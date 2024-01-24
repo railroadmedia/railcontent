@@ -61,10 +61,7 @@ $(window).on("load", function (){
 
     // Function to get the distance from the top of the parent element
     function getDistanceFromTop(elementToCalculate) {
-        if ($(elementToCalculate).is(':visible')) {
-            return $(elementToCalculate).parent().offset().top;
-        }
-        return false;
+        return $(elementToCalculate).is(':visible') ? $(elementToCalculate).parent().offset().top : false;
     }
 
     var slidingElm = $('#sticky-slide');
@@ -88,17 +85,12 @@ $(window).on("load", function (){
     });
 
     $window.scroll(function () {
-        // Check if the window width is less than 1024px
-        if (bodyWidth < 1024) {
+        // Check if the window width is less than 1024px and the distance from the top is available
+        if (bodyWidth < 1024 || originalDistanceFromTop === false) {
             return;
         }
 
         var footerOffsetTop = $bottomFooter.offset().top;
-
-        // Check if the distance from the top is available
-        if (originalDistanceFromTop === false) {
-            return;
-        }
 
         // Check if the scroll position is past the threshold
         var scrollPastThreshold = isScrollPast(originalDistanceFromTop - menuHeight - topFixedSidebarBuffer);
@@ -109,11 +101,8 @@ $(window).on("load", function (){
 
             var footerThreshold = footerOffsetTop - $slidingElm.height() - menuHeight - (topFixedSidebarBuffer * 2);
 
-            if (isScrollPast(footerThreshold)) {
-                $slidingElm.addClass('absolute top-auto bottom-0 mb-4');
-            } else {
-                $slidingElm.removeClass('absolute top-auto bottom-0 mb-4');
-            }
+            $slidingElm.toggleClass('absolute top-auto bottom-0 mb-4', isScrollPast(footerThreshold));
+
         } else {
             $slidingElm.removeClass('fixed top-[70px]');
         }
