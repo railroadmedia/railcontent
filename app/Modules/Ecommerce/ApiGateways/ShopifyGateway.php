@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\ApiGateways;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Models\Shopify\MetaFieldDefinition;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use Carbon\Carbon;
 use Exception;
@@ -82,6 +83,64 @@ class ShopifyGateway
         return $orders;
     }
 
+    public function executeQuery(string $gql): mixed
+    {
+        $this->handleRateLimitBefore();
+        $gqlUrl = $this->shopify->getBaseUrl()."/graphql.json";
+        $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
+        if ($pollResponse->successful()) {
+            $responseBody = json_decode($pollResponse->body());
+            $this->lastQueryCost = $responseBody->extensions->cost ?? null;
+
+            // check for any errors
+            $responseErrors = $responseBody->errors ?? [];
+            if (!empty($responseErrors)) {
+                throw new Exception(
+                    sprintf(
+                        "%s: Error(s) returned: %s",
+                        get_class($this),
+                        collect($responseErrors)->implode("message", " ")
+                    )
+                );
+            }
+        } else {
+            throw new Exception(
+                sprintf(
+                    "%s: Error(s) returned: %s",
+                    get_class($this),
+                    $pollResponse->reason()
+                )
+            );
+        }
+        return $responseBody;
+    }
+
+    protected function handleRateLimitBefore(): void
+    {
+        $lastQueryCost = $this->lastQueryCost;
+        if (!$lastQueryCost) {
+            return;
+        }
+        $rateLimitThresholdPercentage = config('shopify.rate_limit_gql.threshold_percentage');
+        $rateLimitSleepTime = config('shopify.rate_limit_gql.sleep_time');
+
+        $current = $lastQueryCost->throttleStatus->currentlyAvailable;
+        $max = $lastQueryCost->throttleStatus->maximumAvailable;
+        $percentageUsed = round(($max - $current) / $max * 100, 1);
+
+        if ($percentageUsed > $rateLimitThresholdPercentage) {
+            Log::debug("Shopify Graph QL availability: $current/$max ($percentageUsed%)");
+            Log::warning(
+                sprintf(
+                    "About to hit Shopify Graph QL API rate limit. Sleeping for %s %s...",
+                    $rateLimitSleepTime,
+                    Str::plural("second", $rateLimitSleepTime)
+                )
+            );
+            sleep($rateLimitSleepTime);
+        }
+    }
+
     public function getCustomersToUpdate(Carbon $date)
     {
         $emails = collect();
@@ -126,6 +185,11 @@ class ShopifyGateway
         return $emails;
     }
 
+    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
+    {
+        return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
+    }
+
     public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt)
     {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
@@ -147,11 +211,6 @@ class ShopifyGateway
             GQL;
         $responseBody = $this->executeQuery($gql);
         return $responseBody->data->orders->nodes;
-    }
-
-    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
-    {
-        return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
 
     public function defineMetaField()
@@ -225,62 +284,86 @@ class ShopifyGateway
         return $response;
     }
 
-
-    public function executeQuery(string $gql): mixed
+    /**
+     * Check if there's a metafield definition in Shopify that matches the given MetaFieldDefinition
+     *
+     * @param  MetaFieldDefinition  $metaFieldDefinition
+     * @return bool
+     * @throws Exception
+     */
+    public function doesMetaFieldDefinitionExist(MetaFieldDefinition $metaFieldDefinition): bool
     {
-        $this->handleRateLimitBefore();
-        $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
-        $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
-        if ($pollResponse->successful()) {
-            $responseBody = json_decode($pollResponse->body());
-            $this->lastQueryCost = $responseBody->extensions->cost ?? null;
+        $ownerType = $metaFieldDefinition->ownerType;
+        $key = $metaFieldDefinition->key;
+        $name = $metaFieldDefinition->name;
+        $namespace = $metaFieldDefinition->namespace;
+        $type = $metaFieldDefinition->type;
 
-            // check for any errors
-            $responseErrors = $responseBody->errors ?? [];
-            if (!empty($responseErrors)) {
-                throw new Exception(
-                    sprintf(
-                        "%s: Error(s) returned: %s",
-                        get_class($this),
-                        collect($responseErrors)->implode("message", " ")
-                    )
-                );
+        $gql = <<<GQL
+            query {
+                metafieldDefinitions(first:1, ownerType: $ownerType, query:"key:$key AND name:$name AND namespace:$namespace AND type:$type") {
+                    nodes {
+                        id
+                        key
+                        name
+                        namespace
+                        validations {
+                            name
+                            type
+                            value
+                        }
+                        type {
+                            name
+                        }
+                    }
+                }
             }
-        } else {
-            throw new Exception(
-                sprintf(
-                    "%s: Error(s) returned: %s",
-                    get_class($this),
-                    $pollResponse->reason()
-                )
-            );
-        }
-        return $responseBody;
+            GQL;
+
+        $responseBody = $this->executeQuery($gql);
+        return collect($responseBody->data->metafieldDefinitions->nodes)->isNotEmpty();
     }
 
-    protected function handleRateLimitBefore(): void
+    /**
+     * Create a new metafield definition in Shopify with the given MetaFieldDefinition
+     * @param  MetaFieldDefinition  $metaFieldDefinition
+     * @return mixed
+     * @throws Exception
+     */
+    public function createMetaFieldDefinition(MetaFieldDefinition $metaFieldDefinition): mixed
     {
-        $lastQueryCost = $this->lastQueryCost;
-        if (!$lastQueryCost) {
-            return;
-        }
-        $rateLimitThresholdPercentage = config('shopify.rate_limit_gql.threshold_percentage');
-        $rateLimitSleepTime = config('shopify.rate_limit_gql.sleep_time');
+        $ownerType = $metaFieldDefinition->ownerType;
+        $key = $metaFieldDefinition->key;
+        $name = $metaFieldDefinition->name;
+        $description = $metaFieldDefinition->description;
+        $namespace = $metaFieldDefinition->namespace;
+        $type = $metaFieldDefinition->type;
 
-        $current = $lastQueryCost->throttleStatus->currentlyAvailable;
-        $max = $lastQueryCost->throttleStatus->maximumAvailable;
-        $percentageUsed = round(($max - $current) / $max * 100, 1);
-
-        if ($percentageUsed > $rateLimitThresholdPercentage) {
-            Log::debug("Shopify Graph QL availability: $current/$max ($percentageUsed%)");
-            Log::warning(
-                sprintf(
-                    "About to hit Shopify Graph QL API rate limit. Sleeping for %s %s...",
-                    $rateLimitSleepTime,
-                    Str::plural("second", $rateLimitSleepTime)
-                )
-            );
-            sleep($rateLimitSleepTime);
-        }
+        $query = <<<GRAPHQL
+                mutation {
+                    metafieldDefinitionCreate(definition: {
+                        name: "$name",
+                        namespace: "$namespace",
+                        key: "$key",
+                        type: "$type",
+                        ownerType: $ownerType,
+                        description: "$description"
+                    }
+                    ) {
+                    createdDefinition {
+                        id
+                        name
+                        namespace
+                        key
+                    }
+                    userErrors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+            GRAPHQL;
+        return $this->executeQuery($query);
     }
 }
