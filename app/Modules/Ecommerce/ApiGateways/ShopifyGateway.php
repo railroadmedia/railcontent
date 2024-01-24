@@ -7,16 +7,16 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaFieldDefinition;
 use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Signifly\Shopify\Shopify;
 
 class ShopifyGateway
 {
+    use ExecutesShopifyGraphQlQuery;
+
     private Shopify $shopify;
-    private $lastQueryCost = null;
 
     public function __construct(Shopify $shopify)
     {
@@ -81,64 +81,6 @@ class ShopifyGateway
 
 
         return $orders;
-    }
-
-    public function executeQuery(string $gql): mixed
-    {
-        $this->handleRateLimitBefore();
-        $gqlUrl = $this->shopify->getBaseUrl()."/graphql.json";
-        $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
-        if ($pollResponse->successful()) {
-            $responseBody = json_decode($pollResponse->body());
-            $this->lastQueryCost = $responseBody->extensions->cost ?? null;
-
-            // check for any errors
-            $responseErrors = $responseBody->errors ?? [];
-            if (!empty($responseErrors)) {
-                throw new Exception(
-                    sprintf(
-                        "%s: Error(s) returned: %s",
-                        get_class($this),
-                        collect($responseErrors)->implode("message", " ")
-                    )
-                );
-            }
-        } else {
-            throw new Exception(
-                sprintf(
-                    "%s: Error(s) returned: %s",
-                    get_class($this),
-                    $pollResponse->reason()
-                )
-            );
-        }
-        return $responseBody;
-    }
-
-    protected function handleRateLimitBefore(): void
-    {
-        $lastQueryCost = $this->lastQueryCost;
-        if (!$lastQueryCost) {
-            return;
-        }
-        $rateLimitThresholdPercentage = config('shopify.rate_limit_gql.threshold_percentage');
-        $rateLimitSleepTime = config('shopify.rate_limit_gql.sleep_time');
-
-        $current = $lastQueryCost->throttleStatus->currentlyAvailable;
-        $max = $lastQueryCost->throttleStatus->maximumAvailable;
-        $percentageUsed = round(($max - $current) / $max * 100, 1);
-
-        if ($percentageUsed > $rateLimitThresholdPercentage) {
-            Log::debug("Shopify Graph QL availability: $current/$max ($percentageUsed%)");
-            Log::warning(
-                sprintf(
-                    "About to hit Shopify Graph QL API rate limit. Sleeping for %s %s...",
-                    $rateLimitSleepTime,
-                    Str::plural("second", $rateLimitSleepTime)
-                )
-            );
-            sleep($rateLimitSleepTime);
-        }
     }
 
     public function getCustomersToUpdate(Carbon $date)
@@ -365,5 +307,13 @@ class ShopifyGateway
             }
             GRAPHQL;
         return $this->executeQuery($query);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getShopifyConnection(): Shopify
+    {
+        return $this->shopify;
     }
 }
