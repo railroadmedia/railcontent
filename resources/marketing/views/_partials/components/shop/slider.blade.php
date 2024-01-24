@@ -1,5 +1,5 @@
 <div class="product-wrap lg:w-2/3 px-3 md:px-4">
-    <div class="pack-details slider-wrap w-full pt-5 mx-auto mb-1 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
+    <div class="pack-details slider-wrap w-full mx-auto mb-1">
         <div class="text-center pb-5 sm:pb-6 lg:pb-7">
             <div class="clearfix">
                 <div class="w-full">
