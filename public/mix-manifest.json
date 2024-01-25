@@ -1,15 +1,15 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=4177c079d084ed1e2171c2cbb6d433b1",
+    "/platform/js/app.js": "/platform/js/app.js?id=8060bf47fc2ed85d4b6594bb8526c872",
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=5f354c6344c5323d83846fbfb4f4a01a",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=8ac60311b6f990a9d133048747ab3e02",
     "/platform/js/playlist-playback.js": "/platform/js/playlist-playback.js?id=3e98fb231e61b170dd8530ee95e7b350",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=4688d6affbfb27088f6bc2197c588841",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=eee49d6e5d4231b84734b854ca3f8f29",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=4aad84077af232e6542a483021a24da5",
     "/platform/js/song.js": "/platform/js/song.js?id=32cf4a674daee099564df930b014e13e",
-    "/platform/js/song-request.js": "/platform/js/song-request.js?id=a290d92f7d99c9d4d3206f32db077cd9",
+    "/platform/js/song-request.js": "/platform/js/song-request.js?id=a80622891fc0778b76613b985ed0cb63",
     "/platform/js/report-user.js": "/platform/js/report-user.js?id=7ffa8bad08d270210efcd885e9ef5c8d",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=69fcc27fa19d1d70f2bc61c0d420de1c",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=1420b312b0eef0d0a7fca01f80eb6a67",
@@ -27,7 +27,7 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=631c549d3207d9fde6fed35914d1ba49",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=fc94a03ba81716dac8b8717ce2a76c59",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=0bd356ea87fdf96dca11043919d8ab79",
-    "/platform/css/app.css": "/platform/css/app.css?id=6d3357187a05fde85544a02cd8cf4c3d",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=d8d310c4aa7cedc9d82ec9ab727c8bca",
+    "/platform/css/app.css": "/platform/css/app.css?id=179d933117fa260e155e15de10b504a6",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=ddf819d6875c65fea65a59a62b73cc09",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=876048f2ebad7f698f1fcc359b575acb"
 }
