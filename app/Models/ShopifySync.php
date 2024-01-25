@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ShopifySync extends Model
 {
-    use HasFactory;
-
     public const RESOURCE_PRODUCT = "product";
     public const RESOURCE_CUSTOMER = "customer";
     public const RESOURCE_ORDER = "order";

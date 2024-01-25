@@ -66,6 +66,7 @@ class ShopifyWebHookController extends Controller
                 $now = Carbon::now('UTC');
                 $lastTrialEndDate = $now->addDays($trialProduct->getTrialDays());
                 $this->shopifyGateway->updateCustomerLastTrialEndDate($shopifyCustomerId, $lastTrialEndDate);
+                $this->userService->setTrialPeriod($shopifyCustomerId, $lastTrialEndDate);
                 break;
             }
         }

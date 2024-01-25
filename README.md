@@ -167,14 +167,72 @@ In your blade file you can load in these variables like this:
 
 ```
 
+# Automated Testing
+## Testing Through CLI
+You can use the Laravel framework to run various tests through the `artisan test` command. Please refer to the [documentation](https://laravel.com/docs/10.x/testing) 
+for details on options. For example, you can run `r mwp artisan test --testsuite=Feature` to run all tests defined in the 
+Feature test suite, in phpunit.xml.
 
-# PHPStorm Automated Testing Settings
+## Testing Through PhpStorm
+You can run tests directly within PhpStorm, either individually or all tests in a file. After following the setup process 
+outlined below, simply go to a test file and click the "Run test" button (green "play" icon). The test results will be 
+displayed in the Run Window of your PhpStorm.
 
-### Test Framework
+### PHPStorm Automated Testing Settings
+
+#### Test Framework
 ![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/f532fe6d-7f49-489e-aa55-2dabeaee5900/public)
 
-### CLI Interpreter
+#### CLI Interpreter
 ![](https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e0eb64b1-b163-4626-e217-5ce9d80d7900/public)
+
+## Git Hooks
+Developers (especially BE) are encouraged to use [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) 
+to automatically perform desired actions, such as running the test suite before committing. You automatically have a hidden 
+directory for these in `.git/hooks` of the project's root, which is filled with example of hooks you can use. 
+
+Note that PhpStorm hides the .git directory by default. You can change that by going into the Settings and under 
+Editor -> File Types, there will be a tab titled Ignored Files and Folders, where you can remove the .git entry.
+
+Below is an example of the `.git/hoooks/pre-push` file that will run all of our tests inside the php 8 docker container 
+when you try to push to any branch:
+
+```shell
+#!/bin/sh
+
+printf "\nRunning tests\n"
+
+docker exec --workdir /app/musora-web-platform railenvironmentdocker_apache-php-fpm-8 php artisan test --parallel --recreate-databases --processes=4
+result=$?
+
+if [ $result -eq 0 ]
+then
+    printf "\nAll tests passed\n"
+else
+    printf "\nPlease fix failing tests before pushing\n"
+fi
+
+exit $result
+```
+
+These Git Hooks are unique to your environment and are not shared in the code repository. If you have your own hooks that 
+you find useful, please share them with the team.
+
+As a reminder, if you want to temporarily bypass one of your hooks, simply add the `--no-verify` option to your command. 
+e.g. `git push origin my-branch --no-verify`
+
+## Code Coverage
+phpunit allows us to generate a code coverage report, that identifies what code is and isn't covered by tests. You can run 
+these through a number of scripts in the composer.json file. These have two main groups of differences:
+- `--parallel` to run the tests in a single thread, or in parallel
+- `--coverage` or `--coverage-html` to generate the report in your cli terminal, or in an html format stored in the `reports` directory of this project.
+  - To view the html report, go into the `reports` directory and open the `index.html` or `dashboard.html` file
+
+For best results, run `r mwp composer test-cov-html-p` to run the tests in parallel (to run faster) and generate an html report.
+
+## GitHub Actions
+The `automated-testing.yaml` file outlines the GitHub Action that runs our entire test suite and sends the coverage report 
+to [Codecov](https://app.codecov.io/gh/railroadmedia/musora-web-platform).
 
 
 # Useful Testing & Seeder Commands

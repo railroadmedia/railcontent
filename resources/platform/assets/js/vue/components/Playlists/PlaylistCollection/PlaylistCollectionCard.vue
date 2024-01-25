@@ -103,7 +103,7 @@
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
-        console.log(props.listElement)
+        // console.log(props.listElement)
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.listElement.pinned ? true : false;
         state.isPrivate = props.listElement.private;
