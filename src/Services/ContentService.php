@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -244,7 +245,16 @@ class ContentService
             [],
         );
         $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand;
+        $cached = Cache::get($cacheKey);
+        if(!empty($cached)) {
+            $recommendations = $cached;
+        } else {
+            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+            $ttl = 60 * 60;
+            Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
+        }
+
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $limit);
         } else {
