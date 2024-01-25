@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dd359110ef90bd155fcbf69b293ff34",
+    "content-hash": "80fa2a5d1cc7ee80272f01a677cedded",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10080,16 +10080,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.46",
+            "version": "v2.1.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "a10d4b5cd5b49177bfaa8dec5bffffc0ca43eea1"
+                "reference": "c160a04542d09364165bce3a6b0df348f7cdca9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a10d4b5cd5b49177bfaa8dec5bffffc0ca43eea1",
-                "reference": "a10d4b5cd5b49177bfaa8dec5bffffc0ca43eea1",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c160a04542d09364165bce3a6b0df348f7cdca9b",
+                "reference": "c160a04542d09364165bce3a6b0df348f7cdca9b",
                 "shasum": ""
             },
             "require": {
@@ -10144,9 +10144,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.46"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.47"
             },
-            "time": "2024-01-12T17:26:15+00:00"
+            "time": "2024-01-25T18:29:13+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16011,6 +16011,58 @@
                 }
             ],
             "time": "2023-07-06T15:01:43+00:00"
+        },
+        {
+            "name": "yoramdelangen/laravel-pdo-odbc",
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appsfortableau/laravel-pdo-odbc.git",
+                "reference": "128bb2a2f4f459ad3dc3cdf31c72c9b63c10562f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appsfortableau/laravel-pdo-odbc/zipball/128bb2a2f4f459ad3dc3cdf31c72c9b63c10562f",
+                "reference": "128bb2a2f4f459ad3dc3cdf31c72c9b63c10562f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">= 7.0",
+                "illuminate/support": ">= 7.0",
+                "php": "^7.4|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelPdoOdbc\\ODBCServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelPdoOdbc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yoram de Langen",
+                    "email": "yoram@appsfortableau.infotopics.com",
+                    "homepage": "https://github.com/appsfortableau",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PDO ODBC/Snowflake integration for Laravel framework. Support ODBC and native PDO Snowflake.",
+            "homepage": "https://github.com/yoramdelangen/laravel-odbc",
+            "support": {
+                "issues": "https://github.com/appsfortableau/laravel-pdo-odbc/issues",
+                "source": "https://github.com/appsfortableau/laravel-pdo-odbc/tree/1.2.3"
+            },
+            "time": "2023-07-14T12:41:22+00:00"
         }
     ],
     "packages-dev": [
