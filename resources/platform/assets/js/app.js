@@ -21,6 +21,7 @@ import Schedule from './vue/Views/Schedule';
 import Playlists from './vue/Views/Playlists';
 import Playlist from './vue/Views/Playlist';
 import Referral from './vue/Views/Referral';
+import LessonHistory from './vue/Views/LessonHistory';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -288,6 +289,7 @@ app.component('AppContainer', AppContainer)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
     .component('PackCatalogue', PackCatalogue)
+    .component('LessonHistory', LessonHistory)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
