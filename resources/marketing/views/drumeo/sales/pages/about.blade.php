@@ -273,7 +273,7 @@
                                 </div>
                                 <div class="back absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                                     <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-start content-start p-2" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-left text-xs">{!! $altSlide['bio'] !!}</p>
+                                        <p class="leading-normal mx-auto text-left text-sm sm:text-xs lg:text-sm">{!! $altSlide['bio'] !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +466,7 @@
             });
             $('.slick-2').slick({
                 draggable: false,
-                slidesToShow: 5,
+                slidesToShow: 4,
                 responsive: [
                     {
                         breakpoint: 1024,
