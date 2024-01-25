@@ -38,7 +38,8 @@
     @endcomponent
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3 tw-mt-[30px]">
-        <collection-wrapper collection-type="pack" infinite-scroll="{{ false }}" :pre-loaded-content="{{ json_encode($packs) }}" title="packs"></collection-wrapper>
+        <collection-wrapper collection-type="pack" infinite-scroll="{{ false }}" :pre-loaded-content="{{ $packs }}" title="packs"
+                            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"  default-sorts="-progress"></collection-wrapper>
     </div>
 
 {{--    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">--}}
