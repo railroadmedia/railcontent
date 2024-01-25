@@ -42,7 +42,7 @@ const sortOptions =[
     { value: '-created_at', name: 'Newest First', icon: 'sort-down', },
     { value: 'name', name: 'Alphabetical', icon: 'sort-name-asc', },
     { value: '-last_progress', name: 'Most Recent', icon: '', },
-    { value: 'pinned', name: 'Pinned', icon: '', },
+    { value: 'pinned', name: 'Pinned', icon: 'tack', },
 ]
 
 const categories = [
@@ -142,11 +142,12 @@ onBeforeMount(()=> {
         <!-- Search -->
         <div class="tw-relative tw-w-full md:tw-max-w-[465px] tw-mb-[20px] md:tw-mb-0 tw-mr-auto tw-order-3 md:tw-order-none">
             <MusoraIcon
+                v-if="!state.searchTerm"
                 icon-name="search"
-                class="tw-absolute tw-top-5 tw-right-0 dark:tw-text-[#9EC0DC] tw-z-0"
+                class="tw-absolute tw-top-5 tw-right-0 dark:tw-text-white tw-z-0"
             />
             <input type="text"
-                   class="tw-px-4 tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
+                   class="tw-px-4 tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#000C17] dark:tw-text-white dark:focus:tw-bg-[#00101D] tw-bg-white dark:tw-bg-black tw-rounded-full dark:placeholder:tw-text-white focus:tw-ring-0 focus:tw-outline-none tw-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"
                    placeholder="Search"
                    ref="playlistSearch"
                    v-model="state.searchTerm"
@@ -203,7 +204,7 @@ onBeforeMount(()=> {
                 class="tw-h-[50px] tw-w-[50px] tw-text-xs tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#CBCBCD] dark:tw-border-white tw-rounded-full tw-bg-white dark:tw-bg-transparent tw-flex tw-justify-center tw-items-center"
                 @click="() => emit('onToggleListView')"
             >
-                <musora-icon :icon-name="listViewIcon"></musora-icon>
+                <musora-icon :icon-name="listViewIcon" class="tw-w-[25px] tw-h-[25px]"></musora-icon>
             </button>
         </div>
     </nav>
