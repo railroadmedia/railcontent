@@ -246,7 +246,7 @@ class ContentService
         );
         $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
         $cacheKey = 'RECSYS-' . $user_id . '-' . $brand;
-        $cached = Cache::get($cacheKey);
+        $cached = Cache::store('redis')->get($cacheKey);
         if(!empty($cached)) {
             $recommendations = $cached;
         } else {
