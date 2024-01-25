@@ -11,21 +11,17 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <style>
-        .lazyload {
-            opacity: 0;
-        }
-
-        .lazyloading {
-            opacity: 1;
-            transition: opacity 300ms;
-        }
-    </style>
 @stop
+
+@section('body-data')
+    x-data ='{
+    lazyLoad: false,
+    }'
+@endsection
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
@@ -50,7 +46,7 @@
 
         <section class="content-section text-center px-6" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
             <div class="container mx-auto max-w-4xl">
-                <img class="h-28 md:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
+                <img class="h-28 md:h-32" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
 
                 <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Test-drive your lessons for 90 days.</strong><br>
                     Zero risk.</h3>
@@ -72,7 +68,7 @@
             </div>
         </section>
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-        <section class="content-section text-center customize" style="background:#000a1e;">
+        <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background-color:#000;">
                 <div class="container mx-auto">
                     <div class="mx-auto max-w-sm sm:max-w-md md:max-w-xl lg:max-w-5xl" style="font-size: 0;">
                         <h3 class="mb-10"><strong>CONTINUE YOUR MEMBERSHIP<br class="inline lg:hidden"> TODAY AND GET:</strong></h3>
@@ -147,20 +143,57 @@
                             ]
                         @endphp
                         @foreach($bonuses as $bonus)
-                            <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 md:px-3 w-1/2 sm:w-1/3 lg:w-1/5">
-                                <div class="flip-div inline-block relative w-full group" style="padding-bottom: 132%;perspective: 1000px;">
+                            <div
+                                class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
+                                x-data="{
+                        flipped: false,
+                    }"
+                                x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    "
+                            >
+                                <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                                     <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                        <div class="border-2 border-drumeo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                            @if(!empty($bonus['shipping']))
-                                                <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo rounded-t-xl"><strong>Free Shipping</strong></p>
+                                        <div
+                                            x-ref="front"
+                                            class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                            style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                                            @if(!empty($bonus['badge']))
+                                                <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                             @endif
-                                            <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}"></div>
+                                            <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
+                                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                                x-intersect.once="lazyLoad = true">
+                                                <picture class="absolute inset-0 w-full h-full object-cover">
+                                                    <source srcset="{{ $bonus['image'] }}"
+                                                        media="(min-width: 640px)">
+                                                    <img src="{{ $bonus['image'] }}"
+                                                        alt="Bonus Image"
+                                                        class="w-full h-full object-cover opacity-0 transition-opacity"
+                                                        loading="lazy"
+                                                        onload="this.classList.remove('opacity-0')">
+                                                </picture>
+                                            </div>
                                             <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                                 <i class="fas fa-arrow-right text-4xl"></i><br>
                                                 <p class="text-sm"><strong>DETAILS</strong></p>
                                             </div>
                                         </div>
-                                        <div class="back border-2 border-drumeo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                        <div
+                                            x-ref="back"
+                                            class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                            style="backface-visibility: hidden;"
+                                        >
                                             <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
                                                 <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
                                             </div>
@@ -168,12 +201,22 @@
                                     </div>
                                 </div>
 
-                                <p class="uppercase w-full leading-normal">
-                                    <strong class="font-black leading-tight inline-block mt-2 mb-1">{!!  $bonus['title']  !!}</strong><br>
-                                    <span class="text-promo" style="text-transform:uppercase; display:inline-block;"><s>${{ $bonus['price'] }}</s> <strong>FREE</strong></span><br>
-                                    @if(!empty($bonus['shipping']))
-                                        Free Shipping
+                                <p class="w-full leading-normal mt-2">
+                                    @if(!empty($bonus['title']))
+                                        <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                                     @endif
+                                    <span style="text-transform:uppercase; display:inline-block;">
+                            @if(!empty($bonus['price']))
+                                            <s class="opacity-40">${{ $bonus['price'] }}</s>
+                                        @endif
+                            <strong class="text-musora">FREE</strong></span><br>
+                                    <em>
+                                        @if(!empty($bonus['shipping']))
+                                            Free Shipping
+                                        @else
+                                            Online Access
+                                        @endif
+                                    </em>
                                 </p>
                             </div>
                         @endforeach
@@ -217,15 +260,4 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.flip-div').click(function (e) {
-                $(this).toggleClass('flipped');
-            });
-
-        });
-    </script>
 @stop
