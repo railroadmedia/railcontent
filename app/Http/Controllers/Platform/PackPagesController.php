@@ -74,10 +74,13 @@ class PackPagesController extends Controller
     public function index(Request $request, $domain, $brand)
     {
         PackDecorator::$skip = true;
+        ContentRepository::$countFilterOptionItems = true;
+        ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
+
         $packs = $this->packService->getPacks();
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
-        foreach ($packs as $pack) {
+        foreach ($packs['results'] as $pack) {
             if ($pack['id'] == $activePack) {
                 $pack['status_text'] = "In Progress";
             }
@@ -85,7 +88,7 @@ class PackPagesController extends Controller
         }
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
-            foreach ($packs as $packIndex => $pack) {
+            foreach ($packs['results'] as $packIndex => $pack) {
                 // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
                 if ($pack['id'] == 353337) {
                     unset($pack[$packIndex]);
@@ -93,8 +96,11 @@ class PackPagesController extends Controller
             }
         }
 
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['pack'] ?? [];
+
         return view('content.packs.packs-index', [
-            "packs" => $packs,
+            "packs" => $packs->toResponseRawJson(),
+            "catalogueMeta" => $catalogueMeta,
         ]);
     }
 
