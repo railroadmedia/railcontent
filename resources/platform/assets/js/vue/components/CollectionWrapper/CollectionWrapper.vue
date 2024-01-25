@@ -356,6 +356,5 @@ onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.title)
     // console.log(props.preLoadedContent)
-    console.log(props.hideSortIcon)
 })
 </script>
