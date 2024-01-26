@@ -12,6 +12,7 @@ import { createPinia } from 'pinia';
 
 //App Pages
 import Workouts from './vue/Views/Workouts';
+import Songs from './vue/Views/Songs';
 import WorkoutsPlayback from './vue/Views/WorkoutsPlayback';
 import Home from './vue/Views/Home.vue';
 import ChildCatalog from './vue/Views/ChildCatalog.vue';
@@ -20,6 +21,7 @@ import Schedule from './vue/Views/Schedule';
 import Playlists from './vue/Views/Playlists';
 import Playlist from './vue/Views/Playlist';
 import Referral from './vue/Views/Referral';
+import LessonHistory from './vue/Views/LessonHistory';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -279,6 +281,7 @@ app.component('AppContainer', AppContainer)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
     .component('WorkoutsPlayback', WorkoutsPlayback)
+    .component('Songs', Songs)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)
@@ -286,6 +289,7 @@ app.component('AppContainer', AppContainer)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
     .component('PackCatalogue', PackCatalogue)
+    .component('LessonHistory', LessonHistory)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(

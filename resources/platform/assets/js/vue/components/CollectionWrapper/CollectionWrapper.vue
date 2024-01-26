@@ -15,7 +15,7 @@
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <PackCatalogue v-else-if="isPack" :content="preLoadedContent" />
+                <PackCatalogue v-else-if="isPack" :content="data" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :reset-progress="resetProgress"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <CatalogueCardContainer
@@ -356,6 +356,5 @@ onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.title)
     // console.log(props.preLoadedContent)
-    console.log(props.hideSortIcon)
 })
 </script>

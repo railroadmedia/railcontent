@@ -17,7 +17,7 @@
                         [ 'key' => 'complete', 'value' => 'Complete' ]
                     ]) }}"
         @if($resetProgress)
-            reset-progress="true"
+            :reset-progress="true"
         @endif
     ></lesson-history>
 

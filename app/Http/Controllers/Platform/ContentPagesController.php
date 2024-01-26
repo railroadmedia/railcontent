@@ -266,7 +266,7 @@ class ContentPagesController extends BaseController
         if ($contentTypeName == 'songs') {
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
-                "startedLessons" => $startedListLessons,
+                "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],
                 "hasStartedLessons" => $hasStartedLessons,
                 "lessonType" => $lessonType,
                 "sortOverride" => '-popularity',
