@@ -85,7 +85,7 @@
             </div>
         </template>
 
-        <template v-if="searching">
+        <template v-else>
             <!-- Search Results -->
             <forum-search-result
                 v-for="item in searchResults"
@@ -187,7 +187,6 @@ export default {
                 }
             ],
             loading: false,
-            searching: false,
             searchResults: [],
             searchResultsCount: 0,
             searchResultsPage: 1,
@@ -234,8 +233,6 @@ export default {
 
                         this.getSearchResults();
                     }, 800);
-                } else {
-                    this.searching = false;
                 }
             },
         },
@@ -302,7 +299,6 @@ export default {
 
         if (urlParams.search) {
             this.searchInterface = urlParams.search;
-            this.searching = true;
             this.loading = true;
         }
     },
@@ -318,7 +314,6 @@ export default {
                 this.searchResultsPageLength,
             ).then((data) => {
                 this.loading = false;
-                this.searching = true;
                 this.searchResults = data.results;
                 this.searchResultsCount = data.count;
             });
