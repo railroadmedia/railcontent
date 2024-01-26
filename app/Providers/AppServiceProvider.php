@@ -42,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
 
             $request->server->set('REQUEST_URI', '/' . $realPath);
         }
+        if (!$this->app->environment('production')) {
+            $this->app->register(\App\Modules\DevEndpoint\Providers\DevEndpointServiceProvider::class);
+        }
     }
 
     /**

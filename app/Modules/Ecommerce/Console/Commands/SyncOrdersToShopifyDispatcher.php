@@ -61,7 +61,7 @@ class SyncOrdersToShopifyDispatcher extends Command
                         ->orWhereHas("orderItems", function (Builder $oiq) use ($lastSyncAt) {
                             $oiq->whereDate("updated_at", ">", $lastSyncAt);
                         })
-                        ->orWhereHas("orderItemFullfillments", function (Builder $oifq) use ($lastSyncAt) {
+                        ->orWhereHas("orderItemFulfillments", function (Builder $oifq) use ($lastSyncAt) {
                             $oifq->whereDate("updated_at", ">", $lastSyncAt);
                         });
                 });

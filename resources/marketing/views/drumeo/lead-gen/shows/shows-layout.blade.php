@@ -17,37 +17,7 @@
     <script>
         $(document).ready(function () {
             $(document).foundation();
-
-            // swap modal state
-            $(".start-trial").click(function (e) {
-                e.stopPropagation();
-                $(this).parent().addClass('hide');
-                $('iframe.trial').addClass('active');
-            });
-
-            // reset modal state on close
-            $('.reveal-overlay').on('click', function (e) {
-                if (e.target !== this) {
-                    return;
-                }
-
-                $('.pre-trial').removeClass('hide');
-                $('iframe.trial').removeClass('active');
-            });
-            $(document).keyup(function(e) {
-                if (e.which === 27) {
-                    $('.pre-trial').removeClass('hide');
-                    $('iframe.trial').removeClass('active');
-                }
-            });
         });
-
-        // redirect to members area when cart complete
-        function checkUrl() {
-            if($('iframe.trial').contents().get(0).location.href.indexOf('members') > -1) {
-                window.location.href = "https://www.musora.com/drumeo/courses";
-            }
-        }
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop
@@ -69,7 +39,7 @@
                 @if(auth()->check())
                     <a href="@yield('show-url')" class="join blue">View Show &raquo;</a>
                 @else
-                    <a data-open="trial" class="join blue">Explore Drumeo &raquo;</a>
+                    <a href="/choose-your-trial" class="join blue">Explore Drumeo &raquo;</a>
                 @endif
             </div>
         </div>
@@ -82,40 +52,8 @@
         @if(auth()->check())
             <div class="columns"><a href="@yield('course-url')" class="join blue" data-close aria-label="Close modal">View Course &raquo;</a></div>
         @else
-            <div class="columns"><a data-close data-open="trial" class="join blue">Explore Drumeo &raquo;</a></div>
+            <div class="columns"><a href="/choose-your-trial" class="join blue">Explore Drumeo &raquo;</a></div>
         @endif
-    </div>
-
-    <div class="reveal large trial text-center" id="trial" data-reveal data-reset-on-close="false">
-        <div class="pre-trial">
-            <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
-            <h1>You'll <u>learn the drums faster</u> with<br> the best teacher in the world.</h1>
-            <div class="artist-wrap shows large-up-3 medium-up-2 small-up-1">
-                @yield('artists')
-
-                <div class="columns artist blue">
-                    <div class="plus"><i class="fas fa-plus"></i></div>
-                    <p><strong>And Many More...</strong><br>
-                        Performances, Challenges, Solos & Bootcamps</p>
-                </div>
-            </div>
-            <div class="awards columns">
-                <div class="columns small-4">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-modern-drummer.png">
-                </div>
-                <div class="columns small-4">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png">
-                </div>
-                <div class="columns small-4">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-drummies.png">
-                </div>
-            </div>
-            <a class="join blue start-trial">Start Free Trial &raquo;</a>
-            <p class="disclaimer">Credit card required. You’ll get unlimited access FREE for 7 days before continuing with<br class="show-for-large">
-                a monthly membership for ${{ Prices::$plusSubscriptionMonthlyFull }}/month. Cancel anytime during or after your trial.</p>
-        </div>
-
-        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" frameborder="none"></iframe>
     </div>
 
     <section class="lesson-breakdown shows text-center">
@@ -169,17 +107,6 @@
             @else
                 <div class="columns"><a data-open="trial" class="join blue">Explore Drumeo &raquo;</a></div>
             @endif
-            <div class="awards columns">
-                <div class="columns small-4">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-modern-drummer.png">
-                </div>
-                <div class="columns small-4">
-                    <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"><img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png"></a>
-                </div>
-                <div class="columns small-4">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-drummies.png">
-                </div>
-            </div>
         </div>
     </section>
 @stop
