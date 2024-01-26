@@ -95,15 +95,9 @@
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
                                                 <picture>
-                                                    <source
-                                                        media="(min-width:640px)"
-                                                        srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/{{$image['img']}}"
-                                                    >
-                                                    <img
-                                                        alt="{{ $image['instructor'] }}"
-                                                        class="absolute top-0 left-0 w-full h-full object-cover"
-                                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/260x0/filters:quality(95)/{{$image['img']}}"
-                                                    />
+                                                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}">
+                                                    <img alt="{{ $image['instructor'] }}" class="absolute top-0 left-0 w-full h-full object-cover"
+                                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/{{$image['img']}}"/>
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
                                                     <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['title'] !!}</h4>

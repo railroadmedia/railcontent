@@ -16,7 +16,7 @@
     @include('_partials.layout.favicons.pianote-favicons')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
-
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>     <!-- Alpine Plugin -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
 </head>
 
@@ -34,10 +34,6 @@
         document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
     })
 </script>
-@include('_partials.components.countdown',[
-        'countdownDate' => '2023-11-28 00:00:00',
-        'promoVersion' => true
-    ])
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script type="text/javascript" id="inspectletjs">

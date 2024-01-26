@@ -338,6 +338,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Alesis Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_alesis-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
             'Metronome Notice' => [

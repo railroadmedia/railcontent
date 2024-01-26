@@ -42,10 +42,10 @@
 @stop
 
 @section('layout-body')
-    <div class="clearfix container mx-auto max-w-6xl">
+    <div class="clearfix container mx-auto max-w-6xl relative pt-5 md:pt-9 lg:pt-11">
         <div class="lg:flex">
             <div class="product-wrap lg:w-2/3 px-3 md:px-4">
-                <div class="pack-details slider-wrap w-full pt-5 mx-auto mb-1 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
+                <div class="pack-details slider-wrap w-full mx-auto mb-1">
                     <div class="text-center pb-5 sm:pb-6 lg:pb-7">
                         <div class="clearfix">
                             <div class="w-full">
@@ -63,10 +63,10 @@
                     </div>
                 </div>
             </div>
-            <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
+            <div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">
                 <div class="lg:h-0">
                 <div id="order" class="anchor"></div>
-                    <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
+                    <div id="sticky-slide" class="overflow-hidden rounded border border-solid border-gray-300">
                         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
                             <h1 class="text-center text-3xl uppercase md:text-4xl">
                                 <strong class="font-black">$<span class="chosen-variant-price-float">29</span></strong>
@@ -123,7 +123,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/pack-drumshop.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/shop-product.js') }}"></script>
     <script>
         $(document).ready(function () {
             //customize section pack picker

@@ -273,7 +273,7 @@
                                 </div>
                                 <div class="back absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                                     <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-start content-start p-2" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-left text-xs">{!! $altSlide['bio'] !!}</p>
+                                        <p class="leading-normal mx-auto text-left text-sm sm:text-xs lg:text-sm">{!! $altSlide['bio'] !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -426,15 +426,11 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             $('.flip-div.teacher').click(function (e) {
                 $(this).toggleClass('flipped');
             });
@@ -466,7 +462,7 @@
             });
             $('.slick-2').slick({
                 draggable: false,
-                slidesToShow: 5,
+                slidesToShow: 4,
                 responsive: [
                     {
                         breakpoint: 1024,

@@ -27,6 +27,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
@@ -901,7 +902,7 @@ class ContentPagesController extends BaseController
 
                 $contentToRenderAsLesson['ranges'] = array_unique($contentToRenderAsLesson['ranges'] ?? []);
             }
-        }   
+        }
 
         if ($contentToRenderAsLesson['type'] == 'workout' || $contentToRenderAsLesson['type'] == 'challenge-part' ) {
             return view('content.workout-lesson', [
@@ -1477,19 +1478,7 @@ class ContentPagesController extends BaseController
         ContentRepository::$pullFutureContent = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
-        $listLessons = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 20),
-            '-published_on',
-            $filteredType ?? $lessonType,
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
-        );
-
+        $listLessons = $this->getListLessionsFromRequest($request);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
         $adminMessage = null;
         return view('content.catalogue', [
@@ -1501,6 +1490,65 @@ class ContentPagesController extends BaseController
             "catalogueMeta" => $catalogueMeta,
             "adminMessage" => $adminMessage,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Mixed
+     */
+    public function recommendedLessons(Request $request)
+    {
+        if(!config('railcontent.enable_recsys', false)) {
+            return redirect()->route('platform.new-lessons');
+        }
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+
+        ContentRepository::$pullFutureContent = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        $listLessons = $this->contentService->getRecommendationsByContentType(
+            user()->id,
+            brand(),
+            ContentTypes::newContentTypes(),
+            RecommenderSection::Song,
+            false,
+            limit:100);
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
+        $adminMessage = null;
+        return view('content.catalogue', [
+            "adminMessage" => $adminMessage,
+            "catalogueMeta" => $catalogueMeta,
+            "hasStartedLessons" => false,
+            "hideSearch" => true,
+            "isAllContent" => true,
+            "lessonType" => implode(',', $listLessons['filter_options']['type']),
+            "listLessons" => $listLessons->toResponseRawJson(),
+            "totalResults" => $listLessons['total_results'],
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed|Collection|null
+     */
+    private function getListLessionsFromRequest(Request $request)
+    {
+        $lessonType = ContentTypes::newContentTypes();
+        $filteredType = $request->get('included_types');
+        return $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 20),
+            '-published_on',
+            $filteredType ?? $lessonType,
+            $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
+            $request->get('required_fields', []),
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', [])
+        );
     }
 
     /**
@@ -1670,15 +1718,15 @@ class ContentPagesController extends BaseController
     public function slugToPhrase($slug) {
         // Replace dashes with spaces
         $phrase = str_replace('-', ' ', $slug);
-        
+
         // Capitalize the first letter of each word
         $phrase = ucwords($phrase);
-        
+
         return $phrase;
     }
 
     public function artistSongs($route, Request $request, $brand, $artistSlug)
-    {   
+    {
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
 
         $initialContent = $this->contentService->getFiltered(
@@ -1700,7 +1748,7 @@ class ContentPagesController extends BaseController
 
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
         $contentSubtitle = $initialContent->totalResults().' SONGS';
-        
+
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'artist');

@@ -1,8 +1,3 @@
-@php
-    require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
-    $workoutImages = $musora['workoutImages'];
-@endphp
-
 @if(!empty($vid))
     <div class="h-96 sm:h-[720px] cursor-pointer autoplay-video w-full relative z-20 bg-black" x-on:click="trailer = true;">
         <div class="absolute top-0 left-0 right-0 text-white z-20 text-center px-4 pt-7 sm:pt-10">
@@ -15,53 +10,27 @@
         <video class="object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
     </div>
 @else
-    <section class="text-center px-5 sm:px-6 pt-5 sm:pt-7">
-        <div class="container max-w-5xl mx-auto">
-            <div class="p-5 bg-white">
-                <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-3"><strong>PLAY TO LEARN</strong></h1>
-                <h4 class="leading-tight">Improve your skills in<br class="sm:hidden"> just 10 minutes a day.</h4>
+    <section class="text-center pt-7 sm:pt-9 relative"
+        x-data="{ stick: false }"
+        x-init="window.addEventListener('scroll', () => {
+        stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
+    })">
+        <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 bg-white rounded-xl z-10 sticky top-[40vh]"
+            :class="{ 'bottom-auto': stick }" x-ref="stickySection">
+            <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-1 sm:mb-3"><strong>PLAY TO LEARN</strong></h1>
+            <h4 class="leading-tight">Improve your skills in just<br class="sm:hidden">  10 minutes a day.</h4>
+        </div>
+        <div class="overflow-hidden pt-2 sm:pt-6">
+            <div class="inline-block mx-auto left-1/2 relative xl:w-full -translate-x-1/2">
+                <div class="flex flex-wrap justify-center mx-auto w-[490px] sm:w-[1010px] lg:w-[1250px] xl:w-[1400px]">
+                    @foreach($workoutImages as $image)
+                        <img src="{{ $image['src'] }}" style="{{ $image['animation'] }}" loading="lazy"
+                            class="h-24 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity">
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
-    <div class=" overflow-hidden mx-auto text-center relative">
-        <div class="inline-block mx-auto left-1/2 relative xl:w-full" style="    transform: translate(-50%, 0);">
-            <div class="flex flex-wrap justify-center mx-auto w-[965px] sm:w-[1485px] xl:w-[1665px]">
-                {{-- <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-01.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-01.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-02.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-03.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-01.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-05.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-06.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-07.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-02.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-08.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-02.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-09.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-10.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-11.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-03.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-12.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-13.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-03.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-14.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-15.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-16.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-04.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 2s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-17.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;animation-delay: 4s;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-04.webp" loading="lazy">
-                <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity" style="animation: breathing 6s infinite;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-18.webp" loading="lazy"> --}}
-
-                @foreach($workoutImages as $image)
-                    <img class="h-20 sm:h-32 xl:h-36 rounded-xl overflow-hidden mx-1.5 my-1 ease-in-out transition-opacity"
-                        src="{{ $image['src'] }}" 
-                        style="{{ $image['animation'] }}"
-                        loading="lazy">
-                @endforeach
-            </div>
-        </div>
-    </div>
 @endif
 <section class="text-center px-5 sm:px-6 pt-5 sm:pt-7 pb-10 sm:pb-14 lg:pb-20">
     <div class="container max-w-5xl mx-auto">
@@ -85,15 +54,26 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex bg-cover bg-top" style="background-image:url('{{ $workoutsBG }}');">
-                    <div>
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex relative"
+                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                x-intersect.once="lazyLoad = true">
+                    <picture class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top">
+                        <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
+                                media="(min-width:640px)">
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}"
+                            alt="Workouts Background"
+                            class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            loading="lazy">
+                    </picture>
+
+                    <div class="relative z-10">
                         <h5 class="leading-tight mb-3"><strong>
-                                @if($theme == 'drumeo' || $theme == 'pianote')
-                                    Practice with your heroes.
-                                @else
-                                    Never practice alone.
-                                @endif
-                            </strong></h5>
+                            @if($theme == 'drumeo' || $theme == 'pianote')
+                                Practice with your heroes.
+                            @else
+                                Never practice alone.
+                            @endif
+                        </strong></h5>
                         <h6 class="leading-normal max-w-lg mx-0">
                             Your favorite
                             @php
@@ -113,7 +93,7 @@
                                     echo 'musicians';
                                 }
                             @endphp
-                             and teachers will share their tips, cheer you along, and help you learn by playing!
+                            and teachers will share their tips, cheer you along, and help you learn by playing!
                         </h6>
                     </div>
                 </div>

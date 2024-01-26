@@ -24,7 +24,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'electrify-your-drumming',
             'festival-videos',
             'independence-made-easy',
-            'kit',
             'learn-songs-faster',
             'new-drummers',
             'padstand',
@@ -40,6 +39,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'tone-control-kit',
             'tony-royster-jr'
         ]);
+        Route::get('/kit', [SalesController::class, 'kit'] );
         Route::get('/kit-lifetime', [SalesController::class, 'kitLifetime'] );
         Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer'] );
         Route::get('/30-day-drummer/deal', [SalesController::class, 'thirtyDayDrummerDeal'] );
