@@ -92,7 +92,6 @@
                 state.dropdownTop = false;
             }
         }, 0)
-
     }
 
     //Handle Dropdown Trigger
@@ -104,6 +103,7 @@
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
+        // console.log(props.listElement)
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.listElement.pinned ? true : false;
         state.isPrivate = props.listElement.private;
@@ -112,7 +112,7 @@
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
+         :class="isListView ? 'tw-h-[92px] tw-mb-0.5 tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail
@@ -125,19 +125,23 @@
 
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="listElement.url"
-            class="playlist-info-link tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
+            class="playlist-info-link tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-group"
             :class="props.isListView ? '' : 'tw-col-span-4'"
         >
             <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="playlist-info-link-name tw-font-bold tw-truncate tw-w-full tw-text-sm"
-                   :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
+                <p class="playlist-info-link-name tw-w-full tw-flex tw-items-center group-hover:tw-no-underline"
+                   :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-3 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : 'tw-mt-1' "
                 >
-                    {{ listElement.name }}
+                    <span class="tw-font-bold tw-truncate tw-max-w-full tw-text-sm">{{ listElement.name }}</span>
+                    <!-- Playlist Count -->
+                    <span class="tw-inline-flex tw-ml-1.5 tw-text-xs tw-px-2 tw-py-1.5 tw-bg-[#E0E0E1] tw-leading-none tw-rounded-full dark:tw-bg-[#002039] dark:tw-text-white">
+                        {{ listElement.total_items }}
+                    </span>
                 </p>
                 <!--description-->
                 <p class="tw-truncate tw-hidden"
-                    :class=" props.isListView ? 'tw-hidden xl:tw-inline-flex  xl:tw-col-span-5' : '' "
+                    :class=" props.isListView ? 'tw-hidden xl:tw-inline-flex  xl:tw-col-span-4' : '' "
                 >
                     <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4 ">{{ description }}</span>
                 </p>
@@ -145,7 +149,7 @@
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs tw-flex"
                     :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
-                    <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
+                    <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center' : '' ">
                         <span v-if="listElement.category" :class="{'tw-text-center' : props.isListView}">
                             {{ listElement.category }}
                             <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
@@ -160,13 +164,13 @@
             <div class="tw-inline-flex tw-items-center tw-transition-colors"
                  :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8', { 'tw-opacity-0' : !state.isPinned } ]"
             >
-                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex tw-text-white" />
+                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex dark:tw-text-white" />
             </div>
         </a>
 
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
         <div class="tw-inline-flex tw-items-center tw-justify-end"
-             :class="props.isListView ? 'tw-w-[100px] md:tw-justify-center md:tw-pr-[22px]' : 'tw-col-span-1'"
+             :class="props.isListView ? 'tw-w-[100px] md:tw-justify-center' : 'tw-col-span-1'"
         >
             <div class="tw-relative " v-click-outside="()=>{ state.dropdownOpen = false }">
                 <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#E0E0E1] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0"
@@ -198,7 +202,7 @@
 </template>
 
 <style>
-.playlist-info-link:hover .playlist-info-link-name {
-    text-decoration: underline;
-}
+    .playlist-info-link:hover .playlist-info-link-name {
+        text-decoration: underline;
+    }
 </style>

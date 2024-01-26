@@ -141,7 +141,7 @@
         }
         .join {
             display: inline-block;
-            font: 700 13px/1em "Roboto Condensed",sans-serif;
+            font: 700 13px/1em "Bebas Neue",sans-serif;
             text-transform: uppercase;
             background: #00c9ac;
             border: 2px solid #00c9ac;

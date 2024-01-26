@@ -777,7 +777,47 @@ return [
             'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+            'tabs' => [
+                [
+                    'name' => 'All',
+                    'short_name' => 'ALL',
+                    'value' => [''],
+                ],
+                [
+                    'name' => '5 Minutes',
+                    'short_name' => '5 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,450,integer,<,video']
+                ],
+                [
+                    'name' => '10 Minutes',
+                    'short_name' => '10 MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                ],
+                [
+                    'name' => '15+ Minutes',
+                    'short_name' => '15+ MINS',
+                    'is_required_field' => true,
+                    'value' => ['length_in_seconds,750,integer,>,video']
+                ],
+                [
+                    'name' => 'Instructors',
+                    'short_name' => 'INSTRUCTORS',
+                    'is_group_by' => true,
+                    'value' => ['instructor']
+                ],
+            ],
         ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
+            ],
         ],
         'pianote' => [
             'all' => [
@@ -936,6 +976,31 @@ return [
             'workout' => [
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -954,6 +1019,15 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
             ],
         ],
         'guitareo' => [
@@ -1049,6 +1123,37 @@ return [
             'workout' => [
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => '15+ Minutes',
+                        'short_name' => '15+ MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,750,integer,>,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -1067,6 +1172,15 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
             ],
         ],
         'singeo' => [
@@ -1147,6 +1261,31 @@ return [
             'workout' => [
                 'allowableFilters' => ['difficulty','style','topic'],
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
+                'tabs' => [
+                    [
+                        'name' => 'All',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => '5 Minutes',
+                        'short_name' => '5 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,450,integer,<,video']
+                    ],
+                    [
+                        'name' => '10 Minutes',
+                        'short_name' => '10 MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video']
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor']
+                    ],
+                ],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -1165,6 +1304,15 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
             ],
         ],
     ],
@@ -1880,7 +2028,8 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial','challenge'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => true,
+    'search_in_playlist_items_name' => false,
 
     'cohort_permisssion_ids' => [81, 65,96,97,98,100,101],
+    'enable_recsys' => false,
 ];

@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use App\Listeners\Authentication\AuthenticationEventListener;
 use App\Listeners\Content\EngageContentEventListener;
+use App\Listeners\Content\LoggingEventListener;
 use App\Listeners\OrderEventListener;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
+use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Queue\Events\JobProcessing;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
@@ -25,8 +28,6 @@ use Railroad\Railforums\Events\PostLiked;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railforums\Events\ThreadDeleted;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
-use Railroad\Railtracker\Events\EngageContent;
-use Railroad\Railtracker\Events\RemoveEngagedContent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -71,6 +72,8 @@ class EventServiceProvider extends ServiceProvider
         PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],
         PlaylistDeleted::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],
         PlaylistItemDeleted::class =>  [EngageContentEventListener::class.'@handleRemoveEngageContent'],
+        CommandStarting::class => [LoggingEventListener::class.'@commandStarting'],
+        JobProcessing::class => [LoggingEventListener::class.'@jobProcessing'],
     ];
 
     /**

@@ -15,10 +15,10 @@
     }
 ?>
 
-<div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 lg:mt-10">
+<div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">
     <div class="lg:h-0">
         <div id="order" class="anchor"></div>
-        <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
+        <div id="sticky-slide" class="overflow-hidden rounded border border-solid border-gray-300">
             {{--<div class="promo-tab hidden lg:block text-center py-2 px-3" style="position:relative;background:#000 center center/450px;">--}}
                 {{--<img class="w-auto max-h-12" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/xm-logo2021.png">--}}
             {{--</div>--}}
@@ -60,7 +60,7 @@
                     @endif
 
                     @if(!empty($sizes) && count($sizes) !== 0)
-                        <select class="pack-pick mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
+                        <select class="pack-pick mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Bebas Neue, sans-serif" title="Shirt Size" required>
                             <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
                             @foreach($sizes as $size)
                                 <option

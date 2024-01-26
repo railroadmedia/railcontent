@@ -1,3 +1,5 @@
+@import "../_variables";
+
 .bg-darkblue {
   background-color: #010611;
 }
@@ -441,7 +443,7 @@ main + footer.sales-footer .site-map h1 {
   border: 2px solid #000;
 }
 .infusion-form button {
-  font-family: Bison Bold,Arial Narrow,Arial,sans-serif;
+  font-family: $bebas;
   font-weight: 700;
   color: #FFF;
   background: #9101f6;
@@ -512,7 +514,7 @@ main + footer.sales-footer .site-map h1 {
   }
 
   h2 {
-    font: 700 30px/1em Bison Bold,Arial Narrow,Arial,sans-serif;
+    font: 700 30px/1em $bebas;
     margin: 15px auto;
     text-transform: uppercase;
     color: #9101f6;

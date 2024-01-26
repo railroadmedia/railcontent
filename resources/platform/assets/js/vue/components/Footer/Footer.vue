@@ -30,6 +30,7 @@ const { brand } = storeToRefs(userStore)
           <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Support</a></li>/
           <li class="tw-mx-1"><a :href="`/${brand}/student-experience-studies`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Student Experience Studies</a></li>/
           <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Logout</a></li>
+
         </ul>
       </div>
     </div>

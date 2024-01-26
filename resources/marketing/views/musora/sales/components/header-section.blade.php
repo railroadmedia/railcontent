@@ -62,13 +62,15 @@
             @else
             <a class="sm:mx-0.5 w-full sm:w-56 join outline black smaller"
                 href="https://www.shopperapproved.com/reviews/Musora.com"
+                rel="noopener noreferrer"
+                aria-label="See the reviews on Shopper Approved"
                 onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"
             >SEE THE REVIEWS</a>
 
             @endif
         </div>
         <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
-            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                 <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                 <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
@@ -81,8 +83,7 @@
         @foreach($bubbles as $bubble)
     <picture>
         <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
-        <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }} opacity-0 transition-opacity"
-            loading="lazy" onload="this.classList.remove('opacity-0')"
+        <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }}"
             src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
     </picture>
 @endforeach
@@ -114,10 +115,8 @@
                                 <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
                                 <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                     <img
-                                        class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
+                                        class="rounded-full object-cover object-right w-9 h-9"
                                         src={{ $slide['thumb'] }}
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
                                         alt="{{$slide['name']}}"
                                     ><br class="inline md:hidden">
                                     <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>

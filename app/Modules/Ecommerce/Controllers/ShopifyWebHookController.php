@@ -5,10 +5,12 @@ namespace App\Modules\Ecommerce\Controllers;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
+use App\Modules\EventDataSynchronizer\Jobs\ImpactTrackConversion;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,19 +26,16 @@ class ShopifyWebHookController extends Controller
         private ProductService $productService,
         private UserService $userService,
         private ShopifyGateway $shopifyGateway
-    )
-    {}
+    ) {
+    }
 
     public function orderUpdated(Request $request)
     {
         try {
-            Log::debug('Shopify order updated webhook received');
-            //Log::debug(print_r($request->all(), true));
-
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
-            Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
-            $this->shopifySyncService->syncCustomer($shopifyCustomerId, $email);
+            Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
+            dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
@@ -46,12 +45,9 @@ class ShopifyWebHookController extends Controller
     public function orderCreated(Request $request)
     {
         try {
-            Log::debug('Shopify order created webhook received');
-            //Log::debug(print_r($request->all(), true));
-
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
-            Log::debug("Shopify customer id: $shopifyCustomerId email: $email");
+            Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
             $this->handleOrderCreatedEventTracking($request->all());
             $this->updateLastTrialDate($shopifyCustomerId, $request);
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -66,10 +62,11 @@ class ShopifyWebHookController extends Controller
         foreach ($lineItems as $lineItem) {
             $sku = $lineItem['sku'];
             if (Product::IsTrialSku($sku)) {
-                $trialProduct =  $this->productService->getProductsBySkus([$sku])[0];
+                $trialProduct = $this->productService->getProductsBySkus([$sku])[0];
                 $now = Carbon::now('UTC');
                 $lastTrialEndDate = $now->addDays($trialProduct->getTrialDays());
                 $this->shopifyGateway->updateCustomerLastTrialEndDate($shopifyCustomerId, $lastTrialEndDate);
+                $this->userService->setTrialPeriod($shopifyCustomerId, $lastTrialEndDate);
                 break;
             }
         }
@@ -125,8 +122,9 @@ class ShopifyWebHookController extends Controller
 
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
-    }
 
+        dispatch(new ImpactTrackConversion($user,  $brand, $order))->delay(Carbon::now()->addSeconds(3));
+    }
 
     private function handleOrderRefundEventTracking($order): void
     {

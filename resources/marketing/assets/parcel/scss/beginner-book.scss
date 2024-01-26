@@ -1,7 +1,7 @@
 @import "../_variables";
 
 h1 {
-    font-family: $robotocondensed;
+    font-family: $bebas;
     font-weight: 700;
     line-height: 1.1em;
     margin: 0 auto 5px;
@@ -408,7 +408,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     p {
-        font: 400 13px/1.3em $robotocondensed;
+        font: 400 13px/1.3em $bebas;
         text-transform: uppercase;
         margin: 0 auto;
         @include tablet {
@@ -820,7 +820,7 @@ h1, h2, h3, h4, h5, h6 {
         }
 
         .sub-nav-link {
-            font: 700 14px/1em $robotocondensed;
+            font: 700 14px/1em $bebas;
             text-transform: uppercase;
             color: #8B929A;
             background: #FFF;
@@ -901,7 +901,7 @@ h1, h2, h3, h4, h5, h6 {
                 h1 {
                     margin: 0 auto 7px;
                     text-transform: uppercase;
-                    font: 700 23px/1em $robotocondensed;
+                    font: 700 23px/1em $bebas;
                     @include tablet {
                         font-size: 28px;
                     }
@@ -971,7 +971,7 @@ h1, h2, h3, h4, h5, h6 {
 
             h1 {
                 text-transform: uppercase;
-                font: 700 18px/1em $robotocondensed;
+                font: 700 18px/1em $bebas;
                 margin: 10px auto 0;
                 max-width: 280px;
                 @include tablet {
@@ -1069,7 +1069,7 @@ h1, h2, h3, h4, h5, h6 {
 
     h1 {
         text-transform: uppercase;
-        font: 700 30px/1em $robotocondensed;
+        font: 700 30px/1em $bebas;
         margin: 30px auto 20px;
         @include tablet {
             font-size: 40px;
@@ -1176,20 +1176,20 @@ h1, h2, h3, h4, h5, h6 {
 
         h1 {
             text-transform: uppercase;
-            font: 700 25px/1em $robotocondensed;
+            font: 700 25px/1em $bebas;
             margin: 15px auto 5px;
         }
 
         p {
             text-transform: uppercase;
-            font: 400 12px/1em $robotocondensed;
+            font: 400 12px/1em $bebas;
             margin: 0 auto;
         }
     }
 
     h1 {
         text-transform: uppercase;
-        font: 700 30px/1em $robotocondensed;
+        font: 700 30px/1em $bebas;
         margin: 30px auto 20px;
         @include tablet {
             font-size: 40px;
@@ -1233,7 +1233,7 @@ h1, h2, h3, h4, h5, h6 {
 
     h1 {
         text-transform: uppercase;
-        font: 700 30px/1em $robotocondensed;
+        font: 700 30px/1em $bebas;
         margin: 0 auto 20px;
         @include tablet {
             font-size: 40px;
@@ -1394,7 +1394,7 @@ h1, h2, h3, h4, h5, h6 {
         h1 {
             margin: 0 auto 15px;
             text-transform: uppercase;
-            font: 700 28px/1em $robotocondensed;
+            font: 700 28px/1em $bebas;
             @include tablet {
                 margin: 0 auto 30px;
             }
@@ -1452,7 +1452,7 @@ h1, h2, h3, h4, h5, h6 {
                 }
 
                 p {
-                    font: 400 13px/1.2em $robotocondensed;
+                    font: 400 13px/1.2em $bebas;
                     text-transform: uppercase;
                     margin: 10px auto 0;
                     @include desktop {
@@ -1489,7 +1489,7 @@ h1, h2, h3, h4, h5, h6 {
 
     h1 {
         text-transform: uppercase;
-        font: 700 30px/1em $robotocondensed;
+        font: 700 30px/1em $bebas;
         margin: 0 auto 20px;
         @include tablet {
             font-size: 40px;
@@ -1626,7 +1626,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .blue-tab {
-        font: 700 34px/1em $robotocondensed;
+        font: 700 34px/1em $bebas;
         margin: 0 auto 20px;
         @include tablet {
             font-size: 46px;
@@ -1684,7 +1684,7 @@ h1, h2, h3, h4, h5, h6 {
 
     h5 {
         text-transform: uppercase;
-        font: 400 13px/1.2em $robotocondensed;
+        font: 400 13px/1.2em $bebas;
         margin: 0 auto;
         @include desktop {
             font-size: 14px;
@@ -1752,13 +1752,13 @@ h1, h2, h3, h4, h5, h6 {
 
             h1 {
                 text-transform: uppercase;
-                font: 700 21px/1em $robotocondensed;
+                font: 700 21px/1em $bebas;
                 margin: 7px auto 3px;
             }
 
             p {
                 text-transform: uppercase;
-                font: 400 10px/1em $robotocondensed;
+                font: 400 10px/1em $bebas;
                 margin: 0 auto;
             }
         }
@@ -2143,7 +2143,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .join {
-        font-family: $robotocondensed;
+        font-family: $bebas;
         border-radius: 6px;
         font-weight: 700;
         background: $drumeoBlue;
@@ -2209,7 +2209,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     h2 {
-        font: 700 30px/1em $robotocondensed;
+        font: 700 30px/1em $bebas;
         margin: 15px auto;
         text-transform: uppercase;
         color: $drumeoBlue;
@@ -2286,7 +2286,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     h5 {
-        font: 700 14px/1em $robotocondensed;
+        font: 700 14px/1em $bebas;
         text-transform: uppercase;
         margin: 15px auto 10px;
         @include tablet {
@@ -2321,7 +2321,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .blue-tab {
-        font: 700 34px/1em $robotocondensed;
+        font: 700 34px/1em $bebas;
         @include tablet {
             font-size: 46px;
         }

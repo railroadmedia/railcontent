@@ -22,10 +22,20 @@
                             @endif
                             <p class="leading-tight my-2 sm:my-3 text-sm italic">{!!$bundle['desc'] !!}</p>
                             <h4 class="inline-block leading-none">
-                                @if($bundle['discountedPrice'] < $bundle['price'])<span class="opacity-60"><s>${{ $bundle['price'] }}</s></span>&nbsp;@endif
-                                <strong>${{$bundle['discountedPrice']}}</strong>
+                                @if(!empty($bundle['soldOut']))
+                                    <strong>{{$bundle['price']}}</strong>
+                                @else
+                                    @if($bundle['discountedPrice'] < $bundle['price'])<span class="opacity-60"><s>${{ $bundle['price'] }}</s></span>&nbsp;@endif
+                                    <strong>${{$bundle['discountedPrice']}}</strong>
+                                @endif
                             </h4><br>
-                            <div class="join smaller mt-3 w-full text-white p-3 sm:max-w-md w-full" style="background:{{$bundle['buttonColor']}};">SEE DETAILS</div><br>
+                            <div class="join smaller mt-3 w-full text-white p-3 sm:max-w-md w-full" style="background:{{$bundle['buttonColor']}};">
+                                @if(!empty($bundle['soldOut']))
+                                    JOIN THE WAITLIST
+                                @else
+                                    SEE DETAILS
+                                @endif
+                            </div><br>
                         </div>
                         @if(!empty($bundle['img']))
                             <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('{{ $bundle['img'] }}');"></div>

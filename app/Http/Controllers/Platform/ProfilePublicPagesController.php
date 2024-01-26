@@ -49,22 +49,7 @@ class ProfilePublicPagesController extends BaseController
         }
 
         $userMetrics = $this->getUserMetrics($user);
-        switch (brand()) {
-            case 'drumeo':
-                $methodSlug = 'drumeo-method';
-                break;
-            case 'pianote':
-                $methodSlug = 'pianote-method';
-                break;
-            case 'guitareo':
-                $methodSlug = 'guitareo-method';
-                break;
-            case 'singeo':
-                $methodSlug = 'singeo-method';
-                break;
-            default:
-                throw new NotFoundHttpException();
-        }
+        $methodSlug = "$brand-method";
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();

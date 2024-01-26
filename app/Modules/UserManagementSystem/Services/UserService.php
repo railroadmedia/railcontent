@@ -34,12 +34,16 @@ class UserService
 
     public function getUserByShopifyCustomerId($shopifyCustomerId): ?User
     {
-        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first();
+        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->orderByDesc('id')->first();
         return $user ?? null;
     }
 
-    public function createUser(string $email, string $password, ?int $shopifyCustomerId = null, bool $requiresPasswordUpdate = false): User
-    {
+    public function createUser(
+        string $email,
+        string $password,
+        ?int $shopifyCustomerId = null,
+        bool $requiresPasswordUpdate = false
+    ): User {
         $parts = explode('@', $email);
 
         $user = new User();
@@ -51,5 +55,13 @@ class UserService
         $user->save();
         event(new UserCreated($user));
         return $user;
+    }
+
+    public function setTrialPeriod($shopifyCustomerId, $trialExpirationDate)
+    {
+        $user = $this->getUserByShopifyCustomerId($shopifyCustomerId);
+        $user->trial_expiration_date = $trialExpirationDate;
+        $user->is_trial = true;
+        $user->save();
     }
 }

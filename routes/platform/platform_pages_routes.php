@@ -55,6 +55,10 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.coaches');
 
+                Route::get('/{brand}/lessons/recommended', [ContentPagesController::class, 'recommendedLessons'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.recommended-lessons');
+
                 Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.new-lessons');
@@ -157,7 +161,7 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
-                
+
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())
@@ -551,10 +555,6 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account.id');
 
-        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.account');
-
         Route::put('/update-payment-method', [PaymentMethodUpdateController::class, 'submitUpdateForm'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.update-payment-method');
@@ -814,6 +814,10 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
             ->whereIn('brand', all_brands())
             ->name('platform.invite-a-friend');
+
+        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.account');
     });
 
 Route::get(

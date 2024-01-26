@@ -51,7 +51,7 @@
                             v-if="hasPublicProfiles"
                             :href="profileRoute"
                             target="_blank"
-                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0"
+                            class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0 hover:tw-underline hover:tw-underline-offset-2"
                         >
                             {{ comment.user.display_name }}
                         </a>
@@ -70,13 +70,13 @@
 
                 <div class="tw-flex tw-flex-col align-h-right tw-justify-center tw-grow-0">
                     <div class="tw-flex tw-flex-row">
-                        <span
+                        <button
                             v-if="(isUsersPost || isCurrentUserAdmin)"
-                            class="tw-text-sm no-decoration tw-cursor-pointer tw-mr-1"
+                            class="tw-inline-flex tw-items-center tw-justify-center tw-text-sm no-decoration tw-cursor-pointer tw-mr-1 tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-h-[32px] tw-w-[32px]"
                             @click="deleteComment"
                         >
                             <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
-                        </span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -93,9 +93,9 @@
             <div class="tw-flex tw-flex-row tw-flex-wrap">
                 <div class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
                     <div class="tw-flex tw-flex-row tw-items-center">
-                        <p
+                        <button
                             v-if="!isUsersPost"
-                            class="tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                            class="tw-flex tw-items-center tw-justify-center tw-h-[32px] tw-min-w-[32px] tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-px-1"
                             :class="comment.is_liked ? themeTextClass : 'dark:tw-text-white tw-text-[#00101D]'"
                             dusk="like-button"
                             @click="likeComment"
@@ -104,10 +104,10 @@
                             <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
                                 &nbsp;{{ comment.like_count }}
                             </span>
-                        </p>
+                        </button>
 
-                        <p
-                            class="tw-ml-[16px] tw-flex tw-items-center tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect"
+                        <button
+                            class="tw-ml-[16px] tw-flex tw-items-center tw-justify-center tw-h-[32px] tw-min-w-[32px] tw-font-bold tw-uppercase tw-cursor-pointer nowrap noselect tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-px-1"
                             :class="replying ? themeTextClass : 'dark:tw-text-white tw-text-[#00101D]'"
                             dusk="reply-button"
                             @click="openReply"
@@ -116,15 +116,15 @@
                             <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
                                 &nbsp;REPLY&nbsp;
                             </span>
-                        </p>
+                        </button>
 
                         <span class="tw-flex-grow"></span>
 
+                        <!-- Dropdown -->
                         <div class="lg:tw-hidden group-hover/reply:lg:tw-flex tw-flex tw-items-center tw-text-[#3F3F46] dark:tw-text-white tw-cursor-pointer tw-relative tw-h-[20px]">
                             <button @click="toggleDropdown">
                                 <svg class="tw-rotate-90" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                             </button>
-
                             <ul
                                 v-if="showDropdown"
                                 class="tw-absolute tw-top-6 tw-right-0 tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-z-50"

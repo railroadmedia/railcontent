@@ -16,6 +16,13 @@
     <link href="{{ asset('/marketing/parcel/drumeo/sales-app-pianote.css') }}" rel="stylesheet">
 @stop
 
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    lazyLoad: false,
+    }'
+@endsection
+
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
@@ -27,16 +34,11 @@
             <div class="ipad-phone">
                 <img src="https://d2vyvo0tyx8ig5.cloudfront.net/app/header.png" alt="Woman with short platnium hair showing hand playing chord on piano. Pianote logo in red. Screenshot of Pianote mobile app.">
                 <img class="preview" src="https://dpwjbsxqtam5n.cloudfront.net/app/preview-the-app.svg">
-                <i class="fas fa-play autoplay-video" data-open="trailer"></i>
+                <i class="fas fa-play autoplay-video" x-on:click="trailer = true;"></i>
             </div>
         </div>
     </section>
 
-    <div class="reveal large text-center" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/500649054?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
     <section class="download-pitch text-center">
         <div class="container mx-auto">
             <p>Put your piano teacher in your pocket. Take your video lessons, <br class="hidden md:inline">
@@ -93,18 +95,16 @@
         </div>
     </section>
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '500649054',
+        'vimeo' => true,
+    ])
 
     @include('pianote.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        $(function () {
-            $(document).foundation();
-        });
-    </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

@@ -57,7 +57,7 @@
             }
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
+            font-family: 'Bebas Neue', sans-serif;
             font-weight: 700;
             color: #fff;
             background: #0b76db;
@@ -147,7 +147,7 @@
         }
 
         .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
+            font:700 30px/1em "Bebas Neue", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
             color:#0b76db
@@ -383,7 +383,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
                     'url' => 'https://www.youtube.com/freedrumlessons/',
                     'label' => 'youtube',
                     'iconClass' => 'fab fa-youtube',
-                    'count' => number_format(Prices::$drumeoYoutubeSubsc), 
+                    'count' => number_format(Prices::$drumeoYoutubeSubsc),
                     'countLabel' => 'Subscribers',
                 ],
                 [
@@ -459,28 +459,6 @@ $points = [
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-
-    {{-- <script>
-        $(document).ready(function () {
-            $(document).foundation();
-            $('.comparison tr td:nth-child(3)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('online');
-            });
-            $('.comparison tr td:nth-child(4)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('books');
-            });
-            $('.comparison tr td:nth-child(5)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('private');
-            });
-
-            @if(!empty($errors) && $errors->any())
-                $('#waitlistModal').foundation('open');
-            @endif
-        });
-    </script> --}}
 <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defeer></script>
