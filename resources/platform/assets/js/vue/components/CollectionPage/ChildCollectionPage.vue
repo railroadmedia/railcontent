@@ -46,6 +46,10 @@ const props = defineProps({
         type: String,
         default: ""
     },
+    pluralContentType: {
+        type: String,
+        default: ""
+    },
     preLoadedContent: {
         type: Object,
         default: () => ({})
@@ -89,7 +93,7 @@ onBeforeMount(() => {
             :lock-unowned="true"
             :pre-loaded-content="preLoadedContent"
             :tab-options="[
-                { key: 'allContent', value: `All ${contentType}` },
+                { key: 'allContent', value: `All ${pluralContentType}` },
             ]"
             :initial-tab-data="{
                 allContent: {

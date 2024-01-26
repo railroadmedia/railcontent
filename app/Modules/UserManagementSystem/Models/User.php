@@ -113,6 +113,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property bool|false $has_google_subscription
  * @property int $cio_synced_workspaces
  * @property bool|false $requires_password_update
+ * @property bool|false $is_trial
+ * @property Carbon|null $trial_expiration_date
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()

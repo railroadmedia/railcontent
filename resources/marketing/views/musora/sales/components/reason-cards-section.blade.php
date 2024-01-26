@@ -9,19 +9,18 @@
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key == 6)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
-                            <div class="pb-96 overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
+                            <div class="pb-[70%] sm:pb-96 overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
                                  :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                  x-intersect.once="lazyLoad = true"
                                  x-on:click="open = ! open"
                             >
-                                <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl">
-                                    <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{{ $gridItem['image'] }}"
-                                            media="(min-width: 640px)">
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                <picture>
+                                    <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/{{ $gridItem['image'] }}">
+                                    <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x770/filters:quality(95)/{{ $gridItem['image'] }}">
+                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/0x470/filters:quality(95)/{{ $gridItem['image'] }}"
                                          alt="{{ $gridItem['title'] }}"
-                                         class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity"
-                                         loading="lazy"
-                                         onload="this.classList.remove('opacity-0')">
+                                        class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl opacity-0 transition-opacity"
+                                        style="object-position: 60% 0;" loading="lazy" onload="this.classList.remove('opacity-0')">
                                 </picture>
 
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">

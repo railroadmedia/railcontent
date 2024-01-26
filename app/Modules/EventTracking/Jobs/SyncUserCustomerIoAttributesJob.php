@@ -61,8 +61,11 @@ class SyncUserCustomerIoAttributesJob extends BatchQueryJob
     {
         try {
             /** @var Customer $item */
+            /** @var User $user */
             $user = User::find($item->user_id);
-            $this->shopifySyncService->syncCustomer($user, $user->email);
+            if ($user && $user->shopify_id) {
+                $this->shopifySyncService->syncCustomer($user->shopify_id, $user->email);
+            }
         } catch (Throwable $ex) {
             Log::error("Error migrating profile for email $item->email");
             Log::error($ex);

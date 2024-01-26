@@ -365,20 +365,20 @@
                 'animation' => 'animation: breathing 6s infinite;animation-delay: 2s;'
             ],
             [
-                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-01.webp',
-                'animation' => 'animation: breathing 6s infinite;'
+                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-01.webp',
+                'animation' => ''
             ],
             [
                 'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-02.webp',
                 'animation' => 'animation: breathing 6s infinite; animation-delay: 4s;'
             ],
             [
-                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-03.webp',
-                'animation' => 'animation: breathing 6s infinite; animation-delay: 2s;'
+                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-01.webp',
+                'animation' => 'animation: breathing 6s infinite;'
             ],
             [
-                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-01.webp',
-                'animation' => ''
+                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-03.webp',
+                'animation' => 'animation: breathing 6s infinite; animation-delay: 2s;'
             ],
             [
                 'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04.webp',
@@ -449,21 +449,21 @@
                 'animation' => 'animation: breathing 6s infinite;'
             ],
             [
-                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-04.webp',
-                'animation' => ''
+                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-04.webp',
+                'animation' => 'animation: breathing 6s infinite;animation-delay: 4s;'
             ],
             [
                 'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-17.webp',
                 'animation' => 'animation: breathing 6s infinite;animation-delay: 2s;'
             ],
             [
-                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-artists-04.webp',
-                'animation' => 'animation: breathing 6s infinite;animation-delay: 4s;'
-            ],
-            [
                 'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-18.webp',
                 'animation' => 'animation: breathing 6s infinite;'
-            ]
+            ],
+            [
+                'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-instruments-04.webp',
+                'animation' => ''
+            ],
         ],
     ]
     ?>
