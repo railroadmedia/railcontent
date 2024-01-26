@@ -1066,7 +1066,6 @@ return [
                     ],
                 ],
             ],
-        ],
             'recommended' => [
                 'name' => 'Recommended For You',
                 'shortname' => 'Recommenations',
