@@ -490,7 +490,7 @@
             <h3 class="leading-tight mb-4"><strong>Trusted by pianists<br class="inline-block sm:hidden">  everywhere.</strong></h3>
             <p class="mx-auto mb-7">Check out the reviews and meet some of our friendly students.</p>
             <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img alt="shopper approved image" class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <p class="mx-auto text-sm ">Rated <strong>4.8</strong> / 5 based on 6,654 student reviews. <span class="inline-block  text-pianote ">See the reviews »</span></p>
 
             </a>

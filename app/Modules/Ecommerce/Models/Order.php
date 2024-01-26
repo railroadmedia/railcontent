@@ -53,7 +53,7 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function orderItemFullfillments(): HasMany
+    public function orderItemFulfillments(): HasMany
     {
         return $this->hasMany(OrderItemFulfillment::class);
     }

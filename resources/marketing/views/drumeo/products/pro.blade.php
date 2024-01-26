@@ -169,7 +169,7 @@
                     </div>
                     <div class="columns no-padding medium-4">
                         <div class="social-platform image-badge">
-                            <img src="https://dpwjbsxqtam5n.cloudfront.net/drumeo-pro/shopper-approved.png">
+                            <img class="py-1 sm:py-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/musora/membership/homepage/2024/stars.png">
                             <p>Rated 5-Stars For Price,<br>
                                 Satisfaction & Service</p>
                         </div>

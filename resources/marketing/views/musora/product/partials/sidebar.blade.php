@@ -15,10 +15,10 @@
     }
 ?>
 
-<div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 lg:mt-10">
+<div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">
     <div class="lg:h-0">
         <div id="order" class="anchor"></div>
-        <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
+        <div id="sticky-slide" class="overflow-hidden rounded border border-solid border-gray-300">
             {{--<div class="promo-tab hidden lg:block text-center py-2 px-3" style="position:relative;background:#000 center center/450px;">--}}
                 {{--<img class="w-auto max-h-12" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/xm-logo2021.png">--}}
             {{--</div>--}}

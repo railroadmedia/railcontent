@@ -29,15 +29,7 @@ h3 {
   }
 }
 
-.side-bar .side-slide {
-
-  &.fixedSlider {
-    position: fixed;
-    height: initial;
-    //top: 80px;
-    top: 100px;
-  }
-
+#sticky-slide {
   .online-atc.merch {
     .join {
       background: #777;

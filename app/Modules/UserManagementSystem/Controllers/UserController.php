@@ -175,7 +175,7 @@ class UserController extends Controller
 
             $user->email = $email;
             $user->setPassword($password);
-            $this->requires_password_update = false;
+            $user->requires_password_update = false;
             $user->display_name = $parts[0] . rand(10000, 99999);
             $user->save();
         } else {
