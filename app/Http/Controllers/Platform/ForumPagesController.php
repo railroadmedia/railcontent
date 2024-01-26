@@ -244,10 +244,26 @@ class ForumPagesController extends Controller
         $categoryIds = [$categoryId];
         $pinned = (boolean)$request->get('pinned');
         $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'followed') {
+                    $followed = (boolean)$extra['1'];
+                }elseif ($extra['0'] == 'all') {
+                    $followed = null;
+                }
+            }
+        }
 
         PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
 
-        $sortBy = $request->get('sortby_val', '-last_post_published_on');
+        $sortBy = $request->get('sort', '-last_post_published_on');
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,

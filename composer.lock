@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.297.0",
+            "version": "3.297.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ad1f7be78d74d48628a6fe345818ce53bae64169"
+                "reference": "5be6a9c74e1d72af75f24b4f4a9cfac51ccd6a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ad1f7be78d74d48628a6fe345818ce53bae64169",
-                "reference": "ad1f7be78d74d48628a6fe345818ce53bae64169",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5be6a9c74e1d72af75f24b4f4a9cfac51ccd6a56",
+                "reference": "5be6a9c74e1d72af75f24b4f4a9cfac51ccd6a56",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.297.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.297.1"
             },
-            "time": "2024-01-24T19:09:39+00:00"
+            "time": "2024-01-25T19:18:40+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2269,16 +2269,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.7.3",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "ce594cbc39a4866c544f1a970d285ff0548221ad"
+                "reference": "d244f2e6e6bf32bff5174e6729b57214923ecec9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/ce594cbc39a4866c544f1a970d285ff0548221ad",
-                "reference": "ce594cbc39a4866c544f1a970d285ff0548221ad",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d244f2e6e6bf32bff5174e6729b57214923ecec9",
+                "reference": "d244f2e6e6bf32bff5174e6729b57214923ecec9",
                 "shasum": ""
             },
             "require": {
@@ -2362,7 +2362,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.7.3"
+                "source": "https://github.com/doctrine/dbal/tree/3.8.0"
             },
             "funding": [
                 {
@@ -2378,7 +2378,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-21T07:53:09+00:00"
+            "time": "2024-01-25T21:44:02+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -3894,16 +3894,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.28",
+            "version": "8.13.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "f508ab946a60c1470c92e33cfc0393a0d580b9a1"
+                "reference": "b8fa0daf0c27bb6fdb5940e0288f203be7e5cfd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/f508ab946a60c1470c92e33cfc0393a0d580b9a1",
-                "reference": "f508ab946a60c1470c92e33cfc0393a0d580b9a1",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/b8fa0daf0c27bb6fdb5940e0288f203be7e5cfd4",
+                "reference": "b8fa0daf0c27bb6fdb5940e0288f203be7e5cfd4",
                 "shasum": ""
             },
             "require": {
@@ -3962,7 +3962,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2024-01-17T08:09:20+00:00"
+            "time": "2024-01-26T08:49:18+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -9850,12 +9850,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "8c0d6764dac44f76c2a9f575dc5283f76edad21e"
+                "reference": "efe9781630108500894d0ad06f3a2d999fd96996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8c0d6764dac44f76c2a9f575dc5283f76edad21e",
-                "reference": "8c0d6764dac44f76c2a9f575dc5283f76edad21e",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/efe9781630108500894d0ad06f3a2d999fd96996",
+                "reference": "efe9781630108500894d0ad06f3a2d999fd96996",
                 "shasum": ""
             },
             "require": {
@@ -9887,7 +9887,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
             },
-            "time": "2024-01-23T14:54:25+00:00"
+            "time": "2024-01-26T09:11:08+00:00"
         },
         {
             "name": "railroad/permissions",

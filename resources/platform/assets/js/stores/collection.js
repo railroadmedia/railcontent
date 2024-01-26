@@ -27,6 +27,7 @@ export const useCollectionStore = defineStore({
             filterValues: {},
             filterColumns: [],
             filterableValues: [],
+            searchEndpointUrl: '',
         }
     },
     actions: {
@@ -57,7 +58,7 @@ export const useCollectionStore = defineStore({
         },
 
         getEndpoint (){
-            return this.isCoach ? this.coachEndpoint() : this.endpoint;
+            return this.isCoach ? this.coachEndpoint() : ((this.filter.searchTerm && this.searchEndpointUrl) ? this.searchEndpointUrl : this.endpoint);
         },
 
         updateIncludedFields (param) {
@@ -203,6 +204,10 @@ export const useCollectionStore = defineStore({
 
             if (defaults.endpoint) {
                 this.endpoint = defaults.endpoint;
+            }
+
+            if (defaults.searchEndpointUrl) {
+                this.searchEndpointUrl = defaults.searchEndpointUrl;
             }
 
             //Set active tab

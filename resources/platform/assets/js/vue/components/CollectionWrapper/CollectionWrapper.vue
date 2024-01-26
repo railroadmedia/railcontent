@@ -62,6 +62,10 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
+    searchEndpointUrl: {
+        type: String,
+        default: () => '',
+    },
     filterableValues: {
         type: Array,
         default: () => [],
@@ -354,6 +358,7 @@ onBeforeMount(() => {
         tabOptions: tabOptionData.value,
         filterableValues: props.filterableValues,
         endpoint: props.endpoint,
+        searchEndpointUrl: props.searchEndpointUrl,
     })
 })
 

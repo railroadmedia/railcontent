@@ -75,9 +75,10 @@
                     :pre-loaded-content="{{ json_encode($threads) }}"
                     :tab-options="{{ json_encode([
                         [ 'key' => 'all', 'value' => 'All Threads' ],
-                        [ 'key' => 'followed', 'value' => 'Followed' ]
+                        [ 'key' => 'followed,1', 'value' => 'Followed' ]
                     ]) }}"
                     :endpoint="'/{{ request()->path() }}'"
+                    :search-endpoint-url="'{{ url()->route('forums.get-search-results-json') }}'"
                 ></collection-wrapper>
             </div>
 
