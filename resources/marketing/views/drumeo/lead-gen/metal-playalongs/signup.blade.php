@@ -228,39 +228,3 @@
         </div>
     </section>
 @stop
-
-@section('scripts')
-    {{--<script>--}}
-        {{--$(document).ready(function () {--}}
-            {{--// song point cycle--}}
-            {{--var $songPoint = $('.side-pic.songs'),--}}
-                {{--$songPointToggle = $('.text-icon-wrap.songs'),--}}
-                {{--currentSongPoint = 0,--}}
-                {{--updateIndex = function (currentSongPoint) {--}}
-                    {{--$songPoint.removeClass('active');--}}
-                    {{--$songPointToggle.removeClass('active');--}}
-
-                    {{--$songPoint.eq(currentSongPoint).addClass('active');--}}
-                    {{--$songPointToggle.eq(currentSongPoint).addClass('active');--}}
-                {{--},--}}
-                {{--autoplaySongPoints = setInterval(function () {--}}
-                    {{--if(currentSongPoint < 4){--}}
-                        {{--currentSongPoint++;--}}
-                        {{--updateIndex(currentSongPoint);--}}
-                    {{--}--}}
-                    {{--else {--}}
-                        {{--currentSongPoint = 0;--}}
-                        {{--updateIndex(currentSongPoint);--}}
-                    {{--}--}}
-                {{--}, 10000);--}}
-
-            {{--$songPoint.first().addClass('active');--}}
-            {{--$songPointToggle.first().addClass('active');--}}
-            {{--$songPointToggle.on('click', function () {--}}
-                {{--updateIndex($songPointToggle.index($(this)));--}}
-                {{--currentSongPoint = $songPointToggle.index($(this));--}}
-                {{--clearInterval(autoplaySongPoints);--}}
-            {{--});--}}
-        {{--});--}}
-    {{--</script>--}}
-@stop
