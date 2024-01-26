@@ -288,6 +288,8 @@ export const useCollectionStore = defineStore({
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
                 this.getData();
             }
+
+            this.setURLParams()
         },
     },
 });
