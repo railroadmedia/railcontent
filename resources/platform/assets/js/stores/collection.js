@@ -8,6 +8,7 @@ export const useCollectionStore = defineStore({
     state: () => {
         return {
             data: [],
+            endpoint: '/railcontent/content',
             fetching: false,
             filter: {
                 activeTab: '',
@@ -55,8 +56,8 @@ export const useCollectionStore = defineStore({
             return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'All Coaches' ? '' : 'true'}`;
         },
 
-        endpoint (){
-            return '/railcontent/content';
+        getEndpoint (){
+            return this.isCoach ? this.coachEndpoint() : this.endpoint;
         },
 
         updateIncludedFields (param) {
@@ -73,9 +74,10 @@ export const useCollectionStore = defineStore({
         async fetchData () {
             const userStore = useUserStore();
             try {
+                console.log('working')
                 const response = await axios
                     .get(
-                        this.isCoach ? this.coachEndpoint() : this.endpoint(),
+                        this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
                         {
                             params: {
                                 brand: userStore.brand,
@@ -166,19 +168,19 @@ export const useCollectionStore = defineStore({
         },
 
         setData (response, replace) {
-            if (response) {
-                if (replace) {
-                    this.data = [...response.data.data];
-                    this.tabData[this.filter.activeTab].totalPages = Math.ceil(
-                        response.data.meta.totalResults / this.filter.limit
-                    );
-                } else {
-                    this.data = [...this.data, ...response.data.data];
-                    this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
-                }
-                this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
-                this.getFilterColumns();
-            }
+            // if (response) {
+            //     if (replace) {
+            //         this.data = [...response.data.data];
+            //         this.tabData[this.filter.activeTab].totalPages = Math.ceil(
+            //             response.data.meta.totalResults / this.filter.limit
+            //         );
+            //     } else {
+            //         this.data = [...this.data, ...response.data.data];
+            //         this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
+            //     }
+            //     this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
+            //     this.getFilterColumns();
+            // }
 
             this.loading = false;
         },
@@ -197,6 +199,10 @@ export const useCollectionStore = defineStore({
 
             if (defaults.filter) {
                 this.filter = { ...this.filter, ...defaults.filter };
+            }
+
+            if (defaults.endpoint) {
+                this.endpoint = defaults.endpoint;
             }
 
             //Set active tab
