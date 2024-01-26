@@ -73,7 +73,7 @@ class SyncAddressMetafieldsToShopifyOrdersDispatcher extends Command
                     null,
                     ShopifyMetafieldKey::AddressRegion,
                     ShopifyMetafieldTypes::single_line_text_field,
-                    ShopifyMetafieldNamespace::Model_Orders,
+                    ShopifyMetafieldNamespace::Musora,
                     ShopifyMetafieldOwnerTypeEnum::Order
                 ),
                 $simulate
@@ -84,7 +84,7 @@ class SyncAddressMetafieldsToShopifyOrdersDispatcher extends Command
                     null,
                     ShopifyMetafieldKey::AddressCountry,
                     ShopifyMetafieldTypes::single_line_text_field,
-                    ShopifyMetafieldNamespace::Model_Orders,
+                    ShopifyMetafieldNamespace::Musora,
                     ShopifyMetafieldOwnerTypeEnum::Order
                 ),
                 $simulate
