@@ -33,7 +33,8 @@ class LearningPathsService
             $content = $this->contentService->getById($section->product_id);
             $section->bgImg = $section->desktop_img;
             $section->topPillText = $section->tagline ?? '';
-            $section->ctaUrl = $content['url'];
+            $section->content_type = $content['type'] ?? '';
+            $section->ctaUrl = $content['url'] ?? '';
             $section->ctaText = ($content['completed'])?'Completed':((!$content['started']) ? 'Start now':'Continue');
         });
 
