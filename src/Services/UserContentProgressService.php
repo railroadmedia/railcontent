@@ -752,4 +752,12 @@ class UserContentProgressService
     {
         return $this->userContentRepository->countContentProgress($contentId, $date, $state);
     }
+
+    public function countByArtistTypesUserProgress(array $types, $artist)
+    {
+        return $this->userContentRepository->countByArtistTypesUserProgress(
+            $types,
+            $artist
+        );;
+    }
 }
