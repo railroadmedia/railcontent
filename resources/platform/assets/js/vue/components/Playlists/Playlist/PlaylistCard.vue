@@ -44,7 +44,7 @@ const props = defineProps({
     },
     inPlaybackCue: {
         type: Boolean,
-        default: false,  
+        default: false,
     }
 });
 
@@ -96,7 +96,7 @@ const instrument = computed(() => {
             return 'Guitar'
         case 'singeo':
             return 'Song'
-        default: 
+        default:
             return 'Instrument'
     }
 })
@@ -194,7 +194,7 @@ onBeforeMount(() => {
             action: "editLessonTime"
         }]
     }
-    
+
     //Check if it's a full track
     if(JSON.parse(props.lesson.user_playlist_item_extra_data)) {
         let instrumentData = JSON.parse(props.lesson.user_playlist_item_extra_data);
@@ -202,17 +202,17 @@ onBeforeMount(() => {
             state.isFullTrack = false;
         }
     }
-    
+
 });
 </script>
 <template>
     <div :id="cardId"
-        class="tw-mb-0.5 tw-group tw-h-[100px] tw-min-h-[100px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] tw-bg-white dark:tw-bg-[#081825] tw-px-3">
+        class="tw-mb-[1px] tw-group tw-h-[100px] tw-min-h-[100px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] tw-bg-white dark:tw-bg-[#081825] tw-px-3">
         <div class="tw-flex tw-items-center tw-h-full tw-w-full"
              :class="{ 'tw-relative' : playlistsStore.sortingPlaylist }"
         >
             <!-- PLAYLIST INFO: clickable link -->
-            <component :is="needAccess ? 'div' : 'a' " 
+            <component :is="needAccess ? 'div' : 'a' "
                        :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
                        class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white tw-cursor-pointer"
                        :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
@@ -241,7 +241,7 @@ onBeforeMount(() => {
                     </div>
 
                     <!-- Overlay -->
-                    <div v-if="lesson.progress_percent === 100 || !released" 
+                    <div v-if="lesson.progress_percent === 100 || !released"
                          class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-text-white tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center"
                     >
                         <template v-if="!released">
@@ -259,7 +259,7 @@ onBeforeMount(() => {
 
                     <!-- Progress Bar -->
                     <div class="tw-z-[15] tw-absolute tw-flex tw-bottom-0 tw-left-0 tw-h-1 tw-w-full">
-                        <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0" 
+                        <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0"
                               :class="[`tw-bg-${brand}`]"
                               :style="`width: ${lesson.progress_percent}%;`"
                         >
@@ -377,15 +377,15 @@ onBeforeMount(() => {
                         </button>
 
                         <!-- Dropdown-->
-                        <PlaylistDropdown 
-                            :brand="brand" 
-                            :dropdownTop="state.dropdownTop" 
+                        <PlaylistDropdown
+                            :brand="brand"
+                            :dropdownTop="state.dropdownTop"
                             :is-open="state.dropdownOpen"
-                            :dropdownOptions="dropdownOptions" 
-                            :data="lesson" 
-                            :index="index" 
+                            :dropdownOptions="dropdownOptions"
+                            :data="lesson"
+                            :index="index"
                             type="lesson"
-                            @closeDropdown="state.dropdownOpen = false" 
+                            @closeDropdown="state.dropdownOpen = false"
                             @pinItem="(val) => state.isPinned = val"
                             :in-playback-cue="inPlaybackCue"
                             :is-my-playlist="isMyPlaylist"
@@ -423,18 +423,18 @@ onBeforeMount(() => {
                     </svg>
 
                     <!-- Dropdown-->
-                    <PlaylistDropdown 
-                        :brand="brand" 
-                        :dropdownTop="state.dropdownTop" 
+                    <PlaylistDropdown
+                        :brand="brand"
+                        :dropdownTop="state.dropdownTop"
                         :is-open="state.dropdownOpen"
-                        :dropdownOptions="dropdownOptions" 
-                        :data="lesson" 
-                        :index="index" 
+                        :dropdownOptions="dropdownOptions"
+                        :data="lesson"
+                        :index="index"
                         :in-playback-cue="inPlaybackCue"
                         :is-my-playlist="isMyPlaylist"
                         type="lesson"
-                        @closeDropdown="state.dropdownOpen = false" 
-                        @pinItem="(val) => state.isPinned = val" 
+                        @closeDropdown="state.dropdownOpen = false"
+                        @pinItem="(val) => state.isPinned = val"
                     />
                 </div>
             </div>
