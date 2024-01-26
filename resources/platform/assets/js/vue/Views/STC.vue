@@ -81,7 +81,7 @@
                     <div class="tw-relative tw-flex tw-justify-start">
                         <select ref="languageInput" name="student_form_languages[]" id="student_form_languages" class="tw-bg-transparent tw-rounded-full tw-absolute tw-w-full tw-h-full tw-min-h-[24px]" @click="languageContainerClick" @change="(event) => selectLanguage(event.target.value)">
                             <option value="" class="bg-white text-black">Select</option>
-                            <option v-for="language in languages" class="bg-white text-black" :value="language">{{ language }}</option>
+                            <option v-for="language in languages" class="bg-white text-black" :value="language['value']">{{ language['value'] }}</option>
                         </select>
                         <div class="tw-max-w-[85%] tw-py-2 tw-px-3">
                             <div class="tw-flex tw-flex-wrap tw-gap-2 tw-z-20 tw-items-center tw-min-h-[26px] tw-bg-[#F9F9F9] dark:tw-bg-[#000C18] tw-relative tw-rounded-full">
