@@ -51,6 +51,8 @@ class ShopController extends BaseController
 
         $lowStock = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [59, 63, 64, 65, 67, 68, 69, 71, 72]);
 
+        $sale1dollar = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 74]);
+
         return view('drumeo.shop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
@@ -61,7 +63,8 @@ class ShopController extends BaseController
             'category' => $request->category,
             'featured' => $featured,
             'thirtyDD' => $thirtyDD,
-            'lowStock' => $lowStock
+            'lowStock' => $lowStock,
+            'sale1dollar' => $sale1dollar
         ]);
     }
 

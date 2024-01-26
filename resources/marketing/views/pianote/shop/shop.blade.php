@@ -185,6 +185,32 @@
             </div>
         </section>
 
+        {{--   one dollar     --}}
+        <div id="oneDollar" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> $1 Piano Merch</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+                    @foreach($sale1dollar as $key => $sale1dollarItem)
+                        @include('_partials.components.shop.product-card', [
+                        "sku" => $sale1dollarItem->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $sale1dollarItem->slug ),
+                        "thumbnail" => $sale1dollarItem->thumbnail,
+                        "badgeText" => $sale1dollarItem->badge_text,
+                        "title" => $sale1dollarItem->name,
+                        "cardDescription" => $sale1dollarItem->short_desc,
+                        "fullPrice" => $sale1dollarItem->price,
+                        "price" => $sale1dollarItem->discounted_price,
+                        "category" => strtolower($sale1dollarItem->productType->name),
+                        "sizes" => $sale1dollarItem->sizes,
+                        "soldOut" => isset($products[$sale1dollarItem->sku]) ? $products[$sale1dollarItem->sku]->getStockAvailability() === 0 : $sale1dollarItem->sold_out,
+                        "size_case_sensitive" => $sale1dollarItem->size_case_sensitive,
+                        ])
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
         {{--   SHIRTS     --}}
         <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
