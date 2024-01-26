@@ -395,34 +395,34 @@
 
         {{--   limited     --}}
         <div id="limited" class="anchor"></div>
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @foreach($lowStock as $key => $lowStockItem)
-                        @include('_partials.components.shop.product-card', [
-                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '',  $lowStockItem->slug ),
-                            "sku" =>  $lowStockItem->sku === 'drumeo' ? null :  $lowStockItem->sku,
-                            "badgeText" =>  $lowStockItem->badge_text,
-                            "thumbnail" =>  $lowStockItem->thumbnail,
-                            "packLogo" =>  $lowStockItem->thumbnail_logo,
-                            "title" =>  $lowStockItem->name,
-                            "packAuthor" =>  $lowStockItem->instructor_name,
-                            "cardDescription" =>  $lowStockItem->short_desc,
-                            "fullPrice" =>  $lowStockItem->price,
-                            "price" =>  $lowStockItem->discounted_price,
-                            "category" => strtolower( $lowStockItem->productType->name),
-                            "buttonText" =>  $lowStockItem->sku === 'drumeo' ||  $lowStockItem->sku === 'pianote' ||  $lowStockItem->sku === 'singeo' ||  $lowStockItem->sku === 'guitareo' ? 'see the deal' : null,
-                            "soldOut" =>  $lowStockItem->sold_out,
-                            "includedEdge" =>  $lowStockItem->included_edge,
-                            "sizes" =>  $lowStockItem->sizes,
-                            'FCP' => $key < 4 ? true : null,
-                            "size_case_sensitive" =>  $lowStockItem->size_case_sensitive,
-                        ])
-                    @endforeach
-                </div>
-            </div>
-        </section>
+{{--        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">--}}
+{{--            <div class="container">--}}
+{{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>--}}
+{{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">--}}
+{{--                    @foreach($lowStock as $key => $lowStockItem)--}}
+{{--                        @include('_partials.components.shop.product-card', [--}}
+{{--                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '',  $lowStockItem->slug ),--}}
+{{--                            "sku" =>  $lowStockItem->sku === 'drumeo' ? null :  $lowStockItem->sku,--}}
+{{--                            "badgeText" =>  $lowStockItem->badge_text,--}}
+{{--                            "thumbnail" =>  $lowStockItem->thumbnail,--}}
+{{--                            "packLogo" =>  $lowStockItem->thumbnail_logo,--}}
+{{--                            "title" =>  $lowStockItem->name,--}}
+{{--                            "packAuthor" =>  $lowStockItem->instructor_name,--}}
+{{--                            "cardDescription" =>  $lowStockItem->short_desc,--}}
+{{--                            "fullPrice" =>  $lowStockItem->price,--}}
+{{--                            "price" =>  $lowStockItem->discounted_price,--}}
+{{--                            "category" => strtolower( $lowStockItem->productType->name),--}}
+{{--                            "buttonText" =>  $lowStockItem->sku === 'drumeo' ||  $lowStockItem->sku === 'pianote' ||  $lowStockItem->sku === 'singeo' ||  $lowStockItem->sku === 'guitareo' ? 'see the deal' : null,--}}
+{{--                            "soldOut" =>  $lowStockItem->sold_out,--}}
+{{--                            "includedEdge" =>  $lowStockItem->included_edge,--}}
+{{--                            "sizes" =>  $lowStockItem->sizes,--}}
+{{--                            'FCP' => $key < 4 ? true : null,--}}
+{{--                            "size_case_sensitive" =>  $lowStockItem->size_case_sensitive,--}}
+{{--                        ])--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
     </div>
 @endsection
 
