@@ -263,6 +263,7 @@
     @endif
 
     @if(empty($trialVersion) && empty($evergreenVersion) && !empty($promoVersion) && empty($hideHeader))
+        <div id="resolutions" class="anchor"></div>
         <section class="text-center px-5 lg:px-6 py-8 sm:py-0 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
             <div class="container max-w-5xl mx-auto">
                     <h2 class="inline-block sm:hidden mb-4 sm:text-left"><strong>Imagine starting a<br class="inline sm:hidden"> resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
