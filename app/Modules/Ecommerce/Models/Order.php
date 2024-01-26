@@ -104,7 +104,7 @@ class Order extends Model
                 ShopifyMetafieldKey::AddressRegion,
                 $address->region,
                 ShopifyMetafieldTypes::single_line_text_field,
-                ShopifyMetafieldNamespace::Model_Orders
+                ShopifyMetafieldNamespace::Musora
             );
         }
         if ($address?->country) {
@@ -112,7 +112,7 @@ class Order extends Model
                 ShopifyMetafieldKey::AddressCountry,
                 $address->country,
                 ShopifyMetafieldTypes::single_line_text_field,
-                ShopifyMetafieldNamespace::Model_Orders
+                ShopifyMetafieldNamespace::Musora
             );
         }
         return $metafields;
