@@ -8,8 +8,10 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldOwnerTypeEnum;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\CreateMissingMetafieldDefinition;
 use App\Modules\Ecommerce\Jobs\Shopify\SyncOrderAddressMetafieldsToShopify;
+use App\Modules\Ecommerce\Jobs\Shopify\SyncSubscriptionPaymentAddressMetafieldsToShopifyOrder;
 use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\Shopify\MetaFieldDefinition;
+use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use Carbon\Carbon;
 use Illuminate\Bus\Batch;
 use Illuminate\Console\Command;
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
 
-class SyncOrderAddressMetafieldsToShopifyDispatcher extends Command
+class SyncAddressMetafieldsToShopifyOrdersDispatcher extends Command
 {
     /**
      * The name and signature of the console command.
@@ -26,8 +28,8 @@ class SyncOrderAddressMetafieldsToShopifyDispatcher extends Command
      * @var string
      */
     protected $signature = 'shopify:sync-order-address-metafields
-                            {--startCreatedAt= : (Optional) The ISO 8601 date time for all orders to get where created_at at or after. e.g. 2023-10-13T17:00:25+00:00}
-                            {--endCreatedAt= : (Optional) The ISO 8601 date time for all orders to get where created_at at or before. e.g. 2023-10-13T17:30:14+00:00}
+                            {--startCreatedAt= : (Optional) The ISO 8601 date time for all orders and subscription payments to get where created_at at or after. e.g. 2023-10-13T17:00:25+00:00}
+                            {--endCreatedAt= : (Optional) The ISO 8601 date time for all orders and subscription payments to get where created_at at or before. e.g. 2023-10-13T17:30:14+00:00}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
     /**
      * The console command description.
@@ -54,6 +56,13 @@ class SyncOrderAddressMetafieldsToShopifyDispatcher extends Command
             ->whereNotNull('shopify_id')
             ->select("id");
         $orderCount = $orders->count();
+
+        $subscriptionPayments = SubscriptionPayment::query()
+            ->whereBetween('created_at', [$startCreatedAt, $endCreatedAt])
+            ->whereNotNull('shopify_id')
+            ->select("id");
+        $subscriptionPaymentCount = $subscriptionPayments->count();
+
         $batchSize = 500;
 
         // first, add the jobs to ensure the metafields exist in Shopify
@@ -83,20 +92,41 @@ class SyncOrderAddressMetafieldsToShopifyDispatcher extends Command
         ];
 
         $this->info(
-            "SyncOrderAddressMetafieldsToShopify: Preparing to chunk orders into jobs for SyncOrderAddressMetafieldsToShopifyJobManager. Please wait..."
+            "SyncOrderAddressMetafieldsToShopify: Preparing to chunk orders into jobs for SyncOrderAddressMetafieldsToShopify. Please wait..."
         );
         $startAt = Carbon::now();
 
         // step through the chunks of order ids to sync, and add a job to process each chunk
-        $orders->chunkById($batchSize, function ($orderIds) use ($simulate, &$jobs) {
+        $orders->chunkById($batchSize, function ($orderIds) use ($endCreatedAt, $startCreatedAt, $simulate, &$jobs) {
             $firstOrderId = $orderIds->first()->id;
             $lastOrderId = $orderIds->last()->id;
             $jobs[] = new SyncOrderAddressMetafieldsToShopify(
                 $firstOrderId,
                 $lastOrderId,
+                $startCreatedAt,
+                $endCreatedAt,
                 $simulate
             );
         });
+
+        $this->info(
+            "SyncOrderAddressMetafieldsToShopify: Preparing to chunk subscription payments into jobs for SyncOrderAddressMetafieldsToShopify. Please wait..."
+        );
+        // step through the chunks of subscription payment ids to sync, and add a job to process each chunk
+        $subscriptionPayments->chunkById($batchSize, function ($subscriptionPaymentIds) use (
+            $endCreatedAt,
+            $startCreatedAt, $simulate, &$jobs) {
+            $firstSubscriptionPaymentId = $subscriptionPaymentIds->first()->id;
+            $lastSubscriptionPaymentId = $subscriptionPaymentIds->last()->id;
+            $jobs[] = new SyncSubscriptionPaymentAddressMetafieldsToShopifyOrder(
+                $firstSubscriptionPaymentId,
+                $lastSubscriptionPaymentId,
+                $startCreatedAt,
+                $endCreatedAt,
+                $simulate
+            );
+        });
+
         $this->info(
             sprintf(
                 "SyncOrderAddressMetafieldsToShopify: Completed dispatching jobs in %s seconds.",
@@ -117,12 +147,14 @@ class SyncOrderAddressMetafieldsToShopifyDispatcher extends Command
             ->dispatch();
         $this->info(
             sprintf(
-                "SyncOrderAddressMetafieldsToShopify: Batch ID %s dispatched with %s %s to sync %s %s.",
+                "SyncOrderAddressMetafieldsToShopify: Batch ID %s dispatched with %s %s to sync %s %s and %s %s.",
                 $batch->id,
                 $batch->totalJobs,
                 Str::plural("job", $batch->totalJobs),
                 $orderCount,
-                Str::plural("order", $orderCount)
+                Str::plural("order", $orderCount),
+                $subscriptionPaymentCount,
+                Str::plural("subscription payment", $subscriptionPaymentCount)
             )
         );
 

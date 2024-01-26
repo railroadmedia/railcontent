@@ -2,10 +2,10 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
-use App\Modules\Ecommerce\Models\Order;
+use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use Illuminate\Database\Eloquent\Builder;
 
-class SyncOrderAddressMetafieldsToShopify extends SyncAddressMetafieldsToShopifyBaseClass
+class SyncSubscriptionPaymentAddressMetafieldsToShopifyOrder extends SyncAddressMetafieldsToShopifyBaseClass
 {
 
     /**
@@ -16,13 +16,12 @@ class SyncOrderAddressMetafieldsToShopify extends SyncAddressMetafieldsToShopify
         return get_class($this);
     }
 
-
     /**
      * @inheritDoc
      */
     protected function getModelTypeName(): string
     {
-        return "order";
+        return "subscription payment";
     }
 
     /**
@@ -30,7 +29,7 @@ class SyncOrderAddressMetafieldsToShopify extends SyncAddressMetafieldsToShopify
      */
     protected function getModelsQuery(): Builder
     {
-        return Order::query()
+        return SubscriptionPayment::query()
             ->whereBetween("id", [$this->startAtId, $this->endAtId])
             ->whereBetween('created_at', [$this->startCreatedAt, $this->endCreatedAt])
             ->whereNotNull('shopify_id');
