@@ -58,6 +58,10 @@ const props = defineProps({
         type: String,
         default: '-published_on',
     },
+    endpoint: {
+        type: String,
+        default: () => '',
+    },
     filterableValues: {
         type: Array,
         default: () => [],
@@ -349,6 +353,7 @@ onBeforeMount(() => {
         tabData: getTabData.value,
         tabOptions: tabOptionData.value,
         filterableValues: props.filterableValues,
+        endpoint: props.endpoint,
     })
 })
 

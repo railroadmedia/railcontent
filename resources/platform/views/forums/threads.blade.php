@@ -77,6 +77,7 @@
                         [ 'key' => 'all', 'value' => 'All Threads' ],
                         [ 'key' => 'followed', 'value' => 'Followed' ]
                     ]) }}"
+                    :endpoint="'/{{ request()->path() }}'"
                 ></collection-wrapper>
             </div>
 
