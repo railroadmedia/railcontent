@@ -7,10 +7,11 @@
             <p class="show-for-desktop">Join over 200,000 drummers who receive free weekly drum lessons.</p>
             <p class="hide-for-desktop">Receive free weekly lessons.</p>
             <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
-                  method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                  method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()" aria-label="Email Sign Up Form">
                 <input type="hidden" name="form_name" value="Blog Signup">
                 <div class="columns medium-7">
-                    <input id="sign-up-email" class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="">
+                    <label for="sign-up-email" class="sr-only">Email Address</label>
+                    <input id="sign-up-email" class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="" alt="Email Address Input Field">
                 </div>
                 <div class="infusion-submit columns medium-5">
                     <button class="submit infusion-recaptcha" type="submit">
@@ -28,15 +29,25 @@
                 <div class="thank-you-box">
                     <p><em>You should receive an email from team@drumeo.com within 10 minutes.</em></p>
                 </div>
+                
                 <a style="width: 48%;max-width:130px;
-        display: inline-block;
-        margin-right: 2%;
-        margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6" target="_blank">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png" alt="app store icon"></a>
-                <a style="width: 48%;max-width:130px;
-        display: inline-block;
-        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews" target="_blank">
-                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png" alt="google play icon"></a>
+                            display: inline-block;
+                            margin-right: 2%;
+                            margin-top: 10px;" 
+                            href="https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6" 
+                            target="_blank" 
+                            aria-label="Download on App Store">
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png" alt="App Store Icon">
+                </a>
+                <a style="width: 48%;
+                        max-width:130px;
+                        display: inline-block;
+                        margin-top: 10px;" 
+                        href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews"
+                        target="_blank"
+                        aria-label="Download on Google Play" >
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png" alt="Google Play Icon">
+                </a>
             </div>
             <div class="footer-link-wrap">
                 <h1>Resources</h1>
@@ -65,10 +76,10 @@
     @endif
     <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="row">
-            <img class="logo" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-white.png" alt="Drumeo">
+            <img class="logo" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-white.png" alt="Drumeo Logo">
             @if(empty($minimal))
                 <p><a href="https://goo.gl/maps/c4JxakSmnjB2" rel="noopener" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
-                    <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
+                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
 
                 <a rel="noopener" href="https://www.youtube.com/freedrumlessons/" target="_blank" class="inline-flex items-center justify-center social-media youtube" aria-label="youtube"><i class="fab fa-youtube"></i></a>
                 <a rel="noopener" href="https://facebook.com/drumeo/" target="_blank" class="inline-flex items-center justify-center social-media facebook" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>

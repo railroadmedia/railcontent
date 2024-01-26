@@ -3,29 +3,31 @@
         <a
             @if(!empty($logoUrl))
                 href="{{ $logoUrl }}"
+                title="Go to the home page"
             @else
                 href="{{ get_legacy_brand_base_url('drumeo') }}"
+                title="Go to the home page"
             @endif
         >
-            <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
+            <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Logo of Drumeo">
         </a>
     </div>
 
-    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-1 w-0 @endif">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-1 w-0 @endif" role="button" aria-label="Menu Toggle">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
     </div>
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button" role="button" aria-label="Shop at Drumeo shop">Shop</a>
         </div>
     @endif
 
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button" role="button" aria-label="Shop at Drumeo shop">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -48,18 +50,18 @@
         @if(!empty($fullSubscriptionVersion))
             <div class="relative">
                 <div class="edge-wrap show-for-medium">
-                    <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
-                    <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
-                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
-                    <a class="@if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
-                    <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
+                    <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Features Menu"  aria-controls="features-dd">Features <i class="fa-solid fa-caret-down"></i></span>
+                    <span class="cursor-pointer instruments" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Instruments Menu" aria-controls="instruments-dd" title="View Instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" aria-label="Pricing" title="View Pricing">Pricing</a>
+                    <a class="@if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" aria-label="Shop" title="Visit Shop">Shop</a>
+                    <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" title="Read our Blog">Blog</a>
                 </div>
-                <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
+                <div id="features-dd" class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44" tabindex="0">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
                 </div>
-                <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
+                <div id="instruments-dd" class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44" tabindex="0">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full text-drumeo" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('guitareo') }}" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
@@ -72,21 +74,21 @@
             <a @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))
-                    href="{{ $joinUrl }}" class="join"
+                    href="{{ $joinUrl }}" class="join" aria-label="Join Drumeo"
                 @else
                     href="/#customize-anchor" class="join"
                 @endif
                 >
 
                 @if(!empty($trialVersion))
-                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                 @else
                     Join<span class="show-for-medium"> Drumeo</span>
                 @endif
             </a>
         </div>
         <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
-            <a href="https://www.musora.com/drumeo" class="join outline-button">Login</a>
+            <a href="https://www.musora.com/drumeo" class="join outline-button" aria-label="Login to Drumeo">Login</a>
         </div>
     @endif
 </nav>
