@@ -28,6 +28,7 @@ export const useCollectionStore = defineStore({
             filterColumns: [],
             filterableValues: [],
             searchEndpointUrl: '',
+            searching: false, //for threads page
         }
     },
     actions: {
@@ -169,20 +170,21 @@ export const useCollectionStore = defineStore({
         },
 
         setData (response, replace) {
-            // if (response) {
-            //     if (replace) {
-            //         this.data = [...response.data.data];
-            //         this.tabData[this.filter.activeTab].totalPages = Math.ceil(
-            //             response.data.meta.totalResults / this.filter.limit
-            //         );
-            //     } else {
-            //         this.data = [...this.data, ...response.data.data];
-            //         this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
-            //     }
-            //     this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
-            //     this.getFilterColumns();
-            // }
+            if (response) {
+                if (replace) {
+                    this.data = [...response.data.data];
+                    this.tabData[this.filter.activeTab].totalPages = Math.ceil(
+                        response.data.meta.totalResults / this.filter.limit
+                    );
+                } else {
+                    this.data = [...this.data, ...response.data.data];
+                    this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
+                }
+                this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
+                this.getFilterColumns();
+            }
 
+            if (this.filter.searchTerm) this.searching = true;
             this.loading = false;
         },
 

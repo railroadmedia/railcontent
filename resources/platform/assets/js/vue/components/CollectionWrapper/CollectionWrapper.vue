@@ -9,7 +9,7 @@
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
-                <ForumThreadsTable v-else-if="isThreads" :threads="preLoadedContent" />
+                <ForumThreadsTable v-else-if="isThreads" :threads="preLoadedContent" :searching="searching" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                             :total-results="getTotalResults" />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
@@ -139,7 +139,7 @@ const props = defineProps({
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, currentPage, filter, loading, totalPages, tabData, filterColumns } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
 const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
