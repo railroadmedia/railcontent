@@ -13,6 +13,7 @@
     "require": {
         "php": "^8.1",
         "ext-curl": "*",
+        "ext-openssl": "*",
         "code-lts/laravel-fcm": "1.7.*",
         "cweagans/composer-patches": "^1.7",
         "fakerphp/faker": "^1.9.1",
@@ -56,11 +57,12 @@
         "venturecraft/revisionable": "1.*",
         "vimeo/vimeo-api": "^3.0",
         "whitecube/nova-flexible-content": "^1.0",
-        "ext-openssl": "*"
+        "yoramdelangen/laravel-pdo-odbc": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
+        "brianium/paratest": "^6.11",
         "fakerphp/faker": "^1.9.1",
         "kitloong/laravel-migrations-generator": "^5.2",
         "laravel/sail": "^1.0.1",
@@ -107,6 +109,22 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "test-cov-p": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --coverage --parallel --processes=4"
+        ],
+        "test-cov-html-p": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --parallel --coverage-html reports/"
+        ],
+        "test-cov": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --coverage"
+        ],
+        "test-cov-html": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --coverage-html reports/"
         ]
     },
     "extra": {

@@ -31,7 +31,7 @@
 
     @yield('banner')
 
-    <div class="clearfix container mx-auto max-w-6xl">
+    <div class="clearfix container mx-auto max-w-6xl relative pt-5 md:pt-9 lg:pt-11">
         <div class="lg:flex">
             @include('_partials.components.shop.slider', [
         "headerText" => "<strong>The perfect gift for ANY drummer!</strong>",
@@ -39,10 +39,10 @@
         "videoThumb" => "https://s3.amazonaws.com/drumeo-packs/Merch/pass.jpg",
     ])
 
-            <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 mt-2 mb-4 lg:mb-0">
+            <div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">
                 <div class="lg:h-0">
                     <div id="order" class="anchor"></div>
-                    <div class="side-slide overflow-hidden rounded border border-solid fixedSlider" style="border-color: rgb(204, 211, 211); width: 352px;">
+                    <div id="sticky-slide" class="overflow-hidden rounded border border-solid border-gray-300">
                         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
 
                             <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-drumeo">$<span class="chosen-variant-price-float">29</span></strong></h1>
@@ -94,7 +94,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/pack-drumshop.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/shop-product.js') }}"></script>
 
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>

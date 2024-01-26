@@ -28,6 +28,7 @@ use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
@@ -122,30 +123,18 @@ class HomePageController extends BaseController
         return redirect("/" . brand() . "/profile/" . user()->id . "/settings/notifications");
     }
 
-    public function home(Request $request, $brand)
+    public function home(Request $request, $musoraDomain, $brand)
     {
+        if (!in_array($brand, all_brands())) {
+            throw new NotFoundHttpException();
+        }
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
 
-        switch (brand()) {
-            case 'drumeo':
-                $methodSlug = 'drumeo-method';
-                break;
-            case 'pianote':
-                $methodSlug = 'pianote-method';
-                break;
-            case 'guitareo':
-                $methodSlug = 'guitareo-method';
-                break;
-            case 'singeo':
-                $methodSlug = 'singeo-method';
-                break;
-            default:
-                throw new NotFoundHttpException();
-        }
+        $methodSlug = "$brand-method";
 
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
@@ -187,6 +176,12 @@ class HomePageController extends BaseController
         $newContent = $this->getNewContents();
 
         $workoutsContent = $this->getWorkoutsContents();
+        if(config('railcontent.enable_recsys', false)) {
+            $recommendedContent = $this->getSongRecommendations();
+        } else {
+            $recommendedContent = new ContentFilterResultsEntity([]);
+        }
+
 
         $userMetrics = $this->getUserMetrics();
 
@@ -240,6 +235,7 @@ class HomePageController extends BaseController
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
+        $collectionForDecoration = $collectionForDecoration->merge($recommendedContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
         $collectionForDecoration = $collectionForDecoration->merge($workoutsContent->results());
@@ -373,49 +369,52 @@ class HomePageController extends BaseController
         }
 
         return view('home.index', [
-            'brand' => $brand,
-            "hotForumTopics" => $hotForumTopics,
-            "newContentJson" => $newContent->toResponseRawJson(),
-            "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
-            "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "hasStartedLessons" => count($followedLessons->results()) > 0,
-            "usersList" => $usersList,
-            "userMetrics" => $userMetrics,
-            "nextLearningPathLevel" => $nextLearningPathLevel,
-            "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
-            'themeColor' => $themeColor,
-            'currentDate' => $currentDate,
-            'currentEvent' => $currentEvent,
-            'eventCoachProfileUrl' => $eventCoachUrl ?? '',
-            'calendarId' => $currentEventCalendarId ?? null,
-            'coachEvent' => content_to_json([$currentEvent]),
-            'youtubeId' => $youtubeId ?? null,
-            'timeCutoffMinutes' => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
-            'followedLessons' => $followedLessons->toResponseRawJson(),
-            'subscribedCoaches' => $subscribedCoaches,
-            'subscribedCoachesJson' => $subscribedCoaches->toResponseRawJson(),
-            "hasSubscribedCoaches" => count($subscribedCoaches->results()) > 0,
+            "brand" => $brand,
+            "calendarId" => $currentEventCalendarId ?? null,
+            "carousel" => $carousel,
+            "coachEvent" => content_to_json([$currentEvent]),
+            "cohortBanner" => json_encode($cohortBanner),
+            "completedLevelsUrl" => $methodContent['url'] ?? '',
+            "currentDate" => $currentDate,
+            "currentEvent" => $currentEvent,
+            "eventCoachProfileUrl" => $eventCoachUrl ?? '',
+            "existsCohortBanner" => !empty($cohortBanner),
+            "existsTrialSection" => $shouldShowTrialSection,
+            "followedLessons" => $followedLessons->toResponseRawJson(),
+            "hasCompletedMethod" => $hasCompletedMethod,
+            "hasExperience" => $hasExperience,
             "hasfollowedLessons" => count($subscribedCoaches->results()) > 0 && count($followedLessons->results()) > 0,
-            'upcomingEvents' => $upcomingEvents->toResponseRawJson(),
-            'hasUpcomingEvents' => $upcomingEvents->totalResults() > 0,
-            'hasCompletedMethod' => $hasCompletedMethod,
-            'hasStartedMethod' => $hasStartedMethod,
-            'hasGear' => $hasGear,
-            'hasGenres' => $hasGenres,
-            'hasTopics' => $hasTopics,
-            'hasExperience' => $hasExperience,
-            'methodUrl' => ($hasCompletedMethod) ?
+            "hasGear" => $hasGear,
+            "hasGenres" => $hasGenres,
+            "hasGoals" => $hasGoals,
+            "hasRecommendations" => count($recommendedContent->results()) > 0,
+            "hasStartedLessons" => count($followedLessons->results()) > 0,
+            "hasStartedMethod" => $hasStartedMethod,
+            "hasSubscribedCoaches" => count($subscribedCoaches->results()) > 0,
+            "hasTopics" => $hasTopics,
+            "hasUpcomingEvents" => $upcomingEvents->totalResults() > 0,
+            "hotForumTopics" => $hotForumTopics,
+            "methodUrl" => ($hasCompletedMethod) ?
                 url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]) :
                 url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
-            'hasGoals' => $hasGoals,
-            'completedLevelsUrl' => $methodContent['url'] ?? '',
-            'carousel' => $carousel,
-            'cohortBanner' => json_encode($cohortBanner),
-            'existsCohortBanner' => !empty($cohortBanner),
-            'existsTrialSection' => $shouldShowTrialSection,
-            'trialSection' => $trialSection,
+            "newContentJson" => $newContent->toResponseRawJson(),
+            "nextLearningPathLevel" => $nextLearningPathLevel,
+            "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
+            "recommendedContentJson" => $recommendedContent->toResponseRawJson(),
+            "startedContentJson" => $startedLessons->toResponseRawJson(),
+            "subscribedCoaches" => $subscribedCoaches,
+            "subscribedCoachesJson" => $subscribedCoaches->toResponseRawJson(),
+            "themeColor" => $themeColor,
+            "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
+            "trialSection" => $trialSection,
+            "upcomingEvents" => $upcomingEvents->toResponseRawJson(),
+            "userMetrics" => $userMetrics,
+            "usersList" => $usersList,
+            "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
+            "youtubeId" => $youtubeId ?? null,
         ]);
     }
+
 
     public function onboarding(Request $request)
     {
@@ -606,6 +605,19 @@ class HomePageController extends BaseController
                 "label" => "Minutes Practiced",
             ],
         ];
+    }
+
+    /**
+     * @return ContentFilterResultsEntity
+     */
+    private function getSongRecommendations()
+    {
+        return $this->contentService->getRecommendationsByContentType(
+            user()->id,
+            brand(),
+            ContentTypes::newContentTypes(),
+            RecommenderSection::Song,
+            true);
     }
 
     /**
