@@ -73,6 +73,10 @@ export const useCollectionStore = defineStore({
             this.filter.includedFields = [];
         },
 
+        formattedTabs () {
+            return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
+        },
+
         async fetchData () {
             const userStore = useUserStore();
             try {
@@ -89,7 +93,7 @@ export const useCollectionStore = defineStore({
                                 included_fields: this.filter.includedFields,
                                 count_filter_items: true,
                                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
-                                ...(this.filter.activeTab && { tabs: [...this.tabData[this.filter.activeTab].key] }),
+                                ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
                         })
