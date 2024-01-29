@@ -801,8 +801,16 @@ class ContentQueryBuilder extends QueryBuilder
         $table = $groupBy['associated_table']['table'];
         $field = $groupBy['associated_table']['column'];
         $alias = $groupBy['associated_table']['alias'];
+        $joinExists = false;
 
-        $this->addSelect([
+        foreach($this->joins ?? [] as $join)
+        {
+            if($join->table == $table.' as '.$alias)
+            {
+              $joinExists = true;
+            }
+        }
+       $this->addSelect([
                              $this->raw($alias.'.'.$field.' as grouped_by_field'),
                              $this->raw($alias.'.'.$field.' as id'),
                              DB::raw(
@@ -811,14 +819,19 @@ class ContentQueryBuilder extends QueryBuilder
             ".$alias.".content_id      
         ) ) as lessons_grouped_by_field"
                              ),
-                         ])
-            ->join(
+                         ]);
+        
+        if(!$joinExists) {
+            $this->
+            join(
                 $table.' as '.$alias,
                 $alias.'.'.'content_id',
                 '=',
                 ConfigService::$tableContent.'.id'
-            )
-            ->whereNotNull($alias.'.'.$field)
+            );
+        }
+
+        $this->whereNotNull($alias.'.'.$field)
             ->groupBy($alias.'.'.$field);
 
         return $this;
