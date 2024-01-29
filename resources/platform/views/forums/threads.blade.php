@@ -77,7 +77,7 @@
                         [ 'key' => 'all', 'value' => 'All Threads' ],
                         [ 'key' => 'followed,1', 'value' => 'Followed' ]
                     ]) }}"
-                    :endpoint="'{{ url()->route('railforums.thread.index')  }}'"
+                    :endpoint="'{{ url()->route('railforums.thread.index',['category_id' => $discussion['id']])  }}'"
                     :search-endpoint-url="'{{ url()->route('forums.get-search-results-json') }}'"
                 ></collection-wrapper>
             </div>

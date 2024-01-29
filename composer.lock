@@ -10442,12 +10442,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "e0e9167415130cb9c7849b168008af36d19a333e"
+                "reference": "10d13c9b62aff2c7499162e66b22c48ac84a07c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/e0e9167415130cb9c7849b168008af36d19a333e",
-                "reference": "e0e9167415130cb9c7849b168008af36d19a333e",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/10d13c9b62aff2c7499162e66b22c48ac84a07c4",
+                "reference": "10d13c9b62aff2c7499162e66b22c48ac84a07c4",
                 "shasum": ""
             },
             "require": {
@@ -10488,7 +10488,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0-filters-update"
             },
-            "time": "2024-01-29T17:14:25+00:00"
+            "time": "2024-01-29T18:21:57+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -19120,5 +19120,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
