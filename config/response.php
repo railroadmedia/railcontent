@@ -3346,7 +3346,7 @@ return [
                 'difficulty_string',
             ],
             'thumbnail_url',
-
+            'lessons_filter_options',
         ],
 
         'artist' => [
@@ -3378,6 +3378,7 @@ return [
                 'difficulty_string',
             ],
             'thumbnail_url',
+            'lessons_filter_options',
 
         ],
     ],
