@@ -79,6 +79,12 @@
                     ]) }}"
                     :endpoint="'{{ url()->route('railforums.thread.index',['category_id' => $discussion['id']])  }}'"
                     :search-endpoint-url="'{{ url()->route('forums.get-search-results-json') }}'"
+                    :sort-options="{{ json_encode([
+                        [ 'value' => '-last_post_published_on', 'name' => 'Most recent', 'icon' => 'sort-down' ],
+                        [ 'value' => 'last_post_published_on', 'name' => 'Oldest', 'icon' => 'sort-up' ],
+                        [ 'value' => 'mine', 'name' => 'My threads', 'icon' => '' ]
+                    ]) }}"
+                    default-sort="-last_post_published_on"
                 ></collection-wrapper>
             </div>
 
