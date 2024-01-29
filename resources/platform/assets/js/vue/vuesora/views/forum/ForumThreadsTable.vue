@@ -163,6 +163,10 @@ export default {
             type: String,
             default: () => '/threads/latest',
         },
+        searching: {
+            type: Boolean,
+            default: () => false,
+        },
     },
     data() {
         return {
