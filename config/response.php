@@ -3348,6 +3348,38 @@ return [
             'thumbnail_url',
 
         ],
+
+        'artist' => [
+            'id',
+            'type',
+            'name',
+            'plays',
+            'lesson_count',
+            'lessons' => [
+                'id',
+                'type',
+                'fields.title',
+                'fields.artist',
+                'fields.style',
+                'data.thumbnail_url',
+                'data.original_thumbnail_url',
+                'status',
+                'published_on',
+                'completed',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'mobile_app_url',
+                'musora_api_mobile_app_url',
+                'fields.video.fields.length_in_seconds',
+                'is_liked_by_current_user',
+                'parent_id',
+                'published_on_in_timezone',
+                'bundle_count',
+                'difficulty_string',
+            ],
+            'thumbnail_url',
+
+        ],
     ],
     'v2' => [
         'catalogues' => [
