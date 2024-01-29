@@ -76,7 +76,6 @@ export const useCollectionStore = defineStore({
         async fetchData () {
             const userStore = useUserStore();
             try {
-                console.log('working')
                 const response = await axios
                     .get(
                         this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
@@ -90,7 +89,7 @@ export const useCollectionStore = defineStore({
                                 included_fields: this.filter.includedFields,
                                 count_filter_items: true,
                                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
-                                ...(this.filter.activeTab && { tab: this.tabData[this.filter.activeTab].key }),
+                                ...(this.filter.activeTab && { tabs: [...this.tabData[this.filter.activeTab].key] }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
                         })
