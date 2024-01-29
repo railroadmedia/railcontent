@@ -3347,6 +3347,7 @@ return [
             ],
             'thumbnail_url',
             'lessons_filter_options',
+            'total_results',
         ],
 
         'artist' => [
@@ -3379,6 +3380,7 @@ return [
             ],
             'thumbnail_url',
             'lessons_filter_options',
+            'total_results',
 
         ],
     ],
