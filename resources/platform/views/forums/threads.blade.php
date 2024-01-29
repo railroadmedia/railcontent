@@ -72,12 +72,12 @@
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px]">
                 <collection-wrapper
                     collection-type="threads"
-                    :pre-loaded-content="{{ json_encode($threads) }}"
+                    :pre-loaded-content="{{ $threads }}"
                     :tab-options="{{ json_encode([
                         [ 'key' => 'all', 'value' => 'All Threads' ],
                         [ 'key' => 'followed,1', 'value' => 'Followed' ]
                     ]) }}"
-                    :endpoint="'/{{ request()->path() }}'"
+                    :endpoint="'{{ url()->route('railforums.thread.index')  }}'"
                     :search-endpoint-url="'{{ url()->route('forums.get-search-results-json') }}'"
                 ></collection-wrapper>
             </div>

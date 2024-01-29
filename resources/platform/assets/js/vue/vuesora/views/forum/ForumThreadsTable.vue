@@ -68,7 +68,7 @@
                 :brand="brand"
             />
             <forum-threads-table-item
-                v-for="thread in threadsArray"
+                v-for="thread in threads"
                 :key="thread.id"
                 :thread="thread"
                 :brand="brand"
