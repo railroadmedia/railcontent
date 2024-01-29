@@ -29,7 +29,7 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
+                    <a role="link" aria-label="Start your membership" class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                     @if(!empty($orderUrl))
                         href="{{ $orderUrl }}"
                     @elseif(!empty($month))

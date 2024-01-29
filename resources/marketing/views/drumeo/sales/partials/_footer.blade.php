@@ -51,26 +51,32 @@
             </div>
             <div class="footer-link-wrap">
                 <h1>Resources</h1>
-                <p><a href="{{ get_legacy_brand_base_url("drumeo") }}/beat/">The Drumeo Beat</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/beat/rudiments/">40 Drum Rudiments</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/100-songs/">100 Free Drum Songs</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/free-playalongs/">9 Free Play-Alongs</a><br>
-                <a href="{{ get_legacy_brand_base_url("drumeo") }}/beat/videos/">Video Drum Lessons</a></p>
+                <p>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/" aria-label="The Drumeo Beat">The Drumeo Beat</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/rudiments/" aria-label="40 Drum Rudiments">40 Drum Rudiments</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/100-songs/" aria-label="100 Free Drum Songs">100 Free Drum Songs</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/free-playalongs/" aria-label="9 Free Play-Alongs">9 Free Play-Alongs</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/beat/videos/" aria-label="Video Drum Lessons">Video Drum Lessons</a>
+                </p>
             </div>
             <div class="footer-link-wrap">
-                <h1><a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/">Drum Shop</a></h1>
-                <p><a href="{{ get_legacy_brand_base_url("drumeo") }}/">Drumeo Membership</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/practice-pad-full/">P4 Practice Pad</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/quietkick/">Drumeo QuietKick</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/beginner-book">Beginner Drum Book</a><br>
-                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/clothing/">Drumeo Merch</a></p>
+                <h1><a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/" aria-label="Drum Shop">Drum Shop</a></h1>
+                <p>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/" aria-label="Drumeo Membership">Drumeo Membership</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/practice-pad-full/" aria-label="P4 Practice Pad">P4 Practice Pad</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/quietkick/" aria-label="Drumeo QuietKick">Drumeo QuietKick</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/beginner-book" aria-label="Beginner Drum Book">Beginner Drum Book</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/clothing/" aria-label="Drumeo Merch">Drumeo Merch</a>
+                </p>
             </div>
             <div class="footer-link-wrap">
                 <h1>Other Sites</h1>
-                <p><a rel="noopener" href="{{ get_musora_brand_base_url() }}">Musora</a><br>
-                    <a rel="noopener" href="{{ get_legacy_brand_base_url("pianote") }}">Pianote</a><br>
-                    <a rel="noopener" href="{{ get_legacy_brand_base_url("guitareo") }}">Guitareo</a><br>
-                <a rel="noopener" href="{{ get_legacy_brand_base_url("singeo") }}">Singeo</a><br>
+                <p>
+                    <a rel="noopener" href="{{ get_musora_brand_base_url() }}" aria-label="Musora">Musora</a><br>
+                    <a rel="noopener" href="{{ get_legacy_brand_base_url('pianote') }}" aria-label="Pianote">Pianote</a><br>
+                    <a rel="noopener" href="{{ get_legacy_brand_base_url('guitareo') }}" aria-label="Guitareo">Guitareo</a><br>
+                    <a rel="noopener" href="{{ get_legacy_brand_base_url('singeo') }}" aria-label="Singeo">Singeo</a><br>
+                </p>
             </div>
         </div>
     @endif
@@ -88,7 +94,7 @@
                 <a rel="noopener" href="https://pod.link/1657251884" target="_blank" class="inline-flex items-center justify-center social-media podcast" aria-label="podcast"><i class="fas fa-podcast"></i></a>
             @endif
 
-            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms/">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy/">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
+            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms/" aria-label="Terms of Service">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy/" aria-label="Privacy Policy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers" aria-label="Careers at Musora">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand" aria-label="Musora Brand Guide">Brand Guide</a></p>
         </div>
     </div>
 </footer>

@@ -17,21 +17,21 @@
 
             <div class="pr-4 lg:pr-7">
                 <h4 class="leading-normal mb-3 lg:mb-7"><strong>Available across web,<br> tablet, & mobile.</strong></h4>
-                <a class="inline-block" href="{!! $appleUrl !!}" target="_blank">
+                <a class="inline-block" href="{!! $appleUrl !!}" target="_blank" aria-label="Download from Apple Store">
                     <img
                         class="h-8 md:h-10 m-1"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/270x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/download-on-app-store-button.webp"
-                        alt="app store icon"
+                        alt="Download from Apple Store"
                     ></a>
-                <a class="inline-block" href="{!! $googleUrl !!}" target="_blank">
+                <a class="inline-block" href="{!! $googleUrl !!}" target="_blank" aria-label="Download from Google Play">
                     <img
                         class="h-8 md:h-10 m-1"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/270x0/filters:quality(95)/marketing/drumeo/membership/homepage/webp-format/google-play-button.webp"
-                        alt="google play icon"
+                        alt="Download from Google Play"
                     >
                 </a>
             </div>
