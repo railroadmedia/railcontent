@@ -6,7 +6,7 @@
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
 
-        <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/guitareo/promos/november/xmas-guitareo-shop-share-image.jpg">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 @endsection
 
