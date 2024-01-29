@@ -321,7 +321,7 @@
                     @if($lessonType === 'student-review' || !empty($isAllContent))
                         :force-wide-thumbs="true"
                     @endif
-                    @if(!empty($isAllContent))
+                    @if(!($hideSearch ?? false) && !empty($isAllContent))
                         :search-bar="true"
                         search-endpoint="/railcontent/search"
                         total-results="{{ $totalResults }}"
