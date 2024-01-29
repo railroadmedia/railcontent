@@ -71,6 +71,7 @@
                 </div>
             </div>
             <div class="tw-hidden lg:tw-flex tw-flex-shrink-0">
+                <!-- Progress Icon -->
                 <button class="tw-mr-6"><i class="fas fa-plus tw-text-[#ccd3d3] dark:tw-text-[#9EC0DC] tw-text-[28px]" aria-hidden="true" @click="addToPlaylist"></i></button>
                 <a v-if="isReleased" :href="pack.next_lesson_url">
                     <i
@@ -78,9 +79,6 @@
                         :class="progressIcon"
                     ></i>
                 </a>
-                <button v-else>
-                    <i class="fas fa-calendar-plus tw-text-[#ccd3d3] dark:tw-text-[#9EC0DC] tw-text-[28px]"></i>
-                </button>
             </div>
         </div>
     </div>
