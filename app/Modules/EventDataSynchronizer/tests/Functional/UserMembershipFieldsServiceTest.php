@@ -2,35 +2,48 @@
 
 namespace App\Modules\EventDataSynchronizer\tests\Functional;
 
+use App\Enums\Interval;
+use App\Modules\Content\database\factories\PermissionFactory;
+use App\Modules\Content\Models\ContentField;
+use App\Modules\Content\Models\Instructor;
+use App\Modules\Ecommerce\database\factories\ProductFactory;
+use App\Modules\Ecommerce\database\factories\UserAccessPermissionsFactory;
+use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 use App\Modules\EventDataSynchronizer\tests\EventDataSynchronizerTestCase;
 use Carbon\Carbon;
-use Railroad\Ecommerce\Entities\Product;
-use Railroad\Ecommerce\Entities\User;
-use Railroad\Ecommerce\Entities\UserProduct;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Modules\UserManagementSystem\Models\User as UsoraUser;
+use Modules\UserManagementSystem\Models\User;
 
 class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 {
-    private EcommerceEntityManager $ecommerceEntityManager;
+    private const BUFFER_DAYS = 7;
     private UserMembershipFieldsService $userMembershipFieldsService;
-    private ContentFactory $contentFactory;
-    private ContentContentFieldFactory $fieldFactory;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->ecommerceEntityManager = $this->app->make(EcommerceEntityManager::class);
+        PermissionFactory::ensureMembershipPermissionsExist();
         $this->userMembershipFieldsService = $this->app->make(UserMembershipFieldsService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 
-    public function test_sync_no_user()
+
+    private function assertAccess(
+        ?Carbon $membershipExpirationDate,
+        ?string $membership_level,
+        bool $isLifetimeMember,
+        ?string $accessLevel,
+        bool $isPackOwner
+    ) {
+        $this->assertDatabaseHas('usora_users', [
+            'membership_expiration_date' => $membershipExpirationDate?->toDateTimeString(),
+            'membership_level' => $membership_level,
+            'is_lifetime_member' => $isLifetimeMember ? 1 : 0,
+            'access_level' => $accessLevel,
+            'is_pack_owner' => $isPackOwner ? 1 : 0,
+        ]);
+    }
+
+    public function test_no_user()
     {
         $this->userMembershipFieldsService->sync(rand());
 
@@ -41,601 +54,308 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
         ]);
     }
 
-    public function test_sync_no_user_products()
+    public function test_no_user_products()
     {
-        $userId = UsoraUser::factory()->create()->id;
+        $userId = User::factory()->create()->id;
 
         $this->userMembershipFieldsService->sync($userId);
 
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => false,
-            'access_level' => '',
-        ]);
+        $this->assertAccess(null, null, false, '', false);
     }
 
-    public function test_sync_basic_recurring_monthly_membership_access()
+    public function test_basic_monthly_membership_access()
     {
-        $userId = UsoraUser::factory()->create()->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_RECURRING);
-        $product->setDigitalAccessTimeIntervalType(Product::DIGITAL_ACCESS_TIME_INTERVAL_TYPE_MONTH);
-        $product->setDigitalAccessTimeIntervalLength(1);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(Carbon::now()->addDay());
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => $userProduct->getExpirationDate(),
-            'is_lifetime_member' => false,
-            'access_level' => 'member',
-        ]);
-    }
-
-    public function test_sync_basic_recurring_annual_membership_access()
-    {
-        $userId = UsoraUser::factory()->create()->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_RECURRING);
-        $product->setDigitalAccessTimeIntervalType(Product::DIGITAL_ACCESS_TIME_INTERVAL_TYPE_YEAR);
-        $product->setDigitalAccessTimeIntervalLength(1);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(Carbon::now()->addYear());
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => $userProduct->getExpirationDate(),
-            'is_lifetime_member' => false,
-            'access_level' => 'member',
-        ]);
-    }
-
-    public function test_sync_expired_recurring_annual_membership_access()
-    {
-        $userId = UsoraUser::factory()->create()->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_RECURRING);
-        $product->setDigitalAccessTimeIntervalType(Product::DIGITAL_ACCESS_TIME_INTERVAL_TYPE_YEAR);
-        $product->setDigitalAccessTimeIntervalLength(1);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(Carbon::now()->subDays(20));
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => $userProduct->getExpirationDate(),
-            'is_lifetime_member' => false,
-            'access_level' => 'expired',
-        ]);
-    }
-
-    public function test_sync_lifetime_annual_membership_access()
-    {
-        $userId = UsoraUser::factory()->create()->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(null);
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => true,
-            'access_level' => 'lifetime',
-        ]);
-    }
-
-    public function test_sync_lifetime_annual_membership_access_that_is_expired()
-    {
-        $userId = UsoraUser::factory()->create()->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(Carbon::now()->subDay());
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => $userProduct->getExpirationDate(),
-            'is_lifetime_member' => false,
-            'access_level' => 'expired',
-        ]);
-    }
-
-    public function test_sync_pack_owner()
-    {
-        $userId = UsoraUser::factory()->create()->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_ONE_TIME);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_ONE_TIME);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(null);
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => false,
-            'access_level' => 'pack',
-        ]);
-    }
-
-    public function test_sync_admin_team()
-    {
-        $userId = UsoraUser::factory()->create(['permission_level' => 'administrator'])->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_ONE_TIME);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(null);
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => 1,
-            'access_level' => 'team',
-        ]);
-    }
-
-    public function test_sync_coach()
-    {
-        $userId = UsoraUser::factory()->create(['permission_level' => 'administrator'])->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $slug = $this->faker->word;
-        $instructor = $this->contentFactory->create($slug, 'instructor', 'published');
-
-        $this->fieldFactory->create(
-            $instructor['id'],
-            'associated_user_id',
-            $userId,
-            1,
-            'integer'
+        $user = User::factory()->create();
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Month,
+            100
         );
+        $startDate = Carbon::now();
+        $expirationDate = $startDate->clone()->addMonth()->addDays(self::BUFFER_DAYS);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_ONE_TIME);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(null);
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => 1,
-            'access_level' => 'coach',
-        ]);
+        $this->assertAccess(
+            $expirationDate,
+            'basic',
+            false,
+            'member',
+            false
+        );
     }
 
-    public function test_sync_house_coach()
+    public function test_plus_monthly_membership_access()
     {
-        $userId = UsoraUser::factory()->create(['permission_level' => 'administrator'])->id;
-
-        $user = new User($userId, $this->faker->email);
-
-        $slug = $this->faker->word;
-        $instructor = $this->contentFactory->create($slug, 'instructor', 'published');
-
-        $this->fieldFactory->create(
-            $instructor['id'],
-            'associated_user_id',
-            $userId,
-            1,
-            'integer'
+        $user = User::factory()->create();
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Plus,
+            Interval::Month,
+            100
         );
+        $startDate = Carbon::now();
+        $expirationDate = $startDate->clone()->addMonth()->addDays(self::BUFFER_DAYS);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $this->fieldFactory->create(
-            $instructor['id'],
-            'is_house_coach',
+        $this->assertAccess(
+            $expirationDate,
+            'plus',
+            false,
+            'member',
+            false
+        );
+    }
+
+    public function test_basic_annual_membership_access()
+    {
+        $user = User::factory()->create();
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Year,
+            100
+        );
+        $startDate = Carbon::now();
+        $expirationDate = $startDate->clone()->addYear()->addDays(self::BUFFER_DAYS);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        $this->userMembershipFieldsService->sync($user->id);
+
+        $this->assertAccess(
+            $expirationDate,
+            'basic',
+            false,
+            'member',
+            false
+        );
+    }
+
+    public function test_lifetime()
+    {
+        $user = User::factory()->create();
+        $product = ProductFactory::createLifetimeProduct();
+        $startDate = Carbon::now();
+        $expirationDate = Carbon::maxValue();
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        $this->userMembershipFieldsService->sync($user->id);
+
+        $this->assertAccess(
+            $expirationDate,
+            'basic',
             true,
-            1,
-            'boolean'
+            'lifetime',
+            false
         );
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_ONE_TIME);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct = new UserProduct();
-
-        $userProduct->setUser($user);
-        $userProduct->setProduct($product);
-        $userProduct->setQuantity(1);
-        $userProduct->setExpirationDate(null);
-        $userProduct->setStartDate(Carbon::now()->subDay());
-        $userProduct->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => 1,
-            'access_level' => 'house-coach',
-        ]);
     }
 
-    public function test_sync_recurring_monthly_membership_access_ignore_old_user_products()
+    public function test_lifetime_upgrade()
     {
-        $userId = UsoraUser::factory()->create()->id;
+        $user = User::factory()->create();
+        $productLifetime = ProductFactory::createLifetimeProduct();
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Songs,
+            Interval::Month,
+            100
+        );
+        $startDate = Carbon::now();
+        $expirationDate = Carbon::maxValue();
+        UserAccessPermissionsFactory::createPermissions($user, $productLifetime, $startDate);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $user = new User($userId, $this->faker->email);
-
-        $product = new Product();
-
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_RECURRING);
-        $product->setDigitalAccessTimeIntervalType(Product::DIGITAL_ACCESS_TIME_INTERVAL_TYPE_MONTH);
-        $product->setDigitalAccessTimeIntervalLength(1);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($product);
-
-        $userProduct1 = new UserProduct();
-
-        $userProduct1->setUser($user);
-        $userProduct1->setProduct($product);
-        $userProduct1->setQuantity(1);
-        $userProduct1->setExpirationDate(Carbon::now()->subDays(25));
-        $userProduct1->setStartDate(Carbon::now()->subDay());
-        $userProduct1->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct1);
-
-        $userProduct2 = new UserProduct();
-
-        $userProduct2->setUser($user);
-        $userProduct2->setProduct($product);
-        $userProduct2->setQuantity(1);
-        $userProduct2->setExpirationDate(Carbon::now()->addDay());
-        $userProduct2->setStartDate(Carbon::now()->subDay());
-        $userProduct2->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct2);
-
-        $userProduct3 = new UserProduct();
-
-        $userProduct3->setUser($user);
-        $userProduct3->setProduct($product);
-        $userProduct3->setQuantity(1);
-        $userProduct3->setExpirationDate(Carbon::now()->addDays(43));
-        $userProduct3->setStartDate(Carbon::now()->subDay());
-        $userProduct3->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct3);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => $userProduct3->getExpirationDate(),
-            'is_lifetime_member' => false,
-            'access_level' => 'member',
-        ]);
+        $this->assertAccess(
+            $expirationDate,
+            'plus',
+            true,
+            'lifetime',
+            false
+        );
     }
 
-    public function test_sync_lifetime_membership_access_ignore_old_user_products()
+    public function test_lifetime_revoked()
     {
-        $userId = UsoraUser::factory()->create()->id;
+        $user = User::factory()->create();
+        $product = ProductFactory::createLifetimeProduct();
+        $startDate = Carbon::now()->subDays(30);
+        $revokedAt = $startDate->clone()->addDays(20);
+        UserAccessPermissionsFactory::createPermissions(
+            $user,
+            $product,
+            $startDate,
+            [
+                'status' => 'revoked',
+                'revoked_at' => $revokedAt
+            ]
+        );
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $user = new User($userId, $this->faker->email);
+        $this->assertAccess(
+            $revokedAt,
+            null,
+            false,
+            'expired',
+            false
+        );
+    }
 
-        $product = new Product();
+    public function test_aggregate_membership_access()
+    {
+        $user = User::factory()->create();
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Month,
+            100
+        );
+        $startDate = Carbon::now();
+        $startDate2 = Carbon::now()->addDays(10);
+        $expirationDate = $startDate->clone()->addMonths(2)->addDays(self::BUFFER_DAYS);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate2);
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $product->setBrand($this->faker->word);
-        $product->setName($this->faker->word);
-        $product->setSku($this->faker->word);
-        $product->setPrice($this->faker->randomNumber(4));
-        $product->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $product->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $product->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_RECURRING);
-        $product->setDigitalAccessTimeIntervalType(Product::DIGITAL_ACCESS_TIME_INTERVAL_TYPE_MONTH);
-        $product->setDigitalAccessTimeIntervalLength(1);
-        $product->setActive(true);
-        $product->setIsPhysical(false);
-        $product->setAutoDecrementStock(false);
-        $product->setCreatedAt(Carbon::now());
+        $this->assertAccess(
+            $expirationDate,
+            'basic',
+            false,
+            'member',
+            false
+        );
+    }
 
-        $this->ecommerceEntityManager->persist($product);
+    public function test_expired()
+    {
+        $user = User::factory()->create();
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Month,
+            100
+        );
+        $startDate = Carbon::now()->addDays(-40);
+        $expirationDate = $startDate->clone()->addMonth(1)->addDays(self::BUFFER_DAYS);
+        UserAccessPermissionsFactory::createPermissions($user, $product, $startDate);
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $lifetimeProduct = new Product();
+        $this->assertAccess(
+            $expirationDate,
+            null,
+            false,
+            'expired',
+            false
+        );
+    }
 
-        $lifetimeProduct->setBrand($this->faker->word);
-        $lifetimeProduct->setName($this->faker->word);
-        $lifetimeProduct->setSku($this->faker->word);
-        $lifetimeProduct->setPrice($this->faker->randomNumber(4));
-        $lifetimeProduct->setType(Product::TYPE_DIGITAL_SUBSCRIPTION);
-        $lifetimeProduct->setDigitalAccessType(Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS);
-        $lifetimeProduct->setDigitalAccessTimeType(Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME);
-        $lifetimeProduct->setActive(true);
-        $lifetimeProduct->setIsPhysical(false);
-        $lifetimeProduct->setAutoDecrementStock(false);
-        $lifetimeProduct->setCreatedAt(Carbon::now());
+    public function test_pack_owner()
+    {
+        $user = User::factory()->create();
+        $product = ProductFactory::createPackProduct();
+        $startDate = Carbon::now()->subDays(30);
+        UserAccessPermissionsFactory::createPermissions(
+            $user,
+            $product,
+            $startDate
+        );
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $this->ecommerceEntityManager->persist($lifetimeProduct);
+        $this->assertAccess(
+            null,
+            null,
+            false,
+            'pack',
+            true
+        );
+    }
 
-        $userProduct1 = new UserProduct();
+    public function test_admin_team()
+    {
+        $user = User::factory()->create(['permission_level' => 'administrator']);
+        $product = ProductFactory::createLifetimeProduct();
+        $startDate = Carbon::now()->subDays(30);
+        UserAccessPermissionsFactory::createPermissions(
+            $user,
+            $product,
+            $startDate
+        );
+        $this->userMembershipFieldsService->sync($user->id);
 
-        $userProduct1->setUser($user);
-        $userProduct1->setProduct($product);
-        $userProduct1->setQuantity(1);
-        $userProduct1->setExpirationDate(Carbon::now()->subDays(25));
-        $userProduct1->setStartDate(Carbon::now()->subDay());
-        $userProduct1->setCreatedAt(Carbon::now());
+        $this->assertAccess(
+            Carbon::maxValue(),
+            'basic',
+            true,
+            'team',
+            false
+        );
+    }
 
-        $this->ecommerceEntityManager->persist($userProduct1);
-
-        $userProduct2 = new UserProduct();
-
-        $userProduct2->setUser($user);
-        $userProduct2->setProduct($product);
-        $userProduct2->setQuantity(1);
-        $userProduct2->setExpirationDate(Carbon::now()->addDay());
-        $userProduct2->setStartDate(Carbon::now()->subDay());
-        $userProduct2->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct2);
-
-        $userProduct3 = new UserProduct();
-
-        $userProduct3->setUser($user);
-        $userProduct3->setProduct($product);
-        $userProduct3->setQuantity(1);
-        $userProduct3->setExpirationDate(Carbon::now()->addDays(43));
-        $userProduct3->setStartDate(Carbon::now()->subDay());
-        $userProduct3->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct3);
-
-        $userProduct4 = new UserProduct();
-
-        $userProduct4->setUser($user);
-        $userProduct4->setProduct($lifetimeProduct);
-        $userProduct4->setQuantity(1);
-        $userProduct4->setExpirationDate(null);
-        $userProduct4->setStartDate(Carbon::now()->subDay());
-        $userProduct4->setCreatedAt(Carbon::now());
-
-        $this->ecommerceEntityManager->persist($userProduct4);
-        $this->ecommerceEntityManager->flush();
-
-        $this->userMembershipFieldsService->sync($userId);
-
-        $this->assertDatabaseHas('usora_users', [
-            'membership_expiration_date' => null,
-            'is_lifetime_member' => true,
-            'access_level' => 'lifetime',
+    public function test_coach()
+    {
+        $user = User::factory()->create(['permission_level' => 'administrator']);
+        $instructor = Instructor::factory()->create();
+        ContentField::factory()->create([
+            'content_id' => $instructor->id,
+            'key' => 'associated_user_id',
+            'value' => $user->id,
+            'type' => 'string',
+            'position' => 1
         ]);
+
+        $product = ProductFactory::createLifetimeProduct();
+        $startDate = Carbon::now()->subDays(30);
+        UserAccessPermissionsFactory::createPermissions(
+            $user,
+            $product,
+            $startDate
+        );
+        $this->userMembershipFieldsService->sync($user->id);
+
+        $this->assertAccess(
+            Carbon::maxValue(),
+            'basic',
+            true,
+            'coach',
+            false
+        );
+    }
+
+    public function test_house_coach()
+    {
+        $user = User::factory()->create(['permission_level' => 'administrator']);
+        $instructor = Instructor::factory()->create();
+        ContentField::factory()->create([
+            'content_id' => $instructor->id,
+            'key' => 'associated_user_id',
+            'value' => $user->id,
+            'type' => 'string',
+            'position' => 1
+        ]);
+        ContentField::factory()->create([
+            'content_id' => $instructor->id,
+            'key' => 'is_house_coach',
+            'value' => true,
+            'type' => 'boolean',
+            'position' => 1
+        ]);
+
+        $product = ProductFactory::createLifetimeProduct();
+        $startDate = Carbon::now()->subDays(30);
+        UserAccessPermissionsFactory::createPermissions(
+            $user,
+            $product,
+            $startDate
+        );
+        $this->userMembershipFieldsService->sync($user->id);
+
+        $this->assertAccess(
+            Carbon::maxValue(),
+            'basic',
+            true,
+            'coach',
+            false
+        );
     }
 
 }
