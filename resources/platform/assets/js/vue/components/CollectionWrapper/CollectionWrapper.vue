@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :sort-options="sortOptions" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -133,6 +133,16 @@ const props = defineProps({
     infiniteScroll: {
         type: Boolean,
         default: () => true,
+    },
+    sortOptions: {
+        type: Array,
+        default: () => [
+            { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
+            { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+            { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+            { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+            { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+        ],
     },
 });
 
