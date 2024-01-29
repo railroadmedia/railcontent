@@ -134,6 +134,10 @@ export default {
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement>
+        <OptionElement v-if="false" :href="`/${ brand }/lessons/recommended`">
+          <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
+          Recommended For You
+        </OptionElement>
         <OptionElement :href="`/${ brand }/lesson-history/in-progress`">
           <musora-icon icon-name="bookmark" class="tw-w-[20px] tw-mr-2"/>
           Lesson History

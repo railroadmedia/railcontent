@@ -9,19 +9,22 @@ return new class extends Migration {
 
     public function up()
     {
-        DB::statement(
-            "ALTER TABLE user_access_permissions
+        // SQLite doesn't allow us to modify the enum options, so these have already been applied in 2023_09_19_161817_ecommerce_user_permissions.php
+        if (Schema::getConnection()->getDriverName() !== "sqlite") {
+            DB::statement(
+                "ALTER TABLE user_access_permissions
                     MODIFY COLUMN source ENUM('manual', 'shopify', 'web', 'access-code', 'challenges', 'apple', 'google', 'migration')
                     DEFAULT 'manual'"
-        );
+            );
 
-        UserAccessPermission::where('source', 'shopify')->update(['source' => 'web']);
+            UserAccessPermission::where('source', 'shopify')->update(['source' => 'web']);
 
-        DB::statement(
-            "ALTER TABLE user_access_permissions
+            DB::statement(
+                "ALTER TABLE user_access_permissions
                     MODIFY COLUMN source ENUM('manual', 'web', 'access-code', 'challenges', 'apple', 'google', 'migration')
                     DEFAULT 'manual'"
-        );
+            );
+        }
     }
 
 

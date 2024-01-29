@@ -6,10 +6,10 @@
 {{--    }--}}
 {{--@endphp--}}
 
-<div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 mt-2 mb-4 lg:mb-0">
+<div class="lg:px-4 lg:w-1/3 px-3 md:px-4 mb-4 lg:mb-0">
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
-    <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
+    <div id="sticky-slide" class="overflow-hidden rounded border border-solid border-gray-300">
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))
                 <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>

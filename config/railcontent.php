@@ -1066,6 +1066,15 @@ return [
                     ],
                 ],
             ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
+            ],
             'pack' => [
                 'allowableFilters' => ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
                 'allowableFiltersMobile' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
@@ -1272,6 +1281,15 @@ return [
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -1416,6 +1434,15 @@ return [
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -1538,6 +1565,15 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+            ],
+            'recommended' => [
+                'name' => 'Recommended For You',
+                'shortname' => 'Recommenations',
+                'icon' => 'fas fa-star',
+                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => '-published_on',
             ],
         ],
     ],
@@ -2253,7 +2289,8 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial', 'challenge'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => true,
+    'search_in_playlist_items_name' => false,
 
-    'cohort_permisssion_ids' => [81, 65, 96, 97, 98, 100, 101],
+    'cohort_permisssion_ids' => [81, 65,96,97,98,100,101],
+    'enable_recsys' => false,
 ];

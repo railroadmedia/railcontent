@@ -22,17 +22,20 @@ use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Services\MethodService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -49,6 +52,7 @@ class ContentPagesController extends BaseController
     private ContentFollowsService $contentFollowsService;
     private ResourceDecorator $resourceDecorator;
     private MethodService $methodService;
+    private UserContentProgressService $userContentProgressService;
 
     /**
      * @param ContentService $contentService
@@ -69,7 +73,8 @@ class ContentPagesController extends BaseController
         CalendarService $calendarService,
         ContentFollowsService $contentFollowsService,
         ResourceDecorator $resourceDecorator,
-        MethodService $methodService
+        MethodService $methodService,
+        UserContentProgressService $userContentProgressService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -80,6 +85,7 @@ class ContentPagesController extends BaseController
         $this->contentFollowsService = $contentFollowsService;
         $this->resourceDecorator = $resourceDecorator;
         $this->methodService = $methodService;
+        $this->userContentProgressService = $userContentProgressService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -1508,19 +1514,7 @@ class ContentPagesController extends BaseController
         ContentRepository::$pullFutureContent = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
-        $listLessons = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 20),
-            '-published_on',
-            $filteredType ?? $lessonType,
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
-        );
-
+        $listLessons = $this->getListLessionsFromRequest($request);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
         $adminMessage = null;
         return view('content.catalogue', [
@@ -1532,6 +1526,65 @@ class ContentPagesController extends BaseController
             "catalogueMeta" => $catalogueMeta,
             "adminMessage" => $adminMessage,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Mixed
+     */
+    public function recommendedLessons(Request $request)
+    {
+        if(!config('railcontent.enable_recsys', false)) {
+            return redirect()->route('platform.new-lessons');
+        }
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
+
+        ContentRepository::$pullFutureContent = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        $listLessons = $this->contentService->getRecommendationsByContentType(
+            user()->id,
+            brand(),
+            ContentTypes::newContentTypes(),
+            RecommenderSection::Song,
+            false,
+            limit:100);
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
+        $adminMessage = null;
+        return view('content.catalogue', [
+            "adminMessage" => $adminMessage,
+            "catalogueMeta" => $catalogueMeta,
+            "hasStartedLessons" => false,
+            "hideSearch" => true,
+            "isAllContent" => true,
+            "lessonType" => implode(',', $listLessons['filter_options']['type']),
+            "listLessons" => $listLessons->toResponseRawJson(),
+            "totalResults" => $listLessons['total_results'],
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed|Collection|null
+     */
+    private function getListLessionsFromRequest(Request $request)
+    {
+        $lessonType = ContentTypes::newContentTypes();
+        $filteredType = $request->get('included_types');
+        return $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 20),
+            '-published_on',
+            $filteredType ?? $lessonType,
+            $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
+            $request->get('required_fields', []),
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', [])
+        );
     }
 
     /**
@@ -1731,12 +1784,18 @@ class ContentPagesController extends BaseController
         }
 
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
-        $contentSubtitle = $initialContent->totalResults().' SONGS';
+        $pluralContentType = Str::plural('song');
+
 
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
+        $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
+            ['song'],
+            $artist
+        );
 
+        $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType. '    '.$totalPlays.' plays';
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => 'song',
@@ -1747,6 +1806,8 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
             'filterableValues' => $allowableFilters,
+            'thumbnail_url' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
+            'pluralContentType' => $pluralContentType,
         ]);
     }
 
@@ -1773,7 +1834,8 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
-        $contentTitle = ucwords($genre . ' ' . $contentTypeName);
+        $contentTitle = ucwords($genre . ' - ' . $contentTypeName);
+        $contentSubtitle = $initialContent->totalResults().' '.$contentTypeName;
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'style');
@@ -1784,10 +1846,12 @@ class ContentPagesController extends BaseController
             'collectionName' => $genre,
             'contentName' => $lessonType,
             'contentTitle' => $contentTitle,
-            'contentSubtitle' => '',
+            'contentSubtitle' => $contentSubtitle,
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
             'requiredFields' => ['style,'.$genre],
             'filterableValues' => $filterableValues,
+            'thumbnail_url' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
+            'pluralContentType' => Str::plural($lessonType, $initialContent->totalResults()),
         ]);
     }
 }

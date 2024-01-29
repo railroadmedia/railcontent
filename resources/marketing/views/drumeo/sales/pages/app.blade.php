@@ -22,6 +22,13 @@
 
 @stop
 
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    lazyLoad: false,
+    }'
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "subscriptionVersion" => true
@@ -34,7 +41,7 @@
             <div class="ipad-phone">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/app/app-header-spread.png">
                 <img class="preview" src="https://dpwjbsxqtam5n.cloudfront.net/app/preview-the-app.svg">
-                <i class="fas fa-play autoplay-video" data-open="trailer"></i>
+                <i class="fas fa-play autoplay-video" x-on:click="trailer = true;"></i>
             </div>
         </div>
     </section>
@@ -104,21 +111,14 @@
         </div>
     </section>
 
-    <div class="reveal large" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/338735900?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-        </div>
-    </div>
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '338735900',
+        'vimeo' => true,
+    ])
 
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop
