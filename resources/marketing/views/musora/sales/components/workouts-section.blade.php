@@ -1,8 +1,3 @@
-@php
-    require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
-    $workoutImages = $musora['workoutImages'];
-@endphp
-
 @if(!empty($vid))
     <div class="h-96 sm:h-[720px] cursor-pointer autoplay-video w-full relative z-20 bg-black" x-on:click="trailer = true;">
         <div class="absolute top-0 left-0 right-0 text-white z-20 text-center px-4 pt-7 sm:pt-10">
@@ -20,8 +15,13 @@
         </video>
     </div>
 @else
-    <section class="text-center pt-7 sm:pt-9 relative">
-        <div id="sticky-slider" class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 bg-white rounded-xl z-10 sticky top-[40vh]">
+    <section class="text-center pt-7 sm:pt-9 relative"
+        x-data="{ stick: false }"
+        x-init="window.addEventListener('scroll', () => {
+        stick = window.scrollY + window.innerHeight > $refs.stickySection.offsetTop + $refs.stickySection.offsetHeight;
+    })">
+        <div class="w-auto inline-block py-3 sm:py-4 px-4 sm:px-6 bg-white rounded-xl z-10 sticky top-[40vh]"
+            :class="{ 'bottom-auto': stick }" x-ref="stickySection">
             <h1 class="font-lexend  text-3xl sm:text-5xl lg:text-6xl leading-none uppercase mb-1 sm:mb-3"><strong>PLAY TO LEARN</strong></h1>
             <h4 class="leading-tight">Improve your skills in just<br class="sm:hidden">  10 minutes a day.</h4>
         </div>

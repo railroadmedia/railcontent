@@ -15,7 +15,7 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.webp">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
@@ -398,6 +398,10 @@
         'split' => true
     ])
 
+    @php
+        $workoutImages = $musora['workoutImages'];
+    @endphp
+
     @include('musora.sales.components.workouts-section', [
         'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card.webp',
     ])
@@ -472,20 +476,7 @@
         'vimeo' => true,
     ])
 
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
-    <script>
-        const stickyElement = document.getElementById("sticky-slider");
-        const parentElement = stickyElement.parentElement;
-        const unstickPosition = parentElement.offsetTop + parentElement.offsetHeight;
-
-        function handleScroll() {
-            const scrollPosition = window.scrollY + window.innerHeight;
-            stickyElement.classList.toggle("bottom-auto", scrollPosition > unstickPosition);
-        }
-
-        window.addEventListener("scroll", handleScroll);
-    </script>
 @stop

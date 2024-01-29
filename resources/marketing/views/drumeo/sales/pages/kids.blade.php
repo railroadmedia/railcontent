@@ -15,12 +15,19 @@
     @include('_partials.layout.favicons.drumeo-favicons')
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-app.css') }}" rel="stylesheet">
 
 @stop
+
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    trailer2 : false,
+    lazyLoad: false,
+    }'
+@endsection
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
@@ -33,7 +40,7 @@
             <div class="ipad-phone">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/tablet-phone.png" alt="tablet img">
                 <img class="preview" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/preview.png" alt="preview text">
-                <i class="fas fa-play autoplay-video" data-open="trailer"></i>
+                <i class="fas fa-play autoplay-video" x-on:click="trailer = true;"></i>
             </div>
         </div>
         <img class="anchored-image left-image hidden sm:inline" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/rock-spaceship.png" alt="spaceship img">
@@ -102,14 +109,9 @@
                 <h1>Take Drumming<br class="inline sm:hidden"> Everywhere You Go</h1>
                 <h2>Stream or download every episode <br class="inline sm:hidden">
                     from the “Drumeo Kids” app.</h2>
-                <img class="autoplay-video" data-open="trailer2" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/on-the-go-image.jpg" alt="on the go image">
+                <img class="autoplay-video" x-on:click="trailer2 = true;" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/on-the-go-image.jpg" alt="on the go image">
                 <p>Inside the Drumeo Kids app, every episode<br class="inline sm:hidden"> can be streamed or downloaded — perfect for <br>
                     morning shows, road trip entertainment, or<br class="inline sm:hidden"> wherever your kids have time to clap and dance!</p>
-                <div class="reveal large" id="trailer2" data-reveal data-reset-on-close="false">
-                    <div class="aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full" src="" data-lazy-load-url="https://www.youtube.com/embed/TQ11sNPtEc0?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="on the go video"></iframe>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -123,22 +125,24 @@
         </div>
     </section>
 
-    <div class="reveal large" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/364175064?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-        </div>
-    </div>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '364175064',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'styles' => 'aspect-16:9',
+        'name' => 'trailer2',
+        'video' => 'https://www.youtube.com/embed/TQ11sNPtEc0?autoplay=1',
+    ])
 
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             var $slide = $('.topic-wrap'),
                 $slideToggle = $('.toggle-button');
 
@@ -175,5 +179,4 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

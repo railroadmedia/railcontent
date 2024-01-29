@@ -24,12 +24,17 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
+    <title>The perfect gift for ANY musician! | Musora</title>
+    <meta property="og:title" content="The perfect gift for ANY musician! | Musora">
 
-    @include('_partials.layout._tailwindcdn')
+    <meta name="description" content="The Musora gift card is a physical access pass that you can use for yourself, or to send as a gift to another musician.">
+    <meta property="og:description" content="The Musora gift card is a physical access pass that you can use for yourself, or to send as a gift to another musician.">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
+
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
-    <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-product.css') }}" rel="stylesheet">
     @yield('head')
     <style>
         * {
@@ -56,8 +61,13 @@
                     <div class="slider-container overflow-hidden w-full mb-5 md:mb-7" style="font-size: 0;">
                         <div class="slider-for overflow-hidden rounded">
                             <div class="overflow-hidden relative w-full" style="padding-bottom: 56.25%;">
-                                <iframe class="absolute w-full h-full inset-0" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen id="videoPlayer"></iframe>
-                                <div class="hidden" id="videoSrc">//player.vimeo.com/video/113327941</div>
+
+                                <picture>
+                                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg">
+                                    <img class="absolute w-full h-full inset-0 object-cover"
+                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg"
+                                        alt="card image" fetchpriority="high">
+                                </picture>
                             </div>
                         </div>
                     </div>
@@ -105,8 +115,8 @@
         <div class="product-wrap lg:w-2/3 px-3 md:px-4">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                 <p>
-                    The Musora gift card is a physical access pass that you can use for yourself, or to send as a gift to another musician. Simply choose a membership card with 1, 6, or 12 months of access. We'll ship it to your doorstep and it can be redeemed any time. <br><br>
-                    Although the physical card has the Drumeo logo, this Musora gift card is an all-access pass to learn drums, piano, vocals, and guitar. You'll have full access to all four of our brands. Musora offers so many ways to build your musical ability: <br><br>
+                    The Musora gift card is a physical access pass that you can use for yourself, or to send as a gift to another musician. Simply choose a membership card with 1, 6, or 12 months of access. We'll ship it to your doorstep and it can be <a class="text-blue-500" href="/redeem">redeemed any time</a>. <br><br>
+                    This gift card is an all-access pass to learn drums, piano, vocals, and guitar. You'll have full access to all four of our brands. Musora offers so many ways to build your musical ability: <br><br>
                 </p>
                 <ul class="pl-8" style="list-style: disc;">
                     <li>Method: A 10-level step-by-step curriculum that shows you exactly what to practice next.</li>
@@ -120,10 +130,7 @@
 
 @section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/shop-product.js') }}"></script>
     <script>
         $(document).ready(function () {
             //customize section pack picker
@@ -155,12 +162,5 @@
             });
 
         });
-
     </script>
-
-
-    {{-- Platform --}}
-    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @endsection
