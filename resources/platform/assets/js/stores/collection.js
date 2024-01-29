@@ -187,7 +187,11 @@ export const useCollectionStore = defineStore({
                 this.getFilterColumns();
             }
 
-            if (this.filter.searchTerm) this.searching = true;
+            if (this.filter.searchTerm){
+                this.searching = true;
+            } else {
+                this.searching = false;
+            }
             this.loading = false;
         },
 
