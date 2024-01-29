@@ -1536,6 +1536,7 @@ class CustomerIoSyncEventListener
                 Carbon::parse($user->created_at)->timestamp;
             $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest->updatedAt?->timestamp;
             $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($latest);
+            $attributes[$brand . '_membership_latest-access-product-id'] = $latest->product->id;
         }
         return $attributes;
     }
