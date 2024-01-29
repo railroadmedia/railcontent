@@ -97,10 +97,7 @@ class ContentJsonController extends Controller
             }
         }
 
-        if ($request->has('title')) {
-            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
-        }
-
+        $group_by = false;
         $contentTypes = $request->get('included_types', []);
         if($request->get('tab', false)){
             $tabs = $request->get('tab');
@@ -122,6 +119,14 @@ class ContentJsonController extends Controller
                     $required_fields[] = $tab;
                 }
             }
+        }
+
+        if ($request->has('title') && $group_by == 'artist') {
+            $required_fields[] = 'artist,%'.$request->get('title').'%,string,like';
+        }elseif ($request->has('title') && $group_by == 'style') {
+            $required_fields[] = 'style,%'.$request->get('title').'%,string,like';
+        }else{
+            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
         }
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
