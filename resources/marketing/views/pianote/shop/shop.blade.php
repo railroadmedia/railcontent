@@ -117,7 +117,7 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
                       "fullPrice" => 240,
-                      "packAuthor" => "Lisa Witt",
+                      "packAuthor" => "Limited Time Offer",
                       "price" => 180,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",
