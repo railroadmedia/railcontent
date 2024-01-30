@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\EventDataSynchronizer\tests\Functional;
+namespace App\Modules\EventDataSynchronizer\tests\Feature;
 
 use App\Enums\Interval;
 use App\Modules\Content\database\factories\PermissionFactory;
@@ -10,11 +10,11 @@ use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\database\factories\UserAccessPermissionsFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
-use App\Modules\EventDataSynchronizer\tests\EventDataSynchronizerTestCase;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
+use Tests\TestCase;
 
-class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
+class UserMembershipFieldsServiceTest extends TestCase
 {
     private const BUFFER_DAYS = 7;
     private UserMembershipFieldsService $userMembershipFieldsService;
@@ -45,7 +45,7 @@ class UserMembershipFieldsServiceTest extends EventDataSynchronizerTestCase
 
     public function test_no_user()
     {
-        $this->userMembershipFieldsService->sync(rand());
+        $this->userMembershipFieldsService->sync(0);
 
         $this->assertDatabaseMissing('usora_users', [
             'membership_expiration_date' => null,

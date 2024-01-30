@@ -3,17 +3,12 @@
 namespace App\Modules\EventDataSynchronizer\tests;
 
 use App\Modules\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider;
-use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
-use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingRailforumsUserProvider;
-use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingUserProvider;
 use Carbon\Carbon;
 use Doctrine\Inflector\InflectorFactory;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Routing\Router;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
-use Railroad\Railcontent\Repositories\RepositoryBase;
-use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
 use Railroad\Usora\Managers\UsoraEntityManager;
 use Railroad\Usora\Providers\UsoraServiceProvider;
 use Tests\TestCase;
@@ -35,26 +30,14 @@ class EventDataSynchronizerTestCase extends TestCase
      */
     protected $router;
 
-    protected UserProviderInterface $userProvider;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->userProvider = app(TestingUserProvider::class);
-
-        $this->app->instance(UserProviderInterface::class, $this->userProvider);
-        $this->app->instance(RailforumsUserProviderInterface::class, app(TestingRailforumsUserProvider::class));
-
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
-
-
         Carbon::setTestNow(Carbon::now());
-
-
-
     }
 
 
@@ -181,7 +164,5 @@ class EventDataSynchronizerTestCase extends TestCase
 
         app()->instance('DoctrineInflector', $inflector);
 
-        // this is required for railcontent connection masking to work properly from test to test
-        RepositoryBase::$connectionMask = null;
     }
 }

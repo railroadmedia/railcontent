@@ -135,7 +135,7 @@ class RevenueCatService
             $aliases = [$appUserId];
         }
         $user =
-            User::on('musora_laravel_mysql::write')
+            User::onWriteConnection()
                 ->where('email', $value)
                 ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();

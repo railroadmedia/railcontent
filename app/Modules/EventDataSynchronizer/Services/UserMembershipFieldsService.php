@@ -4,23 +4,14 @@ namespace App\Modules\EventDataSynchronizer\Services;
 
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
+use App\Modules\EventDataSynchronizer\Events\UserMembershipDateUpdated;
 use Carbon\Carbon;
-use Log;
-use Railroad\Ecommerce\Entities\Product;
-use Railroad\Ecommerce\Entities\UserProduct;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Ecommerce\Repositories\UserProductRepository;
+use Modules\UserManagementSystem\Models\User;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use Railroad\Railcontent\Services\ContentService;
 
 class UserMembershipFieldsService
 {
-
-
-    protected SubscriptionRepository $subscriptionRepository;
-    protected UserProductRepository $userProductRepository;
-    protected ProductRepository $productRepository;
     private ContentService $contentService;
     private UserProviderInterface $userProvider;
 
@@ -28,16 +19,10 @@ class UserMembershipFieldsService
     private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(
-        SubscriptionRepository $subscriptionRepository,
-        UserProductRepository $userProductRepository,
-        ProductRepository $productRepository,
         ContentService $contentService,
         UserProviderInterface $userProvider,
         UserAccessPermissionsService $userAccessPermissionsService
     ) {
-        $this->subscriptionRepository = $subscriptionRepository;
-        $this->userProductRepository = $userProductRepository;
-        $this->productRepository = $productRepository;
         $this->contentService = $contentService;
         $this->userProvider = $userProvider;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
@@ -79,7 +64,7 @@ class UserMembershipFieldsService
             $ownsPacks
         );
 
-        return $this->userProvider->saveMembershipData(
+        return $this->saveMembershipData(
             $userId,
             $membershipExpirationDate,
             null,
@@ -91,73 +76,53 @@ class UserMembershipFieldsService
         );
     }
 
-    public function sync($userId, array $userProducts = null, array $associatedCoaches = null): bool
-    {
-        $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissions($userId);
-        return $this->syncUserAccess($userAccessPermissions);
+    public function saveMembershipData(
+        int $userId,
+        ?Carbon $membershipExpirationDate,
+        bool $isLifetimeMember,
+        string $accessLevel,
+        bool $isPackOwner,
+        ?string $membershipLevel,
+        bool $isDrumeoLifetimeMember
+    ): bool {
+        $user =
+            User::query()
+                ->find($userId);
+
+        if (!empty($user)) {
+            if ($isLifetimeMember) {
+                $membershipExpirationDate = Carbon::maxValue();
+            }
+            $isUpdatingMembershipDate = $user->membership_expiration_date != $membershipExpirationDate;
+
+            $user->membership_expiration_date =
+                !empty($membershipExpirationDate) ? $membershipExpirationDate->toDateTimeString() : null;
+            $user->is_lifetime_member = $isLifetimeMember;
+            $user->is_drumeo_lifetime_member = $isDrumeoLifetimeMember;
+            $user->access_level = $accessLevel;
+            $user->is_pack_owner = $isPackOwner;
+            $user->membership_level = $membershipLevel;
+
+            $user->save();
+
+            if ($isUpdatingMembershipDate) {
+                event(new UserMembershipDateUpdated($user));
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
-    /**
-     * @param $userId
-     * @param UserProduct[] $usersProducts
-     * @return UserProduct|null
-     */
-    public function getUserProductThatRepresentsUsersMembership($userId, array $usersProducts): ?UserProduct
+    public function sync($userId): bool
     {
-        $eligibleUserProducts = [];
-
-        foreach ($usersProducts as $userProductIndex => $userProduct) {
-            // make sure the product is a membership product
-            if (($userProduct->getProduct()->getDigitalAccessType() !==
-                    Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS &&
-                    $userProduct->getProduct()->getDigitalAccessType() !==
-                    'basic content access') ||
-                $userProduct->getUser()->getId() !== $userId) {
-                continue;
-            }
-
-            $eligibleUserProducts[] = $userProduct;
+        $user = User::find($userId);
+        if ($user == null) {
+            return false;
         }
-
-        // get attributes related to the latest user membership product
-        $latestMembershipUserProductToSync = null;
-
-        foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-            // if its lifetime, use it
-            if (empty($eligibleUserProduct->getExpirationDate()) &&
-                $eligibleUserProduct->getProduct()->getDigitalAccessTimeType() ==
-                Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME &&
-                (empty($latestMembershipUserProductToSync) || $latestMembershipUserProductToSync->getProduct(
-                    )->getBrand() != "drumeo")
-            ) {
-                //prioritize drumeo over other lifetimes because they get some songs access
-                $latestMembershipUserProductToSync = $eligibleUserProduct;
-            }
-        }
-
-        if (!empty($latestMembershipUserProductToSync)) {
-            return $latestMembershipUserProductToSync;
-        }
-
-        foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-            if (empty($latestMembershipUserProductToSync)) {
-                $latestMembershipUserProductToSync = $eligibleUserProduct;
-                continue;
-            }
-
-            // if this product expiration date is further in the past than whatever is currently set, skip it
-            if (!empty($latestMembershipUserProductToSync) &&
-                ($latestMembershipUserProductToSync->getExpirationDate() <
-                    $eligibleUserProduct->getExpirationDate())) {
-                $latestMembershipUserProductToSync = $eligibleUserProduct;
-            }
-        }
-
-        if (!empty($latestMembershipUserProductToSync)) {
-            return $latestMembershipUserProductToSync;
-        }
-
-        return null;
+        $userAccessPermissions = $this->userAccessPermissionsService->getUserAccessPermissionsByUser($user);
+        return $this->syncUserAccess($userAccessPermissions);
     }
 
     /**
