@@ -35,7 +35,16 @@ class LearningPathsService
             $section->topPillText = $section->tagline ?? '';
             $section->content_type = $content['type'] ?? '';
             $section->ctaUrl = $content['url'] ?? '';
+            if ($content['type'] == "learning-path") {
+                $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+                    $content['id'],
+                    auth()->id()
+                );
+                $section->ctaUrl = $nextContentForUser['url'];
+            }
+
             $section->ctaText = ($content['completed'])?'Completed':((!$content['started']) ? 'Start now':'Continue');
+            $section->state = ($content['completed'])?'completed':((!$content['started']) ? 'start':'continue');
         });
 
         return $learningPaths;
