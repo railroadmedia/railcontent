@@ -93,7 +93,7 @@
                 :key="item.id"
                 :item="item"
                 :brand="brand"
-                :term="searchInterface"
+                :term="searchTerm"
             />
 
             <!-- Results Pagination -->
@@ -162,6 +162,10 @@ export default {
         searchJsonResultsEndpointUrl: {
             type: String,
             default: () => '/threads/latest',
+        },
+        searchTerm: {
+            type: String,
+            default: () => '',
         },
     },
     data() {
