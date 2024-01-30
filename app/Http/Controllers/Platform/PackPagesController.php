@@ -99,7 +99,7 @@ class PackPagesController extends Controller
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['pack'] ?? [];
 
         return view('content.packs.packs-index', [
-            "packs" => $packs->toResponseRawJson(),
+            "packs" => $packs['results'],
             "catalogueMeta" => $catalogueMeta,
         ]);
     }
