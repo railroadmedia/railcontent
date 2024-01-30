@@ -79,12 +79,14 @@ class UserMembershipFieldsService
     public function saveMembershipData(
         int $userId,
         ?Carbon $membershipExpirationDate,
+        ?Carbon $membershipStartDate,
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
         ?string $membershipLevel,
         bool $isDrumeoLifetimeMember
     ): bool {
+
         $user =
             User::query()
                 ->find($userId);
@@ -97,6 +99,7 @@ class UserMembershipFieldsService
 
             $user->membership_expiration_date =
                 !empty($membershipExpirationDate) ? $membershipExpirationDate->toDateTimeString() : null;
+            $user->membership_start_date = !empty($membershipStartDate) ? $membershipStartDate->toDateTimeString() : null;
             $user->is_lifetime_member = $isLifetimeMember;
             $user->is_drumeo_lifetime_member = $isDrumeoLifetimeMember;
             $user->access_level = $accessLevel;
