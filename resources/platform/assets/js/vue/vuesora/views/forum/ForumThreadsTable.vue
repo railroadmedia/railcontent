@@ -88,7 +88,7 @@
         <template v-else>
             <!-- Search Results -->
             <forum-search-result
-                v-for="item in searchResults"
+                v-for="item in threads"
                 :searching = "searching"
                 :key="item.id"
                 :item="item"
