@@ -227,25 +227,18 @@
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> $1 Drum Merch</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @foreach($sale1dollar as $key => $sale1dollarItem)
+                    @foreach($sale1dollar as $key => $item)
                         @include('_partials.components.shop.product-card', [
-                            "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '',  $sale1dollarItem->slug ),
-                            "sku" =>  $sale1dollarItem->sku === 'drumeo' ? null :  $sale1dollarItem->sku,
-                            "badgeText" =>  $sale1dollarItem->badge_text,
-                            "thumbnail" =>  $sale1dollarItem->thumbnail,
-                            "packLogo" =>  $sale1dollarItem->thumbnail_logo,
-                            "title" =>  $sale1dollarItem->name,
-                            "packAuthor" =>  $sale1dollarItem->instructor_name,
-                            "cardDescription" =>  $sale1dollarItem->short_desc,
-                            "fullPrice" =>  $sale1dollarItem->price,
-                            "price" =>  $sale1dollarItem->discounted_price,
-                            "category" => strtolower( $sale1dollarItem->productType->name),
-                            "buttonText" =>  $sale1dollarItem->sku === 'drumeo' ||  $sale1dollarItem->sku === 'pianote' ||  $sale1dollarItem->sku === 'singeo' ||  $sale1dollarItem->sku === 'guitareo' ? 'see the deal' : null,
-                            "soldOut" =>  $sale1dollarItem->sold_out,
-                            "includedEdge" =>  $sale1dollarItem->included_edge,
-                            "sizes" =>  $sale1dollarItem->sizes,
-                            'FCP' => $key < 4 ? true : null,
-                            "size_case_sensitive" =>  $sale1dollarItem->size_case_sensitive,
+                        "badge" => $item->badge_text,
+                        "discounted_price" => $item->discounted_price,
+                        "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "price" => $item->price,
+                        "size_case_sensitive" => $item->size_case_sensitive,
+                        "sizes" => $item->sizes,
+                        "sku" => $item->sku,
+                        "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "thumbnail" => $item->thumbnail,
+                        "title" => $item->name,
                         ])
                     @endforeach
                 </div>
@@ -361,27 +354,27 @@
 
         {{--   limited     --}}
         <div id="limited" class="anchor"></div>
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @foreach($lowStock as $key => $item)
-                        @include('_partials.components.shop.product-card', [
-                            "badge" => $item->badge_text,
-                            "discounted_price" => $item->discounted_price,
-                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                            "price" => $item->price,
-                            "size_case_sensitive" => $item->size_case_sensitive,
-                            "sizes" => $item->sizes,
-                            "sku" => $item->sku,
-                            "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                            "thumbnail" => $item->thumbnail,
-                            "title" => $item->name,
-                        ])
-                    @endforeach
-                </div>
-            </div>
-        </section>
+{{--        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">--}}
+{{--            <div class="container">--}}
+{{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>--}}
+{{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">--}}
+{{--                    @foreach($lowStock as $key => $item)--}}
+{{--                        @include('_partials.components.shop.product-card', [--}}
+{{--                            "badge" => $item->badge_text,--}}
+{{--                            "discounted_price" => $item->discounted_price,--}}
+{{--                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),--}}
+{{--                            "price" => $item->price,--}}
+{{--                            "size_case_sensitive" => $item->size_case_sensitive,--}}
+{{--                            "sizes" => $item->sizes,--}}
+{{--                            "sku" => $item->sku,--}}
+{{--                            "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,--}}
+{{--                            "thumbnail" => $item->thumbnail,--}}
+{{--                            "title" => $item->name,--}}
+{{--                        ])--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
     </div>
 @endsection
 
