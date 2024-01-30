@@ -81,9 +81,3 @@ Musora Actions:
 Set user credentials after initial purchase and provide user token [endpoint](https://red-shadow-611407.postman.co/workspace/Team-Workspace~38bb093f-0978-4a83-8423-944a3c78fd51/request/9725390-e2c71e6f-f04c-41d5-863f-24b8d1ed292e?ctx=documentation)
 
 Restore Musora user subscriptions [endpoint](https://red-shadow-611407.postman.co/workspace/Team-Workspace~38bb093f-0978-4a83-8423-944a3c78fd51/request/9725390-16f522c8-f83f-48ef-b406-531aee2598f0?ctx=documentation)
-
-
-## New Artisan command to sync Musora user’s subscriptions with Revenuecat based on Musora user id
-
-r mwp artisan ecommerce:SyncRevenuecatSubscriptionsToMusora {userId}
-
