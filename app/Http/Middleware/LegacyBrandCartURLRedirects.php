@@ -2,18 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Modules\UserManagementSystem\Events\User\UserCreated;
-use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Ecommerce\Services\UserProductService;
-use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 
 class LegacyBrandCartURLRedirects
 {
