@@ -71,16 +71,16 @@
                         @foreach($lessons as $lesson){
                             @include('_partials.components.shop.product-card', [
                                 "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                                "href" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                                 "thumbnail" => $lesson->thumbnail,
-                                "badgeText" => $lesson->badge_text,
+                                "badge" => $lesson->badge_text,
                                 "thumbnail_logo" => $lesson->thumbnail_logo,
-                                "packLogo" => $lesson->page_logo,
+                                "logo" => $lesson->page_logo,
                                 "title" => $lesson->name,
-                                "packAuthor" => $lesson->instructor_name,
+                                "instructor" => $lesson->instructor_name,
                                 "cardDescription" => $lesson->short_desc,
-                                "fullPrice" => $lesson->price,
-                                "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                                "price" => $lesson->price,
+                                "discounted_price" => $lesson->discounted_price,
                                 "productJson" => '{ "'.$lesson->sku.'": 1 }',
                                 "buttonText" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? 'see the deal' : null,
                                 "soldOut" => $lesson->sold_out,
@@ -105,13 +105,13 @@
                         @foreach($accessories as $accessory){
                             @include('_partials.components.shop.product-card', [
                                 "sku" => $accessory->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                                "href" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                                 "thumbnail" => $accessory->thumbnail,
-                                "badgeText" => $accessory->badge_text,
+                                "badge" => $accessory->badge_text,
                                 "title" => $accessory->name,
                                 "cardDescription" => $accessory->short_desc,
-                                "fullPrice" => $accessory->price,
-                                "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                                "price" => $accessory->price,
+                                "discounted_price" => $accessory->discounted_price,
                                 "physical" => true,
                                 "sizes" => $accessory->sizes,
                                 "soldOut" => $accessory->sold_out,
@@ -142,13 +142,13 @@
                         @foreach($misc as $miscItem){
                             @include('_partials.components.shop.product-card', [
                                 "sku" => $miscItem->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                                "href" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
                                 "thumbnail" => $miscItem->thumbnail,
-                                "badgeText" => $miscItem->badge_text,
+                                "badge" => $miscItem->badge_text,
                                 "title" => $miscItem->name,
                                 "cardDescription" => $miscItem->short_desc,
-                                "fullPrice" => $miscItem->price,
-                                "price" => $miscItem->discounted_price === '0.00' || empty($miscItem->discounted_price) ? $miscItem->price : $miscItem->discounted_price,
+                                "price" => $miscItem->price,
+                                "discounted_price" => $miscItem->discounted_price,
                                 "physical" => true,
                                 "sizes" => $miscItem->sizes,
                                 "soldOut" => $miscItem->sold_out,
@@ -172,13 +172,13 @@
                         @foreach($shirts as $shirt){
                             @include('_partials.components.shop.product-card', [
                                 "sku" => $shirt->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                                "href" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                                 "thumbnail" => $shirt->thumbnail,
-                                "badgeText" => $shirt->badge_text,
+                                "badge" => $shirt->badge_text,
                                 "title" => $shirt->name,
                                 "cardDescription" => $shirt->short_desc,
-                                "fullPrice" => $shirt->price,
-                                "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                                "price" => $shirt->price,
+                                "discounted_price" => $shirt->discounted_price,
                                 "physical" => true,
                                 "sizes" => $shirt->sizes,
                                 "soldOut" => $shirt->sold_out,
@@ -187,20 +187,6 @@
                             ])
                         }
                         @endforeach
-                        @if($theme === 'drumeo')
-                            @include('_partials.components.shop.product-card', [
-                                 "badgeText" => "SEE MORE ON TEESPRING",
-                                 "itemURL" => "https://teespring.com/stores/drumeo",
-                                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/teespring.jpg",
-                                 "title" => "Teespring Drumeo Store",
-                                 "cardDescription" => "Check out our on-demand designs that are only available through Teespring.",
-                                 "specialPrice" => "Various Designs & Pricing",
-                                 "price" => 'Various Designs & Pricing',
-                                 "category" => "shirts",
-                                 "buttonText" => "VISIT TEESPRING <i class='fas fa-external-link'></i>",
-                                 "externalURL" => true,
-                            ])
-                        @endif
                     </ul>
                 </section>
             @endif
@@ -224,13 +210,13 @@
                         @foreach($hoodies as $hoodie){
                             @include('_partials.components.shop.product-card', [
                                 "sku" => $hoodie->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                                "href" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                                 "thumbnail" => $hoodie->thumbnail,
-                                "badgeText" => $hoodie->badge_text,
+                                "badge" => $hoodie->badge_text,
                                 "title" => $hoodie->name,
                                 "cardDescription" => $hoodie->short_desc,
-                                "fullPrice" => $hoodie->price,
-                                "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                                "price" => $hoodie->price,
+                                "discounted_price" => $hoodie->discounted_price,
                                 "physical" => true,
                                 "sizes" => $hoodie->sizes,
                                 "soldOut" => $hoodie->sold_out,
@@ -247,14 +233,14 @@
                     @foreach($products as $product){
                         @include('_partials.components.shop.product-card', [
                             "sku" => $product->sku,
-                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                            "href" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
                             "thumbnail" => $product->thumbnail,
                             "thumbnail_logo" => $product->thumbnail_logo,
-                            "badgeText" => $product->badge_text,
+                            "badge" => $product->badge_text,
                             "title" => $product->name,
                             "cardDescription" => $product->short_desc,
-                            "fullPrice" => $product->price,
-                            "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                            "price" => $product->price,
+                            "discounted_price" => $product->discounted_price,
                             "sizes" => $product->sizes,
                             "soldOut" => $product->sold_out,
                             "size_case_sensitive" => $product->size_case_sensitive,
