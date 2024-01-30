@@ -591,9 +591,9 @@ the pin icon on or off.',
             $request->get('user_playlist_item_id'),
             $request->get('position'),
             $request->get('extra_data'),
-            $request->get('start_second'),
-            $request->get('end_second'),
-            $request->get('playlist_item_name')
+            $request->get('start_second', $playlistContent['start_second']),
+            $request->get('end_second', $playlistContent['end_second']),
+            $request->get('playlist_item_name', $playlistContent['playlist_item_name'])
         );
     }
 
