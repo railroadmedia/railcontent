@@ -128,7 +128,7 @@ class PackService
         ))->sortPacks(user()?->id);
 
         return new ContentFilterResultsEntity([
-                                                             'results' => $packs->toArray(),
+                                                             'results' => $packs->values()->toArray(),
                                                              'total_results' => count($packs),
                                                              'filter_options' => $results['filter_options'],
                                                          ]);

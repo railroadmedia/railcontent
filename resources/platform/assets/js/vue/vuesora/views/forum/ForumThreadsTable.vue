@@ -93,7 +93,7 @@
                 :key="item.id"
                 :item="item"
                 :brand="brand"
-                :term="searchInterface"
+                :term="searchTerm"
             />
 
             <!-- Results Pagination -->
@@ -166,6 +166,10 @@ export default {
         searching: {
             type: Boolean,
             default: () => false,
+        },    
+        searchTerm: {
+            type: String,
+            default: () => '',
         },
     },
     data() {
