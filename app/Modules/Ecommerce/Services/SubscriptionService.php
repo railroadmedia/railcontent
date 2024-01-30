@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Models\User;
 
 class SubscriptionService
 {
@@ -212,5 +213,19 @@ class SubscriptionService
         $musoraSubscription->save();
 
         return $musoraSubscription;
+    }
+
+    public function cancelAllSubscriptions(User $user, string $reason): void
+    {
+        try {
+            $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
+            $subscriptions->each(function ($subscription) use ($reason) {
+                if ($subscription->status == RechargeSubscriptionStatusEnum::Active->value) {
+                    $this->recharge->cancelSubscription($subscription, $reason);
+                }
+            });
+        } catch (\Exception $e) {
+            Log::error("Failed to cancel subscriptions for user $user->id: " . $e->getMessage());
+        }
     }
 }
