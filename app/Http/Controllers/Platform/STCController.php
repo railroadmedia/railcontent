@@ -26,7 +26,8 @@ class STCController extends Controller
         $genders = [
             ['value' => 'Man'],
             ['value' => 'Woman'],
-            ['value' => 'Rather not say']
+            ['value' => 'Non-binary'],
+            ['value' => 'Rather not say'],
         ];
 
         $languages = [
