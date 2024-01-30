@@ -19,16 +19,23 @@ export const useCollectionStore = defineStore({
                 sort: '',
                 progress: '',
             },
-            isCoach: false,
-            loading: false,
-            tabData: {},
-            totalPages: 0,
-            totalResults: 0,
             filterValues: {},
             filterColumns: [],
             filterableValues: [],
+            isCoach: false,
+            loading: false,
             searchEndpointUrl: '',
             searching: false, //for threads page
+            sortOptions:[
+                { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
+                { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+                { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+                { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+            ],
+            tabData: {},
+            totalPages: 0,
+            totalResults: 0,
         }
     },
     actions: {
@@ -153,6 +160,17 @@ export const useCollectionStore = defineStore({
             return ContentHelpers.flattenFilters(values);
         },
 
+        getSortOptions () {
+            if (this.tabData[this.filter.activeTab].groupByView) {
+                return [
+                    { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                    { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+                ];
+            } else {
+                return this.sortOptions;
+            }
+        },
+
         loadMore () {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
@@ -217,6 +235,10 @@ export const useCollectionStore = defineStore({
 
             if (defaults.searchEndpointUrl) {
                 this.searchEndpointUrl = defaults.searchEndpointUrl;
+            }
+
+            if (Array.isArray(defaults.sortOptions) && defaults.sortOptions.length > 0) {
+                this.sortOptions = defaults.sortOptions;
             }
 
             //Set active tab
@@ -296,10 +318,17 @@ export const useCollectionStore = defineStore({
             }
 
             this.filter.activeTab = tab.value;
+
+            //When the tab data is stored
             if (this.tabData[this.filter.activeTab] && this.tabData[this.filter.activeTab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
+            //When the tab data is not stored
             } else {
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
+                //When the tab's groupByView is true set sort to by alphabet
+                if  (this.tabData[this.filter.activeTab].groupByView) {
+                    this.filter.sort = 'slug';
+                }
                 this.getData();
             }
 
