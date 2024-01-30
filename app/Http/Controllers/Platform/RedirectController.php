@@ -4,20 +4,16 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Cohort;
+use App\Modules\Ecommerce\Services\ProductService;
 use Illuminate\Http\Request;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Railcontent\Services\ContentService;
 
 class RedirectController extends BaseController
 {
+    private ProductService $productService;
 
-    private ContentService $contentService;
-    private ProductRepository $productRepository;
-
-    public function __construct(ContentService $contentService, ProductRepository $productRepository)
+    public function __construct(ProductService $productService)
     {
-        $this->contentService = $contentService;
-        $this->productRepository = $productRepository;
+        $this->productService = $productService;
     }
 
     public function homeRedirect()
@@ -61,11 +57,11 @@ class RedirectController extends BaseController
         /** @var Cohort $cohort */
         $cohort = Cohort::query()->whereIn('product_id', $products)->first();
         if ($cohort) {
-            $product = $this->productRepository->findProduct($cohort['product_id']);
+            $product = $this->productService->getById($cohort['product_id']);
 
             $registerButtonUrl = url()->route(
                 'platform.cohort.purchased',
-                ['brand' => $brand, 'cohort' => $product->getSku()]
+                ['brand' => $brand, 'cohort' => $product->sku]
             );
             if ($registerButtonUrl) {
                 return redirect($registerButtonUrl);

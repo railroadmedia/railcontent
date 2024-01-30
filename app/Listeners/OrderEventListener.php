@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Analytics\Tracker;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Brand\Services\BrandService;
-use App\Services\User\UserAccessService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Mail\Message;
