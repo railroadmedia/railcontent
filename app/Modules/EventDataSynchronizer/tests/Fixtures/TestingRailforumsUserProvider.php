@@ -2,8 +2,8 @@
 
 namespace App\Modules\EventDataSynchronizer\tests\Fixtures;
 
-use Railroad\Ecommerce\Entities\User;
 use Railroad\Railforums\Contracts\UserProviderInterface;
+use Railroad\Railforums\Entities\User;
 
 class TestingRailforumsUserProvider implements UserProviderInterface
 {

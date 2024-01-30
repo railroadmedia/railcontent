@@ -4,7 +4,6 @@ namespace App\Modules\EventDataSynchronizer\tests;
 
 use App\Modules\EventDataSynchronizer\Providers\EventDataSynchronizerServiceProvider;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
-use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingEcommerceUserProvider;
 use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingRailforumsUserProvider;
 use App\Modules\EventDataSynchronizer\tests\Fixtures\TestingUserProvider;
 use Carbon\Carbon;
@@ -12,11 +11,6 @@ use Doctrine\Inflector\InflectorFactory;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Routing\Router;
-use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
-use Railroad\Ecommerce\Faker\Factory;
-use Railroad\Ecommerce\Faker\Faker as EcommerceFaker;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use Railroad\Ecommerce\Providers\EcommerceServiceProvider;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railforums\Contracts\UserProviderInterface as RailforumsUserProviderInterface;
@@ -26,11 +20,6 @@ use Tests\TestCase;
 
 class EventDataSynchronizerTestCase extends TestCase
 {
-    /**
-     * @var EcommerceFaker
-     */
-    protected $ecommerceFaker;
-
     /**
      * @var DatabaseManager
      */
@@ -56,8 +45,6 @@ class EventDataSynchronizerTestCase extends TestCase
 
         $this->app->instance(UserProviderInterface::class, $this->userProvider);
         $this->app->instance(RailforumsUserProviderInterface::class, app(TestingRailforumsUserProvider::class));
-
-        $this->ecommerceFaker = Factory::create();
 
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
@@ -105,33 +92,6 @@ class EventDataSynchronizerTestCase extends TestCase
         $app['config']->set('ecommerce.database_user', 'root');
         $app['config']->set('ecommerce.database_password', 'root');
         $app['config']->set('ecommerce.database_in_memory', true);
-
-        // ecommerce
-        config(
-            [
-                'ecommerce' => [
-                    'database_connection_name' => 'testbench',
-                    'cache_duration' => 60,
-                    'table_prefix' => 'ecommerce_',
-                    'data_mode' => 'host',
-                    'brand' => 'testbench',
-                    'typeSubscription' => 'subscription',
-                    'typeProduct' => 'product',
-                    'redis_host' => 'redis',
-                    'database_driver' => 'pdo_sqlite',
-                    'database_user' => 'root',
-                    'database_password' => 'root',
-                    'database_in_memory' => true,
-                    'enable_query_log' => false,
-                    'entities' => [
-                        [
-                            'path' => __DIR__ . '/../vendor/railroad/ecommerce/src/Entities',
-                            'namespace' => 'Railroad\Ecommerce\Entities',
-                        ],
-                    ],
-                ],
-            ]
-        );
 
         // usora
         config()->set('usora.authentication_controller_middleware', []);
@@ -203,9 +163,6 @@ class EventDataSynchronizerTestCase extends TestCase
 
         // register providers
         $app->register(EventDataSynchronizerServiceProvider::class);
-        $app->register(EcommerceServiceProvider::class);
-
-        $ecommerceEntityManager = app(EcommerceEntityManager::class);
 
         $app->register(RailcontentServiceProvider::class);
         $app->register(UsoraServiceProvider::class);
@@ -213,13 +170,11 @@ class EventDataSynchronizerTestCase extends TestCase
         // make sure usora is using the same connection as ecom and laravel
         $usoraEntityManager = app(UsoraEntityManager::class);
         $newUsoraEntityManager = UsoraEntityManager::create(
-            $ecommerceEntityManager->getConnection(),
+            $usoraEntityManager->getConnection(),
             $usoraEntityManager->getConfiguration(),
-            $ecommerceEntityManager->getEventManager()
+            $usoraEntityManager->getEventManager()
         );
         app()->instance(UsoraEntityManager::class, $newUsoraEntityManager);
-
-        app()->instance(EcommerceUserProviderInterface::class, app()->make(TestingEcommerceUserProvider::class));
 
         // register global doctrine inflector
         $inflector = InflectorFactory::create()->build();
