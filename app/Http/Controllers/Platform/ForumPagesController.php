@@ -15,6 +15,7 @@ use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\SearchIndexRepository;
 use Railroad\Railforums\Repositories\ThreadReadRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
+use Railroad\Railforums\Responses\JsonPaginatedResponse;
 use Railroad\Usora\Repositories\UserRepository;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -698,7 +699,10 @@ class ForumPagesController extends Controller
             ];
         }
 
-        return response()->json($this->utf8ize(['results' => $mappedItems, 'count' => $count]));
+        return new JsonPaginatedResponse(
+            $this->utf8ize( $mappedItems), $count, null, 200
+        );
+       // return response()->json($this->utf8ize(['results' => $mappedItems, 'count' => $count]));
     }
 
     /**
