@@ -88,8 +88,8 @@
                                 <div v-for="language in selectedLanguages" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-rounded-full tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center">{{ language }} <span @click="selectLanguage(language)" class="tw-cursor-pointer tw-ml-1">x</span></div>
                             </div>
                         </div>
+                        <div v-if="selectedLanguages.length" class="tw-absolute tw-right-10 tw-top-0 tw-h-full tw-flex tw-items-center"><XIcon class="tw-w-[13px] tw-h-[13px] tw-cursor-pointer" @click="resetSelectedLanguages" /></div>
                     </div>
-
                 </label>
 
                 <!-- Student Level -->
@@ -286,16 +286,19 @@ const languageContainerClick = () => {
     if(screenSize < 768) {
         languageInput.value.blur()
         openLanguageModal.value = true;
-        return;
     }
 }
 
-const selectLanguage = (value, isContainer = false) => {
+const selectLanguage = (value) => {
     if(selectedLanguages.value.includes(value)){
         selectedLanguages.value = selectedLanguages.value.filter((lang) => lang !== value);
     } else {
         value && selectedLanguages.value.push(value);
     }
+}
+
+const resetSelectedLanguages = () => {
+    selectedLanguages.value = [];
 }
 
 const screenDetect = () => {
@@ -323,7 +326,6 @@ const submitForm = (event) => {
             'student_form_languages[]': selectedLanguages.value,
         },
     };
-    console.log(formData2)
 
     submitButton.innerHTML = `
     <div id="button-loading" class="tw-inline-flex">
