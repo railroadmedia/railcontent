@@ -46,12 +46,12 @@
                             Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">January 29th</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
                         </p>
                     </div>
-                    @include('pianote._partials.sign-up-form', [
-                    "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form2",
-                    "formName" => 'FP30 Giveaway',
-                    "buttonText" => "I WANT TO WIN!",
-                    ])
+{{--                    @include('pianote._partials.sign-up-form', [--}}
+{{--                    "recaptchaKey" => $recaptchaKey,--}}
+{{--                    "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form2",--}}
+{{--                    "formName" => 'FP30 Giveaway',--}}
+{{--                    "buttonText" => "I WANT TO WIN!",--}}
+{{--                    ])--}}
                 </div>
             </div>
         </div>
@@ -179,12 +179,12 @@
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
 
-            @include('pianote._partials.sign-up-form', [
-        "recaptchaKey" => $recaptchaKey,
-            "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form",
-            "formName" => 'FP30 Giveaway',
-                "buttonText" => "I WANT TO WIN!",
-            ])
+{{--            @include('pianote._partials.sign-up-form', [--}}
+{{--        "recaptchaKey" => $recaptchaKey,--}}
+{{--            "formId" => "Pianote - Engagement - Trigger - FP30 Giveaway - Web Form",--}}
+{{--            "formName" => 'FP30 Giveaway',--}}
+{{--                "buttonText" => "I WANT TO WIN!",--}}
+{{--            ])--}}
         </div>
     </section>
 
