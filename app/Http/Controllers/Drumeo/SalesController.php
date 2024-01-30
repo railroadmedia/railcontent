@@ -108,6 +108,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
+    public function trialKey()
+    {
+        return view('drumeo.sales.trial-key', ['theme' => 'drumeo', 'promoVersion' => true, 'keyPage' => true, 'trialVersion' => true ]);
+    }
     public function trialBeginner()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true, 'beginnerVersion' => true ]);

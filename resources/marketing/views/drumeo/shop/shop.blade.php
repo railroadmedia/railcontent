@@ -7,7 +7,8 @@
     <meta name="description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
     <meta property="og:description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/november/xmas-drumeo-shop-share-image.jpg">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/og-image.jpg">
+
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
 @endsection
 
@@ -199,9 +200,9 @@
                 @endforeach
 
                 @include('_partials.components.shop.product-card', [
-                    "itemURL" => "/drumshop/gift-card/",
+                    "itemURL" => "https://www.musora.com/gift-card",
                     "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
-                    "title" => "Drumeo Gift Card",
+                    "title" => "Gift Card",
                     "cardDescription" => "Give the gift of drum lessons with a gift card to Drumeo — with your choice between a one-month, 6-month, or 1-year membership pass.",
                     "fullPrice" =>29,
                     "price" => 29,
