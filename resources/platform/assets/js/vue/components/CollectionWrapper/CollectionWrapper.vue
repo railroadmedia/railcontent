@@ -361,7 +361,7 @@ onBeforeMount(() => {
         content: props.preLoadedContent,
         filter: {
             params: { ...request_params.value },
-            [isCoach.value ? 'term' : 'title']: '',
+            [isThreads.value ? 'term' : 'title']: '',
             sort: props.defaultSort,
         },
         tabData: getTabData.value,
