@@ -208,7 +208,7 @@
             </header>
             <hr />
             <ul class="tw-flex-shrink tw-overflow-auto">
-                <li v-for="language in languages" :class="`tw-text-lg tw-flex tw-justify-center tw-py-4 tw-cursor-pointer tw-font-semibold ${isLanguageSelected(language) ? 'tw-text-white' : 'tw-text-[#80A0B9]'}`" @click="selectLanguage(language)">{{ language }} <CheckIcon v-if="isLanguageSelected(language)" class="tw-w-[20px] tw-ml-2 tw-text-white" /></li>
+                <li v-for="language in languages" :class="`tw-text-lg tw-flex tw-justify-center tw-py-4 tw-cursor-pointer tw-font-semibold ${isLanguageSelected(language['value']) ? 'tw-text-white' : 'tw-text-[#80A0B9]'}`" @click="selectLanguage(language['value'])">{{ language['value'] }} <CheckIcon v-if="isLanguageSelected(language['value'])" class="tw-w-[20px] tw-ml-2 tw-text-white" /></li>
             </ul>
             <footer class="tw-font-bold tw-text-white tw-py-7 tw-flex tw-justify-center tw-items-center tw-text-lg tw-flex-shrink-0" @click="openLanguageModal = false">Done</footer>
         </div>
