@@ -1,5 +1,5 @@
 <script setup>
-    import { inject, onBeforeMount, computed, reactive } from 'vue';
+    import { inject, onBeforeMount, computed, reactive, onMounted } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
@@ -30,10 +30,13 @@
 
     //--------Reactive Data--------//
     const state = reactive({
-        title: '',
         durationTime: 0,
         startTime: 0,
         endTime: 0
+    })
+
+    const title = computed(() => {
+        return props.data.playlist_item_name || props.data.title;
     })
 
     //-----------Methods-----------//
@@ -73,7 +76,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'fa-pen-to-square',
-                        text: `You have successfully set the start and end time for '${state.title}'.`
+                        text: `You have successfully set the start and end time for '${title.value}'.`
                     })
                 } else {
                     console.log('edit response code', response)
@@ -85,9 +88,6 @@
 
     //----------Lifecycle Hooks----------//
     onBeforeMount(()=> {
-        //Get Playlist Name
-        const title = props.data.title;
-        state.title = title;
         //Format start/end values
         let startTime = props.data.start_second || 0;
         let endTime = props.data.end_second || props.data.duration || 0;
