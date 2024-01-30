@@ -3,7 +3,6 @@
 namespace App\Modules\EventTracking\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Modules\EventTracking\Jobs\SyncUserCustomerIoAttributesJob;
 use App\Modules\EventTracking\Jobs\SyncUserWithPermissionsToCustomerIoJob;
 
 class SyncUserWithPermissionsToCustomerIo extends Command
