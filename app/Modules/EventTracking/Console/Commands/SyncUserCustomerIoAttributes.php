@@ -7,18 +7,20 @@ use App\Modules\EventTracking\Jobs\SyncUserCustomerIoAttributesJob;
 
 class SyncUserCustomerIoAttributes extends Command
 {
-    protected $signature = 'eventTracking:syncUserCustomerIoAttributes {workspaceName}';
+    protected $signature = 'eventTracking:syncUserCustomerIoAttributes {workspaceName} {fromPermissions=0}';
     protected $description = 'Sync users that have digital product access to customerio';
 
     public function handle(): void
     {
         $workspaceName = $this->argument('workspaceName');
+        $fromPermissions = boolval($this->argument('fromPermissions'));
         $this->runBatchQuery(
-            function (int $skip, int $take) use ($workspaceName) {
+            function (int $skip, int $take) use ($workspaceName, $fromPermissions) {
                 return new SyncUserCustomerIoAttributesJob(
                     $skip,
                     $take,
-                    $workspaceName
+                    $workspaceName,
+                    $fromPermissions
                 );
             },
             chunks: 100,
