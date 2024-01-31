@@ -9,7 +9,7 @@
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
-                <ForumThreadsTable v-else-if="isThreads" :threads="preLoadedContent" :searching="searching" :search-term="getSearchTerm" />
+                <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                             :total-results="getTotalResults" />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />

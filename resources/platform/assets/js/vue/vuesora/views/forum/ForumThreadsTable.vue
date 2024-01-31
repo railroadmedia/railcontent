@@ -166,7 +166,7 @@ export default {
         searching: {
             type: Boolean,
             default: () => false,
-        },    
+        },
         searchTerm: {
             type: String,
             default: () => '',
@@ -176,7 +176,6 @@ export default {
         return {
             forumsArray: this.forums,
             threadsArray: this.threads,
-            searchTerm: '',
             filter: 'all',
             timeout: null,
             followed: false,
@@ -222,27 +221,6 @@ export default {
         },
         totalSearchPages() {
             return Math.ceil(this.searchResultsCount / this.searchResultsPageLength);
-        },
-        searchInterface: {
-            get() {
-                return this.searchTerm;
-            },
-            set(val) {
-                clearTimeout(this.timeout);
-
-                this.searchTerm = val;
-
-                if (val) {
-                    this.timeout = setTimeout(() => {
-                        this.searchResultsPage = 1;
-
-                        const new_url = `${window.location.origin + window.location.pathname}?search=${val}`;
-                        window.history.replaceState(history.state, null, new_url);
-
-                        this.getSearchResults();
-                    }, 800);
-                }
-            },
         },
         isFollowedSection() {
             return String(location.search).includes('followed=true');
@@ -306,7 +284,6 @@ export default {
         const urlParams = QueryString.parse(document.location.search);
 
         if (urlParams.search) {
-            this.searchInterface = urlParams.search;
             this.loading = true;
         }
     },
