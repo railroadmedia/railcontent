@@ -1481,7 +1481,7 @@ class ContentPagesController extends BaseController
             "listLessons" => $listLessons->toResponseRawJson(),
             "hasStartedLessons" => false,
             'isAllContent' => true,
-            "lessonType" => implode(',', $listLessons['filter_options']['type']),
+            "lessonType" => implode(',', ContentTypes::newContentTypes()),
             "totalResults" => $listLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
             "adminMessage" => $adminMessage,
