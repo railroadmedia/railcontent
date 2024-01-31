@@ -4,23 +4,23 @@
         <div class="flex flex-wrap mb-5 sm:mb-10">
             @foreach(array_filter($bundles, function($val){if($val['visible'] === 1){ return 1; }}) as $key => $bundle)
                 <a href="{{ $bundle['slug'] }}" class="w-full @if(!empty($bundle['specialW'])) lg:w-2/3 @elseif(!empty($bundle['specialW2'])) lg:w-1/3 @elseif(!empty($bundle['full'])) @else sm:w-1/2 @endif mx-auto p-1 sm:p-2">
-                    <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl px-5 lg:px-10
+                    <div class="flex items-center w-full overflow-hidden relative text-white rounded-xl px-5 lg:px-7
                     @if(empty($bundle['full']) && empty($bundle['specialW']))
                         justify-center py-5 sm:py-6 lg:py-8
                     @elseif(!empty($bundle['specialW']))
                         lg:pl-16 xl:pl-20 py-5 sm:py-6 lg:py-8
                     @else
-                        lg:pl-16 xl:pl-20 py-6 lg:py-7
+                        py-6 lg:py-7
                      @endif "
                         @if(empty($bundle['img'])) style="background:linear-gradient(to bottom, {{ $bundle['bgColor'] }});" @endif >
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                              @if(isset($bundle['logo']))
-                            <img class="h-24 sm:h-28 lg:h-32" src="{{ $bundle['logo'] }}"><br>
+                            <img class="h-24 sm:h-24 lg:h-32" src="{{ $bundle['logo'] }}">
                             @endif
                             @if(isset($bundle['title']))
                                 <h2 class="leading-none"><strong>{{ $bundle['title'] }}</strong></h2>
                             @endif
-                            <p class="leading-tight my-1 sm:my-2 text-sm italic">{!!$bundle['desc'] !!}</p>
+                            <p class="leading-tight mb-5 mt-1 sm:mt-3 text-sm italic">{!!$bundle['desc'] !!}</p>
                              @if(!empty($bundle['price']))
                                  <h4 class="inline-block leading-none mb-3">
                                     @if(!empty($bundle['soldOut']))
@@ -31,7 +31,6 @@
                                     @endif
                                 </h4>
                              @endif
-                                 <br>
                              <div class="join smaller w-full text-white p-3 sm:max-w-md w-full" style="background:{{$bundle['buttonColor']}};">
                                 @if(!empty($bundle['buttonText']))
                                      {{ $bundle['buttonText'] }}
@@ -43,7 +42,7 @@
                             </div><br>
                         </div>
                         @if(!empty($bundle['img']))
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url('{{ $bundle['img'] }}');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:30% 0;background-image:url('{{ $bundle['img'] }}');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('{{ $bundle['imgM'] }}');"></div>
                         @endif
                     </div>
