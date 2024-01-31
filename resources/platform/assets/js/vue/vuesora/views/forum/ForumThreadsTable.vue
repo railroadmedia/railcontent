@@ -68,7 +68,7 @@
                 :brand="brand"
             />
             <forum-threads-table-item
-                v-for="thread in threadsArray"
+                v-for="thread in threads"
                 :key="thread.id"
                 :thread="thread"
                 :brand="brand"
@@ -85,10 +85,10 @@
             </div>
         </template>
 
-        <template v-if="searching">
+        <template v-else>
             <!-- Search Results -->
             <forum-search-result
-                v-for="item in searchResults"
+                v-for="item in threads"
                 :searching = "searching"
                 :key="item.id"
                 :item="item"
@@ -163,6 +163,10 @@ export default {
             type: String,
             default: () => '/threads/latest',
         },
+        searching: {
+            type: Boolean,
+            default: () => false,
+        },    
         searchTerm: {
             type: String,
             default: () => '',
@@ -191,7 +195,6 @@ export default {
                 }
             ],
             loading: false,
-            searching: false,
             searchResults: [],
             searchResultsCount: 0,
             searchResultsPage: 1,
@@ -238,8 +241,6 @@ export default {
 
                         this.getSearchResults();
                     }, 800);
-                } else {
-                    this.searching = false;
                 }
             },
         },
@@ -306,7 +307,6 @@ export default {
 
         if (urlParams.search) {
             this.searchInterface = urlParams.search;
-            this.searching = true;
             this.loading = true;
         }
     },
@@ -322,7 +322,6 @@ export default {
                 this.searchResultsPageLength,
             ).then((data) => {
                 this.loading = false;
-                this.searching = true;
                 this.searchResults = data.results;
                 this.searchResultsCount = data.count;
             });

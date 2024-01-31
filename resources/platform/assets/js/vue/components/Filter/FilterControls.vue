@@ -42,17 +42,16 @@
                     v-if="!hideSortIcon"
                     @click="handleOpenDropdown"
                     class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17]">
-                    <musora-icon :icon-name="sortIcon()" class="tw-w-[22px] tw-h-[22px]" />
+                    <musora-icon :icon-name="sortIcon" class="tw-w-[22px] tw-h-[22px]" />
                 </button>
-                <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="()=>selectedSort" @onClose="handleCloseDropdown"
-                    @onSort="value => $emit('onSort', value)" />
+                <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" @onClose="handleCloseDropdown" @onSort="value => $emit('onSort', value)" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from 'vue';
+    import {computed, ref} from 'vue';
     import { AdjustmentsIcon, XIcon } from '@heroicons/vue/outline';
     import FilterTabs from './FilterTabs.vue';
     import FilterSearch from './FilterSearch.vue';
@@ -112,15 +111,17 @@ import {computed, onMounted, ref} from 'vue';
             type: Object,
             default: () => ({}),
         },
+        sortOptions: {
+            type: Array,
+            default: () => [],
+        }
     });
 
     const emit = defineEmits(['onToggleCollapse', 'onFilterTabClick', 'onSearchSubmit']);
     const showDropdown = ref(false);
-    const sortOptions = ref(null);
 
     // the following refs will be replaced by pinia state
     const inputText = ref('');
-    const selectedSort = ref('');
 
     const handleTabClick = (value) => {
         emit('onFilterTabClick', value)
@@ -138,29 +139,12 @@ import {computed, onMounted, ref} from 'vue';
         showDropdown.value = true;
     };
 
-    const sortIcon = () => {
-        return sortOptions.value && sortOptions.value.find(option => option.value === props.selectedSort).icon;
-    }
+    const sortIcon = computed(() => {
+        return props.sortOptions && props.sortOptions.find(option => option.value === props.selectedSort).icon;
+    })
 
     const hasPills = computed(() => {
         return props.selectedFilters && Object.keys(props.selectedFilters).length > 0;
-    })
-
-    onMounted(()=>{
-        if (props.sortOptionData.length === 0){
-            sortOptions.value = [
-                { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
-                { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
-                { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
-                { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
-                { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
-            ];
-        }
-        else {
-            sortOptions.value = props.sortOptionData;
-        }
-
-        selectedSort.value = sortOptions.value[0].key;
     })
 </script>
 

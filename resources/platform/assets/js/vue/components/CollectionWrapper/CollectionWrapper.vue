@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :sort-options="collectionStore.getSortOptions()" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -9,7 +9,7 @@
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
-                <ForumThreadsTable v-else-if="isThreads" :threads="preLoadedContent" :search-term="getSearchTerm" />
+                <ForumThreadsTable v-else-if="isThreads" :threads="preLoadedContent" :searching="searching" :search-term="getSearchTerm" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                             :total-results="getTotalResults" />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
@@ -57,6 +57,14 @@ const props = defineProps({
     defaultSort: {
         type: String,
         default: '-published_on',
+    },
+    endpoint: {
+        type: String,
+        default: () => '',
+    },
+    searchEndpointUrl: {
+        type: String,
+        default: () => '',
     },
     filterableValues: {
         type: Array,
@@ -126,12 +134,22 @@ const props = defineProps({
         type: Boolean,
         default: () => true,
     },
+    sortOptions: {
+        type: Array,
+        default: () => [
+            { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
+            { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+            { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+            { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+            { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+        ],
+    },
 });
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
 
-const { data, currentPage, filter, loading, totalPages, tabData, filterColumns } = storeToRefs(collectionStore);
+const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
 const { brand } = storeToRefs(userStore);
 
 const request_params = computed(() => {
@@ -343,12 +361,15 @@ onBeforeMount(() => {
         content: props.preLoadedContent,
         filter: {
             params: { ...request_params.value },
-            [isCoach.value ? 'term' : 'title']: '',
+            [isThreads.value ? 'term' : 'title']: '',
             sort: props.defaultSort,
         },
         tabData: getTabData.value,
         tabOptions: tabOptionData.value,
         filterableValues: props.filterableValues,
+        endpoint: props.endpoint,
+        searchEndpointUrl: props.searchEndpointUrl,
+        sortOptions: props.sortOptions,
     })
 })
 

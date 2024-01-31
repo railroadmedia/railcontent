@@ -40,7 +40,7 @@
         "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as 3.0.7",
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "dev-filter-v2 as v2.1.42",
-        "railroad/railforums": "2.0.*",
+        "railroad/railforums": "dev-v2.0-filters-update as v2.0.23",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
         "railroad/referral": "3.0.*",

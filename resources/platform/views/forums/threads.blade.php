@@ -72,11 +72,19 @@
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px]">
                 <collection-wrapper
                     collection-type="threads"
-                    :pre-loaded-content="{{ json_encode($threads) }}"
+                    :pre-loaded-content="{{ $threads }}"
                     :tab-options="{{ json_encode([
                         [ 'key' => 'all', 'value' => 'All Threads' ],
-                        [ 'key' => 'followed', 'value' => 'Followed' ]
+                        [ 'key' => 'followed,1', 'value' => 'Followed' ]
                     ]) }}"
+                    :endpoint="'{{ url()->route('railforums.thread.index',['category_id' => $discussion['id']])  }}'"
+                    :search-endpoint-url="'{{ url()->route('forums.get-search-results-json') }}'"
+                    :sort-options="{{ json_encode([
+                        [ 'value' => '-last_post_published_on', 'name' => 'Most recent', 'icon' => 'sort-down' ],
+                        [ 'value' => 'last_post_published_on', 'name' => 'Oldest', 'icon' => 'sort-up' ],
+                        [ 'value' => 'mine', 'name' => 'My threads', 'icon' => '' ]
+                    ]) }}"
+                    default-sort="-last_post_published_on"
                 ></collection-wrapper>
             </div>
 

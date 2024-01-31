@@ -8,6 +8,7 @@ export const useCollectionStore = defineStore({
     state: () => {
         return {
             data: [],
+            endpoint: '/railcontent/content',
             fetching: false,
             filter: {
                 activeTab: '',
@@ -18,14 +19,23 @@ export const useCollectionStore = defineStore({
                 sort: '',
                 progress: '',
             },
-            isCoach: false,
-            loading: false,
-            tabData: {},
-            totalPages: 0,
-            totalResults: 0,
             filterValues: {},
             filterColumns: [],
             filterableValues: [],
+            isCoach: false,
+            loading: false,
+            searchEndpointUrl: '',
+            searching: false, //for threads page
+            sortOptions:[
+                { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
+                { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+                { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+                { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+            ],
+            tabData: {},
+            totalPages: 0,
+            totalResults: 0,
         }
     },
     actions: {
@@ -55,8 +65,8 @@ export const useCollectionStore = defineStore({
             return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'All Coaches' ? '' : 'true'}`;
         },
 
-        endpoint (){
-            return '/railcontent/content';
+        getEndpoint (){
+            return this.isCoach ? this.coachEndpoint() : ((this.filter.searchTerm && this.searchEndpointUrl) ? this.searchEndpointUrl : this.endpoint);
         },
 
         updateIncludedFields (param) {
@@ -70,12 +80,16 @@ export const useCollectionStore = defineStore({
             this.filter.includedFields = [];
         },
 
+        formattedTabs () {
+            return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
+        },
+
         async fetchData () {
             const userStore = useUserStore();
             try {
                 const response = await axios
                     .get(
-                        this.isCoach ? this.coachEndpoint() : this.endpoint(),
+                        this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
                         {
                             params: {
                                 brand: userStore.brand,
@@ -86,7 +100,7 @@ export const useCollectionStore = defineStore({
                                 included_fields: this.filter.includedFields,
                                 count_filter_items: true,
                                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
-                                ...(this.filter.activeTab && { tab: this.tabData[this.filter.activeTab].key }),
+                                ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
                         })
@@ -146,6 +160,17 @@ export const useCollectionStore = defineStore({
             return ContentHelpers.flattenFilters(values);
         },
 
+        getSortOptions () {
+            if (this.tabData[this.filter.activeTab].groupByView) {
+                return [
+                    { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+                    { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+                ];
+            } else {
+                return this.sortOptions;
+            }
+        },
+
         loadMore () {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
@@ -180,6 +205,11 @@ export const useCollectionStore = defineStore({
                 this.getFilterColumns();
             }
 
+            if (this.filter.searchTerm){
+                this.searching = true;
+            } else {
+                this.searching = false;
+            }
             this.loading = false;
         },
 
@@ -197,6 +227,18 @@ export const useCollectionStore = defineStore({
 
             if (defaults.filter) {
                 this.filter = { ...this.filter, ...defaults.filter };
+            }
+
+            if (defaults.endpoint) {
+                this.endpoint = defaults.endpoint;
+            }
+
+            if (defaults.searchEndpointUrl) {
+                this.searchEndpointUrl = defaults.searchEndpointUrl;
+            }
+
+            if (Array.isArray(defaults.sortOptions) && defaults.sortOptions.length > 0) {
+                this.sortOptions = defaults.sortOptions;
             }
 
             //Set active tab
@@ -276,12 +318,21 @@ export const useCollectionStore = defineStore({
             }
 
             this.filter.activeTab = tab.value;
+
+            //When the tab data is stored
             if (this.tabData[this.filter.activeTab] && this.tabData[this.filter.activeTab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
+            //When the tab data is not stored
             } else {
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
+                //When the tab's groupByView is true set sort to by alphabet
+                if  (this.tabData[this.filter.activeTab].groupByView) {
+                    this.filter.sort = 'slug';
+                }
                 this.getData();
             }
+
+            this.setURLParams()
         },
     },
 });
