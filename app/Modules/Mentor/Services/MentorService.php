@@ -44,7 +44,6 @@ class MentorService
     {
         $brand = $this->getPrimaryBrandForAssigningMentor($userId);
         if (!$brand) {
-            Log::warning("Unable to choose a brand for user '$userId'");
             return false;
         }
         return $this->assignMentorByBrand($userId, $brand);
