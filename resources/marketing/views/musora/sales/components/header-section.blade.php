@@ -39,10 +39,13 @@
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
                     href="#customize-anchor"
+                    aria-label="Customize anchor"
                 @elseif(!empty($month))
                     href="/choose-your-trial-month"
+                    aria-label="Choose your trial month"
                 @else
                     href="/choose-plan"
+                     aria-label="Choose plan"
                 @endif
             >
                 @if(!empty($promoVersion) && empty($trialVersion))
@@ -52,9 +55,9 @@
                         SEE YOUR DEAL &raquo;
                     @endif
                 @elseif(!empty($month))
-                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
-                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @endif
             </a>
             @if(empty($noTrailer))
@@ -106,24 +109,25 @@
                     pauseOnHover: true,
                     pauseOnFocus: true,
                     interval: 3000,
+                    lazyLoad: 'nearby',
                 ",
             ])
                 @slot('content')
                     @foreach ($slides as $slide)
-                        <li class="splide__slide">
-                            <div class="px-3 md:px-6 text-center">
-                                <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
-                                <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
-                                    <img
-                                        class="rounded-full object-cover object-right w-9 h-9"
-                                        src={{ $slide['thumb'] }}
-                                        alt="{{$slide['name']}}"
-                                    ><br class="inline md:hidden">
-                                    <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
-                                </div>
+                    <li class="splide__slide">
+                        <div class="px-3 md:px-6 text-center">
+                            <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                            <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                <img
+                                    class="rounded-full object-cover object-right w-9 h-9"
+                                    data-splide-lazy={{ $slide['thumb'] }}
+                                    alt="{{$slide['name']}}"
+                                ><br class="inline md:hidden">
+                                <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                             </div>
-                        </li>
-                    @endforeach
+                        </div>
+                    </li>
+                @endforeach
                 @endslot
             @endcomponent
         </div>

@@ -79,6 +79,9 @@ class CoachPagesController extends Controller
 
         $lessonType = 'instructor';
 
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 18),
@@ -263,6 +266,9 @@ class CoachPagesController extends Controller
 
         $includedTypes =
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),

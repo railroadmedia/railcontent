@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=7c8140ad2714d39b78b8178b72e8c57c",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=1a070e9f40e119dfded212da5f641497",
+>>>>>>> filters-v2-BE-support
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",

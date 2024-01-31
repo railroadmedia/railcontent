@@ -309,7 +309,7 @@ class CustomerIoService
          * @var $customer Customer
          */
         $customer =
-            Customer::on('musora_laravel_mysql::write')
+            Customer::onWriteConnection()
                 ->where([
                     'email' => $lookupEmail,
                     'workspace_name' => $accountConfigData['workspace_name'],
@@ -369,7 +369,7 @@ class CustomerIoService
          * @var $customer Customer
          */
         $customer =
-            Customer::on('musora_laravel_mysql::write')
+            Customer::onWriteConnection()
                 ->where([
                     'user_id' => $userId,
                     'workspace_name' => $accountConfigData['workspace_name'],
@@ -454,7 +454,7 @@ class CustomerIoService
                      * @var $customer Customer
                      */
                     $customer =
-                        Customer::on('musora_laravel_mysql::write')
+                        Customer::onWriteConnection()
                             ->where([
                                 'email' => $email,
                                 'workspace_name' => $accountConfigData['workspace_name'],

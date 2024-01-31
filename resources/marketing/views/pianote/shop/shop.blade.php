@@ -91,10 +91,12 @@
                                 @foreach($featured as $key => $feat)
                                     <li class="splide__slide px-1">
                                         @include('_partials.components.shop.product-card', [
-                                            "badgeText" => $feat->badge_text,
-                                            "fullPrice" => $feat->price,
-                                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
-                                            "price" => $feat->discounted_price,
+                                            "badge" => $feat->badge_text,
+                                            "price" => $feat->price,
+                                            "instructor" => $feat->instructor_name,
+                                            "logo" => $feat->thumbnail_logo,
+                                            "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $feat->slug ),
+                                            "discounted_price" => $feat->discounted_price,
                                             "size_case_sensitive" => $feat->size_case_sensitive,
                                             "sizes" => $feat->sizes,
                                             "soldOut" => isset($products[$feat->sku]) ? $products[$feat->sku]->getStockAvailability() === 0 : $feat->sold_out,
@@ -116,27 +118,27 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
-                      "fullPrice" => 240,
-                      "packAuthor" => "Limited Time Offer",
-                      "price" => 180,
+                      "price" => 240,
+                      "href" => "/new-year#customize-anchor",
+                      "instructor" => "Limited Time Offer",
+                      "discounted_price" => 180,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",
                       'soldOut' => false,
-                      "itemURL" => "/new-year#customize-anchor",
                  ])
 
                 @foreach($lessons as $key => $lesson)
                     @include('_partials.components.shop.product-card', [
-                        "badgeText" => $lesson->badge_text,
-                        "fullPrice" => $lesson->price,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
-                        "packAuthor" => $lesson->instructor_name,
-                        "packLogo" => $lesson->thumbnail_logo,
-                        "price" => $lesson->discounted_price,
+                        "badge" => $lesson->badge_text,
+                        "price" => $lesson->price,
+                        "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                        "instructor" => $lesson->instructor_name,
+                        "logo" => $lesson->thumbnail_logo,
+                        "discounted_price" => $lesson->discounted_price,
                         "soldOut" => $lesson->sold_out,
                         "thumbnail" => $lesson->thumbnail,
                         "title" => $lesson->name,
-                        'FCP' => $key < 4 ? true : null,
+                        'fetch' => $key < 4 ? true : null,
                         "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                     ])
                 @endforeach
@@ -152,10 +154,10 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @foreach($accessories as $accessory)
                     @include('_partials.components.shop.product-card', [
-                        "badgeText" => $accessory->badge_text,
-                        "fullPrice" => $accessory->price,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
-                        "price" => $accessory->discounted_price,
+                        "badge" => $accessory->badge_text,
+                        "price" => $accessory->price,
+                        "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                        "discounted_price" => $accessory->discounted_price,
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                         "sizes" => $accessory->sizes,
                         "soldOut" => isset($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
@@ -176,10 +178,10 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @foreach($shirts as $shirt)
                         @include('_partials.components.shop.product-card', [
-                            "badgeText" => $shirt->badge_text,
-                            "fullPrice" => $shirt->price,
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                            "price" => $shirt->discounted_price,
+                            "badge" => $shirt->badge_text,
+                            "price" => $shirt->price,
+                            "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                            "discounted_price" => $shirt->discounted_price,
                             "size_case_sensitive" => $shirt->size_case_sensitive,
                             "sizes" => $shirt->sizes,
                             "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
@@ -200,10 +202,10 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @foreach($hoodies as $hoodie)
                         @include('_partials.components.shop.product-card', [
-                            "badgeText" => $hoodie->badge_text,
-                            "fullPrice" => $hoodie->price,
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                            "price" => $hoodie->discounted_price,
+                            "badge" => $hoodie->badge_text,
+                            "price" => $hoodie->price,
+                            "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                            "discounted_price" => $hoodie->discounted_price,
                             "size_case_sensitive" => $hoodie->size_case_sensitive,
                             "sizes" => $hoodie->sizes,
                             "soldOut" => isset($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
@@ -226,13 +228,13 @@
                     @foreach($misc as $miscItem)
                         @include('_partials.components.shop.product-card', [
                              "sku" => $miscItem->sku,
-                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
-                             "badgeText" => $miscItem->badge_text,
+                             "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                             "badge" => $miscItem->badge_text,
                              "thumbnail" => $miscItem->thumbnail,
                              "title" => $miscItem->name,
                              "cardDescription" => $miscItem->short_desc,
-                             "fullPrice" => $miscItem->price,
-                             "price" => $miscItem->discounted_price,
+                             "price" => $miscItem->price,
+                             "discounted_price" => $miscItem->discounted_price,
                              "sizes" => $miscItem->sizes,
                              "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
                              "category" => strtolower($miscItem->productType->name),
@@ -254,13 +256,13 @@
                     @foreach($lowStock as $lowStockItem)
                         @include('_partials.components.shop.product-card', [
                              "sku" => $lowStockItem->sku,
-                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lowStockItem->slug ),
-                             "badgeText" => $lowStockItem->badge_text,
+                             "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lowStockItem->slug ),
+                             "badge" => $lowStockItem->badge_text,
                              "thumbnail" => $lowStockItem->thumbnail,
                              "title" => $lowStockItem->name,
                              "cardDescription" => $lowStockItem->short_desc,
-                             "fullPrice" => $lowStockItem->price,
-                             "price" => $lowStockItem->discounted_price,
+                             "price" => $lowStockItem->price,
+                             "discounted_price" => $lowStockItem->discounted_price,
                              "sizes" => $lowStockItem->sizes,
                              "soldOut" => isset($products[$lowStockItem->sku]) ? $products[$lowStockItem->sku]->getStockAvailability() === 0 : $lowStockItem->sold_out,
                              "category" => strtolower($lowStockItem->productType->name),
