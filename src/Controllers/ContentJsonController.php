@@ -99,10 +99,10 @@ class ContentJsonController extends Controller
 
         $group_by = false;
         $contentTypes = $request->get('included_types', []);
-        if($request->get('tab', false)){
-            $tabs = $request->get('tab');
-            if(!is_array($request->get('tab'))){
-                $tabs = [$request->get('tab')];
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
             }
             foreach($tabs as $tab) {
                 $extra = explode(',', $tab);
