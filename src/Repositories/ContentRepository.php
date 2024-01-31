@@ -2436,6 +2436,11 @@ class ContentRepository extends RepositoryBase
 
         // get values that are in other tables
         $filterNameToTableNameAndColumnName = [
+            'instructor' => [
+                'table' => 'railcontent_content_instructors',
+                'column' => 'instructor_id',
+                'alias' => '_rci'
+            ],
             'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
@@ -2451,16 +2456,20 @@ class ContentRepository extends RepositoryBase
             $type =
                 ($this->typesToInclude[0] === 'song' ||
                     $this->typesToInclude[0] === 'course' ||
-                    $this->typesToInclude[0] === 'rudiment') ? $this->typesToInclude[0].'s' : $this->typesToInclude[0];
+                    $this->typesToInclude[0] === 'rudiment' ||
+                    $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' : $this->typesToInclude[0];
             $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
+            $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
             self::$catalogMetaAllowableFilters =
                 (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
         }
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'instructor',
                 'style',
                 'topic',
                 'focus',
+                'bpm',
                 'essentials',
                 'theory',
                 'creativity',
