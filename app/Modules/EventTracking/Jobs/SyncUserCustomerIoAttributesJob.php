@@ -19,7 +19,7 @@ class SyncUserCustomerIoAttributesJob extends BatchQueryJob
     private int $take;
     protected array $ids;
     private string $workspaceName;
-    private string $fromPermissions;
+    private bool $fromPermissions;
     private CustomerIoService $customerIoService;
     private ShopifySyncService $shopifySyncService;
 
