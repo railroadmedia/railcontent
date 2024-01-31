@@ -1393,7 +1393,7 @@ class ContentRepository extends RepositoryBase
                         ->addSelect('inner_content.lessons_grouped_by_field as lessons_grouped_by_field')
                         ->addSubJoinToQuery($subQuery)
                         ->directPaginate($this->page, $this->limit)
-                        ->orderBy('slug', 'asc');
+                        ->orderBy('slug', $this->orderDirection);
                 if (!empty($this->typesToInclude)) {
                     $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
                 }
@@ -1423,13 +1423,13 @@ class ContentRepository extends RepositoryBase
                 $contentRows =
                     $query->selectRaw(' "'.$this->groupByFields['associated_table']['column'].'" as type')
                         ->directPaginate($this->page, $this->limit)
-                        ->orderByRaw($orderBy.' asc')
+                        ->orderByRaw($orderBy.' '.$this->orderDirection)
                         ->getToArray();
             } else {
                 $contentRows =
                     $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
                         ->directPaginate($this->page, $this->limit)
-                        ->orderByRaw($this->groupByFields['field'].' asc')
+                        ->orderByRaw($this->groupByFields['field'].' '.$this->orderDirection)
                         ->getToArray();
             }
 
