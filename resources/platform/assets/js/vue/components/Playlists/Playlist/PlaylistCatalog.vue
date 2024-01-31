@@ -21,7 +21,7 @@
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[28px]">
                 <div class="tw-flex tw-flex-col">
                     <!-- Empty State -->
-                    <section v-if="playlistsStore.lessons.length === 0" 
+                    <section v-if="playlistsStore.lessons.length === 0"
                             class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
                         <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-6">
                             <musora-icon icon-name="playlist" width="45" height="45" />
@@ -257,7 +257,6 @@ onMounted(()=> {
 })
 
 onBeforeMount(() => {
-    console.log(props.lessons)
     playlistsStore.lessons = [...props.lessons.data];
 });
 </script>

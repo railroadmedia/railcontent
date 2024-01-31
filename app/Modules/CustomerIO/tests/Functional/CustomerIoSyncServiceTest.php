@@ -53,7 +53,8 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
         $this->createLifetimeProduct($user);
         $user->refresh();
 
-        $this->customerIoSyncService->getUsersMembershipAccessAttributesDeprecated($user);
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+        $this->customerIoSyncService->getUsersMembershipAccessAttributes($user, $brands);
 
         $lifetimeAccess = $this->getLifetimeMembershipAccessAttributes($user);
         $lifetimeMemberships = $this->getTrueLifetimeMembershipAccessAttributes($lifetimeAccess);
@@ -191,11 +192,11 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
      *
      * @param User $user
      * @return Collection
-     * @throws NonUniqueResultException
      */
     private function getLifetimeMembershipAccessAttributes(User $user): Collection
     {
-        $membershipAccessAttributes = collect($this->customerIoSyncService->getUsersMembershipAccessAttributesDeprecated($user));
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+        $membershipAccessAttributes = collect($this->customerIoSyncService->getUsersMembershipAccessAttributes($user, $brands));
         return $membershipAccessAttributes->filter(function ($value, $key) {
             return Str::endsWith($key, "membership_is_lifetime");
         });

@@ -177,16 +177,14 @@
                         @foreach($hoodies as $hoodie)
                             @include('_partials.components.shop.product-card', [
                                  "sku" => $hoodie->sku,
-                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                                 "badgeText" => $hoodie->badge_text,
+                                 "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                                 "badge" => $hoodie->badge_text,
                                  "thumbnail" => $hoodie->thumbnail,
                                  "title" => $hoodie->name,
-                                 "cardDescription" => $hoodie->short_desc,
-                                 "fullPrice" => $hoodie->price,
-                                 "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                                 "price" => $hoodie->price,
+                                 "discounted_price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                                  "sizes" => $hoodie->sizes,
                                  "soldOut" => isset($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
-                                 "category" => strtolower($hoodie->productType->name),
                                  "size_case_sensitive" => $hoodie->size_case_sensitive,
                             ])
                         @endforeach
@@ -201,17 +199,15 @@
                         @foreach($shirts as $shirt)
                             @include('_partials.components.shop.product-card', [
                                  "sku" => $shirt->sku,
-                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                                 "badgeText" => $shirt->badge_text,
+                                 "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                                 "badge" => $shirt->badge_text,
                                  "thumbnail" => $shirt->thumbnail,
                                  "title" => $shirt->name,
-                                 "cardDescription" => $shirt->short_desc,
-                                 "fullPrice" => $shirt->price,
-                                 "price" => $shirt->discounted_price,
+                                 "price" => $shirt->price,
+                                 "discounted_price" => $shirt->discounted_price,
                                  "sizes" => $shirt->sizes,
                                  "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
                                  "size_case_sensitive" => $shirt->size_case_sensitive,
-                                 "category" => strtolower($shirt->productType->name),
                             ])
                         @endforeach
                     </div>
@@ -225,16 +221,14 @@
                         @foreach($misc as $miscItem)
                             @include('_partials.components.shop.product-card', [
                                  "sku" => $miscItem->sku,
-                                 "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
-                                 "badgeText" => $miscItem->badge_text,
+                                 "href" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $miscItem->slug ),
+                                 "badge" => $miscItem->badge_text,
                                  "thumbnail" => $miscItem->thumbnail,
                                  "title" => $miscItem->name,
-                                 "cardDescription" => $miscItem->short_desc,
-                                 "fullPrice" => $miscItem->price,
-                                 "price" => $miscItem->discounted_price,
+                                 "price" => $miscItem->price,
+                                 "discounted_price" => $miscItem->discounted_price,
                                  "sizes" => $miscItem->sizes,
                                  "soldOut" => isset($products[$miscItem->sku]) ? $products[$miscItem->sku]->getStockAvailability() === 0 : $miscItem->sold_out,
-                                 "category" => strtolower($miscItem->productType->name),
                                  "size_case_sensitive" => $miscItem->size_case_sensitive,
                             ])
                         @endforeach

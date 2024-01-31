@@ -52,7 +52,7 @@ class UserAccessPermissionsService
     private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
     {
         //force using write db so we have latest data for query
-        $query = UserAccessPermission::on('musora_laravel_mysql::write')->where('user_id', '=', $userId);
+        $query = UserAccessPermission::onWriteConnection()->where('user_id', '=', $userId);
         if ($filterPermissionIds) {
             $query = $query->whereIn('permission_id', $filterPermissionIds);
         }
@@ -644,7 +644,7 @@ class UserAccessPermissionsService
             UserAccessPermissionsSourceEnum::Migration->value
         ];
 
-        UserAccessPermission::on('musora_laravel_mysql::write')
+        UserAccessPermission::onWriteConnection()
             ->where('user_id', '=', $user->id)
             ->whereIn('source', $rebuildSources)->delete();
     }

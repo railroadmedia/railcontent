@@ -9,27 +9,23 @@ use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\ResourceDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
-use App\Maps\ContentTypeHierarchyMap;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
-use App\Services\User\UserAccessService;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
@@ -1774,15 +1770,15 @@ class ContentPagesController extends BaseController
         //dd($lessonType);
 
         $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
-        $request->get('limit', 12),
-        $request->get('sort', '-popularity'),
-        [$lessonType],
-        $request->get('slug_hierarchy', []),
-        $request->get('required_parent_ids', []),
-        ['style,'.$genre],
-        $request->get('included_fields', []),
-        $request->get('required_user_states', []),
-        $request->get('included_user_states', []),);
+            $request->get('limit', 12),
+            $request->get('sort', '-popularity'),
+            [$lessonType],
+            $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
+            ['style,'.$genre],
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', []),);
 
         if ($initialContent->totalResults() === 0) {
             throw new NotFoundHttpException();
