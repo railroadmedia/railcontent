@@ -233,7 +233,7 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendationsByContentType($user_id, $brand, $contentTypes, RecommenderSection $section, bool $randomize=false, $limit=6)
+    public function getAllRecommendations($user_id, $brand, $contentTypes, bool $randomize=false, $limit=6)
     {
         $filter = $this->contentRepository->startFilter(
             1,
@@ -250,7 +250,12 @@ class ContentService
         if(!empty($cached)) {
             $recommendations = $cached;
         } else {
-            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+            $recommendations = [];
+            // this is not a long term solution to handle this by merging all recommendations.
+            foreach(RecommenderSection::cases() as $section) {
+                $allRecommendations[] = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+            }
+            $recommendations = zipperMerge($allRecommendations);
             $ttl = 60 * 60;
             Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
         }
@@ -264,7 +269,7 @@ class ContentService
         return (new ContentFilterResultsEntity([
             'results' => $content,
             'filter_options' => $filterOptions,
-            'total_results' => $filter->countFilter()
+            'total_results' => count($recommendations)
         ]));
     }
 
