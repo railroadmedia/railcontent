@@ -3,14 +3,19 @@
 namespace App\Decorators\GroupedContent;
 
 use App\Decorators\Content\ModeDecoratorBase;
-use App\Decorators\Content\UrlDecorator;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
-use Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 
 class GroupedContentDecorator extends ModeDecoratorBase
 {
+    protected UserContentProgressService $userContentProgressService;
 
+    public function __construct(
+        UserContentProgressService $userContentProgressService,
+    ) {
+        $this->userContentProgressService = $userContentProgressService;
+    }
     public function decorate(Collection $contents)
     {
         $contentsOfType = $contents->whereIn('type', ['style', 'artist', 'instructor']);
@@ -26,6 +31,10 @@ class GroupedContentDecorator extends ModeDecoratorBase
                     'brand' => brand(),
                     'slug' => urlencode(urlencode($content['artist'])),
                 ]);
+                $contents[$index]['total_plays'] = $this->userContentProgressService->countByArtistTypesUserProgress(
+                    ['song'],
+                    $content['artist']
+                );
             } elseif ($content['type'] == 'style') {
                 $contents[$index]['url'] = url()->route('platform.content.genre.show', [
                     'brand' => brand(),
@@ -34,10 +43,10 @@ class GroupedContentDecorator extends ModeDecoratorBase
                 ]);
             } else {
                 $contents[$index]['url'] = url()->route('platform.content.coach.show', [
-                    'brand' => brand(),
-                    'firstContentSlug' => $content['slug'],
-                    'firstContentId' => $content['id'],
-                ]).'?included_types[]='.$content['content_type'];
+                        'brand' => brand(),
+                        'firstContentSlug' => $content['slug'],
+                        'firstContentId' => $content['id'],
+                    ]).'?included_types[]='.$content['content_type'];
             }
         }
 
