@@ -2474,6 +2474,7 @@ class ContentRepository extends RepositoryBase
                 'theory',
                 'creativity',
                 'lifestyle',
+                'type',
             ];
 
         $filterOptions = array_unique($filterOptions);
@@ -2601,6 +2602,7 @@ class ContentRepository extends RepositoryBase
         $filterOptionNameToContentTableColumnName = [
             'difficulty' => ConfigService::$tableContent.'.difficulty',
             'artist' => ConfigService::$tableContent.'.artist',
+            'type' => ConfigService::$tableContent . '.type',
             'instrument' => ConfigService::$tableContent.'.instrument',
             'content_id' => ConfigService::$tableContent.'.id',
         ];
