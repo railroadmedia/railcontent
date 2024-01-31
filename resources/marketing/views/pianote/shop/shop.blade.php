@@ -36,16 +36,15 @@
         @php
             $bundles = [
                 [
-                    'slug' => '/new-year#customize-anchor',
-                    'desc' => 'Join Pianote and get 4 books, 4 courses<br>  a practice poster PLUS a metronome.',
+                    'slug' => '/clothing',
+                    'desc' => 'This month only - add Pianote t-shirts,<br> hoodies, and mugs to your cart for just $1.',
                     'full' => true,
                     'visible' => 1,
-                    'price' => 855,
-                    'discountedPrice' => 240,
                     'buttonColor' => '#F61A30',
-                    'title' => "New Year's Bundle",
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/new-year-bundle.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/december/new-year-bundle-m.jpg',
+                    'buttonText' => 'GET YOURS',
+                    'logo' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/530x0/filters:quality(95)/marketing/pianote/promos/february/pianote-dollar-logo.png",
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/february/single-banner-pianote.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/february/pianote-dollar-banner-m.jpg',
                 ],
             ];
         @endphp
