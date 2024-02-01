@@ -37,59 +37,19 @@
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
-
-            if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability())) {
-                $bundles = [
-                    [
-                        'slug' => '/drumshop/kit',
-                        'desc' => 'Get the ultimate starter e-kit <br> + one year of Drumeo.',
-                        'visible' => 1,
-                        'price' => floatval($productPrices['alesis-ekit']->price),
-                        'discountedPrice' => floatval($productPrices['alesis-ekit']->discounted_price),
-                        'buttonColor' => '#0A69D0',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-nitro-max-logo.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-shop.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-shop-m.jpg',
-                    ],
-                    [
-                        'slug' => '/new-year#customize-anchor',
-                        'desc' => 'A practice pad, stand and sticks <br> so you can practice anywhere.',
-                        'visible' => 1,
-                        'price' => 240,
-                        'discountedPrice' => 200,
-                        'buttonColor' => '#0A69D0',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/practice-anywhere-logo.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/practice-anywhere.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/practice-anywhere-m.jpg',
-                    ],
-                ];
-            }
-            else {
-                $bundles = [
-                    [
-                        'slug' => '/drumshop/kit',
-                        'desc' => 'Get the ultimate starter e-kit <br> + one year of Drumeo.',
-                        'visible' => 1,
-                        'soldOut' => true,
-                        'price' => 'SOLD OUT',
-                        'buttonColor' => '#0A69D0',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-nitro-max-logo.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-shop.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/december/alesis-shop-m.jpg',
-                    ],
-                    [
-                        'slug' => '/new-year#customize-anchor',
-                        'desc' => 'A practice pad, stand and sticks <br> so you can practice anywhere.',
-                        'visible' => 1,
-                        'price' => 240,
-                        'discountedPrice' => 200,
-                        'buttonColor' => '#0A69D0',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/december/practice-anywhere-logo.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/practice-anywhere.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/december/practice-anywhere-m.jpg',
-                    ],
-                ];
-            }
+            $bundles = [
+                [
+                    'slug' => '/clothing',
+                    'desc' => 'This month only - add Drumeo t-shirts<br> and hoodies to your cart for just $1.',
+                    'full' => true,
+                    'visible' => 1,
+                    'buttonColor' => '#0A69D0',
+                    'buttonText' => 'GET YOURS',
+                    'logo' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/530x0/filters:quality(95)/marketing/drumeo/promos/february/drumeo-dollar-logo.png",
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/february/single-banner-drumeo.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/february/drumeo-dollar-banner-m.jpg',
+                ],
+            ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
             "header" => 'Featured Deals',
@@ -220,6 +180,31 @@
             </div>
         </section>
 
+
+        {{--   one dollar     --}}
+        <div id="oneDollar" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
+            <div class="container">
+                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> $1 Drum Merch</strong></h5>
+                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
+                    @foreach($sale1dollar as $key => $item)
+                        @include('_partials.components.shop.product-card', [
+                        "badge" => $item->badge_text,
+                        "discounted_price" => $item->discounted_price,
+                        "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "price" => $item->price,
+                        "size_case_sensitive" => $item->size_case_sensitive,
+                        "sizes" => $item->sizes,
+                        "sku" => $item->sku,
+                        "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "thumbnail" => $item->thumbnail,
+                        "title" => $item->name,
+                        ])
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
         <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <div class="container">
@@ -329,27 +314,27 @@
 
         {{--   limited     --}}
         <div id="limited" class="anchor"></div>
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
-            <div class="container">
-                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>
-                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
-                    @foreach($lowStock as $key => $item)
-                        @include('_partials.components.shop.product-card', [
-                            "badge" => $item->badge_text,
-                            "discounted_price" => $item->discounted_price,
-                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                            "price" => $item->price,
-                            "size_case_sensitive" => $item->size_case_sensitive,
-                            "sizes" => $item->sizes,
-                            "sku" => $item->sku,
-                            "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                            "thumbnail" => $item->thumbnail,
-                            "title" => $item->name,
-                        ])
-                    @endforeach
-                </div>
-            </div>
-        </section>
+{{--        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">--}}
+{{--            <div class="container">--}}
+{{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>--}}
+{{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">--}}
+{{--                    @foreach($lowStock as $key => $item)--}}
+{{--                        @include('_partials.components.shop.product-card', [--}}
+{{--                            "badge" => $item->badge_text,--}}
+{{--                            "discounted_price" => $item->discounted_price,--}}
+{{--                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),--}}
+{{--                            "price" => $item->price,--}}
+{{--                            "size_case_sensitive" => $item->size_case_sensitive,--}}
+{{--                            "sizes" => $item->sizes,--}}
+{{--                            "sku" => $item->sku,--}}
+{{--                            "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,--}}
+{{--                            "thumbnail" => $item->thumbnail,--}}
+{{--                            "title" => $item->name,--}}
+{{--                        ])--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </section>--}}
     </div>
 @endsection
 
