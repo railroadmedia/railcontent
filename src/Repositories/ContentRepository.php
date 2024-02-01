@@ -1556,50 +1556,15 @@ class ContentRepository extends RepositoryBase
             $query->restrictFollowedContent();
         }
 
-        //        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
-        //
-        //            return $this->getFilterOptionsFromCompiledColumn($query);
-        //        }
-
-        $possibleContentFields = $this->getFilterOptionsForQuery($query);
-
-        if (self::$countFilterOptionItems) {
+        if (!self::$countFilterOptionItems) {
+            $possibleContentFields = $this->getFilterOptionsForQuery($query);
+        } else{
             $includedFields = collect($this->includedFields);
             $selectedFilterCategories =
                 $includedFields->pluck('name')
                     ->unique();
-            $initialFilters = $this->includedFields;
 
-            $myResults = [];
-
-            foreach ($selectedFilterCategories as $category) {
-                $otherCategories = $includedFields->where('name', '!=', $category);
-
-                $this->includedFields =
-                    $otherCategories->values()
-                        ->toArray();
-                $allQuery =
-                    $this->query()
-                        ->selectFilterOptionColumns()
-                        ->restrictByUserAccess()
-                        ->restrictByFields($this->requiredFields)
-                        ->includeByFields($this->includedFields)
-                        ->restrictByUserStates($this->requiredUserStates)
-                        ->includeByUserStates($this->includedUserStates)
-                        ->restrictByTypes($this->typesToInclude)
-                        ->restrictByParentIds($this->requiredParentIds);
-                $possibleContentFields2 = $this->getFilterOptionsForQuery($allQuery);
-                $myResults[$category] = $possibleContentFields2[$category];
-                $this->includedFields = $initialFilters;
-            }
-
-            if (!empty($selectedFilterCategories ?? [])) {
-                foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue) {
-                    if (isset($myResults[$possibleContentFieldKey])) {
-                        $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
-                    }
-                }
-            }
+            $possibleContentFields = $this->getFilterOptionsWithCounting($selectedFilterCategories);
         }
 
         return $possibleContentFields;
@@ -2928,5 +2893,159 @@ class ContentRepository extends RepositoryBase
         }
 
         return $contentRows->count(DB::raw('DISTINCT ' . ConfigService::$tableContent . '.id'));
+    }
+
+    private function getFilterOptionsWithCounting($selectedFilterCategories)
+    {
+        $filterOptionsArray = [];
+
+        // get values that are in other tables
+        $filterNameToTableNameAndColumnName = [
+            'instructor' => [
+                'table' => 'railcontent_content_instructors',
+                'column' => 'instructor_id',
+                'alias' => '_rci'
+            ],
+            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
+            'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
+            'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
+            'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
+            'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
+            'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
+        ];
+
+        if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
+            $brand = config('railcontent.brand');
+            $type =
+                ($this->typesToInclude[0] === 'song' ||
+                    $this->typesToInclude[0] === 'course' ||
+                    $this->typesToInclude[0] === 'rudiment' ||
+                    $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' : $this->typesToInclude[0];
+            $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
+            $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
+        }
+
+        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'instructor',
+                'style',
+                'topic',
+                'focus',
+                'bpm',
+                'essentials',
+                'theory',
+                'creativity',
+                'lifestyle',
+                'type',
+            ];
+
+        $filterOptions = array_unique($filterOptions);
+
+        $includedFields = collect($this->includedFields);
+        $initialFilters = $this->includedFields;
+
+        foreach ($filterOptions as $filterOption) {
+            $filterOptionTableName = $filterNameToTableNameAndColumnName[$filterOption]['table'] ?? null;
+            $filterOptionTableAliasName = $filterNameToTableNameAndColumnName[$filterOption]['alias'] ?? null;
+            $filterOptionColumnName = $filterNameToTableNameAndColumnName[$filterOption]['column'] ?? null;
+
+            if (empty($filterOptionTableName) || empty($filterOptionColumnName)) {
+                continue;
+            }
+
+                if(in_array($filterOption, $selectedFilterCategories->toArray()))
+                {
+                    $otherCategories = $includedFields->where('name', '!=', $filterOption);
+                    $this->includedFields =
+                    $otherCategories->values()
+                        ->toArray();
+                }
+
+                $db = DB::table($filterOptionTableName.' as m');
+                $db->selectRaw('m.'.$filterOptionColumnName.' as grouped_by_value,	
+	COUNT( * ) AS lessonsCount');
+                $rq = $this->query()->select('railcontent_content.id')
+                    ->restrictByUserAccess()
+                    ->restrictByFields($this->requiredFields)
+                    ->includeByFields($this->includedFields)
+                    ->restrictByUserStates($this->requiredUserStates)
+                    ->includeByUserStates($this->includedUserStates)
+                    ->restrictByTypes($this->typesToInclude)
+                    ->restrictByParentIds($this->requiredParentIds)
+                    ->whereRaw('railcontent_content.id = m.content_id');
+                $tableResults = $db->joinLateral($rq, 'recent')->whereNotNull('recent.id')->groupBy('m.'.$filterOptionColumnName)->get() ;
+            $this->includedFields = $initialFilters;
+
+            foreach($tableResults ?? [] as $result){
+                $filterOptionsArray[$filterOptionColumnName][] = $result->grouped_by_value.' ('.$result->lessonsCount.')';
+            }
+            if(isset($filterOptionsArray[$filterOptionColumnName])) {
+                usort($filterOptionsArray[$filterOptionColumnName], [$this, 'sortByAlphaThenNumeric']);
+            }
+        }
+
+        // todo: now to the right place
+        $filterOptionNameToContentTableColumnName = [
+            'difficulty' => ConfigService::$tableContent.'.difficulty',
+            'artist' => ConfigService::$tableContent.'.artist',
+            'type' => ConfigService::$tableContent . '.type',
+            'instrument' => ConfigService::$tableContent.'.instrument',
+            'content_id' => ConfigService::$tableContent.'.id',
+        ];
+
+        foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
+            if (!in_array($filterOptionName, $filterOptions)) {
+                continue;
+            }
+            if(in_array($filterOptionName, $selectedFilterCategories->toArray())) {
+                $otherCategories = $includedFields->where('name', '!=', $filterOptionName);
+                $this->includedFields =
+                    $otherCategories->values()
+                        ->toArray();
+            }
+            $rq =
+                $this->query()
+                    ->selectFilterOptionColumns()
+                    ->addSelect(['railcontent_content.id as id'])
+                    ->restrictByUserAccess()
+                    ->restrictByFields($this->requiredFields)
+                    ->includeByFields($this->includedFields)
+                    ->restrictByUserStates($this->requiredUserStates)
+                    ->includeByUserStates($this->includedUserStates)
+                    ->restrictByTypes($this->typesToInclude)
+                    ->restrictByParentIds($this->requiredParentIds)
+                    ->groupBy($filterOptionNameToContentTableColumnName)
+                    ->select($filterOptionNameToContentTableColumnName);
+            $tableResults = $rq->get();
+            $this->includedFields = $initialFilters;
+            $counts[$filterOptionName] =
+                $tableResults->whereNotNull($filterOptionName)
+                    ->pluck($filterOptionName)
+                    ->countBy();
+            $filterOptionsArray[$filterOptionName] =
+                $counts[$filterOptionName]->keys()
+                    ->toArray();
+            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
+                $countingItems = '';
+                if (self::$countFilterOptionItems) {
+                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
+                    $countingItems = ' ('.$nr.')';
+                }
+
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
+                    ucwords(
+                        $filterOptionValueToClean.$countingItems
+                    )
+                );
+            }
+
+            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
+            usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
+        }
+
+        return $filterOptionsArray;
     }
 }
