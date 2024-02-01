@@ -89,6 +89,7 @@ class ContentJsonController extends Controller
         }
 
         $required_fields = $request->get('required_fields', []);
+        $included_fields = $request->get('included_fields', []);
 
         if ($request->has('term')) {
             $required_fields[] = 'name,%'.$request->get('term').'%,string,like';
@@ -125,6 +126,11 @@ class ContentJsonController extends Controller
             $required_fields[] = 'artist,%'.$request->get('title').'%,string,like';
         }elseif ($request->has('title') && $group_by == 'style') {
             $required_fields[] = 'style,%'.$request->get('title').'%,string,like';
+        }elseif ($request->has('title') && $group_by == 'instructor') {
+            $instructors = $this->contentService->getWhereTypeInAndStatusAndField(['instructor'], ['published'], 'name', '%'.$request->get('title').'%','string', 'LIKE');
+            foreach($instructors->pluck('id') ?? [] as $instructor){
+                $included_fields[] = 'instructor,'.$instructor.',integer,=';
+            }
         }else{
             $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
         }
@@ -136,7 +142,7 @@ class ContentJsonController extends Controller
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             $required_fields,
-            $request->get('included_fields', []),
+            $included_fields,
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
             $request->get('include_filters', true),
