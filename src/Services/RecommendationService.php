@@ -13,10 +13,18 @@ enum AccessMethod {
     case HUGGINGFACE;
 }
 
+enum APIEndPoint: string
+{
+    case V1 = 'https://MusoraProductDepartment-recsys.hf.space/recommend';
+    case ALT1 = 'https://musoraproductdepartment-recsys-alt-1.hf.space/recommend';
+    case ALT2 = 'https://musoraproductdepartment-recsys-alt-2.hf.space/recommend';
+}
+
 class RecommendationService
 {
 
     public AccessMethod $accessMethod;
+    public APIEndPoint $APIEndPoint;
     private array $RETRY_ERROR_CODES = [500, 503];
 
     public function __construct(
@@ -27,6 +35,7 @@ class RecommendationService
             'pianote' => [RecommenderSection::Course],
             'singeo' => [RecommenderSection::Course],
         ];
+        $this->APIEndPoint = APIEndPoint::V1;
     }
 
     public function getFilteredRecommendations($userID, $brand, RecommenderSection $section)
@@ -51,7 +60,8 @@ class RecommendationService
 
     private function getFilteredRecommendationsUsingHuggingFace($userIDs, $brand, RecommenderSection $section)
     {
-        $url = env('HUGGINGFACE_URL');
+        //$url = env('HUGGINGFACE_URL');
+        $url = $this->APIEndPoint->value;
         $authToken = env('HUGGINGFACE_TOKEN');
         $data = [
             'user_ids' => $userIDs,

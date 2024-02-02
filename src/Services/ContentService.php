@@ -233,9 +233,61 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
+    public function getAllRecommendations($user_id, $brand, $contentTypes, bool $randomize=false, $limit=6)
+    {
+        $filter = $this->getFilterForRecommendations($limit, $contentTypes);
+        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
+        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-ALL';
+        $callback = function() use ($user_id, $brand) {
+            $allRecommendations = [];
+            foreach(RecommenderSection::cases() as $section) {
+                $allRecommendations[] = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+            }
+            return zipperMerge($allRecommendations);
+        };
+        $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
+        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $limit);
+        return $this->getContentFilterResultsFromRecommendations($recommendations, $filter, $filterOptions);
+    }
+
+    /**
+     *
+     *
+     * @param int user_id
+     * @param string brand
+     * @param int limit -
+     * @return mixed|Collection|null
+     */
     public function getRecommendationsByContentType($user_id, $brand, $contentTypes, RecommenderSection $section, bool $randomize=false, $limit=6)
     {
-        $filter = $this->contentRepository->startFilter(
+        $filter = $this->getFilterForRecommendations($limit, $contentTypes);
+        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
+        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $section->value;
+        $callback = function() use ($user_id, $brand, $section) {
+            return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+        };
+        $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
+        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $limit);
+        return $this->getContentFilterResultsFromRecommendations($recommendations, $filter, $filterOptions);
+    }
+
+    private function getOrCacheRecommendations($cacheKey, $callback)
+    {
+        $cached = Cache::store('redis')->get($cacheKey);
+        // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
+        if(is_null($cached)) {
+            $recommendations = $cached;
+        } else {
+            $recommendations = $callback();
+            $ttl = 60 * 60;
+            Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
+        }
+        return $recommendations;
+    }
+
+    private function getFilterForRecommendations($limit, $contentTypes)
+    {
+        return $this->contentRepository->startFilter(
             1,
             $limit,
             'published_on',
@@ -244,27 +296,25 @@ class ContentService
             [],
             [],
         );
-        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand;
-        $cached = Cache::store('redis')->get($cacheKey);
-        if(!empty($cached)) {
-            $recommendations = $cached;
-        } else {
-            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
-            $ttl = 60 * 60;
-            Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
-        }
+    }
 
+    private function postProcessRecommendationts($recommendations, $randomize, $limit)
+    {
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $limit);
         } else {
             $recommendations = array_slice($recommendations, 0, $limit);
         }
+        return $recommendations;
+    }
+
+    private function getContentFilterResultsFromRecommendations($recommendations, $filter, $filterOptions)
+    {
         $content = $this->getByIds($recommendations);
         return (new ContentFilterResultsEntity([
             'results' => $content,
             'filter_options' => $filterOptions,
-            'total_results' => $filter->countFilter()
+            'total_results' => count($recommendations)
         ]));
     }
 
