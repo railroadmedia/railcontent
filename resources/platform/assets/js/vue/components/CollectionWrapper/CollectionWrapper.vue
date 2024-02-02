@@ -355,7 +355,6 @@ const handleTabChange = (tab) => {
 }
 
 onBeforeMount(() => {
-    collectionStore.getURLParams();
     collectionStore.setDefaults({
         isCoach: isCoach.value,
         content: props.preLoadedContent,
@@ -372,6 +371,7 @@ onBeforeMount(() => {
         sortOptions: props.sortOptions,
         defaultSort: props.defaultSort,
     })
+    collectionStore.getURLParams();
 })
 
 onMounted(() => {
