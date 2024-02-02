@@ -63,8 +63,8 @@ use Railroad\Railforums\Repositories\CategoryRepository;
 use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
-use Railroad\Referral\Events\EmailInvite;
-use Railroad\Referral\Events\ReferralClaimed;
+use App\Modules\Referral\Events\EmailInvite;
+use App\Modules\Referral\Events\ReferralClaimed;
 use Throwable;
 
 class CustomerIoSyncEventListener

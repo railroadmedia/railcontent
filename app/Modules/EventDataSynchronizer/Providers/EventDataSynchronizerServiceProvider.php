@@ -60,11 +60,11 @@ use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Referral\Events\ReferralClaimed;
+use App\Modules\Referral\Events\ReferralClaimed;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
-use Railroad\Referral\Events\EmailInvite;
+use App\Modules\Referral\Events\EmailInvite;
 
 class EventDataSynchronizerServiceProvider extends EventServiceProvider
 {
