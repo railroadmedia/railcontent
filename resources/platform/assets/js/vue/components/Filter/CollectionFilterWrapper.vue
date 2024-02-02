@@ -61,10 +61,6 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    preLoadedContent: {
-        type: Object,
-        default: () => ({}),
-    },
     selectedFilters: {
         type: Object,
         default: () => ({}),
