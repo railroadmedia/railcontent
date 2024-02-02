@@ -2959,15 +2959,13 @@ class ContentRepository extends RepositoryBase
                 if(in_array($filterOption, $selectedFilterCategories->toArray()))
                 {
                     $otherCategories = $includedFields->where('name', '!=', $filterOption);
-                    $this->includedFields =
-                    $otherCategories->values()
-                        ->toArray();
+                    $this->includedFields = $otherCategories->values()->toArray();
                 }
 
                 $db = DB::table($filterOptionTableName.' as m');
                 $db->selectRaw('m.'.$filterOptionColumnName.' as grouped_by_value,	
-	COUNT( * ) AS lessonsCount');
-                $rq = $this->query()->select('railcontent_content.id')
+	COUNT( DISTINCT(lessons.id)) AS lessonsCount');
+                $rq = $this->query()->selectRaw(' railcontent_content.id')
                     ->restrictByUserAccess()
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
@@ -2976,8 +2974,9 @@ class ContentRepository extends RepositoryBase
                     ->restrictByTypes($this->typesToInclude)
                     ->restrictByParentIds($this->requiredParentIds)
                     ->whereRaw('railcontent_content.id = m.content_id');
-                $tableResults = $db->joinLateral($rq, 'recent')->whereNotNull('recent.id')->groupBy('m.'.$filterOptionColumnName)->get() ;
-            $this->includedFields = $initialFilters;
+
+                $tableResults = $db->joinLateral($rq, 'lessons')->whereNotNull('lessons.id')->groupBy('m.'.$filterOptionColumnName)->get() ;
+                $this->includedFields = $initialFilters;
 
             foreach($tableResults ?? [] as $result){
                 $filterOptionsArray[$filterOptionColumnName][] = $result->grouped_by_value.' ('.$result->lessonsCount.')';
