@@ -18,7 +18,7 @@
         ]
     ])
 
-    @component('partials._header-banner', [
+    {{-- @component('partials._header-banner', [
         'backgroundImage' => $pack->fetch('data.header_image_url'),
         'hideUser' => true,
         'hideBrandGradient' => $pack['slug'] == 'piano-technique-made-easy',
@@ -51,7 +51,6 @@
                         </div>
                     </div>
                 @endif
-                {{-- Logo --}}
                 <img alt="{{ $pack->fetch('title') }} Logo"
                     class="tw-w-full tw-transition-opacity tw-max-w-[300px] tw-opacity-0"
                     src="{{ $pack->fetch('data.logo_image_url') }}"
@@ -59,9 +58,21 @@
                 >
             </div>
         @endslot
-    @endcomponent
+    @endcomponent --}}
 
-    @include('partials.bladesora.members.content.content-info-subheader', [
+    <packs-header 
+        title="Packs" 
+        hero-img="{{ $pack->fetch('data.header_image_url') }}" 
+        additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
+        primary-cta-text="start/continue to next lesson"
+        primary-cta-url="{{ $nextLessonUrl }}"
+        :rest-progress="true"
+        content-id="{{ $parentContent->fetch('id') }}"
+    >
+    </packs-header>
+
+
+    {{-- @include('partials.bladesora.members.content.content-info-subheader', [
         "infoData" => $infoData,
         "contentType" => "pack",
         "contentId" => $pack->fetch('id'),
@@ -71,7 +82,7 @@
         'addToList' => false,
         'isAdded' => false,
         'brand' => '{{ $brand }}',
-    ])
+    ]) --}}
 
     @if(!empty($pack->fetch('*fields.instructor')) || !empty($pack->fetch('data.description')))
         <content-info

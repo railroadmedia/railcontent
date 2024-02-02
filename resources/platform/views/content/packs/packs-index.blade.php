@@ -6,7 +6,7 @@
 
 @section('content')
 
-    @component('partials._header-banner', [
+    {{-- @component('partials._header-banner', [
         'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/' . $brand . '-header.jpg',
     ])
         @slot('content')
@@ -35,7 +35,12 @@
                 </div>
             </div>
         @endslot
-    @endcomponent
+    @endcomponent --}}
+
+    <packs-header 
+        icon-name="box-filled" 
+        title="Packs">
+    </packs-header>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
         <div class="tw-flex tw-flex-col">

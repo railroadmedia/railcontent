@@ -7,7 +7,7 @@
 @section('content')
         <div v-cloak>
 
-        @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
+        {{-- @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
@@ -36,9 +36,9 @@
                     ],
                 ]
             ])
-        @endif
+        @endif --}}
 
-        @component('partials._header-banner', [
+        {{-- @component('partials._header-banner', [
             'backgroundImage' => $pack->fetch('data.header_image_url'),
             'hideUser' => true,
         ])
@@ -63,7 +63,22 @@
             "addToList" => !in_array($parentContent->fetch('type'), ['learning-path', 'pack-bundle']),
             "downloadableResources" => $pack['resources'] ?? [],
             "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
-        ])
+        ]) --}}
+
+        @include('content.breadcrumbs._overview-breadcrumbs')
+
+        <packs-header 
+            title="Packs" 
+            hero-img="{{ $pack->fetch('data.header_image_url') }}" 
+            additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
+            primary-cta-text="start/continue to next lesson"
+            primary-cta-url="{{ $nextLessonUrl }}"
+            progress="{{ $parentContent->fetch('progress_percent', 0) }}"
+            back-to-all-lessons-url="{{ url()->route('platform.packs') }}"
+            :rest-progress="true"
+            content-id="{{ $parentContent->fetch('id') }}"
+        >
+        </packs-header>
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
             <div class="tw-flex tw-flex-col">
