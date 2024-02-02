@@ -275,7 +275,7 @@ class PackPagesController extends Controller
                 ->toResponseRawJson();
         }
 
-        return view('content.overview', [
+        return view('content.packs.pack-overview', [
             "pack" => $pack,
             "parentContent" => $thisPackBundle,
             "childContent" => $childContent->toResponseRawJson(),

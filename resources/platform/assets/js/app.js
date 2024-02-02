@@ -41,6 +41,7 @@ import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 //import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
+import PacksHeader from './vue/components/PageHeaders/PacksHeader.vue'
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -276,6 +277,7 @@ app.component('AppContainer', AppContainer)
     //.component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
+    .component('PacksHeader', PacksHeader)
     .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
