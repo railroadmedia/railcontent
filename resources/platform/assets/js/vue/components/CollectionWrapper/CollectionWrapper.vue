@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :sort-options="collectionStore.getSortOptions()" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :sort-options="collectionStore.getSortOptions()" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -10,8 +10,6 @@
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
-                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
-                            :total-results="getTotalResults" />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -200,10 +198,6 @@ const isCourse = computed(() => {
     return props.collectionType === 'course';
 })
 
-const isPlayAlong = computed(() => {
-    return props.collectionType === 'play-along';
-})
-
 const isSolos = computed(() => {
     return props.collectionType === 'solos';
 });
@@ -320,10 +314,6 @@ const getCurrentPage = computed(() => {
 
 const getTotalPages = computed(() => {
     return activeTabData.value && activeTabData.value.totalPages;
-})
-
-const getTotalResults = computed(() => {
-    return activeTabData.value && activeTabData.value.totalResults;
 })
 
 const getActiveTab = computed(() => {
