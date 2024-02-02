@@ -28,6 +28,7 @@
         <div v-if="!hideFilter" class="tw-flex tw-grow tw-items-start tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
                 <FilterSearch v-if="!hideSearch" :search-term="searchTerm" @on-submit="handleSubmit" />
+                <slot name="extra-icon"></slot>
                 <template v-if="!hideFilterIcon">
                     <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                         class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-black tw-bg-[#000C17] dark:tw-bg-white dark:tw-border-white tw-rounded-full">
