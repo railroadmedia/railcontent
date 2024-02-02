@@ -25,7 +25,7 @@ use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Structures\Purchaser;
-use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
+use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Mailora\Services\MailService;
 use App\Modules\Referral\Exceptions\NotFoundException;
 use App\Modules\Referral\Exceptions\ReferralException;

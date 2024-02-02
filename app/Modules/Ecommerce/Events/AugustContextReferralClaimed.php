@@ -2,44 +2,70 @@
 
 namespace App\Modules\Ecommerce\Events;
 
-use App\Modules\Ecommerce\Collections\OrderCollection;
-use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
-use Illuminate\Support\Collection;
+use App\Modules\Referral\Models\Referrer;
 
-class UserAccessPermissionsUpdated
+class AugustContestReferralClaimed
 {
-    private UserAccessPermissionsCollection $userAccessPermissions;
-    private ?OrderCollection $orders;
-    private $subscriptions;
+    private Referrer $referrer;
+    private int $productId;
+    private int $userId;
 
-    public function __construct(
-        UserAccessPermissionsCollection $userAccessPermissions,
-        ?OrderCollection $orders,
-        $subscriptions
-    ) {
-        $this->userAccessPermissions = $userAccessPermissions;
-        $this->orders = $orders;
-        $this->subscriptions = $subscriptions;
+    /**
+     * ReferralClaimed constructor.
+     */
+    public function __construct(Referrer $referrer, int $productId, int $userId)
+    {
+        $this->referrer = $referrer;
+        $this->productId = $productId;
+        $this->userId = $userId;
     }
 
-    public function getUserAccessPermissions(): UserAccessPermissionsCollection
+    /**
+     * @return Referrer
+     */
+    public function getReferrer(): Referrer
     {
-        return $this->userAccessPermissions;
+        return $this->referrer;
     }
 
-    public function getUserId()
+    /**
+     * @param Referrer $referrer
+     */
+    public function setReferrer(Referrer $referrer): void
     {
-        return $this->userAccessPermissions->getUserId();
+        $this->referrer = $referrer;
     }
 
-    public function getOrderCollection(): ?OrderCollection
+    /**
+     * @return int
+     */
+    public function getProductId(): int
     {
-        return $this->orders;
+        return $this->productId;
     }
 
-    public function getSubscriptions()
+    /**
+     * @param int $productId
+     */
+    public function setProductId(int $productId): void
     {
-        return $this->subscriptions;
+        $this->productId = $productId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
     }
 
 }
