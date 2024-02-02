@@ -229,16 +229,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd"
+                "reference": "3e3f413fbbaacd9632b1612941b363fa26a72e52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/c3b518f321f26e786554480de580f06b9f34d1cd",
-                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/3e3f413fbbaacd9632b1612941b363fa26a72e52",
+                "reference": "3e3f413fbbaacd9632b1612941b363fa26a72e52",
                 "shasum": ""
             },
             "require": {
@@ -246,7 +246,7 @@
                 "amphp/byte-stream": "^2",
                 "amphp/cache": "^2",
                 "amphp/parser": "^1",
-                "amphp/windows-registry": "^1",
+                "amphp/windows-registry": "^1.0.1",
                 "daverandom/libdns": "^2.0.2",
                 "ext-filter": "*",
                 "php": ">=8.1",
@@ -256,7 +256,7 @@
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "5.20"
             },
             "type": "library",
             "autoload": {
@@ -305,7 +305,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2.1.0"
+                "source": "https://github.com/amphp/dns/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -313,7 +313,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-18T15:49:57+00:00"
+            "time": "2024-01-30T23:25:30+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.297.4",
+            "version": "3.298.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e9d7c0e488eaffd9232c9ff419c34c8882b379e5"
+                "reference": "55536f81006d8721c51e342d638e7ccc3529e754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e9d7c0e488eaffd9232c9ff419c34c8882b379e5",
-                "reference": "e9d7c0e488eaffd9232c9ff419c34c8882b379e5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/55536f81006d8721c51e342d638e7ccc3529e754",
+                "reference": "55536f81006d8721c51e342d638e7ccc3529e754",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.297.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.298.0"
             },
-            "time": "2024-01-30T19:05:34+00:00"
+            "time": "2024-01-31T19:06:05+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -6446,16 +6446,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.63.0",
+            "version": "v1.63.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "d859aff69254e6b35771087f38f4c8bd5ccf8c10"
+                "reference": "4870c5e4f1fd582f6efe7c327bf17d65cb229a89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/d859aff69254e6b35771087f38f4c8bd5ccf8c10",
-                "reference": "d859aff69254e6b35771087f38f4c8bd5ccf8c10",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/4870c5e4f1fd582f6efe7c327bf17d65cb229a89",
+                "reference": "4870c5e4f1fd582f6efe7c327bf17d65cb229a89",
                 "shasum": ""
             },
             "require": {
@@ -6509,9 +6509,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.63.0"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.63.1"
             },
-            "time": "2024-01-18T11:10:47+00:00"
+            "time": "2024-01-31T16:52:33+00:00"
         },
         {
             "name": "laravel/vapor-core",
@@ -10138,12 +10138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "84baf4995d6de9b9c5e5747c8e073af21fc530ed"
+                "reference": "67416550066d7ab43c61aeb975b1eb1703dd0350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/84baf4995d6de9b9c5e5747c8e073af21fc530ed",
-                "reference": "84baf4995d6de9b9c5e5747c8e073af21fc530ed",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/67416550066d7ab43c61aeb975b1eb1703dd0350",
+                "reference": "67416550066d7ab43c61aeb975b1eb1703dd0350",
                 "shasum": ""
             },
             "require": {
@@ -10175,7 +10175,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
             },
-            "time": "2024-01-30T12:03:02+00:00"
+            "time": "2024-02-01T14:20:21+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10372,12 +10372,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "3d3e1714a4c1df86c123351a1b5e409df3dc2db4"
+                "reference": "bd85e7d429b2c225f31785a4b06ac06bb893155a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3d3e1714a4c1df86c123351a1b5e409df3dc2db4",
-                "reference": "3d3e1714a4c1df86c123351a1b5e409df3dc2db4",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/bd85e7d429b2c225f31785a4b06ac06bb893155a",
+                "reference": "bd85e7d429b2c225f31785a4b06ac06bb893155a",
                 "shasum": ""
             },
             "require": {
@@ -10434,7 +10434,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-01-31T16:43:12+00:00"
+            "time": "2024-02-01T14:19:36+00:00"
         },
         {
             "name": "railroad/railforums",

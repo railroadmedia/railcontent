@@ -21774,9 +21774,6 @@ a:visited{
 .tw-mb-8{
   margin-bottom: 2rem !important;
 }
-.tw-mb-\[-2px\]{
-  margin-bottom: -2px !important;
-}
 .tw-mb-\[10px\]{
   margin-bottom: 10px !important;
 }
@@ -25696,9 +25693,6 @@ a:visited{
 }
 .last-of-type\:tw-inline-flex:last-of-type{
   display: inline-flex !important;
-}
-.visited\:tw-text-gray-400:visited{
-  color: rgb(156 163 175 ) !important;
 }
 .checked\:tw-bg-\[\#FFAE00\]:checked{
   --tw-bg-opacity: 1 !important;
