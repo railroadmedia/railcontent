@@ -309,7 +309,6 @@ class HomePageController extends BaseController
 
         $carousel = $this->carouselService->getCarouselSlides();
 
-        //TODO:
         $shouldShowTrialSection = false;
         $brand = brand();
         $hideSection = $brand.'_trial_section_hide';
