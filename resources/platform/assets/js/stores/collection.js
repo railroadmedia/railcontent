@@ -241,6 +241,10 @@ export const useCollectionStore = defineStore({
                 this.sortOptions = defaults.sortOptions;
             }
 
+            if (defaults.defaultSort) {
+                this.sort = defaults.defaultSort;
+            }
+
             //Set active tab
             if (defaults.tabOptions) {
                 const params = new URLSearchParams(window.location.search);

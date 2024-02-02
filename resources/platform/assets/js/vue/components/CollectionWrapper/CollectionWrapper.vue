@@ -370,6 +370,7 @@ onBeforeMount(() => {
         endpoint: props.endpoint,
         searchEndpointUrl: props.searchEndpointUrl,
         sortOptions: props.sortOptions,
+        defaultSort: props.defaultSort,
     })
 })
 
