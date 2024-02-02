@@ -11,19 +11,16 @@
             @on-filter-change="handleFilterChange"
             @on-sort-change="handleContentSort"
             @on-search-change="handleTriggerSearch"
-        />
-        <div v-if="showFilters" class="flex flex-row mt-2 tw-flex-wrap">
-            <!-- Play Along Actions -->
-            <div class="tw-flex tw-flex-wrap tw-w-full md:tw-w-auto">
-                <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
-                    <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
-                            :class="isShuffle ? `tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
-                            title="Toggle Shuffle" @click="toggleShuffle">
-                        <i class="fas fa-random"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+        >
+            <template #extra-icon>
+                <button
+                    class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] dark:tw-border-white tw-rounded-full"
+                    :class="isShuffle ? 'tw-border-[#000C17] tw-bg-[#000C17] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17]' : 'hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-text-[#000C17] dark:tw-text-white tw-bg-white dark:tw-bg-transparent'"
+                    title="Toggle Shuffle" @click="toggleShuffle">
+                    <i class="fas fa-random"></i>
+                </button>
+            </template>
+        </CollectionFilterWrapper>
         <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
             <Pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange"/>
         </div>
