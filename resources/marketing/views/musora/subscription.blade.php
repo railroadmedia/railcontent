@@ -15,7 +15,7 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.webp">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
@@ -275,36 +275,36 @@
                 top: 0;
             }
             20% {
-                top: -110px;
+                top: -100px;
             }
             39% {
-                top: -110px;
+                top: -100px;
             }
             40% {
-                top: -220px;
+                top: -200px;
             }
             59% {
-                top: -220px;
+                top: -200px;
             }
             60% {
-                top: -330px;
+                top: -300px;
             }
             79% {
-                top: -330px;
+                top: -300px;
             }
             80% {
-                top: -440px;
+                top: -400px;
             }
             99% {
-                top: -440px;
+                top: -400px;
             }
             100% {
                 top: 0;
             }
         }
 
+
         .rotater-text span {
-            line-height: 110px;
             animation: move 25s infinite;
             background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);
             -webkit-background-clip: text;

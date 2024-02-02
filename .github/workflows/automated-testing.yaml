@@ -2,9 +2,9 @@ name: Automated Testing
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ master ]
 
 env:
   APP_NAME: "Musora Web Platform"

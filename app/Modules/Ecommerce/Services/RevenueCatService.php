@@ -63,7 +63,6 @@ class RevenueCatService
 
         if (!empty($entitlements)) {
             foreach ($entitlements as $entitlement) {
-
                 $productIdentifier = $entitlement->product_identifier;
                 $subscriptionData = $subscriptions->$productIdentifier;
 
@@ -89,8 +88,10 @@ class RevenueCatService
                     }
                     $price = $musoraProduct->price;
 
-                    if($subscriptionData->is_sandbox) {
-                        UserAccessPermissionsService::$timeMinutes = round($expiredAt->diffInSeconds($processedAt)/60);
+                    if ($subscriptionData->is_sandbox) {
+                        UserAccessPermissionsService::$timeMinutes = round(
+                            $expiredAt->diffInSeconds($processedAt) / 60
+                        );
                     }
 
                     $this->shopifySyncService->syncOrder(
@@ -135,7 +136,7 @@ class RevenueCatService
             $aliases = [$appUserId];
         }
         $user =
-            User::on('musora_laravel_mysql::write')
+            User::onWriteConnection()
                 ->where('email', $value)
                 ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();

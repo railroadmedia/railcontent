@@ -3,9 +3,11 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Modules\Content\Models\Permission;
+use App\Modules\Ecommerce\database\factories\UserAccessPermissionsFactory;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\UserManagementSystem\Models\User;
 
@@ -29,9 +31,16 @@ use Modules\UserManagementSystem\Models\User;
  */
 class UserAccessPermission extends Model
 {
+    use HasFactory;
+
     protected $table = 'user_access_permissions';
 
     protected $primaryKey = 'id';
+
+    protected static function newFactory(): UserAccessPermissionsFactory
+    {
+        return UserAccessPermissionsFactory::new();
+    }
 
     public function permission()
     {

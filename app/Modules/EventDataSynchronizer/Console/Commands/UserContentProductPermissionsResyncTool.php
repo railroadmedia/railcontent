@@ -5,7 +5,6 @@ namespace App\Modules\EventDataSynchronizer\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use App\Modules\EventDataSynchronizer\Listeners\UserProductToUserContentPermissionListener;
 
 class UserContentProductPermissionsResyncTool extends Command
@@ -39,7 +38,6 @@ class UserContentProductPermissionsResyncTool extends Command
      */
     public function handle(
         DatabaseManager $databaseManager,
-        EcommerceEntityManager $ecommerceEntityManager,
         UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener
     ) {
         $productId = $this->argument('productId');
@@ -53,7 +51,6 @@ class UserContentProductPermissionsResyncTool extends Command
         $done = 0;
 
         $query->chunk(250, function (Collection $userProductRows) use (
-            $ecommerceEntityManager,
             $userProductToUserContentPermissionListener,
             &$done
         ) {
@@ -61,10 +58,6 @@ class UserContentProductPermissionsResyncTool extends Command
                 $userProductToUserContentPermissionListener->syncUserId($userProductRow->user_id);
                 $done++;
             }
-
-            $ecommerceEntityManager->flush();
-            $ecommerceEntityManager->clear();
-
             $this->info('Done ' . $done);
         });
     }

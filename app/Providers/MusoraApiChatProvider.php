@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Services\User\UserAccessService;
 use ChatRoll;
 use Railroad\MusoraApi\Contracts\ChatProviderInterface;
 use Railroad\Railchat\Services\RailchatService;
