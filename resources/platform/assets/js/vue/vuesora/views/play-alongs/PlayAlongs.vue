@@ -4,12 +4,13 @@
             active-tab="All Play-Alongs"
             :multi-select-columns="filterOptions"
             :search-term="searchTerm"
-            :selected-filters="[]"
+            :selected-filters="selectedFilters"
             :selected-sort="sort"
             :sort-options="sortOptions"
             :tab-options="tabOptions"
             @on-filter-change="handleFilterChange"
             @on-sort-change="handleContentSort"
+            @on-search-change="handleTriggerSearch"
         />
         <div v-if="showFilters" class="flex flex-row mt-2 tw-flex-wrap">
             <div class="flex flex-column align-v-center">
@@ -455,22 +456,9 @@ export default {
             this.page = urlParams.page || 1;
             this.limit = urlParams.limit || 20;
             this.sort = urlParams.sort || '-published_on';
-            if (urlParams.required_fields != null && urlParams.required_fields.length > 0) {
-                urlParams.required_fields.forEach((field) => {
-                    const keyValue = field.split(',');
-                    // Since BPM can take either one or two values we just parse that here
-                    // If it's only one value then that's a minimum only, so we add a plus sign
-                    // Otherwise we remove the plus sign and add a dash between the two values
-                    if (keyValue[0] === 'bpm') {
-                        if (this.selectedFilters['bpm'] == null) {
-                            this.selectedFilters['bpm'] = `${keyValue[1]}+`;
-                        } else {
-                            this.selectedFilters['bpm'] = `${this.selectedFilters['bpm'].replace('+', '')}-${keyValue[1]}`;
-                        }
-                    } else {
-                        this.selectedFilters[0] = keyValue[1];
-                    }
-                });
+
+            if (urlParams.included_fields != null && urlParams.included_fields.length > 0) {
+                this.selectedFilters = urlParams.included_fields;
             }
             if (urlParams.only_from_my_list != null
                 && urlParams.only_from_my_list == 1) {
@@ -725,10 +713,8 @@ export default {
             }
             return this.getContent();
         },
-        handleTriggerSearch() {
-            if (this.useUrlParams) {
-                this.updatePageUrl();
-            }
+        handleTriggerSearch(value) {
+            this.searchTerm = value;
             return this.searchContent();
         },
         handleContentSort(value) {
