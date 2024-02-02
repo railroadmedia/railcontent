@@ -7,7 +7,12 @@
         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-20 mt-5"></i>
         <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-{{ $theme }} opacity-50"></div>
         <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10 bg-black opacity-20"></div>
-        <video class="object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
+        <video class="object-cover w-full h-full absolute z-0"
+            x-ref="playToLearnVideo"
+            x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+            x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+            data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline>
+        </video>
     </div>
 @else
     <section class="text-center pt-7 sm:pt-9 relative"
@@ -54,17 +59,22 @@
                 </div>
             </div>
             <div class="mt-5 sm:mt-0 sm:pl-7 sm:w-1/2 flex-grow-0">
-                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 bg-black @if($theme != 'musora') text-white @else text-black @endif flex relative"
-                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                x-intersect.once="lazyLoad = true">
-                    <picture class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top">
-                        <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
-                                media="(min-width:640px)">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}"
-                            alt="Workouts Background"
-                            class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            loading="lazy">
-                    </picture>
+                <div class="h-full rounded-xl p-7 lg:p-10 pb-64 sm:pb-48 @if($theme != 'musora') text-white @else text-black @endif flex relative"
+                    :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                    x-intersect.once="lazyLoad = true; $refs.workout.src = $refs.workout.dataset.src;">
+                    <div class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
+                        <picture>
+                            <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
+                                    media="(min-width:640px)">
+                            <img x-ref="workout"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/5x0/filters:quality(10)/filters:blur(5)/{{ $workoutsBG }}"
+                                data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}"
+                                alt="Workouts Background"
+                                class="w-full h-full object-cover rounded-xl transition-opacity opacity-0 duration-300"
+                                onload="this.classList.remove('opacity-0');"
+                                loading="lazy">
+                        </picture>
+                    </div>
 
                     <div class="relative z-10">
                         <h5 class="leading-tight mb-3"><strong>

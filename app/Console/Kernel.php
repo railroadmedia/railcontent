@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\AddTimeToUsersAccountsJan2023;
 use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
@@ -67,7 +66,6 @@ class Kernel extends ConsoleKernel
         FixSongsTemp::class,
         SoftDeleteOldSingeoSongs::class,
         SoftDeleteOldGuitareoSongs::class,
-        AddTimeToUsersAccountsJan2023::class,
         UpdateRoutines::class,
         CreateSongs24Jan2023::class,
         RemoveTemporarySongsAccessForLifetimeMembersJanuary2023::class,
@@ -99,7 +97,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('notifications:dailySummary')->dailyAt('12:00');//4am PST
 
         $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');//6am PST
-        $schedule->command('content:updatePopularity')->cron('0 */8 * * *'); //every 8 hours
+        $schedule->command('content:updatePopularityMWP')->cron('0 */8 * * *'); //every 8 hours
         $schedule->command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
         $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron(
             "0 */6 * * *"
@@ -129,7 +127,14 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__ . '/Commands');
 
+//        $scan = scandir(app_path('Modules'));
+//        foreach ($scan as $file) {
+//            if (is_dir(app_path("Modules/$file"))) {
+//                $this->load(app_path("Modules/$file/Console/Commands"));
+//            }
+//        }
         $this->load(app_path('Modules/Ecommerce/Console/Commands'));
+        $this->load(app_path('Modules/Content/Console/Commands'));
         $this->load(app_path('Modules/EventTracking/Console/Commands'));
 
         // TODO: uncomment when the console route file exists

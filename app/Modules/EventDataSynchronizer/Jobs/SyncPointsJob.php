@@ -6,10 +6,7 @@ use App;
 use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Ecommerce\Services\AppleStoreKitService;
 use Railroad\Points\Services\UserPointsService;
 
 class SyncPointsJob extends BatchQueryJob

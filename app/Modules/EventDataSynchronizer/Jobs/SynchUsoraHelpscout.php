@@ -15,7 +15,6 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 
 class SynchUsoraHelpscout implements ShouldQueue
 {
@@ -35,7 +34,6 @@ class SynchUsoraHelpscout implements ShouldQueue
 
     /**
      * @param  DatabaseManager $databaseManager
-     * @param  EcommerceEntityManager $ecommerceEntityManager
      * @param  HelpScoutSyncService $helpScoutSyncService
      * @param  HelpScoutService $helpScoutService
      *
@@ -43,7 +41,6 @@ class SynchUsoraHelpscout implements ShouldQueue
      */
     public function handle(
         DatabaseManager $databaseManager,
-        EcommerceEntityManager $ecommerceEntityManager,
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService
     ) {
@@ -60,7 +57,6 @@ class SynchUsoraHelpscout implements ShouldQueue
             ->chunk(
                 25,
                 function (Collection $userRows) use (
-                    $ecommerceEntityManager,
                     $helpScoutSyncService,
                     $railhelpscoutConnection,
                     $helpScoutService
@@ -132,10 +128,6 @@ class SynchUsoraHelpscout implements ShouldQueue
                             }
                         }
                     }
-
-                    $ecommerceEntityManager->flush();
-                    $ecommerceEntityManager->clear();
-                    $ecommerceEntityManager->getConnection()->ping();
 
                     return $result;
                 }

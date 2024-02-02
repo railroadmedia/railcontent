@@ -4,17 +4,13 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
-use App\Services\User\UserAccessService;
 use App\Services\UserMetricsService;
 use Illuminate\Http\Request;
 use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Points\Services\UserPointsService;
-use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProfilePublicPagesController extends BaseController
 {

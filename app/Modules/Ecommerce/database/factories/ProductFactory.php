@@ -3,11 +3,11 @@
 namespace App\Modules\Ecommerce\database\factories;
 
 use App\Enums\Interval;
+use App\Modules\Content\database\factories\PermissionFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\UserManagementSystem\Models\User;
 
 class ProductFactory extends Factory
 {
@@ -50,10 +50,10 @@ class ProductFactory extends Factory
             'created_at' => Carbon::now()
                 ->toDateTimeString(),
             'public_stock_count' => fake()->numberBetween(1, 1000),
-            'digital_access_time_interval_length' => fake()->numberBetween(0, 12),
-            'digital_access_time_type' => fake()->text,
-            'digital_access_time_interval_type' => fake()->text,
-            'digital_access_type' => fake()->text,
+            'digital_access_time_interval_length' => 0,
+            'digital_access_time_type' => null,
+            'digital_access_time_interval_type' => null,
+            'digital_access_type' => null,
             'digital_access_permission_names' => '[]',
         ];
     }
@@ -61,7 +61,7 @@ class ProductFactory extends Factory
     public static function createSubscriptionProduct(
         string $brand,
         DigitalAccessType $accessType,
-        Interval $interval,
+        ?Interval $interval,
         float $price,
         array $attributes = []
     ): Product {
@@ -69,8 +69,47 @@ class ProductFactory extends Factory
             'brand' => $brand,
             'price' => $price,
             'type' => Product::TYPE_DIGITAL_SUBSCRIPTION,
-            'digital_access_type' => $accessType,
-            'digital_access_time_interval_type' => $interval,
+            'digital_access_type' => $accessType->value,
+            'digital_access_time_interval_type' => $interval?->value,
+            'digital_access_time_interval_length' => 1,
+        ]);
+        switch ($accessType) {
+            case DigitalAccessType::Basic:
+                $attributes['digital_access_permission_names'] = '["Musora Basic Membership"]';
+                break;
+            case DigitalAccessType::Plus:
+                $attributes['digital_access_permission_names'] = '["Musora Plus Membership"]';
+                break;
+            case DigitalAccessType::Songs:
+                $attributes['digital_access_permission_names'] = '["Musora Only Songs Membership"]';
+                break;
+            default:
+                throw new \Exception("Not implemented");
+        }
+        return Product::factory()->create($attributes);
+    }
+
+    public static function createLifetimeProduct(
+        array $attributes = []
+    ): Product {
+        $attributes = array_merge($attributes, [
+            'brand' => 'musora',
+            'type' => Product::TYPE_DIGITAL_ONE_TIME,
+            'digital_access_type' => DigitalAccessType::Basic->value,
+            'digital_access_time_type' => 'lifetime',
+            'digital_access_permission_names' => '["Drumeo Lifetime Member","Musora Basic Membership"]'
+        ]);
+        return Product::factory()->create($attributes);
+    }
+
+    public static function createPackProduct(
+        array $attributes = []
+    ): Product {
+        $attributes = array_merge($attributes, [
+            'brand' => 'musora',
+            'type' => Product::TYPE_DIGITAL_ONE_TIME,
+            'digital_access_type' => DigitalAccessType::Specific->value,
+            'digital_access_permission_names' => '["' . PermissionFactory::TestPackName . '"]',
         ]);
         return Product::factory()->create($attributes);
     }

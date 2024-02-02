@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\User\UserAccessService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
