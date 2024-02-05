@@ -35,7 +35,7 @@
             </div>
 
             <form id="stc-form" method="POST" class="tw-flex tw-flex-col" @submit.prevent="(event) => submitForm(event)">
-                <input id="id" type="hidden" name="id" :value="userId" />
+                <input id="email" type="hidden" name="email" :value="userEmail" />
                 <!-- Name -->
                 <label class="tw-flex tw-flex-col tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Name</span>
@@ -228,9 +228,9 @@ const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const props = defineProps({
-    userId: {
-        type: Number,
-        default: 0,
+    userEmail: {
+        type: String,
+        default: '',
     },
     authKey: {
         type: String,
@@ -323,7 +323,7 @@ const submitForm = (event) => {
     const formData2 = {
         data: {
             ...Object.fromEntries(formData),
-            'student_form_languages[]': selectedLanguages.value,
+            'student_form_languages[]': selectedLanguages.value.join(','),
         },
     };
 

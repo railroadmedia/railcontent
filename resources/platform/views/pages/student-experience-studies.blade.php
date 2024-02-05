@@ -6,7 +6,7 @@
 
 @section('content')
     <Stc
-        :user-id="{{ user()->id }}"
+        :user-email="{{ json_encode(user()->email) }}"
         :auth-key="'{{ base64_encode(config('customer-io.accounts.musora.site_id') . ':' . config('customer-io.accounts.musora.track_api_key')) }}'"
         :ages="{{ json_encode($ages) }}"
         :genders="{{ json_encode($genders) }}"
