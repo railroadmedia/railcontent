@@ -5,14 +5,10 @@ namespace App\Providers;
 use App\Listeners\Authentication\AuthenticationEventListener;
 use App\Listeners\Content\EngageContentEventListener;
 use App\Listeners\Content\LoggingEventListener;
-use App\Listeners\OrderEventListener;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
-use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Queue\Events\JobProcessing;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\UserEvent;
-use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\PlaylistDeleted;
@@ -64,9 +60,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserCreated::class => [
             [EventTrackerListener::class, 'handleUserCreated']
-        ],
-        OrderEvent::class => [
-            OrderEventListener::class . '@handleOrderPlaced',
         ],
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
         PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],

@@ -1,9 +1,15 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
+import {computed} from "vue";
 
 const userStore = useUserStore();
-const { brand } = storeToRefs(userStore)
+const { brand } = storeToRefs(userStore);
+
+const currentYear = computed(() => {
+    const d = new Date();
+    return d.getFullYear();
+})
 </script>
 
 <template>
@@ -22,7 +28,7 @@ const { brand } = storeToRefs(userStore)
       </a>
       <!-- Footer Links -->
       <div class="tw-flex md:tw-px-4 tw-text-xs tw-text-gray-[#3F3F46] dark:tw-text-[#9EC0DC] tw-justify-center tw-w-full tw-items-center ">
-        <span class="tw-hidden lg:tw-block tw-mr-1">Musora Media, Inc. © 2024 </span>
+        <span class="tw-hidden lg:tw-block tw-mr-1 tw-py-2">Musora Media, Inc. © {{ currentYear }} </span>
         <ul class="tw-flex tw-items-center tw-text-xs">
           <li class="tw-mx-1"><a :href="`/terms-of-service`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
           <li class="tw-mx-1"><a :href="`/privacy-policy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/

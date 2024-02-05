@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Services\RevenueCatService;
@@ -10,7 +11,6 @@ use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Gateways\RevenueCatGateway;
 
 class MigrateIntoRevenuecat extends Command
 {
@@ -20,7 +20,7 @@ class MigrateIntoRevenuecat extends Command
 
     public function handle(
         RevenueCatService $revenueCatService,
-        RevenueCatGateway $revenueCatGateway,
+        RevenueCatApiGateway $revenueCatGateway,
         SubscriptionService $subscriptionService,
         UserProductService $userProductService
     ) {

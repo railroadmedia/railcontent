@@ -8,7 +8,6 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Mailora\Services\MailService;
-use Railroad\Ecommerce\Repositories\ProductRepository;
 use Illuminate\Routing\Controller;
 
 class BooksController extends Controller
@@ -23,20 +22,12 @@ class BooksController extends Controller
      */
     private $contentService;
 
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
     public function __construct(
-
-        ProductRepository $productRepository,
         MailService $mailService,
         ContentService $contentService
     ) {
         $this->mailService = $mailService;
         $this->contentService = $contentService;
-        $this->productRepository = $productRepository;
     }
 
     public function resources()
@@ -103,8 +94,8 @@ class BooksController extends Controller
         }
 
         return back()->with([
-                                'emailSuccess' => true,
-                            ]);
+            'emailSuccess' => true,
+        ]);
     }
 
     private function getChapterData($chapterNumber)
@@ -724,13 +715,13 @@ class BooksController extends Controller
         ];
 
         return view('books.the-drummers-toolbox.index', [
-                                                          "hasAccess" => $hasAccess,
-                                                          "chapters" => $chapters,
-                                                          "isDigital" => $isDigital,
-                                                          "user" => $user,
-                                                          "isEdge" => $isEdge,
-                                                          "isPackOwner" => $isPackOwner,
-                                                      ]);
+            "hasAccess" => $hasAccess,
+            "chapters" => $chapters,
+            "isDigital" => $isDigital,
+            "user" => $user,
+            "isEdge" => $isEdge,
+            "isPackOwner" => $isPackOwner,
+        ]);
     }
 
     public function drummersToolboxChapter($domain, $brand,  $chapterNumber, Request $request)
@@ -758,21 +749,21 @@ class BooksController extends Controller
         }
 
         $playAlongs = new ContentFilterResultsEntity([
-                                                         'results' => $this->contentService->getByIds(
-                                                             $chapter['play_along_ids']
-                                                         ),
-                                                     ]);
+            'results' => $this->contentService->getByIds(
+                $chapter['play_along_ids']
+            ),
+        ]);
         $playAlongs['total_results'] = count($chapter['play_along_ids']);
 
         return view('books.the-drummers-toolbox.chapter', [
-                                                            "hasAccess" => $hasAccess,
-                                                            "chapterData" => $chapter,
-                                                            "chapterNumber" => $chapterNumber,
-                                                            "isDigital" => $isDigital,
-                                                            "relatedLessons" => $relatedLessons,
-                                                            "playAlongs" => $playAlongs->toResponseRawJson(),
-                                                            "user" => $user,
-                                                        ]);
+            "hasAccess" => $hasAccess,
+            "chapterData" => $chapter,
+            "chapterNumber" => $chapterNumber,
+            "isDigital" => $isDigital,
+            "relatedLessons" => $relatedLessons,
+            "playAlongs" => $playAlongs->toResponseRawJson(),
+            "user" => $user,
+        ]);
     }
 
     public function drummersToolboxChapters($chapter)
