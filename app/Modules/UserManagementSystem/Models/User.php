@@ -83,6 +83,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @property boolean|false $pianote_onboarding_skip_setup
  * @property boolean|false $guitareo_onboarding_skip_setup
  * @property boolean|false $singeo_onboarding_skip_setup
+ * @property boolean|false $drumeo_trial_section_hide
+ * @property boolean|false $pianote_trial_section_hide
+ * @property boolean|false $guitareo_trial_section_hide
+ * @property boolean|false $singeo_trial_section_hide
  * @property int|null $singing_since_year
  * @property int|null $singing_gear_mic_brands
  * @property int|null $singing_gear_photo
