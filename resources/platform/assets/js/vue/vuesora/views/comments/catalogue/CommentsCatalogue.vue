@@ -145,7 +145,11 @@
                 Title
             </div>
             <div class="flex flex-column lesson-title tw-text-xs dense font-bold ph-1">
-                Created On
+                <a
+                    @click.prevent.stop="sortComments('created_on')"
+                >
+                    Created On
+                </a>
             </div>
             <div class="flex flex-column lesson-type tw-text-xs dense font-bold hide-xs-only ph-1 text-center">
                 Type
@@ -196,7 +200,7 @@
                             v-if="comment.content"
                             class="tw-text-sm font-bold"
                         >
-                            {{  new Date(comment.created_on).toLocaleDateString('en-US') }}
+                            {{ new Date(comment.created_on).toLocaleDateString('en-US') }}
                         </h6>
                     </div>
 
@@ -357,6 +361,7 @@ export default {
             noRepliedTo: true,
             openOnly: true,
             closedOnly: false,
+            sortState: this.defaultSortState,
             contentTypes: [
                 {
                     key: 'all',
@@ -448,11 +453,11 @@ export default {
                     active: true,
                 },
                 {
-                  key: 'quick-tips',
-                  brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
-                  value: ['quick-tips'],
-                  icon: 'icon-student-focus',
-                  active: true,
+                    key: 'quick-tips',
+                    brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
+                    value: ['quick-tips'],
+                    icon: 'icon-student-focus',
+                    active: true,
                 },
             ],
         };
@@ -476,7 +481,7 @@ export default {
             return parsedTypes;
         },
 
-        sortParam() {
+        defaultSortState() {
             if (this.brand === 'guitareo') {
                 return '-created_on';
             }
@@ -489,15 +494,15 @@ export default {
     },
     methods: {
         isAllTypesSelected() {
-          let isActive = false;
+            let isActive = false;
 
-          this.contentTypes.forEach((type) => {
-            if (type.key === 'all') {
-              isActive = type.active;
-            }
-          });
+            this.contentTypes.forEach((type) => {
+                if (type.key === 'all') {
+                    isActive = type.active;
+                }
+            });
 
-          return isActive;
+            return isActive;
         },
 
         handleFilter(event) {
@@ -549,6 +554,18 @@ export default {
 
         openCommentThread(comment) {
             this.openCommentId = comment.id;
+        },
+
+        sortComments(column) {
+            if (this.sortState === column) {
+                this.sortState = '-' + column;
+            } else {
+                this.sortState = column;
+            }
+            if (!this.requestingData) {
+                this.currentPage = 1;
+                this.getComments(true);
+            }
         },
 
 
@@ -605,13 +622,13 @@ export default {
             let types = this.activeTypes;
 
             if (this.isAllTypesSelected()) {
-              types = [];
+                types = [];
             }
 
             CommentService.getComments({
                 brand: this.brand,
                 limit: 100,
-                sort: this.sortParam,
+                sort: this.sortState,
                 content_type: types,
                 page: this.currentPage,
                 conversation_status: this.openOnly === true ? 'open' : 'closed',
@@ -672,80 +689,81 @@ export default {
 };
 </script>
 <style lang="scss">
-    @import '../../../assets/sass/partials/variables';
+@import '../../../assets/sass/partials/variables';
 
-    .user-name {
-        flex:0 0 100px;
-        max-width:100px;
+.user-name {
+    flex: 0 0 100px;
+    max-width: 100px;
 
-        @include small {
-            flex: 0 0 250px;
-            max-width:250px;
-        }
-        .avatar {
-            max-width:45px;
-        }
-
-        h6 {
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
-        }
+    @include small {
+        flex: 0 0 250px;
+        max-width: 250px;
     }
 
-    .lesson-title {
-        flex: 0 0 150px;
-        max-width:150px;
-        min-width:150px;
+    .avatar {
+        max-width: 45px;
     }
 
-    .status {
-        flex: 0 0 100px;
-        max-width:100px;
-        min-width:100px;
+    h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+}
 
-    .lesson-type {
-        flex: 0 0 150px;
-        max-width:150px;
-        min-width:150px;
+.lesson-title {
+    flex: 0 0 150px;
+    max-width: 150px;
+    min-width: 150px;
+}
 
-        i {
-            font-size:12px;
-        }
+.status {
+    flex: 0 0 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.lesson-type {
+    flex: 0 0 150px;
+    max-width: 150px;
+    min-width: 150px;
+
+    i {
+        font-size: 12px;
     }
+}
 
-    .comment-item.replied {
-        display:none;
+.comment-item.replied {
+    display: none;
+}
+
+.replied-to {
+    flex: 0 0 60px;
+    max-width: 60px;
+    min-width: 60px;
+}
+
+.comment-body p {
+    word-break: break-word;
+}
+
+.comment-data {
+    padding: #{$gutterWidth / 2} 0;
+
+    @include small {
+        padding: $gutterWidth / 2;
     }
+}
 
-    .replied-to {
-        flex:0 0 60px;
-        max-width:60px;
-        min-width:60px;
-    }
+.active-comment {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto #{$gutterWidth / 2};
+}
 
-    .comment-body p {
-        word-break:break-word;
-    }
-
-    .comment-data {
-        padding:#{$gutterWidth / 2} 0;
-
-        @include small {
-            padding:$gutterWidth / 2;
-        }
-    }
-
-    .active-comment {
-        width:100%;
-        max-width:960px;
-        margin:0 auto #{$gutterWidth / 2};
-    }
-
-    .comment-item .user-name {
-        flex:0 0 100px;
-        max-width:100px;
-        min-width:100px;
-    }
+.comment-item .user-name {
+    flex: 0 0 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
 </style>
