@@ -267,6 +267,10 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
         if ($contentTypeName == 'songs') {
+            $allowableFilters = $catalogueMeta['allowableFilters'];
+
+            $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
+            $catalogueMeta['allowableFilters'] = $filterableValues;
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],

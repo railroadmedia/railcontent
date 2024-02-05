@@ -516,7 +516,7 @@ return [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'style', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'style', 'lifestyle','artist'],
                 'allowableFiltersMobile' => ['difficulty', 'style', 'lifestyle'],
                 'sortBy' => 'slug',
                 'tabs' => [
