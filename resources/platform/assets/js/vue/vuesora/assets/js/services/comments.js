@@ -37,7 +37,15 @@ export default {
     updateCommentConversationStatus(id, conversationStatus) {
         return axios.patch(
             `${endpointPrefix}/railcontent/comment/${id}`,
-            { conversation_status: conversationStatus },
+            {conversation_status: conversationStatus},
+        )
+            .then(response => response.data)
+            .catch(ErrorHandler);
+    },
+
+    commentAssignModerator(id) {
+        return axios.patch(
+            `${endpointPrefix}/railcontent/comment/${id}/assign-moderator`
         )
             .then(response => response.data)
             .catch(ErrorHandler);
@@ -136,7 +144,7 @@ export default {
      * @param {String|Number} limit
      * @returns {Promise} resolved promise with the response.data object
      */
-    getCommentLikeUsers({ id, page = 1, limit = 10 }) {
+    getCommentLikeUsers({id, page = 1, limit = 10}) {
         return axios.get(`${endpointPrefix}/railcontent/comment-likes/${id}`, {
             params: {
                 page,

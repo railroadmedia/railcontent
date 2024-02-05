@@ -144,12 +144,15 @@
             <div class="flex flex-column lesson-title tw-text-xs dense font-bold hide-xs-only ph-1">
                 Title
             </div>
-            <div class="flex flex-column lesson-title tw-text-xs dense font-bold ph-1">
+            <div class="flex flex-column lesson-created-on tw-text-xs dense font-bold ph-1">
                 <a
                     @click.prevent.stop="sortComments('created_on')"
                 >
                     Created On
                 </a>
+            </div>
+            <div class="flex flex-column lesson-assigned-to tw-text-xs dense font-bold hide-xs-only ph-1">
+                Moderator
             </div>
             <div class="flex flex-column lesson-type tw-text-xs dense font-bold hide-xs-only ph-1 text-center">
                 Type
@@ -195,7 +198,7 @@
                         </h6>
                     </div>
 
-                    <div class="flex flex-column lesson-title hide-xs-only ph-1">
+                    <div class="flex flex-column lesson-created-on hide-xs-only ph-1">
                         <h6
                             v-if="comment.content"
                             class="tw-text-sm font-bold"
@@ -203,7 +206,25 @@
                             {{ new Date(comment.created_on).toLocaleDateString('en-US') }}
                         </h6>
                     </div>
-
+                    <div class="flex flex-column lesson-assigned-to hide-xs-only ph-1">
+                        <h6
+                            v-if="comment.content"
+                            class="tw-text-sm font-bold"
+                        >
+                            {{ comment.assigned_moderator_name }}
+                        </h6>
+                        <button
+                            v-if="!comment.assigned_moderator_name"
+                            class="button btn collapse-250"
+                            @click.prevent.stop="assignComment(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Assign
+                            </span>
+                        </button>
+                    </div>
                     <div class="flex flex-column lesson-type hide-xs-only ph-1 align-center">
                         <i
                             v-if="comment.content"
@@ -235,7 +256,7 @@
                         <button
                             v-if="comment.conversation_status === 'open'"
                             class="button btn collapse-250"
-                            style="margin-top: 15px;"
+                            style="margin-top: 5px;"
                             @click.prevent.stop="markClosed(comment)"
                         >
                             <span
@@ -248,7 +269,7 @@
                         <button
                             v-if="comment.conversation_status === 'open'"
                             class="button btn collapse-250"
-                            style="margin-top: 15px;"
+                            style="margin-top: 10px;"
                             @click.prevent.stop="likeAndClose(comment)"
                         >
                             <span
@@ -343,6 +364,11 @@ import CommentPost from '../_CommentPost';
 import CommentLikesModal from '../_CommentLikesModal.vue';
 import CommentMixin from '../_mixin';
 import ThemeClasses from '../../../mixins/ThemeClasses';
+import { storeToRefs } from 'pinia';
+import {useUserStore} from "../../../../../stores/user";
+
+const userStore = useUserStore();
+const { userDisplayName } = storeToRefs(userStore);
 
 export default {
     name: 'CommentsCatalogue',
@@ -579,6 +605,11 @@ export default {
             }
         },
 
+        assignComment(comment) {
+            comment.assigned_moderator_name = userDisplayName.value;
+            CommentService.commentAssignModerator(comment.id);
+        },
+
         markClosed(comment) {
             comment.conversation_status = 'closed';
 
@@ -715,6 +746,18 @@ export default {
     flex: 0 0 150px;
     max-width: 150px;
     min-width: 150px;
+}
+
+.lesson-created-on {
+    flex: 0 0 90px;
+    max-width: 90px;
+    min-width: 90px;
+}
+
+.lesson-assigned-to {
+    flex: 0 0 100px;
+    max-width: 100px;
+    min-width: 100px;
 }
 
 .status {
