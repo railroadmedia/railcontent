@@ -103,6 +103,11 @@ Route::group(
                 )->name('comment.store');
 
                 Route::patch(
+                    '/comment/{id}/assign-moderator',
+                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@assignModerator'
+                )->name('comment.assign-moderator');
+
+                Route::patch(
                     '/comment/{id}',
                     \Railroad\Railcontent\Controllers\CommentJsonController::class . '@update'
                 )->name('comment.update');

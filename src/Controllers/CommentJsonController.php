@@ -52,7 +52,7 @@ class CommentJsonController extends Controller
         CommentRepository::$assignedToUserId = $request->get('assigned_to_user_id', false);
         CommentRepository::$conversationStatus = $request->get('conversation_status', false);
 
-        $commentData = $this->commentService->getComments(
+        $commentData = $this->commentService->getModeratorComments(
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
@@ -101,6 +101,41 @@ class CommentJsonController extends Controller
             [$comment],
             [
                 'transformer' => DataTransformer::class,
+            ]
+        );
+    }
+
+    public function assignModerator(int $commentId)
+    {
+        //update comment with the data sent on the request
+        $comment = $this->commentService->update(
+            $commentId,
+            ['assigned_moderator_id' => auth()->id() ?? null]
+        );
+
+        //if the user it's not logged in into the application
+        throw_if(
+            ($comment === 0),
+            new NotAllowedException('Only registered user can modify own comments. Please sign in.')
+        );
+
+        //if the update response method = -1 => the user have not rights to update other user comment; we throw the exception
+        throw_if(
+            ($comment === -1),
+            new NotAllowedException('Update failed, you can update only your comments.')
+        );
+
+        //if the update method response it's null the comment not exist; we throw the proper exception
+        throw_if(
+            is_null($comment),
+            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+        );
+
+        return reply()->json(
+            [$comment],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
             ]
         );
     }
