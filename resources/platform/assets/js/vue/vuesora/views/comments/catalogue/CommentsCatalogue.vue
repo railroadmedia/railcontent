@@ -144,6 +144,9 @@
             <div class="flex flex-column lesson-title tw-text-xs dense font-bold hide-xs-only ph-1">
                 Title
             </div>
+            <div class="flex flex-column lesson-title tw-text-xs dense font-bold ph-1">
+                Created On
+            </div>
             <div class="flex flex-column lesson-type tw-text-xs dense font-bold hide-xs-only ph-1 text-center">
                 Type
             </div>
@@ -188,6 +191,15 @@
                         </h6>
                     </div>
 
+                    <div class="flex flex-column lesson-title hide-xs-only ph-1">
+                        <h6
+                            v-if="comment.content"
+                            class="tw-text-sm font-bold"
+                        >
+                            {{  new Date(comment.created_on).toLocaleDateString('en-US') }}
+                        </h6>
+                    </div>
+
                     <div class="flex flex-column lesson-type hide-xs-only ph-1 align-center">
                         <i
                             v-if="comment.content"
@@ -226,6 +238,19 @@
                                 class="text-white background-color-red tiny" style="height: 25px;"
                             >
                                 Close
+                            </span>
+                        </button>
+
+                        <button
+                            v-if="comment.conversation_status === 'open'"
+                            class="button btn collapse-250"
+                            style="margin-top: 15px;"
+                            @click.prevent.stop="likeAndClose(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Like/Close
                             </span>
                         </button>
 
@@ -498,7 +523,7 @@ export default {
 
         isRepliedTo(comment) {
             comment.replies = comment.replies || [];
-                
+
             for (let i = 0; i < comment.replies.length; i++) {
                 if (comment.replies[i].user.access_level === 'team') {
                     return true;
@@ -540,6 +565,17 @@ export default {
         markClosed(comment) {
             comment.conversation_status = 'closed';
 
+            CommentService.updateCommentConversationStatus(comment.id, 'closed');
+
+            if (!this.closedOnly) {
+                this.comments.splice(this.comments.indexOf(comment), 1);
+            }
+        },
+
+        likeAndClose(comment) {
+            comment.conversation_status = 'closed';
+
+            CommentService.likeComment(comment.id);
             CommentService.updateCommentConversationStatus(comment.id, 'closed');
 
             if (!this.closedOnly) {
