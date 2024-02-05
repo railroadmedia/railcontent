@@ -9,9 +9,7 @@
       <PageHeaderCta v-if="backToAllLessonsUrl" text="Back to all lessons" icon="fas fa-chevron-double-left"
         :href="backToAllLessonsUrl" />
 
-      <PageHeaderCta icon="fas fa-redo-alt fa-flip-horizontal" event="resetProgressEvent"
-        @resetProgressEvent="resetProgressEventHandler" />
-
+      <PageHeaderCta :icon="resetIcon" event="resetProgressEvent" @resetProgressEvent="resetWithConfirmation" />
     </template>
     <template v-slot:bottom-full v-if="progress">
       <PageHeaderProgressBar :progress="progress" />
@@ -20,13 +18,13 @@
 </template>
   
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 
 import PageHeader from '../PageHeader/PageHeader.vue';
 import PageHeaderHero from '../PageHeader/PageHeaderHero.vue';
 import PageHeaderCta from '../PageHeader/PageHeaderCta.vue';
 import PageHeaderProgressBar from '../PageHeader/PageHeaderProgressBar.vue';
-import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
+import { useResetProgress } from '../../hooks/useResetProgress';
 
 const props = defineProps({
   contentId: String,
@@ -47,13 +45,15 @@ const props = defineProps({
   }
 });
 
+const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
+
 const emit = defineEmits(['progressReset']);
 
-const { emitResetProgress } = useUserCatalogueEvents(props, { emit });
+const { resetProgress } = useResetProgress();
 
-const resetProgressEventHandler = () => {
-  console.log('resetProgressEventHandler');
-  emitResetProgress({ content_id: props.contentId })
+const resetWithConfirmation = () => {
+  resetProgress(props.contentId, resetIcon, true);
 };
+
 </script>
   
