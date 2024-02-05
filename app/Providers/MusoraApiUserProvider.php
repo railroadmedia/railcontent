@@ -175,6 +175,18 @@ class MusoraApiUserProvider implements UserProviderInterface
                 'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
+        $brand = brand();
+        $showLearningPathsOnHomepage = false;
+        $hideSection = $brand.'_trial_section_hide';
+
+        if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels =  count(
+                user()->onboardingExperience->filter(function ($item) use($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
+            $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
+        }
 
         return array_merge([
             'id' => $user->id,
@@ -190,6 +202,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
+            'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
         ], $extraData);
     }
 
