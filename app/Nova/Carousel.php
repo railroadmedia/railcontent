@@ -246,6 +246,17 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->default(true)->show()->rules(['required']);
                     }
                 ),
+            Boolean::make('Show on Workouts?', 'show_on_workouts')->hideFromIndex()->default(true)
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Boolean $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->default(true)->show()->rules(['required']);
+                    }
+                ),
             Text::make('Product ID', 'product_id')->hideFromIndex()
                 ->hide()
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
