@@ -161,7 +161,7 @@
                             :for="mineOnly"
                             class="toggle-label capitalize"
                         >
-                            Mine only
+                            Assigned To Me
                         </label>
                     </div>
                 </div>
