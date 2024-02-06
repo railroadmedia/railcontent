@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=8a47db809c6bf50cba8a9cff93d34085",
-=======
-    "/platform/js/app.js": "/platform/js/app.js?id=64ea0c8e45a603175ad6938e3b0d5da8",
->>>>>>> feature-packs-index
+    "/platform/js/app.js": "/platform/js/app.js?id=81d1efacec6ef382687134739f0a46f5",
     "/platform/js/profile.js": "/platform/js/profile.js?id=86aa1841f2c5fd61f0b1a0a087caa000",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=b11719fd2b12999cf314705273f39458",
     "/platform/js/books.js": "/platform/js/books.js?id=59cd94e09b034342fbe6c7401bdd44e4",
@@ -31,12 +27,7 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=631c549d3207d9fde6fed35914d1ba49",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=fc94a03ba81716dac8b8717ce2a76c59",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=0bd356ea87fdf96dca11043919d8ab79",
-<<<<<<< HEAD
-    "/platform/css/app.css": "/platform/css/app.css?id=4ee6ab0cd59cddc0d5e03d5556e420a0",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=47dadce651a2b961b312f82be5cc07f2",
-=======
-    "/platform/css/app.css": "/platform/css/app.css?id=1b713ad7cbf2a97d27fedf5fae262213",
+    "/platform/css/app.css": "/platform/css/app.css?id=e0d05770c74771d8364b0058e8a7e349",
     "/marketing/css/app.css": "/marketing/css/app.css?id=ea3b0f848ef12e816670e8922b06ba48",
->>>>>>> feature-packs-index
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=876048f2ebad7f698f1fcc359b575acb"
 }
