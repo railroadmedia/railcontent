@@ -3,17 +3,8 @@
 namespace App\Http\Controllers\Drumeo;
 
 use App\Http\Controllers\BaseController;
-use App\Listeners\OrderEventListener;
 use App\Modules\Ecommerce\Services\AccessCodeService;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-
-use Railroad\Ecommerce\Entities\User;
-use Railroad\Ecommerce\Services\UserProductService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -36,57 +27,20 @@ function array_entity_column(array $arrayOfEntities, $getMethodName)
 class SalesController extends BaseController
 {
 
-
-    /**
-     * @var UserProductService
-     */
-    private $userProductService;
-
-
-    public function ___construct(UserProductService $userProductService, ProductRepository $productRepository)
+    public function ___construct()
     {
-        $this->userProductService = $userProductService;
-        $this->productRepository = $productRepository;
     }
-
-    /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
-    /**
-     * @var OrderEventListener
-     */
-    private $orderEventListener;
 
     private AccessCodeService $accessCodeService;
 
     /**
-     * @param AccessCodeService $accessCodeService
-     */
-
-    /**
      * MarketingController constructor.
      *
-     * @param  DatabaseManager $databaseManager
-     * @param  ProductRepository $productRepository
-     * @param  OrderEventListener $orderEventListener
      * @param  AccessCodeService $accessCodeService
      */
     public function __construct(
-        DatabaseManager $databaseManager,
-        ProductRepository $productRepository,
-        OrderEventListener $orderEventListener,
         AccessCodeService $accessCodeService
     ) {
-        $this->databaseManager = $databaseManager;
-        $this->productRepository = $productRepository;
-        $this->orderEventListener = $orderEventListener;
         $this->accessCodeService = $accessCodeService;
 
     }
@@ -194,24 +148,6 @@ class SalesController extends BaseController
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
         ]);
-    }
-
-    /**
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     */
-    public function registerFor30DayDrummer(Request $request)
-    {
-        if (is_current_user_a_member()) {
-            $product = $this->productRepository->findOneBy(['sku' => '30-day-drummer']);
-            $user = new User(current_user()->getId(), current_user()->getEmail());
-
-            $this->userProductService->assignUserProduct($user, $product, null, 1);
-
-            return redirect()->back()
-                ->with('success-message', 'Success! You have registered for 30-Day Drummer. Check your email for the details.');
-        }
-
-        return redirect()->away(url()->route('shopping-cart.to-cart.api') . "?products[30-day-drummer]=1");
     }
 
     public function impact()

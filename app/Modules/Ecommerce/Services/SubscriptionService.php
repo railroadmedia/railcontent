@@ -225,7 +225,8 @@ class SubscriptionService
                 }
             });
         } catch (\Exception $e) {
-            Log::error("Failed to cancel subscriptions for user $user->id: " . $e->getMessage());
+            Log::error("Failed to cancel subscriptions for user $user->id");
+            Log::error($e);
         }
     }
 }
