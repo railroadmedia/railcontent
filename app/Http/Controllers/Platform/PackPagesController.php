@@ -170,7 +170,7 @@ class PackPagesController extends Controller
             "backButton" => $backButton,
             "xpBonus" => $xpBonus,
             "themeColor" => "pack",
-            "nextLessonUrl" => '',
+            "nextLessonUrl" => $pack->fetch('next_lesson_url'),
         ]);
     }
 

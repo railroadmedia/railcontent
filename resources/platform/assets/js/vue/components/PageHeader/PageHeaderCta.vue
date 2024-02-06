@@ -1,11 +1,11 @@
 <template>
-    <a v-if="href" :href="href" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white ml-1"
+    <a v-if="href" :href="href" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white ml-1 tw-mb-0"
         :class="[text ? 'tw-px-6' : 'tw-w-[40px] tw-h-[40px] tw-p-0']">
         <i v-if="icon" :class="[icon, text ? 'mr-1' : '']"></i>
         {{ text }}
     </a>
     <button v-else-if="event" @click="handleClick"
-        class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white ml-1"
+        class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white ml-1 tw-mb-0"
         :class="[text ? 'tw-px-6' : 'tw-w-[40px] tw-h-[40px] tw-p-0']">
         <i v-if="icon" :class="[icon, text ? 'mr-1' : '']"></i>
         {{ text }}
@@ -25,8 +25,6 @@ const props = defineProps({
 const emit = defineEmits();
 
 const handleClick = () => {
-    console.log('handleClick');
-    console.log(props.event);
     if (props.event) {
         emit(props.event);
     }
