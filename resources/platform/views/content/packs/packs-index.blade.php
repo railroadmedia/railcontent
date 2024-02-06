@@ -6,7 +6,7 @@
 
 @section('content')
 
-    {{-- @component('partials._header-banner', [
+    @component('partials._header-banner', [
         'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/' . $brand . '-header.jpg',
     ])
         @slot('content')
@@ -35,41 +35,48 @@
                 </div>
             </div>
         @endslot
-    @endcomponent --}}
+    @endcomponent
 
-    <packs-header 
-        icon-name="box-filled" 
-        title="Packs">
-    </packs-header>
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
-        <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-row tw-pt-4">
-                <h1 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl dark:tw-text-white">
-                    Your Training Packs</h1>
-            </div>
-
-            @foreach ($packs as $index => $pack)
-                @include('partials.bladesora.members.content.content-overview', [
-                    "themeColor" => $brand,
-                    "hideBorder" => $index === 0,
-                    "itemThumbnail" => $pack->fetch('data.thumbnail_url'),
-                    'itemId' => $pack->fetch('id'),
-                    "itemTitle" => $pack->fetch('fields.title'),
-                    "itemDescription" => $pack->fetch('data.description'),
-                    "itemProgress" => $pack->fetch('progress_state'),
-                    "itemType" => $pack->fetch('type'),
-                    "itemUrl" => $pack->fetch('next_lesson_url'),
-                    "lessonsUrl" => $pack->fetch('url'),
-                    "logoImage" => $pack->fetch('data.logo_image_url'),
-                    "forceSquareThumb" => true,
-                    "releaseDate" => $pack->fetch('published_on_in_timezone'),
-                    "isOwned" => true,
-                    "statusText" => $pack->fetch('status_text')
-                ])
-            @endforeach
-        </div>
+    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
+        <collection-wrapper
+            collection-type="pack"
+            :infinite-scroll="false"
+            :pre-loaded-content="{{ $packs }}"
+            title="packs"
+            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
+            default-sorts="-progress"
+            :hide-sort-icon="true"
+        ></collection-wrapper>
     </div>
+
+{{--    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">--}}
+{{--        <div class="tw-flex tw-flex-col">--}}
+{{--            <div class="tw-flex tw-flex-row tw-pt-4">--}}
+{{--                <h1 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl dark:tw-text-white">--}}
+{{--                    Your Training Packs</h1>--}}
+{{--            </div>--}}
+
+{{--            @foreach ($packs as $index => $pack)--}}
+{{--                @include('partials.bladesora.members.content.content-overview', [--}}
+{{--                    "themeColor" => $brand,--}}
+{{--                    "hideBorder" => $index === 0,--}}
+{{--                    "itemThumbnail" => $pack->fetch('data.thumbnail_url'),--}}
+{{--                    'itemId' => $pack->fetch('id'),--}}
+{{--                    "itemTitle" => $pack->fetch('fields.title'),--}}
+{{--                    "itemDescription" => $pack->fetch('data.description'),--}}
+{{--                    "itemProgress" => $pack->fetch('progress_state'),--}}
+{{--                    "itemType" => $pack->fetch('type'),--}}
+{{--                    "itemUrl" => $pack->fetch('next_lesson_url'),--}}
+{{--                    "lessonsUrl" => $pack->fetch('url'),--}}
+{{--                    "logoImage" => $pack->fetch('data.logo_image_url'),--}}
+{{--                    "forceSquareThumb" => true,--}}
+{{--                    "releaseDate" => $pack->fetch('published_on_in_timezone'),--}}
+{{--                    "isOwned" => true,--}}
+{{--                    "statusText" => $pack->fetch('status_text')--}}
+{{--                ])--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 @endsection
 
