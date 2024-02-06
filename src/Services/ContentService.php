@@ -239,11 +239,7 @@ class ContentService
         $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
         $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-ALL';
         $callback = function() use ($user_id, $brand) {
-            $allRecommendations = [];
-            foreach(RecommenderSection::cases() as $section) {
-                $allRecommendations[] = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
-            }
-            return zipperMerge($allRecommendations);
+            return $this->recommendationService->getAllFilteredRecommendations($user_id, $brand);
         };
         $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
         $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $limit);
@@ -275,7 +271,7 @@ class ContentService
     {
         $cached = Cache::store('redis')->get($cacheKey);
         // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
-        if(is_null($cached)) {
+        if(!is_null($cached)) {
             $recommendations = $cached;
         } else {
             $recommendations = $callback();

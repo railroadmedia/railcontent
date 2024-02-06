@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Enums\RecommenderSection;
@@ -13,30 +12,23 @@ enum AccessMethod {
     case HUGGINGFACE;
 }
 
-enum APIEndPoint: string
-{
-    case V1 = 'https://MusoraProductDepartment-recsys.hf.space/recommend';
-    case ALT1 = 'https://musoraproductdepartment-recsys-alt-1.hf.space/recommend';
-    case ALT2 = 'https://musoraproductdepartment-recsys-alt-2.hf.space/recommend';
-}
-
 class RecommendationService
 {
 
     public AccessMethod $accessMethod;
-    public APIEndPoint $APIEndPoint;
     private array $RETRY_ERROR_CODES = [500, 503];
 
     public function __construct(
-        //private DatabaseManager $databaseManager,
+        private DatabaseManager $databaseManager,
     ) {
         $this->accessMethod = AccessMethod::HUGGINGFACE;
         $this->invalidConfigurations = [
             'pianote' => [RecommenderSection::Course],
             'singeo' => [RecommenderSection::Course],
         ];
-        $this->APIEndPoint = APIEndPoint::V1;
     }
+
+
 
     public function getFilteredRecommendations($userID, $brand, RecommenderSection $section)
     {
@@ -60,15 +52,38 @@ class RecommendationService
 
     private function getFilteredRecommendationsUsingHuggingFace($userIDs, $brand, RecommenderSection $section)
     {
-        //$url = env('HUGGINGFACE_URL');
-        $url = $this->APIEndPoint->value;
-        $authToken = env('HUGGINGFACE_TOKEN');
+        $url = env('HUGGINGFACE_URL');
         $data = [
             'user_ids' => $userIDs,
             'brand' => $brand,
             'section' => $section->value
         ];
 
+        $content = $this->postToHuggingFaceWithRetry($url, $data);
+        if (!$content) {
+            $content = [];
+            foreach($userIDs as $userID) {
+                $content[$userID] = [];
+            }
+        }
+        return $content;
+    }
+
+    public function getAllFilteredRecommendations($userID, $brand)
+    {
+        $url = env('HUGGINGFACE_URL_ALL');
+        $data = [
+            'user_ids' => [$userID],
+            'brand' => $brand,
+        ];
+        $content = $this->postToHuggingFaceWithRetry($url, $data);
+        $content = $content[$userID];
+        $finalContent = zipperMerge($content);
+        return $finalContent;
+    }
+
+    private function postToHuggingFaceWithRetry($url, $data) {
+        $authToken = env('HUGGINGFACE_TOKEN');
         $response = Http::withToken($authToken)->post($url, $data);
         if (in_array($response->status(), $this->RETRY_ERROR_CODES)) {
             $response = Http::withToken($authToken)->post($url, $data);
@@ -77,10 +92,6 @@ class RecommendationService
         if (!$content) {
             $status = $response->status();
             Log::warning("HuggingFace return an unexpected response with code: $status");
-            $content = [];
-            foreach($userIDs as $userID) {
-                $content[$userID] = [];
-            }
         }
         return $content;
     }
@@ -132,8 +143,7 @@ class RecommendationService
 //            error_log($e);
 //        }
 //        return $content;
-//
-//    }extra
+//    }
 //
 //    private function getFilteredRecommendationsUsingDBHandler($userID, $brand, RecommenderSection $section) : array
 //    {
