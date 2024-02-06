@@ -3,12 +3,12 @@ import { ref } from 'vue';
 import axios from 'axios';
 import InfoModal from '../Modal/InfoModal.vue';
 import InputLabel from "../InputLabel/InputLabel.vue";
-const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo'
-    }
-});
+import { useUserStore } from "../../../stores/user";
+import { storeToRefs } from "pinia/dist/pinia";
+
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
+
 const emit = defineEmits(['onCloseModal']);
 
 const formData = ref({
@@ -17,7 +17,7 @@ const formData = ref({
 });
 
 const submitForm = () => {
-    axios.post(`/${props.brand}/songs`, formData.value).then((e) => {
+    axios.post(`/${brand.value}/songs`, formData.value).then((e) => {
         if (window.shownotification) {
             window.shownotification({
                 icon: 'check',
@@ -48,12 +48,12 @@ const handleArtistName = (value) => {
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
             <form accept-charset="UTF-8" method="POST" @submit.prevent="submitForm">
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
-                    <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" :brand="brand" inputType="text"
+                    <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" inputType="text"
                         id="inputSongName" inputName="song_name" labelValue="Song Name"
                         placeholder="Enter the song name..." :inputErrors="[]" @onChange="handleSongName" />
                 </div>
                 <div class="tw-flex tw-flex-col tw-mb-[25px]">
-                    <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" :brand="brand" inputType="text"
+                    <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" inputType="text"
                         id="inputSongArtist" inputName="artist_name" labelValue="Artist Name"
                         placeholder="Enter the artist name..." :inputErrors="[]" @onChange="handleArtistName" />
                 </div>

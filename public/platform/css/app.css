@@ -22179,6 +22179,9 @@ a:visited{
 .tw-h-\[10px\]{
   height: 10px !important;
 }
+.tw-h-\[115px\]{
+  height: 115px !important;
+}
 .tw-h-\[120px\]{
   height: 120px !important;
 }
@@ -23580,6 +23583,9 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(98 127 151 / var(--tw-border-opacity)) !important;
 }
+.tw-border-\[\#65656B4D\]{
+  border-color: #65656B4D !important;
+}
 .tw-border-\[\#65656b40\]{
   border-color: #65656b40 !important;
 }
@@ -24612,6 +24618,9 @@ a:visited{
 }
 .tw-pl-\[16px\]{
   padding-left: 16px !important;
+}
+.tw-pl-\[20px\]{
+  padding-left: 20px !important;
 }
 .tw-pl-\[24px\]{
   padding-left: 24px !important;
@@ -26333,6 +26342,10 @@ a:visited{
 :is(.tw-dark .dark\:tw-text-\[\#A1A1A9\]){
   --tw-text-opacity: 1 !important;
   color: rgb(161 161 169 / var(--tw-text-opacity)) !important;
+}
+:is(.tw-dark .dark\:tw-text-\[\#E7EFF6\]){
+  --tw-text-opacity: 1 !important;
+  color: rgb(231 239 246 / var(--tw-text-opacity)) !important;
 }
 :is(.tw-dark .dark\:tw-text-\[\#F0FDF4\]){
   --tw-text-opacity: 1 !important;
