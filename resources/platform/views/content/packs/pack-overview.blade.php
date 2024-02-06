@@ -23,7 +23,7 @@
                     ],
                 ]
             ])
-    
+
         @else
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
@@ -46,7 +46,7 @@
                 <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full tw-min-h-[312px]">
                     <img alt="{{ $pack->fetch('title') }} Logo"
                         class="tw-w-full tw-transition-opacity tw-max-w-[300px] tw-opacity-0"
-                        src="{{ $pack->fetch('data.logo_image_url') }}" 
+                        src="{{ $pack->fetch('data.logo_image_url') }}"
                         onload="this.classList.remove('tw-opacity-0')"
                     >
                 </div>
@@ -67,12 +67,12 @@
 
         @include('content.breadcrumbs._overview-breadcrumbs')
 
-        <packs-header 
-            title="Packs" 
-            hero-img="{{ $pack->fetch('data.header_image_url') }}" 
+        <packs-header
+            title="Packs"
+            hero-img="{{ $pack->fetch('data.header_image_url') }}"
             additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
-            primary-cta-icon="fa-play"
-            primary-cta-text="start/continue"
+	    primary-cta-icon="fa-play"            
+	    primary-cta-text="{{$pack['primary_cta_text']}}"
             primary-cta-url="{{ $nextLessonUrl }}"
             progress="{{ $parentContent->fetch('progress_percent', 0) }}"
             :enable-reset-progress="true"

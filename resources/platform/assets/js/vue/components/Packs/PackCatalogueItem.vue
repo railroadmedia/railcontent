@@ -40,7 +40,7 @@
             <div class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col xl:tw-flex-row tw-items-start tw-mb-2 xl:tw-mb-0">
                     <!-- Enrollment Label -->
-                    <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm xl:tw-order-1 tw-mb-2 xl:tw-mb-0">Enrollment Now Open!</div>
+                    <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm xl:tw-order-1 tw-mb-2 xl:tw-mb-0">Enrollment Now Open!</div>
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto">
                         <!-- Title -->
                         <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl sm:tw-mr-4">
@@ -60,7 +60,7 @@
                 <div class="tw-uppercase dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">Jared Falk</div>
                 <!-- Info -->
                 <div class="dark:tw-text-[#9EC0DC] tw-text-sm tw-flex tw-items-center">
-                    <DifficultyLabel class="tw-text-sm" :difficultyValue="'novice'" textCase="capitalize" /> <span class="tw-mx-2">•</span>Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP
+                    <DifficultyLabel class="tw-text-sm" :difficultyValue="'novice'" textCase="capitalize" /> <span class="tw-mx-2">•</span>{{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </div>
             <div class="sm:tw-flex tw-flex-shrink-0">
@@ -127,14 +127,12 @@ const hasStarted = computed(() => {
     return progressPercent.value > 0;
 })
 
+const enrollmentOpen = computed(() => {
+    return props.pack.enrollment_state === 'open';
+})
+
 const progressText = computed(() => {
-    if (0 < props.pack.progress_percent && props.pack.progress_percent < 100){
-        return `Continue`;
-    } else if(props.pack.progress_percent === 100){
-        return `Completed`;
-    } else {
-        return 'Start';
-    }
+    return props.pack.primary_cta_text;
 })
 
 const progressIcon = computed(() => {
