@@ -81,7 +81,7 @@ class PackPagesController extends Controller
         $packs = $this->packService->getPacks($requiredFields);
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
-        foreach ($packs as $pack) {
+        foreach ($packs['results'] as $pack) {
             if ($pack['id'] == $activePack) {
                 $pack['status_text'] = "In Progress";
             }
@@ -89,7 +89,7 @@ class PackPagesController extends Controller
         }
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
-            foreach ($packs as $packIndex => $pack) {
+            foreach ($packs['results'] as $packIndex => $pack) {
                 // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
                 if ($pack['id'] == 353337) {
                     unset($pack[$packIndex]);
@@ -98,7 +98,7 @@ class PackPagesController extends Controller
         }
 
         return view('content.packs.packs-index', [
-            "packs" => $packs,
+            "packs" => $packs->toResponseRawJson(),
         ]);
     }
 

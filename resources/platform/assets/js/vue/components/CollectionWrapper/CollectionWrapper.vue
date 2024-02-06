@@ -8,7 +8,7 @@
         <transition appear name="fade">
             <CollectionResults :brand="brand" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
-                <PackCatalogue v-else-if="isPack" :content="preLoadedContent" />
+                <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />

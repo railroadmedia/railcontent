@@ -14,6 +14,7 @@ use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -125,6 +126,10 @@ class PackService
             )['results']
         ))->sortPacks(user()?->id);
 
-        return $packs;
+        return new ContentFilterResultsEntity([
+            'results' => $packs->values()->toArray(),
+            'total_results' => count($packs),
+            'filter_options' => [],
+        ]);
     }
 }
