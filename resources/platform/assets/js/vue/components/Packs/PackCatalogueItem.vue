@@ -38,9 +38,9 @@
         </a>
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
             <div class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
-                <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2 lg:tw-mb-0">
+                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-items-start tw-mb-2 xl:tw-mb-0">
                     <!-- Enrollment Label -->
-                    <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm lg:tw-order-1 tw-mb-2 lg:tw-mb-0">Enrollment Now Open!</div>
+                    <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm xl:tw-order-1 tw-mb-2 xl:tw-mb-0">Enrollment Now Open!</div>
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto">
                         <!-- Title -->
                         <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl sm:tw-mr-4">

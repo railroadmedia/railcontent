@@ -27921,6 +27921,9 @@ a:visited{
   .xl\:tw-static{
     position: static !important;
   }
+  .xl\:tw-order-1{
+    order: 1 !important;
+  }
   .xl\:tw-col-span-1{
     grid-column: span 1 / span 1 !important;
   }
