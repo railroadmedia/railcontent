@@ -1,6 +1,6 @@
 <template>
     <a
-        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 lg:tw-px-5 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF]"
+        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 lg:tw-px-5 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF]"
         :href="pack.url"
     >
         <a class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
