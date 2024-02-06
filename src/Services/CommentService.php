@@ -237,9 +237,10 @@ class CommentService
         $page = 1,
         $limit = 25,
         $orderByAndDirection = '-created_on',
-        $currentUserId = null
+        $currentUserId = null,
+        $searchTerm = ''
     ) {
-        $comments = $this->getComments($page, $limit, $orderByAndDirection, $currentUserId);
+        $comments = $this->getComments($page, $limit, $orderByAndDirection, $currentUserId, $searchTerm);
         $moderatorIds = $comments['results']->pluck('assigned_moderator_id')->toArray();
         $userLookup = collect($this->userRepository->findByIds($moderatorIds));
         foreach ($comments['results'] as $comment) {
@@ -259,8 +260,13 @@ class CommentService
      * @param string $orderByAndDirection
      * @return array
      */
-    public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on', $currentUserId = null)
-    {
+    public function getComments(
+        $page = 1,
+        $limit = 25,
+        $orderByAndDirection = '-created_on',
+        $currentUserId = null,
+        $searchTerm = ''
+    ) {
         if ($limit == 'null') {
             $limit = -1;
         }
@@ -315,7 +321,7 @@ class CommentService
                     $orderByColumn
                 );
                 $results = [
-                    'results' => $this->commentRepository->getComments(),
+                    'results' => $this->commentRepository->getComments($searchTerm),
                     'total_results' => $this->commentRepository->countComments(),
                     'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
                 ];

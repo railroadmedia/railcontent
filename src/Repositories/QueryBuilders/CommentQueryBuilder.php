@@ -287,6 +287,17 @@ class CommentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    public function searchExpression($searchTerm)
+    {
+        if ($searchTerm) {
+            $this->where(function($query) use($searchTerm){
+                $query->where('comment', 'like', '%' . trim($searchTerm) . '%');
+            });
+        }
+
+        return $this;
+    }
+
     /** Restrict comments by creation date, will return the comments created after the param creationDate
      *
      * @param string $creationDate

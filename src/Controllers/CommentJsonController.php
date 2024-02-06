@@ -56,7 +56,8 @@ class CommentJsonController extends Controller
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
-            auth()->id() ?? null
+            auth()->id() ?? null,
+            $request->get('searchTerm', '')
         );
 
         return reply()->json(
