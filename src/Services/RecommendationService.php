@@ -38,7 +38,7 @@ class RecommendationService
         if ($this->hasNoResults($brand, $section)) {
             return [];
         }
-        return $this->getFilteredRecommendationsBySection($userID, $brand, $section)[$userID];
+        return $this->getFilteredRecommendationsBySection($userID, $brand, $section);
 //        return match($this->accessMethod)
 //        {
 //            AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
@@ -63,7 +63,7 @@ class RecommendationService
         ];
 
         $content = $this->postToHuggingFaceWithRetry($url, $data);
-        return $content ?? [];
+        return $content[$userID] ?? [];
     }
 
     private function getAllFilteredRecommendations($userID, $brand)
@@ -73,7 +73,8 @@ class RecommendationService
             'user_ids' => [$userID],
             'brand' => $brand,
         ];
-        $content = $this->postToHuggingFaceWithRetry($url, $data)[$userID];
+        $content = $this->postToHuggingFaceWithRetry($url, $data);
+        $content = $content[$userID] ?? [];
         return zipperMerge($content);
     }
 
