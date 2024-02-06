@@ -30,7 +30,7 @@ class RecommendationService
 
 
 
-    public function getFilteredRecommendations($userID, $brand, RecommenderSection $section)
+    public function getFilteredRecommendations($userID, $brand, RecommenderSection $section=null)
     {
         if (is_null($section)) {
             return $this->getAllFilteredRecommendations($userID, $brand);
