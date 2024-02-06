@@ -3596,6 +3596,9 @@ video {
 .text-\[28px\] {
   font-size: 28px !important;
 }
+.text-\[35px\] {
+  font-size: 35px !important;
+}
 .text-\[54px\] {
   font-size: 54px !important;
 }
@@ -6046,6 +6049,10 @@ li, p {
 
   .sm\:font-black {
     font-weight: 900 !important;
+  }
+
+  .sm\:leading-\[76px\] {
+    line-height: 76px !important;
   }
 
   .sm\:leading-loose {
