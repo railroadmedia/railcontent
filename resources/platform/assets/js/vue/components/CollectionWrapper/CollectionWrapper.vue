@@ -7,11 +7,17 @@
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
-                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" :activeTab="getActiveTab" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
                             :total-results="getTotalResults" />
+                <SongCardContainer
+                    v-else-if="isSong"
+                    :pre-loaded-content="data"
+                    :content-type-override="collectionType"
+                    :subscription-calendar-id="subscriptionCalendarId"
+                />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -43,6 +49,7 @@ import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
+import SongCardContainer from "../Catalogue/SongCardContainer";
 import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
 import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
@@ -254,7 +261,7 @@ const isThreads = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isWorkout.value && !isChallenge.value && props.collectionType;
+    return !isWorkout.value && !isChallenge.value  && props.collectionType;
 })
 
 const showGroupBy = computed(() => {

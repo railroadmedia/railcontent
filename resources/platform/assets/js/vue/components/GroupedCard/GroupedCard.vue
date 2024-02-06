@@ -10,7 +10,11 @@
                 :src="`https://www.musora.com/musora-cdn/image/width=200/${thumb}`" :alt="`${name} Image`" />
             <div>
                 <h3 class="tw-font-bold tw-text-lg md:tw-text-xl">{{ name }}</h3>
-                <div class="tw-font-semibold">{{ item.all_lessons_count }} Workouts</div>
+                <div class="tw-font-semibold">
+                    <span>{{ item.all_lessons_count }} Workout</span>
+                    <span v-if="showTotalPlays"> - {{ item.total_plays }} Plays</span>
+                </div>
+
             </div>
         </a>
         <a :href="item.url"
@@ -22,7 +26,8 @@
 
     <div class="tw-mb-[14px] lg:tw-mb-[6px]">
         <transition appear name="fade">
-            <CatalogueCardContainer :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" />
+            <SongCardContainer v-if="contentTypeOverride === 'song'" :preLoadedContent="item.lessons" :isGroupedView="true" />
+            <CatalogueCardContainer v-else :preLoadedContent="item.lessons" :contentTypeOverride="contentTypeOverride" :groupByCards="true" />
         </transition>
     </div>
 </template>
@@ -32,6 +37,7 @@ import { storeToRefs } from "pinia";
 import { useCollectionStore } from "../../../stores/collection";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
+import SongCardContainer from "../Catalogue/SongCardContainer.vue";
 
 const props = defineProps({
     item: {
@@ -41,7 +47,19 @@ const props = defineProps({
     contentTypeOverride: {
         type: String,
         default: () => '',
-    }
+    },
+    contentTypeTitleSingular: {
+        type: String,
+        default: () => '',
+    },
+    contentTypeTitlePlural: {
+        type: String,
+        default: () => '',
+    },
+    showTotalPlays: {
+        type: Boolean,
+        default: () => false,
+    },
 })
 
 const collectionStore = useCollectionStore();
