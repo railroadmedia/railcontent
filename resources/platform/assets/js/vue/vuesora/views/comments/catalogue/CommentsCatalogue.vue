@@ -141,6 +141,29 @@
                             Closed conversation comments only
                         </label>
                     </div>
+                    <div class="flex flex-row form-group align-v-center mb-1">
+                        <span class="toggle-input mr-1">
+                            <input
+                                id="mineOnly"
+                                name="mineOnly"
+                                :v-model="mineOnly"
+                                :checked="mineOnly"
+                                type="checkbox"
+                                @change="mineOnlyUpdated"
+                            >
+
+                            <span class="toggle">
+                                <span class="handle"></span>
+                            </span>
+                        </span>
+
+                        <label
+                            :for="mineOnly"
+                            class="toggle-label capitalize"
+                        >
+                            Mine only
+                        </label>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -410,6 +433,7 @@ export default {
             noRepliedTo: true,
             openOnly: true,
             closedOnly: false,
+            mineOnly: false,
             searchTerm: '',
             sortState: this.defaultSortState,
             contentTypes: [
@@ -666,6 +690,14 @@ export default {
             }, 1000);
         },
 
+        mineOnlyUpdated(value) {
+            this.mineOnly = !this.mineOnly;
+            clearTimeout(this.filterTimeout);
+            this.filterTimeout = setTimeout(() => {
+                this.getComments(true);
+            }, 1000);
+        },
+
         getComments(replace = false) {
             this.requestingData = true;
 
@@ -687,7 +719,8 @@ export default {
                 content_type: types,
                 page: this.currentPage,
                 conversation_status: this.openOnly === true ? 'open' : 'closed',
-                searchTerm: this.searchTerm
+                searchTerm: this.searchTerm,
+                mineOnly: this.mineOnly
             })
                 .then((response) => {
                     // Pulls all Content IDs from every comment and returns all uniques
