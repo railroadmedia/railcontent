@@ -233,32 +233,11 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getAllRecommendations($user_id, $brand, $contentTypes, bool $randomize=false, $limit=6)
+    public function getRecommendedContent($user_id, $brand, $contentTypes, RecommenderSection $section=null, bool $randomize=false, $limit=6)
     {
         $filter = $this->getFilterForRecommendations($limit, $contentTypes);
         $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-ALL';
-        $callback = function() use ($user_id, $brand) {
-            return $this->recommendationService->getAllFilteredRecommendations($user_id, $brand);
-        };
-        $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
-        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $limit);
-        return $this->getContentFilterResultsFromRecommendations($recommendations, $filter, $filterOptions);
-    }
-
-    /**
-     *
-     *
-     * @param int user_id
-     * @param string brand
-     * @param int limit -
-     * @return mixed|Collection|null
-     */
-    public function getRecommendationsByContentType($user_id, $brand, $contentTypes, RecommenderSection $section, bool $randomize=false, $limit=6)
-    {
-        $filter = $this->getFilterForRecommendations($limit, $contentTypes);
-        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $section->value;
+        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $section?->value ?? 'ALL' ;
         $callback = function() use ($user_id, $brand, $section) {
             return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
         };

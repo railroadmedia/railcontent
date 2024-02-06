@@ -32,10 +32,13 @@ class RecommendationService
 
     public function getFilteredRecommendations($userID, $brand, RecommenderSection $section)
     {
+        if (is_null($section)) {
+            return $this->getAllFilteredRecommendations($userID, $brand);
+        }
         if ($this->hasNoResults($brand, $section)) {
             return [];
         }
-        return $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID];
+        return $this->getFilteredRecommendationsBySection($userID, $brand, $section)[$userID];
 //        return match($this->accessMethod)
 //        {
 //            AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
@@ -50,36 +53,28 @@ class RecommendationService
         return isset($this->invalidConfigurations[$brand]) && in_array($section, $this->invalidConfigurations[$brand]);
     }
 
-    private function getFilteredRecommendationsUsingHuggingFace($userIDs, $brand, RecommenderSection $section)
+    private function getFilteredRecommendationsBySection($userID, $brand, RecommenderSection $section)
     {
         $url = env('HUGGINGFACE_URL');
         $data = [
-            'user_ids' => $userIDs,
+            'user_ids' => [$userID],
             'brand' => $brand,
             'section' => $section->value
         ];
 
         $content = $this->postToHuggingFaceWithRetry($url, $data);
-        if (!$content) {
-            $content = [];
-            foreach($userIDs as $userID) {
-                $content[$userID] = [];
-            }
-        }
-        return $content;
+        return $content ?? [];
     }
 
-    public function getAllFilteredRecommendations($userID, $brand)
+    private function getAllFilteredRecommendations($userID, $brand)
     {
         $url = env('HUGGINGFACE_URL_ALL');
         $data = [
             'user_ids' => [$userID],
             'brand' => $brand,
         ];
-        $content = $this->postToHuggingFaceWithRetry($url, $data);
-        $content = $content[$userID];
-        $finalContent = zipperMerge($content);
-        return $finalContent;
+        $content = $this->postToHuggingFaceWithRetry($url, $data)[$userID];
+        return zipperMerge($content);
     }
 
     private function postToHuggingFaceWithRetry($url, $data) {
