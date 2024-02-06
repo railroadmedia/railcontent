@@ -71,11 +71,11 @@
             title="Packs" 
             hero-img="{{ $pack->fetch('data.header_image_url') }}" 
             additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
-            primary-cta-text="start/continue to next lesson"
+            primary-cta-icon="fa-play"
+            primary-cta-text="start/continue"
             primary-cta-url="{{ $nextLessonUrl }}"
             progress="{{ $parentContent->fetch('progress_percent', 0) }}"
-            back-to-all-lessons-url="{{ url()->route('platform.packs') }}"
-            :rest-progress="true"
+            :enable-reset-progress="true"
             content-id="{{ $parentContent->fetch('id') }}"
         >
         </packs-header>

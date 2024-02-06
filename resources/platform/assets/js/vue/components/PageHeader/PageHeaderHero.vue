@@ -4,7 +4,7 @@
       <musora-icon :icon-name="iconName" class="tw-w-[35px] tw-h-[35px] dark:tw-text-white" />
     </template>
     <template v-else-if="heroImg">
-      <div class="header-avatar flex flex-column hide-xs-only">
+      <div class="header-avatar flex flex-column">
         <div class="square">
           <img class="rounded inset-border" :src="heroImg">
         </div>
@@ -22,17 +22,16 @@
       <template v-if="additionalImgSrc">
         <img :src="additionalImgSrc" class="tw-max-w-[174px] tw-max-h-[90px]">
       </template>
-
-      <a v-if="primaryCtaUrl && primaryCtaText" :href="primaryCtaUrl"
-        :class="`tw-btn-primary tw-text-center tw-m-0 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white tw-border-[#B2B2B5] dark:tw-border-white tw-px-6`">
-        {{ primaryCtaText }}
-      </a>
+      <div class="tw-hidden sm:tw-block">
+        <PageHeaderPrimaryCta :icon="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
+import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 
 const props = defineProps({
   iconName: String,
@@ -41,10 +40,12 @@ const props = defineProps({
   subTitle: String,
   description: String,
   additionalImgSrc: String,
+  primaryCtaIcon: String,
   primaryCtaUrl: String,
   primaryCtaText: String,
   secondaryCtaText: String,
 })
+
 
 </script>
 <style lang="scss" scoped>

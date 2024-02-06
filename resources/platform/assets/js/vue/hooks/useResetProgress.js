@@ -21,6 +21,9 @@ export function useResetProgress() {
                         message: 'Your progress has been reset.',
                     });
                     iconClassRef.value = 'fas fa-redo-alt fa-flip-horizontal';
+                    setTimeout(() => {
+                        location.reload();
+                    },500)
                 })
                 .finally(() => {
                     loading.value = false;
