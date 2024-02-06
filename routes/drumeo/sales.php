@@ -13,7 +13,6 @@ Route::domain('{drumeoDomain}')
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/ultimate-bundle', [SalesController::class, 'homeBF'] );
     Route::get('/lp', [SalesController::class, 'promoEG'] );
-    Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/beginner', [SalesController::class, 'promo']);
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
@@ -42,6 +41,8 @@ Route::domain('{drumeoDomain}')
     Route::get('/sonor/', [SalesController::class, 'sonor']);
     Route::get('/alesis', [SalesController::class, 'alesis']);
     Route::get('/alesis/existing', [SalesController::class, 'alesisExisting']);
+    Route::get('/alesis-strata', [SalesController::class, 'alesisStrata']);
+    Route::get('/alesis-strata/existing', [SalesController::class, 'alesisStrataExisting']);
 
     Route::get('/june', [SalesController::class, 'trial']);
     Route::get('/trial-key', [SalesController::class, 'trialKey']);

@@ -118,9 +118,9 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
                       "price" => 240,
-                      "href" => "/new-year#customize-anchor",
-                      "instructor" => "Limited Time Offer",
-                      "discounted_price" => 180,
+                      "href" => "/#customize-anchor",
+                     "instructor" => "7-Day Free Trial",
+                      "discounted_price" => 240,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",
                       'soldOut' => false,
