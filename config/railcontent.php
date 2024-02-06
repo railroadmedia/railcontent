@@ -2293,4 +2293,18 @@ return [
 
     'cohort_permisssion_ids' => [81, 65,96,97,98,100,101],
     'enable_recsys' => false,
+    'difficulty_map' =>
+        [
+            '1' => 'Novice',
+            '2' => 'Beginner',
+            '3' => 'Beginner',
+            '4' => 'Intermediate',
+            '5' => 'Intermediate',
+            '6' => 'Advanced',
+            '7' => 'Advanced',
+            '8' => 'Expert',
+            '9' => 'Expert',
+            '10' => 'Expert',
+            'All Skill Levels' => 'All',
+        ],
 ];
