@@ -1,17 +1,40 @@
 <template>
     <div class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full">
         <div class="flex flex-row pa-2 align-v-center bb-grey-1-1 tw-w-full">
-            <h1 class="heading grow">
-                Comments
-            </h1>
-            <button
-                class="btn collapse-square"
-                @click="filters = !filters"
-            >
+            <div class="flex flex-column">
+                <h1 class="heading grow">
+                    Comments
+                </h1>
+            </div>
+            <div class="flex flex-column">
+                <div class="tw-flex tw-flex-row tw-justify-end">
+                    <div class="flex flex-column grow pr-2 tw-w-full md:tw-max-w-[455px]">
+                        <input id="catalogueSearch" v-model="searchTerm" ref="searchInput" type="text"
+                               name="search" autocomplete="off" placeholder="Search..."
+                               class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[45px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+                               @keydown.enter="submitSearch($event)">
+                    </div>
+
+                    <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0 tw-w-[45px] tw-h-[45px] tw-mb-0"
+                            :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`" title="Search"
+                            @click="submitSearch">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="flex flex-column"
+                 style="max-width:80px">
+                <button
+                    class="btn collapse-square"
+                    style="margin-left:15px"
+                    @click="filters = !filters"
+                >
                 <span :class="[themeBgClass, filters ? 'text-white' : 'inverted ' + themeTextClass]">
                     <i class="fas fa-filter"></i>
                 </span>
-            </button>
+                </button>
+            </div>
         </div>
 
         <transition name="slide-fade">
@@ -364,11 +387,11 @@ import CommentPost from '../_CommentPost';
 import CommentLikesModal from '../_CommentLikesModal.vue';
 import CommentMixin from '../_mixin';
 import ThemeClasses from '../../../mixins/ThemeClasses';
-import { storeToRefs } from 'pinia';
+import {storeToRefs} from 'pinia';
 import {useUserStore} from "../../../../../stores/user";
 
 const userStore = useUserStore();
-const { userDisplayName } = storeToRefs(userStore);
+const {userDisplayName} = storeToRefs(userStore);
 
 export default {
     name: 'CommentsCatalogue',
@@ -387,6 +410,7 @@ export default {
             noRepliedTo: true,
             openOnly: true,
             closedOnly: false,
+            searchTerm: '',
             sortState: this.defaultSortState,
             contentTypes: [
                 {
@@ -663,6 +687,7 @@ export default {
                 content_type: types,
                 page: this.currentPage,
                 conversation_status: this.openOnly === true ? 'open' : 'closed',
+                searchTerm: this.searchTerm
             })
                 .then((response) => {
                     // Pulls all Content IDs from every comment and returns all uniques
@@ -715,6 +740,15 @@ export default {
 
         removeCommentsWithReplies() {
             this.noRepliedTo = !this.noRepliedTo;
+        },
+
+        submitSearch(e) {
+            this.getComments(true);
+            //only blur the input on mobile (up to Tailwind sm breakpoint)
+            let isMobile = window.matchMedia('(max-width: 639px)');
+            if (isMobile.matches) {
+                e.target.blur()
+            }
         },
     },
 };
