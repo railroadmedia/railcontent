@@ -39,7 +39,7 @@ import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
-//import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
+import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 import PacksHeader from './vue/components/PageHeaders/PacksHeader.vue'
 
@@ -274,7 +274,7 @@ app.component('AppContainer', AppContainer)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
     .component('CollectionFilterWrapper', CollectionFilterWrapper)
-    //.component('CollectionWrapper', CollectionWrapper)
+    .component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
     .component('PacksHeader', PacksHeader)
