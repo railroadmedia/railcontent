@@ -25,6 +25,9 @@
             <!-- Arrow -->
             <div class="tw-absolute tw-inset-0 tw-bg-[rgba(0,0,0,0.4)] tw-text-white tw-justify-center tw-items-center tw-text-[32px] tw-hidden group-hover:tw-flex">
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
+<!--                <svg class="tw-w-[40px] lg:tw-w-[52px] tw-h-[40px] lg:tw-h-[52px]" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                    <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                </svg>-->
             </div>
             <!-- Progress bar -->
             <template v-if="progressPercent > 0">
