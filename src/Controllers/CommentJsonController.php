@@ -51,13 +51,14 @@ class CommentJsonController extends Controller
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
         CommentRepository::$assignedToUserId = $request->get('assigned_to_user_id', false);
         CommentRepository::$conversationStatus = $request->get('conversation_status', false);
-
+        $test = $request->get('mineOnly', false);
         $commentData = $this->commentService->getModeratorComments(
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
             auth()->id() ?? null,
-            $request->get('searchTerm', '')
+            $request->get('searchTerm', ''),
+            $request->get('mineOnly', false) == "true",
         );
 
         return reply()->json(
@@ -305,10 +306,10 @@ class CommentJsonController extends Controller
         $this->commentService->reportComment($id);
 
         $input['subject'] =
-            'Comment reported by '.
-            $currentUser['display_name'].
-            " (".
-            $currentUser['email'].
+            'Comment reported by ' .
+            $currentUser['display_name'] .
+            " (" .
+            $currentUser['email'] .
             ")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
@@ -318,28 +319,28 @@ class CommentJsonController extends Controller
 
         $input['unsubscribeLink'] = '';
         $input['alert'] =
-            'Comment reported by '.
-            $currentUser['display_name'].
-            " (".
-            $currentUser['email'].
+            'Comment reported by ' .
+            $currentUser['display_name'] .
+            " (" .
+            $currentUser['email'] .
             ")";
 
-        $input['logo'] = config('mailora.'.$brand.'.logo-link');
+        $input['logo'] = config('mailora.' . $brand . '.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] =  config('mailora.'.$brand.'.report-comment-recipient');
+        $input['recipient'] = config('mailora.' . $brand . '.report-comment-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
-                                        "success" => false,
-                                        "message" => $exception->getMessage()
-                                    ], 500);
+                "success" => false,
+                "message" => $exception->getMessage()
+            ], 500);
         }
 
         return response()->json([
-                                 "success" => true,
-                                 "message" => "The comment was reported"
-                             ], 200);
+            "success" => true,
+            "message" => "The comment was reported"
+        ], 200);
     }
 }

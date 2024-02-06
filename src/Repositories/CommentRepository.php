@@ -126,8 +126,10 @@ class CommentRepository extends RepositoryBase
     /** Get all the comments that meet the search criteria, paginated
      * @return array
      */
-    public function getComments($searchTerm = '')
-    {
+    public function getComments(
+        $searchTerm = '',
+        $mineOnly = false
+    ) {
         if ($this->orderBy == 'replied_on') {
             $query =
                 $this->query()
@@ -171,6 +173,7 @@ class CommentRepository extends RepositoryBase
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
                     ->searchExpression($searchTerm)
+                    ->mineOnlyExpression($mineOnly)
                     ->selectCommentLikeCounts()
                     ->orderByRaw('replied_on ' . ($this->orderDirection))
                     ->groupBy(['child_comment.created_on', 'child_comment.id'])
@@ -190,6 +193,7 @@ class CommentRepository extends RepositoryBase
                 ->restrictByAssignedUserId()
                 ->onlyComments()
                 ->searchExpression($searchTerm)
+                ->mineOnlyExpression($mineOnly)
                 ->selectCommentLikeCounts()
                 ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
                 ->orderBy('created_on', 'desc', ConfigService::$tableComments)
