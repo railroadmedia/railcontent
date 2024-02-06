@@ -1125,10 +1125,16 @@ class ContentService
                 $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
 
                 if ($pullFilterFields && !empty($filterFields['difficulty'])) {
-                    $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
-                        $includedTypes,
-                        $filterFields['difficulty']
-                    );
+                    if(ContentRepository::$countFilterOptionItems == 1) {
+                        $filterFields['difficulty'] = $this->difficultyFilterOptionsMapping(
+                            $filterFields['difficulty']
+                        );
+                    }else{
+                        $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                            $includedTypes,
+                            $filterFields['difficulty']
+                        );
+                    }
                 }
                 $res = $filter->retrieveFilter();
                 if($groupBy) {
@@ -2856,5 +2862,28 @@ class ContentService
         }
 
         return $results;
+    }
+
+    private function difficultyFilterOptionsMapping($difficultyOptions)
+    {
+        $mappedDifficulty = [];
+        foreach($difficultyOptions as $index=>$difficultyS){
+            $difficultyArray = (explode(' (',$difficultyS));
+            $difficulty = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
+            $difficultyNr = str_replace(')', '', $difficultyArray[1]);
+            $mapping = config('railcontent.difficulty_map') ?? [];
+            if (!empty($mapping[$difficulty] ?? [])) {
+                $mappedDifficulty[$mapping[$difficulty]] = ($mappedDifficulty[$mapping[$difficulty]] ?? 0) +$difficultyNr;
+            }else{
+                $mappedDifficulty[$difficulty] = $difficultyNr;
+            }
+        }
+        $filters['difficulty'] = [];
+        foreach($mappedDifficulty as $difficulty=>$count){
+            $filters['difficulty'][] = $difficulty.' ('.$count.')';
+        }
+        sort( $filters['difficulty'],SORT_STRING);
+
+        return $filters['difficulty'];
     }
 }

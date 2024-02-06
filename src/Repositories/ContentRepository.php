@@ -1611,6 +1611,23 @@ class ContentRepository extends RepositoryBase
     {
         $value = Arr::first(explode(' (', $value));
 
+        $mapping = config('railcontent.difficulty_map') ?? [];
+        $difficultyValues = array_keys($mapping, $value);
+
+        foreach($difficultyValues ?? [] as $difficultyInt){
+            $this->includedFields[] = [
+                'name' => $name,
+                'value' => $difficultyInt,
+                'type' => $type,
+                'operator' => $operator,
+                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                'is_content_column' => in_array(
+                    $name,
+                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                ),
+            ];
+        }
+
         $this->includedFields[] = [
             'name' => $name,
             'value' => $value,
