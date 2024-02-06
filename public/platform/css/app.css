@@ -25827,6 +25827,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(244 244 245 / var(--tw-bg-opacity)) !important;
 }
+.hover\:tw-bg-\[\#F4FAFF\]:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(244 250 255 / var(--tw-bg-opacity)) !important;
+}
 .hover\:tw-bg-\[\#F5F5F6\]:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(245 245 246 / var(--tw-bg-opacity)) !important;
@@ -25884,10 +25888,6 @@ a:visited{
 .hover\:tw-bg-white:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
-}
-.hover\:tw-bg-\[\#F4FAFF\]:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(244 250 255 / var(--tw-bg-opacity)) !important;
 }
 .hover\:tw-bg-opacity-10:hover{
   --tw-bg-opacity: 0.1 !important;

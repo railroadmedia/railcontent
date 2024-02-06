@@ -40,7 +40,7 @@
             <div class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2 lg:tw-mb-0">
                     <!-- Enrollment Label -->
-                    <div class="tw-bg-[#FFAE00] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm lg:tw-order-1 tw-mb-2 lg:tw-mb-0">Enrollment Now Open!</div>
+                    <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm lg:tw-order-1 tw-mb-2 lg:tw-mb-0">Enrollment Now Open!</div>
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto">
                         <!-- Title -->
                         <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl sm:tw-mr-4">
@@ -48,7 +48,6 @@
                         </div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
-
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                             </svg>
