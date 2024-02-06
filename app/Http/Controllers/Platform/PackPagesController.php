@@ -73,8 +73,12 @@ class PackPagesController extends Controller
 
     public function index(Request $request, $domain, $brand)
     {
-        PackDecorator::$skip = true;
-        $packs = $this->packService->getPacks();
+        $requiredFields = [];
+        if ($request->has('title')) {
+            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
+        }
+
+        $packs = $this->packService->getPacks($requiredFields);
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
         foreach ($packs as $pack) {

@@ -60,12 +60,12 @@
         @endslot
     @endcomponent --}}
 
-    <packs-header 
-        title="Packs" 
-        hero-img="{{ $pack->fetch('data.header_image_url') }}" 
+    <packs-header
+        title="Packs"
+        hero-img="{{ $pack->fetch('data.header_image_url') }}"
         additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
-        primary-cta-text="start/continue to next lesson"
-        primary-cta-url="{{ $nextLessonUrl }}"
+        primary-cta-text="{{$pack['primary_cta_text']}}"
+        primary-cta-url="{{ $pack['primary_cta_url'] }}"
         :rest-progress="true"
         content-id="{{ $parentContent->fetch('id') }}"
     >
