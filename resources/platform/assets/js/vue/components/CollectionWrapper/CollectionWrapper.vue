@@ -120,6 +120,7 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
+        ...(isPack.value && { without_enrollment: false })
     };
 })
 
