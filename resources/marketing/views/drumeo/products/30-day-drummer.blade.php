@@ -243,6 +243,7 @@
                 "noBreadcrumb" => true
             ])
 
+
     @php
             $price = floatval($productPrices['30-day-drummer-3']->price);
             $discountedPrice = floatval($productPrices['30-day-drummer-3']->discounted_price);
