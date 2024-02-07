@@ -1,6 +1,6 @@
 <template>
     <div
-        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 lg:tw-px-5 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
+        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
 
     >
         <a :href="pack.url" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
@@ -41,9 +41,9 @@
                 <div class="tw-flex tw-flex-col tw-items-start tw-mb-2">
                     <!-- Enrollment Label -->
                     <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2">Enrollment Now Open!</div>
-                    <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto">
+                    <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start">
                         <!-- Title -->
-                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl sm:tw-mr-4">
+                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl">
                             {{ title }}
                         </div>
                         <!-- Add to playlist on mobile -->
@@ -59,7 +59,7 @@
                 <!-- Artist -->
                 <div class="tw-uppercase dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">Jared Falk</div>
                 <!-- Info -->
-                <div class="dark:tw-text-[#9EC0DC] tw-text-sm tw-flex tw-items-center">
+                <div class="dark:tw-text-[#9EC0DC] tw-text-xs tw-flex tw-items-center">
                     <DifficultyLabel class="tw-text-sm" :difficultyValue="'novice'" textCase="capitalize" /> <span class="tw-mx-2">•</span>{{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
@@ -71,7 +71,7 @@
                     </svg>
                 </button>
                 <!-- Action button  -->
-                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 lg:tw-px-10 tw-w-full sm:tw-w-auto" :class="progressButtonColor">
+                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 lg:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 sm:tw-mt-0" :class="progressButtonColor">
                     <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
                 </a>
             </div>
