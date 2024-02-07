@@ -12,11 +12,11 @@
         @if(!empty($testimonialVersion))
             <h5 class="leading-tight uppercase"><strong>MUSIC STUDENTS <br class="sm:hidden">PREFER LEARNING HERE</strong></h5>
             <h1 class="overflow-hidden leading-tight text-[35px] sm:text-5xl sm:leading-[76px] rotater-text my-1 sm:my-0" style="height: 100px;font-family: 'Sedgwick Ave', sans-serif!important; ">
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">Like my very own<br class="sm:hidden"> music coach!</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">So positive and<br class="sm:hidden"> uplifting!</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">Convenient and<br class="sm:hidden"> affordable.</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">Try it once and<br class="sm:hidden"> you’ll see.</span><br>
-                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">The best teaching<br class="sm:hidden"> tool ever.</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Like my very own<br class="sm:hidden"> music coach!"</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"So positive and<br class="sm:hidden"> uplifting!"</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Convenient and<br class="sm:hidden"> affordable."</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Try it once and<br class="sm:hidden"> you’ll see."</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"The best teaching<br class="sm:hidden"> tool ever."</span><br>
             </h1>
         @else
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
