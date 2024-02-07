@@ -1236,13 +1236,11 @@ video {
 .bottom-\[38px\] {
   bottom: 38px !important;
 }
-<<<<<<< HEAD
-.bottom-full {
-  bottom: 100% !important;
-=======
 .bottom-auto {
   bottom: auto !important;
->>>>>>> master
+}
+.bottom-full {
+  bottom: 100% !important;
 }
 .left-0 {
   left: 0 !important;
@@ -2527,9 +2525,6 @@ video {
 }
 .items-center {
   align-items: center !important;
-}
-.items-baseline {
-  align-items: baseline !important;
 }
 .items-stretch {
   align-items: stretch !important;
