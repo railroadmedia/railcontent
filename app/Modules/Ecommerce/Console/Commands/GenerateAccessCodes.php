@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Modules\Ecommerce\Services\ProductService;
 use Carbon\Carbon;
@@ -24,7 +24,6 @@ class GenerateAccessCodes extends Command
                             {productId}
                             {amount}
                             {source?}
-                            {brand?}
                             {--execute : Execute this command. Without this flag, it will be simulated}';
 
     protected $description = 'Generate access codes.';
@@ -162,12 +161,6 @@ class GenerateAccessCodes extends Command
     : ?string
     {
         return $this->argument('source') ?? null;
-    }
-
-    protected function getBrand()
-    : ?string
-    {
-        return $this->argument('brand') ?? null;
     }
 
     protected function isSimulation()
