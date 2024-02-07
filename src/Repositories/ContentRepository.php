@@ -2636,7 +2636,7 @@ class ContentRepository extends RepositoryBase
         $contentIds = [];
         foreach ($contentRows as $contentRow) {
             $ids =  explode(',',$contentRow['lessons_grouped_by_field']);
-            $contentIds = array_merge($contentIds, array_slice($ids,0,5));
+            $contentIds = array_merge($contentIds, $ids);
         }
         $contentIds = array_unique($contentIds);
         return $contentIds;
