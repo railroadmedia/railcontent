@@ -12,7 +12,6 @@ use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\UserManagementSystem\Services\UserService;
-use App\Providers\EcommerceUserProvider;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Collection;
@@ -32,7 +31,6 @@ class ShopifySyncService
     private UserAccessPermissionsService $userAccessPermissionsService;
     private ShopifyCustomerService $shopifyCustomerService;
     private UserService $userService;
-    private EcommerceUserProvider $ecommerceUserProvider;
     private ShopifyGateway $shopifyGateway;
 
     public function __construct(
@@ -44,7 +42,6 @@ class ShopifySyncService
         UserProductService $userProductService,
         ShopifyCustomerService $shopifyCustomerService,
         UserService $userService,
-        EcommerceUserProvider $ecommerceUserProvider,
     ) {
         $this->shopify = $shopify;
         $this->recharge = $recharge;
@@ -53,12 +50,14 @@ class ShopifySyncService
         $this->userAccessPermissionsService = $userAccessPermissionsService;
         $this->shopifyCustomerService = $shopifyCustomerService;
         $this->userService = $userService;
-        $this->ecommerceUserProvider = $ecommerceUserProvider;
         $this->shopifyGateway = $shopifyGateway;
     }
 
-    public function syncCustomerByUser(User $user, bool $isRebuildingPermissions = false, bool $skipEventSync): void
-    {
+    public function syncCustomerByUser(
+        User $user,
+        bool $isRebuildingPermissions = false,
+        bool $skipEventSync = false
+    ): void {
         if ($user->shopify_id) {
             $this->syncCustomer(
                 $user->shopify_id,
@@ -117,7 +116,7 @@ class ShopifySyncService
         }
     }
 
-    public function syncCustomerByEmail($email)
+    public function syncCustomerByEmail($email): void
     {
         Log::debug("Shopify syncing customer by email $email");
         $emailShopify = $this->getEmailForShopify($email);
