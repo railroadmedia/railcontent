@@ -42,6 +42,8 @@ class PackDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['launch_date'] = 'September 2022';
             } elseif ($content['slug'] === '30-day-drummer-season-2') {
                 $contentsOfType[$contentIndex]['launch_date'] = 'March 2023';
+            } elseif ($content['slug'] === '30-day-drummer-season-3') {
+                $contentsOfType[$contentIndex]['launch_date'] = 'September 2023';
             }
 
         }
