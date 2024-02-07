@@ -225,25 +225,29 @@ class ContentService
         return $this->idContentCache[$hash];
     }
 
+
     /**
      *
      *
      * @param int user_id
      * @param string brand
+     * @param RecommenderSection[] sections
+     * @param bool randomize
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendedContent($user_id, $brand, $contentTypes, RecommenderSection $section=null, bool $randomize=false, $limit=6)
+    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $limit=6)
     {
-        $filter = $this->getFilterForRecommendations($limit, $contentTypes);
-        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $section?->value ?? 'ALL' ;
-        $callback = function() use ($user_id, $brand, $section) {
-            return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+        //$filter = $this->getFilterForRecommendations($limit, $contentTypes);
+        //$filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
+        $sectionKey = count($sections) == 1 ? $sections[0]->value : 'ALL';
+        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $sectionKey;
+        $callback = function() use ($user_id, $brand, $sections) {
+            return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
         };
         $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
-        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $limit);
-        return $this->getContentFilterResultsFromRecommendations($recommendations, $filter, $filterOptions);
+        $recommendations = $this->postProcessRecommendationts($recommendations, $sections, $randomize, $limit);
+        return $this->getContentFilterResultsFromRecommendations($recommendations);
     }
 
     private function getOrCacheRecommendations($cacheKey, $callback)
@@ -273,8 +277,9 @@ class ContentService
         );
     }
 
-    private function postProcessRecommendationts($recommendations, $randomize, $limit)
+    private function postProcessRecommendationts($recommendations, array $sections, $randomize, $limit)
     {
+        $recommendations = zipperMerge($recommendations);
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $limit);
         } else {
@@ -283,9 +288,16 @@ class ContentService
         return $recommendations;
     }
 
-    private function getContentFilterResultsFromRecommendations($recommendations, $filter, $filterOptions)
+    private function getContentFilterResultsFromRecommendations($recommendations)
     {
         $content = $this->getByIds($recommendations);
+        $filterOptions = [
+            "style" => ["All"],
+            "topic" => ["All"],
+            "instructor" =>[],
+            "artist" => ["All"],
+        ];
+
         return (new ContentFilterResultsEntity([
             'results' => $content,
             'filter_options' => $filterOptions,

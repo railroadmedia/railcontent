@@ -30,15 +30,23 @@ class RecommendationService
 
 
 
-    public function getFilteredRecommendations($userID, $brand, RecommenderSection $section=null)
+    public function getFilteredRecommendations($userID, $brand, array $sections=[]): array
     {
-        if (is_null($section)) {
-            return $this->getAllFilteredRecommendations($userID, $brand);
+        if (count($sections) == 1) {
+            $section = $sections[0];
+            if ($this->hasNoResults($brand, $section)) {
+                return [];
+            }
+            $content = [
+                $section => $this->getFilteredRecommendationsBySection($userID, $brand, $section)
+            ];
+            return $content;
         }
-        if ($this->hasNoResults($brand, $section)) {
-            return [];
-        }
-        return $this->getFilteredRecommendationsBySection($userID, $brand, $section);
+
+        $allContent = $this->getAllFilteredRecommendations($userID, $brand);
+        $sections = array_map(function($section) { return strtolower($section->value); }, $sections);
+        $content = array_filter($allContent, function($type) use ($sections) { return in_array($type, $sections);});
+        return $content;
 //        return match($this->accessMethod)
 //        {
 //            AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
@@ -68,14 +76,14 @@ class RecommendationService
 
     private function getAllFilteredRecommendations($userID, $brand)
     {
-        $url = env('HUGGINGFACE_URL_ALL');
+        $url = env('HUGGINGFACE_URL');
         $data = [
             'user_ids' => [$userID],
             'brand' => $brand,
         ];
         $content = $this->postToHuggingFaceWithRetry($url, $data);
         $content = $content[$userID] ?? [];
-        return zipperMerge($content);
+        return $content;
     }
 
     private function postToHuggingFaceWithRetry($url, $data) {
