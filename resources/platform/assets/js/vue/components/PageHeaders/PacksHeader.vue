@@ -80,7 +80,7 @@ const resetWithConfirmation = () => {
 };
 
 const areResourcesDownloadable = computed(() => {
-  return props.downloadableResources.length > 0;
+  return props.downloadableResources?.length > 0;
 });
 
 const downloadResources = () => {
