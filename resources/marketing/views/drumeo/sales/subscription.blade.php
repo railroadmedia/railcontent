@@ -437,108 +437,6 @@
         ])
     @endif
 
-    @if(empty($trialVersion) && !empty($promoVersion))
-
-        @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-            <section style="background: linear-gradient(to bottom, #0B1C39, #0C1524); position: relative;">
-                <img class="w-full inline sm:hidden opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/promo-collage.webp"
-                    alt="drum kit image">
-
-                <div class="text-center px-5 sm:px-6 py-4 sm:py-8 lg:py-14 text-white relative overflow-hidden">
-                    <div class="container max-w-5xl mx-auto lg:flex items-baseline">
-                        <div class="text-left flex flex-wrap sm:flex-nowrap lg:justify-center items-start mb-5">
-                            <div class="max-w-3xl sm:max-w-xl lg:max-w-2xl mx-0 z-10 sm:pr-20">
-                                <div class="flex justify-around sm:justify-start mb-10">
-                                    <div class="flex items-center sm:pr-4">
-                                        <img class="h-4 sm:h-10 mr-1 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
-                                            alt="checkmark icon">
-                                        <h3 class="uppercase"><strong>Lessons</strong></h3>
-                                    </div>
-                                    <div class="flex items-center sm:pr-4">
-                                        <img class="h-4 sm:h-10 mr-1 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
-                                            alt="checkmark icon">
-                                        <h3 class="uppercase"><strong>Songs</strong></h3>
-                                    </div>
-                                    <div class="flex items-center sm:pr-4">
-                                        <img class="h-4 sm:h-10 mr-1 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
-                                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/checkmark.svg"
-                                            alt="checkmark icon">
-                                        <h3 class="text-musora uppercase relative">
-                                            <strong>Drums</strong>
-                                            <img class="absolute h-4"
-                                                style="margin: -15px 0 0 -20px;"
-                                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/new.svg"
-                                                alt="New sign icon">
-                                        </h3>
-                                    </div>
-                                </div>
-                                <p class="leading-normal">
-                                    Start the year right with the NEW Drumeo.
-                                    <br><br>
-                                    For the first time ever, you can get one year of unlimited drum lessons plus your choice of an e-kit bundle OR practice kit bundle (drums or no drums):
-                                    <br><br>
-                                    <span class="text-musora"><strong>1. The Practice Anywhere Bundle</strong></span><br>
-                                    With unlimited drum lessons for a year + a portable practice rig for any room in your
-                                    house.<br><br>
-                                    <span class="text-musora"><strong>2. The NEW Drumeo E-Kit Bundle</strong></span><br>
-                                    The highest-rated entry-level e-kit combined with award-winning drum lessons.<br><br>
-                                    If you’ve always wanted to play the drums but don’t know <strong>WHAT</strong> to practice or don’t have a <strong>PLACE</strong>
-                                    to practice, this is it.<br><br>
-                                    It’s the first time EVER that you can get lessons and gear all in one tidy (and quiet!)
-                                    package.<br><br>
-                                    Scroll down to see everything waiting for you inside Drumeo – and we’ll see you on the drums in
-                                    2024.<br><br>
-                                    <span class="flex justify-center sm:justify-start">
-                                        <a class="join smaller blue my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started <i class="fa-light fa-arrow-right"></i></a>
-                                    </span>
-                                </p>
-                            </div>
-                            <img class="absolute top-0 right-0 h-auto hidden sm:inline transition-opacity opacity-0"
-                                style="max-width: 50%; height: auto; max-height: 80vh;"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/promo-collage.webp"
-                                alt="drum kit image">
-                        </div>
-                    </div>
-                </div>
-            </section>
-        @else
-           <section style="background: linear-gradient(to bottom, #0B1C39, #0C1524); position: relative;">
-                <div class="text-center px-5 sm:px-6 py-7 sm:py-8 lg:py-14 text-white relative overflow-hidden">
-                    <div class="container max-w-4xl mx-auto lg:flex items-baseline">
-                        <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
-                            <img class="flex-grow-0 h-80 sm:h-96 sm:order-1 mb-5 sm:mb-0 transition-opacity opacity-0" alt="drum kit image"
-                                loading="lazy" onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/promos/january/bonuses.png">
-                            <div class="w-full sm:w-auto mx-0 z-10 sm:pr-7">
-                                <h3 class="font-lexend uppercase leading-tight mb-3 sm:mb-5"><strong>Start YOUR Year Right<br class="hidden sm:inline"> With The <span class="text-musora">New Drumeo</span>.</strong></h3>
-                                <p class="leading-normal">
-                                    You’ll have your choice between two massive lesson bundles that include everything you need to learn the drums:
-                                    <br><br>
-                                    <strong class="text-musora">The Practice Anywhere Bundle</strong> – with unlimited drum lessons for a year + a portable practice rig for any room in your house. 
-                                    <br><br>
-                                    <strong class="text-musora">The New Year’s Bundle</strong> – get unlimited drum lessons for a year and save 25% – a guaranteed way to make 2024 your best year on the drums. 
-                                    <br><br>
-                                    If you’ve always wanted to play the drums but don’t know WHAT to practice or don’t have a PLACE to practice, this is it.
-                                    <br><br>
-                                    Scroll down to see everything waiting for you inside Drumeo – and we’ll see you on the drums in 2024.
-                                    <br><br>
-                                    <span class="flex justify-center sm:justify-start">
-                                        <a class="join smaller blue my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started <i class="fa-light fa-arrow-right"></i></a>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        @endif
-    @endif
-
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
@@ -617,7 +515,7 @@
             'instrument' => 'drumming',
         ])
 
-    @elseif(!empty($evergreenVersion))
+    @elseif(!empty($promoVersion))
         @php
             $bonuses = [
                 [
@@ -648,8 +546,6 @@
             ];
         @endphp
 
-
-
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
         'header' => 'Online drum lessons for all skill levels.',
@@ -657,120 +553,6 @@
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
-    @elseif(!empty($promoVersion))
-     @php
-        $originalPrice = 240;
-        $discountedPrice = 200;
-        $discountPercentage = 17;
-        if(!empty($products['alesis-ekit'])) {
-            $stock = $products['alesis-ekit']->getPublicStockCount();
-        }
-        else {
-            $stock = 'A LIMITED AMOUNT';
-        }
-    @endphp
-
-     @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-         @include('musora.sales.components.order-promo-cards-section', [
-         // general
-         "songs" => "6000+ popular songs.",
-         'buttonText' => "ORDER NOW",
-         'header' => '<span class="text-drumeo">EVERYTHING</span><br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-         'pointOne' => 'GREAT TEACHERS',
-         'pointTwo' => 'VIDEO LESSONS',
-         'pointThree' => 'FUN PRACTICE',
-         'pointFour' => '6000+ SONGS',
-         'badge' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-free-shipping.svg',
-
-         // first deal
-         'firstDeal'=> "Practice Anywhere",
-         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/practice-anywhere-bundle.webp',
-         'firstImageHeight' => 'h-44',
-         'firstDealPrice' => $discountedPrice,
-         'firstDealDiscount' => $originalPrice,
-         'firstDealSub' => "Save " . round($discountPercentage) . "% on your first year.",
-         "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=special&locked=true",
-         'firstExtraBonuses' => [
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Drumeo Membership </strong><span class="italic">($240 Value)',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> P4 Practice Pad <span class="italic">($79 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drumeo PadStand <span class="italic">($79 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($12.95 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer<span class="italic">($127 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
-     ],
-
-         // second deal
-         'secondDeal' => "E-Kit + Lessons",
-         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/ekit-bundle.webp',
-         'secondImageHeight' => 'h-44',
-         'secondDealSub' => "Everything you need to start playing the drums.",
-         'secondDealPrice' => 499,
-         'secondDealDiscount' => 1005.95,
-         'secondTwoButtons' => 'see the kit',
-         "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true",
-         'secondExtraBonuses' => [
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($499 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong> 1-Year Drumeo Membership </strong><span class="italic">($240 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer <span class="italic">($127 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
-             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 5A Drumsticks <span class="italic">($12.95 Value)</span>',
-     ],
- ])
-         <section class="px-4 sm:px-6 pt-10 pb-20">
-             <div class="container max-w-5xl mx-auto relative z-50">
-                 <h2 class="leading-tight mb-5 w-full text-center"><strong>E-Kit Shipping Notice</strong></h2>
-                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mx-2">
-                     <p class="leading-normal text-left p-2" style="width: 100%"><strong>Free shipping USA / Canada</strong><br>
-                         Your Drumeo E-Kit will ship for free anywhere in the United States and Canada. </p>
-
-                     <p class="leading-normal text-left p-2"><strong>Global Shipping</strong><br>
-                         We’ve automatically applied a $100 shipping discount that you’ll see during the checkout process. You may also need to pay duty depending on your country’s regulations.
-                         <br>Australia / New Zealand: <s>$280.50</s> $180.50 shipping.
-                         <br>Rest of World: <s>$160.50</s> $60.50 shipping.
-                     </p>
-                 </div>
-             </div>
-         </section>
-     @else
-        @include('musora.sales.components.order-promo-cards-section', [
-            // general
-            "songs" => "6000+ popular songs.",
-            'buttonText' => "ORDER NOW",
-            'header' => '<span class="text-drumeo">EVERYTHING</span><br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-            'pointOne' => 'GREAT TEACHERS',
-            'pointTwo' => 'VIDEO LESSONS',
-            'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '6000+ SONGS',
-            'ekitSold' => true,
-
-            // first deal
-            'firstDeal'=> "Practice Anywhere",
-            'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/practice-anywhere-bundle.webp',
-            'firstImageHeight' => 'h-36',
-            'firstDealPrice' => $discountedPrice,
-            'firstDealDiscount' => $originalPrice,
-            'firstDealSub' => "Save " . round($discountPercentage) . "% on your first year.",
-            "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=special&locked=true",
-            'firstExtraBonuses' => [
-                '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Drumeo Membership </strong><span class="italic">($240 Value)',
-                '<i class="fa-solid fa-check pr-1 text-drumeo"></i> P4 Practice Pad <span class="italic">($79 Value)</span>',
-                '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drumeo PadStand <span class="italic">($79 Value)</span>',
-                '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($12.95 Value)</span>',
-                '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer<span class="italic">($127 Value)</span>',
-                '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
-        ],
-
-            // second deal
-            'secondDeal' => "Join Drumeo",
-            'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/january/annual.webp',
-            'secondImageHeight' => 'h-36',
-            'secondDealSub' => "Save 25% on your first year. No bonuses.",
-            'secondDealPrice' => 180,
-            'secondDealDiscount' => 240,
-            "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=newyeardeal&locked=true",
-        ])
-    @endif
-
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/drumeo/membership/homepage/2024/logo-blue.webp',
