@@ -238,9 +238,7 @@ class ContentService
      */
     public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $limit=6)
     {
-        //$filter = $this->getFilterForRecommendations($limit, $contentTypes);
-        //$filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $sectionKey = count($sections) == 1 ? $sections[0]->value : 'ALL';
+        $sectionKey = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
         $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $sectionKey;
         $callback = function() use ($user_id, $brand, $sections) {
             return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
@@ -254,7 +252,8 @@ class ContentService
     {
         $cached = Cache::store('redis')->get($cacheKey);
         // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
-        if(!is_null($cached)) {
+        $useCaching = env('RECSYS_BE_CACHE', true);
+        if($useCaching && !is_null($cached)) {
             $recommendations = $cached;
         } else {
             $recommendations = $callback();
@@ -262,19 +261,6 @@ class ContentService
             Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
         }
         return $recommendations;
-    }
-
-    private function getFilterForRecommendations($limit, $contentTypes)
-    {
-        return $this->contentRepository->startFilter(
-            1,
-            $limit,
-            'published_on',
-            'desc',
-            $contentTypes,
-            [],
-            [],
-        );
     }
 
     private function postProcessRecommendationts($recommendations, array $sections, $randomize, $limit)
@@ -296,6 +282,7 @@ class ContentService
             "topic" => ["All"],
             "instructor" =>[],
             "artist" => ["All"],
+            "type" => ["All"],
         ];
 
         return (new ContentFilterResultsEntity([
@@ -2938,13 +2925,13 @@ class ContentService
             $soundsliceAssingment = 0;
             $assign = [];
             $lessonsCount = 0;
-           // $allLessons = [];
+            // $allLessons = [];
             $bundles = $this->contentRepository->getByParentId($content['id']);
             foreach ($bundles as $bundle) {
                 $lessons = $this->contentRepository->getByParentId($bundle['id']);
                 foreach ($lessons as $lesson) {
                     $lessonsCount++;
-                   // array_push($allLessons, $lesson);
+                    // array_push($allLessons, $lesson);
                     $assignments = $this->contentRepository->getByParentId($lesson['id']);
                     foreach ($assignments ?? [] as $lessonAssignment) {
                         if (isset($lessonAssignment['soundslice_slug'])) {
@@ -2955,7 +2942,7 @@ class ContentService
                 }
             }
             $results['lessons_count'] = $lessonsCount;
-           // $results['lessons'] = $allLessons;
+            // $results['lessons'] = $allLessons;
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
             $results['soundslice_assignments'] = $assign;
         }

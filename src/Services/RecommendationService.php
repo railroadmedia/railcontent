@@ -32,20 +32,29 @@ class RecommendationService
 
     public function getFilteredRecommendations($userID, $brand, array $sections=[]): array
     {
+        // Single section state where we call the faster implementation
         if (count($sections) == 1) {
             $section = $sections[0];
             if ($this->hasNoResults($brand, $section)) {
                 return [];
             }
             $content = [
-                $section => $this->getFilteredRecommendationsBySection($userID, $brand, $section)
+                strtolower($section->value) => $this->getFilteredRecommendationsBySection($userID, $brand, $section)
             ];
             return $content;
         }
 
         $allContent = $this->getAllFilteredRecommendations($userID, $brand);
-        $sections = array_map(function($section) { return strtolower($section->value); }, $sections);
-        $content = array_filter($allContent, function($type) use ($sections) { return in_array($type, $sections);});
+        // strictly defined sections state
+        if ($sections) {
+            $content = [];
+            foreach($sections as $section) {
+                $content[$section->value] = $allContent[$section->value];
+            }
+            // all sections state
+        } else {
+            $content = $allContent;
+        }
         return $content;
 //        return match($this->accessMethod)
 //        {
@@ -71,7 +80,7 @@ class RecommendationService
         ];
 
         $content = $this->postToHuggingFaceWithRetry($url, $data);
-        return $content[$userID] ?? [];
+        return $content[$userID];
     }
 
     private function getAllFilteredRecommendations($userID, $brand)
@@ -82,8 +91,7 @@ class RecommendationService
             'brand' => $brand,
         ];
         $content = $this->postToHuggingFaceWithRetry($url, $data);
-        $content = $content[$userID] ?? [];
-        return $content;
+        return $content[$userID];
     }
 
     private function postToHuggingFaceWithRetry($url, $data) {
