@@ -2,14 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Product;
+use App\Modules\Ecommerce\Services\ProductService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\Mail;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Symfony\Component\Console\Input\InputArgument;
 
 class GenerateAccessCodes extends Command
 {
@@ -40,11 +38,10 @@ class GenerateAccessCodes extends Command
     /**
      * Execute the console command.
      *
-     * @param ProductRepository $productRepository
      * @return mixed
      * @throws NonUniqueResultException
      */
-    public function handle(ProductRepository $productRepository)
+    public function handle(ProductService $productService)
     {
         $source = $this->getSource();
 
@@ -63,14 +60,14 @@ class GenerateAccessCodes extends Command
         $productId = $this->getProductId();
         $simulate = $this->isSimulation();
 
-        $product = $productRepository->findProduct($productId);
+        $product = $productService->getById($productId);
 
         if (!$product) {
             $this->info('No product found for product id ' . $productId . ". Exiting now.");
             die();
         }
 
-        $brand = $product->getBrand();
+        $brand = $product->brand;
         $bar = $this->output->createProgressBar($amountToCreate);
         $bar->start();
 
