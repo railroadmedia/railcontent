@@ -2,8 +2,6 @@
 
 namespace App\Modules\MusoraCenter\Providers;
 
-use App\Modules\Ecommerce\Console\Commands\ProcessAppleExpiredSubscriptions;
-use App\Modules\Ecommerce\Console\Commands\UnifySubscriptions;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 

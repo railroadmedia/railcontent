@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Log;
-use Railroad\Referral\Services\ReferralService;
+use App\Modules\Referral\Services\ReferralService;
 
 class ReferralController
 {

@@ -146,6 +146,14 @@ return [
             'options' => [],
         ],
 
+        'snowflake_pdo' => [
+            'driver' => 'snowflake_native',
+            'account' => env('DB_SNOWFLAKE_ACCOUNT'),
+            'username' => env('DB_SNOWFLAKE_USER_NAME'),
+            'password' => env('DB_SNOWFLAKE_PASSWORD'),
+            'database' => env('DB_SNOWFLAKE_DATABASE'),
+        ]
+
     ],
 
     /*

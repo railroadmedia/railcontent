@@ -12,7 +12,6 @@ Route::domain('{singeoDomain}')
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);
     Route::get('/trial-month', [SalesController::class, 'homeMonth']);
-    Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/lp', [SalesController::class, 'promo'] );
     Route::get('/student-only', [SalesController::class, 'promo']);
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );

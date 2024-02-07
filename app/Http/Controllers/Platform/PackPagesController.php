@@ -508,7 +508,7 @@ class PackPagesController extends Controller
 
         $lesson['assignments'] = $lessonAssignments;
 
-        $userAccessLevel = UserAccessService::getAccessLevelName(current_user()->getId());
+        $userAccessLevel = user()->access_level;
 
         return view('members.content.lesson', [
             "parentType" => 'pack',

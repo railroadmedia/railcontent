@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Railroad\Referral\Services\ReferralService;
+use App\Modules\Referral\Services\ReferralService;
 
 class ReferralPagesController extends BaseController
 {

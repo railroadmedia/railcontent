@@ -5,8 +5,8 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo Awards 2022 Winners | Drumeo</title>
-    <meta property="og:title" content="Drumeo Awards 2022 Winners">
+    <title>Drumeo Awards 2023 Winners | Drumeo</title>
+    <meta property="og:title" content="Drumeo Awards 2023 Winners">
 
     <meta name="description" content="The Drumeo Awards highlights inspirational drummers at the top of their game.">
     <meta property="og:description" content="The Drumeo Awards highlights inspirational drummers at the top of their game.">
@@ -16,134 +16,110 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-
     <style>
 
-        h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
-            font-weight:900
+        h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
+            font-weight: 900;
         }
-
         h1, h2, h3, h4, h5, h6, li, p {
-            font-family:Open Sans, sans-serif;
-            font-weight:400;
-            line-height:1em;
-            margin:0 auto
+            font-weight: 400;
+            line-height: 1em;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0 auto;
         }
-
         h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
-            font-size:50%;
-            top:-.75em
+            font-size: 50%;
+            top: -0.75em;
         }
-
         h1 {
-            font-size:24px;
-            line-height:1.2em
+            line-height: 1.2em;
+            font-size: 30px;
         }
-
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             h1 {
-                font-size:36px
+                font-size: 36px;
             }
         }
-
-        @media (min-width:1024px) {
+        @media (min-width: 1024px) {
             h1 {
-                font-size:48px
+                font-size: 48px;
             }
         }
-
         h2 {
-            font-size:20px;
-            line-height:1.2em
+            line-height: 1.2em;
+            font-size: 24px;
         }
-
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             h2 {
-                font-size:30px
+                font-size: 30px;
             }
         }
-
-        @media (min-width:1024px) {
+        @media (min-width: 1024px) {
             h2 {
-                font-size:36px
+                font-size: 36px;
             }
         }
-
         h3 {
-            font-size:18px
+            font-size: 20px;
         }
-
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             h3 {
-                font-size:24px
+                font-size: 24px;
             }
         }
-
-        @media (min-width:1024px) {
+        @media (min-width: 1024px) {
             h3 {
-                font-size:30px
+                font-size: 30px;
             }
         }
-
         h4 {
-            font-size:16px
+            font-size: 18px;
         }
-
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             h4 {
-                font-size:20px
+                font-size: 20px;
             }
         }
-
-        @media (min-width:1024px) {
+        @media (min-width: 1024px) {
             h4 {
-                font-size:24px
+                font-size: 24px;
             }
         }
-
         h5 {
-            font-size:15px
+            font-size: 16px;
         }
-
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             h5 {
-                font-size:18px
+                font-size: 18px;
             }
         }
-
-        @media (min-width:1024px) {
+        @media (min-width: 1024px) {
             h5 {
-                font-size:20px
+                font-size: 20px;
             }
         }
-
         h6 {
-            font-size:15px
+            font-size: 15px;
         }
-
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             h6 {
-                font-size:16px
+                font-size: 16px;
             }
         }
-
-        @media (min-width:1024px) {
+        @media (min-width: 1024px) {
             h6 {
-                font-size:18px
+                font-size: 18px;
             }
         }
-
-        li, p {
-            font-size:15px;
-            line-height:1.6em
+        p, li {
+            line-height: 1.6em;
+            font-size: 15px;
         }
-
-        @media (min-width:1024px) {
-            li, p {
-                font-size:16px
+        @media (min-width: 1024px) {
+            p, li {
+                font-size: 16px;
             }
         }
 
@@ -180,7 +156,7 @@
 
 @section('body-data')
     x-data="{
-        year: 2022,
+        year: 2023,
         yearOpen: true,
         legacyOpen: true,
     }"
@@ -189,34 +165,55 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <section class="text-white py-8 sm:py-14 lg:py-16 px-4 bg-cover bg-top lazyload" style="background-color:#000;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/header-bg.jpg">
+    <header class="text-white py-8 sm:py-14 lg:py-16 px-4 bg-cover bg-top" style="background-color:#000; background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/header-bg.jpg);">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full sm:w-1/2 lg:w-5/12 text-center">
-                    <img class="h-28 sm:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
+                    <picture>
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
+                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=340,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
+                        <img class="h-28 sm:h-36 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=270,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
+                    </picture>
                     <h1 class="my-1.5 sm:my-3 font-bebas text-5xl sm:text-6xl lg:text-7xl" style="color:#fcd05b"><span x-text="year" style="color: #0c0b0b;-webkit-text-stroke: 1px #fcd05b;"></span> WINNERS</h1>
                     <p class="hidden sm:inline-block text-left max-w-sm px-4">The Drumeo Awards highlights inspirational drummers at the top of their game. Learn about this year's winners below.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-7/12">
-                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                        <iframe class="absolute w-full h-full" x-bind:src="year === 2021 ? 'https://www.youtube.com/embed/4Nt6t0E-5jg' : year === 2022 && 'https://www.youtube.com/embed/p2FVUMYO-6k'" frameborder="0" allowfullscreen allow="autoplay" title="drumeo-video"></iframe>
+                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden"
+                        x-data="{
+                        urls: {
+                            2021: 'https://www.youtube.com/embed/4Nt6t0E-5jg',
+                            2022: 'https://www.youtube.com/embed/p2FVUMYO-6k',
+                            2023: 'https://www.youtube.com/embed/YAfkI3Ys_WQ'
+                        },
+                        getVideoUrl(year) {
+                            return this.urls[year] || 'default_src';
+                        }
+                    }">
+                        <iframe class="absolute w-full h-full" allowfullscreen allow="autoplay" title="drumeo-video"
+                            x-bind:src="getVideoUrl(year)"></iframe>
                     </div>
                     <p class="text-center inline-block sm:hidden mx-auto mt-3 sm:mt-0">The Drumeo Awards highlights inspirational drummers at the top of their game. Learn about this year's winners below.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
     <section class="text-white pb-20 sm:px-5" style="background-color:#02050e;">
         <div class="container mx-auto max-w-5xl">
             <div class="py-4 text-right">
                 <select class="bg-transparent rounded-full w-auto border-white border py-2 px-6 year-select" x-on:change="year = Number($event.target.value)">
                     <option class="bg-black text-white selectable-option" disabled selected>Select Year...</option>
+                    <option class="bg-black text-white" value="2023">2023 Winners</option>
                     <option class="bg-black text-white" value="2022">2022 Winners</option>
                     <option class="bg-black text-white" value="2021">2021 Winners</option>
                 </select>
             </div>
             <div class="py-6 sm:py-8 px-4 sm:px-8 lg:px-12" style="background-color:#272727;">
-                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drummer-of-the-year-logo.png">
+                <picture>
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=470,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drummer-of-the-year-logo.png">
+                    <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=390,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drummer-of-the-year-logo.png">
+                    <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=270,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drummer-of-the-year-logo.png">
+                </picture>
                 <div class="md:flex md:justify-between">
                     <p class="leading-tight max-w-xl m-0">Drumeo’s Drummer Of The Year awards - chosen by you, the community - celebrate those who stand out in different musical styles, and recognize exceptional performances, recordings, and your favorite drummer overall.</p>
                     <div class="text-center mt-4 md:mt-0">
@@ -225,22 +222,21 @@
                 </div>
             </div>
 
+            <div x-cloak x-bind:class="year !== 2023 && 'hidden'" style="background-color:#1c1a1d;">
+                <div :class="!yearOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-16 sm:mb-24 transition-all duration-200">
+                    <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
+                        @foreach($yearAwards2023 as $videoModal)
+                            @include("drumeo.lead-gen.pages._awards-row")
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
             <div x-cloak x-bind:class="year !== 2022 && 'hidden'" style="background-color:#1c1a1d;">
                 <div :class="!yearOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-16 sm:mb-24 transition-all duration-200">
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
                         @foreach($yearAwards2022 as $videoModal)
-                            <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
-                                <div class="sm:pl-6">
-                                    <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}">
-                                    <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
-                                        <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
-                                        <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
-                                    </div>
-                                </div>
-                                {{--<h2 class="text-shadow-4 chrome absolute top-28 sm:top-1/2 left-0 sm:left-1/3 transform -translate-y-1/2 font-bebas pl-1 sm:pl-9">CLICK TO REVEAL WINNER</h2>--}}
-                            </div>
+                            @include("drumeo.lead-gen.pages._awards-row")
                         @endforeach
                     </div>
                 </div>
@@ -250,25 +246,16 @@
                 <div :class="!yearOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-16 sm:mb-24 transition-all duration-200">
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
                         @foreach($yearAwards2021 as $videoModal)
-                            <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
-                                <div class="sm:pl-6">
-                                    <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
-                                    <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
-                                        <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
-                                        <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
-                                    </div>
-                                </div>
-                                {{--<h2 class="text-shadow-4 chrome absolute top-28 sm:top-1/2 left-0 sm:left-1/3 transform -translate-y-1/2 font-bebas pl-1 sm:pl-9">CLICK TO REVEAL WINNER</h2>--}}
-                            </div>
+                            @include("drumeo.lead-gen.pages._awards-row")
                         @endforeach
                     </div>
                 </div>
             </div>
 
             <div class="py-6 sm:py-8 px-4 sm:px-8 lg:px-12" style="background-color:#272727;">
-                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/legacy-awards-logo.png">
+                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 opacity-0 transition-opacity"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/legacy-awards-logo.png">
                 <div class="md:flex md:justify-between">
                     <p class="leading-tight max-w-xl m-0">These Legacy awards - chosen by a panel of industry experts - honor today’s drummers while paying tribute to the awards’ legendary namesakes.</p>
                     <div class="text-center mt-4 md:mt-0">
@@ -278,22 +265,21 @@
 
             </div>
 
+            <div x-bind:class="year !== 2023 && 'hidden'" style="background-color:#1c1a1d;">
+                <div :class="!legacyOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-8 sm:mb-12 transition-all duration-200">
+                    <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
+                        @foreach($legacyAwards2023 as $videoModal)
+                            @include("drumeo.lead-gen.pages._awards-row")
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
             <div x-bind:class="year !== 2022 && 'hidden'" style="background-color:#1c1a1d;">
                 <div :class="!legacyOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-8 sm:mb-12 transition-all duration-200">
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
                         @foreach($legacyAwards2022 as $videoModal)
-                            <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
-                                <div class="sm:pl-6">
-                                    <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
-                                    <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
-                                        <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
-                                        <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
-                                    </div>
-                                </div>
-                                {{--<h2 class="text-shadow-4 chrome absolute top-28 sm:top-1/2 left-0 sm:left-1/3 transform -translate-y-1/2 font-bebas pl-1 sm:pl-9">CLICK TO REVEAL WINNER</h2>--}}
-                            </div>
+                            @include("drumeo.lead-gen.pages._awards-row")
                         @endforeach
                     </div>
                 </div>
@@ -303,18 +289,7 @@
                 <div :class="!legacyOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-8 sm:mb-12 transition-all duration-200">
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
                         @foreach($legacyAwards2021 as $videoModal)
-                            <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
-                                <div class="sm:pl-6">
-                                    <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
-                                    <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
-                                        <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
-                                        <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
-                                    </div>
-                                </div>
-                                {{--<h2 class="text-shadow-4 chrome absolute top-28 sm:top-1/2 left-0 sm:left-1/3 transform -translate-y-1/2 font-bebas pl-1 sm:pl-9">CLICK TO REVEAL WINNER</h2>--}}
-                            </div>
+                            @include("drumeo.lead-gen.pages._awards-row")
                         @endforeach
                     </div>
                 </div>
@@ -329,20 +304,8 @@
         </div>
     </section>
 
-    @include("drumeo.sales.partials._footer", [
-            "minimal" => true
-        ])
+    @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    {{--<script>--}}
-        {{--$(document).ready(function () {--}}
-            {{--$('.award-container').on('click', function () {--}}
-                {{--$(this).removeClass('cursor-pointer').find('img').removeClass('blur brightness-75').addClass('blur-0 brightness-100');--}}
-                {{--$(this).find('.blur-wrap').removeClass('blur');--}}
-                {{--$(this).find('.chrome').addClass('hidden');--}}
-            {{--});--}}
-        {{--});--}}
-    {{--</script>--}}
+
 @stop

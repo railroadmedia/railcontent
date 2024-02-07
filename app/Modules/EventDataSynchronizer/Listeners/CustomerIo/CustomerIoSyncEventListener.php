@@ -35,7 +35,7 @@ use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
-use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
+use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Ecommerce\Events\MobileOrderEvent;
 use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
@@ -63,8 +63,8 @@ use Railroad\Railforums\Repositories\CategoryRepository;
 use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
-use Railroad\Referral\Events\EmailInvite;
-use Railroad\Referral\Events\ReferralClaimed;
+use App\Modules\Referral\Events\EmailInvite;
+use App\Modules\Referral\Events\ReferralClaimed;
 use Throwable;
 
 class CustomerIoSyncEventListener
@@ -1536,6 +1536,7 @@ class CustomerIoSyncEventListener
                 Carbon::parse($user->created_at)->timestamp;
             $attributes[$brand . '_membership_subscription_latest-start-date'] = $latest->updatedAt?->timestamp;
             $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($latest);
+            $attributes[$brand . '_membership_latest-access-product-id'] = $latest->product->id;
         }
         return $attributes;
     }

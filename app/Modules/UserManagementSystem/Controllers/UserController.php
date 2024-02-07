@@ -25,14 +25,14 @@ use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Structures\Purchaser;
-use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
+use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Mailora\Services\MailService;
-use Railroad\Referral\Exceptions\NotFoundException;
-use Railroad\Referral\Exceptions\ReferralException;
-use Railroad\Referral\Exceptions\SaasquatchException;
-use Railroad\Referral\Exceptions\SaasquatchUserExistsException;
-use Railroad\Referral\Models\Referrer;
-use Railroad\Referral\Services\SaasquatchService;
+use App\Modules\Referral\Exceptions\NotFoundException;
+use App\Modules\Referral\Exceptions\ReferralException;
+use App\Modules\Referral\Exceptions\SaasquatchException;
+use App\Modules\Referral\Exceptions\SaasquatchUserExistsException;
+use App\Modules\Referral\Models\Referrer;
+use App\Modules\Referral\Services\SaasquatchService;
 use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -175,7 +175,7 @@ class UserController extends Controller
 
             $user->email = $email;
             $user->setPassword($password);
-            $this->requires_password_update = false;
+            $user->requires_password_update = false;
             $user->display_name = $parts[0] . rand(10000, 99999);
             $user->save();
         } else {

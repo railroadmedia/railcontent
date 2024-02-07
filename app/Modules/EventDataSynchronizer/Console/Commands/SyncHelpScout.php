@@ -10,7 +10,6 @@ use HelpScout\Api\Exception\RateLimitExceededException;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Throwable;
 
 class SyncHelpScout extends Command
@@ -39,7 +38,6 @@ class SyncHelpScout extends Command
      */
     public function handle(
         DatabaseManager $databaseManager,
-        EcommerceEntityManager $ecommerceEntityManager,
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService
     ) {
@@ -60,7 +58,6 @@ class SyncHelpScout extends Command
                 function (Collection $userRows) use (
                     $helpScoutService,
                     $helpScoutSyncService,
-                    $ecommerceEntityManager,
                     &$done,
                     $total,
                     $railhelpscoutConnection,
@@ -85,7 +82,6 @@ class SyncHelpScout extends Command
                             $this->syncUser(
                                 $helpScoutSyncService,
                                 $helpScoutService,
-                                $ecommerceEntityManager,
                                 $userData->id,
                                 $userData->first_name,
                                 $userData->last_name,
@@ -105,10 +101,6 @@ class SyncHelpScout extends Command
 
                     $this->info('Done ' . $done . ' out of ' . $total);
                     $this->info('Real: ' . (memory_get_peak_usage(true) / 1024 / 1024) . " MiB\n\n");
-
-                    $ecommerceEntityManager->flush();
-                    $ecommerceEntityManager->clear();
-                    $ecommerceEntityManager->getConnection()->ping();
                 }
             );
     }
@@ -119,7 +111,6 @@ class SyncHelpScout extends Command
     protected function syncUser(
         HelpScoutSyncService $helpScoutSyncService,
         HelpScoutService $helpScoutService,
-        EcommerceEntityManager $ecommerceEntityManager,
         $usoraId,
         $firstName,
         $lastName,
@@ -164,7 +155,7 @@ class SyncHelpScout extends Command
                     . ', sleeping for ' . self::SLEEP_DELAY . ' seconds'
                 );
 
-                $this->pause($ecommerceEntityManager, $railhelpscoutConnection, $usoraConnection);
+                $this->pause($railhelpscoutConnection, $usoraConnection);
 
                 $attempt++;
             } catch (ConflictException $conflictException) {
@@ -182,7 +173,6 @@ class SyncHelpScout extends Command
     }
 
     protected function pause(
-        EcommerceEntityManager $ecommerceEntityManager,
         $railhelpscoutConnection,
         $usoraConnection
     ) {
@@ -191,11 +181,6 @@ class SyncHelpScout extends Command
 
         while ($cycles >= 0) {
             sleep($sleepDelayPerCycle);
-
-            if ($ecommerceEntityManager->getConnection()->ping() === false) {
-                $ecommerceEntityManager->getConnection()->close();
-                $ecommerceEntityManager->getConnection()->connect();
-            }
 
             if (is_null($railhelpscoutConnection->getPdo())) {
                 $railhelpscoutConnection->reconnect();
