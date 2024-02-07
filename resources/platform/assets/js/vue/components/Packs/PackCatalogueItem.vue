@@ -43,7 +43,7 @@
                     <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2">Enrollment Now Open!</div>
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start">
                         <!-- Title -->
-                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl">
+                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-line-clamp-2">
                             {{ title }}
                         </div>
                         <!-- Add to playlist on mobile -->
@@ -59,8 +59,8 @@
                 <!-- Artist -->
                 <div class="tw-uppercase dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">Jared Falk</div>
                 <!-- Info -->
-                <div class="dark:tw-text-[#9EC0DC] tw-text-xs tw-flex tw-items-center">
-                    <DifficultyLabel class="tw-text-sm" :difficultyValue="'novice'" textCase="capitalize" /> <span class="tw-mx-2">•</span>{{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
+                <div class="dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
+                    <span class="tw-mr-2">•</span>{{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
             <div class="sm:tw-flex tw-flex-shrink-0">
@@ -71,7 +71,7 @@
                     </svg>
                 </button>
                 <!-- Action button  -->
-                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 lg:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 sm:tw-mt-0" :class="progressButtonColor">
+                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 sm:tw-mt-0" :class="progressButtonColor">
                     <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
                 </a>
             </div>
