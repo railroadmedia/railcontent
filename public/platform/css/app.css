@@ -26180,6 +26180,10 @@ a:visited{
 :is(.tw-dark .dark\:tw-border-white\/\[0\.15\]){
   border-color: rgb(255 255 255 / 0.15) !important;
 }
+:is(.tw-dark .dark\:tw-border-\[\#444447\]){
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(68 68 71 / var(--tw-border-opacity)) !important;
+}
 :is(.tw-dark .dark\:tw-border-b-\[\#1E364A\]){
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(30 54 74 / var(--tw-border-opacity)) !important;
@@ -26820,6 +26824,9 @@ a:visited{
   .sm\:tw-justify-start{
     justify-content: flex-start !important;
   }
+  .sm\:tw-justify-end{
+    justify-content: flex-end !important;
+  }
   .sm\:tw-justify-center{
     justify-content: center !important;
   }
@@ -26831,6 +26838,9 @@ a:visited{
   }
   .sm\:tw-gap-8{
     gap: 2rem !important;
+  }
+  .sm\:tw-self-end{
+    align-self: flex-end !important;
   }
   .sm\:tw-overflow-visible{
     overflow: visible !important;

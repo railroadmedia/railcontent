@@ -77,6 +77,8 @@
             progress="{{ $parentContent->fetch('progress_percent', 0) }}"
             :enable-reset-progress="true"
             content-id="{{ $parentContent->fetch('id') }}"
+            :info-data="{{ json_encode($infoData) }}"
+            :downloadable-resources="{{ json_encode($pack['resources'] ?? []) }}"
         >
         </packs-header>
 

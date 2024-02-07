@@ -67,6 +67,7 @@
         primary-cta-icon="fa-play"
         primary-cta-text="start/continue"
         primary-cta-url="{{ $nextLessonUrl }}"
+        :info-data="{{ json_encode($infoData) }}"
         {{-- :enable-reset-progress="true"
         content-id="{{ $parentContent->fetch('id') }}" --}}
     >
