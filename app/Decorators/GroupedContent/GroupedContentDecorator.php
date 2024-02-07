@@ -6,6 +6,7 @@ use App\Decorators\Content\ModeDecoratorBase;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railcontent\Decorators\Decorator;
 
 class GroupedContentDecorator extends ModeDecoratorBase
 {
@@ -48,6 +49,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
                         'firstContentId' => $content['id'],
                     ]).'?included_types[]='.$content['content_type'];
             }
+            $content['lessons'] = Decorator::decorate($content['lessons'], 'card');
         }
 
         return $contents;
