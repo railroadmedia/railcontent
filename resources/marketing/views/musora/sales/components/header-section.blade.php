@@ -10,13 +10,13 @@
             <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
         @endif
         @if(!empty($testimonialVersion))
-            <h4 class="leading-tight uppercase">MUSIC STUDENTS <br class="sm:hidden"><strong>PREFER LEARNING HERE</strong></h4>
-            <h1 class="overflow-hidden text-2xl sm:text-5xl rotater-text -mt-4 -mb-4 sm:my-0" style="height: 110px;font-family: 'Sedgwick Ave', sans-serif!important; ">
-                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Like my very own music coach!</span><br>
-                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">So positive and uplifting!</span><br>
-                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Convenient and affordable.</span><br>
-                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">Try it once and you’ll see.</span><br>
-                <span class="py-3 relative whitespace-nowrap delay-1000 ease-in-out">The best teaching tool ever.</span><br>
+            <h5 class="leading-tight uppercase"><strong>MUSIC STUDENTS <br class="sm:hidden">PREFER LEARNING HERE</strong></h5>
+            <h1 class="overflow-hidden leading-tight text-[35px] sm:text-5xl sm:leading-[76px] rotater-text my-1 sm:my-0" style="height: 100px;font-family: 'Sedgwick Ave', sans-serif!important; ">
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">Like my very own<br class="sm:hidden"> music coach!</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">So positive and<br class="sm:hidden"> uplifting!</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">Convenient and<br class="sm:hidden"> affordable.</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">Try it once and<br class="sm:hidden"> you’ll see.</span><br>
+                <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">The best teaching<br class="sm:hidden"> tool ever.</span><br>
             </h1>
         @else
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
@@ -27,7 +27,7 @@
             <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide"><strong>Guided play-along lessons that<br class="sm:hidden"> are guaranteed to work.</strong></h5>
         @endif
         @if(empty($boldText) && empty($noCheck))
-        <p class="text-sm leading-normal tracking-widest mb-5 lg:mb-7">
+        <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
             <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
             <i class="fas fa-check ml-3 sm:ml-5 text-{{ $theme }}"></i> {!! $pointTwo !!}
             <br class="lg:hidden">
@@ -39,10 +39,13 @@
             <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
                     href="#customize-anchor"
+                    aria-label="Customize anchor"
                 @elseif(!empty($month))
                     href="/choose-your-trial-month"
+                    aria-label="Choose your trial month"
                 @else
                     href="/choose-plan"
+                     aria-label="Choose plan"
                 @endif
             >
                 @if(!empty($promoVersion) && empty($trialVersion))
@@ -52,9 +55,9 @@
                         SEE YOUR DEAL &raquo;
                     @endif
                 @elseif(!empty($month))
-                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
-                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @endif
             </a>
             @if(empty($noTrailer))
@@ -106,24 +109,25 @@
                     pauseOnHover: true,
                     pauseOnFocus: true,
                     interval: 3000,
+                    lazyLoad: 'nearby',
                 ",
             ])
                 @slot('content')
                     @foreach ($slides as $slide)
-                        <li class="splide__slide">
-                            <div class="px-3 md:px-6 text-center">
-                                <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
-                                <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
-                                    <img
-                                        class="rounded-full object-cover object-right w-9 h-9"
-                                        src={{ $slide['thumb'] }}
-                                        alt="{{$slide['name']}}"
-                                    ><br class="inline md:hidden">
-                                    <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
-                                </div>
+                    <li class="splide__slide">
+                        <div class="px-3 md:px-6 text-center">
+                            <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                            <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                <img
+                                    class="rounded-full object-cover object-right w-9 h-9"
+                                    data-splide-lazy={{ $slide['thumb'] }}
+                                    alt="{{$slide['name']}}"
+                                ><br class="inline md:hidden">
+                                <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                             </div>
-                        </li>
-                    @endforeach
+                        </div>
+                    </li>
+                @endforeach
                 @endslot
             @endcomponent
         </div>

@@ -15,13 +15,19 @@
     @include('_partials.layout.favicons.drumeo-favicons')
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-sonor.css') }}" rel="stylesheet">
-
 @stop
+
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    redeem : false,
+    lazyLoad: false,
+    }'
+@endsection
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
@@ -35,7 +41,7 @@
                         @foreach ($errors->all() as $error)
                             {{ $error }}<br>
                         @endforeach
-                    </strong><a style="color:inherit" data-open="redeem"><u>Try Again &raquo;</u></a></p>
+                    </strong><a style="color:inherit" x-on:click="redeem = true;"><u>Try Again &raquo;</u></a></p>
             </div>
         </div>
     @endif
@@ -46,19 +52,13 @@
             <img class="logo sonor" src="https://dpwjbsxqtam5n.cloudfront.net/promos/sonor-trial/sonor-logo-white.png">
             <br>
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>
-            <i class="fas fa-play play-button autoplay-video" data-open="trailer"></i>
+            <i class="fas fa-play play-button autoplay-video" x-on:click="trailer = true;"></i>
             <br>
             <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $30).<br class="hidden lg:inline">
                 Simply use the special access code you received on your flyer to activate your online drum lessons.</h4>
-            <a data-open="redeem" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
+            <a x-on:click="redeem = true;" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
         </div>
     </header>
-
-    <div class="reveal large trailer text-center" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/381368019?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
 
     <section class="learn-play-watch text-center">
         <div class="container mx-auto">
@@ -112,92 +112,101 @@
             <br>
             <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $30).<br class="hidden lg:inline">
                 Simply use the special access code you received on your flyer to activate your online drum lessons.</h4>
-            <a data-open="redeem" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
+            <a x-on:click="redeem = true;" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
         </div>
     </section>
 
-    <div class="reveal large" id="redeem" data-reveal data-reset-on-close="false">
-        <h3 class="mb-1"><strong>Redeem Your Drumeo Access Pass</strong></h3>
-        <p class="change-form uppercase pointer mr-2 mb-1
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '381368019',
+        'vimeo' => true,
+    ])
+    @component('_partials.components.modal',[
+        'name' => 'redeem',
+    ])
+        @slot('content')
+            <div id="redeem" class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <h3 class="mb-3"><strong>Redeem Your Drumeo Access Pass</strong></h3>
+                <p class="change-form uppercase pointer mr-2 mb-3
             {{ old('credentials_type') == 'new' || old('credentials_type') != 'existing' ? 'active' : '' }}"
-                data-form="newAccountForm">Create New Account</p>
+                    data-form="newAccountForm">Create New Account</p>
 
-        <br class="inline md:hidden">
+                <br class="inline md:hidden">
 
-        <p class="change-form uppercase pointer mb-1
+                <p class="change-form uppercase pointer mb-3
             {{ old('credentials_type') == 'existing' ? 'active' : '' }}"
-                data-form="existingAccountForm">Add to My Account</p>
+                    data-form="existingAccountForm">Add to My Account</p>
 
-        <div id="newAccountForm" class="redemption-form {{ old('credentials_type') == 'new' || old('credentials_type') != 'existing' ? '' : 'hidden' }}">
-            <div>
-                <p class="mb-1">
-                    Fill out the form below to start your 30-Day Drumeo Membership.
-                </p>
-
-                <form action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" method="POST" novalidate>
-                    {{ method_field('POST') }}
-                    {{ csrf_field() }}
-
-                    <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
-
-                    <div class="mb-1">
-                        @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "drumeo",
-                            "type" => "text",
-                            "inputId" => "accessCodeNew",
-                            "inputName" => "access_code",
-                            "inputLabel" => "Access Code...",
-                            "inputValue" => old('access_code'),
-                            "inputErrors" => $errors->get('access_code'),
-                            "maxLength" => 24
-                        ])
-                    </div>
-
-                    <div class="mb-1">
-                        @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "drumeo",
-                            "type" => "email",
-                            "inputId" => "emailNew",
-                            "inputName" => "email",
-                            "inputLabel" => "Email Address...",
-                            "inputValue" => old('email'),
-                            "inputErrors" => $errors->get('email'),
-                        ])
-                    </div>
-
-                    <div class="mb-1">
-                        @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "drumeo",
-                            "type" => "password",
-                            "inputId" => "passwordNew",
-                            "inputName" => "password",
-                            "inputLabel" => "Password...",
-                            "inputValue" => "",
-                            "inputErrors" => $errors->get('password'),
-                        ])
-                    </div>
-
-                    <div class="mb-1">
-                        @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "drumeo",
-                            "type" => "password",
-                            "inputId" => "confirmPasswordNew",
-                            "inputName" => "password_confirmation",
-                            "inputLabel" => "Confirm Password...",
-                            "inputValue" => "",
-                            "inputErrors" => $errors->get('password_confirmation'),
-                        ])
-                    </div>
-
-                    <input type="submit" value="Click To Redeem" class="join blue">
-                </form>
-            </div>
-        </div>
-
-        <div id="existingAccountForm" class="redemption-form {{ old('credentials_type') == 'existing' ? '' : 'hidden' }}">
+                <div id="newAccountForm" class="redemption-form {{ old('credentials_type') == 'new' || old('credentials_type') != 'existing' ? '' : 'hidden' }}">
                     <div>
-                        <p class="mb-1">
+                        <p class="mb-3">
+                            Fill out the form below to start your 30-Day Drumeo Membership.
+                        </p>
+
+                        <form action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" method="POST" novalidate>
+                            {{ method_field('POST') }}
+                            {{ csrf_field() }}
+
+                            <input type="hidden" name="credentials_type" value="new">
+                            <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
+
+                            <div class="mb-1">
+                                @include('partials.bladesora.members.inputs.text-input', [
+                                    "brand" => "drumeo",
+                                    "type" => "text",
+                                    "inputId" => "accessCodeNew",
+                                    "inputName" => "access_code",
+                                    "inputLabel" => "Access Code...",
+                                    "inputValue" => old('access_code'),
+                                    "inputErrors" => $errors->get('access_code'),
+                                    "maxLength" => 24
+                                ])
+                            </div>
+
+                            <div class="mb-1">
+                                @include('partials.bladesora.members.inputs.text-input', [
+                                    "brand" => "drumeo",
+                                    "type" => "email",
+                                    "inputId" => "emailNew",
+                                    "inputName" => "email",
+                                    "inputLabel" => "Email Address...",
+                                    "inputValue" => old('email'),
+                                    "inputErrors" => $errors->get('email'),
+                                ])
+                            </div>
+
+                            <div class="mb-1">
+                                @include('partials.bladesora.members.inputs.text-input', [
+                                    "brand" => "drumeo",
+                                    "type" => "password",
+                                    "inputId" => "passwordNew",
+                                    "inputName" => "password",
+                                    "inputLabel" => "Password...",
+                                    "inputValue" => "",
+                                    "inputErrors" => $errors->get('password'),
+                                ])
+                            </div>
+
+                            <div class="mb-1">
+                                @include('partials.bladesora.members.inputs.text-input', [
+                                    "brand" => "drumeo",
+                                    "type" => "password",
+                                    "inputId" => "confirmPasswordNew",
+                                    "inputName" => "password_confirmation",
+                                    "inputLabel" => "Confirm Password...",
+                                    "inputValue" => "",
+                                    "inputErrors" => $errors->get('password_confirmation'),
+                                ])
+                            </div>
+
+                            <input type="submit" value="Click To Redeem" class="join blue">
+                        </form>
+                    </div>
+                </div>
+
+                <div id="existingAccountForm" class="redemption-form {{ old('credentials_type') == 'existing' ? '' : 'hidden' }}">
+                    <div>
+                        <p class="mb-3">
                             Fill out the form below to add 30 days to your Drumeo Membership.
                         </p>
 
@@ -248,12 +257,13 @@
 
                             @endif
 
-                                <input type="submit" value="Click To Redeem" class="join blue">
+                            <input type="submit" value="Click To Redeem" class="join blue">
                         </form>
                     </div>
                 </div>
-    </div>
-
+            </div>
+        @endslot
+    @endcomponent
 
     @include("drumeo.sales.partials._footer")
 
@@ -261,8 +271,6 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             $('input[value!=""]').addClass('has-input');
 
             $('input').blur(function() {
@@ -300,6 +308,4 @@
             }
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

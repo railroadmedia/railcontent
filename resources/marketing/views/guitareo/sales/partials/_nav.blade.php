@@ -1,4 +1,4 @@
-<div class="top-bar expanded">
+<nav class="top-bar expanded">
     <div class="logo">
         <a href="{{ get_legacy_brand_base_url('guitareo') }}">
             <img src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="Guitareo Logo">
@@ -79,7 +79,7 @@
             <a href="https://www.musora.com/guitareo" class="join outline-button">Login</a>
         </div>
     @endif
-</div>
+</nav>
 
 <div class="nav-side-bar" style="z-index: 2147483003;">
     <div class="bottom-section">

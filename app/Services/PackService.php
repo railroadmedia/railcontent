@@ -10,7 +10,6 @@ use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\PackDecorator;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -20,20 +19,10 @@ use Railroad\Railcontent\Services\ContentService;
 
 class PackService
 {
-    /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    /**
-     * @var UserProductService
-     */
-    private $userProductService;
-
-    public function __construct(ContentService $contentService, UserProductService $userProductService)
+    private ContentService $contentService;
+    public function __construct(ContentService $contentService)
     {
         $this->contentService = $contentService;
-        $this->userProductService = $userProductService;
     }
 
     /**

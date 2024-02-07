@@ -13,6 +13,7 @@
     "require": {
         "php": "^8.1",
         "ext-curl": "*",
+        "ext-openssl": "*",
         "code-lts/laravel-fcm": "1.7.*",
         "cweagans/composer-patches": "^1.7",
         "fakerphp/faker": "^1.9.1",
@@ -56,7 +57,7 @@
         "venturecraft/revisionable": "1.*",
         "vimeo/vimeo-api": "^3.0",
         "whitecube/nova-flexible-content": "^1.0",
-        "ext-openssl": "*"
+        "yoramdelangen/laravel-pdo-odbc": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

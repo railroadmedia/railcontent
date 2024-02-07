@@ -2,12 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
-use Railroad\Ecommerce\Entities\Product;
 
 class IsDrumeoLifetimeUserFieldResyncTool extends Command
 {

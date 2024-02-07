@@ -69,7 +69,7 @@ class SyncOrdersToShopifyJobManager implements ShouldQueue
                         ->orWhereHas("orderItems", function (Builder $oiq) {
                             $oiq->whereDate("updated_at", ">", $this->lastSyncAt);
                         })
-                        ->orWhereHas("orderItemFullfillments", function (Builder $oifq) {
+                        ->orWhereHas("orderItemFulfillments", function (Builder $oifq) {
                             $oifq->whereDate("updated_at", ">", $this->lastSyncAt);
                         });
                 });

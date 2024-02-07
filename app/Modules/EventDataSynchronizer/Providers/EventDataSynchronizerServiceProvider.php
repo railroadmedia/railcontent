@@ -4,10 +4,8 @@ namespace App\Modules\EventDataSynchronizer\Providers;
 
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
-use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOrders;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
@@ -18,7 +16,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
-use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
+use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Ecommerce\Events\MobileOrderEvent;
 use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
@@ -36,8 +34,6 @@ use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\HelpScoutIndex;
 use App\Modules\EventDataSynchronizer\Console\Commands\ProductOwnerUserFieldResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoExistingDevices;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoForUpdatedUserProductsAndSubscriptions;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOldEvents;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncExistingHelpScout;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncHelpScout;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncHelpScoutAsync;
@@ -64,11 +60,11 @@ use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Referral\Events\ReferralClaimed;
+use App\Modules\Referral\Events\ReferralClaimed;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
-use Railroad\Referral\Events\EmailInvite;
+use App\Modules\Referral\Events\EmailInvite;
 
 class EventDataSynchronizerServiceProvider extends EventServiceProvider
 {
@@ -233,7 +229,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
 
         $this->commands(
             [
-                SyncCustomerIoForUpdatedUserProductsAndSubscriptions::class,
                 UserContentPermissionsResyncTool::class,
                 UserContentProductPermissionsResyncTool::class,
                 PackBonusExpirationDateResyncTool::class,
@@ -241,7 +236,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncExistingHelpScout::class,
                 HelpScoutIndex::class,
                 SyncHelpScoutAsync::class,
-                SyncCustomerIoOldEvents::class,
                 SyncCustomerIoExistingDevices::class,
                 UserMembershipSyncByPermissions::class,
                 UserMembershipSyncCustom::class,
@@ -251,7 +245,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 CustomerIOSyncUser::class,
                 MigrateMinutesWatchedPoints::class,
                 SyncPoints::class,
-                SyncCustomerIoOrders::class,
             ]
         );
         $this->mergeConfigFrom(

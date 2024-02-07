@@ -4,17 +4,13 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
-use App\Services\User\UserAccessService;
 use App\Services\UserMetricsService;
 use Illuminate\Http\Request;
 use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Points\Services\UserPointsService;
-use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProfilePublicPagesController extends BaseController
 {
@@ -49,22 +45,7 @@ class ProfilePublicPagesController extends BaseController
         }
 
         $userMetrics = $this->getUserMetrics($user);
-        switch (brand()) {
-            case 'drumeo':
-                $methodSlug = 'drumeo-method';
-                break;
-            case 'pianote':
-                $methodSlug = 'pianote-method';
-                break;
-            case 'guitareo':
-                $methodSlug = 'guitareo-method';
-                break;
-            case 'singeo':
-                $methodSlug = 'singeo-method';
-                break;
-            default:
-                throw new NotFoundHttpException();
-        }
+        $methodSlug = "$brand-method";
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();

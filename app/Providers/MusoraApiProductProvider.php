@@ -3,16 +3,13 @@
 namespace App\Providers;
 
 use App\Decorators\Content\VimeoTrailerDecorator;
-use App\Maps\ProductAccessMap;
-use App\Models\Brand;
-use App\Models\Carousel;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
+use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Services\PackService;
 use App\Services\PlaylistService;
-use Carbon\Carbon;
-use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -21,41 +18,34 @@ class MusoraApiProductProvider implements ProductProviderInterface
 {
     private CarouselService $carouselService;
     private UserProductService $userProductService;
-    private ProductRepository $productRepository;
     private CohortService $cohortService;
     private PackService $packService;
     private VimeoTrailerDecorator $vimeoTrailerDecorator;
     private ContentService $contentService;
     private PlaylistService $playlistService;
+    private ProductService $productService;
+    private LearningPathsService $learningPathsService;
 
-    /**
-     * @param CarouselService $carouselService
-     * @param UserProductService $userProductService
-     * @param ProductRepository $productRepository
-     * @param CohortService $cohortService
-     * @param PackService $packService
-     * @param VimeoTrailerDecorator $vimeoTrailerDecorator
-     * @param ContentService $contentService
-     * @param PlaylistService $playlistService
-     */
     public function __construct(
         CarouselService $carouselService,
         UserProductService $userProductService,
-        ProductRepository $productRepository,
         CohortService $cohortService,
         PackService $packService,
         VimeoTrailerDecorator $vimeoTrailerDecorator,
         ContentService $contentService,
-        PlaylistService $playlistService
+        PlaylistService $playlistService,
+        ProductService $productService,
+        LearningPathsService $learningPathsService
     ) {
         $this->carouselService = $carouselService;
         $this->userProductService = $userProductService;
-        $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
         $this->packService = $packService;
         $this->vimeoTrailerDecorator = $vimeoTrailerDecorator;
         $this->contentService = $contentService;
         $this->playlistService = $playlistService;
+        $this->productService = $productService;
+        $this->learningPathsService = $learningPathsService;
     }
 
     public function getPackPrice($slug)
@@ -165,12 +155,12 @@ class MusoraApiProductProvider implements ProductProviderInterface
             }
         }
 
-        $product = $this->productRepository->findProduct($cohort['product_id']);
+        $product = $this->productService->getById($cohort['product_id']);
         $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $cohort['product_id']);
         $nPackOwners = $this->userProductService->getNumberProductOwners($cohort['product_id']);
         $registerButtonUrl =
             (!$hasProduct) ?
-                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) : '';
+                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '';
 
         $enrollmentClosed = $cohort['enrollmentClosed'];
         $lists = $cohort->lists;
@@ -211,7 +201,12 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function getVimeoEndpoints($vimeoId)
     {
-       return  $this->vimeoTrailerDecorator->decorate($vimeoId);
+        return  $this->vimeoTrailerDecorator->decorate($vimeoId);
+    }
+
+    public function getLearningPaths()
+    {
+        return $this->learningPathsService->getLearningPaths();
     }
 
 }

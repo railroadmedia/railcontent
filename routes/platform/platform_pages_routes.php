@@ -54,6 +54,10 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.coaches');
 
+                Route::get('/{brand}/lessons/recommended', [ContentPagesController::class, 'recommendedLessons'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.recommended-lessons');
+
                 Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.new-lessons');
@@ -156,7 +160,7 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
-                
+
 
                 Route::get('/{brand}/workouts', [WorkoutsPageController::class, 'showWorkoutsPage'])
                     ->whereIn('brand', all_brands())

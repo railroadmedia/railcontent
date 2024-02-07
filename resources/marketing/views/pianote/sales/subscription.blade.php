@@ -262,42 +262,6 @@
         @endif
     @endif
 
-    @if(empty($trialVersion) && empty($evergreenVersion) && !empty($promoVersion))
-        <section class="text-center px-5 lg:px-6 py-8 sm:py-0 text-white relative" style="background: linear-gradient(to bottom, #0B1C39, #0C1524);">
-            <div class="container max-w-5xl mx-auto">
-                    <h2 class="inline-block sm:hidden mb-4 sm:text-left"><strong>Imagine starting a<br class="inline sm:hidden"> resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
-                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                    <div class="w-full sm:w-5/12 sm:order-1 bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" x-on:click="workoutVid = true;" style="    padding: 5% 9% 2% 0; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/pianote/membership/homepage/2024/pianote-promo-bundle.png);">
-                        <video class="rounded-xl overflow-hidden w-full shadow-lg max-w-[230px] sm:max-w-full mx-auto"
-                            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-video.mp4"
-                            muted autoplay loop playsinline></video>
-                    </div>
-                    <div class="w-full sm:w-7/12 pr-5 lg:pr-8 mx-0 leading-normal sm:py-14 lg:py-20">
-                        <div class="text-center relative">
-                            <h2 class="hidden sm:inline-block py-4 sm:text-left"><strong>Imagine starting a resolution you <br class="inline sm:hidden"><span class="text-pianote">knew</span> would stick…</strong></h2>
-                        </div>
-                        <p class="pt-6 sm:pt-0">
-                            Pianote is different from other online lessons. <br><br>
-                            You won’t just watch a video and be left alone to do the hard work. Instead, you’ll get guided play-along lessons that bring the personal touch of a live class right into your living room. You’ll play alongside a REAL teacher so you’ll never have to guess what you should be doing. <br><br>
-                            It will feel like they’re right there with you. <br><br>
-                            <span class="text-pianote">And it works.</span> <br><br>
-                            So this year, don’t just wish you could play the piano. Join Pianote and know you can. <br><br>
-                            (And we’re so confident, you’ll have 90 days to try it risk-free.)<br><br>
-                            Join today and get 8 FREE bonuses. <br><br>
-                            You’ll love it.
-                            <br><br>
-                            <span class="flex justify-center md:justify-start">
-                                <a class="join smaller pianote my-3 w-full sm:w-1/2 anchor-slide" href="#customize-anchor">GET Started <i class="fa-light fa-arrow-right"></i></a>
-                            </span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-    @endif
-
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
@@ -380,7 +344,7 @@
             'instrument' => 'piano',
         ])
 
-    @elseif(!empty($evergreenVersion))
+    @elseif(!empty($promoVersion))
         @php
             $bonuses = [
                 [
@@ -417,57 +381,6 @@
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
-    @elseif(!empty($promoVersion))
-
-        @php
-            if(!empty($products['taktell-piccolo-metronome'])) {
-                $stock = $products['taktell-piccolo-metronome']->getPublicStockCount();
-            }
-            else {
-                $stock = '745';
-            }
-        @endphp
-
-    @include('musora.sales.components.order-promo-cards-section', [
-        // General
-        "songs" => "1000+ popular songs.",
-        'buttonText' => 'GET STARTED',
-        'header' => 'THE <span class="text-pianote">NEW WAY</span> TO<br> <span class="relative inline-block">LEARN PIANO<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-        'pointOne' => 'GREAT TEACHERS',
-        'pointTwo' => 'VIDEO LESSONS',
-        'pointThree' => 'FUN PRACTICE',
-        'pointFour' => '1000+ SONGS',
-        'topBadge' => 'BEST DEAL',
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-free-shipping.webp',
-
-        // First deal
-        'firstDeal'=> "Pianote Only",
-        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/pianote-only.webp',
-        'firstImageHeight'=> 'h-36',
-        'firstDealPrice' => 180,
-        'firstDealDiscount' => 240,
-        'firstDealSub' => "Save 25% on your first year. No bonuses.",
-        "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&promo-code=newyeardeal&redirect=/order&locked=true",
-
-        // Second deal
-        'secondDeal' => "New Year’s Bundle",
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/new-year-bundle.webp',
-        'secondImageHeight'=> 'h-36',
-        'secondDealSub' => "Join Pianote + get 8 bonuses worth $621.",
-        'secondDealPrice' => 240,
-        'secondDealDiscount' => 861,
-        "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[little-book-hanon]=1&products[little-book-chord]=1&products[little-book-arpeggios]=1&products[pianote-practice-planner]=1&products[100-days-of-practice-poster]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&redirect=/order&locked=true",
-        'secondExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Metronome <span class="italic">($79 value) <span class="text-pianote"><span class="line-through ">800 </span><strong>' . $stock .'</strong> left!</span></span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Little Book Bundle <span class="italic">($21 value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Pianote Practice Planner <span class="italic">($39 value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> 100 Days of Practice Poster <span class="italic">($9 value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> New Piano Players Start Here <span class="italic">($127 value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Easy Chords <span class="italic">($127 value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Piano Technique Made Easy <span class="italic">($120 value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Riffs & Fills <span class="italic">($99 value)</span>'
-        ],
-    ])
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/pianote/membership/homepage/2024/pianote-logo-red.webp',
@@ -522,7 +435,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
 @stop
