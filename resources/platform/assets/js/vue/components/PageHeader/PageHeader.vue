@@ -5,7 +5,7 @@
                 <div class="">
                     <slot name="top-left"></slot>
                 </div>
-                <div class="tw-flex tw-self-end tw-items-center tw-mt-3 sm:tw-mt-0">
+                <div class="tw-flex sm:tw-self-end tw-items-center tw-mt-3 sm:tw-mt-0">
                     <slot name="top-right"></slot>
                 </div>
             </div>

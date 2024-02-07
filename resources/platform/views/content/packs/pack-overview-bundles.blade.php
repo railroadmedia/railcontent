@@ -67,6 +67,7 @@
         primary-cta-icon="fa-play"
         primary-cta-text="{{$pack['primary_cta_text']}}"
         primary-cta-url="{{ $pack['primary_cta_url'] }}"
+        :info-data="{{ json_encode($infoData) }}"
         {{-- :enable-reset-progress="true"
         content-id="{{ $parentContent->fetch('id') }}" --}}
     >
