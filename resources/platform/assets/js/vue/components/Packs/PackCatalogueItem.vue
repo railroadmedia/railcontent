@@ -1,9 +1,9 @@
 <template>
-    <a
-        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 lg:tw-px-5 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF]"
-        :href="pack.url"
+    <div
+        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 lg:tw-px-5 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
+
     >
-        <div class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
+        <a :href="pack.url" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
             <!-- Thumbnail -->
             <img
                 class="tw-transition-opacity tw-opacity-0 tw-absolute tw-inset-0 tw-object-cover tw-object-center"
@@ -35,9 +35,9 @@
                 <div :class="`tw-absolute tw-left-0 tw-bottom-0 tw-h-[6px] tw-rounded-full tw-bg-${brand}`" :style="`width: ${progressPercent}%`"></div>
             </template>
 
-        </div>
+        </a>
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
-            <div class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
+            <a :href="pack.url" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col tw-items-start tw-mb-2">
                     <!-- Enrollment Label -->
                     <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2">Enrollment Now Open!</div>
@@ -62,7 +62,7 @@
                 <div class="dark:tw-text-[#9EC0DC] tw-text-sm tw-flex tw-items-center">
                     <DifficultyLabel class="tw-text-sm" :difficultyValue="'novice'" textCase="capitalize" /> <span class="tw-mx-2">•</span>{{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
-            </div>
+            </a>
             <div class="sm:tw-flex tw-flex-shrink-0">
                 <!-- Add to playlist -->
                 <button class="tw-mr-4 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-hidden">
@@ -76,7 +76,7 @@
                 </a>
             </div>
         </div>
-    </a>
+    </div>
 </template>
 <script setup>
 import {storeToRefs} from "pinia/dist/pinia";
@@ -166,8 +166,4 @@ const addToPlaylist = () => {
 
     window.openplaylistmodal({ modalType: 'addItem', content });
 }
-
-onMounted(() => {
-    console.log(pack.primary_cta_url)
-})
 </script>
