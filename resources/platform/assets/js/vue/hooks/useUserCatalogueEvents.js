@@ -11,7 +11,6 @@ const getValue = (obj, key) => {
 }
 
 export default function useUserCatalogueEvents(props, context) {
-    console.log(props)
     function progressReset(event) {
         const icon = event.target;
         Toasts.confirm({
@@ -72,9 +71,6 @@ export default function useUserCatalogueEvents(props, context) {
     }
 
     function resetProgressEventHandler(payload) {
-        console.log(payload)
-        console.log(props)
-
         const post_index = props.content.map(post => post.id).indexOf(payload.content_id);
 
         ContentService.resetContentProgress(payload.content_id)
