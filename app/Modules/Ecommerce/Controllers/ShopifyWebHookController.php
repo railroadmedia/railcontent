@@ -123,7 +123,7 @@ class ShopifyWebHookController extends Controller
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
 
-        dispatch(new ImpactTrackConversion($user,  $brand, $order))->delay(Carbon::now()->addSeconds(3));
+        dispatch(new ImpactTrackConversion($user,  $brand, $order, $this->productService))->delay(Carbon::now()->addSeconds(3));
     }
 
     private function handleOrderRefundEventTracking($order): void
