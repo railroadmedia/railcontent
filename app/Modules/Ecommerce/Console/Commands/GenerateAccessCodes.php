@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
+use App\Modules\Ecommerce\Models\AccessCode;
 use App\Modules\Ecommerce\Services\ProductService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
@@ -71,9 +72,7 @@ class GenerateAccessCodes extends Command
         $bar->start();
 
         for ($i = 1; $i <= $amountToCreate; $i++) {
-            $code = bin2hex(
-                openssl_random_pseudo_bytes(24 / 2)
-            );
+            $code = AccessCode::generateNewCode();
 
             $accessCodes[] = [
                 'code' => strtoupper($code),
@@ -145,26 +144,22 @@ class GenerateAccessCodes extends Command
         return $this::SUCCESS;
     }
 
-    protected function getProductId()
-    : int
+    protected function getProductId(): int
     {
         return $this->argument('productId');
     }
 
-    protected function getAmount()
-    : int
+    protected function getAmount(): int
     {
         return $this->argument("amount");
     }
 
-    protected function getSource()
-    : ?string
+    protected function getSource(): ?string
     {
         return $this->argument('source') ?? null;
     }
 
-    protected function isSimulation()
-    : bool
+    protected function isSimulation(): bool
     {
         return $this->option("execute") == false;
     }

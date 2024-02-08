@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Modules\Ecommerce\tests\Unit;
+namespace App\Modules\Ecommerce\tests\Feature;
 
-use App\Modules\Ecommerce\Models\AccessCode;
 use App\Modules\Ecommerce\Models\Product;
 use Tests\TestCase;
 
@@ -19,5 +18,10 @@ class AccessCodeTest extends TestCase
             'brand' => $product->brand,
             'source' => 'test_source'
         ]);
+    }
+
+    public function test_claim_access_code(): void
+    {
+
     }
 }
