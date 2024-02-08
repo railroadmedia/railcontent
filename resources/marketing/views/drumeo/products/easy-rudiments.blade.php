@@ -130,20 +130,20 @@
                         'name' => 'Hannah Welton',
                         'credit' => 'Drummer for Prince',
                         'comment' => 'What an incredible resource! Drumeo never fails to deliver innovative and informative tools to enhance the technique and overall performance of drummers everywhere. No matter your drumming goals or aspirations, “Easy Rudiments” is sure to help you get exactly where you want to be!',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/2021-12-15-Hannah-Welton-headshots-101-1-1640671453.jpg',
+                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/2021-12-15-Hannah-Welton-headshots-101-1-1640671453.jpg',
                         ],
                         [
                         'name' => 'Dorothea Taylor',
                         'credit' => 'The Godmother Of Drumming',
                         'comment' => 'Learning the essential rudiments opens up a lifetime of knowledge for the road ahead.
                         This new book from Drumeo is just what you need for a good foundation starting your drumming experience.',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg',
+                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg',
                         ],
                         [
                         'name' => 'Zach Jones',
                         'credit' => 'Drummer for Sting',
                         'comment' => '“Easy Rudiments” offers a practical, musical approach to learning the foundational skills of drumming. If you’re looking for a quick, fun route from buying your first pair of drumsticks to playing along to your favorite tunes and making music with other people, this is the book for you.',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/zach-jones-1-1-1693917165.jpg',
+                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/zach-jones-1-1-1693917165.jpg',
                         ],
                         [
                         'name' => 'Tony Palermo',
@@ -155,13 +155,13 @@
                         'name' => 'Mike Sleath',
                         'credit' => 'Drummer for Shawn Mendes',
                         'comment' => 'Easy Rudiments by Drumeo covers all the most important tools every drummer needs! A must have for anyone looking to pick up some sticks!!',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/236685-avatar-1573487733.jpg',
+                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/236685-avatar-1573487733.jpg',
                         ],
                         [
                         'name' => 'JP Bouvet',
                         'credit' => 'Independent Drummer',
                         'comment' => 'A book that saves you from guessing which rudiments matter the most. I use these rudiments constantly in my improvisation.',
-                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/2023-08-08-JP-Bouvet-Coach-Cards-1x1-1692091193.jpg',
+                        'img' => 'https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/2023-08-08-JP-Bouvet-Coach-Cards-1x1-1692091193.jpg',
                         ],
                      ];
                 @endphp
