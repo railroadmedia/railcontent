@@ -51,12 +51,12 @@ class AccessCode extends Model
 
     public function generateCode(): void
     {
-        $this->setCode(bin2hex(openssl_random_pseudo_bytes(24 / 2)));
+        $this->code = self::generateNewCode();
     }
 
     public function getProductIdsAsString(): ?string
     {
-        return implode(", ", $this->product_ids);
+        return implode(", ", unserialize($this->product_ids));
     }
 
     public function claimer()

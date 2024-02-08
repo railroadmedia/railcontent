@@ -3,13 +3,11 @@
 namespace App\Modules\Ecommerce\tests\Feature;
 
 use App\Modules\Ecommerce\database\factories\AccessCodeFactory;
-use App\Modules\Ecommerce\database\factories\ProductFactory;
-use App\Modules\Ecommerce\Models\AccessCode;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\AccessCodeService;
-use Event;
 use Exception;
 use Modules\UserManagementSystem\Models\User;
+use Queue;
 use Tests\TestCase;
 
 class AccessCodeServiceTest extends TestCase
@@ -24,7 +22,7 @@ class AccessCodeServiceTest extends TestCase
 
     public function test_claim()
     {
-        Event::fake();
+        Queue::fake();//ignore customerIO jobs
 
         $product = Product::factory()->create();
         $accessCode = AccessCodeFactory::createAccessCode($product);

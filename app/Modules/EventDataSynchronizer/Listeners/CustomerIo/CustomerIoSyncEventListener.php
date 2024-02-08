@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
 use App\Modules\Ecommerce\Collections\OrderCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Events\AccessCodeClaimed;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\Ecommerce\Models\Product;
@@ -32,11 +33,9 @@ use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
-use Railroad\Ecommerce\Events\MobileOrderEvent;
 use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Ecommerce\Events\PaymentEvent;
@@ -1255,13 +1254,10 @@ class CustomerIoSyncEventListener
     }
 
 
-    /**
-     * @param AccessCodeClaimed $accessCodeClaimed
-     */
-    public function handleAccessCodeClaimed(AccessCodeClaimed $accessCodeClaimed)
+    public function handleAccessCodeClaimed(AccessCodeClaimed $accessCodeClaimed): void
     {
         $accessCode = $accessCodeClaimed->getAccessCode();
-        $brand = $accessCode->getBrand();
+        $brand = $accessCode->brand;
 
         dispatch(
             (new CustomerIoCreateEventByUserId(
@@ -1270,40 +1266,17 @@ class CustomerIoSyncEventListener
                 'musora_membership_non_recurring_access_added',
                 [
                     'brand_source' => $brand,
-                    'access_method' => $accessCode->getCode(),
-                    'access_source' => $accessCode->getSource(),
-                    'access_added_timestamp' => $accessCode->getUpdatedAt()->timestamp,
-                    'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
+                    'access_method' => $accessCode->code,
+                    'access_source' => $accessCode->source,
+                    'access_added_timestamp' => Carbon::parse($accessCode->updated_at)->timestamp,
+                    'code_creation_date' => Carbon::parse($accessCode->created_at)->timestamp,
                     'product_ids' => $accessCode->getProductIdsAsString(),
                     'referrer_id' => null,
                     'musora_id' => null
 
                 ], null, Carbon::now()->timestamp
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(3)
-            )
+            ))->delay(Carbon::now()->addSeconds(3))
         );
-
-        //        dispatch(
-        //            (new CustomerIoCreateEventByUserId(
-        //                $accessCodeClaimed->getUser()->getId(),
-        //                $brand,
-        //                'musora_membership_access',
-        //                [
-        //                    'access_type' => 'manual_access_type',
-        //                    'access_start_date' => '',
-        //                    'access_expiration_date' => '',
-        //
-        //                ],
-        //                null,
-        //                Carbon::now()->timestamp
-        //            ))
-        //                ->delay(
-        //                    Carbon::now()
-        //                        ->addSeconds(3)
-        //                )
-        //        );
     }
 
     public function handleMobilePaymentPlaced(MobilePaymentEvent $mobileOrderEvent)

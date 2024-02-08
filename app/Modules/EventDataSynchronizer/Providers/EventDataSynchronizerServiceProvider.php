@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Providers;
 
+use App\Modules\Ecommerce\Events\AccessCodeClaimed;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
@@ -13,7 +14,6 @@ use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncByPermi
 use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncCustom;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
-use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
