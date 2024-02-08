@@ -41,7 +41,7 @@
                 <div class="tw-flex tw-flex-col xl:tw-flex-row tw-items-start tw-mb-2">
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start xl:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
-                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 xl:tw-mb-0">Enroll Now!</div>
+                        <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 xl:tw-mb-0">Enroll Now!</div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
@@ -139,15 +139,15 @@ const progressText = computed(() => {
 })
 
 const progressIcon = computed(() => {
-    if (progressText.value === 'Continue'){
+    if(enrollmentOpen.value){
+        return 'fa-solid fa-graduation-cap';
+    } else if (progressText.value === 'Continue'){
         return `fa-adjust`;
     } else if(progressText.value === 'Completed'){
         return `fa-check-circle`;
     } else {
         return 'fa-play';
     }
-
-//   fa-solid fa-graduation-cap  --> enrollment icon
 })
 
 const progressButtonColor = computed(() => {
