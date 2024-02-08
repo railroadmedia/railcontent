@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Services\CartService;
 use Railroad\Railanalytics\Tracker;
 use Throwable;
@@ -34,17 +35,30 @@ class ImpactTrackConversion implements ShouldQueue
         $userID = $this->user->id;
         $email = $this->user->email;
         $currency = $this->order['currency'];
+        $affiliateClickCode = null;
+
+        Log::info('$this->order["attributes"] = ' . var_export($this->order['attributes'] ?? [], true));
+
+        foreach (($this->order['attributes'] ?? []) as $attributeKeyValueArray) {
+            if ($attributeKeyValueArray['key'] == '_impact_affiliate_click_tracking_code') {
+                $affiliateClickCode = $attributeKeyValueArray['value'];
+            }
+        }
+
+        Log::info('$affiliateClickCode = ' . $affiliateClickCode);
+
         try {
             Tracker::queue(
                 $this->brand,
-                function () use ($products, $promoCodesString, $orderId, $userID, $email, $currency) {
+                function () use ($products, $promoCodesString, $orderId, $userID, $email, $currency, $affiliateClickCode) {
                     Tracker::trackTransactionAPI(
                         $products,
                         $orderId,
                         $promoCodesString,
                         $userID,
                         $email,
-                        currency: $currency
+                        currency: $currency,
+                        affiliateClickCode: $affiliateClickCode
                     );
                 }
         );
