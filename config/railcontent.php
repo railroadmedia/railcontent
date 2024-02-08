@@ -2287,7 +2287,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permisssion_ids' => [81, 65,96,97,98,100,101],
+    'cohort_permisssion_ids' => [81, 65,96,97,98,100,101,102],
     'enable_recsys' => false,
     'difficulty_map' =>
         [

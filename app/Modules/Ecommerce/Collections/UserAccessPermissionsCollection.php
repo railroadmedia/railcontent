@@ -33,6 +33,10 @@ class UserAccessPermissionsCollection
         $this->permissionIdLookup = $this->collection->groupBy('permission_id');
     }
 
+    public function getUser(): User
+    {
+        return $this->user;
+    }
 
     public function getUserId(): int
     {

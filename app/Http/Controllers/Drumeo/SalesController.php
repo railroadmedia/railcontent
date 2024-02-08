@@ -223,6 +223,23 @@ class SalesController extends BaseController
         ]);
     }
 
+    public function alesisStrata(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrata' => true,
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisStrataExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrata' => true,
+            'newAccount' => false,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function coachTrial(Request $request, $domain, $pageC = null)
     {
         return view('drumeo.sales.affiliate.coaches.'.$pageC, ['theme' => 'drumeo', 'month' => true]);
