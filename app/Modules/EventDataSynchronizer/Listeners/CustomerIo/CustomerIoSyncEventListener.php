@@ -849,9 +849,14 @@ class CustomerIoSyncEventListener
             });
 
             $first = $orderItems->first();
-            $attributes[$brand . '_membership_first-access-start-date'] = $first ? $first->order->processedAt->timestamp : null;
+            if ($first) {
+                $attributes[$brand . '_membership_first-access-start-date'] = $first->order->processedAt->timestamp;
+            }
+
             $last = $orderItems->last();
-            $attributes[$brand . '_membership_latest-access-start-date'] = $last ? $last->order->processedAt->timestamp : null;
+            if ($last) {
+                $attributes[$brand . '_membership_latest-access-start-date'] = $last->order->processedAt->timestamp;
+            }
 
             $packs = $packsOrderItemLookup[$brand] ?? collect();
             $attributes[$brand . '_owned_pack_product_ids'] = implode(
