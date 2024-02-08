@@ -33,7 +33,6 @@ Route::group(
             'login/token',
             AuthenticationController::class . '@loginToken',
         )->middleware([
-//            \Railroad\Ecommerce\Middleware\SyncInAppPurchasedItems::class,
             \Railroad\MusoraApi\Middleware\AddMemberData::class,
         ])
             ->name('user_management_system.login.token');

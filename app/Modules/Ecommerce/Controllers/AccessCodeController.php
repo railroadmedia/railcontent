@@ -2,60 +2,34 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
-use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Services\AccessCodeService;
-use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
-use Carbon\Carbon;
+use App\Modules\UserManagementSystem\Services\UserAuthenticationService;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use Railroad\Ecommerce\Contracts\UserProviderInterface;
-use Railroad\Ecommerce\Requests\AccessCodeClaimRequest;
-use Throwable;
+use App\Modules\Ecommerce\Requests\AccessCodeClaimRequest;
 
 class AccessCodeController extends Controller
 {
-    /**
-     * @var AccessCodeService
-     */
     private AccessCodeService $accessCodeService;
+    private UserService $userService;
+    private UserAuthenticationService $userAuthenticationService;
 
-    /**
-     * @var UserProviderInterface
-     */
-    private UserProviderInterface $userProvider;
-
-
-    /**
-     * AccessCodeController constructor.
-     *
-     * @param AccessCodeService $accessCodeService
-     * @param UserProviderInterface $userProvider
-     */
     public function __construct(
         AccessCodeService $accessCodeService,
-        UserProviderInterface $userProvider,
+        UserService $userService,
+        UserAuthenticationService $userAuthenticationService
     ) {
         $this->accessCodeService = $accessCodeService;
-        $this->userProvider = $userProvider;
+        $this->userService = $userService;
+        $this->userAuthenticationService = $userAuthenticationService;
     }
 
-    /**
-     * Claim an access code
-     *
-     * @param AccessCodeClaimRequest $request
-     *
-     * @return RedirectResponse
-     *
-     * @throws Throwable
-     */
-    public function claim(AccessCodeClaimRequest $request)
+    public function claim(AccessCodeClaimRequest $request): RedirectResponse
     {
         if ($request->has('user_email')) {
-            if ($this->userProvider->checkCredentials(
-                $request->get('user_email'),
-                $request->get('user_password')
-            )) {
-                $user = $this->userProvider->getUserByEmail($request->get('user_email'));
+            if ($this->userAuthenticationService->authenticate($request->get('user_email'), $request->get('user_password'))) {
+                $user = $this->userService->getByEmailOrNull($request->get('user_email'));
             } else {
                 return redirect()
                     ->back()
@@ -63,14 +37,14 @@ class AccessCodeController extends Controller
                     ->withErrors(['Invalid credentials.']);
             }
         } else {
-            $user = $this->userProvider->createUser($request->get('email'), $request->get('password'));
+            $user = $this->userService->createUser($request->get('email'), $request->get('password'));
         }
 
         $rawAccessCode = $request->get('access_code');
 
         $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
 
-        auth()->loginUsingId($user->getId(), true);
+        $this->userAuthenticationService->login($user);
 
         $message = [
             'access-code-claimed-success' => true,
@@ -78,8 +52,8 @@ class AccessCodeController extends Controller
         ];
 
         $redirectRoute =
-            (in_array($accessCode->getBrand(), config('ecommerce.available_brands')) &&
-                $accessCode->getBrand() != 'musora') ? $accessCode->getBrand() : "drumeo";
+            (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
+                $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
 
         return $request->has('redirect') ?
             redirect()
