@@ -64,6 +64,7 @@ class ContentRepository extends RepositoryBase
     public static $getFutureContentOnly = false;
     public static $getFollowedContentOnly = false;
     public static $getFutureScheduledContentOnly = false;
+    public static $getEnrollmentContent = true;
 
     private $page;
     private $limit;
