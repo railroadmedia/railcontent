@@ -178,3 +178,9 @@ const addToPlaylist = () => {
     window.openplaylistmodal({ modalType: 'addItem', content });
 }
 </script>
+
+<style scoped>
+    p {
+        font-size: 14px;
+    }
+</style>
