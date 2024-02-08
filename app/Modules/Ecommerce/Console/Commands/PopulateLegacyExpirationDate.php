@@ -11,31 +11,38 @@ use Modules\UserManagementSystem\Models\User;
 
 class PopulateLegacyExpirationDate extends Command
 {
-    protected $signature = 'ecommerce:PopulateLegacyExpirationDate {--limit=1000000}';
+    protected $signature = 'ecommerce:PopulateLegacyExpirationDate {--skip=0} {--limit=1000000}';
 
     public function handle()
     {
+        $skip = $this->option('skip');
         $limit = $this->option('limit');
-        $this->withExecutionTime(function () use ($limit) {
-            $total = $users = User::query()
+        $this->withExecutionTime(function () use ($skip, $limit) {
+            $query = User::query()
                 ->whereNull('membership_expiration_date')
-                ->whereNull('legacy_expiration_date')->count();
+                ->whereNull('legacy_expiration_date')
+                ->whereExists(function ($query) {
+                    $query->from('ecommerce_user_products')
+                        ->whereRaw('ecommerce_user_products.user_id = usora_users.id');
+                })
+                ->skip($skip)
+                ->take($limit);
+            $total = $query->count();
 
             $this->info("Found $total users");
             $i = 0;
-            $users = User::query()
-                ->whereNull('membership_expiration_date')
-                ->whereNull('legacy_expiration_date')
-                ->limit($limit)->chunk(10000, function ($users) use ($total, &$i) {
-                    foreach ($users as $user) {
-                        $user->legacy_expiration_date = $this->getLegacyExpirationDate($user->id);
+            $users = $query->chunk(10000, function ($users) use ($total, &$i) {
+                foreach ($users as $user) {
+                    $user->legacy_expiration_date = $this->getLegacyExpirationDate($user->id);
+                    if ($user->legacy_expiration_date) {
                         $user->save();
-                        $i++;
-                        Timer::afterSeconds(5, function () use ($total, $i) {
-                            $this->info("Users processed ($i/$total)");
-                        });
                     }
-                });
+                    $i++;
+                    Timer::afterSeconds(5, function () use ($total, $i) {
+                        $this->info("Users processed ($i/$total)");
+                    });
+                }
+            });
         });
     }
 
