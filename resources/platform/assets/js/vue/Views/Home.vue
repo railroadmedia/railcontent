@@ -14,7 +14,7 @@
             title="Continue"
             seeAllAriaLabel="See All Lessons In Progress"
             :seeAllUrl="continueUrl"
-            :preLoadedContent="startedContent.data"
+            :preLoadedContent="startedContent"
             :isMiniView="true"
             :show-dropdown="true"
         />
