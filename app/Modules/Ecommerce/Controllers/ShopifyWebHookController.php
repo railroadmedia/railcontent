@@ -199,7 +199,6 @@ class ShopifyWebHookController extends Controller
             'brand' => $brand,
             'payment_source' => $paymentSource,
             'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
-            'attributes' => $order['note_attributes'] ?? [],
         ];
     }
 }
