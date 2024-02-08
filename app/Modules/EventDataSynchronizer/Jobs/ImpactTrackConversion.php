@@ -40,7 +40,7 @@ class ImpactTrackConversion implements ShouldQueue
         Log::info('$this->order["note_attributes"] = ' . var_export($this->order['note_attributes'] ?? [], true));
 
         foreach (($this->order['note_attributes'] ?? []) as $attributeKeyValueArray) {
-            if ($attributeKeyValueArray['key'] == '_impact_affiliate_click_tracking_code') {
+            if ($attributeKeyValueArray['name'] == '_impact_affiliate_click_tracking_code') {
                 $affiliateClickCode = $attributeKeyValueArray['value'];
             }
         }
