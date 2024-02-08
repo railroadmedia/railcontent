@@ -25,8 +25,10 @@ class PopulateLegacyExpirationDate extends Command
                     $query->from('ecommerce_user_products')
                         ->whereRaw('ecommerce_user_products.user_id = usora_users.id');
                 })
+                ->where('id', 613555)
                 ->skip($skip)
                 ->take($limit);
+            $sql = $query->get();
             $total = $query->count();
 
             $this->info("Found $total users");
