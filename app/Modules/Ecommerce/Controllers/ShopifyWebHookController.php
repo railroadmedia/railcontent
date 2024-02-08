@@ -182,6 +182,8 @@ class ShopifyWebHookController extends Controller
     {
         $paymentSource = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
 
+        Log::info('Testing shopify order webhook attributes data: ' . var_export($order['note_attributes'], true));
+
         return [
             'checkout_token' => $order['checkout_token'],
             'order_id' => $order['id'],
@@ -197,6 +199,7 @@ class ShopifyWebHookController extends Controller
             'brand' => $brand,
             'payment_source' => $paymentSource,
             'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
+            'attributes' => $order['note_attributes'] ?? [],
         ];
     }
 }
