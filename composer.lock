@@ -4366,16 +4366,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.26.3",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "b7c782dcc40957ad84c9da947cc201f42e97859e"
+                "reference": "7d2533e84480018a351e9c3e20a284342ea7a75e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/b7c782dcc40957ad84c9da947cc201f42e97859e",
-                "reference": "b7c782dcc40957ad84c9da947cc201f42e97859e",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/7d2533e84480018a351e9c3e20a284342ea7a75e",
+                "reference": "7d2533e84480018a351e9c3e20a284342ea7a75e",
                 "shasum": ""
             },
             "require": {
@@ -4415,9 +4415,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.26.3"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.27.0"
             },
-            "time": "2024-01-18T20:24:45+00:00"
+            "time": "2024-02-07T23:12:02+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -10137,12 +10137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "0a0959c1e5ebf345d300c29c091e32b4a7628921"
+                "reference": "589a5e0fc759cc7389468b3c1bb3e41f61e26056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0a0959c1e5ebf345d300c29c091e32b4a7628921",
-                "reference": "0a0959c1e5ebf345d300c29c091e32b4a7628921",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/589a5e0fc759cc7389468b3c1bb3e41f61e26056",
+                "reference": "589a5e0fc759cc7389468b3c1bb3e41f61e26056",
                 "shasum": ""
             },
             "require": {
@@ -10174,7 +10174,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
             },
-            "time": "2024-02-06T13:52:53+00:00"
+            "time": "2024-02-08T09:01:49+00:00"
         },
         {
             "name": "railroad/permissions",
