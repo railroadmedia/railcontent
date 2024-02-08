@@ -25,7 +25,7 @@
     ])
         @slot('content')
             <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full tw-min-h-[312px]">
-            
+
                 @if($pack['slug'] == 'piano-technique-made-easy')
                     <div
                         class="tw-flex tw-flex-col tw-mb-4 tw-rounded-full ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
@@ -106,7 +106,9 @@
                         catalogue-type="grid"
                         theme-color="{{ $brand }}"
                         :pre-loaded-content="{{ $childContent }}"
-                        user-id="{{ auth()->id() }}"></content-catalogue>
+                        user-id="{{ auth()->id() }}"
+                        :full-width-on-mobile="true"
+                ></content-catalogue>
             </div>
 
             @if($xpBonus > 0)
