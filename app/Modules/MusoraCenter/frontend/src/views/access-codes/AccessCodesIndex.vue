@@ -437,7 +437,7 @@ export default {
                     if (response) {
                         this.accessCodes = response.data.data;
                         this.accessCodesIncludedData = response.data.included;
-                        this.totalPages = response.data.meta.total;
+                        this.totalPages = response.data.meta.last_page;
                     }
                 })
                 .finally(() => {
@@ -456,7 +456,7 @@ export default {
                     if (response) {
                         this.accessCodes = response.data.data;
                         this.accessCodesIncludedData = response.data.included;
-                        this.totalPages = response.data.meta.total;
+                        this.totalPages = response.data.meta.last_page;
                     }
                 })
                 .finally(() => {
