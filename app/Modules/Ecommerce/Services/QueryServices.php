@@ -8,16 +8,23 @@ use Modules\UserManagementSystem\Models\User;
 
 class QueryServices
 {
-    public static function getCustomUserQuery(string $customQuery, ?string $customQueryParameters, ?int $startId = null, ?int $endId = null)
-    {
+    public static function getCustomUserQuery(
+        ?string $customQuery,
+        ?string $customQueryParameters,
+        ?int $startId = null,
+        ?int $endId = null
+    ) {
         $query = User::query();
 
         switch ($customQuery) {
+            case "hasLegacyExpirationDate":
+                $query->whereNotNull('legacy_expiration_date');
+                break;
             case "hasUserPermission":
                 if (!$customQueryParameters) {
                     throw new \Exception("expected customqueryparamater permissionId");
                 }
-                $query = $query->whereExists(function ($query) use ($customQueryParameters) {
+                $query->whereExists(function ($query) use ($customQueryParameters) {
                     $query->select(DB::raw(1))
                         ->from('user_access_permissions')
                         ->whereRaw('usora_users.id = user_access_permissions.user_id')
@@ -25,7 +32,7 @@ class QueryServices
                 });
                 break;
             case "hasOldActiveSubscription":
-                $query = $query->whereExists(function ($query) {
+                $query->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('ecommerce_subscriptions')
                         ->whereRaw('ecommerce_subscriptions.user_id = usora_users.id')
@@ -34,10 +41,10 @@ class QueryServices
                 });
                 break;
             case "hasRechargeSubscription":
-                $query = $query->where('has_recharge_subscription', true);
+                $query->where('has_recharge_subscription', true);
                 break;
             case "futureMembershipIssue":
-                $query = $query->whereExists(function ($query) {
+                $query->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('railcontent_user_permissions')
                         ->whereRaw('railcontent_user_permissions.user_id = usora_users.id')
@@ -46,7 +53,7 @@ class QueryServices
                 });
                 break;
             case "hasMigrationDays":
-                $query = $query->whereExists(function ($query) {
+                $query->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('user_access_permissions')
                         ->whereRaw('user_access_permissions.user_id = usora_users.id')
@@ -56,26 +63,27 @@ class QueryServices
                 });
                 break;
             case "createdWithinLastDay":
-                $query = $query->where('created_at', '>', Carbon::now()->subDay());
+                $query->where('created_at', '>', Carbon::now()->subDay());
                 break;
             case "isAdmin":
-                $query = $query->where('permission_level', User::PERMISSION_LEVEL_ADMIN);
+                $query->where('permission_level', User::PERMISSION_LEVEL_ADMIN);
                 break;
             case "requiresRechargeSync":
-                $query = $query->whereRaw(
+                $query->whereRaw(
                     'recharge_renewal_date is not null and recharge_renewal_date > now() and DATEDIFF(membership_expiration_date, recharge_renewal_date) - 7 > 7'
                 );
                 break;
             case "":
+            case null:
                 break;
             default:
                 throw new \Exception("Invalid custom query: $customQuery");
         }
         if ($startId) {
-            $query = $query->where('id', '>=', $startId);
+            $query->where('id', '>=', $startId);
         }
         if ($endId) {
-            $query = $query->where('id', '<=', $endId);
+            $query->where('id', '<=', $endId);
         }
         //$sql = $query->toSql();
         //\Log::debug("QueryServices::getcustomUserQuery $sql");
