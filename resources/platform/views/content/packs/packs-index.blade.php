@@ -42,10 +42,11 @@
             collection-type="pack"
             :infinite-scroll="false"
             :pre-loaded-content="{{ $packs }}"
-            title="packs"
+            title="Packs"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
             default-sorts="-progress"
             :hide-sort-icon="true"
+            search-placeholder="Search packs..."
         ></collection-wrapper>
     </div>
 
