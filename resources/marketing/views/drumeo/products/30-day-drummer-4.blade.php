@@ -949,7 +949,7 @@
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
+        "video" => '//player.vimeo.com/video/884916532?h=87d3e7a97a&autoplay=1',
         "title" => 'trailer'
     ])
 
