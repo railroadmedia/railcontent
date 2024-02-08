@@ -3,7 +3,7 @@
         class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 xl:tw-px-7 tw-relative tw-bg-white dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
 
     >
-        <a :href="pack.url" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
+        <a :href="packURL" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
             <!-- Thumbnail -->
             <img
                 class="tw-transition-opacity tw-opacity-0 tw-absolute tw-inset-0 tw-object-cover tw-object-center"
@@ -37,7 +37,7 @@
 
         </a>
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
-            <a :href="pack.url" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
+            <a :href="packURL" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col xl:tw-flex-row tw-items-start tw-mb-2">
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start xl:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
@@ -136,6 +136,14 @@ const enrollmentOpen = computed(() => {
 
 const progressText = computed(() => {
     return props.pack.primary_cta_text;
+})
+
+const packURL = computed(() => {
+    if(enrollmentOpen.value){
+        return props.pack.primary_cta_url;
+    } else {
+        return props.pack.url;
+    }
 })
 
 const progressIcon = computed(() => {
