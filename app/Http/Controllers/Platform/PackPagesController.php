@@ -122,7 +122,9 @@ class PackPagesController extends Controller
         }
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
-
+        if ($packBundles->isEmpty()) {
+            return new NotFoundHttpException();
+        }
         $thisPackBundle = $packBundles[0];
 
         if (empty($thisPackBundle)) {
