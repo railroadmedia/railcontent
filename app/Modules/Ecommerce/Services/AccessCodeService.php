@@ -99,7 +99,7 @@ class AccessCodeService
     public function release(?string $code): void
     {
         /** @var AccessCode $accessCode */
-        $accessCode = $this->accessCodeService->getAccessCode($code);
+        $accessCode = $this->getAccessCode($code);
         if (!$accessCode) {
             throw new Exception("Access code for ID $code not found.");
         }
