@@ -2,6 +2,8 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
+use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Services\ProductService;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +22,8 @@ class ImpactTrackConversion implements ShouldQueue
     public function __construct(
         private $user,
         private $brand,
-        private $order) {
+        private $order,
+        private ProductService $productService) {
     }
 
     public function handle()
@@ -30,10 +33,11 @@ class ImpactTrackConversion implements ShouldQueue
             return $code['code'];
         }, $this->order['discount_codes']);
         $promoCodesString = implode(',', $promoCodesList);
-        $products = $this->getAllProducts($this->order['line_items']);
+        $hasZeroCost = intval($this->order['current_total_price']) == 0;
+        $products = $this->getAllProducts($this->order['line_items'], $hasZeroCost);
         $orderId = $this->order['id'];
-        $userID = $this->user->id;
         $email = $this->user->email;
+        $userID = $this->user->id;
         $currency = $this->order['currency'];
         $affiliateClickCode = null;
 
@@ -55,6 +59,7 @@ class ImpactTrackConversion implements ShouldQueue
                         $products,
                         $orderId,
                         $promoCodesString,
+                        // hashed email is used here because when the original trial event is triggered, no shopify or musora user account exists, but the email does. Email needs to be hashed for privacy.
                         $userID,
                         $email,
                         currency: $currency,
@@ -68,23 +73,33 @@ class ImpactTrackConversion implements ShouldQueue
         }
     }
 
-    private function getAllProducts(array $lineItems = []): array
+    private function getAllProducts(array $lineItems, $hasZeroCost): array
     {
         return collect($lineItems)
-            ->map(function ($lineItem) {
+            ->map(function ($lineItem) use ($hasZeroCost) {
                 return [
                     'id' => $lineItem['product_id'],
                     'name' => $lineItem['name'],
                     'quantity' => $lineItem['quantity'],
                     'sku' => $lineItem['sku'],
-                    'brand' => $lineItem['vendor'],
+                    'brand' =>strtolower( $lineItem['vendor']),
                     'value' => $lineItem['price'],
-                    'category' => '',
+                    'category' => $this->getProductCategory($lineItem['sku'], $hasZeroCost),
                     'variant_id' => $lineItem['variant_id'],
                     'variant_name' => $lineItem['variant_title']
                 ];
             })
             ->toArray();
+    }
+
+    private function getProductCategory($sku, $hasZeroCost): string
+    {
+        $product = $this->productService->getBySku($sku);
+        if ($product->isMembershipProduct()) {
+            return $hasZeroCost ? "TrialStart" : "TrialConversion";
+        } else {
+            return "";
+        }
     }
 
     /**
