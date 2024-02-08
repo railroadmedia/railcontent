@@ -27744,10 +27744,6 @@ a:visited{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  .lg\:tw-px-10{
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
-  }
   .lg\:tw-px-12{
     padding-left: 3rem !important;
     padding-right: 3rem !important;
@@ -27934,6 +27930,9 @@ a:visited{
   .xl\:tw-static{
     position: static !important;
   }
+  .xl\:tw-order-1{
+    order: 1 !important;
+  }
   .xl\:tw-col-span-1{
     grid-column: span 1 / span 1 !important;
   }
@@ -27985,6 +27984,9 @@ a:visited{
   }
   .xl\:tw-mt-auto{
     margin-top: auto !important;
+  }
+  .xl\:tw-mr-3{
+    margin-right: 0.75rem !important;
   }
   .xl\:tw-line-clamp-3{
     overflow: hidden !important;
@@ -28073,6 +28075,9 @@ a:visited{
   .xl\:tw-flex-row{
     flex-direction: row !important;
   }
+  .xl\:tw-flex-col{
+    flex-direction: column !important;
+  }
   .xl\:tw-flex-nowrap{
     flex-wrap: nowrap !important;
   }
@@ -28091,6 +28096,9 @@ a:visited{
   .xl\:tw-justify-center{
     justify-content: center !important;
   }
+  .xl\:tw-justify-between{
+    justify-content: space-between !important;
+  }
   .xl\:tw-gap-4{
     gap: 1rem !important;
   }
@@ -28100,6 +28108,10 @@ a:visited{
   .xl\:tw-px-0{
     padding-left: 0px !important;
     padding-right: 0px !important;
+  }
+  .xl\:tw-px-10{
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
   }
   .xl\:tw-px-7{
     padding-left: 1.75rem !important;
@@ -28132,10 +28144,6 @@ a:visited{
   .xl\:tw-py-\[12px\]{
     padding-top: 12px !important;
     padding-bottom: 12px !important;
-  }
-  .xl\:tw-px-10{
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
   }
   .xl\:tw-pb-0{
     padding-bottom: 0px !important;
@@ -28203,19 +28211,22 @@ a:visited{
     font-size: 1.125rem !important;
     line-height: 1.75rem !important;
   }
-  .xl\:tw-text-xl{
-    font-size: 1.25rem !important;
-    line-height: 1.75rem !important;
-  }
   .xl\:tw-text-sm{
     font-size: 0.875rem !important;
     line-height: 1.25rem !important;
+  }
+  .xl\:tw-text-xl{
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
   }
   .xl\:tw-leading-none{
     line-height: 1 !important;
   }
 }
 @media (min-width: 1536px){
+  .\32xl\:tw-order-1{
+    order: 1 !important;
+  }
   .\32xl\:tw-col-span-1{
     grid-column: span 1 / span 1 !important;
   }
@@ -28230,6 +28241,12 @@ a:visited{
   }
   .\32xl\:tw-mt-0{
     margin-top: 0px !important;
+  }
+  .\32xl\:tw-mr-3{
+    margin-right: 0.75rem !important;
+  }
+  .\32xl\:tw-mb-0{
+    margin-bottom: 0px !important;
   }
   .\32xl\:tw-hidden{
     display: none !important;

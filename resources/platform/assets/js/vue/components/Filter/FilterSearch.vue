@@ -10,7 +10,7 @@
         <InputLabel
             :showClearButton="true"
             :initial-value="searchTerm"
-            placeholder="Search"
+            :placeholder="placeholder"
             inputName="term"
             id="workouts-search"
             :removeDefaultInputStyles="true"
@@ -60,6 +60,10 @@
     searchTerm: {
       type: String,
       default: '',
+    },
+    placeholder: {
+      type: String,
+      default: 'Search',
     },
   });
 
