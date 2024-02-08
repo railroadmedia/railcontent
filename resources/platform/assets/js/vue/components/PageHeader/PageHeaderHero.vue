@@ -26,7 +26,9 @@
       <PageHeaderPrimaryCta class="tw-hidden sm:tw-block" :icon="primaryCtaIcon" :url="primaryCtaUrl"
         :text="primaryCtaText" />
     </div>
-    <template v-if="$slots['header-info']">
+
+    <!-- Modal for Desktop -->
+    <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-info']">
       <musora-icon @click="openModal" icon-name="info"
         class="tw-self-start tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
       <ModalRenderer v-if="isModalOpen">
@@ -41,7 +43,20 @@
             class="tw-mt-3 tw-btn-primary tw-border-[#000C17] dark:tw-border-white tw-text-[#000C17] dark:tw-text-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">Close</button>
         </div>
       </ModalRenderer>
-    </template>
+    </div>
+
+    <!-- Tooltip for Mobile -->
+    <div class="tw-hidden sm:tw-block tw-self-start" v-if="$slots['header-info']">
+      <Tooltip position="right">
+        <template v-slot:trigger>
+          <musora-icon icon-name="info"
+            class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer dark:tw-text-[#80A0B9]"></musora-icon>
+        </template>
+        <template v-slot:content>
+          <slot name="header-info"></slot>
+        </template>
+      </Tooltip>
+    </div>
   </div>
 </template>
 
@@ -50,6 +65,7 @@ import { defineProps, ref } from 'vue';
 import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
+import Tooltip from "../Tooltip/Tooltip";
 
 const props = defineProps({
   iconName: String,

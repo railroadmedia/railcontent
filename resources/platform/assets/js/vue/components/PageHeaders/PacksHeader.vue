@@ -4,8 +4,8 @@
       <PageHeaderHero :iconName="iconName" :title="title" :heroImg="heroImg" :additionalImgSrc="additionalImgSrc"
         :primaryCtaIcon="primaryCtaIcon" :primaryCtaText="primaryCtaText" :primaryCtaUrl="primaryCtaUrl">
         <template v-slot:header-info v-if="infoData">
-          <p v-for="(value, key) in infoData" :key="key" class="subheading tw-uppercase tw-mr-3">
-            {{ value }} <span class="body">{{ key }}</span>
+          <p class="text-base	font-bold	tw-text-[#002039] dark:tw-text-[#E7EFF6]">
+            {{ formattedInfoData }}
           </p>
         </template>
       </PageHeaderHero>
@@ -15,7 +15,8 @@
     </template>
     <template v-slot:top-right>
       <div class="tw-flex tw-justify-between sm:tw-justify-end tw-items-center tw-w-full">
-        <span v-if="progress" class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-3xl tw-font-bold">Your
+        <span v-if="progress"
+          class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-3xl tw-font-bold">Your
           Progress - {{ progress }}%</span>
         <div class="">
           <PageHeaderCta v-if="backToAllLessonsUrl" text="Back to all lessons" icon="fas fa-chevron-double-left"
@@ -87,6 +88,14 @@ const downloadResources = () => {
   console.log('downloadResources', props.downloadableResources);
   // TODO: show downloadable resources modal
 };
+
+const formattedInfoData = computed(() => {
+  if (props.infoData) {
+    const { lessons, xp } = props.infoData;
+    return `${lessons} Lessons | ${xp} XP`;
+  }
+  return '';
+});
 
 </script>
   

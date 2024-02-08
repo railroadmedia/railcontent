@@ -4,7 +4,7 @@
             <div :class="`${brandBgColor} tw-h-[10px] tw-rounded-full`" :style="{ width: progressPercentage }"></div>
         </div>
         <div class="tw-ml-3 tw-px-2 tw-py-0 tw-border tw-border-[#B2B2B5] tw-bg-[#F4F4F5] dark:tw-border-[#444447] dark:tw-bg-[#232327] hide-xs-only">
-            <span class="tw-text-[#00101D] dark:tw-text-[#000C17] dark:tw-text-white tw-text-xs tw-font-semibold tw-leading-6">{{ progressPercentage }}</span>
+            <span class="tw-text-[#00101D] dark:tw-text-white tw-text-xs tw-font-semibold tw-leading-6">{{ progressPercentage }}</span>
         </div>
     </div>
 </template>
