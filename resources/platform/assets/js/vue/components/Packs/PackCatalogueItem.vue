@@ -56,9 +56,9 @@
                 </div>
                 <!-- Description -->
                 <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm" v-html="description"></div>
-                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm">
-                    Michael Schack is a master at blending drum-set performance with cutting edge dance music. This pack will te  ach you all you need to know to approach many of the popular EDM styles of music that are so popular today - adding these types to your drumming will!sdsdsdsdss
-                </div>
+<!--                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm">-->
+<!--                    Michael Schack is a master at blending drum-set performance with cutting edge dance music. This pack will te  ach you all you need to know to approach many of the popular EDM styles of music that are so popular today - adding these types to your drumming will!sdsdsdsdss-->
+<!--                </div>-->
                 <!-- Artist -->
                 <div class="tw-uppercase dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">Jared Falk</div>
                 <!-- Info -->
