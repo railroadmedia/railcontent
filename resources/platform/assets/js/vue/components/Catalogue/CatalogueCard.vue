@@ -26,7 +26,7 @@
                     :class="item.type === 'song' && forceListView ? 'tw-aspect-square' : 'tw-aspect-video'"
                 >
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
                         class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''
