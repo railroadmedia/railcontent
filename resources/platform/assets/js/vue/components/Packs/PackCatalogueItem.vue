@@ -1,7 +1,6 @@
 <template>
     <div
         class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 xl:tw-px-7 tw-relative tw-bg-white dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
-
     >
         <a :href="packURL" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
             <!-- Thumbnail -->
@@ -55,7 +54,7 @@
                         </div>
                 </div>
                 <!-- Description -->
-                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs lg:tw-text-sm" v-html="description"></div>
+                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs lg:tw-text-sm description" v-html="description"></div>
 <!--                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm">-->
 <!--                    Michael Schack is a master at blending drum-set performance with cutting edge dance music. This pack will te  ach you all you need to know to approach many of the popular EDM styles of music that are so popular today - adding these types to your drumming will!sdsdsdsdss-->
 <!--                </div>-->
@@ -178,9 +177,3 @@ const addToPlaylist = () => {
     window.openplaylistmodal({ modalType: 'addItem', content });
 }
 </script>
-
-<style scoped>
-    p {
-        font-size: 14px;
-    }
-</style>
