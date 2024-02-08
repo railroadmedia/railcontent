@@ -1,6 +1,6 @@
 <template>
     <div
-        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 xl:tw-px-7 tw-relative dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
+        class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-flex-nowrap tw-py-5 tw-px-4 xl:tw-px-7 tw-relative tw-bg-white dark:tw-bg-[#001729] tw-rounded-xl tw-mb-[15px] tw-border tw-border-[#E0E0E1] hover:tw-border-[#CBCBCD] dark:tw-border-[#162939] hover:dark:tw-border-[#223F57] tw-group hover:dark:tw-bg-[#002039] hover:tw-bg-[#F4FAFF] tw-cursor-pointer"
 
     >
         <a :href="pack.url" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
@@ -38,14 +38,10 @@
         </a>
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
             <a :href="pack.url" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
-                <div class="tw-flex tw-flex-col tw-items-start tw-mb-2">
-                    <!-- Enrollment Label -->
-                    <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2">Enrollment Now Open!</div>
-                    <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start">
-                        <!-- Title -->
-                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-line-clamp-2">
-                            {{ title }}
-                        </div>
+                <div class="tw-flex tw-flex-col xl:tw-flex-row tw-items-start tw-mb-2">
+                    <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start xl:tw-order-1 tw-flex-shrink-0">
+                        <!-- Enrollment Label -->
+                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 xl:tw-mb-0">Enroll Now!</div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
@@ -53,14 +49,21 @@
                             </svg>
                         </button>
                     </div>
+                        <!-- Title -->
+                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-lg tw-line-clamp-2 xl:tw-mr-3">
+                            {{ title }}
+                        </div>
                 </div>
                 <!-- Description -->
-                <div class="tw-hidden xl:tw-block dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-line-clamp-3" v-html="description"></div>
+                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm" v-html="description"></div>
+                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm">
+                    Michael Schack is a master at blending drum-set performance with cutting edge dance music. This pack will te  ach you all you need to know to approach many of the popular EDM styles of music that are so popular today - adding these types to your drumming will!sdsdsdsdss
+                </div>
                 <!-- Artist -->
                 <div class="tw-uppercase dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">Jared Falk</div>
                 <!-- Info -->
-                <div class="dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
-                    <span class="tw-mr-2">•</span>{{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
+                <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
+                    {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
             <div class="sm:tw-flex tw-flex-shrink-0">
