@@ -37,9 +37,9 @@ class ImpactTrackConversion implements ShouldQueue
         $currency = $this->order['currency'];
         $affiliateClickCode = null;
 
-        Log::info('$this->order["attributes"] = ' . var_export($this->order['attributes'] ?? [], true));
+        Log::info('$this->order["note_attributes"] = ' . var_export($this->order['note_attributes'] ?? [], true));
 
-        foreach (($this->order['attributes'] ?? []) as $attributeKeyValueArray) {
+        foreach (($this->order['note_attributes'] ?? []) as $attributeKeyValueArray) {
             if ($attributeKeyValueArray['key'] == '_impact_affiliate_click_tracking_code') {
                 $affiliateClickCode = $attributeKeyValueArray['value'];
             }
