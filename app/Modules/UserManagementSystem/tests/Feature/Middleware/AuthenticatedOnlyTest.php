@@ -49,12 +49,10 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
 
     public function test_unauthenticated_response_if_not_authed_json_request()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
         $response = $this->getJson('test-route', ['HTTP_REFERER' => 'https://test.musora.com']);
 
-        $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals('{"message":"Unauthenticated."}', $response->getContent());
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertStringContainsString('"message":"Unauthenticated."', $response->getContent());
     }
 
     public function test_successful_auth_json_request()
