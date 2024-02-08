@@ -39,7 +39,7 @@ class UserMembershipFieldsService
         if (!$membershipExpirationDate) {
             //legacy permissions were not migrated to the new shopify permission system
             //customer io relies on having the expiration date populated for historical data
-            $membershipExpirationDate = $user->legacy_expiration_date;
+            $membershipExpirationDate = Carbon::parse($user->legacy_expiration_date);
         }
         //access level comes from plus or basic permissions
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
