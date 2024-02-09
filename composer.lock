@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.298.5",
+            "version": "3.298.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b9bc34a8702a37a6151d843af966bf3b36aaaae3"
+                "reference": "0afccba68a96c0cbc10f6fc5b08c5a0e09774220"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b9bc34a8702a37a6151d843af966bf3b36aaaae3",
-                "reference": "b9bc34a8702a37a6151d843af966bf3b36aaaae3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0afccba68a96c0cbc10f6fc5b08c5a0e09774220",
+                "reference": "0afccba68a96c0cbc10f6fc5b08c5a0e09774220",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.298.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.298.6"
             },
-            "time": "2024-02-07T19:05:01+00:00"
+            "time": "2024-02-08T19:03:23+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10288,12 +10288,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "e9274068f019be6f5dc1663d8bd90297647750da"
+                "reference": "02610975bb578af962197e14d424a531bef22355"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/e9274068f019be6f5dc1663d8bd90297647750da",
-                "reference": "e9274068f019be6f5dc1663d8bd90297647750da",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/02610975bb578af962197e14d424a531bef22355",
+                "reference": "02610975bb578af962197e14d424a531bef22355",
                 "shasum": ""
             },
             "require": {
@@ -10322,7 +10322,7 @@
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
                 "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2024-01-16T00:10:42+00:00"
+            "time": "2024-02-08T23:39:39+00:00"
         },
         {
             "name": "railroad/railchat",

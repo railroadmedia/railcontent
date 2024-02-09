@@ -46,6 +46,14 @@ class PackDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['launch_date'] = 'September 2023';
             }
 
+            //strip <p> tags from description
+            $contentData = $content['data'] ?? [];
+            foreach ($contentData as $index => $data) {
+                if(in_array($data['key'] ,['description'])){
+                    $contentsOfType[$contentIndex]['data'][$index]['value'] = strip_tags(html_entity_decode($data['value']), '<a>,<em>,<strong>');
+                }
+            }
+
         }
 
         if (self::$skip) {
