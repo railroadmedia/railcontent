@@ -3,7 +3,7 @@
     RE add captions
     fix tracking for videos
 */
-import { onBeforeMount, computed, reactive, ref } from 'vue';
+import {  computed, reactive, ref } from 'vue';
 import { usePlaylistsStore } from '../../stores/playlists';
 import PlaybackCue from '../components/Playlists/PlaybackCue.vue';
 import ContentUnavailable from '../components/Playlists/ContentUnavailable.vue';
@@ -337,6 +337,15 @@ const unavailableType = computed(() => {
 });
 
 
+
+const showPracticeButton = computed(() => {
+    return !!props.soundsliceSlug;
+});
+
+const showVideoChapters = computed(() => {
+    return formattedChapters.value.length && (props.lessonType === 'workout' || props.lessonType === 'challenge-part');
+});
+
 //--------Methods---------------//
 const handleVideoPause = () => { }; //?
 const handleVideoPlay = () => { }; //?
@@ -369,12 +378,6 @@ const handleCloseSoundslice = () => {
 const seekToChapter = (time) => {
     seekToTime.value = time;
 };
-
-//---------Lifecycle-----------//
-onBeforeMount(() => {
-    //console.log(props.lessonType)
-    //console.log('released', props.released, 'need access', activeItem.need_access, 'no access message', activeItem.need_access_message)
-});
 </script>
 
 <template>
@@ -444,7 +447,7 @@ onBeforeMount(() => {
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :show-practice-button="props.lessonType === 'workout' ? true : false"
+                        :show-practice-button="showPracticeButton"
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
@@ -455,7 +458,7 @@ onBeforeMount(() => {
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="contentChapters" :instructors="contentInstructors" />
 
-                    <VideoChapters v-if="formattedChapters.length && lessonType === 'workout'" :chapters="formattedChapters" @open-slice="openSlice"
+                    <VideoChapters v-if="showVideoChapters" :chapters="formattedChapters" @open-slice="openSlice"
                         @seek-to-chapter="seekToChapter" />
 
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
