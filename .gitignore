@@ -105,8 +105,8 @@ typings/
 
 # Get built by Laravel
 public/mix-manifest.json
-public/platform/*
-public/marketing/*
+public/platform/
+#public/marketing/
 
 .idea
 .phpunit*
