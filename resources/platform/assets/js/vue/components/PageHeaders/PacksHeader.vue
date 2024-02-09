@@ -1,7 +1,7 @@
 <template>
   <PageHeader>
     <template v-slot:top-left>
-      <PageHeaderHero :iconName="iconName" :title="title" :heroImg="heroImg" :additionalImgSrc="additionalImgSrc"
+      <PageHeaderHero :iconName="iconName" :title="title" :heroImg="heroImg" :additionalImgSrc="logo"
         :primaryCtaIcon="primaryCtaIcon" :primaryCtaText="primaryCtaText" :primaryCtaUrl="primaryCtaUrl">
         <template v-slot:header-info v-if="infoData">
           <p class="text-base	font-bold	tw-text-[#002039] dark:tw-text-[#E7EFF6]">
@@ -33,9 +33,9 @@
     </template>
   </PageHeader>
 </template>
-  
+
 <script setup>
-import { computed, defineProps, ref } from 'vue';
+import {computed, defineProps, onMounted, ref} from 'vue';
 
 import PageHeader from '../PageHeader/PageHeader.vue';
 import PageHeaderHero from '../PageHeader/PageHeaderHero.vue';
@@ -50,6 +50,8 @@ const props = defineProps({
   title: String,
   heroImg: String,
   additionalImgSrc: String,
+  darkModeLogo: String,
+  lightModeLogo: String,
   primaryCtaIcon: String,
   primaryCtaText: String,
   primaryCtaUrl: String,
@@ -97,5 +99,12 @@ const formattedInfoData = computed(() => {
   return '';
 });
 
+const isDarkMode = computed(() => {
+    return JSON.parse(localStorage.getItem("darkMode"));
+})
+
+const logo = computed(() => {
+    return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;
+})
+
 </script>
-  

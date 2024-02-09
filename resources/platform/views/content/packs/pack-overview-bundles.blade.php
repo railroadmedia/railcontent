@@ -1,11 +1,10 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>{{ $pack->fetch('fields.title') }} | Musora</title>
+    <title>!!{{ $pack->fetch('fields.title') }} | Musora</title>
 @endsection
 
 @section('content')
-
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
@@ -64,6 +63,8 @@
         title="Packs"
         hero-img="{{ $pack->fetch('data.header_image_url') }}"
         additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
+        dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
+        light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
         primary-cta-icon="fa-play"
         primary-cta-text="{{$pack['primary_cta_text']}}"
         primary-cta-url="{{ $pack['primary_cta_url'] }}"
