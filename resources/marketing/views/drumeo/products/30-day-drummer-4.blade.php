@@ -236,7 +236,7 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/marketing/drumeo/products/30-day-drummer/season-4/30_day_drummer_logo_top.png" alt="30DD logo season3 logo">
+                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo season3 logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
                             <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
@@ -534,7 +534,7 @@
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-28 sm:h-36 lg:h-48 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/760x0/marketing/drumeo/products/30-day-drummer/season-4/30_day_drummer_logo_top.png" alt="30DD logo">
+                <img class="h-28 sm:h-36 lg:h-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Weekly LIVE Q&A workshops<br>
@@ -809,7 +809,7 @@
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
-            <img class="h-20 sm:h-28 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/marketing/drumeo/products/30-day-drummer/season-4/30_day_drummer_logo_bottom.png" alt="30DD season 2">
+            <img class="h-20 sm:h-28 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD season 2">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
 
             <h6 class="leading-normal mb-4">
