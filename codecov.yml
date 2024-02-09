@@ -1,0 +1,6 @@
+github_checks:
+  annotations: false
+ignore:
+  - "app/Modules/*/tests/*Test.php"
+  - "app/Modules/*/tests/Feature/*Test.php"
+  - "app/Modules/*/tests/Unit/*Test.php"
