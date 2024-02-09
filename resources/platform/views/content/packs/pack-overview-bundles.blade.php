@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>!!{{ $pack->fetch('fields.title') }} | Musora</title>
+    <title>{{ $pack->fetch('fields.title') }} | Musora</title>
 @endsection
 
 @section('content')
