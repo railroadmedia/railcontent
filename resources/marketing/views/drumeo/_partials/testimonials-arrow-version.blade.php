@@ -56,7 +56,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
                     @if (isset($location))
                     <p><i>{{ $location }}</i></p>
                     @endif
-                    <img class="my-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg" alt="stars" />
+                    <img class="my-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg" alt="stars" />
                     <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
                 </li>
                 @endforeach

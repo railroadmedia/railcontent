@@ -9,26 +9,26 @@ class UserMembershipSyncByPermissions extends Command
 {
     protected $description = 'Sync membership data for user who own permission';
     protected $signature = 'user:MembershipSyncByPermission
-        {permissionId : filter on users who own this permission}
-        {afterDate? : only sync users who obtained permission after this date}
+        {--customQuery= : run a custom query instead of the default one, see QueryServices.getCustomUserQuery for options}
+        {--customQueryParameter= : parameter for custom query}
         {--syncContentPermissions : sync content permission}
         {--syncCustomerIO=0 : sync customer io data}
     ';
 
     public function handle()
     {
-        $permissionId = $this->argument('permissionId');
+        $customQuery = $this->option('customQuery');
+        $customQueryParameter = $this->option('customQueryParameter');
         $syncCustomerIO = $this->option('syncCustomerIO');
         $syncContentPermissions = $this->option('syncContentPermissions');
-        $afterDate = $this->argument('afterDate');
 
         $this->runBatchQuery(
-            function (int $skip, int $take) use ($permissionId, $afterDate, $syncContentPermissions, $syncCustomerIO) {
+            function (int $skip, int $take) use ($customQuery, $customQueryParameter, $syncContentPermissions, $syncCustomerIO) {
                 return new UserMembershipOwnedProductSyncJob(
                     $skip,
                     $take,
-                    $permissionId,
-                    $afterDate,
+                    $customQuery,
+                    $customQueryParameter,
                     $syncContentPermissions,
                     $syncCustomerIO
                 );

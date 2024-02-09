@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Ecommerce\Console\Commands;
 
-use App\Models\Product;
+use App\Modules\Ecommerce\Models\AccessCode;
+use App\Modules\Ecommerce\Services\ProductService;
 use Carbon\Carbon;
 use Doctrine\ORM\NonUniqueResultException;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\Mail;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Symfony\Component\Console\Input\InputArgument;
 
 class GenerateAccessCodes extends Command
 {
@@ -26,7 +25,6 @@ class GenerateAccessCodes extends Command
                             {productId}
                             {amount}
                             {source?}
-                            {brand?}
                             {--execute : Execute this command. Without this flag, it will be simulated}';
 
     protected $description = 'Generate access codes.';
@@ -40,11 +38,10 @@ class GenerateAccessCodes extends Command
     /**
      * Execute the console command.
      *
-     * @param ProductRepository $productRepository
      * @return mixed
      * @throws NonUniqueResultException
      */
-    public function handle(ProductRepository $productRepository)
+    public function handle(ProductService $productService)
     {
         $source = $this->getSource();
 
@@ -63,21 +60,19 @@ class GenerateAccessCodes extends Command
         $productId = $this->getProductId();
         $simulate = $this->isSimulation();
 
-        $product = $productRepository->findProduct($productId);
+        $product = $productService->getById($productId);
 
         if (!$product) {
             $this->info('No product found for product id ' . $productId . ". Exiting now.");
             die();
         }
 
-        $brand = $product->getBrand();
+        $brand = $product->brand;
         $bar = $this->output->createProgressBar($amountToCreate);
         $bar->start();
 
         for ($i = 1; $i <= $amountToCreate; $i++) {
-            $code = bin2hex(
-                openssl_random_pseudo_bytes(24 / 2)
-            );
+            $code = AccessCode::generateNewCode();
 
             $accessCodes[] = [
                 'code' => strtoupper($code),
@@ -149,32 +144,22 @@ class GenerateAccessCodes extends Command
         return $this::SUCCESS;
     }
 
-    protected function getProductId()
-    : int
+    protected function getProductId(): int
     {
         return $this->argument('productId');
     }
 
-    protected function getAmount()
-    : int
+    protected function getAmount(): int
     {
         return $this->argument("amount");
     }
 
-    protected function getSource()
-    : ?string
+    protected function getSource(): ?string
     {
         return $this->argument('source') ?? null;
     }
 
-    protected function getBrand()
-    : ?string
-    {
-        return $this->argument('brand') ?? null;
-    }
-
-    protected function isSimulation()
-    : bool
+    protected function isSimulation(): bool
     {
         return $this->option("execute") == false;
     }

@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Services\ShopifyAPIService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Signifly\Shopify\Shopify;
@@ -351,6 +352,25 @@ class ShopifyCartAPIController extends Controller
 
         if (empty($cartData)) {
             return redirect()->back();
+        }
+
+        // This is for impact affiliate tracking, it needs refactoring since this is a quick fix.
+        // If they every change their cookie key, this will break.
+        if (!empty($_COOKIE['IR_14652'])) {
+            $irCookieValueArray = explode('|', $_COOKIE['IR_14652']);
+
+            $irClickTrackingCode = $irCookieValueArray[3];
+
+            if (!empty($irClickTrackingCode)) {
+                $this->shopifyStoreFrontAPIService->updateCartAttributes(
+                    $existingShopifyCartId,
+                    ['_impact_affiliate_click_tracking_code' => $irClickTrackingCode]
+                );
+            } else {
+                Log::warning(
+                    'There could be something wrong with our Impact affiliate attribution tracking. Could not get irclick tracking code from cookie.'
+                );
+            }
         }
 
         $checkoutURL = $cartData['checkoutUrl'];
