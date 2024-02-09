@@ -11,40 +11,25 @@
                     ${breakToListView ? 'tw-@container/breakToList' : ''}
                 `">
                 <!-- Skeleton Loader -->
-                <template v-if="showSkeletonLoader">
+                <template v-if="collectionStoreLoading && (isWorkout || isChallenge)">
                     <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
                         :break-to-list-view="breakToListView" />
                 </template>
                 <!-- Catalogue Cards -->
-                <template v-else-if="isMiniView">
-                    <MiniCatalogueCard
-                        v-for="item in data"
-                        :key="'grid' + item.id"
-                        :item="item"
-                        :content-type="item.type"
-                        :user-id="userId"
-                        :is-admin="isAdmin"
-                        :lock-unowned="lockUnowned"
-                        :force-wide-thumbs="forceWideThumbs"
-                        :content-type-override="contentTypeOverride"
-                        :show-my-list-action="showMyListAction"
-                        :force-no-links="forceNoLinks"
-                        @addToList="addToList"
-                        @progressReset="resetProgressEventHandler"
-                        :show-dropdown="showDropdown"
-                    />
-                </template>
                 <template v-else>
                     <CatalogueCard
                         v-for="item in data"
                         :key="'grid' + item.id"
                         :item="item"
                         :content-type="item.type"
+                        :brand="brand"
+                        :use-theme-color="useThemeColor"
                         :user-id="userId"
                         :is-admin="isAdmin"
                         :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride"
+                        :is-mini-card="isMiniView"
                         :show-my-list-action="showMyListAction"
                         :force-no-links="forceNoLinks"
                         :force-list-view="displayInline"
@@ -85,7 +70,6 @@ import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../stores/user";
 import { useCollectionStore } from "../../../stores/collection";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
-import MiniCatalogueCard from './MiniCatalogueCard.vue';
 
 const props = defineProps({
     willScroll: {
@@ -107,6 +91,10 @@ const props = defineProps({
     preLoadedContent: {
         type: [Array, Object],
         default: () => [],
+    },
+    useThemeColor: {
+        type: Boolean,
+        default: () => true,
     },
     userId: {
         type: String,
@@ -159,29 +147,22 @@ const props = defineProps({
 
 },
 );
-
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
 const collectionStore = useCollectionStore();
-
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
+const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
-
-const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: content.value });
 
 //Computed Props
 const data = computed(() => {
-    return content.value;
+    return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : content.value;
 })
 
 const breakToListView = computed( () => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value);
-})
-
-const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value && (isWorkout.value || isChallenge.value)
 })
 
 const skeletonCardCount = computed(() => {
