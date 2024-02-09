@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import {computed, defineProps, onMounted, ref} from 'vue';
+import {computed, defineProps, onMounted, onUpdated, ref} from 'vue';
 
 import PageHeader from '../PageHeader/PageHeader.vue';
 import PageHeaderHero from '../PageHeader/PageHeaderHero.vue';
@@ -56,7 +56,7 @@ const props = defineProps({
   primaryCtaText: String,
   primaryCtaUrl: String,
   progress: {
-    type: Number || String,
+    type: [Number, String],
     default: null,
   },
   backToAllLessonsUrl: String,
@@ -73,6 +73,7 @@ const progressMoreThanZero = computed(() => {
 });
 
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
+const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
 const emit = defineEmits(['progressReset']);
 
@@ -99,12 +100,12 @@ const formattedInfoData = computed(() => {
   return '';
 });
 
-const isDarkMode = computed(() => {
-    return JSON.parse(localStorage.getItem("darkMode"));
-})
-
 const logo = computed(() => {
     return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;
+})
+
+onUpdated(() => {
+    isDarkMode.value = JSON.parse(localStorage.getItem("darkMode"));
 })
 
 </script>
