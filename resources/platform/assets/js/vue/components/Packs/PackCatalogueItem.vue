@@ -40,7 +40,7 @@
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2">
                     <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
-                        <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">Enroll Now!</div>
+                        <div v-if="enrollmentOpen" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{pack.badge_text}}</div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
@@ -130,7 +130,7 @@ const hasStarted = computed(() => {
 })
 
 const enrollmentOpen = computed(() => {
-    return props.pack.enrollment_state === 'open';
+    return props.pack.enrollment_state === 'open' || props.pack.enrollment_state === 'enrolled';
 })
 
 const progressText = computed(() => {

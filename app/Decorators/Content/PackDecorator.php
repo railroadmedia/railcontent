@@ -33,6 +33,28 @@ class PackDecorator extends TypeDecoratorBase
             $registrationUrl = $content->fetch('fields.registration_url');
             $enrollNow = $registrationUrl && $enrollStarted && !$enrollEnded;
             $contentsOfType[$contentIndex]['enrollment_state'] = $enrollNow ? 'open' : 'closed';
+
+            if($enrollNow){
+                $contentsOfType[$contentIndex]['badge_text'] = 'Enroll Now!';
+                $ctaRequest = \Request::create($registrationUrl);
+
+                $lastSegment = last($ctaRequest->segments());
+                $cohort = $this->cohortService->getCohort($lastSegment);
+
+                $productId = $cohort['product_id'];
+                $product = $this->productService->getById($productId);
+
+                $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+                $permissionID =
+                    $product->getContentPermissions($contentPermissionsLookup)
+                        ->first()->id ?? null;
+                $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+                if($hasProduct){
+                    $enrollNow = false;
+                    $contentsOfType[$contentIndex]['enrollment_state'] = 'enrolled';
+                    $contentsOfType[$contentIndex]['badge_text'] = "You're enrolled!";
+                }
+            }
             $isStarted = $content['started'] && !$content['completed'];
             $isCompleted = $content['completed'];
             $contentsOfType[$contentIndex]['primary_cta_text'] = $enrollNow ? 'Enroll Now' : ((!$isStarted) ? 'Start' : (($isCompleted) ? 'Completed' : ' Continue'));
