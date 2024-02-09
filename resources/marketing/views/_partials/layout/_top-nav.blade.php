@@ -67,7 +67,7 @@
     </div>
 
     <!-- Sidebar Toggle -->
-    <button class="@if(!empty($whiteNav)) invert @endif text-white w-10 h-10 md:w-14 md:h-14 relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
+    <button class="@if(!empty($whiteNav)) invert @endif @if(!empty($hideMenu)) opacity-0 px-1 w-0 @else w-10 h-10 md:w-14 md:h-14 @endif text-white relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
         <span class="sr-only">Open main menu</span>
         <div class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out" x-bind:class="{'rotate-45': sidebarOpen,' -translate-y-1.5': !sidebarOpen }"></span>
