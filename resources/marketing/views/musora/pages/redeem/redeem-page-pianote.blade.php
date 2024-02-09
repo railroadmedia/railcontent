@@ -150,6 +150,13 @@
 
 @section('global-body')
     @include('pianote.sales.partials._nav')
+    @if(strpos(url()->full(), 'roland'))
+        <div class="py-5 sm:py-7 px-6 text-center bg-green-400">
+            <div class="container mx-auto max-w-2xl">
+                <h3 class="leading-tight"><strong>Check your email for your access code!</strong></h3>
+            </div>
+        </div>
+    @endif
     <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
                 <style>
