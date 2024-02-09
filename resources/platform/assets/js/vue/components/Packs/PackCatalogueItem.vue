@@ -5,7 +5,7 @@
         <a :href="packURL" class="sm:tw-flex-shrink-0 tw-w-full sm:tw-w-[150px] md:tw-w-[200px] xl:tw-w-[310px] tw-rounded-xl tw-overflow-hidden tw-relative tw-group sm:tw-pb-0 tw-mb-4 sm:tw-mb-0 tw-aspect-video">
             <!-- Thumbnail -->
             <img
-                class="tw-transition-opacity tw-opacity-0 tw-absolute tw-inset-0 tw-object-cover tw-object-center"
+                class="tw-transition-opacity tw-opacity-0 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-object-top"
                 :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${thumbnail}`"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
