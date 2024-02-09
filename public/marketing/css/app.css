@@ -2523,9 +2523,6 @@ video {
 .items-center {
   align-items: center !important;
 }
-.items-baseline {
-  align-items: baseline !important;
-}
 .items-stretch {
   align-items: stretch !important;
 }
