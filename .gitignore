@@ -103,10 +103,16 @@ typings/
 
 /vendor/
 
-# Get built by Laravel
+# Platform generated files
 public/mix-manifest.json
-public/platform/
-#public/marketing/
+public/platform/*
+
+# Marketing generated files
+public/marketing/parcel/drumeo/*
+public/marketing/css/app.css
+public/marketing/css/app.css.map
+public/marketing/css/vuesora.css
+public/marketing/css/vuesora.css.map
 
 .idea
 .phpunit*
