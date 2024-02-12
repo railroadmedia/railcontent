@@ -254,6 +254,10 @@ class SalesController extends BaseController
     {
         return view('pianote.products.christmas-songbook', ['theme' => 'pianote', 'membersVersion' => true]);
     }
+    public function bookBag()
+    {
+        return view('pianote.products.book-bag', ['theme' => 'pianote']);
+    }
 
     public function newPianoPlayers()
     {
