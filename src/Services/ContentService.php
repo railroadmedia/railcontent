@@ -236,7 +236,7 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $limit=6)
+    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $pagesSize=6, $page=1)
     {
         $sectionKey = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
         $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $sectionKey;
@@ -244,7 +244,7 @@ class ContentService
             return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
         };
         $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
-        $recommendations = $this->postProcessRecommendationts($recommendations, $sections, $randomize, $limit);
+        $recommendations = $this->postProcessRecommendationts($recommendations, $sections, $randomize, $pagesSize, $page);
         return $this->getContentFilterResultsFromRecommendations($recommendations);
     }
 
@@ -263,13 +263,14 @@ class ContentService
         return $recommendations;
     }
 
-    private function postProcessRecommendationts($recommendations, array $sections, $randomize, $limit)
+    private function postProcessRecommendationts($recommendations, array $sections, $randomize, $pageSize, $page)
     {
         $recommendations = zipperMerge($recommendations);
         if ($randomize) {
-            $recommendations = $this->randomizeRecommendations($recommendations, $limit);
+            $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
         } else {
-            $recommendations = array_slice($recommendations, 0, $limit);
+            $offset = ($page  - 1) * $pageSize;
+            $recommendations = array_slice($recommendations, $offset, $pageSize);
         }
         return $recommendations;
     }
@@ -302,12 +303,10 @@ class ContentService
             // no caching involved :)
             $hour = date("H");
             srand($hour);
-            $randomKeys =  array_rand($recommendations, $limit);
-            srand(time());
-            return array_intersect_key($recommendations, array_flip($randomKeys));
-        } else {
-            return array_rand($recommendations, $limit);
         }
+        $randomKeys =  array_rand($recommendations, $limit);
+        srand(time());
+        return array_intersect_key($recommendations, array_flip($randomKeys));
     }
 
     /**
