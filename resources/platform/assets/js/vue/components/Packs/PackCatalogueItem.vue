@@ -49,7 +49,7 @@
                         </button>
                     </div>
                         <!-- Title -->
-                        <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
+                        <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start tw-flex-shrink-0">
                             <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-lg lg:tw-text-xl tw-line-clamp-2 lg:tw-mr-3">
                                 {{ title }}
                             </div>
