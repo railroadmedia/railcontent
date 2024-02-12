@@ -43,6 +43,7 @@
             :infinite-scroll="false"
             :pre-loaded-content="{{ $packs }}"
             title="Packs"
+            limit = -1
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
             default-sorts="-progress"
             :hide-sort-icon="true"
