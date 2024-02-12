@@ -19,7 +19,6 @@ class PopulateLegacyExpirationDate extends Command
         $limit = $this->option('limit');
         $this->withExecutionTime(function () use ($skip, $limit) {
             $query = User::query()
-                ->whereNull('membership_expiration_date')
                 ->whereNull('legacy_expiration_date')
                 ->whereExists(function ($query) {
                     $query->from('ecommerce_user_products')
@@ -31,7 +30,7 @@ class PopulateLegacyExpirationDate extends Command
 
             $this->info("Found $total users");
             $i = 0;
-            $users = $query->chunk(10000, function ($users) use ($total, &$i) {
+            $query->chunk(10000, function ($users) use ($total, &$i) {
                 foreach ($users as $user) {
                     $user->legacy_expiration_date = $this->getLegacyExpirationDate($user->id);
                     if ($user->legacy_expiration_date) {
