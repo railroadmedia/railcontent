@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-relative tw-inline-block tw-text-left">
+    <div class="tw-relative tw-inline-block tw-text-left" ref="dropdownRef">
         <div>
             <button @click="toggleDropdown" type="button"
                 class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white ml-1 tw-mb-0"
@@ -18,15 +18,13 @@
         <div class="tw-absolute tw-right-0 tw-z-10 tw-bg-white tw-shadow tw-text-xs tw-text-[#00101D] tw-rounded"
             :class="{ 'tw-opacity-0': !showDropdown, 'tw-opacity-100 tw-transition-opacity tw-duration-200 tw-ease-in-out': showDropdown }"
             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-
             <slot name="content"></slot>
         </div>
     </div>
 </template>
 
-  
 <script setup>
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
     text: String,
@@ -34,10 +32,23 @@ const props = defineProps({
 });
 
 const showDropdown = ref(false);
+const dropdownRef = ref(null);
 
 const toggleDropdown = () => {
     showDropdown.value = !showDropdown.value;
 };
-</script>
 
-  
+const handleClickOutside = (event) => {
+    if (!dropdownRef.value.contains(event.target)) {
+        showDropdown.value = false;
+    }
+};
+
+onMounted(() => {
+    window.addEventListener('click', handleClickOutside);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('click', handleClickOutside);
+});
+</script>
