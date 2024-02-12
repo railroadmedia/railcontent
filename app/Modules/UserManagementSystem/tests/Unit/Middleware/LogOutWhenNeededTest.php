@@ -16,7 +16,7 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
         parent::setUp();
 
         Route::get(
-            'test-route',
+            $this->testRouteName,
             function () {
                 return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
             }
@@ -41,7 +41,7 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
     public function test_successful_web_request_when_needs_logout_is_false()
     {
         $user = $this->createUser(false);
-        $response = $this->actingAs($user)->get('test-route');
+        $response = $this->actingAs($user)->get($this->testRouteName);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -56,7 +56,7 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
                 return str_contains($message, "Logging out user {$user->id}");
             });
 
-        $response = $this->actingAs($user)->get('test-route');
+        $response = $this->actingAs($user)->get($this->testRouteName);
 
         $response->assertRedirectContains(config('user_management_system.login_page_path'));
         $this->assertEquals(302, $response->getStatusCode());
@@ -71,8 +71,8 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
         $token = $user->createToken('test-token')->plainTextToken;
 
         $response = $this->getJson(
-            'test-route',
-            ['HTTP_REFERER' => 'https://test.musora.com', 'AUTHORIZATION' => 'Bearer ' . $token]
+            $this->testRouteName,
+            ['HTTP_REFERER' => $this->testRoutePath, 'AUTHORIZATION' => 'Bearer ' . $token]
         );
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -93,8 +93,8 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
             });
 
         $response = $this->getJson(
-            'test-route',
-            ['HTTP_REFERER' => 'https://test.musora.com', 'AUTHORIZATION' => 'Bearer ' . $token]
+            $this->testRouteName,
+            ['HTTP_REFERER' => $this->testRoutePath, 'AUTHORIZATION' => 'Bearer ' . $token]
         );
 
         $this->assertEquals(500, $response->getStatusCode());
