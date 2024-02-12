@@ -9,7 +9,19 @@ class MarketingController extends BaseController
 
     public function homepage()
     {
-        return view('musora.subscription', ['theme' => 'musora']);
+        return view('musora.subscription', [
+            'theme' => 'musora',
+            'fullSubscriptionVersion' => true,
+        ]);
+    }
+    public function trial()
+    {
+        return view('musora.subscription', [
+            'theme' => 'musora',
+            'promoVersion' => true,
+            'trialVersion' => true,
+            'hideMenu' => true,
+        ]);
     }
     public function sixReasons()
     {

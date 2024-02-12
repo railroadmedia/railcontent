@@ -628,7 +628,7 @@
                 </a>
                 <a href="/blog/how-piano-pedals-work/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=96,width=600/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/07/19154235/2023-07-Piano-Pedals-Explained-1920x1080-1.jpg" alt="beginner pianist practice routine">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=95,width=600/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/07/19154235/2023-07-Piano-Pedals-Explained-1920x1080-1.jpg" alt="beginner pianist practice routine">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">

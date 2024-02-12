@@ -73,7 +73,7 @@ class CodeRedemptionController extends BaseController
         Mail::send(
             'emails.hit-like-a-girl-free-code-delivery',
             [
-                'code' => $code->getCode(),
+                'code' => $code->code,
                 'firstName' => $request->get('first_name'),
                 'lastName' => $request->get('last_name'),
             ],

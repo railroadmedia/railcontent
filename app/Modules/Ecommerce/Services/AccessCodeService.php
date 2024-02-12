@@ -3,89 +3,42 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
+use App\Modules\Ecommerce\Events\AccessCodeClaimed;
+use App\Modules\Ecommerce\Models\AccessCode;
+use App\Modules\Ecommerce\Models\Product;
+use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
-use Datetime;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Exception;
 use Log;
-use Railroad\Ecommerce\Entities\AccessCode;
-use Railroad\Ecommerce\Entities\Product;
-use Railroad\Ecommerce\Entities\Subscription;
-use Railroad\Ecommerce\Entities\SubscriptionAccessCode;
-use Railroad\Ecommerce\Entities\User;
-use Railroad\Ecommerce\Entities\UserProduct;
-use Railroad\Ecommerce\Events\AccessCodeClaimed;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Exceptions\UnprocessableEntityException;
-use Railroad\Ecommerce\Managers\EcommerceEntityManager;
-use Railroad\Ecommerce\Repositories\AccessCodeRepository;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Ecommerce\Services\UserProductService;
+use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
-/**
- * Class AccessCodeService
- *
- * @package Railroad\Ecommerce\Services
- */
 class AccessCodeService
 {
-    /**
-     * @var EcommerceEntityManager $entityManager
-     */
-    private EcommerceEntityManager $entityManager;
-
-    /**
-     * @var ProductRepository $productRepository
-     */
-    private ProductRepository $productRepository;
-
-    /**
-     * @var SubscriptionRepository $subscriptionRepository
-     */
-    private SubscriptionRepository $subscriptionRepository;
-
-    /**
-     * @var UserProductService $userProductService
-     */
-    private UserProductService $userProductService;
-
-    /**
-     * @var AccessCodeRepository $accessCodeRepository
-     */
-    private AccessCodeRepository $accessCodeRepository;
-
-    /**
-     * @var UserAccessPermissionsService
-     */
     private UserAccessPermissionsService $userAccessPermissionsService;
+    private ProductService $productService;
+    private UserService $userService;
 
-    /**
-     * AccessCodeService constructor.
-     *
-     * @param EcommerceEntityManager $entityManager
-     * @param ProductRepository $productRepository
-     * @param SubscriptionRepository $subscriptionRepository
-     * @param UserProductService $userProductService
-     * @param AccessCodeRepository $accessCodeRepository
-     * @param UserAccessPermissionsService $userAccessPermissionsService
-     */
     public function __construct(
-        EcommerceEntityManager $entityManager,
-        ProductRepository $productRepository,
-        SubscriptionRepository $subscriptionRepository,
-        UserProductService $userProductService,
-        AccessCodeRepository $accessCodeRepository,
-        UserAccessPermissionsService $userAccessPermissionsService
+        UserAccessPermissionsService $userAccessPermissionsService,
+        ProductService $productService,
+        UserService $userService
     ) {
-        $this->entityManager = $entityManager;
-        $this->productRepository = $productRepository;
-        $this->subscriptionRepository = $subscriptionRepository;
-        $this->userProductService = $userProductService;
-        $this->accessCodeRepository = $accessCodeRepository;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->productService = $productService;
+        $this->userService = $userService;
+    }
+
+
+    public function claimByUserId(string $code, ?int $userId, $context = null): AccessCode
+    {
+        $user = $this->userService->getByIdOrNull($userId);
+        if (!$user) {
+            throw new Exception('Claim failed, user not found with id: ' . $userId);
+        }
+        return $this->claim($code, $user, $context);
     }
 
     /**
@@ -93,8 +46,8 @@ class AccessCodeService
      * extends $accessCode associated subscriptions
      * adds user products
      *
-     * @param string $rawAccessCode
-     * @param User $user
+     * @param string $code
+     * @param ?int $userId
      *
      * @param null $context
      * @return AccessCode
@@ -104,96 +57,86 @@ class AccessCodeService
      * @throws Throwable
      * @throws \Doctrine\ORM\ORMException
      */
-    public function claim(string $rawAccessCode, User $user, $context = null): AccessCode
+    public function claim(string $code, User $user, $context = null): AccessCode
     {
-        $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
+        /** @var AccessCode $accessCode */
+        $accessCode = $this->getAccessCode($code);
         if (!$accessCode) {
             throw new Exception("Access code does not exist!");
         }
 
-        if ($accessCode->getIsClaimed()) {
+        if ($accessCode->is_claimed) {
             // Can't claim a code that's already claimed
             throw new Exception("Access code already claimed");
         }
 
-        $productIds = $this->getAccessCodeProducts($rawAccessCode);
+        $productIds = $this->getAccessCodeProducts($accessCode);
 
         $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-            $user->getId(),
+            $user->id,
             $productIds,
             Carbon::now(),
-            $accessCode->getId(),
+            $accessCode->id,
             UserAccessPermissionsSourceEnum::AccessCode,
         );
 
-        $accessCode->setIsClaimed(true);
-        $accessCode->setClaimer($user);
-        $accessCode->setClaimedOn(Carbon::now());
-        $accessCode->setUpdatedAt(Carbon::now());
-
-        $this->entityManager->persist($accessCode);
-        $this->entityManager->flush();
+        $accessCode->is_claimed = true;
+        $accessCode->claimer_id = $user->id;
+        $accessCode->claimed_on = Carbon::now();
+        $accessCode->updated_at = Carbon::now();
+        $accessCode->save();
 
         event(new AccessCodeClaimed($accessCode, $user, $context));
 
         Log::info('Access code claimed', [
-            'access_code' => $accessCode->getCode(),
-            'user_id' => $user->getId(),
+            'access_code' => $accessCode->code,
+            'user_id' => $user->id,
         ]);
 
         return $accessCode;
     }
 
-    /**
-     * @param array $productIds
-     * @param string $brand
-     * @param string|null $source
-     * @return AccessCode
-     * @throws ORMException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws OptimisticLockException
-     */
+    public function release(?string $code): void
+    {
+        /** @var AccessCode $accessCode */
+        $accessCode = $this->getAccessCode($code);
+        if (!$accessCode) {
+            throw new Exception("Access code for ID $code not found.");
+        }
+        $accessCode->is_claimed = false;
+        $accessCode->claimer_id = null;
+        $accessCode->claimed_on = null;
+        $accessCode->updated_at = Carbon::now();
+        $accessCode->save();
+    }
+
     public function generateAccessCode(array $productIds, string $brand, string $source = null): AccessCode
     {
         $accessCode = new AccessCode();
-        $accessCode->setProductIds($productIds);
-        $accessCode->setBrand($brand);
+        $accessCode->product_ids = serialize($productIds);
+        $accessCode->brand = $brand;
+        $accessCode->is_claimed = false;
 
         if ($source) {
-            $accessCode->setSource($source);
+            $accessCode->source = $source;
         }
 
         $accessCode->generateCode();
-
-        $this->entityManager->persist($accessCode);
-        $this->entityManager->flush();
-
+        $accessCode->save();
         return $accessCode;
     }
 
-    /**
-     * @param string $rawAccessCode
-     * @return int[]
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function getAccessCodeProducts(string $rawAccessCode): array
+    public function getAccessCodeProducts(AccessCode $accessCode): array
     {
-        $accessCode = $this->accessCodeRepository->findOneBy(['code' => $rawAccessCode]);
-        if (!$accessCode) {
-            throw new Exception("Access code $rawAccessCode not found.");
-        }
-
-        $accessCodeProducts = $this->productRepository->byAccessCode($accessCode);
+        $accessCodeProducts = $this->productService->getByAccessCode($accessCode);
         $productIds = [];
 
         collect($accessCodeProducts)->each(function (Product $product) use (&$productIds) {
             $codeRedeemProductHackMap = config('ecommerce.code_redeem_product_sku_swap', []);
-            $accessCodeProductId = $product->getId();
-            if (array_key_exists($product->getSku(), $codeRedeemProductHackMap)) {
-                $replaceWithSku = $codeRedeemProductHackMap[$product->getSku()];
-                $accessCodeProductId =
-                    $this->productRepository->bySku($replaceWithSku)
-                        ->getId();
+            $accessCodeProductId = $product->id;
+            if (array_key_exists($product->sku, $codeRedeemProductHackMap)) {
+                $replaceWithSku = $codeRedeemProductHackMap[$product->sku];
+                $accessCodeProductId = $this->productService->getBySku($replaceWithSku)->id;
             }
             $productIds[] = $accessCodeProductId;
         });
@@ -208,7 +151,7 @@ class AccessCodeService
      * @param $code
      * @return string
      */
-    public function hyphenateCode($code)
+    public function hyphenateCode($code): string
     {
         return implode(" - ", str_split($code, 4));
     }
@@ -217,13 +160,19 @@ class AccessCodeService
      * @param string|null $code
      * Into: Check if access code exists; if it exists, split the access code into 6 parts and return it as an array;
      *     if not, return null
-     * @return array
+     * @return ?array
      */
-    public function checkAndSplitAccessCode($code)
+    public function checkAndSplitAccessCode(?string $code): ?array
     {
         if (!$code) {
             return null;
         }
-        return ($this->accessCodeRepository->findOneBy(['code' => $code])) ? str_split($code, 4) : null;
+        $accessCode = $this->getAccessCode($code);
+        return ($accessCode) ? str_split($code, 4) : null;
+    }
+
+    public function getAccessCode(?string $code): ?AccessCode
+    {
+        return AccessCode::query()->where('code', $code)->first() ?? null;
     }
 }
