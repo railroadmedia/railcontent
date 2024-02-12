@@ -30,7 +30,7 @@ class PopulateLegacyExpirationDate extends Command
 
             $this->info("Found $total users");
             $i = 0;
-            $query->chunk(10000, function ($users) use ($total, &$i) {
+            $query->chunkById(10000, function ($users) use ($total, &$i) {
                 foreach ($users as $user) {
                     $user->legacy_expiration_date = $this->getLegacyExpirationDate($user->id);
                     if ($user->legacy_expiration_date) {
