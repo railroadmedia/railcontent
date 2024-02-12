@@ -357,7 +357,7 @@ class UserPlaylistsController extends BaseController
         }
 
         if (!empty($content['parent_content_data'] ?? [])) {
-            $content['parent'] =
+            $playlistItem['parent'] =
                 $this->contentService->getByChildId($content['id'])
                     ->first();
         }

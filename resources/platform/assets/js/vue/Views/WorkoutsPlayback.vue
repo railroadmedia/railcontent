@@ -328,8 +328,8 @@ const breadcrumbProps = computed(() => {
 });
 
 const showPracticeButton = computed(() => {
-    return props.soundsliceSlug ? true : false;
-})
+    return !!props.soundsliceSlug;
+});
 
 //Methods
 const handleVideoPlay = (payload) => {

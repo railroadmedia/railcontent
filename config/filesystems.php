@@ -82,6 +82,11 @@ return [
             'cloudfront_access_url' => env('MWP_AWS_S3_CLOUDFRONT_ACCESS_URL'),
         ],
 
+        'ecommerce_test_resources' => [
+            'driver' => 'local',
+            'root' => base_path('app/Modules/Ecommerce/tests/resources'),
+        ],
+
     ],
 
     /*

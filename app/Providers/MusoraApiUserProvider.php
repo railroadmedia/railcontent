@@ -4,15 +4,12 @@ namespace App\Providers;
 
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
+use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\FirebaseToken;
-use Railroad\Ecommerce\Entities\Subscription;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Ecommerce\Services\SubscriptionService;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
@@ -24,40 +21,33 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
-    private SubscriptionRepository $subscriptionRepository;
-    private ProductRepository $productRepository;
     private CalendarService $calendarService;
     private CommentService $commentService;
     private PostRepository $postRepository;
     private ContentService $contentService;
     private CustomerIoService $customerIoService;
-    private SubscriptionService $subscriptionService;
     private RevenueCatService $revenueCatService;
+    private SubscriptionService $subscriptionService;
 
     public function __construct(
-        SubscriptionRepository $subscriptionRepository,
-        ProductRepository $productRepository,
         CalendarService $calendarService,
         CommentService $commentService,
         PostRepository $postRepository,
         ContentService $contentService,
         CustomerIoService $customerIoService,
-        SubscriptionService $subscriptionService,
-        RevenueCatService $revenueCatService
+        RevenueCatService $revenueCatService,
+        SubscriptionService $subscriptionService
     ) {
-        $this->productRepository = $productRepository;
-        $this->subscriptionRepository = $subscriptionRepository;
         $this->calendarService = $calendarService;
         $this->commentService = $commentService;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
         $this->customerIoService = $customerIoService;
-        $this->subscriptionService = $subscriptionService;
         $this->revenueCatService = $revenueCatService;
+        $this->subscriptionService = $subscriptionService;
     }
 
-    public function getCurrentUser()
-    : ?User
+    public function getCurrentUser(): ?User
     {
         if (user()) {
             return new User(
@@ -95,7 +85,7 @@ class MusoraApiUserProvider implements UserProviderInterface
                 })
             ) > 0;
 
-	try {
+        try {
             $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 $accountName,
@@ -185,6 +175,18 @@ class MusoraApiUserProvider implements UserProviderInterface
                 'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
+        $brand = brand();
+        $showLearningPathsOnHomepage = false;
+        $hideSection = $brand.'_trial_section_hide';
+
+        if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels =  count(
+                user()->onboardingExperience->filter(function ($item) use($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
+            $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
+        }
 
         return array_merge([
             'id' => $user->id,
@@ -200,11 +202,11 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
+            'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
         ], $extraData);
     }
 
-    public function getCurrentUserExperienceData()
-    : array
+    public function getCurrentUserExperienceData(): array
     {
         return [
             'totalXp' => user()->getBrandTotalXp(),
@@ -213,24 +215,24 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function setCurrentUserProfilePictureUrl(?string $profilePictureUrl = null)
-    : User {
+    public function setCurrentUserProfilePictureUrl(?string $profilePictureUrl = null): User
+    {
         user()->profile_picture_url = $profilePictureUrl;
         user()->save();
 
         return $this->getCurrentUser();
     }
 
-    public function setCurrentUserPhoneNumber(string $phoneNumber)
-    : User {
+    public function setCurrentUserPhoneNumber(string $phoneNumber): User
+    {
         user()->phone_number = $phoneNumber;
         user()->save();
 
         return $this->getCurrentUser();
     }
 
-    public function setCurrentUserDisplayName(string $displayName)
-    : ?User {
+    public function setCurrentUserDisplayName(string $displayName): ?User
+    {
         $inUseDisplayName =
             \Modules\UserManagementSystem\Models\User::where('display_name', $displayName)
                 ->get();
@@ -300,8 +302,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         // TODO: Implement getUsoraCurrentUser() method.
     }
 
-    public function setAndGetUserTimezone()
-    : string
+    public function setAndGetUserTimezone(): string
     {
         return $this->calendarService->getTimezone(request());
     }
@@ -341,7 +342,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $this->commentService->markUserCommentsAsDeleted($userId);
         $this->postRepository->deleteByUserId($userId);
-        $this->subscriptionService->cancelUserSubscriptions($userId);
+        $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
 
         $user->fill([
             'email' => 'musora+deleted_' .

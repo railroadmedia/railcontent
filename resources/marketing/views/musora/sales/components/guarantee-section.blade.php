@@ -1,12 +1,18 @@
-<div class="h-5 sm:h-10 -mt-10 relative" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #FFF calc(50% + 1px));"></div>
+<div class="h-5 sm:h-10 -mt-10 relative" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #FFF calc(50% + 1px));" aria-hidden="true"></div>
 <div id="guarantee" class="anchor"></div>
 <section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#fff;">
-    <div class="container mx-auto max-w-6xl">
+    <div class="container mx-auto max-w-6xl" 
+        :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+        x-intersect.once="lazyLoad = true; $refs.guaranteeBadge.src = $refs.guaranteeBadge.dataset.src;">
         <picture>
-            <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/{!! $badge !!}">
-            <img class="h-28 md:h-32 -mt-16 md:-mt-20 mb-5 sm:mb-8 transition-opacity opacity-0" alt="guarantee-badge"
-                loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/220x0/filters:quality(95)/{!! $badge !!}">
+            <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/{!! $badge !!}">
+            <img x-ref="guaranteeBadge"
+                class="h-28 md:h-32 -mt-16 md:-mt-20 mb-5 sm:mb-8 transition-opacity opacity-0 duration-300" 
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/35x0/filters:quality(1)/{!! $badge !!}"
+                data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/{!! $badge !!}"
+                onload="this.classList.remove('opacity-0')"
+                loading="lazy"
+                alt="guarantee-badge">
         </picture>
         <h3 class="leading-tight">{!! $header !!}</h3>
         <p class="leading-normal md:leading-loose my-4 sm:my-7 max-w-4xl mx-auto">{!! $desc !!}</p>

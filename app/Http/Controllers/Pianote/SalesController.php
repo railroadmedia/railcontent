@@ -314,7 +314,7 @@ class SalesController extends BaseController
                 'pianote',
                 2,
                 $request->get('email'),
-                ['access_code' => strtoupper($this->accessCodeService->hyphenateCode($accessCode->getCode()))]
+                ['access_code' => strtoupper($this->accessCodeService->hyphenateCode($accessCode->code))]
             ))
                 ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))

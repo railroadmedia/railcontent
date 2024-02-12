@@ -1,7 +1,6 @@
 <?php
 
 use App\Modules\Brand\Services\BrandService;
-use App\Modules\UserManagementSystem\Services\UserAccessService;
 use Carbon\Carbon;
 
 if (!function_exists('user')) {
@@ -46,13 +45,6 @@ if (!function_exists('generate_musora_cross_platform_login_key')) {
     function generate_musora_cross_platform_login_key($userId, $userPasswordHash)
     {
         return md5($userId . $userPasswordHash . Carbon::now()->startOfMinute()->toDateTimeString());
-    }
-}
-
-if (!function_exists('is_current_user_an_annual_or_lifetime_member')) {
-    function is_current_user_an_annual_or_lifetime_member()
-    {
-        return UserAccessService::isAnnualOrLifetimeMember();
     }
 }
 
