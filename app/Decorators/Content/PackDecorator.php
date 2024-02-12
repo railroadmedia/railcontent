@@ -52,7 +52,7 @@ class PackDecorator extends TypeDecoratorBase
                 if($hasProduct){
                     $enrollNow = false;
                     $contentsOfType[$contentIndex]['enrollment_state'] = 'enrolled';
-                    $contentsOfType[$contentIndex]['badge_text'] = "You're enrolled!";
+                    $contentsOfType[$contentIndex]['badge_text'] = "You're Enrolled!";
                 }
             }
             $isStarted = $content['started'] && !$content['completed'];
