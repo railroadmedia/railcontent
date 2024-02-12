@@ -8,6 +8,7 @@ use App\Decorators\Content\ContentExperienceDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\PackDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -96,6 +97,8 @@ class PackService
         AddedToPrimaryPlaylistDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
         ContentExperienceDecorator::$skip = true;
+        ContentLikesDecorator::$skip = true;
+        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $packs = (new PackCollection(
             $this->contentService->getFiltered(
