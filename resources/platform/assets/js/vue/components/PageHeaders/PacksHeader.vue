@@ -18,10 +18,10 @@
         <span v-if="progress"
           class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-3xl tw-font-bold">Your
           Progress - {{ progress }}%</span>
-        <div class="">
+        <div>
           <PageHeaderCta v-if="backToAllLessonsUrl" text="Back to all lessons" icon="fas fa-chevron-double-left"
             :href="backToAllLessonsUrl" />
-          <PageHeaderDropdown icon="fa fa-download">
+          <PageHeaderDropdown icon="fa fa-download" v-if="areResourcesDownloadable">
             <template v-slot:content>
               <ul class="tw-w-max">
                 <li v-for="resource in downloadableResources" :key="resource.resource_id"
@@ -78,7 +78,7 @@ const props = defineProps({
     default: false,
   },
   infoData: Object,
-  downloadableResources: Array,
+  downloadableResources: Object,
 });
 
 const progressMoreThanZero = computed(() => {
@@ -97,7 +97,6 @@ const resetWithConfirmation = () => {
 };
 
 const areResourcesDownloadable = computed(() => {
-  console.log('areResourcesDownloadable', props.downloadableResources);
   return props.downloadableResources && Object.keys(props.downloadableResources)?.length > 0;
 });
 
