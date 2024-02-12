@@ -244,8 +244,9 @@ class ContentService
             return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
         };
         $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
+        $totalCount = count($recommendations);
         $recommendations = $this->postProcessRecommendationts($recommendations, $sections, $randomize, $pagesSize, $page);
-        return $this->getContentFilterResultsFromRecommendations($recommendations);
+        return $this->getContentFilterResultsFromRecommendations($recommendations, $totalCount);
     }
 
     private function getOrCacheRecommendations($cacheKey, $callback)
@@ -275,7 +276,7 @@ class ContentService
         return $recommendations;
     }
 
-    private function getContentFilterResultsFromRecommendations($recommendations)
+    private function getContentFilterResultsFromRecommendations($recommendations, $totalCount)
     {
         $content = $this->getByIds($recommendations);
         $filterOptions = [
@@ -289,7 +290,7 @@ class ContentService
         return (new ContentFilterResultsEntity([
             'results' => $content,
             'filter_options' => $filterOptions,
-            'total_results' => count($recommendations)
+            'total_results' => $totalCount
         ]));
     }
 
