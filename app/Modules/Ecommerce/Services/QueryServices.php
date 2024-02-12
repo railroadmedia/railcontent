@@ -29,6 +29,17 @@ class QueryServices
             case "hasLegacyExpirationDate":
                 $query->whereNotNull('legacy_expiration_date');
                 break;
+            case "hasUserPermissionProduct":
+                if (!$customQueryParameters) {
+                    throw new \Exception("expected customqueryparamater permissionId");
+                }
+                $query->whereExists(function ($query) use ($customQueryParameters) {
+                    $query->select(DB::raw(1))
+                        ->from('user_access_permissions')
+                        ->whereRaw('usora_users.id = user_access_permissions.user_id')
+                        ->where('product_id', '=', intval($customQueryParameters));
+                });
+                break;
             case "hasUserPermission":
                 if (!$customQueryParameters) {
                     throw new \Exception("expected customqueryparamater permissionId");
