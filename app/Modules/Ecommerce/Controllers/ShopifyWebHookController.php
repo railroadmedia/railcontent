@@ -34,6 +34,17 @@ class ShopifyWebHookController extends Controller
         try {
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
+            $processedAt = $request->get('processed_at');
+
+            if ($processedAt) {
+                $launchDate = new Carbon(config('ecommerce.launch_date_times.shopify'));
+                $processedAtDate = new Carbon($processedAt);
+                if ($processedAtDate->isBefore($launchDate)) {
+                    Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring update.");
+                    return;
+                }
+            }
+
             Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
             dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
