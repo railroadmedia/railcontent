@@ -3,13 +3,16 @@
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
 use App\Modules\Ecommerce\Collections\OrderCollection;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Events\AccessCodeClaimed;
 use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
+use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -47,35 +50,17 @@ use Throwable;
 
 class CustomerIoSyncEventListener
 {
-    /**
-     * @var UserService
-     */
-    private $userService;
+    private UserService $userService;
 
-    /**
-     * @var CommentRepository
-     */
-    private $commentRepository;
+    private CommentRepository $commentRepository;
 
-    /**
-     * @var ThreadRepository
-     */
-    private $threadRepository;
+    private ThreadRepository $threadRepository;
 
-    /**
-     * @var PostRepository
-     */
-    private $postRepository;
+    private PostRepository $postRepository;
 
-    /**
-     * @var CategoryRepository
-     */
-    private $categoryRepository;
+    private CategoryRepository $categoryRepository;
 
-    /**
-     * @var ContentService
-     */
-    private $contentService;
+    private ContentService $contentService;
 
     /**
      * @var bool
@@ -85,6 +70,7 @@ class CustomerIoSyncEventListener
      * @var array
      */
     public static $alreadyQueuedUserIds = [];
+    private ProductService $productService;
 
     public function __construct(
         UserService $userService,
@@ -93,6 +79,7 @@ class CustomerIoSyncEventListener
         ThreadRepository $threadRepository,
         PostRepository $postRepository,
         ContentService $contentService,
+        ProductService $productService
     ) {
         $this->userService = $userService;
         $this->commentRepository = $commentRepository;
@@ -100,6 +87,7 @@ class CustomerIoSyncEventListener
         $this->threadRepository = $threadRepository;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
+        $this->productService = $productService;
     }
 
     /**
@@ -177,6 +165,7 @@ class CustomerIoSyncEventListener
 
             $data = $this->getCustomerIoDataFromOrders(
                 $user,
+                $userAccessPermissionsUpdated->getUserAccessPermissions(),
                 $userAccessPermissionsUpdated->getOrderCollection(),
                 $userAccessPermissionsUpdated->getSubscriptions()
             );
@@ -796,10 +785,35 @@ class CustomerIoSyncEventListener
         );
     }
 
-    private function getCustomerIoDataFromOrders(User $user, ?OrderCollection $orderCollection, $subscriptions): array
-    {
+    private function getCustomerIoDataFromOrders(
+        User $user,
+        UserAccessPermissionsCollection $userAccessPermissionsCollection,
+        ?OrderCollection $orderCollection,
+        $subscriptions
+    ): array {
         $attributes = $this->getOrderAttributes($orderCollection);
-        return array_merge($attributes, $this->getSubscriptionAttributes($user, $subscriptions));
+        $permissionsAttributes = $this->getPermissionsAttributes($userAccessPermissionsCollection);
+        $subscriptionAttributes = $this->getSubscriptionAttributes($user, $subscriptions);
+        return array_merge($attributes, $permissionsAttributes, $subscriptionAttributes);
+    }
+
+    public function getPermissionsAttributes(UserAccessPermissionsCollection $userAccessPermissionsCollection)
+    {
+        $attributes = [];
+        $packProductLookup = $this->productService->getPackProductsByOwnedProductIds(
+            $userAccessPermissionsCollection->getActiveProductIds()
+        )->groupBy('brand');
+
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+
+        foreach ($brands as $brand) {
+            $ownedPackIds = $this->getOwnedPackIds($brand, $packProductLookup);
+            $attributes[$brand . '_owned_pack_product_ids'] = implode(', ', $ownedPackIds);
+
+            $ownedPackSkus = $this->getOwnedPackSkus($brand, $packProductLookup);
+            $attributes[$brand . '_owned_pack_product_skus'] = implode(', ', $ownedPackSkus);
+        }
+        return $attributes;
     }
 
     public function getOrderAttributes(?OrderCollection $orderCollection): array
@@ -815,22 +829,6 @@ class CustomerIoSyncEventListener
                 /** @var OrderLineItem $orderLineItem */
                 return $orderLineItem->product && $orderLineItem->product->isDigital(
                     ) && $orderLineItem->product->isMembershipProduct();
-            });
-        })->groupBy(function ($orderLineItem) {
-            /** @var OrderLineItem $orderLineItem */
-            if ($orderLineItem->product) {
-                return $orderLineItem->product->brand;
-            }
-            return 'unknown';
-        });
-
-        $packsOrderItemLookup = $orderCollection->getOrders()->flatMap(function ($order) {
-            /** @var Order $order */
-            return $order->lineItems->filter(function ($orderLineItem) {
-                /** @var OrderLineItem $orderLineItem */
-                return $orderLineItem->product
-                    && $orderLineItem->product->isDigital()
-                    && $orderLineItem->product->isPack();
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
@@ -857,28 +855,15 @@ class CustomerIoSyncEventListener
             if ($last) {
                 $attributes[$brand . '_membership_latest-access-start-date'] = $last->order->processedAt->timestamp;
             }
-
-            $packs = $packsOrderItemLookup[$brand] ?? collect();
-            $attributes[$brand . '_owned_pack_product_ids'] = implode(
-                ', ',
-                $packs->map(function ($item) {
-                    /** @var OrderLineItem $item */
-                    return "_" . $item->product->id . "_";
-                })->toArray()
-            );
-            $attributes[$brand . '_owned_pack_product_skus'] = implode(
-                ', ',
-                $packs->map(function ($item) {
-                    /** @var OrderLineItem $item */
-                    return "_" . $item->product->sku . "_";
-                })->toArray()
-            );
         }
         return $attributes;
     }
 
-    private function getSubscriptionAttributes(User $user, $subscriptions): array
-    {
+    private
+    function getSubscriptionAttributes(
+        User $user,
+        $subscriptions
+    ): array {
         if (!$subscriptions) {
             return [];
         }
@@ -918,8 +903,10 @@ class CustomerIoSyncEventListener
         return $attributes;
     }
 
-    public function getSubscriptionStatus(RechargeSubscription $subscription): string
-    {
+    public
+    function getSubscriptionStatus(
+        RechargeSubscription $subscription
+    ): string {
         return match ($subscription->status) {
             RechargeSubscriptionStatusEnum::Active->value => 'active',
             RechargeSubscriptionStatusEnum::Cancelled->value => 'cancelled',
@@ -928,8 +915,10 @@ class CustomerIoSyncEventListener
         };
     }
 
-    private function getTrialType(RechargeSubscription $latest): string
-    {
+    private
+    function getTrialType(
+        RechargeSubscription $latest
+    ): string {
         if (!$latest->product->isTrial()) {
             return "";
         }
@@ -955,5 +944,25 @@ class CustomerIoSyncEventListener
         }
 
         return $interval . "_" . $days . "_days_free";
+    }
+
+    public function getOwnedPackIds(string $brand, $packProductLookup): array
+    {
+        $packIds = ($packProductLookup[$brand] ?? collect())
+            ->map(function (Product $product) {
+                return "_" . $product->id . "_";
+            })->toArray();
+
+        return $packIds;
+    }
+
+    public function getOwnedPackSkus(string $brand, $packProductLookup): array
+    {
+        $packSkus = ($packProductLookup[$brand] ?? collect())
+            ->map(function (Product $product) {
+                return "_" . $product->sku . "_";
+            })->toArray();
+
+        return $packSkus;
     }
 }

@@ -211,6 +211,15 @@ class UserAccessPermissionsCollection
         return $permissionIds;
     }
 
+    public function getActiveProductIds(): array
+    {
+        $productIds = $this->collection->where(function ($permission) {
+            return $permission->status != 'revoked';
+        })->pluck('product_id')->unique()->sort()->toArray();
+
+        return $productIds;
+    }
+
     public function hasUserOwnedPermissions(array $permissionIds): bool
     {
         list(, $endDate) = $this->getActiveDates($permissionIds);
