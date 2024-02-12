@@ -11,17 +11,19 @@
       </div>
     </template>
 
-    <div class="tw-flex tw-flex-col pl-2 tw-justify-between" :class="{ 'tw-h-[150px]': additionalImgSrc }">
-      <template v-if="!additionalImgSrc">
-        <div v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">{{ title }}</div>
-        <!-- TODO: Style subTitle and description -->
-        <div v-if="subTitle">{{ subTitle }}</div>
-        <div v-if="description">{{ description }}</div>
-      </template>
-
-      <template v-if="additionalImgSrc">
-        <img :src="additionalImgSrc" class="tw-max-w-[174px] tw-max-h-[90px]">
-      </template>
+    <div class="tw-flex tw-flex-col pl-2" :class="{ 'tw-h-[150px]': additionalImgSrc }">
+      <div class="tw-h-full tw-flex tw-items-center">
+        <template v-if="!additionalImgSrc">
+          <div v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">{{ title }}</div>
+          <!-- TODO: Style subTitle and description -->
+          <div v-if="subTitle">{{ subTitle }}</div>
+          <div v-if="description">{{ description }}</div>
+        </template>
+        
+        <template v-if="additionalImgSrc">
+          <img :src="additionalImgSrc" class="tw-max-w-[174px] tw-max-h-[92px]">
+        </template>
+      </div>
 
       <PageHeaderPrimaryCta class="tw-hidden sm:tw-block" :icon="primaryCtaIcon" :url="primaryCtaUrl"
         :text="primaryCtaText" />
