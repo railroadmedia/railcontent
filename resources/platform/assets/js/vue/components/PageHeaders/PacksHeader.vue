@@ -21,8 +21,20 @@
         <div class="">
           <PageHeaderCta v-if="backToAllLessonsUrl" text="Back to all lessons" icon="fas fa-chevron-double-left"
             :href="backToAllLessonsUrl" />
-          <PageHeaderCta v-if="areResourcesDownloadable" icon="fas fa-download" event="downloadResources"
-            @downloadResources="downloadResources" />
+          <PageHeaderDropdown icon="fa fa-download">
+            <template v-slot:content>
+              <ul class="tw-w-max">
+                <li v-for="resource in downloadableResources" :key="resource.resource_id"
+                  class="pa-1 tw-hover:bg-[#f2f2f2] tw-border-b tw-border-[#d1d1d1]">
+                  <a :href="resource.resource_url"
+                    class="tw-block tw-uppercase tw-font-bebas-neue tw-no-underline tw-text-[#00101D]" target="_blank" download>
+                    <i :class="['fas', getIconClass(resource.resource_url), 'tw-mr-1']" style="width:20px;"></i>
+                    {{ resource.resource_name }}
+                  </a>
+                </li>
+              </ul>
+            </template>
+          </PageHeaderDropdown>
           <PageHeaderCta v-if="enableResetProgress && progressMoreThanZero" :icon="resetIcon" event="resetProgressEvent"
             @resetProgressEvent="resetWithConfirmation" />
         </div>
@@ -42,6 +54,7 @@ import PageHeaderHero from '../PageHeader/PageHeaderHero.vue';
 import PageHeaderCta from '../PageHeader/PageHeaderCta.vue';
 import PageHeaderProgressBar from '../PageHeader/PageHeaderProgressBar.vue';
 import PageHeaderPrimaryCta from '../PageHeader/PageHeaderPrimaryCta.vue';
+import PageHeaderDropdown from '../PageHeader/PageHeaderDropdown.vue';
 import { useResetProgress } from '../../hooks/useResetProgress';
 
 const props = defineProps({
@@ -84,12 +97,28 @@ const resetWithConfirmation = () => {
 };
 
 const areResourcesDownloadable = computed(() => {
-  return props.downloadableResources?.length > 0;
+  console.log('areResourcesDownloadable', props.downloadableResources);
+  return props.downloadableResources && Object.keys(props.downloadableResources)?.length > 0;
 });
 
-const downloadResources = () => {
-  console.log('downloadResources', props.downloadableResources);
-  // TODO: show downloadable resources modal
+const getIconClass = (filename) => {
+  const extension = filename.split('.').pop();
+
+  switch (extension) {
+    case 'png':
+      return 'fa-file-text';
+    case 'pdf':
+      return 'fa-file-pdf';
+    case 'zip':
+      return 'fa-file-archive';
+    case 'mp3':
+    case 'wav':
+      return 'fa-file-audio';
+    case 'mp4':
+      return 'fa-file-video';
+    default:
+      return 'fa-cloud-download';
+  }
 };
 
 const formattedInfoData = computed(() => {
