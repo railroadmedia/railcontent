@@ -38,9 +38,9 @@
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
             <a :href="packURL" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2">
-                    <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
+                    <div v-if="showEnrollmentLabel" class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
-                        <div v-if="enrollmentOpen || enrolled" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-1 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{pack.badge_text}}</div>
+                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-0.5 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{pack.badge_text}}</div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
@@ -49,8 +49,17 @@
                         </button>
                     </div>
                         <!-- Title -->
-                        <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-lg lg:tw-text-xl tw-line-clamp-2 lg:tw-mr-3">
-                            {{ title }}
+                        <div class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
+                            <div class="tw-font-extrabold tw-text-[#00101D] dark:tw-text-white tw-text-lg lg:tw-text-xl tw-line-clamp-2 lg:tw-mr-3">
+                                {{ title }}
+                            </div>
+
+                            <!-- Add to playlist on mobile -->
+                            <button v-if="!showEnrollmentLabel" class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
                         </div>
                 </div>
                 <!-- Description -->
@@ -135,6 +144,10 @@ const enrollmentOpen = computed(() => {
 
 const enrolled = computed(() => {
     return props.pack.enrollment_state === 'enrolled';
+})
+
+const showEnrollmentLabel = computed(() => {
+    return enrolled.value || enrollmentOpen.value;
 })
 
 const progressText = computed(() => {

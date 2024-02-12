@@ -50,7 +50,7 @@
       <Tooltip position="right">
         <template v-slot:trigger>
           <musora-icon icon-name="info"
-            class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer dark:tw-text-[#80A0B9]"></musora-icon>
+            class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
         </template>
         <template v-slot:content>
           <slot name="header-info"></slot>
