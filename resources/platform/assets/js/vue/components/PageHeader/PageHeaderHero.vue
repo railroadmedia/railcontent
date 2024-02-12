@@ -4,14 +4,14 @@
       <musora-icon :icon-name="iconName" class="tw-w-[35px] tw-h-[35px] dark:tw-text-white" />
     </template>
     <template v-else-if="heroImg">
-      <div class="header-avatar flex flex-column">
+      <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] flex flex-column">
         <div class="square">
           <img class="rounded inset-border" :src="heroImg">
         </div>
       </div>
     </template>
 
-    <div class="tw-flex tw-flex-col pl-2" :class="{ 'tw-h-[150px]': additionalImgSrc }">
+    <div class="tw-flex tw-flex-col pl-2 tw-self-stretch tw-mr-1">
       <div class="tw-h-full tw-flex tw-items-center">
         <template v-if="!additionalImgSrc">
           <div v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">{{ title }}</div>
@@ -21,7 +21,7 @@
         </template>
         
         <template v-if="additionalImgSrc">
-          <img :src="additionalImgSrc" class="tw-max-w-[174px] tw-max-h-[92px]">
+          <img :src="additionalImgSrc" class="tw-w-[200px] tw-max-h-[100px] sm:tw-w-[174px] sm:tw-max-h-[92px]">
         </template>
       </div>
 
