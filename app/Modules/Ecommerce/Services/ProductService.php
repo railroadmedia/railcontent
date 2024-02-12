@@ -59,4 +59,13 @@ class ProductService
             ->where('brand', '=', $brand)
             ->get();
     }
+
+    public function getPackProductsByOwnedProductIds(array $productIds): Collection
+    {
+        return Product::query()
+            ->whereIn('id', $productIds)
+            ->whereIn('type', Product::DIGITAL_PRODUCT_TYPES)
+            ->where('digital_access_type', Product::DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS)
+            ->get();
+    }
 }
