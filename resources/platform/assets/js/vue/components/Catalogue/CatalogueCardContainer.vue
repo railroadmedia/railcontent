@@ -160,21 +160,17 @@ const props = defineProps({
 },
 );
 
-const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
-
 const collectionStore = useCollectionStore();
 
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
-const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
-
-const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: content.value });
-
 //Computed Props
 const data = computed(() => {
-    return content.value;
-})
+    if (props.preLoadedContent) {
+       return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : props.preLoadedContent.data;
+    }
+    return [];
+});
 
 const breakToListView = computed( () => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value);
@@ -200,4 +196,8 @@ const isChallenge = computed(() => {
     return props.contentTypeOverride === 'challenge';
 })
 
+const userStore = useUserStore();
+const { brand } = storeToRefs(userStore);
+
+const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: data.value });
 </script>
