@@ -101,7 +101,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             $customerIoData = null;
         }
 
-        $userArray = array_merge($user->toArray(), ['customer_io_id' => $customerIoData?->id]);
+        $userArray = array_merge($user->toArray(), ['customer_io_id' => $customerIoData?->uuid]);
         return [
             'user' => $userArray,
             'isEdge' => $user->isAMember(),
@@ -187,7 +187,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
-            'customer_io_id' => $customerIoData?->id,
+            'customer_io_id' => $customerIoData?->uuid,
         ];
     }
 
