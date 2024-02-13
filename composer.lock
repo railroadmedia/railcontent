@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b5f301734e4dd00cfdd767d4869a75f",
+    "content-hash": "80fa2a5d1cc7ee80272f01a677cedded",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10133,16 +10133,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-feature-pack-updates",
+            "version": "v3.1.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d38ca2fa33982e3aad4bc06085a61e039de2e0fe"
+                "reference": "c41c44a37ad97bb598a62a70f2d985a319ff7e1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d38ca2fa33982e3aad4bc06085a61e039de2e0fe",
-                "reference": "d38ca2fa33982e3aad4bc06085a61e039de2e0fe",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c41c44a37ad97bb598a62a70f2d985a319ff7e1c",
+                "reference": "c41c44a37ad97bb598a62a70f2d985a319ff7e1c",
                 "shasum": ""
             },
             "require": {
@@ -10172,9 +10172,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/feature-pack-updates"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.51"
             },
-            "time": "2024-02-08T14:51:23+00:00"
+            "time": "2024-02-13T12:13:15+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10367,16 +10367,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-feature-pack-updates",
+            "version": "v2.1.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "cfa2badb0ccf86f5ad12d2fb33cfb462cc0c137b"
+                "reference": "aa4608f39c84842761a1c5d5b690d54b2b7cd93d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/cfa2badb0ccf86f5ad12d2fb33cfb462cc0c137b",
-                "reference": "cfa2badb0ccf86f5ad12d2fb33cfb462cc0c137b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/aa4608f39c84842761a1c5d5b690d54b2b7cd93d",
+                "reference": "aa4608f39c84842761a1c5d5b690d54b2b7cd93d",
                 "shasum": ""
             },
             "require": {
@@ -10431,9 +10431,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/feature-pack-updates"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.51"
             },
-            "time": "2024-02-08T14:53:29+00:00"
+            "time": "2024-02-13T12:00:54+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19309,29 +19309,15 @@
     ],
     "aliases": [
         {
-            "package": "railroad/musora-api",
-            "version": "dev-feature-pack-updates",
-            "alias": "v3.1.50",
-            "alias_normalized": "3.1.50.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-feature-pack-updates",
-            "alias": "v2.1.49",
-            "alias_normalized": "2.1.49.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
