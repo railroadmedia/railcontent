@@ -188,6 +188,11 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             if ($contentsOfType[$contentIndex]['need_access']) {
                 $contentsOfType[$contentIndex]['need_access_message'] = $message;
             }
+
+            if(ContentRepository::$bypassPermissions === true){
+                $contentsOfType[$contentIndex]['need_access'] = false;
+                $contentsOfType[$contentIndex]['need_access_message'] = '';
+            }
             if (!empty($content['user_playlist_item_extra_data'])) {
                 if ((is_null(json_decode($content['user_playlist_item_extra_data'])))) {
                     error_log($content['user_playlist_item_extra_data']);

@@ -51,6 +51,7 @@ class PlaylistDecorator extends ModeDecoratorBase
         $playlists = $playlists->toArray();
         $userIds = [];
         $playlistIds = [];
+        $initialByPassPermissions = ContentRepository::$bypassPermissions;
         ContentRepository::$bypassPermissions = true;
 
         foreach ($playlists as $index => $playlist) {
@@ -67,7 +68,7 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlists[$index]['is_my_playlist'] = user() ? (($playlist['user_id'] == user()->id) ? 1 : 0) : 0;
         }
 
-        ContentRepository::$bypassPermissions = false;
+        ContentRepository::$bypassPermissions = $initialByPassPermissions;
 
         if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
             return $playlists;
