@@ -7,6 +7,8 @@ use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\FirebaseToken;
@@ -58,8 +60,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $app = null)
-    : array {
+    public function getCurrentUserMembershipData(?string $app = null): array
+    {
         $user = user();
 
         $isAppleAppSubscriber = $user->has_apple_subscription;
@@ -68,46 +70,38 @@ class MusoraApiUserProvider implements UserProviderInterface
         $hasExperience = user()->onboardingExperience ? true : false;
 
         $hasGear = count(
-                user()->onboardingGear->filter(function ($item) use($user) {
+                user()->onboardingGear->filter(function ($item) use ($user) {
                     return $item->brand == $user->last_used_brand;
                 })
             ) > 0;
 
         $hasTopics = count(
-                user()->onboardingTopics->filter(function ($item) use($user) {
+                user()->onboardingTopics->filter(function ($item) use ($user) {
                     return $item->brand == $user->last_used_brand;
                 })
             ) > 0;
 
         $hasGenres = count(
-                user()->onboardingGenres->filter(function ($item) use($user) {
+                user()->onboardingGenres->filter(function ($item) use ($user) {
                     return $item->brand == $user->last_used_brand;
                 })
             ) > 0;
 
         try {
-            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $accountName = ($app) ? strtolower($app) : config(
+                'event-data-synchronizer.customer_io_account_to_sync_all_brands'
+            );
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 $accountName,
-                $user->id
+                $user->id,
+                false
             );
-        } catch (ModelNotFoundException $exception) {
+        } catch (Exception $e) {
+            Log::error('Error getting customer io data for user: ' . $user->id . ' - ' . $e->getMessage());
             $customerIoData = null;
         }
 
-        $extraData = [
-            'cio_id' => null,
-            'customer_io_id' => null,
-        ];
-
-        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
-            $extraData = [
-                'cio_id' => $externalAttributes['cio_id'],
-                'customer_io_id' => strval($externalAttributes['id']),
-            ];
-        }
-
-        $userArray = array_merge($user->toArray(), $extraData);
+        $userArray = array_merge($user->toArray(), ['customer_io_id' => $customerIoData?->uuid]);
         return [
             'user' => $userArray,
             'isEdge' => $user->isAMember(),
@@ -125,8 +119,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function getCurrentUserProfileData(?string $app = null)
-    : array
+    public function getCurrentUserProfileData(?string $app = null): array
     {
         $user = user();
 
@@ -158,37 +151,28 @@ class MusoraApiUserProvider implements UserProviderInterface
         try {
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
-                $user->id
+                $user->id,
+                false
             );
-        } catch (ModelNotFoundException $exception) {
+        } catch (Exception $e) {
+            Log::error('Error getting customer io data for user: ' . $user->id . ' - ' . $e->getMessage());
             $customerIoData = null;
         }
 
-        $extraData = [
-            'cio_id' => null,
-            'customer_io_id' => null,
-        ];
-
-        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
-            $extraData = [
-                'cio_id' => $externalAttributes['cio_id'],
-                'customer_io_id' => strval($externalAttributes['id']),
-            ];
-        }
         $brand = brand();
         $showLearningPathsOnHomepage = false;
-        $hideSection = $brand.'_trial_section_hide';
+        $hideSection = $brand . '_trial_section_hide';
 
-        if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
-            $hasExperienceLevels =  count(
-                user()->onboardingExperience->filter(function ($item) use($brand) {
-                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                })
-            ) > 0;
+        if ($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels = count(
+                    user()->onboardingExperience->filter(function ($item) use ($brand) {
+                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                    })
+                ) > 0;
             $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
         }
 
-        return array_merge([
+        return [
             'id' => $user->id,
             'email' => $user->email,
             'permission_level' => $user->permission_level,
@@ -203,7 +187,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
-        ], $extraData);
+            'customer_io_id' => $customerIoData?->uuid,
+        ];
     }
 
     public function getCurrentUserExperienceData(): array
