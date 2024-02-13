@@ -101,8 +101,9 @@ class MusoraApiUserProvider implements UserProviderInterface
             $customerIoData = null;
         }
 
+        $userArray = array_merge($user->toArray(), ['customer_io_id' => $customerIoData?->id]);
         return [
-            'user' => $user->toArray(),
+            'user' => $userArray,
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => !$user->membership_expiration_date || $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
@@ -115,7 +116,6 @@ class MusoraApiUserProvider implements UserProviderInterface
             'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience),
             'access_level' => $user->access_level,
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
-            'customer_io_id' => $customerIoData?->id,
         ];
     }
 
