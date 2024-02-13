@@ -19,14 +19,14 @@
             }
         }
         .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:15px;
+            max-height:1000px!important;
+            visibility:visible!important;
+            opacity:1!important;
+            padding:15px!important;
         }
         @media (min-width: 40em) {
             .thank-you-box.active {
-                padding: 20px;
+                padding: 20px!important;
             }
         }
     </style>
@@ -94,7 +94,7 @@
                 <em><strong>(No credit card required. No recurring billing. Just awesome piano lessons)</strong><br class="hidden md:inline">
                     Offer valid for new Pianote members only</em></p>
             <div class="max-w-2xl mx-auto px-4">
-                <form id="ajaxForm" accept-charset="UTF-8" action="https://www.pianote.com/claim-roland-90-day-access" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
+                <form id="ajaxForm" accept-charset="UTF-8" action="/claim-roland-90-day-access" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
                     {{ csrf_field() }}
                     <input class="w-full mb-2 text-left rounded-full py-2 px-5 text-gray-400 text-base md:text-lg" name="email" type="email" placeholder="Email Address..." required/>
                     <button class="submit w-full transition-opacity duration-300 hover:opacity-90 uppercase cursor-pointer text-center text-white text-base md:text-lg font-bebas font-bold bg-pianote rounded-full" type="submit">
@@ -136,4 +136,73 @@
         'video' => '567535328',
         'vimeo' => true,
     ])
+@endsection
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.ajax-form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const elements = {
+                        pre: this.querySelector('.pre-add'),
+                        pending: this.querySelector('.pending'),
+                        success: this.querySelector('.success'),
+                        fail: this.querySelector('.fail'),
+                        submitButton: this.querySelector('.submit'),
+                        disclaimer: this.parentNode.querySelector('.disclaimer'),
+                        thankBanner: this.parentNode.querySelector('.thank-you-box'),
+                    };
+
+                    setVisibility(elements, 'loading');
+
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: new FormData(this),
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                    })
+                        .then(handleResponse)
+                        .then(() => setVisibility(elements, 'success'))
+                        .catch(error => {
+                            console.error('Fetch error:', error);
+                            setVisibility(elements, 'error');
+                        });
+                });
+            });
+        });
+
+        function handleResponse(response) {
+            if (!response.ok) throw new Error('Network response was not ok.');
+            return response.json();
+        }
+
+        function setVisibility(elements, state) {
+            switch (state) {
+                case 'loading':
+                    elements.pre.classList.add('hidden');
+                    elements.success.classList.add('hidden');
+                    elements.fail.classList.add('hidden');
+                    elements.pending.classList.remove('hidden');
+                    elements.submitButton.classList.remove('error');
+                    break;
+                case 'success':
+                    elements.pre.classList.add('hidden');
+                    elements.pending.classList.add('hidden');
+                    elements.fail.classList.add('hidden');
+                    elements.success.classList.remove('hidden');
+                    elements.submitButton.parentNode.classList.add('hidden'); // Assuming the form and disclaimer are siblings.
+                    elements.disclaimer.classList.add('hidden');
+                    elements.thankBanner.classList.add('active');
+                    break;
+                case 'error':
+                    elements.pending.classList.add('hidden');
+                    elements.success.classList.add('hidden');
+                    elements.fail.classList.remove('hidden');
+                    elements.submitButton.classList.add('error');
+                    break;
+            }
+        }
+    </script>
 @endsection

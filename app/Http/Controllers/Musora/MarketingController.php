@@ -20,6 +20,7 @@ class MarketingController extends BaseController
             'theme' => 'musora',
             'promoVersion' => true,
             'trialVersion' => true,
+            'scrollToJoin' => true,
             'hideMenu' => true,
         ]);
     }
