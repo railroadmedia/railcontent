@@ -200,9 +200,9 @@ export const useCollectionStore = defineStore({
                 } else {
                     this.data = [...this.data, ...response.data.data];
                     this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
+                    this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
+                    this.getFilterColumns();
                 }
-                this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
-                this.getFilterColumns();
             }
 
             if (this.filter.searchTerm){
