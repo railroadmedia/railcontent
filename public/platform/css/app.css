@@ -27529,6 +27529,9 @@ a:visited{
   .lg\:tw-max-h-\[70px\]{
     max-height: 70px !important;
   }
+  .lg\:tw-max-h-\[50px\]{
+    max-height: 50px !important;
+  }
   .lg\:tw-min-h-screen{
     min-height: 100vh !important;
   }
@@ -28049,6 +28052,9 @@ a:visited{
   }
   .xl\:tw-h-\[33rem\]{
     height: 33rem !important;
+  }
+  .xl\:tw-max-h-\[70px\]{
+    max-height: 70px !important;
   }
   .xl\:tw-w-1\/4{
     width: 25% !important;

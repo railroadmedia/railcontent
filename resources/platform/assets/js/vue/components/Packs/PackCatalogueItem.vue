@@ -14,7 +14,7 @@
             <!-- Logo -->
             <div :class="`tw-absolute tw-w-full tw-p-[10px] tw-pt-[30px] tw-flex tw-justify-center`" style="background:linear-gradient(to bottom, transparent 0%, #000 100%);" :style="`bottom: ${hasStarted ? '6px' : '0'}`">
                 <img
-                    class="tw-max-h-[70px] sm:tw-max-h-[40px] lg:tw-max-h-[70px]"
+                    class="tw-max-h-[70px] sm:tw-max-h-[40px] lg:tw-max-h-[50px] xl:tw-max-h-[70px]"
                     :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${logo}`"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
@@ -64,11 +64,8 @@
                 </div>
                 <!-- Description -->
                 <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs lg:tw-text-sm description" v-html="description"></div>
-<!--                <div class="tw-hidden xl:tw-block tw-text-[#000C17] dark:tw-text-[#E7EFF6] lg:tw-mr-14 tw-mt-2 tw-mb-2 tw-text-xs xl:tw-text-sm">-->
-<!--                    Michael Schack is a master at blending drum-set performance with cutting edge dance music. This pack will te  ach you all you need to know to approach many of the popular EDM styles of music that are so popular today - adding these types to your drumming will!sdsdsdsdss-->
-<!--                </div>-->
                 <!-- Artist -->
-                <div class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">Jared Falk</div>
+                <div class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-mb-2">{{ artistName }}</div>
                 <!-- Info -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-sm tw-flex tw-items-center">
                     {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
@@ -180,6 +177,10 @@ const progressButtonColor = computed(() => {
     } else {
         return 'tw-bg-[#00101D] dark:tw-bg-white tw-text-white dark:tw-text-[#00101D] hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white';
     }
+})
+
+const artistName = computed(() => {
+    return props.pack.instructors && props.pack.instructors.length > 0 && props.pack.instructors[0];
 })
 
 const addToPlaylist = () => {
