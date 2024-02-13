@@ -47,7 +47,7 @@
         <div class="hidden lg:flex justify-center items-center">
             <div class="w-1/3">
                 <div class="text-left pl-8 pb-10">
-                    <p class="text-lg"><strong>Premium-grade, oil-tanned <br/> leather</strong> ensures a classic look <br/>that only gets better with age.</p>
+                    <p class="text-lg"><strong>Premium-grade, oil-tanned leather</strong> ensures a classic look that only gets better with age.</p>
                 </div>
                 <div class="text-left pl-4 pt-10">
                     <p class="text-lg"><strong>16-inch laptop sleeve </strong> <br/>keeps your computer safe.</p>
@@ -105,7 +105,7 @@
                                 $gridItems = [
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/tanned.webp',
-                                'desc' => '<strong>Single leather handle</strong> <br/> provide easy carrying options<br/> and minimalistic styling.',
+                                'desc' => '<strong>Single leather handle</strong> provide easy carrying options and minimalistic styling.',
                                 ],
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/back-pockets.webp',
@@ -113,7 +113,7 @@
                                 ],
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/handle.webp',
-                                'desc' => '<strong>Premium-grade, oil-tanned <br/> leather</strong> ensures a classic look <br/>that only gets better with age.',
+                                'desc' => '<strong>Premium-grade, oil-tanned leather</strong> ensures a classic look that only gets better with age.',
                                 ],
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/sleeve.webp',
@@ -121,15 +121,15 @@
                                 ],
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/emobssed.webp',
-                                'desc' => '<strong>Custom Pianote embossing</strong> <br/>provides a subtle yet distinctive <br/> look. This bag is for piano players.',
+                                'desc' => '<strong>Custom Pianote embossing</strong> provides a subtle yet distinctive look. This bag is for piano players.',
                                 ],
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/magnetic-clasps.webp',
-                                'desc' => '<strong>Magnetic clasps</strong> give you <br/>modern access while keeping <br/> a vintage buckle look.',
+                                'desc' => '<strong>Magnetic clasps</strong> give you modern access while keeping  a vintage buckle look.',
                                 ],
                                 [
                                  'img' => 'marketing/pianote/products/book-bag/removable.webp',
-                                'desc' => '<strong>Removable shoulder strap</strong> <br/>for convenience and comfort.',
+                                'desc' => '<strong>Removable shoulder strap</strong> for convenience and comfort.',
                                 ]
                                 ];
                             @endphp
@@ -141,7 +141,7 @@
                                                 loading="lazy" onload="this.classList.remove('opacity-0')" alt="drumeo stickbag"
                                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                     </div>
-                                    <p class="px-4 py-6 text-base leading-tight">{!! $gridItem['desc'] !!}</p>
+                                    <div class="flex items-start justify-start h-28"> <p class="text-base leading-wide playfair-light m-0 px-6 py-4">{!! $gridItem['desc'] !!}</p></div>
                                 </div>
                             </li>
                         @endforeach

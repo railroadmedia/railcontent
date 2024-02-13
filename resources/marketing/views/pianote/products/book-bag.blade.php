@@ -34,20 +34,12 @@
             font-weight: 700;
             font-style: normal;
         }
-
-        .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 1rem;
-    justify-items: center;
-    align-items: center;
-}
-
-.item1 { grid-area: 2 / 2; } /* Top center */
-.item2 { grid-area: 2 / 1; } /* Middle left */
-.item3 { grid-area: 2 / 2; } /* Middle center (image) */
-/* Add the remaining items here */
+        .playfair-light {
+            font-family: "Playfair Display", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
 
         /* .content-section table.comparison.eardrums tr td:nth-child(1) {
             width: 18%;
