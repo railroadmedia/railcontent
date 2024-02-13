@@ -9,7 +9,7 @@
         continue-url="/{{$brand}}/lesson-history/in-progress"
         :artists-number="{{ json_encode($artistsNumber) }}"
         :songs-number="{{ json_encode($songsNumber) }}"
-        :started-content="{{ $startedLessons }}"
+        :started-content="{{ json_encode($startedLessons) }}"
         :list-lessons="{{ $listLessons }}"
         :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
         :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
