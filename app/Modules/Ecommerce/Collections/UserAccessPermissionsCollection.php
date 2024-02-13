@@ -33,6 +33,10 @@ class UserAccessPermissionsCollection
         $this->permissionIdLookup = $this->collection->groupBy('permission_id');
     }
 
+    public function getUser(): User
+    {
+        return $this->user;
+    }
 
     public function getUserId(): int
     {
@@ -205,6 +209,15 @@ class UserAccessPermissionsCollection
             $permissionIds[] = self::MusoraPlusMembershipPermission;
         }
         return $permissionIds;
+    }
+
+    public function getActiveProductIds(): array
+    {
+        $productIds = $this->collection->where(function ($permission) {
+            return $permission->status != 'revoked';
+        })->pluck('product_id')->unique()->sort()->toArray();
+
+        return $productIds;
     }
 
     public function hasUserOwnedPermissions(array $permissionIds): bool

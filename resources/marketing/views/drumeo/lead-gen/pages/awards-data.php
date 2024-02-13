@@ -1,5 +1,126 @@
 <?php
 
+$yearAwards2023 = [
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/1-drummer-of-the-year-ii.png",
+        "award" => "Drummer Of The Year",
+        "winner" => "II",
+        "description" => "The Drummer Of The Year Award is our biggest award. It goes to a drummer who checked all the boxes this year with recording projects, live or streaming events, online presence, and all-around excellence in their contributions to music.<br><br>Your vote made it loud and clear: II – Sleep Token’s mysterious drummer – was your favorite.<br><br>II and his band had an incredible year, releasing a new album, performing sold-out tours, rising to the top of festival lineups and pushing boundaries of heavy music.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/2-recording-ii.png",
+        "award" => "Drum Recording Of The Year",
+        "winner" => "II",
+        "description" => "The winner of this award played on a single track or a full album that made an outstanding contribution to their style – or to music in general – via the drums.<br><br>You voted for Take Me Back To Eden, the new album from Sleep Token featuring II’s drumming prowess, as your drum recording of the year.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/4-performance-travis-barker.png",
+        "award" => "Drum Performance Of The Year",
+        "winner" => "Travis Barker",
+        "description" => "The winner of this award put on a legendary, must-watch performance this year, either with a full band at an event or in a solo studio video.<br><br>Well, the original lineup of blink-182 reunited with a surprise set at Coachella this year (watch one of the songs here), injecting a massive dose of nostalgia for at least two generations of attendees. We don’t need to convince you that the mighty Travis Barker was at the top of his game; you can see for yourself.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/10-pop-ashton-irwin.png",
+        "award" => "Pop Drummer Of The Year",
+        "winner" => "Ashton Irwin",
+        "description" => "Aussie sticksmith Ashton Irwin performed his band’s hits all around the world this year with 5 Seconds of Summer.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/6-jazz-roni-kaspi.png",
+        "award" => "Jazz Drummer Of The Year",
+        "winner" => "Roni Kaspi",
+        "description" => "Barely in her 20s, Roni is an absolute force on the kit, gigging with Avishai Cohen and releasing new original music this year.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/9-country-harry-miree.png",
+        "award" => "Country Drummer Of The Year",
+        "winner" => "Harry Miree",
+        "description" => "The touring drummer and musical director for Hardy (who exploded this year and landed several #1 hits), Harry performed on record-breaking tours, at the CMAs, the ACM awards, the Grand Ole Opry and more. While ‘the Dude’ was out with Hardy, he partnered with basketball superstar Charles Barkley to donate 100 drum sets to 100 schools across the USA, offering masterclasses along the way.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/11-rb-hip-hop-questlove.png",
+        "award" => "R&B/Hip-Hop Drummer Of The Year",
+        "winner" => "Questlove",
+        "description" => "A fan favorite for many reasons, Questlove toured with The Roots, appeared on new music with Chloe Flower, Plumb, and the NBA in-season tournament theme. He killed it as usual with his ongoing Tonight Show gig, received a GRAMMY nom for best audiobook, and contributed to the GRAMMYs Present 50 Years Of Hip Hop event.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/12-soul-funk-steve-jordan.png",
+        "award" => "Soul/Funk Drummer Of The Year",
+        "winner" => "Steve Jordan",
+        "description" => "Steve is a drummer-of-all-trades whose 2023 included recording the new Rolling Stones album, a new album with Bettye LaVette, and a reunion with John Mayer and Pino Palladino for the NYC Love Rocks benefit show and Eric Clapton’s Crossroads Festival.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/7-contemporary-anika-nilles.png",
+        "award" => "Contemporary Drummer Of The Year",
+        "winner" => "Anika Nilles",
+        "description" => "Tours and a new album with her band Nevell, drum festivals, and a performance at the Jeff Beck tribute concert were just a few of the highlights from Anika’s 2023.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/5-progressive-danny-carey.png",
+        "award" => "Progressive Drummer Of The Year",
+        "winner" => "Danny Carey",
+        "description" => "Danny had a busy year on the road with Tool, appeared on Seth Meyers and more.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/3-metal-ii.png",
+        "award" => "Metal Drummer Of The Year",
+        "winner" => "II",
+        "description" => "With a new album and their biggest tours yet, Sleep Token is enjoying their newfound prominence – and their drummer, II, has proven his chops in the metal world.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/8-rock-paulina-villarreal.png",
+        "award" => "Rock Drummer Of The Year",
+        "winner" => "Paulina Villarreal",
+        "description" => "The drummer of Mexican rock band The Warning, Paulina had a big year alongside her sisters, performing at the VMAs, supporting Muse and Guns N’ Roses on tour, headlining in their home country and more.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/13-youtube-el-estepario-siberiano.png",
+        "award" => "YouTube Drummer Of The Year",
+        "winner" => "El Estepario Siberiano",
+        "description" => "This award goes to a drummer who has built their profile independently, has created a strong online community on YouTube, and is constantly inspiring or entertaining people with their drum videos, playing, and/or personality.<br><br>Now one of the most prominent drummers on YouTube and beyond, Estepario continuously impressed the community with his speed, technique and unconventional creativity, and had over 80,000 drummers enroll in his online course, Fastest Way To Get Faster.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/15-instagram-mauricio-extreme-drums.png",
+        "award" => "Instagram Drummer Of The Year",
+        "winner" => "Mauricio Extreme Drums",
+        "description" => "This award goes to a drummer who’s built a strong online community on Instagram, has created a strong brand for themselves, and constantly inspires, educates, or entertains.<br><br>Though he’s based in Brazil, Mauricio’s drum tutorials and reviews inspired metal drummers all around the world this year, supported by brand partnerships and other collabs.",
+    ],
+    [
+        "last-child" => true,
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/14-tiktok-diana-llerena-vasquez.png",
+        "award" => "TikTok Drummer Of The Year",
+        "winner" => "Diana Llerena Vasquez",
+        "description" => "This award goes to a drummer who’s a standout on TikTok and who has used the platform to entertain or inspire the next generation of drummers.<br><br>Diana Llerena is this year’s winner. The Peruvian drummer opened an online music academy, crossed the 1 million followed mark on TikTok, and worked with multiple brands including Mini Cooper and Evans.",
+    ],
+];
+$legacyAwards2023 = [
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/18-buddy-rich-award-roy-haynes.png",
+        "award" => "The Buddy Rich Award",
+        "winner" => "Roy Haynes",
+        "description" => "One of the most accomplished and well-known drummers of the 20th century, Buddy Rich is still a household name because of his virtuosic talents and his accomplishments as a bandleader. The recipient of this ‘hall of fame’ award has made their name synonymous with drumming over decades of excellence. This may be through any combination of performance, recording, teaching, or all of the above.<br><br>We chose Roy Haynes as the recipient of this year’s Buddy Rich Award. One of the last living legends from the bebop era who’s played with Miles Davis, John Coltrane, Thelonius Monk and more, he’s a jazz pioneer who inspired other greats like Elvin Jones and Tony Williams.<br><br>A multiple GRAMMY Award winner, Modern Drummer Hall of Famer and recipient of several prominent Lifetime Achievement Awards, Roy is almost 99 years old and still plays the drums when he can.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/17-viola-smith-award-arthur-dubois.png",
+        "award" => "The Viola Smith Award",
+        "winner" => "Arthur Dubois",
+        "description" => "Viola Smith was a pioneer in expanding the boundaries of drumming. From her unprecedented, massive drum set (including two elevated gong drums) to playing beyond the age of 100, she was an innovator who carved her own path in the drumming community – especially during an era when she wasn’t encouraged to do so.<br><br>This award is given to a trailblazing drummer who has shown innovation and creativity in how they approach the drum set.<br><br>Arthur Dubois isn’t just a drummer and percussionist – he uses the physics of sound (and even water) to create unique effects. His hybrid style and creative beats have captured the attention of hundreds of thousands of people on social media, including non-drummers. Arthur is a great example of someone who’s adding elements of surprise to the instrument and inspires others to look at percussion differently.",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/16-louie-bellson-award-alex-cohen.png",
+        "award" => "The Louie Bellson Award",
+        "winner" => "Alex Cohen",
+        "description" => "Louie Bellson has long been credited as the first drummer to popularize double bass playing. Before metal and rock came to be, Louie transferred his skills and sounds from hands to feet, finding new ways to express rhythms on the low end. This award is presented to a drummer who has displayed excellence and creativity in double bass drumming.<br><br>Alex Cohen is this year’s Louie Bellson Award recipient. A unique and advanced drummer who’s constantly aiming to push the envelope, Alex is executing things on double bass that most would never even attempt. From playing Delecluse snare pieces on his feet to creatively applying rudiments on the kicks, he’s huge on education and encouraging other drummers to challenge the norm.",
+    ],
+    [
+        "last-child" => true,
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/drumeo/lead-gen/awards/2023/19-tony-williams-award-tosh-peterson.png",
+        "award" => "The Tony Williams Award",
+        "winner" => "Tosh Peterson",
+        "description" => "Tony Williams was just 17 years old when he played on Miles Davis’ revolutionary album, Seven Steps To Heaven. This award is presented to a drummer who has already made a memorable impact at a young age. The winner will have made valuable contributions to drumming and/or inspired others with their music.<br><br>Tosh Peterson has already accomplished the stuff of dreams, and he’s only 22! From drumming with Royal and the Serpent, Fall Out Boy and JXDN, Tosh had a busy 2023. He also recorded with and played some huge gigs with Jung Kook of BTS, including a performance on the Tonight Show.<br><br>But this year was just one more notch on his belt: he’s been touring since he was 16 and has worked with Machine Gun Kelly, Lil Nas X, Bad Bunny and more.",
+    ],
+];
+
 $yearAwards2022 = [
     [
         "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Chad-Smith-1000x1000.jpg",
@@ -93,6 +214,39 @@ $yearAwards2022 = [
         "description" => "This award goes to a drummer who’s a standout on TikTok and who has used the platform to entertain or inspire the next generation of drummers.<br><br>The drummer other drummers say is “impossibly good”, El Estepario built a following on concepts like playing tricky songs one-handed and doing ridiculously difficult things on a small setup. He shared a staggering 250 videos on TikTok in 2022, with his most popular clip reaching over 9 million views.",
     ],
 ];
+$legacyAwards2022 = [
+    [
+        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Phil-Colins-1000x1000.jpg",
+        "award" => "The Buddy Rich Award",
+        "winner" => "Phil Collins",
+        "description" => "One of the most accomplished and well-known drummers of the 20th century, Buddy Rich is still a household name because of his virtuosic talents and his accomplishments as a bandleader. The recipient of this ‘hall of fame’ award has made their name synonymous with drumming over decades of excellence. This may be through any combination of performance, recording, teaching, or all of the above.<br><br>We chose Phil Collins based on his incredible legacy and ability to deeply reach people, even those outside of the drumming world. He composed some of the most recognizable drum parts of the 20th century, inspiring drummers with his technical and musical approach to playing the drums and innovating with electronic sounds and finding ways to incorporate them into his music.<br><br>The drumming legend officially announced his retirement in 2022.",
+    ],
+    [
+        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Yoni-Madar-1000x1000.jpg",
+        "award" => "The Viola Smith Award",
+        "winner" => "Yoni Madar",
+        "description" => "Viola Smith was a pioneer in expanding the boundaries of drumming. From her unprecedented, massive drum set (including two elevated gong drums) to playing beyond the age of 100, she was an innovator who carved her own path in the drumming community – especially during an era when she wasn’t encouraged to do so.<br><br>This award is given to a trailblazing drummer who has shown innovation and creativity in how they approach the drum set. <br><br>Yoni Madar is a master independence technician who pushes what’s physically possible on the instrument. His incredible control and drive has inspired an entire segment of the drumming community, yet he often still flies humbly under the radar. He’s a seasoned educator who literally marches to the beat of his own drum.",
+    ],
+    [
+        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Dom-Famularo-1000x1000.jpg",
+        "award" => "The Jim Chapin Award",
+        "winner" => "Dom Famularo",
+        "description" => "Jim Chapin was a prolific educator whose teachings are still in the hands, feet, and soul of many modern drummers. Having learned from the legendary Sanford Moeller, he taught some of today’s top drummers and educators like Dom Famularo, Steve Smith, Russ Miller and Thomas Lang. His 1948 instructional book, Advanced Techniques For The Modern Drummer, is still a staple of drum education today.<br><br>This award is presented to an educator who has displayed excellence in inspiring & informing drummers everywhere. This could be through education in an academic setting, contributions through a published book, or an online course/channel.<br><br>When we started the Drumeo Awards program in 2021, we asked drumming’s global ambassador, Dom Famularo, to choose the winner of this category. This year, we’re presenting the ‘Educator of the Year’ award to Dom Famularo himself – a man who has been through the absolute ringer, undergoing cancer treatments and navigating uncertain waters while continuing to inspire drummers around the world.<br><br>A former student of Jim Chapin, we felt it fitting to recognize Dom’s incredible tenacity and constant effort to pass these teachings to the next generation and beyond.",
+    ],
+    [
+        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Chris-Turner-1000x1000.jpg",
+        "award" => "The Louie Bellson Award",
+        "winner" => "Chris Turner",
+        "description" => "Louie Bellson has long been credited as the first drummer to popularize double bass playing. Before metal and rock came to be, Louie transferred his skills and sounds from hands to feet, finding new ways to express rhythms on the low end. This award is presented to a drummer who has displayed excellence and creativity in double bass drumming.<br><br>Chris Turner has so much control and precision on his feet, people have questioned how it’s even possible. But he’s proven time and time again that putting in the work gets results. Chris has been building his profile as an independent drummer, releasing an instrumental album this year and taking the tracks on the road.",
+    ],
+    [
+        "last-child" => true,
+        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Greyson-Nekrutman-1000x1000.jpg",
+        "award" => "The Tony Williams Award",
+        "winner" => "Greyson Nekrutman",
+        "description" => "Tony Williams was just 17 years old when he played on Miles Davis’ revolutionary album, <e>Seven Steps To Heaven</e>. This award is presented to a drummer who has already made a memorable impact at a young age. The winner will have made valuable contributions to drumming and/or inspired others with their music.<br><br>This year’s winner is barely out of his teens but he’s already proven to be a dynamo. Between performing at his first big drum festival, going on tour, playing on albums and releasing a drumming course, Greyson killed it in 2022 – he even drummed with the Beach Boys alongside John Stamos!<br><br>On top of being a busy, skilled drummer, he’s a social media powerhouse, regularly sharing clips, filming covers, and engaging with the drumming community.",
+    ],
+];
 
 $yearAwards2021 = [
     [
@@ -175,41 +329,6 @@ $yearAwards2021 = [
         "description" => "Chad Smith had a busy year with a Red Hot Chili Peppers release, several supergroup collaborations, work on Eddie Vedder’s solo recordings, a track on Miley Cyrus’ Metallica covers album, and a feature on the Netflix documentary Count Me In.",
     ],
 ];
-
-$legacyAwards2022 = [
-    [
-        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Phil-Colins-1000x1000.jpg",
-        "award" => "The Buddy Rich Award",
-        "winner" => "Phil Collins",
-        "description" => "One of the most accomplished and well-known drummers of the 20th century, Buddy Rich is still a household name because of his virtuosic talents and his accomplishments as a bandleader. The recipient of this ‘hall of fame’ award has made their name synonymous with drumming over decades of excellence. This may be through any combination of performance, recording, teaching, or all of the above.<br><br>We chose Phil Collins based on his incredible legacy and ability to deeply reach people, even those outside of the drumming world. He composed some of the most recognizable drum parts of the 20th century, inspiring drummers with his technical and musical approach to playing the drums and innovating with electronic sounds and finding ways to incorporate them into his music.<br><br>The drumming legend officially announced his retirement in 2022.",
-    ],
-    [
-        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Yoni-Madar-1000x1000.jpg",
-        "award" => "The Viola Smith Award",
-        "winner" => "Yoni Madar",
-        "description" => "Viola Smith was a pioneer in expanding the boundaries of drumming. From her unprecedented, massive drum set (including two elevated gong drums) to playing beyond the age of 100, she was an innovator who carved her own path in the drumming community – especially during an era when she wasn’t encouraged to do so.<br><br>This award is given to a trailblazing drummer who has shown innovation and creativity in how they approach the drum set. <br><br>Yoni Madar is a master independence technician who pushes what’s physically possible on the instrument. His incredible control and drive has inspired an entire segment of the drumming community, yet he often still flies humbly under the radar. He’s a seasoned educator who literally marches to the beat of his own drum.",
-    ],
-    [
-        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Dom-Famularo-1000x1000.jpg",
-        "award" => "The Jim Chapin Award",
-        "winner" => "Dom Famularo",
-        "description" => "Jim Chapin was a prolific educator whose teachings are still in the hands, feet, and soul of many modern drummers. Having learned from the legendary Sanford Moeller, he taught some of today’s top drummers and educators like Dom Famularo, Steve Smith, Russ Miller and Thomas Lang. His 1948 instructional book, Advanced Techniques For The Modern Drummer, is still a staple of drum education today.<br><br>This award is presented to an educator who has displayed excellence in inspiring & informing drummers everywhere. This could be through education in an academic setting, contributions through a published book, or an online course/channel.<br><br>When we started the Drumeo Awards program in 2021, we asked drumming’s global ambassador, Dom Famularo, to choose the winner of this category. This year, we’re presenting the ‘Educator of the Year’ award to Dom Famularo himself – a man who has been through the absolute ringer, undergoing cancer treatments and navigating uncertain waters while continuing to inspire drummers around the world.<br><br>A former student of Jim Chapin, we felt it fitting to recognize Dom’s incredible tenacity and constant effort to pass these teachings to the next generation and beyond.",
-    ],
-    [
-        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Chris-Turner-1000x1000.jpg",
-        "award" => "The Louie Bellson Award",
-        "winner" => "Chris Turner",
-        "description" => "Louie Bellson has long been credited as the first drummer to popularize double bass playing. Before metal and rock came to be, Louie transferred his skills and sounds from hands to feet, finding new ways to express rhythms on the low end. This award is presented to a drummer who has displayed excellence and creativity in double bass drumming.<br><br>Chris Turner has so much control and precision on his feet, people have questioned how it’s even possible. But he’s proven time and time again that putting in the work gets results. Chris has been building his profile as an independent drummer, releasing an instrumental album this year and taking the tracks on the road.",
-    ],
-    [
-        "last-child" => true,
-        "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/awards/Greyson-Nekrutman-1000x1000.jpg",
-        "award" => "The Tony Williams Award",
-        "winner" => "Greyson Nekrutman",
-        "description" => "Tony Williams was just 17 years old when he played on Miles Davis’ revolutionary album, <e>Seven Steps To Heaven</e>. This award is presented to a drummer who has already made a memorable impact at a young age. The winner will have made valuable contributions to drumming and/or inspired others with their music.<br><br>This year’s winner is barely out of his teens but he’s already proven to be a dynamo. Between performing at his first big drum festival, going on tour, playing on albums and releasing a drumming course, Greyson killed it in 2022 – he even drummed with the Beach Boys alongside John Stamos!<br><br>On top of being a busy, skilled drummer, he’s a social media powerhouse, regularly sharing clips, filming covers, and engaging with the drumming community.",
-    ],
-];
-
 $legacyAwards2021 = [
     [
         "image" => "https://dpwjbsxqtam5n.cloudfront.net/beat/awards/steve-gadd.jpg",

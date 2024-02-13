@@ -128,13 +128,13 @@ return [
                     ],
                 'impact' =>
                     [
-                        'utt-link' => 'A3032697-2ca8-4ba5-9bad-ee08c4a7d1ca1',
-                        'sid' => 'IRzxwmnLNaMN3032697tSVoYihcdj3Qop1',
-                        'auth-token' => 'Dnetdodz2rgZeU.ECRcMmu9heSt_rhwk',
-                        'campaign-id' => '14652',
-                        'tag-action-tracker-id' => '27554',
-                        'api-action-tracker-id' => '27555',
-                        'sign-up-action-tracker-id' => '28350'
+                        'utt-link' => '',
+                        'sid' => '',
+                        'auth-token' => '',
+                        'campaign-id' => '',
+                        'tag-action-tracker-id' => '',
+                        'api-action-tracker-id' => '',
+                        'sign-up-action-tracker-id' => ''
                     ]
             ],
         ],

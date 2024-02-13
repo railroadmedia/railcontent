@@ -391,7 +391,6 @@ $items = [
                 </div> --}}
         </div>
         @include('drumeo.products.partials.evergreen._price-link', [
-            'price' => $price,
             'enrollmentLink' => $enrollmentLink,
             'brandTitle' => $brandTitle,
         ])

@@ -141,11 +141,13 @@ const skillLevelColor = computed(() => {
         <!-- Background Image -->
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2190,quality=100/${desktopImg}`">
-                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1200,quality=100/${tabletImg}`">
+                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2500,quality=95/${desktopImg}`">
+                <source media="(min-width:1024px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1780,quality=95/${desktopImg}`">
+                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1470,quality=95/${tabletImg}`">
+                <source media="(min-width:640px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1220,quality=95/${tabletImg}`">
                 <img
                     class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
-                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=100/${mobileImg}`"
+                    :src="`https://www.musora.com/musora-cdn/image/width=790,quality=95/${mobileImg}`"
                     alt="banner background image"
                 />
             </picture>
@@ -200,7 +202,7 @@ const skillLevelColor = computed(() => {
                 <span
                     v-if="secondaryCtaText && secondaryVideo"
                     @click="secondaryVideoModal = true"
-                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
+                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
 
                 >
                     {{ secondaryCtaText }}

@@ -8,10 +8,10 @@
 <table>
     <thead>
     <tr>
-        <td style="font-weight: bold">Product Name: {{ $product->getName() }}</td>
+        <td style="font-weight: bold">Product Name: {{ $product->name }}</td>
     </tr>
     <tr>
-        <td style="font-weight: bold">Product Id: {{ $product->getId() }}</td>
+        <td style="font-weight: bold">Product Id: {{ $product->id }}</td>
     </tr>
     <tr>
         <td style="font-weight: bold">Source: {{ $source }}</td>

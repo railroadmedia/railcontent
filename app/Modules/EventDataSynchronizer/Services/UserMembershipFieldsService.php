@@ -30,11 +30,17 @@ class UserMembershipFieldsService
 
     public function syncUserAccess(UserAccessPermissionsCollection $userAccessPermissions): bool
     {
-        $userId = $userAccessPermissions->getUserId();
+        $user = $userAccessPermissions->getUser();
+        $userId = $user->id;
 
-        //This code is difficult to understand and should be thoroughly understood before changing it
+        //This code is complex and should be thoroughly understood before changing it
         //membership expiration date comes from both plus and basic permissions combined
         $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate();
+        if (!$membershipExpirationDate && $user->legacy_expiration_date) {
+            //legacy permissions were not migrated to the new shopify permission system
+            //customer io relies on having the expiration date populated for historical data
+            $membershipExpirationDate = Carbon::parse($user->legacy_expiration_date);
+        }
         //access level comes from plus or basic permissions
         $plusMembershipExpirationDate = $userAccessPermissions->getPlusMembershipExpirationDate();
         $basicMembershipExpirationDate = $userAccessPermissions->getBasicMembershipExpirationDate();
@@ -86,7 +92,6 @@ class UserMembershipFieldsService
         ?string $membershipLevel,
         bool $isDrumeoLifetimeMember
     ): bool {
-
         $user =
             User::query()
                 ->find($userId);
@@ -99,7 +104,8 @@ class UserMembershipFieldsService
 
             $user->membership_expiration_date =
                 !empty($membershipExpirationDate) ? $membershipExpirationDate->toDateTimeString() : null;
-            $user->membership_start_date = !empty($membershipStartDate) ? $membershipStartDate->toDateTimeString() : null;
+            $user->membership_start_date = !empty($membershipStartDate) ? $membershipStartDate->toDateTimeString(
+            ) : null;
             $user->is_lifetime_member = $isLifetimeMember;
             $user->is_drumeo_lifetime_member = $isDrumeoLifetimeMember;
             $user->access_level = $accessLevel;
