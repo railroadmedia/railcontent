@@ -61,7 +61,9 @@
     </div>
 
     <div class="ml-auto flex items-center">
-        <a href="/choose-plan" class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 pb-1.5 px-3 md:pb-3 md:pt-4 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">
+        <a class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 pb-1.5 px-3 md:pb-3 md:pt-4 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
+            @if(!empty($scrollToJoin)) href="#customize-anchor" @else href="/choose-plan" @endif
+        >
             Start for free &nbsp; <i class="fas fa-arrow-right mb-1" style="line-height: 0;" aria-hidden="true"></i>
         </a>
     </div>

@@ -13,6 +13,8 @@ class ContentLikesDecorator extends ModeDecoratorBase
      */
     private $contentLikeService;
 
+    public static $skip = false;
+
     /**
      * ContentLikesDecorator constructor.
      */
@@ -23,7 +25,7 @@ class ContentLikesDecorator extends ModeDecoratorBase
 
     public function decorate(Collection $contents)
     {
-        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM || self::$skip) {
             return $contents;
         }
 

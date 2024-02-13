@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
             [
@@ -18,14 +17,14 @@
         ]
     ])
 
-    @component('partials._header-banner', [
+    {{-- @component('partials._header-banner', [
         'backgroundImage' => $pack->fetch('data.header_image_url'),
         'hideUser' => true,
         'hideBrandGradient' => $pack['slug'] == 'piano-technique-made-easy',
     ])
         @slot('content')
             <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full tw-min-h-[312px]">
-            
+
                 @if($pack['slug'] == 'piano-technique-made-easy')
                     <div
                         class="tw-flex tw-flex-col tw-mb-4 tw-rounded-full ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
@@ -51,7 +50,6 @@
                         </div>
                     </div>
                 @endif
-                {{-- Logo --}}
                 <img alt="{{ $pack->fetch('title') }} Logo"
                     class="tw-w-full tw-transition-opacity tw-max-w-[300px] tw-opacity-0"
                     src="{{ $pack->fetch('data.logo_image_url') }}"
@@ -59,9 +57,25 @@
                 >
             </div>
         @endslot
-    @endcomponent
+    @endcomponent --}}
 
-    @include('partials.bladesora.members.content.content-info-subheader', [
+    <packs-header
+        title="Packs"
+        hero-img="{{ $pack->fetch('data.header_image_url') }}"
+        additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
+        dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
+        light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
+        primary-cta-icon="fa-play"
+        primary-cta-text="{{$pack['primary_cta_text']}}"
+        primary-cta-url="{{ $pack['primary_cta_url'] }}"
+        :info-data="{{ json_encode($infoData) }}"
+        {{-- :enable-reset-progress="true"
+        content-id="{{ $parentContent->fetch('id') }}" --}}
+    >
+    </packs-header>
+
+
+    {{-- @include('partials.bladesora.members.content.content-info-subheader', [
         "infoData" => $infoData,
         "contentType" => "pack",
         "contentId" => $pack->fetch('id'),
@@ -71,7 +85,7 @@
         'addToList' => false,
         'isAdded' => false,
         'brand' => '{{ $brand }}',
-    ])
+    ]) --}}
 
     @if(!empty($pack->fetch('*fields.instructor')) || !empty($pack->fetch('data.description')))
         <content-info
@@ -93,7 +107,9 @@
                         catalogue-type="grid"
                         theme-color="{{ $brand }}"
                         :pre-loaded-content="{{ $childContent }}"
-                        user-id="{{ auth()->id() }}"></content-catalogue>
+                        user-id="{{ auth()->id() }}"
+                        :full-width-on-mobile="true"
+                ></content-catalogue>
             </div>
 
             @if($xpBonus > 0)
