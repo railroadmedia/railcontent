@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         .join {
             display:inline-block;
             font:500 22px/1em 'Bebas Neue', sans-serif;
