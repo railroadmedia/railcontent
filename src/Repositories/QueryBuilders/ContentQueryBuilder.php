@@ -553,18 +553,11 @@ class ContentQueryBuilder extends QueryBuilder
                 );
             })
             ->where(function (Builder $builder) use ($membershipPermissionIds) {
-                return $builder->where(function (Builder $builder) {
+                $newBuilder = $builder->where(function (Builder $builder) {
                     return $builder->whereNull(
                         'id_content_permissions'.'.permission_id'
                     );
                 })
-                    ->orWhere(function (Builder $builder) {
-                        return $builder->where(function (Builder $builder) {
-                            return $builder->where(
-                                'enrollment_end_time', '>=', Carbon::now()->toDateTimeString()
-                            );
-                        });
-                            })
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
@@ -602,6 +595,16 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->orWhereNull('start_date');
                             });
                     });
+                if(ContentRepository::$getEnrollmentContent) {
+                    $newBuilder->orWhere(function (Builder $builder) {
+                        return $builder->where(function (Builder $builder) {
+                            return $builder->where(
+                                'enrollment_end_time', '>=', Carbon::now()->toDateTimeString()
+                            );
+                        });
+                    });
+                }
+                return $newBuilder;
             });
 
         return $this;
