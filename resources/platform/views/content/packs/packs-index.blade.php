@@ -41,7 +41,7 @@
         <collection-wrapper
             collection-type="pack"
             :infinite-scroll="false"
-            without-enrollment="{{ user()->isPackOnlyOwner() }}"
+            without-enrollment="{{ json_encode(user()->isPackOnlyOwner()) }}"
             :pre-loaded-content="{{ $packs }}"
             title="Packs"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
