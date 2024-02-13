@@ -17,6 +17,7 @@
             :force-list-view="displayInline"
             :add-dark-mode-color="addDarkModeColor"
             :is-single-item="isSingleItem"
+            :full-width-on-Mobile="fullWidthOnMobile"
             @addToList="emitAddToList"
         />
     </div>
@@ -95,7 +96,11 @@ export default {
         isSingleItem: {
             type: Boolean,
             default: () => false,
-        }
+        },
+        fullWidthOnMobile: {
+            type: Boolean,
+            default: () => false,
+        },
     },
 };
 </script>

@@ -1347,6 +1347,8 @@ return [
             'is_owned',
             'thumbnail',
             'pack_logo',
+            'data.dark_mode_logo_url',
+            'data.light_mode_logo_url',
             'apple_product_id',
             'google_product_id',
             'bundles' => [
@@ -1386,7 +1388,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'resources'
+            'resources',
         ],
 
         'semester-pack' => [
@@ -1403,6 +1405,8 @@ return [
             'is_owned',
             'thumbnail',
             'pack_logo',
+            'data.dark_mode_logo_url',
+            'data.light_mode_logo_url',
             'apple_product_id',
             'google_product_id',
             'lessons' => [

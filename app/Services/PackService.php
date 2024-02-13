@@ -8,11 +8,13 @@ use App\Decorators\Content\ContentExperienceDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\PackDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -38,6 +40,7 @@ class PackService
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        ContentRepository::$getEnrollmentContent = false;
 
         $oldPullFutureContent = ContentRepository::$pullFutureContent;
         $oldAvailableContentStatues = ContentRepository::$availableContentStatues;
@@ -89,12 +92,14 @@ class PackService
     }
 
 
-    public function getPacks()
+    public function getPacks($requiredFields = [])
     {
         ContentRepository::$pullFutureContent = true;
         AddedToPrimaryPlaylistDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
         ContentExperienceDecorator::$skip = true;
+        ContentLikesDecorator::$skip = true;
+        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $packs = (new PackCollection(
             $this->contentService->getFiltered(
@@ -104,7 +109,7 @@ class PackService
                 ['pack', 'semester-pack'],
                 [],
                 [],
-                [],
+                $requiredFields,
                 [],
                 [],
                 [],
@@ -114,6 +119,10 @@ class PackService
             )['results']
         ))->sortPacks(user()?->id);
 
-        return $packs;
+        return new ContentFilterResultsEntity([
+            'results' => $packs->values()->toArray(),
+            'total_results' => count($packs),
+            'filter_options' => [],
+        ]);
     }
 }

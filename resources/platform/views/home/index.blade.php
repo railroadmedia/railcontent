@@ -1,9 +1,5 @@
 @extends('partials.layout')
 
-@php
-//dd(get_defined_vars());
-@endphp
-
 @section('meta')
     <title>{{ ucfirst($brand) }} Home | Musora</title>
 @endsection
@@ -46,6 +42,8 @@
         :workouts-content="{{ $workoutsContentJson }}"
         workouts-content-url="{{ url()->route('platform.workouts') }}"
         youtube-id="{{ $youtubeId }}"
+        :learning-paths="{{ json_encode($trialSection) }}"
+        :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
     ></home>
 
 @include('partials._railanalytics-brand-tracking-iframe')

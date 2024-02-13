@@ -1,0 +1,1185 @@
+{
+    "headers": {
+        "x-shopify-webhook-id": [
+            "479721d3-f077-4485-ac38-1f330e3ac7aa"
+        ],
+        "x-shopify-triggered-at": [
+            "2024-01-30T20:10:52.214735378Z"
+        ],
+        "x-shopify-topic": [
+            "orders\/updated"
+        ],
+        "x-shopify-test": [
+            "false"
+        ],
+        "x-shopify-shop-domain": [
+            "musora-dev-sync.myshopify.com"
+        ],
+        "x-shopify-order-id": [
+            "5655911268646"
+        ],
+        "x-shopify-hmac-sha256": [
+            "w8TH0nEOvhaTzj+hAFHUQzJe8EBsm5P3j+sp1jSv5C8="
+        ],
+        "x-shopify-api-version": [
+            "2023-07"
+        ],
+        "x-forwarded-proto": [
+            "https"
+        ],
+        "x-forwarded-for": [
+            "34.74.51.165"
+        ],
+        "content-type": [
+            "application\/json"
+        ],
+        "connection": [
+            "keep-alive"
+        ],
+        "cf-worker": [
+            "musora.com"
+        ],
+        "cf-warp-tag-id": [
+            "53caa182-786a-474a-8c66-ed9ace7ae83a"
+        ],
+        "cf-visitor": [
+            "{\"scheme\":\"https\"}"
+        ],
+        "cf-ray": [
+            "84dc5c66035cadc6-ATL"
+        ],
+        "cf-ipcountry": [
+            "US"
+        ],
+        "cf-ew-via": [
+            "15"
+        ],
+        "cf-connecting-ip": [
+            "34.74.51.165"
+        ],
+        "cdn-loop": [
+            "cloudflare; subreqs=1"
+        ],
+        "accept-encoding": [
+            "gzip"
+        ],
+        "accept": [
+            "*\/*"
+        ],
+        "content-length": [
+            "19734"
+        ],
+        "user-agent": [
+            "Shopify-Captain-Hook"
+        ],
+        "host": [
+            "brandonk.musora.com"
+        ]
+    },
+    "body": {
+        "id": 5655911268646,
+        "admin_graphql_api_id": "gid:\/\/shopify\/Order\/5655911268646",
+        "app_id": 1354745,
+        "browser_ip": "50.101.147.22",
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": null,
+        "checkout_id": 37458801852710,
+        "checkout_token": "f6784b4fe1555824778df215de03b1da",
+        "client_details": {
+            "accept_language": null,
+            "browser_height": null,
+            "browser_ip": "50.101.147.22",
+            "browser_width": null,
+            "session_hash": null,
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/120.0.0.0 Safari\/537.36"
+        },
+        "closed_at": null,
+        "company": null,
+        "confirmation_number": "9LN5GPVHD",
+        "confirmed": true,
+        "contact_email": "brandonk+receipt@musora.com",
+        "created_at": "2024-01-23T14:23:39-05:00",
+        "currency": "USD",
+        "current_subtotal_price": "57.00",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "57.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "57.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "30.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "57.00",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "57.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "57.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": "en",
+        "device_id": null,
+        "discount_codes": [],
+        "email": "brandonk+receipt@musora.com",
+        "estimated_taxes": false,
+        "financial_status": "partially_paid",
+        "fulfillment_status": "partial",
+        "landing_site": null,
+        "landing_site_ref": null,
+        "location_id": null,
+        "merchant_of_record_app_id": null,
+        "name": "#1282",
+        "note": null,
+        "note_attributes": [],
+        "number": 282,
+        "order_number": 1282,
+        "order_status_url": "https:\/\/musora-dev-sync.myshopify.com\/82852905254\/orders\/cbae2fec4b9850e28042f4a40a5b04c7\/authenticate?key=6845058b890a83a5a9d87819aa012176",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [
+            "manual"
+        ],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2024-01-23T14:23:38-05:00",
+        "reference": "8bf9cac15efb8b51d3f15c4acaa7c165",
+        "referring_site": null,
+        "source_identifier": "8bf9cac15efb8b51d3f15c4acaa7c165",
+        "source_name": "shopify_draft_order",
+        "source_url": null,
+        "subtotal_price": "115.00",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "115.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "115.00",
+                "currency_code": "USD"
+            }
+        },
+        "tags": null,
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": false,
+        "token": "cbae2fec4b9850e28042f4a40a5b04c7",
+        "total_discounts": "30.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "145.00",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "145.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "145.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "28.00",
+        "total_price": "115.00",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "115.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "115.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "0.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 1360,
+        "updated_at": "2024-01-30T15:10:52-05:00",
+        "user_id": 104666038566,
+        "billing_address": {
+            "first_name": "Brandon",
+            "address1": "123 Queen Street West",
+            "phone": null,
+            "city": "Toronto",
+            "zip": "M5H 3M9",
+            "province": "Ontario",
+            "country": "Canada",
+            "last_name": "Kerr",
+            "address2": null,
+            "company": null,
+            "latitude": 43.6511644,
+            "longitude": -79.3841716,
+            "name": "Brandon Kerr",
+            "country_code": "CA",
+            "province_code": "ON"
+        },
+        "customer": {
+            "id": 7794198741286,
+            "email": "brandonk+receipt@musora.com",
+            "created_at": "2024-01-23T14:21:54-05:00",
+            "updated_at": "2024-01-30T15:05:33-05:00",
+            "first_name": "Brandon",
+            "last_name": "Kerr",
+            "state": "disabled",
+            "note": null,
+            "verified_email": true,
+            "multipass_identifier": null,
+            "tax_exempt": false,
+            "phone": null,
+            "email_marketing_consent": {
+                "state": "not_subscribed",
+                "opt_in_level": "single_opt_in",
+                "consent_updated_at": null
+            },
+            "sms_marketing_consent": null,
+            "tags": null,
+            "currency": "USD",
+            "accepts_marketing": false,
+            "accepts_marketing_updated_at": "2024-01-23T14:21:54-05:00",
+            "marketing_opt_in_level": null,
+            "tax_exemptions": [],
+            "admin_graphql_api_id": "gid:\/\/shopify\/Customer\/7794198741286",
+            "default_address": {
+                "id": 9997057425702,
+                "customer_id": 7794198741286,
+                "first_name": "Brandon",
+                "last_name": "Kerr",
+                "company": null,
+                "address1": "123 Queen Street West",
+                "address2": null,
+                "city": "Toronto",
+                "province": "Ontario",
+                "country": "Canada",
+                "zip": "M5H 3M9",
+                "phone": null,
+                "name": "Brandon Kerr",
+                "province_code": "ON",
+                "country_code": "CA",
+                "country_name": "Canada",
+                "default": true
+            }
+        },
+        "discount_applications": [
+            {
+                "target_type": "line_item",
+                "type": "manual",
+                "value": "15.0",
+                "value_type": "fixed_amount",
+                "allocation_method": "each",
+                "target_selection": "explicit",
+                "title": null,
+                "description": null
+            }
+        ],
+        "fulfillments": [
+            {
+                "id": 4997660311846,
+                "admin_graphql_api_id": "gid:\/\/shopify\/Fulfillment\/4997660311846",
+                "created_at": "2024-01-26T15:31:57-05:00",
+                "location_id": 92138111270,
+                "name": "#1282.1",
+                "order_id": 5655911268646,
+                "origin_address": [],
+                "receipt": [],
+                "service": "manual",
+                "shipment_status": null,
+                "status": "cancelled",
+                "tracking_company": "Acme Inc.",
+                "tracking_number": "BK1562678",
+                "tracking_numbers": [
+                    "BK1562678"
+                ],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2024-01-26T15:33:17-05:00",
+                "line_items": [
+                    {
+                        "id": 14588673524006,
+                        "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14588673524006",
+                        "attributed_staffs": [],
+                        "fulfillable_quantity": 0,
+                        "fulfillment_service": "manual",
+                        "fulfillment_status": "fulfilled",
+                        "gift_card": false,
+                        "grams": 227,
+                        "name": "30 Day Drummer Black T-Shirt - xxl",
+                        "price": "29.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "product_exists": true,
+                        "product_id": 8817413947686,
+                        "properties": [],
+                        "quantity": 1,
+                        "requires_shipping": true,
+                        "sku": "30-day-drummer-black-tshirt-xxl",
+                        "taxable": true,
+                        "title": "30 Day Drummer Black T-Shirt",
+                        "total_discount": "0.00",
+                        "total_discount_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "variant_id": 47073062224166,
+                        "variant_inventory_management": "shopify",
+                        "variant_title": "xxl",
+                        "vendor": "Drumeo",
+                        "tax_lines": [],
+                        "duties": [],
+                        "discount_allocations": []
+                    }
+                ]
+            },
+            {
+                "id": 4997679710502,
+                "admin_graphql_api_id": "gid:\/\/shopify\/Fulfillment\/4997679710502",
+                "created_at": "2024-01-26T15:38:29-05:00",
+                "location_id": 92138111270,
+                "name": "#1282.2",
+                "order_id": 5655911268646,
+                "origin_address": [],
+                "receipt": [],
+                "service": "manual",
+                "shipment_status": null,
+                "status": "cancelled",
+                "tracking_company": "Acme Inc.",
+                "tracking_number": "BK1562678",
+                "tracking_numbers": [
+                    "BK1562678"
+                ],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2024-01-26T15:38:47-05:00",
+                "line_items": [
+                    {
+                        "id": 14588673524006,
+                        "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14588673524006",
+                        "attributed_staffs": [],
+                        "fulfillable_quantity": 0,
+                        "fulfillment_service": "manual",
+                        "fulfillment_status": "fulfilled",
+                        "gift_card": false,
+                        "grams": 227,
+                        "name": "30 Day Drummer Black T-Shirt - xxl",
+                        "price": "29.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "product_exists": true,
+                        "product_id": 8817413947686,
+                        "properties": [],
+                        "quantity": 1,
+                        "requires_shipping": true,
+                        "sku": "30-day-drummer-black-tshirt-xxl",
+                        "taxable": true,
+                        "title": "30 Day Drummer Black T-Shirt",
+                        "total_discount": "0.00",
+                        "total_discount_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "variant_id": 47073062224166,
+                        "variant_inventory_management": "shopify",
+                        "variant_title": "xxl",
+                        "vendor": "Drumeo",
+                        "tax_lines": [],
+                        "duties": [],
+                        "discount_allocations": []
+                    }
+                ]
+            },
+            {
+                "id": 4997704646950,
+                "admin_graphql_api_id": "gid:\/\/shopify\/Fulfillment\/4997704646950",
+                "created_at": "2024-01-26T15:47:23-05:00",
+                "location_id": 92138111270,
+                "name": "#1282.3",
+                "order_id": 5655911268646,
+                "origin_address": [],
+                "receipt": [],
+                "service": "manual",
+                "shipment_status": null,
+                "status": "cancelled",
+                "tracking_company": "Other",
+                "tracking_number": "EPG010927121779774",
+                "tracking_numbers": [
+                    "EPG010927121779774"
+                ],
+                "tracking_url": "https:\/\/epgtrack.com\/EPG010927121779774",
+                "tracking_urls": [
+                    "https:\/\/epgtrack.com\/EPG010927121779774"
+                ],
+                "updated_at": "2024-01-29T08:30:08-05:00",
+                "line_items": [
+                    {
+                        "id": 14588673524006,
+                        "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14588673524006",
+                        "attributed_staffs": [],
+                        "fulfillable_quantity": 0,
+                        "fulfillment_service": "manual",
+                        "fulfillment_status": "fulfilled",
+                        "gift_card": false,
+                        "grams": 227,
+                        "name": "30 Day Drummer Black T-Shirt - xxl",
+                        "price": "29.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "product_exists": true,
+                        "product_id": 8817413947686,
+                        "properties": [],
+                        "quantity": 1,
+                        "requires_shipping": true,
+                        "sku": "30-day-drummer-black-tshirt-xxl",
+                        "taxable": true,
+                        "title": "30 Day Drummer Black T-Shirt",
+                        "total_discount": "0.00",
+                        "total_discount_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "variant_id": 47073062224166,
+                        "variant_inventory_management": "shopify",
+                        "variant_title": "xxl",
+                        "vendor": "Drumeo",
+                        "tax_lines": [],
+                        "duties": [],
+                        "discount_allocations": []
+                    }
+                ]
+            },
+            {
+                "id": 4999524286758,
+                "admin_graphql_api_id": "gid:\/\/shopify\/Fulfillment\/4999524286758",
+                "created_at": "2024-01-29T08:31:22-05:00",
+                "location_id": 92138111270,
+                "name": "#1282.4",
+                "order_id": 5655911268646,
+                "origin_address": [],
+                "receipt": [],
+                "service": "manual",
+                "shipment_status": "delivered",
+                "status": "success",
+                "tracking_company": "Acme Inc.",
+                "tracking_number": "BK1562678",
+                "tracking_numbers": [
+                    "BK1562678"
+                ],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2024-01-29T08:45:09-05:00",
+                "line_items": [
+                    {
+                        "id": 14588673524006,
+                        "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14588673524006",
+                        "attributed_staffs": [],
+                        "fulfillable_quantity": 0,
+                        "fulfillment_service": "manual",
+                        "fulfillment_status": "fulfilled",
+                        "gift_card": false,
+                        "grams": 227,
+                        "name": "30 Day Drummer Black T-Shirt - xxl",
+                        "price": "29.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "product_exists": true,
+                        "product_id": 8817413947686,
+                        "properties": [],
+                        "quantity": 1,
+                        "requires_shipping": true,
+                        "sku": "30-day-drummer-black-tshirt-xxl",
+                        "taxable": true,
+                        "title": "30 Day Drummer Black T-Shirt",
+                        "total_discount": "0.00",
+                        "total_discount_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "variant_id": 47073062224166,
+                        "variant_inventory_management": "shopify",
+                        "variant_title": "xxl",
+                        "vendor": "Drumeo",
+                        "tax_lines": [],
+                        "duties": [],
+                        "discount_allocations": []
+                    }
+                ]
+            }
+        ],
+        "line_items": [
+            {
+                "id": 14588673524006,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14588673524006",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 227,
+                "name": "30 Day Drummer Black T-Shirt - xxl",
+                "price": "29.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "29.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "29.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8817413947686,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sku": "30-day-drummer-black-tshirt-xxl",
+                "taxable": true,
+                "title": "30 Day Drummer Black T-Shirt",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47073062224166,
+                "variant_inventory_management": "shopify",
+                "variant_title": "xxl",
+                "vendor": "Drumeo",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+            },
+            {
+                "id": 14618940604710,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14618940604710",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 2,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 227,
+                "name": "30 Day Drummer Black T-Shirt - xl",
+                "price": "29.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "29.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "29.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8817413947686,
+                "properties": [],
+                "quantity": 4,
+                "requires_shipping": true,
+                "sku": "30-day-drummer-black-tshirt-xl",
+                "taxable": true,
+                "title": "30 Day Drummer Black T-Shirt",
+                "total_discount": "30.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "30.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "30.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47073062256934,
+                "variant_inventory_management": "shopify",
+                "variant_title": "xl",
+                "vendor": "Drumeo",
+                "tax_lines": [
+                    {
+                        "channel_liable": false,
+                        "price": "0.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "rate": 0,
+                        "title": "HST"
+                    },
+                    {
+                        "channel_liable": false,
+                        "price": "0.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "rate": 0,
+                        "title": "HST"
+                    },
+                    {
+                        "channel_liable": false,
+                        "price": "0.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "rate": 0,
+                        "title": "HST"
+                    },
+                    {
+                        "channel_liable": false,
+                        "price": "0.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "rate": 0,
+                        "title": "HST"
+                    }
+                ],
+                "duties": [],
+                "discount_allocations": [
+                    {
+                        "amount": "30.00",
+                        "amount_set": {
+                            "shop_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "discount_application_index": 0
+                    }
+                ]
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [
+            {
+                "id": 957649191206,
+                "admin_graphql_api_id": "gid:\/\/shopify\/Refund\/957649191206",
+                "created_at": "2024-01-30T14:15:58-05:00",
+                "note": null,
+                "order_id": 5655911268646,
+                "processed_at": "2024-01-30T14:15:58-05:00",
+                "restock": true,
+                "total_duties_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "user_id": 104666038566,
+                "order_adjustments": [],
+                "transactions": [],
+                "refund_line_items": [
+                    {
+                        "id": 575355388198,
+                        "line_item_id": 14618940604710,
+                        "location_id": 92138111270,
+                        "quantity": 1,
+                        "restock_type": "cancel",
+                        "subtotal": 29,
+                        "subtotal_set": {
+                            "shop_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "total_tax": 0,
+                        "total_tax_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "line_item": {
+                            "id": 14618940604710,
+                            "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14618940604710",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 2,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": null,
+                            "gift_card": false,
+                            "grams": 227,
+                            "name": "30 Day Drummer Black T-Shirt - xl",
+                            "price": "29.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "29.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "29.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8817413947686,
+                            "properties": [],
+                            "quantity": 4,
+                            "requires_shipping": true,
+                            "sku": "30-day-drummer-black-tshirt-xl",
+                            "taxable": true,
+                            "title": "30 Day Drummer Black T-Shirt",
+                            "total_discount": "30.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47073062256934,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": "xl",
+                            "vendor": "Drumeo",
+                            "tax_lines": [
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                },
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                },
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                },
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                }
+                            ],
+                            "duties": [],
+                            "discount_allocations": [
+                                {
+                                    "amount": "30.00",
+                                    "amount_set": {
+                                        "shop_money": {
+                                            "amount": "30.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "30.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "discount_application_index": 0
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "duties": []
+            },
+            {
+                "id": 957651190054,
+                "admin_graphql_api_id": "gid:\/\/shopify\/Refund\/957651190054",
+                "created_at": "2024-01-30T15:02:07-05:00",
+                "note": null,
+                "order_id": 5655911268646,
+                "processed_at": "2024-01-30T15:02:07-05:00",
+                "restock": true,
+                "total_duties_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "user_id": 104666038566,
+                "order_adjustments": [],
+                "transactions": [],
+                "refund_line_items": [
+                    {
+                        "id": 575358435622,
+                        "line_item_id": 14618940604710,
+                        "location_id": 92138111270,
+                        "quantity": 1,
+                        "restock_type": "cancel",
+                        "subtotal": 29,
+                        "subtotal_set": {
+                            "shop_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "29.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "total_tax": 0,
+                        "total_tax_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "line_item": {
+                            "id": 14618940604710,
+                            "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14618940604710",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 2,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": null,
+                            "gift_card": false,
+                            "grams": 227,
+                            "name": "30 Day Drummer Black T-Shirt - xl",
+                            "price": "29.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "29.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "29.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8817413947686,
+                            "properties": [],
+                            "quantity": 4,
+                            "requires_shipping": true,
+                            "sku": "30-day-drummer-black-tshirt-xl",
+                            "taxable": true,
+                            "title": "30 Day Drummer Black T-Shirt",
+                            "total_discount": "30.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47073062256934,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": "xl",
+                            "vendor": "Drumeo",
+                            "tax_lines": [
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                },
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                },
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                },
+                                {
+                                    "channel_liable": false,
+                                    "price": "0.00",
+                                    "price_set": {
+                                        "shop_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "0.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "rate": 0,
+                                    "title": "HST"
+                                }
+                            ],
+                            "duties": [],
+                            "discount_allocations": [
+                                {
+                                    "amount": "30.00",
+                                    "amount_set": {
+                                        "shop_money": {
+                                            "amount": "30.00",
+                                            "currency_code": "USD"
+                                        },
+                                        "presentment_money": {
+                                            "amount": "30.00",
+                                            "currency_code": "USD"
+                                        }
+                                    },
+                                    "discount_application_index": 0
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "duties": []
+            }
+        ],
+        "shipping_address": {
+            "first_name": "Brandon",
+            "address1": "123 Queen Street West",
+            "phone": null,
+            "city": "Toronto",
+            "zip": "M5H 3M9",
+            "province": "Ontario",
+            "country": "Canada",
+            "last_name": "Kerr",
+            "address2": null,
+            "company": null,
+            "latitude": null,
+            "longitude": null,
+            "name": "Brandon Kerr",
+            "country_code": "CA",
+            "province_code": "ON"
+        },
+        "shipping_lines": []
+    }
+}
