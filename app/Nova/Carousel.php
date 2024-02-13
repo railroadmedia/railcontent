@@ -58,6 +58,8 @@ class Carousel extends Resource
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('Name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
+            Boolean::make('Show on Homepage?', 'show_on_homepage')->hideFromIndex()->default(true),
+            Boolean::make('Show on Workouts?', 'show_on_workouts')->hideFromIndex()->default(true),
             Boolean::make('Visible on Desktop', 'visible_on_desktop')->hideFromIndex()->default(true),
             Boolean::make('Visible on Mobile', 'visible_on_mobile')->hideFromIndex()->default(true),
             Select::make(__('All but latest version'), 'mobile_version_below')->options(function () {
@@ -235,28 +237,6 @@ class Carousel extends Resource
             Text::make('Mobile Image', 'mobile_img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Heading::make('BANNER ACTIONS'),
             Boolean::make('Featured product?', 'is_featured')->hideFromIndex()->default(false)->help('Used for member enrolment for cohort packs. Leave unchecked for normal banners.'),
-            Boolean::make('Show on Homepage?', 'show_on_homepage')->hideFromIndex()->default(true)
-                ->hide()
-                ->hideFromDetail(function (NovaRequest $request, $resource) {
-                    return !$this->is_featured;
-                })
-                ->dependsOn(
-                    ['is_featured'],
-                    function (Boolean $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->default(true)->show()->rules(['required']);
-                    }
-                ),
-            Boolean::make('Show on Workouts?', 'show_on_workouts')->hideFromIndex()->default(true)
-                ->hide()
-                ->hideFromDetail(function (NovaRequest $request, $resource) {
-                    return !$this->is_featured;
-                })
-                ->dependsOn(
-                    ['is_featured'],
-                    function (Boolean $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->default(true)->show()->rules(['required']);
-                    }
-                ),
             Text::make('Product ID', 'product_id')->hideFromIndex()
                 ->hide()
                 ->hideFromDetail(function (NovaRequest $request, $resource) {

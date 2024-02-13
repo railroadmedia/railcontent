@@ -96,7 +96,7 @@ class CarouselService
                 ->get();
         if(self::$workoutsPage){
             $carousel = $carousel->filter(function($slide){
-                return $slide->is_featured && ($slide->show_on_workouts == 1);
+                return $slide->show_on_workouts == 1;
             })->values();
         }else{
             $carousel = $carousel->filter(function($slide){
