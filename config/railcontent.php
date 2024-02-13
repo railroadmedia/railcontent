@@ -2177,6 +2177,8 @@ return [
         'zip_url',
         'enrollment_start_time',
         'enrollment_end_time',
+        'light_mode_logo_url',
+        'dark_mode_logo_url',
     ],
 
     'compiled_column_mapping_field_keys' => [
@@ -2282,7 +2284,7 @@ return [
         'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/06b2a24d-60ba-4f6d-9e8d-3a467b2d0b00/public'
     ],
     'content_multiple_level_content_depth_playlist_allowed' => [
-        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial', 'challenge'
+        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial','challenge','unit'
     ],
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,

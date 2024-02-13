@@ -28,6 +28,10 @@ const props = defineProps({
         type: Number,
         default: 1,
     },
+    infiniteScroll: {
+        type: Boolean,
+        default: true,
+    },
     totalPages: {
         type: Number,
         default: 1,
@@ -51,14 +55,14 @@ const infiniteScrollEventHandler = () => {
 }
 
 onMounted(() => {
-    document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
+    props.infiniteScroll && document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
 })
 
 onUnmounted(() => {
-    document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
+    props.infiniteScroll && document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
 })
 
 onUpdated(() => {
-    infiniteScrollEventHandler();
+    props.infiniteScroll && infiniteScrollEventHandler();
 })
 </script>

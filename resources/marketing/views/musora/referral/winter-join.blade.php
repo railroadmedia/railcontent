@@ -83,12 +83,12 @@
         </div>
     </section>
 
-    <section class="py-12 sm:py-20 text-white bg-cover bg-[url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg')]">
+    <section class="py-12 sm:py-20 text-white bg-cover bg-[url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg')]">
         <div class="max-w-4xl mx-auto px-4 xl:px-0 sm:flex sm:items-center text-center sm:text-left">
             <div class="order-1">
                 <img
                     class="h-40 sm:h-auto mb-10 sm:mb-0 inline-block"
-                    src="https://www.musora.com/musora-cdn/image/width=500,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaf-ring.png"
+                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaf-ring.png"
                     alt="intro"
                 />
             </div>

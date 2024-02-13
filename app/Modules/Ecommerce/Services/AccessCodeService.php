@@ -99,7 +99,7 @@ class AccessCodeService
     public function release(?string $code): void
     {
         /** @var AccessCode $accessCode */
-        $accessCode = $this->accessCodeService->getAccessCode($code);
+        $accessCode = $this->getAccessCode($code);
         if (!$accessCode) {
             throw new Exception("Access code for ID $code not found.");
         }
@@ -113,8 +113,9 @@ class AccessCodeService
     public function generateAccessCode(array $productIds, string $brand, string $source = null): AccessCode
     {
         $accessCode = new AccessCode();
-        $accessCode->product_ids = $productIds;
+        $accessCode->product_ids = serialize($productIds);
         $accessCode->brand = $brand;
+        $accessCode->is_claimed = false;
 
         if ($source) {
             $accessCode->source = $source;

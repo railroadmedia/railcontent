@@ -19,7 +19,12 @@
 
 @section('content')
     <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4">
-        <div class="tw-max-w-5xl tw-mx-auto">
+        <div class="tw-max-w-5xl tw-mx-auto tw-relative">
+            <div class="2xl:tw-absolute 2xl:tw-top-0 2xl:-tw-left-28 tw-mb-3 md:tw-mb-6 2xl:tw-mb-0">
+                <button class="tw-bg-[rgba(0,12,23,0.40)] hover:tw-bg-[rgba(0,12,23,0.80)] tw-py-1 tw-px-2.5 tw-text-white tw-rounded-full" onclick="history.back()">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            </div>
             <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
                 <div class="md:tw-flex-1">
                     {{--  Header logo  --}}

@@ -11,27 +11,30 @@ use Modules\UserManagementSystem\Models\User;
 
 class PopulateLegacyExpirationDate extends Command
 {
-    protected $signature = 'ecommerce:PopulateLegacyExpirationDate {--skip=0} {--limit=1000000}';
+    protected $signature = 'ecommerce:PopulateLegacyExpirationDate {--startId=0} {--endId=1000000}';
 
     public function handle()
     {
-        $skip = $this->option('skip');
-        $limit = $this->option('limit');
-        $this->withExecutionTime(function () use ($skip, $limit) {
+        $startId = $this->option('startId');
+        $endId = $this->option('endId');
+        $this->withExecutionTime(function () use ($startId, $endId) {
             $query = User::query()
-                ->whereNull('membership_expiration_date')
                 ->whereNull('legacy_expiration_date')
                 ->whereExists(function ($query) {
                     $query->from('ecommerce_user_products')
                         ->whereRaw('ecommerce_user_products.user_id = usora_users.id');
-                })
-                ->skip($skip)
-                ->take($limit);
+                });
+            if ($startId) {
+                $query->where('id', '>', $startId);
+            }
+            if ($endId) {
+                $query->where('id', '<', $endId);
+            }
             $total = $query->count();
 
             $this->info("Found $total users");
             $i = 0;
-            $users = $query->chunk(10000, function ($users) use ($total, &$i) {
+            $query->chunkById(10000, function ($users) use ($total, &$i) {
                 foreach ($users as $user) {
                     $user->legacy_expiration_date = $this->getLegacyExpirationDate($user->id);
                     if ($user->legacy_expiration_date) {

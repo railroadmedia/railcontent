@@ -1239,6 +1239,9 @@ video {
 .bottom-auto {
   bottom: auto !important;
 }
+.bottom-full {
+  bottom: 100% !important;
+}
 .left-0 {
   left: 0 !important;
 }
@@ -3030,8 +3033,8 @@ video {
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8 !important;
 }
-.bg-\[url\(\'https\:\/\/www\.musora\.com\/musora-cdn\/image\/width\=2000\2c quality\=85\/https\:\/\/d3fzm1tzeyr5n3\.cloudfront\.net\/referral\/winter\/info-section-bg\.jpg\'\)\] {
-  background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg') !important;
+.bg-\[url\(\'https\:\/\/www\.musora\.com\/musora-cdn\/image\/width\=2000\2c quality\=95\/https\:\/\/d3fzm1tzeyr5n3\.cloudfront\.net\/referral\/winter\/info-section-bg\.jpg\'\)\] {
+  background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg') !important;
 }
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important;

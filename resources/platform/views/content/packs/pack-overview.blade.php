@@ -7,7 +7,7 @@
 @section('content')
         <div v-cloak>
 
-        @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
+        {{-- @if($pack['slug'] == 'piano-technique-made-easy' || $pack['slug'] == 'de-stupefy-your-left-hand')
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
                     [
@@ -23,7 +23,7 @@
                     ],
                 ]
             ])
-    
+
         @else
             @include('partials.bladesora.members.navigation.breadcrumbs', [
                 "pages" => [
@@ -36,9 +36,9 @@
                     ],
                 ]
             ])
-        @endif
+        @endif --}}
 
-        @component('partials._header-banner', [
+        {{-- @component('partials._header-banner', [
             'backgroundImage' => $pack->fetch('data.header_image_url'),
             'hideUser' => true,
         ])
@@ -46,7 +46,7 @@
                 <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full tw-min-h-[312px]">
                     <img alt="{{ $pack->fetch('title') }} Logo"
                         class="tw-w-full tw-transition-opacity tw-max-w-[300px] tw-opacity-0"
-                        src="{{ $pack->fetch('data.logo_image_url') }}" 
+                        src="{{ $pack->fetch('data.logo_image_url') }}"
                         onload="this.classList.remove('tw-opacity-0')"
                     >
                 </div>
@@ -63,7 +63,26 @@
             "addToList" => !in_array($parentContent->fetch('type'), ['learning-path', 'pack-bundle']),
             "downloadableResources" => $pack['resources'] ?? [],
             "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
-        ])
+        ]) --}}
+
+        @include('content.breadcrumbs._overview-breadcrumbs')
+
+        <packs-header
+            title="Packs"
+            hero-img="{{ $pack->fetch('data.header_image_url') }}"
+            additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
+            dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
+            light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
+            primary-cta-icon="fa-play"
+            primary-cta-text="{{$pack['primary_cta_text']}}"
+            primary-cta-url="{{ $nextLessonUrl }}"
+            progress="{{ $parentContent->fetch('progress_percent', 0) }}"
+            :enable-reset-progress="true"
+            content-id="{{ $parentContent->fetch('id') }}"
+            :info-data="{{ json_encode($infoData) }}"
+            :downloadable-resources="{{ json_encode($pack['resources'] ?? []) }}"
+        >
+        </packs-header>
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
             <div class="tw-flex tw-flex-col">

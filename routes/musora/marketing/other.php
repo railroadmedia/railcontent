@@ -10,6 +10,7 @@ Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
+        Route::get('/trial', [MarketingController::class, 'trial']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
         Route::get('6-reasons/drums', [MarketingController::class, 'sixReasonsDrums']);
         Route::get('6-reasons/piano', [MarketingController::class, 'sixReasonsPiano']);
