@@ -8,6 +8,7 @@ use App\Decorators\Content\ContentExperienceDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\PackDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -96,30 +97,31 @@ class PackService
         AddedToPrimaryPlaylistDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
         ContentExperienceDecorator::$skip = true;
-        $results = $this->contentService->getFiltered(
-            1,
-            -1,
-            '-published_on',
-            ['pack', 'semester-pack'],
-            [],
-            [],
-            $requiredFields,
-            [],
-            [],
-            [],
-            true,
-            false,
-            false
-        );
+        ContentLikesDecorator::$skip = true;
+        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $packs = (new PackCollection(
-            $results['results']
+            $this->contentService->getFiltered(
+                1,
+                -1,
+                '-published_on',
+                ['pack', 'semester-pack'],
+                [],
+                [],
+                $requiredFields,
+                [],
+                [],
+                [],
+                false,
+                false,
+                false
+            )['results']
         ))->sortPacks(user()?->id);
 
         return new ContentFilterResultsEntity([
-                                                             'results' => $packs->values()->toArray(),
-                                                             'total_results' => count($packs),
-                                                             'filter_options' => $results['filter_options'],
-                                                         ]);
+            'results' => $packs->values()->toArray(),
+            'total_results' => count($packs),
+            'filter_options' => [],
+        ]);
     }
 }

@@ -3,13 +3,16 @@
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
 use App\Modules\Ecommerce\Collections\OrderCollection;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Events\AccessCodeClaimed;
+use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
-use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\Subscription as RechargeSubscription;
 use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Models\Shopify\OrderLineItem;
+use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -23,33 +26,11 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Entities\Payment;
-use Railroad\Ecommerce\Entities\Subscription;
-use Railroad\Ecommerce\Entities\User as EcommerceUser;
-use Railroad\Ecommerce\Events\AccessCodeClaimed;
-use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
-use Railroad\Ecommerce\Events\AppSignupStartedEvent;
-use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
-use Railroad\Ecommerce\Events\MobileOrderEvent;
-use Railroad\Ecommerce\Events\MobilePaymentEvent;
-use Railroad\Ecommerce\Events\OrderEvent;
-use Railroad\Ecommerce\Events\PaymentEvent;
-use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
-use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodUpdated;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewFailed;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
-use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\ContentFollow;
@@ -69,35 +50,17 @@ use Throwable;
 
 class CustomerIoSyncEventListener
 {
-    /**
-     * @var UserService
-     */
-    private $userService;
+    private UserService $userService;
 
-    /**
-     * @var CommentRepository
-     */
-    private $commentRepository;
+    private CommentRepository $commentRepository;
 
-    /**
-     * @var ThreadRepository
-     */
-    private $threadRepository;
+    private ThreadRepository $threadRepository;
 
-    /**
-     * @var PostRepository
-     */
-    private $postRepository;
+    private PostRepository $postRepository;
 
-    /**
-     * @var CategoryRepository
-     */
-    private $categoryRepository;
+    private CategoryRepository $categoryRepository;
 
-    /**
-     * @var ContentService
-     */
-    private $contentService;
+    private ContentService $contentService;
 
     /**
      * @var bool
@@ -107,17 +70,8 @@ class CustomerIoSyncEventListener
      * @var array
      */
     public static $alreadyQueuedUserIds = [];
-    private PaymentRepository $paymentRepository;
+    private ProductService $productService;
 
-    /**
-     * CustomerIoSyncEventListener constructor.
-     *
-     * @param UserService $userService
-     * @param CommentRepository $commentRepository
-     * @param CategoryRepository $categoryRepository
-     * @param ThreadRepository $threadRepository
-     * @param PostRepository $postRepository
-     */
     public function __construct(
         UserService $userService,
         CommentRepository $commentRepository,
@@ -125,7 +79,7 @@ class CustomerIoSyncEventListener
         ThreadRepository $threadRepository,
         PostRepository $postRepository,
         ContentService $contentService,
-        PaymentRepository $paymentRepository
+        ProductService $productService
     ) {
         $this->userService = $userService;
         $this->commentRepository = $commentRepository;
@@ -133,7 +87,7 @@ class CustomerIoSyncEventListener
         $this->threadRepository = $threadRepository;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
-        $this->paymentRepository = $paymentRepository;
+        $this->productService = $productService;
     }
 
     /**
@@ -199,155 +153,7 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param PaymentMethodCreated $paymentMethodCreated
-     */
-    public function handleUserPaymentMethodCreated(PaymentMethodCreated $paymentMethodCreated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            if ($paymentMethodCreated->getUser() instanceof User) {
-                $this->handleUserPaymentMethodUpdated(
-                    new PaymentMethodUpdated(
-                        $paymentMethodCreated->getPaymentMethod(),
-                        $paymentMethodCreated->getPaymentMethod(),
-                        $paymentMethodCreated->getUser()
-                    )
-                );
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param PaymentMethodUpdated $paymentMethodUpdated
-     */
-    public function handleUserPaymentMethodUpdated(PaymentMethodUpdated $paymentMethodUpdated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            if (!empty(
-                $paymentMethodUpdated->getUser()
-                    ->getId()
-                ) && $paymentMethodUpdated->getUser() instanceof User && !in_array(
-                    $paymentMethodUpdated->getUser()
-                        ->getId(),
-                    self::$alreadyQueuedUserIds
-                )) {
-                $userId = $paymentMethodUpdated->getUser()->getId();
-                $user = $this->userService->getByIdOrNull($userId);
-
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param UserProductCreated $userProductCreated
-     */
-    public function handleUserProductCreated(UserProductCreated $userProductCreated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $userId = $userProductCreated->getUserProduct()
-                ->getUser()
-                ->getId();
-            $user = $this->userService->getByIdOrNull($userId);
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param UserProductUpdated $userProductUpdated
-     */
-    public function handleUserProductUpdated(UserProductUpdated $userProductUpdated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $userId = $userProductUpdated->getNewUserProduct()
-                ->getUser()
-                ->getId();
-            $user = $this->userService->getByIdOrNull($userId);
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param UserProductDeleted $userProductDeleted
-     */
-    public function handleUserProductDeleted(UserProductDeleted $userProductDeleted)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $userId = $userProductDeleted->getUserProduct()
-                ->getUser()
-                ->getId();
-            $user = $this->userService->getByIdOrNull($userId);
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated)
+    public function handleUserAccessPermissionsUpdated(UserAccessPermissionsUpdated $userAccessPermissionsUpdated): void
     {
         if (self::$disable) {
             return;
@@ -359,6 +165,7 @@ class CustomerIoSyncEventListener
 
             $data = $this->getCustomerIoDataFromOrders(
                 $user,
+                $userAccessPermissionsUpdated->getUserAccessPermissions(),
                 $userAccessPermissionsUpdated->getOrderCollection(),
                 $userAccessPermissionsUpdated->getSubscriptions()
             );
@@ -375,149 +182,6 @@ class CustomerIoSyncEventListener
             }
         } catch (Throwable $throwable) {
             Log::error($throwable);
-        }
-    }
-
-    /**
-     * @param SubscriptionCreated $subscriptionCreated
-     */
-    public function handleSubscriptionCreated(SubscriptionCreated $subscriptionCreated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            if (!empty(
-                $subscriptionCreated->getSubscription()
-                    ->getUser() &&
-                $subscriptionCreated->getSubscription()
-                    ->getUser() instanceof User
-            )) {
-                $userId = $subscriptionCreated->getSubscription()
-                    ->getUser()
-                    ->getId();
-                $user = $this->userService->getByIdOrNull($userId);
-
-                if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                    dispatch(
-                        (new CustomerIoSyncUserByUserId($user))->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
-                    );
-
-                    self::$alreadyQueuedUserIds[] = $user->id;
-                }
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param SubscriptionUpdated $subscriptionUpdated
-     */
-    public function handleSubscriptionUpdated(SubscriptionUpdated $subscriptionUpdated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        $newSubscription = $subscriptionUpdated->getNewSubscription();
-
-        try {
-            $user = $newSubscription->getUser();
-
-            if ($user instanceof EcommerceUser) {
-                $userId = $newSubscription->getUser()
-                    ->getId();
-                $user = $this->userService->getByIdOrNull($userId);
-            }
-
-            if ($user instanceof User) {
-                if (!in_array($user->id, self::$alreadyQueuedUserIds)) {
-                    dispatch(
-                        (new CustomerIoSyncUserByUserId($user))->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
-                    );
-
-                    self::$alreadyQueuedUserIds[] = $user->id;
-                }
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param AppSignupStartedEvent $appSignupStarted
-     */
-    public function handleAppSignupStarted(AppSignupStartedEvent $appSignupStarted)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            // todo: sync event for this: brand_onboarding_app_sign-up-flow-started
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param AppSignupFinishedEvent $appSignupFinished
-     */
-    public function handleAppSignupFinished(AppSignupFinishedEvent $appSignupFinished)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            // todo: sync event for this: brand_onboarding_app_sign-up-flow-finished
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param SubscriptionRenewed $subscriptionRenewed
-     */
-    public function handleSubscriptionRenewed(SubscriptionRenewed $subscriptionRenewed)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $this->syncSubscriptionRenew($subscriptionRenewed->getSubscription());
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param SubscriptionRenewFailed $subscriptionRenewFailed
-     */
-    public function handleSubscriptionRenewalAttemptFailed(SubscriptionRenewFailed $subscriptionRenewFailed)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        if ($subscriptionRenewFailed->getSubscription()
-                ->getIsActive() == false &&
-            $subscriptionRenewFailed->getSubscription()
-                ->getCanceledOn() == null &&
-            $subscriptionRenewFailed->getSubscription()
-                ->getStopped() == false &&
-            $subscriptionRenewFailed->getSubscription()
-                ->getPaidUntil() < Carbon::now()) {
-            // todo
         }
     }
 
@@ -795,40 +459,6 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param OrderEvent $orderEvent
-     */
-    public function handleOrderPlaced(OrderEvent $orderEvent)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $this->syncOrder($orderEvent->getOrder(), $orderEvent->getPayment());
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param PaymentEvent $paymentEvent
-     */
-    public function handlePaymentPaid(PaymentEvent $paymentEvent)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            //inefficient but reload payment to get all data
-            $payment = $this->paymentRepository->find($paymentEvent->getPayment()->getId());
-            $this->syncPayment($payment);
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
      * @param FirstActivityPerDay $activityEvent
      */
     public function handleFirstActivityPerDay(FirstActivityPerDay $activityEvent)
@@ -886,196 +516,6 @@ class CustomerIoSyncEventListener
                 );
 
                 self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    public function syncOrder($order, $payment, $onlyMusoraEvent = false)
-    {
-        try {
-            if (!empty($order) && !empty($order->getUser())) {
-                $productIds = [];
-
-                foreach ($order->getOrderItems() as $orderItem) {
-                    $productIds[] =
-                        $orderItem->getProduct()
-                            ->getId();
-                }
-
-                $data = [
-                    'product_id' => $productIds,
-                    'amount_paid' => $payment ? $payment->getTotalPaid() : $order->getTotalPaid(),
-                    'amount_due' => $order->getTotalDue(),
-                    'timestamp' => $order->getCreatedAt()->timestamp,
-                ];
-
-                if (!$onlyMusoraEvent) {
-                    dispatch(
-                        (new CustomerIoCreateEventByUserId(
-                            $order->getUser()
-                                ->getId(),
-                            $order->getBrand(),
-                            $order->getBrand() . '_user_order',
-                            $data,
-                            null,
-                            $order->getCreatedAt()->timestamp
-                        ))->delay(
-                            Carbon::now()
-                                ->addSeconds(30)
-                        )
-                    );
-                }
-
-                $data['brand'] = $order->getBrand();
-
-                dispatch(
-                    (new CustomerIoCreateEventByUserId(
-                        $order->getUser()
-                            ->getId(),
-                        $order->getBrand(),
-                        'musora_user_order',
-                        $data,
-                        null,
-                        $order->getCreatedAt()->timestamp
-                    ))->delay(
-                        Carbon::now()
-                            ->addSeconds(30)
-                    )
-                );
-
-                if (!$onlyMusoraEvent) {
-                    // trigger pack specific events
-                    $skuToEventNameMap = config(
-                        'event-data-synchronizer.customer_io_pack_sku_to_purchase_event_name',
-                        []
-                    );
-
-                    foreach (
-                        $order->getOrderItems() as $orderItem
-                    ) {
-                        if (array_key_exists(
-                            $orderItem->getProduct()
-                                ->getSku(),
-                            $skuToEventNameMap
-                        )) {
-                            dispatch(
-                                (new CustomerIoCreateEventByUserId(
-                                    $order->getUser()
-                                        ->getId(),
-                                    $order->getBrand(),
-                                    $order->getBrand() .
-                                    '_pack_' .
-                                    $skuToEventNameMap[$orderItem->getProduct()
-                                        ->getSku()],
-                                    [
-                                        'amount_paid' => $orderItem->getFinalPrice(),
-                                    ],
-                                    null,
-                                    $order->getCreatedAt()->timestamp
-                                ))->delay(
-                                    Carbon::now()
-                                        ->addSeconds(30)
-                                )
-                            );
-                        }
-                    }
-                }
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    public function syncPayment(Payment $payment)
-    {
-        try {
-            if (!empty($payment)) {
-                $order = $payment->getOrder();
-                $subscription = $payment->getSubscription();
-                $productIds = [];
-                $userId = null;
-
-                if (!empty($order)) {
-                    // order initial payment
-                    foreach ($order->getOrderItems() as $orderItem) {
-                        $productIds[] = $orderItem->getProduct()->getId();
-                    }
-                    $userId = $order->getUser()->getId();
-                } elseif (!empty($subscription) && !empty($subscription->getProduct())) {
-                    // membership renewal payment
-                    $productIds[] = $subscription->getProduct()->getId();
-                    $userId = $subscription->getUser()->getId();
-                } elseif (!empty($subscription) && empty($subscription->getProduct()) && !empty(
-                    $subscription->getOrder()
-                    )
-                    && $subscription->getType() == Subscription::TYPE_PAYMENT_PLAN) {
-                    // payment plan renewal payment
-                    foreach ($subscription->getOrder()->getOrderItems() as $orderItem) {
-                        $productIds[] = $orderItem->getProduct()->getId();
-                    }
-                    $userId = $subscription->getUser()->getId();
-                }
-
-                $data = [
-                    'product_id' => implode(", ", $productIds),
-                    'amount_paid' => $payment->getTotalPaid(),
-                    'payment_type' => $payment->getType(),
-                    'subscription_type' => $subscription ? $subscription->getType() : null,
-                    'payment_plan_id' => $payment->getId(),
-                    'status' => $payment->getStatus(),
-                    'brand' => $payment->getGatewayName(),
-                    'payment_source' => $payment->getExternalProvider(),
-                    'payment_info' => $payment->getMessage(),
-                    'payment_timestamp' => $payment->getCreatedAt()->timestamp
-                ];
-
-                $paymentId = $payment->getId();
-                //Log::debug("CustomerIoSyncEventListener::syncPayment paymentId:$paymentId userId:$userId");
-                //Log::debug(print_r($data, true));
-
-                if ($userId) {
-                    dispatch(
-                        (new CustomerIoCreateEventByUserId(
-                            $userId,
-                            $payment->getGatewayName(),
-                            'musora_user_payment',
-                            $data,
-                            null,
-                            $payment->getCreatedAt()->timestamp
-                        ))->delay(
-                            Carbon::now()
-                                ->addSeconds(3)
-                        )
-                    );
-                } else {
-                    Log::error("syncPayment: Unable to get userId from payment $paymentId");
-                }
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param $subscription
-     */
-    public function syncSubscriptionRenew($subscription)
-    {
-        try {
-            if (!empty($subscription) && !empty($subscription->getUser())) {
-                dispatch(
-                    (new CustomerIoCreateEventByUserId(
-                        $subscription->getUser()
-                            ->getId(), $subscription->getBrand(), $subscription->getBrand() . '_membership_renewed', [
-                        'membership_rate' => $subscription->getTotalPrice(),
-                    ], null, $subscription->getCreatedAt()->timestamp
-                    ))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -1255,25 +695,22 @@ class CustomerIoSyncEventListener
     }
 
 
-    /**
-     * @param AccessCodeClaimed $accessCodeClaimed
-     */
     public function handleAccessCodeClaimed(AccessCodeClaimed $accessCodeClaimed)
     {
         $accessCode = $accessCodeClaimed->getAccessCode();
-        $brand = $accessCode->getBrand();
+        $brand = $accessCode->brand;
 
         dispatch(
             (new CustomerIoCreateEventByUserId(
-                $accessCodeClaimed->getUser()->getId(),
+                $accessCodeClaimed->getUser()->id,
                 $brand,
                 'musora_membership_non_recurring_access_added',
                 [
                     'brand_source' => $brand,
-                    'access_method' => $accessCode->getCode(),
-                    'access_source' => $accessCode->getSource(),
-                    'access_added_timestamp' => $accessCode->getUpdatedAt()->timestamp,
-                    'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
+                    'access_method' => $accessCode->code,
+                    'access_source' => $accessCode->source,
+                    'access_added_timestamp' => Carbon::parse($accessCode->updated_at)->timestamp,
+                    'code_creation_date' => Carbon::parse($accessCode->created_at)->timestamp,
                     'product_ids' => $accessCode->getProductIdsAsString(),
                     'referrer_id' => null,
                     'musora_id' => null
@@ -1282,82 +719,6 @@ class CustomerIoSyncEventListener
             ))->delay(
                 Carbon::now()
                     ->addSeconds(3)
-            )
-        );
-
-        //        dispatch(
-        //            (new CustomerIoCreateEventByUserId(
-        //                $accessCodeClaimed->getUser()->getId(),
-        //                $brand,
-        //                'musora_membership_access',
-        //                [
-        //                    'access_type' => 'manual_access_type',
-        //                    'access_start_date' => '',
-        //                    'access_expiration_date' => '',
-        //
-        //                ],
-        //                null,
-        //                Carbon::now()->timestamp
-        //            ))
-        //                ->delay(
-        //                    Carbon::now()
-        //                        ->addSeconds(3)
-        //                )
-        //        );
-    }
-
-    public function handleMobilePaymentPlaced(MobilePaymentEvent $mobileOrderEvent)
-    {
-        $latestPayment =
-            ($mobileOrderEvent->getSubscription()
-                ->getLatestPayment());
-        $amountPaid = ($latestPayment) ? $latestPayment->getTotalPaid() : 0;
-        $amountDue = ($latestPayment) ? $latestPayment->getTotalDue() : 0;
-        $productIds =
-            [
-                $mobileOrderEvent->getSubscription()
-                    ->getProduct()
-                    ->getId(),
-            ];
-
-        $data = [
-            'product_id' => $productIds,
-            'amount_paid' => $amountPaid,
-            'amount_due' => $amountDue,
-            'timestamp' => $mobileOrderEvent->getSubscription()->getUpdatedAt()->timestamp
-        ];
-
-        $brand = $mobileOrderEvent->getSubscription()->getProduct()->getBrand();
-
-        dispatch(
-            (new CustomerIoCreateEventByUserId(
-                $mobileOrderEvent->getSubscription()->getUser()
-                    ->getId(),
-                $brand,
-                $brand . '_user_order',
-                $data,
-                null,
-                $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(30)
-            )
-        );
-
-        $data['brand'] = $brand;
-
-        dispatch(
-            (new CustomerIoCreateEventByUserId(
-                $mobileOrderEvent->getSubscription()->getUser()
-                    ->getId(),
-                $brand,
-                'musora_user_order',
-                $data,
-                null,
-                $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
-            ))->delay(
-                Carbon::now()
-                    ->addSeconds(30)
             )
         );
     }
@@ -1424,10 +785,35 @@ class CustomerIoSyncEventListener
         );
     }
 
-    private function getCustomerIoDataFromOrders(User $user, ?OrderCollection $orderCollection, $subscriptions): array
-    {
+    private function getCustomerIoDataFromOrders(
+        User $user,
+        UserAccessPermissionsCollection $userAccessPermissionsCollection,
+        ?OrderCollection $orderCollection,
+        $subscriptions
+    ): array {
         $attributes = $this->getOrderAttributes($orderCollection);
-        return array_merge($attributes, $this->getSubscriptionAttributes($user, $subscriptions));
+        $permissionsAttributes = $this->getPermissionsAttributes($userAccessPermissionsCollection);
+        $subscriptionAttributes = $this->getSubscriptionAttributes($user, $subscriptions);
+        return array_merge($attributes, $permissionsAttributes, $subscriptionAttributes);
+    }
+
+    public function getPermissionsAttributes(UserAccessPermissionsCollection $userAccessPermissionsCollection)
+    {
+        $attributes = [];
+        $packProductLookup = $this->productService->getPackProductsByOwnedProductIds(
+            $userAccessPermissionsCollection->getActiveProductIds()
+        )->groupBy('brand');
+
+        $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
+
+        foreach ($brands as $brand) {
+            $ownedPackIds = $this->getOwnedPackIds($brand, $packProductLookup);
+            $attributes[$brand . '_owned_pack_product_ids'] = implode(', ', $ownedPackIds);
+
+            $ownedPackSkus = $this->getOwnedPackSkus($brand, $packProductLookup);
+            $attributes[$brand . '_owned_pack_product_skus'] = implode(', ', $ownedPackSkus);
+        }
+        return $attributes;
     }
 
     public function getOrderAttributes(?OrderCollection $orderCollection): array
@@ -1452,22 +838,6 @@ class CustomerIoSyncEventListener
             return 'unknown';
         });
 
-        $packsOrderItemLookup = $orderCollection->getOrders()->flatMap(function ($order) {
-            /** @var Order $order */
-            return $order->lineItems->filter(function ($orderLineItem) {
-                /** @var OrderLineItem $orderLineItem */
-                return $orderLineItem->product
-                    && $orderLineItem->product->isDigital()
-                    && $orderLineItem->product->isPack();
-            });
-        })->groupBy(function ($orderLineItem) {
-            /** @var OrderLineItem $orderLineItem */
-            if ($orderLineItem->product) {
-                return $orderLineItem->product->brand;
-            }
-            return 'unknown';
-        });
-
         $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
 
         foreach ($brands as $brand) {
@@ -1477,31 +847,23 @@ class CustomerIoSyncEventListener
             });
 
             $first = $orderItems->first();
-            $attributes[$brand . '_membership_first-access-start-date'] = $first ? $first->order->processedAt->timestamp : null;
-            $last = $orderItems->last();
-            $attributes[$brand . '_membership_latest-access-start-date'] = $last ? $last->order->processedAt->timestamp : null;
+            if ($first) {
+                $attributes[$brand . '_membership_first-access-start-date'] = $first->order->processedAt->timestamp;
+            }
 
-            $packs = $packsOrderItemLookup[$brand] ?? collect();
-            $attributes[$brand . '_owned_pack_product_ids'] = implode(
-                ', ',
-                $packs->map(function ($item) {
-                    /** @var OrderLineItem $item */
-                    return "_" . $item->product->id . "_";
-                })->toArray()
-            );
-            $attributes[$brand . '_owned_pack_product_skus'] = implode(
-                ', ',
-                $packs->map(function ($item) {
-                    /** @var OrderLineItem $item */
-                    return "_" . $item->product->sku . "_";
-                })->toArray()
-            );
+            $last = $orderItems->last();
+            if ($last) {
+                $attributes[$brand . '_membership_latest-access-start-date'] = $last->order->processedAt->timestamp;
+            }
         }
         return $attributes;
     }
 
-    private function getSubscriptionAttributes(User $user, $subscriptions): array
-    {
+    private
+    function getSubscriptionAttributes(
+        User $user,
+        $subscriptions
+    ): array {
         if (!$subscriptions) {
             return [];
         }
@@ -1541,8 +903,10 @@ class CustomerIoSyncEventListener
         return $attributes;
     }
 
-    public function getSubscriptionStatus(RechargeSubscription $subscription): string
-    {
+    public
+    function getSubscriptionStatus(
+        RechargeSubscription $subscription
+    ): string {
         return match ($subscription->status) {
             RechargeSubscriptionStatusEnum::Active->value => 'active',
             RechargeSubscriptionStatusEnum::Cancelled->value => 'cancelled',
@@ -1551,8 +915,10 @@ class CustomerIoSyncEventListener
         };
     }
 
-    private function getTrialType(RechargeSubscription $latest): string
-    {
+    private
+    function getTrialType(
+        RechargeSubscription $latest
+    ): string {
         if (!$latest->product->isTrial()) {
             return "";
         }
@@ -1578,5 +944,25 @@ class CustomerIoSyncEventListener
         }
 
         return $interval . "_" . $days . "_days_free";
+    }
+
+    public function getOwnedPackIds(string $brand, $packProductLookup): array
+    {
+        $packIds = ($packProductLookup[$brand] ?? collect())
+            ->map(function (Product $product) {
+                return "_" . $product->id . "_";
+            })->toArray();
+
+        return $packIds;
+    }
+
+    public function getOwnedPackSkus(string $brand, $packProductLookup): array
+    {
+        $packSkus = ($packProductLookup[$brand] ?? collect())
+            ->map(function (Product $product) {
+                return "_" . $product->sku . "_";
+            })->toArray();
+
+        return $packSkus;
     }
 }

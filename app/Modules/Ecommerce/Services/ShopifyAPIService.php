@@ -999,6 +999,58 @@ class ShopifyAPIService
         return $jsonResponse["data"]["cartDiscountCodesUpdate"]["cart"];
     }
 
+
+    public function updateCartAttributes($cartId, array $attributes)
+    {
+        $attributesKeyValueStringArray = [];
+
+        foreach ($attributes as $attributeKey => $attributeValue) {
+            $attributesKeyValueStringArray[] = [
+                'key' => $attributeKey,
+                'value' => $attributeValue
+            ];
+        }
+
+        $updateCartAttributesInputLineString = $this->jsonStringToGraphQLObjectString(
+            json_encode($attributesKeyValueStringArray, JSON_UNESCAPED_SLASHES)
+        );
+
+        $cartString = self::cartGraphQLReturnDataString;
+        $userErrorString = self::userErrorsGraphQLReturnDataString;
+
+        $cartData = $this->storefrontClient->query(
+            <<<GRAPHQL
+                mutation {
+                    cartAttributesUpdate(
+                        attributes: $updateCartAttributesInputLineString
+                        cartId: "$cartId",
+                    ) {
+                    $cartString
+                    $userErrorString
+                }
+            }
+            GRAPHQL,
+        );
+
+        $responseBody = $cartData->getBody()->getContents();
+
+        $responseCode = $cartData->getStatusCode();
+
+        $jsonResponse = json_decode($responseBody, true);
+
+        $responseCartData = $jsonResponse["data"]["cartAttributesUpdate"]["cart"] ?? [];
+
+        if ($responseCode !== 200 || empty($responseCartData)) {
+            throw new Exception(
+                "Shopify API call (cartAttributesUpdate) error: " .
+                "HTTP status code: $responseCode - " .
+                "HTTP response body: $responseBody"
+            );
+        }
+
+        return $jsonResponse["data"]["cartAttributesUpdate"]["cart"];
+    }
+
     private function jsonStringToGraphQLObjectString($jsonString)
     {
         return preg_replace('/"([^"]+)"\s*:\s*/', '$1:', $jsonString);

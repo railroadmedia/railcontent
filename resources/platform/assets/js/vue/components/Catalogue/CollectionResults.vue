@@ -14,7 +14,6 @@
 </template>
 
 <script setup>
-
 import { onMounted, onUnmounted, onUpdated } from "vue";
 import { storeToRefs } from "pinia";
 
@@ -27,7 +26,7 @@ const props = defineProps({
     },
     infiniteScroll: {
         type: Boolean,
-        default: false,
+        default: true,
     },
     totalPages: {
         type: Number,

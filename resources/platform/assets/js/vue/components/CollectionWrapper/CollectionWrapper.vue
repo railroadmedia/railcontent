@@ -1,13 +1,14 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :sort-options="collectionStore.getSortOptions()" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
-                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" :activeTab="getActiveTab" />
+                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
                 <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
@@ -55,7 +56,6 @@ import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCata
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "../../vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "../Packs/PackCatalogue";
-
 
 const props = defineProps({
     collectionType: {
@@ -144,12 +144,16 @@ const props = defineProps({
     sortOptions: {
         type: Array,
         default: () => [
-            { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
-            { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
-            { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
-            { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
-            { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
-        ],
+            {value: '-published_on', name: 'Newest First', icon: 'sort-down',},
+            {value: 'published_on', name: 'Oldest First', icon: 'sort-up',},
+            {value: '-popularity', name: 'Most Popular', icon: 'sort-popularity',},
+            {value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc',},
+            {value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc',},
+        ]
+    },
+    searchPlaceholder: {
+        type: String,
+        default: 'Search',
     },
 });
 
@@ -167,6 +171,7 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
+        ...(isPack.value && { without_enrollment: false })
     };
 })
 
@@ -367,7 +372,7 @@ onBeforeMount(() => {
         content: props.preLoadedContent,
         filter: {
             params: { ...request_params.value },
-            [isThreads.value ? 'term' : 'title']: '',
+            [isThreads.value || isCoach.value ? 'term' : 'title']: '',
             sort: props.defaultSort,
         },
         tabData: getTabData.value,

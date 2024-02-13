@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Ecommerce\database\factories\AccessCodeFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,17 +33,30 @@ use Modules\UserManagementSystem\Models\User;
  */
 class AccessCode extends Model
 {
+    use HasFactory;
+
     protected $table = 'ecommerce_access_codes';
     protected $primaryKey = 'id';
 
+
+    public static function generateNewCode(): string
+    {
+        return bin2hex(openssl_random_pseudo_bytes(24 / 2));
+    }
+
+    protected static function newFactory(): AccessCodeFactory
+    {
+        return AccessCodeFactory::new();
+    }
+
     public function generateCode(): void
     {
-        $this->setCode(bin2hex(openssl_random_pseudo_bytes(24 / 2)));
+        $this->code = self::generateNewCode();
     }
 
     public function getProductIdsAsString(): ?string
     {
-        return implode(", ", $this->product_ids);
+        return implode(", ", unserialize($this->product_ids));
     }
 
     public function claimer()

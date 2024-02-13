@@ -1,5 +1,17 @@
 <?php
 
+// DEV NOTE: allow for .env entries for route_middleware_public_groups.
+// Use a comma-separated list, or to disable it use false. Empty or non-existent entries will use the default.
+$route_middleware_public_groups = ['web_or_api_public'];
+if(env('ECOMMERCE_ROUTE_MIDDLEWARE_PUBLIC_GROUPS') === false) {
+    $route_middleware_public_groups = [];
+} elseif (env('ECOMMERCE_ROUTE_MIDDLEWARE_PUBLIC_GROUPS')) {
+    $route_middleware_public_groups = [];
+    foreach (explode(',', env('ECOMMERCE_ROUTE_MIDDLEWARE_PUBLIC_GROUPS')) as $ip) {
+        $route_middleware_public_groups[] = $ip;
+    }
+}
+
 return [
     'development_mode' => env('APP_DEBUG', true),
 
@@ -45,7 +57,7 @@ return [
     // routes
     'route_prefix' => 'ecommerce',
     'autoload_all_routes' => true,
-    'route_middleware_public_groups' => ['web_or_api_public'],
+    'route_middleware_public_groups' => $route_middleware_public_groups,
     'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
     'route_middleware_mobile_app_receipt_validation_groups' => ['api_public'],
 
@@ -1056,5 +1068,8 @@ return [
     'launch_dates' => [
         'unified' => '2023-01-01',
         'shopify' => '2023-11-08',
+    ],
+    'launch_date_times' => [
+        'shopify' => '2023-11-08T08:34:00-08:00',
     ],
 ];

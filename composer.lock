@@ -10371,12 +10371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "3f2b30e83ea5ab539165fe7db5fe1ba96774db65"
+                "reference": "50bd2ee9a15e2b60447a16b8eb46c773cb568e04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3f2b30e83ea5ab539165fe7db5fe1ba96774db65",
-                "reference": "3f2b30e83ea5ab539165fe7db5fe1ba96774db65",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/50bd2ee9a15e2b60447a16b8eb46c773cb568e04",
+                "reference": "50bd2ee9a15e2b60447a16b8eb46c773cb568e04",
                 "shasum": ""
             },
             "require": {
@@ -10433,7 +10433,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-02-08T17:39:36+00:00"
+            "time": "2024-02-13T09:56:36+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16262,16 +16262,16 @@
         },
         {
             "name": "yoramdelangen/laravel-pdo-odbc",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/appsfortableau/laravel-pdo-odbc.git",
-                "reference": "128bb2a2f4f459ad3dc3cdf31c72c9b63c10562f"
+                "reference": "1a0bef6f2cb4f909062de5c4faa3d413eb0b9a5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/appsfortableau/laravel-pdo-odbc/zipball/128bb2a2f4f459ad3dc3cdf31c72c9b63c10562f",
-                "reference": "128bb2a2f4f459ad3dc3cdf31c72c9b63c10562f",
+                "url": "https://api.github.com/repos/appsfortableau/laravel-pdo-odbc/zipball/1a0bef6f2cb4f909062de5c4faa3d413eb0b9a5d",
+                "reference": "1a0bef6f2cb4f909062de5c4faa3d413eb0b9a5d",
                 "shasum": ""
             },
             "require": {
@@ -16308,24 +16308,24 @@
             "homepage": "https://github.com/yoramdelangen/laravel-odbc",
             "support": {
                 "issues": "https://github.com/appsfortableau/laravel-pdo-odbc/issues",
-                "source": "https://github.com/appsfortableau/laravel-pdo-odbc/tree/1.2.3"
+                "source": "https://github.com/appsfortableau/laravel-pdo-odbc/tree/1.2.4"
             },
-            "time": "2023-07-14T12:41:22+00:00"
+            "time": "2024-01-15T14:30:34+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.10.1",
+            "version": "v3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "665069c452c30f64c07b6e7ede68c338b96678c7"
+                "reference": "60d3f5d6298a8b23028927302318856e50cbe59b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/665069c452c30f64c07b6e7ede68c338b96678c7",
-                "reference": "665069c452c30f64c07b6e7ede68c338b96678c7",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/60d3f5d6298a8b23028927302318856e50cbe59b",
+                "reference": "60d3f5d6298a8b23028927302318856e50cbe59b",
                 "shasum": ""
             },
             "require": {
@@ -16384,7 +16384,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.1"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.2"
             },
             "funding": [
                 {
@@ -16396,7 +16396,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-12T14:22:59+00:00"
+            "time": "2024-02-13T09:14:41+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -19348,5 +19348,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.6.0"
 }

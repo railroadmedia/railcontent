@@ -61,13 +61,15 @@
     </div>
 
     <div class="ml-auto flex items-center">
-        <a href="/choose-plan" class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 pb-1.5 px-3 md:pb-3 md:pt-4 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">
+        <a class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 pb-1.5 px-3 md:pb-3 md:pt-4 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
+            @if(!empty($scrollToJoin)) href="#customize-anchor" @else href="/choose-plan" @endif
+        >
             Start for free &nbsp; <i class="fas fa-arrow-right mb-1" style="line-height: 0;" aria-hidden="true"></i>
         </a>
     </div>
 
     <!-- Sidebar Toggle -->
-    <button class="@if(!empty($whiteNav)) invert @endif text-white w-10 h-10 md:w-14 md:h-14 relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
+    <button class="@if(!empty($whiteNav)) invert @endif @if(!empty($hideMenu)) opacity-0 px-1 w-0 @else w-10 h-10 md:w-14 md:h-14 @endif text-white relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
         <span class="sr-only">Open main menu</span>
         <div class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out" x-bind:class="{'rotate-45': sidebarOpen,' -translate-y-1.5': !sidebarOpen }"></span>
