@@ -71,6 +71,10 @@ class ContentJsonController extends Controller
         if ($request->has('count_filter_items')) {
             ContentRepository::$countFilterOptionItems = $request->has('count_filter_items');
         }
+        if ($request->has('without_enrollment')) {
+            ContentRepository::$getEnrollmentContent = !$request->has('without_enrollment');
+        }
+
         $futureScheduledContentOnly = false;
         if ($request->has('include_future_scheduled_content_only') && $request->get('include_future_scheduled_content_only') != 'false') {
             ContentRepository::$pullFutureContent = true;
