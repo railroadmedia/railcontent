@@ -10137,12 +10137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "0a0959c1e5ebf345d300c29c091e32b4a7628921"
+                "reference": "18fc482df5d0475dec8e8a0594a8cd9ca92c4e32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0a0959c1e5ebf345d300c29c091e32b4a7628921",
-                "reference": "0a0959c1e5ebf345d300c29c091e32b4a7628921",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/18fc482df5d0475dec8e8a0594a8cd9ca92c4e32",
+                "reference": "18fc482df5d0475dec8e8a0594a8cd9ca92c4e32",
                 "shasum": ""
             },
             "require": {
@@ -10174,7 +10174,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
             },
-            "time": "2024-02-06T13:52:53+00:00"
+            "time": "2024-02-08T17:43:06+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10371,12 +10371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "1dd411f2b2d0d1299886625bc68036a4da6d4284"
+                "reference": "50bd2ee9a15e2b60447a16b8eb46c773cb568e04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1dd411f2b2d0d1299886625bc68036a4da6d4284",
-                "reference": "1dd411f2b2d0d1299886625bc68036a4da6d4284",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/50bd2ee9a15e2b60447a16b8eb46c773cb568e04",
+                "reference": "50bd2ee9a15e2b60447a16b8eb46c773cb568e04",
                 "shasum": ""
             },
             "require": {
@@ -10433,7 +10433,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-02-07T13:00:08+00:00"
+            "time": "2024-02-13T09:56:36+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19341,5 +19341,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
