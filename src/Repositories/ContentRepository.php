@@ -1649,9 +1649,9 @@ class ContentRepository extends RepositoryBase
      * @param $userId null
      * @return $this
      */
-    public function requireUserStates($state, $userId = null)
+    public function requireUserStates($state, $userId = null,$operator = '=')
     {
-        $this->requiredUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
+        $this->requiredUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id(), 'operator' => $operator];
 
         return $this;
     }

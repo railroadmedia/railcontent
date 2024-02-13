@@ -314,7 +314,7 @@ class ContentQueryBuilder extends QueryBuilder
                         )
                         ->on(
                             $tableName.'.state',
-                            '=',
+                            $requiredUserState['operator'],
                             $joinClause->raw(
                                 DB::connection()
                                     ->getPdo()
