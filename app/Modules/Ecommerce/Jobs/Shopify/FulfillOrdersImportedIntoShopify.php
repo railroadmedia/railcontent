@@ -17,6 +17,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\Shopify;
 
@@ -52,8 +53,9 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
      */
     public function __construct(
         protected ?string $endCursor,
-        protected ?int $limit,
         protected ?int $customerId,
+        protected string $startProcessedAt,
+        protected string $endProcessedAt,
         protected bool $simulate,
     ) {
     }
@@ -92,15 +94,11 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
         $this->printResults();
 
-        // if we have a limit set, calculate the remainder
-        $limitRemaining = is_null($this->limit) ? 1 : max($this->limit - self::PAGE_SIZE, 0);
-
         // if there are more results to get, add another job to the batch
-        if ($this->hasNextPage && $limitRemaining) {
-            $newLimit = is_null($this->limit) ? null : $limitRemaining;
+        if ($this->hasNextPage) {
             // create another job to do the next batch
             $this->batch()->add(
-                new FulfillOrdersImportedIntoShopify($this->endCursor, $newLimit, $this->customerId, $this->simulate)
+                new FulfillOrdersImportedIntoShopify($this->endCursor, $this->customerId, $this->startProcessedAt, $this->endProcessedAt, $this->simulate)
             );
         }
     }
@@ -116,13 +114,13 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
     private function getOrderData(?string $endCursor): Collection
     {
         $date = config('ecommerce.launch_date_times.shopify');
-        $count = is_null($this->limit) ? self::PAGE_SIZE : min(self::PAGE_SIZE, $this->limit);
+        $count = self::PAGE_SIZE;
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
         $customerIdQuery = empty($this->customerId) ? "" : " AND customer_id:{$this->customerId}";
 
         $gql = <<<GQL
             query {
-                orders(first: $count, $cursor query: "created_at:<=\"$date\"$customerIdQuery AND financial_status:paid AND -fulfillment_status:shipped", sortKey: PROCESSED_AT) {
+                orders(first: $count, $cursor query: "created_at:<=\"$date\" AND processed_at:>=\"$this->startProcessedAt\" AND processed_at:<=\"$this->endProcessedAt\"$customerIdQuery AND financial_status:paid AND -fulfillment_status:shipped", sortKey: PROCESSED_AT) {
                     nodes {
                         ... on Order {
                             id,
@@ -374,10 +372,41 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
                     $fulfillmentResult = $this->shopify->createFulfillment($shopifyFulfillmentData);
                     $this->handleRateLimit();
 
+                    $fulfillmentId = $fulfillmentResult->getAttributes()["id"];
                     // store the shopify id on our order item fulfillment
                     foreach ($orderItemFulfillmentsToUpdate as $orderItemFulfillment) {
-                        $orderItemFulfillment->shopify_id = $fulfillmentResult->getAttributes()["id"];
+                        $orderItemFulfillment->shopify_id = $fulfillmentId;
                         $orderItemFulfillment->saveWithoutUpdatedAt();
+                    }
+
+                    // mark the fulfillment as delivered
+                    // DEV NOTE: there seems to be a bug with createOrderFulfillmentEvent, so we'll just work around it with a direct post
+                    try {
+                        $uriPrefix = ['orders', $shopifyOrderId, 'fulfillments', $fulfillmentId];
+                        $url = implode('/', [...$uriPrefix, "events.json"]);
+                        $data = ['event' => ['status' => 'delivered']];
+                        $fulfillmentEventResponse = $this->shopify->post($url, $data);
+                        $this->handleRateLimit();
+
+                        if ($fulfillmentEventResponse->failed()) {
+                            Log::error(
+                                sprintf(
+                                    "%s: Failed to mark fulfillment %s as delivered: %s.",
+                                    get_class($this),
+                                    $fulfillmentId,
+                                    $fulfillmentEventResponse->reason()
+                                )
+                            );
+                        }
+                    } catch (ValidationException $validationException) {
+                        Log::error(
+                            sprintf(
+                                "%s: Failed to mark fulfillment %s as delivered: %s.",
+                                get_class($this),
+                                $fulfillmentId,
+                                $validationException->getMessage()
+                            )
+                        );
                     }
                 }
             }
