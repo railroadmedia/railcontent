@@ -1920,6 +1920,8 @@ return [
         'zip_url',
         'enrollment_start_time',
         'enrollment_end_time',
+        'light_mode_logo_url',
+        'dark_mode_logo_url',
     ],
 
     'compiled_column_mapping_field_keys' => [
