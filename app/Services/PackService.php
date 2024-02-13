@@ -40,6 +40,7 @@ class PackService
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        ContentRepository::$getEnrollmentContent = false;
 
         $oldPullFutureContent = ContentRepository::$pullFutureContent;
         $oldAvailableContentStatues = ContentRepository::$availableContentStatues;
