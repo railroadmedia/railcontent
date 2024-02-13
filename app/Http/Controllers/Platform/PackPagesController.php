@@ -77,7 +77,9 @@ class PackPagesController extends Controller
         if ($request->has('title')) {
             $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
         }
-
+	if(user()->isPackOnlyOwner()){
+	    ContentRepository::$getEnrollmentContent = false;
+	}
         $packs = $this->packService->getPacks($requiredFields);
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
