@@ -34,10 +34,10 @@
         </button>
         <!-- Chapter Info Wrapper -->
         <div class="tw-w-full tw-flex tw-justify-between tw-items-center">
-          <div class="tw-w-[calc(100%-46px)] tw-flex tw-flex-col">
+          <div class="tw-flex-grow tw-flex tw-flex-col">
             <div class="tw-text-sm dark:tw-text-white">{{ formatTime(chapter.time) }}</div>
             <div class="tw-w-full tw-pr-2">
-                <p class="tw-truncate tw-font-bold dark:tw-text-white">{{ chapter.title }}</p>
+                <p class="tw-line-clamp-1 tw-font-bold dark:tw-text-white">{{ chapter.title }}</p>
             </div>
           </div>
           <div class="tw-hidden md:tw-flex tw-flex-shrink-0">
@@ -60,7 +60,7 @@
               Loop
             </button>
           </div>
-          <div class="md:tw-hidden">
+          <div class="tw-shrink-0 md:tw-hidden">
               <DropdownAlt :options="dropdownOptions" @practice="handleOpenSoundslice(chapter.title, index, chapter.time, false)" @loop="handleOpenSoundslice(chapter.title, index, chapter.time, true)" />
           </div>
 
