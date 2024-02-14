@@ -24,7 +24,7 @@
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress"
         :seeAllUrl="continueUrl" :preLoadedContent="startedContent.data" :isMiniView="true" :show-dropdown="true" />
     </div>
-    
+
     <!-- Song Results -->
     <div :class="`tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white songs-catalogue-container ${startedContent?.data?.length ? 'tw-mt-[14px] lg:tw-mt-[6px]' : 'tw-mt-[30px]'}`">
         <transition appear name="fade">
@@ -61,7 +61,7 @@ const props = defineProps({
         default: 0
     },
     startedContent: {
-        type: Object,
+        type: [Object, String],
         default: () => ({
             data: []
         })
