@@ -34,6 +34,17 @@ class ShopifyWebHookController extends Controller
         try {
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
+            $processedAt = $request->get('processed_at');
+
+            if ($processedAt) {
+                $launchDate = new Carbon(config('ecommerce.launch_date_times.shopify'));
+                $processedAtDate = new Carbon($processedAt);
+                if ($processedAtDate->isBefore($launchDate)) {
+                    Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring update.");
+                    return;
+                }
+            }
+
             Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
             dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -123,7 +134,7 @@ class ShopifyWebHookController extends Controller
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
 
-        dispatch(new ImpactTrackConversion($user,  $brand, $order))->delay(Carbon::now()->addSeconds(3));
+        dispatch(new ImpactTrackConversion($user,  $brand, $order, $this->productService))->delay(Carbon::now()->addSeconds(3));
     }
 
     private function handleOrderRefundEventTracking($order): void
@@ -181,6 +192,8 @@ class ShopifyWebHookController extends Controller
     private function getOrderEventData($order, string $brand): array
     {
         $paymentSource = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
+
+        Log::info('Testing shopify order webhook attributes data: ' . var_export($order['note_attributes'], true));
 
         return [
             'checkout_token' => $order['checkout_token'],

@@ -4,9 +4,10 @@ A simple but elegant content, user, and e-commerce management solution.
 
 ## Project setup
 
-in *musora/frontend/* run
+in *app/musora-web-platform/app/Modules/MusoraCenter/frontend* run
 
 ```
+cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend; 
 npm install
 ```
 
@@ -15,24 +16,14 @@ Then add the stripe public keys for both environments from 1Password.
 
 ## Bundling for local development
 ```
-npm run watch
-```
-
-## Bundling for staging
-If you need to use stripe test cards or javascript debugging files you must use "npm run dev",
-otherwise you can use "npm run build".
-```
-npm run dev
-```
-or
-```
-npm run build
+cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend; 
+npm run build;r mwp artisan vendor:publish --tag=public --force
 ```
 
 ## Bundling for production
 ```
-npm run build
-```
+cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend; 
+npm run build;r mwp artisan vendor:publish --tag=public --force```
 
 ## Creating a new patch version
 ```
