@@ -201,7 +201,7 @@ const logoStyle = computed(() => {
         return 'lg:tw-max-h-[50px]';
     }
 
-    if(title.value.includes('Rock Drumming Mastercard') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
+    if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
         return 'lg:tw-max-h-[40px]';
     }
 
