@@ -99,6 +99,10 @@ const props = defineProps({
                         key: 'Complete',
                         value: 'completed',
                     },
+                    {
+                        key: 'Not Started',
+                        value: 'notStarted',
+                    },
                 ],
             },
         ],
