@@ -48,7 +48,22 @@ export default {
             `${endpointPrefix}/railcontent/comment/${id}/assign-moderator`
         )
             .then(response => response.data)
-            .catch(error => ({ error: { ...error.response.data.meta.errors } }));
+            .catch(error => ({error: {...error.response.data}}))
+            .then(({response, error}) => {
+                console.log(error);
+                if (error) {
+                    let message = 'Oops something went wrong! Unable to assign moderator.';
+                    if (error && error?.meta?.errors?.detail) {
+                        message = 'Unable to assign moderator: ' + error.meta.errors.detail;
+                    }
+                    console.log(message);
+                    window.shownotification({
+                        icon: 'error',
+                        text: message
+                    })
+                }
+                return ({response, error});
+            });
     },
 
     commentUnassignModerator(id) {
@@ -56,7 +71,22 @@ export default {
             `${endpointPrefix}/railcontent/comment/${id}/unassign-moderator`
         )
             .then(response => response.data)
-            .catch(ErrorHandler);
+            .catch(error => ({error: {...error.response.data}}))
+            .then(({response, error}) => {
+                console.log(error);
+                if (error) {
+                    let message = 'Oops something went wrong! Unable to unassign moderator.';
+                    if (error && error?.meta?.errors?.detail) {
+                        message = 'Unable to unassign moderator: ' + error.meta.errors.detail;
+                    }
+                    console.log(message);
+                    window.shownotification({
+                        icon: 'error',
+                        text: message
+                    })
+                }
+                return ({response, error});
+            });
     },
 
     /**
