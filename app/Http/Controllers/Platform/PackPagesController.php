@@ -73,11 +73,17 @@ class PackPagesController extends Controller
 
     public function index(Request $request, $domain, $brand)
     {
-        PackDecorator::$skip = true;
-        $packs = $this->packService->getPacks();
+        $requiredFields = [];
+        if ($request->has('title')) {
+            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
+        }
+	if(user()->isPackOnlyOwner()){
+	    ContentRepository::$getEnrollmentContent = false;
+	}
+        $packs = $this->packService->getPacks($requiredFields);
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
-        foreach ($packs as $pack) {
+        foreach ($packs['results'] as $pack) {
             if ($pack['id'] == $activePack) {
                 $pack['status_text'] = "In Progress";
             }
@@ -85,7 +91,7 @@ class PackPagesController extends Controller
         }
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
-            foreach ($packs as $packIndex => $pack) {
+            foreach ($packs['results'] as $packIndex => $pack) {
                 // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
                 if ($pack['id'] == 353337) {
                     unset($pack[$packIndex]);
@@ -94,7 +100,7 @@ class PackPagesController extends Controller
         }
 
         return view('content.packs.packs-index', [
-            "packs" => $packs,
+            "packs" => $packs->toResponseRawJson(),
         ]);
     }
 
@@ -118,7 +124,9 @@ class PackPagesController extends Controller
         }
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
-
+        if ($packBundles->isEmpty()) {
+            return new NotFoundHttpException();
+        }
         $thisPackBundle = $packBundles[0];
 
         if (empty($thisPackBundle)) {
@@ -170,7 +178,7 @@ class PackPagesController extends Controller
             "backButton" => $backButton,
             "xpBonus" => $xpBonus,
             "themeColor" => "pack",
-            "nextLessonUrl" => '',
+            "nextLessonUrl" => $pack->fetch('next_lesson_url'),
         ]);
     }
 
@@ -275,7 +283,7 @@ class PackPagesController extends Controller
                 ->toResponseRawJson();
         }
 
-        return view('content.overview', [
+        return view('content.packs.pack-overview', [
             "pack" => $pack,
             "parentContent" => $thisPackBundle,
             "childContent" => $childContent->toResponseRawJson(),

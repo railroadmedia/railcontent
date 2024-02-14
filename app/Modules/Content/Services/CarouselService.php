@@ -96,11 +96,11 @@ class CarouselService
                 ->get();
         if(self::$workoutsPage){
             $carousel = $carousel->filter(function($slide){
-                return $slide->is_featured;
+                return $slide->show_on_workouts == 1;
             })->values();
         }else{
             $carousel = $carousel->filter(function($slide){
-                return (!$slide->is_featured || ($slide->is_featured && ($slide->show_on_homepage == 1)));
+                return $slide->show_on_homepage == 1;
             })->values();
         }
         $carousel->each(function (Carousel $slide) {
@@ -110,7 +110,7 @@ class CarouselService
                 if ($slide->challenge_id) {
                     $challenge = $this->contentService->getById($slide->challenge_id);
                 }
-                if($challenge && $challenge['challenge_state'] === 'upcoming'){
+                if($challenge && isset($challenge['challenge_state']) && $challenge['challenge_state'] === 'upcoming'){
                         $slide->primary_cta_text = 'Notify Me';
 
                         $slide->is_enrolled = false;

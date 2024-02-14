@@ -46,7 +46,7 @@ class PlaylistService
             $playlistItem = $this->userPlaylistsService->getPlaylistItemById($nextItem);
             if ($playlistItem) {
                 $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
-
+                $initialByPassPermissions = ContentRepository::$bypassPermissions;
                 ContentRepository::$bypassPermissions = true;
                 ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
                 $playlistItems =
@@ -56,7 +56,7 @@ class PlaylistService
                         20,
                         $page
                     );
-                ContentRepository::$bypassPermissions = false;
+                ContentRepository::$bypassPermissions = $initialByPassPermissions;
                 $playlistItem =
                     $playlistItems->where('user_playlist_item_id', '=', $nextItem)
                         ->first();

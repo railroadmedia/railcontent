@@ -43,13 +43,17 @@ class UserAccessPermissionsCollection
         return $this->user->id;
     }
 
-    public function getActiveDates(int|array $permissions, $includeBuffer = true, $includeFixedTimes = true): array
+    public function getActiveDates(int|array $permissions, $includeBuffer = true, $ignoreSources = []): array
     {
         $unifiedLaunchDate = Carbon::parse(config('ecommerce.launch_dates.unified'));
         if (is_integer($permissions)) {
             $userAccessPermissions = $this->permissionIdLookup[$permissions] ?? collect();
         } else {
             $userAccessPermissions = $this->collection->whereIn('permission_id', $permissions);
+        }
+
+        if (count($ignoreSources) > 0) {
+            $userAccessPermissions = $userAccessPermissions->whereNotIn('source', $ignoreSources);
         }
 
         if ($this->user->isAdmin() && (
@@ -104,7 +108,7 @@ class UserAccessPermissionsCollection
             $userAccessPermission->actualExpirationTime = $expirationDate;
         }
 
-        if ($includeFixedTimes && $maxFixedExpirationDate > $expirationDate) {
+        if ($maxFixedExpirationDate > $expirationDate) {
             if (!$startDate || $startDate > Carbon::today()) {
                 $startDate = Carbon::today();
             }
@@ -120,12 +124,12 @@ class UserAccessPermissionsCollection
         return array($startDate, $expirationDate);
     }
 
-    public function getMembershipExpirationDate($includeBuffer = true, $includeFixedTimes = true): ?Carbon
+    public function getMembershipExpirationDate($includeBuffer = true, $ignoreSources = []): ?Carbon
     {
         list($startDate, $endDate) = $this->getActiveDates([
             self::MusoraPlusMembershipPermission,
             self::MusoraBasicMembershipPermission
-        ], $includeBuffer, $includeFixedTimes);
+        ], $includeBuffer, $ignoreSources);
         return $endDate;
     }
 
@@ -209,6 +213,15 @@ class UserAccessPermissionsCollection
             $permissionIds[] = self::MusoraPlusMembershipPermission;
         }
         return $permissionIds;
+    }
+
+    public function getActiveProductIds(): array
+    {
+        $productIds = $this->collection->where(function ($permission) {
+            return $permission->status != 'revoked';
+        })->pluck('product_id')->unique()->sort()->toArray();
+
+        return $productIds;
     }
 
     public function hasUserOwnedPermissions(array $permissionIds): bool

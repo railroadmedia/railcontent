@@ -96,12 +96,12 @@ class AccessCodeService
         return $accessCode;
     }
 
-    public function release(?string $code): void
+    public function release(?string $id): void
     {
         /** @var AccessCode $accessCode */
-        $accessCode = $this->getAccessCode($code);
+        $accessCode = AccessCode::query()->find($id);
         if (!$accessCode) {
-            throw new Exception("Access code for ID $code not found.");
+            throw new Exception("Access code for ID $id not found.");
         }
         $accessCode->is_claimed = false;
         $accessCode->claimer_id = null;
@@ -113,8 +113,9 @@ class AccessCodeService
     public function generateAccessCode(array $productIds, string $brand, string $source = null): AccessCode
     {
         $accessCode = new AccessCode();
-        $accessCode->product_ids = $productIds;
+        $accessCode->product_ids = serialize($productIds);
         $accessCode->brand = $brand;
+        $accessCode->is_claimed = false;
 
         if ($source) {
             $accessCode->source = $source;

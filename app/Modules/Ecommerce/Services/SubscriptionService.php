@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
@@ -98,7 +99,7 @@ class SubscriptionService
             }
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(
                 includeBuffer: false,
-                includeFixedTimes: true
+                ignoreSources: [UserAccessPermissionsSourceEnum::Challenges->value]
             )?->startOfDay() ?? null;
             // BR-1243: safety check for null nextChargeScheduledAt
             if (is_null($mostRecentActiveSubscription->nextChargeScheduledAt)) {
