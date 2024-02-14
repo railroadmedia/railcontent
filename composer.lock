@@ -655,16 +655,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v2.2.2",
+            "version": "v2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "eb6c5e6baae5aebd9a209f50e81bff38c7efef97"
+                "reference": "40c80bdc67a9f975ecb5f4083e3c84ef9f23eace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/eb6c5e6baae5aebd9a209f50e81bff38c7efef97",
-                "reference": "eb6c5e6baae5aebd9a209f50e81bff38c7efef97",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/40c80bdc67a9f975ecb5f4083e3c84ef9f23eace",
+                "reference": "40c80bdc67a9f975ecb5f4083e3c84ef9f23eace",
                 "shasum": ""
             },
             "require": {
@@ -683,7 +683,7 @@
                 "amphp/phpunit-util": "^3",
                 "amphp/process": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "5.20"
             },
             "type": "library",
             "autoload": {
@@ -727,7 +727,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/v2.2.2"
+                "source": "https://github.com/amphp/socket/tree/v2.2.3"
             },
             "funding": [
                 {
@@ -735,7 +735,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-31T18:12:01+00:00"
+            "time": "2024-02-13T21:03:09+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.298.8",
+            "version": "3.298.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9d123669b14ccd0f87f7f7de77ace7e5d8fe9d13"
+                "reference": "db225c3a1c5dabfbb5071349cfb7e4c396c3d9ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9d123669b14ccd0f87f7f7de77ace7e5d8fe9d13",
-                "reference": "9d123669b14ccd0f87f7f7de77ace7e5d8fe9d13",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/db225c3a1c5dabfbb5071349cfb7e4c396c3d9ec",
+                "reference": "db225c3a1c5dabfbb5071349cfb7e4c396c3d9ec",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.298.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.298.9"
             },
-            "time": "2024-02-12T19:07:29+00:00"
+            "time": "2024-02-13T19:08:16+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10137,12 +10137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "18fc482df5d0475dec8e8a0594a8cd9ca92c4e32"
+                "reference": "d871391ed9226f65e4925b5535189fd6ed028c00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/18fc482df5d0475dec8e8a0594a8cd9ca92c4e32",
-                "reference": "18fc482df5d0475dec8e8a0594a8cd9ca92c4e32",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d871391ed9226f65e4925b5535189fd6ed028c00",
+                "reference": "d871391ed9226f65e4925b5535189fd6ed028c00",
                 "shasum": ""
             },
             "require": {
@@ -10174,7 +10174,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
             },
-            "time": "2024-02-08T17:43:06+00:00"
+            "time": "2024-02-14T09:05:07+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10371,12 +10371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "50bd2ee9a15e2b60447a16b8eb46c773cb568e04"
+                "reference": "1cdbe0b9a124c96e95171668e9061aa49c4d2399"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/50bd2ee9a15e2b60447a16b8eb46c773cb568e04",
-                "reference": "50bd2ee9a15e2b60447a16b8eb46c773cb568e04",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1cdbe0b9a124c96e95171668e9061aa49c4d2399",
+                "reference": "1cdbe0b9a124c96e95171668e9061aa49c4d2399",
                 "shasum": ""
             },
             "require": {
@@ -10433,7 +10433,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-02-13T09:56:36+00:00"
+            "time": "2024-02-14T09:04:07+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16191,16 +16191,16 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.12",
+            "version": "v1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "056db7fe0e38053faf33cf4d1160271ede4d206d"
+                "reference": "bcb9b967fc5a703a2a1f26c73e0a24976df8cf96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/056db7fe0e38053faf33cf4d1160271ede4d206d",
-                "reference": "056db7fe0e38053faf33cf4d1160271ede4d206d",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/bcb9b967fc5a703a2a1f26c73e0a24976df8cf96",
+                "reference": "bcb9b967fc5a703a2a1f26c73e0a24976df8cf96",
                 "shasum": ""
             },
             "require": {
@@ -16250,7 +16250,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.12"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.13"
             },
             "funding": [
                 {
@@ -16258,7 +16258,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-06T15:01:43+00:00"
+            "time": "2024-02-14T09:03:34+00:00"
         },
         {
             "name": "yoramdelangen/laravel-pdo-odbc",
@@ -16316,23 +16316,23 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.10.2",
+            "version": "v3.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "60d3f5d6298a8b23028927302318856e50cbe59b"
+                "reference": "09d3dc77d7dc1b063e3728a6029c39ee0fbebf1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/60d3f5d6298a8b23028927302318856e50cbe59b",
-                "reference": "60d3f5d6298a8b23028927302318856e50cbe59b",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/09d3dc77d7dc1b063e3728a6029c39ee0fbebf1d",
+                "reference": "09d3dc77d7dc1b063e3728a6029c39ee0fbebf1d",
                 "shasum": ""
             },
             "require": {
                 "illuminate/routing": "^9|^10|^11",
                 "illuminate/session": "^9|^10|^11",
                 "illuminate/support": "^9|^10|^11",
-                "maximebf/debugbar": "1.20.x",
+                "maximebf/debugbar": "~1.20.1",
                 "php": "^8.0",
                 "symfony/finder": "^6|^7"
             },
@@ -16384,7 +16384,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.2"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.10.4"
             },
             "funding": [
                 {
@@ -16396,7 +16396,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-13T09:14:41+00:00"
+            "time": "2024-02-14T08:52:12+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -17096,16 +17096,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.27.3",
+            "version": "v1.27.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "7e01b345072c9604ead9d7aed175bf7ac1d80289"
+                "reference": "3047e1a157fad968cc5f6e620d5cbe5c0867fffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/7e01b345072c9604ead9d7aed175bf7ac1d80289",
-                "reference": "7e01b345072c9604ead9d7aed175bf7ac1d80289",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/3047e1a157fad968cc5f6e620d5cbe5c0867fffd",
+                "reference": "3047e1a157fad968cc5f6e620d5cbe5c0867fffd",
                 "shasum": ""
             },
             "require": {
@@ -17124,9 +17124,6 @@
             ],
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
                 "laravel": {
                     "providers": [
                         "Laravel\\Sail\\SailServiceProvider"
@@ -17157,20 +17154,20 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-01-30T03:03:59+00:00"
+            "time": "2024-02-08T15:24:21+00:00"
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.20.0",
+            "version": "v1.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "72fea42726383318e44e80dd94c77f958274ef47"
+                "reference": "06ebf922ccedfa4cc43015825697ee8c1fb80f7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/72fea42726383318e44e80dd94c77f958274ef47",
-                "reference": "72fea42726383318e44e80dd94c77f958274ef47",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/06ebf922ccedfa4cc43015825697ee8c1fb80f7e",
+                "reference": "06ebf922ccedfa4cc43015825697ee8c1fb80f7e",
                 "shasum": ""
             },
             "require": {
@@ -17221,9 +17218,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.20.0"
+                "source": "https://github.com/maximebf/php-debugbar/tree/v1.20.1"
             },
-            "time": "2024-02-12T10:29:57+00:00"
+            "time": "2024-02-13T19:03:14+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -19341,5 +19338,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
