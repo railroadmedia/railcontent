@@ -44,7 +44,10 @@
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
                     $contentBreadCrumb->firstLevelTitle = 'Challenges';
                 }
-                else {
+                else if(str_contains($lessonContent['parent']->fetch('type'),'unit')){
+                    $contentBreadCrumb->firstLevelUrl = '/pianote/method/foundations-2019/215952';
+                    $contentBreadCrumb->firstLevelTitle = 'Pianote Foundations';
+                }else {
                     $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]);
                     $contentBreadCrumb->firstLevelTitle = $lessonContent['parent']->fetch('type');
                 }

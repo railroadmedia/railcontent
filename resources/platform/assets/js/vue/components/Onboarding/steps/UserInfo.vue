@@ -6,7 +6,7 @@ import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
-import {saveDisplayName, checkDisplayName, aboutStepCompleted} from '../services';
+import { saveDisplayName, checkDisplayName, aboutStepCompleted } from '../services';
 
 const props = defineProps({
   brand: {
@@ -68,7 +68,7 @@ const handleNextStep = () => {
         }
       })
       .catch((e) => {
-        console.log('entering error block', e)
+        console.error(e);
         handleError();
       });
   } else {
@@ -83,6 +83,13 @@ const handleError = () => {
   })
 };
 
+const handleImageUpload = (newImgUrl) => {
+  emit("onChangeInfo", {
+    ...props.info,
+    user: { ...props.info.user, userProfilePictureUrl: newImgUrl },
+  });
+};
+
 const headerProps = {
   title: 'Just a few quick questions to set up your account',
   subtitle: 'Your musical journey is personalized to you. Tell us a little bit about yourself so that we can get it right.',
@@ -95,8 +102,8 @@ const headerProps = {
   <StepWrapper :brand="brand" :showBgImg="false" :showInstrumentBrand="false" :headerProps="headerProps">
     <template v-slot:content>
       <div class="tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center md:tw-mt-0">
-        <AvatarUpload :imgUrl="info.user.userProfilePictureUrl" :userName="info.user.name" @onError="handleError"
-          :userId="info.user.id" />
+        <AvatarUpload @onImageUpload="handleImageUpload" :imgUrl="info.user.userProfilePictureUrl"
+          :userName="info.user.name" @onError="handleError" :userId="info.user.id" />
         <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-items-center" :initialValue="info.user.name"
           labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
           @onChange="onInputChange" :showClearButton="true" />

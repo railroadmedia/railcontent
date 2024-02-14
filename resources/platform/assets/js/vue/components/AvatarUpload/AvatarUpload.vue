@@ -36,7 +36,7 @@ const props = defineProps({
   }
 });
 
-const imgUrlRef = ref(props.imgUrl);
+const emit = defineEmits(["onImageUpload"]);
 
 function handleImage(image) {
   selectedImage.value = image;
@@ -55,7 +55,7 @@ function openUploadForm() {
 }
 
 function handleUploadDone({ profile_picture_url }) {
-  imgUrlRef.value = profile_picture_url;
+  emit('onImageUpload', profile_picture_url);
   showUploadForm.value = false;
 }
 
@@ -70,7 +70,7 @@ function handleUploadError() {
 
 <template>
   <div class="">
-    <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]" classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
+    <InfoModal :self-contained="true" key="info-modal-in-avatar-upload" v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]" classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
       <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
       <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" />
       <ImageUploadProgress successMessage="Your profile image has successfully uploaded" fieldKey="profile_picture_url" uploadService="/user-management-system/picture/upload-from-s3-front-end" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
@@ -96,8 +96,8 @@ function handleUploadError() {
           hover:tw-border-white
           tw-border-2
           tw-color-[#344858]
-        " :style="{ ...imgUrlRef ? { backgroundImage: `url(${imgUrlRef})`, backgroundSize: 'cover' } : {} }">
-        <UserIcon v-if="!imgUrlRef" />
+        " :style="{ ...imgUrl ? { backgroundImage: `url(${imgUrl})`, backgroundSize: 'cover' } : {} }">
+        <UserIcon v-if="!imgUrl" />
         <div class="
             tw-absolute
             tw-z-0

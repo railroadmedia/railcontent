@@ -1,13 +1,11 @@
 <template>
-    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :hide-filter="hideFilter"
-        :search-term="searchTerm" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions"
-        :active-tab="activeTab" :hide-filter-icon="multiSelectColumns.length === 0" :selected-filters="selectedFilters"
+    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-filter-icon="!hasFilterOptions" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
         <slot name="viewToggleButton"></slot>
     </FilterControls>
     <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
-    <div class="tw-px-4 lg:tw-px-0" v-if="!hideFilter" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
+    <div class="tw-px-4 lg:tw-px-0" v-if="hasFilterOptions" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
         <FilterOptions v-if="!isCollapsed && !isTablet" :multi-select-columns="multiSelectColumns"
             :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
             :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
@@ -24,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import {computed, onMounted, onUnmounted, ref} from 'vue';
 import FilterOptions from './FilterOptions.vue';
 import FilterOptionsModal from './FilterOptionsModal.vue';
 import FilterControls from './FilterControls.vue';
@@ -43,7 +41,7 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    hideFilter: {
+    hideSortIcon: {
         type: Boolean,
         default: false,
     },
@@ -74,6 +72,10 @@ const props = defineProps({
     searchTerm: {
         type: String,
         default: '',
+    },
+    searchPlaceholder: {
+        type: String,
+        default: 'Search',
     },
     singleSelectColumns: {
         type: Array,
@@ -107,6 +109,10 @@ const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'o
 
 const isTablet = ref(false);
 const isCollapsed = ref(true);
+
+const hasFilterOptions = computed(() => {
+    return props.multiSelectColumns.length > 0;
+})
 
 const handleToggleCollapse = () => {
     isCollapsed.value = !isCollapsed.value;

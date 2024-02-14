@@ -121,6 +121,21 @@ class SalesController extends BaseController
     }
     public function thirtyDayDrummer()
     {
+        $productId = 833;
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-drummer-4', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+    public function thirtyDayDrummerEG()
+    {
         $productId = 741;
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);

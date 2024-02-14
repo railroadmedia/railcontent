@@ -181,10 +181,10 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
             $hasExperienceLevels =  count(
-                user()->onboardingExperience->filter(function ($item) use($brand) {
-                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                })
-            ) > 0;
+                    user()->onboardingExperience->filter(function ($item) use($brand) {
+                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                    })
+                ) > 0;
             $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
         }
 

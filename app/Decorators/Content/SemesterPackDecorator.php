@@ -2,6 +2,7 @@
 
 namespace App\Decorators\Content;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Support\Collection;
 
 class SemesterPackDecorator extends TypeDecoratorBase
@@ -24,6 +25,24 @@ class SemesterPackDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['next_lesson_url'] =
                     url()->route('platform.content.jump-to-continue-content', [$content['id']]);
             }
+            $enrollStarted = !empty($content->fetch('enrollment_start_time')) && Carbon::parse($content->fetch('enrollment_start_time')) <= Carbon::now();
+            $enrollEnded = !empty($content->fetch('enrollment_end_time')) && Carbon::parse($content->fetch('enrollment_end_time')) <= Carbon::now();
+            $registrationUrl = $content->fetch('fields.registration_url');
+            $enrollNow = $registrationUrl && $enrollStarted && !$enrollEnded;
+            $contentsOfType[$contentIndex]['enrollment_state'] = $enrollNow ? 'open' : 'closed';
+            $isStarted = $content['started'] && !$content['completed'];
+            $isCompleted = $content['completed'];
+            $contentsOfType[$contentIndex]['primary_cta_text'] = $enrollNow ? 'Enroll Now' : ((!$isStarted) ? 'Start' : (($isCompleted) ? 'Completed' : ' Continue'));
+            $contentsOfType[$contentIndex]['primary_cta_url'] = $enrollNow ? $registrationUrl : ($contentsOfType[$contentIndex]['next_lesson_url']??$contentsOfType[$contentIndex]->fetch('url',''));
+
+            //strip <p> tags from description
+            $contentData = $content['data'] ?? [];
+            foreach ($contentData as $index => $data) {
+                if(in_array($data['key'] ,['description'])){
+                    $contentsOfType[$contentIndex]['data'][$index]['value'] = strip_tags(html_entity_decode($data['value']), '<a>,<em>,<strong>');
+                }
+            }
+
         }
 
         if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
