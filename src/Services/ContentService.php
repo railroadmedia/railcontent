@@ -2949,11 +2949,14 @@ class ContentService
                 $mappedDifficulty[$difficulty] = $difficultyNr;
             }
         }
+        $order = array('-','All','Novice','Beginner', 'Intermediate', 'Advanced', 'Expert');
+        $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedDifficulty);
         $filters['difficulty'] = [];
-        foreach ($mappedDifficulty as $difficulty => $count) {
-            $filters['difficulty'][] = $difficulty.' ('.$count.')';
+        foreach ($properOrderedArray as $difficulty => $count) {
+            if($count != 0) {
+                $filters['difficulty'][] = $difficulty.' ('.$count.')';
+            }
         }
-        sort($filters['difficulty'], SORT_STRING);
 
         return $filters['difficulty'];
     }
