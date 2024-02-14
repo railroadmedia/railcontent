@@ -212,7 +212,6 @@
             }
         }
     </style>
-    <?php \App\Analytics\Tracker::trackProductImpression('30-day-drummer-2'); ?>
 @stop()
 
 @section('body-data')
@@ -679,7 +678,7 @@
                         @if(is_current_user_a_member())
                             <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>
                         @else
-                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
+                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></td>
                         @endif
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
