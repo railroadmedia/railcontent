@@ -41,7 +41,7 @@ const playlistSearch = ref(null)
 const sortOptions =[
     { value: '-created_at', name: 'Newest First', icon: 'sort-down', },
     { value: 'name', name: 'Alphabetical', icon: 'sort-name-asc', },
-    { value: '-last_progress', name: 'Most Recent', icon: '', },
+    { value: '-last_progress', name: 'Most Recent', icon: 'most-recent', },
     { value: 'pinned', name: 'Pinned', icon: 'tack', },
 ]
 
