@@ -14,7 +14,8 @@
             <!-- Logo -->
             <div :class="`tw-absolute tw-w-full tw-p-[10px] tw-pt-[30px] tw-flex tw-justify-center`" style="background:linear-gradient(to bottom, transparent 0%, #000 100%);" :style="`bottom: ${hasStarted ? '6px' : '0'}`">
                 <img
-                    class="tw-max-h-[70px] sm:tw-max-h-[40px] lg:tw-max-h-[50px] xl:tw-max-h-[70px]"
+                    class="tw-max-h-[70px] sm:tw-max-h-[40px]"
+                    :class="`${logoStyle ? logoStyle : 'lg:tw-max-h-[50px] xl:tw-max-h-[70px]'}`"
                     :src="`https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/${logo}`"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
@@ -194,4 +195,16 @@ const addToPlaylist = () => {
 
     window.openplaylistmodal({ modalType: 'addItem', content });
 }
+
+const logoStyle = computed(() => {
+    if(title.value === 'Electrify Your Drumming' || title.value === 'Beyond Beginner Drumming' || title.value === 'Anatomy Of A Drum Solo' || title.value === 'Creative Control' || title.value === 'Getting Started On The Piano' || title.value === 'Easy Chords' || title.value === 'The Power Of Chords' || title.value === 'The Beginner\'s Guide To Classical Piano' || title.value === 'New Piano Players Start Here' || title.value === 'The Beginner\'s Guide To Playing Beautiful Piano' || title.value === 'Beginner Guitar System' || title.value === 'Rhythm & Groove') {
+        return 'lg:tw-max-h-[50px]';
+    }
+
+    if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === '500 Songs In 5 Days' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
+        return 'lg:tw-max-h-[40px]';
+    }
+
+
+})
 </script>
