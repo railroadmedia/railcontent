@@ -2909,13 +2909,13 @@ class ContentService
             $soundsliceAssingment = 0;
             $assign = [];
             $lessonsCount = 0;
-           // $allLessons = [];
+            $allLessons = [];
             $bundles = $this->contentRepository->getByParentId($content['id']);
             foreach ($bundles as $bundle) {
                 $lessons = $this->contentRepository->getByParentId($bundle['id']);
                 foreach ($lessons as $lesson) {
                     $lessonsCount++;
-                   // array_push($allLessons, $lesson);
+                    array_push($allLessons, $lesson);
                     $assignments = $this->contentRepository->getByParentId($lesson['id']);
                     foreach ($assignments ?? [] as $lessonAssignment) {
                         if (isset($lessonAssignment['soundslice_slug'])) {
@@ -2926,7 +2926,7 @@ class ContentService
                 }
             }
             $results['lessons_count'] = $lessonsCount;
-           // $results['lessons'] = $allLessons;
+            $results['lessons'] = $allLessons;
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
             $results['soundslice_assignments'] = $assign;
         }
