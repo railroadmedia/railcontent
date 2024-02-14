@@ -24,7 +24,7 @@
                     {{ number_format(Prices::$reviews) }}
                 @endif
                 student reviews.</strong>
-            <a class="inline-block" target="_blank"
+            <a role="link" aria-label="Link to shopperapproved" class="inline-block" target="_blank"
                 @if($theme == 'drumeo')
                     href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738"
                     onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;"
@@ -100,6 +100,7 @@
                                                 @if(!empty($testimonial['avatar']))
                                                     <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }} opacity-0 transition-opacity"
                                                         loading="lazy" onload="this.classList.remove('opacity-0')"
+                                                        alt="Avatar"
                                                         src="{{$testimonial['avatar']}}">
                                                 @endif
                                                 <div class="">
@@ -168,18 +169,18 @@
         @if(!empty($youtube))
             <div class="flex flex-wrap items-start justify-center mx-auto mt-10 sm:mt-16 lg:mt-20 max-w-3xl">
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#cd201f;">
-                    <a href="{{ $youtubeLink }}" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-4xl sm:text-5xl"></i>
+                    <a href="{{ $youtubeLink }}" target="_blank" aria-label="Youtube Link" role="link"> <i class="fab fa-youtube text-4xl sm:text-5xl"></i>
                     </a>
                     <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $youtube }}</h2>
                     <p class="uppercase sm:tracking-widest">Subscribers</p>
                 </div>
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#3b5998;">
-                    <a href="{{ $facebookLink }}" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i> </a>
+                    <a href="{{ $facebookLink }}" target="_blank" aria-label="Facebook Link" role="link"> <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i> </a>
                     <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $facebook }}</h2>
                     <p class="uppercase sm:tracking-widest">Likes</p>
                 </div>
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5 instagram">
-                    <a href="{{ $instagramLink }}" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-4xl sm:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
+                    <a href="{{ $instagramLink }}" target="_blank" aria-label="Instagram Link" role="link"> <i class="fab fa-instagram text-4xl sm:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
                     </a>
                     <h2 class="font-black leading-none my-1 sm:my-2">{{ $instagram }}</h2>
                     <p class="uppercase sm:tracking-widest" style="color:#E1306C">Followers</p>

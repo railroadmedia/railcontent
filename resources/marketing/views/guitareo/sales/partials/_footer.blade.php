@@ -12,6 +12,7 @@
 
                 <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
                 <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
+                    <label for="sign-up-email" class="sr-only">Email Address</label>
                     <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
                 <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
@@ -33,35 +34,41 @@
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-right: 2%;
-        margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1" target="_blank">
+        margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1" target="_blank" aria-label="Download on App Store">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
-        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews" target="_blank">
+        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews" target="_blank" aria-label="Download on Google Play">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
-            <p><a href="/riff/">The Guitareo Riff</a><br>
-                <a href="/free-acoustic-guitar-lessons">Getting Started On Guitar</a><br>
-                <a href="/song-in-an-hour">Song In An Hour Challenge</a><br>
-                <a href="/riff/lessons">Free Guitar Video Lessons</a><br>
-                <a href="/riff/articles/">Free Guitar Articles</a></p>
+            <p>
+                <a href="/riff/" aria-label="The Guitareo Riff">The Guitareo Riff</a><br>
+                <a href="/free-acoustic-guitar-lessons" aria-label="Getting Started On Guitar">Getting Started On Guitar</a><br>
+                <a href="/song-in-an-hour" aria-label="Song In An Hour Challenge">Song In An Hour Challenge</a><br>
+                <a href="/riff/lessons" aria-label="Free Guitar Video Lessons">Free Guitar Video Lessons</a><br>
+                <a href="/riff/articles/" aria-label="Free Guitar Articles">Free Guitar Articles</a>
+            </p>
         </div>
         <div class="footer-link-wrap">
-            <h1><a href="/shop/">GUITAREO Shop</a></h1>
-            <p><a href="/">Guitareo Membership</a><br>
-                <a href="/guitar-quest">GuitarQuest</a><br>
-                <a href="/shop/500-songs">500 Songs In 5 Days</a><br>
-                <a href="/shop/survival-guide">Guitareo Survival Guide</a><br>
-                <a href="/shop/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
+            <h1><a href="/shop/" aria-label="GUITAREO Shop">GUITAREO Shop</a></h1>
+            <p>
+                <a href="/" aria-label="Guitareo Membership">Guitareo Membership</a><br>
+                <a href="/guitar-quest" aria-label="GuitarQuest">GuitarQuest</a><br>
+                <a href="/shop/500-songs" aria-label="500 Songs In 5 Days">500 Songs In 5 Days</a><br>
+                <a href="/shop/survival-guide" aria-label="Guitareo Survival Guide">Guitareo Survival Guide</a><br>
+                <a href="/shop/acoustic-guitar-made-easy" aria-label="Acoustic Guitar Made Easy">Acoustic Guitar Made Easy</a>
+            </p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>
-            <p><a rel="noopener" href="{{ get_musora_brand_base_url() }}">Musora</a><br>
-                <a rel="noopener" href="{{ get_legacy_brand_base_url("drumeo") }}">Drumeo</a><br>
-                <a rel="noopener" href="{{ get_legacy_brand_base_url("pianote") }}">Pianote</a><br>
-                <a rel="noopener" href="{{ get_legacy_brand_base_url("singeo") }}">Singeo</a><br>
+            <p>
+                <a rel="noopener" href="{{ get_musora_brand_base_url() }}" aria-label="Musora">Musora</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("drumeo") }}" aria-label="Drumeo">Drumeo</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("pianote") }}" aria-label="Pianote">Pianote</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("singeo") }}" aria-label="Singeo">Singeo</a><br>
+            </p>
         </div>
     </div>
     @endif
@@ -76,7 +83,7 @@
             <a aria-label="Instagram" rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="inline-flex items-center justify-center social-media instagram"><i class="fab fa-instagram"></i></a>
             <a rel="noopener" href="https://pod.link/1657251884" target="_blank" class="inline-flex items-center justify-center social-media podcast" aria-label="podcast"><i class="fas fa-podcast"></i></a>
             @endif
-            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
+            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms/" aria-label="Terms of Service">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy/" aria-label="Privacy Policy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers" aria-label="Careers at Musora">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand" aria-label="Musora Brand Guide">Brand Guide</a></p>
         </div>
     </div>
 </footer>
