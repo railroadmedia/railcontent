@@ -26,13 +26,7 @@ export const useCollectionStore = defineStore({
             loading: false,
             searchEndpointUrl: '',
             searching: false, //for threads page
-            sortOptions:[
-                { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
-                { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
-                { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
-                { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
-                { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
-            ],
+            sortOptions:[],
             tabData: {},
             totalPages: 0,
             totalResults: 0,
@@ -239,10 +233,6 @@ export const useCollectionStore = defineStore({
 
             if (Array.isArray(defaults.sortOptions) && defaults.sortOptions.length > 0) {
                 this.sortOptions = defaults.sortOptions;
-            }
-
-            if (defaults.defaultSort) {
-                this.sort = defaults.defaultSort;
             }
 
             //Set active tab

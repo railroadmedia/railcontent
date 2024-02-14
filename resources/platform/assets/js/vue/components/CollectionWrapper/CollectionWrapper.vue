@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="sortOptions"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -144,11 +144,11 @@ const props = defineProps({
     sortOptions: {
         type: Array,
         default: () => [
-            {value: '-published_on', name: 'Newest First', icon: 'sort-down',},
-            {value: 'published_on', name: 'Oldest First', icon: 'sort-up',},
-            {value: '-popularity', name: 'Most Popular', icon: 'sort-popularity',},
-            {value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc',},
-            {value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc',},
+            { value: '-published_on', name: 'Newest First', icon: 'sort-down', },
+            { value: 'published_on', name: 'Oldest First', icon: 'sort-up', },
+            { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
+            { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+            { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
         ]
     },
     searchPlaceholder: {
@@ -388,7 +388,7 @@ onBeforeMount(() => {
 
 onMounted(() => {
     // console.log('collection type',props.collectionType)
-    // console.log(props.title)
+    // console.log(props.sortOptions, props.defaultSort)
     // console.log(props.preLoadedContent)
 })
 </script>

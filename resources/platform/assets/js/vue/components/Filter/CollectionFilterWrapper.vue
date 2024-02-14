@@ -1,5 +1,5 @@
 <template>
-    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-filter-icon="!hasFilterOptions" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters"
+    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-filter-icon="!hasFilterOptions" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
         <slot name="viewToggleButton"></slot>
@@ -40,10 +40,6 @@ const props = defineProps({
     activeTab: {
         type: String,
         default: '',
-    },
-    hideSortIcon: {
-        type: Boolean,
-        default: false,
     },
     hideSortIcon: {
         type: Boolean,
