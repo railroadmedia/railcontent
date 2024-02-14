@@ -1426,7 +1426,8 @@ class ContentRepository extends RepositoryBase
                         ->getPostProcessor()
                 ))->from($this->groupByFields['associated_table']['table'].' as m');
                 $db->selectRaw(
-                    'm.'.$this->groupByFields['associated_table']['column'].' as grouped_by_field,	
+                    'm.'.$this->groupByFields['associated_table']['column'].' as grouped_by_field,
+                    m.'.$this->groupByFields['associated_table']['column'].' as id,	
 	                COUNT( DISTINCT(lessons.caontent_idd)) AS lessonsCount,
 	                GROUP_CONCAT(lessons.caontent_idd) as lessons_grouped_by_field, '.
                     ' "'.$this->groupByFields['associated_table']['column'].'" as type'
