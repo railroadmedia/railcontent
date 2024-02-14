@@ -48,6 +48,14 @@ export default {
             `${endpointPrefix}/railcontent/comment/${id}/assign-moderator`
         )
             .then(response => response.data)
+            .catch(error => ({ error: { ...error.response.data.meta.errors } }));
+    },
+
+    commentUnassignModerator(id) {
+        return axios.patch(
+            `${endpointPrefix}/railcontent/comment/${id}/unassign-moderator`
+        )
+            .then(response => response.data)
             .catch(ErrorHandler);
     },
 

@@ -270,6 +270,18 @@
                                 Assign
                             </span>
                         </button>
+                        <button
+                            v-if="comment.assigned_moderator_name"
+                            class="button btn collapse-250"
+                            style="margin-top:5px"
+                            @click.prevent.stop="assignComment(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Unassign
+                            </span>
+                        </button>
                     </div>
                     <div class="flex flex-column lesson-type hide-xs-only ph-1 align-center">
                         <i
@@ -655,7 +667,28 @@ export default {
 
         assignComment(comment) {
             comment.assigned_moderator_name = userDisplayName.value;
-            CommentService.commentAssignModerator(comment.id);
+            CommentService.commentAssignModerator(comment.id)
+                .then(({response, error}) => {
+                    console.log(error);
+                    if (error) {
+                        let message = 'Oops something went wrong! Unable to assign user.';
+
+                        if (error && error.detail) {
+                            message = 'Unable to assign moderator: ' + error.detail;
+                        }
+                        console.log(message);
+                        this.$root.$emit('displayMessage', {
+                            text: message,
+                            color: 'error',
+                            timeout: 7000,
+                        });
+                    }
+                });
+        },
+
+        unassignComment(comment) {
+            comment.assigned_moderator_name = userDisplayName.value;
+            CommentService.commentUnassignModerator(comment.id);
         },
 
         markClosed(comment) {
