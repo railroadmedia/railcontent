@@ -227,8 +227,8 @@
     ])
     @include('_partials.components.shop.promo-banner', [
                 "name" => "30-Day Drummer",
-                "fullPrice" => floatval($productPrices['30-day-drummer-3']->price),
-                "price" => floatval($productPrices['30-day-drummer-3']->discounted_price),
+                "fullPrice" => floatval($productPrices['30-day-drummer-4']->price),
+                "price" => floatval($productPrices['30-day-drummer-4']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -281,16 +281,16 @@
                         <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                     @endif
 
-                    @if(!$hasProduct && is_current_user_a_member())
-                        {{--                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>--}}
-                    @endif
-
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
+                            @if(is_current_user_a_member())
+                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer" class="join blue medium w-full">ENROLL NOW</a>
+                            @else
+                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
+                            @endif
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
-                                <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Drumeo Members register for free here.</a>
                             </p>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
