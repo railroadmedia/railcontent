@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
         .join.outline.red {
@@ -41,23 +41,32 @@
             font-style: normal;
         }
 
-        /* .content-section table.comparison.eardrums tr td:nth-child(1) {
+        .content-section table.comparison.eardrums tr td:nth-child(1) {
             width: 18%;
-
         }
+        .content-section table.comparison.eardrums tr td:nth-child(2) {
+            color: #3E4145;
+            background-color: #F1EFED;
+        }
+        .content-section table.comparison.eardrums tr:nth-child(1) td:nth-child(2) {
+            background-color:#D7D3CF;
+        }
+        
         .content-section table.comparison.eardrums tr td:nth-child(2),
         .content-section table.comparison.eardrums tr td:nth-child(3),
         .content-section table.comparison.eardrums tr td:nth-child(4) {
             width: 27.33%;
+            border: none;
+
         }
         .content-section table.comparison.eardrums tr td:nth-child(3),
         .content-section table.comparison.eardrums tr td:nth-child(4) {
             color: #3E4145;
-            background-color: #A2AEBD;
+            background-color: #DBE1E9;
         }
         .content-section table.comparison.eardrums tr:nth-child(1) td:nth-child(3),
         .content-section table.comparison.eardrums tr:nth-child(1) td:nth-child(4) {
-            background-color:#8996A5;
+            background-color:#CDD4DC;
         }
         .content-section table.comparison tr:hover td:nth-child(3),
         .content-section table.comparison tr:hover td:nth-child(4),
@@ -66,10 +75,10 @@
             background-color:#abb8c7;
         }
         .content-section table.comparison.eardrums tr td {
-            color:#fff;
+            color:black;
             padding:15px 7px;
             font-size:12px;
-            text-transform:none;
+            text-transform: capitalize;
 
         }
         .content-section table.comparison.eardrums tr:last-child td {
@@ -84,10 +93,11 @@
             }
             .content-section table.comparison.eardrums tr:last-child td strong {
                 font-size: 28px;
+                color:#5B6068;
             }
         }
         .content-section table.comparison.eardrums tr td:nth-child(1) {
-            text-transform:uppercase;
+            text-transform: capitalize;
         }
         @media (max-width: 767px) {
             table tr td:nth-child(3),
@@ -107,12 +117,13 @@
                 display: none;
             }
         }
-        .text-gold {
-            color:#d8b66e;
-        }
-        .join.gold {
-            background:linear-gradient(to bottom, #e2c584, #ad7c12);
-        } */
+
+table.comparison {
+    border-spacing: 15px 0;
+    @media (max-width: 767px) {
+        border-spacing: 7px 0;
+    }
+}
     </style>
 @stop
 
@@ -146,5 +157,4 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-
 @stop

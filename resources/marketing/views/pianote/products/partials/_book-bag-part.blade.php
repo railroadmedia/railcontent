@@ -26,11 +26,13 @@
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.5)"></div>
-        <img class="object-cover w-full relative z-0" style="height: 700px;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/hero-image.webp">
-        <!-- <video class="object-cover w-full relative z-0" style="height: 600px;" type="video/mp4" autoplay loop playsinline muted
-                src="https://d21q7xesnoiieh.cloudfront.net/marketing/drumeo/shop/stickbag/header-vid.mp4"></video> -->
+        <!-- <img class="object-cover w-full relative z-0" style="height: 700px;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/hero-image.webp"> -->
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+                src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/book-bag/book-bag-hero-reel-wide-to-loop-1.mp4"></video>
     </header>
 
+
+<!--description section-->
 
 <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
     <div class="container mx-auto z-10 relative max-w-5xl lg:max-w-6xl pb-10 lg:pb-16">
@@ -152,119 +154,144 @@
     </div>
 </section>
 
+<!--features section-->
 
+<div class="relative z-10 h-5 sm:h-10 -mt-5 md:-mt-10" 
+     style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F1EFED calc(50% + 1px));"></div>
 
-<div class="relative z-10 h-5 sm:h-10 -mt-5 md:-mt-10"
-        @if(!empty($blackBag))
-            style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000 calc(50% + 1px));"
-        @else
-            style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F6F8FC calc(50% + 1px));"
-        @endif
-></div>
-<section class="text-center px-6 sm:px-6 pb-8 sm:pb-16 lg:pb-20 relative"
-        @if(!empty($blackBag))
-            style="background-color:#000;color:#fff;"
-        @else
-            style="background-color:#F6F8FC;"
-        @endif
->
-    <div class="container mx-auto z-10 relative max-w-3xl">
-        <img class="h-28 sm:h-36 sm:mb-10 -mt-14 sm:-mt-24 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
-            @if(!empty($blackBag))
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/820x0/filters:quality(95)/marketing/drumeo/shop/stickbag/black-thank-you-text.png"
-            @else
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/820x0/filters:quality(95)/marketing/drumeo/shop/stickbag/thank-you-text.png"
-            @endif
-        >
-        <img class="my-6 h-56 rounded-xl overflow-hidden inline sm:hidden transition-opacity opacity-0"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                @if(!empty($blackBag))
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/drumeo/shop/stickbag/black-stick-sleeve.jpg"
+     <section class="text-center px-6 sm:px-6 pb-8 sm:pb-16 lg:pb-20 relative" style="background-color:#F1EFED">
+    <div class="container mx-auto z-10 relative max-w-4xl">
+        <h2 class="leading-tight playfair pt-4 sm:pt-6 lg:pt-8"><strong>From concert halls to city streets.</strong></h2>
+        <h5 class="leading-tight px-2 sm:px-10 py-2 italic">The Pianote Book Bag oozes style. This beautiful leather satchel will look at home in Carnegie Hall and next to your Casio.</h5>
+
+        @php
+            $items = [
+                [
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/features-01.webp',
+                    'desc' => '<strong> Designed to be used, </strong> the Pianote Book Bag combines fashion and function to ensure you never have to leave the important things behind.',
+                    'alt'=> 'A woman carrying The Pianote Book Bag, showcasing its fashionable and functional design.'
+                ],
+                [
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/features-03.webp',
+                    'desc' => '<strong>Five separate internal compartments </strong> give you enough space for your music books, sheet music, notebooks, and a laptop. This messenger bag is your everyday carry for the things that matter most.',
+                    'alt'=> 'Stack of music sheets neatly organized inside The Pianote Book Bag.'
+                ],
+                [
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/features-02.webp',
+                    'desc' => '<strong>The premium leather </strong> will only look better with age. This is truly a luxury bag that doesn’t come with the pretense. <br/><br/>But don’t worry… <br/><br/> You’ll still get compliments every time you leave the house.',
+                    'alt'=> 'Front view of The Pianote Book Bag, highlighting its premium leather construction that ages beautifully.'
+                ]
+            ];
+        @endphp
+
+        @foreach ($items as $index => $item)
+            <img class="my-4 w-full rounded-xl overflow-hidden inline sm:hidden transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="{{ $item['img'] }}"
+                    alt="{{ $item['alt'] }}">
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center sm:py-10">
+                @if ($index % 2 == 0)
+                    <img class="flex-shrink-0 w-full sm:w-2/3 rounded-xl overflow-hidden hidden sm:inline-block transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="{{ $item['img'] }}"
+                        alt="{{ $item['alt'] }}"
+                    >
+                    <h6 class="flex-grow-0 leading-normal max-w-xl sm:pl-5 lg:pl-8 mx-0">
+                        {!! $item['desc'] !!}
+                    </h6>
                 @else
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stick-sleeve.jpg"
+                    <h6 class="flex-grow-0 leading-normal max-w-xl sm:pr-5 lg:pr-8 mx-0">
+                        {!! $item['desc'] !!}
+                    </h6>
+                    <img class="flex-shrink-0 w-full sm:w-2/3 rounded-xl overflow-hidden hidden sm:inline-block transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="{{ $item['img'] }}"
+                        alt="{{ $item['alt'] }}"
+                    >
                 @endif
-            alt="learn playing image"
-            fetchpriority="high"
-        >
-        <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
-            <p class="flex-grow-0 leading-normal max-w-xl pr-5 lg:pr-8 mx-0">
-                Brushes take the worst beating in conventional stick bags – and at $30+ a pop, it hurts even more.
-                <br><br>
-                The Drumeo StickBag features a custom brushes sleeve that keeps your brush wires straight and true. And when you’re at your kit, toss your brush sleeve under your hi-hat for easy access in any song.
-                <br><br>
-                It’s an all-new innovation on one of drumming’s oldest tools.</p>
-            <img class="flex-shrink-0 w-60 lg:w-68 rounded-xl overflow-hidden hidden sm:inline-block transition-opacity opacity-0"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                    @if(!empty($blackBag))
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/drumeo/shop/stickbag/black-stick-sleeve.jpg"
-                    @else
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/520x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stick-sleeve.jpg"
-                    @endif
-                alt="learn playing image"
-            >
-        </div>
-
+            </div>
+        @endforeach
     </div>
 </section>
-@if(empty($blackBag))
-<section class="content-section text-center comparison px-1 lg:px-3" style="background:#00101D;">
-    <div class="container mx-auto max-w-4xl">
-        <h2 class="mb-16 md:mb-12 "><strong>Your new favorite<br class="sm:hidden"> piece of gear. </strong></h2>
+
+
+<section class="relative overflow-hidden">
+    <!-- Desktop view -->
+    <div class="hidden md:block relative">
+        <img class="object-cover w-full h-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love.webp" alt="Background image">
+        <div class="absolute top-1/2 transform -translate-y-1/2 left-0 z-10 md:right-auto md:w-1/2 md:pl-12 lg:pl-32">
+            <div class="p-8 rounded-lg text-left" style="background: rgba(18, 18, 16, 0.85);">
+                <h2 class="text-white playfair text-lg md:text-2xl lg:text-3xl pb-4">Made with love. And priced that way too.</h2>
+                <p class="text-white md:text-xs lg:text-base">The Pianote Book Bag is custom-designed by leather artisans in the USA. Each bag is handmade with a level of craftsmanship and quality comparable to bags in the $300 - $600 price range. <br><br> But we’re not here for the mark-up. <br><br>We love our students and genuinely think this bag will make your life better. So we’re committed to keeping the price affordable, without compromising on quality.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile view -->
+    <div class="block md:hidden relative">
+        <img class="object-cover w-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love-m.webp" alt="Background image">
+        <div class="absolute bottom-0 z-10">
+            <div class="p-8 rounded-lg text-left">
+                <h2 class="text-white playfair text-3xl">Made with love. And priced that way too.</h2>
+                <p class="text-white text-base">The Pianote Book Bag is custom-designed by leather artisans in the USA. Each bag is handmade with a level of craftsmanship and quality comparable to bags in the $300 - $600 price range. <br><br> But we’re not here for the mark-up. <br><br>We love our students and genuinely think this bag will make your life better. So we’re committed to keeping the price affordable, without compromising on quality.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!--table section-->
+
+<section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#F5F5F5;" x-data="{ tableClass: 'earbuds' }">
+    <div class="container mx-auto max-w-5xl">
+        <h2 class="mb-16 md:mb-12 text-black playfair"><strong>See how the Pianote <br class="sm:hidden"> Book Bag compares. </strong></h2>
         <div class="relative">
             <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
-            <table class="w-full mx-auto border-separate comparison eardrums earbuds">
+            <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}"  class="w-full mx-auto border-separate comparison eardrums earbuds">
                 <tbody style="background-color:transparent!important;">
                 <tr style="background-color:transparent!important;">
                     <td></td>
                     <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 transition-opacity opacity-0"
+                        <img class="h-20 md:h-40 transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/shop/stickbag/comparison2.png" alt="logo-white">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-03.webp" alt="logo-white">
                     </td>
-                    <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 transition-opacity opacity-0"
+                    <td class="rounded-t-xl" @click="tableClass = 'headphones'">
+                        <img class="h-20 md:h-40 transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/shop/stickbag/vic-firth-comparison.png" alt="logo-white">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-01.webp" alt="logo-white">
                     </td>
-                    <td class="rounded-t-xl">
-                        <img class="h-12 md:h-20 transition-opacity opacity-0"
+                    <td class="rounded-t-xl" @click="tableClass = 'earbuds'">
+                        <img class="h-20 md:h-40 transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/160x0/filters:quality(95)/marketing/drumeo/shop/stickbag/tackle-comparison.png" alt="logo-white">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-02.webp" alt="logo-white">
                     </td>
                 </tr>
                 <tr>
-                    <td>Material</td>
-                    <td>Waxed Canvas & Suede</td>
-                    <td>Canvas</td>
                     <td>Leather</td>
+                    <td>Premium Oil-Tanned Leather</td>
+                    <td>Full-Grain Leather</td>
+                    <td>Vintage Tribe Leather</td>
                 </tr>
                 <tr>
-                    <td>Capacity</td>
-                    <td>18 Pairs</td>
-                    <td>24 Pairs</td>
-                    <td>12 Pairs</td>
+                    <td>Laptop Sleeve</td>
+                    <td>16” Laptop Sleeve</td>
+                    <td>16” Laptop Sleeve</td>
+                    <td>13” Laptop Sleeve</td>
                 </tr>
                 <tr>
-                    <td>Protective<br> Brush Sleeve</td>
+                    <td>External Pockets</td>
                     <td>YES</td>
-                    <td>NO</td>
-                    <td>NO</td>
-                </tr>
-                <tr>
-                    <td>Dimensions</td>
-                    <td>17.5” H x 16” W</td>
-                    <td>20” H x 22” W</td>
-                    <td>18” H x 16” W</td>
-                </tr>
-                <tr>
-                    <td>Drum Key<br> Included</td>
                     <td>YES</td>
-                    <td>NO</td>
                     <td>YES</td>
                 </tr>
                 <tr style="background-color:transparent!important;">
@@ -275,7 +302,7 @@
                         @endif
                         <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
                     </td>
-                    <td class="rounded-b-xl"><strong>$104</strong></td>
+                    <td class="rounded-b-xl"><strong>$349</strong></td>
                     <td class="rounded-b-xl"><strong>$200</strong></td>
                 </tr>
                 </tbody>
@@ -283,254 +310,79 @@
         </div>
     </div>
 </section>
-@endif
-<section class="text-center px-5 py-10 md:py-20 lg:py-24" @if(!empty($blackBag)) style="background-color:#020d24;color:#fff;" @else style="background-color:#f6f8fc;" @endif>
-    <div class="container mx-auto relative z-10 max-w-5xl" x-data="{ imageModal: false }">
-        <h2><strong>The last StickBag<br class="sm:hidden"> you’ll ever need.</strong></h2>
-        <h6 class="leading-tight mt-2 mb-5 sm:mb-10">A bag built to take everything<br class="sm:hidden"> from garage to stage. </h6>
 
-        @if(!empty($blackBag))
-            @php
-                $slides = [
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery2.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery-l1.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery-l2.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery-r1.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/black-gallery-r2.jpg',
-                 ],
-             ];
-            @endphp
-        @else
-            @php
-                $slides = [
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery2.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-l1.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-l2.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-r1.jpg',
-                 ],
-                 [
-                     'img' => 'marketing/drumeo/shop/stickbag/gallery-r2.jpg',
-                 ],
-             ];
-            @endphp
-        @endif
-        @foreach($slides as $slide)
-            @component('_partials.components.modal', ['name' => 'imageModal'])
-                @slot('content')
-                    <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
-                        <img class="logo h-7 md:h-12 lg:h-14 transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/{{$slide['img']}}">
-                    </div>
-                @endslot
-            @endcomponent
-        @endforeach
 
-        <div class="flex flex-wrap items-center">
-            <div class="w-full sm:w-1/2 sm:order-1">
-                <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
-            </div>
-            <div class="w-1/2 sm:w-1/4">
-                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
-                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
-            </div>
-            <div class="w-1/2 sm:w-1/4 sm:order-2">
-                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
-                <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
-            </div>
+<!--cards section-->
+<section class="text-center py-10 md:py-16" style="background: #F1EFED;">
+
+    <img alt="pianote logo block center" class="h-8 sm:h-10"
+        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-logo.svg">
+    <h2 class="text-center playfair">The Pianote Book Bag</h2>
+
+    <div class="container mx-auto max-w-5xl">
+        <div id="customize-anchor" class="anchor"></div>
+        <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto">
+
+            @include('pianote.products.partials._promo-card', [
+                'topBadgeText' => 'SAVE 40%',
+                'productTheme' => 'black',
+                'cardTitle' => 'Book Bag Only',
+                'cardImageHeight' => 'h-40',
+                'cardImageUrl' =>
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp',
+                'cardPrice' => '149',
+                'cardDiscount' => '249',
+                'cardSubtitle' => 'One-time payment. Free shipping.',
+                'cardButtons' => [['link' => '/', 'text' => 'Select']],
+                'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
+            ])
+
+            @include('pianote.products.partials._promo-card', [
+                'topBadgeText' => 'LAUNCH SPECIAL',
+                'productTheme' => 'pianote',
+                'cardTitle' => 'The Book Bag Bundle',
+                'cardImageHeight' => 'h-40',
+                'cardImageUrl' =>
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-02.webp',
+                'cardPrice' => '249',
+                'cardSubtitle' => 'One-time payment. Free shipping.',
+                'cardButtons' => [['link' => '/', 'text' => 'Select']],
+                'cardBonuses' => [
+                    'Pianote Book Bag',
+                    'Chords & Scales Book',
+                    'Practice Planner',
+                    'The Most Beautiful Classical Piano Pieces',
+                ],
+            ])
+
+
         </div>
-        <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
-        <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-            <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">Your Drumeo StickBag is built with premium components to ensure a long-lasting home for your sticks wherever your drumming takes you.</p>
-            <div class="overflow-hidden rounded-xl border @if(!empty($blackBag)) border-white @else border-black @endif">
-                <table>
-                    @if(!empty($blackBag))
-                    <tr>
-                        <td class="px-3 py-1 text-left border-b border-collapse text-gold @if(!empty($blackBag)) border-white @else border-black @endif">Limited Edition Bag</td>
-                        <td class="px-5 py-1 border-b border-collapse text-gold @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                    </tr>
-                    @endif
-                    <tr>
-                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Durable construction</td>
-                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Premium zippers</td>
-                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Quick-stick slot</td>
-                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-1 text-left border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Drum key</td>
-                        <td class="px-5 py-1 border-b border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-1 text-left  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
-                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $197 @else ${{ floatval($productPrices['stickbag']->discounted_price) }} @endif</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
 
-<div id="customize-anchor" class="anchor"></div>
-@if(!empty($blackBag))
-    <section class="py-16 sm:py-24 lg:py-28 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:#000 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/black-order-bg.jpg') center center/cover;">
-        <div class="container mx-auto max-w-6xl relative z-50">
-            <img alt="quietkick logo" class="h-20 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/680x0/filters:quality(95)/marketing/drumeo/shop/stickbag/black-stickbag-logo.svg"><br>
-            <h5 class="leading-tight text-gold"><strong><em>Only <s class="opacity-50">250</s>
-                        @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
-                            {{ $products['stickbag-ltd']->getStockAvailability() }}
-                        @endif
-                        Available</em></strong></h5>
-            <h2 class="leading-tight mt-5 mb-1"><strong>Pack like a pro.</strong></h2>
-            <h4 class="leading-tight"> <strong class="text-gold">$197</strong></h4>
-            @if( $products['stickbag-ltd']->getStockAvailability() > 1 && !empty($products['stickbag-ltd']->getStockAvailability()))
-                <a class="join smaller gold mt-6 w-full max-w-xs"
-                        href="/ecommerce/add-to-cart?locked=true&products[stickbag-ltd]=1"
-                >Order Now</a>
-            @else
-                <span class="join smaller sold-out mt-6 w-full max-w-xs">Sold Out</span>
-            @endif
-        </div>
-    </section>
-@else
-    <section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/order-bg.jpg') center center/cover;">
-        <div class="container mx-auto">
-            <img alt="quietkick logo" class="h-14 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stickbag-logo2.svg"><br>
 
-            @if( $products['stickbag']->getStockAvailability() > 1 && !empty($products['stickbag']->getStockAvailability()))
-
-                <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
-                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black uppercase" >Save 34%</p>
-                        @endif
-                        <a href="/ecommerce/add-to-cart?locked=true&products[stickbag]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
-                            <div class="bg-white px-3 py-5 md:py-7">
-                                <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
-                                <img class="h-24 transition-opacity opacity-0"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/200x0/filters:quality(95)/marketing/drumeo/shop/stickbag/stickbag-option.png"
-                                        alt="learn playing image"
-                                >
-                                <br>
-                                <h4 class="inline-block leading-tight">
-                                    @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                        <s>${{ floatval($productPrices['stickbag']->price) }}</s>
-                                    @endif
-                                    <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
-                                <p class="text-sm"><em>
-                                        @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                            Save 34%.
-                                        @endif
-                                        One-time payment.</em></p>
-                                <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
-                                <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
-                                <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
-                                <p class="text-sm">1 Premium Drum Key</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    @if( Carbon\Carbon::now() && Carbon\Carbon::create(2023, 10, 3, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now() )
-                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        <img class="h-16 absolute top-0 right-0 z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/drumeo/shop/stickbag/free-shipping-icon.svg">
-                        <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo uppercase" >LAUNCH SPECIAL</p>
-                        <a
-                                @if(!empty($memberVersion))
-                                    href="/ecommerce/add-to-cart?locked=true&products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6"
-                                @else
-                                    href="/promo-bag"
-                                @endif
-                                class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
-                            <div class="bg-white px-3 py-6 md:py-9">
-                                <h4 class="mb-2 sm:mb-3"><strong>StickBag + Lessons</strong></h4>
-                                <img class="h-24 transition-opacity opacity-0"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/shop/stickbag/lessons-stickbag-option.png"
-                                        alt="learn playing image"
-                                >
-                                <br>
-                                <h4 class="inline-block leading-tight"><strong>Free StickBag</strong></h4>
-                                <p class="text-sm"><em>
-                                        @if(!empty($memberVersion))
-                                            with annual Membership renewal
-                                        @else
-                                            with annual Drumeo Membership
-                                        @endif
-                                    </em></p>
-                                <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">
-                                    @if(!empty($memberVersion))
-                                        renew membership
-                                    @else
-                                        learn more
-                                    @endif
-                                </div>
-                                <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>
-                                <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
-                                <p class="text-sm mb-1.5"><strong>{{ Prices::$drumeoSongs }}+ popular songs</strong></p>
-                                <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
-                                <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
-                                <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
-                                <p class="text-sm mb-1.5">1 Premium Drum Key</p>
-                                <p class="text-sm">6 Pairs Of 5A Drumsticks</p>
-                            </div>
-                        </a>
-                    </div>
-                    @endif
+        <div class="text-center pt-10">
+            <div class="container mx-auto relative z-50">
+                <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0; color: #ABB5C2;">
+                    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
                 </div>
-            @else
-                <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
-            @endif
-{{--            <br>--}}
-{{--            <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>--}}
-        </div>
-    </section>
-@endif
-
-<section class="text-center py-10" style="background: #00101D;">
-    <div class="container mx-auto relative z-50">
-        <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
-            <p>Call us toll-free at
-                <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-        </div>
-        <div class="inline-block w-full px-3 md:px-4 text-light-navy" style="margin-top: 0;">
-            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
+                <div class="inline-block w-full px-3 md:px-4 mb-5">
+                    <p class="text-black text-xs py-2">Any questions? Call us toll-free at
+                        <a href="tel:+18004398921" class="underline">1-800-439-8921</a> <br
+                            class="inline-block md:hidden"> or directly at
+                        <a href="tel:+16048557605" class="underline">1-604-855-7605</a>.<br> All prices listed in USD.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
+
 </section>
+
+
+
 
 @include('_partials.components.video-modal',[
     'name' => 'trailer',
