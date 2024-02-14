@@ -376,9 +376,9 @@ class HomePageController extends BaseController
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
+            'displayTrialSection' => $shouldShowTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
-            "existsTrialSection" => $shouldShowTrialSection,
             "followedLessons" => $followedLessons->toResponseRawJson(),
             "hasCompletedMethod" => $hasCompletedMethod,
             "hasExperience" => $hasExperience,
@@ -411,6 +411,7 @@ class HomePageController extends BaseController
             "usersList" => $usersList,
             "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
             "youtubeId" => $youtubeId ?? null,
+            'trialSection' => $trialSection,
         ]);
     }
 

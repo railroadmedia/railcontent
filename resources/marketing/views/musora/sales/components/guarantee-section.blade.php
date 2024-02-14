@@ -1,6 +1,6 @@
 <div class="h-5 sm:h-10 -mt-10 relative" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #FFF calc(50% + 1px));" aria-hidden="true"></div>
 <div id="guarantee" class="anchor"></div>
-<section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#fff;">
+<section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#fff;" x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl" 
         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
         x-intersect.once="lazyLoad = true; $refs.guaranteeBadge.src = $refs.guaranteeBadge.dataset.src;">

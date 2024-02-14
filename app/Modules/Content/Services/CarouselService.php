@@ -100,7 +100,7 @@ class CarouselService
             })->values();
         }else{
             $carousel = $carousel->filter(function($slide){
-                return (!$slide->is_featured || ($slide->is_featured && ($slide->show_on_homepage == 1)));
+                return $slide->show_on_homepage == 1;
             })->values();
         }
         $carousel->each(function (Carousel $slide) {

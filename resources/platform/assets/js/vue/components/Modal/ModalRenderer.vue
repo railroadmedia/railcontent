@@ -37,6 +37,7 @@ export default {
 <template>
     <teleport to="#modal-container">
         <div
+            @click="onClose"
             id="modal-overlay"
             class="tw-absolute tw-h-full tw-w-full tw-bg-[#081825] tw-bg-opacity-90"
             style="

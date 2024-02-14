@@ -31,8 +31,6 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-
-    protected const SHOPIFY_LAUNCH_DATE_TIME = "2023-11-08T08:34:00-08:00";
     protected const NOTE_STRING = "Imported from the old ecommerce system: order ID";
     protected const PAGE_SIZE = 250;
     protected const RESULTS_MODEL_TYPE = "results_model_type";
@@ -94,7 +92,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
      */
     protected function getOrderData(?string $endCursor): void
     {
-        $date = self::SHOPIFY_LAUNCH_DATE_TIME;
+        $date = config('ecommerce.launch_date_times.shopify');
         $count = is_null($this->limit) ? self::PAGE_SIZE : min(self::PAGE_SIZE, $this->limit);
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
         $customerIdQuery = empty($this->customerId) ? "" : " AND customer_id:{$this->customerId}";
