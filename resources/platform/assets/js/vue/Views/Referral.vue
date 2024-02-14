@@ -1,16 +1,16 @@
 <template>
     <div class="tw-py-32 lg:tw-pt-40 tw-relative tw-px-4 xl:tw-px-0 tw-bg-white dark:tw-bg-[#000B17]">
         <div class="tw-absolute tw-w-full tw-h-1/2 tw-left-0 tw-top-0">
-            <img class="tw-w-full tw-h-full tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/header-bg.jpg" alt="header bg" />
+            <img class="tw-w-full tw-h-full tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/header-bg.jpg" alt="header bg" />
         </div>
         <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white tw-pt-24 md:tw-pt-32 lg:tw-pt-40 tw-pb-16 tw-text-center" style="box-shadow: rgba(0, 0, 0, 0.25) 5px 5px 20px;">
             <div class="tw-absolute tw-w-full -tw-top-4 sm:-tw-top-6 md:-tw-top-8 tw-left-0">
-                <img class="tw-w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaves.png" alt="leaves" />
+                <img class="tw-w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaves.png" alt="leaves" />
             </div>
             <div class="tw-flex tw-justify-center tw-absolute -tw-top-24 sm:-tw-top-32 lg:-tw-top-40 tw-left-0 tw-w-full">
-                <img class="tw-h-48 sm:tw-h-56 md:tw-h-64 lg:tw-h-80 tw-mx-auto tw-mb-6 tw-transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/gift-card.png" alt="gift card" onload="this.classList.remove('tw-opacity-0')" loading="lazy">
+                <img class="tw-h-48 sm:tw-h-56 md:tw-h-64 lg:tw-h-80 tw-mx-auto tw-mb-6 tw-transition-opacity" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/gift-card.png" alt="gift card" onload="this.classList.remove('tw-opacity-0')" loading="lazy">
             </div>
-            <img class="tw-h-24 lg:tw-h-32 tw-inline-block tw-mb-4" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/12-days-title.svg" alt="12 days title" />
+            <img class="tw-h-24 lg:tw-h-32 tw-inline-block tw-mb-4" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/12-days-title.svg" alt="12 days title" />
             <h3 class="tw-font-normal tw-mb-4 "> Give your friends and family members <br class="tw-hidden sm:tw-inline" />a {{ brandName }} 30-day trial for a chance to<br /> <strong class="tw-font-extrabold">win a $100 Musora Gift Card.</strong>
             </h3>
             <p>
@@ -46,12 +46,12 @@
             </div>
         </div>
     </div>
-    <div class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20 tw-bg-cover tw-bg-[url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg')]">
+    <div class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20 tw-bg-cover tw-bg-[url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/info-section-bg.jpg')]">
         <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-4 sm:tw-px-6 xl:tw-px-0">
             <div class="tw-order-1 tw-relative md:tw-pl-5 lg:tw-pl-10 tw-mb-10 md:tw-mb-0">
                 <img
                     class="tw-w-72 md:tw-w-96 tw-mx-auto"
-                    src="https://www.musora.com/musora-cdn/image/width=500,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaf-ring.png"
+                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/referral/winter/leaf-ring.png"
                     alt="leaf ring"
                 />
             </div>

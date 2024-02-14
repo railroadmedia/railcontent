@@ -4,7 +4,7 @@
 
 @component('partials.bladesora.members.components.header-banner', [
     'hideUser' => true,
-    'backgroundImage' => 'https://www.musora.com/musora-cdn/image/width=1200/'.$packHeader,
+    'backgroundImage' => 'https://www.musora.com/musora-cdn/image/width=1200,quality=95/'.$packHeader,
 ])
     @slot('content')
         <div class="tw-flex tw-flex-col tw-justify-end tw-w-full tw-h-full tw-items-center">
@@ -23,7 +23,7 @@
             @endif --}}
 
             @if($pack['slug'] === '30-day-drummer')
-                <a href="/drumeo/forums/drumeo-coaches/16/30-day-drummer-qanda-thread-for-domino-santantonio/13552?sortby_val=-published_on" 
+                <a href="/drumeo/forums/drumeo-coaches/16/30-day-drummer-qanda-thread-for-domino-santantonio/13552?sortby_val=-published_on"
                     class="btn collapse-200 bg-white inverted short text-white mt-2">
                     Ask A Question
                 </a>
