@@ -197,11 +197,11 @@ const addToPlaylist = () => {
 }
 
 const logoStyle = computed(() => {
-    if(title.value === 'Electrify Your Drumming' || title.value === 'Beyond Beginner Drumming' || title.value === 'Anatomy Of A Drum Solo' || title.value === 'Creative Control' || title.value === 'Getting Started On The Piano' || title.value === 'Easy Chords' || title.value === 'The Power Of Chords' || title.value === 'The Beginner\'s Guide To Classical Piano' || title.value === 'The Beginner\'s Guide To Playing Beautiful Piano' || title.value === 'Beginner Guitar System' || title.value === 'Rhythm & Groove') {
+    if(title.value === 'Electrify Your Drumming' || title.value === 'Beyond Beginner Drumming' || title.value === 'Anatomy Of A Drum Solo' || title.value === 'Creative Control' || title.value === 'Getting Started On The Piano' || title.value === 'Easy Chords' || title.value === 'The Power Of Chords' || title.value === 'The Beginner\'s Guide To Classical Piano' || title.value === 'New Piano Players Start Here' || title.value === 'The Beginner\'s Guide To Playing Beautiful Piano' || title.value === 'Beginner Guitar System' || title.value === 'Rhythm & Groove') {
         return 'lg:tw-max-h-[50px]';
     }
 
-    if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
+    if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === '500 Songs In 5 Days' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
         return 'lg:tw-max-h-[40px]';
     }
 
