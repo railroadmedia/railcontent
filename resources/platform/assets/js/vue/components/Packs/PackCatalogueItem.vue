@@ -197,7 +197,7 @@ const addToPlaylist = () => {
 }
 
 const logoStyle = computed(() => {
-    if(title.value === 'Electrify Your Drumming' || title.value === 'Beyond Beginner Drumming' || title.value === 'Anatomy of a Drum Solo' || title.value === 'Creative Control' || title.value === 'Getting Started on the Piano' || title.value === 'Easy Chords' || title.value === 'The Power of Chords' || title.value === 'The Beginner’s Guide To Classical Piano' || title.value === 'The Beginner’s Guide To PLaying Beautiful Piano' || title.value === 'Beginner Guitar System' || title.value === 'Rhythm & Groove') {
+    if(title.value === 'Electrify Your Drumming' || title.value === 'Beyond Beginner Drumming' || title.value === 'Anatomy Of A Drum Solo' || title.value === 'Creative Control' || title.value === 'Getting Started on the Piano' || title.value === 'Easy Chords' || title.value === 'The Power of Chords' || title.value === 'The Beginner’s Guide To Classical Piano' || title.value === 'The Beginner’s Guide To PLaying Beautiful Piano' || title.value === 'Beginner Guitar System' || title.value === 'Rhythm & Groove') {
         return 'lg:tw-max-h-[50px]';
     }
 
