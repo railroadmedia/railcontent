@@ -1417,12 +1417,28 @@ class ContentRepository extends RepositoryBase
             }
 
             if (!empty($this->groupByFields['associated_table'])) {
-                $orderBy =
-                    ($this->groupByFields['associated_table']['alias'].
-                        '.'.
-                        $this->groupByFields['associated_table']['column']);
+                $orderBy = ('m'.'.'.$this->groupByFields['associated_table']['column']);
+                $db = (new ContentQueryBuilder(
+                    $this->connection(),
+                    $this->connection()
+                        ->getQueryGrammar(),
+                    $this->connection()
+                        ->getPostProcessor()
+                ))->from($this->groupByFields['associated_table']['table'].' as m');
+                $db->selectRaw(
+                    'm.'.$this->groupByFields['associated_table']['column'].' as grouped_by_field,	
+	                COUNT( DISTINCT(lessons.caontent_idd)) AS lessonsCount,
+	                GROUP_CONCAT(lessons.caontent_idd) as lessons_grouped_by_field, '.
+                    ' "'.$this->groupByFields['associated_table']['column'].'" as type'
+                );
+                $rq =
+                    $query->selectRaw(' railcontent_content.id as caontent_idd')
+                        ->whereRaw('railcontent_content.id = m.content_id');
+
                 $contentRows =
-                    $query->selectRaw(' "'.$this->groupByFields['associated_table']['column'].'" as type')
+                    $db->joinLateral($rq, 'lessons')
+                        ->whereNotNull('lessons.id')
+                        ->groupBy('m.'.$this->groupByFields['associated_table']['column'])
                         ->directPaginate($this->page, $this->limit)
                         ->orderByRaw($orderBy.' '.$this->orderDirection)
                         ->getToArray();

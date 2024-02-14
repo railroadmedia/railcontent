@@ -166,8 +166,8 @@ class ContentCompiledColumnTransformer
             $lessonContentIds = explode(',', $lessons);
             $lessonContentIds = array_unique($lessonContentIds);
             $allLessonsCount = count($lessonContentIds);
-            $lessonContentIds = (array_slice($lessonContentIds,0,5));
-            $contentRows[$contentRowIndex]['all_lessons_count'] = $allLessonsCount;
+            $lessonContentIds = (array_slice($lessonContentIds,0,10));
+            $contentRows[$contentRowIndex]['all_lessons_count'] = $contentRow['lessonsCount'] ?? $allLessonsCount;
 
 
             if (empty($lessonContentIds)) {
