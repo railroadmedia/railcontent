@@ -245,7 +245,7 @@ class ContentService
         };
         $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
         $totalCount = count($recommendations);
-        $recommendations = $this->postProcessRecommendationts($recommendations, $sections, $randomize, $pagesSize, $page);
+        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $pagesSize, $page);
         return $this->getContentFilterResultsFromRecommendations($recommendations, $totalCount);
     }
 
@@ -264,14 +264,13 @@ class ContentService
         return $recommendations;
     }
 
-    private function postProcessRecommendationts($recommendations, array $sections, $randomize, $pageSize, $page)
+    private function postProcessRecommendationts($recommendations, $randomize, $pageSize, $page)
     {
         $recommendations = zipperMerge($recommendations);
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
         } else {
-            $offset = ($page  - 1) * $pageSize;
-            $recommendations = array_slice($recommendations, $offset, $pageSize);
+            $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
         }
         return $recommendations;
     }
@@ -298,16 +297,24 @@ class ContentService
     {
         if ($limit > count($recommendations)) {
             return $recommendations;
+        } else {
+            if ($useHourly) {
+                // deterministic random: results will be the same for each hour of the day
+                // no caching involved :)
+                $hour = date("H");
+                srand($hour);
+            }
+            $randomKeys = array_rand($recommendations, $limit);
+            srand(time());
+            return array_intersect_key($recommendations, array_flip($randomKeys));
         }
-        if ($useHourly) {
-            // deterministic random: results will be the same for each hour of the day
-            // no caching involved :)
-            $hour = date("H");
-            srand($hour);
-        }
-        $randomKeys =  array_rand($recommendations, $limit);
-        srand(time());
-        return array_intersect_key($recommendations, array_flip($randomKeys));
+    }
+
+    private function paginateRecommendations($recommendations, $pageSize, $page)
+    {
+        $offset = ($page  - 1) * $pageSize;
+        $recommendations = array_slice($recommendations, $offset, $pageSize);
+        return $recommendations;
     }
 
     /**
