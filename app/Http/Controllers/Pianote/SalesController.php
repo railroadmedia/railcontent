@@ -129,11 +129,6 @@ class SalesController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function giveaway()
-    {
-        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote']);
-    }
-
     public function products(Request $request, $domain, $page = null)
     {
         return view('pianote.products.'.$page);
