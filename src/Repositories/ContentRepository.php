@@ -157,6 +157,16 @@ class ContentRepository extends RepositoryBase
             'column' => 'bpm',
             'alias' => '_rcb',
         ],
+        'gear' => [
+            'table' => 'railcontent_content_gears',
+            'column' => 'gear',
+            'alias' => '_rcge',
+        ],
+        'genre' => [
+            'table' => 'railcontent_content_genres',
+            'column' => 'genre',
+            'alias' => '_rcgn',
+        ],
     ];
 
     /**
@@ -2449,6 +2459,8 @@ class ContentRepository extends RepositoryBase
             'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
+            'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
+            'genre' => ['table' => 'railcontent_content_genres', 'column' => 'genre', 'alias' => '_rcgn'],
         ];
         if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
             $brand = config('railcontent.brand');
@@ -2475,6 +2487,8 @@ class ContentRepository extends RepositoryBase
                 'creativity',
                 'lifestyle',
                 'type',
+                'gear',
+                'genre',
             ];
 
         $filterOptions = array_unique($filterOptions);
@@ -2949,6 +2963,8 @@ class ContentRepository extends RepositoryBase
             'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
+            'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
+            'genre' => ['table' => 'railcontent_content_genres', 'column' => 'genre', 'alias' => '_rcgn'],
         ];
 
         if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
@@ -2975,6 +2991,8 @@ class ContentRepository extends RepositoryBase
                 'creativity',
                 'lifestyle',
                 'type',
+                'gear',
+                'genre'
             ];
 
         $filterOptions = array_unique($filterOptions);
