@@ -2,7 +2,6 @@
     <Breadcrumb
         :breadcrumbs="[{ title: 'Workouts' }]"
     />
-
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
         <section v-if="carouselData.length">
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
@@ -15,8 +14,10 @@
                                 <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                             </template>
                             <template v-slot:content>
-                                <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>
-                                <p>{{ infoText['challenge']['content'] }}</p>
+                                <div class="tw-max-w-[350px]">
+                                    <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>
+                                    <div class="tw-min-w-[350px]">{{ infoText['challenge']['content'] }}</div>
+                                </div>
                             </template>
                         </Tooltip>
                     </div>
@@ -48,9 +49,9 @@
                                 <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                             </template>
                             <template v-slot:content>
-                                <div class="tw-min-w-[350px] tw-w-full">
-                                <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>
-                                <p>{{ infoText['workout']['content'] }}</p>
+                                <div class="tw-max-w-[350px]">
+                                    <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>
+                                    <p>{{ infoText['workout']['content'] }}</p>
                                 </div>
                             </template>
                         </Tooltip>
