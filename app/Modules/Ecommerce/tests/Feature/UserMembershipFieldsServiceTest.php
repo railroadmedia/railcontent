@@ -365,4 +365,57 @@ class UserMembershipFieldsServiceTest extends TestCase
         );
     }
 
+    public function test_membership_total_as_days_for_trial_works()
+    {
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Month,
+            100
+        );
+
+        $product->sku = 'musora-trial-1-month';
+        $product->save();
+        $product->refresh();
+
+        $this->assertTrue($product->isTrial());
+        $this->assertEquals(0, $product->getMembershipTimeAsTotalDays());
+    }
+
+    public function test_membership_total_as_days_for_month_works()
+    {
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Month,
+            100
+        );
+        // factory sets the digital_access_time_interval_length to 1
+        $this->assertEquals(30, $product->getMembershipTimeAsTotalDays());
+
+        // change the length to 6 months
+        $product->digital_access_time_interval_length = 6;
+        $product->save();
+        $product->refresh();
+        $this->assertEquals(180, $product->getMembershipTimeAsTotalDays());
+    }
+
+    public function test_membership_total_as_days_for_year_works()
+    {
+        $product = ProductFactory::createSubscriptionProduct(
+            'musora',
+            DigitalAccessType::Basic,
+            Interval::Year,
+            100
+        );
+        // factory sets the digital_access_time_interval_length to 1
+        $this->assertEquals(365, $product->getMembershipTimeAsTotalDays());
+
+        // change the length to 5 years
+        $product->digital_access_time_interval_length = 5;
+        $product->save();
+        $product->refresh();
+        $this->assertEquals(1825, $product->getMembershipTimeAsTotalDays());
+    }
+
 }

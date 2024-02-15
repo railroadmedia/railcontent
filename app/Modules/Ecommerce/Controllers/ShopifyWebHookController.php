@@ -5,8 +5,10 @@ namespace App\Modules\Ecommerce\Controllers;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
@@ -59,6 +61,8 @@ class ShopifyWebHookController extends Controller
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
             Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
+
+            AddOrderTags::dispatch(new Order(json_decode(json_encode($request->all()), false)));
             $this->handleOrderCreatedEventTracking($request->all());
             $this->updateLastTrialDate($shopifyCustomerId, $request);
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -102,6 +106,7 @@ class ShopifyWebHookController extends Controller
 
     private function handleOrderCreatedEventTracking($order): void
     {
+        // TODO: ensure that AddOrderTags has finished
         $user = $this->shopifySyncService->getOrCreateUser($order['customer']['id'], $order['customer']['email']);
 
         $brand = $this->getBrandFromOrder($order);
