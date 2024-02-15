@@ -1,13 +1,10 @@
 <?php
 
-namespace Modules\Content\Console\Commands;
+namespace App\Modules\Content\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Content\Models\Content;
-use Carbon\Carbon;
 use Exception;
-use Railroad\Railcontent\Events\ContentCreated;
-use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ContentService;
 
 class Filters20242 extends Command
