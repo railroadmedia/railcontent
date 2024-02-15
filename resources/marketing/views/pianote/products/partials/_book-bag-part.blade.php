@@ -384,7 +384,7 @@
                 ],
                 'sku' => 'book-bag',
             ])
-            <a href="/" class="text-center text-xs italic pt-4">Or get your back FREE with a Pianote
+            <a href="/" class="text-center text-xs italic pt-4">Or get your bag FREE with a Pianote
                 Membership</a>
         </div>
 
