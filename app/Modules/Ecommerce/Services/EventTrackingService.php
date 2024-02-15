@@ -37,8 +37,10 @@ class EventTrackingService
                 'musora_user_order',
                 $data,
                 null,
-                Carbon::parse($order['processed_at'])->timestamp),
-            3);
+                Carbon::parse($order['processed_at'])->timestamp
+            ),
+            3
+        );
 
         if ($brand !== 'musora') {
             dispatchWithDelay(
@@ -48,8 +50,10 @@ class EventTrackingService
                     $brand . "_user_order",
                     $data,
                     null,
-                    Carbon::parse($order['processed_at'])->timestamp),
-                3);
+                    Carbon::parse($order['processed_at'])->timestamp
+                ),
+                3
+            );
         }
 
         Avo::order_placed(AvoHelper::defaultEventProperties($data, $user));
@@ -71,8 +75,10 @@ class EventTrackingService
                 'musora_user_refund',
                 $data,
                 null,
-                null),
-            3);
+                null
+            ),
+            3
+        );
 
         $eventTrackingData = $this->getRefundData($refund, $order, $brand);
 
@@ -123,7 +129,7 @@ class EventTrackingService
             'shipping' => floatval($order['total_shipping_price_set']['shop_money']['amount']),
             'tax' => floatval($order['total_tax']),
             'discount' => floatval($order['total_discounts']),
-            'discount_codes' => $order['discount_codes'],
+            'discount_tags' => $this->getDiscountCodes($order),
             'currency' => $order['currency'],
             'products' => $this->getProductList($order['line_items']),
             'brand' => $brand,
@@ -157,5 +163,16 @@ class EventTrackingService
             'brand' => $brand,
             'timestamp' => Carbon::parse($refund['processed_at'])->timestamp,
         ];
+    }
+
+    public function getDiscountCodes(array $order): array
+    {
+        return collect($order['discount_applications'])
+            ->map(function (array $discount) {
+                return match ($discount['type']) {
+                    'automatic' => $discount['title'],
+                    'discount_code' => $discount['code']
+                };
+            })->toArray();
     }
 }
