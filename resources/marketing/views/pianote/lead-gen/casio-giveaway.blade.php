@@ -1,14 +1,14 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Win a Roland FP-30X Digital Piano | Pianote</title>
-    <meta property="og:title" content="Win a Roland FP-30X Digital Piano | Pianote">
+    <title>Win a Casio Priva PX-S1100 | Pianote</title>
+    <meta property="og:title" content="Win a Casio Priva PX-S1100 | Pianote">
 
-    <meta name="description" content="Want a free piano? Simply enter your email address before January 29th to secure your chance to win.">
-    <meta property="og:description" content="Want a free piano? Simply enter your email address before January 29th to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/roland-share.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.pianote.com/giveaway">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">

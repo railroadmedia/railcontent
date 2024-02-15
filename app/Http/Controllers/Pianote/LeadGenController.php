@@ -117,7 +117,7 @@ class LeadGenController extends BaseController
     }
     public function giveaway()
     {
-        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.casio-giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
     }
     public function digitalChordsAndScales()
     {
