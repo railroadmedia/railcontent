@@ -39,8 +39,6 @@ class LogOutWhenNeeded
     {
         if ($user && $user->needs_logout) {
             Log::info("Logging out user $user->id");
-            $user->needs_logout = false;
-            $user->save();
             Auth::logout();
             throw new AuthenticationException();
         }
