@@ -668,4 +668,32 @@ class UserAccessPermissionsService
             $permission->delete();
         });
     }
+
+    public function hasProductNotCached(int $userId, int $productId): bool
+    {
+        $product = $this->productService->getById($productId);
+        if (!$product) {
+            return false;
+        }
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $permissionID =
+            $product->getContentPermissions($contentPermissionsLookup)
+                ->first()->id ?? null;
+        if (!$permissionID) {
+            return false;
+        }
+        $hasProduct = $this->hasPermission($userId, $permissionID);
+        return $hasProduct;
+    }
+
+    public function getNumberProductOwners(int $productId): int
+    {
+        $product = $this->productService->getById($productId);
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $permissionID =
+            $product->getContentPermissions($contentPermissionsLookup)
+                ->first()->id ?? null;
+        $nPackOwners = $this->getNumberPermissionOwners($permissionID);
+        return $nPackOwners;
+    }
 }
