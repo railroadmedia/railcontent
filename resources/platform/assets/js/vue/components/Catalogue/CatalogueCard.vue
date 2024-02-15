@@ -1,10 +1,9 @@
 <template>
     <!--
-        - Cards can be mini with the 'isMiniCard' for continue section
         - Cards can be list view with the 'forceListView' prop for the Related Lessons sections
         - Cards can break to list view in mobile with the 'breakToListView' prop for large catalogs
     -->
-    <div v-if="!isMiniCard"
+    <div
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
             class_object,
@@ -137,67 +136,10 @@
                             :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
                             :position="state.dropdownPosition"
                             @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
-                            @progressReset="emitResetProgress({ content_id: item.id })" />
+                            @progressReset="$emit('progressReset', { content_id: item.id })" />
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div v-else
-        class="tw-group tw-flex tw-items-center tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0">
-        <!-- Thumbnail Image -->
-        <a :href="renderLink  && !forceNoLinks ? item.url : null"
-            class="tw-flex-none tw-h-[70px] tw-w-[121px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">
-            <div
-                class="tw-rounded-[5px] tw-absolute tw-flex tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-h-[70px] tw-w-[121px] tw-justify-center tw-items-center tw-text-white tw-text-center tw-z-[50]">
-                <i class="fas" :class="thumbnailIcon"></i>
-                <p v-if="!isReleased" class="tw-text-sm tw-text-white tw-font-bold">
-                    {{ releaseDate }}
-                </p>
-            </div>
-            <img :src="mappedData.thumbnail"
-                :alt="`${mappedData.color_title} thumbnail`"
-                class="tw-transition-opacity tw-h-[70px] tw-w-[121px] tw-rounded-[5px] tw-opacity-0"
-                :class="item.type === 'song' ? 'tw-blur-sm' : ''"
-                loading="lazy"
-                onload="this.classList.remove('tw-opacity-0')"
-            >
-            <div v-if="item.type === 'song'"
-                class="tw-absolute tw-h-[70px] tw-w-[121px] tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-rounded-[5px]">
-                <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
-            </div>
-        </a>
-
-        <!-- Instructor Name and Title -->
-        <a :href="renderLink  && !forceNoLinks ? item.url : null"
-            class="tw-flex tw-flex-col tw-justify-center tw-flex-grow tw-ml-[10px] tw-font-open-sans tw-h-[70px] tw-overflow-hidden">
-            <!-- Instructor Name -->
-            <div
-                class="tw-font-semibold tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[10px] tw-uppercase tw-truncate tw-leading-[15px]">
-                {{ mappedData.color_title }}
-            </div>
-            <!-- Title -->
-            <div
-                class="tw-text-[#00101D] dark:tw-text-white tw-text-[12px] tw-line-clamp-2 tw-font-[700] tw-leading-[18px]">
-                {{ mappedData.black_title }}
-            </div>
-        </a>
-
-        <!-- Action Button -->
-        <div class="tw-inline-flex tw-items-start tw-p-1 tw-relative"
-            v-click-outside="() => { state.dropdownOpen = false }">
-            <button :id="`${item.id}-action-btn-small`" v-if="item.type !== 'pack-bundle' && showMyListAction"
-                class="tw-flex-none tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
-                :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'" title="More"
-                :data-content-id="item.id" :data-content-type="item.type"
-                @click.prevent="handleShowDropdown(`${item.id}-action-btn-small`)">
-                <DotsHorizontalIcon class="tw-h-[24px] tw-w-[24px]" />
-            </button>
-            <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
-                :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
-                :position="state.dropdownPosition"
-                @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
-                @progressReset="emitResetProgress({ content_id: item.id })" />
         </div>
     </div>
 </template>
@@ -207,7 +149,6 @@ import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
 import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
-import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { snakeToCapitalized } from "../../utils";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
@@ -222,10 +163,6 @@ const props = defineProps({
     item: {
         type: Object,
         default: () => ({}), // Default empty object
-    },
-    brand: {
-        type: String,
-        default: ''
     },
     contentType: {
         type: String,
@@ -267,10 +204,6 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    isMiniCard: {
-        type: Boolean,
-        default: false
-    },
     isSingleItem: {
         type: Boolean,
         default: () => false,
@@ -286,11 +219,10 @@ const {
     contentModel,
     thumbnailIcon,
     renderLink,
-    thumbnailType,
     progress_percent,
     isReleased,
     releaseDate,
-} = useCatalogueItem(props);
+} = useCatalogueItem({ ...props, brand: brand.value });
 
 const state = reactive({
     dropdownOpen: false,
@@ -374,8 +306,11 @@ const thumbnailBadge = computed(() => {
         return `${ props.item.child_count } Workouts`;
     } else if(props.item.type === 'workout') {
         return duration.value;
-    } else {
-        return false;
+    }
+    else if(props.item.type === 'course') {
+        return `${ props.item.child_count } Lessons`;
+    }else {
+        return duration.value;
     }
 })
 
@@ -397,7 +332,7 @@ const contentCreator = computed(() => {
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
     if(contentModel.value.post.fields) {
-        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty').value;
+        difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
     contentModel.value.card.difficulty = difficultyValue;
@@ -411,15 +346,6 @@ const class_object = computed(() => ({
     'dark:tw-border-[#223F57]': props.forceListView,
     'display-inline': props.forceListView,
 }));
-
-const getWrapperClass = computed(() => {
-    if (props.isMiniCard) {
-        return `tw-group tw-py-[4px] tw-h-[78px] tw-relative tw-w-[365px] lg:tw-w-auto tw-shrink-0`;
-    }
-    else {
-        return `tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px] ${class_object.value} ${props.forceListView ? 'tw-py-3' : 'tw-pb-2'}`;
-    }
-});
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
@@ -442,7 +368,5 @@ onUnmounted(() => {
 });
 
 const emit = defineEmits(['addToList', 'progressReset']);
-
-const { emitResetProgress } = useUserCatalogueEvents(props, { emit });
 
 </script>
