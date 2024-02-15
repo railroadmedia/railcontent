@@ -826,7 +826,7 @@
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                    <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                    <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&promo-code=30DDS4-BUNDLE&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                         <h3><strong>30-Day Drummer</strong></h3>
                         <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
                         <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ 50 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
