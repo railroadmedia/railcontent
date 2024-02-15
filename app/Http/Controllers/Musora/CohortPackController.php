@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Musora;
 
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
-use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
