@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
 use Modules\Content\Models\ContentGears;
+use Modules\Content\Models\ContentGenre;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
@@ -205,6 +206,8 @@ class Content extends Model
         'creativity' => 'string',
         'lifestyle' => 'string',
         'gear' => 'string',
+        'genre' => 'string',
+
     ];
 
     public function newEloquentBuilder($query): ContentBuilder
@@ -690,6 +693,25 @@ if($contentInstructor->count() == 0) {
                 $gear->save();
             }
             $this->setField('gear', $value);
+        }
+    }
+
+    public function setGenre($value)
+    {
+        if ($value) {
+            $genre =
+                ContentGenre::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('genre', $value)
+                    ->first();
+            if (!$genre) {
+                $genre = new ContentGenre();
+                $genre->content_id = $this->id;
+                $genre->genre = $value;
+                $genre->position = 1;
+                $genre->save();
+            }
+            $this->setField('genre', $value);
         }
     }
 }
