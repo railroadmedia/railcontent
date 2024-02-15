@@ -236,7 +236,7 @@ class ContentService
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $pagesSize=6, $page=1)
+    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $pageSize=6, $page=1)
     {
         $sectionKey = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
         $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $sectionKey;
@@ -245,7 +245,7 @@ class ContentService
         };
         $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
         $totalCount = count($recommendations);
-        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $pagesSize, $page);
+        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $pageSize, $page);
         return $this->getContentFilterResultsFromRecommendations($recommendations, $totalCount);
     }
 
