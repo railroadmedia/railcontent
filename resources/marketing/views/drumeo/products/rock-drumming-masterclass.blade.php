@@ -60,7 +60,7 @@
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="logo">
                     <p><em>Todd Sucherman's</em></p>
-                        <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drummming Masterclass Logo" fetchpriority="high">
+                        <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drummming Masterclass Logo" fetchpriority="high">
                 </div>
             </div>
             <h3 class="columns">The Rock Drumming Masterclass is a
@@ -408,7 +408,7 @@
                 Just click any of the big buttons on this page to take the first step towards making 2019 your best year ever on the drums.
             </p>
             <div class="columns timeline-pic">
-                <img class="show-for-large transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards.png" alt="Awards Image" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="show-for-large transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards.png" alt="Awards Image" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <img class="hide-for-large transition-all opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards-m.png" alt="Awards Image" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
         </div>
@@ -421,7 +421,7 @@
 
             <div class="columns no-padding drummer-testimonial featured-testimonial">
                 <div class="columns medium-5 large-4 picture">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/steve-smith.jpg" alt="Steve Smith" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/steve-smith.jpg" alt="Steve Smith" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="columns medium-7 large-8 text">
                     <h1>Steve Smith <span class="band">(Journey)</span></h1>
@@ -432,17 +432,17 @@
 
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/will-calhoun.jpg" alt="Will CalHoun" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/will-calhoun.jpg" alt="Will CalHoun" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Will Calhoun<br> <span class="band">(Living Colour)</span></h1>
                     <p>"Todd Sucherman is a great drummer. Although he’s most known for playing Rock-n-Roll, he possesses the facility and knowledge to play any style of music at a high level."</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-dicenso.jpg" alt="Dave Discenso" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-dicenso.jpg" alt="Dave Discenso" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Dave DiCenso<br> <span class="band">(Professor of Percussion at Berklee College of Music)</span></h1>
                     <p>"Todd Sucherman is one of the greatest rock drummers of our time. Brains, brawn, heart and soul - he has 'em all!"</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/simon-phillips.jpg" alt="Simon Phillips" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/simon-phillips.jpg" alt="Simon Phillips" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Simon Phillips<br> <span class="band">(Toto, The Who, Judas Priest)</span></h1>
                     <p>"Whenever I get the opportunity to hear Todd play I am struck by his preciseness and musicality no matter what the musical setting might be."</p>
                 </div>
@@ -450,7 +450,7 @@
 
             <div class="columns no-padding drummer-testimonial featured-testimonial">
                 <div class="columns medium-5 large-4 float-right picture">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gavin-harrison.jpg" alt="Gavin Harrison" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gavin-harrison.jpg" alt="Gavin Harrison" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="columns medium-7 large-8 text">
                     <h1>Gavin Harrison <span class="band">(Porcupine Tree)</span></h1>
@@ -461,17 +461,17 @@
 
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/matt-garska.jpg" alt="Matt Garska" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/matt-garska.jpg" alt="Matt Garska" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Matt Garstka<br> <span class="band">(Animals as Leaders)</span></h1>
                     <p>"Todd Sucherman is a legend. He is super clean, musical and really knows what he's doing. This polished playing only comes about after decades of touring and practice."</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-mattacks.jpg" alt="Dave Dattacks" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-mattacks.jpg" alt="Dave Dattacks" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Dave Mattacks<br> <span class="band">(Fairport Convention)</span></h1>
                     <p>"I’m happy to endorse my chum Todd with this splendid Drumeo course.  Wherever you are along your drumming path, I can honestly say that “Todd hardly ever wrecks the music.”  Seriously though!  You’re in great hands here— double entendre intentional!"</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gary-husband.jpg" alt="Gary Husband" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gary-husband.jpg" alt="Gary Husband" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Gary Husband<br> <span class="band">(Jazz & Rock drummer, pianist, and bandleader.)</span></h1>
                     <p>"It’s always just right-across-the-border drums excellence with Todd! Every time! No matter what the music. It’s the musician he is, primarily, also the warm spirit and how benevolent he is. The taste, the articulation, the feeling, his amazing sound ... all icing on an already delicious cake."</p>
                 </div>
@@ -488,8 +488,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook transition-all opacity-0" alt="Macbook Image" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
-                        <img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo transition-all opacity-0" alt="Masterclass Logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook transition-all opacity-0" alt="Macbook Image" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
+                        <img src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo transition-all opacity-0" alt="Masterclass Logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -620,9 +620,9 @@
 
     <section class="text-center guarantee">
         <div class="row">
-            <img class="guarantee-badge hide-for-medium transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="Guarantee Badge">
+            <img class="guarantee-badge hide-for-medium transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="Guarantee Badge">
             <div class="flex-container">
-                <img class="guarantee-badge show-for-medium transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="guarantee-badge show-for-medium transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
                     <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Rock Drumming Masterclass experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
@@ -634,7 +634,7 @@
     <section class="final">
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
-            <div class="columns logo"><img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drumming Masterclass Logo" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
+            <div class="columns logo"><img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drumming Masterclass Logo" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
 
             <h1 class="columns">
                 Todd Sucherman’s 26-Week Online <br class="hide-for-large">

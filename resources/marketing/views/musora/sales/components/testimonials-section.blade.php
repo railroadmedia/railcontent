@@ -24,7 +24,7 @@
                     {{ number_format(Prices::$reviews) }}
                 @endif
                 student reviews.</strong>
-            <a class="inline-block" target="_blank"
+            <a role="link" aria-label="Link to shopperapproved" class="inline-block" target="_blank"
                 @if($theme == 'drumeo')
                     href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738"
                     onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;"
@@ -57,6 +57,7 @@
                             pauseOnHover: true,
                             pauseOnFocus: true,
                             interval: 5000,
+                            lazyLoad: 'nearby',
                             breakpoints: {
                                 1020: {
                                     padding: '2.5rem',
@@ -69,7 +70,8 @@
                                     snap   : false,
                                 },
                             },
-                        }).mount()
+                        }
+                        ).mount()
                     },
                 }"
             >
@@ -80,21 +82,25 @@
                                 <li class="splide__slide flex px-1">
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
                                         style="background-color:#0C1524;">
-                                        <div class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
-                                             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                             :style="`background-image:url('{{$testimonial['image']}}'); background-color: rgba(0, 0, 0, 0.6)`"
-                                             x-intersect.once="lazyLoad = true"
+                                        <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                             @endif
                                         >
-                                        </div>
+                                            <img
+                                                data-splide-lazy="{{$testimonial['image']}}"
+                                                alt="{{ $testimonial['name'] }}"
+                                                class="object-cover w-full h-full"
+                                                @load="event.target.parentNode.style.backgroundImage = `url(${event.target.src})`"
+                                            >
+                                        </picture>
                                         <div class="flex flex-col justify-between text-left sm:pl-8 sm:py-5">
                                             <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
                                             <div class="flex items-center">
                                                 @if(!empty($testimonial['avatar']))
                                                     <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }} opacity-0 transition-opacity"
                                                         loading="lazy" onload="this.classList.remove('opacity-0')"
+                                                        alt="Avatar"
                                                         src="{{$testimonial['avatar']}}">
                                                 @endif
                                                 <div class="">
@@ -163,18 +169,18 @@
         @if(!empty($youtube))
             <div class="flex flex-wrap items-start justify-center mx-auto mt-10 sm:mt-16 lg:mt-20 max-w-3xl">
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#cd201f;">
-                    <a href="{{ $youtubeLink }}" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-4xl sm:text-5xl"></i>
+                    <a href="{{ $youtubeLink }}" target="_blank" aria-label="Youtube Link" role="link"> <i class="fab fa-youtube text-4xl sm:text-5xl"></i>
                     </a>
                     <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $youtube }}</h2>
                     <p class="uppercase sm:tracking-widest">Subscribers</p>
                 </div>
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#3b5998;">
-                    <a href="{{ $facebookLink }}" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i> </a>
+                    <a href="{{ $facebookLink }}" target="_blank" aria-label="Facebook Link" role="link"> <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i> </a>
                     <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $facebook }}</h2>
                     <p class="uppercase sm:tracking-widest">Likes</p>
                 </div>
                 <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5 instagram">
-                    <a href="{{ $instagramLink }}" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-4xl sm:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
+                    <a href="{{ $instagramLink }}" target="_blank" aria-label="Instagram Link" role="link"> <i class="fab fa-instagram text-4xl sm:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
                     </a>
                     <h2 class="font-black leading-none my-1 sm:my-2">{{ $instagram }}</h2>
                     <p class="uppercase sm:tracking-widest" style="color:#E1306C">Followers</p>

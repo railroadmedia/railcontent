@@ -105,7 +105,6 @@
         }
         .power-pack-signup form input[type="submit"] {
             font-family: "Bebas Neue", sans-serif;
-            font-weight: 700;
             color: #FFF;
             background: #0b76db;
             text-transform: uppercase;

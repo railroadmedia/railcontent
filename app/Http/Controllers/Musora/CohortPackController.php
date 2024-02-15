@@ -3,33 +3,25 @@
 namespace App\Http\Controllers\Musora;
 
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
+use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Carbon\Carbon;
 use Doctrine\ORM\ORMException;
-use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Railroad\Ecommerce\Entities\Product;
-use Railroad\Ecommerce\Entities\User;
-use Railroad\Ecommerce\Repositories\ProductRepository;
-use Railroad\Ecommerce\Services\UserProductService;
 use Throwable;
 
 class CohortPackController
 {
 
-    private ProductRepository $productRepository;
-    private UserProductService $userProductService;
     private UserAccessPermissionsService $userAccessPermissionsService;
+    private ProductService $productService;
 
     public function __construct(
-        ProductRepository $productRepository,
-        UserProductService $userProductService,
         UserAccessPermissionsService $userAccessPermissionsService,
+        ProductService $productService
     ) {
-        $this->productRepository = $productRepository;
-        $this->userProductService = $userProductService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
+        $this->productService = $productService;
     }
 
     /**
@@ -42,13 +34,10 @@ class CohortPackController
     private function registerForProductPack(string $sku, string $successMessage): RedirectResponse
     {
         if (user()?->isAMember()) {
-            $user = new User(user()->id, user()->email);
-
-            /** @var Product $product */
-            $product = $this->productRepository->bySku($sku);
+            $product = $this->productService->getBySku($sku);
             $this->userAccessPermissionsService->addUserAccessPermissionsForProducts(
-                $user->getId(),
-                [$product->getId()],
+                user()->id,
+                [$product->id],
                 Carbon::now(),
                 '',
                 UserAccessPermissionsSourceEnum::Challenges

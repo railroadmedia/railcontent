@@ -4,7 +4,6 @@
 
 @extends('musora._partials.layout', [
     'whiteNav' => true,
-    'fullSubscriptionVersion' => true,
 ])
 
 @section('head-includes')
@@ -15,13 +14,16 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.webp">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/musora/membership/homepage/2023/share-image3.jpg">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         .join {
             display:inline-block;
             font:500 22px/1em 'Bebas Neue', sans-serif;
@@ -275,36 +277,36 @@
                 top: 0;
             }
             20% {
-                top: -110px;
+                top: -100px;
             }
             39% {
-                top: -110px;
+                top: -100px;
             }
             40% {
-                top: -220px;
+                top: -200px;
             }
             59% {
-                top: -220px;
+                top: -200px;
             }
             60% {
-                top: -330px;
+                top: -300px;
             }
             79% {
-                top: -330px;
+                top: -300px;
             }
             80% {
-                top: -440px;
+                top: -400px;
             }
             99% {
-                top: -440px;
+                top: -400px;
             }
             100% {
                 top: 0;
             }
         }
 
+
         .rotater-text span {
-            line-height: 110px;
             animation: move 25s infinite;
             background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);
             -webkit-background-clip: text;
@@ -429,14 +431,34 @@
             'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
         ])
     @endif
-    @include('musora.sales.components.order-section-collage', [
-    'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
-    'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
-    'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
-    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
-    'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
-    ])
+    <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
+    @if(!empty($hideMenu))
+        @include('musora.sales.components.card-selection-section', [
+            "whiteBg" => true,
+            "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+            "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+            "songs" => "Thousands of popular songs.",
+            "firstPoint" => "Learn piano, guitar, drums, & singing.",
+            "thirdPoint" => "Unlimited personal support",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'musical',
+        ])
+    @else
+        @include('musora.sales.components.order-section-collage', [
+        'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',
+        'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> Personalized feedback from real teachers.</li>
+        <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> All-access for piano, guitar, drums, and singing.</li>',
+        'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
+        ])
+    @endif
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/musora/membership/homepage/2024/devices2.webp',

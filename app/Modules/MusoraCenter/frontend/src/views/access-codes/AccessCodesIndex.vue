@@ -2,11 +2,11 @@
     <v-container>
         <v-row align="center">
             <v-col
-                    class="column"
-                    cols="12"
+                class="column"
+                cols="12"
             >
                 <v-custom-breadcrumbs
-                        :breadcrumbs="breadcrumbs"
+                    :breadcrumbs="breadcrumbs"
                 ></v-custom-breadcrumbs>
             </v-col>
 
@@ -54,17 +54,17 @@
                     <template v-slot:item="{ item }">
                         <tr>
                             <td class="text-center">
-                                <v-custom-brand-icon :brand="item.attributes.brand"></v-custom-brand-icon>
+                                <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                             </td>
 
                             <td class="text-center">
-                                <v-icon :color="!item.attributes.is_claimed ? 'green' : 'red'">
-                                    {{ !item.attributes.is_claimed ? 'check_circle' : 'cancel' }}
+                                <v-icon :color="!item.is_claimed ? 'green' : 'red'">
+                                    {{ !item.is_claimed ? 'check_circle' : 'cancel' }}
                                 </v-icon>
                             </td>
 
                             <td>
-                                {{ item.attributes.code }}
+                                {{ item.code }}
                             </td>
 
                             <td>
@@ -81,34 +81,34 @@
                                 </ul>
                             </td>
                             <td>
-                                {{ item.attributes.source }}
+                                {{ item.source }}
                             </td>
 
                             <td>
                                 {{
-                                    item.attributes.claimed_on
-                                        ? moment(item.attributes.claimed_on).format('MMM D, Y')
+                                    item.claimed_on
+                                        ? moment(item.claimed_on).format('MMM D, Y')
                                         : ''
                                 }}
                             </td>
 
                             <td>
-                                {{ getAccessCodeClaimant(item) }}
+                                {{ item.claimer ? item.claimer.email : "" }}
                             </td>
 
                             <td class="text-center">
                                 <v-tooltip top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
-                                            v-if="item.attributes.is_claimed"
+                                            v-if="item.is_claimed"
                                             fab
                                             x-small
                                             raised
                                             :color="brandColor"
                                             class="mx-1 white--text"
                                             :to="{ name: 'users.edit', params: {
-                                                id: item.relationships.claimer
-                                                    ? item.relationships.claimer.data.id
+                                                id: item.claimer
+                                                    ? item.claimer.id
                                                     : 0
                                             }}"
                                             v-on="on"
@@ -125,7 +125,7 @@
                                 <v-tooltip top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
-                                            v-if="!item.attributes.is_claimed"
+                                            v-if="!item.is_claimed"
                                             fab
                                             x-small
                                             raised
@@ -146,7 +146,7 @@
                                 <v-tooltip top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
-                                            v-if="item.attributes.is_claimed"
+                                            v-if="item.is_claimed"
                                             fab
                                             x-small
                                             raised
@@ -437,7 +437,7 @@ export default {
                     if (response) {
                         this.accessCodes = response.data.data;
                         this.accessCodesIncludedData = response.data.included;
-                        this.totalPages = response.data.meta.pagination.total_pages;
+                        this.totalPages = response.data.meta.last_page;
                     }
                 })
                 .finally(() => {
@@ -456,7 +456,7 @@ export default {
                     if (response) {
                         this.accessCodes = response.data.data;
                         this.accessCodesIncludedData = response.data.included;
-                        this.totalPages = response.data.meta.pagination.total_pages;
+                        this.totalPages = response.data.meta.last_page;
                     }
                 })
                 .finally(() => {
@@ -464,33 +464,8 @@ export default {
                 });
         },
 
-        getAccessCodeClaimant(item) {
-            if (!item.relationships || !item.relationships.claimer) {
-                return '';
-            }
-
-            const user = this.getRelatedAttributesByTypeAndId(
-                item.relationships.claimer.data,
-                this.accessCodesIncludedData,
-            );
-
-            return user.attributes.email;
-        },
-
         getAccessCodeProduct(item) {
-
-            if (!item.relationships || !item.relationships.product) {
-                return ['N/A'];
-            }
-
-            const products = item.relationships.product.data.map(
-                product => this.getRelatedAttributesByTypeAndId(
-                    product,
-                    this.accessCodesIncludedData,
-                ),
-            );
-
-            return products.map(product => product.attributes.name);
+            return item.products.map(product => product.name);
         },
 
         getUser() {
@@ -516,7 +491,7 @@ export default {
 
         openClaimForm(item) {
             this.dialog = true;
-            this.newAccessCode = item.attributes.code;
+            this.newAccessCode = item.code;
         },
 
         cancelForm() {

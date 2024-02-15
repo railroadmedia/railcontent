@@ -33,6 +33,7 @@
                             type="button"
                             :class="selectedId === {{ $key+1 }} ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
                             class="px-5 py-2 lg:py-2.5 w-full relative rounded-full relative z-20"
+                            aria-label="{{ $button }}"
                         >
                             {!!  $button  !!}
                         </button>
@@ -51,6 +52,7 @@
                 <section
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
                     :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
+                    
                 >
                     <h4 class="font-extrabold mb-3 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
@@ -69,6 +71,7 @@
                                         type: 'loop',
                                         focus: 0,
                                         interval: 2000,
+                                        lazyLoad: 'nearby',
                                         breakpoints: {
                                             1020: {
                                                 padding: '2rem',
@@ -95,9 +98,14 @@
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
                                                 <picture>
-                                                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}">
-                                                    <img alt="{{ $image['instructor'] }}" class="absolute top-0 left-0 w-full h-full object-cover"
-                                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/{{$image['img']}}"/>
+                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{$image['img']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{$image['img']}}">
+                                                    <img
+                                                        alt="{{ $image['instructor'] }}" 
+                                                        class="absolute top-0 left-0 w-full h-full object-cover transition-opacity opacity-0 duration-300"
+                                                        data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}"
+                                                        onload="this.classList.remove('opacity-0');"
+                                                    />
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
                                                     <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['title'] !!}</h4>
@@ -122,10 +130,13 @@
         <a class="sm:mx-1 w-full sm:w-64 join @if($theme != 'musora') {{ $theme }} @else musora-gold @endif smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
+                aria-label="Customize Anchor"
             @elseif(!empty($month))
                 href="/choose-your-trial-month"
+                aria-label="Choose Your Trial Month"
             @else
                 href="/choose-plan"
+                aria-label="Choose Plan"
             @endif
         >
             @if(!empty($promoVersion) && empty($trialVersion))

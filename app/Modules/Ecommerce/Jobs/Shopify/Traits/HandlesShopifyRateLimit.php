@@ -32,7 +32,14 @@ trait HandlesShopifyRateLimit
             return;
         }
 
-        $limit = $this->shopify->getLastResponse()?->headers()["X-Shopify-Shop-Api-Call-Limit"][0] ?? null;
+        // set the headers keys to all caps, to avoid any issues with casing
+        $headers = $this->shopify->getLastResponse()?->headers() ?? null;
+        if (is_null($headers)) {
+            return;
+        }
+        $headers = array_change_key_case($headers, CASE_UPPER);
+
+        $limit = $headers["X-SHOPIFY-SHOP-API-CALL-LIMIT"][0] ?? null;
         if (is_null($limit)) {
             return;
         }

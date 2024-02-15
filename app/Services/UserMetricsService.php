@@ -5,15 +5,10 @@ namespace App\Services;
 use App\ValueObjects\UserProfileMetrics;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
-use Railroad\Ecommerce\Services\UserProductService;
-use Railroad\Points\Services\UserPointsService;
 
 class UserMetricsService
 {
-//    /**
-//     * @var UserProductService
-//     */
-//    private $userProductService;
+
 
     /**
      * @var DatabaseManager
@@ -32,7 +27,6 @@ class UserMetricsService
      */
     public function __construct(DatabaseManager $databaseManager)
     {
-//        $this->userProductService = $userProductService;
         $this->databaseManager = $databaseManager;
     }
 

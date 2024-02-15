@@ -27,8 +27,8 @@
                     loop
                     playsinline
                     preload="none"
-                    x-ref="video"
-                    x-effect="if (videoLoaded) { $refs.video.play(); }"
+                    x-ref="videoSongsSection"
+                    x-effect="if (videoLoaded && $refs.videoSongsSection) { $refs.videoSongsSection.play(); }"
                     x-intersect.once="videoLoaded = true"
                     ></video>
                         {{-- <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video> --}}
@@ -51,9 +51,9 @@
         </div>
 
         @if(empty($promoVersion))
-            <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline white smaller">SEE SONGS LIST</a>
+            <a role="link" aria-label="See songs list" href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline white smaller">SEE SONGS LIST</a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a role="link" aria-label="See your deal" class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @elseif(!empty($month))

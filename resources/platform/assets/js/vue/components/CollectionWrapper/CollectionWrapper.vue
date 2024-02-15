@@ -1,13 +1,14 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
         <transition appear name="fade">
-            <CollectionResults :brand="brand" :current-page="getCurrentPage" :total-pages="getTotalPages" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :brand="brand" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -41,6 +42,7 @@ import {storeToRefs} from "pinia";
 import { useUserStore } from "../../../stores/user";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
+import PackCatalogue from "../Packs/PackCatalogue";
 
 const props = defineProps({
     collectionType: {
@@ -94,6 +96,22 @@ const props = defineProps({
         type: String,
         default: () => '',
     },
+    infiniteScroll: {
+        type: Boolean,
+        default: () => true,
+    },
+    hideSortIcon: {
+        type: Boolean,
+        default: () => false,
+    },
+    searchPlaceholder: {
+        type: String,
+        default: 'Search',
+    },
+    withoutEnrollment: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -110,6 +128,7 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
+        ...(isPack.value && { without_enrollment: props.withoutEnrollment })
     };
 })
 
@@ -190,6 +209,10 @@ const isChallenge = computed(() => {
     return props.collectionType === 'challenge';
 });
 
+const isPack = computed(() => {
+    return props.collectionType === 'pack';
+})
+
 //List view reactive
 const isList = computed(() => {
     return !isPlayAlong.value && !isRoutine.value && !isWorkout.value && !isChallenge.value;
@@ -197,11 +220,6 @@ const isList = computed(() => {
 
 const showGroupBy = computed(() => {
     return tabData.value[filter.value.activeTab]?.groupByView;
-})
-
-//Filter state reactive
-const hideFilter = computed(() => {
-    return isRoutine.value || isStudentReview.value;
 })
 
 //Tab options reactive
@@ -314,7 +332,7 @@ onBeforeMount(() => {
 
 onMounted(() => {
     // console.log(props.collectionType)
-    // console.log(props.title)
+    // console.log(props.withoutEnrollment)
     // console.log(props.preLoadedContent)
     collectionStore.setDefaults({
         isCoach: isCoach.value,

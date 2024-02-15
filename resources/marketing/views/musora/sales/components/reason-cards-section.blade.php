@@ -41,16 +41,17 @@
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                         <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
                              :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                             x-intersect.once="lazyLoad = true"
+                             x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;"
                              x-on:click="open = ! open"
                         >
-                            <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl">
-                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                            <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
+                                <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
                                         media="(min-width: 640px)">
-                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                <img x-ref="image"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/5x0/filters:quality(10)/filters:blur(5)/{{ $gridItem['image'] }}"
+                                    data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
                                      alt="{{ $gridItem['title'] }}"
                                      class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity"
-                                     loading="lazy"
                                      onload="this.classList.remove('opacity-0')">
                             </picture>
 
@@ -71,19 +72,21 @@
                     @if($key > 2 && $key < 6)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
                             <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
-                                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                                 x-intersect.once="lazyLoad = true"
-                                 x-on:click="open = ! open"
+                                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;"
+                                x-on:click="open = ! open"
                             >
-                                <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl">
-                                    <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
-                                            media="(min-width: 640px)">
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
-                                         alt="{{ $gridItem['title'] }}"
-                                         class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity"
-                                         loading="lazy"
-                                         onload="this.classList.remove('opacity-0')">
-                                </picture>
+                            <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
+                                <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                        media="(min-width: 640px)">
+                                <img x-ref="image"
+                                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/5x0/filters:quality(10)/filters:blur(5)/{{ $gridItem['image'] }}"
+                                    data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                    alt="{{ $gridItem['title'] }}"
+                                    class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')">
+                            </picture>
 
                                 <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
                                     <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
@@ -102,7 +105,7 @@
         @if(empty($promoVersion))
             <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline black smaller">{{ $theme }} METHOD</a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a role="link" aria-label="See your deal" class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @elseif(!empty($month))

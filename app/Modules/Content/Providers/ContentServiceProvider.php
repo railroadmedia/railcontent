@@ -30,19 +30,5 @@ class ContentServiceProvider extends ServiceProvider
         parent::boot();
 
         ContentField::observe(ContentFieldObserver::class);
-
-        $this->commands([
-                            CoachBulkDataUpdate::class,
-                            CoachBulkImageUpdate::class,
-                            RebuildSearchIndexes::class,
-                            FixProgressOnUnpublishedContent::class,
-                            PredefinedPlaylists::class,
-                            MigrateMissingPlaylistsItems::class,
-                            SongDuration::class,
-                            ImportSongsDuration::class,
-                            RecalculatePlaylistDuration::class,
-                            WorkoutsImport2023::class,
-            ChallengesImport2023::class,
-                        ]);
     }
 }

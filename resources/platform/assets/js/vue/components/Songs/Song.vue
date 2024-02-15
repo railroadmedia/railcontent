@@ -187,16 +187,16 @@ const handleCloseSoundslice = () => {
 
                         <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]">
                             <!-- Song Image Background -->
-                            <img :src="`https://www.musora.com/musora-cdn/image/width=500/${thumbnailUrl}`" 
-                                class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm" 
+                            <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnailUrl}`"
+                                class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0 tw-blur-sm"
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             >
                             <!-- Song Image -->
                             <div class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                                <img class="tw-h-full tw-object-cover tw-opacity-0" 
-                                    :src="thumbnailUrl" 
-                                    :alt="`${songTitle} album cover`"  
+                                <img class="tw-h-full tw-object-cover tw-opacity-0"
+                                    :src="thumbnailUrl"
+                                    :alt="`${songTitle} album cover`"
                                     loading="lazy"
                                     onload="this.classList.remove('tw-opacity-0')"
                                 />

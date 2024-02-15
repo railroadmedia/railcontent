@@ -58,7 +58,6 @@
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
             font-family: 'Bebas Neue', sans-serif;
-            font-weight: 700;
             color: #fff;
             background: #F61A30;
             text-transform: uppercase;
@@ -391,7 +390,6 @@ $items = [
                 </div> --}}
         </div>
         @include('drumeo.products.partials.evergreen._price-link', [
-            'price' => $price,
             'enrollmentLink' => $enrollmentLink,
             'brandTitle' => $brandTitle,
         ])

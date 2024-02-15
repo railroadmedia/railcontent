@@ -4,12 +4,14 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
+use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Gateways\RechargeGateway;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Models\User;
 
 class SubscriptionService
 {
@@ -97,7 +99,7 @@ class SubscriptionService
             }
             $membershipExpirationDate = $userAccessPermissions->getMembershipExpirationDate(
                 includeBuffer: false,
-                includeFixedTimes: true
+                ignoreSources: [UserAccessPermissionsSourceEnum::Challenges->value]
             )?->startOfDay() ?? null;
             // BR-1243: safety check for null nextChargeScheduledAt
             if (is_null($mostRecentActiveSubscription->nextChargeScheduledAt)) {
@@ -212,5 +214,20 @@ class SubscriptionService
         $musoraSubscription->save();
 
         return $musoraSubscription;
+    }
+
+    public function cancelAllSubscriptions(User $user, string $reason): void
+    {
+        try {
+            $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
+            $subscriptions->each(function ($subscription) use ($reason) {
+                if ($subscription->status == RechargeSubscriptionStatusEnum::Active->value) {
+                    $this->recharge->cancelSubscription($subscription, $reason);
+                }
+            });
+        } catch (\Exception $e) {
+            Log::error("Failed to cancel subscriptions for user $user->id");
+            Log::error($e);
+        }
     }
 }

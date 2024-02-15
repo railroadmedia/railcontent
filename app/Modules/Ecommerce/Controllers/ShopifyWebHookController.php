@@ -3,9 +3,11 @@
 namespace App\Modules\Ecommerce\Controllers;
 
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
+use App\Modules\Ecommerce\Services\EventTrackingService;
+use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Services\EventTrackingService;
+use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -31,6 +33,17 @@ class ShopifyWebHookController extends Controller
         try {
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
+            $processedAt = $request->get('processed_at');
+
+            if ($processedAt) {
+                $launchDate = new Carbon(config('ecommerce.launch_date_times.shopify'));
+                $processedAtDate = new Carbon($processedAt);
+                if ($processedAtDate->isBefore($launchDate)) {
+                    Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring update.");
+                    return;
+                }
+            }
+
             Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
             dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -45,6 +58,7 @@ class ShopifyWebHookController extends Controller
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
             Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
+            AddOrderTags::dispatch(new Order(json_decode(json_encode($request->all()), false)));
             $this->eventTrackingService->handleOrderCreatedEventTracking($request->all());
             $this->updateLastTrialDate($shopifyCustomerId, $request);
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook

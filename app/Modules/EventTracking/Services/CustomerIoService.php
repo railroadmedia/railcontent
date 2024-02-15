@@ -73,6 +73,7 @@ class CustomerIoService
         $attributes[$brand . '_membership_subscription_latest-start-date'] = $purchaseTimestamp;
         $attributes[$brand . '_membership_subscription_first-start-date'] = Carbon::parse($user->created_at)->timestamp;
         $attributes[$brand . '_membership_subscription_trial-type'] = $this->getTrialType($product);
+        $attributes[$brand . '_membership_latest-access-product-id'] = $product->id;
 
         dispatch(
             (new CustomerIoSyncUserByUserId($user, $attributes))->delay(

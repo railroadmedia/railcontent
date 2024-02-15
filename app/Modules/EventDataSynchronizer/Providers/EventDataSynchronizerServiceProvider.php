@@ -2,12 +2,12 @@
 
 namespace App\Modules\EventDataSynchronizer\Providers;
 
+use App\Modules\Ecommerce\Events\AccessCodeClaimed;
+use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use App\Modules\Ecommerce\Events\UserAccessPermissionsUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
-use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOrders;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
@@ -15,34 +15,13 @@ use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncByPermi
 use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipSyncCustom;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
-use Railroad\Ecommerce\Events\AccessCodeClaimed;
-use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
-use Railroad\Ecommerce\Events\AppSignupStartedEvent;
-use Railroad\Ecommerce\Events\AugustContestReferralClaimed;
-use Railroad\Ecommerce\Events\MobileOrderEvent;
-use Railroad\Ecommerce\Events\MobilePaymentEvent;
-use Railroad\Ecommerce\Events\OrderEvent;
-use Railroad\Ecommerce\Events\PaymentEvent;
-use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
-use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodUpdated;
-use Railroad\Ecommerce\Events\Subscriptions\CommandSubscriptionRenewFailed;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewFailed;
-use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\HelpScoutIndex;
 use App\Modules\EventDataSynchronizer\Console\Commands\ProductOwnerUserFieldResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoExistingDevices;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoForUpdatedUserProductsAndSubscriptions;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOldEvents;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncExistingHelpScout;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncHelpScout;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncHelpScoutAsync;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentPermissionsResyncTool;
-use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipFieldsResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\IsDrumeoLifetimeUserFieldResyncTool;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
@@ -64,11 +43,11 @@ use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Referral\Events\ReferralClaimed;
+use App\Modules\Referral\Events\ReferralClaimed;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
-use Railroad\Referral\Events\EmailInvite;
+use App\Modules\Referral\Events\EmailInvite;
 
 class EventDataSynchronizerServiceProvider extends EventServiceProvider
 {
@@ -86,64 +65,11 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             CustomerIoSyncEventListener::class . '@handleUserUpdated',
             HelpScoutEventListener::class . '@handleUserUpdated',
         ],
-        PaymentMethodCreated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserPaymentMethodCreated',
-        ],
-        PaymentMethodUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserPaymentMethodUpdated',
-        ],
-        UserProductCreated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductCreated',
-            UserProductToUserContentPermissionListener::class . '@handleCreated',
-            HelpScoutEventListener::class . '@handleUserProductCreated',
-            UserMembershipFieldsListener::class . '@handleUserProductCreated',
-        ],
-        UserProductUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductUpdated',
-            UserProductToUserContentPermissionListener::class . '@handleUpdated',
-            HelpScoutEventListener::class . '@handleUserProductUpdated',
-            UserMembershipFieldsListener::class . '@handleUserProductUpdated',
-        ],
-        UserProductDeleted::class => [
-            CustomerIoSyncEventListener::class . '@handleUserProductDeleted',
-            UserProductToUserContentPermissionListener::class . '@handleDeleted',
-            HelpScoutEventListener::class . '@handleUserProductDeleted',
-            UserMembershipFieldsListener::class . '@handleUserProductDeleted',
-        ],
         UserAccessPermissionsUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleUserAccessPermissionsUpdated',
             UserProductToUserContentPermissionListener::class . '@handleUserAccessPermissionsUpdated',
             HelpScoutEventListener::class . '@handleUserAccessPermissionsUpdated',
             UserMembershipFieldsListener::class . '@handleUserAccessPermissionsUpdated',
-        ],
-        SubscriptionCreated::class => [
-            CustomerIoSyncEventListener::class . '@handleSubscriptionCreated',
-            HelpScoutEventListener::class . '@handleSubscriptionCreated',
-        ],
-        SubscriptionUpdated::class => [
-            CustomerIoSyncEventListener::class . '@handleSubscriptionUpdated',
-            HelpScoutEventListener::class . '@handleSubscriptionUpdated',
-        ],
-        SubscriptionRenewed::class => [
-            CustomerIoSyncEventListener::class . '@handleSubscriptionRenewed',
-            HelpScoutEventListener::class . '@handleSubscriptionRenewed',
-        ],
-        SubscriptionRenewFailed::class => [
-            CustomerIoSyncEventListener::class . '@handleSubscriptionRenewalAttemptFailed',
-            HelpScoutEventListener::class . '@handleSubscriptionRenewalAttemptFailed',
-        ],
-        OrderEvent::class => [
-            CustomerIoSyncEventListener::class . '@handleOrderPlaced',
-        ],
-        PaymentEvent::class => [
-            CustomerIoSyncEventListener::class . '@handlePaymentPaid',
-        ],
-
-        AppSignupStartedEvent::class => [
-            CustomerIoSyncEventListener::class . '@handleAppSignupStarted',
-        ],
-        AppSignupFinishedEvent::class => [
-            CustomerIoSyncEventListener::class . '@handleAppSignupFinished',
         ],
         CommentLiked::class => [
             CustomerIoSyncEventListener::class . '@handleCommentLiked',
@@ -190,9 +116,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         EmailInvite::class => [
             CustomerIoSyncEventListener::class . '@handleReferralInvite',
         ],
-        CommandSubscriptionRenewFailed::class => [
-            UserProductToUserContentPermissionListener::class . '@handleSubscriptionRenewalFailureFromDatabaseError'
-        ],
         StudentMentorsUpdated::class => [
             CustomerIoSyncEventListener::class . '@handleMentorUpdated',
         ],
@@ -214,12 +137,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         AugustContestReferralClaimed::class => [
             CustomerIoSyncEventListener::class . '@handleAugustContestReferralClaimed',
         ],
-        MobileOrderEvent::class => [
-
-        ],
-        MobilePaymentEvent::class => [
-            CustomerIoSyncEventListener::class . '@handleMobilePaymentPlaced',
-        ]
     ];
 
     /**
@@ -233,7 +150,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
 
         $this->commands(
             [
-                SyncCustomerIoForUpdatedUserProductsAndSubscriptions::class,
                 UserContentPermissionsResyncTool::class,
                 UserContentProductPermissionsResyncTool::class,
                 PackBonusExpirationDateResyncTool::class,
@@ -241,7 +157,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncExistingHelpScout::class,
                 HelpScoutIndex::class,
                 SyncHelpScoutAsync::class,
-                SyncCustomerIoOldEvents::class,
                 SyncCustomerIoExistingDevices::class,
                 UserMembershipSyncByPermissions::class,
                 UserMembershipSyncCustom::class,
@@ -251,7 +166,6 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 CustomerIOSyncUser::class,
                 MigrateMinutesWatchedPoints::class,
                 SyncPoints::class,
-                SyncCustomerIoOrders::class,
             ]
         );
         $this->mergeConfigFrom(

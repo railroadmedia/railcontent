@@ -3,18 +3,23 @@
         style="background: {{ $bgColor }};"
     @else
         style="background: linear-gradient(45deg, #07233e, #0c1524);"
-  @endif >
+  @endif 
+  x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
-            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0">
+            <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
+            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+            x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
                 <picture>
-                    <source media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
-                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
-                    <img class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
+                    <source type="image/webp" media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
+                    <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
+                    <img x-ref="collage" 
+                         class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
-                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
+                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/{!! $image !!}"
+                         data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/{!! $image !!}"
                          alt="{{$theme}} collage image"
                     >
                 </picture>
@@ -29,7 +34,7 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
+                    <a role="link" aria-label="Start your membership" class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                     @if(!empty($orderUrl))
                         href="{{ $orderUrl }}"
                     @elseif(!empty($month))

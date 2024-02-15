@@ -3,16 +3,16 @@
 namespace App\Providers;
 
 use App\Decorators\Content\VimeoTrailerDecorator;
-use App\Maps\ProductAccessMap;
-use App\Models\Brand;
-use App\Models\Carousel;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
+use App\Modules\Content\Services\ContentPermissionsService;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
+use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Content\Services\LearningPathsService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Services\PackService;
 use App\Services\PlaylistService;
-use Carbon\Carbon;
-use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -21,50 +21,49 @@ class MusoraApiProductProvider implements ProductProviderInterface
 {
     private CarouselService $carouselService;
     private UserProductService $userProductService;
-    private ProductRepository $productRepository;
     private CohortService $cohortService;
     private PackService $packService;
     private VimeoTrailerDecorator $vimeoTrailerDecorator;
     private ContentService $contentService;
     private PlaylistService $playlistService;
+    private ProductService $productService;
+    private LearningPathsService $learningPathsService;
+    private ContentPermissionsService $contentPermissionsService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
-    /**
-     * @param CarouselService $carouselService
-     * @param UserProductService $userProductService
-     * @param ProductRepository $productRepository
-     * @param CohortService $cohortService
-     * @param PackService $packService
-     * @param VimeoTrailerDecorator $vimeoTrailerDecorator
-     * @param ContentService $contentService
-     * @param PlaylistService $playlistService
-     */
     public function __construct(
         CarouselService $carouselService,
         UserProductService $userProductService,
-        ProductRepository $productRepository,
         CohortService $cohortService,
         PackService $packService,
         VimeoTrailerDecorator $vimeoTrailerDecorator,
         ContentService $contentService,
-        PlaylistService $playlistService
+        PlaylistService $playlistService,
+        ProductService $productService,
+        LearningPathsService $learningPathsService,
+        ContentPermissionsService $contentPermissionsService,
+        UserAccessPermissionsService $userAccessPermissionsService,
     ) {
         $this->carouselService = $carouselService;
         $this->userProductService = $userProductService;
-        $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
         $this->packService = $packService;
         $this->vimeoTrailerDecorator = $vimeoTrailerDecorator;
         $this->contentService = $contentService;
         $this->playlistService = $playlistService;
+        $this->productService = $productService;
+        $this->learningPathsService = $learningPathsService;
+        $this->contentPermissionsService = $contentPermissionsService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
-    public function getPackPrice($slug)
-    : array {
+    public function getPackPrice($slug): array
+    {
         return [];
     }
 
-    public function getAppleProductId($slug)
-    : string {
+    public function getAppleProductId($slug): string
+    {
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug') ?? [];
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -72,8 +71,8 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return array_flip(config('ecommerce.apple_store_products_map', []))[$productSKU] ?? '';
     }
 
-    public function getGoogleProductId($slug)
-    : string {
+    public function getGoogleProductId($slug): string
+    {
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -81,13 +80,12 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return array_flip(config('ecommerce.google_store_products_map'))[$productSKU] ?? '';
     }
 
-    public function currentUserOwnsPack($id)
-    : bool {
+    public function currentUserOwnsPack($id): bool
+    {
         return true;
     }
 
-    public function getMembershipProductIds()
-    : array
+    public function getMembershipProductIds(): array
     {
         return [];
     }
@@ -98,15 +96,15 @@ class MusoraApiProductProvider implements ProductProviderInterface
     public function carousel($isWorkoutPage = false)
     {
         CarouselService::$workoutsPage = $isWorkoutPage;
-        $slides =  $this->carouselService->getCarouselSlides();
+        $slides = $this->carouselService->getCarouselSlides();
 
-        foreach ($slides as $slide){
-            if($slide['video_src'] && ($slide['is_enrolled'] != true)){
-                $vimeoId =  (int) substr(parse_url($slide['video_src'], PHP_URL_PATH), 7);
+        foreach ($slides as $slide) {
+            if ($slide['video_src'] && ($slide['is_enrolled'] != true)) {
+                $vimeoId = (int)substr(parse_url($slide['video_src'], PHP_URL_PATH), 7);
                 $slide['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
             }
-            if($slide['primary_video_src']){
-                $vimeoId =  (int) substr(parse_url($slide['primary_video_src'], PHP_URL_PATH), 7);
+            if ($slide['primary_video_src']) {
+                $vimeoId = (int)substr(parse_url($slide['primary_video_src'], PHP_URL_PATH), 7);
                 $slide['trailer_button_1'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
             }
         }
@@ -119,30 +117,32 @@ class MusoraApiProductProvider implements ProductProviderInterface
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getCohortTemplate($slug)
-    : array {
+    public function getCohortTemplate($slug): array
+    {
         $cohort = $this->cohortService->getCohort($slug);
-        $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config('railcontent.cohort_timeline_image_urls')['pianote'];
+        $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config(
+            'railcontent.cohort_timeline_image_urls'
+        )['pianote'];
         foreach (config('railcontent.cohort_icons')[brand()] ?? [] as $key => $value) {
             $cohort[$key] = $value;
         }
-        if($cohort['cohort_trailer']){
-            $vimeoId =  (int) substr(parse_url($cohort['cohort_trailer'], PHP_URL_PATH), 7);
+        if ($cohort['cohort_trailer']) {
+            $vimeoId = (int)substr(parse_url($cohort['cohort_trailer'], PHP_URL_PATH), 7);
             $cohort['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
         }
-        if($cohort['description_trailer_1']){
-            $vimeoId1 =  (int) substr(parse_url($cohort['description_trailer_1'], PHP_URL_PATH), 7);
+        if ($cohort['description_trailer_1']) {
+            $vimeoId1 = (int)substr(parse_url($cohort['description_trailer_1'], PHP_URL_PATH), 7);
             $cohort['first_day_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId1);
         }
-        if($cohort['description_trailer_2']){
-            $vimeoId2 =  (int) substr(parse_url($cohort['description_trailer_2'], PHP_URL_PATH), 7);
+        if ($cohort['description_trailer_2']) {
+            $vimeoId2 = (int)substr(parse_url($cohort['description_trailer_2'], PHP_URL_PATH), 7);
             $cohort['last_day_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId2);
         }
-        if($cohort['demo_trailer']){
-            $vimeoId3 =  (int) substr(parse_url($cohort['demo_trailer'], PHP_URL_PATH), 7);
+        if ($cohort['demo_trailer']) {
+            $vimeoId3 = (int)substr(parse_url($cohort['demo_trailer'], PHP_URL_PATH), 7);
             $cohort['demo_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId3);
         }
-        if($cohort['content_id']){
+        if ($cohort['content_id']) {
             $initialBypassPermissions = ContentRepository::$bypassPermissions;
             $initialPullFutureContent = ContentRepository::$pullFutureContent;
             $initialContentStatuses = ContentRepository::$availableContentStatues;
@@ -150,7 +150,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
             ContentRepository::$pullFutureContent = true;
             ContentRepository::$availableContentStatues = false;
             $content = $this->contentService->getById($cohort['content_id']);
-            ContentRepository::$bypassPermissions  = $initialBypassPermissions;
+            ContentRepository::$bypassPermissions = $initialBypassPermissions;
             ContentRepository::$pullFutureContent = $initialPullFutureContent;
             ContentRepository::$availableContentStatues = $initialContentStatuses;
 
@@ -165,17 +165,20 @@ class MusoraApiProductProvider implements ProductProviderInterface
             }
         }
 
-        $product = $this->productRepository->findProduct($cohort['product_id']);
-        $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $cohort['product_id']);
-        $nPackOwners = $this->userProductService->getNumberProductOwners($cohort['product_id']);
+        $product = $this->productService->getById($cohort['product_id']);
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $permissionID = $product->getContentPermissions($contentPermissionsLookup)->first()->id ?? null;
+        $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
+        $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
+
         $registerButtonUrl =
             (!$hasProduct) ?
-                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) : '';
+                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '';
 
         $enrollmentClosed = $cohort['enrollmentClosed'];
         $lists = $cohort->lists;
         foreach ($lists as $list) {
-            $list->description = preg_replace('/{'.'enrolled'.'}/', $nPackOwners, $list->description);
+            $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
         }
 
         return [
@@ -201,7 +204,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function userOwnProduct($productId)
     {
-        return $this->userProductService->hasProductNotCached(user()?->id, $productId ?? 0);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        return $hasProduct;
     }
 
     public function getPlaybackItemId($playlistId)
@@ -211,7 +217,12 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function getVimeoEndpoints($vimeoId)
     {
-       return  $this->vimeoTrailerDecorator->decorate($vimeoId);
+        return $this->vimeoTrailerDecorator->decorate($vimeoId);
+    }
+
+    public function getLearningPaths()
+    {
+        return $this->learningPathsService->getLearningPaths();
     }
 
 }

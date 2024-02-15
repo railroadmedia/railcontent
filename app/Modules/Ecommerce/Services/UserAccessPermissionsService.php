@@ -52,7 +52,7 @@ class UserAccessPermissionsService
     private function getUserAccessPermissionsQuery(int $userId, array $filterPermissionIds = [])
     {
         //force using write db so we have latest data for query
-        $query = UserAccessPermission::on('musora_laravel_mysql::write')->where('user_id', '=', $userId);
+        $query = UserAccessPermission::onWriteConnection()->where('user_id', '=', $userId);
         if ($filterPermissionIds) {
             $query = $query->whereIn('permission_id', $filterPermissionIds);
         }
@@ -353,6 +353,8 @@ class UserAccessPermissionsService
                     config('ecommerce.days_before_access_revoked_after_expiry', 7)
                 );
                 $accessPermission = $migrationPermissionLookup[$permissionId] ?? null;
+                $product = new Product();
+                $product->id = $dates['product_id'];
                 if ($accessPermission) {
                     $accessPermission->product_id = $dates['product_id'];
                     $accessPermission->time_days = 0;
@@ -366,7 +368,7 @@ class UserAccessPermissionsService
                         $startDate,
                         UserAccessPermissionsSourceEnum::Migration,
                         '',
-                        new Product(),
+                        $product,
                         UserAccessPermissionsStatusEnum::Active,
                         0,
                         0,
@@ -644,7 +646,7 @@ class UserAccessPermissionsService
             UserAccessPermissionsSourceEnum::Migration->value
         ];
 
-        UserAccessPermission::on('musora_laravel_mysql::write')
+        UserAccessPermission::onWriteConnection()
             ->where('user_id', '=', $user->id)
             ->whereIn('source', $rebuildSources)->delete();
     }
@@ -658,10 +660,40 @@ class UserAccessPermissionsService
                 UserAccessPermissionsSourceEnum::Web->value,
                 UserAccessPermissionsSourceEnum::Apple->value,
                 UserAccessPermissionsSourceEnum::Google->value,
-            ])            ->get();
+            ])->get();
         $toRemove->each(function (UserAccessPermission $permission) use ($accessPermissions) {
-            Log::info("Removing deleted order permission $permission->id $permission->time_days $permission->time_months");
+            Log::info(
+                "Removing deleted order permission $permission->id $permission->time_days $permission->time_months"
+            );
             $permission->delete();
         });
+    }
+
+    public function hasProductNotCached(int $userId, int $productId): bool
+    {
+        $product = $this->productService->getById($productId);
+        if (!$product) {
+            return false;
+        }
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $permissionID =
+            $product->getContentPermissions($contentPermissionsLookup)
+                ->first()->id ?? null;
+        if (!$permissionID) {
+            return false;
+        }
+        $hasProduct = $this->hasPermission($userId, $permissionID);
+        return $hasProduct;
+    }
+
+    public function getNumberProductOwners(int $productId): int
+    {
+        $product = $this->productService->getById($productId);
+        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
+        $permissionID =
+            $product->getContentPermissions($contentPermissionsLookup)
+                ->first()->id ?? null;
+        $nPackOwners = $this->getNumberPermissionOwners($permissionID);
+        return $nPackOwners;
     }
 }

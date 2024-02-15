@@ -2,44 +2,10 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
-use Railroad\Ecommerce\Entities\Product;
-use Railroad\Ecommerce\Entities\Subscription;
-use Railroad\Ecommerce\Repositories\OrderRepository;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Ecommerce\Repositories\UserProductRepository;
 use Modules\UserManagementSystem\Models\User;
 
 class HelpScoutSyncService
 {
-    /**
-     * @var OrderRepository
-     */
-    protected $orderRepository;
-
-    /**
-     * @var SubscriptionRepository
-     */
-    protected $subscriptionRepository;
-
-    /**
-     * @var UserProductRepository
-     */
-    protected $userProductRepository;
-
-    /**
-     * @param OrderRepository $orderRepository
-     * @param SubscriptionRepository $subscriptionRepository
-     * @param UserProductRepository $userProductRepository
-     */
-    public function __construct(
-        OrderRepository $orderRepository,
-        SubscriptionRepository $subscriptionRepository,
-        UserProductRepository $userProductRepository
-    ) {
-        $this->orderRepository = $orderRepository;
-        $this->subscriptionRepository = $subscriptionRepository;
-        $this->userProductRepository = $userProductRepository;
-    }
 
     /**
      * @param User $user
