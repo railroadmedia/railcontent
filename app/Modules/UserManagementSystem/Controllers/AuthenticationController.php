@@ -3,12 +3,14 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
@@ -21,8 +23,9 @@ class AuthenticationController extends Controller
     use ValidatesRequests;
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse|RedirectResponse
+     * @throws AuthenticationException
      */
     public function loginCookie(Request $request)
     {
@@ -59,7 +62,11 @@ class AuthenticationController extends Controller
 
         if ($passedCheck) {
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
-
+            if ($user->needs_logout) {
+                Auth::logoutOtherDevices($request->get('password'));
+                $user->needs_logout = false;
+                $user->save();
+            }
             auth()->login($user, $remember);
 
             event(new UserEvent($user->id, 'authenticated'));
@@ -122,8 +129,9 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse|RedirectResponse
+     * @throws AuthenticationException
      */
     public function loginToken(Request $request)
     {
@@ -156,7 +164,11 @@ class AuthenticationController extends Controller
 
         if ($passedCheck) {
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
-
+            if ($user->needs_logout) {
+                Auth::logoutOtherDevices($request->get('password'));
+                $user->needs_logout = false;
+                $user->save();
+            }
             auth()->login($user, $remember);
 
             event(new UserEvent($user->id, 'authenticated'));
