@@ -531,6 +531,96 @@
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
             </div>
         </div>
+
+
+
+
+<div x-data="{ openModalImage: false, imgSrc: '' }" class="flex flex-wrap items-center">
+    <div class="w-full sm:w-1/2 sm:order-1">
+        <div class="p-2 w-full">
+            <div 
+                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'"
+                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
+                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"
+            ></div>
+        </div>
+    </div>
+    <div class="w-1/2 sm:w-1/4">
+        <div class="p-2 w-full">
+            <div 
+                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}'"
+                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"
+            ></div>
+        </div>
+        <div class="p-2 w-full">
+            <div 
+                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}'"
+                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"
+            ></div>
+        </div>
+    </div>
+    <div class="w-1/2 sm:w-1/4 sm:order-2">
+        <div class="p-2 w-full">
+            <div 
+                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}'"
+                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"
+            ></div>
+        </div>
+        <div class="p-2 w-full">
+            <div 
+                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}'"
+                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"
+            ></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+        x-show="openModalImage"
+        style="display: none"
+        x-on:keydown.escape.prevent.stop="openModalImage = false"
+        role="dialog"
+        aria-modal="true"
+        x-id="['modal-title']"
+        :aria-labelledby="$id('modal-title')"
+        class="fixed inset-0 z-10 overflow-y-auto"
+    >
+        <!-- Overlay -->
+        <div x-show="openModalImage" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+ 
+        <!-- Panel -->
+        <div
+            x-show="openModalImage" x-transition
+            x-on:click="openModalImage = false"
+            class="relative flex min-h-screen items-center justify-center p-4"
+        >
+            <div
+                x-on:click.stop
+                x-trap.noscroll.inert="openModalImage"
+                class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg"
+            >
+                <!-- Close button -->
+                <i @click="openModalImage = false" class="fas fa-times absolute top-2 right-2 cursor-pointer"></i>
+                <!-- Content -->
+                <img :src="imgSrc" alt="Image" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
         <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
         <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
             <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">Your Drumeo StickBag is built with premium components to ensure a long-lasting home for your sticks wherever your drumming takes you.</p>
