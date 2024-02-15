@@ -150,6 +150,53 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
+    public function test_adds_trial_start_when_discount_is_on_discount_allocations()
+    {
+        // the order id from the resource file
+        $orderId = 5716409221396;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/drumeo_trial_discount_allocation.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._drumeo_trial_discount_allocation')
+            ),
+            // catch the graphql call to update the order, and return a valid extensions response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        // this is both the initial order and the trial start
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return Str::containsAll(
+                    $message,
+                    [
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ",
+                        ShopifyTagEnum::InitialOrder->value,
+                        ShopifyTagEnum::TrialStart->value
+                    ]
+                );
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the initial order and trial start tags
+        Http::assertSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([ShopifyTagEnum::InitialOrder->value, ShopifyTagEnum::TrialStart->value])
+                );
+        });
+    }
+
     public function test_adds_trial_conversion_order_tag()
     {
         // the order id from the resource file
@@ -239,14 +286,14 @@ class AddOrderTagsTest extends TestCase
         parent::setUp();
         $shopify = app(Shopify::class);
         $this->baseShopifyUrl = $shopify->getBaseUrl();
-        $this->seedDrumeoMembership();
+        $this->seedDrumeoMemberships();
     }
 
     /**
      * Create the
      * @return void
      */
-    private function seedDrumeoMembership(): void
+    private function seedDrumeoMemberships(): void
     {
         Product::create([
             'brand' => "drumeo",
@@ -276,6 +323,37 @@ class AddOrderTagsTest extends TestCase
             'digital_access_time_interval_length' => 7,
             'digital_membership_access_expiration_date' => null,
             'shopify_id' => 47070845370644,
+            'note' => null,
+        ]);
+
+        Product::create([
+            'brand' => "drumeo",
+            'name' => "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+            'sku' => "DLM-Trial-1-month",
+            'inventory_control_sku' => "17001",
+            'fulfillment_sku' => "membership",
+            'price' => "30.00",
+            'type' => "digital subscription",
+            'active' => 1,
+            'category' => "NULL",
+            'description' => "7 days free, then $30 / month. Easy to cancel anytime. Includes access to Drumeo’s step-by-step method, lessons from legendary artists, and unlimited personal support. As a “+” member, you’ll also get access to 5000+ professionally transcribed songs.",
+            'thumbnail_url' => "'https' =>//d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
+            'sales_page_url' => null,
+            'is_physical' => 0,
+            'weight' => "0.00",
+            'subscription_interval_type' => "month",
+            'subscription_interval_count' => 1,
+            'stock' => 999999,
+            'min_stock_level' => 0,
+            'public_stock_count' => 0,
+            'auto_decrement_stock' => 0,
+            'digital_access_permission_names' => "[\"Musora Basic Membership\"]",
+            'digital_access_type' => "basic content access",
+            'digital_access_time_interval_type' => "day",
+            'digital_access_time_type' => "recurring",
+            'digital_access_time_interval_length' => 7,
+            'digital_membership_access_expiration_date' => null,
+            'shopify_id' => 47070758797588,
             'note' => null,
         ]);
     }

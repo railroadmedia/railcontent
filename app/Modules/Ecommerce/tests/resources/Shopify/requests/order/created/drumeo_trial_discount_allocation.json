@@ -1,0 +1,429 @@
+{
+    "headers": {
+
+    },
+    "body": {
+        "id": 5716409221396,
+        "admin_graphql_api_id": "gid://shopify/Order/5716409221396",
+        "app_id": 62984159233,
+        "browser_ip": "22.225.132.237",
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": "c1-3d2b01fc1262b5f5211b602f07ba2ce4",
+        "checkout_id": 37250737996052,
+        "checkout_token": "a503c5bf09cb9d6b50b4c3d3c7bcde2c",
+        "client_details": {
+            "accept_language": "en-US",
+            "browser_height": null,
+            "browser_ip": "22.225.132.237",
+            "browser_width": null,
+            "session_hash": null,
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:122.0) Gecko/20100101 Firefox/122.0"
+        },
+        "closed_at": null,
+        "company": null,
+        "confirmation_number": "QZ84G8D4H",
+        "confirmed": true,
+        "contact_email": "drumeo_trial_discount_allocation@mail.com",
+        "created_at": "2024-02-15T06:42:22-08:00",
+        "currency": "USD",
+        "current_subtotal_price": "0.00",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "30.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "0.00",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": "en-US",
+        "device_id": null,
+        "discount_codes": [],
+        "email": "drumeo_trial_discount_allocation@mail.com",
+        "estimated_taxes": false,
+        "financial_status": "paid",
+        "fulfillment_status": "fulfilled",
+        "landing_site": null,
+        "landing_site_ref": null,
+        "location_id": null,
+        "merchant_of_record_app_id": null,
+        "name": "#1171114",
+        "note": null,
+        "note_attributes": [
+            {
+                "name": "rc_charge_id",
+                "value": 1013656315
+            },
+            {
+                "name": "rc_address_id",
+                "value": 149591209
+            },
+            {
+                "name": "rc_subscription_ids",
+                "value": "454396485"
+            },
+            {
+                "name": "rc_payment_transaction_id",
+                "value": "Shopify Checkout"
+            }
+        ],
+        "number": 1170114,
+        "order_number": 1171114,
+        "order_status_url": "https://shop.musora.com/73541484820/orders/28198c32c4eef95519743d4e507c6903/authenticate?key=9e347edaa8deaaae16834596847fa053",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2024-02-15T06:42:18-08:00",
+        "reference": "06d5151e06bcbcb81f0653fa326ed23c",
+        "referring_site": null,
+        "source_identifier": "06d5151e06bcbcb81f0653fa326ed23c",
+        "source_name": "62984159233",
+        "source_url": null,
+        "subtotal_price": "0.00",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "tags": "Subscription, Subscription First Order",
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": false,
+        "token": "28198c32c4eef95519743d4e507c6903",
+        "total_discounts": "30.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "30.00",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "0.00",
+        "total_price": "0.00",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "0.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 0,
+        "updated_at": "2024-02-15T06:48:05-08:00",
+        "user_id": null,
+        "billing_address": {
+            "first_name": "Drumeo",
+            "address1": "123 Test Lane",
+            "phone": null,
+            "city": "Virginia Beach",
+            "zip": "12345",
+            "province": "Virginia",
+            "country": "United States",
+            "last_name": "Trial",
+            "address2": null,
+            "company": null,
+            "latitude": 36.8568595,
+            "longitude": -76.0187682,
+            "name": "Drumeo Trial",
+            "country_code": "US",
+            "province_code": "VA"
+        },
+        "customer": {
+            "id": 7658693853460,
+            "email": "drumeo_trial_discount_allocation@mail.com",
+            "created_at": "2024-02-15T06:42:18-08:00",
+            "updated_at": "2024-02-15T06:42:51-08:00",
+            "first_name": "Drumeo",
+            "last_name": "Trial",
+            "state": "disabled",
+            "note": null,
+            "verified_email": true,
+            "multipass_identifier": null,
+            "tax_exempt": false,
+            "phone": null,
+            "email_marketing_consent": {
+                "state": "not_subscribed",
+                "opt_in_level": "single_opt_in",
+                "consent_updated_at": null
+            },
+            "sms_marketing_consent": null,
+            "tags": "Active Subscriber",
+            "currency": "USD",
+            "accepts_marketing": false,
+            "accepts_marketing_updated_at": "2024-02-15T06:42:18-08:00",
+            "marketing_opt_in_level": null,
+            "tax_exemptions": [],
+            "admin_graphql_api_id": "gid://shopify/Customer/7658693853460",
+            "default_address": {
+                "id": 9797362319636,
+                "customer_id": 7658693853460,
+                "first_name": "Drumeo",
+                "last_name": "Trial",
+                "company": null,
+                "address1": "123 Test Lane",
+                "address2": null,
+                "city": "Virginia Beach",
+                "province": "Virginia",
+                "country": "United States",
+                "zip": "12345",
+                "phone": null,
+                "name": "Drumeo Trial",
+                "province_code": "VA",
+                "country_code": "US",
+                "country_name": "United States",
+                "default": true
+            }
+        },
+        "discount_applications": [
+            {
+                "target_type": "line_item",
+                "type": "automatic",
+                "value": "100.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "entitled",
+                "title": "7 Day Trial"
+            }
+        ],
+        "fulfillments": [
+            {
+                "id": 5041719935252,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/5041719935252",
+                "created_at": "2024-02-15T06:42:31-08:00",
+                "location_id": 93816291604,
+                "name": "#1171114.1",
+                "order_id": 5716409221396,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2024-02-15T06:42:31-08:00",
+                "line_items": [
+                    {
+                        "id": 14583408754964,
+                        "admin_graphql_api_id": "gid://shopify/LineItem/14583408754964",
+                        "attributed_staffs": [],
+                        "fulfillable_quantity": 0,
+                        "fulfillment_service": "manual",
+                        "fulfillment_status": "fulfilled",
+                        "gift_card": false,
+                        "grams": 0,
+                        "name": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                        "price": "30.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "product_exists": true,
+                        "product_id": 8801079722260,
+                        "properties": [],
+                        "quantity": 1,
+                        "requires_shipping": false,
+                        "sku": "DLM-Trial-1-month",
+                        "taxable": true,
+                        "title": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                        "total_discount": "0.00",
+                        "total_discount_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "variant_id": 47070758797588,
+                        "variant_inventory_management": "shopify",
+                        "variant_title": null,
+                        "vendor": "Drumeo",
+                        "tax_lines": [],
+                        "duties": [],
+                        "discount_allocations": [
+                            {
+                                "amount": "30.00",
+                                "amount_set": {
+                                    "shop_money": {
+                                        "amount": "30.00",
+                                        "currency_code": "USD"
+                                    },
+                                    "presentment_money": {
+                                        "amount": "30.00",
+                                        "currency_code": "USD"
+                                    }
+                                },
+                                "discount_application_index": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "line_items": [
+            {
+                "id": 14583408754964,
+                "admin_graphql_api_id": "gid://shopify/LineItem/14583408754964",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                "price": "30.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "30.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "30.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8801079722260,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": false,
+                "sku": "DLM-Trial-1-month",
+                "taxable": true,
+                "title": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47070758797588,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Drumeo",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                    {
+                        "amount": "30.00",
+                        "amount_set": {
+                            "shop_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "discount_application_index": 0
+                    }
+                ]
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [],
+        "shipping_address": null,
+        "shipping_lines": []
+    }
+}

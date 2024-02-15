@@ -30,12 +30,29 @@ class OrderLineItem
         $this->gid = $shopifyLineItemData->admin_graphql_api_id;
         $this->currency = $shopifyLineItemData->price_set->shop_money->currency_code;
         $this->price = floatval($shopifyLineItemData->price_set->shop_money->amount);
-        $this->discount = floatval($shopifyLineItemData->total_discount_set->shop_money->amount);
+        $this->discount = $this->calculateDiscount($shopifyLineItemData);
         $this->quantity = $shopifyLineItemData->quantity;
         $this->sku = $shopifyLineItemData->sku;
         $this->variantId = $shopifyLineItemData->variant_id;
         $this->product = Product::firstWhere('sku', $this->sku);
         $this->totalPrice = $this->price - $this->discount;
+    }
+
+    /**
+     * Calculate the discount applied to this order line item
+     *
+     * @param $shopifyLineItemData
+     * @return float
+     */
+    private function calculateDiscount($shopifyLineItemData): float
+    {
+        $totalDiscount = 0;
+        /** @var array $discountAllocations */
+        $discountAllocations = $shopifyLineItemData->discount_allocations;
+        foreach ($discountAllocations as $discountAllocation) {
+            $totalDiscount += floatval($discountAllocation->amount_set->shop_money->amount);
+        }
+        return $totalDiscount;
     }
 
     /**
