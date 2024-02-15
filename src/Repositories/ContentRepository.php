@@ -117,7 +117,7 @@ class ContentRepository extends RepositoryBase
             'column' => 'instructor_id',
             'alias' => '_rci',
         ],
-        'style' => [
+        'genre' => [
             'table' => 'railcontent_content_styles',
             'column' => 'style',
             'alias' => '_rcs',
@@ -161,11 +161,6 @@ class ContentRepository extends RepositoryBase
             'table' => 'railcontent_content_gears',
             'column' => 'gear',
             'alias' => '_rcge',
-        ],
-        'genre' => [
-            'table' => 'railcontent_content_genres',
-            'column' => 'genre',
-            'alias' => '_rcgn',
         ],
     ];
 
@@ -2451,7 +2446,7 @@ class ContentRepository extends RepositoryBase
                 'column' => 'instructor_id',
                 'alias' => '_rci'
             ],
-            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'genre' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
@@ -2460,7 +2455,6 @@ class ContentRepository extends RepositoryBase
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
             'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
-            'genre' => ['table' => 'railcontent_content_genres', 'column' => 'genre', 'alias' => '_rcgn'],
         ];
         if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
             $brand = config('railcontent.brand');
@@ -2478,7 +2472,7 @@ class ContentRepository extends RepositoryBase
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
                 'instructor',
-                'style',
+                'genre',
                 'topic',
                 'focus',
                 'bpm',
@@ -2488,7 +2482,6 @@ class ContentRepository extends RepositoryBase
                 'lifestyle',
                 'type',
                 'gear',
-                'genre',
             ];
 
         $filterOptions = array_unique($filterOptions);
@@ -2955,7 +2948,7 @@ class ContentRepository extends RepositoryBase
                 'column' => 'instructor_id',
                 'alias' => '_rci'
             ],
-            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'genre' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
@@ -2964,7 +2957,6 @@ class ContentRepository extends RepositoryBase
             'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
             'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
             'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
-            'genre' => ['table' => 'railcontent_content_genres', 'column' => 'genre', 'alias' => '_rcgn'],
         ];
 
         if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
@@ -2982,7 +2974,7 @@ class ContentRepository extends RepositoryBase
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
                 'instructor',
-                'style',
+                'genre',
                 'topic',
                 'focus',
                 'bpm',
@@ -2992,7 +2984,6 @@ class ContentRepository extends RepositoryBase
                 'lifestyle',
                 'type',
                 'gear',
-                'genre'
             ];
 
         $filterOptions = array_unique($filterOptions);
@@ -3032,10 +3023,10 @@ class ContentRepository extends RepositoryBase
                 $this->includedFields = $initialFilters;
 
             foreach($tableResults ?? [] as $result){
-                $filterOptionsArray[$filterOptionColumnName][] = $result->grouped_by_value.' ('.$result->lessonsCount.')';
+                $filterOptionsArray[$filterOption][] = $result->grouped_by_value.' ('.$result->lessonsCount.')';
             }
-            if(isset($filterOptionsArray[$filterOptionColumnName])) {
-                usort($filterOptionsArray[$filterOptionColumnName], [$this, 'sortByAlphaThenNumeric']);
+            if(isset($filterOptionsArray[$filterOption])) {
+                usort($filterOptionsArray[$filterOption], [$this, 'sortByAlphaThenNumeric']);
             }
         }
 
