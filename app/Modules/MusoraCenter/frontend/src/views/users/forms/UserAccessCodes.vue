@@ -20,11 +20,11 @@
             <template v-slot:item="{ item }">
                 <tr>
                     <td class="text-center">
-                        <v-custom-brand-icon :brand="item.attributes.brand"></v-custom-brand-icon>
+                        <v-custom-brand-icon :brand="item.brand"></v-custom-brand-icon>
                     </td>
 
                     <td class="text-left">
-                        {{ item.attributes.code }}
+                        {{ item.code }}
                     </td>
 
                     <td class="text-left">
@@ -42,13 +42,13 @@
                     </td>
 
                     <td class="text-left">
-                        {{ item.attributes.source }}
+                        {{ item.source }}
                     </td>
 
                     <td class="text-center">
                         {{
-                            item.attributes.claimed_on
-                                ? moment(item.attributes.claimed_on).format('MMM D, Y')
+                            item.claimed_on
+                                ? moment(item.claimed_on).format('MMM D, Y')
                                 : ''
                         }}
                     </td>
@@ -57,7 +57,7 @@
                         <v-tooltip top>
                             <template v-slot:activator="{ on }">
                                 <v-btn
-                                    v-if="item.attributes.is_claimed"
+                                    v-if="item.is_claimed"
                                     fab
                                     x-small
                                     raised
@@ -165,8 +165,7 @@ export default {
                     if (response) {
                         this.accessCodes = response.data.data;
                         this.accessCodesIncludedData = response.data.included;
-                        this.currentPage = response.data.meta.pagination.current_page;
-                        this.totalPages = response.data.meta.pagination.total_pages;
+                        this.totalPages = response.data.meta.last_page;
                     }
                 })
                 .finally(() => {
@@ -175,18 +174,7 @@ export default {
         },
 
         getAccessCodeProduct(item) {
-            if (!item.relationships.product) {
-                return 'N/A';
-            }
-
-            const products = item.relationships.product.data.map(
-                product => this.getRelatedAttributesByTypeAndId(
-                    product,
-                    this.accessCodesIncludedData,
-                ),
-            );
-
-            return products.map(product => product.attributes.name);
+            return item.products.map(product => product.name);
         },
 
         releaseAccessCode(id) {

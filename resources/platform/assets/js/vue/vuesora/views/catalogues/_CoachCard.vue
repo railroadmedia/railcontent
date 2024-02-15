@@ -3,7 +3,7 @@
     :href="item.url"
     class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white tw-group"
   >
-    <img :src="`https://www.musora.com/musora-cdn/image/width=300/${coachImage}`"
+    <img :src="`https://www.musora.com/musora-cdn/image/width=300,quality=95/${coachImage}`"
          :alt="coachName"
          class="tw-w-full tw-transition-opacity tw-duration-500"
          :class="[

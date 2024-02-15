@@ -9,10 +9,8 @@
       tw-border-[#E4E4E7]
       dark:tw-border-[#223457]
       tw-no-underline
-      hover:tw-bg-[#E7EFF6]
-      dark:hover:tw-bg-[#002039]
-    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : 'hover-bg-grey-7 hover-text-black']"
-    :href="renderLink ? item.url : null">
+    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
+    :href="renderLink && isReleased ? item.url : null">
 
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
@@ -34,7 +32,7 @@
       :class="[thumbnailColumnClass, themeColor]">
       <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
-          <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail}`" alt="Lesson Thumbnail"
+          <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail}`" alt="Lesson Thumbnail"
             class="tw-transition-opacity tw-duration-500" loading="lazy"
             :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="mappedData.imageLoaded = true" />
 
@@ -50,9 +48,12 @@
             </h5>
           </div>
 
-          <span class="thumb-hover flex-center">
+          <span
+              class="thumb-hover flex-center"
+              :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
+          >
             <i class="fas" :class="thumbnailIcon"></i>
-            <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+            <p class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
               {{ releaseDate }}
             </p>
           </span>

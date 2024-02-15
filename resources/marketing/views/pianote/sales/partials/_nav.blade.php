@@ -1,11 +1,11 @@
 <nav class="top-bar">
     <div class="logo">
-        <a href="{{ get_legacy_brand_base_url('pianote') }}">
+        <a href="{{ get_legacy_brand_base_url('pianote') }}" title="Go to the home page">
             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="Pianote">
         </a>
     </div>
 
-    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif" role="button" aria-label="Menu Toggle">
         <span></span>
         <span></span>
         <span></span>
@@ -13,12 +13,12 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap text-white">
-            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button" role="button" aria-label="Shop at Pianote shop">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('pianote').'/shop' }}" class="join outline-button hover:no-underline">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('pianote').'/shop' }}" class="join outline-button hover:no-underline" role="button" aria-label="Shop at Pianote shop">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -38,7 +38,7 @@
 
     @if(!empty($subscriptionVersion))
         @if(!empty($fullSubscriptionVersion))
-            <div class="relative">
+            <div class="relative" role="navigation">
                 <div class="edge-wrap show-for-medium">
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
@@ -61,7 +61,7 @@
             </div>
         @endif
         <div class="button-wrap @if(!empty($hideJoin)) hidden @endif">
-            <a @if(!empty($scrollToJoin))
+            <a aria-label="Join Pianote" @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))
                     href="{{ $joinUrl }}" class="join"
@@ -78,7 +78,7 @@
             </a>
         </div>
         <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
-            <a href="https://www.musora.com/pianote" class="join outline-button">Login</a>
+            <a href="https://www.musora.com/pianote" class="join outline-button" aria-label="Login to Pianote">Login</a>
         </div>
     @endif
 </nav>

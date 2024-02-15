@@ -170,6 +170,9 @@ class HandlesShopifyRateLimitTest extends BaseTestCase
      */
     public function test_handle_rate_limit_does_nothing_when_no_shopify_api_call_limit_headers()
     {
+        // set the sleep time to a high threshold, so we can make sure we're under it
+        // DEV NOTE: we can't rely on 0, because the tests themselves may take longer than 0s
+        Config::set('shopify.rate_limit.sleep_time', 5);
         $method = $this->getReflectionMethod($this->traitJob, 'handleRateLimit');
 
         $shopify = $this->traitJob->getShopify();
@@ -185,7 +188,7 @@ class HandlesShopifyRateLimitTest extends BaseTestCase
             ->never();
         $method->invoke($this->traitJob, true);
         $endTime = time();
-        $this->assertTrue($endTime - $startTime == 0);
+        $this->assertTrue($endTime - $startTime < 5);
     }
 
     /**
