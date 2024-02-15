@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
+use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
-use Railroad\Railcontent\Events\ContentCreated;
+use Modules\Content\Models\ContentTopic;
 
 /**
  * App\Modules\Content\Models\Content
@@ -203,6 +204,7 @@ class Content extends Model
         'theory' => 'string',
         'creativity' => 'string',
         'lifestyle' => 'string',
+        'gear' => 'string',
     ];
 
     public function newEloquentBuilder($query): ContentBuilder
@@ -669,6 +671,25 @@ if($contentInstructor->count() == 0) {
                 $lifestyle->save();
             }
             $this->setField('lifestyle', $value);
+        }
+    }
+
+    public function setGear($value)
+    {
+        if ($value) {
+            $gear =
+                ContentGears::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('gear', $value)
+                    ->first();
+            if (!$gear) {
+                $gear = new ContentGears();
+                $gear->content_id = $this->id;
+                $gear->gear = $value;
+                $gear->position = 1;
+                $gear->save();
+            }
+            $this->setField('gear', $value);
         }
     }
 }

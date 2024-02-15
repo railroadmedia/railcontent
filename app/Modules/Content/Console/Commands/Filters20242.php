@@ -9,7 +9,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class Filters20242 extends Command
 {
-    protected $name = 'Filters20242';
     protected $signature = 'filters:import {brand=drumeo} {startIndex=0} {endIndex=-1}';
     protected $description = 'Import filters data from CSV file';
 
@@ -43,14 +42,19 @@ class Filters20242 extends Command
                 if (!$content) {
                     $this->info('Not exists  '.$contentId.'    '.$contentTitle);
                 } else {
-                    $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-1'));
-                    $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-2'));
-                    $content->setTheory($this->getValue($data, $headersRow, 'Theory-1'));
-                    $content->setTheory($this->getValue($data, $headersRow, 'Theory-2'));
-                    $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-1'));
-                    $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'));
-                    $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'));
-                    $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'));
+                    if($brand == 'drumeo-Rudiments') {
+                        $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
+                        $content->setGear($this->getValue($data, $headersRow, 'Gear'));
+                    }else {
+                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-1'));
+                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-2'));
+                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-1'));
+                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-2'));
+                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-1'));
+                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'));
+                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'));
+                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'));
+                    }
                 }
             }
         );

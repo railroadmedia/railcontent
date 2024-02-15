@@ -37,7 +37,6 @@ use App\Console\Commands\VaporEnvManager;
 use App\Console\Commands\UpdateRoutines;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Modules\Content\Console\Commands\Filters20242;
 
 class Kernel extends ConsoleKernel
 {
@@ -80,7 +79,6 @@ class Kernel extends ConsoleKernel
         SeedUserProgress::class,
         AssignUnassignedHelpScoutCustomersToMentors::class,
         SyncShopifyProductInventoryToProductsTable::class,
-        Filters20242::class,
     ];
 
     /**
