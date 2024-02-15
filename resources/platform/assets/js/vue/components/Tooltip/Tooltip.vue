@@ -5,7 +5,7 @@
             <slot name="trigger"></slot>
         </div>
         <div v-if="show"
-            :class="[tooltipPosition, 'tw-absolute tw-px-2 tw-py-1 tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-z-20']">
+            :class="[tooltipPosition, 'tw-absolute tw-px-2 tw-py-1 tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-z-20 tw-min-w-max']">
             <slot name="content"></slot>
         </div>
     </div>
