@@ -65,7 +65,7 @@ export default {
             bpm: [],
             difficulty: [],
             instructor: [],
-            style: [],
+            genre: [],
             focus: [],
             bands: [],
             endorsements: [],
@@ -76,7 +76,8 @@ export default {
             essentials: [],
             theory: [],
             creativity: [],
-            lifestyle:[]
+            lifestyle:[],
+            gear:[],
         };
 
         keys.forEach(key => {
