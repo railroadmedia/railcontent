@@ -283,11 +283,7 @@
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            @if(is_current_user_a_member())
-                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer" class="join blue medium w-full">ENROLL NOW</a>
-                            @else
-                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
-                            @endif
+                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Drumeo Members register for free here.</a>
                             </p>
@@ -675,11 +671,7 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        @if(is_current_user_a_member())
-                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>
-                        @else
                             <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></td>
-                        @endif
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
@@ -829,7 +821,7 @@
                     <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&promo-code=30DDS4-BUNDLE&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                         <h3><strong>30-Day Drummer</strong></h3>
                         <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
-                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                         <div class="join blue smaller my-4">ENROLL NOW</div>
                         <ul class="list-disc ml-10">
                             <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>
