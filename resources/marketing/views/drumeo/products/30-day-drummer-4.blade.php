@@ -829,7 +829,7 @@
                     <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&promo-code=30DDS4-BUNDLE&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                         <h3><strong>30-Day Drummer</strong></h3>
                         <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
-                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ 50 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                         <div class="join blue smaller my-4">ENROLL NOW</div>
                         <ul class="list-disc ml-10">
                             <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>
@@ -846,7 +846,7 @@
                     </a>
                     <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
                         <h3><strong>Unlimited Lessons</strong></h3>
-                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>
+                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $288.94.</p>
                         <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
                         <div class="join blue smaller my-4">GET EVERYTHING</div>
                         <ul class="list-disc ml-10">
