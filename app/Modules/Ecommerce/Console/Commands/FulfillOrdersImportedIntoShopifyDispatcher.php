@@ -19,7 +19,8 @@ class FulfillOrdersImportedIntoShopifyDispatcher extends Command
      */
     protected $signature = 'shopify:fulfill-imported-orders
                             {--customerId= : (Optional) the Shopify ID of the customer to restrict the orders to}
-                            {--limit= : (Optional) The number of orders to limit this run to}
+                            {--startProcessedAt= : (Optional) The ISO 8601 date time for all Shopify orders to get where the processed_at at or after. e.g. 2023-10-13T17:00:25+00:00}
+                            {--endProcessedAt= : (Optional) The ISO 8601 date time for all Shopify orders to get where the processed_at at or before. e.g. 2023-10-13T17:30:14+00:00}
                             {--execute : Update the database records. Without this flag, results will be simulated.}';
     /**
      * The console command description.
@@ -36,12 +37,13 @@ class FulfillOrdersImportedIntoShopifyDispatcher extends Command
      */
     public function handle(): int
     {
-        $simulate = $this->option("execute") == false;
-        $limit = $this->option("limit");
         $customerId = $this->option("customerId");
+        $startProcessedAt = $this->option("startProcessedAt") ?: '1970-01-01T00:00:00Z';
+        $endProcessedAt = $this->option("endProcessedAt") ?: config('ecommerce.launch_date_times.shopify');
+        $simulate = $this->option("execute") == false;
 
         $startAt = Carbon::now();
-        $batch = Bus::batch(new FulfillOrdersImportedIntoShopify(null, $limit, $customerId, $simulate))
+        $batch = Bus::batch(new FulfillOrdersImportedIntoShopify(null, $customerId, $startProcessedAt, $endProcessedAt, $simulate))
             ->then(function (Batch $batch) use ($startAt) {
                 Log::info(
                     sprintf("FulfillOrdersImportedIntoShopify: completed in %s seconds", $startAt->diffInSeconds())

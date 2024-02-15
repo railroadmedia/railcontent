@@ -6,7 +6,6 @@
     </div>
 </template>
 <script setup>
-
 import PackCatalogueItem from "./PackCatalogueItem";
 
 const props = defineProps({

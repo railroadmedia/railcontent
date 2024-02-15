@@ -45,10 +45,6 @@ class SemesterPackDecorator extends TypeDecoratorBase
 
         }
 
-        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
-            return $this->mergeDecorated($contents, $contentsOfType);
-        }
-
         // everything else
         $childCounts = $this->contentHierarchyService->countParentsChildren(
             $contents->pluck('id')
@@ -87,7 +83,6 @@ class SemesterPackDecorator extends TypeDecoratorBase
             );
 
             $contentsOfType[$contentIndex]['lesson_count'] = $childCounts[$content['id']] ?? 0;
-
             foreach ($lessonHierarchies as $lessonHierarchy) {
                 if ($lessonHierarchy['parent_id'] == $content['id']) {
                     if (!isset($contentsOfType[$contentIndex]['xp'])) {
