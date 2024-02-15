@@ -105,7 +105,7 @@
         @if(empty($promoVersion))
             <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline black smaller">{{ $theme }} METHOD</a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a role="link" aria-label="See your deal" class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @elseif(!empty($month))

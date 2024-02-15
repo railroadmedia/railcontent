@@ -1,7 +1,6 @@
 <script setup>
-import ModalRenderer from "../Modal/ModalRenderer";
-import { XIcon } from "@heroicons/vue/solid";
-import { computed, ref} from "vue";
+import VideoModal from "../Modal/VideoModal.vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   topSubtitle: {
@@ -110,33 +109,33 @@ const primaryVideoModal = ref(false);
 const secondaryVideoModal = ref(false);
 
 const skillLevelColor = computed(() => {
-    switch (props.skillLevel) {
-        case 'Novice':
-            return 'tw-bg-[#22C55E]';
-        case 'Beginner':
-            return 'tw-bg-[#0B76DB]';
-        case 'Intermediate':
-            return 'tw-bg-[#EAB308]';
-        case 'Advanced':
-            return 'tw-bg-[#F06314]';
-        case 'Expert':
-            return 'tw-bg-[#B91C1C]';
-        default:
-            return 'tw-bg-[#22C55E]';
-    }
+  switch (props.skillLevel) {
+    case 'Novice':
+      return 'tw-bg-[#22C55E]';
+    case 'Beginner':
+      return 'tw-bg-[#0B76DB]';
+    case 'Intermediate':
+      return 'tw-bg-[#EAB308]';
+    case 'Advanced':
+      return 'tw-bg-[#F06314]';
+    case 'Expert':
+      return 'tw-bg-[#B91C1C]';
+    default:
+      return 'tw-bg-[#22C55E]';
+  }
 });
 
 </script>
 
 <template>
-  <div v-if="showSlide || isPrevSlide"
-      :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full tw-bg-[#000C17]
-        ${ showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0' }
-      `"
-  >
+  <div v-if="showSlide || isPrevSlide" :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full tw-bg-[#000C17]
+        ${showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0'}
+      `">
     <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-relative">
-        <!-- Draft Label -->
-        <div v-if="isDraft" class="tw-text-white tw-absolute tw-right-2 md:tw-right-6 tw-top-2 md:tw-top-6 tw-z-50 tw-font-extrabold tw-text-xl tw-rounded-xl tw-bg-red-700 tw-px-6 tw-py-1">DRAFT</div>
+      <!-- Draft Label -->
+      <div v-if="isDraft"
+        class="tw-text-white tw-absolute tw-right-2 md:tw-right-6 tw-top-2 md:tw-top-6 tw-z-50 tw-font-extrabold tw-text-xl tw-rounded-xl tw-bg-red-700 tw-px-6 tw-py-1">
+        DRAFT</div>
 
         <!-- Background Image -->
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
@@ -155,8 +154,11 @@ const skillLevelColor = computed(() => {
 
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
-        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[15px] sm:tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0 tw-relative">
-          <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" :class="`${ topSubtitleColor && `tw-text-${topSubtitleColor}` }`" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
+        <div
+          class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[15px] sm:tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0 tw-relative">
+          <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3"
+            :class="`${topSubtitleColor && `tw-text-${topSubtitleColor}`}`" v-if="topSubtitle && !logo">{{ topSubtitle
+            }}</h4>
           <h2 class="
               tw-font-bebas-neue
               tw-text-[40px]
@@ -164,18 +166,19 @@ const skillLevelColor = computed(() => {
               tw-mb-1
               tw-uppercase
               tw-leading-none
-            "
-            :class="`${ titleColor && `tw-text-${titleColor}` }`"
-              v-if="title && !logo"
-            >
+            " :class="`${titleColor && `tw-text-${titleColor}`}`" v-if="title && !logo">
             {{ title }}
           </h2>
-            <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
-            <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg" :class="`${ descriptionColor && `tw-text-${descriptionColor}` }`">
-                <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div> {{ skillLevel }}
-            </div>
-          <p :class="`tw-hidden xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
+          <!-- Logo -->
+          <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto"
+            :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
+          <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg"
+            :class="`${descriptionColor && `tw-text-${descriptionColor}`}`">
+            <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div> {{
+              skillLevel }}
+          </div>
+          <p :class="`tw-hidden xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${descriptionColor && `tw-text-${descriptionColor}`}`"
+            v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block tw-max-w-[450px] md:tw-max-w-none">
                 <a
@@ -213,27 +216,11 @@ const skillLevelColor = computed(() => {
     </section>
   </div>
 
-    <!--  Primary Video Modal  -->
-    <ModalRenderer v-if="primaryVideoModal">
-        <button @click="primaryVideoModal = false;"
-                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-        </button>
-        <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
-            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="primaryVideo" frameborder="0" allowfullscreen allow="autoplay" title="primaryVideo"></iframe>
-        </div>
-    </ModalRenderer>
+  <!--  Primary Video Modal  -->
+  <VideoModal v-if="primaryVideoModal" :videoUrl="primaryVideo" @onCloseModal="primaryVideoModal = false" />
 
-    <!--  Secondary Video modal  -->
-    <ModalRenderer v-if="secondaryVideoModal">
-        <button @click="secondaryVideoModal = false;"
-                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-        </button>
-        <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
-            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="secondaryVideo" frameborder="0" allowfullscreen allow="autoplay" title="secondaryVideo"></iframe>
-        </div>
-    </ModalRenderer>
+  <!--  Secondary Video modal  -->
+  <VideoModal v-if="secondaryVideoModal" :videoUrl="secondaryVideo" @onCloseModal="secondaryVideoModal = false" />
 </template>
 
 <style type="text/css">

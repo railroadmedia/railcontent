@@ -7,7 +7,7 @@
             class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white hover:tw-underline"
             style="text-underline-offset: 6px;">
             <img class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]"
-                :src="`https://www.musora.com/musora-cdn/image/width=200/${thumb}`" :alt="`${name} Image`" />
+                :src="`https://www.musora.com/musora-cdn/image/width=200,quality=95/${thumb}`" :alt="`${name} Image`" />
             <div>
                 <h3 class="tw-font-bold tw-text-lg md:tw-text-xl">{{ name }}</h3>
                 <div class="tw-font-semibold">

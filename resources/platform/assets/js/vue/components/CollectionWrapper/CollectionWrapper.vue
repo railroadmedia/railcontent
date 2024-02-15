@@ -155,6 +155,10 @@ const props = defineProps({
         type: String,
         default: 'Search',
     },
+    withoutEnrollment: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -171,7 +175,7 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
-        ...(isPack.value && { without_enrollment: false })
+        ...(isPack.value && { without_enrollment: props.withoutEnrollment })
     };
 })
 

@@ -1,11 +1,11 @@
 <nav id="nav" class="top-bar expanded">
     <div class="logo">
-        <a href="{{ get_legacy_brand_base_url('singeo') }}">
+        <a href="{{ get_legacy_brand_base_url('singeo') }}" title="Go to the home page">
             <img src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="Singeo">
         </a>
     </div>
 
-    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif" role="button" aria-label="Menu Toggle">
         <span></span>
         <span></span>
         <span></span>
@@ -13,12 +13,12 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join outline-button" aria-label="Shop at Singeo shop">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('singeo').'/shop' }}" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo').'/shop' }}" class="join outline-button" aria-label="Shop at Singeo shop">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -86,7 +86,7 @@
                 </a>
             </div>
             <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
-                <a href="https://www.musora.com/singeo" class="join outline-button">Login</a>
+                <a href="https://www.musora.com/singeo" class="join outline-button" aria-label="Login to Singeo">Login</a>
             </div>
     @endif
 </nav>

@@ -3,7 +3,8 @@
         style="background: {{ $bgColor }};"
     @else
         style="background: linear-gradient(45deg, #07233e, #0c1524);"
-  @endif >
+  @endif 
+  x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
@@ -33,7 +34,7 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
+                    <a role="link" aria-label="Start your membership" class=" w-full sm:w-82 join smaller my-3 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
                     @if(!empty($orderUrl))
                         href="{{ $orderUrl }}"
                     @elseif(!empty($month))
