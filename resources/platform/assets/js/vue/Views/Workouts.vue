@@ -9,13 +9,22 @@
                 <div class="tw-flex tw-items-start">
                     <a :href="`/${brand}/workouts/challenges`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Featured Challenges</a>
 <!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314424?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
-                    <div class="tw-relative tw-group">
-                        <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
-                        <div class="tw-hidden group-hover:lg:tw-block tw-absolute tw-left-full tw-top-0 tw-border tw-border-[#444447] tw-bg-[#232327] tw-text-white tw-p-5 tw-z-50 tw-min-w-[350px] tw-w-full">
+                    <Tooltip position="right">
+                        <template v-slot:trigger>
+                            <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                        </template>
+                        <template v-slot:content>
                             <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>
                             <p>{{ infoText['challenge']['content'] }}</p>
-                        </div>
-                    </div>
+                        </template>
+                    </Tooltip>
+<!--                    <div class="tw-relative tw-group">-->
+<!--                        <musora-icon @click="openModal('challenge')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
+<!--                        <div class="tw-hidden group-hover:lg:tw-block tw-absolute tw-left-full tw-top-0 tw-border tw-border-[#444447] tw-bg-[#232327] tw-text-white tw-p-5 tw-z-50 tw-min-w-[350px] tw-w-full">-->
+<!--                            <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>-->
+<!--                            <p>{{ infoText['challenge']['content'] }}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                 </div>
                 <a :href="`/${brand}/workouts/challenges`" class="tw-text-sm lg:tw-text-base xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
@@ -35,13 +44,24 @@
                 <div class="tw-flex tw-items-start">
                     <div class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-2">Workouts</div>
 <!--                    <musora-icon @click="openVideo('//player.vimeo.com/video/785314388?autoplay=1')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
-                    <div class="tw-relative tw-group">
-                        <musora-icon @click="openModal('workout')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
-                        <div class="tw-hidden group-hover:lg:tw-block tw-absolute tw-left-full tw-top-0 tw-border tw-border-[#444447] tw-bg-[#232327] tw-text-white tw-p-5 tw-z-50 tw-min-w-[350px] tw-w-full">
+                    <Tooltip position="right">
+                        <template v-slot:trigger>
+                            <musora-icon icon-name="info" class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
+                        </template>
+                        <template v-slot:content>
+                            <div class="tw-min-w-[350px] tw-w-full">
                             <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>
                             <p>{{ infoText['workout']['content'] }}</p>
-                        </div>
-                    </div>
+                            </div>
+                        </template>
+                    </Tooltip>
+<!--                    <div class="tw-relative tw-group">-->
+<!--                        <musora-icon @click="openModal('workout')" icon-name="info" class="tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>-->
+<!--                        <div class="tw-hidden group-hover:lg:tw-block tw-absolute tw-left-full tw-top-0 tw-border tw-border-[#444447] tw-bg-[#232327] tw-text-white tw-p-5 tw-z-50 tw-min-w-[350px] tw-w-full">-->
+<!--                            <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>-->
+<!--                            <p>{{ infoText['workout']['content'] }}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
             <hr class="tw-border-[#65656b40] dark:tw-border-[#223F57]" />
@@ -113,7 +133,7 @@
 import {onMounted, ref} from "vue";
 import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
-
+import Tooltip from '../components/Tooltip/Tooltip';
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel';
 import CatalogueCardContainer from '../components/Catalogue/CatalogueCardContainer';
