@@ -348,7 +348,7 @@ return [
 
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
-//            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
+            //            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
 
             \App\Decorators\Content\ChallengeDecorator::class,
 
@@ -384,7 +384,7 @@ return [
 
         ],
         'card' => [
-//            \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
+            //            \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
             \App\Decorators\Content\UrlDecorator::class,
         ],
@@ -570,8 +570,8 @@ return [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
-                'allowableFilters' => ['difficulty', 'gear', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'instrument', 'focus'],
+                'allowableFilters' => ['topic', 'progress', 'instrument'],
+                'allowableFiltersMobile' => ['difficulty', 'style', 'instrument', 'topic'],
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -993,7 +993,7 @@ return [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
-                "allowableFilters" => ['genre', 'difficulty', 'bpm'],
+                "allowableFilters" => ['bpm', 'style', 'difficulty'],
                 'allowableFiltersMobile' => ['difficulty', 'bpm', 'style', 'artist'],
                 'tabs' => [
                     [
