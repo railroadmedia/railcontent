@@ -13,7 +13,7 @@
                 <div
                     class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825]"
                     :class="thumbnailType"
-                    :style="'background-image:url( https://www.musora.com/musora-cdn/image/width=300/' + mappedData.thumbnail + ' );'"
+                    :style="'background-image:url( https://www.musora.com/musora-cdn/image/width=300,quality=95/' + mappedData.thumbnail + ' );'"
                 >
                     <div class="lesson-progress overflow">
                         <span
@@ -72,13 +72,13 @@
         >
             {{ item }}
         </div>
-        
+
         <!-- ADD TO FAVORITES -->
         <div
             v-if="showUserActions"
             class="flex flex-column icon-col tw-items-center"
         >
-            <button 
+            <button
                 class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB] tw-h-full tw-items-center"
                 :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]'"
                 :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
@@ -149,7 +149,7 @@ export default {
         mappedData() {
             let difficultyValue = 'all';
             if(this.contentModel.post.fields) difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
-            
+
             if (Number.isFinite(Number(difficultyValue))) {
                 this.contentModel.list.difficulty = difficultyValue;
             }

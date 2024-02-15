@@ -1,6 +1,6 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 
-<section class="relative text-center px-6 pb-10 md:pb-0" style="background-color:#f6f8fc;">
+<section class="relative text-center px-6 pb-10 md:pb-0" style="background-color:#f6f8fc;" x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-5xl relative z-20">
         <div class="text-center md:text-left md:flex justify-center items-center"
                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
