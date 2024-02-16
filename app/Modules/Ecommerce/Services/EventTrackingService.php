@@ -66,7 +66,7 @@ class EventTrackingService
         $user = User::query()->where('shopify_id', $order['customer']['id'])->first();
 
         $brand = $this->getBrandFromOrder($order);
-        $data = $this->getOrderEventData($order, $brand);
+        $data = $this->getRefundData($refund, $order, $brand);
 
         dispatchWithDelay(
             new CustomerIoCreateEventByUserId(
@@ -93,7 +93,7 @@ class EventTrackingService
                     'product_id' => $lineItem['product_id'],
                     'product_name' => $lineItem['name'],
                     'brand' => strtolower($lineItem['vendor']),
-                    'price' => floatval($lineItem['price']),
+                    'price' => floatval($lineItem['price_set']['presentment_money']['amount']),
                     'quantity' => $lineItem['quantity'],
                     'variant_id' => $lineItem['variant_id'],
                     'variant_name' => $lineItem['variant_title'],
@@ -120,17 +120,20 @@ class EventTrackingService
     {
         $paymentSource = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
 
+        $total = floatval($order['total_price_set']['presentment_money']['amount']);
+        $discount = floatval($order['total_discounts_set']['presentment_money']['amount']);
+
         return [
             'checkout_token' => $order['checkout_token'],
             'order_id' => $order['id'],
-            'subtotal' => floatval($order['subtotal_price']),
-            'total' => floatval($order['total_price']),
-            'revenue' => floatval($order['total_price']) + floatval($order['total_discounts']),
-            'shipping' => floatval($order['total_shipping_price_set']['shop_money']['amount']),
-            'tax' => floatval($order['total_tax']),
-            'discount' => floatval($order['total_discounts']),
+            'subtotal' => floatval($order['subtotal_price_set']['presentment_money']['amount']),
+            'total' => $total,
+            'revenue' => $total + $discount,
+            'shipping' => floatval($order['total_shipping_price_set']['presentment_money']['amount']),
+            'tax' => floatval($order['total_tax_set']['presentment_money']['amount']),
+            'discount' => $discount,
             'discount_tags' => $this->getDiscountCodes($order),
-            'currency' => $order['currency'],
+            'currency' => $order['total_price_set']['presentment_money']['currency_code'],
             'products' => $this->getProductList($order['line_items']),
             'brand' => $brand,
             'payment_source' => $paymentSource,
@@ -143,13 +146,13 @@ class EventTrackingService
         $refundLineItems = collect($refund['refund_line_items']);
 
         $refundLineItemsAmount = $refundLineItems
-            ->pluck('subtotal')
-            ->map(fn ($a) => floatval($a) * -1)
+            ->pluck('subtotal_set')
+            ->map(fn ($a) => floatval($a['presentment_money']['amount']))
             ->sum();
 
         $orderAdjustmentsAmount = collect($refund['order_adjustments'])
-            ->pluck('amount')
-            ->map(fn ($a) => floatval($a))
+            ->pluck('amount_set')
+            ->map(fn ($a) => floatval($a['presentment_money']['amount']))
             ->sum();
 
         $lineItems = $refundLineItems->pluck('line_item')->toArray();
@@ -158,7 +161,7 @@ class EventTrackingService
             'refund_id' => $refund['id'],
             'order_id' => $refund['order_id'],
             'refund_amount' => $refundLineItemsAmount + $orderAdjustmentsAmount,
-            'currency' => $order['currency'],
+            'currency' => $order['total_price_set']['presentment_money']['currency_code'],
             'products' => $this->getProductList($lineItems),
             'brand' => $brand,
             'timestamp' => Carbon::parse($refund['processed_at'])->timestamp,

@@ -2,34 +2,36 @@
 
 namespace App\Modules\EventDataSynchronizer\Jobs;
 
-use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Services\ProductService;
-use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Railroad\Ecommerce\Services\CartService;
 use Railroad\Railanalytics\Tracker;
 use Throwable;
 
 class ImpactTrackConversion implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
+    private ProductService $productService;
 
     public function __construct(
         private $user,
         private $brand,
-        private $order,
-        private ProductService $productService) {
+        private $order
+    ) {
     }
 
     public function handle()
     {
 
-        $promoCodesList = array_map(function($code) {
+        $promoCodesList = array_map(function ($code) {
             return $code['code'];
         }, $this->order['discount_codes']);
         $promoCodesString = implode(',', $promoCodesList);
@@ -66,7 +68,7 @@ class ImpactTrackConversion implements ShouldQueue
                         affiliateClickCode: $affiliateClickCode
                     );
                 }
-        );
+            );
         } catch (Throwable $exception) {
             error_log("Error in ImpactTrackConversion with order: $orderId");
             error_log($exception);
@@ -82,7 +84,7 @@ class ImpactTrackConversion implements ShouldQueue
                     'name' => $lineItem['name'],
                     'quantity' => $lineItem['quantity'],
                     'sku' => $lineItem['sku'],
-                    'brand' =>strtolower( $lineItem['vendor']),
+                    'brand' => strtolower($lineItem['vendor']),
                     // this is a hack to set the price to zero for trials.
                     // So reporting on Impact's side is a bit cleaner.
                     // we're not investing more time in a better solution as we're likely moving away from impact
@@ -97,6 +99,8 @@ class ImpactTrackConversion implements ShouldQueue
 
     private function getProductCategory($sku, $hasZeroCost): string
     {
+        // lazy load ProductService
+        $this->productService = app(ProductService::class);
         $product = $this->productService->getBySku($sku);
         if ($product->isMembershipProduct()) {
             return $hasZeroCost ? "TrialStart" : "TrialConversion";
