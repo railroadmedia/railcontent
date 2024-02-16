@@ -191,11 +191,11 @@ export const useCollectionStore = defineStore({
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.data.meta.totalResults / this.filter.limit
                     );
+                    this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
+                    this.getFilterColumns();
                 } else {
                     this.data = [...this.data, ...response.data.data];
                     this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
-                    this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
-                    this.getFilterColumns();
                 }
             }
 
