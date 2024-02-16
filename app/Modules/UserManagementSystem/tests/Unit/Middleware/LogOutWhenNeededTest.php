@@ -2,14 +2,13 @@
 
 namespace Modules\UserManagementSystem\Tests\Unit\Middleware;
 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Middleware\LogOutWhenNeeded;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
-use Tests\TestCase;
 
 class LogOutWhenNeededTest extends UserManagementSystemTestCase
 {
@@ -39,45 +38,17 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
         $user = User::factory()->create([
             'email' => $email,
             'password' => Hash::make($password),
+            'needs_logout' => $needsLogout
         ]);
         auth()->attempt(['email' => $email, 'password' => $password]);
 
-        // auth()->attempt will emit the authenticated event, and will set needs_logout to false,
-        // so set it to true afterwards, if needed
-        if ($needsLogout) {
-            $user->update(['needs_logout' => true]);
-            $user->refresh();
-        }
         return $user;
-    }
-
-    /**
-     * Call the parent actingAs function, and update the user's needs_logout value when necessary,
-     * to work around the automatic change of needs_logout to false caused by the Authenticated event.
-     *
-     * @param  User  $user
-     * @param  bool  $needsLogout
-     * @return TestCase
-     */
-    private function actingAsNeedsLogout(User $user, bool $needsLogout): TestCase
-    {
-        parent::actingAs($user);
-
-        // actingAs authenticates the user, which in turn sets needs_logout to false, if it was true before,
-        // so we need to set needs_logout again
-        if ($needsLogout)
-        {
-            $user->update(['needs_logout' => true]);
-            $user->refresh();
-        }
-
-        return $this;
     }
 
     public function test_successful_web_request_when_needs_logout_is_false()
     {
         $user = $this->createUser(false);
-        $response = $this->actingAsNeedsLogout($user, false)->get($this->testRouteName);
+        $response = $this->actingAs($user)->get($this->testRouteName);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -87,23 +58,15 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
         $user = $this->createUser(true);
         $this->assertTrue($user->needs_logout);
 
-        $testCase = $this->actingAsNeedsLogout($user, true);
-        $this->assertTrue($user->needs_logout);
-
         Log::shouldReceive('info')
             ->once()
             ->withArgs(function ($message) use ($user) {
                 return str_contains($message, "Logging out user {$user->id}");
             });
 
-        $response = $testCase->get($this->testRouteName);
+        $response = $this->actingAs($user)->get($this->testRouteName);
 
         $response->assertRedirectContains(config('user_management_system.login_page_path'));
-        $this->assertEquals(302, $response->getStatusCode());
-
-        Auth::login($user);
-        $user->refresh();
-        $this->assertFalse($user->needs_logout);
     }
 
     public function test_successful_json_request_when_needs_logout_is_false()
@@ -140,5 +103,34 @@ class LogOutWhenNeededTest extends UserManagementSystemTestCase
 
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertStringContainsString('"message":"Unauthenticated."', $response->getContent());
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    public function test_needs_login_is_removed_after_login()
+    {
+        $user = $this->createUser(true);
+        // manually set the password here, so we know what it is
+        $password = $this->faker->words(3, true);
+        $user->password = Hash::make($password);
+        $user->save();
+
+        Log::shouldReceive('info')
+            ->once()
+            ->withArgs(function ($message) use ($user) {
+                return str_contains($message, "User {$user->id} has authenticated for the first time after needing to log out. Logging user out of other devices.");
+            });
+
+        // DEV NOTE: do this test without the specified middleware so that we can get around its usage of Redis
+        $response = $this->withoutMiddleware(DynamicWebOrAppMiddlewareGroupsPublic::class)
+            ->post(route('user_management_system.login.cookie'), [
+                'email' => $user->email,
+                'password' => $password
+            ]);
+
+        $response->assertSessionHasNoErrors();
+        $user->refresh();
+        $this->assertFalse($user->needs_logout);
     }
 }

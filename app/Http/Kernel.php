@@ -59,7 +59,6 @@ class Kernel extends HttpKernel
             LeadTrackerMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
-            LogOutWhenNeeded::class,
         ],
 
         'web_authenticated' => [
@@ -99,7 +98,6 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
-            LogOutWhenNeeded::class,
         ],
 
         'api_authenticated' => [

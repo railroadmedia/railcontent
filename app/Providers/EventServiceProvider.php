@@ -56,9 +56,6 @@ class EventServiceProvider extends ServiceProvider
         CommentLiked::class => [
             NotificationEventListener::class . '@handleCommentLiked',
         ],
-        Authenticated::class => [
-            AuthenticationEventListener::class . '@handleAuthenticatedEvent'
-        ],
         UserEvent::class => [
             AuthenticationEventListener::class . '@handleUserAuthenticated'
         ],
