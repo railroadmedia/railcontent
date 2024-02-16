@@ -135,7 +135,7 @@ class ContentJsonController extends Controller
             foreach($instructors->pluck('id') ?? [] as $instructor){
                 $included_fields[] = 'instructor,'.$instructor.',integer,=';
             }
-        }else{
+        }elseif($request->has('title')){
             $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
         }
         $contentData = $this->contentService->getFiltered(
