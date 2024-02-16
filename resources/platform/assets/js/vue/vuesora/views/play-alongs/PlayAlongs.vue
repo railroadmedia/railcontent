@@ -89,7 +89,8 @@ import CollectionFilterWrapper from '../../../components/Filter/CollectionFilter
 import ProgressTracker from "../../assets/js/classes/progress-tracker";
 import InputLabel from "../../../components/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "../../../../constants/brands";
-
+import { useFilterValues } from "../../../hooks/useFilterValues";
+const { getFilterValues } = useFilterValues();
 
 export default {
     name: 'PlayAlongs',
@@ -239,7 +240,7 @@ export default {
         },
     },
     beforeMount() {
-        this.filterOptions = this.getFilterOptions(this.preLoadedContent.meta.filterOptions);
+        this.filterOptions = getFilterValues(this.preLoadedContent.meta.filterOptions);
     },
     mounted() {
         this.audioPlayer = this.$refs.audioPlayer;
@@ -290,7 +291,7 @@ export default {
                         this.content = response.data.data;
                         this.page = response.data.meta.page;
                         this.totalResults = response.data.meta.totalResults;
-                        this.filterOptions = this.getFilterOptions(response.data.meta.filterOptions);
+                        this.filterOptions = getFilterValues(response.data.meta.filterOptions);
                         this.$nextTick(() => {
                             this.loading = false;
                             if (resetPlaylist) {
@@ -315,7 +316,7 @@ export default {
                         this.content = response.data.data;
                         this.page = response.data.meta.page;
                         this.totalResults = response.data.meta.totalResults;
-                        this.filterOptions = this.getFilterOptions(response.data.meta.filterOptions);
+                        this.filterOptions = getFilterValues(response.data.meta.filterOptions);
                     }
                 }).catch((e) => {
                     console.log('ERROR',e);
@@ -324,33 +325,6 @@ export default {
                         this.loading = false;
                     });
                 });
-        },
-        getFilterOptions(object) {
-            const formattedFilters = {};
-            const numberFormat = /\s\(\d{1,}\)/;
-
-            Object.keys(object).forEach((key) => {
-                formattedFilters[key] = [];
-                object[key].map((o, i) => {
-                    formattedFilters[key].push({
-                        key: o,
-                        value: o.replace(numberFormat, '')
-                    });
-                })
-            });
-
-            const filters = [];
-
-            if(Object.keys(formattedFilters).length > 0){
-                for(const key of Object.keys(formattedFilters)){
-                    filters.push({
-                        category: key,
-                        items: formattedFilters[key]
-                    });
-                }
-            }
-
-            return filters;
         },
         parseBpmOptions(options) {
             const acceptedBpmOptions = [
