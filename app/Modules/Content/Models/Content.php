@@ -207,6 +207,7 @@ class Content extends Model
         'lifestyle' => 'string',
         'gear' => 'string',
         'genre' => 'string',
+        'released' => 'string',
 
     ];
 
@@ -713,5 +714,11 @@ if($contentInstructor->count() == 0) {
             }
             $this->setField('genre', $value);
         }
+    }
+
+    public function setReleased($value)
+    {
+        $this->setField('released', $value);
+        $this->released = $value;
     }
 }
