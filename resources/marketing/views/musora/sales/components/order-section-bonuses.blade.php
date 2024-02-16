@@ -48,7 +48,7 @@
                 <br>
                 @if(!empty($header))<h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>@endif
                 @if(!empty($subHeader))<h4 class="leading-tight mt-4 sm:mt-5 mb-2">{!! $subHeader !!}</h4>@endif
-                <a class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                <a class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" aria-label="Get Started">
                     @if(!empty($CTA))
                         {{ $CTA }}
                     @else
@@ -141,7 +141,7 @@
                 <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
                     @if($theme !== 'drumeo')
                         <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
+                            <img alt="drumeo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/drumeo/membership/homepage/webp-format/drumeo-bonus.webp">
@@ -154,7 +154,7 @@
                     @endif
                     @if($theme !== 'pianote')
                         <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
+                            <img alt="pianote tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/webp-format/pianote-bonus.webp">
@@ -167,7 +167,7 @@
                     @endif
                     @if($theme !== 'guitareo')
                         <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
+                            <img alt="guitareo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/guitareo/membership/homepage/webp-format/guitareo-bonus.webp">
@@ -180,7 +180,7 @@
                     @endif
                     @if($theme !== 'singeo')
                         <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
-                            <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
+                            <img alt="singeo tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/singeo/membership/homepage/webp-format/singeo-bonus.webp">
@@ -199,7 +199,7 @@
 
             </h3>
             <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p>
-            <a class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+            <a role="link" aria-label=" Get Started" class="join @if(!empty($buttonColor)) {{ $buttonColor }} @else {{ $theme }} @endif mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                 @if(!empty($CTA))
                     {{ $CTA }}
                 @else
@@ -208,7 +208,7 @@
             </a>
             @if(!empty($altButtonLink))
                 <br>
-                <a class="inline-block opacity-70 mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
+                <a role="link" class="inline-block opacity-70 mt-2" aria-label="Start a monthly membership" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
             @endif
         </div>
     </section>

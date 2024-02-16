@@ -33,6 +33,7 @@
                             type="button"
                             :class="selectedId === {{ $key+1 }} ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
                             class="px-5 py-2 lg:py-2.5 w-full relative rounded-full relative z-20"
+                            aria-label="{{ $button }}"
                         >
                             {!!  $button  !!}
                         </button>
@@ -129,10 +130,13 @@
         <a class="sm:mx-1 w-full sm:w-64 join @if($theme != 'musora') {{ $theme }} @else musora-gold @endif smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
+                aria-label="Customize Anchor"
             @elseif(!empty($month))
                 href="/choose-your-trial-month"
+                aria-label="Choose Your Trial Month"
             @else
                 href="/choose-plan"
+                aria-label="Choose Plan"
             @endif
         >
             @if(!empty($promoVersion) && empty($trialVersion))

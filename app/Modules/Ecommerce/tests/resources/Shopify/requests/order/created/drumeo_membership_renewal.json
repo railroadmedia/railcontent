@@ -1,0 +1,411 @@
+{
+    "headers": {
+        "x-shopify-webhook-id": [
+            "7ac9e1c4-3f76-484a-b0b1-f0a37176d8be"
+        ],
+        "x-shopify-triggered-at": [
+            "2024-01-31T19:55:43.852962209Z"
+        ],
+        "x-shopify-topic": [
+            "orders\/create"
+        ],
+        "x-shopify-test": [
+            "false"
+        ],
+        "x-shopify-shop-domain": [
+            "musora-dev-sync.myshopify.com"
+        ],
+        "x-shopify-order-id": [
+            "5671228244262"
+        ],
+        "x-shopify-hmac-sha256": [
+            "UtZQZLE9dklSz1HmdtMWpmAMrQywFQxAeNc6jQllbBI="
+        ],
+        "x-shopify-api-version": [
+            "2023-07"
+        ],
+        "x-forwarded-proto": [
+            "https"
+        ],
+        "x-forwarded-for": [
+            "34.139.128.14"
+        ],
+        "content-type": [
+            "application\/json"
+        ],
+        "connection": [
+            "keep-alive"
+        ],
+        "cf-worker": [
+            "musora.com"
+        ],
+        "cf-warp-tag-id": [
+            "53caa182-786a-474a-8c66-ed9ace7ae83a"
+        ],
+        "cf-visitor": [
+            "{\"scheme\":\"https\"}"
+        ],
+        "cf-ray": [
+            "84e483b682a9b11b-ATL"
+        ],
+        "cf-ipcountry": [
+            "US"
+        ],
+        "cf-ew-via": [
+            "15"
+        ],
+        "cf-connecting-ip": [
+            "34.139.128.14"
+        ],
+        "cdn-loop": [
+            "cloudflare; subreqs=1"
+        ],
+        "accept-encoding": [
+            "gzip"
+        ],
+        "accept": [
+            "*\/*"
+        ],
+        "content-length": [
+            "6471"
+        ],
+        "user-agent": [
+            "Shopify-Captain-Hook"
+        ],
+        "host": [
+            "brandonk.musora.com"
+        ]
+    },
+    "body": {
+        "id": 5671228244262,
+        "admin_graphql_api_id": "gid:\/\/shopify\/Order\/5671228244262",
+        "app_id": 1354745,
+        "browser_ip": "50.101.147.22",
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": null,
+        "checkout_id": 37493420163366,
+        "checkout_token": "5aea708a70d61b14aa6caf4532356a28",
+        "client_details": {
+            "accept_language": null,
+            "browser_height": null,
+            "browser_ip": "50.101.147.22",
+            "browser_width": null,
+            "session_hash": null,
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/120.0.0.0 Safari\/537.36"
+        },
+        "closed_at": null,
+        "company": null,
+        "confirmation_number": "8V705LX86",
+        "confirmed": true,
+        "contact_email": "drumeo_memberships@mail.com",
+        "created_at": "2024-01-31T14:55:42-05:00",
+        "currency": "USD",
+        "current_subtotal_price": "25.00",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "0.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "25.00",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": "en",
+        "device_id": null,
+        "discount_codes": [],
+        "email": "drumeo_memberships@mail.com",
+        "estimated_taxes": false,
+        "financial_status": "paid",
+        "fulfillment_status": null,
+        "landing_site": null,
+        "landing_site_ref": null,
+        "location_id": null,
+        "merchant_of_record_app_id": null,
+        "name": "#1286",
+        "note": null,
+        "note_attributes": [],
+        "number": 286,
+        "order_number": 1286,
+        "order_status_url": "https:\/\/musora-dev-sync.myshopify.com\/82852905254\/orders\/820b124bb2d85f9ea5e2ee95f3ffae2c\/authenticate?key=4ae4b7c1bccdd1843911fa3d4e295ebe",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [
+            "manual"
+        ],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2024-01-31T14:55:41-05:00",
+        "reference": "ba0d621bbe7697f6735ad24f86fafcae",
+        "referring_site": null,
+        "source_identifier": "ba0d621bbe7697f6735ad24f86fafcae",
+        "source_name": "shopify_draft_order",
+        "source_url": null,
+        "subtotal_price": "25.00",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            }
+        },
+        "tags": null,
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": false,
+        "token": "820b124bb2d85f9ea5e2ee95f3ffae2c",
+        "total_discounts": "0.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "25.00",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "0.00",
+        "total_price": "25.00",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "25.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "0.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 0,
+        "updated_at": "2024-01-31T14:55:43-05:00",
+        "user_id": 104666038566,
+        "billing_address": {
+            "first_name": "Brandon",
+            "address1": null,
+            "phone": null,
+            "city": null,
+            "zip": null,
+            "province": "Alberta",
+            "country": "Canada",
+            "last_name": "Kerr",
+            "address2": null,
+            "company": null,
+            "latitude": null,
+            "longitude": null,
+            "name": "Brandon Kerr",
+            "country_code": "CA",
+            "province_code": "AB"
+        },
+        "customer": {
+            "id": 7806999331110,
+            "email": "drumeo_memberships@mail.com",
+            "created_at": "2024-01-31T10:34:53-05:00",
+            "updated_at": "2024-01-31T14:55:42-05:00",
+            "first_name": "Brandon",
+            "last_name": "Kerr",
+            "state": "disabled",
+            "note": null,
+            "verified_email": true,
+            "multipass_identifier": null,
+            "tax_exempt": false,
+            "phone": null,
+            "email_marketing_consent": {
+                "state": "not_subscribed",
+                "opt_in_level": "single_opt_in",
+                "consent_updated_at": null
+            },
+            "sms_marketing_consent": null,
+            "tags": null,
+            "currency": "USD",
+            "accepts_marketing": false,
+            "accepts_marketing_updated_at": "2024-01-31T10:34:53-05:00",
+            "marketing_opt_in_level": null,
+            "tax_exemptions": [],
+            "admin_graphql_api_id": "gid:\/\/shopify\/Customer\/7806999331110",
+            "default_address": {
+                "id": 10019132408102,
+                "customer_id": 7806999331110,
+                "first_name": "Brandon",
+                "last_name": "Kerr",
+                "company": null,
+                "address1": null,
+                "address2": null,
+                "city": null,
+                "province": "Alberta",
+                "country": "Canada",
+                "zip": null,
+                "phone": null,
+                "name": "Brandon Kerr",
+                "province_code": "AB",
+                "country_code": "CA",
+                "country_name": "Canada",
+                "default": true
+            }
+        },
+        "discount_applications": [],
+        "fulfillments": [],
+        "line_items": [
+            {
+                "id": 14623139201318,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14623139201318",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 1,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 0,
+                "name": "Drumeo Monthly Membership | With 7-Day Trial",
+                "price": "25.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "25.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "25.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8817355260198,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": false,
+                "sku": "drumeo-base-monthly-recurring-7-day-trial-membership",
+                "taxable": true,
+                "title": "Drumeo Monthly Membership | With 7-Day Trial",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47072987250982,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Drumeo",
+                "tax_lines": [
+                    {
+                        "channel_liable": false,
+                        "price": "0.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "rate": 0.05,
+                        "title": "GST"
+                    }
+                ],
+                "duties": [],
+                "discount_allocations": []
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [],
+        "shipping_address": {
+            "first_name": "Brandon",
+            "address1": null,
+            "phone": null,
+            "city": null,
+            "zip": null,
+            "province": "Alberta",
+            "country": "Canada",
+            "last_name": "Kerr",
+            "address2": null,
+            "company": null,
+            "latitude": null,
+            "longitude": null,
+            "name": "Brandon Kerr",
+            "country_code": "CA",
+            "province_code": "AB"
+        },
+        "shipping_lines": []
+    }
+}

@@ -779,10 +779,8 @@ h1, h2, h3, h4, h5, h6, p, li {
       padding: 7px 20px;
       margin: 0 auto 15px;
 
-      &[type="submit"],
-      button {
+      &[type="submit"] {
         font-family: $bebas;
-        font-weight: 700;
         color: #FFF;
         background: $drumeoBlue;
         text-transform: uppercase;

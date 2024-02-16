@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pianote;
 
 use App\Modules\Ecommerce\Services\AccessCodeService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSendTransactionalEmail;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use Carbon\Carbon;
@@ -126,11 +127,6 @@ class SalesController extends BaseController
         return view('pianote.sales.affiliates.'.$page, ['theme' => 'pianote', 'month' => true]);
 
         throw new NotFoundHttpException();
-    }
-
-    public function giveaway()
-    {
-        return view('pianote.lead-gen.giveaway', ['theme' => 'pianote']);
     }
 
     public function products(Request $request, $domain, $page = null)
@@ -261,11 +257,11 @@ class SalesController extends BaseController
 
     public function newPianoPlayers()
     {
-        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $productId = 517;
-        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.new-piano-players', [
             'recaptchaKey'=>config('recaptcha.key'),
@@ -276,11 +272,11 @@ class SalesController extends BaseController
     }
     public function easyChords()
     {
-        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $productId = 734;
-        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.easy-chords', [
             'recaptchaKey'=>config('recaptcha.key'),
@@ -291,11 +287,11 @@ class SalesController extends BaseController
     }
     public function thirtyDayBluesPiano()
     {
-        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $productId = 740;
-        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.30-day-blues-piano', [
             'recaptchaKey'=>config('recaptcha.key'),

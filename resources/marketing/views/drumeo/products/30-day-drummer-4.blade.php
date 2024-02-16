@@ -55,8 +55,7 @@
             }
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;
             color: #fff;
             background: #0b76db;
             text-transform: uppercase;
@@ -212,7 +211,6 @@
             }
         }
     </style>
-    <?php \App\Analytics\Tracker::trackProductImpression('30-day-drummer-2'); ?>
 @stop()
 
 @section('body-data')
@@ -284,11 +282,7 @@
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            @if(is_current_user_a_member())
-                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer" class="join blue medium w-full">ENROLL NOW</a>
-                            @else
-                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
-                            @endif
+                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Drumeo Members register for free here.</a>
                             </p>
@@ -676,11 +670,7 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        @if(is_current_user_a_member())
-                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>
-                        @else
-                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
-                        @endif
+                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
@@ -827,10 +817,10 @@
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                    <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                    <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&promo-code=30DDS4-BUNDLE&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                         <h3><strong>30-Day Drummer</strong></h3>
                         <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
-                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ 50 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                         <div class="join blue smaller my-4">ENROLL NOW</div>
                         <ul class="list-disc ml-10">
                             <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>
@@ -847,7 +837,7 @@
                     </a>
                     <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
                         <h3><strong>Unlimited Lessons</strong></h3>
-                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>
+                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $288.94.</p>
                         <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
                         <div class="join blue smaller my-4">GET EVERYTHING</div>
                         <ul class="list-disc ml-10">

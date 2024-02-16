@@ -57,6 +57,8 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         protected ?string $endCursor,
         protected ?int $limit,
         protected ?int $customerId,
+        protected string $startProcessedAt,
+        protected string $endProcessedAt,
         protected bool $simulate,
     ) {
     }
@@ -99,7 +101,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
 
         $gql = <<<GQL
             query {
-                orders(first: $count, $cursor query: "created_at:<=\"$date\"$customerIdQuery", sortKey: PROCESSED_AT) {
+                orders(first: $count, $cursor query: "created_at:<=\"$date\"$customerIdQuery AND processed_at:>=\"$this->startProcessedAt\" AND processed_at:<=\"$this->endProcessedAt\"", sortKey: PROCESSED_AT) {
                     nodes {
                         ... on Order {
                             id,
@@ -140,7 +142,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         if ($hasNextPage && $limitRemaining) {
             $newLimit = is_null($this->limit) ? null : $limitRemaining;
             // create another job to do the next batch
-            $this->batch()->add(new SyncImportedOrderShopifyIds($endCursor, $newLimit, $this->customerId, $this->simulate));
+            $this->batch()->add(new SyncImportedOrderShopifyIds($endCursor, $newLimit, $this->customerId, $this->startProcessedAt, $this->endProcessedAt, $this->simulate));
         }
     }
 

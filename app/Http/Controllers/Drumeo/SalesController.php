@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Drumeo;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Ecommerce\Services\AccessCodeService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -122,10 +123,10 @@ class SalesController extends BaseController
     public function thirtyDayDrummer()
     {
         $productId = 833;
-        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
-        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer-4', [
             'recaptchaKey'=>config('recaptcha.key'),
@@ -137,10 +138,10 @@ class SalesController extends BaseController
     public function thirtyDayDrummerEG()
     {
         $productId = 741;
-        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
-        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
             'recaptchaKey'=>config('recaptcha.key'),
@@ -152,10 +153,10 @@ class SalesController extends BaseController
     public function thirtyDayChops()
     {
         $productId = 733;
-        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
-        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
-        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-chops', [
             'recaptchaKey'=>config('recaptcha.key'),

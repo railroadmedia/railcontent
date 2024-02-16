@@ -18,7 +18,7 @@
                      :class="[thumbnailType]"
                 >
                     <!-- Video Thumbnail -->
-                    <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
                          class="tw-transition-opacity tw-duration-500"
                          :class="[
                             item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',

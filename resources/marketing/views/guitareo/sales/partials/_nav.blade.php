@@ -1,13 +1,13 @@
 <nav class="top-bar expanded">
     <div class="logo">
-        <a href="{{ get_legacy_brand_base_url('guitareo') }}">
+        <a href="{{ get_legacy_brand_base_url('guitareo') }}" aria-label="Guitareo Home"  title="Go to the home page">
             <img src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="Guitareo Logo">
         </a>
     </div>
-    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif" role="button" aria-label="Toggle Menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
     </div>
 
     @if(!empty($checkoutVersion))
@@ -24,6 +24,7 @@
                     cart-data-url=''
                     checkout-url='/order/guitareo'
                     api-domain-url=''
+                    aria-label="Cart"
             ></nav-cart-button>
             <cart-sidebar
                     brand="guitareo"
@@ -31,6 +32,7 @@
                     cart-data-url=''
                     checkout-url='/order/guitareo'
                     api-domain-url=''
+                    aria-label="Cart Sidebar"
             ></cart-sidebar>
         </div>
     @endif
@@ -38,19 +40,19 @@
         @if(!empty($fullSubscriptionVersion))
             <div class="relative">
                 <div class="edge-wrap show-for-medium">
-                    <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
-                    <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
-                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/choose-plan" >Pricing</a>
-                    <a class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/shop" >Shop</a>
+                    <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif"  aria-haspopup="true" aria-expanded="false" aria-label="Features Dropdown Menu"  aria-controls="features-dd">Features <i class="fa-solid fa-caret-down"></i></span>
+                    <span class="cursor-pointer instruments" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Instruments Menu" aria-controls="instruments-dd" title="View Instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/choose-plan" title="View Pricing">Pricing</a>
+                    <a class="@if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/shop" title="Visit Shop">Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('guitareo') }}/riff" >Blog</a>
 
                 </div>
-                <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
+                <div id="features-dd" class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44" aria-label="Features Dropdown Menu" tabindex="0">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
                 </div>
-                <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
+                <div id="instruments-dd" class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44" aria-label="Instruments Dropdown Menu" tabindex="0">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full text-guitareo" href="{{ get_legacy_brand_base_url('guitareo') }}" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
@@ -66,6 +68,7 @@
                 @else
                     href="/#customize-anchor" class="join"
                 @endif
+                aria-label="Join Guitareo"
             >
 
                 @if(!empty($trialVersion))
@@ -121,7 +124,7 @@
                 "linkIcon" => ''
             ])
         </div>
-        <div class="has-drop-down" target="_parent" rel="">
+        <div class="has-drop-down" target="_parent" rel="" aria-haspopup="true" aria-expanded="false" role="button">
             <div class="nav-link">
                 <i class="fas fa-piano-keyboard text-guitareo"></i>
                 Instruments
