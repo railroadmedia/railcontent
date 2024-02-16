@@ -34,7 +34,7 @@ class ShopifyWebhookControllerTest extends BaseTestCase
             });
         // values, according to the resource file
         $customerId = 7794198741286;
-        $customerEmail = 'brandonk+receipt@musora.com';
+        $customerEmail = 'only_physical_order@mail.com';
         Log::shouldReceive('debug')
             ->once()
             ->withArgs(function ($message) use ($customerEmail, $customerId) {
@@ -71,7 +71,7 @@ class ShopifyWebhookControllerTest extends BaseTestCase
             });
         // values, according to the resource file
         $customerId = 7462119473446;
-        $customerEmail = 'foo@bar.ex';
+        $customerEmail = 'imported_memberships@mail.com';
         $processedAt = '2023-10-12T20:03:01-04:00';
         Log::shouldReceive('debug')
             ->once()

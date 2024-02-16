@@ -9,10 +9,8 @@
       tw-border-[#E4E4E7]
       dark:tw-border-[#223457]
       tw-no-underline
-      hover:tw-bg-[#E7EFF6]
-      dark:hover:tw-bg-[#002039]
-    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : 'hover-bg-grey-7 hover-text-black']"
-    :href="renderLink ? item.url : null">
+    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
+    :href="renderLink && isReleased ? item.url : null">
 
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
@@ -50,7 +48,10 @@
             </h5>
           </div>
 
-          <span class="thumb-hover flex-center">
+          <span
+              class="thumb-hover flex-center"
+              :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
+          >
             <i class="fas" :class="thumbnailIcon"></i>
             <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
               {{ releaseDate }}

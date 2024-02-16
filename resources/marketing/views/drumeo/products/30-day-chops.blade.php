@@ -58,7 +58,6 @@
         }
         form input[type="submit"], form button[type="submit"], form input button, form button button {
             font-family: 'Bebas Neue', sans-serif;
-            font-weight: 700;
             color: #fff;
             background: #0b76db;
             text-transform: uppercase;

@@ -26,8 +26,6 @@ trait ExecutesShopifyGraphQlQuery
         $pollResponse = $shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
         if ($pollResponse->successful()) {
             $responseBody = json_decode($pollResponse->body());
-            $this->lastQueryCost = new LastQueryCost($responseBody->extensions->cost) ?? null;
-
             // check for any errors
             $responseErrors = $responseBody->errors ?? [];
             if (!empty($responseErrors)) {
@@ -39,6 +37,7 @@ trait ExecutesShopifyGraphQlQuery
                     )
                 );
             }
+            $this->lastQueryCost = new LastQueryCost($responseBody->extensions->cost) ?? null;
         } else {
             throw new Exception(
                 sprintf(

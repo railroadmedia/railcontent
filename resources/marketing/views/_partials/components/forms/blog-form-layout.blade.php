@@ -65,7 +65,6 @@
 
         .infusion-form button {
             font-family:"Bebas Neue", sans-serif;
-            font-weight:700;
             text-transform:uppercase;
             margin:0 auto!important;
             text-align:center;
