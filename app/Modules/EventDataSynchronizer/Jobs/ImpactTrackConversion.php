@@ -28,8 +28,9 @@ class ImpactTrackConversion implements ShouldQueue
     ) {
     }
 
-    public function handle()
+    public function handle(ProductService $productService)
     {
+        $this->productService = $productService;
 
         $promoCodesList = array_map(function ($code) {
             return $code['code'];
@@ -99,8 +100,6 @@ class ImpactTrackConversion implements ShouldQueue
 
     private function getProductCategory($sku, $hasZeroCost): string
     {
-        // lazy load ProductService
-        $this->productService = app(ProductService::class);
         $product = $this->productService->getBySku($sku);
         if ($product->isMembershipProduct()) {
             return $hasZeroCost ? "TrialStart" : "TrialConversion";
