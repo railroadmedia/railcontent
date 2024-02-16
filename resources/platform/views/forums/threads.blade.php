@@ -82,7 +82,7 @@
                     :sort-options="{{ json_encode([
                         [ 'value' => '-last_post_published_on', 'name' => 'Most recent', 'icon' => 'sort-down' ],
                         [ 'value' => 'last_post_published_on', 'name' => 'Oldest', 'icon' => 'sort-up' ],
-                        [ 'value' => 'mine', 'name' => 'My threads', 'icon' => '' ]
+                        [ 'value' => 'mine', 'name' => 'My threads', 'icon' => 'my-threads' ]
                     ]) }}"
                     default-sort="-last_post_published_on"
                 ></collection-wrapper>

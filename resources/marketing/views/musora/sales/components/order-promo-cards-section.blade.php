@@ -7,7 +7,7 @@
         <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 lg:mb-10 font-lexend leading-none sm:leading-none lg:leading-none uppercase">
             <strong>{!! $header !!}</strong>
             @if(!empty($underline))
-                <svg class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;"
+                <svg aria-label="Underline" class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%;"
                     xmlns="http://www.w3.org/2000/svg" width="524" height="22" viewBox="0 0 524 22" fill="none">
                     <path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
                     <path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="@if(!empty($fillColor)) {{ $fillColor }} @else #ffac00 @endif" stroke-width="3" stroke-linecap="round"/>
@@ -25,7 +25,7 @@
             @if ($products['alesis-ekit']->getStockAvailability() < 1 && !empty($products['alesis-ekit']->getStockAvailability()))
             <div class="bg-drumeo rounded-md sm:rounded-full px-6 sm:pl-6 sm:pr-2 py-2 inline-block w-auto mb-5 lg:mb-7">
                 <h5 class="inline-block align-middle mb-2 sm:mb-0 sm:mr-4"><strong>The E-Kit Bundle is sold out. </strong></h5><br class="sm:hidden">
-                <div class="inline-block join white smaller" @click="waitlist = true;">JOIN THE WAITLIST</div>
+                <div class="inline-block join white smaller" role="button" tabindex="0" @click="waitlist = true;">JOIN THE WAITLIST</div>
             </div>
             @endif
             @if(!empty($recaptchaKey))
@@ -80,11 +80,11 @@
                         <p class="text-sm mb-5"><em>{!! $secondDealSub !!}</em></p>
                         @if(!empty($secondTwoButtons))
                             <div class="flex items-center">
-                                <a href="{{$secondDealLink}}" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </a>
-                                <a href="/drumshop/kit" class="mx-1 join black outline smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$secondTwoButtons}} </a>
+                                <a href="{{$secondDealLink}}" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </a>
+                                <a href="/drumshop/kit" class="mx-1 join black outline smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $secondTwoButtons }}"> {{$secondTwoButtons}} </a>
                             </div>
                         @else
-                            <a href="{{$secondDealLink}}" class="join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]"> {{$buttonText}} </a>
+                            <a href="{{$secondDealLink}}" class="join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </a>
                         @endif
                     </div>
                     @if(!empty($secondExtraBonuses))
@@ -115,7 +115,7 @@
                             <strong>${{$firstDealPrice}}</strong>
                         </h3>
                         <p class="text-sm mb-5"><em>{!! $firstDealSub !!}</em></p>
-                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}">{{$buttonText}}</div>
+                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
                     </div>
                         @if(!empty($firstExtraBonuses))
                             <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">

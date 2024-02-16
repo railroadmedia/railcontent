@@ -1,5 +1,7 @@
 <template>
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
+        <!-- Learning Paths -->
+        <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" />
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
         <div class="tw-px-4 lg:tw-px-0">
@@ -14,7 +16,7 @@
             title="Continue"
             seeAllAriaLabel="See All Lessons In Progress"
             :seeAllUrl="continueUrl"
-            :preLoadedContent="startedContent.data"
+            :preLoadedContent="startedContent"
             :isMiniView="true"
             :show-dropdown="true"
         />
@@ -60,6 +62,7 @@ import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalog
 import ListSection from '../components/ListSection/ListSection.vue';
 import CoachEvent from '../vuesora/components/Coaches/CoachEvent.vue';
 import StatsSection from '../components/StatsSection/StatsSection.vue';
+import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
 import { useUserStore } from "../../stores/user";
 import {storeToRefs} from "pinia/dist/pinia";
 
@@ -91,6 +94,7 @@ const props = defineProps({
     hasTopics: { type: Boolean, default: false },
     hasUpcomingEvents: { type: Boolean, default: false },
     hotForumTopics: { type: Array, default: () => ([]) },
+    learningPaths: { type: Array, default: () => ([]) },
     newContent: { type: Object, default: () => ({}) },
     newContentUrl: { type: String, default: '' },
     nextLearningPathLevel: { type: String, default: '' },
@@ -101,6 +105,7 @@ const props = defineProps({
     timeCutoffMinutes: { type: Number, default: 0 },
     upcomingEvents: { type: Object, default: () => ({}) },
     upcomingUrl: { type: String, default: '' },
+    usersList: { type: Object, default: () => ({}) },
     userMetrics: { type: Object, default: () => ({}) },
     usersList: { type: Object, default: () => ({}) },
     workoutsContent: { type: Object, default: () => ({}) },

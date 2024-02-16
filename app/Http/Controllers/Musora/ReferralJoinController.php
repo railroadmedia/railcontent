@@ -8,18 +8,14 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Referral\Models\Referrer;
-use Railroad\Referral\Services\ReferralService;
+use App\Modules\Referral\Models\Referrer;
+use App\Modules\Referral\Services\ReferralService;
 
 
 class ReferralJoinController extends BaseController
 {
+    private ReferralService $referralService;
 
-    /**
-     * ReferralController constructor.
-     *
-     * @param ReferralService $referralService
-     */
     public function __construct(ReferralService $referralService)
     {
         $this->referralService = $referralService;

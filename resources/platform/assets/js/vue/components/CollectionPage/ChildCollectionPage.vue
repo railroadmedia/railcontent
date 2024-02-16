@@ -1,28 +1,14 @@
 <script setup>
-//Libraries
-import { onBeforeMount, inject, computed } from 'vue';
-
-//Services
-import ContentAPI from "../../../vue/vuesora/assets/js/services/content";
-
-//Components
-import { ArrowLeftIcon } from '@heroicons/vue/solid';
-import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
+import Breadcrumb from '../Breadcrumb/BreadcrumbV2.vue';
 import UnifiedHeader from '../Unified/UnifiedHeader.vue';
 
 //Vuesora components
 import CollectionWrapper from '../CollectionWrapper/CollectionWrapper.vue';
-
-//Inject
-const token = inject('csrf_token');
+import SongRequest from "../Songs/SongRequest";
 
 //-----------Props-----------//
 const props = defineProps({
-    brand: {
-        type: String,
-        default: "drumeo"
-    },
-    headerBackground: {
+    collectionAvatar: {
         type: String,
         default: ""
     },
@@ -64,48 +50,32 @@ const props = defineProps({
     }
 });
 
-onBeforeMount(() => {
-    //console.log(props.goBackUrl);
-});
-
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
-    <UnifiedHeader :brand="brand" :header-background="headerBackground">
+    <UnifiedHeader>
         <template v-slot:left-content>
-            <div class="tw-bg-[#00101D] tw-rounded-full tw-h-[28px] tw-w-[28px]">
-                <a class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center" :href="goBackUrl">
-                    <ArrowLeftIcon class="tw-w-[14px] tw-h-[14px] tw-text-white" />
-                </a>
-            </div>
-            <div class="tw-flex tw-flex-col tw-text-white">
-                <h3 class="tw-pb-[10px] tw-text-[32px] tw-font-bold">{{ contentTitle }}</h3>
-                <div class="tw-text-[14px] tw-font-bold tw-leading-none">{{ contentSubtitle }}</div>
+            <div class="tw-flex">
+                <div class="tw-rounded-full tw-w-[115px] tw-h-[115px] tw-border-[2px] tw-border-white" :style="{ backgroundImage: `url(${collectionAvatar})` }"></div>
+                <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white tw-pl-[20px]">
+                    <h3 class="tw-pb-[10px] tw-text-[32px] tw-font-bold">{{ contentTitle }}</h3>
+                    <div class="tw-text-[14px] tw-font-bold tw-leading-none">{{ contentSubtitle }}</div>
+                </div>
             </div>
         </template>
         <template v-if="contentType === 'song'" v-slot:right-content>
-            <song-request brand="{{ brand }}"></song-request>
+            <SongRequest />
         </template>
     </UnifiedHeader>
     <div class="lg:tw-container lg:tw-px-[50px] tw-mx-auto tw-pt-[30px]">
         <CollectionWrapper
-            :use-theme-color="true"
-            :lock-unowned="true"
             :pre-loaded-content="preLoadedContent"
             :tab-options="[
                 { key: 'allContent', value: `All ${pluralContentType}` },
             ]"
-            :initial-tab-data="{
-                allContent: {
-                    searchTerm: '',
-                    sort: 'slug'
-                },
-            }"
             :filterable-values="filterableValues"
             :required-fields="requiredFields"
             :collection-type="contentType"
-            :brand="brand"
-            >
-        </CollectionWrapper>
+        />
     </div>
 </template>

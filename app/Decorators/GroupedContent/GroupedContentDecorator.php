@@ -6,6 +6,7 @@ use App\Decorators\Content\ModeDecoratorBase;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railcontent\Decorators\Decorator;
 
 class GroupedContentDecorator extends ModeDecoratorBase
 {
@@ -25,7 +26,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
         }
 
         foreach ($contents as $index => $content) {
-            $lessonType =  array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['content_type']] ?? '';
+
             if ($content['type'] == 'artist') {
                 $contents[$index]['url'] = url()->route('platform.content.artist.show', [
                     'brand' => brand(),
@@ -36,6 +37,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
                     $content['artist']
                 );
             } elseif ($content['type'] == 'style') {
+                $lessonType =  array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['lessons'][0]['type']] ?? '';
                 $contents[$index]['url'] = url()->route('platform.content.genre.show', [
                     'brand' => brand(),
                     'genre' => urlencode(urlencode($content['grouped_by_field'])),
@@ -48,6 +50,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
                         'firstContentId' => $content['id'],
                     ]).'?included_types[]='.$content['content_type'];
             }
+            $content['lessons'] = Decorator::decorate($content['lessons'], 'card');
         }
 
         return $contents;

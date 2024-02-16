@@ -206,7 +206,7 @@
     ])
     @endcomponent
 
-    <section class="content-section coaches-info text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/spread-background.jpg">
+    <section class="content-section coaches-info text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/spread-background.jpg">
         <div class="container mx-auto relative z-10">
             <h2><strong>The best seat <br class="hide-for-medium"> in the house.</strong></h2>
             <div class="text-section text-center relative z-10">

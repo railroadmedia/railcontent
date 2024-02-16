@@ -37,9 +37,19 @@
         @endslot
     @endcomponent
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3 tw-mt-[30px]">
-        <collection-wrapper collection-type="pack" infinite-scroll="{{ false }}" :pre-loaded-content="{{ $packs }}" title="packs"
-                            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"  default-sorts="-progress"></collection-wrapper>
+    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
+        <collection-wrapper
+            collection-type="pack"
+            :infinite-scroll="false"
+            without-enrollment="{{ json_encode(user()->isPackOnlyOwner()) }}"
+            :pre-loaded-content="{{ $packs }}"
+            title="Packs"
+            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
+            default-sorts="-progress"
+            :hide-sort-icon="true"
+            limit = -1
+            search-placeholder="Search all packs..."
+        ></collection-wrapper>
     </div>
 
 {{--    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">--}}

@@ -1,15 +1,24 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-filter="hideFilter" :hide-sort-icon="hideSortIcon" :hide-search="hideSearch" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :sort-options="collectionStore.getSortOptions()" :tab-options="tabOptionData" :multi-select-columns="filterColumns"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="sortOptions"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
         <transition appear name="fade">
             <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
+                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
+                            :total-results="getTotalResults" />
+                <SongCardContainer
+                    v-else-if="isSong"
+                    :pre-loaded-content="data"
+                    :content-type-override="collectionType"
+                    :subscription-calendar-id="subscriptionCalendarId"
+                />
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
@@ -41,12 +50,12 @@ import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
+import SongCardContainer from "../Catalogue/SongCardContainer";
 import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
 import CoachesGridCatalogue from "../../vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "../../vuesora/views/catalogues/DownloadsCatalogue";
 import PackCatalogue from "../Packs/PackCatalogue";
-
 
 const props = defineProps({
     collectionType: {
@@ -140,7 +149,15 @@ const props = defineProps({
             { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
             { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
             { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
-        ],
+        ]
+    },
+    searchPlaceholder: {
+        type: String,
+        default: 'Search',
+    },
+    withoutEnrollment: {
+        type: Boolean,
+        default: () => false,
     },
 });
 
@@ -158,6 +175,7 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
+        ...(isPack.value && { without_enrollment: props.withoutEnrollment })
     };
 })
 
@@ -248,7 +266,7 @@ const isThreads = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isWorkout.value && !isChallenge.value && props.collectionType;
+    return !isWorkout.value && !isChallenge.value  && props.collectionType;
 })
 
 const showGroupBy = computed(() => {
@@ -350,7 +368,7 @@ onBeforeMount(() => {
         content: props.preLoadedContent,
         filter: {
             params: { ...request_params.value },
-            [isThreads.value ? 'term' : 'title']: '',
+            [isThreads.value || isCoach.value ? 'term' : 'title']: '',
             sort: props.defaultSort,
         },
         tabData: getTabData.value,
@@ -366,7 +384,7 @@ onBeforeMount(() => {
 
 onMounted(() => {
     // console.log('collection type',props.collectionType)
-    // console.log(props.title)
+    // console.log(props.sortOptions, props.defaultSort)
     // console.log(props.preLoadedContent)
 })
 </script>

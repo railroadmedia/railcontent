@@ -167,6 +167,7 @@ class UserPlaylistsController extends BaseController
 
         $playlistItems = [];
         if ($playlist['has_access'] == 1) {
+            $initialByPassPermissions = ContentRepository::$bypassPermissions;
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
             ContentRepository::$bypassPermissions = true;
             $oldStatuses = ContentRepository::$availableContentStatues;
@@ -180,7 +181,7 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$pullFutureContent = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
 
-            ContentRepository::$bypassPermissions = false;
+            ContentRepository::$bypassPermissions = $initialByPassPermissions;
             ContentRepository::$availableContentStatues = $oldStatuses;
             ContentRepository::$pullFutureContent = $oldFutureContent;
 
@@ -303,12 +304,13 @@ class UserPlaylistsController extends BaseController
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
+        $initialByPassPermissions = ContentRepository::$bypassPermissions;
         ContentRepository::$bypassPermissions = true;
         $content = $this->contentService->getById($playlistItem['content_id']);
         ModeDecoratorBase::$decorationMode =   DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
-        ContentRepository::$bypassPermissions = false;
+        ContentRepository::$bypassPermissions = $initialByPassPermissions;
 
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
@@ -357,7 +359,7 @@ class UserPlaylistsController extends BaseController
         }
 
         if (!empty($content['parent_content_data'] ?? [])) {
-            $content['parent'] =
+            $playlistItem['parent'] =
                 $this->contentService->getByChildId($content['id'])
                     ->first();
         }

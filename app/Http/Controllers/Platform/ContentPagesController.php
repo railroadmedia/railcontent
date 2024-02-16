@@ -267,6 +267,10 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
         if ($contentTypeName == 'songs') {
+            $allowableFilters = $catalogueMeta['allowableFilters'];
+
+            $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
+            $catalogueMeta['allowableFilters'] = $filterableValues;
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],
@@ -1814,8 +1818,6 @@ class ContentPagesController extends BaseController
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
 
-        //dd($lessonType);
-
         $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
             $request->get('limit', 12),
             $request->get('sort', '-popularity'),
@@ -1825,7 +1827,12 @@ class ContentPagesController extends BaseController
             ['style,'.$genre],
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', []),);
+            $request->get('included_user_states', []),
+            true,
+            false,
+            true,
+            false,
+            true);
 
         if ($initialContent->totalResults() === 0) {
             throw new NotFoundHttpException();

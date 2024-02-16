@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
+use Modules\Content\Models\ContentGears;
+use Modules\Content\Models\ContentGenre;
 use Modules\Content\Models\ContentLifestyle;
 use Modules\Content\Models\ContentTheory;
-use Railroad\Railcontent\Events\ContentCreated;
+use Modules\Content\Models\ContentTopic;
 
 /**
  * App\Modules\Content\Models\Content
@@ -203,6 +205,10 @@ class Content extends Model
         'theory' => 'string',
         'creativity' => 'string',
         'lifestyle' => 'string',
+        'gear' => 'string',
+        'genre' => 'string',
+        'released' => 'string',
+
     ];
 
     public function newEloquentBuilder($query): ContentBuilder
@@ -670,5 +676,49 @@ if($contentInstructor->count() == 0) {
             }
             $this->setField('lifestyle', $value);
         }
+    }
+
+    public function setGear($value)
+    {
+        if ($value) {
+            $gear =
+                ContentGears::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('gear', $value)
+                    ->first();
+            if (!$gear) {
+                $gear = new ContentGears();
+                $gear->content_id = $this->id;
+                $gear->gear = $value;
+                $gear->position = 1;
+                $gear->save();
+            }
+            $this->setField('gear', $value);
+        }
+    }
+
+    public function setGenre($value)
+    {
+        if ($value) {
+            $genre =
+                ContentGenre::query()
+                    ->where('content_id', '=', $this->id)
+                    ->where('genre', $value)
+                    ->first();
+            if (!$genre) {
+                $genre = new ContentGenre();
+                $genre->content_id = $this->id;
+                $genre->genre = $value;
+                $genre->position = 1;
+                $genre->save();
+            }
+            $this->setField('genre', $value);
+        }
+    }
+
+    public function setReleased($value)
+    {
+        $this->setField('released', $value);
+        $this->released = $value;
     }
 }

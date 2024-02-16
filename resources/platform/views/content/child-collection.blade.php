@@ -2,6 +2,7 @@
 
 @php
 //dd($goBackUrl);
+$collectionAvatar = 'https://picsum.photos/300/300';
 @endphp
 
 @section('meta')
@@ -13,6 +14,7 @@
         :content-title="{{ json_encode($contentTitle) }}"
         :content-subtitle="{{ json_encode($contentSubtitle) }}"
         :collection-name="{{ json_encode($collectionName) }}"
+        :collection-avatar="{{ json_encode($collectionAvatar) }}"
         :content-type="{{ json_encode($contentType) }}"
         :plural-content-type="{{ json_encode($pluralContentType) }}"
         :content-name="{{ json_encode($contentName) }}"

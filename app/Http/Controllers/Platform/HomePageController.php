@@ -9,7 +9,8 @@ use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
-use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\Content\Services\LearningPathsService;
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
@@ -49,7 +50,8 @@ class HomePageController extends BaseController
     private UserContentProgressService $userContentProgressService;
     private CarouselService $carouselService;
     private CohortService $cohortService;
-    private UserProductService $userProductService;
+    private LearningPathsService $learningPathsService;
+    private UserAccessPermissionsService $userAccessPermissionsService;
 
     /**
      * @param ContentService $contentService
@@ -62,7 +64,6 @@ class HomePageController extends BaseController
      * @param UserContentProgressService $userContentProgressService
      * @param CarouselService $carouselService
      * @param CohortService $cohortService
-     * @param UserProductService $userProductService
      * @param OnboardingService $onboardingService
      *
      */
@@ -77,8 +78,9 @@ class HomePageController extends BaseController
         UserContentProgressService $userContentProgressService,
         CarouselService $carouselService,
         CohortService $cohortService,
-        UserProductService $userProductService,
         OnboardingService $onboardingService,
+        LearningPathsService $learningPathsService,
+        UserAccessPermissionsService $userAccessPermissionsService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -90,8 +92,9 @@ class HomePageController extends BaseController
         $this->userContentProgressService = $userContentProgressService;
         $this->carouselService = $carouselService;
         $this->cohortService = $cohortService;
-        $this->userProductService = $userProductService;
         $this->onboardingService = $onboardingService;
+        $this->learningPathsService = $learningPathsService;
+        $this->userAccessPermissionsService = $userAccessPermissionsService;
     }
 
     public function homeRedirect()
@@ -172,7 +175,7 @@ class HomePageController extends BaseController
         $newContent = $this->getNewContents();
 
         $workoutsContent = $this->getWorkoutsContents();
-        if(config('railcontent.enable_recsys', false)) {
+        if (config('railcontent.enable_recsys', false)) {
             $recommendedContent = $this->getSongRecommendations();
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
@@ -305,11 +308,31 @@ class HomePageController extends BaseController
 
         $carousel = $this->carouselService->getCarouselSlides();
 
+        $shouldShowTrialSection = false;
+        $brand = brand();
+        $hideSection = $brand . '_trial_section_hide';
+
+        if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
+            $hasExperienceLevels = count(
+                    user()->onboardingExperience->filter(function ($item) use ($brand) {
+                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                    })
+                ) > 0;
+
+            $shouldShowTrialSection = ($hasExperienceLevels) ? true : false;
+        }
+        $trialSection = [];
+        if ($shouldShowTrialSection) {
+            $trialSection = $this->learningPathsService->getLearningPaths();
+        }
+
         $cohortBanner = [];
         $activeCohort = $this->cohortService->getActiveCohort();
 
-        $hasProduct =
-            user() && $this->userProductService->hasProductNotCached(user()?->id, $activeCohort['product_id'] ?? 0);
+        $hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(
+                user()?->id,
+                $activeCohort['product_id'] ?? 0
+            );
 
         if ($activeCohort && $hasProduct) {
             $contentId = $activeCohort['content_id'];
@@ -354,6 +377,7 @@ class HomePageController extends BaseController
             "completedLevelsUrl" => $methodContent['url'] ?? '',
             "currentDate" => $currentDate,
             "currentEvent" => $currentEvent,
+            'displayTrialSection' => $shouldShowTrialSection,
             "eventCoachProfileUrl" => $eventCoachUrl ?? '',
             "existsCohortBanner" => !empty($cohortBanner),
             "followedLessons" => $followedLessons->toResponseRawJson(),
@@ -382,11 +406,13 @@ class HomePageController extends BaseController
             "subscribedCoachesJson" => $subscribedCoaches->toResponseRawJson(),
             "themeColor" => $themeColor,
             "timeCutoffMinutes" => LiveStreamEventService::NOT_LIVE_PAGE_SWITCH_MINUTES,
+            "trialSection" => $trialSection,
             "upcomingEvents" => $upcomingEvents->toResponseRawJson(),
             "userMetrics" => $userMetrics,
             "usersList" => $usersList,
             "workoutsContentJson" => $workoutsContent->toResponseRawJson(),
             "youtubeId" => $youtubeId ?? null,
+            'trialSection' => $trialSection,
         ]);
     }
 
@@ -592,7 +618,8 @@ class HomePageController extends BaseController
             brand(),
             ContentTypes::newContentTypes(),
             RecommenderSection::Song,
-            true);
+            true
+        );
     }
 
     /**
