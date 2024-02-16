@@ -77,7 +77,7 @@ const thumb = computed(() => {
 })
 
 const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value && (isWorkout.value || isChallenge.value)
+    return collectionStoreLoading.value;
 })
 
 const isWorkout = computed(() => {
