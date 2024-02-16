@@ -162,6 +162,11 @@ class ContentRepository extends RepositoryBase
             'column' => 'gear',
             'alias' => '_rcge',
         ],
+        'style' => [
+            'table' => 'railcontent_content_styles',
+            'column' => 'style',
+            'alias' => '_rcs',
+        ],
     ];
 
     /**
