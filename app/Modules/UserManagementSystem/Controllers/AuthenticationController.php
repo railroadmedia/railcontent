@@ -62,13 +62,10 @@ class AuthenticationController extends Controller
 
         if ($passedCheck) {
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
-            if ($user->needs_logout) {
-                Auth::logoutOtherDevices($request->get('password'));
-                $user->update(['needs_logout' => false]);
-            }
+
             auth()->login($user, $remember);
 
-            event(new UserEvent($user->id, 'authenticated'));
+            $this->authenticated($request, $user);
 
             return redirect()->away($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
@@ -163,13 +160,10 @@ class AuthenticationController extends Controller
 
         if ($passedCheck) {
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
-            if ($user->needs_logout) {
-                Auth::logoutOtherDevices($request->get('password'));
-                $user->update(['needs_logout' => false]);
-            }
+
             auth()->login($user, $remember);
 
-            event(new UserEvent($user->id, 'authenticated'));
+            $this->authenticated($request, $user);
 
             event(
                 new MobileAppLogin($user, $request->get('firebase_token'), $request->get('platform'))
@@ -253,5 +247,24 @@ class AuthenticationController extends Controller
         }
 
         throw new NotFoundHttpException();
+    }
+
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  Request  $request
+     * @param  User  $user
+     * @return void
+     * @throws AuthenticationException
+     */
+    private function authenticated(Request $request, User $user): void
+    {
+        if ($user->needs_logout) {
+            Auth::guard('user-management-system')->logoutOtherDevices($request->get('password'));
+            $user->update(['needs_logout' => false]);
+        }
+
+        event(new UserEvent($user->id, 'authenticated'));
     }
 }

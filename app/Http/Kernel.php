@@ -11,6 +11,7 @@ use App\Http\Middleware\RedirectIfMobileRequest;
 use App\Modules\MusoraApi\Middleware\DeprecationMiddleware;
 use App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Session\Middleware\AuthenticateSession;
 use Modules\UserManagementSystem\Middleware\LogOutWhenNeeded;
 use Railroad\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware;
 use Railroad\LeadTracker\Middleware\LeadTrackerMiddleware;
@@ -79,6 +80,7 @@ class Kernel extends HttpKernel
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LoggingContextMiddleware::class,
             LogOutWhenNeeded::class,
+            AuthenticateSession::class,
         ],
 
         'web_member_only' => [
@@ -113,6 +115,7 @@ class Kernel extends HttpKernel
             BrandMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LogOutWhenNeeded::class,
+            AuthenticateSession::class,
         ],
 
         // Do not add more middleware to these 2 without good reason!
