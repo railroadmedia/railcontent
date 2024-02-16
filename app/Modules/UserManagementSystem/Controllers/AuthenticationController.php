@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
@@ -261,6 +262,7 @@ class AuthenticationController extends Controller
     private function authenticated(Request $request, User $user): void
     {
         if ($user->needs_logout) {
+            Log::info("User $user->id has authenticated for the first time after needing to log out. Logging user out of other devices.");
             Auth::guard('user-management-system')->logoutOtherDevices($request->get('password'));
             $user->update(['needs_logout' => false]);
         }
