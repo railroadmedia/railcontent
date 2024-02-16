@@ -8,13 +8,13 @@
                 <h4 class="py-4 sm:py-6">A handcrafted premium leather satchel for your music books, laptop, and life.
                     </p>
                     <h3 class="leading-tight">
-                        @if (floatval($productPrices['book-bag']->price) > floatval($productPrices['book-bag']->discounted_price))
-                            <s class="opacity-50">${{ floatval($productPrices['book-bag']->price) }}</s>
-                            <strong>${{ floatval($productPrices['book-bag']->discounted_price) }}</strong>
+                        @if (floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
+                            <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
+                            <strong>${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
                             <span class="text-xl">(Save
-                                {{ round(100 - 100 * (floatval($productPrices['book-bag']->discounted_price) / floatval($productPrices['book-bag']->price))) }}%)</span>
+                                {{ round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) }}%)</span>
                         @else
-                            <strong>Only ${{ floatval($productPrices['book-bag']->discounted_price) }}</strong>
+                            <strong>Only ${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
                         @endif
                     </h3>
                     <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
@@ -28,7 +28,7 @@
                             @click="trailerM = true;">
                             <i class="fas fa-play" :class="{ 'translate-x-2': move }"></i> &nbsp;Watch Video
                         </div>
-                        @if ($products['book-bag']->getStockAvailability() > 1 && !empty($products['book-bag']->getStockAvailability()))
+                        @if ($products['pianote-book-bag']->getStockAvailability() > 1 && !empty($products['pianote-book-bag']->getStockAvailability()))
                             <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500"
                                 href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
                                 @mouseout="move = false">Order Now</a>
@@ -180,7 +180,7 @@
 
 <!--features section-->
 
-<div class="relative z-10 h-5 sm:h-10 -mt-5 md:-mt-10" 
+<div class="relative z-10 h-5 sm:h-10 -mt-5 md:-mt-10"
      style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F1EFED calc(50% + 1px));"></div>
 
      <section class="text-center px-6 sm:px-6 pb-8 sm:pb-16 lg:pb-20 relative" style="background-color:#F1EFED">
@@ -321,15 +321,15 @@
                 <tr style="background-color:transparent!important;">
                     <td class="rounded-b-xl">Total</td>
                     <td class="rounded-b-xl text-black">
-                        @if(floatval($productPrices['book-bag']->price) > floatval($productPrices['book-bag']->discounted_price))
-                            <s>${{ floatval($productPrices['book-bag']->price) }}</s>
+                        @if(floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
+                            <s>${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
                         @endif
-                        <strong>${{ floatval($productPrices['book-bag']->discounted_price) }}</strong>
+                        <strong>${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
                     </td>
                     <td class="rounded-b-xl"><strong>$349</strong></td>
                     <td class="rounded-b-xl"><strong>$448</strong></td>
-                    @php 
-                    floatval($productPrices['book-bag']->price)
+                    @php
+                    floatval($productPrices['pianote-book-bag']->price)
                     @endphp
                 </tr>
                 </tbody>
@@ -352,18 +352,18 @@
             class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto">
 
             @include('pianote.products.partials._promo-card', [
-                'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($productPrices['book-bag']->discounted_price) / floatval($productPrices['book-bag']->price))) . '%',
+                'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) . '%',
                 'productTheme' => 'black',
                 'cardTitle' => 'Book Bag Only',
                 'cardImageHeight' => 'h-40',
                 'cardImageUrl' =>
                     'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp',
-                'cardPrice' => floatval($productPrices['book-bag']->discounted_price),
-                'cardDiscount' => floatval($productPrices['book-bag']->price),
+                'cardPrice' => floatval($productPrices['pianote-book-bag']->discounted_price),
+                'cardDiscount' => floatval($productPrices['pianote-book-bag']->price),
                 'cardSubtitle' => 'One-time payment. Free shipping.',
                 'cardButtons' => [['link' => '/', 'text' => 'Select']],
                 'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
-                'sku' => 'book-bag',
+                'sku' => 'pianote-book-bag',
             ])
 
             @include('pianote.products.partials._promo-card', [
@@ -382,7 +382,7 @@
                     'Practice Planner',
                     'The Most Beautiful Classical Piano Pieces',
                 ],
-                'sku' => 'book-bag',
+                'sku' => 'pianote-book-bag',
             ])
             <a href="/" class="text-center text-xs italic pt-4">Or get your bag FREE with a Pianote
                 Membership</a>
