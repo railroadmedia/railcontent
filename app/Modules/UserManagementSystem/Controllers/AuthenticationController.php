@@ -64,8 +64,7 @@ class AuthenticationController extends Controller
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
             if ($user->needs_logout) {
                 Auth::logoutOtherDevices($request->get('password'));
-                $user->needs_logout = false;
-                $user->save();
+                $user->update(['needs_logout' => false]);
             }
             auth()->login($user, $remember);
 
@@ -166,8 +165,7 @@ class AuthenticationController extends Controller
             $user = User::query()->where(['email' => $request->get('email')])->firstOrFail();
             if ($user->needs_logout) {
                 Auth::logoutOtherDevices($request->get('password'));
-                $user->needs_logout = false;
-                $user->save();
+                $user->update(['needs_logout' => false]);
             }
             auth()->login($user, $remember);
 
