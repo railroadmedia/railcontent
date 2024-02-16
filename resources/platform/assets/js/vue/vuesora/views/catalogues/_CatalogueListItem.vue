@@ -53,7 +53,7 @@
               :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
           >
             <i class="fas" :class="thumbnailIcon"></i>
-            <p class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+            <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
               {{ releaseDate }}
             </p>
           </span>

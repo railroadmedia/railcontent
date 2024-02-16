@@ -28,9 +28,15 @@ class RedirectIfMobileRequest
                 $request->routeIs('platform.content.third-level') ||
                 $request->routeIs('platform.content.fourth-level') ||
                 $request->routeIs('platform.content.jump-to-content-id')) {
+                $getEnrollmentContent = true;
+                if(!user()->isAdmin() && ($request->routeIs('platform.packs.first-level') ||
+                        $request->routeIs('platform.packs.second-level') ||
+                        $request->routeIs('platform.packs.third-level'))){
+                    $getEnrollmentContent = false;
+                }
                 $route =
-                    route('v1.mobile.musora-api.content.show', ['id' => last(request()->segments()), 'brand' => $brand]
-                    );
+                    route('v1.mobile.musora-api.content.show', ['id' => last(request()->segments()), 'brand' => $brand, 'get_enrollment_content' => $getEnrollmentContent]);
+
             } elseif ($request->routeIs('platform.packs')) {
                 $route = route('v1.mobile.musora-api.packs', ['brand' => $brand]);
             } elseif ($request->routeIs('platform.coaches')) {

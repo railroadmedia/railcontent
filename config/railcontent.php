@@ -482,7 +482,7 @@ return [
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],            
                 'sortBy' => '-published_on',
             ],
             'courses' => [
@@ -490,7 +490,7 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -517,7 +517,7 @@ return [
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],              
                 'sortBy' => 'slug',
                 'tabs' => [
                     [
@@ -544,7 +544,7 @@ return [
                 'icon' => 'icon-student-focus',
                 'description' => "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.",
                 'allowableFilters' => ['difficulty', 'genre', 'focus', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'focus', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'focus', 'lifestyle'],               
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -571,7 +571,7 @@ return [
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
                 'allowableFilters' => ['difficulty','genre', 'gear', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'instrument', 'topic'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'instrument', 'topic'],              
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -625,7 +625,7 @@ return [
                 'description' => "Drummers love their gear - and in here you will find videos on gear demos,
                     reviews, maintenance, tuning tips and much more.",
                 'allowableFilters' => ['difficulty', 'genre'],
-                'allowableFiltersMobile' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'genre'],              
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -655,7 +655,7 @@ return [
                     more brain power and practice to get down. They are a great way to motivate you to get behind
                     the kit or pad to practice, and cover the entire gamut of drumming skill level.",
                 'allowableFilters' => ['difficulty', 'genre'],
-                'allowableFiltersMobile' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'genre'],              
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -684,7 +684,7 @@ return [
                 'description' => "Grab your sticks and practice along while watching a lesson! These boot camps
                     are designed like workout videos so you can follow along and push your drumming at the same time.",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials'],               
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -712,7 +712,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],                
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -787,7 +787,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Practice sessions, Q&A, celebrations, and more are available during Drumeo live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory'],               
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -816,7 +816,7 @@ return [
                 'description' => "Watch drum solos performed by the many different artists we have had out
                     on Drumeo! A great way to be entertained, motivated, and to learn through amazing performances.",
                 'allowableFilters' => ['difficulty', 'genre'],
-                'allowableFiltersMobile' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'genre'],               
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -845,7 +845,7 @@ return [
                 'description' => "Watch the world's best drummers perform songs, duets, and other inspirational
                     pieces. Sit back, relax, and get ready to be inspired by these amazing performances!",
                 'allowableFilters' => ['difficulty', 'genre'],
-                'allowableFiltersMobile' => ['difficulty', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'genre'],                
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -923,7 +923,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory'],
-                'allowableFiltersMobile' => ['difficulty', 'style', 'essentials', 'theory'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory'],             
                 'sortBy' => '-published_on',
             ],
             'student-collaborations' => [
@@ -994,7 +994,7 @@ return [
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['bpm', 'genre', 'difficulty'],
-                'allowableFiltersMobile' => ['difficulty', 'bpm', 'style', 'artist'],
+                'allowableFiltersMobile' => ['difficulty', 'bpm', 'genre'],
                 'tabs' => [
                     [
                         'name' => 'All Play-Alongs',
@@ -2309,4 +2309,16 @@ return [
             '10' => 'Expert',
             'All Skill Levels' => 'All',
         ],
+    'default_avatar_artist' => [
+        'drumeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/5dc27a49-ce17-4b73-5a35-ac3f19f96f00/public',
+        'pianote' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/6441483e-102a-4e46-6a7b-eae2bdd46400/public',
+        'guitareo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/169b1f03-dc93-4b0f-105f-71921cbc2a00/public',
+        'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1f558634-9b71-4dd8-1a80-12670df39900/public'
+    ],
+    'default_avatar_style' => [
+        'drumeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/5dc27a49-ce17-4b73-5a35-ac3f19f96f00/public',
+        'pianote' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/6441483e-102a-4e46-6a7b-eae2bdd46400/public',
+        'guitareo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/169b1f03-dc93-4b0f-105f-71921cbc2a00/public',
+        'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1f558634-9b71-4dd8-1a80-12670df39900/public'
+    ],
 ];

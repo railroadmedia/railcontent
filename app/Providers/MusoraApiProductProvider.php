@@ -204,7 +204,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function userOwnProduct($productId)
     {
-        return $this->userProductService->hasProductNotCached(user()?->id, $productId ?? 0);
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        return $hasProduct;
     }
 
     public function getPlaybackItemId($playlistId)

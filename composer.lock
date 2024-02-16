@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.298.10",
+            "version": "3.299.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "99af8830cb0662e3edaebe1a976d1cc833a86091"
+                "reference": "76d1165568d949b430a87eaa42f6dbc4b6705b6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/99af8830cb0662e3edaebe1a976d1cc833a86091",
-                "reference": "99af8830cb0662e3edaebe1a976d1cc833a86091",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/76d1165568d949b430a87eaa42f6dbc4b6705b6f",
+                "reference": "76d1165568d949b430a87eaa42f6dbc4b6705b6f",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.298.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.299.0"
             },
-            "time": "2024-02-14T19:05:54+00:00"
+            "time": "2024-02-15T19:08:34+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4366,16 +4366,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.27.2",
+            "version": "v1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "da805a00c3548ffc17a2b9ea844f666b413943e8"
+                "reference": "dfca60f46fed8d9a4d9d2ece7286f18d53d3ebad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/da805a00c3548ffc17a2b9ea844f666b413943e8",
-                "reference": "da805a00c3548ffc17a2b9ea844f666b413943e8",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/dfca60f46fed8d9a4d9d2ece7286f18d53d3ebad",
+                "reference": "dfca60f46fed8d9a4d9d2ece7286f18d53d3ebad",
                 "shasum": ""
             },
             "require": {
@@ -4415,9 +4415,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.27.2"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.28.0"
             },
-            "time": "2024-02-14T20:18:41+00:00"
+            "time": "2024-02-15T19:05:13+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -4510,16 +4510,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.25.2",
+            "version": "v3.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "83ea4c147718666ce6a9b9332ac2aa588c9211eb"
+                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/83ea4c147718666ce6a9b9332ac2aa588c9211eb",
-                "reference": "83ea4c147718666ce6a9b9332ac2aa588c9211eb",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/983a87f4f8798a90ca3a25b0f300b8fda38df643",
+                "reference": "983a87f4f8798a90ca3a25b0f300b8fda38df643",
                 "shasum": ""
             },
             "require": {
@@ -4548,9 +4548,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.2"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.25.3"
             },
-            "time": "2024-01-09T22:12:32+00:00"
+            "time": "2024-02-15T21:11:49+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -10371,12 +10371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "e21725f5cb2d8cc02ca59435dcc6bcf95e77bfaf"
+                "reference": "d718fb87f63199ccc4af44cbce7a21c82cb526cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/e21725f5cb2d8cc02ca59435dcc6bcf95e77bfaf",
-                "reference": "e21725f5cb2d8cc02ca59435dcc6bcf95e77bfaf",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d718fb87f63199ccc4af44cbce7a21c82cb526cb",
+                "reference": "d718fb87f63199ccc4af44cbce7a21c82cb526cb",
                 "shasum": ""
             },
             "require": {
@@ -10433,7 +10433,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-02-15T15:05:36+00:00"
+            "time": "2024-02-16T11:50:54+00:00"
         },
         {
             "name": "railroad/railforums",

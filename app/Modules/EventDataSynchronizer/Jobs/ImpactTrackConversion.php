@@ -83,7 +83,10 @@ class ImpactTrackConversion implements ShouldQueue
                     'quantity' => $lineItem['quantity'],
                     'sku' => $lineItem['sku'],
                     'brand' =>strtolower( $lineItem['vendor']),
-                    'value' => $lineItem['price'],
+                    // this is a hack to set the price to zero for trials.
+                    // So reporting on Impact's side is a bit cleaner.
+                    // we're not investing more time in a better solution as we're likely moving away from impact
+                    'value' => $hasZeroCost ? '0' : $lineItem['price'],
                     'category' => $this->getProductCategory($lineItem['sku'], $hasZeroCost),
                     'variant_id' => $lineItem['variant_id'],
                     'variant_name' => $lineItem['variant_title']

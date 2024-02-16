@@ -88,7 +88,6 @@
 
         .join {
             display:inline-block;
-            font-weight:700;
             font-family:"Bebas Neue", sans-serif;
             line-height:1em;
             text-transform:uppercase;
