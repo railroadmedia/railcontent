@@ -359,7 +359,7 @@
                 'cardPrice' => floatval($productPrices['pianote-book-bag']->discounted_price),
                 'cardDiscount' => floatval($productPrices['pianote-book-bag']->price),
                 'cardSubtitle' => 'One-time payment. Free shipping.',
-                'cardButtons' => [['link' => '/ecommerce/add-to-cart?locked=true&products[book-bag]=1', 'text' => 'Select']],
+                'cardButtons' => [['link' => '/ecommerce/add-to-cart?locked=true&products[pianote-book-bag]=1', 'text' => 'Select']],
                 'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
                 'sku' => 'pianote-book-bag',
             ])
