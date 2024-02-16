@@ -1,11 +1,9 @@
 <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="pianote logo" class="h-12 sm:h-14"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-logo.svg"><br>
-                <h1 class="leading-tight mt-2 mb-3 text-4xl sm:text-5xl lg:text-6xl playfair"><strong>The Pianote Book
-                        Bag</strong></h1>
-                <h4 class="py-4 sm:py-6">A handcrafted premium leather satchel for your music books, laptop, and life.
+                <img alt="pianote logo" class="h-20 md:h-28 ld:h-40"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-bookbag-logo-white.svg"><br>
+                <h4 class="py-4 sm:py-6 px-4">A handcrafted premium leather satchel for your music books, laptop, and life.
                     </p>
                     <h3 class="leading-tight">
                         @if (floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
@@ -112,6 +110,7 @@
                 interval: 2000,
                 drag: 'free',
                 snap: false,
+                lazyLoad: 'nearby',
                 breakpoints: {
                     767: {
                         perPage: 1.5,
@@ -246,7 +245,7 @@
     <!-- Desktop view -->
     <div class="hidden sm:block relative leading-tight">
         <img class="object-cover w-full h-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love.webp" alt="Background image">
-        <div class="absolute top-1/2 transform -translate-y-1/2 left-0 z-10 md:right-auto w-1/2 md:pl-10 lg:pl-32">
+        <div class="absolute top-1/2 transform -translate-y-1/2 left-0 z-10 md:right-auto w-1/2 md:pl-10 lg:pl-40 xl:pl-74">
             <div class="p-8 rounded-lg text-left" style="background: rgba(18, 18, 16, 0.85);">
                 <h2 class="text-white playfair pb-4">Made with love. And priced that way too.</h2>
                 <p class="text-white text-xs lg:text-base">The Pianote Book Bag is custom-designed by leather artisans in the USA. Each bag is handmade with a level of craftsmanship and quality comparable to bags in the $300 - $600 price range. <br><br> But we’re not here for the mark-up. <br><br>We love our students and genuinely think this bag will make your life better. So we’re committed to keeping the price affordable, without compromising on quality.</p>
@@ -285,7 +284,7 @@
                         <img class="h-20 md:h-40 transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-03.webp" alt="The Pianote Book Bag">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-new.webp" alt="The Pianote Book Bag">
                     </td>
                     <td class="rounded-t-xl" @click="tableClass = 'headphones'">
                         <img class="h-20 md:h-40 transition-opacity opacity-0"
@@ -342,14 +341,13 @@
 <!--cards section-->
 <section class="text-center py-10 md:py-16" style="background: #F1EFED;">
 
-    <img alt="pianote logo block center" class="h-8 sm:h-10"
-        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-logo.svg">
-    <h2 class="text-center playfair">The Pianote Book Bag</h2>
+    <img alt="pianote logo block center" class="h-20 sm:h-24 md:h-26 lg:h-30"
+        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/280x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-bookbag-logo-black.svg">
 
     <div class="container mx-auto max-w-5xl">
         <div id="customize-anchor" class="anchor"></div>
         <div
-            class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto">
+            class="flex flex-wrap items-start justify-center flex-col-reverse md:flex-row max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto">
 
             @include('pianote.products.partials._promo-card', [
                 'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) . '%',
@@ -361,7 +359,7 @@
                 'cardPrice' => floatval($productPrices['pianote-book-bag']->discounted_price),
                 'cardDiscount' => floatval($productPrices['pianote-book-bag']->price),
                 'cardSubtitle' => 'One-time payment. Free shipping.',
-                'cardButtons' => [['link' => '/', 'text' => 'Select']],
+                'cardButtons' => [['link' => '/ecommerce/add-to-cart?locked=true&products[book-bag]=1', 'text' => 'Select']],
                 'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
                 'sku' => 'pianote-book-bag',
             ])
@@ -384,11 +382,12 @@
                 ],
                 'sku' => 'pianote-book-bag',
             ])
-            <a href="/" class="text-center text-xs italic pt-4">Or get your bag FREE with a Pianote
-                Membership</a>
-        </div>
 
-        <div class="text-center pt-10">
+        </div>
+        <a href="/" class="text-center text-xs italic pt-4">Or get your bag FREE with a Pianote
+                Membership</a>
+
+        <div class="text-center pt-6">
             <div class="container mx-auto relative z-50">
                 <div class="inline-block w-full px-3 md:px-4" style="margin-top: 0; color: #ABB5C2;">
                     <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
@@ -409,8 +408,6 @@
     </div>
 
 </section>
-
-
 
 
 
