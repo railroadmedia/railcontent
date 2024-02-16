@@ -8,7 +8,7 @@
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
-                    <SkeletonLoader :count="skeletonCardCount" type="card" />
+                    <SkeletonLoader :count="skeletonCardCount" type="songCard" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else>
@@ -55,8 +55,7 @@ const props = defineProps({
         type: String,
         default: 'No lessons found',
     },
-},
-);
+});
 
 const collectionStore = useCollectionStore();
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
