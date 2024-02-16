@@ -455,6 +455,8 @@
     </div>
 </section>
 @endif
+
+
 <section class="text-center px-5 py-10 md:py-20 lg:py-24" @if(!empty($blackBag)) style="background-color:#020d24;color:#fff;" @else style="background-color:#f6f8fc;" @endif>
     <div class="container mx-auto relative z-10 max-w-5xl">
         <h2><strong>The last StickBag<br class="sm:hidden"> you’ll ever need.</strong></h2>
@@ -501,7 +503,97 @@
              ];
             @endphp
         @endif
-        @foreach($slides as $slide)
+
+<!--Modal part-->
+        <div x-data="{ open: false, imgSrc: '', imgIndex: 0, slides: ['{{ $slides[0]['img'] }}', '{{ $slides[1]['img'] }}', '{{ $slides[2]['img'] }}', '{{ $slides[3]['img'] }}', '{{ $slides[4]['img'] }}'] }"
+            class="flex flex-wrap items-center">
+
+
+            <div class="w-full sm:w-1/2 sm:order-1">
+                <div class="p-2 w-full">
+                    <div
+                        @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'"
+                        class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"
+                    ></div>
+                </div>
+            </div>
+            <div class="w-1/2 sm:w-1/4">
+                <div class="p-2 w-full">
+                    <div
+                        @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}'"
+                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"
+                    ></div>
+                </div>
+                <div class="p-2 w-full">
+                    <div
+                        @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}'"
+                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"
+                    ></div>
+                </div>
+            </div>
+            <div class="w-1/2 sm:w-1/4 sm:order-2">
+                <div class="p-2 w-full">
+                    <div
+                        @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}'"
+                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"
+                    ></div>
+                </div>
+                <div class="p-2 w-full">
+                    <div
+                        @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}'"
+                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"
+                    ></div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 overflow-y-auto"
+            >
+                <!-- Overlay -->
+                <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+                <!-- Panel -->
+                <div
+                    x-show="open" x-transition
+                    x-on:click="open = false"
+                    class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                <div
+                        x-on:click.stop
+                        x-trap.noscroll.inert="open"
+                        class="relative w-full max-w-5xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg z-50"
+                    >
+                        <!-- close button -->
+                        <i @click="open = false" class="fa fa-times absolute top-1 right-2 cursor-pointer text-2xl text-drumeo"></i>
+                        <!-- Content -->
+                        <img :src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/' + slides[imgIndex]" alt="Image" class="w-full h-full object-cover">
+
+                            <button @click="imgIndex = (imgIndex - 1 + slides.length) % slides.length" class="absolute left-1 top-1/2 transform -translate-y-1/2 transparent p-2 rounded-full transition duration-200 ease-in-out" tabindex="-1">
+                                <i class="fa fa-chevron-left text-drumeo text-3xl"></i>
+                            </button>
+
+                            <button @click="imgIndex = (imgIndex + 1) % slides.length" class="absolute right-1 top-1/2 transform -translate-y-1/2 transparent p-2 rounded-full transition duration-200 ease-in-out" tabindex="-1">
+                            <i class="fa fa-chevron-right text-drumeo text-3xl"></i>
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--end of Modal part-->
+
+
+<!-- @foreach($slides as $slide)
             @component('_partials.components.modal', ['name' => 'imageModal'])
                 @slot('content')
                     <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
@@ -530,95 +622,7 @@
                 <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
             </div>
-        </div>
-
-
-
-
-<div x-data="{ openModalImage: false, imgSrc: '' }" class="flex flex-wrap items-center">
-    <div class="w-full sm:w-1/2 sm:order-1">
-        <div class="p-2 w-full">
-            <div 
-                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'"
-                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"
-            ></div>
-        </div>
-    </div>
-    <div class="w-1/2 sm:w-1/4">
-        <div class="p-2 w-full">
-            <div 
-                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}'"
-                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"
-            ></div>
-        </div>
-        <div class="p-2 w-full">
-            <div 
-                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}'"
-                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"
-            ></div>
-        </div>
-    </div>
-    <div class="w-1/2 sm:w-1/4 sm:order-2">
-        <div class="p-2 w-full">
-            <div 
-                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}'"
-                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"
-            ></div>
-        </div>
-        <div class="p-2 w-full">
-            <div 
-                @click="openModalImage = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}'"
-                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"
-            ></div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div
-        x-show="openModalImage"
-        style="display: none"
-        x-on:keydown.escape.prevent.stop="openModalImage = false"
-        role="dialog"
-        aria-modal="true"
-        x-id="['modal-title']"
-        :aria-labelledby="$id('modal-title')"
-        class="fixed inset-0 z-10 overflow-y-auto"
-    >
-        <!-- Overlay -->
-        <div x-show="openModalImage" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
- 
-        <!-- Panel -->
-        <div
-            x-show="openModalImage" x-transition
-            x-on:click="openModalImage = false"
-            class="relative flex min-h-screen items-center justify-center p-4"
-        >
-            <div
-                x-on:click.stop
-                x-trap.noscroll.inert="openModalImage"
-                class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg"
-            >
-                <!-- Close button -->
-                <i @click="openModalImage = false" class="fas fa-times absolute top-2 right-2 cursor-pointer"></i>
-                <!-- Content -->
-                <img :src="imgSrc" alt="Image" class="w-full h-full object-cover">
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
+        </div> -->
 
 
         <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
@@ -657,6 +661,7 @@
         </div>
     </div>
 </section>
+
 
 <div id="customize-anchor" class="anchor"></div>
 @if(!empty($blackBag))
