@@ -284,7 +284,8 @@ export default {
                 included_types: ['play-along'],
                 statuses: ['published'],
                 include_future: 0,
-                only_from_my_list: this.showFavoritesOnly
+                only_from_my_list: this.showFavoritesOnly,
+                title: this.searchTerm,
             })
                 .then((response) => {
                     if (response) {
@@ -305,7 +306,7 @@ export default {
             this.loading = true;
             return ContentService.search({
                 ...this.filterQueryObject,
-                term: this.searchTerm,
+                title: this.searchTerm,
                 brand: this.brand,
                 included_types: ['play-along'],
                 statuses: ['published'],
