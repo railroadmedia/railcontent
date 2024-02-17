@@ -245,6 +245,7 @@
   </a>
 </template>
 <script>
+import {computed, onMounted} from "vue";
 import Mixin from "./_mixin";
 import ThemeClasses from "../../mixins/ThemeClasses";
 import DifficultyLabel from '../../../components/DifficultyLabel/DifficultyLabel';
@@ -300,7 +301,6 @@ export default {
           this.contentTypeOverride === "learning-path-part",
       };
     },
-
     branchPathBG() {
       return `tw-bg-${this.brand}/10`;
     },
@@ -332,6 +332,9 @@ export default {
 
       return this.index;
     },
+  },
+  beforeMount() {
+    //console.log('item', this.item)
   },
   beforeDestroy() {
     this.contentModel = null;
