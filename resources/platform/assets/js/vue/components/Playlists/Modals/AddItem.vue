@@ -33,6 +33,7 @@ const token = inject('csrf_token');
 const importAll = ref(false);
 const formattedRows = ref([]);
 const additionalItems = ref(0);
+const totalItems = ref(0);
 const pageNumber = ref(1);
 const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
@@ -168,7 +169,7 @@ const handleCreate = () => {
         data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value, importAssignments: importAll.value },
     });
     window.addItemCallback = function (playlistId) {
-        console.log('callback called')
+        //console.log('callback called')
         saveData(playlistId);
         window.addItemCallback = null;
     }
@@ -262,9 +263,11 @@ onMounted(() => {
     if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
-            const { data: { soundslice_assignments_count } } = r;
+            const { data: { soundslice_assignments_count, lessons_count } } = r;
             additionalItems.value = soundslice_assignments_count;
+            totalItems.value = soundslice_assignments_count + lessons_count;
             isLoadingAssignments.value = false;
+            //console.log('totalItems', totalItems.value)
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
         });
@@ -295,7 +298,7 @@ onMounted(() => {
                 }} additional
                 assignment items. Would you like to import them into your playlist?
             </p>
-            <div class="tw-flex tw-w-full">
+            <div class="tw-flex tw-w-full tw-mb-1">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
                     <b class="tw-uppercase tw-text-sm">Additional Playlist Items</b>
                     <Toggle :initialValue="addFullSongToggle"
@@ -304,11 +307,15 @@ onMounted(() => {
                     />
                 </fieldset>
             </div>
+            <p v-if="importAll && totalItems > 300" class="tw-text-left tw-text-[14px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">
+                LIMIT EXCEEDED. Please add child lessons to playlist individually. 
+            </p>
         </div>
 
         <div class="sm:tw-hidden tw-mt-4">
             <button @click="handleCreate"
-                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-white">
+                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-white"
+            >
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
@@ -395,6 +402,7 @@ onMounted(() => {
         <Table @onActionClick="handleActionClick"
             @onScroll="handleScroll"
             :classOverride="`tw-max-h-[150px] sm:tw-max-h-[260px] lg:tw-max-h-[350px] ${ state.formattedTable.length < 4 && 'lg:tw-overflow-y-hidden'}`"
+            :class="{ 'tw-opacity-50 tw-pointer-events-none' : importAll && totalItems > 300 }"
             :stickyHeader="true"
             :rows="state.formattedTable"
         >
@@ -405,10 +413,11 @@ onMounted(() => {
                     :class="`tw-w-[30px] tw-h-[30px] tw-text-[#4ADE80]`" />
             </template>
         </Table>
+
         <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
                 class="tw-btn-secondary tw-uppercase tw-text-[#00101D] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-40"
-                :disabled="props.content.type === 'song' && (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false)"
+                :disabled="props.content.type === 'song' && (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false) || (importAll && totalItems > 300)"
             >
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
@@ -417,7 +426,7 @@ onMounted(() => {
             <button v-if="props.content.type === 'song'"
                     @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
-                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) "
+                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false)"
             >
                 SAVE
             </button>
@@ -431,7 +440,7 @@ onMounted(() => {
             <button v-else
                     @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
-                    :disabled="selectedPlaylists.length === 0"
+                    :disabled="selectedPlaylists.length === 0 || (importAll && totalItems > 300)"
             >
                 SAVE
             </button>
