@@ -577,7 +577,7 @@
                         <!-- close button -->
                         <i @click="open = false" class="fa fa-times absolute top-1 right-2 cursor-pointer text-2xl text-drumeo"></i>
                         <!-- Content -->
-                        <img :src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/' + slides[imgIndex]" alt="Image" class="w-full h-full object-cover">
+                        <img :src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/' + slides[imgIndex]" alt="Image" class="w-full h-full object-cover rounded-xl">
 
                             <button @click="imgIndex = (imgIndex - 1 + slides.length) % slides.length" class="absolute left-1 top-1/2 transform -translate-y-1/2 transparent p-2 rounded-full transition duration-200 ease-in-out" tabindex="-1">
                                 <i class="fa fa-chevron-left text-drumeo text-3xl"></i>
