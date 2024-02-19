@@ -803,8 +803,6 @@
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
 
             <h6 class="leading-normal mb-4">
-                <strong>EARLY BIRD SPECIAL:</strong> Get a free practice & sticks <br class="hidden sm:inline md:hidden">when you enroll before February 19th.
-                <br>
                 <span class="text-drumeo">Enrollment closes in
                     <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
