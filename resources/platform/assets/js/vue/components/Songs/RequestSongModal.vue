@@ -3,8 +3,8 @@ import { ref } from 'vue';
 import axios from 'axios';
 import InfoModal from '../Modal/InfoModal.vue';
 import InputLabel from "../InputLabel/InputLabel.vue";
-import { useUserStore } from "../../../stores/user";
-import { storeToRefs } from "pinia/dist/pinia";
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/user';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);

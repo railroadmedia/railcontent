@@ -4,6 +4,34 @@
     <title>{{ $pack->fetch('fields.title') }} | Musora</title>
 @endsection
 
+@php
+    $ctas = [
+        [
+            'type' => 'primary',
+            'props' => [
+                'text' => $pack->fetch('primary_cta_text'),
+                'url' => $nextLessonUrl,
+                'icon' => 'fa-play'
+            ]
+        ],
+        [
+            'type' => 'ResetProgressCta',
+            'props' => [
+                'contentId' => $parentContent->fetch('id'),
+                'progress' => $parentContent->fetch('progress_percent', 0),
+            ]
+        ],
+        [
+            'type' => 'DownloadResourcesCta',
+            'props' => [
+                'resources' => $pack['resources'] ?? []
+            ]
+        ]
+    ];
+
+    $ctasJson = json_encode($ctas);
+@endphp
+
 @section('content')
         <div v-cloak>
 
@@ -67,22 +95,17 @@
 
         @include('content.breadcrumbs._overview-breadcrumbs')
 
-        <packs-header
+        <page-header
+            page-type="{{ $parentContent->fetch('type') }}"
             title="Packs"
             hero-img="{{ $pack->fetch('data.header_image_url') }}"
-            additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
             dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
             light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
-            primary-cta-icon="fa-play"
-            primary-cta-text="{{$pack['primary_cta_text']}}"
-            primary-cta-url="{{ $nextLessonUrl }}"
             progress="{{ $parentContent->fetch('progress_percent', 0) }}"
-            :enable-reset-progress="true"
-            content-id="{{ $parentContent->fetch('id') }}"
             :info-data="{{ json_encode($infoData) }}"
-            :downloadable-resources="{{ json_encode($pack['resources'] ?? []) }}"
+            :ctas="{{ $ctasJson }}"
         >
-        </packs-header>
+        </page-header>
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
             <div class="tw-flex tw-flex-col">

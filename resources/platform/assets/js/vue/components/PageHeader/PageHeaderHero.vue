@@ -12,21 +12,21 @@
     </template>
 
     <div class="tw-flex tw-flex-col pl-2 tw-self-stretch tw-mr-1">
-      <div class="tw-h-full tw-flex tw-items-center">
-        <template v-if="!additionalImgSrc">
-          <div v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">{{ title }}</div>
-          <!-- TODO: Style subTitle and description -->
-          <div v-if="subTitle">{{ subTitle }}</div>
-          <div v-if="description">{{ description }}</div>
-        </template>
-        
+      <div class="tw-h-full tw-flex" :class="[additionalImgSrc ? 'tw-items-center' : 'tw-flex-col tw-justify-center']">
         <template v-if="additionalImgSrc">
           <img :src="additionalImgSrc" class="tw-w-[200px] tw-max-h-[100px] sm:tw-w-[174px] sm:tw-max-h-[92px]">
         </template>
+        <template v-else>
+          <span v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">{{ title }}</span>
+          <span v-if="subTitle"
+            class="tw-mt-2.5 tw-text-[20px] font-semibold dark:tw-text-[#9EC0DC] tw-uppercase tw-leading-5">{{ subTitle
+            }}</span>
+          <span v-if="description">{{ description }}</span>
+        </template>
       </div>
-      <div>
+      <div class="tw-flex">
         <PageHeaderPrimaryCta class="tw-hidden sm:tw-block" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
-        :text="primaryCtaText" />
+          :text="primaryCtaText" />
       </div>
     </div>
 
