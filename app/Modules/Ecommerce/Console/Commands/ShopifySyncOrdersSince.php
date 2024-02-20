@@ -5,22 +5,21 @@ namespace App\Modules\Ecommerce\Console\Commands;
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerByEmailJob;
-use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Carbon\Carbon;
-use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
-use Modules\UserManagementSystem\Models\User;
-use Signifly\Shopify\Shopify;
 
 class ShopifySyncOrdersSince extends Command
 {
-    protected $signature = 'ecommerce:ShopifySyncOrdersSince {date}';
+    protected $signature = 'ecommerce:ShopifySyncOrdersSince
+                            {startDate : The ISO 8601 date time for all Shopify orders to get where the updated_at at or after. e.g. 2023-10-13T17:00:25+00:00}
+                            {--endDate= : (Optional) The ISO 8601 date time for all Shopify orders to get where the updated_at at or before. e.g. 2023-10-13T17:30:14+00:00}';
 
     public function handle(ShopifyGateway $shopifyGateway)
     {
-        $date = Carbon::parse($this->argument('date'));
-        $emails = $shopifyGateway->getCustomersToUpdate($date);
+        $startDate = Carbon::parse($this->argument('startDate'));
+        $endDate = $this->option("endDate") ? Carbon::parse($this->option('endDate')) : Carbon::now();
+
+        $emails = $shopifyGateway->getCustomersToUpdate($startDate, $endDate);
         $jobs = collect();
         $emails->chunk(100)->each(function ($chunk) use ($jobs) {
             $jobs->push(new ShopifySyncCustomerByEmailJob($chunk->toArray()));

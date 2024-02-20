@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Collection;
 use Signifly\Shopify\Shopify;
 
 class ShopifyGateway
@@ -83,18 +84,28 @@ class ShopifyGateway
         return $orders;
     }
 
-    public function getCustomersToUpdate(Carbon $date)
+    /**
+     * Get all unique customer email addresses who have an order that was updated between the given dates.
+     *
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
+     * @return Collection
+     * @throws Exception
+     */
+    public function getCustomersToUpdate(Carbon $startDate, Carbon $endDate): Collection
     {
         $emails = collect();
         $cursor = "";
-        $processedAtStartString = $date->toIso8601String();
+        $startDateString = $startDate->toIso8601String();
+        $endDateString = $endDate->toIso8601String();
+
         $i = 0;
         $max = 100;
         do {
             $this->handleRateLimitBefore();
             $gql = <<<GQL
             query {
-                 orders(first:250$cursor, query:"updated_at:>=\"$processedAtStartString\""){
+                 orders(first:250$cursor, query:"updated_at:>=\"$startDateString\" AND updated_at:<=\"$endDateString\""){
                     nodes {
                         ... on Order {
                             customer {
@@ -123,8 +134,7 @@ class ShopifyGateway
             $cursor = ", after: \"$endCursor\"";
             $i++;
         } while ($hasNextPage && $i < $max);
-        $emails = $emails->unique();
-        return $emails;
+        return $emails->unique();
     }
 
     public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
