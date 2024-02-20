@@ -504,16 +504,20 @@
             @endphp
         @endif
 
+
+        @php
+             $scaleAnimation = 'cursor-pointer transform transition duration-500 ease-in-out hover:scale-105';
+        @endphp
 <!--Modal part-->
         <div x-data="{ open: false, imgSrc: '', imgIndex: 0, slides: ['{{ $slides[0]['img'] }}', '{{ $slides[1]['img'] }}', '{{ $slides[2]['img'] }}', '{{ $slides[3]['img'] }}', '{{ $slides[4]['img'] }}'] }"
             class="flex flex-wrap items-center">
 
 
             <div class="w-full sm:w-1/2 sm:order-1">
-                <div class="p-2 w-full">
+                <div class="p-4 w-full">
                     <div
                         @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'"
-                        class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
+                        class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"
                     ></div>
                 </div>
@@ -522,14 +526,14 @@
                 <div class="p-2 w-full">
                     <div
                         @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}'"
-                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"
                     ></div>
                 </div>
                 <div class="p-2 w-full">
                     <div
                         @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}'"
-                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"
                     ></div>
                 </div>
@@ -538,14 +542,14 @@
                 <div class="p-2 w-full">
                     <div
                         @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}'"
-                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"
                     ></div>
                 </div>
                 <div class="p-2 w-full">
                     <div
                         @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}'"
-                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"
                     ></div>
                 </div>
@@ -622,7 +626,7 @@
                 <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
             </div>
-        </div> -->
+        </div>-->
 
 
         <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
