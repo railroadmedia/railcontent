@@ -132,7 +132,19 @@ const saveData = (playlistId) => {
             addLowRoutine: includeLowRoutine.value,
             addHighRoutine: includeHighRoutine.value,
             token,
-        })
+        }).then(function(response) {
+            if(response.status === 200) {
+                //Check if limit has exceeded.....
+                if(Object.keys(response.data)[0] === 'limit_excedeed') {
+                    window.shownotification({
+                        icon: 'error',
+                        text: `You have reached the max limit of items. Delete one or more of your items to free up space or create a new playlist.`
+                    });
+                    return false;
+                }
+                return response;
+            }
+        });
     } else {
         return PlaylistService.addToPlaylist({
             brand: props.brand,
@@ -142,15 +154,30 @@ const saveData = (playlistId) => {
             addFull: addFullSongToggle.value,
             addInstrumentless: addInstrumentlessToggle.value,
             token,
-        })
+        }).then(function(response) {
+            if(response.status === 200) {
+                //Check if limit has exceeded.....
+                if(Object.keys(response.data)[0] === 'limit_excedeed') {
+                    window.shownotification({
+                        icon: 'error',
+                        text: `You have reached the max limit of items. Delete one or more of your items to free up space or create a new playlist.`
+                    });
+                    return false;
+                }
+                return response;
+            }
+        });
     }
 };
 
 const handleSaveItem = () => {
     if (selectedPlaylists.value.length) {
         isLoadingPlaylists.value = true;
-        return saveData().then(() => {
-            window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
+        return saveData().then((response) => {
+            console.log(response)
+            if(!response === false) {
+                window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
+            }
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
         }).finally(() => {
@@ -293,10 +320,7 @@ onMounted(() => {
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-2 lg:tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
             <p class="tw-text-center tw-text-[14px] tw-mb-1 lg:tw-mb-3">
-                Your selected video(s) also contain(s) {{
-                    additionalItems
-                }} additional
-                assignment items. Would you like to import them into your playlist?
+                Your selected video also contains {{ additionalItems }} additional assignment(s). Would you like to import these assignments into your playlist?
             </p>
             <div class="tw-flex tw-w-full tw-mb-1">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
