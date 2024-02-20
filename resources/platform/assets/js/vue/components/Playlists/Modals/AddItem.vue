@@ -174,8 +174,8 @@ const handleSaveItem = () => {
     if (selectedPlaylists.value.length) {
         isLoadingPlaylists.value = true;
         return saveData().then((response) => {
-            console.log(response)
-            if(!response === false) {
+            //console.log(response)
+            if(response) {
                 window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
             }
         }).catch(() => {

@@ -249,11 +249,10 @@
 
     //----------Lifecycle Hooks----------//
     onBeforeMount(()=> {
-        console.log('additional items', typeof props.playlist.additionalItems, props.playlist.additionalItems)
         //Load Data
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
-        state.description = props.playlist.description.replace(/(<([^>]+)>)/gi, "");
+        state.description = props.playlist.description?.replace(/(<([^>]+)>)/gi, "");
         state.category = props.playlist.category || 'General';
 
         //get url params
