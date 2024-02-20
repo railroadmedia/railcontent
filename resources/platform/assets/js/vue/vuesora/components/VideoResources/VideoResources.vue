@@ -6,11 +6,11 @@
                 <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
-                <p class="tw-text-[#3F3F46] dark:tw-text-[#A7A7A7] tw-text-sm tw-mb-2">
-                    <span>{{ instructors[0] }} · </span>
-                    <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                <p class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex dark:tw-text-[#9EC0DC]">
+                    <span>{{ instructors[0]?.name }}&nbsp;&nbsp;<span class="tw-text-[12px]">●</span>&nbsp;&nbsp;</span>
+                    <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty"
                                     textCase="capitalize" />
-                    <span> · {{ lessonType }}</span>
+                    <span>&nbsp;&nbsp;<span class="tw-text-[12px]">●</span>&nbsp;&nbsp;{{ lessonType }}</span>
                 </p>
             </div>
             <!-- Video CTAs -->
