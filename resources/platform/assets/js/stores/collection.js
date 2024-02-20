@@ -2,6 +2,8 @@ import axios from "axios";
 import { defineStore } from 'pinia';
 import { useUserStore } from "./user";
 import ContentHelpers from '../vue/vuesora/assets/js/helper-functions/content';
+import { useFilterValues } from "../vue/hooks/useFilterValues";
+const { getFilterValues } = useFilterValues();
 
 export const useCollectionStore = defineStore({
     id: 'Collection',
@@ -191,8 +193,7 @@ export const useCollectionStore = defineStore({
                     this.tabData[this.filter.activeTab].totalPages = Math.ceil(
                         response.data.meta.totalResults / this.filter.limit
                     );
-                    this.filterValues = this.getFilterValues(response.data?.meta?.filterOptions);
-                    this.getFilterColumns();
+                    this.filterColumns = getFilterValues(response.data?.meta?.filterOptions);
                 } else {
                     this.data = [...this.data, ...response.data.data];
                     this.tabData[this.filter.activeTab].totalResults = response.data.meta.totalResults;
@@ -215,7 +216,7 @@ export const useCollectionStore = defineStore({
             if (defaults.content) {
                 this.data = defaults.content?.data || [];
                 if(defaults.content.meta?.filterOptions){
-                    this.filterValues = this.getFilterValues(defaults.content.meta.filterOptions);
+                    this.filterColumns = getFilterValues(defaults.content.meta.filterOptions);
                 }
             }
 
@@ -258,11 +259,6 @@ export const useCollectionStore = defineStore({
                     this.filter.activeTab = defaults.tabOptions[0].value;
                     this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...defaults.tabOptions[0] };
                 }
-            }
-
-            if (defaults.filterableValues) {
-                this.filterableValues = defaults.filterableValues;
-                this.getFilterColumns();
             }
         },
 

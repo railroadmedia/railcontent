@@ -18,7 +18,7 @@ export default {
         brand = 'drumeo',
         limit = '20',
         statuses = ['published', 'scheduled', 'draft'],
-        term,
+        title,
         included_types,
         included_fields,
         required_fields,
@@ -28,12 +28,12 @@ export default {
         include_future = 1,
     }) {
         return axios
-            .get(`${endpointPrefix}/railcontent/search`, {
+            .get(`${endpointPrefix}/railcontent/content`, {
                 params: {
                     brand,
                     limit,
                     statuses,
-                    term,
+                    title,
                     included_types,
                     included_fields,
                     required_fields,
@@ -41,6 +41,7 @@ export default {
                     required_user_states,
                     page,
                     include_future,
+                    count_filter_items: true,
                 },
             })
             .then(response => response)
@@ -57,7 +58,7 @@ export default {
         limit = '20',
         statuses = ['published', 'scheduled', 'draft'],
         sort = '-published_on',
-        term,
+        title,
         included_types,
         included_fields,
         required_fields,
@@ -74,7 +75,7 @@ export default {
                     limit,
                     statuses,
                     sort,
-                    term,
+                    title,
                     included_types,
                     included_fields,
                     required_fields,
@@ -83,6 +84,7 @@ export default {
                     page,
                     include_future,
                     only_from_my_list,
+                    count_filter_items: true,
                 },
             })
             .then(response => response)

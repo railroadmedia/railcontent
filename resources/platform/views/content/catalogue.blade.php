@@ -257,6 +257,18 @@
 {{--    @endif--}}
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
+        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
+            <play-alongs
+                ref="playAlongsVueInstance"
+                content-endpoint="/railcontent/content"
+                theme-color="{{ $brand }}"
+                brand="{{ $brand }}"
+                :pre-loaded-content="{{ $listLessons }}"
+                :session-token="{{ json_encode(railtracker_session_token()) }}"
+                @play="handlePlayAlongsPlay"
+                @pause="handlePlayAlongsPause"
+            ></play-alongs>
+        @else
                 <collection-wrapper
                     :brand="{{ json_encode($brand) }}"
                     :collection-type="{{ json_encode($lessonType) }}"
@@ -268,6 +280,7 @@
                     :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
                     :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
                 ></collection-wrapper>
+        @endif
 
         {{-- Play Alongs Catalogue for Drumeo --}}
 {{--        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )--}}

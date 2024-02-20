@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :pre-loaded-content="preLoadedContent" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="sortOptions"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="sortOptions"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -11,8 +11,6 @@
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
-                <PlayAlongs v-else-if="isPlayAlong" :pre-loaded-content="data" ref="playAlongsVueInstance"
-                            :total-results="getTotalResults" />
                 <SongCardContainer
                     v-else-if="isSong"
                     :pre-loaded-content="data"
@@ -47,7 +45,6 @@ import CollectionResults from '../Catalogue/CollectionResults.vue';
 import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 
 //Views
-import PlayAlongs from "../../vuesora/views/play-alongs/PlayAlongs";
 import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 import SongCardContainer from "../Catalogue/SongCardContainer";
@@ -216,10 +213,6 @@ const isCourse = computed(() => {
     return props.collectionType === 'course';
 })
 
-const isPlayAlong = computed(() => {
-    return props.collectionType === 'play-along';
-})
-
 const isSolos = computed(() => {
     return props.collectionType === 'solos';
 });
@@ -338,10 +331,6 @@ const getTotalPages = computed(() => {
     return activeTabData.value && activeTabData.value.totalPages;
 })
 
-const getTotalResults = computed(() => {
-    return activeTabData.value && activeTabData.value.totalResults;
-})
-
 const getActiveTab = computed(() => {
     return Array.isArray(filter.value.activeTab) ? JSON.stringify(filter.value.activeTab) : filter.value.activeTab;
 })
@@ -381,7 +370,6 @@ onBeforeMount(() => {
         },
         tabData: getTabData.value,
         tabOptions: tabOptionData.value,
-        filterableValues: props.filterableValues,
         endpoint: props.endpoint,
         searchEndpointUrl: props.searchEndpointUrl,
         sortOptions: props.sortOptions,
@@ -393,6 +381,6 @@ onBeforeMount(() => {
 onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.sortOptions, props.defaultSort)
-    // console.log(props.preLoadedContent)
+    console.log(props.preLoadedContent)
 })
 </script>

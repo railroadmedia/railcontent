@@ -2,7 +2,9 @@
     <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-filter-icon="!hasFilterOptions" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
-        <slot name="viewToggleButton"></slot>
+        <template #extra-icon>
+            <slot name="extra-icon"></slot>
+        </template>
     </FilterControls>
     <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
     <div class="tw-px-4 lg:tw-px-0" v-if="hasFilterOptions" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
@@ -56,10 +58,6 @@ const props = defineProps({
     multiSelectColumns: {
         type: Array,
         default: () => [],
-    },
-    preLoadedContent: {
-        type: Object,
-        default: () => ({}),
     },
     selectedFilters: {
         type: Object,
