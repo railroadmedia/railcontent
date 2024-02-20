@@ -11,7 +11,7 @@
             <div>
                 <h3 class="tw-font-bold tw-text-lg md:tw-text-xl">{{ name }}</h3>
                 <div class="tw-font-semibold">
-                    <span>{{ item.all_lessons_count }} Workout</span>
+                    <span>{{ item.all_lessons_count }} {{ contentType }}</span>
                     <span v-if="showTotalPlays"> - {{ item.total_plays }} Plays</span>
                 </div>
 
@@ -86,5 +86,37 @@ const isWorkout = computed(() => {
 
 const isChallenge = computed(() => {
     return props.contentTypeOverride === 'challenge';
+})
+
+const pluralizeWord = (word,  count , plural) => {
+    if(count > 1) {
+        return plural || word + 's';
+    } else {
+        return word;
+    }
+}
+
+const contentType = computed(() => {
+    let type = props.contentTypeOverride.replaceAll('-', ' ').toLowerCase();
+    let formattedType = '';
+
+    if(type === 'quick tips'){
+        type = 'quick tip';
+    } else if (type === 'boot camps') {
+        type = 'boot camp';
+    }
+
+    if(type === 'student focus'){
+        type = pluralizeWord(type, props.item.all_lessons_count, 'student foci');
+    } else {
+        type = pluralizeWord(type, props.item.all_lessons_count);
+    }
+
+    type = type.split(' ');
+    type.map((o, i) => {
+        formattedType = formattedType + (i > 0 ? ' ' : '') + o.charAt(0).toUpperCase() + o.slice(1);
+    })
+
+    return formattedType;
 })
 </script>
