@@ -512,43 +512,45 @@
 
         <!--Modal part-->
         <div x-data="{
-    open: false,
-    imgIndex: 0,
-    slides: [
-        @foreach ($slides as $slide)
-        '{{ $slide['img'] }}', @endforeach
-    ],
-    splide: null,
-    initSplide: function(startIndex) { 
-        if (this.splide) {
-            this.splide.destroy();
-        }
-        this.imgIndex = startIndex;
-        this.splide = new Splide(this.$refs.splide, {
-            type: 'fade',
-            gap: '1rem',
-            lazyLoad: 'nearby',
-            pagination: false,
-            start: startIndex,
-            autoplay: true,
-            interval: 3000,
-            swipe: false, 
-            arrows: true, 
-            rewind: true, 
-            breakpoints: {
-                640: {
-                        perMove: 1,
+            open: false,
+            imgIndex: 0,
+            slides: [
+                @foreach ($slides as $slide)
+                '{{ $slide['img'] }}', @endforeach
+            ],
+            splide: null,
+            initSplide: function(startIndex) { 
+                console.log('initSplide called with index:', startIndex); 
+                if (!this.splide) { 
+                    this.splide = new Splide(this.$refs.splide, {
                         type: 'fade',
+                        autoplay: true, 
+                        interval: 2000,
                         gap: '1rem',
-                        arrows: false,
-                        swipe: true,
-                        drag: true, 
-                        flickMaxPages: 3,
-                        rewind: true,
+                        lazyLoad: 'nearby',
+                        pagination: false,
+                        start: startIndex,
+                        perMove: 1,
+                        swipe: false, 
+                        arrows: true, 
+                        rewind: true, 
+                        breakpoints: {
+                            640: {
+                                    perMove: 1,
+                                    type: 'slide',
+                                    gap: '1rem',
+                                    arrows: false,
+                                    flickMaxPages: 3,
+                                    rewind: true,
+                            }
+                        },
+                    });
+                    this.splide.mount();
+                    console.log('Splide mounted:', this.splide); 
                 }
-            },
-        });
-        this.splide.mount();
+                this.splide.options.start = startIndex; 
+                this.splide.options.autoplay = true; 
+                this.splide.go(startIndex); 
     }
 }" class="flex flex-wrap items-center">
         <!-- images design -->
