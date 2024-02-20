@@ -44,6 +44,7 @@ import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWra
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 import PackCatalogue from './vue/components/Packs/PackCatalogue';
+import PacksHeader from './vue/components/PageHeaders/PacksHeader';
 
 
 //Vuesora Assets
@@ -290,6 +291,7 @@ app.component('AppContainer', AppContainer)
     .component('Referral', Referral)
     .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
+    .component('PacksHeader', PacksHeader)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(

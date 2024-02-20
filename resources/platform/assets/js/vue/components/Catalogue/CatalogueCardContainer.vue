@@ -64,12 +64,12 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
-    
-        <AddEventModal 
-            v-if="contentTypeOverride === 'challenge'" 
+
+        <AddEventModal
+            v-if="contentTypeOverride === 'challenge'"
             modal-id="notifyModal"
-            :subscription-calendar-id="subscriptionCalendarId" 
-            :theme-color="brand" 
+            :subscription-calendar-id="subscriptionCalendarId"
+            :theme-color="brand"
         />
 
     </div>
@@ -177,7 +177,7 @@ const breakToListView = computed( () => {
 })
 
 const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value && (isWorkout.value || isChallenge.value)
+    return collectionStoreLoading.value;
 })
 
 const skeletonCardCount = computed(() => {
