@@ -2444,6 +2444,8 @@ return [
             'login_as_users',
             'is_enrolled_into_cohort',
             'show_learning_paths_on_homepage',
+            'subcription_date',
+            'completed_workouts'
         ],
 
         'quick-tips' => [
@@ -5466,6 +5468,7 @@ return [
             'is_drumeo_lifetime_member',
             'access_level',
             'is_enrolled_into_cohort',
+            'completed_workouts',
         ],
 
         'quick-tips' => [
