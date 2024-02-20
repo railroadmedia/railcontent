@@ -24,9 +24,10 @@
           <img :src="additionalImgSrc" class="tw-w-[200px] tw-max-h-[100px] sm:tw-w-[174px] sm:tw-max-h-[92px]">
         </template>
       </div>
-
-      <PageHeaderPrimaryCta class="tw-hidden sm:tw-block" :icon="primaryCtaIcon" :url="primaryCtaUrl"
+      <div>
+        <PageHeaderPrimaryCta class="tw-hidden sm:tw-block" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
         :text="primaryCtaText" />
+      </div>
     </div>
 
     <!-- Modal for Desktop -->
