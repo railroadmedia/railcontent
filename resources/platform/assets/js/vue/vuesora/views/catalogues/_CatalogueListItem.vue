@@ -202,7 +202,7 @@
           @click.stop.prevent="progressReset"></i>
       </div>
       <button
-          v-if="!resetProgress && (item.type !== 'learning-path-level' && (brand !== 'drumeo' || brand !== 'pianote') )"
+          v-if="!resetProgress && !disableAddToListForMethods "
           class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-h-[50px] tw-items-center"
           :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
           :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
@@ -280,6 +280,13 @@ export default {
 
       return this.contentModel.list;
     },
+
+    disableAddToListForMethods() {
+      if(this.item.type === 'learning-path-level') {
+        return this.brand === 'drumeo' || this.brand === 'pianote';
+      }
+      return false;
+    }, 
 
     itemStyle() {
       const field = this.item.fields.find((field) => field.key === 'style');
