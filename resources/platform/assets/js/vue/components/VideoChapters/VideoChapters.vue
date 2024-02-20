@@ -37,7 +37,7 @@
           <div class="tw-flex-grow tw-flex tw-flex-col">
             <div class="tw-text-sm dark:tw-text-white">{{ formatTime(chapter.time) }}</div>
             <div class="tw-w-full tw-pr-2">
-                <p class="tw-line-clamp-1 tw-font-bold dark:tw-text-white">{{ chapter.title }}</p>
+                <p class="tw-font-bold dark:tw-text-white">{{ chapter.title }}</p>
             </div>
           </div>
           <div class="tw-hidden md:tw-flex tw-flex-shrink-0">
