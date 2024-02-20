@@ -125,7 +125,6 @@
                         text: `${payload.name} was been successfully created.`
                     })
                     if (props.playlist.hasAddItemCallback) {
-                        // console.log('has add item callback', response.data)
                         window.addItemCallback(response.data.data[0].id)
                     }
                     //load Playlists (if collection catalog exists)

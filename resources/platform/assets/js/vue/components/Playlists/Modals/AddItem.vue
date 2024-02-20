@@ -174,7 +174,6 @@ const handleSaveItem = () => {
     if (selectedPlaylists.value.length) {
         isLoadingPlaylists.value = true;
         return saveData().then((response) => {
-            //console.log(response)
             if(response) {
                 window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
             }
@@ -196,7 +195,6 @@ const handleCreate = () => {
         data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value, importAssignments: importAll.value },
     });
     window.addItemCallback = function (playlistId) {
-        //console.log('callback called')
         saveData(playlistId);
         window.addItemCallback = null;
     }
@@ -294,7 +292,6 @@ onMounted(() => {
             additionalItems.value = soundslice_assignments_count;
             totalItems.value = soundslice_assignments_count + lessons_count;
             isLoadingAssignments.value = false;
-            //console.log('totalItems', totalItems.value)
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
         });
