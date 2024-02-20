@@ -202,7 +202,7 @@
           @click.stop.prevent="progressReset"></i>
       </div>
       <button
-          v-if="!resetProgress"
+          v-if="!resetProgress && (item.type !== 'learning-path-level' && (brand !== 'drumeo' || brand !== 'pianote') )"
           class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-h-[50px] tw-items-center"
           :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
           :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
@@ -334,7 +334,7 @@ export default {
     },
   },
   beforeMount() {
-    //console.log('item', this.item)
+    console.log('item', this.item.type)
   },
   beforeDestroy() {
     this.contentModel = null;
