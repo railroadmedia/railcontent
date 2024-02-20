@@ -6,6 +6,12 @@
                 <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
+                <p class="tw-text-[#3F3F46] dark:tw-text-[#A7A7A7] tw-text-sm tw-mb-2">
+                    <span>{{ instructors[0] }} · </span>
+                    <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                    textCase="capitalize" />
+                    <span> · {{ lessonType }}</span>
+                </p>
             </div>
             <!-- Video CTAs -->
             <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
@@ -268,6 +274,7 @@ import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
 import ReportModal from "../../../components/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
+import DifficultyLabel from "../../../components/DifficultyLabel/DifficultyLabel.vue";
 
 export default {
     name: "VideoResources",
@@ -277,12 +284,18 @@ export default {
         ModalRenderer,
         XIcon,
         FlagIcon,
+        DifficultyLabel,
     },
     mixins: [ThemeClasses],
     props: {
         brand: {
             type: String,
             default: () => "drumeo",
+        },
+
+        difficulty: {
+            type: [String, Number],
+            default: () => "",
         },
 
         title: {
