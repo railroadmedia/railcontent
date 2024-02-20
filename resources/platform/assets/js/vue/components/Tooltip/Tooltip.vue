@@ -5,13 +5,13 @@
             <slot name="trigger"></slot>
         </div>
         <div v-if="show"
-            :class="[tooltipPosition, 'tw-absolute tw-px-2 tw-py-1 tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-min-w-max']">
+            :class="[tooltipPosition, 'tw-absolute tw-px-2 tw-py-1 tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-z-20 tw-min-w-max']">
             <slot name="content"></slot>
         </div>
     </div>
 </template>
 
-  
+
 <script setup>
 import { ref, onMounted, onUnmounted, computed, defineProps } from 'vue';
 
@@ -74,7 +74,7 @@ const tooltipPosition = computed(() => {
         case 'left':
             return 'tw-right-full tw-mr-2';
         case 'right':
-            return 'tw-left-full tw-ml-2';
+            return 'tw-left-full tw-top-0 tw-ml-2';
         default:
             return 'tw-top-full tw-mt-2';
     }

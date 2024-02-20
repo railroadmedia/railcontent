@@ -161,7 +161,7 @@
             </aside>
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 xl:tw-row-span-2" :class="{ 'xl:tw-col-span-2': isRelatedSectionOpen }">
+            <section class="tw-col-span-3 xl:tw-row-span-2" :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'xl:tw-mr-[64px]'">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"
