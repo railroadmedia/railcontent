@@ -1,6 +1,4 @@
 @php
-dd($lessonContent);
-
     if (!empty($lessonContent->fetch('fields.video.fields.youtube_video_id'))) {
         $videoProps = [
             'ref' => 'mediaElementVueInstance',
