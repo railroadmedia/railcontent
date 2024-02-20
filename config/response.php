@@ -2444,6 +2444,7 @@ return [
             'login_as_users',
             'is_enrolled_into_cohort',
             'show_learning_paths_on_homepage',
+            'subcription_date',
         ],
 
         'quick-tips' => [

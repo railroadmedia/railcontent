@@ -23,34 +23,22 @@ use Throwable;
 
 class CohortPackController
 {
-    private ProductRepository $productRepository;
-    private UserProductService $userProductService;
     private CohortService $cohortService;
     private ContentService $contentService;
-    private EcommerceUserProductService $ecommerceUserProductService;
 
     private UserAccessPermissionsService $userAccessPermissionsService;
     private ProductService $productService;
-    private ContentPermissionsService $contentPermissionsService;
 
     public function __construct(
-        UserProductService $userProductService,
-        EcommerceUserProductService $ecommerceUserProductService,
-        ProductRepository $productRepository,
         CohortService $cohortService,
         ContentService $contentService,
         UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
-        ContentPermissionsService $contentPermissionsService,
     ) {
-        $this->userProductService = $userProductService;
-        $this->ecommerceUserProductService = $ecommerceUserProductService;
-        $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
         $this->contentService = $contentService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
         $this->productService = $productService;
-        $this->contentPermissionsService = $contentPermissionsService;
     }
 
     /**
@@ -70,12 +58,8 @@ class CohortPackController
         $productId = $cohort['product_id'];
         $product = $this->productService->getById($productId);
 
-        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
-        $permissionID =
-            $product->getContentPermissions($contentPermissionsLookup)
-                ->first()->id ?? null;
-        $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
-        $nPackOwners = $this->userAccessPermissionsService->getNumberPermissionOwners($permissionID);
+        $hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners =  $this->userAccessPermissionsService->getNumberProductOwners($productId);
         $registerButtonUrl =
             (!$hasProduct) ?
                 url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->sku]) : '#final';
