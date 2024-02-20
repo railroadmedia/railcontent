@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\ApiGateways;
 
+use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -11,6 +12,7 @@ use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Collection;
+use Log;
 use Signifly\Shopify\Shopify;
 
 class ShopifyGateway
@@ -87,8 +89,8 @@ class ShopifyGateway
     /**
      * Get all unique customer email addresses who have an order that was updated between the given dates.
      *
-     * @param  Carbon  $startDate
-     * @param  Carbon  $endDate
+     * @param Carbon $startDate
+     * @param Carbon $endDate
      * @return Collection
      * @throws Exception
      */
@@ -98,6 +100,10 @@ class ShopifyGateway
         $cursor = "";
         $startDateString = $startDate->toIso8601String();
         $endDateString = $endDate->toIso8601String();
+
+        Log::debug(
+            "getCustomersToUpdate: Loading shopify customers with order updates between $startDateString and $endDateString..."
+        );
 
         $i = 0;
         $max = 100;
@@ -129,12 +135,20 @@ class ShopifyGateway
                     return $order->customer->email;
                 })
             );
+
             $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
             $endCursor = $responseBody->data->orders->pageInfo->endCursor;
             $cursor = ", after: \"$endCursor\"";
             $i++;
+            Timer::afterSeconds(2, function () use ($emails) {
+                $count = count($emails->unique());
+                Log::debug("getCustomersToUpdate: Loading shopify customers (found $count so far)...");
+            });
         } while ($hasNextPage && $i < $max);
-        return $emails->unique();
+        $uniqueEmails = $emails->unique();
+        $count = count($uniqueEmails);
+        Log::debug("getCustomersToUpdate: Found $count shopify customers");
+        return $uniqueEmails;
     }
 
     public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
@@ -239,7 +253,7 @@ class ShopifyGateway
     /**
      * Check if there's a metafield definition in Shopify that matches the given MetaFieldDefinition
      *
-     * @param  MetaFieldDefinition  $metaFieldDefinition
+     * @param MetaFieldDefinition $metaFieldDefinition
      * @return bool
      * @throws Exception
      */
@@ -278,7 +292,7 @@ class ShopifyGateway
 
     /**
      * Create a new metafield definition in Shopify with the given MetaFieldDefinition
-     * @param  MetaFieldDefinition  $metaFieldDefinition
+     * @param MetaFieldDefinition $metaFieldDefinition
      * @return mixed
      * @throws Exception
      */
