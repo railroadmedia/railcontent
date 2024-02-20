@@ -512,45 +512,45 @@
 
         <!--Modal part-->
         <div x-data="{
-            open: false,
-            imgIndex: 0,
-            slides: [
-                @foreach ($slides as $slide)
-                '{{ $slide['img'] }}', @endforeach
-            ],
-            splide: null,
-            initSplide: function(startIndex) { <!-- initialize Splide with a specified start index -->
-                if (this.splide) {
-                    this.splide.destroy();
-                }
-                this.imgIndex = startIndex; <!-- set the index of the current image -->
-                this.splide = new Splide(this.$refs.splide, {
-                    type: 'slide',
-                    gap: '1rem',
-                    lazyLoad: 'nearby',
-                    pagination: false,
-                    start: startIndex, <!-- starts the carousel from the chosen image -->
-                    autoplay: true,
-                    interval: 3000,
-                    swipe: false, 
-                    arrows: true,
-                    rewind: true,
-                    breakpoints: {
-                        640: {
+    open: false,
+    imgIndex: 0,
+    slides: [
+        @foreach ($slides as $slide)
+        '{{ $slide['img'] }}', @endforeach
+    ],
+    splide: null,
+    initSplide: function(startIndex) { 
+        if (this.splide) {
+            this.splide.destroy();
+        }
+        this.imgIndex = startIndex;
+        this.splide = new Splide(this.$refs.splide, {
+            type: 'fade',
+            gap: '1rem',
+            lazyLoad: 'nearby',
+            pagination: false,
+            start: startIndex,
+            autoplay: true,
+            interval: 3000,
+            swipe: false, 
+            arrows: true, 
+            rewind: true, 
+            breakpoints: {
+                640: {
                         perMove: 1,
-                        type: 'slide',
+                        type: 'fade',
                         gap: '1rem',
                         arrows: false,
                         swipe: true,
                         drag: true, 
                         flickMaxPages: 3,
                         rewind: true,
-                    }
-                },
-                });
-                this.splide.mount();
-            }
-        }" class="flex flex-wrap items-center">
+                }
+            },
+        });
+        this.splide.mount();
+    }
+}" class="flex flex-wrap items-center">
         <!-- images design -->
             <div class="w-full sm:w-1/2 sm:order-1">
                 <div class="p-3 w-full">
