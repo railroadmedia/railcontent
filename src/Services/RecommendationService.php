@@ -101,11 +101,14 @@ class RecommendationService
             $response = Http::withToken($authToken)->post($url, $data);
         }
         $content = $response->json();
-        if (!$content) {
-            $status = $response->status();
+        $status = $response->status();
+        if ($status != 200)
+        {
             Log::warning("HuggingFace return an unexpected response with code: $status");
+            Log::warning("HuggingFace: Content returned: $content");
+            return [];
         }
-        return $response->status() == 200 ? $content : [];
+        return $content;
     }
 
 // The following code includes functionality using a direct PDO connection to the snowflake db instead of through a web api.
