@@ -94,28 +94,26 @@ class CarouselService
         $carousel =
             $query->orderBy('display_order')
                 ->get();
-        if(self::$workoutsPage){
-            $carousel = $carousel->filter(function($slide){
-                return $slide->is_featured;
+        if (self::$workoutsPage) {
+            $carousel = $carousel->filter(function ($slide) {
+                return $slide->show_on_workouts == 1;
             })->values();
-        }else{
-            $carousel = $carousel->filter(function($slide){
-                return (!$slide->is_featured || ($slide->is_featured && ($slide->show_on_homepage == 1)));
+        } else {
+            $carousel = $carousel->filter(function ($slide) {
+                return $slide->show_on_homepage == 1;
             })->values();
         }
         $carousel->each(function (Carousel $slide) {
-
             if ($slide->is_featured) {
                 $challenge = null;
                 if ($slide->challenge_id) {
                     $challenge = $this->contentService->getById($slide->challenge_id);
                 }
-                if($challenge && $challenge['challenge_state'] === 'upcoming'){
-                        $slide->primary_cta_text = 'Notify Me';
+                if ($challenge && isset($challenge['challenge_state']) && $challenge['challenge_state'] === 'upcoming') {
+                    $slide->primary_cta_text = 'Notify Me';
 
-                        $slide->is_enrolled = false;
-                }
-                elseif ($slide->product_id && $this->isEnrolled(user()->id, $slide->product_id)) {
+                    $slide->is_enrolled = false;
+                } elseif ($slide->product_id && $this->isEnrolled(user()->id, $slide->product_id)) {
                     $slide->primary_cta_text = $slide->primary_cta_text_alt;
                     $slide->primary_cta_url = $slide->primary_cta_url_alt;
                     // $slide->secondary_cta_text = null;
@@ -133,18 +131,6 @@ class CarouselService
 
     private function isEnrolled(int $userId, int $productId)
     {
-        $product = $this->productService->getById($productId);
-
-        $contentPermissionsLookup = $this->contentPermissionsService->getContentPermissionsLookup();
-        $permissionID =
-            $product->getContentPermissions($contentPermissionsLookup)
-                ->first()->id ?? null;
-
-        if (!$permissionID) {
-            return true;
-        }
-        $hasProduct = $this->userAccessPermissionsService->hasPermission($userId, $permissionID);
-
-        return $hasProduct;
+        return $this->userAccessPermissionsService->hasProductNotCached($userId, $productId);
     }
 }

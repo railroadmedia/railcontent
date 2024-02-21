@@ -1,6 +1,6 @@
 <nav id="nav" class="top-bar row expanded @if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif">
     <div class="logo">
-        <a
+        <a aria-label="Musora Home" 
             @if(!empty($logoUrl))
                 href="{{ $logoUrl }}"
             @else
@@ -19,7 +19,7 @@
 
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button" aria-label="Visit Drumeo Shop">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -40,7 +40,7 @@
 
     @if(!empty($subscriptionVersion))
         @if(!empty($fullSubscriptionVersion))
-            <div class="relative">
+            <div class="relative" role="navigation" aria-label="Navigation">
                 <div class="edge-wrap show-for-medium">
                     <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
                     <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
@@ -63,7 +63,7 @@
         @endif
 
         <div class="button-wrap @if(!empty($hideJoin)) hidden @endif">
-            <a @if(!empty($scrollToJoin))
+            <a role="button" aria-label="Join" @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))
                     href="{{ $joinUrl }}" class="join"
@@ -77,17 +77,18 @@
                 @else
                     Join<span class="show-for-medium"> Drumeo</span>
                 @endif
+                
             </a>
         </div>
         <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
-            <a href="https://www.musora.com/drumeo" class="join outline-button">Login</a>
+            <a role="link" aria-label="Login" href="https://www.musora.com/drumeo" class="join outline-button">Login</a>
         </div>
     @endif
 </nav>
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        <a href="https://www.musora.com/login" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-member-login">
+        <a href="https://www.musora.com/login" role="link" aria-label="Musora Login Page" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-member-login">
             <i class=" fas fa-sign-in text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
             Member Login
         </a>

@@ -2,20 +2,24 @@
 
 namespace App\Modules\Ecommerce\ApiGateways;
 
+use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Models\Shopify\MetaFieldDefinition;
 use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
+use Log;
 use Signifly\Shopify\Shopify;
 
 class ShopifyGateway
 {
+    use ExecutesShopifyGraphQlQuery;
+
     private Shopify $shopify;
-    private $lastQueryCost = null;
 
     public function __construct(Shopify $shopify)
     {
@@ -82,18 +86,32 @@ class ShopifyGateway
         return $orders;
     }
 
-    public function getCustomersToUpdate(Carbon $date)
+    /**
+     * Get all unique customer email addresses who have an order that was updated between the given dates.
+     *
+     * @param Carbon $startDate
+     * @param Carbon $endDate
+     * @return Collection
+     * @throws Exception
+     */
+    public function getCustomersToUpdate(Carbon $startDate, Carbon $endDate): Collection
     {
         $emails = collect();
         $cursor = "";
-        $processedAtStartString = $date->toIso8601String();
+        $startDateString = $startDate->toIso8601String();
+        $endDateString = $endDate->toIso8601String();
+
+        Log::debug(
+            "getCustomersToUpdate: Loading shopify customers with order updates between $startDateString and $endDateString..."
+        );
+
         $i = 0;
         $max = 100;
         do {
             $this->handleRateLimitBefore();
             $gql = <<<GQL
             query {
-                 orders(first:250$cursor, query:"updated_at:>=\"$processedAtStartString\""){
+                 orders(first:250$cursor, query:"updated_at:>=\"$startDateString\" AND updated_at:<=\"$endDateString\""){
                     nodes {
                         ... on Order {
                             customer {
@@ -117,13 +135,25 @@ class ShopifyGateway
                     return $order->customer->email;
                 })
             );
+
             $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
             $endCursor = $responseBody->data->orders->pageInfo->endCursor;
             $cursor = ", after: \"$endCursor\"";
             $i++;
+            Timer::afterSeconds(2, function () use ($emails) {
+                $count = count($emails->unique());
+                Log::debug("getCustomersToUpdate: Loading shopify customers (found $count so far)...");
+            });
         } while ($hasNextPage && $i < $max);
-        $emails = $emails->unique();
-        return $emails;
+        $uniqueEmails = $emails->unique();
+        $count = count($uniqueEmails);
+        Log::debug("getCustomersToUpdate: Found $count shopify customers");
+        return $uniqueEmails;
+    }
+
+    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
+    {
+        return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
 
     public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt)
@@ -147,11 +177,6 @@ class ShopifyGateway
             GQL;
         $responseBody = $this->executeQuery($gql);
         return $responseBody->data->orders->nodes;
-    }
-
-    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
-    {
-        return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
 
     public function defineMetaField()
@@ -225,62 +250,94 @@ class ShopifyGateway
         return $response;
     }
 
-
-    public function executeQuery(string $gql): mixed
+    /**
+     * Check if there's a metafield definition in Shopify that matches the given MetaFieldDefinition
+     *
+     * @param MetaFieldDefinition $metaFieldDefinition
+     * @return bool
+     * @throws Exception
+     */
+    public function doesMetaFieldDefinitionExist(MetaFieldDefinition $metaFieldDefinition): bool
     {
-        $this->handleRateLimitBefore();
-        $gqlUrl = $this->shopify->getBaseUrl() . "/graphql.json";
-        $pollResponse = $this->shopify->graphQl()->post($gqlUrl, ["query" => $gql]);
-        if ($pollResponse->successful()) {
-            $responseBody = json_decode($pollResponse->body());
-            $this->lastQueryCost = $responseBody->extensions->cost ?? null;
+        $ownerType = $metaFieldDefinition->ownerType;
+        $key = $metaFieldDefinition->key;
+        $name = $metaFieldDefinition->name;
+        $namespace = $metaFieldDefinition->namespace;
+        $type = $metaFieldDefinition->type;
 
-            // check for any errors
-            $responseErrors = $responseBody->errors ?? [];
-            if (!empty($responseErrors)) {
-                throw new Exception(
-                    sprintf(
-                        "%s: Error(s) returned: %s",
-                        get_class($this),
-                        collect($responseErrors)->implode("message", " ")
-                    )
-                );
+        $gql = <<<GQL
+            query {
+                metafieldDefinitions(first:1, ownerType: $ownerType, query:"key:$key AND name:$name AND namespace:$namespace AND type:$type") {
+                    nodes {
+                        id
+                        key
+                        name
+                        namespace
+                        validations {
+                            name
+                            type
+                            value
+                        }
+                        type {
+                            name
+                        }
+                    }
+                }
             }
-        } else {
-            throw new Exception(
-                sprintf(
-                    "%s: Error(s) returned: %s",
-                    get_class($this),
-                    $pollResponse->reason()
-                )
-            );
-        }
-        return $responseBody;
+            GQL;
+
+        $responseBody = $this->executeQuery($gql);
+        return collect($responseBody->data->metafieldDefinitions->nodes)->isNotEmpty();
     }
 
-    protected function handleRateLimitBefore(): void
+    /**
+     * Create a new metafield definition in Shopify with the given MetaFieldDefinition
+     * @param MetaFieldDefinition $metaFieldDefinition
+     * @return mixed
+     * @throws Exception
+     */
+    public function createMetaFieldDefinition(MetaFieldDefinition $metaFieldDefinition): mixed
     {
-        $lastQueryCost = $this->lastQueryCost;
-        if (!$lastQueryCost) {
-            return;
-        }
-        $rateLimitThresholdPercentage = config('shopify.rate_limit_gql.threshold_percentage');
-        $rateLimitSleepTime = config('shopify.rate_limit_gql.sleep_time');
+        $ownerType = $metaFieldDefinition->ownerType;
+        $key = $metaFieldDefinition->key;
+        $name = $metaFieldDefinition->name;
+        $description = $metaFieldDefinition->description;
+        $namespace = $metaFieldDefinition->namespace;
+        $type = $metaFieldDefinition->type;
 
-        $current = $lastQueryCost->throttleStatus->currentlyAvailable;
-        $max = $lastQueryCost->throttleStatus->maximumAvailable;
-        $percentageUsed = round(($max - $current) / $max * 100, 1);
+        $query = <<<GRAPHQL
+                mutation {
+                    metafieldDefinitionCreate(definition: {
+                        name: "$name",
+                        namespace: "$namespace",
+                        key: "$key",
+                        type: "$type",
+                        ownerType: $ownerType,
+                        description: "$description"
+                    }
+                    ) {
+                    createdDefinition {
+                        id
+                        name
+                        namespace
+                        key
+                    }
+                    userErrors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+            GRAPHQL;
+        return $this->executeQuery($query);
+    }
 
-        if ($percentageUsed > $rateLimitThresholdPercentage) {
-            Log::debug("Shopify Graph QL availability: $current/$max ($percentageUsed%)");
-            Log::warning(
-                sprintf(
-                    "About to hit Shopify Graph QL API rate limit. Sleeping for %s %s...",
-                    $rateLimitSleepTime,
-                    Str::plural("second", $rateLimitSleepTime)
-                )
-            );
-            sleep($rateLimitSleepTime);
-        }
+    /**
+     * @inheritDoc
+     */
+    protected function getShopifyConnection(): Shopify
+    {
+        return $this->shopify;
     }
 }

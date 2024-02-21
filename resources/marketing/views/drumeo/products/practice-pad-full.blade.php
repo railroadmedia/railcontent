@@ -949,7 +949,6 @@
         #bulkOrder .join {
             font-family:"Bebas Neue", sans-serif;
             border-radius:6px;
-            font-weight:700;
             background:#0b76db;
             padding:13px 30px;
             margin:10px auto 0;

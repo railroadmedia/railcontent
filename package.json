@@ -12,9 +12,8 @@
         "pd": "yarn platform-development",
         "pp": "yarn platform-production",
         "pw": "yarn platform-watch",
-        "marketing-production": "parcel build resources/marketing/assets/parcel/scss/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose",
-        "mp": "yarn marketing-production",
-        "mjs": "parcel build resources/marketing/assets/parcel/js/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose"
+        "marketing-production": "parcel build resources/marketing/assets/parcel/scss/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose && parcel build resources/marketing/assets/parcel/js/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose",
+        "mp": "yarn marketing-production"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",

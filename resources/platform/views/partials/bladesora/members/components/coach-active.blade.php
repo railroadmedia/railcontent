@@ -14,7 +14,7 @@
                         class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                         <!-- Coach Image -->
-                        <img src="https://www.musora.com/musora-cdn/image/width=300/{{ $coach->fetch('data.coach_card_image') }}"
+                        <img src="https://www.musora.com/musora-cdn/image/width=300,quality=95/{{ $coach->fetch('data.coach_card_image') }}"
                              class="tw-w-full tw-flex tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
                              alt="{{ $coach->fetch('fields.name') }} Card"
                              loading="lazy"

@@ -5,8 +5,10 @@ namespace App\Modules\Ecommerce\Controllers;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
@@ -34,6 +36,17 @@ class ShopifyWebHookController extends Controller
         try {
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
+            $processedAt = $request->get('processed_at');
+
+            if ($processedAt) {
+                $launchDate = new Carbon(config('ecommerce.launch_date_times.shopify'));
+                $processedAtDate = new Carbon($processedAt);
+                if ($processedAtDate->isBefore($launchDate)) {
+                    Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring update.");
+                    return;
+                }
+            }
+
             Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
             dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -48,6 +61,8 @@ class ShopifyWebHookController extends Controller
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
             Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
+
+            AddOrderTags::dispatch(new Order(json_decode(json_encode($request->all()), false)));
             $this->handleOrderCreatedEventTracking($request->all());
             $this->updateLastTrialDate($shopifyCustomerId, $request);
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
@@ -91,6 +106,7 @@ class ShopifyWebHookController extends Controller
 
     private function handleOrderCreatedEventTracking($order): void
     {
+        // TODO: ensure that AddOrderTags has finished
         $user = $this->shopifySyncService->getOrCreateUser($order['customer']['id'], $order['customer']['email']);
 
         $brand = $this->getBrandFromOrder($order);
@@ -123,7 +139,7 @@ class ShopifyWebHookController extends Controller
         // @TODO EVENT TRACKING: move to avo when migration is completed
         // Avo::order_placed($data);
 
-        dispatch(new ImpactTrackConversion($user,  $brand, $order))->delay(Carbon::now()->addSeconds(3));
+        dispatch(new ImpactTrackConversion($user,  $brand, $order, $this->productService))->delay(Carbon::now()->addSeconds(3));
     }
 
     private function handleOrderRefundEventTracking($order): void
@@ -181,6 +197,8 @@ class ShopifyWebHookController extends Controller
     private function getOrderEventData($order, string $brand): array
     {
         $paymentSource = $this->shopifySyncService->getOrderPaymentSource($order['id'])->value;
+
+        Log::info('Testing shopify order webhook attributes data: ' . var_export($order['note_attributes'], true));
 
         return [
             'checkout_token' => $order['checkout_token'],

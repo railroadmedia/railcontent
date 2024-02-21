@@ -5,8 +5,8 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo Awards 2022 Winners | Drumeo</title>
-    <meta property="og:title" content="Drumeo Awards 2022 Winners">
+    <title>Drumeo Awards 2023 Winners | Drumeo</title>
+    <meta property="og:title" content="Drumeo Awards 2023 Winners">
 
     <meta name="description" content="The Drumeo Awards highlights inspirational drummers at the top of their game.">
     <meta property="og:description" content="The Drumeo Awards highlights inspirational drummers at the top of their game.">
@@ -156,7 +156,7 @@
 
 @section('body-data')
     x-data="{
-        year: 2022,
+        year: 2023,
         yearOpen: true,
         legacyOpen: true,
     }"
@@ -178,8 +178,19 @@
                     <p class="hidden sm:inline-block text-left max-w-sm px-4">The Drumeo Awards highlights inspirational drummers at the top of their game. Learn about this year's winners below.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-7/12">
-                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                        <iframe class="absolute w-full h-full" x-bind:src="year === 2021 ? 'https://www.youtube.com/embed/4Nt6t0E-5jg' : year === 2022 && 'https://www.youtube.com/embed/p2FVUMYO-6k'" frameborder="0" allowfullscreen allow="autoplay" title="drumeo-video"></iframe>
+                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden"
+                        x-data="{
+                        urls: {
+                            2021: 'https://www.youtube.com/embed/4Nt6t0E-5jg',
+                            2022: 'https://www.youtube.com/embed/p2FVUMYO-6k',
+                            2023: 'https://www.youtube.com/embed/YAfkI3Ys_WQ'
+                        },
+                        getVideoUrl(year) {
+                            return this.urls[year] || 'default_src';
+                        }
+                    }">
+                        <iframe class="absolute w-full h-full" allowfullscreen allow="autoplay" title="drumeo-video"
+                            x-bind:src="getVideoUrl(year)"></iframe>
                     </div>
                     <p class="text-center inline-block sm:hidden mx-auto mt-3 sm:mt-0">The Drumeo Awards highlights inspirational drummers at the top of their game. Learn about this year's winners below.</p>
                 </div>
@@ -191,6 +202,7 @@
             <div class="py-4 text-right">
                 <select class="bg-transparent rounded-full w-auto border-white border py-2 px-6 year-select" x-on:change="year = Number($event.target.value)">
                     <option class="bg-black text-white selectable-option" disabled selected>Select Year...</option>
+                    <option class="bg-black text-white" value="2023">2023 Winners</option>
                     <option class="bg-black text-white" value="2022">2022 Winners</option>
                     <option class="bg-black text-white" value="2021">2021 Winners</option>
                 </select>
@@ -206,6 +218,16 @@
                     <p class="leading-tight max-w-xl m-0">Drumeo’s Drummer Of The Year awards - chosen by you, the community - celebrate those who stand out in different musical styles, and recognize exceptional performances, recordings, and your favorite drummer overall.</p>
                     <div class="text-center mt-4 md:mt-0">
                         <i :class="yearOpen && 'rotate-180'" class="fa-solid fa-chevron-down cursor-pointer transform" @click="yearOpen = !yearOpen"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div x-cloak x-bind:class="year !== 2023 && 'hidden'" style="background-color:#1c1a1d;">
+                <div :class="!yearOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-16 sm:mb-24 transition-all duration-200">
+                    <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
+                        @foreach($yearAwards2023 as $videoModal)
+                            @include("drumeo.lead-gen.pages._awards-row")
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -241,6 +263,16 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div x-bind:class="year !== 2023 && 'hidden'" style="background-color:#1c1a1d;">
+                <div :class="!legacyOpen ? 'max-h-0' : 'max-h-full'" class="relative overflow-hidden mb-8 sm:mb-12 transition-all duration-200">
+                    <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
+                        @foreach($legacyAwards2023 as $videoModal)
+                            @include("drumeo.lead-gen.pages._awards-row")
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
             <div x-bind:class="year !== 2022 && 'hidden'" style="background-color:#1c1a1d;">

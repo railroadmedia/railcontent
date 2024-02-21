@@ -124,6 +124,10 @@ class Product extends Model
 
     protected $primaryKey = 'id';
 
+    protected $guarded = [
+        'id'
+    ];
+
     protected static function newFactory(): ProductFactory
     {
         return ProductFactory::new();
@@ -192,6 +196,37 @@ class Product extends Model
             case 'year':
                 return 12 * $this->digital_access_time_interval_length;
         }
+        Log::error(
+            "Not Implemented membership time interval type: $this->digital_access_time_interval_type",
+            [
+                'product_id' => $this->id,
+                'digital_access_time_interval_type' => $this->digital_access_time_interval_type,
+            ]
+        );
+        return null;
+    }
+
+    /**
+     * Get the total number of days that a membership is for, regardless of the interval type.
+     * e.g. 1 year = 365 days, 3 months = 90 days, etc
+     *
+     * @return int|null
+     */
+    public function getMembershipTimeAsTotalDays(): ?int
+    {
+        if ($this->isTrial()) {
+            return 0;
+        }
+        switch ($this->digital_access_time_interval_type) {
+            case 'days':
+            case '':
+                return $this->digital_access_time_interval_length;
+            case 'month':
+                return $this->digital_access_time_interval_length * 30;
+            case 'year':
+                return $this->digital_access_time_interval_length * 365;
+        }
+
         Log::error(
             "Not Implemented membership time interval type: $this->digital_access_time_interval_type",
             [

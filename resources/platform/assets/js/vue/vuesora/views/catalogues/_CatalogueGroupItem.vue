@@ -1,6 +1,6 @@
 <template>
     <div class="tw-mb-6 tw-min-w-[146px] md:tw-min-w-[170px] lg:tw-min-w-0">
-        <img class="tw-w-full tw-rounded-xl tw-mb-1" src="https://www.musora.com/musora-cdn/image/width=500/https://d1923uyy6spedc.cloudfront.net/rob-zombie-hellbilly-deluxe-1694097067.jpg" alt="" />
+        <img class="tw-w-full tw-rounded-xl tw-mb-1" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d1923uyy6spedc.cloudfront.net/rob-zombie-hellbilly-deluxe-1694097067.jpg" alt="" />
         <div class="tw-flex tw-justify-between tw-items-start">
             <div>
                 <div class="tw-font-bold tw-text-sm tw-mb-1">Damn The River</div>

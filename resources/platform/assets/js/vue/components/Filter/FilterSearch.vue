@@ -3,14 +3,14 @@
         class="tw-relative dark:tw-bg-black tw-bg-white tw-rounded-[63px] tw-w-full xl:tw-max-w-[500px] tw-h-[45px] md:tw-mb-0"
     >
         <!-- Search Icon -->
-        <div class="tw-flex tw-justify-center tw-items-center tw-cursor-pointer tw-absolute tw-h-full tw-rounded-[5px] tw-w-[25px] tw-mr-[20px] tw-bg-transparent tw-z-20 tw-right-0 tw-top-0" @click="handleIconClick">
-            <SearchIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
+        <div class="tw-flex tw-justify-center tw-items-center tw-cursor-pointer tw-absolute tw-h-full tw-rounded-[5px] tw-w-[25px] tw-mr-[20px] tw-bg-transparent tw-z-20 tw-right-1 tw-top-0" @click="handleIconClick">
+            <SearchIcon class="tw-w-[18px] tw-h-[18px] tw-text-[#000C17] dark:tw-text-white" />
         </div>
 
         <InputLabel
             :showClearButton="true"
             :initial-value="searchTerm"
-            placeholder="Search"
+            :placeholder="placeholder"
             inputName="term"
             id="workouts-search"
             :removeDefaultInputStyles="true"
@@ -25,7 +25,7 @@
             tw-h-[45px]
             tw-border-[#CBCBCD]
             dark:tw-border-[#445F74]
-            tw-text-xs
+            tw-text-sm
             tw-rounded-[63px]
             tw-transition-color
             dark:tw-text-white
@@ -35,7 +35,7 @@
             tw-pr-[36px]
             ${isSidebarCollapsed
               ? 'placeholder:tw-text-transparent tw-pl-6 tw-cursor-pointer'
-              : 'dark:placeholder:tw-text-[#9EC0DC] tw-pl-8'}
+              : 'placeholder:tw-text-[#000C17] dark:placeholder:tw-text-white tw-pl-8'}
             `
           "
             clearButtonOverride="dark:tw-text-white tw-mr-[35px]"
@@ -60,6 +60,10 @@
     searchTerm: {
       type: String,
       default: '',
+    },
+    placeholder: {
+      type: String,
+      default: 'Search',
     },
   });
 

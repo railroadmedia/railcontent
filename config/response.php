@@ -1347,6 +1347,8 @@ return [
             'is_owned',
             'thumbnail',
             'pack_logo',
+            'data.dark_mode_logo_url',
+            'data.light_mode_logo_url',
             'apple_product_id',
             'google_product_id',
             'bundles' => [
@@ -1386,7 +1388,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'resources'
+            'resources',
         ],
 
         'semester-pack' => [
@@ -1403,6 +1405,8 @@ return [
             'is_owned',
             'thumbnail',
             'pack_logo',
+            'data.dark_mode_logo_url',
+            'data.light_mode_logo_url',
             'apple_product_id',
             'google_product_id',
             'lessons' => [
@@ -2440,6 +2444,8 @@ return [
             'login_as_users',
             'is_enrolled_into_cohort',
             'show_learning_paths_on_homepage',
+            'subcription_date',
+            'completed_workouts'
         ],
 
         'quick-tips' => [
@@ -5462,6 +5468,7 @@ return [
             'is_drumeo_lifetime_member',
             'access_level',
             'is_enrolled_into_cohort',
+            'completed_workouts',
         ],
 
         'quick-tips' => [
