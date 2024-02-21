@@ -288,9 +288,8 @@ app.component('AppContainer', AppContainer)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
-    .component('PackCatalogue', PackCatalogue)
+    // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
-    .component('PacksHeader', PacksHeader)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
