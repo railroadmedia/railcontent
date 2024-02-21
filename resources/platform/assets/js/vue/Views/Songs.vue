@@ -66,8 +66,8 @@ const { brand } = storeToRefs(userStore);
 
 const headerInfoData = computed(() => {
     return {
-        artistsNumber: props.artistsNumber.value,
-        songsNumber: props.songsNumber.value,
+        artistsNumber: props.artistsNumber,
+        songsNumber: props.songsNumber,
     }
 })
 
