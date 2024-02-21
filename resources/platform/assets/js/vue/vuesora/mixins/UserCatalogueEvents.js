@@ -1,6 +1,6 @@
 import ContentService from '../assets/js/services/content';
 import Toasts from '../assets/js/classes/toasts';
-
+import {useResetProgress} from "../../hooks/useResetProgress";
 
 const getValue = (obj, key) => {
     const filtered = obj.filter((field) => {
@@ -67,25 +67,9 @@ export default {
         },
 
         progressReset(event) {
-            const icon = event.target;
-            Toasts.confirm({
-                title: 'Hold your horses… This will reset your progress, are you sure about this?',
-                submitButton: {
-                    text: `<span class="bg-${this.themeColor} text-white short">I want to start over</span>`,
-                    callback: () => {
-                        icon.classList.remove('fa-undo');
-                        icon.classList.add('fa-spin', 'fa-spinner');
+            const { resetProgress } = useResetProgress();
 
-                        this.emitResetProgress({
-                            content_id: this.item.id,
-                            icon,
-                        });
-                    },
-                },
-                cancelButton: {
-                    text: '<span class="bg-grey-3 inverted text-grey-3 short">Get me out of here</span>',
-                },
-            });
+            resetProgress(this.item.id, { value: 'fas fa-redo-alt fa-flip-horizontal' }, true);
         },
 
         // Used to bus the event up one more level to the components parent

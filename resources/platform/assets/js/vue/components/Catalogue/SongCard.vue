@@ -31,10 +31,10 @@
                 </div>
             </a>
             <!-- Description Section -->
-            <div class="tw-flex tw-w-full tw-justify-between">
-                <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
+            <div class="tw-flex tw-w-full tw-justify-between tw-break-all">
+                <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block tw-grow-0 tw-shrink">
                     <a :href="item.url"
-                        class="card-info tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2"
+                        class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2"
                         :class="isGroupedView ? 'tw-flex' : 'tw-hidden sm:tw-flex'">
                         <div class="tw-flex tw-flex-col">
                             <!-- Artist Name -->
@@ -58,11 +58,11 @@
                         </p>
                     </a>
                     <a :href="item.url"
-                        class="card-info tw-flex-auto tw-flex-col tw-rounded-lg tw-h-full tw-justify-center"
+                        class="tw-flex-auto tw-flex-col tw-rounded-lg tw-h-full tw-justify-center"
                         :class="isGroupedView ? 'tw-hidden' : 'tw-flex sm:tw-hidden'">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
-                            <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-1">
+                            <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-break-all tw-line-clamp-1">
                                 {{ mappedData.black_title }}
                             </h4>
                         </div>
@@ -84,7 +84,7 @@
                 <!--
                     Add to Playlist
                 -->
-                <div class="tw-inline-flex tw-pt-1 lg:tw-pt-2 tw-items-start tw-relative sm:tw-justify-end">
+                <div class="tw-inline-flex tw-pt-1 lg:tw-pt-2 tw-items-start tw-relative sm:tw-justify-end tw-shrink-0">
                     <div class="tw-relative">
                         <button :id="`${item.id}-action-btn-big`"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"

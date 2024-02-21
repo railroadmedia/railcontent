@@ -72,15 +72,19 @@
                     {{pack.lesson_count}} Lessons <span class="tw-mx-2">•</span>{{ pack.total_xp }} XP <span class="tw-mx-2" v-if="pack.launch_date">•</span>  {{pack.launch_date}}
                 </div>
             </a>
-            <div class="sm:tw-flex tw-flex-shrink-0">
+            <div class="sm:tw-flex tw-flex-shrink-0 tw-items-center">
                 <!-- Add to playlist -->
-                <button class="tw-mr-4 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                </button>
+                <div class="tw-h-[45px]" :title="pack.lesson_count > 300 ? 'This pack has too many lessons.' : '' ">
+                    <button class="tw-mr-4 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-full tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-30 disabled:tw-pointer-events-none"
+                        :disabled="pack.lesson_count > 300"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                </div>
                 <!-- Action button  -->
-                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 sm:tw-mt-0" :class="progressButtonColor">
+                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 tw-mb-0 sm:tw-mt-0" :class="progressButtonColor">
                     <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
 
                 </a>
