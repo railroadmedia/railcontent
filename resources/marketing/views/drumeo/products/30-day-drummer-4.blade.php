@@ -385,24 +385,6 @@
                             @php
                                 $testimonials = [
                                  [
-                                     'season' => '3',
-                                     'name' => 'Kenyatta ',
-                                     'comment' => '❤️ This was so absolutely lovely and a super fun drum lesson experience. Domino, thank you so much for putting this together for us with the Drumeo team.',
-                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/8021832C-21B0-459E-8CE1-1F315451C8AC-1692660890-593257.jpg',
-                                 ],
-                                 [
-                                     'season' => '3',
-                                     'name' => 'Anthony D ',
-                                     'comment' => 'I just wanted to thank you for your work on this program. I found an instrument I really enjoy playing because of you. You really make the workouts fun and motivating to do.',
-                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1678298286-409099.jpg',
-                                 ],
-                                 [
-                                     'season' => '3',
-                                     'name' => 'Doramu ',
-                                     'comment' => 'What a journey! I started this course on a friend\'s electric kit and finished it on my first ever acoustic drum kit. These workouts have been so much fun and the Drumeo community is so wonderfully encouraging.',
-                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1694598558-612038.jpg',
-                                 ],
-                                 [
                                      'season' => '1',
                                      'name' => 'Erin W.',
                                      'comment' => '<strong>I am shocked at how much I learned in these last 30 days.</strong> My husbands a drummer so he watched me go from knowing NOTHING to being able to make it through a song.',
@@ -455,6 +437,24 @@
                                      'name' => 'Evan W.',
                                      'comment' => 'An absolutely fabulous program… for yourself, your son, your daughter or otherwise. <strong>Filled with great energy, and sound fundamentals.</strong> 🤩 If you’re thinking about it - don’t think, just do! ⚡️',
                                      'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/evan.jpg',
+                                 ],
+                                 [
+                                     'season' => '3',
+                                     'name' => 'Kenyatta ',
+                                     'comment' => '❤️ This was so absolutely lovely and a super fun drum lesson experience. Domino, thank you so much for putting this together for us with the Drumeo team.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/8021832C-21B0-459E-8CE1-1F315451C8AC-1692660890-593257.jpg',
+                                 ],
+                                 [
+                                     'season' => '3',
+                                     'name' => 'Anthony D ',
+                                     'comment' => 'I just wanted to thank you for your work on this program. I found an instrument I really enjoy playing because of you. You really make the workouts fun and motivating to do.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1678298286-409099.jpg',
+                                 ],
+                                 [
+                                     'season' => '3',
+                                     'name' => 'Doramu ',
+                                     'comment' => 'What a journey! I started this course on a friend\'s electric kit and finished it on my first ever acoustic drum kit. These workouts have been so much fun and the Drumeo community is so wonderfully encouraging.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1694598558-612038.jpg',
                                  ],
                              ];
                             @endphp
