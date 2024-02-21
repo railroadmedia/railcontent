@@ -24,7 +24,7 @@
             :hide-sort-icon="hideSortIcon"
             :included-types="includedTypes"
             :pre-loaded-content="preLoadedContent"
-            :reset-progress="resetProgress"
+            :show-reset-progress="showResetProgress"
             :tab-options="tabOptions"
         />
     </div>
@@ -53,7 +53,7 @@ const props = defineProps({
         type: Object,
         default: () => {},
     },
-    resetProgress: {
+    showResetProgress: {
         type: Boolean,
         default: false,
     },
