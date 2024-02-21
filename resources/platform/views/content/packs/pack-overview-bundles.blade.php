@@ -4,6 +4,23 @@
     <title>{{ $pack->fetch('fields.title') }} | Musora</title>
 @endsection
 
+
+@php
+    $ctas = [
+        [
+            'type' => 'primary',
+            'props' => [
+                'text' => $pack->fetch('primary_cta_text'),
+                'url' => $pack->fetch('primary_cta_url'),
+                'icon' => 'fa-play'
+            ]
+        ],
+        
+    ];
+
+    $ctasJson = json_encode($ctas);
+@endphp
+
 @section('content')
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
@@ -59,20 +76,16 @@
         @endslot
     @endcomponent --}}
 
-    <packs-header
+    <page-header
+        page-type="{{ $parentContent->fetch('type') }}"
         title="Packs"
         hero-img="{{ $pack->fetch('data.header_image_url') }}"
-        additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
         dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
         light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
-        primary-cta-icon="fa-play"
-        primary-cta-text="{{$pack['primary_cta_text']}}"
-        primary-cta-url="{{ $pack['primary_cta_url'] }}"
         :info-data="{{ json_encode($infoData) }}"
-        {{-- :enable-reset-progress="true"
-        content-id="{{ $parentContent->fetch('id') }}" --}}
+        :ctas="{{ $ctasJson }}"
     >
-    </packs-header>
+    </page-header>
 
 
     {{-- @include('partials.bladesora.members.content.content-info-subheader', [

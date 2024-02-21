@@ -43,9 +43,7 @@ import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
-import PackCatalogue from './vue/components/Packs/PackCatalogue';
-import PacksHeader from './vue/components/PageHeaders/PacksHeader';
-
+import PageHeader from './vue/components/PageHeader/PageHeader'
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -281,6 +279,7 @@ app.component('AppContainer', AppContainer)
     .component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
+    .component('PageHeader', PageHeader)
     .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('Songs', Songs)
     .component('ChildCatalog', ChildCatalog)
@@ -289,9 +288,8 @@ app.component('AppContainer', AppContainer)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
-    .component('PackCatalogue', PackCatalogue)
+    // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
-    .component('PacksHeader', PacksHeader)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
