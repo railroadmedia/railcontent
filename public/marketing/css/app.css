@@ -6831,6 +6831,10 @@ li, p {
     width: 8rem !important;
   }
 
+  .md\:w-4\/12 {
+    width: 33.333333% !important;
+  }
+
   .md\:w-40 {
     width: 10rem !important;
   }
@@ -8965,10 +8969,6 @@ li, p {
 
   .lg\:pl-5 {
     padding-left: 1.25rem !important;
-  }
-
-  .lg\:pl-6 {
-    padding-left: 1.5rem !important;
   }
 
   .lg\:pl-7 {
