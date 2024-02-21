@@ -308,6 +308,7 @@ export default {
           this.contentTypeOverride === "learning-path-part",
       };
     },
+    
     branchPathBG() {
       return `tw-bg-${this.brand}/10`;
     },
@@ -339,9 +340,6 @@ export default {
 
       return this.index;
     },
-  },
-  beforeMount() {
-    console.log('item', this.item.type)
   },
   beforeDestroy() {
     this.contentModel = null;

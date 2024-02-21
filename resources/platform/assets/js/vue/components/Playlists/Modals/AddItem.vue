@@ -323,8 +323,7 @@ onMounted(() => {
 
         <div class="sm:tw-hidden tw-mt-4">
             <button @click="handleCreate"
-                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-white"
-            >
+                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-white">
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
@@ -435,7 +434,7 @@ onMounted(() => {
             <button v-if="props.content.type === 'song'"
                     @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
-                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false)"
+                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) "
             >
                 SAVE
             </button>
