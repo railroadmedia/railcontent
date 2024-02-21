@@ -7,10 +7,10 @@
                     {{ title }}
                 </h1>
                 <p class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex dark:tw-text-[#9EC0DC]">
-                    <span>{{ instructors[0]?.name }}&nbsp;&nbsp;<span class="tw-text-[12px]">●</span>&nbsp;&nbsp;</span>
+                    <span>{{ instructors[0]?.name }}&nbsp;&nbsp;<span class="tw-text-[12px] tw-h-full tw-flex tw-items-center tw-justify-center">●</span>&nbsp;&nbsp;</span>
                     <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty"
                                     textCase="capitalize" />
-                    <span>&nbsp;&nbsp;<span class="tw-text-[12px]">●</span>&nbsp;&nbsp;{{ lessonType }}</span>
+                    <span>&nbsp;&nbsp;<span class="tw-text-[12px] tw-h-full tw-flex tw-items-center tw-justify-center">●</span>&nbsp;&nbsp;{{ lessonType }}</span>
                 </p>
             </div>
             <!-- Video CTAs -->
