@@ -11,6 +11,9 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -44,18 +47,8 @@
             transform: translateX(0.2rem);
         }
 
-        .playfair {
+        .font-playfair {
             font-family: "Playfair Display", serif;
-            font-optical-sizing: auto;
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .playfair-light {
-            font-family: "Playfair Display", serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
         }
 
         .content-section table.comparison.eardrums tr td:nth-child(1) {
