@@ -1,8 +1,8 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Win a Casio Priva PX-S1100 | Pianote</title>
-    <meta property="og:title" content="Win a Casio Priva PX-S1100 | Pianote">
+    <title>Win a Casio Privia PX-S1100 | Pianote</title>
+    <meta property="og:title" content="Win a Casio Privia PX-S1100 | Pianote">
 
     <meta name="description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
     <meta property="og:description" content="Want a free piano? Simply enter your email address to secure your chance to win.">
@@ -40,14 +40,14 @@
                         <img class="h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" alt="logo">
                         <img class="h-52 sm:hidden mt-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
                         <p class="mx-0 my-4" style="max-width: 450px;">
-                            2024 is the year to learn piano. And we want to help! <span class="font-extrabold">Simply start a free 7-day trial of Pianote from now until February 28th</span> and you’ll automatically be entered to win one of TWO Casio Priva PX-S1100 88-key digital pianos.
+                            2024 is the year to learn piano. And we want to help! <span class="font-extrabold">Simply start a free 7-day trial of Pianote from now until February 28th</span> and you’ll automatically be entered to win one of TWO Casio Privia PX-S1100 88-key digital pianos.
                         </p>
                         <p class="mt-3 mb-6 text-sm">
                             <i class="fas fa-check-circle text-pianote"></i> No purchase necessary.<br class="lg:hidden">
                             <i class="fas fa-check-circle text-pianote lg:ml-2"></i> No age or location restrictions.</p>
 
                     </div>
-{{--                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>--}}
+                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>
                 </div>
                 <div class="hidden sm:block flex-shrink-0">
                     <img class="h-72 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
@@ -79,7 +79,7 @@
                         <br><br>
                         Casio has painstakingly modeled the piano sound from a German concert grand piano. You’ll even hear the dampers lifting from the strings as you press the sustain pedal.
                         <br><br>
-                        And that sound will fill your space thanks to power speakers that feature a strengthened diaphragm for cleaner high-end and an improved inner structure to handle the deep, rich bass notes.
+                        And that sound will fill your space thanks to powerful speakers that feature a strengthened diaphragm for cleaner high-end and an improved inner structure to handle the deep, rich bass notes.
                         <br><br>
                         This piano features Bluetooth MIDI connectivity and is lightweight and portable so you can take it wherever the music takes you.
                         <br><br>
@@ -112,7 +112,7 @@
                     <br><br>
                     But a beautiful digital piano is not the only prize.
                     <br><br>
-                    You could also win one of TWO Limited Edition Prestige Metronomoes by Wittner. These flamed maple metronomes are hand-made in Germany by the best name in metronomes. There are only 216 in the world and each is hand-numbered. (You can learn more here.)
+                    You could also win one of TWO Limited Edition Prestige Metronomoes by Wittner. These flamed maple metronomes are hand-made in Germany by the best name in metronomes. There are only 216 in the world and each is hand-numbered. <a href="/shop/prestige-metronome"><u>(You can learn more here.)</u></a>
                     <br><br>
                     And finally, you could win one of two Annual Pianote Memberships.
                 </p>
@@ -141,18 +141,15 @@
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No purchase necessary <br class="hidden sm:inline">
-                    and there are no age restrictions.
+                    No purchase necessary and there are no age restrictions.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No location restrictions.<br class="hidden sm:inline">
-                    We’ll ship it anywhere in the world.
+                    No location restrictions. We’ll ship it anywhere in the world.
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No sneaky shipping fees.<br class="hidden sm:inline">
-                    We’ll take care of it. (VAT may apply)
+                    No sneaky shipping fees. We’ll take care of it. (VAT may apply)
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
@@ -192,7 +189,7 @@
                             PX-S1100 Digital Piano
                         </h4>
                     </div>
-{{--                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>--}}
+                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>
                 </div>
             </div>
         </div>

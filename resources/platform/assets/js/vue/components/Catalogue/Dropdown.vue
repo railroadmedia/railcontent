@@ -1,9 +1,5 @@
 <script setup>
 const props = defineProps({
-    brand: {
-        type: String,
-        default: "drumeo"
-    },
     dropdownOptions: {
         type: Object,
         default: {},

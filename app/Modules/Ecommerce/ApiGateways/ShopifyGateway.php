@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\ApiGateways;
 
+use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -10,6 +11,8 @@ use App\Modules\Ecommerce\Models\Shopify\Order;
 use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Collection;
+use Log;
 use Signifly\Shopify\Shopify;
 
 class ShopifyGateway
@@ -83,18 +86,32 @@ class ShopifyGateway
         return $orders;
     }
 
-    public function getCustomersToUpdate(Carbon $date)
+    /**
+     * Get all unique customer email addresses who have an order that was updated between the given dates.
+     *
+     * @param Carbon $startDate
+     * @param Carbon $endDate
+     * @return Collection
+     * @throws Exception
+     */
+    public function getCustomersToUpdate(Carbon $startDate, Carbon $endDate): Collection
     {
         $emails = collect();
         $cursor = "";
-        $processedAtStartString = $date->toIso8601String();
+        $startDateString = $startDate->toIso8601String();
+        $endDateString = $endDate->toIso8601String();
+
+        Log::debug(
+            "getCustomersToUpdate: Loading shopify customers with order updates between $startDateString and $endDateString..."
+        );
+
         $i = 0;
         $max = 100;
         do {
             $this->handleRateLimitBefore();
             $gql = <<<GQL
             query {
-                 orders(first:250$cursor, query:"updated_at:>=\"$processedAtStartString\""){
+                 orders(first:250$cursor, query:"updated_at:>=\"$startDateString\" AND updated_at:<=\"$endDateString\""){
                     nodes {
                         ... on Order {
                             customer {
@@ -118,13 +135,20 @@ class ShopifyGateway
                     return $order->customer->email;
                 })
             );
+
             $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
             $endCursor = $responseBody->data->orders->pageInfo->endCursor;
             $cursor = ", after: \"$endCursor\"";
             $i++;
+            Timer::afterSeconds(2, function () use ($emails) {
+                $count = count($emails->unique());
+                Log::debug("getCustomersToUpdate: Loading shopify customers (found $count so far)...");
+            });
         } while ($hasNextPage && $i < $max);
-        $emails = $emails->unique();
-        return $emails;
+        $uniqueEmails = $emails->unique();
+        $count = count($uniqueEmails);
+        Log::debug("getCustomersToUpdate: Found $count shopify customers");
+        return $uniqueEmails;
     }
 
     public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
@@ -229,7 +253,7 @@ class ShopifyGateway
     /**
      * Check if there's a metafield definition in Shopify that matches the given MetaFieldDefinition
      *
-     * @param  MetaFieldDefinition  $metaFieldDefinition
+     * @param MetaFieldDefinition $metaFieldDefinition
      * @return bool
      * @throws Exception
      */
@@ -268,7 +292,7 @@ class ShopifyGateway
 
     /**
      * Create a new metafield definition in Shopify with the given MetaFieldDefinition
-     * @param  MetaFieldDefinition  $metaFieldDefinition
+     * @param MetaFieldDefinition $metaFieldDefinition
      * @return mixed
      * @throws Exception
      */

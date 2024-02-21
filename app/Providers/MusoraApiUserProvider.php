@@ -122,6 +122,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience),
             'access_level' => $user->access_level,
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
+            'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
         ];
     }
 
@@ -188,6 +189,12 @@ class MusoraApiUserProvider implements UserProviderInterface
             $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
         }
 
+        $completedWorkouts = $this->contentService->countByTypesRecentUserProgressState(
+            ['workout'],
+            $user->id,
+            'completed'
+        );
+
         return array_merge([
             'id' => $user->id,
             'email' => $user->email,
@@ -203,6 +210,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
+            'completed_workouts' => $completedWorkouts,
         ], $extraData);
     }
 

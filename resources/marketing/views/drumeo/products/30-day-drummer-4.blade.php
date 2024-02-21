@@ -214,8 +214,10 @@
 @stop()
 
 @section('body-data')
-    x-data="{
-    modal: {{ empty(user()) ? true : false }},
+    x-data ="{
+    trailer : false,
+    lazyLoad: false,
+    videoLoaded: false,
     }"
 @endsection
 
@@ -234,7 +236,9 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo season3 logo">
+                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=420,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo season3 logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
                             <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
@@ -262,7 +266,7 @@
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-drummer/season-4/header-thumb-m.png);"
-                        data-open="trailer">
+                        x-on:click="trailer = true;">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -288,13 +292,16 @@
                             </p>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
+                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
                         </div>
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video" style="padding-bottom: 98%; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/marketing/drumeo/products/30-day-drummer/season-4/header-thumb.png);" data-open="trailer">
+                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
+                        style="padding-bottom: 98%; background-image:url(https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/marketing/drumeo/products/30-day-drummer/season-4/header-thumb.png);" x-on:click="trailer = true;">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -431,16 +438,38 @@
                                      'comment' => 'An absolutely fabulous program… for yourself, your son, your daughter or otherwise. <strong>Filled with great energy, and sound fundamentals.</strong> 🤩 If you’re thinking about it - don’t think, just do! ⚡️',
                                      'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/evan.jpg',
                                  ],
+                                 [
+                                     'season' => '3',
+                                     'name' => 'Kenyatta ',
+                                     'comment' => '❤️ This was so absolutely lovely and a super fun drum lesson experience. Domino, thank you so much for putting this together for us with the Drumeo team.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/8021832C-21B0-459E-8CE1-1F315451C8AC-1692660890-593257.jpg',
+                                 ],
+                                 [
+                                     'season' => '3',
+                                     'name' => 'Anthony D ',
+                                     'comment' => 'I just wanted to thank you for your work on this program. I found an instrument I really enjoy playing because of you. You really make the workouts fun and motivating to do.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1678298286-409099.jpg',
+                                 ],
+                                 [
+                                     'season' => '3',
+                                     'name' => 'Doramu ',
+                                     'comment' => 'What a journey! I started this course on a friend\'s electric kit and finished it on my first ever acoustic drum kit. These workouts have been so much fun and the Drumeo community is so wonderfully encouraging.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1694598558-612038.jpg',
+                                 ],
                              ];
                             @endphp
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
                                     <div class="-mt-10 mb-6">
-                                        <img class="rounded-full w-[90px] h-[90px] object-cover lazyload" data-src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />
+                                        <img class="rounded-full w-[90px] h-[90px] object-cover transition-opacity opacity-0"
+                                            loading="lazy" onload="this.classList.remove('opacity-0')"
+                                            src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}" alt="{{ $testimonial['name'] }} avatar" />
                                     </div>
                                     <h6 class="mb-1 font-extrabold">{{ $testimonial['name'] }}</h6>
                                     <p><i>Season {!! $testimonial['season'] !!} Student</i></p>
-                                    <img class="my-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg" alt="stars" />
+                                    <img class="my-4 transition-opacity opacity-0"
+                                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg" alt="stars" />
                                     <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
                                 </li>
                             @endforeach
@@ -453,7 +482,9 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-10 sm:h-20 {{--mt-10 sm:mt-16 lg:mt-24--}} mb-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Just_Press_Play_logo.png" alt="just press play logo">
+            <img class="h-10 sm:h-20 {{--mt-10 sm:mt-16 lg:mt-24--}} mb-8 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Just_Press_Play_logo.png" alt="just press play logo">
             <h6 class="leading-normal mb-20 lg:mb-28">30-Day Drummer is a NEW way to learn the drums – where you learn by <em>actually</em> playing the drums. By focusing on <b>timing & coordination</b>, you’ll build your skills over thirty days following daily guided workouts with your instructor, Domino Santantonio.
                 <br><br>
                 <b>And the best part is you only need 10 minutes per day.</b></h6>
@@ -494,14 +525,18 @@
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
+                            <img class="-mt-7 rounded-lg transition-opacity opacity-0"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
                             @if(empty($getting['special']))
-                                <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
+                                <img class="-mt-7 rounded-lg transition-opacity opacity-0"
+                                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                             @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}"></div>
+                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9" style="background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }})"></div>
                             @endif
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
@@ -512,9 +547,13 @@
                 @endforeach
             </div>
             <div class="text-center -mt-10 sm:mt-0 mb-32 sm:mb-48 lg:mb-72">
-                <img class="h-10 sm:mt-2 mb-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Bonus_Icon.svg" alt="bonus icon">
+                <img class="h-10 sm:mt-2 mb-1 transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Bonus_Icon.svg" alt="bonus icon">
                 <p class="text-drumeo"><strong>LIMITED TIME BONUS</strong></p>
-                <img class="h-16 sm:h-20 my-3 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/headshot.jpg" alt="headshot"><br>
+                <img class="h-16 sm:h-20 my-3 rounded-full transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/headshot.jpg" alt="headshot"><br>
                 <h4><strong>Performance review by Domino!</strong></h4>
                 <p class="max-w-sm leading-normal mt-4">You can submit a video of yourself performing for the chance to get a personalized review from Domino!</p>
             </div>
@@ -523,12 +562,19 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-14" data-open="trailer">
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-14"
+                x-on:click="trailer = true;">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel2.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                    x-ref="playToLearnVideo"
+                    x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                    x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                    data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel2.mp4" type="video/mp4" autoplay muted loop playsinline></video>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-28 sm:h-36 lg:h-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">
+                <img class="h-28 sm:h-36 lg:h-48 transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-drumeo mr-5"></i> Daily guided drum workouts<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Weekly LIVE Q&A workshops<br>
@@ -547,7 +593,9 @@
                     href="#final"
                     class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
             @endif
-            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
+            <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
         </div>
@@ -556,7 +604,9 @@
     <section class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Screen.png" alt="screen">
+                <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Screen.png" alt="screen">
                 <div class="flex-grow sm:pl-7">
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the way.</strong></h3>
                     <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your lessons, you can ask your instructor at each week’s LIVE Q&A event. Domino will be there to help you through any sticking points and keep you motivated to complete the full course.</h6>
@@ -586,32 +636,42 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30 day drummer logo"> <strong>...is designed for:</strong></h2>
+            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30 day drummer logo"> <strong>...is designed for:</strong></h2>
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:w-1/4 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/new_drummers.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>New<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl" style="background-image:url(https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/new_drummers.jpg)">
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-opacity opacity-0"
+                                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>New<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">If you’re picking up drums for the first time, 30-Day Drummer is perfect for you. From lesson one, you’ll be learning skills to help you play with REAL music.</p>
                 </div>
                 <div class="w-full sm:w-1/4 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/returning_drummers.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>Returning<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl" style="background-image:url(https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/returning_drummers.jpg)">
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-opacity opacity-0"
+                                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>Returning<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Get BACK into drumming by focusing on timing & feel. You’ll build a strong foundation to play your favorite songs with confidence.</p>
                 </div>
                 <div class="w-full sm:w-1/4 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/experienced_drummers.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>Experienced<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl" style="background-image:url(https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/experienced_drummers.jpg)">
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-opacity opacity-0"
+                                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>Experienced<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">If you already play the drums, 30-Day Drummer will help you revisit the fundamentals. You’ll be focusing on beginner beats but playing them with precision.</p>
                 </div>
                 <div class="w-full sm:w-1/4 px-2">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/other_musicians.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br> Other<br class="hidden sm:inline lg:hidden"> Musicians</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl" style="background-image:url(https://www.musora.com/musora-cdn/image/width=530,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/other_musicians.jpg)">
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-opacity opacity-0"
+                                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br> Other<br class="hidden sm:inline lg:hidden"> Musicians</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Learning the drums can help existing musicians improve their rhythm. You’ll skip the theory and get right into playing the drums with music from day one.</p>
@@ -628,7 +688,9 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Logo_white.png" alt="30 day drummer logo"></td>
+                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-opacity opacity-0"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Logo_white.png" alt="30 day drummer logo"></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong></td>
                         <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Drum<br> Books</strong></td>
@@ -684,7 +746,9 @@
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(to bottom, #d70b3b, #9d1032);">
         <div class="container max-w-2xl mx-auto">
             <div class="-mt-14 sm:-mt-20 lg:-mt-28 mb-7">
-                <img class="block h-20 sm:h-24 mx-auto lazyload animated infinite bounce slower" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Important_Icon.svg" alt="important icon">
+                <img class="block h-20 sm:h-24 mx-auto animated infinite bounce slower transition-opacity opacity-0"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Important_Icon.svg" alt="important icon">
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — <strong>and you need to register before the course begins on February 26th.</strong></h6>
@@ -704,7 +768,9 @@
         <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/coach-image.png" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 130%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
@@ -722,17 +788,23 @@
                     </h6>
                     <div class="flex justify-between text-center mt-7 lg:mt-10">
                         <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                            <img class="h-6 sm:h-8 transition-opacity opacity-0"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
                             <h3 class="mt-2"><strong>1.6M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
                         </div>
                         <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                            <img class="h-6 sm:h-8 transition-opacity opacity-0"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
                             <h3 class="mt-2"><strong>23M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">views</p>
                         </div>
                         <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                            <img class="h-6 sm:h-8 transition-opacity opacity-0"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
+                                src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
                             <h3 class="mt-2"><strong>505k</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>
                         </div>
@@ -744,7 +816,9 @@
             <div class="flex flex-wrap text-left">
                 <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
                     <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg" alt="Larnell lewis">
+                        <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0"
+                            loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg" alt="Larnell lewis">
                         <p class="pl-4"><strong>Larnell Lewis</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">Grammy-winner, Snarky Puppy</em><br>
                             “Domino’s passion for drumming is infectious! It’s a great reminder that all we need is a love for music and drums to get started!”
@@ -753,7 +827,9 @@
                 </div>
                 <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
                     <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png" alt="Matt Mcguire">
+                        <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0"
+                            loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png" alt="Matt Mcguire">
                         <p class="pl-4"><strong>Matt McGuire</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">The Chainsmokers</em><br>
                             “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This program not only provides education, I'm sure you'll be entertained throughout the process.”
@@ -762,7 +838,9 @@
                 </div>
                 <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
                     <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg" alt="Dorothea Taylor">
+                        <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0"
+                            loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg" alt="Dorothea Taylor">
                         <p class="pl-4"><strong>Dorothea Taylor</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">The Godmother Of Drumming,<br> Educator for 50+ years</em><br>
                             “Domino plays drums with high energy & passion which shows how much fun playing drums can be.”
@@ -771,7 +849,9 @@
                 </div>
                 <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
                     <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">
+                        <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0"
+                            loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">
                         <p class="pl-4"><strong>Jared Falk</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
                             “Every-time I watch and listen to Domino Santantonio play drums I smile. She plays with joy, teaches with passion, and inspires drummers to take action.”
@@ -785,7 +865,9 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course, guaranteed.</strong></h2>
 
             <h6 class="leading-normal">30-Day Drummer is a NEW way to learn the drums – and for less than a month of private lessons, you’ll enjoy frustration-free progress to improve your timing, coordination, and musicality.
@@ -799,12 +881,12 @@
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
-            <img class="h-20 sm:h-28 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD season 2">
+            <img class="h-20 sm:h-28 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD season 2">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
 
             <h6 class="leading-normal mb-4">
-                <strong>EARLY BIRD SPECIAL:</strong> Get a free practice & sticks <br class="hidden sm:inline md:hidden">when you enroll before February 19th.
-                <br>
                 <span class="text-drumeo">Enrollment closes in
                     <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -857,7 +939,9 @@
                     </a>
                 </div>
                 <div class="flex w-full justify-center xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/marketing/drumeo/products/30-day-drummer/season-4/collage.png" alt="order collage image">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/marketing/drumeo/products/30-day-drummer/season-4/collage.png" alt="order collage image">
                 </div>
             </div>
         </div>
@@ -928,25 +1012,31 @@
 
             <div class="flex flex-wrap sm:flex-nowrap">
                 <div class="w-full sm:w-1/3 px-4 mb-6 sm:mb-0">
-                    <img class="h-16 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=120,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/RCM_logo.svg" alt="RCM logo">
+                    <img class="h-16 mb-4 transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=120,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/RCM_logo.svg" alt="RCM logo">
                     <p>“Research by the Royal College of Music has found that drumming has a positive impact on mental health, with a 10-week programme of group drumming reducing depression by as much as 38% and anxiety by 20%.”</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-4 mb-6 sm:mb-0">
-                    <img class="h-16 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Economist_logo.svg" alt="Economist logo">
+                    <img class="h-16 mb-4 transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Economist_logo.svg" alt="Economist logo">
                     <p>“Music is good for the health. And drumming may be best of all. As well as being physically demanding, it requires people to synchronize their limbs and to react to outside stimuli”</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-4">
-                    <img class="h-16 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/iHeart_logo.svg" alt="iHeart logo">
+                    <img class="h-16 mb-4 transition-opacity opacity-0"
+                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                        src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/iHeart_logo.svg" alt="iHeart logo">
                     <p>“Drummers scored higher on an intelligence test and showed a correlation between using multiple limbs to keep a steady beat and a natural ability to problem solve.”</p>
                 </div>
             </div>
         </div>
     </section>
 
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/884916532?h=87d3e7a97a&autoplay=1',
-        "title" => 'trailer'
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '884916532',
+        'vimeo' => true,
     ])
 
     @include("drumeo.sales.partials._footer")
@@ -957,9 +1047,6 @@
     ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
@@ -971,7 +1058,6 @@
 
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('online');
@@ -986,6 +1072,4 @@
             });
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-
 @stop
