@@ -79,16 +79,24 @@
                 <label id="multiSelect" class="tw-flex tw-flex-col tw-mb-2 tw-relative">
                     <span class="tw-m-2 tw-font-bold tw-leading-0">Spoken Languages<span>*</span></span>
                     <div class="tw-relative tw-flex tw-justify-start">
-                        <select ref="languageInput" name="student_form_languages[]" id="student_form_languages" class="tw-bg-transparent tw-rounded-full tw-absolute tw-w-full tw-h-full tw-min-h-[24px]" @click="languageContainerClick" @change="(event) => selectLanguage(event.target.value)">
+                        <select
+                            ref="languageInput" name="student_form_languages[]" id="student_form_languages"
+                            class="tw-bg-transparent tw-rounded-full tw-absolute tw-w-full tw-h-full tw-min-h-[24px]"
+                            :class="selectedLanguages.length > 0 ? 'tw-rounded-lg' : 'tw-rounded-full'"
+                            @click="languageContainerClick" @change="(event) => selectLanguage(event.target.value)">
                             <option value="" class="bg-white text-black">Select</option>
                             <option v-for="language in languages" class="bg-white text-black" :value="language['value']">{{ language['value'] }}</option>
                         </select>
                         <div class="tw-max-w-[85%] tw-py-2 tw-px-3">
                             <div class="tw-flex tw-flex-wrap tw-gap-2 tw-z-20 tw-items-center tw-min-h-[26px] tw-bg-[#F9F9F9] dark:tw-bg-[#000C18] tw-relative tw-rounded-full">
-                                <div v-for="language in selectedLanguages" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-rounded-full tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center">{{ language }} <span @click="selectLanguage(language)" class="tw-cursor-pointer tw-ml-1">x</span></div>
+                                <div
+                                    v-for="language in selectedLanguages"
+                                    class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center"
+                                    :class="selectedLanguages.length > 0 ? 'tw-rounded-lg' : 'tw-rounded-full'"
+                                >{{ language }} <span @click="selectLanguage(language)" class="tw-cursor-pointer tw-ml-1">x</span></div>
                             </div>
                         </div>
-                        <div v-if="selectedLanguages.length" class="tw-absolute tw-right-10 tw-top-0 tw-h-full tw-flex tw-items-center"><XIcon class="tw-w-[13px] tw-h-[13px] tw-cursor-pointer" @click="resetSelectedLanguages" /></div>
+                        <div v-if="selectedLanguages.length" class="tw-absolute tw-right-10 tw-top-0 tw-h-full tw-flex tw-items-center"><XIcon class="tw-w-[16px] tw-h-[16px] tw-cursor-pointer" @click="resetSelectedLanguages" /></div>
                     </div>
                 </label>
 
