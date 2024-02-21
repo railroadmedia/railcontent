@@ -132,18 +132,6 @@ const saveData = (playlistId) => {
             addLowRoutine: includeLowRoutine.value,
             addHighRoutine: includeHighRoutine.value,
             token,
-        }).then(function(response) {
-            if(response.status === 200) {
-                //Check if limit has exceeded.....
-                if(Object.keys(response.data)[0] === 'limit_excedeed') {
-                    window.shownotification({
-                        icon: 'error',
-                        text: `You have reached the max limit of items. Delete one or more of your items to free up space or create a new playlist.`
-                    });
-                    return false;
-                }
-                return response;
-            }
         });
     } else {
         return PlaylistService.addToPlaylist({
