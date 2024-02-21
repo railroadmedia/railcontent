@@ -278,7 +278,7 @@ onMounted(() => {
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
             const { data: { soundslice_assignments_count, lessons_count } } = r;
             additionalItems.value = soundslice_assignments_count;
-            totalItems.value = soundslice_assignments_count + lessons_count;
+            totalItems.value = lessons_count ? soundslice_assignments_count + lessons_count : soundslice_assignments_count;
             isLoadingAssignments.value = false;
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
