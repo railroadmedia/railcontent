@@ -1,5 +1,5 @@
 <script setup>
-import Breadcrumb from '../Breadcrumb/BreadcrumbV2.vue';
+import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
 import UnifiedHeader from '../Unified/UnifiedHeader.vue';
 
 //Vuesora components
@@ -53,10 +53,10 @@ const props = defineProps({
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
-    <UnifiedHeader>
+    <UnifiedHeader classOverride="tw-mt-[20px]">
         <template v-slot:left-content>
             <div class="tw-flex">
-                <div class="tw-rounded-full tw-w-[115px] tw-h-[115px] tw-border-[2px] tw-border-white" :style="{ backgroundImage: `url(${collectionAvatar})` }"></div>
+                <div class="tw-rounded-full tw-w-[115px] tw-h-[115px] tw-border-[2px] tw-border-white tw-bg-cover" :style="{ backgroundImage: `url(${collectionAvatar})` }"></div>
                 <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white tw-pl-[20px]">
                     <h3 class="tw-pb-[10px] tw-text-[32px] tw-font-bold">{{ contentTitle }}</h3>
                     <div class="tw-text-[14px] tw-font-bold tw-leading-none">{{ contentSubtitle }}</div>

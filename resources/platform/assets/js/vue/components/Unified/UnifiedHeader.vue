@@ -21,12 +21,16 @@ const props = defineProps({
     backUrl: {
         type: String,
         default: '#'
-    }
+    },
+    classOverride: {
+        type: String,
+        default: ''
+    },
 })
 
 </script>
 <template>
-    <div class="tw-w-full lg:tw-container lg:tw-px-[50px]">
+    <div class="tw-w-full lg:tw-container lg:tw-px-[50px]" :class="classOverride">
         <div 
             class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center">
             <div
