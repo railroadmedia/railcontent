@@ -21,7 +21,7 @@
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
-                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :reset-progress="resetProgress"
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :show-reset-progress="showResetProgress"
                     @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
                 <CatalogueCardContainer
                     v-else
@@ -106,7 +106,7 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    resetProgress: {
+    showResetProgress: {
         type: Boolean,
         default: () => false,
     },
