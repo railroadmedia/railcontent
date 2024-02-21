@@ -238,46 +238,45 @@ class ContentService
      */
     public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $pageSize=6, $page=1)
     {
-        $sectionKey = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
-        $cacheKey = 'RECSYS-' . $user_id . '-' . $brand . '-' . $sectionKey;
-        $callback = function() use ($user_id, $brand, $sections) {
-            return $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
-        };
-        $recommendations = $this->getOrCacheRecommendations($cacheKey, $callback);
-        $totalCount = count($recommendations);
-        $recommendations = $this->postProcessRecommendationts($recommendations, $randomize, $pageSize, $page);
-        return $this->getContentFilterResultsFromRecommendations($recommendations, $totalCount);
-    }
-
-    private function getOrCacheRecommendations($cacheKey, $callback)
-    {
+        $sectionString = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
+        $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
         $cached = Cache::store('redis')->get($cacheKey);
         // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
         $useCaching = env('RECSYS_BE_CACHE', true);
         if($useCaching && !is_null($cached)) {
             $recommendations = $cached;
         } else {
-            $recommendations = $callback();
+            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
             $ttl = 60 * 60;
             Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
         }
-        return $recommendations;
+        $processedRecommendations = $this->postProcessRecommendationts($recommendations, $randomize, $pageSize, $page);
+        return $this->getContentFilterResultsFromRecommendations($processedRecommendations);
     }
 
     private function postProcessRecommendationts($recommendations, $randomize, $pageSize, $page)
     {
+        if (!$recommendations) {
+            return [
+                'recommendations' => [],
+                'totalCount' => 0
+            ];
+        }
         $recommendations = zipperMerge($recommendations);
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
         } else {
             $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
         }
-        return $recommendations;
+        return [
+            'recommendations' => $recommendations,
+            'totalCount' => count($recommendations)
+        ];
     }
 
-    private function getContentFilterResultsFromRecommendations($recommendations, $totalCount)
+    private function getContentFilterResultsFromRecommendations($recommendations)
     {
-        $content = $this->getByIds($recommendations);
+        $content = $this->getByIds($recommendations['recommendations']);
         $filterOptions = [
             "style" => ["All"],
             "topic" => ["All"],
@@ -289,7 +288,7 @@ class ContentService
         return (new ContentFilterResultsEntity([
             'results' => $content,
             'filter_options' => $filterOptions,
-            'total_results' => $totalCount
+            'total_results' => $recommendations['totalCount']
         ]));
     }
 

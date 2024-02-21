@@ -49,7 +49,7 @@ class RecommendationService
         if ($sections) {
             $content = [];
             foreach($sections as $section) {
-                $content[$section->value] = $allContent[$section->value];
+                $content[$section->value] = $allContent[$section->value] ?? [];
             }
             // all sections state
         } else {
@@ -80,7 +80,7 @@ class RecommendationService
         ];
 
         $content = $this->postToHuggingFaceWithRetry($url, $data);
-        return $content[$userID];
+        return $content[$userID] ?? [];
     }
 
     private function getAllFilteredRecommendations($userID, $brand)
@@ -91,7 +91,7 @@ class RecommendationService
             'brand' => $brand,
         ];
         $content = $this->postToHuggingFaceWithRetry($url, $data);
-        return $content[$userID];
+        return $content[$userID] ?? [];
     }
 
     private function postToHuggingFaceWithRetry($url, $data) {
@@ -105,7 +105,7 @@ class RecommendationService
             $status = $response->status();
             Log::warning("HuggingFace return an unexpected response with code: $status");
         }
-        return $content;
+        return $response->status() == 200 ? $content : [];
     }
 
 // The following code includes functionality using a direct PDO connection to the snowflake db instead of through a web api.
