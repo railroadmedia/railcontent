@@ -273,11 +273,10 @@ onBeforeMount(() => {
                     <p class="tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs"
                         :class="[{ 'md:tw-block': !cueVersion }]">
                         <!-- Breadcrumb -->
-                        <template v-if="lesson.type === 'assignment'">
-                            <span v-for="(route, i) in lesson.route" :key="i">
-                                {{ route }}<span v-if="i != (lesson.route.length - 1)" class="tw-px-1">•</span>
-                            </span>
-                        </template>
+                        <span v-for="(route, i) in lesson.route" :key="i">
+                            {{ route }}<span v-if="i != (lesson.route.length - 1)" class="tw-px-1">•</span>
+                        </span>
+
                         <!-- if instrumentless -->
                         <template v-if="lesson.type === 'song' && !state.isFullTrack">
                             <span>{{ instrument }}less</span>
@@ -292,8 +291,7 @@ onBeforeMount(() => {
                     </p>
                     <!-- description / Time Stamp-->
                     <div class="tw-flex tw-items-center tw-w-full">
-                        <p class="tw-font-bold tw-text-sm tw-whitespace-normal tw-line-clamp-1">{{
-                            lessonDescription }}</p>
+                        <p class="tw-font-bold tw-text-sm tw-whitespace-normal tw-line-clamp-1">{{ lessonDescription }}</p>
                         <!-- Time Stamp Icon -->
                         <button v-if="!cueVersion"
                             :title="`Begins ${duration_formatted(lesson.start_second) || '0:00:00'}&nbsp; • &nbsp;Ends ${duration_formatted(lesson.end_second) || duration_formatted(lesson.duration) || '0:00:00'}`">
