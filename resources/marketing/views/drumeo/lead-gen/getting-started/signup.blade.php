@@ -213,10 +213,11 @@ $lessons = [
                 <h6 class="uppercase text-drumeo leading-normal text-[#15C5FD]">MEET YOUR TEACHER</h6>
                 <h2><strong>Domino Santantonio</strong></h2>
                 <h6 class="leading-normal mt-4 lg:mt-6">
-                    Domino Santantonio is one of the world’s most viewed drummers.<br><br>
-                    And she’s achieved this with her engaging & supportive style of drumming – always smiling and reminding you why playing the drums is so fun & healthy. Who better to jumpstart your drumming progress?<br><br>
-                    Plus, Domino is also your personal guide through the course.<br><br>
-                    At the end of every week, you’ll have a Q&A session with Domino where you can ask her any questions you had during the lessons.
+                    Domino Santantonio is one of the world’s most viewed drummers today—garnering millions of views on TikTok and Youtube.
+                    <br><br>
+                    You’ll love Domino's engaging & supportive style of teaching – she’s always smiling and reminding you why playing the drums is so fun & rewarding. Who better to jumpstart your drumming progress?
+                    <br><br>
+                    Join her as she takes you through basic beats, breaking them down step by step. In just a few short lessons, you’ll go from total beginner to having the skills you need to play a full song. And maybe even start a band?
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
