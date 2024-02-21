@@ -146,7 +146,6 @@
         :content-instructors="{{ json_encode($lessonContent->fetch('*fields.instructor')) }}"
         user-email="{{ user()->email }}"
         report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
-        report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
     >
     </playlist-playback>
 @endsection
