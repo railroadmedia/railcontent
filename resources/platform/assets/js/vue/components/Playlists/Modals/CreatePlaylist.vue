@@ -125,7 +125,6 @@
                         text: `${payload.name} was been successfully created.`
                     })
                     if (props.playlist.hasAddItemCallback) {
-                        // console.log('has add item callback', response.data)
                         window.addItemCallback(response.data.data[0].id)
                     }
                     //load Playlists (if collection catalog exists)
@@ -249,11 +248,10 @@
 
     //----------Lifecycle Hooks----------//
     onBeforeMount(()=> {
-        console.log('additional items', typeof props.playlist.additionalItems, props.playlist.additionalItems)
         //Load Data
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
-        state.description = props.playlist.description.replace(/(<([^>]+)>)/gi, "");
+        state.description = props.playlist.description?.replace(/(<([^>]+)>)/gi, "");
         state.category = props.playlist.category || 'General';
 
         //get url params
