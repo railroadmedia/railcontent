@@ -80,6 +80,9 @@ class RecommendationService
         ];
 
         $content = $this->postToHuggingFaceWithRetry($url, $data);
+        if (!isset($content[$userID])) {
+            Log::warning("Malformed data from Huggingface: $content");
+        }
         return $content[$userID] ?? [];
     }
 
@@ -91,6 +94,9 @@ class RecommendationService
             'brand' => $brand,
         ];
         $content = $this->postToHuggingFaceWithRetry($url, $data);
+        if (!isset($content[$userID])) {
+            Log::warning("Malformed data from Huggingface: $content");
+        }
         return $content[$userID] ?? [];
     }
 
