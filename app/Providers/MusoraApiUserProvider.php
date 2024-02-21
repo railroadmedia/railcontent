@@ -189,6 +189,12 @@ class MusoraApiUserProvider implements UserProviderInterface
             $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
         }
 
+        $completedWorkouts = $this->contentService->countByTypesRecentUserProgressState(
+            ['workout'],
+            $user->id,
+            'completed'
+        );
+
         return array_merge([
             'id' => $user->id,
             'email' => $user->email,
@@ -204,6 +210,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'has_completed_method' => $hasCompletedMethod ?? false,
             'login_as_users' => $user->hasRole('login_as_users'),
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
+            'completed_workouts' => $completedWorkouts,
         ], $extraData);
     }
 
