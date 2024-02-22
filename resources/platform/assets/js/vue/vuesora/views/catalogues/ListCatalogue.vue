@@ -24,7 +24,6 @@
                 :destroy-on-list-removal="destroyOnListRemoval"
                 :compact-layout="compactLayout"
                 @addToList="emitAddToList"
-                @progressReset="handleProgressReset()"
                 @addEvent="addEventToDropdown"
             ></catalogue-list-item>
 
@@ -55,7 +54,6 @@
                     :destroy-on-list-removal="destroyOnListRemoval"
                     :compact-layout="compactLayout"
                     @addToList="emitAddToList"
-                    @progressReset="handleProgressReset()"
                     @addEvent="addEventToDropdown"
                 />
             </div>
