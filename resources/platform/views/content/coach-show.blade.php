@@ -1,6 +1,27 @@
 @php
     $firstLastName = preg_split('/\s+/', $thisCoach->fetch('fields.name'));
     $currentUserSubscribed = $thisCoach->fetch('current_user_is_subscribed');
+
+    $ctas = [
+        [
+            'type' => 'PageHeaderCta',
+            'props' => [
+                'text' => $currentUserSubscribed ? 'Unsubscribe' : 'Subscribe',
+                'url' => $currentUserSubscribed ? url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')]) : url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
+                'faIconClass' => 'fa-bell'
+            ]
+        ]
+    ];
+    
+    $infoDataStrArr = [];
+    if ($thisCoach->fetch('data.focus_text','')) {
+        $infoDataStrArr = [
+            $thisCoach->fetch('data.focus_text','')
+        ];
+    }
+
+    $ctasJson = json_encode($ctas);
+    $infoDataStrArrJson = json_encode($infoDataStrArr);
 @endphp
 
 @extends('partials.layout')
@@ -23,7 +44,7 @@
         ]
     ])
 
-    @component('partials.bladesora.members.components.coach-header-banner', [
+    <!-- @component('partials.bladesora.members.components.coach-header-banner', [
         'brandName' => '{{ $brand }}',
         'hideUser' => true,
         'backgroundImage' => $thisCoach->fetch('data.coach_top_banner_image'),
@@ -40,7 +61,16 @@
         'subscribeUrl' => url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
         'unsubscribeUrl' => url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')])
         ])
-    @endcomponent
+    @endcomponent -->
+
+    <page-header
+        page-type="{{ $thisCoach->fetch('type') }}"
+        :title="'{{ $firstLastName[0] }}' + ' ' + '{{ $firstLastName[1] }}'"
+        hero-img="{{ $thisCoach->fetch('data.coach_top_banner_image') }}"
+        :info-data="{{ $infoDataStrArrJson }}"
+        :ctas="{{ $ctasJson }}"
+    >
+    </page-header>
 
     @if( !empty($coachEvent) )
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">

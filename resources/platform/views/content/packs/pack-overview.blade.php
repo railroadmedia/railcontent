@@ -30,6 +30,14 @@
     ];
 
     $ctasJson = json_encode($ctas);
+
+    $infoDataStrArr = [];
+    if (isset($infoData['lessons']) && isset($infoData['xp'])) {
+        $infoDataStrArr = [
+            $infoData['lessons'] . ' Lessons',
+            $infoData['xp'] . ' XP'
+        ];
+    }
 @endphp
 
 @section('content')
@@ -97,12 +105,12 @@
 
         <page-header
             page-type="{{ $parentContent->fetch('type') }}"
-            title="Packs"
+            title="Pack"
             hero-img="{{ $pack->fetch('data.header_image_url') }}"
             dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
             light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
             progress="{{ $parentContent->fetch('progress_percent', 0) }}"
-            :info-data="{{ json_encode($infoData) }}"
+            :info-data="{{ json_encode($infoDataStrArr) }}"
             :ctas="{{ $ctasJson }}"
         >
         </page-header>

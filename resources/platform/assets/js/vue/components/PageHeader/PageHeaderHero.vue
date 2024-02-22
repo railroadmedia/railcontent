@@ -12,17 +12,16 @@
     </template>
 
     <div class="tw-flex tw-flex-col pl-2 tw-self-stretch tw-mr-1 tw-w-full">
-      <div class="tw-h-full tw-flex" :class="[additionalImgSrc ? 'tw-items-center' : 'tw-flex-col tw-justify-center']">
+      <div class="tw-h-full tw-flex flex-column" :class="{ 'tw-flex-col tw-justify-center': !additionalImgSrc }">
         <template v-if="additionalImgSrc">
           <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] sm:tw-h-[86px]">
         </template>
         <template v-else>
-          <span v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">{{ title }}</span>
-          <span v-if="subTitle"
-            class="tw-mt-2.5 tw-text-[20px] font-semibold dark:tw-text-[#9EC0DC] tw-uppercase tw-leading-5">{{ subTitle
-            }}</span>
-          <span v-if="description">{{ description }}</span>
+          <span v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize tw-mb-1">
+            {{ title }}
+          </span>
         </template>
+        <PageHeaderRowInfo v-if="infoData" :class="{ 'mb-1': $slots['ctas'] }" :infoData="infoData" />
         <!-- Modal for Desktop -->
         <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-info']">
           <musora-icon @click="openModal" icon-name="info"
@@ -63,21 +62,17 @@
 
 <script setup>
 import { defineProps, ref } from 'vue';
-import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import Tooltip from "../Tooltip/Tooltip";
+import PageHeaderRowInfo from "./PageHeaderRowInfo";
 
 const props = defineProps({
   iconName: String,
   heroImg: String,
   title: String,
-  subTitle: String,
-  description: String,
+  infoData: Array,
   additionalImgSrc: String,
-  primaryCtaIcon: String,
-  primaryCtaUrl: String,
-  primaryCtaText: String,
   secondaryCtaText: String,
 })
 

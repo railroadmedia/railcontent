@@ -65,10 +65,27 @@ const defaultThumbnail = computed(() => {
         pianote: "https://www.musora.com/musora-cdn/image/width=200,quality=95/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/6441483e-102a-4e46-6a7b-eae2bdd46400/public",
     }[brand.value];
 });
+
+const ctaConfig = computed(() => {
+    if (props.contentType === 'song') {
+        return [
+            {
+                type: 'SongRequest'
+            },
+        ];
+    }
+});
+
+const infoData = computed(() => {
+    const regex = /(\d+\s\w+)/g;
+    const items = props.contentSubtitle.match(regex);
+    return items
+})
+
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
-    <UnifiedHeader classOverride="tw-mt-[20px]">
+    <!-- <UnifiedHeader classOverride="tw-mt-[20px]">
         <template v-slot:left-content>
             <div class="tw-flex">
                 <div class="tw-rounded-full tw-w-[115px] tw-h-[115px] tw-border-[2px] tw-border-white tw-bg-cover" :style="{ backgroundImage: `url(${defaultThumbnail})` }"></div>
@@ -81,16 +98,13 @@ const defaultThumbnail = computed(() => {
         <template v-if="contentType === 'song'" v-slot:right-content>
             <SongRequest />
         </template>
-    </UnifiedHeader>
+    </UnifiedHeader>  -->
+    <PageHeader v-if="contentType === 'song'" :pageType="contentType" :title="contentTitle" :heroImg="collectionAvatar"
+        :infoData="infoData" :ctas="ctaConfig" />
+
     <div class="lg:tw-container lg:tw-px-[50px] tw-mx-auto tw-pt-[30px]">
-        <CollectionWrapper
-            :pre-loaded-content="preLoadedContent"
-            :tab-options="[
-                { key: 'allContent', value: `All ${pluralContentType}` },
-            ]"
-            :filterable-values="filterableValues"
-            :required-fields="requiredFields"
-            :collection-type="contentType"
-        />
+        <CollectionWrapper :pre-loaded-content="preLoadedContent" :tab-options="[
+            { key: 'allContent', value: `All ${pluralContentType}` },
+        ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType" />
     </div>
 </template>
