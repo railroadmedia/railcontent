@@ -71,26 +71,7 @@ export default function useUserCatalogueEvents(props, context) {
     }
 
     function resetProgressEventHandler(payload) {
-        const post_index = props.content.map(post => post.id).indexOf(payload.content_id);
-
-        ContentService.resetContentProgress(payload.content_id)
-            .then((response) => {
-                if (response) {
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'READY TO START AGAIN?',
-                        themeColor: props.themeColor,
-                        message: 'Your progress has been reset.',
-                    });
-
-                    props.content.splice(post_index, 1);
-                }
-
-                if(payload.icon) {
-                    payload.icon.classList.remove('fa-spin', 'fa-spinner');
-                    payload.icon.classList.add('fa-undo');
-                }
-            });
+        return ContentService.resetContentProgress(payload.content_id);
     }
 
     function addEvent(payload) {
