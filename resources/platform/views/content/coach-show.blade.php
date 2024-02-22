@@ -7,7 +7,10 @@
             'type' => 'PageHeaderCta',
             'props' => [
                 'text' => $currentUserSubscribed ? 'Unsubscribe' : 'Subscribe',
-                'url' => $currentUserSubscribed ? url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')]) : url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
+                'contentFunction' => $currentUserSubscribed ? 'unfollowCoach' : 'followCoach',
+                'payload' => [
+                    'coachId' => $thisCoach->fetch('id')
+                ],
                 'faIconClass' => 'fa-bell'
             ]
         ]

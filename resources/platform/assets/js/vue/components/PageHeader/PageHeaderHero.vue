@@ -12,16 +12,16 @@
     </template>
 
     <div class="tw-flex tw-flex-col pl-2 tw-self-stretch tw-mr-1 tw-w-full">
-      <div class="tw-h-full tw-flex flex-column" :class="{ 'tw-flex-col tw-justify-center': !additionalImgSrc }">
+      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="{ 'tw-justify-center': !additionalImgSrc }">
         <template v-if="additionalImgSrc">
           <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] sm:tw-h-[86px]">
         </template>
         <template v-else>
-          <span v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize tw-mb-1">
+          <span v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">
             {{ title }}
           </span>
         </template>
-        <PageHeaderRowInfo v-if="infoData" :class="{ 'mb-1': $slots['ctas'] }" :infoData="infoData" />
+        <PageHeaderRowInfo v-if="infoData" class="tw-mt-2" :class="{ 'tw-mb-2': $slots['ctas'] }" :infoData="infoData" />
         <!-- Modal for Desktop -->
         <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-info']">
           <musora-icon @click="openModal" icon-name="info"

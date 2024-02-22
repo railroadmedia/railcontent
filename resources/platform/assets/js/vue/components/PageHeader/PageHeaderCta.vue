@@ -18,12 +18,15 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+import ContentService from '../../vuesora/assets/js/services/content';
 
 const props = defineProps({
     text: String,
     faIconClass: String,
     musoraIconName: String,
-    url: String
+    url: String,
+    contentFunction: String,
+    payload: Object,
 });
 
 const hasIcon = () => {
@@ -32,7 +35,15 @@ const hasIcon = () => {
 
 const emit = defineEmits(['click']);
 
-const emitClick = () => {
+const emitClick = async () => {
     emit('click');
+    if (props.contentFunction) {
+        if (props.payload) {
+            await ContentService[props.contentFunction](props.payload);
+        } else {
+            await ContentService[props.contentFunction]();
+        }
+        window.location.reload();
+    }
 };
 </script>
