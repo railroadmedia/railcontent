@@ -16,19 +16,19 @@
             title="Continue"
             seeAllAriaLabel="See All Lessons In Progress"
             :seeAllUrl="continueUrl"
-            :preLoadedContent="startedContent"
+            :preLoadedContent="startedContent.data"
             :isMiniView="true"
             :show-dropdown="true"
         />
         <!-- Recommended section -->
         <MiniCatalogueSection title="Recommended For You" seeAllAriaLabel="See All Content" :seeAllUrl="recommendedContentUrl"
-                              :preLoadedContent="recommendedContent" v-if="hasRecommendations" />
+                              :preLoadedContent="recommendedContent.data" v-if="hasRecommendations" />
         <!-- Workouts section -->
         <MiniCatalogueSection v-if="workoutsContent.data.length" title="Workouts" seeAllAriaLabel="See All Workouts" :seeAllUrl="workoutsContentUrl"
-            :preLoadedContent="workoutsContent" />
+            :preLoadedContent="workoutsContent.data" />
         <!-- New section -->
         <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"
-            :preLoadedContent="newContent" />
+            :preLoadedContent="newContent.data" />
         <!-- Playlist section -->
         <ListSection :newContentUrl="newContentUrl" :usersList="usersList" :my-list-url="`/${brand}/playlists`" />
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
@@ -44,7 +44,7 @@
             seeAllAriaLabel="See All Upcoming Events"
             :seeAllUrl="upcomingUrl"
             :force-no-links="true"
-            :preLoadedContent="upcomingEvents"
+            :preLoadedContent="upcomingEvents.data"
         />
 
         <!-- Stats section -->
