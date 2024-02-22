@@ -89,7 +89,7 @@
         'reportUserName' => user()->display_name,
         'reportRecipient' => config('mailora.' . $brand . '.ask-question-recipient'),
         'reportLogo' => config('mailora.' . $brand . '.logo-link'),
-        'difficulty' => $lessonContent->fetch('fields.difficulty'),
+        'difficulty' => $lessonContent->fetch('difficulty'),
     ];
 
     $videoButtons = [

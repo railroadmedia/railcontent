@@ -11,7 +11,7 @@
                     <DotSeparator />
                     <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
                     <DotSeparator />
-                    <div>{{ lessonType }}</div>
+                    <div>{{ singularContentType }}</div>
                 </div>
             </div>
             <!-- Video CTAs -->
@@ -277,6 +277,7 @@ import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
 import DifficultyLabel from "../../../components/DifficultyLabel/DifficultyLabel.vue";
 import DotSeparator from "./DotSeparator.vue";
+import { contentTypes } from '../../../../utils';
 
 export default {
     name: "VideoResources",
@@ -442,6 +443,9 @@ export default {
             }
 
             return `${location.protocol}//${location.host}${location.pathname}`;
+        },
+        singularContentType() {
+            return contentTypes[this.lessonType]?.singular || this.lessonType;
         },
     },
     mounted() {

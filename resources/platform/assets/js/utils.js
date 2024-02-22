@@ -26,3 +26,30 @@ export const trapFocus = (element) => {
         }
     });
 }
+
+export const contentTypes = {
+    'learning-path-lesson': { singular: 'Learning Path Lesson', plural: 'Learning Path Lessons' },
+    'pack-lesson': { singular: 'Pack Lesson', plural: 'Pack Lessons' },
+    'quick-tips': { singular: 'Quick Tips', plural: 'Quick Tips' },
+    'boot-camps': { singular: 'Boot Camps', plural: 'Boot Camps' },
+    'play-along': { singular: 'Play Along', plural: 'Play Alongs' },
+    'unit': { singular: 'Unit', plural: 'Units' },
+    'student-focus': { singular: 'Student Focus', plural: 'Student Focus' },
+    'song-part': { singular: 'Song Part', plural: 'Song Parts' },
+    'podcasts': { singular: 'Podcast', plural: 'Podcasts' },
+    'workout': { singular: 'Workout', plural: 'Workouts' },
+    'rudiment': { singular: 'Rudiment', plural: 'Rudiments' },
+    'pack-bundle-lesson': { singular: 'Pack Bundle Lesson', plural: 'Pack Bundle Lessons' },
+    'semester-pack-lesson': { singular: 'Semester Pack Lesson', plural: 'Semester Pack Lessons' },
+    'challenge-part': { singular: 'Challenge Part', plural: 'Challenge Parts' },
+    'song-tutorial-children': { singular: 'Song Tutorial Children', plural: 'Song Tutorial Childrens' },
+    'song-tutorial': { singular: 'Song Tutorial', plural: 'Song Tutorials' },
+    'question-and-answer': { singular: 'Question And Answer', plural: 'Question And Answers' },
+    'coach-stream': { singular: 'Coach Stream', plural: 'Coach Streams' },
+    'course': { singular: 'Course', plural: 'Courses' },
+    'course-part': { singular: 'Course Part', plural: 'Course Parts' },
+    'song': { singular: 'Song', plural: 'Songs' },
+    'chord-and-scale': { singular: 'Chord And Scale', plural: 'Chord And Scales' },
+    'student-review': { singular: 'Student Review', plural: 'Student Reviews' },
+    'unit-part': { singular: 'Unit Part', plural: 'Unit Parts' },
+};
