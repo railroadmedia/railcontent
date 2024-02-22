@@ -17,14 +17,14 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard v-for="item in preLoadedContent" :key="'grid' + item.id" :item="item" :content-type="item.type"
+                    <MiniCatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item" :content-type="item.type"
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
                 <template v-else>
-                    <CatalogueCard v-for="item in preLoadedContent" :key="'grid' + item.id" :item="item" :content-type="item.type"
+                    <CatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item" :content-type="item.type"
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks"
@@ -33,7 +33,7 @@
                 </template>
             </div>
         </div>
-        <div v-if="!collectionStoreLoading && data.length === 0 && noResultsMessage.length > 0"
+        <div v-if="!collectionStoreLoading && getData.length === 0 && noResultsMessage.length > 0"
             class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
                 <div class="icon-wrap square"></div>
@@ -46,7 +46,7 @@
             v-if="contentTypeOverride === 'challenge'"
             modal-id="notifyModal"
             :subscription-calendar-id="subscriptionCalendarId"
-            :theme-color="brand"
+            :brand="brand"
         />
     </div>
 </template>
@@ -62,6 +62,7 @@ import { useCollectionStore } from "../../../stores/collection";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 import MiniCatalogueCard from './MiniCatalogueCard.vue';
 import { useResetProgress } from "../../hooks/useResetProgress";
+import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
     willScroll: {
@@ -127,25 +128,25 @@ const props = defineProps({
     groupByCards: {
         type: Boolean,
         default: () => false,
-    }
-
-},
-);
+    },
+    useRefData: {
+        type: Boolean,
+        default: () => false,
+    },
+});
 
 const collectionStore = useCollectionStore();
+const userStore = useUserStore();
 const { resetProgress } = useResetProgress();
+const { brand } = storeToRefs(userStore);
+const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
+const data = ref(props.preLoadedContent);
 
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
-// Refs
-const initializeData = () => {
-    if (props.preLoadedContent) {
-        return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : props.preLoadedContent.data;
-    }
-    return [];
-}
-
-const data = ref(initializeData());
+const getData = computed(() =>{
+    return props.useRefData ? data.value : props.preLoadedContent;
+})
 
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value);
@@ -171,25 +172,9 @@ const isChallenge = computed(() => {
     return props.contentTypeOverride === 'challenge';
 });
 
-const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, data });
+const { addToList } = useUserCatalogueEvents({ ...props });
 
 const handleProgressReset = (payload) => {
-    resetProgress(payload.content_id, { value: 'fas fa-redo-alt fa-flip-horizontal' }, true);
-    // const tempData = data.value;
-    // const post_index = data.value.map(post => post.id).indexOf(payload.content_id);
-    // data.value.splice(post_index, 1);
-    //
-    // resetProgressEventHandler(payload).then(() => {
-    //     window.shownotification({
-    //         icon: 'check',
-    //         text: 'READY TO START AGAIN? Your progress has been reset.'
-    //     });
-    // }).catch(() => {
-    //     data.value = tempData;
-    //     window.shownotification({
-    //         icon: 'error',
-    //         text: 'There was an error performing this request, try again later or contact support.'
-    //     });
-    // });
+    resetProgress(payload.content_id, resetIcon, true, data);
 }
 </script>
