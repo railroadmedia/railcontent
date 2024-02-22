@@ -3,15 +3,16 @@
         <div class="tw-flex tw-items-start tw-justify-between tw-mb-4 tw-flex-wrap">
 
             <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
-                <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
+                <h1 class="heading tw-pt-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
-                <p class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex dark:tw-text-[#9EC0DC]">
-                    <span>{{ instructors[0]?.name }}&nbsp;&nbsp;<span class="tw-text-[12px] tw-h-full tw-flex tw-items-center tw-justify-center">●</span>&nbsp;&nbsp;</span>
-                    <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty"
-                                    textCase="capitalize" />
-                    <span>&nbsp;&nbsp;<span class="tw-text-[12px] tw-h-full tw-flex tw-items-center tw-justify-center">●</span>&nbsp;&nbsp;{{ lessonType }}</span>
-                </p>
+                <div class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
+                    <div class="tw-uppercase">{{ instructors[0]?.name }}</div>
+                    <DotSeparator />
+                    <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
+                    <DotSeparator />
+                    <div>{{ lessonType }}</div>
+                </div>
             </div>
             <!-- Video CTAs -->
             <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
@@ -275,6 +276,7 @@ import ReportModal from "../../../components/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
 import DifficultyLabel from "../../../components/DifficultyLabel/DifficultyLabel.vue";
+import DotSeparator from "./DotSeparator.vue";
 
 export default {
     name: "VideoResources",
@@ -285,6 +287,7 @@ export default {
         XIcon,
         FlagIcon,
         DifficultyLabel,
+        DotSeparator,
     },
     mixins: [ThemeClasses],
     props: {
