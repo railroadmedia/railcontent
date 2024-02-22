@@ -2269,7 +2269,7 @@ class ContentService
                             ->where('ucp_3.user_id', $userId);
                     }
                 )
-                ->leftJoin(265:35
+                ->leftJoin(
                     'railcontent_user_content_progress AS ucp_4',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
