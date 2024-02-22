@@ -82,6 +82,10 @@ const infoData = computed(() => {
     return items
 })
 
+const heroImg = computed(() => {
+    return props.collectionAvatar ?? defaultThumbnail;
+});
+
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
@@ -99,7 +103,7 @@ const infoData = computed(() => {
             <SongRequest />
         </template>
     </UnifiedHeader>  -->
-    <PageHeader v-if="contentType === 'song'" :pageType="contentType" :title="contentTitle" :heroImg="collectionAvatar"
+    <PageHeader v-if="contentType === 'song'" :pageType="contentType" :title="contentTitle" :heroImg="heroImg"
         :infoData="infoData" :ctas="ctaConfig" />
 
     <div class="lg:tw-container lg:tw-px-[50px] tw-mx-auto tw-pt-[30px]">
