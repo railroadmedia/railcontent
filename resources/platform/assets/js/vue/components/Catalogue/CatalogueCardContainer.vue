@@ -17,14 +17,14 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard v-for="item in data" :key="'grid' + item.id" :item="item" :content-type="item.type"
+                    <MiniCatalogueCard v-for="item in preLoadedContent" :key="'grid' + item.id" :item="item" :content-type="item.type"
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
                 <template v-else>
-                    <CatalogueCard v-for="item in data" :key="'grid' + item.id" :item="item" :content-type="item.type"
+                    <CatalogueCard v-for="item in preLoadedContent" :key="'grid' + item.id" :item="item" :content-type="item.type"
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks"
@@ -42,11 +42,11 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
-        <AddEventModal 
-            v-if="contentTypeOverride === 'challenge'" 
+        <AddEventModal
+            v-if="contentTypeOverride === 'challenge'"
             modal-id="notifyModal"
-            :subscription-calendar-id="subscriptionCalendarId" 
-            :theme-color="brand" 
+            :subscription-calendar-id="subscriptionCalendarId"
+            :theme-color="brand"
         />
     </div>
 </template>
