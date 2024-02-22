@@ -61,6 +61,7 @@ import { storeToRefs } from "pinia";
 import { useCollectionStore } from "../../../stores/collection";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 import MiniCatalogueCard from './MiniCatalogueCard.vue';
+import { useResetProgress } from "../../hooks/useResetProgress";
 
 const props = defineProps({
     willScroll: {
@@ -132,6 +133,7 @@ const props = defineProps({
 );
 
 const collectionStore = useCollectionStore();
+const { resetProgress } = useResetProgress();
 
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
@@ -172,21 +174,22 @@ const isChallenge = computed(() => {
 const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, data });
 
 const handleProgressReset = (payload) => {
-    const tempData = data.value;
-    const post_index = data.value.map(post => post.id).indexOf(payload.content_id);
-    data.value.splice(post_index, 1);
-
-    resetProgressEventHandler(payload).then(() => {
-        window.shownotification({
-            icon: 'check',
-            text: 'READY TO START AGAIN? Your progress has been reset.'
-        });
-    }).catch(() => {
-        data.value = tempData;
-        window.shownotification({
-            icon: 'error',
-            text: 'There was an error performing this request, try again later or contact support.'
-        });
-    });
+    resetProgress(payload.content_id, { value: 'fas fa-redo-alt fa-flip-horizontal' }, true);
+    // const tempData = data.value;
+    // const post_index = data.value.map(post => post.id).indexOf(payload.content_id);
+    // data.value.splice(post_index, 1);
+    //
+    // resetProgressEventHandler(payload).then(() => {
+    //     window.shownotification({
+    //         icon: 'check',
+    //         text: 'READY TO START AGAIN? Your progress has been reset.'
+    //     });
+    // }).catch(() => {
+    //     data.value = tempData;
+    //     window.shownotification({
+    //         icon: 'error',
+    //         text: 'There was an error performing this request, try again later or contact support.'
+    //     });
+    // });
 }
 </script>
