@@ -7,10 +7,14 @@ export function useResetProgress() {
     const loading = ref(false);
     const userStore = useUserStore();
 
-    const resetProgress = (contentId, iconClassRef, showConfirmation = true) => {
+    const resetProgress = (contentId, iconClassRef, showConfirmation = true, arrayRef) => {
         const proceedWithReset = () => {
             iconClassRef.value = 'fas fa-spin fa-spinner';
             loading.value = true;
+
+            if(arrayRef){
+                arrayRef.value = arrayRef.value.filter((item) => item.id !== contentId);
+            }
 
             ContentService.resetContentProgress(contentId)
                 .then(() => {
@@ -21,9 +25,12 @@ export function useResetProgress() {
                         message: 'Your progress has been reset.',
                     });
                     iconClassRef.value = 'fas fa-redo-alt fa-flip-horizontal';
-                    setTimeout(() => {
-                        location.reload();
-                    },500)
+
+                     if(!arrayRef) {
+                        setTimeout(() => {
+                            location.reload();
+                        },500);
+                     }
                 })
                 .finally(() => {
                     loading.value = false;
