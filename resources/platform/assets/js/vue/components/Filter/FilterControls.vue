@@ -25,7 +25,7 @@
                 <slot></slot>
             </div> -->
         </div>
-        <div v-if="!hideFilter" class="tw-flex tw-grow tw-items-start tw-px-4 lg:tw-px-0">
+        <div v-if="!hideFilter" class="tw-flex tw-grow tw-items-start">
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
                 <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" @on-submit="handleSubmit" />
                 <slot name="extra-icon"></slot>
