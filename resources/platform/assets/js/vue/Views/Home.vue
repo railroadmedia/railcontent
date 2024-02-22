@@ -19,6 +19,7 @@
             :preLoadedContent="startedContent.data"
             :isMiniView="true"
             :show-dropdown="true"
+            :use-ref-data="true"
         />
         <!-- Recommended section -->
         <MiniCatalogueSection title="Recommended For You" seeAllAriaLabel="See All Content" :seeAllUrl="recommendedContentUrl"
