@@ -2269,7 +2269,7 @@ class ContentService
                             ->where('ucp_3.user_id', $userId);
                     }
                 )
-                ->leftJoin(
+                ->leftJoin(265:35
                     'railcontent_user_content_progress AS ucp_4',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
@@ -2515,6 +2515,10 @@ class ContentService
                     "UPDATE railcontent_content SET `compiled_view_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
                     $params
                 );
+        } else {
+            DB::connection(config('railcontent.database_connection_name'))
+                ->update(
+                    "UPDATE railcontent_content SET `parent_content_data` = null WHERE `id` in ({$ids})");
         }
 
         return true;
