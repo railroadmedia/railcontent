@@ -2,12 +2,12 @@
   <PageHeaderLayout>
     <template v-slot:top-left>
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg" :additionalImgSrc="logo"
-        :primaryCtaIcon="primaryCtaIcon" :primaryCtaText="primaryCtaText" :primaryCtaUrl="primaryCtaUrl">
+        :infoData="ctasAndInfoInsideHero ? infoData : null">
         <template #header-info v-if="description">
           <!-- Tooltip/Modal content -->
         </template>
         <template #ctas>
-          <div v-if="ctasInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-center tw-w-full">
+          <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
             <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
             <div class="tw-flex tw-items-center tw-flex-grow"
               :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
@@ -18,7 +18,6 @@
               <div>
                 <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
                   v-bind="cta.props" />
-                <SongRequest v-if="isSongs" />
               </div>
             </div>
           </div>
@@ -26,18 +25,12 @@
       </PageHeaderHero>
     </template>
     <template v-slot:bottom-full>
-      <div :class="ctasInsideHero ? 'sm:tw-hidden' : ''">
+      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
         <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
       </div>
-      <div :class="ctasInsideHero ? 'sm:tw-hidden' : ''" class="tw-flex tw-justify-between tw-items-center tw-w-full">
-        <div v-if="isSongs"
-          class="tw-flex tw-items-center tw-text-base tw-font-bold tw-text-[#002039] dark:tw-text-[#9EC0DC]">
-          <div class="tw-flex tw-items-center tw-uppercase" v-for="(item, index) in formattedInfoData" :key="item">
-            <span>{{ item }}</span>
-            <span v-if="index !== formattedInfoData.length - 1"
-              class="tw-inline-block tw-h-[7px] tw-w-[7px] tw-mx-2 tw-rounded-full tw-bg-[#002039] dark:tw-bg-[#9EC0DC]"></span>
-          </div>
-        </div>
+      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''"
+        class="tw-flex tw-justify-between tw-items-center tw-w-full">
+        <PageHeaderRowInfo v-if="!ctasAndInfoInsideHero" :infoData="infoData" />
         <div class="tw-flex tw-items-center tw-flex-grow"
           :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
           <span v-if="progress"
@@ -47,7 +40,6 @@
           <div>
             <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
               v-bind="cta.props" />
-            <SongRequest v-if="isSongs" />
           </div>
         </div>
       </div>
@@ -63,20 +55,22 @@ import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
 import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import PageHeaderProgressBar from './PageHeaderProgressBar.vue';
+import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
 
 import SongRequest from '../Songs/SongRequest.vue';
 import ResetProgressCta from './Ctas/ResetProgressCta.vue';
 import DownloadResourcesCta from './Ctas/DownloadResourcesCta.vue';
 import PageHeaderCta from './PageHeaderCta.vue';
 
+
 const componentMap = {
   ResetProgressCta,
   DownloadResourcesCta,
-  PageHeaderCta
+  PageHeaderCta,
+  SongRequest
 };
 
 const resolveComponent = (type) => componentMap[type];
-
 
 const props = defineProps({
   pageType: String,
@@ -97,6 +91,8 @@ const props = defineProps({
   description: String,
 });
 
+console.log(props.infoData);
+
 const primaryCtaProps = computed(() => props.ctas?.find(cta => cta.type === 'primary')?.props || {});
 const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
 const primaryCtaText = computed(() => primaryCtaProps.value.text);
@@ -108,29 +104,7 @@ const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
 const isSongs = computed(() => props.pageType === 'songs');
 
-const ctasInsideHero = computed(() => !isSongs.value);
-
-const formattedInfoData = computed(() => {
-  if (props.pageType && props.infoData) {
-    switch (props.pageType) {
-      case 'songs':
-        if (props.infoData.artistsNumber !== undefined && props.infoData.songsNumber !== undefined) {
-          return [`${props.infoData.artistsNumber} Artists`, `${props.infoData.songsNumber} Songs`];
-        }
-        break;
-      case 'pack':
-      case 'pack-bundle':
-        if (props.infoData.lessons !== undefined && props.infoData.xp !== undefined) {
-          return [`${props.infoData.lessons} Lessons`, `${props.infoData.xp} XP`];
-        }
-        break;
-      default:
-        return null;
-    }
-  }
-  return null;
-});
-
+const ctasAndInfoInsideHero = computed(() => !isSongs.value);
 
 const logo = computed(() => {
   return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;

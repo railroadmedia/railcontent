@@ -1,6 +1,6 @@
 <template>
     <!-- Header -->
-    <PageHeader pageType="songs" title="Songs" iconName="headphones" :infoData="headerInfoData" />
+    <PageHeader pageType="songs" title="Songs" iconName="headphones-filled" :infoData="headerInfoData" :ctas="ctaConfig" />
     <!-- Continue section -->
     <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-0 md:tw-px-8 tw-mt-[33px]">
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="continueUrl"
@@ -64,10 +64,17 @@ const props = defineProps({
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
 
+const ctaConfig = computed(() => {
+    return [
+        {
+            type: 'SongRequest'
+        },
+    ];
+});
+
 const headerInfoData = computed(() => {
-    return {
-        artistsNumber: props.artistsNumber,
-        songsNumber: props.songsNumber,
+    if (props.artistsNumber !== undefined && props.songsNumber !== undefined) {
+        return [`${props.artistsNumber} Artists`, `${props.songsNumber} Songs`];
     }
 })
 

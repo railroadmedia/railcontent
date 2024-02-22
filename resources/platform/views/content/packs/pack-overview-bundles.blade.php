@@ -19,6 +19,15 @@
     ];
 
     $ctasJson = json_encode($ctas);
+
+    $infoDataStrArr = [];
+    if (isset($infoData['lessons']) && isset($infoData['xp'])) {
+        $infoDataStrArr = [
+            $infoData['lessons'] . ' Lessons',
+            $infoData['xp'] . ' XP'
+        ];
+    }
+
 @endphp
 
 @section('content')
@@ -82,7 +91,7 @@
         hero-img="{{ $pack->fetch('data.header_image_url') }}"
         dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
         light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
-        :info-data="{{ json_encode($infoData) }}"
+        :info-data="{{ json_encode($infoDataStrArr) }}"
         :ctas="{{ $ctasJson }}"
     >
     </page-header>

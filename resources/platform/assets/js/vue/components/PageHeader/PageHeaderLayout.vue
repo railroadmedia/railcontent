@@ -5,9 +5,9 @@
                 <div class="tw-flex-grow">
                     <slot name="top-left"></slot>
                 </div>
-                <div class="tw-flex sm:tw-self-end tw-items-center tw-mt-3 sm:tw-mt-0">
+                <!-- <div class="tw-flex sm:tw-self-end tw-items-center tw-mt-3 sm:tw-mt-0">
                     <slot name="top-right"></slot>
-                </div>
+                </div> -->
             </div>
             <div class="w-full">
                 <slot name="bottom-full"></slot>

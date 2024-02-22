@@ -40,7 +40,7 @@
     <page-header
         page-type="pack"
         title="Packs"
-        icon-name="box"
+        icon-name="box-filled"
     ></page-header>
 
     <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
