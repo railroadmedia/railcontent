@@ -6,8 +6,8 @@
                 <h1 class="heading tw-pt-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
-                <div class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
-                    <div class="tw-uppercase">{{ instructors[0]?.name }}</div>
+                <div class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
+                    <div class="tw-uppercase">{{ artistName }}</div>
                     <DotSeparator />
                     <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
                     <DotSeparator />
@@ -416,6 +416,10 @@ export default {
             type: String,
             default: '',
         },
+        artist: {
+            type: String,
+            default: null,
+        },
     },
 
     data() {
@@ -447,6 +451,12 @@ export default {
         singularContentType() {
             return contentTypes[this.lessonType]?.singular || this.lessonType;
         },
+        artistName() {
+            if (this.artist) {
+                return this.artist;
+            }
+            return this.instructors.length > 0 ? this.instructors[0].name : brand.toCapitalCase();
+        }
     },
     mounted() {
         document.addEventListener("click", (event) => {

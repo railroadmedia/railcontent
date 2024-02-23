@@ -259,6 +259,10 @@ const props = defineProps({
         type: [String, Number],
         default: ''
     },
+    artist: {
+        type: String,
+        default: ''
+    },
 });
 
 const state = reactive({
@@ -455,7 +459,7 @@ const seekToChapter = (time) => {
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
-                        :report-user-name="userName"
+                        :report-user-name="userName" :artist="artist"
                         @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" />
 
                     <!-- Info Section -->
