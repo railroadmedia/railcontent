@@ -171,7 +171,7 @@
             ])
         </div>
     @endif
-    
+
     @if(!empty($nextLessonJson))
         @include('partials._current-learning-path-lesson', [
             "currentLearningPathLesson" => $nextLessonJson,
@@ -260,7 +260,7 @@
             <collection-wrapper
                 collection-type="song-pdf"
                 :pre-loaded-content="{{ $songsPdfs }}"
-                title="songs"
+                title="Songs"
 {{--                :filterable-values="{{ $something ?? [] }}"--}}
             ></collection-wrapper>
 {{--            <div class="flex flex-column">--}}
