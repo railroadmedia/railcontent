@@ -1,5 +1,4 @@
 @php
-
     if (!empty($lessonContent->fetch('fields.video.fields.youtube_video_id'))) {
         $videoProps = [
             'ref' => 'mediaElementVueInstance',
@@ -90,6 +89,7 @@
         'reportUserName' => user()->display_name,
         'reportRecipient' => config('mailora.' . $brand . '.ask-question-recipient'),
         'reportLogo' => config('mailora.' . $brand . '.logo-link'),
+        'difficulty' => $lessonContent->fetch('difficulty'),
     ];
 
     $videoButtons = [
