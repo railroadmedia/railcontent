@@ -9,10 +9,10 @@
                 <h3 class="leading-tight text-2xl md:text-3xl mb-2"><strong>{{ $cardTitle ?? '' }}</strong></h3>
                 <img class="{{ $cardImageHeight ?? '' }} rounded-md transition-opacity opacity-0" src="{{ $cardImageUrl ?? '' }}" loading="lazy" onload="this.classList.remove('opacity-0')" alt="{{ $cardTitle ?? 'Card image' }}">
                 <h3 class="leading-tight mt-2">
-                    @isset($cardDiscount)
-                        <span class="line-through" style="color: #879097; margin-right: 5px;">${{ $cardDiscount }}</span>
-                    @endisset
-                    <strong>${{ $cardPrice ?? '' }}</strong>
+                    @if ($cardPrice > $cardDiscount)
+                        <span class="line-through" style="color: #879097; margin-right: 5px;">${{ $cardPrice }}</span>
+                    @endif
+                    <strong>${{ $cardDiscount ?? '' }}</strong>
                 </h3>
                 <p class="text-sm mb-5"><em>{!! $cardSubtitle ?? '' !!}</em></p>
                 <div class="flex items-center justify-center">
