@@ -38,6 +38,7 @@ import { useCollectionStore } from "../../../stores/collection";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 import SongCardContainer from "../Catalogue/SongCardContainer.vue";
+import { contentTypes } from "../../../utils";
 
 const props = defineProps({
     item: {
@@ -97,26 +98,11 @@ const pluralizeWord = (word,  count , plural) => {
 }
 
 const contentType = computed(() => {
-    let type = props.contentTypeOverride.replaceAll('-', ' ').toLowerCase();
-    let formattedType = '';
-
-    if(type === 'quick tips'){
-        type = 'quick tip';
-    } else if (type === 'boot camps') {
-        type = 'boot camp';
+    const type = contentTypes[props.contentTypeOverride];
+    if(type){
+        return props.item.all_lessons_count > 1 ? type.plural : type.singular;
     }
 
-    if(type === 'student focus'){
-        type = pluralizeWord(type, props.item.all_lessons_count, 'student foci');
-    } else {
-        type = pluralizeWord(type, props.item.all_lessons_count);
-    }
-
-    type = type.split(' ');
-    type.map((o, i) => {
-        formattedType = formattedType + (i > 0 ? ' ' : '') + o.charAt(0).toUpperCase() + o.slice(1);
-    })
-
-    return formattedType;
+    return props.item.all_lessons_count > 1 ? 'lessons' : 'lesson';
 })
 </script>
