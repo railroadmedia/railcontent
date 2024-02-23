@@ -255,6 +255,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    difficulty: {
+        type: [String, Number],
+        default: ''
+    },
 });
 
 const state = reactive({
@@ -443,8 +447,8 @@ const seekToChapter = (time) => {
                 </div>
                 <!-- Video Resources -->
                 <div class="tw-mb-4">
-                    <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
-                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
+                    <VideoResources :difficulty="difficulty" :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
+                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="contentInstructors"
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :show-practice-button="showPracticeButton"
