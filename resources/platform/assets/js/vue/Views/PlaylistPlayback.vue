@@ -255,6 +255,14 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    difficulty: {
+        type: [String, Number],
+        default: ''
+    },
+    artist: {
+        type: String,
+        default: ''
+    },
 });
 
 const state = reactive({
@@ -443,15 +451,15 @@ const seekToChapter = (time) => {
                 </div>
                 <!-- Video Resources -->
                 <div class="tw-mb-4">
-                    <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
-                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
+                    <VideoResources :difficulty="difficulty" :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
+                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="contentInstructors"
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :show-practice-button="showPracticeButton"
                         :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton"
                         :report-logo="reportLogo" :report-recipient="reportRecipient" :report-user-email="userEmail"
-                        :report-user-name="userName"
+                        :report-user-name="userName" :artist="artist"
                         @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" />
 
                     <!-- Info Section -->
