@@ -49,7 +49,7 @@ class SyncContentRowFromRelatedTables extends Command
                 ->whereNotIn('type', ['vimeo-video', 'youtube-video', 'assignment'])
                 ->orderBy('id', 'desc')
                 ->chunkById(500, function (Collection $rows) use (&$totalSynced, $railcontentV2DataSyncingService) {
-                    $railcontentV2DataSyncingService->syncContentIds($rows->pluck('id')->toArray());
+                    $railcontentV2DataSyncingService->syncContentIdsAndFillParentContentData($rows->pluck('id')->toArray());
 
                     $totalSynced += $rows->count();
 
@@ -60,7 +60,7 @@ class SyncContentRowFromRelatedTables extends Command
                 });
         } else {
             $this->info('Syncing content ID: '.$contentId);
-            $railcontentV2DataSyncingService->syncContentId($contentId);
+            $railcontentV2DataSyncingService->syncContentIdAndFillParentContentData($contentId);
         }
 
         $this->info('Done');

@@ -2170,6 +2170,10 @@ class ContentService
                     $params[] = null;
                     $ids[] = $contentId;
                 }
+            } elseif (!empty($contentRow->parent_content_data)) {
+                $cases[] = "WHEN {$contentId} then ?";
+                $params[] = null;
+                $ids[] = $contentId;
             }
         }
 
@@ -2183,7 +2187,6 @@ class ContentService
                     $params
                 );
         }
-
         return true;
     }
 
@@ -2515,12 +2518,7 @@ class ContentService
                     "UPDATE railcontent_content SET `compiled_view_data` = CASE `id` {$cases} END WHERE `id` in ({$ids})",
                     $params
                 );
-        } else {
-            DB::connection(config('railcontent.database_connection_name'))
-                ->update(
-                    "UPDATE railcontent_content SET `parent_content_data` = null WHERE `id` in ({$ids})");
         }
-
         return true;
     }
 

@@ -34,7 +34,7 @@ class CleanParentContentData extends Command
         $stringIDs = $this->argument('ids');
         $ids = explode(',', $stringIDs);
         $this->info("start updating ids: $stringIDs");
-        $rcService->syncContentIds($ids);
+        $rcService->syncContentIdsAndFillParentContentData($ids);
         $this->info("finished updating ids: $stringIDs");
     }
 }

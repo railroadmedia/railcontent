@@ -101,9 +101,9 @@ class RailcontentV2DataSyncingService
      *
      * @throws Throwable
      */
-    public function syncContentId($contentId, $forUserId = null)
+    public function syncContentIdAndFillParentContentData($contentId, $forUserId = null)
     {
-        $this->syncContentIds([$contentId], $forUserId);
+        $this->syncContentIdsAndFillParentContentData([$contentId], $forUserId);
     }
 
     /**
@@ -111,7 +111,7 @@ class RailcontentV2DataSyncingService
      *
      * @throws Throwable
      */
-    public function syncContentIds(array $contentIds, $forUserId = null)
+    public function syncContentIdsAndFillParentContentData(array $contentIds, $forUserId = null)
     {
         $databaseConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
 
