@@ -19,6 +19,7 @@
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="preLoadedContent"
                         :show-dropdown="showDropdown"
+                        :use-ref-data="useRefData"
                     />
                 </transition>
             </div>
@@ -59,6 +60,10 @@ const props = defineProps({
     default: ''
   },
   showDropdown: {
+    type: Boolean,
+    default: () => false,
+  },
+  useRefData: {
     type: Boolean,
     default: () => false,
   },
