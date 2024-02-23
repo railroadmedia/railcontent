@@ -46,7 +46,6 @@
 @endsection
 
 @section('content')
-
     @if($catalogueMeta['name'] == 'Courses')
         <page-header
             title="Courses"
@@ -119,51 +118,6 @@
                     </p>
                 </div>
             @endslot
-
-            @slot('interactionSlot')
-                @if($lessonType === 'student-review' && $brand === 'singeo')
-                    @include('partials._student-review-application-singeo')
-                @endif
-
-                @if($lessonType === 'student-review' && $brand === 'guitareo')
-                    @include('partials._student-review-application-guitareo')
-                @endif
-
-                @if($lessonType === 'student-review' && $brand === 'pianote')
-                    @include('partials._student-review-application-pianote')
-                @endif
-
-                @if($lessonType === 'student-focus' && $brand === 'drumeo')
-                    @include('partials._student-focus-application-drumeo')
-                @endif
-
-                @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
-                    <div class="tw-flex tw-mt-4">
-                        <a
-                            @if(Carbon\Carbon::create(2023, 1, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                                href="/drumeo/forums/drumeo-songs/15/february-2023-song-request-voting-thread/14114?sortby_val=published_on"
-                            @else
-                                href="/drumeo/forums/threads/drumeo-songs/15"
-                            @endif
-                            class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                                Request A Song
-                            <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
-                        </a>
-                    </div>
-                @endif
-
-                @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
-                    @include('partials._student-collaboration-form')
-                @endif
-
-                @if($lessonType === 'question-and-answer')
-                    @include('partials._ask-question-form')
-                @endif
-
-                @if($lessonType === 'routine')
-                    @include('partials._routine-modal')
-                @endif
-            @endslot
         @endcomponent
     @endif
 
@@ -197,7 +151,7 @@
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
                         :six-wide="true"
-                        :pre-loaded-content="{{ $startedLessons }}"
+                        :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}"
                     >
                     </catalogue-card-container>
                 </transition>

@@ -56,8 +56,7 @@
         "symfony/mailgun-mailer": "^6.0",
         "venturecraft/revisionable": "1.*",
         "vimeo/vimeo-api": "^3.0",
-        "whitecube/nova-flexible-content": "^1.0",
-        "yoramdelangen/laravel-pdo-odbc": "*"
+        "whitecube/nova-flexible-content": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

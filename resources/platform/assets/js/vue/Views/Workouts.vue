@@ -80,7 +80,7 @@
                         <transition appear name="fade">
                             <CatalogueCardContainer
                                 :is-mini-view="true"
-                                :pre-loaded-content="continueData"
+                                :pre-loaded-content="continueData.data"
                                 :show-dropdown="true"
                             />
                         </transition>
