@@ -86,6 +86,10 @@ const heroImg = computed(() => {
     return props.collectionAvatar ?? defaultThumbnail;
 });
 
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
@@ -108,7 +112,7 @@ const heroImg = computed(() => {
 
     <div class="lg:tw-container lg:tw-px-[50px] tw-mx-auto tw-pt-[30px]">
         <CollectionWrapper :pre-loaded-content="preLoadedContent" :tab-options="[
-            { key: 'allContent', value: `All ${pluralContentType}` },
+            { key: 'allContent', value: `All ${capitalizeFirstLetter(pluralContentType)}` },
         ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType" />
     </div>
 </template>
