@@ -46,7 +46,6 @@
 @endsection
 
 @section('content')
-
     @component('partials._header-banner',
         ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
         @slot('content')
@@ -189,7 +188,7 @@
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
                         :six-wide="true"
-                        :pre-loaded-content="{{ $startedLessons }}"
+                        :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}"
                     >
                     </catalogue-card-container>
                 </transition>
