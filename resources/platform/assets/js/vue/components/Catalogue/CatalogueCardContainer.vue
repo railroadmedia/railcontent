@@ -1,10 +1,10 @@
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
         <div
-            :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[203px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
+            :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[211px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
                     tw-px-4 lg:tw-px-0 tw-no-scrollbar
-                    ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
+                    ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-pb-[8px] tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
                                             ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
                                             ${!isMiniView && willScroll && !collectionStoreLoading ? 'tw-overflow-x-scroll' : ''}
                                             ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
@@ -17,14 +17,14 @@
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard v-for="item in data" :key="'grid' + item.id" :item="item" :content-type="item.type"
+                    <MiniCatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item" :content-type="item.type"
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
                 <template v-else>
-                    <CatalogueCard v-for="item in data" :key="'grid' + item.id" :item="item" :content-type="item.type"
+                    <CatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item" :content-type="item.type"
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks"
@@ -33,7 +33,7 @@
                 </template>
             </div>
         </div>
-        <div v-if="!collectionStoreLoading && data.length === 0 && noResultsMessage.length > 0"
+        <div v-if="!collectionStoreLoading && getData.length === 0 && noResultsMessage.length > 0"
             class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
                 <div class="icon-wrap square"></div>
@@ -42,11 +42,11 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
-        <AddEventModal 
-            v-if="contentTypeOverride === 'challenge'" 
+        <AddEventModal
+            v-if="contentTypeOverride === 'challenge'"
             modal-id="notifyModal"
-            :subscription-calendar-id="subscriptionCalendarId" 
-            :theme-color="brand" 
+            :subscription-calendar-id="subscriptionCalendarId"
+            :brand="brand"
         />
     </div>
 </template>
@@ -61,6 +61,8 @@ import { storeToRefs } from "pinia";
 import { useCollectionStore } from "../../../stores/collection";
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 import MiniCatalogueCard from './MiniCatalogueCard.vue';
+import { useResetProgress } from "../../hooks/useResetProgress";
+import { useUserStore } from "../../../stores/user";
 
 const props = defineProps({
     willScroll: {
@@ -126,24 +128,25 @@ const props = defineProps({
     groupByCards: {
         type: Boolean,
         default: () => false,
-    }
-
-},
-);
+    },
+    useRefData: {
+        type: Boolean,
+        default: () => false,
+    },
+});
 
 const collectionStore = useCollectionStore();
+const userStore = useUserStore();
+const { resetProgress } = useResetProgress();
+const { brand } = storeToRefs(userStore);
+const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
+const data = ref(props.preLoadedContent);
 
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
-// Refs
-const initializeData = () => {
-    if (props.preLoadedContent) {
-        return Array.isArray(props.preLoadedContent) ? props.preLoadedContent : props.preLoadedContent.data;
-    }
-    return [];
-}
-
-const data = ref(initializeData());
+const getData = computed(() =>{
+    return props.useRefData ? data.value : props.preLoadedContent;
+})
 
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value);
@@ -169,24 +172,9 @@ const isChallenge = computed(() => {
     return props.contentTypeOverride === 'challenge';
 });
 
-const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, data });
+const { addToList } = useUserCatalogueEvents({ ...props });
 
 const handleProgressReset = (payload) => {
-    const tempData = data.value;
-    const post_index = data.value.map(post => post.id).indexOf(payload.content_id);
-    data.value.splice(post_index, 1);
-
-    resetProgressEventHandler(payload).then(() => {
-        window.shownotification({
-            icon: 'check',
-            text: 'READY TO START AGAIN? Your progress has been reset.'
-        });
-    }).catch(() => {
-        data.value = tempData;
-        window.shownotification({
-            icon: 'error',
-            text: 'There was an error performing this request, try again later or contact support.'
-        });
-    });
+    resetProgress(payload.content_id, resetIcon, true, data);
 }
 </script>

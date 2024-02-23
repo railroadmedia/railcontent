@@ -267,7 +267,11 @@ export default {
     isBranchPath: {
       type: Boolean,
       default: () => false,
-    }
+    },
+    isAdmin: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   computed: {
     mappedData() {
@@ -286,7 +290,7 @@ export default {
         return this.brand === 'drumeo' || this.brand === 'pianote';
       }
       return false;
-    }, 
+    },
 
     itemStyle() {
       const field = this.item.fields.find((field) => field.key === 'style');
@@ -308,7 +312,7 @@ export default {
           this.contentTypeOverride === "learning-path-part",
       };
     },
-    
+
     branchPathBG() {
       return `tw-bg-${this.brand}/10`;
     },

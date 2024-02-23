@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-group tw-flex tw-items-center tw-py-[4px] tw-px-[17px] tw-h-[99px] tw-relative tw-w-[377px] lg:tw-w-auto tw-shrink-0 dark:tw-bg-[#0020398C] dark:hover:tw-bg-[#002039] tw-rounded-[10px]">
+    <div class="tw-group tw-flex tw-items-center tw-py-[4px] tw-px-[17px] tw-h-[99px] tw-relative tw-w-[377px] lg:tw-w-auto tw-shrink-0 tw-border-[1px] tw-border-[#CBCBCD80] hover:tw-shadow-[0_4px_4px_0px_rgba(0,0,0,0.1)] dark:tw-border-none tw-bg-white dark:tw-bg-[#0020398C] hover:tw-bg-[rgba(255,255,255,0.8)] dark:hover:tw-bg-[#002039] tw-rounded-[10px]">
         <!-- Thumbnail Image -->
         <a :href="renderLink && !forceNoLinks ? item.url : null"
             class="tw-flex-none tw-h-[78px] tw-w-[144px] tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#0E2031] tw-rounded-[5px]">

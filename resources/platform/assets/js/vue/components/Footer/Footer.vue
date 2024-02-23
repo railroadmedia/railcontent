@@ -13,10 +13,10 @@ const currentYear = computed(() => {
 </script>
 
 <template>
-  <footer data-component="Footer" class="tw-py-5 tw-bg-white dark:tw-bg-[#081825]/90">
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col lg:tw-flex-row ">
+  <footer data-component="Footer" class="tw-py-6 tw-bg-white dark:tw-bg-[#081825]/90">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col xl:tw-flex-row ">
       <!-- Logo -->
-      <a :href="`/members`" class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-mb-0 tw-w-fit tw-mx-auto tw-py-1.5">
+      <a :href="`/members`" class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 xl:tw-mb-0 tw-w-fit tw-mx-auto">
         <svg class="tw-w-24 tw-transition tw-mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11878.76 2760.46">
           <path fill="currentColor" d="m10856.54,679.46c-92.03,0-179.68,7.14-261.47,20.44,53.8,33.99,99.85,74.34,135.83,119.41l2.05,2.57,1.86,2.71c2.83,4.14,5.76,8.34,8.86,12.78,9.35,13.42,19.86,28.51,30.45,45.8,181.15,45.98,280.88,191.96,280.88,420.55v294.56c0,43.34-33.17,71.5-71.76,71.5-7.67,0-15.55-1.11-23.44-3.44-108.03-31.88-237.51-54.43-376.6-54.43-430.59,0-760.1,252.12-760.1,584.28s269.59,564.27,629.06,564.27c186.96,0,375.52-46.68,502.94-153.53,20.57-17.25,45.7-27.7,69.83-27.7s45.27,9.57,61.66,31.92c.73,1.51,1.47,3.01,2.24,4.51,23.48,45.86,61.33,81.03,108.56,104.78,47.52,23.9,104.56,36.23,165.99,36.23s124.63-11.84,188.52-36.23c19.93-7.61,39.81-16.44,59.48-26.51,155.36-79.54,255.06-214.42,266.03-340.42.79-7.85,1.35-893.68,1.35-893.68,0-444.21-430.6-780.38-1022.22-780.38Zm198.46,1602.83c0,10.31-3.86,20.41-10.8,29.18-44.11,55.78-103.9,85.99-176.42,85.99-123.57,0-205.93-106.54-205.93-260.43,0-174.6,104.84-278.18,250.87-278.18,42.22,0,82.31,8.36,113.94,25.08,18.32,9.68,28.35,26.48,28.35,43.75v354.6Z"/>
           <path fill="currentColor" d="m10754.56,1113.46h0c-11-128-57-184-94-238-95-119-276.74-197-460.85-197-137.58,0-285.61,40.34-386.15,133-24.98,23.03-48.6,35.62-66.36,35.62-5.3,0-10.07-1.12-14.2-3.42-12-7-16-14-25.82-28.16-28.76-41.48-54.54-74.52-95.87-98-49.91-28.35-111.68-43.02-178.68-43.02-78.98,0-165.24,20.37-248,62.75-34.66,17.75-66.56,38.25-95.31,60.79-100.14,78.5-162.21,181.76-170.72,279.66.26.37.52.73.78,1.1,42.35,60.37,78.64,125.34,107.86,193.09,29.64,68.72,52.36,141.15,67.55,215.27,15.47,75.53,23.31,153.86,23.31,232.82s-7.84,157.29-23.31,232.82c-15.18,74.12-37.91,146.55-67.55,215.27-29.22,67.75-65.51,132.72-107.86,193.09-.41.58-.83,1.16-1.24,1.74.27,47.52.83,150.89.72,157.89,1.61,32.74,9.65,64.43,24.73,93.88,35.34,69.04,103.27,113.87,186.73,131.95,27.77,6.01,57.25,9.07,87.83,9.07s61.6-2.99,93.4-9.07c51.18-9.78,103.55-27.54,154.6-53.68,160.45-82.14,261.54-223.31,266.83-352.76,0,0-2-912.78-2.04-920.16-1.36-271.54,249.25-505.25,453.98-506.33,2.14-.01,4.23-.02,6.27-.02,36.77,0,58.47,1.86,90.38,6.8-30.5,9.67-44.25,20.53-74.35,35.94-211.13,108.09-319.49,318.38-242.02,469.7,47.1,92,152.05,141.02,274.54,141.02,78.98,0,165.24-20.37,248.01-62.75,158.74-81.27,259.38-220.31,266.62-348.63.62-18.08.62-27.08.19-42.28Z"/>
@@ -30,11 +30,13 @@ const currentYear = computed(() => {
       <div class="tw-flex md:tw-px-4 tw-text-xs tw-text-gray-[#3F3F46] dark:tw-text-[#9EC0DC] tw-justify-center tw-w-full tw-items-center ">
         <span class="tw-hidden lg:tw-block tw-mr-1 tw-py-2">Musora Media, Inc. © {{ currentYear }} </span>
         <ul class="tw-flex tw-items-center tw-text-xs">
-          <li class="tw-mx-1"><a :href="`/terms-of-service`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-py-2">Terms</a></li>/
-          <li class="tw-mx-1"><a :href="`/privacy-policy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-py-2">Privacy</a></li>/
-          <li v-if="brand === 'drumeo'" class="tw-mx-1 tw-text-center"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-py-2">Legacy Resources</a> /</li>
-          <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-py-2">Support</a></li>/
-          <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-py-2">Logout</a></li>
+          <li class="tw-mx-1"><a :href="`/terms-of-service`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
+          <li class="tw-mx-1"><a :href="`/privacy-policy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
+          <li v-if="brand === 'drumeo'" class="tw-mx-1 tw-text-center"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Legacy Resources</a></li>/
+          <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Support</a></li>/
+          <li class="tw-mx-1"><a :href="`/${brand}/student-experience-studies`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Student Experience Studies</a></li>/
+          <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Logout</a></li>
+
         </ul>
       </div>
     </div>

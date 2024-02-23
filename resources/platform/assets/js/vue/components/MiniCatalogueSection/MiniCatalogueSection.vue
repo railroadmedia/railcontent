@@ -1,5 +1,5 @@
 <template>
-    <section class="tw-flex tw-flex-row" :class="isMiniView ? 'tw-mb-[26px]' : 'tw-mb-[14px] lg:tw-mb-[6px]'" >
+    <section class="tw-flex tw-flex-row" :class="isMiniView ? 'tw-mb-[18px]' : 'tw-mb-[14px] lg:tw-mb-[6px]'" >
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
@@ -19,6 +19,7 @@
                         :is-mini-view="isMiniView"
                         :pre-loaded-content="preLoadedContent"
                         :show-dropdown="showDropdown"
+                        :use-ref-data="useRefData"
                     />
                 </transition>
             </div>
@@ -59,6 +60,10 @@ const props = defineProps({
     default: ''
   },
   showDropdown: {
+    type: Boolean,
+    default: () => false,
+  },
+  useRefData: {
     type: Boolean,
     default: () => false,
   },
