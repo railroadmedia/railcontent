@@ -120,17 +120,18 @@ class PackPagesController extends Controller
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
+
         if ($packBundles->isEmpty()) {
-            return new NotFoundHttpException();
+            abort(404);
         }
         $thisPackBundle = $packBundles[0];
 
         if (empty($thisPackBundle)) {
-            return new NotFoundHttpException();
+            abort(404);
         }
 
         $collectionForDecoration = new Collection();
@@ -205,7 +206,7 @@ class PackPagesController extends Controller
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
@@ -217,7 +218,7 @@ class PackPagesController extends Controller
         }
 
         if (empty($thisPackBundle)) {
-            return new NotFoundHttpException();
+            abort(404);
         }
 
         $lessons = $this->contentService->getByParentId($thisPackBundle['id']);
@@ -333,13 +334,13 @@ class PackPagesController extends Controller
                 ->first();
 
         if (empty($pack)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $thisPackBundle = $this->contentService->getById($packBundleId);
 
         if (empty($thisPackBundle)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $parentChildren = $this->contentService->getByParentId($thisPackBundle['id']);
@@ -363,7 +364,7 @@ class PackPagesController extends Controller
         }
 
         if (empty($lesson)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $nextChild = $parentChildren->getMatchOffset($lesson, 1);
@@ -454,7 +455,7 @@ class PackPagesController extends Controller
                 ->first();
 
         if (empty($pack)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $allPackLessons = [];
@@ -468,7 +469,7 @@ class PackPagesController extends Controller
         }
 
         if (empty($thisPackBundle)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $parentChildren = $thisPackBundle['lessons'];
@@ -484,7 +485,7 @@ class PackPagesController extends Controller
         }
 
         if (empty($lesson)) {
-            throw new NotFoundHttpException();
+            abort(404);
         }
 
         $allPackLessons = new Collection($allPackLessons);

@@ -95,6 +95,7 @@
                         :pre-loaded-content="{{ $childContent }}"
                         :show-numbers="true"
                         user-id="{{ auth()->id() }}"
+                        :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     >
                     @for($i = 0; $i < 10; $i++)
                         @include('partials.bladesora.members.skeletons.list-item', [
