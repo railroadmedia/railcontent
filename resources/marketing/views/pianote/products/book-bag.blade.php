@@ -5,7 +5,7 @@
     <meta property="og:title" content="BookBag | Pianote">
 
     <meta name="description" content="A handcrafted premium leather satchel for your music books, laptop, and life.">
-    <meta property="og:description" content="Leather satchel for your music books, laptop, and life.">
+    <meta property="og:description" content="A handcrafted premium leather satchel for your music books, laptop, and life.">
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/book-bag/book-bag-share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
@@ -119,13 +119,13 @@
                 color: #5B6068;
             }
             .content-section table.comparison.eardrums tr:last-child td strong {
-            font-size: 40px;
-        }
+                font-size: 36px;
+            }
 
-        .content-section table.comparison.eardrums tr:last-child td s {
-            font-size: 40px;
-            font-weight:400;
-        }
+            .content-section table.comparison.eardrums tr:last-child td s {
+                font-size: 28px;
+                font-weight:400;
+            }
         }
 
         .content-section table.comparison.eardrums tr td:nth-child(1) {
@@ -158,168 +158,39 @@
                 border-spacing: 7px 0;
             }
         }
-        .twentytwenty-horizontal .twentytwenty-handle:before, .twentytwenty-horizontal .twentytwenty-handle:after {
-            content: " ";
-            display: block;
-            background: #000;
-            position: absolute;
-            z-index: 30;
-            box-shadow: 0 0 12px rgba(51, 51, 51, 0.5);
+    </style>
+    <style>
+
+        .image-slider-container .range-slider {
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            z-index: 2;
+            transition: all 200ms linear;
         }
-        .twentytwenty-horizontal .twentytwenty-handle:before, .twentytwenty-horizontal .twentytwenty-handle:after {
-            width: 2px;
-            height: 9999px;
-            left: 50%;
-            margin-left: -1px;
-        }
-        .twentytwenty-before-label, .twentytwenty-after-label, .twentytwenty-overlay {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .twentytwenty-before-label, .twentytwenty-after-label, .twentytwenty-overlay {
-            transition-duration: 0.5s;
-        }
-        .twentytwenty-before-label, .twentytwenty-after-label {
-            transition-property: opacity;
-        }
-        .twentytwenty-before-label:before, .twentytwenty-after-label:before {
-            color: #000;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-        }
-        .twentytwenty-before-label:before, .twentytwenty-after-label:before {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.2);
-            line-height: 38px;
-            padding: 0 20px;
-            border-radius: 2px;
-        }
-        .twentytwenty-horizontal .twentytwenty-before-label:before, .twentytwenty-horizontal .twentytwenty-after-label:before {
-            top: 50%;
-            margin-top: -19px;
-        }
-        .twentytwenty-left-arrow, .twentytwenty-right-arrow, .twentytwenty-up-arrow, .twentytwenty-down-arrow {
-            width: 0;
-            height: 0;
-            border: 6px inset transparent;
-            position: absolute;
-        }
-        .twentytwenty-left-arrow, .twentytwenty-right-arrow {
-            top: 50%;
-            margin-top: -6px;
-        }
-        .twentytwenty-up-arrow, .twentytwenty-down-arrow {
-            left: 50%;
-            margin-left: -6px;
-        }
-        .twentytwenty-container {
-            box-sizing: content-box;
-            z-index: 0;
-            overflow: hidden;
-            position: relative;
-            user-select: none;
-        }
-        .twentytwenty-container img {
-            max-width: 100%;
-            position: absolute;
-            top: 0;
-            display: block;
-        }
-        .twentytwenty-container.active .twentytwenty-overlay, .twentytwenty-container.active :hover.twentytwenty-overlay {
-            background: rgba(0, 0, 0, 0);
-        }
-        .twentytwenty-container.active .twentytwenty-overlay .twentytwenty-before-label, .twentytwenty-container.active .twentytwenty-overlay .twentytwenty-after-label, .twentytwenty-container.active :hover.twentytwenty-overlay .twentytwenty-before-label, .twentytwenty-container.active :hover.twentytwenty-overlay .twentytwenty-after-label {
-            opacity: 0;
-        }
-        .twentytwenty-container * {
-            box-sizing: content-box;
-        }
-        .twentytwenty-before-label {
-            opacity: 0;
-        }
-        .twentytwenty-before-label:before {
-            content: attr(data-content);
-        }
-        .twentytwenty-after-label {
-            opacity: 0;
-        }
-        .twentytwenty-after-label:before {
-            content: attr(data-content);
-        }
-        .twentytwenty-horizontal .twentytwenty-before-label:before {
-            left: 10px;
-        }
-        .twentytwenty-horizontal .twentytwenty-after-label:before {
-            right: 10px;
-        }
-        .twentytwenty-overlay {
-            transition-property: background;
-            background: rgba(0, 0, 0, 0);
-            z-index: 25;
-        }
-        .twentytwenty-overlay:hover {
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .twentytwenty-overlay:hover .twentytwenty-after-label {
-            opacity: 1;
-        }
-        .twentytwenty-overlay:hover .twentytwenty-before-label {
-            opacity: 1;
-        }
-        .twentytwenty-before {
-            z-index: 20;
-        }
-        .twentytwenty-after {
-            z-index: 10;
-        }
-        .twentytwenty-handle {
-            height: 38px;
-            width: 38px;
-            position: absolute;
-            left: 50%;
-            top: 57%;
-            margin-left: -22px;
-            margin-top: -22px;
-            background: #000;
-            border: 3px solid #000;
-            border-radius: 1000px;
-            box-shadow: 0 0 12px rgba(51, 51, 51, 0.5);
-            z-index: 40;
-            cursor: pointer;
-        }
-        .twentytwenty-horizontal .twentytwenty-handle:before {
-            bottom: 50%;
-            margin-bottom: 22px;
-            box-shadow: 0 3px 0 #000, 0 0 12px rgba(51, 51, 51, 0.5);
-        }
-        .twentytwenty-horizontal .twentytwenty-handle:after {
-            top: 50%;
-            margin-top: 22px;
-            box-shadow: 0 -3px 0 #000, 0 0 12px rgba(51, 51, 51, 0.5);
-        }
-        .twentytwenty-left-arrow {
-            border-right: 6px solid #fff;
-            left: 50%;
-            margin-left: -17px;
-        }
-        .twentytwenty-right-arrow {
-            border-left: 6px solid #fff;
-            right: 50%;
-            margin-right: -17px;
-        }
-        .twentytwenty-up-arrow {
-            border-bottom: 6px solid #fff;
-            top: 50%;
-            margin-top: -17px;
-        }
-        .twentytwenty-down-arrow {
-            border-top: 6px solid #fff;
-            bottom: 50%;
-            margin-bottom: -17px;
+        .image-slider-container .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 4px;
+            height: 705px;
+            background: #191617;
+            cursor: move;
+            transition: all 300ms ease;
+            margin-left: 6px;
         }
 
+        .slider-control {
+            width: 32px;
+            transform: translate(-50%, -50%);
+            cursor: grab;
+        }
+        .image-slider-container {
+            transform: scale(1) rotate(0);
+            transform-style: preserve-3d;
+        }
     </style>
 @stop
 
@@ -334,13 +205,6 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
-    <!-- @include('_partials.components.shop.promo-banner', [
-        "name" => "Drumeo StickBag",
-        "fullPrice" => floatval($productPrices['stickbag']->price),
-        "price" => floatval($productPrices['stickbag']->discounted_price),
-        "noBreadcrumb" => true
-    ]) -->
-
 
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -386,9 +250,6 @@
             playsinline muted
             src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/book-bag/book-bag-hero-reel-wide-to-loop-1.mp4"></video>
     </header>
-
-
-    <!--description section-->
 
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative">
         <div class="container mx-auto z-10 relative max-w-5xl">
@@ -513,24 +374,28 @@
         </div>
     </section>
 
-    <section class="text-white px-4 sm:px-6 pt-8 sm:pt-16 lg:pt-20" style="    background: #191617;">
+    <section class="text-white pt-8 sm:pt-16 lg:pt-20" style="background: #191617;">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="text-center leading-tight font-playfair mb-3"><strong>Organize the chaos</strong></h2>
-            <h6 class="text-center leading-normal italic mb-4">
+            <h2 class="text-center leading-tight font-playfair mb-3 relative z-10"><strong>Organize the chaos</strong></h2>
+            <p class="text-center leading-normal -mb-10 sm:-mb-24 lg:-mb-32 relative z-10 px-3 sm:px-4">
                 Let’s be honest. Your practice space looks like a mad scientist's desk. Books, staff paper,<br class="hidden sm:inline">
-                sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</h6>
+                sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</p>
 
-            <div class='twentytwenty-container'>
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp" alt="Clean drum">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp" alt="Dirty drum">
+            <div class="image-slider-container relative w-full overflow-hidden mx-auto h-96 sm:h-[44rem]">
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 100%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 50%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');"></div>
+
+                <!-- Range Input -->
+                <input id="range-slider" class="range-slider flex absolute w-full h-full m-0" name="slider" type="range" min="1" max="100" value="50" />
+
+                <!-- Slider Control -->
+                <div class="slider-control bg-black text-white rounded-full top-1/2 block relative z-10 text-center py-1" style="left:50%;">
+                    <i class="fas fa-left-right"></i>
+                </div>
             </div>
         </div>
     </section>
 
-
-
-
-    <!--features section-->
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F1EFED">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight font-playfair mb-3"><strong>From concert halls to city streets.</strong></h2>
@@ -589,14 +454,13 @@
         </div>
     </section>
 
-
     <section class="relative overflow-hidden px-5 sm:px-7 py-10 sm:py-16 lg:py-24">
         <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="max-width:1920px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love2.webp');"></div>
         <div class="inset-0 block sm:hidden absolute bg-top bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love-m2.webp');"></div>
 
         <div class="container mx-auto max-w-5xl relative z-10">
-            <div class="w-full sm:w-1/2">
-                <div class="p-5 sm:px-10 sm:py-10 mt-60 sm:mt-0 rounded-xl text-left text-white" style="background: rgba(18, 18, 16, 0.85);">
+            <div class="w-full sm:w-7/12 lg:w-1/2">
+                <div class="p-5 sm:px-10 sm:py-10 mt-60 sm:mt-0 rounded-xl text-left text-white" style="background: rgba(18, 18, 16, 0.9);">
                     <h2 class="leading-tight font-playfair pb-2 sm:pb-4">Made with love. And priced that way too.</h2>
                     <p class="leading-tight text-sm lg:text-base">
                         The Pianote Book Bag is custom-designed by leather artisans in the USA. Each bag is handmade with a level of craftsmanship and quality comparable to bags in the $300 - $600 price range. <br><br> But we’re not here for the mark-up. <br><br>We love our students and genuinely think this bag will make your life better. So we’re committed to keeping the price affordable, without compromising on quality.</p>
@@ -604,12 +468,6 @@
             </div>
         </div>
     </section>
-
-
-
-
-
-    <!--table section-->
 
     <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#F5F5F5;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
@@ -677,8 +535,6 @@
         </div>
     </section>
 
-
-    <!--cards section-->
     <section class="text-center py-10 md:py-16" style="background: #F1EFED;">
 
         <img alt="pianote logo block center" class="h-20 sm:h-24 md:h-26 lg:h-30"
@@ -746,7 +602,6 @@
         </div>
     </section>
 
-
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '913081651',
@@ -759,169 +614,17 @@
             'styles' => 'pb-[177%] bg-white',
     ])
 
-
     @include("pianote.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/1.3.6/jquery.event.move.min.js"></script>
     <script>
-        (function($){
-            $.fn.twentytwenty = function(options) {
-                var options = $.extend({
-                    default_offset_pct: 0.5,
-                    orientation: 'horizontal',
-                    before_label: 'Before',
-                    after_label: 'After',
-                    no_overlay: true,
-                    move_slider_on_hover: false,
-                    move_with_handle_only: true,
-                    click_to_move: false
-                }, options);
+        document.getElementById("range-slider").addEventListener("input", (e) => {
+            const sliderPos = e.target.value;
 
-                return this.each(function() {
-
-                    var sliderPct = options.default_offset_pct;
-                    var container = $(this);
-                    var sliderOrientation = options.orientation;
-                    var beforeDirection = (sliderOrientation === 'vertical') ? 'down' : 'left';
-                    var afterDirection = (sliderOrientation === 'vertical') ? 'up' : 'right';
-
-
-                    container.wrap("<div class='twentytwenty-wrapper twentytwenty-" + sliderOrientation + "'></div>");
-                    if(!options.no_overlay) {
-                        container.append("<div class='twentytwenty-overlay'></div>");
-                        var overlay = container.find(".twentytwenty-overlay");
-                        overlay.append("<div class='twentytwenty-before-label' data-content='"+options.before_label+"'></div>");
-                        overlay.append("<div class='twentytwenty-after-label' data-content='"+options.after_label+"'></div>");
-                    }
-                    var beforeImg = container.find("img:first");
-                    var afterImg = container.find("img:last");
-                    container.append("<div class='twentytwenty-handle'></div>");
-                    var slider = container.find(".twentytwenty-handle");
-                    slider.append("<span class='twentytwenty-" + beforeDirection + "-arrow'></span>");
-                    slider.append("<span class='twentytwenty-" + afterDirection + "-arrow'></span>");
-                    container.addClass("twentytwenty-container");
-                    beforeImg.addClass("twentytwenty-before");
-                    afterImg.addClass("twentytwenty-after");
-
-                    var calcOffset = function(dimensionPct) {
-                        var w = beforeImg.width();
-                        var h = beforeImg.height();
-                        return {
-                            w: w+"px",
-                            h: h+"px",
-                            cw: (dimensionPct*w)+"px",
-                            ch: (dimensionPct*h)+"px"
-                        };
-                    };
-
-                    var adjustContainer = function(offset) {
-                        if (sliderOrientation === 'vertical') {
-                            beforeImg.css("clip", "rect(0,"+offset.w+","+offset.ch+",0)");
-                            afterImg.css("clip", "rect("+offset.ch+","+offset.w+","+offset.h+",0)");
-                        }
-                        else {
-                            beforeImg.css("clip", "rect(0,"+offset.cw+","+offset.h+",0)");
-                            afterImg.css("clip", "rect(0,"+offset.w+","+offset.h+","+offset.cw+")");
-                        }
-                        container.css("height", offset.h);
-                    };
-
-                    var adjustSlider = function(pct) {
-                        var offset = calcOffset(pct);
-                        slider.css((sliderOrientation==="vertical") ? "top" : "left", (sliderOrientation==="vertical") ? offset.ch : offset.cw);
-                        adjustContainer(offset);
-                    };
-
-                    // Return the number specified or the min/max number if it outside the range given.
-                    var minMaxNumber = function(num, min, max) {
-                        return Math.max(min, Math.min(max, num));
-                    };
-
-                    // Calculate the slider percentage based on the position.
-                    var getSliderPercentage = function(positionX, positionY) {
-                        var sliderPercentage = (sliderOrientation === 'vertical') ?
-                            (positionY-offsetY)/imgHeight :
-                            (positionX-offsetX)/imgWidth;
-
-                        return minMaxNumber(sliderPercentage, 0, 1);
-                    };
-
-                    $(window).on("resize.twentytwenty", function(e) {
-                        adjustSlider(sliderPct);
-                    });
-
-                    var offsetX = 0;
-                    var offsetY = 0;
-                    var imgWidth = 0;
-                    var imgHeight = 0;
-                    var onMoveStart = function(e) {
-                        if (((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY && e.distX > -e.distY)) && sliderOrientation !== 'vertical') {
-                            e.preventDefault();
-                        }
-                        else if (((e.distX < e.distY && e.distX < -e.distY) || (e.distX > e.distY && e.distX > -e.distY)) && sliderOrientation === 'vertical') {
-                            e.preventDefault();
-                        }
-                        container.addClass("active");
-                        offsetX = container.offset().left;
-                        offsetY = container.offset().top;
-                        imgWidth = beforeImg.width();
-                        imgHeight = beforeImg.height();
-                    };
-                    var onMove = function(e) {
-                        if (container.hasClass("active")) {
-                            sliderPct = getSliderPercentage(e.pageX, e.pageY);
-                            adjustSlider(sliderPct);
-                        }
-                    };
-                    var onMoveEnd = function() {
-                        container.removeClass("active");
-                    };
-
-                    var moveTarget = options.move_with_handle_only ? slider : container;
-                    moveTarget.on("movestart",onMoveStart);
-                    moveTarget.on("move",onMove);
-                    moveTarget.on("moveend",onMoveEnd);
-
-                    if (options.move_slider_on_hover) {
-                        container.on("mouseenter", onMoveStart);
-                        container.on("mousemove", onMove);
-                        container.on("mouseleave", onMoveEnd);
-                    }
-
-                    slider.on("touchmove", function(e) {
-                        e.preventDefault();
-                    });
-
-                    container.find("img").on("mousedown", function(event) {
-                        event.preventDefault();
-                    });
-
-                    if (options.click_to_move) {
-                        container.on('click', function(e) {
-                            offsetX = container.offset().left;
-                            offsetY = container.offset().top;
-                            imgWidth = beforeImg.width();
-                            imgHeight = beforeImg.height();
-
-                            sliderPct = getSliderPercentage(e.pageX, e.pageY);
-                            adjustSlider(sliderPct);
-                        });
-                    }
-
-                    $(window).trigger("resize.twentytwenty");
-                });
-            };
-
-        })(jQuery);
-    </script>
-    <script>
-        $(document).ready(function () {
-            setTimeout(function() {
-                $(".twentytwenty-container").twentytwenty();
-            }, 300);
+            document.getElementsByClassName("image")[1].style.width = sliderPos + "%";
+            document.getElementsByClassName("slider-control")[0].style.left = sliderPos + "%";
         });
     </script>
 @stop
