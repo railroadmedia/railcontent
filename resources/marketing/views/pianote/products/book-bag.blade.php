@@ -161,35 +161,70 @@
     </style>
     <style>
 
-        .image-slider-container .range-slider {
-            justify-content: center;
-            align-items: center;
-            background: transparent;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-            z-index: 2;
-            transition: all 200ms linear;
+        .sliderContainer .img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: 900px 100%;
         }
-        .image-slider-container .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 4px;
-            height: 705px;
-            background: #191617;
-            cursor: move;
-            transition: all 300ms ease;
-            margin-left: 6px;
+        @media (max-width: 640px) {
+            .sliderContainer .img {
+                background-size: 400px 90%;
+            }
         }
 
-        .slider-control {
-            width: 32px;
-            transform: translate(-50%, -50%);
-            cursor: grab;
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .sliderContainer .img {
+                background-size: 700px 100%;
+            }
         }
-        .image-slider-container {
-            transform: scale(1) rotate(0);
-            transform-style: preserve-3d;
+
+        .sliderContainer .slider {
+        position: absolute;
+        appearance: none;
+        width: 100%;
+        height: 100%;
+        background: rgba(242, 242, 242, 0);
+        outline: none;
+        margin: 0;
+        transition: all 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+
+        .sliderContainer .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 2px;
+        height: 600px;
+        background: #191617;
+        cursor: pointer;
+        margin-left:4px;
+        }
+
+        .sliderContainer .slider::-moz-range-thumb {
+        width: 2px;
+        height: 600px;
+        background: #191617;
+        cursor: pointer;
+        }
+
+        .sliderContainer .slider-button {
+        pointer-events: none;
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #191617;
+        left: calc(50% - 13px);
+        top: calc(50% - 13px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: grab;
         }
     </style>
 @stop
@@ -381,16 +416,30 @@
                 Let’s be honest. Your practice space looks like a mad scientist's desk. Books, staff paper,<br class="hidden sm:inline">
                 sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</p>
 
-            <div class="image-slider-container relative w-full overflow-hidden mx-auto h-96 sm:h-[44rem]">
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 100%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 50%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');"></div>
+                <div class="w-full flex justify-center items-cente">
+                <div class="margin-auto">
+                    <div 
+                        x-data="{ sliderPosition: 50 }" 
+                        x-init="
+                            $watch('sliderPosition', value => {
+                                document.querySelector('.foreground-img').style.width = value + '%';
+                                document.querySelector('.slider-button').style.left = `calc(${value}% - 13px)`;
+                            });
+                            document.getElementById('slider').addEventListener('input', function(e) {
+                                sliderPosition = e.target.value;
+                            });
+                        "
+                        class='sliderContainer relative w-[400px] sm:w-[600px] md:w-[700px] lg:w-[900px]' style="height:600px;">
 
-                <!-- Range Input -->
-                <input id="range-slider" class="range-slider flex absolute w-full h-full m-0" name="slider" type="range" min="1" max="100" value="50" />
+                            <div class='img background-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');"></div>
+                            <div class='img foreground-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp'); width: 50%;"></div>
 
-                <!-- Slider Control -->
-                <div class="slider-control bg-black text-white rounded-full top-1/2 block relative z-10 text-center py-1" style="left:50%;">
-                    <i class="fas fa-left-right"></i>
+                        
+                            <input type="range" min="1" max="100" x-model="sliderPosition" class="slider absolute w-full h-full bg-transparent outline-none m-0 transition-all duration-200 flex justify-center items-center" name='slider' id="slider">
+                        <div class='slider-button'>
+                            <i class="fas fa-left-right text-white"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -618,13 +667,4 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-
-    <script>
-        document.getElementById("range-slider").addEventListener("input", (e) => {
-            const sliderPos = e.target.value;
-
-            document.getElementsByClassName("image")[1].style.width = sliderPos + "%";
-            document.getElementsByClassName("slider-control")[0].style.left = sliderPos + "%";
-        });
-    </script>
 @stop
