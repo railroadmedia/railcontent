@@ -112,7 +112,8 @@ $userData = assembleUserAttributes(user());
         ])
 
         {{-- Pendo Script --}}
-        <script>            
+        <script>     
+            console.log('pendo script')       
             (function(apiKey){
                 (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
                     v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
@@ -121,9 +122,11 @@ $userData = assembleUserAttributes(user());
                         z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
                         pendo.initialize({
                             visitor: {
-                                id: {{ user()->id }},
-                                email: "{{ user()->email }}"
+                                id: "{{ user()->email }}",
                             },
+                            account: {
+                                id: {{ user()->id }},
+                            }   
                         });
                 })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');
         </script>
