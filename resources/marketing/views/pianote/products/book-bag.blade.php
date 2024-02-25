@@ -192,6 +192,16 @@
             transform-style: preserve-3d;
         }
     </style>
+    @php
+        if(!empty($membersVersion)) {
+             $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true';
+             $discountedPrice = 149;
+        }
+        else {
+             $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1';
+             $discountedPrice = $productPrices['pianote-book-bag']->discounted_price;
+        }
+    @endphp
 @stop
 
 @section('body-data')
@@ -213,13 +223,13 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-bookbag-logo-white.svg"><br>
                 <h6 class="py-4 sm:py-6 px-4">A handcrafted premium leather satchel for your music books, laptop, and life.</h6>
                 <h3 class="leading-tight">
-                    @if (floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
+                    @if (floatval($productPrices['pianote-book-bag']->price) > floatval($discountedPrice))
                         <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
-                        <strong>${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
+                        <strong>${{ floatval($discountedPrice) }}</strong>
                         <span class="text-xl">(Save
-                            {{ round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) }}%)</span>
+                            {{ round(100 - 100 * (floatval($discountedPrice) / floatval($productPrices['pianote-book-bag']->price))) }}%)</span>
                     @else
-                        <strong>Only ${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
+                        <strong>Only ${{ floatval($discountedPrice) }}</strong>
                     @endif
                 </h3>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
@@ -518,10 +528,10 @@
                     <tr style="background-color:transparent!important;">
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-black">
-                            @if(floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
+                            @if(floatval($productPrices['pianote-book-bag']->price) > floatval($discountedPrice))
                                 <s class="opacity-40">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
                             @endif
-                            <strong>${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
+                            <strong>${{ floatval($discountedPrice) }}</strong>
                         </td>
                         <td class="rounded-b-xl"><strong>$349</strong></td>
                         <td class="rounded-b-xl"><strong>$448</strong></td>
@@ -545,21 +555,27 @@
             <div
                 class="flex flex-wrap items-start justify-center flex-col-reverse md:flex-row max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto">
 
-                @include('pianote.products.partials._promo-card', [
-                    'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) . '%',
-                    'productTheme' => 'black',
-                    'cardTitle' => 'Book Bag Only',
-                    'cardImageHeight' => 'h-40',
-                    'cardImageUrl' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp',
-                    'cardPrice' => floatval($productPrices['pianote-book-bag']->discounted_price),
-                    'cardDiscount' => floatval($productPrices['pianote-book-bag']->price),
-                    'cardSubtitle' => 'One-time payment. Free shipping.',
-                    'cardButtons' => [['link' => '/ecommerce/add-to-cart?locked=true&products[pianote-book-bag]=1', 'text' => 'Select']],
-                    'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
-                    'sku' => 'pianote-book-bag',
-                ])
-
+                @if(!empty($membersVersion))
+                    @include('pianote.products.partials._promo-card', [
+                        'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($discountedPrice) / floatval($productPrices['pianote-book-bag']->price))) . '%',
+                        'productTheme' => 'black',
+                        'cardTitle' => 'Book Bag Only',
+                        'cardImageHeight' => 'h-40',
+                        'cardImageUrl' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp',
+                        'cardDiscount' => floatval($discountedPrice),
+                        'cardPrice' => floatval($productPrices['pianote-book-bag']->price),
+                        'cardSubtitle' => 'One-time payment. Free shipping.',
+                        'cardButtons' => [
+                            [
+                                'link' => $orderUrl,
+                                'text' => 'Select'
+                            ]
+                        ],
+                        'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
+                        'sku' => 'pianote-book-bag',
+                    ])
+                @endif
                 @include('pianote.products.partials._promo-card', [
                     'topBadgeText' => 'LAUNCH SPECIAL',
                     'productTheme' => 'pianote',
@@ -567,6 +583,7 @@
                     'cardImageHeight' => 'h-40',
                     'cardImageUrl' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-02.webp',
+                    'cardDiscount' => 249,
                     'cardPrice' => '249',
                     'cardSubtitle' => 'One-time payment. Free shipping.',
                     'cardButtons' => [['link' => '/', 'text' => 'Select']],
