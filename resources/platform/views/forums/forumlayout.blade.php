@@ -95,9 +95,11 @@ $userData = assembleUserAttributes(user());
                 z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
                 pendo.initialize({
                     visitor: {
-                        id: {{ user()->id }},
-                        email: {{ user()->email }}
+                        id: "{{ user()->email }}",
                     },
+                    account: {
+                        id: {{ user()->id }},
+                    }  
                 });
             })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');    
 
