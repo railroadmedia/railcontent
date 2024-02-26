@@ -84,7 +84,7 @@
                         :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName" :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo" :lesson="{ completed: videoButtons.isCompleted }"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" />
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" :difficulty="videoResources.difficulty" />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />
@@ -161,7 +161,7 @@
             </aside>
 
             <!-- Lesson Content Wrapper -->
-            <section class="tw-col-span-3 xl:tw-row-span-2" :class="{ 'xl:tw-col-span-2': isRelatedSectionOpen }">
+            <section class="tw-col-span-3 xl:tw-row-span-2" :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'xl:tw-mr-[64px]'">
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row tw-w-full">
                         <VideoComments :theme-color="commentsProps.themeColor" :brand="commentsProps.brand"

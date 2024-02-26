@@ -68,7 +68,7 @@
                         <h3 class="leading-tight mb-2"><strong>{{$secondDeal}}</strong></h3>
                         <img
                             class="{{$secondImageHeight}} rounded-md transition-opacity opacity-0"
-                            src={{ $secondDealImage }}
+                            src="{{ $secondDealImage }}"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="card image"

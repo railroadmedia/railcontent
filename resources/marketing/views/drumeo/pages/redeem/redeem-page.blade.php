@@ -181,7 +181,7 @@
                 <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata.png">
                 <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
+                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/915243228" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
                 </div>
             @elseif(empty($thomann))
                 <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
