@@ -90,7 +90,6 @@ class MusoraApiUserProvider implements UserProviderInterface
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 $accountName,
                 $user->id,
-                false
             );
         } catch (ModelNotFoundException $exception) {
             $customerIoData = null;
@@ -153,7 +152,6 @@ class MusoraApiUserProvider implements UserProviderInterface
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
                 $user->id,
-                false
             );
         } catch (ModelNotFoundException $exception) {
             $customerIoData = null;

@@ -78,7 +78,7 @@ class CustomerIoService
      * @return Customer
      * @throws Exception
      */
-    public function getCustomerByUserId($accountName, $userId, $includeExternalAttributes = true)
+    public function getCustomerByUserId($accountName, $userId)
     {
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -95,15 +95,6 @@ class CustomerIoService
                     'site_id' => $accountConfigData['site_id'],
                 ])
                 ->firstOrFail();
-
-        if ($includeExternalAttributes) {
-            $externalCustomerData = $this->customerIoApiGateway->getCustomer(
-                $accountConfigData['app_api_key'],
-                $customer->uuid
-            );
-
-            $customer->setExternalAttributes((array)$externalCustomerData->attributes);
-        }
 
         return $customer;
     }
