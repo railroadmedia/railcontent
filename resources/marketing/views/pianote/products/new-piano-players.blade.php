@@ -256,9 +256,19 @@ $items = [
                         'name' => 'Jayde McIntosh',
                         ],
                         [
-                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/iankershaw.jpg',
-                        'comment' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
-                        'name' => 'Ian Kershaw',
+                        'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1699032272-630719.jpg',
+                        'comment' => "It’s the best place to start like myself. After 15 days I can comfortably play with both hands. ",
+                        'name' => 'Brian Smith',
+                        ],
+                        [
+                        'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/C5C626A5-9761-42DF-8A46-875D21570D3D-1688758597-569824.jpg',
+                        'comment' => "I absolutely love it. They teach you all about chords. I started playing piano at church now.",
+                        'name' => 'Samantha Latham',
+                        ],
+                        [
+                        'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/B6DBAB11-4DA8-49A3-AC5B-6EC2E3D88634-1694433618-539646.jpg',
+                        'comment' => "NPPSH is the ideal first step irrespective of their age. It’s changed my life for the better.",
+                        'name' => 'James Suntres',
                         ],
 ];
                     $students = "Pianote Student"
