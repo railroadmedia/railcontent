@@ -10371,12 +10371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "bcff297de63e13fba6d871c5a1ce9e0a752eb5d8"
+                "reference": "1fc52682d8d631faf9b141ebf52f6075055cde4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/bcff297de63e13fba6d871c5a1ce9e0a752eb5d8",
-                "reference": "bcff297de63e13fba6d871c5a1ce9e0a752eb5d8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1fc52682d8d631faf9b141ebf52f6075055cde4d",
+                "reference": "1fc52682d8d631faf9b141ebf52f6075055cde4d",
                 "shasum": ""
             },
             "require": {
@@ -10433,7 +10433,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-02-26T12:10:02+00:00"
+            "time": "2024-02-26T13:52:02+00:00"
         },
         {
             "name": "railroad/railforums",
