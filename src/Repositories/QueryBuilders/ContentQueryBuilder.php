@@ -508,17 +508,33 @@ class ContentQueryBuilder extends QueryBuilder
                     ConfigService::$tableContent . '.id'
                 );
 
-                $whereInArray = [];
-
-                foreach ($includedFieldDataGrouped as $includedFieldData) {
-                    $whereInArray[] = $includedFieldData['value'];
-                }
-
-                $this->whereIn(
-                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.' .
-                    $includedFieldDataGrouped[0]['associated_table']['column'],
-                    $whereInArray
-                );
+                $this->where(function (Builder $builder) use (
+                    $includedFieldDataGrouped
+                ) {
+                    foreach ($includedFieldDataGrouped as $includedFieldData) {
+                        if( $includedFieldData['operator'] == 'BETWEEN'){
+                            $builder->orWhereBetween(
+                                $includedFieldData['associated_table']['alias'] .
+                                '.' .
+                                $includedFieldData['associated_table']['column'],
+                                [DB::raw($includedFieldData['min']), DB::raw($includedFieldData['max'])]
+                            );
+                        }else {
+                            $builder->orwhere(
+                                $includedFieldData['associated_table']['alias'].
+                                '.'.
+                                $includedFieldData['associated_table']['column'],
+                                $includedFieldData['operator'],
+                                is_numeric($includedFieldData['value']) ? DB::raw($includedFieldData['value']) :
+                                    DB::raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($includedFieldData['value'])
+                                    )
+                            );
+                        }
+                    }
+                });
             }
         }
 

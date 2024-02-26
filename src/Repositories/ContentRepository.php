@@ -1639,8 +1639,8 @@ class ContentRepository extends RepositoryBase
     {
         $value = Arr::first(explode(' (', $value));
 
-        $mapping = config('railcontent.difficulty_map') ?? [];
-        $difficultyValues = array_keys($mapping, $value);
+        $difficultyMapping = config('railcontent.difficulty_map') ?? [];
+        $difficultyValues = array_keys($difficultyMapping, $value);
 
         foreach($difficultyValues ?? [] as $difficultyInt){
             $this->includedFields[] = [
@@ -1656,17 +1656,34 @@ class ContentRepository extends RepositoryBase
             ];
         }
 
-        $this->includedFields[] = [
-            'name' => $name,
-            'value' => $value,
-            'type' => $type,
-            'operator' => $operator,
-            'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
-            'is_content_column' => in_array(
-                $name,
-                config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-            ),
-        ];
+        $bpmMapping = config('railcontent.bpm_map') ?? [];
+        if(isset($bpmMapping[$value])){
+            $this->includedFields[] = [
+                'name' => $name,
+                'value' => $bpmMapping[$value]['min'],
+                'min' => $bpmMapping[$value]['min'],
+                'max' => $bpmMapping[$value]['max'],
+                'type' => 'integer',
+                'operator' => 'BETWEEN',
+                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                'is_content_column' => in_array(
+                    $name,
+                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                ),
+            ];
+        } else {
+            $this->includedFields[] = [
+                'name' => $name,
+                'value' => $value,
+                'type' => $type,
+                'operator' => $operator,
+                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                'is_content_column' => in_array(
+                    $name,
+                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                ),
+            ];
+        }
 
         return $this;
     }

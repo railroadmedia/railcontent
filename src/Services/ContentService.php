@@ -1193,13 +1193,12 @@ class ContentService
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
                 $results = new ContentFilterResultsEntity($results);
             } else {
-                $filterFields = $this->getFilterOptions($filter, $pullFilterFields, $includedTypes);
 
                 $resultsDB = new ContentFilterResultsEntity([
                                                                 'results' => $filter->retrieveFilter(),
                                                                 'total_results' => $pullPagination ?
                                                                     $filter->countFilter() : 0,
-                                                                'filter_options' => $filterFields,
+                                                                'filter_options' => $this->getFilterOptions($filter, $pullFilterFields, $includedTypes),
                                                             ]);
 
                 $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
@@ -1223,6 +1222,14 @@ class ContentService
                 $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
                     $includedTypes,
                     $filterFields['difficulty']
+                );
+            }
+        }
+
+        if ($pullFilterFields && !empty($filterFields['bpm'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['bpm'] = $this->bpmFilterOptionsMapping(
+                    $filterFields['bpm']
                 );
             }
         }
@@ -2959,5 +2966,32 @@ class ContentService
         }
 
         return $filters['difficulty'];
+    }
+
+    private function bpmFilterOptionsMapping($bpmOptions)
+    {
+        $mappedBpm = [];
+        foreach ($bpmOptions as $index => $difficultyS) {
+            $difficultyArray = (explode(' (', $difficultyS));
+            $difficulty = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
+            $difficultyNr = str_replace(')', '', $difficultyArray[1]);
+            $mappingOptions = config('railcontent.bpm_map') ?? [];
+            foreach($mappingOptions as $key=>$mappingOption){
+                if($difficulty >= $mappingOption['min'] && $difficulty <= $mappingOption['max']){
+                    $mappedBpm[$key] =
+                        ($mappedBpm[$key] ?? 0) + $difficultyNr;
+                }
+            }
+        }
+        $order = array('50-90','91-120','121-150','151-180', '181+');
+        $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedBpm);
+        $filters['bpm'] = [];
+        foreach ($properOrderedArray as $bpm => $count) {
+            if($count != 0) {
+                $filters['bpm'][] = $bpm.' ('.$count.')';
+            }
+        }
+
+        return $filters['bpm'];
     }
 }
