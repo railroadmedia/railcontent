@@ -64,7 +64,7 @@
             <div>
                 <transition appear name="fade">
                     <catalogue-card-container
-                        :pre-loaded-content="{{ $startedLessons }}" user-id="{{ auth()->id() }}"
+                        :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}" user-id="{{ auth()->id() }}"
                         theme-color="{{ $brand }}"
                         catalogue-type="grid"
                         no-results-message="Looks like you haven't started any song. Once you start any, it will show up here for you to access later."

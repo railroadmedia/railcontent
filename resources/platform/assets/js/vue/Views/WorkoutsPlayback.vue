@@ -84,7 +84,7 @@
                         :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName" :report-recipient="videoResources.reportRecipient"
                         :report-logo="videoResources.reportLogo" :lesson="{ completed: videoButtons.isCompleted }"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" />
+                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)" :difficulty="videoResources.difficulty" />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />

@@ -136,6 +136,7 @@
                     report-user-email="{{ user()->email }}"
                     report-user-name="{{ user()->display_name }}"
                     report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
+                    difficulty="{{ $lessonContent->fetch('difficulty') }}"
                 ></video-resources>
 
                 {{-- Add to List and Next/Prev Buttons --}}

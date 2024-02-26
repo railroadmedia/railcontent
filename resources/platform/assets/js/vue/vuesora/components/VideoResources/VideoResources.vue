@@ -3,9 +3,16 @@
         <div class="tw-flex tw-items-start tw-justify-between tw-mb-4 tw-flex-wrap">
 
             <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
-                <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
+                <h1 class="heading tw-pt-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
+                <div class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
+                    <div class="tw-uppercase">{{ artistName }}</div>
+                    <DotSeparator />
+                    <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
+                    <DotSeparator />
+                    <div>{{ singularContentType }}</div>
+                </div>
             </div>
             <!-- Video CTAs -->
             <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
@@ -267,6 +274,9 @@ import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
 import ReportModal from "../../../components/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
+import DifficultyLabel from "../../../components/DifficultyLabel/DifficultyLabel.vue";
+import DotSeparator from "./DotSeparator.vue";
+import { contentTypes } from '../../../../utils';
 
 export default {
     name: "VideoResources",
@@ -276,12 +286,19 @@ export default {
         ModalRenderer,
         XIcon,
         FlagIcon,
+        DifficultyLabel,
+        DotSeparator,
     },
     mixins: [ThemeClasses],
     props: {
         brand: {
             type: String,
             default: () => "drumeo",
+        },
+
+        difficulty: {
+            type: [String, Number],
+            default: () => "",
         },
 
         title: {
@@ -393,6 +410,10 @@ export default {
             type: String,
             default: '',
         },
+        artist: {
+            type: String,
+            default: null,
+        },
     },
 
     data() {
@@ -421,6 +442,15 @@ export default {
 
             return `${location.protocol}//${location.host}${location.pathname}`;
         },
+        singularContentType() {
+            return contentTypes[this.lessonType]?.singular || this.lessonType;
+        },
+        artistName() {
+            if (this.artist) {
+                return this.artist;
+            }
+            return this.instructors.length > 0 ? this.instructors[0].name : brand.toUpperCase();
+        }
     },
     mounted() {
         document.addEventListener("click", (event) => {
