@@ -16,8 +16,9 @@
     <template v-slot:top-right>
       <div class="tw-flex tw-justify-between sm:tw-justify-end tw-items-center tw-w-full">
         <span v-if="progress"
-          class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-3xl tw-font-bold">Your
-          Progress - {{ progress }}%</span>
+          class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-[28px] tw-font-bold">
+            Your Progress - {{ progress }}%
+        </span>
         <div>
           <PageHeaderCta v-if="backToAllLessonsUrl" text="Back to all lessons" icon="fas fa-chevron-double-left"
             :href="backToAllLessonsUrl" />
