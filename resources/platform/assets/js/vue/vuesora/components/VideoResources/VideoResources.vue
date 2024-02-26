@@ -213,7 +213,6 @@
                 v-if="showReportModal"
                 :brand="brand"
                 :logo="reportLogo"
-                :recipient="reportRecipient"
                 :user-name="reportUserName"
                 :user-email="reportUserEmail"
                 @onCloseModal="toggleReportModal"
@@ -395,11 +394,6 @@ export default {
         lesson: {
             type: Object,
             default: {},
-        },
-
-        reportRecipient: {
-            type: String,
-            default: '',
         },
 
         reportLogo: {
