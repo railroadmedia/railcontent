@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
 ! tailwindcss v3.3.7 | MIT License | https://tailwindcss.com
+=======
+! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
+>>>>>>> filters-v2-BE-support
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -26,17 +30,32 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+<<<<<<< HEAD
 */
 
 html {
+=======
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+>>>>>>> filters-v2-BE-support
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -moz-tab-size: 4; /* 3 */
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
+<<<<<<< HEAD
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
+=======
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+>>>>>>> filters-v2-BE-support
 }
 
 /*
@@ -2401,6 +2420,13 @@ video {
   --tw-translate-x: 0px !important;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
+<<<<<<< HEAD
+=======
+.translate-x-2 {
+  --tw-translate-x: 0.5rem !important;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+}
+>>>>>>> filters-v2-BE-support
 .translate-x-full {
   --tw-translate-x: 100% !important;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
@@ -2520,6 +2546,12 @@ video {
 .content-end {
   align-content: flex-end !important;
 }
+<<<<<<< HEAD
+=======
+.content-around {
+  align-content: space-around !important;
+}
+>>>>>>> filters-v2-BE-support
 .items-start {
   align-items: flex-start !important;
 }
@@ -2642,6 +2674,12 @@ video {
 .whitespace-pre-wrap {
   white-space: pre-wrap !important;
 }
+<<<<<<< HEAD
+=======
+.text-wrap {
+  text-wrap: wrap !important;
+}
+>>>>>>> filters-v2-BE-support
 .break-words {
   overflow-wrap: break-word !important;
 }
@@ -3028,6 +3066,13 @@ video {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+<<<<<<< HEAD
+=======
+.bg-zinc-300 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
+}
+>>>>>>> filters-v2-BE-support
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2 !important;
 }
@@ -3066,6 +3111,12 @@ video {
 .to-\[\#29050f\] {
   --tw-gradient-to: #29050f var(--tw-gradient-to-position) !important;
 }
+<<<<<<< HEAD
+=======
+.bg-\[length\:530px\] {
+  background-size: 530px !important;
+}
+>>>>>>> filters-v2-BE-support
 .bg-contain {
   background-size: contain !important;
 }
@@ -4448,6 +4499,13 @@ li, p {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
 }
+<<<<<<< HEAD
+=======
+.hover\:bg-red-500:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity)) !important;
+}
+>>>>>>> filters-v2-BE-support
 .hover\:bg-singeo:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
@@ -4537,6 +4595,7 @@ li, p {
 .group:hover .group-hover\:opacity-80 {
   opacity: 0.8 !important;
 }
+<<<<<<< HEAD
 :is(.dark .dark\:border-\[\#445F74\]) {
   --tw-border-opacity: 1 !important;
   border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
@@ -4565,6 +4624,8 @@ li, p {
   --tw-text-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
+=======
+>>>>>>> filters-v2-BE-support
 @media (min-width: 640px) {
 
   .sm\:absolute {
@@ -5238,6 +5299,13 @@ li, p {
     height: 24rem !important;
   }
 
+<<<<<<< HEAD
+=======
+  .sm\:h-\[44rem\] {
+    height: 44rem !important;
+  }
+
+>>>>>>> filters-v2-BE-support
   .sm\:h-\[450px\] {
     height: 450px !important;
   }
@@ -5566,6 +5634,13 @@ li, p {
     border-top-width: 0px !important;
   }
 
+<<<<<<< HEAD
+=======
+  .sm\:bg-\[length\:960px\] {
+    background-size: 960px !important;
+  }
+
+>>>>>>> filters-v2-BE-support
   .sm\:bg-left {
     background-position: left !important;
   }
@@ -9322,3 +9397,34 @@ li, p {
     padding-right: 0px !important;
   }
 }
+<<<<<<< HEAD
+=======
+:is(:where(.dark) .dark\:border-\[\#445F74\]) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
+}
+:is(:where(.dark) .dark\:bg-\[\#000B17\]) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 11 23 / var(--tw-bg-opacity)) !important;
+}
+:is(:where(.dark) .dark\:bg-\[\#00101D\]) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
+}
+:is(:where(.dark) .dark\:text-\[\#9EC0DC\]) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.dark) .dark\:text-white) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.dark) .dark\:placeholder\:text-\[\#9EC0DC\])::-moz-placeholder {
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+:is(:where(.dark) .dark\:placeholder\:text-\[\#9EC0DC\])::placeholder {
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+>>>>>>> filters-v2-BE-support
