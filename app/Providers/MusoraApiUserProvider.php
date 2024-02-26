@@ -96,13 +96,11 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         $extraData = [
-            'cio_id' => null,
             'customer_io_id' => null,
         ];
 
         if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
             $extraData = [
-                'cio_id' => $externalAttributes['cio_id'],
                 'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
@@ -166,13 +164,11 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         $extraData = [
-            'cio_id' => null,
             'customer_io_id' => null,
         ];
 
         if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
             $extraData = [
-                'cio_id' => $externalAttributes['cio_id'],
                 'customer_io_id' => strval($externalAttributes['id']),
             ];
         }
