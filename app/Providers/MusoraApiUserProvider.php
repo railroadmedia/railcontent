@@ -89,21 +89,16 @@ class MusoraApiUserProvider implements UserProviderInterface
             $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 $accountName,
-                $user->id
+                $user->id,
+                false
             );
         } catch (ModelNotFoundException $exception) {
             $customerIoData = null;
         }
 
         $extraData = [
-            'customer_io_id' => null,
+            'customer_io_id' => $customerIoData?->uuid,
         ];
-
-        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
-            $extraData = [
-                'customer_io_id' => strval($externalAttributes['id']),
-            ];
-        }
 
         $userArray = array_merge($user->toArray(), $extraData);
         return [
@@ -157,21 +152,17 @@ class MusoraApiUserProvider implements UserProviderInterface
         try {
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
-                $user->id
+                $user->id,
+                false
             );
         } catch (ModelNotFoundException $exception) {
             $customerIoData = null;
         }
 
         $extraData = [
-            'customer_io_id' => null,
+            'customer_io_id' => $customerIoData?->uuid,
         ];
 
-        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
-            $extraData = [
-                'customer_io_id' => strval($externalAttributes['id']),
-            ];
-        }
         $brand = brand();
         $showLearningPathsOnHomepage = false;
         $hideSection = $brand.'_trial_section_hide';
