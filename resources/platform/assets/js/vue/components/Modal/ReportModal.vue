@@ -20,10 +20,6 @@
             type: String,
             default: '',
         },
-        recipient: {
-            type: String,
-            default: '',
-        },
         logo: {
             type: String,
             default: '',
@@ -51,7 +47,7 @@
                 formData.append('lines[]', content.value);
                 formData.append('brand', props.brand);
                 formData.append('logo', props.logo);
-                formData.append('recipient', props.recipient);
+                formData.append('recipient', 'support@musora.com');
                 formData.append('alert', `Lesson Error Report by: ${props.userName} (${props.userEmail})`);
 
                 const submit = await axios.post('/mailora/secure/send', formData, {headers: {'Content-Type': 'multipart/form-data'} });
