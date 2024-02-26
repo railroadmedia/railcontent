@@ -160,18 +160,10 @@
         }
     </style>
     <style>
-
-        .image-slider-container .range-slider {
-            justify-content: center;
-            align-items: center;
-            background: transparent;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-            z-index: 2;
-            transition: all 200ms linear;
+        .messy-bg {
+            background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');
         }
-        .image-slider-container .range-slider::-webkit-slider-thumb {
+        .range-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
             width: 4px;
@@ -180,16 +172,6 @@
             cursor: move;
             transition: all 300ms ease;
             margin-left: 6px;
-        }
-
-        .slider-control {
-            width: 32px;
-            transform: translate(-50%, -50%);
-            cursor: grab;
-        }
-        .image-slider-container {
-            transform: scale(1) rotate(0);
-            transform-style: preserve-3d;
         }
     </style>
     @php
@@ -391,15 +373,14 @@
                 Let’s be honest. Your practice space looks like a mad scientist's desk. Books, staff paper,<br class="hidden sm:inline">
                 sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</p>
 
-            <div class="image-slider-container relative w-full overflow-hidden mx-auto h-96 sm:h-[44rem]">
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 100%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 50%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');"></div>
+            <div x-data="{ sliderValue: 50 }" class="relative transform-gpu w-full overflow-hidden mx-auto h-96 sm:h-[44rem]" style="transform-style: preserve-3d;">
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] messy-bg z-10"  :style="`width: ${sliderValue}%;`"></div>
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] bg-center w-full" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
 
-                <!-- Range Input -->
-                <input id="range-slider" class="range-slider flex absolute w-full h-full m-0" name="slider" type="range" min="1" max="100" value="50" />
+                <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-10"
+                    type="range" min="1" max="100" />
 
-                <!-- Slider Control -->
-                <div class="slider-control bg-black text-white rounded-full top-1/2 block relative z-10 text-center py-1" style="left:50%;">
+                <div :style="`left: ${sliderValue}%`" class="bg-black text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2">
                     <i class="fas fa-left-right"></i>
                 </div>
             </div>
@@ -635,13 +616,4 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-
-    <script>
-        document.getElementById("range-slider").addEventListener("input", (e) => {
-            const sliderPos = e.target.value;
-
-            document.getElementsByClassName("image")[1].style.width = sliderPos + "%";
-            document.getElementsByClassName("slider-control")[0].style.left = sliderPos + "%";
-        });
-    </script>
 @stop
