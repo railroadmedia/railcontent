@@ -430,14 +430,29 @@
                     <div 
                         x-data="{ sliderPosition: 50 }" 
                         x-init="
-                            $watch('sliderPosition', value => {
-                                document.querySelector('.foreground-img').style.width = value + '%';
-                                document.querySelector('.slider-button').style.left = `calc(${value}% - 13px)`;
-                            });
-                            document.getElementById('slider').addEventListener('input', function(e) {
-                                sliderPosition = e.target.value;
-                            });
-                        "
+                                $watch('sliderPosition', value => {
+                                    document.querySelector('.foreground-img').style.width = value + '%';
+                                    document.querySelector('.slider-button').style.left = `calc(${value}% - 13px)`;
+                                });
+                                const slider = document.getElementById('slider');
+                                slider.addEventListener('input', function(e) {
+                                    sliderPosition = e.target.value;
+                                });
+                                slider.addEventListener('touchstart', function(e) {
+                                    this.classList.add('active');
+                                });
+                                slider.addEventListener('touchmove', function(e) {
+                                    if (!this.classList.contains('active')) {
+                                        return;
+                                    }
+                                    let touch = e.touches[0];
+                                    let position = touch.pageX / this.offsetWidth * 100;
+                                    sliderPosition = Math.min(Math.max(position, this.min), this.max);
+                                });
+                                slider.addEventListener('touchend', function(e) {
+                                    this.classList.remove('active');
+                                });
+                            "
                         class='sliderContainer relative w-[400px] sm:w-[600px] md:w-[700px] lg:w-[900px]'>
 
                             <div class='img background-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
