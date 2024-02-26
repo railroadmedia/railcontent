@@ -2678,4 +2678,11 @@ return [
         'guitareo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/169b1f03-dc93-4b0f-105f-71921cbc2a00/public',
         'singeo' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/1f558634-9b71-4dd8-1a80-12670df39900/public'
     ],
+    'bpm_map' => [
+        '50-90' => ['min' => 50, 'max' => 90],
+        '91-120' => ['min' => 91, 'max' => 120],
+        '121-150' => ['min' => 121, 'max' => 150],
+        '151-180' => ['min' => 151, 'max' => 180],
+        '181+' => ['min' => 181, 'max' => 10000],
+    ]
 ];
