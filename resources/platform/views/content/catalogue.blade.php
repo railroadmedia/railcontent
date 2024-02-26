@@ -212,7 +212,7 @@
 {{--        @endif--}}
 {{--    @endif--}}
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] dark:tw-text-white">
         @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
             <play-alongs
                 ref="playAlongsVueInstance"
