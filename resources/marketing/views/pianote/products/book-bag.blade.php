@@ -160,15 +160,25 @@
         }
     </style>
     <style>
+        .sliderContainer {
+            height: 600px;
+        }
+
+        @media (max-width: 640px) {
+            .sliderContainer {
+                height: 500px;
+            }
+        }
 
         .sliderContainer .img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: 900px 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 900px 100%;
         }
+
         @media (max-width: 640px) {
             .sliderContainer .img {
                 background-size: 400px 90%;
@@ -182,49 +192,48 @@
         }
 
         .sliderContainer .slider {
-        position: absolute;
-        appearance: none;
-        width: 100%;
-        height: 100%;
-        background: rgba(242, 242, 242, 0);
-        outline: none;
-        margin: 0;
-        transition: all 0.2s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            position: absolute;
+            appearance: none;
+            width: 100%;
+            height: 100%;
+            background: rgba(242, 242, 242, 0);
+            outline: none;
+            margin: 0;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-
         .sliderContainer .slider::-webkit-slider-thumb {
-        appearance: none;
-        width: 2px;
-        height: 600px;
-        background: #191617;
-        cursor: pointer;
-        margin-left:4px;
+            appearance: none;
+            width: 2px;
+            height: 600px;
+            background: #191617;
+            cursor: pointer;
+            margin-left: 4px;
         }
 
         .sliderContainer .slider::-moz-range-thumb {
-        width: 2px;
-        height: 600px;
-        background: #191617;
-        cursor: pointer;
+            width: 2px;
+            height: 600px;
+            background: #191617;
+            cursor: pointer;
         }
 
         .sliderContainer .slider-button {
-        pointer-events: none;
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background-color: #191617;
-        left: calc(50% - 13px);
-        top: calc(50% - 13px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: grab;
+            pointer-events: none;
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #191617;
+            left: calc(50% - 13px);
+            top: calc(50% - 13px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
         }
     </style>
 @stop
@@ -429,10 +438,10 @@
                                 sliderPosition = e.target.value;
                             });
                         "
-                        class='sliderContainer relative w-[400px] sm:w-[600px] md:w-[700px] lg:w-[900px]' style="height:600px;">
+                        class='sliderContainer relative w-[400px] sm:w-[600px] md:w-[700px] lg:w-[900px]'>
 
-                            <div class='img background-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');"></div>
-                            <div class='img foreground-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp'); width: 50%;"></div>
+                            <div class='img background-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
+                            <div class='img foreground-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp'); width: 50%;"></div>
 
                         
                             <input type="range" min="1" max="100" x-model="sliderPosition" class="slider absolute w-full h-full bg-transparent outline-none m-0 transition-all duration-200 flex justify-center items-center" name='slider' id="slider">
