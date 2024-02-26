@@ -168,7 +168,7 @@
             appearance: none;
             width: 4px;
             height: 705px;
-            background: black;
+            background: #191617;
             cursor: move;
             transition: all 300ms ease;
             margin-left: 4px;
@@ -380,7 +380,7 @@
                 <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-50"
                     type="range" min="1" max="100" />
 
-                <div :style="`left: ${sliderValue}%`" class="bg-black text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2 translate-y-[-50%]">
+                <div :style="`left: ${sliderValue}%; background: #191617;`" class="text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2 translate-y-[-50%]">
                     <i class="fa fa-chevron-left text-xs"></i>
                     <i class="fa fa-chevron-right text-xs"></i>
                 </div>
