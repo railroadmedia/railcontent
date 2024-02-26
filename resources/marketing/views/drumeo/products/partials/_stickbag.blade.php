@@ -510,54 +510,47 @@
         @endphp
 
 
-        <!--Modal part-->
         <div x-data="{
-            open: false,
-            imgIndex: 0,
-            slides: [
-                @foreach ($slides as $slide)
-                '{{ $slide['img'] }}', @endforeach
-            ],
-            splide: null,
-            initSplide: function(startIndex) { 
-                console.log('initSplide called with index:', startIndex); 
-                if (!this.splide) { 
-                    this.splide = new Splide(this.$refs.splide, {
-                        type: 'fade',
-                        autoplay: true, 
-                        interval: 2000,
-                        gap: '1rem',
-                        lazyLoad: 'nearby',
-                        pagination: false,
-                        start: startIndex,
-                        perMove: 1,
-                        swipe: false, 
-                        arrows: true, 
-                        rewind: true, 
-                        breakpoints: {
-                            640: {
-                                    perMove: 1,
-                                    type: 'slide',
-                                    gap: '1rem',
-                                    arrows: false,
-                                    flickMaxPages: 3,
-                                    rewind: true,
-                            }
-                        },
-                    });
-                    this.splide.mount();
-                    console.log('Splide mounted:', this.splide); 
+    open: false,
+    imgIndex: null,
+    slides: [
+        @foreach ($slides as $slide)
+        '{{ $slide['img'] }}', @endforeach
+    ],
+    splide: null,
+    imgSrc: '',
+    initSplide: function(startIndex) { 
+        console.log('initSplide called with startIndex:', startIndex);
+        this.splide = new Splide($refs.splide, {
+            type: 'fade',
+            gap: '1rem',
+            lazyLoad: 'nearby',
+            pagination: false,
+            start: startIndex,
+            perMove: 1,
+            swipe: false, 
+            arrows: true, 
+            rewind: true, 
+            breakpoints: {
+                640: {
+                    perMove: 1,
+                    gap: '1rem',
+                    arrows: false,
                 }
-                this.splide.options.start = startIndex; 
-                this.splide.options.autoplay = true; 
-                this.splide.go(startIndex); 
+            },
+        }).mount();
+        console.log('Splide mounted');
+        this.splide.options.start = startIndex; 
+        this.splide.options.autoplay = true; 
+        this.splide.go(startIndex); 
     }
-}" class="flex flex-wrap items-center">
+}" 
+class="flex flex-wrap items-center">
         <!-- images design -->
             <div class="w-full sm:w-1/2 sm:order-1">
                 <div class="p-3 w-full">
                     <!-- call the function initSplide() and pass the index as an argument -->
-                    <div @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'; initSplide(0)"  
+                    <div  @click="console.log('Image clicked with src:', 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'); open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'; initSplide(0)"  
                         class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
                     </div>
@@ -591,7 +584,6 @@
                     </div>
                 </div>
             </div>
-
                 @include('drumeo._partials.modal-carousel')
             </div>
     </div>

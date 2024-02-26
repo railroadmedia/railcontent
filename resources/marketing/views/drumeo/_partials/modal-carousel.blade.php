@@ -21,7 +21,7 @@
                     <ul class="splide__list">
                         <template x-for="(slide, index) in slides" :key="index">
                             <li class="splide__slide">
-                                <img :src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/' + slide"
+                            <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/' + slide"
                                     alt="product image" class="w-full h-full object-cover rounded-xl">
                             </li>
                         </template>
