@@ -135,7 +135,6 @@
                     :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
                     report-user-email="{{ user()->email }}"
                     report-user-name="{{ user()->display_name }}"
-                    report-recipient="{{ config('mailora.'. $brand . '.ask-question-recipient') }}"
                     report-logo="{{ config('mailora.'. $brand . '.logo-link') }}"
                     difficulty="{{ $lessonContent->fetch('difficulty') }}"
                 ></video-resources>
