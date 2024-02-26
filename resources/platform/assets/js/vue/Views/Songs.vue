@@ -1,6 +1,24 @@
 <template>
     <!-- Header -->
-    <PageHeader pageType="songs" title="Songs" iconName="headphones-filled" :infoData="headerInfoData" :ctas="ctaConfig" />
+    <UnifiedHeader :brand="brand" header-background="https://i.ibb.co/PQVRRZP/songs-bg-1.png">
+        <template v-slot:left-content>
+            <div class="tw-flex tw-flex-col tw-pr-4 tw-h-full tw-justify-end">
+                <h1 class="tw-text-white tw-flex tw-items-center">
+                    <musora-icon icon-name="headphones-filled" :class="`tw-w-[36px] tw-mr-2 tw-text-${brand}`">
+                    </musora-icon>
+                    <span class="tw-text-[28px] lg:tw-text-32 tw-font-bold">Songs</span>
+                </h1>
+                <p
+                    class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
+                    {{ artistsNumber }} ARTISTS | {{ songsNumber }} SONGS
+                </p>
+            </div>
+        </template>
+        <template v-slot:right-content>
+            <SongRequest :brand="brand" />
+        </template>
+    </UnifiedHeader>
+
     <!-- Continue section -->
     <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-0 md:tw-px-8 tw-mt-[33px]">
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="continueUrl"
@@ -18,12 +36,12 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from "../../stores/user";
 
-import PageHeader from '../components/PageHeader/PageHeader.vue';
+import UnifiedHeader from '../components/Unified/UnifiedHeader';
 import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
+import SongRequest from "../components/Songs/SongRequest.vue";
 import CollectionWrapper from "../components/CollectionWrapper/CollectionWrapper.vue";
 
 const props = defineProps({
@@ -63,20 +81,5 @@ const props = defineProps({
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-
-const ctaConfig = computed(() => {
-    return [
-        {
-            type: 'SongRequest'
-        },
-    ];
-});
-
-const headerInfoData = computed(() => {
-    if (props.artistsNumber !== undefined && props.songsNumber !== undefined) {
-        return [`${props.artistsNumber} Artists`, `${props.songsNumber} Songs`];
-    }
-})
-
 
 </script>

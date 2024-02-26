@@ -91,86 +91,76 @@
 @section('content')
 
     @include('content.breadcrumbs._overview-breadcrumbs')
-    @if($parentContent->fetch('type') === 'course')
-        <page-header
-            page-type="{{ $parentContent->fetch('type') }}"
-            :title="'{{ $headerDataObj->title }}'"
-            hero-img="{{ $headerDataObj->heroImg }}"
-            progress="{{ $headerDataObj->progress }}"
-            content-id="{{ $headerDataObj->contentId }}"
-            :info-data="{{ json_encode($headerDataObj->infoData) }}"
-            :ctas="{{ json_encode($headerDataObj->ctas) }}"
-        ></page-header>
+
+    @if($parentContent->fetch('type') === 'learning-path')
+        @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
     @else
-        @if($parentContent->fetch('type') === 'learning-path')
-            @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
-        @else
-            {{-- Overview Headers --}}
-            @if($parentContent->fetch('type') === 'pack-bundle')
-                @include('partials.content.overview-headers._pack-bundle')
-            @elseif($parentContent->fetch('type') === 'learning-path-level')
-                @include('partials.content.overview-headers._learning-path-level')
-            @elseif($parentContent->fetch('type') === 'learning-path-course')
-                @include('partials.content.overview-headers._learning-path-course')
-            @elseif($parentContent->fetch('type') === 'challenge')
-                @component('partials.bladesora.members.components.header-banner', [
-                    'hideUser' => true,
-                    'contentType' => $parentContent->fetch('type'),
-                    'backgroundImage' => $parentContent->fetch('data.header_image_url'),
-                ])
-                    @slot('content')
-
-                        <a href="{{ url()->route('platform.workouts.challenges') }}"
-                            class="tw-absolute tw--top-[16px] tw-left-4 lg:tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3">
-                            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                        </a>
-
-                        <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
-                            {{-- Pack Logo --}}
-                            <img alt="{{ $parentContent->fetch('title') }} Logo"
-                                class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[300px]  tw-opacity-0"
-                                src="{{ $parentContent->fetch('data.logo_image_url') }}"
-                                onload="this.classList.remove('tw-opacity-0')"
-                            >
-                        </div>
-                    @endslot
-                @endcomponent
-
-            @else
-                @include('partials.content.overview-headers._default')
-            @endif
-
-            {{-- Level SubHeader --}}
-            @include('partials.bladesora.members.content.content-info-subheader', [
-                "brand" => $brand,
-                "infoData" => $infoData,
-                "contentId" => $parentContent->fetch('id'),
-                "contentType" => $parentContent->fetch('type'),
-                "resetProgress" => $parentContent->fetch('progress_state', false) !== false,
-                "instructorInfo" => false,
-                "addToList" => !in_array($parentContent->fetch('type'), ['learning-path', 'pack-bundle']),
-                "downloadableResources" => $parentContent['resources'] ?? [],
-                "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
+        {{-- Overview Headers --}}
+        @if($parentContent->fetch('type') === 'pack-bundle')
+            @include('partials.content.overview-headers._pack-bundle')
+        @elseif($parentContent->fetch('type') === 'learning-path-level')
+            @include('partials.content.overview-headers._learning-path-level')
+        @elseif($parentContent->fetch('type') === 'learning-path-course')
+            @include('partials.content.overview-headers._learning-path-course')
+        @elseif($parentContent->fetch('type') === 'challenge')
+            @component('partials.bladesora.members.components.header-banner', [
+                'hideUser' => true,
+                'contentType' => $parentContent->fetch('type'),
+                'backgroundImage' => $parentContent->fetch('data.header_image_url'),
             ])
+                @slot('content')
+
+                    <a href="{{ url()->route('platform.workouts.challenges') }}"
+                        class="tw-absolute tw--top-[16px] tw-left-4 lg:tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+
+                    <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
+                        {{-- Pack Logo --}}
+                        <img alt="{{ $parentContent->fetch('title') }} Logo"
+                            class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[300px]  tw-opacity-0"
+                            src="{{ $parentContent->fetch('data.logo_image_url') }}"
+                            onload="this.classList.remove('tw-opacity-0')"
+                        >
+                    </div>
+                @endslot
+            @endcomponent
+
+        @else
+            @include('partials.content.overview-headers._default')
         @endif
 
-        {{-- Content Progress --}}
-        <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
-            @include('partials.bladesora.members.content.content-progress', [
-                "themeColor" => $brand,
-                "brand" => $brand,
-                "contentType" => $parentContent->fetch('type'),
-                "labelText" => $progressLabelText ?? null,
-                "progress" => $parentContent->fetch('progress_percent'),
-                "nextLessonUrl" => $nextLessonUrl,
-                "backButton" => $backButton,
-                "compact" => $parentContent->fetch('type') === 'pack-bundle' && $pack->fetch('bundle_count') <= 1,
-                "xpAmount" =>  $parentContent->fetch('total_xp') ?? null,
-                "isCompleted" => $parentContent->fetch('completed', false),
-                "isStarted" => $parentContent->fetch('started', false),
-            ])
-        </div>
+        {{-- Level SubHeader --}}
+        @include('partials.bladesora.members.content.content-info-subheader', [
+            "brand" => $brand,
+            "infoData" => $infoData,
+            "contentId" => $parentContent->fetch('id'),
+            "contentType" => $parentContent->fetch('type'),
+            "resetProgress" => $parentContent->fetch('progress_state', false) !== false,
+            "instructorInfo" => false,
+            "addToList" => !in_array($parentContent->fetch('type'), ['learning-path', 'pack-bundle']),
+            "downloadableResources" => $parentContent['resources'] ?? [],
+            "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
+        ])
     @endif
+
+    {{-- Content Progress --}}
+    <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
+        @include('partials.bladesora.members.content.content-progress', [
+            "themeColor" => $brand,
+            "brand" => $brand,
+            "contentType" => $parentContent->fetch('type'),
+            "labelText" => $progressLabelText ?? null,
+            "progress" => $parentContent->fetch('progress_percent'),
+            "nextLessonUrl" => $nextLessonUrl,
+            "backButton" => $backButton,
+            "compact" => $parentContent->fetch('type') === 'pack-bundle' && $pack->fetch('bundle_count') <= 1,
+            "xpAmount" =>  $parentContent->fetch('total_xp') ?? null,
+            "isCompleted" => $parentContent->fetch('completed', false),
+            "isStarted" => $parentContent->fetch('started', false),
+        ])
+    </div>
+
 
     @if(!empty($nextLessonJson))
         @include('partials._current-learning-path-lesson', [

@@ -10,6 +10,10 @@ const props = defineProps({
         type: String,
         default: "drumeo"
     },
+    headerBackground: {
+        type: String,
+        default: "https://picsum.photos/1664/180"
+    },
     headerTitle: {
         type: String,
         default: 'Pink Floyd'
@@ -21,20 +25,16 @@ const props = defineProps({
     backUrl: {
         type: String,
         default: '#'
-    },
-    classOverride: {
-        type: String,
-        default: ''
-    },
+    }
 })
 
 </script>
 <template>
-    <div class="tw-w-full lg:tw-container lg:tw-px-[50px]" :class="classOverride">
-        <div 
-            class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center">
+    <div class="tw-h-[180px] tw-w-full" :style="`background-image: url(${headerBackground});`">
+        <div
+            class="tw-w-full tw-h-full tw-bg-black/20 tw-flex tw-items-center tw-justify-center">
             <div
-                class="tw-w-full tw-h-full tw-flex tw-items-end tw-justify-between tw-pb-[20px]">
+                class="tw-w-full tw-h-full tw-bg-gradient-to-b tw-from-transparent tw-to-[#00101D] tw-flex tw-items-center tw-justify-between tw-px-[48px] tw-py-[20px]">
                 <div class="tw-h-full tw-flex tw-flex-col tw-justify-between">
                     <slot name="left-content"></slot>
                 </div>
@@ -43,6 +43,5 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-        <hr class="tw-border-t-[1px] dark:tw-border-[#223F57] tw-border-[#65656B4D]" />
     </div>
 </template>

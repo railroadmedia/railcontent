@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <!-- @component('partials.bladesora.members.components.header-banner', [
+    @component('partials.bladesora.members.components.header-banner', [
         'hideUser' => true,
         'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
         'brand' => '{{ $brand }}'
@@ -31,13 +31,7 @@
                 </p>
             </div>
         @endslot
-    @endcomponent -->
-
-    <page-header
-        title="Coaches"
-        icon-name="whistle-filled"
-    >
-    </page-header>
+    @endcomponent
 
     @if( !empty($coachEvent) )
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
