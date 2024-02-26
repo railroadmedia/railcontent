@@ -47,7 +47,7 @@
         ]
     ])
 
-    <!-- @component('partials.bladesora.members.components.coach-header-banner', [
+    @component('partials.bladesora.members.components.coach-header-banner', [
         'brandName' => '{{ $brand }}',
         'hideUser' => true,
         'backgroundImage' => $thisCoach->fetch('data.coach_top_banner_image'),
@@ -64,16 +64,7 @@
         'subscribeUrl' => url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
         'unsubscribeUrl' => url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')])
         ])
-    @endcomponent -->
-
-    <page-header
-        page-type="{{ $thisCoach->fetch('type') }}"
-        :title="'{{ $firstLastName[0] }}' + ' ' + '{{ $firstLastName[1] }}'"
-        hero-img="{{ $thisCoach->fetch('data.coach_top_banner_image') }}"
-        :info-data="{{ $infoDataStrArrJson }}"
-        :ctas="{{ $ctasJson }}"
-    >
-    </page-header>
+    @endcomponent
 
     @if( !empty($coachEvent) )
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
