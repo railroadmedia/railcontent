@@ -160,80 +160,18 @@
         }
     </style>
     <style>
-        .sliderContainer {
-            height: 600px;
+        .messy-bg {
+            background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');
         }
-
-        @media (max-width: 640px) {
-            .sliderContainer {
-                height: 500px;
-            }
-        }
-
-        .sliderContainer .img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: 900px 100%;
-        }
-
-        @media (max-width: 640px) {
-            .sliderContainer .img {
-                background-size: 400px 90%;
-            }
-        }
-
-        @media (min-width: 641px) and (max-width: 1024px) {
-            .sliderContainer .img {
-                background-size: 700px 100%;
-            }
-        }
-
-        .sliderContainer .slider {
-            position: absolute;
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
             appearance: none;
-            width: 100%;
-            height: 100%;
-            background: rgba(242, 242, 242, 0);
-            outline: none;
-            margin: 0;
-            transition: all 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .sliderContainer .slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 2px;
-            height: 600px;
+            width: 4px;
+            height: 705px;
             background: #191617;
-            cursor: pointer;
+            cursor: move;
+            transition: all 300ms ease;
             margin-left: 4px;
-        }
-
-        .sliderContainer .slider::-moz-range-thumb {
-            width: 2px;
-            height: 600px;
-            background: #191617;
-            cursor: pointer;
-        }
-
-        .sliderContainer .slider-button {
-            pointer-events: none;
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: #191617;
-            left: calc(50% - 13px);
-            top: calc(50% - 13px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: grab;
         }
     </style>
     @php
@@ -435,45 +373,16 @@
                 Let’s be honest. Your practice space looks like a mad scientist's desk. Books, staff paper,<br class="hidden sm:inline">
                 sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</p>
 
-                <div class="w-full flex justify-center items-cente">
-                <div class="margin-auto">
-                    <div 
-                        x-data="{ sliderPosition: 50 }" 
-                        x-init="
-                                $watch('sliderPosition', value => {
-                                    document.querySelector('.foreground-img').style.width = value + '%';
-                                    document.querySelector('.slider-button').style.left = `calc(${value}% - 13px)`;
-                                });
-                                const slider = document.getElementById('slider');
-                                slider.addEventListener('input', function(e) {
-                                    sliderPosition = e.target.value;
-                                });
-                                slider.addEventListener('touchstart', function(e) {
-                                    this.classList.add('active');
-                                });
-                                slider.addEventListener('touchmove', function(e) {
-                                    if (!this.classList.contains('active')) {
-                                        return;
-                                    }
-                                    let touch = e.touches[0];
-                                    let position = touch.pageX / this.offsetWidth * 100;
-                                    sliderPosition = Math.min(Math.max(position, this.min), this.max);
-                                });
-                                slider.addEventListener('touchend', function(e) {
-                                    this.classList.remove('active');
-                                });
-                            "
-                        class='sliderContainer relative w-[400px] sm:w-[600px] md:w-[700px] lg:w-[900px]'>
+            <div x-data="{ sliderValue: 50 }" class="relative transform-gpu w-full overflow-hidden mx-auto h-96 sm:h-[44rem]" style="transform-style: preserve-3d;">
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] messy-bg z-10"  :style="`width: ${sliderValue}%;`"></div>
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] bg-center w-full" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
 
-                            <div class='img background-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
-                            <div class='img foreground-img' style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp'); width: 50%;"></div>
+                <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-50"
+                    type="range" min="1" max="100" />
 
-                        
-                            <input type="range" min="1" max="100" x-model="sliderPosition" class="slider absolute w-full h-full bg-transparent outline-none m-0 transition-all duration-200 flex justify-center items-center" name='slider' id="slider">
-                        <div class='slider-button'>
-                            <i class="fas fa-left-right text-white"></i>
-                        </div>
-                    </div>
+                <div :style="`left: ${sliderValue}%; background: #191617;`" class="text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2 translate-y-[-50%]">
+                    <i class="fa fa-chevron-left text-xs"></i>
+                    <i class="fa fa-chevron-right text-xs"></i>
                 </div>
             </div>
         </div>
