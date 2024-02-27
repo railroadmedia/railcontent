@@ -1,6 +1,6 @@
 <template>
   <div class="tw-flex tw-flex-col">
-      <div class="tw-flex tw-justify-between tw-items-center tw-mb-10">
+      <div class="tw-flex tw-justify-between tw-items-center tw-mb-[30px]">
           <h3 class="tw-text-2xl tw-leading-[30px] tw-font-bold dark:tw-text-white">Chapters:</h3>
           <button class="btn collapse-square"
                   @click="isCollapsed = !isCollapsed">
@@ -43,7 +43,7 @@
           <div class="tw-hidden md:tw-flex tw-flex-shrink-0">
             <!-- Practice Button -->
             <button id="video-chapter-song"
-                    class="tw-btn-primary tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 tw-mr-2 tw-flex tw-justify-center tw-items-center tw-group tw-px-10 lg:tw-px-14 xl:tw-px-[70px]"
+                    class="tw-btn-primary tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-mr-2 tw-flex tw-justify-center tw-items-center tw-group tw-px-[25px] tw-h-[40px]"
                     @click="handleOpenSoundslice(chapter.title, index, chapter.time, false)"
                     title="Practice"
             >
@@ -52,7 +52,7 @@
             </button>
             <!-- Loop Button -->
             <button id="video-chapter-loop"
-                  class="tw-flex tw-justify-center tw-items-center tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-px-10 lg:tw-px-14 xl:tw-px-[70px]"
+                  class="tw-flex tw-justify-center tw-items-center tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-px-[25px] tw-h-[40px]"
                   @click="handleOpenSoundslice(chapter.title, index, chapter.time, true)"
                   title="Loop"
             >
