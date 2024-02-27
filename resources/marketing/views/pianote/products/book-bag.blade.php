@@ -236,7 +236,7 @@
                 {{--                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Pianote Membership.</em></h6> --}}
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.6)"></div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(0, 0, 0, 0.4)"></div>
         <!-- <img class="object-cover w-full relative z-0" style="height: 700px;" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/hero-image.webp"> -->
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop
             playsinline muted
@@ -373,11 +373,18 @@
                 Let’s be honest. Your practice space looks like a mad scientist's desk. Books, staff paper,<br class="hidden sm:inline">
                 sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</p>
 
-            <div x-data="{ sliderValue: 50 }" class="relative transform-gpu w-full overflow-hidden mx-auto h-96 sm:h-[44rem]" style="transform-style: preserve-3d;">
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] messy-bg z-10"  :style="`width: ${sliderValue}%;`"></div>
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] bg-center w-full" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
+            <div x-data="{ sliderValue: 50, isDragging: false }" class="relative transform-gpu w-full overflow-hidden mx-auto h-96 sm:h-[44rem]" style="transform-style: preserve-3d;">
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] messy-bg z-10" :style="`width: ${sliderValue}%;`"></div>
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] sm:bg-center w-full" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
 
-                <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-50"
+                <input x-model="sliderValue" 
+                    @mousedown="isDragging = true" 
+                    @mouseup="isDragging = false" 
+                    @touchstart="isDragging = true" 
+                    @touchend="isDragging = false" 
+                    @mousemove="isDragging && (sliderValue = $event.target.value)" 
+                    @touchmove="isDragging && (sliderValue = $event.target.value)" 
+                    class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-50"
                     type="range" min="1" max="100" />
 
                 <div :style="`left: ${sliderValue}%; background: #191617;`" class="text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2 translate-y-[-50%]">
@@ -447,7 +454,7 @@
     </section>
 
     <section class="relative overflow-hidden px-5 sm:px-7 py-10 sm:py-16 lg:py-24">
-        <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="max-width:1920px;background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love2.webp');"></div>
+        <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0 mx-auto" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love2.webp');"></div>
         <div class="inset-0 block sm:hidden absolute bg-top bg-cover z-0" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/made-with-love-m2.webp');"></div>
 
         <div class="container mx-auto max-w-5xl relative z-10">
