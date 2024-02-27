@@ -4,6 +4,74 @@
 ])
 
 @section('promo-banner')
+    <header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden"
+            style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
+    >
+        <div class="container max-w-6xl mx-auto relative z-20">
+
+            <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide">Get legacy pricing on your first year OR 8 free bonuses with your membership (worth $987).</h5>
+            <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
+                <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
+                        href="#customize-anchor" aria-label="Customize anchor"
+                >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
+                @if(empty($noTrailer))
+                    <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+                @endif
+            </div>
+            <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
+                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                </a>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
+            </div>
+        </div>
+    </header>
+    @if(!empty($slides))
+        <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
+            <div class="container max-w-5xl mx-auto">
+                @component('_partials.components.carousel',[
+                    'xdata' => "
+                        classes: {
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
+                            prev: 'splide__arrow--prev your-class-prev hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            pagination: 'hidden',
+                        },
+                        perPage: 1,
+                        perMove: 1,
+                        type: 'loop',
+                        autoplay: true,
+                        pauseOnHover: true,
+                        pauseOnFocus: true,
+                        interval: 3000,
+                        lazyLoad: 'nearby',
+                    ",
+                ])
+                    @slot('content')
+                        @foreach ($slides as $slide)
+                            <li class="splide__slide">
+                                <div class="px-3 md:px-6 text-center">
+                                    <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                                    <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                        <img
+                                            class="rounded-full object-cover object-right w-9 h-9"
+                                            data-splide-lazy={{ $slide['thumb'] }}
+                                    alt="{{$slide['name']}}"
+                                        ><br class="inline md:hidden">
+                                        <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    @endslot
+                @endcomponent
+            </div>
+        </section>
+    @endif
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: #0C1524;">
         <div class="container max-w-6xl mx-auto">
