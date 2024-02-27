@@ -34,7 +34,7 @@
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
           <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail}`" alt="Lesson Thumbnail"
             class="tw-transition-opacity tw-duration-500" loading="lazy"
-            :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="mappedData.imageLoaded = true" />
+            :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="mappedData.imageLoaded = true" onload="this.classList.remove('tw-opacity-0')" />
 
           <div class="lesson-progress overflow">
             <span class="progress" :class="themeBgClass" :style="'width:' + progress_percent + '%'"></span>
