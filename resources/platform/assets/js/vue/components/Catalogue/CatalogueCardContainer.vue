@@ -133,6 +133,10 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    noSkeleton: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -153,7 +157,7 @@ const breakToListView = computed(() => {
 })
 
 const showSkeletonLoader = computed(() => {
-    return collectionStoreLoading.value;
+    return !props.noSkeleton && collectionStoreLoading.value;
 })
 
 const skeletonCardCount = computed(() => {

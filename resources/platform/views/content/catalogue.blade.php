@@ -46,7 +46,7 @@
 @endsection
 
 @section('content')
-    
+
     @component('partials._header-banner',
         ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
         @slot('content')
@@ -113,7 +113,7 @@
             </div>
         @endslot
     @endcomponent
-    
+
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">
@@ -146,6 +146,7 @@
             Once you watch a video, it will show up here for you to access later."
                         :six-wide="true"
                         :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}"
+                        :no-skeleton="{{ json_encode(true) }}"
                     >
                     </catalogue-card-container>
                 </transition>
