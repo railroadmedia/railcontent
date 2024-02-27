@@ -18,7 +18,7 @@ class UserControllerTest extends UserManagementSystemTestCase
         parent::setUp();
 
 //        Route::get(
-//            'test-route',
+//            $this->testRouteName,
 //            function () {
 //                return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
 //            }

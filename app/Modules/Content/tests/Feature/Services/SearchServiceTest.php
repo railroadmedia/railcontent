@@ -5,12 +5,6 @@ namespace App\Modules\Content\tests\Feature\Services;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Instructor;
 use App\Modules\Content\Services\SearchService;
-use App\Modules\Mentor\Events\StudentMentorsUpdated;
-use App\Modules\Mentor\Models\Mentor;
-use App\Modules\Mentor\Services\MentorService;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Event;
-use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
 class SearchServiceTest extends TestCase
@@ -30,14 +24,33 @@ class SearchServiceTest extends TestCase
         $instructor = Instructor::factory()->create();
         /** @var Content $content */
         $content = Content::factory()->hasInstructor($instructor)->create();
+        $slug = str_replace('-', '', $content->slug);
+
+        $this->assertDatabaseMissing('railcontent_search_indexes', [
+            'content_id' => $content->id,
+            'high_value' => $this->format($slug, $content->title, $instructor->name) . ' ',
+            'medium_value' => $this->format($content->type, $content->title),
+            'low_value' => $this->format($content->title),
+        ]);
+
         $this->searchService->rebuildIndexes();
 
-        $slug = str_replace('-', '', $content->slug);
         $this->assertDatabaseHas('railcontent_search_indexes', [
             'content_id' => $content->id,
-            'high_value' => "$slug $content->title $instructor->name",
-            'medium_value' => "$content->title",
-            'low_value' => "$content->title",
+            'high_value' => $this->format($slug, $content->title, $instructor->name) . ' ',
+            'medium_value' => $this->format($content->type, $content->title),
+            'low_value' => $this->format($content->title),
         ]);
+    }
+
+    /**
+     * Format the string value(s), in the manner done by the SearchService
+     *
+     * @param  string  ...$values
+     * @return string
+     */
+    private function format(string ...$values): string
+    {
+        return substr(preg_replace("/[^A-Za-z0-9_ ]/", '', implode(' ', array_unique($values))), 0, 245);
     }
 }

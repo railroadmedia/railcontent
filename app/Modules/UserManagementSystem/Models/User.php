@@ -249,6 +249,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereBrandMinutesPracticed($value)
  * @method static Builder|User whereBrandTotalXp($value)
  * @method static Builder|User whereMembershipLevel($value)
+ * @property bool $needs_logout;
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -274,7 +275,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $casts = [
         'brand_method_levels' => 'json',
         'brand_total_xp' => 'json',
-        'brand_minutes_practiced' => 'json'
+        'brand_minutes_practiced' => 'json',
+        'needs_logout' => 'bool'
     ];
 
     /**
@@ -324,6 +326,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'guitareo_onboarding_skip_setup',
         'singeo_onboarding_skip_setup',
         'use_legacy_video_player',
+        'needs_logout'
     ];
 
 
