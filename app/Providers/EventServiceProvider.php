@@ -6,6 +6,7 @@ use App\Listeners\Authentication\AuthenticationEventListener;
 use App\Listeners\Content\EngageContentEventListener;
 use App\Listeners\Content\LoggingEventListener;
 use App\Modules\EventTracking\Listeners\EventTrackerListener;
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\UserEvent;

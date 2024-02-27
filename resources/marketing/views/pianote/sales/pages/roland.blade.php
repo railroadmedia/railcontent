@@ -139,70 +139,52 @@
 @endsection
 @section('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.ajax-form').forEach(form => {
-                form.addEventListener('submit', function(e) {
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.querySelectorAll(".ajax-form").forEach(function(form) {
+                form.addEventListener("submit", function(e) {
                     e.preventDefault();
 
-                    const elements = {
-                        pre: this.querySelector('.pre-add'),
-                        pending: this.querySelector('.pending'),
-                        success: this.querySelector('.success'),
-                        fail: this.querySelector('.fail'),
-                        submitButton: this.querySelector('.submit'),
-                        disclaimer: this.parentNode.querySelector('.disclaimer'),
-                        thankBanner: this.parentNode.querySelector('.thank-you-box'),
-                    };
+                    var pre = form.querySelector(".pre-add"),
+                        pending = form.querySelector(".pending"),
+                        success = form.querySelector(".success"),
+                        fail = form.querySelector(".fail"),
+                        submitButton = form.querySelector(".submit"),
+                        disclaimer = form.parentNode.querySelector(".disclaimer"),
+                        thankBanner = form.parentNode.querySelector(".thank-you-box"),
+                        url = form.getAttribute("action");
 
-                    setVisibility(elements, 'loading');
+                    pre.classList.add("hide", "hidden");
+                    success.classList.add("hide", "hidden");
+                    fail.classList.add("hide", "hidden");
+                    pending.classList.remove("hide", "hidden");
+                    submitButton.classList.remove("error");
 
-                    fetch(this.action, {
-                        method: 'POST',
-                        body: new FormData(this),
-                        headers: {
-                            'Accept': 'application/json',
-                        },
-                    })
-                        .then(handleResponse)
-                        .then(() => setVisibility(elements, 'success'))
-                        .catch(error => {
-                            console.error('Fetch error:', error);
-                            setVisibility(elements, 'error');
-                        });
+                    var formData = new FormData(form);
+
+                    fetch(url, {
+                        method: "POST",
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            form.classList.add("hide", "hidden");
+                            disclaimer.classList.add("hide", "hidden");
+                            thankBanner.classList.add("active");
+
+                            pending.classList.add("hide", "hidden");
+                            success.classList.remove("hide", "hidden");
+                        } else {
+                            throw new Error('Failed to submit form');
+                        }
+                    }).catch(error => {
+                        submitButton.classList.add("error");
+
+                        pending.classList.add("hide", "hidden");
+                        fail.classList.remove("hide", "hidden");
+                    });
                 });
             });
         });
 
-        function handleResponse(response) {
-            if (!response.ok) throw new Error('Network response was not ok.');
-            return response.json();
-        }
-
-        function setVisibility(elements, state) {
-            switch (state) {
-                case 'loading':
-                    elements.pre.classList.add('hidden');
-                    elements.success.classList.add('hidden');
-                    elements.fail.classList.add('hidden');
-                    elements.pending.classList.remove('hidden');
-                    elements.submitButton.classList.remove('error');
-                    break;
-                case 'success':
-                    elements.pre.classList.add('hidden');
-                    elements.pending.classList.add('hidden');
-                    elements.fail.classList.add('hidden');
-                    elements.success.classList.remove('hidden');
-                    elements.submitButton.parentNode.classList.add('hidden'); // Assuming the form and disclaimer are siblings.
-                    elements.disclaimer.classList.add('hidden');
-                    elements.thankBanner.classList.add('active');
-                    break;
-                case 'error':
-                    elements.pending.classList.add('hidden');
-                    elements.success.classList.add('hidden');
-                    elements.fail.classList.remove('hidden');
-                    elements.submitButton.classList.add('error');
-                    break;
-            }
-        }
     </script>
 @endsection
