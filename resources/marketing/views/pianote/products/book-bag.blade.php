@@ -163,8 +163,12 @@
         .messy-bg {
             background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');
         }
+        .range-slider {
+            -moz-appearance: none;
+            width: 100%;
+        }
         .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
+            -webkit-appearance: none; 
             appearance: none;
             width: 4px;
             height: 705px;
@@ -172,6 +176,13 @@
             cursor: move;
             transition: all 300ms ease;
             margin-left: 4px;
+        }
+        .range-slider::-moz-range-thumb {
+            border: none;
+            width: 4px;
+            height: 705px;
+            background: #191617;
+            transform: translateX(4px); 
         }
     </style>
     @php
