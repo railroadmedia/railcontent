@@ -104,6 +104,11 @@ class RailcontentV2DataSyncingService
             'focus' => config('railcontent.table_prefix').'content_focus',
             'bpm' => config('railcontent.table_prefix').'content_bpm',
             'instructor_id' => config('railcontent.table_prefix').'content_instructors',
+            'essentials' => config('railcontent.table_prefix').'content_essentials',
+            'creativity' => config('railcontent.table_prefix').'content_creativity',
+            'theory' => config('railcontent.table_prefix').'content_theory',
+            'lifestyle' => config('railcontent.table_prefix').'content_lifestyle',
+            'gear' => config('railcontent.table_prefix').'content_gears',
         ];
     }
 
