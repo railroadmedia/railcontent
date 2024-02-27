@@ -138,71 +138,49 @@
     ])
 @endsection
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.ajax-form').forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
+        $(document).ready(function (){
 
-                    const elements = {
-                        pre: this.querySelector('.pre-add'),
-                        pending: this.querySelector('.pending'),
-                        success: this.querySelector('.success'),
-                        fail: this.querySelector('.fail'),
-                        submitButton: this.querySelector('.submit'),
-                        disclaimer: this.parentNode.querySelector('.disclaimer'),
-                        thankBanner: this.parentNode.querySelector('.thank-you-box'),
-                    };
+            $(".ajax-form").submit(function(e) {
+                e.preventDefault();
 
-                    setVisibility(elements, 'loading');
+                var pre = $(this).find(".pre-add"),
+                    pending = $(this).find(".pending"),
+                    success = $(this).find(".success"),
+                    fail = $(this).find(".fail"),
+                    submitButton = $(this).find(".submit"),
+                    disclaimer = $(this).parent().find(".disclaimer"),
+                    thankBanner = $(this).parent().find(".thank-you-box"),
+                    form = $(this),
+                    url = form.attr("action");
 
-                    fetch(this.action, {
-                        method: 'POST',
-                        body: new FormData(this),
-                        headers: {
-                            'Accept': 'application/json',
-                        },
-                    })
-                        .then(handleResponse)
-                        .then(() => setVisibility(elements, 'success'))
-                        .catch(error => {
-                            console.error('Fetch error:', error);
-                            setVisibility(elements, 'error');
-                        });
+                pre.addClass("hide hidden");
+                success.addClass("hide hidden");
+                fail.addClass("hide hidden");
+                pending.removeClass("hide hidden");
+                submitButton.removeClass("error");
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function() {
+                        form.addClass("hide hidden");
+                        disclaimer.addClass("hide hidden");
+                        thankBanner.addClass("active");
+
+                        pending.addClass("hide hidden");
+                        success.removeClass("hide hidden");
+                    },
+                    error: function() {
+                        submitButton.addClass("error");
+
+                        pending.addClass("hide hidden");
+                        fail.removeClass("hide hidden");
+                    }
                 });
             });
         });
-
-        function handleResponse(response) {
-            if (!response.ok) throw new Error('Network response was not ok.');
-            return response.json();
-        }
-
-        function setVisibility(elements, state) {
-            switch (state) {
-                case 'loading':
-                    elements.pre.classList.add('hidden');
-                    elements.success.classList.add('hidden');
-                    elements.fail.classList.add('hidden');
-                    elements.pending.classList.remove('hidden');
-                    elements.submitButton.classList.remove('error');
-                    break;
-                case 'success':
-                    elements.pre.classList.add('hidden');
-                    elements.pending.classList.add('hidden');
-                    elements.fail.classList.add('hidden');
-                    elements.success.classList.remove('hidden');
-                    elements.submitButton.parentNode.classList.add('hidden'); // Assuming the form and disclaimer are siblings.
-                    elements.disclaimer.classList.add('hidden');
-                    elements.thankBanner.classList.add('active');
-                    break;
-                case 'error':
-                    elements.pending.classList.add('hidden');
-                    elements.success.classList.add('hidden');
-                    elements.fail.classList.remove('hidden');
-                    elements.submitButton.classList.add('error');
-                    break;
-            }
-        }
     </script>
 @endsection
