@@ -26,7 +26,7 @@
               class="tw-rounded-[5px] tw-w-[115px] tw-object-cover"
           >
           <!-- Fallback -->
-          <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white">Chapter {{ index + 1 }}</p>
+          <p v-else class="tw-font-bold tw-text-black tw-text-xl dark:tw-text-white tw-w-[115px]">Chapter {{ index + 1 }}</p>
           <!-- Hover State -->
           <div class="tw-cursor-pointer tw-bg-black/50 tw-z-10 tw-absolute tw-transition-opacity tw-opacity-0 hover:tw-opacity-100 tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center">
             <i class="fas fa-arrow-right tw-text-white tw-text-2xl"></i>
