@@ -266,9 +266,9 @@
         "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&promo-code=legacy&locked=true",
         'firstExtraBonuses' => [
             'Celebrate 8 years of Pianote by rolling back the price of your first year.',
-            '<strong class="text-pianote"><i class="fa-solid fa-check pr-1"></i> Learn</strong>',
-            '<strong class="text-pianote"><i class="fa-solid fa-check pr-1"></i> Practice</strong>',
-            '<strong class="text-pianote"><i class="fa-solid fa-check pr-1"></i> Play</strong>',
+            '<strong class=""><i class="fa-solid fa-check pr-1"></i> Learn</strong>',
+            '<strong class=""><i class="fa-solid fa-check pr-1"></i> Practice</strong>',
+            '<strong class=""><i class="fa-solid fa-check pr-1"></i> Play</strong>',
     ],
 
         // second deal
@@ -282,15 +282,15 @@
         'secondDealDiscount' => 1227,
         "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[piano-technique-made-easy]=1&redirect=/order&locked=true&promo-code=special",
         'secondExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong>Annual Pianote Membership </strong>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Pianote Book Bag ($249 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Chords & Scales Book ($39 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> New Piano Players Start Here ($127 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Easy Chords ($127 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> 30-Day Blues ($127 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Piano Riffs & Fills ($99 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Worship Piano ($99 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Piano Technique Made Easy ($120 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> <strong>Annual Pianote Membership </strong>',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Pianote Book Bag ($249 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Chords & Scales Book ($39 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> New Piano Players Start Here ($127 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Easy Chords ($127 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> 30-Day Blues ($127 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Piano Riffs & Fills ($99 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Worship Piano ($99 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Piano Technique Made Easy ($120 value)',
     ],
 
         // third deal
@@ -301,11 +301,11 @@
         'thirdDealPrice' => 1200,
         "thirdDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849",
         'thirdExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong> Lifetime Membership </strong>',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Pianote Book Bag ($249 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Prestige Metronome (limit 100) ($299 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> C&S Book ($39 value)',
-            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Practice Planner ($39 value)',
+            '<i class="fa-solid fa-check pr-1"></i> <strong> Lifetime Membership </strong>',
+            '<i class="fa-solid fa-check pr-1"></i> Pianote Book Bag ($249 value)',
+            '<i class="fa-solid fa-check pr-1"></i> Prestige Metronome (limit 100) ($299 value)',
+            '<i class="fa-solid fa-check pr-1"></i> C&S Book ($39 value)',
+            '<i class="fa-solid fa-check pr-1"></i> Practice Planner ($39 value)',
     ],
 ])
 @endsection

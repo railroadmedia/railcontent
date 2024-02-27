@@ -44,9 +44,9 @@
             </div>
             <div class="w-full md:w-1/3 lg:px-1 px-1 relative">
                 @if(!empty($topBadge))
-                    <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >{{$topBadge}}</p>
+                    <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-musora text-black font-black tracking-widest">{{$topBadge}}</p>
                 @endif
-                <div  class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if($theme != 'drumeo') border-{{ $theme }} @endif">
+                <div  class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-musora">
                     <div class="bg-white px-3 py-6 md:py-7">
                         <h4 class="leading-tight mb-2"><strong>{{$secondDeal}}</strong></h4>
                         <img
@@ -61,14 +61,9 @@
                             <strong>${{$secondDealPrice}}</strong>
                         </h3>
                         <p class="text-sm mb-5"><em>{!! $secondDealSub !!}</em></p>
-                        @if(!empty($secondTwoButtons))
-                            <div class="flex items-center">
-                                <a href="{{$secondDealLink}}" class="mx-1 join {{ $theme }} smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </a>
-                                <a href="/drumshop/kit" class="mx-1 join black outline smaller w-1/2 transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $secondTwoButtons }}"> {{$secondTwoButtons}} </a>
-                            </div>
-                        @else
-                            <a href="{{$secondDealLink}}" class="join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </a>
-                        @endif
+
+                            <a href="{{$secondDealLink}}" class="join musora smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </a>
+
                     </div>
                     @if(!empty($secondExtraBonuses))
                         <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
@@ -98,7 +93,7 @@
                             <strong>${{$thirdDealPrice}}</strong>
                         </h3>
                         <p class="text-sm mb-5"><em>{!! $thirdDealSub !!}</em></p>
-                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
+                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] musora-black" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
                     </div>
                         @if(!empty($thirdExtraBonuses))
                             <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
