@@ -3,9 +3,16 @@
         <div class="tw-flex tw-items-start tw-justify-between tw-mb-4 tw-flex-wrap">
 
             <div class="tw-text-[#00101D] dark:tw-text-white lg:tw-flex-1">
-                <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
+                <h1 class="heading tw-pt-2 tw-pr-4 xl:tw-pr-0 tw-text-xl md:tw-text-2xl">
                     {{ title }}
                 </h1>
+                <div class="tw-w-full tw-text-[16px] tw-leading-[24px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-[5px] tw-pb-2 tw-items-center">
+                    <div class="tw-uppercase">{{ artistName }}</div>
+                    <DotSeparator />
+                    <DifficultyLabel class="tw-text-[16px] tw-leading-[24px]" :difficultyValue="difficulty" textCase="capitalize" />
+                    <DotSeparator />
+                    <div>{{ singularContentType }}</div>
+                </div>
             </div>
             <!-- Video CTAs -->
             <div id="cta-container" class="tw-flex tw-items-start tw-pt-3 tw-overflow-auto sm:tw-overflow-visible tw-no-scrollbar lg:tw-ml-4 tw-pb-40 -tw-mb-36 lg:-tw-mb-40 tw-relative" @scroll="ctaContainerScroll">
@@ -16,7 +23,7 @@
                 <!-- Workouts Practice -->
                 <div v-if="showPracticeButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-h-[34px] tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90"
+                        class="tw-h-[34px] tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#00000026] hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white"
                         title="Open Workout Practice Tool"
                         @click="openPracticeSoundslice"
                     >
@@ -37,7 +44,7 @@
                 <!-- Info Button -->
                 <div v-if="showInfoButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full"
                         :class="openInfo ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         id="toggleInstructorInfo"
                         title="More Info"
@@ -53,7 +60,7 @@
                 <!-- Like Button -->
                 <div class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full"
                         :class="hasLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         :title="hasLiked ? 'Unlike' : 'Like'"
                         @click="likeContent"
@@ -68,7 +75,7 @@
                 <!-- Share Button -->
                 <div v-if="showShareButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Share"
                         @click="handleOpenModal"
                     >
@@ -82,7 +89,7 @@
                 <!-- Add Button -->
                 <div v-if="showAddToList" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Add to Playlist"
                         @click="addToList"
                     >
@@ -96,7 +103,7 @@
                 <!-- Completed Button -->
                 <div v-if="showCompleteButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         @click="handleCompleteLesson"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
@@ -111,7 +118,7 @@
                 <!-- Resources Button -->
                 <div v-if="resources.length > 0 && showResourceButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
                     <button
-                        class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Download Resources"
                         @click="toggleResourceDropdown"
                     >
@@ -206,7 +213,6 @@
                 v-if="showReportModal"
                 :brand="brand"
                 :logo="reportLogo"
-                :recipient="reportRecipient"
                 :user-name="reportUserName"
                 :user-email="reportUserEmail"
                 @onCloseModal="toggleReportModal"
@@ -268,6 +274,9 @@ import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
 import ReportModal from "../../../components/Modal/ReportModal";
 import { XIcon } from "@heroicons/vue/solid";
 import { FlagIcon } from "@heroicons/vue/outline";
+import DifficultyLabel from "../../../components/DifficultyLabel/DifficultyLabel.vue";
+import DotSeparator from "./DotSeparator.vue";
+import { contentTypes } from '../../../../utils';
 
 export default {
     name: "VideoResources",
@@ -277,12 +286,19 @@ export default {
         ModalRenderer,
         XIcon,
         FlagIcon,
+        DifficultyLabel,
+        DotSeparator,
     },
     mixins: [ThemeClasses],
     props: {
         brand: {
             type: String,
             default: () => "drumeo",
+        },
+
+        difficulty: {
+            type: [String, Number],
+            default: () => "",
         },
 
         title: {
@@ -380,11 +396,6 @@ export default {
             default: {},
         },
 
-        reportRecipient: {
-            type: String,
-            default: '',
-        },
-
         reportLogo: {
             type: String,
             default: '',
@@ -398,6 +409,10 @@ export default {
         reportUserEmail: {
             type: String,
             default: '',
+        },
+        artist: {
+            type: String,
+            default: null,
         },
     },
 
@@ -427,6 +442,15 @@ export default {
 
             return `${location.protocol}//${location.host}${location.pathname}`;
         },
+        singularContentType() {
+            return contentTypes[this.lessonType]?.singular || this.lessonType;
+        },
+        artistName() {
+            if (this.artist) {
+                return this.artist;
+            }
+            return this.instructors.length > 0 ? this.instructors[0].name : brand.toUpperCase();
+        }
     },
     mounted() {
         document.addEventListener("click", (event) => {

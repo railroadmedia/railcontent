@@ -63,17 +63,18 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // first-level types
-            if (count($contentParentData) == 0 && !empty($contentTypeToURLSlugMap[$content['type']])) {
+            if ($content['type'] == 'song-tutorial' ||
+                $content['type'] == 'quick-tips' ||
+                $content['type'] == 'student-review' ||
+                (count($contentParentData) == 0 && !empty($contentTypeToURLSlugMap[$content['type']]))) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.first-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$content['type']],
                     $content['slug'],
                     $content['id'],
                 ]);
-            }
-
             // second-level types
-            if (count($contentParentData) == 1 && $content['type'] == 'challenge-part') {
+            } else if (count($contentParentData) == 1 && $content['type'] == 'challenge-part') {
                 $contents[$contentIndex]['url'] = url()->route('platform.workout.challenge.workout', [
                     'brand' => $content['brand'],
                     "challenges",
@@ -82,10 +83,7 @@ class UrlDecorator extends ModeDecoratorBase
                     $content['slug'],
                     $content['id'],
                 ]);
-            }
-
-            if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
-            {
+            } else if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type])) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$contentParentData[0]->type],
@@ -94,10 +92,8 @@ class UrlDecorator extends ModeDecoratorBase
                     $content['slug'],
                     $content['id'],
                 ]);
-            }
-
             // third-level types
-            if (count($contentParentData) == 2 && !empty($contentTypeToURLSlugMap[$contentParentData[1]->type])) {
+            } else if (count($contentParentData) == 2 && !empty($contentTypeToURLSlugMap[$contentParentData[1]->type])) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.third-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$contentParentData[1]->type],
@@ -108,10 +104,8 @@ class UrlDecorator extends ModeDecoratorBase
                     $content['slug'],
                     $content['id'],
                 ]);
-            }
-
             // fourth-level types
-            if (count($contentParentData) == 3 && !empty($contentTypeToURLSlugMap[$contentParentData[2]->type])) {
+            } else if (count($contentParentData) == 3 && !empty($contentTypeToURLSlugMap[$contentParentData[2]->type])) {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.fourth-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$contentParentData[2]->type],
