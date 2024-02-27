@@ -23,7 +23,7 @@
                     </div>
                     <div
                         class="tw-absolute tw-flex tw-flex-col tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
-                        <i class="fas" :class="thumbnailIcon"></i>
+                        <i class="fas tw-text-xl" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
                         </p>
@@ -37,17 +37,17 @@
                         class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2"
                         :class="isGroupedView ? 'tw-flex' : 'tw-hidden sm:tw-flex'">
                         <div class="tw-flex tw-flex-col">
-                            <!-- Artist Name -->
-                            <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5">
-                                <div v-if="artistName && artistName !== ''" class="tw-mb-0.5">
-                                    <span>{{ artistName }}</span>
-                                </div>
-                            </h6>
                             <!-- Song Title -->
                             <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2">
                                 {{ mappedData.black_title }}
                             </h4>
                         </div>
+                        <!-- Artist Name -->
+                        <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC]">
+                            <div v-if="artistName && artistName !== ''" class="tw-mb-0.5">
+                                <span>{{ artistName }}</span>
+                            </div>
+                        </h6>
                         <p
                             class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
