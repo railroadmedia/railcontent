@@ -138,53 +138,49 @@
     ])
 @endsection
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        $(document).ready(function (){
 
-            document.querySelectorAll(".ajax-form").forEach(function(form) {
-                form.addEventListener("submit", function(e) {
-                    e.preventDefault();
+            $(".ajax-form").submit(function(e) {
+                e.preventDefault();
 
-                    var pre = form.querySelector(".pre-add"),
-                        pending = form.querySelector(".pending"),
-                        success = form.querySelector(".success"),
-                        fail = form.querySelector(".fail"),
-                        submitButton = form.querySelector(".submit"),
-                        disclaimer = form.parentNode.querySelector(".disclaimer"),
-                        thankBanner = form.parentNode.querySelector(".thank-you-box"),
-                        url = form.getAttribute("action");
+                var pre = $(this).find(".pre-add"),
+                    pending = $(this).find(".pending"),
+                    success = $(this).find(".success"),
+                    fail = $(this).find(".fail"),
+                    submitButton = $(this).find(".submit"),
+                    disclaimer = $(this).parent().find(".disclaimer"),
+                    thankBanner = $(this).parent().find(".thank-you-box"),
+                    form = $(this),
+                    url = form.attr("action");
 
-                    pre.classList.add("hide", "hidden");
-                    success.classList.add("hide", "hidden");
-                    fail.classList.add("hide", "hidden");
-                    pending.classList.remove("hide", "hidden");
-                    submitButton.classList.remove("error");
+                pre.addClass("hide hidden");
+                success.addClass("hide hidden");
+                fail.addClass("hide hidden");
+                pending.removeClass("hide hidden");
+                submitButton.removeClass("error");
 
-                    var formData = new FormData(form);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function() {
+                        form.addClass("hide hidden");
+                        disclaimer.addClass("hide hidden");
+                        thankBanner.addClass("active");
 
-                    fetch(url, {
-                        method: "POST",
-                        body: formData
-                    }).then(response => {
-                        if (response.ok) {
-                            form.classList.add("hide", "hidden");
-                            disclaimer.classList.add("hide", "hidden");
-                            thankBanner.classList.add("active");
+                        pending.addClass("hide hidden");
+                        success.removeClass("hide hidden");
+                    },
+                    error: function() {
+                        submitButton.addClass("error");
 
-                            pending.classList.add("hide", "hidden");
-                            success.classList.remove("hide", "hidden");
-                        } else {
-                            throw new Error('Failed to submit form');
-                        }
-                    }).catch(error => {
-                        submitButton.classList.add("error");
-
-                        pending.classList.add("hide", "hidden");
-                        fail.classList.remove("hide", "hidden");
-                    });
+                        pending.addClass("hide hidden");
+                        fail.removeClass("hide hidden");
+                    }
                 });
             });
         });
-
     </script>
 @endsection
