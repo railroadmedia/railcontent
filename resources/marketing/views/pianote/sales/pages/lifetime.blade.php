@@ -293,6 +293,11 @@
                     </div>
                 </div>
             </div>
+
+            <a class="sm:mx-0.5 w-full sm:w-56 join pianote smaller sm:order-1 mt-7 mb-3 anchor-slide"
+                href="#customize-anchor" aria-label="Customize anchor"
+            >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
+            <p class="leading-tight"><em>Get yours FREE with a Lifetime Membership.</em></p>
         </div>
     </section>
     @if($PMstock > 0)
