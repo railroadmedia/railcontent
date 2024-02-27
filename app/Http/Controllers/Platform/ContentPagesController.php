@@ -1843,6 +1843,7 @@ class ContentPagesController extends BaseController
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'style');
+        $thumb = config('railcontent.avatar_style')[$genre] ?? config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
 
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
@@ -1854,7 +1855,7 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
             'requiredFields' => ['style,'.$genre],
             'filterableValues' => $filterableValues,
-            'thumbnail_url' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
+            'thumbnail_url' => $thumb,
             'pluralContentType' => Str::plural($lessonType, $initialContent->totalResults()),
         ]);
     }
