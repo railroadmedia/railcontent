@@ -4,13 +4,16 @@
 ])
 
 @section('promo-banner')
-    <header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden"
+    <header class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16 relative overflow-hidden"
             style="background:linear-gradient(to right, #e0ecf9, #f6f8fc, #f6f8fc, #e0ecf9);"
     >
         <div class="container max-w-6xl mx-auto relative z-20">
-
-            <h5 class="leading-tight uppercase mb-5 lg:mb-7 tracking-wide">Get legacy pricing on your first year OR 8 free bonuses with your membership (worth $987).</h5>
-            <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
+            <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black-m.webp" alt="30 day drummer logo" />
+            <img class="hidden sm:inline-block sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black.webp" alt="30 day drummer logo" />
+            <p class="leading-tight my-5 lg:my-7">Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em></p>
+            <img class="sm:hidden inline-block h-44 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
+            <img class="hidden sm:inline-block sm:h-44 lg:h-60" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header.webp" alt="30 day drummer logo" />
+            <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 mt-5 lg:mt-7">
                 <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                         href="#customize-anchor" aria-label="Customize anchor"
                 >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
@@ -30,6 +33,50 @@
             </div>
         </div>
     </header>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: #0C1524;">
+        <div class="container max-w-6xl mx-auto">
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                <div class=" pr-5 lg:pr-8 mx-0">
+                    <h4 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h4>
+                    <p class="leading-normal max-w-xl">
+                        This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
+                        <br><br>
+                        Join Pianote today and get 8 FREE bonuses (including our NEW Pianote Book Bag).
+                        <br><br>
+                        Or save big with legacy pricing on your first year of lessons.
+                        <br><br>
+                        Scroll down to see everything that’s included -- and why Pianote is the best way to learn the piano online.
+                        <br>
+                        <a class="join smaller my-3 w-1/2 anchor-slide" href="#customize-anchor">See Details &raquo;</a>
+                        <br>
+                        <em>Free worldwide shipping!</em>
+                    </p>
+
+                </div>
+                <img class="h-72 lg:h-80 hidden sm:inline transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
+
+                    alt="learn playing image"
+                >
+            </div>
+        </div>
+    </section>
+
+    <div class="sticky-trigger block"></div>
+    <a href="#customize-anchor"
+        class="promo-banner flex items-center justify-center -mt-12 py-0.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: #CFDDF9;">
+        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
+        <p class="inline-block text-xs mx-0 leading-tight">
+            Celebrate <strong>8 years of Pianote </strong> with
+            <br>8 FREE bonuses 🥳 <em>(worth $987)</em>
+        </p>
+    </a>
+    @php
+        require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+        $slides = $pianote['slides'];
+    @endphp
     @if(!empty($slides))
         <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
             <div class="container max-w-5xl mx-auto">
@@ -72,47 +119,6 @@
             </div>
         </section>
     @endif
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: #0C1524;">
-        <div class="container max-w-6xl mx-auto">
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                <div class=" pr-5 lg:pr-8 mx-0">
-                    <h4 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h4>
-                    <p class="leading-normal max-w-xl">
-                        This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
-                        <br><br>
-                        Join Pianote today and get 8 FREE bonuses (including our NEW Pianote Book Bag).
-                        <br><br>
-                        Or save big with legacy pricing on your first year of lessons.
-                        <br><br>
-                        Scroll down to see everything that’s included -- and why Pianote is the best way to learn the piano online.
-                        <br>
-                        <a class="join smaller my-3 w-1/2 anchor-slide" href="#customize-anchor">See Details &raquo;</a>
-                        <br>
-                        <em>Free worldwide shipping!</em>
-                    </p>
-
-                </div>
-                <img class="h-72 lg:h-80 hidden sm:inline transition-opacity opacity-0"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
-
-                    alt="learn playing image"
-                >
-            </div>
-        </div>
-    </section>
-    <div class="sticky-trigger block"></div>
-    <a href="#customize-anchor"
-        class="promo-banner flex items-center justify-center -mt-12 py-0.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: #CFDDF9;">
-                <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
-        <p class="inline-block text-xs mx-0 leading-tight">
-            Celebrate <strong>8 years of Pianote </strong> with
-            <br>8 FREE bonuses 🥳 <em>(worth $987)</em>
-        </p>
-    </a>
-
 @endsection
 @section('promoDetails')
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
@@ -241,61 +247,60 @@
 
 @endsection
 @section('final')
-    @php
-        $originalPrice = 240;
-        $discountedPrice = 200;
-        $discountPercentage = 17;
-        if(!empty($products['alesis-ekit'])) {
-            $stock = $products['alesis-ekit']->getPublicStockCount();
-        }
-        else {
-            $stock = 'A LIMITED AMOUNT';
-        }
-    @endphp
-
         @include('musora.sales.components.order-promo-cards-section', [
         // general
-        "songs" => "6000+ popular songs.",
-        'buttonText' => "ORDER NOW",
-        'header' => '<span class="text-drumeo">EVERYTHING</span><br class="sm:hidden"> YOU NEED<br class="hidden sm:inline"> TO<br class="sm:hidden"> <span class="relative inline-block">LEARN THE DRUMS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke=" #0b76db " stroke-width="3" stroke-linecap="round"></path></svg></span>.',
-        'pointOne' => 'GREAT TEACHERS',
-        'pointTwo' => 'VIDEO LESSONS',
-        'pointThree' => 'FUN PRACTICE',
-        'pointFour' => '6000+ SONGS',
-        'badge' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-free-shipping.svg',
+        'buttonText' => "GET STARTED",
 
         // first deal
-        'firstDeal'=> "Practice Anywhere",
-        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/practice-anywhere-bundle.webp',
-        'firstImageHeight' => 'h-44',
-        'firstDealPrice' => $discountedPrice,
-        'firstDealDiscount' => $originalPrice,
-        'firstDealSub' => "Save " . round($discountPercentage) . "% on your first year.",
-        "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=special&locked=true",
+        'firstDeal'=> "Legacy Pricing",
+        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
+        'firstImageHeight' => 'h-24',
+        'firstDealPrice' => 197,
+        'firstDealDiscount' => 240,
+        'firstDealSub' => "Save 25% on your first year. No bonuses.",
+        "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&promo-code=legacy&locked=true",
         'firstExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Drumeo Membership </strong><span class="italic">($240 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> P4 Practice Pad <span class="italic">($79 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drumeo PadStand <span class="italic">($79 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 1 Pair of Drumeo Drumsticks <span class="italic">($12.95 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer<span class="italic">($127 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
+            'Celebrate 8 years of Pianote by rolling back the price of your first year.',
+            '<strong class="text-pianote"><i class="fa-solid fa-check pr-1"></i> Learn</strong>',
+            '<strong class="text-pianote"><i class="fa-solid fa-check pr-1"></i> Practice</strong>',
+            '<strong class="text-pianote"><i class="fa-solid fa-check pr-1"></i> Play</strong>',
     ],
 
         // second deal
-        'secondDeal' => "E-Kit + Lessons",
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/ekit-bundle.webp',
-        'secondImageHeight' => 'h-44',
-        'secondDealSub' => "Everything you need to start playing the drums.",
-        'secondDealPrice' => 499,
-        'secondDealDiscount' => 1005.95,
-        'secondTwoButtons' => 'see the kit',
-        "secondDealLink" => "/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true",
+        'topBadge' => "BEST DEAL",
+        'secondDeal' => "Anniversary Bundle",
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
+        'secondImageHeight' => 'h-24',
+        'secondDealSub' => "Join Pianote + get 8 bonuses worth $987.",
+        'secondDealPrice' => 240,
+        'secondDealDiscount' => 1227,
+        "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[piano-technique-made-easy]=1&redirect=/order&locked=true&promo-code=special",
         'secondExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Alesis Nitro Max E-Kit</strong> <span class="italic">($499 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong> 1-Year Drumeo Membership </strong><span class="italic">($240 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer <span class="italic">($127 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops <span class="italic">($127 Value)</span>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 5A Drumsticks <span class="italic">($12.95 Value)</span>',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong>Annual Pianote Membership </strong>',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Pianote Book Bag ($249 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Chords & Scales Book ($39 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> New Piano Players Start Here ($127 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Easy Chords ($127 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> 30-Day Blues ($127 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Piano Riffs & Fills ($99 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Worship Piano ($99 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Piano Technique Made Easy ($120 value)',
+    ],
+
+        // third deal
+        'thirdDeal' => "Lifetime Bundle",
+        'thirdDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp',
+        'thirdImageHeight' => 'h-24',
+        'thirdDealSub' => "Limited quantity. ",
+        'thirdDealPrice' => 1200,
+        "thirdDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849",
+        'thirdExtraBonuses' => [
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> <strong> Lifetime Membership </strong>',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Pianote Book Bag ($249 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Prestige Metronome (limit 100) ($299 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> C&S Book ($39 value)',
+            '<i class="fa-solid fa-check pr-1 text-pianote"></i> Practice Planner ($39 value)',
     ],
 ])
 @endsection

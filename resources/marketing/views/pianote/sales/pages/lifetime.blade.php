@@ -101,6 +101,7 @@
         else {
             $stock = 0;
         }
+
         if(!empty($products['maelzel-metronome']->getStockAvailability())) {
             $PMstock = $products['maelzel-metronome']->getStockAvailability();
         }
@@ -116,7 +117,7 @@
 {{--                "noBreadcrumb" => true,--}}
 {{--                "noCountdown" => true--}}
 {{--            ])--}}
-    <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #AF1F2D 50%, #180104);">
+    <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/header-bg.webp');">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
@@ -126,7 +127,7 @@
                         @if($PMstock > 0)
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifeitme-bundle-metronome.webp"
                         @else
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-credit.webp"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/TODO.webp"
                         @endif
                     ></img>
                 </div>
@@ -359,9 +360,10 @@
     } else {
         $bonuses = [
             [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/march/pianote-credit.webp',
-                'description' => '$300 credit to spend on any Pianote products in the shop.',
-                'price' => 300,
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
+                'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
+                'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
+                'shipping' => true,
             ],
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/march/bookbag-card.webp',
@@ -382,7 +384,8 @@
                 'shipping' => true,
             ],
         ];
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-gift-card-300]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
     }
     @endphp
     @php
