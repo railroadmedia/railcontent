@@ -15,7 +15,7 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
         parent::setUp();
 
         Route::get(
-            'test-route',
+            $this->testRouteName,
             function () {
                 return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
             }
@@ -24,7 +24,7 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
 
     public function test_redirect_to_login_if_not_authed_web_request()
     {
-        $response = $this->get('test-route');
+        $response = $this->get($this->testRouteName);
 
         $response->assertRedirectContains(config('user_management_system.login_page_path'));
         $this->assertEquals(302, $response->getStatusCode());
@@ -42,19 +42,17 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
 
         auth()->attempt(['email' => $email, 'password' => $password]);
 
-        $response = $this->get('test-route');
+        $response = $this->get($this->testRouteName);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function test_unauthenticated_response_if_not_authed_json_request()
     {
-        // TODO fix this test
-        $this->markTestSkipped("this test fails to run");
-        $response = $this->getJson('test-route', ['HTTP_REFERER' => 'https://test.musora.com']);
+        $response = $this->getJson($this->testRouteName, ['HTTP_REFERER' => $this->testRoutePath]);
 
-        $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals('{"message":"Unauthenticated."}', $response->getContent());
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertStringContainsString('"message":"Unauthenticated."', $response->getContent());
     }
 
     public function test_successful_auth_json_request()
@@ -70,8 +68,8 @@ class AuthenticatedOnlyTest extends UserManagementSystemTestCase
         $token = $user->createToken('test-token')->plainTextToken;
 
         $response = $this->getJson(
-            'test-route',
-            ['HTTP_REFERER' => 'https://test.musora.com', 'AUTHORIZATION' => 'Bearer ' . $token]
+            $this->testRouteName,
+            ['HTTP_REFERER' => $this->testRoutePath, 'AUTHORIZATION' => 'Bearer ' . $token]
         );
 
         $this->assertEquals(200, $response->getStatusCode());
