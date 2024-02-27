@@ -13,10 +13,26 @@ use Illuminate\Support\Facades\URL;
 abstract class BaseTestCase extends FoundationBaseTestCase
 {
 
+    protected string $testRouteName = 'test-route';
+    protected string $testRoutePath = 'https://test.musora.com';
+
     /**
      * @var Generator|Factory
      */
     protected Generator|Factory $faker;
+
+    /**
+     * Creates the application.
+     *
+     * @return Application
+     */
+    public function createApplication(): Application
+    {
+        $app = require __DIR__.'/../bootstrap/app.php';
+
+        $app->make(Kernel::class)->bootstrap();
+        return $app;
+    }
 
     protected function setUp(): void
     {
@@ -29,18 +45,5 @@ abstract class BaseTestCase extends FoundationBaseTestCase
         parent::setUp();
 
         URL::forceRootUrl('https://testing.musora.com');
-    }
-
-    /**
-     * Creates the application.
-     *
-     * @return Application
-     */
-    public function createApplication(): Application
-    {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make(Kernel::class)->bootstrap();
-        return $app;
     }
 }

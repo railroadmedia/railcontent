@@ -160,18 +160,10 @@
         }
     </style>
     <style>
-
-        .image-slider-container .range-slider {
-            justify-content: center;
-            align-items: center;
-            background: transparent;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-            z-index: 2;
-            transition: all 200ms linear;
+        .messy-bg {
+            background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');
         }
-        .image-slider-container .range-slider::-webkit-slider-thumb {
+        .range-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
             width: 4px;
@@ -181,17 +173,17 @@
             transition: all 300ms ease;
             margin-left: 6px;
         }
-
-        .slider-control {
-            width: 32px;
-            transform: translate(-50%, -50%);
-            cursor: grab;
-        }
-        .image-slider-container {
-            transform: scale(1) rotate(0);
-            transform-style: preserve-3d;
-        }
     </style>
+    @php
+        if(!empty($membersVersion)) {
+             $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true';
+             $discountedPrice = 149;
+        }
+        else {
+             $orderUrl = '/ecommerce/add-to-cart?products[pianote-book-bag]=1';
+             $discountedPrice = $productPrices['pianote-book-bag']->discounted_price;
+        }
+    @endphp
 @stop
 
 @section('body-data')
@@ -213,13 +205,13 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/book-bag/pianote-bookbag-logo-white.svg"><br>
                 <h6 class="py-4 sm:py-6 px-4">A handcrafted premium leather satchel for your music books, laptop, and life.</h6>
                 <h3 class="leading-tight">
-                    @if (floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
+                    @if (floatval($productPrices['pianote-book-bag']->price) > floatval($discountedPrice))
                         <s class="opacity-50">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
-                        <strong>${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
+                        <strong>${{ floatval($discountedPrice) }}</strong>
                         <span class="text-xl">(Save
-                            {{ round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) }}%)</span>
+                            {{ round(100 - 100 * (floatval($discountedPrice) / floatval($productPrices['pianote-book-bag']->price))) }}%)</span>
                     @else
-                        <strong>Only ${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
+                        <strong>Only ${{ floatval($discountedPrice) }}</strong>
                     @endif
                 </h3>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
@@ -381,15 +373,14 @@
                 Let’s be honest. Your practice space looks like a mad scientist's desk. Books, staff paper,<br class="hidden sm:inline">
                 sheet music, pens. It’s time to tame your space and organize the chaos with your Pianote BookBag.</p>
 
-            <div class="image-slider-container relative w-full overflow-hidden mx-auto h-96 sm:h-[44rem]">
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 100%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
-                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px]" style="width: 50%; background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/messy.webp');"></div>
+            <div x-data="{ sliderValue: 50 }" class="relative transform-gpu w-full overflow-hidden mx-auto h-96 sm:h-[44rem]" style="transform-style: preserve-3d;">
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] messy-bg z-10"  :style="`width: ${sliderValue}%;`"></div>
+                <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] bg-center w-full" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
 
-                <!-- Range Input -->
-                <input id="range-slider" class="range-slider flex absolute w-full h-full m-0" name="slider" type="range" min="1" max="100" value="50" />
+                <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-10"
+                    type="range" min="1" max="100" />
 
-                <!-- Slider Control -->
-                <div class="slider-control bg-black text-white rounded-full top-1/2 block relative z-10 text-center py-1" style="left:50%;">
+                <div :style="`left: ${sliderValue}%`" class="bg-black text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2">
                     <i class="fas fa-left-right"></i>
                 </div>
             </div>
@@ -518,10 +509,10 @@
                     <tr style="background-color:transparent!important;">
                         <td class="rounded-b-xl">Total</td>
                         <td class="rounded-b-xl text-black">
-                            @if(floatval($productPrices['pianote-book-bag']->price) > floatval($productPrices['pianote-book-bag']->discounted_price))
+                            @if(floatval($productPrices['pianote-book-bag']->price) > floatval($discountedPrice))
                                 <s class="opacity-40">${{ floatval($productPrices['pianote-book-bag']->price) }}</s>
                             @endif
-                            <strong>${{ floatval($productPrices['pianote-book-bag']->discounted_price) }}</strong>
+                            <strong>${{ floatval($discountedPrice) }}</strong>
                         </td>
                         <td class="rounded-b-xl"><strong>$349</strong></td>
                         <td class="rounded-b-xl"><strong>$448</strong></td>
@@ -545,21 +536,27 @@
             <div
                 class="flex flex-wrap items-start justify-center flex-col-reverse md:flex-row max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto">
 
-                @include('pianote.products.partials._promo-card', [
-                    'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($productPrices['pianote-book-bag']->discounted_price) / floatval($productPrices['pianote-book-bag']->price))) . '%',
-                    'productTheme' => 'black',
-                    'cardTitle' => 'Book Bag Only',
-                    'cardImageHeight' => 'h-40',
-                    'cardImageUrl' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp',
-                    'cardPrice' => floatval($productPrices['pianote-book-bag']->discounted_price),
-                    'cardDiscount' => floatval($productPrices['pianote-book-bag']->price),
-                    'cardSubtitle' => 'One-time payment. Free shipping.',
-                    'cardButtons' => [['link' => '/ecommerce/add-to-cart?locked=true&products[pianote-book-bag]=1', 'text' => 'Select']],
-                    'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
-                    'sku' => 'pianote-book-bag',
-                ])
-
+                @if(!empty($membersVersion))
+                    @include('pianote.products.partials._promo-card', [
+                        'topBadgeText' => 'Save ' . round(100 - 100 * (floatval($discountedPrice) / floatval($productPrices['pianote-book-bag']->price))) . '%',
+                        'productTheme' => 'black',
+                        'cardTitle' => 'Book Bag Only',
+                        'cardImageHeight' => 'h-40',
+                        'cardImageUrl' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp',
+                        'cardDiscount' => floatval($discountedPrice),
+                        'cardPrice' => floatval($productPrices['pianote-book-bag']->price),
+                        'cardSubtitle' => 'One-time payment. Free shipping.',
+                        'cardButtons' => [
+                            [
+                                'link' => $orderUrl,
+                                'text' => 'Select'
+                            ]
+                        ],
+                        'cardBonuses' => ['Premium Oil-Tanned Leather', '16” Laptop Sleeve', 'Custom Embossed'],
+                        'sku' => 'pianote-book-bag',
+                    ])
+                @endif
                 @include('pianote.products.partials._promo-card', [
                     'topBadgeText' => 'LAUNCH SPECIAL',
                     'productTheme' => 'pianote',
@@ -567,6 +564,7 @@
                     'cardImageHeight' => 'h-40',
                     'cardImageUrl' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-02.webp',
+                    'cardDiscount' => 249,
                     'cardPrice' => '249',
                     'cardSubtitle' => 'One-time payment. Free shipping.',
                     'cardButtons' => [['link' => '/', 'text' => 'Select']],
@@ -618,13 +616,4 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-
-    <script>
-        document.getElementById("range-slider").addEventListener("input", (e) => {
-            const sliderPos = e.target.value;
-
-            document.getElementsByClassName("image")[1].style.width = sliderPos + "%";
-            document.getElementsByClassName("slider-control")[0].style.left = sliderPos + "%";
-        });
-    </script>
 @stop

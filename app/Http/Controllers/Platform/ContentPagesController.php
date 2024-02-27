@@ -783,7 +783,7 @@ class ContentPagesController extends BaseController
         }
 
         if ($contentToRenderAsLesson instanceof Collection && $contentToRenderAsLesson->isEmpty()) {
-            return redirect()->route('members.unreleased');
+            throw new NotFoundHttpException();
         }
 
         ContentRepository::$pullFutureContent = user()->isAdmin();
