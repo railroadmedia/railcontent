@@ -54,6 +54,7 @@ export const useCollectionStore = defineStore({
             this.resetFilterFields();
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
+            this.filter.progress = '';
             this.getData();
         },
 
