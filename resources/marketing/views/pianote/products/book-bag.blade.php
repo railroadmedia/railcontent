@@ -566,11 +566,11 @@
                     'cardImageUrl' =>
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-02.webp',
                     'cardDiscount' => 249,
-                    'cardPrice' => '249',
+                    'cardPrice' => 376,
                     'cardSubtitle' => 'One-time payment. Free shipping.',
                         'cardButtons' => [
                             [
-                                'link' => '/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true',
+                                'link' => '/ecommerce/add-to-cart?products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[classical-piano-pieces]=1&products[pianote-practice-planner]=1&promo-code=launch-bundle&redirect=/order&locked=true',
                                 'text' => 'Select'
                             ]
                         ],
