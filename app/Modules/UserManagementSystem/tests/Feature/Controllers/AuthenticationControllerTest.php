@@ -21,7 +21,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         parent::setUp();
 
         Route::get(
-            'test-route',
+            $this->testRouteName,
             function () {
                 return request()->wantsJson() ? response()->json(['testing' => true]) : response('testing');
             }
@@ -237,7 +237,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
 
         $response = $this->call(
             'GET',
-            'test-route',
+            $this->testRouteName,
             [],
             $cookies
         );

@@ -101,6 +101,7 @@ class UserFactory extends Factory
             'brand_minutes_practiced' => null,
             'membership_level' => null,
             'is_drumeo_lifetime_member' => 0,
+            'needs_logout' => false,
         ];
     }
 

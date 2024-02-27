@@ -171,7 +171,7 @@
             background: #191617;
             cursor: move;
             transition: all 300ms ease;
-            margin-left: 6px;
+            margin-left: 4px;
         }
     </style>
     @php
@@ -377,11 +377,12 @@
                 <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] messy-bg z-10"  :style="`width: ${sliderValue}%;`"></div>
                 <div class="image absolute h-full left-0 top-0 bg-no-repeat bg-[length:530px] sm:bg-[length:960px] bg-center w-full" style="background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/book-bag/clean.webp');"></div>
 
-                <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-10"
+                <input x-model="sliderValue" class="range-slider flex absolute w-full h-full m-0 items-center justify-center bg-transparent outline-none transition-all duration-200 appearance-none z-50"
                     type="range" min="1" max="100" />
 
-                <div :style="`left: ${sliderValue}%`" class="bg-black text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2">
-                    <i class="fas fa-left-right"></i>
+                <div :style="`left: ${sliderValue}%; background: #191617;`" class="text-white rounded-full w-8 top-1/2 mt-10 sm:mt-24 lg:mt-32 block relative z-20 text-center py-1 cursor-move transform -translate-x-1/2 -translate-y-1/2 translate-y-[-50%]">
+                    <i class="fa fa-chevron-left text-xs"></i>
+                    <i class="fa fa-chevron-right text-xs"></i>
                 </div>
             </div>
         </div>
