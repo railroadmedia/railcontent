@@ -568,7 +568,12 @@
                     'cardDiscount' => 249,
                     'cardPrice' => '249',
                     'cardSubtitle' => 'One-time payment. Free shipping.',
-                    'cardButtons' => [['link' => '/', 'text' => 'Select']],
+                        'cardButtons' => [
+                            [
+                                'link' => '/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true',
+                                'text' => 'Select'
+                            ]
+                        ],
                     'cardBonuses' => [
                         'Pianote Book Bag',
                         'Chords & Scales Book',
