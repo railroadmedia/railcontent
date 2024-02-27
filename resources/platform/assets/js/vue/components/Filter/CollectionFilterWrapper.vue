@@ -1,5 +1,5 @@
 <template>
-    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-filter-icon="!hasFilterOptions" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
+    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
         <template #extra-icon>
@@ -7,7 +7,7 @@
         </template>
     </FilterControls>
     <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
-    <div class="tw-px-4 lg:tw-px-0" v-if="hasFilterOptions" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
+    <div class="tw-px-4 lg:tw-px-0" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
         <FilterOptions v-if="!isCollapsed && !isTablet" :multi-select-columns="multiSelectColumns"
             :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
             :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
@@ -42,6 +42,10 @@ const props = defineProps({
     activeTab: {
         type: String,
         default: '',
+    },
+    hideFilterIcon: {
+        type: Boolean,
+        default: false,
     },
     hideSortIcon: {
         type: Boolean,
@@ -119,10 +123,6 @@ const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'o
 
 const isTablet = ref(false);
 const isCollapsed = ref(true);
-
-const hasFilterOptions = computed(() => {
-    return props.multiSelectColumns.length > 0;
-})
 
 const handleToggleCollapse = () => {
     isCollapsed.value = !isCollapsed.value;
