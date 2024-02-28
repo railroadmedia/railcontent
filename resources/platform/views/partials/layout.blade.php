@@ -50,7 +50,7 @@ $userData = assembleUserAttributes(user());
 
         {{-- App Container --}}
         <div id="app" class="flex-1">
-            
+
             @if(empty($noContainer) || !$noContainer)
                 <app-container
                     :vue-router="false"
@@ -112,8 +112,7 @@ $userData = assembleUserAttributes(user());
         ])
 
         {{-- Pendo Script --}}
-        <script>     
-            console.log('pendo script')       
+        <script>
             (function(apiKey){
                 (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
                     v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
@@ -126,13 +125,13 @@ $userData = assembleUserAttributes(user());
                             },
                             account: {
                                 id: {{ user()->id }},
-                            }   
+                            }
                         });
                 })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');
         </script>
 
-        
-        
+
+
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
 </html>

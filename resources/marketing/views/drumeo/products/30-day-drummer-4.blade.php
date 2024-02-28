@@ -218,6 +218,7 @@
     trailer : false,
     lazyLoad: false,
     videoLoaded: false,
+    waitlistModal: false,
     }"
 @endsection
 
@@ -285,8 +286,8 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
+                                                        <span class="join sold-out medium w-full"  x-on:click="waitlistModal = true;">JOIN WAITLIST</span>
+{{--                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>--}}
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Drumeo Members register for free here.</a>
                             </p>
@@ -589,9 +590,8 @@
             @if($hasProduct)
                 <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
             @else
-                <a
-                    href="#final"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+{{--                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
+                <a href="#final" class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" x-on:click="waitlistModal = true;">JOIN WAITLIST</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
@@ -886,64 +886,66 @@
                 src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD season 2">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
 
-            <h6 class="leading-normal mb-4">
-                <span class="text-drumeo">Enrollment closes in
-                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                         </span>!</span>
-            </h6>
+            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span>
+{{--            <h6 class="leading-normal mb-4">--}}
+{{--                <span class="text-drumeo">Enrollment closes in--}}
+{{--                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                         </span>!</span>--}}
+{{--            </h6>--}}
 
-            <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                    <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&promo-code=30DDS4-BUNDLE&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
-                        <h3><strong>30-Day Drummer</strong></h3>
-                        <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
-                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
-                        <div class="join blue smaller my-4">ENROLL NOW</div>
-                        <ul class="list-disc ml-10">
-                            <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>
-                            <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-Month Drumeo Access</li>
-                        </ul>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
+{{--            <div class="flex flex-wrap items-center mt-7 sm:mt-10">--}}
+{{--                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">--}}
+{{--                    <a href="/ecommerce/add-to-cart?products[30-day-drummer-4]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&promo-code=30DDS4-BUNDLE&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
+{{--                        <h3><strong>30-Day Drummer</strong></h3>--}}
+{{--                        <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
+{{--                        <h2 class="inline-block"><s class="opacity-60">$127</s> <strong class="text-4xl">${{ floatval($productPrices['30-day-drummer-4']->discounted_price) }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
+{{--                        <div class="join blue smaller my-4">ENROLL NOW</div>--}}
+{{--                        <ul class="list-disc ml-10">--}}
+{{--                            <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>--}}
+{{--                            <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-Month Drumeo Access</li>--}}
+{{--                        </ul>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
 
-                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> Runs February 26 to March 25<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
-                    </a>
-                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
-                        <h3><strong>Unlimited Lessons</strong></h3>
-                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $288.94.</p>
-                        <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
-                        <div class="join blue smaller my-4">GET EVERYTHING</div>
-                        <ul class="list-disc ml-10">
-                            <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
-                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 30-Day Drummer</li>
-                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>
-                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> PadStand</li>
-                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>
-                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Best Beginner Drum Book</li>
-                        </ul>
-                        <hr class="w-full my-5" style="border-color:#ebf2f8">
-                        <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> 10-Level Drumeo Method Curriculum<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> Play Along To 5000+ Popular Songs.<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>
-                            <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
-                    </a>
-                </div>
-                <div class="flex w-full justify-center xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
-                        loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/marketing/drumeo/products/30-day-drummer/season-4/collage.png" alt="order collage image">
-                </div>
-            </div>
+{{--                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> Runs February 26 to March 25<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                    </a>--}}
+{{--                    <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-4]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
+{{--                        <h3><strong>Unlimited Lessons</strong></h3>--}}
+{{--                        <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $288.94.</p>--}}
+{{--                        <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}
+{{--                        <div class="join blue smaller my-4">GET EVERYTHING</div>--}}
+{{--                        <ul class="list-disc ml-10">--}}
+{{--                            <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 30-Day Drummer</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> PadStand</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Best Beginner Drum Book</li>--}}
+{{--                        </ul>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#ebf2f8">--}}
+{{--                        <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> 10-Level Drumeo Method Curriculum<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> Play Along To 5000+ Popular Songs.<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>--}}
+{{--                            <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="flex w-full justify-center xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0">--}}
+{{--                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"--}}
+{{--                        loading="lazy" onload="this.classList.remove('opacity-0')"--}}
+{{--                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/marketing/drumeo/products/30-day-drummer/season-4/collage.png" alt="order collage image">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
         </div>
     </section>
 
@@ -1033,6 +1035,23 @@
         </div>
     </section>
 
+    @component('_partials.components.modal', ['name' => 'waitlistModal'])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
+                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
+                    next edition of 30-Day Drummer is announced. </p>
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                    "formName" => '30 Day Chops Waitlist',
+                    "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
+                    "buttonText" => "Let Me Know ",
+                    "stacked" => true,
+                    "noSocial" => true,
+                ])
+            </div>
+        @endslot
+    @endcomponent
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '884916532',
