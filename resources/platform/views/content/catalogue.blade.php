@@ -226,19 +226,19 @@
                 @pause="handlePlayAlongsPause"
             ></play-alongs>
         @else
-                <collection-wrapper
-                    :brand="{{ json_encode($brand) }}"
-                    :collection-type="{{ json_encode($lessonType) }}"
-                    :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
-                    :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
-                    :pre-loaded-content="{{ $listLessons }}"
-                    :statuses="{{ json_encode($statuses ?? ['published']) }}"
-                    :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
-                    :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
-                    :is-all-content="{{$isAllContent ?? false}}"
-                    :limit="{{isset($isAllContent) ? 50: 10 }}"
-                ></collection-wrapper>
+            <collection-wrapper
+                :brand="{{ json_encode($brand) }}"
+                :collection-type="{{ json_encode($lessonType) }}"
+                :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+                :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
+                :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"
+                :pre-loaded-content="{{ $listLessons }}"
+                :statuses="{{ json_encode($statuses ?? ['published']) }}"
+                :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
+                :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
+                :is-all-content="{{ json_encode($isAllContent ?? false) }}"
+                :limit="{{isset($isAllContent) ? 50: 10 }}"
+            ></collection-wrapper>
         @endif
 
         {{-- Play Alongs Catalogue for Drumeo --}}

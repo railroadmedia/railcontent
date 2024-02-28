@@ -47,13 +47,13 @@
         <collection-wrapper
             collection-type="pack"
             :infinite-scroll="false"
-            without-enrollment="{{ json_encode(user()->isPackOnlyOwner()) }}"
+            without-enrollment="{{ user()->isPackOnlyOwner() }}"
             :pre-loaded-content="{{ $packs }}"
             title="Packs"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
             default-sorts="-progress"
             :hide-sort-icon="true"
-            limit = -1
+            :limit="{{ 1 }}"
             search-placeholder="Search all packs..."
         ></collection-wrapper>
     </div>

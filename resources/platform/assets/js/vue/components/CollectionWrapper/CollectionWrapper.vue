@@ -95,8 +95,8 @@ const props = defineProps({
         default: () => "/",
     },
     limit: {
-        type: String,
-        default: () => "10",
+        type: Number,
+        default: () => 10,
     },
     preLoadedContent: {
         type: Object,
@@ -188,7 +188,7 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    }else if(isAllContent.value){
+    }else if(props.isAllContent){
         types = props.includedTypes;
     } else {
         props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
@@ -268,10 +268,6 @@ const isPack = computed(() => {
 
 const isThreads = computed(() => {
     return props.collectionType === 'threads';
-})
-
-const isAllContent = computed(() => {
-    return props.isAllContent === 1;
 })
 
 //List view reactive
@@ -388,12 +384,12 @@ onBeforeMount(() => {
         sortOptions: props.sortOptions,
         defaultSort: props.defaultSort,
     })
-    collectionStore.getURLParams();
+    // collectionStore.getURLParams();
 })
 
 onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.sortOptions, props.defaultSort)
-    console.log(props.preLoadedContent)
+    // console.log(props.preLoadedContent)
 })
 </script>
