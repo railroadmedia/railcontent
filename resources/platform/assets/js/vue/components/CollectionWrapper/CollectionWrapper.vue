@@ -95,7 +95,7 @@ const props = defineProps({
         default: () => "/",
     },
     limit: {
-        type: Number,
+        type: [Number, Boolean],
         default: () => 10,
     },
     preLoadedContent: {
