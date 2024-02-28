@@ -443,7 +443,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                'allowableFilters' => [],
+                'allowableFilters' => ['type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
                 'tabs' => [
@@ -489,7 +489,7 @@ return [
                 'name' => 'Courses',
                 'icon' => 'icon-courses',
                 'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory',  'lifestyle', 'creativity'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
                 'tabs' => [
@@ -711,7 +711,7 @@ return [
                 'name' => 'Quick Tips',
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle','creativity'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
@@ -993,7 +993,7 @@ return [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
-                "allowableFilters" => ['bpm', 'genre', 'difficulty'],
+                "allowableFilters" => ['difficulty','genre','bpm'],
                 'allowableFiltersMobile' => ['difficulty', 'bpm', 'genre'],
                 'tabs' => [
                     [
@@ -1078,13 +1078,36 @@ return [
             'pack' => [
                 'allowableFilters' => ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
                 'allowableFiltersMobile' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
-            ]
+            ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'pianote' => [
             'all' => [
                 'name' => 'New Content',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
-                'allowableFilters' => [],
+                'allowableFilters' => ['type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
@@ -1092,6 +1115,25 @@ return [
                 'description' => "Here's a list of all lessons recently added to Pianote. Browse on your own or use search to find whatever it is you'd like to learn!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1461,6 +1503,29 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -1468,7 +1533,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                'allowableFilters' => [],
+                'allowableFilters' => ['type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
             ],
@@ -1716,6 +1781,29 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -1724,7 +1812,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                'allowableFilters' => [],
+                'allowableFilters' => ['type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
             ],
@@ -1931,6 +2019,29 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+            ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
         ],
     ],

@@ -38,17 +38,22 @@ class GroupedContentDecorator extends ModeDecoratorBase
                 );
             } elseif ($content['type'] == 'style') {
                 $lessonType =  array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['lessons'][0]['type']] ?? '';
-                $contents[$index]['url'] = url()->route('platform.content.genre.show', [
-                    'brand' => brand(),
-                    'genre' => urlencode(urlencode($content['grouped_by_field'])),
-                    'contentTypeName' => $lessonType,
-                ]);
+                if($content['grouped_by_field'] != ''){
+                    $contents[$index]['url'] = url()->route('platform.content.genre.show', [
+                        'brand' => brand(),
+                        'genre' => urlencode(urlencode($content['grouped_by_field'])),
+                        'contentTypeName' => $lessonType,
+                    ]);
+                }
             } else {
                 $contents[$index]['url'] = url()->route('platform.content.coach.show', [
                         'brand' => brand(),
                         'firstContentSlug' => $content['slug'],
                         'firstContentId' => $content['id'],
-                    ]).'?included_types[]='.$content['content_type'];
+                    ]);
+                if(isset($content['content_type'])){
+                    $contents[$index]['url'] .= '?included_fields[]=type,'.ucfirst($content['content_type']);
+                }
             }
             $content['lessons'] = Decorator::decorate($content['lessons'], 'card');
         }

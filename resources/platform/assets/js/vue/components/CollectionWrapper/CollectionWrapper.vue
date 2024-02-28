@@ -95,8 +95,8 @@ const props = defineProps({
         default: () => "/",
     },
     limit: {
-        type: String,
-        default: () => "10",
+        type: Number,
+        default: () => 10,
     },
     preLoadedContent: {
         type: Object,
@@ -156,6 +156,13 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    includedTypes: {
+        default: '',
+    },
+    isAllContent: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -181,8 +188,10 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
+    }else if(props.isAllContent){
+        types = props.includedTypes;
     } else {
-        props.collectionType && types.push(props.collectionType);
+        props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
 
         if (isQuickTips.value) {
             types.push('boot-camps');
@@ -375,12 +384,12 @@ onBeforeMount(() => {
         sortOptions: props.sortOptions,
         defaultSort: props.defaultSort,
     })
-    collectionStore.getURLParams();
+    // collectionStore.getURLParams();
 })
 
 onMounted(() => {
     // console.log('collection type',props.collectionType)
     // console.log(props.sortOptions, props.defaultSort)
-    console.log(props.preLoadedContent)
+    // console.log(props.preLoadedContent)
 })
 </script>
