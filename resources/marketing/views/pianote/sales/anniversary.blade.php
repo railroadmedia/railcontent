@@ -53,7 +53,7 @@
                     </p>
 
                 </div>
-                <img class="h-72 lg:h-80 hidden sm:inline transition-opacity opacity-0"
+                <img class="h-56 lg:h-80 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
@@ -254,12 +254,15 @@
 @section('final')
         @include('musora.sales.components.order-promo-cards-section', [
         // general
+        'logoM' => "pianote/promos/march/8-anniversary-logo-white-m.webp",
+        'logo' => "pianote/promos/march/8-anniversary-logo-white.webp",
+        'promoText' => 'Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em>',
         'buttonText' => "GET STARTED",
 
         // first deal
         'firstDeal'=> "Legacy Pricing",
         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
-        'firstImageHeight' => 'h-24',
+        'firstImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
         'firstDealSub' => "Save 25% on your first year. No bonuses.",
@@ -275,8 +278,7 @@
         'topBadge' => "BEST DEAL",
         'secondDeal' => "Anniversary Bundle",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
-        'secondImageHeight' => 'h-24',
+        'secondImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'secondDealSub' => "Join Pianote + get 8 bonuses worth $987.",
         'secondDealPrice' => 240,
         'secondDealDiscount' => 1227,
@@ -296,7 +298,7 @@
         // third deal
         'thirdDeal' => "Lifetime Bundle",
         'thirdDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp',
-        'thirdImageHeight' => 'h-24',
+        'thirdImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'thirdDealSub' => "Limited quantity. ",
         'thirdDealPrice' => 1200,
         "thirdDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849",
