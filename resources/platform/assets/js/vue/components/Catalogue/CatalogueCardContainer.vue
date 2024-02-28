@@ -3,7 +3,7 @@
         <div
             :class="`tw-block tw-no-scrollbar ${isMiniView ? 'tw-overflow-x-scroll tw-max-h-[211px] tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div :class="`
-                    tw-px-4 lg:tw-px-0 tw-no-scrollbar
+                    tw-no-scrollbar
                     ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-pb-[8px] tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
                     ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
                     ${!isMiniView && willScroll && !collectionStoreLoading ? 'tw-overflow-x-scroll' : ''}
