@@ -21,7 +21,7 @@
             {{ title }}
           </span>
         </template>
-        <PageHeaderRowInfo v-if="infoData" class="tw-mt-2" :class="{ 'tw-mb-2': $slots['ctas'] }" :infoData="infoData" />
+        <PageHeaderRowInfo v-if="infoData" class="tw-mt-1" :class="{ 'tw-mb-2': $slots['ctas'] }" :infoData="infoData" />
         <!-- Modal for Desktop -->
         <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-info']">
           <musora-icon @click="openModal" icon-name="info"
