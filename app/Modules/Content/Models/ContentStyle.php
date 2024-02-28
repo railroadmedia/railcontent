@@ -1,8 +1,9 @@
 <?php
 
-namespace Modules\Content\Models;
+namespace App\Modules\Content\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\Content\Models\Content;
 
 /**
  * Modules\Content\Models\ContentStyle
