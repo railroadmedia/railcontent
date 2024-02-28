@@ -54,7 +54,7 @@ class Filters20242 extends Command
                         $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'));
                         $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'));
                         $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'));
-                        //$content->setGenre($this->getValue($data, $headersRow, 'Genre'));
+                        $content->setStyle($this->getValue($data, $headersRow, 'Genre'));
                     }
                 }
             }
