@@ -458,7 +458,7 @@
 
 
 <section class="text-center px-5 py-10 md:py-20 lg:py-24" @if(!empty($blackBag)) style="background-color:#020d24;color:#fff;" @else style="background-color:#f6f8fc;" @endif>
-    <div class="container mx-auto relative z-10 max-w-5xl">
+    <div class="container mx-auto max-w-5xl">
         <h2><strong>The last StickBag<br class="sm:hidden"> you’ll ever need.</strong></h2>
         <h6 class="leading-tight mt-2 mb-5 sm:mb-10">A bag built to take everything<br class="sm:hidden"> from garage to stage. </h6>
 
