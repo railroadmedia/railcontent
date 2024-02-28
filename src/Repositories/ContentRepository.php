@@ -1405,7 +1405,7 @@ class ContentRepository extends RepositoryBase
                         ->addSubJoinToQuery($subQuery)
                         ->directPaginate($this->page, $this->limit)
                         ->orderBy('slug', $this->orderDirection);
-                if (!empty($this->typesToInclude)) {
+                if (!empty($this->typesToInclude) && (count($this->typesToInclude) <= 3)) {
                     $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
                 }
                 $contentRows = $query->getToArray();
@@ -2981,17 +2981,21 @@ class ContentRepository extends RepositoryBase
             'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
         ];
 
+        $brand = config('railcontent.brand');
         if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
-            $brand = config('railcontent.brand');
-            $type =
+              $type =
                 ($this->typesToInclude[0] === 'song' ||
                     $this->typesToInclude[0] === 'course' ||
                     $this->typesToInclude[0] === 'rudiment' ||
                     $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' : $this->typesToInclude[0];
             $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
             $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
+            $type = (count($this->typesToInclude) > 3) ? 'all' : $type;
             self::$catalogMetaAllowableFilters =
                 (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
+        }elseif (in_array('instructor', Arr::pluck($this->requiredFields,'name'))){
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.coach-lessons.allowableFilters'));
         }
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
