@@ -1513,10 +1513,13 @@ class ContentPagesController extends BaseController
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
 
         ContentRepository::$pullFutureContent = false;
-        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = true;
+        ContentRepository::$countFilterOptionItems = true;
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         $listLessons = $this->getListLessionsFromRequest($request);
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
+
         $adminMessage = null;
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
@@ -1572,19 +1575,51 @@ class ContentPagesController extends BaseController
      */
     private function getListLessionsFromRequest(Request $request)
     {
+        $required_fields = $request->get('required_fields', []);
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+                if ($extra['0'] == 'length_in_seconds') {
+                    $required_fields[] = $tab;
+                }
+                if ($extra['0'] == 'topic') {
+                    $required_fields[] = $tab;
+                }
+            }
+        }
+
         $lessonType = ContentTypes::newContentTypes();
         $filteredType = $request->get('included_types');
+
         return $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 20),
+            $request->get('limit', 100),
             '-published_on',
             $filteredType ?? $lessonType,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
+            $required_fields,
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
+            $request->get('included_user_states', []),
+            true,
+            false,
+            true,
+            false,
+            false,
+            $group_by ?? false
         );
     }
 

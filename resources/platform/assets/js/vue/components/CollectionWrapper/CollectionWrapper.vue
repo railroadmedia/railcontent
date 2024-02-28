@@ -156,6 +156,13 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    includedTypes: {
+        default: '',
+    },
+    isAllContent: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -181,8 +188,10 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
+    }else if(isAllContent.value){
+        types = props.includedTypes;
     } else {
-        props.collectionType && types.push(props.collectionType);
+        props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
 
         if (isQuickTips.value) {
             types.push('boot-camps');
@@ -259,6 +268,10 @@ const isPack = computed(() => {
 
 const isThreads = computed(() => {
     return props.collectionType === 'threads';
+})
+
+const isAllContent = computed(() => {
+    return props.isAllContent === 1;
 })
 
 //List view reactive
