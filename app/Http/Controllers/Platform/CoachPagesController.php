@@ -267,7 +267,7 @@ class CoachPagesController extends Controller
         $includedTypes =
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
 
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coach-lessons'] ?? [];
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         $listLessons = $this->contentService->getFiltered(
