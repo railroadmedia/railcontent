@@ -384,7 +384,7 @@ onBeforeMount(() => {
         sortOptions: props.sortOptions,
         defaultSort: props.defaultSort,
     })
-    // collectionStore.getURLParams();
+    collectionStore.getURLParams();
 })
 
 onMounted(() => {
