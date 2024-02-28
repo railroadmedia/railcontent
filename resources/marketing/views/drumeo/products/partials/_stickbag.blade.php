@@ -510,84 +510,18 @@
         @endphp
 
 
-        <div x-data="{
-    open: false,
-    imgIndex: null,
-    slides: [
-        @foreach ($slides as $slide)
-        '{{ $slide['img'] }}', @endforeach
-    ],
-    splide: null,
-    imgSrc: '',
-    initSplide: function(startIndex) { 
-        console.log('initSplide called with startIndex:', startIndex);
-        this.splide = new Splide($refs.splide, {
-            type: 'fade',
-            gap: '1rem',
-            lazyLoad: 'nearby',
-            pagination: false,
-            start: startIndex,
-            perMove: 1,
-            swipe: false, 
-            arrows: true, 
-            rewind: true, 
-            breakpoints: {
-                640: {
-                    perMove: 1,
-                    gap: '1rem',
-                    arrows: false,
-                }
-            },
-        }).mount();
-        console.log('Splide mounted');
-        this.splide.options.start = startIndex; 
-        this.splide.options.autoplay = true; 
-        this.splide.go(startIndex); 
-    }
-}" 
-class="flex flex-wrap items-center">
-        <!-- images design -->
-            <div class="w-full sm:w-1/2 sm:order-1">
-                <div class="p-3 w-full">
-                    <!-- call the function initSplide() and pass the index as an argument -->
-                    <div  @click="console.log('Image clicked with src:', 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'); open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}'; initSplide(0)"  
-                        class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
-                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
-                    </div>
-                </div>
-            </div>
-            <div class="w-1/2 sm:w-1/4">
-                <div class="p-3 w-full">
-                    <div @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}'; initSplide(1)"
-                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
-                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
-                    </div>
-                </div>
-                <div class="p-3 w-full">
-                    <div @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}'; initSplide(2)"
-                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
-                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
-                    </div>
-                </div>
-            </div>
-            <div class="w-1/2 sm:w-1/4 sm:order-2">
-                <div class="p-3 w-full">
-                    <div @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}'; initSplide(3)"
-                        class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
-                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
-                    </div>
-                </div>
-                <div class="p-3 w-full">
-                    <div @click="open = true; imgSrc = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}'; initSplide(4)"
-                        class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
-                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')">
-                    </div>
-                </div>
-            </div>
-                @include('drumeo._partials.modal-carousel')
-            </div>
-    </div>
-<!--end of Modal part-->
+        @include('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation])
+
+
+
+
+
+
+
+
+
+
+
 
         <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
         <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
