@@ -13,6 +13,7 @@ use Modules\Content\Models\ContentEssentials;
 use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentGenre;
 use Modules\Content\Models\ContentLifestyle;
+use App\Modules\Content\Models\ContentStyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
 
@@ -538,6 +539,11 @@ if($contentInstructor->count() == 0) {
                 $style->save();
             }
             $this->setField('style', $value);
+        }else{
+            ContentStyle::query()
+                ->where('content_id', '=', $this->id)
+                ->delete();
+
         }
     }
 
@@ -694,25 +700,6 @@ if($contentInstructor->count() == 0) {
                 $gear->save();
             }
             $this->setField('gear', $value);
-        }
-    }
-
-    public function setGenre($value)
-    {
-        if ($value) {
-            $genre =
-                ContentGenre::query()
-                    ->where('content_id', '=', $this->id)
-                    ->where('genre', $value)
-                    ->first();
-            if (!$genre) {
-                $genre = new ContentGenre();
-                $genre->content_id = $this->id;
-                $genre->genre = $value;
-                $genre->position = 1;
-                $genre->save();
-            }
-            $this->setField('genre', $value);
         }
     }
 
