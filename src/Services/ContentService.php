@@ -1234,6 +1234,12 @@ class ContentService
             }
         }
 
+        $order = ContentRepository::$catalogMetaAllowableFilters;
+
+        if($order) {
+            $filterFields = array_merge(array_fill_keys($order, 0), $filterFields);
+        }
+
         return $filterFields;
     }
 
