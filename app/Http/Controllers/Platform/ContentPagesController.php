@@ -185,6 +185,7 @@ class ContentPagesController extends BaseController
         }
 
         if ($contentTypeName == 'songs') {
+            ContentRepository::$catalogMetaAllowableFilters  = array_merge (ContentRepository::$catalogMetaAllowableFilters, ['artist']);
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -271,6 +272,9 @@ class ContentPagesController extends BaseController
 
             $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
             $catalogueMeta['allowableFilters'] = $filterableValues;
+            $artists =   count($listLessons->filterOptions()['artist'] ?? []);
+            unset($listLessons['filter_options']['artist']);
+
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],
@@ -281,7 +285,7 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
-                "artistsNumber" => count($listLessons->filterOptions()['artist'] ?? []),
+                "artistsNumber" => $artists,
                 "songsNumber" => $listLessons->totalResults(),
                 "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
