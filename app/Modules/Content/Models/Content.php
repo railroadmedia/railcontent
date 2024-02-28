@@ -525,6 +525,9 @@ if($contentInstructor->count() == 0) {
 
     public function setStyle($value)
     {
+        ContentStyle::query()
+            ->where('content_id', '=', $this->id)
+            ->delete();
         if ($value) {
             $style =
                 ContentStyle::query()
@@ -539,11 +542,6 @@ if($contentInstructor->count() == 0) {
                 $style->save();
             }
             $this->setField('style', $value);
-        }else{
-            ContentStyle::query()
-                ->where('content_id', '=', $this->id)
-                ->delete();
-
         }
     }
 
