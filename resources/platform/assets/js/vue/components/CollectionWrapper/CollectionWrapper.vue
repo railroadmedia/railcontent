@@ -22,6 +22,7 @@
                     :content-type-override="collectionType"
                     :will-scroll="false"
                     :subscription-calendar-id="subscriptionCalendarId"
+                    :is-admin="isAdmin"
                 />
             </CollectionResults>
         </transition>
@@ -109,6 +110,10 @@ const props = defineProps({
         default: 'Search',
     },
     withoutEnrollment: {
+        type: Boolean,
+        default: () => false,
+    },
+    isAdmin: {
         type: Boolean,
         default: () => false,
     },

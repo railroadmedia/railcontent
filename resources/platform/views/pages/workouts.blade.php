@@ -10,6 +10,7 @@
 
 @section('content')
     <workouts
+        :is-admin="{{ json_encode(user()->isAdmin()) }}"
         :carousel-data="{{ json_encode($carousel) }}"
         @if($startedLessons)
             :continue-data="{{ $startedLessons }}"
