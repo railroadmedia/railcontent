@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="sortOptions"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -95,7 +95,7 @@ const props = defineProps({
         default: () => "/",
     },
     limit: {
-        type: Number,
+        type: [Number, Boolean],
         default: () => 10,
     },
     preLoadedContent: {
@@ -344,6 +344,16 @@ const getActiveTab = computed(() => {
     return Array.isArray(filter.value.activeTab) ? JSON.stringify(filter.value.activeTab) : filter.value.activeTab;
 })
 
+const getSortOptions = computed(() => {
+    return showGroupBy.value ?
+        [
+            { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
+            { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
+        ]
+        : props.sortOptions
+
+})
+
 const handleClearFilter = () => {
     collectionStore.clearFilter();
 }
@@ -384,7 +394,7 @@ onBeforeMount(() => {
         sortOptions: props.sortOptions,
         defaultSort: props.defaultSort,
     })
-    // collectionStore.getURLParams();
+    collectionStore.getURLParams();
 })
 
 onMounted(() => {

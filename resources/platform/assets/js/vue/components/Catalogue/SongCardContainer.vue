@@ -3,7 +3,7 @@
         <div :class="`tw-block tw-no-scrollbar ${isGroupedView ? 'tw-overflow-x-scroll tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div
                 :class="`
-                    tw-px-4 lg:tw-px-0 tw-no-scrollbar
+                    tw-no-scrollbar
                     ${!isGroupedView ? 'tw-flex tw-flex-wrap' : 'tw-flex tw-flex-row tw-flex-nowrap tw-w-auto'}
                 `">
                 <!-- Skeleton Loader -->

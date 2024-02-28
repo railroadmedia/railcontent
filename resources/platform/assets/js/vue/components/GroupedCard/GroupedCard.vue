@@ -2,7 +2,7 @@
     <!--  Instructor Thumbnail Loader -->
     <SkeletonLoader v-if="showSkeletonLoader" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
-    <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4 tw-mx-4 lg:tw-mx-0">
+    <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4">
         <a :href="item.url"
             class="tw-flex tw-items-center tw-text-[#00101D] dark:tw-text-white hover:tw-underline"
             style="text-underline-offset: 6px;">
