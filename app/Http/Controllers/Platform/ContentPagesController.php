@@ -1609,7 +1609,7 @@ class ContentPagesController extends BaseController
 
         return $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 100),
+            $request->get('limit', 50),
             '-published_on',
             $filteredType ?? $lessonType,
             $request->get('slug_hierarchy', []),
