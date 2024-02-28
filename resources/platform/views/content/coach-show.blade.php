@@ -15,7 +15,7 @@
             ]
         ]
     ];
-    
+
     $infoDataStrArr = [];
     if ($thisCoach->fetch('data.focus_text','')) {
         $infoDataStrArr = [
@@ -158,7 +158,7 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-3">
         <collection-wrapper
-            limit="{{ $limitOverride ?? 18 }}"
+            :limit="{{ $limitOverride ?? 18 }}"
             :pre-loaded-content="{{ $listLessons }}"
             :required-fields="{{ json_encode($requiredFields) }}"
             :statuses="{{ json_encode(['published', 'scheduled']) }}"
