@@ -4,7 +4,14 @@ namespace App\Modules\Content\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Content\Models\Content;
+use App\Modules\Content\Models\ContentStyle;
 use Exception;
+use Modules\Content\Models\ContentCreativity;
+use Modules\Content\Models\ContentEssentials;
+use Modules\Content\Models\ContentGears;
+use Modules\Content\Models\ContentLifestyle;
+use Modules\Content\Models\ContentTheory;
+use Modules\Content\Models\ContentTopic;
 use Railroad\Railcontent\Services\ContentService;
 
 
@@ -64,14 +71,16 @@ class Filters20242 extends Command
                         $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
                         $content->setGear($this->getValue($data, $headersRow, 'Gear'));
                     }else {
-                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-1'));
-                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-2'));
-                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-1'));
-                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-2'));
-                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-1'));
-                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'));
-                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'));
-                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'));
+                        $this->prepareDatabase($contentId, $content);
+
+                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-1'), 1);
+                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-2'), 2);
+                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-1'),1);
+                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-2'),2);
+                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-1'),1);
+                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'),2);
+                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'),1);
+                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'),2);
                         $content->setStyle($this->getValue($data, $headersRow, 'Genre'));
                     }
                     }
@@ -129,5 +138,53 @@ class Filters20242 extends Command
         }
 
         return $data[$name] ?? "";
+    }
+
+    /**
+     * @param string|null $contentId
+     * @param \Illuminate\Database\Eloquent\Model|\App\Modules\Content\Builders\ContentBuilder|object $content
+     */
+    private function prepareDatabase(
+        ?string $contentId,
+        $content
+    )
+    : void {
+        ContentCreativity::query()
+            ->where('content_id', '=', $contentId)
+            ->delete();
+        $content->deleteFields('creativity');
+
+        ContentEssentials::query()
+            ->where('content_id', '=', $contentId)
+            ->delete();
+        $content->deleteFields('essentials');
+
+        ContentTheory::query()
+            ->where('content_id', '=', $contentId)
+            ->first();
+
+        $content->deleteFields('theory');
+
+        ContentLifestyle::query()
+            ->where('content_id', '=', $contentId)
+            ->delete();
+        $content->deleteFields('lifestyle');
+
+        ContentStyle::query()
+            ->where('content_id', '=', $contentId)
+            ->delete();
+        $content->deleteFields('style');
+
+        ContentGears::query()
+            ->where('content_id', '=', $contentId)
+            ->delete();
+        $content->deleteFields('gear');
+
+        ContentTopic::query()
+            ->where('content_id', '=', $contentId)
+            ->delete();
+
+        $content->deleteFields('topic');
+
     }
 }
