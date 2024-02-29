@@ -25,7 +25,7 @@ export function useFilterValues() {
                     for(let i = 0; i < quotient; i++){
                         filters.push({
                             category: key + `${i + 1}`,
-                            items: formattedFilters[key].slice(1*i*10, (i+1)*10-1)
+                            items: formattedFilters[key].slice(1*i*10, (i+1)*10)
                         });
                     }
                 } else {
