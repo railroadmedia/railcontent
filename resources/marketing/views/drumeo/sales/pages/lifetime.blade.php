@@ -5,8 +5,8 @@
     <meta property="og:title" content="Lifetime Membership | Drumeo">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    <meta name="description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
-    <meta property="og:description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
+    <meta name="description" content="Drum lessons for LIFE.">
+    <meta property="og:description" content="Drum lessons for LIFE.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -14,6 +14,13 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
 @stop
+
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    lazyLoad: false,
+    }'
+@endsection
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
@@ -38,7 +45,7 @@
 {{--    ])--}}
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
         <div class="container mx-auto">
-            <h1 class="leading-none"><strong>Get drum lessons for <span class="text-musora">life.</span></strong></h1>
+            <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803596141" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
@@ -87,13 +94,13 @@
             </p>
         </div>
     </section>
-    <section class="text-white text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative" style="background:linear-gradient(to bottom, #0B76DB, #083661);">
-        <div class="container mx-auto max-w-4xl z-10 relative">
+    <section class="text-white text-center px-4 sm:px-6 py-8 sm:py-0 px-2 sm:px-4 relative" style="background:linear-gradient(to bottom, #0B76DB, #083661);">
+        <div class="container mx-auto max-w-5xl z-10 relative">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 sm:order-1 transition-opacity"
+                <img class="w-52 sm:w-72 lg:w-96 mb-4 sm:-my-6 lg:-my-8 sm:order-1 transition-opacity cursor-pointer autoplay-video" x-on:click="trailer = true;"
                     loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Screen.png" alt="screen">
-                <div class="flex-grow sm:pr-7 text-center sm:text-left">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/livestream-phone.webp" alt="screen">
+                <div class="flex-grow sm:pr-7 text-center sm:text-left sm:py-8 lg:py-8">
                     <h2 class="leading-tight"><strong>Improve Your Tempo, Dynamics and Musicianship with Gregg Bissonette</strong></h2>
                     <h6 class="leading-relaxed my-4 sm:my-6">Join Gregg Bissonette in an exclusive Lifetime Masterclass to help you become the most musical and versatile drummer you can be.</h6>
                     <div class="align-middle">
@@ -107,9 +114,9 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative">
-        <div class="container mx-auto max-w-5xl z-10 relative">
-            <p class="text-left leading-relaxed"><em>
+    <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative" style="background:#f6f8fc;">
+        <div class="container mx-auto max-w-4xl z-10 relative">
+            <h6 class="text-left leading-tight"><em>
                 <strong>A note from Gregg:</strong>
                 <br><br>
                 “Be a musical drummer!
@@ -119,117 +126,126 @@
                 Learn to play big band, Latin, funk, Afro-Cuban, hip-hop, R&B, play with brushes, in small groups, large groups, small or large venues, all ages and all kinds of styles and approaches.
                 <br><br>
                 Remember, it’s not all about playing drum solos, it’s about making a joyful noise!”</em>
-            </p>
+            </h6>
         </div>
     </section>
-    <div id="customize-anchor" class="anchor anchor-slide"></div>
-    <section class="py-10 md:py-14 lg:py-16 text-white text-center text-center relative z-50"
-        style="background:linear-gradient(to bottom, #094073 50%, #000C16);"
-        x-data="{
-            bonus: 0,
-            query: '',
-        }"
-    >
-        <div class="container mx-auto relative z-50">
-            <div class="mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mb-4" style="font-size: 0;">
-                <h3 class="mb-3" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
-                <div class="text-center mb-7"><p class="inline-block uppercase text-black bg-[#FFA800] py-1 px-4 font-black rounded-lg">Your choice of any bonus item:</p></div>
 
-                <hr class="opacity-0">
-                @php
-                    $bonuses = [
-                        [
-                            'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/508daf15-2a10-4dfa-a11f-1ebdfb614cfb-2023-02-15-Drumeo-EarDrums-Updated-100-Square+(1).jpg',
-                            'sku' => '&products[drumeo-eardrums]=1',
-                        ],
-                        [
-                            'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Thumbnails/e36ad306-8ba6-4db5-99bc-bd955080a57a-2023-06-21-Vater-Sticks-101-White-Backdrop+(1).jpg',
-                            'badge' => '12 Pairs',
-                            'sku' => '&products[Drumeo-VaterSticks]=12',
-                        ],
-                        [
-                            'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/stickbag/stickbag-cart-image.jpg',
-                            'sku' => '&products[stickbag]=1',
-                        ],
-                    ]
-                @endphp
+    @php
+        $bonuses = [
+            [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/gregg-bissonette-masterclass-card.webp',
+                'description' => 'A Live Masterclass With Gregg Bissonette',
+            ],
+            [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/drumshop-credit-card.webp',
+                'description' => '$300 Credit To The Drumeo DrumShop',
+                'price' => 300,
+            ],
+        ];
+        $buttonLink = '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[drumeo-gift-card-300]=1&promo-code=FREE-W-LIFETIME-849&locked=true';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[drumeo-gift-card-300]=1&promo-code=FREE-W-LIFETIME-849&locked=true';
+    @endphp
+
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
+    <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+        style="background:linear-gradient(to bottom, #094073, #000C16);"
+    >
+        <div class="container mx-auto relative z-50 max-w-4xl">
+            <h3 class="leading-tight mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="sm:hidden"> today and get:</strong></h3>
+            <div class="w-full">
+                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                    <div class=" inline-block relative w-full group" style="padding-bottom: 56%;perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                            <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="h-full w-full bg-center bg-cover" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/lifetime-membership2.webp');"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h2 class="leading-tight mt-4 sm:mt-6 mb-1">
+                    @if(!empty($upgradeVersion))
+                        <s class="opacity-60">$1200</s> <strong>$960</strong>
+                    @else
+                        <strong>$1200</strong>
+                    @endif
+                </h2>
+                <p class="leading-tight text-sm">One time payment or choose a <br class="sm:hidden">payment plan on the next page.</p>
+                <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+                <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE<br class="sm:hidden"> anniversary bonuses</strong></h3>
+            </div>
+            <div style="font-size:0px" class=" max-w-md mx-auto">
                 @foreach($bonuses as $bonus)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4"
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 sm:px-3 w-1/2"
                         x-data="{
-                            selected: false,
-                        }"
+                        flipped: false,
+                    }"
                         x-on:click="
-                            if(bonus <= 1 && selected){
-                                selected = !selected;
-                                query = query.replace('{{ $bonus['sku'] }}', '');
-                                bonus--;
-                            } else if(bonus < 1 && !selected) {
-                                selected = !selected;
-                                bonus++;
-                                query = query + '{{ $bonus['sku'] }}';
-                            }
-                        "
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    "
                     >
-                        <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 115%; @else padding-bottom: 103%; @endif perspective: 1000px;">
+                        <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div
                                     x-ref="front"
-                                    class="border-musora front absolute rounded-xl overflow-hidden w-full h-full transition-transform duration-700"
-                                    :class="selected ? 'border-4' : !selected && bonus !== 1 && 'hover:border-2'"
+                                    class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                     style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
-                                    <h6 class="absolute bg-black text-white top-0 right-0 px-1.5 py-1 my-0.5 mx-0.5 bg-black rounded-full opacity-0 border-2 border-white z-30"
-                                        :class="selected && bonus === 1 && 'opacity-100'"
-                                    ><i class="fas fa-times"></i></h6>
-                                @if(!empty($bonus['badge']))
-                                        <h6 class="absolute text-white top-0 left-0 w-full pt-1 bg-{{ $theme }} font-bebas uppercase z-20"
-                                            :class="!selected && bonus === 1 && 'grayscale'"
-                                        >{{ $bonus['badge'] }}</h6>
+                                    @if(!empty($bonus['badge']))
+                                        <h6 class="absolute text-black top-0 left-0 w-full py-0.5 bg-musora font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     @endif
-                                    <div
-                                        class="h-full w-full bg-black bg-bottom bg-cover z-10"
-                                        style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');"
-                                        :class="!selected && bonus === 1 && 'grayscale'"
-                                    ></div>
+                                    <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}');"></div>
+                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                        <i class="fas fa-arrow-right text-4xl"></i><br>
+                                        <p class="text-sm"><strong>DETAILS</strong></p>
+                                    </div>
+                                </div>
+                                <div
+                                    x-ref="back"
+                                    class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                    style="backface-visibility: hidden;"
+                                >
+                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                        <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <p class="w-full leading-normal mt-2">
+                        <span style="text-transform:uppercase; display:inline-block;">
+                            @if(!empty($bonus['price']))
+                                <s class="opacity-40">${{ $bonus['price'] }}</s>
+                            @endif
+                            <strong class="text-musora">FREE</strong></span><br>
+                            <em>
+                                @if(!empty($bonus['shipping']))
+                                    Free Shipping
+                                @else
+                                    Online Access
+                                @endif
+                                @if(!empty($bonus['delayshipping']))
+                                    <br><u class="text-xs"> Shipping will be delayed</u>
+                                @endif
+                            </em>
+                        </p>
                     </div>
                 @endforeach
             </div>
 
-            <h2 class="leading-none mb-1">
-                @if(!empty($upgradeVersion))
-                    <s class="opacity-60">$1200</s> <strong>$960</strong>
-                @else
-                    <strong>$1200</strong>
-                @endif
-            </h2>
-            <p class="leading-tight text-sm"><em>One time payment.</em></p>
-            <a class="join sold-out bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>
-{{--            @if(!empty($upgradeVersion))--}}
-{{--                <a--}}
-{{--                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"--}}
-{{--                    :class="bonus !== 1 && 'sold-out'"--}}
-{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"--}}
-{{--                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>--}}
-{{--                <br>--}}
-{{--                <a class="inline-block text-white leading-tight mt-3"--}}
-{{--                    :class="bonus !== 1 && 'opacity-50'"--}}
-{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849,lifetime-existing&locked=true'"--}}
-{{--                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
-{{--            @else--}}
-{{--                <a--}}
-{{--                    class="join blue bigger mt-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"--}}
-{{--                    :class="bonus !== 1 && 'sold-out'"--}}
-{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"--}}
-{{--                    x-text="bonus === 1 ? 'GET STARTED &raquo;' : 'Choose a bonus above'"></a>--}}
-{{--                <br>--}}
-{{--                <a class="inline-block text-white leading-tight mt-3"--}}
-{{--                    :class="bonus !== 1 && 'opacity-50'"--}}
-{{--                    :href="bonus === 1 ? '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1'+query+'&promo-code=FREE-W-LIFETIME-849&locked=true' : '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[musora-access-1-year]=1&products[drumeo-eardrums]=1&promo-code=FREE-W-LIFETIME-849&locked=true'"--}}
-{{--                ><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
-{{--            @endif--}}
+            {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
+            <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+                <a class="inline-block leading-tight text-white opacity-70" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
     @php
@@ -287,6 +303,12 @@
         </div>
     </section>
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '917719282',
+        'vimeo' => true,
+        'styles' => 'pb-[177%] sm:pb-[66vh] bg-white',
+    ])
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -294,4 +316,6 @@
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop
