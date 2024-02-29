@@ -152,7 +152,7 @@ class EventTrackingService
 
         $orderAdjustmentsAmount = collect($refund['order_adjustments'])
             ->pluck('amount_set')
-            ->map(fn ($a) => floatval($a['presentment_money']['amount']))
+            ->map(fn ($a) => floatval($a['presentment_money']['amount']) * -1)
             ->sum();
 
         $lineItems = $refundLineItems->pluck('line_item')->toArray();
