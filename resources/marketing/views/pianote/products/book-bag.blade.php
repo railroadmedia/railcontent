@@ -636,7 +636,7 @@
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> <strong> Lifetime Membership </strong></p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Pianote Book Bag ($249 value)</p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Prestige Metronome (limit 100) ($299 value)</p>
-                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> C&amp;S Book ($39 value)</p>
+                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Chords &amp; Scales Book ($39 value)</p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Practice Planner ($39 value)</p>
                             </div>
                         </a>
