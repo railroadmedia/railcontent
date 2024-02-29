@@ -24,9 +24,6 @@
                 </button>
             </template>
         </CollectionFilterWrapper>
-        <div v-if="showPagination" class="flex flex-row pagination-row align-h-right">
-            <Pagination :current-page="Number(page)" :total-pages="totalPages" @pageChange="handlePageChange"/>
-        </div>
         <div class="tw-flex tw-flex-col tw-grow">
             <PlayAlongsListItem
                 v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
