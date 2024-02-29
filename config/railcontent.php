@@ -1088,6 +1088,25 @@ return [
                 'description' => "Here's a list of all lessons recently added to Pianote. Browse on your own or use search to find whatever it is you'd like to learn!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1312,7 +1331,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'Lessons',
-                        'short_name' => 'ALL',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1355,7 +1374,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'Lessons',
-                        'short_name' => 'ALL',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1386,7 +1405,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'Lessons',
-                        'short_name' => 'ALL',
+                        'short_name' => 'Lessons',
                         'value' => [''],
                     ],
                     [
@@ -1469,6 +1488,25 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1714,6 +1752,28 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
+            'song-pdf' => [
+                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'tabs' => [
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'SONGS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Artists',
+                        'short_name' => 'ARTISTS',
+                        'is_group_by' => true,
+                        'value' => ['artist'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ]
         ],
         'singeo' => [
             'all' => [
@@ -1725,6 +1785,25 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1752,6 +1831,25 @@ return [
                 "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
                 'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'tabs' => [
+                    [
+                        'name' => 'Courses',
+                        'short_name' => 'COURSES',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'songs' => [
                 "name" => "Songs",
@@ -1870,7 +1968,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'All Routines',
-                        'short_name' => 'ALL ROUTINED',
+                        'short_name' => 'ALL ROUTINES',
                         'value' => [''],
                     ],
                 ],
