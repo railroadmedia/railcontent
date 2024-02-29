@@ -85,6 +85,7 @@
                         [ 'value' => 'mine', 'name' => 'My threads', 'icon' => 'my-threads' ]
                     ]) }}"
                     default-sort="-last_post_published_on"
+                    :hide-filter-icon="{{ json_encode(true) }}"
                 ></collection-wrapper>
             </div>
 

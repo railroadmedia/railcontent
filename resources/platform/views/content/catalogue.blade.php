@@ -238,6 +238,7 @@
                 :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
                 :is-all-content="{{ json_encode($isAllContent ?? false) }}"
                 :limit="{{isset($isAllContent) ? 50: 10 }}"
+                :hide-filter-icon="{{ json_encode($lessonType === 'routine' ? true : false) }}"
             ></collection-wrapper>
         @endif
 

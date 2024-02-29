@@ -52,7 +52,6 @@
             title="Packs"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
             default-sorts="-progress"
-            :hide-sort-icon="true"
             :limit="-1"
             search-placeholder="Search all packs..."
         ></collection-wrapper>
