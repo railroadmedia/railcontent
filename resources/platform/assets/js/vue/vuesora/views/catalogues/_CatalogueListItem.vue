@@ -32,9 +32,9 @@
       :class="[thumbnailColumnClass, themeColor]">
       <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
-          <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail}`" alt="Lesson Thumbnail"
+          <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
             class="tw-transition-opacity tw-duration-500" loading="lazy"
-            :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="mappedData.imageLoaded = true" />
+            :class="contentModel.list.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="contentModel.list.imageLoaded = true" />
 
           <div class="lesson-progress overflow">
             <span class="progress" :class="themeBgClass" :style="'width:' + progress_percent + '%'"></span>
@@ -276,13 +276,14 @@ export default {
   computed: {
     mappedData() {
       const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value;
-      this.contentModel.list.difficulty = difficultyValue;
+      const contentModel = JSON.parse(JSON.stringify(this.contentModel)) //Create a deep copy to not update reactive prop
+      contentModel.list.difficulty = difficultyValue;
 
       const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
-      const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
-      this.contentModel.list.column_data = filteredColumnData
-
-      return this.contentModel.list;
+      const filteredColumnData = contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+      contentModel.list.column_data = filteredColumnData
+      
+      return contentModel.list;
     },
 
     disableAddToListForMethods() {
