@@ -1409,10 +1409,10 @@ return [
                         'value' => [''],
                     ],
                     [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
+                        'name' => 'Artists',
+                        'short_name' => 'ARTISTS',
                         'is_group_by' => true,
-                        'value' => ['instructor'],
+                        'value' => ['artist'],
                     ],
                     [
                         'name' => 'Genre',
