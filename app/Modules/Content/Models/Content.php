@@ -13,6 +13,7 @@ use Modules\Content\Models\ContentEssentials;
 use Modules\Content\Models\ContentGears;
 use Modules\Content\Models\ContentGenre;
 use Modules\Content\Models\ContentLifestyle;
+use App\Modules\Content\Models\ContentStyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
 
@@ -211,8 +212,8 @@ class Content extends Model
 
     ];
 
-    public function newEloquentBuilder($query): ContentBuilder
-    {
+    public function newEloquentBuilder($query)
+    : ContentBuilder {
         return new ContentBuilder($query);
     }
 
@@ -231,16 +232,19 @@ class Content extends Model
         return ContentFactory::new();
     }
 
-    private function setField(string $key, $value): void
-    {
+    private function setField(string $key, $value)
+    : void {
         /** @var ContentField $field */
-        $field = $this->fields->where('key', '=', $key)->first();
+        $field =
+            $this->fields->where('key', '=', $key)
+                ->first();
 
         if (!$value) {
             if ($field) {
                 Log::debug("Content Field ($this->id) $key $field->value deleted");
                 $field->delete();
             }
+
             return;
         }
         if (!$field) {
@@ -249,6 +253,7 @@ class Content extends Model
             Log::debug("Content Field ($this->id) $key inserted $value");
             $field->value = $value;
             $field->save();
+
             return;
         }
         if ($field->value != $value) {
@@ -258,15 +263,19 @@ class Content extends Model
         }
     }
 
-    public function setFieldArray(string $key, array $values): void
-    {
-        $fields = $this->fields->where('key', '=', $key)->collect();
+    public function setFieldArray(string $key, array $values)
+    : void {
+        $fields =
+            $this->fields->where('key', '=', $key)
+                ->collect();
         $position = 1;
         foreach ($values as $value) {
             if (!$value) {
                 continue;
             }
-            $field = $fields->where('value', '=', $value)->first();
+            $field =
+                $fields->where('value', '=', $value)
+                    ->first();
             if (!$field) {
                 $field = $this->getNewContentField($key);
                 Log::debug("Content Field ($this->id) $key inserted '$value'");
@@ -286,25 +295,29 @@ class Content extends Model
         }
     }
 
-    public function getNewContentField(string $key): ContentField
-    {
+    public function getNewContentField(string $key)
+    : ContentField {
         $field = new ContentField();
         $field->content_id = $this->id;
         $field->key = $key;
         $field->type = $this->fieldTypes[$key];
         $field->position = 1;
+
         return $field;
     }
 
     private function setData(string $key, $value)
     {
         /** @var ContentData $data */
-        $data = $this->data->where('key', '=', $key)->first();
+        $data =
+            $this->data->where('key', '=', $key)
+                ->first();
         if (!$value) {
             if ($data) {
                 Log::debug("Content Data ($this->id) $key $data->value deleted");
                 $data->delete();
             }
+
             return;
         }
         if (!$data) {
@@ -312,6 +325,7 @@ class Content extends Model
             Log::debug("Content Data ($this->id) $key inserted $value");
             $data->value = $value;
             $data->save();
+
             return;
         }
         if ($data->value != $value) {
@@ -321,19 +335,19 @@ class Content extends Model
         }
     }
 
-
-    public function getNewContentData(string $key): ContentData
-    {
+    public function getNewContentData(string $key)
+    : ContentData {
         $content = new ContentData();
         $content->content_id = $this->id;
         $content->key = $key;
         $content->position = 1;
+
         return $content;
     }
 
     public function setTopic($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $topic =
                 ContentTopic::query()
                     ->where('content_id', '=', $this->id)
@@ -346,7 +360,7 @@ class Content extends Model
                 $topic->position = 1;
                 $topic->save();
             }
-            $this->setField('topic', $value);
+            $this->createField('topic', $value);
         }
     }
 
@@ -377,42 +391,45 @@ class Content extends Model
             $this->total_xp = $value;
         }
     }
+
     public function setRegistrationUrl($value)
     {
         if ($value && $value != 'NULL') {
             $this->setField('registration_url', $value);
-        }else{
-
         }
     }
 
     public function setEnrollmentStartDate($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setField('enrollment_start_time', $value);
         }
     }
 
     public function setEnrollmentEndDate($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setField('enrollment_end_time', $value);
         }
     }
 
     public function setInstructor($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $instructor =
                 Instructor::query()
                     ->where('name', 'like', '%'.$value.'%')
                     ->first();
             if ($instructor) {
-                $contentInstructor = ContentInstructor::query()->where('content_id', '=', $this->id)->where('instructor_id', $instructor->id)->get();
-if($contentInstructor->count() == 0) {
-    $this->setField('instructor', $instructor->id);
-}
-            }else{
+                $contentInstructor =
+                    ContentInstructor::query()
+                        ->where('content_id', '=', $this->id)
+                        ->where('instructor_id', $instructor->id)
+                        ->get();
+                if ($contentInstructor->count() == 0) {
+                    $this->setField('instructor', $instructor->id);
+                }
+            } else {
                 Log::debug("Instructor not exist::: ($value) ");
             }
         }
@@ -420,14 +437,14 @@ if($contentInstructor->count() == 0) {
 
     public function setDescription($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setData('description', $value);
         }
     }
 
     public function setOriginalThumb($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setData('original_thumbnail_url', $value);
         }
     }
@@ -435,35 +452,34 @@ if($contentInstructor->count() == 0) {
     public function setThumb($value)
     {
         if ($value && $value != 'NULL') {
-
-        $this->setData('thumbnail_url', $value);
-    }
+            $this->setData('thumbnail_url', $value);
+        }
     }
 
     public function setLogo($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setData('logo_image_url', $value);
         }
     }
 
     public function setHeaderImage($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setData('header_image_url', $value);
         }
     }
 
     public function setSoundsliceSlug($value)
     {
-        if ($value  && $value != 'NULL') {
+        if ($value && $value != 'NULL') {
             $this->setField('soundslice_slug', $value);
         }
     }
 
     public function setVideo($value, $duration = '', $type = 'vimeo')
     {
-        if(!$value ){
+        if (!$value) {
             return;
         }
         $video =
@@ -471,35 +487,35 @@ if($contentInstructor->count() == 0) {
                 ->where($type.'_video_id', '=', $value)
                 //->orWhere('slug', '=', $type.'-video-'.$value)
                 ->first();
-            if (!$video) {
-                $video = new Video();
-                $video->type = $type.'-video';
-                $video->status = 'published';
-                $video->brand = $this->brand;
-                $video->slug = $type.'-video-'.$value;
-                $typeId = $type.'_video_id';
-                if($type == 'vimeo') {
-                    $video->vimeo_video_id = $value;
-                }else{
-                    $video->youtube_video_id = $value;
-                }
-                $video->length_in_seconds = $duration;
-
-                $video->published_on =
-                    Carbon::now()
-                        ->toDateTimeString();
-                $video->save();
-                $video->setLengthInSeconds($duration);
-                if($type == 'vimeo') {
-                    $video->setVimeoVideoId($value);
-                }else{
-                    $video->setYoutubeVideoId($value);
-                }
+        if (!$video) {
+            $video = new Video();
+            $video->type = $type.'-video';
+            $video->status = 'published';
+            $video->brand = $this->brand;
+            $video->slug = $type.'-video-'.$value;
+            $typeId = $type.'_video_id';
+            if ($type == 'vimeo') {
+                $video->vimeo_video_id = $value;
+            } else {
+                $video->youtube_video_id = $value;
             }
+            $video->length_in_seconds = $duration;
 
-            $id = $video->id;
+            $video->published_on =
+                Carbon::now()
+                    ->toDateTimeString();
+            $video->save();
+            $video->setLengthInSeconds($duration);
+            if ($type == 'vimeo') {
+                $video->setVimeoVideoId($value);
+            } else {
+                $video->setYoutubeVideoId($value);
+            }
+        }
 
-            $this->setField('video', $id);
+        $id = $video->id;
+
+        $this->setField('video', $id);
     }
 
     public function setParentId($value, $childPosition = 1)
@@ -537,19 +553,21 @@ if($contentInstructor->count() == 0) {
                 $style->position = 1;
                 $style->save();
             }
-            $this->setField('style', $value);
+            $this->createField('style', $value);
         }
     }
 
     public function setChapter($value, $position = 1, $thumb = null)
     {
-        if(!$value){
+        if (!$value) {
             return;
         }
         $chapterData = explode(':', $value);
-        $chapterDescription = $this->data->where('key', '=', 'chapter_description')
-            ->where('position','=',$position)->first();
-        if($chapterDescription){
+        $chapterDescription =
+            $this->data->where('key', '=', 'chapter_description')
+                ->where('position', '=', $position)
+                ->first();
+        if ($chapterDescription) {
             $chapterDescription->delete();
         }
         $data = $this->getNewContentData('chapter_description');
@@ -557,10 +575,12 @@ if($contentInstructor->count() == 0) {
         $data->value = $chapterData[0];
         $data->save();
 
-        $chapterTimecode = $this->data->where('key', '=', 'chapter_timecode')
-            ->where('position','=',$position)->first();
+        $chapterTimecode =
+            $this->data->where('key', '=', 'chapter_timecode')
+                ->where('position', '=', $position)
+                ->first();
 
-        if($chapterTimecode){
+        if ($chapterTimecode) {
             $chapterTimecode->delete();
         }
 
@@ -569,11 +589,13 @@ if($contentInstructor->count() == 0) {
         $dataTimecode->value = $chapterData[1];
         $dataTimecode->save();
 
-        if($thumb){
+        if ($thumb) {
             // dd($thumb);
-            $chapterThumb = $this->data->where('key', '=', 'chapter_thumbnail_url')
-                ->where('position','=',$position)->first();
-            if($chapterThumb){
+            $chapterThumb =
+                $this->data->where('key', '=', 'chapter_thumbnail_url')
+                    ->where('position', '=', $position)
+                    ->first();
+            if ($chapterThumb) {
                 $chapterThumb->delete();
             }
             $dataThumb = $this->getNewContentData('chapter_thumbnail_url');
@@ -602,7 +624,7 @@ if($contentInstructor->count() == 0) {
         }
     }
 
-    public function setEssentials($value)
+    public function setEssentials($value, $position = 1)
     {
         if ($value) {
             $essential =
@@ -614,14 +636,14 @@ if($contentInstructor->count() == 0) {
                 $essential = new ContentEssentials();
                 $essential->content_id = $this->id;
                 $essential->essentials = $value;
-                $essential->position = 1;
+                $essential->position = $position;
                 $essential->save();
             }
-            $this->setField('essentials', $value);
+            $this->createField('essentials', $value);
         }
     }
 
-    public function setTheory($value)
+    public function setTheory($value, $position = 1)
     {
         if ($value) {
             $theory =
@@ -633,14 +655,14 @@ if($contentInstructor->count() == 0) {
                 $theory = new ContentTheory();
                 $theory->content_id = $this->id;
                 $theory->theory = $value;
-                $theory->position = 1;
+                $theory->position = $position;
                 $theory->save();
             }
-            $this->setField('theory', $value);
+            $this->createField('theory', $value);
         }
     }
 
-    public function setCreativity($value)
+    public function setCreativity($value, $position = 1)
     {
         if ($value) {
             $creativity =
@@ -652,14 +674,14 @@ if($contentInstructor->count() == 0) {
                 $creativity = new ContentCreativity();
                 $creativity->content_id = $this->id;
                 $creativity->creativity = $value;
-                $creativity->position = 1;
+                $creativity->position = $position;
                 $creativity->save();
             }
-            $this->setField('creativity', $value);
+            $this->createField('creativity', $value);
         }
     }
 
-    public function setLifestyle($value)
+    public function setLifestyle($value, $position = 1)
     {
         if ($value) {
             $lifestyle =
@@ -671,10 +693,11 @@ if($contentInstructor->count() == 0) {
                 $lifestyle = new ContentLifestyle();
                 $lifestyle->content_id = $this->id;
                 $lifestyle->lifestyle = $value;
-                $lifestyle->position = 1;
+                $lifestyle->position = $position;
                 $lifestyle->save();
             }
-            $this->setField('lifestyle', $value);
+
+            $this->createField('lifestyle', $value);
         }
     }
 
@@ -693,26 +716,7 @@ if($contentInstructor->count() == 0) {
                 $gear->position = 1;
                 $gear->save();
             }
-            $this->setField('gear', $value);
-        }
-    }
-
-    public function setGenre($value)
-    {
-        if ($value) {
-            $genre =
-                ContentGenre::query()
-                    ->where('content_id', '=', $this->id)
-                    ->where('genre', $value)
-                    ->first();
-            if (!$genre) {
-                $genre = new ContentGenre();
-                $genre->content_id = $this->id;
-                $genre->genre = $value;
-                $genre->position = 1;
-                $genre->save();
-            }
-            $this->setField('genre', $value);
+            $this->createField('gear', $value);
         }
     }
 
@@ -720,5 +724,28 @@ if($contentInstructor->count() == 0) {
     {
         $this->setField('released', $value);
         $this->released = $value;
+    }
+
+    public function deleteFields(string $key)
+    : void {
+        $fields =
+            $this->fields->where('key', '=', $key)
+                ->collect();
+
+        /** @var ContentField $field */
+        foreach ($fields as $field) {
+            Log::debug("Content Field ($this->id) $key $field->value deleted");
+            $field->delete();
+        }
+    }
+
+    private function createField(string $key, $value)
+    : void {
+        /** @var ContentField $field */
+        $field = $this->getNewContentField($key);
+
+        Log::debug("Content Field ($this->id) $key inserted $value");
+        $field->value = $value;
+        $field->save();
     }
 }

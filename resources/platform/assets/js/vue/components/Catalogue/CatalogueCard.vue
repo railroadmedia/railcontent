@@ -15,7 +15,7 @@
             { '@3xl/breakToList:tw-flex-col' : breakToListView }
         ]">
             <!-- Thumbnail Section -->
-            <a :href="renderLink  && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
+            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
                 { 'tw-w-[142px] @lg/breakToList:tw-w-[200px] tw-flex-shrink-0 tw-mr-3 ': forceListView || breakToListView },
                 { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-flex-shrink @3xl/breakToList:tw-mr-0': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
@@ -54,8 +54,11 @@
                     </div>
 
                     <!-- EVERYTHING ELSE -->
-                    <div v-else
-                        class="tw-absolute tw-flex tw-flex-col tw-opacity-0 group-hover:tw-opacity-100 tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center">
+                    <div
+                        v-else
+                        class="tw-absolute tw-flex tw-flex-col tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
+                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased },]"
+                    >
                         <i class="fas" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
