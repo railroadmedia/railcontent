@@ -630,6 +630,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Pianote Awards Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_awards-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             '7 Days To Sight Reading' => [
                 'custom_attributes' => [
                 ],

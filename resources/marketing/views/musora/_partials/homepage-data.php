@@ -13,73 +13,73 @@
         "gridItems" => [
             [
                 "big" => true,
-                'image' => 'marketing/musora/membership/homepage/2024/10-level-curriculum.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-04.webp',
                 'title' => 'Step-By-Step Clarity',
                 'desc' => 'Learn the right skills in the right order with our 10-level curriculum for each instrument. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/10-level-curriculum.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-04.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/musora/membership/homepage/2024/practical-assignments.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-06.webp',
                 'title' => 'Handy Practice Tools',
                 'desc' => 'Gain momentum with interactive exercises, speed control, looping, and progress tracking.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/practical-assignments.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-06.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/musora/membership/homepage/2024/personalized-support-1.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-01.webp',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lesson OR download your videos so you can learn and practice anywhere, anytime. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/personalized-support-1.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-01.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/musora/membership/homepage/2024/guided-workouts.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-05.webp',
                 'title' => 'On-Demand Courses',
                 'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/guided-workouts.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-05.webp',
                     ],
                 ]
             ],
             [
                 "big" => true,
-                'image' => 'marketing/musora/membership/homepage/2024/world-class-teachers.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-02.webp',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/world-class-teachers.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-02.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/musora/membership/homepage/2024/personalized-support.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-07.webp',
                 'title' => 'Powered By Humans',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/personalized-support.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-07.webp',
                     ],
                 ]
             ],
             [
-                'image' => 'marketing/musora/membership/homepage/2024/any-instrument.webp',
+                'image' => 'marketing/musora/membership/homepage/2024/7-reasons-03.webp',
                 'title' => 'Any Instrument, Any Time',
                 'desc' => 'Get all-access to piano, guitar, drums, and singing lessons.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/any-instrument.webp',
+                        'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp',
                     ],
                 ]
             ],
