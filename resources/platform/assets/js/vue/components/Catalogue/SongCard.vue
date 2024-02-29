@@ -92,7 +92,7 @@
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
                             @click.prevent="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
-                            <PlusIcon :class="`${isGroupedView ? 'tw-h-[14px] tw-w-[14px] lg:tw-h-[32px] lg:tw-w-[32px]' : 'tw-h-[30px] tw-w-[30px]'}`" />
+                            <PlusIcon :class="`${isGroupedView ? 'tw-h-[14px] tw-w-[14px] lg:tw-h-[32px] lg:tw-w-[32px]' : 'tw-h-[20px] tw-w-[20px]'}`" />
                         </button>
                     </div>
                 </div>
