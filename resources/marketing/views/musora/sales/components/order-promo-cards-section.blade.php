@@ -44,7 +44,7 @@
                     @endif
                 </a>
             </div>
-            <div class="w-full md:w-1/2 lg:w-full lg:px-1 px-1 relative">
+            <div class="w-full md:w-1/2 lg:w-full max-w-md lg:px-1 px-1 relative">
                 @if(!empty($topBadge))
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full @if(!empty($thirdDealLink)) bg-musora text-black @else bg-drumeo text-white @endif  font-black tracking-widest">{{$topBadge}}</p>
                 @endif

@@ -10,7 +10,7 @@
         <div class="container max-w-6xl mx-auto relative z-20">
             <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-logo-black-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-logo-black.webp" alt="30 day drummer logo" />
-            <p class="leading-tight my-5 lg:my-7">Get first-year pricing <strong>OR</strong> 12 free bonuses with your membership <em class="text-drumeo">(worth $1199.93)</em></p>
+            <p class="leading-tight my-5 lg:my-7">Get first-year pricing <strong>OR</strong> 12 free bonuses with your membership <em class="text-drumeo">(worth $1197.93)</em></p>
             <img class="sm:hidden inline-block h-36 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-52 lg:h-64" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1420x0/filters:quality(95)/marketing/drumeo/promos/march/bundle-header.webp" alt="30 day drummer logo" />
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 mt-5 lg:mt-7">
@@ -68,7 +68,7 @@
         <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
         <p class="inline-block text-xs mx-0 leading-tight">
             Celebrate <strong>12 years of Drumeo </strong> with
-            <br>12 FREE bonuses 🥳 <em>(worth $1199.93)</em>
+            <br>12 FREE bonuses 🥳 <em>(worth $1197.93)</em>
         </p>
     </a>
     @php
@@ -124,7 +124,7 @@
         // general
         'logoM' => "drumeo/promos/march/12-anniversary-logo-white-m.webp",
         'logo' => "drumeo/promos/march/12-anniversary-logo-white.webp",
-        'promoText' => 'Grab first-year pricing <strong>OR</strong> 12 free bonuses with your membership <em class="text-drumeo">(worth $1199.93)</em>',
+        'promoText' => 'Grab first-year pricing <strong>OR</strong> 12 free bonuses with your membership <em class="text-drumeo">(worth $1197.93)</em>',
         'buttonText' => "GET STARTED",
 
         // first deal
@@ -133,8 +133,8 @@
         'firstImageHeight' => 'h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
-        'firstDealSub' => "Save 25% on your first year. No bonuses.",
-        "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&promo-code=legacy&locked=true",
+        'firstDealSub' => "Save 18% on your first year. No bonuses.",
+        "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true",
         'firstExtraBonuses' => [
             'Celebrate 12 years of Drumeo by getting our OG 2012 price on our annual membership:',
             '<strong class="text-drumeo"><i class="fa-solid fa-check pr-1"></i> Learn</strong>',
@@ -147,10 +147,10 @@
         'secondDeal' => "Anniversary Bundle",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/march/order-bundle.webp',
         'secondImageHeight' => 'h-24',
-        'secondDealSub' => "12 bonuses worth $1199.93.",
+        'secondDealSub' => "12 bonuses worth $1197.93.",
         'secondDealPrice' => 240,
         'secondDealDiscount' => 1493.93,
-        "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30dd]=1&products[30dc]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true",
+        "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true",
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Membership </strong>',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> EarDrums ($149 Value)',
@@ -158,9 +158,13 @@
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drum Key ($15 Value)',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer ($127 Value)',
             '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops ($127 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Rock Drumming Masterclass, Drum Technique Made Easy, Independence Made Easy ($591 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Better Drum Fills , Learn Songs Faster ($118 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Great Hands For A Lifetime, Creative Control ($59.98 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Rock Drumming Masterclass ($197 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drum Technique Made Easy ($197 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Independence Made Easy ($197 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Better Drum Fills ($97 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Learn Songs Faster ($19 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Great Hands For A Lifetime ($29.99 Value)',
+            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Creative Control ($29.99 Value)',
     ],
 ])
 @endsection
