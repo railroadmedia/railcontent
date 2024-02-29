@@ -12,11 +12,13 @@
             :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
             :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
             @on-progress-click="progress => emit('onProgressChange', progress)" />
-        <FilterOptionsModal v-if="!isCollapsed && isTablet" :is-collapsed-mobile="isCollapsed"
+        <FilterOptionsModal
+            v-if="!isCollapsed && isTablet"
             :selected-filters="selectedFilters" :selected-progress="selectedProgress"
             :multi-select-columns="multiSelectColumns" :single-select-columns="singleSelectColumns"
             @onClose="handleToggleCollapse" @handle-filter-click="param => emit('onFilterChange', param)"
-            @on-progress-click="progress => emit('onProgressChange', progress)" @clear-filter="emit('OnClearFilter')" />
+            @handle-progress-click="progress => emit('onProgressChange', progress)" @clear-filter="emit('OnClearFilter')"
+        />
 
         <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
     </div>
