@@ -41,7 +41,7 @@
                     <p class="leading-normal max-w-xl">
                         This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
                         <br><br>
-                        Join Pianote today and get 8 FREE bonuses (including our NEW Pianote Book Bag).
+                        Join Pianote today and get 8 FREE bonuses (including our NEW Pianote BookBag).
                         <br><br>
                         Or save big with legacy pricing on your first year of lessons.
                         <br><br>
@@ -135,7 +135,7 @@
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/back-pockets.webp',
-                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security',
+                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security.',
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/handle.webp',
@@ -228,7 +228,7 @@
                                     <div class="rounded-xl overflow-hidden shadow-md" style="background-color:#F1EFED;">
                                         <div class="relative" style="padding-bottom:71%;">
                                             <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
-                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="Pianote Book Bag Details"
+                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="Pianote BookBag Details"
                                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                         </div>
                                         <div class="flex items-start justify-start h-28">
@@ -265,7 +265,7 @@
         'firstImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
-        'firstDealSub' => "Save 25% on your first year. No bonuses.",
+        'firstDealSub' => "Save 18% on your first year. No bonuses.",
         "firstDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&promo-code=legacy&locked=true",
         'firstExtraBonuses' => [
             'Celebrate 8 years of Pianote by rolling back the price of your first year.',
@@ -285,7 +285,7 @@
         "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[piano-technique-made-easy]=1&redirect=/order&locked=true",
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-musora"></i> <strong>Annual Pianote Membership </strong>',
-            '<i class="fa-solid fa-check pr-1 text-musora"></i> Pianote Book Bag ($249 value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Pianote BookBag ($249 value)',
             '<i class="fa-solid fa-check pr-1 text-musora"></i> Chords & Scales Book ($39 value)',
             '<i class="fa-solid fa-check pr-1 text-musora"></i> New Piano Players Start Here ($127 value)',
             '<i class="fa-solid fa-check pr-1 text-musora"></i> Easy Chords ($127 value)',
@@ -304,9 +304,9 @@
         "thirdDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849",
         'thirdExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1"></i> <strong> Lifetime Membership </strong>',
-            '<i class="fa-solid fa-check pr-1"></i> Pianote Book Bag ($249 value)',
-            '<i class="fa-solid fa-check pr-1"></i> Prestige Metronome (limit 100) ($299 value)',
-            '<i class="fa-solid fa-check pr-1"></i> C&S Book ($39 value)',
+            '<i class="fa-solid fa-check pr-1"></i> Pianote BookBag ($249 value)',
+            '<i class="fa-solid fa-check pr-1"></i> Prestige Metronome ($299 value)',
+            '<i class="fa-solid fa-check pr-1"></i> Chords & Scales Book ($39 value)',
             '<i class="fa-solid fa-check pr-1"></i> Practice Planner ($39 value)',
     ],
 ])

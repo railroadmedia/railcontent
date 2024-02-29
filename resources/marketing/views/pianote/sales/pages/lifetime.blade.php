@@ -113,7 +113,7 @@
 {{--                "name" => "Lifetime",--}}
 {{--                "fullPrice" => 1200,--}}
 {{--                "price" => 1200,--}}
-{{--                    "specialText" => "<strong>Only <s class='opacity-60'>300</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
+{{--                    "specialText" => "<strong>Only <s class='opacity-60'>100</s> <span class='text-promo'>" . $stock . "</span> left!</strong>",--}}
 {{--                "noBreadcrumb" => true,--}}
 {{--                "noCountdown" => true--}}
 {{--            ])--}}
@@ -144,7 +144,7 @@
                         payment plan below.</em></p>
                 <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
-                <p class="leading-tight mt-4">ONLY <s class='opacity-60'>300</s> {{ $stock }} SPOTS AVAILABLE</p>
+                <p class="leading-tight mt-4">ONLY <s class='opacity-60'>100</s> {{ $stock }} SPOTS AVAILABLE</p>
             </div>
         </div>
     </section>
@@ -166,9 +166,6 @@
                 You’ll also get some incredible bonuses to help you start and stay playing -- for life.
                 <br><br>
                 Scroll down to see everything included, and to see why joining Pianote for life makes so much sense.
-
-
-                And for the cost of just 5 years of lessons with Pianote, you’ll get:
             </p>
         </div>
     </section>
@@ -186,7 +183,7 @@
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/back-pockets.webp',
-                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security',
+                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security.',
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/handle.webp',
@@ -279,7 +276,7 @@
                                     <div class="rounded-xl overflow-hidden shadow-md" style="background-color:#F1EFED;">
                                         <div class="relative" style="padding-bottom:71%;">
                                             <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
-                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="Pianote Book Bag Details"
+                                                loading="lazy" onload="this.classList.remove('opacity-0')" alt="Pianote BookBag Details"
                                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                         </div>
                                         <div class="flex items-start justify-start h-28">
@@ -308,7 +305,7 @@
                     <br><br>
                     Only 216 were made and each one is hand-numbered.
                     <br><br>
-                    But there are only 100 left, and you’ll get one FREE with your Lifetime Membership (while stocks last).
+                    But there are only {{ $PMstock }} left, and you’ll get one FREE with your Lifetime Membership (while stocks last).
                     <br><br>
                     The only way to get one is to be a Pianote Member. Even Elton John couldn’t get one (unless he decided to join Pianote).
                     <br><br>
