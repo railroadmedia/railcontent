@@ -156,7 +156,7 @@
         }
     @endphp
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-3">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
         <collection-wrapper
             :limit="{{ $limitOverride ?? 18 }}"
             :pre-loaded-content="{{ $listLessons }}"
