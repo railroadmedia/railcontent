@@ -255,7 +255,7 @@
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/back-pockets.webp',
-                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security',
+                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security.',
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/handle.webp',
