@@ -1356,7 +1356,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'Lessons',
-                        'short_name' => 'ALL',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1399,7 +1399,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'Lessons',
-                        'short_name' => 'ALL',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1430,14 +1430,14 @@ return [
                 'tabs' => [
                     [
                         'name' => 'Lessons',
-                        'short_name' => 'ALL',
+                        'short_name' => 'Lessons',
                         'value' => [''],
                     ],
                     [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
+                        'name' => 'Artists',
+                        'short_name' => 'ARTISTS',
                         'is_group_by' => true,
-                        'value' => ['instructor'],
+                        'value' => ['artist'],
                     ],
                     [
                         'name' => 'Genre',
@@ -1536,6 +1536,25 @@ return [
                 'allowableFilters' => ['type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1804,6 +1823,28 @@ return [
                     ],
                 ],
             ],
+            'song-pdf' => [
+                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'tabs' => [
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'SONGS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Artists',
+                        'short_name' => 'ARTISTS',
+                        'is_group_by' => true,
+                        'value' => ['artist'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ]
         ],
         'singeo' => [
             'all' => [
@@ -1812,9 +1853,28 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                'allowableFilters' => ['type'],
+                'allowableFilters' => [],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1842,6 +1902,25 @@ return [
                 "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
                 'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'tabs' => [
+                    [
+                        'name' => 'Courses',
+                        'short_name' => 'COURSES',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
             'songs' => [
                 "name" => "Songs",
@@ -1959,7 +2038,7 @@ return [
                 'tabs' => [
                     [
                         'name' => 'All Routines',
-                        'short_name' => 'ALL ROUTINED',
+                        'short_name' => 'ALL ROUTINES',
                         'value' => [''],
                     ],
                 ],
