@@ -33,25 +33,6 @@
     @include('_partials.components.shop.index-filters')
 
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
-        @php
-            $bundles = [
-                [
-                    'slug' => '/clothing',
-                    'desc' => 'This month only - add Pianote t-shirts,<br> hoodies, and mugs to your cart for just $1.',
-                    'full' => true,
-                    'visible' => 1,
-                    'buttonColor' => '#F61A30',
-                    'buttonText' => 'GET YOURS',
-                    'logo' => "https://d21q7xesnoiieh.cloudfront.net/fit-in/530x0/filters:quality(95)/marketing/pianote/promos/february/pianote-dollar-logo.png",
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/february/single-banner-pianote.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/february/pianote-dollar-banner-m.jpg',
-                ],
-            ];
-        @endphp
-        @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Featured Deals',
-        ])
-
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
