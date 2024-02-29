@@ -6,11 +6,14 @@
             :search-term="searchTerm"
             :selected-filters="selectedFilters"
             :selected-sort="sort"
+            :selected-progress="progress"
             :sort-options="sortOptions"
             :tab-options="tabOptions"
             @on-filter-change="handleFilterChange"
             @on-sort-change="handleContentSort"
             @on-search-change="handleTriggerSearch"
+            @on-clear-filter="handleClearFilter"
+            @on-progress-change="handleProgressChange"
         >
             <template #extra-icon>
                 <button
@@ -165,6 +168,7 @@ export default {
             page: 1,
             limit: 20,
             sort: '-published_on',
+            progress: '',
             totalResults: this.preLoadedContent.meta.totalResults,
             filterOptions: [],
             isKeyboardControlsEnabled: false,
@@ -215,7 +219,7 @@ export default {
                 page: this.page,
                 limit: this.limit,
                 only_from_my_list: this.showFavoritesOnly,
-                required_user_states: this.showCompletedOnly ? ['completed'] : undefined,
+                included_user_states: this.progress ? [this.progress] : undefined,
                 sort: this.sort,
             };
         },
@@ -276,7 +280,7 @@ export default {
         this.removeMouseEventHandlers();
     },
     methods: {
-        getContent(resetPlaylist = false) {
+        getContent(resetPlaylist) {
             this.loading = true;
             return ContentService.getContent({
                 ...this.filterQueryObject,
@@ -301,6 +305,14 @@ export default {
                         });
                     }
                 });
+        },
+        updateContent(resetPlaylist = false){
+            this.updatePageUrl();
+
+            this.$nextTick(() => {
+                this.playedContent = [];
+                return this.getContent(resetPlaylist);
+            });
         },
         searchContent() {
             this.loading = true;
@@ -395,9 +407,9 @@ export default {
                 && urlParams.only_from_my_list == 1) {
                 this.showFavoritesOnly = true;
             }
-            if (urlParams.required_user_states != null
-                && urlParams.required_user_states.indexOf('completed') !== -1) {
-                this.showCompletedOnly = true;
+            if (urlParams.includede_user_states != null
+                && urlParams.includede_user_states.length > 0) {
+                this.progress = urlParams.includede_user_states[0];
             }
         },
         updateTrack(item) {
@@ -629,13 +641,18 @@ export default {
             if (itemIndex === -1) this.selectedFilters.push(value);
             else this.selectedFilters.splice(itemIndex, 1);
 
-            if (this.useUrlParams) {
-                this.updatePageUrl();
-            }
-            this.$nextTick(() => {
-                this.playedContent = [];
-                return this.getContent(this.isShuffle);
-            });
+            this.updateContent(this.isShuffle)
+        },
+        handleClearFilter() {
+            this.selectedFilters = [];
+            this.progress = '';
+
+            this.updateContent(this.isShuffle)
+        },
+        handleProgressChange(value) {
+            this.progress = value;
+
+            this.updateContent(this.isShuffle)
         },
         handlePageChange({ page }) {
             this.page = page;
