@@ -2815,5 +2815,13 @@ return [
         'R&B/Soul' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/fd506b0f-ff46-4deb-4a49-1c6f16bf3e00/public',
         'Rock' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/c2d6ff5d-5a4f-4248-0fbf-0f08defa3200/public',
         'Soundtrack' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/bed117dd-aa80-4db9-4eb1-7b1b43b8d900/public',
+        'Hip-Hop/Rap/EDM'=>'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/a2602e1d-f9f6-4917-8968-153c2d50aa00/public',
+        'Latin/World' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/7a5f76e4-925b-472a-3561-23fb32dd1800/public',
+        'Pop/Rock' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/78b7a836-51ec-4763-a96f-f09de193fb00/public',
+        'Funk/Disco' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/bba73362-7581-45c9-d40c-e870fc6f7500/public',
+        'Hard Rock/Metal' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/c66b9e03-1a88-4a2c-229b-3d7389af1600/public',
+        'Holiday/Soundtrack' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/99b62148-00ed-4022-c03e-ac33c62e8000/public',
+        'Jazz/Blues' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/8c83c093-ace9-4551-fe86-ad1b1e961e00/public',
+        'Worship/Gospel' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/71b1e1dd-472c-4134-2ada-70d11d506c00/public',
     ],
 ];

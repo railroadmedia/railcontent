@@ -64,7 +64,11 @@ class Filters20242 extends Command
                 if (!$content) {
                     $this->info('Not exists  '.$contentId.'    '.$contentTitle);
                 } else {
-                    $style = $this->getValue($data, $headersRow, 'Genre');
+                    if($brand == 'drumeo-Rudiments') {
+                        $style = $this->getValue($data, $headersRow, 'Gear');
+                    }else {
+                        $style = $this->getValue($data, $headersRow, 'Genre');
+                    }
                     $results[$contentType][$style] = ($results[$contentType][$style] ?? 0) + 1;
                     if ($import) {
                     if($brand == 'drumeo-Rudiments') {
