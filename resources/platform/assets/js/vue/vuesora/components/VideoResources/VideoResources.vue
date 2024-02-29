@@ -23,7 +23,7 @@
                 <!-- Workouts Practice -->
                 <div v-if="showPracticeButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-h-[34px] tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90"
+                        class="tw-h-[34px] tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white hover:tw-bg-[#00000026] hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white"
                         title="Open Workout Practice Tool"
                         @click="openPracticeSoundslice"
                     >
@@ -44,7 +44,7 @@
                 <!-- Info Button -->
                 <div v-if="showInfoButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full"
                         :class="openInfo ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         id="toggleInstructorInfo"
                         title="More Info"
@@ -60,7 +60,7 @@
                 <!-- Like Button -->
                 <div class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full"
                         :class="hasLiked ? 'tw-text-white dark:tw-text-[#000C17] tw-bg-[#000C17] dark:tw-bg-white' : 'tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40'"
                         :title="hasLiked ? 'Unlike' : 'Like'"
                         @click="likeContent"
@@ -75,7 +75,7 @@
                 <!-- Share Button -->
                 <div v-if="showShareButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Share"
                         @click="handleOpenModal"
                     >
@@ -89,7 +89,7 @@
                 <!-- Add Button -->
                 <div v-if="showAddToList" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Add to Playlist"
                         @click="addToList"
                     >
@@ -103,7 +103,7 @@
                 <!-- Completed Button -->
                 <div v-if="showCompleteButton" class="flex flex-column resource-button tw-pr-2">
                     <button
-                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         @click="handleCompleteLesson"
                     >
                         <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
@@ -118,7 +118,7 @@
                 <!-- Resources Button -->
                 <div v-if="resources.length > 0 && showResourceButton()" class="flex flex-column resource-button tw-pr-2 tw-relative">
                     <button
-                        class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-2 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
+                        class="open-resources tw-font-bebas-neue tw-uppercase tw-py-1 tw-px-3 tw-text-sm tw-rounded-full tw-text-[#000C17] dark:tw-text-white tw-bg-[#EDEDED] dark:tw-bg-[#0E2031] hover:tw-bg-[#00000026] hover:dark:tw-bg-[#223F57]/90 dark:tw-border dark:tw-border-[#223F57]/40"
                         title="Download Resources"
                         @click="toggleResourceDropdown"
                     >
@@ -213,7 +213,6 @@
                 v-if="showReportModal"
                 :brand="brand"
                 :logo="reportLogo"
-                :recipient="reportRecipient"
                 :user-name="reportUserName"
                 :user-email="reportUserEmail"
                 @onCloseModal="toggleReportModal"
@@ -395,11 +394,6 @@ export default {
         lesson: {
             type: Object,
             default: {},
-        },
-
-        reportRecipient: {
-            type: String,
-            default: '',
         },
 
         reportLogo: {

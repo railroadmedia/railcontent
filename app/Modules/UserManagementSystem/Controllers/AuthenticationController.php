@@ -3,12 +3,15 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
@@ -21,8 +24,9 @@ class AuthenticationController extends Controller
     use ValidatesRequests;
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse|RedirectResponse
+     * @throws AuthenticationException
      */
     public function loginCookie(Request $request)
     {
@@ -62,7 +66,7 @@ class AuthenticationController extends Controller
 
             auth()->login($user, $remember);
 
-            event(new UserEvent($user->id, 'authenticated'));
+            $this->authenticated($request, $user);
 
             return redirect()->away($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
@@ -122,8 +126,9 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse|RedirectResponse
+     * @throws AuthenticationException
      */
     public function loginToken(Request $request)
     {
@@ -159,7 +164,7 @@ class AuthenticationController extends Controller
 
             auth()->login($user, $remember);
 
-            event(new UserEvent($user->id, 'authenticated'));
+            $this->authenticated($request, $user);
 
             event(
                 new MobileAppLogin($user, $request->get('firebase_token'), $request->get('platform'))
@@ -243,5 +248,25 @@ class AuthenticationController extends Controller
         }
 
         throw new NotFoundHttpException();
+    }
+
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  Request  $request
+     * @param  User  $user
+     * @return void
+     * @throws AuthenticationException
+     */
+    private function authenticated(Request $request, User $user): void
+    {
+        if ($user->needs_logout) {
+            Log::info("User $user->id has authenticated for the first time after needing to log out. Logging user out of other devices.");
+            $user->update(['needs_logout' => false]);
+            Auth::guard('user-management-system')->logoutOtherDevices($request->get('password'));
+        }
+
+        event(new UserEvent($user->id, 'authenticated'));
     }
 }

@@ -149,18 +149,20 @@ export default {
         mappedData() {
             let difficultyValue = 'all';
             if(this.contentModel.post.fields) difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
+            
+            const contentModel = JSON.parse(JSON.stringify(this.contentModel)) //Create a deep copy to not update reactive prop
 
             if (Number.isFinite(Number(difficultyValue))) {
-                this.contentModel.list.difficulty = difficultyValue;
+                contentModel.list.difficulty = difficultyValue;
             }
             else {
-                this.contentModel.list.difficulty = 'all';
+                contentModel.list.difficulty = 'all';
             }
 
             const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
-            const filteredColumnData = this.contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
-            this.contentModel.list.column_data = filteredColumnData
-            return this.contentModel.list;
+            const filteredColumnData = contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+            contentModel.list.column_data = filteredColumnData
+            return contentModel.list;
         },
 
         isCompleted() {

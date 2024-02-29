@@ -367,7 +367,7 @@ class CoachPagesController extends Controller
         $lessonContent = $this->contentService->getById($streamId);
 
         if (!$lessonContent || ($lessonContent instanceof Collection && $lessonContent->isEmpty())) {
-            return redirect()->route('members.unreleased');
+            throw new NotFoundHttpException();
         }
 
         if ($lessonContent['status'] == ContentService::STATUS_PUBLISHED) {

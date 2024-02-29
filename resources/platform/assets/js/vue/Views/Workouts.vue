@@ -97,6 +97,7 @@
                 :pre-loaded-content="workoutData"
                 :statuses="statuses"
                 :tab-options="tabOptions"
+                :is-admin="isAdmin"
             />
         </section>
     </div>
@@ -174,6 +175,10 @@ const props = defineProps({
     statuses: {
         type: Array,
         default: () => ["published"],
+    },
+    isAdmin: {
+        type: Boolean,
+        default: () => false,
     },
 });
 
