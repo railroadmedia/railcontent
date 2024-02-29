@@ -657,6 +657,8 @@ class HomePageController extends BaseController
      */
     private function getWorkoutsContents()
     {
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+        ContentRepository::$pullFutureContent = false;
         $workouts = $this->contentService->getFiltered(
             1,
             10,
@@ -670,7 +672,7 @@ class HomePageController extends BaseController
             [],
             false
         );
-
+        ContentRepository::$pullFutureContent = $oldFutureContent;
         return $workouts;
     }
 
