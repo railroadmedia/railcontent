@@ -10,11 +10,11 @@
         </p>
 
         <div id="plusOptions"
-            class="flex flex-wrap items-start justify-center 2-full mb-5 sm:mb-10 mx-auto @if(empty($thirdDealLink)) max-w-3xl @endif"
+            class="flex flex-wrap lg:flex-nowrap items-start justify-center 2-full mb-5 sm:mb-10 mx-auto"
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
 
-            <div class="w-full @if(!empty($thirdDealLink)) md:w-1/3 @else md:w-1/2 @endif lg:px-1 px-1 relative">
+            <div class="w-full md:w-1/2 lg:w-full max-w-md lg:px-1 px-1 relative">
                 <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
                     @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                     <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
@@ -44,7 +44,7 @@
                     @endif
                 </a>
             </div>
-            <div class="w-full @if(!empty($thirdDealLink)) md:w-1/3 @else md:w-1/2 @endif lg:px-1 px-1 relative">
+            <div class="w-full md:w-1/2 lg:w-full lg:px-1 px-1 relative">
                 @if(!empty($topBadge))
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full @if(!empty($thirdDealLink)) bg-musora text-black @else bg-drumeo text-white @endif  font-black tracking-widest">{{$topBadge}}</p>
                 @endif
@@ -68,7 +68,7 @@
 
                     </div>
                     @if(!empty($secondExtraBonuses))
-                        <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
+                        <div class="px-4 sm:px-4 lg:px-6 py-7 lg:whitespace-nowrap" style="background:#F6F8FC">
                             @foreach($secondExtraBonuses as $bonus)
                                 <p class="text-left text-sm mb-1.5">{!! $bonus !!}</p>
                             @endforeach
@@ -77,7 +77,7 @@
                 </div>
             </div>
             @if(!empty($thirdDealLink))
-                <div class="w-full md:w-1/3 lg:px-1 px-1 relative">
+                <div class="w-full  lg:px-1 px-1 relative max-w-md">
                     <a href="{{$thirdDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
                         @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                         <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
