@@ -9,10 +9,9 @@
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key == 6)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
-                            <div class="pb-[70%] sm:pb-96 overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
+                            <div class="pb-[70%] sm:pb-96 overflow-hidden text-white relative w-full rounded-xl"
                                  :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                  x-intersect.once="lazyLoad = true"
-                                 x-on:click="open = ! open"
                             >
                                 <picture>
                                     <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/{{ $gridItem['image'] }}">
@@ -23,12 +22,12 @@
                                         style="object-position: 60% 0;" loading="lazy" onload="this.classList.remove('opacity-0')">
                                 </picture>
 
-                                <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
-                                    <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0"
-                                       x-cloak
-                                       x-bind:class="{ 'max-h-0': !open, 'max-h-[500px]': open  }"
-                                    >{{ $gridItem['desc'] }}</p>
+                                <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-5 pb-5 sm:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>1</strong></h5>
+                                    <div class="pl-3">
+                                        <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -39,10 +38,9 @@
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key < 3)
                     <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
-                        <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
+                        <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full rounded-xl"
                              :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                              x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;"
-                             x-on:click="open = ! open"
                         >
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
                                 <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
@@ -55,12 +53,12 @@
                                      onload="this.classList.remove('opacity-0')">
                             </picture>
 
-                            <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
-                                <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
-                                <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-xs mx-0"
-                                   x-cloak
-                                   x-bind:class="{ 'max-h-0': !open, 'max-h-[500px]': open  }"
-                                >{{ $gridItem['desc'] }}</p>
+                            <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                                <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>@if($theme == 'musora'){{ $key + 2 }}@else{{ $key + 1 }}@endif</strong></h5>
+                                <div class="pl-3">
+                                    <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
+                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -71,10 +69,9 @@
                 @foreach ($gridItems as $key => $gridItem)
                     @if($key > 2 && $key < 6)
                         <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8" x-data="{ open: false }">
-                            <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full rounded-xl cursor-pointer"
+                            <div class="pb-[70%] @if(empty($gridItem['big'])) sm:pb-[60%] @else sm:pb-[80%]  @endif overflow-hidden text-white relative w-full rounded-xl"
                                 :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                 x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;"
-                                x-on:click="open = ! open"
                             >
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
                                 <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
@@ -88,12 +85,12 @@
                                     onload="this.classList.remove('opacity-0')">
                             </picture>
 
-                                <div class="absolute bottom-0 left-0 right-0 px-7 pb-7 pt-10" style="background:linear-gradient(to bottom, transparent, #000);">
-                                    <h5 class="leading-tight"><strong><i class="fa-light fa-circle-plus align-sub text-3xl mr-1 transition-transform duration-300" x-bind:class="{ 'rotate-45': open  }"></i> {{ $gridItem['title'] }}</strong></h5>
-                                    <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-xs mx-0"
-                                       x-cloak
-                                       x-bind:class="{ 'max-h-0': !open, 'max-h-[500px]': open  }"
-                                    >{{ $gridItem['desc'] }}</p>
+                                <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-3 lg:px-5 pb-4 lg:pb-7 pt-10 flex items-start" style="background:linear-gradient(to bottom, transparent, #000);">
+                                    <h5 class="rounded-full border-2 border-{{ $theme }} inline-block w-9 h-9 leading-8 mx-0 text-center flex-grow-0 flex-shrink-0"><strong>@if($theme == 'musora'){{ $key + 2 }}@else{{ $key + 1 }}@endif</strong></h5>
+                                    <div class="pl-3">
+                                        <h5 class="leading-tight"><strong>{{ $gridItem['title'] }}</strong></h5>
+                                        <p class="leading-normal text-sm transition-all duration-300 overflow-hidden max-w-sm mx-0">{{ $gridItem['desc'] }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
