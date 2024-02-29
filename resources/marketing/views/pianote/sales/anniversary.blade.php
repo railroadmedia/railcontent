@@ -282,7 +282,7 @@
         'secondDealSub' => "Join Pianote + get 8 bonuses worth $987.",
         'secondDealPrice' => 240,
         'secondDealDiscount' => 1227,
-        "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[piano-technique-made-easy]=1&redirect=/order&locked=true&promo-code=special",
+        "secondDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[piano-technique-made-easy]=1&redirect=/order&locked=true",
         'secondExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1 text-musora"></i> <strong>Annual Pianote Membership </strong>',
             '<i class="fa-solid fa-check pr-1 text-musora"></i> Pianote Book Bag ($249 value)',
