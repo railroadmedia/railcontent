@@ -29,14 +29,16 @@
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
                 <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" @on-submit="handleSubmit" />
                 <slot name="extra-icon"></slot>
-                <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
-                    class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-black tw-bg-[#000C17] dark:tw-bg-white dark:tw-border-white tw-rounded-full">
-                    <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-white dark:tw-text-[#000C17]" />
-                </button>
-                <button v-else @click="() => emit('onToggleCollapse')"
-                    class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-bg-white dark:tw-bg-transparent">
-                    <AdjustmentsIcon class="tw-w-[22px] tw-h-[22px] tw-rotate-90" />
-                </button>
+                <template v-if="!hideFilterIcon">
+                    <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
+                            class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-black tw-bg-[#000C17] dark:tw-bg-white dark:tw-border-white tw-rounded-full">
+                        <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-white dark:tw-text-[#000C17]" />
+                    </button>
+                    <button v-else @click="() => emit('onToggleCollapse')"
+                            class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-bg-white dark:tw-bg-transparent">
+                        <AdjustmentsIcon class="tw-w-[22px] tw-h-[22px] tw-rotate-90" />
+                    </button>
+                </template>
                 <template v-if="!hideSortIcon">
                     <button @click="handleOpenDropdown"
                         class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17]">
@@ -104,6 +106,10 @@ const props = defineProps({
         default: false,
     },
     hideSortIcon: {
+        type: Boolean,
+        default: false,
+    },
+    hideFilterIcon: {
         type: Boolean,
         default: false,
     },
