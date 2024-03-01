@@ -8,18 +8,25 @@ const handleShowModal = () => {
     showModal.value = !showModal.value;
 };
 
+const props = defineProps({
+    brand: {
+        type: String,
+        default: 'drumeo'
+    }
+});
 </script>
 <template>
     <div class="tw-flex tw-items-center tw-justify-center">
         <button @click="handleShowModal"
-            class="tw-rounded-[25px] tw-h-[40px] tw-px-[25px] dark:tw-bg-white tw-bg-black tw-flex tw-justify-center tw-items-center dark:tw-text-black tw-text-white tw-text-[20px] tw-font-bebas-neue">
-            <svg width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.4004 3.13364C10.4004 2.44445 10.9824 1.88574 11.7004 1.88574H20.8004C21.5184 1.88574 22.1004 2.44445 22.1004 3.13364V8.12524C22.1004 8.81443 21.5184 9.37314 20.8004 9.37314H17.5504L14.3004 12.4929V9.37314H11.7004C10.9824 9.37314 10.4004 8.81443 10.4004 8.12524V3.13364Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M17.9876 5.1815C18.3293 5.37226 18.3293 5.86387 17.9876 6.05463L15.6742 7.34624C15.3409 7.53231 14.9305 7.29138 14.9305 6.90967L14.9305 4.32646C14.9305 3.94475 15.3409 3.70382 15.6742 3.8899L17.9876 5.1815Z" fill="currentColor"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.09912 5.0625C6.99011 5.2232 5.28203 6.93616 5.28203 9.08827C5.28203 11.3498 7.16818 13.1264 9.4237 13.1264C10.9317 13.1264 12.2747 12.3322 12.9991 11.1299V10.6305H10.8242C10.4532 10.9374 9.96725 11.1264 9.4237 11.1264C8.20903 11.1264 7.28203 10.1825 7.28203 9.08827C7.28203 8.09376 8.0477 7.22353 9.09912 7.07311V5.0625ZM9.4237 15.4049C11.5726 15.4049 13.332 16.8377 13.7996 18.7216H5.04784C5.51544 16.8377 7.27477 15.4049 9.4237 15.4049ZM9.4237 13.4049C5.86686 13.4049 2.92578 16.2017 2.92578 19.7216C2.92578 20.2739 3.3735 20.7216 3.92578 20.7216H14.9216C15.4739 20.7216 15.9216 20.2739 15.9216 19.7216C15.9216 16.2017 12.9805 13.4049 9.4237 13.4049Z" fill="currentColor"/>
+            class="tw-flex tw-flex-col tw-justify-center tw-items-center lg:tw-ml-[64px] tw-ml-[12px] hover:tw-underline tw-text-white tw-text-[20px] tw-font-bebas-neue tw-border-2 tw-border-white tw-rounded-full tw-px-3 tw-pt-3 md:tw-px-4 md:tw-pt-4 tw-bg-[#00101D] lg:tw-border-none lg:tw-px-0 lg:tw-pt-0 lg:tw-bg-transparent">
+            <svg width="51" height="44" viewBox="0 0 51 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.4004 6.26728C20.4004 4.88889 21.5421 3.77148 22.9504 3.77148H40.8004C42.2087 3.77148 43.3504 4.88889 43.3504 6.26728V16.2505C43.3504 17.6289 42.2087 18.7463 40.8004 18.7463H34.4254L28.0504 24.9858V18.7463H22.9504C21.5421 18.7463 20.4004 17.6289 20.4004 16.2505V6.26728Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M36.0531 10.8011C36.3899 10.9929 36.3899 11.4784 36.0531 11.6702L30.0333 15.097C29.7 15.2868 29.2859 15.046 29.2859 14.6625L29.2859 7.80879C29.2859 7.42524 29.7 7.18451 30.0333 7.37426L36.0531 10.8011Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8508 11.1274C14.2042 11.4454 11.325 14.468 11.325 18.176C11.325 22.0973 14.5451 25.2522 18.4875 25.2522C21.3168 25.2522 23.7741 23.6273 24.9361 21.2604H22.5876C21.6464 22.4692 20.164 23.2522 18.4875 23.2522C15.623 23.2522 13.325 20.9663 13.325 18.176C13.325 15.5958 15.29 13.4469 17.8508 13.1379V11.1274ZM18.4875 29.8093C23.56 29.8093 27.712 33.6027 28.2197 38.4427H8.75529C9.26299 33.6027 13.415 29.8093 18.4875 29.8093ZM18.4875 27.8093C11.9925 27.8093 6.70312 33.0045 6.70312 39.4427C6.70312 39.995 7.15084 40.4427 7.70312 40.4427H29.2719C29.8242 40.4427 30.2719 39.995 30.2719 39.4427C30.2719 33.0045 24.9825 27.8093 18.4875 27.8093Z" fill="white"/>
             </svg>
-            <div class="tw-ml-[5px] tw-text-[16px] tw-leading-[24px]">REQUEST A SONG</div>
+
+            <div class="tw-hidden lg:tw-block tw-pt-[10px] tw-text-[18px] tw-leading-0">REQUEST A SONG</div>
         </button>
-        <RequestSongModal v-if="showModal" @onCloseModal="handleShowModal" />
+        <RequestSongModal v-if="showModal" :brand="props.brand" @onCloseModal="handleShowModal" />
     </div>
 </template>

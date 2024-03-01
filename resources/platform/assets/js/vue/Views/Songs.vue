@@ -1,24 +1,7 @@
 <template>
     <!-- Header -->
-    <UnifiedHeader :brand="brand" header-background="https://i.ibb.co/PQVRRZP/songs-bg-1.png">
-        <template v-slot:left-content>
-            <div class="tw-flex tw-flex-col tw-pr-4 tw-h-full tw-justify-end">
-                <h1 class="tw-text-white tw-flex tw-items-center">
-                    <musora-icon icon-name="headphones-filled" :class="`tw-w-[36px] tw-mr-2 tw-text-${brand}`">
-                    </musora-icon>
-                    <span class="tw-text-[28px] lg:tw-text-32 tw-font-bold">Songs</span>
-                </h1>
-                <p
-                    class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
-                    {{ artistsNumber }} ARTISTS | {{ songsNumber }} SONGS
-                </p>
-            </div>
-        </template>
-        <template v-slot:right-content>
-            <SongRequest :brand="brand" />
-        </template>
-    </UnifiedHeader>
-
+    <!-- ADD NEW HEADER HERE -->
+    
     <!-- Continue section -->
     <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-0 md:tw-px-8 tw-mt-[33px]">
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="continueUrl"
