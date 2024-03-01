@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\LiveStreamEventService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Illuminate\Support\Str;
@@ -294,7 +295,7 @@ if (!function_exists('assembleUserAttributes')) {
         if (empty($userObject)) {
             return [];
         }
-        
+
         $userData = method_exists($userObject, 'toArray') ? $userObject->toArray() : [];
 
         $methodsToCall = ['getDashboardUrl', 'isAMember'];
@@ -332,5 +333,18 @@ if (!function_exists('convertNumber')) {
             return number_format($num / 1000) . 'K';
         }
         return $num;
+    }
+}
+
+
+if (!function_exists('dispatchWithDelay')) {
+    /**
+     * @param mixed $job
+     * @param int $delaySeconds
+     * @return \Illuminate\Foundation\Bus\PendingDispatch
+     */
+    function dispatchWithDelay($job, $delaySeconds)
+    {
+        return dispatch($job)->delay(Carbon::now()->addSeconds($delaySeconds));
     }
 }
