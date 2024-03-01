@@ -2032,6 +2032,6 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permisssion_ids' => [81, 65,96,97,98,100,101,102],
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104],
     'enable_recsys' => false,
 ];
