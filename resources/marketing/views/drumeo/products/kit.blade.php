@@ -19,6 +19,8 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
     <style>
 
         [placeholder]:focus::-webkit-input-placeholder {
@@ -204,6 +206,9 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+        .splide__arrow:focus {
+        outline: none;
+         }
     </style>
 
     @php
@@ -223,11 +228,6 @@
     waitlist: false,
     lazyLoad: false,
     trailer: false,
-    image1: false,
-    image2: false,
-    image3: false,
-    image4: false,
-    image5: false,
     }"
 @endsection
 
@@ -647,61 +647,106 @@
 
 
 <!-- details section-->
-
 <section class="px-4 md:px-6 py-8 sm:py-16 lg:py-20" style="background: #01050D">
-    <div class="container mx-auto p-4 max-w-5xl">
+    <div class="container mx-auto p-4 max-w-6xl">
         <h2 class="text-white text-center leading-tight"><strong>All in one tidy package.</strong></h2>
+        @php
+            $slides = [
+                [
+                    'img' => 'marketing/drumeo/products/kit/slider-00.png',
+                ],
+                [
+                    'img' => 'marketing/drumeo/products/kit/slider-02.png',
+                ],
+                [
+                    'img' => 'marketing/drumeo/products/kit/slider-01.png',
+                ],
+                [
+                    'img' => 'marketing/drumeo/products/kit/slider-03.png',
+                ],
+            ];
 
-        <div class="flex flex-wrap md:flex-nowrap gap-4 pt-10">
-            <div class="md:hidden w-full">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-02a.png" alt="Drum kit" class="w-full h-auto transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-01.png" alt="Drum kit" class="w-full h-auto py-6 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')">
-            </div>
-            <div class="order-1 md:w-2/3 lg:w-3/4">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/gallery-full2.webp" alt="Drum kit" class="w-full h-full md:block hidden transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')">
-            </div>
-            <div class="w-full md:w-1/3 lg:w-1/4 flex items-center justify-center">
-                <table class="w-full h-full bg-white rounded-xl">
-                    <tbody>
-                        @php
-                            if(empty($membersVersion)) {
-                                $items = [
-                                    ["Drumeo Membership", "1"],
-                                    ["Alesis Nitro Max E-Kit", "1"],
-                                    ["10” Snare Pad", "1"],
-                                    ["8” Tom Pads", "3"],
-                                    ["3 10” Cymbal Pads", "3"],
-                                    ["Drum Module", "1"],
-                                    ["Kick Tower", "1"],
-                                    ["Kick Pedal", "1"],
-                                    ["5A Drumsticks", "1"]
-                                ];
-                            } else {
-                                $items = [
-                                    ["Alesis Nitro Max E-Kit", "1"],
-                                    ["10” Snare Pad", "1"],
-                                    ["8” Tom Pads", "3"],
-                                    ["3 10” Cymbal Pads", "3"],
-                                    ["Drum Module", "1"],
-                                    ["Kick Tower", "1"],
-                                    ["Kick Pedal", "1"],
-                                    ["5A Drumsticks", "1"]
-                                ];
-                            }
-                        @endphp
+            $scaleAnimation = 'cursor-pointer transform transition duration-500 ease-in-out hover:scale-105';
+            $handleClick = 'handleClick';
+        @endphp
 
-                        @foreach($items as $item)
-                        <tr class="border border-black">
-                            <td class="border border-black pl-4">{{ $item[0] }}</td>
-                            <td class="border border-black text-center px-4">{{ $item[1] }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        @component('drumeo._partials.modal-carousel', [
+            'slides' => $slides,
+            'scaleAnimation' => $scaleAnimation,
+            'handleClick' => $handleClick,
+        ])
+            <div class="flex flex-wrap items-stretch">
+                <div class="w-full md:w-1/4 md:order-1 order-3 p-2 flex mt-8 md:mt-0">
+                    <table class="w-full flex-grow bg-white rounded-xl">
+                        <tbody>
+                            @php
+                                if (empty($membersVersion)) {
+                                    $items = [['Drumeo Membership', '1'], 
+                                    ['Alesis Nitro Max E-Kit', '1'], 
+                                    ['10” Snare Pad', '1'], 
+                                    ['8” Tom Pads', '3'], 
+                                    ['3 10” Cymbal Pads', '3'], 
+                                    ['Drum Module', '1'], 
+                                    ['Kick Tower', '1'], 
+                                    ['Kick Pedal', '1'], 
+                                    ['5A Drumsticks', '1']];
+                                } else {
+                                    $items = [['Alesis Nitro Max E-Kit', '1'], 
+                                    ['10” Snare Pad', '1'], 
+                                    ['8” Tom Pads', '3'], 
+                                    ['3 10” Cymbal Pads', '3'], 
+                                    ['Drum Module', '1'], 
+                                    ['Kick Tower', '1'], 
+                                    ['Kick Pedal', '1'], 
+                                    ['5A Drumsticks', '1']];
+                                }
+                            @endphp
+
+                            @foreach ($items as $item)
+                                <tr class="border border-black">
+                                    <td class="border border-black pl-4">{{ $item[0] }}</td>
+                                    <td class="border border-black text-center px-4">{{ $item[1] }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="w-full md:w-1/2 md:order-2 order-1 p-2">
+                    <div @click="handleClick(0)" 
+                        class="h-96 bg-center bg-cover rounded-xl"
+                        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
+                    </div>
+                </div>
+
+                <div class="h-96 w-full md:w-1/4 md:order-3 order-2">
+                    <div class="flex flex-wrap">
+                        <div class="w-1/2 p-2">
+                            <div @click="handleClick(1)"
+                                class="h-48 bg-center bg-cover rounded-xl"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
+                            </div>
+                        </div>
+                        <div class="w-1/2 p-2">
+                            <div @click="handleClick(2)" 
+                                class="h-48 bg-center bg-cover rounded-xl"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-2">
+                        <div @click="handleClick(3)" 
+                            class="h-48 bg-center bg-cover rounded-xl"
+                            style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
+                        </div>
+                    </div>
+                </div>
+            @endcomponent
         </div>
 
-        <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36" (91.44cm) // <strong>Width</strong> 48" (121.92cm) //  <strong>Height</strong> 12.12" (30.78cm)</p>
+        <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36"
+            (91.44cm) // <strong>Width</strong> 48" (121.92cm) // <strong>Height</strong> 12.12" (30.78cm)</p>
 
         <div class="w-full max-w-xs mx-auto pt-4">
             @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
@@ -710,7 +755,10 @@
         </div>
 
     </div>
+
 </section>
+
+
 
     <section class="text-center py-10 text-white" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
@@ -758,4 +806,5 @@
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @stop

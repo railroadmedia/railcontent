@@ -15,6 +15,7 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
         .header {
             height:600px;
@@ -65,6 +66,9 @@
             height: auto;
             max-height: 400px;
         }
+        .splide__arrow:focus {
+        outline: none;
+         }
 
     </style>
 
@@ -183,12 +187,37 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Finally, a practice pad<br class="inline sm:hidden"> for your feet.</strong></h2>
             <h6 class="mt-2">(Kick pedal not included)</h6>
+
+            @php
+                $slides = [
+                 [
+                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-03.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-04.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-02.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-01.jpg',
+                 ],
+             ];
+             $scaleAnimation = 'cursor-pointer transform transition duration-500 ease-in-out hover:scale-105';
+             $handleClick = 'handleClick';
+        @endphp
+
+        @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+
+
             <div class="flex flex-wrap my-5 sm:my-10">
-                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-03.jpg"></div></div>
-                <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-04.jpg"></div></div>
-                <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-02.jpg"></div></div>
-                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-01.jpg"></div></div>
+                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
+                <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
+                <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
+                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
             </div>
+
+        @endcomponent
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">The QuietKick includes everything you need to start working out your foot. You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>
                 <table class="border border-white border-collapse rounded-xl">
@@ -328,4 +357,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @stop

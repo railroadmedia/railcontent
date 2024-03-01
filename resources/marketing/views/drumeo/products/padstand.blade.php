@@ -99,17 +99,15 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+        .splide__arrow:focus {
+        outline: none;
+         }
     </style>
 @stop
 
 @section('body-data')
     x-data="{
     trailer: false,
-    image1: false,
-    image2: false,
-    image3: false,
-    image4: false,
-    image5: false,
     }"
 @endsection
 
