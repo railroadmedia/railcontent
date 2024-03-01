@@ -3,8 +3,8 @@
     x-data="{ plusMembershipSelected: true }"
 >
     <div class="container max-w-5xl mx-auto">
-        <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/{{ $logoM }}" alt="30 day drummer logo" />
-        <img class="hidden sm:inline-block sm:h-20 lg:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/{{ $logo }}" alt="30 day drummer logo" />
+        <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/390x0/filters:quality(95)/marketing/{{ $logoM }}" alt="30 day drummer logo" />
+        <img class="hidden sm:inline-block sm:h-20 lg:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1120x0/filters:quality(95)/marketing/{{ $logo }}" alt="30 day drummer logo" />
         <p class="leading-tight my-5 lg:my-7">
             {!! $promoText !!}
         </p>
@@ -14,7 +14,7 @@
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
 
-            <div class="w-full md:w-1/2 lg:w-full max-w-md lg:px-1 px-1 relative">
+            <div class="w-full md:w-1/2 lg:w-full max-w-sm lg:px-1 px-1 relative">
                 <a href="{{$firstDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
                     @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                     <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
@@ -44,7 +44,7 @@
                     @endif
                 </a>
             </div>
-            <div class="w-full md:w-1/2 lg:w-full max-w-md lg:px-1 px-1 relative">
+            <div class="w-full md:w-1/2 lg:w-full max-w-sm lg:px-1 px-1 relative">
                 @if(!empty($topBadge))
                     <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full @if(!empty($thirdDealLink)) bg-musora text-black @else bg-drumeo text-white @endif  font-black tracking-widest">{{$topBadge}}</p>
                 @endif
@@ -77,7 +77,7 @@
                 </div>
             </div>
             @if(!empty($thirdDealLink))
-                <div class="w-full  lg:px-1 px-1 relative max-w-md">
+                <div class="w-full  lg:px-1 px-1 relative max-w-sm">
                     <a href="{{$thirdDealLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif"
                         @if(!empty($topBadge)) style="margin-top: 30px" @endif>
                         <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">

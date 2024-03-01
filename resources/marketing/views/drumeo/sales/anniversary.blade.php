@@ -11,8 +11,8 @@
             <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-logo-black-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-logo-black.webp" alt="30 day drummer logo" />
             <p class="leading-tight my-5 lg:my-7">Get first-year pricing <strong>OR</strong> 12 free bonuses with your membership <em class="text-drumeo">(worth $1197.93)</em></p>
-            <img class="sm:hidden inline-block h-36 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
-            <img class="hidden sm:inline-block sm:h-52 lg:h-64" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1420x0/filters:quality(95)/marketing/drumeo/promos/march/bundle-header.webp" alt="30 day drummer logo" />
+            <img class="sm:hidden inline-block h-40" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/660x0/filters:quality(95)/marketing/drumeo/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
+            <img class="hidden sm:inline-block sm:h-56 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1780x0/filters:quality(95)/marketing/drumeo/promos/march/bundle-header.webp" alt="30 day drummer logo" />
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 mt-5 lg:mt-7">
                 <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                         href="#customize-anchor" aria-label="Customize anchor"
@@ -33,10 +33,10 @@
             </div>
         </div>
     </header>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: #0C1524;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20 text-white relative" style="background: #0C1524;">
         <div class="container max-w-5xl mx-auto">
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                <div class=" pr-5 lg:pr-8 mx-0 max-w-lg">
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
+                <div class="sm:pr-5 lg:pr-8 mx-0 max-w-lg mb-5 sm:mb-0">
                     <h4 class="mb-4"><strong>Celebrate 12 years of Drumeo with <span class="text-drumeo">our biggest anniversary bundle ever.</span></strong></h4>
                     <p class="leading-normal">
                         You’ll get 12 FREE bonuses with your membership (including a FREE pair of professional in-ear headphones). 
@@ -51,10 +51,10 @@
                     </p>
 
                 </div>
-                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                <img class="h-72 lg:h-[26rem] transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/drumeo/promos/march/drumeo-timeline.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/730x0/filters:quality(95)/marketing/drumeo/promos/march/drumeo-timeline.webp"
 
                     alt="learn playing image"
                 >
@@ -65,7 +65,7 @@
     <div class="sticky-trigger block"></div>
     <a href="#customize-anchor"
         class="promo-banner flex items-center justify-center -mt-12 py-0.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: #CFDDF9;">
-        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
+        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
         <p class="inline-block text-xs mx-0 leading-tight">
             Celebrate <strong>12 years of Drumeo </strong> with
             <br>12 FREE bonuses 🥳 <em>(worth $1197.93)</em>
@@ -129,23 +129,17 @@
 
         // first deal
         'firstDeal'=> "Legacy Pricing",
-        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/march/order-membership.webp',
+        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/promos/march/order-membership.webp',
         'firstImageHeight' => 'h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
         'firstDealSub' => "Save 18% on your first year. No bonuses.",
         "firstDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true",
-        'firstExtraBonuses' => [
-            'Celebrate 12 years of Drumeo by getting our OG 2012 price on our annual membership:',
-            '<strong class="text-drumeo"><i class="fa-solid fa-check pr-1"></i> Learn</strong>',
-            '<strong class="text-drumeo"><i class="fa-solid fa-check pr-1"></i> Practice</strong>',
-            '<strong class="text-drumeo"><i class="fa-solid fa-check pr-1"></i> Play</strong>',
-    ],
 
         // second deal
         'topBadge' => "BEST DEAL",
         'secondDeal' => "Anniversary Bundle",
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/march/order-bundle.webp',
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/promos/march/order-bundle.webp',
         'secondImageHeight' => 'h-24',
         'secondDealSub' => "12 bonuses worth $1197.93.",
         'secondDealPrice' => 240,

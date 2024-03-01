@@ -11,8 +11,8 @@
             <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black.webp" alt="30 day drummer logo" />
             <p class="leading-tight my-5 lg:my-7">Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em></p>
-            <img class="sm:hidden inline-block h-44 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
-            <img class="hidden sm:inline-block sm:h-44 lg:h-60" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header.webp" alt="30 day drummer logo" />
+            <img class="sm:hidden inline-block h-52 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
+            <img class="hidden sm:inline-block sm:h-44 lg:h-64" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1810x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header.webp" alt="30 day drummer logo" />
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 mt-5 lg:mt-7">
                 <a class="sm:mx-0.5 w-full sm:w-56 join {{ $theme }} smaller sm:order-1 mb-2 sm:mb-0 @if(!empty($promoVersion)) anchor-slide @endif"
                         href="#customize-anchor" aria-label="Customize anchor"
@@ -35,8 +35,8 @@
     </header>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: #0C1524;">
         <div class="container max-w-6xl mx-auto">
-            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                <div class=" pr-5 lg:pr-8 mx-0">
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
+                <div class="sm:pr-5 lg:pr-8 mx-0  mb-5 sm: mb-0">
                     <h4 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h4>
                     <p class="leading-normal max-w-xl">
                         This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
@@ -53,10 +53,10 @@
                     </p>
 
                 </div>
-                <img class="h-56 lg:h-80 hidden sm:inline transition-opacity opacity-0"
+                <img class="h-56 lg:h-80 transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
 
                     alt="learn playing image"
                 >
@@ -67,7 +67,7 @@
     <div class="sticky-trigger block"></div>
     <a href="#customize-anchor"
         class="promo-banner flex items-center justify-center -mt-12 py-0.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: #CFDDF9;">
-        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
+        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-sticky-logo.webp" alt="30 day drummer logo" />
         <p class="inline-block text-xs mx-0 leading-tight">
             Celebrate <strong>8 years of Pianote </strong> with
             <br>8 FREE bonuses 🥳 <em>(worth $987)</em>
@@ -261,7 +261,7 @@
 
         // first deal
         'firstDeal'=> "Legacy Pricing",
-        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
+        'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
         'firstImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
@@ -277,7 +277,7 @@
         // second deal
         'topBadge' => "BEST DEAL",
         'secondDeal' => "Anniversary Bundle",
-        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
+        'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
         'secondImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'secondDealSub' => "Join Pianote + get 8 bonuses worth $987.",
         'secondDealPrice' => 240,
@@ -297,7 +297,7 @@
 
         // third deal
         'thirdDeal' => "Lifetime Bundle",
-        'thirdDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp',
+        'thirdDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp',
         'thirdImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'thirdDealSub' => "Limited quantity. ",
         'thirdDealPrice' => 1200,

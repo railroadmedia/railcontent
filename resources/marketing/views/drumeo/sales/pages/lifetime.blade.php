@@ -48,7 +48,7 @@
             <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803596141" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
+                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/918163289" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
@@ -59,8 +59,7 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm"><em>One time payment or choose a <br class="sm:hidden">
-                        payment plan below.</em></p>
+                <p class="leading-tight text-sm"><em>One time payment.</em></p>
                 <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
                 <p class="mt-4 leading-tight text-musora">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>
@@ -170,7 +169,7 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm">One time payment or choose a <br class="sm:hidden">payment plan on the next page.</p>
+                <p class="leading-tight text-sm">One time payment</p>
                 <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE<br class="sm:hidden"> anniversary bonuses</strong></h3>
             </div>
