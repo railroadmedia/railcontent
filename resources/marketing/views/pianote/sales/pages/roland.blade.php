@@ -95,7 +95,6 @@
                     Offer valid for new Pianote members only</em></p>
             <div class="max-w-2xl mx-auto px-4">
                 <form id="ajaxForm" accept-charset="UTF-8" action="/claim-roland-90-day-access" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
-                    {{ csrf_field() }}
                     <input class="w-full mb-2 text-left rounded-full py-2 px-5 text-gray-400 text-base md:text-lg" name="email" type="email" placeholder="Email Address..." required/>
                     <button class="submit w-full transition-opacity duration-300 hover:opacity-90 uppercase cursor-pointer text-center text-white text-base md:text-lg font-bebas font-bold bg-pianote rounded-full" type="submit">
                         <span class="pre-add">Get Started <i class="fad fa-paper-plane"></i></span>
