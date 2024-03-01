@@ -4,6 +4,7 @@ namespace App\Modules\EventTracking\Listeners;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
+use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 
 class EventTrackerListener
@@ -25,7 +26,7 @@ class EventTrackerListener
 
         $user = $event->getUser();
         Avo::account_created(
-            AvoHelper::defaultEventProperties(['account_created_at' => $user->created_at->timestamp], $user)
+            AvoHelper::defaultEventProperties(['account_created_at' => Carbon::parse($user->created_at)->toIso8601String()], $user)
         );
     }
 }
