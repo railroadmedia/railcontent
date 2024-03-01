@@ -46,6 +46,15 @@
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
+            <h6 class="leading-tight mt-3 text-musora uppercase"> Only
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                     </span>
+                left</h6>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/918163289" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
@@ -59,10 +68,10 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm"><em>One time payment.</em></p>
+                <p class="leading-tight text-sm"><em>Payment plans available.</em></p>
                 <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
-                <p class="mt-4 leading-tight text-musora">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>
+{{--                <p class="mt-4 leading-tight text-musora">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>--}}
             </div>
         </div>
     </section>
@@ -150,9 +159,18 @@
         style="background:linear-gradient(to bottom, #094073, #000C16);"
     >
         <div class="container mx-auto relative z-50 max-w-4xl">
-            <h3 class="leading-tight mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="sm:hidden"> today and get:</strong></h3>
+            <h3 class="leading-tight" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="sm:hidden"> today and get:</strong></h3>
+            <h6 class="leading-tight mt-3 mb-5 md:mb-7 lg:mb-10 text-musora uppercase"> Only
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                     </span>
+                left</h6>
             <div class="w-full">
-                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md">
                     <div class=" inline-block relative w-full group" style="padding-bottom: 56%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-musora--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
@@ -169,7 +187,7 @@
                         <strong>$1200</strong>
                     @endif
                 </h2>
-                <p class="leading-tight text-sm">One time payment</p>
+                <p class="leading-tight text-sm">Payment plans available</p>
                 <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE<br class="sm:hidden"> anniversary bonuses</strong></h3>
             </div>
@@ -307,6 +325,11 @@
         'video' => '917719282',
         'vimeo' => true,
         'styles' => 'pb-[177%] sm:pb-[66vh] bg-white',
+    ])
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-03-16 00:00:00',
+        'promoVersion' => false
     ])
     @include("drumeo.sales.partials._footer")
 
