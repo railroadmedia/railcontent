@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.300.7",
+            "version": "3.300.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "aefd3ed981a6a1104e3621855dc0bed5ffaa4d51"
+                "reference": "421be99f109a330acd4297abe2f41069eccbf447"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/aefd3ed981a6a1104e3621855dc0bed5ffaa4d51",
-                "reference": "aefd3ed981a6a1104e3621855dc0bed5ffaa4d51",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/421be99f109a330acd4297abe2f41069eccbf447",
+                "reference": "421be99f109a330acd4297abe2f41069eccbf447",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.300.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.300.8"
             },
-            "time": "2024-02-28T19:05:57+00:00"
+            "time": "2024-02-29T19:06:50+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10372,12 +10372,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "44c76bc04dc8502ccb32242d0d17b3b705be2a30"
+                "reference": "c0a9577185cbe09e1c38d7058bda572ff3fdc783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/44c76bc04dc8502ccb32242d0d17b3b705be2a30",
-                "reference": "44c76bc04dc8502ccb32242d0d17b3b705be2a30",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c0a9577185cbe09e1c38d7058bda572ff3fdc783",
+                "reference": "c0a9577185cbe09e1c38d7058bda572ff3fdc783",
                 "shasum": ""
             },
             "require": {
@@ -10434,7 +10434,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
             },
-            "time": "2024-02-28T13:40:24+00:00"
+            "time": "2024-03-01T10:02:37+00:00"
         },
         {
             "name": "railroad/railforums",
