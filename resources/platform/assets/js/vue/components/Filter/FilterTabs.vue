@@ -6,7 +6,7 @@
                 :class="isActive(option.value) ? `tw-bg-[#28282D] dark:tw-bg-[#445F74] tw-text-white` : `hover:tw-bg-[#E7E7E8] hover:dark:tw-bg-[#223F57] hover:dark:tw-text-white tw-bg-white dark:tw-bg-[#000C17] tw-border-[#CBCBCD] dark:tw-text-white`">
                 {{ option.value }}
             </button>
-            <div v-else v-for="(option, i) in tabOptions" class="tw-text-xl md:tw-text-2xl tw-font-bold tw-text-[#000C17] dark:tw-text-white">
+            <div v-else v-for="(option, i) in tabOptions" class="tw-text-xl md:tw-text-2xl tw-font-bold tw-text-[#000C17] dark:tw-text-white tw-capitalize">
                 {{ option.value }}
             </div>
         </div>
