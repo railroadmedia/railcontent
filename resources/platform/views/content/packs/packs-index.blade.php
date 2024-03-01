@@ -54,6 +54,12 @@
             default-sorts="-progress"
             :limit="-1"
             search-placeholder="Search all packs..."
+            :sort-options="{{ json_encode([
+                        [ 'value' => '-published_on', 'name' => 'Newest First', 'icon' => 'sort-down' ],
+                        [ 'value' => 'published_on', 'name' => 'Oldest First', 'icon' => 'sort-up' ],
+                        [ 'value' => 'title', 'name' => 'Name: A to Z', 'icon' => 'sort-name-asc' ],
+                        [ 'value' => '-title', 'name' => 'Name: Z to A', 'icon' => 'sort-name-desc' ]
+                    ]) }}"
         ></collection-wrapper>
     </div>
 
