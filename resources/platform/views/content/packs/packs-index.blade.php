@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <!-- @component('partials._header-banner', [
+    @component('partials._header-banner', [
         'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/' . $brand . '-header.jpg',
     ])
         @slot('content')
@@ -35,14 +35,14 @@
                 </div>
             </div>
         @endslot
-    @endcomponent -->
+    @endcomponent
 
-    <page-header
+    <!-- <page-header
         page-type="pack"
         title="Packs"
         icon-name="box-filled"
         description="Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on."
-    ></page-header>
+    ></page-header> -->
 
     <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
         <collection-wrapper

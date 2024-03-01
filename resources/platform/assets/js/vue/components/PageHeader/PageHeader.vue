@@ -54,7 +54,7 @@ import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
 import ProgressText from './ProgressBar/ProgressText.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
 
-import SongRequest from '../Songs/SongRequest.vue';
+import SongRequest from '../Songs/SongRequestNew.vue';
 import ResetProgressCta from './Ctas/ResetProgressCta.vue';
 import DownloadResourcesCta from './Ctas/DownloadResourcesCta.vue';
 import PageHeaderCta from './PageHeaderCta.vue';
