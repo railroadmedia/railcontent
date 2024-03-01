@@ -55,5 +55,6 @@ Route::domain('{pianoteDomain}')
         Route::get('/terms', [SalesController::class, 'terms'] );
         Route::get('/welcome-party', [SalesController::class, 'welcomeparty'] );
 
-        Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'] );
+        Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'] )
+            ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 });
