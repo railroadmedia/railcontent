@@ -3,11 +3,9 @@ import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import Breadcrumb from '../Breadcrumb/Breadcrumb.vue';
-import UnifiedHeader from '../Unified/UnifiedHeader.vue';
 
 //Vuesora components
 import CollectionWrapper from '../CollectionWrapper/CollectionWrapper.vue';
-import SongRequest from "../Songs/SongRequestNew.vue";
 import { useUserStore } from "../../../stores/user";
 
 //-----------Props-----------//
@@ -95,21 +93,6 @@ const capitalizeFirstLetter = (string) => {
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
     <PageHeader v-if="contentType === 'song'" :pageType="contentType" :title="contentTitle" :heroImg="heroImg"
         :infoData="infoData" :ctas="ctaConfig" />
-    <UnifiedHeader v-else classOverride="tw-mt-[20px]">
-        <template v-slot:left-content>
-            <div class="tw-flex">
-                <div class="tw-rounded-full tw-w-[115px] tw-h-[115px] tw-border-[2px] tw-border-white tw-bg-cover"
-                    :style="{ backgroundImage: `url(${defaultThumbnail})` }"></div>
-                <div class="tw-flex tw-flex-col tw-justify-center dark:tw-text-white tw-pl-[20px]">
-                    <h3 class="tw-pb-[10px] tw-text-[32px] tw-font-bold">{{ contentTitle }}</h3>
-                    <div class="tw-text-[14px] tw-font-bold tw-leading-none">{{ contentSubtitle }}</div>
-                </div>
-            </div>
-        </template>
-        <template v-if="contentType === 'song'" v-slot:right-content>
-            <SongRequest />
-        </template>
-    </UnifiedHeader>
 
     <div class="lg:tw-container lg:tw-px-[50px] tw-mx-auto tw-pt-[30px]">
         <CollectionWrapper :pre-loaded-content="preLoadedContent" :tab-options="[
