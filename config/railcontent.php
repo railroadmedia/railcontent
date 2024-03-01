@@ -2809,5 +2809,7 @@ return [
         'Holiday/Soundtrack' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/99b62148-00ed-4022-c03e-ac33c62e8000/public',
         'Jazz/Blues' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/8c83c093-ace9-4551-fe86-ad1b1e961e00/public',
         'Worship/Gospel' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/71b1e1dd-472c-4134-2ada-70d11d506c00/public',
+        'Country/Folk' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/ad7aeb00-3630-46eb-e5fe-c182bbc20800/public',
+        'Hip-Hop/Rap'=>'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/a2602e1d-f9f6-4917-8968-153c2d50aa00/public',
     ],
 ];
