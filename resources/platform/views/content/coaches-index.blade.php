@@ -170,6 +170,7 @@
                 [ 'key' => 'subscribedCoaches', 'value' => 'Subscribed Coaches' ]
             ]) }}"
             default-sort="slug"
+            :show-progress-filters="{{ json_encode(false) }}"
         ></collection-wrapper>
 {{--        <transition appear name="fade">--}}
 {{--            <content-catalogue--}}
