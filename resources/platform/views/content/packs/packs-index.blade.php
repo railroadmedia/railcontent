@@ -44,7 +44,7 @@
         description="Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on."
     ></page-header> -->
 
-    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
+    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] tw-px-4 lg:tw-px-8">
         <collection-wrapper
             collection-type="pack"
             :infinite-scroll="false"
