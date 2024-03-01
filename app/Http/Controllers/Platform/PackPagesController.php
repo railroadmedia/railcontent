@@ -80,18 +80,10 @@ class PackPagesController extends Controller
         if ($request->has('title')) {
             $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
         }
-	if(user()->isPackOnlyOwner()){
-	    ContentRepository::$getEnrollmentContent = false;
-	}
-        $packs = $this->packService->getPacks($requiredFields);
-        $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
-
-        foreach ($packs['results'] as $pack) {
-            if ($pack['id'] == $activePack) {
-                $pack['status_text'] = "In Progress";
-            }
-
+        if(user()->isPackOnlyOwner()){
+            ContentRepository::$getEnrollmentContent = false;
         }
+        $packs = $this->packService->getPacks($requiredFields, $request->get('sort','-progress'));
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs['results'] as $packIndex => $pack) {
