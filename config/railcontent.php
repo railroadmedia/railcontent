@@ -444,7 +444,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1081,7 +1081,7 @@ return [
                 'name' => 'New Content',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
@@ -1486,7 +1486,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1524,7 +1524,7 @@ return [
                 "icon" => "icon-courses",
                 "description" => "These jam-packed training courses cover various lesson topics in detail. Find one that suits your guitar goals, and get started!",
                 "allowableFilters" => ['difficulty', 'topic', 'instructor', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
@@ -1783,7 +1783,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1830,7 +1830,7 @@ return [
                 "icon" => "icon-courses",
                 "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
