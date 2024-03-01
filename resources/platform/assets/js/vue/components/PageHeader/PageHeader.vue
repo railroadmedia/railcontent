@@ -4,7 +4,9 @@
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg" :additionalImgSrc="logo"
         :infoData="ctasAndInfoInsideHero ? infoData : null">
         <template #header-info v-if="description">
-          <!-- Tooltip/Modal content -->
+          <span>
+            {{ description }}
+          </span>
         </template>
         <template #ctas>
           <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">

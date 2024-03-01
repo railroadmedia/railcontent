@@ -23085,6 +23085,15 @@ a:visited{
 .tw-max-w-xs{
   max-width: 20rem !important;
 }
+.tw-max-w-\[150px\]{
+  max-width: 150px !important;
+}
+.tw-max-w-\[373px\]{
+  max-width: 373px !important;
+}
+.tw-max-w-\[343px\]{
+  max-width: 343px !important;
+}
 .tw-flex-1{
   flex: 1 1 0% !important;
 }
@@ -27201,6 +27210,10 @@ a:visited{
     padding-top: 2.25rem !important;
     padding-bottom: 2.25rem !important;
   }
+  .sm\:tw-py-1{
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
   .sm\:tw-pb-0{
     padding-bottom: 0px !important;
   }
@@ -27854,6 +27867,10 @@ a:visited{
   .md\:tw-py-8{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
+  }
+  .md\:tw-px-6{
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
   .md\:tw-pb-0{
     padding-bottom: 0px !important;

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="infoData" class="tw-flex tw-items-center tw-text-base tw-font-bold tw-text-[#002039] dark:tw-text-[#9EC0DC]">
+    <div v-if="infoData" class="tw-flex tw-items-center tw-text-base tw-font-semibold tw-text-[#002039] dark:tw-text-[#9EC0DC]">
         <div class="tw-flex tw-items-center tw-uppercase" v-for="(item, index) in infoData" :key="item">
             <span>{{ item }}</span>
             <span v-if="index !== infoData.length - 1"
