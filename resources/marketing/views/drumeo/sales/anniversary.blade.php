@@ -18,7 +18,7 @@
                         href="#customize-anchor" aria-label="Customize anchor"
                 >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
                 @if(empty($noTrailer))
-                    <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+                    <div class="sm:mx-0.5 w-auto sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
                 @endif
             </div>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
@@ -36,8 +36,15 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20 text-white relative" style="background: #0C1524;">
         <div class="container max-w-5xl mx-auto">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
-                <div class="sm:pr-5 lg:pr-8 mx-0 max-w-lg mb-5 sm:mb-0">
-                    <h4 class="mb-4"><strong>Celebrate 12 years of Drumeo with <span class="text-drumeo">our biggest anniversary bundle ever.</span></strong></h4>
+                <img class="h-72 lg:h-[26rem] sm:order-1 transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/730x0/filters:quality(95)/marketing/drumeo/promos/march/drumeo-timeline.webp"
+
+                    alt="learn playing image"
+                >
+                <div class="sm:pr-5 lg:pr-8 mx-0 max-w-lg mt-5 sm:mt-0">
+                    <h3 class="mb-4"><strong>Celebrate 12 years of Drumeo with <span class="text-drumeo">our biggest anniversary bundle ever.</span></strong></h3>
                     <p class="leading-normal">
                         You’ll get 12 FREE bonuses with your membership (including a FREE pair of professional in-ear headphones). 
                         <br><br>
@@ -51,13 +58,6 @@
                     </p>
 
                 </div>
-                <img class="h-72 lg:h-[26rem] transition-opacity opacity-0"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/730x0/filters:quality(95)/marketing/drumeo/promos/march/drumeo-timeline.webp"
-
-                    alt="learn playing image"
-                >
             </div>
         </div>
     </section>
@@ -146,19 +146,19 @@
         'secondDealDiscount' => 1493.93,
         "secondDealLink" => "/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true",
         'secondExtraBonuses' => [
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> <strong>Annual Membership </strong>',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> EarDrums ($149 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 5A Drumsticks ($12.95 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drum Key ($15 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Drummer ($127 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> 30-Day Chops ($127 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Rock Drumming Masterclass ($197 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Drum Technique Made Easy ($197 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Independence Made Easy ($197 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Better Drum Fills ($97 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Learn Songs Faster ($19 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Great Hands For A Lifetime ($29.99 Value)',
-            '<i class="fa-solid fa-check pr-1 text-drumeo"></i> Creative Control ($29.99 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> <strong>Annual Membership </strong>',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> EarDrums ($149 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> 5A Drumsticks ($12.95 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Drum Key ($15 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> 30-Day Drummer ($127 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> 30-Day Chops ($127 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Rock Drumming Masterclass ($197 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Drum Technique Made Easy ($197 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Independence Made Easy ($197 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Better Drum Fills ($97 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Learn Songs Faster ($19 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Great Hands For A Lifetime ($29.99 Value)',
+            '<i class="fa-solid fa-check pr-1 text-musora"></i> Creative Control ($29.99 Value)',
     ],
 ])
 @endsection

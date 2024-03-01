@@ -101,13 +101,6 @@
         else {
             $stock = 0;
         }
-
-        if(!empty($products['maelzel-metronome']->getStockAvailability())) {
-            $PMstock = $products['maelzel-metronome']->getStockAvailability();
-        }
-        else {
-            $PMstock = 0;
-        }
     @endphp
 {{--    @include('_partials.components.shop.promo-banner', [--}}
 {{--                "name" => "Lifetime",--}}
@@ -119,18 +112,9 @@
 {{--            ])--}}
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/header-bg.webp');">
         <div class="container mx-auto">
-            <h1 class="leading-none"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
-            <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
-                <div class="w-full relative rounded-xl overflow-hidden" style="padding-bottom: 42.5%;">
-{{--                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/885340200" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>--}}
-                    <img class="absolute inset-0 object-cover"
-                        @if($PMstock > 0)
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifeitme-bundle-metronome.webp"
-                        @else
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/TODO.webp"
-                        @endif
-                    ></img>
-                </div>
+            <h1 class="leading-tight mb-7 sm:mb-10"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
+            <div class="w-full mx-auto mb-2 sm:mb-3">
+                <img class="h-28 sm:h-52 lg:h-72" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-metronome2.webp">
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mb-1">
@@ -150,7 +134,7 @@
     <section class="text-center px-3 sm:px-5 py-10 md:py-14 lg:py-16 px-2 md:px-4 relative overflow-hidden" style="background-color:#F6F8FC;">
         <div class="container mx-auto max-w-4xl z-10 relative">
             <h2 class="leading-tight mb-2"><strong>The Lifetime Advantage</strong></h2>
-            <p class="leading-tight"><em>Pay once. Play forever. Get unlimited piano lessons for <br class="hidden sm:inline lg:hidden"> the price of 5 years of access to Pianote ($1200 total).</em></p>
+            <p class="leading-tight mb-4"><em>Pay once. Play forever. Get unlimited piano lessons for <br class="hidden sm:inline lg:hidden"> the price of 5 years of access to Pianote ($1200 total).</em></p>
             <img class="hidden sm:inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/november/bundles/timeline2.png">
             <img class="sm:hidden inline-block w-full max-w-3xl mb-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/timeline-m2.png">
             <p class="text-left leading-relaxed mt-5">
@@ -296,7 +280,7 @@
             <p class="leading-tight"><em>Get yours FREE with a Lifetime Membership.</em></p>
         </div>
     </section>
-    @if($PMstock > 0)
+    @if($stock > 0)
         <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
             <div class="container mx-auto z-10 relative max-w-5xl">
                 <img class="h-24 sm:h-28 lg:h-36" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-m2.svg">
@@ -304,7 +288,7 @@
                     <br><br>
                     Only 216 were made and each one is hand-numbered.
                     <br><br>
-                    But there are only {{ $PMstock }} left, and you’ll get one FREE with your Lifetime Membership (while stocks last).
+                    But there are only {{ $stock }} left, and you’ll get one FREE with your Lifetime Membership (while stocks last).
                     <br><br>
                     The only way to get one is to be a Pianote Member. Even Elton John couldn’t get one (unless he decided to join Pianote).
                     <br><br>
@@ -328,12 +312,12 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @php
-    if($PMstock > 0) {
+    if($stock > 0) {
         $bonuses = [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/march/metronome-card.webp',
                 'description' => 'A limited edition flamed maple metronome from Wittner',
-                'badge' => 'ONLY ' . $PMstock . ' REMAINING!',
+                'badge' => 'ONLY ' . $stock . ' REMAINING!',
                 'price' => floatval($productPrices['maelzel-metronome']->price),
                 'shipping' => true,
             ],
@@ -498,7 +482,7 @@
 
 {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            @if($PMstock > 0)
+            @if($stock > 0)
                 <a class="inline-block leading-tight text-white opacity-70" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
             @endif
         </div>

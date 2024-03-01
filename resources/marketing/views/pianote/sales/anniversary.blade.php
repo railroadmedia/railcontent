@@ -18,7 +18,7 @@
                         href="#customize-anchor" aria-label="Customize anchor"
                 >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
                 @if(empty($noTrailer))
-                    <div class="sm:mx-0.5 w-full sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+                    <div class="sm:mx-0.5 w-auto sm:w-56 join outline black smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
                 @endif
             </div>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
@@ -36,8 +36,15 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-12 lg:py-14 text-white relative" style="background: #0C1524;">
         <div class="container max-w-6xl mx-auto">
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start">
-                <div class="sm:pr-5 lg:pr-8 mx-0  mb-5 sm: mb-0">
-                    <h4 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h4>
+                <img class="h-56 lg:h-80 sm:order-1 transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
+
+                    alt="learn playing image"
+                >
+                <div class="sm:pr-5 lg:pr-8 mx-0 mt-5 sm:mt-0">
+                    <h3 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h3>
                     <p class="leading-normal max-w-xl">
                         This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
                         <br><br>
@@ -53,13 +60,6 @@
                     </p>
 
                 </div>
-                <img class="h-56 lg:h-80 transition-opacity opacity-0"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
-
-                    alt="learn playing image"
-                >
             </div>
         </div>
     </section>
