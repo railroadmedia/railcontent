@@ -444,7 +444,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => ['type'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1108,7 +1108,7 @@ return [
                 'name' => 'New Content',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['type'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
@@ -1534,7 +1534,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => ['type'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1854,7 +1854,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
