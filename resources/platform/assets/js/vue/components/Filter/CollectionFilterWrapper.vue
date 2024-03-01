@@ -9,13 +9,13 @@
     <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
     <div class="tw-px-4 lg:tw-px-0" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
         <FilterOptions v-if="!isCollapsed && !isTablet" :multi-select-columns="multiSelectColumns"
-            :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
+            :single-select-columns="getSingleSelectColumns" :selected-filters="selectedFilters"
             :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
             @on-progress-click="progress => emit('onProgressChange', progress)" />
         <FilterOptionsModal
             v-if="!isCollapsed && isTablet"
             :selected-filters="selectedFilters" :selected-progress="selectedProgress"
-            :multi-select-columns="multiSelectColumns" :single-select-columns="singleSelectColumns"
+            :multi-select-columns="multiSelectColumns" :single-select-columns="getSingleSelectColumns"
             @onClose="handleToggleCollapse" @handle-filter-click="param => emit('onFilterChange', param)"
             @handle-progress-click="progress => emit('onProgressChange', progress)" @clear-filter="emit('OnClearFilter')"
         />
@@ -119,6 +119,10 @@ const props = defineProps({
         type: Array,
         default: [],
     },
+    showProgressFilters: {
+        type: Boolean,
+        default: () => true,
+    },
 });
 
 const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'onTabChange', 'onProgressChange', 'OnClearFilter']);
@@ -138,6 +142,10 @@ const getScreenSize = () => {
         isTablet.value = true;
     }
 }
+
+const getSingleSelectColumns = computed(() => {
+    return props.showProgressFilters ? props.singleSelectColumns : [];
+});
 
 onMounted(() => {
     getScreenSize();
