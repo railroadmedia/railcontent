@@ -7,7 +7,7 @@ import UnifiedHeader from '../Unified/UnifiedHeader.vue';
 
 //Vuesora components
 import CollectionWrapper from '../CollectionWrapper/CollectionWrapper.vue';
-import SongRequest from "../Songs/SongRequest";
+import SongRequest from "../Songs/SongRequestNew.vue";
 import { useUserStore } from "../../../stores/user";
 
 //-----------Props-----------//
