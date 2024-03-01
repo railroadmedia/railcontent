@@ -54,6 +54,7 @@
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
             default-sorts="-progress"
             :limit="-1"
+            :hide-filter-icon="{{ json_encode(true) }}"
             search-placeholder="Search all packs..."
             :sort-options="{{ json_encode([
                         [ 'value' => '-published_on', 'name' => 'Newest First', 'icon' => 'sort-down' ],
