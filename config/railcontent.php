@@ -1075,6 +1075,29 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'pianote' => [
             'all' => [
@@ -1478,6 +1501,29 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -1773,7 +1819,30 @@ return [
                         'value' => ['style'],
                     ],
                 ],
-            ]
+            ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -2028,6 +2097,29 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+            ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
             ],
         ],
     ],
