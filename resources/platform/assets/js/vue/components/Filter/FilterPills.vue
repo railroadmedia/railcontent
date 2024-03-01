@@ -47,8 +47,9 @@
         if (props.multiSelectColumns.length > 0) {
             props.multiSelectColumns.map((column) => {
                 column.items && column.items.map((item) => {
-                    const isExist = props.selectedFilters.find(f => f === `${column.category},${item.value}`);
-                    if (isExist) pills.push({ category: column.category, item});
+                    const formattedColumn = column.category.replace( /\d+/, '');
+                    const isExist = props.selectedFilters.find(f => f === `${formattedColumn},${item.value}`);
+                    if (isExist) pills.push({ category: formattedColumn, item});
                 })
             })
         }
