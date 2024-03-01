@@ -41,6 +41,7 @@
         page-type="pack"
         title="Packs"
         icon-name="box-filled"
+        description="Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on."
     ></page-header>
 
     <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
@@ -54,6 +55,12 @@
             default-sorts="-progress"
             :limit="-1"
             search-placeholder="Search all packs..."
+            :sort-options="{{ json_encode([
+                        [ 'value' => '-published_on', 'name' => 'Newest First', 'icon' => 'sort-down' ],
+                        [ 'value' => 'published_on', 'name' => 'Oldest First', 'icon' => 'sort-up' ],
+                        [ 'value' => 'title', 'name' => 'Name: A to Z', 'icon' => 'sort-name-asc' ],
+                        [ 'value' => '-title', 'name' => 'Name: Z to A', 'icon' => 'sort-name-desc' ]
+                    ]) }}"
         ></collection-wrapper>
     </div>
 

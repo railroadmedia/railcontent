@@ -444,7 +444,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => ['type'],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1081,7 +1081,7 @@ return [
             ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1108,7 +1108,7 @@ return [
                 'name' => 'New Content',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['type'],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
@@ -1505,7 +1505,7 @@ return [
             ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1534,7 +1534,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => ['type'],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1571,8 +1571,8 @@ return [
                 "name" => "Courses",
                 "icon" => "icon-courses",
                 "description" => "These jam-packed training courses cover various lesson topics in detail. Find one that suits your guitar goals, and get started!",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle'],
+                "allowableFilters" => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
@@ -1844,7 +1844,30 @@ return [
                         'value' => ['style'],
                     ],
                 ],
-            ]
+            ],
+            'coach-lessons' => [
+                'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genre',
+                        'short_name' => 'Genre',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+            ],
         ],
         'singeo' => [
             'all' => [
@@ -1854,7 +1877,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1900,8 +1923,8 @@ return [
                 "name" => "Courses",
                 "icon" => "icon-courses",
                 "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                "allowableFilters" => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
@@ -2101,7 +2124,7 @@ return [
             ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
-                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -2902,5 +2925,7 @@ return [
         'Holiday/Soundtrack' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/99b62148-00ed-4022-c03e-ac33c62e8000/public',
         'Jazz/Blues' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/8c83c093-ace9-4551-fe86-ad1b1e961e00/public',
         'Worship/Gospel' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/71b1e1dd-472c-4134-2ada-70d11d506c00/public',
+        'Country/Folk' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/ad7aeb00-3630-46eb-e5fe-c182bbc20800/public',
+        'Hip-Hop/Rap'=>'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/a2602e1d-f9f6-4917-8968-153c2d50aa00/public',
     ],
 ];

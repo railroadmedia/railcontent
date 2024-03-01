@@ -16,20 +16,20 @@ class Prices
     public static $singeoSongs = 130;
 
     // social media counts
-    public static $drumeoYoutubeSubsc = 3310000;
+    public static $drumeoYoutubeSubsc = 3540000;
     public static $drumeoFacebookLikes = 1200000;
-    public static $drumeoInstagramFollowers = 1500000;
+    public static $drumeoInstagramFollowers = 1700000;
 
-    public static $pianoteYoutubeSubsc = 1520000;
-    public static $pianoteFacebookLikes = 432000;
-    public static $pianoteInstagramFollowers = 250000;
+    public static $pianoteYoutubeSubsc = 1620000;
+    public static $pianoteFacebookLikes = 434000;
+    public static $pianoteInstagramFollowers = 271000;
 
     public static $guitareoYoutubeSubsc = 1000000;
     public static $guitareoFacebookLikes = 330000;
     public static $guitareoInstagramFollowers = 19000;
 
 
-    public static $singeoYoutubeSubsc = 139000;
+    public static $singeoYoutubeSubsc = 169000;
     public static $singeoFacebookLikes = 23000;
-    public static $singeoInstagramFollowers = 9900;
+    public static $singeoInstagramFollowers = 10000;
 }
