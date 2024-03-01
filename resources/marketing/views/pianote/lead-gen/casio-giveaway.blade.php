@@ -47,7 +47,8 @@
                             <i class="fas fa-check-circle text-pianote lg:ml-2"></i> No age or location restrictions.</p>
 
                     </div>
-                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>
+{{--                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>--}}
+                    <span class="join sold-out smaller w-full">this offer has now ended</span>
                 </div>
                 <div class="hidden sm:block flex-shrink-0">
                     <img class="h-72 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
@@ -189,7 +190,8 @@
                             PX-S1100 Digital Piano
                         </h4>
                     </div>
-                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>
+{{--                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>--}}
+                    <span class="join sold-out smaller w-full">this offer has now ended</span>
                 </div>
             </div>
         </div>
