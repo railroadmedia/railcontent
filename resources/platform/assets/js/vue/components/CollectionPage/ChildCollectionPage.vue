@@ -111,7 +111,7 @@ const capitalizeFirstLetter = (string) => {
         </template>
     </UnifiedHeader>
 
-    <div class="lg:tw-container lg:tw-px-[50px] tw-mx-auto tw-pt-[30px]">
+    <div class="lg:tw-container tw-px-4 md:tw-px-8 tw-mx-auto tw-pt-[30px]">
         <CollectionWrapper :pre-loaded-content="preLoadedContent" :tab-options="[
             { key: 'allContent', value: `All ${capitalizeFirstLetter(pluralContentType)}` },
         ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType" />
