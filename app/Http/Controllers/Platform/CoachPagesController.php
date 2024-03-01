@@ -81,6 +81,7 @@ class CoachPagesController extends Controller
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
 
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
