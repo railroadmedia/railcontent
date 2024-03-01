@@ -1571,7 +1571,7 @@ return [
                 "name" => "Courses",
                 "icon" => "icon-courses",
                 "description" => "These jam-packed training courses cover various lesson topics in detail. Find one that suits your guitar goals, and get started!",
-                "allowableFilters" => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle'],
+                "allowableFilters" => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
