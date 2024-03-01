@@ -38,13 +38,13 @@
                         :class="isGroupedView ? 'tw-flex' : 'tw-hidden sm:tw-flex'">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
-                            <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2">
+                            <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2 tw-break-words">
                                 {{ mappedData.black_title }}
                             </h4>
                         </div>
                         <!-- Artist Name -->
-                        <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC]">
-                            <div v-if="artistName && artistName !== ''" class="tw-mb-0.5">
+                        <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] ">
+                            <div v-if="artistName && artistName !== ''" class="tw-mb-0.5 tw-break-words">
                                 <span>{{ artistName }}</span>
                             </div>
                         </h6>
@@ -75,15 +75,13 @@
                             </span>
                             <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                             <!-- Artist Name -->
-                            <span>
+                            <span class="tw-break-words">
                                 {{ artistName }}
                             </span>
                         </p>
                     </a>
                 </div>
-                <!--
-                    Add to Playlist
-                -->
+                <!-- Add to Playlist -->
                 <div class="tw-inline-flex tw-pt-1 lg:tw-pt-2 tw-items-start tw-relative sm:tw-justify-end tw-shrink-0">
                     <div class="tw-relative">
                         <button :id="`${item.id}-action-btn-big`"
