@@ -161,7 +161,7 @@
             collection-type="coach"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
             :included-types="{{ json_encode(['instructor']) }}"
-            limit="{{ $limitOverride ?? 18 }}"
+            :limit="{{ $limitOverride ?? 18 }}"
             :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"
             :required-fields="{{json_encode(['is_coach,1'])}}"
             :statuses="{{ json_encode(['published', 'scheduled']) }}"
