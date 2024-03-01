@@ -4,17 +4,16 @@
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg" :additionalImgSrc="logo"
         :infoData="ctasAndInfoInsideHero ? infoData : null">
         <template #header-info v-if="description">
-          <!-- Tooltip/Modal content -->
+          <span>
+            {{ description }}
+          </span>
         </template>
         <template #ctas>
           <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
             <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
             <div class="tw-flex tw-items-center tw-flex-grow"
               :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
-              <span v-if="progress"
-                class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-3xl tw-font-bold">Your
-                Progress - {{ progress }}%
-              </span>
+              <ProgressText v-if="progress" :progress="progress" />
               <div>
                 <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
                   v-bind="cta.props" />
@@ -33,10 +32,7 @@
         <PageHeaderRowInfo v-if="!ctasAndInfoInsideHero" :infoData="infoData" />
         <div class="tw-flex tw-items-center tw-flex-grow"
           :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
-          <span v-if="progress"
-            class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl sm:tw-text-xl md:tw-text-2xl lg:tw-text-3xl tw-font-bold">Your
-            Progress - {{ progress }}%
-          </span>
+          <ProgressText v-if="progress" :progress="progress" />
           <div>
             <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
               v-bind="cta.props" />
@@ -54,7 +50,8 @@ import { computed, defineProps, onUpdated, ref } from 'vue';
 import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
 import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
-import PageHeaderProgressBar from './PageHeaderProgressBar.vue';
+import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
+import ProgressText from './ProgressBar/ProgressText.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
 
 import SongRequest from '../Songs/SongRequest.vue';
