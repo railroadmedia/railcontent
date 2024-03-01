@@ -1234,6 +1234,12 @@ class ContentService
             }
         }
 
+        if ($pullFilterFields && !empty($filterFields['type'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['type'] = array_map(function($m) { return ucwords(str_replace("-", " ", $m));}, $filterFields['type']);
+            }
+        }
+
         $order = ContentRepository::$catalogMetaAllowableFilters;
 
         if($order) {

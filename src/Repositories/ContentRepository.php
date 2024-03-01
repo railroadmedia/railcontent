@@ -1394,6 +1394,7 @@ class ContentRepository extends RepositoryBase
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
                     ->restrictByUserStates($this->requiredUserStates)
+                    ->includeByUserStates($this->includedUserStates)
                     ->groupByField($this->groupByFields);
             $query = $subQuery;
 
@@ -1528,6 +1529,7 @@ class ContentRepository extends RepositoryBase
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
                     ->restrictByUserStates($this->requiredUserStates)
+                    ->includeByUserStates($this->includedUserStates)
                     ->groupByField($this->groupByFields)
                     ->selectGroupedCountColumns($this->groupByFields);
 
@@ -1654,6 +1656,10 @@ class ContentRepository extends RepositoryBase
                     config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
                 ),
             ];
+        }
+        
+        if($name == 'type'){
+            $value = strtolower(str_replace(" ", "-", $value));
         }
 
         $bpmMapping = config('railcontent.bpm_map') ?? [];
@@ -3063,6 +3069,7 @@ class ContentRepository extends RepositoryBase
             'type' => ConfigService::$tableContent . '.type',
             'instrument' => ConfigService::$tableContent.'.instrument',
             'content_id' => ConfigService::$tableContent.'.id',
+            'instrumentless' => ConfigService::$tableContent.'.instrumentless',
         ];
 
         foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
