@@ -379,6 +379,7 @@
        $slides = $drumeo['slides'];
     @endphp
 
+    @if(empty($hideHeader) || !$hideHeader)
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
             'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
@@ -434,6 +435,7 @@
             'pointThree' => 'FUN PRACTICE',
             'pointFour' => '6000+ SONGS',
         ])
+    @endif
     @endif
 
     @hasSection('promo-banner')

@@ -1,7 +1,7 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Book Bag | Pianote</title>
+    <title>BookBag | Pianote</title>
     <meta property="og:title" content="BookBag | Pianote">
 
     <meta name="description" content="A handcrafted premium leather satchel for your music books, laptop, and life.">
@@ -275,7 +275,7 @@
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/back-pockets.webp',
-                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security',
+                        'desc' => '<strong>External side and back</strong> pockets <br/>for easy access and extra security.',
                     ],
                     [
                         'img' => 'marketing/pianote/products/book-bag/handle.webp',
@@ -369,7 +369,7 @@
                                 <div class="rounded-xl overflow-hidden shadow-md" style="background-color:#F1EFED;">
                                     <div class="relative" style="padding-bottom:71%;">
                                         <img class="absolute object-cover h-full w-full transition-opacity opacity-1"
-                                            loading="lazy" onload="this.classList.remove('opacity-0')" alt="Pianote Book Bag Details"
+                                            loading="lazy" onload="this.classList.remove('opacity-0')" alt="Pianote BookBag Details"
                                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $gridItem['img'] }}">
                                     </div>
                                     <div class="flex items-start justify-start h-28">
@@ -418,24 +418,24 @@
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F1EFED">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h2 class="leading-tight font-playfair mb-3"><strong>From concert halls to city streets.</strong></h2>
-            <h6 class="leading-normal italic mb-4">The Pianote Book Bag oozes style. This beautiful leather satchel<br class="hidden sm:inline"> will look at home in Carnegie Hall and next to your Casio.</h6>
+            <h6 class="leading-normal italic mb-4">The Pianote BookBag oozes style. This beautiful leather satchel<br class="hidden sm:inline"> will look at home in Carnegie Hall and next to your Casio.</h6>
 
             @php
                 $items = [
                     [
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/features-01.webp',
-                        'desc' => '<strong> Designed to be used, </strong> the Pianote Book Bag combines fashion and function to ensure you never have to leave the important things behind.',
-                        'alt'=> 'A woman carrying The Pianote Book Bag, showcasing its fashionable and functional design.'
+                        'desc' => '<strong> Designed to be used, </strong> the Pianote BookBag combines fashion and function to ensure you never have to leave the important things behind.',
+                        'alt'=> 'A woman carrying The Pianote BookBag, showcasing its fashionable and functional design.'
                     ],
                     [
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/features-03a.webp',
                         'desc' => '<strong>Five separate internal compartments </strong> give you enough space for your music books, sheet music, notebooks, and a laptop. This messenger bag is your everyday carry for the things that matter most.',
-                        'alt'=> 'Stack of music sheets neatly organized inside The Pianote Book Bag.'
+                        'alt'=> 'Stack of music sheets neatly organized inside The Pianote BookBag.'
                     ],
                     [
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/book-bag/features-02.webp',
                         'desc' => '<strong>The premium leather </strong> will only look better with age. This is truly a luxury bag that doesn’t come with the pretense. <br/><br/>But don’t worry… <br/><br/> You’ll still get compliments every time you leave the house.',
-                        'alt'=> 'Front view of The Pianote Book Bag, highlighting its premium leather construction that ages beautifully.'
+                        'alt'=> 'Front view of The Pianote BookBag, highlighting its premium leather construction that ages beautifully.'
                     ]
                 ];
             @endphp
@@ -482,7 +482,7 @@
                 <div class="p-5 sm:px-10 sm:py-10 mt-60 sm:mt-0 rounded-xl text-left text-white" style="background: rgba(18, 18, 16, 0.9);">
                     <h2 class="leading-tight font-playfair pb-2 sm:pb-4">Made with love. And priced that way too.</h2>
                     <p class="leading-tight text-sm lg:text-base">
-                        The Pianote Book Bag is custom-designed by leather artisans in the USA. Each bag is handmade with a level of craftsmanship and quality comparable to bags in the $300 - $600 price range. <br><br> But we’re not here for the mark-up. <br><br>We love our students and genuinely think this bag will make your life better. So we’re committed to keeping the price affordable, without compromising on quality.</p>
+                        The Pianote BookBag is custom-designed by leather artisans in the USA. Each bag is handmade with a level of craftsmanship and quality comparable to bags in the $300 - $600 price range. <br><br> But we’re not here for the mark-up. <br><br>We love our students and genuinely think this bag will make your life better. So we’re committed to keeping the price affordable, without compromising on quality.</p>
                 </div>
             </div>
         </div>
@@ -490,7 +490,7 @@
 
     <section class="content-section text-center comparison px-1 lg:px-3 py-10 md:py-16" style="background:#F5F5F5;" x-data="{ tableClass: 'earbuds' }">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="mb-16 md:mb-12 text-black font-playfair"><strong>See how the Pianote Book Bag <br class="sm:hidden">  compares. </strong></h2>
+            <h2 class="mb-16 md:mb-12 text-black font-playfair"><strong>See how the Pianote BookBag <br class="sm:hidden">  compares. </strong></h2>
             <div class="relative">
                 <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table :class="{'earbuds': tableClass === 'earbuds', 'headphones': tableClass === 'headphones'}"  class="w-full mx-auto border-separate comparison eardrums earbuds">
@@ -501,7 +501,7 @@
                             <img class="h-20 md:h-40 transition-opacity opacity-0"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-new.webp" alt="The Pianote Book Bag">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/bag-comparison-new.webp" alt="The Pianote BookBag">
                         </td>
                         <td class="rounded-t-xl" @click="tableClass = 'headphones'">
                             <img class="h-20 md:h-40 transition-opacity opacity-0"
@@ -561,8 +561,8 @@
 
         <div class="container mx-auto max-w-5xl">
             <div id="customize-anchor" class="anchor"></div>
-            <div class="flex flex-wrap items-start justify-center flex-col-reverse md:flex-row mb-5 sm:mb-10 mx-auto">
-                <div class="w-full md:w-1/3 lg:px-1 px-1 relative">
+            <div class="flex flex-wrap lg:flex-nowrap items-start justify-center mb-5 sm:mb-10 w-full mx-auto">
+                <div class="w-full md:w-1/2 lg:w-full max-w-md lg:px-1 px-1 relative">
                     <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2  border-white " style="margin-top: 30px"
                         @if(!empty($membersVersion))
                             href="/ecommerce/add-to-cart?products[pianote-book-bag]=1&promo-code=members&locked=true"
@@ -571,8 +571,8 @@
                         @endif
                     >
                         <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
-                            <h4 class="leading-tight mb-2"><strong>Book Bag Only</strong></h4>
-                            <img class="h-20 lg:h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
+                            <h4 class="leading-tight mb-2"><strong>BookBag Only</strong></h4>
+                            <img class="h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/order-bag-01.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
                             <h3 class="leading-tight mt-2">
 
                                 @if(!empty($membersVersion))
@@ -593,39 +593,39 @@
                     </a>
                 </div>
                 @if(!empty($membersVersion))
-                    <div class="w-full md:w-1/3 lg:px-1 px-1 relative">
+                    <div class="w-full md:w-1/2 lg:w-full lg:px-1 px-1 relative">
                         <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-musora text-black font-black tracking-widest">BEST DEAL</p>
                         <div class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-musora">
                             <div class="bg-white px-3 py-6 md:py-7">
                                 <h4 class="leading-tight mb-2"><strong>Anniversary Bundle</strong></h4>
-                                <img class="h-20 lg:h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
+                                <img class="h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
                                 <h3 class="leading-tight mt-2">
                                     <span class="line-through" style="color: #879097; margin-right: 5px;">$1227</span>
                                     <strong>$240</strong>
                                 </h3>
                                 <p class="text-sm mb-5"><em>Join Pianote + get 8 bonuses worth $987.</em></p>
 
-                                <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&amp;products[pianote-book-bag]=1&amp;products[piano-chords-and-scales-guide]=1&amp;products[new-piano-players-start-here]=1&amp;products[easy-chords]=1&amp;products[30-day-blues-piano]=1&amp;products[piano-riffs-and-fills]=1&amp;products[worship-piano]=1&amp;products[piano-technique-made-easy]=1&amp;redirect=/order&amp;locked=true&amp;promo-code=special" class="join musora smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="GET STARTED"> GET STARTED </a>
+                                <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[piano-technique-made-easy]=1&redirect=/order&locked=true" class="join musora smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="GET STARTED"> GET STARTED </a>
 
                             </div>
-                            <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
+                            <div class="px-4 sm:px-4 lg:px-6 py-7 lg:whitespace-nowrap" style="background:#F6F8FC">
                                 <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> <strong>Annual Pianote Membership </strong></p>
-                                <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Pianote Book Bag ($249 value)</p>
-                                <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Chords &amp; Scales Book ($39 value)</p>
+                                <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Pianote BookBag ($249 value)</p>
+                                <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Chords & Scales Book ($39 value)</p>
                                 <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> New Piano Players Start Here ($127 value)</p>
                                 <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Easy Chords ($127 value)</p>
                                 <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> 30-Day Blues ($127 value)</p>
-                                <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Piano Riffs &amp; Fills ($99 value)</p>
+                                <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Piano Riffs & Fills ($99 value)</p>
                                 <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Worship Piano ($99 value)</p>
                                 <p class="text-left text-sm mb-1.5"><i class="fa-solid fa-check pr-1 text-musora" aria-hidden="true"></i> Piano Technique Made Easy ($120 value)</p>
                             </div>
                         </div>
                     </div>
-                    <div class="w-full md:w-1/3 lg:px-1 px-1 relative">
-                        <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&amp;products[maelzel-metronome]=1&amp;products[pianote-book-bag]=1&amp;products[pianote-practice-planner]=1&amp;products[piano-chords-and-scales-guide]=1&amp;redirect=/order&amp;locked=true&amp;promo-code=FREE-W-LIFETIME-849" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2  border-white " style="margin-top: 30px">
+                    <div class="w-full max-w-md lg:px-1 px-1 relative">
+                        <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2  border-white " style="margin-top: 30px">
                             <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
                                 <h4 class="leading-tight mb-2"><strong>Lifetime Bundle</strong></h4>
-                                <img class="h-20 lg:h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
+                                <img class="h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
                                 <h3 class="leading-tight mt-2">
                                     <strong>$1200</strong>
                                 </h3>
@@ -634,9 +634,9 @@
                             </div>
                             <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> <strong> Lifetime Membership </strong></p>
-                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Pianote Book Bag ($249 value)</p>
-                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Prestige Metronome (limit 100) ($299 value)</p>
-                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> C&amp;S Book ($39 value)</p>
+                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Pianote BookBag ($249 value)</p>
+                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Prestige Metronome ($299 value)</p>
+                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Chords & Scales Book ($39 value)</p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Practice Planner ($39 value)</p>
                             </div>
                         </a>

@@ -10,9 +10,12 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
+
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
+
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
@@ -241,73 +244,170 @@ $items = [
 @php
                     $testimonials = [
                         [
-                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
-                        'comment' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created. I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
+                        'avatar' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
+                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
+                        'title' => "It was like Lisa was right there beside me, cheering me on. I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
                         'name' => 'Jess Ripley',
                         ],
                         [
-                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
-                        'comment' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on. I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
+                        'avatar' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Serena-dorward-thumb.webp',
+                        'title' => " I can play some of my all-time favorite songs – and it's just so awesome to know I can learn from home and accomplish one of my dreams. I'm so excited to keep learning and I recommend Pianote so much.",
                         'name' => 'Serena Dorward',
                         ],
                         [
-                        'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
-                        'comment' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals. During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing. I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
+                        'avatar' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Jayde-mcintosh-thumb.webp',
+                        'title' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals. During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing. I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
                         'name' => 'Jayde McIntosh',
                         ],
                         [
-                        'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1699032272-630719.jpg',
-                        'comment' => "It’s the best place to start like myself. After 15 days I can comfortably play with both hands. ",
+                        'avatar' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1699032272-630719.jpg',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Brian-smith-thumb.webp',
+                        'title' => "It’s the best place to start like myself. After 15 days I can comfortably play with both hands. ",
                         'name' => 'Brian Smith',
+                        'video' => '906856562',
                         ],
                         [
-                        'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/C5C626A5-9761-42DF-8A46-875D21570D3D-1688758597-569824.jpg',
-                        'comment' => "I absolutely love it. They teach you all about chords. I started playing piano at church now.",
+                        'avatar' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/C5C626A5-9761-42DF-8A46-875D21570D3D-1688758597-569824.jpg',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Sam-latham-thumb.webp',
+                        'title' => "I absolutely love it. They teach you all about chords. I started playing piano at church now.",
                         'name' => 'Samantha Latham',
+                        'video' => '906856806',
                         ],
                         [
-                        'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/B6DBAB11-4DA8-49A3-AC5B-6EC2E3D88634-1694433618-539646.jpg',
-                        'comment' => "NPPSH is the ideal first step irrespective of their age. It’s changed my life for the better.",
+                        'avatar' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/B6DBAB11-4DA8-49A3-AC5B-6EC2E3D88634-1694433618-539646.jpg',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/James-suntres-thumb.webp',
+                        'title' => "NPPSH is the ideal first step irrespective of their age. It’s changed my life for the better.",
                         'name' => 'James Suntres',
+                        'video' => '906856743',
                         ],
 ];
-                    $students = "Pianote Student"
+                    $students = "Pianote Student";
              @endphp
+    <div id="testimonials" class="anchor"></div>
+    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center text-white px-3 lg:px-5"
+        style="    background: linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1));"
+        x-data="{
+        @foreach($testimonials as $testimonial)
+            {{ str_replace(' ', '', $testimonial['name']) }} : false,
+        @endforeach
+    }">
 
-@include('drumeo.products.partials.evergreen._testimonials', [
-    'socialIcons' => [
-                [
-                    'url' => 'https://www.youtube.com/pianolessonscom/',
-                    'label' => 'youtube',
-                    'iconClass' => 'fab fa-youtube',
-                    'count' => number_format(Prices::$pianoteYoutubeSubsc),
-                    'countLabel' => 'Subscribers',
-                ],
-                [
-                    'url' => 'https://facebook.com/pianoteofficial/',
-                    'label' => 'facebook',
-                    'iconClass' => 'fab fa-facebook-f',
-                    'count' => number_format(Prices::$pianoteFacebookLikes),
-                    'countLabel' => 'Likes',
-                ],
-                [
-                    'url' => 'https://instagram.com/pianoteofficial/',
-                    'label' => 'instagram',
-                    'iconClass' => 'fab fa-instagram',
-                    'count' => number_format(Prices::$pianoteInstagramFollowers),
-                    'countLabel' => 'Followers',
-                ],
-            ],
-        'bgColor' => 'linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1))',
-        'subHeader'=> 'What students are saying about Lisa',
-        'description' => 'New Piano Players Start Here  works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the piano in just thirty days. Check out what students are saying:',
-        'showBottom' => true,
-])
+        <div class="container mx-auto max-w-6xl mb-12">
+            <h2 class="leading-tight"><strong>What students are saying about Lisa</strong></h2>
+            <h4 class="leading-tight mt-2 mb-5 md:mb-8 leading-tight" style="max-width:670px">New Piano Players Start Here works. By focusing on playing with real music right from day one, you’ll learn the skills to play hundreds of songs on the piano in just thirty days. Check out what students are saying:</h4>
+
+            <div
+                x-data="{
+                init() {
+                    new Splide(this.$refs.splide, {
+                        classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 top-1/2 transform -translate-y-1/2 shadow-lg h-11 w-11',
+                                prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
+                                pagination: 'splide__pagination hidden md:flex -bottom-10',
+                        },
+                        perMove: 1,
+                        type: 'loop',
+                        padding: '5rem',
+                        focus: 0,
+                        autoplay: true,
+                        pauseOnHover: true,
+                        pauseOnFocus: true,
+                        interval: 5000,
+                        lazyLoad: 'nearby',
+                        breakpoints: {
+                            1020: {
+                                padding: '2.5rem',
+                            },
+                            767: {
+                                padding: '1.5rem',
+                            },
+                            620: {
+                                drag   : 'free',
+                                snap   : false,
+                            },
+                        },
+                    }
+                    ).mount()
+                },
+            }"
+            >
+                <section x-ref="splide" class="splide md:mb-12">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            @foreach ($testimonials as $testimonial)
+                                <li class="splide__slide flex items-start sm:items-stretch px-1">
+                                    <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
+                                        style="background-color:#0C1524;">
+                                        <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/3 lg:w-5/12 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-44 sm:h-80 lg:h-[32rem]"
+                                            @if(!empty($testimonial['video']))
+                                                x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
+                                            @endif
+                                        >
+                                            <img
+                                                data-splide-lazy="{{$testimonial['image']}}"
+                                                alt="{{ $testimonial['name'] }}"
+                                                class="object-cover w-full h-full rounded-xl"
+                                                @load="event.target.parentNode.style.backgroundImage = `url(${event.target.src})`"
+                                            >
+                                        </picture>
+                                        <div class="flex flex-col justify-between text-left sm:pl-8">
+                                            <h5 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h5>
+                                            <div class="flex md:items-center">
+                                                @if(!empty($testimonial['avatar']))
+                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-pianote opacity-0 transition-opacity"
+                                                        loading="lazy" onload="this.classList.remove('opacity-0')"
+                                                        alt="Avatar"
+                                                        src="{{$testimonial['avatar']}}">
+                                                @endif
+                                                <div class="">
+                                                    <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
+                                                    @if(!empty($testimonial['location']))
+                                                        <p class="leading-tight mx-0 text-sm text-pianote"><em>{{ $testimonial['location'] }}</em></p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+        @foreach($testimonials as $testimonial)
+            @if(!empty($testimonial['video']))
+                @include('_partials.components.video-modal',[
+                    'name' => str_replace(' ', '', $testimonial['name']),
+                    'video' => $testimonial['video'],
+                    'vimeo' => true
+                ])
+            @else
+                @component('_partials.components.modal', ['name' => str_replace(' ', '', $testimonial['name'])])
+                    @slot('content')
+                        <div class="overflow-hidden rounded-xl max-w-sm mx-auto">
+                            <img class="opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{$testimonial['image']}}" alt="{{$testimonial['name']}}" />
+                            <div class="bg-white p-4">
+                                <h2 class="leading-none font-bebas">{{$testimonial['name']}}</h2>
+                                @if(!empty($testimonial['location']))
+                                    <p class="text-coaches uppercase mx-auto mb-3 md:mb-2">{!!  $testimonial['location'] !!}</p>
+                                @endif
+                                <p class="mx-auto text-left leading-normal md:leading-normal">{!! $testimonial['title'] !!}</p>
+                            </div>
+                        </div>
+                    @endslot
+                @endcomponent
+            @endif
+        @endforeach
+    </section>
 
 
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 relative z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br> longer than the course.</strong></h2>
             <p class="leading-normal mx-auto" style="max-width:540px">New Piano Players Start Here is all about getting you playing beautiful piano in the shortest amount of time. For less than the cost of just 2 private lessons, you’ll have a guided path to improve your playing, build your confidence, and start your journey on the piano.
                 <br><br>
