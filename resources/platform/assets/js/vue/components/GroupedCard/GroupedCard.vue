@@ -24,7 +24,7 @@
         </a>
     </div>
 
-    <div class="tw-mb-[15px]">
+    <div class="tw-mb-[30px]">
         <transition appear name="fade">
             <SongCardContainer v-if="contentTypeOverride === 'song'" :preLoadedContent="item.lessons" :isGroupedView="true" />
             <CatalogueCardContainer v-else :preLoadedContent="item.lessons" :contentTypeOverride="contentTypeOverride" :groupByCards="true" />
