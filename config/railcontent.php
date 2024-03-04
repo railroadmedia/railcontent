@@ -516,7 +516,7 @@ return [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
                 'tabs' => [
@@ -1165,7 +1165,7 @@ return [
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
                 'tabs' => [
@@ -1598,7 +1598,7 @@ return [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
@@ -1950,7 +1950,7 @@ return [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'genre'],
+                'allowableFilters' => ['difficulty', 'genre','instrumentless'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
