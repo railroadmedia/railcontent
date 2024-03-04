@@ -169,7 +169,7 @@
                 !empty($lessonContent->fetch('data.description')) ||
                 !empty($lessonContent['chapters']))
                 <content-info
-                    :instructors="{{ json_encode($lessonContent->fetch('*fields.instructor')) }}"
+                    :instructors="{{ $lessonContent->fetch('*fields.instructor') }}"
                     :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
                     :content-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
                 ></content-info>
