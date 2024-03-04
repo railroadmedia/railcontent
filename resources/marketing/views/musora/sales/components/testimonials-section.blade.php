@@ -75,14 +75,14 @@
                     },
                 }"
             >
-                <section x-ref="splide" class="splide md:mb-12">
+                <section x-ref="splide" class="splide mb-12 sm:mb-20">
                     <div class="splide__track">
                         <ul class="splide__list">
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide flex px-1">
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
                                         style="background-color:#0C1524;">
-                                        <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center rounded-xl relative h-56 sm:h-80 lg:h-[32rem]"
+                                        <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center relative h-56 sm:h-80 lg:h-[32rem]"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                             @endif
@@ -90,15 +90,15 @@
                                             <img
                                                 data-splide-lazy="{{$testimonial['image']}}"
                                                 alt="{{ $testimonial['name'] }}"
-                                                class="object-cover w-full h-full"
+                                                class="object-cover w-full h-full rounded-xl overflow-hidden"
                                                 @load="event.target.parentNode.style.backgroundImage = `url(${event.target.src})`"
                                             >
                                         </picture>
-                                        <div class="flex flex-col justify-between text-left sm:pl-8 sm:py-5">
-                                            <h3 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h3>
+                                        <div class="flex flex-col justify-evenly text-left sm:pl-8 sm:py-5">
+                                            <h4 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h4>
                                             <div class="flex items-center">
                                                 @if(!empty($testimonial['avatar']))
-                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-{{ $theme }} opacity-0 transition-opacity"
+                                                    <img class="h-16 lg:h-20 w-16 lg:w-20 rounded-full object-cover mr-4 border-2 border-{{ $theme }} opacity-0 transition-opacity"
                                                         loading="lazy" onload="this.classList.remove('opacity-0')"
                                                         alt="Avatar"
                                                         src="{{$testimonial['avatar']}}">
@@ -106,7 +106,7 @@
                                                 <div class="">
                                                     <p class="leading-tight mx-0 font-black">{{ $testimonial['name'] }}</p>
                                                     @if(!empty($testimonial['location']))
-                                                        <p class="leading-tight mx-0 text-sm text-{{ $theme }}"><em>{{ $testimonial['location'] }}</em></p>
+                                                        <p class="leading-tight mx-0 text-sm"><em>{{ $testimonial['location'] }}</em></p>
                                                     @endif
                                                 </div>
                                             </div>
