@@ -379,7 +379,7 @@
                 <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Try it once and<br class="sm:hidden"> you’ll see."</span><br>
                 <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"The best teaching<br class="sm:hidden"> tool ever."</span><br>
             </h1>
-            <div class="grid grid-cols-4 gap-1 sm:gap-3 mb-5 lg:mb-7">
+            <div class="grid grid-cols-4 gap-1 sm:gap-3 mb-5 lg:mb-7 text-center sm:text-left">
                 <div class="relative w-full aspect-1:1">
                     <picture>
                         <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/560x0/filters:quality(95)/marketing/musora/membership/homepage/2024/header-drumeo-part.webp">
@@ -390,7 +390,7 @@
                             class="w-full h-full object-contain object-bottom rounded-xl absolute inset-0 opacity-0 transition-opacity"
                             onload="this.classList.remove('opacity-0')">
                     </picture>
-                    <h6 class="uppercase text-white absolute bottom-0 left-0 py-2 sm:py-4 px-3 sm:px-6"><strong>DRUMS</strong></h6>
+                    <h6 class="uppercase text-white absolute bottom-0 w-full py-2 sm:py-4 sm:px-4 lg:px-6"><strong>DRUMS</strong></h6>
                 </div>
                 <div class="relative w-full aspect-1:1">
                     <picture>
@@ -402,7 +402,7 @@
                             class="w-full h-full object-contain object-bottom rounded-xl absolute inset-0 opacity-0 transition-opacity"
                             onload="this.classList.remove('opacity-0')">
                     </picture>
-                    <h6 class="uppercase text-white absolute bottom-0 left-0 py-2 sm:py-4 px-3 sm:px-6"><strong>PIANO</strong></h6>
+                    <h6 class="uppercase text-white absolute bottom-0 w-full py-2 sm:py-4 sm:px-4 lg:px-6"><strong>PIANO</strong></h6>
                 </div>
                 <div class="relative w-full aspect-1:1">
                     <picture>
@@ -414,7 +414,7 @@
                             class="w-full h-full object-contain object-bottom rounded-xl absolute inset-0 opacity-0 transition-opacity"
                             onload="this.classList.remove('opacity-0')">
                     </picture>
-                    <h6 class="uppercase text-white absolute bottom-0 left-0 py-2 sm:py-4 px-3 sm:px-6"><strong>GUITAR</strong></h6>
+                    <h6 class="uppercase text-white absolute bottom-0 w-full py-2 sm:py-4 sm:px-4 lg:px-6"><strong>GUITAR</strong></h6>
                 </div>
                 <div class="relative w-full aspect-1:1">
                     <picture>
@@ -426,7 +426,7 @@
                             class="w-full h-full object-contain object-bottom rounded-xl absolute inset-0 opacity-0 transition-opacity"
                             onload="this.classList.remove('opacity-0')">
                     </picture>
-                    <h6 class="uppercase text-white absolute bottom-0 left-0 py-2 sm:py-4 px-3 sm:px-6"><strong>SINGING</strong></h6>
+                    <h6 class="uppercase text-white absolute bottom-0 w-full py-2 sm:py-4 sm:px-4 lg:px-6"><strong>SINGING</strong></h6>
                 </div>
             </div>
             @if(empty($boldText) && empty($noCheck))
