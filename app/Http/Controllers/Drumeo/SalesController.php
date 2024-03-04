@@ -119,11 +119,6 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.pages.lifetime', ['theme' => 'drumeo', 'upgradeVersion' => true]);
     }
-
-    public function Festival()
-    {
-        return view('drumeo.products.festival', ['theme' => 'drumeo']);
-    }
     public function thirtyDayDrummer()
     {
         $productId = 833;
