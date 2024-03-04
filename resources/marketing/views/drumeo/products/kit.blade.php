@@ -676,28 +676,28 @@
             'handleClick' => $handleClick,
         ])
             <div class="flex flex-wrap items-stretch">
-                <div class="w-full md:w-1/4 md:order-1 order-3 p-2 flex mt-8 md:mt-0">
-                    <table class="w-full flex-grow bg-white rounded-xl">
+                <div class="w-full sm:w-3/12 lg:w-3/12 flex items-center justify-center mt-8 sm:mt-0">
+                    <table class="w-full h-full bg-white rounded-xl">
                         <tbody>
                             @php
                                 if (empty($membersVersion)) {
-                                    $items = [['Drumeo Membership', '1'], 
-                                    ['Alesis Nitro Max E-Kit', '1'], 
-                                    ['10” Snare Pad', '1'], 
-                                    ['8” Tom Pads', '3'], 
-                                    ['3 10” Cymbal Pads', '3'], 
-                                    ['Drum Module', '1'], 
-                                    ['Kick Tower', '1'], 
-                                    ['Kick Pedal', '1'], 
+                                    $items = [['Drumeo Membership', '1'],
+                                    ['Alesis Nitro Max E-Kit', '1'],
+                                    ['10” Snare Pad', '1'],
+                                    ['8” Tom Pads', '3'],
+                                    ['3 10” Cymbal Pads', '3'],
+                                    ['Drum Module', '1'],
+                                    ['Kick Tower', '1'],
+                                    ['Kick Pedal', '1'],
                                     ['5A Drumsticks', '1']];
                                 } else {
-                                    $items = [['Alesis Nitro Max E-Kit', '1'], 
-                                    ['10” Snare Pad', '1'], 
-                                    ['8” Tom Pads', '3'], 
-                                    ['3 10” Cymbal Pads', '3'], 
-                                    ['Drum Module', '1'], 
-                                    ['Kick Tower', '1'], 
-                                    ['Kick Pedal', '1'], 
+                                    $items = [['Alesis Nitro Max E-Kit', '1'],
+                                    ['10” Snare Pad', '1'],
+                                    ['8” Tom Pads', '3'],
+                                    ['3 10” Cymbal Pads', '3'],
+                                    ['Drum Module', '1'],
+                                    ['Kick Tower', '1'],
+                                    ['Kick Pedal', '1'],
                                     ['5A Drumsticks', '1']];
                                 }
                             @endphp
@@ -712,32 +712,32 @@
                     </table>
                 </div>
 
-                <div class="w-full md:w-1/2 md:order-2 order-1 p-2">
-                    <div @click="handleClick(0)" 
-                        class="h-96 bg-center bg-cover rounded-xl"
+                <div class="w-full sm:w-1/2 sm:order-2 order-1 p-2">
+                    <div @click="handleClick(0)"
+                        class="h-64 sm:h-96 bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90"
                         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
                     </div>
                 </div>
 
-                <div class="h-96 w-full md:w-1/4 md:order-3 order-2 p-2">
+                <div class="h-96 w-full sm:w-3/12 sm:order-3 order-2 p-2">
                     <div class="flex flex-wrap">
                         <div class="w-1/2 p-2">
                             <div @click="handleClick(1)"
-                                class="h-48 bg-center bg-cover rounded-xl"
+                                class="h-48 bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
                             </div>
                         </div>
                         <div class="w-1/2 p-2">
-                            <div @click="handleClick(2)" 
-                                class="h-48 bg-center bg-cover rounded-xl"
+                            <div @click="handleClick(2)"
+                                class="h-48 bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
                             </div>
                         </div>
                     </div>
 
                     <div class="w-full p-2">
-                        <div @click="handleClick(3)" 
-                            class="h-48 bg-center bg-cover rounded-xl"
+                        <div @click="handleClick(3)"
+                            class="h-48 bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
                         </div>
                     </div>
@@ -745,7 +745,7 @@
             @endcomponent
         </div>
 
-        <p class="p-4 text-center hidden md:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36"
+        <p class="p-4 text-center hidden sm:block" style="color: rgb(135, 144, 151, 1.2)"> <strong>Depth</strong> 36"
             (91.44cm) // <strong>Width</strong> 48" (121.92cm) // <strong>Height</strong> 12.12" (30.78cm)</p>
 
         <div class="w-full max-w-xs mx-auto pt-4">

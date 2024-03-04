@@ -224,25 +224,25 @@
                  [
                      'img' => 'marketing/pianote/products/classical-piano-pieces/collage-01a.jpg',
                  ],
-             
+
              ];
-           
+
              $scaleAnimation = 'cursor-pointer transform transition duration-500 ease-in-out hover:scale-105';
              $handleClick = 'handleClick';
             @endphp
 
             @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
-                <div class="flex flex-wrap items-center">                
+                <div class="flex flex-wrap items-center">
                     <div class="w-1/2 md:w-1/4">
                         <div class="p-3 w-full">
                             <div @click="handleClick(1)"
-                                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
                             </div>
                         </div>
                         <div class="p-3 w-full">
                             <div @click="handleClick(3)"
-                                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                     <div class="w-1/2 md:w-1/4">
                         <div class="p-3 w-full">
                             <div @click="handleClick(2)"
-                                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
                             </div>
                         </div>
@@ -258,7 +258,7 @@
                     <div class="w-1/2 md:w-1/4">
                         <div class="p-3 w-full">
                             <div @click="handleClick(0)"
-                                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
                             </div>
                         </div>
@@ -266,13 +266,13 @@
                     <div class="w-1/2 md:w-1/4">
                         <div class="p-3 w-full">
                             <div @click="handleClick(5)"
-                                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[5]['img'] }}')">
                             </div>
                         </div>
                         <div class="p-3 w-full">
                             <div  @click="handleClick(4)"
-                                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')">
                             </div>
                         </div>

@@ -31,7 +31,7 @@
             }
         }
         .img-toggle.active {
-            display:block;
+            display:block!important;
         }
 
         .dropdowns {
@@ -61,10 +61,10 @@
             overflow: hidden;
         }
         .dropdowns .dropdown.active .description {
-            visibility: visible;
-            opacity: 1;
-            height: auto;
-            max-height: 400px;
+            visibility: visible!important;
+            opacity: 1!important;
+            height: auto!important;
+            max-height: 400px!important;
         }
         .splide__arrow:focus {
         outline: none;
@@ -111,7 +111,7 @@
         <video class="object-cover w-full h-full relative z-0" poster="" src="https://player.vimeo.com/progressive_redirect/playback/696274730/rendition/1080p?loc=external&signature=a2e19f58b044993d2561fbeaabcd4855ec9d1f577a7bba332fc5a7e7221cb23a" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
     </header>
 
-    <section class="text-left text-white px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/bg.jpg">
+    <section class="text-left px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/bg.jpg">
         <div class="container mx-auto max-w-6xl relative pb-8 md:py-10 lg:py-16">
             <div class="mx-auto mb-4 sm:mb-0 sm:absolute sm:top-0 sm:right-0 z-10 max-w-xs sm:max-w-full w-full sm:w-1/2 lg:w-7/12">
                 <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-up2.png" alt="quietkick pedal">

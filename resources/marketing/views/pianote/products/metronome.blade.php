@@ -221,19 +221,19 @@
             @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
             <div class="flex flex-wrap items-center mb-12">
                 <div class="w-full sm:w-1/2 sm:order-1">
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl  {{ $scaleAnimation }}"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
                 </div>
                 <div class="w-1/2 sm:w-1/4">
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90{{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
                 </div>
                 <div class="w-1/2 sm:w-1/4 sm:order-2">
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
                 </div>
             </div>
