@@ -466,7 +466,18 @@ class ContentQueryBuilder extends QueryBuilder
 
         foreach ($includedFields as $includedFieldIndex => $includedField) {
             if (!empty($includedField['associated_table']['table'])) {
-                $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+                $joinExists = false;
+
+                foreach($this->joins ?? [] as $join)
+                {
+                    if($join->table == $includedField['associated_table']['table'].' as '.$includedField['associated_table']['alias'])
+                    {
+                        $joinExists = true;
+                    }
+                }
+                if(!$joinExists) {
+                    $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+                }
             } else {
                 $includedFieldsGroupedByTable[$includedField['name']][] = $includedField;
             }
