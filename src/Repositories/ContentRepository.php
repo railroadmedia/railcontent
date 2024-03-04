@@ -1398,6 +1398,7 @@ class ContentRepository extends RepositoryBase
                     ->groupByField($this->groupByFields);
             $query = $subQuery;
 
+            //Group by instructors
             if ($this->groupByFields['is_a_related_content']) {
                 $query =
                     $this->query()
@@ -1427,6 +1428,7 @@ class ContentRepository extends RepositoryBase
                 $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
             }
 
+            //Group by associated table(style/genre, bpm, essentials, creativity, lifestyle ...)
             if (!empty($this->groupByFields['associated_table'])) {
                 $orderBy = ('m'.'.'.$this->groupByFields['associated_table']['column']);
                 $db = (new ContentQueryBuilder(
@@ -1455,6 +1457,7 @@ class ContentRepository extends RepositoryBase
                         ->orderByRaw($orderBy.' '.$this->orderDirection)
                         ->getToArray();
             } else {
+                //Group by content's column: artist
                 $contentRows =
                     $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
                         ->directPaginate($this->page, $this->limit)
@@ -2615,7 +2618,7 @@ class ContentRepository extends RepositoryBase
             sort($filterOptionsArray[$filterOptionName]);
         }
 
-        // todo: handle instructors which need to be pulled from matching content rows
+        // only for the old mobile app builds
         if (!empty($filterOptionsArray['instructor_id']) && in_array('instructor', $filterOptions)) {
             $instructorRows =
                 $this->query()
@@ -2733,110 +2736,6 @@ class ContentRepository extends RepositoryBase
             $dataLookup[$datum['id']] = $datum;
         }
         return $dataLookup;
-    }
-
-    private function getFilterOptionsFromCompiledColumn(ContentQueryBuilder $contentQueryBuilder)
-    {
-        $filterOptionsArray = [];
-
-        $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'instructor',
-                'style',
-                'topic',
-                'focus',
-                'bpm',
-                'difficulty',
-                'artist',
-                'difficulty_range',
-                'type',
-                'instrument',
-            ];
-
-        $filterOptions = array_unique($filterOptions);
-
-        foreach ($filterOptions as $filterOption) {
-            $filterOptionsArray[$filterOption] = [];
-        }
-
-        // todo: this needs to be made much more efficient
-        $contentRows = $contentQueryBuilder->get();
-
-        foreach ($contentRows as $contentRowIndex => $contentRow) {
-            $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
-            foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
-                if ($filterOptionName == 'instructor' && isset($contentRowCompiledColumnValues[$filterOptionName])) {
-                    $instructors = $contentRowCompiledColumnValues[$filterOptionName];
-                    if (isset($instructors['id'])) {
-                        $instructors = [$instructors];
-                    }
-                    if (!is_array($instructors)) {
-                        continue;
-                    }
-                    foreach ($instructors as $instructor) {
-                        if (isset($instructor['id']) && !isset($compiledViewData[$instructor['id']])) {
-                            $compiledViewData[$instructor['id']] = json_decode(
-                                $instructor['compiled_view_data'] ?? '',
-                                true
-                            );
-
-                            $filterOptionsArray[$filterOptionName][] = [
-                                'id' => $instructor['id'],
-                                'name' => $instructor['name'],
-                                'fields' => [
-                                    [
-                                        "id" => $instructor['id'],
-                                        "key" => "name",
-                                        "value" => $instructor['name'],
-                                    ],
-                                ],
-                                'data' => [
-                                    [
-                                        "id" => $instructor['id'],
-                                        "key" => "head_shot_picture_url",
-                                        "value" => $compiledViewData[$instructor['id']]['head_shot_picture_url']
-                                            ??
-                                            $compiledViewData[$instructor['id']]['avatar_image_url']
-                                            ??
-                                            '',
-                                    ],
-                                ],
-                            ];
-                        }
-                    }
-                } elseif (isset($contentRowCompiledColumnValues[$filterOptionName])) {
-                    $filterOptionsArray[$filterOptionName] = array_merge(
-                        $filterOptionsArray[$filterOptionName] ?? [],
-                        (array)$contentRowCompiledColumnValues[$filterOptionName]
-                    );
-                }
-            }
-        }
-
-        foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
-            foreach ($filterOptionValue as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                if (!is_array($filterOptionValueToClean)) {
-                    $filterOptionValue[$filterOptionIndexToClean] = trim(
-                        ucwords(
-                            $filterOptionValueToClean
-                        )
-                    );
-                    $filterOptionsArray[$filterOptionName] = array_keys(array_flip($filterOptionValue));
-                    sort($filterOptionsArray[$filterOptionName]);
-                } else {
-                    $tempArr = array_unique(array_column($filterOptionValue, 'id'));
-                    $filterOptionsArray[$filterOptionName] = array_intersect_key($filterOptionValue, $tempArr);
-                    usort($filterOptionsArray[$filterOptionName], function ($a, $b) {
-                        if (is_array($a)) {
-                            return strncmp(strtolower($a['name']), strtolower($b['name']), 15);
-                        }
-
-                        return strncmp(strtolower($a), strtolower($b), 15);
-                    });
-                }
-            }
-        }
-
-        return $filterOptionsArray;
     }
 
     /**
