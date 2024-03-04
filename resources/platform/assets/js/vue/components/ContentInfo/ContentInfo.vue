@@ -1,60 +1,60 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import BreadCrumb from './Breadcrumb.vue';
-import ContentCatalogue from "../../vuesora/views/catalogues/ContentCatalogue";
+    import BreadCrumb from './Breadcrumb.vue';
+    import ContentCatalogue from "../../vuesora/views/catalogues/ContentCatalogue";
 
-const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo',
-    },
-    userId: {
-        type: String,
-        default: '',
-    },
-    breadcrumbs: {
-        type: [Array, Object],
-        default: {},
-    },
-    lessonList: {
-        type: Array,
-        default: () => []
-    },
-    lockUnowned: {
-        type: Boolean,
-        default: false,
-    },
-    contentDescription: {
-        type: String,
-        default: '',
-    },
-    contentChapters: {
-        type: Array,
-        default: () => []
-    },
-    instructors: {
-        type: Array,
-        default: () => []
-    },
-    lessonData: {
-        type: Array,
-        default: () => []
-    },
-});
-
-const chapterList = ref([]);
-
-onMounted(() => {
-    let chapters = [...props.contentChapters];
-
-    chapters.forEach((c) => {
-        let date = new Date(null);
-        date.setSeconds(c.chapter_timecode);
-        c.chapter_time = date.toISOString().substr(11, 8);
+    const props = defineProps({
+        brand: {
+            type: String,
+            default: 'drumeo',
+        },
+        userId: {
+            type: String,
+            default: '',
+        },
+        breadcrumbs: {
+            type: [Array, Object],
+            default: {},
+        },
+        lessonList: {
+            type: Array,
+            default: () => []
+        },
+        lockUnowned: {
+            type: Boolean,
+            default: false,
+        },
+        contentDescription: {
+            type: String,
+            default: '',
+        },
+        contentChapters: {
+            type: Array,
+            default: () => []
+        },
+        instructors: {
+            type: Array,
+            default: () => []
+        },
+        lessonData: {
+            type: Array,
+            default: () => []
+        },
     });
 
-    chapterList.value = chapters;
-});
+    const chapterList = ref([]);
+
+    onMounted(() => {
+        let chapters = [...props.contentChapters];
+
+        chapters.forEach((c) => {
+            let date = new Date(null);
+            date.setSeconds(c.chapter_timecode);
+            c.chapter_time = date.toISOString().substr(11, 8);
+        });
+
+        chapterList.value = chapters;
+    });
 </script>
 
 <template>
@@ -99,7 +99,7 @@ onMounted(() => {
 
             <!-- CHAPTER MARKERS -->
             <div v-if="chapterList && chapterList.length" class="tw-flex tw-flex-row tw-mb-3">
-                <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
+                <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
                     <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
                     <template v-for="chapter in chapterList">
                         <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode']">
@@ -112,11 +112,11 @@ onMounted(() => {
 
             <!-- INSTRUCTORS -->
             <template v-if="instructors && instructors.length"  >
-                <div class="tw-flex tw-flex-row mb-3"
-                    v-for="(instructor, index) in instructors"
-                    :key="index"
+                <div class="tw-flex tw-flex-row mb-3" 
+                    v-for="(instructor, i) in instructors" 
+                    :key="i"
                 >
-                    <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
+                    <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
                         <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase">About {{ instructor.name }}</h6>
                         <div v-if="instructor.data.find((i) => i.key === 'biography')" v-html="instructor.data.find((i) => i.key === 'biography').value"></div>
                     </div>
