@@ -17,6 +17,7 @@
                         :key="'grid' + item.id"
                         :item="item"
                         :isGroupedView="isGroupedView"
+                        :add-margin-bottom="addMarginBottom"
                         @addToList="addToList"
                         @progressReset="resetProgressEventHandler"
                     />
@@ -54,6 +55,10 @@ const props = defineProps({
     noResultsMessage: {
         type: String,
         default: 'No lessons found',
+    },
+    addMarginBottom: {
+        type: Boolean,
+        default: () => true,
     },
 });
 
