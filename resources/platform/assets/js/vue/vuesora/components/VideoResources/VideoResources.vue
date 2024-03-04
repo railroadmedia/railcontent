@@ -449,7 +449,7 @@ export default {
             if (this.artist) {
                 return this.artist;
             }
-            return this.instructors.length > 0 ? this.instructors[0].name : brand.toUpperCase();
+            return this.instructors.length > 0 ? this.instructors[0].name : this.brand.toUpperCase();
         }
     },
     mounted() {
