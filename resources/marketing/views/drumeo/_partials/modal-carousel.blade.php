@@ -88,7 +88,7 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
                                             <source media="(min-width: 768px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/' + slide">
                                             <source media="(min-width: 640px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1150x0/filters:quality(95)/' + slide">
                                             <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/' + slide"
-                                                alt="product image" class="w-full h-full object-cover overflow-hidden rounded-xl">
+                                                alt="product image" class="w-full h-full bg-white object-contain overflow-hidden rounded-xl">
                                         </picture>
                                     </li>
                                 </template>
