@@ -2507,6 +2507,7 @@ class ContentRepository extends RepositoryBase
                 'alias' => '_rci'
             ],
             'genre' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcso'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
