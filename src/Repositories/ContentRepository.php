@@ -1655,41 +1655,43 @@ class ContentRepository extends RepositoryBase
     {
         $value = Arr::first(explode(' (', $value));
 
-        $difficultyMapping = config('railcontent.difficulty_map') ?? [];
-        $difficultyValues = array_keys($difficultyMapping, $value);
+        if($name == 'difficulty') {
+            $difficultyMapping = config('railcontent.difficulty_map') ?? [];
+            $difficultyValues = array_keys($difficultyMapping, $value);
 
-        foreach($difficultyValues ?? [] as $difficultyInt){
-            $this->includedFields[] = [
-                'name' => $name,
-                'value' => $difficultyInt,
-                'type' => $type,
-                'operator' => $operator,
-                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
-                'is_content_column' => in_array(
-                    $name,
-                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-                ),
-            ];
+            foreach ($difficultyValues ?? [] as $difficultyInt) {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $difficultyInt,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
+        }elseif ($name == 'instrumentless') {
+            $instrumentlessMapping = config('railcontent.instrumentless_map.'.config('railcontent.brand')) ?? [];
+            $instrumentlessIndex = array_search($value, $instrumentlessMapping);
+            if (isset($instrumentlessIndex)) {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $instrumentlessIndex,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
         }
-        $instrumentlessMapping = config('railcontent.instrumentless_map.'.config('railcontent.brand')) ?? [];
-        $instrumentlessIndex =  array_search($value,$instrumentlessMapping);
-        if(isset($instrumentlessIndex)){
-            $this->includedFields[] = [
-                'name' => $name,
-                'value' => $instrumentlessIndex,
-                'type' => $type,
-                'operator' => $operator,
-                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
-                'is_content_column' => in_array(
-                    $name,
-                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-                ),
-            ];
-        }
-        if($name == 'type'){
+        elseif($name == 'type'){
             $value = strtolower(str_replace(" ", "-", $value));
-        }
-        if($name != 'instrumentless') {
+        }elseif($name == 'bpm') {
             $bpmMapping = config('railcontent.bpm_map') ?? [];
             if (isset($bpmMapping[$value])) {
                 $this->includedFields[] = [
@@ -1705,7 +1707,8 @@ class ContentRepository extends RepositoryBase
                         config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
                     ),
                 ];
-            } else {
+            }
+        } else {
                 $this->includedFields[] = [
                     'name' => $name,
                     'value' => $value,
@@ -1718,7 +1721,7 @@ class ContentRepository extends RepositoryBase
                     ),
                 ];
             }
-        }
+
 
         return $this;
     }
@@ -2912,45 +2915,13 @@ class ContentRepository extends RepositoryBase
             'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
         ];
 
-        $brand = config('railcontent.brand');
-        if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
-              $type =
-                ($this->typesToInclude[0] === 'song' ||
-                    $this->typesToInclude[0] === 'course' ||
-                    $this->typesToInclude[0] === 'rudiment' ||
-                    $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' : $this->typesToInclude[0];
-            $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
-            $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
-            $type = (count($this->typesToInclude) > 3) ? 'all' : $type;
-            self::$catalogMetaAllowableFilters =
-                (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
-        }elseif (in_array('instructor', Arr::pluck($this->requiredFields,'name'))){
-            self::$catalogMetaAllowableFilters =
-                (config('railcontent.cataloguesMetadata.'.$brand.'.coach-lessons.allowableFilters'));
-        }
-
-        $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'instructor',
-                'genre',
-                'topic',
-                'focus',
-                'bpm',
-                'essentials',
-                'theory',
-                'creativity',
-                'lifestyle',
-                'type',
-                'gear',
-            ];
-
-        $filterOptions = array_unique($filterOptions);
+        $filterOptions = $this->setFilterOptionsBasedOnIncludedTypes();
 
         $includedFields = collect($this->includedFields);
         $initialFilters = $this->includedFields;
 
         foreach ($filterOptions as $filterOption) {
             $filterOptionTableName = $filterNameToTableNameAndColumnName[$filterOption]['table'] ?? null;
-            $filterOptionTableAliasName = $filterNameToTableNameAndColumnName[$filterOption]['alias'] ?? null;
             $filterOptionColumnName = $filterNameToTableNameAndColumnName[$filterOption]['column'] ?? null;
 
             if (empty($filterOptionTableName) || empty($filterOptionColumnName)) {
@@ -3048,5 +3019,48 @@ class ContentRepository extends RepositoryBase
         }
 
         return $filterOptionsArray;
+    }
+
+    /**
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string[]
+     */
+    private function setFilterOptionsBasedOnIncludedTypes()
+    : mixed
+    {
+        $brand = config('railcontent.brand');
+        if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
+            $type =
+                ($this->typesToInclude[0] === 'song' ||
+                    $this->typesToInclude[0] === 'course' ||
+                    $this->typesToInclude[0] === 'rudiment' ||
+                    $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' :
+                    $this->typesToInclude[0];
+            $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
+            $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
+            $type = (count($this->typesToInclude) > 3) ? 'all' : $type;
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
+        } elseif (in_array('instructor', Arr::pluck($this->requiredFields, 'name'))) {
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.coach-lessons.allowableFilters'));
+        }
+
+        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'instructor',
+                'genre',
+                'topic',
+                'focus',
+                'bpm',
+                'essentials',
+                'theory',
+                'creativity',
+                'lifestyle',
+                'type',
+                'gear',
+            ];
+
+        $filterOptions = array_unique($filterOptions);
+
+        return $filterOptions;
     }
 }
