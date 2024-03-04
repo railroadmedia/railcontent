@@ -14,13 +14,11 @@
     ],
     splide: null,
     handleClick: function(index) {
-        console.log('handleClick called with index:', index);
         this.open = true;
         this.imgIndex = index;
         this.slide = this.slides[index];
     },
     initSplide: function() {
-        console.log('initSplide called');
         if (this.splide) {
             this.splide.destroy();
         }
@@ -45,10 +43,8 @@
                 }
             },
         }).mount();
-        console.log('Splide mounted');
     },
     close: function() {
-        console.log('close called');
         this.open = false;
         if (this.splide) {
             setTimeout(() => {
@@ -76,7 +72,7 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
             class="relative min-h-screen flex items-start justify-center px-4 pt-40 sm:pt-28"
             style="z-index: 1006;">
             <!-- Close button -->
-            <i @click="close()" class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl" style="z-index: 1005;"></i>
+            <i x-on:click="close" class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl" style="z-index: 1005;"></i>
             <!-- Content -->
             <div x-on:click.stop x-trap.noscroll.inert="open"
                 class="relative w-full overflow-y-visible max-w-6xl">
