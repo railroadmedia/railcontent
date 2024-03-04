@@ -302,6 +302,9 @@
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
 
+    @hasSection('promoDetails')
+        @yield('promoDetails')
+    @endif
     @php
         $testimonials = $pianote['testimonials'];
         $youtube = convertNumber(Prices::$pianoteYoutubeSubsc);
