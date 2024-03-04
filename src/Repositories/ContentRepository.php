@@ -1558,12 +1558,18 @@ class ContentRepository extends RepositoryBase
             $subQuery->restrictFollowedContent();
         }
 
-        return $this->connection()
+        $count = $this->connection()
             ->table(
                 $this->databaseManager->raw('(' . $subQuery->toSql() . ') as results')
             )
             ->addBinding($subQuery->getBindings())
             ->count();
+        
+        //All lessons page should display max 100 lessons
+        if(count($this->typesToInclude) > 10 && $count > 100){
+            return 100;
+        }
+        return $count;
     }
 
     /**
@@ -1657,30 +1663,12 @@ class ContentRepository extends RepositoryBase
                 ),
             ];
         }
-        
-        if($name == 'type'){
-            $value = strtolower(str_replace(" ", "-", $value));
-        }
-
-        $bpmMapping = config('railcontent.bpm_map') ?? [];
-        if(isset($bpmMapping[$value])){
+        $instrumentlessMapping = config('railcontent.instrumentless_map.'.config('railcontent.brand')) ?? [];
+        $instrumentlessIndex =  array_search($value,$instrumentlessMapping);
+        if(isset($instrumentlessIndex)){
             $this->includedFields[] = [
                 'name' => $name,
-                'value' => $bpmMapping[$value]['min'],
-                'min' => $bpmMapping[$value]['min'],
-                'max' => $bpmMapping[$value]['max'],
-                'type' => 'integer',
-                'operator' => 'BETWEEN',
-                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
-                'is_content_column' => in_array(
-                    $name,
-                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-                ),
-            ];
-        } else {
-            $this->includedFields[] = [
-                'name' => $name,
-                'value' => $value,
+                'value' => $instrumentlessIndex,
                 'type' => $type,
                 'operator' => $operator,
                 'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
@@ -1689,6 +1677,39 @@ class ContentRepository extends RepositoryBase
                     config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
                 ),
             ];
+        }
+        if($name == 'type'){
+            $value = strtolower(str_replace(" ", "-", $value));
+        }
+        if($name != 'instrumentless') {
+            $bpmMapping = config('railcontent.bpm_map') ?? [];
+            if (isset($bpmMapping[$value])) {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $bpmMapping[$value]['min'],
+                    'min' => $bpmMapping[$value]['min'],
+                    'max' => $bpmMapping[$value]['max'],
+                    'type' => 'integer',
+                    'operator' => 'BETWEEN',
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            } else {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $value,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
         }
 
         return $this;

@@ -1215,8 +1215,8 @@ class ContentService
         $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
         if ($pullFilterFields && !empty($filterFields['difficulty'])) {
             if (ContentRepository::$countFilterOptionItems == 1) {
-                $filterFields['difficulty'] = $this->difficultyFilterOptionsMapping(
-                    $filterFields['difficulty']
+                $filterFields['difficulty'] = $this->filterOptionsMapping(
+                    $filterFields['difficulty'], 'railcontent.difficulty_map'
                 );
             } else {
                 $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
@@ -1237,6 +1237,14 @@ class ContentService
         if ($pullFilterFields && !empty($filterFields['type'])) {
             if (ContentRepository::$countFilterOptionItems == 1) {
                 $filterFields['type'] = array_map(function($m) { return ucwords(str_replace("-", " ", $m));}, $filterFields['type']);
+            }
+        }
+
+        if ($pullFilterFields && !empty($filterFields['instrumentless'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['instrumentless'] = $this->filterOptionsMapping(
+                    $filterFields['instrumentless'], 'railcontent.instrumentless_map.'.config('railcontent.brand')
+                );
             }
         }
 
@@ -2953,14 +2961,14 @@ class ContentService
         return $results;
     }
 
-    private function difficultyFilterOptionsMapping($difficultyOptions)
+    private function filterOptionsMapping($difficultyOptions, $rules = 'railcontent.difficulty_map')
     {
         $mappedDifficulty = [];
         foreach ($difficultyOptions as $index => $difficultyS) {
             $difficultyArray = (explode(' (', $difficultyS));
             $difficulty = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
             $difficultyNr = str_replace(')', '', $difficultyArray[1]);
-            $mapping = config('railcontent.difficulty_map') ?? [];
+            $mapping = config($rules) ?? [];
             if (!empty($mapping[$difficulty] ?? [])) {
                 $mappedDifficulty[$mapping[$difficulty]] =
                     ($mappedDifficulty[$mapping[$difficulty]] ?? 0) + $difficultyNr;
