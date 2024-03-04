@@ -70,13 +70,13 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
         aria-modal="true" x-id="['modal-title']" :aria-labelledby="$id('modal-title')"
         class="fixed inset-0 overflow-y-auto">
         <!-- Overlay -->
-        <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80 z-50" style="z-index: 1005;"></div>
+        <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-80" style="z-index: 1005;"></div>
         <!-- Panel -->
         <div x-show="open" x-transition.opacity x-on:click="open = false"
             class="relative min-h-screen flex items-start justify-center px-4 pt-40 sm:pt-28"
             style="z-index: 1006;">
             <!-- Close button -->
-            <i @click="close()" class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl z-1005" style="z-index: 1005;"></i>
+            <i @click="close()" class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl" style="z-index: 1005;"></i>
             <!-- Content -->
             <div x-on:click.stop x-trap.noscroll.inert="open"
                 class="relative w-full overflow-y-visible max-w-6xl">

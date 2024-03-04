@@ -191,7 +191,7 @@
     </section>
 
     <section class="text-center px-5 py-10 md:py-20 lg:py-24 text-white"  style="background-color:#010b1a;" >
-        <div class="container mx-auto relative z-10 max-w-5xl">
+        <div class="container mx-auto relative max-w-5xl">
             <h2><strong>The metronome you’ll<br class="sm:hidden">  WANT to use.</strong></h2>
             <p class="leading-tight mt-2 mb-5 sm:mb-10 mx-auto max-w-2xl">
                 Let’s be honest. Piano players don’t like metronomes. But you’ll love using this one. The beautiful styling and quality feel are so much better than any app. And precision German manufacturing will mean your metronome will last as long as you keep playing.</p>
@@ -221,19 +221,19 @@
             @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
             <div class="flex flex-wrap items-center mb-12">
                 <div class="w-full sm:w-1/2 sm:order-1">
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl  {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
                 </div>
                 <div class="w-1/2 sm:w-1/4">
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
                 </div>
                 <div class="w-1/2 sm:w-1/4 sm:order-2">
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
+                    <div class="p-2 w-full"><div @click="handleClick(0)" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl {{ $scaleAnimation }}"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
                 </div>
             </div>
