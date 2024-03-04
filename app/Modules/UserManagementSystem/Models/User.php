@@ -983,7 +983,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function isEnrolledIntoCohort()
     {
-        $cohortPermissionsIds = config('railcontent.cohort_permisssion_ids',[]);
+        $cohortPermissionsIds = config('railcontent.cohort_permission_ids',[]);
         return $this->hasMany(
             UserAccessPermission::class,
             "user_id"
