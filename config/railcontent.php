@@ -517,7 +517,7 @@ return [
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'allowableFilters' => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
                 'tabs' => [
                     [
@@ -1162,7 +1162,7 @@ return [
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
                 'tabs' => [
                     [
@@ -1596,7 +1596,7 @@ return [
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -1925,7 +1925,7 @@ return [
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -2561,6 +2561,7 @@ return [
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
         'instrument' => 'instrument',
+        'instrumentless' => 'instrumentless',
     ],
     'content_hierarchy' => [
         'drumeo' => [
@@ -2904,4 +2905,23 @@ return [
         'Country/Folk' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/ad7aeb00-3630-46eb-e5fe-c182bbc20800/public',
         'Hip-Hop/Rap'=>'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/a2602e1d-f9f6-4917-8968-153c2d50aa00/public',
     ],
+        'instrumentless_map' =>
+        [
+            'drumeo' => [
+                '0' => 'Full Song Only',
+                '1' => 'Instrument Removed',
+             ],
+            'pianote' => [
+                '0' => 'Full Song Only',
+                '1' => 'Instrument Removed',
+            ],
+            'guitareo' => [
+                '0' => 'Full Song Only',
+                '1' => 'Instrument Removed',
+            ],
+            'singeo' => [
+                '0' => 'Full Song Only',
+                '1' => 'Vocals Removed',
+            ],
+        ],
 ];
