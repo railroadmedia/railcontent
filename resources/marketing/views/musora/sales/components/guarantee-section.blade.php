@@ -5,7 +5,7 @@
         :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
         x-intersect.once="lazyLoad = true; $refs.guaranteeBadge.src = $refs.guaranteeBadge.dataset.src;">
         <picture>
-            <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/{!! $badge !!}">
+            <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/{!! $badge !!}">
             <img x-ref="guaranteeBadge"
                 class="h-28 md:h-32 -mt-16 md:-mt-20 mb-5 sm:mb-8 transition-opacity opacity-0 duration-300"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/35x0/filters:quality(1)/{!! $badge !!}"
