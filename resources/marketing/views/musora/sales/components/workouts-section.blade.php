@@ -64,8 +64,8 @@
                     x-intersect.once="lazyLoad = true; $refs.workout.src = $refs.workout.dataset.src;">
                     <div class="absolute inset-0 w-full h-full rounded-xl object-cover bg-top" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
                         <picture>
-                            <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}"
-                                    media="(min-width:640px)">
+                            <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $workoutsBG }}" media="(min-width:1024px)">
+                            <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/{{ $workoutsBG }}" media="(min-width:640px)">
                             <img x-ref="workout"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/5x0/filters:quality(10)/filters:blur(5)/{{ $workoutsBG }}"
                                 data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $workoutsBG }}"
