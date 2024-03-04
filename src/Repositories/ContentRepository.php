@@ -1601,6 +1601,11 @@ class ContentRepository extends RepositoryBase
                     ->unique();
 
             $possibleContentFields = $this->getFilterOptionsWithCounting($selectedFilterCategories);
+            foreach ($this->requiredFields as $requiredField){
+                if(array_key_exists($requiredField['name'], $possibleContentFields)){
+                    unset($possibleContentFields[$requiredField['name']]);
+                }
+            }
         }
 
         return $possibleContentFields;
