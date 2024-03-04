@@ -65,7 +65,7 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
 
     <!-- Modal -->
     <div x-show="open"
-        style="display: none; z-index: 2147483002;"
+        style="display: none; z-index: 2147483004;"
         x-on:keydown.escape.prevent.stop="open = false" role="dialog"
         aria-modal="true" x-id="['modal-title']" :aria-labelledby="$id('modal-title')"
         class="fixed inset-0 overflow-y-auto">

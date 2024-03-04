@@ -719,7 +719,7 @@
                     </div>
                 </div>
 
-                <div class="h-96 w-full md:w-1/4 md:order-3 order-2">
+                <div class="h-96 w-full md:w-1/4 md:order-3 order-2 p-2">
                     <div class="flex flex-wrap">
                         <div class="w-1/2 p-2">
                             <div @click="handleClick(1)"
@@ -735,7 +735,7 @@
                         </div>
                     </div>
 
-                    <div class="p-2">
+                    <div class="w-full p-2">
                         <div @click="handleClick(3)" 
                             class="h-48 bg-center bg-cover rounded-xl"
                             style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[3]['img'] }}')">

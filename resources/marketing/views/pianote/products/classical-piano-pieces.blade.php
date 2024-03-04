@@ -62,6 +62,9 @@
         .image-modal-arrow-right::before {
             content: "\f105";
         }
+        .splide__arrow:focus {
+        outline: none;
+         }
         header {
             background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg);
             background-size: 290px;
@@ -309,7 +312,7 @@
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
