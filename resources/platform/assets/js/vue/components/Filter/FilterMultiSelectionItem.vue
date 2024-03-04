@@ -1,7 +1,7 @@
 <template>
     <ul class="tw-text-sm">
         <div class="md:tw-static tw-sticky tw-top-0">
-            <div class="tw-flex tw-justify-between tw-items-center tw-py-[15px] tw-px-4 lg:tw-px-0 tw-bg-[#F9F9F9] dark:tw-bg-[#081825] lg:tw-bg-transparent lg:dark:tw-bg-transparent">
+            <div class="tw-flex tw-justify-between tw-items-center tw-py-[15px] lg:tw-py-0 lg:tw-mb-[15px] tw-px-4 lg:tw-px-0 tw-bg-[#F9F9F9] dark:tw-bg-[#081825] lg:tw-bg-transparent lg:dark:tw-bg-transparent">
                 <div class="tw-uppercase tw-font-bold">{{ category }}</div>
                 <button class="tw-font-bold lg:tw-hidden" @click="toggleCollapse">&mdash;</button>
             </div>
