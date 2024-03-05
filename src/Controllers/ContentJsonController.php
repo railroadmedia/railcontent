@@ -102,11 +102,11 @@ class ContentJsonController extends Controller
             }
         }
 
-        $group_by = false;
+        $group_by = null;
         $contentTypes = $request->get('included_types', []);
 
         [$group_by, $required_fields, $included_fields] =
-            $this->extractFields($request, $group_by, $required_fields, $included_fields);
+            $this->extractFields($request, $required_fields, $included_fields, $group_by);
 
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -124,7 +124,7 @@ class ContentJsonController extends Controller
             true,
             $request->get('only_subscribed', false),
             $futureScheduledContentOnly,
-            $group_by ?? false,
+            $group_by ?? null,
         );
 
         $filters = $contentData['filter_options'];
@@ -539,13 +539,13 @@ class ContentJsonController extends Controller
     }
 
     /**
- * @param Request $request
- * @param string $group_by
- * @param mixed $required_fields
- * @param mixed $included_fields
- * @return array
- */
-    private function extractFields(Request $request, string $group_by, mixed $required_fields, mixed $included_fields)
+     * @param Request $request
+     * @param mixed $required_fields
+     * @param mixed $included_fields
+     * @param string|null $group_by
+     * @return array
+     */
+    private function extractFields(Request $request, mixed $required_fields, mixed $included_fields,?string $group_by )
     : array {
         $tabs = $request->get('tabs', $request->get('tab', false));
         if ($tabs) {
