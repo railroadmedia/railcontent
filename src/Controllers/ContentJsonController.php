@@ -547,10 +547,10 @@ class ContentJsonController extends Controller
  */
     private function extractFields(Request $request, string $group_by, mixed $required_fields, mixed $included_fields)
     : array {
-        if ($request->get('tabs', false)) {
-            $tabs = $request->get('tabs');
-            if (!is_array($request->get('tabs'))) {
-                $tabs = [$request->get('tabs')];
+        $tabs = $request->get('tabs', $request->get('tab', false));
+        if ($tabs) {
+            if (!is_array($tabs)) {
+                $tabs = [$tabs];
             }
             foreach ($tabs as $tab) {
                 $extra = explode(',', $tab);
