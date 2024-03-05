@@ -460,8 +460,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -506,8 +506,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -533,8 +533,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -560,8 +560,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -575,8 +575,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'instrument', 'topic'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -641,8 +641,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -671,8 +671,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -700,8 +700,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -716,8 +716,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -727,8 +727,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -803,8 +803,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -832,8 +832,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -861,8 +861,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1096,8 +1096,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1129,8 +1129,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1182,8 +1182,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -1213,8 +1213,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1233,8 +1233,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1244,8 +1244,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1275,8 +1275,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1295,8 +1295,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1306,8 +1306,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1326,8 +1326,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1337,8 +1337,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1368,8 +1368,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1411,8 +1411,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1442,8 +1442,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1521,8 +1521,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1551,8 +1551,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1588,8 +1588,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1614,8 +1614,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -1662,8 +1662,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1690,8 +1690,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1725,8 +1725,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1840,8 +1840,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1863,8 +1863,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1894,8 +1894,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1940,8 +1940,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1966,8 +1966,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -1993,8 +1993,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2020,8 +2020,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2047,8 +2047,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2140,8 +2140,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
