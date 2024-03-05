@@ -20,7 +20,7 @@ return new class extends Migration {
                 $table->string('essentials')->index();
                 $table->integer('position')->index();
 
-                $table->index(['essentials', 'content_id'], 'ec');
+                $table->index(['essentials', 'content_id'], 'essc');
             }
         );
         Schema::connection(config('railcontent.database_connection_name'))->create(
@@ -31,7 +31,7 @@ return new class extends Migration {
                 $table->string('theory')->index();
                 $table->integer('position')->index();
 
-                $table->index(['theory', 'content_id'], 'tc');
+                $table->index(['theory', 'content_id'], 'thec');
             }
         );
         Schema::connection(config('railcontent.database_connection_name'))->create(
