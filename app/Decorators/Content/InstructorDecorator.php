@@ -28,7 +28,7 @@ class InstructorDecorator extends ModeDecoratorBase
     {
         $contentsOfType = $contents->whereIn('type', ['style','artist']);
 
-        if (!$contentsOfType->isEmpty()) {
+        if ($contentsOfType->isNotEmpty()) {
             return $contents;
         }
 

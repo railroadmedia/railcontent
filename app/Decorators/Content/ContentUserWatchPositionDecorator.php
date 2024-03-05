@@ -32,7 +32,7 @@ class ContentUserWatchPositionDecorator extends \Railroad\Railcontent\Decorators
 
         $contentsOfType = $contents->whereIn('type', ['style','artist']);
 
-        if (!$contentsOfType->isEmpty()) {
+        if ($contentsOfType->isNotEmpty()) {
             return $contents;
         }
 
