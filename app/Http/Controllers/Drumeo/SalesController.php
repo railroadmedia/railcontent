@@ -79,6 +79,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
+    public function promoAnniversary()
+    {
+        return view('drumeo.sales.anniversary', ['theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
     public function choosePlanVDF()
     {
         return view('drumeo.sales.pages.vdf', ['theme' => 'drumeo']);
@@ -114,11 +118,6 @@ class SalesController extends BaseController
     public function lifetimeDiscount()
     {
         return view('drumeo.sales.pages.lifetime', ['theme' => 'drumeo', 'upgradeVersion' => true]);
-    }
-
-    public function Festival()
-    {
-        return view('drumeo.products.festival', ['theme' => 'drumeo']);
     }
     public function thirtyDayDrummer()
     {

@@ -18,7 +18,7 @@
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] sm:tw-h-[86px]">
           </template>
           <template v-else>
-            <span v-if="title" class="tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">
+            <span v-if="title" class="tw-text-[20px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">
               {{ title }}
             </span>
           </template>
@@ -57,7 +57,7 @@
             </div>
           </div>
         </div>
-        <PageHeaderRowInfo v-if="infoData" class="tw-mt-1" :class="{ 'tw-mb-2': $slots['ctas'] }" :infoData="infoData" />
+        <PageHeaderRowInfo v-if="infoData" class="sm:tw-mt-1" :class="{ 'tw-mb-2': $slots['ctas'] }" :infoData="infoData" />
       </div>
       <div class="tw-flex">
         <slot name="ctas"></slot>

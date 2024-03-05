@@ -1,6 +1,6 @@
 <template>
-    <ul class="lg:tw-w-[252px] tw-text-sm tw-mb-6 lg:tw-mb-0">
-        <div class="tw-flex tw-justify-between tw-items-center tw-py-[15px] tw-px-4 lg:tw-px-0 tw-bg-[#F9F9F9] dark:tw-bg-[#081825] md:tw-bg-transparent md:dark:tw-bg-transparent">
+    <ul class="tw-text-sm tw-mb-6 lg:tw-mb-0">
+        <div class="tw-flex tw-justify-between tw-items-center tw-py-[15px] lg:tw-py-0 lg:tw-mb-[15px] tw-px-4 lg:tw-px-0 tw-bg-[#F9F9F9] dark:tw-bg-[#081825] md:tw-bg-transparent md:dark:tw-bg-transparent">
             <div class="tw-uppercase tw-font-bold">{{ column.category }}</div>
             <button class="tw-font-bold lg:tw-hidden" @click="toggleCollapse">&mdash;</button>
         </div>

@@ -43,11 +43,11 @@
                              x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;"
                         >
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
                                         media="(min-width: 640px)">
                                 <img x-ref="image"
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/5x0/filters:quality(10)/filters:blur(5)/{{ $gridItem['image'] }}"
-                                    data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                    data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
                                      alt="{{ $gridItem['title'] }}"
                                      class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity"
                                      onload="this.classList.remove('opacity-0')">
@@ -74,11 +74,11 @@
                                 x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;"
                             >
                             <picture class="absolute inset-0 w-full h-full object-cover bg-center rounded-xl" style="background: linear-gradient(180deg, transparent, rgba(246, 248, 252, 0.9));">
-                                <source data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
                                         media="(min-width: 640px)">
                                 <img x-ref="image"
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/5x0/filters:quality(10)/filters:blur(5)/{{ $gridItem['image'] }}"
-                                    data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/{{ $gridItem['image'] }}"
+                                    data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $gridItem['image'] }}"
                                     alt="{{ $gridItem['title'] }}"
                                     class="w-full h-full object-cover rounded-xl opacity-0 transition-opacity"
                                     loading="lazy"

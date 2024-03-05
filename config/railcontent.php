@@ -387,6 +387,7 @@ return [
             //            \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
             \App\Decorators\Content\UrlDecorator::class,
+            \App\Decorators\Content\DefaultDifficultyDecorator::class,
         ],
         'group' => [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
@@ -459,8 +460,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -505,8 +506,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -516,8 +517,8 @@ return [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
                 'tabs' => [
                     [
@@ -532,8 +533,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -559,8 +560,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -574,8 +575,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'instrument', 'topic'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -640,8 +641,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -670,8 +671,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -699,8 +700,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -715,8 +716,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -726,8 +727,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -802,8 +803,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -831,8 +832,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -860,8 +861,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1095,8 +1096,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1128,8 +1129,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1165,7 +1166,8 @@ return [
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
                 'tabs' => [
                     [
@@ -1180,8 +1182,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -1211,8 +1213,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1231,8 +1233,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1242,8 +1244,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1273,8 +1275,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1293,8 +1295,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1304,8 +1306,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1324,8 +1326,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials'],
                 'tabs' => [
                     [
-                        'name' => 'All',
-                        'short_name' => 'ALL',
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
                     [
@@ -1335,8 +1337,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1366,8 +1368,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1409,8 +1411,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1440,8 +1442,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1519,8 +1521,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1549,8 +1551,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1586,8 +1588,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1597,8 +1599,8 @@ return [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'genre', 'lifestyle'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -1612,8 +1614,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -1660,8 +1662,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1688,8 +1690,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1723,8 +1725,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1838,8 +1840,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1861,8 +1863,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1892,8 +1894,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1938,8 +1940,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -1949,8 +1951,8 @@ return [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'genre'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre','instrumentless'],
+                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -1964,8 +1966,8 @@ return [
                         'value' => ['artist'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style']
                     ],
@@ -1991,8 +1993,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2018,8 +2020,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2045,8 +2047,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2138,8 +2140,8 @@ return [
                         'value' => ['instructor'],
                     ],
                     [
-                        'name' => 'Genre',
-                        'short_name' => 'Genre',
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
                         'is_group_by' => true,
                         'value' => ['style'],
                     ],
@@ -2585,6 +2587,7 @@ return [
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
         'instrument' => 'instrument',
+        'instrumentless' => 'instrumentless',
     ],
     'content_hierarchy' => [
         'drumeo' => [
@@ -2928,4 +2931,23 @@ return [
         'Country/Folk' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/ad7aeb00-3630-46eb-e5fe-c182bbc20800/public',
         'Hip-Hop/Rap'=>'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/a2602e1d-f9f6-4917-8968-153c2d50aa00/public',
     ],
+        'instrumentless_map' =>
+        [
+            'drumeo' => [
+                '0' => 'Full Song Only',
+                '1' => 'Instrument Removed',
+             ],
+            'pianote' => [
+                '0' => 'Full Song Only',
+                '1' => 'Instrument Removed',
+            ],
+            'guitareo' => [
+                '0' => 'Full Song Only',
+                '1' => 'Instrument Removed',
+            ],
+            'singeo' => [
+                '0' => 'Full Song Only',
+                '1' => 'Vocals Removed',
+            ],
+        ],
 ];

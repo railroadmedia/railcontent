@@ -16,7 +16,7 @@
                             <template v-slot:content>
                                 <div class="tw-max-w-[350px]">
                                     <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Challenge?</h1>
-                                    <div class="tw-min-w-[350px]">{{ infoText['challenge']['content'] }}</div>
+                                    <div>{{ infoText['challenge']['content'] }}</div>
                                 </div>
                             </template>
                         </Tooltip>
@@ -51,7 +51,7 @@
                             <template v-slot:content>
                                 <div class="tw-max-w-[350px]">
                                     <h1 class="tw-text-lg tw-font-extrabold tw-mb-2">What is a Workout?</h1>
-                                    <p>{{ infoText['workout']['content'] }}</p>
+                                    <div>{{ infoText['workout']['content'] }}</div>
                                 </div>
                             </template>
                         </Tooltip>
