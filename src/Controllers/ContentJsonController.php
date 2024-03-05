@@ -572,7 +572,7 @@ class ContentJsonController extends Controller
             $instructors =
                 $this->contentService->getWhereTypeInAndStatusAndField(
                     ['instructor'],
-                    ['published'],
+                    'published',
                     'name',
                     '%'.$request->get('title').'%',
                     'string',
