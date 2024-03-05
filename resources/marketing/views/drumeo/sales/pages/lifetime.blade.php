@@ -46,32 +46,34 @@
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
         <div class="container mx-auto">
             <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
-            <h6 class="leading-tight mt-3 text-musora uppercase"> Only
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                left</h6>
+            <h6 class="leading-tight mt-3 text-musora uppercase">
+                @if($stock > 0)
+                    Only
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                         </span>
+                    left
+                @else
+                    &nbsp;
+                @endif
+            </h6>
             <div class="w-full mx-auto my-4 sm:my-8 " style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/918163289" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
                 </div>
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
-                <h2 class="leading-none mb-1">
-                    @if(!empty($upgradeVersion))
-                        <s class="opacity-60">$1200</s> <strong>$960</strong>
-                    @else
-                        <strong>$1200</strong>
-                    @endif
-                </h2>
+                <h2 class="leading-none mb-1"><strong>$1200</strong></h2>
                 <p class="leading-tight text-sm"><em>Payment plans available.</em></p>
-                <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-{{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
-{{--                <p class="mt-4 leading-tight text-musora">ONLY <s class='opacity-60'>500</s>  {{ $stock }} SPOTS AVAILABLE</p>--}}
+                @if($stock > 0)
+                    <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
+                @else
+                    <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
+                @endif
             </div>
         </div>
     </section>
@@ -139,6 +141,23 @@
     </section>
 
     @php
+    if($stock == 123) {
+        $bonuses = [
+            [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/gregg-bissonette-masterclass-card.webp',
+                'description' => 'A Live Masterclass With Gregg Bissonette',
+            ],
+            [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/drumsticks-card.webp',
+                'description' => '12 Pairs Of Drumsticks',
+                'price' => 155.40,
+                'shipping' => true,
+            ],
+        ];
+        $buttonLink = '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[Drumeo-VaterSticks]=12&locked=true';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[Drumeo-VaterSticks]=12&locked=true';
+    }
+    else {
         $bonuses = [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/promos/march/lifetime/gregg-bissonette-masterclass-card.webp',
@@ -152,6 +171,7 @@
         ];
         $buttonLink = '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[drumeo-gift-card-300]=1&locked=true';
         $buttonLink2 = '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[drumeo-gift-card-300]=1&promo-code=lifetime-gift-card&locked=true';
+    }
     @endphp
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
@@ -160,15 +180,21 @@
     >
         <div class="container mx-auto relative z-50 max-w-4xl">
             <h3 class="leading-tight" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="sm:hidden"> today and get:</strong></h3>
-            <h6 class="leading-tight mt-3 mb-5 md:mb-7 lg:mb-10 text-musora uppercase"> Only
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                left</h6>
+            <h6 class="leading-tight mt-3 mb-5 md:mb-7 lg:mb-10 text-musora uppercase">
+                @if($stock > 0)
+                    Only
+                        <span x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                         </span>
+                    left
+                @else
+                    &nbsp;
+                @endif
+            </h6>
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md">
                     <div class=" inline-block relative w-full group" style="padding-bottom: 56%;perspective: 1000px;">
@@ -188,7 +214,11 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm">Payment plans available</p>
-                <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+                @if($stock > 0)
+                    <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+                @else
+                    <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
+                @endif
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE<br class="sm:hidden"> anniversary bonuses</strong></h3>
             </div>
             <div style="font-size:0px" class=" max-w-md mx-auto">
@@ -260,9 +290,12 @@
                 @endforeach
             </div>
 
-            {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
-            <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            @if($stock > 0)
+                <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
                 <a class="inline-block leading-tight text-white opacity-70" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
+            @else
+                <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>
+            @endif
         </div>
     </section>
     @php
