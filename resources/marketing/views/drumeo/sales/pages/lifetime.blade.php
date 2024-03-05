@@ -150,8 +150,8 @@
                 'price' => 300,
             ],
         ];
-        $buttonLink = '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[drumeo-gift-card-300]=1&promo-code=FREE-W-LIFETIME-849&locked=true';
-        $buttonLink2 = '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[drumeo-gift-card-300]=1&promo-code=FREE-W-LIFETIME-849&locked=true';
+        $buttonLink = '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[drumeo-gift-card-300]=1&locked=true';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[DLM-Lifetime-3-pay]=1&products[drumeo-gift-card-300]=1&promo-code=lifetime-gift-card&locked=true';
     @endphp
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
