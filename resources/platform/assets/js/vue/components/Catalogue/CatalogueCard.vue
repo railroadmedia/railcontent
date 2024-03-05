@@ -8,7 +8,8 @@
         :class="[
             class_object,
             forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-[267px]' : 'tw-w-[267px]'}  lg:tw-w-1/4 2xl:tw-w-1/5 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]`}`,
-            { 'tw-py-3 tw-w-full @3xl/breakToList:tw-py-0 @3xl/breakToList:tw-w-1/4 @3xl/breakToList:tw-mb-6 @3xl/breakToList:tw-pr-[8px] @4xl/breakToList:tw-pr-[12px] @5xl/breakToList:tw-w-1/5 @6xl/breakToList:tw-pr-[18px]' : breakToListView }
+            { 'tw-py-3 tw-w-full @3xl/breakToList:tw-py-0 @3xl/breakToList:tw-w-1/4 @3xl/breakToList:tw-mb-6 @3xl/breakToList:tw-pr-[8px] @4xl/breakToList:tw-pr-[12px] @5xl/breakToList:tw-w-1/5 @6xl/breakToList:tw-pr-[18px]' : breakToListView },
+            { 'tw-mb-[15px]': addMarginBottom }
         ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
@@ -212,6 +213,10 @@ const props = defineProps({
         default: () => false,
     },
     fullWidthOnMobile: {
+        type: Boolean,
+        default: () => false,
+    },
+    addMarginBottom: {
         type: Boolean,
         default: () => false,
     },
