@@ -575,8 +575,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'instrument', 'topic'],
                 'tabs' => [
                     [
-                        'name' => 'Lessons',
-                        'short_name' => 'LESSONS',
+                        'name' => 'All',
+                        'short_name' => 'ALL',
                         'value' => [''],
                     ],
                     [
