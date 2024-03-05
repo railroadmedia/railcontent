@@ -1051,10 +1051,10 @@ class ContentService
             }
 
             $resultsDB = new ContentFilterResultsEntity([
-                                                                'results' => $filter->retrieveFilter(),
-                                                                'total_results' => $pullPagination ?
-                                                                    $filter->countFilter() : 0,
-                                                                'filter_options' => $pullFilterFields ? $this->getFilterOptions($filter, $includedTypes) : [],
+                'results' => $filter->retrieveFilter(),
+                'total_results' => $pullPagination ?
+                    $filter->countFilter() : 0,
+                'filter_options' => $pullFilterFields ? $this->getFilterOptions($filter, $includedTypes) : [],
                                                             ]);
 
             $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
