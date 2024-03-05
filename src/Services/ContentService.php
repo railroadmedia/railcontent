@@ -2860,11 +2860,22 @@ class ContentService
         return $filters['difficulty'];
     }
 
+    /**
+     * Mapping system for BPM filter options
+     * Should take into consideration the mapping rules:
+    '50-90' => ['min' => 50, 'max' => 90],
+    '91-120' => ['min' => 91, 'max' => 120],
+    '121-150' => ['min' => 121, 'max' => 150],
+    '151-180' => ['min' => 151, 'max' => 180],
+    '181+' => ['min' => 181, 'max' => 10000],
+     * @param $bpmOptions - is an array with the format: "bpm_value (number_or_lessons)"
+     * @return array
+     */
     private function bpmFilterOptionsMapping($bpmOptions)
     {
         $mappedBpm = [];
-        foreach ($bpmOptions as $index => $difficultyS) {
-            $bpmArray = (explode(' (', $difficultyS));
+        foreach ($bpmOptions as $bpmOption) {
+            $bpmArray = (explode(' (', $bpmOption));
             $bpm = is_numeric($bpmArray[0]) ? (int)$bpmArray[0] : $bpmArray[0];
             $nr = str_replace(')', '', $bpmArray[1]);
             $mappingOptions = config('railcontent.bpm_map') ?? [];
