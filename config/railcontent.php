@@ -482,7 +482,7 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFilters' => ['style', 'focus'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
             ],
@@ -575,8 +575,8 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'instrument', 'topic'],
                 'tabs' => [
                     [
-                        'name' => 'Lessons',
-                        'short_name' => 'LESSONS',
+                        'name' => 'All',
+                        'short_name' => 'ALL',
                         'value' => [''],
                     ],
                     [
@@ -1154,7 +1154,7 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-		        'allowableFilters' => ['difficulty', 'style', 'essentials', 'theory', 'lifestyle', 'creativity'],
+		        'allowableFilters' => ['style', 'focus'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
             ],
@@ -1565,7 +1565,7 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFilters' => ['style', 'focus'],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
             ],
@@ -1908,7 +1908,7 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFilters' => ['style', 'focus'],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty', 'genre','essentials','theory','lifestime','creativity'],
 
