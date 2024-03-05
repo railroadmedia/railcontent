@@ -1568,10 +1568,10 @@ class ContentRepository extends RepositoryBase
             ->addBinding($subQuery->getBindings())
             ->count();
         
-        //All lessons page should display max 100 lessons
-        if(count($this->typesToInclude) > 10 && $count > 100){
-            return 100;
-        }
+//        //All lessons page should display max 100 lessons
+//        if(count($this->typesToInclude) > 10 && $count > 100){
+//            return 100;
+//        }
         return $count;
     }
 
@@ -1693,7 +1693,7 @@ class ContentRepository extends RepositoryBase
             $value = strtolower(str_replace(" ", "-", $value));
         }elseif($name == 'bpm') {
             $bpmMapping = config('railcontent.bpm_map') ?? [];
-            if (isset($bpmMapping[$value])) {
+            if (isset($bpmMapping[$value]) && isset($bpmMapping[$value]['min']) && isset($bpmMapping[$value]['max'])) {
                 $this->includedFields[] = [
                     'name' => $name,
                     'value' => $bpmMapping[$value]['min'],
