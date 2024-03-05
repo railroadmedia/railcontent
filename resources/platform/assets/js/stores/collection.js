@@ -1,7 +1,6 @@
 import axios from "axios";
 import { defineStore } from 'pinia';
 import { useUserStore } from "./user";
-import ContentHelpers from '../vue/vuesora/assets/js/helper-functions/content';
 import { useFilterValues } from "../vue/hooks/useFilterValues";
 const { getFilterValues } = useFilterValues();
 
@@ -21,9 +20,7 @@ export const useCollectionStore = defineStore({
                 sort: '',
                 progress: '',
             },
-            filterValues: {},
             filterColumns: [],
-            filterableValues: [],
             isCoach: false,
             loading: false,
             searchEndpointUrl: '',
@@ -140,21 +137,6 @@ export const useCollectionStore = defineStore({
             if (params.getAll('included_fields[]').length > 0) {
                 this.filter.includedFields = params.getAll('included_fields[]');
             }
-        },
-
-        getFilterColumns () {
-            let filters = [];
-            for (const value of this.filterableValues){
-                filters.push({
-                    category: value,
-                    items: this.filterValues[value]
-                });
-            }
-            this.filterColumns = filters;
-        },
-
-        getFilterValues (values) {
-            return ContentHelpers.flattenFilters(values);
         },
 
         getSortOptions () {
@@ -305,6 +287,7 @@ export const useCollectionStore = defineStore({
             this.tabData[this.filter.activeTab] = {
                 ...this.tabData[this.filter.activeTab],
                 data: [...this.data],
+                filterColumns: this.filterColumns,
                 filterApplied: true,
             }
 
@@ -313,6 +296,7 @@ export const useCollectionStore = defineStore({
             //When the tab data is stored
             if (this.tabData[this.filter.activeTab] && this.tabData[this.filter.activeTab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
+                this.filterColumns =  this.tabData[this.filter.activeTab].filterColumns;
             //When the tab data is not stored
             } else {
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
