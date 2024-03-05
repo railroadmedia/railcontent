@@ -1441,12 +1441,12 @@ class ContentRepository extends RepositoryBase
                 $db->selectRaw(
                     'm.'.$this->groupByFields['associated_table']['column'].' as grouped_by_field,
                     m.'.$this->groupByFields['associated_table']['column'].' as id,	
-	                COUNT( DISTINCT(lessons.caontent_idd)) AS lessonsCount,
-	                GROUP_CONCAT(lessons.caontent_idd) as lessons_grouped_by_field, '.
+	                COUNT( DISTINCT(lessons.content_id)) AS lessonsCount,
+	                GROUP_CONCAT(lessons.content_id) as lessons_grouped_by_field, '.
                     ' "'.$this->groupByFields['associated_table']['column'].'" as type'
                 );
                 $rq =
-                    $query->selectRaw(' railcontent_content.id as caontent_idd')
+                    $query->selectRaw(' railcontent_content.id as content_id')
                         ->whereRaw('railcontent_content.id = m.content_id');
 
                 $contentRows =
