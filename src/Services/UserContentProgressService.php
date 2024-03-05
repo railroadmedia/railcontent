@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
-use Railroad\Railcontent\Events\UserContentProgressStarted;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
