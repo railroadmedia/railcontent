@@ -3020,6 +3020,22 @@ class ContentRepository extends RepositoryBase
             usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
         }
 
+        //Return Currently Selected Filter(s), regardless of number of results
+        foreach($initialFilters as $selected) {
+            if(!isset($filterOptionsArray[$selected['name']])){
+                $filterOptionsArray[$selected['name']][] = $selected['value'].' (0)';
+            }else{
+                $values = [];
+                foreach($filterOptionsArray[$selected['name']] as $existOption) {
+                    $difficultyArray = (explode(' (',$existOption));
+                    $values[] = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
+                }
+                if(!in_array($selected['value'], $values)){
+                    $filterOptionsArray[$selected['name']][] = $selected['value'].' (0)';
+                }
+            }
+        }
+
         return $filterOptionsArray;
     }
 
