@@ -1603,13 +1603,14 @@ class ContentPagesController extends BaseController
                 }
             }
         }
+        $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
 
         $lessonType = ContentTypes::newContentTypes();
         $filteredType = $request->get('included_types');
 
         return $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 50),
+            $request->get('limit', 10),
             '-published_on',
             $filteredType ?? $lessonType,
             $request->get('slug_hierarchy', []),
