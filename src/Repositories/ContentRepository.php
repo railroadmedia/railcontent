@@ -1691,6 +1691,17 @@ class ContentRepository extends RepositoryBase
         }
         elseif($name == 'type'){
             $value = strtolower(str_replace(" ", "-", $value));
+            $this->includedFields[] = [
+                'name' => $name,
+                'value' => $value,
+                'type' => $type,
+                'operator' => $operator,
+                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                'is_content_column' => in_array(
+                    $name,
+                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                ),
+            ];
         }elseif($name == 'bpm') {
             $bpmMapping = config('railcontent.bpm_map') ?? [];
             if (isset($bpmMapping[$value]) && isset($bpmMapping[$value]['min']) && isset($bpmMapping[$value]['max'])) {
@@ -3030,7 +3041,8 @@ class ContentRepository extends RepositoryBase
                     $difficultyArray = (explode(' (',$existOption));
                     $values[] = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
                 }
-                if(!in_array($selected['value'], $values)){
+
+                if(!in_array(ucfirst($selected['value']), $values)){
                     $filterOptionsArray[$selected['name']][] = $selected['value'].' (0)';
                 }
             }

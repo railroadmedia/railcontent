@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -104,7 +105,9 @@ class ContentJsonController extends Controller
 
         $group_by = null;
         $contentTypes = $request->get('included_types', []);
-
+        if(count($contentTypes) > 5){
+            $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
+        }
         [$group_by, $required_fields, $included_fields] =
             $this->extractFields($request, $required_fields, $included_fields, $group_by);
 
