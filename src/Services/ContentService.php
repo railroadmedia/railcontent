@@ -2820,6 +2820,22 @@ class ContentService
     private function filterOptionsMapping($difficultyOptions, $rules = 'railcontent.difficulty_map')
     {
         $mappedDifficulty = [];
+
+        //DifficultyOptions is an array with the format: "difficulty_level (number_or_lessons)"
+        //$difficultyOptions = [
+        //  0 => "1 (6)",
+        //  1 => "10 (5)",
+        //  2 => "2 (34)",
+        //  3 => "3 (103)",
+        //  4 => "4 (294)",
+        //  5 => "5 (528)",
+        //  6 => "6 (215)",
+        //  7 => "7 (71)",
+        //  8 => "8 (30)",
+        //  9 => "9 (12)",
+        //]
+        // We need to provide the "difficulty_string (number_of_lessons)"
+        // and take care that some difficulty strings like Intermediate summarize different difficulty_level
         foreach ($difficultyOptions as $index => $difficultyS) {
             $difficultyArray = (explode(' (', $difficultyS));
             $difficulty = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
@@ -2836,7 +2852,7 @@ class ContentService
         $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedDifficulty);
         $filters['difficulty'] = [];
         foreach ($properOrderedArray as $difficulty => $count) {
-            if($count != 0) {
+            if($count != 0 || array_key_exists($difficulty, $mappedDifficulty)) {
                 $filters['difficulty'][] = $difficulty.' ('.$count.')';
             }
         }
@@ -2848,14 +2864,14 @@ class ContentService
     {
         $mappedBpm = [];
         foreach ($bpmOptions as $index => $difficultyS) {
-            $difficultyArray = (explode(' (', $difficultyS));
-            $difficulty = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
-            $difficultyNr = str_replace(')', '', $difficultyArray[1]);
+            $bpmArray = (explode(' (', $difficultyS));
+            $bpm = is_numeric($bpmArray[0]) ? (int)$bpmArray[0] : $bpmArray[0];
+            $nr = str_replace(')', '', $bpmArray[1]);
             $mappingOptions = config('railcontent.bpm_map') ?? [];
             foreach($mappingOptions as $key=>$mappingOption){
-                if($difficulty >= $mappingOption['min'] && $difficulty <= $mappingOption['max']){
+                if($bpm >= $mappingOption['min'] && $bpm <= $mappingOption['max']){
                     $mappedBpm[$key] =
-                        ($mappedBpm[$key] ?? 0) + $difficultyNr;
+                        ($mappedBpm[$key] ?? 0) + $nr;
                 }
             }
         }
@@ -2863,7 +2879,7 @@ class ContentService
         $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedBpm);
         $filters['bpm'] = [];
         foreach ($properOrderedArray as $bpm => $count) {
-            if($count != 0) {
+            if($count != 0 || array_key_exists($bpm, $mappedBpm)) {
                 $filters['bpm'][] = $bpm.' ('.$count.')';
             }
         }
