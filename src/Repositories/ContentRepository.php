@@ -1534,7 +1534,7 @@ class ContentRepository extends RepositoryBase
                     ->restrictByUserStates($this->requiredUserStates)
                     ->includeByUserStates($this->includedUserStates)
                     ->groupByField($this->groupByFields)
-                    ->selectGroupedCountColumns($this->groupByFields);
+                    ->selectGroupedColumnsForCount($this->groupByFields);
 
             return $this->connection()
                 ->table(

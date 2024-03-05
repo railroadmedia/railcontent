@@ -867,7 +867,7 @@ class ContentQueryBuilder extends QueryBuilder
         return $this;
     }
 
-    public function selectGroupedCountColumns($groupBy)
+    public function selectGroupedColumnsForCount($groupBy)
     {
         $isTableContent = $groupBy['is_content_column'] ?? false;
         $alias = ConfigService::$tableContent;
