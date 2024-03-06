@@ -1,6 +1,6 @@
 <template>
     <div
-        class="tw-flex"
+        class="tw-flex lg:tw-grid lg:tw-grid-cols-4 2xl:tw-grid-cols-5 lg:tw-gap-3"
         :class="[noWrap ? 'overflow' : 'flex-wrap', {'tw-flex-col' : displayInline }]"
     >
         <catalogue-card
