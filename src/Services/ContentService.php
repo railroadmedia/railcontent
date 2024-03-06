@@ -1104,6 +1104,9 @@ class ContentService
             }
         }
 
+        if(!ContentRepository::$countFilterOptionItems){
+            return $filterFields;
+        }
         $order = ContentRepository::$catalogMetaAllowableFilters;
 
         if($order) {
