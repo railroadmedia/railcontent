@@ -72,6 +72,17 @@ class Filters20242 extends Command
                     $results[$contentType][$style] = ($results[$contentType][$style] ?? 0) + 1;
                     if ($import) {
                     if($brand == 'drumeo-Rudiments') {
+                        ContentTopic::query()
+                                    ->where('content_id', '=', $contentId)
+                                    ->delete();
+
+                        $content->deleteFields('topic');
+
+                        ContentGears::query()
+                            ->where('content_id', '=', $contentId)
+                            ->delete();
+                        $content->deleteFields('gear');
+
                         $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
                         $content->setGear($this->getValue($data, $headersRow, 'Gear'));
                     }else {
@@ -178,17 +189,5 @@ class Filters20242 extends Command
             ->where('content_id', '=', $contentId)
             ->delete();
         $content->deleteFields('style');
-
-        ContentGears::query()
-            ->where('content_id', '=', $contentId)
-            ->delete();
-        $content->deleteFields('gear');
-
-        ContentTopic::query()
-            ->where('content_id', '=', $contentId)
-            ->delete();
-
-        $content->deleteFields('topic');
-
     }
 }
