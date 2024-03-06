@@ -16,6 +16,12 @@ class ApiVersionMiddleware
      */
     public function handle(Request $request, Closure $next, $guard): mixed
     {
+        //set filter version
+        if($request->has('count_filter_items')){
+            config(['railcontent.filter_version' => 'V2']);
+        }
+
+        //set endpoints version
         config(['musora-api.api.version' => $guard]);
         return $next($request);
     }

@@ -10,7 +10,23 @@
         <div class="container max-w-6xl mx-auto relative z-20">
             <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black.webp" alt="30 day drummer logo" />
-            <p class="leading-tight my-5 lg:my-7">Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em></p>
+            <p class="leading-tight my-5 lg:my-7">
+                Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em>
+                @if(Carbon\Carbon::create(2024, 3, 22, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                    <br>
+                    <em class="font-black uppercase inline-block mt-2 text-{{ $theme }}">
+                        Only
+                        <span x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                         </span>
+                        left
+                    </em>
+                @endif
+            </p>
             <img class="sm:hidden inline-block h-52 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-44 lg:h-64" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1810x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header.webp" alt="30 day drummer logo" />
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 mt-5 lg:mt-7">
@@ -311,23 +327,28 @@
     ],
 ])
 @endsection
+
 @section('scripts')
-<script type="application/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        var stickyBar = document.querySelector('.promo-banner');
-        window.addEventListener('scroll', function () {
-            var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
-            var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-            if (window.scrollY > (unstickTrigger - 115)) {
-                stickyBar.classList.remove('fixed', 'mt-0');
-            }
-            if (window.scrollY < stickTrigger - 115) {
-                stickyBar.classList.remove('fixed', 'mt-0');
-            }
-            if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
-                stickyBar.classList.add('fixed', 'mt-0');
-            }
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-04-1 00:00:00',
+        'promoVersion' => false
+    ])
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endsection
