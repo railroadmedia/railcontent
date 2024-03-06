@@ -659,10 +659,5 @@
         ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
-    <script>
-        $(document).foundation();
-    </script>
-
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop
