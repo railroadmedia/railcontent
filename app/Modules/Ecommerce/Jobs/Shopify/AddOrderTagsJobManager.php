@@ -38,8 +38,8 @@ class AddOrderTagsJobManager implements ShouldQueue
         protected ?int $customerId,
         protected string $startProcessedAt,
         protected string $endProcessedAt,
-        protected int $trialConversionDayLimit = 45,
         protected bool $simulate,
+        protected int $trialConversionDayLimit = 45
     ) {
     }
 
@@ -74,6 +74,20 @@ class AddOrderTagsJobManager implements ShouldQueue
             $jobs[] = new AddOrderTags($order, $this->trialConversionDayLimit, $this->simulate);
         });
         $this->batch()->add($jobs);
+
+        // if there are more results to get, add another job to the batch
+        if ($this->hasNextPage) {
+            $this->batch()->add(
+                new AddOrderTagsJobManager(
+                    $this->endCursor,
+                    $this->customerId,
+                    $this->startProcessedAt,
+                    $this->endProcessedAt,
+                    $this->simulate,
+                    $this->trialConversionDayLimit
+                )
+            );
+        }
     }
 
     /**

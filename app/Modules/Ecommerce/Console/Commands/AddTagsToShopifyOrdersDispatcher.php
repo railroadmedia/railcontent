@@ -46,7 +46,7 @@ class AddTagsToShopifyOrdersDispatcher extends Command
 
 
         $startAt = Carbon::now();
-        $batch = Bus::batch(new AddOrderTagsJobManager(null, $customerId, $startProcessedAt, $endProcessedAt, $trialConversionDayLimit, $simulate))
+        $batch = Bus::batch(new AddOrderTagsJobManager(null, $customerId, $startProcessedAt, $endProcessedAt, $simulate, $trialConversionDayLimit))
             ->then(function (Batch $batch) use ($startAt) {
                 Log::info(
                     sprintf("AddOrderTags: completed in %s seconds", $startAt->diffInSeconds())

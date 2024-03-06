@@ -1114,7 +1114,8 @@ return [
             ],
             'pack' => [
                 'allowableFilters' => ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
-                'allowableFiltersMobile' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
+                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
             ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
@@ -1558,6 +1559,11 @@ return [
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
+            'pack' => [
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
+            ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
                 'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
@@ -1870,7 +1876,12 @@ return [
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => [],
             ],
-            'coach-lessons' => [
+            'pack' => [
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
+            ],
+	    'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'tabs' => [
@@ -2205,6 +2216,11 @@ return [
                 'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+            ],
+            'pack' => [
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' =>  ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
             ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
