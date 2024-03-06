@@ -26,6 +26,12 @@ class InstructorDecorator extends ModeDecoratorBase
 
     public function decorate(Collection $contents)
     {
+        $contentsOfType = $contents->whereIn('type', ['style','artist']);
+
+        if ($contentsOfType->isNotEmpty()) {
+            return $contents;
+        }
+
         if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
             foreach ($contents as $contentIndex => $content) {
                 if ($content instanceof ContentEntity) {

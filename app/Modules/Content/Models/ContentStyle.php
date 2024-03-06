@@ -3,9 +3,10 @@
 namespace App\Modules\Content\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\Content\Models\Content;
 
 /**
- * App\Modules\Content\Models\ContentStyle
+ * Modules\Content\Models\ContentStyle
  *
  * @property integer $id
  * @property integer $content_id

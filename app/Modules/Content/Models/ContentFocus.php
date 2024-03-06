@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\Content\Models;
+namespace Modules\Content\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Modules\Content\Models\ContentFocus
+ * Modules\Content\Models\ContentFocus
  *
  * @property integer $id
  * @property integer $content_id

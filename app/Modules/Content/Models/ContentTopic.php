@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Modules\Content\Models;
+namespace Modules\Content\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Modules\Content\Models\ContentTopic
+ * Modules\Content\Models\ContentTopic
  *
  * @property integer $id
  * @property integer $content_id
  * @property string $topic
  * @property int $position
  * @property-read \App\Modules\Content\Models\Content|null $content
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle query()
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle whereContentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle wherePosition($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContentStyle whereStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic whereContentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContentTopic whereTopic($value)
  * @mixin \Eloquent
  */
 class ContentTopic extends Model
