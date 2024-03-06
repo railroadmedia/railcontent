@@ -26,7 +26,8 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
     - compile frontend assets
         ```
         cd /app/musora-web-platform && 
-        nvm use 16 && 
+        nvm install v20 &&
+        nvm use v20 && 
         yarn &&
         yarn pp && 
         yarn mp
