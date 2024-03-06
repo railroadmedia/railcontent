@@ -1485,6 +1485,7 @@ class ContentPagesController extends BaseController
             "totalResults" => $listLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
             "adminMessage" => $adminMessage,
+            "futureScheduledContentOnly" => false,
         ]);
     }
 
