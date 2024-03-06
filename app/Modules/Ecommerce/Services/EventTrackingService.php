@@ -175,7 +175,7 @@ class EventTrackingService
                 return match ($discount['type']) {
                     'automatic' => $discount['title'],
                     'discount_code' => $discount['code'],
-                    default => ''
+                    default => $discount['description'] ?? ''
                 };
             })->toArray();
     }
