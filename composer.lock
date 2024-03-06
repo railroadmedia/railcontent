@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37bee5d8038afc638fa1a8387dfe99ca",
+    "content-hash": "a15594034095d2f60b4bb80e870a480f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10134,16 +10134,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-v3.0-filters-v2",
+            "version": "v3.1.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "360220330b99e61ae1a6227357f8edf680a02e82"
+                "reference": "bc43ecca43b67dbdaedf7a4b4c9d1d5557a980e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/360220330b99e61ae1a6227357f8edf680a02e82",
-                "reference": "360220330b99e61ae1a6227357f8edf680a02e82",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/bc43ecca43b67dbdaedf7a4b4c9d1d5557a980e7",
+                "reference": "bc43ecca43b67dbdaedf7a4b4c9d1d5557a980e7",
                 "shasum": ""
             },
             "require": {
@@ -10173,9 +10173,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0-filters-v2"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.53"
             },
-            "time": "2024-03-06T08:21:05+00:00"
+            "time": "2024-03-06T11:25:21+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10368,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-filter-v2",
+            "version": "v2.1.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c4963b965eea8b1cf414611df3d79a50d0f46746"
+                "reference": "986ed773e3d277f9fbe23535f511323f02702682"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c4963b965eea8b1cf414611df3d79a50d0f46746",
-                "reference": "c4963b965eea8b1cf414611df3d79a50d0f46746",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/986ed773e3d277f9fbe23535f511323f02702682",
+                "reference": "986ed773e3d277f9fbe23535f511323f02702682",
                 "shasum": ""
             },
             "require": {
@@ -10432,22 +10432,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/filter-v2"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.53"
             },
-            "time": "2024-03-05T19:10:56+00:00"
+            "time": "2024-03-06T09:24:50+00:00"
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.23",
+            "version": "v2.0.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "66da4e19c13f6aa270a7c675118c7be04f6c1217"
+                "reference": "8008fe3071829bc9669a694ae14cbec84f57cba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/66da4e19c13f6aa270a7c675118c7be04f6c1217",
-                "reference": "66da4e19c13f6aa270a7c675118c7be04f6c1217",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/8008fe3071829bc9669a694ae14cbec84f57cba5",
+                "reference": "8008fe3071829bc9669a694ae14cbec84f57cba5",
                 "shasum": ""
             },
             "require": {
@@ -10486,9 +10486,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.23"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.24"
             },
-            "time": "2023-09-05T17:36:00+00:00"
+            "time": "2024-03-06T08:50:26+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -19263,29 +19263,15 @@
     ],
     "aliases": [
         {
-            "package": "railroad/musora-api",
-            "version": "dev-v3.0-filters-v2",
-            "alias": "v3.1.49",
-            "alias_normalized": "3.1.49.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-filter-v2",
-            "alias": "v2.1.42",
-            "alias_normalized": "2.1.42.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
