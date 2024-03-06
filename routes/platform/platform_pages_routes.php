@@ -25,6 +25,7 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])
@@ -32,6 +33,16 @@ Route::domain('{musoraDomain}')
         Route::domain('{musoraDomain}')
             ->middleware(['web_member_only'])
             ->group(function () {
+                /*
+                 * Storybook
+                 */
+                Route::get('/storybook', function () {
+                    if (app()->environment() != 'production' && user()->isAdmin()) {
+                        return redirect()->away(asset('/storybook-build/index.html'));
+                    } else {
+                        throw new NotFoundHttpException(); 
+                    }
+                });
                 /*
                  * Home Page
                  */

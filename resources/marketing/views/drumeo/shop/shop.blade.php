@@ -267,30 +267,6 @@
                 </div>
             </div>
         </section>
-
-        {{--   limited     --}}
-        <div id="limited" class="anchor"></div>
-{{--        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">--}}
-{{--            <div class="container">--}}
-{{--                <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-shirt text-{{ $brand }} mr-1"></i> Limited Sizes</strong></h5>--}}
-{{--                <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">--}}
-{{--                    @foreach($lowStock as $key => $item)--}}
-{{--                        @include('_partials.components.shop.product-card', [--}}
-{{--                            "badge" => $item->badge_text,--}}
-{{--                            "discounted_price" => $item->discounted_price,--}}
-{{--                            "href" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),--}}
-{{--                            "price" => $item->price,--}}
-{{--                            "size_case_sensitive" => $item->size_case_sensitive,--}}
-{{--                            "sizes" => $item->sizes,--}}
-{{--                            "sku" => $item->sku,--}}
-{{--                            "soldOut" => isset($products[$item->sku]) ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,--}}
-{{--                            "thumbnail" => $item->thumbnail,--}}
-{{--                            "title" => $item->name,--}}
-{{--                        ])--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
     </div>
 @endsection
 
