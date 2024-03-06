@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -93,6 +94,7 @@ class ContentJsonController extends Controller
         }
 
         $required_fields = $request->get('required_fields', []);
+        $included_fields = $request->get('included_fields', []);
 
         if ($request->has('term')) {
             $required_fields[] = 'name,%'.$request->get('term').'%,string,like';
@@ -101,26 +103,14 @@ class ContentJsonController extends Controller
             }
         }
 
-        if ($request->has('title')) {
-            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
-        }
-
+        $group_by = null;
         $contentTypes = $request->get('included_types', []);
-        if($request->get('tab', false)){
-            $tabs = $request->get('tab');
-            if(!is_array($request->get('tab'))){
-                $tabs = [$request->get('tab')];
-            }
-            foreach($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-            }
+        if(count($contentTypes) > 5 && $request->has('count_filter_items')){
+            $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
         }
+        [$group_by, $required_fields, $included_fields] =
+            $this->extractFields($request, $required_fields, $included_fields, $group_by);
+
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -129,7 +119,7 @@ class ContentJsonController extends Controller
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             $required_fields,
-            $request->get('included_fields', []),
+            $included_fields,
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
             $request->get('include_filters', true),
@@ -137,7 +127,7 @@ class ContentJsonController extends Controller
             true,
             $request->get('only_subscribed', false),
             $futureScheduledContentOnly,
-            $group_by ?? false,
+            $group_by ?? null,
         );
 
         $filters = $contentData['filter_options'];
@@ -549,5 +539,55 @@ class ContentJsonController extends Controller
     public function countLessonsAndAssignments($contentId)
     {
         return $this->contentService->countLessonsAndAssignments($contentId);
+    }
+
+    /**
+     * @param Request $request
+     * @param mixed $required_fields
+     * @param mixed $included_fields
+     * @param string|null $group_by
+     * @return array
+     */
+    private function extractFields(Request $request, mixed $required_fields, mixed $included_fields,?string $group_by )
+    : array {
+        $tabs = $request->get('tabs', $request->get('tab', false));
+        if ($tabs) {
+            if (!is_array($tabs)) {
+                $tabs = [$tabs];
+            }
+            foreach ($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+                if ($extra['0'] == 'length_in_seconds' || $extra['0'] == 'topic') {
+                    $required_fields[] = $tab;
+                }
+            }
+        }
+
+        if ($request->has('title') && ($group_by == 'artist' || $group_by == 'style')) {
+            $required_fields[] = $group_by.',%'.$request->get('title').'%,string,like';
+        } elseif ($request->has('title') && $group_by == 'instructor') {
+            $instructors =
+                $this->contentService->getWhereTypeInAndStatusAndField(
+                    ['instructor'],
+                    'published',
+                    'name',
+                    '%'.$request->get('title').'%',
+                    'string',
+                    'LIKE'
+                );
+            foreach ($instructors->pluck('id') ?? [] as $instructor) {
+                $included_fields[] = 'instructor,'.$instructor.',integer,=';
+            }
+        } elseif ($request->has('title')) {
+            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
+        }
+
+        return [$group_by, $required_fields, $included_fields];
     }
 }

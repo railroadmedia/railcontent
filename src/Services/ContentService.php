@@ -1050,175 +1050,66 @@ class ContentService
                 $filter->groupByField($groupBy);
             }
 
-            if (config('railcontent.use_elastic_search') == true) {
-                $filters = [];
+            $resultsDB = new ContentFilterResultsEntity([
+                'results' => $filter->retrieveFilter(),
+                'total_results' => $pullPagination ?
+                    $filter->countFilter() : 0,
+                'filter_options' => $pullFilterFields ? $this->getFilterOptions($filter, $includedTypes) : [],
+                                                            ]);
 
-                if (!empty($includedUserStates)) {
-                    $includedContentsIdsByState = [];
-                    $includedContentsByState =
-                        $this->userContentProgressRepository->createQueryBuilder('up')
-                            ->where('up.user = :userId')
-                            ->andWhere('up.state IN (:state)')
-                            ->setParameter('userId', auth()->id())
-                            ->setParameter('state', $includedUserStates)
-                            ->getQuery()
-                            ->getResult();
-                    foreach ($includedContentsByState as $progress) {
-                        $includedContentsIdsByState[] =
-                            $progress->getContent()
-                                ->getId();
-                    }
-                }
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
+            $results = new ContentFilterResultsEntity($results);
+        }
 
-                $followedContents = [];
-                if ($getFollowedContentOnly) {
-                    $followedContents = $this->contentFollowsRepository->getFollowedContentIds();
-                    if (empty($followedContents)) {
-                        $resultsDB = new ContentFilterResultsEntity([
-                            'results' => $followedContents,
-                            'total_results' => 0,
-                            'filter_options' => [],
-                        ]);
+        $decorator = ($groupBy) ? 'group':'content';
+        return Decorator::decorate($results, $decorator);
+    }
 
-                        $results =
-                            CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
+    private function getFilterOptions($filter, $includedTypes)
+    {
+        $filterFields = $filter->getFilterFields();
 
-                        return new ContentFilterResultsEntity($results);
-                    }
-                }
-
-                if (!empty($requiredUserStates)) {
-                    $requiredContentsByState = $this->userContentProgressRepository->getUserProgressForState(
-                        auth()->id(),
-                        $requiredUserStates[0]
-                    );
-
-                    $requiredContentIdsByState = Arr::pluck($requiredContentsByState, 'content_id');
-                }
-
-                $permissionIds = [];
-                if (auth()->id()) {
-                    $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
-                    $permissionIds = Arr::pluck($userPermissions, 'permission_id');
-                }
-
-                ElasticQueryBuilder::$userPermissions = $permissionIds;
-
-                $requiredUserPlaylistIds = [];
-                $start = microtime(true);
-                $elasticData = $this->elasticService->getElasticFiltered(
-                    $page,
-                    $limit,
-                    $orderByAndDirection,
-                    $includedTypes,
-                    $slugHierarchy,
-                    $requiredParentIds,
-                    $filter->getRequiredFields(),
-                    $filter->getIncludedFields(),
-                    $requiredContentIdsByState ?? null,
-                    $includedContentsIdsByState ?? null,
-                    $requiredUserPlaylistIds,
-                    null,
-                    $followedContents
+        if (!empty($filterFields['difficulty'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['difficulty'] = $this->filterOptionsMapping(
+                    $filterFields['difficulty'], 'railcontent.difficulty_map'
                 );
-                $finish = microtime(true) - $start;
-                error_log('get elastic data in '.$finish);
-                $totalResults = $elasticData['hits']['total']['value'];
-
-                $ids = [];
-                foreach ($elasticData['hits']['hits'] as $elData) {
-                    $ids[] = $elData['_source']['content_id'];
-                }
-                $start = microtime(true);
-                $unorderedContentRows = $this->getByIds($ids);
-                $finish = microtime(true) - $start;
-
-                // error_log('get contents by ids from elasticsearch '.$finish.'  contentIds = '.print_r($elasticData['hits']['hits'], true));
-
-                $data = [];
-                foreach ($ids as $id) {
-                    foreach ($unorderedContentRows as $index => $unorderedContentRow) {
-                        if ($id == $unorderedContentRow['id']) {
-                            $data[] = $unorderedContentRow;
-                        }
-                    }
-                }
-
-                if ($pullFilterFields === true) {
-                    $start = microtime(true);
-                    $filterOptions = $this->elasticService->getFilterFields(
-                        $includedTypes,
-                        $slugHierarchy,
-                        $requiredParentIds,
-                        $filter->getRequiredFields(),
-                        $filter->getIncludedFields(),
-                        $requiredContentIdsByState ?? null,
-                        $includedContentsIdsByState ?? null,
-                        $requiredUserPlaylistIds
-                    );
-
-                    if (array_key_exists('instructors', $filterOptions)) {
-                        $instructors = $this->contentRepository->getByIds($filterOptions['instructors']);
-
-                        unset($filterOptions['instructors']);
-                        usort($instructors, function ($a, $b) {
-                            return strncmp(
-                                ContentHelper::getFieldValue($a, 'name'),
-                                ContentHelper::getFieldValue($b, 'name'),
-                                15
-                            );
-                        });
-                        $filterOptions['instructor'] = $instructors;
-                    }
-
-                    if (!empty($filterOptions['difficulty'])) {
-                        $filterOptions['difficulty'] = $this->difficultyFilterOptionsCleanup(
-                            $includedTypes,
-                            $filterOptions['difficulty']
-                        );
-                    }
-
-                    $filters = $filterOptions;
-                    $finish = microtime(true) - $start;
-
-                    error_log('get filter options in  '.$finish);
-                }
-
-                $resultsDB = new ContentFilterResultsEntity([
-                    'results' => $data,
-                    'total_results' => $totalResults,
-                    'filter_options' => $filters,
-                ]);
-
-                $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
-                $results = new ContentFilterResultsEntity($results);
             } else {
-                $filterFields = $this->getFilterOptions($filter, $pullFilterFields, $includedTypes);
-                $resultsDB = new ContentFilterResultsEntity([
-                    'results' => $filter->retrieveFilter(),
-                    'total_results' => $pullPagination ?
-                        $filter->countFilter() : 0,
-                    'filter_options' => $filterFields,
-                ]);
-
-                $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
-                $results = new ContentFilterResultsEntity($results);
+                $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
+                    $includedTypes,
+                    $filterFields['difficulty']
+                );
             }
         }
 
-
-        return Decorator::decorate($results, 'content');
-    }
-
-    private function getFilterOptions( $filter, $pullFilterFields, $includedTypes)
-    {
-        $filterFields = $pullFilterFields ? $filter->getFilterFields() : [];
-        if ($pullFilterFields && !empty($filterFields['difficulty'])) {
-            $filterFields['difficulty'] = $this->difficultyFilterOptionsCleanup(
-                $includedTypes,
-                $filterFields['difficulty']
-            );
+        if (!empty($filterFields['bpm'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['bpm'] = $this->bpmFilterOptionsMapping(
+                    $filterFields['bpm']
+                );
+            }
         }
+
+        if (!empty($filterFields['type'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['type'] = array_map(function($m) { return ucwords(str_replace("-", " ", $m));}, $filterFields['type']);
+            }
+        }
+
+        if (!empty($filterFields['instrumentless'])) {
+            if (ContentRepository::$countFilterOptionItems == 1) {
+                $filterFields['instrumentless'] = $this->filterOptionsMapping(
+                    $filterFields['instrumentless'], 'railcontent.instrumentless_map.'.config('railcontent.brand')
+                );
+            }
+        }
+
+        $order = ContentRepository::$catalogMetaAllowableFilters;
+
+        if($order) {
+            $filterFields = array_merge(array_fill_keys($order, 0), $filterFields);
+        }
+
         return $filterFields;
     }
 
@@ -2924,5 +2815,86 @@ class ContentService
         }
 
         return $results;
+    }
+
+    private function filterOptionsMapping($difficultyOptions, $rules = 'railcontent.difficulty_map')
+    {
+        $mappedDifficulty = [];
+
+        //DifficultyOptions is an array with the format: "difficulty_level (number_or_lessons)"
+        //$difficultyOptions = [
+        //  0 => "1 (6)",
+        //  1 => "10 (5)",
+        //  2 => "2 (34)",
+        //  3 => "3 (103)",
+        //  4 => "4 (294)",
+        //  5 => "5 (528)",
+        //  6 => "6 (215)",
+        //  7 => "7 (71)",
+        //  8 => "8 (30)",
+        //  9 => "9 (12)",
+        //]
+        // We need to provide the "difficulty_string (number_of_lessons)"
+        // and take care that some difficulty strings like Intermediate summarize different difficulty_level
+        foreach ($difficultyOptions as $index => $difficultyS) {
+            $difficultyArray = (explode(' (', $difficultyS));
+            $difficulty = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
+            $difficultyNr = str_replace(')', '', $difficultyArray[1]);
+            $mapping = config($rules) ?? [];
+            if (!empty($mapping[$difficulty] ?? [])) {
+                $mappedDifficulty[$mapping[$difficulty]] =
+                    ($mappedDifficulty[$mapping[$difficulty]] ?? 0) + $difficultyNr;
+            } else {
+                $mappedDifficulty[$difficulty] = $difficultyNr;
+            }
+        }
+        $order = array('-','All','Novice','Beginner', 'Intermediate', 'Advanced', 'Expert');
+        $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedDifficulty);
+        $filters['difficulty'] = [];
+        foreach ($properOrderedArray as $difficulty => $count) {
+            if($count != 0 || array_key_exists($difficulty, $mappedDifficulty)) {
+                $filters['difficulty'][] = $difficulty.' ('.$count.')';
+            }
+        }
+
+        return $filters['difficulty'];
+    }
+
+    /**
+     * Mapping system for BPM filter options
+     * Should take into consideration the mapping rules:
+    '50-90' => ['min' => 50, 'max' => 90],
+    '91-120' => ['min' => 91, 'max' => 120],
+    '121-150' => ['min' => 121, 'max' => 150],
+    '151-180' => ['min' => 151, 'max' => 180],
+    '181+' => ['min' => 181, 'max' => 10000],
+     * @param $bpmOptions - is an array with the format: "bpm_value (number_or_lessons)"
+     * @return array
+     */
+    private function bpmFilterOptionsMapping($bpmOptions)
+    {
+        $mappedBpm = [];
+        foreach ($bpmOptions as $bpmOption) {
+            $bpmArray = (explode(' (', $bpmOption));
+            $bpm = is_numeric($bpmArray[0]) ? (int)$bpmArray[0] : $bpmArray[0];
+            $nr = str_replace(')', '', $bpmArray[1]);
+            $mappingOptions = config('railcontent.bpm_map') ?? [];
+            foreach($mappingOptions as $key=>$mappingOption){
+                if($bpm >= $mappingOption['min'] && $bpm <= $mappingOption['max']){
+                    $mappedBpm[$key] =
+                        ($mappedBpm[$key] ?? 0) + $nr;
+                }
+            }
+        }
+        $order = array('50-90','91-120','121-150','151-180', '181+');
+        $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedBpm);
+        $filters['bpm'] = [];
+        foreach ($properOrderedArray as $bpm => $count) {
+            if($count != 0 || array_key_exists($bpm, $mappedBpm)) {
+                $filters['bpm'][] = $bpm.' ('.$count.')';
+            }
+        }
+
+        return $filters['bpm'];
     }
 }

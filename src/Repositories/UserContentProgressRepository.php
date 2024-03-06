@@ -362,4 +362,29 @@ class UserContentProgressRepository extends RepositoryBase
             ->first()['count'];
     }
 
+    public function countByArtistTypesUserProgress(array $types, $artist)
+    {
+        $query =  $this->query()
+            ->select(
+                $this->databaseManager->raw(
+                    'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
+                )
+            )
+            ->join(
+                ConfigService::$tableContent,
+                function (JoinClause $join) {
+                    $join->on(
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    );
+                }
+            )
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableContent . '.artist', $artist);
+
+        return $query->get()
+            ->first()['count'];
+    }
+
 }

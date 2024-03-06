@@ -314,7 +314,7 @@ class ContentQueryBuilder extends QueryBuilder
                         )
                         ->on(
                             $tableName.'.state',
-                            '=',
+                            $requiredUserState['operator'],
                             $joinClause->raw(
                                 DB::connection()
                                     ->getPdo()
@@ -466,7 +466,18 @@ class ContentQueryBuilder extends QueryBuilder
 
         foreach ($includedFields as $includedFieldIndex => $includedField) {
             if (!empty($includedField['associated_table']['table'])) {
-                $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+                $joinExists = false;
+
+                foreach($this->joins ?? [] as $join)
+                {
+                    if($join->table == $includedField['associated_table']['table'].' as '.$includedField['associated_table']['alias'])
+                    {
+                        $joinExists = true;
+                    }
+                }
+                if(!$joinExists) {
+                    $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+                }
             } else {
                 $includedFieldsGroupedByTable[$includedField['name']][] = $includedField;
             }
@@ -508,17 +519,33 @@ class ContentQueryBuilder extends QueryBuilder
                     ConfigService::$tableContent . '.id'
                 );
 
-                $whereInArray = [];
-
-                foreach ($includedFieldDataGrouped as $includedFieldData) {
-                    $whereInArray[] = $includedFieldData['value'];
-                }
-
-                $this->whereIn(
-                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.' .
-                    $includedFieldDataGrouped[0]['associated_table']['column'],
-                    $whereInArray
-                );
+                $this->where(function (Builder $builder) use (
+                    $includedFieldDataGrouped
+                ) {
+                    foreach ($includedFieldDataGrouped as $includedFieldData) {
+                        if( $includedFieldData['operator'] == 'BETWEEN'){
+                            $builder->orWhereBetween(
+                                $includedFieldData['associated_table']['alias'] .
+                                '.' .
+                                $includedFieldData['associated_table']['column'],
+                                [DB::raw($includedFieldData['min']), DB::raw($includedFieldData['max'])]
+                            );
+                        }else {
+                            $builder->orwhere(
+                                $includedFieldData['associated_table']['alias'].
+                                '.'.
+                                $includedFieldData['associated_table']['column'],
+                                $includedFieldData['operator'],
+                                is_numeric($includedFieldData['value']) ? DB::raw($includedFieldData['value']) :
+                                    DB::raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($includedFieldData['value'])
+                                    )
+                            );
+                        }
+                    }
+                });
             }
         }
 
@@ -782,11 +809,11 @@ class ContentQueryBuilder extends QueryBuilder
             $this->addSelect([
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
-
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as id'),
                                  DB::raw(
-                                     "( 
-           JSON_ARRAYAGG(
-            id
+                                     "(
+            GROUP_CONCAT(
+            ".ConfigService::$tableContent.".id
         ) ) as lessons_grouped_by_field"
                                  ),
                              ])
@@ -804,25 +831,57 @@ class ContentQueryBuilder extends QueryBuilder
         $table = $groupBy['associated_table']['table'];
         $field = $groupBy['associated_table']['column'];
         $alias = $groupBy['associated_table']['alias'];
+        $joinExists = false;
 
-        $this->addSelect([
+        foreach($this->joins ?? [] as $join)
+        {
+            if($join->table == $table.' as '.$alias)
+            {
+              $joinExists = true;
+            }
+        }
+       $this->addSelect([
                              $this->raw($alias.'.'.$field.' as grouped_by_field'),
                              $this->raw($alias.'.'.$field.' as id'),
                              DB::raw(
                                  "( 
-           JSON_ARRAYAGG(
+           GROUP_CONCAT(
             ".$alias.".content_id      
         ) ) as lessons_grouped_by_field"
                              ),
-                         ])
-            ->join(
+                         ]);
+        
+        if(!$joinExists) {
+            $this->
+            join(
                 $table.' as '.$alias,
                 $alias.'.'.'content_id',
                 '=',
                 ConfigService::$tableContent.'.id'
-            )
-            ->whereNotNull($alias.'.'.$field)
+            );
+        }
+
+        $this->whereNotNull($alias.'.'.$field)
             ->groupBy($alias.'.'.$field);
+
+        return $this;
+    }
+
+    public function selectGroupedColumnsForCount($groupBy)
+    {
+        $isTableContent = $groupBy['is_content_column'] ?? false;
+        $alias = ConfigService::$tableContent;
+        $field = 'id';
+
+        if ($isTableContent) {
+            $field = $groupBy['field'];
+        } elseif(!empty($groupBy['associated_table'])) {
+            $field = $groupBy['associated_table']['column'];
+            $alias = $groupBy['associated_table']['alias'];
+        }
+        $this->select([
+                             $this->raw('DISTINCT('. $alias.'.'.$field.') as id'),
+                         ]);
 
         return $this;
     }

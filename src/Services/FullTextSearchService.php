@@ -94,64 +94,7 @@ class FullTextSearchService
             ConfigService::$availableBrands = $brands;
         }
 
-        if (config('railcontent.use_elastic_search') == true) {
-            $permissionIds = [];
-            if (auth()->id()) {
-                $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
-                $permissionIds = array_pluck($userPermissions, 'permission_id');
-            }
-
-            ElasticQueryBuilder::$userPermissions = $permissionIds;
-
-            $elasticData = $this->elasticService->search(
-                $term,
-                $page,
-                $limit,
-                $contentTypes,
-                $contentStatuses,
-                $dateTimeCutoff,
-                $sort,
-                $instructorIds
-            );
-
-            $totalResults = $elasticData['hits']['total']['value'];
-
-            $contentIds = [];
-            foreach ($elasticData['hits']['hits'] as $elData) {
-                $contentIds[$elData['_source']['content_id']] = $elData['_source']['content_id'];
-            }
-
-            $filters = $this->elasticService->getFilterFields(
-                $contentTypes,
-                [],
-                [],
-                [],
-                [],
-                null,
-                null,
-                [],
-                $term
-            );
-
-            $contents = $this->contentService->getByIds($contentIds);
-            $return = [
-                'results' => $contents,
-                'total_results' => $totalResults,
-                'filter_options' => $filters,
-                'custom_pagination' => [
-                    'total' => $totalResults,
-                    'count' => count($contents),
-                    'per_page' => $limit,
-                    'current_page' => $page,
-                    'total_pages' => ceil($totalResults / $limit),
-                    'links' => [],
-                ],
-            ];
-            config(['railcontent.available_brands' => $oldBrands]);
-
-            return $return;
-        } else {
-            $return = [
+        $return = [
                 'results' => $this->contentService->getByIds(
                     $this->fullTextSearchRepository->search(
                         $term,
@@ -173,7 +116,7 @@ class FullTextSearchService
                     $instructorIds
                 ),
             ];
-        }
+
         ConfigService::$availableBrands = $oldBrands;
 
         return $return;

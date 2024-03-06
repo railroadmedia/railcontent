@@ -59,6 +59,8 @@ use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\Expression;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
@@ -176,6 +178,40 @@ class RailcontentServiceProvider extends ServiceProvider
             'set as the :attribute for this content-type with the current or requested content-status. Please ' .
             'double-check the input value and try again.'
         );
+
+        Builder::macro('joinLateral', function ($query, $as, $type = 'inner') {
+            if (!in_array($type, ['inner', 'left', 'right', 'outer', 'cross'])) {
+                throw new \InvalidArgumentException("Invalid type (". $type .") use: inner | left | right | outer | cross");
+            }
+
+            if (!(($query instanceof \Closure) || ($query instanceof \Illuminate\Database\Query\Builder))) {
+                throw new \InvalidArgumentException('$query need to be an instance of \Closure OR \Illuminate\Database\Query\Builder');
+            }
+
+            [$subQuery, $bindings] = $this->createSub($query);
+
+            $expression = "lateral ($subQuery) as {$this->grammar->wrapTable($as)} on true";
+
+            $join = $this->newJoinClause($this, $type, new Expression($expression));
+
+            $this->joins[] = $join;
+
+            $this->addBinding($bindings, 'join');
+
+            return $this;
+        });
+
+        Builder::macro('innerJoinLateral', function ($query, $as) {
+            return $this->joinLateral($query, $as, 'inner');
+        });
+
+        Builder::macro('leftJoinLateral', function ($query, $as) {
+            return $this->joinLateral($query, $as, 'left');
+        });
+
+        Builder::macro('rightJoinLateral', function ($query, $as) {
+            return $this->joinLateral($query, $as, 'right');
+        });
     }
 
     private function setupConfig()
