@@ -445,8 +445,9 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -469,6 +470,7 @@ return [
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -483,16 +485,18 @@ return [
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
                 'allowableFilters' => ['focus','style'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['focus', 'style'],
             ],
             'courses' => [
                 'name' => 'Courses',
                 'icon' => 'icon-courses',
                 'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
@@ -518,8 +522,9 @@ return [
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 'allowableFilters' => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
+                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -545,8 +550,9 @@ return [
                 'icon' => 'icon-student-focus',
                 'description' => "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'focus', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'focus', 'lifestyle'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty',  'instructor', 'topic'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -572,7 +578,8 @@ return [
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
                 'allowableFilters' => ['topic', 'progress', 'instrument'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'instrument', 'topic'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'instrument', 'topic'],
+                'allowableFiltersMobile' => ['topic',  'instrument','progress'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -614,6 +621,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "We're standing on the shoulders of giants. Those who came before us paved the way for everyone who came after by developing most of what we take for granted today, in the world of drum-set playing. Learning about these giants and their contributions to our craft is essential to fully appreciate and understand what we do as musicians. This is the journey Todd Sucherman is inviting you to take on with him, as he navigates the incredible world of Spotlight.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
                 'amountOfFutureLessonsToShow' => 10,
@@ -626,7 +634,8 @@ return [
                 'description' => "Drummers love their gear - and in here you will find videos on gear demos,
                     reviews, maintenance, tuning tips and much more.",
                 'allowableFilters' => ['instructor', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -656,7 +665,8 @@ return [
                     more brain power and practice to get down. They are a great way to motivate you to get behind
                     the kit or pad to practice, and cover the entire gamut of drumming skill level.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -685,8 +695,9 @@ return [
                 'description' => "Grab your sticks and practice along while watching a lesson! These boot camps
                     are designed like workout videos so you can follow along and push your drumming at the same time.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -713,7 +724,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -733,6 +744,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'podcasts' => [
@@ -744,6 +756,7 @@ return [
                     about drum topics or interviews with the greats you are looking for, these are an entertaining
                     and educational way to pass the time.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-sort',
             ],
@@ -756,6 +769,7 @@ return [
                     some of the biggest drum/music events in the world, as well as factory tours of your favorite
                     drum brands.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
@@ -767,6 +781,7 @@ return [
                 'description' => "Have you ever wondered what it’s like to work at the Drumeo office?
                     This is your behind the scenes look at what we do and all the shenanigans that happen day to day.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-sort',
             ],
@@ -778,6 +793,7 @@ return [
                 'description' => "Study the greats with Austin Burcham! These lessons break down the beats,
                     licks, and ideas of some of the most famous drummers we have had out on Drumeo.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -788,8 +804,9 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Practice sessions, Q&A, celebrations, and more are available during Drumeo live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => [],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -817,8 +834,9 @@ return [
                 'description' => "Watch drum solos performed by the many different artists we have had out
                     on Drumeo! A great way to be entertained, motivated, and to learn through amazing performances.",
                 'allowableFilters' => ['instructor', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['instructor'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -846,8 +864,9 @@ return [
                 'description' => "Watch the world's best drummers perform songs, duets, and other inspirational
                     pieces. Sit back, relax, and get ready to be inspired by these amazing performances!",
                 'allowableFilters' => ['instructor', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['instructor'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -874,6 +893,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Join Carson and his extraterrestrial roommate Gary as they travel through time and space exploring some of earth's greatest hip-hop beats and delicious snacks.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -884,6 +904,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Take a closer look at Sonor Drums with Jared as he explores the Sonor Factory in Bad Berleburg Germany and interviews the people behind the amazing brand.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'published_on',
             ],
@@ -894,8 +915,9 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Take a closer look at Paiste Cymbals with Jared as he explores the Paiste factory in Switzerland and interviews the people behind the amazing brand.",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' => [],
                 'sortBy' => 'published_on',
+                'allowableFiltersMobile' => [],
             ],
             'rhythms-from-another-planet' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/rythms-from-another-planet.jpg',
@@ -904,6 +926,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Flying Saucers Over Canada! Aliens from the Horsehead Nebula are here glitching humans! Aaron assembles an assortment of numerically nimble nerds to save the day! Tag along for the adventure, Glitchings, Quintuplet Panteradies, and save the world to learn some phenomenally fancy fives!",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -914,6 +937,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Take a closer look at Tama Drums with Jared as he explores the Tama factory in Japan, learns about Japanese Culture, experiments with traditional Taiko drummers,  and interviews the people behind the amazing brand.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'published_on',
             ],
@@ -924,8 +948,9 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['instructor','progress'],
             ],
             'student-collaborations' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/student-collaborations.jpg',
@@ -934,6 +959,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Collaborate with the community with Drumeo Monthly Collaborations! Each month a new Play-Along is chosen and members are tasked to submit their videos playing along to the song. At the end of each month, every video is joined together to create a single performance!",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
                 'trailer1' => 448684113,
@@ -946,6 +972,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Step into David Raouf’s workshop where he will show you how to repurpose old and broken drum gear into usable and functional items! Whether you are a handyman or not, this show will give you unique and creative ideas and drum hacks that you have never seen before!",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -956,6 +983,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "In The Rhythmic Adventures of Captain Carson, kids will join Captain Carson and his best friends Ricky (the robot) and Gary (the alien) as they fly through space and learn fun musical grooves. But they’ve got to be quick, because the tricky Groove Troll is trying to steal their groove!",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -975,6 +1003,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Join the roadies of Rush and get a firsthand look at what it's like to be part of one of our favorite bands. You’re going on an exciting, behind-the-scenes journey to their 2008 Snakes & Arrows Concert Tour - an exclusive invitation to witness the reveal of all of the band’s backstage secrets. Roadies are the unsung heroes of any band - and being a roadie with a top-rated, world-famous rock and roll band is a highly coveted job. It may appear to be all glamour and adventure, but it can be a grueling marathon of 18-hour workdays!",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -985,6 +1014,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "The music industry is dominated by electronic music and electronic drums. For the first time ever, we’ve gathered 14 of the most innovative electronic drum kits to learn more about how they were made, how they work, and most importantly, how they sound.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
                 'amountOfFutureLessonsToShow' => 10,
@@ -995,7 +1025,7 @@ return [
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['bpm', 'style', 'difficulty'],
-                'allowableFiltersMobile' => ['difficulty', 'bpm', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'bpm', 'genre'],
                 'tabs' => [
                     [
                         'name' => 'All Play-Alongs',
@@ -1003,6 +1033,7 @@ return [
                         'value' => [''],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
             'drum-fest-international-2022' => [
                 'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/2c12c9ae-5a67-4767-f257-d1fa3693bd00/public',
@@ -1011,6 +1042,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => " In 2022, Drumeo had the exclusive honor of filming Ralph Angelillo’s Drum Fest International. It was an incredible gathering of some of the best drummers in the world. Tune in to see a spectrum of unforgettable performances - from Greyson Nekrutman’s show-stopping jazz, to Simon Phillips’ fancy fusion work, these are videos you do not want to miss.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
@@ -1019,6 +1051,7 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
             ],
@@ -1027,14 +1060,16 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'topic', 'style'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'workout' => [
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -1074,11 +1109,12 @@ return [
                 'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' => [],
                 'sortBy' => '-published_on',
             ],
             'coach-lessons' => [
                 'allowableFilters' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
-                'allowableFiltersMobile' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
+                'allowableFiltersMobileV2' => ['difficulty', 'style','essentials','theory','lifestyle','type'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1107,6 +1143,7 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor','progress'],
                 'shortname' => 'New',
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Pianote. Browse on your own or use search to find whatever it is you'd like to learn!",
@@ -1134,6 +1171,7 @@ return [
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+                'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -1151,7 +1189,8 @@ return [
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
                 'allowableFilters' => ['focus'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobile' => ['focus', 'style'],
                 'sortBy' => '-published_on',
             ],
             'songs' => [
@@ -1165,6 +1204,7 @@ return [
                 'showFutureLessonAtTopOrBottom' => 'bottom',
                 'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'sortBy' => 'slug',
+                'allowableFiltersMobileV2' => ['difficulty',  'style', 'artist', 'progress'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -1189,8 +1229,9 @@ return [
                 "name" => "Courses",
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/courses.jpg',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'shortname' => 'Courses',
                 "icon" => "icon-courses",
                 "description" => "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.",
@@ -1221,6 +1262,7 @@ return [
                 'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/7979495d-d06a-4f78-161f-2f670f6f9800/public',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobileV2' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'shortname' => 'Quick Tips',
                 'icon' => 'fa-lightbulb',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
@@ -1255,8 +1297,9 @@ return [
                 'icon' => 'icon-student-focus',
                 'description' => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
                 'amountOfFutureLessonsToShow' => 3,
+                'allowableFiltersMobile' => [],
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'focus'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'focus'],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1283,6 +1326,7 @@ return [
                 'name' => 'Q&A',
                 'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobileV2' => ['instructor','progress'],
                 'shortname' => 'Q&A',
                 'icon' => 'icon-student-focus',
                 'description' => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
@@ -1318,8 +1362,9 @@ return [
                 'icon' => 'icon-chords-scales-icon',
                 'description' => "These bootcamps deliver results, but they also require commitment. Select a topic that you want to become an expert in, and get ready to learn!",
                 'amountOfFutureLessonsToShow' => 3,
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1344,8 +1389,9 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/podcast.png',
                 'name' => 'The Pianote Podcast',
                 'allowableFilters' => ['instructor'],
-                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' => [],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => [],
                 'shortname' => 'Podcast',
                 'icon' => 'icon-podcast',
                 'description' => "Join Lisa in her quest to unify piano players around the world, build community, and make playing the piano cool!",
@@ -1387,8 +1433,9 @@ return [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/bootcamps.jpg',
                 'name' => 'Bootcamps',
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobileV2' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'shortname' => 'Bootcamps',
                 'icon' => 'icon-chords-scales-icon',
                 'description' => "These bootcamps deliver results, but they also require commitment. Select a topic that you want to become an expert in, and get ready to learn!",
@@ -1421,11 +1468,12 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'song tutorials',
+                'allowableFiltersMobile' => ['difficulty', 'style', 'artist', 'progress'],
                 "icon" => "play-progress",
                 "description" => "",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1448,7 +1496,8 @@ return [
             ],
             'workout' => [
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -1481,6 +1530,7 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
             ],
@@ -1489,7 +1539,8 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'topic', 'style'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
@@ -1499,6 +1550,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
@@ -1533,8 +1585,9 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1556,6 +1609,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
             'coaches' => [
@@ -1563,15 +1617,16 @@ return [
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
                 'allowableFilters' => ['progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['focus', 'style'],
             ],
             'courses' => [
                 "name" => "Courses",
                 "icon" => "icon-courses",
                 "description" => "These jam-packed training courses cover various lesson topics in detail. Find one that suits your guitar goals, and get started!",
                 "allowableFilters" => ['difficulty', 'topic', 'instructor', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
@@ -1591,13 +1646,14 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'songs' => [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -1617,13 +1673,14 @@ return [
                         'value' => ['style']
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
             ],
             'play-alongs' => [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Our play-along feature teaches you chords, strumming patterns, riffs, and song layouts -- with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['difficulty', 'style', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'bpm', 'genre','essentials','theory'],
+                'allowableFiltersMobileV2' => ['difficulty', 'bpm', 'genre','essentials','theory'],
                 'tabs' => [
                     [
                         'name' => 'All Play-Alongs',
@@ -1631,12 +1688,14 @@ return [
                         'value' => [''],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
             'chords-scales' => [
                 "name" => "Chords",
                 "icon" => "icon-chords-scales-guitareo",
                 "description" => "Chords are one of the building blocks of playing the guitar. This is an excellent reference for expanding your chords vocabulary!",
                 "allowableFilters" => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
             ],
             'archives' => [
@@ -1645,7 +1704,7 @@ return [
                 "icon" => "icon-library",
                 "description" => "Miss a live event or just want to watch a particular episode again? This is the place to do it. All of the Guitareo live broadcasts are archived here for you to watch at your leisure. If you have any questions or want to discuss the topics mentioned in the videos you can always post in the forum.",
                 "allowableFilters" => ['difficulty', 'topic', 'progress', 'instructor'],
-                'allowableFiltersMobile' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1665,6 +1724,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/297dc5b4-e878-4238-d5b5-ed0588ee0b00/public',
@@ -1673,7 +1733,7 @@ return [
                 "icon" => "icon-shows",
                 "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 "allowableFilters" => ['difficulty', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre','essentials','theory','lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre','essentials','theory','lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1693,6 +1753,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer-singeo.png',
@@ -1700,6 +1761,7 @@ return [
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
+                'allowableFiltersMobileV2' => ['instructor', 'progress'],
                 'allowableFiltersMobile' => ['instructor', 'progress'],
             ],
             'student-reviews' => [
@@ -1708,7 +1770,7 @@ return [
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'genre','focus'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre','focus'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1728,6 +1790,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => [],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -1739,7 +1802,7 @@ return [
             ],
             'workout' => [
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -1771,6 +1834,7 @@ return [
                         'value' => ['instructor'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -1778,17 +1842,19 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
             ],
             'challenge' => [
                 'name' => 'Challenges',
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'topic', 'style'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'recommended' => [
                 'name' => 'Recommended For You',
@@ -1796,8 +1862,9 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => [],
+                'allowableFiltersMobileV2' => [],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => [],
             ],
             'song-pdf' => [
                 'allowableFiltersMobile' => ['difficulty', 'genre'],
@@ -1853,8 +1920,9 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1876,6 +1944,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
             'coaches' => [
@@ -1884,7 +1953,8 @@ return [
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
                 'allowableFilters' => ['progress'],
                 'sortBy' => '-published_on',
-                'allowableFiltersMobile' => ['difficulty', 'genre','essentials','theory','lifestime','creativity'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre','essentials','theory','lifestime','creativity'],
+                'allowableFiltersMobile' => ['focus', 'style'],
 
             ],
             'subscribed' => [
@@ -1900,7 +1970,7 @@ return [
                 "icon" => "icon-courses",
                 "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Courses',
@@ -1920,13 +1990,14 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'songs' => [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'lifestyle','instrumentless'],
                 'tabs' => [
                     [
                         'name' => 'Songs',
@@ -1946,6 +2017,7 @@ return [
                         'value' => ['style']
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/8464033e-9b4e-458e-d613-e89fb47e2a00/public',
@@ -1953,7 +2025,7 @@ return [
                 "icon" => "icon-shows",
                 "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1973,6 +2045,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer.png',
@@ -1980,7 +2053,7 @@ return [
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'lifestyle'],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -2000,6 +2073,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['instructor', 'progress'],
             ],
             'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
@@ -2007,7 +2081,7 @@ return [
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'focus', ],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'focus', ],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -2027,6 +2101,7 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+                'allowableFiltersMobile' => [],
             ],
             'routines' => [
                 "name" => "Routines",
@@ -2034,7 +2109,7 @@ return [
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
                 'allowableFiltersMobile' => [],
-                'allowableFiltersMobile' => ['difficulty', 'genre', 'type'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'type'],
                 'tabs' => [
                     [
                         'name' => 'All Routines',
@@ -2042,10 +2117,11 @@ return [
                         'value' => [''],
                     ],
                 ],
+                'allowableFiltersMobile' => [],
             ],
             'workout' => [
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'tabs' => [
                     [
                         'name' => 'All',
@@ -2071,6 +2147,7 @@ return [
                         'value' => ['instructor'],
                     ],
                 ],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'modalText' => 'Workouts are fun play-along lessons that help hone your musical skills. They cover various topics, and have multiple difficulty and duration options — so there’s always a perfect Workout for you. Just pick one, press start, and play along!',
             ],
             'challenge-part' => [
@@ -2078,16 +2155,18 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'style', 'topic'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
             ],
             'challenge' => [
                 'name' => 'Challenges',
                 'icon' => 'icon-courses',
                 'description' => "... ",
                 'allowableFilters' => ['difficulty', 'topic', 'style'],
-                'allowableFiltersMobile' => ['difficulty', 'topic', 'style'],
+                'allowableFiltersMobileV2' => ['difficulty', 'topic', 'style'],
                 'sortBy' => '-published_on',
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
@@ -2096,6 +2175,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
                 'allowableFilters' => [],
+                'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
@@ -2925,4 +3005,5 @@ return [
                 '1' => 'Vocals Removed',
             ],
         ],
+    'filter_version' => 1,
 ];
