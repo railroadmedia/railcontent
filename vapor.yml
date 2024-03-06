@@ -60,7 +60,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     beta-testing:
@@ -90,7 +90,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-one:
@@ -119,7 +119,7 @@ environments:
             - 'php artisan event:clear'
             - 'php artisan route:clear'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-two:
@@ -148,7 +148,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-three:
@@ -177,7 +177,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-four:
@@ -206,7 +206,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-five:
@@ -235,7 +235,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     app-staging-one:
@@ -264,7 +264,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     app-staging-two:
@@ -293,7 +293,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     app-staging-three:
@@ -322,6 +322,6 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'

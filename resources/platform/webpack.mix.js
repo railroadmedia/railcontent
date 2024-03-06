@@ -62,3 +62,5 @@ mix.webpackConfig(webpack => {
         ]
     };
 });
+
+module.exports = mix;
