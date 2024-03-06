@@ -147,12 +147,12 @@ class EventTrackingService
 
         $refundLineItemsAmount = $refundLineItems
             ->pluck('subtotal_set')
-            ->map(fn ($a) => floatval($a['presentment_money']['amount']))
+            ->map(fn($a) => floatval($a['presentment_money']['amount']))
             ->sum();
 
         $orderAdjustmentsAmount = collect($refund['order_adjustments'])
             ->pluck('amount_set')
-            ->map(fn ($a) => floatval($a['presentment_money']['amount']) * -1)
+            ->map(fn($a) => floatval($a['presentment_money']['amount']) * -1)
             ->sum();
 
         $lineItems = $refundLineItems->pluck('line_item')->toArray();
@@ -174,7 +174,8 @@ class EventTrackingService
             ->map(function (array $discount) {
                 return match ($discount['type']) {
                     'automatic' => $discount['title'],
-                    'discount_code' => $discount['code']
+                    'discount_code' => $discount['code'],
+                    default => ''
                 };
             })->toArray();
     }
