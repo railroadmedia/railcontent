@@ -3075,7 +3075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/transformer-sass@npm:^2.7.0":
+"@parcel/transformer-sass@npm:^2.12.0":
   version: 2.12.0
   resolution: "@parcel/transformer-sass@npm:2.12.0"
   dependencies:
@@ -13496,7 +13496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parcel@npm:^2.7.0":
+"parcel@npm:^2.12.0":
   version: 2.12.0
   resolution: "parcel@npm:2.12.0"
   dependencies:
@@ -15361,7 +15361,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.22.5"
     "@heroicons/vue": "npm:^1.0.5"
     "@musora/icons": "npm:^1.0.6"
-    "@parcel/transformer-sass": "npm:^2.7.0"
+    "@parcel/transformer-sass": "npm:^2.12.0"
     "@parcel/transformer-vue": "npm:2.7.0"
     "@storybook/addon-actions": "npm:^7.6.17"
     "@storybook/addon-designs": "npm:^7.0.9"
@@ -15413,7 +15413,7 @@ __metadata:
     mux.js: "npm:^5.5.1"
     normalize.css: "npm:^8.0.1"
     noty: "npm:^3.2.0-beta-deprecated"
-    parcel: "npm:^2.7.0"
+    parcel: "npm:^2.12.0"
     pinia: "npm:^2.1.7"
     postcss: "npm:^8.4.35"
     postcss-import: "npm:^15.0.0"
