@@ -1,5 +1,5 @@
 <template>
-    <section class="tw-flex tw-flex-row" :class="isMiniView ? 'tw-mb-[18px]' : 'tw-mb-[14px] lg:tw-mb-[6px]'" >
+    <section class="tw-flex tw-flex-row" :class="isMiniView ? 'tw-mb-[18px]' : 'tw-mb-[30px]'" >
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
