@@ -2851,7 +2851,7 @@ class ContentService
                 $mappedDifficulty[$difficulty] = $difficultyNr;
             }
         }
-        $order = array('-','All','Novice','Beginner', 'Intermediate', 'Advanced', 'Expert');
+        $order = array('-','All','Introductory','Beginner', 'Intermediate', 'Advanced', 'Expert');
         $properOrderedArray = array_merge(array_fill_keys($order, 0), $mappedDifficulty);
         $filters['difficulty'] = [];
         foreach ($properOrderedArray as $difficulty => $count) {
