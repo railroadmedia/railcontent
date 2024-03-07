@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tw-mb-[30px]">
         <slot></slot>
 
         <transition name="show-from-bottom">
