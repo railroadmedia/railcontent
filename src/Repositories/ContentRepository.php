@@ -1658,6 +1658,9 @@ class ContentRepository extends RepositoryBase
         if($name == 'difficulty') {
             $difficultyMapping = config('railcontent.difficulty_map') ?? [];
             $difficultyValues = array_keys($difficultyMapping, $value);
+            if(empty($difficultyValues)) {
+                $difficultyValues = [$value];
+            }
 
             foreach ($difficultyValues ?? [] as $difficultyInt) {
                 $this->includedFields[] = [
@@ -3064,6 +3067,7 @@ class ContentRepository extends RepositoryBase
                     $this->typesToInclude[0] === 'course' ||
                     $this->typesToInclude[0] === 'rudiment' ||
                     $this->typesToInclude[0] === 'song-tutorial' ||
+                    $this->typesToInclude[0] === 'student-review' ||
                     $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' :
                     $this->typesToInclude[0];
             $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
