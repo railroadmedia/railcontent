@@ -51,7 +51,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
                             'brand' => brand(),
                             'firstContentSlug' => $content['slug'],
                             'firstContentId' => $content['id'],
-                        ]).'?included_types[]='.$content['content_type'];
+                        ]).'?included_fields[]=type,'.ucfirst($content['content_type']);
                 }else{
                     //for mobile app - See All options
                     $contents[$index]['url'] = url()->route('platform.content.coach.show', [
