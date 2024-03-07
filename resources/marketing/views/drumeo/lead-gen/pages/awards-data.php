@@ -362,3 +362,67 @@ $legacyAwards2021 = [
         "description" => "Tony Williams was just 17 years old when he played on Miles Davis’ revolutionary album, Seven Steps To Heaven. This award is presented to a “rookie” drummer who has made a memorable impact at a young age. The winner will have made valuable contributions to drumming and/or inspired others with their music during a ‘breakout’ year.<br><br> This year’s winner is Nandi Bushell, who truly embodies the spirit of this award. Her infectious energy and passion encourages and inspires people to get excited about drumming and about music. Like Tony Williams working with legends at a young age, Nandi has already collaborated with huge names like Dave Grohl and Tom Morello. She is fearlessly setting an incredible course for herself as a developing artist and positive role model.",
     ],
 ];
+
+$pianoteAwards2023 = [
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/coryhenry-jazz.webp",
+        "award" => "Jazz Pianist Of The Year",
+        "winner" => "Cory Henry",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/jemmaheigis-poppianist.webp",
+        "award" => "Pop Pianist Of The Year",
+        "winner" => "Jemma Heigis",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/jonbatiste-originalcomposition.webp",
+        "award" => "Composition Of The Year",
+        "winner" => "Butterfly - Jon Batiste",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/jonbatiste-pianistoftheyear.webp",
+        "award" => "Pianist Of The Year",
+        "winner" => "Jon Batiste",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/jordanrudess-contemporary.webp",
+        "award" => "Contemporary Pianist Of The Year",
+        "winner" => "Jordan Rudess",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/judekofie-mostinspiring.webp",
+        "award" => "Most Inspiring Pianist Of The Year",
+        "winner" => "Jude Kofie",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/justinleeschultz-insta.webp",
+        "award" => "Instagram Pianist Of The Year",
+        "winner" => "Justin Lee Schultz",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/lordvinheteiro-youtube.webp",
+        "award" => "YouTube Pianist Of The Year",
+        "winner" => "Lord Vinheteiro",
+        "description" => "todo",
+    ],
+    [
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/margaritasipatova-tiktok.webp",
+        "award" => "TikTok Pianist Of The Year",
+        "winner" => "Margarita Sipatova",
+        "description" => "todo",
+    ],
+    [
+        "last-child" => true,
+        "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/yujawang-classical.webp",
+        "award" => "Classical Pianist Of The Year",
+        "winner" => "Yuja Wang",
+        "description" => "todo",
+    ],
+];
