@@ -107,7 +107,7 @@
                                     <i class="align-middle text-base -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                                     <i class="align-middle text-base -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                                 </a>
-                                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by 81,687 active students.</em></p>
+                                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
                             </div>
                         </div>
                     </div>
