@@ -114,7 +114,13 @@
         <div class="container mx-auto">
             <h1 class="leading-tight mb-7 sm:mb-10"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto mb-2 sm:mb-3">
-                <img class="h-28 sm:h-52 lg:h-72" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-metronome2.webp">
+                <img class="h-28 sm:h-52 lg:h-72"
+                    @if($stock == 123)
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-regular-metronome.webp"
+                    @else
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-metronome2.webp"
+                    @endif
+                >
             </div>
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mb-1">
@@ -127,7 +133,10 @@
                 <p class="leading-tight text-sm"><em>One time payment.</em></p>
                 <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
-                <p class="leading-tight mt-4">ONLY <s class='opacity-60'>100</s> {{ $stock }} SPOTS AVAILABLE</p>
+
+                @if($stock != 123)
+                    <p class="leading-tight mt-4">ONLY <s class='opacity-60'>100</s> {{ $stock }} SPOTS AVAILABLE</p>
+                @endif
             </div>
         </div>
     </section>
@@ -280,7 +289,27 @@
             <p class="leading-tight"><em>Get yours FREE with a Lifetime Membership.</em></p>
         </div>
     </section>
-    @if($stock > 0)
+    @if($stock == 123)
+        <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
+            <div class="container mx-auto z-10 relative max-w-5xl">
+                <img class="h-24 sm:h-28 lg:h-36" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/promos/march/metronome-logo.png">
+                <p class="leading-normal my-7 max-w-2xl">Let’s be honest. Piano players don’t like metronomes. But you’ll love using this one. The beautiful styling and quality feel are so much better than any app. And precision German manufacturing will mean your metronome will last as long as you keep playing.</p>
+                <div class="flex flex-wrap items-center">
+                    <div class="w-full sm:w-1/2 sm:order-1">
+                        <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-gallery-06.jpg')"></div></div>
+                    </div>
+                    <div class="w-1/2 sm:w-1/4">
+                        <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-gallery-01.jpg')"></div></div>
+                        <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-gallery-04.jpg')"></div></div>
+                    </div>
+                    <div class="w-1/2 sm:w-1/4 sm:order-2">
+                        <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-gallery-07.jpg')"></div></div>
+                        <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-gallery-05.jpg')"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @else
         <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
             <div class="container mx-auto z-10 relative max-w-5xl">
                 <img class="h-24 sm:h-28 lg:h-36" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/products/prestige-metronome/logo-m2.svg">
@@ -312,7 +341,36 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @php
-    if($stock > 0) {
+    if($stock == 123) {
+        $bonuses = [
+            [
+                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
+                'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
+                'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/march/bookbag-card.webp',
+                'description' => 'A premium leather satchel for your music books, laptop, and life.',
+                'price' => floatval($productPrices['pianote-book-bag']->price),
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
+                'description' => 'Your encyclopedia of piano chords & scales.',
+                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                'shipping' => true,
+            ],
+            [
+                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
+                'description' => 'Plan your practice and reach your goals with this beautiful planner.',
+                'price' => floatval($productPrices['pianote-practice-planner']->price),
+                'shipping' => true,
+            ],
+        ];
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
+    } else {
         $bonuses = [
             [
                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/march/metronome-card.webp',
@@ -342,45 +400,7 @@
         ];
         $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
         $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
-    } else {
-        $bonuses = [
-            [
-                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
-                'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
-                'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
-                'shipping' => true,
-            ],
-            [
-                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/march/bookbag-card.webp',
-                'description' => 'A premium leather satchel for your music books, laptop, and life.',
-                'price' => floatval($productPrices['pianote-book-bag']->price),
-                'shipping' => true,
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                'description' => 'Your encyclopedia of piano chords & scales.',
-                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                'shipping' => true,
-            ],
-            [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
-                'description' => 'Plan your practice and reach your goals with this beautiful planner.',
-                'price' => floatval($productPrices['pianote-practice-planner']->price),
-                'shipping' => true,
-            ],
-        ];
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
-        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
     }
-    @endphp
-    @php
-//        if(!empty($upgradeVersion)) {
-//            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
-//            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[musora-access-1-year]=1&products[taktell-piccolo-metronome]=1&products[pianote-practice-planner]=1&products[christmas-songbook]=1&products[christmas-song-book-digital]=1&products[classical-piano-pieces]=1&products[music-theory-posters]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&products[piano-technique-made-easy]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849,lifetime-existing';
-//        } else {
-//            $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
-//            $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME-3-pay]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849';
-//        };
     @endphp
 
     <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
@@ -408,7 +428,9 @@
                 </h2>
                 <p class="leading-tight text-sm">One time payment.</p>
                 <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-                <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                @if($stock != 123)
+                    <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                @endif
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE anniversary bonuses</strong></h3>
             </div>
             <div style="font-size:0px">
@@ -483,7 +505,7 @@
 {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
             @if($stock > 0)
-                <a class="inline-block leading-tight text-white opacity-70" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
+                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
             @endif
         </div>
     </section>

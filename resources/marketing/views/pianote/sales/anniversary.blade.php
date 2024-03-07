@@ -55,7 +55,7 @@
                 <img class="h-56 lg:h-80 sm:order-1 transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline2.webp"
 
                     alt="learn playing image"
                 >
