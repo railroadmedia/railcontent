@@ -28,7 +28,7 @@
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks"
-                        :force-list-view="displayInline" :break-to-list-view="breakToListView" @addToList="addToList"
+                        :force-list-view="displayInline" :break-to-list-view="breakToListView" :is-single-row="isSingleRow" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
             </div>
@@ -130,6 +130,10 @@ const props = defineProps({
         default: () => false,
     },
     useRefData: {
+        type: Boolean,
+        default: () => false,
+    },
+    isSingleRow: {
         type: Boolean,
         default: () => false,
     },
