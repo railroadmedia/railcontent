@@ -74,7 +74,7 @@ export default {
         //Thumbnail
         lessonThumbnail() {
             const thumbnail = this.lessonData['data'].find(data => data.key === 'thumbnail_url');
-            return thumbnail.value;
+            return thumbnail && thumbnail.value;
         },
         lessonTitle() {
             const title = this.lessonData['fields'].find(data => data.key === 'title');
