@@ -113,7 +113,6 @@ class Kernel extends HttpKernel
             BrandMiddleware::class,
             \App\Modules\Ecommerce\Middleware\RedirectLegacyCartRequestsToShopifyControllers::class,
             LogOutWhenNeeded::class,
-            AuthenticateSession::class,
         ],
 
         // Do not add more middleware to these 2 without good reason!
