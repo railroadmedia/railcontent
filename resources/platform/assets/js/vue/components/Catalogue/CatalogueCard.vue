@@ -7,7 +7,8 @@
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
             class_object,
-            forceListView || breakToListView ? 'tw-py-3 lg:tw-py-0 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-[267px]' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0'}  lg:tw-w-auto tw-shrink-0 lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden`}`,
+            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-auto' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0'} lg:tw-w-auto tw-shrink-0 `}`,
+            { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow }
         ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
@@ -15,8 +16,8 @@
         ]">
             <!-- Thumbnail Section -->
             <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'tw-w-[142px] md:tw-w-[200px] lg:tw-w-full tw-flex-shrink-0 tw-mr-3': forceListView || breakToListView },
-                { 'lg:tw-mr-0 lg:tw-w-full lg:tw-flex-shrink': breakToListView },
+                { 'tw-w-[142px] tw-flex-shrink-0 tw-mr-3': forceListView || breakToListView },
+                { 'lg:tw-mr-0 lg:tw-w-full lg:tw-flex-shrink lg:tw-w-full': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
@@ -214,6 +215,10 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    isSingleRow: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const {
@@ -344,8 +349,8 @@ const mappedData = computed(() => {
 const class_object = computed(() => ({
     'no-access': noAccess.value,
     completed: props.item.completed,
-    'dark:tw-border-[#223F57]': props.forceListView,
-    'display-inline': props.forceListView,
+    'dark:tw-border-[#223F57] tw-inline': props.forceListView,
+    'lg:tw-py-0': props.breakToListView,
 }));
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
