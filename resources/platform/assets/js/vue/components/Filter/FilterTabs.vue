@@ -15,6 +15,11 @@
 
 <script setup>
 import { computed } from "vue";
+import {useCollectionStore} from "../../../stores/collection";
+import {storeToRefs} from "pinia/dist/pinia";
+
+const collectionStore = useCollectionStore();
+const { loading: collectionStoreLoading } = storeToRefs(collectionStore);
 
 const props = defineProps({
     tabOptions: {
@@ -33,7 +38,7 @@ const isActive = (value) => {
 };
 
 const onTabClick = (tab) => {
-    emit('onTabClick', tab);
+    !collectionStoreLoading.value && emit('onTabClick', tab);
 };
 
 const isMultipleTabs = computed(() => {
