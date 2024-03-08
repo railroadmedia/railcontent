@@ -20,7 +20,7 @@
         </a>
     </div>
 
-    <div class="tw-mb-[30px]">
+    <div class="tw-mb-[20px]">
         <transition appear name="fade">
             <CatalogueCardContainer :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" />
         </transition>
