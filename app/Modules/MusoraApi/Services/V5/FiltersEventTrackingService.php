@@ -4,15 +4,20 @@ namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class FiltersEventTrackingService
 {
     public function trackFilterApplied(Request $request): void
     {
-        ['section' => $section, 'filters' => $requestFilters, 'progress' => $progress] = $request->validate(
+        [
+            'section' => $section,
+            'filters' => $requestFilters,
+            'progress' => $progress,
+            'brand' => $brand
+        ] = $request->validate(
             [
+                'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'filters' => ['required', 'array'],
                 'filters.*' => ['required', 'string'],
@@ -40,7 +45,7 @@ class FiltersEventTrackingService
                 [
                     'filters' => $filters,
                     'navigation_section' => $section,
-                    'brand' => $properties['brand'] ?? brand(),
+                    'brand' => $brand,
                 ],
                 user()
             )
@@ -49,8 +54,9 @@ class FiltersEventTrackingService
 
     public function trackFilterGroupApplied(Request $request): void
     {
-        ['section' => $section, 'group' => $group] = $request->validate(
+        ['section' => $section, 'group' => $group, 'brand' => $brand] = $request->validate(
             [
+                'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'group' => ['required', 'string'],
             ]
@@ -61,7 +67,7 @@ class FiltersEventTrackingService
                 [
                     'filter_group' => $group,
                     'navigation_section' => $section,
-                    'brand' => brand(),
+                    'brand' => $brand,
                 ],
                 user()
             )
@@ -70,8 +76,9 @@ class FiltersEventTrackingService
 
     public function trackSortingApplied(Request $request): void
     {
-        ['section' => $section, 'sort' => $sort] = $request->validate(
+        ['section' => $section, 'sort' => $sort, 'brand' => $brand] = $request->validate(
             [
+                'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'sort' => ['required', 'string'],
             ]
@@ -91,7 +98,7 @@ class FiltersEventTrackingService
                 [
                     'sorting_type' => $sortType,
                     'navigation_section' => $section,
-                    'brand' => brand(),
+                    'brand' => $brand,
                 ],
                 user()
             )
