@@ -137,6 +137,8 @@
     @endif
 @endsection
 @section('promoDetails')
+
+    <div id="bookbag" class="anchor"></div>
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
         <div class="container mx-auto z-10 relative max-w-5xl">
             <p class="leading-tight"><em>Introducing the <strong class="text-pianote font-black">NEW…</strong></em></p>
@@ -317,7 +319,8 @@
         'thirdImageHeight' => 'h-20 sm:h-16 lg:h-24',
         'thirdDealSub' => "Limited quantity. ",
         'thirdDealPrice' => 1200,
-        "thirdDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849",
+        "altbuttonText" => "Learn More",
+        "thirdDealLink" => "/lifetime",
         'thirdExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1"></i> <strong> Lifetime Membership </strong>',
             '<i class="fa-solid fa-check pr-1"></i> Pianote BookBag ($249 value)',
