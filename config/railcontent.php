@@ -448,25 +448,6 @@ return [
                 'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
-                'tabs' => [
-                    [
-                        'name' => 'Lessons',
-                        'short_name' => 'LESSONS',
-                        'value' => [''],
-                    ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
-                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1154,25 +1135,6 @@ return [
                 'description' => "Here's a list of all lessons recently added to Pianote. Browse on your own or use search to find whatever it is you'd like to learn!",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'tabs' => [
-                    [
-                        'name' => 'Lessons',
-                        'short_name' => 'LESSONS',
-                        'value' => [''],
-                    ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
-                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
@@ -1598,25 +1560,6 @@ return [
                 'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor','progress'],
-                'tabs' => [
-                    [
-                        'name' => 'Lessons',
-                        'short_name' => 'LESSONS',
-                        'value' => [''],
-                    ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
-                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
@@ -1938,25 +1881,6 @@ return [
                 'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
-                'tabs' => [
-                    [
-                        'name' => 'Lessons',
-                        'short_name' => 'LESSONS',
-                        'value' => [''],
-                    ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
-                ],
             ],
             'in-progress' => [
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
