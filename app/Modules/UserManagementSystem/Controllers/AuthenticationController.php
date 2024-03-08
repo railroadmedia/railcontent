@@ -198,6 +198,7 @@ class AuthenticationController extends Controller
 
         if (!empty($user)) {
             auth()->logout();
+            session()->flush();
         }
 
         return $request->has('redirect_to') ? redirect()->away($request->get('redirect_to')) :

@@ -46,13 +46,19 @@ class GroupedContentDecorator extends ModeDecoratorBase
                     ]);
                 }
             } else {
-                $contents[$index]['url'] = url()->route('platform.content.coach.show', [
+                if(isset($content['content_type'])) {
+                    $contents[$index]['url'] = url()->route('platform.content.coach.show', [
+                            'brand' => brand(),
+                            'firstContentSlug' => $content['slug'],
+                            'firstContentId' => $content['id'],
+                        ]).'?included_types[]='.$content['content_type'];
+                }else{
+                    //for mobile app - See All options
+                    $contents[$index]['url'] = url()->route('platform.content.coach.show', [
                         'brand' => brand(),
                         'firstContentSlug' => $content['slug'],
                         'firstContentId' => $content['id'],
                     ]);
-                if(isset($content['content_type'])){
-                    $contents[$index]['url'] .= '?included_fields[]=type,'.ucfirst($content['content_type']);
                 }
             }
             $content['lessons'] = Decorator::decorate($content['lessons'], 'card');

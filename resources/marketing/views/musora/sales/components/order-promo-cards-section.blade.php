@@ -105,7 +105,7 @@
                                 <strong>${{$thirdDealPrice}}</strong>
                             </h3>
                             <p class="text-sm mb-5"><em>{!! $thirdDealSub !!}</em></p>
-                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] musora-black" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
+                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] musora-black" role="button" tabindex="0" aria-label="{{ $altbuttonText }}">{{$altbuttonText}}</div>
                         </div>
                             @if(!empty($thirdExtraBonuses))
                                 <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
