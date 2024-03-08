@@ -614,6 +614,13 @@ return [
                 'sortBy' => 'sort',
                 'amountOfFutureLessonsToShow' => 10,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
+                'tabs' => [
+                    [
+                        'name' => 'All Spotlights',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                ],
             ],
             'gear-guides' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/gear.jpg',
