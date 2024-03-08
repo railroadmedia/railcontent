@@ -7,8 +7,8 @@
     "name": "Members' Area"
   },
   "branch": {
-    "id": "master",
-    "name": "main"
+    "id": "hgGjqh5gz",
+    "name": "add-filters-tracking"
   },
   "sources": [
     {
@@ -16,9 +16,9 @@
       "name": "Musora Web Platform",
       "path": "app/Modules/EventTracking/Avo/Avo.php",
       "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
-      "actionId": "yeo7BsrobVCZTI1TjdHq",
-      "branchId": "master",
-      "updatedAt": "2024-03-01T16:37:10.937Z"
+      "actionId": "jDiXR3woyQ16ODbu4kLw",
+      "branchId": "hgGjqh5gz",
+      "updatedAt": "2024-03-08T18:29:08.377Z"
     }
   ],
   "force": false
