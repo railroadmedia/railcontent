@@ -10,7 +10,7 @@
                     <h5 class="text-gray-100 uppercase mb-2 text-lg font-bebas-neue mx-0">
                         Stay Connected
                     </h5>
-                    <p class="show-for-desktop">Join over 200,000 drummers who receive free weekly drum lessons.</p>
+                    <p class="show-for-desktop">Join over 400,000 drummers who receive free weekly drum lessons.</p>
                     <p class="hide-for-desktop">Receive free weekly lessons.</p>
                     <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form" method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
                         <input type="hidden" name="form_name" value="Blog Signup">
