@@ -15,9 +15,9 @@ class EventTrackingController extends Controller
     public function track(Request $request, string $event): void
     {
         match ($event) {
-            'filter-applied' => $this->filtersEventTrackingService->trackFilterApplied($request->all()),
-            'filter-group-applied' => $this->filtersEventTrackingService->trackFilterGroupApplied($request->all()),
-            'sorting-applied' => $this->filtersEventTrackingService->trackSortingApplied($request->all()),
+            'filter-applied' => $this->filtersEventTrackingService->trackFilterApplied($request),
+            'filter-group-applied' => $this->filtersEventTrackingService->trackFilterGroupApplied($request),
+            'sorting-applied' => $this->filtersEventTrackingService->trackSortingApplied($request),
             default => '',
         };
     }

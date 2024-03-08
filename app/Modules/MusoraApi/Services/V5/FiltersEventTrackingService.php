@@ -4,20 +4,22 @@ namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
-use Carbon\CarbonInterval;
-use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class FiltersEventTrackingService
 {
-    public function trackFilterApplied(array $properties): void
+    public function trackFilterApplied(Request $request): void
     {
-        if (!isset($properties['section']) || !isset($properties['filters'])) {
-            Log::error("FiltersEventTrackingService::trackFilterApplied: section or filters not set", $properties);
-            return;
-        }
+        ['section' => $section, 'filters' => $requestFilters] = $request->validate(
+            [
+                'section' => ['required', 'string'],
+                'filters' => ['required', 'array'],
+                'filters.*' => ['required', 'string'],
+            ]
+        );
 
-        $filters = collect($properties['filters'])->map(
+        $filters = collect($requestFilters)->map(
             function ($filter) {
                 $filterTag = explode(',', $filter);
                 return [
@@ -36,7 +38,7 @@ class FiltersEventTrackingService
             AvoHelper::defaultEventProperties(
                 [
                     'filters' => $filters,
-                    'navigation_section' => $properties['section'],
+                    'navigation_section' => $section,
                     'brand' => $properties['brand'] ?? brand(),
                 ],
                 user()
@@ -44,18 +46,20 @@ class FiltersEventTrackingService
         );
     }
 
-    public function trackFilterGroupApplied(array $properties): void
+    public function trackFilterGroupApplied(Request $request): void
     {
-        if (!isset($properties['section']) || !isset($properties['group'])) {
-            Log::error("FiltersEventTrackingService::trackFilterApplied: section or sort not set", $properties);
-            return;
-        }
+        ['section' => $section, 'group' => $group] = $request->validate(
+            [
+                'section' => ['required', 'string'],
+                'group' => ['required', 'string'],
+            ]
+        );
 
         Avo::filter_group_applied(
             AvoHelper::defaultEventProperties(
                 [
-                    'filter_group' => $properties['group'],
-                    'navigation_section' => $properties['section'],
+                    'filter_group' => $group,
+                    'navigation_section' => $section,
                     'brand' => brand(),
                 ],
                 user()
@@ -63,14 +67,16 @@ class FiltersEventTrackingService
         );
     }
 
-    public function trackSortingApplied(array $properties): void
+    public function trackSortingApplied(Request $request): void
     {
-        if (!isset($properties['section']) || !isset($properties['sort'])) {
-            Log::error("FiltersEventTrackingService::trackFilterApplied: section or sort not set", $properties);
-            return;
-        }
+        ['section' => $section, 'sort' => $sort] = $request->validate(
+            [
+                'section' => ['required', 'string'],
+                'sort' => ['required', 'string'],
+            ]
+        );
 
-        $sortType = match ($properties['sort']) {
+        $sortType = match ($sort) {
             '-popularity' => 'Most Popular',
             'popularity' => 'Least Popular',
             'slug' => 'Name: A to Z',
@@ -83,7 +89,7 @@ class FiltersEventTrackingService
             AvoHelper::defaultEventProperties(
                 [
                     'sorting_type' => $sortType,
-                    'navigation_section' => $properties['section'],
+                    'navigation_section' => $section,
                     'brand' => brand(),
                 ],
                 user()
