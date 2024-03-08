@@ -28,7 +28,7 @@ class MusoraApiServiceProvider extends ServiceProvider
     {
         // publish config file
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/journeys.php',
+            __DIR__ . '/../config/journey.php',
             'journeys'
         );
 

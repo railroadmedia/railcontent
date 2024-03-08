@@ -11,11 +11,12 @@ class FiltersEventTrackingService
 {
     public function trackFilterApplied(Request $request): void
     {
-        ['section' => $section, 'filters' => $requestFilters] = $request->validate(
+        ['section' => $section, 'filters' => $requestFilters, 'progress' => $progress] = $request->validate(
             [
                 'section' => ['required', 'string'],
                 'filters' => ['required', 'array'],
                 'filters.*' => ['required', 'string'],
+                'progress' => ['string']
             ]
         );
 
@@ -31,7 +32,7 @@ class FiltersEventTrackingService
 
         $filters[] = [
             'filter_category' => 'progress',
-            'filter_tag' => $properties['progress'] ?? 'all',
+            'filter_tag' => $progress ?? 'all',
         ];
 
         Avo::filter_applied(
