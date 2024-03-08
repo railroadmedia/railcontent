@@ -9,17 +9,28 @@ class MarketingController extends BaseController
 
     public function homepage()
     {
-        return view('musora.subscription', [
+        return view('musora.sales.subscription', [
             'theme' => 'musora',
             'fullSubscriptionVersion' => true,
         ]);
     }
     public function trial()
     {
-        return view('musora.subscription', [
+        return view('musora.sales.subscription', [
             'theme' => 'musora',
             'promoVersion' => true,
             'trialVersion' => true,
+            'scrollToJoin' => true,
+            'hideMenu' => true,
+        ]);
+    }
+    public function spotify()
+    {
+        return view('musora.sales.spotify', [
+            'theme' => 'musora',
+            'promoVersion' => true,
+            'trialVersion' => true,
+            'month' => true,
             'scrollToJoin' => true,
             'hideMenu' => true,
         ]);

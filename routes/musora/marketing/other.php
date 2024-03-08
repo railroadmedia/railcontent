@@ -11,6 +11,7 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
         Route::get('/trial', [MarketingController::class, 'trial']);
+        Route::get('/spotify', [MarketingController::class, 'spotify']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
         Route::get('6-reasons/drums', [MarketingController::class, 'sixReasonsDrums']);
         Route::get('6-reasons/piano', [MarketingController::class, 'sixReasonsPiano']);
@@ -59,4 +60,6 @@ Route::domain('{musoraDomain}')
         Route::get('singeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingSingeo']);
         Route::get('sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewMusora']);
         Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
+        Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
+        Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
     });

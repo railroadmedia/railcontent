@@ -454,18 +454,6 @@ return [
                         'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
                 ],
             ],
             'in-progress' => [
@@ -1160,18 +1148,6 @@ return [
                         'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
                 ],
             ],
             'in-progress' => [
@@ -1604,18 +1580,6 @@ return [
                         'short_name' => 'LESSONS',
                         'value' => [''],
                     ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
-                    ],
                 ],
             ],
             'in-progress' => [
@@ -1943,18 +1907,6 @@ return [
                         'name' => 'Lessons',
                         'short_name' => 'LESSONS',
                         'value' => [''],
-                    ],
-                    [
-                        'name' => 'Instructors',
-                        'short_name' => 'INSTRUCTORS',
-                        'is_group_by' => true,
-                        'value' => ['instructor'],
-                    ],
-                    [
-                        'name' => 'Genres',
-                        'short_name' => 'Genres',
-                        'is_group_by' => true,
-                        'value' => ['style'],
                     ],
                 ],
             ],

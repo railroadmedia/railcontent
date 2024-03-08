@@ -826,7 +826,7 @@
         <div class="md:max-w-3xl lg:max-w-4xl mx-auto px-4 lg:px-0 grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-10 text-white">
             <div class="text-center mb-4 sm:mb-0">
                 <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/drumeo_icon.svg" alt="drumeo logo">
-                <h1 class="font-extrabold">33.6K</h1>
+                <h1 class="font-extrabold">91K</h1>
                 <p class="uppercase sm:tracking-widest">Active students</p>
             </div>
             <div class="text-center mb-4 sm:mb-0">
