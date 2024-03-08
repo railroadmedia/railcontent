@@ -112,8 +112,8 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'jDiXR3woyQ16ODbu4kLw',
-                        'br' => 'hgGjqh5gz',
+                        'ac' => 'nQqnUglpu0izFZ8TQ314',
+                        'br' => 'DIIjACG96',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
                         'ha' => $hash,
@@ -149,8 +149,8 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'jDiXR3woyQ16ODbu4kLw',
-                        'br' => 'hgGjqh5gz',
+                        'ac' => 'nQqnUglpu0izFZ8TQ314',
+                        'br' => 'DIIjACG96',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,
                         'sc' => '1cMjCpEPIvTt6xkXe7Fi',
@@ -205,31 +205,10 @@ class Avo
          }
      }
 
-     private static function _assert_filters($filters, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_list('0W4owU4RO', 'filters', $filters));
-         if (is_array($filters)) {
-             foreach($filters as $key=>$value) {
-               $messages = array_merge($messages, self::_avo_assert_object('0W4owU4RO', 'item at index ' . $key . ' in filters', $value));
-               $messages = array_merge($messages, self::_assert_filter_category($value['filter_category'], 'item at index ' . $key . ' in filters'));
-               $messages = array_merge($messages, self::_assert_filter_tag($value['filter_tag'], 'item at index ' . $key . ' in filters'));
-             }
-         }
-         return $messages;
-     }
-
      private static function _assert_revenue($revenue, $label_ = NULL)
      {
          $messages = [];
          $messages = array_merge($messages, self::_avo_assert_float('2aO3BixNf', isset($label_) ? 'revenue' . ':' . $label_ : 'revenue', $revenue));
-         return $messages;
-     }
-
-     private static function _assert_filter_group($filter_group, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('2ntYcoVYq', isset($label_) ? 'filter_group' . ':' . $label_ : 'filter_group', $filter_group));
          return $messages;
      }
 
@@ -264,6 +243,22 @@ class Avo
          return $messages;
      }
 
+     private static function _assert_homepage_section($homepage_section, $label_ = NULL)
+     {
+         $messages = [];
+         $messages = array_merge($messages, self::_avo_assert_string('7lHiW6ZgW', isset($label_) ? 'homepage_section' . ':' . $label_ : 'homepage_section', $homepage_section));
+         if ($homepage_section !== 'recommended' &&
+             $homepage_section !== 'new' &&
+             $homepage_section !== 'playlists' &&
+             $homepage_section !== 'workouts' &&
+             $homepage_section !== 'continue' &&
+             $homepage_section !== 'banner' &&
+             $homepage_section !== 'upcoming-events') {
+             array_push($messages, ['tag' => 'expectedStringMatch', 'propertyId' => '7lHiW6ZgW', 'message' => (isset($label_) ? 'homepage_section' . ': ' . $label_ : 'homepage_section') . " should match one of the following values [ recommended | new | playlists | workouts | continue | banner | upcoming-events ] but you provided the value {$homepage_section}"]);
+         }
+         return $messages;
+     }
+
      private static function _assert_currency($currency, $label_ = NULL)
      {
          $messages = [];
@@ -275,6 +270,13 @@ class Avo
      {
          $messages = [];
          $messages = array_merge($messages, self::_avo_assert_float('DgJwW8gJZ', isset($label_) ? 'shipping' . ':' . $label_ : 'shipping', $shipping));
+         return $messages;
+     }
+
+     private static function _assert_content_id($content_id, $label_ = NULL)
+     {
+         $messages = [];
+         $messages = array_merge($messages, self::_avo_assert_int('EYlcIbuNn', isset($label_) ? 'content_id' . ':' . $label_ : 'content_id', $content_id));
          return $messages;
      }
 
@@ -382,13 +384,6 @@ class Avo
          return $messages;
      }
 
-     private static function _assert_filter_category($filter_category, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('YzUmJzSAj', isset($label_) ? 'filter_category' . ':' . $label_ : 'filter_category', $filter_category));
-         return $messages;
-     }
-
      private static function _assert_is_skipped($is_skipped, $label_ = NULL)
      {
          $messages = [];
@@ -404,13 +399,6 @@ class Avo
              foreach($goals_list as $key=>$value) {
              }
          }
-         return $messages;
-     }
-
-     private static function _assert_sorting_type($sorting_type, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('aPHDsEZbW', isset($label_) ? 'sorting_type' . ':' . $label_ : 'sorting_type', $sorting_type));
          return $messages;
      }
 
@@ -504,13 +492,6 @@ class Avo
          return $messages;
      }
 
-     private static function _assert_navigation_section($navigation_section, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('sU_wHRlyx', isset($label_) ? 'navigation_section' . ':' . $label_ : 'navigation_section', $navigation_section));
-         return $messages;
-     }
-
      private static function _assert_discount_tags($discount_tags, $label_ = NULL)
      {
          $messages = [];
@@ -519,13 +500,6 @@ class Avo
              foreach($discount_tags as $key=>$value) {
              }
          }
-         return $messages;
-     }
-
-     private static function _assert_filter_tag($filter_tag, $label_ = NULL)
-     {
-         $messages = [];
-         $messages = array_merge($messages, self::_avo_assert_string('u5UvdMoEN', isset($label_) ? 'filter_tag' . ':' . $label_ : 'filter_tag', $filter_tag));
          return $messages;
      }
 
@@ -1111,6 +1085,97 @@ class Avo
          ]);
      }
 
+     public static function homepage_content_clicked($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_os($properties['os']));
+             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             $messages = array_merge($messages, self::_assert_homepage_section($properties['homepage_section']));
+             $messages = array_merge($messages, self::_assert_content_id($properties['content_id']));
+             // debug console in Avo
+             self::_invoke('dYP15nuFxw', '47ab8cdfd1d606461d5c92be56f385f5beabf9547c95c927182fbd982239bf90', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Homepage Content Clicked': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Homepage Content Clicked', Event props: ". print_r(array_filter([
+             'os' => $properties['os'],
+             'platform' => $properties['platform'],
+             'brand' => $properties['brand'],
+             'homepage_section' => $properties['homepage_section'],
+             'content_id' => $properties['content_id'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Homepage Content Clicked', [
+         'os' => $properties['os'],
+         'platform' => $properties['platform'],
+         'brand' => $properties['brand'],
+         'homepage_section' => $properties['homepage_section'],
+         'content_id' => $properties['content_id'],
+         ]);
+     }
+
+     public static function homepage_section_see_all_clicked($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_os($properties['os']));
+             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             $messages = array_merge($messages, self::_assert_homepage_section($properties['homepage_section']));
+             // debug console in Avo
+             self::_invoke('ayqjU62wR7', 'bca3ea63eef940c7236a6a0d408ed7f6b58d23c928718e03ef21ae97fd2787ca', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Homepage Section See All Clicked': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Homepage Section See All Clicked', Event props: ". print_r(array_filter([
+             'os' => $properties['os'],
+             'platform' => $properties['platform'],
+             'brand' => $properties['brand'],
+             'homepage_section' => $properties['homepage_section'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Homepage Section See All Clicked', [
+         'os' => $properties['os'],
+         'platform' => $properties['platform'],
+         'brand' => $properties['brand'],
+         'homepage_section' => $properties['homepage_section'],
+         ]);
+     }
+
      public static function order_placed($properties = [])
      {
          // assert properties
@@ -1276,162 +1341,9 @@ class Avo
          ]);
      }
 
-     public static function filter_applied($properties = [])
-     {
-         // assert properties
-         if (self::$__AVO_ENV__ !== 'prod') {
-             $messages = [];
-             $messages = array_merge($messages, self::_assert_os($properties['os']));
-             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
-             $messages = array_merge($messages, self::_assert_filters($properties['filters']));
-             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
-             $messages = array_merge($messages, self::_assert_navigation_section($properties['navigation_section']));
-             // debug console in Avo
-             self::_invoke('FBhKVZCZT4', '77d7cf2be08d6ae195b3ed190a1f07a6493db40ccbcfc74f2c7fe14fe106f1d5', $messages);
-             if (self::$__STRICT__) {
-                 // throw exception if messages is not empty
-                 if (count($messages) > 0) {
-                     throw new \UnexpectedValueException("Error sending event 'Filter Applied': {$messages[0]['message']}");
-                 }
-             } else {
-                 if (self::$__VERBOSE__) {
-                     foreach($messages as $m) {
-                         self::$__LOGGER__->error("[avo] {$m['message']}");
-                     }
-                 }
-             }
-         }
-
-         if (self::$__AVO_ENV__ !== 'prod') {
-             self::$__LOGGER__->info("[avo] Event sent: 'Filter Applied', Event props: ". print_r(array_filter([
-             'os' => $properties['os'],
-             'platform' => $properties['platform'],
-             'filters' =>
-             array_map(function($value) {
-                 return array_filter([
-                     'filter_category' => $value['filter_category'],
-                     'filter_tag' => $value['filter_tag'],
-                 ], function($value) { return isset($value); });
-             }, $properties['filters']),
-             'brand' => $properties['brand'],
-             'navigation_section' => $properties['navigation_section'],
-             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
-         }
-
-         // destination rudder_stack
-         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Filter Applied', [
-         'os' => $properties['os'],
-         'platform' => $properties['platform'],
-         'filters' =>
-         array_map(function($value) {
-             return array_filter([
-                 'filter_category' => $value['filter_category'],
-                 'filter_tag' => $value['filter_tag'],
-             ], function($value) { return isset($value); });
-         }, $properties['filters']),
-         'brand' => $properties['brand'],
-         'navigation_section' => $properties['navigation_section'],
-         ]);
-     }
-
-     public static function sorting_applied($properties = [])
-     {
-         // assert properties
-         if (self::$__AVO_ENV__ !== 'prod') {
-             $messages = [];
-             $messages = array_merge($messages, self::_assert_os($properties['os']));
-             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
-             $messages = array_merge($messages, self::_assert_sorting_type($properties['sorting_type']));
-             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
-             $messages = array_merge($messages, self::_assert_navigation_section($properties['navigation_section']));
-             // debug console in Avo
-             self::_invoke('vg7bUEFPIO', '67df2e2bf4f03af6c80054cc9be1648cabe2249e4f73f04c13c27cd10c3187ad', $messages);
-             if (self::$__STRICT__) {
-                 // throw exception if messages is not empty
-                 if (count($messages) > 0) {
-                     throw new \UnexpectedValueException("Error sending event 'Sorting Applied': {$messages[0]['message']}");
-                 }
-             } else {
-                 if (self::$__VERBOSE__) {
-                     foreach($messages as $m) {
-                         self::$__LOGGER__->error("[avo] {$m['message']}");
-                     }
-                 }
-             }
-         }
-
-         if (self::$__AVO_ENV__ !== 'prod') {
-             self::$__LOGGER__->info("[avo] Event sent: 'Sorting Applied', Event props: ". print_r(array_filter([
-             'os' => $properties['os'],
-             'platform' => $properties['platform'],
-             'sorting_type' => $properties['sorting_type'],
-             'brand' => $properties['brand'],
-             'navigation_section' => $properties['navigation_section'],
-             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
-         }
-
-         // destination rudder_stack
-         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Sorting Applied', [
-         'os' => $properties['os'],
-         'platform' => $properties['platform'],
-         'sorting_type' => $properties['sorting_type'],
-         'brand' => $properties['brand'],
-         'navigation_section' => $properties['navigation_section'],
-         ]);
-     }
-
-     public static function filter_group_applied($properties = [])
-     {
-         // assert properties
-         if (self::$__AVO_ENV__ !== 'prod') {
-             $messages = [];
-             $messages = array_merge($messages, self::_assert_os($properties['os']));
-             $messages = array_merge($messages, self::_assert_platform($properties['platform']));
-             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
-             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
-             $messages = array_merge($messages, self::_assert_filter_group($properties['filter_group']));
-             $messages = array_merge($messages, self::_assert_navigation_section($properties['navigation_section']));
-             // debug console in Avo
-             self::_invoke('uqpa2Us2LH', '6cc337cc8b86a57a7e23b1d558ae2f90c9d6888aeed1eba99b81cbdd4fe531d9', $messages);
-             if (self::$__STRICT__) {
-                 // throw exception if messages is not empty
-                 if (count($messages) > 0) {
-                     throw new \UnexpectedValueException("Error sending event 'Filter Group Applied': {$messages[0]['message']}");
-                 }
-             } else {
-                 if (self::$__VERBOSE__) {
-                     foreach($messages as $m) {
-                         self::$__LOGGER__->error("[avo] {$m['message']}");
-                     }
-                 }
-             }
-         }
-
-         if (self::$__AVO_ENV__ !== 'prod') {
-             self::$__LOGGER__->info("[avo] Event sent: 'Filter Group Applied', Event props: ". print_r(array_filter([
-             'os' => $properties['os'],
-             'platform' => $properties['platform'],
-             'brand' => $properties['brand'],
-             'filter_group' => $properties['filter_group'],
-             'navigation_section' => $properties['navigation_section'],
-             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
-         }
-
-         // destination rudder_stack
-         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Filter Group Applied', [
-         'os' => $properties['os'],
-         'platform' => $properties['platform'],
-         'brand' => $properties['brand'],
-         'filter_group' => $properties['filter_group'],
-         'navigation_section' => $properties['navigation_section'],
-         ]);
-     }
-
 }
 if (!function_exists('json_encode')) {
     throw new \Exception('Avo needs the JSON PHP extension.');
 }
 // AVOMODULEMAP:"Avo"
-// AVOEVENTMAP:["onboarding_started","account_created","referral_invite_sent","referral_link_copied","onboarding_about_step_completed","onboarding_instrument_step_completed","onboarding_gear_step_completed","onboarding_experience_step_completed","onboarding_genres_step_completed","onboarding_topics_step_completed","onboarding_skipped","onboarding_goals_step_completed","referral_page_viewed","order_placed","order_refunded","filter_applied","sorting_applied","filter_group_applied"]
+// AVOEVENTMAP:["onboarding_started","account_created","referral_invite_sent","referral_link_copied","onboarding_about_step_completed","onboarding_instrument_step_completed","onboarding_gear_step_completed","onboarding_experience_step_completed","onboarding_genres_step_completed","onboarding_topics_step_completed","onboarding_skipped","onboarding_goals_step_completed","referral_page_viewed","homepage_content_clicked","homepage_section_see_all_clicked","order_placed","order_refunded"]

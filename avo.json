@@ -7,8 +7,8 @@
     "name": "Members' Area"
   },
   "branch": {
-    "id": "hgGjqh5gz",
-    "name": "add-filters-tracking"
+    "id": "DIIjACG96",
+    "name": "add-recommender-system-tracking"
   },
   "sources": [
     {
@@ -16,9 +16,9 @@
       "name": "Musora Web Platform",
       "path": "app/Modules/EventTracking/Avo/Avo.php",
       "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
-      "actionId": "jDiXR3woyQ16ODbu4kLw",
-      "branchId": "hgGjqh5gz",
-      "updatedAt": "2024-03-08T18:29:08.377Z"
+      "actionId": "nQqnUglpu0izFZ8TQ314",
+      "branchId": "DIIjACG96",
+      "updatedAt": "2024-03-08T23:40:18.055Z"
     }
   ],
   "force": false

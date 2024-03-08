@@ -3,13 +3,16 @@
 namespace App\Modules\MusoraApi\Controllers\V5;
 
 use App\Modules\MusoraApi\Services\V5\FiltersEventTrackingService;
+use App\Modules\MusoraApi\Services\V5\RecSysJourneyService;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 class EventTrackingController extends Controller
 {
-    public function __construct(private readonly FiltersEventTrackingService $filtersEventTrackingService)
-    {
+    public function __construct(
+        private readonly FiltersEventTrackingService $filtersEventTrackingService,
+        private readonly RecSysJourneyService $recSysJourneyService
+    ) {
     }
 
     public function track(Request $request, string $event): void
@@ -18,6 +21,10 @@ class EventTrackingController extends Controller
             'filter-applied' => $this->filtersEventTrackingService->trackFilterApplied($request),
             'filter-group-applied' => $this->filtersEventTrackingService->trackFilterGroupApplied($request),
             'sorting-applied' => $this->filtersEventTrackingService->trackSortingApplied($request),
+            'homepage-content-clicked' => $this->recSysJourneyService->trackHomepageContentClicked($request),
+            'homepage-section-see-all-clicked' => $this->recSysJourneyService->trackHomepageSectionSeeAllClicked(
+                $request
+            ),
             default => '',
         };
     }
