@@ -147,7 +147,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center mb-5">
                 <p class="leading-normal max-w-xl pr-7 mx-0">Hey music maestros! 🎵
                     <br><br>
-                    With more than 75,000 active students, our incredible team of volunteer Mods is here to keep the rhythm flowing alongside our Musora Mentors family! As Mods, we're all about jamming with students, helping them unleash their musical mojo and groove to their favorite beats!
+                    With more than {{ number_format(Prices::$students) }} active students, our incredible team of volunteer Mods is here to keep the rhythm flowing alongside our Musora Mentors family! As Mods, we're all about jamming with students, helping them unleash their musical mojo and groove to their favorite beats!
                     <br><br>
                     Music is the universal language that adds color and joy to our world. Our Mods embody the spirit of Musora, creating a stage where we can all connect, learn, and grow together.</p>
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"

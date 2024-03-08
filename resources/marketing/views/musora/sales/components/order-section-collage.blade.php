@@ -3,7 +3,7 @@
         style="background: {{ $bgColor }};"
     @else
         style="background: linear-gradient(45deg, #07233e, #0c1524);"
-  @endif 
+  @endif
   x-data="{lazyLoad:false}">
     <div class="container mx-auto max-w-6xl mb-5 sm:mb-10">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -14,7 +14,7 @@
                     <source type="image/webp" media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/{!! $image !!}">
                     <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/{!! $image !!}">
                     <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/{!! $image !!}">
-                    <img x-ref="collage" 
+                    <img x-ref="collage"
                          class="object-contain h-64 sm:h-auto max-w-full sm:max-w-md md:max-w-lg lg:max-w-full transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
@@ -28,7 +28,13 @@
                 @if(!empty($logo))
                     <img class="h-7 mb-4 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/{{ $logo }}" alt="logo">
                 @endif
-                <p class="uppercase text-musora mb-2"><strong class="font-black">YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></p>
+                <p class="uppercase text-musora mb-2"><strong class="font-black">
+                        @if(!empty($subHeader))
+                            {{ $subHeader }}
+                        @else
+                            YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.
+                        @endif
+                    </strong></p>
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                     {!! $list !!}
