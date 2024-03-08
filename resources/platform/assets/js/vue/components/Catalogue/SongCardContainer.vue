@@ -3,12 +3,12 @@
         <div :class="`tw-block tw-no-scrollbar ${isGroupedView ? 'tw-overflow-x-scroll tw-overflow-y-hidden' : 'tw-overflow-x-clip tw-overflow-y-hidden'}`">
             <div
                 :class="`
-                    tw-no-scrollbar
-                    ${!isGroupedView ? 'tw-flex tw-flex-wrap' : 'tw-flex tw-flex-row tw-flex-nowrap tw-w-auto'}
+                    tw-no-scrollbar tw-flex
+                    ${isGroupedView ? 'tw-flex-row tw-flex-nowrap tw-w-auto lg:tw-grid lg:tw-gap-3 lg:tw-grid-cols-5 2xl:tw-grid-cols-7' : 'tw-flex-wrap sm:tw-grid sm:tw-grid-cols-4 lg:tw-grid-cols-5 2xl:tw-grid-cols-7 sm:tw-gap-3'}
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
-                    <SkeletonLoader :count="skeletonCardCount" type="songCard" />
+                    <SkeletonLoader :is-grouped-view="isGroupedView" :count="skeletonCardCount" type="songCard" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else>
