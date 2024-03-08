@@ -51,7 +51,9 @@ const difficultyText = computed(() => {
         const difficulty = props.difficultyValue.toString().toLowerCase();
 
         switch(difficulty){
+            case 'novice':
             case 'introductory':
+                return 'introductory'
             case 'beginner':
             case 'intermediate':
             case 'advanced':
