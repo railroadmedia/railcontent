@@ -11,6 +11,7 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
         Route::get('/trial', [MarketingController::class, 'trial']);
+        Route::get('/spotify', [MarketingController::class, 'spotify']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
         Route::get('6-reasons/drums', [MarketingController::class, 'sixReasonsDrums']);
         Route::get('6-reasons/piano', [MarketingController::class, 'sixReasonsPiano']);

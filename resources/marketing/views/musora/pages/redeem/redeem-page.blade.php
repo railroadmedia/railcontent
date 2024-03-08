@@ -169,7 +169,7 @@
                 <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @elseif(!empty($spotify))
-                <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
+                <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
                     alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
                 <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>
