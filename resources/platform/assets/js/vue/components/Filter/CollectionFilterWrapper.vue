@@ -105,7 +105,7 @@ const props = defineProps({
                     },
                     {
                         key: 'Not Started',
-                        value: 'notStarted',
+                        value: 'not-started',
                     },
                 ],
             },
