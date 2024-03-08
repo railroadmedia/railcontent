@@ -174,6 +174,25 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'musora']);
     }
 
+    public function spotifyRedeemNewMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'theme' => 'musora',
+            'spotify' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function spotifyRedeemExistingMusora(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'theme' => 'musora',
+            'spotify' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function roland()
     {
         return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);

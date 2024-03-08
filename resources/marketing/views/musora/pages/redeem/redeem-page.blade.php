@@ -164,8 +164,23 @@
 @section('layout-body')
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-            @if(empty($thomann))
-                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
+            @if(!empty($thomann))
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="filter  h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
+                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+            @elseif(!empty($spotify))
+                <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
+                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>
+                <picture>
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp">
+                    <img class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp"
+                        alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" >
+                </picture>
+            @else
+                <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
+                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <picture>
                         <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg">
@@ -174,10 +189,6 @@
                             alt="card image" fetchpriority="high">
                     </picture>
                 </div>
-            @else
-                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="filter  h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
-                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @endif
         </div>
     </div>
@@ -193,7 +204,13 @@
                     <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                         <strong><b>Existing Member?</b>
                             <br>
-                            <a class="text-drumeo underline" href="/redeem/existing">Click here to add to your account.</a>
+                            <a class="text-drumeo underline"
+                                @if(!empty($spotify))
+                                    href="/redeem-spotify/existing"
+                                @else
+                                    href="/redeem/existing"
+                                @endif
+                            >Click here to add to your account.</a>
                         </strong>
                         <br>
                         <em>(The form below is only for new accounts)</em>
@@ -210,7 +227,12 @@
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
                         <br>
-                        <a class="text-drumeo underline" href="/redeem">Click here to redeem on a new account.</a>
+                        <a class="text-drumeo underline"
+                            @if(!empty($spotify))
+                                href="/redeem-spotify"
+                            @else
+                                href="/redeem"
+                            @endif>Click here to redeem on a new account.</a>
                     </strong>
                     <br>
                     <em>(The form below is only for existing members)</em>

@@ -59,4 +59,6 @@ Route::domain('{musoraDomain}')
         Route::get('singeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingSingeo']);
         Route::get('sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewMusora']);
         Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
+        Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
+        Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
     });
