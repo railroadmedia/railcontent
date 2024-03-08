@@ -137,7 +137,7 @@
 
                 <!-- Genres: Multi-select -->
                 <label id="multiSelectGenre" class="tw-flex tw-flex-col tw-mb-2 tw-relative">
-                    <span class="tw-m-2 tw-font-bold tw-leading-0">Favorite Genres<span>*</span></span>
+                    <span class="tw-m-2 tw-font-bold tw-leading-0">Favorite Genres</span>
                     <div class="tw-relative tw-flex tw-justify-start">
                         <select
                             ref="genreInput" name="student_form_languages[]" id="student_form_genres"
