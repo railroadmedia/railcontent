@@ -16,3 +16,6 @@
 - `GET /musora-api/v1/onboarding/answer-history-instrument`
 - `GET /musora-api/v1/onboarding/answer-history-coach`
   
+### Journeys
+
+- `POST /musora-api/v5/journeys/{event}`
