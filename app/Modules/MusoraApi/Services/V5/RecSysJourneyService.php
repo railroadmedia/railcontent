@@ -8,12 +8,11 @@ use Illuminate\Http\Request;
 
 class RecSysJourneyService
 {
-
     public function trackHomepageContentClicked(Request $request): void
     {
         ['section' => $section, 'contentId' => $contentId, 'brand' => $brand] = $request->validate(
             [
-                'brand' => ['string'],
+                'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'filters' => ['required', 'array'],
                 'filters.*' => ['required', 'string'],
@@ -26,7 +25,7 @@ class RecSysJourneyService
                 [
                     'content_id' => $contentId,
                     'homepage_section' => $section,
-                    'brand' => $brand ?? brand(),
+                    'brand' => $brand,
                 ],
                 user()
             )
@@ -37,7 +36,7 @@ class RecSysJourneyService
     {
         ['section' => $section, 'brand' => $brand] = $request->validate(
             [
-                'brand' => ['string'],
+                'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'filters' => ['required', 'array'],
                 'filters.*' => ['required', 'string'],
@@ -49,7 +48,7 @@ class RecSysJourneyService
             AvoHelper::defaultEventProperties(
                 [
                     'homepage_section' => $section,
-                    'brand' => $brand ?? brand(),
+                    'brand' => $brand,
                 ],
                 user()
             )
