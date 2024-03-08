@@ -295,7 +295,7 @@ class ContentQueryBuilder extends QueryBuilder
         foreach ($requiredUserStates as $index => $requiredUserState) {
             $tableName = 'ucp_'.$index;
 
-            $this->join(
+            $this->leftJoin(
                 ConfigService::$tableUserContentProgress.' as '.$tableName,
                 function (JoinClause $joinClause) use ($requiredUserState, $tableName) {
                     $joinClause->on(
@@ -311,18 +311,29 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->getPdo()
                                     ->quote($requiredUserState['user_id'])
                             )
-                        )
-                        ->on(
+                        );
+                }
+            );
+
+            $this->where(function (Builder $builder) use (
+                $requiredUserStates, $tableName
+            ) {
+                foreach ($requiredUserStates as $requiredUserState) {
+                    if ($requiredUserState['state'] != 'not-started') {
+                        $builder->where(
                             $tableName.'.state',
-                            $requiredUserState['operator'],
-                            $joinClause->raw(
+                            '=',
+                            DB::raw(
                                 DB::connection()
                                     ->getPdo()
                                     ->quote($requiredUserState['state'])
                             )
                         );
+                    } else {
+                        $builder->whereNull($tableName.'.state');
+                    }
                 }
-            );
+            });
         }
 
         return $this;
@@ -338,7 +349,7 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->join(ConfigService::$tableUserContentProgress,
+        $this->leftJoin(ConfigService::$tableUserContentProgress,
             function (JoinClause $joinClause) use ($includedUserStates) {
                 $joinClause->on(
                     ConfigService::$tableUserContentProgress.'.content_id',
@@ -357,22 +368,32 @@ class ContentQueryBuilder extends QueryBuilder
                                         ->getPdo()
                                         ->quote($includedUserState['user_id'])
                                 )
-                            )
-                                ->on(
-                                    ConfigService::$tableUserContentProgress.'.state',
-                                    '=',
-                                    $joinClause->raw(
-                                        DB::connection()
-                                            ->getPdo()
-                                            ->quote($includedUserState['state'])
-                                    )
-                                );
+                            );
                         });
                     }
                 }
 
                 );
             });
+        $this->where(function (Builder $builder) use (
+            $includedUserStates
+        ) {
+            foreach ($includedUserStates as $includedUserState) {
+                if ($includedUserState['state'] != 'not-started') {
+                    $builder->orWhere(
+                        ConfigService::$tableUserContentProgress.'.state',
+                        '=',
+                        DB::raw(
+                            DB::connection()
+                                ->getPdo()
+                                ->quote($includedUserState['state'])
+                        )
+                    );
+                } else {
+                    $builder->orWhereNull(ConfigService::$tableUserContentProgress.'.state');
+                }
+            }
+        });
 
         return $this;
     }
