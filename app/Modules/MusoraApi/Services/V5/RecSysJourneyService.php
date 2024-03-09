@@ -14,18 +14,16 @@ class RecSysJourneyService
             [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
-                'filters' => ['required', 'array'],
-                'filters.*' => ['required', 'string'],
-                'progress' => ['string']
+                'contentId' => ['required', 'int']
             ]
         );
 
         Avo::homepage_content_clicked(
             AvoHelper::defaultEventProperties(
                 [
-                    'content_id' => $contentId,
-                    'homepage_section' => $section,
                     'brand' => $brand,
+                    'homepage_section' => $section,
+                    'content_id' => $contentId,
                 ],
                 user()
             )
@@ -38,17 +36,14 @@ class RecSysJourneyService
             [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
-                'filters' => ['required', 'array'],
-                'filters.*' => ['required', 'string'],
-                'progress' => ['string']
             ]
         );
 
         Avo::homepage_section_see_all_clicked(
             AvoHelper::defaultEventProperties(
                 [
-                    'homepage_section' => $section,
                     'brand' => $brand,
+                    'homepage_section' => $section,
                 ],
                 user()
             )
