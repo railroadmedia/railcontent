@@ -41,7 +41,7 @@
                 </ul>
                 @if(!empty($emailSignup))
                     <div class="max-w-xs sm:max-w-sm mx-auto sm:mx-0">
-                        <form id="ajaxForm" accept-charset="UTF-8" action="/claim-spotify" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
+                        <form id="ajaxForm" accept-charset="UTF-8" action="https://www.pianote.com/claim-spotify" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
                             <input class="w-full mb-2 text-left rounded-full py-1.5 px-5 text-gray-400 text-base md:text-lg" name="email" type="email" placeholder="Email Address..." required/>
                             <button type="submit" class="submit join musora smaller w-full">
                                 <span class="pre-add">Get Started <i class="fad fa-paper-plane"></i></span>

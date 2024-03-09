@@ -345,38 +345,4 @@ class SalesController extends BaseController
 
         return response()->json(['success' => true]);
     }
-    public function claimSpotify(Request $request)
-    {
-        // create access code
-        $accessCode = $this->accessCodeService->generateAccessCode([491], 'musora', 'spotify-promo');
-
-        // create the customer and send the email
-        dispatch(
-            (new CustomerIoSendTransactionalEmail(
-                'musora',
-                2,
-                $request->get('email'),
-                ['access_code' => strtoupper($this->accessCodeService->hyphenateCode($accessCode->code))]
-            ))
-                ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
-                ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
-                ->delay(Carbon::now()->addSeconds(3))
-        );
-
-        // dispatch the event
-        dispatch(
-            (new CustomerIoTriggerEvent(
-                'musora',
-                $request->get('email'),
-                null,
-                'musora_onboarding_spotify-trial',
-                null
-            ))
-                ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
-                ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
-                ->delay(Carbon::now()->addSeconds(10))
-        );
-
-        return response()->json(['success' => true]);
-    }
 }
