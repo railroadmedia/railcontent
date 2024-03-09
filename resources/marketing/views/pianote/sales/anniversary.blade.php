@@ -270,6 +270,22 @@
 
 @endsection
 @section('final')
+    @php
+    if(!empty($products['maelzel-metronome']->getStockAvailability())) {
+        $stock = $products['maelzel-metronome']->getStockAvailability() - 16;
+    }
+    else {
+        $stock = 0;
+    }
+    if ($stock < 1) {
+        $lifetimeImg = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-regular-metronome.webp';
+        $lifetimeMet = 'Pianote Metronome ($79 value)';
+    }
+    else {
+        $lifetimeImg = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp';
+        $lifetimeMet = 'Prestige Metronome ($299 value)';
+    }
+    @endphp
         @include('musora.sales.components.order-promo-cards-section', [
         // general
         'logoM' => "pianote/promos/march/8-anniversary-logo-white-m.webp",
@@ -280,7 +296,7 @@
         // first deal
         'firstDeal'=> "Legacy Pricing",
         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
-        'firstImageHeight' => 'h-20 sm:h-16 lg:h-24',
+        'firstImageHeight' => 'h-20 lg:h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
         'firstDealSub' => "Save 18% on your first year. No bonuses.",
@@ -296,7 +312,7 @@
         'topBadge' => "BEST DEAL",
         'secondDeal' => "Anniversary Bundle",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
-        'secondImageHeight' => 'h-20 sm:h-16 lg:h-24',
+        'secondImageHeight' => 'h-20 lg:h-24',
         'secondDealSub' => "Join Pianote + get 8 bonuses worth $987.",
         'secondDealPrice' => 240,
         'secondDealDiscount' => 1227,
@@ -315,16 +331,16 @@
 
         // third deal
         'thirdDeal' => "Lifetime Bundle",
-        'thirdDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp',
-        'thirdImageHeight' => 'h-20 sm:h-16 lg:h-24',
+        'thirdDealImage' => $lifetimeImg,
+        'thirdImageHeight' => 'h-20 lg:h-24',
         'thirdDealSub' => "Limited quantity. ",
         'thirdDealPrice' => 1200,
         "altbuttonText" => "Learn More",
-        "thirdDealLink" => "/lifetime",
+        "thirdDealLink" => "/lifetime#customize-anchor",
         'thirdExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1"></i> <strong> Lifetime Membership </strong>',
             '<i class="fa-solid fa-check pr-1"></i> Pianote BookBag ($249 value)',
-            '<i class="fa-solid fa-check pr-1"></i> Prestige Metronome ($299 value)',
+            '<i class="fa-solid fa-check pr-1"></i> ' . $lifetimeMet,
             '<i class="fa-solid fa-check pr-1"></i> Chords & Scales Book ($39 value)',
             '<i class="fa-solid fa-check pr-1"></i> Practice Planner ($39 value)',
     ],
