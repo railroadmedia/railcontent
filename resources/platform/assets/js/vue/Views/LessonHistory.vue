@@ -28,7 +28,6 @@
             :pre-loaded-content="preLoadedContent"
             :show-reset-progress="showResetProgress"
             :tab-options="tabOptions"
-            title="Lessons"
         />
     </div>
 </template>
