@@ -20,9 +20,11 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px]">
         <CollectionWrapper
             :collection-type="collectionType"
+            :hide-controls="true"
             :hide-search="hideSearch"
             :hide-sort-icon="hideSortIcon"
             :included-types="includedTypes"
+            :is-all-content="true"
             :pre-loaded-content="preLoadedContent"
             :show-reset-progress="showResetProgress"
             :tab-options="tabOptions"

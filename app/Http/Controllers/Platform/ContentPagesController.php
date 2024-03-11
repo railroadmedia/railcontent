@@ -1205,51 +1205,59 @@ class ContentPagesController extends BaseController
         $topics = [
             [
                 'topic' => 'Chords',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CChords',
+                'url' => '/guitareo/courses?included_fields[]=creativity,Chords',
             ],
             [
-                'topic' => 'Fingerstyle',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CFingerstyle',
+                'topic' => 'Tab & Notation',
+                'url' => '/guitareo/courses?included_fields[]=theory,Tab %26 Notation',
             ],
             [
-                'topic' => 'Gear',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CGear',
-            ],
-            [
-                'topic' => 'Guitar Essentials',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CGuitar%20Essentials',
-            ],
-            [
-                'topic' => 'Improvisation & Soloing',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CImprovisation%20%26%20Soloing',
+                'topic' => 'Speed & Stamina',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Speed %26 Stamina',
             ],
             [
                 'topic' => 'Picking',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CPicking',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Picking',
+            ],
+            [
+                'topic' => 'Licks',
+                'url' => '/guitareo/courses?included_fields[]=creativity,Licks',
+            ],
+            [
+                'topic' => 'Gigging Tips & Gear',
+                'url' => '/guitareo/courses?included_fields[]=lifestyle,Gigging Tips %26 Gear',
             ],
             //            [
             //                'topic' => 'Reading Music',
             //                'url' => '/guitareo/courses?required_fields[]=topic%2CReading%20Music',
             //            ],
             [
-                'topic' => 'Rhythm',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CRhythm',
+                'topic' => 'Chord Theory',
+                'url' => '/guitareo/courses?included_fields[]=theory,Chord Theory',
             ],
             [
-                'topic' => 'Scales',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CScales',
+                'topic' => 'Scales & Modes',
+                'url' => '/guitareo/courses?included_fields[]=theory,Scales %26 Modes',
             ],
             [
-                'topic' => 'Songwriting',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CSongwriting',
+                'topic' => 'Ear Training',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Ear Training',
             ],
             [
-                'topic' => 'Technique',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CTechnique',
+                'topic' => 'Embellishments',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Embellishments',
             ],
             [
-                'topic' => 'Theory & Ear Training',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CTheory%20%26%20Ear%20Training',
+                'topic' => 'Fingerstyle',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Fingerstyle',
+            ],
+            [
+                'topic' => 'Improvisation & Songwriting',
+                'url' => '/guitareo/courses?included_fields[]=creativity,Improvisation %26 Songwriting',
+            ],
+            [
+                'topic' => 'Composition & Arranging',
+                'url' => '/guitareo/courses?included_fields[]=theory,Composition %26 Arranging',
             ],
         ];
 

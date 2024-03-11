@@ -614,6 +614,13 @@ return [
                 'sortBy' => 'sort',
                 'amountOfFutureLessonsToShow' => 10,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
+                'tabs' => [
+                    [
+                        'name' => 'All Spotlights',
+                        'short_name' => 'ALL',
+                        'value' => [''],
+                    ],
+                ],
             ],
             'gear-guides' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/gear.jpg',
@@ -1912,6 +1919,30 @@ return [
                         'value' => ['style'],
                     ],
                 ],
+            ],
+            'recording' => [
+                'allowableFilters' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+                'allowableFiltersMobile' => ['difficulty', 'genre'],
             ],
         ],
         'singeo' => [
