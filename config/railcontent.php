@@ -2101,8 +2101,8 @@ return [
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                'allowableFilters' => ['difficulty', 'genre', 'focus'],
-                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'focus', ],
+                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle' ],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
