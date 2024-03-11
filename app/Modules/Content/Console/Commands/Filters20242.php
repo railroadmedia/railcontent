@@ -53,7 +53,11 @@ class Filters20242 extends Command
                 $data = $this->getData($row, $headersRow);
 
                 $contentId = $this->getValue($data, $headersRow, 'id');
-                $contentType = $this->getValue($data, $headersRow, 'type');
+                if($brand == 'drumeo-songs'){
+                    $contentType = 'song';
+                }else{
+                    $contentType = $this->getValue($data, $headersRow, 'type');
+                }
                 $contentTitle= $this->getValue($data, $headersRow, 'title');
 
                 $content = Content::query()
@@ -66,6 +70,8 @@ class Filters20242 extends Command
                 } else {
                     if($brand == 'drumeo-Rudiments') {
                         $style = $this->getValue($data, $headersRow, 'Gear');
+                    }elseif($brand == 'drumeo-songs') {
+                        $style = $this->getValue($data, $headersRow, 'NEW-GENRE');
                     }else {
                         $style = $this->getValue($data, $headersRow, 'Genre');
                     }
@@ -85,6 +91,12 @@ class Filters20242 extends Command
 
                         $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
                         $content->setGear($this->getValue($data, $headersRow, 'Gear'));
+                    }elseif($brand == 'drumeo-songs') {
+                        ContentStyle::query()
+                            ->where('content_id', '=', $contentId)
+                            ->delete();
+                        $content->deleteFields('style');
+                        $content->setStyle($this->getValue($data, $headersRow, 'NEW-GENRE'));
                     }else {
                         $this->prepareDatabase($contentId, $content);
 
