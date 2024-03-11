@@ -10,7 +10,23 @@
         <div class="container max-w-6xl mx-auto relative z-20">
             <img class="sm:hidden inline-block h-24 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/960x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-logo-black.webp" alt="30 day drummer logo" />
-            <p class="leading-tight my-5 lg:my-7">Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em></p>
+            <p class="leading-tight my-5 lg:my-7">
+                Get legacy pricing on your first year <strong>OR</strong> 8 free bonuses with your membership <em class="text-pianote">(worth $987)</em>
+                @if(Carbon\Carbon::create(2024, 3, 22, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                    <br>
+                    <em class="font-black uppercase inline-block mt-2 text-{{ $theme }}">
+                        Only
+                        <span x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                         </span>
+                        left
+                    </em>
+                @endif
+            </p>
             <img class="sm:hidden inline-block h-52 " src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header-m.webp" alt="30 day drummer logo" />
             <img class="hidden sm:inline-block sm:h-44 lg:h-64" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1810x0/filters:quality(95)/marketing/pianote/promos/march/bundle-header.webp" alt="30 day drummer logo" />
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0 mt-5 lg:mt-7">
@@ -39,13 +55,13 @@
                 <img class="h-56 lg:h-80 sm:order-1 transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/920x0/filters:quality(95)/marketing/pianote/promos/march/timeline2.webp"
 
                     alt="learn playing image"
                 >
                 <div class="sm:pr-5 lg:pr-8 mx-0 mt-5 sm:mt-0">
                     <h3 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h3>
-                    <p class="leading-normal max-w-xl">
+                    <p class="leading-normal max-w-xl mx-0">
                         This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
                         <br><br>
                         Join Pianote today and get 8 FREE bonuses (including our NEW Pianote BookBag).
@@ -121,6 +137,8 @@
     @endif
 @endsection
 @section('promoDetails')
+
+    <div id="bookbag" class="anchor"></div>
     <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
         <div class="container mx-auto z-10 relative max-w-5xl">
             <p class="leading-tight"><em>Introducing the <strong class="text-pianote font-black">NEW…</strong></em></p>
@@ -252,6 +270,22 @@
 
 @endsection
 @section('final')
+    @php
+    if(!empty($products['maelzel-metronome']->getStockAvailability())) {
+        $stock = $products['maelzel-metronome']->getStockAvailability() - 16;
+    }
+    else {
+        $stock = 0;
+    }
+    if ($stock < 1) {
+        $lifetimeImg = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-regular-metronome.webp';
+        $lifetimeMet = 'Pianote Metronome ($79 value)';
+    }
+    else {
+        $lifetimeImg = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp';
+        $lifetimeMet = 'Prestige Metronome ($299 value)';
+    }
+    @endphp
         @include('musora.sales.components.order-promo-cards-section', [
         // general
         'logoM' => "pianote/promos/march/8-anniversary-logo-white-m.webp",
@@ -262,7 +296,7 @@
         // first deal
         'firstDeal'=> "Legacy Pricing",
         'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/order-membership.webp',
-        'firstImageHeight' => 'h-20 sm:h-16 lg:h-24',
+        'firstImageHeight' => 'h-20 lg:h-24',
         'firstDealPrice' => 197,
         'firstDealDiscount' => 240,
         'firstDealSub' => "Save 18% on your first year. No bonuses.",
@@ -278,7 +312,7 @@
         'topBadge' => "BEST DEAL",
         'secondDeal' => "Anniversary Bundle",
         'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/anniversary-bundle-order.webp',
-        'secondImageHeight' => 'h-20 sm:h-16 lg:h-24',
+        'secondImageHeight' => 'h-20 lg:h-24',
         'secondDealSub' => "Join Pianote + get 8 bonuses worth $987.",
         'secondDealPrice' => 240,
         'secondDealDiscount' => 1227,
@@ -297,37 +331,43 @@
 
         // third deal
         'thirdDeal' => "Lifetime Bundle",
-        'thirdDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp',
-        'thirdImageHeight' => 'h-20 sm:h-16 lg:h-24',
+        'thirdDealImage' => $lifetimeImg,
+        'thirdImageHeight' => 'h-20 lg:h-24',
         'thirdDealSub' => "Limited quantity. ",
         'thirdDealPrice' => 1200,
-        "thirdDealLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849",
+        "altbuttonText" => "Learn More",
+        "thirdDealLink" => "/lifetime#customize-anchor",
         'thirdExtraBonuses' => [
             '<i class="fa-solid fa-check pr-1"></i> <strong> Lifetime Membership </strong>',
             '<i class="fa-solid fa-check pr-1"></i> Pianote BookBag ($249 value)',
-            '<i class="fa-solid fa-check pr-1"></i> Prestige Metronome ($299 value)',
+            '<i class="fa-solid fa-check pr-1"></i> ' . $lifetimeMet,
             '<i class="fa-solid fa-check pr-1"></i> Chords & Scales Book ($39 value)',
             '<i class="fa-solid fa-check pr-1"></i> Practice Planner ($39 value)',
     ],
 ])
 @endsection
+
 @section('scripts')
-<script type="application/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        var stickyBar = document.querySelector('.promo-banner');
-        window.addEventListener('scroll', function () {
-            var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
-            var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
-            if (window.scrollY > (unstickTrigger - 115)) {
-                stickyBar.classList.remove('fixed', 'mt-0');
-            }
-            if (window.scrollY < stickTrigger - 115) {
-                stickyBar.classList.remove('fixed', 'mt-0');
-            }
-            if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
-                stickyBar.classList.add('fixed', 'mt-0');
-            }
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-04-1 00:00:00',
+        'promoVersion' => false
+    ])
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endsection

@@ -86,6 +86,7 @@
                 <!-- Action button  -->
                 <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 tw-mb-0 sm:tw-mt-0" :class="progressButtonColor">
                     <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
+
                 </a>
             </div>
         </div>

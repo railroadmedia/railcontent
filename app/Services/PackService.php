@@ -8,6 +8,7 @@ use App\Decorators\Content\ContentExperienceDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Playlist\PlaylistDecorator;
+use App\Modules\Content\Services\CohortService;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
@@ -19,10 +20,12 @@ use Railroad\Railcontent\Services\ContentService;
 class PackService
 {
     private ContentService $contentService;
+    private CohortService $cohortService;
 
-    public function __construct(ContentService $contentService)
+    public function __construct(ContentService $contentService, CohortService $cohortService)
     {
         $this->contentService = $contentService;
+        $this->cohortService =  $cohortService;
     }
 
     /**
@@ -85,7 +88,7 @@ class PackService
     }
 
 
-    public function getPacks($requiredFields = [])
+    public function getPacks($requiredFields = [], $sort = '-progress')
     {
         ContentRepository::$pullFutureContent = true;
         AddedToPrimaryPlaylistDecorator::$skip = true;
@@ -94,26 +97,40 @@ class PackService
         ContentLikesDecorator::$skip = true;
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
-        $packs = (new PackCollection(
-            $this->contentService->getFiltered(
-                1,
-                -1,
-                '-published_on',
-                ['pack', 'semester-pack'],
-                [],
-                [],
-                $requiredFields,
-                [],
-                [],
-                [],
-                false,
-                false,
-                false
-            )['results']
-        ))->sortPacks(user()?->id);
+        $activeContentId = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
+
+        $packs =  $this->contentService->getFiltered(
+            1,
+            -1,
+            $sort,
+            ['pack', 'semester-pack'],
+            [],
+            [],
+            $requiredFields,
+            [],
+            [],
+            [],
+            false,
+            false,
+            false
+        )['results'];
+
+        if($activeContentId){
+            if(in_array($activeContentId, $packs->pluck('id')->toArray())){
+                $packs = $packs->filter(function($pack) use ($activeContentId){
+                    return $pack['id'] != $activeContentId;
+                });
+            }
+            $activeCohort = $this->contentService->getById($activeContentId);
+            $packs =  $packs->values()->toArray();
+            if($activeCohort){
+                $activeCohort['status_text'] = "In Progress";
+                $packs = array_merge([$activeCohort],$packs);
+            }
+        }
 
         return new ContentFilterResultsEntity([
-            'results' => $packs->values()->toArray(),
+            'results' => !is_array($packs)?$packs->values()->toArray():$packs,
             'total_results' => count($packs),
             'filter_options' => [],
         ]);

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import RequestSongModal from "./RequestSongModal.vue";
-
+import PageHeaderCta from "../PageHeader/PageHeaderCta.vue";
 const showModal = ref(false);
 
 const handleShowModal = () => {

@@ -7,6 +7,20 @@
         <img class="hidden sm:inline-block sm:h-20 lg:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1120x0/filters:quality(95)/marketing/{{ $logo }}" alt="30 day drummer logo" />
         <p class="leading-tight mt-4 mb-3 sm:mb-5">
             {!! $promoText !!}
+            @if(Carbon\Carbon::create(2024, 3, 22, 0, 0, 0, 'America/Vancouver') < Carbon\Carbon::now())
+                <br>
+                <em class="font-black uppercase inline-block mt-2 text-{{ $theme }}">
+                    Only
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                         </span>
+                    left
+                </em>
+            @endif
         </p>
 
         <div id="plusOptions"
@@ -91,7 +105,7 @@
                                 <strong>${{$thirdDealPrice}}</strong>
                             </h3>
                             <p class="text-sm mb-5"><em>{!! $thirdDealSub !!}</em></p>
-                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] musora-black" role="button" tabindex="0" aria-label="{{ $buttonText }}">{{$buttonText}}</div>
+                            <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] musora-black" role="button" tabindex="0" aria-label="{{ $altbuttonText }}">{{$altbuttonText}}</div>
                         </div>
                             @if(!empty($thirdExtraBonuses))
                                 <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">

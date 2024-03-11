@@ -207,7 +207,7 @@ onBeforeMount(() => {
 </script>
 <template>
     <div :id="cardId"
-        class="tw-mb-0.5 tw-group tw-h-[100px] tw-min-h-[100px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] tw-bg-white dark:tw-bg-[#081825] tw-px-3">
+        class="tw-mb-[1px] tw-group tw-h-[100px] tw-min-h-[100px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] tw-bg-white dark:tw-bg-[#081825] tw-px-3">
         <div class="tw-flex tw-items-center tw-h-full tw-w-full"
              :class="{ 'tw-relative' : playlistsStore.sortingPlaylist }"
         >

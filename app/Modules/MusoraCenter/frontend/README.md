@@ -7,7 +7,9 @@ A simple but elegant content, user, and e-commerce management solution.
 in *app/musora-web-platform/app/Modules/MusoraCenter/frontend* run
 
 ```
-cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend; 
+cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend;
+nvm install v14.15.2
+nvm use 
 npm install
 ```
 

@@ -1,20 +1,24 @@
 <template>
-    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-filter-icon="!hasFilterOptions" :hide-sort-icon="hideSortIcon" :selected-filters="selectedFilters"
+    <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
-        <slot name="viewToggleButton"></slot>
+        <template #extra-icon>
+            <slot name="extra-icon"></slot>
+        </template>
     </FilterControls>
     <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
-    <div class="tw-px-4 lg:tw-px-0" v-if="hasFilterOptions" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
+    <div class="tw-px-4 lg:tw-px-0" :class="`tw-relative ${!isCollapsed ? 'tw-mb-5' : ''}`">
         <FilterOptions v-if="!isCollapsed && !isTablet" :multi-select-columns="multiSelectColumns"
-            :single-select-columns="singleSelectColumns" :selected-filters="selectedFilters"
+            :single-select-columns="getSingleSelectColumns" :selected-filters="selectedFilters"
             :selected-progress="selectedProgress" @on-filter-click-handle="param => emit('onFilterChange', param)"
             @on-progress-click="progress => emit('onProgressChange', progress)" />
-        <FilterOptionsModal v-if="!isCollapsed && isTablet" :is-collapsed-mobile="isCollapsed"
+        <FilterOptionsModal
+            v-if="!isCollapsed && isTablet"
             :selected-filters="selectedFilters" :selected-progress="selectedProgress"
-            :multi-select-columns="multiSelectColumns" :single-select-columns="singleSelectColumns"
+            :multi-select-columns="multiSelectColumns" :single-select-columns="getSingleSelectColumns"
             @onClose="handleToggleCollapse" @handle-filter-click="param => emit('onFilterChange', param)"
-            @on-progress-click="progress => emit('onProgressChange', progress)" @clear-filter="emit('OnClearFilter')" />
+            @handle-progress-click="progress => emit('onProgressChange', progress)" @clear-filter="emit('OnClearFilter')"
+        />
 
         <div v-if="loading" class="tw-absolute tw-inset-0 dark:tw-bg-[#000C17]/30 tw-bg-[#F9F9F9]/30 tw-z-50"></div>
     </div>
@@ -41,7 +45,19 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    hideControls: {
+        type: Boolean,
+        default: false,
+    },
+    hideFilterIcon: {
+        type: Boolean,
+        default: false,
+    },
     hideSortIcon: {
+        type: Boolean,
+        default: false,
+    },
+    hideSearch: {
         type: Boolean,
         default: false,
     },
@@ -52,10 +68,6 @@ const props = defineProps({
     multiSelectColumns: {
         type: Array,
         default: () => [],
-    },
-    preLoadedContent: {
-        type: Object,
-        default: () => ({}),
     },
     selectedFilters: {
         type: Object,
@@ -95,13 +107,25 @@ const props = defineProps({
                         key: 'Complete',
                         value: 'completed',
                     },
+                    {
+                        key: 'Not Started',
+                        value: 'not-started',
+                    },
                 ],
             },
         ],
     },
+    sortOptions: {
+        type: Array,
+        default: [],
+    },
     tabOptions: {
         type: Array,
         default: [],
+    },
+    showProgressFilters: {
+        type: Boolean,
+        default: () => true,
     },
 });
 
@@ -109,10 +133,6 @@ const emit = defineEmits(['onFilterChange', 'onSearchChange', 'onSortChange', 'o
 
 const isTablet = ref(false);
 const isCollapsed = ref(true);
-
-const hasFilterOptions = computed(() => {
-    return props.multiSelectColumns.length > 0;
-})
 
 const handleToggleCollapse = () => {
     isCollapsed.value = !isCollapsed.value;
@@ -126,6 +146,10 @@ const getScreenSize = () => {
         isTablet.value = true;
     }
 }
+
+const getSingleSelectColumns = computed(() => {
+    return props.showProgressFilters ? props.singleSelectColumns : [];
+});
 
 onMounted(() => {
     getScreenSize();

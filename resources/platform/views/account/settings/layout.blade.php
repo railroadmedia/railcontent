@@ -148,12 +148,11 @@
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-pt-8 tw-pb-14">
         <div class="tw-flex tw-flex-row">
             <div class="tw-flex tw-flex-col grow">
-                <div class="tw-flex tw-flex-row tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <div class="tw-flex tw-flex-row tw-gap-[4px] md:tw-gap-[10px] tw-px-[30px]">
                     @foreach($sections as $index => $section)
-                        <a href="{{ $section['url'] }}" class="tw-z-10 tw-mb-[-2px] tw-w-full tw-flex tw-flex-row tw-items-center tw-justify-center tw-font-bebas-neue tw-pb-2 ph-1 tw-mr-2 tw-transition tw-no-underline hover:tw-text-[#00101D] dark:hover:tw-text-white
-                            {{ $section['active'] ? 'tw-border-b-2 tw-border-black dark:tw-border-white tw-text-[#00101D] dark:tw-text-white' : 'visited:tw-text-gray-400 tw-text-gray-400 dark:tw-text-[#80A0B9]' }}">
-                            <i class="tw-text-lg {{ $section['icon'] }}"></i>
-                            <span class="hide-xs-only tw-ml-2 tw-text-lg xl:tw-text-xl tw-leading-none">{{ $section['title'] }}</span>
+                        <a href="{{ $section['url'] }}" class="tw-btn-primary tw-flex tw-items-center tw-justify-center tw-text-center tw-border tw-text-[#000C17] dark:tw-text-white dark:tw-border-[#445F74] tw-px-4 lg:tw-px-6 tw-mb-0 tw-leading-[1px]
+                            {{ $section['active'] ? 'tw-bg-[#28282D] dark:tw-bg-[#445F74] tw-text-white' : 'hover:tw-bg-[#E7E7E8] hover:dark:tw-bg-[#223F57] hover:dark:tw-text-white tw-bg-white dark:tw-bg-[#000C17] tw-border-[#CBCBCD] dark:tw-text-white' }}">
+                            {{ $section['title'] }}
                         </a>
                     @endforeach
                 </div>

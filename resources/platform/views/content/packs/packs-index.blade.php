@@ -37,18 +37,31 @@
         @endslot
     @endcomponent
 
-    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] lg:tw-px-4">
+    <!-- <page-header
+        page-type="pack"
+        title="Packs"
+        icon-name="box-filled"
+        description="Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on."
+    ></page-header> -->
+
+    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] tw-px-4 lg:tw-px-8">
         <collection-wrapper
             collection-type="pack"
             :infinite-scroll="false"
-            without-enrollment="{{ json_encode(user()->isPackOnlyOwner()) }}"
+            without-enrollment="{{ user()->isPackOnlyOwner() }}"
             :pre-loaded-content="{{ $packs }}"
             title="Packs"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
             default-sorts="-progress"
-            :hide-sort-icon="true"
-            limit = -1
+            :limit="-1"
+            :hide-filter-icon="{{ json_encode(true) }}"
             search-placeholder="Search all packs..."
+            :sort-options="{{ json_encode([
+                        [ 'value' => '-published_on', 'name' => 'Newest First', 'icon' => 'sort-down' ],
+                        [ 'value' => 'published_on', 'name' => 'Oldest First', 'icon' => 'sort-up' ],
+                        [ 'value' => 'title', 'name' => 'Name: A to Z', 'icon' => 'sort-name-asc' ],
+                        [ 'value' => '-title', 'name' => 'Name: Z to A', 'icon' => 'sort-name-desc' ]
+                    ]) }}"
         ></collection-wrapper>
     </div>
 

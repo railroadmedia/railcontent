@@ -4,7 +4,7 @@
     <div class="container max-w-[75rem] mx-auto">
         <div class="footer-link-wrap footer-sign-up">
             <h1>Stay Connected</h1>
-            <p class="show-for-desktop">Join over 200,000 piano players who get free lessons twice a week.</p>
+            <p class="show-for-desktop">Join over 400,000 piano players who get free lessons twice a week.</p>
             <p class="hide-for-desktop">Receive free weekly lessons.</p>
             <form id="PianoteEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
                   class="ajax-form clearfix infusion-form facebook-track-lead lg:flex" onsubmit="emailSignUpConversionTrackerForImpactProvider()">

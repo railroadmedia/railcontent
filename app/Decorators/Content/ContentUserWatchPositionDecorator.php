@@ -30,6 +30,12 @@ class ContentUserWatchPositionDecorator extends \Railroad\Railcontent\Decorators
             return $contents;
         }
 
+        $contentsOfType = $contents->whereIn('type', ['style','artist']);
+
+        if ($contentsOfType->isNotEmpty()) {
+            return $contents;
+        }
+
         $contentIds = $contents->map(function ($item) {
             return $item['id'];
         })->toArray();

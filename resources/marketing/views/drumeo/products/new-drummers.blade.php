@@ -363,7 +363,7 @@
             <div class="float-left w-1/3">
                 <div class="social-platform py-4 md:py-5 lg:py-6 rounded-3xl w-11/12" style="color: #0b76db;background: linear-gradient(#000a1e, #00102e);">
                     <img class="lazyload w-auto h-10 md:h-12 lg:h-14 py-2" data-src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo Logo">
-                    <h1 class="count font-black leading-none my-2 md:my-4 text-white" id="likes-count" data-total-count="51000">0</h1>
+                    <h1 class="count font-black leading-none my-2 md:my-4 text-white" id="likes-count" data-total-count="91000">0</h1>
                     <p class="uppercase leading-none md:tracking-widest">Active Students</p>
                 </div>
             </div>

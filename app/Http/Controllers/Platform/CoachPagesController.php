@@ -79,6 +79,10 @@ class CoachPagesController extends Controller
 
         $lessonType = 'instructor';
 
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
+
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 18),
@@ -199,7 +203,7 @@ class CoachPagesController extends Controller
         );
 
         $upcomingCoaches = config('coaches.upcoming_coaches', []);
-
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
         return view('content.coaches-index', [
             'coaches' => $coaches,
             'activeCoaches' => $activeCoaches->results(),
@@ -221,6 +225,7 @@ class CoachPagesController extends Controller
             "onlySubscribedCoaches" => $request->get('only_subscribed', false),
             'upcomingCoaches' => $upcomingCoaches,
             'hasUpcomingCoaches' => ($upcomingCoaches && count($upcomingCoaches) > 0),
+            "catalogueMeta" => $catalogueMeta,
         ]);
     }
 
@@ -241,6 +246,7 @@ class CoachPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
+        ContentRepository::$countFilterOptionItems = true;
         $lessonType = 'instructor';
 
         $thisCoach = $this->contentService->getById($coachId);
@@ -261,6 +267,9 @@ class CoachPagesController extends Controller
 
         $includedTypes =
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coach-lessons'] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         $listLessons = $this->contentService->getFiltered(
             $request->get('page', 1),
