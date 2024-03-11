@@ -122,7 +122,7 @@
                 -->
                 <div v-if="!enrollmentOpen || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
-                        <button :id="`${item.id}-action-btn-big`" v-if="item.type !== 'pack-bundle' && showMyListAction"
+                        <button :id="`${item.id}-action-btn-big`" v-if="showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                             :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
