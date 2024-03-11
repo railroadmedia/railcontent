@@ -13,7 +13,7 @@
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
                     <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
-                        :break-to-list-view="breakToListView" />
+                        :break-to-list-view="breakToListView" :is-single-row="isSingleRow" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">

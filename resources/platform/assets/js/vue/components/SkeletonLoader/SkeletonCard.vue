@@ -1,6 +1,7 @@
 <template>
     <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group" :class="[
         forceListView || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0 lg:tw-w-auto tw-shrink-0',
+        { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow }
     ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
@@ -35,6 +36,10 @@ const props = defineProps({
     breakToListView: {
         type: Boolean,
         default: false,
-    }
+    },
+    isSingleRow: {
+        type: Boolean,
+        default: () => false,
+    },
 })
 </script>

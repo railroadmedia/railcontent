@@ -1,6 +1,6 @@
 <template>
     <!--  Instructor Thumbnail Loader -->
-    <SkeletonLoader v-if="collectionStoreLoading" type="card-group-header" />
+    <SkeletonLoader v-if="collectionStoreLoading" type="card-group-header" :is-single-row="true" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4 tw-mx-4 lg:tw-mx-0">
         <a :href="item.web_url_path + '?included_types[]=Workout'"
@@ -22,7 +22,7 @@
 
     <div class="tw-mb-[20px]">
         <transition appear name="fade">
-            <CatalogueCardContainer :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" />
+            <CatalogueCardContainer :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" />
         </transition>
     </div>
 </template>

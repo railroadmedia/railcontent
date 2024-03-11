@@ -1,8 +1,8 @@
 <template>
     <component :is="skeletonComponent" v-for="n in count" :key="n" v-bind="props" />
 </template>
-  
-  
+
+
 <script setup>
 import { ref, computed } from 'vue';
 import SkeletonCard from './SkeletonCard.vue';
@@ -24,7 +24,11 @@ const props = defineProps({
     breakToListView: {
         type: Boolean,
         default: false,
-    }
+    },
+    isSingleRow: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const skeletonComponent = computed(() => {
@@ -39,4 +43,3 @@ const skeletonComponent = computed(() => {
 });
 </script>
 
-  
