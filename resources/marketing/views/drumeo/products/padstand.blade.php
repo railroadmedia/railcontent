@@ -99,17 +99,15 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+        .splide__arrow:focus {
+        outline: none;
+         }
     </style>
 @stop
 
 @section('body-data')
     x-data="{
     trailer: false,
-    image1: false,
-    image2: false,
-    image3: false,
-    image4: false,
-    image5: false,
     }"
 @endsection
 
@@ -285,7 +283,7 @@
     </section>
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f6f8fc calc(50% + 1px));"></div>
     <section class="text-center px-5 py-10 md:py-20 lg:py-24" style="background-color:#f6f8fc;">
-        <div class="container mx-auto relative z-10 max-w-5xl">
+        <div class="container mx-auto relative max-w-5xl">
             <h2><strong>Works with ALL 12” practice pads.</strong></h2>
             <h6 class="leading-tight mt-2 mb-5 sm:mb-10">
                 The Drumeo PadStand can be used with a QuietPad, P4, or any other 12” or<br class="hidden sm:inline">
@@ -308,38 +306,54 @@
                      'img' => 'marketing/drumeo/shop/padstand/padstand-gallery-05.jpg',
                  ],
              ];
-            @endphp
-            @foreach($slides as $slide)
-                @component('_partials.components.modal', ['name' => 'imageModal'])
-                    @slot('content')
-                        <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
-                            <img class="logo h-7 md:h-12 lg:h-14 transition-opacity opacity-0"
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/{{$slide['img']}}">
-                        </div>
-                    @endslot
-                @endcomponent
-            @endforeach
 
-            <div class="flex flex-wrap items-center">
-                <div class="w-full sm:w-1/2 sm:order-1">
-                    <div class="p-2 w-full"><div data-open="image1" class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl"
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
-                </div>
-                <div class="w-1/2 sm:w-1/4">
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
-                </div>
-                <div class="w-1/2 sm:w-1/4 sm:order-2">
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl"
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
-                    <div class="p-2 w-full"><div data-open="image1" class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl"
-                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')"></div></div>
+             $scaleAnimation = 'cursor-pointer transform transition duration-500 ease-in-out hover:scale-105';
+             $handleClick = 'handleClick';
+        @endphp
+
+
+        @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+        <div class="flex flex-wrap items-center">
+        <div class="w-full sm:w-1/2 sm:order-1">
+            <div class="p-3 w-full">
+                <div @click="handleClick(0)"
+                    class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
                 </div>
             </div>
-            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: QuietPad/Sticks/Pad are not included.</em></p>
+        </div>
+        <div class="w-1/2 sm:w-1/4">
+            <div class="p-3 w-full">
+                <div @click="handleClick(1)"
+                    class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
+                </div>
+            </div>
+            <div class="p-3 w-full">
+                <div @click="handleClick(2)"
+                    class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
+                </div>
+            </div>
+        </div>
+        <div class="w-1/2 sm:w-1/4 sm:order-2">
+            <div class="p-3 w-full">
+                <div  @click="handleClick(3)"
+                    class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
+                </div>
+            </div>
+            <div class="p-3 w-full">
+                <div @click="handleClick(4)"
+                    class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')">
+                </div>
+            </div>
+        </div>
+        </div>
+        @endcomponent
+
+        <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: QuietPad/Sticks/Pad are not included.</em></p>
         </div>
     </section>
 
