@@ -108,8 +108,10 @@ class ContentJsonController extends Controller
         if(count($contentTypes) > 5 && $request->has('count_filter_items')){
             $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
         }
-        [$group_by, $required_fields, $included_fields] =
-            $this->extractFields($request, $required_fields, $included_fields, $group_by);
+
+        $required_user_states = $request->get('required_user_states', []);
+        [$group_by, $required_fields, $included_fields, $required_user_states] =
+            $this->extractFields($request, $required_fields, $included_fields, $required_user_states, $group_by);
 
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -120,7 +122,7 @@ class ContentJsonController extends Controller
             $request->get('required_parent_ids', []),
             $required_fields,
             $included_fields,
-            $request->get('required_user_states', []),
+            $required_user_states,
             $request->get('included_user_states', []),
             $request->get('include_filters', true),
             false,
@@ -548,7 +550,7 @@ class ContentJsonController extends Controller
      * @param string|null $group_by
      * @return array
      */
-    private function extractFields(Request $request, mixed $required_fields, mixed $included_fields,?string $group_by )
+    private function extractFields(Request $request, mixed $required_fields, mixed $included_fields,mixed $required_user_states, ?string $group_by )
     : array {
         $tabs = $request->get('tabs', $request->get('tab', false));
         if ($tabs) {
@@ -565,6 +567,12 @@ class ContentJsonController extends Controller
                 }
                 if ($extra['0'] == 'length_in_seconds' || $extra['0'] == 'topic') {
                     $required_fields[] = $tab;
+                }
+                if(count($extra) == 1 && $extra[0] == 'complete'){
+                    $required_user_states[] = 'completed';
+                }
+                if(count($extra) == 1 && $extra[0] == 'inProgress'){
+                    $required_user_states[] = 'started';
                 }
             }
         }
@@ -588,6 +596,6 @@ class ContentJsonController extends Controller
             $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
         }
 
-        return [$group_by, $required_fields, $included_fields];
+        return [$group_by, $required_fields, $included_fields, $required_user_states];
     }
 }
