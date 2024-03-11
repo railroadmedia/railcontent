@@ -32,13 +32,11 @@
             pagination: false,
             start: this.imgIndex,
             perMove: 1,
-            gap: '1rem',
             swipe: true,
             arrows: true,
             breakpoints: {
                 640: {
                     type: 'loop',
-                    gap: '1rem',
                     swipe: true,
                 }
             },
