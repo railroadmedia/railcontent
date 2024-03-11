@@ -1,6 +1,6 @@
 <template>
     <platform-header
-        title="My Playlist"
+        title="My Playlists"
         titleIcon="playlist"
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
         class="tw-min-h-[180px]"

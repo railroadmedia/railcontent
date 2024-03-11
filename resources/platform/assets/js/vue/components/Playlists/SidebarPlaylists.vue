@@ -124,7 +124,7 @@ onBeforeMount(()=> {
                 :class="[isActivePath ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']">
                 <musora-icon icon-name="playlist" class="tw-w-[24px] tw-mx-4" />
                 <span class="tw-transition tw-whitespace-nowrap tw-font-bold tw-text-sm tw-uppercase group-hover:tw-underline"
-                    :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">My Playlist</span>
+                    :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">My Playlists</span>
             </a>
 
             <!-- Create Playlist -->

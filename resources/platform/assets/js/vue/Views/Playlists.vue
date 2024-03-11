@@ -1,6 +1,6 @@
 <template>
     <Breadcrumb
-        :breadcrumbs="[{ title: 'My Playlist' }]"
+        :breadcrumbs="[{ title: 'My Playlists' }]"
     />
 
     <PlaylistCollectionHeader :playlist-count="playlistCount" />
