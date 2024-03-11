@@ -28,7 +28,13 @@ class AccessCodeJsonController extends Controller
     public function index(Request $request): ResourceCollection
     {
         $this->permissionService->canOrThrow(auth()->id(), 'pull.access_codes');
-        $results = AccessCode::query()
+        $claimer_id = $request->get('claimer_id');
+
+        $query = AccessCode::query();
+        if ($claimer_id) {
+            $query->where('claimer_id', $claimer_id);
+        }
+        $results = $query
             ->orderByRequest($request)
             ->paginate();
         return new AccessCodeCollection($results);
@@ -61,4 +67,5 @@ class AccessCodeJsonController extends Controller
         $accessCodeId = $request->get('access_code_id');
         $this->accessCodeService->release($accessCodeId);
     }
+
 }
