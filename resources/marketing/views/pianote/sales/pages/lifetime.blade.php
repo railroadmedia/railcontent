@@ -115,7 +115,7 @@
             <h1 class="leading-tight mb-7 sm:mb-10"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto mb-2 sm:mb-3">
                 <img class="h-28 sm:h-52 lg:h-72"
-                    @if($stock < 1)
+                    @if($stock > 0)
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-metronome2.webp"
                     @else
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-regular-metronome.webp"
@@ -428,7 +428,7 @@
                 </h2>
                 <p class="leading-tight text-sm">One time payment.</p>
                 <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-                @if($stock != 123)
+                @if($stock > 0)
                     <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $stock }} SPOTS AVAILABLE</p>
                 @endif
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE anniversary bonuses</strong></h3>
@@ -504,9 +504,7 @@
 
 {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            @if($stock > 0)
-                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @endif
+            <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
 
