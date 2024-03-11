@@ -371,6 +371,9 @@
     @endphp
     <header class="text-center px-3 py-10 sm:py-16 lg:py-20 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff, #F1EFED);">
         <div class="container max-w-6xl mx-auto relative z-20">
+
+            @yield('spotify-banner')
+
             <h5 class="leading-tight uppercase">MUSIC STUDENTS <br class="sm:hidden"><strong>PREFER LEARNING HERE</strong></h5>
             <h1 class="overflow-hidden leading-tight text-[35px] sm:text-5xl sm:leading-[76px] rotater-text my-1 sm:my-0" style="height: 100px;font-family: 'Sedgwick Ave', sans-serif!important; ">
                 <span class="py-1.5 sm:py-3 relative inline-block delay-1000 ease-in-out">"Like my very own<br class="sm:hidden"> music coach!"</span><br>
@@ -580,7 +583,9 @@
     @endif
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @if(!empty($hideMenu))
+    @hasSection('final')
+        @yield('final')
+    @elseif(!empty($hideMenu))
         @include('musora.sales.components.card-selection-section', [
             "whiteBg" => true,
             "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",

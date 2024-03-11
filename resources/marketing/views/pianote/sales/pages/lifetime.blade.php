@@ -95,8 +95,8 @@
         "cartVersion" => true
     ])
     @php
-        if(!empty($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount())) {
-            $stock = $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount();
+        if(!empty($products['maelzel-metronome']->getStockAvailability())) {
+            $stock = $products['maelzel-metronome']->getStockAvailability() - 16;
         }
         else {
             $stock = 0;
@@ -115,10 +115,10 @@
             <h1 class="leading-tight mb-7 sm:mb-10"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="w-full mx-auto mb-2 sm:mb-3">
                 <img class="h-28 sm:h-52 lg:h-72"
-                    @if($stock == 123)
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-regular-metronome.webp"
-                    @else
+                    @if($stock > 0)
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-metronome2.webp"
+                    @else
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-regular-metronome.webp"
                     @endif
                 >
             </div>
@@ -134,7 +134,7 @@
                 <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
 {{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
 
-                @if($stock != 123)
+                @if($stock > 0)
                     <p class="leading-tight mt-4">ONLY <s class='opacity-60'>100</s> {{ $stock }} SPOTS AVAILABLE</p>
                 @endif
             </div>
@@ -289,7 +289,7 @@
             <p class="leading-tight"><em>Get yours FREE with a Lifetime Membership.</em></p>
         </div>
     </section>
-    @if($stock == 123)
+    @if($stock < 1)
         <section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
             <div class="container mx-auto z-10 relative max-w-5xl">
                 <img class="h-24 sm:h-28 lg:h-36" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/440x0/filters:quality(95)/marketing/pianote/promos/march/metronome-logo.png">
@@ -341,7 +341,7 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @php
-    if($stock == 123) {
+    if($stock < 1) {
         $bonuses = [
             [
                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Thumbnails/b15d76f7-b3c5-4dcd-94c3-449cd60ed88e-metronome-cart.jpg',
@@ -428,8 +428,8 @@
                 </h2>
                 <p class="leading-tight text-sm">One time payment.</p>
                 <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-                @if($stock != 123)
-                    <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                @if($stock > 0)
+                    <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $stock }} SPOTS AVAILABLE</p>
                 @endif
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE anniversary bonuses</strong></h3>
             </div>
@@ -504,9 +504,7 @@
 
 {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            @if($stock > 0)
-                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @endif
+            <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
 

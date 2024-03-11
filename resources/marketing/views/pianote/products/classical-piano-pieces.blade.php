@@ -14,6 +14,8 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
     <style>
         .image-modal-arrow-left, .image-modal-arrow-right {
             font-size: 0;
@@ -60,6 +62,9 @@
         .image-modal-arrow-right::before {
             content: "\f105";
         }
+        .splide__arrow:focus {
+        outline: none;
+         }
         header {
             background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg);
             background-size: 290px;
@@ -196,13 +201,86 @@
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 mb-20 sm:mb-24">
-        <div class="container max-w-5xl mx-auto">
+        <div class="container max-w-6xl mx-auto">
             <h3 class="leading-tight text-center mb-6 sm:mb-7"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h3>
-            <div class="cursor-pointer" data-open="seeInside0">
-                <img class="hidden sm:inline-block h-64 lg:h-72" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
-                <img class="sm:hidden" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-m.png">
-            </div>
-        </div>
+
+            @php
+                $slides = [
+                 [
+                     'img' => 'marketing/pianote/products/classical-piano-pieces/collage-04a.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/pianote/products/classical-piano-pieces/collage-06a.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/pianote/products/classical-piano-pieces/collage-03a.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/pianote/products/classical-piano-pieces/collage-02a.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/pianote/products/classical-piano-pieces/collage-05a.jpg',
+                 ],
+                 [
+                     'img' => 'marketing/pianote/products/classical-piano-pieces/collage-01a.jpg',
+                 ],
+
+             ];
+
+             $scaleAnimation = 'cursor-pointer transform transition duration-500 ease-in-out hover:scale-105';
+             $handleClick = 'handleClick';
+            @endphp
+
+            @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+                <div class="flex flex-wrap items-center">
+                    <div class="w-1/2 md:w-1/4">
+                        <div class="p-3 w-full">
+                            <div @click="handleClick(1)"
+                                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
+                            </div>
+                        </div>
+                        <div class="p-3 w-full">
+                            <div @click="handleClick(3)"
+                                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 md:w-1/4">
+                        <div class="p-3 w-full">
+                            <div @click="handleClick(2)"
+                                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 md:w-1/4">
+                        <div class="p-3 w-full">
+                            <div @click="handleClick(0)"
+                                class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 md:w-1/4">
+                        <div class="p-3 w-full">
+                            <div @click="handleClick(5)"
+                                class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[5]['img'] }}')">
+                            </div>
+                        </div>
+                        <div class="p-3 w-full">
+                            <div  @click="handleClick(4)"
+                                class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
+                                style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcomponent
+     </div>
+
     </section>
 
     <div id="final" class="anchor"></div>
@@ -230,24 +308,6 @@
             </div>
         </div>
     </section>
-
-    @php
-        $modalImages = [
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-03a.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-01a.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-05a.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-02a.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-06a.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-04a.jpg"
-        ];
-    @endphp
-    @foreach ($modalImages as $key => $img)
-        @include('pianote.products.partials.image-modal',[
-            'id' => "seeInside".$key,
-            "image" => $img,
-            "imageName" => "seeInside".$key,
-        ])
-    @endforeach
 
     @include("pianote.sales.partials._footer")
 
@@ -299,7 +359,6 @@
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
 @stop

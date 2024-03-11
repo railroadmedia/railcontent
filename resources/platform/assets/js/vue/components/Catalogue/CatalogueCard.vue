@@ -8,7 +8,7 @@
         :class="[
             class_object,
             forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-auto' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0'} lg:tw-w-auto tw-shrink-0 `}`,
-            { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow }
+            { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow },
         ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
@@ -92,7 +92,7 @@
                         </div>
                         <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
+                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
                                 <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                     textCase="capitalize" />
                                     <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
@@ -216,6 +216,10 @@ const props = defineProps({
         default: () => false,
     },
     isSingleRow: {
+		type: Boolean,
+        default: () => false,
+    },
+    addMarginBottom: {
         type: Boolean,
         default: () => false,
     },

@@ -81,6 +81,7 @@ class CoachPagesController extends Controller
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
 
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -98,7 +99,7 @@ class CoachPagesController extends Controller
             true,
             $request->get('only_subscribed', false)
         );
-
+        ContentRepository::$countFilterOptionItems = false;
         $activeCoaches = $this->contentService->getFiltered(
             1,
             20,
@@ -202,7 +203,7 @@ class CoachPagesController extends Controller
         );
 
         $upcomingCoaches = config('coaches.upcoming_coaches', []);
-
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['coaches'] ?? [];
         return view('content.coaches-index', [
             'coaches' => $coaches,
             'activeCoaches' => $activeCoaches->results(),
@@ -224,6 +225,7 @@ class CoachPagesController extends Controller
             "onlySubscribedCoaches" => $request->get('only_subscribed', false),
             'upcomingCoaches' => $upcomingCoaches,
             'hasUpcomingCoaches' => ($upcomingCoaches && count($upcomingCoaches) > 0),
+            "catalogueMeta" => $catalogueMeta,
         ]);
     }
 
@@ -244,6 +246,7 @@ class CoachPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
+        ContentRepository::$countFilterOptionItems = true;
         $lessonType = 'instructor';
 
         $thisCoach = $this->contentService->getById($coachId);

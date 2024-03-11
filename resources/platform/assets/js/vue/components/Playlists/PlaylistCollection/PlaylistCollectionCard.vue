@@ -112,7 +112,7 @@
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[92px] tw-mb-0.5 tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
+         :class="isListView ? 'tw-h-[92px] tw-mb-[1px] tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail
@@ -155,7 +155,7 @@
                             <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
                         </span>
                     </div>
-                    <div :class="props.isListView ? 'md:tw-w-1/2 md:tw-w-1/2 tw-inline-flex tw-justify-center tw-items-center' : '' ">
+                    <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-justify-center tw-items-center' : '' ">
                         <span>{{ duration_formated }}</span>
                     </div>
                 </div>

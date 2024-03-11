@@ -20,6 +20,8 @@ use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -30,6 +32,7 @@ use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Services\MethodService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -46,6 +49,7 @@ class ContentPagesController extends BaseController
     private ContentFollowsService $contentFollowsService;
     private ResourceDecorator $resourceDecorator;
     private MethodService $methodService;
+    private UserContentProgressService $userContentProgressService;
 
     /**
      * @param ContentService $contentService
@@ -66,7 +70,8 @@ class ContentPagesController extends BaseController
         CalendarService $calendarService,
         ContentFollowsService $contentFollowsService,
         ResourceDecorator $resourceDecorator,
-        MethodService $methodService
+        MethodService $methodService,
+        UserContentProgressService $userContentProgressService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -77,12 +82,14 @@ class ContentPagesController extends BaseController
         $this->contentFollowsService = $contentFollowsService;
         $this->resourceDecorator = $resourceDecorator;
         $this->methodService = $methodService;
+        $this->userContentProgressService = $userContentProgressService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
     {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        ContentRepository::$countFilterOptionItems = true;
 
         if ($contentTypeName == 'lessons' && $brand == 'guitareo') {
             return $this->guitareoLessonsPage($request, $domain, $brand);
@@ -123,7 +130,7 @@ class ContentPagesController extends BaseController
 
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
 
-        $defaultPage = $lessonType === 'routine' ? 12 : 20;
+        $defaultPage = $lessonType === 'routine' ? 12 : 10;
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
@@ -152,8 +159,33 @@ class ContentPagesController extends BaseController
                 'filter_options' => [],
             ]);
         }
+        $required_fields = $request->get('required_fields', []);
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+                if ($extra['0'] == 'length_in_seconds') {
+                    $required_fields[] = $tab;
+                }
+                if ($extra['0'] == 'topic') {
+                    $required_fields[] = $tab;
+                }
+            }
+        }
 
         if ($contentTypeName == 'songs') {
+            ContentRepository::$catalogMetaAllowableFilters  = array_merge (ContentRepository::$catalogMetaAllowableFilters, ['artist']);
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -161,11 +193,16 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $request->get('required_fields', []),
+                $required_fields,
                 $request->get('included_fields', []),
                 $request->get('required_user_states', []),
                 $request->get('included_user_states', []),
-                true
+                true,
+                false,
+                true,
+                false,
+                false,
+                $group_by ?? false
             );
         } else {
             ContentRepository::$pullFutureContent = true;
@@ -177,7 +214,7 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $request->get('required_fields', []),
+                $required_fields,
                 $request->get('included_fields', []),
                 $request->get('required_user_states', []),
                 $request->get('included_user_states', []),
@@ -185,7 +222,8 @@ class ContentPagesController extends BaseController
                 false,
                 true,
                 false,
-                $futureScheduledContentOnly
+                $futureScheduledContentOnly,
+                $group_by ?? false
             );
         }
 
@@ -230,9 +268,16 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
         if ($contentTypeName == 'songs') {
+            $allowableFilters = $catalogueMeta['allowableFilters'];
+
+            $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
+            $catalogueMeta['allowableFilters'] = $filterableValues;
+            $artists =   count($listLessons->filterOptions()['artist'] ?? []);
+            unset($listLessons['filter_options']['artist']);
+
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
-                "startedLessons" => $startedListLessons,
+                "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],
                 "hasStartedLessons" => $hasStartedLessons,
                 "lessonType" => $lessonType,
                 "sortOverride" => '-popularity',
@@ -240,7 +285,7 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
-                "artistsNumber" => count($listLessons->filterOptions()['artist'] ?? []),
+                "artistsNumber" => $artists,
                 "songsNumber" => $listLessons->totalResults(),
                 "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
@@ -1160,51 +1205,59 @@ class ContentPagesController extends BaseController
         $topics = [
             [
                 'topic' => 'Chords',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CChords',
+                'url' => '/guitareo/courses?included_fields[]=creativity,Chords',
             ],
             [
-                'topic' => 'Fingerstyle',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CFingerstyle',
+                'topic' => 'Tab & Notation',
+                'url' => '/guitareo/courses?included_fields[]=theory,Tab %26 Notation',
             ],
             [
-                'topic' => 'Gear',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CGear',
-            ],
-            [
-                'topic' => 'Guitar Essentials',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CGuitar%20Essentials',
-            ],
-            [
-                'topic' => 'Improvisation & Soloing',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CImprovisation%20%26%20Soloing',
+                'topic' => 'Speed & Stamina',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Speed %26 Stamina',
             ],
             [
                 'topic' => 'Picking',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CPicking',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Picking',
+            ],
+            [
+                'topic' => 'Licks',
+                'url' => '/guitareo/courses?included_fields[]=creativity,Licks',
+            ],
+            [
+                'topic' => 'Gigging Tips & Gear',
+                'url' => '/guitareo/courses?included_fields[]=lifestyle,Gigging Tips %26 Gear',
             ],
             //            [
             //                'topic' => 'Reading Music',
             //                'url' => '/guitareo/courses?required_fields[]=topic%2CReading%20Music',
             //            ],
             [
-                'topic' => 'Rhythm',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CRhythm',
+                'topic' => 'Chord Theory',
+                'url' => '/guitareo/courses?included_fields[]=theory,Chord Theory',
             ],
             [
-                'topic' => 'Scales',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CScales',
+                'topic' => 'Scales & Modes',
+                'url' => '/guitareo/courses?included_fields[]=theory,Scales %26 Modes',
             ],
             [
-                'topic' => 'Songwriting',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CSongwriting',
+                'topic' => 'Ear Training',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Ear Training',
             ],
             [
-                'topic' => 'Technique',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CTechnique',
+                'topic' => 'Embellishments',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Embellishments',
             ],
             [
-                'topic' => 'Theory & Ear Training',
-                'url' => '/guitareo/courses?required_fields[]=topic%2CTheory%20%26%20Ear%20Training',
+                'topic' => 'Fingerstyle',
+                'url' => '/guitareo/courses?included_fields[]=essentials,Fingerstyle',
+            ],
+            [
+                'topic' => 'Improvisation & Songwriting',
+                'url' => '/guitareo/courses?included_fields[]=creativity,Improvisation %26 Songwriting',
+            ],
+            [
+                'topic' => 'Composition & Arranging',
+                'url' => '/guitareo/courses?included_fields[]=theory,Composition %26 Arranging',
             ],
         ];
 
@@ -1472,10 +1525,13 @@ class ContentPagesController extends BaseController
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
 
         ContentRepository::$pullFutureContent = false;
-        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = true;
+        ContentRepository::$countFilterOptionItems = true;
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
+        ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
         $listLessons = $this->getListLessionsFromRequest($request);
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['all'] ?? [];
+
         $adminMessage = null;
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
@@ -1532,19 +1588,52 @@ class ContentPagesController extends BaseController
      */
     private function getListLessionsFromRequest(Request $request)
     {
+        $required_fields = $request->get('required_fields', []);
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+                if ($extra['0'] == 'length_in_seconds') {
+                    $required_fields[] = $tab;
+                }
+                if ($extra['0'] == 'topic') {
+                    $required_fields[] = $tab;
+                }
+            }
+        }
+        $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
+
         $lessonType = ContentTypes::newContentTypes();
         $filteredType = $request->get('included_types');
+
         return $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 20),
+            $request->get('limit', 10),
             '-published_on',
             $filteredType ?? $lessonType,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
+            $required_fields,
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
+            $request->get('included_user_states', []),
+            true,
+            false,
+            true,
+            false,
+            false,
+            $group_by ?? false
         );
     }
 
@@ -1724,7 +1813,9 @@ class ContentPagesController extends BaseController
 
     public function artistSongs($route, Request $request, $brand, $artistSlug)
     {
+        $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
 
         $initialContent = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -1733,7 +1824,7 @@ class ContentPagesController extends BaseController
             ['song'],
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            ['artist,'.$this->slugToPhrase($artistSlug)],
+            ['artist,'.$artist],
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
@@ -1744,12 +1835,19 @@ class ContentPagesController extends BaseController
         }
 
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
-        $contentSubtitle = $initialContent->totalResults().' SONGS';
+        $pluralContentType = Str::plural('song');
+
 
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
+        $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
+            ['song'],
+            $artist
+        );
+        $artistData = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$artist,'string')->first();
 
+        $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType. '    '.$totalPlays.' plays';
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => 'song',
@@ -1760,15 +1858,19 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
             'filterableValues' => $allowableFilters,
+            'thumbnail_url' => ($artistData) ?
+                $artistData->fetch('data.head_shot_picture_url') :
+                config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
+            'pluralContentType' => $pluralContentType,
         ]);
     }
 
     public function genreContentByType($slug, Request $request, $brand, $genre, $contentTypeName)
     {
+        $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
-
-        //dd($lessonType);
+        ContentRepository::$countFilterOptionItems = true;
 
         $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
             $request->get('limit', 12),
@@ -1779,16 +1881,23 @@ class ContentPagesController extends BaseController
             ['style,'.$genre],
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', []),);
+            $request->get('included_user_states', []),
+            true,
+            false,
+            true,
+            false,
+            true);
 
         if ($initialContent->totalResults() === 0) {
             throw new NotFoundHttpException();
         }
 
-        $contentTitle = ucwords($genre . ' ' . $contentTypeName);
+        $contentTitle = ucwords($genre . ' - ' . $contentTypeName);
+        $contentSubtitle = $initialContent->totalResults().' '.$contentTypeName;
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'style');
+        $thumb = config('railcontent.avatar_style')[$genre] ?? config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
 
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
@@ -1796,10 +1905,12 @@ class ContentPagesController extends BaseController
             'collectionName' => $genre,
             'contentName' => $lessonType,
             'contentTitle' => $contentTitle,
-            'contentSubtitle' => '',
+            'contentSubtitle' => $contentSubtitle,
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
             'requiredFields' => ['style,'.$genre],
             'filterableValues' => $filterableValues,
+            'thumbnail_url' => $thumb,
+            'pluralContentType' => Str::plural($lessonType, $initialContent->totalResults()),
         ]);
     }
 }

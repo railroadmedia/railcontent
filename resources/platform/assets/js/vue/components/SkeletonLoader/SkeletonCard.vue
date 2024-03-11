@@ -1,7 +1,7 @@
 <template>
     <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group" :class="[
         forceListView || breakToListView ? 'tw-py-3 tw-w-full' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0 lg:tw-w-auto tw-shrink-0',
-        { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow }
+        { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow },
     ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
@@ -19,7 +19,7 @@
                 <div class="tw-flex tw-items-start tw-p-0 tw-gap-[12px] tw-w-full tw-h-[16px] tw-my-1">
                     <div class="tw-w-9/10 tw-w-full tw-h-[16px] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-[40px]">
                     </div>
-                    <div class="tw-w-1/10 tw-w-[16px] tw-h-[16px] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-[40px]">
+                    <div class="tw-w-[16px] tw-h-[16px] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-[40px]">
                     </div>
                 </div>
                 <div class="tw-w-full tw-h-[16px] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] tw-rounded-[40px]"></div>

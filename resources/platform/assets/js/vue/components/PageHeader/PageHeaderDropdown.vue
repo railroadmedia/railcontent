@@ -11,7 +11,7 @@
                 <template v-else>
                     <span v-if="text">{{ text }}</span>
                 </template>
-                <i :class="[icon, text ? 'mr-1' : '']" aria-hidden="true"></i>
+                <i :class="[faIconClass, text ? 'mr-1' : '']" aria-hidden="true"></i>
             </button>
         </div>
 
@@ -28,7 +28,7 @@ import { ref, defineProps, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
     text: String,
-    icon: String
+    faIconClass: String
 });
 
 const showDropdown = ref(false);

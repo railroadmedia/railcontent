@@ -157,7 +157,7 @@ class Clothing extends Resource
                 ->addLayout(FeatureLayout::class)
                 ->preset(FeaturePreset::class),
             Select::make('Size Chart', 'size_chart_id')
-                ->options(\App\Models\SizeChart::pluck('chart', 'id'))
+                ->options(\App\Models\SizeChart::pluck('chart', 'id')->put('', 'None')->reverse())
                 ->onlyOnForms()
                 ->hideFromIndex(),
             Text::make('Size Chart', 'size_chart_id')
