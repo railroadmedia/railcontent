@@ -8,6 +8,7 @@ export const useCollectionStore = defineStore({
     id: 'Collection',
     state: () => {
         return {
+            count_filter_items: true,
             data: [],
             endpoint: '/railcontent/content',
             fetching: false,
@@ -92,7 +93,7 @@ export const useCollectionStore = defineStore({
                                 sort: this.filter.sort,
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
-                                count_filter_items: true,
+                                count_filter_items: this.count_filter_items,
                                 ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
                                 ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
@@ -218,6 +219,8 @@ export const useCollectionStore = defineStore({
             if (Array.isArray(defaults.sortOptions) && defaults.sortOptions.length > 0) {
                 this.sortOptions = defaults.sortOptions;
             }
+
+            this.count_filter_items = defaults.count_filter_items;
 
             //Set active tab
             if (defaults.tabOptions) {

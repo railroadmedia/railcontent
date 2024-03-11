@@ -176,6 +176,10 @@ const props = defineProps({
         type: Boolean,
         default: () => true,
     },
+    countFilterItems: {
+        type: Boolean,
+        default: () => true,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -406,6 +410,7 @@ onBeforeMount(() => {
         searchEndpointUrl: props.searchEndpointUrl,
         sortOptions: props.sortOptions,
         defaultSort: props.defaultSort,
+        count_filter_items: props.countFilterItems,
     })
     collectionStore.getURLParams();
 })
