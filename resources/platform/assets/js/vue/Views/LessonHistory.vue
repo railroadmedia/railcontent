@@ -20,6 +20,7 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px]">
         <CollectionWrapper
             :collection-type="collectionType"
+            :count-filter-items="false"
             :hide-search="hideSearch"
             :hide-sort-icon="hideSortIcon"
             :included-types="includedTypes"
