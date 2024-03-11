@@ -173,16 +173,6 @@ class ContentCompiledColumnTransformer
             }
 
             if ($contentRow['type'] == 'style' || $contentRow['type'] == 'artist') {
-                $contentRows[$contentRowIndex]['data'][] = [
-                    'id' => substr(md5(mt_rand()), 0, 10),
-                    'content_id' => substr(md5(mt_rand()), 0, 10),
-                    'key' => 'head_shot_picture_url',
-                    'value' => ($contentRow['type'] == 'style') ?
-                        (config('railcontent.avatar_style')[$contentRow['grouped_by_field']] ?? config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')]) :
-                        config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
-                    'type' => 'string',
-                    'position' => 1,
-                ];
                 $contentRows[$contentRowIndex]['fields'][] = [
                     'id' => substr(md5(mt_rand()), 0, 10),
                     'content_id' => substr(md5(mt_rand()), 0, 10),
