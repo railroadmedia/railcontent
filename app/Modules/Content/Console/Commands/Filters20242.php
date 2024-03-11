@@ -21,7 +21,7 @@ use Symfony\Component\Console\Helper\TableSeparator;
 
 class Filters20242 extends Command
 {
-    protected $signature = 'filters:import {brand=drumeo} {--withImport}';
+    protected $signature = 'filters:import {brand=drumeo} {--withImport} {--refreshCompiledViewData}';
     protected $description = 'Import filters data from CSV file';
 
 
@@ -32,6 +32,7 @@ class Filters20242 extends Command
         $endIndex = -1;
         $brand = $this->argument('brand');
         $import = $this->option('withImport');
+        $refreshCompiledViewData = $this->option('refreshCompiledViewData');
 
         $table = new Table($this->output);
 
@@ -46,13 +47,15 @@ class Filters20242 extends Command
         [$csv, $headersRow] = $this->getCSV($startIndex, $endIndex, $brand);
 
         $results = [];
+        $contentIds = [];
 
         $this->withProgressBar(
             $csv,
-            function ($row) use ($headersRow, $contentService, &$results, $brand, $import) {
+            function ($row) use ($headersRow, $contentService, &$results, $brand, $import, &$contentIds) {
                 $data = $this->getData($row, $headersRow);
 
                 $contentId = $this->getValue($data, $headersRow, 'id');
+                $contentIds[] = $contentId;
                 if($brand == 'drumeo-songs'){
                     $contentType = 'song';
                 }else{
@@ -114,6 +117,10 @@ class Filters20242 extends Command
                 }
             }
         );
+
+        if($refreshCompiledViewData){
+            $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
+        }
 
         $separator = new TableSeparator();
         $roows = [];

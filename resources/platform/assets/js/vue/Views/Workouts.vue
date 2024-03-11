@@ -96,7 +96,7 @@
                 :include-future-scheduled-content-only = "includeFutureScheduledContentOnly"
                 :pre-loaded-content="workoutData"
                 :statuses="statuses"
-                :tab-options="tabOptions"
+                :tabs="tabs"
                 :is-admin="isAdmin"
             />
         </section>
@@ -128,7 +128,7 @@
 
 <script setup>
 // TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import { storeToRefs } from 'pinia';
 import {useUserStore} from "../../stores/user";
 import Tooltip from '../components/Tooltip/Tooltip';
@@ -180,6 +180,10 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    tabs: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const userStore = useUserStore();
@@ -205,14 +209,6 @@ const openModal = (type) => {
 const closeModal = () => {
     modalType.value = false;
 }
-
-const tabOptions = [
-    { key: '', value: 'All', },
-    { key: 'duration,450,<', value: '5 Minutes', },
-    { key: ['duration,451,>', 'duration,750,<'], value: '10 Minutes', },
-    ...(brand.value === 'drumeo' || brand.value === 'guitareo' ? [{ key: 'duration,751,>', value: '15+ Minutes', }] : []),
-    { key: 'group_by,instructor', value: 'Instructors', groupByView: true, },
-]
 
 const infoText = {
     challenge: {

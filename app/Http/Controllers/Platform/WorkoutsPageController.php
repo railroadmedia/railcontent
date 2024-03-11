@@ -39,6 +39,30 @@ class WorkoutsPageController extends BaseController
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
 
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs');
+
+            if(!is_array($request->get('tabs'))){
+                $tabs = [$request->get('tabs')];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'group_by') {
+                    $group_by = $extra['1'];
+                }
+                if ($extra['0'] == 'duration') {
+                    $requiredFields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+                }
+                if ($extra['0'] == 'length_in_seconds') {
+                    $requiredFields[] = $tab;
+                }
+                if ($extra['0'] == 'topic') {
+                    $requiredFields[] = $tab;
+                }
+            }
+        }
+
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -50,7 +74,12 @@ class WorkoutsPageController extends BaseController
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
-            true
+            true,
+            false,
+            true,
+            false,
+            false,
+            $group_by ?? false
         );
 
             $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(

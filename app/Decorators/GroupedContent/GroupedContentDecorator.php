@@ -69,7 +69,9 @@ class GroupedContentDecorator extends ModeDecoratorBase
                         'key' => 'head_shot_picture_url',
                         'value' => ($genre) ?
                             $genre->fetch('data.head_shot_picture_url') :
-                            config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
+                            ( (config('railcontent.avatar_style')[$content['grouped_by_field']]) ??
+                                config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')]
+                            ),
                         'type' => 'string',
                         'position' => 1,
                     ];

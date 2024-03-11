@@ -1,8 +1,6 @@
 <template>
-    <div class="tw-container tw-mx-auto tw-px-4 lg:tw-px-0">
-        <div class="tw-flex tw-flex-col">
-          <PackCatalogueItem v-for="item in content" :pack="item" />
-        </div>
+    <div class="tw-flex tw-flex-col">
+      <PackCatalogueItem v-for="item in content" :pack="item" />
     </div>
 </template>
 <script setup>

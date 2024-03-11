@@ -1,6 +1,30 @@
 @php
     $firstLastName = preg_split('/\s+/', $thisCoach->fetch('fields.name'));
     $currentUserSubscribed = $thisCoach->fetch('current_user_is_subscribed');
+
+    $ctas = [
+        [
+            'type' => 'PageHeaderCta',
+            'props' => [
+                'text' => $currentUserSubscribed ? 'Unsubscribe' : 'Subscribe',
+                'contentFunction' => $currentUserSubscribed ? 'unfollowCoach' : 'followCoach',
+                'payload' => [
+                    'coachId' => $thisCoach->fetch('id')
+                ],
+                'faIconClass' => 'fa-bell'
+            ]
+        ]
+    ];
+
+    $infoDataStrArr = [];
+    if ($thisCoach->fetch('data.focus_text','')) {
+        $infoDataStrArr = [
+            $thisCoach->fetch('data.focus_text','')
+        ];
+    }
+
+    $ctasJson = json_encode($ctas);
+    $infoDataStrArrJson = json_encode($infoDataStrArr);
 @endphp
 
 @extends('partials.layout')
@@ -132,17 +156,15 @@
         }
     @endphp
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-3">
-        <content-catalogue-container
-            brand="{{ $brand }}"
-            :catalogue-props="{{ json_encode($catalogueProps) }}"
-        >
-            @for ($i = 0; $i < ($limitOverride ?? 16); $i++)
-                @include('partials.bladesora.members.skeletons.card-item', [
-                    "cardClass" => 'six-wide',
-                ])
-            @endfor
-        </content-catalogue-container>
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
+        <collection-wrapper
+            :limit="{{ $limitOverride ?? 18 }}"
+            :pre-loaded-content="{{ $listLessons }}"
+            :required-fields="{{ json_encode($requiredFields) }}"
+            :statuses="{{ json_encode(['published', 'scheduled']) }}"
+            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+            title="lessons"
+        ></collection-wrapper>
     </div>
 
     @component('partials.bladesora.members.components.coach-footer', [

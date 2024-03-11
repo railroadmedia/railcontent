@@ -29,7 +29,7 @@
         <div v-else class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls v-if="!props.miniCatalog || state.searchTerm.length" :brand="brand"
-                :isListView="state.isListView" @onUpdateListView="(val) => state.isListView = val" />
+                :isListView="state.isListView" @onToggleListView="toggleListView" />
 
             <!-- List View Header -->
             <header v-if="playlistsStore.playlists.length !== 0"
@@ -165,6 +165,10 @@ const handlePageChange = (pageNumber) => {
     let url = new URL(window.location.href);
     url.searchParams.set('page', pageNumber)
     window.history.pushState({}, '', url);
+}
+
+const toggleListView = () => {
+    state.isListView = !state.isListView;
 }
 
 //---------Lifecycle Methods---------//
