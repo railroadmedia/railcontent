@@ -1815,6 +1815,7 @@ class ContentPagesController extends BaseController
     {
         $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
 
         $initialContent = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -1869,6 +1870,7 @@ class ContentPagesController extends BaseController
         $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
 
         $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
             $request->get('limit', 12),
