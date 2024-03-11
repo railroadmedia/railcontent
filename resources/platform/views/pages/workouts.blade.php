@@ -20,5 +20,6 @@
         :filterable-values="{{ json_encode($catalogueMeta['allowableFilters'] ?? []) }}"
         :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
         :statuses="{{ json_encode($statuses ?? ['published']) }}"
+        :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
     ></workouts>
 @endsection

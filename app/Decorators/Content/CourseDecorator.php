@@ -22,7 +22,7 @@ class CourseDecorator extends TypeDecoratorBase
 
         // lesson count first and add lessons
         foreach ($contentsOfType as $contentIndex => $content) {
-            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
+            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'] ?? 0;
 
         }
 

@@ -13,7 +13,7 @@
 
 <template>
     <div v-click-outside="() => { emit('onClose') }"
-         class="tw-w-[185px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-my-2 tw-top-10 tw-z-[2000]">
+         class="tw-w-[185px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-mt-1 tw-top-[100%] tw-z-[2000]">
         <ul class="tw-text-xs tw-w-full">
             <!-- List Items -->
             <li v-for="(item, i) in sortOptions" :key="i" class="tw-w-full">

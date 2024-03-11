@@ -10,7 +10,7 @@
     {{-- Background Gradient --}}
     <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top hide-lg-down" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill @if(empty($hideBrandGradient) || !$hideBrandGradient){{ $brand }} @endif"></div>
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative">
+    <div class="tw-container tw-mx-auto tw-px-4 lg:tw-px-8 dark:tw-text-white tw-relative">
         <div class="tw-flex tw-flex-row">
             {{ $content }}
         </div>

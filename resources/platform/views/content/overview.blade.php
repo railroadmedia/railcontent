@@ -33,7 +33,58 @@
 @endsection
 
 @php
-    //dd( $parentContent->fetch('data.logo_image_url') )
+    $headerData = [
+        'title' => null,
+        'heroImg' => null,
+        'progress' => null,
+        'contentId' => null,
+        'infoData' => null,
+    ];
+
+    $infoDataStrArr = [];
+    if ($parentContent->fetch('type') === 'course') {
+        if (isset($infoData['lessons']) && isset($infoData['xp'])) {
+            $infoDataStrArr = [
+                $infoData['lessons'] . ' Lessons',
+                $infoData['xp'] . ' XP'
+            ];
+        }
+
+        $headerData = [
+            'title' => $parentContent->fetch('fields.title'),
+            'heroImg' => $parentContent->fetch('fields.instructor.data.head_shot_picture_url'),
+            'progress' => $parentContent->fetch('progress_percent', 0),
+            'contentId' => $parentContent->fetch('id'),
+            'infoData' => $infoDataStrArr,
+            'ctas' => [
+                [
+                    'type' => 'primary',
+                    'props' => [
+                        'text' => 'Start first lesson',
+                        'url' => $nextLessonUrl,
+                        'icon' => 'fa-play'
+                    ]
+                ],
+                [
+                    'type' => 'ResetProgressCta',
+                    'props' => [
+                        'contentId' => $parentContent->fetch('id'),
+                        'progress' => $parentContent->fetch('progress_percent', 0),
+                    ]
+                ],
+                [
+                    'type' => 'DownloadResourcesCta',
+                    'props' => [
+                        'resources' => $parentContent['resources'] ?? []
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    $headerDataJson = json_encode($headerData);
+    $headerDataObj = json_decode($headerDataJson);
+
 @endphp
 
 {{-- Content --}}
@@ -58,12 +109,12 @@
                 'backgroundImage' => $parentContent->fetch('data.header_image_url'),
             ])
                 @slot('content')
-                    <!-- Back Button -->
+
                     <a href="{{ url()->route('platform.workouts.challenges') }}"
                         class="tw-absolute tw--top-[16px] tw-left-4 lg:tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3">
                         <i class="fas fa-arrow-left" aria-hidden="true"></i>
                     </a>
-                    <!-- Content -->
+
                     <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
                         {{-- Pack Logo --}}
                         <img alt="{{ $parentContent->fetch('title') }} Logo"
@@ -109,6 +160,7 @@
             "isStarted" => $parentContent->fetch('started', false),
         ])
     </div>
+
 
     @if(!empty($nextLessonJson))
         @include('partials._current-learning-path-lesson', [
@@ -195,22 +247,28 @@
     {{-- for guitareo 500 songs special page --}}
     @if(!empty($songsPdfs))
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
-            <div class="flex flex-column">
-                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
-                    <content-catalogue
-                            catalogue-type="downloads"
-                            theme-color="guitareo"
-                            brand="guitareo"
-                            :use-theme-color="true"
-                            sort-override="slug"
-                            :included-types="['song-pdf']"
-                            :filterable-values="['artist', 'style']"
-                            :pre-loaded-content="{{ $songsPdfs }}"
-                            user-id="{{ auth()->id() }}"
-                            :infinite-scroll="true"
-                    ></content-catalogue>
-                </div>
-            </div>
+            <collection-wrapper
+                collection-type="song-pdf"
+                :pre-loaded-content="{{ $songsPdfs }}"
+                title="Songs"
+{{--                :filterable-values="{{ $something ?? [] }}"--}}
+            ></collection-wrapper>
+{{--            <div class="flex flex-column">--}}
+{{--                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">--}}
+{{--                    <content-catalogue--}}
+{{--                            catalogue-type="downloads"--}}
+{{--                            theme-color="guitareo"--}}
+{{--                            brand="guitareo"--}}
+{{--                            :use-theme-color="true"--}}
+{{--                            sort-override="slug"--}}
+{{--                            :included-types="['song-pdf']"--}}
+{{--                            :filterable-values="['artist', 'style']"--}}
+{{--                            :pre-loaded-content="{{ $songsPdfs }}"--}}
+{{--                            user-id="{{ auth()->id() }}"--}}
+{{--                            :infinite-scroll="true"--}}
+{{--                    ></content-catalogue>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     @endif
 

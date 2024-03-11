@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column">
-        
+
         <template v-for="(item, i) in content" :key="'list' + item.id">
             <catalogue-list-item
                 :index="item.week || i + 1"
@@ -20,11 +20,10 @@
                 :lock-unowned="lockUnowned"
                 :is_search="is_search"
                 :force-wide-thumbs="forceWideThumbs"
-                :reset-progress="resetProgress"
+                :reset-progress="showResetProgress"
                 :destroy-on-list-removal="destroyOnListRemoval"
                 :compact-layout="compactLayout"
                 @addToList="emitAddToList"
-                @progressReset="emitResetProgress"
                 @addEvent="addEventToDropdown"
             ></catalogue-list-item>
 
@@ -51,13 +50,12 @@
                     :lock-unowned="lockUnowned"
                     :is_search="is_search"
                     :force-wide-thumbs="forceWideThumbs"
-                    :reset-progress="resetProgress"
+                    :reset-progress="showResetProgress"
                     :destroy-on-list-removal="destroyOnListRemoval"
                     :compact-layout="compactLayout"
                     @addToList="emitAddToList"
-                    @progressReset="emitResetProgress"
                     @addEvent="addEventToDropdown"
-                />  
+                />
             </div>
         </template>
 
@@ -144,7 +142,7 @@ export default {
             type: Boolean,
             default: () => false,
         },
-        resetProgress: {
+        showResetProgress: {
             type: Boolean,
             default: () => false,
         },

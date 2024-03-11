@@ -1,11 +1,12 @@
 <template>
     <component :is="skeletonComponent" v-for="n in count" :key="n" v-bind="props" />
 </template>
-  
-  
+
+
 <script setup>
 import { ref, computed } from 'vue';
 import SkeletonCard from './SkeletonCard.vue';
+import SkeletonSongCard from './SkeletonSongCard.vue';
 import SkeletonCardGroupHeader from './SkeletonCardGroupHeader.vue';
 
 const props = defineProps({
@@ -24,13 +25,19 @@ const props = defineProps({
     breakToListView: {
         type: Boolean,
         default: false,
-    }
+    },
+    isGroupedView: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const skeletonComponent = computed(() => {
     switch (props.type) {
         case 'card':
             return SkeletonCard;
+        case 'songCard':
+            return SkeletonSongCard;
         case 'card-group-header':
             return SkeletonCardGroupHeader;
         default:
@@ -39,4 +46,3 @@ const skeletonComponent = computed(() => {
 });
 </script>
 
-  

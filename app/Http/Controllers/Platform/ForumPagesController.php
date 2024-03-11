@@ -8,12 +8,14 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\CategoryRepository;
 use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\SearchIndexRepository;
 use Railroad\Railforums\Repositories\ThreadReadRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
+use Railroad\Railforums\Responses\JsonPaginatedResponse;
 use Railroad\Usora\Repositories\UserRepository;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -244,10 +246,26 @@ class ForumPagesController extends Controller
         $categoryIds = [$categoryId];
         $pinned = (boolean)$request->get('pinned');
         $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
+        if($request->get('tabs', false)){
+            $tabs = $request->get('tabs',$request->get('tab'));
+
+            if(!is_array($request->get('tabs', $request->get('tab')))){
+                $tabs = [$request->get('tabs',$request->get('tab'))];
+            }
+
+            foreach($tabs as $tab) {
+                $extra = explode(',', $tab);
+                if ($extra['0'] == 'followed') {
+                    $followed = (boolean)$extra['1'];
+                }elseif ($extra['0'] == 'all') {
+                    $followed = null;
+                }
+            }
+        }
 
         PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
 
-        $sortBy = $request->get('sortby_val', '-last_post_published_on');
+        $sortBy = $request->get('sort', '-last_post_published_on');
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -277,7 +295,7 @@ class ForumPagesController extends Controller
 
         $isAdmin = user()->isAdmin();
 
-        foreach ($threads as $thread) {
+        foreach ($threads ?? [] as $thread) {
             $latestPost = $thread->latest_post;
             $latestPost['created_at_diff'] =
                 Carbon::parse($latestPost['created_at'])
@@ -358,12 +376,17 @@ class ForumPagesController extends Controller
             "access_level" => $accessLevel,
             "xp_rank" => $xpRank,
         ];
+        $listLessons = new ContentFilterResultsEntity([
+                                                          'results' => array_merge($mappedPinnedThreads,$mappedThreads),
+                                                          'total_results' => $threadsCount,
+                                                          'filter_options' => [],
+                                                      ]);
 
         return view(
             'forums.threads',
             [
                 'discussion' => $category,
-                "threads" => $mappedThreads,
+                "threads" => $listLessons->toResponseRawJson(),
                 "pinnedThreads" => $mappedPinnedThreads,
                 'threadCount' => $threadsCount,
                 'user' => $currentUser,
@@ -616,7 +639,7 @@ class ForumPagesController extends Controller
             $term,
             $request->get('page', 1),
             $request->get('limit', 10),
-            $request->get('sort', 'score')
+            'score'
         );
 
         $count = $this->searchIndexRepository->countTotalResults($term);
@@ -676,7 +699,10 @@ class ForumPagesController extends Controller
             ];
         }
 
-        return response()->json($this->utf8ize(['results' => $mappedItems, 'count' => $count]));
+        return new JsonPaginatedResponse(
+            $this->utf8ize( $mappedItems), $count, null, 200
+        );
+       // return response()->json($this->utf8ize(['results' => $mappedItems, 'count' => $count]));
     }
 
     /**
