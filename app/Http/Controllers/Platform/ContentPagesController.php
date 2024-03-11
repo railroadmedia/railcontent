@@ -1844,6 +1844,7 @@ class ContentPagesController extends BaseController
             ['song'],
             $artist
         );
+        $artistData = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$artist,'string')->first();
 
         $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType. '    '.$totalPlays.' plays';
         return view('content.child-collection', [
@@ -1856,7 +1857,9 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
             'filterableValues' => $allowableFilters,
-            'thumbnail_url' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
+            'thumbnail_url' => ($artistData) ?
+                $artistData->fetch('data.head_shot_picture_url') :
+                config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
             'pluralContentType' => $pluralContentType,
         ]);
     }
