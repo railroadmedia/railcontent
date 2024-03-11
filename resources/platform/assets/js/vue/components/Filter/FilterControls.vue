@@ -25,7 +25,7 @@
                 <slot></slot>
             </div> -->
         </div>
-        <div v-if="!hideFilter" class="tw-flex tw-grow tw-items-start">
+        <div v-if="!hideControls" class="tw-flex tw-grow tw-items-start">
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
                 <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" @on-submit="handleSubmit" />
                 <slot name="extra-icon"></slot>
@@ -73,7 +73,7 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    hideFilter: {
+    hideControls: {
         type: Boolean,
         default: false,
     },
