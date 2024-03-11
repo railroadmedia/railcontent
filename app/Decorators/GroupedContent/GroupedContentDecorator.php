@@ -82,7 +82,8 @@ class GroupedContentDecorator extends ModeDecoratorBase
                             'brand' => brand(),
                             'firstContentSlug' => $content['slug'],
                             'firstContentId' => $content['id'],
-                        ]).'?included_fields[]=type,'.ucfirst($content['content_type']);
+                            'included_fields[]' => 'type,'.ucwords(str_replace('-',' ',$content['content_type'])),
+                        'include_future_scheduled_content_only' =>false]);
                 }else{
                     //for mobile app - See All options
                     $contents[$index]['url'] = url()->route('platform.content.coach.show', [
