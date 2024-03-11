@@ -10,22 +10,17 @@ class FiltersEventTrackingService
 {
     public function trackFilterApplied(Request $request): void
     {
-        [
-            'section' => $section,
-            'filters' => $requestFilters,
-            'progress' => $progress,
-            'brand' => $brand
-        ] = $request->validate(
+         $validated = $request->validate(
             [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'filters' => ['required', 'array'],
                 'filters.*' => ['required', 'string'],
-                'progress' => ['string']
+                'progress' => ['nullable', 'string']
             ]
         );
 
-        $filters = collect($requestFilters)->map(
+        $filters = collect($validated['filters'])->map(
             function ($filter) {
                 $filterTag = explode(',', $filter);
                 return [
@@ -37,15 +32,15 @@ class FiltersEventTrackingService
 
         $filters[] = [
             'filter_category' => 'progress',
-            'filter_tag' => $progress ?? 'all',
+            'filter_tag' => $validated['progress'] ?? 'all',
         ];
 
         Avo::filter_applied(
             AvoHelper::defaultEventProperties(
                 [
                     'filters' => $filters,
-                    'navigation_section' => $section,
-                    'brand' => $brand,
+                    'navigation_section' => $validated['section'],
+                    'brand' => $validated['brand'],
                 ],
                 user()
             )
@@ -54,7 +49,7 @@ class FiltersEventTrackingService
 
     public function trackFilterGroupApplied(Request $request): void
     {
-        ['section' => $section, 'group' => $group, 'brand' => $brand] = $request->validate(
+        $validated = $request->validate(
             [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
@@ -65,9 +60,9 @@ class FiltersEventTrackingService
         Avo::filter_group_applied(
             AvoHelper::defaultEventProperties(
                 [
-                    'filter_group' => $group,
-                    'navigation_section' => $section,
-                    'brand' => $brand,
+                    'filter_group' => $validated['group'],
+                    'navigation_section' => $validated['section'],
+                    'brand' => $validated['brand'],
                 ],
                 user()
             )
@@ -76,7 +71,7 @@ class FiltersEventTrackingService
 
     public function trackSortingApplied(Request $request): void
     {
-        ['section' => $section, 'sort' => $sort, 'brand' => $brand] = $request->validate(
+        $validated = $request->validate(
             [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
@@ -84,7 +79,7 @@ class FiltersEventTrackingService
             ]
         );
 
-        $sortType = match ($sort) {
+        $sortType = match ($validated['sort']) {
             '-popularity' => 'Most Popular',
             'popularity' => 'Least Popular',
             'slug' => 'Name: A to Z',
@@ -97,8 +92,8 @@ class FiltersEventTrackingService
             AvoHelper::defaultEventProperties(
                 [
                     'sorting_type' => $sortType,
-                    'navigation_section' => $section,
-                    'brand' => $brand,
+                    'navigation_section' => $validated['section'],
+                    'brand' => $validated['brand'],
                 ],
                 user()
             )
