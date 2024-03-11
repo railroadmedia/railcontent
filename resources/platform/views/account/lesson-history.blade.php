@@ -12,10 +12,6 @@
         :included-types="{{ json_encode($allowedTypes) }}"
         :hide-search="true"
         :hide-sort-icon="true"
-        :tab-options="{{ json_encode([
-                        [ 'key' => 'inProgress', 'value' => 'In Progress' ],
-                        [ 'key' => 'complete', 'value' => 'Complete' ]
-                    ]) }}"
         @if($resetProgress)
             :show-reset-progress="{{ json_encode(true) }}"
         @endif
