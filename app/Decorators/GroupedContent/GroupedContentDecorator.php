@@ -35,7 +35,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
         foreach ($contents as $index => $content) {
 
             if ($content['type'] == 'artist') {
-                $artist = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$content['artist'],'string')->first();
+                $artist = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$content['grouped_by_field'],'string')->first();
                 $contents[$index]['url'] = url()->route('platform.content.artist.show', [
                     'brand' => brand(),
                     'slug' => urlencode(urlencode($content['artist'])),
