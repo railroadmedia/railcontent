@@ -75,7 +75,7 @@ const ctaConfig = computed(() => {
 });
 
 const infoData = computed(() => {
-    const regex = /(\d+\s\w+)/g;
+    const regex = /(\d+\s\w+\-?\w+\-?\w+)/g;
     const items = props.contentSubtitle.match(regex);
     return items
 })

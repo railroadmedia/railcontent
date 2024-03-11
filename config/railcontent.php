@@ -2378,6 +2378,8 @@ return [
         'chords-and-scales',
         'pack',
         'podcasts',
+        'workout',
+        'challenge',
     ],
     'homeInProgressContentTypes' => [
         'course',

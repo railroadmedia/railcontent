@@ -415,7 +415,7 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-    console.log('collection type',props.collectionType)
+    // console.log('collection type',props.collectionType)
     // console.log(props.sortOptions, props.defaultSort)
     // console.log(props.preLoadedContent)
 })
