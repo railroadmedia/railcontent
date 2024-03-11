@@ -57,6 +57,7 @@ $userData = assembleUserAttributes(user());
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
                     csrf_token="{{ csrf_token() }}"
+                    :current-page="{{ json_encode(ucfirst($catalogueMeta['name'])) }}"
                 >
                     <page-container
                         :is-live="{{ json_encode(isLive()) }}"

@@ -2,6 +2,8 @@ import axios from "axios";
 import { defineStore } from 'pinia';
 import { useUserStore } from "./user";
 import { useFilterValues } from "../vue/hooks/useFilterValues";
+import userJourney from "../services/userJourney";
+
 const { getFilterValues } = useFilterValues();
 
 export const useCollectionStore = defineStore({
@@ -277,6 +279,7 @@ export const useCollectionStore = defineStore({
 
         sortData (item) {
             this.filter.sort = item;
+            this.trackSort(item);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
@@ -309,6 +312,55 @@ export const useCollectionStore = defineStore({
 
             this.setURLParams()
         },
+
+        trackSort (sortValue) { 
+            if (sortValue) {
+                const userStore = useUserStore();
+                const payload = {
+                    sort: sortValue,
+                    section: userStore.currentPage,
+                    brand: userStore.brand,
+                };
+
+                userJourney.trackSort({
+                    token: userStore.token,
+                    payload 
+                })
+            }
+        },
+
+        trackFilter ({ progress, filters }) { 
+            if (sortValue) {
+                const userStore = useUserStore();
+                const payload = {
+                    brand: userStore.brand,
+                    section: userStore.currentPage,
+                    progress,
+                    filters,
+                };
+
+                userJourney.trackFilter({
+                    token: userStore.token,
+                    payload 
+                })
+            }
+        },
+
+        trackFilterGroup (sortValue) { 
+            if (sortValue) {
+                const userStore = useUserStore();
+                const payload = {
+                    brand: userStore.brand,
+                    section: userStore.currentPage,
+                    sort: sortValue
+                };
+
+                userJourney.trackFilterGroup({
+                    token: userStore.token,
+                    payload 
+                })
+            }
+        }
     },
 });
 
