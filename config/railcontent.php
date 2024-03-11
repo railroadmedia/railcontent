@@ -1920,6 +1920,30 @@ return [
                     ],
                 ],
             ],
+            'recording' => [
+                'allowableFilters' => ['difficulty', 'genre'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre'],
+                'tabs' => [
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'value' => [''],
+                    ],
+                    [
+                        'name' => 'Instructors',
+                        'short_name' => 'INSTRUCTORS',
+                        'is_group_by' => true,
+                        'value' => ['instructor'],
+                    ],
+                    [
+                        'name' => 'Genres',
+                        'short_name' => 'Genres',
+                        'is_group_by' => true,
+                        'value' => ['style'],
+                    ],
+                ],
+                'allowableFiltersMobile' => ['difficulty', 'genre'],
+            ],
         ],
         'singeo' => [
             'all' => [
