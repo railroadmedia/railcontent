@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Playlists | Musora</title>
+    <title>My Playlist | Musora</title>
 @endsection
 
 @section('content')

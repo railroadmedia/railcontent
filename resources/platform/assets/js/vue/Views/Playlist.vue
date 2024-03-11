@@ -1,6 +1,6 @@
 <template>
     <Breadcrumb
-        :breadcrumbs="[{ title: 'Playlists', url: `/${ brand }/playlists` }, { title: playlist['name'] }]"
+        :breadcrumbs="[{ title: 'My Playlist', url: `/${ brand }/playlists` }, { title: playlist['name'] }]"
     />
 
     <PlaylistHeader
