@@ -24,6 +24,7 @@
             :hide-search="hideSearch"
             :hide-sort-icon="hideSortIcon"
             :included-types="includedTypes"
+            :is-all-content="true"
             :pre-loaded-content="preLoadedContent"
             :show-reset-progress="showResetProgress"
             :tab-options="tabOptions"
