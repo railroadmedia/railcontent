@@ -91,7 +91,7 @@ const capitalizeFirstLetter = (string) => {
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
-    <PageHeader v-if="contentType === 'song'" :pageType="contentType" :title="contentTitle" :heroImg="heroImg"
+    <PageHeader :pageType="contentType" :title="contentTitle" :heroImg="heroImg"
         :infoData="infoData" :ctas="ctaConfig" />
 
     <div class="lg:tw-container tw-px-4 md:tw-px-8 tw-mx-auto tw-pt-[30px]">
