@@ -59,12 +59,63 @@
 
 @section('final')
     @include('musora.sales.components.order-section-collage', [
+    'emailSignup' => true,
     'logo' => 'marketing/musora/membership/redeem/musora-spotify-logo-white.svg',
     'subHeader' => 'LEARN YOUR FAVORITE SONGS FOR FREE.',
-    'header' => '30 days of FREE music lessons.<br> Enter your email to get your access<br> code and start your free lessons.',
+    'headerLight' => true,
+    'header' => '<strong>30 days of FREE music lessons.</strong><br> Enter your email to get your access<br> code and start your free lessons.',
     'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> No credit card required.</li>
     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora"></i> No recurring billing.</li>
     <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> Awesome music lessons.</li>',
     'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
     ])
+@endsection
+
+@section('scripts')
+    @parent
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function (){
+
+            $(".ajax-form").submit(function(e) {
+                e.preventDefault();
+
+                var pre = $(this).find(".pre-add"),
+                    pending = $(this).find(".pending"),
+                    success = $(this).find(".success"),
+                    fail = $(this).find(".fail"),
+                    submitButton = $(this).find(".submit"),
+                    disclaimer = $(this).parent().find(".disclaimer"),
+                    thankBanner = $(this).parent().find(".thank-you-box"),
+                    form = $(this),
+                    url = form.attr("action");
+
+                pre.addClass("hide hidden");
+                success.addClass("hide hidden");
+                fail.addClass("hide hidden");
+                pending.removeClass("hide hidden");
+                submitButton.removeClass("error");
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function() {
+                        form.addClass("hide hidden");
+                        disclaimer.addClass("hide hidden");
+                        thankBanner.addClass("active");
+
+                        pending.addClass("hide hidden");
+                        success.removeClass("hide hidden");
+                    },
+                    error: function() {
+                        submitButton.addClass("error");
+
+                        pending.addClass("hide hidden");
+                        fail.removeClass("hide hidden");
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -1,0 +1,3582 @@
+BRAND,id,ARTIST,title,NEW-GENRE
+drumeo,13595,Nirvana,Smells Like Teen Spirit,Rock
+drumeo,13796,Kings Of Leon,Use Somebody,Rock
+drumeo,13945,Radiohead,Creep,Rock
+drumeo,190995,Lenny Kravitz,Always On The Run,Rock
+drumeo,19307,Rush,Tom Sawyer,Rock
+drumeo,19806,Paramore,Still Into You,Rock
+drumeo,19999,AC/DC,Back In Black,Rock
+drumeo,20249,Blink-182,All The Small Things,Rock
+drumeo,210724,Twenty One Pilots,Car Radio,Rock
+drumeo,21264,Ozzy Osbourne,Crazy Train,Rock
+drumeo,214898,Boston,More Than A Feeling,Rock
+drumeo,21576,Porcupine Tree,The Sound Of Muzak,Rock
+drumeo,220948,Pink Floyd,Money,Rock
+drumeo,221443,Toto,Hold The Line,Rock
+drumeo,22154,Katy Perry,California Gurls,Pop
+drumeo,22855,Queens Of The Stone Age,No One Knows,Rock
+drumeo,22981,Paul Simon,Late In The Evening,Rock
+drumeo,230848,Audioslave,Like A Stone,Rock
+drumeo,231622,Breaking Benjamin,The Diary Of Jane,Rock
+drumeo,23450,Maroon 5,This Love,Pop
+drumeo,23527,The Police,Roxanne,Rock
+drumeo,23826,Paramore,Now,Rock
+drumeo,23856,Led Zeppelin,The Ocean,Rock
+drumeo,24244,Guns N' Roses,Sweet Child O' Mine,Rock
+drumeo,24252,Journey,Don't Stop Believin',Rock
+drumeo,24391,Van Halen,Hot For Teacher,Rock
+drumeo,24559,Sting,Seven Days,Pop
+drumeo,24670,Foo Fighters,Rope,Rock
+drumeo,24769,Green Day,Basket Case,Rock
+drumeo,25013,Foo Fighters,Everlong,Rock
+drumeo,25244,Blink-182,First Date,Rock
+drumeo,25270,Lynyrd Skynyrd,Sweet Home Alabama,Rock
+drumeo,255148,AC/DC,Hells Bells,Rock
+drumeo,25548,Muse,Stockholm Syndrome,Rock
+drumeo,25556,Pearl Jam,Even Flow,Rock
+drumeo,260283,3 Doors Down,Kryptonite,Rock
+drumeo,260286,AC/DC,Hells Bells,Rock
+drumeo,260293,Aerosmith,Amazing,Rock
+drumeo,260295,Aerosmith,Dream On,Rock
+drumeo,260297,Aerosmith,I Don't Want To Miss A Thing,Rock
+drumeo,260299,Aerosmith,Livin' On The Edge,Rock
+drumeo,260301,Aerosmith,Love In An Elevator,Rock
+drumeo,260306,Audioslave,Like A Stone,Rock
+drumeo,260313,Billy Joel,New York State Of Mind,Pop
+drumeo,260315,Blink-182,Adam's Song,Rock
+drumeo,260319,Blink-182,The Rock Show,Rock
+drumeo,260325,Bob Seger,Old Time Rock & Roll,Rock
+drumeo,260327,Bon Iver,8 (circle),Pop
+drumeo,260329,Bon Iver,Perth,Pop
+drumeo,260332,Bon Jovi,You Give Love A Bad Name,Rock
+drumeo,260338,Bryan Adams,Heaven,Rock
+drumeo,260341,Coldplay,Clocks,Rock
+drumeo,260343,Coldplay,Yellow,Rock
+drumeo,260345,Collective Soul,Where The River Flows,Rock
+drumeo,260347,Creedence Clearwater Revival,Fortunate Son,Rock
+drumeo,260349,Creedence Clearwater Revival,Have You Ever Seen The Rain,Rock
+drumeo,260356,Dave Matthews Band,"Drive In, Drive Out",Rock
+drumeo,260358,David Bowie,Lazarus,Rock
+drumeo,260362,Death Cab for Cutie,Grapevine Fires,Rock
+drumeo,260369,Eagles,Already Gone,Rock
+drumeo,260371,Eagles,Hotel California,Rock
+drumeo,260375,Eagles,Take It Easy,Rock
+drumeo,260379,Ed Sheeran,Thinking Out Loud,Rock
+drumeo,260381,Evanescence,Bring Me To Life,Rock
+drumeo,260383,Everything Everything,Cough Cough,Rock
+drumeo,260385,Extreme,Unconditionally,Rock
+drumeo,260387,Foo Fighters,Big Me,Rock
+drumeo,260392,Foo Fighters,The Pretender,Rock
+drumeo,260394,Foo Fighters,The Sky Is A Neighborhood,Rock
+drumeo,260396,Georgia Satellites,Keep Your Hands To Yourself,Rock
+drumeo,260400,Grand Funk Railroad,Bad Time,Rock
+drumeo,260402,Grand Funk Railroad,We're An American Band,Rock
+drumeo,260404,Green Day,21 Guns,Rock
+drumeo,260408,Guns N' Roses,Paradise City,Rock
+drumeo,260415,Hozier,Take Me To Church,Pop
+drumeo,260417,Huey Lewis And The News,The Power Of Love,Rock
+drumeo,260419,INXS,New Sensation,Rock
+drumeo,260429,Jet,Are You Gonna Be My Girl,Rock
+drumeo,260433,Jimmy Eat World,The Middle,Rock
+drumeo,260435,Joan Jett & The Blackhearts,I Love Rock 'n Roll,Rock
+drumeo,260437,John Cougar Mellencamp,Hurts So Good,Rock
+drumeo,260439,John Lennon,Imagine,Rock
+drumeo,260446,Journey,Wheel In The Sky,Rock
+drumeo,260453,Kings Of Leon,Sex On Fire,Rock
+drumeo,260456,KISS,I Was Made For Lovin' You,Rock
+drumeo,260469,Lenny Kravitz,I'll Be Waiting,Rock
+drumeo,260471,Linkin Park,In The End,Rock
+drumeo,260492,Michael Jackson,Beat It,Pop
+drumeo,260494,Michael Jackson,Billie Jean,Pop
+drumeo,260496,Michael Jackson,Thriller,Pop
+drumeo,260504,Muse,Big Freeze,Rock
+drumeo,260506,Muse,Hysteria,Rock
+drumeo,260508,Muse,Panic Station,Rock
+drumeo,260513,Muse,Uprising,Rock
+drumeo,260515,Nickelback,Animals,Rock
+drumeo,260517,Nickelback,How You Remind Me,Rock
+drumeo,260519,Nirvana,In Bloom,Rock
+drumeo,260524,NOFX,Linoleum,Rock
+drumeo,260526,Oasis,Wonderwall,Pop
+drumeo,260528,Otis Redding,(Sittin’ On) The Dock Of The Bay,R&B/Soul
+drumeo,260536,Pat Benatar,Hit Me With Your Best Shot,Rock
+drumeo,260541,Pink Floyd,Comfortably Numb,Rock
+drumeo,260544,Poison,Talk Dirty To Me,Rock
+drumeo,260551,Queen,Another One Bites The Dust,Rock
+drumeo,260553,Queen,Bohemian Rhapsody,Rock
+drumeo,260555,Queen,Fat Bottomed Girls,Rock
+drumeo,260562,Radiohead,Paranoid Android,Rock
+drumeo,260565,Radiohead,Karma Police,Rock
+drumeo,260569,Rick Springfield,Jessie's Girl,Rock
+drumeo,260571,Rush,2112,Rock
+drumeo,260573,Rush,Entre Nous,Rock
+drumeo,260575,Rush,Subdivisions,Rock
+drumeo,260577,Rush,Tears,Rock
+drumeo,260579,Rush,Time And Motion,Rock
+drumeo,260583,Scorpions,Bad Boys Running Wild,Rock
+drumeo,260586,Scorpions,Still Loving You,Rock
+drumeo,260589,Shania Twain,Man! I Feel Like A Woman!,Pop
+drumeo,260591,Simon & Garfunkel,The Sound Of Silence,Pop
+drumeo,260595,Soundgarden,Spoonman,Rock
+drumeo,260597,Steppenwolf,Born To Be Wild,Rock
+drumeo,260599,Steppenwolf,Magic Carpet Ride,Rock
+drumeo,260603,Sting,Fields Of Gold,Pop
+drumeo,260606,Stone Temple Pilots,Vasoline,Rock
+drumeo,260609,Survivor,Eye Of The Tiger,Rock
+drumeo,260613,Tears For Fears,Head Over Heels,Rock
+drumeo,260616,The Beatles,The End,Rock
+drumeo,260618,The Beatles,Ticket To Ride,Rock
+drumeo,260622,The Buggles,Video Killed The Radio Star,Rock
+drumeo,260626,The Cult,Honey From A Knife,Rock
+drumeo,260628,The Doobie Brothers,China Grove,Rock
+drumeo,260630,The Doobie Brothers,Minute By Minute,Rock
+drumeo,260632,The Killers,Somebody Told Me,Rock
+drumeo,260634,The Knack,She Likes The Beat,Rock
+drumeo,260636,The Police,Every Breath You Take,Rock
+drumeo,260638,The Police,Message In A Bottle,Rock
+drumeo,260641,The Police,So Lonely,Rock
+drumeo,260643,The Pretenders,Brass In Pocket,Rock
+drumeo,260645,The Proclaimers,I'm Gonna Be (500 Miles),Rock
+drumeo,260647,The Rolling Stones,(I Can't Get No) Satisfaction,Rock
+drumeo,260649,The Rolling Stones,Honky Tonk Women,Rock
+drumeo,260651,The Rolling Stones,Paint It Black,Rock
+drumeo,260654,Thirty Seconds To Mars,Closer To The Edge,Rock
+drumeo,260656,Thirty Seconds To Mars,The Kill,Rock
+drumeo,260658,Three Days Grace,I Hate Everything About You,Rock
+drumeo,260670,Tigran Hamasyan & Red Hail,Corrupt,Latin/World
+drumeo,260674,Toto,Africa,Rock
+drumeo,260677,Toto,Rosanna,Rock
+drumeo,260682,Twenty One Pilots,Ride,Rock
+drumeo,260684,Twisted Sister,We're Not Gonna Take It,Rock
+drumeo,260686,U2,Where The Streets Have No Name,Pop
+drumeo,260693,Van Morrison,Brown Eyed Girl,Pop
+drumeo,260695,Weezer,Say It Ain't So,Rock
+drumeo,260697,Whitesnake,Here I Go Again,Rock
+drumeo,260699,Whitesnake,Still Of The Night,Rock
+drumeo,260702,Wolfmother,Joker & The Thief,Rock
+drumeo,260704,YUCA,I'm Alive She Said,Rock
+drumeo,26195,Bon Jovi,Livin' On A Prayer,Rock
+drumeo,264255,AC/DC,Rock 'N' Roll Train,Rock
+drumeo,264261,Adele,Rolling In The Deep,Pop
+drumeo,264265,Alice In Chains,Would?,Rock
+drumeo,264281,Bachman-Turner Overdrive,Takin' Care Of Business,Rock
+drumeo,264283,Bad Company,Can't Get Enough,Rock
+drumeo,264285,Badfinger,No Matter What,Rock
+drumeo,264287,Barenaked Ladies,The Old Apartment,Rock
+drumeo,264291,Heart,Alone,Rock
+drumeo,264295,Biffy Clyro,Mountains,Rock
+drumeo,264297,Bill Withers,Lovely Day,R&B/Soul
+drumeo,264299,Billy Idol,"White Wedding, Part 1",Rock
+drumeo,264301,Billy Joel,My Life,Rock
+drumeo,264303,Billy Joel,Sometimes A Fantasy,Rock
+drumeo,264311,Bob Seger,Night Moves,Rock
+drumeo,264313,Bon Jovi,Have A Nice Day,Rock
+drumeo,264315,Bon Jovi,It's My Life,Rock
+drumeo,264317,Bon Jovi,Runaway,Rock
+drumeo,264319,Bruce Springsteen,My Hometown,Rock
+drumeo,264321,Bruce Springsteen,The River,Rock
+drumeo,264327,Chick Corea Elektric Band,Beneath The Mask,Jazz
+drumeo,264335,Coldplay,Fix You,Rock
+drumeo,264337,Coldplay,Paradise,Rock
+drumeo,264339,Coldplay,The Scientist,Rock
+drumeo,264341,Coldplay,Viva La Vida,Rock
+drumeo,264343,Creedence Clearwater Revival,Bad Moon Rising,Rock
+drumeo,264345,Creedence Clearwater Revival,Green River,Rock
+drumeo,264347,Creedence Clearwater Revival,Lodi,Rock
+drumeo,264349,Creedence Clearwater Revival,Who'll Stop The Rain,Rock
+drumeo,264351,Def Leppard,Bringin' On The Heartbreak,Rock
+drumeo,264353,Dire Straits,Brothers In Arms,Rock
+drumeo,264381,Eagles,Desperado,Rock
+drumeo,264383,Earth Wind & Fire,September,Funk
+drumeo,264385,Ed Sheeran,Perfect,Pop
+drumeo,264387,Elton John,Bennie And The Jets,Rock
+drumeo,264389,Elton John,Candle In The Wind,Rock
+drumeo,264391,Elton John,Rocket Man,Rock
+drumeo,264393,Elton John,The Ballad Of Danny Bailey,Rock
+drumeo,264395,Elton John,Your Song,Rock
+drumeo,264397,Elvis Presley,Little Sister,Rock
+drumeo,264399,Eric Clapton,Wonderful Tonight,Rock
+drumeo,264401,Fleetwood Mac,Go Your Own Way,Rock
+drumeo,264403,Fleetwood Mac,The Chain,Rock
+drumeo,264405,Foreigner,Juke Box Hero,Rock
+drumeo,264407,Frank Zappa,Dong Work For Yuda,Rock
+drumeo,264409,Frank Zappa,Keep It Greasey,Rock
+drumeo,264411,Frank Zappa,Zomby Woof,Rock
+drumeo,264413,Free,All Right Now,Rock
+drumeo,264419,Gary Wright,Love Is Alive,Pop
+drumeo,264421,Genesis,Home By The Sea,Rock
+drumeo,264425,Gino Vannelli,I Just Wanna Stop,Rock
+drumeo,264427,Green Day,Boulevard Of Broken Dreams,Rock
+drumeo,264429,Green Day,Know Your Enemy,Rock
+drumeo,264431,Green Day,Wake Me Up When September Ends,Rock
+drumeo,264433,Guns N' Roses,Knockin' On Heaven's Door,Rock
+drumeo,264435,Guns N' Roses,Yesterdays,Rock
+drumeo,264437,Heart,What About Love,Rock
+drumeo,264443,Hoobastank,The Reason,Rock
+drumeo,264449,Jeff Buckley,Grace,Rock
+drumeo,264451,Jeff Buckley,Last Goodbye,Rock
+drumeo,264453,John Coltrane,Acknowledgement,Jazz
+drumeo,264455,John Cougar Mellencamp,Authority Song,Rock
+drumeo,264457,John Mayer,Heartbreak Warfare,Rock
+drumeo,264459,John Mayer,No Such Thing,Rock
+drumeo,264461,John Mayer,Waiting On The World To Change,Rock
+drumeo,264463,Journey,Who's Crying Now,Rock
+drumeo,264467,Kansas,Point Of Know Return,Rock
+drumeo,264469,Katy Perry,Teenage Dream,Pop
+drumeo,264471,Katy Perry,Who Am I Living For?,Pop
+drumeo,264475,KISS,Lick It Up,Rock
+drumeo,264477,KISS,Rock And Roll All Nite,Rock
+drumeo,264481,Loverboy,Working For The Weekend,Rock
+drumeo,264485,Mark Ronson & Amy Winehouse,Valerie,Rock
+drumeo,264487,Maroon 5,Makes Me Wonder,Pop
+drumeo,264491,Matchbox Twenty,3AM,Rock
+drumeo,264495,Michael Jackson,The Girl Is Mine,Pop
+drumeo,264497,Mountain,Mississippi Queen,Rock
+drumeo,264499,Mr. Big,Green-Tinted Sixties Mind,Rock
+drumeo,264501,Muse,Exo-Politics,Rock
+drumeo,264503,Muse,Madness,Rock
+drumeo,264505,Muse,Supremacy,Rock
+drumeo,264507,My Chemical Romance,Disenchanted,Rock
+drumeo,264509,Nirvana,Come As You Are,Rock
+drumeo,264511,Nirvana,Heart-Shaped Box,Rock
+drumeo,264513,Nirvana,Lithium,Rock
+drumeo,264515,Nirvana,Polly,Rock
+drumeo,264517,No Doubt,Just A Girl,Rock
+drumeo,264519,Ozzy Osbourne,"Mama, I'm Coming Home",Rock
+drumeo,264521,Ozzy Osbourne,Mr. Crowley,Rock
+drumeo,264525,Peter Gabriel,Sledgehammer,Rock
+drumeo,264535,Philip Bailey & Phil Collins,Easy Lover,Rock
+drumeo,264537,Pink Floyd,"Another Brick In The Wall, Part 2",Rock
+drumeo,264539,Pink Floyd,Have A Cigar,Rock
+drumeo,264541,Pink Floyd,Hey You,Rock
+drumeo,264543,Pink Floyd,Wish You Were Here,Rock
+drumeo,264547,Prince,Kiss,Rock
+drumeo,264549,Queen,Hammer To Fall,Rock
+drumeo,264551,Queen,Killer Queen,Rock
+drumeo,264553,Queen,Play The Game,Rock
+drumeo,264555,Queen,You’re My Best Friend,Rock
+drumeo,264557,Radiohead,High And Dry,Rock
+drumeo,264559,Rage Against The Machine,Bombtrack,Rock
+drumeo,264561,Rage Against The Machine,Bulls On Parade,Rock
+drumeo,264563,Rage Against The Machine,Killing In The Name,Rock
+drumeo,264567,Ramones,Blitzkrieg Bop,Rock
+drumeo,264569,Ramones,I Wanna Be Sedated,Rock
+drumeo,264575,Red Hot Chili Peppers,Under The Bridge,Rock
+drumeo,264577,REO Speedwagon,Can't Fight This Feeling,Rock
+drumeo,264579,Rush,A Farewell To Kings,Rock
+drumeo,264581,Rush,A Passage To Bangkok,Rock
+drumeo,264583,Rush,Animate,Rock
+drumeo,264585,Rush,Anthem,Rock
+drumeo,264587,Rush,Bastille Day,Rock
+drumeo,264589,Rush,Best I Can,Rock
+drumeo,264591,Rush,By-Tor & The Snow Dog,Rock
+drumeo,264593,Rush,Circumstances,Rock
+drumeo,264595,Rush,Cygnus X-1 Book I: The Voyage,Rock
+drumeo,264597,Rush,Digital Man,Rock
+drumeo,264599,Rush,Dreamline,Rock
+drumeo,264601,Rush,Finding My Way,Rock
+drumeo,264603,Rush,Fly By Night,Rock
+drumeo,264605,Rush,Force Ten,Rock
+drumeo,264607,Rush,In The Mood,Rock
+drumeo,264609,Rush,Lakeside Park,Rock
+drumeo,264611,Rush,Marathon,Rock
+drumeo,264613,Rush,Show Don't Tell,Rock
+drumeo,264615,Rush,The Pass,Rock
+drumeo,264617,Rush,Time Stand Still,Rock
+drumeo,264619,Rush,Working Man,Rock
+drumeo,264621,Rush,Xanadu,Rock
+drumeo,264623,Shinedown,Miracle,Rock
+drumeo,264625,Shinedown,Sound Of Madness,Rock
+drumeo,264627,Simple Minds,Don’t You (Forget About Me),Rock
+drumeo,264629,Simple Plan,Welcome To My Life,Rock
+drumeo,264635,Sting,If I Ever Lose My Faith In You,Pop
+drumeo,264637,Stone Temple Pilots,Interstate Love Song,Rock
+drumeo,264639,Sublime,What I Got,Rock
+drumeo,264643,Tears For Fears,Badman's Song,Rock
+drumeo,264645,The 1975,Chocolate,Rock
+drumeo,264647,The Beatles,A Hard Day's Night,Rock
+drumeo,264649,The Beatles,Back In The U.S.S.R.,Rock
+drumeo,264651,The Beatles,Day Tripper,Rock
+drumeo,264653,The Beatles,Don't Let Me Down,Rock
+drumeo,264655,The Beatles,Get Back,Rock
+drumeo,264657,The Beatles,Here Comes The Sun,Rock
+drumeo,264659,The Beatles,Rain,Rock
+drumeo,264661,The Beatles,Sgt. Pepper's Lonely Hearts Club Band,Rock
+drumeo,264663,The Beatles,With A Little Help From My Friends,Rock
+drumeo,264665,The Black Crowes,Hard To Handle,Rock
+drumeo,264669,The Calling,Wherever You Will Go,Rock
+drumeo,264671,The Cars,Just What I Needed,Rock
+drumeo,264673,The Cult,She Sells Sanctuary,Rock
+drumeo,264675,The Fray,How To Save A Life,Rock
+drumeo,264679,The Jimi Hendrix Experience,Purple Haze,Rock
+drumeo,264681,The Killers,Mr. Brightside,Rock
+drumeo,264683,The Killers,Read My Mind,Rock
+drumeo,264685,The Mamas And The Papas,California Dreamin’,Rock
+drumeo,264687,The Offspring,"You're Gonna Go Far, Kid",Rock
+drumeo,264689,The Outfield,Your Love,Rock
+drumeo,264691,The Rolling Stones,Beast Of Burden,Rock
+drumeo,264693,The Rolling Stones,Get Off My Cloud,Rock
+drumeo,264695,The Rolling Stones,Jumpin' Jack Flash,Rock
+drumeo,264697,The Rolling Stones,Miss You,Rock
+drumeo,264699,The White Stripes,Seven Nation Army,Rock
+drumeo,264701,Thundercat,Them Changes,R&B/Soul
+drumeo,264703,Tom Petty,Free Fallin’,Rock
+drumeo,264705,Tom Petty,I Won’t Back Down,Rock
+drumeo,264707,Tom Petty & The Heartbreakers,Learning To Fly,Rock
+drumeo,264711,Toto,Georgy Porgy,Rock
+drumeo,264713,Twenty One Pilots,Heathens,Rock
+drumeo,264715,U2,Beautiful Day,Pop
+drumeo,264717,U2,Bullet The Blue Sky,Pop
+drumeo,264719,U2,Elevation,Pop
+drumeo,264721,U2,I Still Haven't Found What I'm Looking For,Pop
+drumeo,264723,U2,I Will Follow,Pop
+drumeo,264725,U2,New Year's Day,Pop
+drumeo,264727,Uriah Heep,The Wizard,Rock
+drumeo,264729,Van Halen,And The Cradle Will Rock...,Rock
+drumeo,264731,Van Halen,Why Can't This Be Love,Rock
+drumeo,264735,Walk The Moon,Shut Up And Dance,Rock
+drumeo,264737,Weezer,Buddy Holly,Rock
+drumeo,264741,XTC,The Ballad Of Peter Pumpkinhead,Rock
+drumeo,264743,Young The Giant,Apartment,Rock
+drumeo,265086,Bee Gees,Alone,Pop
+drumeo,270299,ABBA,Mamma Mia,Pop
+drumeo,270301,ABBA,The Winner Takes It All,Pop
+drumeo,270303,AC/DC,Shake A Leg,Rock
+drumeo,270305,AC/DC,What Do You Do For Money Honey,Rock
+drumeo,270307,AC/DC,Let Me Put My Love Into You,Rock
+drumeo,270309,AC/DC,High Voltage,Rock
+drumeo,270311,AC/DC,Girls Got Rhythm,Rock
+drumeo,270313,AC/DC,Fire Your Guns,Rock
+drumeo,270315,Aerosmith,Cryin',Rock
+drumeo,270317,Aerosmith,What Could Have Been Love,Rock
+drumeo,270319,Aerosmith,Janie's Got A Gun,Rock
+drumeo,270321,Alice In Chains,Man In The Box,Rock
+drumeo,270323,Alphaville,Forever Young,Pop
+drumeo,270325,Anberlin,Feel Good Drag,Rock
+drumeo,270329,April Wine,Just Between You And Me,Rock
+drumeo,270333,Arctic Monkeys,Do I Wanna Know?,Rock
+drumeo,270335,Arctic Monkeys,R U Mine?,Rock
+drumeo,270337,Arctic Monkeys,Piledriver Waltz,Rock
+drumeo,270339,Arctic Monkeys,Four Out Of Five,Rock
+drumeo,270351,Backstreet Boys,Everybody (Backstreet's Back),Rock
+drumeo,270353,Backstreet Boys,I Want It That Way,Rock
+drumeo,270355,Barenaked Ladies,One Week,Rock
+drumeo,270363,Billy Joel,Don't Ask Me Why,Rock
+drumeo,270365,Billy Joel,You May Be Right,Rock
+drumeo,270367,Billy Squier,The Stroke,Rock
+drumeo,270369,Billy Talent,Try Honesty,Rock
+drumeo,270371,Billy Talent,Red Flag,Rock
+drumeo,270375,Bon Iver,"33 ""GOD""",Pop
+drumeo,270377,Bon Iver,Holocene,Pop
+drumeo,270381,Boston,Peace Of Mind,Rock
+drumeo,270383,Boston,Amanda,Rock
+drumeo,270391,Bruce Springsteen,Dancing In The Dark,Rock
+drumeo,270393,Bruce Springsteen,Darkness On The Edge Of Town,Rock
+drumeo,270405,Celine Dion,My Heart Will Go On,Pop
+drumeo,270407,Chicago,Hard Habit To Break,Pop
+drumeo,270409,Chicago,You're The Inspiration,Pop
+drumeo,270411,Chick Corea Elektric Band,Little Things That Count,Jazz
+drumeo,270413,Chick Corea Elektric Band,One Of Us Is Over 40,Jazz
+drumeo,270427,Christina Aguilera,The Voice Within,Pop
+drumeo,270429,Chuck Berry,Johnny B. Goode,Rock
+drumeo,270431,Cinderella,Night Songs,Rock
+drumeo,270439,Cream,Strange Brew,Rock
+drumeo,270441,Cream,White Room,Rock
+drumeo,270443,Creedence Clearwater Revival,Long As I Can See The Light,Rock
+drumeo,270445,Creedence Clearwater Revival,Travelin' Band,Rock
+drumeo,270447,Creedence Clearwater Revival,Up Around The Bend,Rock
+drumeo,270449,Creedence Clearwater Revival,Commotion,Rock
+drumeo,270451,Creedence Clearwater Revival,Someday Never Comes,Rock
+drumeo,270453,Creedence Clearwater Revival,Down On The Corner,Rock
+drumeo,270455,Cutting Crew,(I Just) Died In Your Arms,Rock
+drumeo,270459,Daughtry,Break The Spell,Rock
+drumeo,270463,David Bowie,Heroes,Rock
+drumeo,270485,Elton John & Kiki Dee,Don't Go Breaking My Heart,Rock
+drumeo,270497,Eric Clapton,I Shot The Sherrif,Rock
+drumeo,270499,Eric Clapton,Cocaine,Rock
+drumeo,270503,Europe,The Final Countdown,Rock
+drumeo,270505,Fleetwood Mac,Everywhere,Rock
+drumeo,270507,Foghat,Slow Ride,Rock
+drumeo,270509,Foo Fighters,Best Of You,Rock
+drumeo,270511,Foo Fighters,My Hero,Rock
+drumeo,270513,Genesis,That's All,Rock
+drumeo,270515,George Michael,Careless Whisper,Rock
+drumeo,270517,Guns N' Roses,Don't Cry,Rock
+drumeo,270519,Guns N' Roses,You Could Be Mine,Rock
+drumeo,270521,Hall & Oates,You Make My Dreams,Pop
+drumeo,270523,Heart,Barracuda,Rock
+drumeo,270529,Herbie Hancock,Butterfly,Funk
+drumeo,270531,Hinder,Lips Of An Angel,Rock
+drumeo,270533,Horace Silver,Song For My Father,Jazz
+drumeo,270535,Huey Lewis And The News,Do You Believe In Love,Rock
+drumeo,270537,Huey Lewis And The News,I Want A New Drug,Rock
+drumeo,270547,John Mayer,Perfectly Lonely,Rock
+drumeo,270549,John Mayer,Slow Dancing In A Burning Room,Rock
+drumeo,270551,John Mayer,Rosie,Rock
+drumeo,270553,Katy Perry,Last Friday Night (T.G.I.F.),Pop
+drumeo,270555,Keane,Somewhere Only We Know,Pop
+drumeo,270557,Lady Gaga,The Edge Of Glory,Pop
+drumeo,270559,Lady Gaga,Poker Face,Pop
+drumeo,270561,Lady Gaga,Bad Romance,Pop
+drumeo,270563,Led Zeppelin,D'yer Mak'er,Rock
+drumeo,270565,Led Zeppelin,Over The Hills And Far Away,Rock
+drumeo,270567,Led Zeppelin,Babe I'm Gonna Leave You,Rock
+drumeo,270569,Led Zeppelin,Communication Breakdown,Rock
+drumeo,270571,Led Zeppelin,Living Loving Maid (She's Just A Woman),Rock
+drumeo,270573,Led Zeppelin,Misty Mountain Hop,Rock
+drumeo,270585,Men At Work,Down Under,Pop
+drumeo,270589,Michael Buble,Everything,Pop
+drumeo,270591,Michael Jackson,Earth Song,Pop
+drumeo,270593,Michael Jackson,P.Y.T. (Pretty Young Thing),Pop
+drumeo,270603,Miles Davis,Tutu,Jazz
+drumeo,270607,Muse,Assassin,Rock
+drumeo,270609,Muse,Defector,Rock
+drumeo,270613,Nickelback,Gotta Be Somebody,Rock
+drumeo,270615,Nirvana,Lounge Act,Rock
+drumeo,270617,Oasis,Don't Look Back In Anger,Pop
+drumeo,270619,OneRepublic,Counting Stars,Pop
+drumeo,270621,OutKast,Hey Ya!,Hip-Hop/Rap
+drumeo,270623,P!nk,Raise Your Glass,Pop
+drumeo,270625,P!nk,Try,Pop
+drumeo,270629,Passenger,Let Her Go,Pop
+drumeo,270633,Phil Collins,In The Air Tonight,Pop
+drumeo,270635,Poison,Every Rose Has Its Thorn,Rock
+drumeo,270637,Porcupine Tree,Arriving Somewhere But Not Here,Rock
+drumeo,270639,Porcupine Tree,Halo,Rock
+drumeo,270641,Porcupine Tree,Lazarus,Rock
+drumeo,270643,Porcupine Tree,Open Car,Rock
+drumeo,270645,Porcupine Tree,Shallow,Rock
+drumeo,270647,Porcupine Tree,Trains,Rock
+drumeo,270649,R.E.M.,Losing My Religion,Pop
+drumeo,270651,Ramones,My Brain Is Hanging Upside Down (Bonzo Goes To Bitburg),Rock
+drumeo,270655,Red Hot Chili Peppers,Suck My Kiss,Rock
+drumeo,270657,Rick Astley,Never Gonna Give You Up,Pop
+drumeo,270659,Rise Against,Make It Stop (September's Children),Rock
+drumeo,270663,Rush,The Necromancer,Rock
+drumeo,270665,Rush,"Beneath, Between & Behind",Rock
+drumeo,270667,Rush,Jacob's Ladder,Rock
+drumeo,270669,Rush,Superconductor,Rock
+drumeo,270671,Rush,What You're Doing,Rock
+drumeo,270673,Rush,Limbo,Rock
+drumeo,270675,Simon & Garfunkel,Bridge Over Troubled Water,Pop
+drumeo,270677,Snow Patrol,Chasing Cars,Rock
+drumeo,270679,Snow Patrol,Run,Rock
+drumeo,270681,Steve Miller Band,Jungle Love,Rock
+drumeo,270683,Steve Miller Band,The Joker,Rock
+drumeo,270695,Stevie Wonder,Sir Duke,Rock
+drumeo,270697,Sting,I Hung My Head,Pop
+drumeo,270699,Switchfoot,Dare You To Move,Rock
+drumeo,270701,Switchfoot,This Is Your Life,Rock
+drumeo,270703,Switchfoot,This Is Home,Rock
+drumeo,270705,Taylor Swift,Shake It Off,Pop
+drumeo,270707,The All-American Rejects,Damn Girl,Rock
+drumeo,270709,The All-American Rejects,Gives You Hell,Rock
+drumeo,270711,The B-52's,Love Shack,Rock
+drumeo,270713,The Bangles,Walk Like An Egyptian,Rock
+drumeo,270715,The Beatles,I Want To Hold Your Hand,Rock
+drumeo,270717,The Beatles,Glass Onion,Rock
+drumeo,270719,The Cardigans,Lovefool,Rock
+drumeo,270721,The Clash,Stay Free,Rock
+drumeo,270723,The Clash,Tommy Gun,Rock
+drumeo,270725,The Jackson 5,ABC,Rock
+drumeo,270731,The Police,Spirits In The Material World,Rock
+drumeo,270733,The Rolling Stones,Ruby Tuesday,Rock
+drumeo,270735,The Rolling Stones,Start Me Up,Rock
+drumeo,270741,The Stooges,I Wanna Be Your Dog,Rock
+drumeo,270743,The Temptations,Papa Was A Rollin' Stone,R&B/Soul
+drumeo,270745,The Temptations,Get Ready,R&B/Soul
+drumeo,270755,Tina Turner,What's Love Got To Do With It,Rock
+drumeo,270757,Tom Petty & The Heartbreakers,American Girl,Rock
+drumeo,270775,Toto,Pamela,Rock
+drumeo,270777,Train,Drive By,Rock
+drumeo,270779,Train,Drops Of Jupiter,Rock
+drumeo,270781,U2,Sunday Bloody Sunday,Rock
+drumeo,270785,Warrant,I Saw Red,Rock
+drumeo,270787,Whitesnake,Is This Love,Rock
+drumeo,270789,Whitney Houston,I Wanna Dance With Somebody (Who Loves Me),Pop
+drumeo,270791,Whitney Houston,How Will I Know,Pop
+drumeo,270793,Yes,Owner Of A Lonely Heart,Rock
+drumeo,27164,Lenny Kravitz,Are You Gonna Go My Way,Rock
+drumeo,27190,AC/DC,You Shook Me All Night Long,Rock
+drumeo,27245,The Beatles,Come Together,Rock
+drumeo,275326,A Day To Remember,"Sometimes You're The Hammer, Sometimes You're The Nail",Metal
+drumeo,275328,a-ha,Take On Me,Rock
+drumeo,275330,ABBA,Voulez-Vous,Rock
+drumeo,275332,AC/DC,Let There Be Rock,Rock
+drumeo,275334,Aerosmith,Last Child,Rock
+drumeo,275336,Air Supply,All Out Of Love,Rock
+drumeo,275338,Airbourne,"Too Much, Too Young, Too Fast",Rock
+drumeo,275342,Alice Cooper,Billion Dollar Babies,Rock
+drumeo,275344,Alice In Chains,Down In A Hole,Rock
+drumeo,275346,Alice In Chains,Rooster,Rock
+drumeo,275366,Asia,Only Time Will Tell,Rock
+drumeo,275372,Bad Company,Bad Company,Rock
+drumeo,275374,Bad Company,Rock Steady,Rock
+drumeo,275376,Beck,Loser,Pop
+drumeo,275382,Billy Joel,Piano Man,Rock
+drumeo,275388,Blink-182,Feeling This,Rock
+drumeo,275390,Blink-182,Dumpweed,Rock
+drumeo,275392,Blink-182,Going Away To College,Rock
+drumeo,275394,Bob Dylan,Knockin' On Heaven's Door,Pop
+drumeo,275396,Bon Jovi,Bed Of Roses,Rock
+drumeo,275398,Bon Jovi,I'll Be There For You,Rock
+drumeo,275400,Boston,Let Me Take You Home Tonight,Rock
+drumeo,275402,Boston,Don't Look Back,Rock
+drumeo,275416,Bruce Springsteen,Badlands,Rock
+drumeo,275418,Bruce Springsteen,Santa Claus Is Comin' To Town,Rock
+drumeo,275424,Cage The Elephant,Ain't No Rest For The Wicked,Rock
+drumeo,275430,Cheap Trick,Surrender,Rock
+drumeo,275442,Coldplay,White Shadows,Rock
+drumeo,275444,Concrete Blonde,Joey,Rock
+drumeo,275446,Creedence Clearwater Revival,Run Through The Jungle,
+drumeo,275448,Dance Gavin Dance,One In A Million,Metal
+drumeo,275454,Dave Matthews Band,Rapunzel,Rock
+drumeo,275456,David Bowie,I'm Afraid Of Americans,Pop
+drumeo,275462,Def Leppard,Hysteria,Rock
+drumeo,275464,Def Leppard,Foolin',Rock
+drumeo,275466,Def Leppard,Photograph,Rock
+drumeo,275468,Def Leppard,Rock Of Ages,Rock
+drumeo,275470,Depeche Mode,Personal Jesus,Pop
+drumeo,275480,Edgar Winter,Frankenstein,Rock
+drumeo,275490,Elvis Presley,Suspicious Minds,Pop
+drumeo,275492,Enter Shikari,Torn Apart,Rock
+drumeo,275496,Europe,Rock The Night,Rock
+drumeo,275498,Fall Out Boy,Thnks Fr Th Mmrs,Rock
+drumeo,275500,Fleetwood Mac,Dreams,Rock
+drumeo,275502,Foo Fighters,Wind Up,Rock
+drumeo,275504,Foo Fighters,Learn To Fly,Rock
+drumeo,275506,Foo Fighters,Arlandria,Rock
+drumeo,275508,Foo Fighters,Bridge Burning,Rock
+drumeo,275510,Foo Fighters,Dear Rosemary,Rock
+drumeo,275512,Foo Fighters,Walk,Rock
+drumeo,275514,Foo Fighters,White Limo,Rock
+drumeo,275522,Great White,The Angel Song,Rock
+drumeo,275526,Hall & Oates,Sara Smile,Pop
+drumeo,275536,Huey Lewis And The News,Hip To Be Square,Rock
+drumeo,275538,Huey Lewis And The News,Workin' For A Livin',Rock
+drumeo,275540,Huey Lewis And The News,Heart And Soul,Rock
+drumeo,275542,Huey Lewis And The News,If This Is It,Rock
+drumeo,275544,Huey Lewis And The News,The Heart Of Rock & Roll,Rock
+drumeo,275546,Imagine Dragons,Believer,Rock
+drumeo,275548,Imagine Dragons,Thunder,Rock
+drumeo,275550,Imagine Dragons,Natural,Rock
+drumeo,275552,Incubus,Drive,Rock
+drumeo,275554,Incubus,Pardon Me,Rock
+drumeo,275556,INXS,Devil Inside,Rock
+drumeo,275558,INXS,Suicide Blonde,Rock
+drumeo,275560,James Bay,Let It Go,Rock
+drumeo,275566,John Mayer,Why Georgia,Rock
+drumeo,275570,Journey,Open Arms,Rock
+drumeo,275572,Journey,Faithfully,Rock
+drumeo,275574,Journey,After All These Years,Rock
+drumeo,275578,Led Zeppelin,Fool In The Rain,Rock
+drumeo,275580,Led Zeppelin,Heartbreaker,Rock
+drumeo,275582,Led Zeppelin,Black Dog,Rock
+drumeo,275590,Lionel Richie,All Night Long (All Night),Rock
+drumeo,275592,Living Colour,Cult Of Personality,Rock
+drumeo,275620,Miley Cyrus,Party In The U.S.A.,Rock
+drumeo,275624,Mutemath,Chaos,Rock
+drumeo,275626,Mutemath,Hit Parade,Rock
+drumeo,275628,My Chemical Romance,I Don't Love You,Rock
+drumeo,275630,My Chemical Romance,Welcome To The Black Parade,Rock
+drumeo,275632,Nazareth,Love Hurts,Rock
+drumeo,275634,New Found Glory,My Friends Over You,Rock
+drumeo,275636,Night Ranger,Sister Christian,Rock
+drumeo,275640,Nine Inch Nails,The Perfect Drug,Rock
+drumeo,275642,Nine Inch Nails,Closer,Rock
+drumeo,275644,Nine Inch Nails,The Hand That Feeds,Rock
+drumeo,275646,Nirvana,All Apologies,Rock
+drumeo,275648,Nirvana,Breed,Rock
+drumeo,275650,Nirvana,Something In The Way,Rock
+drumeo,275652,Norah Jones,Begin Again,Rock
+drumeo,275658,Oscar Peterson,The Girl From Ipanema,Jazz
+drumeo,275660,P!nk,Funhouse,Pop
+drumeo,275668,Pink Floyd,Any Colour You Like,Rock
+drumeo,275670,Pink Floyd,Brain Damage,Rock
+drumeo,275672,Pink Floyd,Time,Rock
+drumeo,275674,Pink Floyd,Us And Them,Rock
+drumeo,275676,Pink Floyd,Young Lust,Rock
+drumeo,275678,Porcupine Tree,Anesthetize,Rock
+drumeo,275680,Porcupine Tree,Way Out Of Here,Rock
+drumeo,275682,Porcupine Tree,Blackest Eyes,Rock
+drumeo,275686,Queen,Don't Stop Me Now,Rock
+drumeo,275688,Queen,We Will Rock You,Rock
+drumeo,275690,Queen,Crazy Little Thing Called Love,Rock
+drumeo,275694,Rage Against The Machine,Know Your Enemy,Rock
+drumeo,275700,Red Hot Chili Peppers,Dani California,Rock
+drumeo,275702,Rush,Closer To The Heart,Rock
+drumeo,275704,Rush,La Villa Strangiato,Rock
+drumeo,275706,Rush,The Trees,Rock
+drumeo,275708,Rush,Limelight,Rock
+drumeo,275710,Rush,YYZ,Rock
+drumeo,275712,Rush,Freewill,Rock
+drumeo,275714,Rush,Natural Science,Rock
+drumeo,275716,Rush,The Spirit Of Radio,Rock
+drumeo,275718,Rush,New World Man,Rock
+drumeo,275720,Rush,Red Sector A,Rock
+drumeo,275722,Rush,Red Barchetta,Rock
+drumeo,275724,Scorpions,The Zoo,Rock
+drumeo,275726,Scorpions,No One Like You,Rock
+drumeo,275728,Scorpions,Wind Of Change,Rock
+drumeo,275730,Scorpions,Always Somewhere,Rock
+drumeo,275732,Shinedown,Bully,Rock
+drumeo,275734,Sia,Chandelier,Pop
+drumeo,275738,Soundgarden,The Day I Tried To Live,Rock
+drumeo,275740,Steely Dan,Aja,Rock
+drumeo,275742,Steely Dan,Reelin' In The Years,Rock
+drumeo,275744,Steve Miller Band,Rock'n Me,Rock
+drumeo,275746,Steve Miller Band,Take The Money And Run,Rock
+drumeo,275748,Steve Winwood,Higher Love,Rock
+drumeo,275750,Stevie Wonder,For Your Love,Rock
+drumeo,275752,Stevie Wonder,I Wish,Rock
+drumeo,275754,Sweet,The Ballroom Blitz,Rock
+drumeo,275756,Switchfoot,We Are One Tonight,Rock
+drumeo,275758,The All-American Rejects,It Ends Tonight,Rock
+drumeo,275760,The All-American Rejects,Move Along,Rock
+drumeo,275762,The Allman Brothers Band,Ramblin' Man,Rock
+drumeo,275764,The Band,The Weight,Rock
+drumeo,275766,The Band,Ophelia,Rock
+drumeo,275768,The Beatles,Paperback Writer,Rock
+drumeo,275770,The Beatles,All You Need Is Love,Rock
+drumeo,275772,The Beatles,Tomorrow Never Knows,Rock
+drumeo,275774,The Beatles,Happiness Is A Warm Gun,Rock
+drumeo,275776,The Beatles,Revolution,Rock
+drumeo,275778,The Beatles,She Loves You,Rock
+drumeo,275780,The Beatles,Yellow Submarine,Rock
+drumeo,275782,The Clash,Rock The Casbah,Rock
+drumeo,275784,The Cure,Just Like Heaven,Rock
+drumeo,275786,The Kinks,Lola,Rock
+drumeo,275790,The Pretenders,Back On The Chain Gang,Rock
+drumeo,275792,The Rolling Stones,Sympathy For The Devil,Rock
+drumeo,275796,The Smashing Pumpkins,1979,Rock
+drumeo,275798,The Smashing Pumpkins,Cherub Rock,Rock
+drumeo,275800,The Smashing Pumpkins,Today,Rock
+drumeo,275802,The Who,Won't Get Fooled Again,Rock
+drumeo,275806,Tom Cochrane,Life Is A Highway,Rock
+drumeo,275808,Train,"Hey, Soul Sister",Rock
+drumeo,275810,Twenty One Pilots,Stressed Out,Rock
+drumeo,275818,Weezer,Island In The Sun,Rock
+drumeo,275820,Weezer,Undone – The Sweater Song,Rock
+drumeo,275822,Wham!,Wake Me Up Before You Go-Go,Rock
+drumeo,275824,Whitesnake,Slide It In,Rock
+drumeo,275828,ZZ Top,La Grange,Rock
+drumeo,27593,Green Day,American Idiot,Rock
+drumeo,27843,Santana,Smooth,Rock
+drumeo,27845,Maroon 5,Sugar,Pop
+drumeo,278877,A Day To Remember,Right Back At It Again,Metal
+drumeo,278879,A Day To Remember,If It Means A Lot To You,Metal
+drumeo,278881,A Perfect Circle,3 Libras,Metal
+drumeo,278883,AC/DC,If You Want Blood (You've Got It),Rock
+drumeo,278885,AC/DC,Dog Eat Dog,Rock
+drumeo,278887,Aerosmith,Jaded,Rock
+drumeo,278889,Aerosmith,Dude (Looks Like A Lady),Rock
+drumeo,278891,Aerosmith,Back In The Saddle,Rock
+drumeo,278893,Alice Cooper,I'm Eighteen,Rock
+drumeo,278899,Anika Nilles,Greenfield,Rock
+drumeo,278903,Arctic Monkeys,The View From The Afternoon,Rock
+drumeo,278915,Bad Brains,Sailin' On,Rock
+drumeo,278917,Barbra Streisand,Guilty,Rock
+drumeo,278919,Barenaked Ladies,"If I Had $1,000,000",Rock
+drumeo,278923,Bastille,Pompeii,Rock
+drumeo,278929,Billy Idol,Dancing With Myself,Rock
+drumeo,278931,Billy Talent,Surrender,Rock
+drumeo,278933,Black Flag,My War,Rock
+drumeo,278947,Blink-182,California,Rock
+drumeo,278949,Blink-182,She's Out Of Her Mind,Rock
+drumeo,278951,Bob Dylan,Like A Rolling Stone,Rock
+drumeo,278953,Bon Jovi,Always,Rock
+drumeo,278955,Bon Jovi,Keep The Faith,Rock
+drumeo,278957,Bon Jovi,Lost Highway,Rock
+drumeo,278959,Bon Jovi,Lay Your Hands On Me,Rock
+drumeo,278961,Bon Jovi,Wanted Dead Or Alive,Rock
+drumeo,278965,Boston,Smokin',Rock
+drumeo,278967,Boston,A Man I'll Never Be,Rock
+drumeo,278969,Boz Scaggs,Lido Shuffle,Rock
+drumeo,278977,Bring Me The Horizon,Mantra,Rock
+drumeo,278981,Bruce Springsteen,Born In The U.S.A,Rock
+drumeo,278983,Bruce Springsteen,I'm On Fire,Rock
+drumeo,278985,Bruce Springsteen,Hungry Heart,Rock
+drumeo,278987,Carl Perkins,Blue Suede Shoes,Rock
+drumeo,278993,Celine Dion,It's All Coming Back To Me Now,Pop
+drumeo,278995,Rufus & Chaka Khan,Ain't Nobody,R&B/Soul
+drumeo,278997,Cheap Trick,The Flame,Rock
+drumeo,279001,Chicago,90 Degrees And Freezing,Rock
+drumeo,279013,Coldplay,Speed Of Sound,Rock
+drumeo,279019,Cyndi Lauper,Time After Time,Rock
+drumeo,279023,Dance Gavin Dance,Betrayed By The Game,Rock
+drumeo,279025,Daughtry,Renegade,Rock
+drumeo,279027,Daughtry,Home,Rock
+drumeo,279029,Daughtry,No Surprise,Rock
+drumeo,279031,Dave Matthews Band,The Space Between,Rock
+drumeo,279043,Dick Dale & His Del-Tones,Misirlou,Rock
+drumeo,279049,Dire Straits,Money For Nothing,Rock
+drumeo,279055,Duran Duran,Girls On Film,Rock
+drumeo,279057,Dusty Springfield,Son Of A Preacher Man,Rock
+drumeo,279061,Elvis Presley,A Little Less Conversation,Rock
+drumeo,279063,Elvis Presley,Hound Dog,Rock
+drumeo,279065,Europe,Superstitious,Rock
+drumeo,279067,Europe,Carrie,Rock
+drumeo,279071,Finger Eleven,Other Light,Rock
+drumeo,279073,Fleetwood Mac,You Make Loving Fun,Rock
+drumeo,279075,Florence + The Machine,Howl,Rock
+drumeo,279077,Foo Fighters,Let It Die,Rock
+drumeo,279079,Foo Fighters,Times Like These,Rock
+drumeo,279081,Foo Fighters,February Stars,Rock
+drumeo,279085,Fun.,We Are Young,Rock
+drumeo,279087,Genesis,Turn It On Again,Rock
+drumeo,279089,Gino Vannelli,Seek And You Will Find,Rock
+drumeo,279093,Green Day,Are We The Waiting,Rock
+drumeo,279095,Green Day,St. Jimmy,Rock
+drumeo,279107,Huey Lewis And The News,Stuck With You,Rock
+drumeo,279109,Imagine Dragons,Demons,Rock
+drumeo,279111,INXS,Need You Tonight,Rock
+drumeo,279113,Jack White,Over And Over And Over,Rock
+drumeo,279119,Jason Mraz,I'm Yours,Rock
+drumeo,279129,John Mayer,Vultures,Rock
+drumeo,279131,John Mayer,Your Body Is A Wonderland,Rock
+drumeo,279135,Jonas Brothers,Burnin' Up,Rock
+drumeo,279139,Journey,Lights,Rock
+drumeo,279145,KISS,"100,000 Years",Rock
+drumeo,279147,KISS,Calling Dr. Love,Rock
+drumeo,279153,Led Zeppelin,The Crunge,Rock
+drumeo,279155,Led Zeppelin,Tangerine,Rock
+drumeo,279157,Led Zeppelin,Stairway To Heaven,Rock
+drumeo,279159,Led Zeppelin,The Wanton Song,Rock
+drumeo,279163,Linkin Park,Numb,Rock
+drumeo,279165,Linkin Park,What I've Done,Rock
+drumeo,279167,Lionel Richie,Hello,Pop
+drumeo,279169,Madonna,Like A Virgin,Pop
+drumeo,279171,Maroon 5,Misery,Pop
+drumeo,279189,Michael Jackson,Bad,Pop
+drumeo,279191,Michael Jackson,Jam,Pop
+drumeo,279193,Michael Jackson,Human Nature,Pop
+drumeo,279197,Muse,Animals,Rock
+drumeo,279199,Nickelback,Rockstar,Rock
+drumeo,279201,Nine Inch Nails,Last,Rock
+drumeo,279203,Nirvana,Drain You,Rock
+drumeo,279205,Norah Jones,Turn Me On,Pop
+drumeo,279207,Norah Jones,Flame Twin,Pop
+drumeo,279209,OneRepublic,Apologize,Rock
+drumeo,279211,Our Last Night,Lost,Rock
+drumeo,279215,Pat Benatar,Love Is A Battlefield,Rock
+drumeo,279221,Pink Floyd,Breathe,Rock
+drumeo,279223,Pink Floyd,Run Like Hell,Rock
+drumeo,279225,Porcupine Tree,Start Of Something Beautiful,Rock
+drumeo,279227,Prince,Sexy MF,Funk
+drumeo,279231,Queens Of The Stone Age,Little Sister,Rock
+drumeo,279233,Queens Of The Stone Age,"You Think I Ain't Worth A Dollar, But I Feel Like A Millionaire",Rock
+drumeo,279235,Rage Against The Machine,Freedom,Rock
+drumeo,279237,Rancid,Side Kick,Rock
+drumeo,279241,Red Hot Chili Peppers,Californication,Rock
+drumeo,279243,Red Hot Chili Peppers,Snow (Hey Oh),Rock
+drumeo,279245,Robert Palmer,Addicted To Love,Rock
+drumeo,279247,Roy Orbison,Ooby Dooby,Pop
+drumeo,279249,Rush,Leave That Thing Alone,Rock
+drumeo,279251,Rush,Far Cry,Rock
+drumeo,279255,Santana,Soul Sacrifice,Rock
+drumeo,279265,Skillet,Monster,Rock
+drumeo,279267,Skillet,Comatose,Rock
+drumeo,279275,Sonny Rollins,Mambo Bounce,Jazz
+drumeo,279277,Soundgarden,Fell On Black Days,Rock
+drumeo,279279,Spin Doctors,Two Princes,Rock
+drumeo,279281,Starship,We Built This City,Rock
+drumeo,279283,Stealers Wheel,Stuck In The Middle With You,Rock
+drumeo,279285,Steely Dan,Home At Last,Rock
+drumeo,279289,Sum 41,In Too Deep,Rock
+drumeo,279293,Tame Impala,Elephant,Rock
+drumeo,279295,Tenacious D,Tribute,Rock
+drumeo,279297,Tesla,Modern Day Cowboy,Rock
+drumeo,279303,The 1975,Somebody Else,Rock
+drumeo,279305,The Allman Brothers Band,Whipping Post,Rock
+drumeo,279307,The Beach Boys,Surfin' U.S.A.,Rock
+drumeo,279309,The Beatles,Carry That Weight,Rock
+drumeo,279311,The Beatles,Let It Be,Rock
+drumeo,279313,The Beatles,Norwegian Wood (This Bird Has Flown),Rock
+drumeo,279315,The Black Keys,Lonely Boy,Rock
+drumeo,279317,The Clash,I Fought The Law,Rock
+drumeo,279319,The Doors,Riders On The Storm,Rock
+drumeo,279321,The Doors,Light My Fire,Rock
+drumeo,279323,The Fray,You Found Me,Rock
+drumeo,279327,The Kinks,You Really Got Me,Rock
+drumeo,279329,The Monkees,I'm A Believer,Rock
+drumeo,279331,The Pretenders,Middle Of The Road,Rock
+drumeo,279336,The Runaways,Cherry Bomb,Rock
+drumeo,279338,The Script,Nothing,Rock
+drumeo,279340,The Smashing Pumpkins,Bullet With Butterfly Wings,Rock
+drumeo,279346,The Ventures,"Walk, Don't Run",Rock
+drumeo,279348,The Who,My Generation,Rock
+drumeo,279350,Them Crooked Vultures,New Fang,Rock
+drumeo,279352,Thin Lizzy,Jailbreak,Rock
+drumeo,279354,Thin Lizzy,Don't Believe A Word,Rock
+drumeo,279356,Tom Petty,You Wreck Me,Rock
+drumeo,279358,Toto,Child's Anthem,Rock
+drumeo,279360,Twenty One Pilots,Migraine,Rock
+drumeo,279362,U2,Mysterious Ways,Rock
+drumeo,279364,U2,Vertigo,Rock
+drumeo,279366,Van Halen,Best Of Both Worlds,Rock
+drumeo,279368,Wheatus,Teenage Dirtbag,Rock
+drumeo,279370,Willie Nelson,On The Road Again,Rock
+drumeo,279372,Yes,Changes,Rock
+drumeo,279374,Yes,Heart Of The Sunrise,Rock
+drumeo,28218,Aerosmith,Walk This Way,Rock
+drumeo,28330,Foo Fighters,Monkey Wrench,Rock
+drumeo,284668,311,Beautiful Disaster,Rock
+drumeo,284670,38 Special,Hold On Loosely,Rock
+drumeo,284672,5 Seconds Of Summer,She Looks So Perfect,Rock
+drumeo,284674,A Day To Remember,I Surrender,Metal
+drumeo,284676,A Day To Remember,2nd Sucks,Metal
+drumeo,284678,A Perfect Circle,The Outsider,Rock
+drumeo,284680,ABBA,Dancing Queen,Pop
+drumeo,284682,ABBA,"Knowing Me, Knowing You",Pop
+drumeo,284684,ABBA,Super Trouper,Pop
+drumeo,284686,AC/DC,Givin' The Dog A Bone,Rock
+drumeo,284688,AC/DC,Have A Drink On Me,Rock
+drumeo,284690,AC/DC,Hard As A Rock,Rock
+drumeo,284692,AC/DC,Skies On Fire,Rock
+drumeo,284694,AC/DC,Little Lover,Rock
+drumeo,284696,AC/DC,Shot In The Dark,Rock
+drumeo,284698,AC/DC,Who Made Who,Rock
+drumeo,284700,Aerosmith,Make It,Rock
+drumeo,284702,Aerosmith,Eat The Rich,Rock
+drumeo,284704,Aerosmith,Get A Grip,Rock
+drumeo,284706,Aerosmith,Heart's Done Time,Rock
+drumeo,284708,Aerosmith,Home Tonight,Rock
+drumeo,284710,Airbourne,Diamond In The Rough,Rock
+drumeo,284714,Alice In Chains,Them Bones,Rock
+drumeo,284720,Anika Nilles,Mister,Rock
+drumeo,284722,Anika Nilles,Orange Leaves,Rock
+drumeo,284726,Arctic Monkeys,Brianstorm,Rock
+drumeo,284754,Barenaked Ladies,You Run Away,Rock
+drumeo,284760,Billy Idol,Rebel Yell,Rock
+drumeo,284770,Bon Jovi,Dry County,Rock
+drumeo,284772,Bon Jovi,I'D Die For You,Rock
+drumeo,284774,Bon Jovi,Raise Your Hands,Rock
+drumeo,284776,Bon Jovi,Hey God,Rock
+drumeo,284784,Bring Me The Horizon,Avalanche,Rock
+drumeo,284788,Bruce Springsteen,The Promised Land,Rock
+drumeo,284790,Bryan Adams,Cuts Like A Knife,Rock
+drumeo,284792,Buckcherry,Sorry,Rock
+drumeo,284794,Buddy Holly,Rave On!,Rock
+drumeo,284798,Burning Spear,"Red, Gold & Green",Rock
+drumeo,284802,Chick Corea Elektric Band,Illusions,Jazz
+drumeo,284808,Coldplay,Cemeteries Of London,Rock
+drumeo,284810,Coldplay,Twisted Logic,Rock
+drumeo,284812,Cyndi Lauper,Girls Just Want To Have Fun,Pop
+drumeo,284816,Daft Punk,Beyond,Electronic
+drumeo,284818,Daniel Powter,Bad Day,Pop
+drumeo,284820,Daughtry,Feels Like Tonight,Rock
+drumeo,284822,Daughtry,What About Now,Rock
+drumeo,284824,Dave Matthews Band,Don't Drink The Water,Rock
+drumeo,284826,Dave Matthews Band,Funny The Way It Is,Rock
+drumeo,284828,Dave Matthews Band,Satellite,Rock
+drumeo,284830,David Bowie,Blackstar,Rock
+drumeo,284832,David Bowie,Changes,Rock
+drumeo,284834,David Bowie,Let's Dance,Rock
+drumeo,284836,David Bowie,Fame,Rock
+drumeo,284838,Death Cab For Cutie,Soul Meets Body,Rock
+drumeo,284840,Demi Lovato,Tell Me You Love Me,Rock
+drumeo,284842,Dire Straits,Sultans Of Swing,Rock
+drumeo,284848,Duran Duran,Hungry Like The Wolf,Rock
+drumeo,284850,Ed Sheeran,Shape Of You,Pop
+drumeo,284852,Elton John,Levon,Rock
+drumeo,284856,Elvis Presley,Blue Suede Shoes,Rock
+drumeo,284858,Elvis Presley,Jailhouse Rock,Rock
+drumeo,284862,Fall Out Boy,"Dance, Dance",Rock
+drumeo,284866,Fishbone,Unyielding Conditioning,Rock
+drumeo,284868,Fleetwood Mac,Rhiannon,Rock
+drumeo,284870,Fleetwood Mac,Second Hand News,Rock
+drumeo,284872,Flying Lotus,Never Catch Me,Rock
+drumeo,284874,Foo Fighters,Home,Rock
+drumeo,284876,Foo Fighters,Long Road To Ruin,Rock
+drumeo,284878,Foo Fighters,Summer's End,Rock
+drumeo,284880,Foreigner,That Was Yesterday,Rock
+drumeo,284884,Fun.,Carry On,Rock
+drumeo,284888,Green Day,¡Viva La Gloria!,Rock
+drumeo,284890,Green Day,Holiday,Rock
+drumeo,284898,Hands Like Houses,Colourblind,Rock
+drumeo,284916,Huey Lewis And The News,Back In Time,Rock
+drumeo,284918,Huey Lewis And The News,Giving It All Up For Love,Rock
+drumeo,284920,Huey Lewis And The News,Tell Me A Little Lie,Rock
+drumeo,284922,Huey Lewis And The News,The Only One,Rock
+drumeo,284924,Imagine Dragons,Warriors,Rock
+drumeo,284926,INXS,Never Tear Us Apart,Pop
+drumeo,284928,Joe Walsh,Rocky Mountain Way,Rock
+drumeo,284930,John Mayer,Gravity,Rock
+drumeo,284932,John Mayer,Neon,Rock
+drumeo,284942,KC & The Sunshine Band,Get Down Tonight,Rock
+drumeo,284944,Keith Urban,Somebody Like You,Rock
+drumeo,284946,Kelly Clarkson,My Life Would Suck Without You,Rock
+drumeo,284950,Kid Rock,Let's Ride,Rock
+drumeo,284952,King Crimson,21st Century Schizoid Man,Rock
+drumeo,284954,KISS,Heaven's On Fire,Rock
+drumeo,284956,KISS,Creatures Of The Night,Rock
+drumeo,284958,KISS,Room Service,Rock
+drumeo,284960,KISS,We Are One,Rock
+drumeo,284968,Led Zeppelin,When The Levee Breaks,Rock
+drumeo,284970,Led Zeppelin,Down By The Seaside,Rock
+drumeo,284972,Led Zeppelin,Houses Of The Holy,Rock
+drumeo,284974,Led Zeppelin,In My Time Of Dying,Rock
+drumeo,284976,Led Zeppelin,Ten Years Gone,Rock
+drumeo,284978,Led Zeppelin,The Rover,Rock
+drumeo,284980,Lenny Kravitz,Let Love Rule,Rock
+drumeo,284982,Lenny Kravitz,Low,Rock
+drumeo,284988,Linkin Park,Crawling,Rock
+drumeo,284990,Linkin Park,Breaking The Habit,Rock
+drumeo,284992,Linkin Park,Final Masquerade,Rock
+drumeo,284996,Lynyrd Skynyrd,Saturday Night Special,Rock
+drumeo,284998,Lynyrd Skynyrd,What's Your Name,Rock
+drumeo,285008,Matchbox Twenty,Unwell,Rock
+drumeo,285026,Michael Jackson,Dirty Diana,Pop
+drumeo,285028,Michael Jackson,Black Or White,Pop
+drumeo,285030,Michael Jackson,The Lady In My Life,Pop
+drumeo,285038,Nickelback,Photograph,Rock
+drumeo,285040,Nickelback,Someday,Rock
+drumeo,285042,Norah Jones,Just A Little Bit,Pop
+drumeo,285046,Pearl Jam,Alive,Rock
+drumeo,285048,Prince,I Wanna Be Your Lover,Pop
+drumeo,285050,Pure Prairie League,Amie,Rock
+drumeo,285052,Queen,Bicycle Race,Rock
+drumeo,285054,Queens Of The Stone Age,Go With The Flow,Rock
+drumeo,285060,Red Hot Chili Peppers,Blood Sugar Sex Magik,Rock
+drumeo,285066,Rush,Manhattan Project,Rock
+drumeo,285068,Rush,Bravado,Rock
+drumeo,285070,Rush,Losing It,Rock
+drumeo,285072,Rush,The Analog Kid,Rock
+drumeo,285074,Rush,Driven,Rock
+drumeo,285076,Rush,Resist,Rock
+drumeo,285078,Sheryl Crow,All I Wanna Do,Pop
+drumeo,285080,Sigala,Just Got Paid,Rock
+drumeo,285082,Skillet,Falling Inside The Black,Rock
+drumeo,285084,Skillet,Whispers In The Dark,Rock
+drumeo,285086,Skunk Anansie,Charlie Big Potato,Rock
+drumeo,285088,Smash Mouth,All Star,Rock
+drumeo,285094,Sum 41,Fat Lip,Rock
+drumeo,285100,Tears For Fears,Everybody Wants To Rule The World,Rock
+drumeo,285106,The Beach Boys,All Summer Long,Pop
+drumeo,285108,The Beach Boys,"Fun, Fun, Fun",Pop
+drumeo,285110,The Beach Boys,Good Vibrations,Pop
+drumeo,285112,The Beach Boys,California Girls,Pop
+drumeo,285114,The Beach Boys,Then I Kissed Her,Pop
+drumeo,285116,The Beatles,Can't Buy Me Love,Rock
+drumeo,285118,The Beatles,Golden Slumbers,Rock
+drumeo,285120,The Beatles,Drive My Car,Rock
+drumeo,285122,The Beatles,All My Loving,Rock
+drumeo,285128,The Reign Of Kindo,Till We Make Our Ascent,Rock
+drumeo,285136,Them Crooked Vultures,No One Loves Me &  Neither Do I,Rock
+drumeo,285138,Thin Lizzy,Cowboy Song,Rock
+drumeo,285140,Thin Lizzy,Whiskey In The Jar,Rock
+drumeo,285144,Tom Cochrane,Big League,Rock
+drumeo,285146,Tom Petty,You Don't Know How It Feels,Rock
+drumeo,285148,Tori Kelly,Masterpiece,Rock
+drumeo,285150,Toto,99,Rock
+drumeo,285152,Toto,Stop Loving You,Rock
+drumeo,285154,Train,This'll Be My Year,Rock
+drumeo,285156,Train,"Save Me, San Francisco",Rock
+drumeo,285158,Twenty One Pilots,Heavydirtysoul,Rock
+drumeo,29092,Red Hot Chili Peppers,Give It Away,Rock
+drumeo,291178,A Perfect Circle,Judith,Rock
+drumeo,291180,A Perfect Circle,Weak And Powerless,Rock
+drumeo,291184,Alanis Morissette,Uninvited,Rock
+drumeo,291186,Alanis Morissette,Forgiven,Rock
+drumeo,291188,Alice Cooper,No More Mr. Nice Guy,Rock
+drumeo,291190,Alice Cooper,Muscle Of Love,Rock
+drumeo,291192,Amy Winehouse,Rehab,Rock
+drumeo,291194,Angus & Julia Stone,Big Jet Plane,Rock
+drumeo,291202,Arctic Monkeys,I Bet You Look Good On The Dancefloor,Rock
+drumeo,291212,Ashley Monroe,Hands On You,Rock
+drumeo,291214,Ashley Monroe,Wild Love,Rock
+drumeo,291218,Benny Greb,Grebfruit,Rock
+drumeo,291228,Billie Eilish,My Future,Rock
+drumeo,291230,Billie Eilish,Bad Guy,Rock
+drumeo,291238,Blink-182,Always,Rock
+drumeo,291240,Blink-182,Stockholm Syndrome,Rock
+drumeo,291242,Blink-182,Home Is Such A Lonely Place,Rock
+drumeo,291244,Blondie,Heart Of Glass,Rock
+drumeo,291246,Bon Jovi,Blood On Blood,Rock
+drumeo,291248,Bradley Cooper,Black Eyes,Rock
+drumeo,291250,Bruce Springsteen,Tougher Than The Rest,Rock
+drumeo,291258,Charlie Puth,How Long,Funk
+drumeo,291262,Collective Soul,The World I Know,Rock
+drumeo,291264,Collective Soul,Shine,Rock
+drumeo,291268,Counting Crows,Mr. Jones,Rock
+drumeo,291270,Crow,Evil Woman,Rock
+drumeo,291274,Dave Matthews Band,Seven,Rock
+drumeo,291276,Dave Matthews Band,Why I Am,Rock
+drumeo,291278,Dave Matthews Band,Where Are You Going,Rock
+drumeo,291280,Dave Matthews Band,So Much To Say,Rock
+drumeo,291282,Dave Matthews Band,Ants Marching,Rock
+drumeo,291284,Dave Matthews Band,What Would You Say,Rock
+drumeo,291288,Dead Kennedys,Police Truck,Rock
+drumeo,291292,Def Leppard,Pour Some Sugar On Me,Rock
+drumeo,291294,Demi Lovato,Confident,Rock
+drumeo,291296,Devo,Whip It,Rock
+drumeo,291298,Diana Ross,Upside Down,Rock
+drumeo,291300,Dire Straits,Romeo And Juliet,Rock
+drumeo,291302,Dixie Chicks,The Long Way Around,Rock
+drumeo,291304,Dua Lipa,New Rules,Pop
+drumeo,291306,Dua Lipa,Don't Start Now,Pop
+drumeo,291308,Dua Lipa,Hallucinate,Pop
+drumeo,291310,Dua Lipa,Levitating,Pop
+drumeo,291312,Dua Lipa,Physical,Pop
+drumeo,291314,Electric Light Orchestra,Mr. Blue Sky,Rock
+drumeo,291322,Ella Henderson,Ghost,Rock
+drumeo,291324,Elvis Costello,Everyday I Write The Book,Rock
+drumeo,291326,Elvis Costello,Pump It Up,Rock
+drumeo,291328,Fall Out Boy,Centuries,Rock
+drumeo,291330,Faith No More,Easy,Rock
+drumeo,291332,Fats Domino,Ain't That A Shame,Rock
+drumeo,291334,First State,Reach Me,Rock
+drumeo,291336,Fleetwood Mac,Need Your Love So Bad,Rock
+drumeo,291338,Foo Fighters,For All The Cows,Rock
+drumeo,291340,Foo Fighters,This Is A Call,Rock
+drumeo,291342,Frankie Goes To Hollywood,Relax,Rock
+drumeo,291346,Genesis,Land Of Confusion,Rock
+drumeo,291348,Genesis,I Can't Dance,Rock
+drumeo,291350,Goldfinger,A Million Miles,Rock
+drumeo,291352,Gorillaz,Clint Eastwood,Rock
+drumeo,291356,Ike & Tina Turner,Proud Mary,Rock
+drumeo,291358,Jane's Addiction,Jane Says,Rock
+drumeo,291360,Jason Derulo,Savage Love,Pop
+drumeo,291362,Jerry Lee Lewis,Crazy Arms,Rock
+drumeo,291364,Joe Jackson,It's Different For Girls,Rock
+drumeo,291366,John Cougar Mellencamp,Small Town,Rock
+drumeo,291368,John Cougar Mellencamp,Pink Houses,Rock
+drumeo,291370,Johnny Winter,Be Careful With A Fool,Blues
+drumeo,291376,Journey,"Lovin', Touchin', Squeezin'",Rock
+drumeo,291378,Joy Division,Love Will Tear Us Apart,Rock
+drumeo,291388,Kaleo,No Good,Rock
+drumeo,291390,Keith Richards,How I Wish,Rock
+drumeo,291392,Kid Rock,All Summer Long,Rock
+drumeo,291394,Kings Of Leon,Crawl,Rock
+drumeo,291396,Kings Of Leon,Red Morning Light,Rock
+drumeo,291418,Limp Bizkit,Break Stuff,Metal
+drumeo,291420,Linkin Park,One Step Closer,Rock
+drumeo,291430,Machine Gun Kelly,Bloody Valentine,Rock
+drumeo,291432,Machine Gun Kelly,Concert For Aliens,Rock
+drumeo,291434,Machine Gun Kelly,Forget Me Too,Rock
+drumeo,291436,Machine Gun Kelly,My Ex's Best Friend,Rock
+drumeo,291458,Maroon 5,Moves Like Jagger,Rock
+drumeo,291460,Men Without Hats,The Safety Dance,Rock
+drumeo,291466,MGMT,Electric Feel,Pop
+drumeo,291468,Misfits,Dig Up Her Bones,Rock
+drumeo,291470,Misfits,Last Caress,Rock
+drumeo,291472,Misfits,Hybrid Moments,Rock
+drumeo,291480,Mr. Big,Take Cover,Rock
+drumeo,291482,Neon Trees,Everybody Talks,Rock
+drumeo,291486,Nothing But Thieves,Amsterdam,Rock
+drumeo,291490,Paramore,Pressure,Rock
+drumeo,291498,Poco,Bad Weather,Rock
+drumeo,291500,Poison,Cry Tough,Rock
+drumeo,291502,Poison,Nothin' But A Good Time,Rock
+drumeo,291504,Pond,The Boys Are Killing Me,Rock
+drumeo,291510,Queen,Somebody To Love,Rock
+drumeo,291512,Rancid,Maxwell Murder,Rock
+drumeo,291514,Rancid,Ruby Soho,Rock
+drumeo,291516,Rodriguez,I Wonder,Rock
+drumeo,291518,Rodriguez,Sugar Man,Rock
+drumeo,291522,Royal Coda,Becoming The Memory,Rock
+drumeo,291524,Royal Coda,Breathe Correct,Rock
+drumeo,291526,Rupert Homes,Escape,Rock
+drumeo,291534,Sade,Soldier Of Love,Rock
+drumeo,291536,Seether,Rise Above This,Rock
+drumeo,291538,Seether,Country Song,Rock
+drumeo,291540,Seether,Remedy,Rock
+drumeo,291542,Shawn Mendes,Stitches,Rock
+drumeo,291544,Shawn Mendes,In My Blood,Rock
+drumeo,291546,Shawn Mendes,Senorita,Rock
+drumeo,291548,Simon & Garfunkel,Mrs. Robinson,Rock
+drumeo,291562,Sophie Ellis-Bextor,Murder On The Dancefloor,Pop
+drumeo,291564,Spoon,I Turn My Camera On,Rock
+drumeo,291566,Styx,Renegade,Rock
+drumeo,291568,Styx,Come Sail Away,Rock
+drumeo,291580,Angel City,Marseilles,Rock
+drumeo,291582,The Beach Boys,Wouldn't It Be Nice,Pop
+drumeo,291584,The Beat,Mirror In The Bathroom,Rock
+drumeo,291586,The Black Crowes,She Talks To Angels,Rock
+drumeo,291596,The Cranberries,Linger,Rock
+drumeo,291598,The Cranberries,Zombie,Rock
+drumeo,291600,The Cure,Pictures Of You,Rock
+drumeo,291602,The Doobie Brothers,Long Train Runnin',Rock
+drumeo,291604,The Gaslight Anthem,1930,Rock
+drumeo,291606,The Hollies,Long Cool Woman (In A Black Dress),Rock
+drumeo,291608,The Isley Brothers,It's Your Thing,Rock
+drumeo,291610,The Jam,Going Underground,Rock
+drumeo,291612,The Mars Volta,Drunkship Of Lanterns,Rock
+drumeo,291614,The National,About Today,Rock
+drumeo,291618,The Pretenders,Don’t Get Me Wrong,Rock
+drumeo,291620,The Red Jumpsuit Apparatus,Face Down,Rock
+drumeo,291622,The Rolling Stones,Under My Thumb,Rock
+drumeo,291624,The Rolling Stones,Ventilator Blues,Rock
+drumeo,291626,The Script,The Man Who Can't Be Moved,Rock
+drumeo,291628,The Smiths,How Soon Is Now?,Rock
+drumeo,291630,The Stone Roses,I Wanna Be Adored,Rock
+drumeo,291632,The Stone Roses,Made Of Stone,Rock
+drumeo,291634,The Tragically Hip,Blow At High Dough,Rock
+drumeo,291638,The Used,A Box Full Of Sharp Objects,Rock
+drumeo,291640,The Used,Buried Myself Alive,Rock
+drumeo,291642,The Who,Who Are You,Rock
+drumeo,291644,The Who,Baba O'Riley,Rock
+drumeo,291646,The Wonders,That Thing You Do!,Rock
+drumeo,291648,Three Days Grace,Animal I Have Become,Rock
+drumeo,291650,Tom Petty & The Heartbreakers,Don't Come Around Here No More,Rock
+drumeo,291652,Tommy Tutone,867-5309/Jenny,Rock
+drumeo,291654,Toto,Mama,Rock
+drumeo,291656,Toto,Angela,Rock
+drumeo,291658,Toto,I'll Supply The Love,Rock
+drumeo,291660,Toto,Rockmaker,Rock
+drumeo,291662,Toto,Lovers In The Night,Rock
+drumeo,291664,Train,50 Ways To Say Goodbye,Rock
+drumeo,291666,Train,California 37,Rock
+drumeo,291668,Train,If It's Love,Rock
+drumeo,291670,Train,Parachute,Rock
+drumeo,291672,U2,With Or Without You,Pop
+drumeo,291674,U2,Bad,Pop
+drumeo,291676,Van Halen,Dreams,Rock
+drumeo,291678,Van Halen,Summer Nights,Rock
+drumeo,291680,Van Halen,Ain't Talkin' 'Bout Love,Rock
+drumeo,291682,Van Halen,Runnin' With The Devil,Rock
+drumeo,291684,Van Halen,Unchained,Rock
+drumeo,291686,Warren Zevon,Poor Poor Pitiful Me,Pop
+drumeo,291692,Winger,Miles Away,Rock
+drumeo,291694,Wings,Band On The Run,Rock
+drumeo,29244,The Surfaris,Wipe Out,Rock
+drumeo,293062,Pink Floyd,Eclipse,Rock
+drumeo,293064,Pink Floyd,On The Run,Rock
+drumeo,293066,Pink Floyd,The Great Gig In The Sky,Rock
+drumeo,293068,Pink Floyd,Shine On You Crazy Diamond (Parts I-V),Rock
+drumeo,293070,Pink Floyd,Shine On You Crazy Diamond (Parts VI-IX),Rock
+drumeo,293788,Soundgarden,4th Of July,Rock
+drumeo,293869,Soundgarden,Fresh Tendrils,Rock
+drumeo,294017,Soundgarden,Half,Rock
+drumeo,294020,Soundgarden,Head Down,Rock
+drumeo,294024,Soundgarden,Kickstand,Rock
+drumeo,294026,Soundgarden,Let Me Drown,Rock
+drumeo,294028,Soundgarden,Like Suicide,Rock
+drumeo,294030,Soundgarden,Limo Wreck,Rock
+drumeo,294033,Soundgarden,Mailman,Rock
+drumeo,294036,Soundgarden,My Wave,Rock
+drumeo,294039,Soundgarden,She Likes Surprises,Rock
+drumeo,294042,Soundgarden,Superunknown,Rock
+drumeo,294252,ZZ Top,Gimme All Your Lovin',Rock
+drumeo,294505,Aerosmith,Sweet Emotion,Rock
+drumeo,294509,Bruce Springsteen,Born To Run,Rock
+drumeo,294511,Coheed And Cambria,The Pavilion (A Long Way Back),Rock
+drumeo,294517,Interpol,Evil,Rock
+drumeo,294524,Joe Cocker,You Can Leave Your Hat On,Rock
+drumeo,294526,John Parr,St. Elmo's Fire (Man In Motion),Rock
+drumeo,294528,Limp Bizkit,Take A Look Around,Metal
+drumeo,294530,Live,Selling The Drama,Rock
+drumeo,294532,Neil Young,Heart Of Gold,Rock
+drumeo,294534,Supertramp,Breakfast In America,Rock
+drumeo,294536,The Offspring,Come Out And Play,Rock
+drumeo,294777,Eagles,Tequila Sunrise,Rock
+drumeo,294779,Eagles,Life In The Fast Lane,Rock
+drumeo,294782,Eagles,Heartache Tonight,Rock
+drumeo,294790,Bikini Kill,Rebel Girl,Rock
+drumeo,294793,The Bangles,Manic Monday,Rock
+drumeo,294795,The Bangles,Hazy Shade Of Winter,Rock
+drumeo,294797,The Go-Go's,Our Lips Are Sealed,Rock
+drumeo,294799,The Go-Go's,We Got The Beat,Rock
+drumeo,294801,The Runaways,You Drive Me Wild,Rock
+drumeo,295188,Al Jarreau,Mornin',Rock
+drumeo,295192,Aretha Franklin,What A Fool Believes,Rock
+drumeo,295194,Boz Scaggs,I Don't Hear You,Rock
+drumeo,295196,Boz Scaggs,Lowdown,Rock
+drumeo,295198,Dire Straits,Calling Elvis,Rock
+drumeo,295200,Jackson Browne,The Pretender,Rock
+drumeo,295202,Michael McDonald,I Keep Forgettin',Rock
+drumeo,295205,Steely Dan,Bad Sneakers,Rock
+drumeo,295207,Steely Dan,Doctor Wu,Rock
+drumeo,295209,Steely Dan,Your Gold Teeth II,Rock
+drumeo,295212,Steely Dan,Night By Night,Rock
+drumeo,295214,Toto,Jake To The Bone,Rock
+drumeo,295216,Toto,Home Of The Brave,Rock
+drumeo,295218,Toto,Mushanga,Rock
+drumeo,295220,Toto,These Chains,Rock
+drumeo,295630,Al Jarreau,Spain (I Can Recall),Jazz
+drumeo,295632,Ben Sidran,Seven Steps To Heaven,Jazz
+drumeo,295636,Chick Corea,Samba Song,Jazz
+drumeo,295639,Frank Weber,Complicated Times,
+drumeo,295641,James Taylor,October Road,
+drumeo,295643,Rickie Lee Jones,Chuck E.'s In Love,
+drumeo,295645,Steely Dan,Third World Man,
+drumeo,296074,Tom Petty,A Face In The Crowd,
+drumeo,296077,Tom Petty,A Mind With A Heart Of Its Own,
+drumeo,296079,Tom Petty,Depending On You,
+drumeo,296081,Tom Petty,Feel A Whole Lot Better,
+drumeo,296083,Tom Petty,Love Is A Long Road,
+drumeo,296086,Tom Petty,Runnin' Down A Dream,
+drumeo,296088,Tom Petty,The Apartment Song,
+drumeo,296092,Tom Petty,Zombie Zoo,
+drumeo,296463,AC/DC,Shoot To Thrill,Rock
+drumeo,296465,AC/DC,Ain't No Fun (Waiting Round To Be A Millionaire),Rock
+drumeo,296467,AC/DC,Big Balls,Rock
+drumeo,296469,AC/DC,Crabsody In Blue,Rock
+drumeo,296471,AC/DC,Love At First Feel,Rock
+drumeo,296473,AC/DC,Problem Child,Rock
+drumeo,296475,AC/DC,Ride On,Rock
+drumeo,296477,AC/DC,Rocker,Rock
+drumeo,296479,AC/DC,Squealer,Rock
+drumeo,296481,AC/DC,There's Gonna Be Some Rockin',Rock
+drumeo,296483,AC/DC,Breaking The Rules,Rock
+drumeo,296485,AC/DC,C.O.D.,Rock
+drumeo,296489,AC/DC,Evil Walks,Rock
+drumeo,296491,AC/DC,I Put The Finger On You,Rock
+drumeo,296493,AC/DC,Let's Get It Up,Rock
+drumeo,296495,AC/DC,Inject The Venom,Rock
+drumeo,296497,AC/DC,Night Of The Long Knives,Rock
+drumeo,296500,AC/DC,Snowballed,Rock
+drumeo,296503,AC/DC,Spellbound,Rock
+drumeo,296506,AC/DC,Can I Sit Next To You Girl,Rock
+drumeo,296508,AC/DC,Live Wire,Rock
+drumeo,296510,AC/DC,Rock 'N' Roll Singer,Rock
+drumeo,296512,AC/DC,She's Got Balls,Rock
+drumeo,296514,AC/DC,The Jack,Rock
+drumeo,296517,AC/DC,Beating Around The Bush,Rock
+drumeo,296519,AC/DC,Get It Hot,Rock
+drumeo,296521,AC/DC,Love Hungry Man,Rock
+drumeo,296523,AC/DC,Night Prowler,Rock
+drumeo,296525,AC/DC,Shot Down In Flames,Rock
+drumeo,296527,AC/DC,Touch Too Much,Rock
+drumeo,296529,AC/DC,Bad Boy Boogie,Rock
+drumeo,296531,AC/DC,Go Down,Rock
+drumeo,296533,AC/DC,Hell Ain't A Bad Place To Be,Rock
+drumeo,296536,AC/DC,Overdose,Rock
+drumeo,296538,AC/DC,R.I.P. (Rock In Peace),Rock
+drumeo,29755,Paul Simon,50 Ways To Leave Your Lover,Pop
+drumeo,298353,Brian Wilson,California Role/That Lucky Old Sun,Pop
+drumeo,298355,Brian Wilson,Can't Wait Too Long,Pop
+drumeo,298357,Brian Wilson,Forever She'll Be My Surfer Girl,Pop
+drumeo,298359,Brian Wilson,Going Home,Pop
+drumeo,298361,Brian Wilson,Good Kind Of Love,Pop
+drumeo,298363,Brian Wilson,Live Let Live/That Lucky Old Sun (Reprise),Pop
+drumeo,298366,Brian Wilson,Mexican Girl,Pop
+drumeo,298368,Brian Wilson,Morning Beat,Pop
+drumeo,298370,Brian Wilson,Narrative: Cinco De Mayo,Pop
+drumeo,298372,Brian Wilson,Oxygen To The Brain,Pop
+drumeo,298374,Styx,Bourgeois Pig,Rock
+drumeo,298376,Styx,Captain America,Rock
+drumeo,298378,Styx,Do Things My Way,Rock
+drumeo,298380,Styx,Fields Of The Brave,Rock
+drumeo,298383,Styx,Genki Desu Ka,Rock
+drumeo,298385,Styx,Killing The Thing That You Love,Rock
+drumeo,298403,Styx,Kiss Your Ass Goodbye,Rock
+drumeo,298405,Styx,More Love For The Money,Rock
+drumeo,298407,Styx,One With Everything,Rock
+drumeo,298410,Styx,These Are The Times,Rock
+drumeo,298412,Styx,Together,Rock
+drumeo,298415,Styx,Waiting For Our Time,Rock
+drumeo,298482,Styx,Gone Gone Gone,Rock
+drumeo,298484,Styx,Hundred Million Miles From Home,Rock
+drumeo,298486,Styx,Locomotive,Rock
+drumeo,298488,Styx,Mission To Mars,Rock
+drumeo,298490,Styx,Overture,Rock
+drumeo,298492,Styx,Radio Silence,Rock
+drumeo,298494,Styx,Red Storm,Rock
+drumeo,298496,Styx,Ten Thousand Ways,Rock
+drumeo,298498,Styx,The Greater Good,Rock
+drumeo,298502,Styx,The Outpost,Rock
+drumeo,298504,Styx,Time May Bend,Rock
+drumeo,298506,Styx,Trouble At The Big Show,Rock
+drumeo,298960,Van Halen,Drop Dead Legs,Rock
+drumeo,298962,Van Halen,Girl Gone Bad,Rock
+drumeo,298965,Van Halen,House Of Pain,Rock
+drumeo,298967,Van Halen,I'll Wait,Rock
+drumeo,298969,Van Halen,Top Jimmy,Rock
+drumeo,298971,Van Halen,5150,Rock
+drumeo,298974,Van Halen,Get Up,Rock
+drumeo,298976,Van Halen,Good Enough,Rock
+drumeo,298978,Van Halen,Inside,Rock
+drumeo,298981,Van Halen,Love Walks In,Rock
+drumeo,298983,Van Halen,Atomic Punk,Rock
+drumeo,298985,Van Halen,Eruption,Rock
+drumeo,298987,Van Halen,Feel Your Love Tonight,Rock
+drumeo,298989,Van Halen,I'm The One,Rock
+drumeo,298991,Van Halen,Ice Cream Man,Rock
+drumeo,298993,Van Halen,Jamie's Cryin',Rock
+drumeo,298995,Van Halen,Little Dreamer,Rock
+drumeo,298997,Van Halen,On Fire,Rock
+drumeo,299000,Van Halen,You Really Got Me,Rock
+drumeo,299002,Van Halen,Beautiful Girls,Rock
+drumeo,299004,Van Halen,Bottoms Up!,Rock
+drumeo,299006,Van Halen,D.O.A.,Rock
+drumeo,299008,Van Halen,Dance The Night Away,Rock
+drumeo,299010,Van Halen,Light Up The Sky,Rock
+drumeo,299012,Van Halen,Outta Love Again,Rock
+drumeo,299014,Van Halen,Somebody Get Me A Doctor,Rock
+drumeo,299017,Van Halen,Women In Love...,Rock
+drumeo,299020,Van Halen,You're No Good,Rock
+drumeo,299073,AC/DC,Whole Lotta Rosie,Rock
+drumeo,299076,Anika Nilles,Synergy,Rock
+drumeo,299080,Golden Earring,Radar Love,Rock
+drumeo,299094,Pixies,Where Is My Mind?,Rock
+drumeo,299097,Red Hot Chili Peppers,Can't Stop,Rock
+drumeo,299100,Red Hot Chili Peppers,Soul To Squeeze,Rock
+drumeo,299104,Supertramp,The Logical Song,Rock
+drumeo,299106,The Four Seasons,"December, 1963 (Oh, What A Night)",R&B/Soul
+drumeo,299108,The Killers,Human,Rock
+drumeo,300270,Foo Fighters,Doll,Rock
+drumeo,300274,Foo Fighters,Enough Space,Rock
+drumeo,300277,Foo Fighters,"Hey, Johnny Park!",Rock
+drumeo,300280,Foo Fighters,My Poor Brain,Rock
+drumeo,300284,Foo Fighters,New Way Home,Rock
+drumeo,300287,Foo Fighters,See You,Rock
+drumeo,300290,Foo Fighters,The Colour And The Shape,Rock
+drumeo,300292,Foo Fighters,Up In Arms,Rock
+drumeo,300294,Foo Fighters,Walking After You,Rock
+drumeo,301935,Led Zeppelin,Dancing Days,Rock
+drumeo,301937,Led Zeppelin,No Quarter,Rock
+drumeo,301939,Led Zeppelin,The Rain Song,Rock
+drumeo,301941,Led Zeppelin,The Song Remains The Same,Rock
+drumeo,301943,Led Zeppelin,Dazed And Confused,Rock
+drumeo,301945,Led Zeppelin,How Many More Times,Rock
+drumeo,301948,Led Zeppelin,I Can't Quit You Baby,Rock
+drumeo,301950,Led Zeppelin,You Shook Me,Rock
+drumeo,301952,Led Zeppelin,Your Time Is Gonna Come,Rock
+drumeo,301954,Led Zeppelin,Bring It On Home,Rock
+drumeo,301956,Led Zeppelin,Moby Dick,Rock
+drumeo,301958,Led Zeppelin,Ramble On,Rock
+drumeo,301960,Led Zeppelin,Thank You,Rock
+drumeo,301962,Led Zeppelin,The Lemon Song,Rock
+drumeo,301964,Led Zeppelin,What Is And What Should Never Be,Rock
+drumeo,301967,Led Zeppelin,Whole Lotta Love,Rock
+drumeo,301970,Led Zeppelin,Bron-Y-Aur Stomp,Rock
+drumeo,301972,Led Zeppelin,Celebration Day,Rock
+drumeo,301975,Led Zeppelin,Gallows Pole,Rock
+drumeo,301977,Led Zeppelin,Out On The Tiles,Rock
+drumeo,301979,Led Zeppelin,Four Sticks,Rock
+drumeo,301981,Led Zeppelin,Since I've Been Loving You,Rock
+drumeo,301985,Led Zeppelin,Rock And Roll,Rock
+drumeo,301987,Led Zeppelin,Black Country Woman,Rock
+drumeo,301989,Led Zeppelin,Boogie With Stu,Rock
+drumeo,301991,Led Zeppelin,Custard Pie,Rock
+drumeo,301993,Led Zeppelin,In The Light,Rock
+drumeo,301995,Led Zeppelin,Night Flight,Rock
+drumeo,301997,Led Zeppelin,Sick Again,Rock
+drumeo,302000,Led Zeppelin,Trampled Under Foot,Rock
+drumeo,302626,Alien Ant Farm,Smooth Criminal,Rock
+drumeo,302629,Beastie Boys,Sabotage,Rock
+drumeo,302631,Boston,Rock & Roll Band,Rock
+drumeo,302634,Chicago,Make Me Smile,Rock
+drumeo,302638,Cream,Sunshine Of Your Love,Rock
+drumeo,302641,DNCE,Cake By The Ocean,Rock
+drumeo,302643,Gorillaz,Feel Good Inc.,Rock
+drumeo,302647,Keane,Everybody's Changing,Pop
+drumeo,302656,Queen,I'm In Love With My Car,Rock
+drumeo,302660,REO Speedwagon,Take It On The Run,Rock
+drumeo,302664,The Clash,Rudie Can't Fail,Rock
+drumeo,302666,The Pineapple Thief,Versions Of The Truth,Rock
+drumeo,302668,The Weeknd,Blinding Lights,Rock
+drumeo,303115,Styx,Crash Of The Crown,Rock
+drumeo,303246,Prince,Baby I'm A Star,Pop
+drumeo,303250,Prince,Computer Blue,Pop
+drumeo,303253,Prince,Darling Nikki,Pop
+drumeo,303255,Prince,I Would Die 4 U,Pop
+drumeo,303257,Prince,Let's Go Crazy,Pop
+drumeo,303259,Prince,Purple Rain,Pop
+drumeo,303261,Prince,Take Me With U,Pop
+drumeo,303263,Prince,When Doves Cry,Pop
+drumeo,303265,Prince,The Beautiful Ones,Pop
+drumeo,303354,Prince,Adore,Pop
+drumeo,303356,Prince,Forever In My Life,Pop
+drumeo,303358,Prince,Hot Thing,Pop
+drumeo,303360,Prince,Housequake,Pop
+drumeo,303362,Prince,I Could Never Take The Place Of Your Man,Pop
+drumeo,303364,Prince,If I Was Your Girlfriend,Pop
+drumeo,303366,Prince,It,Pop
+drumeo,303369,Prince,It's Gonna Be A Beautiful Night,Pop
+drumeo,303371,Prince,Play In The Sunshine,Pop
+drumeo,303373,Prince,Sign O' The Times,Pop
+drumeo,303375,Prince,Slow Love,Pop
+drumeo,303377,Prince,Starfish And Coffee,Pop
+drumeo,303379,Prince,Strange Relationship,Pop
+drumeo,303381,Prince,The Ballad Of Dorothy Parker,Pop
+drumeo,303383,Prince,The Cross,Pop
+drumeo,303385,Prince,U Got The Look,Pop
+drumeo,303638,Twenty One Pilots,Doubt,Rock
+drumeo,303643,Twenty One Pilots,Fairly Local,Rock
+drumeo,303645,Twenty One Pilots,Goner,Rock
+drumeo,303675,Twenty One Pilots,Hometown,Rock
+drumeo,303677,Twenty One Pilots,Lane Boy,Rock
+drumeo,303679,Twenty One Pilots,Message Man,Rock
+drumeo,303681,Twenty One Pilots,Not Today,Rock
+drumeo,303683,Twenty One Pilots,Polarize,Rock
+drumeo,303685,Twenty One Pilots,Tear In My Heart,Rock
+drumeo,303687,Twenty One Pilots,The Judge,Rock
+drumeo,303689,Twenty One Pilots,We Don't Believe What's On TV,Rock
+drumeo,303691,Twenty One Pilots,Bandito,Rock
+drumeo,303693,Twenty One Pilots,Chlorine,Rock
+drumeo,303695,Twenty One Pilots,Cut My Lip,Rock
+drumeo,303697,Twenty One Pilots,Jumpsuit,Rock
+drumeo,303699,Twenty One Pilots,Leave The City,Rock
+drumeo,303703,Twenty One Pilots,Legend,Rock
+drumeo,303705,Twenty One Pilots,Levitate,Rock
+drumeo,303708,Twenty One Pilots,Morph,Rock
+drumeo,303710,Twenty One Pilots,My Blood,Rock
+drumeo,303712,Twenty One Pilots,Neon Gravestones,Rock
+drumeo,303714,Twenty One Pilots,Nico And The Niners,Rock
+drumeo,303716,Twenty One Pilots,Pet Cheetah,Rock
+drumeo,303718,Twenty One Pilots,Smithereens,Rock
+drumeo,303720,Twenty One Pilots,The Hype,Rock
+drumeo,304038,AC/DC,Walk All Over You,Rock
+drumeo,305644,Alice Cooper,Poison,Rock
+drumeo,305647,Audioslave,Cochise,Rock
+drumeo,305649,Blue Oyster Cult,(Don't Fear) The Reaper,Rock
+drumeo,305651,Dave Matthews Band,Two Step,Rock
+drumeo,305663,Green Day,Jesus Of Suburbia,Rock
+drumeo,305672,Jethro Tull,Aqualung,Rock
+drumeo,305674,Kaiser Chiefs,I Predict A Riot,Rock
+drumeo,305683,Paramore,Misery Business,Rock
+drumeo,305685,Peter Gabriel,Red Rain,Pop
+drumeo,305687,Queen,Under Pressure,Rock
+drumeo,305689,Ram Jam,Black Betty,Rock
+drumeo,305691,Red Hot Chili Peppers,Scar Tissue,Rock
+drumeo,305695,The Knack,My Sharona,Rock
+drumeo,305697,The Offspring,Self Esteem,Rock
+drumeo,307172,John Mayer,Last Train Home,Rock
+drumeo,308034,Coheed And Cambria,The Suffering,Rock
+drumeo,309147,Blondie,Call Me,Rock
+drumeo,309149,Blur,Parklife,Rock
+drumeo,309151,Cheap Trick,I Want You To Want Me,Rock
+drumeo,309153,David Bowie,Ziggy Stardust,Rock
+drumeo,309155,Frost*,Black Light Machine,Rock
+drumeo,309167,Sum 41,Still Waiting,Rock
+drumeo,309169,The Presidents Of The United States Of America,Lump,Rock
+drumeo,309171,The Pretty Reckless,Death By Rock And Roll,Rock
+drumeo,309173,The Rembrandts,I'll Be There For You,Rock
+drumeo,309175,Third Eye Blind,Semi-Charmed Life,Rock
+drumeo,309318,The Beatles,Any Time At All,Rock
+drumeo,309320,The Beatles,I Should Have Known Better,Rock
+drumeo,309322,The Beatles,I'll Be Back,Rock
+drumeo,309324,The Beatles,I'll Cry Instead,Rock
+drumeo,309326,The Beatles,I’m Happy Just To Dance With You,Rock
+drumeo,309328,The Beatles,If I Fell,Rock
+drumeo,309330,The Beatles,Tell Me Why,Rock
+drumeo,309332,The Beatles,Things We Said Today,Rock
+drumeo,309334,The Beatles,When I Get Home,Rock
+drumeo,309336,The Beatles,You Can't Do That,Rock
+drumeo,309338,The Beatles,I Want You (She's So Heavy),Rock
+drumeo,309340,The Beatles,Maxwell's Silver Hammer,Rock
+drumeo,309342,The Beatles,Mean Mr. Mustard,Rock
+drumeo,309344,The Beatles,Octopus's Garden,Rock
+drumeo,309346,The Beatles,Oh! Darling,Rock
+drumeo,309348,The Beatles,Old Brown Shoe,Rock
+drumeo,309350,The Beatles,Polythene Pam,Rock
+drumeo,309352,The Beatles,She Came In Through The Bathroom Window,Rock
+drumeo,309354,The Beatles,Something,Rock
+drumeo,309356,The Beatles,Sun King,Rock
+drumeo,309358,The Beatles,You Never Give Me Your Money,Rock
+drumeo,309360,The Beatles,Free As A Bird,Rock
+drumeo,309362,The Beatles,I Feel Fine,Rock
+drumeo,309364,The Beatles,She's A Woman,Rock
+drumeo,309366,The Beatles,Baby's In Black,Rock
+drumeo,309368,The Beatles,Eight Days A Week,Rock
+drumeo,309370,The Beatles,Every Little Thing,Rock
+drumeo,309372,The Beatles,Everybody's Trying To Be My Baby,Rock
+drumeo,309374,The Beatles,Honey Don't,Rock
+drumeo,309376,The Beatles,I Don't Want To Spoil The Party,Rock
+drumeo,309378,The Beatles,I'm A Loser,Rock
+drumeo,309380,The Beatles,Kansas City/Hey Hey Hey Hey,Rock
+drumeo,309382,The Beatles,No Reply,Rock
+drumeo,309384,The Beatles,Rock And Roll Music,Rock
+drumeo,309386,The Beatles,What You're Doing,Rock
+drumeo,309388,The Beatles,Words Of Love,Rock
+drumeo,309390,The Beatles,Act Naturally,Rock
+drumeo,309392,The Beatles,Another Girl,Rock
+drumeo,309394,The Beatles,Dizzy Miss Lizzy,Rock
+drumeo,309396,The Beatles,Help!,Rock
+drumeo,309398,The Beatles,I Need You,Rock
+drumeo,309400,The Beatles,I've Just Seen A Face,Rock
+drumeo,309402,The Beatles,It's Only Love,Rock
+drumeo,309404,The Beatles,Tell Me What You See,Rock
+drumeo,309406,The Beatles,The Night Before,Rock
+drumeo,309408,The Beatles,You're Going To Lose That Girl,Rock
+drumeo,309410,The Beatles,You've Got To Hide Your Love Away,Rock
+drumeo,309412,The Beatles,You Like Me Too Much,Rock
+drumeo,309414,The Beatles,Hey Jude,Rock
+drumeo,309416,The Beatles,Lady Madonna,Rock
+drumeo,309418,The Beatles,The Ballad Of John And Yoko,Rock
+drumeo,309420,The Beatles,Across The Universe,Rock
+drumeo,309422,The Beatles,Dig A Pony,Rock
+drumeo,309424,The Beatles,Dig It,Rock
+drumeo,309426,The Beatles,For You Blue,Rock
+drumeo,309428,The Beatles,I Me Mine,Rock
+drumeo,309430,The Beatles,I've Got A Feeling,Rock
+drumeo,309432,The Beatles,Maggie Mae,Rock
+drumeo,309434,The Beatles,One After 909,Rock
+drumeo,309436,The Beatles,The Long And Winding Road,Rock
+drumeo,309438,The Beatles,Two Of Us,Rock
+drumeo,309440,The Beatles,"Baby, You're A Rich Man",Rock
+drumeo,309442,The Beatles,Blue Jay Way,Rock
+drumeo,309444,The Beatles,Flying,Rock
+drumeo,309446,The Beatles,"Hello, Goodbye",Rock
+drumeo,309448,The Beatles,I Am The Walrus,Rock
+drumeo,309450,The Beatles,Magical Mystery Tour,Rock
+drumeo,309452,The Beatles,Penny Lane,Rock
+drumeo,309454,The Beatles,Strawberry Fields Forever,Rock
+drumeo,309456,The Beatles,The Fool On The Hill,Rock
+drumeo,309458,The Beatles,Your Mother Should Know,Rock
+drumeo,309460,The Beatles,This Boy,Rock
+drumeo,309462,The Beatles,Bad Boy,Rock
+drumeo,309464,The Beatles,I Call Your Name,Rock
+drumeo,309466,The Beatles,I'll Get You,Rock
+drumeo,309468,The Beatles,I'm Down,Rock
+drumeo,309470,The Beatles,Long Tall Sally,Rock
+drumeo,309472,The Beatles,Matchbox,Rock
+drumeo,309474,The Beatles,Slow Down,Rock
+drumeo,309476,The Beatles,Thank You Girl,Rock
+drumeo,309478,The Beatles,"Yes, It Is",Rock
+drumeo,309480,The Beatles,You Know My Name,Rock
+drumeo,309482,The Beatles,A Taste Of Honey,Rock
+drumeo,309484,The Beatles,Anna (Go To Him),Rock
+drumeo,309486,The Beatles,Ask Me Why,Rock
+drumeo,309488,The Beatles,Baby It's You,Rock
+drumeo,309490,The Beatles,Boys,Rock
+drumeo,309492,The Beatles,Chains,Rock
+drumeo,309494,The Beatles,Do You Want To Know A Secret,Rock
+drumeo,309496,The Beatles,I Saw Her Standing There,Rock
+drumeo,309498,The Beatles,Love Me Do,Rock
+drumeo,309500,The Beatles,Misery,Rock
+drumeo,309502,The Beatles,P.S. I Love You,Rock
+drumeo,309504,The Beatles,Please Please Me,Rock
+drumeo,309506,The Beatles,There's A Place,Rock
+drumeo,309508,The Beatles,Twist And Shout,Rock
+drumeo,309510,The Beatles,And Your Bird Can Sing,Rock
+drumeo,309512,The Beatles,Doctor Robert,Rock
+drumeo,309514,The Beatles,For No One,Rock
+drumeo,309516,The Beatles,Good Day Sunshine,Rock
+drumeo,309518,The Beatles,Got To Get You Into My Life,Rock
+drumeo,309520,The Beatles,"Here, There And Everywhere",Rock
+drumeo,309522,The Beatles,I'm Only Sleeping,Rock
+drumeo,309524,The Beatles,She Said She Said,Rock
+drumeo,309526,The Beatles,Taxman,Rock
+drumeo,309528,The Beatles,Girl,Rock
+drumeo,309530,The Beatles,I Want To Tell You,Rock
+drumeo,309532,The Beatles,I'm Looking Through You,Rock
+drumeo,309534,The Beatles,If I Needed Someone,Rock
+drumeo,309536,The Beatles,In My Life,Rock
+drumeo,309538,The Beatles,Michelle,Rock
+drumeo,309540,The Beatles,Nowhere Man,Rock
+drumeo,309542,The Beatles,Run For Your Life,Rock
+drumeo,309544,The Beatles,The Word,Rock
+drumeo,309546,The Beatles,Think For Yourself,Rock
+drumeo,309548,The Beatles,Wait,Rock
+drumeo,309550,The Beatles,What Goes On,Rock
+drumeo,309552,The Beatles,You Won't See Me,Rock
+drumeo,309554,The Beatles,A Day In The Life,Rock
+drumeo,309556,The Beatles,Being For The Benefit Of Mr. Kite,Rock
+drumeo,309558,The Beatles,Fixing A Hole,Rock
+drumeo,309560,The Beatles,Getting Better,Rock
+drumeo,309562,The Beatles,Good Morning Good Morning,Rock
+drumeo,309564,The Beatles,Lovely Rita,Rock
+drumeo,309566,The Beatles,Lucy In The Sky With Diamonds,Rock
+drumeo,309568,The Beatles,Sgt. Pepper's Lonely Hearts Club Band (Reprise),Rock
+drumeo,309570,The Beatles,When I'm Sixty Four,Rock
+drumeo,309572,The Beatles,Birthday,Rock
+drumeo,309574,The Beatles,Cry Baby Cry,Rock
+drumeo,309576,The Beatles,Dear Prudence,Rock
+drumeo,309578,The Beatles,Don't Pass Me By,Rock
+drumeo,309580,The Beatles,Everybody's Got Something To Hide Except Me And My Monkey,Rock
+drumeo,309582,The Beatles,Helter Skelter,Rock
+drumeo,309584,The Beatles,Honey Pie,Rock
+drumeo,309586,The Beatles,I Will,Rock
+drumeo,309588,The Beatles,I'm So Tired,Rock
+drumeo,309590,The Beatles,"Long, Long, Long",Rock
+drumeo,309592,The Beatles,Martha My Dear,Rock
+drumeo,309594,The Beatles,"Ob-La-Di, Ob-La-Da",Rock
+drumeo,309596,The Beatles,Piggies,Rock
+drumeo,309598,The Beatles,Rocky Raccoon,Rock
+drumeo,309600,The Beatles,Savoy Truffle,Rock
+drumeo,309602,The Beatles,Sexy Sadie,Rock
+drumeo,309604,The Beatles,The Continuing Story Of Bungalow Bill,Rock
+drumeo,309606,The Beatles,While My Guitar Gently Weeps,Rock
+drumeo,309608,The Beatles,Why Don't We Do It In The Road,Rock
+drumeo,309610,The Beatles,Wild Honey Pie,Rock
+drumeo,309612,The Beatles,Yer Blues,Rock
+drumeo,309614,The Beatles,From Me To You,Rock
+drumeo,309616,The Beatles,We Can Work It Out,Rock
+drumeo,309618,The Beatles,All I've Got To Do,Rock
+drumeo,309620,The Beatles,Devil In Her Heart,Rock
+drumeo,309622,The Beatles,Don't Bother Me,Rock
+drumeo,309624,The Beatles,Hold Me Tight,Rock
+drumeo,309626,The Beatles,I Wanna Be Your Man,Rock
+drumeo,309628,The Beatles,It Won't Be Long,Rock
+drumeo,309630,The Beatles,Little Child,Rock
+drumeo,309632,The Beatles,Money (That's What I Want),Rock
+drumeo,309634,The Beatles,Not A Second Time,Rock
+drumeo,309636,The Beatles,Please Mr. Postman,Rock
+drumeo,309638,The Beatles,Roll Over Beethoven,Rock
+drumeo,309640,The Beatles,You Really Got A Hold On Me,Rock
+drumeo,309642,The Beatles,All Together Now,Rock
+drumeo,309644,The Beatles,Hey Bulldog,Rock
+drumeo,309646,The Beatles,It's All Too Much,Rock
+drumeo,309648,The Beatles,Only A Northern Song,Rock
+drumeo,311099,Queen,Good Old-Fashioned Lover Boy,Rock
+drumeo,311101,Queen,Friends Will Be Friends,Rock
+drumeo,311105,Queen,One Vision,Rock
+drumeo,311107,Queen,Who Wants To Live Forever,Rock
+drumeo,311109,Queen,The Prophet's Song,Rock
+drumeo,311112,Queen,Innuendo,Rock
+drumeo,311114,Queen,Dead On Time,Rock
+drumeo,311116,Queen,Mustapha,Rock
+drumeo,311118,Queen,"All Dead, All Dead",Rock
+drumeo,311120,Queen,It's Late,Rock
+drumeo,311122,Queen,Spread Your Wings,Rock
+drumeo,311124,Queen,Now I'm Here,Rock
+drumeo,311126,Queen,Keep Yourself Alive,Rock
+drumeo,311129,Queen,The March Of The Black Queen,Rock
+drumeo,311131,Queen,Dragon Attack,Rock
+drumeo,311133,Queen,Save Me,Rock
+drumeo,311136,Queen,Breakthru,Rock
+drumeo,311140,Queen,I Want It All,Rock
+drumeo,311142,Queen,I Want To Break Free,Rock
+drumeo,311145,Queen,Radio Ga Ga,Rock
+drumeo,31143,Bryan Adams,Summer Of '69,Rock
+drumeo,31246,Scorpions,Rock You Like A Hurricane,Rock
+drumeo,314501,4 Non Blondes,What's Up,Rock
+drumeo,314503,Avril Lavigne,Sk8er Boi,Rock
+drumeo,314505,Blur,Song 2,Rock
+drumeo,314509,David Bowie,Rebel Rebel,Rock
+drumeo,314511,Dropkick Murhpys,I'm Shipping Up To Boston,Rock
+drumeo,314515,Incubus,Nice To Know You,Rock
+drumeo,314517,Incubus,Wish You Were Here,Rock
+drumeo,314521,Lynyrd Skynyrd,Free Bird,Rock
+drumeo,314525,Soundgarden,Jesus Christ Pose,Rock
+drumeo,314528,Talking Heads,Road To Nowhere,Rock
+drumeo,314530,The Offspring,The Kids Aren't Alright,Rock
+drumeo,31532,Creedence Clearwater Revival,Proud Mary,Rock
+drumeo,315951,Michael Jackson,Another Part Of Me,Pop
+drumeo,315953,Michael Jackson,I Just Can't Stop Loving You,Pop
+drumeo,315957,Michael Jackson,Leave Me Alone,Pop
+drumeo,315959,Michael Jackson,Liberian Girl,Pop
+drumeo,315965,Michael Jackson,Speed Demon,Pop
+drumeo,315967,Michael Jackson,The Way You Make Me Feel,Pop
+drumeo,315969,Michael Jackson,Can't Let Her Get Away,Pop
+drumeo,315971,Michael Jackson,Dangerous,Pop
+drumeo,315975,Michael Jackson,Heal The World,Pop
+drumeo,315977,Michael Jackson,In The Closet,Pop
+drumeo,315981,Michael Jackson,Remember The Time,Pop
+drumeo,315985,Michael Jackson,Who Is It,Pop
+drumeo,315989,Michael Jackson,Will You Be There,Pop
+drumeo,315991,Michael Jackson,They Don't Care About Us,Pop
+drumeo,315993,Michael Jackson,Burn This Disco Out,Pop
+drumeo,315997,Michael Jackson,Get On The Floor,Pop
+drumeo,315999,Michael Jackson,Girlfriend,Pop
+drumeo,316001,Michael Jackson,I Can't Help It,Pop
+drumeo,316005,Michael Jackson,Off The Wall,Pop
+drumeo,316009,Michael Jackson,Working Day And Night,Pop
+drumeo,316011,Michael Jackson,Baby Be Mine,Pop
+drumeo,316013,Michael Jackson,Wanna Be Startin' Somethin',Pop
+drumeo,317230,Big Country,In A Big Country,Rock
+drumeo,317234,The Animals,The House Of The Rising Sun,Rock
+drumeo,317236,Foo Fighters,All My Life,Rock
+drumeo,317238,Foo Fighters,These Days,Rock
+drumeo,317240,Green Day,When I Come Around,Rock
+drumeo,317242,Jefferson Airplane,White Rabbit,Rock
+drumeo,317244,John Cougar Mellencamp,Jack & Diane,Rock
+drumeo,317246,Meat Loaf,Bat Out Of Hell,Rock
+drumeo,317252,Queens Of The Stone Age,Song For The Deaf,Rock
+drumeo,317255,Royal Blood,Figure It Out,Rock
+drumeo,317260,The Clash,London Calling,Rock
+drumeo,317265,The Cranberries,Dreams,Rock
+drumeo,317267,The Jimi Hendrix Experience,Fire,Rock
+drumeo,317269,The Mighty Mighty Bosstones,The Impression That I Get,Rock
+drumeo,317794,Nirvana,Dumb,Rock
+drumeo,317796,Nirvana,Frances Farmer Will Have Her Revenge On Seattle,Rock
+drumeo,317799,Nirvana,Milk It,Rock
+drumeo,317801,Nirvana,Pennyroyal Tea,Rock
+drumeo,317803,Nirvana,Radio Friendly Unit Shifter,Rock
+drumeo,317808,Nirvana,Rape Me,Rock
+drumeo,317810,Nirvana,Scentless Apprentice,Rock
+drumeo,317812,Nirvana,Serve The Servants,Rock
+drumeo,317815,Nirvana,Tourette's,Rock
+drumeo,317818,Nirvana,Very Ape,Rock
+drumeo,317820,Nirvana,"Endless, Nameless",Rock
+drumeo,317822,Nirvana,On A Plain,Rock
+drumeo,317824,Nirvana,Stay Away,Rock
+drumeo,317827,Nirvana,Territorial Pissings,Rock
+drumeo,318587,Rush,Seven Cities Of Gold,Rock
+drumeo,318589,Rush,The Anarchist,Rock
+drumeo,318591,Rush,The Garden,Rock
+drumeo,318593,Rush,The Wreckers,Rock
+drumeo,318595,Rush,Wish Them Well,Rock
+drumeo,318597,Rush,Alien Shore,Rock
+drumeo,318599,Rush,Between Sun & Moon,Rock
+drumeo,318601,Rush,Cold Fire,Rock
+drumeo,318603,Rush,Cut To The Chase,Rock
+drumeo,318605,Rush,Double Agent,Rock
+drumeo,318607,Rush,Everyday Glory,Rock
+drumeo,318609,Rush,Nobody's Hero,Rock
+drumeo,318611,Rush,Stick It Out,Rock
+drumeo,318613,Rush,The Speed Of Love,Rock
+drumeo,318615,Rush,Crossroads,Rock
+drumeo,318617,Rush,For What It's Worth,Rock
+drumeo,318619,Rush,Heart Full Of Soul,Rock
+drumeo,318621,Rush,Mr. Soul,Rock
+drumeo,318623,Rush,Seven And Seven Is,Rock
+drumeo,318625,Rush,Shape Of Things,Rock
+drumeo,318627,Rush,Summertime Blues,Rock
+drumeo,318629,Rush,The Seeker,Rock
+drumeo,318631,Rush,In The End,Rock
+drumeo,318633,Rush,Making Memories,Rock
+drumeo,318635,Rush,Afterimage,Rock
+drumeo,318637,Rush,Between The Wheels,Rock
+drumeo,318639,Rush,Distant Early Warning,Rock
+drumeo,318641,Rush,Kid Gloves,Rock
+drumeo,318643,Rush,Red Lenses,Rock
+drumeo,318645,Rush,The Body Electric,Rock
+drumeo,318647,Rush,The Enemy Within,Rock
+drumeo,318649,Rush,Cygnus X-1 Book II: Hemispheres,Rock
+drumeo,318651,Rush,High Water,Rock
+drumeo,318653,Rush,Lock And Key,Rock
+drumeo,318655,Rush,Mission,Rock
+drumeo,318657,Rush,Open Secrets,Rock
+drumeo,318659,Rush,Prime Mover,Rock
+drumeo,318661,Rush,Second Nature,Rock
+drumeo,318663,Rush,Tai Shan,Rock
+drumeo,318665,Rush,Turn The Page,Rock
+drumeo,318667,Rush,The Camera Eye,Rock
+drumeo,318669,Rush,Vital Signs,Rock
+drumeo,318671,Rush,Witch Hunt,Rock
+drumeo,318673,Rush,Not Fade Away,Rock
+drumeo,318675,Rush,You Can't Fight It,Rock
+drumeo,318677,Rush,Different Strings,Rock
+drumeo,318679,Rush,Emotion Detector,Rock
+drumeo,318681,Rush,Grand Designs,Rock
+drumeo,318683,Rush,Middletown Dreams,Rock
+drumeo,318685,Rush,Mystic Rhythms,Rock
+drumeo,318687,Rush,Territories,Rock
+drumeo,318689,Rush,The Big Money,Rock
+drumeo,318691,Rush,Anagram (For Mongo),Rock
+drumeo,318693,Rush,Available Light,Rock
+drumeo,318695,Rush,Chain Lightning,Rock
+drumeo,318697,Rush,Hand Over Fist,Rock
+drumeo,318699,Rush,Presto,Rock
+drumeo,318701,Rush,Red Tide,Rock
+drumeo,318703,Rush,Scars,Rock
+drumeo,318707,Rush,Big Wheel,Rock
+drumeo,318709,Rush,Face Up,Rock
+drumeo,318711,Rush,Ghost Of A Chance,Rock
+drumeo,318713,Rush,Heresy,Rock
+drumeo,318715,Rush,Neurotica,Rock
+drumeo,318717,Rush,Roll The Bones,Rock
+drumeo,318719,Rush,Where's My Thing,Rock
+drumeo,318721,Rush,You Bet Your Life,Rock
+drumeo,318723,Rush,Before And After,Rock
+drumeo,318725,Rush,Here Again,Rock
+drumeo,318727,Rush,Need Some Love,Rock
+drumeo,318729,Rush,Take A Friend,Rock
+drumeo,318731,Rush,Chemistry,Rock
+drumeo,318733,Rush,Countdown,Rock
+drumeo,318735,Rush,The Weapon (Part II Of Fear),Rock
+drumeo,318737,Rush,Armor And Sword,Rock
+drumeo,318739,Rush,Bravest Face,Rock
+drumeo,318741,Rush,Faithless,Rock
+drumeo,318743,Rush,Good News First,Rock
+drumeo,318745,Rush,Malignant Narcissism,Rock
+drumeo,318747,Rush,Spindrift,Rock
+drumeo,318749,Rush,The Larger Bowl (A Pantoum),Rock
+drumeo,318751,Rush,The Main Monkey Business,Rock
+drumeo,318753,Rush,The Way The Wind Blows,Rock
+drumeo,318755,Rush,We Hold On,Rock
+drumeo,318757,Rush,Workin' Them Angels,Rock
+drumeo,318759,Rush,Carve Away The Stone,Rock
+drumeo,318761,Rush,Dog Years,Rock
+drumeo,318763,Rush,Half The World,Rock
+drumeo,318765,Rush,Test For Echo,Rock
+drumeo,318767,Rush,The Color Of Right,Rock
+drumeo,318769,Rush,Totem,Rock
+drumeo,318771,Rush,Virtuality,Rock
+drumeo,318773,Rush,Ceiling Unlimited,Rock
+drumeo,318775,Rush,Earthshine,Rock
+drumeo,318777,Rush,Freeze (Part IV Of Fear),Rock
+drumeo,318779,Rush,Ghost Rider,Rock
+drumeo,318781,Rush,How It Is,Rock
+drumeo,318783,Rush,Nocturne,Rock
+drumeo,318785,Rush,One Little Victory,Rock
+drumeo,318787,Rush,Out Of The Cradle,Rock
+drumeo,318789,Rush,Peaceable Kingdom,Rock
+drumeo,318791,Rush,Secret Touch,Rock
+drumeo,318793,Rush,Sweet Miracle,Rock
+drumeo,318795,Rush,The Stars Look Down,Rock
+drumeo,318797,Rush,Vapor Trail,Rock
+drumeo,321166,The Police,Darkness,Rock
+drumeo,321168,The Police,Demolition Man,Rock
+drumeo,321171,The Police,Every Little Thing She Does Is Magic,Rock
+drumeo,321174,The Police,Hungry For You,Rock
+drumeo,321176,The Police,Invisible Sun,Rock
+drumeo,321178,The Police,Omegaman,Rock
+drumeo,321181,The Police,One World (Not Three),Rock
+drumeo,321183,The Police,Rehumanize Yourself,Rock
+drumeo,321185,The Police,Secret Journey,Rock
+drumeo,321187,The Police,Too Much Information,Rock
+drumeo,321190,The Police,"Be My Girl, Sally",Rock
+drumeo,321192,The Police,Born In The 50s,Rock
+drumeo,321195,The Police,Can't Stand Losing You,Rock
+drumeo,321197,The Police,Hole In My Life,Rock
+drumeo,321200,The Police,Masoko Tanga,Rock
+drumeo,321202,The Police,Next To You,Rock
+drumeo,321204,The Police,Peanuts,Rock
+drumeo,321206,The Police,Truth Hits Everybody,Rock
+drumeo,321208,The Police,Bring On The Night,Rock
+drumeo,321215,The Police,Contact,Rock
+drumeo,321219,The Police,Deathwish,Rock
+drumeo,321254,The Police,Does Everyone Stare,Rock
+drumeo,321258,The Police,It's Alright For You,Rock
+drumeo,321264,The Police,No Time This Time,Rock
+drumeo,321268,The Police,On Any Other Day,Rock
+drumeo,321270,The Police,Reggatta De Blanc,Rock
+drumeo,321272,The Police,The Bed's Too Big Without You,Rock
+drumeo,321279,The Police,Walking On The Moon,Rock
+drumeo,321283,The Police,King Of Pain,Rock
+drumeo,321337,The Police,Miss Gradenko,Rock
+drumeo,321339,The Police,Mother,Rock
+drumeo,321341,The Police,Murder By Numbers,Rock
+drumeo,321343,The Police,O My God,Rock
+drumeo,321345,The Police,Synchronicity I,Rock
+drumeo,321350,The Police,Synchronicity II,Rock
+drumeo,321352,The Police,Tea In The Sahara,Rock
+drumeo,321354,The Police,Walking In Your Footsteps,Rock
+drumeo,321356,The Police,Wrapped Around Your Finger,Rock
+drumeo,321360,The Police,Behind My Camel,Rock
+drumeo,321362,The Police,Bombs Away,Rock
+drumeo,321365,The Police,Canary In A Coalmine,Rock
+drumeo,321367,The Police,"De Do Do Do, De Da Da Da",Rock
+drumeo,321369,The Police,Don't Stand So Close To Me,Rock
+drumeo,321371,The Police,Driven To Tears,Rock
+drumeo,321373,The Police,Man In A Suitcase,Rock
+drumeo,321375,The Police,Shadows In The Rain,Rock
+drumeo,321381,The Police,The Other Way Of Stopping,Rock
+drumeo,321383,The Police,Voices Inside My Head,Rock
+drumeo,321385,The Police,"When The World Is Running Down, You Make The Best Of What's Still Around",Rock
+drumeo,321927,Bon Jovi,Always Run To You,Rock
+drumeo,321929,Bon Jovi,In And Out Of Love,Rock
+drumeo,321932,Bon Jovi,King Of The Mountain,Rock
+drumeo,321934,Bon Jovi,Only Lonely,Rock
+drumeo,321944,Bon Jovi,Secret Dreams,Rock
+drumeo,321946,Bon Jovi,Silent Night,Rock
+drumeo,321949,Bon Jovi,The Hardest Part Is The Night,Rock
+drumeo,321951,Bon Jovi,The Price Of Love,Rock
+drumeo,321954,Bon Jovi,To The Fire,Rock
+drumeo,321958,Bon Jovi,Tokyo Road,Rock
+drumeo,321960,Bon Jovi,Breakout,Rock
+drumeo,321965,Bon Jovi,Burning For Love,Rock
+drumeo,321967,Bon Jovi,Come Back,Rock
+drumeo,321969,Bon Jovi,Get Ready,Rock
+drumeo,321972,Bon Jovi,Love Lies,Rock
+drumeo,321974,Bon Jovi,Roulette,Rock
+drumeo,321976,Bon Jovi,She Don't Know Me,Rock
+drumeo,321979,Bon Jovi,Shot Through The Heart,Rock
+drumeo,321981,Bon Jovi,Captain Crash & The Beauty Queen From Mars,Rock
+drumeo,321984,Bon Jovi,I Could Make A Living Out Of Lovin' You,Rock
+drumeo,321988,Bon Jovi,I Got The Girl,Rock
+drumeo,321990,Bon Jovi,Just Older,Rock
+drumeo,321992,Bon Jovi,Mystery Train,Rock
+drumeo,321994,Bon Jovi,Next 100 Years,Rock
+drumeo,321996,Bon Jovi,Neurotica,Rock
+drumeo,321998,Bon Jovi,One Wild Night,Rock
+drumeo,322000,Bon Jovi,Save The World,Rock
+drumeo,322003,Bon Jovi,Say It Isn't So,Rock
+drumeo,322005,Bon Jovi,She's A Mystery,Rock
+drumeo,322007,Bon Jovi,Thank You For Loving Me,Rock
+drumeo,322009,Bon Jovi,Two Story Town,Rock
+drumeo,322011,Bon Jovi,Blame It On The Love Of Rock & Roll,Rock
+drumeo,322013,Bon Jovi,Fear,Rock
+drumeo,322016,Bon Jovi,I Believe,Rock
+drumeo,322018,Bon Jovi,I Want You,Rock
+drumeo,322020,Bon Jovi,If I Was Your Mother,Rock
+drumeo,322024,Bon Jovi,I'll Sleep When I'm Dead,Rock
+drumeo,322027,Bon Jovi,In These Arms,Rock
+drumeo,322029,Bon Jovi,Little Bit Of Soul,Rock
+drumeo,322031,Bon Jovi,Women In Love,Rock
+drumeo,322032,Bon Jovi,99 In The Shade,Rock
+drumeo,322058,Bon Jovi,Bad Medicine,Rock
+drumeo,322060,Bon Jovi,Born To Be My Baby,Rock
+drumeo,322062,Bon Jovi,Homebound Train,Rock
+drumeo,322066,Bon Jovi,Living In Sin,Rock
+drumeo,322068,Bon Jovi,Love For Sale,Rock
+drumeo,322070,Bon Jovi,Stick To Your Guns,Rock
+drumeo,322079,Bon Jovi,Wild Is The Wind,Rock
+drumeo,322158,Bon Jovi,Let It Rock,Rock
+drumeo,322161,Bon Jovi,Never Say Goodbye,Rock
+drumeo,322163,Bon Jovi,Social Disease,Rock
+drumeo,322166,Bon Jovi,Wild In The Streets,Rock
+drumeo,322168,Bon Jovi,Without Love,Rock
+drumeo,322172,Bon Jovi,(It's Hard) Letting You Go,Rock
+drumeo,322174,Bon Jovi,Damned,Rock
+drumeo,322176,Bon Jovi,Diamond Ring,Rock
+drumeo,322180,Bon Jovi,Hearts Breaking Even,Rock
+drumeo,322182,Bon Jovi,If That's What It Takes,Rock
+drumeo,322184,Bon Jovi,Lie To Me,Rock
+drumeo,322186,Bon Jovi,My Guitar Lies Bleeding in My Arms,Rock
+drumeo,322188,Bon Jovi,Something For The Pain,Rock
+drumeo,322190,Bon Jovi,Something To Believe In,Rock
+drumeo,322192,Bon Jovi,These Days,Rock
+drumeo,322194,Bon Jovi,This Ain't A Love Song,Rock
+drumeo,322451,Alanis Morissette,Ironic,Rock
+drumeo,322455,Franz Ferdinand,Take Me Out,Rock
+drumeo,322458,Goo Goo Dolls,Iris,Rock
+drumeo,322462,Meat Loaf,I'd Do Anything For Love (But I Won't Do That),Rock
+drumeo,322469,OK Go,Here It Goes Again,Rock
+drumeo,322471,Pearl Jam,Black,Rock
+drumeo,322474,Pearl Jam,Yellow Ledbetter,Rock
+drumeo,322478,The Black Crowes,Remedy,Rock
+drumeo,322480,TLC,Waterfalls,Rock
+drumeo,322483,Yeah Yeah Yeahs,Maps,Rock
+drumeo,323902,U2,Grace,Pop
+drumeo,323905,U2,Acrobat,Pop
+drumeo,323906,U2,In A Little While,Pop
+drumeo,323909,U2,Kite,Pop
+drumeo,323911,U2,Even Better Than The Real Thing,Pop
+drumeo,323912,U2,Even Better Than The Real Thing,Pop
+drumeo,323914,U2,Love Is Blindness,Pop
+drumeo,323915,U2,New York,Pop
+drumeo,323918,U2,Peace On Earth,Pop
+drumeo,323920,U2,One,Pop
+drumeo,323922,U2,Stuck In A Moment You Can’t Get Out Of,Pop
+drumeo,323925,U2,So Cruel,Pop
+drumeo,323926,U2,The Ground Beneath Her Feet,Pop
+drumeo,323929,U2,The Fly,Pop
+drumeo,323930,U2,Walk On,Pop
+drumeo,323933,U2,Tryin' To Throw Your Arms Around The World,Pop
+drumeo,323934,U2,When I Look At The World,Pop
+drumeo,323937,U2,Ultra Violet (Light My Way),Pop
+drumeo,323938,U2,Wild Honey,Pop
+drumeo,323942,U2,Until The End Of The World,Pop
+drumeo,323943,U2,A Day Without Me,Pop
+drumeo,323946,U2,Who's Gonna Ride Your Wild Horses,Pop
+drumeo,323948,U2,Zoo Station,Pop
+drumeo,323950,U2,A Man And A Woman,Pop
+drumeo,323951,U2,An Cat Dubh,Pop
+drumeo,323954,U2,All Because Of You,Pop
+drumeo,323955,U2,"Another Time, Another Place",Pop
+drumeo,323958,U2,Into The Heart,Pop
+drumeo,323959,U2,City Of Blinding Lights,Pop
+drumeo,323962,U2,Crumbs From Your Table,Pop
+drumeo,323963,U2,Out Of Control,Pop
+drumeo,323966,U2,Fast Cars,Pop
+drumeo,323968,U2,Love And Peace Or Else,Pop
+drumeo,323970,U2,Miracle Drug,Pop
+drumeo,323972,U2,One Step Closer,Pop
+drumeo,323974,U2,Original Of The Species,Pop
+drumeo,323976,U2,Sometimes You Can't Make It On Your Own,Pop
+drumeo,323978,U2,Yahweh,Pop
+drumeo,323980,U2,Breathe,Pop
+drumeo,323981,U2,Shadows And Tall Trees/Saturday Matinee,Pop
+drumeo,323984,U2,Stories For Boys,Pop
+drumeo,323986,U2,Cedars Of Lebanon,Pop
+drumeo,323988,U2,The Electric Co.,Pop
+drumeo,323990,U2,The Ocean,Pop
+drumeo,323991,U2,Fez - Being Born,Pop
+drumeo,323994,U2,Twilight,Pop
+drumeo,323996,U2,Fire,Pop
+drumeo,323997,U2,Get On Your Boots,Pop
+drumeo,324000,U2,Gloria,Pop
+drumeo,324001,U2,I'll Go Crazy If I Don't Go Crazy Tonight,Pop
+drumeo,324006,U2,Magnificent,Pop
+drumeo,324008,U2,I Fall Down,Pop
+drumeo,324009,U2,Moment Of Surrender,Pop
+drumeo,324012,U2,I Threw A Brick Through A Window,Pop
+drumeo,324013,U2,No Line On The Horizon,Pop
+drumeo,324016,U2,Stand Up Comedy,Pop
+drumeo,324017,U2,Is That All?,Pop
+drumeo,324020,U2,Unknown Caller,Pop
+drumeo,324022,U2,White As Snow,Pop
+drumeo,324024,U2,Rejoice,Pop
+drumeo,324026,U2,Scarlet,Pop
+drumeo,324028,U2,Stranger In A Strange Land,Pop
+drumeo,324031,U2,Tomorrow,Pop
+drumeo,324034,U2,With A Shout (Jerusalem),Pop
+drumeo,324038,U2,All Along The Watchtower,Pop
+drumeo,324050,U2,All I Want Is You,Pop
+drumeo,324052,U2,Angel Of Harlem,Pop
+drumeo,324054,U2,Desire,Pop
+drumeo,324056,U2,Exit,Pop
+drumeo,324057,U2,God Part II,Pop
+drumeo,324060,U2,Helter Skelter,Pop
+drumeo,324061,U2,In God's Country,Pop
+drumeo,324064,U2,Hawkmoon 269,Pop
+drumeo,324065,U2,Mothers Of The Disappeared,Pop
+drumeo,324068,U2,One Tree Hill,Pop
+drumeo,324069,U2,Heartland,Pop
+drumeo,324072,U2,Red Hill Mining Town,Pop
+drumeo,324073,U2,Love Rescue Me,Pop
+drumeo,324077,U2,Running To Stand Still,Pop
+drumeo,324078,U2,When Love Comes To Town,Pop
+drumeo,324081,U2,Silver And Gold,Pop
+drumeo,324082,U2,Trip Through Your Wires,Pop
+drumeo,324086,U2,A Sort Of Homecoming,Pop
+drumeo,324088,U2,Elvis Presley And America,Pop
+drumeo,324090,U2,Indian Summer Sky,Pop
+drumeo,324092,U2,Pride (In the Name of Love),Pop
+drumeo,324094,U2,Promenade,Pop
+drumeo,324096,U2,The Unforgettable Fire,Pop
+drumeo,324098,U2,Wire,Pop
+drumeo,324100,U2,40,Pop
+drumeo,324102,U2,Drowning Man,Pop
+drumeo,324104,U2,Like A Song,Pop
+drumeo,324106,U2,Red Light,Pop
+drumeo,324108,U2,Seconds,Pop
+drumeo,324110,U2,Surrender,Pop
+drumeo,324112,U2,The Refugee,Pop
+drumeo,324114,U2,Two Hearts Beat As One,Pop
+drumeo,324386,Bon Jovi,We Weren't Born To Follow,Rock
+drumeo,324736,BTS,Butter,Pop
+drumeo,324811,Def Leppard,Have You Ever Needed Someone So Bad,Rock
+drumeo,324813,Def Leppard,Heaven Is,Rock
+drumeo,324815,Def Leppard,I Wanna Touch You,Rock
+drumeo,324817,Def Leppard,Let's Get Rocked,Rock
+drumeo,324819,Def Leppard,Make Love Like A Man,Rock
+drumeo,324821,Def Leppard,Personal Property,Rock
+drumeo,324823,Def Leppard,Stand Up (Kick Love Into Motion),Rock
+drumeo,324825,Def Leppard,Tear It Down,Rock
+drumeo,324827,Def Leppard,Tonight,Rock
+drumeo,324829,Def Leppard,White Lightning,Rock
+drumeo,324831,Def Leppard,21st Century Sha La La La Girl,Rock
+drumeo,324833,Def Leppard,All Night,Rock
+drumeo,324835,Def Leppard,Back In Your Face,Rock
+drumeo,324837,Def Leppard,Day After Day,Rock
+drumeo,324839,Def Leppard,Demolition Man,Rock
+drumeo,324841,Def Leppard,Disintegrate,Rock
+drumeo,324843,Def Leppard,Goodbye,Rock
+drumeo,324845,Def Leppard,Guilty,Rock
+drumeo,324847,Def Leppard,It’s Only Love,Rock
+drumeo,324849,Def Leppard,Kings Of Oblivion,Rock
+drumeo,324851,Def Leppard,Paper Sun,Rock
+drumeo,324853,Def Leppard,Promises,Rock
+drumeo,324855,Def Leppard,To Be Alive,Rock
+drumeo,324857,Def Leppard,Another Hit And Run,Rock
+drumeo,324859,Def Leppard,High 'n' Dry (Saturday Night),Rock
+drumeo,324861,Def Leppard,Lady Strange,Rock
+drumeo,324863,Def Leppard,Let It Go,Rock
+drumeo,324865,Def Leppard,Mirror Mirror,Rock
+drumeo,324867,Def Leppard,"No, No, No",Rock
+drumeo,324869,Def Leppard,On Through The Night,Rock
+drumeo,324871,Def Leppard,Switch 625,Rock
+drumeo,324873,Def Leppard,You Got Me Runnin',Rock
+drumeo,324875,Def Leppard,Animal,Rock
+drumeo,324877,Def Leppard,Armageddon It,Rock
+drumeo,324879,Def Leppard,Don't Shoot Shotgun,Rock
+drumeo,324881,Def Leppard,Excitable,Rock
+drumeo,324883,Def Leppard,Gods Of War,Rock
+drumeo,324885,Def Leppard,Love And Affection,Rock
+drumeo,324887,Def Leppard,Love Bites,Rock
+drumeo,324889,Def Leppard,Rocket,Rock
+drumeo,324891,Def Leppard,Run Riot,Rock
+drumeo,324893,Def Leppard,Women,Rock
+drumeo,324895,Def Leppard,Action! Not Words,Rock
+drumeo,324897,Def Leppard,Comin' Under Fire,Rock
+drumeo,324899,Def Leppard,Billy's Got A Gun,Rock
+drumeo,324901,Def Leppard,Die Hard The Hunter,Rock
+drumeo,324903,Def Leppard,Rock! Rock! (Til You Drop),Rock
+drumeo,324905,Def Leppard,Stagefright,Rock
+drumeo,324907,Def Leppard,Too Late For Love,Rock
+drumeo,324909,Def Leppard,Action,Rock
+drumeo,324911,Def Leppard,Desert Song,Rock
+drumeo,324913,Def Leppard,Fractured Love,Rock
+drumeo,324915,Def Leppard,I Wanna Be Your Hero,Rock
+drumeo,324917,Def Leppard,Miss You In A Heartbeat,Rock
+drumeo,324919,Def Leppard,Only After Dark,Rock
+drumeo,324921,Def Leppard,Ring Of Fire,Rock
+drumeo,324923,Def Leppard,She's Too Tough,Rock
+drumeo,324925,Def Leppard,Two Steps Behind,Rock
+drumeo,324927,Def Leppard,When Love & Hate Collide,Rock
+drumeo,326646,Black Sabbath,The Wizard,Rock
+drumeo,326648,Blink-182,I Miss You,Rock
+drumeo,326651,Dan Marocco,Brooklyn Nine-Nine,Rock
+drumeo,326653,David Bowie,Golden Years,Rock
+drumeo,326657,Mammoth WVH,Don't Back Down,Rock
+drumeo,326660,Lynyrd Skynyrd,Simple Man,Rock
+drumeo,326667,Primus,Jerry Was A Race Car Driver,Rock
+drumeo,326669,Red Hot Chili Peppers,By The Way,Rock
+drumeo,326673,The Wallflowers,6th Avenue Heartache,Rock
+drumeo,326676,Ugly Kid Joe,Cats In The Cradle,Rock
+drumeo,326678,Van Halen,Right Now,Rock
+drumeo,327106,Blink-182,Brohemian Rhapsody,Rock
+drumeo,327108,Blink-182,Bored To Death,Rock
+drumeo,327110,Blink-182,Built This Pool,Rock
+drumeo,327113,Blink-182,Cynical,Rock
+drumeo,327115,Blink-182,Kings Of The Weekend,Rock
+drumeo,327117,Blink-182,Left Alone,Rock
+drumeo,327119,Blink-182,Los Angeles,Rock
+drumeo,327121,Blink-182,No Future,Rock
+drumeo,327123,Blink-182,Rabbit Hole,Rock
+drumeo,327126,Blink-182,San Diego,Rock
+drumeo,327128,Blink-182,Sober,Rock
+drumeo,327130,Blink-182,Teenage Satellites,Rock
+drumeo,327132,Blink-182,After Midnight,Rock
+drumeo,327134,Blink-182,The Only Thing That Matters,Rock
+drumeo,327137,Blink-182,Ghosts On The Dance Floor,Rock
+drumeo,327139,Blink-182,Aliens Exist,Rock
+drumeo,327142,Blink-182,Heart's All Gone,Rock
+drumeo,327144,Blink-182,Anthem,Rock
+drumeo,327145,Blink-182,Kaleidoscope,Rock
+drumeo,327147,Blink-182,Don't Leave Me,Rock
+drumeo,327149,Blink-182,Love Is Dangerous,Rock
+drumeo,327154,Blink-182,Mutt,Rock
+drumeo,327157,Blink-182,The Party Song,Rock
+drumeo,327159,Blink-182,Wendy Clear,Rock
+drumeo,327161,Blink-182,What's My Age Again?,Rock
+drumeo,327171,Blink-182,MH 4.18.2011,Rock
+drumeo,327173,Blink-182,Natives,Rock
+drumeo,327175,Blink-182,This Is Home,Rock
+drumeo,327177,Blink-182,Up All Night,Rock
+drumeo,327179,Blink-182,Wishing Well,Rock
+drumeo,327329,Blink-182,Anthem Part Two,Rock
+drumeo,327331,Blink-182,Everytime I Look For You,Rock
+drumeo,327333,Blink-182,Give Me One Good Reason,Rock
+drumeo,327335,Blink-182,"Happy Holidays, You Bastard",Rock
+drumeo,327338,Blink-182,Online Songs,Rock
+drumeo,327340,Blink-182,Please Take Me Home,Rock
+drumeo,327342,Blink-182,Reckless Abandon,Rock
+drumeo,327344,Blink-182,Roller Coaster,Rock
+drumeo,327346,Blink-182,Shut Up,Rock
+drumeo,327348,Blink-182,Stay Together For The Kids,Rock
+drumeo,327350,Blink-182,Story Of A Lonely Guy,Rock
+drumeo,327456,Led Zeppelin,Bonzo's Montreux,Rock
+drumeo,327460,Led Zeppelin,Darlene,Rock
+drumeo,327462,Led Zeppelin,Ozone Baby,Rock
+drumeo,327464,Led Zeppelin,Walter's Walk,Rock
+drumeo,327466,Led Zeppelin,Poor Tom,Rock
+drumeo,327468,Led Zeppelin,We're Gonna Groove,Rock
+drumeo,327470,Led Zeppelin,Wearing And Tearing,Rock
+drumeo,327472,Led Zeppelin,All My Love,Rock
+drumeo,327476,Led Zeppelin,Carouselambra,Rock
+drumeo,327479,Led Zeppelin,Hot Dog,Rock
+drumeo,327482,Led Zeppelin,I'm Gonna Crawl,Rock
+drumeo,327485,Led Zeppelin,In The Evening,Rock
+drumeo,327488,Led Zeppelin,South Bound Suarez,Rock
+drumeo,327491,Led Zeppelin,Achilles Last Stand,Rock
+drumeo,327493,Led Zeppelin,Candy Store Rock,Rock
+drumeo,327497,Led Zeppelin,For Your Life,Rock
+drumeo,327500,Led Zeppelin,Nobody's Fault But Mine,Rock
+drumeo,327502,Led Zeppelin,Hots On For Nowhere,Rock
+drumeo,327504,Led Zeppelin,Royal Orleans,Rock
+drumeo,327506,Led Zeppelin,Tea For One,Rock
+drumeo,328144,AC/DC,Big Gun,Rock
+drumeo,328146,Adele,Skyfall,Rock
+drumeo,328157,Audioslave,Show Me How To Live,Rock
+drumeo,328161,Blink-182,Dammit,Rock
+drumeo,328163,Bloodhound Gang,Foxtrot Uniform Charlie Kilo,Rock
+drumeo,328169,Dire Straits,Once Upon A Time In The West,Rock
+drumeo,328171,Elvis Costello,It’s Time,Rock
+drumeo,328175,Florence + The Machine,Dog Days Are Over,Rock
+drumeo,328178,Frank Zappa,Florentine Pogen,Rock
+drumeo,328180,Green Day,Hitchin’ A Ride,Rock
+drumeo,328182,Heart,Magic Man,Rock
+drumeo,328184,Jack Savoretti,Back Where I Belong,Pop
+drumeo,328189,John Stewart,Gold,Rock
+drumeo,328193,Juice Wrld,Lucid Dreams,Rock
+drumeo,328197,Live,Waitress,Rock
+drumeo,328199,Live,"White, Discussion",Rock
+drumeo,328201,Luke Combs,Forever After All,Rock
+drumeo,328203,Manchester Orchestra,The Moth,Rock
+drumeo,328206,Måneskin,Beggin',Rock
+drumeo,328208,Manfred Mann's Earth Band,Blinded By The Light,Rock
+drumeo,328210,Maroon 5,If I Never See Your Face Again,Rock
+drumeo,328214,Neil Young,Cortez The Killer,Rock
+drumeo,328219,Oingo Boingo,Just Another Day,Rock
+drumeo,328221,Portugal. The Man,People Say,Rock
+drumeo,328223,R.E.M.,Orange Crush,Rock
+drumeo,328227,Royal Blood,Oblivion,Rock
+drumeo,328233,Shakira,Si Te Vas,Pop
+drumeo,328237,Sigur Ros,Untitled #8,Rock
+drumeo,328241,Spandau Ballet,True,Rock
+drumeo,328243,Stereophonics,Mr. And Mrs. Smith,Rock
+drumeo,328245,Stryper,To Hell With The Devil,Rock
+drumeo,328247,Surf Mesa,ILY (I Love You Baby),Rock
+drumeo,328249,The Allman Brothers Band,Statesboro Blues,Rock
+drumeo,328251,Tori Amos,Space Dog,Pop
+drumeo,328253,Trooper,Raise A Little Hell,Rock
+drumeo,328255,Twenty One Pilots,Shy Away,Rock
+drumeo,329024,Pink Floyd,Learning To Fly,Rock
+drumeo,329026,Pink Floyd,On The Turning Away,Rock
+drumeo,329028,Pink Floyd,One Slip,Rock
+drumeo,329030,Pink Floyd,Sorrow,Rock
+drumeo,329032,Pink Floyd,Terminal Frost,Rock
+drumeo,329034,Pink Floyd,The Dogs Of War,Rock
+drumeo,329036,Pink Floyd,Yet Another Movie,Rock
+drumeo,329038,Pink Floyd,Dogs,Rock
+drumeo,329040,Pink Floyd,Pigs (Three Different Ones),Rock
+drumeo,329043,Pink Floyd,Sheep,Rock
+drumeo,329045,Pink Floyd,"Another Brick In The Wall, Pt. 3",Rock
+drumeo,329047,Pink Floyd,Bring The Boys Back Home,Rock
+drumeo,329049,Pink Floyd,In The Flesh?,Rock
+drumeo,329051,Pink Floyd,Mother,Rock
+drumeo,329054,Pink Floyd,One Of My Turns,Rock
+drumeo,329056,Pink Floyd,The Happiest Days Of Our Lives,Rock
+drumeo,329059,Pink Floyd,The Trial,Rock
+drumeo,329061,Pink Floyd,Waiting For The Worms,Rock
+drumeo,329064,Pink Floyd,Don't Leave Me Now,Rock
+drumeo,329066,Pink Floyd,The Show Must Go On,Rock
+drumeo,329069,Pink Floyd,The Thin Ice,Rock
+drumeo,329576,Porcupine Tree,Harridan,Rock
+drumeo,330225,Ozzy Osbourne,Centre Of Eternity,Rock
+drumeo,330228,Ozzy Osbourne,Now You See It (Now You Don't),Rock
+drumeo,330230,Ozzy Osbourne,Rock 'n' Roll Rebel,Rock
+drumeo,330232,Ozzy Osbourne,Slow Down,Rock
+drumeo,330234,Ozzy Osbourne,So Tired,Rock
+drumeo,330237,Ozzy Osbourne,Spiders,Rock
+drumeo,330240,Ozzy Osbourne,You're No Different,Rock
+drumeo,330243,Ozzy Osbourne,Waiting For Darkness,Rock
+drumeo,330246,Ozzy Osbourne,Goodbye To Romance,Rock
+drumeo,330250,Ozzy Osbourne,I Don't Know,Rock
+drumeo,330253,Ozzy Osbourne,No Bone Movies,Rock
+drumeo,330255,Ozzy Osbourne,Revelation (Mother Earth),Rock
+drumeo,330259,Ozzy Osbourne,Steal Away (The Night),Rock
+drumeo,330261,Ozzy Osbourne,Suicide Solution,Rock
+drumeo,330270,Ozzy Osbourne,Believer,Rock
+drumeo,330272,Ozzy Osbourne,Diary Of A Madman,Rock
+drumeo,330274,Ozzy Osbourne,Flying High Again,Rock
+drumeo,330276,Ozzy Osbourne,Little Dolls,Rock
+drumeo,330279,Ozzy Osbourne,Over The Mountain,Rock
+drumeo,330281,Ozzy Osbourne,S.A.T.O.,Rock
+drumeo,330283,Ozzy Osbourne,Tonight,Rock
+drumeo,330286,Ozzy Osbourne,You Can't Kill Rock And Roll,Rock
+drumeo,330340,Black Sabbath,Into The Void,Rock
+drumeo,330344,Black Sabbath,Lord Of This World,Rock
+drumeo,330346,Black Sabbath,Cornucopia,Rock
+drumeo,330348,Black Sabbath,Snowblind,Rock
+drumeo,330350,Black Sabbath,St. Vitus Dance,Rock
+drumeo,330352,Black Sabbath,Supernaut,Rock
+drumeo,330355,Black Sabbath,Tomorrow's Dreams,Rock
+drumeo,330360,Black Sabbath,Under The Sun,Rock
+drumeo,330362,Black Sabbath,Wheels Of Confusion,Rock
+drumeo,330364,Black Sabbath,Electric Funeral,Rock
+drumeo,330367,Black Sabbath,Rat Salad,Rock
+drumeo,331182,Boston,Foreplay/Longtime,Rock
+drumeo,331184,Creedence Clearwater Revival,I Heard It Through The Grapevine,Rock
+drumeo,331191,Foreigner,I Want To Know What Love Is,Rock
+drumeo,331201,Modest Mouse,Float On,Rock
+drumeo,331204,Muse,Time Is Running Out,Rock
+drumeo,331207,Pearl Jam,Jeremy,Rock
+drumeo,331209,Queen,Tie Your Mother Down,Rock
+drumeo,331216,Steely Dan,Rikki Don't Lose That Number,Rock
+drumeo,331219,The Clash,Should I Stay Or Should I Go,Rock
+drumeo,337411,KISS,Love Gun,Rock
+drumeo,337413,KISS,God Gave Rock And Roll To You,Rock
+drumeo,337421,Neil Young,Rockin' In The Free World,Rock
+drumeo,337426,Roxette,The Look,Pop
+drumeo,337430,Skunk Anansie,Weak,Rock
+drumeo,337432,Soundgarden,Burden In My Hand,Rock
+drumeo,337435,The Moody Blues,Nights In White Satin,Rock
+drumeo,337437,The Strokes,Last Nite,Rock
+drumeo,337439,The Style Council,Dropping Bombs On The White House,Rock
+drumeo,337441,The Travelling Wilburys,End Of The Line,Rock
+drumeo,337443,The Who,Behind Blue Eyes,Rock
+drumeo,337445,Tracy Chapman,Fast Car,Rock
+drumeo,337447,Violent Femmes,Blister in The Sun,Rock
+drumeo,337454,Robbie Williams,I Wan'na Be Like You,Rock
+drumeo,337854,Bellevue Suite,Burn,Rock
+drumeo,337856,Bellevue Suite,For The Love Of God,Rock
+drumeo,337858,Bellevue Suite,Somewhere Along The Way,Rock
+drumeo,337860,Prince & 3RDEYEGIRL,AINTTURNINROUND,Rock
+drumeo,337863,Prince & 3RDEYEGIRL,ANOTHERLOVE,Rock
+drumeo,337865,Prince & 3RDEYEGIRL,BOYTROUBLE,Rock
+drumeo,337867,Prince & 3RDEYEGIRL,FIXURLIFEUP,Rock
+drumeo,337869,Prince & 3RDEYEGIRL,FUNKNROLL,Rock
+drumeo,337872,Prince & 3RDEYEGIRL,MARZ,Rock
+drumeo,337874,Prince & 3RDEYEGIRL,PLECTRUMELECTRUM,Rock
+drumeo,337876,Prince & 3RDEYEGIRL,PRETZELBODYLOGIC,Rock
+drumeo,337878,Prince & 3RDEYEGIRL,STOPTHISTRAIN,Rock
+drumeo,337882,Prince & 3RDEYEGIRL,TICTACTOE,Rock
+drumeo,337885,Prince & 3RDEYEGIRL,WHITECAPS,Rock
+drumeo,337887,Prince & 3RDEYEGIRL,WOW,Rock
+drumeo,338877,Duane Eddy,Rebel Rouser,Rock
+drumeo,340092,Genesis,Down And Out,Rock
+drumeo,340094,Genesis,Undertow,Rock
+drumeo,340096,Genesis,Dance On A Volcano,Rock
+drumeo,340098,Genesis,Los Endos,Rock
+drumeo,340100,Genesis,"Robbery, Assault And Battery",Rock
+drumeo,340103,Genesis,Abacab,Rock
+drumeo,340105,Genesis,Behind The Lines,Rock
+drumeo,340107,Genesis,Watcher Of The Skies,Rock
+drumeo,340109,Genesis,Supper's Ready,Rock
+drumeo,340112,Genesis,The Musical Box,Rock
+drumeo,340114,Genesis,Dancing With The Moonlit Knight,Rock
+drumeo,340116,Genesis,Firth Of Fifth,Rock
+drumeo,340120,Genesis,The Carpet Crawlers,Rock
+drumeo,340123,Phil Collins,Another Day In Paradise,Pop
+drumeo,340125,Phil Collins,Against All Odds,Pop
+drumeo,340127,Phil Collins,I Don't Care Anymore,Pop
+drumeo,340130,Phil Collins,You Can't Hurry Love,Pop
+drumeo,340132,Phil Collins,Sussudio,Pop
+drumeo,341259,Faith Hill,Cry,Pop
+drumeo,341261,Frank Zappa,Catholic Girls,Rock
+drumeo,341263,Frank Zappa,Why Does It Hurt When I Pee?,Rock
+drumeo,341265,Joni Mitchell,Two Grey Rooms,Rock
+drumeo,341272,Sting,The Hounds Of Winter,Pop
+drumeo,341275,Sting,Love Is Stronger Than Justice (The Munificent Seven),Pop
+drumeo,341277,Sting,Shape Of My Heart,Pop
+drumeo,341279,Sting,St. Augustine In Hell,Pop
+drumeo,344722,Bob Seger,Sunspot Baby,Rock
+drumeo,344724,Cake,Short Skirt/Long Jacket,Pop
+drumeo,344726,David Benoit,Shaken Not Stirred,Rock
+drumeo,344728,Elton John,Saturday Night's Alright (For Fighting),Rock
+drumeo,344735,Nine Inch Nails,Every Day Is Exactly The Same,Rock
+drumeo,344737,Oasis,Supersonic,Rock
+drumeo,344740,Oingo Boingo,Weird Science,Rock
+drumeo,344742,Papa Roach,Last Resort,Rock
+drumeo,344744,Procol Harum,A Whiter Shade Of Pale,Rock
+drumeo,344746,Rage Against The Machine,Renegades Of Funk,Rock
+drumeo,344748,Soundgarden,Outshined,Rock
+drumeo,344753,The Fratellis,Chelsea Dagger,Rock
+drumeo,344757,The Jimi Hendrix Experience,Voodoo Child,Rock
+drumeo,344759,The Offspring,Pretty Fly (For A White Guy),Rock
+drumeo,344762,The Smashing Pumpkins,"Tonight, Tonight",Rock
+drumeo,344765,UB40,Kingston Town,Rock
+drumeo,347039,Ariana Grande,No Tears Left To Cry,Rock
+drumeo,347045,Ariana Grande,Dangerous Woman,Rock
+drumeo,347054,Chaka Khan,One For All Time,R&B/Soul
+drumeo,347056,Chaka Khan,You Belong To Me,R&B/Soul
+drumeo,348728,Cliff Richard,Devil Woman,Rock
+drumeo,348734,Eagles,One Of These Nights,Rock
+drumeo,348736,Foreigner,Hot Blooded,Rock
+drumeo,348738,Frank Turner,I Still Believe,Rock
+drumeo,348740,Garbage,Stupid Girl,Rock
+drumeo,348743,Meat Loaf,Paradise By The Dashboard Light,Rock
+drumeo,348745,Kenny Loggins,Danger Zone,Rock
+drumeo,348749,No Doubt,Spiderwebs,Rock
+drumeo,348751,Phil Collins,I Wish It Would Rain Down,Rock
+drumeo,348753,Queens Of The Stone Age,Song For The Dead,Rock
+drumeo,348757,Seven Mary Three,Cumbersome,Rock
+drumeo,348763,Stevie Nicks,Edge Of Seventeen,Rock
+drumeo,348766,Stone Temple Pilots,Plush,Rock
+drumeo,348768,The Doors,Roadhouse Blues,Rock
+drumeo,348770,The Rolling Stones,Gimme Shelter,Rock
+drumeo,348774,They Might Be Giants,Boss Of Me,Rock
+drumeo,349668,Airbag,Colors,Rock
+drumeo,349673,Alkaline Trio,Private Eye,Rock
+drumeo,349686,Dermot Kennedy,After Rain,Rock
+drumeo,349690,Dirty Honey,Rolling 7s,Rock
+drumeo,349692,Elliott Smith,Waltz #2 (XO),Rock
+drumeo,349694,Faith No More,Ashes To Ashes,Rock
+drumeo,349710,Genesis,Many Too Many,Rock
+drumeo,349717,Héroes Del Silencio,Entre Dos Tierras,Rock
+drumeo,349721,Starship,Nothing’s Gonna Stop Us Now,Rock
+drumeo,349723,Joe Cocker,Night Calls,Rock
+drumeo,349725,Judas Priest,Last Rose Of Summer,Rock
+drumeo,349728,KISS,I Love It Loud,Rock
+drumeo,349730,Kungs Vs. Cookin' On 3 Burners,This Girl,Rock
+drumeo,349735,Linkin Park,New Divide,Rock
+drumeo,349741,Movements,Daylily,Rock
+drumeo,349744,New Order,True Faith,Rock
+drumeo,349747,Opus,Live Is Life,Rock
+drumeo,349749,Pink Floyd,Coming Back To Life,Rock
+drumeo,349752,Portishead,Wandering Star,Rock
+drumeo,349758,Stone Temple Pilots,Crackerman,Rock
+drumeo,349870,Sugarland,It Happens,Rock
+drumeo,349872,Sum 41,Catching Fire,Rock
+drumeo,349874,T. Rex,Bang A Gong (Get It On),Rock
+drumeo,349876,The Crystal Method,Name Of The Game,Rock
+drumeo,349878,James Gang,Funk #49,Rock
+drumeo,349880,Tony Joe White,Polk Salad Annie,Rock
+drumeo,349882,Trans Am,I Want It All,Rock
+drumeo,349884,Trapt,Headstrong,Rock
+drumeo,349887,Van Halen,Intruder/(Oh) Pretty Woman,Rock
+drumeo,349889,We The Kings,"Check Yes, Juliet",Rock
+drumeo,349891,ZZ Top,I Gotsta Get Paid,Rock
+drumeo,349893,ZZ Top,Beer Drinkers & Hell Raisers,Rock
+drumeo,352690,David Benoit,Human Nature,Rock
+drumeo,352693,Blondie,One Way Or Another,Rock
+drumeo,352696,Don Henley,Boys Of Summer,Rock
+drumeo,352698,Fall Out Boy,The Carpal Tunnel Of Love,Rock
+drumeo,352703,Green Day,Longview,Rock
+drumeo,352705,Jesus Jones,"Right Here, Right Now",Rock
+drumeo,352707,Kim Mitchell,All We Are,Rock
+drumeo,352709,Lit,My Own Worst Enemy,Rock
+drumeo,352711,Living Colour,Love Rears Its Ugly Head,Rock
+drumeo,352713,Mammoth WVH,Epiphany,Rock
+drumeo,352715,Maroon 5,Sunday Morning,Rock
+drumeo,352717,Muse,Plug In Baby,Rock
+drumeo,352719,Placebo,Nancy Boy,Rock
+drumeo,352721,Public Service Broadcasting,Gagarin,Rock
+drumeo,352723,Pulp,Common People,Rock
+drumeo,352725,Red Hot Chili Peppers,Otherside,Rock
+drumeo,352727,Soundgarden,Rusty Cage,Rock
+drumeo,352729,The B-52's,Rock Lobster,Rock
+drumeo,352731,The Raconteurs,Steady As She Goes,Rock
+drumeo,352743,Niacin,Things Ain't Like They Used To Be,Rock
+drumeo,352746,Steely Dan,Babylon Sisters,Rock
+drumeo,354795,The Beatles,Twist And Shout,Rock
+drumeo,356003,Cactus,Evil,Rock
+drumeo,356005,King Cobra,Hunger,Rock
+drumeo,356007,Rod Stewart,Da Ya Think I’m Sexy?,Rock
+drumeo,356009,Rod Stewart,Young Turks,Rock
+drumeo,356011,Vanilla Fudge,You Keep Me Hangin' On,Rock
+drumeo,356013,Audioslave,Doesn't Remind Me,Rock
+drumeo,356015,Chris Isaak,Wicked Game,Rock
+drumeo,356017,Crowded House,Don't Dream It's Over,Rock
+drumeo,356020,Danzig,Mother,Rock
+drumeo,356022,David Bowie,Ashes To Ashes,Rock
+drumeo,356026,Elton John,Susie (Dramas),Rock
+drumeo,356028,Faith No More,Midlife Crisis,Rock
+drumeo,356030,Genesis,Follow You Follow Me,Rock
+drumeo,356032,Gin Blossoms,Hey Jealousy,Rock
+drumeo,356036,Hole,Celebrity Skin,Rock
+drumeo,356038,Joan Jett & The Blackhearts,I Hate Myself For Loving You,Rock
+drumeo,356040,KISS,Detroit Rock City,Rock
+drumeo,356042,Linkin Park,Faint,Rock
+drumeo,356046,Oasis,Champagne Supernova,Rock
+drumeo,356048,Sammy Hagar,Give To Live,Rock
+drumeo,356050,Screaming Trees,Nearly Lost You,Rock
+drumeo,356052,Simple Minds,Alive And Kicking,Rock
+drumeo,356057,The Jimi Hendrix Experience,Little Wing,Rock
+drumeo,356059,The Offspring,Gone Away,Rock
+drumeo,356063,Toto,I Will Remember,Rock
+drumeo,356065,Tracy Chapman,Give Me One Reason,Rock
+drumeo,356067,Weezer,Hash Pipe,Rock
+drumeo,356069,Abba,I Still Have Faith In You,Pop
+drumeo,356071,Billie Eilish,Happier Than Ever,Pop
+drumeo,356073,Billie Eilish,No Time To Die,Pop
+drumeo,356077,Coldplay,Higher Power,Rock
+drumeo,356079,Doja Kat,Kiss Me More,Rock
+drumeo,356083,Olivia Rodrigo,Drivers License,Pop
+drumeo,356086,St. Vincent,Pay Your Way In Pain,Pop
+drumeo,356088,The Kid LAROI & Justin Bieber,Stay,Pop
+drumeo,357338,DarWin,Forever,Rock
+drumeo,357344,Steve Lukather,Party In Simon's Pants,Rock
+drumeo,357346,Toto,Bottom Of Your Soul,Rock
+drumeo,358910,Foo Fighters,Alone + Easy Target,Rock
+drumeo,358912,Foo Fighters,Exhausted,Rock
+drumeo,358914,Foo Fighters,Floaty,Rock
+drumeo,358916,Foo Fighters,Good Grief,Rock
+drumeo,358918,Foo Fighters,I'll Stick Around,Rock
+drumeo,358920,Foo Fighters,"Oh, George",Rock
+drumeo,358922,Foo Fighters,Wattershed,Rock
+drumeo,358924,Foo Fighters,Weenie Beenie,Rock
+drumeo,358926,Foo Fighters,X-Static,Rock
+drumeo,358928,Foo Fighters,Ain't It The Life,Rock
+drumeo,358930,Foo Fighters,Aurora,Rock
+drumeo,358932,Foo Fighters,Breakout,Rock
+drumeo,358934,Foo Fighters,Generator,Rock
+drumeo,358936,Foo Fighters,Gimme Stitches,Rock
+drumeo,358938,Foo Fighters,Headwires,Rock
+drumeo,358940,Foo Fighters,Live-In Skin,Rock
+drumeo,358942,Foo Fighters,M.I.A.,Rock
+drumeo,358944,Foo Fighters,Next Year,Rock
+drumeo,358946,Foo Fighters,Stacked Actors,Rock
+drumeo,358948,Foo Fighters,Burn Away,Rock
+drumeo,358950,Foo Fighters,Come Back,Rock
+drumeo,358952,Foo Fighters,Disenchanted Lullaby,Rock
+drumeo,358954,Foo Fighters,Halo,Rock
+drumeo,358956,Foo Fighters,Have It All,Rock
+drumeo,358958,Foo Fighters,Lonely As You,Rock
+drumeo,358960,Foo Fighters,Low,Rock
+drumeo,358962,Foo Fighters,Overdrive,Rock
+drumeo,358964,Foo Fighters,Another Round,Rock
+drumeo,358966,Foo Fighters,Cold Day In The Sun,Rock
+drumeo,358968,Foo Fighters,DOA,Rock
+drumeo,358970,Foo Fighters,End Over End,Rock
+drumeo,358972,Foo Fighters,Free Me,Rock
+drumeo,358974,Foo Fighters,Hell,Rock
+drumeo,358976,Foo Fighters,In Your Honor,Rock
+drumeo,358978,Foo Fighters,Miracle,Rock
+drumeo,358980,Foo Fighters,No Way Back,Rock
+drumeo,358982,Foo Fighters,On The Mend,Rock
+drumeo,358984,Foo Fighters,Over And Out,Rock
+drumeo,358986,Foo Fighters,Resolve,Rock
+drumeo,358988,Foo Fighters,Still,Rock
+drumeo,358990,Foo Fighters,The Deepest Blues Are Black,Rock
+drumeo,358992,Foo Fighters,The Last Song,Rock
+drumeo,358994,Foo Fighters,Virginia Moon,Rock
+drumeo,358996,Foo Fighters,What If I Do?,Rock
+drumeo,358998,Foo Fighters,"But, Honestly",Rock
+drumeo,359000,Foo Fighters,"Cheer Up, Boys (Your Make Up Is Running)",Rock
+drumeo,359002,Foo Fighters,Come Alive,Rock
+drumeo,359004,Foo Fighters,Erase/Replace,Rock
+drumeo,359006,Foo Fighters,Statues,Rock
+drumeo,359008,Foo Fighters,Stranger Things Have Happened,Rock
+drumeo,359010,Foo Fighters,A Matter Of Time,Rock
+drumeo,359012,Foo Fighters,Back & Forth,Rock
+drumeo,359014,Foo Fighters,I Should Have Known,Rock
+drumeo,359016,Foo Fighters,Miss The Misery,Rock
+drumeo,359018,Foo Fighters,Congregation,Rock
+drumeo,359020,Foo Fighters,I Am A River,Rock
+drumeo,359022,Foo Fighters,In The Clear,Rock
+drumeo,359024,Foo Fighters,Outside,Rock
+drumeo,359026,Foo Fighters,Something From Nothing,Rock
+drumeo,359028,Foo Fighters,Subterranean,Rock
+drumeo,359030,Foo Fighters,The Feast And The Famine,Rock
+drumeo,359032,Foo Fighters,What Did I Do?/God As My Witness,Rock
+drumeo,359034,Foo Fighters,Arrows,Rock
+drumeo,359036,Foo Fighters,Concrete And Gold,Rock
+drumeo,359038,Foo Fighters,Dirty Water,Rock
+drumeo,359040,Foo Fighters,Happy Ever After (Zero Hour),Rock
+drumeo,359042,Foo Fighters,La Dee Da,Rock
+drumeo,359044,Foo Fighters,Make It Right,Rock
+drumeo,359046,Foo Fighters,Run,Rock
+drumeo,359048,Foo Fighters,Sunday Rain,Rock
+drumeo,359050,Foo Fighters,T-Shirt,Rock
+drumeo,359052,Foo Fighters,The Line,Rock
+drumeo,359054,Foo Fighters,Chasing Birds,Rock
+drumeo,359056,Foo Fighters,Cloudspotter,Rock
+drumeo,359058,Foo Fighters,Holding Poison,Rock
+drumeo,359060,Foo Fighters,Love Dies Young,Rock
+drumeo,359062,Foo Fighters,Making A Fire,Rock
+drumeo,359064,Foo Fighters,Medicine At Midnight,Rock
+drumeo,359066,Foo Fighters,No Son Of Mine,Rock
+drumeo,359068,Foo Fighters,Shame Shame,Rock
+drumeo,359070,Foo Fighters,Waiting On A War,Rock
+drumeo,359072,Foo Fighters,More Than A Woman,Rock
+drumeo,359074,Foo Fighters,Night Fever,Rock
+drumeo,359076,Foo Fighters,Shadow Dancing,Rock
+drumeo,359078,Foo Fighters,Tragedy,Rock
+drumeo,359080,Foo Fighters,You Should Be Dancing,Rock
+drumeo,359967,Alice In Chains,Rain When I Die,Rock
+drumeo,359991,Elle King,Ex's & Oh's,Pop
+drumeo,360007,Phil Collins,You'll Be In My Heart,Pop
+drumeo,360017,The Cure,Friday I'm In Love,Rock
+drumeo,360021,The Moody Blues,I'm Just A Singer (In A Rock And Roll Band),Rock
+drumeo,361689,Journey,Where Were You,Rock
+drumeo,361691,Journey,Where Were You,Rock
+drumeo,362428,Bonnie Tyler,Holding Out For A Hero,Rock
+drumeo,362430,Cee Lo Green And Daryl Hall,I Can't Go For That,Rock
+drumeo,362472,David Lee Roth,Just Like Paradise,Rock
+drumeo,362474,Don Henley,Workin’ It,Rock
+drumeo,364667,Christopher Cross,Sailing,Rock
+drumeo,364710,LCD Soundsystem,Dance Yrself Clean,Rock
+drumeo,364722,Men At Work,Who Can It Be Now?,Rock
+drumeo,364752,Red,Start Again,Rock
+drumeo,365649,Butthole Surfers,Pepper,Rock
+drumeo,365659,Live,I Alone,Rock
+drumeo,365685,Willie Nile,One Guitar,Rock
+drumeo,366280,The Allman Brothers Band,No One To Run With,Rock
+drumeo,371130,David Bowie,Young Americans,Rock
+drumeo,371160,The Commitments,Chain Of Fools,Rock
+drumeo,371331,Pantera,Planet Caravan,Rock
+drumeo,371334,Pantera,Planet Caravan,Rock
+drumeo,371405,No Doubt,Hella Good,Rock
+drumeo,373373,Linda Ronstadt,You're No Good,Rock
+drumeo,373377,Natalie Merchant,Wonder,Rock
+drumeo,373379,Paramore,That's What You Get,Rock
+drumeo,373381,Paul Simon,You Can Call Me Al,Pop
+drumeo,373383,Poison,Unskinny Bop,Rock
+drumeo,373385,Ratt,Round And Round,Rock
+drumeo,373387,Red Hot Chili Peppers,Easily,Rock
+drumeo,373389,Sex Pistols,God Save The Queen,Rock
+drumeo,373391,Sheryl Crow,If It Makes You Happy,Rock
+drumeo,373395,Soundgarden,Blow Up The Outside World,Rock
+drumeo,373397,Stand Atlantic,Jurassic Park,Rock
+drumeo,373401,The Smashing Pumpkins,Zero,Rock
+drumeo,373403,The Who,Pinball Wizard,Rock
+drumeo,373405,Gino Vannelli,Black Cars,Rock
+drumeo,373484,Jimmy Barnes,Message To My Girl,Rock
+drumeo,373486,Madonna,Hung Up,Pop
+drumeo,373786,3 Doors Down,It's Not My Time,Rock
+drumeo,373788,Alice Cooper,Hey Stoopid,Rock
+drumeo,373790,Alice Cooper,Welcome To My Nightmare,Rock
+drumeo,373792,Alice In Chains,Check My Brain,Rock
+drumeo,373794,All Time Low,Damned If I Do Ya (Damned If I Don't),Rock
+drumeo,373806,Blink-182,Down,Rock
+drumeo,373808,Bruce Springsteen,Glory Days,Rock
+drumeo,373810,Bruno Mars,Finesse,Rock
+drumeo,373821,KISS,Cold Gin,Rock
+drumeo,373823,Limp Bizkit,Rollin' (Air Raid Vehicle),Rock
+drumeo,373825,Maroon 5,She Will Be Loved,Rock
+drumeo,373836,Nickelback,Burn It To The Ground,Rock
+drumeo,373838,Prince,1999,Rock
+drumeo,373840,R.E.M.,Everybody Hurts,Rock
+drumeo,373846,The Rolling Stones,Brown Sugar,Rock
+drumeo,373848,Third Eye Blind,Graduate,Rock
+drumeo,373851,Three Days Grace,I Am Machine,Rock
+drumeo,373853,Tom Petty & The Heartbreakers,Refugee,Rock
+drumeo,373855,Train,Bulletproof Picasso,Rock
+drumeo,373858,Wings,Live And Let Die,Rock
+drumeo,374198,The Rolling Stones,Not Fade Away,Rock
+drumeo,374523,10 Years,The Shift,Rock
+drumeo,374525,ABBA,The Visitors,Pop
+drumeo,374529,Avril Lavigne,Bois Lie,Pop
+drumeo,374532,Bad Religion,Los Angeles Is Burning,Rock
+drumeo,374537,Big Country,Fields Of Fire,Rock
+drumeo,374547,Bruce Springsteen,No Surrender,Rock
+drumeo,374549,Bruno Mars,24K Magic,Rock
+drumeo,374552,Chicago,Ballet For A Girl In Buchannon,Rock
+drumeo,374554,David Bowie,Look Back In Anger,Rock
+drumeo,374558,Eric Clapton,She’s Waiting,Rock
+drumeo,374560,Fiona Apple,Ladies,Pop
+drumeo,374567,Franz Ferdinand,No You Girls,Rock
+drumeo,374575,King Crimson,Level Five,Rock
+drumeo,374578,Lady Gaga And Bradley Cooper,Shallow,Pop
+drumeo,374580,Lake Street Dive,I Don’t Care About You,Rock
+drumeo,374584,Live,Pain Lies On The Riverside,Rock
+drumeo,374586,Lord Huron,Meet Me In The Woods,Rock
+drumeo,374588,Lucifer’s Friend,Any Day Now,Rock
+drumeo,374590,Monster Truck,Don’t Tell Me How To Live,Rock
+drumeo,374594,OneRepublic,Love Runs Out,Rock
+drumeo,374596,Prince,Diamonds And Pearls,Pop
+drumeo,374600,Ride,Vapour Trail,Rock
+drumeo,374608,Sex Pistols,Silly Thing,Rock
+drumeo,374610,Skid Row,Youth Gone Wild,Rock
+drumeo,374615,Stray Cats,Stray Cat Strut,Rock
+drumeo,374617,Tesla,What You Give,Rock
+drumeo,374619,The Beaches,T-Shirt,Rock
+drumeo,374621,The Cure,Push,Rock
+drumeo,374629,The Stone Roses,Fools Gold,Rock
+drumeo,374633,Theory Of A Deadman,Bad Girlfriend,Rock
+drumeo,374635,Tracy Chapman,America,Pop
+drumeo,374638,U2,Ordinary Love,Rock
+drumeo,374641,Van Halen,Hang ‘em High,Rock
+drumeo,374643,Warpaint,Love Is To Die,Rock
+drumeo,374699,Styx,Coming Out The Other Side,Rock
+drumeo,374701,Styx,Blue Collar Man (Long Nights),Rock
+drumeo,374703,Styx,Fooling Yourself (The Angry Young Man),Rock
+drumeo,375189,alt-J,Intro,Rock
+drumeo,375191,Ben Folds Five,Song For The Dumped,Rock
+drumeo,375193,Bill Withers,Use Me,Rock
+drumeo,375197,Celldweller,Eon,Rock
+drumeo,375199,Derek And The Dominos,Layla,Rock
+drumeo,375201,Elton John,Goodbye Yellow Brick Road,Rock
+drumeo,375203,Garbage,Only Happy When It Rains,Rock
+drumeo,375208,Paramore,Decode,Rock
+drumeo,375210,Status Quo,Rockin' All Over The World,Rock
+drumeo,375212,Steve Earle,Copperhead Road,Rock
+drumeo,375216,The Carpenters,(They Long to Be) Close to You,Rock
+drumeo,375218,The Cars,You Might Think,Rock
+drumeo,375220,Toadies,Possum Kingdom,Rock
+drumeo,375222,Ugly Kid Joe,Everything About You,Rock
+drumeo,375228,Steely Dan,Third World Man,Rock
+drumeo,375383,Bruno Mars,That's What I Like,Rock
+drumeo,375385,Coldplay,God Put A Smile Upon Your Face,Rock
+drumeo,375387,Coldplay,Politik,Rock
+drumeo,375389,Daughtry,Life After You,Rock
+drumeo,375391,Daughtry,September,Rock
+drumeo,375393,Daughtry,You Don't Belong,Rock
+drumeo,375395,Don Henley,Dirty Laundry,Rock
+drumeo,375397,Fleetwood Mac,Don't Stop,Rock
+drumeo,375401,Jimmy Buffett,Margaritaville,Rock
+drumeo,375403,Lincoln Brewster,More Than Amazing,Rock
+drumeo,375405,Prince,Little Red Corvette,Rock
+drumeo,375413,Stan Getz & Joao Gilberto,The Girl From Ipanema,Rock
+drumeo,375415,Tom Petty & The Heartbreakers,Don't Do Me Like That,Rock
+drumeo,375417,Tom Petty & The Heartbreakers,Here Comes My Girl,Rock
+drumeo,375419,Tom Petty & The Heartbreakers,Mary Jane's Last Dance,Rock
+drumeo,375642,Alessia Cara,Make It To Christmas,Rock
+drumeo,375647,Bob & Doug McKenzie,Take Off,Holiday
+drumeo,375649,For King & Country,Little Drummer Boy,Holiday
+drumeo,375652,Gwen Stefani,You Make It Feel Like Christmas,Holiday
+drumeo,375656,Michael Buble,Santa Claus Is Comin' To Town,Jazz
+drumeo,375659,Michael Buble,White Christmas,Jazz
+drumeo,375661,Trans-Siberian Orchestra,Carol Of The Bells,Holiday
+drumeo,375663,Twisted Sister,Heavy Metal Christmas (The Twelve Days Of Christmas),Holiday
+drumeo,375666,Twisted Sister,The Christmas Song (Chestnuts Roasting On An Open Fire),Holiday
+drumeo,376556,Maynard Ferguson,Birdland,Jazz
+drumeo,376577,The Prodigy,Firestarter,Electronic
+drumeo,377124,Santana,Europa (Earth's Cry Heaven's Smile),Latin/World
+drumeo,381564,Creedence Clearwater Revival,I Put A Spell On You,Rock
+drumeo,381571,Elton John,Daniel,Rock
+drumeo,381596,Rage Against The Machine,Testify,Metal
+drumeo,381600,The Prodigy,Breathe,Electronic
+drumeo,382370,Cory Wong & Dirty Loops,Follow The Light,Funk
+drumeo,382372,Dave Matthews Band,Stay,Rock
+drumeo,382433,Spinal Tap,Stonehenge,Soundtrack
+drumeo,382464,Michael Sembello,Maniac,Soundtrack
+drumeo,382468,Nickelback,Far Away,Rock
+drumeo,383891,Genesis,Second Home By The Sea,Rock
+drumeo,383893,Phil Collins,A Groovy Kind Of Love,Soundtrack
+drumeo,383895,Phil Collins,Hand In Hand,Pop
+drumeo,383897,Phil Collins,Take Me Home,Metal
+drumeo,384105,A Day To Remember,City Of Ocala,Metal
+drumeo,384107,A Day To Remember,It's Complicated,Metal
+drumeo,384207,Anderson .Paak & Justin Timberlake,Just Sing,Soundtrack
+drumeo,384257,Bang Tango,Attack Of Life,Rock
+drumeo,384307,Bon Jovi,Bounce,Rock
+drumeo,384309,Bon Jovi,Undivided,Rock
+drumeo,384311,Bon Jovi,No Apologies,Rock
+drumeo,384313,Bon Jovi,Complicated,Rock
+drumeo,384315,Bon Jovi,I Want To Be Loved,Rock
+drumeo,384317,Bon Jovi,Story Of My Life,Rock
+drumeo,384319,Bon Jovi,Welcome To Wherever You Are,Rock
+drumeo,384321,Bon Jovi,Who Says You Can't Go Home,Rock
+drumeo,384323,Bon Jovi,Summertime,Rock
+drumeo,384325,Bon Jovi,Superman Tonight,Rock
+drumeo,384351,Bruce Springsteen,Bobby Jean,Rock
+drumeo,384353,Bruce Springsteen,Cover Me,Rock
+drumeo,384355,Bruce Springsteen,Darlington County,Rock
+drumeo,384357,Bruce Springsteen,Downbound Train,Rock
+drumeo,384359,Bruce Springsteen,I'm Goin' Down,Rock
+drumeo,384361,Bruce Springsteen,Working On The Highway,Rock
+drumeo,384363,Bruce Springsteen,Thunder Road,Rock
+drumeo,384365,Bruce Springsteen,Candy's Room,Rock
+drumeo,384367,Bruce Springsteen,Human Touch,Rock
+drumeo,384369,Bruce Springsteen,The Rising,Rock
+drumeo,384397,Celine Dion,Beauty And The Beast,Soundtrack
+drumeo,384419,Dashboard Confessional,Belle Of The Boulevard,Rock
+drumeo,384421,Dashboard Confessional,Everybody Learns From Disaster,Rock
+drumeo,384423,Dashboard Confessional,Get Me Right,Rock
+drumeo,384425,Dashboard Confessional,Until Morning,Rock
+drumeo,384427,Daughtry,Start Of Something Good,Rock
+drumeo,384429,Daughtry,Over You,Rock
+drumeo,384431,Daughtry,Sorry,Rock
+drumeo,384433,Daughtry,Every Time You Turn Around,Rock
+drumeo,384435,Daughtry,Ghost Of Me,Rock
+drumeo,384447,Death Cab For Cutie,You Are A Tourist,Rock
+drumeo,384469,Dua Lipa,One Kiss,Pop
+drumeo,384471,Dua Lipa,Be The One,Pop
+drumeo,384473,Dua Lipa,Electricity,Pop
+drumeo,384475,Dua Lipa,Lost In Your Light,Pop
+drumeo,384477,Dua Lipa,Pretty Please,Pop
+drumeo,384527,Fleetwood Mac,Gypsy,Rock
+drumeo,384531,Flying Lotus,Cold Dead,Hip-Hop/Rap
+drumeo,384533,Flying Lotus,Dead Man's Tetris,Hip-Hop/Rap
+drumeo,384535,Flying Lotus,The Protest,Hip-Hop/Rap
+drumeo,384537,Flying Lotus,Turkey Dog Coma,Hip-Hop/Rap
+drumeo,384539,Flying Lotus,Turtles,Hip-Hop/Rap
+drumeo,384651,John Mayer,Half Of My Heart,Rock
+drumeo,384653,John Mayer,Clarity,Rock
+drumeo,384665,Johnny Burnette,Rock Billy Boogie,Rock
+drumeo,384683,Justin Timberlake,The Otherside,Soundtrack
+drumeo,384719,KISS,Rock Bottom,Rock
+drumeo,384745,Leona Lewis,Better In Time,R&B/Soul
+drumeo,384747,Leona Lewis,Bleeding Love,R&B/Soul
+drumeo,384749,Leona Lewis,Footprints In The Sand,R&B/Soul
+drumeo,384751,Les Dudek,Assault and Battery,Rock
+drumeo,384783,Los Lonely Boys,Heaven,Latin/World
+drumeo,384873,New Riders Of The Purple Sage,I Don't Know You,Country
+drumeo,384937,Prince,All The Critics Love U In New York,Pop
+drumeo,384939,Prince,Automatic,Pop
+drumeo,384941,Prince,D.M.S.R.,Pop
+drumeo,384943,Prince,Delirious,Pop
+drumeo,384945,Prince,Free,Pop
+drumeo,384947,Prince,International Lover,Pop
+drumeo,384949,Prince,Lady Cab Driver,Pop
+drumeo,384951,Prince,Let's Pretend We're Married,Pop
+drumeo,384953,Prince,Something In The Water (Does Not Compute),Pop
+drumeo,384955,Prince,America,Pop
+drumeo,384957,Prince,Pop Life,Pop
+drumeo,384959,Prince,Gett Off,Pop
+drumeo,384961,Prince,The Everlasting Now,Pop
+drumeo,384963,Prince,The Work Pt.1,Pop
+drumeo,384965,Prince,When You Were Mine,Pop
+drumeo,384977,Rage Against The Machine,Take The Power Back,Metal
+drumeo,384991,Red Hot Chili Peppers,I Could Have Lied,Rock
+drumeo,384993,Red Hot Chili Peppers,Universally Speaking,Rock
+drumeo,384997,Richie Sambora,Ballad Of Youth,Rock
+drumeo,385003,Rihanna,California King Bed,R&B/Soul
+drumeo,385121,Stan Getz & Joao Gilberto,So Danco Samba,Latin/World
+drumeo,385151,Styx,Babe,Rock
+drumeo,385153,Styx,Boat On The River,Rock
+drumeo,385155,Styx,Borrowed Time,Rock
+drumeo,385157,Styx,Eddie,Rock
+drumeo,385159,Styx,First Time,Rock
+drumeo,385161,Styx,Lights,Rock
+drumeo,385163,Styx,Love In The Midnight,Rock
+drumeo,385165,Styx,Never Say Never,Rock
+drumeo,385167,Styx,Why Me,Rock
+drumeo,385169,Styx,A Monster,Rock
+drumeo,385171,Styx,Another Farewell,Rock
+drumeo,385173,Styx,Common Ground,Rock
+drumeo,385175,Styx,Hold Back The Darkness,Rock
+drumeo,385177,Styx,Long Live The King,Rock
+drumeo,385179,Styx,Lost At Sea,Rock
+drumeo,385181,Styx,Our Wonderful Lives,Rock
+drumeo,385183,Styx,Reveries,Rock
+drumeo,385185,Styx,Save Us From Ourselves,Rock
+drumeo,385187,Styx,Sound The Alarm,Rock
+drumeo,385189,Styx,Stream,Rock
+drumeo,385191,Styx,The Flight Of Our Lives,Rock
+drumeo,385193,Styx,To Those,Rock
+drumeo,385195,Styx,Cold War,Rock
+drumeo,385197,Styx,Don't Let It End,Rock
+drumeo,385199,Styx,Don't Let It End (Reprise),Rock
+drumeo,385201,Styx,Double Life,Rock
+drumeo,385203,Styx,Haven't We Been Here Before,Rock
+drumeo,385205,Styx,Heavy Metal Poisoning,Rock
+drumeo,385207,Styx,High Time,Rock
+drumeo,385209,Styx,Just Get Through This Night,Rock
+drumeo,385211,Styx,Mr. Roboto,Rock
+drumeo,385213,Styx,A.D. 1928,Rock
+drumeo,385215,Styx,A.D. 1958,Rock
+drumeo,385217,Styx,"Half Penny, Two Penny",Rock
+drumeo,385219,Styx,Lonely People,Rock
+drumeo,385221,Styx,Nothing Ever Goes As Planned,Rock
+drumeo,385223,Styx,Rockin' The Paradise,Rock
+drumeo,385225,Styx,She Cares,Rock
+drumeo,385227,Styx,Snowblind,Rock
+drumeo,385229,Styx,The Best Of Times,Rock
+drumeo,385231,Styx,Too Much Time On My Hands,Rock
+drumeo,385233,Styx,Aku-Aku,Rock
+drumeo,385235,Styx,Great White Hope,Rock
+drumeo,385237,Styx,I'm O.K.,Rock
+drumeo,385239,Styx,Lords Of The Ring,Rock
+drumeo,385241,Styx,Pieces Of Eight,Rock
+drumeo,385243,Styx,Queen Of Spades,Rock
+drumeo,385245,Styx,Sing For The Day,Rock
+drumeo,385247,Styx,Castle Walls,Rock
+drumeo,385249,Styx,Man In The Wilderness,Rock
+drumeo,385251,Styx,Superstars,Rock
+drumeo,385253,Styx,The Grand Finale,Rock
+drumeo,385255,Styx,The Grand Illusion,Rock
+drumeo,385285,Tame Impala,Sestri Levante,Rock
+drumeo,385287,Tame Impala,Nothing That Has Happened So Far Has Been Anything We Could Control,Rock
+drumeo,385423,The Weeknd,In Your Eyes,Pop
+drumeo,385441,Toto,Takin' It Back,Rock
+drumeo,385443,Toto,Good For You,Rock
+drumeo,385445,Toto,Orphan,Rock
+drumeo,385519,Yes,Hold On,Rock
+drumeo,385521,Yes,It Can Happen,Rock
+drumeo,385523,Yes,Leave It,Rock
+drumeo,385525,Yes,Love Will Find A Way,Rock
+drumeo,385527,Yes,Rhythm Of Love,Rock
+drumeo,385529,Yes,Your Move,Rock
+drumeo,385549,Bloodhound Gang,The Bad Touch,Rock
+drumeo,385551,Bob Dylan,Bob Dylan's 115th Dream,Folk
+drumeo,385553,Bob Dylan,Love Minus Zero/No Limit,Folk
+drumeo,385555,Bob Dylan,On The Road Again,Folk
+drumeo,385557,Bob Dylan,She Belongs To Me,Folk
+drumeo,385559,Bob Dylan,"It Takes A Lot To Laugh, It Takes A Train To Cry",Folk
+drumeo,385561,Bob Dylan,Just Like Tom Thumb's Blues,Folk
+drumeo,385563,Bob Dylan,Queen Jane Approximately,Folk
+drumeo,385565,Bob Dylan,Tombstone Blues,Folk
+drumeo,385567,Bob Dylan,Duquesne Whistle,Folk
+drumeo,385569,Bob Dylan,Soon After Midnight,Folk
+drumeo,385571,Bob Dylan,Tin Angel,Folk
+drumeo,385573,Bob Dylan,Dirt Road Blues,Folk
+drumeo,385575,Bob Dylan,Standing In The Doorway,Folk
+drumeo,385577,Bob Dylan,Tryin' To Get To Heaven,Folk
+drumeo,385579,Bobby Helms,Jingle Bell Rock,Holiday
+drumeo,385595,Brenda Lee,Rockin' Around The Christmas Tree,Holiday
+drumeo,385597,Daft Punk,Digital Love,Pop
+drumeo,385599,Daft Punk,Face To Face,Pop
+drumeo,385601,Daft Punk,"Harder, Better, Faster, Stronger",Pop
+drumeo,385603,Daft Punk,One More Time,Pop
+drumeo,385605,Daft Punk,Short Circuit,Pop
+drumeo,385607,Daft Punk,Something About Us,Pop
+drumeo,385609,Daft Punk,Voyager,Pop
+drumeo,385611,Daft Punk,Alive,Pop
+drumeo,385613,Daft Punk,Around The World,Pop
+drumeo,385615,Daft Punk,Da Funk,Pop
+drumeo,385617,Daft Punk,Human After All,Pop
+drumeo,385619,Daft Punk,Make Love,Pop
+drumeo,385621,Daft Punk,Instant Crush,Pop
+drumeo,385623,Daft Punk,Within,Pop
+drumeo,385633,Devo,Gates Of Steel,Pop
+drumeo,385635,Devo,Girl U Want,Pop
+drumeo,385637,Devo,Snowball,Pop
+drumeo,385639,Devo,Beautiful World,Pop
+drumeo,385641,Devo,Going Under,Pop
+drumeo,385643,Devo,Big Mess,Pop
+drumeo,385645,Devo,That's Good,Pop
+drumeo,385647,Devo,(I Can't Get No) Satisfaction,Pop
+drumeo,385651,Gillian Welch,One More Dollar,Country
+drumeo,385653,Gillian Welch,Only One And Only,Country
+drumeo,385655,Gillian Welch,Paper Wings,Country
+drumeo,385657,Gillian Welch,Look At Miss Ohio,Country
+drumeo,385659,Gillian Welch,Lowlands,Country
+drumeo,385661,Gillian Welch,One Monkey,Country
+drumeo,385663,Gillian Welch,Wayside/Back In Time,Country
+drumeo,385665,Gillian Welch,Wrecking Ball,Country
+drumeo,385667,Gillian Welch,My First Lover,Country
+drumeo,385675,Johnny Cash,The Ballad Of Ira Hayes,Folk
+drumeo,385677,Johnny Cash,I've Been Everywhere,Folk
+drumeo,385679,Johnny Cash,Folsom Prison Blues,Folk
+drumeo,385681,Johnny Cash,Ring Of Fire,Folk
+drumeo,385725,MGMT,Kids,Pop
+drumeo,385727,MGMT,Time To Pretend,Pop
+drumeo,385729,MGMT,Weekend Wars,Pop
+drumeo,385747,Mumford & Sons,Babel,Folk
+drumeo,385749,Mumford & Sons,Below My Feet,Folk
+drumeo,385751,Mumford & Sons,Broken Crown,Folk
+drumeo,385753,Mumford & Sons,Ghosts That We Knew,Folk
+drumeo,385755,Mumford & Sons,Holland Road,Folk
+drumeo,385757,Mumford & Sons,Hopeless Wanderer,Folk
+drumeo,385759,Mumford & Sons,I Will Wait,Folk
+drumeo,385761,Mumford & Sons,The Boxer,Folk
+drumeo,385763,Mumford & Sons,Whispers In The Dark,Folk
+drumeo,385765,Mumford & Sons,After The Storm,Folk
+drumeo,385767,Mumford & Sons,Awake My Soul,Folk
+drumeo,385769,Mumford & Sons,I Gave You All,Folk
+drumeo,385771,Mumford & Sons,Little Lion Man,Folk
+drumeo,385773,Mumford & Sons,Roll Away Your Stone,Folk
+drumeo,385775,Mumford & Sons,Sigh No More,Folk
+drumeo,385777,Mumford & Sons,White Blank Page,Folk
+drumeo,385779,Mumford & Sons,Winter Winds,Folk
+drumeo,385781,Neil Young,Cripple Creek Ferry,Folk
+drumeo,385783,Neil Young,I Believe In You,Folk
+drumeo,385785,Neil Young,"Oh, Lonesome Me",Folk
+drumeo,385787,Neil Young,Only Love Can Break Your Heart,Folk
+drumeo,385789,Neil Young,Till The Morning Comes,Folk
+drumeo,385791,Neil Young,Harvest,Folk
+drumeo,385793,Neil Young,Old Man,Folk
+drumeo,385795,Neil Young,Out On The Weekend,Folk
+drumeo,385797,Norah Jones,Don't Know Why,Pop
+drumeo,385799,Norah Jones,What Am I To You?,Pop
+drumeo,385801,Norah Jones,Unchained Melody,Pop
+drumeo,385803,Roy Orbison,All I Have To Do Is Dream,Pop
+drumeo,385805,Roy Orbison,Blue Bayou,Pop
+drumeo,385807,Roy Orbison,Dream,Pop
+drumeo,385809,Roy Orbison,In Dreams,Pop
+drumeo,385811,Roy Orbison,Lonely Wine,Pop
+drumeo,385813,Roy Orbison,Shahdaroba,Pop
+drumeo,385815,Roy Orbison,A Love So Beautiful,Pop
+drumeo,385817,Roy Orbison,California Blue,Pop
+drumeo,385819,Roy Orbison,In The Real World,Pop
+drumeo,385821,Roy Orbison,It's Over,Pop
+drumeo,385823,Roy Orbison,Dream Baby,Pop
+drumeo,385825,Roy Orbison,I Drove All Night,Pop
+drumeo,385827,Roy Orbison,Leah,Pop
+drumeo,385829,Roy Orbison,Only With You,Pop
+drumeo,385831,Roy Orbison,Sleepy Hollow,Pop
+drumeo,385833,Roy Orbison,Uptown,Pop
+drumeo,385855,Talking Heads,Life During Wartime,Pop
+drumeo,385857,Talking Heads,And She Was,Pop
+drumeo,385859,Talking Heads,Creatures Of Love,Pop
+drumeo,385861,Talking Heads,Stay Up Late,Pop
+drumeo,385863,Talking Heads,Take Me To The River,Pop
+drumeo,385865,Talking Heads,The Big Country,Pop
+drumeo,385867,Talking Heads,The Girl Wants To Be With The Girls,Pop
+drumeo,385869,Talking Heads,The Good Thing,Pop
+drumeo,385871,Talking Heads,Girlfriend Is Better,Pop
+drumeo,385873,Talking Heads,Making Flippy Floppy,Pop
+drumeo,385875,Talking Heads,Pull Up The Roots,Pop
+drumeo,385877,Talking Heads,This Must Be The Place,Pop
+drumeo,385879,Talking Heads,New Feeling,Pop
+drumeo,385881,Talking Heads,Sugar On My Tongue,Pop
+drumeo,385883,Talking Heads,"Uh Oh, Love Comes To Town",Pop
+drumeo,385885,Talking Heads,Love For Sale,Pop
+drumeo,385887,Talking Heads,"Wild, Wild Life",Pop
+drumeo,385889,The Brian Jonestown Massacre,Open Heart Surgery,Rock
+drumeo,385891,The Everly Brothers,"Gone, Gone, Gone",Pop
+drumeo,385893,The Everly Brothers,Let It Be Me,Pop
+drumeo,385895,The Everly Brothers,"Please Help, I'm Falling",Pop
+drumeo,385897,The Everly Brothers,Like Strangers,Pop
+drumeo,385899,The Everly Brothers,Bird Dog,Pop
+drumeo,385943,The Weeknd ft. Daft Punk,I Feel It Coming,Pop
+drumeo,386035,Weird Al Yankovic,Theme From Rocky XIII,Soundtrack
+drumeo,386051,Weird Al Yankovic,The Saga Begins,Soundtrack
+drumeo,386279,Genesis,Invisible Touch,Rock
+drumeo,386281,Genesis,Afterglow,Rock
+drumeo,386283,Genesis,Jesus He Knows Me,Rock
+drumeo,386285,Genesis,No Son Of Mine,Rock
+drumeo,386287,Phil Collins,Two Hearts,Soundtrack
+drumeo,387483,Green Day,Brain Stew,Rock
+drumeo,388200,Imagine Dragons,Radioactive,Pop
+drumeo,388295,Tool,Descending,Metal
+drumeo,388351,John Mayer,Wait Until Tomorrow,Rock
+drumeo,388635,John Denver,"Take Me Home, Country Roads",Rock
+drumeo,388700,James Gang,Walk Away,Rock
+drumeo,388847,Blinding Sunrise,Black Clover - Opening 3 - Black Rover,Metal
+drumeo,388849,Blinding Sunrise,Black Clover - Opening 3 - Black Rover,Metal
+drumeo,389022,RJD2,A Beautiful Mine (Theme From Mad Men),Hip-Hop/Rap
+drumeo,389028,Sha-Na-Na,Born To Hand Jive,Soundtrack
+drumeo,389032,Stevie Ray Vaughan,Voodoo Child (Slight Return),Blues
+drumeo,389040,Tedeschi Trucks Band,Midnight In Harlem,Jazz
+drumeo,389042,The Afghan Whigs,Debonair,Rock
+drumeo,389044,The Blues Brothers,She Caught The Katy,Soundtrack
+drumeo,389048,The Hooters,500 Miles,Rock
+drumeo,389052,The Presidents Of The United States Of America,Peaches,Rock
+drumeo,389062,Wilco,Pot Kettle Black,Pop
+drumeo,389099,America,A Horse With No Name,Rock
+drumeo,389103,Blondie,Union City Blue,Rock
+drumeo,389129,Joe Cocker,The Letter,Rock
+drumeo,389147,Platinum Blonde,Doesn’t Really Matter,Rock
+drumeo,389151,Alter Bridge,Open Your Eyes,Rock
+drumeo,389165,Labelle,Lady Marmelade,R&B/Soul
+drumeo,389169,Paramore,Hard Times,Rock
+drumeo,389175,Stromae,Alors On Danse,Pop
+drumeo,389177,The Doors,People Are Strange,Rock
+drumeo,389209,Joe Cocker,Now That The Magic Has Gone,Rock
+drumeo,389825,Animal Collective,Gem And I,Rock
+drumeo,390136,Billy Joel,Uptown Girl,Rock
+drumeo,390138,Chevelle,The Red,Rock
+drumeo,390142,Creed,Higher,Rock
+drumeo,390148,Dire Straits,Walk Of Life,Rock
+drumeo,390150,Harry Styles,As It Was,Rock
+drumeo,390162,Miley Cyrus,Flowers,Pop
+drumeo,390458,Genesis,Misunderstanding,Rock
+drumeo,390464,Missing Persons,U.S. Drag,Pop
+drumeo,390470,Paul Anka,Put Your Head On My Shoulder,Jazz
+drumeo,390515,Bowling For Soup,Almost,Rock
+drumeo,390552,Henry Mancini,The Pink Panther Theme,Soundtrack
+drumeo,390566,Sting,Englishman In New York,Pop
+drumeo,390834,J.D. McPherson,North Side Gal,Rock
+drumeo,390969,Bruce Hornsby,The Way It Is,Rock
+drumeo,390981,John Lennon,Jealous Guy,Rock
+drumeo,390995,Tina Turner,The Best,Rock
+drumeo,390997,Wilson Pickett,Mustang Sally,R&B/Soul
+drumeo,391096,Brandi Carlile,The Story,Rock
+drumeo,391098,Clutch,Electric Worry,Rock
+drumeo,391119,Pierce The Veil,King For A Day,Metal
+drumeo,391121,Taylor Swift,All Too Well,Pop
+drumeo,391123,Tori Amos,Cornflake Girl,Pop
+drumeo,391382,AFI,Miss Murder,Rock
+drumeo,391386,Bloc Party,Banquet,Pop
+drumeo,391394,Donald Fagen,The Nightfly,Pop
+drumeo,391398,Jamiroquai,Cosmic Girl,Funk
+drumeo,391400,Jvke,This Is What Heartbreak Feels Like,Pop
+drumeo,391402,Lenny Kravitz,It Ain't Over 'Til It's Over,Rock
+drumeo,391447,Cake,The Distance,Pop
+drumeo,391451,Finger Eleven,Paralyzer,Rock
+drumeo,391468,Matthew Wilder,Break My Stride,R&B/Soul
+drumeo,391476,Spacehog,In The Meantime,Rock
+drumeo,392053,Bruno Mars,Runaway Baby,R&B/Soul
+drumeo,392065,James Taylor,How Sweet It Is,Pop
+drumeo,392067,Level 42,Love Games,Rock
+drumeo,392071,Otis Redding,Hard To Handle,R&B/Soul
+drumeo,392075,System Of A Down,Lonely Day,Metal
+drumeo,392303,Billy Joel,Movin' Out (Anthony's Song),Rock
+drumeo,392309,Evanescence,My Immortal,Rock
+drumeo,392319,Joe Cocker,Hard Knocks,Rock
+drumeo,392321,Jvke,Golden Hour,Pop
+drumeo,392325,Marillion,Kayleigh,Rock
+drumeo,392329,Rise Against,Savior,Metal
+drumeo,392333,The Alan Parson Project,Eye In The Sky,Rock
+drumeo,392695,The White Stripes,Hello Operator,Rock
+drumeo,392697,The White Stripes,My Doorbell,Rock
+drumeo,392699,The White Stripes,Bone Broke,Rock
+drumeo,392701,The White Stripes,Rag & Bone,Rock
+drumeo,392703,The White Stripes,Dead Leaves & The Dirty Ground,Rock
+drumeo,392705,The White Stripes,The Union Forever,Rock
+drumeo,392792,Dave Grohl Josh Homme & Trent Reznor,Mantra,Rock
+drumeo,392796,American Football,Never Meant,Rock
+drumeo,392932,Alabama Shakes,Hold On,R&B/Soul
+drumeo,393037,Rage Against The Machine,Guerilla Radio,Rock
+drumeo,393039,Rage Against The Machine,Guerilla Radio,Rock
+drumeo,393117,Coheed And Cambria,Welcome Home,Rock
+drumeo,393125,Donna Summer,Hot Stuff,Disco
+drumeo,393127,Fito Paez,Giros,Latin/World
+drumeo,393135,James,Sit Down,Rock
+drumeo,393137,Lorde,Royals,Pop
+drumeo,393141,The Rolling Stones,Sweet Virginia,Rock
+drumeo,394017,Susan Tedeschi,Talking About,Blues
+drumeo,394090,Elder,Blind,Metal
+drumeo,394136,Invisible,El Anillo Del Capitán Beto,Rock
+drumeo,394138,Keane,Disconnected,Pop
+drumeo,394140,Michael Buble,Haven't Met You Yet,Jazz
+drumeo,394150,Red Hot Chili Peppers,Give It Away (Easy Version),Rock
+drumeo,394152,Red Hot Chili Peppers,Suck My Kiss (Easy Version),Rock
+drumeo,394154,Red Hot Chili Peppers,Breaking The Girl (Easy Version),Rock
+drumeo,394156,Red Hot Chili Peppers,Breaking The Girl (Easy Version),Rock
+drumeo,394160,Queen,Under Pressure (Easy Version),Rock
+drumeo,394162,Queen,Don't Stop Me Now (Easy Version),Rock
+drumeo,394165,Queen,We Are The Champions (Easy Version),Rock
+drumeo,394924,Average White Band,Got The Love,R&B/Soul
+drumeo,394930,James,Getting Away With It (All Messed Up),Rock
+drumeo,394948,Rage Against The Machine,Killing In The Name (Easy Version),Rock
+drumeo,395092,Dua Lipa,Break My Heart,Pop
+drumeo,395221,Lenny Kravitz,Are You Gonna Go My Way (Easy Version),Rock
+drumeo,395239,Rage Against The Machine,Know Your Enemy (Easy Version),Rock
+drumeo,395765,Nina Hagen Band,TV-Glotzer (White Punks on Dope),Rock
+drumeo,395773,Sandy Nelson,Teen Beat,Pop
+drumeo,395791,Jamiroquai,Cosmic Girl (Easy Version),Funk
+drumeo,395793,Guns N' Roses,Don't Cry (Easy Version),Rock
+drumeo,395795,Guns N' Roses,Don't Cry (Easy Version),Rock
+drumeo,395921,Dua Lipa,Dance The Night,Pop
+drumeo,396148,La Secta Allstar,Caido,Rock
+drumeo,396888,John Scofield,Groove Elation,Jazz
+drumeo,396892,Johnny Cash,Folsom Prison Blues (Easy Version),Folk
+drumeo,397456,Alicia Keys,No One,R&B/Soul
+drumeo,397483,Alicia Keys,No One,R&B/Soul
+drumeo,397485,Gnarles Barkley,Crazy,R&B/Soul
+drumeo,397497,The Doors,Love Me Two Times,Rock
+drumeo,397499,John Mayer,Belief,Rock
+drumeo,398053,Orville Peck,Lafayette,Rock
+drumeo,399291,Triumph,Fight The Good Fight,Metal
+drumeo,399295,Volbeat,Last Day Under The Sun,Metal
+drumeo,399858,Billy Squier,My Kinda Lover,Rock
+drumeo,399860,Screaming Females,Empty Head,Rock
+drumeo,401230,Rascal Flatts,Joy To The World,Holiday
+drumeo,401232,Dan Fogelberg,Same Auld Lang Syne,Holiday
+drumeo,401594,Dave Matthews Band,Grey Street,Rock
+drumeo,401612,Harry Styles,Sign Of The Times,Pop
+drumeo,401628,Phoenix,1901,Rock
+drumeo,402550,5 Seconds Of Summer,She's Kinda Hot,Pop
+drumeo,402606,Billy Joel,A Matter Of Trust,Pop
+drumeo,402608,Billy Joel,Prelude/Angry Young Man,Pop
+drumeo,402610,Billy Joel,Honesty,Pop
+drumeo,402612,Billy Joel,Easy Money,Pop
+drumeo,402614,Billy Joel,Allentown,Pop
+drumeo,402680,The Seatbelts,Tank!,Folk
+drumeo,402817,Justin Timberlake,Can't Stop The Feeling,Hip-Hop/Rap
+drumeo,403266,Justin Timberlake,Seniorita,Hip-Hop/Rap
+drumeo,403278,Wiz Khalifa,See You Again,Hip-Hop/Rap
+drumeo,403832,Labi Siffre,I Got The...,Hip-Hop/Rap
+drumeo,403839,Run D.M.C,Walk This Way,Hip-Hop/Rap
+drumeo,404361,Pitbull,Timber,Hip-Hop/Rap
+drumeo,404580,Santana,El Farol,Hip-Hop/Rap
+drumeo,404683,Dyke And The Blazers,Let A Woman Be A Woman,Funk
+drumeo,404685,"Earth, Wind & Fire",Serpentine Fire,Funk
+drumeo,404687,Eddie Kendricks,Keep On Truckin’,Funk
+drumeo,404689,George Duke,Dukey Stick,Funk
+drumeo,404691,George McCrae,I Get Lifted,Funk
+drumeo,404693,Isaac Hayes,Theme From Shaft,Funk
+drumeo,404695,James Brown,Papa’s Got A Brand New Bag (Parts 1 & 2),Funk
+drumeo,404697,Jamiroquai,Love Foolosophy,Funk
+drumeo,404699,Jamiroquai,You Give Me Something,Funk
+drumeo,404701,Jamiroquai,Canned Heat,Funk
+drumeo,404703,Jamiroquai,Alright,Funk
+drumeo,404705,Jamiroquai,Little L,Funk
+drumeo,404707,Louis Cole,Dead Inside Shuffle,Funk
+drumeo,404709,Ohio Players,Funky Worm,Funk
+drumeo,404711,Sly & The Family Stone,Hot Fun In The Summer Time,Funk
+drumeo,404713,Sly & The Family Stone,I Want To Take You Higher,Funk
+drumeo,404715,Stevie Wonder,Living For The City,Funk
+drumeo,404717,The Brothers Johnson,Get The Funk Out Ma Face,Funk
+drumeo,404720,The Commodores,Machine Gun,Funk
+drumeo,404722,The Gap Band,You Dropped A Bomb On Me,Funk
+drumeo,404724,The Gap Band,Burn Rubber On Me,Funk
+drumeo,404726,The Temptations,Shakey Ground,Funk
+drumeo,404728,Tom Tom Club,Genius Of Love,Funk
+drumeo,404730,War,Why Can’t We Be Friends,Funk
+drumeo,404732,War,Low Rider,Funk
+pianote,378459,Neil Young,Heart Of Gold,Folk
+pianote,378469,Neil Diamond,Sweet Caroline,Pop
+pianote,378507,P!nk,Try,Pop
+pianote,378513,John Mayer,Waiting On The World To Change,Rock
+pianote,378521,fun.,We Are Young,Pop
+pianote,378527,Jason Derulo,Whatcha Say,Pop
+pianote,378535,Whitney Houston,Where Do Broken Hearts Go,Pop
+pianote,378565,Adele,Million Years Ago,Folk
+pianote,378626,Vince Guaraldi,Christmas Time Is Here,Holiday
+pianote,378638,Nina Simone,"I Loves You, Porgy",Jazz
+pianote,378642,The Beach Boys,Wouldn't It Be Nice,Rock
+pianote,378644,The Supremes,Baby Love,R&B/Soul
+pianote,378658,Cutting Crew,(I Just) Died In Your Arms,Rock
+pianote,378662,Thirsty Merc,20 Good Reasons,Rock
+pianote,378690,Cyndi Lauper,All Through The Night,Pop
+pianote,378692,The Beatles,All You Need Is Love,Rock
+pianote,378702,Tom Petty And The Heartbreakers,American Girl,Rock
+pianote,378710,Charlie Puth,Attention,Pop
+pianote,378730,Celine Dion,Beauty And The Beast,Soundtrack
+pianote,378734,Kelly Clarkson,Behind These Hazel Eyes,Pop
+pianote,378738,Imagine Dragons,Believer,Pop
+pianote,378742,Joni Mitchell,Big Yellow Taxi,Folk
+pianote,378746,Leona Lewis,Bleeding Love,Pop
+pianote,378754,Kelly Clarkson,Breakaway,Pop
+pianote,378756,The Script,Breakeven,Rock
+pianote,378766,Mr. Mister,Broken Wings,Rock
+pianote,378770,The Foundations,Build Me Up Buttercup,R&B/Soul
+pianote,378780,Train,Calling All Angels,Rock
+pianote,378782,Elton John,Can You Feel The Love Tonight,Soundtrack
+pianote,378792,Simon & Garfunkel,Cecilia,Rock
+pianote,378810,Avril Lavigne,Complicated,Rock
+pianote,378822,Justin Timberlake,Cry Me A River,Pop
+pianote,378826,ABBA,Dancing Queen,Disco
+pianote,378828,Sam Smith,Dancing With A Stranger,Pop
+pianote,378844,Bobby McFerrin,Don’t Worry Be Happy,Jazz
+pianote,378846,Ella Fitzgerald,Dream A Little Dream,Jazz
+pianote,378852,Taio Cruz,Dynamite,Pop
+pianote,378866,P!nk,F**kin’ Perfect,Pop
+pianote,378872,Journey,Faithfully,Rock
+pianote,378880,Sting,Fields Of Gold,Rock
+pianote,378882,Rachel Platten,Fight Song,Pop
+pianote,378886,Coldplay,Fix You,Pop
+pianote,378890,Uncle Kracker,Follow Me,Pop
+pianote,378892,Tom Petty And The Heartbreakers,Free Fallin’,Rock
+pianote,378896,Marshmello & Anne-Marie,Friends,Pop
+pianote,378899,Shania Twain,From This Moment On,Country
+pianote,378901,Maren Morris,Girl,Pop
+pianote,378909,Maroon 5,Girls Like You,Pop
+pianote,378911,Supertramp,Give A Little Bit,Rock
+pianote,378935,Camila Cabello,Havana,Latin/World
+pianote,378937,Creedence Clearwater Revival,Have You Ever Seen The Rain,Rock
+pianote,378943,Linkin Park,Heavy,Rock
+pianote,378947,Lionel Richie,Hello,R&B/Soul
+pianote,378961,The Beatles,Hey Jude,Rock
+pianote,378965,Train,"Hey, Soul Sister",Pop
+pianote,378969,The Lumineers,Ho Hey,Folk
+pianote,378981,The Fray,How To Save A Life,Pop
+pianote,378983,Johnny Cash,Hurt,Country
+pianote,378989,Johnny Nash,I Can See Clearly Now,R&B/Soul
+pianote,378993,ZAYN / Taylor Swift,I Don’t Wanna Live Forever,Pop
+pianote,378995,Aerosmith,I Don’t Want To Miss A Thing,Rock
+pianote,379001,Aretha Franklin,I Say A Little Prayer,R&B/Soul
+pianote,379005,All-4-One,I Swear,R&B/Soul
+pianote,379007,Tommy James & The Shondells,I Think We’re Alone Now,Rock
+pianote,379011,Whitney Houston,I Will Always Love You,R&B/Soul
+pianote,379021,The Rembrandts,I’ll Be There For You,Rock
+pianote,379023,The Monkees,I’m A Believer,Rock
+pianote,379029,Jason Mraz,I’m Yours,Pop
+pianote,379031,Sarah McLachlan,Ice Cream,Pop
+pianote,379032,Beyonce,If I Were A Boy,Pop
+pianote,379036,Jennifer Lopez,If You Had My Love,R&B/Soul
+pianote,379038,Shawn Mendes,In My Blood,Pop
+pianote,379042,Van Morrison,Into The Mystic,Rock
+pianote,379048,Beyonce,Irreplaceable,Pop
+pianote,379062,Nelly,Just A Dream,Pop
+pianote,379071,Seal,Kiss From A Rose,R&B/Soul
+pianote,379073,Sixpence None The Richer,Kiss Me,Pop
+pianote,379075,Bob Dylan,Knockin’ On Heaven’s Door,Folk
+pianote,379081,Bob Dylan,"Lay, Lady, Lay",Folk
+pianote,379096,Ellie Goulding,Love Me Like You Do,Pop
+pianote,379108,The Bangles,Manic Monday,Pop
+pianote,379121,Shawn Mendes,Mercy,Pop
+pianote,379128,Mariah Carey,My All,R&B/Soul
+pianote,379140,Alicia Keys,No One,Pop
+pianote,379142,Cheat Codes (feat. Demi Lovato),No Promises,Pop
+pianote,379148,Gavin DeGraw,Not Over You,Pop
+pianote,379150,Sam Smith,Not The Only One,R&B/Soul
+pianote,379162,Willie Nelson,On The Road Again,Country
+pianote,379168,Linkin Park,One More Light,Rock
+pianote,379174,The Lumineers,Ophelia,Folk
+pianote,379176,Taylor Swift,Our Song,Country
+pianote,379178,The Fray,Over My Head (Cable Car),Rock
+pianote,379182,The Chainsmokers,Paris,Pop
+pianote,379212,Elton John,Rocket Man,Rock
+pianote,379230,Wiz Khalifa,See You Again,Pop
+pianote,379238,Lady Gaga & Bradley Cooper,Shallow,Soundtrack
+pianote,379242,Maroon 5,She Will Be Loved,Pop
+pianote,379260,Rihanna,Stay,Pop
+pianote,379262,Zedd / Alessia Cara,Stay,Pop
+pianote,379267,OneRepublic,Stop And Stare,Rock
+pianote,379269,Kelly Clarkson,Stronger,Pop
+pianote,379271,Jonas Brothers,Sucker,Pop
+pianote,379275,Bryan Adams,Summer Of '69,Rock
+pianote,379277,Shawn Colvin,Sunny Came Home,Rock
+pianote,379284,Berlin,Take My Breath Away,Soundtrack
+pianote,379295,Simon & Garfunkel,The Sound Of Silence,Folk
+pianote,379299,Ed Sheeran,Thinking Out Loud,Pop
+pianote,379301,Maroon 5,This Love,Pop
+pianote,379307,Bonnie Tyler,Total Eclipse Of The Heart,Pop
+pianote,379311,Rihanna,Umbrella,Pop
+pianote,379313,Avicii,Wake Me Up,Pop
+pianote,379315,Marc Cohn,Walking In Memphis,Rock
+pianote,379317,ABBA,Waterloo,Pop
+pianote,379319,Mariah Carey,We Belong Together,R&B/Soul
+pianote,379323,Bette Midler,Wind Beneath My Wings,Pop
+pianote,379428,Lady Gaga,Always Remember Us This Way,Soundtrack
+pianote,379526,Barbra Streisand,The Way We Were,Soundtrack
+pianote,379528,Barbra Streisand,Who Are You Now?,Soundtrack
+pianote,379537,Carole King,I Feel The Earth Move,R&B/Soul
+pianote,379539,Carole King,It's Too Late,R&B/Soul
+pianote,379549,Dan + Shay / Justin Bieber,"10,000 Hours",Pop
+pianote,379563,Elton John,Bennie And The Jets,Rock
+pianote,379567,Elton John,Crocodile Rock,Rock
+pianote,379591,Elvis Presley,Blueberry Hill,Rock
+pianote,379597,Victor Young / Edward Heyman,When I Fall In Love,Jazz
+pianote,379601,Joe Cocker,You Are So Beautiful,Rock
+pianote,379613,Lady Gaga,I'll Never Love Again,Soundtrack
+pianote,379615,Lady Gaga,Is That Alright?,Soundtrack
+pianote,379627,Michael Buble,Feeling Good,Jazz
+pianote,379629,Michael Buble,Lost,Jazz
+pianote,379631,Michael Buble,Everything,Jazz
+pianote,379633,Michael Buble,Home,Jazz
+pianote,379635,Norah Jones,Don't Know Why,Jazz
+pianote,379651,Rihanna,Unfaithful,Pop
+pianote,379657,Steve Tyrell,Walk On By,R&B/Soul
+pianote,379663,Susan Boyle,I Dreamed A Dream,Soundtrack
+pianote,379729,The Commodores,Easy,R&B/Soul
+pianote,379747,Tina Turner,What's Love Got To Do With It,R&B/Soul
+pianote,379751,Andrea Bocelli,"The Music of the Night (From ""The Phantom of the Opera"")",Soundtrack
+pianote,379816,Nina Simone,Little Girl Blue,Soundtrack
+pianote,379882,Kander & Ebb,Cabaret,Soundtrack
+pianote,379931,Carole King,You've Got A Friend,Rock
+pianote,379933,John Lennon,Imagine,Rock
+pianote,379934,Leonard Cohen,Hallelujah,Folk
+pianote,379935,Nina Simone,He Needs Me,Jazz
+pianote,379939,Nina Simone,My Baby Just Cares For Me,Jazz
+pianote,379948,Shania Twain,You’re Still The One,Country
+pianote,379952,Stevie Wonder,You Are The Sunshine Of My Life,R&B/Soul
+pianote,379958,MercyMe,I Can Only Imagine,CCM/Worship
+pianote,379973,Josh Groban,Believe,Holiday
+pianote,379974,Christina Aguilera,Reflection,Soundtrack
+pianote,379992,Perry Como,And I Love You So,Rock
+pianote,382509,Jordin Sparks,Battlefield,Pop
+pianote,382517,Van Morrison,Brown Eyed Girl,Rock
+pianote,382521,James Taylor,Fire and Rain,Folk
+pianote,382525,Kenny Loggins,Footloose,Rock
+pianote,382539,Auli'i Cravalho,How Far I'll Go,Soundtrack
+pianote,382541,Eric Carmen,Hungry Eyes,Rock
+pianote,382551,Rascal Flatts,Life Is A Highway,Rock
+pianote,382555,Roxette,Listen To Your Heart,Rock
+pianote,382557,Fleetwood Mac,Little Lies,Rock
+pianote,382559,Mumford & Sons,Little Lion Man,Folk
+pianote,382565,Cat Stevens,Morning Has Broken,Rock
+pianote,382569,Whitney Houston,My Love Is Your Love,R&B/Soul
+pianote,382579,Judy Garland,Over The Rainbow,Soundtrack
+pianote,382581,Billy Joel,Piano Man,Rock
+pianote,382583,Jim Cuddy,Pull Me Through,Rock
+pianote,382587,Goo Goo Dolls,Slide,Rock
+pianote,382593,Billy Joel,Uptown Girl,Rock
+pianote,382638,Barbra Streisand,He Touched Me,Soundtrack
+pianote,382666,The Commodores,Three Times A Lady (Original Version),R&B/Soul
+pianote,382693,Mervyn Warren,"Joyful, Joyful",Soundtrack
+pianote,382699,High School Musical Cast,We're All In This Together,Soundtrack
+pianote,382708,Louis Armstrong,When The Saints Go Marching In,Jazz
+pianote,382712,Henry Mancini & Orchestra,Moon River,Soundtrack
+pianote,382714,George Gershwin,Embraceable You,Jazz
+pianote,382801,Yann Tiersen,Amélie Theme (Comptine d’un autre été) (Easy Version),Soundtrack
+pianote,384029,Bob Dylan,Like A Rolling Stone,Folk
+pianote,384031,Prince,Little Red Corvette,Rock
+pianote,384035,Eminem ft. Rihanna,Love The Way You Lie,Pop
+pianote,384039,Sister Act 2 Cast,Oh Happy Day,CCM/Worship
+pianote,384047,Ike & Tina Turner,Proud Mary,R&B/Soul
+pianote,384063,Kelly Clarkson,Since U Been Gone,Pop
+pianote,384065,fun.,Some Nights,Pop
+pianote,384069,The Chainsmokers & Coldplay,Something Just Like This,Pop
+pianote,384073,Five For Fighting,Superman (It’s Not Easy),Pop
+pianote,384081,John Denver,"Take Me Home, Country Roads",Country
+pianote,384083,Jordin Sparks,Tattoo,Pop
+pianote,384093,Chris Isaak,Wicked Game,Rock
+pianote,386118,Idina Menzel,Let It Go,CCM/Worship
+pianote,386120,Eric Clapton,Wonderful Tonight,Rock
+pianote,386122,Alessia Cara,Wild Things,Pop
+pianote,389716,Mark Ronson,Uptown Funk!,Disco
+pianote,389719,LMFAO,Party Rock Anthem,Pop
+pianote,389721,Usher,OMG,Pop
+pianote,389724,The Chainsmokers,Closer,Pop
+pianote,389753,Maroon 5,Girls Like You,Pop
+pianote,389755,The Chainsmokers,Don't Let Me Down,Electronic
+pianote,389757,Coldplay,A Sky Full Of Stars,Rock
+pianote,389759,Luis Fonsi,Despacito,Latin/World
+pianote,389761,Avicii,Wake Me Up!,
+pianote,389763,Post Malone,Sunflower,R&B/Soul
+pianote,389765,Jason Derulo,Want To Want Me,Pop
+pianote,389767,Clean Bandit,Rockabye,Pop
+pianote,389769,Lukas Graham,7 Years,Pop
+pianote,389771,Travis Scott,Sicko Mode,Hip-Hop/Rap
+pianote,389773,Meghan Trainor,All About That Bass,Pop
+pianote,389781,Lewis Capaldi,Wish You The Best,Pop
+pianote,389920,Shania Twain,Man! I Feel Like A Woman!,Country
+pianote,389921,Shania Twain,That Don't Impress Me Much,Country
+pianote,389922,Stevie Wonder,Superstition,R&B/Soul
+pianote,389923,Stevie Wonder,Isn't She Lovely,R&B/Soul
+pianote,389924,Ariana Grande,Break Free,Electronic
+pianote,389925,Zedd,Clarity,Electronic
+pianote,389926,Grease,Summer Nights,Soundtrack
+pianote,389927,Grease,You're The One That I Want,Soundtrack
+pianote,389928,Lady Gaga,You And I,Country
+pianote,389929,Billy Joel,You May Be Right,Rock
+pianote,389930,Billy Joel,The River Of Dreams,Pop
+pianote,389931,Dear Evan Hansen,Only Us,Soundtrack
+pianote,389932,Dear Evan Hansen,Waving Through A Window,Soundtrack
+pianote,389933,Disney,When You Wish Upon A Star,Soundtrack
+pianote,389934,Coldplay,Viva La Vida,Pop
+pianote,390283,Lady Gaga,Hold My Hand,Rock
+pianote,390285,Britney Spears,Baby One More Time,Pop
+pianote,390287,Britney Spears,Oops! I Did It Again,Pop
+pianote,390289,Coldplay,Yellow,Pop
+pianote,390291,Coldplay,Everglow,Pop
+pianote,390294,Stevie Wonder,For Once In My Life,R&B/Soul
+pianote,390296,Stevie Wonder,Sir Duke,R&B/Soul
+pianote,390298,Shania Twain,Whose Bed Have Your Boots Been Under,Country
+pianote,390300,Shania Twain,Party For Two,Country
+pianote,390302,Ariana Grande,Dangerous Woman,R&B/Soul
+pianote,390304,Ariana Grande,One Last Time,R&B/Soul
+pianote,390306,Ben Platt,You Will Be Found,Soundtrack
+pianote,390308,Ben Platt,For Forever,Soundtrack
+pianote,390310,Zedd,Stay The Night,Electronic
+pianote,390312,Zedd,Spectrum,Electronic
+pianote,390703,A Criminal Mind,A Criminal Mind,Rock
+pianote,390705,Lawrence Gowan,Strange Animal,Rock
+pianote,390707,Styx,Mr Roboto,Rock
+pianote,390709,Styx,The Best Of Times,Rock
+pianote,390711,Styx,Too Much Time On My Hands,Rock
+pianote,390713,Styx,Renegade,Rock
+pianote,390715,Ayla Tesler-Mabe,Give Me A Sign?,Pop
+pianote,390717,The Animals,House Of The Rising Sun,Rock
+pianote,390719,Coldplay,In My Place,Rock
+pianote,390721,Billy Joel,New York State Of Mind,Rock
+pianote,390723,Billy Joel,Vienna,Rock
+pianote,390725,Lady Gaga,Telephone,Pop
+pianote,390727,Lady Gaga,Just Dance,Pop
+pianote,390729,Britney Spears,Circus,Pop
+pianote,390731,Stevie Wonder,Love’s in Need of Love Today,R&B/Soul
+pianote,390733,Shania Twain,I'm Gonna Getcha Good,Country
+pianote,391000,Tom Odell,Another Love,Pop
+pianote,391002,Eric Clapton,Tears In Heaven,Rock
+pianote,391004,Fleetwood Mac,Songbird,Folk
+pianote,391006,Keane,Somewhere Only We Know,Pop
+pianote,391008,Regina Spektor,Samson,Pop
+pianote,391010,Joji,Glimpse Of Us,R&B/Soul
+pianote,391012,Hillsong UNITED,Oceans,CCM/Worship
+pianote,391014,My Chemical Romance,Welcome To The Black Parade,Pop
+pianote,391016,Toto,Hold The Line,Rock
+pianote,391018,Journey,Any Way You Want It,Rock
+pianote,391019,Bill Withers,Lean On Me,R&B/Soul
+pianote,391021,Pink Floyd,Wish You Were Here,Rock
+pianote,391022,Taylor Swift,Lavender Haze,Pop
+pianote,391024,Alicia Keys,Underdog,R&B/Soul
+pianote,391026,Bethel Music,Goodness Of God,CCM/Worship
+pianote,391344,Spirit & Song,My Chains Are Gone (Amazing Grace),CCM/Worship
+pianote,391346,N'Sync,Bye Bye Bye,Pop
+pianote,391348,N'Sync,It's Gonna Be Me,Pop
+pianote,391350,N'Sync,This I Promise You,Pop
+pianote,391352,Backstreet Boys,Incomplete,Pop
+pianote,391354,Backstreet Boys,As Long As You Love Me,Pop
+pianote,391356,Tom Odell,Heal,Rock
+pianote,391358,Tori Amos,Cornflake Girl,Pop
+pianote,391360,Lewis Capaldi,Before You Go,Pop
+pianote,391362,Lewis Capaldi,Forget Me,Pop
+pianote,391364,Lewis Capaldi,Bruises,Pop
+pianote,391365,REO Speedwagon,Can't Fight This Feelin',Rock
+pianote,391367,Regina Spektor,Two Birds,Rock
+pianote,391369,Regina Spektor,Fidelity,Rock
+pianote,391371,Pink Floyd,Another Brick In The Wall Pt. 2,Rock
+pianote,391786,Pink Floyd,Comfortably Numb,Rock
+pianote,391787,Parcels,Tieduprightnow,Rock
+pianote,391788,Elvis Presley,Love Me Tender,Rock
+pianote,391789,Elvis Presley,Trouble,Blues
+pianote,391790,Elvis Presley,If I Can Dream,Rock
+pianote,391791,Celine Dion,It's All Coming Back To Me Now,Pop
+pianote,391792,Celine Dion,I'm Alive,Pop
+pianote,391793,Celine Dion,That's The Way It Is,Pop
+pianote,391794,R.E.M.,Losing My Religion,Rock
+pianote,391795,R.E.M.,Everybody Hurts,Rock
+pianote,391796,Queen,Don't Stop Me Now,Rock
+pianote,391797,Queen,Radio GaGa,Rock
+pianote,391798,Queen,Crazy Little Thing Called Love,Rock
+pianote,391799,Queen,I Want To Break Free,Rock
+pianote,391800,Queen,Another One Bites The Dust,Rock
+pianote,392780,Wicked OST Sung by Idina Menzel,Defying Gravity,Soundtrack
+pianote,392781,Wicked OST,For Good,Soundtrack
+pianote,394388,Billie Eilish,What Was I Made For?,Soundtrack
+pianote,395312,Mariah Carey,Love Takes Time,R&B/Soul
+pianote,395325,Boyz II Men,End Of The Road,R&B/Soul
+pianote,396010,John Denver,"Take Me Home, Country Roads (Easy Version)",Country
+pianote,396020,John Lennon,Imagine (Easy Version),Rock
+pianote,398845,Mykola Leontovych,Carol Of The Bells,Holiday
+pianote,398847,Pyotr Illyich Tchaikovsky,Dance Of The Sugar Plum Fairy,Holiday
+pianote,398872,Anonymous,Auld Lang Syne,Holiday
+pianote,398941,Mykola Leontovych,Carol of the Bells (Easy Version),Holiday
+pianote,398943,Pyotr Illyich Tchaikovsky,Dance of the Sugar Plum Fairy (Easy Version),Holiday
+pianote,398949,Ernst Anschütz,O Christmas Tree (Easy Version),Holiday
+pianote,399000,Anonymous,Auld Lang Syne (Easy Version),Holiday
+pianote,401096,Vince Guaraldi Trio,O Tannenbaum,Holiday
+pianote,401097,Vince Guaraldi Trio,O Tannenbaum (Easy Version),Holiday
+pianote,401171,Joni Mitchell,River,Folk
+pianote,401172,Joni Mitchell,River (Solo),Folk
+pianote,401173,Joni Mitchell,"River (Solo, Easy Version)",Folk
+pianote,401174,Vince Guaraldi Trio,The Christmas Song,Holiday
+pianote,401175,Vince Guaraldi Trio,The Christmas Song (Easy Version),Holiday
+pianote,401393,Stevie Wonder,Don't You Worry 'Bout A Thing,R&B/Soul
+pianote,401395,John Lennon,Isolation,Rock
+pianote,401396,The Beatles,Sexy Sadie,Rock
+pianote,401398,The Beatles,Martha My Dear,Rock
+pianote,403497,Dream Theater,The Dance Of Eternity,Metal
+pianote,403988,Aphex Twin,Avril 14th,Classical
+pianote,403990,Dario Marianelli,Dawn,Soundtrack
+pianote,403991,Dario Marianelli,Dawn (Easy Version),Soundtrack
+guitareo,383802,Chris Isaak,Wicked Game,Rock
+guitareo,391554,R.E.M.,Losing My Religion,Pop
+guitareo,391583,Fleetwood Mac,The Chain,Rock
+guitareo,392646,Olivia Rodrigo,Vampire,Pop
+guitareo,402983,Louis Armstrong,When The Saints Go Marchin' In (Full Version),Jazz
+guitareo,404559,Green Day,Jesus Of Suburbia,Rock
+singeo,380708,Andrea Bocelli,"The Music of the Night (From ""The Phantom of the Opera"")",Soundtrack
+singeo,380845,Shania Twain,You’re Still The One,Country
+singeo,382819,Jordin Sparks,Battlefield,Pop
+singeo,382829,Van Morrison,Brown Eyed Girl,Rock
+singeo,382835,James Taylor,Fire and Rain,Folk
+singeo,382839,Kenny Loggins,Footloose,Rock
+singeo,382853,Eric Carmen,Hungry Eyes,Rock
+singeo,382867,Roxette,Listen To Your Heart,Rock
+singeo,382869,Fleetwood Mac,Little Lies,Rock
+singeo,382871,Mumford & Sons,Little Lion Man,Folk
+singeo,382877,Cat Stevens,Morning Has Broken,Rock
+singeo,382881,Whitney Houston,My Love Is Your Love,R&B/Soul
+singeo,382891,Judy Garland,Over The Rainbow,Soundtrack
+singeo,382893,Billy Joel,Piano Man,Rock
+singeo,382895,Jim Cuddy,Pull Me Through,Rock
+singeo,382899,Goo Goo Dolls,Slide,Rock
+singeo,382903,Neil Diamond,Sweet Caroline,Rock
+singeo,382915,Billy Joel,Uptown Girl,Rock
+singeo,382947,Barbra Streisand,He Touched Me,Soundtrack
+singeo,382977,The Commodores,Three Times A Lady (Original Version),R&B/Soul
+singeo,383011,Mervyn Warren,"Joyful, Joyful",CCM/Worship
+singeo,383019,Vince Guaraldi,Christmas Time Is Here,Holiday
+singeo,383037,Louis Armstrong,When The Saints Go Marching In,Jazz
+singeo,383039,Nina Simone,"I Loves You, Porgy",Jazz
+singeo,383043,The Beach Boys,Wouldn't It Be Nice,Rock
+singeo,383045,The Supremes,Baby Love,R&B/Soul
+singeo,383055,Henry Mancini & Orchestra,Moon River,Soundtrack
+singeo,383937,Bob Dylan,Like A Rolling Stone,Rock
+singeo,383939,Prince,Little Red Corvette,Rock
+singeo,383941,Bon Jovi,Livin’ On A Prayer,Rock
+singeo,383943,Eminem ft. Rihanna,Love The Way You Lie,Hip-Hop/Rap
+singeo,383945,Justin Bieber,Love Yourself,Pop
+singeo,383947,Kid Rock feat. Sheryl Crow,Picture,Country
+singeo,383949,John Mellencamp,Pink Houses,Rock
+singeo,383951,Luke Bryan,Play It Again,Country
+singeo,383953,Ike & Tina Turner,Proud Mary,R&B/Soul
+singeo,383955,Foster The People,Pumped Up Kicks,Pop
+singeo,383957,Matchbox Twenty,Push,Rock
+singeo,383959,Juice Newton,Queen Of Hearts,Country
+singeo,383961,Colbie Caillat,Realize,Pop
+singeo,383963,UB40,Red Red Wine,Pop
+singeo,383965,Missy Higgins,Scar,Pop
+singeo,383967,Tal Bachman,She’s So High,Pop
+singeo,383969,Kelly Clarkson,Since U Been Gone,Pop
+singeo,383971,fun.,Some Nights,Pop
+singeo,383973,Gotye,Somebody That I Used To Know,Pop
+singeo,383975,The Chainsmokers & Coldplay,Something Just Like This,Electronic
+singeo,383977,Demi Lovato,Stone Cold,Pop
+singeo,383979,Five For Fighting,Superman (It’s Not Easy),Pop
+singeo,383981,Ava Max,Sweet But Psycho,Pop
+singeo,383985,REO Speedwagon,Take It On The Run,Rock
+singeo,383987,John Denver,"Take Me Home, Country Roads",Country
+singeo,383989,Jordin Sparks,Tattoo,Pop
+singeo,383991,Dan + Shay,Tequila,Country
+singeo,383993,ABBA,Thank You For The Music,Pop
+singeo,383995,The Calling,Wherever You Will Go,Rock
+singeo,383997,Chris Isaak,Wicked Game,Rock
+singeo,383999,Cat Stevens,Wild World,Rock
+singeo,384001,Creed,With Arms Wide Open,Rock
+singeo,384003,Halsey,Without Me,Pop
+singeo,384007,The Regents,Barbara Ann,Pop
+singeo,384009,Edwin R. Hawkins,Oh Happy Day,CCM/Worship
+singeo,384015,Idina Menzel,Let It Go,Soundtrack
+singeo,384021,Alessia Cara,Wild Things,Pop
+singeo,384023,Eric Clapton,Wonderful Tonight,Rock
+singeo,389795,Post Malone,Sunflower,Pop
+singeo,389799,Luis Fonsi,Despacito,Latin/World
+singeo,389807,The Chainsmokers,Closer,Pop
+singeo,389809,Usher,OMG,R&B/Soul
+singeo,389811,LMFAO,Party Rock Anthem,Pop
+singeo,389813,Mark Ronson,Uptown Funk!,Disco
+singeo,390061,Lady Gaga,You And I,Country
+singeo,390062,Grease,You're The One That I Want,Soundtrack
+singeo,390064,Grease,Summer Nights,Soundtrack
+singeo,390491,Coldplay,Yellow,Pop
+singeo,390493,Coldplay,Everglow,Pop
+singeo,390499,Shania Twain,Whose Bed Have Your Boots Been Under,Country
+singeo,390501,Shania Twain,Party For Two,Country
+singeo,390813,Shania Twain,I'm Gonna Getcha Good,Country
+singeo,391154,Eric Clapton,Tears In Heaven,Rock
+singeo,391158,Keane,Somewhere Only We Know,Pop
+singeo,391176,Taylor Swift,Lavender Haze,Pop
+singeo,391864,Elvis Presley,Trouble,Jazz
+singeo,391872,Elvis Presley,If I Can Dream,Rock
+singeo,392023,Queen,Under Pressure,Rock
+singeo,392026,Queen,Killer Queen,Rock
+singeo,392030,Fleetwood Mac,Go Your Own Way,Rock
+singeo,392032,Fleetwood Mac,The Chain,Rock
+singeo,392034,Elevation Worship,O Come To The Altar,CCM/Worship
+singeo,392080,Elevation Worship,The Blessing,CCM/Worship
+singeo,392082,Elevation Worship,Graves Into Gardens,CCM/Worship
+singeo,392084,Elevation Worship,Jireh,CCM/Worship
+singeo,392340,The Super Mario Bros. Movie,Peaches,Soundtrack
+singeo,392341,Laura Story,Blessings,CCM/Worship
+singeo,392342,Miley Cyrus,Flowers,Pop
+singeo,392343,Lauren Daigle,Thank God I Do,CCM/Worship
+singeo,392346,Celine Dion,The Prayer,Pop
+singeo,392350,The Greatest Showman,A Million Dreams,Soundtrack
+singeo,392354,The Greatest Showman,From Now On,Soundtrack
+singeo,392402,The Greatest Showman,Never Enough,Soundtrack
+singeo,392403,Wicked OST Sung by Idina Menzel,Defying Gravity,Soundtrack
+singeo,392404,Wicked OST,For Good,Soundtrack
+singeo,392518,Aerosmith,Walk This Way,Rock
+singeo,392550,Mariah Carey,Love Takes Time,R&B/Soul
+singeo,392553,Boyz II Men,End Of The Road,R&B/Soul
+singeo,392559,Atlantic Starr,Always,Pop
+singeo,392563,Elton John,Something About The Way You Look Tonight,Rock
+singeo,401424,Rod Stewart,Have I Told You Lately That I Love You,Rock
+singeo,401428,Beatles,"Here, There, Everywhere",Rock
+singeo,401435,Smokey Robinson & The Miracles,You Really Got A Hold On Me,R&B/Soul
+singeo,401566,Meredith Brooks,Bitch,Rock
+singeo,401568,The Cardigans,Lovefool,Rock
+singeo,401672,Cranberries,Dreams,Rock
+singeo,401673,Semisonic,Closing Time,Pop
+singeo,402178,Paul Anka,Put Your Head On My Shoulder,Jazz
+singeo,402179,Nat King Cole,Smile,Jazz
+singeo,402561,The Lovin' Spoonful,Summer In The City,Rock
+singeo,402563,Mungo Jerry,In The Summertime,Pop
+singeo,402565,Beach Boys,Kokomo,Rock
+singeo,402567,Katrina And The Waves,Walking On Sunshine,Pop
+singeo,402570,Jimmy Buffett,Margaritaville,Pop
+singeo,402650,Simple Minds,Don't You (Forget About Me),Rock
+singeo,402654,B.J. Thomas - Butch Cassidy And The Sundance Kid,Raindrops Keep Fallin' On My Head,Jazz
+singeo,402656,Backstreet Boys,Quit Playing Games With My Heart,Pop
+singeo,402660,O-Town,All Or Nothing,Pop
+singeo,402663,One Direction,One Thing,Pop
+singeo,402724,Donny Hathaway,This Christmas,Holiday
