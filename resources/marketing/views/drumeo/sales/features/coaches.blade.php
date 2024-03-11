@@ -35,7 +35,6 @@
                         perPage: 4.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -52,7 +51,7 @@
                     @slot('content')
                         @foreach ($learn as $slide)
                             <li class="splide__slide">
-                                <div>
+                                <div class="px-1">
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -82,7 +81,6 @@
                         perPage: 4.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -99,7 +97,7 @@
                     @slot('content')
                         @foreach ($techniques as $slide)
                             <li class="splide__slide">
-                                <div>
+                                <div class="px-1">
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
@@ -130,7 +128,6 @@
                         perPage: 4.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -147,7 +144,7 @@
                     @slot('content')
                         @foreach ($creativities as $slide)
                             <li class="splide__slide">
-                                <div>
+                                <div class="px-1">
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
@@ -178,7 +175,6 @@
                         perPage: 4.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -195,7 +191,7 @@
                     @slot('content')
                         @foreach ($grooves as $slide)
                             <li class="splide__slide">
-                                <div>
+                                <div class="px-1">
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
@@ -226,7 +222,6 @@
                         perPage: 4.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -243,7 +238,7 @@
                     @slot('content')
                         @foreach ($anythingElse as $slide)
                             <li class="splide__slide">
-                                <div>
+                                <div class="px-1">
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
