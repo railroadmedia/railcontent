@@ -429,7 +429,7 @@
                 <p class="leading-tight text-sm">One time payment.</p>
                 <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
                 @if($stock != 123)
-                    <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS AVAILABLE</p>
+                    <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $stock }} SPOTS AVAILABLE</p>
                 @endif
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE anniversary bonuses</strong></h3>
             </div>

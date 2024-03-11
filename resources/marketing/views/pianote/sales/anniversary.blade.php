@@ -61,7 +61,7 @@
                 >
                 <div class="sm:pr-5 lg:pr-8 mx-0 mt-5 sm:mt-0">
                     <h3 class="mb-4"><strong>Time flies when you’re <span class="text-pianote">changing the world.</span></strong></h3>
-                    <p class="leading-normal max-w-xl">
+                    <p class="leading-normal max-w-xl mx-0">
                         This month we’re celebrating 8 years since Pianote began its mission of spreading the joy of music across the globe. 
                         <br><br>
                         Join Pianote today and get 8 FREE bonuses (including our NEW Pianote BookBag).
