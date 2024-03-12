@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Musora;
 use App\Http\Controllers\BaseController;
 use App\Modules\Ecommerce\Services\AccessCodeService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSendTransactionalEmail;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
