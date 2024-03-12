@@ -439,7 +439,7 @@ return [
     'cataloguesMetadata' => [
         'drumeo' => [
             'all' => [
-                'name' => 'New Content',
+                'name' => 'New Releases',
                 'shortname' => 'Content',
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
@@ -457,6 +457,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
             ],
@@ -1158,6 +1159,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
             ],
@@ -1590,6 +1592,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
@@ -1965,6 +1968,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],

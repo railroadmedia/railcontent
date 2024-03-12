@@ -180,6 +180,10 @@ const props = defineProps({
         type: Boolean,
         default: () => true,
     },
+    multipleTypes: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -196,7 +200,9 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
-        ...(isPack.value && { without_enrollment: props.withoutEnrollment })
+        ...(isPack.value && { without_enrollment: props.withoutEnrollment }),
+        is_all: props.isAllContent,
+
     };
 })
 
@@ -205,7 +211,7 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    }else if(props.isAllContent){
+    }else if(props.multipleTypes){
         types = props.includedTypes;
     } else {
         props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
