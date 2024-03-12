@@ -58,6 +58,4 @@ Route::domain('{pianoteDomain}')
 
         Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'] )
             ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-        Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'] )
-            ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 });
