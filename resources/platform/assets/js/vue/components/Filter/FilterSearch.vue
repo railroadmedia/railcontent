@@ -96,14 +96,11 @@
   };
 
   const searchPlaceholder = computed(() => {
-      if(props.tabOptions.length > 1) {
-          return `Search ${props.activeTab}`;
-      }
-      else if(props.placeholder) {
+      if(props.placeholder) {
           return props.placeholder;
       }
       else {
-          return 'Search';
+          return `Search ${props.activeTab}`;
       }
   })
 </script>
