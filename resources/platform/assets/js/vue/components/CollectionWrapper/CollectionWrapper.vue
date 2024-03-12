@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="`${searchPlaceholder} ${contentTypePlaceholder}`" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -187,6 +187,11 @@ const userStore = useUserStore();
 
 const { data, currentPage, filter, loading, totalPages, tabData, filterColumns, searching } = storeToRefs(collectionStore);
 const { brand } = storeToRefs(userStore);
+
+const contentTypePlaceholder = computed(() => {
+    const string = props.collectionType;
+    return `${string.charAt(0).toUpperCase() + string.slice(1)}s`
+})
 
 const request_params = computed(() => {
     return {
