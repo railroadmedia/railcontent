@@ -4,6 +4,8 @@ use App\Http\Controllers\Musora\CodeRedemptionController;
 use App\Http\Controllers\Musora\MarketingController;
 use App\Http\Controllers\Musora\ReferralJoinController;
 
+use App\Http\Controllers\Musora\SalesController;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::domain('{musoraDomain}')
@@ -63,4 +65,8 @@ Route::domain('{musoraDomain}')
         Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
         Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
         Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
+
+        Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'] )
+            ->withoutMiddleware([VerifyCsrfToken::class])
+            ->name('claim-spotify');
     });
