@@ -20,6 +20,10 @@ class SalesController extends BaseController
 
     public function claimSpotify(Request $request): JsonResponse
     {
+        ['email' => $email ] = $request->validate([
+            'email' => 'required|email',
+        ]);
+
         // create access code
         $accessCode = $this->accessCodeService->generateAccessCode(
             [491],
@@ -32,7 +36,7 @@ class SalesController extends BaseController
             (new CustomerIoSendTransactionalEmail(
                 'musora',
                 2,
-                $request->get('email'),
+                $email,
                 ['access_code' => strtoupper($this->accessCodeService->hyphenateCode($accessCode->code))]
             ))
                 ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
