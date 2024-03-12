@@ -172,7 +172,6 @@ class ShopifySyncService
         );
         $shopifyOrderId = $orderResource->getAttributes()['id'];
 
-
         $amount = number_format($price, 2, '.', '');
         // format the data for the payment
         $paymentData =
@@ -183,32 +182,6 @@ class ShopifySyncService
                 "source" => "external"
             ];
         $orderTransaction = $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
-
-
-//        $fulfillmentOrder = $this->shopify->getOrderFulfillmentOrders($shopifyOrderId)->last();
-//        $lineItems = $fulfillmentOrder->getAttributes()["line_items"];
-//
-//        // and for each line item...
-//        foreach ($lineItems as $lineItemData) {
-//            $fulfillmentData = [
-//                "fulfillment" => [
-//                    "notify_customer" => false
-//                ],
-//                "line_items_by_fulfillment_order" => [
-//                    [
-//                        "fulfillment_order_id" => $lineItemData["fulfillment_order_id"],
-//                        "fulfillment_order_line_items" => [
-//                            [
-//                                "id" => $lineItemData["id"],
-//                                "quantity" => 1
-//                            ]
-//                        ]
-//                    ]
-//                ]
-//            ];
-//            $this->shopify->createFulfillment($fulfillmentData);
-//        }
-
 
         // STEP 4: sync user products
         try {
@@ -303,8 +276,6 @@ class ShopifySyncService
             ->get()
             ->map(
                 fn(Product $product) => [
-                    "fulfillable_quantity" => 1,
-                    "fulfillment_service" => "manual",
                     "price" => $price,
                     "quantity" => 1, // for digital products, only 1 item of each
                     "requires_shipping" => false, // no shipping required since it is for digital products
