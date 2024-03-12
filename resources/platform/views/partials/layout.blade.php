@@ -5,10 +5,10 @@ $userData = assembleUserAttributes(user());
 
 $journeySection = '';
 
-if ($trackingSectionName) {
-    $journeySection = $catalogueMeta['name'];
-} else if ($catalogueMeta['name']) {
+if (isset($trackingSectionName)) {
     $journeySection = $trackingSectionName;
+} else if ($catalogueMeta['name']) {
+    $journeySection = $catalogueMeta['name'];
 } else {
     $journeySection = 'Unknown';
 }
