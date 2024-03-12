@@ -1,5 +1,6 @@
 <!-- To use this modal, add Focus Plugin (because of x-trap) in the head section before the Alpine.js script -->
 <!-- <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script> -->
+<!-- Splide 4.1.4 -->
 
 @props(['slides', 'scaleAnimation', 'handleClick'])
 
