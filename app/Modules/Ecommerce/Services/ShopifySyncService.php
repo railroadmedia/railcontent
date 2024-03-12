@@ -170,6 +170,45 @@ class ShopifySyncService
         Log::info(
             "User ID: $user->id; Customer Shopify ID: $customerShopifyId. Created order $orderResource->id in Shopify"
         );
+        $shopifyOrderId = $orderResource->getAttributes()['id'];
+
+
+        $amount = number_format($price, 2, '.', '');
+        // format the data for the payment
+        $paymentData =
+            [
+                "amount" => $amount,
+                "kind" => "sale",
+                // DEV NOTE: this is not documented in Shopify, but it is required
+                "source" => "external"
+            ];
+        $orderTransaction = $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+
+
+//        $fulfillmentOrder = $this->shopify->getOrderFulfillmentOrders($shopifyOrderId)->last();
+//        $lineItems = $fulfillmentOrder->getAttributes()["line_items"];
+//
+//        // and for each line item...
+//        foreach ($lineItems as $lineItemData) {
+//            $fulfillmentData = [
+//                "fulfillment" => [
+//                    "notify_customer" => false
+//                ],
+//                "line_items_by_fulfillment_order" => [
+//                    [
+//                        "fulfillment_order_id" => $lineItemData["fulfillment_order_id"],
+//                        "fulfillment_order_line_items" => [
+//                            [
+//                                "id" => $lineItemData["id"],
+//                                "quantity" => 1
+//                            ]
+//                        ]
+//                    ]
+//                ]
+//            ];
+//            $this->shopify->createFulfillment($fulfillmentData);
+//        }
+
 
         // STEP 4: sync user products
         try {
@@ -222,7 +261,7 @@ class ShopifySyncService
         $data = [
             "customer" => ["id" => $customerShopifyId],
             "email" => $this->getEmailForShopify($email),
-            "processed_at" => $processedAt,
+            "processed_at" => $processedAt->toIso8601String(),
             "subtotal_price" => number_format($price, 2, '.', ''),
             "total_outstanding" => "0.00",
             "total_price" => number_format($price + ($tax ?? 0), 2, '.', ''),
@@ -264,6 +303,8 @@ class ShopifySyncService
             ->get()
             ->map(
                 fn(Product $product) => [
+                    "fulfillable_quantity" => 1,
+                    "fulfillment_service" => "manual",
                     "price" => $price,
                     "quantity" => 1, // for digital products, only 1 item of each
                     "requires_shipping" => false, // no shipping required since it is for digital products
@@ -329,10 +370,12 @@ class ShopifySyncService
         $user->save();
     }
 
-    public function cancelOrder(int $shopifyCustomerId, string $email, int $orderId): void
+    public function refundAndCancelOrder(User $user, int $orderId): void
     {
-        $this->shopify->cancelOrder($orderId);
-        $this->syncCustomer($shopifyCustomerId, $email);
+        /** @var ShopifyCancelService $shopifyCancelService */
+        $shopifyCancelService = app(ShopifyCancelService::class);
+        $shopifyCancelService->cancelOrder($orderId);
+        $this->syncCustomerByUser($user);
     }
 
     public function syncUser(User $user)
