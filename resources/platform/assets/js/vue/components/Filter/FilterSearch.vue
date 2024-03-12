@@ -10,7 +10,7 @@
         <InputLabel
             :showClearButton="true"
             :initial-value="searchTerm"
-            :placeholder="placeholder"
+            :placeholder="searchPlaceholder"
             inputName="term"
             id="workouts-search"
             :removeDefaultInputStyles="true"
@@ -47,7 +47,7 @@
 <script setup>
   import InputLabel from "../InputLabel/InputLabel.vue";
   import { SearchIcon } from '@heroicons/vue/outline'
-  import {ref} from "vue";
+  import { ref, computed } from "vue";
 
   const props = defineProps({
     isSidebarCollapsed: {
@@ -63,7 +63,15 @@
     },
     placeholder: {
       type: String,
-      default: 'Search',
+      default: '',
+    },
+    tabOptions: {
+      type: Array,
+      default: [],
+      },
+    activeTab: {
+      type: String,
+      default: '',
     },
   });
 
@@ -86,4 +94,16 @@
   const handleIconClick = () => {
       handleSubmitSearch();
   };
+
+  const searchPlaceholder = computed(() => {
+      if(props.tabOptions.length > 1) {
+          return `Search ${props.activeTab}`;
+      }
+      else if(props.placeholder) {
+          return props.placeholder;
+      }
+      else {
+          return 'Search';
+      }
+  })
 </script>
