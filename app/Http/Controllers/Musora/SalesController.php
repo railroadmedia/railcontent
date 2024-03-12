@@ -41,20 +41,6 @@ class SalesController extends BaseController
                 ->delay(Carbon::now()->addSeconds(3))
         );
 
-        // dispatch the event
-        dispatch(
-            (new CustomerIoTriggerEvent(
-                'musora',
-                $request->get('email'),
-                null,
-                'musora_onboarding_spotify-trial',
-                null
-            ))
-                ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
-                ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
-                ->delay(Carbon::now()->addSeconds(10))
-        );
-
         return response()->json(['success' => true]);
     }
 }
