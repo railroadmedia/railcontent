@@ -36,9 +36,12 @@ class GroupedContentDecorator extends ModeDecoratorBase
 
             if ($content['type'] == 'artist') {
                 $artist = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$content['grouped_by_field'],'string')->first();
+
+                $lessonType =  $content['lessons'][0]['type'] ?? '';
                 $contents[$index]['url'] = url()->route('platform.content.artist.show', [
                     'brand' => brand(),
                     'slug' => urlencode(urlencode($content['artist'])),
+                    'included_fields[]' => 'type,'.ucwords(str_replace('-',' ',$lessonType)),
                 ]);
                 $contents[$index]['total_plays'] = $this->userContentProgressService->countByArtistTypesUserProgress(
                     ['song'],
