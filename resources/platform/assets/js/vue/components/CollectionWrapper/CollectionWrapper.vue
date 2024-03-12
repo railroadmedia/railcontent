@@ -159,7 +159,7 @@ const props = defineProps({
     },
     searchPlaceholder: {
         type: String,
-        default: 'Search',
+        default: '',
     },
     withoutEnrollment: {
         type: Boolean,
