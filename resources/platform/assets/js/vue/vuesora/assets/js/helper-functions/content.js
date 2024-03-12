@@ -65,14 +65,19 @@ export default {
             bpm: [],
             difficulty: [],
             instructor: [],
-            style: [],
+            genre: [],
             focus: [],
             bands: [],
             endorsements: [],
             topic: [],
             key: [],
             key_pitch_type: [],
-            instrument: []
+            instrument: [],
+            essentials: [],
+            theory: [],
+            creativity: [],
+            lifestyle:[],
+            gear:[],
         };
 
         keys.forEach(key => {

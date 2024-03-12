@@ -233,7 +233,6 @@
                         perPage: 3.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -249,7 +248,7 @@
                 ])
                     @slot('content')
                         @foreach ($pianoteMethod as $key => $method)
-                            <li class="splide__slide my-2 flex">
+                            <li class="splide__slide my-2 flex px-1">
                                 <div class="bg-[#F6F8FC] rounded-xl" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                                     <div class="relative" style="padding-bottom: 56.25%;">
                                         <img
@@ -290,7 +289,6 @@
                         perPage: 3.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -306,7 +304,7 @@
                 ])
                     @slot('content')
                         @foreach ($guitareoMethod as $key => $method)
-                            <li class="splide__slide my-2 flex">
+                            <li class="splide__slide my-2 flex px-1">
                                 <div class="bg-[#F6F8FC] rounded-xl" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                                     <div class="relative" style="padding-bottom: 56.25%;">
                                         <img
@@ -348,7 +346,6 @@
                         perPage: 3.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -364,7 +361,7 @@
                 ])
                     @slot('content')
                         @foreach ($drumeoMethod as $key => $method)
-                            <li class="splide__slide my-2 flex">
+                            <li class="splide__slide my-2 flex px-1">
                                 <div class="bg-[#F6F8FC] rounded-xl" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                                     <div class="relative" style="padding-bottom: 56.25%;">
                                         <img
@@ -406,7 +403,6 @@
                         perPage: 3.5,
                         perMove: 1,
                         type: 'loop',
-                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
                             900: {
@@ -422,7 +418,7 @@
                 ])
                     @slot('content')
                         @foreach ($singeoMethod as $key => $method)
-                            <li class="splide__slide my-2 flex">
+                            <li class="splide__slide my-2 flex px-1">
                                 <div class="bg-[#F6F8FC] rounded-xl" style="box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                                     <div class="relative" style="padding-bottom: 56.25%;">
                                         <img
@@ -478,7 +474,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -495,7 +490,7 @@
                         @slot('content')
                             @foreach ($learnAll as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -524,7 +519,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -541,7 +535,7 @@
                         @slot('content')
                             @foreach ($learnDrumeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -570,7 +564,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -587,7 +580,7 @@
                         @slot('content')
                             @foreach ($learnPianote as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -616,7 +609,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -633,7 +625,7 @@
                         @slot('content')
                             @foreach ($learnGuitareo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -662,7 +654,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -679,7 +670,7 @@
                         @slot('content')
                             @foreach ($learnSingeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -711,7 +702,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -728,7 +718,7 @@
                         @slot('content')
                             @foreach ($essentialAll as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -757,7 +747,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -774,7 +763,7 @@
                         @slot('content')
                             @foreach ($essentialDrumeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -803,7 +792,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -820,7 +808,7 @@
                         @slot('content')
                             @foreach ($essentialPianote as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -849,7 +837,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -866,7 +853,7 @@
                         @slot('content')
                             @foreach ($essentialGuitareo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -895,7 +882,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -912,7 +898,7 @@
                         @slot('content')
                             @foreach ($essentialSingeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -944,7 +930,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -961,7 +946,7 @@
                         @slot('content')
                             @foreach ($playAll as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -990,7 +975,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1007,7 +991,7 @@
                         @slot('content')
                             @foreach ($playDrumeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1036,7 +1020,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1053,7 +1036,7 @@
                         @slot('content')
                             @foreach ($playPianote as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1082,7 +1065,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1099,7 +1081,7 @@
                         @slot('content')
                             @foreach ($playGuitareo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1128,7 +1110,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1145,7 +1126,7 @@
                         @slot('content')
                             @foreach ($playSingeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1177,7 +1158,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1194,7 +1174,7 @@
                         @slot('content')
                             @foreach ($anythingAll as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1223,7 +1203,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1240,7 +1219,7 @@
                         @slot('content')
                             @foreach ($anythingDrumeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1269,7 +1248,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1286,7 +1264,7 @@
                         @slot('content')
                             @foreach ($anythingPianote as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1315,7 +1293,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1332,7 +1309,7 @@
                         @slot('content')
                             @foreach ($anythingGuitareo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"
@@ -1361,7 +1338,6 @@
                             perPage: 4.5,
                             perMove: 1,
                             type: 'loop',
-                            gap: '0.5rem',
                             interval: 2000,
                             breakpoints: {
                                 900: {
@@ -1378,7 +1354,7 @@
                         @slot('content')
                             @foreach ($anythingSingeo as $slide)
                                 <li class="splide__slide" >
-                                    <div>
+                                    <div class="px-1">
                                         <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                             <img
                                                 class="rounded-xl w-full absolute w-full h-full object-cover object-top"

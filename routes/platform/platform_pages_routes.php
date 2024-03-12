@@ -40,7 +40,7 @@ Route::domain('{musoraDomain}')
                     if (app()->environment() != 'production' && user()->isAdmin()) {
                         return redirect()->away(asset('/storybook-build/index.html'));
                     } else {
-                        throw new NotFoundHttpException(); 
+                        throw new NotFoundHttpException();
                     }
                 });
                 /*
@@ -125,6 +125,7 @@ Route::domain('{musoraDomain}')
                         'boot-camps',
                         'song-tutorials',
                         'drum-fest-international-2022',
+                        'student-focus',
                     ])
                     ->name('platform.content.genre.show');
 

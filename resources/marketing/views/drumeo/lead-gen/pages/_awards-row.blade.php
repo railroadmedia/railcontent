@@ -13,7 +13,7 @@
             src="https://www.musora.com/musora-cdn/image/width=410,quality=95/{{ $videoModal['image'] }}">
         <div>
             <h5 class="text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
-            <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
+            <p class="leading-tight opacity-80">{!! $videoModal['description'] !!}</p>
         </div>
     </div>
 </div>

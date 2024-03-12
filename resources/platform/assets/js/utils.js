@@ -52,4 +52,5 @@ export const contentTypes = {
     'chord-and-scale': { singular: 'Chord And Scale Lesson', plural: 'Chord And Scale Lessons' },
     'student-review': { singular: 'Student Review', plural: 'Student Reviews' },
     'unit-part': { singular: 'Unit Part', plural: 'Unit Parts' },
+    'spotlight': { singular: 'Spotlight', plural: 'Spotlights' },
 };

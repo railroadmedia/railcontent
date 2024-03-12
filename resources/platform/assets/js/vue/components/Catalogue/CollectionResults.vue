@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tw-mb-[30px]">
         <slot></slot>
 
         <transition name="show-from-bottom">
@@ -20,10 +20,6 @@ import { storeToRefs } from "pinia";
 import { useCollectionStore } from "../../../stores/collection";
 
 const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo',
-    },
     currentPage: {
         type: Number,
         default: 1,
@@ -44,7 +40,6 @@ const collectionStore = useCollectionStore();
 const { loading } = storeToRefs(collectionStore);
 
 const infiniteScrollEventHandler = () => {
-
     let scrollEl = document.querySelector('#content-container');
     const scroll_position = scrollEl.scrollTop + scrollEl.offsetHeight;
     const scroll_buffer = scrollEl.scrollHeight * 0.8;
@@ -54,11 +49,12 @@ const infiniteScrollEventHandler = () => {
     }
 }
 
-onMounted(() => {
+onMounted(()=>{
+    props.infiniteScroll && infiniteScrollEventHandler();
     props.infiniteScroll && document.querySelector('#content-container').addEventListener("scroll", infiniteScrollEventHandler);
 })
 
-onUnmounted(() => {
+onUnmounted(()=>{
     props.infiniteScroll && document.querySelector('#content-container').removeEventListener("scroll", infiniteScrollEventHandler);
 })
 

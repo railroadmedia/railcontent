@@ -1,5 +1,10 @@
 <template>
-    <GroupedCard v-for="(item, index) in content" :item="item" :key="index" :content-type-override="contentTypeOverride" />
+    <GroupedCard
+        v-for="(item, index) in content"
+        :item="item" :key="index"
+        :content-type-override="contentTypeOverride"
+        :showTotalPlays="activeTab === 'Artists'"
+    />
 </template>
 
 <script setup>
@@ -13,6 +18,10 @@ const props = defineProps({
     contentTypeOverride: {
         type: String,
         default: () => '',
-    }
+    },
+    activeTab: {
+        type: String,
+        default: () => '',
+    },
 })
 </script>

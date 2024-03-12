@@ -141,7 +141,7 @@ onBeforeMount(()=> {
       />
       <div v-if="showClearButton"
         :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${maskedValue.length ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
-        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">
+        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[20px] tw-z-10" @click="onClear">
           <XIcon class="tw-h-full tw-w-full dark:tw-text-white" />
         </button>
       </div>

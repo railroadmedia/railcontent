@@ -4,6 +4,32 @@
     <title>{{ $pack->fetch('fields.title') }} | Musora</title>
 @endsection
 
+
+@php
+    $ctas = [
+        [
+            'type' => 'primary',
+            'props' => [
+                'text' => $pack->fetch('primary_cta_text'),
+                'url' => $pack->fetch('primary_cta_url'),
+                'icon' => 'fa-play'
+            ]
+        ],
+        
+    ];
+
+    $ctasJson = json_encode($ctas);
+
+    $infoDataStrArr = [];
+    if (isset($infoData['lessons']) && isset($infoData['xp'])) {
+        $infoDataStrArr = [
+            $infoData['lessons'] . ' Lessons',
+            $infoData['xp'] . ' XP'
+        ];
+    }
+
+@endphp
+
 @section('content')
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
@@ -59,20 +85,16 @@
         @endslot
     @endcomponent --}}
 
-    <packs-header
+    <page-header
+        page-type="{{ $parentContent->fetch('type') }}"
         title="Packs"
         hero-img="{{ $pack->fetch('data.header_image_url') }}"
-        additional-img-src="{{ $pack->fetch('data.logo_image_url') }}"
         dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
         light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
-        primary-cta-icon="fa-play"
-        primary-cta-text="{{$pack['primary_cta_text']}}"
-        primary-cta-url="{{ $pack['primary_cta_url'] }}"
-        :info-data="{{ json_encode($infoData) }}"
-        {{-- :enable-reset-progress="true"
-        content-id="{{ $parentContent->fetch('id') }}" --}}
+        :info-data="{{ json_encode($infoDataStrArr) }}"
+        :ctas="{{ $ctasJson }}"
     >
-    </packs-header>
+    </page-header>
 
 
     {{-- @include('partials.bladesora.members.content.content-info-subheader', [
@@ -94,21 +116,21 @@
         ></content-info>
     @endif
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
+    <div class="tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
         <div class="tw-flex tw-flex-col">
 
             <div class="tw-flex tw-flex-row pv-3">
                 <h1 class="tw-text-[30px] tw-font-bold dark:tw-text-white tw-capitalize">{{ $pack->fetch('fields.title') }}</h1>
             </div>
 
-            <div class="tw-flex tw-flex-row tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57]">
+            <div class="tw-flex tw-flex-row tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-pb-[30px]">
                 <content-catalogue
-                        brand="{{ $brand }}"
-                        catalogue-type="grid"
-                        theme-color="{{ $brand }}"
-                        :pre-loaded-content="{{ $childContent }}"
-                        user-id="{{ auth()->id() }}"
-                        :full-width-on-mobile="true"
+                    brand="{{ $brand }}"
+                    catalogue-type="grid"
+                    theme-color="{{ $brand }}"
+                    :pre-loaded-content="{{ $childContent }}"
+                    user-id="{{ auth()->id() }}"
+                    :full-width-on-mobile="true"
                 ></content-catalogue>
             </div>
 

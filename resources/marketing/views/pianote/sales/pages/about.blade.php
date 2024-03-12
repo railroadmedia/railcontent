@@ -269,7 +269,6 @@
             init() {
                 new Splide(this.$refs.splide, {
                     perPage: 4,
-                    gap: '0.5rem',
                     perMove: 1,
                     classes: {
                         arrow: 'splide__arrow bg-pianote',
@@ -298,7 +297,7 @@
                 <div class="splide__track relative" style="z-index: 10">
                     <ul class="splide__list">
                         @foreach ($slider as $slide)
-                            <li class="splide__slide flex flex-col items-center justify-center">
+                            <li class="splide__slide flex flex-col items-center justify-center px-1">
                                 <div class="rounded-xl border-4 border-white border-solid relative overflow-hidden">
                                     <h3 class="font-bebas text-center py-2" style="background:linear-gradient(180deg, #780000 0%, #3C0000 100%);">{{$slide['year']}}</h3>
                                     <div class="w-full bg-cover bg-top lazyload" style="padding-bottom:56%" data-bg="https://www.musora.com/musora-cdn/image/width=420,quality=95/{{$slide['img']}}"></div>

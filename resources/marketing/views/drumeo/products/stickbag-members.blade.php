@@ -9,6 +9,7 @@
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/share-image2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag/">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>     
 
     @include('_partials.layout._fonts')
 
@@ -16,7 +17,7 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
         .join.outline.blue {
             border-color:#0b76db;
@@ -99,6 +100,10 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+
+        .splide__arrow:focus {
+            outline: none;
+        }
     </style>
 @stop
 
@@ -106,11 +111,6 @@
     x-data="{
     trailer: false,
     trailerM: false,
-    image1: false,
-    image2: false,
-    image3: false,
-    image4: false,
-    image5: false,
     }"
 @endsection
 
@@ -126,7 +126,7 @@
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script>
         $(document).ready(function () {
             $('table tr td:nth-child(3)').on('click', function(){

@@ -6,9 +6,6 @@
     @endif
 >
     <div class="container max-w-6xl mx-auto relative z-20">
-        @if(!empty($noExcuse))
-            <h4 class="font-lexend leading-tight uppercase mb-3 sm:mb-4">NEW YEAR. <span class="text-{{$theme}}"> NO EXCUSES.</span></h4>
-        @endif
         @if(!empty($testimonialVersion))
             <h5 class="leading-tight uppercase"><strong>MUSIC STUDENTS <br class="sm:hidden">PREFER LEARNING HERE</strong></h5>
             <h1 class="overflow-hidden leading-tight text-[35px] sm:text-5xl sm:leading-[76px] rotater-text my-1 sm:my-0" style="height: 100px;font-family: 'Sedgwick Ave', sans-serif!important; ">

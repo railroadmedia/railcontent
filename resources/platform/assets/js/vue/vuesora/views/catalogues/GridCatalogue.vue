@@ -1,7 +1,7 @@
 <template>
     <div
         class="tw-flex"
-        :class="[noWrap ? 'overflow' : 'flex-wrap', {'tw-flex-col' : displayInline }]"
+        :class="[noWrap ? 'overflow' : 'flex-wrap', {'tw-flex-col': displayInline }, { 'md:tw-grid md:tw-grid-cols-3 lg:tw-grid-cols-4 2xl:tw-grid-cols-5 md:tw-gap-3': !isSingleItem && !displayInline }]"
     >
         <catalogue-card
             v-for="item in content"
@@ -18,6 +18,7 @@
             :add-dark-mode-color="addDarkModeColor"
             :is-single-item="isSingleItem"
             :full-width-on-Mobile="fullWidthOnMobile"
+            :add-margin-bottom="addMarginBottom"
             @addToList="emitAddToList"
         />
     </div>
@@ -100,6 +101,10 @@ export default {
         fullWidthOnMobile: {
             type: Boolean,
             default: () => false,
+        },
+        addMarginBottom: {
+            type: Boolean,
+            default: () => true,
         },
     },
 };
