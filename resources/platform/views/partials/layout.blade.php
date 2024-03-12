@@ -7,7 +7,7 @@ $journeySection = '';
 
 if (isset($trackingSectionName)) {
     $journeySection = $trackingSectionName;
-} else if ($catalogueMeta['name']) {
+} else if (isset($catalogueMeta) && $catalogueMeta['name']) {
     $journeySection = $catalogueMeta['name'];
 } else {
     $journeySection = 'Unknown';

@@ -27,29 +27,30 @@ export const useCollectionStore = defineStore({
             loading: false,
             searchEndpointUrl: '',
             searching: false, //for threads page
-            sortOptions:[],
+            sortOptions: [],
             tabData: {},
             totalPages: 0,
             totalResults: 0,
         }
     },
     actions: {
-        applyFilter (param) {
+        applyFilter(param) {
             this.updateIncludedFields(param);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
 
-        setProgress (value) {
+        setProgress(value) {
             this.filter = {
                 ...this.filter,
                 progress: value,
             };
             this.getData();
+            this.trackFilter();
         },
 
-        clearFilter () {
+        clearFilter() {
             this.resetFilterFields();
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
@@ -57,30 +58,35 @@ export const useCollectionStore = defineStore({
             this.getData();
         },
 
-        coachEndpoint (){
+        coachEndpoint() {
             return `/railcontent/content?only_subscribed=${this.filter.activeTab === 'All Coaches' ? '' : 'true'}`;
         },
 
-        getEndpoint (){
+        getEndpoint() {
             return this.isCoach ? this.coachEndpoint() : ((this.filter.searchTerm && this.searchEndpointUrl) ? this.searchEndpointUrl : this.endpoint);
         },
 
-        updateIncludedFields (param) {
+        updateIncludedFields(param) {
             const itemIndex = this.filter.includedFields.findIndex(f => f === param);
 
-            if (itemIndex === -1) this.filter.includedFields.push(param);
-            else this.filter.includedFields.splice(itemIndex, 1);
+            if (itemIndex === -1) {
+                this.filter.includedFields.push(param);
+                this.trackFilter();
+            } else {
+                this.filter.includedFields.splice(itemIndex, 1);
+                // maybe track clear filter here
+            }
         },
 
-        resetFilterFields () {
+        resetFilterFields() {
             this.filter.includedFields = [];
         },
 
-        formattedTabs () {
+        formattedTabs() {
             return Array.isArray(this.tabData[this.filter.activeTab].key) ? this.tabData[this.filter.activeTab].key : [this.tabData[this.filter.activeTab].key];
         },
 
-        async fetchData () {
+        async fetchData() {
             const userStore = useUserStore();
             try {
 
@@ -96,7 +102,7 @@ export const useCollectionStore = defineStore({
                                 ...this.filter.params,
                                 included_fields: this.filter.includedFields,
                                 count_filter_items: true,
-                                ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm} ),
+                                ...(this.filter.searchTerm && { [this.filter.hasOwnProperty('term') ? 'term' : 'title']: this.filter.searchTerm }),
                                 ...(this.filter.activeTab && { tabs: this.formattedTabs() }),
                                 ...(this.filter.progress && { included_user_states: [this.filter.progress] }),
                             },
@@ -111,7 +117,7 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        async getData (replace = true, displayLoading = true) {
+        async getData(replace = true, displayLoading = true) {
             this.loading = displayLoading;
             this.fetching = true;
 
@@ -123,7 +129,7 @@ export const useCollectionStore = defineStore({
             this.fetching = false;
         },
 
-        getURLParams () {
+        getURLParams() {
             const params = new URLSearchParams(window.location.search);
 
             //Get search params
@@ -142,7 +148,7 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        getSortOptions () {
+        getSortOptions() {
             if (this.tabData[this.filter.activeTab].groupByView) {
                 return [
                     { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
@@ -153,26 +159,26 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        loadMore () {
+        loadMore() {
             if (!this.fetching) {
                 this.tabData[this.filter.activeTab].currentPage++;
                 this.getData(false, false);
             }
         },
 
-        setAllTabsToFilterNotApplied () {
+        setAllTabsToFilterNotApplied() {
             Object.keys(this.tabData).forEach(tab => {
                 this.tabData[tab].filterApplied = false;
             });
         },
 
-        setActiveTabToFilterApplied () {
+        setActiveTabToFilterApplied() {
             if (this.tabData[this.filter.activeTab]) {
                 this.tabData[this.filter.activeTab].filterApplied = true;
             }
         },
 
-        setData (response, replace) {
+        setData(response, replace) {
             if (response) {
                 if (replace) {
                     this.data = [...response.data.data];
@@ -186,7 +192,7 @@ export const useCollectionStore = defineStore({
                 }
             }
 
-            if (this.filter.searchTerm){
+            if (this.filter.searchTerm) {
                 this.searching = true;
             } else {
                 this.searching = false;
@@ -194,14 +200,14 @@ export const useCollectionStore = defineStore({
             this.loading = false;
         },
 
-        setDefaults (defaults) {
-            if (defaults.isCoach){
+        setDefaults(defaults) {
+            if (defaults.isCoach) {
                 this.isCoach = defaults.isCoach;
             }
 
             if (defaults.content) {
                 this.data = defaults.content?.data || [];
-                if(defaults.content.meta?.filterOptions){
+                if (defaults.content.meta?.filterOptions) {
                     this.filterColumns = getFilterValues(defaults.content.meta.filterOptions);
                 }
             }
@@ -228,8 +234,8 @@ export const useCollectionStore = defineStore({
                 let tabParams = params.getAll('tabs[]');
 
                 //Set active tab from URL
-                if(tabParams && tabParams.length > 0){
-                    if(tabParams.length === 1){
+                if (tabParams && tabParams.length > 0) {
+                    if (tabParams.length === 1) {
                         tabParams = tabParams[0];
                     }
 
@@ -240,7 +246,7 @@ export const useCollectionStore = defineStore({
                     this.filter.activeTab = activeTab.value;
                     this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...activeTab };
 
-                //Set active tab as first tab from tabOptions
+                    //Set active tab as first tab from tabOptions
                 } else {
                     this.filter.activeTab = defaults.tabOptions[0].value;
                     this.tabData[this.filter.activeTab] = { ...defaults.tabData, ...defaults.tabOptions[0] };
@@ -248,7 +254,7 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        setURLParams () {
+        setURLParams() {
             const url = new URL(window.location.origin + window.location.pathname);
 
             this.filter.searchTerm && url.searchParams.set(this.filter.hasOwnProperty('term') ? 'term' : 'title', this.filter.searchTerm);
@@ -260,7 +266,7 @@ export const useCollectionStore = defineStore({
                 })
             }
 
-            if(Array.isArray(this.tabData[this.filter.activeTab].key)){
+            if (Array.isArray(this.tabData[this.filter.activeTab].key)) {
                 this.tabData[this.filter.activeTab].key.map((key) => {
                     key && url.searchParams.append('tabs[]', key);
                 })
@@ -271,22 +277,24 @@ export const useCollectionStore = defineStore({
             window.history.pushState({}, '', url);
         },
 
-        setSearchTerm (term) {
+        setSearchTerm(term) {
             this.filter.searchTerm = term;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
         },
 
-        sortData (item) {
+        sortData(item) {
             this.filter.sort = item;
-            this.trackSort(item);
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.getData();
+            this.trackSort();
         },
 
-        switchTab (tab) {
+        switchTab(tab) {
+            this.trackFilterGroup(tab);
+
             //Save page data
             this.tabData[this.filter.activeTab] = {
                 ...this.tabData[this.filter.activeTab],
@@ -300,12 +308,12 @@ export const useCollectionStore = defineStore({
             //When the tab data is stored
             if (this.tabData[this.filter.activeTab] && this.tabData[this.filter.activeTab].filterApplied) {
                 this.data = ([...this.tabData[this.filter.activeTab].data]);
-                this.filterColumns =  this.tabData[this.filter.activeTab].filterColumns;
-            //When the tab data is not stored
+                this.filterColumns = this.tabData[this.filter.activeTab].filterColumns;
+                //When the tab data is not stored
             } else {
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
                 //When the tab's groupByView is true set sort to by alphabet
-                if  (this.tabData[this.filter.activeTab].groupByView) {
+                if (this.tabData[this.filter.activeTab].groupByView) {
                     this.filter.sort = 'slug';
                 }
                 this.getData();
@@ -314,51 +322,48 @@ export const useCollectionStore = defineStore({
             this.setURLParams()
         },
 
-        trackSort (sortValue) { 
-            if (sortValue) {
-                const userStore = useUserStore();
-                const payload = {
-                    sort: sortValue,
-                    section: userStore.journeySection,
-                    brand: userStore.brand,
-                };
+        trackSort() {
+            const userStore = useUserStore();
+            const payload = {
+                sort: sortValue,
+                section: userStore.journeySection,
+                brand: userStore.brand,
+            };
 
-                userJourney.trackSort({
-                    token: userStore.token,
-                    payload 
-                })
-            }
+            userJourney.trackSort({
+                token: userStore.token,
+                payload
+            })
         },
 
-        trackFilter () {
-                const userStore = useUserStore();
-                const payload = {
-                    brand: userStore.brand,
-                    section: userStore.journeySection,
-                    progress,
-                    filters,
-                };
+        trackFilter() {
+            const userStore = useUserStore();
+            const payload = {
+                brand: userStore.brand,
+                section: userStore.journeySection,
+                progress: this.filter.progress,
+                filters: this.filter.includedFields,
+            };
 
-                userJourney.trackFilter({
-                    token: userStore.token,
-                    payload 
-                })
+            userJourney.trackFilter({
+                token: userStore.token,
+                payload
+            });
         },
 
-        trackFilterGroup (sortValue) { 
-            if (sortValue) {
-                const userStore = useUserStore();
-                const payload = {
-                    brand: userStore.brand,
-                    section: userStore.journeySection,
-                    sort: sortValue
-                };
+        trackFilterGroup(tab) {
+            const userStore = useUserStore();
+            const payload = {
+                brand: userStore.brand,
+                section: userStore.journeySection,
+                group: tab.value
+            };
 
-                userJourney.trackFilterGroup({
-                    token: userStore.token,
-                    payload 
-                })
-            }
+            userJourney.trackFilterGroup({
+                token: userStore.token,
+                payload
+            })
+
         }
     },
 });
