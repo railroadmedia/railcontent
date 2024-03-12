@@ -11,8 +11,9 @@
       </div>
     </template>
 
-    <div class="tw-flex tw-flex-col pl-2 tw-self-stretch tw-mr-1 tw-w-full">
-      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="{ 'tw-justify-end': !additionalImgSrc }">
+    <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full" :class="{ 'pl-2': iconName || heroImg }">
+      <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : ''
+    ]">
         <div class="tw-flex">
           <template v-if="additionalImgSrc">
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] sm:tw-h-[86px]">
@@ -80,6 +81,7 @@ const props = defineProps({
   infoData: Array,
   additionalImgSrc: String,
   secondaryCtaText: String,
+  hasCtas: Boolean,
 })
 
 const isModalOpen = ref(false);
