@@ -5,7 +5,7 @@ export const useUserStore = defineStore({
   state: () => ({
     user: null,
     brand: 'drumeo',
-    currentPage: null,
+    journeySection: null,
     token: null,
   }),
   getters: {
@@ -22,8 +22,8 @@ export const useUserStore = defineStore({
     setCurrentBrand (brand) {
       this.brand = brand;
     },
-    setCurrentPage (currentPage) {
-      this.currentPage = currentPage;
+    setJourneySection (journeySection) {
+      this.journeySection = journeySection;
     },
     setToken (token) {
       this.token = token;

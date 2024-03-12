@@ -21,7 +21,7 @@ const props = defineProps({
     type: String,
     default: 'drumeo'
   },
-  currentPage: {
+  journeySection: {
     type: String,
     default: ''
   },
@@ -50,9 +50,9 @@ watch(
   { immediate: true }
 );
 watch(
-  () => props.currentPage,
-  (currentPage) => {
-    userStore.setCurrentPage(currentPage);
+  () => props.journeySection,
+  (journeySection) => {
+    userStore.setJourneySection(journeySection);
   },
   { immediate: true }
 );

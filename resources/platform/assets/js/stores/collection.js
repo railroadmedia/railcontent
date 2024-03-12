@@ -83,6 +83,7 @@ export const useCollectionStore = defineStore({
         async fetchData () {
             const userStore = useUserStore();
             try {
+
                 const response = await axios
                     .get(
                         this.isCoach ? this.coachEndpoint() : this.getEndpoint(),
@@ -318,7 +319,7 @@ export const useCollectionStore = defineStore({
                 const userStore = useUserStore();
                 const payload = {
                     sort: sortValue,
-                    section: userStore.currentPage,
+                    section: userStore.journeySection,
                     brand: userStore.brand,
                 };
 
@@ -329,12 +330,11 @@ export const useCollectionStore = defineStore({
             }
         },
 
-        trackFilter ({ progress, filters }) { 
-            if (sortValue) {
+        trackFilter () {
                 const userStore = useUserStore();
                 const payload = {
                     brand: userStore.brand,
-                    section: userStore.currentPage,
+                    section: userStore.journeySection,
                     progress,
                     filters,
                 };
@@ -343,7 +343,6 @@ export const useCollectionStore = defineStore({
                     token: userStore.token,
                     payload 
                 })
-            }
         },
 
         trackFilterGroup (sortValue) { 
@@ -351,7 +350,7 @@ export const useCollectionStore = defineStore({
                 const userStore = useUserStore();
                 const payload = {
                     brand: userStore.brand,
-                    section: userStore.currentPage,
+                    section: userStore.journeySection,
                     sort: sortValue
                 };
 
