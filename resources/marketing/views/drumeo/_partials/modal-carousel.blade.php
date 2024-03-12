@@ -32,6 +32,7 @@
             pagination: false,
             start: this.imgIndex,
             perMove: 1,
+            gap: '1rem',
             swipe: true,
             arrows: true,
             breakpoints: {
@@ -76,7 +77,7 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
                 class="relative w-full overflow-y-visible max-w-6xl">
                 <div class="@if(!empty($styles)) {{ $styles }} @endif w-full relative px-3 sm:px-5">
                     <div x-ref="splide" class="splide">
-                        <div class="splide__track">
+                        <div class="splide__track rounded-xl">
                             <ul class="splide__list">
                                 <template x-for="(slide, index) in slides" :key="index">
                                     <li class="splide__slide">
