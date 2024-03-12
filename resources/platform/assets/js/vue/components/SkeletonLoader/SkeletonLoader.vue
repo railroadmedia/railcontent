@@ -26,6 +26,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    isSingleRow: {
+		type: Boolean,
+        default: () => false,
+    },
     isGroupedView: {
         type: Boolean,
         default: () => false,

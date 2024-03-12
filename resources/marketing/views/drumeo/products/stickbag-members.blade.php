@@ -9,6 +9,7 @@
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/share-image2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/stickbag/">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>     
 
     @include('_partials.layout._fonts')
 
@@ -99,6 +100,10 @@
         .join.gold {
             background:linear-gradient(to bottom, #e2c584, #ad7c12);
         }
+
+        .splide__arrow:focus {
+            outline: none;
+        }
     </style>
 @stop
 
@@ -106,11 +111,6 @@
     x-data="{
     trailer: false,
     trailerM: false,
-    image1: false,
-    image2: false,
-    image3: false,
-    image4: false,
-    image5: false,
     }"
 @endsection
 

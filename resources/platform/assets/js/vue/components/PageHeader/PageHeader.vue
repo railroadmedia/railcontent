@@ -88,8 +88,6 @@ const props = defineProps({
   description: String,
 });
 
-console.log(props.infoData);
-
 const primaryCtaProps = computed(() => props.ctas?.find(cta => cta.type === 'primary')?.props || {});
 const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
 const primaryCtaText = computed(() => primaryCtaProps.value.text);

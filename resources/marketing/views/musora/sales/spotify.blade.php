@@ -58,8 +58,8 @@
 @endsection
 
 @section('final')
+{{--    'emailSignup' => true,--}}
     @include('musora.sales.components.order-section-collage', [
-    'emailSignup' => true,
     'logo' => 'marketing/musora/membership/redeem/musora-spotify-logo-white.svg',
     'subHeader' => 'LEARN YOUR FAVORITE SONGS FOR FREE.',
     'headerLight' => true,
@@ -69,6 +69,7 @@
     <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> Awesome music lessons.</li>',
     'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
     ])
+
 @endsection
 
 @section('scripts')
