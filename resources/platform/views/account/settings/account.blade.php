@@ -25,7 +25,6 @@
                     '{{ $shopifyCustomerAccessToken }}'
                 )
                     .then(session => {
-                        console.log(session);
                         return session;
                     })
                     .catch(error => {
@@ -39,11 +38,8 @@
             '{{ $shopifyCustomerAccessToken }}'
         )
         .then(session => {
-            console.log('session');
-            console.log(session);
             recharge.customer.getCustomerPortalAccess(session)
             .then(portal => {
-                console.log(portal);
                 document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
             })
             .catch(error => {
