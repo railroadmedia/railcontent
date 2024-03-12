@@ -142,7 +142,7 @@
                                     </li>
                                     <li>
                                         <button class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap tw-text-sm" @click="reportComment">
-                                            <FlagIcon class="tw-inline tw-w-6 tw-h-6 tw-mr-1" /> Report Comment
+                                            <FlagIcon class="tw-inline tw-w-6 tw-h-6 tw-mr-1" /> {{ isReported ? 'Reported' : 'Report Comment' }}
                                         </button>
                                     </li>
                                 </ul>
