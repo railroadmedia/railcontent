@@ -2166,6 +2166,12 @@ return [
                         'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video'],
                     ],
                     [
+                        'name' => '15+ Minutes',
+                        'short_name' => '15+ MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,750,integer,>,video'],
+                    ],
+                    [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
