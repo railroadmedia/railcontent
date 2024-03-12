@@ -76,12 +76,13 @@
                             See All
                         </a>
                     </div>
-                    <div>
+                    <div class="tw-px-4 lg:tw-px-0">
                         <transition appear name="fade">
                             <CatalogueCardContainer
                                 :is-mini-view="true"
                                 :pre-loaded-content="continueData.data"
                                 :show-dropdown="true"
+                                :no-skeleton="true"
                             />
                         </transition>
                     </div>
@@ -89,7 +90,7 @@
             </template>
         </section>
         <br>
-        <section>
+        <section class="tw-px-4 lg:tw-px-0">
             <CollectionWrapper
                 :collection-type="collectionType"
                 :filterable-values="filterableValues"

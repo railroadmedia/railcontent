@@ -36,9 +36,12 @@ class GroupedContentDecorator extends ModeDecoratorBase
 
             if ($content['type'] == 'artist') {
                 $artist = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$content['grouped_by_field'],'string')->first();
+
+                $lessonType =  $content['lessons'][0]['type'] ?? '';
                 $contents[$index]['url'] = url()->route('platform.content.artist.show', [
                     'brand' => brand(),
                     'slug' => urlencode(urlencode($content['artist'])),
+                    'included_fields[]' => 'type,'.ucwords(str_replace('-',' ',$lessonType)),
                 ]);
                 $contents[$index]['total_plays'] = $this->userContentProgressService->countByArtistTypesUserProgress(
                     ['song'],
@@ -82,7 +85,8 @@ class GroupedContentDecorator extends ModeDecoratorBase
                             'brand' => brand(),
                             'firstContentSlug' => $content['slug'],
                             'firstContentId' => $content['id'],
-                        ]).'?included_fields[]=type,'.ucfirst($content['content_type']);
+                            'included_fields[]' => 'type,'.ucwords(str_replace('-',' ',$content['content_type'])),
+                        'include_future_scheduled_content_only' =>false]);
                 }else{
                     //for mobile app - See All options
                     $contents[$index]['url'] = url()->route('platform.content.coach.show', [

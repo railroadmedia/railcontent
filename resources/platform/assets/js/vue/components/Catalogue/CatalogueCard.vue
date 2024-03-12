@@ -7,18 +7,17 @@
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
             class_object,
-            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-[267px]' : 'tw-w-[267px]'}  lg:tw-w-1/4 2xl:tw-w-1/5 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]`}`,
-            { 'tw-py-3 tw-w-full @3xl/breakToList:tw-py-0 @3xl/breakToList:tw-w-1/4 @3xl/breakToList:tw-mb-6 @3xl/breakToList:tw-pr-[8px] @4xl/breakToList:tw-pr-[12px] @5xl/breakToList:tw-w-1/5 @6xl/breakToList:tw-pr-[18px]' : breakToListView },
-            { 'tw-mb-[15px]': addMarginBottom }
+            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-auto' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0'} lg:tw-w-auto tw-shrink-0 `}`,
+            { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow },
         ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
-            { '@3xl/breakToList:tw-flex-col' : breakToListView }
+            { 'lg:tw-flex-col' : breakToListView }
         ]">
             <!-- Thumbnail Section -->
             <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
-                { 'tw-w-[142px] @lg/breakToList:tw-w-[200px] tw-flex-shrink-0 tw-mr-3 ': forceListView || breakToListView },
-                { '@3xl/breakToList:tw-w-full @3xl/breakToList:tw-flex-shrink @3xl/breakToList:tw-mr-0': breakToListView },
+                { 'tw-w-[142px] tw-flex-shrink-0 tw-mr-3': forceListView || breakToListView },
+                { 'lg:tw-mr-0 lg:tw-w-full lg:tw-flex-shrink lg:tw-w-full': breakToListView },
                 item.type === 'song' && forceListView ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
@@ -216,6 +215,10 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    isSingleRow: {
+		type: Boolean,
+        default: () => false,
+    },
     addMarginBottom: {
         type: Boolean,
         default: () => false,
@@ -350,8 +353,9 @@ const mappedData = computed(() => {
 const class_object = computed(() => ({
     'no-access': noAccess.value,
     completed: props.item.completed,
-    'dark:tw-border-[#223F57]': props.forceListView,
-    'display-inline': props.forceListView,
+    'dark:tw-border-[#223F57] tw-inline': props.forceListView,
+    'lg:tw-py-0': props.breakToListView,
+    'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
 }));
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);

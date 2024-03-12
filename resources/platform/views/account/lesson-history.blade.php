@@ -10,8 +10,8 @@
         collection-type="history"
         :pre-loaded-content="{{ $listLessons }}"
         :included-types="{{ json_encode($allowedTypes) }}"
-        :hide-search="true"
-        :hide-sort-icon="true"
+        :hide-search="false"
+        :hide-sort-icon="false"
         :tab-options="{{ json_encode([
                         [ 'key' => 'inProgress', 'value' => 'In Progress' ],
                         [ 'key' => 'complete', 'value' => 'Complete' ]

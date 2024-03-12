@@ -20,6 +20,7 @@
                         :pre-loaded-content="preLoadedContent"
                         :show-dropdown="showDropdown"
                         :use-ref-data="useRefData"
+                        :is-single-row="true"
                     />
                 </transition>
             </div>
