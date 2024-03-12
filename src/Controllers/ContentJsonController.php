@@ -105,7 +105,7 @@ class ContentJsonController extends Controller
 
         $group_by = null;
         $contentTypes = $request->get('included_types', []);
-        if(count($contentTypes) > 5 && $request->has('count_filter_items')){
+        if($request->has('is_all') && ($request->get('is_all') === "true")){
             $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
         }
 

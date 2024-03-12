@@ -2935,7 +2935,11 @@ class ContentRepository extends RepositoryBase
 
         $includedFields = collect($this->includedFields);
         $initialFilters = $this->includedFields;
-
+	foreach ($initialFilters as $initialFilter){
+	    if(!in_array($initialFilter['name'],$filterOptions)){
+		$filterOptions[] = $initialFilter['name'];
+	    }
+	}
         foreach ($filterOptions as $filterOption) {
             $filterOptionTableName = $filterNameToTableNameAndColumnName[$filterOption]['table'] ?? null;
             $filterOptionColumnName = $filterNameToTableNameAndColumnName[$filterOption]['column'] ?? null;
