@@ -28,8 +28,8 @@
           :alwaysShow="progressBarData.alwaysShow">
           <template #progress-text v-if="progressBarData.labelText">{{ progressBarData.labelText }} -&nbsp;</template>
         </ProgressText>
-        <PageHeaderCtasBox :class="{ 'tw-hidden sm:tw-flex': isLearningPathPage }" :progressBarData="progressBarData"
-          :secondaryCtas="secondaryCtas" />
+        <PageHeaderCtasBox :class="{ 'tw-hidden sm:tw-flex': isLearningPathPage || isLivePage || isSchedulePage }"
+          :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>
     </template>
     <template #bottom-full>
