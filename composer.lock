@@ -10135,16 +10135,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.56",
+            "version": "v3.1.57",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "0f635b068951eca1991ff3548c1215b8a8235b1b"
+                "reference": "77d06b92c6e6af0c4efb847d064e87263536f523"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0f635b068951eca1991ff3548c1215b8a8235b1b",
-                "reference": "0f635b068951eca1991ff3548c1215b8a8235b1b",
+                "reference": "77d06b92c6e6af0c4efb847d064e87263536f523",
                 "shasum": ""
             },
             "require": {
@@ -19283,5 +19283,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

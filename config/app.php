@@ -199,6 +199,7 @@ return [
         App\Modules\EventTracking\Providers\EventTrackingServiceProvider::class,
         App\Modules\MusoraApi\Providers\MusoraApiServiceProvider::class,
         App\Modules\MusoraCenter\Providers\MusoraCenterServiceProvider::class,
+        App\Modules\FeatureFlagging\Providers\FeatureFlaggingServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -245,6 +246,7 @@ return [
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'FCM' => LaravelFCM\Facades\FCM::class,
+        'FeatureFlag' => App\Modules\FeatureFlagging\Facades\FeatureFlagging::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
