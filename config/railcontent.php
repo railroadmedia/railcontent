@@ -1961,7 +1961,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                'allowableFilters' => [],
+                'allowableFilters' => ['type'],
                 'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
