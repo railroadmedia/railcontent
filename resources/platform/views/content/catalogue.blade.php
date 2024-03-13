@@ -295,6 +295,7 @@
                 :statuses="{{ json_encode($statuses ?? ['published']) }}"
                 :title="{{ json_encode($catalogueMeta['shortname'] ?? $catalogueMeta['name']) }}"
                 :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
+                :multiple-types="{{ json_encode($isAllContent ?? false) }}"
                 :is-all-content="{{ json_encode($isAllContent ?? false) }}"
                 :hide-filter-icon="{{ json_encode($lessonType === 'routine' ? true : false) }}"
             ></collection-wrapper>

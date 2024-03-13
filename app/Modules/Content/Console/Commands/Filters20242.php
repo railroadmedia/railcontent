@@ -21,7 +21,7 @@ use Symfony\Component\Console\Helper\TableSeparator;
 
 class Filters20242 extends Command
 {
-    protected $signature = 'filters:import {brand=drumeo} {--withImport}';
+    protected $signature = 'filters:import {brand=drumeo} {--withImport} {--refreshCompiledViewData}';
     protected $description = 'Import filters data from CSV file';
 
 
@@ -32,6 +32,7 @@ class Filters20242 extends Command
         $endIndex = -1;
         $brand = $this->argument('brand');
         $import = $this->option('withImport');
+        $refreshCompiledViewData = $this->option('refreshCompiledViewData');
 
         $table = new Table($this->output);
 
@@ -46,14 +47,20 @@ class Filters20242 extends Command
         [$csv, $headersRow] = $this->getCSV($startIndex, $endIndex, $brand);
 
         $results = [];
+        $contentIds = [];
 
         $this->withProgressBar(
             $csv,
-            function ($row) use ($headersRow, $contentService, &$results, $brand, $import) {
+            function ($row) use ($headersRow, $contentService, &$results, $brand, $import, &$contentIds) {
                 $data = $this->getData($row, $headersRow);
 
                 $contentId = $this->getValue($data, $headersRow, 'id');
-                $contentType = $this->getValue($data, $headersRow, 'type');
+                $contentIds[] = $contentId;
+                if($brand == 'drumeo-songs'){
+                    $contentType = 'song';
+                }else{
+                    $contentType = $this->getValue($data, $headersRow, 'type');
+                }
                 $contentTitle= $this->getValue($data, $headersRow, 'title');
 
                 $content = Content::query()
@@ -66,6 +73,8 @@ class Filters20242 extends Command
                 } else {
                     if($brand == 'drumeo-Rudiments') {
                         $style = $this->getValue($data, $headersRow, 'Gear');
+                    }elseif($brand == 'drumeo-songs') {
+                        $style = $this->getValue($data, $headersRow, 'NEW-GENRE');
                     }else {
                         $style = $this->getValue($data, $headersRow, 'Genre');
                     }
@@ -85,6 +94,12 @@ class Filters20242 extends Command
 
                         $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
                         $content->setGear($this->getValue($data, $headersRow, 'Gear'));
+                    }elseif($brand == 'drumeo-songs') {
+                        ContentStyle::query()
+                            ->where('content_id', '=', $contentId)
+                            ->delete();
+                        $content->deleteFields('style');
+                        $content->setStyle($this->getValue($data, $headersRow, 'NEW-GENRE'));
                     }else {
                         $this->prepareDatabase($contentId, $content);
 
@@ -102,6 +117,10 @@ class Filters20242 extends Command
                 }
             }
         );
+
+        if($refreshCompiledViewData){
+            $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
+        }
 
         $separator = new TableSeparator();
         $roows = [];

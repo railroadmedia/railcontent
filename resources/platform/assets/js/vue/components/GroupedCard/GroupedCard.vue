@@ -1,6 +1,6 @@
 <template>
     <!--  Instructor Thumbnail Loader -->
-    <SkeletonLoader v-if="showSkeletonLoader" type="card-group-header" />
+    <SkeletonLoader v-if="collectionStoreLoading" type="card-group-header" />
     <!--  Instructor Thumbnail  -->
     <div v-else class="tw-flex tw-justify-between tw-items-center tw-mb-4">
         <a :href="item.url"
@@ -23,11 +23,10 @@
             See All
         </a>
     </div>
-
     <div class="tw-mb-5">
         <transition appear name="fade">
             <SongCardContainer v-if="contentTypeOverride === 'song'" :preLoadedContent="item.lessons" :isGroupedView="true" :add-margin-bottom="false" />
-            <CatalogueCardContainer v-else :preLoadedContent="item.lessons" :contentTypeOverride="contentTypeOverride" :groupByCards="true" />
+            <CatalogueCardContainer v-else :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" />
         </transition>
     </div>
 </template>

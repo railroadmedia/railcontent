@@ -1,6 +1,6 @@
 <template>
-    <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group tw-shrink-0 sm:tw-pr-[12px]"
-         :class="`sm:tw-w-1/4 lg:tw-w-1/5 xl:tw-w-1/7 tw-mb-4 lg:tw-mb-6 ${isGroupedView ? 'tw-w-[145px] sm:tw-w-[170px] tw-mr-[12px] lg:tw-mr-0' : 'tw-w-full'}`">
+    <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group tw-shrink-0"
+         :class="`${isGroupedView ? 'tw-w-[145px] sm:tw-w-[170px] lg:tw-w-auto tw-mr-3 lg:tw-mr-0' : 'tw-w-full tw-mb-4 sm:tw-mb-0'}`">
         <div class="tw-flex tw-items-center" :class="`${isGroupedView ? 'tw-flex-col' : 'tw-flex-row sm:tw-flex-col'}`">
             <!-- Thumbnail Section -->
             <div class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[5px] sm:tw-mr-0" :class="[

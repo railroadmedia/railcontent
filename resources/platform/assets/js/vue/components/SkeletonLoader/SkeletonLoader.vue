@@ -25,7 +25,15 @@ const props = defineProps({
     breakToListView: {
         type: Boolean,
         default: false,
-    }
+    },
+    isSingleRow: {
+		type: Boolean,
+        default: () => false,
+    },
+    isGroupedView: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const skeletonComponent = computed(() => {

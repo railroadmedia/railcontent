@@ -1,7 +1,7 @@
 <template>
     <div>
         <CollectionFilterWrapper
-            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
+            :showBackButton="showBackButton" :parentUrl="parentUrl" :active-tab="getActiveTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :loading="loading" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :selected-sort="getSelectedSort" :search-term="getSearchTerm" :search-placeholder="searchPlaceholder" :tab-options="tabOptionData" :multi-select-columns="filterColumns" :sort-options="getSortOptions" :show-progress-filters="showProgressFilters"
             @on-clear-filter="handleClearFilter" @on-filter-change="handleFilterChange" @on-search-change="handleSearchChange" @on-sort-change="handleSortChange" @on-tab-change="handleTabChange" @on-progress-change="handleProgressChange"
         />
 
@@ -74,6 +74,10 @@ const props = defineProps({
     filterableValues: {
         type: Array,
         default: () => [],
+    },
+    hideControls: {
+        type: Boolean,
+        default: false,
     },
     hideSortIcon: {
         type: Boolean,
@@ -176,6 +180,10 @@ const props = defineProps({
         type: Boolean,
         default: () => true,
     },
+    multipleTypes: {
+        type: Boolean,
+        default: () => false,
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -192,7 +200,9 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
-        ...(isPack.value && { without_enrollment: props.withoutEnrollment })
+        ...(isPack.value && { without_enrollment: props.withoutEnrollment }),
+        is_all: props.isAllContent,
+
     };
 })
 
@@ -201,7 +211,7 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    }else if(props.isAllContent){
+    }else if(props.multipleTypes){
         types = props.includedTypes;
     } else {
         props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
