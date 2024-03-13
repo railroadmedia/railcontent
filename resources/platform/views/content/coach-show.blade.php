@@ -1,6 +1,7 @@
 @php
     $firstLastName = preg_split('/\s+/', $thisCoach->fetch('fields.name'));
     $currentUserSubscribed = $thisCoach->fetch('current_user_is_subscribed');
+    $headerDescription = $thisCoach->fetch('data.short_bio');
 
     $ctas = [
         [
@@ -47,24 +48,15 @@
         ]
     ])
 
-    @component('partials.bladesora.members.components.coach-header-banner', [
-        'brandName' => '{{ $brand }}',
-        'hideUser' => true,
-        'backgroundImage' => $thisCoach->fetch('data.coach_top_banner_image'),
-        'shortBio' => $thisCoach->fetch('data.short_bio'),
-        'focusArray' => \Illuminate\Support\Arr::wrap($thisCoach->fetch('data.focus_text','')),
-        'fullName' => $firstLastName,
-        'firstName' => $firstLastName[0] ?? '',
-        'lastName' => $firstLastName[1] ?? '',
-        'nameThree' => $firstLastName[2] ?? '',
-        'isUserSubscribed' => $currentUserSubscribed,
-        'coachId' => $thisCoach->fetch('id'),
-        'vimeoVideo' => $thisCoach->fetch('fields.video.fields.vimeo_video_id', null),
-        'forumUrl' => $thisCoach->fetch('fields.forum_thread_id')?($thisCoach['forum_thread']['url'] ?? ''):'',
-        'subscribeUrl' => url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
-        'unsubscribeUrl' => url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')])
-        ])
-    @endcomponent
+    <page-header
+        page-type="{{ $thisCoach->fetch('type') }}"
+        :title="'{{ $firstLastName[0] }}' + ' ' + '{{ $firstLastName[1] }}'"
+        hero-img="{{ $thisCoach->fetch('data.coach_top_banner_image') }}"
+        :info-data="{{ $infoDataStrArrJson }}"
+        :ctas="{{ $ctasJson }}"
+        description="{{ $headerDescription }}"
+    >
+    </page-header>
 
     @if( !empty($coachEvent) )
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
