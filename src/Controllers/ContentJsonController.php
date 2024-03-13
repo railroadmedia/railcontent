@@ -558,8 +558,6 @@ class ContentJsonController extends Controller
     )
     : array {
         $tabs = $request->get('tabs', $request->get('tab', false));
-        $isSong = false;
-        $isAll = false;
         if ($tabs) {
             if (!is_array($tabs)) {
                 $tabs = [$tabs];
@@ -577,17 +575,9 @@ class ContentJsonController extends Controller
                 }
                 if (count($extra) == 1 && $extra[0] == 'complete') {
                     $required_user_states[] = 'completed';
-                    $isAll = true;
                 }
                 if (count($extra) == 1 && $extra[0] == 'inProgress') {
                     $required_user_states[] = 'started';
-                    $isAll = true;
-                }
-                if (count($extra) == 1 && $extra[0] == 'songs') {
-                    $isSong = true;
-                }
-                if (count($extra) == 1 && $extra[0] == 'all') {
-                    $isAll = true;
                 }
             }
         }
@@ -628,11 +618,7 @@ class ContentJsonController extends Controller
                         ->toArray()
                 );
 
-            $included_fields[] =
-                ($isSong) ? 'title|artist|album|genre,%'.$request->get('title').'%,string,like,'.$instructorIds :
-                    (($isAll) ?
-                        'title|artist|album|genre|instructor,%'.$request->get('title').'%,string,like,'.$instructorIds :
-                        'title|genre|instructor,%'.$request->get('title').'%,string,like,'.$instructorIds);
+            $included_fields[] = 'title|artist|album|genre|instructor,%'.$request->get('title').'%,string,like,'.$instructorIds ;
         }
 
         return [$group_by, $required_fields, $included_fields, $required_user_states];
