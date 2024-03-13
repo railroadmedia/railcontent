@@ -1,6 +1,6 @@
 <template>
     <div class="tw-relative">
-        <button class="tw-text-[#00101D] dark:tw-text-white" @click="toggleDropdown" @scrolloff>
+        <button class="tw-text-[#00101D] dark:tw-text-white" @click="toggleDropdown">
             <DotsHorizontalIcon class="tw-w-6" />
         </button>
 
