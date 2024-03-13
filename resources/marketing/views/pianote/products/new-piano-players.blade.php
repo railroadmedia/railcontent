@@ -244,41 +244,36 @@ $items = [
 @php
                     $testimonials = [
                         [
-                        'avatar' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
-                        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jessripley.jpg',
-                        'title' => "It was like Lisa was right there beside me, cheering me on. I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
-                        'name' => 'Jess Ripley',
-                        ],
-                        [
-                        'avatar' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/serenadorward.jpg',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Serena-dorward-thumb.webp',
-                        'title' => " I can play some of my all-time favorite songs – and it's just so awesome to know I can learn from home and accomplish one of my dreams. I'm so excited to keep learning and I recommend Pianote so much.",
-                        'name' => 'Serena Dorward',
-                        ],
-                        [
                         'avatar' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/testimonials/jaydemcintosh.jpg',
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Jayde-mcintosh-thumb.webp',
-                        'title' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals. During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing. I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/membership/homepage/2024/testimonials/Jayde-McIntosh-thumb-m.webp',
+                        'title' => "I can play some of my all-time favorite songs – and it’s just so awesome to know <strong>I can learn from home</strong> and accomplish one of my dreams. I’m so excited to keep learning!",
                         'name' => 'Jayde McIntosh',
+                        'video' => '660596722',
+                        ],
+                        [
+                        'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/membership/homepage/2023/testimonials/jessripley.jpg',
+                        'title' => "It's fulfilling and fun to see myself progress and achieve goals. <strong>Now I'm playing with both hands at the same time with confidence</strong> – and I've started playing along with more backing tracks and making up my own songs. ",
+                        'name' => 'Jess Ripley',
                         ],
                         [
                         'avatar' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1699032272-630719.jpg',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Brian-smith-thumb.webp',
-                        'title' => "It’s the best place to start like myself. After 15 days I can comfortably play with both hands. ",
+                        'title' => "It’s the best place to start for somebody new like myself. After 15 days, <strong>I can comfortably play with both hands.</strong> The lessons are great, Lisa is great, and the excitement is great. ",
                         'name' => 'Brian Smith',
                         'video' => '906856562',
                         ],
                         [
                         'avatar' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/C5C626A5-9761-42DF-8A46-875D21570D3D-1688758597-569824.jpg',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/Sam-latham-thumb.webp',
-                        'title' => "I absolutely love it. They teach you all about chords. I started playing piano at church now.",
+                        'title' => "The teachers are engaging, they’re fun. They make practicing the piano an absolute joy. <strong>I started playing the piano at church now,</strong> which has been a dream of mine.",
                         'name' => 'Samantha Latham',
                         'video' => '906856806',
                         ],
                         [
                         'avatar' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/B6DBAB11-4DA8-49A3-AC5B-6EC2E3D88634-1694433618-539646.jpg',
                         'image' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/new-piano-players/testimonials/James-suntres-thumb.webp',
-                        'title' => "NPPSH is the ideal first step irrespective of their age. It’s changed my life for the better.",
+                        'title' => "It’s the ideal first step for anyone who wants to learn the piano, irrespective of age. I’m 67 and yet, I’m making really good progress, and <strong>it has changed my life for the better.</strong>",
                         'name' => 'James Suntres',
                         'video' => '906856743',
                         ],
@@ -353,11 +348,11 @@ $items = [
                                                 @load="event.target.parentNode.style.backgroundImage = `url(${event.target.src})`"
                                             >
                                         </picture>
-                                        <div class="flex flex-col justify-between text-left sm:pl-8">
-                                            <h5 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h5>
-                                            <div class="flex md:items-center">
+                                        <div class="flex flex-col justify-evenly text-left sm:pl-8">
+                                            <h4 class="leading-normal mt-3 sm:mt-0 mb-2"><em>{!! $testimonial['title'] !!}</em></h4>
+                                            <div class="flex items-center">
                                                 @if(!empty($testimonial['avatar']))
-                                                    <img class="h-16 w-16 rounded-full object-cover mr-4 border-4 border-pianote opacity-0 transition-opacity"
+                                                    <img class="h-16 lg:h-20 w-16 lg:w-20 rounded-full object-cover mr-4 border-2 border-{{ $theme }} opacity-0 transition-opacity"
                                                         loading="lazy" onload="this.classList.remove('opacity-0')"
                                                         alt="Avatar"
                                                         src="{{$testimonial['avatar']}}">
