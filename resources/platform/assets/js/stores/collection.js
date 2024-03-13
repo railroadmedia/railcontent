@@ -71,11 +71,10 @@ export const useCollectionStore = defineStore({
 
             if (itemIndex === -1) {
                 this.filter.includedFields.push(param);
-                this.trackFilter();
             } else {
                 this.filter.includedFields.splice(itemIndex, 1);
-                // maybe track clear filter here
             }
+            this.trackFilter();
         },
 
         resetFilterFields() {
