@@ -6,11 +6,11 @@ const props = defineProps({
     },
     headTitles: {
         type: Array,
-        default: ['Name', 'Date', 'Time', '']
+        default: () => ['Name', 'Date', 'Time', '']
     },
     rows: {
         type: Array,
-        default: []
+        default: () => []
     },
     stickyHeader: {
         type: Boolean,
