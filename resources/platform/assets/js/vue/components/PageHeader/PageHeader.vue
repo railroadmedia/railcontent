@@ -39,7 +39,7 @@
       </div>
       <div class="tw-justify-between tw-items-center tw-w-full"
         :class="{ 'tw-flex': isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage, 'tw-flex sm:tw-hidden': isPackBundlePage, 'tw-hidden': !isSongsPage && !isPackBundlePage && !isLearningPathLevelPage && !isLearningPathCoursePage }">
-        <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage"
+        <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage" class="tw-self-end"
           :infoData="infoData" />
         <PageHeaderCtasBox :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>

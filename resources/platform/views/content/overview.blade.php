@@ -119,8 +119,12 @@
         if (isset($infoData['xp'])) {
             $infoDataStrArr[] = $infoData['xp'] . ' XP';
         }
-
-        $headerData['title'] = $parentContent->fetch('fields.title');
+        if($parentContent->fetch('type') === 'learning-path-level'){
+            $headerData['title'] = 'Level ' . $parentContent->fetch('level_number', 0) . ' - ' . $parentContent->fetch('fields.title');
+        }
+        else if($parentContent->fetch('type') === 'learning-path-course') {
+            $headerData['title'] = 'Level ' . $secondContent->fetch('level_number', 0) . '.' . $parentContent->fetch('course_position', 0) . ' - ' . $parentContent->fetch('fields.title');
+        }
         $headerData['progress'] = $parentContent->fetch('progress_percent', 0);
         $headerData['description'] = $parentContent->fetch('data.description');
         $headerData['progressLabelText'] = $progressLabelText;
