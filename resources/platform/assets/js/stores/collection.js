@@ -79,6 +79,7 @@ export const useCollectionStore = defineStore({
 
         resetFilterFields() {
             this.filter.includedFields = [];
+            this.trackFilter();
         },
 
         formattedTabs() {
