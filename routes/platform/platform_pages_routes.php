@@ -127,6 +127,7 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                         'student-focus',
                     ])
+                    ->where('genre', '(.*)')
                     ->name('platform.content.genre.show');
 
                 Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])

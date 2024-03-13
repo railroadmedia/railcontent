@@ -8,6 +8,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Decorators\Decorator;
+use Illuminate\Support\Facades\Log;
 
 class GroupedContentDecorator extends ModeDecoratorBase
 {
@@ -61,9 +62,10 @@ class GroupedContentDecorator extends ModeDecoratorBase
                 $genre = $this->contentService->getWhereTypeInAndStatusAndField(['style'],'published','name',$content['grouped_by_field'],'string')->first();
                 $lessonType =  array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['lessons'][0]['type']] ?? '';
                 if($content['grouped_by_field'] != ''){
+                    $genreUrl = encodeURI($content['grouped_by_field']);
                     $contents[$index]['url'] = url()->route('platform.content.genre.show', [
                         'brand' => brand(),
-                        'genre' => urlencode(urlencode($content['grouped_by_field'])),
+                        'genre' => $genreUrl,
                         'contentTypeName' => $lessonType,
                     ]);
                     $contents[$index]['data'][] = [
