@@ -4,7 +4,7 @@
       <musora-icon :icon-name="iconName" class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
     </template>
     <template v-else-if="heroImg">
-      <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-2">
+      <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
         <div class="square">
           <img class="rounded inset-border" :src="heroImg">
         </div>
