@@ -3,6 +3,121 @@
     if($hasStartedLessons && $lessonType !== 'routine'){
         $showInProgress = true;
     }
+
+    $headerData = [
+        'type' => null,
+        'title' => null,
+        'description' => null,
+        'iconName' => null,
+        'heroImg' => null,
+        'progress' => null,
+        'contentId' => null,
+        'infoData' => null,
+        'ctas' => null
+    ];
+
+    $infoDataStrArr = [];
+    if ($catalogueMeta['name'] == 'Courses') {
+        $headerData['type'] = 'courses';
+        $headerData['title'] = 'Courses';
+        $headerData['iconName'] = 'academic-cap-filled';
+        if ($brand === 'drumeo') {
+            $headerData['description'] = "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers.";
+        } elseif ($brand === 'pianote') {
+            $headerData['description'] = "Tackle your next piano goal with bite-sized courses from many of the world's best pianists.";
+        } elseif ($brand === 'guitareo') {
+            $headerData['description'] = "Tackle your next guitar goal with bite-sized courses from many of the world's best guitarists.";
+        } elseif ($brand === 'singeo') {
+            $headerData['description'] = "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.";
+        }
+    }
+    else if ($catalogueMeta['name'] == 'Play Alongs') {
+        $headerData['type'] = 'playalong';
+        $headerData['title'] = 'Play Alongs';
+        $headerData['iconName'] = 'eigth-notes-filled';
+        $headerData['description'] = 'Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.';
+    }
+    else if ($catalogueMeta['name'] == 'Songs') {
+        $headerData['type'] = 'song';
+        $headerData['title'] = 'Songs';
+        $headerData['iconName'] = 'headphones-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Routines') {
+        $headerData['type'] = 'routine';
+        $headerData['title'] = 'Routines';
+        $headerData['iconName'] = 'routines-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Quick Tips') {
+        $headerData['type'] = 'quicktip';
+        $headerData['title'] = 'Quick Tips';
+        $headerData['iconName'] = 'light-bulb-filled';
+        $headerData['description'] = "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don't have lots of time to practice.";
+    }
+    else if ($catalogueMeta['name'] == 'Bootcamps') {
+        $headerData['type'] = 'bootcamp';
+        $headerData['title'] = 'Bootcamps';
+        $headerData['iconName'] = 'keys-filled';
+    }
+    else if ($catalogueMeta['name'] == 'The Pianote Podcast') {
+        $headerData['type'] = 'podcast';
+        $headerData['title'] = 'The Pianote Podcast';
+        $headerData['iconName'] = 'podcast-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Student Focus') {
+        $headerData['type'] = 'studentfocus';
+        $headerData['title'] = 'Student Focus';
+        $headerData['iconName'] = 'person-plus-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Q & A') {
+        $headerData['type'] = 'qanda';
+        $headerData['title'] = 'Q & A';
+        $headerData['iconName'] = 'question-mark-circle';
+    }
+    else if ($catalogueMeta['name'] == 'Student Reviews') {
+        $headerData['type'] = 'studentreview';
+        $headerData['title'] = 'Student Reviews';
+        $headerData['iconName'] = 'person-plus-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Chords & Scales') {
+        $headerData['type'] = 'chordsandscales';
+        $headerData['title'] = 'Chords & Scales';
+        $headerData['iconName'] = 'guitar-tabs-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Archives') {
+        $headerData['type'] = 'archives';
+        $headerData['title'] = 'Archives';
+        $headerData['iconName'] = 'archives-filled';
+    }
+    else if ($catalogueMeta['name'] == 'New Content') {
+        $headerData['type'] = 'newcontent';
+        $headerData['title'] = 'New Content';
+        $headerData['iconName'] = 'star-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Subscribed') {
+        $headerData['type'] = 'subscribed';
+        $headerData['title'] = 'Subscribed';
+        $headerData['iconName'] = 'bell';
+    }
+    else if ($catalogueMeta['name'] == 'Song Tutorials') {
+        $headerData['type'] = 'songtutorials';
+        $headerData['title'] = 'Song Tutorials';
+        $headerData['iconName'] = 'play-progress-filled';
+    }
+    else if ($catalogueMeta['name'] == 'Rudiments') {
+        $headerData['type'] = 'rudiments';
+        $headerData['title'] = 'Rudiments';
+        $headerData['iconName'] = 'drum-filled';
+        $headerData['description'] = "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.";
+    }
+    else {
+        $headerData['type'] = 'generic';
+        $headerData['title'] = $catalogueMeta['name'];
+        $headerData['description'] = $catalogueMeta['description'];
+    }
+
+
+    $headerDataJson = json_encode($headerData);
+    $headerDataObj = json_decode($headerDataJson);
 @endphp
 
 @extends('partials.layout')
@@ -46,74 +161,18 @@
 @endsection
 
 @section('content')
-
-    @component('partials._header-banner',
-        ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
-        @slot('content')
-            <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    @if($catalogueMeta['name'] == 'Q&A')
-                        <musora-icon icon-name="light-bulb-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Routines')
-                        <musora-icon icon-name="routines-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Quick Tips')
-                        <musora-icon icon-name="light-bulb-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Songs')
-                        <musora-icon icon-name="headphones-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Bootcamps')
-                        <musora-icon icon-name="keys-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
-                        <musora-icon icon-name="podcast-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Student Focus')
-                        <musora-icon icon-name="person-plus-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Q & A')
-                        <musora-icon icon-name="question-mark-circle"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Student Reviews')
-                        <musora-icon icon-name="person-plus-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Chords & Scales')
-                        <musora-icon icon-name="guitar-tabs-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Archives')
-                        <musora-icon icon-name="archives-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Play Alongs')
-                        <musora-icon icon-name="eigth-notes-filled"
-                                    class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @elseif($catalogueMeta['name'] == 'New Content')
-                        <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
-                    @elseif($catalogueMeta['name'] == 'Subscribed')
-                        <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
-                    @elseif($catalogueMeta['name'] == 'Song Tutorials')
-                        <musora-icon icon-name="play-progress-filled"
-                                class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Rudiments')
-                        <musora-icon icon-name="drum-filled"
-                                    class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @else
-                        <musora-icon icon-name="academic-cap-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @endif
-                    <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
-                </h1>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    {{ $catalogueMeta['description'] }}
-                </p>
-            </div>
-        @endslot
-    @endcomponent
-
+    <page-header
+        page-type="{{ $headerDataObj->type }}"
+        icon-name="{{ $headerDataObj->iconName }}"
+        title="{{ $headerDataObj->title }}"
+        description="{{ $headerDataObj->description }}"
+        hero-img="{{ $headerDataObj->heroImg }}"
+        progress="{{ $headerDataObj->progress }}"
+        content-id="{{ $headerDataObj->contentId }}"
+        :info-data="{{ json_encode($headerDataObj->infoData) }}"
+        :ctas="{{ json_encode($headerDataObj->ctas) }}"
+    ></page-header>
+    
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">
