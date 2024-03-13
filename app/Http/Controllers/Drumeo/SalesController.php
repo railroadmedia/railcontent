@@ -165,6 +165,22 @@ class SalesController extends BaseController
         ]);
     }
 
+    public function thirtyDayIndependence()
+    {
+        $productId = 800;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-independence', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+
     public function impact()
     {
         return view('drumeo.sales.pages.impact');
@@ -328,4 +344,5 @@ class SalesController extends BaseController
     {
         return view('drumeo.pages.vote', ['theme' => 'drumeo']);
     }
+
 }
