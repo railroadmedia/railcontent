@@ -1762,7 +1762,9 @@ return [
 //            'notify_on_forum_post_reply',
 //            'notifications_summary_frequency_minutes',
             'permission_level',
-            'helpscout_beacon_id'
+            'helpscout_beacon_id',
+            'branches',
+            'features',
         ],
     ],
     'brand_logo_path_for_email' => [
