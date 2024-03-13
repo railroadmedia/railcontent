@@ -49,7 +49,11 @@ const props = defineProps({
     requiredFields: {
         type: Array,
         default: () => ([]),
-    }
+    },
+    includedTypes: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const userStore = useUserStore();
@@ -75,7 +79,7 @@ const ctaConfig = computed(() => {
 });
 
 const infoData = computed(() => {
-    const regex = /(\d+\s\w+)/g;
+    const regex = /(\d+\s\w+\-?\w+\-?\w+)/g;
     const items = props.contentSubtitle.match(regex);
     return items
 })
@@ -91,12 +95,12 @@ const capitalizeFirstLetter = (string) => {
 </script>
 <template>
     <Breadcrumb :breadcrumbs="[{ title: contentName, url: goBackUrl }, { title: contentTitle }]" />
-    <PageHeader v-if="contentType === 'song'" :pageType="contentType" :title="contentTitle" :heroImg="heroImg"
+    <PageHeader :pageType="contentType" :title="contentTitle" :heroImg="heroImg"
         :infoData="infoData" :ctas="ctaConfig" />
 
     <div class="lg:tw-container tw-px-4 md:tw-px-8 tw-mx-auto tw-pt-[30px]">
         <CollectionWrapper :pre-loaded-content="preLoadedContent" :tab-options="[
             { key: 'allContent', value: `All ${capitalizeFirstLetter(pluralContentType)}` },
-        ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType" />
+        ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType"  :included-types="includedTypes" :multiple-types="true" />
     </div>
 </template>

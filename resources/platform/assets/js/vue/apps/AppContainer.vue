@@ -21,6 +21,10 @@ const props = defineProps({
     type: String,
     default: 'drumeo'
   },
+  journeySection: {
+    type: String,
+    default: ''
+  },
   csrf_token: {
     type: String
   }
@@ -42,6 +46,20 @@ watch(
   () => props.brand,
   (brand) => {
     userStore.setCurrentBrand(brand);
+  },
+  { immediate: true }
+);
+watch(
+  () => props.journeySection,
+  (journeySection) => {
+    userStore.setJourneySection(journeySection);
+  },
+  { immediate: true }
+);
+watch(
+  () => props.csrf_token,
+  (token) => {
+    userStore.setToken(token);
   },
   { immediate: true }
 );

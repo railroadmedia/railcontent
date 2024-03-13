@@ -99,7 +99,7 @@ class CoachPagesController extends Controller
             true,
             $request->get('only_subscribed', false)
         );
-
+        ContentRepository::$countFilterOptionItems = false;
         $activeCoaches = $this->contentService->getFiltered(
             1,
             20,

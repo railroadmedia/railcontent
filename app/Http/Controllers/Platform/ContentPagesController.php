@@ -1815,12 +1815,13 @@ class ContentPagesController extends BaseController
     {
         $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
-
+        ContentRepository::$countFilterOptionItems = true;
+        $types = ['song','song-tutorial'];
         $initialContent = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 12),
             $request->get('sort', '-popularity'),
-            ['song'],
+            $types,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             ['artist,'.$artist],
@@ -1836,7 +1837,6 @@ class ContentPagesController extends BaseController
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
         $pluralContentType = Str::plural('song');
 
-
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
@@ -1844,11 +1844,13 @@ class ContentPagesController extends BaseController
             ['song'],
             $artist
         );
+        $artistData = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$artist,'string')->first();
 
         $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType. '    '.$totalPlays.' plays';
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
-            'contentType' => 'song',
+            'contentType' => $types,
+            'allowedTypes' => ['song','song-tutorial'],
             'collectionName' => $artistName,
             'contentName' => 'Songs',
             'contentTitle' => $artistName,
@@ -1856,7 +1858,9 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
             'filterableValues' => $allowableFilters,
-            'thumbnail_url' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/challenges.jpg',
+            'thumbnail_url' => ($artistData) ?
+                $artistData->fetch('data.head_shot_picture_url') :
+                config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
             'pluralContentType' => $pluralContentType,
         ]);
     }
@@ -1866,6 +1870,7 @@ class ContentPagesController extends BaseController
         $genre = urldecode($genre);
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
+        ContentRepository::$countFilterOptionItems = true;
 
         $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
             $request->get('limit', 12),

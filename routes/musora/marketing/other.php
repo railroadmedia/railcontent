@@ -39,6 +39,7 @@ Route::domain('{musoraDomain}')
         Route::get('songs', [MarketingController::class, 'songs']);
         Route::get('community', [MarketingController::class, 'community']);
         Route::get('choose-plan', [MarketingController::class, 'choosePlan'] );
+        Route::get('choose-your-trial-month', [MarketingController::class, 'choosePlanMonth'] );
 
         Route::get('/drum-faster', [MarketingController::class, 'faster']);
 

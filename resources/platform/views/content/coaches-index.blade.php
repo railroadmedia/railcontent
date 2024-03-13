@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'coaches'])
 
 @section('meta')
     <title>{{ ucfirst($brand) }} Coaches | Musora</title>
@@ -56,7 +56,7 @@
     ])
     @endcomponent
 
-    <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
+    <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-[30px]">
         <div class="tw-flex tw-flex-row tw-mb-3">
             <div class="tw-flex tw-flex-col tw-flex-grow">
                 <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
@@ -94,7 +94,7 @@
     </div>
 
     @if($hasFollowedCoaches)
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-[30px]">
             <div class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow">
 

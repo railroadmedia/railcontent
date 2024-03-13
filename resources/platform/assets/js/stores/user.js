@@ -4,7 +4,9 @@ export const useUserStore = defineStore({
   id: 'User',
   state: () => ({
     user: null,
-    brand: 'drumeo'
+    brand: 'drumeo',
+    journeySection: null,
+    token: null,
   }),
   getters: {
     userId: (state) => state.user?.id,
@@ -19,6 +21,12 @@ export const useUserStore = defineStore({
     },
     setCurrentBrand (brand) {
       this.brand = brand;
+    },
+    setJourneySection (journeySection) {
+      this.journeySection = journeySection;
+    },
+    setToken (token) {
+      this.token = token;
     }
   }
 });

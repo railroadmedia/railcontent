@@ -2,6 +2,16 @@
 use Illuminate\Support\Str;
 $isOnboarding = str_contains(request()->url(), '/onboarding');
 $userData = assembleUserAttributes(user());
+
+$journeySection = '';
+
+if (isset($trackingSectionName)) {
+    $journeySection = $trackingSectionName;
+} else if (isset($catalogueMeta) && $catalogueMeta['name']) {
+    $journeySection = $catalogueMeta['name'];
+} else {
+    $journeySection = 'Unknown';
+}
 @endphp
 
 <!DOCTYPE html>
@@ -57,6 +67,7 @@ $userData = assembleUserAttributes(user());
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
                     csrf_token="{{ csrf_token() }}"
+                    :journey-section="{{ json_encode($journeySection) }}"
                 >
                     <page-container
                         :is-live="{{ json_encode(isLive()) }}"

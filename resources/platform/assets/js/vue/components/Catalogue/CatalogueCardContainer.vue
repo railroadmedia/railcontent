@@ -5,15 +5,15 @@
             <div :class="`
                     tw-no-scrollbar
                     ${isMiniView && willScroll ? 'tw-grid tw-auto-rows-min tw-pb-[8px] tw-grid-flow-row tw-auto-cols-min lg:tw-auto-cols-auto tw-grid-cols-4 lg:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 4xl:tw-grid-cols-5 lg:tw-w-auto tw-gap-[5px] tw-overflow-x-auto tw-min-w-max lg:tw-min-w-full' : ''}
-                    ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap' : ''}
+                    ${!isMiniView && willScroll ? 'tw-flex lg:tw-overflow-x-clip tw-flex-nowrap ' : ''}
                     ${!isMiniView && willScroll && !collectionStoreLoading ? 'tw-overflow-x-scroll' : ''}
                     ${!isMiniView && !willScroll ? 'tw-flex tw-flex-wrap' : ''}
-                    ${breakToListView ? 'tw-@container/breakToList' : ''}
+                    ${!isMiniView ? 'lg:tw-grid lg:tw-grid-cols-4 2xl:tw-grid-cols-5 lg:tw-gap-3 2xl:tw-gap-4' : ''}
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
                     <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
-                        :break-to-list-view="breakToListView" />
+                        :break-to-list-view="breakToListView" :is-single-row="isSingleRow" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
@@ -28,7 +28,7 @@
                         :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks"
-                        :force-list-view="displayInline" :break-to-list-view="breakToListView" @addToList="addToList"
+                        :force-list-view="displayInline" :break-to-list-view="breakToListView" :is-single-row="isSingleRow" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
             </div>
@@ -131,6 +131,10 @@ const props = defineProps({
     },
     useRefData: {
         type: Boolean,
+        default: () => false,
+    },
+    isSingleRow: {
+		type: Boolean,
         default: () => false,
     },
     noSkeleton: {
