@@ -504,9 +504,53 @@ class ContentQueryBuilder extends QueryBuilder
             }
         }
 
-        // set the joins first, then we'll add the where's after
         foreach ($includedFieldsGroupedByTable as $name => $includedFieldDataGrouped) {
-            if ($includedFieldDataGrouped[0]['is_content_column']) {
+            //multiple fields example: title like 'Adele' or artist like 'Adele'
+            if($includedFieldDataGrouped[0]['name'] == 'multiple_fields'){
+                $this->where(function (Builder $builder) use (
+                    $includedFieldDataGrouped
+                ) {
+                    $i =0;
+                    foreach ($includedFieldDataGrouped[0]['fields'] as $field){
+                        $i++;
+                        if($field['is_content_column']) {
+                            $builder->orwhere(
+                                'railcontent_content'.'.'.$field['name'],
+                                $field['operator'],
+                                is_numeric($field['value']) ? DB::raw($field['value']) : DB::raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($field['value'])
+                                )
+                            );
+                        }elseif (!empty($field['associated_table'])){
+                            $this->leftJoin(
+                                $field['associated_table']['table'].
+                                ' as '.
+                                $field['associated_table']['alias'].$i,
+                                $field['associated_table']['alias'].$i . '.content_id',
+                                '=',
+                                ConfigService::$tableContent . '.id'
+                            );
+                            $values = (!empty($field['extra_ids']))?$field['extra_ids']:[$field['value']];
+                            foreach ($values as $value) {
+                                $builder->orwhere(
+                                    $field['associated_table']['alias'].$i.'.'.$field['associated_table']['column'],
+                                    $field['operator'],
+                                    is_numeric($value) ? DB::raw($value) : DB::raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($value)
+                                    )
+                                );
+                            }
+                        }
+                    }
+                });
+
+            }
+            elseif ($includedFieldDataGrouped[0]['is_content_column']) {
+                //content column example: difficulty = 2 or difficulty = 3
                 $whereInArray = [];
 
                 foreach ($includedFieldDataGrouped as $includedFieldData) {
@@ -531,6 +575,7 @@ class ContentQueryBuilder extends QueryBuilder
                     );
                 }
             } elseif (!empty($includedFieldDataGrouped[0]['associated_table'])) {
+                //field from other tables like: genre like 'Funk/Disco' or genre like 'Pop/Rock'
                 $this->leftJoin(
                     $includedFieldDataGrouped[0]['associated_table']['table'].
                     ' as '.

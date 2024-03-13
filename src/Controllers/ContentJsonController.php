@@ -60,7 +60,6 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         if ($request->has('statuses')) {
             ContentRepository::$availableContentStatues = $request->get('statuses');
@@ -77,18 +76,18 @@ class ContentJsonController extends Controller
         }
 
         $futureScheduledContentOnly = false;
-        if ($request->has('include_future_scheduled_content_only') && $request->get('include_future_scheduled_content_only') != 'false') {
+        if ($request->has('include_future_scheduled_content_only') &&
+            $request->get('include_future_scheduled_content_only') != 'false') {
             ContentRepository::$pullFutureContent = true;
             $futureScheduledContentOnly = true;
         }
 
         if ($request->has('only_from_my_list') && ($request->get('only_from_my_list') == "true")) {
-            $myList =
-                    $this->userPlaylistsService->getUserPlaylist(
-                        user()->id,
-                        'user-playlist',
-                        config('railcontent.brand')
-                    );
+            $myList = $this->userPlaylistsService->getUserPlaylist(
+                user()->id,
+                'user-playlist',
+                config('railcontent.brand')
+            );
             $myListIds = \Arr::pluck($myList, 'id');
             ContentRepository::$includedInPlaylistsIds = $myListIds;
         }
@@ -105,8 +104,13 @@ class ContentJsonController extends Controller
 
         $group_by = null;
         $contentTypes = $request->get('included_types', []);
-        if($request->has('is_all') && ($request->get('is_all') === "true")){
-            $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
+        if ($request->has('is_all') && ($request->get('is_all') === "true")) {
+            $required_fields[] =
+                'published_on,'.
+                Carbon::now()
+                    ->subMonth(3)
+                    ->toDateTimeString().
+                ',date,>=';
         }
 
         $required_user_states = $request->get('required_user_states', []);
@@ -133,29 +137,28 @@ class ContentJsonController extends Controller
         );
 
         $filters = $contentData['filter_options'];
-        if(!$request->has('count_filter_items'))
-        {// Add "All" option, but not in all cases
-        foreach ($filters as $key => $filterOptions) {
-            if (is_array($filterOptions)) {
-                $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
+        if (!$request->has('count_filter_items')) {// Add "All" option, but not in all cases
+            foreach ($filters as $key => $filterOptions) {
+                if (is_array($filterOptions)) {
+                    $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
 
-                // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
-                // accommodates—have an "included_types" value like this—an array of one string.
-                $isContentTypeWithSpecialConditions = in_array($contentTypes, [
-                    ['student-focus'],
-                    ['student-review'],
-                ]);
+                    // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+                    // accommodates—have an "included_types" value like this—an array of one string.
+                    $isContentTypeWithSpecialConditions = in_array($contentTypes, [
+                        ['student-focus'],
+                        ['student-review'],
+                    ]);
 
-                if ($isContentTypeWithSpecialConditions) {
-                    $filtersToExclude = array_merge($filtersToExclude, ['topic', 'difficulty']);
-                }
+                    if ($isContentTypeWithSpecialConditions) {
+                        $filtersToExclude = array_merge($filtersToExclude, ['topic', 'difficulty']);
+                    }
 
-                if (!in_array($key, $filtersToExclude)) {
-                    $filters[$key] = array_diff($filterOptions, ['All']);
-                    array_unshift($filters[$key], 'All');
+                    if (!in_array($key, $filtersToExclude)) {
+                        $filters[$key] = array_diff($filterOptions, ['All']);
+                        array_unshift($filters[$key], 'All');
+                    }
                 }
             }
-        }
         }
 
         return reply()->json($contentData['results'], [
@@ -212,17 +215,15 @@ class ContentJsonController extends Controller
         if (!$content) {
             $userId = user()?->id;
             Log::warning("No content with id $id exists. (userId:$userId)");
-            return reply()->json(
-                null,
-                [
-                    'code' => 404,
-                    'totalResults' => 0,
-                    'errors' => [
-                        'title' => 'Entity not found.',
-                        'detail' => 'No content with id ' . $id . ' exists.',
-                    ],
-                ]
-            );
+
+            return reply()->json(null, [
+                                         'code' => 404,
+                                         'totalResults' => 0,
+                                         'errors' => [
+                                             'title' => 'Entity not found.',
+                                             'detail' => 'No content with id '.$id.' exists.',
+                                         ],
+                                     ]);
         }
 
         //        $rules = $this->contentService->getValidationRules($content);
@@ -394,11 +395,10 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types =
-                array_merge(
-                    $types,
-                    array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
-                );
+            $types = array_merge(
+                $types,
+                array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            );
         }
 
         if (!empty($types)) {
@@ -444,11 +444,10 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types =
-                array_merge(
-                    $types,
-                    array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
-                );
+            $types = array_merge(
+                $types,
+                array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            );
         }
 
         $field = ($request->has('is_home')) ? 'home_staff_pick_rating' : 'staff_pick_rating';
@@ -550,9 +549,17 @@ class ContentJsonController extends Controller
      * @param string|null $group_by
      * @return array
      */
-    private function extractFields(Request $request, mixed $required_fields, mixed $included_fields,mixed $required_user_states, ?string $group_by )
+    private function extractFields(
+        Request $request,
+        mixed $required_fields,
+        mixed $included_fields,
+        mixed $required_user_states,
+        ?string $group_by
+    )
     : array {
         $tabs = $request->get('tabs', $request->get('tab', false));
+        $isSong = false;
+        $isAll = false;
         if ($tabs) {
             if (!is_array($tabs)) {
                 $tabs = [$tabs];
@@ -568,11 +575,19 @@ class ContentJsonController extends Controller
                 if ($extra['0'] == 'length_in_seconds' || $extra['0'] == 'topic') {
                     $required_fields[] = $tab;
                 }
-                if(count($extra) == 1 && $extra[0] == 'complete'){
+                if (count($extra) == 1 && $extra[0] == 'complete') {
                     $required_user_states[] = 'completed';
+                    $isAll = true;
                 }
-                if(count($extra) == 1 && $extra[0] == 'inProgress'){
+                if (count($extra) == 1 && $extra[0] == 'inProgress') {
                     $required_user_states[] = 'started';
+                    $isAll = true;
+                }
+                if (count($extra) == 1 && $extra[0] == 'songs') {
+                    $isSong = true;
+                }
+                if (count($extra) == 1 && $extra[0] == 'all') {
+                    $isAll = true;
                 }
             }
         }
@@ -580,20 +595,44 @@ class ContentJsonController extends Controller
         if ($request->has('title') && ($group_by == 'artist' || $group_by == 'style')) {
             $required_fields[] = $group_by.',%'.$request->get('title').'%,string,like';
         } elseif ($request->has('title') && $group_by == 'instructor') {
-            $instructors =
-                $this->contentService->getWhereTypeInAndStatusAndField(
-                    ['instructor'],
-                    'published',
-                    'name',
-                    '%'.$request->get('title').'%',
-                    'string',
-                    'LIKE'
-                );
-            foreach ($instructors->pluck('id') ?? [] as $instructor) {
-                $included_fields[] = 'instructor,'.$instructor.',integer,=';
+            $instructors = $this->contentService->getWhereTypeInAndStatusAndField(
+                ['instructor'],
+                'published',
+                'name',
+                '%'.$request->get('title').'%',
+                'string',
+                'LIKE'
+            )
+                ->pluck('id')
+                ->toArray();
+            if (empty($instructors)) {
+                $required_fields[] = 'instructor,0,integer,=';
+            }
+            foreach ($instructors ?? [] as $instructor) {
+                $required_fields[] = 'instructor,'.$instructor.',integer,=';
             }
         } elseif ($request->has('title')) {
-            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
+            $instructors = $this->contentService->getWhereTypeInAndStatusAndField(
+                ['instructor'],
+                'published',
+                'name',
+                '%'.$request->get('title').'%',
+                'string',
+                'LIKE'
+            );
+
+            $instructorIds =
+                implode(
+                    '-',
+                    $instructors->pluck('id')
+                        ->toArray()
+                );
+
+            $included_fields[] =
+                ($isSong) ? 'title|artist|album|genre,%'.$request->get('title').'%,string,like,'.$instructorIds :
+                    (($isAll) ?
+                        'title|artist|album|genre|instructor,%'.$request->get('title').'%,string,like,'.$instructorIds :
+                        'title|genre|instructor,%'.$request->get('title').'%,string,like,'.$instructorIds);
         }
 
         return [$group_by, $required_fields, $included_fields, $required_user_states];
