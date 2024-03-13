@@ -56,7 +56,7 @@
                         <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
                             <h5 class="mx-auto"><strong><i class="fas fa-check"></i> Success!</strong></h5>
                             <h2 class="leading-none text-musora my-3 md:my-4 font-bebas">CHECK YOUR EMAIL</h2>
-                            <p class="leading-normal mx-auto max-w-xl"><em>You should receive an email from Musora within 10 minutes.
+                            <p class="leading-normal mx-auto max-w-xl"><em>You should receive an email from team@musora.com within 10 minutes.
                                     If you don’t, then check your spam folder or re-enter your email address again.</em></p>
                         </div>
                     </div>
