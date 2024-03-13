@@ -1,43 +1,46 @@
 <template>
   <PageHeaderLayout>
-    <template v-slot:top-left>
-      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg" :additionalImgSrc="logo"
-        :infoData="ctasAndInfoInsideHero ? infoData : null">
+    <template #top-left>
+      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
+        :additionalImgSrc="logo" :infoData="ctasAndInfoInsideHero ? infoData : null" :hasCtas="hasSecondaryCtas">
         <template #header-info v-if="description">
-          <span>
-            {{ description }}
-          </span>
+          <div class="tw-flex tw-flex-col tw-h-full">
+            <div class="tw-flex tw-grow tw-items-center">
+              <span v-html="description" />
+            </div>
+            <div v-if="ctasBesideHero" class="sm:tw-hidden tw-flex tw-flex-col ctas-container">
+              <CtaResolver :ctas="secondaryCtas" />
+            </div>
+          </div>
         </template>
         <template #ctas>
           <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
             <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
-            <div class="tw-flex tw-items-center tw-flex-grow"
-              :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
-              <ProgressText v-if="progress" :progress="progress" />
-              <div>
-                <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
-                  v-bind="cta.props" />
-              </div>
-            </div>
+            <PageHeaderCtasBox :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
           </div>
         </template>
       </PageHeaderHero>
     </template>
-    <template v-slot:bottom-full>
-      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
-        <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+    <template #top-right v-if="ctasBesideHero">
+      <div class="tw-flex">
+        <ProgressText v-if="progress && isLearningPathPage" class="sm:tw-hidden" :progress="progressBarData.progress"
+          :alwaysShow="progressBarData.alwaysShow">
+          <template #progress-text v-if="progressBarData.labelText">{{ progressBarData.labelText }} -&nbsp;</template>
+        </ProgressText>
+        <PageHeaderCtasBox :class="{ 'tw-hidden sm:tw-flex': isLearningPathPage }" :progressBarData="progressBarData"
+          :secondaryCtas="secondaryCtas" />
       </div>
-      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''"
-        class="tw-flex tw-justify-between tw-items-center tw-w-full">
-        <PageHeaderRowInfo v-if="!ctasAndInfoInsideHero" :infoData="infoData" />
-        <div class="tw-flex tw-items-center tw-flex-grow"
-          :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
-          <ProgressText v-if="progress" :progress="progress" />
-          <div>
-            <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
-              v-bind="cta.props" />
-          </div>
-        </div>
+    </template>
+    <template #bottom-full>
+      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
+        <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
+          :text="primaryCtaText" />
+      </div>
+      <div class="tw-justify-between tw-items-center tw-w-full"
+        :class="{ 'tw-flex': isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage, 'tw-flex sm:tw-hidden': isPackBundlePage, 'tw-hidden': !isSongsPage && !isPackBundlePage && !isLearningPathLevelPage && !isLearningPathCoursePage }">
+        <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage"
+          :infoData="infoData" />
+        <PageHeaderCtasBox :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>
       <PageHeaderProgressBar v-if="progress" :progress="progress" />
     </template>
@@ -51,23 +54,10 @@ import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
 import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
-import ProgressText from './ProgressBar/ProgressText.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
-
-import SongRequest from '../Songs/SongRequestNew.vue';
-import ResetProgressCta from './Ctas/ResetProgressCta.vue';
-import DownloadResourcesCta from './Ctas/DownloadResourcesCta.vue';
-import PageHeaderCta from './PageHeaderCta.vue';
-
-
-const componentMap = {
-  ResetProgressCta,
-  DownloadResourcesCta,
-  PageHeaderCta,
-  SongRequest
-};
-
-const resolveComponent = (type) => componentMap[type];
+import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
+import CtaResolver from './Ctas/CtaResolver.vue'
+import ProgressText from './ProgressBar/ProgressText.vue'
 
 const props = defineProps({
   pageType: String,
@@ -79,6 +69,7 @@ const props = defineProps({
   additionalImgSrc: String,
   darkModeLogo: String,
   lightModeLogo: String,
+  progressLabelText: String,
   progress: {
     type: [Number, String],
     default: null,
@@ -88,7 +79,7 @@ const props = defineProps({
   description: String,
 });
 
-console.log(props.infoData);
+console.log(props)
 
 const primaryCtaProps = computed(() => props.ctas?.find(cta => cta.type === 'primary')?.props || {});
 const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
@@ -96,12 +87,29 @@ const primaryCtaText = computed(() => primaryCtaProps.value.text);
 const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
 const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'primary') || []);
+const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
-const isSongs = computed(() => props.pageType === 'songs');
+const isPackBundlePage = computed(() => props.pageType === 'pack-bundle')
+const isSongsPage = computed(() => props.pageType === 'songs');
+const isLivePage = computed(() => props.pageType === 'live');
+const isSchedulePage = computed(() => props.pageType === 'schedule');
+const isLearningPathPage = computed(() => props.pageType === 'learning-path');
+const isLearningPathLevelPage = computed(() => props.pageType === 'learning-path-level');
+const isLearningPathCoursePage = computed(() => props.pageType === 'learning-path-course');
 
-const ctasAndInfoInsideHero = computed(() => !isSongs.value);
+const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value);
+
+const ctasAndInfoInsideHero = computed(() => !isSongsPage.value && !ctasBesideHero.value && !isLearningPathLevelPage.value && !isLearningPathCoursePage.value);
+
+const progressBarData = computed(() => {
+  return {
+    progress: props.progress,
+    labelText: props.progressLabelText,
+    alwaysShow: isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value
+  };
+});
 
 const logo = computed(() => {
   return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;
@@ -110,5 +118,11 @@ const logo = computed(() => {
 onUpdated(() => {
   isDarkMode.value = JSON.parse(localStorage.getItem("darkMode"));
 })
-
 </script>
+<style lang="scss" scoped>
+.ctas-container {
+  ::v-deep>* {
+    margin-top: 0.5rem;
+  }
+}
+</style>
