@@ -2,8 +2,15 @@
 
 namespace App\Modules\Ecommerce\Models\Shopify\Rest;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
+use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
+use Signifly\Shopify\REST\Resources\MetafieldResource;
+use Signifly\Shopify\Shopify;
 
 /**
  * Data Model for a Shopify Order, using the REST Admin API.
@@ -11,6 +18,8 @@ use Illuminate\Support\Collection;
 class Order
 {
     // DEV NOTE: this only has the attributes required so far. Please add to this, as needed.
+
+    public const AUTOMATED_SOURCES = ['subscription_contract'];
 
     public string $gid;
     public int $id;
@@ -26,11 +35,14 @@ class Order
     public array $discountCodes;
     public string $email;
     public array $tags;
+    public ?string $sourceName;
     public ?Carbon $processedAt;
     public ?Customer $customer;
     /** @var Collection<OrderLineItem> $lineItems */
     public Collection $lineItems;
 
+    /** @var Collection<MetaField> */
+    private Collection $_metafields;
 
     public function __construct($shopifyOrderData)
     {
@@ -62,6 +74,36 @@ class Order
         $this->totalShipping = floatval($shopifyOrderData->total_shipping_price_set->shop_money->amount);
         $this->totalTax = floatval($shopifyOrderData->total_tax);
         $this->totalPrice = floatval($shopifyOrderData->total_price_set->shop_money->amount);
+        $this->sourceName = $shopifyOrderData->source_name;
+
+        $this->_metafields = collect();
+    }
+
+    /**
+     * @param  bool  $refresh  get a fresh copy of the Metafields from Shopify
+     * @return Collection
+     */
+    public function getMetafields(bool $refresh = false): Collection
+    {
+        // save a hit to Shopify if we already have the metafields, unless we want to refresh it
+        if (!$refresh && $this->_metafields->isNotEmpty()) {
+            return $this->_metafields;
+        }
+        $shopify = app(Shopify::class);
+        $metafields = $shopify->getOrderMetafields($this->id);
+        try {
+            $this->_metafields = $metafields->map(function (MetafieldResource $metafieldResource) {
+                return new MetaField(
+                    ShopifyMetafieldKey::from($metafieldResource->key),
+                    (string)$metafieldResource->value,
+                    ShopifyMetafieldTypes::from($metafieldResource->type),
+                    ShopifyMetafieldNamespace::from($metafieldResource->namespace)
+                );
+            });
+        } catch (\ValueError $exception) {
+            Log::error("Invalid Shopify Metafield value for expected enum: ".$exception->getMessage());
+        }
+        return $this->_metafields;
     }
 
     /**
