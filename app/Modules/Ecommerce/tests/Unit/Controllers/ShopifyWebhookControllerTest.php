@@ -21,7 +21,7 @@ class ShopifyWebhookControllerTest extends BaseTestCase
 
     public function test_order_updated_dispatches_shopify_sync_customer_job_for_post_launch()
     {
-        $path = Storage::disk("ecommerce_test_resources")->path("Shopify/requests/order/updated/initial_physical_only.json");
+        $path = Storage::disk("ecommerce_test_resources")->path("Shopify/requests/order/updated/first_physical_only.json");
         $json = json_decode(file_get_contents($path), true);
 
         // info logs are made (somewhere?)
