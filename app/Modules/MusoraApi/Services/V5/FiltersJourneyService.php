@@ -10,7 +10,7 @@ class FiltersJourneyService
 {
     public function trackFilterApplied(array $props): void
     {
-        $filters = collect($props['filters'])->map(
+        $filters = collect($props['filters'] ?? [])->map(
             function ($filter) {
                 $filterTag = explode(',', $filter);
                 return [

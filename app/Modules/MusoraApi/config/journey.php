@@ -11,7 +11,7 @@ return [
             'filter-applied' => [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
-                'filters' => ['required', 'array'],
+                'filters' => ['nullable', 'array'],
                 'filters.*' => ['required', 'string'],
                 'progress' => ['nullable', 'string']
             ],
