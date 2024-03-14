@@ -80,6 +80,7 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/{brand}/artists/{slug}', [ContentPagesController::class, 'artistSongs'])
                     ->whereIn('brand', all_brands())
+                    ->where('slug', '(.*)')
                     ->name('platform.content.artist.show');
 
                 Route::get('/{brand}/genres/{genre}/{contentTypeName}', [ContentPagesController::class, 'genreContentByType'])
