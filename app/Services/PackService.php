@@ -98,7 +98,7 @@ class PackService
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $activeContentId = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
-
+        $sort = ($sort == 'undefined') ? '-progress' : $sort;
         $packs =  $this->contentService->getFiltered(
             1,
             -1,

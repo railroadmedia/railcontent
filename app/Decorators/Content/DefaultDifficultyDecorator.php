@@ -40,18 +40,18 @@ class DefaultDifficultyDecorator extends ModeDecoratorBase
                 $contents[$contentIndex]['difficulty_string'] = $difficulty;
                 if (!is_string($difficulty)) {
                     if ($difficulty == 1) {
-                        $contents[$contentIndex]['difficulty_string'] = 'Novice';
+                        $contents[$contentIndex]['difficulty_string'] = 'Introductory';
                     }
                     if ($difficulty > 1 && $difficulty <= 3) {
                         $contents[$contentIndex]['difficulty_string'] = 'Beginner';
                     }
-                    if ($difficulty > 3 && $difficulty <= 5) {
+                    if ($difficulty > 3 && $difficulty <= 6) {
                         $contents[$contentIndex]['difficulty_string'] = 'Intermediate';
                     }
-                    if ($difficulty > 5 && $difficulty <= 7) {
+                    if ($difficulty > 6 && $difficulty <= 9) {
                         $contents[$contentIndex]['difficulty_string'] = 'Advanced';
                     }
-                    if ($difficulty > 7) {
+                    if ($difficulty > 9) {
                         $contents[$contentIndex]['difficulty_string'] = 'Expert';
                     }
                 }
