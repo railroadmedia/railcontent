@@ -25,7 +25,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import MusoraIcon from "../MusoraIcons/MusoraIcon";
 
@@ -43,9 +43,18 @@ const closeDropdown = () => {
 };
 
 const toggleDropdown = () => {
-    console.log('toggleDropdown')
     openDropdown.value = !openDropdown.value;
 };
+
+onMounted(() => {
+    const contentContainer = document.getElementById('content-container');
+    contentContainer && contentContainer.addEventListener('scroll', closeDropdown);
+});
+
+onUnmounted(() => {
+    const contentContainer = document.getElementById('content-container');
+    contentContainer && contentContainer.removeEventListener('scroll', closeDropdown);
+});
 
 
 </script>

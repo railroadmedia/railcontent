@@ -55,13 +55,3 @@ LongBreadcrumbList.args = {
         { title: 'Detail', url: '/detail' }
     ],
 };
-
-export const WithoutUrls = Template.bind({});
-WithoutUrls.args = {
-    brand: 'drumeo',
-    breadcrumbs: [
-        { title: 'Home' },
-        { title: 'Category' },
-        { title: 'Subcategory' }
-    ],
-};

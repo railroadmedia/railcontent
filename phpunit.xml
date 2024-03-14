@@ -16,6 +16,7 @@
             <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Feature</directory>
             <directory suffix="Test.php">./app/Modules/Content/tests/Feature</directory>
             <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/FeatureFlagging/tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
