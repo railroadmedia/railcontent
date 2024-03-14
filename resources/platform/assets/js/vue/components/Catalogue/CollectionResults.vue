@@ -43,6 +43,10 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    selectedProgress: {
+        type: String,
+        default: '',
+    },
     totalPages: {
         type: Number,
         default: 1,
@@ -65,7 +69,7 @@ const infiniteScrollEventHandler = () => {
 }
 
 const showEmptyState = computed(() => {
-    return (props.searchTerm || Object.keys(props.selectedFilters).length > 0) && !loading.value && props.content.length === 0;
+    return (props.searchTerm || Object.keys(props.selectedFilters).length > 0 || props.selectedProgress) && !loading.value && props.content.length === 0;
 })
 
 onMounted(()=>{
