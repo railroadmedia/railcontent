@@ -1067,12 +1067,13 @@ class ContentService
              *      if we have results grouped, it will sum up the total number of lessons in each group;
              *      if we do not have results grouped it is equal to total_results
              */
+            $totalLessons = $pullPagination ? $filter->countFilter() : 0;
+            $totalResults = ($groupBy && $pullPagination) ? $filter->countFilter($groupBy) : $totalLessons;
+
             $resultsDB = new ContentFilterResultsEntity([
                                                             'results' => $filter->retrieveFilter(),
-                                                            'total_results' => $pullPagination ?
-                                                                $filter->countFilter($groupBy) : 0,
-                                                            'total_lessons' => $pullPagination ?
-                                                                $filter->countFilter() : 0,
+                                                            'total_results' => $totalResults,
+                                                            'total_lessons' => $totalLessons,
                                                             'filter_options' => $pullFilterFields ?
                                                                 $this->getFilterOptions($filter, $includedTypes) : [],
                                                         ]);
@@ -2169,26 +2170,34 @@ class ContentService
                                 ->toDateTimeString()
                         );
                 })
-                ->leftJoin('railcontent_user_content_progress AS ucp_1',
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_1',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
                             ->where('ucp_1.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_2',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_2',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
                             ->where('ucp_2.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_3',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_3',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
                             ->where('ucp_3.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_4',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_4',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
                             ->where('ucp_4.user_id', $userId);
-                    })
+                    }
+                )
                 ->select([
                              'ch_1.parent_id AS ch_1_parent_id',
                              'ch_2.parent_id AS ch_2_parent_id',
@@ -2551,16 +2560,14 @@ class ContentService
             $limit,
             $page
         );
-        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn(
-            $types,
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
             Carbon::now()
-                ->toDateTimeString(),
+                                                                                            ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
-            []
-        );
+            []);
 
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
@@ -2610,16 +2617,14 @@ class ContentService
             ),
             'content'
         );
-        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn(
-            $types,
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED],
             Carbon::now()
-                ->toDateTimeString(),
+                                                                                            ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
-            []
-        );
+            []);
 
         return new ContentFilterResultsEntity([
                                                   'results' => $scheduleEvents,
@@ -2666,26 +2671,34 @@ class ContentService
                     return $joinClause->on('ch_4_child.id', '=', 'ch_4.child_id')
                         ->whereNot('ch_4_child.type', 'assignment');
                 })
-                ->leftJoin('railcontent_user_content_progress AS ucp_1',
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_1',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
                             ->where('ucp_1.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_2',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_2',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
                             ->where('ucp_2.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_3',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_3',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
                             ->where('ucp_3.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_4',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_4',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
                             ->where('ucp_4.user_id', $userId);
-                    })
+                    }
+                )
                 ->select([
                              'ch_1.parent_id AS ch_1_parent_id',
                              'ch_2.parent_id AS ch_2_parent_id',
