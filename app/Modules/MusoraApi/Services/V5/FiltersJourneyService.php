@@ -59,7 +59,7 @@ class FiltersJourneyService
             'slug' => 'Name: A to Z',
             '-slug' => 'Name: Z to A',
             'published_on' => 'Oldest first',
-            default => 'Newest First',
+            default => 'Unknown',
         };
 
         Avo::sorting_applied(
