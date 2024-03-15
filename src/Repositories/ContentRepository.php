@@ -1527,11 +1527,12 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param false $groupBy
      * @return int
      */
-    public function countFilter()
+    public function countFilter($groupBy = false)
     {
-        if ($this->groupByFields) {
+        if ($groupBy) {
             $subQuery =
                 $this->query()
                     ->restrictByTypes($this->typesToInclude)
@@ -1576,10 +1577,6 @@ class ContentRepository extends RepositoryBase
                 ->addBinding($subQuery->getBindings())
                 ->count();
 
-        //        //All lessons page should display max 100 lessons
-        //        if(count($this->typesToInclude) > 10 && $count > 100){
-        //            return 100;
-        //        }
         return $count;
     }
 

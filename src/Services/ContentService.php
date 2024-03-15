@@ -1050,12 +1050,17 @@ class ContentService
                 $filter->groupByField($groupBy);
             }
 
+            /**
+             * total_results = number of items(lessons or group) used for pagination
+             * total_lessons = number of items(lessons);
+             *      if we have results grouped, it will sum up the total number of lessons in each group;
+             *      if we do not have results grouped it is equal to total_results
+             */
             $resultsDB = new ContentFilterResultsEntity([
                 'results' => $filter->retrieveFilter(),
-                'total_results' => $pullPagination ?
-                    $filter->countFilter() : 0,
-                'filter_options' => $pullFilterFields ? $this->getFilterOptions($filter, $includedTypes) : [],
-                                                            ]);
+                'total_results' => $pullPagination ? $filter->countFilter($groupBy) : 0,
+                'total_lessons' => $pullPagination ? $filter->countFilter() : 0,
+                'filter_options' => $pullFilterFields ? $this->getFilterOptions($filter, $includedTypes) : []]);
 
             $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
