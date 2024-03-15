@@ -55,6 +55,7 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.filter.progress = '';
+            this.trackFilter();
             this.getData();
         },
 
@@ -79,7 +80,6 @@ export const useCollectionStore = defineStore({
 
         resetFilterFields() {
             this.filter.includedFields = [];
-            this.trackFilter();
         },
 
         formattedTabs() {
