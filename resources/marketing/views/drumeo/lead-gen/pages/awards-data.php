@@ -377,7 +377,6 @@ $pianoteAwards2023 = [
         "description" => "A Roland Global Artist, keys player Jemma Heigis is accomplished both online and in traditional concert venues. In 2023, she toured with Karol G and played on coveted shows like Saturday Night Live and Tiny Desk. Heigis also hit 2.1 million views on her viral Bruno Mars “Chunky” reel.",
     ],
     [
-        "last-child" => true,
         "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/yujawang-classical.webp",
         "award" => "Classical Pianist Of The Year",
         "winner" => "Yuja Wang",
@@ -420,6 +419,7 @@ $pianoteAwards2023 = [
         "description" => "Jon Batiste’s piano-driven “Butterfly” has been nominated for a GRAMMY Song of the Year award. World Music Radio, which carries the track, was also nominated for a GRAMMY as Album of the Year. “Butterfly” is featured in Batiste’s 2023 biographical documentary American Symphony.",
     ],
     [
+        "last-child" => true,
         "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/judekofie-mostinspiring.webp",
         "award" => "Most Inspiring Pianist Of The Year",
         "winner" => "Jude Kofie",
