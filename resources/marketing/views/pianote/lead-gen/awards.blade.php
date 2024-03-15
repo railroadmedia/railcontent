@@ -182,7 +182,7 @@
                 <div class="w-full sm:w-1/2 lg:w-7/12">
                     <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                         <iframe class="absolute w-full h-full" allowfullscreen allow="autoplay" title="pianote-video"
-                            src="https://www.youtube.com/embed/TODO"></iframe>
+                            src="https://www.youtube.com/embed/w8RLK6GXxm0"></iframe>
                     </div>
                     <p class="text-center inline-block sm:hidden mx-auto mt-3 sm:mt-0">The Pianote Awards recognizes outstanding keyboard musicians across a multitude of styles, genres, and platforms. Artists are shortlisted by Pianote and winners are voted in by the global piano community.</p>
                 </div>

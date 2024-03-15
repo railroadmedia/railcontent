@@ -146,6 +146,11 @@ export const useCollectionStore = defineStore({
             if (params.getAll('included_fields[]').length > 0) {
                 this.filter.includedFields = params.getAll('included_fields[]');
             }
+
+            //GetProgress
+            if (params.getAll('included_user_states[]').length > 0) {
+                this.filter.progress = params.getAll('included_user_states[]')[0];
+            }
         },
 
         getSortOptions() {
@@ -272,6 +277,10 @@ export const useCollectionStore = defineStore({
                 })
             } else {
                 url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
+            }
+
+            if(this.filter.progress){
+                url.searchParams.set('included_user_states[]', this.filter.progress);
             }
 
             window.history.pushState({}, '', url);
