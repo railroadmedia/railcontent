@@ -219,6 +219,8 @@ exit $result
 These Git Hooks are unique to your environment and are not shared in the code repository. If you have your own hooks that 
 you find useful, please share them with the team.
 
+You can see the current list of samples in [this Gist](https://gist.github.com/BrandonKerr/0c23a888fda2ecfbc942fba4c03b57ef).
+
 As a reminder, if you want to temporarily bypass one of your hooks, simply add the `--no-verify` option to your command. 
 e.g. `git push origin my-branch --no-verify`
 
