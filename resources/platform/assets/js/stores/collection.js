@@ -297,8 +297,8 @@ export const useCollectionStore = defineStore({
             this.filter.sort = item;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.getData();
             this.trackSort();
+            this.getData();
         },
 
         switchTab(tab) {
@@ -334,7 +334,7 @@ export const useCollectionStore = defineStore({
         trackSort() {
             const userStore = useUserStore();
             const payload = {
-                sort: sortValue,
+                sort: this.filter.sort,
                 section: userStore.journeySection,
                 brand: userStore.brand,
             };
