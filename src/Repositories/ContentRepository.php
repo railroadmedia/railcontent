@@ -598,10 +598,13 @@ class ContentRepository extends RepositoryBase
                     '=',
                     ConfigService::$tableContent.'.id'
                 )
-                ->havingRaw(ConfigService::$tableContent.".type IN (".implode(
-                                ",",
-                                array_fill(0, count([$type]), "?")
-                            ).")", [$type])
+                ->havingRaw(
+                    ConfigService::$tableContent.".type IN (".implode(
+                        ",",
+                        array_fill(0, count([$type]), "?")
+                    ).")",
+                    [$type]
+                )
                 ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress.'.state', $state)
                 ->orderBy('published_on', 'desc')
@@ -1059,7 +1062,8 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->selectInheritenceColumns()
                 ->restrictByUserAccess()
-                ->leftJoin(ConfigService::$tableContentHierarchy,
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
                     function (JoinClause $joinClause) use ($childContentIds) {
                         $joinClause->on(
                             ConfigService::$tableContentHierarchy.'.parent_id',
@@ -1067,7 +1071,8 @@ class ContentRepository extends RepositoryBase
                             ConfigService::$tableContent.'.id'
                         )
                             ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childContentIds);
-                    })
+                    }
+                )
                 ->where(ConfigService::$tableContent.'.user_id', $userId);
 
         if (!empty($slug)) {
@@ -2631,8 +2636,7 @@ class ContentRepository extends RepositoryBase
             }
 
             $joinTablesQuery->addSelect(
-                [$filterOptionTableAliasName.'.'.$filterOptionColumnName.' as '.$filterOptionColumnName]
-            );
+                [$filterOptionTableAliasName.'.'.$filterOptionColumnName.' as '.$filterOptionColumnName]);
 
             $groupBy[] = $filterOptionColumnName;
 

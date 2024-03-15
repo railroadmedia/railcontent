@@ -14,15 +14,12 @@ class ContentFilterResultsEntity extends Entity
     public function toResponseRawJson()
     {
         return reply()
-            ->json(
-                $this->results(),
-                [
-                    'transformer' => DataTransformer::class,
-                    'totalResults' => $this->totalResults(),
-                    'totalLessons' => $this->totalLessons(),
-                    'filterOptions' => $this->filterOptions(),
-                ]
-            )
+            ->json($this->results(), [
+                                       'transformer' => DataTransformer::class,
+                                       'totalResults' => $this->totalResults(),
+                                       'totalLessons' => $this->totalLessons(),
+                                       'filterOptions' => $this->filterOptions(),
+                                   ])
             ->getContent();
     }
 
@@ -31,15 +28,12 @@ class ContentFilterResultsEntity extends Entity
      */
     public function toJsonResponse()
     {
-        return reply()->json(
-            $this->results(),
-            [
-                'transformer' => DataTransformer::class,
-                'totalResults' => $this->totalResults(),
-                'totalLessons' => $this->totalLessons(),
-                'filterOptions' => $this->filterOptions(),
-            ]
-        );
+        return reply()->json($this->results(), [
+                                                 'transformer' => DataTransformer::class,
+                                                 'totalResults' => $this->totalResults(),
+                                                 'totalLessons' => $this->totalLessons(),
+                                                 'filterOptions' => $this->filterOptions(),
+                                             ]);
     }
 
     /**
