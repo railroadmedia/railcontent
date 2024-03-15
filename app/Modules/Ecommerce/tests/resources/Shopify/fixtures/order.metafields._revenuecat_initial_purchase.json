@@ -1,0 +1,30 @@
+{
+    "metafields": [
+        {
+            "id": 37559273685286,
+            "namespace": "Musora",
+            "key": "brand",
+            "value": "drumeo",
+            "description": null,
+            "owner_id": 5733522800934,
+            "created_at": "2024-03-13T10:05:47-04:00",
+            "updated_at": "2024-03-13T10:05:47-04:00",
+            "owner_resource": "order",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/37559273685286"
+        },
+        {
+            "id": 37559273718054,
+            "namespace": "Musora",
+            "key": "payment_source",
+            "value": "google",
+            "description": null,
+            "owner_id": 5733522800934,
+            "created_at": "2024-03-13T10:05:47-04:00",
+            "updated_at": "2024-03-13T10:05:47-04:00",
+            "owner_resource": "order",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/37559273718054"
+        }
+    ]
+}

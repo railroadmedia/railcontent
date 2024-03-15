@@ -112,7 +112,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'sbLSkX571cCFpDffKort',
+                        'ac' => 'SOIaxCZ9nS3FN3mq2ZgT',
                         'br' => 'hgGjqh5gz',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
@@ -149,7 +149,7 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => 'sbLSkX571cCFpDffKort',
+                        'ac' => 'SOIaxCZ9nS3FN3mq2ZgT',
                         'br' => 'hgGjqh5gz',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,

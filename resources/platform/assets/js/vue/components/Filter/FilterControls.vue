@@ -27,7 +27,7 @@
         </div>
         <div v-if="!hideControls" class="tw-flex tw-grow tw-items-start">
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
-                <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" @on-submit="handleSubmit" />
+                <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" :active-tab="activeTab" :tab-options="tabOptions" @on-submit="handleSubmit" />
                 <slot name="extra-icon"></slot>
                 <template v-if="!hideFilterIcon">
                     <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
@@ -83,7 +83,7 @@ const props = defineProps({
     },
     searchPlaceholder: {
         type: String,
-        default: 'Search',
+        default: '',
     },
     selectedSort: {
         type: String,
