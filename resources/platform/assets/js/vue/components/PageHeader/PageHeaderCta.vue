@@ -7,6 +7,7 @@
         <span v-if="text" :class="textSpanClass">
             {{ text }}
         </span>
+        <slot />
     </a>
     <button v-else @click.prevent="emitClick"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-p-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
@@ -16,6 +17,7 @@
         <span v-if="text" :class="textSpanClass">
             {{ text }}
         </span>
+        <slot />
     </button>
 </template>
 

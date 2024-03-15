@@ -92,21 +92,25 @@
         $headerData['progressLabelText'] = $progressLabelText;
         $headerData['contentId'] = $parentContent->fetch('id');
         $headerData['infoData'] = $infoDataStrArr;
-        $headerData['ctas'] = [
-            [
+        $headerData['ctas'] = [];
+
+        $vimeoVideoId = $parentContent->fetch('fields.video.fields.vimeo_video_id');
+        if (!empty($vimeoVideoId)) {
+            $headerData['ctas'][] = [
                 'type' => 'PreviewLessonCta',
                 'props' => [
                     'contentId' => $parentContent->fetch('id'),
-                    'videoId' => $parentContent->fetch('fields.video.fields.vimeo_video_id'),
+                    'videoId' => $vimeoVideoId,
                     'castTitle' => $parentContent->fetch('fields.title'),
                     'poster' => $parentContent['video_poster_image_url'] ?? '',
                     'sources' => $parentContent['video_playback_endpoints'],
-                    'nextLessonUrl' => $nextLessonUrl
-                ]
-            ],
-            [
-                'type' => 'WhereToBeginCta'
-            ]
+                    'nextLessonUrl' => $nextLessonUrl,
+                ],
+            ];
+        }
+
+        $headerData['ctas'][] = [
+            'type' => 'WhereToBeginCta',
         ];
     }
     elseif ($parentContent->fetch('type') === 'learning-path-level' || $parentContent->fetch('type') === 'learning-path-course'){
