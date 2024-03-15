@@ -35,6 +35,7 @@
             </div>
 
             <form id="stc-form" method="POST" class="tw-flex tw-flex-col" @submit.prevent="(event) => submitForm(event)">
+                <input id="id" type="hidden" name="id" :value="userId" />
                 <input id="email" type="hidden" name="email" :value="userEmail" />
                 <!-- Name -->
                 <label class="tw-flex tw-flex-col tw-mb-2">
@@ -308,6 +309,10 @@ const props = defineProps({
     genres: {
         type: Array,
         default: [],
+    },
+    userId: {
+        type: String,
+        default: '',
     },
 })
 
