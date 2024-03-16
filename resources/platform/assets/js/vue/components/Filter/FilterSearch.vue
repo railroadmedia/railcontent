@@ -12,7 +12,7 @@
             :initial-value="searchTerm"
             :placeholder="searchPlaceholder"
             inputName="term"
-            id="catalog-search"
+            id="workouts-search"
             :removeDefaultInputStyles="true"
             @onChange="handleChange"
             @onEnter="handleSubmitSearch"
