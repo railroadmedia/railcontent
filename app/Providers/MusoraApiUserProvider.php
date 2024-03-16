@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -407,5 +408,21 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllBranchInformation()
+    {
+        return FeatureFlagging::allBranches(user());
+    }
+
+    /**
+     * @return array
+     */
+    public function getAccessibleFeatures()
+    {
+        return FeatureFlagging::allowedFeatures(user());
     }
 }

@@ -2,22 +2,11 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
-use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
-use App\Modules\Ecommerce\Services\ProductService;
-use App\Modules\Ecommerce\Services\ShopifyAPIService;
-use App\Modules\UserManagementSystem\Services\UserService;
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Http;
-use Modules\UserManagementSystem\Events\UserEvent;
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Services\RecommendationService;
-
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
-use function Amp\delay;
 
 
 class DevEndpointController extends Controller
@@ -30,7 +19,8 @@ class DevEndpointController extends Controller
     public function __construct(
         private RecommendationService $recommendationService,
     )
-    { }
+    {
+    }
 
     public function handleRequest(Request $request, $arg1=null)
     {
@@ -45,16 +35,8 @@ class DevEndpointController extends Controller
         return $this->recommendationService->getFilteredRecommendations(1111,'pianote', RecommenderSection::Course);
         $this->testRandomization();
         dd("hello from the playground");
-
     }
 
-    private function testBulkRecommendation() {
-
-        $userIDs = [648632, 149869, 150909, 152882];
-        $brand = 'SINGEO';
-        $results = $this->recommendationService->getBulkFilterRecommendations($userIDs, $brand, RecommenderSection::Song);
-        dd($results);
-    }
 
     private function testingForRecommendationSystem() {
 
@@ -105,6 +87,5 @@ class DevEndpointController extends Controller
         }
         return $timeResults;
     }
-
 }
 

@@ -6,7 +6,7 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
@@ -159,7 +159,7 @@ const props = defineProps({
     },
     searchPlaceholder: {
         type: String,
-        default: 'Search',
+        default: '',
     },
     withoutEnrollment: {
         type: Boolean,
@@ -179,6 +179,10 @@ const props = defineProps({
     showProgressFilters: {
         type: Boolean,
         default: () => true,
+    },
+    multipleTypes: {
+        type: Boolean,
+        default: () => false,
     },
 });
 
@@ -201,7 +205,9 @@ const request_params = computed(() => {
         included_types: includedTypes.value,
         include_future_scheduled_content_only: props.includeFutureScheduledContentOnly,
         limit: props.limit,
-        ...(isPack.value && { without_enrollment: props.withoutEnrollment })
+        ...(isPack.value && { without_enrollment: props.withoutEnrollment }),
+        is_all: props.isAllContent,
+
     };
 })
 
@@ -210,7 +216,7 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    }else if(props.isAllContent){
+    }else if(props.multipleTypes){
         types = props.includedTypes;
     } else {
         props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);

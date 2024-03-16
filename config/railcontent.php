@@ -439,7 +439,7 @@ return [
     'cataloguesMetadata' => [
         'drumeo' => [
             'all' => [
-                'name' => 'New Content',
+                'name' => 'New Releases',
                 'shortname' => 'Content',
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
@@ -457,6 +457,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
             ],
@@ -537,8 +538,8 @@ return [
                 'name' => 'Student Focus',
                 'icon' => 'icon-student-focus',
                 'description' => "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.",
-                'allowableFilters' => ['difficulty', 'genre', 'focus', 'lifestyle'],
-                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'focus', 'lifestyle'],
+                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle' ],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty',  'instructor', 'topic'],
                 'tabs' => [
@@ -1158,6 +1159,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
             ],
@@ -1280,14 +1282,14 @@ return [
             'student-reviews' => [
                 'name' => 'Student Reviews',
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/student-review.jpg',
-                'allowableFilters' => ['difficulty', 'genre', 'focus'],
+                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
                 'shortname' => 'Student Reviews',
                 'icon' => 'icon-student-focus',
                 'description' => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
                 'amountOfFutureLessonsToShow' => 3,
                 'allowableFiltersMobile' => [],
                 'showFutureLessonAtTopOrBottom' => 'bottom',
-                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'focus'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle' ],
                 'sortBy' => '-published_on',
                 'tabs' => [
                     [
@@ -1505,6 +1507,12 @@ return [
                         'value' => ['length_in_seconds,451,integer,>,video', 'length_in_seconds,751,integer,<,video'],
                     ],
                     [
+                        'name' => '15+ Minutes',
+                        'short_name' => '15+ MINS',
+                        'is_required_field' => true,
+                        'value' => ['length_in_seconds,750,integer,>,video'],
+                    ],
+                    [
                         'name' => 'Instructors',
                         'short_name' => 'INSTRUCTORS',
                         'is_group_by' => true,
@@ -1590,6 +1598,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
@@ -1750,8 +1759,8 @@ return [
                 "name" => "Student Reviews",
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
-                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'focus'],
-                'allowableFiltersMobileV2' => ['difficulty', 'genre','focus'],
+                'allowableFilters' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle'],
+                'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory', 'creativity', 'lifestyle' ],
                 'tabs' => [
                     [
                         'name' => 'Lessons',
@@ -1952,7 +1961,7 @@ return [
                 'icon' => 'fas fa-star',
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
-                'allowableFilters' => [],
+                'allowableFilters' => ['type'],
                 'allowableFiltersMobileV2' => ['difficulty', 'genre', 'essentials', 'theory','creativity','lifestyle','type'],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor', 'progress'],
@@ -1965,6 +1974,7 @@ return [
                 ],
             ],
             'in-progress' => [
+                'allowableFilters' => ['difficulty', 'type'],
                 'allowableFiltersMobileV2' => ['difficulty', 'type', 'instructor'],
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],

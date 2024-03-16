@@ -87,7 +87,7 @@ const props = defineProps({
     },
     searchPlaceholder: {
         type: String,
-        default: 'Search',
+        default: '',
     },
     singleSelectColumns: {
         type: Array,

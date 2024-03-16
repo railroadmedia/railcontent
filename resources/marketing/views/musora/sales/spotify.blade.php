@@ -2,6 +2,23 @@
     "promoVersion" => true,
     "hideHeader" => true,
 ])
+@section('head-includes')
+@parent
+
+<style>
+    .thank-you-box.active {
+        max-height:1000px!important;
+        visibility:visible!important;
+        opacity:1!important;
+        padding:15px!important;
+    }
+    @media (min-width: 40em) {
+        .thank-you-box.active {
+            padding: 20px!important;
+        }
+    }
+</style>
+@endsection
 
 @section('spotify-banner')
     <p class="leading-tight mb-2 text-sm"><em>Learn your favorite songs for <strong>FREE</strong></em></p>
@@ -69,6 +86,7 @@
     <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> Awesome music lessons.</li>',
     'image' => 'marketing/musora/membership/homepage/webp-format/musora-m-team2.webp',
     ])
+
 @endsection
 
 @section('scripts')

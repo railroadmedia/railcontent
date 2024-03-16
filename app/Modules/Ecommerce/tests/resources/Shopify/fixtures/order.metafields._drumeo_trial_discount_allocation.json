@@ -1,0 +1,17 @@
+{
+    "metafields": [
+        {
+            "id": 32140854427924,
+            "namespace": "Musora",
+            "key": "brand",
+            "value": "Drumeo",
+            "description": null,
+            "owner_id": 5716409221396,
+            "created_at": "2024-02-15T06:42:27-08:00",
+            "updated_at": "2024-02-15T06:42:27-08:00",
+            "owner_resource": "order",
+            "type": "single_line_text_field",
+            "admin_graphql_api_id": "gid://shopify/Metafield/32140854427924"
+        }
+    ]
+}

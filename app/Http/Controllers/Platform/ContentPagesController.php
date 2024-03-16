@@ -1816,12 +1816,12 @@ class ContentPagesController extends BaseController
         $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
-
+        $types = ['song','song-tutorial'];
         $initialContent = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 12),
             $request->get('sort', '-popularity'),
-            ['song'],
+            $types,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             ['artist,'.$artist],
@@ -1837,7 +1837,6 @@ class ContentPagesController extends BaseController
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
         $pluralContentType = Str::plural('song');
 
-
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
@@ -1850,7 +1849,8 @@ class ContentPagesController extends BaseController
         $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType. '    '.$totalPlays.' plays';
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
-            'contentType' => 'song',
+            'contentType' => $types,
+            'allowedTypes' => ['song','song-tutorial'],
             'collectionName' => $artistName,
             'contentName' => 'Songs',
             'contentTitle' => $artistName,
@@ -1871,11 +1871,12 @@ class ContentPagesController extends BaseController
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
         ContentRepository::$countFilterOptionItems = true;
+        $availableTypes = (in_array($lessonType,['quick-tips','boot-camps']))?['quick-tips','boot-camps']:[$lessonType];
 
         $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
             $request->get('limit', 12),
             $request->get('sort', '-popularity'),
-            [$lessonType],
+            $availableTypes,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
             ['style,'.$genre],
@@ -1902,6 +1903,7 @@ class ContentPagesController extends BaseController
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => $lessonType,
+            'allowedTypes' => $availableTypes,
             'collectionName' => $genre,
             'contentName' => $lessonType,
             'contentTitle' => $contentTitle,

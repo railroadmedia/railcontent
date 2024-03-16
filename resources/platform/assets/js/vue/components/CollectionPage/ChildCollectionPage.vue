@@ -49,7 +49,11 @@ const props = defineProps({
     requiredFields: {
         type: Array,
         default: () => ([]),
-    }
+    },
+    includedTypes: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const userStore = useUserStore();
@@ -97,6 +101,6 @@ const capitalizeFirstLetter = (string) => {
     <div class="lg:tw-container tw-px-4 md:tw-px-8 tw-mx-auto tw-pt-[30px]">
         <CollectionWrapper :pre-loaded-content="preLoadedContent" :tab-options="[
             { key: 'allContent', value: `All ${capitalizeFirstLetter(pluralContentType)}` },
-        ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType" />
+        ]" :filterable-values="filterableValues" :required-fields="requiredFields" :collection-type="contentType"  :included-types="includedTypes" :multiple-types="true" />
     </div>
 </template>

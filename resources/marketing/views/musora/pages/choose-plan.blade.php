@@ -55,27 +55,38 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
 
-    @include('musora.sales.components.card-selection-section', [
-        "whiteBg" => true,
+    @if(empty($month))
+        @include('musora.sales.components.card-selection-section', [
+            "whiteBg" => true,
+            "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+            "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+            "songs" => "Thousands of popular songs.",
+            "firstPoint" => "Learn piano, guitar, drums, & singing.",
+            "thirdPoint" => "Unlimited personal support.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
+
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'musical',
+        ])
+    @else
+        @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
         "songs" => "Thousands of popular songs.",
         "firstPoint" => "Learn piano, guitar, drums, & singing.",
-        "thirdPoint" => "Unlimited personal support",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
-    ])
+        "thirdPoint" => "Unlimited personal support.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-30-day-trial-membership]=1&locked=true&referralCode=" . $referralCode,
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'musical',
+        ])
+    @endif
 
-    @include('musora.sales.components.trial-explanation', [
-        'instrument' => 'musical',
-    ])
-    @include('musora.sales.components.app-section', [
-        'image' => 'marketing/musora/membership/homepage/2023/devices2.png',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
-    ])
     @include('musora._partials._faq')
 
 @stop

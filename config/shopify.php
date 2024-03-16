@@ -91,4 +91,40 @@ return [
          */
         'account_creation_secret_key' => 'musora_shopify_claim_key_68769727349672736',
     ],
+
+    /*
+     * The name of order sources that are known to be automated
+     */
+    'automated_source_names' => [
+        'subscription_contract'
+    ],
+
+    /*
+     * API apps in the Shopify instance
+     */
+    'api_app' => [
+        // our custom app to connect with MWP
+        'musora_web_platform' => [
+            // the identifier for the app
+            'ids' => !is_null(env('SHOPIFY_API_APP_MUSORA_WEB_PLATFORM_IDS')) ?
+                explode(',', env('SHOPIFY_API_APP_MUSORA_WEB_PLATFORM_IDS')) :
+                [
+                    '62984159233',    // production
+                    '77261602817',    // app-staging-one
+                    '77262651393',    // app-staging-two
+                    '77262946305',    // app-staging-three
+                    '77263208449',    // beta-testing
+                    '65246101505',    // pre-production
+                    '53390114817',    // sandbox-staging
+                    '64000589825',    // subscription-staging
+                    '62696062977',    // sync-staging
+                    '77263568897',    // musora-web-staging-one
+                    '77263732737',    // musora-web-staging-two
+                    '77263896577',    // musora-web-staging-three
+                    '77263994881',    // musora-web-staging-four
+                    '77264060417',    // musora-web-staging-five
+                    '62191271937',    // musora-dev-sync
+                ],
+        ]
+    ]
 ];

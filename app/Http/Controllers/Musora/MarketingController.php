@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Musora;
 
 use App\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
 
 class MarketingController extends BaseController
 {
@@ -148,6 +149,10 @@ class MarketingController extends BaseController
     public function choosePlan()
     {
         return view('musora.pages.choose-plan', ['theme' => 'musora']);
+    }
+    public function choosePlanMonth(Request $request)
+    {
+        return view('musora.pages.choose-plan', ['theme' => 'musora', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
     public function faster()
     {
