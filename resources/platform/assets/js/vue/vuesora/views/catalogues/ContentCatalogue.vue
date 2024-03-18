@@ -64,7 +64,7 @@
     <grid-catalogue v-if="catalogueType === 'grid'" :content="content"
       :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
       :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
-      :six-wide="sixWide" :five-wide="fiveWide" :show-my-list-action="showMyListAction" :display-inline="displayInline" :is-single-item="isSingleItem" :full-width-on-Mobile="fullWidthOnMobile"
+      :show-my-list-action="showMyListAction" :display-inline="displayInline" :is-single-item="isSingleItem" :full-width-on-Mobile="fullWidthOnMobile"
       @addToList="addToListEventHandler" />
 
     <routines-catalogue v-if="catalogueType === 'routines'" :content="content" :brand="brand" :theme-color="themeColor"
