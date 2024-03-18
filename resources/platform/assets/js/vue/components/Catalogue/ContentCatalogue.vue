@@ -204,10 +204,6 @@ export default {
             type: Boolean,
             default: () => false,
         },
-        fiveWide: {
-            type: Boolean,
-            default: () => false,
-        },
         displayInline: {
             type: Boolean,
             default: () => false,
