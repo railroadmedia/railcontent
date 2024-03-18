@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a15594034095d2f60b4bb80e870a480f",
+    "content-hash": "86913145fb0eccb833af04126ec97f50",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10368,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.63",
+            "version": "dev-hotfix-FSU-187",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c27b9b032ac04a1ef284bace5479d0ce838f9f62"
+                "reference": "baf9a1b311f44e4c94da2450b185e600a006b8e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c27b9b032ac04a1ef284bace5479d0ce838f9f62",
-                "reference": "c27b9b032ac04a1ef284bace5479d0ce838f9f62",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/baf9a1b311f44e4c94da2450b185e600a006b8e8",
+                "reference": "baf9a1b311f44e4c94da2450b185e600a006b8e8",
                 "shasum": ""
             },
             "require": {
@@ -10432,9 +10432,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.63"
+                "source": "https://github.com/railroadmedia/railcontent/tree/hotfix-FSU-187"
             },
-            "time": "2024-03-18T07:01:25+00:00"
+            "time": "2024-03-18T09:38:11+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19266,11 +19266,18 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-hotfix-FSU-187",
+            "alias": "v2.1.63",
+            "alias_normalized": "2.1.63.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
