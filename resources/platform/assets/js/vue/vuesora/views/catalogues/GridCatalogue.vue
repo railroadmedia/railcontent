@@ -14,7 +14,6 @@
             :content-type-override="contentTypeOverride"
             :show-my-list-action="showMyListAction"
             :force-list-view="displayInline"
-            :add-dark-mode-color="addDarkModeColor"
             :is-single-item="isSingleItem"
             :full-width-on-Mobile="fullWidthOnMobile"
             :add-margin-bottom="addMarginBottom"
