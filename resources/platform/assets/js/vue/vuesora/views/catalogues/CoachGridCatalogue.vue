@@ -8,7 +8,6 @@
             :key="'coach-grid' + item.id"
             :item="item"
             :content-type="item.type"
-            :brand="brand"
             :user-id="userId"
             :is-admin="isAdmin"
             :lock-unowned="lockUnowned"
