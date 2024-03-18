@@ -12,6 +12,7 @@ use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ReportedCommentRepository;
+use Railroad\Usora\Repositories\UserRepository;
 
 class CommentService
 {
@@ -30,6 +31,8 @@ class CommentService
 
     protected RailcontentProvider $railcontentProvider;
 
+    protected UserRepository $userRepository;
+
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
@@ -43,17 +46,20 @@ class CommentService
      * @param ContentRepository $contentRepository
      * @param ReportedCommentRepository $reportedCommentRepository
      * @param RailcontentProvider $railcontentProvider
+     * @param UserRepository $userRepository
      */
     public function __construct(
         CommentRepository $commentRepository,
         ContentRepository $contentRepository,
         ReportedCommentRepository $reportedCommentRepository,
-        RailcontentProvider $railcontentProvider
+        RailcontentProvider $railcontentProvider,
+        UserRepository $userRepository
     ) {
         $this->commentRepository = $commentRepository;
         $this->contentRepository = $contentRepository;
         $this->reportedCommentRepository = $reportedCommentRepository;
         $this->railcontentProvider = $railcontentProvider;
+        $this->userRepository = $userRepository;
     }
 
     /** Call the getById method from repository and return the comment if exist and null otherwise
@@ -93,7 +99,8 @@ class CommentService
         //return null if the content type it's not predefined in config file
         if (!in_array(
             $content['type'],
-            array_merge(config('railcontent.commentable_content_types', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            array_merge(config('railcontent.commentable_content_types', []),
+                config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         )) {
             return null;
         }
@@ -171,7 +178,6 @@ class CommentService
      */
     public function delete($id)
     {
-
         //check if comment exist
         $comment = $this->commentRepository->getById($id);
 
@@ -227,6 +233,24 @@ class CommentService
         return self::$canManageOtherComments || ($comment['user_id'] == auth()->id());
     }
 
+    public function getModeratorComments(
+        $page = 1,
+        $limit = 25,
+        $orderByAndDirection = '-created_on',
+        $currentUserId = null,
+        $searchTerm = '',
+        $mineOnly = false
+    ) {
+        $comments = $this->getComments($page, $limit, $orderByAndDirection, $currentUserId, $searchTerm, $mineOnly);
+        $moderatorIds = $comments['results']->pluck('assigned_moderator_id')->toArray();
+        $userLookup = collect($this->userRepository->findByIds($moderatorIds));
+        foreach ($comments['results'] as $comment) {
+            $user = $userLookup[$comment['assigned_moderator_id']] ?? null;
+            $comment['assigned_moderator_name'] = $user ? $user->getDisplayName() : '';
+        }
+        return $comments;
+    }
+
     /**
      *  Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
      * call the method from the repository to pull the paginated comments that meet the criteria and call a method that
@@ -237,8 +261,14 @@ class CommentService
      * @param string $orderByAndDirection
      * @return array
      */
-    public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on', $currentUserId = null)
-    {
+    public function getComments(
+        $page = 1,
+        $limit = 25,
+        $orderByAndDirection = '-created_on',
+        $currentUserId = null,
+        $searchTerm = '',
+        $mineOnly = false
+    ) {
         if ($limit == 'null') {
             $limit = -1;
         }
@@ -293,7 +323,7 @@ class CommentService
                     $orderByColumn
                 );
                 $results = [
-                    'results' => $this->commentRepository->getComments(),
+                    'results' => $this->commentRepository->getComments($searchTerm, $mineOnly),
                     'total_results' => $this->commentRepository->countComments(),
                     'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
                 ];
