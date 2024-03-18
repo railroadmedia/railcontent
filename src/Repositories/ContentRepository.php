@@ -3161,4 +3161,18 @@ class ContentRepository extends RepositoryBase
 
         return $filterOptions;
     }
+
+    /**
+     * @return Collection
+     */
+    public function getArtists()
+    {
+        return $this->query()
+            ->selectRaw('DISTINCT '.ConfigService::$tableContent.'.artist as name')
+            ->restrictByUserAccess()
+            ->restrictByTypes(['song'])
+            ->whereNotNull('artist')
+            ->orderBy('artist','asc')
+            ->get();
+    }
 }

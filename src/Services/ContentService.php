@@ -2937,4 +2937,14 @@ class ContentService
 
         return $filters['bpm'];
     }
+
+    /**
+     * @return mixed|Collection|null
+     */
+    public function getArtists()
+    {
+        $results = $this->contentRepository->getArtists()->toArray();
+
+        return Decorator::decorate($results, 'artist');
+    }
 }
