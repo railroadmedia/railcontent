@@ -51,7 +51,6 @@ class CommentJsonController extends Controller
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
         CommentRepository::$assignedToUserId = $request->get('assigned_to_user_id', false);
         CommentRepository::$conversationStatus = $request->get('conversation_status', false);
-        $test = $request->get('mineOnly', false);
         $commentData = $this->commentService->getModeratorComments(
             $request->get('page', 1),
             $request->get('limit', 10),
