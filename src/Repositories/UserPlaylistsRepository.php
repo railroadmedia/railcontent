@@ -67,7 +67,7 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->where(config('railcontent.table_prefix').'user_playlists'.'.brand', $brand)
                 ->where('type', $playlistType);
 
-        $this->searchTerm($term, $query);
+        $this->searchTerm($query, $term);
 
         if (self::$availableCategories) {
             $query->whereIn('category', self::$availableCategories);
@@ -174,7 +174,7 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->where('brand', $brand)
                 ->where('type', $playlistType);
 
-        $this->searchTerm($term, $query);
+        $this->searchTerm($query, $term);
 
         if (self::$availableCategories) {
             $query->whereIn('category', self::$availableCategories);
@@ -296,7 +296,7 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->where('type', $playlistType)
                 ->groupBy('category');
 
-        $this->searchTerm($term, $query);
+        $this->searchTerm($query, $term);
 
         foreach ($query->get() ?? [] as $result) {
             $filterOptionsArray['categories'][] = $result['category'].' ('.$result['playlistsCount'].')';
@@ -304,10 +304,15 @@ class UserPlaylistsRepository extends RepositoryBase
 
         //Return Currently Selected Category(s), regardless of number of results
         if (UserPlaylistsRepository::$availableCategories) {
+            $values = [];
+            foreach ($filterOptionsArray['categories'] as $existOption) {
+                $optionArray = (explode(' (', $existOption));
+                $values[] = is_numeric($optionArray[0]) ? (int)$optionArray[0] : $optionArray[0];
+            }
             foreach (UserPlaylistsRepository::$availableCategories as $category) {
                 if (!isset($filterOptionsArray['categories'])) {
                     $filterOptionsArray['categories'][] = $category.' (0)';
-                } elseif (!in_array($category, $filterOptionsArray['categories'])) {
+                } elseif (!in_array($category, $values)) {
                     $filterOptionsArray['categories'][] = $category.' (0)';
                 }
             }
@@ -317,11 +322,11 @@ class UserPlaylistsRepository extends RepositoryBase
     }
 
     /**
-     * @param $term
      * @param Builder $query
+     * @param null $term
      * @return Builder
      */
-    private function searchTerm($term, Builder $query)
+    private function searchTerm(Builder $query, $term = null)
     {
         if ($term) {
             if (config('railcontent.search_in_playlist_items_name', false)) {
