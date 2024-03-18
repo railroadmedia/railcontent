@@ -248,7 +248,7 @@ class AddOrderTags implements ShouldQueue
                 mutation {
                     tagsAdd (
                         id: "{$this->order->gid}"
-                        tags: $this->tagsToAdd
+                        tags: {$this->tagsToAdd->values()}
                     ) {
                     node {
                         id
@@ -275,6 +275,7 @@ class AddOrderTags implements ShouldQueue
                 $this->executeQuery($gql);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+                Log::debug($gql);
             }
         }
     }
