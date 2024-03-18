@@ -218,10 +218,6 @@ const props = defineProps({
 		type: Boolean,
         default: () => false,
     },
-    addMarginBottom: {
-        type: Boolean,
-        default: () => false,
-    },
 });
 
 const {
