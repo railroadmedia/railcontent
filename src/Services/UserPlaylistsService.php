@@ -269,7 +269,7 @@ class UserPlaylistsService
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
-            ContentService::STATUS_ARCHIVED
+            ContentService::STATUS_ARCHIVED,
         ];
 
         ContentRepository::$pullFutureContent = true;
@@ -285,9 +285,11 @@ class UserPlaylistsService
             return $results;
         }
 
-        $singularContentTypes = array_merge(config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
-                                            config('railcontent.singularContentTypes'),
-                                            ['assignment']);
+        $singularContentTypes = array_merge(
+            config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
+            config('railcontent.singularContentTypes'),
+            ['assignment']
+        );
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
         $itemsThatShouldBeAdd = $assignments['lessons_count'] ?? 0;
@@ -303,10 +305,10 @@ class UserPlaylistsService
         if ($content && (in_array($content['type'], $singularContentTypes))) {
             $itemsThatShouldBeAdd++;
         }
-        if($importHighRoutine){
+        if ($importHighRoutine) {
             $itemsThatShouldBeAdd++;
         }
-        if($importLowRoutine){
+        if ($importLowRoutine) {
             $itemsThatShouldBeAdd++;
         }
 
@@ -484,7 +486,7 @@ class UserPlaylistsService
             return -1;
         }
         $blockedUsers = $this->railcontentProvider->getBlockedUsers();
-        if($checkPermission && in_array($playlist['user_id'], $blockedUsers)){
+        if ($checkPermission && in_array($playlist['user_id'], $blockedUsers)) {
             return -2;
         }
         //        $playlist['like_count'] =
@@ -633,12 +635,13 @@ class UserPlaylistsService
             ->delete();
 
         //delete playlist
-        $delete =  $this->userPlaylistsRepository->query()
-            ->where([
-                        'id' => $userPlaylistId,
-                        'user_id' => auth()->id(),
-                    ])
-            ->delete();
+        $delete =
+            $this->userPlaylistsRepository->query()
+                ->where([
+                            'id' => $userPlaylistId,
+                            'user_id' => auth()->id(),
+                        ])
+                ->delete();
 
         event(new PlaylistDeleted($userPlaylistId));
 
@@ -853,7 +856,7 @@ class UserPlaylistsService
             return -1;
         }
         $blockedUsers = $this->railcontentProvider->getBlockedUsers();
-        if($checkPermission && in_array($playlist['user_id'], $blockedUsers)){
+        if ($checkPermission && in_array($playlist['user_id'], $blockedUsers)) {
             return -2;
         }
         $playlist['is_liked_by_current_user'] =
@@ -908,9 +911,10 @@ class UserPlaylistsService
     public function reportPlaylist($playlistId)
     {
         $currentUser = auth()->user();
-        $playlist = $this->userPlaylistsRepository->query()
-            ->where('id', $playlistId)
-            ->first();
+        $playlist =
+            $this->userPlaylistsRepository->query()
+                ->where('id', $playlistId)
+                ->first();
         if (!$playlist) {
             throw new NotFoundHttpException();
         }
@@ -924,41 +928,53 @@ class UserPlaylistsService
                                      ->toDateTimeString(),
                              ]);
 
-        $input['subject'] =
-            'Playlist reported by '.
-            $currentUser['display_name'].
-            " (".
-            $currentUser['email'].
-            ")";
+        $input['subject'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following playlist has been reported:'];
-        $input['lines'][] = url()->route('platform.user.playlist',['id' => $playlistId, 'brand' => $playlist['brand']]);
+        $input['lines'][] =
+            url()->route('platform.user.playlist', ['id' => $playlistId, 'brand' => $playlist['brand']]);
 
         $input['unsubscribeLink'] = '';
-        $input['alert'] =
-            'Playlist reported by '.
-            $currentUser['display_name'].
-            " (".
-            $currentUser['email'].
-            ")";
+        $input['alert'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
 
         $input['logo'] = config('mailora.'.$playlist['brand'].'.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] =  config('mailora.'.$playlist['brand'].'.report-comment-recipient');
+        $input['recipient'] = config('mailora.'.$playlist['brand'].'.report-comment-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
                                         "success" => false,
-                                        "message" => $exception->getMessage()
+                                        "message" => $exception->getMessage(),
                                     ], 500);
         }
 
         return response()->json([
                                     "success" => true,
-                                    "message" => "The playlist was reported"
+                                    "message" => "The playlist was reported",
                                 ], 200);
+    }
+
+    /**
+     * @param $userId
+     * @param $playlistType
+     * @param null $brand
+     * @param null $term
+     * @return array
+     */
+    public function getFilterOptions(
+        $userId,
+        $playlistType,
+        $brand = null,
+        $term = null
+    ) {
+        return $this->userPlaylistsRepository->getFilterOptions(
+            $userId,
+            $playlistType,
+            $brand,
+            $term
+        );
     }
 }
