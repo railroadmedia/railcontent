@@ -95,7 +95,6 @@ class ContentPagesController extends BaseController
             return $this->guitareoLessonsPage($request, $domain, $brand);
         }
 
-
         if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
             return redirect()->route('platform.songs-upgrade');
         }
@@ -154,20 +153,20 @@ class ContentPagesController extends BaseController
             );
 
             $listLessons = new ContentFilterResultsEntity([
-                'results' => $searchResults['results'],
-                'total_results' => $searchResults['total_results'],
-                'filter_options' => [],
-            ]);
+                                                              'results' => $searchResults['results'],
+                                                              'total_results' => $searchResults['total_results'],
+                                                              'filter_options' => [],
+                                                          ]);
         }
         $required_fields = $request->get('required_fields', []);
-        if($request->get('tabs', false)){
+        if ($request->get('tabs', false)) {
             $tabs = $request->get('tabs');
 
-            if(!is_array($request->get('tabs'))){
+            if (!is_array($request->get('tabs'))) {
                 $tabs = [$request->get('tabs')];
             }
 
-            foreach($tabs as $tab) {
+            foreach ($tabs as $tab) {
                 $extra = explode(',', $tab);
                 if ($extra['0'] == 'group_by') {
                     $group_by = $extra['1'];
@@ -185,7 +184,8 @@ class ContentPagesController extends BaseController
         }
 
         if ($contentTypeName == 'songs') {
-            ContentRepository::$catalogMetaAllowableFilters  = array_merge (ContentRepository::$catalogMetaAllowableFilters, ['artist']);
+            ContentRepository::$catalogMetaAllowableFilters =
+                array_merge(ContentRepository::$catalogMetaAllowableFilters, ['artist']);
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -272,7 +272,8 @@ class ContentPagesController extends BaseController
 
             $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
             $catalogueMeta['allowableFilters'] = $filterableValues;
-            $artists =   count($listLessons->filterOptions()['artist'] ?? []);
+            $songArtists = $this->contentService->getArtists();
+            $artists = count($songArtists ?? []);
             unset($listLessons['filter_options']['artist']);
 
             return view('content.songs-catalogue', [
@@ -289,7 +290,8 @@ class ContentPagesController extends BaseController
                 "songsNumber" => $listLessons->totalResults(),
                 "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
-                "futureScheduledContentOnly" => $futureScheduledContentOnly
+                "futureScheduledContentOnly" => $futureScheduledContentOnly,
+                "allArtistUrl" => url()->route('platform.content.artists.show'),
             ]);
         } else {
             return view('content.catalogue', [
@@ -304,7 +306,7 @@ class ContentPagesController extends BaseController
                 "catalogueMeta" => $catalogueMeta,
                 "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
-                "futureScheduledContentOnly" => $futureScheduledContentOnly
+                "futureScheduledContentOnly" => $futureScheduledContentOnly,
             ]);
         }
     }
@@ -359,8 +361,7 @@ class ContentPagesController extends BaseController
             );
         }
 
-        $childrenContent = $firstLevelContent['units'] ??
-            $this->contentService->getByParentId(
+        $childrenContent = $firstLevelContent['units'] ?? $this->contentService->getByParentId(
                 $firstLevelContent['id']
             );
 
@@ -374,9 +375,9 @@ class ContentPagesController extends BaseController
         $nextLessonJson = $nextContentForUser ?? null;
 
         if (!empty($nextLessonJson)) {
-            $nextLessonJson = (new ContentFilterResultsEntity(
-                ['results' => [$nextLessonJson], 'total_results' => 1]
-            ))->toResponseRawJson();
+            $nextLessonJson =
+                (new ContentFilterResultsEntity(['results' => [$nextLessonJson], 'total_results' => 1]
+                ))->toResponseRawJson();
         } else {
             $nextLessonJson = '';
         }
@@ -398,20 +399,20 @@ class ContentPagesController extends BaseController
                     $methodSlug = 'singeo-method';
                     break;
             }
-            $methodContent = $this->contentService->getBySlugAndType($methodSlug, 'learning-path')->first();
+            $methodContent =
+                $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
+                    ->first();
             $backButton = [
                 "text" => "&laquo; Learning Paths",
-                "url" => url()->route(
-                    'platform.content.first-level',
-                    [$primaryPage, $methodContent['slug'], $methodContent['id']]
-                ),
+                "url" => url()->route('platform.content.first-level',
+                                      [$primaryPage, $methodContent['slug'], $methodContent['id']]),
             ];
 
             if ($firstId == 276693) {
                 $classicalMethodPack = $this->contentService->getById(361886);
-                $classicalMethodPackJson = (new ContentFilterResultsEntity(
-                    ['results' => [$classicalMethodPack], 'total_results' => 1]
-                ))->toResponseRawJson();
+                $classicalMethodPackJson =
+                    (new ContentFilterResultsEntity(['results' => [$classicalMethodPack], 'total_results' => 1]
+                    ))->toResponseRawJson();
             } else {
                 $classicalMethodPack = null;
                 $classicalMethodPackJson = null;
@@ -423,7 +424,6 @@ class ContentPagesController extends BaseController
                 "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => 'courses']),
             ];
         }
-
 
         // attach the trailer video from vimeo
         $firstLevelContent =
@@ -446,7 +446,7 @@ class ContentPagesController extends BaseController
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - ' . (($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         return view('content.overview', [
@@ -521,9 +521,9 @@ class ContentPagesController extends BaseController
         $nextLessonJson = $nextContentForUser ?? null;
 
         if (!empty($nextLessonJson)) {
-            $nextLearningPathLesson = (new ContentFilterResultsEntity(
-                ['results' => [$nextLessonJson], 'total_results' => 1]
-            ))->toResponseRawJson();
+            $nextLearningPathLesson =
+                (new ContentFilterResultsEntity(['results' => [$nextLessonJson], 'total_results' => 1]
+                ))->toResponseRawJson();
         } else {
             $nextLearningPathLesson = '';
         }
@@ -537,7 +537,7 @@ class ContentPagesController extends BaseController
         ];
 
         $noProgress = empty($firstContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - ' . (($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         $backButton = [
@@ -627,9 +627,9 @@ class ContentPagesController extends BaseController
         $nextLessonJson = $nextContentForUser ?? null;
 
         if (!empty($nextLessonJson)) {
-            $nextLearningPathLesson = (new ContentFilterResultsEntity(
-                ['results' => [$nextLessonJson], 'total_results' => 1]
-            ))->toResponseRawJson();
+            $nextLearningPathLesson =
+                (new ContentFilterResultsEntity(['results' => [$nextLessonJson], 'total_results' => 1]
+                ))->toResponseRawJson();
         } else {
             $nextLearningPathLesson = '';
         }
@@ -643,7 +643,7 @@ class ContentPagesController extends BaseController
         ];
 
         $noProgress = empty($firstContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - ' . (($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         $backButton = [
@@ -763,14 +763,11 @@ class ContentPagesController extends BaseController
             $contentToRenderAsLessonParent = $thirdContent;
         }
 
-        if ((
-                empty($contentToRenderAsLesson['published_on']) ||
+        if ((empty($contentToRenderAsLesson['published_on']) ||
                 Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
-                !in_array(
-                    $contentToRenderAsLesson['status'],
-                    [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED]
-                ))
-            && !(user()->isAdmin())) {
+                !in_array($contentToRenderAsLesson['status'],
+                          [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED])) &&
+            !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
 
@@ -827,12 +824,10 @@ class ContentPagesController extends BaseController
             }
 
             $parentChildren =
-                $this->contentService->getFiltered(
-                    $request->get('page', 1),
-                    $request->get('limit', 10),
-                    '-' . $sort,
-                    [$contentToRenderAsLesson['type']]
-                )['results'];
+                $this->contentService->getFiltered($request->get('page', 1),
+                                                   $request->get('limit', 10),
+                                                   '-'.$sort,
+                                                   [$contentToRenderAsLesson['type']])['results'];
 
             // Alter 'availableContentStatues' so next/prev buttons don't link to lessons with different status.
             // (eg: don't link to archived lessons from non-archived lessons, and vice-versa)
@@ -945,7 +940,7 @@ class ContentPagesController extends BaseController
             }
         }
 
-        if ($contentToRenderAsLesson['type'] == 'workout' || $contentToRenderAsLesson['type'] == 'challenge-part' ) {
+        if ($contentToRenderAsLesson['type'] == 'workout' || $contentToRenderAsLesson['type'] == 'challenge-part') {
             return view('content.workout-lesson', [
                 "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
                 "lessonType" => $contentToRenderAsLesson['type'],
@@ -1027,7 +1022,9 @@ class ContentPagesController extends BaseController
         $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
-        $lessonContent = $this->resourceDecorator->decorate(new Collection([$lessonContent]))->first();
+        $lessonContent =
+            $this->resourceDecorator->decorate(new Collection([$lessonContent]))
+                ->first();
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MINIMUM;
 
         LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
@@ -1062,14 +1059,13 @@ class ContentPagesController extends BaseController
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
 
-        $songsFromSameArtist = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', 10),
-            '-published_on',
-            [$lessonContent['type']],
-            [],
-            [],
-            ['artist,' . $lessonContent->fetch('fields.artist')]
+        $songsFromSameArtist = $this->contentService->getFiltered($request->get('page', 1),
+                                                                  $request->get('limit', 10),
+                                                                  '-published_on',
+                                                                  [$lessonContent['type']],
+                                                                  [],
+                                                                  [],
+                                                                  ['artist,'.$lessonContent->fetch('fields.artist')]
         )['results'];
 
         // remove requested song if in related lessons, part one of two
@@ -1084,14 +1080,13 @@ class ContentPagesController extends BaseController
         $songsFromSameStyle = new Collection();
 
         if (count($songsFromSameArtist) < 10) {
-            $songsFromSameStyle = $this->contentService->getFiltered(
-                1,
-                19,
-                '-published_on',
-                [$lessonContent['type']],
-                [],
-                [],
-                ['style,' . $lessonContent->fetch('fields.style')]
+            $songsFromSameStyle = $this->contentService->getFiltered(1,
+                                                                     19,
+                                                                     '-published_on',
+                                                                     [$lessonContent['type']],
+                                                                     [],
+                                                                     [],
+                                                                     ['style,'.$lessonContent->fetch('fields.style')]
             )['results'];
 
             // remove requested song if in related lessons, part two of two (because sometimes in $songsFromSameStyle)
@@ -1113,15 +1108,15 @@ class ContentPagesController extends BaseController
         }
 
         $relatedLessons = (new ContentFilterResultsEntity([
-            'results' => array_slice(
-                array_merge(
-                    $songsFromSameArtist->toArray(),
-                    $songsFromSameStyle->toArray()
-                ),
-                0,
-                10
-            ),
-        ]))->toResponseRawJson();
+                                                              'results' => array_slice(
+                                                                  array_merge(
+                                                                      $songsFromSameArtist->toArray(),
+                                                                      $songsFromSameStyle->toArray()
+                                                                  ),
+                                                                  0,
+                                                                  10
+                                                              ),
+                                                          ]))->toResponseRawJson();
 
         return view('content.song', [
             "lessonType" => 'songs',
@@ -1146,9 +1141,9 @@ class ContentPagesController extends BaseController
         $this->contentService->idContentCache = [];
 
         // all members have access to all packs atm
-//        if (user()->isAMember()) {
-//            ContentRepository::$bypassPermissions = true;
-//        }
+        //        if (user()->isAMember()) {
+        //            ContentRepository::$bypassPermissions = true;
+        //        }
 
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         ContentRepository::$pullFutureContent = false;
@@ -1375,15 +1370,15 @@ class ContentPagesController extends BaseController
                 DB::connection(config('railcontent.database_connection_name'))
                     ->table('railcontent_content_hierarchy as ch_1')
                     ->select([
-                        'ch_1.parent_id as level_id',
-                        'ch_2.parent_id as learning_path_id',
+                                 'ch_1.parent_id as level_id',
+                                 'ch_2.parent_id as learning_path_id',
 
-                        'c_1.slug as level_slug',
-                        'c_2.slug as learning_path_slug',
+                                 'c_1.slug as level_slug',
+                                 'c_2.slug as learning_path_slug',
 
-                        'ch_1.child_position as course_child_position',
-                        'ch_2.child_position as level_child_position',
-                    ])
+                                 'ch_1.child_position as course_child_position',
+                                 'ch_2.child_position as level_child_position',
+                             ])
                     ->join('railcontent_content_hierarchy as ch_2', 'ch_2.child_id', '=', 'ch_1.parent_id')
                     ->join('railcontent_content as c_1', 'c_1.id', '=', 'ch_1.parent_id')
                     ->join('railcontent_content as c_2', 'c_2.id', '=', 'ch_2.parent_id')
@@ -1408,10 +1403,10 @@ class ContentPagesController extends BaseController
                 DB::connection(config('railcontent.database_connection_name'))
                     ->table('railcontent_content_hierarchy as ch_1')
                     ->select([
-                        'ch_1.parent_id as pack_id',
-                        'c_1.slug as pack_slug',
-                        'ch_1.child_position as child_position',
-                    ])
+                                 'ch_1.parent_id as pack_id',
+                                 'c_1.slug as pack_slug',
+                                 'ch_1.child_position as child_position',
+                             ])
                     ->join('railcontent_content as c_1', 'c_1.id', '=', 'ch_1.parent_id')
                     ->where('c_1.type', 'pack')
                     ->where('ch_1.child_id', $contentId)
@@ -1533,6 +1528,7 @@ class ContentPagesController extends BaseController
         $listLessons = $this->getListLessionsFromRequest($request);
 
         $adminMessage = null;
+
         return view('content.catalogue', [
             "listLessons" => $listLessons->toResponseRawJson(),
             "hasStartedLessons" => false,
@@ -1551,7 +1547,7 @@ class ContentPagesController extends BaseController
      */
     public function recommendedLessons(Request $request)
     {
-        if(!config('railcontent.enable_recsys', false)) {
+        if (!config('railcontent.enable_recsys', false)) {
             return redirect()->route('platform.new-lessons');
         }
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -1566,10 +1562,12 @@ class ContentPagesController extends BaseController
             ContentTypes::newContentTypes(),
             RecommenderSection::Song,
             false,
-            limit:100);
+            limit: 100
+        );
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
         $adminMessage = null;
+
         return view('content.catalogue', [
             "adminMessage" => $adminMessage,
             "catalogueMeta" => $catalogueMeta,
@@ -1589,14 +1587,14 @@ class ContentPagesController extends BaseController
     private function getListLessionsFromRequest(Request $request)
     {
         $required_fields = $request->get('required_fields', []);
-        if($request->get('tabs', false)){
+        if ($request->get('tabs', false)) {
             $tabs = $request->get('tabs');
 
-            if(!is_array($request->get('tabs'))){
+            if (!is_array($request->get('tabs'))) {
                 $tabs = [$request->get('tabs')];
             }
 
-            foreach($tabs as $tab) {
+            foreach ($tabs as $tab) {
                 $extra = explode(',', $tab);
                 if ($extra['0'] == 'group_by') {
                     $group_by = $extra['1'];
@@ -1612,7 +1610,12 @@ class ContentPagesController extends BaseController
                 }
             }
         }
-        $required_fields[] = 'published_on,'.Carbon::now()->subMonth(3)->toDateTimeString().',date,>=';
+        $required_fields[] =
+            'published_on,'.
+            Carbon::now()
+                ->subMonth(3)
+                ->toDateTimeString().
+            ',date,>=';
 
         $lessonType = ContentTypes::newContentTypes();
         $filteredType = $request->get('included_types');
@@ -1685,12 +1688,12 @@ class ContentPagesController extends BaseController
                 $dateTimeZone = new DateTimeZone($timezone);
                 try {
                     $time = new DateTime(null, $dateTimeZone);
-                    $formattedTimeForZone = ' - ' . $time->format('g:i a');
+                    $formattedTimeForZone = ' - '.$time->format('g:i a');
                 } catch (\Exception $e) {
                     error_log($e);
                 }
 
-                $formattedTimeZones[] = $timezone . ($formattedTimeForZone ?? '');
+                $formattedTimeZones[] = $timezone.($formattedTimeForZone ?? '');
             }
         }
 
@@ -1706,21 +1709,19 @@ class ContentPagesController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MINIMUM;
 
-        $includedTypes =
-            array_merge(
-                config('railcontent.coachContentTypes', []),
-                config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
-            );
+        $includedTypes = array_merge(
+            config('railcontent.coachContentTypes', []),
+            config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
+        );
         $lessonType = $request->get('included_types', $includedTypes);
 
-        $followedLessons =
-            $this->contentFollowsService->getLessonsForFollowedCoaches(
-                config('railcontent.brand'),
-                $lessonType,
-                [],
-                $request->get('page', 1),
-                $request->get('limit', 20)
-            );
+        $followedLessons = $this->contentFollowsService->getLessonsForFollowedCoaches(
+            config('railcontent.brand'),
+            $lessonType,
+            [],
+            $request->get('page', 1),
+            $request->get('limit', 20)
+        );
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['subscribed'] ?? [];
 
@@ -1762,11 +1763,11 @@ class ContentPagesController extends BaseController
 
         $url = $content->fetch('url', '');
 
-        return redirect($url . '?goToComment=' . $commentId);
+        return redirect($url.'?goToComment='.$commentId);
     }
 
-    private function getAdminMessage($published_on): ?string
-    {
+    private function getAdminMessage($published_on)
+    : ?string {
         if (user()->isAdmin()) {
             ContentRepository::$pullFutureContent = true;
             if ($published_on) {
@@ -1774,14 +1775,13 @@ class ContentPagesController extends BaseController
                     Carbon::createFromTimeString($published_on)
                         ->isFuture();
                 if ($unpublished) {
-                    return 'ADMIN PREVIEW (Published On: "' .
-                        $published_on .
-                        '")';
+                    return 'ADMIN PREVIEW (Published On: "'.$published_on.'")';
                 }
             } else {
                 return 'ADMIN PREVIEW (Draft)';
             }
         }
+
         return null;
     }
 
@@ -1794,14 +1794,17 @@ class ContentPagesController extends BaseController
         return view('content.comments');
     }
 
-    public function removeWithKey($array, $initKey) {
-        if(($key = array_search($initKey, $array)) !== false) {
+    public function removeWithKey($array, $initKey)
+    {
+        if (($key = array_search($initKey, $array)) !== false) {
             unset($array[$key]);
         }
+
         return array_values($array);
     }
 
-    public function slugToPhrase($slug) {
+    public function slugToPhrase($slug)
+    {
         // Replace dashes with spaces
         $phrase = str_replace('-', ' ', $slug);
 
@@ -1816,7 +1819,7 @@ class ContentPagesController extends BaseController
         $artist = urldecode($artistSlug);
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand]['songs'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
-        $types = ['song','song-tutorial'];
+        $types = ['song', 'song-tutorial'];
         $initialContent = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 12),
@@ -1844,13 +1847,16 @@ class ContentPagesController extends BaseController
             ['song'],
             $artist
         );
-        $artistData = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$artist,'string')->first();
+        $artistData =
+            $this->contentService->getWhereTypeInAndStatusAndField(['artist'], 'published', 'name', $artist, 'string')
+                ->first();
 
-        $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType. '    '.$totalPlays.' plays';
+        $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType.'    '.$totalPlays.' plays';
+
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
             'contentType' => $types,
-            'allowedTypes' => ['song','song-tutorial'],
+            'allowedTypes' => ['song', 'song-tutorial'],
             'collectionName' => $artistName,
             'contentName' => 'Songs',
             'contentTitle' => $artistName,
@@ -1858,8 +1864,7 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
             'filterableValues' => $allowableFilters,
-            'thumbnail_url' => ($artistData) ?
-                $artistData->fetch('data.head_shot_picture_url') :
+            'thumbnail_url' => ($artistData) ? $artistData->fetch('data.head_shot_picture_url') :
                 config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
             'pluralContentType' => $pluralContentType,
         ]);
@@ -1871,9 +1876,11 @@ class ContentPagesController extends BaseController
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$contentTypeName] ?? [];
         ContentRepository::$countFilterOptionItems = true;
-        $availableTypes = (in_array($lessonType,['quick-tips','boot-camps']))?['quick-tips','boot-camps']:[$lessonType];
+        $availableTypes =
+            (in_array($lessonType, ['quick-tips', 'boot-camps'])) ? ['quick-tips', 'boot-camps'] : [$lessonType];
 
-        $initialContent = $this->contentService->getFiltered( $request->get('page', 1),
+        $initialContent = $this->contentService->getFiltered(
+            $request->get('page', 1),
             $request->get('limit', 12),
             $request->get('sort', '-popularity'),
             $availableTypes,
@@ -1887,18 +1894,22 @@ class ContentPagesController extends BaseController
             false,
             true,
             false,
-            true);
+            true
+        );
 
         if ($initialContent->totalResults() === 0) {
             throw new NotFoundHttpException();
         }
 
-        $contentTitle = ucwords($genre . ' - ' . $contentTypeName);
+        $contentTitle = ucwords($genre.' - '.$contentTypeName);
         $contentSubtitle = $initialContent->totalResults().' '.$contentTypeName;
         $allowableFilters = $catalogueMeta['allowableFilters'];
 
         $filterableValues = $this->removeWithKey($allowableFilters, 'style');
-        $thumb = config('railcontent.avatar_style')[$genre] ?? config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
+        $thumb =
+            config('railcontent.avatar_style')[$genre]
+            ??
+            config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
 
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
@@ -1913,6 +1924,25 @@ class ContentPagesController extends BaseController
             'filterableValues' => $filterableValues,
             'thumbnail_url' => $thumb,
             'pluralContentType' => Str::plural($lessonType, $initialContent->totalResults()),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function artists(Request $request)
+    {
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+        ContentRepository::$pullFutureContent = false;
+        ContentRepository::$getFutureScheduledContentOnly = false;
+
+        $artists = $this->contentService->getArtists();
+
+        return view('content.artists', [
+            'artists' => $artists,
+            'numberOfArtists' => count($artists),
         ]);
     }
 }
