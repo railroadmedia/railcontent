@@ -14,14 +14,12 @@ class ContentFilterResultsEntity extends Entity
     public function toResponseRawJson()
     {
         return reply()
-            ->json(
-                $this->results(),
-                [
-                    'transformer' => DataTransformer::class,
-                    'totalResults' => $this->totalResults(),
-                    'filterOptions' => $this->filterOptions(),
-                ]
-            )
+            ->json($this->results(), [
+                                       'transformer' => DataTransformer::class,
+                                       'totalResults' => $this->totalResults(),
+                                       'totalLessons' => $this->totalLessons(),
+                                       'filterOptions' => $this->filterOptions(),
+                                   ])
             ->getContent();
     }
 
@@ -30,14 +28,12 @@ class ContentFilterResultsEntity extends Entity
      */
     public function toJsonResponse()
     {
-        return reply()->json(
-            $this->results(),
-            [
-                'transformer' => DataTransformer::class,
-                'totalResults' => $this->totalResults(),
-                'filterOptions' => $this->filterOptions(),
-            ]
-        );
+        return reply()->json($this->results(), [
+                                                 'transformer' => DataTransformer::class,
+                                                 'totalResults' => $this->totalResults(),
+                                                 'totalLessons' => $this->totalLessons(),
+                                                 'filterOptions' => $this->filterOptions(),
+                                             ]);
     }
 
     /**
@@ -62,5 +58,13 @@ class ContentFilterResultsEntity extends Entity
     public function filterOptions()
     {
         return $this['filter_options'] ?? [];
+    }
+
+    /**
+     * @return int
+     */
+    public function totalLessons()
+    {
+        return $this['total_lessons'] ?? 0;
     }
 }
