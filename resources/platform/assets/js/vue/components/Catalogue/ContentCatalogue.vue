@@ -200,10 +200,6 @@ export default {
             type: String,
             default: () => "",
         },
-        sixWide: {
-            type: Boolean,
-            default: () => false,
-        },
         displayInline: {
             type: Boolean,
             default: () => false,

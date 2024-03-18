@@ -170,14 +170,6 @@ const props = defineProps({
         type: String,
         default: '' // Default empty string
     },
-    userId: {
-        type: String,
-        default: ''
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
     breakToListView: {
         type: Boolean,
         default: false
@@ -228,7 +220,7 @@ const {
     progress_percent,
     isReleased,
     releaseDate,
-} = useCatalogueItem({ ...props, brand: brand.value });
+} = useCatalogueItem(props);
 
 const state = reactive({
     dropdownOpen: false,

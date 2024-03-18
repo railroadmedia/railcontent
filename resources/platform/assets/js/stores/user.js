@@ -12,6 +12,7 @@ export const useUserStore = defineStore({
     userProfilePictureUrl: (state) => state.user?.profile_picture_url,
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
+    isAdmin: (state) => state.user?.permission_level === 'administrator',
   },
   actions: {
     setUser (user) {

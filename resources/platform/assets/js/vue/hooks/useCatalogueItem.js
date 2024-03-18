@@ -1,13 +1,17 @@
 import { DateTime } from 'luxon';
+import { reactive, computed, toRefs } from 'vue';
 import ContentHelpers from "../vuesora/assets/js/helper-functions/content.js";
 import ContentModel from '../vuesora/assets/js/models/_model.js';
-import { reactive, computed, toRefs } from 'vue';
+import { useUserStore } from "../../stores/user";
 
 export default function useCatalogueItem(props) {
+    const userStore = useUserStore();
+    console.log(userStore.isAdmin)
+
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
     const progress_percent = computed(() => props.item.progress_percent);
     const noAccess = computed(() => {
-            if (props.isAdmin) {
+            if (userStore.isAdmin) {
                 return false;
             }
 
@@ -16,7 +20,7 @@ export default function useCatalogueItem(props) {
     const datePublshedOn = computed(() => DateTime.fromSQL(props.item.published_on, { zone: 'UTC' }).toFormat('x'));
     const dateNow = computed(() => Date.now());
     const isReleased = computed(() => {
-            if (props.isAdmin) {
+            if (userStore.isAdmin) {
                 return true;
             }
 
@@ -47,7 +51,7 @@ export default function useCatalogueItem(props) {
                 return completedIcon.value;
             }
 
-            return contentWithHierarchy[props.brand].indexOf(props.item.type) !== -1 ? 'fa-arrow-right' : 'fa-play';
+            return contentWithHierarchy[userStore.brand].indexOf(props.item.type) !== -1 ? 'fa-arrow-right' : 'fa-play';
         });
     const renderLink = computed(() => {
             if (props.noLink) {
@@ -66,7 +70,7 @@ export default function useCatalogueItem(props) {
                 guitareo: ['song', 'chord-and-scale', 'learning-path-level'],
                 pianote: ['song', 'unit', 'learning-path-level'],
                 singeo: ['song', 'unit', 'learning-path-level'],
-            }[props.brand].indexOf(props.item.type) !== -1 ? 'square' : 'widescreen';
+            }[userStore.brand].indexOf(props.item.type) !== -1 ? 'square' : 'widescreen';
         });
 
     const contentModel = computed(() => {
@@ -78,7 +82,7 @@ export default function useCatalogueItem(props) {
         }
 
         return new ContentModel(type, {
-            brand: props.brand,
+            brand: userStore.brand,
             post: props.item,
         });
     });
