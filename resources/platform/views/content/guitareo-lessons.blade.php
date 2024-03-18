@@ -90,7 +90,6 @@
                                 :force-wide-thumbs="true"
                                 :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newCourses }}"
-                                :full-width-on-mobile="{{ true }}"
                             >
                                 <div class="flex flex-row nmh-1">
                                     @for($i = 0; $i < 6; $i++)
@@ -131,7 +130,6 @@
                                 :force-wide-thumbs="true"
                                 :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newQuickTips }}"
-                                :full-width-on-mobile="{{ true }}"
                             >
                                 <div class="flex flex-row nmh-1">
                                     @for($i = 0; $i < 6; $i++)
