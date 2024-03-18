@@ -4,7 +4,6 @@ namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
-use Illuminate\Http\Request;
 
 class FiltersJourneyService
 {
