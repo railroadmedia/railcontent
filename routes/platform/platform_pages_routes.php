@@ -852,7 +852,7 @@ Route::get(
         /*
          * Home Page
          */
-        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
+        Route::get('/{brand}/comments', [\App\Http\Controllers\Platform\CommentModerationController::class, 'comments'])
             ->whereIn('brand', all_brands())
             ->name('platform.members-area.comments');
     });
