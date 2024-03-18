@@ -218,16 +218,20 @@ class SubscriptionService
 
     public function cancelAllSubscriptions(User $user, string $reason): void
     {
-        try {
-            $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
-            $subscriptions->each(function ($subscription) use ($reason) {
-                if ($subscription->status == RechargeSubscriptionStatusEnum::Active->value) {
-                    $this->recharge->cancelSubscription($subscription, $reason);
-                }
-            });
-        } catch (\Exception $e) {
-            Log::error("Failed to cancel subscriptions for user $user->id");
-            Log::error($e);
+        if ($user->shopify_id) {
+            try {
+                $subscriptions = $this->recharge->getSubscriptions($user->shopify_id);
+                $subscriptions->each(function ($subscription) use ($reason) {
+                    if ($subscription->status == RechargeSubscriptionStatusEnum::Active->value) {
+                        $this->recharge->cancelSubscription($subscription, $reason);
+                    }
+                });
+            } catch (\Exception $e) {
+                Log::error("Failed to cancel subscriptions for user $user->id");
+                Log::error($e);
+            }
+        } else {
+            Log::info("No shopify_id for user $user->id. Subscriptions cannot be cancelled.");
         }
     }
 }
