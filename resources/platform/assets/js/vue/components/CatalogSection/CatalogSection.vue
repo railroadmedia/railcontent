@@ -78,7 +78,6 @@ export default {
                             catalogue-type="grid"
                             limit="16"
                             :lock-unowned="true"
-                            :six-wide="true"
                             :force-wide-thumbs="true"
                             :pre-loaded-content="false"
                     >

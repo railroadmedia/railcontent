@@ -174,7 +174,6 @@
                         catalogue-type="grid"
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
-                        :six-wide="true"
                         :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}"
                         :no-skeleton="{{ json_encode(true) }}"
                     >
