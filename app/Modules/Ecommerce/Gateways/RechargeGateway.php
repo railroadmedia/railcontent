@@ -6,8 +6,10 @@ use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Models\Recharge\Customer;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Log;
 
 class RechargeGateway
@@ -18,9 +20,13 @@ class RechargeGateway
 
     private $ch;
 
+    private string $baseUrl;
+
     public function __construct()
     {
         $this->access_token = config('shopify.recharge.access_token');
+        $shopifyDomainBase = Str::before(config('shopify.credentials.domain'), '.myshopify.com');
+        $this->baseUrl = sprintf('https://%s-sp.admin.rechargeapps.com/merchant', $shopifyDomainBase);
     }
 
 
@@ -258,6 +264,21 @@ class RechargeGateway
     }
 
     /**
+     * Get the profile URL for the given Recharge customer ID
+     *
+     * @param  int  $customerId
+     * @return string
+     * @throws Exception
+     */
+    public function getCustomerProfile(int $customerId): string
+    {
+        if (empty($this->baseUrl)) {
+            throw new \Exception('No base URL found for this Recharge instance.');
+        }
+        return sprintf('%s/customers/%s', $this->baseUrl, $customerId);
+    }
+
+    /**
      * Get the customer from Recharge, for the given Shopify ID
      *
      * @param int $shopifyCustomerId
@@ -369,6 +390,42 @@ class RechargeGateway
         $subscription->status = RechargeSubscriptionStatusEnum::Cancelled->value;
         $subscription->cancellationReason = $cancelReason;
         $subscription->createdAt = Carbon::now();
+    }
+
+    /**
+     * Get all subscriptions with the given status that were
+     * created within the date range between createdAtMin and createdAtMax.
+     *
+     * @param  string  $status
+     * @param  CarbonInterface  $createdAtMin
+     * @param  CarbonInterface  $createdAtMax
+     * @param  int  $limit
+     *
+     * @return Collection
+     * @throws Exception
+     */
+    public function getSubscriptionsByStatus(string $status, CarbonInterface $createdAtMin, CarbonInterface $createdAtMax, int $limit = 250): Collection
+    {
+        assert(in_array($status, ['active', 'cancelled', 'expired']));
+
+        $response = $this->call('GET', '/subscriptions', [
+            'status' => $status,
+            'created_at_min' => $createdAtMin->toDateString(),
+            'created_at_max' => $createdAtMax->toDateString(),
+            'limit' => $limit
+        ], apiVersion: self::API_VERSION_2021_01);
+
+        try {
+            return collect(
+                $response?->subscriptions
+            )->map(function ($subscription) {
+                return new Subscription($subscription);
+            });
+        } catch (Exception $e) {
+            Log::error("RechargeGateway:getSubscriptionsByStatus: " . $e->getMessage());
+            Log::error(print_r($response, true));
+            throw $e;
+        }
     }
 
     public function updateSubscriptionNextChargeDate($subscription, Carbon $nextChargeDate): void
