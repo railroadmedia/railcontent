@@ -18,7 +18,7 @@ class GenerateReportRechargeCancelledSubscriptions extends Command
      *
      * @var string
      */
-    protected $description = 'Generate a report of cancelled Recharge subscriptions and email it to the Mentors team.';
+    protected $description = 'Generate a report of cancelled Recharge subscriptions and email it to the specified recipients.';
 
     public function handle(): int
     {
