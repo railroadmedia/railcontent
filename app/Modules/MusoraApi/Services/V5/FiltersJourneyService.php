@@ -58,6 +58,7 @@ class FiltersJourneyService
             'slug' => 'Name: A to Z',
             '-slug' => 'Name: Z to A',
             'published_on' => 'Oldest first',
+            '-published_on' => 'Newest first',
             default => 'Unknown',
         };
 
