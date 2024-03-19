@@ -210,6 +210,10 @@ const props = defineProps({
 		type: Boolean,
         default: () => false,
     },
+    scrollContainer: {
+        type: String,
+        default: 'content-container'
+    }
 });
 
 const {
@@ -356,12 +360,12 @@ const closeDropdownOnScroll = () => {
 };
 
 onMounted(() => {
-    const contentContainer = document.getElementById('content-container');
+    const contentContainer = document.getElementById(props.scrollContainer);
     contentContainer.addEventListener('scroll', closeDropdownOnScroll);
 });
 
 onUnmounted(() => {
-    const contentContainer = document.getElementById('content-container');
+    const contentContainer = document.getElementById(props.scrollContainer);
     contentContainer.removeEventListener('scroll', closeDropdownOnScroll);
 });
 
