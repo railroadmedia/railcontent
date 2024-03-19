@@ -4,7 +4,7 @@
         <ProgressText v-if="progress" :progress="progress" :alwaysShow="alwaysShowProgress">
             <template #progress-text v-if="progressText">{{ progressText }} -&nbsp;</template>
         </ProgressText>
-        <div class="ctas-container">
+        <div class="ctas-container tw-flex-shrink-0">
             <CtaResolver :ctas="secondaryCtas" />
         </div>
     </div>

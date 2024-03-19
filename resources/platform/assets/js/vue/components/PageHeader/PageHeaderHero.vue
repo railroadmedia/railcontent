@@ -1,7 +1,9 @@
 <template>
   <div class="tw-flex tw-items-center">
     <template v-if="iconName">
-      <musora-icon :icon-name="iconName" class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
+      <i v-if="isFontAswesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2" :class="iconName"></i>
+      <musora-icon v-else :icon-name="iconName"
+        class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
     </template>
     <template v-else-if="heroImg">
       <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
@@ -91,6 +93,7 @@ const openModal = () => {
   isModalOpen.value = true;
 };
 
+const isFontAswesome = props.iconName && props.iconName.startsWith('fa-');
 
 </script>
 <style lang="scss" scoped>

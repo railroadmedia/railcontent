@@ -32,7 +32,7 @@
         }
     }
     else if ($catalogueMeta['name'] == 'Play Alongs') {
-        $headerData['type'] = 'playalong';
+        $headerData['type'] = 'play-along';
         $headerData['title'] = 'Play Alongs';
         $headerData['iconName'] = 'eigth-notes-filled';
         $headerData['description'] = 'Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.';
@@ -48,7 +48,7 @@
         $headerData['iconName'] = 'routines-filled';
     }
     else if ($catalogueMeta['name'] == 'Quick Tips') {
-        $headerData['type'] = 'quicktip';
+        $headerData['type'] = 'quick-tips';
         $headerData['title'] = 'Quick Tips';
         $headerData['iconName'] = 'light-bulb-filled';
         $headerData['description'] = "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don't have lots of time to practice.";
@@ -64,19 +64,107 @@
         $headerData['iconName'] = 'podcast-filled';
     }
     else if ($catalogueMeta['name'] == 'Student Focus') {
-        $headerData['type'] = 'studentfocus';
+        $headerData['type'] = 'student-focus';
         $headerData['title'] = 'Student Focus';
         $headerData['iconName'] = 'person-plus-filled';
+        $headerData['description'] = "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+        if ($brand === 'drumeo') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'What is Student Review?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/450154189',
+                    ]
+                ],
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'How to Apply',
+                        'faIconClass' => 'fa-play-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/450152568',
+                    ]
+                ],
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Apply Now',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSdRzf0Wg4meObJi0ovKlUDgbBDYDpJP7MCguIDmPFDybchViQ/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        }
+    }
+    else if ($catalogueMeta['name'] == 'Student Reviews') {
+        $headerData['type'] = 'student-review';
+        $headerData['title'] = 'Student Reviews';
+        $headerData['iconName'] = 'person-plus-filled';
+        $headerData['description'] = "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+        if ($brand === 'pianote') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Apply Now',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSe4Soy7CDxk9Aw9_kuJvK9f3FyojMfLkuqezIsvKNUFQPD51w/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        } elseif ($brand === 'guitareo') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'What is Student Review?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/642883586',
+                    ]
+                ],
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'How to Apply',
+                        'faIconClass' => 'fa-play-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/642900215',
+                    ]
+                ],
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Apply Now',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSfqS5HTrmln2sd7QaNt9Er31fY2becXt4n6isN57HbGwVPHFg/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        } elseif ($brand === 'singeo') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'Tips For Applying',
+                        'faIconClass' => 'fa-play-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/712150351',
+                    ]
+                ],
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Apply Now',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSeWyMtqVuQjMdA7rrZMK2jCkAIaPLeycTr0zXUE6LEaD6OmyQ/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        }
     }
     else if ($catalogueMeta['name'] == 'Q & A') {
         $headerData['type'] = 'qanda';
         $headerData['title'] = 'Q & A';
         $headerData['iconName'] = 'question-mark-circle';
-    }
-    else if ($catalogueMeta['name'] == 'Student Reviews') {
-        $headerData['type'] = 'studentreview';
-        $headerData['title'] = 'Student Reviews';
-        $headerData['iconName'] = 'person-plus-filled';
     }
     else if ($catalogueMeta['name'] == 'Chords & Scales') {
         $headerData['type'] = 'chordsandscales';

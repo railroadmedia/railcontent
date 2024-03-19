@@ -1,3 +1,12 @@
+@php
+    $headerDescription = null;
+    if ($brand === "pianote" || $brand === "guitareo") {
+        $headerDescription = "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+    } elseif ($brand === "singeo") {
+        $headerDescription = "Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+    }
+@endphp
+
 @extends('partials.layout')
 
 @section('meta')
@@ -5,25 +14,12 @@
 @endsection
 
 @section('content')
-
-        @component('partials._header-banner', ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'])
-            @slot('content')
-                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                        <span class="tw-text-32 tw-font-bold">Student Focus</span>
-                    </h1>
-
-                    <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                        @if($brand === 'pianote' || $brand === 'guitareo')
-                            Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
-                        @elseif($brand === 'singeo')
-                            Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
-                        @endif
-                    </p>
-                </div>
-            @endslot
-        @endcomponent
+        <page-header
+            title="Student Focus"
+            icon-name="person-plus-filled"
+            description="{{ $headerDescription }}"
+        >
+        </page-header>
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col mv-3">

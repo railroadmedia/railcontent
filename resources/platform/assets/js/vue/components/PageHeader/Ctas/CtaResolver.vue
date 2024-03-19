@@ -10,6 +10,8 @@ import PageHeaderCta from '../PageHeaderCta.vue';
 import TimezoneSelectCta from './TimezoneSelectCta.vue'
 import PreviewLessonCta from './PreviewLessonCta.vue';
 import WhereToBeginCta from './WhereToBeginCta.vue';
+import VideoModalCta from './VideoModalCta.vue';
+import GoogleFormCta from './GoogleFormCta.vue';
 
 const componentMap = {
     SongRequest,
@@ -19,6 +21,8 @@ const componentMap = {
     TimezoneSelectCta,
     PreviewLessonCta,
     WhereToBeginCta,
+    VideoModalCta,
+    GoogleFormCta,
 };
 
 const resolveComponent = (type) => componentMap[type];

@@ -8,12 +8,12 @@
             <div class="tw-flex tw-grow tw-items-center">
               <span v-html="description" />
             </div>
-            <div v-if="ctasBesideHero" class="sm:tw-hidden tw-flex tw-flex-col ctas-container">
+            <div v-if="ctasBesideHero" class="tw-flex tw-flex-col ctas-container tw-flex-shrink-0"
+              :class="isStudentFocusCatalougePage ? 'lg:tw-hidden' : 'sm:tw-hidden'">
               <CtaResolver :ctas="secondaryCtas" />
             </div>
           </div>
         </template>
-
         <template #ctas>
           <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
             <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
@@ -28,8 +28,9 @@
           :alwaysShow="progressBarData.alwaysShow">
           <template #progress-text v-if="progressBarData.labelText">{{ progressBarData.labelText }} -&nbsp;</template>
         </ProgressText>
-        <PageHeaderCtasBox :class="{ 'tw-hidden sm:tw-flex': isLearningPathPage || isLivePage || isSchedulePage }"
-          :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
+        <PageHeaderCtasBox :class="{
+        'tw-hidden sm:tw-flex': isLearningPathPage || isLivePage || isSchedulePage || isStudentFocusCatalougePage || isForumsPage || isForumThreadPage,
+      }" :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>
     </template>
     <template #bottom-full>
@@ -37,8 +38,11 @@
         <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
           :text="primaryCtaText" />
       </div>
-      <div class="tw-justify-between tw-items-center tw-w-full"
-        :class="{ 'tw-flex': isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage, 'tw-flex sm:tw-hidden': isPackBundlePage, 'tw-hidden': !isSongsPage && !isPackBundlePage && !isLearningPathLevelPage && !isLearningPathCoursePage }">
+      <div class="tw-justify-between tw-items-center tw-w-full" :class="{
+        'tw-flex': isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage,
+        'tw-flex sm:tw-hidden': isPackBundlePage || isForumThreadPage || isCoursePage,
+        'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage && !isLearningPathLevelPage && !isLearningPathCoursePage && !isForumThreadPage
+      }">
         <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage" class="tw-self-end"
           :infoData="infoData" />
         <PageHeaderCtasBox :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
@@ -92,17 +96,27 @@ const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
+const isCoursePage = computed(() => props.pageType === 'course')
 const isPackBundlePage = computed(() => props.pageType === 'pack-bundle')
 const isSongsPage = computed(() => props.pageType === 'songs');
+
 const isLivePage = computed(() => props.pageType === 'live');
 const isSchedulePage = computed(() => props.pageType === 'schedule');
 const isLearningPathPage = computed(() => props.pageType === 'learning-path');
+
 const isLearningPathLevelPage = computed(() => props.pageType === 'learning-path-level');
 const isLearningPathCoursePage = computed(() => props.pageType === 'learning-path-course');
 
-const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value);
+const isStudentReviewPage = computed(() => props.pageType === 'student-review');
+const isStudentFocusPage = computed(() => props.pageType === 'student-focus');
+const isStudentFocusCatalougePage = computed(() => isStudentReviewPage.value || isStudentFocusPage.value);
 
-const ctasAndInfoInsideHero = computed(() => !isSongsPage.value && !ctasBesideHero.value && !isLearningPathLevelPage.value && !isLearningPathCoursePage.value);
+const isForumsPage = computed(() => props.pageType === 'forums');
+const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
+
+const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value);
+
+const ctasAndInfoInsideHero = computed(() => isCoursePage.value || isPackBundlePage.value);
 
 const progressBarData = computed(() => {
   return {

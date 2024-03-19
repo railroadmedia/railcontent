@@ -2,21 +2,31 @@
     <a v-if="url" :href="url"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
         :class="buttonConditionalClasses">
-        <MusoraIcon v-if="musoraIconName" :icon-name="musoraIconName" class="tw-w-6 tw-h-6" />
-        <i v-else-if="faIconClass" class="fas" :class="[faIconClass]"></i>
-        <span v-if="text" :class="textSpanClass">
+        <MusoraIcon v-if="musoraIconName && iconPosition === 'left'" :icon-name="musoraIconName" :class="iconClass" />
+        <i v-else-if="faIconClass && iconPosition === 'left'" class="fas" :class="faIconClass"></i>
+
+        <span v-if="text" :class="[textSpanClass]">
             {{ text }}
         </span>
+
+        <MusoraIcon v-if="musoraIconName && iconPosition === 'right'" :icon-name="musoraIconName" :class="iconClass" />
+        <i v-else-if="faIconClass && iconPosition === 'right'" class="fas" :class="faIconClass"></i>
+
         <slot />
     </a>
     <button v-else @click.prevent="emitClick"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-p-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
         :class="buttonConditionalClasses">
-        <MusoraIcon v-if="musoraIconName" :icon-name="musoraIconName" class="tw-w-6 tw-h-6" />
-        <i v-else-if="faIconClass" class="fas" :class="[faIconClass]"></i>
-        <span v-if="text" :class="textSpanClass">
+        <MusoraIcon v-if="musoraIconName && iconPosition === 'left'" :icon-name="musoraIconName" :class="iconClass" />
+        <i v-else-if="faIconClass && iconPosition === 'left'" class="fas" :class="faIconClass"></i>
+
+        <span v-if="text" :class="[textSpanClass]">
             {{ text }}
         </span>
+
+        <MusoraIcon v-if="musoraIconName && iconPosition === 'right'" :icon-name="musoraIconName" :class="iconClass" />
+        <i v-else-if="faIconClass && iconPosition === 'right'" class="fas" :class="faIconClass"></i>
+
         <slot />
     </button>
 </template>
@@ -30,20 +40,30 @@ const props = defineProps({
     text: String,
     faIconClass: String,
     musoraIconName: String,
+    iconPosition: {
+        type: String,
+        default: 'left',
+    },
     url: String,
     contentFunction: String,
     payload: Object,
+    onClickCallback: Function,
     showTextMobileHideDesktop: Boolean,
     showAllAlways: Boolean,
 });
 
-const hasIcon = () => {
+const hasIcon = computed(() => {
     return props.faIconClass || props.musoraIconName;
-};
+});
+
+const iconClass = computed(() => {
+    return ['tw-w-6 tw-h-6'];
+});
+
 
 const textSpanClass = computed(() => {
     const classes = [];
-    if (hasIcon) {
+    if (hasIcon.value) {
         if (!props.showAllAlways) {
             if (props.showTextMobileHideDesktop) {
                 classes.push('sm:tw-hidden');
@@ -52,14 +72,14 @@ const textSpanClass = computed(() => {
                 classes.push('tw-hidden sm:tw-block');
             }
         }
-        classes.push('ml-1');
+        classes.push(props.iconPosition === 'left' ? 'ml-1' : 'mr-1');
     }
     return classes
 });
 
 const buttonConditionalClasses = computed(() => {
     const classes = [];
-    if (props.text && hasIcon) {
+    if (props.text && hasIcon.value) {
         if (!props.showAllAlways) {
             if (props.showTextMobileHideDesktop) {
                 classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto sm:tw-p-0 sm:tw-w-[32px] sm:tw-h-[32px] md:tw-w-[40px] md:tw-h-[40px]');
@@ -72,11 +92,11 @@ const buttonConditionalClasses = computed(() => {
             classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto md:tw-h-[40px]');
         }
     }
-    else if (hasIcon) {
+    else if (hasIcon.value) {
         classes.push('tw-p-0 tw-w-[32px] tw-h-[32px] md:tw-w-[40px] md:tw-h-[40px]')
     }
     else if (props.text) {
-        classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto')
+        classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto md:tw-h-[40px]')
     }
     return classes
 });
@@ -92,6 +112,9 @@ const emitClick = async () => {
             await ContentService[props.contentFunction]();
         }
         window.location.reload();
+    }
+    else if (props.onClickCallback) {
+        props.onClickCallback();
     }
 };
 </script>
