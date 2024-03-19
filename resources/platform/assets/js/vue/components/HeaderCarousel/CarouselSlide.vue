@@ -128,7 +128,7 @@ const skillLevelColor = computed(() => {
 </script>
 
 <template>
-  <div v-if="showSlide || isPrevSlide" :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full tw-bg-[#000C17] tw-w-1/2
+  <div v-if="showSlide || isPrevSlide" :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full tw-bg-[#000C17]
         ${showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0'}
       `">
     <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-relative">
