@@ -120,7 +120,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
 
         $schedule->command('ecommerce:report-cancelled-subscriptions celina@drumeo.com --cc=karissa@musora.com')
-            ->twiceMonthly();
+            ->mondays()->when(function () {
+                return now()->weekOfYear % 2 == 0;
+            })->at('08:01'); // every other Monday at 12:01am PST
     }
 
     /**
