@@ -27,6 +27,7 @@ use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Enums\RecommenderSection;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
@@ -134,55 +135,33 @@ class ContentPagesController extends BaseController
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
-        $searchTerm = null;
+//        $searchTerm = null;
+//
+//        if (!empty($request->get('term', null))) {
+//            $searchTerm = $request->get('term', null);
+//        }
+//
+//        if (!empty($searchTerm)) {
+//            $searchResults = $this->fullTextSearchService->search(
+//                $request->get('term', null),
+//                $request->get('page', 1),
+//                $request->get('limit', 20),
+//                [$lessonType],
+//                $request->get('statuses', []),
+//                $request->get('sort', '-score'),
+//                $request->get('date_time_cutoff', null),
+//                $request->get('brands', null),
+//                $request->get('coach_ids', [])
+//            );
+//
+//            $listLessons = new ContentFilterResultsEntity([
+//                'results' => $searchResults['results'],
+//                'total_results' => $searchResults['total_results'],
+//                'filter_options' => [],
+//            ]);
+//        }
 
-        if (!empty($request->get('term', null))) {
-            $searchTerm = $request->get('term', null);
-        }
-
-        if (!empty($searchTerm)) {
-            $searchResults = $this->fullTextSearchService->search(
-                $request->get('term', null),
-                $request->get('page', 1),
-                $request->get('limit', 20),
-                [$lessonType],
-                $request->get('statuses', []),
-                $request->get('sort', '-score'),
-                $request->get('date_time_cutoff', null),
-                $request->get('brands', null),
-                $request->get('coach_ids', [])
-            );
-
-            $listLessons = new ContentFilterResultsEntity([
-                'results' => $searchResults['results'],
-                'total_results' => $searchResults['total_results'],
-                'filter_options' => [],
-            ]);
-        }
-        $required_fields = $request->get('required_fields', []);
-        if($request->get('tabs', false)){
-            $tabs = $request->get('tabs');
-
-            if(!is_array($request->get('tabs'))){
-                $tabs = [$request->get('tabs')];
-            }
-
-            foreach($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-                if ($extra['0'] == 'length_in_seconds') {
-                    $required_fields[] = $tab;
-                }
-                if ($extra['0'] == 'topic') {
-                    $required_fields[] = $tab;
-                }
-            }
-        }
+        FiltersHelper::prepareFiltersFields();
 
         if ($contentTypeName == 'songs') {
             ContentRepository::$catalogMetaAllowableFilters  = array_merge (ContentRepository::$catalogMetaAllowableFilters, ['artist']);
@@ -193,20 +172,19 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $required_fields,
-                $request->get('included_fields', []),
-                $request->get('required_user_states', []),
+                FiltersHelper::$requiredFields,
+                FiltersHelper::$includedFields,
+                FiltersHelper::$requiredUserStates,
                 $request->get('included_user_states', []),
                 true,
                 false,
                 true,
                 false,
                 false,
-                $group_by ?? false
+                FiltersHelper::$groupBy ?? false
             );
         } else {
             ContentRepository::$pullFutureContent = true;
-
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -214,16 +192,16 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $required_fields,
-                $request->get('included_fields', []),
-                $request->get('required_user_states', []),
+                FiltersHelper::$requiredFields,
+                FiltersHelper::$includedFields,
+                FiltersHelper::$requiredUserStates,
                 $request->get('included_user_states', []),
                 true,
                 false,
                 true,
                 false,
                 $futureScheduledContentOnly,
-                $group_by ?? false
+                FiltersHelper::$groupBy ?? false
             );
         }
 
@@ -287,7 +265,7 @@ class ContentPagesController extends BaseController
                 "catalogueMeta" => $catalogueMeta,
                 "artistsNumber" => $artists,
                 "songsNumber" => $listLessons->totalResults(),
-                "searchTerm" => $searchTerm,
+              //  "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly
             ]);
@@ -302,7 +280,7 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
-                "searchTerm" => $searchTerm,
+                //"searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly
             ]);
