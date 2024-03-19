@@ -17,6 +17,8 @@
         :goals="{{ json_encode($goals) }}"
         :experience="{{ json_encode($experience) }}"
         :types="{{ json_encode($types) }}"
+        :genres="{{ json_encode($genres) }}"
+        :user-id="{{ auth()->id() }}"
     ></Stc>
 {{--    <header class="tw-relative tw-bg-black tw-py-[40px] tw-px-8 2xl:tw-px-0 tw-min-h-[360px] tw-flex tw-items-center">--}}
 {{--        <!-- BG Image -->--}}

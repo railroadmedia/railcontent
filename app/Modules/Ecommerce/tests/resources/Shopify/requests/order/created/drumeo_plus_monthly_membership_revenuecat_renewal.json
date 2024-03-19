@@ -1,0 +1,260 @@
+{
+    "headers": {
+
+    },
+    "body": {
+        "id": 5732685316390,
+        "admin_graphql_api_id": "gid:\/\/shopify\/Order\/5732685316390",
+        "app_id": 62191271937,
+        "browser_ip": null,
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": null,
+        "checkout_id": null,
+        "checkout_token": null,
+        "client_details": null,
+        "closed_at": null,
+        "company": null,
+        "confirmation_number": "JRPUHU6KZ",
+        "confirmed": true,
+        "contact_email": "revenueCat1@musora.com.ex",
+        "created_at": "2024-03-12T15:32:35-04:00",
+        "currency": "USD",
+        "current_subtotal_price": "319.00",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "0.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "319.00",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": null,
+        "device_id": null,
+        "discount_codes": [],
+        "email": "revenueCat1@musora.com.ex",
+        "estimated_taxes": false,
+        "financial_status": "paid",
+        "fulfillment_status": null,
+        "landing_site": null,
+        "landing_site_ref": null,
+        "location_id": null,
+        "merchant_of_record_app_id": null,
+        "name": "#1338",
+        "note": null,
+        "note_attributes": [],
+        "number": 338,
+        "order_number": 1338,
+        "order_status_url": "https:\/\/musora-dev-sync.myshopify.com\/82852905254\/orders\/cd0291981ced2081c487a2e13762a063\/authenticate?key=e153dfd208d8ea50b9c30ad31870affa",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2023-08-30T05:19:10-04:00",
+        "reference": null,
+        "referring_site": null,
+        "source_identifier": null,
+        "source_name": "62191271937",
+        "source_url": null,
+        "subtotal_price": "319.00",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            }
+        },
+        "tags": null,
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": false,
+        "token": "cd0291981ced2081c487a2e13762a063",
+        "total_discounts": "0.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "319.00",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "319.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "319.00",
+        "total_price": "369.00",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "369.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "369.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "50.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "50.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "50.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 0,
+        "updated_at": "2024-03-12T15:33:36-04:00",
+        "user_id": null,
+        "billing_address": null,
+        "customer": {
+            "id": 7939442049318,
+            "email": "revenueCat1@musora.com.ex",
+            "created_at": "2024-03-12T15:19:29-04:00",
+            "updated_at": "2024-03-12T15:32:35-04:00",
+            "first_name": null,
+            "last_name": null,
+            "state": "disabled",
+            "note": null,
+            "verified_email": true,
+            "multipass_identifier": null,
+            "tax_exempt": false,
+            "phone": null,
+            "email_marketing_consent": {
+                "state": "not_subscribed",
+                "opt_in_level": "single_opt_in",
+                "consent_updated_at": null
+            },
+            "sms_marketing_consent": null,
+            "tags": null,
+            "currency": "USD",
+            "accepts_marketing": false,
+            "accepts_marketing_updated_at": null,
+            "marketing_opt_in_level": "single_opt_in",
+            "tax_exemptions": [],
+            "admin_graphql_api_id": "gid:\/\/shopify\/Customer\/7939442049318"
+        },
+        "discount_applications": [],
+        "fulfillments": [],
+        "line_items": [
+            {
+                "id": 14776962875686,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14776962875686",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 1,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 0,
+                "name": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                "price": "319.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "319.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "319.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": false,
+                "product_id": null,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": false,
+                "sku": "DLM-Trial-1-month",
+                "taxable": true,
+                "title": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": null,
+                "variant_inventory_management": null,
+                "variant_title": null,
+                "vendor": "drumeo",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [],
+        "shipping_address": null,
+        "shipping_lines": []
+    }
+}

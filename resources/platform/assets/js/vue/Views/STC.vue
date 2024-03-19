@@ -35,6 +35,7 @@
             </div>
 
             <form id="stc-form" method="POST" class="tw-flex tw-flex-col" @submit.prevent="(event) => submitForm(event)">
+                <input id="id" type="hidden" name="id" :value="userId" />
                 <input id="email" type="hidden" name="email" :value="userEmail" />
                 <!-- Name -->
                 <label class="tw-flex tw-flex-col tw-mb-2">
@@ -83,9 +84,9 @@
                             ref="languageInput" name="student_form_languages[]" id="student_form_languages"
                             class="tw-bg-transparent tw-rounded-full tw-absolute tw-w-full tw-h-full tw-min-h-[24px]"
                             :class="selectedLanguages.length > 0 ? 'tw-rounded-lg' : 'tw-rounded-full'"
-                            @click="languageContainerClick" @change="(event) => selectLanguage(event.target.value)">
-                            <option value="" class="bg-white text-black">Select</option>
-                            <option v-for="language in languages" class="bg-white text-black" :value="language['value']">{{ language['value'] }}</option>
+                            @click="multiSelectContainerClick('Languages')" @change="(event) => handleMultiSelect(selectedLanguages, event.target.value)">
+                            <option value="" :selected="selectedLanguages.length === 0" class="tw-bg-white tw-text-black">Select</option>
+                            <option v-for="language in languages" class="tw-bg-white tw-text-black" :value="language['value']">{{ language['value'] }}</option>
                         </select>
                         <div class="tw-max-w-[85%] tw-py-2 tw-px-3">
                             <div class="tw-flex tw-flex-wrap tw-gap-2 tw-z-20 tw-items-center tw-min-h-[26px] tw-bg-[#F9F9F9] dark:tw-bg-[#000C18] tw-relative tw-rounded-full">
@@ -93,7 +94,7 @@
                                     v-for="language in selectedLanguages"
                                     class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center"
                                     :class="selectedLanguages.length > 0 ? 'tw-rounded-lg' : 'tw-rounded-full'"
-                                >{{ language }} <span @click="selectLanguage(language)" class="tw-cursor-pointer tw-ml-1">x</span></div>
+                                >{{ language }} <span @click="handleMultiSelect(selectedLanguages, language)" class="tw-cursor-pointer tw-ml-1">x</span></div>
                             </div>
                         </div>
                         <div v-if="selectedLanguages.length" class="tw-absolute tw-right-10 tw-top-0 tw-h-full tw-flex tw-items-center"><XIcon class="tw-w-[16px] tw-h-[16px] tw-cursor-pointer" @click="resetSelectedLanguages" /></div>
@@ -133,6 +134,31 @@
                 <label v-if="goalInput === 'Other'" id="student_form_other-goal" class="tw-flex tw-flex-col tw-ml-4 tw-mb-2">
                     <span class="tw-m-2 tw-font-bold tw-leading-0 tw-capitalize">Learning Goal</span>
                     <input required id="student_form_goal" type="text" name="student_form_goal" autocomplete="student_form_goal"  class="tw-bg-transparent tw-rounded-full"/>
+                </label>
+
+                <!-- Genres: Multi-select -->
+                <label id="multiSelectGenre" class="tw-flex tw-flex-col tw-mb-2 tw-relative">
+                    <span class="tw-m-2 tw-font-bold tw-leading-0">Favorite Genres</span>
+                    <div class="tw-relative tw-flex tw-justify-start">
+                        <select
+                            ref="genreInput" name="student_form_languages[]" id="student_form_genres"
+                            class="tw-bg-transparent tw-rounded-full tw-absolute tw-w-full tw-h-full tw-min-h-[24px]"
+                            :class="selectedGenres.length > 0 ? 'tw-rounded-lg' : 'tw-rounded-full'"
+                            @click="multiSelectContainerClick('Genres')" @change="(event) => handleMultiSelect(selectedGenres, event.target.value)">
+                            <option value="" :selected="selectedGenres.length === 0" class="tw-bg-white tw-text-black">Select</option>
+                            <option v-for="genres in genres" class="tw-bg-white tw-text-black" :value="genres['value']">{{ genres['value'] }}</option>
+                        </select>
+                        <div class="tw-max-w-[85%] tw-py-2 tw-px-3">
+                            <div class="tw-flex tw-flex-wrap tw-gap-2 tw-z-20 tw-items-center tw-min-h-[26px] tw-bg-[#F9F9F9] dark:tw-bg-[#000C18] tw-relative tw-rounded-full">
+                                <div
+                                    v-for="genre in selectedGenres"
+                                    class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center"
+                                    :class="selectedGenres.length > 0 ? 'tw-rounded-lg' : 'tw-rounded-full'"
+                                >{{ genre }} <span @click="handleMultiSelect(selectedGenres, genre)" class="tw-cursor-pointer tw-ml-1">x</span></div>
+                            </div>
+                        </div>
+                        <div v-if="selectedGenres.length" class="tw-absolute tw-right-10 tw-top-0 tw-h-full tw-flex tw-items-center"><XIcon class="tw-w-[16px] tw-h-[16px] tw-cursor-pointer" @click="resetSelectedGenres" /></div>
+                    </div>
                 </label>
 
                 <!-- Student Length -->
@@ -209,14 +235,14 @@
     <ModalRenderer v-if="openLanguageModal">
         <div class="tw-w-full tw-h-full tw-font-medium tw-flex tw-flex-col">
             <header class="tw-flex tw-flex-col tw-justify-center tw-min-h-[90px] tw-px-5 tw-flex-shrink-0 tw-my-4">
-                <div class="tw-text-white tw-font-semibold">Select Languages</div>
+                <div class="tw-text-white tw-font-semibold">Select {{ modalCategory }}</div>
                 <div class="tw-flex tw-flex-wrap tw-gap-2 tw-items-center tw-relative tw-mt-2">
-                    <div v-for="language in selectedLanguages" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-rounded-full tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center">{{ language }} <span @click="selectLanguage(language)" class="tw-cursor-pointer tw-ml-1">x</span></div>
+                    <div v-for="item in modalSelectedData[modalCategory]" class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-rounded-full tw-py-[2px] tw-px-2 tw-font-semibold tw-flex tw-items-center">{{ item }} <span @click="handleMultiSelect(modalSelectedData[modalCategory], item)" class="tw-cursor-pointer tw-ml-1">x</span></div>
                 </div>
             </header>
             <hr />
             <ul class="tw-flex-shrink tw-overflow-auto">
-                <li v-for="language in languages" :class="`tw-text-lg tw-flex tw-justify-center tw-py-4 tw-cursor-pointer tw-font-semibold ${isLanguageSelected(language['value']) ? 'tw-text-white' : 'tw-text-[#80A0B9]'}`" @click="selectLanguage(language['value'])">{{ language['value'] }} <CheckIcon v-if="isLanguageSelected(language['value'])" class="tw-w-[20px] tw-ml-2 tw-text-white" /></li>
+                <li v-for="item in modalData[modalCategory]" :class="`tw-text-lg tw-flex tw-justify-center tw-py-4 tw-cursor-pointer tw-font-semibold ${isItemSelected(item['value']) ? 'tw-text-white' : 'tw-text-[#80A0B9]'}`" @click="handleMultiSelect(modalSelectedData[modalCategory], item['value'])">{{ item['value'] }} <CheckIcon v-if="isItemSelected(item['value'])" class="tw-w-[20px] tw-ml-2 tw-text-white" /></li>
             </ul>
             <footer class="tw-font-bold tw-text-white tw-py-7 tw-flex tw-justify-center tw-items-center tw-text-lg tw-flex-shrink-0" @click="openLanguageModal = false">Done</footer>
         </div>
@@ -280,28 +306,60 @@ const props = defineProps({
         type: Array,
         default: [],
     },
+    genres: {
+        type: Array,
+        default: [],
+    },
+    userId: {
+        type: String,
+        default: '',
+    },
 })
 
 const instrumentInput = ref('');
 const goalInput = ref('');
 const openLanguageModal = ref(false);
 const selectedLanguages = ref([]);
+const selectedGenres = ref([]);
 const languageInput = ref(null);
+const genreInput = ref(null);
 const consentBox = ref(false);
+const modalCategory = ref('');
 
-const languageContainerClick = () => {
+const modalData = computed(() => {
+    return {
+        Languages: props.languages,
+        Genres: props.genres,
+    }
+})
+
+const modalSelectedData = computed(() => {
+    return {
+        Languages: selectedLanguages.value,
+        Genres: selectedGenres.value,
+    }
+})
+
+const multiSelectContainerClick = (category) => {
     const screenSize = window.innerWidth;
     if(screenSize < 768) {
-        languageInput.value.blur()
+        languageInput.value.blur();
+        genreInput.value.blur();
+        modalCategory.value = category;
         openLanguageModal.value = true;
     }
 }
 
-const selectLanguage = (value) => {
-    if(selectedLanguages.value.includes(value)){
-        selectedLanguages.value = selectedLanguages.value.filter((lang) => lang !== value);
+const resetSelectedGenres = () => {
+    selectedGenres.value = [];
+}
+
+const handleMultiSelect = (category, value) => {
+    if(category.includes(value)){
+        const index = category.indexOf(value);
+        category.splice(index, 1);
     } else {
-        value && selectedLanguages.value.push(value);
+        value && category.push(value);
     }
 }
 
@@ -316,8 +374,8 @@ const screenDetect = () => {
     }
 }
 
-const isLanguageSelected = (value) => {
-    return selectedLanguages.value.includes(value);
+const isItemSelected = (value) => {
+    return modalSelectedData.value[modalCategory.value].includes(value);
 }
 
 const isCookieSet = () => {
@@ -332,6 +390,7 @@ const submitForm = (event) => {
         data: {
             ...Object.fromEntries(formData),
             'student_form_languages[]': selectedLanguages.value.join(','),
+            'student_form_genres[]': selectedGenres.value.join(','),
         },
     };
 

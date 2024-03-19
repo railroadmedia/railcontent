@@ -159,6 +159,24 @@ class STCController extends Controller
             ['value' => 'Lifetime'],
         ];
 
+        $genres = [
+            ['value' => 'Pop'],
+            ['value' => 'Hip-hop '],
+            ['value' => 'Rock'],
+            ['value' => 'R’n’B'],
+            ['value' => 'Soul'],
+            ['value' => 'Reggae'],
+            ['value' => 'Country'],
+            ['value' => 'CCM / Worship'],
+            ['value' => 'Funk'],
+            ['value' => 'Folk'],
+            ['value' => 'Jazz'],
+            ['value' => 'Classical'],
+            ['value' => 'Electronic'],
+            ['value' => 'Blues'],
+            ['value' => 'Metal'],
+        ];
+
         return view('pages.student-experience-studies', [
             'ages' => $ages,
             'genders' => $genders,
@@ -170,6 +188,7 @@ class STCController extends Controller
             'goals' => $goals,
             'experience' => $experience,
             'types' => $types,
+            'genres' => $genres,
         ]);
     }
 

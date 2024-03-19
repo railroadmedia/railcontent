@@ -25,7 +25,6 @@
                     '{{ $shopifyCustomerAccessToken }}'
                 )
                     .then(session => {
-                        console.log(session);
                         return session;
                     })
                     .catch(error => {
@@ -38,14 +37,16 @@
             '{{ config('shopify.storefront.access_token') }}',
             '{{ $shopifyCustomerAccessToken }}'
         )
-            .then(session => {
-                console.log('session');
-                console.log(session);
-                recharge.customer.getCustomerPortalAccess(session).then(portal => {
-                    console.log(portal);
-                    document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
-                })
-            }).catch(error => {
+        .then(session => {
+            recharge.customer.getCustomerPortalAccess(session)
+            .then(portal => {
+                document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
+            })
+            .catch(error => {
+                document.getElementById('rcPortalContainer').remove();
+            })
+
+        }).catch(error => {
             console.log(error);
         });
     </script>
@@ -115,7 +116,7 @@
                 {{-- ================================= Subscription Info Section ================================= --}}
                 {{-- ============================================================================================= --}}
 
-                <div class="tw-flex tw-flex-col pa-3">
+                <div class="tw-flex tw-flex-col pa-3" id="rcPortalContainer">
                     {{-- TEMPORARY MESSAGE --}}
                     {{-- <div class="tw-full tw-flex tw-p-4 tw-mb-4 tw-rounded-lg tw-bg-red-100 tw-text-red-800 tw-font-semibold">
                         <p>

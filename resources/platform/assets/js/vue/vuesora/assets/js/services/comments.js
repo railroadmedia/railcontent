@@ -37,10 +37,56 @@ export default {
     updateCommentConversationStatus(id, conversationStatus) {
         return axios.patch(
             `${endpointPrefix}/railcontent/comment/${id}`,
-            { conversation_status: conversationStatus },
+            {conversation_status: conversationStatus},
         )
             .then(response => response.data)
             .catch(ErrorHandler);
+    },
+
+    commentAssignModerator(id) {
+        return axios.patch(
+            `${endpointPrefix}/railcontent/comment/${id}/assign-moderator`
+        )
+            .then(response => response.data)
+            .catch(error => ({error: {...error.response.data}}))
+            .then(({response, error}) => {
+                console.log(error);
+                if (error) {
+                    let message = 'Oops something went wrong! Unable to assign moderator.';
+                    if (error && error?.meta?.errors?.detail) {
+                        message = 'Unable to assign moderator: ' + error.meta.errors.detail;
+                    }
+                    console.log(message);
+                    window.shownotification({
+                        icon: 'error',
+                        text: message
+                    })
+                }
+                return ({response, error});
+            });
+    },
+
+    commentUnassignModerator(id) {
+        return axios.patch(
+            `${endpointPrefix}/railcontent/comment/${id}/unassign-moderator`
+        )
+            .then(response => response.data)
+            .catch(error => ({error: {...error.response.data}}))
+            .then(({response, error}) => {
+                console.log(error);
+                if (error) {
+                    let message = 'Oops something went wrong! Unable to unassign moderator.';
+                    if (error && error?.meta?.errors?.detail) {
+                        message = 'Unable to unassign moderator: ' + error.meta.errors.detail;
+                    }
+                    console.log(message);
+                    window.shownotification({
+                        icon: 'error',
+                        text: message
+                    })
+                }
+                return ({response, error});
+            });
     },
 
     /**
@@ -136,7 +182,7 @@ export default {
      * @param {String|Number} limit
      * @returns {Promise} resolved promise with the response.data object
      */
-    getCommentLikeUsers({ id, page = 1, limit = 10 }) {
+    getCommentLikeUsers({id, page = 1, limit = 10}) {
         return axios.get(`${endpointPrefix}/railcontent/comment-likes/${id}`, {
             params: {
                 page,

@@ -2,9 +2,12 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\ShopifyTagEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Customer;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\Models\Shopify\Rest\OrderLineItem;
@@ -54,24 +57,25 @@ class AddOrderTags implements ShouldQueue
 
         $this->otherOrders = $this->getOtherOrders();
 
-        if ($this->isInitialOrder()) {
-            $this->tagsToAdd->push(ShopifyTagEnum::InitialOrder);
-        }
-
         if ($this->isTrialStart($this->order)) {
             $this->tagsToAdd->push(ShopifyTagEnum::TrialStart);
         }
 
-        // an order can't be a trial conversion AND (an initial order or a trial start), so skip this check
+        // an order can't be a trial conversion AND a trial start, so skip this check
         // if we already have a tag to apply
         if ($this->tagsToAdd->isEmpty() && $this->isTrialConversion()) {
             $this->tagsToAdd->push(ShopifyTagEnum::TrialConversion);
         }
 
-        // an order can't be a membership renewal AND (a trial conversion or an initial order or a trial start), so skip this check
+        $isMembershipRenewal = $this->isMembershipRenewal();
+        // an order can't be a membership renewal AND (a trial conversion or a trial start), so skip this check
         // if we already have a tag to apply
-        if ($this->tagsToAdd->isEmpty() && $this->isMembershipRenewal()) {
+        if ($this->tagsToAdd->isEmpty() && $isMembershipRenewal) {
             $this->tagsToAdd->push(ShopifyTagEnum::MembershipRenewal);
+        }
+
+        if ($this->isInitialOrder($isMembershipRenewal)) {
+            $this->tagsToAdd->push(ShopifyTagEnum::InitialOrder);
         }
 
         $this->applyTags();
@@ -96,33 +100,6 @@ class AddOrderTags implements ShouldQueue
 
         // remove this order
         return $customerOrders->filter(fn(Order $order) => $order->id != $this->order->id);
-    }
-
-    /**
-     * Check if this is an initial order.
-     * Any initial purchase that comes from a customer using the checkout.
-     *
-     * @return bool
-     */
-    protected function isInitialOrder(): bool
-    {
-        if ($this->otherOrders->isEmpty()) {
-            return true;
-        }
-
-        // check for any other orders made before this one
-        $earlierOrders = $this->otherOrders
-            ->reject(fn(Order $otherOrder) => $otherOrder->processedAt->isAfter($this->order->processedAt));
-        $isFirstOrder = $earlierOrders->isEmpty();
-
-        // DEV NOTE: it's possible for multiple entries to have the same time, so use the order number as the next check
-        if ($earlierOrders->count() > 1) {
-            $isFirstOrder = $earlierOrders
-                ->filter(fn(Order $otherOrder) => $otherOrder->orderNumber < $this->order->orderNumber)
-                ->isEmpty();
-        }
-
-        return $isFirstOrder;
     }
 
     /**
@@ -220,6 +197,43 @@ class AddOrderTags implements ShouldQueue
     }
 
     /**
+     * Check if this is an initial order.
+     * An initial order is defined as an order that was placed by the customer (or by support) via a deliberate action,
+     * i.e. not automated.
+     *
+     * @param  bool  $isMembershipRenewal
+     * @return bool
+     */
+    protected function isInitialOrder(bool $isMembershipRenewal): bool
+    {
+        // if it came from one of out known automated sources, it can't be initial
+        if (in_array($this->order->sourceName, config('shopify.automated_source_names'))) {
+            return false;
+        }
+
+        // RevenueCat's webhook comes into MWP which then creates the order,
+        // so check if the source was MWP
+        if (in_array($this->order->sourceName, config('shopify.api_app.musora_web_platform.ids'))) {
+            // the only way we can tell if it's a RevenueCat order is if it has payment source metafields of Apple or Google
+            $metafields = $this->order->getMetafields();
+            $mobilePaymentSourceMetafields = $metafields->filter(function (MetaField $metaField) {
+                return $metaField->key === ShopifyMetafieldKey::PaymentSource->value
+                    && in_array(
+                        $metaField->value,
+                        [ShopifyPaymentSourceEnum::Apple->value, ShopifyPaymentSourceEnum::Google->value]
+                    );
+            });
+            if ($mobilePaymentSourceMetafields->isNotEmpty()) {
+                // we don't have any way to distinguish a RevenueCat initial order from a renewal, so we need to use $isMembershipRenewal
+                return !$isMembershipRenewal;
+            }
+        }
+
+        // otherwise, it came from a manual source and must be an Initial Order
+        return true;
+    }
+
+    /**
      * Apply all new tags that are to be added to this order.
      *
      * @return void
@@ -234,7 +248,7 @@ class AddOrderTags implements ShouldQueue
                 mutation {
                     tagsAdd (
                         id: "{$this->order->gid}"
-                        tags: $this->tagsToAdd
+                        tags: {$this->tagsToAdd->values()}
                     ) {
                     node {
                         id
@@ -247,27 +261,23 @@ class AddOrderTags implements ShouldQueue
             }
             GQL;
 
-        Log::info(sprintf('%s: Adding tags to Shopify Order %s: %s',
-            $this->getClassName(),
-            $this->order->id,
-            $this->tagsToAdd->isEmpty() ? '(none)' : $this->tagsToAdd->implode(', ')
-        ));
+        Log::info(
+            sprintf(
+                '%s: Adding tags to Shopify Order %s: %s',
+                $this->getClassName(),
+                $this->order->id,
+                $this->tagsToAdd->isEmpty() ? '(none)' : $this->tagsToAdd->implode(', ')
+            )
+        );
 
         if (!$this->isSimulation && $this->tagsToAdd->isNotEmpty()) {
             try {
                 $this->executeQuery($gql);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+                Log::debug($gql);
             }
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getIsSimulation(): bool
-    {
-        return $this->isSimulation;
     }
 
     /**
@@ -276,6 +286,14 @@ class AddOrderTags implements ShouldQueue
     protected function getClassName(): string
     {
         return class_basename(__CLASS__);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsSimulation(): bool
+    {
+        return $this->isSimulation;
     }
 
     /**
