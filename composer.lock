@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86913145fb0eccb833af04126ec97f50",
+    "content-hash": "a15594034095d2f60b4bb80e870a480f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1107,16 +1107,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.301.1",
+            "version": "3.301.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "0a910d2b35e7087337cdf3569dc9b6ce232aafba"
+                "reference": "7f8180275e624cb566d8af77d2f1c958bf5be35b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0a910d2b35e7087337cdf3569dc9b6ce232aafba",
-                "reference": "0a910d2b35e7087337cdf3569dc9b6ce232aafba",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7f8180275e624cb566d8af77d2f1c958bf5be35b",
+                "reference": "7f8180275e624cb566d8af77d2f1c958bf5be35b",
                 "shasum": ""
             },
             "require": {
@@ -1196,9 +1196,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.301.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.301.2"
             },
-            "time": "2024-03-15T18:14:42+00:00"
+            "time": "2024-03-18T18:06:18+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10368,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-hotfix-FSU-187",
+            "version": "v2.1.65",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "baf9a1b311f44e4c94da2450b185e600a006b8e8"
+                "reference": "c6ec32efe965db9ea8e03246f6493b18ba92db5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/baf9a1b311f44e4c94da2450b185e600a006b8e8",
-                "reference": "baf9a1b311f44e4c94da2450b185e600a006b8e8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c6ec32efe965db9ea8e03246f6493b18ba92db5a",
+                "reference": "c6ec32efe965db9ea8e03246f6493b18ba92db5a",
                 "shasum": ""
             },
             "require": {
@@ -10432,9 +10432,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/hotfix-FSU-187"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.65"
             },
-            "time": "2024-03-18T09:38:11+00:00"
+            "time": "2024-03-19T07:25:38+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -12028,16 +12028,16 @@
         },
         {
             "name": "spatie/laravel-fractal",
-            "version": "6.1.0",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-fractal.git",
-                "reference": "254caf0170b48c5b84aa3b42bca53cc58331d814"
+                "reference": "5b6a17720fc77891e79f505dde8368ea8e71fb13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/254caf0170b48c5b84aa3b42bca53cc58331d814",
-                "reference": "254caf0170b48c5b84aa3b42bca53cc58331d814",
+                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/5b6a17720fc77891e79f505dde8368ea8e71fb13",
+                "reference": "5b6a17720fc77891e79f505dde8368ea8e71fb13",
                 "shasum": ""
             },
             "require": {
@@ -12097,7 +12097,7 @@
                 "transform"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-fractal/tree/6.1.0"
+                "source": "https://github.com/spatie/laravel-fractal/tree/6.2.0"
             },
             "funding": [
                 {
@@ -12105,7 +12105,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-03-02T05:48:10+00:00"
+            "time": "2024-03-18T12:38:19+00:00"
         },
         {
             "name": "spatie/laravel-markdown",
@@ -19266,18 +19266,11 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-hotfix-FSU-187",
-            "alias": "v2.1.63",
-            "alias_normalized": "2.1.63.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -19287,5 +19280,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

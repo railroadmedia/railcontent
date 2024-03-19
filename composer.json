@@ -39,7 +39,7 @@
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as 3.0.7",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "dev-hotfix-FSU-187 as v2.1.63",
+        "railroad/railcontent": "2.1.*",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
