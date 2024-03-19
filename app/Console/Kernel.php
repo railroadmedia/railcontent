@@ -118,6 +118,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('addevent:syncMusora --live')->hourlyAt(30);
 
         $schedule->command('SyncShopifyProductInventoryToProductsTable')->everyFiveMinutes();
+
+        $schedule->command('ecommerce:report-cancelled-subscriptions celina@drumeo.com --cc=karissa@musora.com')
+            ->twiceMonthly();
     }
 
     /**
