@@ -6,7 +6,6 @@ import { useUserStore } from "../../stores/user";
 
 export default function useCatalogueItem(props) {
     const userStore = useUserStore();
-    console.log(userStore.isAdmin)
 
     const is_added = computed(() => props.item.is_added_to_primary_playlist);
     const progress_percent = computed(() => props.item.progress_percent);

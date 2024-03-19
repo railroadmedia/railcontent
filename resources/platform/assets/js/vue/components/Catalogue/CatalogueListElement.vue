@@ -1,45 +1,54 @@
 <template>
-    <div :class="[
-        wrapperClasses,
-    ]">
-        <div class="tw-flex tw-flex-col">
+    <div
+        class="tw-snap-center tw-flex tw-flex-col tw-group tw-py-3 tw-w-full dark:tw-border-[#223F57] tw-inline"
+        :class="[
+            class_object,
+            classOverride,
+        ]">
+        <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
-            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
-                class="tw-no-underline tw-flex tw-flex-col" :class="item.type + '-thumbnail'">
-                <div
-                    class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-video">
+            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
+                item.type === 'song' ? 'tw-max-w-[121px]' : '',
+                item.type + '-thumbnail'
+            ]">
+                <div class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]"
+                    :class="item.type === 'song' ? 'tw-aspect-square' : 'tw-aspect-video'"
+                >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
                         class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[
-        item.type === 'song' ? 'tw-blur-sm' : ''
-    ]" loading="lazy" onload="this.classList.remove('tw-opacity-0')">
+                            item.type === 'song' ? 'tw-blur-sm' : ''
+                        ]"
+                        loading="lazy"
+                        onload="this.classList.remove('tw-opacity-0')"
+                    >
                     <!-- Song Overlay -->
                     <div v-if="item.type === 'song'"
                         class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail"
-                            :alt="mappedData.black_title" />
+                        <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
                     </div>
 
                     <!-- Thumbnail Badge -->
                     <div v-if="thumbnailBadge"
-                        class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
-                        {{ thumbnailBadge }}
+                         class="tw-bg-black/70 tw-absolute tw-leading-none tw-uppercase tw-font-bold tw-bottom-1 tw-right-1 tw-rounded tw-text-white tw-text-[10px] tw-p-1">
+                         {{ thumbnailBadge }}
                     </div>
 
                     <!-- Progress -->
                     <div class="lesson-progress overflow">
-                        <span class="progress" :class="`tw-bg-${brand}`"
-                            :style="'width:' + progress_percent + '%'"></span>
+                        <span class="progress" :class="`tw-bg-${brand}`" :style="'width:' + progress_percent + '%'"></span>
                     </div>
                     <div v-if="showTrophy" class="bundle-complete tw-justify-center">
                         <i class="fas fa-trophy"></i>
                     </div>
 
                     <!-- EVERYTHING ELSE -->
-                    <div v-else
+                    <div
+                        v-else
                         class="tw-absolute tw-flex tw-flex-col tw-bg-black/30 tw-w-full tw-h-full tw-justify-center tw-items-center tw-text-white tw-text-center"
-                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased },]">
+                        :class="[{ 'tw-opacity-0 group-hover:tw-opacity-100': isReleased },]"
+                    >
                         <i class="fas" :class="thumbnailIcon"></i>
                         <p v-if="!isReleased" class="tw-mt-1 tw-text-sm text-white font-bold">
                             {{ releaseDate }}
@@ -50,8 +59,8 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a :href="renderLink && !forceNoLinks ? item.url : null"
-                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2">
+                    <a :href="renderLink  && !forceNoLinks ? item.url : null"
+                        class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
                             <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
@@ -60,8 +69,8 @@
                             </h4>
                             <!-- Video Description -->
                             <p v-if="mappedData.show_description"
-                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2">{{
-        mappedData.description.replace(/<[^>]+>/g, '') }}</p>
+                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
+                            >{{  mappedData.description.replace(/<[^>]+>/g, '') }}</p>
                             <!-- Content -->
                             <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
@@ -70,13 +79,12 @@
                                 </div>
                             </h6>
                         </div>
-                        <p
-                            class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                        <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
                             <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
                                 <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                     textCase="capitalize" />
-                                <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                             </span>
                             <span class="tw-mb-0.5">
                                 {{ contentTypeString }}
@@ -85,13 +93,14 @@
                     </a>
                     <!-- CHALLENGE CTA's -->
                     <template v-if="contentType === 'challenge'">
-                        <a v-if="enrollmentOpen && !hasProduct" :href="registrationUrl"
-                            class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl tw-shadow tw-bg-white dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
+                        <a v-if="enrollmentOpen && !hasProduct"
+                            :href="registrationUrl"
+                            class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl tw-shadow tw-bg-white dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]"
+                        >
                             Enroll Now
                         </a>
-                        <button v-if="upcomingChallenge" data-open-modal="notifyModal"
-                            class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl tw-shadow tw-bg-white dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
-                            <musora-icon icon-name="bell" class="tw-w-5 tw-h-5 tw-mr-1" />
+                        <button v-if="upcomingChallenge" data-open-modal="notifyModal" class="tw-mt-1 tw-inline-flex tw-items-center tw-justify-center tw-uppercase tw-text-sm tw-px-4 tw-leading-none tw-font-bebas-neue tw-h-[36px] tw-rounded-2xl tw-shadow tw-bg-white dark:tw-bg-[#0E2031] dark:tw-text-[#F1F1F1] tw-text-[#00101D]">
+                            <musora-icon icon-name="bell" class="tw-w-5 tw-h-5 tw-mr-1"/>
                             Notify Me
                         </button>
                     </template>
@@ -100,8 +109,7 @@
                     Add to Playlist
                     Don't show if the user has not enrolled in a challenge (does not own Product)
                 -->
-                <div v-if="!enrollmentOpen || hasProduct"
-                    class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
+                <div v-if="!enrollmentOpen || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
                     <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
                         <button :id="`${item.id}-action-btn-big`" v-if="showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
@@ -152,13 +160,9 @@ const props = defineProps({
         type: String,
         default: '' // Default empty string
     },
-    wrapperClassOverride: {
+    classOverride: {
         type: String,
         default: ''
-    },
-    breakToListView: {
-        type: Boolean,
-        default: false
     },
     lockUnowned: {
         type: Boolean,
@@ -189,7 +193,7 @@ const props = defineProps({
         default: () => false,
     },
     isSingleRow: {
-        type: Boolean,
+		type: Boolean,
         default: () => false,
     },
     scrollContainer: {
@@ -251,10 +255,10 @@ const handleShowDropdown = (className) => {
 };
 
 const contentTypeString = computed(() => {
-    if (contentModel.value.post.type === 'workout') {
+    if(contentModel.value.post.type === 'workout') {
         return 'Workouts';
     }
-    if (contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
+    if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
 })
 
@@ -270,7 +274,7 @@ const registrationUrl = computed(() => {
     return contentModel.value.post.fields.find(field => field.key === 'registration_url')?.value || '';
 })
 
-const duration = computed(() => {
+const duration = computed( () => {
     let time = props.item.fields.find(field => field.key === 'length_in_seconds')?.value || '';
     let hours = Math.floor(time / 3600);
     let minutes = Math.floor(time / 60);
@@ -284,15 +288,15 @@ const enrollmentOpen = computed(() => {
 })
 
 const thumbnailBadge = computed(() => {
-    if (props.item.type === 'challenge') {
-        if (enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
-        if (upcomingChallenge.value) return 'Upcomming';
-        return `${props.item.child_count} Workouts`;
-    } else if (props.item.type === 'workout') {
+    if(props.item.type === 'challenge') {
+        if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
+        if(upcomingChallenge.value) return 'Upcomming';
+        return `${ props.item.child_count } Workouts`;
+    } else if(props.item.type === 'workout') {
         return duration.value;
-    } else if (props.item.type === 'course' || props.item.type === 'pack-bundle') {
-        return `${props.item.child_count} Lessons`;
-    } else {
+    } else if(props.item.type === 'course' || props.item.type === 'pack-bundle') {
+        return `${ props.item.child_count } Lessons`;
+    }else {
         return duration.value;
     }
 })
@@ -302,7 +306,7 @@ const upcomingChallenge = computed(() => {
 })
 
 const contentCreator = computed(() => {
-    if (contentModel.value.post.fields) {
+    if(contentModel.value.post.fields) {
         if (isSongContent.value) {
             return contentModel.value.post.fields.find(field => field.key === 'artist')?.value || ''
         }
@@ -314,7 +318,7 @@ const contentCreator = computed(() => {
 
 const mappedData = computed(() => {
     let difficultyValue = 0; //default
-    if (contentModel.value.post.fields) {
+    if(contentModel.value.post.fields) {
         difficultyValue = contentModel.value.post.fields.find(field => field.key === 'difficulty')?.value || 0;
     }
 
@@ -323,18 +327,11 @@ const mappedData = computed(() => {
     return contentModel.value.card
 });
 
-const defaultWrapperClasses = 'tw-snap-center tw-flex tw-flex-col tw-group lg:tw-w-auto tw-shrink-0 tw-w-[267px] tw-mr-3 lg:tw-mr-0';
-
-const wrapperClasses = computed(() => {
-    const override = props.wrapperClassOverride;
-    return ({
-        [defaultWrapperClasses]: defaultWrapperClasses,
-        'no-access': noAccess.value,
-        completed: props.item.completed,
-        'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
-        [override]: override,
-    })
-});
+const class_object = computed(() => ({
+    'no-access': noAccess.value,
+    completed: props.item.completed,
+    'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
+}));
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
@@ -358,4 +355,4 @@ onUnmounted(() => {
 
 const emit = defineEmits(['addToList', 'progressReset']);
 
-</script>
+</script>../../utils.js../../../stores/user.js

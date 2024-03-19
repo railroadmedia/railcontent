@@ -64,7 +64,7 @@
     <grid-catalogue v-if="catalogueType === 'grid'" :content="content"
       :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
       :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
-      :show-my-list-action="showMyListAction" :display-inline="displayInline" :is-single-item="isSingleItem" :full-width-on-Mobile="fullWidthOnMobile"
+      :show-my-list-action="showMyListAction" :display-inline="displayInline" :is-single-item="isSingleItem" :full-width-on-mobile="fullWidthOnMobile"
       @addToList="addToListEventHandler" />
 
     <routines-catalogue v-if="catalogueType === 'routines'" :content="content" :brand="brand" :theme-color="themeColor"
@@ -142,10 +142,6 @@ export default {
   },
   mixins: [UserCatalogueEvents, ThemeClasses],
   props: {
-    addDarkModeColor: {
-      type: Boolean,
-      default: () => true,
-    },
     searchBarTitle: {
       type: String,
       default: '',

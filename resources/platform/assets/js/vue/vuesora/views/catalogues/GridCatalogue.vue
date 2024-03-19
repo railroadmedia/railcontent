@@ -1,63 +1,32 @@
 <template>
-    <div
-        class="tw-flex"
-        :class="[noWrap ? 'overflow' : 'flex-wrap', {'tw-flex-col': displayInline }, { 'md:tw-grid md:tw-grid-cols-3 lg:tw-grid-cols-4 2xl:tw-grid-cols-5 md:tw-gap-3': !isSingleItem && !displayInline }]"
-    >
-        <catalogue-card
-            v-for="item in content"
-            :key="'grid' + item.id"
-            :item="item"
-            :content-type="item.type"
-            :user-id="userId"
-            :is-admin="isAdmin"
-            :lock-unowned="lockUnowned"
-            :content-type-override="contentTypeOverride"
-            :show-my-list-action="showMyListAction"
-            :force-list-view="displayInline"
-            :is-single-item="isSingleItem"
-            :full-width-on-Mobile="fullWidthOnMobile"
-            @addToList="emitAddToList"
-        />
+    <div class="tw-flex"
+        :class="[noWrap ? 'overflow' : 'flex-wrap', { 'tw-flex-col': displayInline }, { 'md:tw-grid md:tw-grid-cols-3 lg:tw-grid-cols-4 2xl:tw-grid-cols-5 md:tw-gap-3': !isSingleItem && !displayInline }]">
+        <CatalogueListElement v-if="displayInline" v-for="item in content" :key="'coach-list' + item.id" :item="item"
+            :content-type="item.type" :lock-unowned="lockUnowned" :content-type-override="contentTypeOverride"
+            :show-my-list-action="showMyListAction" @addToList="emitAddToList"
+            :wrapperClassOverride="elementClassOverride" />
+        <CatalogueCard v-else v-for="item in content" :key="'coach-grid' + item.id" :item="item"
+            :content-type="item.type" :lock-unowned="lockUnowned" :content-type-override="contentTypeOverride"
+            :show-my-list-action="showMyListAction" @addToList="emitAddToList"
+            :wrapperClassOverride="elementClassOverride" />
     </div>
 </template>
 <script>
 import CatalogueCard from '../../../components/Catalogue/CatalogueCard.vue';
+import CatalogueListElement from '../../../components/Catalogue/CatalogueListElement.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 
 export default {
     name: 'GridCatalogue',
     components: {
-        'catalogue-card': CatalogueCard,
+        CatalogueCard,
+        CatalogueListElement
     },
     mixins: [UserCatalogueEvents],
     props: {
-        addDarkModeColor: {
-            type: Boolean,
-            default: () => true,
-        },
         content: {
             type: Array,
             default: () => [],
-        },
-        themeColor: {
-            type: String,
-            default: () => 'drumeo',
-        },
-        useThemeColor: {
-            type: Boolean,
-            default: () => true,
-        },
-        userId: {
-            type: String,
-            default: () => '',
-        },
-        isAdmin: {
-            type: Boolean,
-            default: () => false,
-        },
-        brand: {
-            type: String,
-            default: () => 'drumeo',
         },
         noWrap: {
             type: Boolean,
@@ -90,6 +59,17 @@ export default {
         fullWidthOnMobile: {
             type: Boolean,
             default: () => false,
+        },
+    },
+    computed: {
+        elementClassOverride() {
+            if (this.isSingleItem) {
+                return '!tw-w-full !tw-px-2 sm:!mb-4';
+            } else if (this.fullWidthOnMobile) {
+                return '!tw-w-full md:!tw-w-auto !tw-mb-4 md:!tw-mb-0';
+            } else {
+                return '';
+            }
         },
     },
 };
