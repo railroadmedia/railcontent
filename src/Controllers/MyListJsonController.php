@@ -72,7 +72,7 @@ class MyListJsonController extends Controller
         $userPrimaryPlaylists =
             $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
 
-        if($userPrimaryPlaylists instanceof Collection && $userPrimaryPlaylists->isEmpty()){
+        if ($userPrimaryPlaylists instanceof Collection && $userPrimaryPlaylists->isEmpty()) {
             $userPrimaryPlaylists =
                 $this->userPlaylistsService->getUserPlaylist($userId, 'user-playlist', $request->get('brand'));
         }
@@ -98,8 +98,12 @@ class MyListJsonController extends Controller
             $userPrimaryPlaylist = Arr::first($userPrimaryPlaylists);
         }
 
-        $this->userPlaylistsService->addItemToPlaylist(
-            [$userPrimaryPlaylist['id']], $request->get('content_id'), null, null);
+        $this->userPlaylistsService->addItemToPlaylist([$userPrimaryPlaylist['id']],
+                                                       $request->get('content_id'),
+                                                       null,
+                                                       null
+        );
+
         //addContentToUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
 
         return response()->json(['success']);
@@ -123,7 +127,7 @@ class MyListJsonController extends Controller
         $userPrimaryPlaylist =
             $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
 
-        if($userPrimaryPlaylist instanceof Collection && $userPrimaryPlaylist->isEmpty()){
+        if ($userPrimaryPlaylist instanceof Collection && $userPrimaryPlaylist->isEmpty()) {
             $userPrimaryPlaylist =
                 $this->userPlaylistsService->getUserPlaylist($userId, 'user-playlist', $request->get('brand'));
         }
@@ -265,7 +269,10 @@ class MyListJsonController extends Controller
         );
         throw_if(
             ($playlist == -2),
-            new NotFoundException("You don’t have access to this playlist. Unblock the playlist owner to access the playlist.  ", 'Blocked Playlist')
+            new NotFoundException(
+                "You don’t have access to this playlist. Unblock the playlist owner to access the playlist.  ",
+                'Blocked Playlist'
+            )
         );
         throw_if(!$playlist, new NotFoundException("Playlist not exists."));
 
@@ -343,6 +350,15 @@ class MyListJsonController extends Controller
             $sort
         );
 
+        if ($request->has('count_filter_items')) {
+            $filterOptions = $this->userPlaylistsService->getFilterOptions(
+                auth()->id(),
+                'user-playlist',
+                config('railcontent.brand'),
+                $request->get('term')
+            );
+        }
+
         $itemId = $request->get('content_id');
         if ($itemId) {
             foreach ($playlists as $index => $playlist) {
@@ -360,6 +376,7 @@ class MyListJsonController extends Controller
                                                        config('railcontent.brand'),
                                                        $request->get('term')
                                                    ),
+                                                   'filter_options' => $filterOptions ?? [],
                                                ]))->toJsonResponse();
     }
 
