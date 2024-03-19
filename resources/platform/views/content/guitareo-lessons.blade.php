@@ -88,7 +88,6 @@
                                 :lock-unowned="true"
                                 :five-wide="true"
                                 :force-wide-thumbs="true"
-                                :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newCourses }}"
                                 :full-width-on-mobile="{{ true }}"
                             >
@@ -129,7 +128,6 @@
                                 :lock-unowned="true"
                                 :five-wide="true"
                                 :force-wide-thumbs="true"
-                                :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newQuickTips }}"
                                 :full-width-on-mobile="{{ true }}"
                             >
