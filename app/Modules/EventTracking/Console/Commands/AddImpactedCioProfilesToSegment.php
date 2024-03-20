@@ -9,7 +9,6 @@ use App\Modules\EventTracking\Jobs\AddImpactedCioProfilesToSegmentJob;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class AddImpactedCioProfilesToSegment extends Command
