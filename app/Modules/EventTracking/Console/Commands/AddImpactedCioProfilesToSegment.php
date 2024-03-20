@@ -47,13 +47,14 @@ class AddImpactedCioProfilesToSegment extends Command
                 $next = $response->next ?? "";
                 $start = $next;
 
-                $activities = collect($response->activities ?? [])
+                $ids = collect($response->activities ?? [])
                     ->filter(function ($activity) use ($startDate) {
                         $timestamp = Carbon::createFromTimestamp($activity->timestamp);
                         return $timestamp->gte($startDate);
-                    });
-
-                $ids = collect($activities)->pluck('customer_identifiers.id')->unique()->toArray();
+                    })
+                    ->pluck('customer_identifiers.id')
+                    ->unique()
+                    ->toArray();
 
                 if (count($ids) === 0) {
                     continue;
