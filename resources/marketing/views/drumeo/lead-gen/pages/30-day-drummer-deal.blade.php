@@ -226,46 +226,71 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data ='{
+        lazyLoad: false,
+        }'
+@endsection
+
+
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
     <section class="py-20 text-center" style="background:#F1F7FE;">
         <div class="mx-auto">
             <h2 class="leading-tight mb-2">
-                <strong>Get unlimited drum lessons for a year!</strong><br>
+                <strong>GET UNLIMITED DRUM LESSONS FOR A YEAR</strong><br>
                 + 2 NEW follow-up packs with Domino<br>
                 (and 3 more bonuses!)
             </h2>
-            <h5 class=" text-drumeo uppercase"></h5>
+            <div class="uppercase text-2xl text-musora"> <strong> 
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                <span>
+                ONLY AVAILABLE FOR
+                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                    <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                </span>
+                </span> 
+            </strong>
+           
+            </div>
+                <h5 class=" text-drumeo uppercase"></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/869289949" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
+
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">You’ve spent 30 days crushing it on the drums.
                 <br><br>
                 And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.
                 <br><br>
                 <b>Join Drumeo today and you’ll get:</b>
             </p>
-            <ul class="pl-4 mx-auto text-left rounded-xl text-white px-3 py-4" style="width: 100%; max-width: 700px; background-color:#0D1627;">
+            <div class="mx-3 md:mx-0">
+                <ul class="pl-4 mx-auto text-left rounded-xl text-white px-3 py-4 w-full" style="max-width: 700px; background-color:#0D1627;">
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Step-by-step lessons building on what you learned in 30-Day Drummer</li>
-                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to 5000+ popular songs you can play with your new skills</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to 6000+ popular songs you can play with your new skills</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Personalized support for ALL your drumming questions</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Follow-up courses 10-Day Fills and 10-Day Ghost Notes with Domino (NEW!)</li>
                 <li class="flex items-start"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> The brand NEW Drumeo StickBag and a fresh pair of 5A drumsticks (FREE BONUSES)</li>
-            </ul>
+                </ul> 
+            </div>
+
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
                 <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise).
                 <br><br>
                 And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?).
                 <br><br>
-                <b>But heads up:</b> This offer is only available until October 5, 2023. <br><br>
+                <b>But heads up:</b> This offer is only available until March 31, 2024. <br><br>
                 Click below to get started and keep crushing it on the drums for the next year!
             </p>
                         <div class="px-3 md:px-0">
-{{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
-                            <a class="join sold-out w-full sm:w-auto max-w-xs sm:max-w-full">SOLD OUT</a>
+                         <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>
+                            <!-- <a class="join sold-out w-full sm:w-auto max-w-xs sm:max-w-full">SOLD OUT</a> -->
                         </div>
         </div>
     </section>
@@ -330,7 +355,7 @@
                     </div>
                 </div>
             </div>
-            <h6><em>These brand new follow-up packs drop on October 5, 2023.</em><br><br>
+            <h6><em>These brand new follow-up packs are available now–</em><br><br>
                 <strong class="text-drumeo">And they’re included FREE with your Drumeo membership.</strong></h6>
         </div>
     </section>
@@ -383,33 +408,46 @@
         </div>
     </section>
 
-    <section class="py-6 md:py-10">
-        <div class="md:max-w-3xl lg:max-w-4xl mx-auto text-center px-4 lg:px-0">
-            <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com">
-                <img class="mx-auto h-10 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg" alt="shopper approved logo">
-            </a>
-            <h4 class="font-extrabold leading-tight {{--mb-2 sm:mb-4--}} mb-14">
-                Trusted by {{ number_format(Prices::$students) }} students<br class="inline sm:hidden"> from around the world.
-            </h4>
-            {{--<p class="mb-14 leading-tight">--}}
-            {{--Sub-headline explaining what<br class="inline sm:hidden"> the reviews below are.--}}
-            {{--</p>--}}
-            <div class="grid sm:grid-cols-3 gap-6">
-                @foreach ($studentReviews as $key => $review)
-                    <div class="max-w-sm md:max-w-full mx-auto mb-10 @if($key > 3) hidden sm:block @endif">
-                        <h5 class="font-bold mb-3 leading-tight">{!!  $review['quote']  !!}</h5>
-                        <img class="h-4" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/stars.svg" alt="5starts">
-                        <hr class="w-12 mx-auto my-5" style="border-color: #D9D9D9; border-width: 1px;">
-                        <p>{!! $review['review'] !!}</p>
-                        <p class="mt-4 text-drumeo text-sm"><a target="_blank" href="{!! $review['link'] !!}"><strong>{!! $review['name'] !!}</strong> - {{ $review['date'] }}</a></p>
-                    </div>
-                @endforeach
-            </div>
-            <div class="w-full text-center">
-                <a href="https://www.shopperapproved.com/reviews/Musora.com" class="join smaller outline method mx-auto inline-block uppercase" target="_blank">See more student reviews</a>
-            </div>
-        </div>
-    </section>
+    @php
+        $bonuses = [
+                        [
+                        'image' => 'marketing/drumeo/promos/black-friday/fills-card2.jpg',
+                        'title' => "10 Day Fills",
+                        'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
+                        'customText' => 'NEW COURSE',
+                        ],
+                        [
+                        'image' => 'marketing/drumeo/promos/black-friday/ghost-notes-card2.jpg',
+                        'title' => "10 Day Ghost Notes",
+                        'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
+                        'customText' => 'NEW COURSE',
+                        ],
+                        [
+                        'image' => 'marketing/drumeo/promos/black-friday/stick-card.png',
+                        'title' => "Drumeo StickBag",
+                        'description' => 'Protect your tools & keep your kit tight. All your tools in one place, safe and sound.',
+                            'price' => floatval($productPrices['stickbag']->price),
+                            'shipping' => true,
+                        ],
+                        [
+                            'image' => 'marketing/drumeo/promos/black-friday/drumsticks.jpg',
+                            'title' => 'Drumeo Drumsticks',
+                            'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
+                            'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
+                            'shipping' => true,
+                        ],
+        ]
+    @endphp
+    @include('musora.sales.components.order-section-bonuses', [
+    'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
+    'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',
+    'theme' => 'drumeo',
+        'CTA' => 'CLAIM YOUR OFFER',
+    'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
+    'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
+    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',
+    'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
+    ])
 
     <div id="customize-section" class="anchor"></div>
 
@@ -419,7 +457,7 @@
         ])
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-04-01 00:00:00',
+        'countdownDate' => '2024-04-01 00:00:00',
         'promoVersion' => false
     ])
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
