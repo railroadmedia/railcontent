@@ -56,12 +56,6 @@ class RecommendationService
             $content = $allContent;
         }
         return $content;
-//        return match($this->accessMethod)
-//        {
-//            AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
-//            AccessMethod::DB => $this->getFilteredRecommendationsUsingDBHandler($userID, $brand, $section),
-//            AccessMethod::HUGGINGFACE => $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID],
-//        };
     }
 
     private function hasNoResults($brand, $section): bool
@@ -81,7 +75,8 @@ class RecommendationService
 
         $content = $this->postToHuggingFaceWithRetry($url, $data);
         if (!isset($content[$userID])) {
-            Log::warning("Malformed data from Huggingface: $content");
+            $msg = print_r($content, true);
+            Log::warning("Malformed data from Huggingface: $msg");
         }
         return $content[$userID] ?? [];
     }
@@ -95,7 +90,8 @@ class RecommendationService
         ];
         $content = $this->postToHuggingFaceWithRetry($url, $data);
         if (!isset($content[$userID])) {
-            Log::warning("Malformed data from Huggingface: $content");
+            $msg = print_r($content, true);
+            Log::warning("Malformed data from Huggingface: $msg");
         }
         return $content[$userID] ?? [];
     }
@@ -111,7 +107,8 @@ class RecommendationService
         if ($status != 200)
         {
             Log::warning("HuggingFace return an unexpected response with code: $status");
-            Log::warning("HuggingFace: Content returned: $content");
+            $msg = print_r($content, true);
+            Log::warning("HuggingFace: Content returned: $msg");
             return [];
         }
         return $content;

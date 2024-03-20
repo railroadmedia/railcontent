@@ -263,6 +263,7 @@ class ContentService
             ];
         }
         $recommendations = zipperMerge($recommendations);
+        $totalCount = count($recommendations);
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
         } else {
@@ -270,7 +271,7 @@ class ContentService
         }
         return [
             'recommendations' => $recommendations,
-            'totalCount' => count($recommendations)
+            'totalCount' => $totalCount
         ];
     }
 
