@@ -47,20 +47,32 @@ class AddImpactedCioProfilesToSegment extends Command
                 $next = $response->next ?? "";
                 $start = $next;
 
+                $activities = collect($response->activities ?? [])
+                    ->filter(function ($activity) use ($startDate) {
+                        $timestamp = Carbon::createFromTimestamp($activity->timestamp);
+                        return $timestamp->gte($startDate);
+                    });
+
+                $ids = collect($activities)->pluck('customer_identifiers.id')->unique()->toArray();
+
+                if (count($ids) === 0) {
+                    continue;
+                }
+
                 $jobs->push(
                     new AddImpactedCioProfilesToSegmentJob(
                         $workspaceName,
                         $segmentId,
                         $startDate,
                         $accountConfigData,
-                        $response->activities
+                        $ids
                     )
                 );
             } catch (Exception $e) {
                 $this->error($e->getMessage());
                 return;
             }
-        } while ($next !== "");
+        } while ($next !== "" && count($ids) > 0);
 
         try {
             Bus::batch($jobs)->onQueue('command')->dispatch();

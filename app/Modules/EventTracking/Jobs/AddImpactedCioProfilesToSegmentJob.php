@@ -26,23 +26,15 @@ class AddImpactedCioProfilesToSegmentJob implements ShouldQueue
         private readonly int $segmentId,
         private readonly Carbon $startDate,
         private readonly array $accountConfig,
-        private readonly array $activities
+        private readonly array $customerIds
     ) {
     }
 
     public function handle(CustomerIoApiGateway $customerIoApiGateway): void
     {
-        $activities = collect($this->activities ?? [])
-            ->filter(function ($activity) {
-                $timestamp = Carbon::createFromTimestamp($activity->timestamp);
-                return $timestamp->gte($this->startDate);
-            });
-
-        $ids = collect($activities)->pluck('customer_identifiers.id')->unique()->toArray();
-
         Log::info(
             'Adding ' . count(
-                $ids
+                $this->customerIds
             ) . ' profiles to segment ' . $this->segmentId . ' for workspace ' . $this->workspaceName
         );
 
@@ -51,7 +43,7 @@ class AddImpactedCioProfilesToSegmentJob implements ShouldQueue
                 $this->accountConfig['site_id'],
                 $this->accountConfig['track_api_key'],
                 $this->segmentId,
-                $ids,
+                $this->customerIds,
             );
         } catch (Exception $e) {
             Log::error($e->getMessage());
