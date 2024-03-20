@@ -263,15 +263,7 @@ class CoachPagesController extends Controller
         FiltersHelper::prepareFiltersFields();
         FiltersHelper::setRequiredFields('instructor,' . $thisCoach['id']);
 
-//        $includedFields = [];
-//        $requiredFields = [];
-//
         $fieldIds = [$thisCoach['id']];
-//        $requiredFields[] = 'instructor,' . $thisCoach['id'];
-//
-//        if ($request->has('title')) {
-//            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
-//        }
 
         $includedTypes =
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
