@@ -7,8 +7,7 @@
         class="tw-snap-center tw-flex tw-flex-col tw-group"
         :class="[
             class_object,
-            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-auto' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0'} lg:tw-w-auto tw-shrink-0 `}`,
-            { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow },
+            forceListView || breakToListView ? 'tw-py-3 tw-w-full' : `${isSingleItem ? 'tw-w-full tw-px-2 sm:mb-4' : `${fullWidthOnMobile ? 'tw-w-full md:tw-w-auto tw-mb-4 md:tw-mb-0' : 'tw-w-[267px] tw-mr-3 lg:tw-mr-0'} lg:tw-w-auto tw-shrink-0 `}`,
         ]">
         <div class="tw-flex" :class="[
             forceListView || breakToListView ? 'tw-flex-row tw-items-center' : 'tw-flex-col',
@@ -26,7 +25,7 @@
                 >
                     <!-- Video Thumbnail -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${mappedData.thumbnail} `"
-                        class="tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
+                        class="tw-w-full tw-h-full tw-absolute tw-transition-opacity tw-duration-500 tw-opacity-0"
                         :class="[
                             item.type === 'song' ? 'tw-blur-sm' : ''
                         ]"
@@ -217,10 +216,6 @@ const props = defineProps({
     },
     isSingleRow: {
 		type: Boolean,
-        default: () => false,
-    },
-    addMarginBottom: {
-        type: Boolean,
         default: () => false,
     },
 });

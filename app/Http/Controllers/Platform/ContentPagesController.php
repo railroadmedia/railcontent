@@ -1785,18 +1785,9 @@ class ContentPagesController extends BaseController
         return null;
     }
 
-    public function comments()
-    {
-        if (!user()->isAdmin()) {
-            throw new NotFoundHttpException();
-        }
 
-        return view('content.comments');
-    }
-
-    public function removeWithKey($array, $initKey)
-    {
-        if (($key = array_search($initKey, $array)) !== false) {
+    public function removeWithKey($array, $initKey) {
+        if(($key = array_search($initKey, $array)) !== false) {
             unset($array[$key]);
         }
 
