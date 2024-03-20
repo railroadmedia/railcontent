@@ -448,18 +448,12 @@ class ContentJsonController extends Controller
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
-        $requiredFields = $request->get('required_fields', []);
-        $requiredUserState = $request->get('required_user_states', []);
         $sortedBy = $request->get('sort', $sortedBy);
 
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
 
-        if ($request->has('future')) {
-            ContentRepository::$pullFutureContent = true;
-        } else {
-            ContentRepository::$pullFutureContent = false;
-        }
+        FiltersHelper::prepareFiltersFields();
 
         if (!empty($types)) {
             $results = $this->contentService->getFiltered(
@@ -469,9 +463,9 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                $requiredFields,
+                FiltersHelper::$requiredFields,
                 [],
-                $requiredUserState,
+                FiltersHelper::$requiredUserStates,
                 [],
                 true
             );
