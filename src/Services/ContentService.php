@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Modules\Content\Models\ContentUserProgress;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
@@ -250,11 +251,13 @@ class ContentService
             $ttl = 60 * 60;
             Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
         }
-        $processedRecommendations = $this->postProcessRecommendationts($recommendations, $randomize, $pageSize, $page);
+        $processedRecommendations = $this->postProcessRecommendations($recommendations, $randomize, $pageSize, $page, $user_id);
         return $this->getContentFilterResultsFromRecommendations($processedRecommendations);
     }
 
-    private function postProcessRecommendationts($recommendations, $randomize, $pageSize, $page)
+
+
+    private function postProcessRecommendations($recommendations, $randomize, $pageSize, $page, $user_id)
     {
         if (!$recommendations) {
             return [
@@ -263,6 +266,10 @@ class ContentService
             ];
         }
         $recommendations = zipperMerge($recommendations);
+        $removeSeen = env('RECSYS_REMOVE_PREVIOUSLY_SEEN', false);
+        if ($removeSeen) {
+            $recommendations = $this->removePreviousSeenRecommendations($recommendations, $user_id);
+        }
         $totalCount = count($recommendations);
         if ($randomize) {
             $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
@@ -273,6 +280,19 @@ class ContentService
             'recommendations' => $recommendations,
             'totalCount' => $totalCount
         ];
+    }
+
+    private function removePreviousSeenRecommendations($recommendations, $user_id)
+    {
+
+        $previouslySeenContent = ContentUserProgress::where(['user_id' => $user_id])->whereIn('content_id', $recommendations)->get()->pluck('content_id');
+        if ($previouslySeenContent->count() == 0) {
+            return $recommendations;
+        }
+        return array_filter($recommendations, (fn($contentID) =>
+        $previouslySeenContent->contains(fn($value, $key) =>
+            $contentID != $value
+        )));
     }
 
     private function getContentFilterResultsFromRecommendations($recommendations)
