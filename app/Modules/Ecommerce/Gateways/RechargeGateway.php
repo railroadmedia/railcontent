@@ -406,7 +406,11 @@ class RechargeGateway
      */
     public function getSubscriptionsByStatus(string $status, CarbonInterface $createdAtMin, CarbonInterface $createdAtMax, int $limit = 250): Collection
     {
-        assert(in_array($status, ['active', 'cancelled', 'expired']));
+        // ensure that the status is one that Recharge supports. Refer to https://developer.rechargepayments.com/2021-11/subscriptions/subscriptions_object
+        $validStatuses = ['active', 'cancelled', 'expired'];
+        if (!in_array($status, $validStatuses)) {
+            throw new Exception("Invalid status $status. Must be one of: " . implode(', ', $validStatuses));
+        }
 
         $response = $this->call('GET', '/subscriptions', [
             'status' => $status,
