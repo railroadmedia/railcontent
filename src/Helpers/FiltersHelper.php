@@ -62,7 +62,7 @@ class FiltersHelper
      */
     public static function setRequiredFields($field)
     {
-        self::$requiredFields = array_merge(request('required_fields', []), [$field]);
+        self::$requiredFields = array_merge(self::$requiredFields, [$field]);
     }
 
     private static function processStatuses($request)
