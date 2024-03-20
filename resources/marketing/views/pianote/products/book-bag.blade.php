@@ -622,10 +622,10 @@
                         </div>
                     </div>
                     <div class="w-full max-w-md lg:px-1 px-1 relative">
-                        <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[maelzel-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2  border-white " style="margin-top: 30px">
+                        <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&redirect=/order&locked=true&promo-code=FREE-W-LIFETIME-849" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2  border-white " style="margin-top: 30px">
                             <div class="bg-white px-3 py-6 md:py-7" style="border-bottom: 1px solid white">
                                 <h4 class="leading-tight mb-2"><strong>Lifetime Bundle</strong></h4>
-                                <img class="h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/march/lifetime-bundle-order.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
+                                <img class="h-24 transition-opacity" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/book-bag/lifetime-bundle-order-reg.webp" loading="lazy" onload="this.classList.remove('opacity-0')" alt="card image">
                                 <h3 class="leading-tight mt-2">
                                     <strong>$1200</strong>
                                 </h3>
@@ -635,7 +635,7 @@
                             <div class="px-4 sm:px-4 lg:px-6 py-7" style="background:#F6F8FC">
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> <strong> Lifetime Membership </strong></p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Pianote BookBag ($249 value)</p>
-                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Prestige Metronome ($299 value)</p>
+                                <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> The Pianote Metronome ($79 value)</p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Chords & Scales Book ($39 value)</p>
                                 <p class="text-left text-sm mb-1.5 leading-tight"><i class="fa-solid fa-check pr-1" aria-hidden="true"></i> Practice Planner ($39 value)</p>
                             </div>

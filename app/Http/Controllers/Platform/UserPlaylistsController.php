@@ -116,8 +116,15 @@ class UserPlaylistsController extends BaseController
             "xp_rank" => user()->getXpRank(),
         ];
         $initialPage = $request->get('page', 1);
+        $filterOptions = $this->userPlaylistsService->getFilterOptions(
+            user()->id,
+            'user-playlist',
+            brand(),
+            $term
+        );
+
         $listLessons =
-            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $playlistsNumber]
+            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $playlistsNumber, 'filter_options' => $filterOptions]
             ))->toResponseRawJson();
 
         return view('account.playlists', [
