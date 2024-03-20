@@ -493,7 +493,7 @@ class CustomerIoApiGateway
         ?string $name = null,
         ?int $limit = 10,
         ?string $startToken = null
-    ): array {
+    ): mixed {
         $ch = curl_init();
 
         $params = [];
@@ -552,11 +552,11 @@ class CustomerIoApiGateway
     }
 
     public function addProfilesToSegment(
-        $customerIoSiteId,
-        $customerIoTrackApiKey,
-        $customerIds,
-        $segmentId
-    ) {
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        int $segmentId,
+        array $customerIds,
+    ): void {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id');
