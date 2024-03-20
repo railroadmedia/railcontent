@@ -8,8 +8,7 @@
             <div class="tw-flex tw-grow tw-items-center">
               <span v-html="description" />
             </div>
-            <div v-if="ctasBesideHero" class="tw-flex tw-flex-col ctas-container tw-flex-shrink-0"
-              :class="isStudentFocusCatalougePage ? 'lg:tw-hidden' : 'sm:tw-hidden'">
+            <div v-if="ctasBesideHero" class="tw-flex tw-flex-col ctas-container 'sm:tw-hidden' tw-flex-shrink-0">
               <CtaResolver :ctas="secondaryCtas" />
             </div>
           </div>
@@ -29,7 +28,7 @@
           <template #progress-text v-if="progressBarData.labelText">{{ progressBarData.labelText }} -&nbsp;</template>
         </ProgressText>
         <PageHeaderCtasBox :class="{
-        'tw-hidden sm:tw-flex': isLearningPathPage || isLivePage || isSchedulePage || isStudentFocusCatalougePage || isForumsPage || isForumThreadPage,
+        'tw-hidden sm:tw-flex': ctasBesideHero,
       }" :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>
     </template>
@@ -45,7 +44,9 @@
       }">
         <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage" class="tw-self-end"
           :infoData="infoData" />
-        <PageHeaderCtasBox :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
+        <PageHeaderCtasBox
+          :class="progress && !isLearningPathLevelPage && !isLearningPathCoursePage ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
+          :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>
       <PageHeaderProgressBar v-if="progress" :progress="progress" />
     </template>
