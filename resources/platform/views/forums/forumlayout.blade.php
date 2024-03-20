@@ -10,7 +10,7 @@ $userData = assembleUserAttributes(user());
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
         @yield('meta')
-        
+
         {{-- Icons --}}
         <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
         <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
@@ -50,22 +50,22 @@ $userData = assembleUserAttributes(user());
                     <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
                 @endif
 
-                <page-container 
+                <page-container
                     :is-live="{{ !empty($coachEvent) }}"
                     :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                     search-url=""
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
                     @endif
-                >  
+                >
                     <template v-cloak v-slot="slotProps">
 
                         @yield('breadcrumbs')
                         @yield('content')
 
-                    </template>      
+                    </template>
                 </page-container>
-                
+
             </app-container>
 
             {{-- Review Modals Must Be Global --}}
@@ -88,38 +88,23 @@ $userData = assembleUserAttributes(user());
         {{-- Pendo Script --}}
         <script>
             (function(apiKey){
-                (p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];   
-                v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){       
-                o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);   
-                y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';       
+                (p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+                v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
+                o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+                y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
                 z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
                 pendo.initialize({
                     visitor: {
-                        id: "{{ user()->email }}",
+                        id: {{ user()->id }},
                     },
                     account: {
-                        id: {{ user()->id }},
-                    }  
+                        id: "{{ user()->email }}",
+                    }
                 });
-            })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');    
+            })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');
 
         </script>
-        <script>
-            (function(apiKey){
-                (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
-                    v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
-                        o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
-                        y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
-                        z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
-                        pendo.initialize({
-                            visitor: {
-                                id: {{ user()->id }},
-                                email: "{{ user()->email }}"
-                            },
-                        });
-                })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');
-            </script>
-        
+
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
 </html>
