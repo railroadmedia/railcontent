@@ -97,6 +97,7 @@ const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
 const isCoursePage = computed(() => props.pageType === 'course')
+const isPackOverviewPage = computed(() => props.pageType === 'pack')
 const isPackBundlePage = computed(() => props.pageType === 'pack-bundle')
 const isSongsPage = computed(() => props.pageType === 'songs');
 
@@ -116,7 +117,7 @@ const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
 
 const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value);
 
-const ctasAndInfoInsideHero = computed(() => isCoursePage.value || isPackBundlePage.value);
+const ctasAndInfoInsideHero = computed(() => isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value);
 
 const progressBarData = computed(() => {
   return {

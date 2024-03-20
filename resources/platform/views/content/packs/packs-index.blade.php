@@ -20,7 +20,7 @@
 @section('content')
 
     <page-header
-        page-type="pack"
+        page-type="packs"
         title="Packs"
         icon-name="box-filled"
         description="{{ $headerDescription }}"
