@@ -14,6 +14,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -90,23 +91,51 @@ class PackService
 
     public function getPacks($requiredFields = [], $sort = '-progress')
     {
+        // Set up decorators and content retrieval options
+        $this->setUpDecoratorsAndContentOptions();
+
+        // Retrieve active cohort content ID
+        $activeContentId = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
+
+        // Set default sort if undefined
+        $sort = ($sort == 'undefined') ? '-progress' : $sort;
+
+        // Retrieve packs
+        $packs = $this->retrievePacks($sort);
+
+        // Exclude active cohort content if exists
+        $packs = $this->excludeActiveCohortContent($packs, $activeContentId);
+
+        // Insert active cohort content at the beginning if exists
+        $packs = $this->insertActiveCohortContent($packs, $activeContentId);
+
+        return new ContentFilterResultsEntity([
+            'results' => !is_array($packs)?$packs->values()->toArray():$packs,
+            'total_results' => count($packs),
+            'filter_options' => [],
+        ]);
+    }
+
+    protected function setUpDecoratorsAndContentOptions()
+    {
         ContentRepository::$pullFutureContent = true;
         AddedToPrimaryPlaylistDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
         ContentExperienceDecorator::$skip = true;
         ContentLikesDecorator::$skip = true;
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+    }
 
-        $activeContentId = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
-        $sort = ($sort == 'undefined') ? '-progress' : $sort;
-        $packs =  $this->contentService->getFiltered(
+    protected function retrievePacks($sort)
+    {
+        return $this->contentService->getFiltered(
             1,
             -1,
             $sort,
             ['pack', 'semester-pack'],
             [],
-            [],
-            $requiredFields,
+            FiltersHelper::$includedFields,
+            FiltersHelper::$requiredFields,
             [],
             [],
             [],
@@ -114,25 +143,28 @@ class PackService
             false,
             false
         )['results'];
+    }
 
-        if($activeContentId){
-            if(in_array($activeContentId, $packs->pluck('id')->toArray())){
-                $packs = $packs->filter(function($pack) use ($activeContentId){
-                    return $pack['id'] != $activeContentId;
-                });
-            }
+    protected function excludeActiveCohortContent($packs, $activeContentId)
+    {
+        if ($activeContentId && in_array($activeContentId, $packs->pluck('id')->toArray())) {
+            $packs = $packs->filter(function($pack) use ($activeContentId){
+                return $pack['id'] != $activeContentId;
+            });
+        }
+        return $packs;
+    }
+
+    protected function insertActiveCohortContent($packs, $activeContentId)
+    {
+        if ($activeContentId) {
             $activeCohort = $this->contentService->getById($activeContentId);
             $packs =  $packs->values()->toArray();
-            if($activeCohort){
+            if ($activeCohort) {
                 $activeCohort['status_text'] = "In Progress";
-                $packs = array_merge([$activeCohort],$packs);
+                array_unshift($packs, $activeCohort);
             }
         }
-
-        return new ContentFilterResultsEntity([
-            'results' => !is_array($packs)?$packs->values()->toArray():$packs,
-            'total_results' => count($packs),
-            'filter_options' => [],
-        ]);
+        return $packs;
     }
 }

@@ -84,6 +84,9 @@ class CoachPagesController extends Controller
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
 
+        FiltersHelper::prepareFiltersFields();
+        FiltersHelper::setRequiredFields('is_coach,1');
+
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 18),
@@ -91,7 +94,7 @@ class CoachPagesController extends Controller
             [$lessonType],
             [],
             [],
-            ['is_coach,1'],
+            FiltersHelper::$requiredFields,
             [],
             [],
             [],
@@ -100,6 +103,7 @@ class CoachPagesController extends Controller
             true,
             $request->get('only_subscribed', false)
         );
+
         ContentRepository::$countFilterOptionItems = false;
         $activeCoaches = $this->contentService->getFiltered(
             1,
