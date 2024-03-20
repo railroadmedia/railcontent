@@ -5,9 +5,12 @@ namespace App\Modules\EventTracking\Console\Commands;
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Services\CustomerIoService;
+use App\Modules\EventTracking\Jobs\AddImpactedCioProfilesToSegmentJob;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class AddImpactedCioProfilesToSegment extends Command
 {
@@ -32,45 +35,39 @@ class AddImpactedCioProfilesToSegment extends Command
 
         $startDate = Carbon::now()->subDays($daysAgo)->startOfDay();
         $start = 'start';
+        $jobs = collect();
         do {
             try {
                 $response = $customerIoApiGateway->getActivities(
                     $accountConfigData['app_api_key'],
                     $activitieType,
                     null,
-                    100,
+                    10,
                     $start
                 );
                 $next = $response->next ?? "";
                 $start = $next;
 
-                $activities = collect($response->activities ?? [])
-                    ->filter(function ($activity) use ($startDate, $daysAgo) {
-                        $timestamp = Carbon::createFromTimestamp($activity->timestamp);
-                        return $timestamp->gte($startDate);
-                    });
-
-                $ids = collect($activities)->pluck('customer_identifiers.id')->unique()->toArray();
-
-                $this->info(
-                    'Adding ' . count($ids) . ' profiles to segment ' . $segmentId . ' for workspace ' . $workspaceName
+                $jobs->push(
+                    new AddImpactedCioProfilesToSegmentJob(
+                        $workspaceName,
+                        $segmentId,
+                        $startDate,
+                        $accountConfigData,
+                        $response->activities
+                    )
                 );
-
-                $customerIoApiGateway->addProfilesToSegment(
-                    $accountConfigData['site_id'],
-                    $accountConfigData['track_api_key'],
-                    $segmentId,
-                    $ids,
-                );
-
-                $this->info('Profiles added to segment');
-
-                // so we don't exceed the rate limit
-                sleep(1);
             } catch (Exception $e) {
                 $this->error($e->getMessage());
                 return;
             }
         } while ($next !== "");
+
+        try {
+            Bus::batch($jobs)->onQueue('command')->dispatch();
+        } catch (Throwable $e) {
+            $this->error($e->getMessage());
+            return;
+        }
     }
 }
