@@ -42,7 +42,7 @@ class AddImpactedCioProfilesToSegment extends Command
                     $accountConfigData['app_api_key'],
                     $activitieType,
                     null,
-                    10,
+                    100,
                     $start
                 );
                 $next = $response->next ?? "";
