@@ -8,6 +8,7 @@
 <script setup>
 import { watch, provide, onBeforeMount } from 'vue';
 import { useUserStore } from '../../stores/user';
+import { toKebabCase } from '../../utils.js'; 
 
 const props = defineProps({
   vueRouter: {
@@ -52,7 +53,14 @@ watch(
 watch(
   () => props.journeySection,
   (journeySection) => {
-    userStore.setJourneySection(journeySection);
+    const formattedJourneySection = () => {
+      if(journeySection.toLowerCase() === 'podcast') {
+        return 'podcasts';
+      } else {
+        return toKebabCase(journeySection);
+      }
+    };
+    userStore.setJourneySection(formattedJourneySection());
   },
   { immediate: true }
 );
