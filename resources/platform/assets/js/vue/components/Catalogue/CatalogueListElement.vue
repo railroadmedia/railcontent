@@ -1,10 +1,7 @@
 <template>
     <div
         class="tw-snap-center tw-flex tw-flex-col tw-group tw-py-3 tw-w-full dark:tw-border-[#223F57] tw-inline"
-        :class="[
-            class_object,
-            classOverride,
-        ]">
+        :class="wrapperClasses">
         <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
             <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
@@ -152,6 +149,10 @@ const { brand } = storeToRefs(userStore);
 
 
 const props = defineProps({
+    wrapperClassOverride: {
+        type: String,
+        default: '',
+    },
     item: {
         type: Object,
         default: () => ({}), // Default empty object
@@ -327,11 +328,12 @@ const mappedData = computed(() => {
     return contentModel.value.card
 });
 
-const class_object = computed(() => ({
+const wrapperClasses = computed(() => {
+    return {
     'no-access': noAccess.value,
     completed: props.item.completed,
-    'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
-}));
+    [props.wrapperClassOverride]: props.wrapperClassOverride
+}});
 
 const is_added = computed(() => props.item.is_added_to_primary_playlist);
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
@@ -355,4 +357,4 @@ onUnmounted(() => {
 
 const emit = defineEmits(['addToList', 'progressReset']);
 
-</script>../../utils.js../../../stores/user.js
+</script>

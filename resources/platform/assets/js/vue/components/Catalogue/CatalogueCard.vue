@@ -323,16 +323,15 @@ const mappedData = computed(() => {
     return contentModel.value.card
 });
 
-const defaultWrapperClasses = 'tw-snap-center tw-flex tw-flex-col tw-group lg:tw-w-auto tw-shrink-0 tw-w-[267px] tw-mr-3 lg:tw-mr-0';
 
 const wrapperClasses = computed(() => {
-    const override = props.wrapperClassOverride;
+    const defaultWrapperClasses = 'tw-snap-center tw-flex tw-flex-col tw-group lg:tw-w-auto tw-shrink-0 tw-w-[267px] tw-mr-3 lg:tw-mr-0';
     return ({
         [defaultWrapperClasses]: defaultWrapperClasses,
         'no-access': noAccess.value,
         completed: props.item.completed,
         'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
-        [override]: override,
+        [props.wrapperClassOverride]: props.wrapperClassOverride,
     })
 });
 
