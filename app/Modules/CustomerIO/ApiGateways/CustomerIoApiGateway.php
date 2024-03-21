@@ -3,6 +3,7 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class CustomerIoApiGateway
 {
@@ -581,11 +582,15 @@ class CustomerIoApiGateway
         $headers[] = 'Content-Type: application/json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result = json_decode(curl_exec($ch), true);
+        $response = curl_exec($ch);
+        Log::info('Customer.io addProfilesToSegment response: ' . $response);
+        $result = json_decode($response, true);
+        Log::info('Customer.io addProfilesToSegment result: ' . var_export($result, true));
 
         if (curl_errno($ch)) {
             throw new Exception('Customer.io addProfilesToSegment api call failed: ' . curl_error($ch));
         }
+
 
         // empty result means success for some reason...
         if ($result !== []) {
