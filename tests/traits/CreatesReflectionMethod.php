@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Ecommerce\tests\Unit\Jobs\Traits;
+namespace Tests\traits;
 
 use ReflectionException;
 use ReflectionMethod;

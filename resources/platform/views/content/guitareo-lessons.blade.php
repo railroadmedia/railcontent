@@ -87,7 +87,6 @@
                                 limit="10"
                                 :lock-unowned="true"
                                 :force-wide-thumbs="true"
-                                :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newCourses }}"
                                 :full-width-on-mobile="{{ true }}"
                             >
@@ -125,7 +124,6 @@
                                 limit="10"
                                 :lock-unowned="true"
                                 :force-wide-thumbs="true"
-                                :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newQuickTips }}"
                                 :full-width-on-mobile="{{ true }}"
                             >
