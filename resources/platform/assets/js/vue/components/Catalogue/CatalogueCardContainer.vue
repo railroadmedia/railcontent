@@ -12,8 +12,7 @@
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
-                    <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
-                        :break-to-list-view="breakToListView" :is-single-row="isSingleRow" />
+                    <SkeletonLoader :count="skeletonCardCount" :type="showListElement ? 'listElement' : 'card'" :is-single-row="isSingleRow" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
@@ -24,7 +23,7 @@
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
                 <template v-else>
-                    <CatalogueListElement v-if="displayInline || (breakToListView && smallerThanLg)"
+                    <CatalogueListElement v-if="showListElement"
                         v-for="item in getData" :key="'catalogue-list' + item.id" :item="item" :content-type="item.type"
                         :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
@@ -165,6 +164,10 @@ const getData = computed(() => {
 const breakToListView = computed(() => {
     return !showGroupBy.value && (isWorkout.value || isChallenge.value);
 })
+
+const showListElement = computed(() => {
+    return props.displayInline || (breakToListView.value && smallerThanLg);
+});
 
 const showSkeletonLoader = computed(() => {
     return !props.noSkeleton && collectionStoreLoading.value;
