@@ -4,6 +4,7 @@ namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
+use Illuminate\Support\Str;
 
 class FiltersJourneyService
 {
@@ -12,6 +13,9 @@ class FiltersJourneyService
         $filters = collect($props['filters'] ?? [])->map(
             function ($filter) {
                 $filterTag = explode(',', $filter);
+                if (count($filterTag) !== 2) {
+                    return null;
+                }
                 return [
                     'filter_category' => $filterTag[0],
                     'filter_tag' => $filterTag[1],
@@ -28,8 +32,8 @@ class FiltersJourneyService
             AvoHelper::defaultEventProperties(
                 [
                     'filters' => $filters,
-                    'navigation_section' => $props['section'],
-                    'brand' => $props['brand'],
+                    'navigation_section' => Str::kebab(strtolower($props['section'] ?? '')),
+                    'brand' => $props['brand'] ?? null,
                 ],
                 user()
             )
@@ -41,9 +45,9 @@ class FiltersJourneyService
         Avo::filter_group_applied(
             AvoHelper::defaultEventProperties(
                 [
-                    'filter_group' => $props['group'],
-                    'navigation_section' => $props['section'],
-                    'brand' => $props['brand'],
+                    'filter_group' => $props['group'] ?? null,
+                    'navigation_section' => Str::kebab(strtolower($props['section'] ?? '')),
+                    'brand' => $props['brand'] ?? null,
                 ],
                 user()
             )
@@ -55,10 +59,10 @@ class FiltersJourneyService
         $sortType = match ($props['sort']) {
             '-popularity' => 'Most Popular',
             'popularity' => 'Least Popular',
-            'slug' => 'Name: A to Z',
-            '-slug' => 'Name: Z to A',
-            'published_on' => 'Oldest first',
-            '-published_on' => 'Newest first',
+            'name' => 'Name: A to Z',
+            '-name' => 'Name: Z to A',
+            'published_on' => 'Oldest First',
+            '-published_on' => 'Newest First',
             default => 'Unknown',
         };
 
@@ -66,8 +70,8 @@ class FiltersJourneyService
             AvoHelper::defaultEventProperties(
                 [
                     'sorting_type' => $sortType,
-                    'navigation_section' => $props['section'],
-                    'brand' => $props['brand'],
+                    'navigation_section' => Str::kebab(strtolower($props['section'] ?? '')),
+                    'brand' => $props['brand'] ?? null,
                 ],
                 user()
             )
