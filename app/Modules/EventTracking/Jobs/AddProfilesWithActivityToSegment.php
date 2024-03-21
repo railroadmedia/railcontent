@@ -13,13 +13,12 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class AddImpactedCioProfilesToSegmentJob implements ShouldQueue
+class AddProfilesWithActivityToSegment implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
-    use SerializesModels;
 
     public function __construct(
         private readonly string $workspaceName,
