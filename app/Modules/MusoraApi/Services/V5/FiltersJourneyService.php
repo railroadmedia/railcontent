@@ -59,8 +59,8 @@ class FiltersJourneyService
         $sortType = match ($props['sort']) {
             '-popularity' => 'Most Popular',
             'popularity' => 'Least Popular',
-            'name' => 'Name: A to Z',
-            '-name' => 'Name: Z to A',
+            'slug' => 'Name: A to Z',
+            '-slug' => 'Name: Z to A',
             'published_on' => 'Oldest First',
             '-published_on' => 'Newest First',
             default => 'Unknown',
