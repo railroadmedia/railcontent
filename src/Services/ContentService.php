@@ -1655,9 +1655,9 @@ class ContentService
         $params = [];
 
         foreach ($contentIds as $contentId) {
-            $contentRow = $contentRowsById[$contentId];
+            $contentRow = $contentRowsById[$contentId] ?? null;
 
-            if (!empty($contentRow)) {
+            if (!is_null($contentRow)) {
                 // compile
                 $contentFieldRows = $contentsFieldRowsByContentId[$contentId] ?? collect();
                 $contentDataRows = $contentsDataRowsByContentId[$contentId] ?? collect();
