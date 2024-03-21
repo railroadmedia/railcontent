@@ -458,7 +458,7 @@ Route::domain('{musoraDomain}')
          * Primary Content Pages
          */
         Route::get('/{brand}/packs', [PackPagesController::class, 'index'])
-            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->whereIn('brand', all_brands())
             ->name('platform.packs');
 
         Route::get('/{brand}/search', [ContentPagesController::class, 'search'])
