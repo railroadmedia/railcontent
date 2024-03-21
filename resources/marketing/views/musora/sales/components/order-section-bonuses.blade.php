@@ -127,8 +127,13 @@
                             @if(!empty($bonus['price']))
                                     <s class="opacity-40">${{ $bonus['price'] }}</s>
                                 @endif
-                            <strong class="text-musora">FREE</strong></span><br>
-                        <em>
+                                @if(!empty($bonus['customText']))
+                                    <strong class="text-musora">{{ $bonus['customText'] }}</strong>
+                                @else
+                                    <strong class="text-musora">FREE</strong>
+                                @endif          
+                                <br>      
+                        <em> 
                             @if(!empty($bonus['shipping']))
                                 Free Shipping
                             @else

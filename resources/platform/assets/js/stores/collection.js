@@ -55,6 +55,7 @@ export const useCollectionStore = defineStore({
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
             this.filter.progress = '';
+            this.trackFilter();
             this.getData();
         },
 
@@ -71,11 +72,10 @@ export const useCollectionStore = defineStore({
 
             if (itemIndex === -1) {
                 this.filter.includedFields.push(param);
-                this.trackFilter();
             } else {
                 this.filter.includedFields.splice(itemIndex, 1);
-                // maybe track clear filter here
             }
+            this.trackFilter();
         },
 
         resetFilterFields() {
@@ -145,6 +145,11 @@ export const useCollectionStore = defineStore({
             //Get filters
             if (params.getAll('included_fields[]').length > 0) {
                 this.filter.includedFields = params.getAll('included_fields[]');
+            }
+
+            //GetProgress
+            if (params.getAll('included_user_states[]').length > 0) {
+                this.filter.progress = params.getAll('included_user_states[]')[0];
             }
         },
 
@@ -274,6 +279,10 @@ export const useCollectionStore = defineStore({
                 url.searchParams.set('tabs[]', this.tabData[this.filter.activeTab].key);
             }
 
+            if(this.filter.progress){
+                url.searchParams.set('included_user_states[]', this.filter.progress);
+            }
+
             window.history.pushState({}, '', url);
         },
 
@@ -288,8 +297,8 @@ export const useCollectionStore = defineStore({
             this.filter.sort = item;
             this.setAllTabsToFilterNotApplied();
             this.setActiveTabToFilterApplied();
-            this.getData();
             this.trackSort();
+            this.getData();
         },
 
         switchTab(tab) {
@@ -325,7 +334,7 @@ export const useCollectionStore = defineStore({
         trackSort() {
             const userStore = useUserStore();
             const payload = {
-                sort: sortValue,
+                sort: this.filter.sort,
                 section: userStore.journeySection,
                 brand: userStore.brand,
             };

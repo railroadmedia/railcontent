@@ -41,7 +41,7 @@
                 </ul>
                 @if(!empty($emailSignup))
                     <div class="max-w-xs sm:max-w-sm mx-auto sm:mx-0">
-                        <form id="ajaxForm" accept-charset="UTF-8" action="https://www.pianote.com/claim-spotify" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
+                        <form id="ajaxForm" accept-charset="UTF-8" action="{{ url()->route('claim-spotify') }}" class="ajax-form clearfix infusion-form facebook-track-lead w-full mx-auto" method="POST">
                             <input class="w-full mb-2 text-left rounded-full py-1.5 px-5 text-gray-400 text-base md:text-lg" name="email" type="email" placeholder="Email Address..." required/>
                             <button type="submit" class="submit join musora smaller w-full">
                                 <span class="pre-add">Get Started <i class="fad fa-paper-plane"></i></span>
@@ -55,14 +55,9 @@
                         </div>
                         <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
                             <h5 class="mx-auto"><strong><i class="fas fa-check"></i> Success!</strong></h5>
-                            <h2 class="leading-none text-pianote my-3 md:my-4 font-bebas"><strong>CHECK YOUR EMAIL</strong></h2>
-                            <p class="leading-normal mx-auto max-w-xl"><em>You should receive an email from team@pianote.com within 10 minutes.
+                            <h2 class="leading-none text-musora my-3 md:my-4 font-bebas">CHECK YOUR EMAIL</h2>
+                            <p class="leading-normal mx-auto max-w-xl"><em>You should receive an email from team@musora.com within 10 minutes.
                                     If you don’t, then check your spam folder or re-enter your email address again.</em></p>
-                            <div class="mt-5 lg:mt-6">
-                                <a href="https://youtube.com/user/pianolessonscom" target="_blank" class="text-white transition-opacity duration-300 py-3 w-14 h-14 text-3xl leading-none rounded-full inline-block text-center m-3 hover:opacity-70 youtube" style="background: #cd201f;"><i class="fab fa-youtube"></i></a>
-                                <a href="https://facebook.com/pianoteofficial" target="_blank" class="text-white transition-opacity duration-300 py-3 w-14 h-14 text-3xl leading-none rounded-full inline-block text-center m-3 hover:opacity-70 facebook" style="background: #3b5998;"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://instagram.com/pianoteofficial" target="_blank" class="text-white transition-opacity duration-300 py-3 w-14 h-14 text-3xl leading-none rounded-full inline-block text-center m-3 hover:opacity-70 instagram" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);"><i class="fab fa-instagram"></i></a>
-                            </div>
                         </div>
                     </div>
                 @else

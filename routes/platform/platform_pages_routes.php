@@ -80,6 +80,7 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/{brand}/artists/{slug}', [ContentPagesController::class, 'artistSongs'])
                     ->whereIn('brand', all_brands())
+                    ->where('slug', '(.*)')
                     ->name('platform.content.artist.show');
 
                 Route::get('/{brand}/genres/{genre}/{contentTypeName}', [ContentPagesController::class, 'genreContentByType'])
@@ -127,6 +128,7 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                         'student-focus',
                     ])
+                    ->where('genre', '(.*)')
                     ->name('platform.content.genre.show');
 
                 Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
@@ -850,7 +852,7 @@ Route::get(
         /*
          * Home Page
          */
-        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
+        Route::get('/{brand}/comments', [\App\Http\Controllers\Platform\CommentModerationController::class, 'comments'])
             ->whereIn('brand', all_brands())
             ->name('platform.members-area.comments');
     });

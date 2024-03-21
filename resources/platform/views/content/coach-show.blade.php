@@ -28,7 +28,7 @@
 @endphp
 
 
-@extends('partials.layout', ['trackingSectionName' => $thisCoach->fetch('fields.name')])
+@extends('partials.layout', ['trackingSectionName' => 'Coaches'])
 
 @section('meta')
     <title>{{ ucfirst($thisCoach->fetch('fields.name')) }} | Musora</title>

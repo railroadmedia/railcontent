@@ -112,6 +112,36 @@
                 </p>
             </div>
         @endslot
+
+        @slot('interactionSlot')
+            @if($lessonType === 'student-review' && $brand === 'singeo')
+                @include('partials._student-review-application-singeo')
+            @endif
+
+            @if($lessonType === 'student-review' && $brand === 'guitareo')
+                @include('partials._student-review-application-guitareo')
+            @endif
+
+            @if($lessonType === 'student-review' && $brand === 'pianote')
+                @include('partials._student-review-application-pianote')
+            @endif
+
+            @if($lessonType === 'student-focus' && $brand === 'drumeo')
+                @include('partials._student-focus-application-drumeo')
+            @endif
+
+            @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
+                @include('partials._student-collaboration-form')
+            @endif
+
+            @if($lessonType === 'question-and-answer')
+                @include('partials._ask-question-form')
+            @endif
+
+            @if($lessonType === 'routine')
+                @include('partials._routine-modal')
+            @endif
+        @endslot
     @endcomponent
 
 

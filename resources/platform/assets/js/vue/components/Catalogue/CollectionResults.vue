@@ -1,6 +1,9 @@
 <template>
     <div class="tw-mb-[30px]">
-        <slot></slot>
+        <div v-if="showEmptyState">
+            We couldn't find what you're looking for. Please try again!
+        </div>
+        <slot v-else></slot>
 
         <transition name="show-from-bottom">
             <div v-show="loading" id="loadingDialog" class="flex flex-row align-center">
@@ -14,12 +17,16 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, onUpdated } from "vue";
+import {computed, onMounted, onUnmounted, onUpdated} from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCollectionStore } from "../../../stores/collection";
 
 const props = defineProps({
+    content: {
+        type: Array,
+        default: [],
+    },
     currentPage: {
         type: Number,
         default: 1,
@@ -27,6 +34,18 @@ const props = defineProps({
     infiniteScroll: {
         type: Boolean,
         default: true,
+    },
+    searchTerm: {
+        type: String,
+        default: '',
+    },
+    selectedFilters: {
+        type: Object,
+        default: () => ({}),
+    },
+    selectedProgress: {
+        type: String,
+        default: '',
     },
     totalPages: {
         type: Number,
@@ -48,6 +67,10 @@ const infiniteScrollEventHandler = () => {
         emit('onLoadMore');
     }
 }
+
+const showEmptyState = computed(() => {
+    return (props.searchTerm || Object.keys(props.selectedFilters).length > 0 || props.selectedProgress) && !loading.value && props.content.length === 0;
+})
 
 onMounted(()=>{
     props.infiniteScroll && infiniteScrollEventHandler();

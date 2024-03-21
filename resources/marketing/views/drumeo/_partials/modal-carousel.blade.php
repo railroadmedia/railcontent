@@ -1,5 +1,6 @@
 <!-- To use this modal, add Focus Plugin (because of x-trap) in the head section before the Alpine.js script -->
 <!-- <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script> -->
+<!-- Splide 4.1.4 -->
 
 @props(['slides', 'scaleAnimation', 'handleClick'])
 
@@ -32,6 +33,7 @@
             pagination: false,
             start: this.imgIndex,
             perMove: 1,
+            gap: '1rem',
             swipe: true,
             arrows: true,
             breakpoints: {
@@ -76,7 +78,7 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
                 class="relative w-full overflow-y-visible max-w-6xl">
                 <div class="@if(!empty($styles)) {{ $styles }} @endif w-full relative px-3 sm:px-5">
                     <div x-ref="splide" class="splide">
-                        <div class="splide__track">
+                        <div class="splide__track rounded-xl">
                             <ul class="splide__list">
                                 <template x-for="(slide, index) in slides" :key="index">
                                     <li class="splide__slide">

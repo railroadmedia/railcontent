@@ -1,13 +1,14 @@
 <template>
   <PageHeaderLayout>
     <template v-slot:top-left>
-      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg" :additionalImgSrc="logo"
-        :infoData="ctasAndInfoInsideHero ? infoData : null">
+      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
+        :additionalImgSrc="logo" :infoData="ctasAndInfoInsideHero ? infoData : null" :hasCtas="hasSecondaryCtas">
         <template #header-info v-if="description">
           <span>
             {{ description }}
           </span>
         </template>
+
         <template #ctas>
           <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
             <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
@@ -23,9 +24,11 @@
         </template>
       </PageHeaderHero>
     </template>
+
     <template v-slot:bottom-full>
       <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
-        <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+        <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
+          :text="primaryCtaText" />
       </div>
       <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''"
         class="tw-flex tw-justify-between tw-items-center tw-w-full">
@@ -94,6 +97,7 @@ const primaryCtaText = computed(() => primaryCtaProps.value.text);
 const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
 const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'primary') || []);
+const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 

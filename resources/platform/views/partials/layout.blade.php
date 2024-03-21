@@ -7,7 +7,7 @@ $journeySection = '';
 
 if (isset($trackingSectionName)) {
     $journeySection = $trackingSectionName;
-} else if (isset($catalogueMeta) && $catalogueMeta['name']) {
+} else if (isset($catalogueMeta) && isset($catalogueMeta['name'])) {
     $journeySection = $catalogueMeta['name'];
 } else {
     $journeySection = 'Unknown';
@@ -132,10 +132,10 @@ if (isset($trackingSectionName)) {
                         z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
                         pendo.initialize({
                             visitor: {
-                                id: "{{ user()->email }}",
+                                id: {{ user()->id }},
                             },
                             account: {
-                                id: {{ user()->id }},
+                                id: "{{ user()->email }}",
                             }
                         });
                 })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');

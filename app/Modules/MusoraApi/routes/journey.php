@@ -7,7 +7,7 @@ Route::as('musora-api.')
     ->middleware('web_or_api_authenticated')
     ->group(function () {
         Route::post('/v5/journeys/{event}', [JourneyController::class, 'track'])
-            ->whereIn('event', config('journeys.v5.events'))
+            ->whereIn('event', array_keys(config('journeys.v5.schema')))
             ->middleware('api_version:v5')
             ->name('v5.journeys');
     });

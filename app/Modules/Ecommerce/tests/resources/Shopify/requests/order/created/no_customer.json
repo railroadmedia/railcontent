@@ -1,0 +1,536 @@
+{
+    "headers": {
+        "x-shopify-webhook-id": [
+            "efaeb749-ba9d-4648-9480-cc6bc13a2043"
+        ],
+        "x-shopify-triggered-at": [
+            "2024-01-31T16:33:03.497750198Z"
+        ],
+        "x-shopify-topic": [
+            "orders\/create"
+        ],
+        "x-shopify-test": [
+            "false"
+        ],
+        "x-shopify-shop-domain": [
+            "musora-dev-sync.myshopify.com"
+        ],
+        "x-shopify-order-id": [
+            "5670966231334"
+        ],
+        "x-shopify-hmac-sha256": [
+            "sRC\/CF+BLS2ntADP\/pr5oeN676RiFkfIgKdDdOWf2\/s="
+        ],
+        "x-shopify-api-version": [
+            "2023-07"
+        ],
+        "x-forwarded-proto": [
+            "https"
+        ],
+        "x-forwarded-for": [
+            "34.75.190.134"
+        ],
+        "content-type": [
+            "application\/json"
+        ],
+        "connection": [
+            "keep-alive"
+        ],
+        "cf-worker": [
+            "musora.com"
+        ],
+        "cf-warp-tag-id": [
+            "53caa182-786a-474a-8c66-ed9ace7ae83a"
+        ],
+        "cf-visitor": [
+            "{\"scheme\":\"https\"}"
+        ],
+        "cf-ray": [
+            "84e35ab7b4e1ad76-ATL"
+        ],
+        "cf-ipcountry": [
+            "US"
+        ],
+        "cf-ew-via": [
+            "15"
+        ],
+        "cf-connecting-ip": [
+            "34.75.190.134"
+        ],
+        "cdn-loop": [
+            "cloudflare; subreqs=1"
+        ],
+        "accept-encoding": [
+            "gzip"
+        ],
+        "accept": [
+            "*\/*"
+        ],
+        "content-length": [
+            "6471"
+        ],
+        "user-agent": [
+            "Shopify-Captain-Hook"
+        ],
+        "host": [
+            "brandonk.musora.com"
+        ]
+    },
+    "body": {
+        "id": 5760283541780,
+        "admin_graphql_api_id": "gid:\/\/shopify\/Order\/5760283541780",
+        "app_id": 1354745,
+        "browser_ip": "99.240.230.189",
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": null,
+        "checkout_id": 37314527232276,
+        "checkout_token": "d3a88a9e5b064c1ba60d6bdb9be2ca7b",
+        "client_details": {
+            "accept_language": null,
+            "browser_height": null,
+            "browser_ip": "99.240.230.189",
+            "browser_width": null,
+            "session_hash": null,
+            "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/122.0.0.0 Safari\/537.36"
+        },
+        "closed_at": null,
+        "company": null,
+        "confirmation_number": "NK7YQ6ENY",
+        "confirmed": true,
+        "contact_email": null,
+        "created_at": "2024-03-11T16:26:32-07:00",
+        "currency": "USD",
+        "current_subtotal_price": "0.00",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "41.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "41.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "41.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "0.00",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": "en",
+        "device_id": null,
+        "discount_codes": [
+            {
+                "code": "Mentor Product Knowledge - Includes 1 Singeo Straw for Carlos Borges",
+                "amount": "41.00",
+                "type": "percentage"
+            }
+        ],
+        "email": "",
+        "estimated_taxes": false,
+        "financial_status": "paid",
+        "fulfillment_status": null,
+        "landing_site": null,
+        "landing_site_ref": null,
+        "location_id": 93816291604,
+        "merchant_of_record_app_id": null,
+        "name": "#1200734",
+        "note": null,
+        "note_attributes": [],
+        "number": 1199734,
+        "order_number": 1200734,
+        "order_status_url": "https:\/\/shop.musora.com\/73541484820\/orders\/43cbaccea5aaa8ee69777629d54b8ead\/authenticate?key=2b9f6291b6f5f800715ba717f9268c76",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2024-03-11T16:26:32-07:00",
+        "reference": "f073f73dc73a16acb141b038a4cdfc99",
+        "referring_site": null,
+        "source_identifier": "f073f73dc73a16acb141b038a4cdfc99",
+        "source_name": "shopify_draft_order",
+        "source_url": null,
+        "subtotal_price": "0.00",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "tags": "",
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": false,
+        "token": "43cbaccea5aaa8ee69777629d54b8ead",
+        "total_discounts": "41.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "41.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "41.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "41.00",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "41.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "41.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "0.00",
+        "total_price": "0.00",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "0.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 480,
+        "updated_at": "2024-03-11T16:26:40-07:00",
+        "user_id": 106364141844,
+        "billing_address": null,
+        "customer": null,
+        "discount_applications": [
+            {
+                "target_type": "line_item",
+                "type": "manual",
+                "value": "100.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "title": "Mentor Product Knowledge - Includes 1 Singeo Straw for Carlos Borges",
+                "description": null
+            }
+        ],
+        "fulfillments": [],
+        "line_items": [
+            {
+                "id": 14675478380820,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14675478380820",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 1,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 100,
+                "name": "The Little Book of Arpeggios",
+                "price": "7.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "7.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "7.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8886201811220,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sku": "little-book-arpeggios",
+                "taxable": true,
+                "title": "The Little Book of Arpeggios",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47302667796756,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Pianote",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                    {
+                        "amount": "7.00",
+                        "amount_set": {
+                            "shop_money": {
+                                "amount": "7.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "7.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "discount_application_index": 0
+                    }
+                ]
+            },
+            {
+                "id": 14675478413588,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14675478413588",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 1,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 100,
+                "name": "The Little Book of Chord Progressions",
+                "price": "7.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "7.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "7.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8886200860948,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sku": "little-book-chord",
+                "taxable": true,
+                "title": "The Little Book of Chord Progressions",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47302664945940,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Pianote",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                    {
+                        "amount": "7.00",
+                        "amount_set": {
+                            "shop_money": {
+                                "amount": "7.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "7.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "discount_application_index": 0
+                    }
+                ]
+            },
+            {
+                "id": 14675478446356,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14675478446356",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 1,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 100,
+                "name": "The Little Book of Hanon",
+                "price": "7.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "7.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "7.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8883088621844,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sku": "little-book-hanon",
+                "taxable": true,
+                "title": "The Little Book of Hanon",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47297223885076,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Pianote",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                    {
+                        "amount": "7.00",
+                        "amount_set": {
+                            "shop_money": {
+                                "amount": "7.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "7.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "discount_application_index": 0
+                    }
+                ]
+            },
+            {
+                "id": 14675478479124,
+                "admin_graphql_api_id": "gid:\/\/shopify\/LineItem\/14675478479124",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 2,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 91,
+                "name": "Singing Straw",
+                "price": "10.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "10.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "10.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8801132806420,
+                "properties": [],
+                "quantity": 2,
+                "requires_shipping": true,
+                "sku": "singing-straw",
+                "taxable": true,
+                "title": "Singing Straw",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47070829445396,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Singeo",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                    {
+                        "amount": "20.00",
+                        "amount_set": {
+                            "shop_money": {
+                                "amount": "20.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "20.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "discount_application_index": 0
+                    }
+                ]
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [],
+        "shipping_address": null,
+        "shipping_lines": []
+    }
+}

@@ -21,12 +21,12 @@ class AddOrderTagsTest extends TestCase
 
     protected string $baseShopifyUrl;
 
-    public function test_adds_initial_order_tag()
+    public function test_adds_initial_order_tag_for_manual_source()
     {
         // the order id from the resource file
         $orderId = 5655911268646;
         $path = Storage::disk("ecommerce_test_resources")->path(
-            "Shopify/requests/order/updated/initial_physical_only.json"
+            "Shopify/requests/order/updated/first_physical_only.json"
         );
         $json = json_decode(file_get_contents($path), true);
 
@@ -38,7 +38,7 @@ class AddOrderTagsTest extends TestCase
             "$this->baseShopifyUrl/customers/*" => Http::response(
                 $this->fixture('customer.orders._only_physical_order')
             ),
-            // catch the graphql call to update the order, and return a valid extensions response
+            // catch the graphql call to update the order, and return a valid empty response
             "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
         ]);
 
@@ -63,12 +63,110 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
+    public function test_adds_initial_order_tag_for_revenuecat_initial_purchase()
+    {
+        // the order id from the resource file
+        $orderId = 5733522800934;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/drumeo_plus_monthly_membership_revenuecat_initial_purchase.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._revenuecat')
+            ),
+            // call to get the order's metafields: return back our fixture
+            "$this->baseShopifyUrl/orders/*" => Http::response(
+                $this->fixture('order.metafields._revenuecat_initial_purchase')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return strcmp(
+                        $message,
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
+                    ) === 0;
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the initial order tag
+        Http::assertSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([ShopifyTagEnum::InitialOrder->value])
+                );
+        });
+    }
+
+    public function test_does_not_add_initial_order_tag_for_revenuecat_renewal()
+    {
+        // the order id from the resource file
+        $orderId = 5732685316390;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/drumeo_plus_monthly_membership_revenuecat_renewal.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._revenuecat')
+            ),
+            // call to get the order's metafields: return back our fixture
+            "$this->baseShopifyUrl/orders/*" => Http::response(
+                $this->fixture('order.metafields._revenuecat_renewal')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return strcmp(
+                        $message,
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
+                    ) === 0;
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job does not send out the HTTP request to the graphql endpoint with the initial order tag
+        Http::assertNotSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains($request->data()['query'], 'tags: ["'.ShopifyTagEnum::InitialOrder->value.'"]');
+        });
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the membership renewal tag
+        Http::assertSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([ShopifyTagEnum::MembershipRenewal->value])
+                );
+        });
+    }
+
     public function test_skips_initial_order_tag_if_already_present()
     {
         // the order id from the resource file
         $orderId = 5655911268646;
         $path = Storage::disk("ecommerce_test_resources")->path(
-            "Shopify/requests/order/updated/initial_physical_only.json"
+            "Shopify/requests/order/updated/first_physical_only.json"
         );
         $json = json_decode(file_get_contents($path), true);
 
@@ -83,7 +181,7 @@ class AddOrderTagsTest extends TestCase
             "$this->baseShopifyUrl/customers/*" => Http::response(
                 $this->fixture('customer.orders._only_physical_order')
             ),
-            // catch the graphql call to update the order, and return a valid extensions response
+            // catch the graphql call to update the order, and return a valid empty response
             "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
         ]);
 
@@ -98,7 +196,45 @@ class AddOrderTagsTest extends TestCase
 
         AddOrderTags::dispatchSync($orderData);
 
-        // make sure the job sends out the HTTP request to the graphql endpoint with the initial order tag
+        // make sure the job does not send out the HTTP request to the graphql endpoint with the initial order tag
+        Http::assertNotSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains($request->data()['query'], 'tags: ["'.ShopifyTagEnum::InitialOrder->value.'"]');
+        });
+    }
+
+    public function test_does_not_add_initial_order_tag_for_subscription_contract()
+    {
+        $orderId = 5739903844644;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/musora_annual_membership_recharge_renewal.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._musora_annual_membership_recharge')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return strcmp(
+                        $message,
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: (none)",
+                    ) === 0;
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job does not send out the HTTP request to the graphql endpoint with the initial order tag
         Http::assertNotSent(function (Request $request) {
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains($request->data()['query'], 'tags: ["'.ShopifyTagEnum::InitialOrder->value.'"]');
@@ -120,7 +256,7 @@ class AddOrderTagsTest extends TestCase
             "$this->baseShopifyUrl/customers/*" => Http::response(
                 $this->fixture('customer.orders._drumeo_memberships')
             ),
-            // catch the graphql call to update the order, and return a valid extensions response
+            // catch the graphql call to update the order, and return a valid empty response
             "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
         ]);
 
@@ -132,8 +268,8 @@ class AddOrderTagsTest extends TestCase
                     $message,
                     [
                         "AddOrderTags: Adding tags to Shopify Order $orderId: ",
-                        ShopifyTagEnum::InitialOrder->value,
-                        ShopifyTagEnum::TrialStart->value
+                        ShopifyTagEnum::TrialStart->value,
+                        ShopifyTagEnum::InitialOrder->value
                     ]
                 );
             });
@@ -145,7 +281,7 @@ class AddOrderTagsTest extends TestCase
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
-                    'tags: '.json_encode([ShopifyTagEnum::InitialOrder->value, ShopifyTagEnum::TrialStart->value])
+                    'tags: '.json_encode([ShopifyTagEnum::TrialStart->value, ShopifyTagEnum::InitialOrder->value])
                 );
         });
     }
@@ -167,7 +303,11 @@ class AddOrderTagsTest extends TestCase
             "$this->baseShopifyUrl/customers/*" => Http::response(
                 $this->fixture('customer.orders._drumeo_trial_discount_allocation')
             ),
-            // catch the graphql call to update the order, and return a valid extensions response
+            // call to get the order's metafields: return back our fixture
+            "$this->baseShopifyUrl/orders/*" => Http::response(
+                $this->fixture('order.metafields._drumeo_trial_discount_allocation')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
             "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
         ]);
 
@@ -192,7 +332,7 @@ class AddOrderTagsTest extends TestCase
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
-                    'tags: '.json_encode([ShopifyTagEnum::InitialOrder->value, ShopifyTagEnum::TrialStart->value])
+                    'tags: '.json_encode([ShopifyTagEnum::TrialStart->value, ShopifyTagEnum::InitialOrder->value])
                 );
         });
     }
@@ -214,17 +354,21 @@ class AddOrderTagsTest extends TestCase
             "$this->baseShopifyUrl/customers/*" => Http::response(
                 $this->fixture('customer.orders._drumeo_memberships')
             ),
-            // catch the graphql call to update the order, and return a valid extensions response
+            // catch the graphql call to update the order, and return a valid empty response
             "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
         ]);
 
         Log::shouldReceive("info")
             ->once()
             ->withArgs(function ($message) use ($orderId) {
-                return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::TrialConversion->value
-                    ) === 0;
+                return Str::containsAll(
+                    $message,
+                    [
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ",
+                        ShopifyTagEnum::InitialOrder->value,
+                        ShopifyTagEnum::TrialConversion->value
+                    ]
+                );
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -234,7 +378,7 @@ class AddOrderTagsTest extends TestCase
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
-                    'tags: '.json_encode([ShopifyTagEnum::TrialConversion->value])
+                    'tags: '.json_encode([ShopifyTagEnum::TrialConversion->value, ShopifyTagEnum::InitialOrder->value])
                 );
         });
     }
@@ -256,17 +400,21 @@ class AddOrderTagsTest extends TestCase
             "$this->baseShopifyUrl/customers/*" => Http::response(
                 $this->fixture('customer.orders._drumeo_memberships')
             ),
-            // catch the graphql call to update the order, and return a valid extensions response
+            // catch the graphql call to update the order, and return a valid empty response
             "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
         ]);
 
         Log::shouldReceive("info")
             ->once()
             ->withArgs(function ($message) use ($orderId) {
-                return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
-                    ) === 0;
+                return Str::containsAll(
+                    $message,
+                    [
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ",
+                        ShopifyTagEnum::InitialOrder->value,
+                        ShopifyTagEnum::MembershipRenewal->value
+                    ]
+                );
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -276,10 +424,52 @@ class AddOrderTagsTest extends TestCase
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
-                    'tags: '.json_encode([ShopifyTagEnum::MembershipRenewal->value])
+                    'tags: '.json_encode([
+                        ShopifyTagEnum::MembershipRenewal->value,
+                        ShopifyTagEnum::InitialOrder->value
+                    ])
                 );
         });
     }
+
+    public function test_handles_order_with_no_customer()
+    {
+        // the order id from the resource file
+        $orderId = 5760283541780;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/no_customer.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return strcmp(
+                        $message,
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
+                    ) === 0;
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the initial order tag
+        Http::assertSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([ShopifyTagEnum::InitialOrder->value])
+                );
+        });
+    }
+
 
     protected function setUp(): void
     {
