@@ -12,6 +12,7 @@ use Railroad\Railcontent\Services\ConfigService;
 class CommentRepository extends RepositoryBase
 {
     use ByContentIdTrait;
+
     /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.
      * If the value it' is false the comment with all his replies will be deleted.
      * If it's true the comment with the replies are only soft deleted (marked as deleted).
@@ -113,10 +114,10 @@ class CommentRepository extends RepositoryBase
         $this->orderDirection = $orderByDirection;
 
         $this->orderTableName = ($orderByColumn == 'like_count' ?
-            ConfigService::$tableCommentLikes:
+            ConfigService::$tableCommentLikes :
             ConfigService::$tableComments);
 
-        $this->orderTable = ($orderByColumn == 'like_count' ? '':
+        $this->orderTable = ($orderByColumn == 'like_count' ? '' :
             ConfigService::$tableComments);
 
         return $this;
@@ -125,8 +126,10 @@ class CommentRepository extends RepositoryBase
     /** Get all the comments that meet the search criteria, paginated
      * @return array
      */
-    public function getComments()
-    {
+    public function getComments(
+        $searchTerm = '',
+        $mineOnly = false
+    ) {
         if ($this->orderBy == 'replied_on') {
             $query =
                 $this->query()
@@ -134,7 +137,11 @@ class CommentRepository extends RepositoryBase
                     ->aggregateOrderTable($this->orderTableName)
                     ->addSelect($this->databaseManager->raw('child_comment.created_on as child_created_on'))
                     ->addSelect($this->databaseManager->raw('child_comment.id as child_id'))
-                    ->addSelect($this->databaseManager->raw('GREATEST(COALESCE(child_comment.created_on, "0000-00-00 00.00:00"), COALESCE(' . ConfigService::$tableComments . '.created_on, "0000-00-00 00.00:00")) as replied_on'))
+                    ->addSelect(
+                        $this->databaseManager->raw(
+                            'GREATEST(COALESCE(child_comment.created_on, "0000-00-00 00.00:00"), COALESCE(' . ConfigService::$tableComments . '.created_on, "0000-00-00 00.00:00")) as replied_on'
+                        )
+                    )
                     ->leftJoin(
                         ConfigService::$tableComments . ' as child_comment',
                         'child_comment.parent_id',
@@ -150,7 +157,9 @@ class CommentRepository extends RepositoryBase
                                 function (Builder $builder) {
                                     $builder->selectRaw('MAX(id) as id')
                                         ->from(ConfigService::$tableComments . ' as child_sub_comment')
-                                        ->whereRaw('child_sub_comment.parent_id = ' . ConfigService::$tableComments . '.id');
+                                        ->whereRaw(
+                                            'child_sub_comment.parent_id = ' . ConfigService::$tableComments . '.id'
+                                        );
                                 }
                             )
                                 ->orWhereNull('child_comment.id');
@@ -163,13 +172,14 @@ class CommentRepository extends RepositoryBase
                     ->restrictByConversationStatus()
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
+                    ->searchExpression($searchTerm)
+                    ->mineOnlyExpression($mineOnly)
                     ->selectCommentLikeCounts()
                     ->orderByRaw('replied_on ' . ($this->orderDirection))
                     ->groupBy(['child_comment.created_on', 'child_comment.id'])
                     ->directPaginate($this->page, 25);
 
             $rows = $query->get()->toArray();
-
         } else {
             $query = $this->query()
                 ->selectColumns()
@@ -182,6 +192,8 @@ class CommentRepository extends RepositoryBase
                 ->restrictByVisibility()
                 ->restrictByAssignedUserId()
                 ->onlyComments()
+                ->searchExpression($searchTerm)
+                ->mineOnlyExpression($mineOnly)
                 ->selectCommentLikeCounts()
                 ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
                 ->orderBy('created_on', 'desc', ConfigService::$tableComments)
@@ -191,8 +203,7 @@ class CommentRepository extends RepositoryBase
         }
 
 
-
-        $repliesRows =  $this->getRepliesByCommentIds(array_column($rows, 'id'));
+        $repliesRows = $this->getRepliesByCommentIds(array_column($rows, 'id'));
 
         return $this->parseRows($rows, $repliesRows);
     }
@@ -470,13 +481,14 @@ class CommentRepository extends RepositoryBase
 
         $repliesRowsGrouped = ContentHelper::groupArrayBy($repliesRows, 'parent_id');
 
-        foreach($rows as $row){
+        foreach ($rows as $row) {
             $comment = [
                 'id' => $row['id'],
                 'comment' => $row['comment'],
                 'content_id' => $row['content_id'],
                 'parent_id' => $row['parent_id'],
                 'user_id' => $row['user_id'],
+                'assigned_moderator_id' => $row['assigned_moderator_id'],
                 'conversation_status' => $row['conversation_status'],
                 'display_name' => $row['display_name'],
                 'created_on' => $row['created_on'],
@@ -576,9 +588,9 @@ class CommentRepository extends RepositoryBase
             $this->query()
                 ->where(['user_id' => $userId])
                 ->update([
-                             'deleted_at' => Carbon::now()
-                                 ->toDateTimeString(),
-                         ]);
+                    'deleted_at' => Carbon::now()
+                        ->toDateTimeString(),
+                ]);
 
         return $deleted;
     }

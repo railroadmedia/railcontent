@@ -51,12 +51,13 @@ class CommentJsonController extends Controller
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
         CommentRepository::$assignedToUserId = $request->get('assigned_to_user_id', false);
         CommentRepository::$conversationStatus = $request->get('conversation_status', false);
-
-        $commentData = $this->commentService->getComments(
+        $commentData = $this->commentService->getModeratorComments(
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
-            auth()->id() ?? null
+            auth()->id() ?? null,
+            $request->get('searchTerm', ''),
+            $request->get('mineOnly', false) == "true",
         );
 
         return reply()->json(
@@ -101,6 +102,80 @@ class CommentJsonController extends Controller
             [$comment],
             [
                 'transformer' => DataTransformer::class,
+            ]
+        );
+    }
+
+    public function assignModerator(int $commentId)
+    {
+        $comment = $this->commentService->get($commentId);
+        if ($comment['assigned_moderator_id']) {
+            throw  new NotAllowedException('Comment was assigned to another moderator.');
+        }
+        //update comment with the data sent on the request
+        $comment = $this->commentService->update(
+            $commentId,
+            ['assigned_moderator_id' => auth()->id() ?? null]
+        );
+
+        //if the user it's not logged in into the application
+        throw_if(
+            ($comment === 0),
+            new NotAllowedException('Only registered user can modify own comments. Please sign in.')
+        );
+
+        //if the update response method = -1 => the user have not rights to update other user comment; we throw the exception
+        throw_if(
+            ($comment === -1),
+            new NotAllowedException('Update failed, you can update only your comments.')
+        );
+
+        //if the update method response it's null the comment not exist; we throw the proper exception
+        throw_if(
+            is_null($comment),
+            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+        );
+
+        return reply()->json(
+            [$comment],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
+    }
+
+    public function unassignModerator(int $commentId)
+    {
+        //update comment with the data sent on the request
+        $comment = $this->commentService->update(
+            $commentId,
+            ['assigned_moderator_id' => null]
+        );
+
+        //if the user it's not logged in into the application
+        throw_if(
+            ($comment === 0),
+            new NotAllowedException('Only registered user can modify own comments. Please sign in.')
+        );
+
+        //if the update response method = -1 => the user have not rights to update other user comment; we throw the exception
+        throw_if(
+            ($comment === -1),
+            new NotAllowedException('Update failed, you can update only your comments.')
+        );
+
+        //if the update method response it's null the comment not exist; we throw the proper exception
+        throw_if(
+            is_null($comment),
+            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+        );
+
+        return reply()->json(
+            [$comment],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
             ]
         );
     }
@@ -269,10 +344,10 @@ class CommentJsonController extends Controller
         $this->commentService->reportComment($id);
 
         $input['subject'] =
-            'Comment reported by '.
-            $currentUser['display_name'].
-            " (".
-            $currentUser['email'].
+            'Comment reported by ' .
+            $currentUser['display_name'] .
+            " (" .
+            $currentUser['email'] .
             ")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
@@ -282,28 +357,28 @@ class CommentJsonController extends Controller
 
         $input['unsubscribeLink'] = '';
         $input['alert'] =
-            'Comment reported by '.
-            $currentUser['display_name'].
-            " (".
-            $currentUser['email'].
+            'Comment reported by ' .
+            $currentUser['display_name'] .
+            " (" .
+            $currentUser['email'] .
             ")";
 
-        $input['logo'] = config('mailora.'.$brand.'.logo-link');
+        $input['logo'] = config('mailora.' . $brand . '.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] =  config('mailora.'.$brand.'.report-comment-recipient');
+        $input['recipient'] = config('mailora.' . $brand . '.report-comment-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
-                                        "success" => false,
-                                        "message" => $exception->getMessage()
-                                    ], 500);
+                "success" => false,
+                "message" => $exception->getMessage()
+            ], 500);
         }
 
         return response()->json([
-                                 "success" => true,
-                                 "message" => "The comment was reported"
-                             ], 200);
+            "success" => true,
+            "message" => "The comment was reported"
+        ], 200);
     }
 }
