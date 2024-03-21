@@ -333,8 +333,10 @@ export const useCollectionStore = defineStore({
 
         trackSort() {
             const userStore = useUserStore();
+            // next line is needed for the sort to be tracked correctly (ex: packs)
+            const sort = this.filter.sort.includes('title') ? this.filter.sort.replace('title', 'slug') : this.filter.sort;
             const payload = {
-                sort: this.filter.sort,
+                sort,
                 section: userStore.journeySection,
                 brand: userStore.brand,
             };
