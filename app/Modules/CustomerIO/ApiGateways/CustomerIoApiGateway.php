@@ -560,12 +560,18 @@ class CustomerIoApiGateway
     ): void {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id');
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id'
+        );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 
-        Log::info('Customer.io addProfilesToSegment customerIds: ' . var_export($customerIds, true));
+        Log::info(
+            'Customer.io addProfilesToSegment ' . count($customerIds) . ' customerIds: ' . json_encode($customerIds)
+        );
 
         $dataArray = [
             'ids' => $customerIds,
