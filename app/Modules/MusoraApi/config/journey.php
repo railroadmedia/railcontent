@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Validation\Rule;
+
 return [
     'v5' => [
         'events' => [
@@ -12,7 +14,7 @@ return [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
                 'filters' => ['nullable', 'array'],
-                'filters.*' => ['required', 'string'],
+                'filters.*' => ['required', 'string', 'regex:/([A-Z]|[a-z])\w+,([a-z]|[A-Z])\w+/'],
                 'progress' => ['nullable', 'string']
             ],
             'filter-group-applied' => [
@@ -23,7 +25,11 @@ return [
             'sorting-applied' => [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
-                'sort' => ['required', 'string'],
+                'sort' => [
+                    'required',
+                    'string',
+                    Rule::in(['-popularity', 'popularity', 'name', '-name', 'published_on', '-published_on'])
+                ],
             ],
         ]
     ],
