@@ -170,11 +170,10 @@ class FiltersHelper
     }
 
     /**
-     * @param $request
+     * @param string $title
      */
-    private static function processTitleFilter($request)
+    private static function processTitleFilter(string $title)
     {
-        $title = $request->input('title');
         if (self::$groupBy == 'artist' || self::$groupBy == 'style') {
             self::$requiredFields[] = self::$groupBy.',%'.$title.'%,string,like';
         } elseif (self::$groupBy == 'instructor') {
