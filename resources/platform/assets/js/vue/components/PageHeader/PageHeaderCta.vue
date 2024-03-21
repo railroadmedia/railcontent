@@ -1,7 +1,7 @@
 <template>
     <a v-if="url" :href="url"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
-        :class="buttonConditionalClasses">
+        :class="[buttonConditionalClasses, disabledClasses]">
         <MusoraIcon v-if="musoraIconName && iconPosition === 'left'" :icon-name="musoraIconName" :class="iconClass" />
         <i v-else-if="faIconClass && iconPosition === 'left'" class="fas" :class="faIconClass"></i>
 
@@ -16,7 +16,7 @@
     </a>
     <button v-else @click.prevent="emitClick"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-p-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
-        :class="buttonConditionalClasses">
+        :class="[buttonConditionalClasses, disabledClasses]">
         <MusoraIcon v-if="musoraIconName && iconPosition === 'left'" :icon-name="musoraIconName" :class="iconClass" />
         <i v-else-if="faIconClass && iconPosition === 'left'" class="fas" :class="faIconClass"></i>
 
@@ -50,6 +50,7 @@ const props = defineProps({
     onClickCallback: Function,
     showTextMobileHideDesktop: Boolean,
     showAllAlways: Boolean,
+    disabled: Boolean,
 });
 
 const hasIcon = computed(() => {
@@ -60,6 +61,9 @@ const iconClass = computed(() => {
     return ['tw-w-6 tw-h-6'];
 });
 
+const disabledClasses = computed(() => {
+    return props.disabled ? 'tw-opacity-50 tw-cursor-not-allowed disabled' : '';
+});
 
 const textSpanClass = computed(() => {
     const classes = [];

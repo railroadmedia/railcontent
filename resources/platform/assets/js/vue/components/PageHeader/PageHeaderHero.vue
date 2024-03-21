@@ -7,7 +7,7 @@
     </template>
     <template v-else-if="heroImg">
       <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
-        <div class="square">
+        <div :class="heroImgClasses ?? 'square'">
           <img class="rounded inset-border" :src="heroImg">
         </div>
       </div>
@@ -78,6 +78,7 @@ import PageHeaderRowInfo from "./PageHeaderRowInfo";
 const props = defineProps({
   iconName: String,
   heroImg: String,
+  heroImgClasses: String,
   title: String,
   infoData: Array,
   additionalImgSrc: String,

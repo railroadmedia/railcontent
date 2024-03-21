@@ -12,7 +12,8 @@
                 'payload' => [
                     'coachId' => $thisCoach->fetch('id')
                 ],
-                'faIconClass' => 'fa-bell'
+                'faIconClass' => 'fa-bell',
+                'showAllAlways' => true,
             ]
         ]
     ];

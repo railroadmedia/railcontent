@@ -2,13 +2,15 @@
   <PageHeaderLayout>
     <template #top-left>
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :additionalImgSrc="logo" :infoData="ctasAndInfoInsideHero ? infoData : null" :hasCtas="hasSecondaryCtas">
+        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo" :infoData="ctasAndInfoInsideHero ? infoData : null"
+        :hasCtas="ctasAndInfoInsideHero && hasSecondaryCtas">
         <template #header-info v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
               <span v-html="description" />
             </div>
-            <div v-if="ctasBesideHero" class="tw-flex tw-flex-col ctas-container 'sm:tw-hidden' tw-flex-shrink-0">
+            <div v-if="ctasBesideHero || isCoachPage"
+              class="tw-flex tw-flex-col ctas-container sm:tw-hidden tw-flex-shrink-0">
               <CtaResolver :ctas="secondaryCtas" />
             </div>
           </div>
@@ -28,19 +30,20 @@
           <template #progress-text v-if="progressBarData.labelText">{{ progressBarData.labelText }} -&nbsp;</template>
         </ProgressText>
         <PageHeaderCtasBox :class="{
-        'tw-hidden sm:tw-flex': ctasBesideHero,
+        'tw-hidden sm:tw-flex': ctasBesideHero && !isNotificationsPage,
+        'tw-flex': isNotificationsPage
       }" :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
       </div>
     </template>
     <template #bottom-full>
       <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
-        <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
+        <PageHeaderPrimaryCta class="tw-mt-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
           :text="primaryCtaText" />
       </div>
-      <div class="tw-justify-between tw-items-center tw-w-full" :class="{
+      <div class="tw-mt-3 tw-justify-between tw-items-center tw-w-full" :class="{
         'tw-flex': isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage,
         'tw-flex sm:tw-hidden': isPackBundlePage || isForumThreadPage || isCoursePage,
-        'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage && !isLearningPathLevelPage && !isLearningPathCoursePage && !isForumThreadPage
+        'tw-hidden': !isSongsPage && !isLearningPathLevelPage && !isLearningPathCoursePage && !isCoursePage && !isPackBundlePage && !isForumThreadPage
       }">
         <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage" class="tw-self-end"
           :infoData="infoData" />
@@ -72,6 +75,7 @@ const props = defineProps({
   title: String,
   subTitle: String,
   heroImg: String,
+  heroImgClasses: String,
   additionalImgSrc: String,
   darkModeLogo: String,
   lightModeLogo: String,
@@ -94,9 +98,12 @@ const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
 const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'primary') || []);
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
-
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
+const isDashboardPage = computed(() => props.pageType === 'dashboard')
+const isNotificationsPage = computed(() => props.pageType === 'notifications')
+
+const isCoachPage = computed(() => props.pageType === 'instructor')
 const isCoursePage = computed(() => props.pageType === 'course')
 const isPackOverviewPage = computed(() => props.pageType === 'pack')
 const isPackBundlePage = computed(() => props.pageType === 'pack-bundle')
@@ -116,9 +123,9 @@ const isStudentFocusCatalougePage = computed(() => isStudentReviewPage.value || 
 const isForumsPage = computed(() => props.pageType === 'forums');
 const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
 
-const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value);
+const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value);
 
-const ctasAndInfoInsideHero = computed(() => isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value);
+const ctasAndInfoInsideHero = computed(() => isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
 
 const progressBarData = computed(() => {
   return {

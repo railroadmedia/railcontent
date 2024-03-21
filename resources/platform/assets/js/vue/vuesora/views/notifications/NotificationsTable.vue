@@ -1,31 +1,6 @@
 <template>
-    <div class="tw-flex tw-flex-col">
-        <div class="tw-flex tw-flex-row tw-pb-8 tw-items-center tw-flex-wrap tw-justify-between">
-            <div class="tw-flex tw-flex-row tw-items-center">
-                <BellIcon class="tw-h-[26px] tw-w-[26px] tw-mr-[10px] tw-text-white" />
-                <h1 class="tw-text-xl md:tw-text-2xl tw-font-bold tw-mb-2">
-                    Notifications
-                </h1>
-            </div>
-
-            <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mr-[12px]">
-                <button class="tw-btn-primary tw-bg-white tw-text-[#00101D]"  :disabled="!hasUnread"
-                    @click.stop="markAllAsRead">
-                    <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
-                    Mark All As Read
-                </button>
-            </div>
-
-            <div class="tw-flex tw-flex-col">
-                <a :href="settingsUrl" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white">
-                    <CogIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
-                    Notification Settings
-                </a>
-            </div>
-            </div>
-        </div>
-
+    <PageHeader pageType="notifications" title="Notifications" iconName="fa-bell" :ctas="headerCtas" />
+    <div class="tw-flex tw-flex-col tw-container tw-mx-auto tw-px-0 md:tw-px-8 tw-mt-[33px]">
         <div v-if="notifications.length === 0" class="tw-flex tw-flex-row">
             <p class="tw-text-sm text-grey-3 dark:tw-text-[#9EC0DC] tw-italic">
                 You do not appear to have any notifications at this time.
@@ -45,6 +20,7 @@
 import { onMounted, ref, computed } from 'vue';
 import * as QueryString from 'query-string';
 import NotificationsTableRow from './_NotificationsTableRow.vue';
+import PageHeader from '../../../components/PageHeader/PageHeader.vue';
 import Pagination from '../../components/Pagination.vue';
 import UserService from '../../assets/js/services/user';
 import { BellIcon } from '@heroicons/vue/solid';
@@ -100,7 +76,29 @@ const currentPage = computed(() => {
     return 1;
 });
 
-function markAllAsRead() {
+const headerCtas = computed(() => {
+    return [
+        {
+            type: 'PageHeaderCta',
+            props: {
+                text: 'Mark All As Read',
+                faIconClass: 'fa-eye',
+                onClickCallback: markAllAsRead,
+                disabled: !hasUnread.value,
+            },
+        },
+        {
+            type: 'PageHeaderCta',
+            props: {
+                text: 'Notification Settings',
+                faIconClass: 'fa-cog',
+                url: props.settingsUrl,
+            },
+        },
+    ];
+});
+
+const markAllAsRead = () => {
     if (!markingAllAsRead.value) {
         markingAllAsRead.value = true;
 
@@ -118,7 +116,7 @@ function markAllAsRead() {
     }
 };
 
-function markAsRead(payload) {
+function markAsRead (payload) {
     const index = notificationsArray.value.map(notification => notification.id).indexOf(payload.id);
 
     if (payload.isRead) {
@@ -142,7 +140,7 @@ function markAsRead(payload) {
     }
 };
 
-function handlePageChange(payload) {
+function handlePageChange (payload) {
     const urlParams = QueryString.parse(location.search);
 
     urlParams.page = payload.page;
