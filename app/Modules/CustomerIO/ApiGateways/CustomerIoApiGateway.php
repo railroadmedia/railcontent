@@ -565,6 +565,8 @@ class CustomerIoApiGateway
         curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 
+        Log::info('Customer.io addProfilesToSegment customerIds: ' . var_export($customerIds, true));
+
         $dataArray = [
             'ids' => $customerIds,
         ];
