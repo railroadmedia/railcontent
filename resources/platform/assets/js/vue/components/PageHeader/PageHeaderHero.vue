@@ -1,7 +1,8 @@
 <template>
   <div class="tw-flex tw-items-center">
     <template v-if="iconName">
-      <i v-if="isFontAswesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2" :class="iconName"></i>
+      <i v-if="isFontAswesome" class="fas tw-hidden sm:tw-block tw-text-3xl dark:tw-text-white tw-mr-2"
+        :class="iconName"></i>
       <musora-icon v-else :icon-name="iconName"
         class="tw-hidden sm:tw-block tw-w-[35px] tw-h-[35px] dark:tw-text-white tw-mr-2" />
     </template>
@@ -21,7 +22,8 @@
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] sm:tw-h-[86px]">
           </template>
           <template v-else>
-            <span v-if="title" class="tw-text-[20px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white tw-capitalize">
+            <span v-if="title" class="tw-text-[20px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white"
+              :class="{ 'tw-capitalize': !heroImgClasses }">
               {{ title }}
             </span>
           </template>
