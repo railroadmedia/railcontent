@@ -13,6 +13,8 @@ class Subscription
 
     public ?Carbon $createdAt;
     public int $id;
+    public int $customerId;
+    public ?string $email = null;
     public ?Product $product = null;
     public ?int $shopifyVariantId;
     public string $status;
@@ -22,6 +24,8 @@ class Subscription
     public function __construct($subscriptionData)
     {
         $this->id = $subscriptionData->id;
+        $this->customerId = $subscriptionData->customer_id;
+        $this->email = $subscriptionData->email ?? null;
         $this->createdAt = $subscriptionData->created_at? Carbon::parse($subscriptionData->created_at) : null;
 
         $this->cancellationReason = $subscriptionData->cancellation_reason;

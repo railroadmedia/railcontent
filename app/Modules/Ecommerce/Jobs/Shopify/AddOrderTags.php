@@ -35,7 +35,7 @@ class AddOrderTags implements ShouldQueue
 
     protected const TIMEOUT = 840;
     protected Shopify $shopify;
-    protected Customer $customer;
+    protected ?Customer $customer;
     /** @var Collection<Order> $otherOrders */
     protected Collection $otherOrders;
     /** @var Collection<ShopifyTagEnum> $tagsToAdd */
@@ -88,6 +88,11 @@ class AddOrderTags implements ShouldQueue
      */
     protected function getOtherOrders(): Collection
     {
+        // it's possible for there to be no customer on the order, so we just need to return the empty collection then
+        if (is_null($this->customer)) {
+            return collect();
+        }
+
         // DEV NOTE: make sure we have the status param, otherwise archived orders will be skipped
         $customerOrders = $this->shopify->getCustomerOrders($this->customer->id, ['status' => 'any']);
         $this->handleRateLimit();
@@ -132,6 +137,11 @@ class AddOrderTags implements ShouldQueue
      */
     protected function isTrialConversion(): bool
     {
+        // if there are no other orders for the customer, it can't be a trial conversion
+        if ($this->otherOrders->isEmpty()) {
+            return false;
+        }
+
         // this order needs to be for a paid membership
         if ($this->order->totalPrice <= 0 || !$this->order->isMembershipOrder()) {
             return false;
@@ -169,6 +179,11 @@ class AddOrderTags implements ShouldQueue
      */
     protected function isMembershipRenewal(): bool
     {
+        // if there are no other orders for the customer, it can't be a membership renewal
+        if ($this->otherOrders->isEmpty()) {
+            return false;
+        }
+
         // this order needs to be for a paid membership
         if ($this->order->totalPrice <= 0 || !$this->order->isMembershipOrder()) {
             return false;
@@ -248,7 +263,7 @@ class AddOrderTags implements ShouldQueue
                 mutation {
                     tagsAdd (
                         id: "{$this->order->gid}"
-                        tags: $this->tagsToAdd
+                        tags: {$this->tagsToAdd->values()}
                     ) {
                     node {
                         id
@@ -275,6 +290,7 @@ class AddOrderTags implements ShouldQueue
                 $this->executeQuery($gql);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+                Log::debug($gql);
             }
         }
     }

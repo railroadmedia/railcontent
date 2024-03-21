@@ -3,6 +3,7 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class CustomerIoApiGateway
 {
@@ -473,6 +474,129 @@ class CustomerIoApiGateway
         // empty result means success for some reason...
         if ($result !== []) {
             throw new Exception('Customer.io deleteCustomer api call failed: ' . curl_error($ch));
+        }
+
+        curl_close($ch);
+    }
+
+    /**
+     * @param string $customerIoAppApiKey
+     * @param string|null $type
+     * @param string|null $name
+     * @param int|null $limit
+     * @param string|null $startToken
+     * @return mixed
+     * @throws Exception
+     */
+    public function getActivities(
+        string $customerIoAppApiKey,
+        ?string $type = null,
+        ?string $name = null,
+        ?int $limit = 10,
+        ?string $startToken = null
+    ): mixed {
+        $ch = curl_init();
+
+        $params = [];
+
+        if (!empty($type)) {
+            $params['type'] = $type;
+        }
+        if (!empty($name)) {
+            $params['name'] = $name;
+        }
+        if (!empty($limit)) {
+            $params['limit'] = $limit;
+        }
+        if (!empty($startToken)) {
+            $params['start'] = $startToken;
+        }
+
+        $paramsString = http_build_query($params);
+
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'https://beta-api.customer.io/v1/api/activities?' . $paramsString
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+        $headers = [];
+        $headers[] = 'Authorization: Bearer ' . $customerIoAppApiKey;
+        $headers[] = 'Content-Type: application/json';
+        $headers[] = 'Accept: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $apiResponse = curl_exec($ch);
+
+        $result = json_decode($apiResponse);
+
+        if (curl_errno($ch)) {
+            throw new Exception('Customer.io getCustomerActivities api call failed: ' . curl_error($ch));
+        }
+
+        // empty result means success for some reason...
+        if (!empty($result->errors)) {
+            throw new Exception(
+                'Customer.io getCustomerActivities api call failed: ' .
+                curl_error($ch) .
+                ' - ' .
+                var_export($result, true), 404
+            );
+        }
+
+        curl_close($ch);
+
+        return $result;
+    }
+
+    public function addProfilesToSegment(
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        int $segmentId,
+        array $customerIds,
+    ): void {
+        $ch = curl_init();
+
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id'
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+
+        $dataArray = [
+            'ids' => array_values($customerIds),
+        ];
+
+        curl_setopt(
+            $ch,
+            CURLOPT_POSTFIELDS,
+            json_encode($dataArray)
+        );
+
+        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        $headers = [];
+        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $response = curl_exec($ch);
+        Log::info('Customer.io addProfilesToSegment response: ' . $response);
+        $result = json_decode($response, true);
+
+        if (curl_errno($ch)) {
+            throw new Exception('Customer.io addProfilesToSegment api call failed: ' . curl_error($ch));
+        }
+
+        // empty result means success for some reason...
+        if ($result !== []) {
+            throw new Exception('Customer.io addProfilesToSegment api call failed: ' . curl_error($ch));
         }
 
         curl_close($ch);
