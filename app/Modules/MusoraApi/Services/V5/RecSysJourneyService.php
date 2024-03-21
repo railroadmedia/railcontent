@@ -13,9 +13,9 @@ class RecSysJourneyService
         Avo::homepage_content_clicked(
             AvoHelper::defaultEventProperties(
                 [
-                    'brand' => $props['brand'],
-                    'homepage_section' => $props['section'],
-                    'content_id' => $props['contentId'],
+                    'brand' => $props['brand'] ?? null,
+                    'homepage_section' => $props['section'] ?? null,
+                    'content_id' => $props['contentId'] ?? null,
                 ],
                 user()
             )
@@ -27,8 +27,8 @@ class RecSysJourneyService
         Avo::homepage_section_see_all_clicked(
             AvoHelper::defaultEventProperties(
                 [
-                    'brand' => $props['brand'],
-                    'homepage_section' => $props['section'],
+                    'brand' => $props['brand'] ?? null,
+                    'homepage_section' => $props['section'] ?? null,
                 ],
                 user()
             )
