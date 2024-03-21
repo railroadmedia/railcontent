@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use ReflectionException;
 use Signifly\Shopify\Shopify;
 use Tests\BaseTestCase;
+use Tests\traits\CreatesReflectionMethod;
 
 class HandlesShopifyRateLimitTest extends BaseTestCase
 {

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use ReflectionException;
 use Tests\BaseTestCase;
+use Tests\traits\CreatesReflectionMethod;
 
 class LogsShopifyTest extends BaseTestCase
 {
