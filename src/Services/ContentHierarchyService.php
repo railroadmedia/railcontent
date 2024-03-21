@@ -89,6 +89,7 @@ class ContentHierarchyService
      */
     public function create($parentId, $childId, $childPosition = null)
     {
+        $existingHierarchy = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
         $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
             $parentId,
             $childId,
@@ -101,7 +102,9 @@ class ContentHierarchyService
         //delete the cached results for child id
         CacheHelper::deleteCache('content_' . $childId);
 
-        event(new HierarchyUpdated($parentId));
+        if(!$existingHierarchy){
+            event(new HierarchyUpdated($parentId));
+        }
 
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
 
