@@ -586,9 +586,7 @@ class CustomerIoApiGateway
         $headers[] = 'Content-Type: application/json';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $response = curl_exec($ch);
-        Log::info('Customer.io addProfilesToSegment response: ' . $response);
-        $result = json_decode($response, true);
+        $result = json_decode(curl_exec($ch), true);
 
         if (curl_errno($ch)) {
             throw new Exception('Customer.io addProfilesToSegment api call failed: ' . curl_error($ch));
