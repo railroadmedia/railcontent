@@ -76,7 +76,8 @@ class AddImpactedCioProfilesToSegment extends Command
         } while ($next !== "" && count($ids) > 0);
 
         try {
-            Bus::batch($jobs)->onQueue('command')->dispatch();
+            $batch = Bus::batch($jobs)->onQueue('command')->dispatch();
+            $this->info("AddImpactedCioProfilesToSegment: Batch {$batch->id} dispatched.");
         } catch (Throwable $e) {
             $this->error($e->getMessage());
             return;
