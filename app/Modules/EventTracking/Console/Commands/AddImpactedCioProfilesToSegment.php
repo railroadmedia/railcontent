@@ -28,7 +28,7 @@ class AddImpactedCioProfilesToSegment extends Command
     {
         $workspaceName = $this->argument('workspaceName');
         $segmentId = $this->argument('segmentId');
-        $activitieType = $this->argument('activityType');
+        $activityType = $this->argument('activityType');
         $daysAgo = $this->argument('daysAgo');
         $accountConfigData = $customerIoService->getAccountConfigData($workspaceName);
 
@@ -39,7 +39,7 @@ class AddImpactedCioProfilesToSegment extends Command
             try {
                 $response = $customerIoApiGateway->getActivities(
                     $accountConfigData['app_api_key'],
-                    $activitieType,
+                    $activityType,
                     null,
                     100,
                     $start
