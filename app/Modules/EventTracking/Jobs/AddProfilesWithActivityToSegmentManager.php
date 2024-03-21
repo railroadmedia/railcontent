@@ -74,6 +74,9 @@ class AddProfilesWithActivityToSegmentManager implements ShouldQueue
                 )
             );
 
+            // so we don't hit the rate limit
+            sleep(3);
+
             if ($next) {
                 $this->batch()->add(
                     new AddProfilesWithActivityToSegmentManager(
