@@ -4,6 +4,7 @@ namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
+use Illuminate\Support\Str;
 
 class FiltersJourneyService
 {
@@ -28,7 +29,7 @@ class FiltersJourneyService
             AvoHelper::defaultEventProperties(
                 [
                     'filters' => $filters,
-                    'navigation_section' => $props['section'],
+                    'navigation_section' => Str::kebab(strtolower($props['section'])),
                     'brand' => $props['brand'],
                 ],
                 user()
@@ -42,7 +43,7 @@ class FiltersJourneyService
             AvoHelper::defaultEventProperties(
                 [
                     'filter_group' => $props['group'],
-                    'navigation_section' => $props['section'],
+                    'navigation_section' => Str::kebab(strtolower($props['section'])),
                     'brand' => $props['brand'],
                 ],
                 user()
@@ -57,8 +58,8 @@ class FiltersJourneyService
             'popularity' => 'Least Popular',
             'slug' => 'Name: A to Z',
             '-slug' => 'Name: Z to A',
-            'published_on' => 'Oldest first',
-            '-published_on' => 'Newest first',
+            'published_on' => 'Oldest First',
+            '-published_on' => 'Newest First',
             default => 'Unknown',
         };
 
@@ -66,7 +67,7 @@ class FiltersJourneyService
             AvoHelper::defaultEventProperties(
                 [
                     'sorting_type' => $sortType,
-                    'navigation_section' => $props['section'],
+                    'navigation_section' => Str::kebab(strtolower($props['section'])),
                     'brand' => $props['brand'],
                 ],
                 user()
