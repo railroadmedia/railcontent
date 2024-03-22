@@ -11,6 +11,7 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -61,61 +62,10 @@ class ContentJsonController extends Controller
     public function index(Request $request)
     {
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        if ($request->has('statuses')) {
-            ContentRepository::$availableContentStatues = $request->get('statuses');
-        }
 
-        if ($request->has('include_future_content')) {
-            ContentRepository::$pullFutureContent = $request->has('include_future_content');
-        }
-        if ($request->has('count_filter_items')) {
-            ContentRepository::$countFilterOptionItems = $request->has('count_filter_items');
-        }
-        if ($request->has('without_enrollment')) {
-            ContentRepository::$getEnrollmentContent = !$request->has('without_enrollment');
-        }
+        FiltersHelper::prepareFiltersFields();
 
-        $futureScheduledContentOnly = false;
-        if ($request->has('include_future_scheduled_content_only') &&
-            $request->get('include_future_scheduled_content_only') != 'false') {
-            ContentRepository::$pullFutureContent = true;
-            $futureScheduledContentOnly = true;
-        }
-
-        if ($request->has('only_from_my_list') && ($request->get('only_from_my_list') == "true")) {
-            $myList = $this->userPlaylistsService->getUserPlaylist(
-                user()->id,
-                'user-playlist',
-                config('railcontent.brand')
-            );
-            $myListIds = \Arr::pluck($myList, 'id');
-            ContentRepository::$includedInPlaylistsIds = $myListIds;
-        }
-
-        $required_fields = $request->get('required_fields', []);
-        $included_fields = $request->get('included_fields', []);
-
-        if ($request->has('term')) {
-            $required_fields[] = 'name,%'.$request->get('term').'%,string,like';
-            if ($request->get('sort') == '-score') {
-                $request->merge(['sort' => 'published_on']);
-            }
-        }
-
-        $group_by = null;
         $contentTypes = $request->get('included_types', []);
-        if ($request->has('is_all') && ($request->get('is_all') === "true")) {
-            $required_fields[] =
-                'published_on,'.
-                Carbon::now()
-                    ->subMonth(3)
-                    ->toDateTimeString().
-                ',date,>=';
-        }
-
-        $required_user_states = $request->get('required_user_states', []);
-        [$group_by, $required_fields, $included_fields, $required_user_states] =
-            $this->extractFields($request, $required_fields, $included_fields, $required_user_states, $group_by);
 
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -124,16 +74,16 @@ class ContentJsonController extends Controller
             $contentTypes,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $required_fields,
-            $included_fields,
-            $required_user_states,
+            FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
+            FiltersHelper::$requiredUserStates,
             $request->get('included_user_states', []),
             $request->get('include_filters', true),
             false,
             true,
             $request->get('only_subscribed', false),
-            $futureScheduledContentOnly,
-            $group_by ?? null,
+            FiltersHelper::$futureScheduledContentOnly,
+            FiltersHelper::$groupBy ?? null,
         );
 
         $filters = $contentData['filter_options'];
@@ -498,18 +448,12 @@ class ContentJsonController extends Controller
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
-        $requiredFields = $request->get('required_fields', []);
-        $requiredUserState = $request->get('required_user_states', []);
         $sortedBy = $request->get('sort', $sortedBy);
 
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
 
-        if ($request->has('future')) {
-            ContentRepository::$pullFutureContent = true;
-        } else {
-            ContentRepository::$pullFutureContent = false;
-        }
+        FiltersHelper::prepareFiltersFields();
 
         if (!empty($types)) {
             $results = $this->contentService->getFiltered(
@@ -519,9 +463,9 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                $requiredFields,
+                FiltersHelper::$requiredFields,
                 [],
-                $requiredUserState,
+                FiltersHelper::$requiredUserStates,
                 [],
                 true
             );
@@ -540,87 +484,5 @@ class ContentJsonController extends Controller
     public function countLessonsAndAssignments($contentId)
     {
         return $this->contentService->countLessonsAndAssignments($contentId);
-    }
-
-    /**
-     * @param Request $request
-     * @param mixed $required_fields
-     * @param mixed $included_fields
-     * @param string|null $group_by
-     * @return array
-     */
-    private function extractFields(
-        Request $request,
-        mixed $required_fields,
-        mixed $included_fields,
-        mixed $required_user_states,
-        ?string $group_by
-    )
-    : array {
-        $tabs = $request->get('tabs', $request->get('tab', false));
-        if ($tabs) {
-            if (!is_array($tabs)) {
-                $tabs = [$tabs];
-            }
-            foreach ($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-                if ($extra['0'] == 'length_in_seconds' || $extra['0'] == 'topic') {
-                    $required_fields[] = $tab;
-                }
-                if (count($extra) == 1 && $extra[0] == 'complete') {
-                    $required_user_states[] = 'completed';
-                }
-                if (count($extra) == 1 && $extra[0] == 'inProgress') {
-                    $required_user_states[] = 'started';
-                }
-            }
-        }
-
-        if ($request->has('title') && ($group_by == 'artist' || $group_by == 'style')) {
-            $required_fields[] = $group_by.',%'.$request->get('title').'%,string,like';
-        } elseif ($request->has('title') && $group_by == 'instructor') {
-            $instructors = $this->contentService->getWhereTypeInAndStatusAndField(
-                ['instructor'],
-                'published',
-                'name',
-                '%'.$request->get('title').'%',
-                'string',
-                'LIKE'
-            )
-                ->pluck('id')
-                ->toArray();
-            if (empty($instructors)) {
-                $required_fields[] = 'instructor,0,integer,=';
-            }
-            foreach ($instructors ?? [] as $instructor) {
-                $required_fields[] = 'instructor,'.$instructor.',integer,=';
-            }
-        } elseif ($request->has('title')) {
-            $instructors = $this->contentService->getWhereTypeInAndStatusAndField(
-                ['instructor'],
-                'published',
-                'name',
-                '%'.$request->get('title').'%',
-                'string',
-                'LIKE'
-            );
-
-            $instructorIds =
-                implode(
-                    '-',
-                    $instructors->pluck('id')
-                        ->toArray()
-                );
-
-            $included_fields[] = 'title|artist|album|genre|instructor,%'.$request->get('title').'%,string,like,'.$instructorIds ;
-        }
-
-        return [$group_by, $required_fields, $included_fields, $required_user_states];
     }
 }
