@@ -1,7 +1,6 @@
 // tailwind.config.js
 const stylesoraTheme = require('../platform/assets/js/stylesora/theme');
 const plugin = require('tailwindcss/plugin');
-const colors = require("tailwindcss/colors");
 const { keyframes } = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -17,7 +16,6 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
-      ...colors,
       ...stylesoraTheme.colors,
     },
     extend: {
@@ -60,7 +58,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/container-queries'),
     //Stylesora's Base Styles
     require("../platform/assets/js/stylesora/base")(),
