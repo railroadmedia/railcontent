@@ -27,6 +27,7 @@ use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Enums\RecommenderSection;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
@@ -104,25 +105,18 @@ class ContentPagesController extends BaseController
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
 
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
-        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
 
         // make sure we only show scheduled content if it is set in the future
         $futureScheduledContentOnly = true;
 
-        if (user()->isAdmin()) {
-            ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
+        // Admin users have access to drafts
+        if (user()->isAdmin() || user()->permission_level === 'administrator') {
+            ContentRepository::$availableContentStatues[] = ContentService::STATUS_DRAFT;
         }
 
         if (empty($lessonType) || empty($catalogueMeta)) {
             throw new NotFoundHttpException();
-        }
-
-        if (user()->permission_level === 'administrator') {
-            ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
         ContentRepository::$pullFutureContent = false;
@@ -133,55 +127,7 @@ class ContentPagesController extends BaseController
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
-        $searchTerm = null;
-
-        if (!empty($request->get('term', null))) {
-            $searchTerm = $request->get('term', null);
-        }
-
-        if (!empty($searchTerm)) {
-            $searchResults = $this->fullTextSearchService->search(
-                $request->get('term', null),
-                $request->get('page', 1),
-                $request->get('limit', 20),
-                [$lessonType],
-                $request->get('statuses', []),
-                $request->get('sort', '-score'),
-                $request->get('date_time_cutoff', null),
-                $request->get('brands', null),
-                $request->get('coach_ids', [])
-            );
-
-            $listLessons = new ContentFilterResultsEntity([
-                                                              'results' => $searchResults['results'],
-                                                              'total_results' => $searchResults['total_results'],
-                                                              'filter_options' => [],
-                                                          ]);
-        }
-        $required_fields = $request->get('required_fields', []);
-        if ($request->get('tabs', false)) {
-            $tabs = $request->get('tabs');
-
-            if (!is_array($request->get('tabs'))) {
-                $tabs = [$request->get('tabs')];
-            }
-
-            foreach ($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-                if ($extra['0'] == 'length_in_seconds') {
-                    $required_fields[] = $tab;
-                }
-                if ($extra['0'] == 'topic') {
-                    $required_fields[] = $tab;
-                }
-            }
-        }
+        FiltersHelper::prepareFiltersFields();
 
         if ($contentTypeName == 'songs') {
             ContentRepository::$catalogMetaAllowableFilters =
@@ -193,20 +139,19 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $required_fields,
-                $request->get('included_fields', []),
-                $request->get('required_user_states', []),
+                FiltersHelper::$requiredFields,
+                FiltersHelper::$includedFields,
+                FiltersHelper::$requiredUserStates,
                 $request->get('included_user_states', []),
                 true,
                 false,
                 true,
                 false,
                 false,
-                $group_by ?? false
+                FiltersHelper::$groupBy ?? false
             );
         } else {
             ContentRepository::$pullFutureContent = true;
-
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -214,16 +159,16 @@ class ContentPagesController extends BaseController
                 [$lessonType],
                 $request->get('slug_hierarchy', []),
                 $request->get('required_parent_ids', []),
-                $required_fields,
-                $request->get('included_fields', []),
-                $request->get('required_user_states', []),
+                FiltersHelper::$requiredFields,
+                FiltersHelper::$includedFields,
+                FiltersHelper::$requiredUserStates,
                 $request->get('included_user_states', []),
                 true,
                 false,
                 true,
                 false,
                 $futureScheduledContentOnly,
-                $group_by ?? false
+                FiltersHelper::$groupBy ?? false
             );
         }
 
@@ -288,7 +233,6 @@ class ContentPagesController extends BaseController
                 "catalogueMeta" => $catalogueMeta,
                 "artistsNumber" => $artists,
                 "songsNumber" => $listLessons->totalResults(),
-                "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
                 "allArtistUrl" => url()->route('platform.content.artists.show'),
@@ -304,7 +248,6 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
-                "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
             ]);
@@ -1586,49 +1529,18 @@ class ContentPagesController extends BaseController
      */
     private function getListLessionsFromRequest(Request $request)
     {
-        $required_fields = $request->get('required_fields', []);
-        if ($request->get('tabs', false)) {
-            $tabs = $request->get('tabs');
-
-            if (!is_array($request->get('tabs'))) {
-                $tabs = [$request->get('tabs')];
-            }
-
-            foreach ($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-                if ($extra['0'] == 'length_in_seconds') {
-                    $required_fields[] = $tab;
-                }
-                if ($extra['0'] == 'topic') {
-                    $required_fields[] = $tab;
-                }
-            }
-        }
-        $required_fields[] =
-            'published_on,'.
-            Carbon::now()
-                ->subMonth(3)
-                ->toDateTimeString().
-            ',date,>=';
-
-        $lessonType = ContentTypes::newContentTypes();
-        $filteredType = $request->get('included_types');
+        $request->merge(['is_all' => "true"]);
+        FiltersHelper::prepareFiltersFields();
 
         return $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
             '-published_on',
-            $filteredType ?? $lessonType,
+            $request->get('included_types', ContentTypes::newContentTypes()),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $required_fields,
-            $request->get('included_fields', []),
+            FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
             true,
@@ -1785,9 +1697,9 @@ class ContentPagesController extends BaseController
         return null;
     }
 
-
-    public function removeWithKey($array, $initKey) {
-        if(($key = array_search($initKey, $array)) !== false) {
+    public function removeWithKey($array, $initKey)
+    {
+        if (($key = array_search($initKey, $array)) !== false) {
             unset($array[$key]);
         }
 
