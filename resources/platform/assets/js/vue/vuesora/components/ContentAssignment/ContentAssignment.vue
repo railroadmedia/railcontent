@@ -544,7 +544,7 @@ export default {
 }
 
 .complete-column {
-    margin-top: $gutterWidth / 2;
+    margin-top: calc(#{$gutterWidth} / 2);
 
     @include medium {
         margin-top: 0;

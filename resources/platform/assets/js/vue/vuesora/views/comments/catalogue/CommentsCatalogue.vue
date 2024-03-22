@@ -885,17 +885,17 @@ export default {
 }
 
 .comment-data {
-    padding: #{$gutterWidth / 2} 0;
+    padding: calc(#{$gutterWidth} / 2) 0;
 
     @include small {
-        padding: $gutterWidth / 2;
+        padding: calc(#{$gutterWidth} / 2);
     }
 }
 
 .active-comment {
     width: 100%;
     max-width: 960px;
-    margin: 0 auto #{$gutterWidth / 2};
+    margin: 0 auto calc(#{$gutterWidth} / 2);
 }
 
 .comment-item .user-name {
