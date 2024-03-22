@@ -4258,16 +4258,16 @@
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.40.0",
+            "version": "v1.41.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "fb2cc48fbdda164d457df3107464b3d205a25529"
+                "reference": "d934742d9efdf66ae3fe79fccdf34bda74dfb477"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/fb2cc48fbdda164d457df3107464b3d205a25529",
-                "reference": "fb2cc48fbdda164d457df3107464b3d205a25529",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/d934742d9efdf66ae3fe79fccdf34bda74dfb477",
+                "reference": "d934742d9efdf66ae3fe79fccdf34bda74dfb477",
                 "shasum": ""
             },
             "require": {
@@ -4309,9 +4309,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.40.0"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.41.0"
             },
-            "time": "2024-03-15T18:39:38+00:00"
+            "time": "2024-03-22T12:59:36+00:00"
         },
         {
             "name": "google/common-protos",
@@ -10135,16 +10135,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.59",
+            "version": "v3.1.60",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "44145f892a8ba53f9391d89be46c17676d19dfbf"
+                "reference": "9c75fb731f1e86fe88c42566b7c9d6db9653c9b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/44145f892a8ba53f9391d89be46c17676d19dfbf",
-                "reference": "44145f892a8ba53f9391d89be46c17676d19dfbf",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9c75fb731f1e86fe88c42566b7c9d6db9653c9b9",
+                "reference": "9c75fb731f1e86fe88c42566b7c9d6db9653c9b9",
                 "shasum": ""
             },
             "require": {
@@ -10174,9 +10174,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.59"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.60"
             },
-            "time": "2024-03-18T07:03:42+00:00"
+            "time": "2024-03-22T13:08:10+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10369,16 +10369,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.67",
+            "version": "v2.1.68",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "6833aac923f3b6e599b5c571e4e699135afa17e4"
+                "reference": "40ddc8077beb79eab2ad519d2b12e4487b1c6995"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/6833aac923f3b6e599b5c571e4e699135afa17e4",
-                "reference": "6833aac923f3b6e599b5c571e4e699135afa17e4",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/40ddc8077beb79eab2ad519d2b12e4487b1c6995",
+                "reference": "40ddc8077beb79eab2ad519d2b12e4487b1c6995",
                 "shasum": ""
             },
             "require": {
@@ -10433,9 +10433,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.67"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.68"
             },
-            "time": "2024-03-22T07:09:31+00:00"
+            "time": "2024-03-22T13:05:11+00:00"
         },
         {
             "name": "railroad/railforums",
