@@ -20,6 +20,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -76,14 +77,14 @@ class PackPagesController extends Controller
         PackDecorator::$skip = true;
         ContentRepository::$countFilterOptionItems = true;
         ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
-        $requiredFields = [];
-        if ($request->has('title')) {
-            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
-        }
+
+        FiltersHelper::prepareFiltersFields();
+
         if(user()->isPackOnlyOwner()){
             ContentRepository::$getEnrollmentContent = false;
         }
-        $packs = $this->packService->getPacks($requiredFields, $request->get('sort','-progress'));
+
+        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort','-progress'));
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs['results'] as $packIndex => $pack) {
