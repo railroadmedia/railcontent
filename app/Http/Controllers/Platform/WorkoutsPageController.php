@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Services\CarouselService;
+use Google\Service\Gmail\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -21,10 +23,11 @@ class WorkoutsPageController extends BaseController
      * @param ContentService $contentService
      * @param CarouselService $carouselService
      */
-    public function __construct(ContentService $contentService,
+    public function __construct(
+        ContentService $contentService,
         CarouselService $carouselService,
-        UserContentProgressService $userContentProgressService)
-    {
+        UserContentProgressService $userContentProgressService
+    ) {
         $this->contentService = $contentService;
         $this->carouselService = $carouselService;
         $this->userContentProgressService = $userContentProgressService;
@@ -33,35 +36,12 @@ class WorkoutsPageController extends BaseController
     public function showWorkoutsPage(Request $request, $domain, $brand)
     {
         $lessonType = 'workout';
-        $requiredFields = $request->get('required_fields', []);
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$lessonType] ?? [];
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
 
-        if($request->get('tabs', false)){
-            $tabs = $request->get('tabs');
-
-            if(!is_array($request->get('tabs'))){
-                $tabs = [$request->get('tabs')];
-            }
-
-            foreach($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $requiredFields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-                if ($extra['0'] == 'length_in_seconds') {
-                    $requiredFields[] = $tab;
-                }
-                if ($extra['0'] == 'topic') {
-                    $requiredFields[] = $tab;
-                }
-            }
-        }
+        FiltersHelper::prepareFiltersFields();
 
         $workouts = $this->contentService->getFiltered(
             $request->get('page', 1),
@@ -70,8 +50,8 @@ class WorkoutsPageController extends BaseController
             [$lessonType],
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $requiredFields,
-            $request->get('included_fields', []),
+            FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
             true,
@@ -79,42 +59,38 @@ class WorkoutsPageController extends BaseController
             true,
             false,
             false,
-            $group_by ?? false
+            FiltersHelper::$groupBy
         );
 
-            $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
-                auth()->id(),
-                [$lessonType],
-                'started',
-                'updated_on',
-                'desc',
-                4
-            );
-            $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
-            $lessons->transform(function ($lesson){
-                $lesson = collect($lesson);
-                return $lesson->only(['id','slug','type','fields','data','url','published_on','instructors'])->toArray();
+        $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
+            auth()->id(),
+            [$lessonType],
+            'started',
+            'updated_on',
+            'desc',
+            4
+        );
+        $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
+        $lessons->transform(function ($lesson) {
+            $lesson = collect($lesson);
 
-            });
-            $startedListLessons =
-                (new ContentFilterResultsEntity(['results' => $lessons->values()]))->toResponseRawJson() ;
-            $hasStartedLessons = count($startedProgressRows) > 0;
+            return $lesson->only(['id', 'slug', 'type', 'fields', 'data', 'url', 'published_on', 'instructors'])
+                ->toArray();
+        });
+        $startedListLessons = (new ContentFilterResultsEntity(['results' => $lessons->values()]))->toResponseRawJson();
+        $hasStartedLessons = count($startedProgressRows) > 0;
 
         CarouselService::$workoutsPage = true;
-        $carousel =
-            $this->carouselService->getCarouselSlides();
+        $carousel = $this->carouselService->getCarouselSlides();
 
-        return view(
-            'pages.workouts',
-            [
-                "listLessons" => $workouts->toResponseRawJson(),
-                "startedLessons" => $startedListLessons,
-                "hasStartedLessons" => $hasStartedLessons,
-                "lessonType" => $lessonType,
-                "catalogueMeta" => $catalogueMeta,
-                'carousel' => $carousel,
-            ]
-        );
+        return view('pages.workouts', [
+                                        "listLessons" => $workouts->toResponseRawJson(),
+                                        "startedLessons" => $startedListLessons,
+                                        "hasStartedLessons" => $hasStartedLessons,
+                                        "lessonType" => $lessonType,
+                                        "catalogueMeta" => $catalogueMeta,
+                                        'carousel' => $carousel,
+                                    ]);
     }
 
     public function showChallengesPage(Request $request, $domain, $brand)
@@ -125,6 +101,8 @@ class WorkoutsPageController extends BaseController
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
 
+        FiltersHelper::prepareFiltersFields();
+
         $challenges = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 25),
@@ -132,8 +110,8 @@ class WorkoutsPageController extends BaseController
             [$lessonType],
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
-            $request->get('included_fields', []),
+            FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
             true
@@ -159,8 +137,8 @@ class WorkoutsPageController extends BaseController
         $contentToRenderAsLesson = $this->contentService->getById($id);
         $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();
         $thisLessonJson =
-            (new ContentFilterResultsEntity(['results' => [$contentToRenderAsLesson], 'total_results' => 1]))->toResponseRawJson(
-            );
+            (new ContentFilterResultsEntity(['results' => [$contentToRenderAsLesson], 'total_results' => 1]
+            ))->toResponseRawJson();
 
         return view('content.lesson', [
             "parentType" => $contentToRenderAsLessonParent['type'] ?? null,
