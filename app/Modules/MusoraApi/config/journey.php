@@ -4,11 +4,6 @@ use Illuminate\Validation\Rule;
 
 return [
     'v5' => [
-        'events' => [
-            'filter-applied',
-            'filter-group-applied',
-            'sorting-applied',
-        ],
         'schema' => [
             'filter-applied' => [
                 'brand' => ['required', 'string'],
