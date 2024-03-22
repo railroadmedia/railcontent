@@ -10,23 +10,7 @@ class FiltersJourneyService
 {
     public function trackFilterApplied(array $props): void
     {
-        $filters = collect($props['filters'] ?? [])->map(
-            function ($filter) {
-                $filterTag = explode(',', $filter);
-                if (count($filterTag) !== 2) {
-                    return null;
-                }
-                return [
-                    'filter_category' => $filterTag[0],
-                    'filter_tag' => $filterTag[1],
-                ];
-            }
-        )->toArray();
-
-        $filters[] = [
-            'filter_category' => 'progress',
-            'filter_tag' => $props['progress'] ?? 'all',
-        ];
+        $filters = $this->parseFilters($props);
 
         Avo::filter_applied(
             AvoHelper::defaultEventProperties(
@@ -56,15 +40,7 @@ class FiltersJourneyService
 
     public function trackSortingApplied(array $props): void
     {
-        $sortType = match ($props['sort']) {
-            '-popularity' => 'Most Popular',
-            'popularity' => 'Least Popular',
-            'slug' => 'Name: A to Z',
-            '-slug' => 'Name: Z to A',
-            'published_on' => 'Oldest First',
-            '-published_on' => 'Newest First',
-            default => 'Unknown',
-        };
+        $sortType = $this->parseSort($props['sort']);
 
         Avo::sorting_applied(
             AvoHelper::defaultEventProperties(
@@ -76,5 +52,56 @@ class FiltersJourneyService
                 user()
             )
         );
+    }
+
+    /**
+     * @param array|null $props
+     * @return array
+     */
+    public function parseFilters(?array $props): array
+    {
+        $props = $props ?? [];
+        $filters = collect($props['filters'] ?? [])->map(
+            function ($filter) {
+                $filterTag = explode(',', $filter);
+                if (count($filterTag) !== 2) {
+                    return null;
+                }
+                return [
+                    'filter_category' => $filterTag[0],
+                    'filter_tag' => $filterTag[1],
+                ];
+            }
+        )
+            ->filter(fn($f) => !!$f)
+            ->toArray();
+
+        $filters[] = [
+            'filter_category' => 'progress',
+            'filter_tag' => $props['progress'] ?? 'all',
+        ];
+
+        return $filters;
+    }
+
+    /**
+     * @param string|null $sort
+     * @return string
+     */
+    public function parseSort(?string $sort): string
+    {
+        return match ($sort) {
+            '-popularity' => 'Most Popular',
+            'popularity' => 'Least Popular',
+            'slug' => 'Name: A to Z',
+            '-slug' => 'Name: Z to A',
+            'published_on', 'created_at' => 'Oldest First',
+            '-published_on', '-created_at' => 'Newest First',
+            '-progress' => 'Progress',
+            '-last_progress' => 'Recently Viewed',
+            'most_recent' => 'Most Recent',
+            'pinned' => 'Pinned',
+            default => 'Unknown',
+        };
     }
 }

@@ -28,7 +28,20 @@ return [
                 'sort' => [
                     'required',
                     'string',
-                    Rule::in(['-popularity', 'popularity', 'slug', '-slug', 'published_on', '-published_on'])
+                    Rule::in([
+                        '-popularity',
+                        'popularity',
+                        'slug',
+                        '-slug',
+                        'published_on',
+                        '-published_on',
+                        'created_at',
+                        '-created_at',
+                        'pinned',
+                        'most_recent',
+                        '-progress',
+                        '-last_progress'
+                    ])
                 ],
             ],
         ]
