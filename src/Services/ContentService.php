@@ -303,7 +303,7 @@ class ContentService
             "topic" => ["All"],
             "instructor" =>[],
             "artist" => ["All"],
-            "type" => ["All"],
+            "type" => ["Recommendation"],
         ];
 
         return (new ContentFilterResultsEntity([
