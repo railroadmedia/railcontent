@@ -231,10 +231,6 @@ export const useCollectionStore = defineStore({
 
                 //Set active tab from URL
                 if(tabParams && tabParams.length > 0){
-                    if(tabParams.length === 1){
-                        tabParams = tabParams[0];
-                    }
-
                     const activeTab = defaults.tabOptions.find((tab) => {
                         return JSON.stringify(tab.key) === JSON.stringify(tabParams);
                     })
