@@ -51,6 +51,9 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
 
 mix.webpackConfig(webpack => {
     return {
+        stats: {
+            children: true
+        },
         // target: ['web', 'es5'],
         output: {
             publicPath: ASSET_URL,

@@ -271,6 +271,7 @@ function loadSource(src) {
 
     return new Promise((resolve) => {
         mediaElement.value.src = source.value.file;
+        currentSource.value = source.value.file;
 
         setTimeout(() => {
             resolve();
@@ -950,11 +951,7 @@ const currentProgress = computed(() => {
     return isNaN(progress) ? 0 : progress;
 });
 
-const currentSource = computed({
-    get() {
-        return mediaElement.value ? mediaElement.value.src : '';
-    },
-});
+const currentSource = ref(null);
 
 const $_sources = computed({
     get() {
