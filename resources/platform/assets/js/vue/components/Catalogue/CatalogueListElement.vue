@@ -193,10 +193,6 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-    isSingleRow: {
-		type: Boolean,
-        default: () => false,
-    },
     scrollContainer: {
         type: String,
         default: 'content-container'
