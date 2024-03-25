@@ -23,7 +23,7 @@ return [
                 'sort' => [
                     'required',
                     'string',
-                    Rule::in([
+                    'in:' . implode(',', [
                         '-popularity',
                         'popularity',
                         'slug',
