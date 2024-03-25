@@ -161,10 +161,6 @@ const props = defineProps({
         type: String,
         default: '' // Default empty string
     },
-    classOverride: {
-        type: String,
-        default: ''
-    },
     lockUnowned: {
         type: Boolean,
         default: false
