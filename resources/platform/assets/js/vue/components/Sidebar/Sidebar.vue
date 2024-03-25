@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { storeToRefs } from 'pinia'
 import SidebarContainer from './SidebarContainer.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';

@@ -2390,6 +2390,7 @@ return [
         'podcasts',
         'workout',
         'challenge',
+        'challenge-part',
     ],
     'homeInProgressContentTypes' => [
         'course',
