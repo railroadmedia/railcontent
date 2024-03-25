@@ -166,7 +166,7 @@ const breakToListView = computed(() => {
 })
 
 const showListElement = computed(() => {
-    return props.displayInline || (breakToListView.value && smallerThanLg);
+    return props.displayInline || (breakToListView.value && smallerThanLg.value);
 });
 
 const showSkeletonLoader = computed(() => {
