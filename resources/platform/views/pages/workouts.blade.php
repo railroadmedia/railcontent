@@ -2,7 +2,7 @@
 //dd($startedLessons);
 @endphp
 
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'Workouts'])
 
 @section('meta')
     <title>{{ ucfirst($brand) }} Workouts | Musora</title>

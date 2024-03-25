@@ -2,7 +2,7 @@
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
 @endphp
 
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'forums'])
 
 @section('meta')
     <title>{{$discussion['title']}} | Forums | {{ $brand }}</title>
