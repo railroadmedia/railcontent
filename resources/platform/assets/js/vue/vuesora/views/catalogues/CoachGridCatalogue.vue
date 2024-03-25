@@ -1,11 +1,11 @@
 <template>
     <div class="flex flex-row align-v-top test-coach" :class="[noWrap ? 'overflow' : 'flex-wrap']">
         <CatalogueListElement v-if="displayInline" v-for="item in content" :key="'coach-list' + item.id" :item="item"
-            :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+            :content-type="item.type"  :lock-unowned="lockUnowned"
             :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
             @addToList="emitAddToList" />
         <CatalogueCard v-else v-for="item in content" :key="'coach-grid' + item.id" :item="item"
-            :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+            :content-type="item.type" :lock-unowned="lockUnowned"
             :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
             @addToList="emitAddToList" />
     </div>
