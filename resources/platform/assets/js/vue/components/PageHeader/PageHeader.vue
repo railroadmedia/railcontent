@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps, onUpdated, ref } from 'vue';
+import { computed, onUpdated, ref } from 'vue';
 
 import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';

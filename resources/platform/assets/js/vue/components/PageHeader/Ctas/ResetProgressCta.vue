@@ -4,7 +4,7 @@
 
 <script setup>
 
-import { defineProps, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import PageHeaderCta from '../PageHeaderCta.vue';
 import { useResetProgress } from '../../../hooks/useResetProgress';
 
