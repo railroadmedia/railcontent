@@ -180,10 +180,6 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    isSingleItem: {
-        type: Boolean,
-        default: () => false,
-    },
     fullWidthOnMobile: {
         type: Boolean,
         default: () => false,

@@ -64,7 +64,7 @@ export default {
     computed: {
         elementClassOverride() {
             if (this.isSingleItem) {
-                return '!tw-w-full !tw-px-2 sm:!mb-4';
+                return '!tw-w-full !tw-px-2 sm:!mb-4 lg:!tw-w-full';
             } else if (this.fullWidthOnMobile) {
                 return '!tw-w-full md:!tw-w-auto !tw-mb-4 md:!tw-mb-0';
             } else {
