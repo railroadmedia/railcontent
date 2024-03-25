@@ -1,5 +1,5 @@
 <template>
-    <div :class="[
+    <div class="tw-snap-center tw-group" :class="[
         wrapperClasses,
     ]">
         <div class="tw-flex tw-flex-col">
@@ -321,9 +321,9 @@ const mappedData = computed(() => {
 
 
 const wrapperClasses = computed(() => {
-    const defaultWrapperClasses = 'tw-snap-center tw-flex tw-flex-col tw-group lg:tw-w-auto tw-shrink-0 tw-w-[267px] tw-mr-3 lg:tw-mr-0';
+    const defaultWrapperClasses = 'tw-flex tw-flex-col tw-mr-3 lg:tw-mr-0 lg:tw-w-auto tw-shrink-0 tw-w-[267px]';
     return ({
-        [defaultWrapperClasses]: defaultWrapperClasses,
+        [defaultWrapperClasses]: defaultWrapperClasses && !props.wrapperClassOverride,
         'no-access': noAccess.value,
         completed: props.item.completed,
         'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': props.isSingleRow,
