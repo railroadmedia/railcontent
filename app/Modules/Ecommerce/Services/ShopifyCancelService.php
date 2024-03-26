@@ -41,7 +41,7 @@ class ShopifyCancelService
         // order is paid and/or fulfilled, and undo each of those
         if ($orderShopifyAttributes["fulfillment_status"] === "fulfilled") {
             $fulfillmentsData = $orderShopifyAttributes["fulfillments"];
-            $this->cancelFulfillments($fulfillmentsData, $shopifyOrderId);
+            $this->cancelFulfillments($fulfillmentsData);
         }
         if ($orderShopifyAttributes["financial_status"] === "paid") {
             $this->shopifyRefundService->refundAllTransactions($orderShopifyAttributes, $shopifyOrderId);
