@@ -295,7 +295,7 @@ class ContentQueryBuilder extends QueryBuilder
         foreach ($requiredUserStates as $index => $requiredUserState) {
             $tableName = 'ucp_'.$index;
 
-            $this->join(
+            $this->leftJoin(
                 ConfigService::$tableUserContentProgress.' as '.$tableName,
                 function (JoinClause $joinClause) use ($requiredUserState, $tableName) {
                     $joinClause->on(
@@ -311,18 +311,29 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->getPdo()
                                     ->quote($requiredUserState['user_id'])
                             )
-                        )
-                        ->on(
+                        );
+                }
+            );
+
+            $this->where(function (Builder $builder) use (
+                $requiredUserStates, $tableName
+            ) {
+                foreach ($requiredUserStates as $requiredUserState) {
+                    if ($requiredUserState['state'] != 'not-started') {
+                        $builder->where(
                             $tableName.'.state',
                             '=',
-                            $joinClause->raw(
+                            DB::raw(
                                 DB::connection()
                                     ->getPdo()
                                     ->quote($requiredUserState['state'])
                             )
                         );
+                    } else {
+                        $builder->whereNull($tableName.'.state');
+                    }
                 }
-            );
+            });
         }
 
         return $this;
@@ -338,7 +349,7 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->join(ConfigService::$tableUserContentProgress,
+        $this->leftJoin(ConfigService::$tableUserContentProgress,
             function (JoinClause $joinClause) use ($includedUserStates) {
                 $joinClause->on(
                     ConfigService::$tableUserContentProgress.'.content_id',
@@ -357,22 +368,32 @@ class ContentQueryBuilder extends QueryBuilder
                                         ->getPdo()
                                         ->quote($includedUserState['user_id'])
                                 )
-                            )
-                                ->on(
-                                    ConfigService::$tableUserContentProgress.'.state',
-                                    '=',
-                                    $joinClause->raw(
-                                        DB::connection()
-                                            ->getPdo()
-                                            ->quote($includedUserState['state'])
-                                    )
-                                );
+                            );
                         });
                     }
                 }
 
                 );
             });
+        $this->where(function (Builder $builder) use (
+            $includedUserStates
+        ) {
+            foreach ($includedUserStates as $includedUserState) {
+                if ($includedUserState['state'] != 'not-started') {
+                    $builder->orWhere(
+                        ConfigService::$tableUserContentProgress.'.state',
+                        '=',
+                        DB::raw(
+                            DB::connection()
+                                ->getPdo()
+                                ->quote($includedUserState['state'])
+                        )
+                    );
+                } else {
+                    $builder->orWhereNull(ConfigService::$tableUserContentProgress.'.state');
+                }
+            }
+        });
 
         return $this;
     }
@@ -466,15 +487,70 @@ class ContentQueryBuilder extends QueryBuilder
 
         foreach ($includedFields as $includedFieldIndex => $includedField) {
             if (!empty($includedField['associated_table']['table'])) {
-                $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+                $joinExists = false;
+
+                foreach($this->joins ?? [] as $join)
+                {
+                    if($join->table == $includedField['associated_table']['table'].' as '.$includedField['associated_table']['alias'])
+                    {
+                        $joinExists = true;
+                    }
+                }
+                if(!$joinExists) {
+                    $includedFieldsGroupedByTable[$includedField['associated_table']['table']][] = $includedField;
+                }
             } else {
                 $includedFieldsGroupedByTable[$includedField['name']][] = $includedField;
             }
         }
 
-        // set the joins first, then we'll add the where's after
         foreach ($includedFieldsGroupedByTable as $name => $includedFieldDataGrouped) {
-            if ($includedFieldDataGrouped[0]['is_content_column']) {
+            //multiple fields example: title like 'Adele' or artist like 'Adele'
+            if($includedFieldDataGrouped[0]['name'] == 'multiple_fields'){
+                $this->where(function (Builder $builder) use (
+                    $includedFieldDataGrouped
+                ) {
+                    $i =0;
+                    foreach ($includedFieldDataGrouped[0]['fields'] as $field){
+                        $i++;
+                        if($field['is_content_column']) {
+                            $builder->orwhere(
+                                'railcontent_content'.'.'.$field['name'],
+                                $field['operator'],
+                                is_numeric($field['value']) ? DB::raw($field['value']) : DB::raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($field['value'])
+                                )
+                            );
+                        }elseif (!empty($field['associated_table'])){
+                            $this->leftJoin(
+                                $field['associated_table']['table'].
+                                ' as '.
+                                $field['associated_table']['alias'].$i,
+                                $field['associated_table']['alias'].$i . '.content_id',
+                                '=',
+                                ConfigService::$tableContent . '.id'
+                            );
+                            $values = (!empty($field['extra_ids']))?$field['extra_ids']:[$field['value']];
+                            foreach ($values as $value) {
+                                $builder->orwhere(
+                                    $field['associated_table']['alias'].$i.'.'.$field['associated_table']['column'],
+                                    $field['operator'],
+                                    is_numeric($value) ? DB::raw($value) : DB::raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($value)
+                                    )
+                                );
+                            }
+                        }
+                    }
+                });
+
+            }
+            elseif ($includedFieldDataGrouped[0]['is_content_column']) {
+                //content column example: difficulty = 2 or difficulty = 3
                 $whereInArray = [];
 
                 foreach ($includedFieldDataGrouped as $includedFieldData) {
@@ -499,6 +575,7 @@ class ContentQueryBuilder extends QueryBuilder
                     );
                 }
             } elseif (!empty($includedFieldDataGrouped[0]['associated_table'])) {
+                //field from other tables like: genre like 'Funk/Disco' or genre like 'Pop/Rock'
                 $this->leftJoin(
                     $includedFieldDataGrouped[0]['associated_table']['table'].
                     ' as '.
@@ -508,17 +585,33 @@ class ContentQueryBuilder extends QueryBuilder
                     ConfigService::$tableContent . '.id'
                 );
 
-                $whereInArray = [];
-
-                foreach ($includedFieldDataGrouped as $includedFieldData) {
-                    $whereInArray[] = $includedFieldData['value'];
-                }
-
-                $this->whereIn(
-                    $includedFieldDataGrouped[0]['associated_table']['alias'] . '.' .
-                    $includedFieldDataGrouped[0]['associated_table']['column'],
-                    $whereInArray
-                );
+                $this->where(function (Builder $builder) use (
+                    $includedFieldDataGrouped
+                ) {
+                    foreach ($includedFieldDataGrouped as $includedFieldData) {
+                        if( $includedFieldData['operator'] == 'BETWEEN'){
+                            $builder->orWhereBetween(
+                                $includedFieldData['associated_table']['alias'] .
+                                '.' .
+                                $includedFieldData['associated_table']['column'],
+                                [DB::raw($includedFieldData['min']), DB::raw($includedFieldData['max'])]
+                            );
+                        }else {
+                            $builder->orwhere(
+                                $includedFieldData['associated_table']['alias'].
+                                '.'.
+                                $includedFieldData['associated_table']['column'],
+                                $includedFieldData['operator'],
+                                is_numeric($includedFieldData['value']) ? DB::raw($includedFieldData['value']) :
+                                    DB::raw(
+                                        DB::connection()
+                                            ->getPdo()
+                                            ->quote($includedFieldData['value'])
+                                    )
+                            );
+                        }
+                    }
+                });
             }
         }
 
@@ -553,18 +646,11 @@ class ContentQueryBuilder extends QueryBuilder
                 );
             })
             ->where(function (Builder $builder) use ($membershipPermissionIds) {
-                return $builder->where(function (Builder $builder) {
+                $newBuilder = $builder->where(function (Builder $builder) {
                     return $builder->whereNull(
                         'id_content_permissions'.'.permission_id'
                     );
                 })
-                    ->orWhere(function (Builder $builder) {
-                        return $builder->where(function (Builder $builder) {
-                            return $builder->where(
-                                'enrollment_end_time', '>=', Carbon::now()->toDateTimeString()
-                            );
-                        });
-                            })
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
@@ -602,6 +688,16 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->orWhereNull('start_date');
                             });
                     });
+                if(ContentRepository::$getEnrollmentContent) {
+                    $newBuilder->orWhere(function (Builder $builder) {
+                        return $builder->where(function (Builder $builder) {
+                            return $builder->where(
+                                'enrollment_end_time', '>=', Carbon::now()->toDateTimeString()
+                            );
+                        });
+                    });
+                }
+                return $newBuilder;
             });
 
         return $this;
@@ -779,11 +875,11 @@ class ContentQueryBuilder extends QueryBuilder
             $this->addSelect([
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as '.$field),
                                  $this->raw(ConfigService::$tableContent.'.'.$field.' as grouped_by_field'),
-
+                                 $this->raw(ConfigService::$tableContent.'.'.$field.' as id'),
                                  DB::raw(
-                                     "( 
-           JSON_ARRAYAGG(
-            id
+                                     "(
+            GROUP_CONCAT(
+            ".ConfigService::$tableContent.".id
         ) ) as lessons_grouped_by_field"
                                  ),
                              ])
@@ -801,25 +897,57 @@ class ContentQueryBuilder extends QueryBuilder
         $table = $groupBy['associated_table']['table'];
         $field = $groupBy['associated_table']['column'];
         $alias = $groupBy['associated_table']['alias'];
+        $joinExists = false;
 
-        $this->addSelect([
+        foreach($this->joins ?? [] as $join)
+        {
+            if($join->table == $table.' as '.$alias)
+            {
+              $joinExists = true;
+            }
+        }
+       $this->addSelect([
                              $this->raw($alias.'.'.$field.' as grouped_by_field'),
                              $this->raw($alias.'.'.$field.' as id'),
                              DB::raw(
                                  "( 
-           JSON_ARRAYAGG(
+           GROUP_CONCAT(
             ".$alias.".content_id      
         ) ) as lessons_grouped_by_field"
                              ),
-                         ])
-            ->join(
+                         ]);
+        
+        if(!$joinExists) {
+            $this->
+            join(
                 $table.' as '.$alias,
                 $alias.'.'.'content_id',
                 '=',
                 ConfigService::$tableContent.'.id'
-            )
-            ->whereNotNull($alias.'.'.$field)
+            );
+        }
+
+        $this->whereNotNull($alias.'.'.$field)
             ->groupBy($alias.'.'.$field);
+
+        return $this;
+    }
+
+    public function selectGroupedColumnsForCount($groupBy)
+    {
+        $isTableContent = $groupBy['is_content_column'] ?? false;
+        $alias = ConfigService::$tableContent;
+        $field = 'id';
+
+        if ($isTableContent) {
+            $field = $groupBy['field'];
+        } elseif(!empty($groupBy['associated_table'])) {
+            $field = $groupBy['associated_table']['column'];
+            $alias = $groupBy['associated_table']['alias'];
+        }
+        $this->select([
+                             $this->raw('DISTINCT('. $alias.'.'.$field.') as id'),
+                         ]);
 
         return $this;
     }

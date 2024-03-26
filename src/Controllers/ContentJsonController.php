@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -10,6 +11,7 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -59,64 +61,12 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        if ($request->has('statuses')) {
-            ContentRepository::$availableContentStatues = $request->get('statuses');
-        }
 
-        if ($request->has('include_future_content')) {
-            ContentRepository::$pullFutureContent = $request->has('include_future_content');
-        }
-        if ($request->has('count_filter_items')) {
-            ContentRepository::$countFilterOptionItems = $request->has('count_filter_items');
-        }
-        $futureScheduledContentOnly = false;
-        if ($request->has('include_future_scheduled_content_only') && $request->get('include_future_scheduled_content_only') != 'false') {
-            ContentRepository::$pullFutureContent = true;
-            $futureScheduledContentOnly = true;
-        }
-
-        if ($request->has('only_from_my_list') && ($request->get('only_from_my_list') == "true")) {
-            $myList =
-                    $this->userPlaylistsService->getUserPlaylist(
-                        user()->id,
-                        'user-playlist',
-                        config('railcontent.brand')
-                    );
-            $myListIds = \Arr::pluck($myList, 'id');
-            ContentRepository::$includedInPlaylistsIds = $myListIds;
-        }
-
-        $required_fields = $request->get('required_fields', []);
-
-        if ($request->has('term')) {
-            $required_fields[] = 'name,%'.$request->get('term').'%,string,like';
-            if ($request->get('sort') == '-score') {
-                $request->merge(['sort' => 'published_on']);
-            }
-        }
-
-        if ($request->has('title')) {
-            $required_fields[] = 'title,%'.$request->get('title').'%,string,like';
-        }
+        FiltersHelper::prepareFiltersFields();
 
         $contentTypes = $request->get('included_types', []);
-        if($request->get('tab', false)){
-            $tabs = $request->get('tab');
-            if(!is_array($request->get('tab'))){
-                $tabs = [$request->get('tab')];
-            }
-            foreach($tabs as $tab) {
-                $extra = explode(',', $tab);
-                if ($extra['0'] == 'group_by') {
-                    $group_by = $extra['1'];
-                }
-                if ($extra['0'] == 'duration') {
-                    $required_fields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
-                }
-            }
-        }
+
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -124,42 +74,41 @@ class ContentJsonController extends Controller
             $contentTypes,
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $required_fields,
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
+            FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
+            FiltersHelper::$requiredUserStates,
             $request->get('included_user_states', []),
             $request->get('include_filters', true),
             false,
             true,
             $request->get('only_subscribed', false),
-            $futureScheduledContentOnly,
-            $group_by ?? false,
+            FiltersHelper::$futureScheduledContentOnly,
+            FiltersHelper::$groupBy ?? null,
         );
 
         $filters = $contentData['filter_options'];
-        if(!$request->has('count_filter_items'))
-        {// Add "All" option, but not in all cases
-        foreach ($filters as $key => $filterOptions) {
-            if (is_array($filterOptions)) {
-                $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
+        if (!$request->has('count_filter_items')) {// Add "All" option, but not in all cases
+            foreach ($filters as $key => $filterOptions) {
+                if (is_array($filterOptions)) {
+                    $filtersToExclude = ['content_type', 'instructor', 'focus', 'style'];
 
-                // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
-                // accommodates—have an "included_types" value like this—an array of one string.
-                $isContentTypeWithSpecialConditions = in_array($contentTypes, [
-                    ['student-focus'],
-                    ['student-review'],
-                ]);
+                    // It is deliberate that values are *arrays* of single strings. The Catalog pages—that this section
+                    // accommodates—have an "included_types" value like this—an array of one string.
+                    $isContentTypeWithSpecialConditions = in_array($contentTypes, [
+                        ['student-focus'],
+                        ['student-review'],
+                    ]);
 
-                if ($isContentTypeWithSpecialConditions) {
-                    $filtersToExclude = array_merge($filtersToExclude, ['topic', 'difficulty']);
-                }
+                    if ($isContentTypeWithSpecialConditions) {
+                        $filtersToExclude = array_merge($filtersToExclude, ['topic', 'difficulty']);
+                    }
 
-                if (!in_array($key, $filtersToExclude)) {
-                    $filters[$key] = array_diff($filterOptions, ['All']);
-                    array_unshift($filters[$key], 'All');
+                    if (!in_array($key, $filtersToExclude)) {
+                        $filters[$key] = array_diff($filterOptions, ['All']);
+                        array_unshift($filters[$key], 'All');
+                    }
                 }
             }
-        }
         }
 
         return reply()->json($contentData['results'], [
@@ -216,17 +165,15 @@ class ContentJsonController extends Controller
         if (!$content) {
             $userId = user()?->id;
             Log::warning("No content with id $id exists. (userId:$userId)");
-            return reply()->json(
-                null,
-                [
-                    'code' => 404,
-                    'totalResults' => 0,
-                    'errors' => [
-                        'title' => 'Entity not found.',
-                        'detail' => 'No content with id ' . $id . ' exists.',
-                    ],
-                ]
-            );
+
+            return reply()->json(null, [
+                                         'code' => 404,
+                                         'totalResults' => 0,
+                                         'errors' => [
+                                             'title' => 'Entity not found.',
+                                             'detail' => 'No content with id '.$id.' exists.',
+                                         ],
+                                     ]);
         }
 
         //        $rules = $this->contentService->getValidationRules($content);
@@ -398,11 +345,10 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types =
-                array_merge(
-                    $types,
-                    array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
-                );
+            $types = array_merge(
+                $types,
+                array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            );
         }
 
         if (!empty($types)) {
@@ -448,11 +394,10 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types =
-                array_merge(
-                    $types,
-                    array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
-                );
+            $types = array_merge(
+                $types,
+                array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            );
         }
 
         $field = ($request->has('is_home')) ? 'home_staff_pick_rating' : 'staff_pick_rating';
@@ -503,18 +448,12 @@ class ContentJsonController extends Controller
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
-        $requiredFields = $request->get('required_fields', []);
-        $requiredUserState = $request->get('required_user_states', []);
         $sortedBy = $request->get('sort', $sortedBy);
 
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
 
-        if ($request->has('future')) {
-            ContentRepository::$pullFutureContent = true;
-        } else {
-            ContentRepository::$pullFutureContent = false;
-        }
+        FiltersHelper::prepareFiltersFields();
 
         if (!empty($types)) {
             $results = $this->contentService->getFiltered(
@@ -524,9 +463,9 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                $requiredFields,
+                FiltersHelper::$requiredFields,
                 [],
-                $requiredUserState,
+                FiltersHelper::$requiredUserStates,
                 [],
                 true
             );

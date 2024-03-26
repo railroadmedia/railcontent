@@ -18,6 +18,7 @@ class CommentQueryBuilder extends QueryBuilder
             ConfigService::$tableComments . '.comment' => 'comment',
             ConfigService::$tableComments . '.parent_id' => 'parent_id',
             ConfigService::$tableComments . '.user_id' => 'user_id',
+            ConfigService::$tableComments . '.assigned_moderator_id' => 'assigned_moderator_id',
             ConfigService::$tableComments . '.conversation_status' => 'conversation_status',
             ConfigService::$tableComments . '.temporary_display_name' => 'display_name',
             ConfigService::$tableComments . '.created_on' => 'created_on',
@@ -60,11 +61,11 @@ class CommentQueryBuilder extends QueryBuilder
 
         $this->leftJoin(
             ConfigService::$tableCommentLikes,
-            ConfigService::$tableCommentLikes.".comment_id",
+            ConfigService::$tableCommentLikes . ".comment_id",
             "=",
-            ConfigService::$tableComments.'.id'
+            ConfigService::$tableComments . '.id'
         )
-            ->groupBy([ConfigService::$tableComments.'.id']);
+            ->groupBy([ConfigService::$tableComments . '.id']);
 
         return $this;
     }
@@ -86,7 +87,6 @@ class CommentQueryBuilder extends QueryBuilder
             );
 
             if (isset($config['groupBy'])) {
-
                 $this->groupBy($config['groupBy'], [ConfigService::$tableComments . '.id']);
             }
         }
@@ -105,7 +105,7 @@ class CommentQueryBuilder extends QueryBuilder
         }
 
 
-        if(!empty(CommentRepository::$blockedUserIds)){
+        if (!empty(CommentRepository::$blockedUserIds)) {
             $this->whereNotIn(ConfigService::$tableComments . '.user_id', CommentRepository::$blockedUserIds);
         }
 
@@ -126,10 +126,9 @@ class CommentQueryBuilder extends QueryBuilder
                 '=',
                 ConfigService::$tableContent . '.id'
             );
-            if(is_array(CommentRepository::$availableContentType)){
+            if (is_array(CommentRepository::$availableContentType)) {
                 $this->whereIn(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
-            }
-            else {
+            } else {
                 $this->where(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
             }
         }
@@ -160,7 +159,7 @@ class CommentQueryBuilder extends QueryBuilder
             $this->where(ConfigService::$tableComments . '.user_id', CommentRepository::$availableUserId);
         }
 
-        if(!empty(CommentRepository::$blockedUserIds)){
+        if (!empty(CommentRepository::$blockedUserIds)) {
             $this->whereNotIn(ConfigService::$tableComments . '.user_id', CommentRepository::$blockedUserIds);
         }
 
@@ -173,7 +172,7 @@ class CommentQueryBuilder extends QueryBuilder
      */
     public function restrictBlockedUsers()
     {
-        if(!empty(CommentRepository::$blockedUserIds)){
+        if (!empty(CommentRepository::$blockedUserIds)) {
             $this->whereNotIn(ConfigService::$tableComments . '.user_id', CommentRepository::$blockedUserIds);
         }
 
@@ -186,7 +185,10 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByConversationStatus()
     {
         if (CommentRepository::$conversationStatus) {
-            $this->where(ConfigService::$tableComments . '.conversation_status', CommentRepository::$conversationStatus);
+            $this->where(
+                ConfigService::$tableComments . '.conversation_status',
+                CommentRepository::$conversationStatus
+            );
         }
 
         return $this;
@@ -261,7 +263,6 @@ class CommentQueryBuilder extends QueryBuilder
      */
     public function restrictByAssociatedManagerId()
     {
-
         if (CommentAssignmentRepository::$availableAssociatedManagerId) {
             $this->where(
                 ConfigService::$tableCommentsAssignment . '.user_id',
@@ -281,6 +282,26 @@ class CommentQueryBuilder extends QueryBuilder
     {
         if ($commentId) {
             $this->where(ConfigService::$tableCommentsAssignment . '.comment_id', $commentId);
+        }
+
+        return $this;
+    }
+
+    public function searchExpression($searchTerm)
+    {
+        if ($searchTerm) {
+            $this->where(function ($query) use ($searchTerm) {
+                $query->where('comment', 'like', '%' . trim($searchTerm) . '%');
+            });
+        }
+
+        return $this;
+    }
+
+    public function mineOnlyExpression($mineOnly)
+    {
+        if ($mineOnly) {
+            $this->where('assigned_moderator_id', auth()->id());
         }
 
         return $this;

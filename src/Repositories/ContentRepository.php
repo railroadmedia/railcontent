@@ -64,6 +64,7 @@ class ContentRepository extends RepositoryBase
     public static $getFutureContentOnly = false;
     public static $getFollowedContentOnly = false;
     public static $getFutureScheduledContentOnly = false;
+    public static $getEnrollmentContent = true;
 
     private $page;
     private $limit;
@@ -116,7 +117,7 @@ class ContentRepository extends RepositoryBase
             'column' => 'instructor_id',
             'alias' => '_rci',
         ],
-        'style' => [
+        'genre' => [
             'table' => 'railcontent_content_styles',
             'column' => 'style',
             'alias' => '_rcs',
@@ -124,17 +125,47 @@ class ContentRepository extends RepositoryBase
         'topic' => [
             'table' => 'railcontent_content_topics',
             'column' => 'topic',
-            'alias' => '_rct',
+            'alias' => '_rctt',
         ],
         'focus' => [
             'table' => 'railcontent_content_focus',
             'column' => 'focus',
             'alias' => '_rcf',
         ],
+        'essentials' => [
+            'table' => 'railcontent_content_essentials',
+            'column' => 'essentials',
+            'alias' => '_rce',
+        ],
+        'theory' => [
+            'table' => 'railcontent_content_theory',
+            'column' => 'theory',
+            'alias' => '_rth',
+        ],
+        'creativity' => [
+            'table' => 'railcontent_content_creativity',
+            'column' => 'creativity',
+            'alias' => '_rcc',
+        ],
+        'lifestyle' => [
+            'table' => 'railcontent_content_lifestyle',
+            'column' => 'lifestyle',
+            'alias' => '_rcl',
+        ],
         'bpm' => [
             'table' => 'railcontent_content_bpm',
             'column' => 'bpm',
             'alias' => '_rcb',
+        ],
+        'gear' => [
+            'table' => 'railcontent_content_gears',
+            'column' => 'gear',
+            'alias' => '_rcge',
+        ],
+        'style' => [
+            'table' => 'railcontent_content_styles',
+            'column' => 'style',
+            'alias' => '_rcs',
         ],
     ];
 
@@ -179,7 +210,7 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
-                ->where([ConfigService::$tableContent . '.id' => $id])
+                ->where([ConfigService::$tableContent.'.id' => $id])
                 ->getToArray();
 
         if (empty($contentRows)) {
@@ -194,6 +225,7 @@ class ContentRepository extends RepositoryBase
                 array_column($contentRows, 'type')
             );
             $contentRows[0]['permissions'] = $contentPermissionRows;
+
             return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows))[0] ?? null;
         }
 
@@ -212,7 +244,7 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.id', $ids)
+                ->whereIn(ConfigService::$tableContent.'.id', $ids)
                 ->distinct()
                 ->getToArray();
 
@@ -249,12 +281,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
+                    ConfigService::$tableContentHierarchy.'.child_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+                ->where(ConfigService::$tableContentHierarchy.'.parent_id', $parentId)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -284,12 +316,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
+                    ConfigService::$tableContentHierarchy.'.child_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+                ->where(ConfigService::$tableContentHierarchy.'.parent_id', $parentId)
                 ->selectInheritenceColumns()
                 ->limit($limit)
                 ->skip($skip)
@@ -320,13 +352,13 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
+                    ConfigService::$tableContentHierarchy.'.child_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->where(ConfigService::$tableContentHierarchy.'.parent_id', $parentId)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -357,13 +389,13 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
+                    ConfigService::$tableContentHierarchy.'.child_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->where(ConfigService::$tableContentHierarchy.'.parent_id', $parentId)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
                 ->limit($limit)
                 ->skip($skip)
                 ->selectInheritenceColumns()
@@ -389,12 +421,12 @@ class ContentRepository extends RepositoryBase
             ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.child_id',
+                ConfigService::$tableContentHierarchy.'.child_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
-            ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableContentHierarchy.'.parent_id', $parentId)
+            ->whereIn(ConfigService::$tableContent.'.type', $types)
             ->selectInheritenceColumns()
             ->count();
     }
@@ -411,12 +443,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
+                    ConfigService::$tableContentHierarchy.'.child_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
+                ->whereIn(ConfigService::$tableContentHierarchy.'.parent_id', $parentIds)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -444,12 +476,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tableContentHierarchy.'.parent_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
-                ->where(ConfigService::$tableContent . '.type', $type)
+                ->where(ConfigService::$tableContentHierarchy.'.child_id', $childId)
+                ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -474,12 +506,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tableContentHierarchy.'.parent_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
-                ->where(ConfigService::$tableContent . '.type', $type)
+                ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childIds)
+                ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -504,12 +536,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tableContentHierarchy.'.parent_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
-                ->where(ConfigService::$tableContent . '.type', $type)
+                ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childIds)
+                ->where(ConfigService::$tableContent.'.type', $type)
                 ->selectInheritenceColumns()
                 ->getToArray(['id', 'slug', 'child_ids']);
 
@@ -531,12 +563,12 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tableContentHierarchy.'.parent_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->where(ConfigService::$tableContentHierarchy.'.child_id', $childId)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -562,19 +594,19 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableUserContentProgress,
-                    ConfigService::$tableUserContentProgress . '.content_id',
+                    ConfigService::$tableUserContentProgress.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->havingRaw(
-                    ConfigService::$tableContent . ".type IN (" . implode(
+                    ConfigService::$tableContent.".type IN (".implode(
                         ",",
                         array_fill(0, count([$type]), "?")
-                    ) . ")",
+                    ).")",
                     [$type]
                 )
-                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+                ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
+                ->where(ConfigService::$tableUserContentProgress.'.state', $state)
                 ->orderBy('published_on', 'desc')
                 ->limit($limit)
                 ->skip($skip)
@@ -605,13 +637,13 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableUserContentProgress,
-                    ConfigService::$tableUserContentProgress . '.content_id',
+                    ConfigService::$tableUserContentProgress.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
+                ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
+                ->where(ConfigService::$tableUserContentProgress.'.state', $state)
                 ->orderBy('published_on', 'desc')
                 ->limit($limit)
                 ->skip($skip)
@@ -642,17 +674,17 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableUserContentProgress,
-                    ConfigService::$tableUserContentProgress . '.content_id',
+                    ConfigService::$tableUserContentProgress.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->havingRaw(
-                    ConfigService::$tableContent . ".type IN (" . implode(",", array_fill(0, count($types), "?")) . ")",
+                    ConfigService::$tableContent.".type IN (".implode(",", array_fill(0, count($types), "?")).")",
                     $types
                 )
-                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                ->groupBy('updated_on', ConfigService::$tableUserContentProgress . '.id')
+                ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
+                ->where(ConfigService::$tableUserContentProgress.'.state', $state)
+                ->groupBy('updated_on', ConfigService::$tableUserContentProgress.'.id')
                 ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
                 ->limit($limit)
                 ->skip($skip)
@@ -680,17 +712,16 @@ class ContentRepository extends RepositoryBase
             ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableUserContentProgress,
-                ConfigService::$tableUserContentProgress . '.content_id',
+                ConfigService::$tableUserContentProgress.'.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->whereIn(ConfigService::$tableContent.'.type', $types)
+            ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
+            ->where(ConfigService::$tableUserContentProgress.'.state', $state)
             ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
             ->count();
     }
-
 
     /**
      * @param int $id
@@ -716,29 +747,35 @@ class ContentRepository extends RepositoryBase
         $direction,
         $limit
     ) {
-        $subquery['subqueryOne'] = $this
-            ->query()
-            ->selectRaw(
-                DB::raw(
-                    'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' ' . $direction . ', railcontent_content.id ' . $direction . ') AS rowNumber'
+        $subquery['subqueryOne'] =
+            $this->query()
+                ->selectRaw(
+                    DB::raw(
+                        'ROW_NUMBER() OVER (order by railcontent_content.'.
+                        $orderColumn.
+                        ' '.
+                        $direction.
+                        ', railcontent_content.id '.
+                        $direction.
+                        ') AS rowNumber'
+                    )
                 )
-            )
-            ->selectPrimaryColumns()
-            ->restrictByUserAccess()
-            ->where(ConfigService::$tableContent . '.type', $type)
-            ->where(ConfigService::$tableContent . '.' . $columnName, $operator, $columnValue)
-            ->limit($limit);
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->where(ConfigService::$tableContent.'.type', $type)
+                ->where(ConfigService::$tableContent.'.'.$columnName, $operator, $columnValue)
+                ->limit($limit);
 
-        $subquery['subqueryTwo'] = $this->query()
-            ->selectRaw(DB::raw('rowNumber'))
-            ->fromSub($subquery['subqueryOne'], 'sub')
-            ->where('id', $contentId)
-            ->get()
-            ->value('rowNumber');
+        $subquery['subqueryTwo'] =
+            $this->query()
+                ->selectRaw(DB::raw('rowNumber'))
+                ->fromSub($subquery['subqueryOne'], 'sub')
+                ->where('id', $contentId)
+                ->get()
+                ->value('rowNumber');
 
         return $subquery;
     }
-
 
     /**
      * @param int $id
@@ -832,8 +869,8 @@ class ContentRepository extends RepositoryBase
                 $this->query()
                     ->selectPrimaryColumns()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent . '.type', $type)
-                    ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
+                    ->where(ConfigService::$tableContent.'.type', $type)
+                    ->where(ConfigService::$tableContent.'.'.$columnName, '<', $columnValue)
                     ->orderBy($orderColumn, 'desc')
                     ->limit($siblingPairLimit)
                     ->getToArray();
@@ -842,8 +879,8 @@ class ContentRepository extends RepositoryBase
                 $this->query()
                     ->selectPrimaryColumns()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent . '.type', $type)
-                    ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
+                    ->where(ConfigService::$tableContent.'.type', $type)
+                    ->where(ConfigService::$tableContent.'.'.$columnName, '>', $columnValue)
                     ->orderBy($orderColumn, 'asc')
                     ->limit($siblingPairLimit)
                     ->getToArray();
@@ -900,13 +937,13 @@ class ContentRepository extends RepositoryBase
             ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableUserContentProgress,
-                ConfigService::$tableUserContentProgress . '.content_id',
+                ConfigService::$tableUserContentProgress.'.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->whereIn(ConfigService::$tableContent.'.type', $types)
+            ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
+            ->where(ConfigService::$tableUserContentProgress.'.state', $state)
             ->orderBy('published_on', 'desc')
             ->count();
     }
@@ -969,7 +1006,7 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->where('slug', $slug)
-                ->where(ConfigService::$tableContent . '.brand', $brand)
+                ->where(ConfigService::$tableContent.'.brand', $brand)
                 ->where('type', $type)
                 ->getToArray();
 
@@ -996,7 +1033,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->where('slug', $slug)
                 ->where('type', $type)
-                ->where(ConfigService::$tableContent . '.user_id', $userId)
+                ->where(ConfigService::$tableContent.'.user_id', $userId)
                 ->getToArray();
 
         if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
@@ -1029,14 +1066,14 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContentHierarchy,
                     function (JoinClause $joinClause) use ($childContentIds) {
                         $joinClause->on(
-                            ConfigService::$tableContentHierarchy . '.parent_id',
+                            ConfigService::$tableContentHierarchy.'.parent_id',
                             '=',
-                            ConfigService::$tableContent . '.id'
+                            ConfigService::$tableContent.'.id'
                         )
-                            ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childContentIds);
+                            ->whereIn(ConfigService::$tableContentHierarchy.'.child_id', $childContentIds);
                     }
                 )
-                ->where(ConfigService::$tableContent . '.user_id', $userId);
+                ->where(ConfigService::$tableContent.'.user_id', $userId);
 
         if (!empty($slug)) {
             $query->where('slug', $slug);
@@ -1081,28 +1118,28 @@ class ContentRepository extends RepositoryBase
                     $fieldComparisonOperator
                 ) {
                     $joinClause->on(
-                        ConfigService::$tableContentFields . '.content_id',
+                        ConfigService::$tableContentFields.'.content_id',
                         '=',
-                        ConfigService::$tableContent . '.id'
+                        ConfigService::$tableContent.'.id'
                     )
                         ->where(
-                            ConfigService::$tableContentFields . '.key',
+                            ConfigService::$tableContentFields.'.key',
                             '=',
                             $fieldKey
                         )
                         ->where(
-                            ConfigService::$tableContentFields . '.type',
+                            ConfigService::$tableContentFields.'.type',
                             '=',
                             $fieldType
                         )
                         ->where(
-                            ConfigService::$tableContentFields . '.value',
+                            ConfigService::$tableContentFields.'.value',
                             $fieldComparisonOperator,
                             $fieldValue
                         );
                 })
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->where(ConfigService::$tableContent . '.status', $status)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
+                ->where(ConfigService::$tableContent.'.status', $status)
                 ->getToArray();
 
         if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData && !empty($contentRows)) {
@@ -1152,10 +1189,10 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->where(ConfigService::$tableContent . '.status', $status)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
+                ->where(ConfigService::$tableContent.'.status', $status)
                 ->where(
-                    ConfigService::$tableContent . '.published_on',
+                    ConfigService::$tableContent.'.published_on',
                     $publishedOnComparisonOperator,
                     $publishedOnValue
                 )
@@ -1169,12 +1206,12 @@ class ContentRepository extends RepositoryBase
         if (!empty($requiredField)) {
             if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
                 $contentRows->where(
-                    ConfigService::$tableContent . '.' . $requiredField['key'],
+                    ConfigService::$tableContent.'.'.$requiredField['key'],
                     $requiredField['value']
                 );
             } else {
                 $column = ($requiredField['key'] == 'instructor') ? 'instructor_id' : $requiredField['key'];
-                $table = config('railcontent.table_prefix') . 'content_' . $requiredField['key'] . 's';
+                $table = config('railcontent.table_prefix').'content_'.$requiredField['key'].'s';
             }
             $contentRows->join($table, function (JoinClause $joinClause) use (
                 $requiredField,
@@ -1182,12 +1219,12 @@ class ContentRepository extends RepositoryBase
                 $column
             ) {
                 $joinClause->on(
-                    $table . '.content_id',
+                    $table.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                     ->whereIn(
-                        $table . '.' . $column,
+                        $table.'.'.$column,
                         $requiredField['value']
                     );
             })
@@ -1280,7 +1317,7 @@ class ContentRepository extends RepositoryBase
             $contents[$contentRow['id']]['language'] = $contentRow['language'];
             $contents[$contentRow['id']]['brand'] = $contentRow['brand'];
             $contents[$contentRow['id']]['total_xp'] = $contentRow['total_xp'];
-//            $contents[$contentRow['id']]['instrumentless'] = $contentRow['instrumentless'];
+            //            $contents[$contentRow['id']]['instrumentless'] = $contentRow['instrumentless'];
             $contents[$contentRow['id']]['published_on'] = $contentRow['published_on'];
             $contents[$contentRow['id']]['created_on'] = $contentRow['created_on'];
             $contents[$contentRow['id']]['archived_on'] = $contentRow['archived_on'];
@@ -1363,10 +1400,11 @@ class ContentRepository extends RepositoryBase
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
                     ->restrictByUserStates($this->requiredUserStates)
-
+                    ->includeByUserStates($this->includedUserStates)
                     ->groupByField($this->groupByFields);
             $query = $subQuery;
 
+            //Group by instructors
             if ($this->groupByFields['is_a_related_content']) {
                 $query =
                     $this->query()
@@ -1374,7 +1412,10 @@ class ContentRepository extends RepositoryBase
                         ->addSelect('inner_content.lessons_grouped_by_field as lessons_grouped_by_field')
                         ->addSubJoinToQuery($subQuery)
                         ->directPaginate($this->page, $this->limit)
-                        ->orderBy('slug', 'asc');
+                        ->orderBy('slug', $this->orderDirection);
+                if (!empty($this->typesToInclude) && (count($this->typesToInclude) <= 3)) {
+                    $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
+                }
                 $contentRows = $query->getToArray();
                 $contentIds = $this->getGroupByContentIds($contentRows);
                 $dataLookup = $this->getContentLookupByIds($contentIds);
@@ -1382,16 +1423,64 @@ class ContentRepository extends RepositoryBase
                 $contentRows = $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
 
                 $contentRows = $this->contentCompiledColumnTransformer->transformLessons(
-                    $contentRows,
-                    $dataLookup
-                ) ?? [];
+                        $contentRows,
+                        $dataLookup
+                    ) ?? [];
 
                 return $contentRows;
             }
-            $contentRows = $query->getToArray();
+
+            if (!empty($this->typesToInclude)) {
+                $query->selectRaw(' "'.$this->typesToInclude[0].'" as content_type');
+            }
+
+            //Group by associated table(style/genre, bpm, essentials, creativity, lifestyle ...)
+            if (!empty($this->groupByFields['associated_table'])) {
+                $orderBy = ('m'.'.'.$this->groupByFields['associated_table']['column']);
+                $db = (new ContentQueryBuilder(
+                    $this->connection(),
+                    $this->connection()
+                        ->getQueryGrammar(),
+                    $this->connection()
+                        ->getPostProcessor()
+                ))->from($this->groupByFields['associated_table']['table'].' as m');
+                $db->selectRaw(
+                    'm.'.
+                    $this->groupByFields['associated_table']['column'].
+                    ' as grouped_by_field,
+                    m.'.
+                    $this->groupByFields['associated_table']['column'].
+                    ' as id,	
+	                COUNT( DISTINCT(lessons.content_id)) AS lessonsCount,
+	                GROUP_CONCAT(lessons.content_id) as lessons_grouped_by_field, '.
+                    ' "'.
+                    $this->groupByFields['associated_table']['column'].
+                    '" as type'
+                );
+                $rq =
+                    $query->selectRaw(' railcontent_content.id as content_id')
+                        ->whereRaw('railcontent_content.id = m.content_id');
+
+                $contentRows =
+                    $db->joinLateral($rq, 'lessons')
+                        ->whereNotNull('lessons.id')
+                        ->groupBy('m.'.$this->groupByFields['associated_table']['column'])
+                        ->directPaginate($this->page, $this->limit)
+                        ->orderByRaw($orderBy.' '.$this->orderDirection)
+                        ->getToArray();
+            } else {
+                //Group by content's column: artist
+                $contentRows =
+                    $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
+                        ->directPaginate($this->page, $this->limit)
+                        ->orderByRaw($this->groupByFields['field'].' '.$this->orderDirection)
+                        ->getToArray();
+            }
+
             $contentIds = $this->getGroupByContentIds($contentRows);
             $dataLookup = $this->getContentLookupByIds($contentIds);
-            return $this->contentCompiledColumnTransformer->transformLessons($contentRows) ?? [];
+
+            return $this->contentCompiledColumnTransformer->transformLessons($contentRows, $dataLookup) ?? [];
         }
 
         $subQuery =
@@ -1443,11 +1532,12 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param false $groupBy
      * @return int
      */
-    public function countFilter()
+    public function countFilter($groupBy = false)
     {
-        if ($this->groupByFields) {
+        if ($groupBy) {
             $subQuery =
                 $this->query()
                     ->restrictByTypes($this->typesToInclude)
@@ -1455,11 +1545,13 @@ class ContentRepository extends RepositoryBase
                     ->restrictByFields($this->requiredFields)
                     ->includeByFields($this->includedFields)
                     ->restrictByUserStates($this->requiredUserStates)
-                    ->groupByField($this->groupByFields);
+                    ->includeByUserStates($this->includedUserStates)
+                    ->groupByField($this->groupByFields)
+                    ->selectGroupedColumnsForCount($this->groupByFields);
 
             return $this->connection()
                 ->table(
-                    $this->databaseManager->raw('(' . $subQuery->toSql() . ') as results')
+                    $this->databaseManager->raw('('.$subQuery->toSql().') as results')
                 )
                 ->addBinding($subQuery->getBindings())
                 ->count();
@@ -1476,18 +1568,21 @@ class ContentRepository extends RepositoryBase
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->groupBy(ConfigService::$tableContent . '.id');
+                ->groupBy(ConfigService::$tableContent.'.id');
 
         if (self::$getFollowedContentOnly) {
             $subQuery->restrictFollowedContent();
         }
 
-        return $this->connection()
-            ->table(
-                $this->databaseManager->raw('(' . $subQuery->toSql() . ') as results')
-            )
-            ->addBinding($subQuery->getBindings())
-            ->count();
+        $count =
+            $this->connection()
+                ->table(
+                    $this->databaseManager->raw('('.$subQuery->toSql().') as results')
+                )
+                ->addBinding($subQuery->getBindings())
+                ->count();
+
+        return $count;
     }
 
     /**
@@ -1495,55 +1590,33 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $query = $this->query()
-            ->selectFilterOptionColumns()
-            ->restrictByUserAccess()
-            ->restrictByFields($this->requiredFields)
-            ->includeByFields($this->includedFields)
-            ->restrictByUserStates($this->requiredUserStates)
-            ->includeByUserStates($this->includedUserStates)
-            ->restrictByTypes($this->typesToInclude)
-            ->restrictByParentIds($this->requiredParentIds);
+        $query =
+            $this->query()
+                ->selectFilterOptionColumns()
+                ->restrictByUserAccess()
+                ->restrictByFields($this->requiredFields)
+                ->includeByFields($this->includedFields)
+                ->restrictByUserStates($this->requiredUserStates)
+                ->includeByUserStates($this->includedUserStates)
+                ->restrictByTypes($this->typesToInclude)
+                ->restrictByParentIds($this->requiredParentIds);
 
         if (self::$getFollowedContentOnly) {
             $query->restrictFollowedContent();
         }
 
-//        if (ContentCompiledColumnTransformer::$useCompiledColumnForServingData) {
-//
-//            return $this->getFilterOptionsFromCompiledColumn($query);
-//        }
-
-        $possibleContentFields = $this->getFilterOptionsForQuery($query);
-        if (self::$countFilterOptionItems) {
+        if (!self::$countFilterOptionItems) {
+            $possibleContentFields = $this->getFilterOptionsForQuery($query);
+        } else {
             $includedFields = collect($this->includedFields);
-            $selectedFilterCategories = $includedFields->pluck('name');
-            $initialFilters = $this->includedFields;
+            $selectedFilterCategories =
+                $includedFields->pluck('name')
+                    ->unique();
 
-            $myResults = [];
-            foreach ($selectedFilterCategories as $category) {
-                if (isset($possibleContentFields[$category])) {
-                    $otherCategories = $includedFields->where('name', '!=', $category);
-                    $this->includedFields = $otherCategories->values()->toArray();
-                    $allQuery =
-                        $this->query()
-                            ->selectFilterOptionColumns()
-                            ->restrictByUserAccess()
-                            ->restrictByFields($this->requiredFields)
-                            ->includeByFields($this->includedFields)
-                            ->restrictByUserStates($this->requiredUserStates)
-                            ->includeByUserStates($this->includedUserStates)
-                            ->restrictByTypes($this->typesToInclude)
-                            ->restrictByParentIds($this->requiredParentIds);
-                    $possibleContentFields2 = $this->getFilterOptionsForQueryVersion2($allQuery);
-                    $myResults[$category] = $possibleContentFields2[$category];
-                    $this->includedFields = $initialFilters;
-                }
-            }
-
-            foreach ($possibleContentFields as $possibleContentFieldKey => $possibleContentFieldValue) {
-                if (isset($myResults[$possibleContentFieldKey])) {
-                    $possibleContentFields[$possibleContentFieldKey] = $myResults[$possibleContentFieldKey];
+            $possibleContentFields = $this->getFilterOptionsWithCounting($selectedFilterCategories);
+            foreach ($this->requiredFields as $requiredField) {
+                if (array_key_exists($requiredField['name'], $possibleContentFields)) {
+                    unset($possibleContentFields[$requiredField['name']]);
                 }
             }
         }
@@ -1561,19 +1634,18 @@ class ContentRepository extends RepositoryBase
     public function requireField($name, $value, $type = '', $operator = '=', $field = '')
     {
         $value = Arr::first(explode(' (', $value));
-        $this->requiredFields[] =
-            [
-                'name' => $name,
-                'value' => $value,
-                'type' => $type,
-                'operator' => $operator,
-                'field' => $field,
-                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
-                'is_content_column' => in_array(
-                    $name,
-                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-                )
-            ];
+        $this->requiredFields[] = [
+            'name' => $name,
+            'value' => $value,
+            'type' => $type,
+            'operator' => $operator,
+            'field' => $field,
+            'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+            'is_content_column' => in_array(
+                $name,
+                config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+            ),
+        ];
 
         return $this;
     }
@@ -1584,25 +1656,127 @@ class ContentRepository extends RepositoryBase
      *
      * @param $name
      * @param $value
-     * @param $type
-     * @param $operator
+     * @param string $type
+     * @param string $operator
+     * @param string $extraIds
      * @return $this
      */
-    public function includeField($name, $value, $type = '', $operator = '=')
+    public function includeField($name, $value, $type = '', $operator = '=', $extraIds = '')
     {
         $value = Arr::first(explode(' (', $value));
 
-        $this->includedFields[] = [
-            'name' => $name,
-            'value' => $value,
-            'type' => $type,
-            'operator' => $operator,
-            'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
-            'is_content_column' => in_array(
-                $name,
-                config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
-            )
-        ];
+        if ($name == 'difficulty') {
+            $difficultyMapping = config('railcontent.difficulty_map') ?? [];
+            $difficultyValues = array_keys($difficultyMapping, $value);
+            if (empty($difficultyValues)) {
+                $difficultyValues = [$value];
+            }
+
+            foreach ($difficultyValues ?? [] as $difficultyInt) {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $difficultyInt,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
+        } elseif ($name == 'instrumentless') {
+            $instrumentlessMapping = config('railcontent.instrumentless_map.'.config('railcontent.brand')) ?? [];
+            $instrumentlessIndex = array_search($value, $instrumentlessMapping);
+            if (isset($instrumentlessIndex)) {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $instrumentlessIndex,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
+        } elseif ($name == 'type') {
+            $value = strtolower(str_replace(" ", "-", $value));
+            $this->includedFields[] = [
+                'name' => $name,
+                'value' => $value,
+                'type' => $type,
+                'operator' => $operator,
+                'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                'is_content_column' => in_array(
+                    $name,
+                    config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                ),
+            ];
+        } elseif ($name == 'bpm') {
+            $bpmMapping = config('railcontent.bpm_map') ?? [];
+            if (isset($bpmMapping[$value]) && isset($bpmMapping[$value]['min']) && isset($bpmMapping[$value]['max'])) {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $bpmMapping[$value]['min'],
+                    'min' => $bpmMapping[$value]['min'],
+                    'max' => $bpmMapping[$value]['max'],
+                    'type' => 'integer',
+                    'operator' => 'BETWEEN',
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
+        } else {
+            $fields = (explode('|', $name));
+            if (count($fields) > 1) {
+                $subFields = [];
+                foreach ($fields as $field) {
+                    $subFields[] = [
+                        'name' => $field,
+                        'value' => $value,
+                        'type' => $type,
+                        'operator' => $operator,
+                        'associated_table' => self::TABLESFORFIELDS[$field] ?? [],
+                        'is_content_column' => in_array(
+                            $field,
+                            config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                        ),
+                        'extra_ids' => ($field == 'instructor') ? explode('-', $extraIds) : [],
+                    ];
+                }
+                $this->includedFields[] = [
+                    'name' => 'multiple_fields',
+                    'value' => $value,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                    'is_multiple_fields' => true,
+                    'fields' => $subFields,
+
+                ];
+            } else {
+                $this->includedFields[] = [
+                    'name' => $name,
+                    'value' => $value,
+                    'type' => $type,
+                    'operator' => $operator,
+                    'associated_table' => self::TABLESFORFIELDS[$name] ?? [],
+                    'is_content_column' => in_array(
+                        $name,
+                        config('railcontent.content_fields_that_are_now_columns_in_the_content_table', [])
+                    ),
+                ];
+            }
+        }
 
         return $this;
     }
@@ -1612,9 +1786,10 @@ class ContentRepository extends RepositoryBase
      * @param $userId null
      * @return $this
      */
-    public function requireUserStates($state, $userId = null)
+    public function requireUserStates($state, $userId = null, $operator = '=')
     {
-        $this->requiredUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
+        $this->requiredUserStates[] =
+            ['state' => $state, 'user_id' => $userId ?? auth()->id(), 'operator' => $operator];
 
         return $this;
     }
@@ -1646,7 +1821,9 @@ class ContentRepository extends RepositoryBase
                 ) && ($field != 'length_in_seconds'),
             'is_a_related_content' => $field == 'instructor',
         ];
-        $this->groupByFields = ($groupByFields['is_content_column'] || !empty($groupByFields['associated_table'])) ? $groupByFields : null;
+        $this->groupByFields =
+            ($groupByFields['is_content_column'] || !empty($groupByFields['associated_table'])) ? $groupByFields : null;
+
         return $this;
     }
 
@@ -1828,8 +2005,8 @@ class ContentRepository extends RepositoryBase
         $query =
             $this->query()
                 ->addSelect([
-                    ConfigService::$tableContent . '.id as id',
-                ]);
+                                ConfigService::$tableContent.'.id as id',
+                            ]);
 
         $rows =
             $query->restrictByUserAccess()
@@ -1838,23 +2015,23 @@ class ContentRepository extends RepositoryBase
                     $contentFieldValues
                 ) {
                     $joinClause->on(
-                        ConfigService::$tableContentFields . '.content_id',
+                        ConfigService::$tableContentFields.'.content_id',
                         '=',
-                        ConfigService::$tableContent . '.id'
+                        ConfigService::$tableContent.'.id'
                     )
                         ->where(
-                            ConfigService::$tableContentFields . '.key',
+                            ConfigService::$tableContentFields.'.key',
                             '=',
                             $contentFieldKey
                         );
                     if (!empty($contentFieldValues)) {
                         $joinClause->whereIn(
-                            ConfigService::$tableContentFields . '.value',
+                            ConfigService::$tableContentFields.'.value',
                             $contentFieldValues
                         );
                     }
                 })
-                ->whereIn(ConfigService::$tableContent . '.type', $contentTypes)
+                ->whereIn(ConfigService::$tableContent.'.type', $contentTypes)
                 ->getToArray();
 
         $ids = [];
@@ -1876,7 +2053,7 @@ class ContentRepository extends RepositoryBase
         $contentRows =
             $this->query()
                 ->selectPrimaryColumns()
-                ->whereBetween(ConfigService::$tableContent . '.published_on', [
+                ->whereBetween(ConfigService::$tableContent.'.published_on', [
                     $startDate,
                     Carbon::now()
                         ->toDateTimeString(),
@@ -1902,7 +2079,7 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->select('type', DB::raw('count(*) as total'))
                 ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.type', $type);
+                ->whereIn(ConfigService::$tableContent.'.type', $type);
 
         if (!empty($groupBy)) {
             $query->groupBy($groupBy);
@@ -1925,18 +2102,18 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableUserContentProgress,
-                    ConfigService::$tableUserContentProgress . '.content_id',
+                    ConfigService::$tableUserContentProgress.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                 ->leftJoin(
                     ConfigService::$tableContentFields,
-                    ConfigService::$tableContentFields . '.content_id',
+                    ConfigService::$tableContentFields.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+                ->where(ConfigService::$tableUserContentProgress.'.user_id', $userId)
+                ->where(ConfigService::$tableUserContentProgress.'.state', $state)
                 ->getToArray();
 
         return $this->parseAvailableFields($possibleFilters);
@@ -1950,11 +2127,11 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    ConfigService::$tableContentHierarchy.'.parent_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+                ->where(ConfigService::$tableContentHierarchy.'.child_id', $childId)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -1986,24 +2163,24 @@ class ContentRepository extends RepositoryBase
         $instructors =
             $this->query()
                 ->select([
-                    config('railcontent.table_prefix') . 'content_instructors' . '.content_id',
-                    config('railcontent.table_prefix') . 'content_instructors' . '.instructor_id as field_value',
-                    config('railcontent.table_prefix') . 'content' . '.*',
-                ])
+                             config('railcontent.table_prefix').'content_instructors'.'.content_id',
+                             config('railcontent.table_prefix').'content_instructors'.'.instructor_id as field_value',
+                             config('railcontent.table_prefix').'content'.'.*',
+                         ])
                 ->leftJoin(
-                    config('railcontent.table_prefix') . 'content_instructors',
-                    config('railcontent.table_prefix') . 'content' . '.id',
+                    config('railcontent.table_prefix').'content_instructors',
+                    config('railcontent.table_prefix').'content'.'.id',
                     '=',
-                    config('railcontent.table_prefix') . 'content_instructors' . '.instructor_id'
+                    config('railcontent.table_prefix').'content_instructors'.'.instructor_id'
                 )
                 ->join(
-                    config('railcontent.table_prefix') . 'content as co',
-                    config('railcontent.table_prefix') . 'content_instructors' . '.content_id',
+                    config('railcontent.table_prefix').'content as co',
+                    config('railcontent.table_prefix').'content_instructors'.'.content_id',
                     '=',
                     'co.id'
                 )
                 ->whereIn(
-                    config('railcontent.table_prefix') . 'content_instructors' . '.content_id',
+                    config('railcontent.table_prefix').'content_instructors'.'.content_id',
                     $contentIds
                 )
                 ->get()
@@ -2023,7 +2200,6 @@ class ContentRepository extends RepositoryBase
             $contentPermissionRows
         );
 
-
         $results = [];
         foreach ($instructors as $instructor) {
             $results[$instructor['content_id']][] = $instructorRows[$instructor['field_value']];
@@ -2041,17 +2217,17 @@ class ContentRepository extends RepositoryBase
         $videos =
             $this->query()
                 ->select([
-                    'video' . '.*',
-                    config('railcontent.table_prefix') . 'content.id as content_id',
-                ])
+                             'video'.'.*',
+                             config('railcontent.table_prefix').'content.id as content_id',
+                         ])
                 ->leftJoin(
-                    config('railcontent.table_prefix') . 'content as video',
-                    config('railcontent.table_prefix') . 'content' . '.video',
+                    config('railcontent.table_prefix').'content as video',
+                    config('railcontent.table_prefix').'content'.'.video',
                     '=',
                     'video.id'
                 )
                 ->whereIn(
-                    config('railcontent.table_prefix') . 'content' . '.id',
+                    config('railcontent.table_prefix').'content'.'.id',
                     $contentIds
                 )
                 ->get()
@@ -2106,17 +2282,17 @@ class ContentRepository extends RepositoryBase
             $styles =
                 $this->query()
                     ->select([
-                        config('railcontent.table_prefix') . 'content_styles' . '.style as field_value',
-                        config('railcontent.table_prefix') . 'content' . '.id',
-                    ])
+                                 config('railcontent.table_prefix').'content_styles'.'.style as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
                     ->join(
-                        config('railcontent.table_prefix') . 'content_styles',
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content_styles',
+                        config('railcontent.table_prefix').'content'.'.id',
                         '=',
-                        config('railcontent.table_prefix') . 'content_styles' . '.content_id'
+                        config('railcontent.table_prefix').'content_styles'.'.content_id'
                     )
                     ->whereIn(
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content'.'.id',
                         array_column($contentRows, 'id')
                     )
                     ->get()
@@ -2126,17 +2302,17 @@ class ContentRepository extends RepositoryBase
             $bpm =
                 $this->query()
                     ->select([
-                        config('railcontent.table_prefix') . 'content_bpm' . '.bpm as field_value',
-                        config('railcontent.table_prefix') . 'content' . '.id',
-                    ])
+                                 config('railcontent.table_prefix').'content_bpm'.'.bpm as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
                     ->join(
-                        config('railcontent.table_prefix') . 'content_bpm',
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content_bpm',
+                        config('railcontent.table_prefix').'content'.'.id',
                         '=',
-                        config('railcontent.table_prefix') . 'content_bpm' . '.content_id'
+                        config('railcontent.table_prefix').'content_bpm'.'.content_id'
                     )
                     ->whereIn(
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content'.'.id',
                         array_column($contentRows, 'id')
                     )
                     ->get()
@@ -2146,17 +2322,17 @@ class ContentRepository extends RepositoryBase
             $topics =
                 $this->query()
                     ->select([
-                        config('railcontent.table_prefix') . 'content_topics' . '.topic as field_value',
-                        config('railcontent.table_prefix') . 'content' . '.id',
-                    ])
+                                 config('railcontent.table_prefix').'content_topics'.'.topic as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
                     ->join(
-                        config('railcontent.table_prefix') . 'content_topics',
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content_topics',
+                        config('railcontent.table_prefix').'content'.'.id',
                         '=',
-                        config('railcontent.table_prefix') . 'content_topics' . '.content_id'
+                        config('railcontent.table_prefix').'content_topics'.'.content_id'
                     )
                     ->whereIn(
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content'.'.id',
                         array_column($contentRows, 'id')
                     )
                     ->get()
@@ -2166,17 +2342,17 @@ class ContentRepository extends RepositoryBase
             $tags =
                 $this->query()
                     ->select([
-                        config('railcontent.table_prefix') . 'content_tags' . '.tag as field_value',
-                        config('railcontent.table_prefix') . 'content' . '.id',
-                    ])
+                                 config('railcontent.table_prefix').'content_tags'.'.tag as field_value',
+                                 config('railcontent.table_prefix').'content'.'.id',
+                             ])
                     ->join(
-                        config('railcontent.table_prefix') . 'content_tags',
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content_tags',
+                        config('railcontent.table_prefix').'content'.'.id',
                         '=',
-                        config('railcontent.table_prefix') . 'content_tags' . '.content_id'
+                        config('railcontent.table_prefix').'content_tags'.'.content_id'
                     )
                     ->whereIn(
-                        config('railcontent.table_prefix') . 'content' . '.id',
+                        config('railcontent.table_prefix').'content'.'.id',
                         array_column($contentRows, 'id')
                     )
                     ->get()
@@ -2285,14 +2461,14 @@ class ContentRepository extends RepositoryBase
     {
         $data =
             $this->query()
-                ->select(config('railcontent.table_prefix') . 'content.id as content_id', 'videoRow.*')
+                ->select(config('railcontent.table_prefix').'content.id as content_id', 'videoRow.*')
                 ->join(
-                    config('railcontent.table_prefix') . 'content as videoRow',
-                    config('railcontent.table_prefix') . 'content.video',
+                    config('railcontent.table_prefix').'content as videoRow',
+                    config('railcontent.table_prefix').'content.video',
                     '=',
                     'videoRow.id'
                 )
-                ->whereIn(config('railcontent.table_prefix') . 'content.id', $contentIds)
+                ->whereIn(config('railcontent.table_prefix').'content.id', $contentIds)
                 ->get()
                 ->toArray();
 
@@ -2314,7 +2490,7 @@ class ContentRepository extends RepositoryBase
         $contentRows =
             $this->query()
                 ->selectPrimaryColumns()
-                ->where([ConfigService::$tableContent . '.id' => $id])
+                ->where([ConfigService::$tableContent.'.id' => $id])
                 ->getToArray();
 
         if (empty($contentRows)) {
@@ -2338,17 +2514,17 @@ class ContentRepository extends RepositoryBase
 
         if (self::$pullFilterResultsOptionsAndCount) {
             $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'data',
-                'instructor',
-                'style',
-                'topic',
-                'focus',
-                'bpm',
-                'video',
-                'original_video',
-                'high_video',
-                'low_video'
-            ];
+                    'data',
+                    'instructor',
+                    'style',
+                    'topic',
+                    'focus',
+                    'bpm',
+                    'video',
+                    'original_video',
+                    'high_video',
+                    'low_video',
+                ];
         }
 
         // we always need the related data
@@ -2384,27 +2560,47 @@ class ContentRepository extends RepositoryBase
             'instructor' => [
                 'table' => 'railcontent_content_instructors',
                 'column' => 'instructor_id',
-                'alias' => '_rci'
+                'alias' => '_rci',
             ],
-            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'genre' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcso'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
+            'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
+            'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
+            'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
+            'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
         ];
+        if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
+            $brand = config('railcontent.brand');
+
+            $type =
+                ($this->typesToInclude[0] === 'song' ||
+                    $this->typesToInclude[0] === 'course' ||
+                    $this->typesToInclude[0] === 'rudiment' ||
+                    $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' :
+                    $this->typesToInclude[0];
+            $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
+            $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
+        }
 
         $filterOptions = self::$catalogMetaAllowableFilters ?? [
-                'data',
                 'instructor',
-                'style',
+                'genre',
                 'topic',
                 'focus',
                 'bpm',
+                'essentials',
+                'theory',
+                'creativity',
+                'lifestyle',
+                'type',
+                'gear',
             ];
-
-        // we always need the related data
-        if (!in_array('data', $filterOptions)) {
-            $filterOptions[] = 'data';
-        }
 
         $filterOptions = array_unique($filterOptions);
 
@@ -2424,7 +2620,7 @@ class ContentRepository extends RepositoryBase
                     /**
                      * @var $existingJoin JoinClause
                      */
-                    if ($existingJoin->table == $filterOptionTableName . ' as ' . $filterOptionTableAliasName) {
+                    if ($existingJoin->table == $filterOptionTableName.' as '.$filterOptionTableAliasName) {
                         $hasJoinAlready = true;
                     }
                 }
@@ -2432,66 +2628,49 @@ class ContentRepository extends RepositoryBase
 
             if (!$hasJoinAlready) {
                 $joinTablesQuery->leftJoin(
-                    $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
-                    $filterOptionTableAliasName . '.content_id',
+                    $filterOptionTableName.' as '.$filterOptionTableAliasName,
+                    $filterOptionTableAliasName.'.content_id',
                     '=',
                     'railcontent_content.id'
                 );
             }
 
             $joinTablesQuery->addSelect(
-                [$filterOptionTableAliasName . '.' . $filterOptionColumnName . ' as ' . $filterOptionColumnName]
-            );
+                [$filterOptionTableAliasName.'.'.$filterOptionColumnName.' as '.$filterOptionColumnName]);
 
             $groupBy[] = $filterOptionColumnName;
 
             $filterOptionsArray[$filterOptionColumnName] = [];
         }
 
-        $countingQuery = clone($joinTablesQuery);
-
         if (!empty($groupBy)) {
+            $groupBy[] = 'railcontent_content.id';
+            $joinTablesQuery->addSelect(['railcontent_content.id']);
             $joinTablesQuery->groupBy($groupBy);
         } else {
             $joinTablesQuery->select(['railcontent_content.id']);
         }
 
         $tableResults = $joinTablesQuery->get();
-        $countingQueryResults = collect([]);
-        if (self::$countFilterOptionItems) {
-            $countingQuery->addSelect(
-                ['railcontent_content.id']
-            );
-            $groupBy[] = 'id';
-            $countingQuery->groupBy($groupBy);
-
-            $countingQueryResults = $countingQuery->get();
-        }
 
         $counts = [];
         foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
-            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->pluck($filterOptionName)
-                ->unique()
-                ->values()
-                ->toArray();
-            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
-                ->unique(function ($item) use ($filterOptionName) {
-                    return $item['id'] . $item["$filterOptionName"];
-                })
-                ->pluck($filterOptionName)
-                ->countBy()
-                ->toArray();
-
+            $counts[$filterOptionName] =
+                $tableResults->whereNotNull($filterOptionName)
+                    ->pluck($filterOptionName)
+                    ->countBy();
+            $filterOptionsArray[$filterOptionName] =
+                $counts[$filterOptionName]->keys()
+                    ->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $countingItems = '';
                 if (self::$countFilterOptionItems) {
                     $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                    $countingItems = ' (' . $nr . ')';
+                    $countingItems = ' ('.$nr.')';
                 }
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
                     trim(
-                        $filterOptionValueToClean . $countingItems
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
             }
@@ -2500,42 +2679,44 @@ class ContentRepository extends RepositoryBase
             sort($filterOptionsArray[$filterOptionName]);
         }
 
-        // todo: handle instructors which need to be pulled from matching content rows
+        // only for the old mobile app builds
         if (!empty($filterOptionsArray['instructor_id']) && in_array('instructor', $filterOptions)) {
-            $instructorRows = $this->query()
-                ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url'])
-                ->leftJoin(
-                    ConfigService::$tableContentData,
-                    function (JoinClause $joinClause) {
+            $instructorRows =
+                $this->query()
+                    ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url'])
+                    ->leftJoin(ConfigService::$tableContentData, function (JoinClause $joinClause) {
                         $joinClause->on(
-                            ConfigService::$tableContentData . '.content_id',
+                            ConfigService::$tableContentData.'.content_id',
                             '=',
-                            ConfigService::$tableContent . '.id'
+                            ConfigService::$tableContent.'.id'
                         )
                             ->where(
-                                ConfigService::$tableContentData . '.id',
+                                ConfigService::$tableContentData.'.id',
                                 '=',
                                 DB::raw(
-                                    '(SELECT id FROM ' . ConfigService::$tableContentData . ' WHERE ' . ConfigService::$tableContentData . '.content_id = railcontent_content.id and railcontent_content_data.key = \'head_shot_picture_url\' LIMIT 1)'
+                                    '(SELECT id FROM '.
+                                    ConfigService::$tableContentData.
+                                    ' WHERE '.
+                                    ConfigService::$tableContentData.
+                                    '.content_id = railcontent_content.id and railcontent_content_data.key = \'head_shot_picture_url\' LIMIT 1)'
                                 )
                             );
-                    }
-                )
-                ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
-                ->orderBy('name')
-                ->get()
-                ->toArray();
+                    })
+                    ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
+                    ->orderBy('name')
+                    ->get()
+                    ->toArray();
 
             foreach ($instructorRows as $instructorRowIndex => $instructorRow) {
                 $instructorRows[$instructorRowIndex]["fields"][] = [
                     'id' => 1,
                     'key' => 'name',
-                    'value' => $instructorRow["name"]
+                    'value' => $instructorRow["name"],
                 ];
                 $instructorRows[$instructorRowIndex]["data"][] = [
                     'id' => 1,
                     'key' => 'head_shot_picture_url',
-                    'value' => $instructorRow["head_shot_picture_url"]
+                    'value' => $instructorRow["head_shot_picture_url"],
                 ];
             }
 
@@ -2544,45 +2725,40 @@ class ContentRepository extends RepositoryBase
 
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
-            'difficulty' => ConfigService::$tableContent . '.difficulty',
-            'difficulty_range' => ConfigService::$tableContent . '.difficulty_range',
-            'artist' => ConfigService::$tableContent . '.artist',
-            'type' => ConfigService::$tableContent . '.type',
-            'instrument' => ConfigService::$tableContent . '.instrument',
-            'content_id' => ConfigService::$tableContent . '.id',
+            'difficulty' => ConfigService::$tableContent.'.difficulty',
+            'artist' => ConfigService::$tableContent.'.artist',
+            'type' => ConfigService::$tableContent.'.type',
+            'instrument' => ConfigService::$tableContent.'.instrument',
+            'content_id' => ConfigService::$tableContent.'.id',
         ];
 
-        $contentTableQuery->addSelect(
-            [ 'railcontent_content.id as id']
-        );
+        $contentTableQuery->addSelect(['railcontent_content.id as id']);
         $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
             ->select($filterOptionNameToContentTableColumnName);
 
         $tableResults = $contentTableQuery->get();
 
         foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
-            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->pluck($filterOptionName)
-                ->unique()
-                ->values()
-                ->toArray();
-            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->unique(function ($item) use ($filterOptionName) {
-                    return $item['id'] . $item["$filterOptionName"];
-                })
-                ->pluck($filterOptionName)
-                ->countBy()
-                ->toArray();
+            if (!in_array($filterOptionName, $filterOptions)) {
+                continue;
+            }
+            $counts[$filterOptionName] =
+                $tableResults->whereNotNull($filterOptionName)
+                    ->pluck($filterOptionName)
+                    ->countBy();
+            $filterOptionsArray[$filterOptionName] =
+                $counts[$filterOptionName]->keys()
+                    ->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $countingItems = '';
                 if (self::$countFilterOptionItems) {
                     $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                    $countingItems = ' (' . $nr . ')';
+                    $countingItems = ' ('.$nr.')';
                 }
 
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
-                        $filterOptionValueToClean . $countingItems
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
             }
@@ -2598,14 +2774,15 @@ class ContentRepository extends RepositoryBase
      * @param array $contentRows
      * @return array
      */
-    public function getGroupByContentIds(array $contentRows): array
-    {
+    public function getGroupByContentIds(array $contentRows)
+    : array {
         $contentIds = [];
         foreach ($contentRows as $contentRow) {
-            $ids = \GuzzleHttp\json_decode($contentRow['lessons_grouped_by_field'], true);
+            $ids = explode(',', $contentRow['lessons_grouped_by_field']);
             $contentIds = array_merge($contentIds, $ids);
         }
         $contentIds = array_unique($contentIds);
+
         return $contentIds;
     }
 
@@ -2613,115 +2790,18 @@ class ContentRepository extends RepositoryBase
      * @param array $contentIds
      * @return array
      */
-    public function getContentLookupByIds(array $contentIds): array
-    {
-        $data = $this->query()->whereIn("id", $contentIds)->getToArray();
+    public function getContentLookupByIds(array $contentIds)
+    : array {
+        $data =
+            $this->query()
+                ->whereIn("id", $contentIds)
+                ->getToArray();
         $dataLookup = [];
         foreach ($data as $datum) {
             $dataLookup[$datum['id']] = $datum;
         }
+
         return $dataLookup;
-    }
-
-    private function getFilterOptionsFromCompiledColumn(ContentQueryBuilder $contentQueryBuilder)
-    {
-        $filterOptionsArray = [];
-
-        $filterOptions = self::$catalogMetaAllowableFilters ?? [
-            'instructor',
-            'style',
-            'topic',
-            'focus',
-            'bpm',
-            'difficulty',
-            'artist',
-            'difficulty_range',
-            'type',
-            'instrument'
-        ];
-
-        $filterOptions = array_unique($filterOptions);
-
-        foreach ($filterOptions as $filterOption) {
-            $filterOptionsArray[$filterOption] = [];
-        }
-
-        // todo: this needs to be made much more efficient
-        $contentRows = $contentQueryBuilder->get();
-
-        foreach ($contentRows as $contentRowIndex => $contentRow) {
-            $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
-            foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
-                if ($filterOptionName == 'instructor' && isset($contentRowCompiledColumnValues[$filterOptionName])) {
-                    $instructors = $contentRowCompiledColumnValues[$filterOptionName];
-                    if (isset($instructors['id'])) {
-                        $instructors = [$instructors];
-                    }
-                    if (!is_array($instructors)) {
-                        continue;
-                    }
-                    foreach ($instructors as $instructor) {
-                        if (isset($instructor['id']) && !isset($compiledViewData[$instructor['id']])) {
-                            $compiledViewData[$instructor['id']] = json_decode(
-                                $instructor['compiled_view_data'] ?? '',
-                                true
-                            );
-
-
-                            $filterOptionsArray[$filterOptionName][] = [
-                                'id' => $instructor['id'],
-                                'name' => $instructor['name'],
-                                'fields' => [
-                                    [
-                                        "id" => $instructor['id'],
-                                        "key" => "name",
-                                        "value" => $instructor['name'],
-                                    ],
-                                ],
-                                'data' => [
-                                    [
-                                        "id" => $instructor['id'],
-                                        "key" => "head_shot_picture_url",
-                                        "value" => $compiledViewData[$instructor['id']]['head_shot_picture_url'] ?? $compiledViewData[$instructor['id']]['avatar_image_url'] ?? '',
-                                    ],
-                                ],
-                            ];
-                        }
-                    }
-                } elseif (isset($contentRowCompiledColumnValues[$filterOptionName])) {
-                    $filterOptionsArray[$filterOptionName] = array_merge(
-                        $filterOptionsArray[$filterOptionName] ?? [],
-                        (array)$contentRowCompiledColumnValues[$filterOptionName]
-                    );
-                }
-            }
-        }
-
-        foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
-            foreach ($filterOptionValue as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                if (!is_array($filterOptionValueToClean)) {
-                    $filterOptionValue[$filterOptionIndexToClean] = trim(
-                        ucwords(
-                            $filterOptionValueToClean
-                        )
-                    );
-                    $filterOptionsArray[$filterOptionName] = array_keys(array_flip($filterOptionValue));
-                    sort($filterOptionsArray[$filterOptionName]);
-                } else {
-                    $tempArr = array_unique(array_column($filterOptionValue, 'id'));
-                    $filterOptionsArray[$filterOptionName] = array_intersect_key($filterOptionValue, $tempArr);
-                    usort($filterOptionsArray[$filterOptionName], function ($a, $b) {
-                        if (is_array($a)) {
-                            return strncmp(strtolower($a['name']), strtolower($b['name']), 15);
-                        }
-
-                        return strncmp(strtolower($a), strtolower($b), 15);
-                    });
-                }
-            }
-        }
-
-        return $filterOptionsArray;
     }
 
     /**
@@ -2768,10 +2848,10 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->whereIn(ConfigService::$tableContent . '.status', $status)
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
+                ->whereIn(ConfigService::$tableContent.'.status', $status)
                 ->where(
-                    ConfigService::$tableContent . '.published_on',
+                    ConfigService::$tableContent.'.published_on',
                     $publishedOnComparisonOperator,
                     $publishedOnValue
                 )
@@ -2779,18 +2859,19 @@ class ContentRepository extends RepositoryBase
                 ->orderBy($orderByColumn, $orderByDirection);
 
         if (!empty($limit)) {
-            $contentRows->limit($limit)->skip(($page - 1) * $limit);
+            $contentRows->limit($limit)
+                ->skip(($page - 1) * $limit);
         }
 
         if (!empty($requiredField)) {
             if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
                 $contentRows->where(
-                    ConfigService::$tableContent . '.' . $requiredField['key'],
+                    ConfigService::$tableContent.'.'.$requiredField['key'],
                     $requiredField['value']
                 );
             } else {
                 $column = ($requiredField['key'] == 'instructor') ? 'instructor_id' : $requiredField['key'];
-                $table = config('railcontent.table_prefix') . 'content_' . $requiredField['key'] . 's';
+                $table = config('railcontent.table_prefix').'content_'.$requiredField['key'].'s';
             }
             $contentRows->join($table, function (JoinClause $joinClause) use (
                 $requiredField,
@@ -2798,12 +2879,12 @@ class ContentRepository extends RepositoryBase
                 $column
             ) {
                 $joinClause->on(
-                    $table . '.content_id',
+                    $table.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                     ->whereIn(
-                        $table . '.' . $column,
+                        $table.'.'.$column,
                         $requiredField['value']
                     );
             })
@@ -2834,26 +2915,27 @@ class ContentRepository extends RepositoryBase
         $orderByDirection = 'desc',
         $requiredField = []
     ) {
-        $contentRows = $this->query()
-            ->selectPrimaryColumns()
-            ->restrictByUserAccess()
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->whereIn(ConfigService::$tableContent . '.status', $status)
-            ->where(
-                ConfigService::$tableContent . '.published_on',
-                $publishedOnComparisonOperator,
-                $publishedOnValue
-            );
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->whereIn(ConfigService::$tableContent.'.type', $types)
+                ->whereIn(ConfigService::$tableContent.'.status', $status)
+                ->where(
+                    ConfigService::$tableContent.'.published_on',
+                    $publishedOnComparisonOperator,
+                    $publishedOnValue
+                );
 
         if (!empty($requiredField)) {
             if (in_array($requiredField['key'], config('railcontent.contentColumnNamesForFields'))) {
                 $contentRows->where(
-                    ConfigService::$tableContent . '.' . $requiredField['key'],
+                    ConfigService::$tableContent.'.'.$requiredField['key'],
                     $requiredField['value']
                 );
             } else {
                 $column = ($requiredField['key'] == 'instructor') ? 'instructor_id' : $requiredField['key'];
-                $table = config('railcontent.table_prefix') . 'content_' . $requiredField['key'] . 's';
+                $table = config('railcontent.table_prefix').'content_'.$requiredField['key'].'s';
             }
             $contentRows->join($table, function (JoinClause $joinClause) use (
                 $requiredField,
@@ -2861,241 +2943,152 @@ class ContentRepository extends RepositoryBase
                 $column
             ) {
                 $joinClause->on(
-                    $table . '.content_id',
+                    $table.'.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    ConfigService::$tableContent.'.id'
                 )
                     ->whereIn(
-                        $table . '.' . $column,
+                        $table.'.'.$column,
                         $requiredField['value']
                     );
             })
                 ->groupBy('railcontent_content.id');
         }
 
-        return $contentRows->count(DB::raw('DISTINCT ' . ConfigService::$tableContent . '.id'));
+        return $contentRows->count(DB::raw('DISTINCT '.ConfigService::$tableContent.'.id'));
     }
 
-    private function getFilterOptionsForQueryVersion2(ContentQueryBuilder $contentQueryBuilder)
+    private function getFilterOptionsWithCounting($selectedFilterCategories)
     {
         $filterOptionsArray = [];
-
-        $joinTablesQuery = clone($contentQueryBuilder);
-        $contentTableQuery = clone($contentQueryBuilder);
-
-        $joinTablesQuery->select([]);
 
         // get values that are in other tables
         $filterNameToTableNameAndColumnName = [
             'instructor' => [
                 'table' => 'railcontent_content_instructors',
                 'column' => 'instructor_id',
-                'alias' => '_rci'
+                'alias' => '_rci',
             ],
-            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'genre' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcs'],
+            'style' => ['table' => 'railcontent_content_styles', 'column' => 'style', 'alias' => '_rcsss'],
             'topic' => ['table' => 'railcontent_content_topics', 'column' => 'topic', 'alias' => '_rct'],
             'focus' => ['table' => 'railcontent_content_focus', 'column' => 'focus', 'alias' => '_rcf'],
             'bpm' => ['table' => 'railcontent_content_bpm', 'column' => 'bpm', 'alias' => '_rcb'],
+            'essentials' => ['table' => 'railcontent_content_essentials', 'column' => 'essentials', 'alias' => '_rce'],
+            'theory' => ['table' => 'railcontent_content_theory', 'column' => 'theory', 'alias' => '_rcth'],
+            'creativity' => ['table' => 'railcontent_content_creativity', 'column' => 'creativity', 'alias' => '_rcc'],
+            'lifestyle' => ['table' => 'railcontent_content_lifestyle', 'column' => 'lifestyle', 'alias' => '_rcl'],
+            'gear' => ['table' => 'railcontent_content_gears', 'column' => 'gear', 'alias' => '_rcge'],
         ];
 
-        $filterOptions = self::$catalogMetaAllowableFilters ?? [
-            'data',
-            'instructor',
-            'style',
-            'topic',
-            'focus',
-            'bpm',
-        ];
+        $filterOptions = $this->setFilterOptionsBasedOnIncludedTypes();
 
-        // we always need the related data
-        if (!in_array('data', $filterOptions)) {
-            $filterOptions[] = 'data';
+        $includedFields = collect($this->includedFields);
+        $initialFilters = $this->includedFields;
+        foreach ($initialFilters as $initialFilter) {
+            if (!in_array($initialFilter['name'], $filterOptions)) {
+                $filterOptions[] = $initialFilter['name'];
+            }
         }
-
-        $filterOptions = array_unique($filterOptions);
-
         foreach ($filterOptions as $filterOption) {
             $filterOptionTableName = $filterNameToTableNameAndColumnName[$filterOption]['table'] ?? null;
-            $filterOptionTableAliasName = $filterNameToTableNameAndColumnName[$filterOption]['alias'] ?? null;
             $filterOptionColumnName = $filterNameToTableNameAndColumnName[$filterOption]['column'] ?? null;
 
             if (empty($filterOptionTableName) || empty($filterOptionColumnName)) {
                 continue;
             }
 
-            $hasJoinAlready = false;
-
-            if (!empty($joinTablesQuery->joins)) {
-                foreach ($joinTablesQuery->joins as $existingJoin) {
-                    /**
-                     * @var $existingJoin JoinClause
-                     */
-                    if ($existingJoin->table == $filterOptionTableName . ' as ' . $filterOptionTableAliasName) {
-                        $hasJoinAlready = true;
-                    }
-                }
+            if (in_array($filterOption, $selectedFilterCategories->toArray())) {
+                $otherCategories = $includedFields->where('name', '!=', $filterOption);
+                $this->includedFields =
+                    $otherCategories->values()
+                        ->toArray();
             }
 
-            if (!$hasJoinAlready) {
-                $joinTablesQuery->leftJoin(
-                    $filterOptionTableName . ' as ' . $filterOptionTableAliasName,
-                    $filterOptionTableAliasName . '.content_id',
-                    '=',
-                    'railcontent_content.id'
-                );
-            }
-
-            $joinTablesQuery->addSelect(
-                [$filterOptionTableAliasName . '.' . $filterOptionColumnName . ' as ' . $filterOptionColumnName]
+            $db = DB::table($filterOptionTableName.' as m');
+            $db->selectRaw(
+                'm.'.$filterOptionColumnName.' as grouped_by_value,	
+	COUNT( DISTINCT(lessons.id)) AS lessonsCount'
             );
+            $rq =
+                $this->query()
+                    ->selectRaw(' railcontent_content.id')
+                    ->restrictByUserAccess()
+                    ->restrictByFields($this->requiredFields)
+                    ->includeByFields($this->includedFields)
+                    ->restrictByUserStates($this->requiredUserStates)
+                    ->includeByUserStates($this->includedUserStates)
+                    ->restrictByTypes($this->typesToInclude)
+                    ->restrictByParentIds($this->requiredParentIds)
+                    ->whereRaw('railcontent_content.id = m.content_id');
 
-            $groupBy[] = $filterOptionColumnName;
+            $tableResults =
+                $db->joinLateral($rq, 'lessons')
+                    ->whereNotNull('lessons.id')
+                    ->groupBy('m.'.$filterOptionColumnName)
+                    ->get();
+            $this->includedFields = $initialFilters;
 
-            $filterOptionsArray[$filterOptionColumnName] = [];
-        }
-
-        $countingQuery = clone($joinTablesQuery);
-
-        if (!empty($groupBy)) {
-            $joinTablesQuery->groupBy($groupBy);
-        } else {
-            return [];
-        }
-
-        $tableResults = $joinTablesQuery->get();
-
-        $countingQuery->addSelect(
-            ['railcontent_content.id']
-        );
-        $groupBy[] = 'id';
-        $countingQuery->groupBy($groupBy);
-
-        $countingQueryResults = $countingQuery->get();
-
-        $counts = [];
-        foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
-            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->pluck($filterOptionName)
-                ->unique()
-                ->values()
-                ->toArray();
-            $counts[$filterOptionName] = $countingQueryResults->whereNotNull($filterOptionName)
-                ->unique(function ($item) use ($filterOptionName) {
-                    return $item['id'] . $item["$filterOptionName"];
-                })
-                ->pluck($filterOptionName)
-                ->countBy()
-                ->toArray();
-
-            foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $countingItems = '';
-                if (self::$countFilterOptionItems) {
-                    $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                    $countingItems = ' (' . $nr . ')';
-                }
-                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
-                    trim(
-                        $filterOptionValueToClean . $countingItems
-                    )
-                );
+            foreach ($tableResults ?? [] as $result) {
+                $filterOptionsArray[$filterOption][] = $result->grouped_by_value.' ('.$result->lessonsCount.')';
             }
-
-            $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
-            sort($filterOptionsArray[$filterOptionName]);
-        }
-
-        // todo: handle instructors which need to be pulled from matching content rows
-        if (!empty($filterOptionsArray['instructor_id'])) {
-            $instructorRows = $this->query()
-                ->select(['railcontent_content.id as id', 'name', 'value as head_shot_picture_url'])
-                ->leftJoin(
-                    ConfigService::$tableContentData,
-                    function (JoinClause $joinClause) {
-                        $joinClause->on(
-                            ConfigService::$tableContentData . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->where(
-                                ConfigService::$tableContentData . '.id',
-                                '=',
-                                DB::raw(
-                                    '(SELECT id FROM ' . ConfigService::$tableContentData . ' WHERE ' . ConfigService::$tableContentData . '.content_id = railcontent_content.id and railcontent_content_data.key = \'head_shot_picture_url\' LIMIT 1)'
-                                )
-                            );
-                    }
-                )
-                ->whereIn('railcontent_content.id', $filterOptionsArray['instructor_id'])
-                ->orderBy('name')
-                ->get()
-                ->toArray();
-
-            foreach ($instructorRows as $instructorRowIndex => $instructorRow) {
-                $instructorRows[$instructorRowIndex]["fields"][] = [
-                    'id' => 1,
-                    'key' => 'name',
-                    'value' => $instructorRow["name"]
-                ];
-                $instructorRows[$instructorRowIndex]["data"][] = [
-                    'id' => 1,
-                    'key' => 'head_shot_picture_url',
-                    'value' => $instructorRow["head_shot_picture_url"]
-                ];
+            if (isset($filterOptionsArray[$filterOption])) {
+                usort($filterOptionsArray[$filterOption], [$this, 'sortByAlphaThenNumeric']);
             }
-
-            $filterOptionsArray['instructor'] = $instructorRows;
         }
-
-        // dd($filterOptionsArray);
 
         // todo: now to the right place
         $filterOptionNameToContentTableColumnName = [
-            'difficulty' => ConfigService::$tableContent . '.difficulty',
-            'difficulty_range' => ConfigService::$tableContent . '.difficulty_range',
-            'artist' => ConfigService::$tableContent . '.artist',
-            'type' => ConfigService::$tableContent . '.type',
-            'instrument' => ConfigService::$tableContent . '.instrument',
-            'content_id' => ConfigService::$tableContent . '.id',
+            'difficulty' => ConfigService::$tableContent.'.difficulty',
+            'artist' => ConfigService::$tableContent.'.artist',
+            'type' => ConfigService::$tableContent.'.type',
+            'instrument' => ConfigService::$tableContent.'.instrument',
+            'content_id' => ConfigService::$tableContent.'.id',
+            'instrumentless' => ConfigService::$tableContent.'.instrumentless',
         ];
 
-        $contentTableQuery->addSelect(
-            ['railcontent_content.id as id']
-        );
-        $contentTableQuery->groupBy($filterOptionNameToContentTableColumnName)
-            ->select($filterOptionNameToContentTableColumnName);
-
-        $tableResults = $contentTableQuery->get();
-        if (!self::$catalogMetaAllowableFilters) {
-            self::$catalogMetaAllowableFilters = ['style', 'topic', 'difficulty'];
-        }
-
-        $filterOptionNameToContentTableColumnName = array_intersect_key(
-            $filterOptionNameToContentTableColumnName,
-            array_combine(self::$catalogMetaAllowableFilters, self::$catalogMetaAllowableFilters)
-        );
         foreach ($filterOptionNameToContentTableColumnName as $filterOptionName => $filterOptionValue) {
-            $filterOptionsArray[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->pluck($filterOptionName)
-                ->unique()
-                ->values()
-                ->toArray();
-            $counts[$filterOptionName] = $tableResults->whereNotNull($filterOptionName)
-                ->unique(function ($item) use ($filterOptionName) {
-                    return $item['id'] . $item["$filterOptionName"];
-                })
-                ->pluck($filterOptionName)
-                ->countBy()
-                ->toArray();
+            if (!in_array($filterOptionName, $filterOptions)) {
+                continue;
+            }
+            if (in_array($filterOptionName, $selectedFilterCategories->toArray())) {
+                $otherCategories = $includedFields->where('name', '!=', $filterOptionName);
+                $this->includedFields =
+                    $otherCategories->values()
+                        ->toArray();
+            }
+            $rq =
+                $this->query()
+                    ->selectFilterOptionColumns()
+                    ->addSelect(['railcontent_content.id as id'])
+                    ->restrictByUserAccess()
+                    ->restrictByFields($this->requiredFields)
+                    ->includeByFields($this->includedFields)
+                    ->restrictByUserStates($this->requiredUserStates)
+                    ->includeByUserStates($this->includedUserStates)
+                    ->restrictByTypes($this->typesToInclude)
+                    ->restrictByParentIds($this->requiredParentIds)
+                    ->groupBy($filterOptionNameToContentTableColumnName)
+                    ->select($filterOptionNameToContentTableColumnName);
+            $tableResults = $rq->get();
+            $this->includedFields = $initialFilters;
+            $counts[$filterOptionName] =
+                $tableResults->whereNotNull($filterOptionName)
+                    ->pluck($filterOptionName)
+                    ->countBy();
+            $filterOptionsArray[$filterOptionName] =
+                $counts[$filterOptionName]->keys()
+                    ->toArray();
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
                 $countingItems = '';
                 if (self::$countFilterOptionItems) {
                     $nr = $counts[$filterOptionName][$filterOptionValueToClean];
-                    $countingItems = ' (' . $nr . ')';
+                    $countingItems = ' ('.$nr.')';
                 }
 
                 $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
                     ucwords(
-                        $filterOptionValueToClean . $countingItems
+                        $filterOptionValueToClean.$countingItems
                     )
                 );
             }
@@ -3104,7 +3097,82 @@ class ContentRepository extends RepositoryBase
             usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
         }
 
+        //Return Currently Selected Filter(s), regardless of number of results
+        foreach ($includedFields->where('name', '!=', 'multiple_fields') as $selected) {
+            if (!isset($filterOptionsArray[$selected['name']])) {
+                $filterOptionsArray[$selected['name']][] = $selected['value'].' (0)';
+            } else {
+                $values = [];
+                foreach ($filterOptionsArray[$selected['name']] as $existOption) {
+                    $difficultyArray = (explode(' (', $existOption));
+                    $values[] = is_numeric($difficultyArray[0]) ? (int)$difficultyArray[0] : $difficultyArray[0];
+                }
+
+                if (!in_array(ucfirst($selected['value']), $values)) {
+                    $filterOptionsArray[$selected['name']][] = $selected['value'].' (0)';
+                }
+            }
+        }
+
         return $filterOptionsArray;
     }
 
+    /**
+     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string[]
+     */
+    private function setFilterOptionsBasedOnIncludedTypes()
+    : mixed
+    {
+        $brand = config('railcontent.brand');
+        if (!self::$catalogMetaAllowableFilters && count($this->typesToInclude) >= 1) {
+            $type =
+                ($this->typesToInclude[0] === 'song' ||
+                    $this->typesToInclude[0] === 'course' ||
+                    $this->typesToInclude[0] === 'rudiment' ||
+                    $this->typesToInclude[0] === 'song-tutorial' ||
+                    $this->typesToInclude[0] === 'student-review' ||
+                    $this->typesToInclude[0] === 'play-along') ? $this->typesToInclude[0].'s' :
+                    $this->typesToInclude[0];
+            $type = ($this->typesToInclude[0] === 'live') ? 'live-streams' : $type;
+            $type = ($this->typesToInclude[0] === 'instructor') ? 'coaches' : $type;
+            $type = (count($this->typesToInclude) > 3) ? 'all' : $type;
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.'.$type.'.allowableFilters'));
+        } elseif (in_array('instructor', Arr::pluck($this->requiredFields, 'name'))) {
+            self::$catalogMetaAllowableFilters =
+                (config('railcontent.cataloguesMetadata.'.$brand.'.coach-lessons.allowableFilters'));
+        }
+
+        $filterOptions = self::$catalogMetaAllowableFilters ?? [
+                'instructor',
+                'genre',
+                'topic',
+                'focus',
+                'bpm',
+                'essentials',
+                'theory',
+                'creativity',
+                'lifestyle',
+                'type',
+                'gear',
+            ];
+
+        $filterOptions = array_unique($filterOptions);
+
+        return $filterOptions;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getArtists()
+    {
+        return $this->query()
+            ->selectRaw('DISTINCT '.ConfigService::$tableContent.'.artist as name')
+            ->restrictByUserAccess()
+            ->restrictByTypes(['song'])
+            ->whereNotNull('artist')
+            ->orderBy('artist','asc')
+            ->get();
+    }
 }

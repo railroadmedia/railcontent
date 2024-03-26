@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
-use Railroad\Railcontent\Events\UserContentProgressStarted;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -165,7 +164,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressStarted($userId, $contentId, $progressPercent));
+        event(new UserContentProgressSaved($userId, $contentId, $progressPercent, self::STATE_STARTED));
 
         return true;
     }
@@ -751,5 +750,13 @@ class UserContentProgressService
     public function countContentProgress($contentId, $date = null, $state = null)
     {
         return $this->userContentRepository->countContentProgress($contentId, $date, $state);
+    }
+
+    public function countByArtistTypesUserProgress(array $types, $artist)
+    {
+        return $this->userContentRepository->countByArtistTypesUserProgress(
+            $types,
+            $artist
+        );;
     }
 }
