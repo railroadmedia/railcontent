@@ -31,7 +31,7 @@ class ShopifyDeleteService
 
     public function deleteSubscriptionPaymentOrder(SubscriptionPayment $subscriptionPayment): void
     {
-        $shopifyOrderId = $subscriptionPayment->shopify_order_id;
+        $shopifyOrderId = $subscriptionPayment->shopify_id;
         $orderResource = $this->shopify->getOrder($shopifyOrderId);
 
         $this->shopifyCancelService->cancelOrderResource($orderResource);
