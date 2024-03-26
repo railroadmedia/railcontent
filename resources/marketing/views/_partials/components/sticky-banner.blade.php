@@ -1,4 +1,4 @@
-<a href="{{ $link }}" class="flex items-center justify-center px-2 sm:px-0 w-full z-[100] sticky top-[40px] md:top-[56px]" style="{{$style}}">
+<a href="{{ $link }}" class="flex items-center justify-center px-2 sm:px-0 w-full z-[60] sticky top-[40px] md:top-[56px]" style="{{$style}}">
     @if(!empty($logo))
     <img
         class="h-8 sm:h-10 mr-4 transition-opacity opacity-0"
