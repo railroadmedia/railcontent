@@ -59,6 +59,11 @@ class ShopifyGateway
                                     amount
                                 }
                             }
+                            totalRefundedSet {
+                                shopMoney {
+                                    amount
+                                }
+                            }
                         }
                     }
                     pageInfo {
