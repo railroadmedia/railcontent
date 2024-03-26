@@ -130,6 +130,16 @@
         .timed-toggle .active-toggle.active .description {
             max-height:100px!important;
         }
+        @media (max-width: 763px) {
+         .sticky-anniversary {
+            top: 40px;
+                }
+            }
+        @media (min-width: 764px) {
+            .sticky-anniversary {
+                top: 56px;
+            }
+        }
     </style>
 @stop
 
@@ -166,6 +176,17 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+    @endif
+
+    @if(Request::path() == '/')
+    <a href="/anniversary"
+        class="sticky-anniversary sticky flex items-center justify-center z-[100]" style="background: #CFDDF9;">
+        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/210x0/filters:quality(95)/marketing/pianote/promos/march/8-anniversary-sticky-logo.webp" alt="Pianote Anniversary Logo" />
+        <p class="inline-block text-xs mx-0 leading-tight">
+            Celebrate <strong>8 years of Pianote </strong> with
+            <br>8 FREE bonuses 🥳 <span class="text-pianote uppercase">CLICK HERE</span>
+        </p>
+    </a>
     @endif
 
     @php
@@ -261,6 +282,7 @@
             ])
         @endif
     @endif
+
 
     @hasSection('promo-banner')
         @yield('promo-banner')
