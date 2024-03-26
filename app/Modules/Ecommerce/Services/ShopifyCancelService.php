@@ -2,13 +2,7 @@
 
 namespace App\Modules\Ecommerce\Services;
 
-use App\Modules\Content\Services\ContentPermissionsService;
-use App\Modules\Ecommerce\Enums\UserAccessPermissionsStatusEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
-use App\Modules\Ecommerce\Models\SubscriptionPayment;
-use App\Modules\Ecommerce\Models\UserAccessPermission;
-use Illuminate\Support\Collection;
-use Signifly\Shopify\Exceptions\NotFoundException;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
