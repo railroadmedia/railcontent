@@ -222,34 +222,6 @@
                 </div>
             </div>
         </section>
-
-        <section x-show="!isEnrolled && timeLeft > 0" class="tw-py-10 tw-bg-white">
-            <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0">
-                <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-{{ $brand }} tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0">
-                    <h1 class="lg:tw-text-[34px] tw-font-extrabold">Course Only</h1>
-                    <h2 class="lg:tw-text-[26px] tw-font-extrabold">Free</h2>
-                    <i>Included in your membership</i>
-                    <button class="tw-btn-primary tw-bg-{{ $brand }} tw-my-5" x-on:click="enroll('{{ $registerButtonUrl }}');">Enroll Now</button>
-                    <p class="tw-text-xs tw-leading-relaxed">{{ $cohort['course_description'] }}</p>
-                </div>
-                <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-[#FFAE00] tw-text-center tw-relative tw-mx-auto md:tw-mx-0">
-                    <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
-                        <div class="tw-uppercase tw-bg-[#FFAE00] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold">{{ $cohort['get_product_badge'] }}</div>
-                    </div>
-                    <h1 class="lg:tw-text-[34px] tw-font-extrabold tw-leading-tight">Course + <br /> {{ $cohort['product_name'] }}</h1>
-                    <h2 class="lg:tw-text-[26px]"><s class="tw-text-[rgba(0,0,0,0.6)]">${{ floatVal($cohort['product_original_price']) }}</s> <span class="tw-font-extrabold">${{ floatVal($cohort['product_sale_price']) }}</span></h2>
-                    <i>Included in your membership</i>
-                    <button
-                        class="tw-btn-primary tw-bg-{{ $brand }} tw-my-5 tw-px-8 md:tw-px-16"
-                        x-bind:class="isEnrolled && 'tw-cursor-default'"
-                        x-on:click="enroll('{{ $registerButtonUrl }}', true);"
-                    >
-                        <span x-show="isEnrolled">You are enrolled</span> <span x-show="!isEnrolled">Enroll + Get the deal</span>
-                    </button>
-                    <p class="tw-text-xs tw-leading-relaxed">{{ $cohort['course_product_description'] }}</p>
-                </div>
-            </div>
-        </section>
     @endif
 
     {{--  Dropdown  --}}
@@ -267,17 +239,48 @@
             <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ $cohort['bottom_title'] }}</h3>
             {{--  Bottom description  --}}
             <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
-            <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
-                {{--  Buttons  --}}
-                <span x-cloak x-show="isEnrolled" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
-                <span x-cloak x-show="!isEnrolled && timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                <button x-cloak x-show="!isEnrolled && timeLeft > 0" x-on:click="enroll('{{ $registerButtonUrl }}')" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
-                @if(!empty($cohort['conversation_url']))
-                    <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
-                @endif
-            </div>
 
-            <div x-cloak x-show="isEnrolled" class="tw-text-center tw-mb-3"><a href="{{ $cohort['product_cart_link'] }}" class="tw-text-[#2563EB]">{{ $cohort['product_cart_link_description'] }}</a></div>
+            @if($cohort['is_product'])
+                <div x-cloak x-show="!isEnrolled && timeLeft > 0">
+                    <div class="md:tw-flex md:tw-justify-center md:tw-gap-6 tw-px-4 md:tw-px-0 tw-mb-4">
+                        <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-{{ $brand }} tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0">
+                            <h1 class="lg:tw-text-[34px] tw-font-extrabold">Course Only</h1>
+                            <h2 class="lg:tw-text-[26px] tw-font-extrabold">Free</h2>
+                            <i>Included in your membership</i>
+                            <button class="tw-btn-primary tw-bg-{{ $brand }} tw-my-5" x-on:click="enroll('{{ $registerButtonUrl }}');">Enroll Now</button>
+                            <p class="tw-text-xs tw-leading-relaxed">{{ $cohort['course_description'] }}</p>
+                        </div>
+                        <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-[#FFAE00] tw-text-center tw-relative tw-mx-auto md:tw-mx-0">
+                            <div class="tw-flex tw-justify-center tw-absolute tw-left-0 -tw-top-2 tw-w-full">
+                                <div class="tw-uppercase tw-bg-[#FFAE00] tw-px-5 tw-py-0.5 tw-rounded-full tw-text-[10px] tw-font-semibold">{{ $cohort['get_product_badge'] }}</div>
+                            </div>
+                            <h1 class="lg:tw-text-[34px] tw-font-extrabold tw-leading-tight">Course + <br /> {{ $cohort['product_name'] }}</h1>
+                            <h2 class="lg:tw-text-[26px]"><s class="tw-text-[rgba(0,0,0,0.6)]">${{ floatVal($cohort['product_original_price']) }}</s> <span class="tw-font-extrabold">${{ floatVal($cohort['product_sale_price']) }}</span></h2>
+                            <i>Included in your membership</i>
+                            <button
+                                class="tw-btn-primary tw-bg-{{ $brand }} tw-my-5 tw-px-8 md:tw-px-16"
+                                x-bind:class="isEnrolled && 'tw-cursor-default'"
+                                x-on:click="enroll('{{ $registerButtonUrl }}', true);"
+                            >
+                                <span x-show="isEnrolled">You are enrolled</span> <span x-show="!isEnrolled">Enroll + Get the deal</span>
+                            </button>
+                            <p class="tw-text-xs tw-leading-relaxed">{{ $cohort['course_product_description'] }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div x-cloak x-show="isEnrolled && timeLeft > 0" class="tw-text-center tw-mb-3"><a href="{{ $cohort['product_cart_link'] }}" class="tw-text-[#2563EB]">{{ $cohort['product_cart_link_description'] }}</a></div>
+            @else
+                <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
+                    {{--  Buttons  --}}
+                    <span x-cloak x-show="isEnrolled" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+                    <span x-cloak x-show="!isEnrolled && timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
+                    <button x-cloak x-show="!isEnrolled && timeLeft > 0" x-on:click="enroll('{{ $registerButtonUrl }}')" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                    @if(!empty($cohort['conversation_url']))
+                        <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
+                    @endif
+                </div>
+            @endif
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
@@ -346,17 +349,11 @@
 
 @section('inject-components')
     @include('partials._countdown',[
-            'countdownDate' => '2024/10/23',
+            'countdownDate' => $cohort['enrollment_end_date'],
             'promoVersion' => false
         ])
 
     <script>
-        {{--        @if(!empty($purchased) && $purchased)--}}
-        {{--            document.addEventListener('DOMContentLoaded', function () {--}}
-        {{--                window.openModal('signupModal');--}}
-        {{--            })--}}
-        {{--        @endif--}}
-
         document.addEventListener('alpine:init', () => {
             Alpine.data('cohort', () => ({
                 ...timer(),
