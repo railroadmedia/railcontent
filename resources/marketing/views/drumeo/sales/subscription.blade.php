@@ -299,7 +299,6 @@
                 margin:25px 10px 0
             }
         }
-
     </style>
 @stop
 
@@ -339,6 +338,16 @@
 
     @hasSection('top-bar')
         @yield('top-bar')
+    @endif
+   
+    @if(Request::path() == '/')
+    @include('_partials.components.sticky-banner', [
+        'link' => '/anniversary',
+        'logo' => 'marketing/drumeo/promos/march/12-anniversary-sticky-logo.webp',
+        'text' => 'Celebrate <strong>12 years of Drumeo </strong> with
+            <br>12 FREE bonuses 🥳 <span class="text-drumeo uppercase">CLICK HERE</span>',
+        'style' => 'background: #CFDDF9;',
+    ])
     @endif
 
     @php
@@ -439,6 +448,7 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
+
 
     @php
         $gridItems = $drumeo['gridItems'];
