@@ -269,8 +269,7 @@ class UserAccessPermissionsService
         OrderLineItem $lineItem,
         User $user
     ): void {
-        if ($accessPermission->status != $status->value) {
-            //Only ever need to update the order status if order is cancelled
+        if ($accessPermission->status != $status->value && !$accessPermission->manually_revoked) {
             $accessPermission->status = $status;
             $accessPermission->save();
         }
@@ -487,11 +486,16 @@ class UserAccessPermissionsService
         $userAccessPermission->time_lifetime = $lifetime ?? 0;
         $userAccessPermission->time_fixed = null;
         $userAccessPermission->status = $status;
+
         if ($revokedAt) {
             $userAccessPermission->revoked_at = $revokedAt;
+            $userAccessPermission->manually_revoked = true;
             if ($userAccessPermission->source == UserAccessPermissionsSourceEnum::Challenges->value) {
                 $userAccessPermission->source_hash = uniqid();
             }
+        }
+        else{
+            $userAccessPermission->manually_revoked = false;
         }
         $userAccessPermission->save();
 

@@ -33,6 +33,7 @@ class UserAccessPermissionsFactory extends Factory
             'time_lifetime' => 0,
             'time_fixed' => null,
             'status' => 'active',
+            'manually_revoked' => 0,
             'created_at' => Carbon::now()
                 ->toDateTimeString(),
         ];
