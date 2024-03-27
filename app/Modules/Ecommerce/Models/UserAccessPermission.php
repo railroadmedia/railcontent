@@ -26,6 +26,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property ?Carbon $time_fixed
  * @property UserAccessPermissionsStatusEnum $status
  * @property Carbon $revoked_at
+ * @property bool $manually_revoked
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
