@@ -281,7 +281,7 @@ class ContentService
 
                 $toZipper = [];
                 foreach($groupBySections as $section) {
-                    $toZipper[] = $recommendations[$section->value];
+                    $toZipper[] = $recommendations[$section->value] ?? [];
                 }
                 $zippered = zipperMerge($toZipper);
                 $numGroups += 1;
