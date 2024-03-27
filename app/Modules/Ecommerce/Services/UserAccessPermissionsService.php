@@ -494,6 +494,7 @@ class UserAccessPermissionsService
                 $userAccessPermission->source_hash = uniqid();
             }
         } else {
+            $userAccessPermission->revoked_at = null;
             $userAccessPermission->manually_revoked = false;
         }
         $userAccessPermission->save();
