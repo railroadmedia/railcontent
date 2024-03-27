@@ -173,15 +173,17 @@ class ShopifySyncService
         $shopifyOrderId = $orderResource->getAttributes()['id'];
 
         $amount = number_format($price, 2, '.', '');
-        // format the data for the payment
-        $paymentData =
-            [
-                "amount" => $amount,
-                "kind" => "sale",
-                // DEV NOTE: this is not documented in Shopify, but it is required
-                "source" => "external"
-            ];
-        $orderTransaction = $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+        if ($amount > 0) {
+            // format the data for the payment
+            $paymentData =
+                [
+                    "amount" => $amount,
+                    "kind" => "sale",
+                    // DEV NOTE: this is not documented in Shopify, but it is required
+                    "source" => "external"
+                ];
+            $orderTransaction = $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+        }
 
         // STEP 4: sync user products
         try {
