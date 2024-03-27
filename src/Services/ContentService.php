@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Modules\Content\Models\ContentUserProgress;
 use Carbon\Carbon;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
@@ -225,76 +227,181 @@ class ContentService
         return $this->idContentCache[$hash];
     }
 
+
     /**
      *
      *
      * @param int user_id
      * @param string brand
+     * @param RecommenderSection[] sections
+     * @param bool randomize
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendationsByContentType(
-        $user_id,
-        $brand,
-        $contentTypes,
-        RecommenderSection $section,
-        bool $randomize = false,
-        $limit = 6
-    ) {
-        $filter = $this->contentRepository->startFilter(
-            1,
-            $limit,
-            'published_on',
-            'desc',
-            $contentTypes,
-            [],
-            [],
-        );
-        $filterOptions = $this->getFilterOptions($filter, true, $contentTypes);
-        $cacheKey = 'RECSYS-'.$user_id.'-'.$brand;
-        $cached =
-            Cache::store('redis')
-                ->get($cacheKey);
-        if (!empty($cached)) {
+    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $pageSize=6, $page=1, array $groupByForLessonsPage = [])
+    {
+        $sectionString = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
+        $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
+        $cached = Cache::store('redis')->get($cacheKey);
+        // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
+        $useCaching = env('RECSYS_BE_CACHE', true);
+        if($useCaching && !is_null($cached)) {
             $recommendations = $cached;
         } else {
-            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $section);
+            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
             $ttl = 60 * 60;
             Cache::store('redis')
                 ->put($cacheKey, $recommendations, $ttl);
         }
 
-        if ($randomize) {
-            $recommendations = $this->randomizeRecommendations($recommendations, $limit);
-        } else {
-            $recommendations = array_slice($recommendations, 0, $limit);
-        }
-        $content = $this->getByIds($recommendations);
-
-        return (new ContentFilterResultsEntity([
-                                                   'results' => $content,
-                                                   'filter_options' => $filterOptions,
-                                                   'total_results' => $filter->countFilter(),
-                                               ]));
+        $processedRecommendations = $this->postProcessRecommendations($recommendations, $randomize, $pageSize, $page, $user_id, $groupByForLessonsPage);
+        return $this->getContentFilterResultsFromRecommendations($processedRecommendations, $groupByForLessonsPage);
     }
 
-    private function randomizeRecommendations($recommendations, $limit = 6, $useHourly = true)
+
+
+    private function postProcessRecommendations($recommendations, $randomize, $pageSize, $page, $user_id, array $groupByForLessonsPage = [])
+    {
+        if (!$recommendations) {
+            return [
+                'recommendations' => [],
+                'totalCount' => 0,
+                'totalLessons' => 0
+            ];
+        }
+        $removeSeen = env('RECSYS_REMOVE_PREVIOUSLY_SEEN', false);
+        if ($removeSeen) {
+            $recommendations = $this->removePreviousSeenRecommendations($recommendations, $user_id);
+        }
+        if ($groupByForLessonsPage) {
+            $groupedByRecommendations = [];
+            $totalCount = 0;
+            $numGroups = 0;
+            foreach($groupByForLessonsPage as $index => $groupBySections) {
+
+                $toZipper = [];
+                foreach($groupBySections as $section) {
+                    $toZipper[] = $recommendations[$section->value] ?? [];
+                }
+                $zippered = zipperMerge($toZipper);
+                $numGroups += 1;
+                $totalCount += count($zippered);
+                $groupedByRecommendations[] = [
+                    'grouped_by_field' => $index,
+                    'lessons_grouped_by_field' => implode(',', $zippered), // exploded values,
+                    'type' => 'recommended',
+                    'recommended' => $index,
+                    'id' => $index,
+                    'fields' => [[
+                        'id' => substr(md5(mt_rand()), 0, 10),
+                        'content_id' => substr(md5(mt_rand()), 0, 10),
+                        'key' => 'name',
+                        'value' => $index,
+                        'type' => 'string',
+                        'position' => 1,
+                    ]],
+                    'all_lessons_count' => $totalCount,
+                    'lessons' => $zippered,
+                    'data' => []
+                ];
+            }
+            return [
+                'recommendations' => $groupedByRecommendations,
+                'totalCount' => $numGroups,
+                'totalLessons' => $totalCount //TODO fix this to count the minimum of each
+            ];
+        } else {
+            $recommendations = zipperMerge($recommendations);
+            $totalCount = count($recommendations);
+            if ($randomize) {
+                throw new InvalidArgumentException("I got rid of this"); //TODO remove parameter with cleanup
+                $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
+            } else {
+                $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
+            }
+            return [
+                'recommendations' => $recommendations,
+                'totalCount' => $totalCount,
+                'totalLessons' => $totalCount
+            ];
+        }
+    }
+
+    private function removePreviousSeenRecommendations($recommendations, $user_id)
+    {
+        $allkey = zipperMerge($recommendations);
+        $previouslySeenContent = ContentUserProgress::where(['user_id' => $user_id])->whereIn('content_id', $allkey)->get()->pluck('content_id');
+        if ($previouslySeenContent->count() == 0) {
+            return $recommendations;
+        }
+        $filteredContent = [];
+        foreach ($recommendations as $sectionName => $section) {
+            $filteredContent[$sectionName] = array_filter($section, (fn($contentID) =>
+            $previouslySeenContent->contains(fn($value, $key) =>
+                $contentID != $value
+            )));
+        }
+        return $filteredContent;
+    }
+
+    private function getContentFilterResultsFromRecommendations($recommendations, $isGroupedBy)
+    {
+        if ($isGroupedBy) {
+            foreach($recommendations['recommendations'] as $index => $groupedBy) {
+                $recommendations['recommendations'][$index]['lessons'] = $this->getByIds($groupedBy['lessons']);
+            }
+            $content = $recommendations['recommendations'];
+            $content = Decorator::decorate($content, 'group');
+        } else {
+            $content = $this->getByIds($recommendations['recommendations']);
+        }
+        $filterOptions = [
+            "style" => ["All"],
+            "topic" => ["All"],
+            "instructor" =>[],
+            "artist" => ["All"],
+            "type" => ["Recommendation"],
+        ];
+
+        return (new ContentFilterResultsEntity([
+            'results' => $content,
+            'filter_options' => $filterOptions,
+            'total_results' => $recommendations['totalCount'],
+            'total_lessons' => $recommendations['totalLessons'] //TODO this needs to be updated for groupBy
+        ]));
+    }
+
+    private function randomizeRecommendations($recommendations, $limit=6, $useHourly=true)
     {
         if ($limit > count($recommendations)) {
             return $recommendations;
-        }
-        if ($useHourly) {
-            // deterministic random: results will be the same for each hour of the day
-            // no caching involved :)
-            $hour = date("H");
-            srand($hour);
+        } else {
+            if ($useHourly) {
+                // deterministic random: results will be the same for each hour of the day
+                // no caching involved :)
+                $hour = date("H");
+                srand($hour);
+            }
             $randomKeys = array_rand($recommendations, $limit);
             srand(time());
 
             return array_intersect_key($recommendations, array_flip($randomKeys));
-        } else {
-            return array_rand($recommendations, $limit);
         }
+    }
+
+    private function paginateRecommendations($recommendations, $pageSize, $page)
+    {
+        $offset = ($page  - 1) * $pageSize;
+        $recommendations = array_slice($recommendations, $offset, $pageSize);
+        return $recommendations;
+    }
+
+    private function paginateGroupedByRecommendations($recommendations, $pageSize, $page)
+    {
+
+        $offset = ($page  - 1) * $pageSize;
+        $recommendations = array_slice($recommendations, $offset, $pageSize);
+        return $recommendations;
     }
 
     /**
