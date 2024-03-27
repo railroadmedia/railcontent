@@ -351,6 +351,7 @@ class ContentService
                 $recommendations['recommendations'][$index]['lessons'] = $this->getByIds($groupedBy['lessons']);
             }
             $content = $recommendations['recommendations'];
+            $content = Decorator::decorate($content, 'group');
         } else {
             $content = $this->getByIds($recommendations['recommendations']);
         }
