@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Helpers\FiltersHelper;
@@ -115,6 +116,52 @@ class ContentJsonController extends Controller
             'transformer' => DataTransformer::class,
             'totalResults' => $contentData['total_results'],
             'filterOptions' => $filters,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonPaginatedResponse
+     */
+    public function recommended(Request $request)
+    {
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
+        FiltersHelper::prepareFiltersFields();
+
+        $brand = $request->get('brand', brand());
+        $pageSize = $request->get('limit', 100);
+        $randomize = $request->get('randomize', 0);
+        $filter = FiltersHelper::$filter ?? '';
+        $page = $request->get('page', 1);
+        $sections = match(strtolower($filter)) {
+            'songs', 'song' => [RecommenderSection::Song],
+            // everything but songs
+            'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;}),
+            default => [],
+        };
+        if (!$sections) {
+            $groupBySections = [
+                'Songs You Might Like' => [RecommenderSection::Song],
+                'Lessons You Might Like' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;})
+            ];
+        } else {
+            $groupBySections = [];
+        }
+        $contentData = $this->contentService->getRecommendedContent(
+            user()->id,
+            $brand,
+            sections: $sections,
+            randomize:$randomize,
+            pageSize:$pageSize,
+            page:$page,
+            groupByForLessonsPage: $groupBySections
+        );
+
+        return reply()->json($contentData['results'], [
+            'transformer' => DataTransformer::class,
+            'totalResults' => $contentData['total_results'],
+            'filterOptions' => $contentData['filter_options'],
         ]);
     }
 

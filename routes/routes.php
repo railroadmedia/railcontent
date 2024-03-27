@@ -40,6 +40,11 @@ Route::group(
                 )->name('content.index');
 
                 Route::get(
+                    '/recommended',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@recommended'
+                )->name('content.recommended');
+
+                Route::get(
                     '/content/parent/{parentId}',
                     \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByParentId'
                 )->name('content.get-by-parent-id');
