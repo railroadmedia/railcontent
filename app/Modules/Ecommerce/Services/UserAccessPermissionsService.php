@@ -493,8 +493,7 @@ class UserAccessPermissionsService
             if ($userAccessPermission->source == UserAccessPermissionsSourceEnum::Challenges->value) {
                 $userAccessPermission->source_hash = uniqid();
             }
-        }
-        else{
+        } else {
             $userAccessPermission->manually_revoked = false;
         }
         $userAccessPermission->save();
@@ -591,6 +590,7 @@ class UserAccessPermissionsService
         $accessPermission->time_minutes = (self::$timeMinutes) ? self::$timeMinutes : 0;
         $accessPermission->time_lifetime = $isLifeTime;
         $accessPermission->time_fixed = $fixed;
+        $accessPermission->manually_revoked = 0;
         $accessPermission->status = $status;
         try {
             $accessPermission->save();
