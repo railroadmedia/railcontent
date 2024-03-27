@@ -54,6 +54,15 @@ return [
                         'tag-action-tracker-id' => '',
                         'api-action-tracker-id' => '',
                         'sign-up-action-tracker-id' => ''
+                    ],
+                'everflow' =>
+                    [
+                        'base_link' => '',
+                        'nid' => '',
+                        'verification_token' => '',
+                        'conversion_event_id' => '', // This comes from Brands/X/Events
+                        'brand_id' => '',
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -98,7 +107,7 @@ return [
             ]
         ],
         'production' => [
-            'active-tracking-providers' => ['ga4', 'gtm', 'ga', 'im'],
+            'active-tracking-providers' => ['ga4', 'gtm', 'ga', 'im', 'ef'],
 
             'providers' => [
                 'google-analytics' =>
@@ -135,6 +144,15 @@ return [
                         'tag-action-tracker-id' => '',
                         'api-action-tracker-id' => '',
                         'sign-up-action-tracker-id' => ''
+                    ],
+                'everflow' =>
+                    [
+                        'base_link' => '',
+                        'nid' => '',
+                        'verification_token' => '',
+                        'conversion_event_id' => '',
+                        'brand_id' => '',
+                        'sign-up-action-tracker-id' => ''
                     ]
             ],
         ],
@@ -142,7 +160,7 @@ return [
 
     'drumeo' => [
         'local' => [
-            'active-tracking-providers' => ['ga', 'fp', 'gaw', 'ga4', 'gtm', 'im',],
+            'active-tracking-providers' => ['ga', 'fp', 'gaw', 'ga4', 'gtm', 'im'],
 
             'providers' => [
                 'google-analytics' =>
@@ -179,6 +197,16 @@ return [
                         'tag-action-tracker-id' => '27554',
                         'api-action-tracker-id' => '27555',
                         'sign-up-action-tracker-id' => ''
+                    ],
+                //TODO remove this before production
+                'everflow' =>
+                    [
+                        'base_link' => 'https://www.mcqn3fgtrk.com',
+                        'nid' => '2809',
+                        'verification_token' => 'Wd6qt9rAYSpV9Fm3QYUtBdnra9p4D0',
+                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'brand_id' => 1,
+                        'sign-up-action-tracker-id' => 2
                     ]
             ]
         ],
@@ -265,7 +293,7 @@ return [
             ]
         ],
         'production' => [
-            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im'],
+            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im', 'ef'],
 
             'providers' => [
                 'google-analytics' =>
@@ -302,6 +330,15 @@ return [
                         'tag-action-tracker-id' => '27554',
                         'api-action-tracker-id' => '27555',
                         'sign-up-action-tracker-id' => '28350'
+                    ],
+                'everflow' =>
+                    [
+                        'base_link' => 'https://www.mcqn3fgtrk.com',
+                        'nid' => '2809',
+                        'verification_token' => 'Wd6qt9rAYSpV9Fm3QYUtBdnra9p4D0',
+                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'brand_id' => 1,
+                        'sign-up-action-tracker-id' => 2
                     ]
             ]
         ]
@@ -389,7 +426,7 @@ return [
             ]
         ],
         'production' => [
-            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im'],
+            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im', 'ef'],
 
             'providers' => [
                 'google-analytics' =>
@@ -426,6 +463,15 @@ return [
                         'tag-action-tracker-id' => '27558',
                         'api-action-tracker-id' => '27559',
                         'sign-up-action-tracker-id' => '28349',
+                    ],
+                'everflow' =>
+                    [
+                        'base_link' => 'https://www.mcqn3fgtrk.com',
+                        'nid' => '2809',
+                        'verification_token' => 'ESebdMzhYRuj9e81RThwqbp6SQ8s1W',
+                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'brand_id' => 2,
+                        'sign-up-action-tracker-id' => '2'
                     ]
             ]
         ]
@@ -505,7 +551,7 @@ return [
             ]
         ],
         'production' => [
-            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im'],
+            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im', 'ef'],
 
             'providers' => [
                 'google-analytics' =>
@@ -541,6 +587,15 @@ return [
                         'tag-action-tracker-id' => '27560',
                         'api-action-tracker-id' => '27561',
                         'sign-up-action-tracker-id' => '28352'
+                    ],
+                'everflow' =>
+                    [
+                        'base_link' => 'https://www.mcqn3fgtrk.com',
+                        'nid' => '2809',
+                        'verification_token' => 'teNV6vx5a0OfPlf9MuXheR5PJMNURf',
+                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'brand_id' => 3,
+                        'sign-up-action-tracker-id' => 2
                     ]
             ]
         ]
@@ -588,7 +643,7 @@ return [
             ]
         ],
         'production' => [
-            'active-tracking-providers' => ['gtm', 'ga4', 'im'],
+            'active-tracking-providers' => ['gtm', 'ga4', 'im', 'ef'],
 
             'providers' => [
                 'google-tag-manager' =>
@@ -608,6 +663,15 @@ return [
                         'tag-action-tracker-id' => '27792',
                         'api-action-tracker-id' => '27793',
                         'sign-up-action-tracker-id' => '28353'
+                    ],
+                'everflow' =>
+                    [
+                        'base_link' => 'https://www.mcqn3fgtrk.com',
+                        'nid' => '2809',
+                        'verification_token' => 'LvxhwYIlQ32s7j1r2vMZTtJ0afohJz',
+                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'brand_id' => 4,
+                        'sign-up-action-tracker-id' => 2
                     ]
             ]
         ]
