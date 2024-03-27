@@ -54,7 +54,8 @@ watch(
   () => props.journeySection,
   (journeySection) => {
     const formattedJourneySection = () => {
-      if(journeySection.toLowerCase() === 'podcast') {
+      const sectionLowercased = journeySection.toLowerCase();
+      if(sectionLowercased === 'podcast' || sectionLowercased === 'the-pianote-podcast') {
         return 'podcasts';
       } else {
         return toKebabCase(journeySection);
