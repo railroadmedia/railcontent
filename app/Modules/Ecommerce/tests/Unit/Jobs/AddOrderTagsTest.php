@@ -365,7 +365,6 @@ class AddOrderTagsTest extends TestCase
                     $message,
                     [
                         "AddOrderTags: Adding tags to Shopify Order $orderId: ",
-                        ShopifyTagEnum::InitialOrder->value,
                         ShopifyTagEnum::TrialConversion->value
                     ]
                 );
@@ -378,12 +377,61 @@ class AddOrderTagsTest extends TestCase
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
-                    'tags: '.json_encode([ShopifyTagEnum::TrialConversion->value, ShopifyTagEnum::InitialOrder->value])
+                    'tags: '.json_encode([ShopifyTagEnum::TrialConversion->value])
                 );
         });
     }
 
     public function test_adds_membership_renewal_order_tag()
+    {
+        // the order id from the resource file
+        $orderId = 5671228244262;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/drumeo_membership_renewal.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+        // set the source to be an automated one, so that we don't have the Initial Order tag trump the Membership Renewal
+        $json['body']['source_name'] = config('shopify.automated_source_names')[0];
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._drumeo_memberships')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return Str::containsAll(
+                    $message,
+                    [
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ",
+                        ShopifyTagEnum::MembershipRenewal->value
+                    ]
+                );
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the membership renewal tag
+        Http::assertSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([
+                        ShopifyTagEnum::MembershipRenewal->value
+                    ])
+                );
+        });
+    }
+
+    public function test_does_not_add_membership_renewal_order_tag_when_trumped_by_initial_order()
     {
         // the order id from the resource file
         $orderId = 5671228244262;
@@ -411,21 +459,19 @@ class AddOrderTagsTest extends TestCase
                     $message,
                     [
                         "AddOrderTags: Adding tags to Shopify Order $orderId: ",
-                        ShopifyTagEnum::InitialOrder->value,
-                        ShopifyTagEnum::MembershipRenewal->value
+                        ShopifyTagEnum::InitialOrder->value
                     ]
                 );
             });
 
         AddOrderTags::dispatchSync($orderData);
 
-        // make sure the job sends out the HTTP request to the graphql endpoint with the membership renewal tag
+        // make sure the job sends out the HTTP request to the graphql endpoint with the initial order tag
         Http::assertSent(function (Request $request) {
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
                     'tags: '.json_encode([
-                        ShopifyTagEnum::MembershipRenewal->value,
                         ShopifyTagEnum::InitialOrder->value
                     ])
                 );
