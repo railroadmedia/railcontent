@@ -299,18 +299,6 @@
                 margin:25px 10px 0
             }
         }
-
-        @media (max-width: 763px) {
-         .sticky-anniversary {
-        top: 40px;
-            }
-        }
-        @media (min-width: 764px) {
-            .sticky-anniversary {
-                top: 56px;
-            }
-        }
-
     </style>
 @stop
 
@@ -353,14 +341,13 @@
     @endif
    
     @if(Request::path() == '/')
-    <a href="/anniversary"
-        class="sticky-anniversary sticky z-[100] flex items-center justify-center transition-none" style="background: #CFDDF9;">
-        <img class="h-8 sm:h-10 mr-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/marketing/drumeo/promos/march/12-anniversary-sticky-logo.webp" alt="Drumeo Anniversary Logo" />
-        <p class="inline-block text-xs mx-0 leading-tight">
-            Celebrate <strong>12 years of Drumeo </strong> with
-            <br>12 FREE bonuses 🥳 <span class="text-drumeo uppercase">CLICK HERE</span>
-        </p>
-    </a>
+    @include('_partials.components.sticky-banner', [
+        'link' => '/anniversary',
+        'logo' => 'marketing/drumeo/promos/march/12-anniversary-sticky-logo.webp',
+        'text' => 'Celebrate <strong>12 years of Drumeo </strong> with
+            <br>12 FREE bonuses 🥳 <span class="text-drumeo uppercase">CLICK HERE</span>',
+        'style' => 'background: #CFDDF9;',
+    ])
     @endif
 
     @php

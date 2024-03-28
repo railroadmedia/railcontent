@@ -19,8 +19,7 @@ class DevEndpointController extends Controller
     public function __construct(
         private RecommendationService $recommendationService,
     )
-    {
-    }
+    { }
 
     public function handleRequest(Request $request, $arg1=null)
     {

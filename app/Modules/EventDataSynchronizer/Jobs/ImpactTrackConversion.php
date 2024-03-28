@@ -101,7 +101,7 @@ class ImpactTrackConversion implements ShouldQueue
     private function getProductCategory($sku, $hasZeroCost): string
     {
         $product = $this->productService->getBySku($sku);
-        if ($product->isMembershipProduct()) {
+        if ($product?->isMembershipProduct() ?? false) {
             return $hasZeroCost ? "TrialStart" : "TrialConversion";
         } else {
             return "";
