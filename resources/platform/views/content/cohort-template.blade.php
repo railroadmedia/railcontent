@@ -270,17 +270,20 @@
                 </div>
 
                 <div x-cloak x-show="isEnrolled && timeLeft > 0" class="tw-text-center tw-mb-3"><a href="{{ $cohort['product_cart_link'] }}" class="tw-text-[#2563EB]">{{ $cohort['product_cart_link_description'] }}</a></div>
-            @else
-                <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
-                    {{--  Buttons  --}}
-                    <span x-cloak x-show="isEnrolled" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+            @endif
+
+            <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
+                {{--  Buttons  --}}
+                <span x-cloak x-show="isEnrolled" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
+                @if(!$cohort['is_product'])
                     <span x-cloak x-show="!isEnrolled && timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
                     <button x-cloak x-show="!isEnrolled && timeLeft > 0" x-on:click="enroll('{{ $registerButtonUrl }}')" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
-                    @if(!empty($cohort['conversation_url']))
-                        <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
-                    @endif
-                </div>
-            @endif
+                @endif
+                @if(!empty($cohort['conversation_url']))
+                    <a x-cloak x-show="isEnrolled" href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
+                @endif
+            </div>
+
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
