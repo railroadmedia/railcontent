@@ -54,3 +54,10 @@ export const contentTypes = {
     'unit-part': { singular: 'Unit Part', plural: 'Unit Parts' },
     'spotlight': { singular: 'Spotlight', plural: 'Spotlights' },
 };
+
+export const toKebabCase = (string) => {
+    return string
+        .replace(/([a-z])([A-Z])/g, "$1-$2")
+        .replace(/[\s_]+/g, '-')
+        .toLowerCase();
+};
