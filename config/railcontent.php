@@ -363,6 +363,7 @@ return [
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
             \App\Decorators\Comments\CommentUserDecorator::class,
             \App\Decorators\Comments\CommentLikesUserDecorator::class,
+            \App\Decorators\UrlsDecorator::class,
         ],
         'comment_likes' => [
             \App\Decorators\Content\ContentCommentLikesUserDecorator::class,
