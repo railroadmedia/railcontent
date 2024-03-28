@@ -128,8 +128,8 @@ class Cohort extends Model
                 $model['demo_mobile_center_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['demo_mobile_center_image_url']->getClientOriginalName());
             }
 
-            if (gettype($model['product_image']) === 'object') {
-                $model['product_image'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['product_image']->getClientOriginalName());
+            if ($model['product_image']) {
+                $model['product_image'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.str_replace(' ', '+', $model['product_image']);
             }
         });
     }
