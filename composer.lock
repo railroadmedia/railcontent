@@ -10292,12 +10292,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "6beac3a60d8226af99183d61147cac3893bf33e6"
+                "reference": "9c002025f9ab8bd37d9d2a009c32ca8b58d020d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/6beac3a60d8226af99183d61147cac3893bf33e6",
-                "reference": "6beac3a60d8226af99183d61147cac3893bf33e6",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/9c002025f9ab8bd37d9d2a009c32ca8b58d020d1",
+                "reference": "9c002025f9ab8bd37d9d2a009c32ca8b58d020d1",
                 "shasum": ""
             },
             "require": {

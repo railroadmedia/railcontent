@@ -469,9 +469,9 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'ESebdMzhYRuj9e81RThwqbp6SQ8s1W',
-                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'conversion_event_id' => 4, // This comes from Brands/X/Events
                         'brand_id' => 2,
-                        'sign-up-action-tracker-id' => '2'
+                        'sign-up-action-tracker-id' => 3
                     ]
             ]
         ]
@@ -593,9 +593,9 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'teNV6vx5a0OfPlf9MuXheR5PJMNURf',
-                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'conversion_event_id' => 6, // This comes from Brands/X/Events
                         'brand_id' => 3,
-                        'sign-up-action-tracker-id' => 2
+                        'sign-up-action-tracker-id' => 5
                     ]
             ]
         ]
@@ -669,9 +669,9 @@ return [
                         'base_link' => 'https://www.mcqn3fgtrk.com',
                         'nid' => '2809',
                         'verification_token' => 'LvxhwYIlQ32s7j1r2vMZTtJ0afohJz',
-                        'conversion_event_id' => 1, // This comes from Brands/X/Events
+                        'conversion_event_id' => 8, // This comes from Brands/X/Events
                         'brand_id' => 4,
-                        'sign-up-action-tracker-id' => 2
+                        'sign-up-action-tracker-id' => 7
                     ]
             ]
         ]
