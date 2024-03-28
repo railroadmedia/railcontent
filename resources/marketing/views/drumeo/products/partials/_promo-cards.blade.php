@@ -56,6 +56,9 @@
                             @endif
                             <strong>${{$firstDealPrice}}</strong>
                         </h3>
+                        @if(!empty($firstDealExtra))
+                            <p class="text-sm mb-5"><em>{!! $firstDealExtra !!}</em></p>
+                        @endif
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px] {{ $theme }}" role="button" tabindex="0" aria-label="{{ $firstButtonText }}" style="background: #071D31">{{$firstButtonText}}</div>
                     </div>
                     @if(!empty($firstExtraBonuses))
