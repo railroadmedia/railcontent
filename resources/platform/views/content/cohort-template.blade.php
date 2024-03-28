@@ -268,8 +268,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div x-cloak x-show="isEnrolled && timeLeft > 0" class="tw-text-center tw-mb-3"><a href="{{ $cohort['product_cart_link'] }}" class="tw-text-[#2563EB]">{{ $cohort['product_cart_link_description'] }}</a></div>
             @endif
 
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
@@ -284,6 +282,9 @@
                 @endif
             </div>
 
+            @if($cohort['is_product'])
+            <div x-cloak x-show="isEnrolled && timeLeft > 0" class="tw-text-center tw-mb-3"><a href="{{ $cohort['product_cart_link'] }}" class="tw-text-[#2563EB]">{{ $cohort['product_cart_link_description'] }}</a></div>
+            @endif
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
