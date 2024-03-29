@@ -2,6 +2,16 @@
 use Illuminate\Support\Str;
 $isOnboarding = str_contains(request()->url(), '/onboarding');
 $userData = assembleUserAttributes(user());
+
+$journeySection = '';
+
+if (isset($trackingSectionName)) {
+    $journeySection = $trackingSectionName;
+} else if (isset($catalogueMeta) && isset($catalogueMeta['name'])) {
+    $journeySection = $catalogueMeta['name'];
+} else {
+    $journeySection = 'Unknown';
+}
 @endphp
 
 <!DOCTYPE html>
@@ -57,6 +67,7 @@ $userData = assembleUserAttributes(user());
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
                     csrf_token="{{ csrf_token() }}"
+                    :journey-section="{{ json_encode($journeySection) }}"
                 >
                     <page-container
                         :is-live="{{ json_encode(isLive()) }}"
@@ -121,10 +132,10 @@ $userData = assembleUserAttributes(user());
                         z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
                         pendo.initialize({
                             visitor: {
-                                id: "{{ user()->email }}",
+                                id: {{ user()->id }},
                             },
                             account: {
-                                id: {{ user()->id }},
+                                id: "{{ user()->email }}",
                             }
                         });
                 })('d376ea71-ab19-48c3-6a31-cbff42c1e64d');

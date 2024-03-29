@@ -8,6 +8,7 @@
 <script setup>
 import { watch, provide, onBeforeMount } from 'vue';
 import { useUserStore } from '../../stores/user';
+import { toKebabCase } from '../../utils.js'; 
 
 const props = defineProps({
   vueRouter: {
@@ -20,6 +21,10 @@ const props = defineProps({
   brand: {
     type: String,
     default: 'drumeo'
+  },
+  journeySection: {
+    type: String,
+    default: ''
   },
   csrf_token: {
     type: String
@@ -42,6 +47,28 @@ watch(
   () => props.brand,
   (brand) => {
     userStore.setCurrentBrand(brand);
+  },
+  { immediate: true }
+);
+watch(
+  () => props.journeySection,
+  (journeySection) => {
+    const formattedJourneySection = () => {
+      const sectionLowercased = journeySection.toLowerCase();
+      if(sectionLowercased === 'podcast' || sectionLowercased === 'the-pianote-podcast') {
+        return 'podcasts';
+      } else {
+        return toKebabCase(journeySection);
+      }
+    };
+    userStore.setJourneySection(formattedJourneySection());
+  },
+  { immediate: true }
+);
+watch(
+  () => props.csrf_token,
+  (token) => {
+    userStore.setToken(token);
   },
   { immediate: true }
 );

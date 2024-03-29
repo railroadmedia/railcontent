@@ -14,6 +14,7 @@ use Illuminate\View\View;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
@@ -83,6 +84,9 @@ class CoachPagesController extends Controller
         ContentRepository::$catalogMetaAllowableFilters = $catalogueMeta['allowableFilters'] ?? [];
         ContentRepository::$countFilterOptionItems = true;
 
+        FiltersHelper::prepareFiltersFields();
+        FiltersHelper::setRequiredFields('is_coach,1');
+
         $coaches = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 18),
@@ -90,7 +94,7 @@ class CoachPagesController extends Controller
             [$lessonType],
             [],
             [],
-            ['is_coach,1'],
+            FiltersHelper::$requiredFields,
             [],
             [],
             [],
@@ -99,6 +103,7 @@ class CoachPagesController extends Controller
             true,
             $request->get('only_subscribed', false)
         );
+
         ContentRepository::$countFilterOptionItems = false;
         $activeCoaches = $this->contentService->getFiltered(
             1,
@@ -255,15 +260,10 @@ class CoachPagesController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $includedFields = [];
-        $requiredFields = [];
+        FiltersHelper::prepareFiltersFields();
+        FiltersHelper::setRequiredFields('instructor,' . $thisCoach['id']);
 
         $fieldIds = [$thisCoach['id']];
-        $requiredFields[] = 'instructor,' . $thisCoach['id'];
-
-        if ($request->has('title')) {
-            $requiredFields[] = 'title,%' . $request->get('title') . '%,string,like';
-        }
 
         $includedTypes =
             array_merge(config('railcontent.coachContentTypes', []), config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []);
@@ -278,8 +278,8 @@ class CoachPagesController extends Controller
             $request->get('included_types', $includedTypes),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', $requiredFields),
-            $request->get('included_fields', $includedFields),
+            FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
             $request->get('required_user_states', []),
             $request->get('included_user_states', [])
         );
@@ -294,7 +294,7 @@ class CoachPagesController extends Controller
             [],
             [],
             [],
-            array_merge(['is_featured,1'], $requiredFields),
+            array_merge(['is_featured,1'], FiltersHelper::$requiredFields),
             [],
             [],
             []
@@ -333,8 +333,8 @@ class CoachPagesController extends Controller
             "sortOverride" => '-published_on',
             "availableContentStatues" => ContentRepository::$availableContentStatues,
             "catalogueMeta" => $catalogueMeta,
-            "includedFields" => $includedFields,
-            "requiredFields" => $requiredFields,
+            "includedFields" => FiltersHelper::$includedFields,
+            "requiredFields" => FiltersHelper::$requiredFields,
             'totalResults' => $listLessons->totalResults(),
             'includedTypes' => array_map('ucfirst', $listLessons->filterOptions()['type'] ?? []),
             'featuredLessons' => $featuredLessons->toResponseRawJson(),

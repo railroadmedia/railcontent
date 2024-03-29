@@ -315,7 +315,7 @@ const getTabOptions = computed(() => {
     if (props.tabs?.length) {
         return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
             return {
-                key: (is_group_by) ? 'group_by,' + value[0]:value,
+                key: (is_group_by) ? ['group_by,' + value[0]] : value,
                 value: name,
                 groupByView: (is_group_by) ? true : false,
             }

@@ -180,6 +180,11 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
+    
+    public function thirtyDayDrummerDeal()
+    {
+        return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['theme' => 'drumeo']);
+    }
 
     public function impact()
     {
