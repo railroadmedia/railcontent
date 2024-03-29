@@ -360,7 +360,6 @@
 
 @section('inject-components')
     @include('partials._countdown',[
-
             'countdownDate' => $cohort['enrollment_end_date'],
             'promoVersion' => false
         ])
