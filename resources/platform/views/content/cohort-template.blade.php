@@ -74,6 +74,10 @@
                                         echo 'drummers';
                                     } else if($brand === 'pianote'){
                                         echo 'piano players';
+                                    } else if($brand === 'guitareo'){
+                                        echo 'guitar players';
+                                    } else if($brand === 'singeo'){
+                                        echo 'singers';
                                     }
                                 @endphp
                                 who have already registered.
@@ -300,6 +304,10 @@
                             echo 'drummers';
                         } else if($brand === 'pianote'){
                             echo 'piano players';
+                        } else if($brand === 'guitareo'){
+                            echo 'guitar players';
+                        } else if($brand === 'singeo'){
+                            echo 'singers';
                         }
                     @endphp
                     who have already registered.
