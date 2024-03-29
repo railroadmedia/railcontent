@@ -6,6 +6,7 @@ use App\Modules\Content\Services\CohortService;
 use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Enums\UserAccessPermissionsSourceEnum;
 use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
@@ -28,17 +29,20 @@ class CohortPackController
 
     private UserAccessPermissionsService $userAccessPermissionsService;
     private ProductService $productService;
+    private ShopifySyncService $shopifySyncService;
 
     public function __construct(
         CohortService $cohortService,
         ContentService $contentService,
         UserAccessPermissionsService $userAccessPermissionsService,
         ProductService $productService,
+        ShopifySyncService $shopifySyncService
     ) {
         $this->cohortService = $cohortService;
         $this->contentService = $contentService;
         $this->userAccessPermissionsService = $userAccessPermissionsService;
         $this->productService = $productService;
+        $this->shopifySyncService = $shopifySyncService;
     }
 
     /**
@@ -92,6 +96,15 @@ class CohortPackController
         }
         $cohort->lists = $lists;
 
+
+        if($cohort['is_product']) {
+            $shopifyCustomerId = $this->shopifySyncService->getShopifyCustomer(\user()->email)['id'];
+            $sku = 'singeo-the-foiled-water-bottle';
+            $ownedProducts = $this->shopifySyncService->getOwnedProducts($shopifyCustomerId);
+            $hasPurchasedTheProduct =
+                ($ownedProducts->where('sku', '=', $sku)
+                    ->where('order.processedAt', '>', $cohort['enrollment_start_date']));
+        }
         return view('content.cohort-template', [
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -101,6 +114,7 @@ class CohortPackController
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
             'purchased' => $purchased,
+            'hasPurchasedTheProduct' => $hasPurchasedTheProduct
         ]);
     }
 
