@@ -181,6 +181,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
             $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
         }
 
+        if($cohort['is_product'] && $cohort['product_sale_price'] && $cohort['product_original_price']){
+            $cohort['product_savings_price_percent'] = round(100 - (100 * ($cohort['product_sale_price'] / $cohort['product_original_price'])));
+        }
+
         return [
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
