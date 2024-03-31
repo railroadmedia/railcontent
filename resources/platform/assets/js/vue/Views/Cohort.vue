@@ -191,7 +191,7 @@
                 <template v-else>
                     <button
                         v-if="!hasEnded"
-                        :class="`tw-btn-primary tw-bg-white tw-text-{{ $brand }} hover:tw-opacity-80`"
+                        :class="`tw-btn-primary tw-bg-white tw-text-${brand} hover:tw-opacity-80`"
                         @click="enroll(true)"
                     >
                         Enroll + Get the deal
