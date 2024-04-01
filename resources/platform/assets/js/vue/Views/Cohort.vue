@@ -357,7 +357,7 @@ const props = defineProps({
 
 const token = inject('csrf_token');
 
-const isEnrolled = ref(false);
+const isEnrolled = ref(props.hasProduct);
 const countdownText = ref('');
 const openTrailer = ref(false);
 const openSignUp = ref(false);
