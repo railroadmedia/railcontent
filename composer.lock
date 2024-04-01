@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.301.9",
+            "version": "3.302.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "23eda9eeb6c44a3ed6a12951b61020dc6048f7f5"
+                "reference": "cb343ed4fc5d86c0ddf8e948f0271052f183f937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/23eda9eeb6c44a3ed6a12951b61020dc6048f7f5",
-                "reference": "23eda9eeb6c44a3ed6a12951b61020dc6048f7f5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cb343ed4fc5d86c0ddf8e948f0271052f183f937",
+                "reference": "cb343ed4fc5d86c0ddf8e948f0271052f183f937",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.301.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.302.0"
             },
-            "time": "2024-03-27T18:26:04+00:00"
+            "time": "2024-03-29T18:07:04+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4094,16 +4094,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.341.0",
+            "version": "v0.342.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "50dad3cd4a3902bd2df0d96e7dc09cdaa2ba79b9"
+                "reference": "b75a249bd9abf0241822fa6d9d9b396583f5003f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/50dad3cd4a3902bd2df0d96e7dc09cdaa2ba79b9",
-                "reference": "50dad3cd4a3902bd2df0d96e7dc09cdaa2ba79b9",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/b75a249bd9abf0241822fa6d9d9b396583f5003f",
+                "reference": "b75a249bd9abf0241822fa6d9d9b396583f5003f",
                 "shasum": ""
             },
             "require": {
@@ -4132,9 +4132,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.341.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.342.0"
             },
-            "time": "2024-03-24T01:08:16+00:00"
+            "time": "2024-04-01T01:08:41+00:00"
         },
         {
             "name": "google/auth",
@@ -10292,12 +10292,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "6beac3a60d8226af99183d61147cac3893bf33e6"
+                "reference": "9c002025f9ab8bd37d9d2a009c32ca8b58d020d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/6beac3a60d8226af99183d61147cac3893bf33e6",
-                "reference": "6beac3a60d8226af99183d61147cac3893bf33e6",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/9c002025f9ab8bd37d9d2a009c32ca8b58d020d1",
+                "reference": "9c002025f9ab8bd37d9d2a009c32ca8b58d020d1",
                 "shasum": ""
             },
             "require": {
@@ -10326,7 +10326,7 @@
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
                 "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2024-03-27T19:08:00+00:00"
+            "time": "2024-03-28T22:53:06+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -16269,16 +16269,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.12.2",
+            "version": "v3.12.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "43555503052443964ce2c1c1f3b0378e58219eb8"
+                "reference": "e7a9a217512d8f1d07448fd241ce2ac0922ddc2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/43555503052443964ce2c1c1f3b0378e58219eb8",
-                "reference": "43555503052443964ce2c1c1f3b0378e58219eb8",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/e7a9a217512d8f1d07448fd241ce2ac0922ddc2c",
+                "reference": "e7a9a217512d8f1d07448fd241ce2ac0922ddc2c",
                 "shasum": ""
             },
             "require": {
@@ -16337,7 +16337,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-debugbar/issues",
-                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.12.2"
+                "source": "https://github.com/barryvdh/laravel-debugbar/tree/v3.12.4"
             },
             "funding": [
                 {
@@ -16349,7 +16349,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-13T09:50:34+00:00"
+            "time": "2024-04-01T09:14:15+00:00"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -19042,16 +19042,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.12.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "5b6f801c605a593106b623e45ca41496a6e7d56d"
+                "reference": "889bf1dfa59e161590f677728b47bf4a6893983b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/5b6f801c605a593106b623e45ca41496a6e7d56d",
-                "reference": "5b6f801c605a593106b623e45ca41496a6e7d56d",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/889bf1dfa59e161590f677728b47bf4a6893983b",
+                "reference": "889bf1dfa59e161590f677728b47bf4a6893983b",
                 "shasum": ""
             },
             "require": {
@@ -19121,7 +19121,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-03T15:49:39+00:00"
+            "time": "2024-03-29T14:03:47+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
