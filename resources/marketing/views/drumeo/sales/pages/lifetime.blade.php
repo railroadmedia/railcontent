@@ -46,10 +46,10 @@
 
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center" style="background:linear-gradient(to bottom, #094073 50%, #000C16);">
         <div class="container mx-auto">
-            <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>            
+            <h1 class="leading-none"><strong>Get drum lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <h3 class="leading-tight mt-3 text-white uppercase">
                 @if($stock > 0)
-                  
+
                     <!-- <span x-cloak x-data="timer()" x-init="countdown()">
                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                              <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -57,9 +57,9 @@
                              <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                          </span> -->
-    
+
                     <strong>Only <s>100</s> <span class='text-musora'> {{ $products['DLM-Lifetime']->getPublicStockCount()}}  </span> left!</strong>
-                    
+
                 @else
                     &nbsp;
                 @endif
@@ -72,11 +72,11 @@
             <div class="px-3 mx-auto w-full max-w-2xl">
                 <h2 class="leading-none mb-1"><strong>$1200</strong></h2>
                 <p class="leading-tight text-sm"><em>Payment plans available.</em></p>
-                @if($stock > 0)
-                    <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-                @else
+{{--                @if($stock > 0)--}}
+{{--                    <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>--}}
+{{--                @else--}}
                     <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
-                @endif
+{{--                @endif--}}
             </div>
         </div>
     </section>
@@ -217,11 +217,11 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm">Payment plans available</p>
-                @if($stock > 0)
-                    <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-                @else
+{{--                @if($stock > 0)--}}
+{{--                    <a class="join drumeo mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
+{{--                @else--}}
                     <span class="join sold-out mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;">SOLD OUT</span>
-                @endif
+{{--                @endif--}}
                 <h3 class="leading-tight mt-8 sm:mt-12 mb-5 sm:mb-9"><strong>+ get these FREE<br class="sm:hidden"> anniversary bonuses</strong></h3>
             </div>
             <div style="font-size:0px" class=" max-w-md mx-auto">
@@ -293,12 +293,12 @@
                 @endforeach
             </div>
 
-            @if($stock > 0)
-                <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
-            @else
+{{--            @if($stock > 0)--}}
+{{--                <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
+{{--                <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>--}}
+{{--            @else--}}
                 <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>
-            @endif
+{{--            @endif--}}
         </div>
     </section>
     @php
