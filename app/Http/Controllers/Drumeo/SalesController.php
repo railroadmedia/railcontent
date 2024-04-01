@@ -79,10 +79,6 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
-    public function promoAnniversary()
-    {
-        return view('drumeo.sales.anniversary', ['theme' => 'drumeo', 'promoVersion' => 'true']);
-    }
     public function choosePlanVDF()
     {
         return view('drumeo.sales.pages.vdf', ['theme' => 'drumeo']);
