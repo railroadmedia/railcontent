@@ -379,7 +379,7 @@ const enroll = (purchase = false) => {
             referrerPolicy: 'no-referrer',
         })
         .then((response) => {
-            this.isEnrolled = true;
+            isEnrolled.value = true;
 
             if(purchase){
                 openPurchase.value = true;
