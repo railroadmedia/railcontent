@@ -10,6 +10,7 @@
         :register-url="{{ json_encode($registerButtonUrl) }}"
         :n-pack-owners="{{ json_encode(number_format($nPackOwners ?? 0)) }}"
         :dropdowns="{{ json_encode($cohort->dropdowns) }}"
+        :hasProduct="{{ json_encode($hasProduct) }}"
     ></cohort>
 
     @include('partials._railanalytics-brand-tracking-iframe')
