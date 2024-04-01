@@ -168,16 +168,6 @@
         ])
     @endif
 
-    @if(Request::path() == '/')
-    @include('_partials.components.sticky-banner', [
-        'link' => '/anniversary',
-        'logo' => 'marketing/pianote/promos/march/8-anniversary-sticky-logo.webp',
-        'text' => '  Celebrate <strong>8 years of Pianote </strong> with
-            <br>8 FREE bonuses 🥳 <span class="text-pianote uppercase">CLICK HERE</span>',
-        'style' => 'background: #CFDDF9;',
-    ])
-    @endif
-
     @php
         $bubbles =  [
              [
