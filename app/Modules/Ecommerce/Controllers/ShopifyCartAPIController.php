@@ -37,6 +37,7 @@ class ShopifyCartAPIController extends Controller
 
     public function createOrAddToCart(Request $request)
     {
+
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
         $existingCart = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
@@ -72,8 +73,9 @@ class ShopifyCartAPIController extends Controller
             if ($request->get('locked') == 'true') {
                 Session::put(self::SHOPIFY_CART_LOCKED_SESSION_KEY, true);
             }
-
+            $existingShopifyCartId = $cartData['id'];
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
+
         } else {
             // clear the cart if locked=true or it was locked previously
             if (Session::get(self::SHOPIFY_CART_LOCKED_SESSION_KEY, false) == true ||
@@ -95,7 +97,13 @@ class ShopifyCartAPIController extends Controller
 
             Session::put(self::SHOPIFY_CART_ID_SESSION_KEY, $cartData['id']);
         }
-
+        $EFTransactionId = $request->get('_ef_transaction_id');
+        if ($EFTransactionId) {
+            $this->shopifyStoreFrontAPIService->updateCartAttributes(
+                $existingShopifyCartId,
+                ['eftid' => $EFTransactionId]
+            );
+        }
         if ($request->get('referralCode')) {
             Session::put('referral_code', $request->get('referralCode'));
             Session::put('referral_code_product_sku', array_keys($productSKUsAndQuantities)[0]);
@@ -341,6 +349,7 @@ class ShopifyCartAPIController extends Controller
 
     public function redirectToShopifyOrderForm(Request $request)
     {
+
         $existingShopifyCartId = Session::get(self::SHOPIFY_CART_ID_SESSION_KEY);
 
         if (!empty($request->get('shopify-cart-id'))) {

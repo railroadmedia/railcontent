@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Validation\Rule;
+
+return [
+    'v5' => [
+        'schema' => [
+            'filter-applied' => [
+                'brand' => ['required', 'string'],
+                'section' => ['required', 'string'],
+                'filters' => ['nullable', 'array'],
+                'filters.*' => ['required', 'string', 'regex:/([A-Z]|[a-z])\w+,([a-z]|[A-Z])\w+/'],
+                'progress' => ['nullable', 'string']
+            ],
+            'filter-group-applied' => [
+                'brand' => ['required', 'string'],
+                'section' => ['required', 'string'],
+                'group' => ['required', 'string'],
+            ],
+            'sorting-applied' => [
+                'brand' => ['required', 'string'],
+                'section' => ['required', 'string'],
+                'sort' => [
+                    'required',
+                    'string',
+                    'in:' . implode(',', [
+                        '-popularity',
+                        'popularity',
+                        'slug',
+                        '-slug',
+                        'published_on',
+                        '-published_on',
+                        'created_at',
+                        '-created_at',
+                        'pinned',
+                        'most_recent',
+                        '-progress',
+                        '-last_progress'
+                    ])
+                ],
+            ],
+        ]
+    ],
+];

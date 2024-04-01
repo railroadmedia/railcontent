@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => $parentContent->fetch('fields.title')])
 
 @section('meta')
     <title>{{ $parentContent->fetch('fields.title') }} | Musora</title>

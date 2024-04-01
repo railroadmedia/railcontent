@@ -27,7 +27,8 @@
     $infoDataStrArrJson = json_encode($infoDataStrArr);
 @endphp
 
-@extends('partials.layout')
+
+@extends('partials.layout', ['trackingSectionName' => 'Coaches'])
 
 @section('meta')
     <title>{{ ucfirst($thisCoach->fetch('fields.name')) }} | Musora</title>

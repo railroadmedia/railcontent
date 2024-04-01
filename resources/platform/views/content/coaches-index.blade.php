@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'coaches'])
 
 @section('meta')
     <title>{{ ucfirst($brand) }} Coaches | Musora</title>
