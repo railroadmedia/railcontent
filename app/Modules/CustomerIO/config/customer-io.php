@@ -640,6 +640,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Osmose Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_osmose-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             '7 Days To Sight Reading' => [
                 'custom_attributes' => [
                 ],
