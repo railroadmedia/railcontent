@@ -286,6 +286,7 @@ class ContentService
                 $zippered = zipperMerge($toZipper);
                 $numGroups += 1;
                 $totalCount += count($zippered);
+                $zippered = $this->paginateRecommendations($zippered, $pageSize, $page);
                 $groupedByRecommendations[] = [
                     'grouped_by_field' => $index,
                     'lessons_grouped_by_field' => implode(',', $zippered), // exploded values,
@@ -313,12 +314,7 @@ class ContentService
         } else {
             $recommendations = zipperMerge($recommendations);
             $totalCount = count($recommendations);
-            if ($randomize) {
-                throw new InvalidArgumentException("I got rid of this"); //TODO remove parameter with cleanup
-                $recommendations = $this->randomizeRecommendations($recommendations, $pageSize);
-            } else {
-                $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
-            }
+            $recommendations = $this->paginateRecommendations($recommendations, $pageSize, $page);
             return [
                 'recommendations' => $recommendations,
                 'totalCount' => $totalCount,
