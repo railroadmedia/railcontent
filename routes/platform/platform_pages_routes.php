@@ -83,6 +83,10 @@ Route::domain('{musoraDomain}')
                     ->where('slug', '(.*)')
                     ->name('platform.content.artist.show');
 
+                Route::get('/{brand}/artists', [ContentPagesController::class, 'artists'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content.artists.show');
+
                 Route::get('/{brand}/genres/{genre}/{contentTypeName}', [ContentPagesController::class, 'genreContentByType'])
                     ->whereIn('brand', all_brands())->whereIn('contentTypeName', [
                         'lessons', // guitareo one-off page
