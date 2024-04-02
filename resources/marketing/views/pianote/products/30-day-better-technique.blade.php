@@ -458,10 +458,10 @@
             <h5 class="text-pianote uppercase text-center pt-10">You’ll know the:</h5>
         </div>
 
-        <div class="container mx-auto max-w-5xl p-4 hidden md:block">
+        <div class="container mx-auto max-w-5xl p-4">
             <div class="flex justify-center pt-10 gap-4">
                 @foreach ($gridItems as $gridItem)
-                    <div class="relative text-center w-1/3 bg-white rounded-xl px-4 py-8">
+                    <div class="relative text-center w-1/3 bg-white rounded-xl px-4 py-8 hidden md:inline">
                         <img src="{{ $gridItem['image'] }}" alt="Image" class="mx-auto rounded-xl">
                         <p class="mt-4 text-left h-28">{{ $gridItem['text'] }}</p>
                         <div
