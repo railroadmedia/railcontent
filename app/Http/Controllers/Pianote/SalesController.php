@@ -345,4 +345,20 @@ class SalesController extends BaseController
 
         return response()->json(['success' => true]);
     }
+
+    public function betterTechnique() 
+    {
+        $productId = 740; 
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('pianote.products.30-day-better-technique', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
+    }
 }
