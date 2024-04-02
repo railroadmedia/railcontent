@@ -299,7 +299,6 @@
                 margin:25px 10px 0
             }
         }
-
     </style>
 @stop
 
@@ -439,6 +438,7 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
+
 
     @php
         $gridItems = $drumeo['gridItems'];

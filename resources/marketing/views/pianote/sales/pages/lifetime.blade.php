@@ -112,7 +112,26 @@
 {{--            ])--}}
     <section class="px-5 py-10 md:py-14 lg:py-16 text-white text-center bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1900x0/filters:quality(95)/marketing/pianote/promos/march/header-bg.webp');">
         <div class="container mx-auto">
-            <h1 class="leading-tight mb-7 sm:mb-10"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
+            <h1 class="leading-tight"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
+            <div class="uppercase text-xl md:text-2xl text-white py-4 mb-3 sm:mb-4">
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                    <span>
+                        ENDS IN
+                        <strong class="text-bold">
+
+                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
+                                    x-text="dayText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
+                                    x-text="hourText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
+                                    x-text="minuteText"></span></span>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
+                                    x-text="secondText"></span></span>
+                        </strong>
+                    </span>
+                </span>
+
+            </div>
             <div class="w-full mx-auto mb-2 sm:mb-3">
                 <img class="h-28 sm:h-52 lg:h-72"
                     @if($stock > 0)
@@ -131,8 +150,8 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm"><em>One time payment.</em></p>
-                <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>
-{{--                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>--}}
+{{--                <a class="join drumeo mt-4 w-full anchor-slide" href="#customize-anchor">GET STARTED &raquo;</a>--}}
+                <a class="join sold-out mt-4 w-full anchor-slide" href="#customize-anchor">SOLD OUT</a>
 
                 @if($stock > 0)
                     <p class="leading-tight mt-4">ONLY <s class='opacity-60'>100</s> {{ $stock }} SPOTS AVAILABLE</p>
@@ -283,9 +302,9 @@
                 </div>
             </div>
 
-            <a class="sm:mx-0.5 w-full sm:w-56 join pianote smaller sm:order-1 mt-7 mb-3 anchor-slide"
-                href="#customize-anchor" aria-label="Customize anchor"
-            >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
+{{--            <a class="sm:mx-0.5 w-full sm:w-56 join pianote smaller sm:order-1 mt-7 mb-3 anchor-slide"--}}
+{{--                href="#customize-anchor" aria-label="Customize anchor"--}}
+{{--            >Get Started <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>--}}
             <p class="leading-tight"><em>Get yours FREE with a Lifetime Membership.</em></p>
         </div>
     </section>
@@ -427,7 +446,7 @@
                     @endif
                 </h2>
                 <p class="leading-tight text-sm">One time payment.</p>
-                <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+{{--                <a class="join mt-4 md:mt-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 15px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
                 @if($stock > 0)
                     <p class="mt-4 md:mt-5 leading-tight text-musora">ONLY {{ $stock }} SPOTS AVAILABLE</p>
                 @endif
@@ -503,7 +522,7 @@
             </div>
 
 {{--            <a class="join sold-out my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;">SOLD OUT</a>--}}
-            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+{{--            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>--}}
             <a class="inline-block leading-tight text-white" href="{{ $buttonLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
         </div>
     </section>
@@ -555,6 +574,11 @@
             </div>
         </div>
     </section>
+
+    @include('_partials.components.countdown', [
+        'countdownDate' => '2024-04-01 00:00:00',
+        'promoVersion' => false,
+    ])
 
     @include('pianote.sales.partials._footer')
 

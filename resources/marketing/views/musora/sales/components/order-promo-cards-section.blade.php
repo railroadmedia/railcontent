@@ -63,8 +63,8 @@
                         <h4 class="leading-tight mb-2"><strong>{{$firstDeal}}</strong></h4>
                         <img
                             class="{{$firstImageHeight}} rounded-md transition-opacity opacity-0"
-                            src={{ $firstDealImage }}
-                                        loading="lazy"
+                            src="{{ $firstDealImage }}"
+                            loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="card image"
                         >

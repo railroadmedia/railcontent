@@ -262,6 +262,7 @@
         @endif
     @endif
 
+
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif

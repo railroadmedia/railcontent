@@ -84,7 +84,7 @@ class Order
     {
         return $this->lineItems->contains(function ($lineItem) {
             /** @var OrderLineItem $lineItem */
-            return $lineItem->product->isTrial();
+            return $lineItem->product?->isTrial() ?? false;
         });
     }
 }

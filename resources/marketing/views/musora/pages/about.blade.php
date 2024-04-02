@@ -94,18 +94,7 @@
         <div class="container mx-auto relative z-0 max-w-6xl">
             <h3 class="mb-8 md:mb-14"><strong>Our Leadership Team</strong></h3>
             <div class="flex flex-wrap items-start justify-center mx-auto px-2 sm:px-4" style="max-width:1060px">
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true; modal = true">
-                        <img
-                            class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
-                            alt="jared falk"
-                        >
-                    </div>
-                    <h5 class="mt-3"><strong>Jared Falk</strong></h5>
-                    <p class="text-[#a1afc9]">Founder</p>
-                </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="james = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
@@ -116,51 +105,7 @@
                     <h5 class="mt-3"><strong>James Falk</strong></h5>
                     <p class="text-[#a1afc9]">Chief Executive Officer</p>
                 </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="dave = true; modal = true">
-                        <img
-                            class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
-                            alt="dave atkinson"
-                        >
-                    </div>
-                    <h5 class="mt-3"><strong>Dave Atkinson</strong></h5>
-                    <p class="text-[#a1afc9]">VP, Partnerships</p>
-                </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="pam = true; modal = true">
-                        <img
-                            class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
-                            alt="pam black"
-                        >
-                    </div>
-                    <h5 class="mt-3"><strong>Pam Black</strong></h5>
-                    <p class="text-[#a1afc9]">Director of Finance</p>
-                </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="mary = true; modal = true">
-                        <img
-                            class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
-                            alt="mary liz borseth"
-                        >
-                    </div>
-                    <h5 class="mt-3"><strong>Mary-Liz Borseth</strong></h5>
-                    <p class="text-[#a1afc9]">People & Culture Manager</p>
-                </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
-                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="caleb = true; modal = true">
-                        <img
-                            class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
-                            alt="caleb favo"
-                        >
-                    </div>
-                    <h5 class="mt-3"><strong>Caleb Favor</strong></h5>
-                    <p class="text-[#a1afc9]">Chief Product Officer</p>
-                </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="chad = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
@@ -171,7 +116,29 @@
                     <h5 class="mt-3"><strong>Chad Kettner</strong></h5>
                     <p class="text-[#a1afc9]">Chief Marketing Officer</p>
                 </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="caleb = true; modal = true">
+                        <img
+                            class="w-full rounded-lg overflow-hidden standard-pic"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
+                            alt="caleb favo"
+                        >
+                    </div>
+                    <h5 class="mt-3"><strong>Caleb Favor</strong></h5>
+                    <p class="text-[#a1afc9]">Chief Product Officer</p>
+                </div>
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true; modal = true">
+                        <img
+                            class="w-full rounded-lg overflow-hidden standard-pic"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
+                            alt="jared falk"
+                        >
+                    </div>
+                    <h5 class="mt-3"><strong>Jared Falk</strong></h5>
+                    <p class="text-[#a1afc9]">Founder</p>
+                </div>
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="amy = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
@@ -182,7 +149,41 @@
                     <h5 class="mt-3"><strong>Amy Malcolmson</strong></h5>
                     <p class="text-[#a1afc9]">Chief Operating Officer</p>
                 </div>
-                <div class="w-1/2 md:w-1/3 lg:w-1/5 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
+                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="dave = true; modal = true">
+                        <img
+                            class="w-full rounded-lg overflow-hidden standard-pic"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
+                            alt="dave atkinson"
+                        >
+                    </div>
+                    <h5 class="mt-3"><strong>Dave Atkinson</strong></h5>
+                    <p class="text-[#a1afc9]">VP, Partnerships</p>
+                </div>
+{{--                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">--}}
+{{--                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="pam = true; modal = true">--}}
+{{--                        <img--}}
+{{--                            class="w-full rounded-lg overflow-hidden standard-pic"--}}
+{{--                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"--}}
+{{--                            alt="pam black"--}}
+{{--                        >--}}
+{{--                    </div>--}}
+{{--                    <h5 class="mt-3"><strong>Pam Black</strong></h5>--}}
+{{--                    <p class="text-[#a1afc9]">Director of Finance</p>--}}
+{{--                </div>--}}
+{{--                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">--}}
+{{--                    <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="mary = true; modal = true">--}}
+{{--                        <img--}}
+{{--                            class="w-full rounded-lg overflow-hidden standard-pic"--}}
+{{--                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"--}}
+{{--                            alt="mary liz borseth"--}}
+{{--                        >--}}
+{{--                    </div>--}}
+{{--                    <h5 class="mt-3"><strong>Mary-Liz Borseth</strong></h5>--}}
+{{--                    <p class="text-[#a1afc9]">People & Culture Manager</p>--}}
+{{--                </div>--}}
+                <div class="w-1/2 md:w-1/3 lg:w-1/4 px-1 sm:px-3 lg:px-1 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jordan = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
@@ -193,6 +194,7 @@
                     <h5 class="mt-3"><strong>Jordan Paul</strong></h5>
                     <p class="text-[#a1afc9]">VP, Creative Services</p>
                 </div>
+
                 @component('_partials.components.modal',[
                     'name' => 'modal',
                     'additionalOnClose' => 'jared = false; james = false; dave = false; pam = false; mary = false; caleb = false; chad = false; amy = false; jordan = false;',

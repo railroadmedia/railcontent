@@ -41,7 +41,7 @@
         >
             <!-- Content -->
             <div
-            class="@if(!empty($styles)) {{ $styles }} @endif overflow-hidden rounded-xl w-full relative @if(!empty($vimeo)) aspect-16:9 @elseif(!empty($soundslice)) pb-[66vh] bg-white @elseif(!empty($youtube)) aspect-16:9 @endif"
+                class="@if(!empty($styles)) {{ $styles }} @endif overflow-hidden rounded-xl w-full relative @if(!empty($vimeo)) aspect-16:9 @elseif(!empty($soundslice)) pb-[66vh] bg-white  @elseif(!empty($youtube)) aspect-16:9 @endif"
             >
                 <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && '{{ $video }}'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
             </div>

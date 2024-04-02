@@ -130,8 +130,6 @@ class ContentPagesController extends BaseController
         FiltersHelper::prepareFiltersFields();
 
         if ($contentTypeName == 'songs') {
-            ContentRepository::$catalogMetaAllowableFilters =
-                array_merge(ContentRepository::$catalogMetaAllowableFilters, ['artist']);
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -213,16 +211,14 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
         if ($contentTypeName == 'songs') {
-            $allowableFilters = $catalogueMeta['allowableFilters'];
-
-            $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
-            $catalogueMeta['allowableFilters'] = $filterableValues;
-            $artists = count($listLessons->filterOptions()['artist'] ?? []);
-            unset($listLessons['filter_options']['artist']);
+            ContentRepository::$availableContentStatues =
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+            $songArtists = $this->contentService->getArtists();
+            $artists = count($songArtists ?? []);
 
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
-                "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],
+                "startedLessons" => $hasStartedLessons ? $startedListLessons : json_encode(['data' => []]),
                 "hasStartedLessons" => $hasStartedLessons,
                 "lessonType" => $lessonType,
                 "sortOverride" => '-popularity',
@@ -234,6 +230,7 @@ class ContentPagesController extends BaseController
                 "songsNumber" => $listLessons->totalResults(),
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
+                "allArtistUrl" => url()->route('platform.content.artists.show'),
             ]);
         } else {
             return view('content.catalogue', [
@@ -1695,26 +1692,6 @@ class ContentPagesController extends BaseController
         return null;
     }
 
-    public function removeWithKey($array, $initKey)
-    {
-        if (($key = array_search($initKey, $array)) !== false) {
-            unset($array[$key]);
-        }
-
-        return array_values($array);
-    }
-
-    public function slugToPhrase($slug)
-    {
-        // Replace dashes with spaces
-        $phrase = str_replace('-', ' ', $slug);
-
-        // Capitalize the first letter of each word
-        $phrase = ucwords($phrase);
-
-        return $phrase;
-    }
-
     public function artistSongs($route, Request $request, $brand, $artistSlug)
     {
         $artist = urldecode($artistSlug);
@@ -1741,9 +1718,6 @@ class ContentPagesController extends BaseController
         $artistName = $initialContent->results()[0]->fetch('fields.artist.1');
         $pluralContentType = Str::plural('song');
 
-        $allowableFilters = $catalogueMeta['allowableFilters'];
-
-        $filterableValues = $this->removeWithKey($allowableFilters, 'artist');
         $totalPlays = $this->userContentProgressService->countByArtistTypesUserProgress(
             ['song'],
             $artist
@@ -1764,7 +1738,7 @@ class ContentPagesController extends BaseController
             'contentSubtitle' => $contentSubtitle,
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
-            'filterableValues' => $allowableFilters,
+            'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => ($artistData) ? $artistData->fetch('data.head_shot_picture_url') :
                 config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
             'pluralContentType' => $pluralContentType,
@@ -1804,13 +1778,12 @@ class ContentPagesController extends BaseController
 
         $contentTitle = ucwords($genre.' - '.$contentTypeName);
         $contentSubtitle = $initialContent->totalResults().' '.$contentTypeName;
-        $allowableFilters = $catalogueMeta['allowableFilters'];
 
-        $filterableValues = $this->removeWithKey($allowableFilters, 'style');
         $thumb =
             config('railcontent.avatar_style')[$genre]
             ??
             config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
+        unset($initialContent['filter_options']['genre']);
 
         return view('content.child-collection', [
             'initialContent' => $initialContent->toResponseRawJson(),
@@ -1822,9 +1795,28 @@ class ContentPagesController extends BaseController
             'contentSubtitle' => $contentSubtitle,
             'goBackUrl' => '/'.$brand.'/'.$contentTypeName,
             'requiredFields' => ['style,'.$genre],
-            'filterableValues' => $filterableValues,
+            'filterableValues' => $catalogueMeta['allowableFilters'],
             'thumbnail_url' => $thumb,
             'pluralContentType' => Str::plural($lessonType, $initialContent->totalResults()),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function artists(Request $request)
+    {
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$getFutureScheduledContentOnly = false;
+
+        $artists = $this->contentService->getArtists();
+
+        return view('content.artists', [
+            'artists' => $artists,
+            'numberOfArtists' => count($artists),
         ]);
     }
 }
