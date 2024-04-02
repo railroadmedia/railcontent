@@ -94,15 +94,15 @@ class RecommendationService
     }
 
     private function postToHuggingFaceWithRetry($data) {
-        $url = env('HUGGINGFACE_URL');
-        $authToken = env('HUGGINGFACE_TOKEN');
+        $url = config('railcontent.recsys.url');
+        $authToken = config('railcontent.recsys.token');
         $response = Http::withToken($authToken)->post($url, $data);
         $status = $response->status();
-
         if (in_array($status, $this->RETRY_ERROR_CODES)) {
             $response = Http::withToken($authToken)->post($url, $data);
         } else if ($status == 500) {
-            $backupURL = env('HUGGINGFACE_BACKUP_URL');
+            // attempt the backup URL
+            $backupURL = config('railcontent.recsys.backup_url');
             $response = Http::withToken($authToken)->post($backupURL, $data);
             $status = $response->status();
         }

@@ -244,7 +244,7 @@ class ContentService
         $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
         $cached = Cache::store('redis')->get($cacheKey);
         // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
-        $useCaching = env('RECSYS_BE_CACHE', true);
+        $useCaching = config('railcontent.recsys.use_caching');
         if($useCaching && !is_null($cached)) {
             $recommendations = $cached;
         } else {
@@ -269,7 +269,7 @@ class ContentService
                 'totalLessons' => 0
             ];
         }
-        $removeSeen = env('RECSYS_REMOVE_PREVIOUSLY_SEEN', false);
+        $removeSeen = config('railcontent.recsys.remove_seen_content');
         if ($removeSeen) {
             $recommendations = $this->removePreviousSeenRecommendations($recommendations, $user_id);
         }
