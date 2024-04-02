@@ -516,6 +516,92 @@ class AddOrderTagsTest extends TestCase
         });
     }
 
+    public function test_handles_recharge_subscription()
+    {
+        // the order id from the resource file
+        $orderId = 5710284521748;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/recharge_subscription.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._recharge_subscriptions')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return strcmp(
+                        $message,
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
+                    ) === 0;
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the membership renewal tag
+        Http::assertSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([ShopifyTagEnum::MembershipRenewal->value])
+                );
+        });
+    }
+
+    public function test_handles_recharge_subscription_after_delay()
+    {
+        // this test case has the subscription that was renewed 3 weeks late
+        // (payments failed and were re-attempted one week later, repeating until successful on the 3rd week)
+
+        // the order id from the resource file
+        $orderId = 5824040075540;
+        $path = Storage::disk("ecommerce_test_resources")->path(
+            "Shopify/requests/order/created/recharge_subscription_delayed.json"
+        );
+        $json = json_decode(file_get_contents($path), true);
+
+        $orderData = new Order(json_decode(json_encode($json['body']), false));
+
+        // set up the http faking, to emulate the process with Shopify
+        Http::fake([
+            // call to get the customer's orders: return back our fixture
+            "$this->baseShopifyUrl/customers/*" => Http::response(
+                $this->fixture('customer.orders._recharge_subscriptions')
+            ),
+            // catch the graphql call to update the order, and return a valid empty response
+            "$this->baseShopifyUrl/graphql.json" => Http::response($this->fixture('empty_graphql')),
+        ]);
+
+        Log::shouldReceive("info")
+            ->once()
+            ->withArgs(function ($message) use ($orderId) {
+                return strcmp(
+                        $message,
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: (none)"
+                    ) === 0;
+            });
+
+        AddOrderTags::dispatchSync($orderData);
+
+        // make sure the job sends out the HTTP request to the graphql endpoint with the membership renewal tag
+        Http::assertNotSent(function (Request $request) {
+            return $request->url() == "$this->baseShopifyUrl/graphql.json"
+                && Str::contains(
+                    $request->data()['query'],
+                    'tags: '.json_encode([ShopifyTagEnum::MembershipRenewal->value])
+                );
+        });
+    }
 
     protected function setUp(): void
     {
@@ -590,6 +676,37 @@ class AddOrderTagsTest extends TestCase
             'digital_access_time_interval_length' => 7,
             'digital_membership_access_expiration_date' => null,
             'shopify_id' => 47070758797588,
+            'note' => null,
+        ]);
+
+        Product::create([
+            'brand' => "drumeo",
+            'name' => "Drumeo+ Monthly Membership: Includes Songs",
+            'sku' => "DLM-1-month",
+            'inventory_control_sku' => "17001",
+            'fulfillment_sku' => null,
+            'price' => "30.00",
+            'type' => "digital subscription",
+            'active' => 1,
+            'category' => "NULL",
+            'description' => "Access to Drumeo’s library of lessons by legendary coaches, step-by-step method, and a personal mentor for support and guidance. As a “+” member you also get access to thousands of professionally transcribed songs.",
+            'thumbnail_url' => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
+            'sales_page_url' => "/",
+            'is_physical' => 0,
+            'weight' => "0.00",
+            'subscription_interval_type' => "month",
+            'subscription_interval_count' => 1,
+            'stock' => 999999,
+            'min_stock_level' => 0,
+            'public_stock_count' => 0,
+            'auto_decrement_stock' => 0,
+            'digital_access_permission_names' => "[\"Drumeo Edge\",\"Musora Plus Membership\"]",
+            'digital_access_type' => "all content access",
+            'digital_access_time_interval_type' => "month",
+            'digital_access_time_type' => "recurring",
+            'digital_access_time_interval_length' => 1,
+            'digital_membership_access_expiration_date' => null,
+            'shopify_id' => 47070758240532,
             'note' => null,
         ]);
     }

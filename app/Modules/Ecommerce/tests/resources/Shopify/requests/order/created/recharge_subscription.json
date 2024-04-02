@@ -1,0 +1,454 @@
+{
+    "headers": {
+        "x-shopify-webhook-id": [
+            "7ac9e1c4-3f76-484a-b0b1-f0a37176d8be"
+        ],
+        "x-shopify-triggered-at": [
+            "2024-01-31T19:55:43.852962209Z"
+        ],
+        "x-shopify-topic": [
+            "orders/create"
+        ],
+        "x-shopify-test": [
+            "false"
+        ],
+        "x-shopify-shop-domain": [
+            "musora-dev-sync.myshopify.com"
+        ],
+        "x-shopify-order-id": [
+            "5671228244262"
+        ],
+        "x-shopify-hmac-sha256": [
+            "UtZQZLE9dklSz1HmdtMWpmAMrQywFQxAeNc6jQllbBI="
+        ],
+        "x-shopify-api-version": [
+            "2023-07"
+        ],
+        "x-forwarded-proto": [
+            "https"
+        ],
+        "x-forwarded-for": [
+            "34.139.128.14"
+        ],
+        "content-type": [
+            "application/json"
+        ],
+        "connection": [
+            "keep-alive"
+        ],
+        "cf-worker": [
+            "musora.com"
+        ],
+        "cf-warp-tag-id": [
+            "53caa182-786a-474a-8c66-ed9ace7ae83a"
+        ],
+        "cf-visitor": [
+            "{\"scheme\":\"https\"}"
+        ],
+        "cf-ray": [
+            "84e483b682a9b11b-ATL"
+        ],
+        "cf-ipcountry": [
+            "US"
+        ],
+        "cf-ew-via": [
+            "15"
+        ],
+        "cf-connecting-ip": [
+            "34.139.128.14"
+        ],
+        "cdn-loop": [
+            "cloudflare; subreqs=1"
+        ],
+        "accept-encoding": [
+            "gzip"
+        ],
+        "accept": [
+            "*/*"
+        ],
+        "content-length": [
+            "6471"
+        ],
+        "user-agent": [
+            "Shopify-Captain-Hook"
+        ],
+        "host": [
+            "brandonk.musora.com"
+        ]
+    },
+    "body": {
+        "id": 5710284521748,
+        "admin_graphql_api_id": "gid://shopify/Order/5710284521748",
+        "app_id": 294517,
+        "browser_ip": null,
+        "buyer_accepts_marketing": false,
+        "cancel_reason": null,
+        "cancelled_at": null,
+        "cart_token": null,
+        "checkout_id": null,
+        "checkout_token": null,
+        "client_details": null,
+        "closed_at": null,
+        "company": null,
+        "confirmation_number": "HPUJ8NGKT",
+        "confirmed": true,
+        "contact_email": "recharge_subscriptions1@musora.com.ex",
+        "created_at": "2024-02-09T00:06:56-08:00",
+        "currency": "USD",
+        "current_subtotal_price": "30.00",
+        "current_subtotal_price_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_additional_fees_set": null,
+        "current_total_discounts": "0.00",
+        "current_total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_duties_set": null,
+        "current_total_price": "30.00",
+        "current_total_price_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "current_total_tax": "0.00",
+        "current_total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "customer_locale": "en",
+        "device_id": null,
+        "discount_codes": [],
+        "email": "recharge_subscriptions1@musora.com.ex",
+        "estimated_taxes": false,
+        "financial_status": "paid",
+        "fulfillment_status": "fulfilled",
+        "landing_site": null,
+        "landing_site_ref": null,
+        "location_id": null,
+        "merchant_of_record_app_id": null,
+        "name": "#1163793",
+        "note": null,
+        "note_attributes": [
+            {
+                "name": "rc_charge_id",
+                "value": "987513446"
+            },
+            {
+                "name": "rc_address_id",
+                "value": "139954524"
+            },
+            {
+                "name": "rc_subscription_ids",
+                "value": "422699289"
+            }
+        ],
+        "number": 1162793,
+        "order_number": 1163793,
+        "order_status_url": "https://shop.musora.com/73541484820/orders/85026f22b01bf8c54416ccfc2224d93e/authenticate?key=0006dedf20ff1c62f193b9871c71f49d",
+        "original_total_additional_fees_set": null,
+        "original_total_duties_set": null,
+        "payment_gateway_names": [
+            "stripe"
+        ],
+        "phone": null,
+        "po_number": null,
+        "presentment_currency": "USD",
+        "processed_at": "2024-02-09T00:06:56-08:00",
+        "reference": null,
+        "referring_site": null,
+        "source_identifier": null,
+        "source_name": "subscription_contract",
+        "source_url": null,
+        "subtotal_price": "30.00",
+        "subtotal_price_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "tags": "Subscription, Subscription Recurring Order",
+        "tax_exempt": false,
+        "tax_lines": [],
+        "taxes_included": false,
+        "test": false,
+        "token": "85026f22b01bf8c54416ccfc2224d93e",
+        "total_discounts": "0.00",
+        "total_discounts_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_line_items_price": "30.00",
+        "total_line_items_price_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_outstanding": "0.00",
+        "total_price": "30.00",
+        "total_price_set": {
+            "shop_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "30.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_shipping_price_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tax": "0.00",
+        "total_tax_set": {
+            "shop_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            },
+            "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "USD"
+            }
+        },
+        "total_tip_received": "0.00",
+        "total_weight": 0,
+        "updated_at": "2024-02-09T00:23:27-08:00",
+        "user_id": null,
+        "billing_address": {
+            "first_name": null,
+            "address1": null,
+            "phone": null,
+            "city": null,
+            "zip": null,
+            "province": null,
+            "country": "United States",
+            "last_name": null,
+            "address2": null,
+            "company": null,
+            "latitude": null,
+            "longitude": null,
+            "name": "",
+            "country_code": "US",
+            "province_code": null
+        },
+        "customer": {
+            "id": 7370349379860,
+            "email": "recharge_subscriptions1@musora.com.ex",
+            "created_at": "2023-11-02T06:53:13-07:00",
+            "updated_at": "2024-03-28T03:07:09-07:00",
+            "first_name": "",
+            "last_name": "N/A",
+            "state": "disabled",
+            "note": null,
+            "verified_email": true,
+            "multipass_identifier": null,
+            "tax_exempt": false,
+            "phone": null,
+            "email_marketing_consent": {
+                "state": "not_subscribed",
+                "opt_in_level": "single_opt_in",
+                "consent_updated_at": null
+            },
+            "sms_marketing_consent": null,
+            "tags": "Active Subscriber",
+            "currency": "USD",
+            "accepts_marketing": false,
+            "accepts_marketing_updated_at": null,
+            "marketing_opt_in_level": "single_opt_in",
+            "tax_exemptions": [],
+            "admin_graphql_api_id": "gid://shopify/Customer/7370349379860",
+            "default_address": {
+                "id": 9555505086740,
+                "customer_id": 7370349379860,
+                "first_name": "",
+                "last_name": "N/A",
+                "company": null,
+                "address1": null,
+                "address2": null,
+                "city": null,
+                "province": null,
+                "country": "United States",
+                "zip": null,
+                "phone": null,
+                "name": "N/A",
+                "province_code": null,
+                "country_code": "US",
+                "country_name": "United States",
+                "default": true
+            }
+        },
+        "discount_applications": [],
+        "fulfillments": [
+            {
+                "id": 5036489048340,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/5036489048340",
+                "created_at": "2024-02-09T00:23:26-08:00",
+                "location_id": 93816291604,
+                "name": "#1163793.1",
+                "order_id": 5710284521748,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2024-02-09T00:23:27-08:00",
+                "line_items": [
+                    {
+                        "id": 14572597182740,
+                        "admin_graphql_api_id": "gid://shopify/LineItem/14572597182740",
+                        "attributed_staffs": [],
+                        "fulfillable_quantity": 0,
+                        "fulfillment_service": "manual",
+                        "fulfillment_status": "fulfilled",
+                        "gift_card": false,
+                        "grams": 0,
+                        "name": "Drumeo+ Monthly Membership: Includes Songs",
+                        "price": "30.00",
+                        "price_set": {
+                            "shop_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "30.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "product_exists": true,
+                        "product_id": 8801079230740,
+                        "properties": [],
+                        "quantity": 1,
+                        "requires_shipping": false,
+                        "sku": "DLM-1-month",
+                        "taxable": true,
+                        "title": "Drumeo+ Monthly Membership: Includes Songs",
+                        "total_discount": "0.00",
+                        "total_discount_set": {
+                            "shop_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            },
+                            "presentment_money": {
+                                "amount": "0.00",
+                                "currency_code": "USD"
+                            }
+                        },
+                        "variant_id": 47070758240532,
+                        "variant_inventory_management": "shopify",
+                        "variant_title": null,
+                        "vendor": "Drumeo",
+                        "tax_lines": [],
+                        "duties": [],
+                        "discount_allocations": []
+                    }
+                ]
+            }
+        ],
+        "line_items": [
+            {
+                "id": 14572597182740,
+                "admin_graphql_api_id": "gid://shopify/LineItem/14572597182740",
+                "attributed_staffs": [],
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Drumeo+ Monthly Membership: Includes Songs",
+                "price": "30.00",
+                "price_set": {
+                    "shop_money": {
+                        "amount": "30.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "30.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "product_exists": true,
+                "product_id": 8801079230740,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": false,
+                "sku": "DLM-1-month",
+                "taxable": true,
+                "title": "Drumeo+ Monthly Membership: Includes Songs",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                    "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    },
+                    "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "USD"
+                    }
+                },
+                "variant_id": 47070758240532,
+                "variant_inventory_management": "shopify",
+                "variant_title": null,
+                "vendor": "Drumeo",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+            }
+        ],
+        "payment_terms": null,
+        "refunds": [],
+        "shipping_address": null,
+        "shipping_lines": []
+    }
+}
