@@ -13,11 +13,11 @@
         content="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/logo.webp">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
     <style>
         header {
             background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/header-bg-m.webp');
@@ -68,10 +68,10 @@
 @endsection
 
 @section('body-data')
-    x-data ='{
+    x-data="{
         modalVideoLeft : false,
         modalVideoRight : false,
-    }'
+    }"
 @endsection
 
 @section('global-body')
@@ -83,18 +83,17 @@
         <div class="flex flex-wrap sm:flex-nowrap">
             <div class="mx-auto text-center lg:text-left px-4 sm:px-0">
                 <div class="sm:px-3">
-                    <img class="h-28 lg:h-32"
+                    <img class="h-28 lg:h-36"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/logo.webp"
                         alt="Win an Osmose Expressive-E from Jordan Rudess and Pianote Logo">
                     <img class="h-52 sm:hidden mt-4"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/header-image.webp"
                         alt="Pianist's hands on the piano keyboard">
-                    <p class="mx-0 my-4" style="max-width: 450px;">
+                    <p class="mx-0 my-4">
                         <span class="font-extrabold">Win an Osmose Expressive-E</span> <br />
                         Enter your email address and you’ll be in the running to win an Osmose Expressive-E (valued at
                         $1799 USD). One entry per person. Winner announced April 15.
                     </p>
-                </div>
                     @include('pianote._partials.sign-up-form', [
                         'recaptchaKey' => $recaptchaKey,
                         'stacked' => true,
@@ -104,8 +103,9 @@
                     ])
                     <!-- <span class="join sold-out smaller w-full">this offer has now ended</span> -->
                 </div>
+                </div>
                 <div class="hidden sm:block flex-shrink-0">
-                    <img class="h-72 lg:h-80 transition-opacity opacity-1"
+                    <img class="h-72 lg:h-96 transition-opacity opacity-1"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/header-image.webp"
                         loading="lazy" onload="this.classList.remove('opacity-0')"
                         alt="Pianist's hands on the piano keyboard">
@@ -124,15 +124,15 @@
         <div class="max-w-md md:max-w-4xl mx-auto">
             <div class="md:flex md:flex-wrap">
                 <div class="w-full mb-4 md:mb-8 text-center">
-                    <h2 class="font-extrabold leading-normal mb-2" style="color:#2A2F34;">
+                    <h2 class="font-extrabold leading-tight mb-1" style="color:#2A2F34;">
                         Press. Bend. <br class="inline md:hidden"> Shake. Strum.
                     </h2>
-                    <h6 class="leading-tight"><strong><em>
+                    <p class="leading-tight"><strong><em>
                                 The new way to bring expression <br class="inline md:hidden">
-                                to your playing.</em></strong></h6>
+                                to your playing.</em></strong></p>
 
                 </div>
-                <div class="md:w-7/12 md:pr-7">
+                <div class="md:w-1/2 md:pr-7">
                     <img class="md:hidden rounded-xl mb-6 transition-opacity opacity-1"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/features-collage.webp"
                         loading="lazy" onload="this.classList.remove('opacity-0')" alt="Collage of 4 images with piano">
@@ -143,7 +143,7 @@
                         Expressive-E.
                         <br><br>
                         Use intuitive gestures to control the 49-key synthesizer and take your musical journey into
-                        unchartered waters.
+                        uncharted waters.
                         <br><br>
                         We’ve partnered with Dream Theater’s Jordan Rudess to give away a beautiful Osmose Expressive-E to
                         one lucky pianist.
@@ -151,12 +151,12 @@
                         Could it be you?
                         <br><br>
                     </p>
-                    <a class="join smaller w-full" role="button" x-on:click="scrollToSection">ENTER NOW»</a>
+                    <a class="join smaller w-full max-w-xs" role="button" x-on:click="scrollToSection">ENTER NOW»</a>
                     <!-- <span class="join sold-out smaller w-full">this offer has now ended</span> -->
                 </div>
 
 
-                <div class="w-5/12 justify-center pl-8">
+                <div class="w-1/2 justify-center pl-6">
                     <img class="rounded-xl hidden md:inline-block transition-opacity opacity-1"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/pianote/lead-gen/osmose-giveaway/features-collage.webp"
                         loading="lazy" onload="this.classList.remove('opacity-0')" alt="Collage of 4 images with piano">
@@ -167,8 +167,8 @@
 
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#01101D;">
         <div class="container m-auto max-w-5xl text-white">
-            <h2 class="font-extrabold leading-normal mb-2 text-center">See it in action.</h5>
-                <h5 class="leading-tight text-center"><strong><em> Express your originality.</em></strong></h5>
+            <h2 class="font-extrabold leading-normal mb-1 text-center">See it in action.</h2>
+                <p class="leading-tight text-center"><strong><em> Express your originality.</em></strong></p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="p-4 md:py-10 relative">
                         <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
@@ -179,8 +179,10 @@
                                 loading="lazy" onload="this.classList.remove('opacity-0')"
                                 alt="header image" fetchpriority="high" />
                         </div>
-                        <p class="text-center leading-tight py-2 text-sm md:text-xs"><strong><em>Expressive E - Discovering Osmose with Jordan
-                                    Rudess (prototype unit)</em><strong></p>
+                        <p class="text-center leading-tight py-2 text-sm md:text-xs"><strong><em>
+                                    Expressive E - Discovering Osmose with<br class="lg:hide">
+                                     Jordan Rudess (prototype unit)
+                                </em></strong></p>
 
                     </div>
                     <div class="p-4 md:py-10 relative">
@@ -192,11 +194,13 @@
                                 loading="lazy" onload="this.classList.remove('opacity-0')"
                                 alt="header image" fetchpriority="high" />
                         </div>
-                        <p class="text-center leading-tight py-2 text-sm md:text-xs"><strong><em>Osmose by Expressive E with Jordan Rudess -
-                                    NAMM 2023</em><strong></p>
+                        <p class="text-center leading-tight py-2 text-sm md:text-xs"><strong><em>
+                                    Osmose by Expressive E with<br class="lg:hide">
+                                    Jordan Rudess - NAMM 2023
+                                </em></strong></p>
                     </div>
                 </div>
-                
+
 
         </div>
     </section>
@@ -235,16 +239,16 @@
                     No shipping fees. We’ll take care of it. (VAT may apply.)
                 </div>
             </div>
-            <div class="inline-block italic text-black py-4 px-6 bg-musora">
+            <p class="inline-block italic py-4 px-6 bg-musora">
                 The winner will be announced during a LIVE event on <strong>April 15th</strong>.
-            </div>
+            </p>
         </div>
     </section>
 
 
 
     <section class="text-center pb-8 md:pb-12 lg:pb-14 px-5 md:px-7" style="background-color:#F1EFED;" id="wantToWin">
-        <div class="container mx-auto max-w-4xl">
+        <div class="container mx-auto max-w-3xl">
             <div class="flex flex-col">
                 <div class="py-4 lg:py-6">
                     <img class="h-28 lg:h-32 transition-opacity opacity-1"
@@ -253,18 +257,20 @@
                         alt="Win an Osmose Expressive-E from Jordan Rudess and Pianote Logo">
                 </div>
                 <h2 class="pb-4 lg:pb-6"><strong>Win an Osmose Expressive-E</strong></h2>
-                @include('pianote._partials.sign-up-form', [
-                    'recaptchaKey' => $recaptchaKey,
-                    'stacked' => true,
-                    'formId' => 'Pianote - Engagement - Trigger - Osmose Giveaway - Web Form',
-                    'formName' => 'Osmose Giveaway',
-                    'buttonText' => 'I WANT TO WIN!',
-                ])
+                <div class="w-full">
+                    @include('pianote._partials.sign-up-form', [
+                        'recaptchaKey' => $recaptchaKey,
+                        'formId' => 'Pianote - Engagement - Trigger - Osmose Giveaway - Web Form2',
+                        'formName' => 'Osmose Giveaway',
+                        'buttonText' => 'I WANT TO WIN!',
+                    ])
+
+                </div>
                 <!-- <span class="join sold-out smaller w-full">this offer has now ended</span> -->
             </div>
         </div>
     </section>
-    
+
     @include('_partials.components.video-modal', [
         'name' => 'modalVideoLeft',
         'video' => 'wNjxe49-_Cw',
