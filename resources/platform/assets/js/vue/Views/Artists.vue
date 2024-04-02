@@ -6,7 +6,7 @@
             <ul class="tw-list-disc tw-list-inside dark:tw-text-white tw-mb-1" v-for="(group, letter) in groupedArtists" :key="letter">
                 <h2 class="tw-font-bold tw-text-xl">{{ letter }}</h2>
                 <li v-for="artist in group" :key="artist.url" class="tw-m-2">
-                    <a :href="artist.url" class="dark:tw-text-white">{{ artist.name }}</a>
+                    <a :href="artist.url" class="tw-text-[#00101D] dark:tw-text-white hover:tw-underline">{{ artist.name }}</a>
                 </li>
             </ul>
         </div>

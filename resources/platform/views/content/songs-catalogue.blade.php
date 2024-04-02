@@ -15,8 +15,8 @@
                         <span class="tw-text-[28px] lg:tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                     </h1>
                     <p
-                        class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
-                        <a href="{{ $allArtistUrl }}"> SEE ALL {{ $artistsNumber }} ARTISTS </a>
+                        class="tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
+                        <a class="tw-text-white" href="{{ $allArtistUrl }}"> SEE ALL {{ $artistsNumber }} ARTISTS </a>
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row tw-items-center tw-justify-center">
