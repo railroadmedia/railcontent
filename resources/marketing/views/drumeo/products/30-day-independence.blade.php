@@ -260,24 +260,21 @@
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
                         alt="30-Day Independence Logo">
-                    <h1 class="rotater-text overflow-hidden"><strong>
+                    @php
+                        $lines = ['Learn the drums', 'Improve your timing', 'Boost your creativity'];
+                    @endphp
 
-                            @php
-                                $lines = ['Learn the drums', 'Improve your timing', 'Boost your creativity'];
-                            @endphp
-
-                            <h1 class="rotater-text overflow-hidden">
-                                <strong>
-                                    @foreach (range(1, 5) as $i)
-                                        @foreach ($lines as $line)
-                                            <span
-                                                class="relative nowrap delay-1000 ease-in-out">{{ $line }}</span><br>
-                                        @endforeach
-                                    @endforeach
-                                </strong>
-                            </h1>
-                        </strong></h1>
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
+                    <h2 class="rotater-text overflow-hidden">
+                        <strong>
+                            @foreach (range(1, 5) as $i)
+                                @foreach ($lines as $line)
+                                    <span
+                                        class="relative nowrap delay-1000 ease-in-out">{{ $line }}</span><br>
+                                @endforeach
+                            @endforeach
+                        </strong>
+                    </h2>
+                    <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the next class <br
                                 class="inline lg:hidden">starting May 6th.</strong></h6>
@@ -391,9 +388,9 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-normal"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
+            <h2 class="leading-tight mb-3"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
             <div class="flex flex-col-reverse md:flex-row">
-                <div class="w-full md:w-1/2 text-left py-2 md:py-4 flex items-center">
+                <div class="w-full md:w-1/2 text-left mb-2 md:mb-4 flex items-center">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores provident sequi explicabo ipsum
                         blanditiis incidunt aliquid architecto, illum non enim minima mollitia, repellendus vitae
                         perferendis cumque? At voluptatem aspernatur sunt. Lorem ipsum dolor sit amet consectetur
@@ -453,11 +450,11 @@
                     ],
                 ];
             @endphp
-            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 sm:pb-14 lg:pb-20 mt-5">
+            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 mt-5">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
-                            class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 @if ($key !== 4) md:mb-20 @else md:mb-0 @endif">
+                            class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -468,7 +465,7 @@
                         </div>
                     @else
                         <div
-                            class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
+                            class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
                             @if (empty($getting['special']))
                                 <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
                                     onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
@@ -608,7 +605,7 @@
 
             <div class="flex flex-col sm:flex-row text-left justify-center">
                 @foreach ($drummers as $drummer)
-                    <div class="w-full sm:w-1/4 px-2 mb-6 sm:mb-0 mx-auto sm:mx-0">
+                    <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0 mx-auto sm:mx-0">
                         <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl"
                             style="background-image:url('{{ $drummer['image'] }}'); object-position: 60% 0">
                             <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img
@@ -697,15 +694,13 @@
         </div>
     </section>
 
-    <section style="background: #EFF7FF" class="pb-10 md:pb-20">
-        <div class="container max-w-2xl mx-auto pb-10 sm:py-10">
-            <div class="p-6 text-center">
-                <h4 class="uppercase leading-relaxed text-gray-300 py-4">No theory. No homework.</h4>
-                <img class="w-full sm:max-w-md"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play-logo.svg"
-                    alt="Just Press Play Image" />
-            </div>
-            <div class="aspect-16:9 cursor-pointer sm:rounded-xl autoplay-video overflow-hidden w-full relative"
+    <section style="background: #EFF7FF" class="px-5 sm:px-8 py-8 sm:py-12 lg:py-16 text-center">
+        <div class="container max-w-5xl mx-auto mb-10">
+            <h5 class="uppercase leading-relaxed opacity-50 mb-3">No theory. No homework.</h5>
+            <img class="w-full sm:max-w-2xl mb-5 sm:mb-10"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play-logo.svg"
+                alt="Just Press Play Image" />
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                 x-on:click="trailer = true;" role="button">
                 <i
                     class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
@@ -739,7 +734,7 @@
                     6th.</strong></h6>
             <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto"
                 style="background-color:#fd5;color:#9d1032;">
-                REGISTRATION CLOSES IN<br class="inline sm:hidden">
+                REGISTRATION CLOSES IN
                 <span x-cloak x-data="timer()" x-init="countdown()">
                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
                             x-text="dayText"></span></span>
@@ -758,7 +753,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/coach-image.webp">
@@ -771,7 +766,7 @@
                         alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
+                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow"
                     style="background-color:#00101d;">
                     <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>El Estepario Siberiano</strong></h2>
@@ -908,9 +903,9 @@
 
              <!-- Version 1 -->
             <h6 class="leading-normal mb-4 text-drumeo">
-            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <strong>Only <s class='opacity-60'>500</s> <span> {{$products['DLM-Lifetime']->getPublicStockCount()}} </span> left!</strong>
+            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>500</s> <strong> {{$products['DLM-Lifetime']->getPublicStockCount()}} </strong> left!</span>
             </h6>
-                
+
 
 
             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
@@ -938,7 +933,7 @@
                     '<strong>Free</strong> Drumeo 5A Drumsticks',
                     '<strong>Free</strong> 1-month Drumeo Access',
                 ],
-            
+
                 // second deal
                 'topBadge' => 'MOST POPULAR',
                 'secondDeal' => 'Unlimited Lessons',
@@ -963,69 +958,69 @@
 
               <!-- Version 2 -->
 
-              <h6 class="leading-normal mb-4">
-                <span class="text-drumeo">Enrollment closes in
-                    <strong><span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                        </span>!</strong>
-                </span>
-            </h6>
+{{--              <h6 class="leading-normal mb-4">--}}
+{{--                <span class="text-drumeo">Enrollment closes in--}}
+{{--                    <strong><span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span--}}
+{{--                                    x-text="dayText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span--}}
+{{--                                    x-text="hourText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span--}}
+{{--                                    x-text="minuteText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span--}}
+{{--                                    x-text="secondText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                        </span>!</strong>--}}
+{{--                </span>--}}
+{{--            </h6>--}}
 
 
-            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles in 30-Day Independence">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}
-                drummers who<br class="sm:hidden"> have already registered.</p>
+{{--            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"--}}
+{{--                onload="this.classList.remove('opacity-0')"--}}
+{{--                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
+{{--                alt="Image of joined student profiles in 30-Day Independence">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}--}}
+{{--                drummers who<br class="sm:hidden"> have already registered.</p>--}}
 
-            @include('drumeo.products.partials._promo-cards', [
-                // first deal
-                'firstDeal' => '30-Day Independence',
-                'firstDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/30DI-course.webp',
-                'firstImageHeight' => 'h-32',
-                'firstDealPrice' => 97,
-                'firstDealSub' => 'Just the course',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true',
-                'firstButtonText' => 'ENROLL NOW',
-                'whiteBg' => 'false',
-                'firstDealExtra' => "One-time payment",
-                'firstExtraBonuses' => [
-                    '24 Guided Workouts',
-                    '4 Live Q&A Sessions',
-                    'Lifetime Course Access',
-                    '90-Day Money Back Guarantee',
-                ],
-            
-                // second deal
-                'topBadge' => 'MOST POPULAR',
-                'secondDeal' => 'Unlimited Lessons',
-                'secondDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/membership-bundle.webp',
-                'secondImageHeight' => 'h-32',
-                'secondDealSub' => "1 year of Drumeo + 4 bonuses worth $1,493.93",
-                'secondDealPrice' => '20/mo',
-                'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
-                'secondExtraBonuses' => [
-                    '<strong>Annual Drumeo Membership</strong>',
-                    '<strong>Free 30-Day Independence</strong>',
-                    '<strong>Free</strong> Drumeo PadStand',
-                    '<strong>Free</strong> Drumeo 5A Drumsticks',
-                    '<strong>Free</strong> Easy Rudiments Book',
-                ],
-                'secondButtonText' => 'GET EVERYTHING',
-                'secondDealExtra' => "Billed annually at $240/yr.",
-            ])
+{{--            @include('drumeo.products.partials._promo-cards', [--}}
+{{--                // first deal--}}
+{{--                'firstDeal' => '30-Day Independence',--}}
+{{--                'firstDealImage' =>--}}
+{{--                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/30DI-course.webp',--}}
+{{--                'firstImageHeight' => 'h-32',--}}
+{{--                'firstDealPrice' => 97,--}}
+{{--                'firstDealSub' => 'Just the course',--}}
+{{--                'firstDealLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true',--}}
+{{--                'firstButtonText' => 'ENROLL NOW',--}}
+{{--                'whiteBg' => 'false',--}}
+{{--                'firstDealExtra' => "One-time payment",--}}
+{{--                'firstExtraBonuses' => [--}}
+{{--                    '24 Guided Workouts',--}}
+{{--                    '4 Live Q&A Sessions',--}}
+{{--                    'Lifetime Course Access',--}}
+{{--                    '90-Day Money Back Guarantee',--}}
+{{--                ],--}}
+
+{{--                // second deal--}}
+{{--                'topBadge' => 'MOST POPULAR',--}}
+{{--                'secondDeal' => 'Unlimited Lessons',--}}
+{{--                'secondDealImage' =>--}}
+{{--                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/membership-bundle.webp',--}}
+{{--                'secondImageHeight' => 'h-32',--}}
+{{--                'secondDealSub' => "1 year of Drumeo + 4 bonuses worth $1,493.93",--}}
+{{--                'secondDealPrice' => '20/mo',--}}
+{{--                'secondDealLink' =>--}}
+{{--                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',--}}
+{{--                'secondExtraBonuses' => [--}}
+{{--                    '<strong>Annual Drumeo Membership</strong>',--}}
+{{--                    '<strong>Free 30-Day Independence</strong>',--}}
+{{--                    '<strong>Free</strong> Drumeo PadStand',--}}
+{{--                    '<strong>Free</strong> Drumeo 5A Drumsticks',--}}
+{{--                    '<strong>Free</strong> Easy Rudiments Book',--}}
+{{--                ],--}}
+{{--                'secondButtonText' => 'GET EVERYTHING',--}}
+{{--                'secondDealExtra' => "Billed annually at $240/yr.",--}}
+{{--            ])--}}
 
         </div>
     </section>
