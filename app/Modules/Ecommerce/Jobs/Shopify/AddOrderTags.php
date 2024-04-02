@@ -41,6 +41,9 @@ class AddOrderTags implements ShouldQueue
     /** @var array<string, bool> */
     protected array $orderTagsEnabled;
 
+    // buffer for subscription renewals (in case of failed payment, etc.)
+    protected int $subscriptionRenewalBufferDays = 60;
+
     public function __construct(
         protected Order $order,
         protected int $trialConversionDayLimit = 45,
@@ -215,8 +218,8 @@ class AddOrderTags implements ShouldQueue
             ->filter(fn(OrderLineItem $lineItem) => $lineItem->isMembership())
             ->first()
             ->product;
-        // annual or monthly, with a 2-week buffer
-        $historyDays = $membershipProduct->getMembershipTimeAsTotalDays() + 14;
+        // annual or monthly, with the buffer
+        $historyDays = $membershipProduct->getMembershipTimeAsTotalDays() + $this->subscriptionRenewalBufferDays;
         $historyPeriodStartDate = $this->order->processedAt->copy();
         $historyPeriodStartDate->subDays($historyDays);
 

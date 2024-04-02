@@ -587,14 +587,14 @@ class AddOrderTagsTest extends TestCase
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
                         $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: (none)"
+                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
                     ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
 
         // make sure the job sends out the HTTP request to the graphql endpoint with the membership renewal tag
-        Http::assertNotSent(function (Request $request) {
+        Http::assertSent(function (Request $request) {
             return $request->url() == "$this->baseShopifyUrl/graphql.json"
                 && Str::contains(
                     $request->data()['query'],
