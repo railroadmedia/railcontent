@@ -393,6 +393,9 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
             \App\Decorators\GroupedContent\GroupedContentDecorator::class,
         ],
+        'artist' => [
+           \App\Decorators\Content\ArtistDecorator::class,
+        ],
     ],
 
     // specific decorator configs

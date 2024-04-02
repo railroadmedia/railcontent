@@ -16,8 +16,7 @@
                     </h1>
                     <p
                         class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
-                        <!-- TODO: GET THIS INFO FROM BACKEND -->
-                        {{ $artistsNumber }} ARTISTS | {{ $songsNumber }} SONGS
+                        <a href="{{ $allArtistUrl }}"> SEE ALL {{ $artistsNumber }} ARTISTS </a>
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row tw-items-center tw-justify-center">
