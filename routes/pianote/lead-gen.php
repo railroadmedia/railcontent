@@ -33,6 +33,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/digital-chords-scales-guide', [LeadGenController::class, 'digitalChordsAndScales']);
     Route::get('/casio-giveaway', [LeadGenController::class, 'giveaway']);
     Route::get('/awards', [LeadGenController::class, 'awards']);
+    Route::get('/osmose-giveaway', [LeadGenController::class, 'osmoseGiveaway']);
 
     Route::group(['prefix' => 'piano-complete-beginners-bootcamp'],
         function () {
