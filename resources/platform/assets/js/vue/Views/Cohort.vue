@@ -258,7 +258,7 @@
             </div>
 
             <!-- Cart link -->
-            <div v-if="cohort['is_product'] && isEnrolled && hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
+            <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
