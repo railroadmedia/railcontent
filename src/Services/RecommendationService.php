@@ -16,7 +16,7 @@ class RecommendationService
 {
 
     public AccessMethod $accessMethod;
-    private array $RETRY_ERROR_CODES = [500, 503];
+    private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
         //private DatabaseManager $databaseManager,
@@ -66,14 +66,12 @@ class RecommendationService
 
     private function getFilteredRecommendationsBySection($userID, $brand, RecommenderSection $section)
     {
-        $url = env('HUGGINGFACE_URL');
         $data = [
             'user_ids' => [$userID],
             'brand' => $brand,
             'section' => $section->value
         ];
-
-        $content = $this->postToHuggingFaceWithRetry($url, $data);
+        $content = $this->postToHuggingFaceWithRetry($data);
         if (!isset($content[$userID])) {
             $msg = print_r($content, true);
             Log::warning("Malformed data from Huggingface: $msg");
@@ -83,12 +81,11 @@ class RecommendationService
 
     private function getAllFilteredRecommendations($userID, $brand)
     {
-        $url = env('HUGGINGFACE_URL');
         $data = [
             'user_ids' => [$userID],
             'brand' => $brand,
         ];
-        $content = $this->postToHuggingFaceWithRetry($url, $data);
+        $content = $this->postToHuggingFaceWithRetry($data);
         if (!isset($content[$userID])) {
             $msg = print_r($content, true);
             Log::warning("Malformed data from Huggingface: $msg");
@@ -96,14 +93,21 @@ class RecommendationService
         return $content[$userID] ?? [];
     }
 
-    private function postToHuggingFaceWithRetry($url, $data) {
+    private function postToHuggingFaceWithRetry($data) {
+        $url = env('HUGGINGFACE_URL');
         $authToken = env('HUGGINGFACE_TOKEN');
         $response = Http::withToken($authToken)->post($url, $data);
-        if (in_array($response->status(), $this->RETRY_ERROR_CODES)) {
-            $response = Http::withToken($authToken)->post($url, $data);
-        }
-        $content = $response->json();
         $status = $response->status();
+
+        if (in_array($status, $this->RETRY_ERROR_CODES)) {
+            $response = Http::withToken($authToken)->post($url, $data);
+        } else if ($status == 500) {
+            $backupURL = env('HUGGINGFACE_BACKUP_URL');
+            $response = Http::withToken($authToken)->post($backupURL, $data);
+            $status = $response->status();
+        }
+
+        $content = $response->json();
         if ($status != 200)
         {
             Log::warning("HuggingFace return an unexpected response with code: $status");
