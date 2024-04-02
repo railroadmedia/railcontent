@@ -352,10 +352,6 @@ class ContentService
             $content = $this->getByIds($recommendations['recommendations']);
         }
         $filterOptions = [
-            "style" => ["All"],
-            "topic" => ["All"],
-            "instructor" =>[],
-            "artist" => ["All"],
             "type" => ["Recommendation"],
         ];
 

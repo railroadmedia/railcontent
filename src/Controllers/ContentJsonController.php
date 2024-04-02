@@ -130,7 +130,7 @@ class ContentJsonController extends Controller
         FiltersHelper::prepareFiltersFields();
 
         $brand = $request->get('brand', brand());
-        $pageSize = $request->get('limit', 100);
+        $pageSize = $request->get('limit', 5);
         $randomize = $request->get('randomize', 0);
         $filter = FiltersHelper::$filter ?? '';
         $page = $request->get('page', 1);
