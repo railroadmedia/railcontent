@@ -127,7 +127,10 @@ class LeadGenController extends BaseController
     {
         return view('pianote.lead-gen.awards', ['theme' => 'pianote']);
     }
-
+    public function osmoseGiveaway()
+    {
+        return view('pianote.lead-gen.osmose-giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+    }
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
         if(is_null($page)){
