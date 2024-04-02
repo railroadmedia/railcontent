@@ -7,6 +7,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { ref, computed, watch, nextTick, inject, onUpdated } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
 // TODO: Add image upload functionality
@@ -30,7 +31,7 @@ const props = defineProps({
     },
     imageUploadEndpoint: {
         type: String,
-        default: null,
+        default: 'testendpoint.php',
     },
     initialValue: {
         default: null,
@@ -58,7 +59,6 @@ const initObject = computed(() => ({
     autoresize_min_height: props.height,
     body_class: `${isDarkModeSelected.value ? 'tw-dark' : ''}`,
     toolbar: props.toolbar,
-    images_upload_url: props.imageUploadEndpoint,
     branding: false,
     content_id: '#textEditor',
     content_style: `body.tw-dark { color: white } body { font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; } body.tw-dark.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #9EC0DC; } body.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #223F57; } `,
@@ -79,10 +79,15 @@ const initObject = computed(() => ({
     media_alt_source: false,
     paste_as_text: true,
     plugins: 'lists link image media autolink autoresize emoticons',
+    images_file_types: 'jpg,svg,webp',
     relative_urls: false,
     resize: false,
     statusbar: false,
     target_list: false,
+    images_upload_url: 'http://localhost:8000/server.php',
+    automatic_uploads: true,
+    images_reuse_filename: true,
+    images_upload_handler: handleImageUpload,
     setup: (editor) => {
         editor.on('input', () => {
             editor.save();
@@ -132,6 +137,53 @@ function handleEditorDrop(event, editor) {
     }
     */
 }
+
+function handleImageUpload(blobInfo, success, failure, progress) {
+    console.log(blobInfo, success, failure, progress)
+    const formData = new FormData();
+    formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+    console.log(formData)
+
+    axios({
+        method: 'post',
+        url: props.imageUploadEndpoint,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: function (e) {
+            progress(parseInt(Math.round((e.loaded * 100) / e.total)));
+        }
+    }).then(function (response) {
+        console.log('then response', response);
+            // Handle success
+            const json = response.data;
+            if (!json || typeof json.location != 'string') {
+                failure('Invalid JSON: ' + JSON.stringify(json));
+                return;
+            }
+            success(json.location);
+        })
+        .catch(function (error) {
+            console.log('catch error', error)
+            // Handle failure
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                if (error.response.status === 403) {
+                    failure('HTTP Error: ' + error.response.status, { remove: true });
+                } else if (error.response.status < 200 || error.response.status >= 300) {
+                    failure('HTTP Error: ' + error.response.status);
+                }
+            } else if (error.request) {
+                // The request was made but no response was received
+                failure('Image upload failed due to a XHR Transport error. Code: ' + error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                failure('Error: ' + error.message);
+            }
+        });
+}
+
 </script>
 
 <style scoped>
