@@ -458,7 +458,7 @@
             <h5 class="text-pianote uppercase text-center pt-10">You’ll know the:</h5>
         </div>
 
-        <div class="container mx-auto max-w-5xl p-4 hidden lg:block">
+        <div class="container mx-auto max-w-5xl p-4 hidden md:block">
             <div class="flex justify-center pt-10 gap-4">
                 @foreach ($gridItems as $gridItem)
                     <div class="relative text-center w-1/3 bg-white rounded-xl px-4 py-8">
@@ -471,75 +471,71 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-        <!--mobile view-->
-        <div class="lg:hidden" x-data="{
-            init() {
-                new Splide(this.$refs.splide1, {
-                    classes: {
-                        arrow: 'hidden',
-                        prev: 'hidden',
-                        next: 'hidden',
-                        pagination: 'splide__pagination bottom-0',
+             <!--mobile view-->
+            <div class="md:hidden" x-data="{
+                    init() {
+                        new Splide(this.$refs.splide1, {
+                            classes: {
+                                arrow: 'hidden',
+                                prev: 'hidden',
+                                next: 'hidden',
+                                pagination: 'splide__pagination bottom-0',
+                            },
+                            perPage: 2.5,
+                            perMove: 1,
+                            focus: 0,
+                            interval: 2000,
+                            drag: 'free',
+                            snap: false,
+                            lazyLoad: 'nearby',
+                            pagination: false,
+                            breakpoints: {
+                                767: {
+                                    perPage: 1.5,
+                                    type: 'loop',
+                                },
+                            },
+                        }).mount()
                     },
-                    perPage: 2.5,
-                    perMove: 1,
-                    type: 'loop',
-                    focus: 0,
-                    interval: 2000,
-                    drag: 'free',
-                    snap: false,
-                    lazyLoad: 'nearby',
-                    pagination: false,
-                    breakpoints: {
-                        1020: {
-                            perPage: 3,
-                            focus: 2,
-                        },
-                        767: {
-                            perPage: 1.5,
-                        },
-                    },
-                }).mount()
-            },
-        }">
-            <div x-ref="splide1" class="splide text-left">
-                <div class="splide__track pt-10">
-                    <ul class="splide__list items-start">
-                        @foreach ($gridItems as $gridItem)
-                            <li class="splide__slide px-4">
-                                <div class="relative text-center bg-white rounded-xl px-4 py-10">
-                                    <img src="{{ $gridItem['image'] }}" alt="Image" class="mx-auto rounded-l">
-                                    <p class="mt-4 text-left sm:text-sm">{{ $gridItem['text'] }}</p>
-                                    <div
-                                        class="bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-                                        <i class="{{ $gridItem['icon'] }} text-pianote text-3xl"></i>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                }">
+                    <div x-ref="splide1" class="splide text-left">
+                        <div class="splide__track pt-10">
+                            <ul class="splide__list items-start">
+                                @foreach ($gridItems as $gridItem)
+                                    <li class="splide__slide px-4">
+                                        <div class="relative text-center bg-white rounded-xl px-4 py-10">
+                                            <img src="{{ $gridItem['image'] }}" alt="Image" class="mx-auto rounded-l">
+                                            <p class="mt-4 text-left sm:text-sm">{{ $gridItem['text'] }}</p>
+                                            <div
+                                                class="bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+                                                <i class="{{ $gridItem['icon'] }} text-pianote text-3xl"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="px-4">
-            <div class="text-center">
-                <img class="hidden md:inline h-20"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/line-circle.svg"
-                    alt="Red Lines">
-                <img class="inline md:hidden h-16"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/line-m.svg"
-                    alt="Red Line">
-            </div>
+                <div class="px-4">
+                    <div class="text-center">
+                        <img class="hidden md:inline h-20"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/line-circle.svg"
+                            alt="Red Lines">
+                        <img class="inline md:hidden h-16"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/line-m.svg"
+                            alt="Red Line">
+                    </div>
 
-            <div class="bg-white border-2 border-pianote rounded-md px-4 w-full sm:w-9/12 lg:w-2/3 mx-auto">
-                <h4 class="p-4 text-center">The result is <strong>stronger fingers <br class="inline sm:hidden"> and hands,
-                        improved coordination,</strong> and <strong>better technique </strong> <br
-                        class="inline sm:hidden">so you play the songs you love on the piano with ease.</h4>
-            </div>
-        </div>
+                    <div class="bg-white border-2 border-pianote rounded-md px-4 w-full sm:w-9/12 lg:w-2/3 mx-auto">
+                        <h4 class="p-4 text-center">The result is <strong>stronger fingers <br class="inline sm:hidden"> and hands,
+                                improved coordination,</strong> and <strong>better technique </strong> <br class="inline sm:hidden">so you play the songs you love on the piano with ease.</h4>
+                    </div>
+                </div>
 
+        </div>            
+        
 
         <h5 class="text-pianote uppercase text-center py-10">Let’s dive in:</h5>
         @php
@@ -1063,13 +1059,13 @@
     <section class="text-center text-white py-10" style="background: #000000;">
         <div class="container sm:max-w-5xl lg:max-w-6xl mx-auto px-4">
             <h2><strong>Still reading?</strong></h2>
-            <h5 class="leading-normal">By now, you already know that the biggest <br class="inline md:hidden"> difference between those pianists you envy
+            <h4 class="leading-normal">By now, you already know that the biggest <br class="inline md:hidden"> difference between those pianists you envy
                 <br> and the ones who get stuck on a plateau, never <br class="inline md:hidden"> making progress, all comes down to…
                 <br><br>
                 <span class="text-pianote"><strong>Better Technique.</strong></span>
                 <br><br>
                 So if you’re still here, let’s wrap this up and get <br class="inline md:hidden">  you playing better.
-            </h5>
+            </h4>
 
             <div class="md:hidden flex flex-col items-center pt-10">
                 @foreach ($boxes as $box)
@@ -1079,8 +1075,8 @@
                 @endforeach
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal-m.webp" alt="Logo with arrows" class="w-2/3">
                 <div class="w-auto max-w-5xl text-center">
-                        <h3 class="leading-normal">Enroll today and make these 30 days the most <br>
-                            <strong>impactful</strong> and <strong>memorable</strong> of
+                        <h3 class="leading-normal">Enroll today and make these 30 days <br> the most 
+                            <strong>impactful</strong> and <strong>memorable <br></strong> of
                             your piano-playing life.</h3>
                     </div>
             </div>
