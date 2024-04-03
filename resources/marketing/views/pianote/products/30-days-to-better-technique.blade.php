@@ -559,18 +559,20 @@
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => 'Jordan’s secret Juilliard exercises. These are the exact exercises his teachers at Juilliard taught him.
-            He’s sharing them now -- with you.',
+                            'desc' => '<strong>Using musical patterns </strong>to build strong fingers. Each exercise will sound like music, not a boring technical exercise. 
+                             Jordan will show you exactly what notes to play in what order.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => 'The “Flowing” exercise to give you freedom in your playing. An etherial arpeggio exercise that sounds
-            incredible while helping you play faster.',
+                            'desc' => '<strong>Creating true separation for your fingers.</strong> 
+                            Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.
+',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => 'How to “think” about playing fast. Speed is more than an act -- it’s a mindset. Jordan will show you how
-            to approach practicing speed so you’re set up for success, not frustration.',
+                            'desc' => '<strong>Independence for EVERY finger.</strong> 
+                            As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!
+',
                         ],
                     ],
                 ],
@@ -582,24 +584,22 @@
             In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and
             right hands.
             <br><br>
-            No more boring whole notes in your left hand. You’ll learn to play different rhythms in your left hand than your
-            right hand.',
+            No more boring whole notes in your left hand. You’ll learn to play differenHand coordination trips up so many piano players and halts your progress. 
+            But with Jordan’s daily guidance, you’ll be amazing at how quickly you progress.',
                     'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s what you’ll get:',
+                    'backHeader' => 'Here’s how we’ll do it:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => 'Patterns designed to break up your hands. You’ll lay a foundational rhythm with one hand while exploring
-            new patterns and syncopation in the other.',
+                            'desc' => '<strong>Patterns designed to break up your hands. </strong> You’ll lay a foundational rhythm with one hand while exploring new patterns and syncopation in the other.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => 'Personal accompaniment from Jordan. While you’re working on your exercises, Jordan will accompany you,
-            providing a unique backing track. Yes, you’ll be making music with Jordan Rudess.',
+                            'desc' => '<strong>Personal accompaniment from Jordan.</strong> While you’re working on your exercises, Jordan will accompany you, providing a unique backing track. Yes, you’ll be making music with Jordan Rudess.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => 'Break out of 4/4. Get out of the easy time signtarures and step into Jordan’s world of off-time. “It’s
+                            'desc' => '<strong>Break out of 4/4. </strong> Get out of the easy time signtarures and step into Jordan’s world of off-time. “It’s
             easy, but it’s odd.”',
                         ],
                     ],
@@ -624,17 +624,16 @@
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => 'Jordan’s secret Juilliard exercises. These are the exact exercises his teachers at Juilliard taught
-            him. He’s sharing them now -- with you.',
+                            'desc' => '<strong>Jordan’s secret Juilliard exercises.</strong> These are the exact exercises his teachers at Juilliard taught him. He’s sharing them now -- with you.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => 'The “Flowing” exercise to give you freedom in your playing. An etherial arpeggio exercise that sounds
+                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing. </strong> An etherial arpeggio exercise that sounds
             incredible while helping you play faster.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => 'How to “think” about playing fast. Speed is more than an act -- it’s a mindset. Jordan will show you
+                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you
             how to approach practicing speed so you’re set up for success, not frustration.',
                         ],
                     ],
@@ -657,17 +656,17 @@
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => 'The specific techniques to draw listeners in to your playing. How to get people to stop and stare
+                            'desc' => '<strong>The specific techniques to draw listeners in to your playing.</strong> How to get people to stop and stare
             whenever you sit at the piano.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => 'The mindset of a singer. Why thinking like a vocalist is key to bringing emotion and feeling to the
+                            'desc' => '<strong>The mindset of a singer. </strong> Why thinking like a vocalist is key to bringing emotion and feeling to the
             pieces you play.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => 'A final performance with Jordan. “We are going to rock”, says Jordan. In the final week, you’ll put
+                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put
             all your skills together to play sometning Dream Theater-esque WITH Jordan.',
                         ],
                     ],
