@@ -45,7 +45,11 @@ const props = defineProps({
   mostRecentPlaylists: {
     type: Array,
     default: []
-  }
+  },
+  showRecommendation: {
+    type: Boolean,
+    default: false
+  },
 });
 
 const pageContainerStore = usePageContainerStore();
@@ -225,7 +229,7 @@ onUpdated(() => {
       v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps"></PlaylistsModal>
 
     <Navbar v-if="!isOnboarding" :forceSidebarHidden="forceSidebarHidden" :has-notifications="hasNotifications"
-      :isSidebarHidden="pageContainerStore.isSidebarHidden" :isDarkModeSelected="isDarkModeSelected"
+      :isSidebarHidden="pageContainerStore.isSidebarHidden" :isDarkModeSelected="isDarkModeSelected" :show-recommendation="showRecommendation"
       :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed" :is-live="isLive" @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle" />
 

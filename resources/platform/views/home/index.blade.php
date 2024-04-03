@@ -20,7 +20,6 @@
         :has-gear="{{ $hasGear ? 'true' : 'false' }}"
         :has-genres="{{ $hasGenres ? 'true' : 'false' }}"
         :has-goals="{{ $hasGoals ? 'true' : 'false' }}"
-        :has-recommendations="{{ $hasRecommendations ? 'true' : 'false' }}"
         :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-topics="{{ $hasTopics ? 'true' : 'false' }}"
@@ -31,7 +30,9 @@
         new-content-url="{{ url()->route('platform.new-lessons') }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"
         :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-        :recommended-content="{{ $recommendedContentJson }}"
+        @feature('recsys')
+            :recommended-content="{{ $recommendedContentJson }}"
+        @endfeature
         recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
         :started-content="{{ $startedContentJson }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"

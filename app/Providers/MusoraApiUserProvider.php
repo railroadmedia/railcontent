@@ -100,7 +100,12 @@ class MusoraApiUserProvider implements UserProviderInterface
             'customer_io_id' => $customerIoData?->uuid,
         ];
 
-        $userArray = array_merge($user->toArray(), $extraData);
+        $branchData = $this->getAllBranchInformation();
+        $featureData = $this->getAccessibleFeatures();
+        $featureArray = ['branches' => $branchData, 'features' => $featureData];
+
+        $userArray = array_merge($user->toArray(), $extraData, $featureArray);
+
         return [
             'user' => $userArray,
             'isEdge' => $user->isAMember(),

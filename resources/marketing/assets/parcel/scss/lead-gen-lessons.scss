@@ -49,8 +49,8 @@ form :-moz-placeholder {
   }
 }
 
-.infusion-form input,
-.infusion-form button {
+.ajax-form input,
+.ajax-form button {
   font: 400 18px/50px $opensans;
   width: 100%;
   height: 50px;
@@ -75,7 +75,7 @@ form :-moz-placeholder {
   }
 }
 
-.infusion-form button {
+.ajax-form button {
   font-family: $bebas;
   color: #FFF;
   background: $guitareoGreen;

@@ -3,12 +3,9 @@
 namespace App\Modules\FeatureFlagging\tests\Feature\Services;
 
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
-use Error;
 use Illuminate\Support\Carbon;
 use App\Modules\FeatureFlagging\Services\FeatureFlagService;
-use InvalidArgumentException;
 use Modules\UserManagementSystem\Models\User;
-use Psy\Exception\ErrorException;
 use Tests\TestCase;
 
 class FeatureFlagFunctionalTest extends TestCase
@@ -233,6 +230,20 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertContains($allowed1->name, $allFeatures);
         $this->assertContains($allowed2->name, $allFeatures);
         $this->assertNotContains($notAllowed1->name, $allFeatures);
+    }
+
+    public function test_musora_filter()
+    {
+        $now = Carbon::now();
+        $tomorrow = $now->addDay();
+        $domains = ['musora', 'drumeo', 'singeo', 'pianote', 'guitareo'];
+        $musoraFeature = $this->ffService->addFeature($this->faker->word, allow_filter: 'musora', active_at: $tomorrow);
+        foreach($domains as $domain) {
+            $user = User::factory()->create(['email' => "a@$domain.com"]);
+            $this->assertTrue(FeatureFlagging::accessible($musoraFeature->name, $user));
+        }
+        $userBlocked = User::factory()->create();
+        $this->assertFalse(FeatureFlagging::accessible($musoraFeature->name, $userBlocked));
     }
 
 }

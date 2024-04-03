@@ -12,6 +12,7 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -218,7 +219,7 @@ class ContentPagesController extends BaseController
 
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
-                "startedLessons" => $hasStartedLessons ? $startedListLessons : ['data' => []],
+                "startedLessons" => $hasStartedLessons ? $startedListLessons : json_encode(['data' => []]),
                 "hasStartedLessons" => $hasStartedLessons,
                 "lessonType" => $lessonType,
                 "sortOverride" => '-popularity',
@@ -1485,32 +1486,51 @@ class ContentPagesController extends BaseController
      */
     public function recommendedLessons(Request $request)
     {
-        if (!config('railcontent.enable_recsys', false)) {
-            return redirect()->route('platform.new-lessons');
-        }
+
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
         ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
-
         ContentRepository::$pullFutureContent = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
-        $listLessons = $this->contentService->getRecommendationsByContentType(
+
+        FiltersHelper::prepareFiltersFields();
+
+        $brand = $request->get('brand', brand());
+        $pageSize = $request->get('limit', 5);
+        $randomize = $request->get('randomize', 0);
+        $filter = FiltersHelper::$filter ?? '';
+        $page = $request->get('page', 1);
+        $sections = match(strtolower($filter)) {
+            'songs', 'song' => [RecommenderSection::Song],
+            // everything but songs
+            'lessons', 'lesson' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;}),
+            default => [],
+        };
+        if (!$sections) {
+            $groupBySections = [
+                'Songs You Might Like' => [RecommenderSection::Song],
+                'Lessons You Might Like' => array_filter(RecommenderSection::cases(), function($section) { return $section != RecommenderSection::Song;})
+            ];
+        } else {
+            $groupBySections = [];
+        }
+        $listLessons = $this->contentService->getRecommendedContent(
             user()->id,
-            brand(),
-            ContentTypes::newContentTypes(),
-            RecommenderSection::Song,
-            false,
-            limit: 100
+            $brand,
+            sections: $sections,
+            randomize:$randomize,
+            pageSize:$pageSize,
+            page:$page,
+            groupByForLessonsPage: $groupBySections
         );
 
         $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
         $adminMessage = null;
-
         return view('content.catalogue', [
             "adminMessage" => $adminMessage,
             "catalogueMeta" => $catalogueMeta,
             "hasStartedLessons" => false,
             "hideSearch" => true,
+            "hideControls" => true,
             "isAllContent" => true,
             "lessonType" => implode(',', $listLessons['filter_options']['type']),
             "listLessons" => $listLessons->toResponseRawJson(),

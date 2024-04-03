@@ -1,32 +1,25 @@
 <template>
-    <div
-        class="flex flex-row align-v-top test-coach"
-        :class="[noWrap ? 'overflow' : 'flex-wrap']"
-    >
-        <catalogue-card
-            v-for="item in content"
-            :key="'coach-grid' + item.id"
-            :item="item"
-            :content-type="item.type"
-            :brand="brand"
-            :user-id="userId"
-            :is-admin="isAdmin"
-            :lock-unowned="lockUnowned"
-            :content-type-override="contentTypeOverride"
-            :show-my-list-action="showMyListAction"
-            :force-list-view="displayInline"
-            @addToList="emitAddToList"
-        ></catalogue-card>
+    <div class="flex flex-row align-v-top test-coach" :class="[noWrap ? 'overflow' : 'flex-wrap']">
+        <CatalogueListElement v-if="displayInline" v-for="item in content" :key="'coach-list' + item.id" :item="item"
+            :content-type="item.type"  :lock-unowned="lockUnowned"
+            :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
+            @addToList="emitAddToList" />
+        <CatalogueCard v-else v-for="item in content" :key="'coach-grid' + item.id" :item="item"
+            :content-type="item.type" :lock-unowned="lockUnowned"
+            :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
+            @addToList="emitAddToList" />
     </div>
 </template>
 <script>
 import CatalogueCard from '../../../components/Catalogue/CatalogueCard.vue';
+import CatalogueListElement from '../../../components/Catalogue/CatalogueListElement.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 
 export default {
     name: 'CoachGridCatalogue',
     components: {
-        'catalogue-card': CatalogueCard,
+        CatalogueCard,
+        CatalogueListElement
     },
     mixins: [UserCatalogueEvents],
     props: {
@@ -67,14 +60,6 @@ export default {
             default: () => '',
         },
         lockUnowned: {
-            type: Boolean,
-            default: () => false,
-        },
-        sixWide: {
-            type: Boolean,
-            default: () => false,
-        },
-        fiveWide: {
             type: Boolean,
             default: () => false,
         },
