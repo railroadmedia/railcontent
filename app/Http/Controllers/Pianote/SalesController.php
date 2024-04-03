@@ -342,15 +342,15 @@ class SalesController extends BaseController
         return response()->json(['success' => true]);
     }
 
-    public function betterTechnique() 
+    public function betterTechnique()
     {
-        $productId = 740; 
+        $productId = 740;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
-        return view('pianote.products.30-day-better-technique', [
+        return view('pianote.products.30-days-to-better-technique', [
             'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
