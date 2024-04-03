@@ -99,9 +99,9 @@
 
 @section('body-data')
     x-data="{
-        trailerLeft: false,
-        trailerRight: false,
-        trailerM: false,
+        danceOfEternity: false,
+        jayZ: false,
+        trailer: false,
     }"
 @endsection
 
@@ -115,8 +115,8 @@
             <div class="container mx-auto max-w-5xl">
                 <img alt="30 Day to Better Technique Logo" class="h-20 md:h-28 lg:h-44 my-4 md:my-10"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/header-logo.svg"><br>
-                <p class="text-sm md:text-2xl italic">What would happen if you learned piano from <br> the <strong> best
-                        keyboardist in the world?</strong></p>
+                <h6 class="italic">What would happen if you learned piano from <br> the <strong> best
+                        keyboardist in the world?</strong></h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-pianote hover:text-white"
                         @click="trailer = true;">
@@ -149,7 +149,7 @@
                 </span>
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.7)"></div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
         <img class="object-cover w-full relative z-0" style="height: 700px;"
             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/hero-image.jpeg"
             alt="Description of the image">
@@ -178,14 +178,14 @@
     <section class="" style="background: #ffffff;">
         <div class="container max-w-4xl mx-auto py-4 md:py-10 flex justify-center flex-col md:flex-row">
             <div class="flex flex-col items-center md:hidden">
-                <h2 class="my-6 text-center text-5xl pb-2"><strong>Technique is <br/> <span class="underline">everything.</span>  </strong></h2>
+                <h2 class="my-6 text-center pb-2"><strong>Technique is <br/> <span class="underline">everything.</span>  </strong></h2>
                 <video
                     src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
                     muted="" autoplay="" loop="" playsinline="" class="w-2/3"></video>
             </div>
 
             <div class="sm:mb-10 md:w-2/3 p-4">
-                <h2 class="text-center hidden md:inline"><strong>Technique is 
+                <h2 class="text-center hidden md:inline"><strong>Technique is
                     <span class="underline">everything.</span>  </strong></h2>
 
                 <p class="text-black pt-10">
@@ -221,8 +221,8 @@
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #EFF2F6 calc(50% + 1px));">
     </div>
     <section class="text-center px-4 sm:px-6 py-10 sm:pt-14" style="background-color: #EFF2F6;">
-        <div class="container max-w-3xl mx-auto">
-            <h2 class="leading-normal"><strong>In just 30 days, <br />you’ll be able to:</strong></h2>
+        <div class="container max-w-4xl mx-auto">
+            <h2 class="leading-tight mb-5 sm:mb-10"><strong>In just 30 days, <br />you’ll be able to:</strong></h2>
 
 
 
@@ -269,13 +269,13 @@
                     ],
                 ];
             @endphp
-            <div class="max-w-4xl mx-auto relative md:pb-10 mt-5 pt-6">
+            <div class="max-w-4xl mx-auto relative md:pb-5 pt-7">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
                             class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 mb-16 @if ($key !== 4) md:mb-20 @else md:mb-0 @endif">
                             <div class="content relative flex items-center text-left">
-                                <p>{!! $getting['desc'] !!}</p>
+                                <h6>{!! $getting['desc'] !!}</h6>
                             </div>
                             <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
@@ -292,24 +292,24 @@
                                     style="background-image:url('{{ $getting['img'] }}')"></div>
                             @endif
                             <div class="content relative flex items-center text-left md:mb-10">
-                                <p>{!! $getting['desc'] !!}</p>
+                                <h6>{!! $getting['desc'] !!}</h6>
                             </div>
                         </div>
                     @endif
                 @endforeach
             </div>
         </div>
-        <h3 class="uppercase text-pianote">And you’ll have <br class="block md:hidden"> learned all <br
-                class="hidden md:block"> these things from...</h3>
+        <h4 class="uppercase text-pianote">And you’ll have <br class="block md:hidden"> learned all <br
+                class="hidden md:block"> these things from...</h4>
     </section>
 
-    <div class="text-white flex flex-col items-center justify-center md:flex-row md:items-center md:justify-center py-4"
+    <div class="text-white flex flex-col items-center justify-center md:flex-row md:items-center md:justify-center py-3"
         style="background: linear-gradient(90deg, #F61A30 0%, #632127 100%);">
-        <p class="uppercase text-center text-2xl lg:text-3xl xl:text-5xl">
+        <h2 class="leading-tight uppercase text-center">
             <strong>
                 “The greatest <br class="inline md:hidden"> keyboardist of all time”
             </strong>
-        </p>
+        </h2>
         <p class="italic text-xs md:text-sm md:mt-auto">
             ~ MusicRadar Magazine
         </p>
@@ -324,7 +324,7 @@
             alt="Jordan Rudess Photo">
 
 
-        <div class="container mx-auto max-w-6xl p-4 md:p-6 -mt-96 md:mt-0">
+        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-96 sm:-mt-10">
             <div class="flex flex-col justify-center items-center">
                 <h6 class="uppercase text-pianote">It’s time to meet your teacher…</h6>
                     <h1 class="text-6xl pb-4 font-bebas tracking-widest">JORDAN RUDESS</h1>
@@ -360,27 +360,27 @@
         </div>
 
         <div class="container mx-auto max-w-6xl py-4 md:px-6 pb-10">
-            <h4 class="uppercase text-gray-400 text-center py-4">See Jordan in action</h5>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 md:py-10 relative">
+            <h5 class="uppercase text-gray-400 text-center mb-3">See Jordan in action</h5>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <div class="relative">
                         <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                            x-on:click="trailerLeft = true;" role="button">
-                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>                            
-                            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                                data-src="" type="video/mp4" autoplay loop playsinline muted></video>
-                            <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/thumb-02-01.webp"
-                                alt="header image" fetchpriority="high" />
-                        </div>
-                    </div>
-                    <div class="md:p-4 md:py-10 relative">
-                        <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                            x-on:click="trailerRight = true;" role="button">
-                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>                            
+                            x-on:click="jayZ = true;" role="button">
+                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>
                             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                                 data-src="" type="video/mp4" autoplay loop playsinline muted></video>
                             <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/thumb-02-02.webp"
+                                alt="header image" fetchpriority="high" />
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+                            x-on:click="danceOfEternity = true;" role="button">
+                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>
+                            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                                data-src="" type="video/mp4" autoplay loop playsinline muted></video>
+                            <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/thumb-02-01.webp"
                                 alt="header image" fetchpriority="high" />
                         </div>
                     </div>
@@ -441,7 +441,7 @@
     @endphp
 
 
-    <section class="bg-gray-100 pt-10 pb-20">
+    <section class="pt-10 pb-20" style="background-color:#eff2f6;">
         <div class="container mx-auto max-w-2xl pt-8 px-4">
             <div class="flex flex-col items-center pb2 md:pb-4">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/logo-introducing.svg"
@@ -455,15 +455,15 @@
                 Over 30 days, you’ll play with Jordan as he guides you through the exercises he used to develop his
                 incredible piano skills.
             </p>
-            <h5 class="text-pianote uppercase text-center pt-10">You’ll know the:</h5>
+            <h6 class="text-pianote uppercase text-center pt-10">You’ll know the:</h6>
         </div>
 
-        <div class="container mx-auto max-w-5xl p-4">
+        <div class="container mx-auto max-w-6xl p-4">
             <div class="flex justify-center pt-10 gap-4">
                 @foreach ($gridItems as $gridItem)
                     <div class="relative text-center w-1/3 bg-white rounded-xl px-4 py-8 hidden md:inline">
                         <img src="{{ $gridItem['image'] }}" alt="Image" class="mx-auto rounded-xl">
-                        <p class="mt-4 text-left h-28">{{ $gridItem['text'] }}</p>
+                        <p class="mt-4 text-left">{{ $gridItem['text'] }}</p>
                         <div
                             class="w-16 h-16 bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                             <i class="{{ $gridItem['icon'] }} text-pianote text-3xl"></i>
@@ -528,14 +528,14 @@
                             alt="Red Line">
                     </div>
 
-                    <div class="bg-white border-2 border-pianote rounded-md px-4 w-full sm:w-9/12 lg:w-2/3 mx-auto">
-                        <h4 class="p-4 text-center">The result is <strong>stronger fingers <br class="inline sm:hidden"> and hands,
-                                improved coordination,</strong> and <strong>better technique </strong> <br class="inline sm:hidden">so you play the songs you love on the piano with ease.</h4>
+                    <div class="bg-white border-2 border-pianote rounded-md px-6 py-6 text-center w-full max-w-5xl mx-auto -mt-3">
+                        <h2 class="leading-normal">The result is <strong>stronger fingers <br class="inline sm:hidden"> and hands,
+                                improved coordination,</strong> and <strong>better technique </strong> <br class="inline sm:hidden">so you play the songs you love on the piano with ease.</h2>
                     </div>
                 </div>
 
-        </div>            
-        
+        </div>
+
 
         <h5 class="text-pianote uppercase text-center py-10">Let’s dive in:</h5>
         @php
@@ -802,7 +802,7 @@
                 </div>
                 </div>
                 <div class="flex justify-center">
-                
+
             </div>
         </div>
     </section>
@@ -852,7 +852,7 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
         style="background-color:#EFF2F6;">
         <div class="container mx-auto relative z-50 text-center">
-            <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
+            <img class="h-20 sm:h-32 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/30-days-technique-Jordan-Rudess-logo.svg"
                 alt="30 Day to Better Technique Logo">
@@ -861,7 +861,7 @@
 
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
             <h6 class="leading-normal text-sm mb-4">
-                <span class="text-pianote">Enrollment closes in
+                <span class="text-pianote uppercase tracking-widest">Enrollment closes in
                     <strong><span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
                                     x-text="dayText"></span></span>
@@ -955,21 +955,21 @@
                     'title' =>
                         'I want to do this, but I’m worried I’m not good enough. What level do I need to be to start this course?',
                     'desc' => 'We hear you.
-                
+
                                     And we didn’t bring in the world’s best keyboard player just to teach you the C scale. In fact, you should already know your C scale (at least) before starting this course.
-                
+
                                     But you don’t need years of experience to enroll in 30 Days to Better Technique. The course has been structured to be beginner-friendly to start with. And if you HAVE been playing for years, you’ll pick up some incredible tips and exercises that will change how you practice.
-                
+
                                     Will you be challenged? Yes.
-                
-                                    But that’s exactly how you get better. 
-                
-                                    And we’ll support you every step of the way. 
-                
+
+                                    But that’s exactly how you get better.
+
+                                    And we’ll support you every step of the way.
+
                                     So as Jordan says…
-                
+
                                     “Don’t be scared. Jump in. I’m friendly. I’m there with you. We’re going to play together. And we’re going to make some music.”
-                
+
                                     And hey, the absolute worst-case scenario is that you give it a shot and it’s not right for you. And then you’ll be protected by our 90-Day Better Technique Guarantee.
                                     ',
                 ])
@@ -977,27 +977,27 @@
                     'title' =>
                         'This sounds like a big time commitment, and my life is pretty busy. What if I miss a day and fall behind?',
                     'desc' => '30 Days to Better Technique takes place over 30 days. (It’s right there in the title.) But…
-                
+
                                         We created this course with the real-world in mind.
-                
+
                                         So while it’s designed to be completed in 30 days, there are actually only 20 lessons. That leaves you 2 free days each week to catch up or repeat anything you need to. Because life happens, and missing one day shouldn’t mean the end of your progress.
-                
+
                                         The lessons are designed to run Monday - Friday, and then on the weekend we’ll answer your questions and you’ll have time to catch up on anything you missed.
-                
+
                                         And the lessons themselves range from 10-15 minutes each day.
-                
-                                        And we know you can find 15 minutes each day. 
+
+                                        And we know you can find 15 minutes each day.
                                         ',
                     'num' => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
                     'title' => 'How involved is Jordan Rudess? Will I get to meet him?',
                     'desc' => ' Very. And YES.
-                
+
                                     Jordan wrote every single lesson and resource for this course with YOU in mind. He presents every lesson, and it will feel like he’s in the room with you. You’ll play along with him, and then he’ll accompany you while you practice.
-                
+
                                     And at the end of the course, you’ll have the chance to join an exclusive live stream with Jordan to share your experience, ask any questions you might have, and just hang out with the world’s best keyboard player.
-                
+
                                     It’s a rare opportunity to learn from and connect with the very best.
                                     ',
                     'num' => '?',
@@ -1005,24 +1005,24 @@
                 @include('_partials.components.question-dropdown', [
                     'title' => 'Do I need the metronome to complete this course?',
                     'desc' => 'No.
-                
+
                                     Every lesson has a built-in metronome that you’ll be playing along to. But we included the metronome as a bonus because when Jordan was here filming -- he loved it so much that we sent him home with one.
-                
+
                                     And having a physical metronome on your piano is a wonderful reminder to practice.
-                
+
                                     And by the end of this course, you’ll see how valuable and important a metronome is for your development as a pianist.
-                
+
                                     ',
                     'num' => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
                     'title' => 'What happens once the course is over? ',
                     'desc' => 'That’s up to you.
-                
+
                                     You’ll have access to this course for the rest of your life. It will never expire. And we’d encourage you to go through it again and again, as you’ll get something new each time.
-                
+
                                     But once you finish it, you’ll be itching to put your new technique to use.
-                
+
                                     And if you’re looking for the best way to do that, we’d suggest joining Pianote and getting access to over 1000 popular songs (including some Dream Theater songs), as well as other courses form world-class instructors.
                                     ',
                     'num' => '?',
@@ -1030,13 +1030,13 @@
                 @include('_partials.components.question-dropdown', [
                     'title' => 'When will the course be open again?',
                     'desc' => 'The short answer is…
-                
+
                                     We don’t know.
-                
-                                    We’ll be closing enrollment on May 6th so we can focus on helping thousands of piano players improve their technique. 
-                
+
+                                    We’ll be closing enrollment on May 6th so we can focus on helping thousands of piano players improve their technique.
+
                                     So it could be months before we open it again. And if we do, Jordan won’t be available for an exclusive live lesson.
-                
+
                                     Don’t wait. Join now and improve your technique in just 30 days.
                                     ',
                     'num' => '?',
@@ -1056,16 +1056,16 @@
         ];
     @endphp
 
-    <section class="text-center text-white py-10" style="background: #000000;">
-        <div class="container sm:max-w-5xl lg:max-w-6xl mx-auto px-4">
-            <h2><strong>Still reading?</strong></h2>
-            <h4 class="leading-normal">By now, you already know that the biggest <br class="inline md:hidden"> difference between those pianists you envy
+    <section class="text-center text-white py-10 sm:py-16" style="background: #000000;">
+        <div class="container max-w-5xl mx-auto px-4">
+            <h2 class="leading-tight mb-3"><strong>Still reading?</strong></h2>
+            <p class="leading-normal">By now, you already know that the biggest <br class="inline md:hidden"> difference between those pianists you envy
                 <br> and the ones who get stuck on a plateau, never <br class="inline md:hidden"> making progress, all comes down to…
                 <br><br>
                 <span class="text-pianote"><strong>Better Technique.</strong></span>
                 <br><br>
                 So if you’re still here, let’s wrap this up and get <br class="inline md:hidden">  you playing better.
-            </h4>
+            </p>
 
             <div class="md:hidden flex flex-col items-center pt-10">
                 @foreach ($boxes as $box)
@@ -1075,7 +1075,7 @@
                 @endforeach
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal-m.webp" alt="Logo with arrows" class="w-2/3">
                 <div class="w-auto max-w-5xl text-center">
-                        <h3 class="leading-normal">Enroll today and make these 30 days <br> the most 
+                        <h3 class="leading-normal">Enroll today and make these 30 days <br> the most
                             <strong>impactful</strong> and <strong>memorable <br></strong> of
                             your piano-playing life.</h3>
                     </div>
@@ -1114,13 +1114,13 @@
                         </div>
                     </div>
                     <div class="w-auto max-w-5xl text-center">
-                        <h4 class="leading-normal">Enroll today and make these 30 days the most <br>
+                        <h3 class="leading-normal">Enroll today and make these 30 days the most <br>
                             <strong>impactful</strong> and <strong>memorable</strong> of
-                            your piano-playing life.</h4>
+                            your piano-playing life.</h3>
                     </div>
                 </div>
             </div>
-           
+
                 <div class="flex justify-center">
                     <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500"
                         href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
@@ -1151,20 +1151,19 @@
 
 
     @include('_partials.components.video-modal', [
-        'name' => 'trailerRight',
+        'name' => 'jayZ',
         'video' => 'aFdOW1Ql3L4',
         'youtube' => true,
     ])
     @include('_partials.components.video-modal', [
-        'name' => 'trailerLeft',
+        'name' => 'danceOfEternity',
         'video' => 'LUknLohfN48',
         'youtube' => true,
     ])
     @include('_partials.components.video-modal', [
-        'name' => 'trailerM',
+        'name' => 'trailer',
         'video' => '928599834',
         'vimeo' => true,
-        'styles' => 'pb-[177%] bg-white',
     ])
     @include('_partials.components.countdown', [
         'countdownDate' => '2024-05-06 00:00:00',
