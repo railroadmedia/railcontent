@@ -347,9 +347,6 @@
                         Jordan.</p>
                     <p class="mb-4">Over 30 days, Jordan will guide you through the exact exercises he used to develop
                         his incredible piano skill. But you won’t just be watching Jordan, you’ll be playing with him.</p>
-                    <p class="mb-4">His piano playing is renowned for its virtuosity, speed, and of course…
-                        <strong>technique.</strong>
-                    </p>
                     <p class="mb-4">“I’ve always thought it would be amazing to have a place to go where you knew that
                         the exercises and steps you were taking were guaranteed to make you a better piano player,” he says.
                     </p>
