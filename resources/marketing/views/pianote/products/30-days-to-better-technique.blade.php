@@ -556,18 +556,18 @@
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Using musical patterns </strong>to build strong fingers. Each exercise will sound like music, not a boring technical exercise. 
+                            'desc' => '<strong>Using musical patterns </strong>to build strong fingers. Each exercise will sound like music, not a boring technical exercise.
                              Jordan will show you exactly what notes to play in what order.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>Creating true separation for your fingers.</strong> 
+                            'desc' => '<strong>Creating true separation for your fingers.</strong>
                             Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.
 ',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Independence for EVERY finger.</strong> 
+                            'desc' => '<strong>Independence for EVERY finger.</strong>
                             As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!
 ',
                         ],
@@ -581,7 +581,7 @@
             In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and
             right hands.
             <br><br>
-            No more boring whole notes in your left hand. You’ll learn to play differenHand coordination trips up so many piano players and halts your progress. 
+            No more boring whole notes in your left hand. You’ll learn to play differenHand coordination trips up so many piano players and halts your progress.
             But with Jordan’s daily guidance, you’ll be amazing at how quickly you progress.',
                     'notes' => 'See what we’ll focus on...',
                     'backHeader' => 'Here’s how we’ll do it:',
@@ -917,6 +917,7 @@
                     ])
 
                     @include('pianote.products.partials._promo-card-special', [
+                        'whiteBadge' => true,
                         'badgeText' => 'COURSE BUNDLE',
                         'cardTitle' => 'The Better <br> Technique Bundle',
                         'cardImage' =>

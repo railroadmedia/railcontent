@@ -1,7 +1,7 @@
 
     <div class="w-full md:w-1/2 lg:w-full md:order-1 max-w-sm lg:px-1 px-1 relative mx-2">
         @if(!empty($badgeText))
-            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{$badgeColor}} text-white tracking-widest">{{$badgeText}}</p>
+            <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{$badgeColor}} @if(!empty($whiteBadge)) text-white @endif tracking-widest">{{$badgeText}}</p>
         @endif
         <a href="{{$cardLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-{{$badgeColor}}">
             <div class="bg-white px-3 py-6 md:py-7">
@@ -25,7 +25,7 @@
                     @endif
                 </h3>
                 <p class="text-sm mb-5"><em>{!! $cardExtraInfo !!}</em></p>
-               
+
                 <span class="join {{$badgeColor}} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]" role="button" tabindex="0" aria-label="{{ $buttonText }}"> {{$buttonText}} </span>
             </div>
             @if(!empty($extraBonuses))
