@@ -3,14 +3,22 @@
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
-                <a :href="seeAllUrl"
-                    class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                    <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
-                </a>
-                <a :href="seeAllUrl" :aria-label="seeAllAriaLabel"
-                    class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                    See All
-                </a>
+                <div class="tw-flex tw-items-center">
+                    <a :href="seeAllUrl"
+                        class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                        <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">{{ title }}</h2>
+
+                    </a>
+                    <slot name="label"></slot>
+                </div>
+                <div class="tw-flex tw-items-center">
+                    <slot name="icon"></slot>
+                    <a :href="seeAllUrl" :aria-label="seeAllAriaLabel"
+                       class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1">
+                        See All
+                    </a>
+                </div>
+
             </div>
             <div>
                 <transition appear name="fade">

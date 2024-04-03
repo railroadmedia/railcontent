@@ -20,7 +20,11 @@ const props = defineProps({
   isLive: {
     type: Boolean,
     default: false
-  }
+  },
+  showRecommendation: {
+    type: Boolean,
+    default: false
+  },
 });
 const emit = defineEmits([
   "onCollapseSidebar",
@@ -120,6 +124,7 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
         :account-url="userDashboardUrl"
         :has-notifications="hasNotifications"
         :isDarkModeSelected="isDarkModeSelected"
+        :show-recommendation="showRecommendation"
         @onColorModeToggle="emit('onColorModeToggle')"
       />
     </div>

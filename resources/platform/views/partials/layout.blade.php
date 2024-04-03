@@ -81,6 +81,9 @@ if (isset($trackingSectionName)) {
                         @if(isset($adminMessage))
                             admin-message="{{ $adminMessage }}"
                         @endif
+                        @feature('recsys')
+                            :show-recommendation="{{ 'true' }}"
+                        @endfeature
                         {{-- @if(isset($forceHideSidebar))
                             :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
                         @endif --}}

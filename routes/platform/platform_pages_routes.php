@@ -68,7 +68,7 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/{brand}/lessons/recommended', [ContentPagesController::class, 'recommendedLessons'])
                     ->whereIn('brand', all_brands())
-                    ->name('platform.recommended-lessons');
+                    ->name('platform.recommended-lessons')->middleware('feature:recsys,on,404');
 
                 Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
                     ->whereIn('brand', all_brands())
