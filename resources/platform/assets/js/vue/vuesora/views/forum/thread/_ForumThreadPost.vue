@@ -70,6 +70,7 @@
                         >
                         <text-editor
                             :initial-value="post.postBody"
+                            toolbar="bold italic underline | bullist numlist | link image media | forecolor backcolor | emoticons"
                         />
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">

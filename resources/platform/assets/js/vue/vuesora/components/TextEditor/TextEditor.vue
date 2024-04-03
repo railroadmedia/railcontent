@@ -10,6 +10,7 @@
 import axios from 'axios';
 import { ref, computed, watch, nextTick, inject, onUpdated } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
+import { isNull } from 'lodash';
 // TODO: Add image upload functionality
 // import { storeToRefs } from 'pinia';
 // import { useUserStore } from '../../../../stores/user';
@@ -27,11 +28,11 @@ const props = defineProps({
     },
     toolbar: {
         type: String,
-        default: 'bold italic underline | bullist numlist | link image media | forecolor backcolor | emoticons',
+        default: 'bold italic underline | bullist numlist | link media | forecolor backcolor | emoticons',
     },
     imageUploadEndpoint: {
         type: String,
-        default: 'testendpoint.php',
+        default: null,
     },
     initialValue: {
         default: null,
@@ -67,7 +68,7 @@ const initObject = computed(() => ({
     elementpath: false,
     entity_encoding: 'numeric',
     emoticons_database: 'emojis',
-    file_picker_types: 'image',
+    file_picker_types: props.imageUploadEndpoint ? 'image' : null,
     height: props.height,
     image_description: false,
     image_dimensions: false,
@@ -79,13 +80,13 @@ const initObject = computed(() => ({
     media_alt_source: false,
     paste_as_text: true,
     plugins: 'lists link image media autolink autoresize emoticons',
-    images_file_types: 'jpg,svg,webp',
+    images_file_types: 'jpg,svg,webp,png',
     relative_urls: false,
     resize: false,
     statusbar: false,
     target_list: false,
-    images_upload_url: 'http://localhost:8000/server.php',
-    automatic_uploads: true,
+    images_upload_url: props.imageUploadEndpoint,
+    automatic_uploads: !!props.imageUploadEndpoint,
     images_reuse_filename: true,
     images_upload_handler: handleImageUpload,
     setup: (editor) => {
@@ -138,50 +139,41 @@ function handleEditorDrop(event, editor) {
     */
 }
 
-function handleImageUpload(blobInfo, success, failure, progress) {
-    console.log(blobInfo, success, failure, progress)
+
+
+async function handleImageUpload(blobInfo, success, failure, progress) {
+    console.log(blobInfo, success, failure, progress);
     const formData = new FormData();
     formData.append('file', blobInfo.blob(), blobInfo.filename());
 
-    console.log(formData)
+    console.log(formData);
 
-    axios({
-        method: 'post',
-        url: props.imageUploadEndpoint,
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' },
-        onUploadProgress: function (e) {
-            progress(parseInt(Math.round((e.loaded * 100) / e.total)));
-        }
-    }).then(function (response) {
-        console.log('then response', response);
-            // Handle success
-            const json = response.data;
-            if (!json || typeof json.location != 'string') {
-                failure('Invalid JSON: ' + JSON.stringify(json));
-                return;
-            }
-            success(json.location);
-        })
-        .catch(function (error) {
-            console.log('catch error', error)
-            // Handle failure
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                if (error.response.status === 403) {
-                    failure('HTTP Error: ' + error.response.status, { remove: true });
-                } else if (error.response.status < 200 || error.response.status >= 300) {
-                    failure('HTTP Error: ' + error.response.status);
-                }
-            } else if (error.request) {
-                // The request was made but no response was received
-                failure('Image upload failed due to a XHR Transport error. Code: ' + error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                failure('Error: ' + error.message);
+    try {
+        const response = await axios({
+            method: 'post',
+            url: props.imageUploadEndpoint,
+            data: formData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+            onUploadProgress: function (e) {
+                progress(parseInt(Math.round((e.loaded * 100) / e.total)));
             }
         });
+
+        console.log('then response', response);
+        // Handle success
+        const json = response.data;
+        if (!json || typeof json.location != 'string') {
+            failure('Invalid JSON: ' + JSON.stringify(json));
+            return;
+        }
+        success(json.location);
+    } catch (error) {
+        console.error(error);
+        window.shownotification({
+            icon: 'error',
+            text: 'This is Embarrassing That didn\'t work. Refresh the page and try once more, if it happens again please let us know using the chat below.'
+        });
+    }
 }
 
 </script>
