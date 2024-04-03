@@ -9,22 +9,17 @@
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row">
 
-                <PlaylistCollectionCatalog :playlists="playlists" :playlist-count="playlistCount" />
+                <PlaylistCollectionCatalog :playlists="playlists" :playlist-count="playlistCount" :filterOptions="filterOptions" />
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { storeToRefs } from "pinia/dist/pinia";
-import { useUserStore } from "../../stores/user";
 
 //Components
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
 import PlaylistCollectionHeader from '../components/Playlists/PlaylistCollection/PlaylistCollectionHeader';
 import PlaylistCollectionCatalog from '../components/Playlists/PlaylistCollection/PlaylistCollectionCatalog';
-
-const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
 
 const props = defineProps({
     playlists: {
@@ -34,6 +29,10 @@ const props = defineProps({
     playlistCount: {
         type: Number,
         default: 0
+    },
+    filterOptions: {
+        type: [Object, Array],
+        default: null
     },
 })
 </script>

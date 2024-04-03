@@ -2,8 +2,11 @@
     <FilterControls :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
-        <template #extra-icon>
-            <slot name="extra-icon"></slot>
+        <template #extra-icon-left>
+            <slot name="extra-icon-left"></slot>
+        </template>
+        <template #extra-icon-right>
+            <slot name="extra-icon-right"></slot>
         </template>
     </FilterControls>
     <FilterPills :multi-select-columns="multiSelectColumns" :selected-filters="selectedFilters" @cancel-filter="param => emit('onFilterChange', param)" @clear-filter="emit('OnClearFilter')" />
@@ -70,8 +73,8 @@ const props = defineProps({
         default: () => [],
     },
     selectedFilters: {
-        type: Object,
-        default: () => ({}),
+        type: Array,
+        default: () => ([]),
     },
     selectedProgress: {
         type: String,
