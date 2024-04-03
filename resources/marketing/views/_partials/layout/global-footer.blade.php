@@ -12,13 +12,13 @@
                     </h5>
                     <p class="show-for-desktop">Join over 400,000 drummers who receive free weekly drum lessons.</p>
                     <p class="hide-for-desktop">Receive free weekly lessons.</p>
-                    <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form" method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                    <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form" method="POST" class="ajax-form clearfix facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
                         <input type="hidden" name="form_name" value="Blog Signup">
                         <div class="columns medium-7">
-                            <input id="sign-up-email" class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="">
+                            <input id="sign-up-email" class="" name="email" type="email" placeholder="Email Address..." required="">
                         </div>
-                        <div class="infusion-submit columns medium-5">
-                            <button class="submit infusion-recaptcha" type="submit">
+                        <div class="columns medium-5">
+                            <button class="submit" type="submit">
                                 <span class="pre-add"> Sign Up  <i class="fas fa-paper-plane" aria-hidden="true"></i></span>
                                 <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin" aria-hidden="true"></i></span>
                                 <span class="success hide hidden">Sent <i class="fas fa-thumbs-up" aria-hidden="true"></i></span>

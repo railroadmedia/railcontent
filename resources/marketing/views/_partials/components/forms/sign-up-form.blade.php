@@ -19,7 +19,7 @@
 
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-    class="ajax-form clearfix infusion-form facebook-track-lead mx-auto">
+    class="ajax-form clearfix facebook-track-lead mx-auto">
 
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
@@ -32,10 +32,10 @@
         ) !!}
     @endif
 
-    <div class="infusion-field w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
+    <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
         <input id='sign-up-email' class="w-full" name="email" type="email" @if(!empty($inputText)) placeholder="{!!  $inputText  !!}" @else placeholder="Your Email" @endif required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
     </div>
-    <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
+    <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
         <button class="submit g-recaptcha hover:opacity-80 @if(!empty($buttonColor)) {{ $buttonColor }} @else bg-{{$brand}} @endif @if(!empty($outline)) outline @endif" type="submit"
                 data-sitekey="{{$recaptchaKey}}"
                 data-callback='recaptchaSubmit{{$cleanFormId}}'

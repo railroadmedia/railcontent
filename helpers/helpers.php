@@ -337,6 +337,36 @@ if (!function_exists('convertNumber')) {
 }
 
 
+/**
+ * Zipper merges arrays into a single array
+ *
+ * @param array[array] $arraysToZip children arrays must be sequencially numerically indexed
+ * @return array The merged array
+ */
+if (!function_exists('zipperMerge')) {
+    function zipperMerge($arraysToZip)
+    {
+        $results = [];
+        $reIndexedArrays = [];
+        foreach($arraysToZip as $array) {
+            if (!$array) continue;
+            $reIndexedArrays[] = array_values($array);
+        }
+        if (!$reIndexedArrays) {
+            return $results;
+        }
+        $lengths = array_map(function($child){return count($child);}, $reIndexedArrays);
+        $maxLength = max($lengths);
+        for($j = 0; $j < $maxLength; $j++) {
+            foreach($reIndexedArrays as $child) {
+                if (count($child) == 0 || $j >= count($child)) continue;
+                $results[] = $child[$j];
+            }
+        }
+        return $results;
+    }
+}
+
 if (!function_exists('dispatchWithDelay')) {
     /**
      * @param mixed $job
@@ -416,3 +446,5 @@ function encodeURISub($url)
 
     return strtr(rawurlencode($url), array_merge($reserved, $unescaped, $score));
 }
+
+

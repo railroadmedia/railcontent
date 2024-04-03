@@ -56,8 +56,8 @@ class FeatureFlagManager implements FeatureFlagsContract
             $user = auth()->user();
         }
         if ($user &&
-            ($this->doesUserMatchUserList($feature->userid_list, $user)
-                || $this->doesUserMatchFilter($feature->allow_filter, $user))) {
+            ($this->doesUserMatchFilter($feature->allow_filter, $user)
+                || $this->doesUserMatchUserList($feature->userid_list, $user))) {
             return true;
         }
         return Carbon::parse($feature->active_at)->isPast();
@@ -170,6 +170,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
         $isMatch = match(true) {
             $filter == 'admin' => $user->isAdmin(),
+            $filter == 'musora' => $user->isMusoraAccount(),
             str_starts_with($filter, 'older_than') => $this->doesUserMatchOlderThanFilter($filter, $user),
             default => false
         };
@@ -200,7 +201,7 @@ class FeatureFlagManager implements FeatureFlagsContract
      * @return bool
      */
     public static function isValidFilter(array|string|null $allow_filter) {
-        $validFilters = ['admin'];
+        $validFilters = ['admin', 'musora'];
         $filters = is_array($allow_filter) ? $allow_filter : explode(',', $allow_filter);
         foreach($filters as $filter) {
             if (!in_array($filter, $validFilters)

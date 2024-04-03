@@ -142,7 +142,7 @@ const handleOpenDropdown = () => {
 };
 
 const sortIcon = () => {
-    return props.sortOptions.length > 0 && props.sortOptions.find(option => option.value === props.selectedSort).icon;
+    return props.sortOptions.length > 0 && props.sortOptions.find(option => option.value === props.selectedSort)?.icon || '';
 }
 
 const hasPills = computed(() => {
