@@ -37,7 +37,7 @@
             color:#777
         }
 
-        .infusion-form input, .infusion-form button {
+        .ajax-form input, .ajax-form button {
             font:400 18px/45px "Open Sans", sans-serif;
             height:45px;
             color:#999;
@@ -51,19 +51,19 @@
         }
 
         @media (min-width:640px) {
-            .infusion-form input, .infusion-form button {
+            .ajax-form input, .ajax-form button {
                 font-size:19px;
                 margin:0 auto
             }
         }
 
         @media (min-width:1024px) {
-            .infusion-form input, .infusion-form button {
+            .ajax-form input, .ajax-form button {
                 font-size:23px
             }
         }
 
-        .infusion-form button {
+        .ajax-form button {
             font-family:"Bebas Neue", sans-serif;
             text-transform:uppercase;
             margin:0 auto!important;

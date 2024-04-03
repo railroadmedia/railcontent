@@ -7,14 +7,14 @@
             <p class="show-for-desktop">Join over 400,000 drummers who receive free weekly drum lessons.</p>
             <p class="hide-for-desktop">Receive free weekly lessons.</p>
             <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
-                  method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()" aria-label="Email Sign Up Form">
+                  method="POST" class="ajax-form clearfix facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()" aria-label="Email Sign Up Form">
                 <input type="hidden" name="form_name" value="Blog Signup">
                 <div class="columns medium-7">
                     <label for="sign-up-email" class="sr-only">Email Address</label>
-                    <input id="sign-up-email" class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="" alt="Email Address Input Field">
+                    <input id="sign-up-email" class="" name="email" type="email" placeholder="Email Address..." required="" alt="Email Address Input Field">
                 </div>
-                <div class="infusion-submit columns medium-5">
-                    <button class="submit infusion-recaptcha" type="submit">
+                <div class="columns medium-5">
+                    <button class="submit" type="submit">
                         <span class="pre-add"> Sign Up  <i class="fas fa-paper-plane"></i></span>
                         <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
                         <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
