@@ -225,6 +225,10 @@ const includedTypes = computed(() => {
 })
 
 //Collection type reactives
+const isRecommendation = computed(() => {
+    return props.collectionType === 'Recommendation';
+})
+
 const isArchives = computed(() => {
     return props.collectionType === 'recording';
 })
@@ -238,7 +242,7 @@ const isCoach = computed(() => {
 })
 
 const isSong = computed(() => {
-    return props.collectionType === 'song';
+    return props.collectionType === 'song' || (isRecommendation.value && getActiveTab.value === 'Songs');
 })
 
 const isCourse = computed(() => {
@@ -295,7 +299,7 @@ const isThreads = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isWorkout.value && !isChallenge.value  && props.collectionType;
+    return !isRecommendation.value && !isWorkout.value && !isChallenge.value  && props.collectionType;
 })
 
 const showGroupBy = computed(() => {
