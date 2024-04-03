@@ -66,7 +66,7 @@
         $(document).ready(function () {
             $(document).foundation();
 
-            $(".infusion-form").submit(function(event) {
+            $(".ajax-form").submit(function(event) {
                 if(event.originalEvent != null) {
                     var formId = $(this).find('input[name="inf_form_xid"]').val();
 

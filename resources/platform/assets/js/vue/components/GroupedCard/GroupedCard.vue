@@ -9,9 +9,9 @@
             <img v-if="thumb" class="tw-rounded-full tw-w-20 tw-h-20 tw-border-2 tw-border-white tw-border-solid tw-mr-[10px]"
                 :src="`https://www.musora.com/musora-cdn/image/width=200,quality=95/${thumb}`" :alt="`${name} Image`" />
             <div>
-                <h3 class="tw-font-bold tw-text-lg md:tw-text-xl">{{ name }}</h3>
+                <h3 class="tw-font-bold tw-text-lg md:tw-text-xl lg:tw-text-2xl">{{ name }}</h3>
                 <div class="tw-font-semibold">
-                    <span>{{ item.all_lessons_count }} {{ contentType }}</span>
+                    <span v-if="contentType">{{ item.all_lessons_count }} {{ contentType }}</span>
                     <span v-if="showTotalPlays"> - {{ item.total_plays }} Plays</span>
                 </div>
 
@@ -102,6 +102,10 @@ const contentType = computed(() => {
         return props.item.all_lessons_count > 1 ? type.plural : type.singular;
     }
 
-    return props.item.all_lessons_count > 1 ? 'lessons' : 'lesson';
+    //this can be removed when recommendation page needs to display content type
+    if(props.contentTypeOverride !== 'Recommendation'){
+        return props.item.all_lessons_count > 1 ? 'lessons' : 'lesson';
+    }
+
 })
 </script>

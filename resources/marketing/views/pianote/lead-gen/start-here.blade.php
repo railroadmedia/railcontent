@@ -332,7 +332,7 @@
                 Begin Your Piano <br>
                 Journey Here
             </h2>
-            <p class="max-w-xl py-4 sm:py-5 lg:my-6" style="color: #A1A1A9;">
+            <p class="max-w-xl py-4 sm:py-5 lg:my-6 mx-0" style="color: #A1A1A9;">
                 Get started on the right foot (or rather hand!) <br>with free piano lessons.
                 {{--Want a deeper dive? Try a Pianote Membership for 7 days.--}}
             </p>

@@ -15,10 +15,10 @@
     @parent
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
-        .infusion-form button {
+        .ajax-form button {
             background-color:#36df7a!important;
         }
-        .infusion-form button:hover {
+        .ajax-form button:hover {
             background-color:#3bf787 !important;
         }
         header .disclaimer {

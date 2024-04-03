@@ -30,8 +30,8 @@ h1, h2, h3, h4, h5, h6, p, li {
   font-family: $opensans;
 }
 
-.infusion-form input,
-.infusion-form button {
+.ajax-form input,
+.ajax-form button {
   font: 400 18px/45px $opensans;
   height: 45px;
   color: #999;
@@ -53,7 +53,7 @@ h1, h2, h3, h4, h5, h6, p, li {
   }
 }
 
-.infusion-form button {
+.ajax-form button {
   font-family: $bebas;
   color: #FFF;
   background: $guitareoGreen;
@@ -377,7 +377,7 @@ h1, h2, h3, h4, h5, h6, p, li {
         background: #eee;
       }
 
-      .infusion-form button {
+      .ajax-form button {
         background: $jumpStartOrange;
 
         &:hover {
@@ -387,7 +387,7 @@ h1, h2, h3, h4, h5, h6, p, li {
     }
 
     &.blue#getAccess {
-      .infusion-form button {
+      .ajax-form button {
         background: #408beb;
 
         &:hover {
@@ -490,7 +490,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       }
     }
 
-    .infusion-form button {
+    .ajax-form button {
       background: $jumpStartOrange;
 
       &:hover {
@@ -533,7 +533,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       }
     }
 
-    .infusion-form button {
+    .ajax-form button {
       background: #408beb;
 
       &:hover {
@@ -716,7 +716,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       }
     }
 
-    .infusion-form button {
+    .ajax-form button {
       background: $jumpStartOrange;
 
       &:hover {
@@ -738,7 +738,7 @@ h1, h2, h3, h4, h5, h6, p, li {
       }
     }
 
-    .infusion-form button {
+    .ajax-form button {
       background: #408beb;
 
       &:hover {

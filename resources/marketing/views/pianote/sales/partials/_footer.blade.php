@@ -7,15 +7,15 @@
             <p class="show-for-desktop">Join over 400,000 piano players who get free lessons twice a week.</p>
             <p class="hide-for-desktop">Receive free weekly lessons.</p>
             <form id="PianoteEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
-                  class="ajax-form clearfix infusion-form facebook-track-lead lg:flex" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                  class="ajax-form clearfix facebook-track-lead lg:flex" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
                 <input type="hidden" name="form_name" value="Blog Signup">
 
                 <input type="hidden" name="leadtracker_form_name" value="Pianote General">
-                <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
-                    <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
+                <div class="col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
+                    <input class="medium-body" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
-                <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
-                    <button class="submit button-red infusion-recaptcha join-form-button border-pianote text-pianote hover:bg-pianote hover:text-black" type="submit">
+                <div class="col-xs-12 form-group lg:w-5/12">
+                    <button class="submit button-red join-form-button border-pianote text-pianote hover:bg-pianote hover:text-black" type="submit">
                         <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
                         <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
                         <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
