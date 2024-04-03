@@ -54,10 +54,18 @@
 @section('content')
 
     @if($lessonType === 'Recommendation')
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => 'Inspired By Your Activity',
+                ],
+            ]
+        ])
+
         <div class="tw-container tw-mx-auto tw-mt-[30px] tw-px-4 lg:tw-px-8">
             <div class="tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-items-start tw-flex tw-justify-between tw-pb-5">
-                <div class="tw-text-2xl md:tw-text-[32px] dark:tw-text-white tw-font-bold tw-flex">
-                    Inspired By Your Activity
+                <div class="tw-text-2xl md:tw-text-[32px] dark:tw-text-white tw-flex">
+                    <span class="tw-font-bold">Inspired By Your Activity</span>
                     <div class="tw-group tw-relative">
                         <musora-icon icon-name="info" class="tw-text-[#65656B] dark:tw-text-[#80A0B9] tw-w-[25px] tw-h-[25px] tw-ml-1" onclick="openModal()"></musora-icon>
 
@@ -72,8 +80,8 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-bold tw-text-sm tw-hidden md:tw-flex tw-items-center" title="Learn More">
-                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-ml-1"></musora-icon>
+                <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
+                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-mr-1"></musora-icon>
                     Experimental Feature
                 </a>
             </div>
@@ -206,7 +214,6 @@
                         catalogue-type="grid"
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
-                        :six-wide="true"
                         :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}"
                         :no-skeleton="{{ json_encode(true) }}"
                     >

@@ -32,6 +32,12 @@
         ) !!}
     @endif
 
+    @if(!empty($nameInput))
+        <div class="w-full px-2 sm:px-3 float-left">
+            <input class="w-full" name="name" type="text" placeholder="Your Name" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
+        </div>
+    @endif
+
     <div class="w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
         <input id='sign-up-email' class="w-full" name="email" type="email" @if(!empty($inputText)) placeholder="{!!  $inputText  !!}" @else placeholder="Your Email" @endif required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
     </div>

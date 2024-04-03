@@ -24,15 +24,12 @@
                         catalogue-type="grid"
                         limit="16"
                         :lock-unowned="true"
-                        :six-wide="true"
                         :force-wide-thumbs="true"
                         :pre-loaded-content="{{ $courseContentJson }}"
                 >
                     <div class="tw-flex tw-flex-row nmh-1">
                         @for($i = 0; $i < 6; $i++)
-                            @include('partials.bladesora.members.skeletons.card-item', [
-                                "cardClass" => 'six-wide',
-                            ])
+                            @include('partials.bladesora.members.skeletons.card-item')
                         @endfor
                     </div>
                 </content-catalogue>

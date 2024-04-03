@@ -40,8 +40,8 @@ const props = defineProps({
         default: '',
     },
     selectedFilters: {
-        type: Object,
-        default: () => ({}),
+        type: Array,
+        default: () => [],
     },
     selectedProgress: {
         type: String,

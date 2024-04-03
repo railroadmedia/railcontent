@@ -200,14 +200,6 @@ export default {
             type: String,
             default: () => "",
         },
-        sixWide: {
-            type: Boolean,
-            default: () => false,
-        },
-        fiveWide: {
-            type: Boolean,
-            default: () => false,
-        },
         displayInline: {
             type: Boolean,
             default: () => false,
@@ -889,8 +881,6 @@ export default {
       :lock-unowned="lockUnowned"
       :force-wide-thumbs="forceWideThumbs"
       :content-type-override="contentTypeOverride"
-      :six-wide="sixWide"
-      :five-wide="fiveWide"
       :show-my-list-action="showMyListAction"
       :display-inline="displayInline"
       @addToList="addToListEventHandler"
@@ -924,8 +914,6 @@ export default {
       :lock-unowned="lockUnowned"
       :force-wide-thumbs="forceWideThumbs"
       :content-type-override="contentTypeOverride"
-      :six-wide="sixWide"
-      :five-wide="fiveWide"
       :show-my-list-action="showMyListAction"
       :display-inline="displayInline"
       @addToList="addToListEventHandler"
@@ -942,7 +930,6 @@ export default {
       :lock-unowned="lockUnowned"
       :force-wide-thumbs="forceWideThumbs"
       :content-type-override="contentTypeOverride"
-      :six-wide="sixWide"
       :display-inline="displayInline"
       @addToList="addToListEventHandler"
     />

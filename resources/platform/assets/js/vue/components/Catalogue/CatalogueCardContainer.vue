@@ -12,24 +12,28 @@
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
-                    <SkeletonLoader :count="skeletonCardCount" type="card" :force-list-view="displayInline"
-                        :break-to-list-view="breakToListView" :is-single-row="isSingleRow" />
+                    <SkeletonLoader :count="skeletonCardCount" :type="showListElement ? 'listElement' : 'card'" :is-single-row="isSingleRow" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
-                    <MiniCatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item" :content-type="item.type"
-                        :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+                    <MiniCatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item"
+                        :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
                 <template v-else>
-                    <CatalogueCard v-for="item in getData" :key="'grid' + item.id" :item="item" :content-type="item.type"
-                        :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
-                        :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
-                        :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks"
-                        :force-list-view="displayInline" :break-to-list-view="breakToListView" :is-single-row="isSingleRow" @addToList="addToList"
+                    <CatalogueListElement v-if="showListElement"
+                        v-for="item in getData" :key="'catalogue-list' + item.id" :item="item" :content-type="item.type"
+                        :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
+                        :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
+                        :force-no-links="forceNoLinks" :is-single-row="isSingleRow" @addToList="addToList"
                         @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
+                    <CatalogueCard v-else v-for="item in getData" :key="'catalogue-grid' + item.id" :item="item"
+                        :content-type="item.type" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
+                        :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
+                        :force-no-links="forceNoLinks" :force-list-view="displayInline" :is-single-row="isSingleRow"
+                        @addToList="addToList" @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
                 </template>
             </div>
         </div>
@@ -42,12 +46,8 @@
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
-        <AddEventModal
-            v-if="contentTypeOverride === 'challenge'"
-            modal-id="notifyModal"
-            :subscription-calendar-id="subscriptionCalendarId"
-            :brand="brand"
-        />
+        <AddEventModal v-if="contentTypeOverride === 'challenge'" modal-id="notifyModal"
+            :subscription-calendar-id="subscriptionCalendarId" :brand="brand" />
     </div>
 </template>
 <script setup>
@@ -55,6 +55,7 @@
 import { computed, ref } from 'vue'
 // In order for the horizontal scroll to work, you need to make parent container a block.
 import CatalogueCard from '../Catalogue/CatalogueCard.vue';
+import CatalogueListElement from '../Catalogue/CatalogueListElement.vue';
 import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 import { storeToRefs } from "pinia";
@@ -63,6 +64,7 @@ import SkeletonLoader from '../SkeletonLoader/SkeletonLoader.vue';
 import MiniCatalogueCard from './MiniCatalogueCard.vue';
 import { useResetProgress } from "../../hooks/useResetProgress";
 import { useUserStore } from "../../../stores/user";
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 
 const props = defineProps({
     willScroll: {
@@ -134,7 +136,7 @@ const props = defineProps({
         default: () => false,
     },
     isSingleRow: {
-		type: Boolean,
+        type: Boolean,
         default: () => false,
     },
     noSkeleton: {
@@ -142,6 +144,9 @@ const props = defineProps({
         default: () => false,
     },
 });
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const smallerThanLg = breakpoints.smaller('lg') // only smaller than lg
 
 const collectionStore = useCollectionStore();
 const userStore = useUserStore();
@@ -152,13 +157,17 @@ const data = ref(props.preLoadedContent);
 
 const { loading: collectionStoreLoading, tabData, filter } = storeToRefs(collectionStore);
 
-const getData = computed(() =>{
+const getData = computed(() => {
     return props.useRefData ? data.value : props.preLoadedContent;
 })
 
 const breakToListView = computed(() => {
-    return !showGroupBy.value && (isWorkout.value || isChallenge.value);
+    return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value);
 })
+
+const showListElement = computed(() => {
+    return props.displayInline || (breakToListView.value && smallerThanLg.value);
+});
 
 const showSkeletonLoader = computed(() => {
     return !props.noSkeleton && collectionStoreLoading.value;
@@ -178,6 +187,10 @@ const isWorkout = computed(() => {
 
 const isChallenge = computed(() => {
     return props.contentTypeOverride === 'challenge';
+});
+
+const isRecommendation = computed(() => {
+    return props.contentTypeOverride === 'Recommendation';
 });
 
 const { addToList } = useUserCatalogueEvents({ ...props });

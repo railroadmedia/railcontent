@@ -1,8 +1,8 @@
 <template>
-    <section class="tw-flex tw-flex-row" :class="isMiniView ? 'tw-mb-[18px]' : 'tw-mb-[30px]'" >
+    <section class="tw-flex tw-flex-row tw-px-4 lg:tw-px-0" :class="isMiniView ? 'tw-mb-[18px]' : 'tw-mb-[30px]'" >
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
+            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                 <div class="tw-flex tw-items-center">
                     <a :href="seeAllUrl"
                         class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">

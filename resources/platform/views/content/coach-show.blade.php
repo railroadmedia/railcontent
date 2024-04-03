@@ -90,45 +90,6 @@
         </div>
     @endif
 
-    {{-- @if ($hasFeaturedLessons)
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-8 tw-mb-[30px]">
-            <div class="tw-flex tw-flex-row tw-mb-3">
-                <div class="tw-flex tw-flex-col tw-flex-grow">
-                    <div class="tw-text-[#00101D] dark:tw-text-white tw-mb-3">
-                        <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">
-                            Featured Lessons
-                        </h2>
-                    </div>
-
-                    <div class="tw-flex tw-flex-row six-cards-row">
-                        <transition appear name="fade">
-                            <content-catalogue
-                                brand="{{ $brand }}"
-                                theme-color="{{ $brand }}"
-                                :use-theme-color="true"
-                                content-endpoint="/railcontent/content"
-                                catalogue-type="coach-grid"
-                                limit="16"
-                                :lock-unowned="true"
-                                :six-wide="true"
-                                :force-wide-thumbs="true"
-                                :pre-loaded-content="{{ $featuredLessons }}"
-                            >
-                                <div class="tw-flex tw-flex-row nmh-1">
-                                    @for ($i = 0; $i < 4; $i++)
-                                        @include('partials.bladesora.members.skeletons.card-item', [
-                                        "cardClass" => 'four-wide',
-                                        ])
-                                    @endfor
-                                </div>
-                            </content-catalogue>
-                        </transition>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif --}}
-
     @php
         $catalogueProps = [];
         $catalogueProps['themeColor'] = $brand;
@@ -153,7 +114,6 @@
             $catalogueProps['searchBar'] = true;
             $catalogueProps['totalResults'] = $totalResults;
             $catalogueProps['paginate'] = true;
-            $catalogueProps['sixWide'] = true;
         }
     @endphp
 
