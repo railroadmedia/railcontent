@@ -24,6 +24,7 @@ class FiltersHelper
     public static $requiredUserStates = [];
     public static $futureScheduledContentOnly = false;
     public static $groupBy = null;
+    public static $filter = null;
 
     /**
      * Prepares filters fields based on the incoming request data.
@@ -157,6 +158,9 @@ class FiltersHelper
         }
         if ($extra[0] == 'duration') {
             self::$requiredFields[] = 'length_in_seconds,'.$extra[1].',integer,'.$extra[2].',video';
+        }
+        if ($extra[0] == 'filter') {
+            self::$filter = $extra[1];
         }
         if ($extra[0] == 'length_in_seconds' || $extra[0] == 'topic') {
             self::$requiredFields[] = $tab;

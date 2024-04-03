@@ -43,6 +43,11 @@ Route::group(
         )
             ->name('api.content.index');
         Route::get(
+            '/recommended',
+            ContentJsonController::class . '@recommended'
+        )
+            ->name('api.content.recommended');
+        Route::get(
             '/content/parent/{parentId}',
             ContentJsonController::class . '@getByParentId'
         )

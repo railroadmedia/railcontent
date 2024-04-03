@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Enums\RecommenderSection;
@@ -17,7 +16,7 @@ class RecommendationService
 {
 
     public AccessMethod $accessMethod;
-    private array $RETRY_ERROR_CODES = [500, 503];
+    private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
         //private DatabaseManager $databaseManager,
@@ -29,18 +28,34 @@ class RecommendationService
         ];
     }
 
-    public function getFilteredRecommendations($userID, $brand, RecommenderSection $section)
+
+
+    public function getFilteredRecommendations($userID, $brand, array $sections=[]): array
     {
-        if ($this->hasNoResults($brand, $section)) {
-            return [];
+        // Single section state where we call the faster implementation
+        if (count($sections) == 1) {
+            $section = $sections[0];
+            if ($this->hasNoResults($brand, $section)) {
+                return [];
+            }
+            $content = [
+                strtolower($section->value) => $this->getFilteredRecommendationsBySection($userID, $brand, $section)
+            ];
+            return $content;
         }
-        return $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID];
-//        return match($this->accessMethod)
-//        {
-//            AccessMethod::PDO => $this->getFilteredRecommendationsUsingPDO($userID, $brand, $section),
-//            AccessMethod::DB => $this->getFilteredRecommendationsUsingDBHandler($userID, $brand, $section),
-//            AccessMethod::HUGGINGFACE => $this->getFilteredRecommendationsUsingHuggingFace([$userID], $brand, $section)[$userID],
-//        };
+
+        $allContent = $this->getAllFilteredRecommendations($userID, $brand);
+        // strictly defined sections state
+        if ($sections) {
+            $content = [];
+            foreach($sections as $section) {
+                $content[$section->value] = $allContent[$section->value] ?? [];
+            }
+            // all sections state
+        } else {
+            $content = $allContent;
+        }
+        return $content;
     }
 
     private function hasNoResults($brand, $section): bool
@@ -49,28 +64,56 @@ class RecommendationService
         return isset($this->invalidConfigurations[$brand]) && in_array($section, $this->invalidConfigurations[$brand]);
     }
 
-    private function getFilteredRecommendationsUsingHuggingFace($userIDs, $brand, RecommenderSection $section)
+    private function getFilteredRecommendationsBySection($userID, $brand, RecommenderSection $section)
     {
-        $url = env('HUGGINGFACE_URL');
-        $authToken = env('HUGGINGFACE_TOKEN');
         $data = [
-            'user_ids' => $userIDs,
+            'user_ids' => [$userID],
             'brand' => $brand,
             'section' => $section->value
         ];
-
-        $response = Http::withToken($authToken)->post($url, $data);
-        if (in_array($response->status(), $this->RETRY_ERROR_CODES)) {
-            $response = Http::withToken($authToken)->post($url, $data);
+        $content = $this->postToHuggingFaceWithRetry($data);
+        if (!isset($content[$userID])) {
+            $msg = print_r($content, true);
+            Log::warning("Malformed data from Huggingface: $msg");
         }
-        $content = $response->json();
-        if (!$content) {
+        return $content[$userID] ?? [];
+    }
+
+    private function getAllFilteredRecommendations($userID, $brand)
+    {
+        $data = [
+            'user_ids' => [$userID],
+            'brand' => $brand,
+        ];
+        $content = $this->postToHuggingFaceWithRetry($data);
+        if (!isset($content[$userID])) {
+            $msg = print_r($content, true);
+            Log::warning("Malformed data from Huggingface: $msg");
+        }
+        return $content[$userID] ?? [];
+    }
+
+    private function postToHuggingFaceWithRetry($data) {
+        $url = config('railcontent.recsys.url');
+        $authToken = config('railcontent.recsys.token');
+        $response = Http::withToken($authToken)->post($url, $data);
+        $status = $response->status();
+        if (in_array($status, $this->RETRY_ERROR_CODES)) {
+            $response = Http::withToken($authToken)->post($url, $data);
+        } else if ($status == 500) {
+            // attempt the backup URL
+            $backupURL = config('railcontent.recsys.backup_url');
+            $response = Http::withToken($authToken)->post($backupURL, $data);
             $status = $response->status();
+        }
+
+        $content = $response->json();
+        if ($status != 200)
+        {
             Log::warning("HuggingFace return an unexpected response with code: $status");
-            $content = [];
-            foreach($userIDs as $userID) {
-                $content[$userID] = [];
-            }
+            $msg = print_r($content, true);
+            Log::warning("HuggingFace: Content returned: $msg");
+            return [];
         }
         return $content;
     }
@@ -122,8 +165,7 @@ class RecommendationService
 //            error_log($e);
 //        }
 //        return $content;
-//
-//    }extra
+//    }
 //
 //    private function getFilteredRecommendationsUsingDBHandler($userID, $brand, RecommenderSection $section) : array
 //    {
