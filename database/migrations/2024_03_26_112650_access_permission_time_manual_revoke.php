@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('user_access_permissions', function (Blueprint $table) {
-            $table->boolean('manually_revoked')->after('revoked_at');
+            $table->boolean('manually_revoked')->default(false)->after('revoked_at');
         });
     }
 
