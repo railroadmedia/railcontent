@@ -85,6 +85,11 @@ class PictureUploadController extends Controller
             $pictureUrl
         );
 
+        if (Storage::disk('musora_web_platform_s3')->missing($s3Path)) {
+            // if the file doesn't exist, we can consider it deleted
+            return response()->json();
+        }
+
         $success = Storage::disk('musora_web_platform_s3')->delete($s3Path);
 
         if ($success) {
