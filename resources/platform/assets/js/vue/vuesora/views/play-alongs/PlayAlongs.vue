@@ -6,7 +6,7 @@
             @on-filter-change="handleFilterChange" @on-sort-change="handleContentSort"
             @on-search-change="handleTriggerSearch" @on-clear-filter="handleClearFilter"
             @on-progress-change="handleProgressChange">
-            <template #extra-icon>
+            <template #extra-icon-left>
                 <button
                     class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] dark:tw-border-white tw-rounded-full"
                     :class="isShuffle ? 'tw-border-[#000C17] tw-bg-[#000C17] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17]' : 'hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-text-[#000C17] dark:tw-text-white tw-bg-white dark:tw-bg-transparent'"
@@ -392,23 +392,6 @@ export default {
             }
             return parsedOptions;
         },
-        parseRequiredFields() {
-            const selectedFilters = Object.keys(this.selectedFilters)
-                .filter(key => this.selectedFilters[key] != null);
-            const parsedFields = [];
-            selectedFilters.forEach((key) => {
-                if (key === 'bpm') {
-                    const bpmRange = this.selectedFilters[key].replace(/[+]/, '').split('-');
-                    parsedFields.push(`bpm,${bpmRange[0]},integer,>`);
-                    if (bpmRange[1]) {
-                        parsedFields.push(`bpm,${bpmRange[1]},integer,<`);
-                    }
-                } else {
-                    parsedFields.push(`${key},${this.selectedFilters[key]}`);
-                }
-            });
-            return parsedFields;
-        },
         getActiveFilters() {
             const urlParams = QueryString.parse(window.location.search, { arrayFormat: 'bracket' });
             this.page = urlParams.page || 1;
@@ -655,8 +638,6 @@ export default {
 
             if (itemIndex === -1) this.selectedFilters.push(value);
             else this.selectedFilters.splice(itemIndex, 1);
-
-
 
             this.updateContent(this.isShuffle)
         },
