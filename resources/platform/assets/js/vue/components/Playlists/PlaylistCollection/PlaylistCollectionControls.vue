@@ -1,18 +1,22 @@
 <script setup>
-import {onBeforeMount, watch, ref, inject, reactive, computed} from 'vue';
-import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-import { XIcon } from "@heroicons/vue/solid";
+import { onBeforeMount, watch, ref, inject, reactive, computed } from 'vue';
+import { storeToRefs } from "pinia";
+import { ViewListIcon, ViewGridIcon } from '@heroicons/vue/solid';
 import { usePlaylistsStore } from '../../../../stores/playlists';
-import FilterSortDropdown from '../../Filter/FilterSortDropdown';
+import CollectionFilterWrapper from '../../Filter/CollectionFilterWrapper.vue';
+import { useFilterValues } from '../../../hooks/useFilterValues';
 
 //Inject
 const token = inject('csrf_token');
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const { filterOptions } = storeToRefs(playlistsStore);
 
 //Emits
-const emit = defineEmits(['onUpdateListView']);
+const emit = defineEmits(['onToggleListView']);
+
+const { getFilterValues } = useFilterValues();
 
 //-----------Props-----------//
 const props = defineProps({
@@ -23,6 +27,10 @@ const props = defineProps({
     isListView: {
         type: Boolean,
         default: false,
+    },
+    initialFilterOptions: {
+        type: [Object, Array],
+        default: null
     }
 });
 
@@ -30,65 +38,29 @@ const props = defineProps({
 const state = reactive({
     searchTerm: '',
     sortValue: '-created_at', //Default
-    categories: '',
     showSortDropdown: false,
-})
+    selectedCategories: [],
+});
 
-//---------Template Refs---------//
-const playlistSearch = ref(null)
+
+// fix filter values
+const filterValues = computed(() => {
+    return getFilterValues(filterOptions.value);
+});
 
 //---------Static Data---------//
-const sortOptions =[
+const sortOptions = [
     { value: '-created_at', name: 'Newest First', icon: 'sort-down', },
     { value: 'name', name: 'Alphabetical', icon: 'sort-name-asc', },
     { value: '-last_progress', name: 'Most Recent', icon: 'most-recent', },
     { value: 'pinned', name: 'Pinned', icon: 'tack', },
-]
-
-const categories = [
-    {
-        text: 'Watch-Later',
-        value: 'Watch Later',
-    },
-    {
-        text: 'Favorites',
-        value: 'Favorites',
-    },
-    {
-        text: 'General',
-        value: 'General',
-    },
-    {
-        text: 'Practice',
-        value: 'Practice',
-    },
-    {
-        text: 'Learning',
-        value: 'Learning',
-    },
-    {
-        text: 'Entertainment',
-        value: 'Entertainment',
-    },
-    {
-        text: 'Warm-Up',
-        value: 'Warm Up',
-    },
-    {
-        text: 'Songs',
-        value: 'Songs',
-    }
 ];
 
-const listViewIcon = computed(() => {
-    return props.isListView ? "list-view" : "grid-view";
-})
-
-const sortIcon = computed(() => {
-    return sortOptions.find(option => option.value === state.sortValue).icon;
-})
-
 //----------Methods----------//
+const formatSelectedCategories = (filters) => {
+    return filters.map(f => f.split(',')[1]);
+};
+
 const loadPlaylists = () => {
     const payload = {
         brand: brand,
@@ -96,7 +68,8 @@ const loadPlaylists = () => {
         limit: 10,
         term: state.searchTerm,
         sort: state.sortValue,
-        categories: state.categories ? [state.categories] : '',
+        count_filter_items: 1,
+        categories: formatSelectedCategories(state.selectedCategories),
     }
     //load Playlists
     playlistsStore.getPlaylists(payload, token);
@@ -105,13 +78,15 @@ const loadPlaylists = () => {
     url.searchParams.set('sortby_val', state.sortValue);
     url.searchParams.set('search', state.searchTerm);
     url.searchParams.set('page', 1);
-    if(state.categories) url.searchParams.set('categories[]', state.categories);
-    else url.searchParams.delete('categories[]');
+    url.searchParams.set('count_filter_items', 1);
+    if (state.selectedCategories.length) {
+        url.searchParams.set('categories[]', formatSelectedCategories(state.selectedCategories));
+    } else {
+        url.searchParams.delete('categories[]');
+    }
 
     playlistsStore.resultsPage = 1;
     window.history.pushState({}, '', url);
-    //Blur Input
-    playlistSearch.value.blur();
 };
 
 const handleSort = (value) => {
@@ -120,13 +95,33 @@ const handleSort = (value) => {
     loadPlaylists();
 }
 
-const cancelCategoryFilter = ()=> {
-    state.categories = '';
+const handleSearch = (value) => {
+    state.searchTerm = value;
+    loadPlaylists();
+};
+
+const handleFilterChange = (value) => {
+    const itemIndex = state.selectedCategories.findIndex(f => f === value);
+
+    if (itemIndex === -1) state.selectedCategories.push(value);
+    else state.selectedCategories.splice(itemIndex, 1);
+
     loadPlaylists();
 }
 
+const handleClearFilters = () => {
+    state.selectedCategories = [];
+    loadPlaylists();
+}
+
+const handleViewToggle = () => {
+    emit('onToggleListView');
+}
+
 //---------Lifecycle Methods---------//
-onBeforeMount(()=> {
+onBeforeMount(() => {
+    playlistsStore.updateFilterOptions({ filterOptions: props.initialFilterOptions });
+
     //get url params
     const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
@@ -138,74 +133,19 @@ onBeforeMount(()=> {
 })
 </script>
 <template>
-    <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">
-        <!-- Search -->
-        <div class="tw-relative tw-w-full md:tw-max-w-[465px] tw-mb-[20px] md:tw-mb-0 tw-mr-auto tw-order-3 md:tw-order-none">
-            <MusoraIcon
-                v-if="!state.searchTerm"
-                icon-name="search"
-                class="tw-absolute tw-top-5 tw-right-0 dark:tw-text-white tw-z-0"
-            />
-            <input type="text"
-                   class="tw-px-4 tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#000C17] dark:tw-text-white dark:focus:tw-bg-[#00101D] tw-bg-white dark:tw-bg-black tw-rounded-full dark:placeholder:tw-text-white focus:tw-ring-0 focus:tw-outline-none tw-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"
-                   placeholder="Search"
-                   ref="playlistSearch"
-                   v-model="state.searchTerm"
-                   @keyup.enter="loadPlaylists"
-            >
-            <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
-                <XIcon class="" />
-            </button>
-        </div>
-        <!-- Category -->
-        <div class="tw-w-full md:tw-max-w-[290px] tw-order-2 md:tw-order-1 form-group tw-mb-5 md:tw-mb-0 md:tw-ml-7">
-            <select name="playlist-sort"
-                    id="playlist-category"
-                    class="tw-transition-colors tw-w-full tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-text-center sm:tw-text-left"
-                    v-model="state.categories"
-                    @change="loadPlaylists"
-            >
-                <option class="tw-text-[#00101D]" value="" disabled>Filter by Category</option>
-                <option v-for="(category, i) in categories" :key="i" :value="category.value" class="tw-text-[#00101D]">
-                    {{ category.text }}
-                </option>
-            </select>
-            <span
-                v-if="state.categories"
-                class="cancel-filter"
-            >
-                <i
-                    class="fas fa-times tw-absolute tw-right-0 tw-top-0 tw-bottom-0 tw-w-[50px] tw-cursor-pointer tw-bg-white tw-flex tw-justify-center tw-items-center tw-border tw-border-[#D1D1D1] tw-rounded-[25px] tw-text-xl"
-                    :class="'text-' + brand"
-                    @click="cancelCategoryFilter"
-                ></i>
-            </span>
-        </div>
-
-        <div class="tw-flex tw-justify-end tw-flex-shrink-0 tw-order-1 md:tw-order-3 tw-mb-5 md:tw-mb-0 tw-w-full md:tw-w-auto">
-            <!-- Sort -->
-            <div class="tw-relative">
-                <button
-                    class="tw-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border tw-border-[#CBCBCD] tw-bg-white dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full tw-text-xs hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17]  tw-mr-[10px] md:tw-mx-[10px]"
-                    @click="() => state.showSortDropdown = !state.showSortDropdown"
-                >
-                    <musora-icon :icon-name="sortIcon" class="tw-w-[25px] tw-h-[25px]" />
-                </button>
-                <FilterSortDropdown
-                    v-if="state.showSortDropdown"
-                    :sortOptions="sortOptions"
-                    @onSort="handleSort"
-                    @onClose="state.showSortDropdown = false"
-                />
-            </div>
-
+    <CollectionFilterWrapper active-tab="All Playlists" :multi-select-columns="filterValues"
+        :search-term="state.searchTerm" :selected-filters="state.selectedCategories" :selected-sort="state.sortValue"
+        :single-select-columns="[]" :sort-options="sortOptions"
+        :tab-options="[{ value: 'All Playlists', key: 'All Playlists' }]" @on-filter-change="handleFilterChange"
+        @on-sort-change="handleSort" @on-search-change="handleSearch" @on-clear-filter="handleClearFilters">
+        <template #extra-icon-right>
             <!-- List/Grid Toggle -->
             <button
-                class="tw-h-[50px] tw-w-[50px] tw-text-xs tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#CBCBCD] dark:tw-border-white tw-rounded-full tw-bg-white dark:tw-bg-transparent tw-flex tw-justify-center tw-items-center"
-                @click="() => emit('onToggleListView')"
-            >
-                <musora-icon :icon-name="listViewIcon" class="tw-w-[25px] tw-h-[25px]"></musora-icon>
+                class="tw-ml-[15px] tw-h-[35px] tw-w-[35x] tw-text-[#00101D] dark:tw-text-white tw-flex tw-justify-center tw-items-center tw-shrink-0"
+                @click="handleViewToggle">
+                <ViewListIcon v-if="isListView" class="tw-w-[35px] tw-h-[35px]" />
+                <ViewGridIcon v-else class="tw-w-[35px] tw-h-[35px]" />
             </button>
-        </div>
-    </nav>
+        </template>
+    </CollectionFilterWrapper>
 </template>

@@ -39,6 +39,15 @@ return [
                     ])
                 ],
             ],
+            'homepage-content-clicked' => [
+                'brand' => ['required', 'string'],
+                'section' => ['required', 'string'],
+                'contentId' => ['required', 'int']
+            ],
+            'homepage-section-see-all-clicked' => [
+                'brand' => ['required', 'string'],
+                'section' => ['required', 'string'],
+            ],
         ]
     ],
 ];

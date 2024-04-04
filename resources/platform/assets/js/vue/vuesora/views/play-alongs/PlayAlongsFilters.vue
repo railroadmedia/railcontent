@@ -163,12 +163,8 @@ export default {
         },
 
         selectedFilters: {
-            type: Object,
-            default: () => ({
-                bpm: null,
-                difficulty: null,
-                style: null,
-            }),
+            type: Array,
+            default: () => [],
         },
 
         brand: {

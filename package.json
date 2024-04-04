@@ -84,6 +84,7 @@
     "@parcel/transformer-sass": "^2.12.0",
     "@tinymce/tinymce-vue": "^5.1.1",
     "@vimeo/player": "^2.15.0",
+    "@vueuse/core": "^10.9.0",
     "alpinejs": "^3.4.2",
     "ansi-styles": "^6.1.0",
     "axios": "^0.26.1",

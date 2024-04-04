@@ -31,15 +31,12 @@
                     :use-theme-color="true"
                     :lock-unowned="true"
                     :force-wide-thumbs="true"
-                    :six-wide="true"
                     :pre-loaded-content="{{ $preLoadedContent }}"
                     content-endpoint="/railcontent/content"
                 >
                     <div class="flex flex-row nmh-1">
                         @for($i = 0; $i < 6; $i++)
-                            @include('bladesora::members.skeletons.card-item', [
-                                'cardClass' => 'six-wide',
-                            ])
+                            @include('bladesora::members.skeletons.card-item')
                         @endfor
                     </div>
                 </content-catalogue>

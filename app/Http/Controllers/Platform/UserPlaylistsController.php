@@ -137,6 +137,7 @@ class UserPlaylistsController extends BaseController
             "noResultsMessage" => 'no results',
             "playlistsNumber" => $playlistsNumber,
             "searchTerm" => $term,
+            "filterOptions" => $filterOptions,
         ]);
     }
 
