@@ -10371,16 +10371,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.69",
+            "version": "v2.1.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "7501ac32c802bcf8f203cde16f6fb0af48075596"
+                "reference": "1f863fd4b67957bf4adf263518b93559f787b653"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/7501ac32c802bcf8f203cde16f6fb0af48075596",
-                "reference": "7501ac32c802bcf8f203cde16f6fb0af48075596",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1f863fd4b67957bf4adf263518b93559f787b653",
+                "reference": "1f863fd4b67957bf4adf263518b93559f787b653",
                 "shasum": ""
             },
             "require": {
