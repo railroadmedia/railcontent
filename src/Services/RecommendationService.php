@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Enums\RecommenderSection;
@@ -96,15 +97,23 @@ class RecommendationService
     private function postToHuggingFaceWithRetry($data) {
         $url = config('railcontent.recsys.url');
         $authToken = config('railcontent.recsys.token');
-        $response = Http::withToken($authToken)->post($url, $data);
-        $status = $response->status();
-        if (in_array($status, $this->RETRY_ERROR_CODES)) {
-            $response = Http::withToken($authToken)->post($url, $data);
-        } else if ($status == 500) {
-            // attempt the backup URL
-            $backupURL = config('railcontent.recsys.backup_url');
-            $response = Http::withToken($authToken)->post($backupURL, $data);
+        $timeout = 12;
+        try {
+            $response = Http::withToken($authToken)->timeout($timeout)->post($url, $data);
             $status = $response->status();
+            if (in_array($status, $this->RETRY_ERROR_CODES)) {
+                $response = Http::withToken($authToken)->timeout($timeout)->post($url, $data);
+            } else {
+                if ($status == 500) {
+                    // attempt the backup URL
+                    $backupURL = config('railcontent.recsys.backup_url');
+                    $response = Http::withToken($authToken)->timeout($timeout)->post($backupURL, $data);
+                    $status = $response->status();
+                }
+            }
+        } catch (ConnectionException $ex) {
+            Log::warning("HuggingFace connection timed out after $timeout s");
+            return [];
         }
 
         $content = $response->json();
