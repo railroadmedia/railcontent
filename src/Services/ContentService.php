@@ -2225,7 +2225,7 @@ class ContentService
                 ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
-                ->leftJoin('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
+                ->join('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
                     return $joinClause->on('ch_1_child.id', '=', 'ch_1.child_id')
                         ->whereNot('ch_1_child.type', 'assignment')
                         ->where('ch_1_child.status', '=', 'published')
@@ -2323,7 +2323,8 @@ class ContentService
                 ->orderBy('ch_1.child_position')
                 ->orderBy('ch_2.child_position')
                 ->orderBy('ch_3.child_position')
-                ->orderBy('ch_4.child_position');
+                ->orderBy('ch_4.child_position')
+                ->limit(1);
 
         // if the parent is complete, then just return the first lesson, otherwise get the next uncomplete lesson
         if (!$isParentComplete) {
@@ -2333,26 +2334,23 @@ class ContentService
                 ->where($this->databaseManager->raw('IFNULL(ucp_4.state, "")'), '!=', 'completed');
         }
 
-        $contentHierarchyDataRows = $contentHierarchyDataQuery->get();
-        // loop through each row until we get a valid entry
+        $contentHierarchyDataRow =
+            $contentHierarchyDataQuery->get()
+                ->first();
+
         $contentId = null;
-        $contentHierarchyDataRows->each(function(array $contentHierarchyDataRow) use (&$contentId){
-            if (!empty($contentHierarchyDataRow)) {
-                if (!empty($contentHierarchyDataRow['ch_4_child_slug'])) {
-                    $contentId = $contentHierarchyDataRow['ch_4_child_id'];
-                    return false;
-                } elseif (!empty($contentHierarchyDataRow['ch_3_child_slug'])) {
-                    $contentId = $contentHierarchyDataRow['ch_3_child_id'];
-                    return false;
-                } elseif (!empty($contentHierarchyDataRow['ch_2_child_slug'])) {
-                    $contentId = $contentHierarchyDataRow['ch_2_child_id'];
-                    return false;
-                } elseif (!empty($contentHierarchyDataRow['ch_1_child_slug'])) {
-                    $contentId = $contentHierarchyDataRow['ch_1_child_id'];
-                    return false;
-                }
+
+        if (!empty($contentHierarchyDataRow)) {
+            if (!empty($contentHierarchyDataRow['ch_4_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_4_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_3_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_3_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_2_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_2_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_1_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_1_child_id'];
             }
-        });
+        }
 
         if (!empty($contentId)) {
             return $this->getById($contentId);
