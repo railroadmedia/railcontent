@@ -2323,8 +2323,7 @@ class ContentService
                 ->orderBy('ch_1.child_position')
                 ->orderBy('ch_2.child_position')
                 ->orderBy('ch_3.child_position')
-                ->orderBy('ch_4.child_position')
-                ->limit(1);
+                ->orderBy('ch_4.child_position');
 
         // if the parent is complete, then just return the first lesson, otherwise get the next uncomplete lesson
         if (!$isParentComplete) {
@@ -2334,23 +2333,26 @@ class ContentService
                 ->where($this->databaseManager->raw('IFNULL(ucp_4.state, "")'), '!=', 'completed');
         }
 
-        $contentHierarchyDataRow =
-            $contentHierarchyDataQuery->get()
-                ->first();
-
+        $contentHierarchyDataRows = $contentHierarchyDataQuery->get();
+        // loop through each row until we get a valid entry
         $contentId = null;
-
-        if (!empty($contentHierarchyDataRow)) {
-            if (!empty($contentHierarchyDataRow['ch_4_child_slug'])) {
-                $contentId = $contentHierarchyDataRow['ch_4_child_id'];
-            } elseif (!empty($contentHierarchyDataRow['ch_3_child_slug'])) {
-                $contentId = $contentHierarchyDataRow['ch_3_child_id'];
-            } elseif (!empty($contentHierarchyDataRow['ch_2_child_slug'])) {
-                $contentId = $contentHierarchyDataRow['ch_2_child_id'];
-            } elseif (!empty($contentHierarchyDataRow['ch_1_child_slug'])) {
-                $contentId = $contentHierarchyDataRow['ch_1_child_id'];
+        $contentHierarchyDataRows->each(function(array $contentHierarchyDataRow) use (&$contentId){
+            if (!empty($contentHierarchyDataRow)) {
+                if (!empty($contentHierarchyDataRow['ch_4_child_slug'])) {
+                    $contentId = $contentHierarchyDataRow['ch_4_child_id'];
+                    return false;
+                } elseif (!empty($contentHierarchyDataRow['ch_3_child_slug'])) {
+                    $contentId = $contentHierarchyDataRow['ch_3_child_id'];
+                    return false;
+                } elseif (!empty($contentHierarchyDataRow['ch_2_child_slug'])) {
+                    $contentId = $contentHierarchyDataRow['ch_2_child_id'];
+                    return false;
+                } elseif (!empty($contentHierarchyDataRow['ch_1_child_slug'])) {
+                    $contentId = $contentHierarchyDataRow['ch_1_child_id'];
+                    return false;
+                }
             }
-        }
+        });
 
         if (!empty($contentId)) {
             return $this->getById($contentId);
