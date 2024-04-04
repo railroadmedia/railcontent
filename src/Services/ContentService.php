@@ -243,9 +243,7 @@ class ContentService
         $sectionString = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
         $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
         $cached = Cache::store('redis')->get($cacheKey);
-        // we use in_null instead of isEmpty() so that users without results don't trigger calls to the recsys.
-        $useCaching = config('railcontent.recsys.use_caching');
-        if($useCaching && !is_null($cached)) {
+        if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
             $recommendations = $cached;
         } else {
             $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
