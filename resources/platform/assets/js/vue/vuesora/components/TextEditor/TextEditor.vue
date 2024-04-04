@@ -7,17 +7,15 @@
 </template>
 
 <script setup>
-import axios from 'axios';
 import { ref, computed, watch, nextTick, inject, onUpdated } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
-import { isNull } from 'lodash';
-// TODO: Add image upload functionality
-// import { storeToRefs } from 'pinia';
-// import { useUserStore } from '../../../../stores/user';
-// import {v4 as uuidv4} from 'uuid';
+import { uploadImage } from '../../../../services/imageUpload';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../../stores/user';
+import { v4 as uuidv4 } from 'uuid';
 
-// const userStore = useUserStore();
-// const { userId } = storeToRefs(userStore);
+const userStore = useUserStore();
+const { userId } = storeToRefs(userStore);
 
 const emit = defineEmits(['input']);
 
@@ -28,11 +26,11 @@ const props = defineProps({
     },
     toolbar: {
         type: String,
-        default: 'bold italic underline | bullist numlist | link media | forecolor backcolor | emoticons',
+        default: 'bold italic underline | bullist numlist | link | forecolor backcolor | emoticons',
     },
-    imageUploadEndpoint: {
-        type: String,
-        default: null,
+    hasImageUploader: {
+        type: Boolean,
+        default: false,
     },
     initialValue: {
         default: null,
@@ -68,7 +66,7 @@ const initObject = computed(() => ({
     elementpath: false,
     entity_encoding: 'numeric',
     emoticons_database: 'emojis',
-    file_picker_types: props.imageUploadEndpoint ? 'image' : null,
+    file_picker_types: props.hasImageUploader ? 'image' : null,
     height: props.height,
     image_description: false,
     image_dimensions: false,
@@ -85,8 +83,8 @@ const initObject = computed(() => ({
     resize: false,
     statusbar: false,
     target_list: false,
-    images_upload_url: props.imageUploadEndpoint,
-    automatic_uploads: !!props.imageUploadEndpoint,
+    images_upload_url: props.hasImageUploader,
+    automatic_uploads: !!props.hasImageUploader,
     images_reuse_filename: true,
     images_upload_handler: handleImageUpload,
     setup: (editor) => {
@@ -117,63 +115,49 @@ function forceReRender() {
     });
 }
 
+function getFormData(blob) {
+    const formData = new FormData();
+    const fileName = `comment_${userId}_${uuidv4()}.png`;
+    formData.append('file', blob, fileName);
+    formData.append('target', fileName);
+    formData.append('_method', 'POST');
+    formData.append('fieldKey', 'forum_post_photo');
+    return formData;
+}
+
 function handleEditorDrop(event, editor) {
     event.preventDefault();
-    /*
-    TODO: Add image upload functionality
     const files = event.dataTransfer.files;
     if (files.length) {
-        const newFileName = `comment_${userId}_${uuidv4()}.png`;
-        const formData = new FormData();
-        formData.append('image', files[0]);
-        formData.append('target', newFileName);
-        formData.append('_method', 'POST');
-        formData.append('fieldKey', 'comment_tinymce_image');
+        const formData = getFormData(files[0]);
 
-        Vapor.store(formData.get('image'), {
-            visibility: 'public-read',
+        Vapor.store(formData.get('file'), {
+            visibility: 'public-read'
         }).then((response) => {
             editor.insertContent(`<img src="${response.url}" />`);
         });
     }
-    */
 }
 
 
-
-async function handleImageUpload(blobInfo, success, failure, progress) {
-    console.log(blobInfo, success, failure, progress);
-    const formData = new FormData();
-    formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-    console.log(formData);
-
-    try {
-        const response = await axios({
-            method: 'post',
-            url: props.imageUploadEndpoint,
-            data: formData,
-            headers: { 'Content-Type': 'multipart/form-data' },
-            onUploadProgress: function (e) {
-                progress(parseInt(Math.round((e.loaded * 100) / e.total)));
-            }
+function handleImageUpload(blobInfo, progress) {
+    const formData = getFormData(blobInfo.blob());
+    const onSuccess = (response) => {
+        window.shownotification({
+            icon: 'success',
+            text: 'Image uploaded successfully.'
         });
-
-        console.log('then response', response);
-        // Handle success
-        const json = response.data;
-        if (!json || typeof json.location != 'string') {
-            failure('Invalid JSON: ' + JSON.stringify(json));
-            return;
-        }
-        success(json.location);
-    } catch (error) {
-        console.error(error);
+        console.log(response)
+    };
+    const onFailure = (error) => {
         window.shownotification({
             icon: 'error',
             text: 'This is Embarrassing That didn\'t work. Refresh the page and try once more, if it happens again please let us know using the chat below.'
         });
-    }
+        console.log(error)
+    };
+
+    uploadImage(formData, props.token, progress).then(onSuccess).catch(onFailure);
 }
 
 </script>
