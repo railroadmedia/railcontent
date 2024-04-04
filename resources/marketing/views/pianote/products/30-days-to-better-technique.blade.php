@@ -324,7 +324,7 @@
             alt="Jordan Rudess Photo">
 
 
-        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-96 sm:-mt-10">
+        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-96 md:-mt-10">
             <div class="flex flex-col justify-center items-center">
                 <h6 class="uppercase text-pianote">It’s time to meet your teacher…</h6>
                     <h1 class="text-6xl pb-4 font-bebas tracking-widest">JORDAN RUDESS</h1>
@@ -440,7 +440,7 @@
 
     <section class="pt-10 pb-20" style="background-color:#eff2f6;">
         <div class="container mx-auto max-w-2xl pt-8 px-4">
-            <div class="flex flex-col items-center pb2 md:pb-4">
+            <div class="flex flex-col items-center pb-2 md:pb-4">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/logo-introducing.svg"
                     alt="30 Day to Better Technique Logo" class="h-32 md:h-48">
             </div>
@@ -534,7 +534,9 @@
         </div>
 
 
-        <h5 class="text-pianote uppercase text-center py-10">Let’s dive in:</h5>
+        <h5 class="text-pianote uppercase text-center pt-10">Let’s dive in:</h5>
+
+        <div class="container w-full sm:max-w-8xl">
         @php
             $weeks = [
                 [
@@ -562,14 +564,12 @@
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
                             'desc' => '<strong>Creating true separation for your fingers.</strong>
-                            Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.
-',
+                            Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
                             'desc' => '<strong>Independence for EVERY finger.</strong>
-                            As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!
-',
+                            As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
                         ],
                     ],
                 ],
@@ -671,101 +671,114 @@
             ];
         @endphp
 
-        <div class="max-w-8xl">
-            <div class="pl-4 lg:pl-20">
-                <div x-data="{
-                    init() {
-                        new Splide(this.$refs.splide2, {
-                            classes: {
-                                arrow: 'hidden',
-                                prev: 'hidden',
-                                next: 'hidden',
-                                pagination: 'splide__pagination bottom-0',
-                            },
-                            perPage: 2.5,
-                            perMove: 1,
-                            type: 'slide',
-                            gap: 20,
-                            focus: 0,
-                            interval: 2000,
-                            drag: 'free',
-                            snap: false,
-                            lazyLoad: 'nearby',
-                            breakpoints: {
-                                920: {
-                                    perPage: 2.1,
+            <div>
+                <div class="pl-2 lg:pl-20">
+                    <div x-data="{
+                        init() {
+                            new Splide(this.$refs.splide2, {
+                                classes: {
+                                    arrow: 'hidden',
+                                    prev: 'hidden',
+                                    next: 'hidden',
+                                    pagination: 'splide__pagination bottom-0',
                                 },
-                                870: {
-                                    perPage: 1.5,
+                                perPage: 2.8,
+                                perMove: 1,
+                                type: 'slide',
+                                gap: 20,
+                                focus: 0,
+                                interval: 2000,
+                                drag: 'free',
+                                snap: false,
+                                lazyLoad: 'nearby',
+                                breakpoints: {
+                                    1300: {
+                                        perPage: 2.1,
+                                    },
+                                    1023: {
+                                        perPage: 1.8,
+                                    },
+                                    767: {
+                                        perPage: 1.3,
+                                    },
+                                    500: {
+                                        perPage: 1,
+                                    },
                                 },
-                                640: {
-                                    perPage: 1.1,
-                                },
-                            },
-                        }).mount()
-                    },
-                }" class="mb-5">
-                    <div x-ref="splide2" class="splide text-left">
-                        <div class="splide__track pb-8">
-                            <ul class="splide__list items-start">
-                                @foreach ($weeks as $index => $week)
-                                    <li class="splide__slide px-1">
-                                        <!-- card -->
-                                        <div x-data="{ flipped: false }" class="rounded-xl overflow-hidden cursor-pointer"
-                                            @click="flipped = !flipped">
-                                            <!-- Front -->
-                                            <div class="relative w-[650px] h-[650px]">
+                            }).mount()
+                        },
+                    }" class="mb-5">
+                        <div x-ref="splide2" class="splide text-left">
+                            <div class="splide__track py-20">
+                                <ul class="splide__list items-start">
+                                    @foreach ($weeks as $index => $week)
+                                        <li class="splide__slide px-1">
+                                            <!-- card -->
+                                            <div x-data="{ flipped: false }" class="rounded-xl overflow-hidden cursor-pointer"
+                                                @click="flipped = !flipped">
+                                                <!-- Front -->
+                                                <div class="relative w-[680px] h-[680px]">
 
-                                            </div>
+                                                </div>
 
-                                            <div class="absolute inset-0 rounded-lg text-white p-4 md:p-10 w-full bg-gray-900"
-                                                x-show.transition.scale.5.duration.400ms="!flipped">
-                                                @if ($index % 2 == 0 && !empty($week['img']))
-                                                    <img class="h-40" src="{{ $week['img'] }}" alt="">
-                                                @endif
-                                                <h5
-                                                    class="text-pianote uppercase text-left {{ $index % 2 == 0 ? '' : 'pt-5 md:pt-10' }} tracking-tight">
-                                                    <strong>{!! $week['header1'] !!}</strong>
-                                                </h5>
-                                                <h4 class="leading-normal"><strong>{!! $week['header2'] !!}</strong></h4>
-                                                <p class="py-8">{!! $week['desc'] !!}</p>
-                                                <p class="text-pianote absolute bottom-[16px]">
-                                                    <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                    {!! $week['notes'] !!}
-                                                </p>
-                                            </div>
-                                            <!-- Back  -->
-                                            <div class="absolute inset-0 rounded-lg p-4 md:p-10 w-full bg-gray-800"
-                                                x-show.transition.scale.5.duration.400ms="flipped">
-                                                <h5
-                                                    class="text-pianote uppercase text-left {{ $index % 2 == 0 ? '' : 'pt-5 md:pt-10' }} tracking-tight">
-                                                    <strong>{!! $week['header1'] !!}</strong>
-                                                </h5>
-                                                <p class="leading-normal text-white">
-                                                    <strong>{!! $week['header2'] !!}</strong>
-                                                </p>
-                                                @foreach ($week['back'] as $paragraph)
-                                                    <div class="flex items-center">
-                                                        <i class="{{ $paragraph['icon'] }} text-pianote text-4xl"></i>
-                                                        <p class="text-white ml-2 py-4 pl-2">{!! $paragraph['desc'] !!}</p>
+                                                <div class="absolute inset-0 rounded-3xl text-white p-4 md:py-10 md:px-8 w-full bg-gray-900"
+                                                    x-show.transition.scale.5.duration.400ms="!flipped">
+                                                    <div class="flex items-center justify-center relative -mt-24">
+                                                    @if ($index % 2 == 0 && !empty($week['img']))
+                                                        <img class="w-full px-4" src="{{ $week['img'] }}" alt="">
+                                                    @endif
                                                     </div>
-                                                @endforeach
-                                                <p class="text-pianote absolute bottom-[16px]">
-                                                    <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                    See the weeks overview...
-                                                </p>
+
+                                                    <h5
+                                                        class="text-pianote uppercase text-left {{ $index % 2 == 0 ? '' : 'pt-24' }} tracking-tight">
+                                                        <strong>{!! $week['header1'] !!}</strong>
+                                                    </h5>
+                                                    <h4 class="leading-normal"><strong>{!! $week['header2'] !!}</strong></h4>
+                                                    <p class="py-4">{!! $week['desc'] !!}</p>
+                                                    <p class="text-pianote absolute bottom-[16px]">
+                                                        <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                        {!! $week['notes'] !!}
+                                                    </p>
+                                                </div>
+                                                <!-- Back  -->
+                                                <div class="absolute inset-0 rounded-3xl p-4 md:py-10 md:px-8 w-full bg-gray-800"
+                                                    x-show.transition.scale.5.duration.400ms="flipped">
+                                                    <h5
+                                                        class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
+                                                        <strong>{!! $week['header1'] !!}</strong>
+                                                    </h5>
+                                                    <p class="leading-normal text-white">
+                                                    {!! $week['header2'] !!}
+                                                    </p>
+                                                    <h5
+                                                        class="text-left py-4 tracking-tight text-white">
+                                                        <strong>{!! $week['backHeader'] !!}</strong>
+                                                    </h5>
+                                                    @foreach ($week['back'] as $paragraph)
+                                                        <div class="flex items-center">
+                                                            <i class="{{ $paragraph['icon'] }} text-pianote text-4xl"></i>
+                                                            <p class="text-white ml-2 pl-2 pb-2 lg:pb-6">{!! $paragraph['desc'] !!}</p>
+                                                        </div>
+                                                    @endforeach
+                                                    <p class="text-pianote absolute bottom-[16px]">
+                                                        <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                        See the weeks overview...
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
+
+   
+
 
     <section class="text-black px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#ffffff;">
         <div class="container max-w-4xl mx-auto pb-10">
