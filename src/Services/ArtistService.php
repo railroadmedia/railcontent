@@ -8,7 +8,7 @@ use Railroad\Railcontent\Repositories\ArtistRepository;
 class ArtistService
 {
 
-    public ArtistRepository $artistRepository;
+    public $artistRepository;
 
     /**
      * @param ArtistRepository $artistRepository

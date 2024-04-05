@@ -7,10 +7,11 @@ use Railroad\Railcontent\Services\ArtistService;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Routing\Controller;
 
 class ArtistsJsonController extends Controller
 {
-    private ArtistService $artistService;
+    private $artistService;
 
     /**
      * @param ArtistService $artistService
