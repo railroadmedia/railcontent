@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 import ContentModel from '../../assets/js/models/_model.js';
+import {useUserStore} from "../../../../stores/user";
 
 export default {
     mixins: [UserCatalogueEvents],
@@ -19,11 +20,6 @@ export default {
         userId: {
             type: String,
             default: () => '',
-        },
-
-        isAdmin: {
-            type: Boolean,
-            default: () => false,
         },
 
         contentTypeOverride: {
@@ -105,6 +101,12 @@ export default {
             get() {
                 return this.item.is_added_to_primary_playlist;
             },
+        },
+
+        isAdmin() {
+            const userStore = useUserStore();
+            console.log(userStore.isAdmin);
+            return userStore.isAdmin;
         },
 
         progress_percent() {
