@@ -16,4 +16,7 @@ enum ShopifyMetafieldNamespace: string
     case Model_Products = 'products';
     case Model_SubscriptionPayments = 'subscription_payments';
     case Model_Users = 'users';
+
+    // namespace added post-launch within Shopify to track which checkout blocks were used
+    case CheckoutBlocks = 'checkoutblocks';
 }
