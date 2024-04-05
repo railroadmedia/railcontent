@@ -258,7 +258,7 @@
             </div>
 
             <!-- Cart link -->
-            <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
+            <div v-if="cohort['is_product'] && isEnrolled && !hasEnded" class="tw-text-center tw-mb-3"><a :href="cohort['product_cart_link']" target="_blank"  class="tw-text-sm tw-text-[#2563EB] tw-underline">{{ cohort['product_cart_link_description'] }}</a></div>
 
             <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                 <img
@@ -311,7 +311,7 @@
                 The course runs from {{ startDateText }} - {{ endDateText }}. We’ll notify you before the course begins.
             </p>
             <div class="tw-mb-4">
-                <a :href="cohort['product_cart_link']" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white tw-w-full">Click here to complete your purchase</a>
+                <a :href="cohort['product_cart_link']" target="_blank" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white tw-w-full">Click here to complete your purchase</a>
             </div>
             <div>
                 <a :href="cohort['course_url']" class="tw-text-sm tw-text-[#2563EB] tw-underline ">Change your mind? Click here to to go the course instead.</a>
