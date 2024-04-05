@@ -45,7 +45,7 @@
                         </div>
                         <template v-else>
                             <!--  Enroll now Button  -->
-                            <button v-if="!hasEnded" @click="enroll" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                            <button v-if="!hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                             <!--  Closed Button  -->
                             <span v-else class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white">Enrollment Closed</span>
                         </template>
@@ -225,7 +225,7 @@
                             <h1 class="lg:tw-text-[34px] tw-font-extrabold">Course Only</h1>
                             <h2 class="lg:tw-text-[26px] tw-font-extrabold">Free</h2>
                             <i>Included in your membership</i>
-                            <button :class="`tw-btn-primary tw-bg-${brand} tw-my-5 hover:tw-bg-${brand}-600`" @click="enroll">Enroll Now</button>
+                            <button :class="`tw-btn-primary tw-bg-${brand} tw-my-5 hover:tw-bg-${brand}-600`" @click="enroll()">Enroll Now</button>
                             <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_description'] }}</p>
                         </div>
                         <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-[#FFAE00] tw-text-center tw-relative tw-mx-auto md:tw-mx-0">
@@ -252,7 +252,7 @@
                 <span v-if="isEnrolled"  class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                 <template v-else>
                     <span v-if="hasEnded" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                    <button v-else-if="!cohort['is_product'] && hasEnded" @click="enroll" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
+                    <button v-else-if="!cohort['is_product'] && hasEnded" @click="enroll()" :class="`tw-btn-primary tw-bg-${brand} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-${brand}-600`">Enroll Now</button>
                 </template>
                 <a v-if="cohort['conversation_url'] && isEnrolled" x-cloak x-show="isEnrolled" :href="cohort['conversation_url']" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
             </div>
