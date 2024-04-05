@@ -14,6 +14,7 @@ enum ShopifyMetafieldTypes: string
     case date_time = 'date_time';
     case dimension = 'dimension';
     case json = 'json';
+    case json_string = 'json_string';
     case money = 'money';
     case multi_line_text_field = 'multi_line_text_field';
     case decimal = 'number_decimal';

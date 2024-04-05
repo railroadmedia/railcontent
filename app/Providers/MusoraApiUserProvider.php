@@ -393,12 +393,12 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function getUserAfterRevenuecatPurchase($email, $password, $revenuecatOriginalAppUserId)
     {
-        $user = \Modules\UserManagementSystem\Models\User::where(
-            'revenuecat_origin_app_user_id',
-            '=',
-            $revenuecatOriginalAppUserId
-        )
-            ->first();
+        $user = \Modules\UserManagementSystem\Models\User::onWriteConnection()->where(
+        'revenuecat_origin_app_user_id',
+        '=',
+        $revenuecatOriginalAppUserId
+    )
+        ->first();
 
         if (!$user) {
             $user = $this->revenueCatService->syncSubscriber($revenuecatOriginalAppUserId, $email, true);
