@@ -336,6 +336,26 @@ Route::group(
                     '/user-permission',
                     \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@index'
                 )->name('user.permissions.index');
+
+                Route::get(
+                    '/artists',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@index'
+                )->name('artists.index');
+
+                Route::get(
+                    '/artist/{id}',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@getArtist'
+                )->name('artists.index');
+
+                Route::put(
+                    '/artist',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@store'
+                )->name('artists.store');
+
+                Route::patch(
+                    '/artist/{id}',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@update'
+                )->name('artists.update');
             }
         );
     }
