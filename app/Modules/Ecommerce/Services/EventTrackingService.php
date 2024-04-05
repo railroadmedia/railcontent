@@ -31,7 +31,7 @@ class EventTrackingService
         $brand = $this->getBrandFromOrder($order);
         $data = $this->getOrderEventData($order, $brand);
 
-        $cioEventData = array_merge($data, ['product_quantity' => count($data['products'])]);
+        $cioEventData = array_merge($data, ['order_sku_quantity' => count($data['products'])]);
 
         dispatchWithDelay(
             new CustomerIoCreateEventByUserId(
