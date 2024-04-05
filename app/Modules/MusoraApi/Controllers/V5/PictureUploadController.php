@@ -29,9 +29,9 @@ class PictureUploadController extends Controller
             ]
         );
 
-        $image = $this->imageManager->make($file);
-
-        $image
+        $image = $this
+            ->imageManager
+            ->make($file)
             ->interlace()
             ->encode('jpg', 75)
             ->save();
@@ -39,7 +39,7 @@ class PictureUploadController extends Controller
         $target = $fieldKey . "/" . pathinfo($request->get('target'))['filename'] . '-' . time() . '-' . user(
             )->id . '.jpg';
 
-        $success = Storage::disk('musora_web_platform_s3')->put($target, $request->file('file')->getContent());
+        $success = Storage::disk('musora_web_platform_s3')->put($target, $image->getEncoded());
 
         if ($success) {
             $url = config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url') . $target;
