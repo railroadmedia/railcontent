@@ -923,7 +923,7 @@
                 'firstImageHeight' => 'h-32',
                 'firstDealPrice' => 97,
                 'firstDealSub' => 'Just the course + 3 bonuses worth $102.95',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true',
+                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
                 'firstButtonText' => 'ENROLL NOW',
                 'firstDealExtra' => "One-time payment",
                 'whiteBg' => 'false',
@@ -943,7 +943,7 @@
                 'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $308.94",
                 'secondDealPrice' => '20/mo',
                 'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
+                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
                 'secondExtraBonuses' => [
                     '<strong>Annual Drumeo Membership</strong>',
                     '<strong>Free 30-Day Independence</strong>',
