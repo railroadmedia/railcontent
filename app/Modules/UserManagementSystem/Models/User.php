@@ -326,7 +326,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'guitareo_onboarding_skip_setup',
         'singeo_onboarding_skip_setup',
         'use_legacy_video_player',
-        'needs_logout'
+        'needs_logout',
+        'password',
+        'email',
+        'revenuecat_origin_app_user_id'
     ];
 
 
