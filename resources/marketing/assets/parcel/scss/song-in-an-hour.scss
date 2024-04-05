@@ -159,8 +159,8 @@ a.tw-rounded-full.social-bubble {
   }
 }
 
-.infusion-form input,
-.infusion-form button {
+.ajax-form input,
+.ajax-form button {
   font: 400 18px/45px $opensans;
   height: 45px;
   color: #999;
@@ -181,7 +181,7 @@ a.tw-rounded-full.social-bubble {
     font-size: 23px;
   }
 }
-.gsotac .infusion-form button {
+.gsotac .ajax-form button {
   background: $guitareoGreen;
   color: #fff;
 
@@ -191,7 +191,7 @@ a.tw-rounded-full.social-bubble {
   }
 
 }
-.infusion-form button {
+.ajax-form button {
   font-family: $bebas;
   text-transform: uppercase;
   margin: 0 auto 15px;
@@ -451,7 +451,7 @@ a.tw-rounded-full.social-bubble {
     }
   }
 
-  .infusion-form {
+  .ajax-form {
     max-width: 600px;
     @include desktop {
       max-width: 700px;

@@ -11,7 +11,7 @@ class AddFeature extends Command
 
 
 
-    protected $signature = 'featureFlag:addFeature {name} {--description=} {--active_at} {--allowFilter=} {--userid_list=} ';
+    protected $signature = 'featureFlag:addFeature {name} {--description=} {--active_at=} {--allowFilter=} {--userid_list=} ';
 
     public function handle(FeatureFlagService $ffService): void
     {

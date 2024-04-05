@@ -14,10 +14,10 @@
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}"></noscript>
 
     <style>
-        .infusion-form button {
+        .ajax-form button {
             background:#ffde16;
         }
-        .infusion-form button:hover {
+        .ajax-form button:hover {
             background:#f2ce00;
         }
         .header-bg {

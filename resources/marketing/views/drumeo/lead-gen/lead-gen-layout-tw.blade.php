@@ -39,5 +39,5 @@
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/form-tracking.js') }}"></script>
 @stop

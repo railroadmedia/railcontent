@@ -20,10 +20,6 @@
         body {
             background:#000;
         }
-
-        .infusion-submit div {
-            display:none;
-        }
     </style>
     <link href="{{ asset('/marketing/parcel/drumeo/gtme-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
