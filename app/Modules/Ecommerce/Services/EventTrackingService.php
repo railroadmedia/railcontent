@@ -31,12 +31,14 @@ class EventTrackingService
         $brand = $this->getBrandFromOrder($order);
         $data = $this->getOrderEventData($order, $brand);
 
+        $cioEventData = array_merge($data, ['product_quantity' => count($data['products'])]);
+
         dispatchWithDelay(
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
                 'musora_user_order',
-                $data,
+                $cioEventData,
                 null,
                 Carbon::parse($order['processed_at'])->timestamp
             ),
@@ -49,13 +51,14 @@ class EventTrackingService
                     $user->id,
                     $brand,
                     $brand . "_user_order",
-                    $data,
+                    $cioEventData,
                     null,
                     Carbon::parse($order['processed_at'])->timestamp
                 ),
                 3
             );
         }
+
         try {
             Avo::order_placed(AvoHelper::defaultEventProperties($data, $user));
         } catch (\Exception $e) {
