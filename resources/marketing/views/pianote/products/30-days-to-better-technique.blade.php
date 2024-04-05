@@ -777,7 +777,7 @@
         </div>
     </section>
 
-   
+
 
 
     <section class="text-black px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#ffffff;">
@@ -918,8 +918,7 @@
                         'cardSubtitle' => 'Just the course.',
                         'cardPrice' => '97',
                         'cardDiscount' => '127',
-                        'cardLink' =>
-                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[pianote_access_30-days]=1&locked=true',
                         'badgeColor' => 'musora',
                         'extraBonuses' => [
                             '<strong>30-Days To Better Technique</strong> <span class="italic text-xs">(Lifetime Access)</span>',
@@ -938,8 +937,7 @@
                         'imageHeight' => 'h-40',
                         'cardSubtitle' => "The course + red Pianote metronome",
                         'cardPrice' => '127',
-                        'cardLink' =>
-                            '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
                             '<strong>30-Days To Better Technique</strong> <span class="italic text-xs">(Lifetime Access)</span>',
