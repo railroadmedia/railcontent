@@ -33,7 +33,7 @@ class PictureUploadController extends Controller
             ->imageManager
             ->make($file)
             ->interlace()
-            ->encode('jpg', 75)
+            ->encode('jpg', 90)
             ->save();
 
         $target = $fieldKey . "/" . pathinfo($request->get('target'))['filename'] . '-' . time() . '-' . user(
