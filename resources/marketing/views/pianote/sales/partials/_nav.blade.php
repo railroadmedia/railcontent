@@ -240,7 +240,7 @@
         ])
         @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
-            "linkUrl" => "https://help.pianote.com/",
+            "linkUrl" => "https://help.musora.com/",
             "externalLink" => false
         ])
         @include('drumeo.sales.partials._secondary-nav-link', [
