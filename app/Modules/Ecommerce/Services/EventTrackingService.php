@@ -31,14 +31,12 @@ class EventTrackingService
         $brand = $this->getBrandFromOrder($order);
         $data = $this->getOrderEventData($order, $brand);
 
-        $cioEventData = array_merge($data, ['order_sku_quantity' => count($data['products'])]);
-
         dispatchWithDelay(
             new CustomerIoCreateEventByUserId(
                 $user->id,
                 $brand,
                 'musora_user_order',
-                $cioEventData,
+                $data,
                 null,
                 Carbon::parse($order['processed_at'])->timestamp
             ),
@@ -51,7 +49,7 @@ class EventTrackingService
                     $user->id,
                     $brand,
                     $brand . "_user_order",
-                    $cioEventData,
+                    $data,
                     null,
                     Carbon::parse($order['processed_at'])->timestamp
                 ),
@@ -131,6 +129,7 @@ class EventTrackingService
 
         $total = floatval($order['total_price_set']['presentment_money']['amount']);
         $discount = floatval($order['total_discounts_set']['presentment_money']['amount']);
+        $products = $this->getProductList($order['line_items']);
 
         return [
             'checkout_token' => $order['checkout_token'],
@@ -143,7 +142,8 @@ class EventTrackingService
             'discount' => $discount,
             'discount_tags' => $this->getDiscountCodes($order),
             'currency' => $order['total_price_set']['presentment_money']['currency_code'],
-            'products' => $this->getProductList($order['line_items']),
+            'products' => $products,
+            'order_sku_quantity' => count($products),
             'brand' => $brand,
             'payment_source' => $paymentSource,
             'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
