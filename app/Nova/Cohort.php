@@ -409,7 +409,7 @@ class Cohort extends Resource
                 ->dependsOn(
                     ['is_product'],
                     function (Image $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_product) $field->show()->rules(['required']);
+                        if ($formData->is_product) $field->show();
                     }
                 ),
             Text::make('Get Product Badge', 'get_product_badge')->hideFromIndex()
