@@ -1,6 +1,6 @@
 # Automated Testing
 
-Any push or pull request into the master branch will trigger the Automated Testing GitHub action.
+Any push or pull request into the main branch will trigger the Automated Testing GitHub action.
 
 All tests in the Unit and Feature test suites will be run as defined in phpunit.xml.
 
@@ -8,7 +8,7 @@ For more details on the action check out https://github.com/railroadmedia/musora
 
 ### Push
 
-A push to master may inadvertently break the tests and result in a red X next to the branch.
+A push to main may inadvertently break the tests and result in a red X next to the branch.
 For the time being this branch will be monitored by Rob to see how often we break it.
 
 ![automated-testing-github-checks.png](images/automated-testing-github-checks.png)
