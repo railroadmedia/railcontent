@@ -3,7 +3,7 @@
 This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.  
 
 ### Setup:
-- pull the latest railenvironment master branch changes
+- pull the latest railenvironment main branch changes
 - in the `railenvironment_docker` directory, run `sudo docker-compose build`
     - _This will install new containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites._ 
 - in the railenvironment directory, restart the container with the `./rrr.sh` command
@@ -289,7 +289,7 @@ We have 11 total environments:
 - **app-staging-three** - for general purpose mobile app API testing, review, etc
 
 Each environment deploys a specific branch in the musora-web-platform repository under the same name as the environment
-**except for 'production' which deploys the 'production' branch and 'master' which deploys to 'pre-production'**.
+**except for 'production' which deploys the 'production' branch and 'main' which deploys to 'pre-production'**.
 
 ## Web URLs
 
