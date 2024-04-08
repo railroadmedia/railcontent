@@ -105,7 +105,6 @@ export default {
 
         isAdmin() {
             const userStore = useUserStore();
-            console.log(userStore.isAdmin);
             return userStore.isAdmin;
         },
 
