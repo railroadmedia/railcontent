@@ -55,7 +55,7 @@
             ],
             "FAQs" => [
                 "iconClass" => "fas fa-fw fa-question",
-                "url" => 'https://help.singeo.com/',
+                "url" => 'https://help.musora.com/',
                 "target" => '_parent'
             ]
         ]

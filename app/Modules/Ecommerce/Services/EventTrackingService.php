@@ -56,6 +56,7 @@ class EventTrackingService
                 3
             );
         }
+
         try {
             Avo::order_placed(AvoHelper::defaultEventProperties($data, $user));
         } catch (\Exception $e) {
@@ -128,6 +129,7 @@ class EventTrackingService
 
         $total = floatval($order['total_price_set']['presentment_money']['amount']);
         $discount = floatval($order['total_discounts_set']['presentment_money']['amount']);
+        $products = $this->getProductList($order['line_items']);
 
         return [
             'checkout_token' => $order['checkout_token'],
@@ -140,7 +142,8 @@ class EventTrackingService
             'discount' => $discount,
             'discount_tags' => $this->getDiscountCodes($order),
             'currency' => $order['total_price_set']['presentment_money']['currency_code'],
-            'products' => $this->getProductList($order['line_items']),
+            'products' => $products,
+            'order_sku_quantity' => count($products),
             'brand' => $brand,
             'payment_source' => $paymentSource,
             'timestamp' => Carbon::parse($order['processed_at'])->timestamp,
