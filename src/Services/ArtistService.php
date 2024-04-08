@@ -34,13 +34,13 @@ class ArtistService
     public function getAll()
     {
         $hash = 'artists_all_'.CacheHelper::getKey();
-        $results = CacheHelper::getCachedResultsForKey($hash);
+//        $results = CacheHelper::getCachedResultsForKey($hash);
+//
+//        if (!$results) {
+//            $results = CacheHelper::saveUserCache($hash, $this->artistRepository->getAll(), null);
+//        }
 
-        if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->artistRepository->getAll(), null);
-        }
-
-        return $results;
+        return $this->artistRepository->getAll();
     }
 
     /**
