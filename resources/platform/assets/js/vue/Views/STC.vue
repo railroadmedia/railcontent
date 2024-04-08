@@ -31,7 +31,10 @@
         <section id="stc-form-wrapper" class="tw-mb-12 tw-w-full">
             <div class="tw-text-center tw-mb-4">
                 <h2 class="tw-mb-1 tw-text-2xl md:tw-text-3xl tw-font-bold">Enrollment Questionnaire</h2>
-                <p>Please fill out the enrollment questionnaire to be considered for studies</p>
+                <p class="tw-mb-6">Please fill out the enrollment questionnaire to be considered for studies</p>
+                <div class="tw-bg-[#223F57] tw-p-3 tw-rounded-xl tw-text-left">
+                    Please be advised that some adblockers may cause form submission errors. If you are having difficulty submitting the form, please disable your adblocker and try again.
+                </div>
             </div>
 
             <form id="stc-form" method="POST" class="tw-flex tw-flex-col" @submit.prevent="(event) => submitForm(event)">
