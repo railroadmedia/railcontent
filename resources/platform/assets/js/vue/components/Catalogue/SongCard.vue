@@ -7,9 +7,9 @@
         ]">
         <div class="tw-flex tw-items-center" :class="`${isGroupedView ? 'tw-flex-col' : 'tw-flex-row sm:tw-flex-col'}`">
             <!-- Thumbnail Section -->
-            <a :href="item.url" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[5px] sm:tw-mr-0" :class="[
+            <a :href="item.url" class="tw-no-underline tw-flex tw-flex-col tw-aspect-square tw-mr-[10px] sm:tw-mr-0" :class="[
                 { 'tw-w-full': isGroupedView },
-                { 'tw-w-[65px] sm:tw-w-full tw-flex-shrink-0': !isGroupedView },
+                { 'tw-w-[90px] sm:tw-w-full tw-flex-shrink-0': !isGroupedView },
             ]">
                 <div
                     :class="`tw-relative tw-overflow-hidden ${isGroupedView ? 'tw-rounded-[9px]' : 'tw-rounded-[5px] sm:tw-rounded-[9px]'} tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-square`">

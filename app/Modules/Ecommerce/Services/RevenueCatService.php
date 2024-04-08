@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\EventTracking\Services\CustomerIoService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
@@ -67,18 +68,17 @@ class RevenueCatService
                 $subscriptionData = $subscriptions->$productIdentifier;
 
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
-                $store = $type . '_store';
+                $store = $type.'_store';
                 if ($subscriptionData->period_type == 'trial') {
-                    $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]];
+                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]];
                 } else {
-                    $productsMap = array_merge(
-                        [config('ecommerce.' . $store . '_products_map')[$productIdentifier]],
-                        [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]]
-                    );
+                    $productsMap = array_merge([config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
+                                               [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]);
                 }
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
-                        ->get()->first();
+                        ->get()
+                        ->first();
 
                 $processedAt = Carbon::parse($subscriptionData->purchase_date);
                 $expiredAt = Carbon::parse($subscriptionData->expires_date);
@@ -101,8 +101,7 @@ class RevenueCatService
                         $processedAt,
                         $price,
                         0,
-                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple
-                            : ShopifyPaymentSourceEnum::Google,
+                        $type == 'apple' ? ShopifyPaymentSourceEnum::Apple : ShopifyPaymentSourceEnum::Google,
                         null //defaults to USD
                     );
 
@@ -130,8 +129,8 @@ class RevenueCatService
      * @param array $aliases
      * @return User|null
      */
-    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = []): ?User
-    {
+    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = [])
+    : ?User {
         if (empty($aliases)) {
             $aliases = [$appUserId];
         }
@@ -142,12 +141,12 @@ class RevenueCatService
                 ->first();
         if (!$user && $createIfNotExists && $value) {
             $parts = explode('@', $value);
-            $user = new User;
-            $user->email = $value;
-            $user->setPassword($value);
-            $user->display_name = $parts[0] . rand(10000, 99999);
-            $user->revenuecat_origin_app_user_id = $appUserId;
-            $user->save();
+            $user = User::updateOrCreate(['email' => $value], [
+                                                                'email' => $value,
+                                                                'password' => Hash::make($value),
+                                                                'display_name' => $parts[0].rand(10000, 99999),
+                                                                'revenuecat_origin_app_user_id' => $appUserId,
+                                                            ]);
             event(new UserCreated($user));
         } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
@@ -156,7 +155,6 @@ class RevenueCatService
 
         return $user;
     }
-
 
     /**
      * @param $userId
@@ -172,10 +170,10 @@ class RevenueCatService
         $app = 'Musora'
     ) {
         Log::debug(
-            'Call revoke API ' .
-            $productIdentifier .
-            ' for ' .
-            $userId .
+            'Call revoke API '.
+            $productIdentifier.
+            ' for '.
+            $userId.
             ' on Revenuecat(user access revoked from Google Play Console)'
         );
 

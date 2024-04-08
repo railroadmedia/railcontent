@@ -152,8 +152,7 @@
                             class="tw-w-full tw-flex tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block">
                             <div v-for="(item, i) in relatedLessons.data " :key="i"
                                 class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
-                                <CatalogueCard :item="item" :content-type="item.type" :brand="brand"
-                                    :force-list-view="true" />
+                                <CatalogueListElement :item="item" :content-type="item.type" :brand="brand" />
                             </div>
                         </section>
                     </div>
@@ -210,7 +209,7 @@ import VideoChapters from "../components/VideoChapters/VideoChapters.vue";
 import ContentInfo from "../components/ContentInfo/ContentInfo.vue";
 import SoundSlice from "../components/SoundSlice/SoundSlice.vue";
 import SoundSliceControls from "../components/SoundSlice/SoundSliceControls.vue";
-import CatalogueCard from "../components/Catalogue/CatalogueCard.vue";
+import CatalogueListElement from "../components/Catalogue/CatalogueListElement.vue";
 import Intercom from "../vuesora/assets/js/services/intercom";
 import Helpscout from "../vuesora/assets/js/services/helpscout";
 import ProgressTracker from "../vuesora/assets/js/classes/progress-tracker";

@@ -22,14 +22,39 @@
             :use-ref-data="true"
         />
         <!-- Recommended section -->
-        <MiniCatalogueSection title="Recommended For You" seeAllAriaLabel="See All Content" :seeAllUrl="recommendedContentUrl"
-                              :preLoadedContent="recommendedContent.data" v-if="hasRecommendations" />
+        <MiniCatalogueSection
+            v-if="recommends.length > 0"
+            title="Inspired By Your Activity"
+            seeAllAriaLabel="See All Content"
+            :seeAllUrl="recommendedContentUrl"
+            :preLoadedContent="recommends"
+        >
+            <template #label>
+                <a :href="recommendationLinks[brand]" class="tw-flex tw-ml-2 tw-text-[#FFAE00] md:tw-text-[#00101D] tw-text-xs md:tw-border md:tw-border-[#FFAE00] md:tw-rounded-md md:tw-px-[5px] md:tw-py-0.5 tw-font-semibold md:tw-bg-[#FFAE00] hover:md:tw-border-[#DC9600] hover:md:tw-bg-[#DC9600] md:tw-flex tw-items-center" title="Learn More">
+                    <musora-icon icon-name="info" class="tw-w-5 tw-h-5 tw-mr-1" /> <span class="tw-hidden md:tw-inline">Experimental Feature</span>
+                </a>
+            </template>
+            <template #icon>
+                <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
+                    <i class="fas fa-random"></i>
+                </button>
+            </template>
+        </MiniCatalogueSection>
         <!-- Workouts section -->
-        <MiniCatalogueSection v-if="workoutsContent.data.length" title="Workouts" seeAllAriaLabel="See All Workouts" :seeAllUrl="workoutsContentUrl"
-            :preLoadedContent="workoutsContent.data" />
+        <MiniCatalogueSection
+            v-if="workoutsContent.data.length"
+            title="Workouts"
+            seeAllAriaLabel="See All Workouts"
+            :seeAllUrl="workoutsContentUrl"
+            :preLoadedContent="workoutsContent.data"
+        />
         <!-- New section -->
-        <MiniCatalogueSection title="New Releases" seeAllAriaLabel="See All New Releases" :seeAllUrl="newContentUrl"
-            :preLoadedContent="newContent.data" />
+        <MiniCatalogueSection
+            title="New Releases"
+            seeAllAriaLabel="See All New Releases"
+            :seeAllUrl="newContentUrl"
+            :preLoadedContent="newContent.data"
+        />
         <!-- Playlist section -->
         <ListSection :newContentUrl="newContentUrl" :usersList="usersList" :my-list-url="`/${brand}/playlists`" />
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
@@ -55,7 +80,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import TriggerBanner from '../components/Onboarding/TriggerBanner.vue';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
 import CohortBanner from '../components/CohortBanner/CohortBanner.vue';
@@ -66,15 +91,11 @@ import StatsSection from '../components/StatsSection/StatsSection.vue';
 import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
 import { useUserStore } from "../../stores/user";
 import {storeToRefs} from "pinia/dist/pinia";
+import axios from 'axios';
 
 //Pinia Stores
 const userStore = useUserStore();
-
 const { brand } = storeToRefs(userStore);
-
-const showTriggerBanner = computed(() => {
-    return !props.hasGear || !props.hasTopics || !props.hasGenres || !props.hasExperience || !props.hasGoals;
-});
 
 const props = defineProps({
     accountUrl: { type: String, default: '' },
@@ -90,7 +111,6 @@ const props = defineProps({
     hasGear: { type: Boolean, default: false },
     hasGenres: { type: Boolean, default: false },
     hasGoals: { type: Boolean, default: false },
-    hasRecommendations: { type: Boolean, default: false },
     hasStartedLessons: { type: Boolean, default: false },
     hasTopics: { type: Boolean, default: false },
     hasUpcomingEvents: { type: Boolean, default: false },
@@ -100,7 +120,7 @@ const props = defineProps({
     newContentUrl: { type: String, default: '' },
     nextLearningPathLevel: { type: String, default: '' },
     nextLearningPathProgressPercent: { type: Number, default: 0 },
-    recommendedContent: { type: Object, default: () => ({}) },
+    recommendedContent: { type: Object, default: () => ({ data: [] }) },
     recommendedContentUrl: { type: String, default: '' },
     startedContent: { type: Object, default: () => ({}) },
     timeCutoffMinutes: { type: Number, default: 0 },
@@ -108,11 +128,17 @@ const props = defineProps({
     upcomingUrl: { type: String, default: '' },
     usersList: { type: Object, default: () => ({}) },
     userMetrics: { type: Object, default: () => ({}) },
-    usersList: { type: Object, default: () => ({}) },
     workoutsContent: { type: Object, default: () => ({}) },
     workoutsContentUrl: { type: String, default: '' },
     youtubeId: { type: String, default: '' },
 });
+
+const showTriggerBanner = computed(() => {
+    return !props.hasGear || !props.hasTopics || !props.hasGenres || !props.hasExperience || !props.hasGoals;
+});
+
+const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
+const recSysPage = ref(1);
 
 const openPlaylistModal = () => {
     window.openplaylistmodal({
@@ -127,9 +153,26 @@ const openPlaylistModal = () => {
     });
 };
 
+const shuffleRecommends = () => {
+    if(Math.ceil(props.recommendedContent.data.length / 5) === recSysPage.value){
+        recSysPage.value = 1;
+    } else {
+        recSysPage.value = recSysPage.value + 1;
+    }
+
+    recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
+}
+
 onMounted(() => {
     if (window.location.href.includes('create-playlist-window')) {
         openPlaylistModal();
     }
 });
+
+const recommendationLinks = {
+    drumeo: 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083',
+    pianote: 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612',
+    guitareo: 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772',
+    singeo:'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436',
+}
 </script>

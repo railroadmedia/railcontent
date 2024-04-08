@@ -15,9 +15,8 @@
                         <span class="tw-text-[28px] lg:tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                     </h1>
                     <p
-                        class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
-                        <!-- TODO: GET THIS INFO FROM BACKEND -->
-                        {{ $artistsNumber }} ARTISTS | {{ $songsNumber }} SONGS
+                        class="tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
+                        <a class="tw-text-white" href="{{ $allArtistUrl }}"> SEE ALL {{ $artistsNumber }} ARTISTS </a>
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row tw-items-center tw-justify-center">
@@ -40,7 +39,7 @@
         continue-url="/{{$brand}}/lesson-history/in-progress"
         :artists-number="{{ json_encode($artistsNumber) }}"
         :songs-number="{{ json_encode($songsNumber) }}"
-        :started-content="{{ json_encode($startedLessons) }}"
+        :started-content="{{ $startedLessons }}"
         :list-lessons="{{ $listLessons }}"
         :tabs="{{ json_encode($catalogueMeta['tabs'] ?? []) }}"
         :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"

@@ -256,20 +256,20 @@
                 </div>
                 <br><br>
             @else
-            <form accept-charset="UTF-8" action="/hlag-submit" id="inf_form" class="clearfix infusion-form" method="POST">
+            <form accept-charset="UTF-8" action="/hlag-submit" id="inf_form" class="clearfix ajax-form" method="POST">
                 <input type="hidden" name="_token" class="sort-input" value="{{ csrf_token() }}" />
                 <input name="inf_form_xid" type="hidden" value=""/>
                 <input name="inf_form_name" type="hidden" value=""/>
-                <div class="infusion-field columns medium-6">
-                    <input class="infusion-field-input-container" id="first_name" name="first_name" placeholder="First Name..." required/>
+                <div class="columns medium-6">
+                    <input class="" id="first_name" name="first_name" placeholder="First Name..." required/>
                 </div>
-                <div class="infusion-field columns medium-6">
-                    <input class="infusion-field-input-container" id="last_name" name="last_name" placeholder="Last Name..." required/>
+                <div class="columns medium-6">
+                    <input class="" id="last_name" name="last_name" placeholder="Last Name..." required/>
                 </div>
-                <div class="infusion-field columns">
-                    <input class="infusion-field-input-container" id="email" name="email" type="email" placeholder="Email Address..." required/>
+                <div class="columns">
+                    <input class="" id="email" name="email" type="email" placeholder="Email Address..." required/>
                 </div>
-                <div class="infusion-submit columns">
+                <div class="columns">
                     <input class="submit" type="submit" value="Claim Your Access Code &raquo;"/>
                 </div>
             </form>

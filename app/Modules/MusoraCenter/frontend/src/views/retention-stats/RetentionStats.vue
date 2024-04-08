@@ -24,7 +24,7 @@
                     </v-toolbar-title>
 
                     <v-btn small
-                       href="https://github.com/railroadmedia/docusora/blob/master/docs/statistics/guides/musora-center/retention-reporting-tool-guide.md" target="_blank">
+                       href="https://github.com/railroadmedia/docusora/blob/main/docs/statistics/guides/musora-center/retention-reporting-tool-guide.md" target="_blank">
                         View Guide
                     </v-btn>
 

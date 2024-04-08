@@ -27,7 +27,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
 
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->whereIn('type', ['style', 'artist', 'instructor']);
+        $contentsOfType = $contents->whereIn('type', ['style', 'artist', 'instructor', 'recommended']);
 
         if ($contentsOfType->isEmpty()) {
             return $contents;
@@ -80,6 +80,19 @@ class GroupedContentDecorator extends ModeDecoratorBase
                         'type' => 'string',
                         'position' => 1,
                     ];
+                }
+            } else if ($content['type'] == 'recommended') {
+                $id = strtolower($content['id']);
+                $filter = match(true) {
+                    str_contains($id, 'song') => 'song',
+                    str_contains($id, 'lesson') => 'lesson',
+                    default => ''
+                };
+                if ($filter) {
+                    $content['url'] = url()->route('platform.recommended-lessons', [
+                        'brand' => brand(),
+                        'tabs[]' => "filter,$filter",
+                    ]);
                 }
             } else {
                 if(isset($content['content_type'])) {

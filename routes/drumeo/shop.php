@@ -45,6 +45,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         Route::get('/30-day-drummer/deal', [SalesController::class, 'thirtyDayDrummerDeal'] );
         Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops'] );
         Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal'] );
+        Route::get('/30-day-independence', [SalesController::class, 'thirtyDayIndependence'] );
         Route::get('/{productslug}', [ShopController::class, 'product']);
     });
 });

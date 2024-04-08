@@ -1,5 +1,5 @@
 <template>
-    <main class="tw-w-full">
+    <main class="tw-w-full tw-pt-[16px]">
 
         <!-- No Playlists -->
         <section
@@ -29,7 +29,7 @@
         <div v-else class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls v-if="!props.miniCatalog || state.searchTerm.length" :brand="brand"
-                :isListView="state.isListView" @onToggleListView="toggleListView" />
+                :isListView="state.isListView" @onToggleListView="toggleListView" :initial-filter-options="filterOptions" />
 
             <!-- List View Header -->
             <header v-if="playlistsStore.playlists.length !== 0"
@@ -136,6 +136,10 @@ const props = defineProps({
     miniCatalog: {
         type: Boolean,
         default: false,
+    },
+    filterOptions: {
+        type: [Object, Array],
+        default: null
     }
 })
 

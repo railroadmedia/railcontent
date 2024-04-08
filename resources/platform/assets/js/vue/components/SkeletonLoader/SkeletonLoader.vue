@@ -4,8 +4,9 @@
 
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import SkeletonCard from './SkeletonCard.vue';
+import SkeletonListElement from './SkeletonListElement.vue';
 import SkeletonSongCard from './SkeletonSongCard.vue';
 import SkeletonCardGroupHeader from './SkeletonCardGroupHeader.vue';
 
@@ -17,14 +18,6 @@ const props = defineProps({
     count: {
         type: Number,
         default: 1
-    },
-    forceListView: {
-        type: Boolean,
-        default: false,
-    },
-    breakToListView: {
-        type: Boolean,
-        default: false,
     },
     isSingleRow: {
 		type: Boolean,
@@ -40,6 +33,8 @@ const skeletonComponent = computed(() => {
     switch (props.type) {
         case 'card':
             return SkeletonCard;
+        case 'listElement':
+            return SkeletonListElement;
         case 'songCard':
             return SkeletonSongCard;
         case 'card-group-header':

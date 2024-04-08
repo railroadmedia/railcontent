@@ -392,7 +392,7 @@ $pianoteAwards2023 = [
         "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/jordanrudess-contemporary.webp",
         "award" => "Contemporary Pianist Of The Year",
         "winner" => "Jordan Rudess",
-        "description" => "Renowned for his virtuosic work with Dream Theater, Jordan Rudess continues to be one of today’s most revered keyboardists. Rudess’ 2023 collaborations include “Still Woven” with Quartarone and “Incarnation,” an original composition he produced with Mahesh Raghvan and featuring Mohini Dey, Elijah Wood, and B. C. Manjunath. He was also featured in Bradley Hall’s “Thrash Grandad.” Prolific in the world of music tech, Rudess collaborated with Drukowski Guitars to create the Wizard’s Axe and was, of course, present at NAMM 2023.",
+        "description" => "Renowned as the \"Best Keyboardist of All Time\" by Music Radar Magazine, Jordan Rudess wrapped up the Dream Theater Dreamsonic tour in 2023 and recorded his solo album, which will be released on Sony Inside Out September 2024. A pioneer technologist with a focus on state-of-the-art keyboard controllers and music apps, Rudess also began a collaboration on an AI interactive project as Visiting Artist Lab at MIT’s Media Lab in the Responsive Environments group.",
     ],
     [
         "image" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/lead-gen/awards/2023/margaritasipatova-tiktok.webp",
