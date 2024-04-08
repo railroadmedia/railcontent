@@ -222,7 +222,6 @@
                         <text-editor
                             ref="textEditor"
                             :is-reply-section="true"
-                            toolbar="bold italic underline | bullist numlist | link image media | forecolor backcolor | emoticons"
                             :hasImageUploader="true"
                             v-model="postReplyInterface"
                             @input="handleInput"

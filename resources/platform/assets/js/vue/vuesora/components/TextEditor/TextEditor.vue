@@ -1,5 +1,10 @@
 <template>
     <div class="text-editor-container tw-flex tw-flex-col tw-w-full" v-if="renderTinyMCE">
+        <ImageUploader v-if="showImageUploader" :skipCrop="true" :selfContained="true"
+            uploadServiceRoute="/musora-api/v5/picture/upload-from-s3"
+            successMessage="Your image was successfully uploaded" fieldKey="forum_post_photo" cropType="square"
+            :selectedImage="selectedImage" :initialStep="initialUploaderStep" @uploadSuccess="handleUploadDone"
+            @uploadError="handleUploadError" @onUploaderClose="closeUploader" />
         <input v-model="contentInterface" type="hidden" :name="fieldKey" class="">
         <TinyEditor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
             :init="initObject" @change="handleInput" :placeholder="placeholder" />
@@ -7,15 +12,9 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, inject, onUpdated } from 'vue';
+import { ref, computed, watch, nextTick, inject } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
-import { uploadImage } from '../../../../services/imageUpload';
-import { storeToRefs } from 'pinia';
-import { useUserStore } from '../../../../stores/user';
-import { v4 as uuidv4 } from 'uuid';
-
-const userStore = useUserStore();
-const { userId } = storeToRefs(userStore);
+import ImageUploader from '../../../components/ImageUploader/ImageUploader.vue';
 
 const emit = defineEmits(['input']);
 
@@ -53,11 +52,15 @@ const isDarkModeSelected = inject('isDarkModeSelected');
 const currentValue = ref(props.initialValue);
 const renderTinyMCE = ref(true);
 const contentInterface = defineModel();
+const editorRef = ref(null);
+const showImageUploader = ref(false);
+const initialUploaderStep = ref('dropzone');
+const selectedImage = ref(null);
 
 const initObject = computed(() => ({
     autoresize_min_height: props.height,
     body_class: `${isDarkModeSelected.value ? 'tw-dark' : ''}`,
-    toolbar: props.toolbar,
+    toolbar: props.hasImageUploader ? 'bold italic underline | bullist numlist | link customImageUploader media | forecolor backcolor | emoticons' : props.toolbar,
     branding: false,
     content_id: '#textEditor',
     content_style: `body.tw-dark { color: white } body { font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; } body.tw-dark.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #9EC0DC; } body.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #223F57; } `,
@@ -83,16 +86,16 @@ const initObject = computed(() => ({
     resize: false,
     statusbar: false,
     target_list: false,
-    images_upload_url: props.hasImageUploader,
-    automatic_uploads: !!props.hasImageUploader,
-    images_reuse_filename: true,
-    images_upload_handler: handleImageUpload,
     setup: (editor) => {
+        setupCustomImageUploaderPlugin(editor);
+
         editor.on('input', () => {
             editor.save();
         });
 
         editor.on('drop', (e) => handleEditorDrop(e, editor));
+
+        editorRef.value = editor;
     },
 }));
 
@@ -115,50 +118,54 @@ function forceReRender() {
     });
 }
 
-function getFormData(blob) {
-    const formData = new FormData();
-    const fileName = `comment_${userId}_${uuidv4()}.png`;
-    formData.append('file', blob, fileName);
-    formData.append('target', fileName);
-    formData.append('_method', 'POST');
-    formData.append('fieldKey', 'forum_post_photo');
-    return formData;
+function closeUploader() {
+    showImageUploader.value = false;
 }
 
-function handleEditorDrop(event, editor) {
+const getFileBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+});
+
+async function handleEditorDrop(event) {
     event.preventDefault();
     const files = event.dataTransfer.files;
     if (files.length) {
-        const formData = getFormData(files[0]);
-
-        Vapor.store(formData.get('file'), {
-            visibility: 'public-read'
-        }).then((response) => {
-            editor.insertContent(`<img src="${response.url}" />`);
-        });
+        console.log(typeof files[0])
+        console.log(files[0])
+        selectedImage.value = await getFileBase64(files[0]);
+        initialUploaderStep.value = 'upload';
+        showImageUploader.value = true;
     }
 }
 
-
-function handleImageUpload(blobInfo, progress) {
-    const formData = getFormData(blobInfo.blob());
-    const onSuccess = (response) => {
-        window.shownotification({
-            icon: 'success',
-            text: 'Image uploaded successfully.'
-        });
-        console.log(response)
-    };
-    const onFailure = (error) => {
-        window.shownotification({
-            icon: 'error',
-            text: 'This is Embarrassing That didn\'t work. Refresh the page and try once more, if it happens again please let us know using the chat below.'
-        });
-        console.log(error)
-    };
-
-    uploadImage(formData, props.token, progress).then(onSuccess).catch(onFailure);
+function setupCustomImageUploaderPlugin(editor) {
+    editor.ui.registry.addButton('customImageUploader', {
+        icon: 'image', // You can choose an icon here or use text: 'Upload Image'
+        tooltip: 'Upload image',
+        onAction: function () {
+            showImageUploader.value = true;
+        }
+    });
 }
+
+function handleUploadDone(uploadResponse) {
+    editorRef.value.insertContent(`<img src="${uploadResponse.url}" class="tw-max-w-full tw-h-auto tw-rounded-lg tw-shadow" />`);
+    showImageUploader.value = false;
+    initialUploaderStep.value = 'dropzone';
+    selectedImage.value = null;
+}
+
+function handleUploadError() {
+    window.shownotification({
+        icon: 'error',
+        text: 'There was an error uploading this image, please try again later.'
+    });
+    showImageUploader.value = false;
+}
+
 
 </script>
 

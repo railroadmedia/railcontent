@@ -70,7 +70,6 @@
                         >
                         <text-editor
                             :initial-value="post.postBody"
-                            toolbar="bold italic underline | bullist numlist | link image media | forecolor backcolor | emoticons"
                             :hasImageUploader="true"
                         />
 
