@@ -13,7 +13,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["onImageUpload"]);
+const emit = defineEmits(["onImageUpload", "onError"]);
 
 function openUploadForm() {
   showUploadForm.value = !showUploadForm.value;
@@ -26,10 +26,7 @@ function handleUploadDone({ profile_picture_url }) {
 }
 
 function handleUploadError() {
-  window.shownotification({
-    icon: 'error',
-    text: 'There was an error uploading this image, please try again later.'
-  });
+  emit('onError');
   showUploadForm.value = false;
 }
 </script>

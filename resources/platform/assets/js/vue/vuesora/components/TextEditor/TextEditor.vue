@@ -133,8 +133,6 @@ async function handleEditorDrop(event) {
     event.preventDefault();
     const files = event.dataTransfer.files;
     if (files.length) {
-        console.log(typeof files[0])
-        console.log(files[0])
         selectedImage.value = await getFileBase64(files[0]);
         initialUploaderStep.value = 'upload';
         showImageUploader.value = true;
