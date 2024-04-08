@@ -728,7 +728,7 @@
                     alt="important icon">
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
-            <h6 class="leading-normal  mt-4">330-Day Independence is a daily guided workout program for drummers — where
+            <h6 class="leading-normal  mt-4">30-Day Independence is a daily guided workout program for drummers — where
                 you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this,
                 students will not be able to join midway — <strong>and you need to register before the course begins on May
                     6th.</strong></h6>
