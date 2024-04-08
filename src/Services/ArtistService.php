@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ArtistRepository;
 
 class ArtistService
@@ -33,13 +32,6 @@ class ArtistService
      */
     public function getAll()
     {
-        $hash = 'artists_all_'.CacheHelper::getKey();
-//        $results = CacheHelper::getCachedResultsForKey($hash);
-//
-//        if (!$results) {
-//            $results = CacheHelper::saveUserCache($hash, $this->artistRepository->getAll(), null);
-//        }
-
         return $this->artistRepository->getAll();
     }
 
@@ -49,21 +41,9 @@ class ArtistService
      */
     public function getById($id)
     {
-        $hash = 'artist_id'.CacheHelper::getKey($id);
-        $results = CacheHelper::getCachedResultsForKey($hash);
-
-        if (!$results) {
-            $results =
-                CacheHelper::saveUserCache(
-                    $hash,
-                    $this->artistRepository->query()
-                        ->where('id', $id)
-                        ->get(),
-                    null
-                );
-        }
-
-        return $results;
+        return $this->artistRepository->query()
+            ->where('id', $id)
+            ->get();
     }
 
     /**
@@ -77,7 +57,6 @@ class ArtistService
                                                         'name' => $name,
                                                         'head_shot_picture_url' => $avatar,
                                                     ]);
-        CacheHelper::deleteAllCachedSearchResults('artists_all_');
 
         return $this->get($artistId);
     }
@@ -98,8 +77,6 @@ class ArtistService
         }
 
         $this->artistRepository->update($id, ['name' => $name, 'head_shot_picture_url' => $avatar]);
-
-        CacheHelper::deleteAllCachedSearchResults('artists_all_');
 
         return $this->get($id);
     }

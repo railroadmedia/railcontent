@@ -345,7 +345,7 @@ Route::group(
                 Route::get(
                     '/artist/{id}',
                     \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@getArtist'
-                )->name('artists.index');
+                )->name('artists.view');
 
                 Route::put(
                     '/artist',
@@ -356,6 +356,27 @@ Route::group(
                     '/artist/{id}',
                     \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@update'
                 )->name('artists.update');
+
+
+                Route::get(
+                    '/genre',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@index'
+                )->name('genre.index');
+
+                Route::get(
+                    '/genre/{id}',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@getGenre'
+                )->name('genre.view');
+
+                Route::put(
+                    '/genre',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@store'
+                )->name('genre.store');
+
+                Route::patch(
+                    '/genre/{id}',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@update'
+                )->name('genre.update');
             }
         );
     }
