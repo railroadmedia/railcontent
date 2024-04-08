@@ -14,6 +14,9 @@ class BatchStatus extends Command
     {
         $batchId = $this->argument('batchID');
         $batch = Bus::findBatch($batchId);
+        if (!$batch) {
+            $this->info("unable to find jobs for batch $batchId");
+        }
         $completedJobs = $batch->totalJobs - $batch->pendingJobs;
         $this->info("Processed $completedJobs/$batch->totalJobs {$batch->progress()}%");
     }
