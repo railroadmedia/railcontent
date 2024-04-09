@@ -8,7 +8,9 @@ use App\Nova\Flexible\Presets\CohortDropdownPreset;
 use App\Nova\Flexible\Presets\CohortListPreset;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
@@ -284,174 +286,6 @@ class Cohort extends Resource
                 }),
             Text::make('Body image url', 'body_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
 
-
-            Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
-            Image::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('description_trailer_1_thumb_url')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
-            Text::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Text::make('First day text', 'first_day_text')->hideFromIndex(),
-
-            Text::make('Last day Trailer URL', 'description_trailer_2')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
-            Image::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('description_trailer_2_thumb_url')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
-            Text::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Text::make('Last day text', 'last_day_text')->hideFromIndex(),
-
-            Heading::make('Demo Section'),
-            Text::make('Demo Title', 'demo_title_text')->hideFromIndex(),
-            Text::make('Demo Description', 'demo_description_text')->hideFromIndex(),
-            Text::make('Demo Label', 'demo_label_text')->hideFromIndex(),
-            Image::make('Demo Background Image', 'demo_background_image_url')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_background_image_url')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
-            Text::make('Demo Background Image', 'demo_background_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Image::make('Demo Desktop Center Image', 'demo_desktop_center_image_url')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_desktop_center_image_url')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
-            Text::make('Demo Desktop Center Image', 'demo_desktop_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Image::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_mobile_center_image_url')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
-            Text::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Text::make('Demo Trailer', 'demo_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
-
             Heading::make('Bottom'),
             Image::make('Bottom Logo', 'body_logo')
                 ->help('The logo should be 896 x 100px or a comparable aspect ratio.')
@@ -490,6 +324,160 @@ class Cohort extends Resource
             Flexible::make('Items')->help('You can use tags as {enrolled} that will be replaced with number of enrolled students   e.g: "Join {enrolled} players who have already registered."')
                 ->addLayout(CohortListLayout::class)
                 ->preset(CohortListPreset::class),
+
+            Heading::make('Product'),
+            Boolean::make('Is there a product?', 'is_product')->hideFromIndex()->default(false)->help('Is there a product?'),
+            Text::make('Product Description Header', 'product_description_header')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Product Description Body', 'product_description_body')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Number::make('Product Original Price', 'product_original_price')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Number::make('Product Sale Price', 'product_sale_price')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Image::make('Product Image', 'product_image')
+                ->help('The image should be 16:9.')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('product_image')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                })
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Image $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show();
+                    }
+                ),
+            Text::make('Get Product Badge', 'get_product_badge')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Product Name', 'product_name')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Course Description', 'course_description')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Course + Product Description', 'course_product_description')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Product Cart Link', 'product_cart_link')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Product Cart Link Description', 'product_cart_link_description')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_product;
+                })
+                ->dependsOn(
+                    ['is_product'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_product) $field->show()->rules(['required']);
+                    }
+                ),
 
             Heading::make('Dropdown'),
             Text::make('Dropdown Title','dropdown_title')->hideFromIndex(),
