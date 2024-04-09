@@ -24,6 +24,7 @@ import Playlist from './vue/Views/Playlist';
 import Referral from './vue/Views/Referral';
 import Stc from './vue/Views/STC';
 import LessonHistory from './vue/Views/LessonHistory';
+import Cohort from './vue/Views/Cohort';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -292,6 +293,7 @@ app.component('AppContainer', AppContainer)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
     .component('Stc', Stc)
+    .component('Cohort', Cohort)
     // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
 
