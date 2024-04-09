@@ -17,8 +17,8 @@ return new class extends Migration
             $table->boolean('is_product')->default(false);
             $table->string('product_description_header')->nullable();
             $table->longText('product_description_body')->nullable();
-            $table->float('product_original_price');
-            $table->float('product_sale_price');
+            $table->float('product_original_price')->nullable();
+            $table->float('product_sale_price')->nullable();
             $table->string('product_image')->nullable();
             $table->longText('course_description')->nullable();
             $table->longText('course_product_description')->nullable();
