@@ -336,6 +336,47 @@ Route::group(
                     '/user-permission',
                     \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@index'
                 )->name('user.permissions.index');
+
+                Route::get(
+                    '/artists',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@index'
+                )->name('artists.index');
+
+                Route::get(
+                    '/artist/{id}',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@getArtist'
+                )->name('artists.view');
+
+                Route::put(
+                    '/artist',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@store'
+                )->name('artists.store');
+
+                Route::patch(
+                    '/artist/{id}',
+                    \Railroad\Railcontent\Controllers\ArtistsJsonController::class . '@update'
+                )->name('artists.update');
+
+
+                Route::get(
+                    '/genre',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@index'
+                )->name('genre.index');
+
+                Route::get(
+                    '/genre/{id}',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@getGenre'
+                )->name('genre.view');
+
+                Route::put(
+                    '/genre',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@store'
+                )->name('genre.store');
+
+                Route::patch(
+                    '/genre/{id}',
+                    \Railroad\Railcontent\Controllers\GenreJsonController::class . '@update'
+                )->name('genre.update');
             }
         );
     }
