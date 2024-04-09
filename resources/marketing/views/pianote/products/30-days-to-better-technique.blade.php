@@ -545,47 +545,30 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week1.webp',
                     'header1' => 'WEEK 1',
                     'header2' => 'Building your finger independence.',
-                    'desc' => 'Strong fingers make everything easier on the piano.
-            <br><br>
-            And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit
-            random keys and move when you don’t want them to.
-            <br><br>
-            That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the
-            independence they crave.
-            After the first day, your fingers will already feel stronger, and you’ll be more confident and excited to keep
-            learning.',
+                    'desc' => 'Strong fingers make everything easier on the piano.<br><br>And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to.<br><br>That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. After the first day your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
                     'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s what you’ll get:',
+                    'backHeader' => 'Here’s what we’ll focus on:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Using musical patterns </strong>to build strong fingers. Each exercise will sound like music, not a boring technical exercise.
-                             Jordan will show you exactly what notes to play in what order.',
+                            'desc' => '<strong>Using musical patterns </strong> to build strong fingers. Each exercise will sound like music, not a boring technical exercise. Jordan will show you exactly what notes to play in what order.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>Creating true separation for your fingers.</strong>
-                            Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
+                            'desc' => '<strong>Creating true separation for your fingers.</strong> Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Independence for EVERY finger.</strong>
-                            As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
+                            'desc' => '<strong>Independence for EVERY finger.</strong> As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
                         ],
                     ],
                 ],
                 [
                     'header1' => 'WEEK 2',
                     'header2' => 'Separate your hands and coordinate your brain.',
-                    'desc' => 'Now you’ve built strong fingers, it’s time to use them.
-            <br><br>
-            In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and
-            right hands.
-            <br><br>
-            No more boring whole notes in your left hand. You’ll learn to play different hand coordination trips up so many piano players and halts your progress.
-            But with Jordan’s daily guidance, you’ll be amazing at how quickly you progress.',
+                    'desc' => 'Now you’ve built strong fingers, it’s time to use them.<br><br>In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands.<br><br>No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
                     'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s how we’ll do it:',
+                    'backHeader' => 'How we’ll do it!',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
@@ -597,8 +580,7 @@
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Break out of 4/4. </strong> Get out of the easy time signtarures and step into Jordan’s world of off-time. “It’s
-            easy, but it’s odd.”',
+                            'desc' => '<strong>Break out of 4/4. </strong> Get out of the easy time signatures and step into Jordan’s world of off-time. “It’s easy, but it’s odd.”',
                         ],
                     ],
                 ],
@@ -607,16 +589,7 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week3.webp',
                     'header1' => 'Week 3',
                     'header2' => 'Speed. How to practice and play fast.',
-                    'desc' => 'Now it’s time to impress.
-            <br><br>
-            Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he
-            learned at Juilliard and used to build his prodigious speed.
-            <br><br>
-            Strap in, because it’s a wild ride.
-            <br><br>
-            But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay
-            there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools
-            to continue practicing how to play faster.',
+                    'desc' => 'Now it’s time to impress.<br><br>Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed.<br><br>Strap in, because it’s a wild ride.<br><br>But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
                     'notes' => 'See what you’ll get...',
                     'backHeader' => 'Here’s what you’ll get:',
                     'back' => [
@@ -626,46 +599,32 @@
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing. </strong> An etherial arpeggio exercise that sounds
-            incredible while helping you play faster.',
+                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing. </strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you
-            how to approach practicing speed so you’re set up for success, not frustration.',
+                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
                         ],
                     ],
                 ],
                 [
                     'header1' => 'Week 4',
                     'header2' => 'Creative expression. Make beautiful music.',
-                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4.
-            <br><br>
-            Because what’s the point of getting better technique?
-            <br><br>
-            To play beautiful music.
-            <br><br>
-            In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do
-            you go from hitting the keys to making music? This final week will show you how to tell a story with your
-            playing.
-            ',
+                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4.<br><br>Because what’s the point of getting better technique?<br><br>To play beautiful music.<br><br>In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
                     'notes' => 'See what you’ll end the course with:',
-                    'backHeader' => 'Here’s what you’ll get:',
+                    'backHeader' => 'You end the course with:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>The specific techniques to draw listeners in to your playing.</strong> How to get people to stop and stare
-            whenever you sit at the piano.',
+                            'desc' => '<strong>The specific techniques to draw listeners into your playing.</strong> How to get people to stop and stare whenever you sit at the piano.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The mindset of a singer. </strong> Why thinking like a vocalist is key to bringing emotion and feeling to the
-            pieces you play.',
+                            'desc' => '<strong>The mindset of a singer. </strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put
-            all your skills together to play something Dream Theater-esque WITH Jordan.',
+                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
                         ],
                     ],
                 ],
@@ -784,20 +743,15 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/screen.webp"
                     alt="Mobile Screen with 30-Day Independence">
                 <div class="flex-grow sm:pl-10">
-                    <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get an exclusive LIVE <br> every step
-                            of the way.</strong></h3>
+                    <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get An Exclusive LIVE Lesson With Jordan</strong></h3>
                     <div class="text-center sm:text-left pb-4">
-                        <p>
-                            All students who enroll in 30-Days to Better Technique will be invited to join an exclusive LIVE
-                            lesson with Jordan Rudess.
+                        <p>All students who enroll in 30 Days to Better Technique will be invited to join an exclusive LIVE lesson with Jordan Rudess.
                             <br><br>
-                            You’ll be able to share your feedback, ask questions, and learn live from the “world’s best
-                            keyboardist”.
+                            You’ll be able to share your feedback, ask questions, and learn live from the “world’s best keyboardist”.
                             <br><br>
                             It’s a rare opportunity.
                             <br><br>
-                            And it’s only available to students who enroll in the first-ever class of 30-Days to Better
-                            Technique.
+                            And it’s only available to students who enroll in the first-ever class of 30 Days to Better Technique.
                             <br><br>
                             Reserve your spot today.
                         </p>
@@ -861,8 +815,8 @@
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/30-days-technique-Jordan-Rudess-logo.svg"
                 alt="30 Day to Better Technique Logo">
-            <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Play-Along Lessons + weekly Q&As <br> with a
-                    real piano teacher. </strong></h2>
+            <h3 class="italic leading-tight mt-2 mb-3 sm:my-3 lg:my-4">What would happen if you learned from the<br>  <strong> best
+                    keyboardist in the world?</strong></h3>
 
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
             <h6 class="leading-normal text-sm mb-4">
@@ -921,7 +875,7 @@
                             '<strong>LIVE</strong> Session with Jordan Rudess',
                         ],
                         'buttonText' => 'ENROLL NOW',
-                        'cardExtraInfo' => 'SAVE 24%. One-time payment.',
+                        'cardExtraInfo' => 'One-time payment. Save 24%',
                     ])
 
                     @include('pianote.products.partials._promo-card-special', [
@@ -931,8 +885,9 @@
                         'cardImage' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-01.webp',
                         'imageHeight' => 'h-40',
-                        'cardSubtitle' => "The course + red Pianote metronome",
+                        'cardSubtitle' => "The course + a Pianote metronome",
                         'cardPrice' => '127',
+                        'cardDiscount' => '296',
                         'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
@@ -940,8 +895,8 @@
                             '<strong>FREE</strong> Pianote Metronome <span class="italic text-xs">(Lifetime Access)</span>',
                             '<strong>LIVE</strong> Session with Jordan Rudess',
                         ],
-                        'buttonText' => 'GET EVERYTHING',
-                        'cardExtraInfo' => "One-time payment.",
+                        'buttonText' => 'ENROLL NOW',
+                        'cardExtraInfo' => "One-time payment. Save 57%",
                     ])
                 </div>
             </div>
