@@ -2223,7 +2223,7 @@ class ContentService
                 ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
-                ->leftJoin('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
+                ->join('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
                     return $joinClause->on('ch_1_child.id', '=', 'ch_1.child_id')
                         ->whereNot('ch_1_child.type', 'assignment')
                         ->where('ch_1_child.status', '=', 'published')
