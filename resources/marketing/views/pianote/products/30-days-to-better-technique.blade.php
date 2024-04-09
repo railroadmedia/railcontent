@@ -113,20 +113,20 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="30 Day to Better Technique Logo" class="h-20 md:h-28 lg:h-44 my-4 md:my-10"
+                <img alt="30 Day to Better Technique Logo" class="h-32 sm:h-40 lg:h-48 my-4 md:my-10"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/header-logo.svg"><br>
                 <h6 class="italic">What would happen if you learned piano from <br> the <strong> best
                         keyboardist in the world?</strong></h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-pianote hover:text-white"
+                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
                         &nbsp;Watch Trailer
                     </div>
-                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-pianote hover:text-white"
+                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailerM = true;">
                          &nbsp;Watch Trailer
                     </div>
-                    <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500" href="#customize-anchor"
+                    <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500 anchor-slide" href="#customize-anchor"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
                 </div>
             </div>
@@ -161,13 +161,18 @@
     </header>
 
     @php
-        $items = ['Improve Your <br class="hidden md:inline lg:hidden"> Playing', '30 Days of <br class="hidden md:inline lg:hidden"> Lessons', 'Practice with <br class="hidden md:inline lg:hidden"> Jordan', 'Guaranteed <br class="hidden md:inline lg:hidden"> results'];
+        $items = [
+            'Improve Your <br class="inline lg:hidden"> Playing',
+            '30 Days of <br class="inline lg:hidden"> Lessons',
+            'Practice with <br class="inline lg:hidden"> Jordan',
+            'Guaranteed <br class="inline lg:hidden"> results'
+            ];
     @endphp
 
     <section class="bg-black text-white p-4 md:px-20">
         <div class="container max-w-4xl mx-auto flex flex-wrap md:flex-center justify-center ">
             @foreach ($items as $item)
-                <div class="flex flex-col items-center justify-center p-2 uppercase text-center md:w-1/4">
+                <div class="flex flex-col items-center justify-center uppercase text-center py-2 w-1/2 md:w-1/4">
                     <p class="mb-2"><i class="fa fa-check text-pianote"></i> {!! $item !!}</p>
                 </div>
             @endforeach
@@ -176,19 +181,19 @@
     </section>
 
     <section class="" style="background: #ffffff;">
-        <div class="container max-w-4xl mx-auto py-4 md:py-10 flex justify-center flex-col md:flex-row">
-            <div class="flex flex-col items-center md:hidden">
-                <h2 class="my-6 text-center pb-2"><strong>Technique is <br/> <span class="underline">everything.</span>  </strong></h2>
+        <div class="container max-w-4xl mx-auto py-8 md:py-12 flex justify-center flex-col md:flex-row">
+            <div class="flex flex-col items-center md:hidden mb-6 sm:mb-0">
+                <h2 class="leading-tight mb-8 text-center"><strong>Technique is <br class="hidden sm:inline-block"> <span class="underline">everything.</span></strong></h2>
                 <video
                     src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
                     muted="" autoplay="" loop="" playsinline="" class="w-2/3"></video>
             </div>
 
-            <div class="sm:mb-10 md:w-2/3 p-4">
-                <h2 class="text-center hidden md:inline"><strong>Technique is
+            <div class="sm:mb-10 md:w-2/3 px-4">
+                <h2 class="text-center hidden md:inline-block mb-6"><strong>Technique is
                     <span class="underline">everything.</span>  </strong></h2>
 
-                <p class="text-black pt-10">
+                <p class="text-black">
                     It’s the foundation that will allow you to build your skills and abilities on the piano. It’s the key
                     that unlocks that feeling of musical freedom when your fingers feel like they have a mind of their own.
                     <br><br>
@@ -239,7 +244,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/approach.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/approach-03.webp',
                         'title' => 'Approach your piano practice',
                         'desc' =>
                             'Approach your piano practice in a way that’s <strong>musical</strong> -- and enhances your ear as well as your fingers.',
@@ -247,7 +252,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/pianote/products/30-day-better-technique/speed.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/pianote/products/30-day-better-technique/speed-03.webp',
                         'title' => 'Boost your speed',
                         'desc' =>
                             '<strong>Boost your speed and accuracy </strong>around the keyboard. You’ll learn practice secrets normally reserved for the greatest piano schools in the world.',
@@ -255,7 +260,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/fluidity.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/fluidity-03.webp',
                         'title' => 'Move around the keyboard',
                         'desc' =>
                             '<strong>Move around the keyboard</strong> with greater fluidity and independence. Playing will feel fun again, and you’ll be excited about the potential for the future.',
@@ -263,7 +268,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/lifetime.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/lifetime-03.webp',
                         'title' => 'Return to a technique routine',
                         'desc' => 'Return to a technique routine that will <strong>last you a <span class="text-pianote">lifetime<span></strong>.',
                     ],
@@ -324,10 +329,10 @@
             alt="Jordan Rudess Photo">
 
 
-        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-96 md:-mt-10">
+        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-52 md:-mt-10">
             <div class="flex flex-col justify-center items-center">
                 <h6 class="uppercase text-pianote">It’s time to meet your teacher…</h6>
-                    <h1 class="text-6xl pb-4 font-bebas tracking-widest">JORDAN RUDESS</h1>
+                <h1 class="text-6xl mb-4 font-bebas sm:tracking-widest">JORDAN RUDESS</h1>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="md:py-4 md:pt-10">
@@ -356,7 +361,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto max-w-6xl py-4 md:px-6 pb-10">
+        <div class="container mx-auto max-w-6xl py-4 px-4 md:px-6 pb-10">
             <h5 class="uppercase text-gray-400 text-center mb-3">See Jordan in action</h5>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div class="relative">
@@ -383,7 +388,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center py-4">
-                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500"
+                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"
                         href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
                         @mouseout="move = false">ENROLL NOW</a>
                 </div>
@@ -682,27 +687,20 @@
                                     next: 'hidden',
                                     pagination: 'splide__pagination bottom-0',
                                 },
-                                perPage: 2.8,
+                                perPage: 2.5,
                                 perMove: 1,
                                 type: 'slide',
-                                gap: 20,
                                 focus: 0,
                                 interval: 2000,
                                 drag: 'free',
                                 snap: false,
                                 lazyLoad: 'nearby',
                                 breakpoints: {
-                                    1300: {
-                                        perPage: 2.1,
-                                    },
                                     1023: {
-                                        perPage: 1.8,
+                                        perPage: 2.1,
                                     },
                                     767: {
                                         perPage: 1.3,
-                                    },
-                                    500: {
-                                        perPage: 1,
                                     },
                                 },
                             }).mount()
@@ -714,56 +712,58 @@
                                     @foreach ($weeks as $index => $week)
                                         <li class="splide__slide px-1">
                                             <!-- card -->
-                                            <div x-data="{ flipped: false }" class="rounded-xl overflow-hidden cursor-pointer"
-                                                @click="flipped = !flipped">
-                                                <!-- Front -->
-                                                <div class="relative w-[680px] h-[680px]">
+                                            <div class="relative">
+                                                <div x-data="{ flipped: false }" class="rounded-xl overflow-hidden cursor-pointer"
+                                                    @click="flipped = !flipped">
+                                                    <!-- Front -->
+                                                    <div class="relative w-full h-[740px]">
 
-                                                </div>
-
-                                                <div class="absolute inset-0 rounded-3xl text-white p-4 md:py-10 md:px-8 w-full bg-gray-900"
-                                                    x-show.transition.scale.5.duration.400ms="!flipped">
-                                                    <div class="flex items-center justify-center relative -mt-24">
-                                                    @if ($index % 2 == 0 && !empty($week['img']))
-                                                        <img class="w-full px-4" src="{{ $week['img'] }}" alt="">
-                                                    @endif
                                                     </div>
 
-                                                    <h5
-                                                        class="text-pianote uppercase text-left {{ $index % 2 == 0 ? '' : 'pt-24' }} tracking-tight">
-                                                        <strong>{!! $week['header1'] !!}</strong>
-                                                    </h5>
-                                                    <h4 class="leading-normal"><strong>{!! $week['header2'] !!}</strong></h4>
-                                                    <p class="py-4">{!! $week['desc'] !!}</p>
-                                                    <p class="text-pianote absolute bottom-[16px]">
-                                                        <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                        {!! $week['notes'] !!}
-                                                    </p>
-                                                </div>
-                                                <!-- Back  -->
-                                                <div class="absolute inset-0 rounded-3xl p-4 md:py-10 md:px-8 w-full bg-gray-800"
-                                                    x-show.transition.scale.5.duration.400ms="flipped">
-                                                    <h5
-                                                        class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
-                                                        <strong>{!! $week['header1'] !!}</strong>
-                                                    </h5>
-                                                    <p class="leading-normal text-white">
-                                                    {!! $week['header2'] !!}
-                                                    </p>
-                                                    <h5
-                                                        class="text-left py-4 tracking-tight text-white">
-                                                        <strong>{!! $week['backHeader'] !!}</strong>
-                                                    </h5>
-                                                    @foreach ($week['back'] as $paragraph)
-                                                        <div class="flex items-center">
-                                                            <i class="{{ $paragraph['icon'] }} text-pianote text-4xl"></i>
-                                                            <p class="text-white ml-2 pl-2 pb-2 lg:pb-6">{!! $paragraph['desc'] !!}</p>
+                                                    <div class="absolute inset-0 rounded-3xl text-white p-4 md:py-10 md:px-8 w-full bg-gray-900"
+                                                        x-show.transition.scale.5.duration.400ms="!flipped">
+                                                        <div class="flex items-center justify-center relative">
+                                                            @if (!empty($week['img']))
+                                                                <img class="h-28 lg:h-36 px-4" src="{{ $week['img'] }}" alt="">
+                                                            @endif
                                                         </div>
-                                                    @endforeach
-                                                    <p class="text-pianote absolute bottom-[16px]">
-                                                        <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                        See the weeks overview...
-                                                    </p>
+
+                                                        <h5
+                                                            class="text-pianote uppercase text-left tracking-tight">
+                                                            <strong>{!! $week['header1'] !!}</strong>
+                                                        </h5>
+                                                        <h4 class="leading-normal mb-4"><strong>{!! $week['header2'] !!}</strong></h4>
+                                                        <p class="pb-16">{!! $week['desc'] !!}</p>
+                                                        <p class="text-pianote absolute bottom-[16px]">
+                                                            <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                            {!! $week['notes'] !!}
+                                                        </p>
+                                                    </div>
+                                                    <!-- Back  -->
+                                                    <div class="absolute inset-0 rounded-3xl p-4 md:py-10 md:px-8 w-full bg-gray-800"
+                                                        x-show.transition.scale.5.duration.400ms="flipped">
+                                                        <h5
+                                                            class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
+                                                            <strong>{!! $week['header1'] !!}</strong>
+                                                        </h5>
+                                                        <p class="leading-normal text-white">
+                                                        {!! $week['header2'] !!}
+                                                        </p>
+                                                        <h5
+                                                            class="text-left py-4 tracking-tight text-white">
+                                                            <strong>{!! $week['backHeader'] !!}</strong>
+                                                        </h5>
+                                                        @foreach ($week['back'] as $paragraph)
+                                                            <div class="flex items-center">
+                                                                <i class="{{ $paragraph['icon'] }} text-pianote text-4xl"></i>
+                                                                <p class="text-white ml-2 pl-2 pb-2 lg:pb-6">{!! $paragraph['desc'] !!}</p>
+                                                            </div>
+                                                        @endforeach
+                                                        <p class="text-pianote absolute bottom-[16px]">
+                                                            <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                            See the weeks overview...
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -806,7 +806,7 @@
                             Reserve your spot today.
                         </p>
                     </div>
-                    <a class="w-full md:w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500" href="#customize-anchor"
+                    <a class="w-full md:w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide" href="#customize-anchor"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
                 </div>
                 </div>
@@ -866,7 +866,7 @@
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/30-days-technique-Jordan-Rudess-logo.svg"
                 alt="30 Day to Better Technique Logo">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Play-Along Lessons + weekly Q&As <br> with a
-                    real piano techer </strong></h2>
+                    real piano teacher. </strong></h2>
 
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
             <h6 class="leading-normal text-sm mb-4">
@@ -878,10 +878,10 @@
                                     x-text="hourText"></span></span>
                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
                                     x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                        </span>!</strong>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
+                                    x-text="secondText"></span></span>!
+                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
+                        </span></strong>
                 </span>
             </h6>
 
@@ -955,9 +955,9 @@
 
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Frequently Asked Questions</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
+        <div class="container mx-auto relative z-10 max-w-4xl">
+            <h2 class="mb-4 sm:mb-6"><strong>Still Have Questions?</strong></h2>
+            <div class="px-4">
                 @include('_partials.components.question-dropdown', [
                     'num' => '?',
                     'title' =>
@@ -1130,7 +1130,7 @@
             </div>
 
                 <div class="flex justify-center">
-                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500"
+                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"
                         href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
                         @mouseout="move = false">ENROLL NOW</a>
                 </div>
