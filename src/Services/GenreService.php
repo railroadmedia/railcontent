@@ -53,7 +53,7 @@ class GenreService
                                                       'head_shot_picture_url' => $avatar,
                                                   ]);
 
-        return $this->getById($genreId);
+        return $this->genreRepository->getById($genreId);
     }
 
     /**
@@ -65,7 +65,7 @@ class GenreService
     public function update($id, $name, $avatar)
     {
         //check if genre exist in the database
-        $genre = $this->getById($id);
+        $genre = $this->genreRepository->getById($id);
 
         if (is_null($genre)) {
             return $genre;
@@ -73,6 +73,6 @@ class GenreService
 
         $this->genreRepository->update($id, ['name' => $name, 'head_shot_picture_url' => $avatar]);
 
-        return $this->getById($id);
+        return $this->genreRepository->getById($id);
     }
 }

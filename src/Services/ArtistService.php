@@ -49,7 +49,7 @@ class ArtistService
                                                         'head_shot_picture_url' => $avatar,
                                                     ]);
 
-        return $this->getById($artistId);
+        return $this->artistRepository->getById($artistId);
     }
 
     /**
@@ -61,7 +61,7 @@ class ArtistService
     public function update($id, $name, $avatar)
     {
         //check if artist exist in the database
-        $artist = $this->getById($id);
+        $artist = $this->artistRepository->getById($id);
 
         if (is_null($artist)) {
             return $artist;
@@ -69,6 +69,6 @@ class ArtistService
 
         $this->artistRepository->update($id, ['name' => $name, 'head_shot_picture_url' => $avatar]);
 
-        return $this->getById($id);
+        return $this->artistRepository->getById($id);
     }
 }
