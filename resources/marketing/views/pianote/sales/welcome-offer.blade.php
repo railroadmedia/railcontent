@@ -67,10 +67,10 @@
         'pointFour' => '1000+ SONGS',
     ])
     <div class="sticky-trigger block"></div>
-    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&redirect=/order&locked=true&promo-code=welcome-offer"
-        class="promo-banner flex text-white items-center justify-center fixed mt-0 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+    <a href="#customize-anchor"
+        class="promo-banner flex text-white items-center justify-center -mt-12 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
         {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
-        <h3 class="inline-block font-bebas text-musora mx-0 pr-3">SAVE 25% ON YOUR FIRST YEAR</h3>
+        <h3 class="inline-block font-bebas mx-0 pr-3">SAVE 25% ON YOUR FIRST YEAR</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
 
         </p>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <br>
-                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Online piano lessons for all skill levels.</strong></h2>
+                <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Save 25% on your first year of lessons.</strong></h2>
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2">
                     <s class="opacity-50">$240</s>
                     <strong>$180</strong> <span class="text-musora">(Save 25%)</span>
@@ -106,4 +106,24 @@
             <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @endsection
