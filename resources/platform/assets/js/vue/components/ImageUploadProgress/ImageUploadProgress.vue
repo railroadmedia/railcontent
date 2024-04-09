@@ -1,23 +1,18 @@
 <script setup>
-import UploadProgress from "../UploadProgress/UploadProgress.vue";
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, inject } from "vue";
+import { v4 as uuidv4 } from 'uuid';
+import { useUserStore } from '../../../stores/user';
+import { storeToRefs } from 'pinia';
+import UploadProgress from "../UploadProgress/UploadProgress.vue";
 
 const props = defineProps({
   image: {
-    type: Blob,
-  },
-  userId: {
-    type: String,
-    default: 'random-uuid'
+    type: String, //base64 image string
   },
   uploadService: {
     type: String,
     default: ''
-  },
-  token: {
-    type: String,
-    default: null
   },
   fieldKey: {
     type: String,
@@ -28,6 +23,10 @@ const props = defineProps({
     default: null
   }
 });
+
+const userStore = useUserStore();
+const { userId } = storeToRefs(userStore);
+const token = inject('csrf_token');
 
 const emit = defineEmits(['onUploadDone', 'onUploadError']);
 
@@ -55,7 +54,7 @@ function dataURItoBlob(dataURI) {
 
 onMounted(() => {
   var formData = new FormData();
-  const newFileName = `${props.userId}_${Date.now()}.png`;
+  const newFileName = `${userId.value}_${Date.now()}_${uuidv4()}.png`;
 
   // We need dataURItoBlob for the BE to accept the data transfer, it does not accept base64 string.
   formData.append('file', dataURItoBlob(props.image), newFileName);
@@ -69,9 +68,9 @@ onMounted(() => {
       percentCompleted.value = progress * 100;
     }
   }).then(response => {
-    const options = props.token ? {
+    const options = token ? {
       headers: {
-        'X-CSRF-TOKEN': props.token
+        'X-CSRF-TOKEN': token
       }
     } : {};
     axios.post(props.uploadService, {
