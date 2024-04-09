@@ -70,6 +70,7 @@
                         >
                         <text-editor
                             :initial-value="post.postBody"
+                            :hasImageUploader="true"
                         />
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">

@@ -103,7 +103,7 @@ const headerProps = {
     <template v-slot:content>
       <div class="tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center md:tw-mt-0">
         <AvatarUpload @onImageUpload="handleImageUpload" :imgUrl="info.user.userProfilePictureUrl"
-          :userName="info.user.name" @onError="handleError" :userId="info.user.id" />
+          @onError="handleError" />
         <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-items-center" :initialValue="info.user.name"
           labelValue="Display Name" placeholder="Enter your display name..." inputOverride="tw-w-[90vw] md:tw-w-[471px]"
           @onChange="onInputChange" :showClearButton="true" />

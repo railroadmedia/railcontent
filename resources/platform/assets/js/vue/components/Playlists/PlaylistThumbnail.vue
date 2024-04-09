@@ -3,10 +3,6 @@
 
     //-----------Props-----------//
     const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
         listElement: {
             type: Object,
             default: {}
