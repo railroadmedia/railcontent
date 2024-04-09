@@ -45,7 +45,8 @@ import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
-import PageHeader from './vue/components/PageHeader/PageHeader'
+import PageHeader from './vue/components/PageHeader/PageHeader';
+import DeleteAccountModal from './vue/components/Modal/DeleteAccountModal';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -292,6 +293,7 @@ app.component('AppContainer', AppContainer)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
     .component('Stc', Stc)
+    .component('DeleteAccountModal', DeleteAccountModal)
     // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
 
