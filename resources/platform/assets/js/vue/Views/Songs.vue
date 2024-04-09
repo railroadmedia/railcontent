@@ -1,6 +1,7 @@
 <template>
     <!-- Header -->
     <!-- ADD NEW HEADER HERE -->
+    <PageHeader pageType="songs" title="Songs" iconName="headphones-filled" :infoData="headerInfoData" :ctas="ctaConfig" />
     
     <!-- Continue section -->
     <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-0 md:tw-px-8 tw-mt-[33px]">
@@ -19,12 +20,9 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../stores/user";
-
-import UnifiedHeader from '../components/Unified/UnifiedHeader';
+import { defineProps, computed } from 'vue';
+import PageHeader from '../components/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
-import SongRequest from "../components/Songs/SongRequest.vue";
 import CollectionWrapper from "../components/CollectionWrapper/CollectionWrapper.vue";
 
 const props = defineProps({
@@ -62,7 +60,18 @@ const props = defineProps({
     }
 });
 
-const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const ctaConfig = computed(() => {
+    return [
+        {
+            type: 'SongRequest'
+        },
+    ];
+});
+
+const headerInfoData = computed(() => {
+    if (props.artistsNumber !== undefined && props.songsNumber !== undefined) {
+        return [`${props.artistsNumber} Artists`, `${props.songsNumber} Songs`];
+    }
+})
 
 </script>

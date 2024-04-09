@@ -9,9 +9,11 @@
                     <slot name="button"></slot>
                 </template>
                 <template v-else>
+                    <i v-if="iconPosition === 'left'" :class="[faIconClass, text ? 'mr-1' : '']" aria-hidden="true"></i>
                     <span v-if="text">{{ text }}</span>
+                    <i v-if="iconPosition === 'right'" :class="[faIconClass, text ? 'ml-1' : '']"
+                        aria-hidden="true"></i>
                 </template>
-                <i :class="[faIconClass, text ? 'mr-1' : '']" aria-hidden="true"></i>
             </button>
         </div>
 
@@ -28,7 +30,11 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
     text: String,
-    faIconClass: String
+    faIconClass: String,
+    iconPosition: {
+        type: String,
+        default: 'left',
+    }
 });
 
 const showDropdown = ref(false);
