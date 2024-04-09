@@ -150,12 +150,8 @@
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
-        <img class="object-cover w-full relative z-0" style="height: 700px;"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/hero-image.jpeg"
-            alt="Description of the image">
-        <!-- <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop
-                        playsinline muted
-                        src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/book-bag/book-bag-hero-reel-wide-to-loop-1.mp4"></video> -->
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
 
 
     </header>
@@ -586,7 +582,7 @@
             In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and
             right hands.
             <br><br>
-            No more boring whole notes in your left hand. You’ll learn to play differenHand coordination trips up so many piano players and halts your progress.
+            No more boring whole notes in your left hand. You’ll learn to play different hand coordination trips up so many piano players and halts your progress.
             But with Jordan’s daily guidance, you’ll be amazing at how quickly you progress.',
                     'notes' => 'See what we’ll focus on...',
                     'backHeader' => 'Here’s how we’ll do it:',
@@ -669,7 +665,7 @@
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
                             'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put
-            all your skills together to play sometning Dream Theater-esque WITH Jordan.',
+            all your skills together to play something Dream Theater-esque WITH Jordan.',
                         ],
                     ],
                 ],
