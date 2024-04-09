@@ -235,6 +235,7 @@
 @section('body-data')
     x-data ="{
     trailer : false,
+    trailerM: false,
     lazyLoad: false,
     videoLoaded: false,
     waitlistModal: false,
@@ -247,9 +248,15 @@
     ])
     @include('_partials.components.shop.promo-banner', [
         'name' => '30-Day Independence',
-        'fullPrice' => floatval($productPrices['30-day-drummer']->price),
-        'price' => floatval($productPrices['30-day-drummer']->discounted_price),
+        'fullPrice' => floatval($productPrices['30-day-independence']->price),
+        'price' => floatval($productPrices['30-day-independence']->discounted_price),
         'noBreadcrumb' => true,
+    ])
+    
+    @include('_partials.components.sticky-bar', [
+    'link' => '#final',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp',
+    'text' => 'First 500 get a FREE limited edition QuietPad',
     ])
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
@@ -261,7 +268,7 @@
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
                         alt="30-Day Independence Logo">
                     @php
-                        $lines = ['Learn the drums', 'Improve your timing', 'Boost your creativity'];
+                        $lines = ['Unlock Your Limbs', 'Improve Your Coordination', 'Boost Your Independence'];
                     @endphp
 
                     <h2 class="rotater-text overflow-hidden">
@@ -276,12 +283,12 @@
                     </h2>
                     <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the next class <br
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
                                 class="inline lg:hidden">starting May 6th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
-                        x-on:click="trailer = true;">
+                        x-on:click="trailerM = true;">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
                         </div>
                     </div>
@@ -374,7 +381,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-trophy text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Play your favorite songs<br> with excellent timing & feel.</span>
+                            <span class="text-sm">Improve your 4-way <br>  coordination</span>
                         </p>
                     </div>
                 </div>
@@ -388,8 +395,8 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-tight mb-3"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
-            <div class="flex flex-col-reverse md:flex-row">
+            <h2 class="leading-tight pb-8"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
+            <!-- <div class="flex flex-col-reverse md:flex-row">
                 <div class="w-full md:w-1/2 text-left mb-2 md:mb-4 flex items-center">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores provident sequi explicabo ipsum
                         blanditiis incidunt aliquid architecto, illum non enim minima mollitia, repellendus vitae
@@ -403,7 +410,7 @@
                 <img class="w-full md:w-1/2" loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/section.jpg"
                     alt="Drummer">
-            </div>
+            </div> -->
 
 
             @php
@@ -422,7 +429,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
-                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Independence is designed to fit any schedule. You only need 10-minutes per day to improve your 4-way coordination.',
+                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Independence is designed to fit any schedule. You only need 10 minutes per day to improve your 4-way coordination.',
                     ],
                     [
                         'position' => 'left',
@@ -561,7 +568,7 @@
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
                                 <strong>JUN</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">1</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">3</strong></p>
                         </div>
                     </div>
                 </div>
@@ -591,7 +598,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/advanced.webp',
                         'title' => 'Advanced Drummers',
                         'description' =>
-                            'You’ve been playing for a while, holding down gigs and feeling confident in your drumming. 30-Day Indpendence will boost your 4-way coordination that will help you play new styles, create your own drum parts, and play everything easier. ',
+                            'You’ve been playing for a while, holding down gigs and feeling confident in your drumming. 30-Day Independence will boost your 4-way coordination that will help you play new styles, create your own drum parts, and play everything easier. ',
                     ],
                     [
                         'image' =>
@@ -622,9 +629,9 @@
             </div>
 
 
-            <h2 class="mt-20 lg:mt-24 mb-3"><strong>Playing makes perfect.</strong></h2>
-            <h6 class="leading-normal mb-11">For less than the cost of monthly private lessons<br
-                    class="hidden sm:inline"> you’ll get a 30 day program to transform your drumming.</h6>
+            <h2 class="mt-10 lg:mt-24 mb-3"><strong>Playing makes perfect.</strong></h2>
+            <h6 class="leading-normal mb-14 md:mb-11">For less than the cost of monthly private lessons<br
+                    class="hidden sm:inline"> you’ll get a 30-day program to transform your drumming.</h6>
 
             <div class="relative">
                 <p
@@ -695,23 +702,21 @@
     </section>
 
     <section style="background: #EFF7FF" class="px-5 sm:px-8 py-8 sm:py-12 lg:py-16 text-center">
-        <div class="container max-w-5xl mx-auto mb-10">
+        <div class="container max-w-4xl mx-auto mb-10">
             <h5 class="uppercase leading-relaxed opacity-50 mb-3">No theory. No homework.</h5>
             <img class="w-full sm:max-w-2xl mb-5 sm:mb-10"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play-logo.svg"
                 alt="Just Press Play Image" />
-            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                x-on:click="trailer = true;" role="button">
-                <i
-                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="sm:rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                    data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4"
-                    type="video/mp4" loop playsinline muted controls></video>
-                <img class="absolute inset-0 sm:rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play.jpg"
-                    alt="Press Play" />
+                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+                x-on:click="window.innerWidth <= 640 ? trailerM = true : trailer = true;">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                    x-ref="playToLearnVideo"
+                    x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                    x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                    data-src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/30-day-independence/30-day-independence-silent-reel.mp4" type="video/mp4" autoplay muted loop playsinline></video>
             </div>
-        </div>
+            </div>
     </section>
 
 
@@ -728,7 +733,7 @@
                     alt="important icon">
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
-            <h6 class="leading-normal  mt-4">330-Day Independence is a daily guided workout program for drummers — where
+            <h6 class="leading-normal  mt-4">30-Day Independence is a daily guided workout program for drummers — where
                 you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this,
                 students will not be able to join midway — <strong>and you need to register before the course begins on May
                     6th.</strong></h6>
@@ -814,12 +819,13 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg"
-                            alt="Larnell lewis">
-                        <p class="pl-4"><strong>Larnell Lewis</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Grammy-winner, Snarky Puppy</em><br>
-                            “Domino’s passion for drumming is infectious! It’s a great reminder that all we need is a love
-                            for music and drums to get started!”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/mike-portnoy.webp"
+                            alt="Mike Portnoy Photo">
+                        <p class="pl-4"><strong>Mike Portnoy</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Dream Theater</em><br>
+                            “El Estepario continues to push the boundaries of what is possible with drumming, creativity and independence… 
+                            proving to be one of the most inspiring (and popular) drummers on the internet.”
+
                         </p>
                     </div>
                 </div>
@@ -827,10 +833,10 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png"
-                            alt="Matt Mcguire">
-                        <p class="pl-4"><strong>Matt McGuire</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">The Chainsmokers</em><br>
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/chad-smith.webp"
+                            alt="Chad Smith Photo">
+                        <p class="pl-4"><strong>Chad Smith (Red Hot Chili Peppers)</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Red Hot Chili Peppers</em><br>
                             “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This
                             program not only provides education, I'm sure you'll be entertained throughout the process.”
                         </p>
@@ -840,12 +846,11 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg"
-                            alt="Dorothea Taylor">
-                        <p class="pl-4"><strong>Dorothea Taylor</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">The Godmother Of Drumming,<br> Educator
-                                for 50+ years</em><br>
-                            “Domino plays drums with high energy & passion which shows how much fun playing drums can be.”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp"
+                            alt="Nic Collins Photo">
+                        <p class="pl-4"><strong>Nic Collins</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Phil Collins/Genesis</em><br>
+                                “I’ve been a fan of Estepario’s ever since I saw one of his videos for the first time on my Instagram. He never ceases to blow my mind with his speed, precision, and creativity.”
                         </p>
                     </div>
                 </div>
@@ -853,12 +858,12 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg"
-                            alt="Jared Falk">
-                        <p class="pl-4"><strong>Jared Falk</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
-                            “Every-time I watch and listen to Domino Santantonio play drums I smile. She plays with joy,
-                            teaches with passion, and inspires drummers to take action.”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/gregg-bisonnette.webp"
+                            alt="Gregg Bissonette Photo">
+                        <p class="pl-4"><strong>Gregg Bissonette</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Ringo Starr & His All-Starr Band</em><br>
+                            “El Estepario Siberiano is one of the greatest drummers I have ever heard in my entire life. His dedication, technique, and tremendous showmanship, and just everything are a real inspiration to myself and to drummers all around the world.”
+
                         </p>
                     </div>
                 </div>
@@ -873,7 +878,7 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                     guaranteed.</strong></h2>
@@ -923,7 +928,7 @@
                 'firstImageHeight' => 'h-32',
                 'firstDealPrice' => 97,
                 'firstDealSub' => 'Just the course + 3 bonuses worth $102.95',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true',
+                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
                 'firstButtonText' => 'ENROLL NOW',
                 'firstDealExtra' => "One-time payment",
                 'whiteBg' => 'false',
@@ -943,7 +948,7 @@
                 'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $308.94",
                 'secondDealPrice' => '20/mo',
                 'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
+                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
                 'secondExtraBonuses' => [
                     '<strong>Annual Drumeo Membership</strong>',
                     '<strong>Free 30-Day Independence</strong>',
@@ -1091,11 +1096,11 @@
                 class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
                 <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
                 <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                    next edition of 30-Day Drummer is announced. </p>
+                     30-Day Independence is announced. </p>
                 @include('drumeo.lead-gen.partials.sign-up-form', [
                     'recaptchaKey' => $recaptchaKey,
-                    'formName' => '30 Day Chops Waitlist',
-                    'formId' => 'Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form',
+                    'formName' => '30 Day Independence Waitlist',
+                    'formId' => 'Drumeo - Engagement - Trigger - 30 Day Independence Waitlist - Web Form',
                     'buttonText' => 'Let Me Know ',
                     'stacked' => true,
                     'noSocial' => true,
@@ -1105,8 +1110,15 @@
     @endcomponent
     @include('_partials.components.video-modal', [
         'name' => 'trailer',
-        'video' => '884916532',
+        'video' => '931212517',
         'vimeo' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailerM',
+        'video' => '931214479',
+        'vimeo' => true,
+            'styles' => 'pb-[177%] bg-white',
     ])
 
     @include('drumeo.sales.partials._footer')

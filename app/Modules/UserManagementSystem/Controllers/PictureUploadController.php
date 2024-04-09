@@ -5,6 +5,7 @@ namespace Modules\UserManagementSystem\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\File;
 use Intervention\Image\ImageManager;
 
 class PictureUploadController extends Controller
@@ -20,23 +21,26 @@ class PictureUploadController extends Controller
 
     public function uploadPhoto(Request $request)
     {
-        $request->validate(['fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo']);
+        ['fieldKey' => $fieldKey, 'file' => $file] = $request->validate([
+            'fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo',
+            'file' => File::image()
+        ]);
 
-        $image = $this->imageManager->make($request->file('file'));
-
-        $image
+        $image = $this
+            ->imageManager
+            ->make($file)
             ->interlace()
-            ->encode('jpg', 75)
+            ->encode('jpg', 90)
             ->save();
 
-        $target = $request->get('fieldKey') . "/" .
-            pathinfo($request->get('target'))['filename'].'-'.time().'-'.user()->id.'.jpg';
+        $target = $fieldKey . "/" .
+            pathinfo($request->get('target'))['filename'] . '-' . time() . '-' . user()->id . '.jpg';
 
-        $success = Storage::disk('musora_web_platform_s3')->put($target, $request->file('file')->getContent());
+        $success = Storage::disk('musora_web_platform_s3')->put($target, $image->getEncoded());
 
         if ($success) {
-            user()->{$request->get('fieldKey')} =
-                config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').$target;
+            user()->{$fieldKey} =
+                config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url') . $target;
             user()->save();
 
             return response()->json(user()->toArray(), 201);
@@ -50,16 +54,18 @@ class PictureUploadController extends Controller
     // See: https://docs.vapor.build/1.0/resources/storage.html#file-uploads
     public function uploadPhotoFromS3FrontEnd(Request $request)
     {
-        $request->validate(['fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo']);
+        $request->validate(
+            ['fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo']
+        );
 
         $target = $request->get('fieldKey') . "/" .
-            'user-profile-picture-'.time().'-'.user()->id.'.jpg';
+            'user-profile-picture-' . time() . '-' . user()->id . '.jpg';
 
         $success = Storage::disk('musora_web_platform_s3')->copy($request->get('s3_bucket_path'), $target);
 
         if ($success) {
             user()->{$request->get('fieldKey')} =
-                config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').$target;
+                config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url') . $target;
 
             user()->save();
 

@@ -34,7 +34,7 @@ environments:
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
-    pre-production: # deploys the master branch
+    pre-production: # deploys the main branch
         domain:
             - 'pre-production.musora.com'
             - 'pre-production.drumeo.com'

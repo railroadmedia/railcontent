@@ -24,7 +24,7 @@
                     </v-toolbar-title>
 
                     <v-btn small
-                           href="https://github.com/railroadmedia/docusora/blob/master/docs/statistics/guides/musora-center/membership-reporting-tool-guide.md"
+                           href="https://github.com/railroadmedia/docusora/blob/main/docs/statistics/guides/musora-center/membership-reporting-tool-guide.md"
                            target="_blank">
                         View Guide
                     </v-btn>

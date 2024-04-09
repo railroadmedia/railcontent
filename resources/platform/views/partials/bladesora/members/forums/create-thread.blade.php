@@ -47,7 +47,9 @@
                     @endif
 
                     <text-editor field-key="first_post_content"
-                                 initial-value="{{ old('first_post_content') }}">
+                                 initial-value="{{ old('first_post_content') }}"
+                                :hasImageUploader="{{ boolval(true) }}"
+                                 >
                     </text-editor>
 
                     @if(!empty($errors->get('first_post_content')))
