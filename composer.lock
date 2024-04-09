@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4934936e708aa81ab73fed4478bf8a33",
+    "content-hash": "7c6bd08d64d2a7fc6f1c0e006455eb9f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.303.4",
+            "version": "3.304.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9ae5429f7699701cb158780cd287d1549f45ad32"
+                "reference": "29a79bac02997f3053559f6961a0e83622a14f88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9ae5429f7699701cb158780cd287d1549f45ad32",
-                "reference": "9ae5429f7699701cb158780cd287d1549f45ad32",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/29a79bac02997f3053559f6961a0e83622a14f88",
+                "reference": "29a79bac02997f3053559f6961a0e83622a14f88",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.303.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.0"
             },
-            "time": "2024-04-05T18:04:15+00:00"
+            "time": "2024-04-08T18:03:38+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -9592,16 +9592,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.1",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "shasum": ""
             },
             "require": {
@@ -9610,7 +9610,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -9625,7 +9625,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -9639,9 +9639,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/1.1"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "time": "2023-04-04T09:50:52+00:00"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/log",
@@ -10137,16 +10137,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.61",
+            "version": "dev-FSU-212",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3f94004b3e5c6844386cc6cd94403388db26572b"
+                "reference": "7e5d8c137e3a66a9fdb8b3250443ae9a14cab7da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3f94004b3e5c6844386cc6cd94403388db26572b",
-                "reference": "3f94004b3e5c6844386cc6cd94403388db26572b",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/7e5d8c137e3a66a9fdb8b3250443ae9a14cab7da",
+                "reference": "7e5d8c137e3a66a9fdb8b3250443ae9a14cab7da",
                 "shasum": ""
             },
             "require": {
@@ -10176,9 +10176,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.61"
+                "source": "https://github.com/railroadmedia/musora-api/tree/FSU-212"
             },
-            "time": "2024-04-03T16:27:22+00:00"
+            "time": "2024-04-09T06:54:09+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -11591,16 +11591,16 @@
         },
         {
             "name": "shopify/shopify-api",
-            "version": "v5.3.0",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shopify/shopify-api-php.git",
-                "reference": "8ff4648c360f5a4d5457f4c8f521e7bcaedba0d8"
+                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/8ff4648c360f5a4d5457f4c8f521e7bcaedba0d8",
-                "reference": "8ff4648c360f5a4d5457f4c8f521e7bcaedba0d8",
+                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/0365e3face702008e8232cc77fa5ba2fcebf993d",
+                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d",
                 "shasum": ""
             },
             "require": {
@@ -11612,9 +11612,9 @@
                 "firebase/php-jwt": "^5.2 || ^6.2",
                 "guzzlehttp/guzzle": "^7.0",
                 "guzzlehttp/psr7": "^2.0",
-                "php": "^8.0",
+                "php": "^8.1",
                 "psr/http-client": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0",
                 "psr/log": "^1.1 || ^2.0 || ^3.0",
                 "ramsey/uuid": "^4.1"
             },
@@ -11655,9 +11655,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Shopify/shopify-api-php/issues",
-                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.3.0"
+                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.4.0"
             },
-            "time": "2024-01-10T20:51:25+00:00"
+            "time": "2024-04-08T18:45:30+00:00"
         },
         {
             "name": "signifly/laravel-shopify",
@@ -17017,16 +17017,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.52.1",
+            "version": "v3.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "6e77207f0d851862ceeb6da63e6e22c01b1587bc"
+                "reference": "69a19093a9ded8d1baac62ed6c009b8bc148d008"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/6e77207f0d851862ceeb6da63e6e22c01b1587bc",
-                "reference": "6e77207f0d851862ceeb6da63e6e22c01b1587bc",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/69a19093a9ded8d1baac62ed6c009b8bc148d008",
+                "reference": "69a19093a9ded8d1baac62ed6c009b8bc148d008",
                 "shasum": ""
             },
             "require": {
@@ -17050,6 +17050,7 @@
             },
             "require-dev": {
                 "facile-it/paraunit": "^1.3 || ^2.0",
+                "infection/infection": "^0.27.11",
                 "justinrainbow/json-schema": "^5.2",
                 "keradus/cli-executor": "^2.1",
                 "mikey179/vfsstream": "^1.6.11",
@@ -17097,7 +17098,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.52.1"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.53.0"
             },
             "funding": [
                 {
@@ -17105,7 +17106,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-19T21:02:43+00:00"
+            "time": "2024-04-08T15:03:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -19702,6 +19703,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-FSU-212",
+            "alias": "v3.1.61",
+            "alias_normalized": "3.1.61.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
@@ -19716,6 +19723,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
     },
