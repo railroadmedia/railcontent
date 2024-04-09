@@ -205,14 +205,6 @@
     <!--  Dropdown  -->
     <section class="tw-bg-white tw-py-7">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-            <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ cohort['dropdown_title'] }}</h3>
-            <CohortDropdown
-                v-if="dropdowns.length > 0"
-                v-for="(dropdown, index) in dropdowns"
-                :key="`dropdown ${index}`"
-                :title="dropdown['title']"
-                :desc="dropdown['description']"
-            />
             <!--  Bottom title  -->
             <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ cohort['bottom_title'] }}</h3>
             <!--  Bottom description  -->
@@ -273,6 +265,15 @@
                     who have already registered.
                 </p>
             </div>
+
+            <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ cohort['dropdown_title'] }}</h3>
+            <CohortDropdown
+                v-if="dropdowns.length > 0"
+                v-for="(dropdown, index) in dropdowns"
+                :key="`dropdown ${index}`"
+                :title="dropdown['title']"
+                :desc="dropdown['description']"
+            />
         </div>
     </section>
 
