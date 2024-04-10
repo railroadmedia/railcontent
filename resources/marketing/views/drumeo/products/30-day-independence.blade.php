@@ -7,8 +7,8 @@
     <meta name="description" content="Improve your coordination with daily guided workouts.">
     <meta property="og:description" content="Unlock your creativity and speed around the drums.">
     <meta property="og:image"
-        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-drummer/season-4/share-image.jpg"
-        style="display: none;"> <!-- TODO -->
+        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-independence/share-image.jpg"
+        style="display: none;"> 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -261,7 +261,7 @@
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
         <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
+            <div class="flex flex-wrap sm:flex-nowrap items-center pt-4">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -334,7 +334,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                        style="padding-bottom: 98%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
                         x-on:click="trailer = true;">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
                                 class="fas fa-play"></i> Watch Trailer</div>
@@ -833,19 +833,6 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/chad-smith.webp"
-                            alt="Chad Smith Photo">
-                        <p class="pl-4"><strong>Chad Smith (Red Hot Chili Peppers)</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Red Hot Chili Peppers</em><br>
-                            “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This
-                            program not only provides education, I'm sure you'll be entertained throughout the process.”
-                        </p>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp"
                             alt="Nic Collins Photo">
                         <p class="pl-4"><strong>Nic Collins</strong><br>
@@ -858,12 +845,23 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/chad-smith.webp"
+                            alt="Chad Smith Photo">
+                        <p class="pl-4 m-0"><strong>Chad Smith (Red Hot Chili Peppers)</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Red Hot Chili Peppers</em><br>
+                            “All I know is that guy is a freak of nature.” <br>
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/gregg-bisonnette.webp"
                             alt="Gregg Bissonette Photo">
                         <p class="pl-4"><strong>Gregg Bissonette</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">Ringo Starr & His All-Starr Band</em><br>
                             “El Estepario Siberiano is one of the greatest drummers I have ever heard in my entire life. His dedication, technique, and tremendous showmanship, and just everything are a real inspiration to myself and to drummers all around the world.”
-
                         </p>
                     </div>
                 </div>
@@ -878,7 +876,7 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                     guaranteed.</strong></h2>

@@ -317,13 +317,18 @@
     </div>
 
     <section class="flex flex-col items-center text-white" style="background-color: #00101D;">
-        <img class="w-full hidden md:inline"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach.webp"
-            alt="Jordan Rudess Photo">
-        <img class="w-full inline md:hidden"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach-m.webp"
-            alt="Jordan Rudess Photo">
-
+        <picture>
+            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach.webp">
+            <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)//marketing/pianote/products/30-day-better-technique/coach.webp">
+            <img
+                class="w-full transition-opacity opacity-0 hidden md:inline"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)//marketing/pianote/products/30-day-better-technique/coach.webp"
+                alt="Jordan Rudess Photo"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
+        </picture>
+        <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach-m.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
 
         <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-52 md:-mt-10">
             <div class="flex flex-col justify-center items-center">
@@ -366,9 +371,10 @@
                             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>
                             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                                 data-src="" type="video/mp4" autoplay loop playsinline muted></video>
-                            <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0"
+                            <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/thumb-02-02.webp"
-                                alt="header image" fetchpriority="high" />
+                                alt="Thumbnail for piano technique tutorial video"/>
                         </div>
                     </div>
                     <div class="relative">
@@ -377,9 +383,10 @@
                             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-10"></i>
                             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                                 data-src="" type="video/mp4" autoplay loop playsinline muted></video>
-                            <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                            <img class="absolute inset-0 rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity"
+                                loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/thumb-02-01.webp"
-                                alt="header image" fetchpriority="high" />
+                                alt="Thumbnail for piano technique tutorial video "/>
                         </div>
                     </div>
                 </div>
@@ -460,7 +467,7 @@
             <div class="flex justify-center pt-10 gap-4">
                 @foreach ($gridItems as $gridItem)
                     <div class="relative text-center w-1/3 bg-white rounded-xl px-4 py-8 hidden md:inline">
-                        <img src="{{ $gridItem['image'] }}" alt="Image" class="mx-auto rounded-xl">
+                        <img src="{{ $gridItem['image'] }}"  loading="lazy" onload="this.classList.remove('opacity-0')" alt="Image of Jordan Rudess showing piano techniques" class="mx-auto rounded-xl opacity-0 transition-opacity">
                         <p class="mt-4 text-left">{{ $gridItem['text'] }}</p>
                         <div
                             class="w-16 h-16 bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
@@ -502,7 +509,7 @@
                                 @foreach ($gridItems as $gridItem)
                                     <li class="splide__slide px-4">
                                         <div class="relative text-center bg-white rounded-xl px-4 py-10">
-                                            <img src="{{ $gridItem['image'] }}" alt="Image" class="mx-auto rounded-l">
+                                            <img src="{{ $gridItem['image'] }}" alt="Image of Jordan Rudess showing piano techniques" class="mx-auto rounded-l">
                                             <p class="mt-4 text-left sm:text-sm">{{ $gridItem['text'] }}</p>
                                             <div
                                                 class="bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
@@ -518,10 +525,12 @@
 
                 <div class="px-4">
                     <div class="text-center">
-                        <img class="hidden md:inline h-20"
+                        <img class="hidden md:inline h-20 opacity-0 transition-opacity"
+                            loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/line-circle.svg"
                             alt="Red Lines">
-                        <img class="inline md:hidden h-16"
+                        <img class="inline md:hidden h-16 opacity-0 transition-opacity"
+                            loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/line-m.svg"
                             alt="Red Line">
                     </div>
@@ -692,7 +701,7 @@
 
                                                         <div class="flex items-center justify-center relative">
                                                             @if (!empty($week['img']))
-                                                                <img class="h-28 lg:h-36 px-4" src="{{ $week['img'] }}" alt="Collage showing pianists">
+                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity" src="{{ $week['img'] }}" alt="Collage showing pianists" loading="lazy" onload="this.classList.remove('opacity-0')">
                                                             @endif
                                                         </div>
 
@@ -712,7 +721,7 @@
 
                                                         <div class="flex items-center justify-center relative">
                                                             @if (!empty($week['imgBack']))
-                                                                <img class="h-28 lg:h-36 px-4" src="{{ $week['imgBack'] }}" alt="Collage showing pianists">
+                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity" src="{{ $week['imgBack'] }}" alt="Collage showing pianists" loading="lazy" onload="this.classList.remove('opacity-0')">
                                                             @endif
                                                         </div>
                                                         <h5 class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
@@ -752,8 +761,8 @@
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <img class="w-48 sm:w-64 lg:w-80 -mt-24 mb-4 sm:-mb-24 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/screen.webp"
-                    alt="Mobile Screen with 30-Day Independence">
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/screen.webp"
+                    alt="Mobile Screen with 30 Day To Better Technique">
                 <div class="flex-grow sm:pl-10">
                     <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get An Exclusive LIVE Lesson With Jordan</strong></h3>
                     <div class="text-center sm:text-left pb-4">
@@ -815,7 +824,7 @@
             @include('pianote._partials._guarantee-section', [
                 'containerWidth' => 'max-w-6xl',
                 'imageUrl' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/guarantee-collage.webp',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/guarantee-collage.webp',
             ])
         </div>
     </section>
@@ -912,6 +921,7 @@
                     ])
                 </div>
             </div>
+        </div>
     </section>
 
 
@@ -1044,7 +1054,9 @@
                         <h5 class="leading-normal">{{ $box }}</h5>
                     </div>
                 @endforeach
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal-m.webp" alt="Logo with arrows" class="w-2/3">
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal-m.webp" 
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                alt="Logo with arrows" class="w-2/3 opacity-0 transition-opacity">
                 <div class="w-auto max-w-5xl text-center">
                         <h3 class="leading-normal">Enroll today and make these 30 days <br> the most
                             <strong>impactful</strong> and <strong>memorable <br></strong> of
