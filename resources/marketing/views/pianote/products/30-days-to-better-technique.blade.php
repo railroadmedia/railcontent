@@ -545,29 +545,21 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week1.webp',
                     'header1' => 'WEEK 1',
                     'header2' => 'Building your finger independence.',
-                    'desc' => 'Strong fingers make everything easier on the piano.
-            <br><br>
-            And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to.
-            <br><br>
-            That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. 
-            After the first day your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
+                    'desc' => 'Strong fingers make everything easier on the piano. <br><br> And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to. <br><br> That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. After the first day, your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
                     'notes' => 'See what we’ll focus on...',
                     'backHeader' => 'Here’s what we’ll focus on:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Using musical patterns</strong>to build strong fingers. Each exercise will sound like music, not a boring technical exercise. 
-                            Jordan will show you exactly what notes to play in what order.',
+                            'desc' => '<strong>Using musical patterns</strong> to build strong fingers. Each exercise will sound like music, not a boring technical exercise. Jordan will show you exactly what notes to play in what order.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>Creating true separation for your fingers. </strong>
-                            Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
+                            'desc' => '<strong>Creating true separation for your fingers.</strong> Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Independence for EVERY finger.</strong>
-                            As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
+                            'desc' => '<strong>Independence for EVERY finger.</strong> As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
                         ],
                     ],
                 ],
@@ -576,18 +568,13 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week2.webp',
                     'header1' => 'WEEK 2',
                     'header2' => 'Separate your hands and coordinate your brain.',
-                    'desc' => 'Now you’ve built strong fingers, it’s time to use them.
-
-            <br><br>
-            In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands.
-            <br><br>
-            No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
+                    'desc' => 'Now you’ve built strong fingers, it’s time to use them. <br><br> In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands. <br><br> No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
                     'notes' => 'See what we’ll focus on...',
                     'backHeader' => 'Here’s how we’ll do it:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Patterns designed to break up your hands. </strong> You’ll lay a foundational rhythm with one hand while exploring new patterns and syncopation in the other.',
+                            'desc' => '<strong>Patterns designed to break up your hands.</strong> You’ll lay a foundational rhythm with one hand while exploring new patterns and syncopation in the other.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
@@ -604,13 +591,7 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week3.webp',
                     'header1' => 'Week 3',
                     'header2' => 'Speed. How to practice and play fast.',
-                    'desc' => 'Now it’s time to impress.
-            <br><br>
-            Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed.
-            <br><br>
-            Strap in, because it’s a wild ride.
-            <br><br>
-            But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
+                    'desc' => 'Now it’s time to impress. <br><br> Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed. <br><br> Strap in, because it’s a wild ride. <br><br> But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
                     'notes' => 'See what you’ll get...',
                     'backHeader' => 'Here’s what you’ll get:',
                     'back' => [
@@ -620,12 +601,11 @@
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing. </strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
+                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing.</strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. 
-                             Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
+                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
                         ],
                     ],
                 ],
@@ -634,13 +614,7 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week4.webp',
                     'header1' => 'Week 4',
                     'header2' => 'Creative expression. Make beautiful music.',
-                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4.
-            <br><br>
-            Because what’s the point of getting better technique?
-            <br><br>
-            To play beautiful music.
-            <br><br>
-            In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
+                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4. <br><br> Because what’s the point of getting better technique?<br><br>To play beautiful music. <br><br> In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
                     'notes' => 'See what you’ll end the course with:',
                     'backHeader' => 'You end the course with:',
                     'back' => [
@@ -650,17 +624,16 @@
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The mindset of a singer. </strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
+                            'desc' => '<strong>The mindset of a singer.</strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>A final performance with Jordan.</strong>  “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
+                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
                         ],
                     ],
                 ],
             ];
         @endphp
-
                 <div class="pl-2 md:pl-6 xl:pl-10">
                     <div x-data="{
                         init() {
@@ -771,12 +744,8 @@
                         </div>
                     </div>
                 </div>
-            
         </div>
     </section>
-
-
-
 
     <section class="text-black px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#ffffff;">
         <div class="container max-w-4xl mx-auto pb-10">
@@ -1085,31 +1054,37 @@
 
             <div class="hidden md:block py-6 md:py-10">
                 <div class="flex flex-wrap items-center justify-around text-left">
-                    <div class="w-auto max-w-xs border border-pianote rounded-xl p-8 text-center italic" style="background: #283049;">
+                    <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 text-center italic md:hidden lg:inline" style="background: #283049;">
                         <p class="leading-normal">If you’ve ever watched Jordan Rudess play and thought, “How does he do
                             that?”...</p>
                     </div>
                     <div class="w-full flex justify-center content-around py-3">
-                        <div class="w-auto max-w-xs flex flex-wrap content-around">
-                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-8 mb-4 text-center italic"
+                        <div class="w-auto max-w-xs flex flex-wrap content-around md:mr-4 lg:mr-0">
+                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 mb-4 text-center italic md:mt-10 lg:mt-0"
                                 style="background: #283049;">
                                 <p class="leading-normal">If you’re tired of playing the same songs over and over again, feeling like you lack the path to improvement…</p>
                             </div>
-                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-8 text-center italic"
+                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 text-center italic"
                                 style="background: #283049;">
                                 <p class="leading-normal">If you want to learn from the best in the world…</p>
                             </div>
                         </div>
-                        <div>
+                        <div class="w-full flex justify-center items-center flex-col">
+                      
+                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 text-center italic mb-4 lg:hidden" style="background: #283049;">
+                            <p class="leading-normal">If you’ve ever watched Jordan Rudess play and thought, “How does he do
+                                that?”...</p>
+                            </div>
+
                             <img
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal.webp">
                         </div>
-                        <div class="w-auto max-w-xs flex flex-wrap content-around">
-                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-8 mb-4 text-center italic"
+                        <div class="w-auto max-w-xs flex flex-wrap content-around md:ml-4 lg:ml-0">
+                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 mb-4 text-center italic md:mt-10 lg:mt-0"
                                 style="background: #283049;">
                                 <p class="leading-normal">If you feel like your fingers aren’t strong enough or fast enough…</p>
                             </div>
-                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-8 text-center italic"
+                            <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 text-center italic"
                                 style="background: #283049;">
                                 <p class="leading-normal">If you’re serious about improving your skills and developing as a pianist...</p>
                             </div>
