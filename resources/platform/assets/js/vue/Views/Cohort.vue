@@ -183,7 +183,7 @@
             </div>
             <div class="lg:tw-w-1/2 lg:tw-pr-4 tw-text-white tw-text-center md:tw-text-left">
                 <h1 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-5">{{ cohort['product_description_header'] }}</h1>
-                <p class="tw-text-base tw-mb-6">{{ cohort['product_description_body'] }}</p>
+                <p class="tw-text-base tw-mb-6" v-html="cohort['product_description_body']"></p>
                 <div class="tw-mb-5 tw-text-4xl">
                     <s class="tw-text-[rgba(255,255,255,0.7)]">${{ cohort['product_original_price'] }}</s> <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span> Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
                 </div>
@@ -216,7 +216,7 @@
                         <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-{{ $brand }} tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0">
                             <h1 class="lg:tw-text-[34px] tw-font-extrabold">Course Only</h1>
                             <h2 class="lg:tw-text-[26px] tw-font-extrabold">Free</h2>
-                            <i>Included in your membership</i>
+                            <i>Included in your membership.</i>
                             <button :class="`tw-btn-primary tw-bg-${brand} tw-my-5 hover:tw-bg-${brand}-600`" @click="enroll()">Enroll Now</button>
                             <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_description'] }}</p>
                         </div>
@@ -226,7 +226,7 @@
                             </div>
                             <h1 class="lg:tw-text-[34px] tw-font-extrabold tw-leading-tight">Course + <br /> {{ cohort['product_name'] }}</h1>
                             <h2 class="lg:tw-text-[26px]"><s class="tw-text-[rgba(0,0,0,0.6)]">${{ cohort['product_original_price'] }}</s> <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span></h2>
-                            <i>Included in your membership</i>
+                            <i>Complete purchase on next step.</i>
                             <button
                                 :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 hover:tw-bg-${brand}-600`"
                                 @click="enroll(true)"
