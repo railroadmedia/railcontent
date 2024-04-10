@@ -298,8 +298,8 @@ class CommentJsonController extends Controller
 
     /**
      * @param $id
+     * @param Request $request
      * @return JsonResponse
-     * @throws \Exception
      */
     public function report($id, Request $request)
     {
@@ -321,6 +321,7 @@ class CommentJsonController extends Controller
         $input['lines'][] = $comment['comment'];
         $input['lines'][] = $comment['url'];
         if ($request->has('issue')) {
+            $input['lines'][] = 'Reason:';
             $input['lines'][] = $request->get('issue');
         }
 

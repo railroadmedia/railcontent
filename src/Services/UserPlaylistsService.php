@@ -906,9 +906,10 @@ class UserPlaylistsService
 
     /**
      * @param $playlistId
+     * @param null $issue
      * @return \Illuminate\Http\JsonResponse
      */
-    public function reportPlaylist($playlistId)
+    public function reportPlaylist($playlistId, $issue = null)
     {
         $currentUser = auth()->user();
         $playlist =
@@ -934,6 +935,11 @@ class UserPlaylistsService
         $input['lines'] = ['The following playlist has been reported:'];
         $input['lines'][] =
             url()->route('platform.user.playlist', ['id' => $playlistId, 'brand' => $playlist['brand']]);
+
+        if ($issue) {
+            $input['lines'][] = 'Reason:';
+            $input['lines'][] = $issue;
+        }
 
         $input['unsubscribeLink'] = '';
         $input['alert'] = 'Playlist reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
