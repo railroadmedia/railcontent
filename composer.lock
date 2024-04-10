@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87def82ba24dfd0bcece9893662dd221",
+    "content-hash": "e9bba6473731078a3ca4270bff30faa5",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10137,16 +10137,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.62",
+            "version": "dev-MT-727",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3c74e71c6ab5c85f26cc1399bf6d151b8abfeb56"
+                "reference": "42136c59b7a0af8e1bfff1e0b98ef215d69971ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3c74e71c6ab5c85f26cc1399bf6d151b8abfeb56",
-                "reference": "3c74e71c6ab5c85f26cc1399bf6d151b8abfeb56",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/42136c59b7a0af8e1bfff1e0b98ef215d69971ee",
+                "reference": "42136c59b7a0af8e1bfff1e0b98ef215d69971ee",
                 "shasum": ""
             },
             "require": {
@@ -10176,9 +10176,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.62"
+                "source": "https://github.com/railroadmedia/musora-api/tree/MT-727"
             },
-            "time": "2024-04-10T06:59:23+00:00"
+            "time": "2024-04-10T08:23:55+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10375,12 +10375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "bc384639d8cc436ce6de94fde862b368fb0084d0"
+                "reference": "2ce78ac5d09287073ba150e26748e1ed0f42396c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/bc384639d8cc436ce6de94fde862b368fb0084d0",
-                "reference": "bc384639d8cc436ce6de94fde862b368fb0084d0",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2ce78ac5d09287073ba150e26748e1ed0f42396c",
+                "reference": "2ce78ac5d09287073ba150e26748e1ed0f42396c",
                 "shasum": ""
             },
             "require": {
@@ -10437,7 +10437,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/MT-727"
             },
-            "time": "2024-04-10T07:51:47+00:00"
+            "time": "2024-04-10T08:22:57+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19703,6 +19703,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-MT-727",
+            "alias": "v3.1.62",
+            "alias_normalized": "3.1.62.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
@@ -19717,6 +19723,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
     },
