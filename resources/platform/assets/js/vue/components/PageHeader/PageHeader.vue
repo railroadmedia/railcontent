@@ -2,56 +2,38 @@
   <PageHeaderLayout>
     <template #top-left>
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo" :infoData="ctasAndInfoInsideHero ? infoData : null"
-        :hasCtas="ctasAndInfoInsideHero && hasSecondaryCtas">
+        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo" :infoData="isSongsPage ? null : infoData">
         <template #header-info v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
               <span v-html="description" />
             </div>
-            <div v-if="ctasBesideHero || isCoachPage"
-              class="tw-flex tw-flex-col ctas-container sm:tw-hidden tw-flex-shrink-0">
-              <CtaResolver :ctas="secondaryCtas" />
-            </div>
-          </div>
-        </template>
-        <template #ctas>
-          <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
-            <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
-            <PageHeaderCtasBox :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
           </div>
         </template>
       </PageHeaderHero>
     </template>
-    <template #top-right v-if="ctasBesideHero">
-      <div class="tw-flex">
-        <ProgressText v-if="progress && isLearningPathPage" class="sm:tw-hidden" :progress="progressBarData.progress"
-          :alwaysShow="progressBarData.alwaysShow">
-          <template #progress-text v-if="progressBarData.labelText">{{ progressBarData.labelText }} -&nbsp;</template>
-        </ProgressText>
-        <PageHeaderCtasBox :class="{
-        'tw-hidden sm:tw-flex': ctasBesideHero && !isNotificationsPage,
-        'tw-flex': isNotificationsPage
-      }" :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
+    <template #top-right v-if="!isSongsPage">
+      <div :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+        <PageHeaderCtasBox class="tw-flex" :ctas="ctas" />
       </div>
     </template>
     <template #bottom-full>
-      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
-        <PageHeaderPrimaryCta class="tw-mt-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
-          :text="primaryCtaText" />
-      </div>
-      <div class="tw-mt-3 tw-justify-between tw-items-center tw-w-full" :class="{
-        'tw-flex': isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage,
-        'tw-flex sm:tw-hidden': isPackBundlePage || isForumThreadPage || isCoursePage,
-        'tw-hidden': !isSongsPage && !isLearningPathLevelPage && !isLearningPathCoursePage && !isCoursePage && !isPackBundlePage && !isForumThreadPage
+      <div class="tw-flex tw-items-center"
+        :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : isSongsPage ? 'tw-mt-4' : ''">
+        <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : ''">
+          <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+        </div>
+        <div class="tw-justify-between tw-items-center" :class="{
+        'tw-flex tw-w-full': isSongsPage,
+        'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
+        'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
       }">
-        <PageHeaderRowInfo v-if="isSongsPage || isLearningPathLevelPage || isLearningPathCoursePage" class="tw-self-end"
-          :infoData="infoData" />
-        <PageHeaderCtasBox
-          :class="progress && !isLearningPathLevelPage && !isLearningPathCoursePage ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
-          :progressBarData="progressBarData" :secondaryCtas="secondaryCtas" />
+          <PageHeaderRowInfo v-if="isSongsPage" class="tw-self-end" :infoData="infoData" />
+          <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
+            :ctas="secondaryCtas" />
+        </div>
       </div>
-      <PageHeaderProgressBar v-if="progress" :progress="progress" />
+      <PageHeaderProgressBar v-if="progress" :progress="progress" class="tw-mt-4" />
     </template>
   </PageHeaderLayout>
 </template>
@@ -65,8 +47,6 @@ import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
 import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
-import CtaResolver from './Ctas/CtaResolver.vue'
-import ProgressText from './ProgressBar/ProgressText.vue'
 
 const props = defineProps({
   pageType: String,
@@ -91,12 +71,13 @@ const props = defineProps({
 
 console.log(props)
 
-const primaryCtaProps = computed(() => props.ctas?.find(cta => cta.type === 'primary')?.props || {});
+const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
+const primaryCtaProps = computed(() => primaryCta.value?.props || {});
 const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
 const primaryCtaText = computed(() => primaryCtaProps.value.text);
 const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
-const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'primary') || []);
+const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'PageHeaderPrimaryCta') || []);
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
@@ -123,17 +104,17 @@ const isStudentFocusCatalougePage = computed(() => isStudentReviewPage.value || 
 const isForumsPage = computed(() => props.pageType === 'forums');
 const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
 
-const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value);
+// const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value || isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
 
-const ctasAndInfoInsideHero = computed(() => isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
+const ctasAndInfoInsideHero = false;
 
-const progressBarData = computed(() => {
-  return {
-    progress: props.progress,
-    labelText: props.progressLabelText,
-    alwaysShow: isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value
-  };
-});
+// const progressBarData = computed(() => {
+//   return {
+//     progress: props.progress,
+//     labelText: props.progressLabelText,
+//     alwaysShow: isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value
+//   };
+// });
 
 const logo = computed(() => {
   return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;

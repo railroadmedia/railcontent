@@ -1,31 +1,37 @@
 <template>
     <a v-if="url" :href="url"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
-        :class="[buttonConditionalClasses, disabledClasses]">
-        <MusoraIcon v-if="musoraIconName && iconPosition === 'left'" :icon-name="musoraIconName" :class="iconClass" />
-        <i v-else-if="faIconClass && iconPosition === 'left'" class="fas" :class="faIconClass"></i>
+        :class="[buttonConditionalClasses, disabledClasses, inDropdownClasses]">
+        <MusoraIcon v-if="musoraIconName && iconPositionOverride === 'left'" :icon-name="musoraIconName"
+            :class="iconClass" />
+        <i v-else-if="faIconClass && iconPositionOverride === 'left'" class="fas" :class="[faIconClass, iconClass]"></i>
 
         <span v-if="text" :class="[textSpanClass]">
             {{ text }}
         </span>
 
-        <MusoraIcon v-if="musoraIconName && iconPosition === 'right'" :icon-name="musoraIconName" :class="iconClass" />
-        <i v-else-if="faIconClass && iconPosition === 'right'" class="fas" :class="faIconClass"></i>
+        <MusoraIcon v-if="musoraIconName && iconPositionOverride === 'right'" :icon-name="musoraIconName"
+            :class="iconClass" />
+        <i v-else-if="faIconClass && iconPositionOverride === 'right'" class="fas"
+            :class="[faIconClass, iconClass]"></i>
 
         <slot />
     </a>
     <button v-else @click.prevent="emitClick"
         class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-mb-0 tw-p-0 tw-min-h-0 hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17]"
-        :class="[buttonConditionalClasses, disabledClasses]">
-        <MusoraIcon v-if="musoraIconName && iconPosition === 'left'" :icon-name="musoraIconName" :class="iconClass" />
-        <i v-else-if="faIconClass && iconPosition === 'left'" class="fas" :class="faIconClass"></i>
+        :class="[buttonConditionalClasses, disabledClasses, inDropdownClasses]">
+        <MusoraIcon v-if="musoraIconName && iconPositionOverride === 'left'" :icon-name="musoraIconName"
+            :class="iconClass" />
+        <i v-else-if="faIconClass && iconPositionOverride === 'left'" class="fas" :class="[faIconClass, iconClass]"></i>
 
         <span v-if="text" :class="[textSpanClass]">
             {{ text }}
         </span>
 
-        <MusoraIcon v-if="musoraIconName && iconPosition === 'right'" :icon-name="musoraIconName" :class="iconClass" />
-        <i v-else-if="faIconClass && iconPosition === 'right'" class="fas" :class="faIconClass"></i>
+        <MusoraIcon v-if="musoraIconName && iconPositionOverride === 'right'" :icon-name="musoraIconName"
+            :class="iconClass" />
+        <i v-else-if="faIconClass && iconPositionOverride === 'right'" class="fas"
+            :class="[faIconClass, iconClass]"></i>
 
         <slot />
     </button>
@@ -51,14 +57,26 @@ const props = defineProps({
     showTextMobileHideDesktop: Boolean,
     showAllAlways: Boolean,
     disabled: Boolean,
+    inDropdown: {
+        type: Boolean,
+        default: false,
+    },
 });
+
+// const textLowercase = computed(() => {
+//     return props.text ? props.text.toLowerCase() : '';
+// });
 
 const hasIcon = computed(() => {
     return props.faIconClass || props.musoraIconName;
 });
 
 const iconClass = computed(() => {
-    return ['tw-w-6 tw-h-6'];
+    return props.inDropdown ? 'tw-w-6' : 'tw-w-6';
+});
+
+const iconPositionOverride = computed(() => {
+    return props.inDropdown ? 'left' : props.iconPosition;
 });
 
 const disabledClasses = computed(() => {
@@ -68,7 +86,7 @@ const disabledClasses = computed(() => {
 const textSpanClass = computed(() => {
     const classes = [];
     if (hasIcon.value) {
-        if (!props.showAllAlways) {
+        if (!props.showAllAlways && !props.inDropdown) {
             if (props.showTextMobileHideDesktop) {
                 classes.push('sm:tw-hidden');
             }
@@ -76,7 +94,7 @@ const textSpanClass = computed(() => {
                 classes.push('tw-hidden sm:tw-block');
             }
         }
-        classes.push(props.iconPosition === 'left' ? 'ml-1' : 'mr-1');
+        classes.push(iconPositionOverride.value === 'left' ? 'ml-1' : 'mr-1');
     }
     return classes
 });
@@ -84,7 +102,7 @@ const textSpanClass = computed(() => {
 const buttonConditionalClasses = computed(() => {
     const classes = [];
     if (props.text && hasIcon.value) {
-        if (!props.showAllAlways) {
+        if (!props.showAllAlways && !props.inDropdown) {
             if (props.showTextMobileHideDesktop) {
                 classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto sm:tw-p-0 sm:tw-w-[32px] sm:tw-h-[32px] md:tw-w-[40px] md:tw-h-[40px]');
             }
@@ -93,16 +111,26 @@ const buttonConditionalClasses = computed(() => {
             }
         }
         else {
-            classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto md:tw-h-[40px]');
+            if (!props.inDropdown) {
+                classes.push('tw-px-6 tw-py-1')
+            }
+            classes.push('tw-w-auto tw-h-auto md:tw-h-[40px]');
+
         }
     }
     else if (hasIcon.value) {
-        classes.push('tw-p-0 tw-w-[32px] tw-h-[32px] md:tw-w-[40px] md:tw-h-[40px]')
+        classes.push('tw-p-0 tw-w-[40px] md:tw-h-[40px]')
     }
     else if (props.text) {
         classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto md:tw-h-[40px]')
     }
     return classes
+});
+
+// set rounded to none and hover border to none if in dropdown. set bg on hover to alternate with text while considering dark mode
+const inDropdownClasses = computed(() => {
+    console.log(props.inDropdown);
+    return props.inDropdown ? 'tw-text-sm tw-font-sans tw-capitalize tw-px-3 tw-py-3 tw-justify-start tw-w-full tw-rounded-none tw-border-none tw-bg-[#000C17] tw-text-white dark:tw-text-[#000C17] hover:tw-bg-white hover:tw-text-[#000C17] hover:dark:tw-text-[#000C17]' : '';
 });
 
 const emit = defineEmits(['click']);

@@ -1,5 +1,5 @@
 <template>
-    <PageHeaderCta :text="text" :faIconClass="faIconClass" :data-open-modal="modalId" showAllAlways iconPosition="right" />
+    <PageHeaderCta v-bind="$attrs" :text="text" :faIconClass="faIconClass" :data-open-modal="modalId" showAllAlways iconPosition="right" />
     <div :id="modalId" class="modal">
         <div class="tw-text-[#00101D] tw-flex tw-flex-col tw-rounded-[10px] tw-shadow tw-p-[30px] tw-relative"
             style="background: white !important;">

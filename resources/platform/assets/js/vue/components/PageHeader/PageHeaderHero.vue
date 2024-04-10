@@ -19,10 +19,10 @@
     ]">
         <div class="tw-flex">
           <template v-if="additionalImgSrc">
-            <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] sm:tw-h-[86px]">
+            <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] md:tw-h-[86px]">
           </template>
           <template v-else>
-            <span v-if="title" class="tw-text-[20px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white"
+            <span v-if="title" class="tw-text-[28px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white"
               :class="{ 'tw-capitalize': !heroImgClasses }">
               {{ title }}
             </span>

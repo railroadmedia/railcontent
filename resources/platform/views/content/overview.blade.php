@@ -62,11 +62,11 @@
         $headerData['infoData'] = $infoDataStrArr;
         $headerData['ctas'] = [
             [
-                'type' => 'primary',
+                'type' => 'PageHeaderPrimaryCta',
                 'props' => [
                     'text' => 'Start first lesson',
                     'url' => $nextLessonUrl,
-                    'icon' => 'fa-play'
+                    'faIconClass' => 'fa-play'
                 ]
             ],
             [

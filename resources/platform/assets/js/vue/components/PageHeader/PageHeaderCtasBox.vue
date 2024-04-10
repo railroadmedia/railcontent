@@ -1,33 +1,36 @@
 <template>
-    <div class="tw-flex tw-items-center tw-flex-grow tw-justify-end">
-        <ProgressText v-if="progress" :progress="progress" :alwaysShow="alwaysShowProgress">
-            <template #progress-text v-if="progressText">{{ progressText }} -&nbsp;</template>
-        </ProgressText>
-        <div class="ctas-container tw-flex-shrink-0">
-            <CtaResolver :ctas="secondaryCtas" />
+    <div class="tw-items-center tw-flex-grow tw-justify-end"
+        :class="displayMobileDropdown ? 'tw-hidden sm:tw-flex' : ''">
+        <div class="ctas-container tw-flex-shrink-0 tw-flex">
+            <CtaResolver :ctas="ctas" />
         </div>
     </div>
+    <MobileCtaDropdown v-if="displayMobileDropdown" class="sm:tw-hidden" :ctas="secondaryCtas" />
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
-import ProgressText from './ProgressBar/ProgressText.vue';
+import { defineProps, computed } from 'vue';
 import CtaResolver from './Ctas/CtaResolver.vue';
-
+import MobileCtaDropdown from './MobileCtaDropdown.vue';
 const props = defineProps({
-    progressBarData: {
-        type: Object,
-        default: null,
-    },
-    secondaryCtas: {
+    ctas: {
         type: Array,
         default: () => [],
     },
 });
 
-const progress = computed(() => props.progressBarData?.progress);
-const progressText = computed(() => props.progressBarData?.labelText);
-const alwaysShowProgress = computed(() => props.progressBarData?.alwaysShow);
+const secondaryCtas = computed(() =>
+    props.ctas.filter(cta =>
+        cta.type !== 'PageHeaderPrimaryCta' &&
+        (cta.type !== 'ResetProgressCta' || cta.props.progress > 0) &&
+        (cta.type !== 'DownloadResourcesCta' || cta.props.resources.length > 0)
+    )
+);
+
+console.log(secondaryCtas.value);
+
+// only display mobile dropdown if there are more than 1 secondary CTAs
+const displayMobileDropdown = secondaryCtas.value.length >= 1;
 </script>
 <style lang="scss" scoped>
 .ctas-container {
