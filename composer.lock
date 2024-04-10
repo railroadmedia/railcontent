@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17eaf5afc72022a1b010320640c705fe",
+    "content-hash": "87def82ba24dfd0bcece9893662dd221",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10371,16 +10371,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.73",
+            "version": "dev-MT-727",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "d3a7614e8689b6df61f9c78a2d5225c48a62b685"
+                "reference": "bc384639d8cc436ce6de94fde862b368fb0084d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d3a7614e8689b6df61f9c78a2d5225c48a62b685",
-                "reference": "d3a7614e8689b6df61f9c78a2d5225c48a62b685",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/bc384639d8cc436ce6de94fde862b368fb0084d0",
+                "reference": "bc384639d8cc436ce6de94fde862b368fb0084d0",
                 "shasum": ""
             },
             "require": {
@@ -10435,9 +10435,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.73"
+                "source": "https://github.com/railroadmedia/railcontent/tree/MT-727"
             },
-            "time": "2024-04-10T06:24:36+00:00"
+            "time": "2024-04-10T07:51:47+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19707,11 +19707,18 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-MT-727",
+            "alias": "v2.1.73",
+            "alias_normalized": "2.1.73.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
