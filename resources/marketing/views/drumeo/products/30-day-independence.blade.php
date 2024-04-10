@@ -7,8 +7,8 @@
     <meta name="description" content="Improve your coordination with daily guided workouts.">
     <meta property="og:description" content="Unlock your creativity and speed around the drums.">
     <meta property="og:image"
-        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-drummer/season-4/share-image.jpg"
-        style="display: none;"> <!-- TODO -->
+        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-independence/share-image.jpg"
+        style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -334,7 +334,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                        style="padding-bottom: 98%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
                         x-on:click="trailer = true;">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
                                 class="fas fa-play"></i> Watch Trailer</div>
@@ -878,7 +878,7 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                     guaranteed.</strong></h2>
