@@ -252,7 +252,7 @@
         'price' => floatval($productPrices['30-day-independence']->discounted_price),
         'noBreadcrumb' => true,
     ])
-    
+
     @include('_partials.components.sticky-bar', [
     'link' => '#final',
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp',
@@ -823,7 +823,7 @@
                             alt="Mike Portnoy Photo">
                         <p class="pl-4"><strong>Mike Portnoy</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">Dream Theater</em><br>
-                            “El Estepario continues to push the boundaries of what is possible with drumming, creativity and independence… 
+                            “El Estepario continues to push the boundaries of what is possible with drumming, creativity and independence…
                             proving to be one of the most inspiring (and popular) drummers on the internet.”
 
                         </p>
@@ -928,7 +928,7 @@
                 'firstImageHeight' => 'h-32',
                 'firstDealPrice' => 97,
                 'firstDealSub' => 'Just the course + 3 bonuses worth $102.95',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
+                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[quietpad-estepario]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
                 'firstButtonText' => 'ENROLL NOW',
                 'firstDealExtra' => "One-time payment",
                 'whiteBg' => 'false',
@@ -948,7 +948,7 @@
                 'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $308.94",
                 'secondDealPrice' => '20/mo',
                 'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
+                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad-estepario]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
                 'secondExtraBonuses' => [
                     '<strong>Annual Drumeo Membership</strong>',
                     '<strong>Free 30-Day Independence</strong>',
