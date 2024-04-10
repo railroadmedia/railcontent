@@ -689,7 +689,7 @@
                                                     <div x-ref="front" class="absolute inset-0 rounded-3xl text-white p-8 md:py-6 md:px-4 lg:px-8 w-full bg-gray-900 transition-transform duration-700"
                                                         style="backface-visibility: hidden; transform-style: preserve-3d;"
                                                         :class="{ 'rotate-y-180': flipped }">
-                                                        
+
                                                         <div class="flex items-center justify-center relative">
                                                             @if (!empty($week['img']))
                                                                 <img class="h-28 lg:h-36 px-4" src="{{ $week['img'] }}" alt="Collage showing pianists">
@@ -880,7 +880,7 @@
                         'cardSubtitle' => 'Just the course.',
                         'cardPrice' => '97',
                         'cardDiscount' => '127',
-                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[pianote_access_30-days]=1&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[pianote_access_30-days]=1&promo-code=technique-launch&locked=true',
                         'badgeColor' => 'musora',
                         'extraBonuses' => [
                             '<strong>30-Days To Better Technique</strong> <span class="italic text-xs">(Lifetime Access)</span>',
@@ -900,7 +900,7 @@
                         'cardSubtitle' => "The course + a Pianote metronome",
                         'cardPrice' => '127',
                         'cardDiscount' => '296',
-                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
                             '<strong>30-Days To Better Technique</strong> <span class="italic text-xs">(Lifetime Access)</span>',
@@ -1070,7 +1070,7 @@
                             </div>
                         </div>
                         <div class="w-full flex justify-center items-center flex-col">
-                      
+
                             <div class="w-auto max-w-xs border border-pianote rounded-xl p-6 text-center italic mb-4 lg:hidden" style="background: #283049;">
                             <p class="leading-normal">If you’ve ever watched Jordan Rudess play and thought, “How does he do
                                 that?”...</p>
