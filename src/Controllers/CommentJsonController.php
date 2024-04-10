@@ -60,15 +60,13 @@ class CommentJsonController extends Controller
             $request->get('mineOnly', false) == "true",
         );
 
-        return reply()->json(
-            $commentData['results'], [
-                'totalResults' => $commentData['total_results'],
-                'transformer' => DataTransformer::class,
-                'meta' => [
-                    'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
-                ],
-            ]
-        );
+        return reply()->json($commentData['results'], [
+                                                        'totalResults' => $commentData['total_results'],
+                                                        'transformer' => DataTransformer::class,
+                                                        'meta' => [
+                                                            'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
+                                                        ],
+                                                    ]);
     }
 
     /**
@@ -98,12 +96,9 @@ class CommentJsonController extends Controller
             new NotAllowedException('Only registered user can add comment. Please sign in.')
         );
 
-        return reply()->json(
-            [$comment],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return reply()->json([$comment], [
+                                           'transformer' => DataTransformer::class,
+                                       ]);
     }
 
     public function assignModerator(int $commentId)
@@ -113,10 +108,7 @@ class CommentJsonController extends Controller
             throw  new NotAllowedException('Comment was assigned to another moderator.');
         }
         //update comment with the data sent on the request
-        $comment = $this->commentService->update(
-            $commentId,
-            ['assigned_moderator_id' => auth()->id() ?? null]
-        );
+        $comment = $this->commentService->update($commentId, ['assigned_moderator_id' => auth()->id() ?? null]);
 
         //if the user it's not logged in into the application
         throw_if(
@@ -133,25 +125,19 @@ class CommentJsonController extends Controller
         //if the update method response it's null the comment not exist; we throw the proper exception
         throw_if(
             is_null($comment),
-            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+            new NotFoundException('Update failed, comment not found with id: '.$commentId)
         );
 
-        return reply()->json(
-            [$comment],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return reply()->json([$comment], [
+                                           'transformer' => DataTransformer::class,
+                                           'code' => 201,
+                                       ]);
     }
 
     public function unassignModerator(int $commentId)
     {
         //update comment with the data sent on the request
-        $comment = $this->commentService->update(
-            $commentId,
-            ['assigned_moderator_id' => null]
-        );
+        $comment = $this->commentService->update($commentId, ['assigned_moderator_id' => null]);
 
         //if the user it's not logged in into the application
         throw_if(
@@ -168,16 +154,13 @@ class CommentJsonController extends Controller
         //if the update method response it's null the comment not exist; we throw the proper exception
         throw_if(
             is_null($comment),
-            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+            new NotFoundException('Update failed, comment not found with id: '.$commentId)
         );
 
-        return reply()->json(
-            [$comment],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return reply()->json([$comment], [
+                                           'transformer' => DataTransformer::class,
+                                           'code' => 201,
+                                       ]);
     }
 
     /**
@@ -193,17 +176,14 @@ class CommentJsonController extends Controller
         //update comment with the data sent on the request
         $comment = $this->commentService->update(
             $commentId,
-            array_intersect_key(
-                $request->all(),
-                [
-                    'comment' => '',
-                    'content_id' => '',
-                    'parent_id' => '',
-                    'user_id' => '',
-                    'display_name' => '',
-                    'conversation_status' => '',
-                ]
-            )
+            array_intersect_key($request->all(), [
+                                                   'comment' => '',
+                                                   'content_id' => '',
+                                                   'parent_id' => '',
+                                                   'user_id' => '',
+                                                   'display_name' => '',
+                                                   'conversation_status' => '',
+                                               ])
         );
 
         //if the user it's not logged in into the application
@@ -221,16 +201,13 @@ class CommentJsonController extends Controller
         //if the update method response it's null the comment not exist; we throw the proper exception
         throw_if(
             is_null($comment),
-            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+            new NotFoundException('Update failed, comment not found with id: '.$commentId)
         );
 
-        return reply()->json(
-            [$comment],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return reply()->json([$comment], [
+                                           'transformer' => DataTransformer::class,
+                                           'code' => 201,
+                                       ]);
     }
 
     /**
@@ -248,7 +225,7 @@ class CommentJsonController extends Controller
         //if the delete method response it's null the comment not exist; we throw the proper exception
         throw_if(
             is_null($deleted),
-            new NotFoundException('Delete failed, comment not found with id: ' . $commentId)
+            new NotFoundException('Delete failed, comment not found with id: '.$commentId)
         );
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
@@ -286,12 +263,9 @@ class CommentJsonController extends Controller
             new NotAllowedException('Only registered user can reply to comment. Please sign in.')
         );
 
-        return reply()->json(
-            [$reply],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return reply()->json([$reply], [
+                                         'transformer' => DataTransformer::class,
+                                     ]);
     }
 
     /**
@@ -316,13 +290,10 @@ class CommentJsonController extends Controller
             '-id'
         );
 
-        return reply()->json(
-            $commentData['results'],
-            [
-                'totalResults' => $commentData['total_results'],
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return reply()->json($commentData['results'], [
+                                                        'totalResults' => $commentData['total_results'],
+                                                        'transformer' => DataTransformer::class,
+                                                    ]);
     }
 
     /**
@@ -330,7 +301,7 @@ class CommentJsonController extends Controller
      * @return JsonResponse
      * @throws \Exception
      */
-    public function report($id)
+    public function report($id, Request $request)
     {
         $comment = $this->commentService->get($id);
 
@@ -343,42 +314,35 @@ class CommentJsonController extends Controller
 
         $this->commentService->reportComment($id);
 
-        $input['subject'] =
-            'Comment reported by ' .
-            $currentUser['display_name'] .
-            " (" .
-            $currentUser['email'] .
-            ")";
+        $input['subject'] = 'Comment reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
         $input['sender-address'] = config('mailora.report-sender-address');
         $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following comment has been reported:'];
         $input['lines'][] = $comment['comment'];
         $input['lines'][] = $comment['url'];
+        if ($request->has('issue')) {
+            $input['lines'][] = $request->get('issue');
+        }
 
         $input['unsubscribeLink'] = '';
-        $input['alert'] =
-            'Comment reported by ' .
-            $currentUser['display_name'] .
-            " (" .
-            $currentUser['email'] .
-            ")";
+        $input['alert'] = 'Comment reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
 
-        $input['logo'] = config('mailora.' . $brand . '.logo-link');
+        $input['logo'] = config('mailora.'.$brand.'.logo-link');
         $input['type'] = 'layouts/inline/alert';
-        $input['recipient'] = config('mailora.' . $brand . '.report-comment-recipient');
+        $input['recipient'] = config('mailora.'.$brand.'.report-comment-recipient');
 
         try {
             $this->mailService->sendSecure($input);
         } catch (\Exception $exception) {
             return response()->json([
-                "success" => false,
-                "message" => $exception->getMessage()
-            ], 500);
+                                        "success" => false,
+                                        "message" => $exception->getMessage(),
+                                    ], 500);
         }
 
         return response()->json([
-            "success" => true,
-            "message" => "The comment was reported"
-        ], 200);
+                                    "success" => true,
+                                    "message" => "The comment was reported",
+                                ], 200);
     }
 }
