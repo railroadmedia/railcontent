@@ -113,20 +113,20 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="30 Day to Better Technique Logo" class="h-20 md:h-28 lg:h-44 my-4 md:my-10"
+                <img alt="30 Day to Better Technique Logo" class="h-32 sm:h-40 lg:h-48 my-4 md:my-10"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/header-logo.svg"><br>
                 <h6 class="italic">What would happen if you learned piano from <br> the <strong> best
                         keyboardist in the world?</strong></h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
-                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-pianote hover:text-white"
+                    <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
                         @click="trailer = true;">
                         &nbsp;Watch Trailer
                     </div>
-                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-pianote hover:text-white"
+                    <div class="sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailerM = true;">
                          &nbsp;Watch Trailer
                     </div>
-                    <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500" href="#customize-anchor"
+                    <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500 anchor-slide" href="#customize-anchor"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
                 </div>
             </div>
@@ -150,24 +150,25 @@
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
-        <img class="object-cover w-full relative z-0" style="height: 700px;"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/hero-image.jpeg"
-            alt="Description of the image">
-        <!-- <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop
-                        playsinline muted
-                        src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/book-bag/book-bag-hero-reel-wide-to-loop-1.mp4"></video> -->
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
 
 
     </header>
 
     @php
-        $items = ['Improve Your <br class="hidden md:inline lg:hidden"> Playing', '30 Days of <br class="hidden md:inline lg:hidden"> Lessons', 'Practice with <br class="hidden md:inline lg:hidden"> Jordan', 'Guaranteed <br class="hidden md:inline lg:hidden"> results'];
+        $items = [
+            'Improve Your <br class="inline lg:hidden"> Playing',
+            '30 Days of <br class="inline lg:hidden"> Lessons',
+            'Practice with <br class="inline lg:hidden"> Jordan',
+            'Guaranteed <br class="inline lg:hidden"> results'
+            ];
     @endphp
 
     <section class="bg-black text-white p-4 md:px-20">
         <div class="container max-w-4xl mx-auto flex flex-wrap md:flex-center justify-center ">
             @foreach ($items as $item)
-                <div class="flex flex-col items-center justify-center p-2 uppercase text-center md:w-1/4">
+                <div class="flex flex-col items-center justify-center uppercase text-center py-2 w-1/2 md:w-1/4">
                     <p class="mb-2"><i class="fa fa-check text-pianote"></i> {!! $item !!}</p>
                 </div>
             @endforeach
@@ -176,19 +177,19 @@
     </section>
 
     <section class="" style="background: #ffffff;">
-        <div class="container max-w-4xl mx-auto py-4 md:py-10 flex justify-center flex-col md:flex-row">
-            <div class="flex flex-col items-center md:hidden">
-                <h2 class="my-6 text-center pb-2"><strong>Technique is <br/> <span class="underline">everything.</span>  </strong></h2>
+        <div class="container max-w-4xl mx-auto py-8 md:py-12 flex justify-center flex-col md:flex-row">
+            <div class="flex flex-col items-center md:hidden mb-6 sm:mb-0">
+                <h2 class="leading-tight mb-8 text-center"><strong>Technique is <br class="hidden sm:inline-block"> <span class="underline">everything.</span></strong></h2>
                 <video
                     src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
                     muted="" autoplay="" loop="" playsinline="" class="w-2/3"></video>
             </div>
 
-            <div class="sm:mb-10 md:w-2/3 p-4">
-                <h2 class="text-center hidden md:inline"><strong>Technique is
+            <div class="sm:mb-10 md:w-2/3 px-4">
+                <h2 class="text-center hidden md:inline-block mb-6"><strong>Technique is
                     <span class="underline">everything.</span>  </strong></h2>
 
-                <p class="text-black pt-10">
+                <p class="text-black">
                     It’s the foundation that will allow you to build your skills and abilities on the piano. It’s the key
                     that unlocks that feeling of musical freedom when your fingers feel like they have a mind of their own.
                     <br><br>
@@ -239,7 +240,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/approach.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/approach-03.webp',
                         'title' => 'Approach your piano practice',
                         'desc' =>
                             'Approach your piano practice in a way that’s <strong>musical</strong> -- and enhances your ear as well as your fingers.',
@@ -247,7 +248,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/pianote/products/30-day-better-technique/speed.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/pianote/products/30-day-better-technique/speed-03.webp',
                         'title' => 'Boost your speed',
                         'desc' =>
                             '<strong>Boost your speed and accuracy </strong>around the keyboard. You’ll learn practice secrets normally reserved for the greatest piano schools in the world.',
@@ -255,7 +256,7 @@
                     [
                         'position' => 'right',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/fluidity.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/fluidity-03.webp',
                         'title' => 'Move around the keyboard',
                         'desc' =>
                             '<strong>Move around the keyboard</strong> with greater fluidity and independence. Playing will feel fun again, and you’ll be excited about the potential for the future.',
@@ -263,7 +264,7 @@
                     [
                         'position' => 'left',
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/lifetime.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/lifetime-03.webp',
                         'title' => 'Return to a technique routine',
                         'desc' => 'Return to a technique routine that will <strong>last you a <span class="text-pianote">lifetime<span></strong>.',
                     ],
@@ -324,10 +325,10 @@
             alt="Jordan Rudess Photo">
 
 
-        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-96 md:-mt-10">
+        <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-52 md:-mt-10">
             <div class="flex flex-col justify-center items-center">
                 <h6 class="uppercase text-pianote">It’s time to meet your teacher…</h6>
-                    <h1 class="text-6xl pb-4 font-bebas tracking-widest">JORDAN RUDESS</h1>
+                <h1 class="text-6xl mb-4 font-bebas sm:tracking-widest">JORDAN RUDESS</h1>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="md:py-4 md:pt-10">
@@ -356,7 +357,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto max-w-6xl py-4 md:px-6 pb-10">
+        <div class="container mx-auto max-w-6xl py-4 px-4 md:px-6 pb-10">
             <h5 class="uppercase text-gray-400 text-center mb-3">See Jordan in action</h5>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div class="relative">
@@ -383,7 +384,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center py-4">
-                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500"
+                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"
                         href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
                         @mouseout="move = false">ENROLL NOW</a>
                 </div>
@@ -544,47 +545,30 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week1.webp',
                     'header1' => 'WEEK 1',
                     'header2' => 'Building your finger independence.',
-                    'desc' => 'Strong fingers make everything easier on the piano.
-            <br><br>
-            And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit
-            random keys and move when you don’t want them to.
-            <br><br>
-            That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the
-            independence they crave.
-            After the first day, your fingers will already feel stronger, and you’ll be more confident and excited to keep
-            learning.',
+                    'desc' => 'Strong fingers make everything easier on the piano.<br><br>And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to.<br><br>That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. After the first day your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
                     'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s what you’ll get:',
+                    'backHeader' => 'Here’s what we’ll focus on:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Using musical patterns </strong>to build strong fingers. Each exercise will sound like music, not a boring technical exercise.
-                             Jordan will show you exactly what notes to play in what order.',
+                            'desc' => '<strong>Using musical patterns </strong> to build strong fingers. Each exercise will sound like music, not a boring technical exercise. Jordan will show you exactly what notes to play in what order.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>Creating true separation for your fingers.</strong>
-                            Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
+                            'desc' => '<strong>Creating true separation for your fingers.</strong> Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Independence for EVERY finger.</strong>
-                            As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
+                            'desc' => '<strong>Independence for EVERY finger.</strong> As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
                         ],
                     ],
                 ],
                 [
                     'header1' => 'WEEK 2',
                     'header2' => 'Separate your hands and coordinate your brain.',
-                    'desc' => 'Now you’ve built strong fingers, it’s time to use them.
-            <br><br>
-            In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and
-            right hands.
-            <br><br>
-            No more boring whole notes in your left hand. You’ll learn to play differenHand coordination trips up so many piano players and halts your progress.
-            But with Jordan’s daily guidance, you’ll be amazing at how quickly you progress.',
+                    'desc' => 'Now you’ve built strong fingers, it’s time to use them.<br><br>In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands.<br><br>No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
                     'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s how we’ll do it:',
+                    'backHeader' => 'How we’ll do it!',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
@@ -596,8 +580,7 @@
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Break out of 4/4. </strong> Get out of the easy time signtarures and step into Jordan’s world of off-time. “It’s
-            easy, but it’s odd.”',
+                            'desc' => '<strong>Break out of 4/4. </strong> Get out of the easy time signatures and step into Jordan’s world of off-time. “It’s easy, but it’s odd.”',
                         ],
                     ],
                 ],
@@ -606,16 +589,7 @@
                         'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week3.webp',
                     'header1' => 'Week 3',
                     'header2' => 'Speed. How to practice and play fast.',
-                    'desc' => 'Now it’s time to impress.
-            <br><br>
-            Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he
-            learned at Juilliard and used to build his prodigious speed.
-            <br><br>
-            Strap in, because it’s a wild ride.
-            <br><br>
-            But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay
-            there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools
-            to continue practicing how to play faster.',
+                    'desc' => 'Now it’s time to impress.<br><br>Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed.<br><br>Strap in, because it’s a wild ride.<br><br>But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
                     'notes' => 'See what you’ll get...',
                     'backHeader' => 'Here’s what you’ll get:',
                     'back' => [
@@ -625,46 +599,32 @@
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing. </strong> An etherial arpeggio exercise that sounds
-            incredible while helping you play faster.',
+                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing. </strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you
-            how to approach practicing speed so you’re set up for success, not frustration.',
+                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
                         ],
                     ],
                 ],
                 [
                     'header1' => 'Week 4',
                     'header2' => 'Creative expression. Make beautiful music.',
-                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4.
-            <br><br>
-            Because what’s the point of getting better technique?
-            <br><br>
-            To play beautiful music.
-            <br><br>
-            In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do
-            you go from hitting the keys to making music? This final week will show you how to tell a story with your
-            playing.
-            ',
+                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4.<br><br>Because what’s the point of getting better technique?<br><br>To play beautiful music.<br><br>In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
                     'notes' => 'See what you’ll end the course with:',
-                    'backHeader' => 'Here’s what you’ll get:',
+                    'backHeader' => 'You end the course with:',
                     'back' => [
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>The specific techniques to draw listeners in to your playing.</strong> How to get people to stop and stare
-            whenever you sit at the piano.',
+                            'desc' => '<strong>The specific techniques to draw listeners into your playing.</strong> How to get people to stop and stare whenever you sit at the piano.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The mindset of a singer. </strong> Why thinking like a vocalist is key to bringing emotion and feeling to the
-            pieces you play.',
+                            'desc' => '<strong>The mindset of a singer. </strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
                         ],
                         [
                             'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put
-            all your skills together to play sometning Dream Theater-esque WITH Jordan.',
+                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
                         ],
                     ],
                 ],
@@ -682,27 +642,20 @@
                                     next: 'hidden',
                                     pagination: 'splide__pagination bottom-0',
                                 },
-                                perPage: 2.8,
+                                perPage: 2.5,
                                 perMove: 1,
                                 type: 'slide',
-                                gap: 20,
                                 focus: 0,
                                 interval: 2000,
                                 drag: 'free',
                                 snap: false,
                                 lazyLoad: 'nearby',
                                 breakpoints: {
-                                    1300: {
-                                        perPage: 2.1,
-                                    },
                                     1023: {
-                                        perPage: 1.8,
+                                        perPage: 2.1,
                                     },
                                     767: {
                                         perPage: 1.3,
-                                    },
-                                    500: {
-                                        perPage: 1,
                                     },
                                 },
                             }).mount()
@@ -714,56 +667,58 @@
                                     @foreach ($weeks as $index => $week)
                                         <li class="splide__slide px-1">
                                             <!-- card -->
-                                            <div x-data="{ flipped: false }" class="rounded-xl overflow-hidden cursor-pointer"
-                                                @click="flipped = !flipped">
-                                                <!-- Front -->
-                                                <div class="relative w-[680px] h-[680px]">
+                                            <div class="relative">
+                                                <div x-data="{ flipped: false }" class="rounded-xl overflow-hidden cursor-pointer"
+                                                    @click="flipped = !flipped">
+                                                    <!-- Front -->
+                                                    <div class="relative w-full h-[740px]">
 
-                                                </div>
-
-                                                <div class="absolute inset-0 rounded-3xl text-white p-4 md:py-10 md:px-8 w-full bg-gray-900"
-                                                    x-show.transition.scale.5.duration.400ms="!flipped">
-                                                    <div class="flex items-center justify-center relative -mt-24">
-                                                    @if ($index % 2 == 0 && !empty($week['img']))
-                                                        <img class="w-full px-4" src="{{ $week['img'] }}" alt="">
-                                                    @endif
                                                     </div>
 
-                                                    <h5
-                                                        class="text-pianote uppercase text-left {{ $index % 2 == 0 ? '' : 'pt-24' }} tracking-tight">
-                                                        <strong>{!! $week['header1'] !!}</strong>
-                                                    </h5>
-                                                    <h4 class="leading-normal"><strong>{!! $week['header2'] !!}</strong></h4>
-                                                    <p class="py-4">{!! $week['desc'] !!}</p>
-                                                    <p class="text-pianote absolute bottom-[16px]">
-                                                        <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                        {!! $week['notes'] !!}
-                                                    </p>
-                                                </div>
-                                                <!-- Back  -->
-                                                <div class="absolute inset-0 rounded-3xl p-4 md:py-10 md:px-8 w-full bg-gray-800"
-                                                    x-show.transition.scale.5.duration.400ms="flipped">
-                                                    <h5
-                                                        class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
-                                                        <strong>{!! $week['header1'] !!}</strong>
-                                                    </h5>
-                                                    <p class="leading-normal text-white">
-                                                    {!! $week['header2'] !!}
-                                                    </p>
-                                                    <h5
-                                                        class="text-left py-4 tracking-tight text-white">
-                                                        <strong>{!! $week['backHeader'] !!}</strong>
-                                                    </h5>
-                                                    @foreach ($week['back'] as $paragraph)
-                                                        <div class="flex items-center">
-                                                            <i class="{{ $paragraph['icon'] }} text-pianote text-4xl"></i>
-                                                            <p class="text-white ml-2 pl-2 pb-2 lg:pb-6">{!! $paragraph['desc'] !!}</p>
+                                                    <div class="absolute inset-0 rounded-3xl text-white p-4 md:py-10 md:px-8 w-full bg-gray-900"
+                                                        x-show.transition.scale.5.duration.400ms="!flipped">
+                                                        <div class="flex items-center justify-center relative">
+                                                            @if (!empty($week['img']))
+                                                                <img class="h-28 lg:h-36 px-4" src="{{ $week['img'] }}" alt="">
+                                                            @endif
                                                         </div>
-                                                    @endforeach
-                                                    <p class="text-pianote absolute bottom-[16px]">
-                                                        <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                        See the weeks overview...
-                                                    </p>
+
+                                                        <h5
+                                                            class="text-pianote uppercase text-left tracking-tight">
+                                                            <strong>{!! $week['header1'] !!}</strong>
+                                                        </h5>
+                                                        <h4 class="leading-normal mb-4"><strong>{!! $week['header2'] !!}</strong></h4>
+                                                        <p class="pb-16">{!! $week['desc'] !!}</p>
+                                                        <p class="text-pianote absolute bottom-[16px]">
+                                                            <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                            {!! $week['notes'] !!}
+                                                        </p>
+                                                    </div>
+                                                    <!-- Back  -->
+                                                    <div class="absolute inset-0 rounded-3xl p-4 md:py-10 md:px-8 w-full bg-gray-800"
+                                                        x-show.transition.scale.5.duration.400ms="flipped">
+                                                        <h5
+                                                            class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
+                                                            <strong>{!! $week['header1'] !!}</strong>
+                                                        </h5>
+                                                        <p class="leading-normal text-white">
+                                                        {!! $week['header2'] !!}
+                                                        </p>
+                                                        <h5
+                                                            class="text-left py-4 tracking-tight text-white">
+                                                            <strong>{!! $week['backHeader'] !!}</strong>
+                                                        </h5>
+                                                        @foreach ($week['back'] as $paragraph)
+                                                            <div class="flex items-center">
+                                                                <i class="{{ $paragraph['icon'] }} text-pianote text-4xl"></i>
+                                                                <p class="text-white ml-2 pl-2 pb-2 lg:pb-6">{!! $paragraph['desc'] !!}</p>
+                                                            </div>
+                                                        @endforeach
+                                                        <p class="text-pianote absolute bottom-[16px]">
+                                                            <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                            See the weeks overview...
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -788,25 +743,20 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/screen.webp"
                     alt="Mobile Screen with 30-Day Independence">
                 <div class="flex-grow sm:pl-10">
-                    <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get an exclusive LIVE <br> every step
-                            of the way.</strong></h3>
+                    <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get An Exclusive LIVE Lesson With Jordan</strong></h3>
                     <div class="text-center sm:text-left pb-4">
-                        <p>
-                            All students who enroll in 30-Days to Better Technique will be invited to join an exclusive LIVE
-                            lesson with Jordan Rudess.
+                        <p>All students who enroll in 30 Days to Better Technique will be invited to join an exclusive LIVE lesson with Jordan Rudess.
                             <br><br>
-                            You’ll be able to share your feedback, ask questions, and learn live from the “world’s best
-                            keyboardist”.
+                            You’ll be able to share your feedback, ask questions, and learn live from the “world’s best keyboardist”.
                             <br><br>
                             It’s a rare opportunity.
                             <br><br>
-                            And it’s only available to students who enroll in the first-ever class of 30-Days to Better
-                            Technique.
+                            And it’s only available to students who enroll in the first-ever class of 30 Days to Better Technique.
                             <br><br>
                             Reserve your spot today.
                         </p>
                     </div>
-                    <a class="w-full md:w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500" href="#customize-anchor"
+                    <a class="w-full md:w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide" href="#customize-anchor"
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
                 </div>
                 </div>
@@ -865,8 +815,8 @@
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/30-days-technique-Jordan-Rudess-logo.svg"
                 alt="30 Day to Better Technique Logo">
-            <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Play-Along Lessons + weekly Q&As <br> with a
-                    real piano techer </strong></h2>
+            <h3 class="italic leading-tight mt-2 mb-3 sm:my-3 lg:my-4">What would happen if you learned from the<br>  <strong> best
+                    keyboardist in the world?</strong></h3>
 
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
             <h6 class="leading-normal text-sm mb-4">
@@ -878,10 +828,10 @@
                                     x-text="hourText"></span></span>
                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
                                     x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                        </span>!</strong>
+                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
+                                    x-text="secondText"></span></span>!
+                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
+                        </span></strong>
                 </span>
             </h6>
 
@@ -925,7 +875,7 @@
                             '<strong>LIVE</strong> Session with Jordan Rudess',
                         ],
                         'buttonText' => 'ENROLL NOW',
-                        'cardExtraInfo' => 'SAVE 24%. One-time payment.',
+                        'cardExtraInfo' => 'One-time payment. Save 24%',
                     ])
 
                     @include('pianote.products.partials._promo-card-special', [
@@ -935,8 +885,9 @@
                         'cardImage' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-01.webp',
                         'imageHeight' => 'h-40',
-                        'cardSubtitle' => "The course + red Pianote metronome",
+                        'cardSubtitle' => "The course + a Pianote metronome",
                         'cardPrice' => '127',
+                        'cardDiscount' => '296',
                         'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
@@ -944,8 +895,8 @@
                             '<strong>FREE</strong> Pianote Metronome <span class="italic text-xs">(Lifetime Access)</span>',
                             '<strong>LIVE</strong> Session with Jordan Rudess',
                         ],
-                        'buttonText' => 'GET EVERYTHING',
-                        'cardExtraInfo' => "One-time payment.",
+                        'buttonText' => 'ENROLL NOW',
+                        'cardExtraInfo' => "One-time payment. Save 57%",
                     ])
                 </div>
             </div>
@@ -955,9 +906,9 @@
 
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Frequently Asked Questions</strong></h2>
-            <div class="max-w-6xl mt-4 sm:mt-10 px-4">
+        <div class="container mx-auto relative z-10 max-w-4xl">
+            <h2 class="mb-4 sm:mb-6"><strong>Still Have Questions?</strong></h2>
+            <div class="px-4">
                 @include('_partials.components.question-dropdown', [
                     'num' => '?',
                     'title' =>
@@ -1130,7 +1081,7 @@
             </div>
 
                 <div class="flex justify-center">
-                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500"
+                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"
                         href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
                         @mouseout="move = false">ENROLL NOW</a>
                 </div>

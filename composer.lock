@@ -16199,16 +16199,16 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "e28bd3dfc8ae7c5e83f6397128017d327a1465f5"
+                "reference": "a887ddbc1ef597cac4987b7f3ebdde78958b1fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/e28bd3dfc8ae7c5e83f6397128017d327a1465f5",
-                "reference": "e28bd3dfc8ae7c5e83f6397128017d327a1465f5",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/a887ddbc1ef597cac4987b7f3ebdde78958b1fca",
+                "reference": "a887ddbc1ef597cac4987b7f3ebdde78958b1fca",
                 "shasum": ""
             },
             "require": {
@@ -16258,7 +16258,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.1.0"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.1.1"
             },
             "funding": [
                 {
@@ -16266,7 +16266,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-13T13:23:57+00:00"
+            "time": "2024-04-09T15:27:06+00:00"
         }
     ],
     "packages-dev": [
