@@ -150,12 +150,8 @@
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
-        <img class="object-cover w-full relative z-0" style="height: 700px;"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/hero-image.jpeg"
-            alt="Description of the image">
-        <!-- <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop
-                        playsinline muted
-                        src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/book-bag/book-bag-hero-reel-wide-to-loop-1.mp4"></video> -->
+        <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
+            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
 
 
     </header>
@@ -677,7 +673,7 @@
                                 },
                                 perPage: 2.5,
                                 perMove: 1,
-                                type: 'loop',
+                                type: 'slide',
                                 focus: 0,
                                 gap: '0.5rem',
                                 interval: 2000,
@@ -790,19 +786,15 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/screen.webp"
                     alt="Mobile Screen with 30-Day Independence">
                 <div class="flex-grow sm:pl-10">
-                    <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get an exclusive LIVE <br> lesson with Jordan</strong></h3>
+                    <h3 class="leading-tight text-center sm:text-left py-4"><strong>Get An Exclusive LIVE Lesson With Jordan</strong></h3>
                     <div class="text-center sm:text-left pb-4">
-                        <p>
-                            All students who enroll in 30-Days to Better Technique will be invited to join an exclusive LIVE
-                            lesson with Jordan Rudess.
+                        <p>All students who enroll in 30 Days to Better Technique will be invited to join an exclusive LIVE lesson with Jordan Rudess.
                             <br><br>
-                            You’ll be able to share your feedback, ask questions, and learn live from the “world’s best
-                            keyboardist”.
+                            You’ll be able to share your feedback, ask questions, and learn live from the “world’s best keyboardist”.
                             <br><br>
                             It’s a rare opportunity.
                             <br><br>
-                            And it’s only available to students who enroll in the first-ever class of 30-Days to Better
-                            Technique.
+                            And it’s only available to students who enroll in the first-ever class of 30 Days to Better Technique.
                             <br><br>
                             Reserve your spot today.
                         </p>
@@ -866,8 +858,8 @@
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/30-days-technique-Jordan-Rudess-logo.svg"
                 alt="30 Day to Better Technique Logo">
-            <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Play-Along Lessons + weekly Q&As <br> with a
-                    real piano teacher. </strong></h2>
+            <h3 class="italic leading-tight mt-2 mb-3 sm:my-3 lg:my-4">What would happen if you learned from the<br>  <strong> best
+                    keyboardist in the world?</strong></h3>
 
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
             <h6 class="leading-normal text-sm mb-4">
@@ -926,7 +918,7 @@
                             '<strong>LIVE</strong> Session with Jordan Rudess',
                         ],
                         'buttonText' => 'ENROLL NOW',
-                        'cardExtraInfo' => 'SAVE 24%. One-time payment.',
+                        'cardExtraInfo' => 'One-time payment. Save 24%',
                     ])
 
                     @include('pianote.products.partials._promo-card-special', [
@@ -936,8 +928,9 @@
                         'cardImage' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-01.webp',
                         'imageHeight' => 'h-40',
-                        'cardSubtitle' => "The course + red Pianote metronome",
+                        'cardSubtitle' => "The course + a Pianote metronome",
                         'cardPrice' => '127',
+                        'cardDiscount' => '296',
                         'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
@@ -945,8 +938,8 @@
                             '<strong>FREE</strong> Pianote Metronome <span class="italic text-xs">(Lifetime Access)</span>',
                             '<strong>LIVE</strong> Session with Jordan Rudess',
                         ],
-                        'buttonText' => 'GET EVERYTHING',
-                        'cardExtraInfo' => "One-time payment.",
+                        'buttonText' => 'ENROLL NOW',
+                        'cardExtraInfo' => "One-time payment. Save 57%",
                     ])
                 </div>
             </div>

@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.304.0",
+            "version": "3.304.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "29a79bac02997f3053559f6961a0e83622a14f88"
+                "reference": "6dac9b3257873a807ac73f6dc4418bdc49a5d9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/29a79bac02997f3053559f6961a0e83622a14f88",
-                "reference": "29a79bac02997f3053559f6961a0e83622a14f88",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6dac9b3257873a807ac73f6dc4418bdc49a5d9db",
+                "reference": "6dac9b3257873a807ac73f6dc4418bdc49a5d9db",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.1"
             },
-            "time": "2024-04-08T18:03:38+00:00"
+            "time": "2024-04-09T19:25:27+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10137,16 +10137,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.61",
+            "version": "v3.1.62",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3f94004b3e5c6844386cc6cd94403388db26572b"
+                "reference": "3c74e71c6ab5c85f26cc1399bf6d151b8abfeb56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3f94004b3e5c6844386cc6cd94403388db26572b",
-                "reference": "3f94004b3e5c6844386cc6cd94403388db26572b",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3c74e71c6ab5c85f26cc1399bf6d151b8abfeb56",
+                "reference": "3c74e71c6ab5c85f26cc1399bf6d151b8abfeb56",
                 "shasum": ""
             },
             "require": {
@@ -10176,9 +10176,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.61"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.62"
             },
-            "time": "2024-04-03T16:27:22+00:00"
+            "time": "2024-04-10T06:59:23+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10371,16 +10371,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.72",
+            "version": "v2.1.73",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "a821db033a106dc7c11e00e2b228c28863f05bc7"
+                "reference": "d3a7614e8689b6df61f9c78a2d5225c48a62b685"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/a821db033a106dc7c11e00e2b228c28863f05bc7",
-                "reference": "a821db033a106dc7c11e00e2b228c28863f05bc7",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d3a7614e8689b6df61f9c78a2d5225c48a62b685",
+                "reference": "d3a7614e8689b6df61f9c78a2d5225c48a62b685",
                 "shasum": ""
             },
             "require": {
@@ -10435,9 +10435,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.72"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.73"
             },
-            "time": "2024-04-09T12:27:42+00:00"
+            "time": "2024-04-10T06:24:36+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19721,5 +19721,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
