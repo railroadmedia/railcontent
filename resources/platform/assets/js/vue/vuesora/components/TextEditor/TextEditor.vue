@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, inject } from 'vue';
+import { ref, computed, watch, nextTick, inject, onMounted } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
 import ImageUploader from '../../../components/ImageUploader/ImageUploader.vue';
 
@@ -102,6 +102,12 @@ const initObject = computed(() => ({
 watch(initObject, (newInit, oldInit) => {
     if (newInit.body_class !== oldInit.body_class) {
         forceReRender();
+    }
+});
+
+onMounted(() => {
+    if (props.initialValue != null) {
+        contentInterface.value = props.initialValue;
     }
 });
 
