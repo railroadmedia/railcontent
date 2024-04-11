@@ -682,71 +682,87 @@
                                     @foreach ($weeks as $index => $week)
                                         <li class="splide__slide px-1">
                                             <!-- card -->
-                                            <div class="relative h-[670px]">
-                                                <div x-data="{ flipped: {{ $index % 2 != 0 ? 'true' : 'false' }} }" class="rounded-xl overflow-hidden cursor-pointer"
-                                                    x-on:click="
-                                                    flipped = !flipped;
-                                                        if(flipped){
-                                                            $refs.front.classList.add('rotate-y-180');
-                                                            $refs.back.classList.remove('-rotate-y-180');
-                                                        }
-                                                        else {
-                                                            $refs.front.classList.remove('rotate-y-180');
-                                                            $refs.back.classList.add('-rotate-y-180');
-                                                        }">
-                                                    <!-- Front -->
-                                                    <div x-ref="front" class="absolute inset-0 rounded-3xl text-white p-8 md:py-6 md:px-4 lg:px-8 w-full bg-gray-900 transition-transform duration-700"
-                                                        style="backface-visibility: hidden; transform-style: preserve-3d;"
-                                                        :class="{ 'rotate-y-180': flipped }">
+                                            <div class="relative h-[670px] rounded-xl overflow-hidden cursor-pointer" x-data="{ flipped: false }"
+                                                x-on:click="
+                                                     flipped = !flipped;
+                                                     if(flipped){
+                                                        $refs.front.classList.add('rotate-y-180');
+                                                        $refs.back.classList.remove('-rotate-y-180');
+                                                        $refs.back.classList.add('rotate-y-0');
+                                                     }
+                                                     else {
+                                                        $refs.front.classList.remove('rotate-y-180');
+                                                        $refs.back.classList.add('-rotate-y-180');
+                                                        $refs.back.classList.remove('rotate-y-0');
+                                                     }
+                                                ">
+                                                <div style="perspective: 1000px;">
+                                                   <!-- Front -->
+                                                   <div style="transform-style: preserve-3d;">
+                                                      <div x-ref="front"
+                                                          class="absolute inset-0 rounded-3xl text-white p-8 md:p-6 lg:p-8 w-full bg-gray-900 transition-transform duration-500 ease-in-out h-[670px] overflow-hidden"
+                                                          style="backface-visibility: hidden;"
+                                                          :class="{ 'rotate-y-180': flipped }">
 
-                                                        <div class="flex items-center justify-center relative">
+                                                         <div class="flex items-center justify-center relative">
                                                             @if (!empty($week['img']))
-                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity" src="{{ $week['img'] }}" alt="Collage showing pianists" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity"
+                                                                    src="{{ $week['img'] }}"
+                                                                    alt="Collage showing pianists" loading="lazy"
+                                                                    onload="this.classList.remove('opacity-0')">
                                                             @endif
-                                                        </div>
+                                                         </div>
 
-                                                        <h5 class="text-pianote uppercase text-left">
+                                                         <h5 class="text-pianote uppercase text-left">
                                                             <strong>{!! $week['header1'] !!}</strong>
-                                                        </h5>
-                                                        <h4 class="leading-normal mb-4 md:mb-2"><strong>{!! $week['header2'] !!}</strong></h4>
-                                                        <p class="pb-16">{!! $week['desc'] !!}</p>
-                                                        <p class="text-pianote absolute bottom-[16px]">
+                                                         </h5>
+                                                         <h4 class="leading-normal mb-4 md:mb-2">
+                                                            <strong>{!! $week['header2'] !!}</strong></h4>
+                                                         <p class="pb-16">{!! $week['desc'] !!}</p>
+                                                         <p class="text-pianote absolute bottom-[16px]">
                                                             <i class="fa-solid fa-arrows-rotate-reverse"></i>
                                                             {!! $week['notes'] !!}
-                                                        </p>
-                                                    </div>
-                                                    <!-- Back  -->
-                                                    <div x-ref="back" class="absolute inset-0 rounded-3xl p-8 md:py-6 md:px-4 lg:px-8 w-full bg-gray-800 transition-transform duration-700 {{ $index % 2 != 0 ? '' : '-rotate-y-180' }}"
-                                                        style="backface-visibility: hidden; transform-style: preserve-3d;">
+                                                         </p>
+                                                      </div>
+                                                      <!-- Back  -->
+                                                      <div x-ref="back"
+                                                          class="absolute inset-0 rounded-3xl p-8 md:p-6 lg:p-8 w-full bg-gray-800 transition-transform duration-700 ease-in-out -rotate-y-180 h-[670px] overflow-hidden"
+                                                          style="backface-visibility: hidden;"
+                                                      >
 
-                                                        <div class="flex items-center justify-center relative">
+                                                         <div class="flex items-center justify-center relative">
                                                             @if (!empty($week['imgBack']))
-                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity" src="{{ $week['imgBack'] }}" alt="Collage showing pianists" loading="lazy" onload="this.classList.remove('opacity-0')">
+                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity"
+                                                                    src="{{ $week['imgBack'] }}"
+                                                                    alt="Collage showing pianists" loading="lazy"
+                                                                    onload="this.classList.remove('opacity-0')">
                                                             @endif
-                                                        </div>
-                                                        <h5 class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
+                                                         </div>
+                                                         <h5
+                                                            class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
                                                             <strong>{!! $week['header1'] !!}</strong>
-                                                        </h5>
-                                                        <p class="leading-normal text-white">
+                                                         </h5>
+                                                         <p class="leading-normal text-white">
                                                             {!! $week['header2'] !!}
-                                                        </p>
-                                                        <h5 class="text-left py-4 tracking-tight text-white">
+                                                         </p>
+                                                         <h5 class="text-left py-4 tracking-tight text-white">
                                                             <strong>{!! $week['backHeader'] !!}</strong>
-                                                        </h5>
-                                                        @foreach ($week['back'] as $paragraph)
+                                                         </h5>
+                                                         @foreach ($week['back'] as $paragraph)
                                                             <div class="flex items-center">
                                                                 <i class="{{ $paragraph['icon'] }} text-pianote text-3xl"></i>
-                                                                <p class="text-white ml-2 pl-2 pb-3">{!! $paragraph['desc'] !!}</p>
+                                                                <p class="text-white ml-2 pl-2 pb-3">
+                                                                   {!! $paragraph['desc'] !!}</p>
                                                             </div>
-                                                        @endforeach
-                                                        <p class="text-pianote absolute bottom-[14px]">
+                                                         @endforeach
+                                                         <p class="text-pianote absolute bottom-[14px]">
                                                             <i class="fa-solid fa-arrows-rotate-reverse"></i>
                                                             See the weeks overview...
-                                                        </p>
-                                                    </div>
+                                                         </p>
+                                                      </div>
+                                                   </div>
                                                 </div>
                                             </div>
-                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
