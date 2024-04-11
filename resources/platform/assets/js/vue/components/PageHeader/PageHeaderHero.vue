@@ -29,7 +29,7 @@
           </template>
           <div class="tw-ml-[5px]">
             <!-- Modal for Desktop -->
-            <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-info']">
+            <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-description']">
               <musora-icon @click="openModal" icon-name="info"
                 class="tw-self-start tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
               <ModalRenderer v-if="isModalOpen">
@@ -39,13 +39,13 @@
                 </button>
                 <div
                   class="dark:tw-text-white tw-text-center tw-p-6 sm:tw-p-[30px] tw-max-w-[600px] tw-mx-4 sm:tw-mx-0 tw-h-full">
-                  <slot name="header-info"></slot>
+                  <slot name="header-description"></slot>
                 </div>
               </ModalRenderer>
             </div>
 
             <!-- Tooltip for Mobile -->
-            <div class="tw-hidden sm:tw-block tw-self-start" v-if="$slots['header-info']">
+            <div class="tw-hidden sm:tw-block tw-self-start" v-if="$slots['header-description']">
               <Tooltip position="right">
                 <template #trigger>
                   <musora-icon icon-name="info"
@@ -53,7 +53,7 @@
                 </template>
                 <template #content>
                   <div class="tw-max-w-[343px]">
-                    <slot name="header-info"></slot>
+                    <slot name="header-description"></slot>
                   </div>
                 </template>
               </Tooltip>

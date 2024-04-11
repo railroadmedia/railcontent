@@ -3,7 +3,7 @@
     <template #top-left>
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
         :heroImgClasses="heroImgClasses" :additionalImgSrc="logo" :infoData="isSongsPage ? null : infoData">
-        <template #header-info v-if="description">
+        <template #header-description v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
               <span v-html="description" />
@@ -14,12 +14,12 @@
     </template>
     <template #top-right v-if="!isSongsPage">
       <div :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
-        <PageHeaderCtasBox class="tw-flex" :ctas="ctas" />
+        <PageHeaderCtasBox :ctas="ctas" />
       </div>
     </template>
     <template #bottom-full>
       <div class="tw-flex tw-items-center"
-        :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : isSongsPage ? 'tw-mt-4' : ''">
+        :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : ''">
         <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : ''">
           <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
         </div>
@@ -29,6 +29,7 @@
         'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
       }">
           <PageHeaderRowInfo v-if="isSongsPage" class="tw-self-end" :infoData="infoData" />
+          <div v-if="isSongsPage">See all artists >></div>
           <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
             :ctas="secondaryCtas" />
         </div>

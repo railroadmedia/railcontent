@@ -206,6 +206,12 @@
 
     $headerDataJson = json_encode($headerData);
     $headerDataObj = json_decode($headerDataJson);
+
+    $recommendationLinks = new stdClass();
+    $recommendationLinks->drumeo = 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083';
+    $recommendationLinks->pianote = 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612';
+    $recommendationLinks->guitareo = 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772';
+    $recommendationLinks->singeo = 'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436';
 @endphp
 
 @extends('partials.layout')
@@ -249,18 +255,52 @@
 @endsection
 
 @section('content')
-    <page-header
-        page-type="{{ $headerDataObj->type }}"
-        icon-name="{{ $headerDataObj->iconName }}"
-        title="{{ $headerDataObj->title }}"
-        description="{{ $headerDataObj->description }}"
-        hero-img="{{ $headerDataObj->heroImg }}"
-        progress="{{ $headerDataObj->progress }}"
-        content-id="{{ $headerDataObj->contentId }}"
-        :info-data="{{ json_encode($headerDataObj->infoData) }}"
-        :ctas="{{ json_encode($headerDataObj->ctas) }}"
-    ></page-header>
-    
+    @if($lessonType === 'Recommendation')
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => 'Inspired By Your Activity',
+                ],
+            ]
+        ])
+
+        <div class="tw-container tw-mx-auto tw-mt-[30px] tw-px-4 lg:tw-px-8">
+            <div class="tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-items-start tw-flex tw-justify-between tw-pb-5">
+                <div class="tw-text-2xl md:tw-text-[32px] dark:tw-text-white tw-flex">
+                    <span class="tw-font-bold">Inspired By Your Activity</span>
+                    <div class="tw-group tw-relative">
+                        <musora-icon icon-name="info" class="tw-text-[#65656B] dark:tw-text-[#80A0B9] tw-w-[25px] tw-h-[25px] tw-ml-1" onclick="openModal()"></musora-icon>
+
+                        <div class="tw-left-full tw-top-0 tw-ml-2 tw-absolute tw-p-[15px] tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-z-30 tw-min-w-max tw-hidden group-hover:tw-block">
+                            <div class="tw-max-w-[343px]">
+                                <div class="tw-flex tw-flex-col tw-h-full">
+                                    <div class="tw-flex tw-grow tw-items-center">
+                                        <span>Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
+                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-mr-1"></musora-icon>
+                    Experimental Feature
+                </a>
+            </div>
+        </div>
+    @else
+        <page-header
+            page-type="{{ $headerDataObj->type }}"
+            icon-name="{{ $headerDataObj->iconName }}"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            progress="{{ $headerDataObj->progress }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+        ></page-header>
+       
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">

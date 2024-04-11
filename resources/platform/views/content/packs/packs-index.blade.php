@@ -11,7 +11,7 @@
     }
 @endphp
 
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'packs'])
 
 @section('meta')
     <title>{{ ucfirst($brand) }} Packs | Musora</title>

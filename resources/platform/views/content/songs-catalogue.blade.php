@@ -7,6 +7,7 @@
 @section('content')
     <songs
         continue-url="/{{$brand}}/lesson-history/in-progress"
+        :all-artist-url="{{ json_encode($allArtistUrl) }}"
         :artists-number="{{ json_encode($artistsNumber) }}"
         :songs-number="{{ json_encode($songsNumber) }}"
         :started-content="{{ $startedLessons }}"

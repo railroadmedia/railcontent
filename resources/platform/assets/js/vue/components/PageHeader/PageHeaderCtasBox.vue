@@ -27,10 +27,9 @@ const secondaryCtas = computed(() =>
     )
 );
 
-console.log(secondaryCtas.value);
-
 // only display mobile dropdown if there are more than 1 secondary CTAs
 const displayMobileDropdown = secondaryCtas.value.length >= 1;
+
 </script>
 <style lang="scss" scoped>
 .ctas-container {
