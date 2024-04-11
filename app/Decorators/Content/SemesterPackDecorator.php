@@ -7,6 +7,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class SemesterPackDecorator extends TypeDecoratorBase
 {
+    public static $skip = false;
     /**
      * @param Collection $contents
      * @return Collection
@@ -16,7 +17,7 @@ class SemesterPackDecorator extends TypeDecoratorBase
         // url
         $contentsOfType = $contents->where('type', 'semester-pack');
 
-        if ($contentsOfType->isEmpty()) {
+        if ($contentsOfType->isEmpty() || self::$skip) {
             return $contents;
         }
 
