@@ -1,4 +1,5 @@
-<a href="{{ $link }}" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] fixed anchor-slide" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+<a href="{{ $link }}" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full text-white z-[100] fixed anchor-slide"
+    style="background: linear-gradient(to bottom, #0b74d8, #024e95);">
     @if(!empty($logo))
     <img
         class="h-8 sm:h-10 mr-4 transition-opacity opacity-0"
@@ -8,7 +9,6 @@
         onload="this.classList.remove('opacity-0')"
     />
     @endif
-    <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
-        {!! $text !!}
-    </p>
+    <h3 class="font-bebas uppercase mx-0 leading-none mr-3">{!! $text !!}</h3>
+    <p class="mx-0 leading-none">Only <s class="opacity-50">500</s> <strong>{!! $stock !!}</strong> left!</p>
 </a>
