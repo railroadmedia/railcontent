@@ -1503,8 +1503,7 @@ class ContentPagesController extends BaseController
         FiltersHelper::prepareFiltersFields();
 
         $brand = $request->get('brand', brand());
-        $pageSize = $request->get('limit', 5);
-        $randomize = $request->get('randomize', 0);
+        $pageSize = $request->get('limit', 10);
         $filter = FiltersHelper::$filter ?? '';
         $page = $request->get('page', 1);
         $sections = match(strtolower($filter)) {
@@ -1525,7 +1524,6 @@ class ContentPagesController extends BaseController
             user()->id,
             $brand,
             sections: $sections,
-            randomize:$randomize,
             pageSize:$pageSize,
             page:$page,
             groupByForLessonsPage: $groupBySections
