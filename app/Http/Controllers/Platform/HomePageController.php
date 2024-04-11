@@ -617,7 +617,6 @@ class HomePageController extends BaseController
         return $this->contentService->getRecommendedContent(
             user()->id,
             brand(),
-            randomize: false,
             pageSize: 50,
         );
     }
