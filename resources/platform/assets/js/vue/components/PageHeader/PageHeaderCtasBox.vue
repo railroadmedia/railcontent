@@ -1,6 +1,6 @@
 <template>
     <div class="tw-items-center tw-flex-grow tw-justify-end"
-        :class="displayMobileDropdown ? 'tw-hidden sm:tw-flex' : ''">
+        :class="displayMobileDropdown && ctas?.length > 0 ? 'tw-hidden sm:tw-flex' : ''">
         <div class="ctas-container tw-flex-shrink-0 tw-flex">
             <CtaResolver :ctas="ctas" />
         </div>
@@ -20,11 +20,11 @@ const props = defineProps({
 });
 
 const secondaryCtas = computed(() =>
-    props.ctas.filter(cta =>
+    props.ctas?.filter(cta =>
         cta.type !== 'PageHeaderPrimaryCta' &&
         (cta.type !== 'ResetProgressCta' || cta.props.progress > 0) &&
         (cta.type !== 'DownloadResourcesCta' || cta.props.resources.length > 0)
-    )
+    ) || []
 );
 
 // only display mobile dropdown if there are more than 1 secondary CTAs
