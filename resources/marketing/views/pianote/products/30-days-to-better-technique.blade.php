@@ -318,8 +318,8 @@
 
     <section class="flex flex-col items-center text-white" style="background-color: #00101D;">
         <picture>
-            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach.webp">
-            <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)//marketing/pianote/products/30-day-better-technique/coach.webp">
+            <source media="(min-width: 1200px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach.webp">
+            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach.webp">
             <img
                 class="w-full transition-opacity opacity-0 hidden md:inline"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)//marketing/pianote/products/30-day-better-technique/coach.webp"
@@ -328,7 +328,7 @@
                 onload="this.classList.remove('opacity-0')"
             >
         </picture>
-        <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach-m.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
+        <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/coach-m.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
 
         <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-52 md:-mt-10">
             <div class="flex flex-col justify-center items-center">
@@ -881,10 +881,10 @@
                 <div id="customize-anchor" class="anchor"></div>
                 <div class="flex flex-wrap lg:flex-nowrap items-start justify-center mb-5 sm:mb-10 w-full mx-auto">
                     @include('pianote.products.partials._promo-card-special', [
-                        'badgeText' => 'JUST THE COURSE',
+                        'badgeText' => 'SAVE 25%',
                         'cardTitle' => '30 Days To <br> Better Technique',
                         'cardImage' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-01.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle1.webp',
                         'imageHeight' => 'h-40',
                         'cardSubtitle' => 'Just the course.',
                         'cardPrice' => '97',
@@ -892,8 +892,9 @@
                         'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[pianote_access_30-days]=1&promo-code=technique-launch&locked=true',
                         'badgeColor' => 'musora',
                         'extraBonuses' => [
-                            '<strong>30-Days To Better Technique</strong> <span class="italic text-xs">(Lifetime Access)</span>',
-                            '<strong>LIVE</strong> Session with Jordan Rudess',
+                            '<strong>Lifetime</strong> Course Access',
+                            '<strong>EXCLUSIVE</strong> Livestream with Jordan',
+                            '<strong>FREE</strong> 1-month Pianote Access',
                         ],
                         'buttonText' => 'ENROLL NOW',
                         'cardExtraInfo' => 'One-time payment. Save 24%',
@@ -901,22 +902,23 @@
 
                     @include('pianote.products.partials._promo-card-special', [
                         'whiteBadge' => true,
-                        'badgeText' => 'COURSE BUNDLE',
+                        'badgeText' => 'SAVE 57%',
                         'cardTitle' => 'The Better <br> Technique Bundle',
                         'cardImage' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-01.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle2.webp',
                         'imageHeight' => 'h-40',
-                        'cardSubtitle' => "The course + a Pianote metronome",
+                        'cardSubtitle' => "The course + red Pianote metronome ($79 value)",
                         'cardPrice' => '127',
                         'cardDiscount' => '296',
                         'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
-                            '<strong>30-Days To Better Technique</strong> <span class="italic text-xs">(Lifetime Access)</span>',
-                            '<strong>FREE</strong> Pianote Metronome <span class="italic text-xs">(Lifetime Access)</span>',
-                            '<strong>LIVE</strong> Session with Jordan Rudess',
+                            '<strong>Lifetime</strong> Course Access',
+                            '<strong>EXCLUSIVE</strong> Livestream with Jordan',
+                            '<strong>FREE</strong> 3-month Pianote Access',
+                            '<strong>BONUS</strong> Pianote Metronome',
                         ],
-                        'buttonText' => 'ENROLL NOW',
+                        'buttonText' => 'GET EVERYTHING',
                         'cardExtraInfo' => "One-time payment. Save 57%",
                     ])
                 </div>
@@ -1054,7 +1056,7 @@
                         <h5 class="leading-normal">{{ $box }}</h5>
                     </div>
                 @endforeach
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal-m.webp" 
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/final-appeal-m.webp"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 alt="Logo with arrows" class="w-2/3 opacity-0 transition-opacity">
                 <div class="w-auto max-w-5xl text-center">
