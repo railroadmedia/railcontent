@@ -1,6 +1,6 @@
 <template>
     <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer tw-flex tw-flex-col">
-        <PageHeaderCta text="Change Your Timezone" faIconClass="fa-globe" showAllAlways>
+        <PageHeaderCta v-bind="$attrs" text="Change Your Timezone" faIconClass="fa-globe" showAllAlways>
             <select name="timezone" id="timezoneSelector" v-model="selectedTimezone"
                 class="tw-w-full tw-p-2 tw-rounded tw-cursor-pointer">
                 <option v-for="timezone in timezones" :key="timezone" :value="timezone" class="tw-text-[#00101D]">

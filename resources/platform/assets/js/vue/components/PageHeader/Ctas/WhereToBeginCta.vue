@@ -1,5 +1,5 @@
 <template>
-    <PageHeaderCta text="Where to begin" faIconClass="fa-question-circle" data-open-modal="surveyModal" showAllAlways />
+    <PageHeaderCta v-bind="$attrs" text="Where to begin" faIconClass="fa-question-circle" data-open-modal="surveyModal" showAllAlways />
     <div id="surveyModal" class="modal">
         <div class="flex flex-column corners-10">
             <div v-if="brand === 'drumeo'" class="typeform-widget"

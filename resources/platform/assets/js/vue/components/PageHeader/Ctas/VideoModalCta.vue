@@ -1,5 +1,5 @@
 <template>
-    <PageHeaderCta :text="text" :faIconClass="faIconClass" :data-open-modal="modalId" showAllAlways />
+    <PageHeaderCta v-bind="$attrs" :text="text" :faIconClass="faIconClass" :data-open-modal="modalId" showAllAlways />
     <div :id="modalId" class="modal vimeo-embedded-player">
         <div class="flex flex-column corners-10">
             <div class="video-wrap">

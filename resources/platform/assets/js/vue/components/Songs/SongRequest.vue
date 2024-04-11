@@ -10,6 +10,6 @@ const handleShowModal = () => {
 
 </script>
 <template>
-    <PageHeaderCta musoraIconName="eigth-notes-filled" text="Request a song" @click="handleShowModal" />
+    <PageHeaderCta v-bind="$attrs" musoraIconName="eigth-notes-filled" text="Request a song" @click="handleShowModal" />
     <RequestSongModal v-if="showModal" @onCloseModal="handleShowModal" />
 </template>

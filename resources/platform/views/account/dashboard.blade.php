@@ -48,7 +48,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
     $ctaUrl = "/onboarding?brand={$brand}{$ctaUrlSuffix}";
 
     $headerData['ctas'][] = [
-        'type' => 'primary',
+        'type' => 'PageHeaderPrimaryCta',
         'props' => [
             'text' => $ctaText,
             'url' => $ctaUrl,
