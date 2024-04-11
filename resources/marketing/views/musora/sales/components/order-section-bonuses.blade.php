@@ -7,7 +7,7 @@
 >
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
         @if(empty($bgColor))
-        :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" 
+        :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
         :style="`background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/pianote/membership/homepage/2024/order-bg-tile-2.webp') center center/160px;`" @endif
         x-intersect.once="lazyLoad = true">
     <div class="container mx-auto relative z-50 @if(!empty($max5)) max-w-5xl @else max-w-6xl @endif">
@@ -131,16 +131,17 @@
                                     <strong class="text-musora">{{ $bonus['customText'] }}</strong>
                                 @else
                                     <strong class="text-musora">FREE</strong>
-                                @endif          
-                                <br>      
-                        <em> 
-                            @if(!empty($bonus['shipping']))
-                                Free Shipping
-                            @else
-                                Online Access
-                            @endif
-                        </em>
-                    </p>
+                                @endif
+                                <br>
+                                <em>
+                                    @if(!empty($bonus['shipping']))
+                                        Free Shipping
+                                    @else
+                                        Online Access
+                                    @endif
+                                </em>
+                            </span>
+                        </p>
                     </div>
                 @endforeach
                 <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
