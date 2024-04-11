@@ -19,6 +19,7 @@ export const usePlaylistsStore = defineStore({
       loadingLessons: false,
       sortingPlaylist: false,
       loadingPinnedPlaylists: false,
+      filterOptions: [],
       playlistsQuantity: 0,
       resultsPage: 1
     }
@@ -49,6 +50,12 @@ export const usePlaylistsStore = defineStore({
       })
     },
 
+    updateFilterOptions({ filterOptions }) {
+      this.$patch({
+        filterOptions,
+      })
+    },
+
     //Dynamic Updates
     async getPinnedPlaylists(brand, token) {
       this.loadingPinnedPlaylists = true;
@@ -68,6 +75,7 @@ export const usePlaylistsStore = defineStore({
         this.loadingPlaylists = false;
         this.playlists = await response.data.data;
         this.playlistsQuantity = await response.data.meta.totalResults;
+        this.filterOptions = await response.data.meta.filterOptions;
       } catch {
         console.log('there was an error with your request');
         //hard reload?

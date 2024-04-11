@@ -337,6 +337,36 @@ if (!function_exists('convertNumber')) {
 }
 
 
+/**
+ * Zipper merges arrays into a single array
+ *
+ * @param array[array] $arraysToZip children arrays must be sequencially numerically indexed
+ * @return array The merged array
+ */
+if (!function_exists('zipperMerge')) {
+    function zipperMerge($arraysToZip)
+    {
+        $results = [];
+        $reIndexedArrays = [];
+        foreach($arraysToZip as $array) {
+            if (!$array) continue;
+            $reIndexedArrays[] = array_values($array);
+        }
+        if (!$reIndexedArrays) {
+            return $results;
+        }
+        $lengths = array_map(function($child){return count($child);}, $reIndexedArrays);
+        $maxLength = max($lengths);
+        for($j = 0; $j < $maxLength; $j++) {
+            foreach($reIndexedArrays as $child) {
+                if (count($child) == 0 || $j >= count($child)) continue;
+                $results[] = $child[$j];
+            }
+        }
+        return $results;
+    }
+}
+
 if (!function_exists('dispatchWithDelay')) {
     /**
      * @param mixed $job
@@ -348,3 +378,73 @@ if (!function_exists('dispatchWithDelay')) {
         return dispatch($job)->delay(Carbon::now()->addSeconds($delaySeconds));
     }
 }
+
+if (!function_exists('encodeURI')) {
+    /**
+     * @param $url
+     * @return string
+     */
+    function encodeURI($url)
+    {
+        $res = preg_match('/.*:\/\/(.*?)\//', $url, $matches);
+        if ($res) {
+            // except host name
+            $url_tmp = str_replace($matches[0], "", $url);
+
+            // except query parameter
+            $url_tmp_arr = explode("?", $url_tmp);
+
+            // encode each tier
+            $url_tear = explode("/", $url_tmp_arr[0]);
+            foreach ($url_tear as $key => $tear) {
+                $url_tear[$key] = rawurlencode($tear);
+            }
+
+            $ret_url = $matches[0].implode('/', $url_tear);
+
+            // encode query parameter
+            if (count($url_tmp_arr) >= 2) {
+                $ret_url .= "?".encodeURISub($url_tmp_arr[1]);
+            }
+
+            return $ret_url;
+        } else {
+            return encodeURISub($url);
+        }
+    }
+}
+/**
+ * https://stackoverflow.com/questions/4929584/encodeuri-in-php/6059053
+ */
+function encodeURISub($url)
+{
+    $unescaped = [
+        '%2D' => '-',
+        '%5F' => '_',
+        '%2E' => '.',
+        '%21' => '!',
+        '%7E' => '~',
+        '%2A' => '*',
+        '%27' => "'",
+        '%28' => '(',
+        '%29' => ')'
+    ];
+    $reserved = [
+        '%3B' => ';',
+        '%2C' => ',',
+        '%2F' => '/',
+        '%3F' => '?',
+        '%3A' => ':',
+        '%40' => '@',
+        '%26' => '&',
+        '%3D' => '=',
+        '%24' => '$'
+    ];
+    $score = [
+        '%23' => '#'
+    ];
+
+    return strtr(rawurlencode($url), array_merge($reserved, $unescaped, $score));
+}
+
+

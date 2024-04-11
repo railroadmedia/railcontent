@@ -30,7 +30,11 @@ export default {
     hasNotifications: {
       type: Boolean,
       default: false,
-    }
+    },
+    showRecommendation: {
+      type: Boolean,
+      default: false
+    },
   },
   emits: ['onColorModeToggle'],
   components: {
@@ -134,9 +138,10 @@ export default {
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement>
-        <OptionElement v-if="false" :href="`/${ brand }/lessons/recommended`">
-          <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
-          Recommended For You
+        <OptionElement v-if="showRecommendation" :href="`/${ brand }/lessons/recommended`">
+          <musora-icon icon-name="recommendation" class="tw-w-[20px] tw-mr-2"/>
+          Inspired by Your Activity
+          <musora-icon icon-name="info" class="tw-w-[14px] tw-h-[14px] tw-text-[#FFAE00] tw-ml-2"></musora-icon>
         </OptionElement>
         <OptionElement :href="`/${ brand }/lesson-history/in-progress`">
           <musora-icon icon-name="bookmark" class="tw-w-[20px] tw-mr-2"/>

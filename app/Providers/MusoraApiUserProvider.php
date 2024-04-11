@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -99,7 +100,12 @@ class MusoraApiUserProvider implements UserProviderInterface
             'customer_io_id' => $customerIoData?->uuid,
         ];
 
-        $userArray = array_merge($user->toArray(), $extraData);
+        $branchData = $this->getAllBranchInformation();
+        $featureData = $this->getAccessibleFeatures();
+        $featureArray = ['branches' => $branchData, 'features' => $featureData];
+
+        $userArray = array_merge($user->toArray(), $extraData, $featureArray);
+
         return [
             'user' => $userArray,
             'isEdge' => $user->isAMember(),
@@ -387,12 +393,12 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function getUserAfterRevenuecatPurchase($email, $password, $revenuecatOriginalAppUserId)
     {
-        $user = \Modules\UserManagementSystem\Models\User::where(
-            'revenuecat_origin_app_user_id',
-            '=',
-            $revenuecatOriginalAppUserId
-        )
-            ->first();
+        $user = \Modules\UserManagementSystem\Models\User::onWriteConnection()->where(
+        'revenuecat_origin_app_user_id',
+        '=',
+        $revenuecatOriginalAppUserId
+    )
+        ->first();
 
         if (!$user) {
             $user = $this->revenueCatService->syncSubscriber($revenuecatOriginalAppUserId, $email, true);
@@ -407,5 +413,21 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllBranchInformation()
+    {
+        return FeatureFlagging::allBranches(user());
+    }
+
+    /**
+     * @return array
+     */
+    public function getAccessibleFeatures()
+    {
+        return FeatureFlagging::allowedFeatures(user());
     }
 }

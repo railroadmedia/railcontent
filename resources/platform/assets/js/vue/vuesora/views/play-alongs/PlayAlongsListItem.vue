@@ -46,7 +46,7 @@
             </p>
 
             <p
-                class="tw-text-sm font-compressed text-truncate uppercase hide-md-up tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+                class="tw-text-sm text-truncate tw-uppercase tw-flex lg:tw-hidden tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
             >
                 <span
                     v-for="(item, i) in mappedData.column_data"
@@ -58,7 +58,7 @@
                     >-</span>
                     {{ item }}
                 </span>
-                <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+                <DifficultyLabel v-if="mappedData.difficulty" class="basic-col tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
             </p>
         </div>
 
@@ -149,7 +149,7 @@ export default {
         mappedData() {
             let difficultyValue = 'all';
             if(this.contentModel.post.fields) difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value
-            
+
             const contentModel = JSON.parse(JSON.stringify(this.contentModel)) //Create a deep copy to not update reactive prop
 
             if (Number.isFinite(Number(difficultyValue))) {

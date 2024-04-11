@@ -3,13 +3,14 @@
 namespace App\Modules\Ecommerce\tests\Feature;
 
 use App\Modules\Ecommerce\Models\Product;
-use Modules\UserManagementSystem\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class AccessCodeTest extends TestCase
 {
     public function test_generate_access_code(): void
     {
+        Mail::fake();
         $product = Product::factory()->create();
         $this->artisan("generateAccessCodes $product->id 1 test_source --execute")->assertExitCode(0);
 
@@ -35,5 +36,6 @@ class AccessCodeTest extends TestCase
 
     public function test_claim_access_code(): void
     {
+        $this->markTestSkipped("TODO write a test for this");
     }
 }

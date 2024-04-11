@@ -9,6 +9,7 @@
             <directory suffix="Test.php">./tests/Unit</directory>
             <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Unit</directory>
             <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Unit</directory>
+            <directory suffix="Test.php">./app/Modules/MusoraApi/tests/V5/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./app/Modules/Brand/tests/Feature</directory>
@@ -16,6 +17,7 @@
             <directory suffix="Test.php">./app/Modules/Ecommerce/tests/Feature</directory>
             <directory suffix="Test.php">./app/Modules/Content/tests/Feature</directory>
             <directory suffix="Test.php">./app/Modules/UserManagementSystem/tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/FeatureFlagging/tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">

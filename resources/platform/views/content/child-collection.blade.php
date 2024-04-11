@@ -1,4 +1,4 @@
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'Songs'])
 
 @section('meta')
     <title>{{ $contentTitle }} | Musora</title>

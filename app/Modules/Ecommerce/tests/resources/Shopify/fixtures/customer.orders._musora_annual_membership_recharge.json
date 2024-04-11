@@ -1,0 +1,4833 @@
+{
+    "orders": [
+        {
+            "id": 5739903844644,
+            "admin_graphql_api_id": "gid://shopify/Order/5739903844644",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "7N5HI9D5D",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-03-07T10:14:37-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330098",
+            "note": null,
+            "note_attributes": [],
+            "number": 329098,
+            "order_number": 330098,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/44b304f8d296d122dc163a17dc5a449e/authenticate?key=246c26c57977c433011e5cac48d7123c",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-03-07T10:14:37-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "44b304f8d296d122dc163a17dc5a449e",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-03-07T10:14:45-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14688060703012,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14688060703012",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5739562860836,
+            "admin_graphql_api_id": "gid://shopify/Order/5739562860836",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "WPFY0L5CN",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-03-07T00:08:40-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330097",
+            "note": null,
+            "note_attributes": [],
+            "number": 329097,
+            "order_number": 330097,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/5a1e355f93096177c0d276182a9289a1/authenticate?key=13bce9db754ad92434bc61fed2b540ac",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-03-07T00:08:40-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "5a1e355f93096177c0d276182a9289a1",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-03-07T00:16:43-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14687433163044,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14687433163044",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5737671688484,
+            "admin_graphql_api_id": "gid://shopify/Order/5737671688484",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "WJFY9K0RG",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-03-05T00:09:08-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330096",
+            "note": null,
+            "note_attributes": [],
+            "number": 329096,
+            "order_number": 330096,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/d2921ed5c37db0e12957265a3dc8ff06/authenticate?key=5468b5799fe71305e9db9d96865b360b",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-03-05T00:09:08-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "d2921ed5c37db0e12957265a3dc8ff06",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-03-05T00:16:58-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14684002255140,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14684002255140",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5735747518756,
+            "admin_graphql_api_id": "gid://shopify/Order/5735747518756",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "9FL4DKALA",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-03-03T00:08:47-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330095",
+            "note": null,
+            "note_attributes": [],
+            "number": 329095,
+            "order_number": 330095,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/a77ca7ecc2b99b92757a7bd328e415d7/authenticate?key=671328c8566305338da6dfcd1f3421cd",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-03-03T00:08:47-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "a77ca7ecc2b99b92757a7bd328e415d7",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-03-03T00:16:34-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14680556011812,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14680556011812",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5733678350628,
+            "admin_graphql_api_id": "gid://shopify/Order/5733678350628",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "98NCAUF7J",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-03-01T00:11:01-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330094",
+            "note": null,
+            "note_attributes": [],
+            "number": 329094,
+            "order_number": 330094,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/455745a16cd56f42a58b38c46da604af/authenticate?key=edba5e9adcd43db4925b8d4813293d69",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-03-01T00:11:01-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "455745a16cd56f42a58b38c46da604af",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-03-01T00:19:30-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14676839203108,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14676839203108",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5731528671524,
+            "admin_graphql_api_id": "gid://shopify/Order/5731528671524",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "7VM60RTX6",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-28T00:09:22-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330093",
+            "note": null,
+            "note_attributes": [],
+            "number": 329093,
+            "order_number": 330093,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/aa2f4fe9fe2563baf7bff5efb2560e02/authenticate?key=dcf83061a38788c717915018816c687e",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-28T00:09:22-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "aa2f4fe9fe2563baf7bff5efb2560e02",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-28T00:18:26-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14672663150884,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14672663150884",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5729475002660,
+            "admin_graphql_api_id": "gid://shopify/Order/5729475002660",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "5NZILRAWE",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-26T00:08:39-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330092",
+            "note": null,
+            "note_attributes": [],
+            "number": 329092,
+            "order_number": 330092,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/5eb2c34bea3dd039627e0a9efebcd14a/authenticate?key=ed48b423eecf54a8c6ebd5d9c16cd8ea",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-26T00:08:39-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "5eb2c34bea3dd039627e0a9efebcd14a",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-26T00:15:41-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14668996018468,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14668996018468",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5727532646692,
+            "admin_graphql_api_id": "gid://shopify/Order/5727532646692",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "5PL88YJ5M",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-24T00:07:54-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330091",
+            "note": null,
+            "note_attributes": [],
+            "number": 329091,
+            "order_number": 330091,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/64e7612ae8a32567a88045aa4628012e/authenticate?key=e9ec1f63ef9196a9ee10731ae039cba1",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-24T00:07:54-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "64e7612ae8a32567a88045aa4628012e",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-24T00:15:50-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14665644081444,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14665644081444",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5725622894884,
+            "admin_graphql_api_id": "gid://shopify/Order/5725622894884",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "Q0580NTMD",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-22T00:08:46-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330090",
+            "note": null,
+            "note_attributes": [],
+            "number": 329090,
+            "order_number": 330090,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/077ed541170347248224bf241b2893cf/authenticate?key=1776a6dcb66717acc0474ca571220416",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-22T00:08:46-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "077ed541170347248224bf241b2893cf",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-22T00:16:49-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14662234767652,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14662234767652",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5723804729636,
+            "admin_graphql_api_id": "gid://shopify/Order/5723804729636",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "Q7ZXZMA6A",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-20T00:08:19-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330089",
+            "note": null,
+            "note_attributes": [],
+            "number": 329089,
+            "order_number": 330089,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/97a073813f17438abe2ef1de3eca4f8f/authenticate?key=b65f8ab6c1f07ffbc59cebc0124f9133",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-20T00:08:19-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "97a073813f17438abe2ef1de3eca4f8f",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-20T00:14:46-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14658964488484,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14658964488484",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5721855656228,
+            "admin_graphql_api_id": "gid://shopify/Order/5721855656228",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "XPW001ND3",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-18T00:08:24-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330088",
+            "note": null,
+            "note_attributes": [],
+            "number": 329088,
+            "order_number": 330088,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/b4ce17594df8e9847e673594e1a305ab/authenticate?key=20ff96635404a482b7a0cbb216ec3663",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-18T00:08:24-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "b4ce17594df8e9847e673594e1a305ab",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-18T00:15:20-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14655675629860,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14655675629860",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5714027053348,
+            "admin_graphql_api_id": "gid://shopify/Order/5714027053348",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "GIP8TL0VQ",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-16T00:08:48-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330087",
+            "note": null,
+            "note_attributes": [],
+            "number": 329087,
+            "order_number": 330087,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/a63a59ba0f65947cf6f0639aa489405b/authenticate?key=e80fbec4dffe64703d2a5696037518a6",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-16T00:08:48-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "a63a59ba0f65947cf6f0639aa489405b",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-16T00:16:44-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14636432752932,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14636432752932",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5708205556004,
+            "admin_graphql_api_id": "gid://shopify/Order/5708205556004",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "UCE5TL8HL",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-14T00:08:21-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330086",
+            "note": null,
+            "note_attributes": [],
+            "number": 329086,
+            "order_number": 330086,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/23a7432dbf9b536a0a2d606178282d84/authenticate?key=7b9cd8fd13f4ec19fc4f9f8ee7c45dee",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-14T00:08:21-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "23a7432dbf9b536a0a2d606178282d84",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-14T00:16:33-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14623468323108,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14623468323108",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5703733281060,
+            "admin_graphql_api_id": "gid://shopify/Order/5703733281060",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "JPC3KEMDJ",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-12T00:08:57-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330085",
+            "note": null,
+            "note_attributes": [],
+            "number": 329085,
+            "order_number": 330085,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/561e4efe13289eaec0424d7b02331d1a/authenticate?key=7c072d596261a968b7fe7df2ce7862e9",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-12T00:08:57-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "561e4efe13289eaec0424d7b02331d1a",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-12T00:16:15-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14614484648228,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14614484648228",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5699264643364,
+            "admin_graphql_api_id": "gid://shopify/Order/5699264643364",
+            "app_id": 294517,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "EI654G7TR",
+            "confirmed": true,
+            "contact_email": "test123@glalen.com",
+            "created_at": "2024-02-10T00:08:26-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "test123@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330084",
+            "note": null,
+            "note_attributes": [],
+            "number": 329084,
+            "order_number": 330084,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/1252f22fbc873a71797370e8b9a8b0d1/authenticate?key=3e900e65fbd6bfd18ca984761319b91a",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": "+12262368008",
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2024-02-10T00:08:26-05:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "subscription_contract",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription Recurring Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "1252f22fbc873a71797370e8b9a8b0d1",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-02-10T00:16:48-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [],
+            "line_items": [
+                {
+                    "id": 14562260680996,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14562260680996",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 1,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": null,
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Annual Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269644068,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-annual-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Annual Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499477796,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5566534222116,
+            "admin_graphql_api_id": "gid://shopify/Order/5566534222116",
+            "app_id": 580111,
+            "browser_ip": "142.117.131.28",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": "c1-1d03696ecd2a3120cca0b0192953ccd9",
+            "checkout_id": 36990318674212,
+            "checkout_token": "b411f137c33816bcdf08efd303a5b6dc",
+            "client_details": {
+                "accept_language": "en-US",
+                "browser_height": null,
+                "browser_ip": "142.117.131.28",
+                "browser_width": null,
+                "session_hash": null,
+                "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            },
+            "closed_at": "2023-11-07T10:00:55-05:00",
+            "company": null,
+            "confirmation_number": "CI2KGQL0Z",
+            "confirmed": true,
+            "contact_email": "wonipe9236@glalen.com",
+            "created_at": "2023-11-07T09:54:49-05:00",
+            "currency": "USD",
+            "current_subtotal_price": "25.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "25.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": "en-US",
+            "device_id": null,
+            "discount_codes": [],
+            "email": "wonipe9236@glalen.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": "/collections/all",
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#330083",
+            "note": null,
+            "note_attributes": [],
+            "number": 329083,
+            "order_number": 330083,
+            "order_status_url": "https://musora-sync-staging.myshopify.com/83175833892/orders/066587402e780f045e65a47881d1d79f/authenticate?key=ad2408bd5c7d2c3dcc6137c776d6f35f",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                "shopify_payments"
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-11-07T09:54:47-05:00",
+            "reference": "566d94de066a92b9a07adc315d8eb46e",
+            "referring_site": "https://musora-sync-staging.myshopify.com/products/None?recharge=true",
+            "source_identifier": "566d94de066a92b9a07adc315d8eb46e",
+            "source_name": "web",
+            "source_url": null,
+            "subtotal_price": "25.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Subscription, Subscription First Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": true,
+            "token": "066587402e780f045e65a47881d1d79f",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "25.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "25.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "25.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2023-11-07T10:00:55-05:00",
+            "user_id": null,
+            "billing_address": {
+                "first_name": "Wo",
+                "address1": "123 William Street",
+                "phone": "1 (226) 236-8008",
+                "city": "New York",
+                "zip": "10038",
+                "province": "New York",
+                "country": "United States",
+                "last_name": "Nipe",
+                "address2": null,
+                "company": null,
+                "latitude": 40.7094756,
+                "longitude": -74.0072955,
+                "name": "Wo Nipe",
+                "country_code": "US",
+                "province_code": "NY"
+            },
+            "customer": {
+                "id": 7795452051748,
+                "email": "test123@glalen.com",
+                "created_at": "2023-11-07T09:54:47-05:00",
+                "updated_at": "2024-03-07T10:14:38-05:00",
+                "first_name": "Wo",
+                "last_name": "Nipe",
+                "state": "disabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": "+12262368008",
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null,
+                    "consent_collected_from": "OTHER"
+                },
+                "tags": "Active Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7795452051748",
+                "default_address": {
+                    "id": 9907509592356,
+                    "customer_id": 7795452051748,
+                    "first_name": "Wo",
+                    "last_name": "Nipe",
+                    "company": null,
+                    "address1": "123 William Street",
+                    "address2": null,
+                    "city": "New York",
+                    "province": "New York",
+                    "country": "United States",
+                    "zip": "10038",
+                    "phone": "1 (226) 236-8008",
+                    "name": "Wo Nipe",
+                    "province_code": "NY",
+                    "country_code": "US",
+                    "country_name": "United States",
+                    "default": true
+                }
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4938099753252,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4938099753252",
+                    "created_at": "2023-11-07T10:00:55-05:00",
+                    "location_id": 92556230948,
+                    "name": "#330083.1",
+                    "order_id": 5566534222116,
+                    "origin_address": [],
+                    "receipt": [],
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-07T10:00:55-05:00",
+                    "line_items": [
+                        {
+                            "id": 14289145692452,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14289145692452",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Musora Monthly Membership",
+                            "price": "25.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "25.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "25.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8808269775140,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "musora-base-monthly-recurring-membership",
+                            "taxable": true,
+                            "title": "Musora Monthly Membership",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47234499707172,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "Musora",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14289145692452,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14289145692452",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Musora Monthly Membership",
+                    "price": "25.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "25.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8808269775140,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "musora-base-monthly-recurring-membership",
+                    "taxable": true,
+                    "title": "Musora Monthly Membership",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47234499707172,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "Musora",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        }
+    ]
+}

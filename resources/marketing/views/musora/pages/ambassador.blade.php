@@ -210,7 +210,10 @@
                 music instruction and earn in return</h4>
 
             <span class="join smaller mb-3 md:mb-0 md:mx-2 cursor-pointer border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="modal = true">Guidelines</span>
-            <a class="join smaller md:mx-2 bg-musora-gold text-black" x-on:click="apply = true">APPLY NOW</a>
+            <a class="join smaller md:mx-2 bg-musora-gold text-black"
+                href="https://musora.everflowclient.io/affiliate/signup"
+{{--                x-on:click="apply = true"--}}
+            >APPLY NOW</a>
         </div>
     </header>
     <section class="text-white text-center py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
@@ -241,7 +244,10 @@
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>2</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Fill This Out</strong></h4>
-                    <span class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="apply = true">APPLY NOW</span>
+                    <span class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold"
+{{--                        x-on:click="apply = true"--}}
+                        href="https://musora.everflowclient.io/affiliate/signup"
+                    >APPLY NOW</span>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
                     <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>3</strong></h1></div>
@@ -291,7 +297,7 @@
                 <li class="w-full leading-relaxed">
                     <i class="far fa-li fa-question-circle text-musora-gold text-4xl"></i>
                     <strong class="font-black">Who Is Tracking All Of This?</strong><br>
-                    Our Influencer Marketing Partnership Ambassador Calculation Thingamabob, or IMPACT. This fantastic system looks after all the tracking, assets, reporting, and calculations. It also makes sure you get paid on time and consistently.
+                    Everflow! This fantastic system looks after all the tracking, assets, reporting, and calculations. It also makes sure you get paid on time and consistently.
                 </li>
             </ul>
         </div>
@@ -303,9 +309,14 @@
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <span class="join bg-musora-gold text-black my-5 md:my-7 inline-block" x-on:click="apply = true">APPLY NOW</span>
+            <span class="join bg-musora-gold text-black my-5 md:my-7 inline-block"
+{{--                x-on:click="apply = true"--}}
+                href="https://musora.everflowclient.io/affiliate/signup">APPLY NOW</span>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:jmilligan@musora.com"><u>jmilligan@musora.com</u></a> after<br class="hidden md:inline">
-                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <span class="cursor-pointer" x-on:click="apply = true"><u>application page</u></span>.</p>
+                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <span class="cursor-pointer"
+{{--                    x-on:click="apply = true"--}}
+                    href="https://musora.everflowclient.io/affiliate/signup"
+                ><u>application page</u></span>.</p>
         </div>
     </section>
 
@@ -343,10 +354,7 @@
         @slot('content')
             <div class="relative w-full max-w-lg overflow-y-auto rounded-xl bg-white px-5 py-5 sm:px-8 sm:py-8 shadow-lg">
                 <h4 class="leading-tight text-center mb-3 sm:mb-5"><strong>Which program would you<br class="hidden sm:inline"> like to apply for? </strong></h4>
-                <a class="join w-full mb-4 bg-drumeo " href="http://app.impact.com/campaign-campaign-info-v2/Drumeo.brand">APPLY FOR Drumeo</a>
-                <a class="join w-full mb-4 bg-pianote " href="http://app.impact.com/campaign-campaign-info-v2/Pianote.brand">APPLY FOR Pianote</a>
-                <a class="join w-full mb-4 bg-guitareo " href="http://app.impact.com/campaign-campaign-info-v2/Guitareo.brand">APPLY FOR Guitareo</a>
-                <a class="join w-full bg-singeo " href="http://app.impact.com/campaign-campaign-info-v2/Singeo.brand">APPLY FOR Singeo</a>
+                <a class="join w-full mb-4 bg-drumeo " href="https://musora.everflowclient.io/affiliate/signup">APPLY</a>
             </div>
         @endslot
     @endcomponent

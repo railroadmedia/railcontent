@@ -72,7 +72,7 @@
             ],
             "FAQs" => [
                 "iconClass" => "fas fa-fw fa-question",
-                "url" => 'https://help.guitareo.com/',
+                "url" => 'https://help.musora.com/',
                 "target" => '_parent'
             ]
         ]

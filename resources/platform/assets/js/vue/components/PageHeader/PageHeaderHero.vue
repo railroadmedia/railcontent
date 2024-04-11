@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import Tooltip from "../Tooltip/Tooltip";

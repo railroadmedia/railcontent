@@ -9,26 +9,11 @@
             </template>
             <!-- Filter Tabs -->
             <FilterTabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
-            <!-- <div v-if="!hideFilter" class="tw-flex tw-grow tw-justify-end md:tw-hidden">
-                <button @click="handleOpenDropdown"
-                    class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
-                    <musora-icon :icon-name="sortIcon()" class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
-                </button>
-                <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
-                    class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
-                    <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
-                </button>
-                <button v-else @click="() => emit('onToggleCollapse')"
-                    class="tw-flex tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
-                    <AdjustmentsIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white tw-rotate-90" />
-                </button>
-                <slot></slot>
-            </div> -->
         </div>
         <div v-if="!hideControls" class="tw-flex tw-grow tw-items-start">
             <div class="tw-flex tw-grow tw-justify-end tw-items-center tw-relative">
-                <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" @on-submit="handleSubmit" />
-                <slot name="extra-icon"></slot>
+                <FilterSearch v-if="!hideSearch" :placeholder="searchPlaceholder" :search-term="searchTerm" :active-tab="activeTab" :tab-options="tabOptions" @on-submit="handleSubmit" />
+                <slot name="extra-icon-left"></slot>
                 <template v-if="!hideFilterIcon">
                     <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                             class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-black tw-bg-[#000C17] dark:tw-bg-white dark:tw-border-white tw-rounded-full">
@@ -47,6 +32,7 @@
                     <FilterSortDropdown v-if="showDropdown" :sortOptions="sortOptions" :selected-sort="selectedSort" @onClose="handleCloseDropdown"
                         @onSort="value => $emit('onSort', value)" />
                 </template>
+                <slot name="extra-icon-right"></slot>
             </div>
         </div>
     </div>
@@ -83,7 +69,7 @@ const props = defineProps({
     },
     searchPlaceholder: {
         type: String,
-        default: 'Search',
+        default: '',
     },
     selectedSort: {
         type: String,
@@ -115,7 +101,7 @@ const props = defineProps({
     },
     selectedFilters: {
         type: Object,
-        default: () => ({}),
+        default: () => ([]),
     },
 });
 
@@ -142,7 +128,7 @@ const handleOpenDropdown = () => {
 };
 
 const sortIcon = () => {
-    return props.sortOptions.length > 0 && props.sortOptions.find(option => option.value === props.selectedSort).icon;
+    return props.sortOptions.length > 0 && props.sortOptions.find(option => option.value === props.selectedSort)?.icon || '';
 }
 
 const hasPills = computed(() => {

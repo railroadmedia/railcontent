@@ -4,7 +4,9 @@ export const useUserStore = defineStore({
   id: 'User',
   state: () => ({
     user: null,
-    brand: 'drumeo'
+    brand: 'drumeo',
+    journeySection: null,
+    token: null,
   }),
   getters: {
     userId: (state) => state.user?.id,
@@ -12,6 +14,7 @@ export const useUserStore = defineStore({
     userProfilePictureUrl: (state) => state.user?.profile_picture_url,
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
+    isAdmin: (state) => state.user?.permission_level === 'administrator',
   },
   actions: {
     setUser (user) {
@@ -19,6 +22,12 @@ export const useUserStore = defineStore({
     },
     setCurrentBrand (brand) {
       this.brand = brand;
+    },
+    setJourneySection (journeySection) {
+      this.journeySection = journeySection;
+    },
+    setToken (token) {
+      this.token = token;
     }
   }
 });

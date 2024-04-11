@@ -11,7 +11,7 @@
     }
 @endphp
 
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'coaches'])
 
 @section('meta')
     <title>{{ ucfirst($brand) }} Coaches | Musora</title>
@@ -68,15 +68,12 @@
                             catalogue-type="grid"
                             limit="16"
                             :lock-unowned="true"
-                            :six-wide="true"
                             :force-wide-thumbs="true"
                             :pre-loaded-content="{{ $latestLessons }}"
                         >
                             <div class="tw-flex tw-flex-row nmh-1">
                                 @for($i = 0; $i < 6; $i++)
-                                    @include('partials.bladesora.members.skeletons.card-item', [
-                                        "cardClass" => 'six-wide',
-                                    ])
+                                    @include('partials.bladesora.members.skeletons.card-item')
                                 @endfor
                             </div>
                         </content-catalogue>
@@ -165,40 +162,6 @@
             default-sort="slug"
             :show-progress-filters="{{ json_encode(false) }}"
         ></collection-wrapper>
-{{--        <transition appear name="fade">--}}
-{{--            <content-catalogue--}}
-{{--                    theme-color="{{ $brand }}"--}}
-{{--                    brand="{{ $brand }}"--}}
-{{--                    content-endpoint="/railcontent/content?only_subscribed={{$onlySubscribedCoaches}}"--}}
-{{--                    catalogue-type="coaches-grid"--}}
-{{--                    limit="{{ $limitOverride ?? 18 }}"--}}
-{{--                    :infinite-scroll="true"--}}
-{{--                    :statuses="{{ json_encode(['published', 'scheduled']) }}"--}}
-{{--                    :filterable-values="{{ json_encode(['focus','style']) }}"--}}
-{{--                    :included-types="{{ json_encode(['instructor']) }}"--}}
-{{--                    :required-fields="{{json_encode(['is_coach,1'])}}"--}}
-{{--                    :pre-loaded-content="{{ $coaches->toResponseRawJson() }}"--}}
-{{--                    user-id="{{ auth()->id() }}"--}}
-{{--                    :is-admin="{{ json_encode(user()->isAdmin()) }}"--}}
-{{--                    :use-url-params="true"--}}
-{{--                    :lock-unowned="true"--}}
-{{--                    :show-loading-animation="true"--}}
-{{--                    sort-override="slug"--}}
-{{--                    :six-wide="true"--}}
-
-{{--                    @if(!empty($showSearch))--}}
-{{--                    :search-bar="true"--}}
-{{--                    :total-results="{{ $limitOverride ?? 18 }}"--}}
-{{--                    :search-endpoint="{{json_encode(url()->route('content.index'))}}"--}}
-{{--                    @endif--}}
-{{--            >--}}
-{{--                @for($i = 0; $i < ($limitOverride ?? 18); $i++)--}}
-{{--                    @include('partials.bladesora.members.skeletons.card-item', [--}}
-{{--                    "cardClass" => 'six-wide',--}}
-{{--                    ])--}}
-{{--                @endfor--}}
-{{--            </content-catalogue>--}}
-{{--        </transition>--}}
     </div>
 
 @endsection

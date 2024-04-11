@@ -268,21 +268,17 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    isAdmin: {
-      type: Boolean,
-      default: () => false,
-    },
   },
   computed: {
     mappedData() {
-      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty').value;
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty')?.value;
       const contentModel = JSON.parse(JSON.stringify(this.contentModel)) //Create a deep copy to not update reactive prop
       contentModel.list.difficulty = difficultyValue;
 
       const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
       const filteredColumnData = contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
       contentModel.list.column_data = filteredColumnData
-      
+
       return contentModel.list;
     },
 

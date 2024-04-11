@@ -275,5 +275,5 @@ $lessons = [
         });
     </script>
     <script defer src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
-    <script defer src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
+    <script defer src="{{ asset('/marketing/js/drumeo/form-tracking.js') }}"></script>
 @stop

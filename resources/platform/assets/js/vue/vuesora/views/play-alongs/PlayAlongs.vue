@@ -1,21 +1,12 @@
 <template>
     <div class="flex flex-column grow play-alongs tw-pt-[20px]">
-        <CollectionFilterWrapper
-            active-tab="All Play-Alongs"
-            :multi-select-columns="filterOptions"
-            :search-term="searchTerm"
-            :selected-filters="selectedFilters"
-            :selected-sort="sort"
-            :selected-progress="progress"
-            :sort-options="sortOptions"
-            :tab-options="tabOptions"
-            @on-filter-change="handleFilterChange"
-            @on-sort-change="handleContentSort"
-            @on-search-change="handleTriggerSearch"
-            @on-clear-filter="handleClearFilter"
-            @on-progress-change="handleProgressChange"
-        >
-            <template #extra-icon>
+        <CollectionFilterWrapper active-tab="All Play-Alongs" :multi-select-columns="filterOptions"
+            :search-term="searchTerm" :selected-filters="selectedFilters" :selected-sort="sort"
+            :selected-progress="progress" :sort-options="sortOptions" :tab-options="tabOptions"
+            @on-filter-change="handleFilterChange" @on-sort-change="handleContentSort"
+            @on-search-change="handleTriggerSearch" @on-clear-filter="handleClearFilter"
+            @on-progress-change="handleProgressChange">
+            <template #extra-icon-left>
                 <button
                     class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] dark:tw-border-white tw-rounded-full"
                     :class="isShuffle ? 'tw-border-[#000C17] tw-bg-[#000C17] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17]' : 'hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-text-[#000C17] dark:tw-text-white tw-bg-white dark:tw-bg-transparent'"
@@ -25,8 +16,7 @@
             </template>
         </CollectionFilterWrapper>
         <div class="tw-flex tw-flex-col tw-grow">
-            <PlayAlongsListItem
-                v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
+            <PlayAlongsListItem v-for="(item, i) in content" :ref="`list${item.id}`" :key="`list${item.id}`"
                 :index="i + 1" :item="item" :brand="brand"
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
@@ -56,17 +46,15 @@
             </div>
         </transition>
 
-        <PlayAlongsPlayer
-            v-show="activeItem != null" :no-sidebar="noSidebar" ref="progressBar" :active-item="activeItem"
-            :audio-player="audioPlayer" :drums="drums" :metronome="metronome" :loop="loop" :current-time="currentTime"
-            :total-duration="totalDuration" :current-position="currentPosition" :is-playing="isPlaying"
-            :anchor-offsets="anchorOffsets" :current-mouse-x="currentMousePosition.x" :played-content="playedContent"
-            :total-results="totalResults" :is-shuffle="isShuffle" :current-volume="Number(currentVolume * 100)"
-            @playPause="playPause" @nextTrack="playNextTrack" @previousTrack="playPreviousTrack" @seek="seek"
-            @drums="toggleDrums" @metronome="toggleMetronome" @loop="toggleLoop"
-            @anchorMouseDown="handleAnchorMouseDown" @anchorButtonClick="handleAnchorButtonClick"
-            @volumeChange="changeVolume"
-        />
+        <PlayAlongsPlayer v-show="activeItem != null" :no-sidebar="noSidebar" ref="progressBar"
+            :active-item="activeItem" :audio-player="audioPlayer" :drums="drums" :metronome="metronome" :loop="loop"
+            :current-time="currentTime" :total-duration="totalDuration" :current-position="currentPosition"
+            :is-playing="isPlaying" :anchor-offsets="anchorOffsets" :current-mouse-x="currentMousePosition.x"
+            :played-content="playedContent" :total-results="totalResults" :is-shuffle="isShuffle"
+            :current-volume="Number(currentVolume * 100)" @playPause="playPause" @nextTrack="playNextTrack"
+            @previousTrack="playPreviousTrack" @seek="seek" @drums="toggleDrums" @metronome="toggleMetronome"
+            @loop="toggleLoop" @anchorMouseDown="handleAnchorMouseDown" @anchorButtonClick="handleAnchorButtonClick"
+            @volumeChange="changeVolume" />
         <div class="flex flex-row hide">
             <audio id="playAlongsAudioPlayer" ref="audioPlayer" preload="auto"></audio>
         </div>
@@ -76,6 +64,7 @@
 import * as QueryString from 'query-string';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ContentService from '../../assets/js/services/content';
+import userJourney from '../../../../services/userJourney.js';
 import PlayAlongsListItem from './PlayAlongsListItem.vue';
 import UserCatalogueEvents from '../../mixins/UserCatalogueEvents';
 import PlayAlongsPlayer from './PlayAlongsPlayer.vue';
@@ -90,6 +79,7 @@ import ProgressTracker from "../../assets/js/classes/progress-tracker";
 import InputLabel from "../../../components/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "../../../../constants/brands";
 import { useFilterValues } from "../../../hooks/useFilterValues";
+import { useUserStore } from '../../../../stores/user.js';
 const { getFilterValues } = useFilterValues();
 
 export default {
@@ -277,6 +267,33 @@ export default {
         this.removeMouseEventHandlers();
     },
     methods: {
+        trackFilters() {
+            const userStore = useUserStore();
+            const payload = {
+                brand: userStore.brand,
+                section: userStore.journeySection,
+                progress: this.filterOptions.included_user_states,
+                filters: this.filterQueryObject.included_fields,
+            };
+
+            userJourney.trackFilter({
+                token: userStore.token,
+                payload
+            });
+        },
+        trackSort() {
+            const userStore = useUserStore();
+            const payload = {
+                sort: this.filterQueryObject.sort,
+                section: userStore.journeySection,
+                brand: userStore.brand,
+            };
+
+            userJourney.trackSort({
+                token: userStore.token,
+                payload
+            })
+        },
         getContent(resetPlaylist) {
             this.loading = true;
             return ContentService.getContent({
@@ -303,7 +320,8 @@ export default {
                     }
                 });
         },
-        updateContent(resetPlaylist = false){
+        updateContent(resetPlaylist = false) {
+            this.trackFilters();
             this.updatePageUrl();
 
             this.$nextTick(() => {
@@ -329,7 +347,7 @@ export default {
                         this.filterOptions = getFilterValues(response.data.meta.filterOptions);
                     }
                 }).catch((e) => {
-                    console.log('ERROR',e);
+                    console.log('ERROR', e);
                 }).finally(() => {
                     this.$nextTick(() => {
                         this.loading = false;
@@ -374,23 +392,6 @@ export default {
             }
             return parsedOptions;
         },
-        parseRequiredFields() {
-            const selectedFilters = Object.keys(this.selectedFilters)
-                .filter(key => this.selectedFilters[key] != null);
-            const parsedFields = [];
-            selectedFilters.forEach((key) => {
-                if (key === 'bpm') {
-                    const bpmRange = this.selectedFilters[key].replace(/[+]/, '').split('-');
-                    parsedFields.push(`bpm,${bpmRange[0]},integer,>`);
-                    if (bpmRange[1]) {
-                        parsedFields.push(`bpm,${bpmRange[1]},integer,<`);
-                    }
-                } else {
-                    parsedFields.push(`${key},${this.selectedFilters[key]}`);
-                }
-            });
-            return parsedFields;
-        },
         getActiveFilters() {
             const urlParams = QueryString.parse(window.location.search, { arrayFormat: 'bracket' });
             this.page = urlParams.page || 1;
@@ -404,9 +405,9 @@ export default {
                 && urlParams.only_from_my_list == 1) {
                 this.showFavoritesOnly = true;
             }
-            if (urlParams.includede_user_states != null
-                && urlParams.includede_user_states.length > 0) {
-                this.progress = urlParams.includede_user_states[0];
+            if (urlParams.included_user_states != null
+                && urlParams.included_user_states.length > 0) {
+                this.progress = urlParams.included_user_states[0];
             }
         },
         updateTrack(item) {
@@ -667,6 +668,8 @@ export default {
             if (this.useUrlParams) {
                 this.updatePageUrl();
             }
+
+            this.trackSort();
             return this.getContent();
         },
         handleContentLimit(event) {

@@ -86,16 +86,13 @@
                                 catalogue-type="grid"
                                 limit="10"
                                 :lock-unowned="true"
-                                :five-wide="true"
                                 :force-wide-thumbs="true"
-                                :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newCourses }}"
+                                :full-width-on-mobile="{{ true }}"
                             >
                                 <div class="flex flex-row nmh-1">
                                     @for($i = 0; $i < 6; $i++)
-                                        @include('partials.bladesora.members.skeletons.card-item', [
-                                            "cardClass" => 'six-wide',
-                                        ])
+                                        @include('partials.bladesora.members.skeletons.card-item')
                                     @endfor
                                 </div>
                             </content-catalogue>
@@ -126,16 +123,13 @@
                                 catalogue-type="grid"
                                 limit="10"
                                 :lock-unowned="true"
-                                :five-wide="true"
                                 :force-wide-thumbs="true"
-                                :show-my-list-action="false"
                                 :pre-loaded-content="{{ $newQuickTips }}"
+                                :full-width-on-mobile="{{ true }}"
                             >
                                 <div class="flex flex-row nmh-1">
                                     @for($i = 0; $i < 6; $i++)
-                                        @include('partials.bladesora.members.skeletons.card-item', [
-                                            "cardClass" => 'six-wide',
-                                        ])
+                                        @include('partials.bladesora.members.skeletons.card-item')
                                     @endfor
                                 </div>
                             </content-catalogue>

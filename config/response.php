@@ -2444,7 +2444,9 @@ return [
             'is_enrolled_into_cohort',
             'show_learning_paths_on_homepage',
             'subcription_date',
-            'completed_workouts'
+            'completed_workouts',
+            'branches',
+            'features'
         ],
 
         'quick-tips' => [
@@ -5533,6 +5535,8 @@ return [
             'access_level',
             'is_enrolled_into_cohort',
             'completed_workouts',
+            'branches',
+            'features'
         ],
 
         'quick-tips' => [

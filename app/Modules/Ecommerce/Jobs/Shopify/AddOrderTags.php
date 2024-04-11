@@ -2,9 +2,12 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\ShopifyTagEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesShopifyRateLimit;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Customer;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\Models\Shopify\Rest\OrderLineItem;
@@ -32,11 +35,14 @@ class AddOrderTags implements ShouldQueue
 
     protected const TIMEOUT = 840;
     protected Shopify $shopify;
-    protected Customer $customer;
+    protected ?Customer $customer;
     /** @var Collection<Order> $otherOrders */
     protected Collection $otherOrders;
-    /** @var Collection<ShopifyTagEnum> $tagsToAdd */
-    protected Collection $tagsToAdd;
+    /** @var array<string, bool> */
+    protected array $orderTagsEnabled;
+
+    // buffer for subscription renewals (in case of failed payment, etc.)
+    protected int $subscriptionRenewalBufferDays = 60;
 
     public function __construct(
         protected Order $order,
@@ -44,7 +50,15 @@ class AddOrderTags implements ShouldQueue
         protected bool $isSimulation = false
     ) {
         $this->customer = $order->customer;
-        $this->tagsToAdd = collect();
+        $this->orderTagsEnabled = [
+            ShopifyTagEnum::TrialStart->value => in_array(ShopifyTagEnum::TrialStart->value, $order->tags),
+            ShopifyTagEnum::TrialConversion->value => in_array(ShopifyTagEnum::TrialConversion->value, $order->tags),
+            ShopifyTagEnum::InitialOrder->value => in_array(ShopifyTagEnum::InitialOrder->value, $order->tags),
+            ShopifyTagEnum::MembershipRenewal->value => in_array(
+                ShopifyTagEnum::MembershipRenewal->value,
+                $order->tags
+            ),
+        ];
     }
 
     public function handle(Shopify $shopify): void
@@ -54,25 +68,13 @@ class AddOrderTags implements ShouldQueue
 
         $this->otherOrders = $this->getOtherOrders();
 
-        if ($this->isInitialOrder()) {
-            $this->tagsToAdd->push(ShopifyTagEnum::InitialOrder);
-        }
-
-        if ($this->isTrialStart($this->order)) {
-            $this->tagsToAdd->push(ShopifyTagEnum::TrialStart);
-        }
-
-        // an order can't be a trial conversion AND (an initial order or a trial start), so skip this check
-        // if we already have a tag to apply
-        if ($this->tagsToAdd->isEmpty() && $this->isTrialConversion()) {
-            $this->tagsToAdd->push(ShopifyTagEnum::TrialConversion);
-        }
-
-        // an order can't be a membership renewal AND (a trial conversion or an initial order or a trial start), so skip this check
-        // if we already have a tag to apply
-        if ($this->tagsToAdd->isEmpty() && $this->isMembershipRenewal()) {
-            $this->tagsToAdd->push(ShopifyTagEnum::MembershipRenewal);
-        }
+        // check for each order tag and determine if this order should have it or note
+        $this->orderTagsEnabled[ShopifyTagEnum::TrialStart->value] = $this->isTrialStart($this->order);
+        $this->orderTagsEnabled[ShopifyTagEnum::TrialConversion->value] = $this->isTrialConversion();
+        $this->orderTagsEnabled[ShopifyTagEnum::MembershipRenewal->value] = $this->isMembershipRenewal();
+        $this->orderTagsEnabled[ShopifyTagEnum::InitialOrder->value] = $this->isInitialOrder(
+            $this->orderTagsEnabled[ShopifyTagEnum::MembershipRenewal->value]
+        );
 
         $this->applyTags();
     }
@@ -84,6 +86,11 @@ class AddOrderTags implements ShouldQueue
      */
     protected function getOtherOrders(): Collection
     {
+        // it's possible for there to be no customer on the order, so we just need to return the empty collection then
+        if (is_null($this->customer)) {
+            return collect();
+        }
+
         // DEV NOTE: make sure we have the status param, otherwise archived orders will be skipped
         $customerOrders = $this->shopify->getCustomerOrders($this->customer->id, ['status' => 'any']);
         $this->handleRateLimit();
@@ -99,33 +106,6 @@ class AddOrderTags implements ShouldQueue
     }
 
     /**
-     * Check if this is an initial order.
-     * Any initial purchase that comes from a customer using the checkout.
-     *
-     * @return bool
-     */
-    protected function isInitialOrder(): bool
-    {
-        if ($this->otherOrders->isEmpty()) {
-            return true;
-        }
-
-        // check for any other orders made before this one
-        $earlierOrders = $this->otherOrders
-            ->reject(fn(Order $otherOrder) => $otherOrder->processedAt->isAfter($this->order->processedAt));
-        $isFirstOrder = $earlierOrders->isEmpty();
-
-        // DEV NOTE: it's possible for multiple entries to have the same time, so use the order number as the next check
-        if ($earlierOrders->count() > 1) {
-            $isFirstOrder = $earlierOrders
-                ->filter(fn(Order $otherOrder) => $otherOrder->orderNumber < $this->order->orderNumber)
-                ->isEmpty();
-        }
-
-        return $isFirstOrder;
-    }
-
-    /**
      * Check if the given order is a trial start.
      * If the order item was for zero dollars and for a trial membership product, it's a Trial Start.
      *
@@ -134,6 +114,11 @@ class AddOrderTags implements ShouldQueue
      */
     private function isTrialStart(Order $order): bool
     {
+        // if the order already has the Trial Start tag, it is one
+        if ($this->orderTagsEnabled[ShopifyTagEnum::TrialStart->value]) {
+            return true;
+        }
+
         if (!$order->isTrialOrder()) {
             return false;
         }
@@ -155,6 +140,21 @@ class AddOrderTags implements ShouldQueue
      */
     protected function isTrialConversion(): bool
     {
+        // an order can't be a trial conversion AND a trial start
+        if ($this->orderTagsEnabled[ShopifyTagEnum::TrialStart->value]) {
+            return false;
+        }
+
+        // if the order already has the Trial Conversion tag, it is one
+        if ($this->orderTagsEnabled[ShopifyTagEnum::TrialConversion->value]) {
+            return true;
+        }
+
+        // if there are no other orders for the customer, it can't be a trial conversion
+        if ($this->otherOrders->isEmpty()) {
+            return false;
+        }
+
         // this order needs to be for a paid membership
         if ($this->order->totalPrice <= 0 || !$this->order->isMembershipOrder()) {
             return false;
@@ -192,6 +192,21 @@ class AddOrderTags implements ShouldQueue
      */
     protected function isMembershipRenewal(): bool
     {
+        // an order can't be a membership renewal AND (a trial conversion or a trial start)
+        if ($this->orderTagsEnabled[ShopifyTagEnum::TrialStart->value] || $this->orderTagsEnabled[ShopifyTagEnum::TrialConversion->value]) {
+            return false;
+        }
+
+        // if the order already has the Membership Renewal tag, it is one
+        if (in_array(ShopifyTagEnum::MembershipRenewal->value, $this->order->tags)) {
+            return true;
+        }
+
+        // if there are no other orders for the customer, it can't be a membership renewal
+        if ($this->otherOrders->isEmpty()) {
+            return false;
+        }
+
         // this order needs to be for a paid membership
         if ($this->order->totalPrice <= 0 || !$this->order->isMembershipOrder()) {
             return false;
@@ -203,8 +218,8 @@ class AddOrderTags implements ShouldQueue
             ->filter(fn(OrderLineItem $lineItem) => $lineItem->isMembership())
             ->first()
             ->product;
-        // annual or monthly, with a 2-week buffer
-        $historyDays = $membershipProduct->getMembershipTimeAsTotalDays() + 14;
+        // annual or monthly, with the buffer
+        $historyDays = $membershipProduct->getMembershipTimeAsTotalDays() + $this->subscriptionRenewalBufferDays;
         $historyPeriodStartDate = $this->order->processedAt->copy();
         $historyPeriodStartDate->subDays($historyDays);
 
@@ -220,21 +235,68 @@ class AddOrderTags implements ShouldQueue
     }
 
     /**
+     * Check if this is an initial order.
+     * An initial order is defined as an order that was placed by the customer (or by support) via a deliberate action,
+     * i.e. not automated.
+     *
+     * @param  bool  $isMembershipRenewal
+     * @return bool
+     */
+    protected function isInitialOrder(bool $isMembershipRenewal): bool
+    {
+        // if the order already has the Initial Order tag, it is one
+        if (in_array(ShopifyTagEnum::InitialOrder->value, $this->order->tags)) {
+            return true;
+        }
+
+        // if it came from one of out known automated sources, it can't be initial
+        if (in_array($this->order->sourceName, config('shopify.automated_source_names'))) {
+            return false;
+        }
+
+        // RevenueCat's webhook comes into MWP which then creates the order,
+        // so check if the source was MWP
+        if (in_array($this->order->sourceName, config('shopify.api_app.musora_web_platform.ids'))) {
+            // the only way we can tell if it's a RevenueCat order is if it has payment source metafields of Apple or Google
+            $metafields = $this->order->getMetafields();
+            $mobilePaymentSourceMetafields = $metafields->filter(function (MetaField $metaField) {
+                return $metaField->key === ShopifyMetafieldKey::PaymentSource->value
+                    && in_array(
+                        $metaField->value,
+                        [ShopifyPaymentSourceEnum::Apple->value, ShopifyPaymentSourceEnum::Google->value]
+                    );
+            });
+            if ($mobilePaymentSourceMetafields->isNotEmpty()) {
+                // we don't have any way to distinguish a RevenueCat initial order from a renewal, so we need to use $isMembershipRenewal
+                return !$isMembershipRenewal;
+            }
+        }
+
+        // otherwise, it came from a manual source and must be an Initial Order
+        return true;
+    }
+
+    /**
      * Apply all new tags that are to be added to this order.
      *
      * @return void
      */
     protected function applyTags(): void
     {
-        // transform the enums into their values, and remove any that are already in the order's tags
-        $this->tagsToAdd->transform(fn(ShopifyTagEnum $shopifyTagEnum) => $shopifyTagEnum->value);
-        $this->tagsToAdd = $this->tagsToAdd->reject(fn(string $tag) => in_array($tag, $this->order->tags));
+        // grab all the tags that should be enabled
+        $tagsToAdd = collect($this->orderTagsEnabled)->filter()->keys();
+
+        // do the safety sanitization in case of edge cases
+        $tagsToAdd = $this->sanitizeTags($tagsToAdd);
+
+        // remove any that already exist on the order
+        $tagsToAdd = $tagsToAdd->reject(fn(string $tag) => in_array($tag, $this->order->tags));
 
         $gql = <<<GQL
                 mutation {
                     tagsAdd (
                         id: "{$this->order->gid}"
-                        tags: $this->tagsToAdd
+                        tags: {$tagsToAdd->values()}
                     ) {
                     node {
                         id
@@ -247,27 +309,50 @@ class AddOrderTags implements ShouldQueue
             }
             GQL;
 
-        Log::info(sprintf('%s: Adding tags to Shopify Order %s: %s',
-            $this->getClassName(),
-            $this->order->id,
-            $this->tagsToAdd->isEmpty() ? '(none)' : $this->tagsToAdd->implode(', ')
-        ));
+        Log::info(
+            sprintf(
+                '%s: Adding tags to Shopify Order %s: %s',
+                $this->getClassName(),
+                $this->order->id,
+                $tagsToAdd->isEmpty() ? '(none)' : $tagsToAdd->implode(', ')
+            )
+        );
 
-        if (!$this->isSimulation && $this->tagsToAdd->isNotEmpty()) {
+        if (!$this->isSimulation && $tagsToAdd->isNotEmpty()) {
             try {
                 $this->executeQuery($gql);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
+                Log::debug($gql);
             }
         }
     }
 
     /**
-     * @inheritDoc
+     * Perform any necessary sanitization for edge cases.
+     * In general, no order should ever have a combination of these tags:
+     *      Trial Conversion
+     *      Initial Order
+     *      Membership Renewal
+     * If one does have more than one of these tags, we should remove the excess based on the priority order above.
+     *
+     * @param  Collection  $tags
+     * @return Collection
      */
-    protected function getIsSimulation(): bool
+    protected function sanitizeTags(Collection $tags): Collection
     {
-        return $this->isSimulation;
+        $hasTrialConversion = $tags->contains(ShopifyTagEnum::TrialConversion->value);
+        $hasInitialOrder = $tags->contains(ShopifyTagEnum::InitialOrder->value);
+
+        return $tags->filter(function (string $tag) use ($hasTrialConversion, $hasInitialOrder) {
+            if ($tag === ShopifyTagEnum::InitialOrder->value && $hasTrialConversion) {
+                return false;
+            }
+            if ($tag === ShopifyTagEnum::MembershipRenewal->value && ($hasTrialConversion || $hasInitialOrder)) {
+                return false;
+            }
+            return true;
+        });
     }
 
     /**
@@ -276,6 +361,14 @@ class AddOrderTags implements ShouldQueue
     protected function getClassName(): string
     {
         return class_basename(__CLASS__);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getIsSimulation(): bool
+    {
+        return $this->isSimulation;
     }
 
     /**

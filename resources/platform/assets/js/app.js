@@ -13,6 +13,7 @@ import { createPinia } from 'pinia';
 //App Pages
 import Workouts from './vue/Views/Workouts';
 import Songs from './vue/Views/Songs';
+import Artists from './vue/Views/Artists.vue';
 import WorkoutsPlayback from './vue/Views/WorkoutsPlayback';
 import Home from './vue/Views/Home.vue';
 import ChildCatalog from './vue/Views/ChildCatalog.vue';
@@ -21,6 +22,7 @@ import Schedule from './vue/Views/Schedule';
 import Playlists from './vue/Views/Playlists';
 import Playlist from './vue/Views/Playlist';
 import Referral from './vue/Views/Referral';
+import Stc from './vue/Views/STC';
 import LessonHistory from './vue/Views/LessonHistory';
 
 //App Components
@@ -282,12 +284,14 @@ app.component('AppContainer', AppContainer)
     .component('PageHeader', PageHeader)
     .component('WorkoutsPlayback', WorkoutsPlayback)
     .component('Songs', Songs)
+    .component('Artists', Artists)
     .component('ChildCatalog', ChildCatalog)
     .component('Support', Support)
     .component('Schedule', Schedule)
     .component('Playlists', Playlists)
     .component('Playlist', Playlist)
     .component('Referral', Referral)
+    .component('Stc', Stc)
     // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
 

@@ -223,7 +223,7 @@ class RevenueCatController extends Controller
                         $processedAt
                     );
                     if ($orderId) {
-                        $this->shopifySyncService->cancelOrder($user->shopify_id, $user->email, $orderId);
+                        $this->shopifySyncService->refundAndCancelOrder($user, $orderId);
                         $this->unsetUserSubscription($user, $type);
                     }
                 }

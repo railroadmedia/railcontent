@@ -68,7 +68,7 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/{brand}/lessons/recommended', [ContentPagesController::class, 'recommendedLessons'])
                     ->whereIn('brand', all_brands())
-                    ->name('platform.recommended-lessons');
+                    ->name('platform.recommended-lessons')->middleware('feature:recsys,on,404');
 
                 Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
                     ->whereIn('brand', all_brands())
@@ -80,7 +80,12 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/{brand}/artists/{slug}', [ContentPagesController::class, 'artistSongs'])
                     ->whereIn('brand', all_brands())
+                    ->where('slug', '(.*)')
                     ->name('platform.content.artist.show');
+
+                Route::get('/{brand}/artists', [ContentPagesController::class, 'artists'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content.artists.show');
 
                 Route::get('/{brand}/genres/{genre}/{contentTypeName}', [ContentPagesController::class, 'genreContentByType'])
                     ->whereIn('brand', all_brands())->whereIn('contentTypeName', [
@@ -127,6 +132,7 @@ Route::domain('{musoraDomain}')
                         'drum-fest-international-2022',
                         'student-focus',
                     ])
+                    ->where('genre', '(.*)')
                     ->name('platform.content.genre.show');
 
                 Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
@@ -850,7 +856,7 @@ Route::get(
         /*
          * Home Page
          */
-        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
+        Route::get('/{brand}/comments', [\App\Http\Controllers\Platform\CommentModerationController::class, 'comments'])
             ->whereIn('brand', all_brands())
             ->name('platform.members-area.comments');
     });

@@ -38,9 +38,9 @@
         <!-- Action Button -->
         <div class="tw-flex tw-flex-col tw-justify-between tw-pl-[5px] tw-relative tw-h-[78px]">
             <button @click="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
-                <PlusIcon class="tw-h-[18px] tw-w-[18px]" />
+                <PlusIcon class="tw-h-[18px] tw-w-[18px] dark:tw-text-white" />
             </button>
-            <button class="tw-h-[18px] tw-w-[18px] tw-flex tw-items-center tw-justify-center tw-text-center" @click="$emit('progressReset', { content_id: item.id })">
+            <button class="tw-h-[18px] tw-w-[18px] tw-flex tw-items-center tw-justify-center tw-text-center dark:tw-text-white" @click="$emit('progressReset', { content_id: item.id })">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.5857 0.571415C1.5857 0.287379 1.35543 0.0571289 1.07141 0.0571289C0.787402 0.0571289 0.557129 0.287379 0.557129 0.571415V4.32142C0.557129 4.60544 0.787402 4.8357 1.07141 4.8357H4.82139C5.10547 4.8357 5.33568 4.60544 5.33568 4.32142C5.33568 4.03738 5.10547 3.80713 4.82139 3.80713H2.4061C3.39857 2.17547 5.19348 1.0857 7.24284 1.0857C10.3672 1.0857 12.9 3.61849 12.9 6.74284C12.9 9.8672 10.3672 12.4 7.24284 12.4C5.16159 12.4 3.34282 11.2761 2.36039 9.60204C2.25844 9.42831 2.07582 9.31427 1.87436 9.31427C1.49153 9.31427 1.23458 9.70367 1.42348 10.0366C2.57234 12.062 4.748 13.4286 7.24284 13.4286C10.9353 13.4286 13.9286 10.4353 13.9286 6.74284C13.9286 3.05042 10.9353 0.0571289 7.24284 0.0571289C4.86088 0.0571289 2.7699 1.30277 1.5857 3.17816V0.571415Z" fill="currentColor"/>
                 </svg>

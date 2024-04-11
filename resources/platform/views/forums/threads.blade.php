@@ -32,7 +32,7 @@
     $headerDataObj = json_decode($headerDataJson);
 @endphp
 
-@extends('partials.layout')
+@extends('partials.layout', ['trackingSectionName' => 'forums'])
 
 @section('meta')
     <title>{{$discussion['title']}} | Forums | {{ $brand }}</title>

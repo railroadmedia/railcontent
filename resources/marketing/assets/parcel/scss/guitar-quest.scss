@@ -419,8 +419,8 @@ main + footer.sales-footer .site-map h1 {
 }
 
 
-.infusion-form input,
-.infusion-form button {
+.ajax-form input,
+.ajax-form button {
   font: 400 18px/45px 'Open Sans', sans-serif;
   height: 45px;
   color: #999;
@@ -439,10 +439,10 @@ main + footer.sales-footer .site-map h1 {
   }
 }
 
-.infusion-form input {
+.ajax-form input {
   border: 2px solid #000;
 }
-.infusion-form button {
+.ajax-form button {
   font-family: $bebas;
   color: #FFF;
   background: #9101f6;

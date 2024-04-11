@@ -15,7 +15,7 @@
     @parent
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
-        .infusion-form button {
+        .ajax-form button {
             background:linear-gradient(to bottom, #01c474, #008e54)!important;
         }
         header .disclaimer {

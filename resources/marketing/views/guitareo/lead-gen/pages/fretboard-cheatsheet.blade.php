@@ -22,11 +22,11 @@
             text-shadow:none;
         }
 
-        .hero-header .infusion-form button {
+        .hero-header .ajax-form button {
             background:#01c9ac;
         }
 
-        .hero-header .infusion-form button:hover {
+        .hero-header .ajax-form button:hover {
             background:#02e0bf;
         }
 

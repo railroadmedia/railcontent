@@ -52,7 +52,7 @@
     <coach-grid-catalogue v-if="catalogueType === 'coach-grid'" :content="content" :brand="brand"
       :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
       :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
-      :six-wide="sixWide" :five-wide="fiveWide" :show-my-list-action="showMyListAction" :display-inline="displayInline"
+      :show-my-list-action="showMyListAction" :display-inline="displayInline"
       @addToList="addToListEventHandler" />
 
     <!-- Coach Index Page -->
@@ -61,15 +61,15 @@
       :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
       :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToListEventHandler" />
 
-    <grid-catalogue v-if="catalogueType === 'grid'" :add-dark-mode-color="addDarkModeColor" :content="content"
+    <grid-catalogue v-if="catalogueType === 'grid'" :content="content"
       :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
       :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
-      :six-wide="sixWide" :five-wide="fiveWide" :show-my-list-action="showMyListAction" :display-inline="displayInline" :is-single-item="isSingleItem" :full-width-on-Mobile="fullWidthOnMobile" :add-margin-bottom="addMarginBottom"
+      :show-my-list-action="showMyListAction" :display-inline="displayInline" :is-single-item="isSingleItem" :full-width-on-mobile="fullWidthOnMobile"
       @addToList="addToListEventHandler" />
 
     <routines-catalogue v-if="catalogueType === 'routines'" :content="content" :brand="brand" :theme-color="themeColor"
       :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride" :six-wide="sixWide"
+      :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
       :display-inline="displayInline" @addToList="addToListEventHandler" />
 
     <list-catalogue v-if="catalogueType === 'list'" :is-coach="isCoach" :content="content" :brand="brand"
@@ -142,10 +142,6 @@ export default {
   },
   mixins: [UserCatalogueEvents, ThemeClasses],
   props: {
-    addDarkModeColor: {
-      type: Boolean,
-      default: () => true,
-    },
     searchBarTitle: {
       type: String,
       default: '',
@@ -310,14 +306,6 @@ export default {
       type: String,
       default: () => "",
     },
-    sixWide: {
-      type: Boolean,
-      default: () => false,
-    },
-    fiveWide: {
-      type: Boolean,
-      default: () => false,
-    },
     displayInline: {
       type: Boolean,
       default: () => false,
@@ -358,10 +346,6 @@ export default {
     fullWidthOnMobile: {
         type: Boolean,
         default: () => false,
-    },
-    addMarginBottom: {
-        type: Boolean,
-        default: () => true,
     },
   },
   data() {

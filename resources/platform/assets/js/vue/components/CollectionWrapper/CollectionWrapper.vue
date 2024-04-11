@@ -6,7 +6,7 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
@@ -159,7 +159,7 @@ const props = defineProps({
     },
     searchPlaceholder: {
         type: String,
-        default: 'Search',
+        default: '',
     },
     withoutEnrollment: {
         type: Boolean,
@@ -225,6 +225,10 @@ const includedTypes = computed(() => {
 })
 
 //Collection type reactives
+const isRecommendation = computed(() => {
+    return props.collectionType === 'Recommendation';
+})
+
 const isArchives = computed(() => {
     return props.collectionType === 'recording';
 })
@@ -238,7 +242,7 @@ const isCoach = computed(() => {
 })
 
 const isSong = computed(() => {
-    return props.collectionType === 'song';
+    return props.collectionType === 'song' || (isRecommendation.value && getActiveTab.value === 'Songs');
 })
 
 const isCourse = computed(() => {
@@ -295,7 +299,7 @@ const isThreads = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isWorkout.value && !isChallenge.value  && props.collectionType;
+    return !isRecommendation.value && !isWorkout.value && !isChallenge.value  && props.collectionType;
 })
 
 const showGroupBy = computed(() => {
@@ -315,7 +319,7 @@ const getTabOptions = computed(() => {
     if (props.tabs?.length) {
         return props.tabs.map(({ name, value, is_required_field, is_group_by }) => {
             return {
-                key: (is_group_by) ? 'group_by,' + value[0]:value,
+                key: (is_group_by) ? ['group_by,' + value[0]] : value,
                 value: name,
                 groupByView: (is_group_by) ? true : false,
             }

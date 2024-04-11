@@ -8,6 +8,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Decorators\Decorator;
+use Illuminate\Support\Facades\Log;
 
 class GroupedContentDecorator extends ModeDecoratorBase
 {
@@ -26,7 +27,7 @@ class GroupedContentDecorator extends ModeDecoratorBase
 
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->whereIn('type', ['style', 'artist', 'instructor']);
+        $contentsOfType = $contents->whereIn('type', ['style', 'artist', 'instructor', 'recommended']);
 
         if ($contentsOfType->isEmpty()) {
             return $contents;
@@ -36,11 +37,11 @@ class GroupedContentDecorator extends ModeDecoratorBase
 
             if ($content['type'] == 'artist') {
                 $artist = $this->contentService->getWhereTypeInAndStatusAndField(['artist'],'published','name',$content['grouped_by_field'],'string')->first();
-
+                $artistSlug = encodeURI($content['artist']);
                 $lessonType =  $content['lessons'][0]['type'] ?? '';
                 $contents[$index]['url'] = url()->route('platform.content.artist.show', [
                     'brand' => brand(),
-                    'slug' => urlencode(urlencode($content['artist'])),
+                    'slug' => $artistSlug,
                     'included_fields[]' => 'type,'.ucwords(str_replace('-',' ',$lessonType)),
                 ]);
                 $contents[$index]['total_plays'] = $this->userContentProgressService->countByArtistTypesUserProgress(
@@ -61,9 +62,10 @@ class GroupedContentDecorator extends ModeDecoratorBase
                 $genre = $this->contentService->getWhereTypeInAndStatusAndField(['style'],'published','name',$content['grouped_by_field'],'string')->first();
                 $lessonType =  array_flip(PrimaryURLSlugToContentTypeMap::$map)[$content['lessons'][0]['type']] ?? '';
                 if($content['grouped_by_field'] != ''){
+                    $genreUrl = encodeURI($content['grouped_by_field']);
                     $contents[$index]['url'] = url()->route('platform.content.genre.show', [
                         'brand' => brand(),
-                        'genre' => urlencode(urlencode($content['grouped_by_field'])),
+                        'genre' => $genreUrl,
                         'contentTypeName' => $lessonType,
                     ]);
                     $contents[$index]['data'][] = [
@@ -78,6 +80,19 @@ class GroupedContentDecorator extends ModeDecoratorBase
                         'type' => 'string',
                         'position' => 1,
                     ];
+                }
+            } else if ($content['type'] == 'recommended') {
+                $id = strtolower($content['id']);
+                $filter = match(true) {
+                    str_contains($id, 'song') => 'song',
+                    str_contains($id, 'lesson') => 'lesson',
+                    default => ''
+                };
+                if ($filter) {
+                    $content['url'] = url()->route('platform.recommended-lessons', [
+                        'brand' => brand(),
+                        'tabs[]' => "filter,$filter",
+                    ]);
                 }
             } else {
                 if(isset($content['content_type'])) {

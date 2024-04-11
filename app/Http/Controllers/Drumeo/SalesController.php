@@ -79,10 +79,6 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
-    public function promoAnniversary()
-    {
-        return view('drumeo.sales.anniversary', ['theme' => 'drumeo', 'promoVersion' => 'true']);
-    }
     public function choosePlanVDF()
     {
         return view('drumeo.sales.pages.vdf', ['theme' => 'drumeo']);
@@ -163,6 +159,27 @@ class SalesController extends BaseController
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
         ]);
+    }
+
+    public function thirtyDayIndependence()
+    {
+        $productId = 800;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-independence', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+    
+    public function thirtyDayDrummerDeal()
+    {
+        return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['theme' => 'drumeo']);
     }
 
     public function impact()
@@ -328,4 +345,5 @@ class SalesController extends BaseController
     {
         return view('drumeo.pages.vote', ['theme' => 'drumeo']);
     }
+
 }
