@@ -28,8 +28,9 @@
         'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
         'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
       }">
-          <PageHeaderRowInfo v-if="isSongsPage" class="tw-self-end" :infoData="infoData" />
-          <div v-if="isSongsPage">See all artists >></div>
+          <a v-if="isSongsPage" :href="songsPageLink.url">
+            <PageHeaderRowInfo :infoData="[songsPageLink.text]" />
+          </a>
           <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
             :ctas="secondaryCtas" />
         </div>
@@ -104,6 +105,8 @@ const isStudentFocusCatalougePage = computed(() => isStudentReviewPage.value || 
 
 const isForumsPage = computed(() => props.pageType === 'forums');
 const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
+
+const songsPageLink = computed(() => props.pageType === 'songs' ? props.infoData : null);
 
 // const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value || isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
 
