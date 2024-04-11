@@ -131,7 +131,6 @@ class ContentJsonController extends Controller
 
         $brand = $request->get('brand', brand());
         $pageSize = $request->get('limit', 5);
-        $randomize = $request->get('randomize', 0);
         $filter = FiltersHelper::$filter ?? '';
         $page = $request->get('page', 1);
         $sections = match(strtolower($filter)) {
@@ -152,7 +151,6 @@ class ContentJsonController extends Controller
             user()->id,
             $brand,
             sections: $sections,
-            randomize:$randomize,
             pageSize:$pageSize,
             page:$page,
             groupByForLessonsPage: $groupBySections
@@ -214,13 +212,13 @@ class ContentJsonController extends Controller
             Log::warning("No content with id $id exists. (userId:$userId)");
 
             return reply()->json(null, [
-                                         'code' => 404,
-                                         'totalResults' => 0,
-                                         'errors' => [
-                                             'title' => 'Entity not found.',
-                                             'detail' => 'No content with id '.$id.' exists.',
-                                         ],
-                                     ]);
+                'code' => 404,
+                'totalResults' => 0,
+                'errors' => [
+                    'title' => 'Entity not found.',
+                    'detail' => 'No content with id '.$id.' exists.',
+                ],
+            ]);
         }
 
         //        $rules = $this->contentService->getValidationRules($content);
@@ -420,10 +418,10 @@ class ContentJsonController extends Controller
             array_values(array_diff($filterOptions['content_type'] ?? [], ['course-part']));
 
         return (new ContentFilterResultsEntity([
-                                                   'results' => $lessons,
-                                                   'total_results' => $totalResults,
-                                                   'filter_options' => $filterOptions,
-                                               ]))->toJsonResponse();
+            'results' => $lessons,
+            'total_results' => $totalResults,
+            'filter_options' => $filterOptions,
+        ]))->toJsonResponse();
     }
 
     /**

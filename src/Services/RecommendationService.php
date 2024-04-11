@@ -29,35 +29,22 @@ class RecommendationService
         ];
     }
 
-
-
-    public function getFilteredRecommendations($userID, $brand, array $sections=[]): array
+    public function getFilteredRecommendations($userID, $brand, array $sections=[], bool $useFastImplementation=false): array
     {
         // Single section state where we call the faster implementation
-        if (count($sections) == 1) {
+        if ($useFastImplementation && count($sections) == 1) {
             $section = $sections[0];
             if ($this->hasNoResults($brand, $section)) {
                 return [];
             }
-            $content = [
+            return [
                 strtolower($section->value) => $this->getFilteredRecommendationsBySection($userID, $brand, $section)
             ];
-            return $content;
         }
-
-        $allContent = $this->getAllFilteredRecommendations($userID, $brand);
-        // strictly defined sections state
-        if ($sections) {
-            $content = [];
-            foreach($sections as $section) {
-                $content[$section->value] = $allContent[$section->value] ?? [];
-            }
-            // all sections state
-        } else {
-            $content = $allContent;
-        }
-        return $content;
+        return $this->getAllFilteredRecommendations($userID, $brand);
     }
+
+
 
     private function hasNoResults($brand, $section): bool
     {

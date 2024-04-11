@@ -47,89 +47,6 @@ use Railroad\Railcontent\Support\Collection;
 
 class ContentService
 {
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
-
-    /**
-     * @var ContentVersionRepository
-     */
-    private $versionRepository;
-
-    /**
-     * @var ContentFieldRepository
-     */
-    private $fieldRepository;
-
-    /**
-     * @var ContentDatumRepository
-     */
-    private $datumRepository;
-
-    /**
-     * @var ContentHierarchyRepository
-     */
-    private $contentHierarchyRepository;
-
-    /**
-     * @var CommentRepository
-     */
-    private $commentRepository;
-
-    /**
-     * @var CommentAssignmentRepository
-     */
-    private $commentAssignationRepository;
-
-    /**
-     * @var ContentPermissionRepository
-     */
-    private $contentPermissionRepository;
-
-    /**
-     * @var UserContentProgressRepository
-     */
-    private $userContentProgressRepository;
-
-    /**
-     * @var UserPermissionsRepository
-     */
-    private $userPermissionRepository;
-    /**
-     * @var ContentFollowsRepository
-     */
-    private $contentFollowRepository;
-
-    /**
-     * @var ElasticService
-     */
-    private $elasticService;
-    /**
-     * @var ContentTopicRepository
-     */
-    private $contentTopicRepository;
-    /**
-     * @var ContentInstructorRepository
-     */
-    private $contentInstructorRepository;
-    /**
-     * @var ContentStyleRepository
-     */
-    private $contentStyleRepository;
-
-    private $contentBpmRepository;
-    /**
-     * @var ContentVideoRepository
-     */
-    private $contentVideoRepository;
-
-    /**
-     * @var RecommendationService
-     */
-    private $recommendationService;
-
-    private DatabaseManager $databaseManager;
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
@@ -143,17 +60,12 @@ class ContentService
 
     /**
      * @param ContentRepository $contentRepository
-     * @param ContentVersionRepository $versionRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
      * @param ContentPermissionRepository $contentPermissionRepository
      * @param CommentRepository $commentRepository
-     * @param CommentAssignmentRepository $commentAssignmentRepository
      * @param UserContentProgressRepository $userContentProgressRepository
-     * @param UserPermissionsRepository $userPermissionsRepository
-     * @param ContentFollowsRepository $contentFollowsRepository
-     * @param ElasticService $elasticService
      * @param ContentTopicRepository $contentTopicRepository
      * @param ContentInstructorRepository $contentInstructorRepository
      * @param ContentStyleRepository $contentStyleRepository
@@ -161,45 +73,21 @@ class ContentService
      * @param RecommendationService $recommendationService
      */
     public function __construct(
-        ContentRepository $contentRepository,
-        ContentVersionRepository $versionRepository,
-        ContentFieldRepository $fieldRepository,
-        ContentDatumRepository $datumRepository,
-        ContentHierarchyRepository $contentHierarchyRepository,
-        ContentPermissionRepository $contentPermissionRepository,
-        CommentRepository $commentRepository,
-        CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository,
-        UserPermissionsRepository $userPermissionsRepository,
-        ContentFollowsRepository $contentFollowsRepository,
-        ElasticService $elasticService,
-        ContentTopicRepository $contentTopicRepository,
-        ContentInstructorRepository $contentInstructorRepository,
-        ContentStyleRepository $contentStyleRepository,
-        ContentBpmRepository $contentBpmRepository,
-        DatabaseManager $databaseManager,
-        ContentVideoRepository $contentVideoRepository,
-        RecommendationService $recommendationService,
+        private ContentRepository $contentRepository,
+        private ContentFieldRepository $fieldRepository,
+        private ContentDatumRepository $datumRepository,
+        private ContentHierarchyRepository $contentHierarchyRepository,
+        private ContentPermissionRepository $contentPermissionRepository,
+        private CommentRepository $commentRepository,
+        private UserContentProgressRepository $userContentProgressRepository,
+        private ContentTopicRepository $contentTopicRepository,
+        private ContentInstructorRepository $contentInstructorRepository,
+        private ContentStyleRepository $contentStyleRepository,
+        private ContentBpmRepository $contentBpmRepository,
+        private DatabaseManager $databaseManager,
+        private ContentVideoRepository $contentVideoRepository,
+        private RecommendationService $recommendationService,
     ) {
-        $this->contentRepository = $contentRepository;
-        $this->versionRepository = $versionRepository;
-        $this->fieldRepository = $fieldRepository;
-        $this->datumRepository = $datumRepository;
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
-        $this->contentPermissionRepository = $contentPermissionRepository;
-        $this->commentRepository = $commentRepository;
-        $this->commentAssignationRepository = $commentAssignmentRepository;
-        $this->userContentProgressRepository = $userContentProgressRepository;
-        $this->userPermissionRepository = $userPermissionsRepository;
-        $this->contentFollowsRepository = $contentFollowsRepository;
-        $this->elasticService = $elasticService;
-        $this->contentTopicRepository = $contentTopicRepository;
-        $this->contentInstructorRepository = $contentInstructorRepository;
-        $this->contentStyleRepository = $contentStyleRepository;
-        $this->contentBpmRepository = $contentBpmRepository;
-        $this->databaseManager = $databaseManager;
-        $this->contentVideoRepository = $contentVideoRepository;
-        $this->recommendationService = $recommendationService;
     }
 
     /**
@@ -234,31 +122,49 @@ class ContentService
      * @param int user_id
      * @param string brand
      * @param RecommenderSection[] sections
-     * @param bool randomize
      * @param int limit -
      * @return mixed|Collection|null
      */
-    public function getRecommendedContent($user_id, $brand, array $sections=[], bool $randomize=false, $pageSize=6, $page=1, array $groupByForLessonsPage = [])
+    public function getRecommendedContent($user_id, $brand, array $sections=[], $pageSize=6, $page=1, array $groupByForLessonsPage = [])
     {
-        $sectionString = count($sections) == 0 ? 'ALL' : implode('-', array_map(function($section) { return $section->value;}, $sections));
+        $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
+        $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
+            '-',
+            array_map(function ($section) {
+                return $section->value;
+            }, $sections)
+        );
         $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
         $cached = Cache::store('redis')->get($cacheKey);
         if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
             $recommendations = $cached;
         } else {
-            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections);
+            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections, $useFastImplementation);
             $ttl = 60 * 60;
             Cache::store('redis')
                 ->put($cacheKey, $recommendations, $ttl);
         }
-
-        $processedRecommendations = $this->postProcessRecommendations($recommendations, $randomize, $pageSize, $page, $user_id, $groupByForLessonsPage);
+        $filteredBySectionRecommendations = $this->filterRecommendedSections($recommendations, $sections);
+        $processedRecommendations = $this->postProcessRecommendations($filteredBySectionRecommendations, $pageSize, $page, $user_id, $groupByForLessonsPage);
         return $this->getContentFilterResultsFromRecommendations($processedRecommendations, $groupByForLessonsPage);
     }
 
+    private function filterRecommendedSections($allContent, $sections)
+    {
+        // strictly defined sections state
+        if ($sections) {
+            $content = [];
+            foreach($sections as $section) {
+                $content[$section->value] = $allContent[$section->value] ?? [];
+            }
+            // all sections state
+        } else {
+            $content = $allContent;
+        }
+        return $content;
+    }
 
-
-    private function postProcessRecommendations($recommendations, $randomize, $pageSize, $page, $user_id, array $groupByForLessonsPage = [])
+    private function postProcessRecommendations($recommendations, $pageSize, $page, $user_id, array $groupByForLessonsPage = [])
     {
         if (!$recommendations) {
             return [
@@ -1168,12 +1074,12 @@ class ContentService
             $totalResults = ($groupBy && $pullPagination) ? $filter->countFilter($groupBy) : $totalLessons;
 
             $resultsDB = new ContentFilterResultsEntity([
-                                                            'results' => $filter->retrieveFilter(),
-                                                            'total_results' => $totalResults,
-                                                            'total_lessons' => $totalLessons,
-                                                            'filter_options' => $pullFilterFields ?
-                                                                $this->getFilterOptions($filter, $includedTypes) : [],
-                                                        ]);
+                'results' => $filter->retrieveFilter(),
+                'total_results' => $totalResults,
+                'total_lessons' => $totalLessons,
+                'filter_options' => $pullFilterFields ?
+                    $this->getFilterOptions($filter, $includedTypes) : [],
+            ]);
 
             $results = CacheHelper::saveUserCache($hash, $resultsDB, Arr::pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
@@ -1308,19 +1214,19 @@ class ContentService
         }
 
         $id = $this->contentRepository->create([
-                                                   'slug' => $slug,
-                                                   'type' => $type,
-                                                   'sort' => $sort,
-                                                   'status' => $status ?? self::STATUS_DRAFT,
-                                                   'language' => $language ?? ConfigService::$defaultLanguage,
-                                                   'brand' => $brand ?? ConfigService::$brand,
-                                                   //                                                   'instrumentless' => ($type === 'song') ? false : null,
-                                                   'total_xp' => $this->getDefaultXP($type, 0),
-                                                   'user_id' => $userId,
-                                                   'published_on' => $publishedOn,
-                                                   'created_on' => Carbon::now()
-                                                       ->toDateTimeString(),
-                                               ]);
+            'slug' => $slug,
+            'type' => $type,
+            'sort' => $sort,
+            'status' => $status ?? self::STATUS_DRAFT,
+            'language' => $language ?? ConfigService::$defaultLanguage,
+            'brand' => $brand ?? ConfigService::$brand,
+            //                                                   'instrumentless' => ($type === 'song') ? false : null,
+            'total_xp' => $this->getDefaultXP($type, 0),
+            'user_id' => $userId,
+            'published_on' => $publishedOn,
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+        ]);
 
         //save the link with parent if the parent id exist on the request
         if ($parentId) {
@@ -2092,31 +1998,31 @@ class ContentService
                     'rch4.parent_id'
                 )
                 ->select([
-                             'rch1.child_id as rch1_child_id',
-                             'rch1.parent_id as rch1_parent_id',
-                             'rch1.child_position as rch1_child_position',
-                             'rcp1.id as rcp1_content_id',
-                             'rcp1.slug as rcp1_content_slug',
-                             'rcp1.type as rcp1_content_type',
-                             'rch2.child_id as rch2_child_id',
-                             'rch2.parent_id as rch2_parent_id',
-                             'rch2.child_position as rch2_child_position',
-                             'rcp2.id as rcp2_content_id',
-                             'rcp2.slug as rcp2_content_slug',
-                             'rcp2.type as rcp2_content_type',
-                             'rch3.child_id as rch3_child_id',
-                             'rch3.parent_id as rch3_parent_id',
-                             'rch3.child_position as rch3_child_position',
-                             'rcp3.id as rcp3_content_id',
-                             'rcp3.slug as rcp3_content_slug',
-                             'rcp3.type as rcp3_content_type',
-                             'rch4.child_id as rch4_child_id',
-                             'rch4.parent_id as rch4_parent_id',
-                             'rch4.child_position as rch4_child_position',
-                             'rcp4.id as rcp4_content_id',
-                             'rcp4.slug as rcp4_content_slug',
-                             'rcp4.type as rcp4_content_type',
-                         ])
+                    'rch1.child_id as rch1_child_id',
+                    'rch1.parent_id as rch1_parent_id',
+                    'rch1.child_position as rch1_child_position',
+                    'rcp1.id as rcp1_content_id',
+                    'rcp1.slug as rcp1_content_slug',
+                    'rcp1.type as rcp1_content_type',
+                    'rch2.child_id as rch2_child_id',
+                    'rch2.parent_id as rch2_parent_id',
+                    'rch2.child_position as rch2_child_position',
+                    'rcp2.id as rcp2_content_id',
+                    'rcp2.slug as rcp2_content_slug',
+                    'rcp2.type as rcp2_content_type',
+                    'rch3.child_id as rch3_child_id',
+                    'rch3.parent_id as rch3_parent_id',
+                    'rch3.child_position as rch3_child_position',
+                    'rcp3.id as rcp3_content_id',
+                    'rcp3.slug as rcp3_content_slug',
+                    'rcp3.type as rcp3_content_type',
+                    'rch4.child_id as rch4_child_id',
+                    'rch4.parent_id as rch4_parent_id',
+                    'rch4.child_position as rch4_child_position',
+                    'rcp4.id as rcp4_content_id',
+                    'rcp4.slug as rcp4_content_slug',
+                    'rcp4.type as rcp4_content_type',
+                ])
                 ->whereIn('rch1.child_id', $contentIds)
                 ->get();
 
@@ -2296,27 +2202,27 @@ class ContentService
                     }
                 )
                 ->select([
-                             'ch_1.parent_id AS ch_1_parent_id',
-                             'ch_2.parent_id AS ch_2_parent_id',
-                             'ch_3.parent_id AS ch_3_parent_id',
-                             'ch_4.parent_id AS ch_4_parent_id',
-                             'ch_1.child_id AS ch_1_child_id',
-                             'ch_2.child_id AS ch_2_child_id',
-                             'ch_3.child_id AS ch_3_child_id',
-                             'ch_4.child_id AS ch_4_child_id',
-                             'ch_1.child_position AS ch_1_child_position',
-                             'ch_2.child_position AS ch_2_child_position',
-                             'ch_3.child_position AS ch_3_child_position',
-                             'ch_4.child_position AS ch_4_child_position',
-                             'ch_1_child.slug AS ch_1_child_slug',
-                             'ch_2_child.slug AS ch_2_child_slug',
-                             'ch_3_child.slug AS ch_3_child_slug',
-                             'ch_4_child.slug AS ch_4_child_slug',
-                             'ucp_1.state AS ucp_1_state',
-                             'ucp_2.state AS ucp_2_state',
-                             'ucp_3.state AS ucp_3_state',
-                             'ucp_4.state AS ucp_4_state',
-                         ])
+                    'ch_1.parent_id AS ch_1_parent_id',
+                    'ch_2.parent_id AS ch_2_parent_id',
+                    'ch_3.parent_id AS ch_3_parent_id',
+                    'ch_4.parent_id AS ch_4_parent_id',
+                    'ch_1.child_id AS ch_1_child_id',
+                    'ch_2.child_id AS ch_2_child_id',
+                    'ch_3.child_id AS ch_3_child_id',
+                    'ch_4.child_id AS ch_4_child_id',
+                    'ch_1.child_position AS ch_1_child_position',
+                    'ch_2.child_position AS ch_2_child_position',
+                    'ch_3.child_position AS ch_3_child_position',
+                    'ch_4.child_position AS ch_4_child_position',
+                    'ch_1_child.slug AS ch_1_child_slug',
+                    'ch_2_child.slug AS ch_2_child_slug',
+                    'ch_3_child.slug AS ch_3_child_slug',
+                    'ch_4_child.slug AS ch_4_child_slug',
+                    'ucp_1.state AS ucp_1_state',
+                    'ucp_2.state AS ucp_2_state',
+                    'ucp_3.state AS ucp_3_state',
+                    'ucp_4.state AS ucp_4_state',
+                ])
                 ->where('ch_1.parent_id', $parentContentId)
                 ->orderBy('ch_1.child_position')
                 ->orderBy('ch_2.child_position')
@@ -2660,7 +2566,7 @@ class ContentService
         $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
             Carbon::now()
-                                                                                            ->toDateTimeString(),
+                ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
@@ -2670,9 +2576,9 @@ class ContentService
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
         $results = new ContentFilterResultsEntity([
-                                                      'results' => $scheduleEvents,
-                                                      'total_results' => $countEvents,
-                                                  ]);
+            'results' => $scheduleEvents,
+            'total_results' => $countEvents,
+        ]);
 
         return Decorator::decorate($results, 'content');
     }
@@ -2717,16 +2623,16 @@ class ContentService
         $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED],
             Carbon::now()
-                                                                                            ->toDateTimeString(),
+                ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
             []);
 
         return new ContentFilterResultsEntity([
-                                                  'results' => $scheduleEvents,
-                                                  'total_results' => $countEvents,
-                                              ]);
+            'results' => $scheduleEvents,
+            'total_results' => $countEvents,
+        ]);
     }
 
     /**
@@ -2797,27 +2703,27 @@ class ContentService
                     }
                 )
                 ->select([
-                             'ch_1.parent_id AS ch_1_parent_id',
-                             'ch_2.parent_id AS ch_2_parent_id',
-                             'ch_3.parent_id AS ch_3_parent_id',
-                             'ch_4.parent_id AS ch_4_parent_id',
-                             'ch_1.child_id AS ch_1_child_id',
-                             'ch_2.child_id AS ch_2_child_id',
-                             'ch_3.child_id AS ch_3_child_id',
-                             'ch_4.child_id AS ch_4_child_id',
-                             'ch_1.child_position AS ch_1_child_position',
-                             'ch_2.child_position AS ch_2_child_position',
-                             'ch_3.child_position AS ch_3_child_position',
-                             'ch_4.child_position AS ch_4_child_position',
-                             'ch_1_child.slug AS ch_1_child_slug',
-                             'ch_2_child.slug AS ch_2_child_slug',
-                             'ch_3_child.slug AS ch_3_child_slug',
-                             'ch_4_child.slug AS ch_4_child_slug',
-                             'ucp_1.state AS ucp_1_state',
-                             'ucp_2.state AS ucp_2_state',
-                             'ucp_3.state AS ucp_3_state',
-                             'ucp_4.state AS ucp_4_state',
-                         ])
+                    'ch_1.parent_id AS ch_1_parent_id',
+                    'ch_2.parent_id AS ch_2_parent_id',
+                    'ch_3.parent_id AS ch_3_parent_id',
+                    'ch_4.parent_id AS ch_4_parent_id',
+                    'ch_1.child_id AS ch_1_child_id',
+                    'ch_2.child_id AS ch_2_child_id',
+                    'ch_3.child_id AS ch_3_child_id',
+                    'ch_4.child_id AS ch_4_child_id',
+                    'ch_1.child_position AS ch_1_child_position',
+                    'ch_2.child_position AS ch_2_child_position',
+                    'ch_3.child_position AS ch_3_child_position',
+                    'ch_4.child_position AS ch_4_child_position',
+                    'ch_1_child.slug AS ch_1_child_slug',
+                    'ch_2_child.slug AS ch_2_child_slug',
+                    'ch_3_child.slug AS ch_3_child_slug',
+                    'ch_4_child.slug AS ch_4_child_slug',
+                    'ucp_1.state AS ucp_1_state',
+                    'ucp_2.state AS ucp_2_state',
+                    'ucp_3.state AS ucp_3_state',
+                    'ucp_4.state AS ucp_4_state',
+                ])
                 ->where('ch_1.parent_id', $parentContentId)
                 ->orderBy('ch_1.child_position')
                 ->orderBy('ch_2.child_position')
