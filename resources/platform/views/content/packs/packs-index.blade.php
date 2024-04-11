@@ -18,7 +18,14 @@
 @endsection
 
 @section('content')
-
+    <breadcrumbs>
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([
+                [
+                    'title' => 'Packs',
+                ]
+            ]) }}"
+        ></breadcrumb>
     <page-header
         page-type="packs"
         title="Packs"
