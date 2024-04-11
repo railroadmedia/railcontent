@@ -35,7 +35,11 @@ const props = defineProps({
     iconPosition: {
         type: String,
         default: 'left',
-    }
+    },
+    inDropdown: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const showDropdown = ref(false);

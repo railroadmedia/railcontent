@@ -63,6 +63,8 @@ const props = defineProps({
     },
 });
 
+console.log('PageHeaderCta.vue', props);
+
 // const textLowercase = computed(() => {
 //     return props.text ? props.text.toLowerCase() : '';
 // });
@@ -119,7 +121,7 @@ const buttonConditionalClasses = computed(() => {
         }
     }
     else if (hasIcon.value) {
-        classes.push('tw-p-0 tw-w-[40px] md:tw-h-[40px]')
+        classes.push('tw-p-0 tw-w-[32px] tw-h-[32px] tw-w-[40px] md:tw-h-[40px]')
     }
     else if (props.text) {
         classes.push('tw-px-6 tw-py-1 tw-w-auto tw-h-auto md:tw-h-[40px]')
