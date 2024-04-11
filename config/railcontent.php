@@ -3149,6 +3149,7 @@ return [
         'backup_url' => env('HUGGINGFACE_BACKUP_URL', 'https://MusoraProductDepartment-recsys-alt-2.hf.space/recommend'),
         'token' => env('HUGGINGFACE_TOKEN', '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'),
         'use_caching' => true,
-        'remove_seen_content' => false
+        'remove_seen_content' => false,
+        'use_fast_implementation' => false,
     ]
 ];
