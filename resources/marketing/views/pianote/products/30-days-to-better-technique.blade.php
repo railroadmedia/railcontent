@@ -181,7 +181,7 @@
             <div class="flex flex-col items-center md:hidden mb-6 sm:mb-0">
                 <h2 class="leading-tight mb-8 text-center"><strong>Technique is <br class="hidden sm:inline-block"> <span class="underline">everything.</span></strong></h2>
                 <video
-                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
+                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/30DTBT-Gif-header-v2.mp4"
                     muted="" autoplay="" loop="" playsinline="" class="w-2/3"></video>
             </div>
 
@@ -210,7 +210,7 @@
             </div>
             <div class="md:w-1/3 p-4 sm:-mb-24">
                 <video class="hidden md:inline relative top-0 rounded-xl overflow-hidden"
-                    src="https://d21q7xesnoiieh.cloudfront.net/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
+                    src="https://d21q7xesnoiieh.cloudfront.net/marketing/pianote/products/30-day-better-technique/30DTBT-Gif-header-v2.mp4"
                     muted="" autoplay="" loop="" playsinline=""></video>
             </div>
 
@@ -793,7 +793,7 @@
 
     @php
         $logo =
-            'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp';
+            'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/better-technique-guarantee.webp';
         $guaranteeText = "We’re so confident that you’ll LOVE the improvements to your piano technique after Jordan’s course, that we’re giving you THREE times as long to put it to the test.
                         <br><br>
                         <strong>The course is 30 days, but you’ll have 90 days to try it risk-free.</strong>
@@ -1010,7 +1010,7 @@
 
                                     But once you finish it, you’ll be itching to put your new technique to use.
 
-                                    And if you’re looking for the best way to do that, we’d suggest joining Pianote and getting access to over 1000 popular songs (including some Dream Theater songs), as well as other courses form world-class instructors.
+                                    And if you’re looking for the best way to do that, we’d suggest joining Pianote and getting access to over 1000 popular songs (including some Dream Theater songs), as well as other courses from world-class instructors.
                                     ',
                     'num' => '?',
                 ])
