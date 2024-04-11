@@ -300,7 +300,7 @@
             :info-data="{{ json_encode($headerDataObj->infoData) }}"
             :ctas="{{ json_encode($headerDataObj->ctas) }}"
         ></page-header>
-       
+    @endif
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">

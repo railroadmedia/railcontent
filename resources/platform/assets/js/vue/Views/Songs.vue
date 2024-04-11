@@ -32,6 +32,10 @@ const props = defineProps({
         type: String,
         default: '#'
     },
+    allArtistsUrl: {
+        type: String,
+        default: '#'
+    },
     artistsNumber: {
         type: Number,
         default: 0
@@ -71,8 +75,10 @@ const ctaConfig = computed(() => {
 });
 
 const headerInfoData = computed(() => {
-    if (props.artistsNumber !== undefined && props.songsNumber !== undefined) {
-        return [`${props.artistsNumber} Artists`, `${props.songsNumber} Songs`];
+    return {
+        type: 'Link',
+        text: `See all ${props.artistsNumber} artists >`,
+        url: props.allArtistsUrl
     }
 })
 
