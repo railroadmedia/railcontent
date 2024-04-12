@@ -24,7 +24,7 @@
     <style>
         .join,
         .join:hover {
-            background-color: #F61A30;
+            background: #F61A30;
             border-color: #F61A30;
         }
 
