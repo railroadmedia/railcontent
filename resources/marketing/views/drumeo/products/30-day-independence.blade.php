@@ -461,7 +461,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/lifetime.webp',
                         'title' => 'Lifetime access.',
                         'desc' =>
-                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace.',
+                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
             @endphp
@@ -855,7 +855,7 @@
                             onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/chad-smith.webp"
                             alt="Chad Smith Photo">
-                        <p class="pl-4 m-0"><strong>Chad Smith (Red Hot Chili Peppers)</strong><br>
+                        <p class="pl-4 m-0"><strong>Chad Smith</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">Red Hot Chili Peppers</em><br>
                             “All I know is that guy is a freak of nature.” <br>
                         </p>
