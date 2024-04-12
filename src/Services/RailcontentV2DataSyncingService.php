@@ -123,6 +123,7 @@ class RailcontentV2DataSyncingService
             ->whereIn('content_id', $contentIds)
             ->whereNotNull('value')
             ->whereNotIn('value', ['Invalid date'])
+            ->orderBy('id', 'asc')
             ->get()
             ->groupBy('content_id');
 
@@ -135,13 +136,6 @@ class RailcontentV2DataSyncingService
             ->whereIn('content_id', $contentIds)
             ->selectRaw('COUNT(*) as count, content_id')
             ->groupBy(['content_id'])
-            ->get()
-            ->keyBy('content_id');
-
-        $contentsLengthInSecondsFields = $databaseConnection
-            ->table(config('railcontent.table_prefix').'content_fields')
-            ->whereIn('content_id', $contentRows->pluck('video')->toArray())
-            ->where('key', 'length_in_seconds')
             ->get()
             ->keyBy('content_id');
 
@@ -168,7 +162,6 @@ class RailcontentV2DataSyncingService
 
         foreach ($contentRows as $contentRow) {
             $contentFieldRows = $contentsFieldRows[$contentRow->id] ?? [];
-            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->video] ?? null;
 
             // fields first
             foreach ($this->fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
@@ -222,6 +215,12 @@ class RailcontentV2DataSyncingService
             $contentColumnsToUpdate['like_count'] = $contentsLikeCounts[$contentRow->id]->count ?? 0;
 
             // length in seconds
+            $contentLengthInSecondsField = $databaseConnection
+                ->table(config('railcontent.table_prefix').'content_fields')
+                ->whereIn('content_id', [$contentColumnsToUpdate['video']])
+                ->where('key', 'length_in_seconds')
+                ->first();
+
             $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
 
             // update content row
