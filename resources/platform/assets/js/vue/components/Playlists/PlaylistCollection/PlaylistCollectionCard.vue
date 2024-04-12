@@ -112,7 +112,7 @@
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[92px] tw-mb-[1px] tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
+         :class="isListView ? 'tw-h-[92px] tw-mb-[1px] tw-px-1.5 md:tw-px-6 tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 tw-bg-white dark:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[221px] tw-min-w-[221px] lg:tw-w-auto lg:tw-min-w-0 lg:[&:nth-child(11)]:tw-hidden lg:[&:nth-child(12)]:tw-hidden 2xl:[&:nth-child(11)]:tw-grid 2xl:[&:nth-child(12)]:tw-grid' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail
@@ -161,16 +161,16 @@
                 </div>
             </div>
             <!-- Pinned Icon -->
-            <div class="tw-inline-flex tw-items-center tw-transition-colors"
-                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8', { 'tw-opacity-0' : !state.isPinned } ]"
+            <div class="tw-items-center tw-transition-colors"
+                 :class="[ !props.isListView ? 'tw-inline-flex tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-hidden sm:tw-inline-flex tw-px-4 xl:tw-px-8', { 'tw-opacity-0' : !state.isPinned } ]"
             >
-                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex dark:tw-text-white" />
+                <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto dark:tw-text-white" />
             </div>
         </a>
 
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
         <div class="tw-inline-flex tw-items-center tw-justify-end"
-             :class="props.isListView ? 'tw-w-[100px] md:tw-justify-center' : 'tw-col-span-1'"
+             :class="props.isListView ? 'md:tw-w-[100px] md:tw-justify-center' : 'tw-col-span-1'"
         >
             <div class="tw-relative " v-click-outside="()=>{ state.dropdownOpen = false }">
                 <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#E0E0E1] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0"
