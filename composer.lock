@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17eaf5afc72022a1b010320640c705fe",
+    "content-hash": "4ce9079ba7f70222b09d946589ecf980",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.304.2",
+            "version": "3.304.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2435079c3e1a08148d955de15ec090018114f35a"
+                "reference": "d1ecaba720dc5d935d4ff66255f990fce3aa9727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2435079c3e1a08148d955de15ec090018114f35a",
-                "reference": "2435079c3e1a08148d955de15ec090018114f35a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d1ecaba720dc5d935d4ff66255f990fce3aa9727",
+                "reference": "d1ecaba720dc5d935d4ff66255f990fce3aa9727",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.3"
             },
-            "time": "2024-04-10T18:05:32+00:00"
+            "time": "2024-04-11T18:05:41+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -9872,30 +9872,27 @@
         },
         {
             "name": "railroad/doctrine-array-hydrator",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/doctrine-array-hydrator.git",
-                "reference": "11131931df480e058e3105e673826596e0968d7f"
+                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/11131931df480e058e3105e673826596e0968d7f",
-                "reference": "11131931df480e058e3105e673826596e0968d7f",
+                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/12e4a9de5d18870f961fbc1febb8f37f797f51f3",
+                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "^1.13",
-                "doctrine/orm": "2.12.*",
-                "laravel/framework": "^9.0",
-                "php": "^8.1",
-                "symfony/cache": "^6.0"
+                "doctrine/orm": "^2.5"
             },
             "require-dev": {
-                "dms/phpunit-arraysubset-asserts": "^0.4.0",
-                "orchestra/testbench": "^7.4",
-                "phpunit/php-code-coverage": "^9.2.10",
-                "phpunit/phpunit": "^9.5.10"
+                "codeclimate/php-test-reporter": "dev-master",
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "3.6.x@dev",
+                "orchestra/testbench": "~3.6",
+                "phpunit/phpunit": "~7.0"
             },
             "type": "library",
             "autoload": {
@@ -9926,9 +9923,9 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/v2.0.0"
+                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/v2.0.1"
             },
-            "time": "2022-05-16T21:22:24+00:00"
+            "time": "2024-04-11T22:34:23+00:00"
         },
         {
             "name": "railroad/ecommerce",
@@ -10371,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.74",
+            "version": "dev-BE-15-MWP",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "11db5c934f0d0a581b81b740264a921dd81e7776"
+                "reference": "d33eb7bd0eb6e67529dfceba77a30ed593a335b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/11db5c934f0d0a581b81b740264a921dd81e7776",
-                "reference": "11db5c934f0d0a581b81b740264a921dd81e7776",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d33eb7bd0eb6e67529dfceba77a30ed593a335b5",
+                "reference": "d33eb7bd0eb6e67529dfceba77a30ed593a335b5",
                 "shasum": ""
             },
             "require": {
@@ -10435,9 +10432,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.74"
+                "source": "https://github.com/railroadmedia/railcontent/tree/BE-15-MWP"
             },
-            "time": "2024-04-11T15:08:41+00:00"
+            "time": "2024-04-12T13:32:11+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -12112,16 +12109,16 @@
         },
         {
             "name": "spatie/laravel-markdown",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-markdown.git",
-                "reference": "76b0d5fe809c61bb4c2208df3f1115a5db0ceb3b"
+                "reference": "52f1b831495eb904d3af045af906a6ba9e9d4fbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/76b0d5fe809c61bb4c2208df3f1115a5db0ceb3b",
-                "reference": "76b0d5fe809c61bb4c2208df3f1115a5db0ceb3b",
+                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/52f1b831495eb904d3af045af906a6ba9e9d4fbc",
+                "reference": "52f1b831495eb904d3af045af906a6ba9e9d4fbc",
                 "shasum": ""
             },
             "require": {
@@ -12176,7 +12173,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-markdown/tree/2.5.0"
+                "source": "https://github.com/spatie/laravel-markdown/tree/2.5.1"
             },
             "funding": [
                 {
@@ -12184,7 +12181,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-26T14:24:08+00:00"
+            "time": "2024-04-12T12:22:44+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -19707,11 +19704,18 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-BE-15-MWP",
+            "alias": "v2.1.74",
+            "alias_normalized": "2.1.74.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -19721,5 +19725,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
