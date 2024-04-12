@@ -105,8 +105,6 @@ class ShopifyGateway
             "getCustomersToUpdate: Loading shopify customers with order updates between $startDateString and $endDateString..."
         );
 
-        $i = 0;
-        $max = 100;
         do {
             $this->handleRateLimitBefore();
             $gql = <<<GQL
@@ -139,12 +137,11 @@ class ShopifyGateway
             $hasNextPage = $responseBody->data->orders->pageInfo->hasNextPage;
             $endCursor = $responseBody->data->orders->pageInfo->endCursor;
             $cursor = ", after: \"$endCursor\"";
-            $i++;
             Timer::afterSeconds(2, function () use ($emails) {
                 $count = count($emails->unique());
                 Log::debug("getCustomersToUpdate: Loading shopify customers (found $count so far)...");
             });
-        } while ($hasNextPage && $i < $max);
+        } while ($hasNextPage);
         $uniqueEmails = $emails->unique();
         $count = count($uniqueEmails);
         Log::debug("getCustomersToUpdate: Found $count shopify customers");
