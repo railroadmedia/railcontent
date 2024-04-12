@@ -112,7 +112,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $resources = [];
+            $resources = $content['resources'] ?? [];
             if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
@@ -304,8 +304,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
                         $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$content['id']]]))
                             ->first();
-                        $resources = array_merge($contentsOfType[$contentIndex]['resources']??[], $contentsOfType[$contentIndex]['parent']['resources']??[]);
-
+                        $resources = array_merge($contentsOfType[$contentIndex]['resources']??[], $contentsOfType[$contentIndex]['parent']['resources']??[], $resources);
                         if (empty($contentsOfType[$contentIndex]['instructors'])) {
                             InstructorDecorator::$decorationMode =
                                 \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
