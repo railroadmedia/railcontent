@@ -139,14 +139,21 @@ class RevenueCatService
                 ->where('email', $value)
                 ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();
-        if (!$user && $createIfNotExists && $value) {
+        if ($createIfNotExists && $value) {
             $parts = explode('@', $value);
-            $user = User::updateOrCreate(['email' => $value], [
-                                                                'email' => $value,
-                                                                'password' => Hash::make($value),
-                                                                'display_name' => $parts[0].rand(10000, 99999),
-                                                                'revenuecat_origin_app_user_id' => $appUserId,
-                                                            ]);
+            User::upsert([
+                                     'email' => $value,
+                                     'password' => Hash::make($value),
+                                     'display_name' => $parts[0].rand(10000, 99999),
+                                     'revenuecat_origin_app_user_id' => $appUserId,
+                                 ],
+            'email',
+            ['password','display_name','revenuecat_origin_app_user_id']);
+
+            $user =
+                User::onWriteConnection()
+                    ->where('email', $value)
+                    ->first();
             event(new UserCreated($user));
         } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
