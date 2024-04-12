@@ -35,7 +35,7 @@ class ShopifySyncCustomerByEmailInS3File extends Command
 
         $emails = collect();
         while (($line = fgets($stream)) !== false) {
-            $emails->push($line);
+            $emails->push(trim($line));
         }
         if (!feof($stream)) {
             $this->error("unexpected fgets() failure");
