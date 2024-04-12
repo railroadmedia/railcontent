@@ -154,13 +154,6 @@ class RailcontentV2DataSyncingService
             ->get()
             ->keyBy('content_id');
 
-        $contentsLengthInSecondsFields = $databaseConnection
-            ->table(config('railcontent.table_prefix').'content_fields')
-            ->whereIn('content_id', $contentRows->pluck('video')->toArray())
-            ->where('key', 'length_in_seconds')
-            ->get()
-            ->keyBy('content_id');
-
         // delete current field tables for content ids
         foreach ($this->fieldNameToTableMap as $fieldAndColumnName => $tableName) {
             $databaseConnection->table($tableName)
@@ -184,8 +177,6 @@ class RailcontentV2DataSyncingService
 
         foreach ($contentRows as $contentRow) {
             $contentFieldRows = $contentsFieldRows[$contentRow->id] ?? [];
-            $contentLengthInSecondsField = $contentsLengthInSecondsFields[$contentRow->id] ?? null;
-
             // fields first
             foreach ($this->fieldNameToContentColumnNameMap as $fieldName => $contentColumnName) {
                 // update content columns from fields using map
@@ -239,6 +230,11 @@ class RailcontentV2DataSyncingService
 
             // length in seconds
             if($contentRow->type !== 'assignment') {
+                $contentLengthInSecondsField = $databaseConnection
+                    ->table(config('railcontent.table_prefix').'content_fields')
+                    ->whereIn('content_id', [$contentColumnsToUpdate['video']])
+                    ->where('key', 'length_in_seconds')
+                    ->first();
                 $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? $contentRow->length_in_seconds ?? 0);
             }else{
                 $contentColumnsToUpdate['length_in_seconds'] = $contentRow->length_in_seconds;
