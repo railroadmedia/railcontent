@@ -202,6 +202,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'login_as_users' => $user->hasRole('login_as_users'),
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
             'completed_workouts' => $completedWorkouts,
+            'branches' => $this->getAllBranchInformation(),
+            'features' => $this->getAccessibleFeatures()
         ], $extraData);
     }
 

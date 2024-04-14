@@ -340,7 +340,7 @@
                     </div>
                     <div class="sm:pl-5 lg:pl-8">
                         <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-horizontal-logo.png">
-                        <p class="leading-tight">Our best-selling book is yours FREE. This book is your encyclopedia of piano chords & scales. Arranged by key, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear. (Because of the busy holiday season, your book will ship in mid-January.)</p>
+                        <p class="leading-tight">Our best-selling book is yours FREE. This book is your encyclopedia of piano chords & scales. Arranged by key, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.</p>
                     </div>
                 </div>
                 <div class="w-full sm:flex items-center mb-12">
