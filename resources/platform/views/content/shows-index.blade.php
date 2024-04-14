@@ -3,6 +3,11 @@
     if($brand === 'drumeo'){
         $headerDescription = "Whether you're looking for drumming inspiration, entertainment, or education, Drumeo Shows has something for everyone.";
     }
+    $breadcrumbs = [
+        [
+            'title' => 'Shows',
+        ]
+    ];
 @endphp
 @extends('partials.layout')
 
@@ -11,6 +16,7 @@
 @endsection
 
 @section('content')
+    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
     <page-header
         page-type="shows"
         title="Shows"

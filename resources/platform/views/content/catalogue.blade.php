@@ -212,6 +212,12 @@
     $recommendationLinks->pianote = 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612';
     $recommendationLinks->guitareo = 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772';
     $recommendationLinks->singeo = 'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436';
+
+    $breadcrumbs = [
+        [
+            'title' => 'Courses',
+        ],
+    ];
 @endphp
 
 @extends('partials.layout')
@@ -289,6 +295,7 @@
             </div>
         </div>
     @else
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
         <page-header
             page-type="{{ $headerDataObj->type }}"
             icon-name="{{ $headerDataObj->iconName }}"

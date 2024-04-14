@@ -18,6 +18,13 @@
 
     $headerDataJson = json_encode($headerData);
     $headerDataObj = json_decode($headerDataJson);
+
+    
+    $breadcrumbs = [
+        [
+            'title' => 'Live',
+        ],
+    ];
 @endphp
 
 @section('meta')
@@ -25,7 +32,7 @@
 @endsection
 
 @section('content')
-
+    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
     <page-header
         page-type="{{ $headerDataObj->type }}"
         icon-name="{{ $headerDataObj->iconName }}"

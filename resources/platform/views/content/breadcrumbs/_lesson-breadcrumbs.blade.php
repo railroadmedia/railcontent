@@ -1,4 +1,17 @@
-@if ($lessonType === 'unit-part')
+@if ($lessonType === 'student-focus')
+    @include('partials.bladesora.members.navigation.breadcrumbs', [
+        'pages' => [
+            [
+                'title' => 'Student Focus',
+                'url' => url()->route('platform.student-focus'),
+            ],
+            [
+                'title' => $lessonContent->fetch('fields.title'),
+            ],
+        ],
+        'breadcrumbClassOverride' => '',
+    ])
+@elseif ($lessonType === 'unit-part')
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         'pages' => [
             [
@@ -92,7 +105,7 @@
                     'title' => $lessonContent->fetch('fields.title'),
                 ],
             ],
-            'breadcrumbClassOverride' => $breadcrumbClassOverride ?? '',
+            'breadcrumbClassOverride' => '',
         ])
     @else
         @include('partials.bladesora.members.navigation.breadcrumbs', [
