@@ -914,7 +914,7 @@
                         'cardSubtitle' => "The course + red Pianote metronome ($79 value)",
                         'cardPrice' => '127',
                         'cardDiscount' => '296',
-                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome,metronome-shipping&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
                             '<strong>Lifetime</strong> Course Access',
