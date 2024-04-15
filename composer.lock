@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17eaf5afc72022a1b010320640c705fe",
+    "content-hash": "d9d1bfa5edee07ab0129e79bc2ea4627",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.304.2",
+            "version": "3.304.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2435079c3e1a08148d955de15ec090018114f35a"
+                "reference": "20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2435079c3e1a08148d955de15ec090018114f35a",
-                "reference": "2435079c3e1a08148d955de15ec090018114f35a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386",
+                "reference": "20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.4"
             },
-            "time": "2024-04-10T18:05:32+00:00"
+            "time": "2024-04-12T18:06:45+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1739,21 +1739,21 @@
         },
         {
             "name": "daverandom/libdns",
-            "version": "v2.0.3",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DaveRandom/LibDNS.git",
-                "reference": "42c2d700d1178c9f9e78664793463f7f1aea248c"
+                "reference": "b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DaveRandom/LibDNS/zipball/42c2d700d1178c9f9e78664793463f7f1aea248c",
-                "reference": "42c2d700d1178c9f9e78664793463f7f1aea248c",
+                "url": "https://api.github.com/repos/DaveRandom/LibDNS/zipball/b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a",
+                "reference": "b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "suggest": {
                 "ext-intl": "Required for IDN support"
@@ -1777,9 +1777,9 @@
             ],
             "support": {
                 "issues": "https://github.com/DaveRandom/LibDNS/issues",
-                "source": "https://github.com/DaveRandom/LibDNS/tree/v2.0.3"
+                "source": "https://github.com/DaveRandom/LibDNS/tree/v2.1.0"
             },
-            "time": "2022-09-20T18:15:38+00:00"
+            "time": "2024-04-12T12:12:48+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -4094,16 +4094,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.343.0",
+            "version": "v0.344.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "8cb869e5c413b0e9d4aeada3d83df5e2ce388154"
+                "reference": "d5813b1a64a8a73daf7ab307dc640e2efb046131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/8cb869e5c413b0e9d4aeada3d83df5e2ce388154",
-                "reference": "8cb869e5c413b0e9d4aeada3d83df5e2ce388154",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/d5813b1a64a8a73daf7ab307dc640e2efb046131",
+                "reference": "d5813b1a64a8a73daf7ab307dc640e2efb046131",
                 "shasum": ""
             },
             "require": {
@@ -4132,9 +4132,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.343.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.344.0"
             },
-            "time": "2024-04-06T00:58:16+00:00"
+            "time": "2024-04-12T01:04:09+00:00"
         },
         {
             "name": "google/auth",
@@ -4196,16 +4196,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.56.2",
+            "version": "v1.57.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "686ffd0bb1328cd2ee963c4444e2ab4b111ba3ba"
+                "reference": "a6bbc85a5ff2edc1c29344e3aaaa0a099d569748"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/686ffd0bb1328cd2ee963c4444e2ab4b111ba3ba",
-                "reference": "686ffd0bb1328cd2ee963c4444e2ab4b111ba3ba",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/a6bbc85a5ff2edc1c29344e3aaaa0a099d569748",
+                "reference": "a6bbc85a5ff2edc1c29344e3aaaa0a099d569748",
                 "shasum": ""
             },
             "require": {
@@ -4256,22 +4256,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.56.2"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.57.0"
             },
-            "time": "2024-03-15T18:39:38+00:00"
+            "time": "2024-04-12T23:38:19+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.41.0",
+            "version": "v1.41.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "d934742d9efdf66ae3fe79fccdf34bda74dfb477"
+                "reference": "3b6d7c13970f0c80f2450d2ec1241d7deaad3dda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/d934742d9efdf66ae3fe79fccdf34bda74dfb477",
-                "reference": "d934742d9efdf66ae3fe79fccdf34bda74dfb477",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/3b6d7c13970f0c80f2450d2ec1241d7deaad3dda",
+                "reference": "3b6d7c13970f0c80f2450d2ec1241d7deaad3dda",
                 "shasum": ""
             },
             "require": {
@@ -4281,7 +4281,7 @@
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "google/cloud-pubsub": "^1.0",
+                "google/cloud-pubsub": "^2.0",
                 "phpdocumentor/reflection": "^5.3.3",
                 "phpdocumentor/reflection-docblock": "^5.3",
                 "phpseclib/phpseclib": "^2.0||^3.0",
@@ -4313,9 +4313,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.41.0"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.41.2"
             },
-            "time": "2024-03-22T12:59:36+00:00"
+            "time": "2024-04-12T23:38:19+00:00"
         },
         {
             "name": "google/common-protos",
@@ -4472,16 +4472,16 @@
         },
         {
             "name": "google/longrunning",
-            "version": "0.3.1",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "a974fe870d5f57cc21da697923a1f4e8d08829c9"
+                "reference": "6841b03479d5a397a64036a99c33d8ee06bc8b42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/a974fe870d5f57cc21da697923a1f4e8d08829c9",
-                "reference": "a974fe870d5f57cc21da697923a1f4e8d08829c9",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/6841b03479d5a397a64036a99c33d8ee06bc8b42",
+                "reference": "6841b03479d5a397a64036a99c33d8ee06bc8b42",
                 "shasum": ""
             },
             "require-dev": {
@@ -4510,9 +4510,9 @@
             ],
             "description": "Google LongRunning Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-longrunning/tree/v0.3.1"
+                "source": "https://github.com/googleapis/php-longrunning/tree/v0.4.0"
             },
-            "time": "2024-03-01T11:25:35+00:00"
+            "time": "2024-04-12T23:38:19+00:00"
         },
         {
             "name": "google/protobuf",
@@ -7755,16 +7755,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.9.2",
+            "version": "2.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "437cb3628f4cf6042cc10ae97fc2b8472e48ca1f"
+                "reference": "a30bfe2e142720dfa990d0a7e573997f5d884215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/437cb3628f4cf6042cc10ae97fc2b8472e48ca1f",
-                "reference": "437cb3628f4cf6042cc10ae97fc2b8472e48ca1f",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/a30bfe2e142720dfa990d0a7e573997f5d884215",
+                "reference": "a30bfe2e142720dfa990d0a7e573997f5d884215",
                 "shasum": ""
             },
             "require": {
@@ -7785,8 +7785,8 @@
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
                 "phpspec/prophecy": "^1.15",
-                "phpstan/phpstan": "^0.12.91",
-                "phpunit/phpunit": "^8.5.14",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^8.5.38 || ^9.6.19",
                 "predis/predis": "^1.1 || ^2.0",
                 "rollbar/rollbar": "^1.3 || ^2 || ^3",
                 "ruflin/elastica": "^7",
@@ -7841,7 +7841,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.9.2"
+                "source": "https://github.com/Seldaek/monolog/tree/2.9.3"
             },
             "funding": [
                 {
@@ -7853,7 +7853,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-27T15:25:26+00:00"
+            "time": "2024-04-12T20:52:51+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -9872,30 +9872,27 @@
         },
         {
             "name": "railroad/doctrine-array-hydrator",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/doctrine-array-hydrator.git",
-                "reference": "11131931df480e058e3105e673826596e0968d7f"
+                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/11131931df480e058e3105e673826596e0968d7f",
-                "reference": "11131931df480e058e3105e673826596e0968d7f",
+                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/12e4a9de5d18870f961fbc1febb8f37f797f51f3",
+                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "^1.13",
-                "doctrine/orm": "2.12.*",
-                "laravel/framework": "^9.0",
-                "php": "^8.1",
-                "symfony/cache": "^6.0"
+                "doctrine/orm": "^2.5"
             },
             "require-dev": {
-                "dms/phpunit-arraysubset-asserts": "^0.4.0",
-                "orchestra/testbench": "^7.4",
-                "phpunit/php-code-coverage": "^9.2.10",
-                "phpunit/phpunit": "^9.5.10"
+                "codeclimate/php-test-reporter": "dev-master",
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "3.6.x@dev",
+                "orchestra/testbench": "~3.6",
+                "phpunit/phpunit": "~7.0"
             },
             "type": "library",
             "autoload": {
@@ -9926,9 +9923,9 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/v2.0.0"
+                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/v2.0.1"
             },
-            "time": "2022-05-16T21:22:24+00:00"
+            "time": "2024-04-11T22:34:23+00:00"
         },
         {
             "name": "railroad/ecommerce",
@@ -10137,16 +10134,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.63",
+            "version": "dev-BE-69",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "1f643a5a74d3b96c44648d4a033861ddf14498d6"
+                "reference": "8a58db3aa823b24b27776c3265b460318965a439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1f643a5a74d3b96c44648d4a033861ddf14498d6",
-                "reference": "1f643a5a74d3b96c44648d4a033861ddf14498d6",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8a58db3aa823b24b27776c3265b460318965a439",
+                "reference": "8a58db3aa823b24b27776c3265b460318965a439",
                 "shasum": ""
             },
             "require": {
@@ -10176,9 +10173,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.63"
+                "source": "https://github.com/railroadmedia/musora-api/tree/BE-69"
             },
-            "time": "2024-04-11T15:06:10+00:00"
+            "time": "2024-04-15T13:55:43+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -12112,16 +12109,16 @@
         },
         {
             "name": "spatie/laravel-markdown",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-markdown.git",
-                "reference": "76b0d5fe809c61bb4c2208df3f1115a5db0ceb3b"
+                "reference": "52f1b831495eb904d3af045af906a6ba9e9d4fbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/76b0d5fe809c61bb4c2208df3f1115a5db0ceb3b",
-                "reference": "76b0d5fe809c61bb4c2208df3f1115a5db0ceb3b",
+                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/52f1b831495eb904d3af045af906a6ba9e9d4fbc",
+                "reference": "52f1b831495eb904d3af045af906a6ba9e9d4fbc",
                 "shasum": ""
             },
             "require": {
@@ -12176,7 +12173,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-markdown/tree/2.5.0"
+                "source": "https://github.com/spatie/laravel-markdown/tree/2.5.1"
             },
             "funding": [
                 {
@@ -12184,7 +12181,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-26T14:24:08+00:00"
+            "time": "2024-04-12T12:22:44+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -19703,6 +19700,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-BE-69",
+            "alias": "v3.1.63",
+            "alias_normalized": "3.1.63.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "3.0.7",
@@ -19711,6 +19714,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
@@ -19721,5 +19725,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
