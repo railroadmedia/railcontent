@@ -61,7 +61,7 @@
 
                 {{-- Account Title --}}
                 <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-pb-3">
-                    <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
+                    <h1 class="tw-text-2xl tw-font-bold dark:tw-text-white tw-text-[#00101D]">
                         Account Details
                     </h1>
                 </div>
@@ -71,12 +71,12 @@
                 @if($membershipLevel !== 'none')
                     <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
                         <div
-                            class="tw-flex tw-flex-row tw-flex-auto tw-py-2 tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
+                            class="tw-flex tw-flex-row tw-flex-auto tw-py-2 dark:tw-text-white tw-text-[#00101D]">
                             <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Membership Access</h2>
                         </div>
 
                         <div
-                            class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
+                            class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
                             <div class="tw-flex tw-flex-col">
                                 <p>{{ ucwords($membershipLevel) }} Membership</p>
                                 @if( $membershipLevel == 'plus' || $membershipLevel == 'basic')
@@ -93,12 +93,12 @@
                 @if(!empty($allPackPermissionNames))
                     <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
                         <div
-                            class="tw-flex tw-flex-row tw-flex-auto tw-py-2 tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
+                            class="tw-flex tw-flex-row tw-flex-auto tw-py-2 dark:tw-text-white tw-text-[#00101D]">
                             <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Other Products</h2>
                         </div>
 
                         <div
-                            class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
+                            class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
                             <div class="tw-flex tw-flex-col">
                                 <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
                                     @foreach($allPackPermissionNames as $product)
@@ -155,20 +155,13 @@
                     "inputID" => "useLegacyPlayer",
                     "inputName" => "use_legacy_video_player",
                     "inputLabel" => "Use legacy video player.",
-                    "checked" => (boolean) user()->use_legacy_video_player ?? false
+                    "checked" => (boolean) user()->use_legacy_video_player ?? false,
+                    "submitOnChange" => true,
                 ])
             </div>
         </div>
-
-        {{-- =================================  Save Account Settings ================================= --}}
-        <div class="tw-flex tw-flex-row tw-flex-wrap sm:tw-flex-nowrap pa-3">
-            <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white sm:tw-mr-2 tw-w-full sm:tw-w-auto"
-                    type="submit"> Save
-            </button>
-            <button
-                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-white/10 hover:tw-bg-black/10 tw-w-full sm:tw-w-auto"
-                type="reset"> Cancel
-            </button>
-        </div>
     </form>
+
+    <delete-account-modal></delete-account-modal>
+
 @endsection
