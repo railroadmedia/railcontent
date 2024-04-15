@@ -74,17 +74,40 @@
                     </div>
                 </div>
 
-                <div id="replyContainer" class="tw-flex tw-flex-col tw-w-full sm:tw-pl-4">
-                    <form method="post" :action="postStoreFormUrl" @submit="formDisabled = !formDisabled">
+                <div id="replyContainer"
+                     class="tw-flex tw-flex-col tw-w-full sm:tw-pl-4"
+                >
+                    <form
+                        method="post"
+                        :action="postStoreFormUrl"
+                        @submit="formDisabled = !formDisabled"
+                    >
 
-                        <text-editor ref="textEditor" :is-reply-section="true" v-model="postReplyInterface"
-                            @input="handleInput" />
+                        <text-editor
+                            ref="textEditor"
+                            :is-reply-section="true"
+                            :hasImageUploader="true"
+                            v-model="postReplyInterface"
+                            @input="handleInput"
+                        />
 
-                        <input type="hidden" name="_method" value="PUT">
+                        <input
+                            type="hidden"
+                            name="_method"
+                            value="PUT"
+                        >
 
-                        <input type="hidden" name="thread_id" :value="this.thread.id">
+                        <input
+                            type="hidden"
+                            name="thread_id"
+                            :value="this.thread.id"
+                        >
 
-                        <input type="hidden" name="brand" :value="this.brand">
+                        <input
+                            type="hidden"
+                            name="brand"
+                            :value="this.brand"
+                        >
 
                         <div class="flex tw-flex-col md:tw-flex-row mt-2 tw-justify-center md:tw-justify-between">
                             <a :href="`/${brand}/profile/${currentUser.id}/settings/profile#signatureForm`"

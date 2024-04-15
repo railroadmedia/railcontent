@@ -131,56 +131,23 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
             </section>
 
             {{-- Completed Lessons --}}
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                @if ($isCurrentUsersProfile)
-                    <a href="/{{ $brand }}/lesson-history/completed" dusk="see-all-started"
-                        class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Completed
-                            Lessons</h2>
-                    </a>
-                    <a href="/{{ $brand }}/lesson-history/completed" dusk="see-all-started"
-                        class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        See All
-                    </a>
-                @endif
-            </div>
-
-            {{-- Completed Catalogue --}}
-            @if ($isCurrentUsersProfile)
-                <div class="tw-flex tw-flex-row pb-3 four-cards-row" dusk="completed-lesson-grid">
-                    <content-catalogue brand="{{ $brand }}" theme-color="{{ $brand }}" catalogue-type="grid"
-                        limit="4" :force-wide-thumbs="true" :use-theme-color="true"
-                        :pre-loaded-content="{{ $completedProgressContents }}"
-                        no-results-message="{{ $isCurrentUsersProfile ? 'Any lessons that you complete will show up here.' : 'This member has not completed any lessons yet.' }}"
-                        no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}" />
-                </div>
+            @if ($isCurrentUsersProfile && count(json_decode($completedProgressContents)->data) > 0)
+                <mini-catalogue-section
+                    title="Completed Lessons"
+                    see-all-url="/{{ $brand }}/lesson-history/completed"
+                    seeAllAriaLabel="See All Completed Lessons"
+                    :pre-loaded-content="{{ json_encode(json_decode($completedProgressContents)->data) }}"
+                ></mini-catalogue-section>
             @endif
 
             {{-- Started Lessons --}}
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                @if ($isCurrentUsersProfile)
-                    <a href="/{{ $brand }}/lesson-history/in-progress" dusk="see-all-started"
-                        class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Started
-                            Lessons
-                        </h2>
-                    </a>
-                    <a href="/{{ $brand }}/lesson-history/in-progress" dusk="see-all-started"
-                        class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        See All
-                    </a>
-                @endif
-            </div>
-            {{-- Started Catalogue --}}
-
-            @if ($isCurrentUsersProfile)
-                <div class="tw-flex tw-flex-row tw-pb-3 four-cards-row" dusk="started-lesson-grid">
-                    <content-catalogue brand="{{ $brand }}" theme-color="{{ $brand }}" catalogue-type="grid"
-                        limit="4" :force-wide-thumbs="true" :use-theme-color="true"
-                        :pre-loaded-content="{{ $startedProgressContents }}"
-                        no-results-message="{{ $isCurrentUsersProfile ? 'Any lessons that you start will show up here.' : 'This member has not started any lessons yet.' }}"
-                        no-results-icon="{{ $isCurrentUsersProfile ? 'happy' : 'disappointed' }}" />
-                </div>
+            @if ($isCurrentUsersProfile && count(json_decode($completedProgressContents)->data) > 0)
+                <mini-catalogue-section
+                    title="Started Lessons"
+                    see-all-url="/{{ $brand }}/lesson-history/in-progress"
+                    seeAllAriaLabel="See All Started Lessons"
+                    :pre-loaded-content="{{ json_encode(json_decode($startedProgressContents)->data) }}"
+                ></mini-catalogue-section>
             @endif
 
             {{-- About You --}}

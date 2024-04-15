@@ -17,7 +17,7 @@ class PackDecorator extends TypeDecoratorBase
     {
         $contentsOfType = $contents->where('type', 'pack');
 
-        if ($contentsOfType->isEmpty()) {
+        if ($contentsOfType->isEmpty() || self::$skip) {
             return $contents;
         }
 

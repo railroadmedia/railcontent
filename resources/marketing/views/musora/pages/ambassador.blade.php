@@ -244,10 +244,10 @@
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>2</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Fill This Out</strong></h4>
-                    <span class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold"
+                    <a class="join smaller border-2 text-musora-gold border-musora-gold hover:bg-musora-gold"
 {{--                        x-on:click="apply = true"--}}
                         href="https://musora.everflowclient.io/affiliate/signup"
-                    >APPLY NOW</span>
+                    >APPLY NOW</a>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
                     <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>3</strong></h1></div>
@@ -309,14 +309,14 @@
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <span class="join bg-musora-gold text-black my-5 md:my-7 inline-block"
+            <a class="join bg-musora-gold text-black my-5 md:my-7 inline-block"
 {{--                x-on:click="apply = true"--}}
-                href="https://musora.everflowclient.io/affiliate/signup">APPLY NOW</span>
+                href="https://musora.everflowclient.io/affiliate/signup">APPLY NOW</a>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:jmilligan@musora.com"><u>jmilligan@musora.com</u></a> after<br class="hidden md:inline">
-                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <span class="cursor-pointer"
+                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a class="cursor-pointer"
 {{--                    x-on:click="apply = true"--}}
                     href="https://musora.everflowclient.io/affiliate/signup"
-                ><u>application page</u></span>.</p>
+                ><u>application page</u></a>.</p>
         </div>
     </section>
 

@@ -89,7 +89,7 @@
 @endforeach
 </header>
 @if(!empty($slides))
-    <section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
+    <section class="sm:px-6 py-4 sm:py-5 text-white relative z-10" style="background:#0c1524;">
         <div class="container max-w-5xl mx-auto">
             @component('_partials.components.carousel',[
                 'xdata' => "
