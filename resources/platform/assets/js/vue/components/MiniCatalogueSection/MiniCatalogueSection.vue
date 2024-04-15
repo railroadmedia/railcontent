@@ -1,5 +1,5 @@
 <template>
-    <section class="tw-flex tw-flex-row">
+    <section class="tw-flex tw-flex-row tw-mb-[30px]">
         <div class="tw-flex tw-flex-col tw-w-full">
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
