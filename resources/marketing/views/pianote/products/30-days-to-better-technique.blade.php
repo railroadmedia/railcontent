@@ -181,7 +181,7 @@
             <div class="flex flex-col items-center md:hidden mb-6 sm:mb-0">
                 <h2 class="leading-tight mb-8 text-center"><strong>Technique is <br class="hidden sm:inline-block"> <span class="underline">everything.</span></strong></h2>
                 <video
-                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
+                    src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/30-day-better-technique/30DTBT-Gif-header-v2.mp4"
                     muted="" autoplay="" loop="" playsinline="" class="w-2/3"></video>
             </div>
 
@@ -210,7 +210,7 @@
             </div>
             <div class="md:w-1/3 p-4 sm:-mb-24">
                 <video class="hidden md:inline relative top-0 rounded-xl overflow-hidden"
-                    src="https://d21q7xesnoiieh.cloudfront.net/marketing/pianote/products/30-day-better-technique/gif-header-white.mp4"
+                    src="https://d21q7xesnoiieh.cloudfront.net/marketing/pianote/products/30-day-better-technique/30DTBT-Gif-header-v2.mp4"
                     muted="" autoplay="" loop="" playsinline=""></video>
             </div>
 
@@ -544,231 +544,219 @@
         </div>
 
 
-        <h5 class="text-pianote uppercase text-center pt-10">Let’s dive in:</h5>
+        <h5 class="text-pianote uppercase text-center mb-5 sm:mb-7">Let’s dive in:</h5>
 
         <div class="container w-full max-w-screen-2xl mx-auto">
-        @php
-            $weeks = [
-                [
-                    'img' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week1.webp',
-                    'header1' => 'WEEK 1',
-                    'header2' => 'Building your finger independence.',
-                    'desc' => 'Strong fingers make everything easier on the piano. <br><br> And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to. <br><br> That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. After the first day, your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
-                    'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s what we’ll focus on:',
-                    'back' => [
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Using musical patterns</strong> to build strong fingers. Each exercise will sound like music, not a boring technical exercise. Jordan will show you exactly what notes to play in what order.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>Creating true separation for your fingers.</strong> Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Independence for EVERY finger.</strong> As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
-                        ],
-                    ],
-                ],
-                [
-                    'imgBack' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week2.webp',
-                    'header1' => 'WEEK 2',
-                    'header2' => 'Separate your hands and coordinate your brain.',
-                    'desc' => 'Now you’ve built strong fingers, it’s time to use them. <br><br> In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands. <br><br> No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
-                    'notes' => 'See what we’ll focus on...',
-                    'backHeader' => 'Here’s how we’ll do it:',
-                    'back' => [
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Patterns designed to break up your hands.</strong> You’ll lay a foundational rhythm with one hand while exploring new patterns and syncopation in the other.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>Personal accompaniment from Jordan.</strong> While you’re working on your exercises, Jordan will accompany you, providing a unique backing track. Yes, you’ll be making music with Jordan Rudess.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>Break out of 4/4.</strong> Get out of the easy time signatures and step into Jordan’s world of off-time. “It’s easy, but it’s odd.”',
+            @php
+                $weeks = [
+                    [
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week1.webp',
+                        'header1' => 'WEEK 1',
+                        'header2' => 'Building your finger independence.',
+                        'desc' => 'Strong fingers make everything easier on the piano. <br><br> And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to. <br><br> That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. After the first day, your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
+                        'notes' => 'See what we’ll focus on...',
+                        'backHeader' => 'Here’s what we’ll focus on:',
+                        'back' => [
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-1',
+                                'desc' => '<strong>Using musical patterns</strong> to build strong fingers. Each exercise will sound like music, not a boring technical exercise. Jordan will show you exactly what notes to play in what order.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-2',
+                                'desc' => '<strong>Creating true separation for your fingers.</strong> Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-3',
+                                'desc' => '<strong>Independence for EVERY finger.</strong> As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
+                            ],
                         ],
                     ],
-                ],
-                [
-                    'img' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week3.webp',
-                    'header1' => 'Week 3',
-                    'header2' => 'Speed. How to practice and play fast.',
-                    'desc' => 'Now it’s time to impress. <br><br> Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed. <br><br> Strap in, because it’s a wild ride. <br><br> But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
-                    'notes' => 'See what you’ll get...',
-                    'backHeader' => 'Here’s what you’ll get:',
-                    'back' => [
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>Jordan’s secret Juilliard exercises.</strong> These are the exact exercises his teachers at Juilliard taught him. He’s sharing them now -- with you.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing.</strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
-                        ],
-                    ],
-                ],
-                [
-                    'imgBack' =>
-                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week4.webp',
-                    'header1' => 'Week 4',
-                    'header2' => 'Creative expression. Make beautiful music.',
-                    'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4. <br><br> Because what’s the point of getting better technique?<br><br>To play beautiful music. <br><br> In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
-                    'notes' => 'See what you’ll end the course with:',
-                    'backHeader' => 'You end the course with:',
-                    'back' => [
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-1',
-                            'desc' => '<strong>The specific techniques to draw listeners into your playing.</strong> How to get people to stop and stare whenever you sit at the piano.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-2',
-                            'desc' => '<strong>The mindset of a singer.</strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
-                        ],
-                        [
-                            'icon' => 'fa-sharp fa-light fa-circle-3',
-                            'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
+                    [
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week2.webp',
+                        'header1' => 'WEEK 2',
+                        'header2' => 'Separate your hands and coordinate your brain.',
+                        'desc' => 'Now you’ve built strong fingers, it’s time to use them. <br><br> In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands. <br><br> No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
+                        'notes' => 'See what we’ll focus on...',
+                        'backHeader' => 'Here’s how we’ll do it:',
+                        'back' => [
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-1',
+                                'desc' => '<strong>Patterns designed to break up your hands.</strong> You’ll lay a foundational rhythm with one hand while exploring new patterns and syncopation in the other.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-2',
+                                'desc' => '<strong>Personal accompaniment from Jordan.</strong> While you’re working on your exercises, Jordan will accompany you, providing a unique backing track. Yes, you’ll be making music with Jordan Rudess.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-3',
+                                'desc' => '<strong>Break out of 4/4.</strong> Get out of the easy time signatures and step into Jordan’s world of off-time. “It’s easy, but it’s odd.”',
+                            ],
                         ],
                     ],
-                ],
-            ];
-        @endphp
-                <div class="pl-2 md:pl-6 xl:pl-10">
-                    <div x-data="{
-                        init() {
-                            new Splide(this.$refs.splide2, {
-                                classes: {
-                                    arrow: 'hidden',
-                                    prev: 'hidden',
-                                    next: 'hidden',
-                                    pagination: 'hidden',
-                                },
-                                perPage: 2.5,
-                                perMove: 1,
-                                type: 'slide',
-                                focus: 0,
-                                gap: '0.5rem',
-                                interval: 2000,
-                                drag: 'free',
-                                snap: false,
-                                lazyLoad: 'nearby',
-                                breakpoints: {
-                                    1250: {
-                                        perPage: 2.1,
-                                    },
-                                    1023: {
-                                        perPage: 1.8,
-                                    },
-                                    767: {
-                                        perPage: 1.3,
-                                    },
-                                },
-                            }).mount()
+                    [
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week3.webp',
+                        'header1' => 'Week 3',
+                        'header2' => 'Speed. How to practice and play fast.',
+                        'desc' => 'Now it’s time to impress. <br><br> Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed. <br><br> Strap in, because it’s a wild ride. <br><br> But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
+                        'notes' => 'See what you’ll get...',
+                        'backHeader' => 'Here’s what you’ll get:',
+                        'back' => [
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-1',
+                                'desc' => '<strong>Jordan’s secret Juilliard exercises.</strong> These are the exact exercises his teachers at Juilliard taught him. He’s sharing them now -- with you.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-2',
+                                'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing.</strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-3',
+                                'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
+                            ],
+                        ],
+                    ],
+                    [
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/week4.webp',
+                        'header1' => 'Week 4',
+                        'header2' => 'Creative expression. Make beautiful music.',
+                        'desc' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4. <br><br> Because what’s the point of getting better technique?<br><br>To play beautiful music. <br><br> In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
+                        'notes' => 'See what you’ll end the course with:',
+                        'backHeader' => 'You end the course with:',
+                        'back' => [
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-1',
+                                'desc' => '<strong>The specific techniques to draw listeners into your playing.</strong> How to get people to stop and stare whenever you sit at the piano.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-2',
+                                'desc' => '<strong>The mindset of a singer.</strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
+                            ],
+                            [
+                                'icon' => 'fa-sharp fa-light fa-circle-3',
+                                'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
+                            ],
+                        ],
+                    ],
+                ];
+            @endphp
+            <div x-data="{
+                init() {
+                    new Splide(this.$refs.splide2, {
+                        classes: {
+                            arrow: 'hidden',
+                            prev: 'hidden',
+                            next: 'hidden',
+                            pagination: 'hidden',
                         },
-                    }" class="mb-5">
-                        <div x-ref="splide2" class="splide text-left">
-                            <div class="splide__track py-20">
-                                <ul class="splide__list items-start">
-                                    @foreach ($weeks as $index => $week)
-                                        <li class="splide__slide px-1">
-                                            <!-- card -->
-                                            <div class="relative h-[670px] rounded-xl overflow-hidden cursor-pointer" x-data="{ flipped: false }"
-                                                x-on:click="
-                                                     flipped = !flipped;
-                                                     if(flipped){
-                                                        $refs.front.classList.add('rotate-y-180');
-                                                        $refs.back.classList.remove('-rotate-y-180');
-                                                        $refs.back.classList.add('rotate-y-0');
-                                                     }
-                                                     else {
-                                                        $refs.front.classList.remove('rotate-y-180');
-                                                        $refs.back.classList.add('-rotate-y-180');
-                                                        $refs.back.classList.remove('rotate-y-0');
-                                                     }
-                                                ">
-                                                <div style="perspective: 1000px;">
-                                                   <!-- Front -->
-                                                   <div style="transform-style: preserve-3d;">
-                                                      <div x-ref="front"
-                                                          class="absolute inset-0 rounded-3xl text-white p-8 md:p-6 lg:p-8 w-full bg-gray-900 transition-transform duration-500 ease-in-out h-[670px] overflow-hidden"
-                                                          style="backface-visibility: hidden;"
-                                                          :class="{ 'rotate-y-180': flipped }">
+                        perPage: 2.5,
+                        perMove: 1,
+                        type: 'slide',
+                        focus: 0,
+                        gap: '0.5rem',
+                        interval: 2000,
+                        drag: 'free',
+                        snap: false,
+                        lazyLoad: 'nearby',
+                        breakpoints: {
+                            1250: {
+                                perPage: 2.1,
+                            },
+                            1023: {
+                                perPage: 1.8,
+                            },
+                            767: {
+                                perPage: 1.1,
+                            },
+                        },
+                    }).mount()
+                },
+            }">
+                <div x-ref="splide2" class="splide text-left">
+                    <div class="splide__track">
+                        <ul class="splide__list items-start">
+                            @foreach ($weeks as $index => $week)
+                                <li class="splide__slide px-1">
+                                    <!-- card -->
+                                    <div class="relative inline-block align-top w-full " x-data="{ flipped: false }"
+                                        x-on:click="
+                                             flipped = !flipped;
+                                             if(flipped){
+                                                $refs.front.classList.add('rotate-y-180');
+                                                $refs.back.classList.remove('-rotate-y-180');
+                                                $refs.back.classList.add('rotate-y-0');
+                                             }
+                                             else {
+                                                $refs.front.classList.remove('rotate-y-180');
+                                                $refs.back.classList.add('-rotate-y-180');
+                                                $refs.back.classList.remove('rotate-y-0');
+                                             }
+                                        ">
+                                        <div class="inline-block relative w-full" style="perspective: 1000px;">
+                                            <div class="relative cursor-pointer" style="transform-style: preserve-3d;">
+                                               <!-- Front -->
+                                                <div x-ref="front"
+                                                    class="block z-20 text-white p-5 md:p-6 lg:p-8  rounded-3xl w-full h-full transition-transform duration-700"
+                                                    style="backface-visibility: hidden; background-color:#00101d;">
+                                                 <div class="flex items-center justify-center relative">
+                                                    @if (!empty($week['img']))
+                                                        <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity"
+                                                            src="{{ $week['img'] }}"
+                                                            alt="Collage showing pianists" loading="lazy"
+                                                            onload="this.classList.remove('opacity-0')">
+                                                    @endif
+                                                 </div>
 
-                                                         <div class="flex items-center justify-center relative">
-                                                            @if (!empty($week['img']))
-                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity"
-                                                                    src="{{ $week['img'] }}"
-                                                                    alt="Collage showing pianists" loading="lazy"
-                                                                    onload="this.classList.remove('opacity-0')">
-                                                            @endif
-                                                         </div>
-
-                                                         <h5 class="text-pianote uppercase text-left">
-                                                            <strong>{!! $week['header1'] !!}</strong>
-                                                         </h5>
-                                                         <h4 class="leading-normal mb-4 md:mb-2">
-                                                            <strong>{!! $week['header2'] !!}</strong></h4>
-                                                         <p class="pb-16">{!! $week['desc'] !!}</p>
-                                                         <p class="text-pianote absolute bottom-[16px]">
-                                                            <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                            {!! $week['notes'] !!}
-                                                         </p>
-                                                      </div>
-                                                      <!-- Back  -->
-                                                      <div x-ref="back"
-                                                          class="absolute inset-0 rounded-3xl p-8 md:p-6 lg:p-8 w-full bg-gray-800 transition-transform duration-700 ease-in-out -rotate-y-180 h-[670px] overflow-hidden"
-                                                          style="backface-visibility: hidden;"
-                                                      >
-
-                                                         <div class="flex items-center justify-center relative">
-                                                            @if (!empty($week['imgBack']))
-                                                                <img class="h-28 lg:h-36 px-4 opacity-0 transition-opacity"
-                                                                    src="{{ $week['imgBack'] }}"
-                                                                    alt="Collage showing pianists" loading="lazy"
-                                                                    onload="this.classList.remove('opacity-0')">
-                                                            @endif
-                                                         </div>
-                                                         <h5
-                                                            class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
-                                                            <strong>{!! $week['header1'] !!}</strong>
-                                                         </h5>
-                                                         <p class="leading-normal text-white">
-                                                            {!! $week['header2'] !!}
-                                                         </p>
-                                                         <h5 class="text-left py-4 tracking-tight text-white">
-                                                            <strong>{!! $week['backHeader'] !!}</strong>
-                                                         </h5>
-                                                         @foreach ($week['back'] as $paragraph)
-                                                            <div class="flex items-center">
-                                                                <i class="{{ $paragraph['icon'] }} text-pianote text-3xl"></i>
-                                                                <p class="text-white ml-2 pl-2 pb-3">
-                                                                   {!! $paragraph['desc'] !!}</p>
-                                                            </div>
-                                                         @endforeach
-                                                         <p class="text-pianote absolute bottom-[14px]">
-                                                            <i class="fa-solid fa-arrows-rotate-reverse"></i>
-                                                            See the weeks overview...
-                                                         </p>
-                                                      </div>
-                                                   </div>
-                                                </div>
+                                                 <h5 class="text-pianote uppercase text-left">
+                                                    <strong>{!! $week['header1'] !!}</strong>
+                                                 </h5>
+                                                 <h4 class="leading-normal mb-4 md:mb-2">
+                                                    <strong>{!! $week['header2'] !!}</strong></h4>
+                                                 <p class="leading-tight pb-8">{!! $week['desc'] !!}</p>
+                                                 <p class="text-pianote absolute bottom-[16px]">
+                                                    <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                    {!! $week['notes'] !!}
+                                                 </p>
+                                              </div>
+                                              <!-- Back  -->
+                                                <div x-ref="back"
+                                                    class="absolute top-0 left-0 z-40 text-white p-5 md:p-6 lg:p-8 rounded-3xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                                    style="backface-visibility: hidden; background-color:#252e36;"
+                                                >
+                                                 <h5
+                                                    class="text-pianote uppercase text-left pt-1 sm:pt-2 tracking-tight">
+                                                    <strong>{!! $week['header1'] !!}</strong>
+                                                 </h5>
+                                                 <p class="leading-normal text-white">
+                                                    {!! $week['header2'] !!}
+                                                 </p>
+                                                 <h5 class="text-left py-4 tracking-tight text-white">
+                                                    <strong>{!! $week['backHeader'] !!}</strong>
+                                                 </h5>
+                                                 @foreach ($week['back'] as $paragraph)
+                                                    <div class="flex items-start">
+                                                        <i class="{{ $paragraph['icon'] }} text-pianote text-3xl"></i>
+                                                        <p class="leading-tight text-white ml-2 pl-2 pb-4">
+                                                           {!! $paragraph['desc'] !!}</p>
+                                                    </div>
+                                                 @endforeach
+                                                 <p class="text-pianote absolute bottom-[14px]">
+                                                    <i class="fa-solid fa-arrows-rotate-reverse"></i>
+                                                    See the weeks overview...
+                                                 </p>
+                                              </div>
                                             </div>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -805,7 +793,7 @@
 
     @php
         $logo =
-            'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp';
+            'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/better-technique-guarantee.webp';
         $guaranteeText = "We’re so confident that you’ll LOVE the improvements to your piano technique after Jordan’s course, that we’re giving you THREE times as long to put it to the test.
                         <br><br>
                         <strong>The course is 30 days, but you’ll have 90 days to try it risk-free.</strong>
@@ -926,7 +914,7 @@
                         'cardSubtitle' => "The course + red Pianote metronome ($79 value)",
                         'cardPrice' => '127',
                         'cardDiscount' => '296',
-                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome,metronome-shipping&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
                             '<strong>Lifetime</strong> Course Access',
@@ -1022,7 +1010,7 @@
 
                                     But once you finish it, you’ll be itching to put your new technique to use.
 
-                                    And if you’re looking for the best way to do that, we’d suggest joining Pianote and getting access to over 1000 popular songs (including some Dream Theater songs), as well as other courses form world-class instructors.
+                                    And if you’re looking for the best way to do that, we’d suggest joining Pianote and getting access to over 1000 popular songs (including some Dream Theater songs), as well as other courses from world-class instructors.
                                     ',
                     'num' => '?',
                 ])

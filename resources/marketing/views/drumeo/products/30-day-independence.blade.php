@@ -262,8 +262,8 @@
 @endphp
     @include('_partials.components.sticky-bar', [
     'link' => '#final',
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/icon-logo-white.webp',
-    'text' => 'Get a FREE EL <br class="md:hidden"> ESTEPARIO QuietPad',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/quietpad-estepario.webp',
+    'text' => 'Get a FREE EL ESTEPARIO QuietPad',
     'stock' => $stock,
     ])
 
@@ -322,9 +322,8 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" x-on:click="waitlistModal = true;">JOIN
-                                WAITLIST</span>
-                            {{--                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a> --}}
+{{--                            <span class="join sold-out medium w-full" x-on:click="waitlistModal = true;">JOIN WAITLIST</span>--}}
+                                                        <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Registration is FREE for
                                     Drumeo Members.</a>
@@ -461,7 +460,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/lifetime.webp',
                         'title' => 'Lifetime access.',
                         'desc' =>
-                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace.',
+                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
             @endphp
@@ -523,9 +522,8 @@
             @if ($hasProduct)
                 <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
             @else
-                {{--                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br> --}}
-                <a href="#final" class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3"
-                    x-on:click="waitlistModal = true;">JOIN WAITLIST</a><br>
+                                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+{{--                <a href="#final" class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" x-on:click="waitlistModal = true;">JOIN WAITLIST</a><br>--}}
             @endif
 {{--            <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"--}}
 {{--                onload="this.classList.remove('opacity-0')"--}}
@@ -855,7 +853,7 @@
                             onload="this.classList.remove('opacity-0')"
                             src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/chad-smith.webp"
                             alt="Chad Smith Photo">
-                        <p class="pl-4 m-0"><strong>Chad Smith (Red Hot Chili Peppers)</strong><br>
+                        <p class="pl-4 m-0"><strong>Chad Smith</strong><br>
                             <em class="leading-tight inline-block mb-1 opacity-60">Red Hot Chili Peppers</em><br>
                             “All I know is that guy is a freak of nature.” <br>
                         </p>
@@ -1056,7 +1054,7 @@
                 @include('_partials.components.question-dropdown', [
                     'title' => 'How much time per week will this course require?',
                     'desc' =>
-                        '30-Day Indepenence gives you guided daily chop workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.',
+                        '30-Day Independence gives you guided daily coordination workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.',
                     'num' => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
@@ -1130,7 +1128,7 @@
     @include('drumeo.sales.partials._footer')
 
     @include('_partials.components.countdown', [
-        'countdownDate' => '2024-06-01 00:00:00',
+        'countdownDate' => '2024-05-06 00:00:00',
         'promoVersion' => false,
     ])
 

@@ -2,13 +2,13 @@
 
 namespace App\Modules\Ecommerce\Jobs;
 
-
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
 
 class ShopifySyncCustomerByEmailJob implements ShouldQueue
@@ -18,6 +18,11 @@ class ShopifySyncCustomerByEmailJob implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
+
+    public function middleware(): array
+    {
+        return [new SkipIfBatchCancelled()];
+    }
 
     private array $emails;
 
