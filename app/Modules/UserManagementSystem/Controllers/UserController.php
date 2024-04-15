@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
@@ -44,6 +45,7 @@ class UserController extends Controller
     private MailService $mailService;
     private SaasquatchService $saasquatchService;
     private UserService $userService;
+    private SubscriptionService $subscriptionService;
 
     /**
      * UserController constructor.
@@ -51,11 +53,13 @@ class UserController extends Controller
     public function __construct(
         MailService $mailService,
         SaasquatchService $saasquatchService,
-        UserService $userService
+        UserService $userService,
+        SubscriptionService $subscriptionService
     ) {
         $this->mailService = $mailService;
         $this->saasquatchService = $saasquatchService;
         $this->userService = $userService;
+        $this->subscriptionService = $subscriptionService;
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
 
@@ -712,5 +716,36 @@ class UserController extends Controller
         return response()->json([
             "reported" => $reported ? true : false,
         ], 200);
+    }
+
+    public function markAsDelete(Request $request, $id)
+    {
+        $isJson = request()->expectsJson();
+
+        $user = user();
+        $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
+        $user = $this->userService->deleteUser();
+
+        if ($user) {
+            event(new UserDeleted($user));
+        } else {
+            return response('', 404);
+        }
+
+        if (!$isJson) {
+            $message = ['success' => true];
+
+            return $request->has('redirect') ?
+                redirect()
+                    ->away($request->get('redirect'))
+                    ->with($message) :
+                redirect()
+                    ->back()
+                    ->with($message);
+        } else {
+            return json_encode([
+                                   "data" => ["attributes" => json_encode($user)],
+                               ]);
+        }
     }
 }
