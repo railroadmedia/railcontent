@@ -262,8 +262,8 @@
 @endphp
     @include('_partials.components.sticky-bar', [
     'link' => '#final',
-    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/icon-logo-white.webp',
-    'text' => 'Get a FREE EL <br class="md:hidden"> ESTEPARIO QuietPad',
+    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/quietpad-estepario.webp',
+    'text' => 'Get a FREE EL ESTEPARIO QuietPad',
     'stock' => $stock,
     ])
 
