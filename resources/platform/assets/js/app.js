@@ -46,7 +46,8 @@ import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
-import PageHeader from './vue/components/PageHeader/PageHeader';
+import PageHeader from './vue/components/PageHeader/PageHeader'
+import MiniCatalogueSection from './vue/components/MiniCatalogueSection/MiniCatalogueSection';
 import DeleteAccountModal from './vue/components/Modal/DeleteAccountModal';
 
 //Vuesora Assets
@@ -296,6 +297,7 @@ app.component('AppContainer', AppContainer)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
+    .component('MiniCatalogueSection', MiniCatalogueSection)
     // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
 
