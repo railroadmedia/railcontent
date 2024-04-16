@@ -9,8 +9,9 @@ Route::domain('{singeoDomain}')
     ->group(function () {
         Route::group(['prefix' => 'shop' ],
             function () {
-                Route::get('/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
                 Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
+                Route::get('/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
+                Route::get('/singing-straw', [SalesController::class, 'singingStraw']);
             }
         );
 
