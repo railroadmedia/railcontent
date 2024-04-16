@@ -174,7 +174,7 @@
     </section>
 
 
-    <section v-if="cohort['is_product']" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
+    <section id="final" v-if="cohort['is_product']" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
         <div class="tw-max-w-6xl tw-mx-auto lg:tw-px-10 tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-w-full lg:tw-w-1/2 lg:tw-order-1 tw-mb-4 lg:tw-mb-0">
                 <div class="tw-w-full tw-aspect-video tw-bg-black tw-rounded-xl tw-overflow-hidden tw-relative">
@@ -203,10 +203,10 @@
     </section>
 
     <!--  Dropdown  -->
-    <section class="tw-bg-white tw-py-7">
+    <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
             <!--  Bottom title  -->
-            <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ cohort['bottom_title'] }}</h3>
+            <h3 class="tw-font-extrabold tw-text-center">{{ cohort['bottom_title'] }}</h3>
             <!--  Bottom description  -->
             <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
 
@@ -266,7 +266,7 @@
                 </p>
             </div>
 
-            <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ cohort['dropdown_title'] }}</h3>
+            <h3 class="tw-font-extrabold tw-text-center tw-mb-7 tw-mt-10">{{ cohort['dropdown_title'] }}</h3>
             <CohortDropdown
                 v-if="dropdowns.length > 0"
                 v-for="(dropdown, index) in dropdowns"
