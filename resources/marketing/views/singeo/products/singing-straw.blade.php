@@ -197,10 +197,10 @@
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h3 class="leading-tight font-playfair mb-3"><strong>Improve your voice anywhere, anytime.</strong></h3>
             <p class="leading-normal max-w-xl mx-auto">Whether you’re brand new to singing, looking to blow the doors off the next open mic night, or you’re a gigging musician and need to keep your voice in top shape while on the road – the Singing Straw has everything you need.</p>
-            <div class="max-w-2xl mx-auto relative my-7">
+            <div class="max-w-xl mx-auto relative my-7">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1344x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp">
-                    <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp" alt="logo">
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1152x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside2.webp">
+                    <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside2.webp" alt="logo">
                 </picture>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 30%;left: 11%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="Durable stainless steel case to keep everything organized">
                     <span class="text-2xl">+</span>
