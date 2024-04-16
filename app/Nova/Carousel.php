@@ -250,7 +250,9 @@ class Carousel extends Resource
                 ),
             Select::make('Skill Level', 'skill_level')
                 ->options([
-                    'Novice' => 'Novice',
+                    null => "No Difficulty",
+                    'All' => 'All',
+                    'Introductory' => 'Introductory',
                     'Beginner' => 'Beginner',
                     'Intermediate' => 'Intermediate',
                     'Advanced' => 'Advanced',
@@ -264,7 +266,7 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Select $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show()->rules(['required']);
+                        if ($formData->is_featured) $field->show();
                     }
                 ),
             Text::make('Challenge ID', 'challenge_id')->hideFromIndex()

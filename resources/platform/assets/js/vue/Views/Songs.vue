@@ -1,9 +1,9 @@
 <template>
     <!-- Header -->
     <!-- ADD NEW HEADER HERE -->
-    
+
     <!-- Continue section -->
-    <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-0 md:tw-px-8 tw-mt-[33px]">
+    <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[33px]">
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="continueUrl"
             :preLoadedContent="startedContent.data" :isMiniView="true" :show-dropdown="true" />
     </div>
