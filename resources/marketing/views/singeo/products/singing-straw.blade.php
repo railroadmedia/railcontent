@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
 
     <style>
+
         .info-pop {
             position: absolute;
         }
@@ -25,8 +26,9 @@
             max-height: 0;
             visibility: hidden;
             opacity: 0;
-            transition: all 0.3s;
+            transition: all .3s;
             overflow: hidden;
+            font-size: 14px;
         }
         .info-pop:before {
             z-index: 100;
@@ -40,7 +42,7 @@
         .info-pop:after {
             padding: 5px 8px;
             content: attr(tip);
-            font: 400 14px/1.4em 'Open Sans', sans-serif;
+            font-size: 14px;
             text-align: left;
             color: #000;
             width: 220px;
@@ -53,7 +55,7 @@
         .info-pop:hover, .info-pop:active, .info-pop:focus {
             z-index: 100;
         }
-        .info-pop:hover:after, .info-pop:active:after, .info-pop:focus:after, .info-pop:hover:before, .info-pop:active:before, .info-pop:focus:before {
+        .info-pop:hover:after, .info-pop:hover:before, .info-pop:active:after, .info-pop:active:before, .info-pop:focus:after, .info-pop:focus:before {
             max-height: 1000px;
             visibility: visible;
             opacity: 1;
@@ -110,14 +112,14 @@
                 <h3 class="font-extrabold leading-tight text-center md:text-left mb-5">
                     Strengthen your voice, increase your range, and sing with confidence.
                 </h3>
-                <h2 class="font-extrabold leading-tight text-center md:text-left">
+                <h2 class="leading-tight text-center md:text-left inline-block mr-2">
                     @if(floatval($productPrices['singing-straw']->discounted_price) < floatval($productPrices['singing-straw']->price))
                         <s class="opacity-50">${{ floatval($productPrices['singing-straw']->price) }}</s>
                     @endif
                     <strong>${{ floatval($productPrices['singing-straw']->discounted_price) }}</strong>
                 </h2>
                 @if(floatval($productPrices['singing-straw']->discounted_price) < floatval($productPrices['singing-straw']->price))
-                    <p class="text-musora">(Save {{ round(100 - (100 * (floatval($productPrices['singing-straw']->discounted_price) / floatval($productPrices['singing-straw']->price)))) }}%)</p>
+                    <h4 class="text-musora inline-block">(Save {{ round(100 - (100 * (floatval($productPrices['singing-straw']->discounted_price) / floatval($productPrices['singing-straw']->price)))) }}%)</h4>
                 @endif
                 <div class="md:w-72 lg:w-2/3 text-center mt-5">
                     <a class="join smaller w-full" href="/ecommerce/add-to-cart?products[singing-straw]=1&promo-code=transform">ORDER NOW</a>
@@ -191,19 +193,27 @@
             @endforeach
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#EFF3F5">
+    <section class="text-center px-5 sm:px-6 py-8 sm:py-12 lg:py-16 relative" style="background-color:#EFF3F5">
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h3 class="leading-tight font-playfair mb-3"><strong>Improve your voice anywhere, anytime.</strong></h3>
-            <p class="leading-normal">Whether you’re brand new to singing, looking to blow the doors off the next open mic night, or you’re a gigging musician and need to keep your voice in top shape while on the road – the Singing Straw has everything you need.</p>
-            <img class="inline-block sm:hidden rounded-xl my-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp" alt="Eardrums kit">
-
-            <div class="hidden sm:inline-block relative text-musora text-xs sm:text-lg my-7">
-                <p class="absolute w-full text-center -top-6 sm:top-6"><strong>(Tap for more information)</strong></p>
-                <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside.webp" alt="Eardrums kit">
-                <div class="info-pop cursor-pointer" style="top: 30%;left: 29%;" tip="Durable stainless steel case to keep everything organized"><i class="fas fa-info-circle"></i></div>
-                <div class="info-pop cursor-pointer" style="top: 61%;left: 38%;" tip="Cleaning brush to keep your straws in perfect condition (just like your voice)"><i class="fas fa-info-circle"></i></div>
-                <div class="info-pop cursor-pointer" style="top: 44%;left: 47%;" tip="3 straws in varying diameters to improve your singing"><i class="fas fa-info-circle"></i></div>
-                <div class="info-pop cursor-pointer" style="top: 29%;left: 68%;" tip="Canvas carry bag"><i class="fas fa-info-circle"></i></div>
+            <p class="leading-normal max-w-xl mx-auto">Whether you’re brand new to singing, looking to blow the doors off the next open mic night, or you’re a gigging musician and need to keep your voice in top shape while on the road – the Singing Straw has everything you need.</p>
+            <div class="max-w-2xl mx-auto relative my-7">
+                <picture>
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1344x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp">
+                    <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp" alt="logo">
+                </picture>
+                <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 30%;left: 11%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="Durable stainless steel case to keep everything organized">
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 61%;left: 24%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="Cleaning brush to keep your straws in perfect condition (just like your voice)">
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 44%;left: 39%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="3 straws in varying diameters to improve your singing">
+                    <span class="text-2xl">+</span>
+                </div>
+                <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 29%;left: 47%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="Canvas carry bag">
+                    <span class="text-2xl">+</span>
+                </div>
             </div>
             <div class="overflow-hidden rounded-xl border  border-black inline-block">
                 <table>
@@ -238,15 +248,16 @@
                 range, and sing with confidence.
             </h3>
 
-            <h2 class="font-extrabold leading-tight">
+            <h2 class="leading-tight inline-block mr-2">
                 @if(floatval($productPrices['singing-straw']->discounted_price) < floatval($productPrices['singing-straw']->price))
                     <s class="opacity-50">${{ floatval($productPrices['singing-straw']->price) }}</s>
                 @endif
                 <strong>${{ floatval($productPrices['singing-straw']->discounted_price) }}</strong>
             </h2>
             @if(floatval($productPrices['singing-straw']->discounted_price) < floatval($productPrices['singing-straw']->price))
-                <p class="text-musora">(Save {{ round(100 - (100 * (floatval($productPrices['singing-straw']->discounted_price) / floatval($productPrices['singing-straw']->price)))) }}%)</p>
+                <h4 class="text-musora inline-block">(Save {{ round(100 - (100 * (floatval($productPrices['singing-straw']->discounted_price) / floatval($productPrices['singing-straw']->price)))) }}%)</h4>
             @endif
+            <br>
             <a class="join smaller bg-musora text-black w-1/2 mb-3 mt-5" href="/ecommerce/add-to-cart?products[singing-straw]=1&promo-code=transform">Order Now</a>
             <p class="leading-tight"><em>For hygienic reasons all singing <br class="sm:hidden"> straw sales are final.</em></p>
         </div>
