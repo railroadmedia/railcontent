@@ -153,7 +153,7 @@
                         'icon' => 'fa-microphone-stand',
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-03.webp',
                         'title' => 'Balanced Singing.',
-                        'desc' => 'Using your Singing Straw is like a yoga class… but for your voice! It’s perfect for warming up or cooling down your voice which improves flexibility, agility, and clarity in your voice.',
+                        'desc' => 'Using your Singing Straw is like a yoga class… but for your voice! It’s perfect for warming up or cooling down and improves your voice\'s flexibility, agility, and clarity.',
                     ],
                 ];
             @endphp
