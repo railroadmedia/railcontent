@@ -11,3 +11,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('admin.vimeo-data');
     });
+
+
+Route::domain('{musoraDomain}')
+    ->middleware(['web_authenticated', 'web_authenticated_admin'])
+    ->any('/admin/studio{any}', [\App\Http\Controllers\Misc\SanityStudioCMSController::class, 'renderStudio'])
+    ->where('any', '.*')
+    ->name('admin.studio');
