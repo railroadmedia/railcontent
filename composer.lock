@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06c1297dfb00b5cd06509c3cfa5e38fb",
+    "content-hash": "00a798783f2a07370ce0fb2468e3bd0f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -9872,16 +9872,16 @@
         },
         {
             "name": "railroad/doctrine-array-hydrator",
-            "version": "v2.0.1",
+            "version": "dev-temp-fix-inflector",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/doctrine-array-hydrator.git",
-                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3"
+                "reference": "4df7e2bf28c1de09fd7adb5080497d803d188345"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/12e4a9de5d18870f961fbc1febb8f37f797f51f3",
-                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3",
+                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/4df7e2bf28c1de09fd7adb5080497d803d188345",
+                "reference": "4df7e2bf28c1de09fd7adb5080497d803d188345",
                 "shasum": ""
             },
             "require": {
@@ -9923,9 +9923,9 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/v2.0.1"
+                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/temp-fix-inflector"
             },
-            "time": "2024-04-11T22:34:23+00:00"
+            "time": "2024-04-16T17:19:36+00:00"
         },
         {
             "name": "railroad/ecommerce",
@@ -19698,9 +19698,18 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/doctrine-array-hydrator",
+            "version": "dev-temp-fix-inflector",
+            "alias": "v2.0.2",
+            "alias_normalized": "2.0.2.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "railroad/doctrine-array-hydrator": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -19709,5 +19718,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
