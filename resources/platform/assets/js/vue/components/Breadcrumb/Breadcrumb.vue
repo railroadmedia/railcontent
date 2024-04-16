@@ -1,24 +1,24 @@
 <template>
-  <div class="tw-flex tw-w-full tw-items-center tw-justify-center">
+  <div :class="`tw-flex tw-w-full tw-pt-4 ${classOverride}`">
     <!-- Mobile -->
-    <div v-if="penultimateBreadcrumb && penultimateBreadcrumb.url" class="tw-flex lg:tw-hidden tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-px-3 tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-justify-center tw-items-center tw-w-full tw-h-[40px] dark:tw-bg-black tw-bg-[#e5e7eb] tw-text-center tw-uppercase tw-text-sm">
-      <a class="tw-flex tw-items-center tw-justify-center tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-no-underline tw-font-bold tw-leading-none"
+    <div v-if="penultimateBreadcrumb && penultimateBreadcrumb.url" class="tw-flex  lg:tw-hidden tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-w-full tw-uppercase tw-text-[14px]">
+      <a class="tw-flex tw-items-center tw-text-sm tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-no-underline tw-font-bold"
         :href="penultimateBreadcrumb.url">
-        <ArrowLeftIcon class="tw-w-[14px] tw-h-[14px] tw-inline-block tw-mr-[3px]" />
+        <i class="fa-solid fa-chevron-left tw-text-[16px] tw-h-[16px] tw-w-[16px] tw-pr-[5px]"></i>
         <span class="tw-font-bold">{{ penultimateBreadcrumb.title }}</span>
       </a>
     </div>
     <!-- Desktop -->
-    <div class="tw-hidden lg:tw-flex tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-px-3 tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-justify-center tw-items-center tw-w-full tw-h-[40px] dark:tw-bg-black tw-bg-[#e5e7eb] tw-text-center tw-uppercase tw-text-sm">
-      <a :href="`/${brand}`" class="tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] dark:hover:tw-text-white hover:tw-text-black tw-leading-none">
-        <HomeIcon class="tw-w-[14px] tw-h-[14px]" />
+    <div class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-hidden lg:tw-flex tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden dark:tw-bg-[#000C17] tw-uppercase tw-text-[14px] tw-leading-[21px]">
+      <a :href="`/${brand}`" class="dark:hover:tw-text-white hover:tw-text-black tw-font-normal tw-text-[14px] tw-leading-[21px]">
+        HOME
       </a>
       <template v-for="(breadcrumb, index) in breadcrumbs" :key="index">
-        <span class="tw-font-bold">&nbsp;/&nbsp;</span>
-        <a v-if="index < breadcrumbs.length - 1 && breadcrumb.url" :href="breadcrumb.url" class="tw-leading-none tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] dark:hover:tw-text-white hover:tw-text-black">
-          <span class="tw-text-sm">{{ breadcrumb.title }}</span>
+        <span class="tw-font-normal tw-text-[14px] tw-leading-[21px]">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+        <a v-if="index < breadcrumbs.length - 1 && breadcrumb.url" :href="breadcrumb.url" class="tw-font-normal tw-text-[14px] tw-leading-[21px] dark:hover:tw-text-white hover:tw-text-black">
+          <span>{{ breadcrumb.title }}</span>
         </a>
-        <span v-else class="tw-font-bold tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-text-sm tw-leading-none">
+        <span v-else class="tw-font-bold tw-text-[14px] tw-leading-[21px]">
           {{ breadcrumb.title }}
         </span>
       </template>
@@ -27,8 +27,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { ArrowLeftIcon, HomeIcon } from '@heroicons/vue/solid';
+import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 
@@ -39,6 +38,10 @@ const props = defineProps({
   breadcrumbs: {
     type: Array,
     default: () => [],
+  },
+  classOverride: {
+    type: String,
+    default: 'tw-px-4 md:tw-px-8',
   }
 });
 

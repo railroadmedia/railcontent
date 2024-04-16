@@ -1,6 +1,7 @@
 <template>
     <!-- Header -->
     <!-- ADD NEW HEADER HERE -->
+    <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
     <PageHeader pageType="songs" title="Songs" iconName="headphones-filled" :infoData="headerInfoData" :ctas="ctaConfig" />
     
     <!-- Continue section -->
@@ -24,6 +25,7 @@ import { defineProps, computed } from 'vue';
 import PageHeader from '../components/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
 import CollectionWrapper from "../components/CollectionWrapper/CollectionWrapper.vue";
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
 
 const props = defineProps({
     continueUrl: {

@@ -1,3 +1,15 @@
+@php
+    $breadcrumbs = [
+        [
+            'title' => 'Live',
+            'url' => '/'.$brand.'/live'
+        ],
+        [
+            'title' => $lessonContent->fetch('fields.title'),
+        ],
+    ];
+@endphp
+
 @extends('partials.layout')
 
 @section('meta')
@@ -5,7 +17,7 @@
 @endsection
 
 @section('content')
-
+    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}" :class-override=""></breadcrumb>
     <div class="fluid pv-3">
         {{-- Youtube Live Embed --}}
         @include('partials.bladesora.members.content.lesson-video._live-embed', [

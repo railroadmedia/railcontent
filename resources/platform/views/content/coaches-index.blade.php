@@ -9,6 +9,12 @@
     } elseif ($brand === "singeo") {
         $headerDescription = "Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world!";
     }
+
+    $breadcrumbs = [
+        [
+            'title' => 'Coaches',
+        ]
+    ];
 @endphp
 
 @extends('partials.layout', ['trackingSectionName' => 'coaches'])
@@ -18,7 +24,7 @@
 @endsection
 
 @section('content')
-
+    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
     <page-header
         title="Coaches"
         icon-name="whistle-filled"
