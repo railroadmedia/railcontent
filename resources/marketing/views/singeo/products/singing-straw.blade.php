@@ -116,11 +116,11 @@
                     @endif
                     <strong>${{ floatval($productPrices['singing-straw']->discounted_price) }}</strong>
                 </h2>
-                @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
-                    <p class="text-musora">(Save {{ round(100 - (100 * (floatval($productPrices['singing-starter-kit']->discounted_price) / floatval($productPrices['singing-starter-kit']->price)))) }}%)</p>
+                @if(floatval($productPrices['singing-straw']->discounted_price) < floatval($productPrices['singing-straw']->price))
+                    <p class="text-musora">(Save {{ round(100 - (100 * (floatval($productPrices['singing-straw']->discounted_price) / floatval($productPrices['singing-straw']->price)))) }}%)</p>
                 @endif
                 <div class="md:w-72 lg:w-2/3 text-center mt-5">
-                    <a class="join smaller w-full" href="/ecommerce/add-to-cart?products[singing-straw]=1">ORDER NOW</a>
+                    <a class="join smaller w-full" href="/ecommerce/add-to-cart?products[singing-straw]=1&promo-code=transform">ORDER NOW</a>
                 </div>
             </div>
             <div class="md:w-1/2 hidden md:block relative">
@@ -244,10 +244,10 @@
                 @endif
                 <strong>${{ floatval($productPrices['singing-straw']->discounted_price) }}</strong>
             </h2>
-            @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
-                <p class="text-musora">(Save {{ round(100 - (100 * (floatval($productPrices['singing-starter-kit']->discounted_price) / floatval($productPrices['singing-starter-kit']->price)))) }}%)</p>
+            @if(floatval($productPrices['singing-straw']->discounted_price) < floatval($productPrices['singing-straw']->price))
+                <p class="text-musora">(Save {{ round(100 - (100 * (floatval($productPrices['singing-straw']->discounted_price) / floatval($productPrices['singing-straw']->price)))) }}%)</p>
             @endif
-            <a class="join smaller bg-musora text-black w-1/2 mb-3 mt-5" href="/ecommerce/add-to-cart?products[singing-straw]=1">Order Now</a>
+            <a class="join smaller bg-musora text-black w-1/2 mb-3 mt-5" href="/ecommerce/add-to-cart?products[singing-straw]=1&promo-code=transform">Order Now</a>
             <p class="leading-tight"><em>For hygienic reasons all singing <br class="sm:hidden"> straw sales are final.</em></p>
         </div>
     </section>
