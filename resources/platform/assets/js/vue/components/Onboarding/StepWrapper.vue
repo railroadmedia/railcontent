@@ -22,7 +22,7 @@ const emit = defineEmits(['onHeaderGoBack']);
 </script>
 
 <template>
-  <div class="dark:tw-text-white tw-h-screen lg:tw-h-full lg:tw-min-h-screen tw-overflow-x-hidden"
+  <div class="dark:tw-text-white tw-h-screen lg:tw-h-full lg:tw-min-h-screen tw-overflow-x-hidden lg:tw-flex lg:tw-items-center"
     :class="`StepWrapper StepWrapper--${brand}`" :style="showBgImg ? { backgroundImage: `url('${bgImg[brand]}')` } : {}">
     <div :class="`tw-flex tw-w-full tw-h-full tw-flex-col tw-items-center tw-justify-between tw-pt-[24px] md:tw-pt-[40px] ${showBgImg ? 'tw-bg-transparent' : 'tw-bg-[#000c17]'
       }`">
