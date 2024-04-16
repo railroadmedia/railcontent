@@ -15,8 +15,8 @@
                 :class="item.type === 'song' ? 'tw-blur-sm' : ''" loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')">
             <div v-if="item.type === 'song'"
-                class="tw-absolute tw-h-[70px] tw-w-[121px] tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-rounded-[5px]">
-                <img class="tw-h-full tw-object-cover" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
+                class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center tw-items-center">
+                <img class="tw-object-cover tw-h-[70px] tw-w-[121px] tw-rounded-[5px]" :src="mappedData.thumbnail" :alt="mappedData.black_title" />
             </div>
         </a>
 
