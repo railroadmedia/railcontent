@@ -9,7 +9,7 @@
         onload="this.classList.remove('opacity-0')"
     />
     @endif
-    <div class="flex flex-col sm:flex-row sm:py-2">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center sm:py-2">
         <h3 class="font-bebas uppercase mx-0 leading-none sm:mr-3">{!! $text !!}</h3>
         <p class="mx-0 leading-none">Only <s class="opacity-50">500</s> <strong>{!! $stock !!}</strong> left!</p>
     </div>
