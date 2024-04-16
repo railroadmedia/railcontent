@@ -98,11 +98,11 @@
         <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center md:gap-10 px-6 lg:px-0">
             <div class="md:w-1/2 text-center md:text-left">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/singing-straw/logo-dark.svg">
-                    <img class="h-24 lg:h-28 rounded-b-md mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/singing-straw/logo-dark.svg" alt="logo">
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/310x0/filters:quality(95)/marketing/singeo/products/singing-straw/logo-dark.svg">
+                    <img class="h-24 lg:h-28 rounded-b-md mb-3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/270x0/filters:quality(95)/marketing/singeo/products/singing-straw/logo-dark.svg" alt="logo">
                 </picture>
                 <div class="relative md:hidden">
-                    <img class="rounded-xl mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/singing-straw/header-m.webp" alt="header thumb">
+                    <img class="rounded-xl mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/660x0/filters:quality(95)/marketing/singeo/products/singing-straw/header2.webp" alt="header thumb">
 {{--                    <div class="absolute uppercase bg-white text-black rounded-full pb-1 pt-1.5 px-4 font-bebas bottom-6 left-2 cursor-pointer autoplay-video text-sm" data-open="trailer">--}}
 {{--                        <i class="fa-solid fa-play mr-1"></i> play video--}}
 {{--                    </div>--}}
@@ -124,7 +124,7 @@
                 </div>
             </div>
             <div class="md:w-1/2 hidden md:block relative">
-                <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/singing-straw/header.webp" alt="header thumb">
+                <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/860x0/filters:quality(95)/marketing/singeo/products/singing-straw/header2.webp" alt="header thumb">
 {{--                <div class="absolute uppercase bg-white text-black rounded-full pb-1 pt-2 px-6 font-bebas bottom-3 lg:bottom-4 left-4 lg:left-6 autoplay-video cursor-pointer" data-open="trailer">--}}
 {{--                    <i class="fa-solid fa-play mr-1"></i> play video--}}
 {{--                </div>--}}
@@ -139,19 +139,19 @@
                 $items = [
                     [
                         'icon' => 'fa-arrows-to-line rotate-90',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-01.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1050x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-01.webp',
                         'title' => 'Reduces Tension.',
                         'desc' => 'As you use the Singing Straw, tension gets released from your vocal cords allowing all the right muscles to relax. This leads to smoother transitions and reduced strain on your voice (meaning less vocal cracks)!',
                     ],
                     [
                         'icon' => 'fa-chart-simple',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-02.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1050x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-02.webp',
                         'title' => 'Extended Range.',
                         'desc' => 'The precise diameter of the straw creates a resistance that channels energy back to your vocal cords making it easier to sing high notes and safely develop your vocal range.',
                     ],
                     [
                         'icon' => 'fa-microphone-stand',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-03.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1050x0/filters:quality(95)/marketing/singeo/products/singing-straw/feature-03.webp',
                         'title' => 'Balanced Singing.',
                         'desc' => 'Using your Singing Straw is like a yoga class… but for your voice! It’s perfect for warming up or cooling down and improves your voice\'s flexibility, agility, and clarity.',
                     ],
@@ -195,11 +195,11 @@
         <div class="container mx-auto z-10 relative max-w-4xl">
             <h3 class="leading-tight font-playfair mb-3"><strong>Improve your voice anywhere, anytime.</strong></h3>
             <p class="leading-normal">Whether you’re brand new to singing, looking to blow the doors off the next open mic night, or you’re a gigging musician and need to keep your voice in top shape while on the road – the Singing Straw has everything you need.</p>
-            <img class="inline-block sm:hidden rounded-xl my-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp" alt="Eardrums kit">
+            <img class="inline-block sm:hidden rounded-xl my-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside-m.webp" alt="Eardrums kit">
 
             <div class="hidden sm:inline-block relative text-musora text-xs sm:text-lg my-7">
                 <p class="absolute w-full text-center -top-6 sm:top-6"><strong>(Tap for more information)</strong></p>
-                <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside.webp" alt="Eardrums kit">
+                <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/singeo/products/singing-straw/whats-inside.webp" alt="Eardrums kit">
                 <div class="info-pop cursor-pointer" style="top: 30%;left: 29%;" tip="Durable stainless steel case to keep everything organized"><i class="fas fa-info-circle"></i></div>
                 <div class="info-pop cursor-pointer" style="top: 61%;left: 38%;" tip="Cleaning brush to keep your straws in perfect condition (just like your voice)"><i class="fas fa-info-circle"></i></div>
                 <div class="info-pop cursor-pointer" style="top: 44%;left: 47%;" tip="3 straws in varying diameters to improve your singing"><i class="fas fa-info-circle"></i></div>
@@ -230,9 +230,9 @@
         </div>
     </section>
 
-    <section class="py-12 md:py-20 px-4 sm:px-6 text-center text-white bg-center bg-cover" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/singeo/products/singing-straw/order-bg.webp');">
+    <section class="py-12 md:py-20 px-4 sm:px-6 text-center text-white bg-center bg-cover" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/singeo/products/singing-straw/order-bg.webp');">
         <div class="container mx-auto max-w-3xl">
-            <img class="h-20 md:h-28 lg:h-32 mb-2" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/singeo/products/singing-straw/logo-white.svg" alt="logo">
+            <img class="h-20 md:h-28 lg:h-32 mb-2" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/360x0/filters:quality(95)/marketing/singeo/products/singing-straw/logo-white.svg" alt="logo">
             <h3 class="font-extrabold leading-tight mb-5">
                 Strengthen your voice, increase your<br class="hidden sm:inline-block">
                 range, and sing with confidence.
