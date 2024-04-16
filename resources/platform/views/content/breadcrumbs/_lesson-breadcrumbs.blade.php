@@ -105,7 +105,7 @@
                     'title' => $lessonContent->fetch('fields.title'),
                 ],
             ],
-            'breadcrumbClassOverride' => '',
+            'breadcrumbClassOverride' => 'tw-px-4 md:tw-px-8 tw-max-w-[1703px]',
         ])
     @else
         @include('partials.bladesora.members.navigation.breadcrumbs', [

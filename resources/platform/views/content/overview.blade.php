@@ -156,6 +156,7 @@
     <!-- <div>{{$parentContent->fetch('type')}}</div> -->
 
     @include('content.breadcrumbs._overview-breadcrumbs')
+    
     @if($parentContent->fetch('type') === 'course' || 
         $parentContent->fetch('type') === 'learning-path' || 
         $parentContent->fetch('type') === 'learning-path-level' ||
