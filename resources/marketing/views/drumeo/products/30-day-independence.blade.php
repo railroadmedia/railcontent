@@ -253,8 +253,8 @@
         'noBreadcrumb' => true,
     ])
 @php
-    if(!empty($products['quietpad-estepario']->getStockAvailability())) {
-        $stock = $products['quietpad-estepario']->getStockAvailability() - 750;
+    if(!empty($products['quietpad-estepario']->getStockAvailability()) && $products['quietpad-estepario']->getStockAvailability() > 250) {
+        $stock = $products['quietpad-estepario']->getStockAvailability() - 250;
     }
     else {
         $stock = 0;
@@ -402,7 +402,7 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-tight pb-8"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
             <!-- <div class="flex flex-col-reverse md:flex-row">
                 <div class="w-full md:w-1/2 text-left mb-2 md:mb-4 flex items-center">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores provident sequi explicabo ipsum
@@ -464,7 +464,7 @@
                     ],
                 ];
             @endphp
-            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 mt-5">
+            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
@@ -912,7 +912,7 @@
 
              <!-- Version 1 -->
             <h6 class="leading-normal mb-4 text-drumeo">
-            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>500</s> <strong> {{$stock}} </strong> left!</span>
+            <strong>EARLY BIRD EXTENDED:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>1000</s> <strong> {{$stock}} </strong> left!</span>
             </h6>
 
 
