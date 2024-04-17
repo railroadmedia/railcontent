@@ -123,7 +123,7 @@
                         &nbsp;Watch Trailer
                     </div>
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block bg-transparent hover:bg-white hover:text-black"
-                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailerM = true;">
+                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                          &nbsp;Watch Trailer
                     </div>
                     <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500 anchor-slide" href="#customize-anchor"

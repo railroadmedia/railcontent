@@ -474,7 +474,7 @@ const fullscreen = () => {
     isTransitioning.value = false;
 
     // If we have access to the requestFullscreen API then use that
-    if (Screenfull.enabled) {
+    if (Screenfull.isEnabled) {
         Screenfull.toggle(container.value);
     } else {
         /* copied */

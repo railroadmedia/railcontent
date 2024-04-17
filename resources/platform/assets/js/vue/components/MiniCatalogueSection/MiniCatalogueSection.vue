@@ -13,7 +13,7 @@
                 </div>
                 <div class="tw-flex tw-items-center">
                     <slot name="icon"></slot>
-                    <a :href="seeAllUrl" :aria-label="seeAllAriaLabel"
+                    <a v-show="seeAllUrl" :href="seeAllUrl" :aria-label="seeAllAriaLabel"
                        class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1">
                         See All
                     </a>
