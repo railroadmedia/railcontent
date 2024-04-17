@@ -1033,6 +1033,11 @@
             <a class="mt-10 inline-block" href="/ecommerce/add-to-cart?products[30-day-independence]=1&products[drumeo_access_30-days]=1&locked=true"><u class="text-drumeo">Don’t want a free bonus? Click here to get just digital access to 30-Day Independence ($97).</u></a>
         </div>
     </section>
+    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
+        <p class="max-w-3xl px-4 md:px-2 leading-loose">
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
+        </p>
+    </section>
 
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
