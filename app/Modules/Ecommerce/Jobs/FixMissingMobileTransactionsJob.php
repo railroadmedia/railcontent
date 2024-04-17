@@ -70,19 +70,24 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
                 $orderId = str_replace('gid://shopify/Order/', '', $order->id);
                 Log::info("Processing Order ID: $orderId");
 
-                if (!$order->transactions) {
-                    Log::info("Order ID: $orderId has no transactions");
-                    $amount = $order->totalPriceSet->shopMoney->amount;
-                    if ($order->cancelledAt != null) {
-                        Log::info("Order ID: $orderId is cancelled");
-                        //Do nothing for cancelled orders because adding the transaction and revoking it will add a bunch of refunds for whenever we processed this
-                        //$shopifyCancelService->cancelOrder($orderId);
+                try {
+                    if (!$order->transactions) {
+                        Log::info("Order ID: $orderId has no transactions");
+                        $amount = $order->totalPriceSet->shopMoney->amount;
+                        if ($order->cancelledAt != null) {
+                            Log::info("Order ID: $orderId is cancelled");
+                            //Do nothing for cancelled orders because adding the transaction and revoking it will add a bunch of refunds for whenever we processed this
+                            //$shopifyCancelService->cancelOrder($orderId);
+                        } else {
+                            $shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
+                        }
+                        $this->totalProcessed++;
                     } else {
-                        $shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
+                        Log::info("Order ID: $orderId has transactions");
                     }
-                    $this->totalProcessed++;
-                } else {
-                    Log::info("Order ID: $orderId has transactions");
+                } catch (\Exception $e) {
+                    Log::error("Order ID: $orderId failed to process");
+                    Log::error($e);
                 }
             }
         } while ($endCursor);
