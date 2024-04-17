@@ -264,7 +264,7 @@
     'link' => '#final',
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/quietpad-estepario.webp',
     'text' => 'Get a FREE EL ESTEPARIO QuietPad',
-    'stock' => $stock,
+    'stock' => 64,
     ])
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
@@ -912,7 +912,7 @@
 
              <!-- Version 1 -->
             <h6 class="leading-normal mb-4 text-drumeo">
-            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>500</s> <strong> {{$stock}} </strong> left!</span>
+            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <span>Only  <strong> 500 </strong> available!</span>
             </h6>
 
 
