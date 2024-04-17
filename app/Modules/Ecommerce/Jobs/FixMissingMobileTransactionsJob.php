@@ -5,8 +5,6 @@ namespace App\Modules\Ecommerce\Jobs;
 
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
-use App\Modules\Ecommerce\Services\ShopifyCancelService;
-use App\Modules\Ecommerce\Services\ShopifyRefundService;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Carbon\Carbon;
 use Illuminate\Bus\Batchable;
@@ -16,7 +14,6 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Log;
-use Signifly\Shopify\Shopify;
 
 class FixMissingMobileTransactionsJob implements ShouldQueue
 {
@@ -45,9 +42,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
 
     public function handle(
         ShopifyGateway $shopifyGateway,
-        Shopify $shopify,
         ShopifySyncService $shopifySyncService,
-        ShopifyCancelService $shopifyCancelService
     ): void {
         $className = get_class($this);
         if (!$this->endCursor) {
