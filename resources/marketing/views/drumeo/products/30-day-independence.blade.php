@@ -253,8 +253,8 @@
         'noBreadcrumb' => true,
     ])
 @php
-    if(!empty($products['quietpad-estepario']->getStockAvailability())) {
-        $stock = $products['quietpad-estepario']->getStockAvailability() - 750;
+    if(!empty($products['quietpad-estepario']->getStockAvailability()) && $products['quietpad-estepario']->getStockAvailability() > 250) {
+        $stock = $products['quietpad-estepario']->getStockAvailability() - 250;
     }
     else {
         $stock = 0;
@@ -264,7 +264,7 @@
     'link' => '#final',
     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/quietpad-estepario.webp',
     'text' => 'Get a FREE EL ESTEPARIO QuietPad',
-    'stock' => 64,
+    'stock' => $stock,
     ])
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
@@ -402,7 +402,7 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-tight pb-8"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
+            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
             <!-- <div class="flex flex-col-reverse md:flex-row">
                 <div class="w-full md:w-1/2 text-left mb-2 md:mb-4 flex items-center">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores provident sequi explicabo ipsum
@@ -464,7 +464,7 @@
                     ],
                 ];
             @endphp
-            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 mt-5">
+            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
@@ -912,7 +912,7 @@
 
              <!-- Version 1 -->
             <h6 class="leading-normal mb-4 text-drumeo">
-            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <span>Only  <strong> 500 </strong> available!</span>
+            <strong>EARLY BIRD EXTENDED:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>1000</s> <strong> {{$stock}} </strong> left!</span>
             </h6>
 
 
@@ -1032,6 +1032,11 @@
 {{--            ])--}}
             <a class="mt-10 inline-block" href="/ecommerce/add-to-cart?products[30-day-independence]=1&products[drumeo_access_30-days]=1&locked=true"><u class="text-drumeo">Don’t want a free bonus? Click here to get just digital access to 30-Day Independence ($97).</u></a>
         </div>
+    </section>
+    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
+        <p class="max-w-3xl px-4 md:px-2 leading-loose">
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
+        </p>
     </section>
 
 
