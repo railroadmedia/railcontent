@@ -57,12 +57,8 @@ class AccessCodeController extends Controller
             (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
                 $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
 
-        return $request->has('redirect') ?
-            redirect()
-            ->away($request->get('redirect'))
-            ->with($message) :
-            redirect()
-            ->to('/' . $redirectRoute)
-            ->with($message);
+        return $request->has('redirect')
+            ? redirect()->away($request->get('redirect'))->with($message)
+            : redirect()->to('/' . $redirectRoute)->with($message);
     }
 }
