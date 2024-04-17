@@ -3,6 +3,9 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
+use Illuminate\Console\View\Components\Warn;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class CustomerIoApiGateway
@@ -104,7 +107,8 @@ class CustomerIoApiGateway
         // empty result means success for some reason...
         if (!empty($result->errors) || empty($result->customer)) {
             throw new Exception(
-                'Customer.io api call failed: ' . curl_error($ch) . ' - ' . var_export($result, true), 404
+                'Customer.io api call failed: ' . curl_error($ch) . ' - ' . var_export($result, true),
+                404
             );
         }
 
@@ -133,12 +137,7 @@ class CustomerIoApiGateway
         $eventType = null,
         $createdAtTimestamp = null
     ) {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/customers/' . $customerId . '/events');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        $url = 'https://track.customer.io/api/v1/customers/' . $customerId . '/events';
 
         $dataArray = [
             'name' => $eventName,
@@ -156,36 +155,21 @@ class CustomerIoApiGateway
             $dataArray['timestamp'] = $createdAtTimestamp;
         }
 
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            json_encode($dataArray)
-        );
-
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-        $headers = [];
-        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $result = Http::withToken($authHeaderKey, 'Basic')
+            ->withBody(json_encode($dataArray), 'application/json')
+            ->post($url);
 
-        $rawResult = curl_exec($ch);
-        $jsonResult = json_decode($rawResult, true);
-
-        if (curl_errno($ch)) {
+        if (!$result->ok()) {
             throw new Exception(
-                'Customer.io createEvent api call failed: ' . curl_error($ch) . ' - Result: ' . $rawResult
+                'Customer.io createEvent api call failed: \n' . $result->reason() . '\n Result: ' . var_export($result->json(), true),
+                $result->status()
             );
         }
-
-        // empty result means success for some reason...
-        if ($jsonResult !== []) {
-            throw new Exception(
-                'Customer.io createEvent api call failed: ' . curl_error($ch) . ' - Result: ' . $rawResult
-            );
+        if ($result->json() !== []) {
+            Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true));
         }
-
-        curl_close($ch);
 
         return true;
     }
@@ -250,9 +234,10 @@ class CustomerIoApiGateway
         if (!empty($result->errors)) {
             throw new Exception(
                 'Customer.io getCustomerActivities api call failed: ' .
-                curl_error($ch) .
-                ' - ' .
-                var_export($result, true), 404
+                    curl_error($ch) .
+                    ' - ' .
+                    var_export($result, true),
+                404
             );
         }
 
@@ -431,7 +416,7 @@ class CustomerIoApiGateway
         if (curl_errno($ch) || $httpCode !== 200) {
             throw new Exception(
                 'Customer.io mergeCustomers api call failed: ' . curl_error($ch) .
-                ' - http code: ' . $httpCode
+                    ' - http code: ' . $httpCode
             );
         }
 
@@ -541,9 +526,10 @@ class CustomerIoApiGateway
         if (!empty($result->errors)) {
             throw new Exception(
                 'Customer.io getCustomerActivities api call failed: ' .
-                curl_error($ch) .
-                ' - ' .
-                var_export($result, true), 404
+                    curl_error($ch) .
+                    ' - ' .
+                    var_export($result, true),
+                404
             );
         }
 
