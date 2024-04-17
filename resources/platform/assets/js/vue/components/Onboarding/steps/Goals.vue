@@ -1,13 +1,12 @@
 <script setup>
-import {ref} from "vue";
+import { ref } from "vue";
 import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
-import StepHeader from "../StepHeader.vue";
 import SkipStep from "../SkipStep.vue";
-import MultiSelect from "../../MultiSelect/MultiSelect.vue";
-import {getMultiSelectOptions} from "../utils";
-import {saveGoals} from "../services";
+import Branding from "../Branding.vue";
+import { getMultiSelectOptions } from "../utils";
+import { saveGoals } from "../services";
 import SingleChoicePills from "../../SingleChoicePills/SingleChoicePills.vue";
 
 const props = defineProps({
@@ -55,7 +54,7 @@ const isNextButtonDisabled = () => {
 };
 
 const handleRedirect = () => {
-  emit("onChangeInfo", {...props.info, goals: {...props.info.goals, [props.brand]: currentSelection.value}});
+  emit("onChangeInfo", { ...props.info, goals: { ...props.info.goals, [props.brand]: currentSelection.value } });
 
   saveGoals({
     goals: currentSelection.value,
@@ -78,7 +77,8 @@ const headerProps = {
 </script>
 
 <template>
-  <StepWrapper :brand="brand" :showBgImg="true" @on-header-go-back="goBack" :headerProps="headerProps">
+  <StepWrapper :brand="brand" :showBgImg="true" @on-header-go-back="goBack" :headerProps="headerProps"
+    :hideBranding="true" topPaddingClasses="tw-pt-[24px] md:tw-pt-[40px]">
     <template v-slot:content>
       <div class="
         tw-w-full tw-min-h-full tw-flex tw-flex-col tw-items-center
@@ -92,13 +92,14 @@ const headerProps = {
     </template>
     <template v-slot:footer>
       <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
-              classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Complete Your Account
+        classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Complete Your Account
       </Button>
-      <ProgressBar :brand="brand" :currentStep="6" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)"/>
+      <ProgressBar :brand="brand" :currentStep="6" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
       <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
-              classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account
+        classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account
       </Button>
-      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0"/>
+      <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0" />
+      <Branding :brand="brand" :showInstrumentBrand="true" classOverride="tw-pt-[12px]" />
     </template>
   </StepWrapper>
 </template>
