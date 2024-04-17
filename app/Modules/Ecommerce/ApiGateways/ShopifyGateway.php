@@ -151,13 +151,71 @@ class ShopifyGateway
         return $uniqueEmails;
     }
 
-    public function doesOrderExist(int $shopifyCustomerId, Carbon $processedAt): bool
-    {
+    /**
+     * Get all order ids created between the given dates.
+     *
+     * @param Carbon $startDate
+     * @param Carbon $endDate
+     * @param string $additionalFilter Additional query filter, e.g. " AND status:closed".
+     *                       See https://shopify.dev/docs/api/usage/search-syntax
+     * @param string $additionalFields Additional fields to include in result, e.g. ", processedAt".
+     * @return Collection
+     * @throws Exception
+     */
+    public function getOrdersBetween(
+        Carbon $startDate,
+        Carbon $endDate,
+        int $limit = 100,
+        string $additionalFilter = '',
+        string $additionalFields = '',
+        string &$endCursor = ''
+    ): Collection {
+        $orderInfo = collect();
+        $startDateString = $startDate->toIso8601String();
+        $endDateString = $endDate->toIso8601String();
+        $cursor = "";
+        if ($endCursor) {
+            $cursor = ", after: \"$endCursor\"";
+        }
+
+        $this->handleRateLimitBefore();
+        $gql = <<<GQL
+            query {
+                 orders(first:$limit$cursor, query:"created_at:>=\"$startDateString\" AND created_at:<=\"$endDateString\"$additionalFilter"){
+                    nodes {
+                        ... on Order {
+                            id$additionalFields
+                        }
+                    }
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
+                }
+            }
+            GQL;
+
+        $responseBody = $this->executeQuery($gql);
+        $orderInfo = $orderInfo->merge(
+            collect($responseBody->data->orders->nodes)->map(function ($order) {
+                return $order;
+            })
+        );
+        $endCursor = $responseBody->data->orders->pageInfo->endCursor;
+        return $orderInfo;
+    }
+
+    public function doesOrderExist(
+        int $shopifyCustomerId,
+        Carbon $processedAt
+    ): bool {
         return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
 
-    public function getCustomerOrderByProcessAtDate(int $shopifyCustomerId, Carbon $processedAt)
-    {
+    public function getCustomerOrderByProcessAtDate(
+        int $shopifyCustomerId,
+        Carbon $processedAt
+    ) {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
@@ -212,8 +270,10 @@ class ShopifyGateway
         return $response;
     }
 
-    public function updateCustomerLastTrialEndDate($customerID, $lastTrialEndDate)
-    {
+    public function updateCustomerLastTrialEndDate(
+        $customerID,
+        $lastTrialEndDate
+    ) {
         // This data is processed by the shopify extension: checkout-block-repeated-trials
         // in the repository: musora-shop-ify-extensions-app
         $namespace = ShopifyMetafieldNamespace::Model_Users->value;
@@ -257,8 +317,9 @@ class ShopifyGateway
      * @return bool
      * @throws Exception
      */
-    public function doesMetaFieldDefinitionExist(MetaFieldDefinition $metaFieldDefinition): bool
-    {
+    public function doesMetaFieldDefinitionExist(
+        MetaFieldDefinition $metaFieldDefinition
+    ): bool {
         $ownerType = $metaFieldDefinition->ownerType;
         $key = $metaFieldDefinition->key;
         $name = $metaFieldDefinition->name;
@@ -296,8 +357,9 @@ class ShopifyGateway
      * @return mixed
      * @throws Exception
      */
-    public function createMetaFieldDefinition(MetaFieldDefinition $metaFieldDefinition): mixed
-    {
+    public function createMetaFieldDefinition(
+        MetaFieldDefinition $metaFieldDefinition
+    ): mixed {
         $ownerType = $metaFieldDefinition->ownerType;
         $key = $metaFieldDefinition->key;
         $name = $metaFieldDefinition->name;
