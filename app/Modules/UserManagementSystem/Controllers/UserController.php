@@ -34,6 +34,8 @@ use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Exceptions\SaasquatchUserExistsException;
 use App\Modules\Referral\Models\Referrer;
 use App\Modules\Referral\Services\SaasquatchService;
+use Railroad\Railcontent\Services\CommentService;
+use Railroad\Railforums\Repositories\PostRepository;
 use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -46,6 +48,8 @@ class UserController extends Controller
     private SaasquatchService $saasquatchService;
     private UserService $userService;
     private SubscriptionService $subscriptionService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
 
     /**
      * UserController constructor.
@@ -54,12 +58,17 @@ class UserController extends Controller
         MailService $mailService,
         SaasquatchService $saasquatchService,
         UserService $userService,
-        SubscriptionService $subscriptionService
+        SubscriptionService $subscriptionService,
+        CommentService $commentService,
+        PostRepository $postRepository
     ) {
         $this->mailService = $mailService;
         $this->saasquatchService = $saasquatchService;
         $this->userService = $userService;
         $this->subscriptionService = $subscriptionService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
+
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
 
@@ -723,6 +732,11 @@ class UserController extends Controller
         $isJson = request()->expectsJson();
 
         $user = user();
+        $userId = $user['id'];
+
+        //delete related data
+        $this->commentService->markUserCommentsAsDeleted($userId);
+        $this->postRepository->deleteByUserId($userId);
         $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
         $user = $this->userService->deleteUser();
 

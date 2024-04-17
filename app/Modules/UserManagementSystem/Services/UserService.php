@@ -5,16 +5,11 @@ namespace App\Modules\UserManagementSystem\Services;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Railcontent\Services\CommentService;
-use Railroad\Railforums\Repositories\PostRepository;
 
 class UserService
 {
 
-    public function __construct(
-        private CommentService $commentService,
-        private PostRepository $postRepository
-    ) {
+    public function __construct() {
     }
 
     public function getByEmailOrNull(string $email)
@@ -87,10 +82,6 @@ class UserService
     public function deleteUser()
     {
         $user = user();
-        $userId = $user['id'];
-
-        $this->commentService->markUserCommentsAsDeleted($userId);
-        $this->postRepository->deleteByUserId($userId);
 
         $user->fill([
                         'email' => 'musora+deleted_'.

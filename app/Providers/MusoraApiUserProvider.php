@@ -16,6 +16,7 @@ use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -27,6 +28,8 @@ class MusoraApiUserProvider implements UserProviderInterface
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserService $userService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
 
     public function __construct(
         CalendarService $calendarService,
@@ -34,7 +37,9 @@ class MusoraApiUserProvider implements UserProviderInterface
         CustomerIoService $customerIoService,
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
-        UserService $userService
+        UserService $userService,
+        CommentService $commentService,
+        PostRepository $postRepository
     ) {
         $this->calendarService = $calendarService;
         $this->contentService = $contentService;
@@ -42,6 +47,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userService = $userService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser(): ?User
@@ -335,7 +342,10 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function deleteAccount()
     {
         $user = user();
+        $userId = $user['id'];
 
+        $this->commentService->markUserCommentsAsDeleted($userId);
+        $this->postRepository->deleteByUserId($userId);
         $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
 
         $user = $this->userService->deleteUser();
