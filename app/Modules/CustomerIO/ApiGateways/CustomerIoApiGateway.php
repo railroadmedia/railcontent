@@ -157,21 +157,31 @@ class CustomerIoApiGateway
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-        $result = Http::withToken($authHeaderKey, 'Basic')
-            ->withBody(json_encode($dataArray), 'application/json')
-            ->post($url);
 
-        if (!$result->ok()) {
-            throw new Exception(
-                'Customer.io createEvent api call failed: \n' . $result->reason() . '\n Result: ' . var_export($result->json(), true),
-                $result->status()
-            );
-        }
-        if ($result->json() !== []) {
-            Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true));
-        }
+        try {
+            $result = Http::withToken($authHeaderKey, 'Basic')
+                ->withBody(json_encode($dataArray), 'application/json')
+                ->post($url);
 
-        return true;
+            if (!$result->ok()) {
+                Log::error('customer.io api call failed. Request body: ' . var_export($dataArray, true));
+                throw new Exception(
+                    'Customer.io createEvent api call failed: ' . $result->reason()
+                        . '\n Result: ' . var_export($result->json(), true),
+                    $result->status()
+                );
+            }
+            if ($result->json() !== []) {
+                Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true));
+            }
+
+            return true;
+        } catch (Exception $e) {
+            Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true) . '\n - '
+                . $e->getMessage()
+                . '\n - Request body: ' . var_export($dataArray, true));
+            throw $e;
+        }
     }
 
     /**
