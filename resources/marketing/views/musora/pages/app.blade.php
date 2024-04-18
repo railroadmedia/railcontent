@@ -1,5 +1,3 @@
-
-
 @extends('musora._partials.layout', [
     'whiteNav' => true,
     'fullSubscriptionVersion' => true,
@@ -22,16 +20,17 @@ bg-gradient-to-b from-white to-gray-200
 
 @section('layout-body')
     <section class="w-full">
-        <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center px-4 sm:px-6 py-10 md:py-16 lg:py-20">
-                <div class="flex justify-center sm:justify-start w-full sm:w-auto flex-grow-1 sm:order-1 sm:pl-5 mt-5 sm:mt-0">
+        <div class="container max-w-6xl mx-auto">
+            <div class="flex flex-wrap lg:flex-nowrap items-center px-4 sm:px-6 py-10 lg:py-20">
+                <div class="flex justify-center max-w-md lg:max-w-full mx-auto w-full lg:w-auto flex-grow-1 lg:order-1 lg:pl-5">
                     <picture>
-                        <source media="(min-width:1024px)" type="image/webp" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/musora/membership/app-page/devices.webp">
-                        <source media="(min-width:640px)" type="image/webp" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/musora/membership/app-page/devices.webp">
+                        <source media="(min-width:1200px)" type="image/webp" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1290x0/filters:quality(95)/marketing/musora/membership/app-page/devices.webp">
+                        <source media="(min-width:1024px)" type="image/webp" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1040x0/filters:quality(95)/marketing/musora/membership/app-page/devices.webp">
+                        <source media="(min-width:640px)" type="image/webp" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/musora/membership/app-page/devices.webp">
                         <img class="transition-opacity opacity-0 w-full" alt="Screenshot of Musora app on tablet and mobile screens" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/musora/membership/app-page/devices.webp">
                     </picture>
                 </div>
-                <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 pt-5">
+                <div class="text-center lg:text-left w-full lg:w-auto flex-shrink-0 lg:pt-5">
                     <img class="h-7 mb-4 invert" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/230x0/filters:quality(95)/marketing/musora/membership/homepage/webp-format/musora_logo.webp" alt="Musora logo">
                     <p class="uppercase text-musora mb-2">
                         <strong>
@@ -43,7 +42,7 @@ bg-gradient-to-b from-white to-gray-200
                         Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.
                         </strong>
                     </h3>
-                    <ul class="text-center sm:text-left pt-5">
+                    <ul class="text-center lg:text-left pt-5">
                         <li class="leading-tight mb-3">
                             <i class="fas fa-check text-musora mr-2"></i>
                             Trusted by <?= number_format(Prices::$students) ?> students.
