@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Jobs\FixMissingMobileTransactionsJob;
+use Bus;
 use Carbon\Carbon;
 
 class FixMissingMobileTransactions extends Command
@@ -16,6 +17,8 @@ class FixMissingMobileTransactions extends Command
     {
         $startDate = Carbon::parse($this->argument('startDate'));
         $endDate = Carbon::parse($this->argument('endDate'));
-        dispatch(new FixMissingMobileTransactionsJob($startDate, $endDate));
+        Bus::batch([
+            new FixMissingMobileTransactionsJob($startDate, $endDate)
+        ])->onQueue('command')->dispatch();
     }
 }

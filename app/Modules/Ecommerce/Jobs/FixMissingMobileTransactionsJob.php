@@ -51,7 +51,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
         $endCursor = $this->endCursor;
         $break = false;
         do {
-            Timer::afterSeconds(120, function () use (&$break) {
+            Timer::afterSeconds(1, function () use (&$break) {
                 $break = true;
             });
             if ($break) {
@@ -71,19 +71,20 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
                 Log::info("Processing Order ID: $orderId");
 
                 try {
-                    if (!$order->transactions) {
+                    $amount = $order->totalPriceSet->shopMoney->amount;
+                    if (!$order->transactions && floatval($amount) > 0) {
                         Log::info("Order ID: $orderId has no transactions");
-                        $amount = $order->totalPriceSet->shopMoney->amount;
                         if ($order->cancelledAt != null) {
-                            Log::info("Order ID: $orderId is cancelled");
+                            Log::info("Order ID: $orderId is cancelled, no action taken");
                             //Do nothing for cancelled orders because adding the transaction and revoking it will add a bunch of refunds for whenever we processed this
                             //$shopifyCancelService->cancelOrder($orderId);
                         } else {
-                            $shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
+                            //$shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
+                            Log::info("Order ID: $orderId transaction added");
                         }
                         $this->totalProcessed++;
                     } else {
-                        Log::info("Order ID: $orderId has transactions");
+                        Log::info("Order ID: $orderId has transactions or amount is 0, no action taken");
                     }
                 } catch (\Exception $e) {
                     Log::error("Order ID: $orderId failed to process");
@@ -94,7 +95,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
 
         if ($break) {
             Log::info("$className: Processed $this->totalProcessed/??, triggering new job");
-            dispatch(
+            $this->batch()->add(
                 new FixMissingMobileTransactionsJob(
                     $this->startDate,
                     $this->endDate,
