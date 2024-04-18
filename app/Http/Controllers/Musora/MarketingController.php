@@ -158,4 +158,8 @@ class MarketingController extends BaseController
     {
         return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
+    public function app()
+    {
+        return view('musora.pages.app', [ 'theme' => 'musora', 'page' => 'app' ]);
+    }
 }
