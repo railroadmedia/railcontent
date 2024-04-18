@@ -51,7 +51,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
         $endCursor = $this->endCursor;
         $break = false;
         do {
-            Timer::afterSeconds(1, function () use (&$break) {
+            Timer::afterSeconds(120, function () use (&$break) {
                 $break = true;
             });
             if ($break) {
