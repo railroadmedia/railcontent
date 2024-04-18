@@ -156,6 +156,7 @@ class ShopifyGateway
      *
      * @param Carbon $startDate
      * @param Carbon $endDate
+     * @param  int  $limit  The page limit for this query. Must be 1-250.
      * @param string $additionalFilter Additional query filter, e.g. " AND status:closed".
      *                       See https://shopify.dev/docs/api/usage/search-syntax
      * @param string $additionalFields Additional fields to include in result, e.g. ", processedAt".
