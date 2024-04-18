@@ -29,11 +29,11 @@
             :seeAllUrl="recommendedContentUrl"
             :preLoadedContent="recommends"
         >
-            <template #label>
+            <!-- <template #label>
                 <a :href="recommendationLinks[brand]" class="tw-flex tw-ml-2 tw-text-[#FFAE00] md:tw-text-[#00101D] tw-text-xs md:tw-border md:tw-border-[#FFAE00] md:tw-rounded-md md:tw-px-[5px] md:tw-py-0.5 tw-font-semibold md:tw-bg-[#FFAE00] hover:md:tw-border-[#DC9600] hover:md:tw-bg-[#DC9600] md:tw-flex tw-items-center" title="Learn More">
                     <musora-icon icon-name="info" class="tw-w-5 tw-h-5 tw-mr-1" /> <span class="tw-hidden md:tw-inline">Experimental Feature</span>
                 </a>
-            </template>
+            </template> -->
             <template #icon>
                 <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
                     <i class="fas fa-random"></i>
