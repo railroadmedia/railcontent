@@ -1520,6 +1520,28 @@ class ContentPagesController extends BaseController
         } else {
             $groupBySections = [];
         }
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
+
+        if(!\user()->hasSongsAccess($brand)) {
+            $catalogueMeta['tabs'] = array_values(
+                array_filter($catalogueMeta['tabs'], function ($tab) {
+                    return $tab['name'] != 'Songs';
+                })
+            );
+            $groupBySections =
+                array_filter($groupBySections, function ($key) {
+                    return $key != 'Songs You Might Like';
+                },
+                ARRAY_FILTER_USE_KEY);
+
+            $sections = array_values(
+                array_filter($sections, function ($section) {
+                    return $section->name != 'Song';
+                })
+            );
+        }
+
         $listLessons = $this->contentService->getRecommendedContent(
             user()->id,
             $brand,
@@ -1529,7 +1551,6 @@ class ContentPagesController extends BaseController
             groupByForLessonsPage: $groupBySections
         );
 
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
         $adminMessage = null;
         return view('content.catalogue', [
             "adminMessage" => $adminMessage,

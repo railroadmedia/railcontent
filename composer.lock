@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.304.4",
+            "version": "3.304.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386"
+                "reference": "02abf9b8e2afbdf281e28757c582049d3db16df7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386",
-                "reference": "20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/02abf9b8e2afbdf281e28757c582049d3db16df7",
+                "reference": "02abf9b8e2afbdf281e28757c582049d3db16df7",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.6"
             },
-            "time": "2024-04-12T18:06:45+00:00"
+            "time": "2024-04-17T18:27:31+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2097,16 +2097,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "3.4.3",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "8b5e5650391f851ed58910b3e3d48a71062eeced"
+                "reference": "0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/8b5e5650391f851ed58910b3e3d48a71062eeced",
-                "reference": "8b5e5650391f851ed58910b3e3d48a71062eeced",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a",
+                "reference": "0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a",
                 "shasum": ""
             },
             "require": {
@@ -2168,7 +2168,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/common/issues",
-                "source": "https://github.com/doctrine/common/tree/3.4.3"
+                "source": "https://github.com/doctrine/common/tree/3.4.4"
             },
             "funding": [
                 {
@@ -2184,7 +2184,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-09T11:47:59+00:00"
+            "time": "2024-04-16T13:35:33+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -10134,16 +10134,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.65",
+            "version": "v3.1.66",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3e45b41a1159461eee629f0930829ef63adae4f5"
+                "reference": "3bee5681cdf14b0169a8005a23d340326eee8cdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3e45b41a1159461eee629f0930829ef63adae4f5",
-                "reference": "3e45b41a1159461eee629f0930829ef63adae4f5",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3bee5681cdf14b0169a8005a23d340326eee8cdc",
+                "reference": "3bee5681cdf14b0169a8005a23d340326eee8cdc",
                 "shasum": ""
             },
             "require": {
@@ -10173,9 +10173,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.65"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.66"
             },
-            "time": "2024-04-16T06:33:08+00:00"
+            "time": "2024-04-18T16:47:31+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10368,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.75",
+            "version": "v2.1.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "552385bc7df2360bde787b3a14f6124fc48c642e"
+                "reference": "b0a362a2ae2cbd17d3f6e4023918432031112b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/552385bc7df2360bde787b3a14f6124fc48c642e",
-                "reference": "552385bc7df2360bde787b3a14f6124fc48c642e",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b0a362a2ae2cbd17d3f6e4023918432031112b34",
+                "reference": "b0a362a2ae2cbd17d3f6e4023918432031112b34",
                 "shasum": ""
             },
             "require": {
@@ -10432,9 +10432,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.75"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.76"
             },
-            "time": "2024-04-15T16:03:31+00:00"
+            "time": "2024-04-18T16:46:34+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -11588,16 +11588,16 @@
         },
         {
             "name": "shopify/shopify-api",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shopify/shopify-api-php.git",
-                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d"
+                "reference": "48d775f956b5ebec90f06200baca627fd07a9089"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/0365e3face702008e8232cc77fa5ba2fcebf993d",
-                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d",
+                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/48d775f956b5ebec90f06200baca627fd07a9089",
+                "reference": "48d775f956b5ebec90f06200baca627fd07a9089",
                 "shasum": ""
             },
             "require": {
@@ -11617,10 +11617,14 @@
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.30",
+                "ext-apcu": "*",
                 "maglnet/composer-require-checker": "^3.0 || ^4.0",
                 "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "^9",
                 "squizlabs/php_codesniffer": "^3.6"
+            },
+            "suggest": {
+                "ext-apcu": "Log fewer API deprecation warnings"
             },
             "type": "library",
             "autoload": {
@@ -11652,9 +11656,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Shopify/shopify-api-php/issues",
-                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.4.0"
+                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.5.0"
             },
-            "time": "2024-04-08T18:45:30+00:00"
+            "time": "2024-04-18T13:13:18+00:00"
         },
         {
             "name": "signifly/laravel-shopify",
@@ -17014,16 +17018,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.53.0",
+            "version": "v3.54.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "69a19093a9ded8d1baac62ed6c009b8bc148d008"
+                "reference": "2aecbc8640d7906c38777b3dcab6f4ca79004d08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/69a19093a9ded8d1baac62ed6c009b8bc148d008",
-                "reference": "69a19093a9ded8d1baac62ed6c009b8bc148d008",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/2aecbc8640d7906c38777b3dcab6f4ca79004d08",
+                "reference": "2aecbc8640d7906c38777b3dcab6f4ca79004d08",
                 "shasum": ""
             },
             "require": {
@@ -17095,7 +17099,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.53.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.54.0"
             },
             "funding": [
                 {
@@ -17103,7 +17107,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-08T15:03:00+00:00"
+            "time": "2024-04-17T08:12:13+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -19284,16 +19288,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "889bf1dfa59e161590f677728b47bf4a6893983b"
+                "reference": "952798e239d9969e4e694b124c2cc222798dbb28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/889bf1dfa59e161590f677728b47bf4a6893983b",
-                "reference": "889bf1dfa59e161590f677728b47bf4a6893983b",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/952798e239d9969e4e694b124c2cc222798dbb28",
+                "reference": "952798e239d9969e4e694b124c2cc222798dbb28",
                 "shasum": ""
             },
             "require": {
@@ -19363,7 +19367,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-29T14:03:47+00:00"
+            "time": "2024-04-16T08:49:17+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
