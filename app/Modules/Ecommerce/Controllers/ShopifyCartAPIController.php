@@ -112,9 +112,9 @@ class ShopifyCartAPIController extends Controller
         $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
 
         //TMP fix, we need the redirect mobile app to order page
-//        if ($request->expectsJson()) {
-//            return response()->json($responseData, 200);
-//        }
+        if ($request->expectsJson()) {
+            return response()->json($responseData, 200);
+        }
 
         $redirectResponse =
             $request->get('redirect') ? redirect()->away($request->get('redirect')) : redirect()->to(
