@@ -562,22 +562,23 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF2F6">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>“Is 30 Days to Better Technique right for me?”</strong></h2>
-            <p class="leading-normal mt-5 mb-10 sm:mb-12 mx-auto max-w-2xl">30 Days to Better Technique is best suited for intermediate to advanced pianists. But even if you’re new on your journey, you’ll see massive improvements to your playing.
+            <p class="leading-normal mt-5 mb-10 sm:mb-12 mx-auto" style="max-width:600px;">
+                Do you want to have stronger fingers, better hand coordination, and play faster? If the answer is yes, then 30 Days to Better Technique is perfect for you. Even if you’re new on your journey, you’ll see massive improvements to your playing.
                 <br><br>
-                Click below to see a detailed course breakdown and decide if it’s right for you.</p>
+                Click below to see a detailed course breakdown.</p>
 
 
             @foreach ($weeks as $week)
-                <div class="dropdown text-center rounded-xl mb-3 select-none text-black  border-2 border-[#EFF3F5] bg-white  "
+                <div class="dropdown text-center rounded-xl mb-4 select-none text-black  border-2 border-[#EFF3F5] bg-white  "
                     x-data="{ open: false }">
                     <div class="flex">
-                        <div class="hidden sm:block mr-auto py-3 sm:py-6 pl-4 lg:pl-5 cursor-pointer flex-shrink-0" x-on:click="open = !open">
+                        <div class="hidden sm:block mr-auto py-3 sm:py-4 lg:py-6 pl-4 lg:pl-5 cursor-pointer flex-shrink-0" x-on:click="open = !open">
                             <img class="h-10 sm:h-16 lg:h-20 opacity-0 transition-opacity"
                                 src="{{ $week['img'] }}"
                                 alt="Collage showing pianists" loading="lazy"
                                 onload="this.classList.remove('opacity-0')">
                         </div>
-                        <div class="pt-3 sm:pt-6 px-4 cursor-pointer text-left"
+                        <div class="py-3 sm:py-4 lg:py-6 px-4 cursor-pointer text-left"
                             x-on:click="open = !open;">
                             <p class="text-pianote uppercase text-left text-sm">{!! $week['weekNum'] !!}</p>
                             <h5 class="leading-normal">
@@ -589,7 +590,7 @@
                             <div
                                 x-cloak
                                 class="transition-all duration-100 leading-relaxed sm:leading-relaxed overflow-hidden"
-                                x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px] pb-3 sm:pb-6': open  }">
+                                x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }">
                                 <p class="leading-tight mb-4">{!! $week['desc'] !!}
                                     <br><br>
                                     <strong>{!! $week['backHeader'] !!}</strong></p>
@@ -602,7 +603,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="ml-auto text-pianote pt-3 sm:pt-6 pr-4 sm:pr-5 cursor-pointer " x-on:click="open = !open">
+                        <div class="ml-auto text-pianote py-3 sm:py-4 lg:py-6 pr-4 sm:pr-5 cursor-pointer " x-on:click="open = !open">
                             <i class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl" x-bind:class="{ 'rotate-45': open }" aria-hidden="true"></i>
                         </div>
 
@@ -611,20 +612,19 @@
             @endforeach
 
 
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-around">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-around mt-5 sm:mt-10">
                 <img class="h-28 sm:h-36 lg:h-48 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/30-days-technique-Jordan-Rudess-logo.svg"
                     alt="30-Day Independence Logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-pianote mr-5"></i> Daily guided Piano workouts<br>
-                    <i class="fas fa-check text-pianote mr-5"></i> 4 Q&A Sessions<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Flexible weekly schedule<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results
                 </h4>
             </div>
-            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-12 sm:mb-0 anchor-slide">ENROLL NOW</a><br>
         </div>
     </section>
 
@@ -712,8 +712,7 @@
                     keyboardist in the world?</strong></h3>
             <p class="leading-tight mb-4">
                 <i class="fas fa-check text-pianote mr-1 inline-block"></i> Runs May 6 to June 3<br class="sm:hidden">
-                <i class="fas fa-check text-pianote mr-1 ml-3 inline-block"></i> 20 Guided Workouts<br class="sm:hidden">
-                <i class="fas fa-check text-pianote mr-1 ml-3 inline-block"></i> 4 Q&A Sessions<br class="lg:hidden">
+                <i class="fas fa-check text-pianote mr-1 ml-3 inline-block"></i> 20 Guided Workouts<br class="lg:hidden">
                 <i class="fas fa-check text-pianote mr-1 ml-3 inline-block"></i> Lifetime Course Access<br class="sm:hidden">
                 <i class="fas fa-check text-pianote mr-1 ml-3 inline-block"></i> 90-Day Money Back Guarantee
             </p>
@@ -778,12 +777,12 @@
                         'badgeText' => 'MOST POPULAR',
                         'cardTitle' => 'Unlimited Lessons',
                         'cardImage' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle2.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-03.webp',
                         'imageHeight' => 'h-40',
                         'cardSubtitle' => "1 year of Pianote + 4 bonuses worth $406.",
                         'cardPrice' => '20/mo',
                         'cardExtraInfo' => "Billed annually at $240/yr.",
-                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote_membership_90_days_access]=1&promo-code=better-technique-bundle-metronome,metronome-shipping&locked=true',
+                        'cardLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&locked=true',
                         'badgeColor' => 'pianote',
                         'extraBonuses' => [
                             '<strong class="font-black">Annual Pianote Membership</strong>',
