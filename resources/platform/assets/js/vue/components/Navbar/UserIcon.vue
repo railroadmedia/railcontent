@@ -141,7 +141,7 @@ export default {
         <OptionElement v-if="showRecommendation" :href="`/${ brand }/lessons/recommended`">
           <musora-icon icon-name="recommendation" class="tw-w-[20px] tw-mr-2"/>
           Inspired by Your Activity
-          <musora-icon icon-name="info" class="tw-w-[14px] tw-h-[14px] tw-text-[#FFAE00] tw-ml-2"></musora-icon>
+          <!-- <musora-icon icon-name="info" class="tw-w-[14px] tw-h-[14px] tw-text-[#FFAE00] tw-ml-2"></musora-icon> -->
         </OptionElement>
         <OptionElement :href="`/${ brand }/lesson-history/in-progress`">
           <musora-icon icon-name="bookmark" class="tw-w-[20px] tw-mr-2"/>
