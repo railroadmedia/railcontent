@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a10ab5cf0bd61ae6d052da09e3d70c1f",
+    "content-hash": "00a798783f2a07370ce0fb2468e3bd0f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10134,16 +10134,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-BE-76-Recommendation-System-Hide-Song-Pill",
+            "version": "v3.1.66",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "88f4747ed4802bea7a0d1d70934b885cff35575b"
+                "reference": "3bee5681cdf14b0169a8005a23d340326eee8cdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/88f4747ed4802bea7a0d1d70934b885cff35575b",
-                "reference": "88f4747ed4802bea7a0d1d70934b885cff35575b",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3bee5681cdf14b0169a8005a23d340326eee8cdc",
+                "reference": "3bee5681cdf14b0169a8005a23d340326eee8cdc",
                 "shasum": ""
             },
             "require": {
@@ -10173,9 +10173,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/BE-76-Recommendation-System-Hide-Song-Pill"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.66"
             },
-            "time": "2024-04-18T13:11:03+00:00"
+            "time": "2024-04-18T16:47:31+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10368,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-BE-76-Recommendation-System-Hide-Song-Pill",
+            "version": "v2.1.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "46391598b80c5f1dafaf10fecca0e7df7068a439"
+                "reference": "b0a362a2ae2cbd17d3f6e4023918432031112b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/46391598b80c5f1dafaf10fecca0e7df7068a439",
-                "reference": "46391598b80c5f1dafaf10fecca0e7df7068a439",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b0a362a2ae2cbd17d3f6e4023918432031112b34",
+                "reference": "b0a362a2ae2cbd17d3f6e4023918432031112b34",
                 "shasum": ""
             },
             "require": {
@@ -10432,9 +10432,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/BE-76-Recommendation-System-Hide-Song-Pill"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.76"
             },
-            "time": "2024-04-18T11:36:10+00:00"
+            "time": "2024-04-18T16:46:34+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -11588,16 +11588,16 @@
         },
         {
             "name": "shopify/shopify-api",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shopify/shopify-api-php.git",
-                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d"
+                "reference": "48d775f956b5ebec90f06200baca627fd07a9089"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/0365e3face702008e8232cc77fa5ba2fcebf993d",
-                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d",
+                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/48d775f956b5ebec90f06200baca627fd07a9089",
+                "reference": "48d775f956b5ebec90f06200baca627fd07a9089",
                 "shasum": ""
             },
             "require": {
@@ -11617,10 +11617,14 @@
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.30",
+                "ext-apcu": "*",
                 "maglnet/composer-require-checker": "^3.0 || ^4.0",
                 "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "^9",
                 "squizlabs/php_codesniffer": "^3.6"
+            },
+            "suggest": {
+                "ext-apcu": "Log fewer API deprecation warnings"
             },
             "type": "library",
             "autoload": {
@@ -11652,9 +11656,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Shopify/shopify-api-php/issues",
-                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.4.0"
+                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.5.0"
             },
-            "time": "2024-04-08T18:45:30+00:00"
+            "time": "2024-04-18T13:13:18+00:00"
         },
         {
             "name": "signifly/laravel-shopify",
@@ -19704,25 +19708,11 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
-        },
-        {
-            "package": "railroad/musora-api",
-            "version": "dev-BE-76-Recommendation-System-Hide-Song-Pill",
-            "alias": "v3.1.65",
-            "alias_normalized": "3.1.65.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-BE-76-Recommendation-System-Hide-Song-Pill",
-            "alias": "v2.1.75",
-            "alias_normalized": "2.1.75.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20,
-        "railroad/musora-api": 20,
-        "railroad/railcontent": 20
+        "railroad/doctrine-array-hydrator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -19732,5 +19722,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
