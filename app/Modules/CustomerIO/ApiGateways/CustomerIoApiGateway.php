@@ -157,7 +157,6 @@ class CustomerIoApiGateway
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-
         try {
             $result = Http::withToken($authHeaderKey, 'Basic')
                 ->withBody(json_encode($dataArray), 'application/json')
@@ -177,9 +176,7 @@ class CustomerIoApiGateway
 
             return true;
         } catch (Exception $e) {
-            Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true) . '\n - '
-                . $e->getMessage()
-                . '\n - Request body: ' . var_export($dataArray, true));
+            Log::error('Customer.io createEvent api call failed: ' . $e->getMessage() . '\n - Request body: ' . var_export($dataArray, true));
             throw $e;
         }
     }
