@@ -147,6 +147,19 @@ class ContentJsonController extends Controller
         } else {
             $groupBySections = [];
         }
+        if(!\user()->hasSongsAccess(brand())) {
+            $groupBySections =
+                array_filter($groupBySections, function ($key) {
+                    return $key != 'Songs You Might Like';
+                },
+                             ARRAY_FILTER_USE_KEY);
+
+            $sections = array_values(
+                array_filter($sections, function ($section) {
+                    return $section->name != 'Song';
+                })
+            );
+        }
         $contentData = $this->contentService->getRecommendedContent(
             user()->id,
             $brand,
