@@ -110,7 +110,9 @@ const secondaryVideoModal = ref(false);
 
 const skillLevelColor = computed(() => {
   switch (props.skillLevel) {
-    case 'Novice':
+    case 'All':
+      return 'tw-bg-white';
+    case 'Introductory':
       return 'tw-bg-[#22C55E]';
     case 'Beginner':
       return 'tw-bg-[#0B76DB]';

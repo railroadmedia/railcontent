@@ -6,6 +6,7 @@ use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
 use App\Console\Commands\AssignUnassignedHelpScoutCustomersToMentors;
+use App\Console\Commands\CheckCommentsUrl;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
@@ -81,6 +82,7 @@ class Kernel extends ConsoleKernel
         AssignUnassignedHelpScoutCustomersToMentors::class,
         SyncShopifyProductInventoryToProductsTable::class,
         SetUserNeedsLogout::class,
+        CheckCommentsUrl::class
     ];
 
     /**

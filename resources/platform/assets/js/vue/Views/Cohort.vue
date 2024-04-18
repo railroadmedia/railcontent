@@ -174,7 +174,7 @@
     </section>
 
 
-    <section v-if="cohort['is_product']" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
+    <section id="final" v-if="cohort['is_product']" :class="`tw-bg-${brand} tw-py-20 lg:tw-py-32`">
         <div class="tw-max-w-6xl tw-mx-auto lg:tw-px-10 tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-px-4 lg:tw-px-0">
             <div class="tw-w-full lg:tw-w-1/2 lg:tw-order-1 tw-mb-4 lg:tw-mb-0">
                 <div class="tw-w-full tw-aspect-video tw-bg-black tw-rounded-xl tw-overflow-hidden tw-relative">
@@ -183,7 +183,7 @@
             </div>
             <div class="lg:tw-w-1/2 lg:tw-pr-4 tw-text-white tw-text-center md:tw-text-left">
                 <h1 class="tw-text-2xl tw-font-extrabold tw-leading-tight tw-mb-5">{{ cohort['product_description_header'] }}</h1>
-                <p class="tw-text-base tw-mb-6">{{ cohort['product_description_body'] }}</p>
+                <p class="tw-text-base tw-mb-6" v-html="cohort['product_description_body']"></p>
                 <div class="tw-mb-5 tw-text-4xl">
                     <s class="tw-text-[rgba(255,255,255,0.7)]">${{ cohort['product_original_price'] }}</s> <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span> Save {{ Math.round(100 - (100 * (cohort['product_sale_price'] / cohort['product_original_price']))) }}%
                 </div>
@@ -203,10 +203,10 @@
     </section>
 
     <!--  Dropdown  -->
-    <section class="tw-bg-white tw-py-7">
+    <section class="tw-bg-white tw-py-10">
         <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
             <!--  Bottom title  -->
-            <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ cohort['bottom_title'] }}</h3>
+            <h3 class="tw-font-extrabold tw-text-center">{{ cohort['bottom_title'] }}</h3>
             <!--  Bottom description  -->
             <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ cohort['bottom_description'] }}</p>
 
@@ -216,7 +216,7 @@
                         <div class="tw-w-full tw-max-w-[340px] tw-rounded-xl tw-px-4 md:tw-px-12 tw-py-8 tw-bg-white tw-border-2 tw-border-{{ $brand }} tw-text-center tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mx-0">
                             <h1 class="lg:tw-text-[34px] tw-font-extrabold">Course Only</h1>
                             <h2 class="lg:tw-text-[26px] tw-font-extrabold">Free</h2>
-                            <i>Included in your membership</i>
+                            <i>Included in your membership.</i>
                             <button :class="`tw-btn-primary tw-bg-${brand} tw-my-5 hover:tw-bg-${brand}-600`" @click="enroll()">Enroll Now</button>
                             <p class="tw-text-xs tw-leading-relaxed">{{ cohort['course_description'] }}</p>
                         </div>
@@ -226,7 +226,7 @@
                             </div>
                             <h1 class="lg:tw-text-[34px] tw-font-extrabold tw-leading-tight">Course + <br /> {{ cohort['product_name'] }}</h1>
                             <h2 class="lg:tw-text-[26px]"><s class="tw-text-[rgba(0,0,0,0.6)]">${{ cohort['product_original_price'] }}</s> <span class="tw-font-extrabold">${{ cohort['product_sale_price'] }}</span></h2>
-                            <i>Included in your membership</i>
+                            <i>Complete purchase on next step.</i>
                             <button
                                 :class="`tw-btn-primary tw-bg-${brand} tw-my-5 tw-px-8 md:tw-px-16 hover:tw-bg-${brand}-600`"
                                 @click="enroll(true)"
@@ -266,7 +266,7 @@
                 </p>
             </div>
 
-            <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ cohort['dropdown_title'] }}</h3>
+            <h3 class="tw-font-extrabold tw-text-center tw-mb-7 tw-mt-10">{{ cohort['dropdown_title'] }}</h3>
             <CohortDropdown
                 v-if="dropdowns.length > 0"
                 v-for="(dropdown, index) in dropdowns"

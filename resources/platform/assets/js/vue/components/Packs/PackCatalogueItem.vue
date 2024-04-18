@@ -154,6 +154,13 @@ const showEnrollmentLabel = computed(() => {
 })
 
 const progressText = computed(() => {
+    if(progressPercent.value === 0){
+        return 'Start';
+    } else if(progressPercent.value < 100){
+        return 'Continue';
+    } else {
+        return 'Completed';
+    }
     return props.pack.primary_cta_text;
 })
 

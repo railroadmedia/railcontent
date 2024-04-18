@@ -56,84 +56,23 @@
     ])
     @endcomponent
 
-    <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-[30px]">
-        <div class="tw-flex tw-flex-row tw-mb-3">
-            <div class="tw-flex tw-flex-col tw-flex-grow">
-                <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
-                    <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-3">
-                        Latest Featured Lessons
-                    </h2>
-                </div>
-
-                <div class="tw-flex tw-flex-row six-cards-row">
-                    <transition appear name="fade">
-                        <content-catalogue
-                            brand="{{ $brand }}"
-                            theme-color="{{ $brand }}"
-                            :use-theme-color="true"
-                            content-endpoint="/railcontent/content"
-                            catalogue-type="grid"
-                            limit="16"
-                            :lock-unowned="true"
-                            :force-wide-thumbs="true"
-                            :pre-loaded-content="{{ $latestLessons }}"
-                        >
-                            <div class="tw-flex tw-flex-row nmh-1">
-                                @for($i = 0; $i < 6; $i++)
-                                    @include('partials.bladesora.members.skeletons.card-item')
-                                @endfor
-                            </div>
-                        </content-catalogue>
-                    </transition>
-                </div>
-            </div>
-        </div>
+    {{--  Latest Featured Lessons  --}}
+    <div class="tw-px-4 md:tw-px-8 tw-mb-[30px]">
+        <mini-catalogue-section
+            title="Latest Featured Lessons"
+            :pre-loaded-content="{{ json_encode(json_decode($latestLessons)->data) }}"
+        ></mini-catalogue-section>
     </div>
 
+    {--  From Subscribed Coaches  --}}
     @if($hasFollowedCoaches)
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-[30px]">
-            <div class="tw-flex tw-flex-row tw-mb-3">
-                <div class="tw-flex tw-flex-col tw-flex-grow">
-
-                    <!-- Section Title -->
-                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                        <a href="/{{ $brand }}/lessons/subscribed" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                            <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">From Subscribed Coaches</h2>
-                        </a>
-                        <a href="/{{ $brand }}/lessons/subscribed"
-                            aria-label="See All Subscribed Lessons"
-                            class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
-                        >
-                            See All
-                        </a>
-                    </div>
-
-                    <div class="tw-flex tw-flex-row six-cards-row">
-                        <transition appear name="fade">
-                            <content-catalogue
-                                brand="{{ $brand }}"
-                                theme-color="{{ $brand }}"
-                                :use-theme-color="true"
-                                content-endpoint="/railcontent/content"
-                                catalogue-type="grid"
-                                limit="16"
-                                :lock-unowned="true"
-                                :four-wide="true"
-                                :force-wide-thumbs="true"
-                                :pre-loaded-content="{{ $latestSubscribedLessons }}"
-                            >
-                                <div class="tw-flex tw-flex-row nmh-1">
-                                    @for($i = 0; $i < 6; $i++)
-                                        @include('partials.bladesora.members.skeletons.card-item', [
-                                            "cardClass" => 'four-wide',
-                                        ])
-                                    @endfor
-                                </div>
-                            </content-catalogue>
-                        </transition>
-                    </div>
-                </div>
-            </div>
+        <div class="tw-px-4 md:tw-px-8 tw-mb-[30px]">
+            <mini-catalogue-section
+                title="From Subscribed Coaches"
+                see-all-url="/{{ $brand }}/lessons/subscribed"
+                seeAllAriaLabel="See All From Subscribed Coaches"
+                :pre-loaded-content="{{ json_encode(json_decode($latestSubscribedLessons)->data) }}"
+            ></mini-catalogue-section>
         </div>
     @endif
 

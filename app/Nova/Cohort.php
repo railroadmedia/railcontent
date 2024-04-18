@@ -343,6 +343,7 @@ class Cohort extends Resource
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
                     return !$this->is_product;
                 })
+                ->help('Use &lt;br&gt; for a line break.')
                 ->dependsOn(
                     ['is_product'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
