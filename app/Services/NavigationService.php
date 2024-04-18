@@ -30,8 +30,8 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => brand() === 'singeo' ? 'Courses' : 'Packs',
-                        'path' => brand() === 'singeo' ? '/'.brand().'/courses' : '/'.brand().'/packs',
+                        'name' => 'Packs',
+                        'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                 ],
@@ -228,8 +228,6 @@ class NavigationService
             ];
             return $navData;
         } elseif (brand() === 'singeo') {
-            // remove the "Packs" menu item
-            array_shift($commonContentSection);
             $commonContentSection = array_merge($commonContentSection,
                 [
                     [
