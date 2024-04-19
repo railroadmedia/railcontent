@@ -232,7 +232,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'soundslice',
-        'video' => '1D6Vc',
+        'video' => '23rlc',
         'soundslice' => true,
     ])
     @include("drumeo.sales.partials._footer", [
