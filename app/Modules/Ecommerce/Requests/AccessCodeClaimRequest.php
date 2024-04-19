@@ -42,14 +42,14 @@ class AccessCodeClaimRequest extends FormRequest
                 'ecommerce_access_codes' .
                 ',code,is_claimed,0',
             'credentials_type' => 'required|in:new,existing',
-            'user_email' => 'required_if:credentials_type,existing|email:strict,dns|not_regex:/[ÄäÜüÖö]|max:255|exists:' .
+            'user_email' => 'required_if:credentials_type,existing|email:strict,dns|not_regex:/[ÄäÜüÖö]/|max:255|exists:' .
                 config('ecommerce.database_info_for_unique_user_email_validation.database_connection_name') .
                 '.' .
                 config('ecommerce.database_info_for_unique_user_email_validation.table') .
                 ',' .
                 config('ecommerce.database_info_for_unique_user_email_validation.email_column'),
             'user_password' => 'required_if:credentials_type,existing',
-            'email' => 'required_if:credentials_type,new|email:strict,dns|not_regex:/[ÄäÜüÖö]|max:255|unique:' .
+            'email' => 'required_if:credentials_type,new|email:strict,dns|not_regex:/[ÄäÜüÖö]/|max:255|unique:' .
                 config('ecommerce.database_info_for_unique_user_email_validation.database_connection_name') .
                 '.' .
                 config('ecommerce.database_info_for_unique_user_email_validation.table') .
