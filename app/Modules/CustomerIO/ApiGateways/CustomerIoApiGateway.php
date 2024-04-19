@@ -163,7 +163,8 @@ class CustomerIoApiGateway
             if (!$result->ok()) {
                 Log::error('customer.io api call failed. Request body: ' . var_export($dataArray, true));
                 throw new Exception(
-                    'Customer.io createEvent api call failed: ' . $result->reason()
+                    'Customer.io createEvent api call failed for ' . $url
+                        . ' - ' . $result->reason()
                         . ' - Result: ' . var_export($result->json(), true)
                         . ' - Request data: ' . var_export($dataArray, true),
                     $result->status()
@@ -171,14 +172,21 @@ class CustomerIoApiGateway
             }
 
             if ($result->json() !== []) {
-                Log::error('Customer.io createEvent api call failed: '
-                    . var_export($result->json(), true)
-                    . ' - Request data ' . var_export($dataArray, true));
+                Log::error(
+                    'Customer.io createEvent api call failed for ' . $url
+                        . ' - ' . $result->reason()
+                        . ' - Result: ' . var_export($result->json(), true)
+                        . ' - Request data: ' . var_export($dataArray, true),
+                );
             }
 
             return true;
         } catch (Exception $e) {
-            Log::error('Customer.io createEvent api call failed: ' . $e->getMessage() . '\n - Request body: ' . var_export($dataArray, true));
+            Log::error(
+                'Customer.io createEvent api call failed for ' . $url
+                    . ' - ' . $e->getMessage()
+                    . ' - Request data: ' . var_export($dataArray, true)
+            );
             throw $e;
         }
     }
