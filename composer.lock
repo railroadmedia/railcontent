@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06c1297dfb00b5cd06509c3cfa5e38fb",
+    "content-hash": "00a798783f2a07370ce0fb2468e3bd0f",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "aaf0ec1d5a2c20b523258995a10e80c1fb765871"
+                "reference": "ff63f10210adb6e83335e0e25522bac5cd7dc4e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/aaf0ec1d5a2c20b523258995a10e80c1fb765871",
-                "reference": "aaf0ec1d5a2c20b523258995a10e80c1fb765871",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/ff63f10210adb6e83335e0e25522bac5cd7dc4e2",
+                "reference": "ff63f10210adb6e83335e0e25522bac5cd7dc4e2",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,7 @@
             "require-dev": {
                 "amphp/php-cs-fixer-config": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^4.13"
+                "psalm/phar": "5.23.1"
             },
             "type": "library",
             "autoload": {
@@ -77,7 +77,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/amp/issues",
-                "source": "https://github.com/amphp/amp/tree/v3.0.0"
+                "source": "https://github.com/amphp/amp/tree/v3.0.1"
             },
             "funding": [
                 {
@@ -85,7 +85,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-18T16:52:44+00:00"
+            "time": "2024-04-18T15:24:36+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -164,16 +164,16 @@
         },
         {
             "name": "amphp/cache",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/cache.git",
-                "reference": "218bb3888d380eb9dd926cd06f803573c84391d3"
+                "reference": "46912e387e6aa94933b61ea1ead9cf7540b7797c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/cache/zipball/218bb3888d380eb9dd926cd06f803573c84391d3",
-                "reference": "218bb3888d380eb9dd926cd06f803573c84391d3",
+                "url": "https://api.github.com/repos/amphp/cache/zipball/46912e387e6aa94933b61ea1ead9cf7540b7797c",
+                "reference": "46912e387e6aa94933b61ea1ead9cf7540b7797c",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +217,7 @@
             "homepage": "https://amphp.org/cache",
             "support": {
                 "issues": "https://github.com/amphp/cache/issues",
-                "source": "https://github.com/amphp/cache/tree/v2.0.0"
+                "source": "https://github.com/amphp/cache/tree/v2.0.1"
             },
             "funding": [
                 {
@@ -225,20 +225,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-09T21:04:12+00:00"
+            "time": "2024-04-19T03:38:06+00:00"
         },
         {
             "name": "amphp/dns",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "3e3f413fbbaacd9632b1612941b363fa26a72e52"
+                "reference": "04c88e67bef804203df934703bd422ea72f46b0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/3e3f413fbbaacd9632b1612941b363fa26a72e52",
-                "reference": "3e3f413fbbaacd9632b1612941b363fa26a72e52",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/04c88e67bef804203df934703bd422ea72f46b0e",
+                "reference": "04c88e67bef804203df934703bd422ea72f46b0e",
                 "shasum": ""
             },
             "require": {
@@ -305,7 +305,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2.1.1"
+                "source": "https://github.com/amphp/dns/tree/v2.1.2"
             },
             "funding": [
                 {
@@ -313,7 +313,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-30T23:25:30+00:00"
+            "time": "2024-04-19T03:49:29+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -530,16 +530,16 @@
         },
         {
             "name": "amphp/process",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/process.git",
-                "reference": "a79dc87100be857db2c4bbfd5369585a6d1e658c"
+                "reference": "52e08c09dec7511d5fbc1fb00d3e4e79fc77d58d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/process/zipball/a79dc87100be857db2c4bbfd5369585a6d1e658c",
-                "reference": "a79dc87100be857db2c4bbfd5369585a6d1e658c",
+                "url": "https://api.github.com/repos/amphp/process/zipball/52e08c09dec7511d5fbc1fb00d3e4e79fc77d58d",
+                "reference": "52e08c09dec7511d5fbc1fb00d3e4e79fc77d58d",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +586,7 @@
             "homepage": "https://amphp.org/process",
             "support": {
                 "issues": "https://github.com/amphp/process/issues",
-                "source": "https://github.com/amphp/process/tree/v2.0.2"
+                "source": "https://github.com/amphp/process/tree/v2.0.3"
             },
             "funding": [
                 {
@@ -594,7 +594,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-13T20:38:21+00:00"
+            "time": "2024-04-19T03:13:44+00:00"
         },
         {
             "name": "amphp/serialization",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.304.4",
+            "version": "3.304.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386"
+                "reference": "b01905670e952b5c5cdc4902973120f62a14a7f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386",
-                "reference": "20be41a5f1eef4c8a53a6ae7c0fc8b7346c0c386",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b01905670e952b5c5cdc4902973120f62a14a7f4",
+                "reference": "b01905670e952b5c5cdc4902973120f62a14a7f4",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.7"
             },
-            "time": "2024-04-12T18:06:45+00:00"
+            "time": "2024-04-18T18:12:29+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2097,16 +2097,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "3.4.3",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "8b5e5650391f851ed58910b3e3d48a71062eeced"
+                "reference": "0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/8b5e5650391f851ed58910b3e3d48a71062eeced",
-                "reference": "8b5e5650391f851ed58910b3e3d48a71062eeced",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a",
+                "reference": "0aad4b7ab7ce8c6602dfbb1e1a24581275fb9d1a",
                 "shasum": ""
             },
             "require": {
@@ -2168,7 +2168,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/common/issues",
-                "source": "https://github.com/doctrine/common/tree/3.4.3"
+                "source": "https://github.com/doctrine/common/tree/3.4.4"
             },
             "funding": [
                 {
@@ -2184,7 +2184,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-09T11:47:59+00:00"
+            "time": "2024-04-16T13:35:33+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -3971,16 +3971,16 @@
         },
         {
             "name": "giggsey/locale",
-            "version": "2.5",
+            "version": "2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/Locale.git",
-                "reference": "e6d4540109a01dd2bc7334cdc842d6a6a67cf239"
+                "reference": "37874fa473131247c348059fb7b8985efc18b5ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/Locale/zipball/e6d4540109a01dd2bc7334cdc842d6a6a67cf239",
-                "reference": "e6d4540109a01dd2bc7334cdc842d6a6a67cf239",
+                "url": "https://api.github.com/repos/giggsey/Locale/zipball/37874fa473131247c348059fb7b8985efc18b5ea",
+                "reference": "37874fa473131247c348059fb7b8985efc18b5ea",
                 "shasum": ""
             },
             "require": {
@@ -4019,9 +4019,9 @@
             "description": "Locale functions required by libphonenumber-for-php",
             "support": {
                 "issues": "https://github.com/giggsey/Locale/issues",
-                "source": "https://github.com/giggsey/Locale/tree/2.5"
+                "source": "https://github.com/giggsey/Locale/tree/2.6"
             },
-            "time": "2023-11-01T17:19:48+00:00"
+            "time": "2024-04-18T19:31:19+00:00"
         },
         {
             "name": "google/apiclient",
@@ -9872,16 +9872,16 @@
         },
         {
             "name": "railroad/doctrine-array-hydrator",
-            "version": "v2.0.1",
+            "version": "dev-temp-fix-inflector",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/doctrine-array-hydrator.git",
-                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3"
+                "reference": "4df7e2bf28c1de09fd7adb5080497d803d188345"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/12e4a9de5d18870f961fbc1febb8f37f797f51f3",
-                "reference": "12e4a9de5d18870f961fbc1febb8f37f797f51f3",
+                "url": "https://api.github.com/repos/railroadmedia/doctrine-array-hydrator/zipball/4df7e2bf28c1de09fd7adb5080497d803d188345",
+                "reference": "4df7e2bf28c1de09fd7adb5080497d803d188345",
                 "shasum": ""
             },
             "require": {
@@ -9923,9 +9923,9 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/v2.0.1"
+                "source": "https://github.com/railroadmedia/doctrine-array-hydrator/tree/temp-fix-inflector"
             },
-            "time": "2024-04-11T22:34:23+00:00"
+            "time": "2024-04-16T17:19:36+00:00"
         },
         {
             "name": "railroad/ecommerce",
@@ -10134,16 +10134,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.65",
+            "version": "v3.1.67",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3e45b41a1159461eee629f0930829ef63adae4f5"
+                "reference": "db17385db6f0a4e29b4297d2920b3496b605d388"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3e45b41a1159461eee629f0930829ef63adae4f5",
-                "reference": "3e45b41a1159461eee629f0930829ef63adae4f5",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/db17385db6f0a4e29b4297d2920b3496b605d388",
+                "reference": "db17385db6f0a4e29b4297d2920b3496b605d388",
                 "shasum": ""
             },
             "require": {
@@ -10173,9 +10173,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.65"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.67"
             },
-            "time": "2024-04-16T06:33:08+00:00"
+            "time": "2024-04-19T07:07:01+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -10368,16 +10368,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.75",
+            "version": "v2.1.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "552385bc7df2360bde787b3a14f6124fc48c642e"
+                "reference": "b0a362a2ae2cbd17d3f6e4023918432031112b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/552385bc7df2360bde787b3a14f6124fc48c642e",
-                "reference": "552385bc7df2360bde787b3a14f6124fc48c642e",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b0a362a2ae2cbd17d3f6e4023918432031112b34",
+                "reference": "b0a362a2ae2cbd17d3f6e4023918432031112b34",
                 "shasum": ""
             },
             "require": {
@@ -10432,9 +10432,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.75"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.76"
             },
-            "time": "2024-04-15T16:03:31+00:00"
+            "time": "2024-04-18T16:46:34+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -11588,16 +11588,16 @@
         },
         {
             "name": "shopify/shopify-api",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shopify/shopify-api-php.git",
-                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d"
+                "reference": "48d775f956b5ebec90f06200baca627fd07a9089"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/0365e3face702008e8232cc77fa5ba2fcebf993d",
-                "reference": "0365e3face702008e8232cc77fa5ba2fcebf993d",
+                "url": "https://api.github.com/repos/Shopify/shopify-api-php/zipball/48d775f956b5ebec90f06200baca627fd07a9089",
+                "reference": "48d775f956b5ebec90f06200baca627fd07a9089",
                 "shasum": ""
             },
             "require": {
@@ -11617,10 +11617,14 @@
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.30",
+                "ext-apcu": "*",
                 "maglnet/composer-require-checker": "^3.0 || ^4.0",
                 "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "^9",
                 "squizlabs/php_codesniffer": "^3.6"
+            },
+            "suggest": {
+                "ext-apcu": "Log fewer API deprecation warnings"
             },
             "type": "library",
             "autoload": {
@@ -11652,9 +11656,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Shopify/shopify-api-php/issues",
-                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.4.0"
+                "source": "https://github.com/Shopify/shopify-api-php/tree/v5.5.0"
             },
-            "time": "2024-04-08T18:45:30+00:00"
+            "time": "2024-04-18T13:13:18+00:00"
         },
         {
             "name": "signifly/laravel-shopify",
@@ -17014,16 +17018,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.53.0",
+            "version": "v3.54.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "69a19093a9ded8d1baac62ed6c009b8bc148d008"
+                "reference": "2aecbc8640d7906c38777b3dcab6f4ca79004d08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/69a19093a9ded8d1baac62ed6c009b8bc148d008",
-                "reference": "69a19093a9ded8d1baac62ed6c009b8bc148d008",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/2aecbc8640d7906c38777b3dcab6f4ca79004d08",
+                "reference": "2aecbc8640d7906c38777b3dcab6f4ca79004d08",
                 "shasum": ""
             },
             "require": {
@@ -17095,7 +17099,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.53.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.54.0"
             },
             "funding": [
                 {
@@ -17103,7 +17107,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-08T15:03:00+00:00"
+            "time": "2024-04-17T08:12:13+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -19284,16 +19288,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "889bf1dfa59e161590f677728b47bf4a6893983b"
+                "reference": "952798e239d9969e4e694b124c2cc222798dbb28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/889bf1dfa59e161590f677728b47bf4a6893983b",
-                "reference": "889bf1dfa59e161590f677728b47bf4a6893983b",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/952798e239d9969e4e694b124c2cc222798dbb28",
+                "reference": "952798e239d9969e4e694b124c2cc222798dbb28",
                 "shasum": ""
             },
             "require": {
@@ -19363,7 +19367,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-29T14:03:47+00:00"
+            "time": "2024-04-16T08:49:17+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -19698,9 +19702,18 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/doctrine-array-hydrator",
+            "version": "dev-temp-fix-inflector",
+            "alias": "v2.0.2",
+            "alias_normalized": "2.0.2.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "railroad/doctrine-array-hydrator": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

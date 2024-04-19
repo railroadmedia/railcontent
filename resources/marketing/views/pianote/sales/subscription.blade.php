@@ -166,6 +166,18 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-white relative" style="background-color:#060f15;">
+            <div class="container max-w-5xl mx-auto relative z-20">
+                <img class="h-28 sm:h-32 lg:h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/pianote/promos/april/banner-title.webp">
+                <p class="leading-tight my-4">Practice with Jordan and improve your<br class="sm:hidden"> playing over 30 days of lessons.</p>
+                <a href="/shop/30-days-to-better-technique" class="join smaller">Learn More</a>
+            </div>
+            <picture>
+                <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/april/banner-bg.webp" type="image/webp">
+                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/promos/april/banner-bg.webp" type="image/webp">
+                <img class="absolute inset-0 w-full h-full object-cover z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/april/banner-bg-m.webp">
+            </picture>
+        </section>
     @endif
 
     @php
