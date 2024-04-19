@@ -420,7 +420,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'soundslice',
-        'video' => '77f4c',
+        'video' => '4JGlc',
         'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[

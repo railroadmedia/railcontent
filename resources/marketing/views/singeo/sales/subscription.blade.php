@@ -361,7 +361,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'soundslice',
-        'video' => 'ZsC4c',
+        'video' => 'PTGlc',
         'soundslice' => true
     ])
     @include('_partials.components.video-modal',[
