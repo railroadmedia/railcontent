@@ -27,8 +27,6 @@ class AccessCodeController extends Controller
 
     public function claim(AccessCodeClaimRequest $request): RedirectResponse
     {
-        $request->validate($request->rules());
-
         if ($request->has('user_email')) {
             if ($this->userAuthenticationService->authenticate($request->get('user_email'), $request->get('user_password'))) {
                 $user = $this->userService->getByEmailOrNull($request->get('user_email'));
