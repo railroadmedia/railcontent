@@ -153,11 +153,18 @@ class CustomerIoApiGateway
             $dataArray['timestamp'] = $createdAtTimestamp;
         }
 
+        $jsonBody = json_encode($dataArray);
+
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        $headers = [];
+        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
+        $headers[] = 'Content-Type: application/json';
 
         try {
             $result = Http::withToken($authHeaderKey, 'Basic')
-                ->withBody(json_encode($dataArray), 'application/json')
+                ->withHeaders($headers)
+                ->withBody($jsonBody, 'application/json')
                 ->post($url);
 
             if (!$result->ok()) {
@@ -166,7 +173,7 @@ class CustomerIoApiGateway
                     'Customer.io createEvent api call failed for ' . $url
                         . ' - ' . $result->reason()
                         . ' - Result: ' . var_export($result->json(), true)
-                        . ' - Request data: ' . var_export($dataArray, true),
+                        . ' - Request data: ' . $jsonBody,
                     $result->status()
                 );
             }
@@ -176,7 +183,7 @@ class CustomerIoApiGateway
                     'Customer.io createEvent api call failed for ' . $url
                         . ' - ' . $result->reason()
                         . ' - Result: ' . var_export($result->json(), true)
-                        . ' - Request data: ' . var_export($dataArray, true),
+                        . ' - Request data: ' . $jsonBody,
                 );
             }
 
@@ -185,7 +192,7 @@ class CustomerIoApiGateway
             Log::error(
                 'Customer.io createEvent api call failed for ' . $url
                     . ' - ' . $e->getMessage()
-                    . ' - Request data: ' . var_export($dataArray, true)
+                    . ' - Request data: ' . $jsonBody
             );
             throw $e;
         }
