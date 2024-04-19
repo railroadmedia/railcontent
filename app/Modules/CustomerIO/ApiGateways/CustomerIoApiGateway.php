@@ -3,8 +3,6 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
-use Illuminate\Console\View\Components\Warn;
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -166,12 +164,16 @@ class CustomerIoApiGateway
                 Log::error('customer.io api call failed. Request body: ' . var_export($dataArray, true));
                 throw new Exception(
                     'Customer.io createEvent api call failed: ' . $result->reason()
-                        . '\n Result: ' . var_export($result->json(), true),
+                        . ' - Result: ' . var_export($result->json(), true)
+                        . ' - Request data: ' . var_export($dataArray, true),
                     $result->status()
                 );
             }
+
             if ($result->json() !== []) {
-                Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true));
+                Log::error('Customer.io createEvent api call failed: '
+                    . var_export($result->json(), true)
+                    . ' - Request data ' . var_export($dataArray, true));
             }
 
             return true;
