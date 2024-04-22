@@ -234,4 +234,9 @@ class ContentFieldService
         return $newField;
     }
 
+    public function getByContentIdAndKey($contentId, $key)
+    {
+        return $this->fieldRepository->getByContentIdAndKey($contentId, $key);
+    }
+
 }

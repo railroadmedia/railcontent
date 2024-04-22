@@ -96,4 +96,13 @@ class ContentFieldRepository extends RepositoryBase
 
         dd($subContents);
     }
+
+    public function getByContentIdAndKey($contentId, $key)
+    {
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->where('key', $key)
+            ->orderBy('position', 'asc')
+            ->first();
+    }
 }
