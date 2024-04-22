@@ -690,7 +690,7 @@
                     x-ref="playToLearnVideo"
                     x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
                     x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
-                    data-src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/30-day-independence/30-day-independence-silent-reel.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+                    data-src="https://player.vimeo.com/progressive_redirect/playback/931215529/rendition/540p/file.mp4?loc=external&signature=6bb8c33a63099e10ddedf690bf5a125956bb2e296b8f4ea56e5a48396a90ecb8" type="video/mp4" autoplay muted loop playsinline></video>
             </div>
             </div>
     </section>
@@ -908,8 +908,8 @@
             @include('drumeo.products.partials._promo-cards', [
                 'firstDeal' => '30-Day Independence',
                 'firstDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/30DI-bundle.webp',
-                'firstImageHeight' => 'h-32',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-01.webp',
+                'firstImageHeight' => 'h-36 lg:h-40',
                 'firstDealPrice' => 97,
                 'firstDealSub' => 'Just the course + 2 bonuses worth $42.95',
                 'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
@@ -925,8 +925,8 @@
                 'topBadge' => 'MOST POPULAR',
                 'secondDeal' => 'Unlimited Lessons',
                 'secondDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/membership-bundle.webp',
-                'secondImageHeight' => 'h-32',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-02.webp',
+                'secondImageHeight' => 'h-36 lg:h-40',
                 'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $258.94",
                 'secondDealPrice' => '20/mo',
                 'secondDealLink' =>
