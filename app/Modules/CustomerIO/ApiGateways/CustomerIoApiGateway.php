@@ -3,8 +3,6 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
-use Illuminate\Console\View\Components\Warn;
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -155,31 +153,47 @@ class CustomerIoApiGateway
             $dataArray['timestamp'] = $createdAtTimestamp;
         }
 
+        $jsonBody = json_encode($dataArray);
+
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
+        $headers = [];
+        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
+        $headers[] = 'Content-Type: application/json';
 
         try {
             $result = Http::withToken($authHeaderKey, 'Basic')
-                ->withBody(json_encode($dataArray), 'application/json')
+                ->withHeaders($headers)
+                ->withBody($jsonBody, 'application/json')
                 ->post($url);
 
             if (!$result->ok()) {
                 Log::error('customer.io api call failed. Request body: ' . var_export($dataArray, true));
                 throw new Exception(
-                    'Customer.io createEvent api call failed: ' . $result->reason()
-                        . '\n Result: ' . var_export($result->json(), true),
+                    'Customer.io createEvent api call failed for ' . $url
+                        . ' - ' . $result->reason()
+                        . ' - Result: ' . var_export($result->json(), true)
+                        . ' - Request data: ' . $jsonBody,
                     $result->status()
                 );
             }
+
             if ($result->json() !== []) {
-                Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true));
+                Log::error(
+                    'Customer.io createEvent api call failed for ' . $url
+                        . ' - ' . $result->reason()
+                        . ' - Result: ' . var_export($result->json(), true)
+                        . ' - Request data: ' . $jsonBody,
+                );
             }
 
             return true;
         } catch (Exception $e) {
-            Log::error('Customer.io createEvent api call failed: ' . var_export($result->json(), true) . '\n - '
-                . $e->getMessage()
-                . '\n - Request body: ' . var_export($dataArray, true));
+            Log::error(
+                'Customer.io createEvent api call failed for ' . $url
+                    . ' - ' . $e->getMessage()
+                    . ' - Request data: ' . $jsonBody
+            );
             throw $e;
         }
     }

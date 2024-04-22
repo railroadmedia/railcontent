@@ -51,7 +51,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
         $endCursor = $this->endCursor;
         $break = false;
         do {
-            Timer::afterSeconds(1, function () use (&$break) {
+            Timer::afterSeconds(120, function () use (&$break) {
                 $break = true;
             });
             if ($break) {
@@ -62,7 +62,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
                 $this->endDate,
                 10,
                 ' AND (tag:Apple OR tag:Google)',
-                ',transactions{id},totalPriceSet{shopMoney{amount}},cancelledAt',
+                ',transactions{id},subtotalPriceSet{shopMoney{amount}},cancelledAt',
                 $endCursor
             );
 
@@ -71,7 +71,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
                 Log::info("Processing Order ID: $orderId");
 
                 try {
-                    $amount = $order->totalPriceSet->shopMoney->amount;
+                    $amount = $order->subtotalPriceSet->shopMoney->amount;
                     if (!$order->transactions && floatval($amount) > 0) {
                         Log::info("Order ID: $orderId has no transactions");
                         if ($order->cancelledAt != null) {
@@ -79,7 +79,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
                             //Do nothing for cancelled orders because adding the transaction and revoking it will add a bunch of refunds for whenever we processed this
                             //$shopifyCancelService->cancelOrder($orderId);
                         } else {
-                            //$shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
+                            $shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
                             Log::info("Order ID: $orderId transaction added");
                         }
                         $this->totalProcessed++;

@@ -622,25 +622,25 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'drumeoSoundslice',
-        'video' => '1D6Vc',
+        'video' => '23rlc',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
         'name' => 'pianoteSoundslice',
-        'video' => '77f4c',
+        'video' => '4JGlc',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
         'name' => 'guitareoSoundslice',
-        'video' => 'Mnmkc',
+        'video' => 'NXGlc',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
         'name' => 'singeoSoundslice',
-        'video' => 'ZsC4c',
+        'video' => 'PTGlc',
         'soundslice' => true,
     ])
 
