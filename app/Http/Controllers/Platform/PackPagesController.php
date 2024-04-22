@@ -124,15 +124,6 @@ class PackPagesController extends Controller
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
 
-        if ($packBundles->isEmpty()) {
-            abort(404);
-        }
-        $thisPackBundle = $packBundles[0];
-
-        if (empty($thisPackBundle)) {
-            abort(404);
-        }
-
         $collectionForDecoration = new Collection();
         $collectionForDecoration = $collectionForDecoration->merge([$pack]);
         $collectionForDecoration = $collectionForDecoration->merge($packBundles);

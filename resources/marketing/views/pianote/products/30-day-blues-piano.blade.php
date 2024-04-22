@@ -485,7 +485,7 @@ $items = [
             ],
         'bgColor' => 'linear-gradient(rgba(246, 26, 48, 1), rgba(161, 0, 0, 1))',
         'title' => "Trusted by piano players everywhere.",
-        'subTitle' => "Rated 5 stars by thousands by Pianote students from around the world! See the reviews ››",
+        'subTitle' => "Rated 5 stars by thousands of Pianote students from around the world! See the reviews ››",
         'showTop' => true,
 ])
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2A2F34 calc(50% + 1px));"></div>
