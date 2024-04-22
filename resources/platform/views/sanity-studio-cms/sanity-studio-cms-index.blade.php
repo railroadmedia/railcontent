@@ -19,8 +19,8 @@
 <body>
 <div id="app"></div>
 <script type="module">
-    import { defineConfig, renderStudio } from "https://esm.sh/sanity"
-    import { deskTool } from "https://esm.sh/sanity/desk"
+    import { defineConfig, renderStudio } from "https://esm.sh/sanity@3.38.1-canary.107"
+    import { deskTool } from "https://esm.sh/sanity@3.38.1-canary.107/desk"
 
     const config = defineConfig({
         plugins: [deskTool()],
