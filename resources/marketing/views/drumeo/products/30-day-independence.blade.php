@@ -257,7 +257,7 @@
         $stock = $products['quietpad-estepario']->getStockAvailability() - 250;
     }
     else {
-        $stock = 0;
+        $stock = 'a limited amount';
     }
 @endphp
     @include('_partials.components.sticky-bar', [
@@ -912,7 +912,8 @@
 
              <!-- Version 1 -->
             <h6 class="leading-normal mb-4 text-drumeo">
-            <strong>EARLY BIRD EXTENDED:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>1000</s> <strong> {{$stock}} </strong> left!</span>
+            <strong>EARLY BIRD EXTENDED:</strong> Get a free limited edition Estepario QuietPad <br>
+                <span>Only <s class='opacity-60'>1000</s> <strong> {{$stock}} </strong> left!</span>
             </h6>
 
 

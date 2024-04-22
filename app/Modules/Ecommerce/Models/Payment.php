@@ -3,7 +3,9 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Ecommerce\database\factories\PaymentFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Modules\Ecommerce\Models
  *
  * @property int $id
+ * @property string $type
+ * @property string|null $note
  * @property int|null $shopify_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -24,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Payment extends Model
 {
+    use HasFactory;
     use CanSaveWithoutUpdatedAt;
     use SoftDeletes;
 
@@ -39,6 +44,11 @@ class Payment extends Model
 
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';
+
+    protected static function newFactory(): PaymentFactory
+    {
+        return PaymentFactory::new();
+    }
 
     public function orders(): BelongsToMany
     {
