@@ -311,6 +311,7 @@
                 :hide-controls="{{ json_encode($lessonType === 'Recommendation' ? true : false) }}"
                 @if($lessonType === 'Recommendation')
                     endpoint="/railcontent/recommended"
+                    no-results-message="Start your learning journey to help us select the appropriate videos for you."
                 @endif
             ></collection-wrapper>
         @endif
