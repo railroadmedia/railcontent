@@ -46,7 +46,7 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
             foreach ($childHierarchyRows as $childHierarchyRow) {
                 if ($childHierarchyRow['parent_id'] == $content['id'] &&
                     !empty($assignmentContents[$childHierarchyRow['child_id']])) {
-                    $duration += $assignmentContents[$childHierarchyRow['child_id']]['length_in_seconds'] ?? 0;
+                    $duration += $assignmentContents[$childHierarchyRow['child_id']]->fetch('fields.length_in_seconds', 0);
                     $contentsOfTypes[$contentIndex]['assignments'][] =
                         $assignmentContents[$childHierarchyRow['child_id']];
                 }
