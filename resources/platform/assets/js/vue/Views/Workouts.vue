@@ -1,7 +1,7 @@
 <template>
     <Breadcrumb
         :breadcrumbs="[{ title: 'Workouts' }]"
-        classOverride="lg:tw-container tw-mx-auto lg:tw-px-8"
+        classOverride="lg:tw-container tw-mx-auto tw-px-4 lg:tw-px-8"
     />
     <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
         <section v-if="carouselData.length">
