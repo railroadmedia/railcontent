@@ -2,13 +2,11 @@
 
 namespace App\Modules\Ecommerce\Console\Commands;
 
-use App\Models\ShopifySync;
+use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Jobs\Shopify\SyncOrdersToShopifyJobManager;
 use App\Modules\Ecommerce\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Bus\Batch;
-use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -24,7 +22,8 @@ class SyncOrdersToShopifyDispatcher extends Command
     protected $signature = 'shopify:sync-orders
                             {--startingId= : (Optional) The order Id to start processing at}
                             {--limit= : (Optional) The number of order to limit this run to}
-                            {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
+                            {--startCreatedAt= : (Optional) The ISO 8601 date time for all ecommerce_orders to get where the created_at is at or after. e.g. 2023-10-13T17:00:25+00:00}
+                            {--endCreatedAt= : (Optional) The ISO 8601 date time for all  ecommerce_orders to get where the created_at is at or before. e.g. 2023-10-13T17:30:14+00:00}
                             {--fresh : Sync all orders, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
     /**
@@ -40,38 +39,32 @@ class SyncOrdersToShopifyDispatcher extends Command
      * @return int
      * @throws Throwable
      */
-    public function handle(): int {
+    public function handle(): int
+    {
         $simulate = $this->option("execute") == false;
         $fresh = $this->option("fresh");
         $startingId = $this->option("startingId");
         $limit = $this->option("limit");
 
-        $lastSyncAt = $this->getDateTimeOfLastSync();
+        $startCreatedAt = new Carbon($this->option("startCreatedAt") ?: '1970-01-01T00:00:00Z');
+        $endCreatedAt = new Carbon($this->option("endCreatedAt") ?: config('ecommerce.launch_date_times.shopify'));
 
         // find all orders that need to be synced
-        $orders = Order::query()
-            ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
-                return $q->where("id", ">=", $startingId);
-            })
-            ->where(function (Builder $q) use ($lastSyncAt, $fresh) {
-                $q->when(!$fresh, function (Builder $q) use ($lastSyncAt) {
-                    return $q->whereDate("updated_at", ">", $lastSyncAt)
-
-                        // we also need to check if any of the order's order items or order item fulfillments need to be synced
-                        ->orWhereHas("orderItems", function (Builder $oiq) use ($lastSyncAt) {
-                            $oiq->whereDate("updated_at", ">", $lastSyncAt);
-                        })
-                        ->orWhereHas("orderItemFulfillments", function (Builder $oifq) use ($lastSyncAt) {
-                            $oifq->whereDate("updated_at", ">", $lastSyncAt);
-                        });
-                });
-            })
+        $orders = Order::toSyncWithShopify(
+            startingId: $startingId,
+            fresh: $fresh,
+            startCreatedAt: $startCreatedAt,
+            endCreatedAt: $endCreatedAt
+        )
             ->select("id");
+
         $orderCount = $orders->count();
         $batchSize = 500;
         $jobs = [];
 
-        $this->info("SyncOrdersToShopify: Preparing to chunk orders into jobs for SyncOrdersToShopifyJobManager. Please wait...");
+        $this->info(
+            "SyncOrdersToShopify: Preparing to chunk orders into jobs for SyncOrdersToShopifyJobManager. Please wait..."
+        );
         $startAt = Carbon::now();
         if ($limit) {
             $orderCount = min($limit, $orderCount);
@@ -81,7 +74,8 @@ class SyncOrdersToShopifyDispatcher extends Command
             $orders->chunk(
                 $batchSize,
                 function ($orderIds) use (
-                    $lastSyncAt,
+                    $endCreatedAt,
+                    $startCreatedAt,
                     $limit,
                     &$isAtLimit,
                     $batchSize,
@@ -102,12 +96,11 @@ class SyncOrdersToShopifyDispatcher extends Command
                         $orderIds = $orderIds->take($toGet);
                     }
 
-                    $firstOrderId = $orderIds->first()->id;
-                    $lastOrderId = $orderIds->last()->id;
                     $jobs[] = new SyncOrdersToShopifyJobManager(
-                        $firstOrderId,
-                        $lastOrderId,
-                        $lastSyncAt,
+                        $orderIds->first()->id,
+                        $orderIds->last()->id,
+                        $startCreatedAt,
+                        $endCreatedAt,
                         $simulate,
                         $fresh
                     );
@@ -115,20 +108,26 @@ class SyncOrdersToShopifyDispatcher extends Command
             );
         } else {
             // step through the chunks of order ids to sync, and add a job to process each chunk
-            $orders->chunk($batchSize, function ($orderIds) use ($lastSyncAt, $simulate, $fresh, &$jobs) {
-                $firstOrderId = $orderIds->first()->id;
-                $lastOrderId = $orderIds->last()->id;
-                $jobs[] = new SyncOrdersToShopifyJobManager(
-                    $firstOrderId,
-                    $lastOrderId,
-                    $lastSyncAt,
-                    $simulate,
-                    $fresh
-                );
-            });
+            $orders->chunk(
+                $batchSize,
+                function ($orderIds) use ($endCreatedAt, $startCreatedAt, $simulate, $fresh, &$jobs) {
+                    $jobs[] = new SyncOrdersToShopifyJobManager(
+                        $orderIds->first()->id,
+                        $orderIds->last()->id,
+                        $startCreatedAt,
+                        $endCreatedAt,
+                        $simulate,
+                        $fresh
+                    );
+                }
+            );
         }
-        $this->info(sprintf("SyncOrdersToShopify: Completed chunking orders into jobs for SyncOrdersToShopifyJobManager in %s seconds.",
-            $startAt->diffInSeconds()));
+        $this->info(
+            sprintf(
+                "SyncOrdersToShopify: Completed chunking orders into jobs for SyncOrdersToShopifyJobManager in %s seconds.",
+                $startAt->diffInSeconds()
+            )
+        );
 
         $startAt = Carbon::now();
         $batch = Bus::batch($jobs)
@@ -137,7 +136,7 @@ class SyncOrdersToShopifyDispatcher extends Command
             })->catch(function (Batch $batch, Throwable $e) {
                 Log::error($e->getMessage());
             })
-            ->onQueue('command')
+            ->onQueue('command-two')
             ->dispatch();
         $this->info(
             sprintf(
@@ -151,35 +150,5 @@ class SyncOrdersToShopifyDispatcher extends Command
         );
 
         return self::SUCCESS;
-    }
-
-    /**
-     * Get the date and time that orders were last synced up to Shopify
-     *
-     * @return Carbon
-     */
-    protected function getDateTimeOfLastSync(): Carbon
-    {
-        $override = $this->getLastSyncAtOverride();
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        $sync = ShopifySync::where("resource", ShopifySync::RESOURCE_ORDER)->latestFinished()->first();
-        return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
-    }
-
-    /**
-     * Get the optional override of when this entity was last synced to Shopify
-     *
-     * @return Carbon|null
-     */
-    protected function getLastSyncAtOverride(): null|Carbon
-    {
-        $override = $this->option("since");
-        if (!is_null($override)) {
-            return new Carbon($override);
-        }
-        return null;
     }
 }
