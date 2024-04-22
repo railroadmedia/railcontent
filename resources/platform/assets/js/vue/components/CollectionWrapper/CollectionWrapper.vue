@@ -7,7 +7,7 @@
 
         <transition appear name="fade">
             <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
-                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
+                <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" :no-results-message="noResultsMessage" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
                 <ForumThreadsTable v-else-if="isThreads" :threads="data" :searching="searching" :search-term="getSearchTerm" />
@@ -183,6 +183,10 @@ const props = defineProps({
     multipleTypes: {
         type: Boolean,
         default: () => false,
+    },
+    noResultsMessage: {
+        type: String,
+        default: '',
     },
 });
 
