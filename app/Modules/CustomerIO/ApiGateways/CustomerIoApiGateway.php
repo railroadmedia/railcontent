@@ -178,15 +178,6 @@ class CustomerIoApiGateway
                 );
             }
 
-            if ($result->json() !== []) {
-                Log::error(
-                    'Customer.io createEvent api call failed for ' . $url
-                        . ' - ' . $result->reason()
-                        . ' - Result: ' . var_export($result->json(), true)
-                        . ' - Request data: ' . $jsonBody,
-                );
-            }
-
             return true;
         } catch (Exception $e) {
             Log::error(
