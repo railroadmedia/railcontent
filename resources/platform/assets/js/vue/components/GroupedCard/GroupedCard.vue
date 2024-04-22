@@ -26,7 +26,7 @@
     <div class="tw-mb-5">
         <transition appear name="fade">
             <SongCardContainer v-if="contentTypeOverride === 'song'" :preLoadedContent="item.lessons" :isGroupedView="true" :add-margin-bottom="false" />
-            <CatalogueCardContainer v-else :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" />
+            <CatalogueCardContainer v-else :pre-loaded-content="item.lessons" :content-type-override="contentTypeOverride" :group-by-cards="true" :is-single-row="true" :no-results-message="noResultsMessage" />
         </transition>
     </div>
 </template>
@@ -59,6 +59,10 @@ const props = defineProps({
     showTotalPlays: {
         type: Boolean,
         default: () => false,
+    },
+    noResultsMessage: {
+        type: String,
+        default: '',
     },
 })
 
