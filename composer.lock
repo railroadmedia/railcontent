@@ -656,16 +656,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v2.3.0",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "acc0a2f65ab498025ba5641f7cce499c4b1ed4b5"
+                "reference": "58e0422221825b79681b72c50c47a930be7bf1e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/acc0a2f65ab498025ba5641f7cce499c4b1ed4b5",
-                "reference": "acc0a2f65ab498025ba5641f7cce499c4b1ed4b5",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/58e0422221825b79681b72c50c47a930be7bf1e1",
+                "reference": "58e0422221825b79681b72c50c47a930be7bf1e1",
                 "shasum": ""
             },
             "require": {
@@ -728,7 +728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/v2.3.0"
+                "source": "https://github.com/amphp/socket/tree/v2.3.1"
             },
             "funding": [
                 {
@@ -736,7 +736,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-19T20:01:53+00:00"
+            "time": "2024-04-21T14:33:03+00:00"
         },
         {
             "name": "amphp/sync",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.304.7",
+            "version": "3.304.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b01905670e952b5c5cdc4902973120f62a14a7f4"
+                "reference": "0079eaa0a0eaef2d73d0a4a11389cdfce1d33189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b01905670e952b5c5cdc4902973120f62a14a7f4",
-                "reference": "b01905670e952b5c5cdc4902973120f62a14a7f4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0079eaa0a0eaef2d73d0a4a11389cdfce1d33189",
+                "reference": "0079eaa0a0eaef2d73d0a4a11389cdfce1d33189",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.304.8"
             },
-            "time": "2024-04-18T18:12:29+00:00"
+            "time": "2024-04-19T18:13:09+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3899,22 +3899,25 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.34",
+            "version": "8.13.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "319810672f3f90d810e3cbc0071d0b7b329c2ec8"
+                "reference": "cd52d7b27572ee45d31ca0d61b394638ed9a6bae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/319810672f3f90d810e3cbc0071d0b7b329c2ec8",
-                "reference": "319810672f3f90d810e3cbc0071d0b7b329c2ec8",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/cd52d7b27572ee45d31ca0d61b394638ed9a6bae",
+                "reference": "cd52d7b27572ee45d31ca0d61b394638ed9a6bae",
                 "shasum": ""
             },
             "require": {
                 "giggsey/locale": "^1.7|^2.0",
                 "php": ">=5.3.2",
                 "symfony/polyfill-mbstring": "^1.17"
+            },
+            "replace": {
+                "giggsey/libphonenumber-for-php-lite": "self.version"
             },
             "require-dev": {
                 "pear/pear-core-minimal": "^1.9",
@@ -3967,7 +3970,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2024-04-05T09:45:18+00:00"
+            "time": "2024-04-19T12:41:30+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -4094,16 +4097,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.344.0",
+            "version": "v0.345.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "d5813b1a64a8a73daf7ab307dc640e2efb046131"
+                "reference": "a975dae4c06d304b020eda3f53e7c3402b32132d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/d5813b1a64a8a73daf7ab307dc640e2efb046131",
-                "reference": "d5813b1a64a8a73daf7ab307dc640e2efb046131",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a975dae4c06d304b020eda3f53e7c3402b32132d",
+                "reference": "a975dae4c06d304b020eda3f53e7c3402b32132d",
                 "shasum": ""
             },
             "require": {
@@ -4132,9 +4135,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.344.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.345.0"
             },
-            "time": "2024-04-12T01:04:09+00:00"
+            "time": "2024-04-21T01:02:15+00:00"
         },
         {
             "name": "google/auth",
@@ -4196,16 +4199,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.57.0",
+            "version": "v1.58.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "a6bbc85a5ff2edc1c29344e3aaaa0a099d569748"
+                "reference": "2ea91dab93f9281c97e28691c0d9d806c5b61359"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/a6bbc85a5ff2edc1c29344e3aaaa0a099d569748",
-                "reference": "a6bbc85a5ff2edc1c29344e3aaaa0a099d569748",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/2ea91dab93f9281c97e28691c0d9d806c5b61359",
+                "reference": "2ea91dab93f9281c97e28691c0d9d806c5b61359",
                 "shasum": ""
             },
             "require": {
@@ -4256,22 +4259,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.57.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.58.0"
             },
-            "time": "2024-04-12T23:38:19+00:00"
+            "time": "2024-04-19T22:39:11+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.41.2",
+            "version": "v1.41.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "3b6d7c13970f0c80f2450d2ec1241d7deaad3dda"
+                "reference": "58b7e56e2ad9c7ef55648c461e74372580b34794"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/3b6d7c13970f0c80f2450d2ec1241d7deaad3dda",
-                "reference": "3b6d7c13970f0c80f2450d2ec1241d7deaad3dda",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/58b7e56e2ad9c7ef55648c461e74372580b34794",
+                "reference": "58b7e56e2ad9c7ef55648c461e74372580b34794",
                 "shasum": ""
             },
             "require": {
@@ -4313,9 +4316,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.41.2"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.41.3"
             },
-            "time": "2024-04-12T23:38:19+00:00"
+            "time": "2024-04-19T22:39:11+00:00"
         },
         {
             "name": "google/common-protos",
@@ -4472,16 +4475,16 @@
         },
         {
             "name": "google/longrunning",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "6841b03479d5a397a64036a99c33d8ee06bc8b42"
+                "reference": "67b80d36df06eaf5000fea010c77307e72fa0985"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/6841b03479d5a397a64036a99c33d8ee06bc8b42",
-                "reference": "6841b03479d5a397a64036a99c33d8ee06bc8b42",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/67b80d36df06eaf5000fea010c77307e72fa0985",
+                "reference": "67b80d36df06eaf5000fea010c77307e72fa0985",
                 "shasum": ""
             },
             "require-dev": {
@@ -4510,9 +4513,9 @@
             ],
             "description": "Google LongRunning Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-longrunning/tree/v0.4.0"
+                "source": "https://github.com/googleapis/php-longrunning/tree/v0.4.1"
             },
-            "time": "2024-04-12T23:38:19+00:00"
+            "time": "2024-04-19T22:39:11+00:00"
         },
         {
             "name": "google/protobuf",
@@ -10134,16 +10137,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.67",
+            "version": "v3.1.68",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "db17385db6f0a4e29b4297d2920b3496b605d388"
+                "reference": "da6e7e01f6b0703149edf74c14e5ad2a54715d1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/db17385db6f0a4e29b4297d2920b3496b605d388",
-                "reference": "db17385db6f0a4e29b4297d2920b3496b605d388",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/da6e7e01f6b0703149edf74c14e5ad2a54715d1f",
+                "reference": "da6e7e01f6b0703149edf74c14e5ad2a54715d1f",
                 "shasum": ""
             },
             "require": {
@@ -10173,9 +10176,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.67"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.68"
             },
-            "time": "2024-04-19T07:07:01+00:00"
+            "time": "2024-04-22T06:41:24+00:00"
         },
         {
             "name": "railroad/permissions",
