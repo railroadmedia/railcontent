@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\UserManagementSystem\Services\UserService;
@@ -21,8 +22,8 @@ class CheckSongMembershipAccess extends Command
         $users =
             UserAccessPermission::query()
                 ->join('usora_users', 'usora_users.id', '=', 'user_access_permissions.user_id')
-                ->where('permission_id', '=', 94)
-                ->where('permission_id', '!=', 92)
+                ->where('permission_id', '=', UserAccessPermissionsCollection::SongsOnlyMembershipPermission)
+                ->where('permission_id', '!=', UserAccessPermissionsCollection::MusoraPlusMembershipPermission)
                 ->where('usora_users.membership_level', '=', 'plus')
                 ->get();
 
@@ -30,18 +31,16 @@ class CheckSongMembershipAccess extends Command
         foreach ($users as $item) {
             $userIdOrEmail = $item['user_id'];
             $user = $userService->getByIdOrNull($userIdOrEmail);
-
             if (!$user) {
                 $this->error("User $userIdOrEmail not found");
             }
 
             $shouldModify = true;
-
             foreach (
                 $accessPermissionsService->getUserAccessPermissions($userIdOrEmail)
                     ->getCollection() as $userPermission
             ) {
-                if ($userPermission->permission_id == 92) {
+                if ($userPermission->permission_id == UserAccessPermissionsCollection::MusoraPlusMembershipPermission) {
                     $time = $userPermission->time_fixed ?? $userPermission->start_time;
                     $expirationDate =
                         Carbon::parse($time)
@@ -55,7 +54,7 @@ class CheckSongMembershipAccess extends Command
                         $shouldModify = false;
                     }
                 }
-                if ($userPermission->permission_id == 94) {
+                if ($userPermission->permission_id == UserAccessPermissionsCollection::SongsOnlyMembershipPermission) {
                     $time = $userPermission->time_fixed ?? $userPermission->start_time;
                     $expirationDate =
                         Carbon::parse($time)
