@@ -56,7 +56,7 @@ class FixMobileTransactionsJob implements ShouldQueue
     ): void {
         $className = get_class($this);
         if (!$this->endCursor) {
-            Log::info("$className: Start Processing");
+            Log::info("$className: Start Processing Batch $this->batchId");
         }
         $endCursor = $this->endCursor;
         $break = false;
