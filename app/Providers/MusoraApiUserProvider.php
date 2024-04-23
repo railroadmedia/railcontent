@@ -6,6 +6,7 @@ use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
+use App\Modules\UserManagementSystem\Services\UserService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -14,7 +15,6 @@ use Modules\UserManagementSystem\Models\FirebaseToken;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
-use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,29 +23,32 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private CalendarService $calendarService;
-    private CommentService $commentService;
-    private PostRepository $postRepository;
     private ContentService $contentService;
     private CustomerIoService $customerIoService;
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
+    private UserService $userService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
 
     public function __construct(
         CalendarService $calendarService,
-        CommentService $commentService,
-        PostRepository $postRepository,
         ContentService $contentService,
         CustomerIoService $customerIoService,
         RevenueCatService $revenueCatService,
-        SubscriptionService $subscriptionService
+        SubscriptionService $subscriptionService,
+        UserService $userService,
+        CommentService $commentService,
+        PostRepository $postRepository
     ) {
         $this->calendarService = $calendarService;
-        $this->commentService = $commentService;
-        $this->postRepository = $postRepository;
         $this->contentService = $contentService;
         $this->customerIoService = $customerIoService;
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
+        $this->userService = $userService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser(): ?User
@@ -345,45 +348,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->postRepository->deleteByUserId($userId);
         $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
 
-        $user->fill([
-            'email' => 'musora+deleted_' .
-                Carbon::now()
-                    ->getTimestamp() .
-                '@musora.com',
-            'first_name' => null,
-            'last_name' => null,
-            'display_name' => '',
-            'gender' => null,
-            'country' => null,
-            'region' => null,
-            'city' => null,
-            'birthday' => null,
-            'phone_number' => null,
-            'profile_picture_url' => null,
-            'timezone' => null,
-            'permission_level' => null,
-            'drums_gear_photo' => null,
-            'biography' => null,
-            'piano_gear_photo' => null,
-            'drums_gear_set_brands' => null,
-            'drums_gear_hardware_brands' => null,
-            'drums_gear_stick_brands' => null,
-            'drums_gear_cymbal_brands' => null,
-            'drums_playing_since_year' => null,
-            'piano_gear_piano_brands' => null,
-            'piano_gear_keyboard_brands' => null,
-            'piano_playing_since_year' => null,
-
-        ]);
-        $user->email =
-            'musora+deleted_' .
-            Carbon::now()
-                ->getTimestamp() .
-            '@musora.com';
-        $user->updated_at =
-            Carbon::now()
-                ->toDateTimeString();
-        $user->save();
+        $user = $this->userService->deleteUser();
 
         return $user;
     }

@@ -15,8 +15,8 @@
                     {{ method_field($method) }}
 
                     <div class="form-group tw-mb-2">
-                        <input type="text" name="title" id="title" value="{{ old('title') }}" 
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
+                        <input type="text" name="title" id="title" value="{{ old('title') }}"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-caret-black dark:tw-caret-white"
                         >
                         <label for="title" class="{{ $brand }}">Title</label>
 
@@ -27,7 +27,7 @@
 
                     <div class="form-group mb-2">
                         <input type="text" name="description" id="description" value="{{ old('description') }}"
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-caret-black dark:tw-caret-white"
                         >
                         <label for="description" class="{{ $brand }}">Description</label>
 
@@ -38,7 +38,7 @@
 
                     <div class="form-group tw-mb-2">
                         <input type="text" name="weight" id="weight" value="{{ old('weight') }}"
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-caret-black dark:tw-caret-white"
                         >
                         <label for="weight" class="{{ $brand }}">Weight (order), any number</label>
 
@@ -49,7 +49,7 @@
 
                     <div class="form-group tw-mb-2">
                         <input type="text" name="icon" id="icon" value="{{ old('icon-class') }}"
-                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74]"
+                               class="tw-pb-0 dark:tw-bg-transparent dark:tw-text-white dark:tw-border-[#445F74] tw-caret-black dark:tw-caret-white"
                         >
                         <label for="icon-class" class="{{ $brand }}">Icon class</label>
 
@@ -60,7 +60,7 @@
 
                     <div class="tw-flex tw-flex-row align-h-right tw-mt-2 tw-justify-end tw-flex-wrap">
                         <a href="{{ $forumUrl }}"
-                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 sm:tw-mr-1 tw-w-full sm:tw-w-auto" 
+                           class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 sm:tw-mr-1 tw-w-full sm:tw-w-auto"
                            dusk="cancel-button">
                             Cancel
                         </a>
