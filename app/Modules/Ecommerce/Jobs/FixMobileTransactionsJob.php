@@ -72,7 +72,7 @@ class FixMobileTransactionsJob implements ShouldQueue
                 $this->endDate,
                 10,
                 ' AND (tag:Apple OR tag:Google)',
-                ",email,transactions{id,processedAt},subtotalPriceSet{shopMoney{amount}}, totalPriceSet{shopMoney{amount}}
+                ",email,transactions{id,processedAt},subtotalPriceSet{shopMoney{amount}},refunds{id},totalPriceSet{shopMoney{amount}}
                 ,cancelledAt,processedAt,currencyCode,metafields(first:10){edges{node{namespace,value,key}}}
                 ,lineItems(first:10){edges{node{id,title,quantity,variant{title,sku}}}},note,tags",
                 $endCursor
@@ -86,12 +86,18 @@ class FixMobileTransactionsJob implements ShouldQueue
                     if ($order->subtotalPriceSet->shopMoney->amount != $order->totalPriceSet->shopMoney->amount) {
                         Log::info("Order ID: $orderId has a different subtotal and total price");
                     }
+
                     if ($order->transactions && !$order->cancelledAt) {
                         $hours = Carbon::parse($order->transactions[0]->processedAt)->diffInHours(
                             Carbon::parse($order->processedAt)
                         );
 
                         if ($hours > 1) { //anything within an hour is fine for metrics
+                            if($order->refunds){
+                                Log::info("Order ID: $orderId has a refund, ignore processing.");
+                                continue;
+                            }
+
                             Log::info(
                                 "Order ID: $orderId has a transaction that is more than 1 hour apart from the order processedAt time"
                             );
