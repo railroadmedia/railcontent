@@ -3,23 +3,11 @@
 namespace App\Modules\Ecommerce\Jobs;
 
 
+use App\Jobs\WebhookChildJob;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
-use Illuminate\Bus\Batchable;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
-class ShopifySyncCustomerJob implements ShouldQueue
+class ShopifySyncCustomerJob extends WebhookChildJob
 {
-    use Batchable;
-    use Dispatchable;
-    use InteractsWithQueue;
-    use Queueable;
-    use SerializesModels;
-
-
     private ?int $customerId;
     private string $email;
 
