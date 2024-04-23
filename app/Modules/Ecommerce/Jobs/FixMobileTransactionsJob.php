@@ -99,9 +99,9 @@ class FixMobileTransactionsJob implements ShouldQueue
                             $user = $userService->getByEmailOrNull($email);
 
                             foreach ($order->metafields->edges as $metafield) {
-                                if ($metafield->node->key === 'brand') {
+                                if ($metafield->node->key === ShopifyMetafieldKey::Brand->value) {
                                     $brand = $metafield->node->value;
-                                } elseif ($metafield->node->key === 'payment_source') {
+                                } elseif ($metafield->node->key === ShopifyMetafieldKey::PaymentSource->value) {
                                     $paymentSource = ShopifyPaymentSourceEnum::tryFrom($metafield->node->value);
                                 }
                             }
