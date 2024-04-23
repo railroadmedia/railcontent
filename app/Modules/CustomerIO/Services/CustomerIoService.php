@@ -8,11 +8,7 @@ use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Events\CustomerCreated;
 use App\Modules\CustomerIO\Events\CustomerUpdated;
 use App\Modules\CustomerIO\Models\Customer;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Log;
-use Psr\Container\NotFoundExceptionInterface;
-use Psr\Container\ContainerExceptionInterface;
-use InvalidArgumentException;
 use Throwable;
 
 class CustomerIoService
@@ -301,7 +297,7 @@ class CustomerIoService
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
-         * @var $customer Customer
+         * @var Customer $customer
          */
         $customer =
             Customer::onWriteConnection()
