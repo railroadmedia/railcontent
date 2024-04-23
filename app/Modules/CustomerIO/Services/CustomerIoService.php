@@ -8,7 +8,11 @@ use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Events\CustomerCreated;
 use App\Modules\CustomerIO\Events\CustomerUpdated;
 use App\Modules\CustomerIO\Models\Customer;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Log;
+use Psr\Container\NotFoundExceptionInterface;
+use Psr\Container\ContainerExceptionInterface;
+use InvalidArgumentException;
 use Throwable;
 
 class CustomerIoService
@@ -51,13 +55,13 @@ class CustomerIoService
          */
         $customer =
             Customer::query()
-                ->where([
-                    'uuid' => $id,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->firstOrFail();
+            ->where([
+                'uuid' => $id,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->firstOrFail();
 
         if ($includeExternalAttributes) {
             $externalCustomerData = $this->customerIoApiGateway->getCustomer(
@@ -88,13 +92,13 @@ class CustomerIoService
          */
         $customer =
             Customer::query()
-                ->where([
-                    'user_id' => $userId,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->firstOrFail();
+            ->where([
+                'user_id' => $userId,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->firstOrFail();
 
         return $customer;
     }
@@ -117,13 +121,13 @@ class CustomerIoService
          */
         $customer =
             Customer::query()
-                ->where([
-                    'user_id' => $userId,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->firstOrFail();
+            ->where([
+                'user_id' => $userId,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->firstOrFail();
 
         $customerActivities = $this->customerIoApiGateway->getCustomerActivities(
             $accountConfigData['app_api_key'],
@@ -301,13 +305,13 @@ class CustomerIoService
          */
         $customer =
             Customer::onWriteConnection()
-                ->where([
-                    'email' => $lookupEmail,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->first();
+            ->where([
+                'email' => $lookupEmail,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         if (empty($customer)) {
             $customer = $this->createCustomer(
@@ -361,13 +365,13 @@ class CustomerIoService
          */
         $customer =
             Customer::onWriteConnection()
-                ->where([
-                    'user_id' => $userId,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->first();
+            ->where([
+                'user_id' => $userId,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         if (empty($customer)) {
             // There may be a customer entry under the users email only with no user id so we should sync that one
@@ -401,13 +405,13 @@ class CustomerIoService
 
         $customer =
             Customer::query()
-                ->where([
-                    'user_id' => $userId,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->first();
+            ->where([
+                'user_id' => $userId,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         if (!$customer) {
             Log::info("User $userId does not exist in the customer io workspace '$accountName'");
@@ -424,13 +428,13 @@ class CustomerIoService
     }
 
     /**
-     * @param $email
-     * @param $formNameToProcess
-     * @param $requestParams
-     * @return array
-     * @throws Throwable
+     * @param string $email
+     * @param string $formNameToProcess
+     * @param array $requestParams
+     * @return array|void
+     * @throws Exception
      */
-    public function processForm($email, $formNameToProcess, $requestParams)
+    public function processForm(string $email, string $formNameToProcess, array $requestParams): array
     {
         $allConfiguredForms = config('customer-io.forms.' . config('customer-io.brand'), []);
 
@@ -441,26 +445,32 @@ class CustomerIoService
                 foreach ($formConfig['accounts_to_sync'] as $accountName) {
                     $accountConfigData = $this->getAccountConfigData($accountName);
 
-                    /**
-                     * @var $customer Customer
-                     */
+                    /** @var Customer $customer */
                     $customer =
                         Customer::onWriteConnection()
-                            ->where([
-                                'email' => $email,
-                                'workspace_name' => $accountConfigData['workspace_name'],
-                                'workspace_id' => $accountConfigData['workspace_id'],
-                                'site_id' => $accountConfigData['site_id'],
-                            ])
-                            ->first();
+                        ->where([
+                            'email' => $email,
+                            'workspace_name' => $accountConfigData['workspace_name'],
+                            'workspace_id' => $accountConfigData['workspace_id'],
+                            'site_id' => $accountConfigData['site_id'],
+                        ])
+                        ->first();
+
+                    $customAttributeNames = array_keys($formConfig['custom_attributes']);
+                    $customAttributes = [];
+                    foreach ($requestParams as $param => $value) {
+                        if (in_array($param, $customAttributeNames)) {
+                            $customAttributes[$param] = $value;
+                        }
+                    }
 
                     if (empty($customer)) {
-                        $customer = $this->createCustomer($email, $accountName, $formConfig['custom_attributes']);
+                        $customer = $this->createCustomer($email, $accountName, $customAttributes);
                     } else {
                         $customer = $this->updateCustomer(
                             $customer,
                             $accountName,
-                            $formConfig['custom_attributes']
+                            $customAttributes
                         );
                     }
 
@@ -546,26 +556,26 @@ class CustomerIoService
              */
             $customer =
                 Customer::query()
-                    ->where([
-                        'uuid' => $uuid,
-                        'workspace_name' => $accountConfigData['workspace_name'],
-                        'workspace_id' => $accountConfigData['workspace_id'],
-                        'site_id' => $accountConfigData['site_id'],
-                    ])
-                    ->first();
+                ->where([
+                    'uuid' => $uuid,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
+                ->first();
         } else {
             /**
              * @var $customer Customer
              */
             $customer =
                 Customer::query()
-                    ->where([
-                        'email' => $email,
-                        'workspace_name' => $accountConfigData['workspace_name'],
-                        'workspace_id' => $accountConfigData['workspace_id'],
-                        'site_id' => $accountConfigData['site_id'],
-                    ])
-                    ->first();
+                ->where([
+                    'email' => $email,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
+                ->first();
 
             if (empty($customer)) {
                 $customer = $this->createCustomer($email, $accountName, []);
@@ -617,13 +627,13 @@ class CustomerIoService
          */
         $customer =
             Customer::query()
-                ->where([
-                    'user_id' => $userId,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->first();
+            ->where([
+                'user_id' => $userId,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         if (!empty($customer)) {
             $this->customerIoApiGateway->createEvent(
@@ -669,13 +679,13 @@ class CustomerIoService
          */
         $customer =
             Customer::query()
-                ->where([
-                    'email' => $customerEmail,
-                    'workspace_name' => $accountConfigData['workspace_name'],
-                    'workspace_id' => $accountConfigData['workspace_id'],
-                    'site_id' => $accountConfigData['site_id'],
-                ])
-                ->first();
+            ->where([
+                'email' => $customerEmail,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         if (empty($customer)) {
             $customer = $this->createCustomer($customerEmail, $accountName);
@@ -704,10 +714,12 @@ class CustomerIoService
     {
         $accountConfig = config('customer-io.accounts')[$accountName] ?? [];
 
-        if (empty($accountConfig) ||
+        if (
+            empty($accountConfig) ||
             empty($accountConfig['workspace_name']) ||
             empty($accountConfig['workspace_id']) ||
-            empty($accountConfig['site_id'])) {
+            empty($accountConfig['site_id'])
+        ) {
             // incorrect config, error
             throw new Exception(
                 'Failed to connect to customer.io account, no config exists for account name: ' . $accountName
@@ -803,8 +815,8 @@ class CustomerIoService
         if (empty($primaryCustomer) || empty($secondaryCustomer)) {
             throw new Exception(
                 'Could not merge customer ids because one is missing from the database. ' .
-                '$primaryCustomerId:' . $primaryCustomerId .
-                ' - $secondaryCustomerId:' . $secondaryCustomerId . ' - $accountName: ' . $accountName
+                    '$primaryCustomerId:' . $primaryCustomerId .
+                    ' - $secondaryCustomerId:' . $secondaryCustomerId . ' - $accountName: ' . $accountName
             );
         }
 
@@ -834,8 +846,8 @@ class CustomerIoService
             error_log($exception);
             error_log(
                 'Failed to merge customer.io customers. Secondary customer will not be deleted from database.' .
-                '$primaryCustomerId:' . $primaryCustomerId .
-                ' - $secondaryCustomerId:' . $secondaryCustomerId . ' - $accountName: ' . $accountName
+                    '$primaryCustomerId:' . $primaryCustomerId .
+                    ' - $secondaryCustomerId:' . $secondaryCustomerId . ' - $accountName: ' . $accountName
             );
 
             return false;
