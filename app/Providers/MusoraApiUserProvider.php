@@ -19,6 +19,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
