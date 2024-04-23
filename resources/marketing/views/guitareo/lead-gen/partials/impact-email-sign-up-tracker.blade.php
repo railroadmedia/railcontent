@@ -10,7 +10,7 @@
     }
 
     function emailSignUpConversionTrackerForImpactProvider() {
-        var email = $('.infusion-field').find('input').val();
+        var email = document.getElementById('sign-up-email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('guitareo_'.concat(email))
 

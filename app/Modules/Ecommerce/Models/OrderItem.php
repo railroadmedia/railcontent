@@ -3,7 +3,9 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Ecommerce\database\factories\OrderItemFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,10 +28,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class OrderItem extends Model
 {
+    use HasFactory;
     use CanSaveWithoutUpdatedAt;
 
     protected $table = 'ecommerce_order_items';
     protected $primaryKey = 'id';
+
+    protected static function newFactory(): OrderItemFactory
+    {
+        return OrderItemFactory::new();
+    }
 
     public function order(): BelongsTo
     {

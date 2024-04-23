@@ -288,8 +288,7 @@
 
                         <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
                             brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
-                            @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
-                            user-id="{{ auth()->id() }}"></content-catalogue>
+                            @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"></content-catalogue>
                     </div>
                 </div>
             </div>

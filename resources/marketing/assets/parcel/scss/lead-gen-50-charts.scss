@@ -126,6 +126,7 @@ img {
 }
 
 .play-button {
+    display: inline-block;
   cursor: pointer;
   outline: none;
   transition: opacity .3s;
@@ -278,8 +279,8 @@ img {
   }
 }
 
-.infusion-form input,
-.infusion-form button {
+.ajax-form input,
+.ajax-form button {
   font: 400 18px/45px $opensans;
   height: 45px;
   color: #999;
@@ -301,7 +302,7 @@ img {
   }
 }
 
-.infusion-form button {
+.ajax-form button {
   font-family: $bebas;
   text-transform: uppercase;
   transition: background-color .3s;

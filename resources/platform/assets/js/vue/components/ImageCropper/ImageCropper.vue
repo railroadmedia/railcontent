@@ -14,7 +14,7 @@ import SquareStencil from "./SquareStencil.vue";
 
 const props = defineProps({
   selectedImage: {
-    type: Blob,
+    type: String, //base64 string
     default: null,
   },
   type: {

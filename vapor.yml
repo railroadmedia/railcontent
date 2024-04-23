@@ -25,6 +25,7 @@ environments:
         queues:
           - musora-web-platform-production: 50
           - commandmusora-web-platform-production: 3
+          - command-twomusora-web-platform-production: 3
         cache: musora-production-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -34,7 +35,7 @@ environments:
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
-    pre-production: # deploys the master branch
+    pre-production: # deploys the main branch
         domain:
             - 'pre-production.musora.com'
             - 'pre-production.drumeo.com'
@@ -54,6 +55,7 @@ environments:
         queues:
           - musora-web-platform-pre-production
           - commandmusora-web-platform-pre-production: 20
+          - command-twomusora-web-platform-pre-production: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -84,6 +86,7 @@ environments:
         queues:
           - musora-web-platform-beta-testing: 10
           - commandmusora-web-platform-beta-testing: 20
+          - command-twomusora-web-platform-beta-testing: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -113,6 +116,7 @@ environments:
         queues:
           - musora-web-platform-web-staging-one
           - commandmusora-web-platform-web-staging-one: 20
+          - command-twomusora-web-platform-web-staging-one: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -142,6 +146,7 @@ environments:
         queues:
           - musora-web-platform-web-staging-two
           - commandmusora-web-platform-web-staging-two: 20
+          - command-twomusora-web-platform-web-staging-two: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -171,6 +176,7 @@ environments:
         queues:
           - musora-web-platform-web-staging-three
           - commandmusora-web-platform-web-staging-three: 20
+          - command-twomusora-web-platform-web-staging-three: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -200,6 +206,7 @@ environments:
         queues:
           - musora-web-platform-web-staging-four
           - commandmusora-web-platform-web-staging-four: 20
+          - command-twomusora-web-platform-web-staging-four: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -229,6 +236,7 @@ environments:
         queues:
           - musora-web-platform-web-staging-five
           - commandmusora-web-platform-web-staging-five: 20
+          - command-twomusora-web-platform-web-staging-five: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -258,6 +266,7 @@ environments:
         queues:
           - musora-web-platform-app-staging-one
           - commandmusora-web-platform-app-staging-one: 20
+          - command-twomusora-web-platform-app-staging-one: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -287,6 +296,7 @@ environments:
         queues:
           - musora-web-platform-app-staging-two
           - commandmusora-web-platform-app-staging-two: 20
+          - command-twomusora-web-platform-app-staging-two: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -316,6 +326,7 @@ environments:
         queues:
           - musora-web-platform-app-staging-three
           - commandmusora-web-platform-app-staging-three: 20
+          - command-twomusora-web-platform-app-staging-three: 20
         cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'

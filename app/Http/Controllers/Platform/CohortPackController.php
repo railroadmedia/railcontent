@@ -33,7 +33,7 @@ class CohortPackController
         CohortService $cohortService,
         ContentService $contentService,
         UserAccessPermissionsService $userAccessPermissionsService,
-        ProductService $productService,
+        ProductService $productService
     ) {
         $this->cohortService = $cohortService;
         $this->contentService = $contentService;
@@ -100,7 +100,7 @@ class CohortPackController
             'cohort' => $cohort,
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
-            'purchased' => $purchased,
+            'purchased' => $purchased
         ]);
     }
 

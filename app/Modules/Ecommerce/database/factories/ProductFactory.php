@@ -7,6 +7,7 @@ use App\Modules\Content\database\factories\PermissionFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -84,7 +85,7 @@ class ProductFactory extends Factory
                 $attributes['digital_access_permission_names'] = '["Musora Only Songs Membership"]';
                 break;
             default:
-                throw new \Exception("Not implemented");
+                throw new Exception("Not implemented");
         }
         return Product::factory()->create($attributes);
     }
@@ -114,4 +115,107 @@ class ProductFactory extends Factory
         return Product::factory()->create($attributes);
     }
 
+    /**
+     * Create a new product as configured in production, for the given sku.
+     *
+     * @throws Exception
+     */
+    public static function createProductForSku(string $sku): Product
+    {
+        return match ($sku) {
+            "drumeo-base-monthly-recurring-7-day-trial-membership" => Product::create([
+                'brand' => "drumeo",
+                'name' => "Drumeo Monthly Membership | With 7-Day Trial",
+                'sku' => "drumeo-base-monthly-recurring-7-day-trial-membership",
+                'inventory_control_sku' => "17001",
+                'fulfillment_sku' => "membership",
+                'price' => 25.00,
+                'type' => "digital subscription",
+                'active' => 1,
+                'category' => "NULL",
+                'description' => "7 days free, then $25 / month. Easy to cancel anytime. Includes access to Drumeo’s step-by-step method, lessons from legendary artists, and unlimited personal support.",
+                'thumbnail_url' => "'https' =>//d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
+                'sales_page_url' => null,
+                'is_physical' => 0,
+                'weight' => 0.00,
+                'subscription_interval_type' => "month",
+                'subscription_interval_count' => 1,
+                'stock' => 999999,
+                'min_stock_level' => 0,
+                'public_stock_count' => 0,
+                'auto_decrement_stock' => 0,
+                'digital_access_permission_names' => "[\"Musora Basic Membership\"]",
+                'digital_access_type' => "basic content access",
+                'digital_access_time_interval_type' => "day",
+                'digital_access_time_type' => "recurring",
+                'digital_access_time_interval_length' => 7,
+                'digital_membership_access_expiration_date' => null,
+                'shopify_id' => 47070845370644,
+                'note' => null,
+            ]),
+            "DLM-Trial-1-month" => Product::create([
+                'brand' => "drumeo",
+                'name' => "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                'sku' => "DLM-Trial-1-month",
+                'inventory_control_sku' => "17001",
+                'fulfillment_sku' => "membership",
+                'price' => 30.00,
+                'type' => "digital subscription",
+                'active' => 1,
+                'category' => "NULL",
+                'description' => "7 days free, then $30 / month. Easy to cancel anytime. Includes access to Drumeo’s step-by-step method, lessons from legendary artists, and unlimited personal support. As a “+” member, you’ll also get access to 5000+ professionally transcribed songs.",
+                'thumbnail_url' => "'https' =>//d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
+                'sales_page_url' => null,
+                'is_physical' => 0,
+                'weight' => 0.00,
+                'subscription_interval_type' => "month",
+                'subscription_interval_count' => 1,
+                'stock' => 999999,
+                'min_stock_level' => 0,
+                'public_stock_count' => 0,
+                'auto_decrement_stock' => 0,
+                'digital_access_permission_names' => "[\"Musora Basic Membership\"]",
+                'digital_access_type' => "basic content access",
+                'digital_access_time_interval_type' => "day",
+                'digital_access_time_type' => "recurring",
+                'digital_access_time_interval_length' => 7,
+                'digital_membership_access_expiration_date' => null,
+                'shopify_id' => 47070758797588,
+                'note' => null,
+            ]),
+            "DLM-1-month" => Product::create([
+                'brand' => "drumeo",
+                'name' => "Drumeo+ Monthly Membership: Includes Songs",
+                'sku' => "DLM-1-month",
+                'inventory_control_sku' => "17001",
+                'fulfillment_sku' => null,
+                'price' => 30.00,
+                'type' => "digital subscription",
+                'active' => 1,
+                'category' => "NULL",
+                'description' => "Access to Drumeo’s library of lessons by legendary coaches, step-by-step method, and a personal mentor for support and guidance. As a “+” member you also get access to thousands of professionally transcribed songs.",
+                'thumbnail_url' => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
+                'sales_page_url' => "/",
+                'is_physical' => 0,
+                'weight' => 0.00,
+                'subscription_interval_type' => "month",
+                'subscription_interval_count' => 1,
+                'stock' => 999999,
+                'min_stock_level' => 0,
+                'public_stock_count' => 0,
+                'auto_decrement_stock' => 0,
+                'digital_access_permission_names' => "[\"Drumeo Edge\",\"Musora Plus Membership\"]",
+                'digital_access_type' => "all content access",
+                'digital_access_time_interval_type' => "month",
+                'digital_access_time_type' => "recurring",
+                'digital_access_time_interval_length' => 1,
+                'digital_membership_access_expiration_date' => null,
+                'shopify_id' => 47070758240532,
+                'note' => null,
+            ]),
+            default => throw new Exception(
+                sprintf("sku %s has not been configured. Please update createProductForSku to include it.", $sku)
+            ),
+        };
+    }
 }

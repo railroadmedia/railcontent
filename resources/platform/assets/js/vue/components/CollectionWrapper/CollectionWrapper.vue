@@ -7,7 +7,7 @@
 
         <transition appear name="fade">
             <!-- Delete contentType prop after May 6th -->
-            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType" >
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
@@ -185,6 +185,10 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    noResultsMessage: {
+        type: String,
+        default: '',
+    },
 });
 
 const collectionStore = useCollectionStore();
@@ -226,6 +230,10 @@ const includedTypes = computed(() => {
 })
 
 //Collection type reactives
+const isRecommendation = computed(() => {
+    return props.collectionType === 'Recommendation';
+})
+
 const isArchives = computed(() => {
     return props.collectionType === 'recording';
 })
@@ -239,7 +247,7 @@ const isCoach = computed(() => {
 })
 
 const isSong = computed(() => {
-    return props.collectionType === 'song';
+    return props.collectionType === 'song' || (isRecommendation.value && getActiveTab.value === 'Songs');
 })
 
 const isCourse = computed(() => {
@@ -296,7 +304,7 @@ const isThreads = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isWorkout.value && !isChallenge.value  && props.collectionType;
+    return !isRecommendation.value && !isWorkout.value && !isChallenge.value  && props.collectionType;
 })
 
 const showGroupBy = computed(() => {

@@ -12,6 +12,7 @@ use App\Modules\Content\Services\CohortService;
 use App\Modules\Content\Services\LearningPathsService;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
@@ -175,8 +176,8 @@ class HomePageController extends BaseController
         $newContent = $this->getNewContents();
 
         $workoutsContent = $this->getWorkoutsContents();
-        if (config('railcontent.enable_recsys', false)) {
-            $recommendedContent = $this->getSongRecommendations();
+        if(FeatureFlagging::accessible('recsys', user())) {
+            $recommendedContent = $this->getAllRecommentations();
         } else {
             $recommendedContent = new ContentFilterResultsEntity([]);
         }
@@ -611,14 +612,12 @@ class HomePageController extends BaseController
     /**
      * @return ContentFilterResultsEntity
      */
-    private function getSongRecommendations()
+    private function getAllRecommentations()
     {
-        return $this->contentService->getRecommendationsByContentType(
+        return $this->contentService->getRecommendedContent(
             user()->id,
             brand(),
-            ContentTypes::newContentTypes(),
-            RecommenderSection::Song,
-            true
+            pageSize: 50,
         );
     }
 

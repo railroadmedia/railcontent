@@ -363,6 +363,7 @@ return [
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
             \App\Decorators\Comments\CommentUserDecorator::class,
             \App\Decorators\Comments\CommentLikesUserDecorator::class,
+            \App\Decorators\UrlsDecorator::class,
         ],
         'comment_likes' => [
             \App\Decorators\Content\ContentCommentLikesUserDecorator::class,
@@ -1102,14 +1103,37 @@ return [
                 ],
             ],
             'recommended' => [
-                'name' => 'Recommended For You',
-                'shortname' => 'Recommenations',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'description' => "",
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'allowableFiltersMobileV2' => [],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'ALL',
+                        'short_name' => 'ALL',
+                        'use_recommended_endpoint' => true,
+                        'is_group_by' => true,
+                        'value' => ['Recommended']
+                    ],
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'SONGS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,song']
+                    ],
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,lesson']
+                    ],
+                ]
             ],
             'pack' => [
                 'allowableFilters' => ['difficulty', 'style', 'essentials','theory', 'lifestyle'],
@@ -1544,14 +1568,37 @@ return [
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
-                'name' => 'Recommended For You',
-                'shortname' => 'Recommenations',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'description' => "",
                 'allowableFilters' => [],
                 'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'ALL',
+                        'short_name' => 'ALL',
+                        'use_recommended_endpoint' => true,
+                        'is_group_by' => true,
+                        'value' => ['Recommended']
+                    ],
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'SONGS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,song']
+                    ],
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,lesson']
+                    ],
+                ],
             ],
             'pack' => [
                 'allowableFilters' => [],
@@ -1850,14 +1897,37 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'recommended' => [
-                'name' => 'Recommended For You',
-                'shortname' => 'Recommenations',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'description' => "",
                 'allowableFilters' => [],
                 'allowableFiltersMobileV2' => [],
                 'sortBy' => '-published_on',
                 'allowableFiltersMobile' => [],
+                'tabs' => [
+                    [
+                        'name' => 'ALL',
+                        'short_name' => 'ALL',
+                        'use_recommended_endpoint' => true,
+                        'is_group_by' => true,
+                        'value' => ['Recommended']
+                    ],
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'SONGS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,song']
+                    ],
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,lesson']
+                    ],
+                ],
             ],
             'pack' => [
                 'allowableFilters' => [],
@@ -2204,14 +2274,37 @@ return [
                 'modalText' => 'Challenges are a collection of Workout-style videos that build your skills one step at a time. They help you develop broader musical skills at a manageable pace — usually over a few days.',
             ],
             'recommended' => [
-                'name' => 'Recommended For You',
-                'shortname' => 'Recommenations',
+                'name' => 'Inspired By Your Activity',
+                'shortname' => 'Inspired By Your Activity',
                 'icon' => 'fas fa-star',
-                'description' => "Here's a list of 50 lessons we think you'd be interested! Items are refreshed daily based on your activitiy and what other similar users play.",
+                'description' => "",
                 'allowableFilters' => [],
                 'allowableFiltersMobileV2' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+                'tabs' => [
+                    [
+                        'name' => 'ALL',
+                        'short_name' => 'ALL',
+                        'use_recommended_endpoint' => true,
+                        'is_group_by' => true,
+                        'value' => ['Recommended']
+                    ],
+                    [
+                        'name' => 'Songs',
+                        'short_name' => 'SONGS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,song']
+                    ],
+                    [
+                        'name' => 'Lessons',
+                        'short_name' => 'LESSONS',
+                        'is_required_field' => true,
+                        'use_recommended_endpoint' => true,
+                        'value' => ['filter,lesson']
+                    ],
+                ]
             ],
             'pack' => [
                 'allowableFilters' => [],
@@ -2963,8 +3056,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105],
-    'enable_recsys' => false,
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106],
     'difficulty_map' =>
         [
             '1' => 'Introductory',
@@ -3052,4 +3144,12 @@ return [
             ],
         ],
     'filter_version' => 1,
+    'recsys' => [
+        'url' => env('HUGGINGFACE_URL', 'https://MusoraProductDepartment-recsys-alt-1.hf.space/recommend'),
+        'backup_url' => env('HUGGINGFACE_BACKUP_URL', 'https://MusoraProductDepartment-recsys-alt-2.hf.space/recommend'),
+        'token' => env('HUGGINGFACE_TOKEN', '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'),
+        'use_caching' => true,
+        'remove_seen_content' => false,
+        'use_fast_implementation' => false,
+    ]
 ];

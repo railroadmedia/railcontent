@@ -43,6 +43,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
     }
+    public function promoWO()
+    {
+        return view('pianote.sales.welcome-offer', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
     public function trial()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
@@ -340,5 +344,21 @@ class SalesController extends BaseController
         );
 
         return response()->json(['success' => true]);
+    }
+
+    public function betterTechnique()
+    {
+        $productId = 740;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('pianote.products.30-days-to-better-technique', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
     }
 }

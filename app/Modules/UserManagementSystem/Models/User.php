@@ -326,7 +326,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'guitareo_onboarding_skip_setup',
         'singeo_onboarding_skip_setup',
         'use_legacy_video_player',
-        'needs_logout'
+        'needs_logout',
+        'password',
+        'email',
+        'revenuecat_origin_app_user_id'
     ];
 
 
@@ -981,12 +984,27 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         );
     }
 
-    public function isEnrolledIntoCohort()
+    public function isEnrolledIntoCohort($cohortPermissionsIds = [])
     {
-        $cohortPermissionsIds = config('railcontent.cohort_permission_ids',[]);
+        if(empty($cohortPermissionsIds)) {
+            $cohortPermissionsIds = config('railcontent.cohort_permission_ids', []);
+        }
         return $this->hasMany(
             UserAccessPermission::class,
             "user_id"
         )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
+    }
+
+    public function isMusoraAccount() : bool
+    {
+        $email = $this->email;
+        if (!$email) {
+            return false;
+        }
+        return str_contains($email, 'drumeo.com') ||
+            str_contains($email, 'guitareo.com') ||
+            str_contains($email, 'pianote.com') ||
+            str_contains($email, 'singeo.com') ||
+            str_contains($email, 'musora.com');
     }
 }

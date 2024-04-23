@@ -159,7 +159,7 @@
         ])
         @include('musora.product.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
-            "linkUrl" => "https://help.drumeo.com/",
+            "linkUrl" => "https://help.musora.com/",
             "externalLink" => false
         ])
         <span class="shim"></span>

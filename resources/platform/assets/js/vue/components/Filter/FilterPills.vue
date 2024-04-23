@@ -26,8 +26,8 @@
             default: [],
         },
         selectedFilters: {
-            type: Object,
-            default: {},
+            type: Array,
+            default: () => [],
         },
     })
 
@@ -58,7 +58,7 @@
     })
 
     const showPills = computed(() => {
-        return Object.keys(props.selectedFilters).length !== 0;
+        return props.selectedFilters.length !== 0;
     })
 </script>
 

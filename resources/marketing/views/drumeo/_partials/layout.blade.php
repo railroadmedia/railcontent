@@ -78,7 +78,7 @@
             ],
             "FAQs" => [
                 "iconClass" => "fas fa-fw fa-question",
-                "url" => 'https://help.drumeo.com/',
+                "url" => 'https://help.musora.com/',
                 "target" => '_parent'
             ]
         ]

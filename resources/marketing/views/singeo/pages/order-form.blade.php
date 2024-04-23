@@ -81,7 +81,7 @@
                             We're always here to help
                         </p>
                         <p class="x-tiny text-white">
-                            <a target="_blank" class="text-white" href="https://help.singeo.com/">See our FAQs & answers</a>, or<br>
+                            <a target="_blank" class="text-white" href="https://help.musora.com/">See our FAQs & answers</a>, or<br>
                             <a target="_blank" class="text-white" href="{{ get_musora_brand_base_url() }}/contact">click here to contact us directly</a>.
                         </p>
                     </div>

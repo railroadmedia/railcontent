@@ -476,8 +476,8 @@ a:focus {
   }
 }
 
-.infusion-form input,
-.infusion-form button {
+.ajax-form input,
+.ajax-form button {
   font: 400 18px/45px $opensans;
   height: 45px;
   color: #999;
@@ -499,7 +499,7 @@ a:focus {
   }
 }
 
-.infusion-form button {
+.ajax-form button {
   font-family: $bebas;
   text-transform: uppercase;
   margin: 0 auto 15px;

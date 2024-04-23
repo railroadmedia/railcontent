@@ -3,6 +3,12 @@
     if($hasStartedLessons && $lessonType !== 'routine'){
         $showInProgress = true;
     }
+
+    $recommendationLinks = new stdClass();
+    $recommendationLinks->drumeo = 'https://www.musora.com/drumeo/forums/drumeo-website-feedback/6/16436/16436?page=1&sortby_val=published_on#post349083';
+    $recommendationLinks->pianote = 'https://www.musora.com/pianote/forums/platform-update-feedback-discussion/5/5348/5348?page=1&sortby_val=published_on#post127612';
+    $recommendationLinks->guitareo = 'https://www.musora.com/guitareo/forums/website-update-and-feedback-discussion/6/3185/3185?page=1&sortby_val=published_on#post45772';
+    $recommendationLinks->singeo = 'https://www.musora.com/singeo/forums/platform-update-feedback-discussion/5/919/919?page=1&sortby_val=published_on#post48436';
 @endphp
 
 @extends('partials.layout')
@@ -47,103 +53,137 @@
 
 @section('content')
 
-    @component('partials._header-banner',
-        ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
-        @slot('content')
-            <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    @if($catalogueMeta['name'] == 'Q&A')
-                        <musora-icon icon-name="light-bulb-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Routines')
-                        <musora-icon icon-name="routines-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Quick Tips')
-                        <musora-icon icon-name="light-bulb-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Songs')
-                        <musora-icon icon-name="headphones-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Bootcamps')
-                        <musora-icon icon-name="keys-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
-                        <musora-icon icon-name="podcast-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Student Focus')
-                        <musora-icon icon-name="person-plus-filled"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Q & A')
-                        <musora-icon icon-name="question-mark-circle"
-                                        class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Student Reviews')
-                        <musora-icon icon-name="person-plus-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Chords & Scales')
-                        <musora-icon icon-name="guitar-tabs-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Archives')
-                        <musora-icon icon-name="archives-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Play Alongs')
-                        <musora-icon icon-name="eigth-notes-filled"
-                                    class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @elseif($catalogueMeta['name'] == 'New Content')
-                        <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
-                    @elseif($catalogueMeta['name'] == 'Subscribed')
-                        <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
-                    @elseif($catalogueMeta['name'] == 'Song Tutorials')
-                        <musora-icon icon-name="play-progress-filled"
-                                class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @elseif($catalogueMeta['name'] == 'Rudiments')
-                        <musora-icon icon-name="drum-filled"
-                                    class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
-                        </musora-icon>
-                    @else
-                        <musora-icon icon-name="academic-cap-filled"
-                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    @endif
-                    <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
-                </h1>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    {{ $catalogueMeta['description'] }}
-                </p>
+    @if($lessonType === 'Recommendation')
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => 'Inspired By Your Activity',
+                ],
+            ]
+        ])
+
+        <div class="tw-container tw-mx-auto tw-mt-[30px] tw-px-4 lg:tw-px-8">
+            <div class="tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-items-start tw-flex tw-justify-between tw-pb-5">
+                <div class="tw-text-2xl md:tw-text-[32px] dark:tw-text-white tw-flex">
+                    <span class="tw-font-bold">Inspired By Your Activity</span>
+                    <div class="tw-group tw-relative">
+                        <musora-icon icon-name="info" class="tw-text-[#65656B] dark:tw-text-[#80A0B9] tw-w-[25px] tw-h-[25px] tw-ml-1" onclick="openModal()"></musora-icon>
+
+                        <div class="tw-left-full tw-top-0 tw-ml-2 tw-absolute tw-p-[15px] tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-z-30 tw-min-w-max tw-hidden group-hover:tw-block">
+                            <div class="tw-max-w-[343px]">
+                                <div class="tw-flex tw-flex-col tw-h-full">
+                                    <div class="tw-flex tw-grow tw-items-center">
+                                        <span>Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
+                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-mr-1"></musora-icon>
+                    Experimental Feature
+                </a> --}}
             </div>
-        @endslot
+        </div>
+    @else
+        @component('partials._header-banner',
+            ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',])
+            @slot('content')
+                <div class="tw-inline-tw-flex tw-w-full tw-flex-col tw-pr-4">
+                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                        @if($catalogueMeta['name'] == 'Q&A')
+                            <musora-icon icon-name="light-bulb-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Routines')
+                            <musora-icon icon-name="routines-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Quick Tips')
+                            <musora-icon icon-name="light-bulb-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Songs')
+                            <musora-icon icon-name="headphones-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Bootcamps')
+                            <musora-icon icon-name="keys-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'The Pianote Podcast')
+                            <musora-icon icon-name="podcast-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Student Focus')
+                            <musora-icon icon-name="person-plus-filled"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Q & A')
+                            <musora-icon icon-name="question-mark-circle"
+                                            class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Student Reviews')
+                            <musora-icon icon-name="person-plus-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Chords & Scales')
+                            <musora-icon icon-name="guitar-tabs-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Archives')
+                            <musora-icon icon-name="archives-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Play Alongs')
+                            <musora-icon icon-name="eigth-notes-filled"
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                            </musora-icon>
+                        @elseif($catalogueMeta['name'] == 'New Content')
+                            <i class="fas fa-star tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                        @elseif($catalogueMeta['name'] == 'Subscribed')
+                            <i class="fas fa-bell tw-text-{{ $brand }} tw-mr-2 tw-text-2xl"></i>
+                        @elseif($catalogueMeta['name'] == 'Song Tutorials')
+                            <musora-icon icon-name="play-progress-filled"
+                                    class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                            </musora-icon>
+                        @elseif($catalogueMeta['name'] == 'Rudiments')
+                            <musora-icon icon-name="drum-filled"
+                                        class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}">
+                            </musora-icon>
+                        @else
+                            <musora-icon icon-name="academic-cap-filled"
+                                            class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
+                        @endif
+                        <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
+                    </h1>
+                    <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
+                        {{ $catalogueMeta['description'] }}
+                    </p>
+                </div>
+            @endslot
 
-        @slot('interactionSlot')
-            @if($lessonType === 'student-review' && $brand === 'singeo')
-                @include('partials._student-review-application-singeo')
-            @endif
+            @slot('interactionSlot')
+                @if($lessonType === 'student-review' && $brand === 'singeo')
+                    @include('partials._student-review-application-singeo')
+                @endif
 
-            @if($lessonType === 'student-review' && $brand === 'guitareo')
-                @include('partials._student-review-application-guitareo')
-            @endif
+                @if($lessonType === 'student-review' && $brand === 'guitareo')
+                    @include('partials._student-review-application-guitareo')
+                @endif
 
-            @if($lessonType === 'student-review' && $brand === 'pianote')
-                @include('partials._student-review-application-pianote')
-            @endif
+                @if($lessonType === 'student-review' && $brand === 'pianote')
+                    @include('partials._student-review-application-pianote')
+                @endif
 
-            @if($lessonType === 'student-focus' && $brand === 'drumeo')
-                @include('partials._student-focus-application-drumeo')
-            @endif
+                @if($lessonType === 'student-focus' && $brand === 'drumeo')
+                    @include('partials._student-focus-application-drumeo')
+                @endif
 
-            @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
-                @include('partials._student-collaboration-form')
-            @endif
+                @if($catalogueMeta['name'] == 'Drumeo Monthly Collaborations' && $brand === 'drumeo')
+                    @include('partials._student-collaboration-form')
+                @endif
 
-            @if($lessonType === 'question-and-answer')
-                @include('partials._ask-question-form')
-            @endif
+                @if($lessonType === 'question-and-answer')
+                    @include('partials._ask-question-form')
+                @endif
 
-            @if($lessonType === 'routine')
-                @include('partials._routine-modal')
-            @endif
-        @endslot
-    @endcomponent
-
+                @if($lessonType === 'routine')
+                    @include('partials._routine-modal')
+                @endif
+            @endslot
+        @endcomponent
+    @endif
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">
@@ -174,7 +214,6 @@
                         catalogue-type="grid"
                         no-results-message="Looks like you haven't started any lessons.
             Once you watch a video, it will show up here for you to access later."
-                        :six-wide="true"
                         :pre-loaded-content="{{ json_encode(json_decode($startedLessons)->data) }}"
                         :no-skeleton="{{ json_encode(true) }}"
                     >
@@ -269,97 +308,33 @@
                 :multiple-types="{{ json_encode($isAllContent ?? false) }}"
                 :is-all-content="{{ json_encode($isAllContent ?? false) }}"
                 :hide-filter-icon="{{ json_encode($lessonType === 'routine' ? true : false) }}"
+                :hide-controls="{{ json_encode($lessonType === 'Recommendation' ? true : false) }}"
+                @if($lessonType === 'Recommendation')
+                    endpoint="/railcontent/recommended"
+                    no-results-message="Start your learning journey to help us select the appropriate videos for you."
+                @endif
             ></collection-wrapper>
         @endif
+    </div>
 
-        {{-- Play Alongs Catalogue for Drumeo --}}
-{{--        @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )--}}
-
-{{--            <play-alongs--}}
-{{--                ref="playAlongsVueInstance"--}}
-{{--                content-endpoint="/railcontent/content"--}}
-{{--                theme-color="{{ $brand }}"--}}
-{{--                brand="{{ $brand }}"--}}
-{{--                :pre-loaded-content="{{ $listLessons }}"--}}
-{{--                :session-token="{{ json_encode(railtracker_session_token()) }}"--}}
-{{--                @play="handlePlayAlongsPlay"--}}
-{{--                @pause="handlePlayAlongsPause"--}}
-{{--            ></play-alongs>--}}
-
-{{--        @else--}}
-
-{{--            <transition appear name="fade">--}}
-{{--                <content-catalogue--}}
-{{--                    dusk="content-catalogue"--}}
-{{--                    brand="{{ $brand }}"--}}
-{{--                    theme-color="{{ $brand }}"--}}
-{{--                    user-id="{{ auth()->id() }}"--}}
-{{--                    subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] ?? null }}"--}}
-{{--                    catalogue-name="{{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}"--}}
-{{--                    :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"--}}
-{{--                    content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}"--}}
-{{--                    :use-theme-color="true"--}}
-{{--                    :pre-loaded-content="{{ $listLessons }}"--}}
-{{--                    :is-admin="{{ json_encode(user()->isAdmin()) }}"--}}
-{{--                    :statuses="{{ json_encode($statuses ?? ['published']) }}"--}}
-{{--                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"--}}
-{{--                    :use-url-params="true"--}}
-{{--                    :lock-unowned="true"--}}
-{{--                    :show-loading-animation="true"--}}
-{{--                    no-results-message="There are no {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }} that match those filters. Please remove some filters."--}}
-{{--                    @if($lessonType === 'routine')--}}
-{{--                        catalogue-type="routines"--}}
-{{--                        :infinite-scroll="false"--}}
-{{--                        :paginate="true"--}}
-{{--                        limit="12"--}}
-{{--                    @else--}}
-{{--                        catalogue-type="{{ $lessonType === 'chord-and-scale' ? 'grid' : 'list' }}"--}}
-{{--                        :infinite-scroll="true"--}}
-{{--                        limit="20"--}}
-{{--                    @endif--}}
-{{--                    @if($lessonType === 'quick-tips')--}}
-{{--                        :included-types="{{ json_encode([$lessonType, 'boot-camps']) }}"--}}
-{{--                    @else--}}
-{{--                        :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType) ) }}"--}}
-{{--                    @endif--}}
-{{--                    @if($lessonType === 'student-review' || !empty($isAllContent))--}}
-{{--                        :force-wide-thumbs="true"--}}
-{{--                    @endif--}}
-{{--                    @if(!empty($isAllContent))--}}
-{{--                        :search-bar="true"--}}
-{{--                        search-endpoint="/railcontent/search"--}}
-{{--                        total-results="{{ $totalResults }}"--}}
-{{--                    @endif--}}
-{{--                    @if(!empty($searchTerm))--}}
-{{--                        search-term="{{ $searchTerm }}"--}}
-{{--                    @endif--}}
-{{--                    @if(!empty($sortOverride))--}}
-{{--                        sort-override="{{ $sortOverride }}"--}}
-{{--                    @endif--}}
-{{--                >--}}
-{{--                    @include('partials.bladesora.members.skeletons.catalog-filters', [--}}
-{{--                        "length" => count($catalogueMeta['allowableFilters']),--}}
-{{--                    ])--}}
-{{--                    @if($lessonType === 'routine')--}}
-{{--                        <div class="tw-flex tw-flex-row nmh-1">--}}
-{{--                            @for($i = 0; $i < 4; $i++)--}}
-{{--                                @include('partials.bladesora.members.skeletons.card-item', [--}}
-{{--                                ])--}}
-{{--                            @endfor--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        @for($i = 0; $i < 10; $i++)--}}
-{{--                            @include('partials.bladesora.members.skeletons.list-item', [--}}
-{{--                                "overview" => false,--}}
-{{--                                "showNumbers" => false,--}}
-{{--                                "thumbnailType" => $lessonType === 'song' ? 'square' : 'widescreen'--}}
-{{--                            ])--}}
-{{--                        @endfor--}}
-{{--                    @endif--}}
-{{--                </content-catalogue>--}}
-{{--            </transition>--}}
-
-{{--        @endif--}}
+    <div id="featureModal" class="modal">
+        <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
+            {{-- <div class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-bold tw-text-sm tw-inline-block">
+                <div class="tw-flex tw-items-center">
+                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-ml-1"></musora-icon>
+                    Experimental Feature
+                </div>
+            </div> --}}
+            <p class="tw-my-2 dark:tw-text-white">Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests. </p>
+            <a href="{{ $recommendationLinks->$brand }}" class="tw-font-bebas-neue tw-uppercase tw-flex tw-items-center dark:tw-text-white">
+                Learn More <musora-icon icon-name="right-arrow" class="tw-w-7" ></musora-icon>
+            </a>
+        </div>
     </div>
 
 @endsection
+<script>
+    const openModal = () => {
+        window.openModal('featureModal');
+    }
+</script>
