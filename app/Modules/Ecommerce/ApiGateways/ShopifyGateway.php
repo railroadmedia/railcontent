@@ -179,7 +179,7 @@ class ShopifyGateway
         $this->handleRateLimitBefore();
         $gql = <<<GQL
             query {
-                 orders(first:$limit$cursor, query:"created_at:>=\"$startDateString\" AND created_at:<=\"$endDateString\"$additionalFilter"){
+                 orders(first:$limit$cursor, query:"processed_at:>=\"$startDateString\" AND processed_at:<=\"$endDateString\"$additionalFilter"){
                     nodes {
                         ... on Order {
                             id$additionalFields

@@ -56,13 +56,15 @@ class ShopifySyncService
     public function syncCustomerByUser(
         User $user,
         bool $isRebuildingPermissions = false,
-        bool $skipEventSync = false
+        bool $skipEventSync = false,
+        bool $removeDeletedOrderPermissions = false
     ): void {
         if ($user->shopify_id) {
             $this->syncCustomer(
                 $user->shopify_id,
                 isRebuildingPermissions: $isRebuildingPermissions,
-                skipEventSync: $skipEventSync
+                skipEventSync: $skipEventSync,
+                removeDeletedOrderPermissions: $removeDeletedOrderPermissions
             );
         } else {
             $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
@@ -135,7 +137,7 @@ class ShopifySyncService
         array $productIds,
         string $brand,
         Carbon $processedAt,
-        float $price,
+        float $totalPrice,
         ?float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
         ?string $currency
@@ -158,7 +160,7 @@ class ShopifySyncService
             $productIds,
             $brand,
             $processedAt,
-            $price,
+            $totalPrice,
             $tax,
             $paymentSource,
             $currency
@@ -172,10 +174,10 @@ class ShopifySyncService
         );
         $shopifyOrderId = $orderResource->getAttributes()['id'];
 
-        $amount = number_format($price, 2, '.', '');
+        $amount = number_format($totalPrice, 2, '.', '');
         if ($amount > 0) {
             // format the data for the payment
-            $this->createShopifyOrderTransaction($shopifyOrderId, $amount);
+            $this->createShopifyOrderTransaction($shopifyOrderId, $amount, $processedAt, $paymentSource, $currency);
         }
 
         // STEP 4: sync user products
@@ -187,16 +189,42 @@ class ShopifySyncService
         }
     }
 
-    public function createShopifyOrderTransaction(int $shopifyOrderId, string $amount): void
-    {
+    public function createShopifyOrderTransaction(
+        int $shopifyOrderId,
+        string $amount,
+        Carbon $processedAt,
+        ShopifyPaymentSourceEnum $paymentSource,
+        ?string $currency,
+    ): void {
         $paymentData =
             [
                 "amount" => $amount,
                 "kind" => "sale",
                 // DEV NOTE: this is not documented in Shopify, but it is required
-                "source" => "external"
+                "source" => "external",
+                "processed_at" => $processedAt->toIso8601String(),
+                "gateway" => $paymentSource->value,
+                "currency" => $currency ?? 'USD',
+                "status" => "success",
             ];
-        $orderTransaction = $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+        $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+    }
+
+    /**
+     * Temporarily keep this around for testing purposes
+     */
+    public function createShopifyOrderTransactionOld(
+        int $shopifyOrderId,
+        string $amount,
+    ): void {
+        $paymentData =
+            [
+                "amount" => $amount,
+                "kind" => "sale",
+                // DEV NOTE: this is not documented in Shopify, but it is required
+                "source" => "external",
+            ];
+        $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
     }
 
     /**
@@ -223,7 +251,7 @@ class ShopifySyncService
      * @param int[] $productIds
      * @param string $brand
      * @param Carbon $processedAt
-     * @param float $price
+     * @param float $totalPrice
      * @param float $tax
      * @return array
      */
@@ -233,7 +261,7 @@ class ShopifySyncService
         array $productIds,
         string $brand,
         Carbon $processedAt,
-        float $price,
+        float $totalPrice,
         float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
         ?string $currency
@@ -242,10 +270,10 @@ class ShopifySyncService
             "customer" => ["id" => $customerShopifyId],
             "email" => $this->getEmailForShopify($email),
             "processed_at" => $processedAt->toIso8601String(),
-            "subtotal_price" => number_format($price, 2, '.', ''),
+            "subtotal_price" => number_format($totalPrice - ($tax ?? 0), 2, '.', ''),
             "total_outstanding" => "0.00",
-            "total_price" => number_format($price + ($tax ?? 0), 2, '.', ''),
-            "line_items" => $this->createOrderItems($productIds, $price),
+            "total_price" => number_format($totalPrice, 2, '.', ''),
+            "line_items" => $this->createOrderItems($productIds, $totalPrice),
             "currency" => $currency ?? 'USD',
             "metafields" => [
                 [
