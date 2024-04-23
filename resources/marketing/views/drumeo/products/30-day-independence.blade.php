@@ -720,7 +720,7 @@
                     x-ref="playToLearnVideo"
                     x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
                     x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
-                    data-src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/30-day-independence/30-day-independence-silent-reel.mp4" type="video/mp4" autoplay muted loop playsinline></video>
+                    data-src="https://player.vimeo.com/progressive_redirect/playback/931215529/rendition/540p/file.mp4?loc=external&signature=6bb8c33a63099e10ddedf690bf5a125956bb2e296b8f4ea56e5a48396a90ecb8" type="video/mp4" autoplay muted loop playsinline></video>
             </div>
             </div>
     </section>

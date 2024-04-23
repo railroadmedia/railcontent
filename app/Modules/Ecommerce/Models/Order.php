@@ -3,12 +3,15 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
+use App\Modules\Ecommerce\database\factories\OrderFactory;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use App\Modules\Ecommerce\Models\Traits\HasShopifyMetafields;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -31,11 +34,18 @@ use Modules\UserManagementSystem\Models\User;
  */
 class Order extends Model
 {
+    use HasFactory;
     use CanSaveWithoutUpdatedAt;
     use HasShopifyMetafields;
     use SoftDeletes;
+
     protected $table = 'ecommerce_orders';
     protected $primaryKey = 'id';
+
+    protected static function newFactory(): OrderFactory
+    {
+        return OrderFactory::new();
+    }
 
     public function payments(): BelongsToMany
     {
@@ -87,6 +97,51 @@ class Order extends Model
     public function billingAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'billing_address_id');
+    }
+
+    /**
+     * Query scope to get orders that need to be synced with Shopify, for the given constraints.
+     *
+     * @param  Builder  $query
+     * @param  int|null  $startingId
+     * @param  int|null  $endingId
+     * @param  bool|null  $fresh
+     * @param  Carbon|null  $startCreatedAt
+     * @param  Carbon|null  $endCreatedAt
+     * @return void
+     */
+    public function scopeToSyncWithShopify(
+        Builder $query,
+        ?int $startingId = null,
+        ?int $endingId = null,
+        ?bool $fresh = null,
+        ?Carbon $startCreatedAt = null,
+        ?Carbon $endCreatedAt = null
+    ): void {
+        $query->when(
+            !is_null($startingId) && !is_null($endingId),
+            function (Builder $q) use ($startingId, $endingId) {
+                return $q->whereBetween("id", [$startingId, $endingId]);
+            },
+            function (Builder $q) use ($startingId) {
+                return $q->when(!is_null($startingId), function (Builder $q) use ($startingId) {
+                    return $q->where("id", ">=", $startingId);
+                });
+            },
+        )
+            ->when(!$fresh, function (Builder $q) {
+                return $q->whereNull("shopify_id");
+            })
+            ->when(
+                !is_null($startCreatedAt) && !is_null($endCreatedAt),
+                function (Builder $q) use ($startCreatedAt, $endCreatedAt) {
+                    return $q->whereBetween(
+                        'created_at',
+                        [$startCreatedAt->toDateTimeString(), $endCreatedAt->toDateTimeString()]
+                    );
+                }
+            )
+            ->whereHas('orderItems');
     }
 
     /**

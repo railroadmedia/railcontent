@@ -61,6 +61,7 @@
             transform: translateX(0.2rem);
         }
         .play-button {
+            display: inline-block;
             cursor: pointer;
             outline: none;
             transition: opacity 0.3s;
