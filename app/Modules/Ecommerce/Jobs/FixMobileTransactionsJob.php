@@ -74,7 +74,7 @@ class FixMobileTransactionsJob implements ShouldQueue
                 ' AND (tag:Apple OR tag:Google)',
                 ",email,transactions{id,processedAt},subtotalPriceSet{shopMoney{amount}}, totalPriceSet{shopMoney{amount}}
                 ,cancelledAt,processedAt,currencyCode,metafields(first:10){edges{node{namespace,value,key}}}
-                ,lineItems(first:10){edges{node{id,title,quantity,variant{title,sku}}}}",
+                ,lineItems(first:10){edges{node{id,title,quantity,variant{title,sku}}}},note,tags",
                 $endCursor
             );
 
@@ -106,6 +106,14 @@ class FixMobileTransactionsJob implements ShouldQueue
                                 }
                             }
 
+                            if (!$brand) {
+                                throw new \Exception("Brand not found for order $orderId");
+                            }
+
+                            if (!$paymentSource) {
+                                throw new \Exception("Payment source not found for order $orderId");
+                            }
+
                             $sku = $order->lineItems->edges[0]->node->variant->sku;
                             $productsIds = [$productService->getBySku($sku)->id];
                             $processedAt = Carbon::parse($order->processedAt);
@@ -113,6 +121,9 @@ class FixMobileTransactionsJob implements ShouldQueue
                             $price = $order->subtotalPriceSet->shopMoney->amount;
                             $tax = $order->totalPriceSet->shopMoney->amount - $price;
                             $currency = $order->currencyCode;
+
+                            $note = $order->note;
+                            $tags = $order->tags;
 
                             $shopifySyncService->syncOrder(
                                 $user,
@@ -122,7 +133,9 @@ class FixMobileTransactionsJob implements ShouldQueue
                                 $price,
                                 $tax,
                                 $paymentSource,
-                                $currency
+                                $currency,
+                                $note,
+                                $tags,
                             );
 
                             $shopifyDeleteService->deleteOrder($orderId);

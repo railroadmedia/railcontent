@@ -140,7 +140,9 @@ class ShopifySyncService
         float $totalPrice,
         ?float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency
+        ?string $currency,
+        ?string $notes = null,
+        ?array $tags = null
     ): void {
         Log::debug("Start syncing purchase for user $user->id");
         // STEP 1: Is user synced?
@@ -163,7 +165,9 @@ class ShopifySyncService
             $totalPrice,
             $tax,
             $paymentSource,
-            $currency
+            $currency,
+            $notes,
+            $tags
         );
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
@@ -264,7 +268,9 @@ class ShopifySyncService
         float $totalPrice,
         float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency
+        ?string $currency,
+        ?string $note = null,
+        ?array $tags = null
     ): array {
         $data = [
             "customer" => ["id" => $customerShopifyId],
@@ -290,6 +296,13 @@ class ShopifySyncService
                 ]
             ]
         ];
+
+        if ($note) {
+            $data['note'] = $note;
+        }
+        if ($tags) {
+            $data['tags'] = implode(",", $tags);
+        }
 
         if ($tax) {
             $data['total_tax'] = number_format($tax, 2, '.', '');
