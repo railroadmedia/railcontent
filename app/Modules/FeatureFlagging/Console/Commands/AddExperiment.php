@@ -11,14 +11,18 @@ class AddExperiment extends Command
 
 
 
-    protected $signature = 'featureFlag:addExperiment {name} {--default_value=} {--enabled}';
+    protected $signature = 'featureFlag:addExperiment
+                            {name : name of new Experiment}
+                            {--default_value= : string - Default value, used when no branches exist or the Experiment is disabled}
+                            {--enabled : truthsy values will set the enabled flag to true. Default true}';
+    protected $description = "Add new A/B Testing Experiment";
 
     public function handle(FeatureFlagService $ffService): void
     {
         $ffService->addExperiment(
             $this->argument('name'),
-            default_value: $this->argument('default_value'),
-            enabled: $this->argument('enabled')
+            default_value: $this->option('default_value'),
+            enabled: $this->option('enabled')
         );
     }
 }

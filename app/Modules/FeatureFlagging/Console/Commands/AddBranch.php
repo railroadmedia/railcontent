@@ -11,14 +11,21 @@ class AddBranch extends Command
 
 
 
-    protected $signature = 'featureFlag:addBranch {branchName} {experimentName} {content} {--weight=} {--priority=} {--allow_filter=} {--userid_list=} ';
+    protected $signature = 'featureFlag:addBranch
+                            {name : name of Branch}
+                            {experimentName : name of Parent Experiment}
+                            {content : string - content value}
+                            {--weight= : int - weight value}
+                            {--priority= : int - priority value}
+                            {--allow_filter= : comma separated filters}
+                            {--userid_list= : comma separated userids}';
+    protected $description = "Add new A/B Testing Branch";
 
     public function handle(FeatureFlagService $ffService): void
     {
-        $this->argument('experimentName');
         $experiment = Experiment::whereName($this->argument('experimentName'))->first();
         $ffService->addBranch(
-            $this->argument('branchName'),
+            $this->argument('name'),
             $this->argument('content'),
             $experiment->id,
             priority: $this->option('priority'),
