@@ -87,9 +87,13 @@ class EventTrackingService
             3
         );
 
-        $eventTrackingData = $this->getRefundData($refund, $order, $brand);
-
-        Avo::order_refunded(AvoHelper::defaultEventProperties($eventTrackingData, $user));
+        try {
+            $eventTrackingData = $this->getRefundData($refund, $order, $brand);
+            Avo::order_refunded(AvoHelper::defaultEventProperties($eventTrackingData, $user));
+        } catch (\Exception $e) {
+            // Do not block user flow if event tracking fails
+            \Log::error($e->getMessage());
+        }
     }
 
     private function getProductList(array $lineItems = []): array

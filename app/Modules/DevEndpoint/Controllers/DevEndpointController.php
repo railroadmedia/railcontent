@@ -11,6 +11,7 @@ use Google\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentService;

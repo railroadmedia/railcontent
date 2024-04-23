@@ -2,15 +2,13 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
-use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
-use App\Modules\Ecommerce\Services\EventTrackingService;
+use App\Jobs\WebhookJob;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
+use App\Modules\Ecommerce\Jobs\Shopify\RefundCreatedJob;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
-use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
+use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedUpdateLastTrialDataJob;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
-use App\Modules\Ecommerce\Services\ProductService;
-use App\Modules\Ecommerce\Services\ShopifySyncService;
-use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,16 +16,6 @@ use Illuminate\Support\Facades\Log;
 
 class ShopifyWebHookController extends Controller
 {
-
-    public function __construct(
-        private ShopifySyncService $shopifySyncService,
-        private ProductService $productService,
-        private UserService $userService,
-        private ShopifyGateway $shopifyGateway,
-        private EventTrackingService $eventTrackingService
-    ) {
-    }
-
     public function orderUpdated(Request $request)
     {
         try {
@@ -45,11 +33,17 @@ class ShopifyWebHookController extends Controller
             }
 
             Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
-            dispatch(new ShopifySyncCustomerJob($shopifyCustomerId, $email));
+            $id = $this->getWebhookIdentifierOrGUID($request);
+            $content = $request->all();
+            $children = [
+                new ShopifySyncCustomerJob($shopifyCustomerId, $email)
+            ];
+            dispatch(new WebhookJob('Shopify-order-updated', $id, $content, $children));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
+        return response()->json();
     }
 
     public function orderCreated(Request $request)
@@ -58,45 +52,43 @@ class ShopifyWebHookController extends Controller
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
             Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
-            AddOrderTags::dispatch(new Order(json_decode(json_encode($request->all()), false)));
-            $this->eventTrackingService->handleOrderCreatedEventTracking($request->all());
-            $this->updateLastTrialDate($shopifyCustomerId, $request);
+            $id = $this->getWebhookIdentifierOrGUID($request);
+            $contents = $request->all();
+            $children = [
+                new AddOrderTags(new Order(json_decode(json_encode($contents), false))),
+                new OrderCreatedEventTrackingJob($contents),
+                new OrderCreatedUpdateLastTrialDataJob($contents)
+            ];
+            dispatch(new WebhookJob('Shopify-order-created', $id, $contents, $children));
         } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
+        return response()->json();
     }
 
-    private function updateLastTrialDate($shopifyCustomerId, Request $request)
-    {
-        $lineItems = $request['line_items'];
-        foreach ($lineItems as $lineItem) {
-            $sku = $lineItem['sku'];
-            if (Product::IsTrialSku($sku)) {
-                $trialProduct = $this->productService->getProductsBySkus([$sku])[0];
-                $now = Carbon::now('UTC');
-                $lastTrialEndDate = $now->addDays($trialProduct->getTrialDays());
-                $this->shopifyGateway->updateCustomerLastTrialEndDate($shopifyCustomerId, $lastTrialEndDate);
-                $this->userService->setTrialPeriod($shopifyCustomerId, $lastTrialEndDate);
-                break;
-            }
-        }
-    }
-
-    public function refundCreated(Request $request): void
+    public function refundCreated(Request $request)
     {
         try {
             Log::debug('Shopify refund created webhook received');
 
             $orderId = $request->get('order_id');
             Log::info("Shopify refund created webhook received for order id: $orderId");
-
-            $order = $this->shopifySyncService->getOrder($orderId);
-
-            $this->eventTrackingService->handleOrderRefundEventTracking($request->all(), $order->getAttributes());
+            $id = $this->getWebhookIdentifierOrGUID($request);
+            $contents = $request->all();
+            $children = [
+                new RefundCreatedJob($orderId, $contents)
+            ];
+            dispatch(new WebhookJob("Shopify-order-refunded", $id, $contents, $children));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
+        return response()->json();
+    }
+
+    private function getWebhookIdentifierOrGUID(Request $request)
+    {
+        return $request->header('x-shopify-webhook-id') ?? $request->header('X-Shopify-Webhook-Id') ?? uniqid('generated-');
     }
 }
