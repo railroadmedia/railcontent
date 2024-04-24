@@ -237,6 +237,9 @@
     trailer : false,
     trailerM: false,
     lazyLoad: false,
+    loadAlternateSrc: function(src) {
+        this.$refs.playToLearnVideo.src = src;
+    },
     videoLoaded: false,
     waitlistModal: false,
     }"
@@ -683,16 +686,24 @@
             <img class="w-full sm:max-w-2xl mb-5 sm:mb-10"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play-logo.svg"
                 alt="Just Press Play Image" />
-                <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                 x-on:click="window.innerWidth <= 640 ? trailerM = true : trailer = true;">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                     x-ref="playToLearnVideo"
+                    x-on:error="loadAlternateSrc('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/30-day-independence/30-day-independence-silent-reel.mp4')"
                     x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
                     x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
-                    data-src="https://player.vimeo.com/progressive_redirect/playback/931215529/rendition/540p/file.mp4?loc=external&signature=6bb8c33a63099e10ddedf690bf5a125956bb2e296b8f4ea56e5a48396a90ecb8" type="video/mp4" autoplay muted loop playsinline></video>
+                    poster="https://i.vimeocdn.com/video/1828301259-c092a2a94d0b5008ba1042a1dd0a4f8f7289dac5a9ba14bc19a17e5a679b07d0-d?mw=2700&mh=1519&q=70"
+                    data-src="https://player.vimeo.com/progressive_redirect/playback/931215529/rendition/540p/file.mp4?loc=external&signature=6bb8c33a63099e10ddedf690bf5a125956bb2e296b8f4ea56e5a48396a90ecb8"
+                    type="video/mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"></video>
             </div>
-            </div>
+        </div>
     </section>
 
 
