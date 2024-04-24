@@ -46,10 +46,10 @@
                         <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@php
                             if(str_contains($nextLesson->thumbnail, 'i.vimeocdn.com')){
                                   $nextLesson->thumbnail = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $nextLesson->thumbnail);
-                                  if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', '$nextLesson->thumbnail') !== 1){
+                                  if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $nextLesson->thumbnail) !== 1){
                                         $nextLesson->thumbnail = $nextLesson->thumbnail.'.jpg';
                                     }
-                            }
+                              }
                               echo $nextLesson->thumbnail;
                         @endphp" alt="next-thumb">
                     @endif
