@@ -44,7 +44,7 @@ class ShopifyWebhookControllerTest extends TestCase
         Log::shouldReceive('debug')
             ->once()
             ->withArgs(function ($message) use ($customerEmail, $customerId) {
-                return str_contains($message, "Shopify order updated webhook received:$customerId $customerEmail");
+                return str_contains($message, "Shopify order updated webhook received: $customerId $customerEmail");
             });
         // error logs are made (somewhere?)
         Log::shouldReceive('error')->zeroOrMoreTimes();
@@ -82,7 +82,7 @@ class ShopifyWebhookControllerTest extends TestCase
         Log::shouldReceive('debug')
             ->once()
             ->withArgs(function ($message) use ($processedAt, $customerEmail, $customerId) {
-                return str_contains($message, "Shopify order updated webhook received: $customerId $customerEmail, processed at $processedAt. Ignoring update.");
+                return str_contains($message, "Shopify order updated webhook received: $customerId $customerEmail, processed at $processedAt. Ignoring.");
             });
         // error logs are made (somewhere?)
         Log::shouldReceive('error')->zeroOrMoreTimes();
@@ -97,6 +97,44 @@ class ShopifyWebhookControllerTest extends TestCase
         );
 
         Bus::assertNotDispatched(ShopifySyncCustomerJob::class);
+        $response->assertOk();
+    }
+
+    public function test_order_created_does_not_dispatch_shopify_sync_customer_job_for_imported_orders()
+    {
+        $path = Storage::disk("ecommerce_test_resources")->path("Shopify/requests/order/updated/imported_order.json");
+        $json = json_decode(file_get_contents($path), true);
+
+        // info logs are made (somewhere?)
+        Log::shouldReceive('info')->zeroOrMoreTimes();
+        // we don't have the endpoint protected
+        Log::shouldReceive('warning')
+            ->once()
+            ->withArgs(function ($message) {
+                return str_contains($message, 'SHOPIFY_WEBHOOK_SECRET not set in .env file.  Endpoints not protected');
+            });
+        // values, according to the resource file
+        $customerId = 7462119473446;
+        $customerEmail = 'imported_memberships@mail.com';
+        $processedAt = '2023-10-12T20:03:01-04:00';
+        Log::shouldReceive('debug')
+            ->once()
+            ->withArgs(function ($message) use ($processedAt, $customerEmail, $customerId) {
+                return str_contains($message, "Shopify order created webhook received: $customerId $customerEmail, processed at $processedAt. Ignoring.");
+            });
+        // error logs are made (somewhere?)
+        Log::shouldReceive('error')->zeroOrMoreTimes();
+
+        // use the fake bus, so we don't trigger the job for real
+        Bus::fake();
+
+        $response = $this->postJson(
+            route('shopify.webhook.order.create'),
+            $json['body'],
+            $json['headers']
+        );
+
+        Bus::assertNothingDispatched();
         $response->assertOk();
     }
 
@@ -117,9 +155,11 @@ class ShopifyWebhookControllerTest extends TestCase
             $json['headers']
         );
         $id = $json['headers']['x-shopify-webhook-id'];
-        $this->assertDatabaseHas('webhooks',
+        $this->assertDatabaseHas(
+            'webhooks',
             [ 'source_id' => $id,
-            ]);
+            ]
+        );
         Bus::assertDispatched(AddOrderTags::class);
         Bus::assertDispatched(OrderCreatedEventTrackingJob::class);
         Bus::assertDispatched(OrderCreatedUpdateLastTrialDataJob::class);
@@ -141,9 +181,11 @@ class ShopifyWebhookControllerTest extends TestCase
             $json['headers']
         );
         $id = $json['headers']['x-shopify-webhook-id'];
-        $this->assertDatabaseHas('webhooks',
+        $this->assertDatabaseHas(
+            'webhooks',
             [ 'source_id' => $id,
-            ]);
+            ]
+        );
         Bus::assertDispatched(RefundCreatedJob::class);
         $response->assertOk();
     }
@@ -155,9 +197,11 @@ class ShopifyWebhookControllerTest extends TestCase
         );
         $json = json_decode(file_get_contents($path), true);
         $id = $json['headers']['x-shopify-webhook-id'];
-        $this->assertDatabaseMissing('webhooks',
+        $this->assertDatabaseMissing(
+            'webhooks',
             [ 'source_id' => $id,
-            ]);
+            ]
+        );
         Bus::fake();
 
         $response = $this->postJson(
@@ -165,9 +209,11 @@ class ShopifyWebhookControllerTest extends TestCase
             $json['body'],
             $json['headers']
         );
-        $this->assertDatabaseHas('webhooks',
+        $this->assertDatabaseHas(
+            'webhooks',
             [ 'source_id' => $id,
-            ]);
+            ]
+        );
     }
 
     public function test_create_generated_webhook_id()
@@ -187,7 +233,7 @@ class ShopifyWebhookControllerTest extends TestCase
             $json['headers']
         );
         $postWebhooks = count(Webhook::where('source_id', 'like', 'generated%')->get());
-        $this->assertEquals($preWebhooks+1, $postWebhooks);
+        $this->assertEquals($preWebhooks + 1, $postWebhooks);
         $response->assertOk();
     }
 }
