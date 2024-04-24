@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Jobs;
 
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Services\ProductService;
@@ -82,6 +83,12 @@ class FixMobileTransactionsJob implements ShouldQueue
                 $orderId = str_replace('gid://shopify/Order/', '', $order->id);
                 Log::info("Processing Order ID: $orderId");
 
+
+                if ($this->batch()->canceled()) {
+                    Log::info("$className: Batch $this->batchId was cancelled");
+                    return;
+                }
+
                 try {
                     if ($order->subtotalPriceSet->shopMoney->amount != $order->totalPriceSet->shopMoney->amount) {
                         Log::info("Order ID: $orderId has a different subtotal and total price");
@@ -93,7 +100,7 @@ class FixMobileTransactionsJob implements ShouldQueue
                         );
 
                         if ($hours > 1) { //anything within an hour is fine for metrics
-                            if($order->refunds){
+                            if ($order->refunds) {
                                 Log::info("Order ID: $orderId has a refund, ignore processing.");
                                 continue;
                             }
