@@ -34,10 +34,12 @@ class FixMobileTransactionsJob implements ShouldQueue
     private Carbon $endDate;
     private string $endCursor;
     private int $totalProcessed;
+    private ?int $limit;
 
     public function __construct(
         Carbon $startDate,
         Carbon $endDate,
+        ?int $limit,
         string $endCursor = '',
         int $totalProcessed = 0
     ) {
@@ -45,6 +47,7 @@ class FixMobileTransactionsJob implements ShouldQueue
         $this->endDate = $endDate;
         $this->endCursor = $endCursor;
         $this->totalProcessed = $totalProcessed;
+        $this->limit = $limit;
     }
 
     public function handle(
@@ -153,6 +156,15 @@ class FixMobileTransactionsJob implements ShouldQueue
 
                             $shopifyDeleteService->deleteOrder($orderId);
                             $shopifySyncService->syncCustomerByUser($user, removeDeletedOrderPermissions: true);
+
+                            $this->totalProcessed++;
+                            if ($this->limit && $this->totalProcessed >= $this->limit) {
+                                break;
+                            }
+                        } else {
+                            Log::info(
+                                "Order ID: $orderId has a transaction within an hour of the order processedAt time"
+                            );
                         }
                     }
                 } catch (\Exception $e) {
@@ -168,6 +180,7 @@ class FixMobileTransactionsJob implements ShouldQueue
                 new FixMobileTransactionsJob(
                     $this->startDate,
                     $this->endDate,
+                    $this->limit,
                     $endCursor,
                     $this->totalProcessed
                 )
