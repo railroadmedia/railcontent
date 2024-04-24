@@ -159,7 +159,10 @@ class FixMobileTransactionsJob implements ShouldQueue
 
                             $this->totalProcessed++;
                             if ($this->limit && $this->totalProcessed >= $this->limit) {
-                                break;
+                                Log::info(
+                                    "$className: Finished processing ($this->totalProcessed/$this->totalProcessed)"
+                                );
+                                return;
                             }
                         } else {
                             Log::info(
