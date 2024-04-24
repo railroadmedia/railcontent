@@ -10,29 +10,26 @@ use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedUpdateLastTrialDataJob;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 
 class ShopifyWebHookController extends Controller
 {
-    public function orderUpdated(Request $request)
+    public function orderUpdated(Request $request): JsonResponse
     {
         try {
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
             $processedAt = $request->get('processed_at');
 
-            if ($processedAt) {
-                $launchDate = new Carbon(config('ecommerce.launch_date_times.shopify'));
-                $processedAtDate = new Carbon($processedAt);
-                if ($processedAtDate->isBefore($launchDate)) {
-                    Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring update.");
-                    return;
-                }
+            if ($this->isImportedOrder($processedAt)) {
+                Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring.");
+                return response()->json();
             }
 
-            Log::debug("Shopify order updated webhook received:$shopifyCustomerId $email");
+            Log::debug("Shopify order updated webhook received: $shopifyCustomerId $email");
             $id = $this->getWebhookIdentifierOrGUID($request);
             $content = $request->all();
             $children = [
@@ -46,11 +43,18 @@ class ShopifyWebHookController extends Controller
         return response()->json();
     }
 
-    public function orderCreated(Request $request)
+    public function orderCreated(Request $request): JsonResponse
     {
         try {
             $shopifyCustomerId = $request->get('customer')['id'];
             $email = $request->get('customer')['email'];
+            $processedAt = $request->get('processed_at');
+
+            if ($this->isImportedOrder($processedAt)) {
+                Log::debug("Shopify order created webhook received: $shopifyCustomerId $email, processed at $processedAt. Ignoring.");
+                return response()->json();
+            }
+
             Log::debug("Shopify order created webhook received: $shopifyCustomerId $email");
             $id = $this->getWebhookIdentifierOrGUID($request);
             $contents = $request->all();
@@ -67,7 +71,7 @@ class ShopifyWebHookController extends Controller
         return response()->json();
     }
 
-    public function refundCreated(Request $request)
+    public function refundCreated(Request $request): JsonResponse
     {
         try {
             Log::debug('Shopify refund created webhook received');
@@ -85,6 +89,25 @@ class ShopifyWebHookController extends Controller
             Log::error($e->getTraceAsString());
         }
         return response()->json();
+    }
+
+    /**
+     * Is this webhook request for an Order that was imported into Shopify?
+     *
+     * @param  string|null  $processedAt
+     * @return bool
+     */
+    private function isImportedOrder(?string $processedAt): bool
+    {
+        if ($processedAt) {
+            $launchDate = new Carbon(config('ecommerce.launch_date_times.shopify'));
+
+            $processedAtDate = new Carbon($processedAt);
+            if ($processedAtDate->isBefore($launchDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private function getWebhookIdentifierOrGUID(Request $request)
