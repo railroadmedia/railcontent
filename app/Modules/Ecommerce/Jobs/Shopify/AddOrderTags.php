@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Jobs\WebhookChildJob;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\ShopifyTagEnum;
@@ -14,7 +15,6 @@ use App\Modules\Ecommerce\Models\Shopify\Rest\OrderLineItem;
 use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
-class AddOrderTags implements ShouldQueue
+class AddOrderTags extends WebhookChildJob
 {
     use Batchable;
     use Dispatchable;

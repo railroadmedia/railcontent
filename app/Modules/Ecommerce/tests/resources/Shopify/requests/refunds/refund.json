@@ -1,0 +1,240 @@
+{
+  "body": {
+    "id": 870847938715,
+    "order_id": 5105340678299,
+    "created_at": "2024-04-16T13:17:29-07:00",
+    "note": "blah blah blah",
+    "user_id": 81372577947,
+    "processed_at": "2024-04-16T13:17:29-07:00",
+    "restock": false,
+    "duties": [],
+    "total_duties_set": {
+      "shop_money": {
+        "amount": "0.00",
+        "currency_code": "CAD"
+      },
+      "presentment_money": {
+        "amount": "0.00",
+        "currency_code": "USD"
+      }
+    },
+    "return": null,
+    "refund_shipping_lines": [],
+    "admin_graphql_api_id": "gid://shopify/Refund/870847938715",
+    "refund_line_items": [],
+    "transactions": [
+      {
+        "id": 6284117344411,
+        "order_id": 5105340678299,
+        "kind": "refund",
+        "gateway": "shopify_payments",
+        "status": "success",
+        "message": "Transaction approved",
+        "created_at": "2024-04-16T13:17:26-07:00",
+        "test": true,
+        "authorization": "re_3P6IP4S4RMNw9nl91n9RHd1z",
+        "location_id": null,
+        "user_id": 81372577947,
+        "parent_id": 6284114690203,
+        "processed_at": "2024-04-16T13:17:28-07:00",
+        "device_id": null,
+        "error_code": null,
+        "source_name": "1830279",
+        "payment_details": {
+          "credit_card_bin": "411111",
+          "avs_result_code": "Y",
+          "cvv_result_code": "M",
+          "credit_card_number": "•••• •••• •••• 1111",
+          "credit_card_company": "Visa",
+          "buyer_action_info": null,
+          "credit_card_name": "Adrian M",
+          "credit_card_wallet": null,
+          "credit_card_expiration_month": 7,
+          "credit_card_expiration_year": 2039,
+          "payment_method_name": "visa"
+        },
+        "receipt": {
+          "id": "re_3P6IP4S4RMNw9nl91n9RHd1z",
+          "amount": 100,
+          "balance_transaction": {
+            "id": "txn_3P6IP4S4RMNw9nl91amoKEID",
+            "object": "balance_transaction",
+            "exchange_rate": 1.38179
+          },
+          "charge": {
+            "id": "ch_3P6IP4S4RMNw9nl91skb7gW4",
+            "object": "charge",
+            "amount": 11000,
+            "application_fee": "fee_1P6IP5S4RMNw9nl9n1eBH8kx",
+            "balance_transaction": "txn_3P6IP4S4RMNw9nl91gMrbN0O",
+            "captured": true,
+            "created": 1713298494,
+            "currency": "usd",
+            "failure_code": null,
+            "failure_message": null,
+            "fraud_details": [],
+            "livemode": false,
+            "metadata": {
+              "email": "adrian+208@musora.com",
+              "manual_entry": "false",
+              "order_id": "rrfAevvjznufyzjgAfEzl9yty",
+              "order_transaction_id": "6284114690203",
+              "payments_charge_id": "2415867363483",
+              "shop_id": "61109174427",
+              "shop_name": "musora-subscription-staging",
+              "transaction_fee_tax_amount": "0",
+              "transaction_fee_total_amount": "577"
+            },
+            "outcome": {
+              "network_status": "approved_by_network",
+              "reason": null,
+              "risk_level": "normal",
+              "risk_score": 51,
+              "seller_message": "Payment complete.",
+              "type": "authorized"
+            },
+            "paid": true,
+            "payment_intent": "pi_3P6IP4S4RMNw9nl91bBL9V0b",
+            "payment_method": "pm_1P6IP4S4RMNw9nl9U5Kabs7T",
+            "payment_method_details": {
+              "card": {
+                "amount_authorized": 11000,
+                "brand": "visa",
+                "checks": {
+                  "address_line1_check": "pass",
+                  "address_postal_code_check": "pass",
+                  "cvc_check": "pass"
+                },
+                "country": "US",
+                "description": null,
+                "ds_transaction_id": null,
+                "exp_month": 7,
+                "exp_year": 2039,
+                "extended_authorization": {
+                  "status": "disabled"
+                },
+                "fingerprint": "FtNQzDMF8bVj4BrX",
+                "funding": "credit",
+                "iin": "411111",
+                "incremental_authorization": {
+                  "status": "unavailable"
+                },
+                "installments": null,
+                "issuer": "THE CHASE MANHATTAN BANK",
+                "last4": "1111",
+                "mandate": null,
+                "moto": null,
+                "multicapture": {
+                  "status": "unavailable"
+                },
+                "network": "visa",
+                "network_token": {
+                  "used": false
+                },
+                "network_transaction_id": "881227989545310",
+                "overcapture": {
+                  "maximum_amount_capturable": 11000,
+                  "status": "unavailable"
+                },
+                "payment_account_reference": "x7opyiogw9CvNrrGNPcTeu8RcTikV",
+                "three_d_secure": null,
+                "wallet": null
+              },
+              "type": "card"
+            },
+            "refunded": false,
+            "source": null,
+            "status": "succeeded",
+            "mit_params": {
+              "network_transaction_id": "881227989545310"
+            }
+          },
+          "object": "refund",
+          "reason": null,
+          "status": "succeeded",
+          "created": 1713298647,
+          "currency": "usd",
+          "metadata": {
+            "order_transaction_id": "6284117344411",
+            "payments_refund_id": "96890028187"
+          },
+          "payment_method_details": {
+            "card": {
+              "acquirer_reference_number": null,
+              "acquirer_reference_number_status": "pending"
+            },
+            "type": "card"
+          },
+          "mit_params": []
+        },
+        "amount": "1.00",
+        "currency": "USD",
+        "payments_refund_attributes": {
+          "status": "success",
+          "acquirer_reference_number": "1260690919589251"
+        },
+        "payment_id": "#168548.2",
+        "total_unsettled_set": {
+          "presentment_money": {
+            "amount": "0.0",
+            "currency": "USD"
+          },
+          "shop_money": {
+            "amount": "0.0",
+            "currency": "CAD"
+          }
+        },
+        "manual_payment_gateway": false,
+        "admin_graphql_api_id": "gid://shopify/OrderTransaction/6284117344411"
+      }
+    ],
+    "order_adjustments": [
+      {
+        "id": 218427293851,
+        "order_id": 5105340678299,
+        "refund_id": 870847938715,
+        "amount": "-1.38",
+        "tax_amount": "0.00",
+        "kind": "refund_discrepancy",
+        "reason": "Refund discrepancy",
+        "amount_set": {
+          "shop_money": {
+            "amount": "-1.38",
+            "currency_code": "CAD"
+          },
+          "presentment_money": {
+            "amount": "-1.00",
+            "currency_code": "USD"
+          }
+        },
+        "tax_amount_set": {
+          "shop_money": {
+            "amount": "0.00",
+            "currency_code": "CAD"
+          },
+          "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "USD"
+          }
+        }
+      }
+    ]
+  },
+  "headers": {
+    "x-shopify-webhook-id": "45fc4fdd-e20d-400d-b9e8-fb7b577dd17f",
+    "X-Shopify-Triggered-At": "2024-04-16T20:17:29Z",
+    "X-Shopify-Topic": "refunds/create",
+    "X-Shopify-Shop-Domain": "musora-subscription-staging.myshopify.com",
+    "X-Shopify-Hmac-Sha256": "k82a8COTqujrnswoeczqGL7c4SRDzdGxBTRbKGuIslg=",
+    "X-Shopify-Api-Version": "2024-04",
+    "X-Forwarded-Proto": "https",
+    "X-Forwarded-Host": "guppy-viable-grub.ngrok-free.app",
+    "X-Forwarded-For": "104.154.18.181",
+    "Content-Type": "application/json",
+    "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+    "Accept": "*/*",
+    "Content-Length": "4435",
+    "User-Agent": "Shopify-Captain-Hook",
+    "Host": "dev.musora.com:8443"
+  }
+}
