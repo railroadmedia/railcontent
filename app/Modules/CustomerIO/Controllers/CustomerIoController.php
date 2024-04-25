@@ -3,7 +3,6 @@
 namespace App\Modules\CustomerIO\Controllers;
 
 use App\Modules\CustomerIO\Models\CustomerIoFormRequest;
-use App\Modules\CustomerIO\Models\CustomerIoRCFormRequest;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use App\Modules\CustomerIO\Services\CustomerIoService;

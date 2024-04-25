@@ -18,10 +18,7 @@ class CustomerIoFormRequest extends FormRequest
         $forms = config('customer-io.forms.' . config('customer-io.brand'), []);
         $allConfiguredFormNames = array_keys($forms);
 
-        $customAttributeRules = [];
-        if (isset($forms[$this->input('form_name')])) {
-            $customAttributeRules = $forms[$this->input('form_name')]['custom_attributes'];
-        }
+        $customAttributeRules = $forms[$this->input('form_name')]['custom_attributes'] ?? [];
 
         $rules = array_merge([
             'email' => 'required|email',
@@ -34,12 +31,9 @@ class CustomerIoFormRequest extends FormRequest
         return $rules;
     }
 
-    public function messages(): array
+    public function attributes()
     {
-        return [
-            'email' => 'Email is required',
-            'first_name' => 'First Name is required',
-            'form_name' => 'Form name is required',
-        ];
+        $forms = config('customer-io.forms.' . config('customer-io.brand'), []);
+        return $forms[$this->input('form_name')]['attributes'] ?? [];
     }
 }

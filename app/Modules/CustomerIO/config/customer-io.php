@@ -349,6 +349,10 @@ return [
                 'accounts_to_sync' => [
                     'pianote',
                 ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
             ],
             'Chord Hacks - Facebook' => [
                 'custom_attributes' => [],
