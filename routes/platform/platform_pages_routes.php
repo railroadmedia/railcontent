@@ -797,7 +797,10 @@ Route::domain('{musoraDomain}')
             ->name('platform.request-song');
 
         Route::get('/{brand}/enrollment/{cohort}', [CohortPackController::class, 'template'])
-            ->name('platform.cohort');
+            ->name('platform.cohort')
+            ->middleware(
+                [Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class]
+            );
 
         Route::get('/{brand}/enrollment/{cohort}/purchased', [CohortPackController::class, 'purchased'])
             ->name('platform.cohort.purchased');
