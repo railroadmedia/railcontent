@@ -173,7 +173,6 @@
                                 :fieldKey="domID + '-editor'"
                                 ref="textEditor"
                                 v-model="replyInterface"
-                                @input="handleInput"
                                 :height="150"
                             ></text-editor>
                         </div>
@@ -428,9 +427,6 @@ export default {
         },
     },
     methods: {
-        handleInput(payload) {
-            this.reply = payload.currentValue;
-        },
         replyToComment() {
             this.replying = !this.replying;
             this.$emit('replyOpened', {
