@@ -10,6 +10,7 @@ class RechargeWebhooksRegister extends Command
     public const WEBHOOKS = [
         'subscription/cancelled' => 'recharge.webhook.subscription.cancel',
         'charge/failed' => 'recharge.webhook.charge.failed',
+        'customer/payment_method_updated' => 'recharge.webhook.customer.payment-method-updated',
     ];
 
     protected $signature = 'ecommerce:registerRechargeWebhook {customBaseURL?}';

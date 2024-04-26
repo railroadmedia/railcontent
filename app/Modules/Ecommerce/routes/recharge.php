@@ -15,5 +15,8 @@ Route::prefix('ecommerce/recharge')
 
                 Route::post('charge/failed', [RechargeWebhookController::class, 'chargeFailed'])
                     ->name('recharge.webhook.charge.failed');
+
+                Route::post('customer/payment-method-updated', [RechargeWebhookController::class, 'paymentMethodUpdated'])
+                    ->name('recharge.webhook.customer.payment-method-updated');
             });
     });
