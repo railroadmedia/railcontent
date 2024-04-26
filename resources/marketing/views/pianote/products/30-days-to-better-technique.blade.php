@@ -1026,12 +1026,12 @@
     @include('_partials.components.video-modal', [
         'name' => 'jayZ',
         'video' => 'aFdOW1Ql3L4',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'danceOfEternity',
         'video' => 'LUknLohfN48',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'trailer',
