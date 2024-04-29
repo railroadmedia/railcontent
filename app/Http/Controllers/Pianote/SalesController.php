@@ -8,6 +8,8 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSendTransactionalEmail;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use function App\Http\Controllers\Drumeo\array_entity_column;
@@ -313,9 +315,35 @@ class SalesController extends BaseController
     // 2 is the customer.io email ID from their system
     public function claimRoland90DaysAccess(Request $request)
     {
+        // Validate email before proceeding
+        $workspace_name = 'pianote';
+
+        $validatedData = $request->validate([
+            'email' => [
+                'required',
+                'email',
+                function ($attribute, $value, $fail) use ($workspace_name) {
+                    $userExists = DB::table('usora_users')
+                        ->join('user_access_permissions', 'usora_users.id', '=', 'user_access_permissions.user_id')
+                        ->where('usora_users.email', $value)
+                        ->whereIn('user_access_permissions.permission_id', [77, 88])
+                        ->exists();
+        
+                    if ($userExists) {
+                        $fail($attribute.' is already in use.');
+                    }
+                },
+                Rule::unique('customer_io_customers', 'email')->where(function ($query) use ($workspace_name) {
+                    $query->where('workspace_name', $workspace_name);
+                }),
+            ],
+        ]);
+       
+        // If validation passes, the customer does not exist, continue with the process
+    
         // create access code
         $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote', 'roland-piano-promo');
-
+    
         // create the customer and send the email
         dispatch(
             (new CustomerIoSendTransactionalEmail(
@@ -328,7 +356,7 @@ class SalesController extends BaseController
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
                 ->delay(Carbon::now()->addSeconds(3))
         );
-
+    
         // dispatch the event
         dispatch(
             (new CustomerIoTriggerEvent(
@@ -342,9 +370,10 @@ class SalesController extends BaseController
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
                 ->delay(Carbon::now()->addSeconds(10))
         );
-
+    
         return response()->json(['success' => true]);
     }
+    
 
     public function betterTechnique()
     {
