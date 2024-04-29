@@ -1564,7 +1564,8 @@ return [
             'data.timecode',
             'parent',
             'url',
-            'route'
+            'route',
+            'resources',
         ],
 
         'comment' => [
@@ -2712,6 +2713,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'resources',
         ],
         'podcasts' => [
             'id',
