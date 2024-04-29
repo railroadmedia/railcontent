@@ -262,7 +262,7 @@ class CustomerIoService
             $accountConfigData['site_id'],
             $accountConfigData['track_api_key'],
             $customer->email,
-            $customer->uuid,
+            null,
             $customAttributes,
             $createdAtTimestamp
         );
