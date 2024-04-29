@@ -8,9 +8,6 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class AddExperiment extends Command
 {
-
-
-
     protected $signature = 'featureFlag:addExperiment
                             {name : name of new Experiment}
                             {--default_value= : string - Default value, used when no branches exist or the Experiment is disabled}

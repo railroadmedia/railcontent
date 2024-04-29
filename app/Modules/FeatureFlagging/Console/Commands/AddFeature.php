@@ -3,14 +3,10 @@
 namespace Modules\FeatureFlagging\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Modules\FeatureFlagging\Models\Experiment;
 use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class AddFeature extends Command
 {
-
-
-
     protected $signature = 'featureFlag:addFeature
                             {name : name of new Feature}
                             {--description= : description value}

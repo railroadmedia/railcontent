@@ -119,7 +119,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
      */
     public function getCohortTemplate($slug): array
     {
-        $slug = explode('?',$slug)[0];
+        $slug = explode('?', $slug)[0];
         $cohort = $this->cohortService->getCohort($slug);
         $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config(
             'railcontent.cohort_timeline_image_urls'
@@ -182,7 +182,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
             $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
         }
 
-        if($cohort['is_product'] && $cohort['product_sale_price'] && $cohort['product_original_price']){
+        if($cohort['is_product'] && $cohort['product_sale_price'] && $cohort['product_original_price']) {
             $cohort['product_savings_price_percent'] = round(100 - (100 * ($cohort['product_sale_price'] / $cohort['product_original_price'])));
         }
 

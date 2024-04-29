@@ -8,9 +8,6 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class EditFeature extends Command
 {
-
-
-
     protected $signature = 'featureFlag:editFeature
                             {name : name of feature to edit}
                             {--description= : new description value}
@@ -31,9 +28,9 @@ class EditFeature extends Command
         $valuesToUpdate = [];
         $allOptions = $this->options();
         $builtInOptions = $this->getApplication()->getDefinition()->getOptions();
-        $onlyMyOptions = array_diff_key($allOptions,$builtInOptions);
+        $onlyMyOptions = array_diff_key($allOptions, $builtInOptions);
         $this->info("Updating Feature $name");
-        foreach($onlyMyOptions as $key=>$value) {
+        foreach($onlyMyOptions as $key => $value) {
             if (!is_null($value)) {
                 $valuesToUpdate[$key] = $value;
                 $val = $feature[$key];

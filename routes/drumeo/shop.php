@@ -39,13 +39,13 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'tone-control-kit',
             'tony-royster-jr'
         ]);
-        Route::get('/kit', [SalesController::class, 'kit'] );
-        Route::get('/kit-lifetime', [SalesController::class, 'kitLifetime'] );
-        Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummerEG'] );
-        Route::get('/30-day-drummer/deal', [SalesController::class, 'thirtyDayDrummerDeal'] );
-        Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops'] );
-        Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal'] );
-        Route::get('/30-day-independence', [SalesController::class, 'thirtyDayIndependence'] );
+        Route::get('/kit', [SalesController::class, 'kit']);
+        Route::get('/kit-lifetime', [SalesController::class, 'kitLifetime']);
+        Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummerEG']);
+        Route::get('/30-day-drummer/deal', [SalesController::class, 'thirtyDayDrummerDeal']);
+        Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops']);
+        Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal']);
+        Route::get('/30-day-independence', [SalesController::class, 'thirtyDayIndependence']);
         Route::get('/{productslug}', [ShopController::class, 'product']);
     });
 });

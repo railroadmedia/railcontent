@@ -7,7 +7,6 @@ use App\Modules\FeatureFlagging\Models\Feature;
 
 class ShowFeatures extends Command
 {
-
     protected $signature = 'featureFlag:showFeatures';
     protected $description = 'Show FeatureFlags';
 

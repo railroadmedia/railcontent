@@ -22,7 +22,6 @@ use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
 
-
 class UserAccessPermissionsService
 {
     private ProductService $productService;
@@ -35,7 +34,7 @@ class UserAccessPermissionsService
 
     public static $timeMinutes = false;
 
-    function __construct(
+    public function __construct(
         ProductService $productService,
         ContentPermissionsService $contentPermissionsService,
         UserProductService $userProductService,

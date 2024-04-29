@@ -12,9 +12,6 @@ use function PHPUnit\Framework\isNull;
 
 class EditBranch extends Command
 {
-
-
-
     protected $signature = 'featureFlag:editBranch
                             {name : name of branch to edit}
                             {--content= : new content value}
@@ -35,9 +32,9 @@ class EditBranch extends Command
         $valuesToUpdate = [];
         $allOptions = $this->options();
         $builtInOptions = $this->getApplication()->getDefinition()->getOptions();
-        $onlyMyOptions = array_diff_key($allOptions,$builtInOptions);
+        $onlyMyOptions = array_diff_key($allOptions, $builtInOptions);
         $this->info("Updating Branch: $name");
-        foreach($onlyMyOptions as $key=>$value) {
+        foreach($onlyMyOptions as $key => $value) {
             if (!is_null($value)) {
                 $valuesToUpdate[$key] = $value;
                 $val = $branch[$key];

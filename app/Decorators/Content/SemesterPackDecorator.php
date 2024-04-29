@@ -34,12 +34,12 @@ class SemesterPackDecorator extends TypeDecoratorBase
             $isStarted = $content['started'] && !$content['completed'];
             $isCompleted = $content['completed'];
             $contentsOfType[$contentIndex]['primary_cta_text'] = $enrollNow ? 'Enroll Now' : ((!$isStarted) ? 'Start' : (($isCompleted) ? 'Completed' : ' Continue'));
-            $contentsOfType[$contentIndex]['primary_cta_url'] = $enrollNow ? $registrationUrl : ($contentsOfType[$contentIndex]['next_lesson_url']??$contentsOfType[$contentIndex]->fetch('url',''));
+            $contentsOfType[$contentIndex]['primary_cta_url'] = $enrollNow ? $registrationUrl : ($contentsOfType[$contentIndex]['next_lesson_url'] ?? $contentsOfType[$contentIndex]->fetch('url', ''));
 
             //strip <p> tags from description
             $contentData = $content['data'] ?? [];
             foreach ($contentData as $index => $data) {
-                if(in_array($data['key'] ,['description'])){
+                if(in_array($data['key'], ['description'])) {
                     $contentsOfType[$contentIndex]['data'][$index]['value'] = strip_tags(html_entity_decode($data['value']), '<a>,<em>,<strong>');
                 }
             }

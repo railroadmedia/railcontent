@@ -62,10 +62,10 @@ class CustomerIoService
         if ($includeExternalAttributes) {
             $externalCustomerData = $this->customerIoApiGateway->getCustomer(
                 $accountConfigData['app_api_key'],
-                $customer->uuid
+                $customer->email
             );
 
-            $customer->setExternalAttributes((array)$externalCustomerData->attributes);
+            $customer->setExternalAttributes($externalCustomerData['attributes']);
         }
 
         return $customer;
@@ -125,16 +125,14 @@ class CustomerIoService
             ])
             ->firstOrFail();
 
-        $customerActivities = $this->customerIoApiGateway->getCustomerActivities(
+        return $this->customerIoApiGateway->getCustomerActivities(
             $accountConfigData['app_api_key'],
-            $customer->uuid,
+            $customer->email,
             'event',
             null,
             $limit,
             $amountToSkip
         );
-
-        return $customerActivities;
     }
 
     /**
@@ -199,8 +197,8 @@ class CustomerIoService
         $this->customerIoApiGateway->addOrUpdateCustomer(
             $accountConfigData['site_id'],
             $accountConfigData['track_api_key'],
-            $customer->uuid,
             $customer->email,
+            $customer->uuid,
             $customAttributes,
             $createdAtTimestamp
         );
@@ -263,8 +261,8 @@ class CustomerIoService
         $this->customerIoApiGateway->addOrUpdateCustomer(
             $accountConfigData['site_id'],
             $accountConfigData['track_api_key'],
-            $customer->uuid,
             $customer->email,
+            $customer->uuid,
             $customAttributes,
             $createdAtTimestamp
         );
@@ -395,6 +393,9 @@ class CustomerIoService
         return $customer;
     }
 
+    /**
+     * @throws Throwable
+     */
     public function deleteCustomer(int $userId, $accountName)
     {
         $accountConfigData = $this->getAccountConfigData($accountName);
@@ -411,13 +412,13 @@ class CustomerIoService
 
         if (!$customer) {
             Log::info("User $userId does not exist in the customer io workspace '$accountName'");
-            return;
+            return null;
         }
 
         $this->customerIoApiGateway->deleteCustomer(
             $accountConfigData['site_id'],
             $accountConfigData['track_api_key'],
-            $customer->uuid
+            $customer->email
         );
         $customer->delete();
         return $customer;
@@ -478,7 +479,7 @@ class CustomerIoService
                             $eventData[$dataKey] = $requestParams[$param] ?? null;
                         }
 
-                        $this->createEvent($customer->uuid, $accountName, $eventName, array_filter($eventData));
+                        $this->createEvent($customer->email, $accountName, $eventName, array_filter($eventData));
                     }
 
                     $customers[] = $customer;
@@ -504,7 +505,7 @@ class CustomerIoService
      * @throws Exception
      */
     public function createEvent(
-        $uuid,
+        $email,
         $accountName,
         $eventName,
         $eventData = [],
@@ -516,7 +517,7 @@ class CustomerIoService
         $this->customerIoApiGateway->createEvent(
             $accountConfigData['site_id'],
             $accountConfigData['track_api_key'],
-            $uuid,
+            $email,
             $eventName,
             $eventData,
             $eventType,
@@ -584,7 +585,7 @@ class CustomerIoService
             $this->customerIoApiGateway->createEvent(
                 $accountConfigData['site_id'],
                 $accountConfigData['track_api_key'],
-                $customer->uuid,
+                $customer->email,
                 $eventName,
                 $eventType,
                 $createdAtTimestamp
@@ -635,7 +636,7 @@ class CustomerIoService
             $this->customerIoApiGateway->createEvent(
                 $accountConfigData['site_id'],
                 $accountConfigData['track_api_key'],
-                $customer->uuid,
+                $customer->email,
                 $eventName,
                 $eventData,
                 $eventType,
@@ -694,7 +695,6 @@ class CustomerIoService
             $accountConfigData['app_api_key'],
             $customerIoTransactionalMessageId,
             $customerEmail,
-            $customer->uuid,
             $messageDataArray
         );
 
@@ -757,7 +757,7 @@ class CustomerIoService
             $this->customerIoApiGateway->addOrUpdateCustomerDevice(
                 $accountConfigData['site_id'],
                 $accountConfigData['track_api_key'],
-                $customer->uuid,
+                $customer->email,
                 $deviceData,
                 $createdAtTimestamp
             );
@@ -771,17 +771,17 @@ class CustomerIoService
     /**
      * Note, secondary customer row is always hard-deleted. It's not soft deleted.
      *
-     * @param $accountName
-     * @param $primaryCustomerId
-     * @param $secondaryCustomerId
+     * @param string $accountName
+     * @param string $primaryCustomerId
+     * @param string $secondaryCustomerId
      * @return false|Customer
      * @throws Exception
      */
     public function mergeCustomers(
-        $accountName,
-        $primaryCustomerId,
-        $secondaryCustomerId
-    ) {
+        string $accountName,
+        string $primaryCustomerId,
+        string $secondaryCustomerId
+    ): bool|Customer {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
@@ -820,8 +820,8 @@ class CustomerIoService
             $this->customerIoApiGateway->mergeCustomers(
                 $accountConfigData['site_id'],
                 $accountConfigData['track_api_key'],
-                $primaryCustomerId,
-                $secondaryCustomerId
+                $primaryCustomer->email,
+                $secondaryCustomer->email
             );
 
             // if the secondary customer was created first, set the primary created at to match
@@ -832,8 +832,8 @@ class CustomerIoService
                 $this->customerIoApiGateway->addOrUpdateCustomer(
                     $accountConfigData['site_id'],
                     $accountConfigData['track_api_key'],
+                    $primaryCustomer->email,
                     $primaryCustomerId,
-                    null,
                     [],
                     Carbon::parse($secondaryCustomer->created_at)->timestamp
                 );
