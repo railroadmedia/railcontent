@@ -7,9 +7,6 @@ use App\Modules\FeatureFlagging\Models\Experiment;
 
 class ShowExperiments extends Command
 {
-
-
-
     protected $signature = 'featureFlag:showExperiments
                             {--name= : Experiment to output; if missing, output all experiments and branches.}';
     protected $description = 'Show All A/B Testing Experiments and their Children Branches.';

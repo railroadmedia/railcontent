@@ -73,7 +73,7 @@ class FiltersJourneyService
                 ];
             }
         )
-            ->filter(fn($f) => !!$f)
+            ->filter(fn ($f) => !!$f)
             ->toArray();
 
         $filters[] = [

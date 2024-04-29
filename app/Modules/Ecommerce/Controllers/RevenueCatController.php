@@ -33,8 +33,8 @@ class RevenueCatController extends Controller
     private RevenueCatApiGateway $revenueCatGateway;
     private CustomerIoService $customerIoService;
 
-    const SUBSCRIPTION_REVOKED = 12;
-    const SANDBOX_ENVIRONMENT = 'SANDBOX';
+    public const SUBSCRIPTION_REVOKED = 12;
+    public const SANDBOX_ENVIRONMENT = 'SANDBOX';
 
     public function __construct(
         RevenueCatService $revenueCatService,
@@ -270,7 +270,7 @@ class RevenueCatController extends Controller
                 $this->unsetUserSubscription($user, $type);
 
                 break;
-            // handle other events...
+                // handle other events...
             case 'PRODUCT_CHANGE':
                 break;
             case 'BILLING_ISSUE':
@@ -895,19 +895,21 @@ class RevenueCatController extends Controller
 
             foreach ($entitlements as $entitlement) {
                 if (Carbon::parse($entitlement->expires_date) >= now()->subDays(
-                        config(
-                            'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
-                            7
-                        )
-                    )) {
+                    config(
+                        'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                        7
+                    )
+                )) {
                     $active = true;
                     $subscription = $apiResponse->subscriber->subscriptions->{$entitlement->product_identifier};
                     $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
 
                     //productId
                     $productId = $entitlement->product_identifier;
-                    $productsMap = array_merge([config('ecommerce.' . $store . '_products_map')[$productId]],
-                        [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
+                    $productsMap = array_merge(
+                        [config('ecommerce.' . $store . '_products_map')[$productId]],
+                        [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+                    );
 
                     $musoraProduct =
                         Product::whereIn('sku', $productsMap)
@@ -951,19 +953,21 @@ class RevenueCatController extends Controller
 
         foreach ($entitlements as $entitlement) {
             if (Carbon::parse($entitlement->expires_date) >= now()->subDays(
-                    config(
-                        'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
-                        7
-                    )
-                )) {
+                config(
+                    'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                    7
+                )
+            )) {
                 $active = true;
                 $subscription = $subscriptions->{$entitlement->product_identifier};
                 $store = (strtolower($subscription->store) == 'app_store') ? 'apple_store' : 'google_store';
 
                 //productId
                 $productId = $entitlement->product_identifier;
-                $productsMap = array_merge([config('ecommerce.' . $store . '_products_map')[$productId]],
-                    [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
+                $productsMap = array_merge(
+                    [config('ecommerce.' . $store . '_products_map')[$productId]],
+                    [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+                );
 
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)

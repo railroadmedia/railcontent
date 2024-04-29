@@ -6,7 +6,6 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Modules\FeatureFlagging\Models\Experiment;
 use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
-
 class ToggleExperiment extends Command
 {
     protected $signature = 'featureFlag:toggleExperiment

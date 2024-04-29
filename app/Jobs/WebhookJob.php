@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Log;
  */
 class WebhookJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected Webhook $webhook;
     protected array $children;
@@ -31,7 +34,7 @@ class WebhookJob implements ShouldQueue
      * @param array $delays - same length array as children for time to delay each child job.Leaving this null will dispatch children without delay
      * @param string $queue - name of the queue to dispatch children jobs on
      */
-    public function __construct(string $source, string $source_id, array $contents, array $children, array $delays = [], string $queue='')
+    public function __construct(string $source, string $source_id, array $contents, array $children, array $delays = [], string $queue = '')
     {
         $this->queueName = $queue;
         $this->webhook = Webhook::firstOrCreate([
@@ -75,7 +78,7 @@ class WebhookJob implements ShouldQueue
      * @param array<int>|null $delays - number of seconds to delay the corresponding child job
      * @return array - internal array of children jobs + metadata
      */
-    private function buildChildren(array $children, array $delays=[]) : array
+    private function buildChildren(array $children, array $delays = []): array
     {
         $childrenWithDelays = [];
 
@@ -110,4 +113,3 @@ class WebhookJob implements ShouldQueue
         return count($this->children);
     }
 }
-

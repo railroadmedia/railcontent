@@ -7,7 +7,6 @@ use ReflectionMethod;
 
 trait CreatesReflectionMethod
 {
-
     /**
      * Get a reflection method for the non-public method of the trait-using job, so we can call it
      *

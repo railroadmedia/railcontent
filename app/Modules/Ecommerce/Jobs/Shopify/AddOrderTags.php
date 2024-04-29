@@ -102,7 +102,7 @@ class AddOrderTags extends WebhookChildJob
         });
 
         // remove this order
-        return $customerOrders->filter(fn(Order $order) => $order->id != $this->order->id);
+        return $customerOrders->filter(fn (Order $order) => $order->id != $this->order->id);
     }
 
     /**
@@ -125,7 +125,7 @@ class AddOrderTags extends WebhookChildJob
 
         // ensure that this trial product had 0 cost
         return $order->lineItems
-            ->filter(fn(OrderLineItem $lineItem) => $lineItem->isTrial() && $lineItem->totalPrice == 0)
+            ->filter(fn (OrderLineItem $lineItem) => $lineItem->isTrial() && $lineItem->totalPrice == 0)
             ->isNotEmpty();
     }
 
@@ -165,19 +165,19 @@ class AddOrderTags extends WebhookChildJob
         $recentDaysStart->subDays($this->trialConversionDayLimit);
         $recentOrders = $this->otherOrders
             ->filter(
-                fn(Order $otherOrder) => $otherOrder->processedAt->isBetween(
+                fn (Order $otherOrder) => $otherOrder->processedAt->isBetween(
                     $recentDaysStart,
                     $this->order->processedAt
                 )
             );
 
         $hasRecentTrialStart = $recentOrders
-            ->filter(fn(Order $otherOrder) => $this->isTrialStart($otherOrder))
+            ->filter(fn (Order $otherOrder) => $this->isTrialStart($otherOrder))
             ->isNotEmpty();
 
         // and make sure there weren't other payments in that period
         $noRecentMembershipPayment = $recentOrders
-            ->filter(fn(Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
+            ->filter(fn (Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
             ->isEmpty();
 
         return $hasRecentTrialStart && $noRecentMembershipPayment;
@@ -215,7 +215,7 @@ class AddOrderTags extends WebhookChildJob
         // ensure we have a previous order that was a membership payment, to determine that this is a renewal of it
         /** @var Product $membershipProduct */
         $membershipProduct = $this->order->lineItems
-            ->filter(fn(OrderLineItem $lineItem) => $lineItem->isMembership())
+            ->filter(fn (OrderLineItem $lineItem) => $lineItem->isMembership())
             ->first()
             ->product;
         // annual or monthly, with the buffer
@@ -225,12 +225,12 @@ class AddOrderTags extends WebhookChildJob
 
         return $this->otherOrders
             ->filter(
-                fn(Order $otherOrder) => $otherOrder->processedAt->isBetween(
+                fn (Order $otherOrder) => $otherOrder->processedAt->isBetween(
                     $historyPeriodStartDate,
                     $this->order->processedAt
                 )
             )
-            ->filter(fn(Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
+            ->filter(fn (Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
             ->isNotEmpty();
     }
 
@@ -290,7 +290,7 @@ class AddOrderTags extends WebhookChildJob
         $tagsToAdd = $this->sanitizeTags($tagsToAdd);
 
         // remove any that already exist on the order
-        $tagsToAdd = $tagsToAdd->reject(fn(string $tag) => in_array($tag, $this->order->tags));
+        $tagsToAdd = $tagsToAdd->reject(fn (string $tag) => in_array($tag, $this->order->tags));
 
         $gql = <<<GQL
                 mutation {

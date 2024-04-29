@@ -56,15 +56,19 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         if (user()) {
             return new User(
-                user()->id, user()->email, user()->display_name, user()->profile_picture_url ?? '', user()->phone_number
+                user()->id,
+                user()->email,
+                user()->display_name,
+                user()->profile_picture_url ?? '',
+                user()->phone_number
             );
         }
 
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $app = null)
-    : array {
+    public function getCurrentUserMembershipData(?string $app = null): array
+    {
         $user = user();
 
         $isAppleAppSubscriber = $user->has_apple_subscription;
@@ -73,25 +77,25 @@ class MusoraApiUserProvider implements UserProviderInterface
         $hasExperience = user()->onboardingExperience ? true : false;
 
         $hasGear = count(
-                user()->onboardingGear->filter(function ($item) use($user) {
-                    return $item->brand == $user->last_used_brand;
-                })
-            ) > 0;
+            user()->onboardingGear->filter(function ($item) use ($user) {
+                return $item->brand == $user->last_used_brand;
+            })
+        ) > 0;
 
         $hasTopics = count(
-                user()->onboardingTopics->filter(function ($item) use($user) {
-                    return $item->brand == $user->last_used_brand;
-                })
-            ) > 0;
+            user()->onboardingTopics->filter(function ($item) use ($user) {
+                return $item->brand == $user->last_used_brand;
+            })
+        ) > 0;
 
         $hasGenres = count(
-                user()->onboardingGenres->filter(function ($item) use($user) {
-                    return $item->brand == $user->last_used_brand;
-                })
-            ) > 0;
+            user()->onboardingGenres->filter(function ($item) use ($user) {
+                return $item->brand == $user->last_used_brand;
+            })
+        ) > 0;
 
         try {
-            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $accountName = ($app) ? strtolower($app) : config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
             $customerIoData = $this->customerIoService->getCustomerByUserId(
                 $accountName,
                 $user->id,
@@ -128,8 +132,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function getCurrentUserProfileData(?string $app = null)
-    : array
+    public function getCurrentUserProfileData(?string $app = null): array
     {
         $user = user();
 
@@ -177,10 +180,10 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
             $hasExperienceLevels =  count(
-                    user()->onboardingExperience->filter(function ($item) use($brand) {
-                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                    })
-                ) > 0;
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
             $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
         }
 
@@ -246,7 +249,9 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
             throw new MusoraAPIException(
-                'This display name is already in use', 'Display name exist', ($mobileEndpointVersion >= 2) ? 200 : 500
+                'This display name is already in use',
+                'Display name exist',
+                ($mobileEndpointVersion >= 2) ? 200 : 500
             );
         }
 
@@ -362,10 +367,10 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function getUserAfterRevenuecatPurchase($email, $password, $revenuecatOriginalAppUserId)
     {
         $user = \Modules\UserManagementSystem\Models\User::onWriteConnection()->where(
-        'revenuecat_origin_app_user_id',
-        '=',
-        $revenuecatOriginalAppUserId
-    )
+            'revenuecat_origin_app_user_id',
+            '=',
+            $revenuecatOriginalAppUserId
+        )
         ->first();
 
         if (!$user) {

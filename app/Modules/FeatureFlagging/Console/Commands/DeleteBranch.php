@@ -9,9 +9,6 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class DeleteBranch extends Command
 {
-
-
-
     protected $signature = 'featureFlag:deleteBranch
                             {name : name of Branch to delete}';
 

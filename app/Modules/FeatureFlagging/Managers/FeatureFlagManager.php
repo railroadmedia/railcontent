@@ -23,7 +23,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     {
     }
 
-    public function allBranches(User $user) : array
+    public function allBranches(User $user): array
     {
         $experiments = Experiment::all();
         $allowedBranches = [];
@@ -34,7 +34,7 @@ class FeatureFlagManager implements FeatureFlagsContract
     }
 
 
-    public function allowedFeatures(User $user) : array
+    public function allowedFeatures(User $user): array
     {
         $features = Feature::all();
         $allowedFeatures = [];
@@ -46,7 +46,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return $allowedFeatures;
     }
 
-    public function accessible(string $featureName, User $user=null): bool
+    public function accessible(string $featureName, User $user = null): bool
     {
         $feature = $this->getFeature($featureName);
         if (!$feature) {
@@ -63,7 +63,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return Carbon::parse($feature->active_at)->isPast();
     }
 
-    public function branch(string $experimentName, User $user=null): string
+    public function branch(string $experimentName, User $user = null): string
     {
         $experiment = $this->getExperiment($experimentName);
         if (!$experiment) {
@@ -104,7 +104,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         if ($user) {
             foreach ($branches as $branch) {
                 if ($this->doesUserMatchUserList($branch->userid_list, $user)
-                    ||$this->doesUserMatchFilter($branch->allow_filter, $user)) {
+                    || $this->doesUserMatchFilter($branch->allow_filter, $user)) {
                     $selectedBranch = $branch;
                     Log::debug('short circuit: ' . $branch->name);
                     break;
@@ -142,7 +142,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         }
     }
 
-    private function doesUserMatchUserList($userid_list, User $user) : bool
+    private function doesUserMatchUserList($userid_list, User $user): bool
     {
         if ($userid_list) {
             $ids = explode(',', $userid_list);
@@ -153,7 +153,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return false;
     }
 
-    private function doesUserMatchFilter($allow_filter, User $user) : bool
+    private function doesUserMatchFilter($allow_filter, User $user): bool
     {
         if ($allow_filter) {
             $filters = explode(',', $allow_filter);
@@ -166,7 +166,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return false;
     }
 
-    private function isUserAllowMatch(string $filter, User $user) : bool
+    private function isUserAllowMatch(string $filter, User $user): bool
     {
         $isMatch = match(true) {
             $filter == 'admin' => $user->isAdmin(),
@@ -177,7 +177,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return $isMatch;
     }
 
-    private function doesUserMatchOlderThanFilter(string $filter, User $user) : bool
+    private function doesUserMatchOlderThanFilter(string $filter, User $user): bool
     {
         $sections = explode('_', $filter);
         if (count($sections) != 4) {
@@ -200,7 +200,8 @@ class FeatureFlagManager implements FeatureFlagsContract
      * @param array|string $allow_filter
      * @return bool
      */
-    public static function isValidFilter(array|string|null $allow_filter) {
+    public static function isValidFilter(array|string|null $allow_filter)
+    {
         $validFilters = ['admin', 'musora'];
         $filters = is_array($allow_filter) ? $allow_filter : explode(',', $allow_filter);
         foreach($filters as $filter) {
@@ -212,7 +213,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return true;
     }
 
-    private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user=null, ?string $anonymous_user_id = null) : bool
+    private function trackBranchSelectedEvent(Branch $branch, Experiment $experiment, User $user = null, ?string $anonymous_user_id = null): bool
     {
 
         Tracking::create([
@@ -223,7 +224,8 @@ class FeatureFlagManager implements FeatureFlagsContract
         ]);
         try {
             Avo::experimentation_branch_assigned(
-                AvoHelper::defaultEventProperties([
+                AvoHelper::defaultEventProperties(
+                    [
                     'experiment_id' => $experiment->id,
                     'experiment_name' => $experiment->name,
                     'branch_id' => $branch->id,
@@ -240,7 +242,7 @@ class FeatureFlagManager implements FeatureFlagsContract
         return true;
     }
 
-    private function getAssignedBranch(Experiment $experiment, ?User $user) : Branch | null
+    private function getAssignedBranch(Experiment $experiment, ?User $user): Branch | null
     {
         if (!$user) {
             return null;
@@ -249,12 +251,12 @@ class FeatureFlagManager implements FeatureFlagsContract
         return $tracking?->branch ?? null;
     }
 
-    private function getFeature($featureName) : Feature | null
+    private function getFeature($featureName): Feature | null
     {
         return Feature::whereName($featureName)->first();
     }
 
-    private function getExperiment($experiment) : Experiment | null
+    private function getExperiment($experiment): Experiment | null
     {
         return Experiment::whereName($experiment)->first();
     }

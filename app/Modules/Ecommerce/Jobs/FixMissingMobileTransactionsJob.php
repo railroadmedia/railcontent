@@ -2,7 +2,6 @@
 
 namespace App\Modules\Ecommerce\Jobs;
 
-
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
