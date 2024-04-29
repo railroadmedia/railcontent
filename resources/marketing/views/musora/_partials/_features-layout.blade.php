@@ -4,7 +4,9 @@
 ])
 
 @section('layout-body')
-    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white" @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundslice: false, } @endif">
+    <header class="pb-12 md:pb-0 md:pt-20 text-center text-white" style="background-color:#000C17;"
+        @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundslice: false, }" @endif
+    >
         @if($page === 'songs')
             @yield('header-mobileImg')
         @else
@@ -19,13 +21,13 @@
         <div class="px-4 md:px-0">
             <div class="mb-6">
                 <img
-                    class="h-5 md:h-7 mr-2"
+                    class="h-5 md:h-9 mr-2"
                     src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
                     alt="musora logo"
                     fetchpriority="high"
                 />
                 <img
-                    class="h-6 md:h-10"
+                    class="h-6 md:h-9"
                     src="https://www.musora.com/musora-cdn/image/width=150,quality=95/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
                     style="filter:brightness(0) invert(1)"
