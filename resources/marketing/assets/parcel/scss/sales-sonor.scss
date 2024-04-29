@@ -161,6 +161,7 @@
   }
 
   .play-button {
+      display: inline-block;
     margin: 100px auto;
     @include tablet {
       margin: 145px auto;

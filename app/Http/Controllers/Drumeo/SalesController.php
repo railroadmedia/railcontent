@@ -163,7 +163,7 @@ class SalesController extends BaseController
 
     public function thirtyDayIndependence()
     {
-        $productId = 800;
+        $productId = 844;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
@@ -176,7 +176,7 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
-    
+
     public function thirtyDayDrummerDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['theme' => 'drumeo']);

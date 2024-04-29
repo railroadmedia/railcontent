@@ -28,7 +28,7 @@ Route::group(
 
         Route::delete(
             'user/delete/{id}',
-            UserController::class . '@destroy'
+            UserController::class . '@markAsDelete'
         )
             ->name('user_management_system.user.delete');
 

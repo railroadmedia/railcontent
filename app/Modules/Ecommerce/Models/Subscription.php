@@ -47,6 +47,7 @@ use Modules\UserManagementSystem\Models\User;
  * @property string|null $paypal_recurring_profile_id
  * @property int|null $failed_payment_id
  * @property-read User|null $user
+ * @property-read Customer|null $customer
  * @property ?PaymentMethod $paymentMethod
  * @method static \App\Modules\Ecommerce\database\factories\SubscriptionFactory factory(...$parameters)
  * @method static Builder|Subscription fromUser(int $userId)
@@ -91,22 +92,22 @@ class Subscription extends Model
     use HasFactory;
     use SoftDeletes;
 
-    const TYPE_SUBSCRIPTION = 'subscription';
-    const TYPE_APPLE_SUBSCRIPTION = 'apple_subscription';
-    const TYPE_GOOGLE_SUBSCRIPTION = 'google_subscription';
-    const TYPE_PAYPAL_SUBSCRIPTION = 'paypal_recurring_profile_subscription';
-    const TYPE_PAYMENT_PLAN = 'payment plan';
+    public const TYPE_SUBSCRIPTION = 'subscription';
+    public const TYPE_APPLE_SUBSCRIPTION = 'apple_subscription';
+    public const TYPE_GOOGLE_SUBSCRIPTION = 'google_subscription';
+    public const TYPE_PAYPAL_SUBSCRIPTION = 'paypal_recurring_profile_subscription';
+    public const TYPE_PAYMENT_PLAN = 'payment plan';
 
     // log actions names
-    const ACTION_RENEW = 'renew';
-    const ACTION_CANCEL = 'cancel';
-    const ACTION_DEACTIVATED = 'deactivated';
+    public const ACTION_RENEW = 'renew';
+    public const ACTION_CANCEL = 'cancel';
+    public const ACTION_DEACTIVATED = 'deactivated';
 
     // states
-    const STATE_ACTIVE = 'active';
-    const STATE_SUSPENDED = 'suspended';
-    const STATE_CANCELED = 'canceled';
-    const STATE_STOPPED = 'stopped';
+    public const STATE_ACTIVE = 'active';
+    public const STATE_SUSPENDED = 'suspended';
+    public const STATE_CANCELED = 'canceled';
+    public const STATE_STOPPED = 'stopped';
 
     protected $table = 'ecommerce_subscriptions';
 
@@ -130,6 +131,16 @@ class Subscription extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
     public function product()

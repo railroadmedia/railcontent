@@ -2,9 +2,8 @@
 
 namespace App\Modules\CustomerIO\Controllers;
 
-use App\Rules\ReCaptcha;
+use App\Modules\CustomerIO\Models\CustomerIoFormRequest;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Throwable;
@@ -23,20 +22,10 @@ class CustomerIoController extends Controller
         $this->customerIoService = $customerIoService;
     }
 
-    public function submitEmailForm(Request $request)
+    public function submitEmailForm(CustomerIoFormRequest $request)
     {
-        $allConfiguredFormNames = array_keys(config('customer-io.forms.' . config('customer-io.brand'), []));
-
-        $this->validate(
-            $request,
-            [
-                'email' => 'required|email',
-                'form_name' => 'required|in:'.implode(',', $allConfiguredFormNames),
-            ]
-        );
-
         try {
-            $customers = $this->customerIoService->processForm($request->get('email'), $request->get('form_name'), $request->all());
+            $this->customerIoService->processForm($request->get('email'), $request->get('form_name'), $request->all());
         } catch (Throwable $exception) {
             if (request()->expectsJson()) {
                 return response()->json(
@@ -66,21 +55,10 @@ class CustomerIoController extends Controller
 
         return $response->with(['success' => true]);
     }
-    public function submitEmailFormRC(Request $request)
+    public function submitEmailFormRC(CustomerIoFormRequest $request)
     {
-        $allConfiguredFormNames = array_keys(config('customer-io.forms.' . config('customer-io.brand'), []));
-
-        $this->validate(
-            $request,
-            [
-                'email' => 'required|email',
-                'form_name' => 'required|in:'.implode(',', $allConfiguredFormNames),
-                'g-recaptcha-response' => ['required', new ReCaptcha]
-            ]
-        );
-
         try {
-            $customers = $this->customerIoService->processForm($request->get('email'), $request->get('form_name'), $request->all());
+            $this->customerIoService->processForm($request->get('email'), $request->get('form_name'), $request->all());
         } catch (Throwable $exception) {
             if (request()->expectsJson()) {
                 return response()->json(

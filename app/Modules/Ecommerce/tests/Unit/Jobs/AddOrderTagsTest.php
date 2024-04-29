@@ -2,11 +2,13 @@
 
 namespace App\Modules\Ecommerce\tests\Unit\Jobs;
 
+use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\ShopifyTagEnum;
 use App\Modules\Ecommerce\Jobs\Shopify\AddOrderTags;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use App\Modules\Ecommerce\tests\resources\Shopify\fixtures\ReadsFixture;
+use Exception;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -46,9 +48,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -92,9 +94,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -138,9 +140,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -189,9 +191,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: (none)"
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: (none)"
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -227,9 +229,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: (none)",
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: (none)",
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -499,9 +501,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::InitialOrder->value
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -541,9 +543,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -586,9 +588,9 @@ class AddOrderTagsTest extends TestCase
             ->once()
             ->withArgs(function ($message) use ($orderId) {
                 return strcmp(
-                        $message,
-                        "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
-                    ) === 0;
+                    $message,
+                    "AddOrderTags: Adding tags to Shopify Order $orderId: ".ShopifyTagEnum::MembershipRenewal->value
+                ) === 0;
             });
 
         AddOrderTags::dispatchSync($orderData);
@@ -614,100 +616,12 @@ class AddOrderTagsTest extends TestCase
     /**
      * Create the
      * @return void
+     * @throws Exception
      */
     private function seedDrumeoMemberships(): void
     {
-        Product::create([
-            'brand' => "drumeo",
-            'name' => "Drumeo Monthly Membership | With 7-Day Trial",
-            'sku' => "drumeo-base-monthly-recurring-7-day-trial-membership",
-            'inventory_control_sku' => "17001",
-            'fulfillment_sku' => "membership",
-            'price' => "25.00",
-            'type' => "digital subscription",
-            'active' => 1,
-            'category' => "NULL",
-            'description' => "7 days free, then $25 / month. Easy to cancel anytime. Includes access to Drumeo’s step-by-step method, lessons from legendary artists, and unlimited personal support.",
-            'thumbnail_url' => "'https' =>//d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
-            'sales_page_url' => null,
-            'is_physical' => 0,
-            'weight' => "0.00",
-            'subscription_interval_type' => "month",
-            'subscription_interval_count' => 1,
-            'stock' => 999952,
-            'min_stock_level' => 0,
-            'public_stock_count' => 0,
-            'auto_decrement_stock' => 0,
-            'digital_access_permission_names' => "[\"Musora Basic Membership\"]",
-            'digital_access_type' => "basic content access",
-            'digital_access_time_interval_type' => "day",
-            'digital_access_time_type' => "recurring",
-            'digital_access_time_interval_length' => 7,
-            'digital_membership_access_expiration_date' => null,
-            'shopify_id' => 47070845370644,
-            'note' => null,
-        ]);
-
-        Product::create([
-            'brand' => "drumeo",
-            'name' => "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
-            'sku' => "DLM-Trial-1-month",
-            'inventory_control_sku' => "17001",
-            'fulfillment_sku' => "membership",
-            'price' => "30.00",
-            'type' => "digital subscription",
-            'active' => 1,
-            'category' => "NULL",
-            'description' => "7 days free, then $30 / month. Easy to cancel anytime. Includes access to Drumeo’s step-by-step method, lessons from legendary artists, and unlimited personal support. As a “+” member, you’ll also get access to 5000+ professionally transcribed songs.",
-            'thumbnail_url' => "'https' =>//d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
-            'sales_page_url' => null,
-            'is_physical' => 0,
-            'weight' => "0.00",
-            'subscription_interval_type' => "month",
-            'subscription_interval_count' => 1,
-            'stock' => 999999,
-            'min_stock_level' => 0,
-            'public_stock_count' => 0,
-            'auto_decrement_stock' => 0,
-            'digital_access_permission_names' => "[\"Musora Basic Membership\"]",
-            'digital_access_type' => "basic content access",
-            'digital_access_time_interval_type' => "day",
-            'digital_access_time_type' => "recurring",
-            'digital_access_time_interval_length' => 7,
-            'digital_membership_access_expiration_date' => null,
-            'shopify_id' => 47070758797588,
-            'note' => null,
-        ]);
-
-        Product::create([
-            'brand' => "drumeo",
-            'name' => "Drumeo+ Monthly Membership: Includes Songs",
-            'sku' => "DLM-1-month",
-            'inventory_control_sku' => "17001",
-            'fulfillment_sku' => null,
-            'price' => "30.00",
-            'type' => "digital subscription",
-            'active' => 1,
-            'category' => "NULL",
-            'description' => "Access to Drumeo’s library of lessons by legendary coaches, step-by-step method, and a personal mentor for support and guidance. As a “+” member you also get access to thousands of professionally transcribed songs.",
-            'thumbnail_url' => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
-            'sales_page_url' => "/",
-            'is_physical' => 0,
-            'weight' => "0.00",
-            'subscription_interval_type' => "month",
-            'subscription_interval_count' => 1,
-            'stock' => 999999,
-            'min_stock_level' => 0,
-            'public_stock_count' => 0,
-            'auto_decrement_stock' => 0,
-            'digital_access_permission_names' => "[\"Drumeo Edge\",\"Musora Plus Membership\"]",
-            'digital_access_type' => "all content access",
-            'digital_access_time_interval_type' => "month",
-            'digital_access_time_type' => "recurring",
-            'digital_access_time_interval_length' => 1,
-            'digital_membership_access_expiration_date' => null,
-            'shopify_id' => 47070758240532,
-            'note' => null,
-        ]);
+        ProductFactory::createProductForSku("drumeo-base-monthly-recurring-7-day-trial-membership");
+        ProductFactory::createProductForSku("DLM-Trial-1-month");
+        ProductFactory::createProductForSku("DLM-1-month");
     }
 }

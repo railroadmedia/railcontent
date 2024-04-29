@@ -8,7 +8,9 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class DeleteFeature extends Command
 {
-    protected $signature = 'featureFlag:deleteFeature {name}';
+    protected $signature = 'featureFlag:deleteFeature
+                            {name : name of Feature to delete}';
+    protected $description = 'Delete FeatureFlag. This will effectively enable the feature for all users.';
 
     public function handle(FeatureFlagService $ffService): void
     {

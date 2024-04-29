@@ -53,7 +53,7 @@ class ShopifyCartAPIController extends Controller
         foreach ($productSKUsAndQuantities as $productSKUToAdd => $quantityToAdd) {
             $productVariantIdsAndQuantitiesToAdd[$productsWithSellingPlans[$productSKUToAdd]['id']] =
                 [
-                    'quantity' => (integer)$quantityToAdd,
+                    'quantity' => (int)$quantityToAdd,
                     'sellingPlanId' => $productsWithSellingPlans[$productSKUToAdd]['sellingPlan']['id'] ?? null
                 ];
         }
@@ -112,9 +112,13 @@ class ShopifyCartAPIController extends Controller
         $responseData = $this->createLegacyCartResponseDataFromShopifyCartData($cartData);
 
         //TMP fix, we need the redirect mobile app to order page
-//        if ($request->expectsJson()) {
-//            return response()->json($responseData, 200);
-//        }
+        if ($request->expectsJson()) {
+            if ($request->missing('user_id') && $request->missing('auth_key')) {
+                Log::debug("user_id and auth_key are both missing. This must be web..");
+                return response()->json($responseData, 200);
+            }
+            Log::debug("user_id and auth_key were not both missing. Mobile app will continue...");
+        }
 
         $redirectResponse =
             $request->get('redirect') ? redirect()->away($request->get('redirect')) : redirect()->to(
@@ -169,7 +173,8 @@ class ShopifyCartAPIController extends Controller
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
         $productSKUVariantId =
-            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs([$productSku]
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs(
+                [$productSku]
             )[$productSku] ?? null;
 
         if (empty($shopifyCartData['lines']['edges']) || empty($productSKUVariantId)) {
@@ -241,7 +246,8 @@ class ShopifyCartAPIController extends Controller
         $shopifyCartData = $this->shopifyStoreFrontAPIService->getCart($existingShopifyCartId);
 
         $productSKUVariantId =
-            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs([$productSku]
+            $this->shopifyStoreFrontAPIService->getProductVariantIdsFromSKUs(
+                [$productSku]
             )[$productSku] ?? null;
 
         if (empty($shopifyCartData['lines']['edges']) || empty($productSKUVariantId)) {
