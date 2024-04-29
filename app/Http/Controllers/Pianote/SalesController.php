@@ -349,7 +349,7 @@ class SalesController extends BaseController
 
     public function betterTechnique()
     {
-        $productId = 740;
+        $productId = 843;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
