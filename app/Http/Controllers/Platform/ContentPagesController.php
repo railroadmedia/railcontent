@@ -30,9 +30,11 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Helpers\FiltersHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ArtistService;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\FullTextSearchService;
+use Railroad\Railcontent\Services\GenreService;
 use Railroad\Railcontent\Services\MethodService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
@@ -52,6 +54,8 @@ class ContentPagesController extends BaseController
     private ResourceDecorator $resourceDecorator;
     private MethodService $methodService;
     private UserContentProgressService $userContentProgressService;
+    private ArtistService $artistService;
+    private GenreService $genreService;
 
     /**
      * @param ContentService $contentService
@@ -73,7 +77,9 @@ class ContentPagesController extends BaseController
         ContentFollowsService $contentFollowsService,
         ResourceDecorator $resourceDecorator,
         MethodService $methodService,
-        UserContentProgressService $userContentProgressService
+        UserContentProgressService $userContentProgressService,
+        ArtistService $artistService,
+        GenreService $genreService
     ) {
         $this->contentService = $contentService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
@@ -85,6 +91,8 @@ class ContentPagesController extends BaseController
         $this->resourceDecorator = $resourceDecorator;
         $this->methodService = $methodService;
         $this->userContentProgressService = $userContentProgressService;
+        $this->artistService = $artistService;
+        $this->genreService = $genreService;
     }
 
     public function contentTypeCatalog(Request $request, $domain, $brand, $contentTypeName)
@@ -1495,8 +1503,7 @@ class ContentPagesController extends BaseController
         FiltersHelper::prepareFiltersFields();
 
         $brand = $request->get('brand', brand());
-        $pageSize = $request->get('limit', 5);
-        $randomize = $request->get('randomize', 0);
+        $pageSize = $request->get('limit', 10);
         $filter = FiltersHelper::$filter ?? '';
         $page = $request->get('page', 1);
         $sections = match(strtolower($filter)) {
@@ -1513,17 +1520,37 @@ class ContentPagesController extends BaseController
         } else {
             $groupBySections = [];
         }
+
+        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
+
+        if(!\user()->hasSongsAccess($brand)) {
+            $catalogueMeta['tabs'] = array_values(
+                array_filter($catalogueMeta['tabs'], function ($tab) {
+                    return $tab['name'] != 'Songs';
+                })
+            );
+            $groupBySections =
+                array_filter($groupBySections, function ($key) {
+                    return $key != 'Songs You Might Like';
+                },
+                ARRAY_FILTER_USE_KEY);
+
+            $sections = array_values(
+                array_filter($sections, function ($section) {
+                    return $section->name != 'Song';
+                })
+            );
+        }
+
         $listLessons = $this->contentService->getRecommendedContent(
             user()->id,
             $brand,
             sections: $sections,
-            randomize:$randomize,
             pageSize:$pageSize,
             page:$page,
             groupByForLessonsPage: $groupBySections
         );
 
-        $catalogueMeta = config('railcontent.cataloguesMetadata')[brand()]['recommended'] ?? [];
         $adminMessage = null;
         return view('content.catalogue', [
             "adminMessage" => $adminMessage,
@@ -1742,9 +1769,7 @@ class ContentPagesController extends BaseController
             ['song'],
             $artist
         );
-        $artistData =
-            $this->contentService->getWhereTypeInAndStatusAndField(['artist'], 'published', 'name', $artist, 'string')
-                ->first();
+        $artistData = $this->artistService->getByName($artist);
 
         $contentSubtitle = $initialContent->totalResults().' '.$pluralContentType.'    '.$totalPlays.' plays';
 
@@ -1759,7 +1784,7 @@ class ContentPagesController extends BaseController
             'goBackUrl' => '/'.$brand.'/songs',
             'requiredFields' => ['artist,'.$artistName],
             'filterableValues' => $catalogueMeta['allowableFilters'],
-            'thumbnail_url' => ($artistData) ? $artistData->fetch('data.head_shot_picture_url') :
+            'thumbnail_url' => ($artistData) ? $artistData['head_shot_picture_url'] :
                 config('railcontent.default_avatar_artist')[config('railcontent.brand', 'drumeo')],
             'pluralContentType' => $pluralContentType,
         ]);
@@ -1798,9 +1823,9 @@ class ContentPagesController extends BaseController
 
         $contentTitle = ucwords($genre.' - '.$contentTypeName);
         $contentSubtitle = $initialContent->totalResults().' '.$contentTypeName;
-
+        $genreData = $this->genreService->getByName($genre);
         $thumb =
-            config('railcontent.avatar_style')[$genre]
+            $genreData['head_shot_picture_url']
             ??
             config('railcontent.default_avatar_style')[config('railcontent.brand', 'drumeo')];
         unset($initialContent['filter_options']['genre']);

@@ -4,6 +4,7 @@
         :item="item" :key="index"
         :content-type-override="contentTypeOverride"
         :showTotalPlays="activeTab === 'Artists'"
+        :no-results-message="noResultsMessage"
     />
 </template>
 
@@ -22,6 +23,10 @@ const props = defineProps({
     activeTab: {
         type: String,
         default: () => '',
+    },
+    noResultsMessage: {
+        type: String,
+        default: '',
     },
 })
 </script>

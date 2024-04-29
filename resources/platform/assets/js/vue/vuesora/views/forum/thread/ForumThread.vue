@@ -77,8 +77,12 @@
                 <div id="replyContainer" class="tw-flex tw-flex-col tw-w-full sm:tw-pl-4">
                     <form method="post" :action="postStoreFormUrl" @submit="formDisabled = !formDisabled">
 
-                        <text-editor ref="textEditor" :is-reply-section="true" v-model="postReplyInterface"
-                            @input="handleInput" />
+                        <text-editor
+                            ref="textEditor"
+                            :is-reply-section="true"
+                            :hasImageUploader="true"
+                            v-model="postReplyInterface"
+                        />
 
                         <input type="hidden" name="_method" value="PUT">
 
@@ -469,11 +473,7 @@ export default {
             this.currentPost = payload.id;
         },
 
-        handleInput (payload) {
-            this.postReplyInterface = payload.currentValue;
-        },
-
-        pinPost () {
+        pinPost() {
             ForumService.pinForumsThread(this.thread.id, this.brand, !this.isPinned)
                 .then(resolved => resolved);
 

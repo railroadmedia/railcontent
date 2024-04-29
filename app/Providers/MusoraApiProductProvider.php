@@ -119,6 +119,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
      */
     public function getCohortTemplate($slug): array
     {
+        $slug = explode('?',$slug)[0];
         $cohort = $this->cohortService->getCohort($slug);
         $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config(
             'railcontent.cohort_timeline_image_urls'
@@ -126,23 +127,23 @@ class MusoraApiProductProvider implements ProductProviderInterface
         foreach (config('railcontent.cohort_icons')[brand()] ?? [] as $key => $value) {
             $cohort[$key] = $value;
         }
-        if ($cohort['cohort_trailer']) {
+        if (isset($cohort['cohort_trailer'])) {
             $vimeoId = (int)substr(parse_url($cohort['cohort_trailer'], PHP_URL_PATH), 7);
             $cohort['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
         }
-        if ($cohort['description_trailer_1']) {
+        if (isset($cohort['description_trailer_1'])) {
             $vimeoId1 = (int)substr(parse_url($cohort['description_trailer_1'], PHP_URL_PATH), 7);
             $cohort['first_day_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId1);
         }
-        if ($cohort['description_trailer_2']) {
+        if (isset($cohort['description_trailer_2'])) {
             $vimeoId2 = (int)substr(parse_url($cohort['description_trailer_2'], PHP_URL_PATH), 7);
             $cohort['last_day_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId2);
         }
-        if ($cohort['demo_trailer']) {
+        if (isset($cohort['demo_trailer'])) {
             $vimeoId3 = (int)substr(parse_url($cohort['demo_trailer'], PHP_URL_PATH), 7);
             $cohort['demo_trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId3);
         }
-        if ($cohort['content_id']) {
+        if (isset($cohort['content_id'])) {
             $initialBypassPermissions = ContentRepository::$bypassPermissions;
             $initialPullFutureContent = ContentRepository::$pullFutureContent;
             $initialContentStatuses = ContentRepository::$availableContentStatues;
@@ -179,6 +180,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
         $lists = $cohort->lists;
         foreach ($lists as $list) {
             $list->description = preg_replace('/{' . 'enrolled' . '}/', $nPackOwners, $list->description);
+        }
+
+        if($cohort['is_product'] && $cohort['product_sale_price'] && $cohort['product_original_price']){
+            $cohort['product_savings_price_percent'] = round(100 - (100 * ($cohort['product_sale_price'] / $cohort['product_original_price'])));
         }
 
         return [

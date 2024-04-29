@@ -173,7 +173,6 @@
                                 :fieldKey="domID + '-editor'"
                                 ref="textEditor"
                                 v-model="replyInterface"
-                                @input="handleInput"
                                 :height="150"
                             ></text-editor>
                         </div>
@@ -336,9 +335,6 @@ export default {
         },
 
         userExpValue() {
-            if (this.brand === 'guitareo') {
-                return null;
-            }
 
             return Utils.parseXpValue(this.comment.user.xp);
         },
@@ -427,13 +423,10 @@ export default {
         },
 
         showUserExp() {
-            return this.userExpValue != null && this.comment.user.access_level !== 'team';
+            return this.userExpValue != null;
         },
     },
     methods: {
-        handleInput(payload) {
-            this.reply = payload.currentValue;
-        },
         replyToComment() {
             this.replying = !this.replying;
             this.$emit('replyOpened', {

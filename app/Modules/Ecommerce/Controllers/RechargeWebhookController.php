@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Jobs\WebhookJob;
+use App\Modules\Ecommerce\Jobs\Recharge\PaymentMethodUpdatedEventTrackingJob;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
@@ -114,5 +116,29 @@ class RechargeWebhookController extends Controller
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
+    }
+
+    public function paymentMethodUpdated(Request $request): void
+    {
+        try {
+            Log::info('Recharge payment method updated webhook received');
+            Log::debug(print_r($request->all(), true));
+            Log::debug($request->headers);
+
+            $id = $this->getWebhookIdentifierOrGUID($request);
+            $contents = $request->all();
+            $children = [
+                new PaymentMethodUpdatedEventTrackingJob($contents),
+            ];
+            dispatch(new WebhookJob('Recharge-payment-method-updated', $id, $contents, $children));
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
+    }
+
+    private function getWebhookIdentifierOrGUID(Request $request)
+    {
+        return $request->header('x-recharge-request-id') ?? $request->header('X-Recharge-Request-Id') ?? uniqid('generated-');
     }
 }

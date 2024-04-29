@@ -3,13 +3,10 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
-use App\Models\ShopifySync;
 use App\Modules\Ecommerce\Jobs\Shopify\SyncSubscriptionPaymentsToShopifyOrdersJobManager;
-use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use Carbon\Carbon;
 use Illuminate\Bus\Batch;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -25,7 +22,8 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
     protected $signature = 'shopify:sync-subscription-payments
                             {--startingId= : (Optional) The SubscriptionPayment Id to start processing at}
                             {--limit= : (Optional) The number of subscription payments to limit this run to}
-                            {--since= : (Optional) The ISO 8601 date time to sync all changes since. e.g. 2023-10-13T17:03:25+00:00}
+                            {--startCreatedAt= : (Optional) The ISO 8601 date time for all ecommerce_subscription_payments to get where the created_at is at or after. e.g. 2023-10-13T17:00:25+00:00}
+                            {--endCreatedAt= : (Optional) The ISO 8601 date time for all  ecommerce_subscription_payments to get where the created_at is at or before. e.g. 2023-10-13T17:30:14+00:00}
                             {--fresh : Sync all subscription payments, not just those that need it}
                             {--execute : Execute this sync to Shopify. Without this flag, it will be simulated.}';
     /**
@@ -48,32 +46,24 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
         $startingId = $this->option("startingId");
         $limit = $this->option("limit");
 
-        $lastSyncAt = $this->getDateTimeOfLastSync();
+        $startCreatedAt = new Carbon($this->option("startCreatedAt") ?: '1970-01-01T00:00:00Z');
+        $endCreatedAt = new Carbon($this->option("endCreatedAt") ?: config('ecommerce.launch_date_times.shopify'));
 
         // find all subscription payments that need to be synced
-        $subscriptionPayments = SubscriptionPayment::query()
-            ->when(!is_null($startingId), function (Builder $q) use ($startingId) {
-                return $q->where("id", ">=", $startingId);
-            })
-            ->where(function (Builder $q) use ($lastSyncAt, $fresh) {
-                $q->when(!$fresh, function (Builder $q) use ($lastSyncAt) {
-                    return $q->whereNull("shopify_id")
-                        ->orWhereDate("updated_at", ">", $lastSyncAt);
-                });
-            })
-            ->whereIn("payment_id", function ($query) {
-                $query->select("id")
-                    ->from("ecommerce_payments")
-                    ->where("status", Payment::STATUS_PAID)
-                    ->whereNot("type", Payment::TYPE_INITIAL_ORDER);
-            })
+        $subscriptionPayments = SubscriptionPayment::toSyncWithShopify(
+            startingId: $startingId,
+            fresh: $fresh,
+            startCreatedAt: $startCreatedAt,
+            endCreatedAt: $endCreatedAt
+        )
             ->select("id");
+
         $subscriptionPaymentsCount = $subscriptionPayments->count();
         $batchSize = 500;
         $jobs = [];
 
         $this->info(
-            "SyncSubscriptionPaymentsToShopifyOrders: Preparing to chunk orders into jobs for SyncSubscriptionPaymentsToShopifyOrders. Please wait..."
+            "SyncSubscriptionPaymentsToShopifyOrders: Preparing to chunk subscription payments into jobs for SyncSubscriptionPaymentsToShopifyOrders. Please wait..."
         );
 
         $startAt = Carbon::now();
@@ -85,7 +75,8 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
             $subscriptionPayments->chunk(
                 $batchSize,
                 function ($subscriptionPaymentIds) use (
-                    $lastSyncAt,
+                    $endCreatedAt,
+                    $startCreatedAt,
                     $limit,
                     &$isAtLimit,
                     $batchSize,
@@ -106,12 +97,11 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
                         $subscriptionPaymentIds = $subscriptionPaymentIds->take($toGet);
                     }
 
-                    $firstSubscriptionPaymentId = $subscriptionPaymentIds->first()->id;
-                    $lastSubscriptionPaymentId = $subscriptionPaymentIds->last()->id;
                     $jobs[] = new SyncSubscriptionPaymentsToShopifyOrdersJobManager(
-                        $firstSubscriptionPaymentId,
-                        $lastSubscriptionPaymentId,
-                        $lastSyncAt,
+                        $subscriptionPaymentIds->first()->id,
+                        $subscriptionPaymentIds->last()->id,
+                        $startCreatedAt,
+                        $endCreatedAt,
                         $simulate,
                         $fresh
                     );
@@ -121,13 +111,12 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
             // step through the chunks of order ids to sync, and add a job to process each chunk
             $subscriptionPayments->chunk(
                 $batchSize,
-                function ($subscriptionPaymentIds) use ($lastSyncAt, $simulate, $fresh, &$jobs) {
-                    $firstSubscriptionPaymentId = $subscriptionPaymentIds->first()->id;
-                    $lastSubscriptionPaymentId = $subscriptionPaymentIds->last()->id;
+                function ($subscriptionPaymentIds) use ($startCreatedAt, $endCreatedAt, $simulate, $fresh, &$jobs) {
                     $jobs[] = new SyncSubscriptionPaymentsToShopifyOrdersJobManager(
-                        $firstSubscriptionPaymentId,
-                        $lastSubscriptionPaymentId,
-                        $lastSyncAt,
+                        $subscriptionPaymentIds->first()->id,
+                        $subscriptionPaymentIds->last()->id,
+                        $startCreatedAt,
+                        $endCreatedAt,
                         $simulate,
                         $fresh
                     );
@@ -136,7 +125,7 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
         }
         $this->info(
             sprintf(
-                "SyncSubscriptionPaymentsToShopifyOrders: Completed chunking orders into jobs for ".
+                "SyncSubscriptionPaymentsToShopifyOrders: Completed chunking subscription payments into jobs for ".
                 "SyncSubscriptionPaymentsToShopifyOrdersJobManager in %s seconds.",
                 $startAt->diffInSeconds()
             )
@@ -154,7 +143,7 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
             })->catch(function (Batch $batch, Throwable $e) {
                 Log::error($e->getMessage());
             })
-            ->onQueue('command')
+            ->onQueue('command-two')
             ->dispatch();
         $this->info(
             sprintf(
@@ -163,41 +152,10 @@ class SyncSubscriptionPaymentsToShopifyOrdersDispatcher extends Command
                 $batch->totalJobs,
                 Str::plural("job", $batch->totalJobs),
                 $subscriptionPaymentsCount,
-                Str::plural("order", $subscriptionPaymentsCount)
+                Str::plural("subscription payment", $subscriptionPaymentsCount)
             )
         );
 
         return self::SUCCESS;
-    }
-
-
-    /**
-     * Get the date and time that orders were last synced up to Shopify
-     *
-     * @return Carbon
-     */
-    protected function getDateTimeOfLastSync(): Carbon
-    {
-        $override = $this->getLastSyncAtOverride();
-        if (!is_null($override)) {
-            return $override;
-        }
-
-        $sync = ShopifySync::where("resource", ShopifySync::RESOURCE_SUBSCRIPTION_PAYMENT)->latestFinished()->first();
-        return $sync?->finished_at ?? Carbon::createFromTimestamp(0);
-    }
-
-    /**
-     * Get the optional override of when this entity was last synced to Shopify
-     *
-     * @return Carbon|null
-     */
-    protected function getLastSyncAtOverride(): null|Carbon
-    {
-        $override = $this->option("since");
-        if (!is_null($override)) {
-            return new Carbon($override);
-        }
-        return null;
     }
 }

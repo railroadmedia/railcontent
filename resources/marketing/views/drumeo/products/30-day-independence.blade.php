@@ -7,8 +7,8 @@
     <meta name="description" content="Improve your coordination with daily guided workouts.">
     <meta property="og:description" content="Unlock your creativity and speed around the drums.">
     <meta property="og:image"
-        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-drummer/season-4/share-image.jpg"
-        style="display: none;"> <!-- TODO -->
+        content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/marketing/drumeo/products/30-day-independence/share-image.jpg"
+        style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -235,7 +235,11 @@
 @section('body-data')
     x-data ="{
     trailer : false,
+    trailerM: false,
     lazyLoad: false,
+    loadAlternateSrc: function(src) {
+        this.$refs.playToLearnVideo.src = src;
+    },
     videoLoaded: false,
     waitlistModal: false,
     }"
@@ -247,21 +251,29 @@
     ])
     @include('_partials.components.shop.promo-banner', [
         'name' => '30-Day Independence',
-        'fullPrice' => floatval($productPrices['30-day-drummer']->price),
-        'price' => floatval($productPrices['30-day-drummer']->discounted_price),
+        'fullPrice' => floatval($productPrices['30-day-independence']->price),
+        'price' => floatval($productPrices['30-day-independence']->discounted_price),
         'noBreadcrumb' => true,
     ])
+@php
+    if(!empty($products['quietpad-estepario']->getStockAvailability()) && $products['quietpad-estepario']->getStockAvailability() > 250) {
+        $stock = $products['quietpad-estepario']->getStockAvailability() - 250;
+    }
+    else {
+        $stock = 'a limited amount';
+    }
+@endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
         <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
+            <div class="flex flex-wrap sm:flex-nowrap items-center pt-4">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/drumeo/products/30-day-independence/icon-logo-dark.webp"
                         alt="30-Day Independence Logo">
                     @php
-                        $lines = ['Learn the drums', 'Improve your timing', 'Boost your creativity'];
+                        $lines = ['Unlock Your Limbs', 'Improve Your Coordination', 'Boost Your Independence'];
                     @endphp
 
                     <h2 class="rotater-text overflow-hidden">
@@ -276,12 +288,12 @@
                     </h2>
                     <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the next class <br
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
                                 class="inline lg:hidden">starting May 6th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
-                        x-on:click="trailer = true;">
+                        x-on:click="trailerM = true;">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
                         </div>
                     </div>
@@ -307,9 +319,8 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" x-on:click="waitlistModal = true;">JOIN
-                                WAITLIST</span>
-                            {{--                            <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a> --}}
+{{--                            <span class="join sold-out medium w-full" x-on:click="waitlistModal = true;">JOIN WAITLIST</span>--}}
+                                                        <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
                                 <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Registration is FREE for
                                     Drumeo Members.</a>
@@ -327,7 +338,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                        style="padding-bottom: 98%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/header-thumb.webp');"
                         x-on:click="trailer = true;">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
                                 class="fas fa-play"></i> Watch Trailer</div>
@@ -374,7 +385,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-trophy text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Play your favorite songs<br> with excellent timing & feel.</span>
+                            <span class="text-sm">Improve your 4-way <br>  coordination</span>
                         </p>
                     </div>
                 </div>
@@ -388,24 +399,7 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="leading-tight mb-3"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
-            <div class="flex flex-col-reverse md:flex-row">
-                <div class="w-full md:w-1/2 text-left mb-2 md:mb-4 flex items-center">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores provident sequi explicabo ipsum
-                        blanditiis incidunt aliquid architecto, illum non enim minima mollitia, repellendus vitae
-                        perferendis cumque? At voluptatem aspernatur sunt. Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit.
-                        <br><br>
-                        Asperiores provident sequi explicabo ipsum blanditiis incidunt aliquid architecto, illum non enim
-                        minima mollitia, repellendus vitae perferendis cumque? At voluptatem aspernatur sunt.
-                    </p>
-                </div>
-                <img class="w-full md:w-1/2" loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/section.jpg"
-                    alt="Drummer">
-            </div>
-
-
+            <h2 class="leading-tight mb-7 sm:mb-12"><strong>Unlock your creativity <br />and speed around the drums.</strong></h2>
             @php
                 $gettings = [
                     [
@@ -422,7 +416,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/schedule.webp',
                         'title' => 'Fits any schedule.',
                         'desc' =>
-                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Independence is designed to fit any schedule. You only need 10-minutes per day to improve your 4-way coordination.',
+                            'It’s not easy trying to cram your drum practice between work, school, and family. That’s why 30-Day Independence is designed to fit any schedule. You only need 10 minutes per day to improve your 4-way coordination.',
                     ],
                     [
                         'position' => 'left',
@@ -446,11 +440,11 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/lifetime.webp',
                         'title' => 'Lifetime access.',
                         'desc' =>
-                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace.',
+                            'You can access ALL playalongs, charts, and lessons from 30-Day Independence for life. That means you can return to your favorite workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
             @endphp
-            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 mt-5">
+            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
@@ -500,18 +494,10 @@
                     <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results
                 </h4>
             </div>
-            @if (session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day
-                        Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
-            {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br> --}}
-            @if ($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
-                {{--                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br> --}}
-                <a href="#final" class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3"
-                    x-on:click="waitlistModal = true;">JOIN WAITLIST</a><br>
-            @endif
+
+                                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+{{--                <a href="#final" class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" x-on:click="waitlistModal = true;">JOIN WAITLIST</a><br>--}}
+
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -561,7 +547,7 @@
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo">
                                 <strong>JUN</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">1</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">3</strong></p>
                         </div>
                     </div>
                 </div>
@@ -591,7 +577,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/advanced.webp',
                         'title' => 'Advanced Drummers',
                         'description' =>
-                            'You’ve been playing for a while, holding down gigs and feeling confident in your drumming. 30-Day Indpendence will boost your 4-way coordination that will help you play new styles, create your own drum parts, and play everything easier. ',
+                            'You’ve been playing for a while, holding down gigs and feeling confident in your drumming. 30-Day Independence will boost your 4-way coordination that will help you play new styles, create your own drum parts, and play everything easier. ',
                     ],
                     [
                         'image' =>
@@ -622,9 +608,9 @@
             </div>
 
 
-            <h2 class="mt-20 lg:mt-24 mb-3"><strong>Playing makes perfect.</strong></h2>
-            <h6 class="leading-normal mb-11">For less than the cost of monthly private lessons<br
-                    class="hidden sm:inline"> you’ll get a 30 day program to transform your drumming.</h6>
+            <h2 class="mt-10 lg:mt-24 mb-3"><strong>Playing makes perfect.</strong></h2>
+            <h6 class="leading-normal mb-14 md:mb-11">For less than the cost of monthly private lessons<br
+                    class="hidden sm:inline"> you’ll get a 30-day program to transform your drumming.</h6>
 
             <div class="relative">
                 <p
@@ -695,21 +681,27 @@
     </section>
 
     <section style="background: #EFF7FF" class="px-5 sm:px-8 py-8 sm:py-12 lg:py-16 text-center">
-        <div class="container max-w-5xl mx-auto mb-10">
+        <div class="container max-w-4xl mx-auto mb-10">
             <h5 class="uppercase leading-relaxed opacity-50 mb-3">No theory. No homework.</h5>
             <img class="w-full sm:max-w-2xl mb-5 sm:mb-10"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play-logo.svg"
                 alt="Just Press Play Image" />
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
-                x-on:click="trailer = true;" role="button">
-                <i
-                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="sm:rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                    data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4"
-                    type="video/mp4" loop playsinline muted controls></video>
-                <img class="absolute inset-0 sm:rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/press-play.jpg"
-                    alt="Press Play" />
+                x-on:click="window.innerWidth <= 640 ? trailerM = true : trailer = true;">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
+                    x-ref="playToLearnVideo"
+                    x-on:error="loadAlternateSrc('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/30-day-independence/30-day-independence-silent-reel.mp4')"
+                    x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                    x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                    poster="https://i.vimeocdn.com/video/1828301259-c092a2a94d0b5008ba1042a1dd0a4f8f7289dac5a9ba14bc19a17e5a679b07d0-d?mw=2700&mh=1519&q=70"
+                    data-src="https://player.vimeo.com/progressive_redirect/playback/931215529/rendition/540p/file.mp4?loc=external&signature=6bb8c33a63099e10ddedf690bf5a125956bb2e296b8f4ea56e5a48396a90ecb8"
+                    type="video/mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"></video>
             </div>
         </div>
     </section>
@@ -814,12 +806,13 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg"
-                            alt="Larnell lewis">
-                        <p class="pl-4"><strong>Larnell Lewis</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Grammy-winner, Snarky Puppy</em><br>
-                            “Domino’s passion for drumming is infectious! It’s a great reminder that all we need is a love
-                            for music and drums to get started!”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/mike-portnoy.webp"
+                            alt="Mike Portnoy Photo">
+                        <p class="pl-4"><strong>Mike Portnoy</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Dream Theater</em><br>
+                            “El Estepario continues to push the boundaries of what is possible with drumming, creativity and independence…
+                            proving to be one of the most inspiring (and popular) drummers on the internet.”
+
                         </p>
                     </div>
                 </div>
@@ -827,12 +820,11 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png"
-                            alt="Matt Mcguire">
-                        <p class="pl-4"><strong>Matt McGuire</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">The Chainsmokers</em><br>
-                            “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This
-                            program not only provides education, I'm sure you'll be entertained throughout the process.”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/nic-collins.webp"
+                            alt="Nic Collins Photo">
+                        <p class="pl-4"><strong>Nic Collins</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Phil Collins/Genesis</em><br>
+                                “I’ve been a fan of Estepario’s ever since I saw one of his videos for the first time on my Instagram. He never ceases to blow my mind with his speed, precision, and creativity.”
                         </p>
                     </div>
                 </div>
@@ -840,12 +832,11 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg"
-                            alt="Dorothea Taylor">
-                        <p class="pl-4"><strong>Dorothea Taylor</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">The Godmother Of Drumming,<br> Educator
-                                for 50+ years</em><br>
-                            “Domino plays drums with high energy & passion which shows how much fun playing drums can be.”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/chad-smith.webp"
+                            alt="Chad Smith Photo">
+                        <p class="pl-4 m-0"><strong>Chad Smith</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Red Hot Chili Peppers</em><br>
+                            “All I know is that guy is a freak of nature.” <br>
                         </p>
                     </div>
                 </div>
@@ -853,12 +844,11 @@
                     <div class="flex items-start p-5 bg-white rounded-lg">
                         <img class="h-16 lg:h-20 rounded-full transition-opacity opacity-0" loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg"
-                            alt="Jared Falk">
-                        <p class="pl-4"><strong>Jared Falk</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
-                            “Every-time I watch and listen to Domino Santantonio play drums I smile. She plays with joy,
-                            teaches with passion, and inspires drummers to take action.”
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/gregg-bisonnette.webp"
+                            alt="Gregg Bissonette Photo">
+                        <p class="pl-4"><strong>Gregg Bissonette</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Ringo Starr & His All-Starr Band</em><br>
+                            “El Estepario Siberiano is one of the greatest drummers I have ever heard in my entire life. His dedication, technique, and tremendous showmanship, and just everything are a real inspiration to myself and to drummers all around the world.”
                         </p>
                     </div>
                 </div>
@@ -873,7 +863,7 @@
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/410x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
                 alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                     guaranteed.</strong></h2>
@@ -903,7 +893,18 @@
 
              <!-- Version 1 -->
             <h6 class="leading-normal mb-4 text-drumeo">
-            <strong>EARLY BIRD SPECIAL:</strong> Get a free limited edition Estepario QuietPad <span>Only <s class='opacity-60'>500</s> <strong> {{$products['DLM-Lifetime']->getPublicStockCount()}} </strong> left!</span>
+                Enrollment closes in
+                <strong x-cloak x-data="timer()" x-init="countdown()">
+                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
+                            x-text="dayText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
+                            x-text="hourText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
+                            x-text="minuteText"></span></span>
+                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
+                            x-text="secondText"></span></span>!
+                    <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
+                </strong>
             </h6>
 
 
@@ -916,38 +917,35 @@
                 drummers who<br class="sm:hidden"> have already registered.</p>
 
             @include('drumeo.products.partials._promo-cards', [
-                // first deal
                 'firstDeal' => '30-Day Independence',
                 'firstDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/30DI-bundle.webp',
-                'firstImageHeight' => 'h-32',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-01.webp',
+                'firstImageHeight' => 'h-36 lg:h-40',
                 'firstDealPrice' => 97,
-                'firstDealSub' => 'Just the course + 3 bonuses worth $102.95',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
+                'firstDealSub' => 'Just the course + 2 bonuses worth $42.95',
+                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
                 'firstButtonText' => 'ENROLL NOW',
                 'firstDealExtra' => "One-time payment",
                 'whiteBg' => 'false',
                 'firstExtraBonuses' => [
                     '<strong>30-Day Independence</strong>',
-                    '<strong>Free</strong> Ltd. Edition Estepario QuietPad',
                     '<strong>Free</strong> Drumeo 5A Drumsticks',
                     '<strong>Free</strong> 1-month Drumeo Access',
                 ],
 
-                // second deal
                 'topBadge' => 'MOST POPULAR',
                 'secondDeal' => 'Unlimited Lessons',
                 'secondDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/membership-bundle.webp',
-                'secondImageHeight' => 'h-32',
-                'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $308.94",
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-02.webp',
+                'secondImageHeight' => 'h-36 lg:h-40',
+                'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $258.94",
                 'secondDealPrice' => '20/mo',
                 'secondDealLink' =>
                     '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
                 'secondExtraBonuses' => [
                     '<strong>Annual Drumeo Membership</strong>',
                     '<strong>Free 30-Day Independence</strong>',
-                    '<strong>Free</strong> Ltd. Edition Estepario QuietPad',
+                    '<strong>Free</strong> Drumeo QuietPad',
                     '<strong>Free</strong> Drumeo PadStand',
                     '<strong>Free</strong> Drumeo 5A Drumsticks',
                     '<strong>Free</strong> Easy Rudiments Book',
@@ -956,73 +954,13 @@
                 'secondDealExtra' => "Billed annually at $240/yr.",
             ])
 
-              <!-- Version 2 -->
-
-{{--              <h6 class="leading-normal mb-4">--}}
-{{--                <span class="text-drumeo">Enrollment closes in--}}
-{{--                    <strong><span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span--}}
-{{--                                    x-text="dayText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span--}}
-{{--                                    x-text="hourText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span--}}
-{{--                                    x-text="minuteText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span--}}
-{{--                                    x-text="secondText"></span></span>--}}
-{{--                            <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                        </span>!</strong>--}}
-{{--                </span>--}}
-{{--            </h6>--}}
-
-
-{{--            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"--}}
-{{--                onload="this.classList.remove('opacity-0')"--}}
-{{--                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
-{{--                alt="Image of joined student profiles in 30-Day Independence">--}}
-{{--            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}--}}
-{{--                drummers who<br class="sm:hidden"> have already registered.</p>--}}
-
-{{--            @include('drumeo.products.partials._promo-cards', [--}}
-{{--                // first deal--}}
-{{--                'firstDeal' => '30-Day Independence',--}}
-{{--                'firstDealImage' =>--}}
-{{--                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/30DI-course.webp',--}}
-{{--                'firstImageHeight' => 'h-32',--}}
-{{--                'firstDealPrice' => 97,--}}
-{{--                'firstDealSub' => 'Just the course',--}}
-{{--                'firstDealLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=legacy&locked=true',--}}
-{{--                'firstButtonText' => 'ENROLL NOW',--}}
-{{--                'whiteBg' => 'false',--}}
-{{--                'firstDealExtra' => "One-time payment",--}}
-{{--                'firstExtraBonuses' => [--}}
-{{--                    '24 Guided Workouts',--}}
-{{--                    '4 Live Q&A Sessions',--}}
-{{--                    'Lifetime Course Access',--}}
-{{--                    '90-Day Money Back Guarantee',--}}
-{{--                ],--}}
-
-{{--                // second deal--}}
-{{--                'topBadge' => 'MOST POPULAR',--}}
-{{--                'secondDeal' => 'Unlimited Lessons',--}}
-{{--                'secondDealImage' =>--}}
-{{--                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/550x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/membership-bundle.webp',--}}
-{{--                'secondImageHeight' => 'h-32',--}}
-{{--                'secondDealSub' => "1 year of Drumeo + 4 bonuses worth $1,493.93",--}}
-{{--                'secondDealPrice' => '20/mo',--}}
-{{--                'secondDealLink' =>--}}
-{{--                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',--}}
-{{--                'secondExtraBonuses' => [--}}
-{{--                    '<strong>Annual Drumeo Membership</strong>',--}}
-{{--                    '<strong>Free 30-Day Independence</strong>',--}}
-{{--                    '<strong>Free</strong> Drumeo PadStand',--}}
-{{--                    '<strong>Free</strong> Drumeo 5A Drumsticks',--}}
-{{--                    '<strong>Free</strong> Easy Rudiments Book',--}}
-{{--                ],--}}
-{{--                'secondButtonText' => 'GET EVERYTHING',--}}
-{{--                'secondDealExtra' => "Billed annually at $240/yr.",--}}
-{{--            ])--}}
-
+            <a class="mt-10 inline-block" href="/ecommerce/add-to-cart?products[30-day-independence]=1&products[drumeo_access_30-days]=1&locked=true"><u class="text-drumeo">Don’t want a free bonus? Click here to get just digital access to 30-Day Independence ($97).</u></a>
         </div>
+    </section>
+    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
+        <p class="max-w-3xl px-4 md:px-2 leading-loose">
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
+        </p>
     </section>
 
 
@@ -1045,7 +983,7 @@
                 @include('_partials.components.question-dropdown', [
                     'title' => 'How much time per week will this course require?',
                     'desc' =>
-                        '30-Day Indepenence gives you guided daily chop workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.',
+                        '30-Day Independence gives you guided daily coordination workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.',
                     'num' => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
@@ -1091,11 +1029,11 @@
                 class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
                 <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
                 <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                    next edition of 30-Day Drummer is announced. </p>
+                     30-Day Independence is announced. </p>
                 @include('drumeo.lead-gen.partials.sign-up-form', [
                     'recaptchaKey' => $recaptchaKey,
-                    'formName' => '30 Day Chops Waitlist',
-                    'formId' => 'Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form',
+                    'formName' => '30 Day Independence Waitlist',
+                    'formId' => 'Drumeo - Engagement - Trigger - 30 Day Independence Waitlist - Web Form',
                     'buttonText' => 'Let Me Know ',
                     'stacked' => true,
                     'noSocial' => true,
@@ -1105,14 +1043,21 @@
     @endcomponent
     @include('_partials.components.video-modal', [
         'name' => 'trailer',
-        'video' => '884916532',
+        'video' => '931212517',
         'vimeo' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailerM',
+        'video' => '931214479',
+        'vimeo' => true,
+            'styles' => 'pb-[177%] bg-white',
     ])
 
     @include('drumeo.sales.partials._footer')
 
     @include('_partials.components.countdown', [
-        'countdownDate' => '2024-06-01 00:00:00',
+        'countdownDate' => '2024-05-06 00:00:00',
         'promoVersion' => false,
     ])
 

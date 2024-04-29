@@ -17,7 +17,7 @@ class MarketingController extends BaseController
     }
     public function trial()
     {
-        return view('musora.sales.subscription', [
+        return view('musora.sales.trial', [
             'theme' => 'musora',
             'promoVersion' => true,
             'trialVersion' => true,
@@ -157,5 +157,9 @@ class MarketingController extends BaseController
     public function faster()
     {
         return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+    }
+    public function app()
+    {
+        return view('musora.pages.app', [ 'theme' => 'musora', 'page' => 'app' ]);
     }
 }

@@ -29,6 +29,7 @@
             }
         }
             .play-button {
+                display: inline-block;
             cursor: pointer;
             outline: none;
             transition: opacity 0.3s;
@@ -94,14 +95,14 @@
                         Enter your email address and you’ll be in the running to win an Osmose Expressive-E (valued at
                         $1799 USD). One entry per person. Winner announced April 15.
                     </p>
-                    @include('pianote._partials.sign-up-form', [
-                        'recaptchaKey' => $recaptchaKey,
-                        'stacked' => true,
-                        'formId' => 'Pianote - Engagement - Trigger - Osmose Giveaway - Web Form',
-                        'formName' => 'Osmose Giveaway',
-                        'buttonText' => 'I WANT TO WIN!',
-                    ])
-                    <!-- <span class="join sold-out smaller w-full">this offer has now ended</span> -->
+{{--                    @include('pianote._partials.sign-up-form', [--}}
+{{--                        'recaptchaKey' => $recaptchaKey,--}}
+{{--                        'stacked' => true,--}}
+{{--                        'formId' => 'Pianote - Engagement - Trigger - Osmose Giveaway - Web Form',--}}
+{{--                        'formName' => 'Osmose Giveaway',--}}
+{{--                        'buttonText' => 'I WANT TO WIN!',--}}
+{{--                    ])--}}
+                    <span class="join sold-out smaller w-full">this offer has now ended</span>
                 </div>
                 </div>
                 <div class="hidden sm:block flex-shrink-0">
@@ -151,8 +152,6 @@
                         Could it be you?
                         <br><br>
                     </p>
-                    <a class="join smaller w-full max-w-xs" role="button" x-on:click="scrollToSection">ENTER NOW»</a>
-                    <!-- <span class="join sold-out smaller w-full">this offer has now ended</span> -->
                 </div>
 
 
@@ -257,16 +256,16 @@
                         alt="Win an Osmose Expressive-E from Jordan Rudess and Pianote Logo">
                 </div>
                 <h2 class="pb-4 lg:pb-6"><strong>Win an Osmose Expressive-E</strong></h2>
-                <div class="w-full">
-                    @include('pianote._partials.sign-up-form', [
-                        'recaptchaKey' => $recaptchaKey,
-                        'formId' => 'Pianote - Engagement - Trigger - Osmose Giveaway - Web Form2',
-                        'formName' => 'Osmose Giveaway',
-                        'buttonText' => 'I WANT TO WIN!',
-                    ])
+{{--                <div class="w-full">--}}
+{{--                    @include('pianote._partials.sign-up-form', [--}}
+{{--                        'recaptchaKey' => $recaptchaKey,--}}
+{{--                        'formId' => 'Pianote - Engagement - Trigger - Osmose Giveaway - Web Form2',--}}
+{{--                        'formName' => 'Osmose Giveaway',--}}
+{{--                        'buttonText' => 'I WANT TO WIN!',--}}
+{{--                    ])--}}
 
-                </div>
-                <!-- <span class="join sold-out smaller w-full">this offer has now ended</span> -->
+{{--                </div>--}}
+                <span class="join sold-out smaller w-full">this offer has now ended</span>
             </div>
         </div>
     </section>

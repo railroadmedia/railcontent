@@ -35,9 +35,9 @@ class RailnotificationsUserProvider implements UserProviderInterface
 
     public function getUserFirebaseTokens(int $userId, $types = [])
     : ?array {
-        $tokens = FirebaseToken::whereUserId($userId)->get()->toArray();
+        $tokens = FirebaseToken::whereUserId($userId)->get();
 
-        return $tokens;
+        return $tokens->unique('token')->toArray();
     }
 
     public function deleteUserFirebaseTokens(int $userId, array $tokens)

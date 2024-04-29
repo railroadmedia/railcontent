@@ -8,7 +8,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class LiveEventDecorator extends TypeDecoratorBase
 {
-
+    public static $skip = false;
     const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
 
     /**
@@ -19,7 +19,7 @@ class LiveEventDecorator extends TypeDecoratorBase
     {
         $contentsOfType = $contents->whereIn('type', config('railcontent.liveContentTypes', []));
 
-        if ($contentsOfType->isEmpty()) {
+        if ($contentsOfType->isEmpty() || self::$skip) {
             return $contents;
         }
 

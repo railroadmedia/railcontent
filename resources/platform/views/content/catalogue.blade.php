@@ -282,10 +282,10 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
+                {{-- <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
                     <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-mr-1"></musora-icon>
                     Experimental Feature
-                </a>
+                </a> --}}
             </div>
         </div>
     @else
@@ -428,6 +428,7 @@
                 :hide-controls="{{ json_encode($lessonType === 'Recommendation' ? true : false) }}"
                 @if($lessonType === 'Recommendation')
                     endpoint="/railcontent/recommended"
+                    no-results-message="Start your learning journey to help us select the appropriate videos for you."
                 @endif
             ></collection-wrapper>
         @endif
@@ -435,12 +436,12 @@
 
     <div id="featureModal" class="modal">
         <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-            <div class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-bold tw-text-sm tw-inline-block">
+            {{-- <div class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-bold tw-text-sm tw-inline-block">
                 <div class="tw-flex tw-items-center">
                     <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-ml-1"></musora-icon>
                     Experimental Feature
                 </div>
-            </div>
+            </div> --}}
             <p class="tw-my-2 dark:tw-text-white">Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests. </p>
             <a href="{{ $recommendationLinks->$brand }}" class="tw-font-bebas-neue tw-uppercase tw-flex tw-items-center dark:tw-text-white">
                 Learn More <musora-icon icon-name="right-arrow" class="tw-w-7" ></musora-icon>
