@@ -2,6 +2,19 @@
     'whiteNav' => true,
     'fullSubscriptionVersion' => true,
 ])
+@section('head-includes')
+    <style>
+        .join.musora-gold {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora-gold:hover, .join.musora-gold:focus {
+            background:#FFAE00;
+            color:#000;
+        }
+    </style>
+@endsection
 
 @section('layout-body')
     <header class="pb-12 md:pb-0 md:pt-20 text-center text-white" style="background-color:#000C17;"
@@ -36,6 +49,18 @@
             </div>
             <h2 class="font-extrabold mb-4">@yield('header')</h2>
             <p class="md:mb-10 px-4 lg:px-0">@yield('desc')</p>
+
+            <div class="flex flex-wrap items-center justify-center my-7 mx-auto">
+                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                </a>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
+            </div>
+            <a class="join musora-gold smaller sm:mb-10" href="/choose-plan">Start your free trial today</a>
         </div>
             @if($page === 'songs')
                 @yield('header-img')
