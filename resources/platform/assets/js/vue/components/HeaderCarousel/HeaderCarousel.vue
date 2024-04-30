@@ -11,6 +11,10 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+  trackingSection: {
+    type: String,
+    default: "",
+  },
 });
 
 const currentSlide = ref(0);
@@ -109,6 +113,7 @@ onMounted(() => {
       :mobileImg="slide.mobile_img"
       :is-draft="slide.draft === 1"
       :skill-level="slide.skill_level"
+      :trackingSection="trackingSection"
     />
 
       <!-- Directional Buttons -->

@@ -4,7 +4,7 @@
     ]">
         <div class="tw-flex tw-flex-col">
             <!-- Thumbnail Section -->
-            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
+            <a @click="handleClick" :href="isReleased && renderLink && !forceNoLinks ? item.url : null"
                 class="tw-no-underline tw-flex tw-flex-col" :class="item.type + '-thumbnail'">
                 <div
                     class="tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031] tw-aspect-video">
@@ -50,7 +50,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a :href="renderLink && !forceNoLinks ? item.url : null"
+                    <a @click="handleClick"  :href="renderLink && !forceNoLinks ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
@@ -137,11 +137,11 @@ import { snakeToCapitalized } from "../../utils";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+import userJourney from '../../../services/userJourney';
 
 //Pinia Stores
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
-
 
 const props = defineProps({
     item: {
@@ -191,7 +191,11 @@ const props = defineProps({
     scrollContainer: {
         type: String,
         default: 'content-container'
-    }
+    },
+    trackingSection: {
+        type: String,
+        default: '',
+    },
 });
 
 const {
@@ -353,4 +357,19 @@ onUnmounted(() => {
 
 const emit = defineEmits(['addToList', 'progressReset']);
 
+const handleClick = (event) => {
+    if (isReleased.value && renderLink.value && !props.forceNoLinks && props.trackingSection && props.trackingSection.length) {
+        event.preventDefault();
+
+        userJourney.trackHomeContentClick({
+            payload: {
+                contentId: props.item.id,
+                brand: brand.value,
+                section: props.trackingSection,
+            }
+        }).finally(() => {
+            window.location.href = props.item.url;
+        });
+    }
+}
 </script>

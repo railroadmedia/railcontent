@@ -4,14 +4,14 @@
     v-if="content && $_hours <= 48">
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
-      <a :href="`${brand}/live`"
+      <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`"
         class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex">
         <div class="tw-relative">
           <img class="tw-rounded-lg tw-w-full" :src="'https://cdn.musora.com/image/fetch/c_thumb,w_320,h_180,z_0.75,q_auto:best/' +
-            (content.thumbnail_url
-              ? content.thumbnail_url
-              : instructors[0].head_shot_picture_url)
-            " />
+      (content.thumbnail_url
+        ? content.thumbnail_url
+        : instructors[0].head_shot_picture_url)
+      " />
         </div>
       </a>
 
@@ -20,7 +20,7 @@
         <div class="tw-flex tw-flex-col tw-justify-center tw-pr-4">
           <div class="tw-flex tw-items-center tw-mb-1">
             <!-- Live Badge -->
-            <a :href="`${brand}/live`" class="tw-flex tw-no-underline flex-row" v-if="eventIsLive">
+            <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`" class="tw-flex tw-no-underline flex-row" v-if="eventIsLive">
               <div
                 class="flex-center tw-text-white tw-uppercase tw-rounded tw-bg-red-500 tw-text-sm tw-font-bold tw-leading-none tw-p-1">
                 <span>live</span>
@@ -50,7 +50,7 @@
 
           <!-- Event Title & Desc -->
           <div class="tw-mb-1.5">
-            <a :href="`${brand}/live`"
+            <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`"
               class="tw-font-bold tw-no-underline tw-text-[#00101D] tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white">
               {{ content.title }}
             </a>
@@ -59,7 +59,7 @@
           <!-- Coaches -->
           <div class="tw-flex">
             <div class="tw-inline-flex" v-for="(coach, i) in instructors" :key="i">
-              <a :href="`${brand}/coaches/${coach.slug}`" class="tw-no-underline tw-mr-1.5 tw-block">
+              <a @click="(e) => handleClick(e, `${brand}/coaches/${coach.slug}`)" :href="`${brand}/coaches/${coach.slug}`" class="tw-no-underline tw-mr-1.5 tw-block">
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
                   <span class="tw-mr-1">{{ coach.name.split(" ")[0] }}</span>
                   <span class="tw-font-bold tw-mr-1">{{ coach.name.split(" ")[1] }}</span>
@@ -82,7 +82,7 @@
           <div v-if="eventIsLive || showWatch">
             <div class="tw-flex-row tw-flex-wrap-md tw-hidden lg:tw-block">
               <div>
-                <a :href="`${brand}/live`" class="tw-btn-primary tw-w-full" :class="[brandBGColor, brandHoverColor]">
+                <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`" class="tw-btn-primary tw-w-full" :class="[brandBGColor, brandHoverColor]">
                   watch now
                 </a>
               </div>
@@ -94,13 +94,15 @@
             <button
               class="dark:tw-text-[#9EC0DC] dark:hover:tw-bg-[#000C17] hover:tw-bg-white tw-cursor-pointer tw-border-0 tw-bg-transparent tw-transition tw-text-3xl tw-mr-2 tw-inline-flex tw-items-center tw-justify-center tw-h-[61px] tw-w-[52px] tw-rounded"
               @click.stop.prevent="addToPlaylist">
-              <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
             </button>
 
             <!-- Subscribe to Calendar -->
-            <button class="dark:tw-text-[#9EC0DC] dark:hover:tw-bg-[#000C17] hover:tw-bg-white tw-cursor-pointer tw-border-0 tw-bg-transparent tw-text-3xl tw-inline-flex tw-items-center tw-justify-center tw-h-[61px] tw-w-[52px] tw-rounded"
+            <button
+              class="dark:tw-text-[#9EC0DC] dark:hover:tw-bg-[#000C17] hover:tw-bg-white tw-cursor-pointer tw-border-0 tw-bg-transparent tw-text-3xl tw-inline-flex tw-items-center tw-justify-center tw-h-[61px] tw-w-[52px] tw-rounded"
               data-open-modal="scheduleAddToCalendarModal" alt="Subscribe to Calendar" :class="[brandTextColor]">
               <i class="fas fa-calendar-plus" @click="toggleSubscribePopup"></i>
             </button>
@@ -118,8 +120,8 @@
 import ContentHelpers from "../../assets/js/helper-functions/content.js";
 import ContentSchedule from "../../views/schedule/Schedule.vue";
 import { DateTime } from "luxon";
-import { useUserStore} from "../../../../stores/user";
-import {storeToRefs} from "pinia/dist/pinia";
+import { useUserStore } from "../../../../stores/user";
+import { storeToRefs } from "pinia/dist/pinia";
 
 export default {
   components: {
@@ -144,6 +146,10 @@ export default {
       default: () => 0,
     },
     youtubeEventId: {
+      type: String,
+      default: () => "",
+    },
+    trackingSection: {
       type: String,
       default: () => "",
     },
@@ -235,11 +241,17 @@ export default {
         return this.content.is_added_to_primary_playlist;
       },
     },
-    brand(){
-        const userStore = useUserStore();
-        const { brand } = storeToRefs(userStore)
+    brand() {
+      const userStore = useUserStore();
+      const { brand } = storeToRefs(userStore)
 
-        return brand.value;
+      return brand.value;
+    },
+    token() {
+      const userStore = useUserStore();
+      const { token } = storeToRefs(userStore)
+
+      return token.value;
     },
     brandBGColor() {
       return "tw-bg-" + this.brand;
@@ -268,6 +280,23 @@ export default {
           1000
         );
       });
+    },
+
+    handleClick(event, url) {
+      if (this.trackingSection && this.trackingSection.length) {
+        event.preventDefault();
+
+        userJourney.trackHomeContentClick({
+          token: this.token,
+          payload: {
+            contentId: null,
+            brand: this.brand,
+            section: this.trackingSection,
+          }
+        }).finally(() => {
+          window.location.href = url;
+        });
+      }
     },
 
     padTwoDigits(number) {

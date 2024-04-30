@@ -2,6 +2,7 @@
 
 // Add to existing imports
 import axios from 'axios';
+import { useUserStore } from "../stores/user";
 
 export default {
     //-------------JOURNEYS--------------//
@@ -62,4 +63,32 @@ export default {
             headers
         });
     },
+
+    trackHomeContentClick({ payload }) {
+        const { token } = useUserStore();
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'POST',
+            url: '/musora-api/v5/journeys/homepage-content-clicked',
+            data: payload,
+            headers
+        });
+    },
+
+    trackHomeSeeAll({ payload }) {
+        const { token } = useUserStore();
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'POST',
+            url: '/musora-api/v5/journeys/homepage-section-see-all-clicked',
+            data: payload,
+            headers
+        });
+    }
 };

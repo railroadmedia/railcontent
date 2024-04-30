@@ -20,7 +20,7 @@
             <div class="tw-flex lg:tw-w-full lg:tw-gap-[14px] tw-px-4 lg:tw-px-0">
                 <LearningPathCard v-for="path in learningPaths" :key="path.id" :topPillText="path.tagline ?? ''"
                     :title="path.title" :topDescription="path.subtitle" :description="path.description"
-                    :ctaText="path.ctaText" :ctaUrl="path.ctaUrl" :videoUrl="path.trailer" :bgImg="path.bgImg" />
+                    :ctaText="path.ctaText" :ctaUrl="path.ctaUrl" :videoUrl="path.trailer" :bgImg="path.bgImg" :trackingSection="trackingSection" />
             </div>
         </div>
     </div>
@@ -43,6 +43,10 @@ const props = defineProps({
     learningPaths: {
         type: Array,
         default: () => []
+    },
+    trackingSection: {
+        type: String,
+        default: ''
     }
 });
 
