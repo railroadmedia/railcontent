@@ -431,12 +431,7 @@ class CustomerIoApiGateway
             );
         }
 
-        if ($method !== 'GET' && !empty($response)) {
-            throw new Exception('CustomerIoApiGateway::executeRequest() api call failed: ' . var_export($response, true));
-        }
-
-
-        return $response;
+        return $response ?? [];
     }
 
     /**
