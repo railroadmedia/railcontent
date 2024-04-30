@@ -1,5 +1,8 @@
 <script setup>
-    import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+    import { useCallback } from 'react';
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+
+    const emit = defineEmits(['onThumbnailClick']);
 
     //-----------Props-----------//
     const props = defineProps({
@@ -27,11 +30,21 @@
             type: String,
             default: "",
         },
+        useCallback: {
+            type: Boolean,
+            default: false,
+        },
     });
+
+    const handleClick = (e) => {
+        if (props.useCallback) {
+            emit('onThumbnailClick', e);
+        }
+    };
 </script>
 <template>
         <!-- Playlist thumbnail -->
-        <a id="playlist-list-view-thumbnail" :href="linkUrl.length ? linkUrl : false"
+        <a @click="handleClick" id="playlist-list-view-thumbnail" :href="linkUrl.length ? linkUrl : false"
             class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square"
            :class="isListView ? 'tw-h-[72px] tw-w-[72px] tw-rounded tw-shrink-0' : `tw-row-span-5 tw-col-span-5 tw-rounded-lg ${isMiniCatalog ? 'tw-h-auto' : ''} `"
         >
