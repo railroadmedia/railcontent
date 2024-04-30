@@ -278,7 +278,7 @@
                                             alt="lesson{{$key+1}} img"
                                             fetchpriority="high"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #85001E 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(133 0 30 / 60%), rgba(0, 0, 0, 0.2));"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-white.png" alt="pianote logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -335,7 +335,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #05816F 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(5 129 111 / 60%), rgba(0, 0, 0, 0.2));"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo-white.png" alt="guitareo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -392,7 +392,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #095399 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(9 83 153 / 60%), rgba(0, 0, 0, 0.2));"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo-white.png" alt="drumeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -449,7 +449,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #703d99 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+{{--                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(112 61 153 / 60%), rgba(0, 0, 0, 0.2));"></div>--}}
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="singeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
