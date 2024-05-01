@@ -198,7 +198,7 @@ class CustomerIoApiGateway
 
         $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', [], $dataArray);
 
-        if (!empty($result['delivery_id'])) {
+        if (empty($result['delivery_id'])) {
             throw new Exception(
                 'CustomerIoApiGateway::sendTransactionalEmail() api call failed: ' . var_export($result, true)
             );
