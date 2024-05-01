@@ -117,6 +117,34 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->assertTrue($isAccessible);
     }
 
+    public function test_feature_block_filter_admin()
+    {
+        $feature = $this->ffService->addFeature($this->faker->unique()->name);
+        $user = User::factory()->create(['permission_level' => User::PERMISSION_LEVEL_ADMIN]);
+        $isAccessible = FeatureFlagging::accessible($feature->name, $user);
+        $this->assertTrue($isAccessible);
+
+        $this->ffService->editFeature($feature->id, ['block_filter' => 'admin']);
+        $isAccessible = FeatureFlagging::accessible($feature->name, $user);
+        $this->assertFalse($isAccessible);
+    }
+
+    public function test_feature_block_list_younger_than()
+    {
+        $feature = $this->ffService->addFeature($this->faker->unique()->name);
+        $user = User::factory()->create(['created_at' => Carbon::now()->addDays(-2)]);
+        $isAccessible = FeatureFlagging::accessible($feature->name, $user);
+        $this->assertTrue($isAccessible);
+
+        $this->ffService->editFeature($feature->id, ['block_filter' => 'younger_than_1_days']);
+        $isAccessible = FeatureFlagging::accessible($feature->name, $user);
+        $this->assertTrue($isAccessible);
+
+        $this->ffService->editFeature($feature->id, ['block_filter' => 'younger_than_3_days']);
+        $isAccessible = FeatureFlagging::accessible($feature->name, $user);
+        $this->assertFalse($isAccessible);
+    }
+
     public function test_feature_allow_list_older_than()
     {
         $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(1));
