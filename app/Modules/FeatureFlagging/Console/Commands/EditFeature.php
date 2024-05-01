@@ -13,6 +13,7 @@ class EditFeature extends Command
                             {--description= : new description value}
                             {--active_at= : datetime string eg: "2024-04-19 16:02:37"}
                             {--allow_filter= : comma separated list of filters,  will replace existing}
+                            {--block_filter= : comma separated list of filters,  will replace existing}
                             {--userid_list= : comma separated list of user ids, will replace existing} ';
 
     protected $description = "Edit FeatureFlag values";
@@ -40,6 +41,6 @@ class EditFeature extends Command
         $ffService->editFeature($feature->id, $valuesToUpdate);
         $this->info("Feature $name updated showing features");
         $this->info('--------------------------------------');
-        $this->call("featureFlag:showFeatures $name");
+        $this->call("featureFlag:showFeatures");
     }
 }

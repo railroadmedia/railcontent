@@ -55,6 +55,9 @@ class FeatureFlagManager implements FeatureFlagsContract
         if (!$user) {
             $user = auth()->user();
         }
+        if ($user && $this->doesUserMatchFilter($feature->block_filter, $user)) {
+            return false;
+        }
         if ($user &&
             ($this->doesUserMatchFilter($feature->allow_filter, $user)
                 || $this->doesUserMatchUserList($feature->userid_list, $user))) {
@@ -106,7 +109,6 @@ class FeatureFlagManager implements FeatureFlagsContract
                 if ($this->doesUserMatchUserList($branch->userid_list, $user)
                     || $this->doesUserMatchFilter($branch->allow_filter, $user)) {
                     $selectedBranch = $branch;
-                    Log::debug('short circuit: ' . $branch->name);
                     break;
                 }
             }
@@ -153,12 +155,12 @@ class FeatureFlagManager implements FeatureFlagsContract
         return false;
     }
 
-    private function doesUserMatchFilter($allow_filter, User $user): bool
+    private function doesUserMatchFilter($string_filter, User $user): bool
     {
-        if ($allow_filter) {
-            $filters = explode(',', $allow_filter);
+        if ($string_filter) {
+            $filters = explode(',', $string_filter);
             foreach($filters as $filter) {
-                if ($this->isUserAllowMatch($filter, $user)) {
+                if ($this->isUserMatch($filter, $user)) {
                     return true;
                 }
             }
@@ -166,18 +168,19 @@ class FeatureFlagManager implements FeatureFlagsContract
         return false;
     }
 
-    private function isUserAllowMatch(string $filter, User $user): bool
+    private function isUserMatch(string $filter, User $user): bool
     {
         $isMatch = match(true) {
             $filter == 'admin' => $user->isAdmin(),
             $filter == 'musora' => $user->isMusoraAccount(),
-            str_starts_with($filter, 'older_than') => $this->doesUserMatchOlderThanFilter($filter, $user),
+            str_starts_with($filter, 'older_than') => $this->doesUserMatchAgeThanFilter($filter, $user, true),
+            str_starts_with($filter, 'younger_than') => $this->doesUserMatchAgeThanFilter($filter, $user, false),
             default => false
         };
         return $isMatch;
     }
 
-    private function doesUserMatchOlderThanFilter(string $filter, User $user): bool
+    private function doesUserMatchAgeThanFilter(string $filter, User $user, bool $older): bool
     {
         $sections = explode('_', $filter);
         if (count($sections) != 4) {
@@ -193,7 +196,11 @@ class FeatureFlagManager implements FeatureFlagsContract
             'year', 'years' => $now->subYears($count),
             default => $now
         };
-        return $createdTime <= $earliestAllowedTime;
+        if ($older) {
+            return $createdTime <= $earliestAllowedTime;
+        } else {
+            return $createdTime >= $earliestAllowedTime;
+        }
     }
 
     /**
