@@ -1,6 +1,6 @@
 <template>
     <div class="tw-w-full tw-relative">
-        <PageHeader pageType="schedule" :title="`${brand} Schedule`" iconName="calendar-filled"
+        <PageHeader pageType="schedule" :title="`${brand} Schedule`" iconName="calendar"
             :description="description" :ctas="ctaConfig" />
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">

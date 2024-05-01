@@ -22,7 +22,7 @@
     <page-header
         page-type="packs"
         title="Packs"
-        icon-name="box-filled"
+        icon-name="box"
         description="{{ $headerDescription }}"
     ></page-header>
 

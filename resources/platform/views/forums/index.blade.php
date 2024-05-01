@@ -4,7 +4,7 @@
         'type' => 'forums',
         'title' => $brand . ' Forums',
         'description' => null,
-        'iconName' => 'messages-filled',
+        'iconName' => 'messages',
         'ctas' => null
     ];
     if ($brand === 'drumeo') {

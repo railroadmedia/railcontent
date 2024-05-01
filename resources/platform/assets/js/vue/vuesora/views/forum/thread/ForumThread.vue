@@ -242,6 +242,8 @@ export default {
                     type: 'PageHeaderCta',
                     props: {
                         faIconClass: 'fa-edit',
+                        text: 'Edit Thread',
+                        showTextMobileHideDesktop: true,
                         onClickCallback: this.update,
                     },
                 });
@@ -251,6 +253,8 @@ export default {
                     type: 'PageHeaderCta',
                     props: {
                         faIconClass: 'fa-thumbtack',
+                        text: `${this.isPinned ? 'Unpin' : 'Pin'} Thread`,
+                        showTextMobileHideDesktop: true,
                         onClickCallback: this.pinPost,
                     },
                 });
@@ -258,6 +262,8 @@ export default {
                     type: 'PageHeaderCta',
                     props: {
                         faIconClass: 'fa-lock',
+                        text: `${this.isLocked ? 'Unlock' : 'Lock'} Thread`,
+                        showTextMobileHideDesktop: true,
                         onClickCallback: this.lockPost,
                     },
                 });
@@ -265,7 +271,9 @@ export default {
             ctas.push({
                 type: 'PageHeaderCta',
                 props: {
-                    faIconClass: 'fa-eye',
+                    faIconClass: `${this.signaturesHidden ? 'fa-eye-slash' : 'fa-eye'}`,
+                    text: `${this.signaturesHidden ? 'Show' : 'Hide'} All Signatures`,
+                    showTextMobileHideDesktop: true,
                     onClickCallback: this.hideSignatures,
                 },
             });
@@ -273,7 +281,8 @@ export default {
             ctas.push({
                 type: 'PageHeaderCta',
                 props: {
-                    text: this.isFollowed ? 'Followed' : 'Follow',
+                    text: this.isFollowed ? 'Unfollow' : 'Follow',
+                    faIconClass: `fa-user-${this.isFollowed ? 'minus' : 'plus'}`,
                     onClickCallback: this.followPost,
                 },
             });
@@ -282,7 +291,7 @@ export default {
                 type: 'PageHeaderCta',
                 props: {
                     text: 'Add Reply',
-                    faIconClass: 'fa-reply',
+                    faIconClass: 'fa-plus',
                     onClickCallback: this.scrollToReply,
                 },
             });

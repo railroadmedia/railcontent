@@ -132,7 +132,7 @@ const buttonConditionalClasses = computed(() => {
 // set rounded to none and hover border to none if in dropdown. set bg on hover to alternate with text while considering dark mode
 const inDropdownClasses = computed(() => {
     console.log(props.inDropdown);
-    return props.inDropdown ? 'tw-text-sm tw-font-sans tw-capitalize tw-px-3 tw-py-3 tw-justify-start tw-w-full tw-rounded-none tw-border-none tw-bg-[#000C17] tw-text-white dark:tw-text-[#000C17] hover:tw-bg-white hover:tw-text-[#000C17] hover:dark:tw-text-[#000C17]' : '';
+    return props.inDropdown ? 'tw-text-sm tw-leading-6 tw-font-sans tw-capitalize tw-px-4 tw-py-3 tw-justify-start tw-w-full tw-rounded-none tw-border-none tw-bg-[#000C17] tw-text-white dark:tw-text-[#000C17] hover:tw-bg-white hover:tw-text-[#000C17] hover:dark:tw-text-[#000C17]' : '';
 });
 
 const emit = defineEmits(['click']);

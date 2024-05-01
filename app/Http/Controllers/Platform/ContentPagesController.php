@@ -393,7 +393,7 @@ class ContentPagesController extends BaseController
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level '.(($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         return view('content.overview', [
@@ -484,7 +484,7 @@ class ContentPagesController extends BaseController
         ];
 
         $noProgress = empty($firstContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         $backButton = [
@@ -590,7 +590,7 @@ class ContentPagesController extends BaseController
         ];
 
         $noProgress = empty($firstContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         $backButton = [

@@ -85,7 +85,7 @@
         ];
     }
     elseif ($parentContent->fetch('type') === 'learning-path') {
-        $headerData['iconName'] = 'method-filled';
+        $headerData['iconName'] = 'method';
         $headerData['title'] = 'Method';
         $headerData['description'] = $parentContent->fetch('data.description');
         $headerData['progress'] = $parentContent->fetch('progress_percent', 0);

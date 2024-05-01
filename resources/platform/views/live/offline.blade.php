@@ -4,7 +4,7 @@
     $headerData = [
         'type' => 'live',
         'title' => $brand.' Live',
-        'iconName' => 'play-circle-filled',
+        'iconName' => 'play-circle',
         'ctas' => [
             [
                 'type' => 'TimezoneSelectCta',

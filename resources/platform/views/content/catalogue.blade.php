@@ -20,7 +20,7 @@
     if ($catalogueMeta['name'] == 'Courses') {
         $headerData['type'] = 'courses';
         $headerData['title'] = 'Courses';
-        $headerData['iconName'] = 'academic-cap-filled';
+        $headerData['iconName'] = 'academic-cap';
         if ($brand === 'drumeo') {
             $headerData['description'] = "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers.";
         } elseif ($brand === 'pianote') {
@@ -34,39 +34,39 @@
     else if ($catalogueMeta['name'] == 'Play Alongs') {
         $headerData['type'] = 'play-along';
         $headerData['title'] = 'Play Alongs';
-        $headerData['iconName'] = 'eigth-notes-filled';
+        $headerData['iconName'] = 'eigth-notes';
         $headerData['description'] = 'Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.';
     }
     else if ($catalogueMeta['name'] == 'Songs') {
         $headerData['type'] = 'song';
         $headerData['title'] = 'Songs';
-        $headerData['iconName'] = 'headphones-filled';
+        $headerData['iconName'] = 'headphones';
     }
     else if ($catalogueMeta['name'] == 'Routines') {
         $headerData['type'] = 'routine';
         $headerData['title'] = 'Routines';
-        $headerData['iconName'] = 'routines-filled';
+        $headerData['iconName'] = 'routines';
     }
     else if ($catalogueMeta['name'] == 'Quick Tips') {
         $headerData['type'] = 'quick-tips';
         $headerData['title'] = 'Quick Tips';
-        $headerData['iconName'] = 'light-bulb-filled';
+        $headerData['iconName'] = 'light-bulb';
         $headerData['description'] = "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don't have lots of time to practice.";
     }
     else if ($catalogueMeta['name'] == 'Bootcamps') {
         $headerData['type'] = 'bootcamp';
         $headerData['title'] = 'Bootcamps';
-        $headerData['iconName'] = 'keys-filled';
+        $headerData['iconName'] = 'keys';
     }
     else if ($catalogueMeta['name'] == 'The Pianote Podcast') {
         $headerData['type'] = 'podcast';
         $headerData['title'] = 'The Pianote Podcast';
-        $headerData['iconName'] = 'podcast-filled';
+        $headerData['iconName'] = 'podcast';
     }
     else if ($catalogueMeta['name'] == 'Student Focus') {
         $headerData['type'] = 'student-focus';
         $headerData['title'] = 'Student Focus';
-        $headerData['iconName'] = 'person-plus-filled';
+        $headerData['iconName'] = 'person-plus';
         $headerData['description'] = "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
         if ($brand === 'drumeo') {
             $headerData['ctas'] = [
@@ -100,7 +100,7 @@
     else if ($catalogueMeta['name'] == 'Student Reviews') {
         $headerData['type'] = 'student-review';
         $headerData['title'] = 'Student Reviews';
-        $headerData['iconName'] = 'person-plus-filled';
+        $headerData['iconName'] = 'person-plus';
         $headerData['description'] = "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
         if ($brand === 'pianote') {
             $headerData['ctas'] = [
@@ -169,17 +169,17 @@
     else if ($catalogueMeta['name'] == 'Chords & Scales') {
         $headerData['type'] = 'chordsandscales';
         $headerData['title'] = 'Chords & Scales';
-        $headerData['iconName'] = 'guitar-tabs-filled';
+        $headerData['iconName'] = 'guitar-tabs';
     }
     else if ($catalogueMeta['name'] == 'Archives') {
         $headerData['type'] = 'archives';
         $headerData['title'] = 'Archives';
-        $headerData['iconName'] = 'archives-filled';
+        $headerData['iconName'] = 'archives';
     }
     else if ($catalogueMeta['name'] == 'New Content') {
         $headerData['type'] = 'newcontent';
         $headerData['title'] = 'New Content';
-        $headerData['iconName'] = 'star-filled';
+        $headerData['iconName'] = 'star';
     }
     else if ($catalogueMeta['name'] == 'Subscribed') {
         $headerData['type'] = 'subscribed';
@@ -189,12 +189,12 @@
     else if ($catalogueMeta['name'] == 'Song Tutorials') {
         $headerData['type'] = 'songtutorials';
         $headerData['title'] = 'Song Tutorials';
-        $headerData['iconName'] = 'play-progress-filled';
+        $headerData['iconName'] = 'play-progress';
     }
     else if ($catalogueMeta['name'] == 'Rudiments') {
         $headerData['type'] = 'rudiments';
         $headerData['title'] = 'Rudiments';
-        $headerData['iconName'] = 'drum-filled';
+        $headerData['iconName'] = 'drum';
         $headerData['description'] = "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.";
     }
     else {

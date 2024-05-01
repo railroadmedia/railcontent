@@ -1,5 +1,5 @@
 <template>
-    <PageHeaderCta v-bind="$attrs" text="Play Trailer" faIconClass="fa-play" showTextMobileHideDesktop data-open-modal="previewModal" />
+    <PageHeaderCta v-bind="$attrs" text="Play Trailer" faIconClass="fa-play" data-open-modal="previewModal" />
 
     <div id="previewModal" class="modal vimeo-embedded-player">
         <div class="flex flex-column corners-10">

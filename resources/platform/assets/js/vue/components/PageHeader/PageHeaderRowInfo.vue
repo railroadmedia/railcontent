@@ -1,6 +1,6 @@
 <template>
     <div v-if="formattedInfoData"
-        class="tw-flex tw-items-center tw-text-sm sm:tw-text-base tw-font-semibold tw-text-[#002039] dark:tw-text-[#9EC0DC]">
+        class="tw-flex tw-items-center tw-text-sm sm:tw-text-base tw-font-bold tw-text-[#002039] dark:tw-text-[#9EC0DC]">
         <div class="tw-flex tw-items-center tw-uppercase" v-for="(item, index) in formattedInfoData" :key="item">
             <span>{{ item }}</span>
             <span v-if="index !== formattedInfoData.length - 1"

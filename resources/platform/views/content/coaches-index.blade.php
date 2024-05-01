@@ -21,7 +21,7 @@
 
     <page-header
         title="Coaches"
-        icon-name="whistle-filled"
+        icon-name="whistle"
         description="{{ $headerDescription }}"
     >
     </page-header>
