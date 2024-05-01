@@ -29,7 +29,7 @@ const props = defineProps({
   },
   classOverride: {
     type: String,
-    default: "lg:tw-absolute lg:tw-bottom-0",
+    default: "",
   },
 });
 </script>

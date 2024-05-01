@@ -25,7 +25,7 @@ const props = defineProps({
   },
   topPaddingClasses: {
     type: String,
-    default: 'tw-pt-[24px] md:tw-pt-[40px] lg:tw-pt-0',
+    default: 'tw-pt-[24px] md:tw-pt-[40px]',
   },
 });
 const emit = defineEmits(['onHeaderGoBack']);
