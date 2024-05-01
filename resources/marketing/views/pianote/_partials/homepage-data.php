@@ -1,11 +1,11 @@
     <?php
-    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jordan-rudess.webp';
-    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/lisa-witt.webp';
-    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/david-bennett.webp';
+    $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/david-bennett2.webp';
+    $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/330x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/lisa-witt.webp';
+    $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jordan-rudess2.webp';
     $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/kevin-castro.webp';
     $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/erskine-hawkins.webp';
-    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/victoria-thoedore.webp';
-    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/sangah-noona.webp';
+    $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/360x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/victoria-thoedore.webp';
+    $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/390x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/sangah-noona.webp';
     $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jesus-molina.webp';
 
     $pianote = [
