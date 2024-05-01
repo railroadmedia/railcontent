@@ -128,8 +128,8 @@ class UserController extends Controller
         $verificationToken = $request->get('verification_token');
 
         if (strtolower($verificationToken) !== strtolower(
-                md5($email . config('shopify.multipass.account_creation_secret_key'))
-            )) {
+            md5($email . config('shopify.multipass.account_creation_secret_key'))
+        )) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
@@ -177,8 +177,8 @@ class UserController extends Controller
         $verificationToken = $request->get('verification_token');
 
         if (strtolower($verificationToken) !== strtolower(
-                md5($email . config('shopify.multipass.account_creation_secret_key'))
-            )) {
+            md5($email . config('shopify.multipass.account_creation_secret_key'))
+        )) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
@@ -259,7 +259,7 @@ class UserController extends Controller
                     ->with($exception->errors());
         }
 
-        $user = new User;
+        $user = new User();
 
         $user->email = $request->email;
         $user->setPassword($request->password);
@@ -268,7 +268,8 @@ class UserController extends Controller
 
         $newUser =
             User::where('email', $user->email)
-                ->first();;
+                ->first();
+        ;
 
         event(new UserCreated($user));
 

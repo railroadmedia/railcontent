@@ -92,8 +92,7 @@ class Order
         return UserAccessPermissionsStatusEnum::Active;
     }
 
-    private
-    function isTrialOrder()
+    private function isTrialOrder()
     {
         return $this->lineItems->contains(function ($lineItem) {
             /** @var OrderLineItem $lineItem */

@@ -12,9 +12,8 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            $table->float('product_original_price')->nullable()->change();
-            $table->float('product_sale_price')->nullable()->change();
+        Schema::table('features_features', function (Blueprint $table) {
+            $table->string('block_filter')->after('allow_filter')->nullable();
         });
     }
 
@@ -25,9 +24,8 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            $table->float('product_original_price')->change();
-            $table->float('product_sale_price')->change();
+        Schema::table('features_features', function (Blueprint $table) {
+            $table->dropColumn('block_filter');
         });
     }
 };

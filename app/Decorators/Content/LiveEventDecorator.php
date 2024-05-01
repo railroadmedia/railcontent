@@ -9,7 +9,7 @@ use Railroad\Railcontent\Support\Collection;
 class LiveEventDecorator extends TypeDecoratorBase
 {
     public static $skip = false;
-    const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
+    public const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
 
     /**
      * @param Collection $contents

@@ -14,7 +14,7 @@ class CheckCommentsUrl extends Command
     protected $signature = 'check:urls';
     protected $description = 'Check urls from comments/replies';
 
-    const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
+    public const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
 
     public function handle(
         CommentRepository $commentRepository,
@@ -103,7 +103,7 @@ class CheckCommentsUrl extends Command
         $this->info("End verification ");
     }
 
-    function hasRelativeUrlsInComment($comment)
+    public function hasRelativeUrlsInComment($comment)
     {
         // Regular expression pattern to match URLs
         $pattern = '/href=["\']?((?:.(?!["\'?]))*.)["\'?]/';

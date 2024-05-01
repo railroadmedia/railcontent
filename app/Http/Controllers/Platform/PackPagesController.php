@@ -80,11 +80,11 @@ class PackPagesController extends Controller
 
         FiltersHelper::prepareFiltersFields();
 
-        if(user()->isPackOnlyOwner()){
+        if(user()->isPackOnlyOwner()) {
             ContentRepository::$getEnrollmentContent = false;
         }
 
-        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort','-progress'));
+        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort', '-progress'));
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs['results'] as $packIndex => $pack) {

@@ -111,13 +111,15 @@ class WebhookTest extends TestCase
         try {
             dispatch($parent);
             $this->fail("expected to throw exception in job");
-        } catch (\InvalidArgumentException $ex) {}
+        } catch (\InvalidArgumentException $ex) {
+        }
         $webhookData->refresh();
         $this->assertFalse($webhookData->allComplete());
     }
 
     public function test_only_valid_childen_allowed()
-    {   $source_id = $this->faker->unique()->word;
+    {
+        $source_id = $this->faker->unique()->word;
         $this->assertDatabaseMissing(
             'webhooks',
             [ 'source_id' => $source_id,

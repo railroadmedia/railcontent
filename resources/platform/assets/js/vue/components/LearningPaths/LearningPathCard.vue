@@ -17,7 +17,7 @@
                 {{ description }}
             </p>
             <div class="tw-flex tw-pt-[15px]">
-                <a :href="ctaUrl"
+                <a @click="(e) => handleCtaClick(e, ctaUrl)" :href="ctaUrl"
                     class="tw-btn-primary tw-bg-white tw-text-black hover:tw-bg-[#627F97] hover:tw-text-white">
                     <span >
                         {{ ctaText }}
@@ -47,6 +47,10 @@
 import { ref, computed } from "vue";
 import { VideoCameraIcon } from "@heroicons/vue/outline"
 import VideoModal from "../Modal/VideoModal.vue";
+import { useUserStore } from "../../../stores/user";
+import userJourney from "../../../services/userJourney";
+
+const userStore = useUserStore();
 
 const props = defineProps({
     topPillText: {
@@ -81,6 +85,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    trackingSection: {
+        type: String,
+        default: ''
+    }
 });
 
 const showVideoModal = ref(false);
@@ -95,5 +103,22 @@ const handleVideoClick = () => {
 
 const handleCloseVideo = () => {
     showVideoModal.value = false;
+};
+
+const handleCtaClick = (event, url) => {
+    if (props.trackingSection && props.trackingSection.length) {
+        event.preventDefault();
+
+        userJourney.trackHomeContentClick({
+            token: userStore.token,
+            payload: {
+                contentId: null,
+                brand: userStore.brand,
+                section: props.trackingSection,
+            }
+        }).finally(() => {
+            window.location.href = url;
+        });
+    }
 };
 </script>

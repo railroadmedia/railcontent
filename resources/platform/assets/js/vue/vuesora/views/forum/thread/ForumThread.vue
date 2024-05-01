@@ -224,7 +224,6 @@
                             :is-reply-section="true"
                             :hasImageUploader="true"
                             v-model="postReplyInterface"
-                            @input="handleInput"
                         />
 
                         <input
@@ -586,10 +585,6 @@ export default {
             this.scrollToReply();
             this.postReplyInterface += blockQuoteHtmlString;
             this.currentPost = payload.id;
-        },
-
-        handleInput(payload) {
-            this.postReplyInterface = payload.currentValue;
         },
 
         pinPost() {

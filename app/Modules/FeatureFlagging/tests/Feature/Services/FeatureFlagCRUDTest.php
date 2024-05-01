@@ -12,16 +12,14 @@ use Illuminate\Support\Facades\Bus;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
-
 class FeatureFlagCRUDTest extends TestCase
 {
-
     private FeatureFlagService $ffService;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->ffService= app(FeatureFlagService::class);
+        $this->ffService = app(FeatureFlagService::class);
 
     }
 
@@ -31,11 +29,13 @@ class FeatureFlagCRUDTest extends TestCase
         $this->artisan("featureFlag:addFeature '$name'")
             ->assertSuccessful();
         $feature = Feature::whereName($name)->first();
-        $this->assertDatabaseHas('features_features',
-                                [
+        $this->assertDatabaseHas(
+            'features_features',
+            [
                                     'id' => $feature->id,
                                     'name' => $name
-                                ]);
+                                ]
+        );
         $newDescription = $this->faker->sentence(3);
 
         $this->ffService->editFeature($feature->id, ['description' => $newDescription]);
@@ -48,10 +48,12 @@ class FeatureFlagCRUDTest extends TestCase
         }
         $feature->refresh();
         $this->ffService->deleteFeature($feature->id);
-        $this->assertDatabaseMissing('features_features',
+        $this->assertDatabaseMissing(
+            'features_features',
             [ 'id' => $feature->id,
                 'name' => $feature->name
-            ]);
+            ]
+        );
     }
 
     public function test_create_userid_list_different_formats()
@@ -60,10 +62,12 @@ class FeatureFlagCRUDTest extends TestCase
         $feature = $this->ffService->addFeature(
             $this->faker->name,
         );
-        $this->assertDatabaseHas('features_features',
+        $this->assertDatabaseHas(
+            'features_features',
             [ 'id' => $feature->id,
                 'name' => $feature->name,
-            ]);
+            ]
+        );
         $userList = [2, '1', '140'];
         $stringList = '2,1,140';
         $this->assertFeatureUserListUpdated($feature, $userList, $stringList);
@@ -84,14 +88,16 @@ class FeatureFlagCRUDTest extends TestCase
     {
         $experiment = $this->ffService->addExperiment(
             $this->faker->name,
-            default_value: $this->faker->words(2, true));
+            default_value: $this->faker->words(2, true)
+        );
         $branch1 = $this->ffService->addBranch(
             $this->faker->name,
             $this->faker->words(2, true),
             $experiment->id,
             priority: 1,
             allow_filter: 'admin',
-            weight: 10);
+            weight: 10
+        );
         // ----------- CREATE ----------------- //
         $this->assertDatabaseHas('features_branches', [
             'id' => $branch1->id,
@@ -123,7 +129,8 @@ class FeatureFlagCRUDTest extends TestCase
         $this->expectNotToPerformAssertions();
         $experiment = $this->ffService->addExperiment(
             $this->faker->name,
-            default_value: $this->faker->words(2, true));
+            default_value: $this->faker->words(2, true)
+        );
         try {
             $branch1 = $this->ffService->addBranch(
                 $this->faker->name,
@@ -165,7 +172,8 @@ class FeatureFlagCRUDTest extends TestCase
     {
         $experiment = $this->ffService->addExperiment(
             $this->faker->name,
-            default_value: $this->faker->words(2, true));
+            default_value: $this->faker->words(2, true)
+        );
         // ----------- CREATE ----------------- //
         $this->assertDatabaseHas('features_experiments', [
                 'id' => $experiment->id,
@@ -189,7 +197,8 @@ class FeatureFlagCRUDTest extends TestCase
             $this->faker->name,
             $this->faker->words(2, true),
             $experiment->id,
-            weight: 1);
+            weight: 1
+        );
         $this->assertDatabaseHas('features_branches', [
             'id' => $branch1->id,
             'name' => $branch1->name,
@@ -223,12 +232,14 @@ class FeatureFlagCRUDTest extends TestCase
     {
         $experiment = $this->ffService->addExperiment(
             $this->faker->name,
-            default_value: $this->faker->words(2, true));
+            default_value: $this->faker->words(2, true)
+        );
         $branch1 = $this->ffService->addBranch(
             $this->faker->name,
             $this->faker->words(2, true),
             $experiment->id,
-            weight: 1);
+            weight: 1
+        );
         $name = $branch1->name;
         $this->artisan("featureFlag:addRemoveUsersToBranch '$name' 1,2,3 --add")
             ->assertSuccessful();

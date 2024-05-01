@@ -7,7 +7,8 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Illuminate\Support\Str;
 
 if (!function_exists('current_user_has_recent_order')) {
-    function current_user_has_recent_order() {
+    function current_user_has_recent_order()
+    {
         if (user()) {
             return DB::connection(config('ecommerce.database_connection_name'))
                 ->table('ecommerce_orders')
@@ -21,7 +22,8 @@ if (!function_exists('current_user_has_recent_order')) {
 }
 
 if (!function_exists('get_legacy_brand_base_url')) {
-    function get_legacy_brand_base_url($brand = null, $withPort = true) {
+    function get_legacy_brand_base_url($brand = null, $withPort = true)
+    {
         if (empty($brand)) {
             $brand = brand();
         }
@@ -37,7 +39,8 @@ if (!function_exists('get_legacy_brand_base_url')) {
 }
 
 if (!function_exists('get_musora_brand_base_url')) {
-    function get_musora_brand_base_url() {
+    function get_musora_brand_base_url()
+    {
         if (App::environment() == 'local' || App::environment() == 'development') {
             return 'https://dev.musora.com:8443';
         } elseif (App::environment() != 'production') {
@@ -137,15 +140,16 @@ if (!function_exists('current_subdomain')) {
     }
 }
 
-if(!function_exists('get_resource_icon')){
+if(!function_exists('get_resource_icon')) {
     /**
      * @param $filename
      * @return string
      */
-    function get_resource_icon($filename){
+    function get_resource_icon($filename)
+    {
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-        switch($extension){
+        switch($extension) {
             case 'png':
                 return 'fa-file-text';
             case 'pdf':
@@ -163,8 +167,9 @@ if(!function_exists('get_resource_icon')){
     }
 }
 
-if(!function_exists('parse_lesson_type_readable')){
-    function parse_lesson_type_readable($type, $plural = false){
+if(!function_exists('parse_lesson_type_readable')) {
+    function parse_lesson_type_readable($type, $plural = false)
+    {
         switch ($type) {
             case 'course-part':
                 $parsedType = 'Courses';
@@ -207,8 +212,8 @@ if(!function_exists('parse_lesson_type_readable')){
                 break;
         }
 
-        if($plural){
-            return $parsedType[strlen($parsedType)-1] == 's' ? $parsedType : ($parsedType . 's');
+        if($plural) {
+            return $parsedType[strlen($parsedType) - 1] == 's' ? $parsedType : ($parsedType . 's');
         }
 
         return $parsedType;
@@ -216,14 +221,13 @@ if(!function_exists('parse_lesson_type_readable')){
 }
 
 if (!function_exists('parse_xp_value')) {
-    function parse_xp_value($xp){
-        if($xp >= 1000 && $xp < 100000){
+    function parse_xp_value($xp)
+    {
+        if($xp >= 1000 && $xp < 100000) {
             return round($xp / 1000, 1) . 'K';
-        }
-        else if($xp >= 100000 && $xp < 1000000){
+        } elseif($xp >= 100000 && $xp < 1000000) {
             return round($xp / 1000, 0) . 'K';
-        }
-        else if($xp >= 1000000){
+        } elseif($xp >= 1000000) {
             return round($xp / 1000000, 1) . 'M';
         }
 
@@ -291,7 +295,8 @@ if (!function_exists('assembleUserAttributes')) {
      * @param object $userObject
      * @return array
      */
-    function assembleUserAttributes($userObject) {
+    function assembleUserAttributes($userObject)
+    {
         if (empty($userObject)) {
             return [];
         }
@@ -349,17 +354,21 @@ if (!function_exists('zipperMerge')) {
         $results = [];
         $reIndexedArrays = [];
         foreach($arraysToZip as $array) {
-            if (!$array) continue;
+            if (!$array) {
+                continue;
+            }
             $reIndexedArrays[] = array_values($array);
         }
         if (!$reIndexedArrays) {
             return $results;
         }
-        $lengths = array_map(function($child){return count($child);}, $reIndexedArrays);
+        $lengths = array_map(function ($child) {return count($child);}, $reIndexedArrays);
         $maxLength = max($lengths);
         for($j = 0; $j < $maxLength; $j++) {
             foreach($reIndexedArrays as $child) {
-                if (count($child) == 0 || $j >= count($child)) continue;
+                if (count($child) == 0 || $j >= count($child)) {
+                    continue;
+                }
                 $results[] = $child[$j];
             }
         }
@@ -446,5 +455,3 @@ function encodeURISub($url)
 
     return strtr(rawurlencode($url), array_merge($reserved, $unescaped, $score));
 }
-
-

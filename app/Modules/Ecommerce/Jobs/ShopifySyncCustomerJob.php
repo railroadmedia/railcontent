@@ -2,7 +2,6 @@
 
 namespace App\Modules\Ecommerce\Jobs;
 
-
 use App\Jobs\WebhookChildJob;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 

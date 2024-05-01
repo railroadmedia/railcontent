@@ -261,12 +261,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use CanSaveWithoutUpdatedAt;
 
 
-    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO = 1;
-    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE = 2;
-    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
-    const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO = 8;
+    public const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_DRUMEO = 1;
+    public const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_PIANOTE = 2;
+    public const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_GUITAREO = 4;
+    public const FLAG_CUSTOMERIO_SYNCED_WORKSPACES_SINGEO = 8;
 
-    const PERMISSION_LEVEL_ADMIN = 'administrator';
+    public const PERMISSION_LEVEL_ADMIN = 'administrator';
     private ?NotificationSettings $notificationSettingsLookup = null;
 
     protected $hidden = ['password', 'session_salt'];
@@ -517,42 +517,42 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return !empty($this->total_xp) ? $this->total_xp : 0;
     }
 
-    public function getXpRank() : string
+    public function getXpRank(): string
     {
         return $this->getXpRankName($this->total_xp);
     }
 
-    public function getBrandXpRank() : string
+    public function getBrandXpRank(): string
     {
         $brankExp = $this->getBrandTotalXp();
         return $this->getXpRankName($brankExp, brand());
     }
 
-    private static function getXpRankName($exp, $brand = '') : string
+    private static function getXpRankName($exp, $brand = ''): string
     {
         $isDrumeo = $brand == 'drumeo';
         return match (true) {
-             $exp < 250 =>'Casual',
-             $exp < 1000 => 'Enthusiast I',
-             $exp < 2500 => 'Enthusiast II',
-             $exp < 5000 => 'Pro I' ,
-             $exp < 10000 => 'Pro II' ,
-             $exp < 20000 => 'Pro III' ,
-             $exp < 50000 => 'Master I' ,
-             $exp < 100000 => 'Master II' ,
-             $exp < 250000 => 'Master III' ,
-             $exp < 500000 => $isDrumeo ? 'Drumeo Legend' : 'Legend',
-             $exp < 1000000 => $isDrumeo ? 'Legends: Starr' : 'Legend I' ,
-             $exp < 1500000 => $isDrumeo ? 'Legends: Erskine' : 'Legend II' ,
-             $exp < 2000000 => $isDrumeo ? 'Legends: Cobham' : 'Legend III' ,
-             $exp < 2500000 => $isDrumeo ? 'Legends: Garibaldi' : 'Legend IV' ,
-             $exp < 3000000 => $isDrumeo ? 'Legends: Peart' : 'Legend V' ,
-             $exp < 4000000 => $isDrumeo ? 'Legends: Bonham' : 'Legend VI' ,
-             $exp < 5000000 => $isDrumeo ? 'Legends: Colaiuta' : 'Legend VII' ,
-             $exp < 7500000 => $isDrumeo ? 'Legends: Gadd' : 'Legend VIII' ,
-             $exp < 10000000 => $isDrumeo ? 'Legends: Porcaro' : 'Legend IX' ,
-             $exp >= 10000000 => $isDrumeo ? 'Legends: Rich' : 'Legend X',
-             default => 'Member'
+            $exp < 250 => 'Casual',
+            $exp < 1000 => 'Enthusiast I',
+            $exp < 2500 => 'Enthusiast II',
+            $exp < 5000 => 'Pro I' ,
+            $exp < 10000 => 'Pro II' ,
+            $exp < 20000 => 'Pro III' ,
+            $exp < 50000 => 'Master I' ,
+            $exp < 100000 => 'Master II' ,
+            $exp < 250000 => 'Master III' ,
+            $exp < 500000 => $isDrumeo ? 'Drumeo Legend' : 'Legend',
+            $exp < 1000000 => $isDrumeo ? 'Legends: Starr' : 'Legend I' ,
+            $exp < 1500000 => $isDrumeo ? 'Legends: Erskine' : 'Legend II' ,
+            $exp < 2000000 => $isDrumeo ? 'Legends: Cobham' : 'Legend III' ,
+            $exp < 2500000 => $isDrumeo ? 'Legends: Garibaldi' : 'Legend IV' ,
+            $exp < 3000000 => $isDrumeo ? 'Legends: Peart' : 'Legend V' ,
+            $exp < 4000000 => $isDrumeo ? 'Legends: Bonham' : 'Legend VI' ,
+            $exp < 5000000 => $isDrumeo ? 'Legends: Colaiuta' : 'Legend VII' ,
+            $exp < 7500000 => $isDrumeo ? 'Legends: Gadd' : 'Legend VIII' ,
+            $exp < 10000000 => $isDrumeo ? 'Legends: Porcaro' : 'Legend IX' ,
+            $exp >= 10000000 => $isDrumeo ? 'Legends: Rich' : 'Legend X',
+            default => 'Member'
         };
     }
 
@@ -995,7 +995,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         )->whereIn("permission_id", $cohortPermissionsIds)->count() > 0;
     }
 
-    public function isMusoraAccount() : bool
+    public function isMusoraAccount(): bool
     {
         $email = $this->email;
         if (!$email) {

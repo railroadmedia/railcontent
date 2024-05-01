@@ -7,7 +7,6 @@ use App\Modules\FeatureFlagging\Models\Feature;
 
 class ShowFeatures extends Command
 {
-
     protected $signature = 'featureFlag:showFeatures';
     protected $description = 'Show FeatureFlags';
 
@@ -17,9 +16,9 @@ class ShowFeatures extends Command
         $rows = [];
         foreach($features as $feature) {
             $userFilterExists = empty($feature->userid_list) ? "N" : "Y";
-            $rows[] = [$feature->name, $feature->active_at, $userFilterExists, $feature->allow_filter];
+            $rows[] = [$feature->name, $feature->active_at, $userFilterExists, $feature->allow_filter, $feature->block_filter];
 
         }
-        $this->table(["Name", "Active At", "Has User Filter", "Allow Filter"], $rows);
+        $this->table(["Name", "Active At", "Has User Filter", "Allow Filter", "Block Filter"], $rows);
     }
 }

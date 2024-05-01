@@ -752,7 +752,7 @@
 
             <div class="container mx-auto max-w-5xl">
                 <div id="customize-anchor" class="anchor"></div>
-                <div class="flex flex-wrap sm:flex-nowrap items-start justify-center mb-5 sm:mb-10 w-full mx-auto">
+                <div class="flex flex-wrap sm:flex-nowrap items-start justify-center mb-3 sm:mb-5 w-full mx-auto">
                     @include('pianote.products.partials._promo-card-special', [
                         'cardTitle' => 'Course Only',
                         'cardImage' =>
@@ -797,6 +797,12 @@
                         ],
                         'buttonText' => 'GET EVERYTHING',
                     ])
+                </div>
+                <div class="flex items-center justify-center text-left mx-auto @if(Carbon\Carbon::create(2024, 4, 29, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) opacity-0 h-0 @endif">
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
+                    <p class="leading-tight pl-3">
+                        Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1020,12 +1026,12 @@
     @include('_partials.components.video-modal', [
         'name' => 'jayZ',
         'video' => 'aFdOW1Ql3L4',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'danceOfEternity',
         'video' => 'LUknLohfN48',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'trailer',

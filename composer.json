@@ -111,6 +111,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "test-p":  "@php -d memory_limit=-1 artisan test --parallel --processes=4",
         "test-cov-p": [
             "@putenv XDEBUG_MODE=coverage",
             "@php -d memory_limit=-1 -d opcache.enable_cli=1 artisan test --coverage --parallel --processes=4"
