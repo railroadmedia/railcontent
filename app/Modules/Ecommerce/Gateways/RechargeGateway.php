@@ -177,21 +177,21 @@ class RechargeGateway
                 'HTTP/1.1 429 TOO MANY REQUESTS'
             ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
                 Log::warning('[Recharge\API] Sleeping for 1 seconds (429 Too Many Requests / Method 1)');
-                sleep(1);
+                sleep(1 * $attemptCount);
                 $retry = true;
                 continue;
             }
 
             if (isset($result->warning) && $result->warning == "too many requests") {
                 Log::warning('[Recharge\API] Sleeping for 1 seconds (Too Many Requests / Method 2)');
-                sleep(1);
+                sleep(1 * $attemptCount);
                 $retry = true;
                 continue;
             }
 
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 409 CONFLICT') > -1) {
                 Log::warning('[Recharge\API] Sleeping for 1 seconds (409 Conflict)');
-                sleep(1);
+                sleep(1 * $attemptCount);
                 $retry = true;
                 continue;
             }
