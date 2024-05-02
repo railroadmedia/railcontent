@@ -25,7 +25,7 @@ class FeatureFlagCRUDTest extends TestCase
 
     public function test_crud_feature()
     {
-        $name = $this->faker->unique()->name;
+        $name = $this->getRandomName();
         $this->artisan("featureFlag:addFeature '$name'")
             ->assertSuccessful();
         $feature = Feature::whereName($name)->first();
@@ -60,7 +60,7 @@ class FeatureFlagCRUDTest extends TestCase
     {
         // add and edit allow for different formats of userids, as a mixed array or as comma separated string
         $feature = $this->ffService->addFeature(
-            $this->faker->name,
+            $this->getRandomName(),
         );
         $this->assertDatabaseHas(
             'features_features',
@@ -87,11 +87,11 @@ class FeatureFlagCRUDTest extends TestCase
     public function test_crud_branches()
     {
         $experiment = $this->ffService->addExperiment(
-            $this->faker->name,
+            $this->getRandomName(),
             default_value: $this->faker->words(2, true)
         );
         $branch1 = $this->ffService->addBranch(
-            $this->faker->name,
+            $this->getRandomName(),
             $this->faker->words(2, true),
             $experiment->id,
             priority: 1,
@@ -128,12 +128,12 @@ class FeatureFlagCRUDTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
         $experiment = $this->ffService->addExperiment(
-            $this->faker->name,
+            $this->getRandomName(),
             default_value: $this->faker->words(2, true)
         );
         try {
             $branch1 = $this->ffService->addBranch(
-                $this->faker->name,
+                $this->getRandomName(),
                 $this->faker->words(2, true),
                 $experiment->id,
             );
@@ -142,7 +142,7 @@ class FeatureFlagCRUDTest extends TestCase
         }
         try {
             $branch1 = $this->ffService->addBranch(
-                $this->faker->name,
+                $this->getRandomName(),
                 $this->faker->words(2, true),
                 $experiment->id,
                 allow_filter: 'garbage'
@@ -152,7 +152,7 @@ class FeatureFlagCRUDTest extends TestCase
         }
         try {
             $branch1 = $this->ffService->addBranch(
-                $this->faker->name,
+                $this->getRandomName(),
                 $this->faker->words(2, true),
                 $experiment->id,
                 allow_filter: 'admin,garbage'
@@ -161,7 +161,7 @@ class FeatureFlagCRUDTest extends TestCase
         } catch (\InvalidArgumentException $e) {
         }
         $branch1 = $this->ffService->addBranch(
-            $this->faker->name,
+            $this->getRandomName(),
             $this->faker->words(2, true),
             $experiment->id,
             allow_filter: 'admin,older_than_3_months'
@@ -171,7 +171,7 @@ class FeatureFlagCRUDTest extends TestCase
     public function test_crud_experiment()
     {
         $experiment = $this->ffService->addExperiment(
-            $this->faker->name,
+            $this->getRandomName(),
             default_value: $this->faker->words(2, true)
         );
         // ----------- CREATE ----------------- //
@@ -194,7 +194,7 @@ class FeatureFlagCRUDTest extends TestCase
         $experiment->refresh();
         // ----------- DELETE WITH CHILDREN ----------------- //
         $branch1 = $this->ffService->addBranch(
-            $this->faker->name,
+            $this->getRandomName(),
             $this->faker->words(2, true),
             $experiment->id,
             weight: 1
@@ -231,11 +231,11 @@ class FeatureFlagCRUDTest extends TestCase
     public function test_add_remove_users_from_branch()
     {
         $experiment = $this->ffService->addExperiment(
-            $this->faker->name,
+            $this->getRandomName(),
             default_value: $this->faker->words(2, true)
         );
         $branch1 = $this->ffService->addBranch(
-            $this->faker->name,
+            $this->getRandomName(),
             $this->faker->words(2, true),
             $experiment->id,
             weight: 1
@@ -257,7 +257,7 @@ class FeatureFlagCRUDTest extends TestCase
 
     public function test_add_remove_users_from_feature()
     {
-        $name = $this->faker->unique()->name;
+        $name = $this->getRandomName();
         $this->artisan("featureFlag:addFeature '$name'")
             ->assertSuccessful();
         $feature = Feature::whereName($name)->first();
