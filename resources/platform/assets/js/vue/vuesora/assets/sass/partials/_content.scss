@@ -10,7 +10,7 @@
 
     &.left-column {
       flex:0 0 100%;
-      margin-bottom:$gutterWidth / 2;
+      margin-bottom: calc($gutterWidth / 2);
 
       h3 {
         text-align:center;
@@ -70,7 +70,7 @@
 
   @include xSmallOnly {
     margin-right:0;
-    margin-bottom:$gutterWidth / 3;
+    margin-bottom:calc($gutterWidth / 3);
   }
 
   .trophy-progress-cutoff {
@@ -184,7 +184,7 @@
 
   @include medium {
     flex:0 0 350px;
-    padding-left:$gutterWidth / 3;
+    padding-left:calc($gutterWidth / 3);
     height:auto;
     margin-top:0;
   }
@@ -248,7 +248,7 @@
     @include small {
       flex:0 0 310px;
       max-width:310px;
-      margin-left:$gutterWidth / 2;
+      margin-left: calc($gutterWidth / 2);
     }
 
     @include medium {
@@ -314,7 +314,7 @@
 
 .catalogue-filter {
   flex:0 0 100%;
-  margin-bottom:$gutterWidth / 2;
+  margin-bottom: calc($gutterWidth / 2);
 
   @include small {
     flex:1;
@@ -515,7 +515,7 @@
 
     @include xSmallOnly {
       margin-left:0!important;
-      margin-bottom:$gutterWidth / 3;
+      margin-bottom:calc($gutterWidth / 3);
     }
   }
 }
