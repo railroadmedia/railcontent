@@ -9,7 +9,6 @@ use Spatie\Permission\Models\Permission;
 
 class PasswordControllerTest extends UserManagementSystemTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();

@@ -69,27 +69,26 @@ class TrialSection extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/learning-paths/'.$request->uuid.'-'.$request->file('desktop_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -101,27 +100,26 @@ class TrialSection extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/learning-paths/'.$request->uuid.'-'.$request->file('tablet_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -133,27 +131,26 @@ class TrialSection extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/learning-paths/'.$request->uuid.'-'.$request->file('mobile_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),

@@ -137,7 +137,8 @@ class WorkoutsPageController extends BaseController
         $contentToRenderAsLesson = $this->contentService->getById($id);
         $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();
         $thisLessonJson =
-            (new ContentFilterResultsEntity(['results' => [$contentToRenderAsLesson], 'total_results' => 1]
+            (new ContentFilterResultsEntity(
+                ['results' => [$contentToRenderAsLesson], 'total_results' => 1]
             ))->toResponseRawJson();
 
         return view('content.lesson', [

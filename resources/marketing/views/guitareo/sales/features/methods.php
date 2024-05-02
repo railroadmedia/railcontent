@@ -1,4 +1,5 @@
 <?php
+
 $methods = [
     [
         "title" => "Get To Know The Guitar",

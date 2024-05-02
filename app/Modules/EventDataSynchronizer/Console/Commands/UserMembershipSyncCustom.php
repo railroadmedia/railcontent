@@ -14,7 +14,7 @@ class UserMembershipSyncCustom extends Command
     public function handle()
     {
         $this->runBatchQuery(
-            function (int $skip, int $take)  {
+            function (int $skip, int $take) {
                 return new UserMembershipSyncCustomJob(
                     $skip,
                     $take

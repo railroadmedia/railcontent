@@ -11,7 +11,6 @@ use Illuminate\Routing\Router;
 use App\Modules\CustomerIO\Providers\CustomerIoServiceProvider;
 use Tests\TestCase;
 
-
 class CustomerIoTestCase extends TestCase
 {
     /**

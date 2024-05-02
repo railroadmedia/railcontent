@@ -7,7 +7,6 @@ use Modules\UserManagementSystem\Controllers\OnboardingController;
 use Modules\UserManagementSystem\Controllers\ResetPasswordController;
 use Modules\UserManagementSystem\Controllers\UserController;
 
-
 Route::group(
     ['prefix' => config('user_management_system.route_prefix'),],
     function () {

@@ -62,7 +62,7 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**
@@ -138,7 +138,7 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
             GQL;
         $responseBody = $this->executeQuery($gql);
         $orderData = collect($responseBody->data->orders->nodes)->transform(
-            fn($data) => new FulfillOrdersImportedIntoShopifyOrderData(
+            fn ($data) => new FulfillOrdersImportedIntoShopifyOrderData(
                 $data->id,
                 $data->name,
                 $data->fulfillable,
@@ -149,9 +149,9 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
         // get only the orders that have notes in our expected format, so we can match it to our own ecommerce_order
         $importedOrderData = $orderData->filter(function ($orderData) {
             return !empty($orderData->note) && str_contains(
-                    $orderData->note,
-                    self::NOTE_STRING
-                );
+                $orderData->note,
+                self::NOTE_STRING
+            );
         });
 
 
@@ -299,7 +299,8 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
 
             // we'll need the fulfillmentOrderLineItemId when we build the payload, so add it to each order item fulfillment
             $orderItemFulfillmentsWithSyncedOrderItem->each(
-                fn(OrderItemFulfillment $fulfillment
+                fn (
+                    OrderItemFulfillment $fulfillment
                 ) => $fulfillment->fulfillmentOrderLineItemId = $fulfillmentOrderLineItemId
             );
 
@@ -315,7 +316,7 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
         // we have some order item fulfillments to sync, so group them by the tracking information,
         // and create fulfillment data for each grouping
         $grouped = $orderItemFulfillmentsToSync->groupBy(
-            fn($fulfillment) => "$fulfillment->company-$fulfillment->tracking_number"
+            fn ($fulfillment) => "$fulfillment->company-$fulfillment->tracking_number"
         );
         $grouped->each(
             function (Collection $fulfillments) use ($shopifyOrderNumber, $shopifyOrderId, $fulfillmentOrderId) {

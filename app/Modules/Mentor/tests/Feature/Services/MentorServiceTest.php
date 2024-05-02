@@ -12,7 +12,6 @@ use Tests\TestCase;
 
 class MentorServiceTest extends TestCase
 {
-
     private MentorService $mentorService;
 
     protected function setUp(): void

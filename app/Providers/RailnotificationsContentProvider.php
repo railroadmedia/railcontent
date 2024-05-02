@@ -10,8 +10,8 @@ use Railroad\Railnotifications\Contracts\ContentProviderInterface;
 
 class RailnotificationsContentProvider implements ContentProviderInterface
 {
-private ContentService $contentService;
-private CommentService $commentService;
+    private ContentService $contentService;
+    private CommentService $commentService;
 
     /**
      * @param ContentService $contentService
@@ -28,7 +28,7 @@ private CommentService $commentService;
         ContentRepository::$bypassPermissions = true;
 
         $content = $this->contentService->getById($id);
-        $content['mobile_app_url'] = url()->route('v1.mobile.musora-api.content.show',['id' => $id, 'brand' => $content['brand']]);
+        $content['mobile_app_url'] = url()->route('v1.mobile.musora-api.content.show', ['id' => $id, 'brand' => $content['brand']]);
         return $content;
     }
 

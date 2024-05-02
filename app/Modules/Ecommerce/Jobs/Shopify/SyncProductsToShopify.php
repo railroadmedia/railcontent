@@ -64,7 +64,7 @@ class SyncProductsToShopify implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     public function __construct(
@@ -75,8 +75,7 @@ class SyncProductsToShopify implements ShouldQueue
         protected bool $simulate,
         protected bool $fresh,
         protected int $batchIndex
-    )
-    {
+    ) {
         $this->shopifyIds = collect();
         $this->productsToSkip = collect();
     }
@@ -92,11 +91,10 @@ class SyncProductsToShopify implements ShouldQueue
      * @throws Exception
      */
     public function handle(
-            Shopify $shopify,
-            ProductRepository $productRepository,
-            EcommerceEntityManager $entityManager
-    ): void
-    {
+        Shopify $shopify,
+        ProductRepository $productRepository,
+        EcommerceEntityManager $entityManager
+    ): void {
         // set DI instances that we'll need
         $this->shopify = $shopify;
         $this->productRepository = $productRepository;
@@ -137,7 +135,7 @@ class SyncProductsToShopify implements ShouldQueue
             });
 
             // record the IDs of these products, so we know to skip them later because they're already done
-            $this->productsToSkip->push(...$products->map(fn(Product $pr) => $pr->getId()));
+            $this->productsToSkip->push(...$products->map(fn (Product $pr) => $pr->getId()));
         }
         return $products;
     }
@@ -159,7 +157,7 @@ class SyncProductsToShopify implements ShouldQueue
 
         // sku's are inconsistently cased, so analyze the end string to determine if we should transform our options
         if (ctype_lower($skuEnd)) {
-            $sizes->transform(fn($size) => Str::lower($size));
+            $sizes->transform(fn ($size) => Str::lower($size));
         }
 
         if ($sizes->doesntContain($skuEnd)) {
@@ -170,8 +168,8 @@ class SyncProductsToShopify implements ShouldQueue
         $skuBase = Str::beforeLast($sku, $SEPARATOR);
 
         return $sizes
-            ->filter(fn($size) => $size !== $skuEnd)
-            ->transform(fn($size) => $skuBase.$SEPARATOR.$size);
+            ->filter(fn ($size) => $size !== $skuEnd)
+            ->transform(fn ($size) => $skuBase.$SEPARATOR.$size);
     }
 
     /**
@@ -189,7 +187,7 @@ class SyncProductsToShopify implements ShouldQueue
         Collection $options
     ): array {
         if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType(
-            ) === Product::TYPE_DIGITAL_ONE_TIME) {
+        ) === Product::TYPE_DIGITAL_ONE_TIME) {
             if ($isCreating) {
                 return $this->createProductData($product, $this->locationId);
             }
@@ -279,7 +277,7 @@ class SyncProductsToShopify implements ShouldQueue
      */
     private function guessProductNameForOption(Collection $productOptions): string
     {
-        $productNames = $productOptions->map(fn(Product $product) => $product->getName());
+        $productNames = $productOptions->map(fn (Product $product) => $product->getName());
 
         // go through all the names, and walk through the names character by character, until the matching stops,
         // so that we can pull out the common name
@@ -288,7 +286,7 @@ class SyncProductsToShopify implements ShouldQueue
         });
 
         // break each product name into an array, so we can step through them all
-        $productNames->transform(fn(string $productName) => str_split($productName));
+        $productNames->transform(fn (string $productName) => str_split($productName));
 
         $baseNameArray = $productNames->shift();
 
@@ -394,7 +392,7 @@ class SyncProductsToShopify implements ShouldQueue
 
         // in case the size in the name is inconsistently cased, analyze the end string to determine if we should transform our options
         if (ctype_lower($sizeString)) {
-            $sizes->transform(fn($size) => Str::lower($size));
+            $sizes->transform(fn ($size) => Str::lower($size));
         }
 
         if ($sizes->contains($sizeString)) {
@@ -531,7 +529,7 @@ class SyncProductsToShopify implements ShouldQueue
         $postData["options"] = [
             "name" => self::SIZE_OPTION_NAME,
             "values" => [
-                $productOptions->map(fn(Product $product) => $this->getSizeFromProductSku($product))
+                $productOptions->map(fn (Product $product) => $this->getSizeFromProductSku($product))
             ]
         ];
 
@@ -584,7 +582,7 @@ class SyncProductsToShopify implements ShouldQueue
         // first, we need to get the existing product from Shopify, so we know what to update
         // the latest updated may not be in shopify yet, so find one that has a shopify id
         $shopifyVariantId = $productOptions
-            ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
+            ->filter(fn (Product $productOption) => !is_null($productOption->getShopifyId()))
             ->first()
             ->getShopifyId();
 
@@ -618,7 +616,8 @@ class SyncProductsToShopify implements ShouldQueue
                 // find the corresponding product from our productOptions
                 $shopifyVariantId = $shopifyVariant->getAttributes()["id"];
                 /** @var Product $matched */
-                $matched = $productOptions->filter(fn(Product $product) => $product->getShopifyId() == $shopifyVariantId
+                $matched = $productOptions->filter(
+                    fn (Product $product) => $product->getShopifyId() == $shopifyVariantId
                 )->first();
                 if (is_null($matched)) {
                     $this->logError(
@@ -640,7 +639,7 @@ class SyncProductsToShopify implements ShouldQueue
 
         // if we have any new entries in the productOptions that are not yet variants, we need to add them
         $missedProducts = $productOptions
-            ->filter(fn(Product $product) => $matchedProductOptions->doesntContain($product->getId()));
+            ->filter(fn (Product $product) => $matchedProductOptions->doesntContain($product->getId()));
         if ($missedProducts->isNotEmpty()) {
             $missedProducts->each(function (Product $missedProduct) use ($locationId, &$variantsData) {
                 $variantsData[] = $this->createVariantData(
@@ -829,10 +828,11 @@ class SyncProductsToShopify implements ShouldQueue
                 // whose ID is before this job's startAtId, we'll assume that the whole collection was already done in
                 // an earlier job
                 /** @var Product $lowestProduct */
-                $lowestProduct = $options->sortBy(fn(Product $product) => $product->getId())->first();
+                $lowestProduct = $options->sortBy(fn (Product $product) => $product->getId())->first();
                 $lowestId = $lowestProduct->getId();
                 if ($lowestId < $this->startAtId && $this->batchIndex > 1) {
-                    $this->logWarning(sprintf("%s: Found product ID %s (sku %s) as part of a collection of options "
+                    $this->logWarning(sprintf(
+                        "%s: Found product ID %s (sku %s) as part of a collection of options "
                      . "in batch %s. This should have been already synced in an earlier batch and has been skipped.",
                         $this->getClassName(),
                         $lowestId,
@@ -844,7 +844,7 @@ class SyncProductsToShopify implements ShouldQueue
 
 
                 $isAllNew = $options
-                    ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
+                    ->filter(fn (Product $productOption) => !is_null($productOption->getShopifyId()))
                     ->isEmpty();
                 $isCreating = $fresh || $isAllNew;
             }
@@ -865,7 +865,7 @@ class SyncProductsToShopify implements ShouldQueue
                     } else {
                         // this product of ours may not yet be in shopify, so get the first in the group that has a shopify id
                         $existingVariant = $options
-                            ->filter(fn(Product $productOption) => !is_null($productOption->getShopifyId()))
+                            ->filter(fn (Product $productOption) => !is_null($productOption->getShopifyId()))
                             ->first();
                         $variant = $this->shopify->getVariant($existingVariant->getShopifyId());
                     }
@@ -929,12 +929,20 @@ class SyncProductsToShopify implements ShouldQueue
             $this->handleRateLimit();
         });
 
-        $this->logInfo(sprintf("%s: results for syncing products to Shopify job %s of %s:",
-            $this->getClassName(), $this->batch()->processedJobs()+1, $this->batch()->totalJobs));
+        $this->logInfo(sprintf(
+            "%s: results for syncing products to Shopify job %s of %s:",
+            $this->getClassName(),
+            $this->batch()->processedJobs() + 1,
+            $this->batch()->totalJobs
+        ));
 
         foreach($this->results as $result) {
-            $this->logInfo(sprintf("Product ID %s (sku %s): Shopify Variant ID %s",
-                $result[0], $result[1], $result[2]));
+            $this->logInfo(sprintf(
+                "Product ID %s (sku %s): Shopify Variant ID %s",
+                $result[0],
+                $result[1],
+                $result[2]
+            ));
         }
 
         return $this->shopifyIds;

@@ -167,7 +167,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(302, $response->getStatusCode());
 
         // todo: fix
-//        $response->assertRedirect(config('user_management_system.login_page_path'));
+        //        $response->assertRedirect(config('user_management_system.login_page_path'));
 
         $this->assertEquals($user->toArray(), auth()->user()->toArray());
         $this->assertEquals($user->toArray(), user()->toArray());

@@ -2,7 +2,6 @@
 
 namespace App\Modules\Mentor\Services;
 
-
 use App\Modules\Brand\Services\PrimaryBrandService;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\Mentor\Models\Mentor;
@@ -153,9 +152,9 @@ class MentorService
 
     private function getMentorsWithLowestStudentPercentage($mentors): mixed
     {
-        $lowestStudentPercentage = $mentors->map(fn(Mentor $t) => $t->getActiveStudentPercentage())->min();
+        $lowestStudentPercentage = $mentors->map(fn (Mentor $t) => $t->getActiveStudentPercentage())->min();
         $mentorsWithLowestStudentPercentage = $mentors->where(
-            fn($t) => $t->getActiveStudentPercentage() == $lowestStudentPercentage
+            fn ($t) => $t->getActiveStudentPercentage() == $lowestStudentPercentage
         );
         return $mentorsWithLowestStudentPercentage;
     }
@@ -165,7 +164,7 @@ class MentorService
         if (!$this->mentors) {
             $this->mentors = Mentor::all();
         }
-        $mentors = $this->mentors->where(fn(Mentor $t) => Str::contains($t->supported_brands, $brand))
+        $mentors = $this->mentors->where(fn (Mentor $t) => Str::contains($t->supported_brands, $brand))
             ->where('active_student_max_count', '>', '0');
         return $mentors;
     }
@@ -316,7 +315,7 @@ class MentorService
         }
 
         $mentorStudents->groupBy('mentor_user_id')->each(function ($data, $mentorUserId) use ($mentors) {
-            $ids = $data->map(fn($t) => $t->id);
+            $ids = $data->map(fn ($t) => $t->id);
 
             MentorStudent::query()->whereIn('id', $ids)->update(
                 ['mentor_user_id' => $mentorUserId ? $mentorUserId : null]

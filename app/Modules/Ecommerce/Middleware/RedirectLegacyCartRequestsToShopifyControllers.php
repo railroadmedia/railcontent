@@ -49,7 +49,7 @@ class RedirectLegacyCartRequestsToShopifyControllers
         }
 
         if ((Str::startsWith($request->path(), 'ecommerce/json/update-product-quantity') && $request->method(
-            ) == 'PATCH')) {
+        ) == 'PATCH')) {
             $route = $request->route();
 
             $routeAction = array_merge($route->getAction(), [
@@ -115,7 +115,7 @@ class RedirectLegacyCartRequestsToShopifyControllers
         $array = explode(".", $hostWithSubdomain);
 
         return (array_key_exists(count($array) - 2, $array) ? $array[count($array) - 2] : "") . "." . $array[count(
-                $array
-            ) - 1];
+            $array
+        ) - 1];
     }
 }

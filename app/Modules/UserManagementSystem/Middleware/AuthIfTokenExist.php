@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class AuthIfTokenExist
 {
-
     /**
      * @param $request
      * @param Closure $next

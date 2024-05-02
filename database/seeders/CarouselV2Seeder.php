@@ -235,7 +235,7 @@ May 10th (3:00PM PT) - Drumeo Live Lesson',
             ],
         ];
 
-        foreach($carousels as $carousel){
+        foreach($carousels as $carousel) {
             Carousel::create([
                                  'brand_id' => $carousel['brand_id'],
                                  'logo' => $carousel['logo'],

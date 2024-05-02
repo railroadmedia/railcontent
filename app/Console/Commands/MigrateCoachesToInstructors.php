@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class MigrateCoachesToInstructors extends Command
 {
-
     /**
      * The console command name.
      *

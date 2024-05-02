@@ -52,7 +52,7 @@ class AuthenticationController extends Controller
         $remember = false;
 
         if (config('user_management_system.force_remember', false) == true ||
-            (boolean)$request->get('remember', false) == true) {
+            (bool)$request->get('remember', false) == true) {
             $remember = true;
         }
 
@@ -150,7 +150,7 @@ class AuthenticationController extends Controller
         $remember = false;
 
         if (config('user_management_system.force_remember', false) == true ||
-            (boolean)$request->get('remember', false) == true) {
+            (bool)$request->get('remember', false) == true) {
             $remember = true;
         }
 

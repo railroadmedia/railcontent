@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class LoginPageController extends BaseController
 {
-
     private ShopifyAPIService $shopifyAPIService;
 
     public function __construct(ShopifyAPIService $shopifyAPIService)

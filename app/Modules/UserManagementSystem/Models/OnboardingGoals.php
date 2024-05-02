@@ -31,10 +31,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OnboardingGoals extends Model
 {
+    use HasFactory;
 
     protected $table = 'onboarding_goals';
-
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.

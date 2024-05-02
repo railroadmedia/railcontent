@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class MigrateTypeBasedContentPermissionsToIdBased extends Command
 {
-
     /**
      * The console command name.
      *

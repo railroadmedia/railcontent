@@ -11,7 +11,8 @@ class ExpiredProductResync extends Command
     protected $description = 'ExpiredProductResync';
     protected $signature = 'user:resyncExpiredProducts';
 
-    public function handle(UserMembershipFieldsService $userMembershipFieldsService) {
+    public function handle(UserMembershipFieldsService $userMembershipFieldsService)
+    {
         $this->runChainQuery(function (int $skip, int $take) {
             return new ExpiredProductsResyncJob($skip, $take);
         }, chunks: 500);

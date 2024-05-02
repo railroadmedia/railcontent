@@ -158,7 +158,7 @@ class InstructorDecorator extends ModeDecoratorBase
                         break;
                 }
                 $contents[$contentIndex]['lessons'][$lessonIndex]['difficulty_string'] = $difficultyString;
-                if($lesson['type'] == 'workout'){
+                if($lesson['type'] == 'workout') {
                     $contents[$contentIndex]['lessons'][$lessonIndex]['url'] = url()->route('platform.content.first-level', [
                         'brand' => $lesson['brand'],
                         'workouts',

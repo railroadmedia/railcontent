@@ -27,9 +27,8 @@ use Illuminate\Support\Carbon;
  */
 class ReportedUser extends Model
 {
-    protected $table = 'usora_reported_users';
-
     use HasFactory;
+    protected $table = 'usora_reported_users';
 
     /**
      * The attributes that are mass assignable.

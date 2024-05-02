@@ -10,7 +10,6 @@ use Railroad\Points\Services\UserPointsService;
 
 class MigrateGuitareoUserXP extends Command
 {
-
     /**
      * The console command name.
      *

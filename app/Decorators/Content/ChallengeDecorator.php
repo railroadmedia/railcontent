@@ -25,11 +25,11 @@ class ChallengeDecorator extends TypeDecoratorBase
             $challengeEnrollEnded = !empty($content->fetch('enrollment_end_time')) && Carbon::parse($content->fetch('enrollment_end_time')) <= Carbon::now();
             $registrationUrl = $content->fetch('fields.registration_url');
             $cohortSlug = '';
-            if($registrationUrl){
+            if($registrationUrl) {
                 $paths = explode('/', $registrationUrl);
                 $cohortSlug = \Arr::last($paths);
             }
-            if(config('musora-api.api.version')){
+            if(config('musora-api.api.version')) {
                 $contentsOfType[$contentIndex]['slug'] = $cohortSlug;
             }
 
@@ -40,7 +40,7 @@ class ChallengeDecorator extends TypeDecoratorBase
                 $permissionID =
                     $product->getContentPermissions($contentPermissionsLookup)
                         ->first()->id ?? null;
-                $contentsOfType[$contentIndex]['has_product'] = (!$permissionID)?true:(user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID));
+                $contentsOfType[$contentIndex]['has_product'] = (!$permissionID) ? true : (user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID));
             }
 
             $enrollNow = $registrationUrl && $challengeEnrollStarted && !$challengeEnrollEnded;
@@ -48,7 +48,7 @@ class ChallengeDecorator extends TypeDecoratorBase
 
             $normallAndAccessible = !empty($content->fetch('published_on')) && Carbon::parse($content->fetch('published_on')) <= Carbon::now();
             $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
-            $contentsOfType[$contentIndex]['primary_cta_text'] = (!$challengeEnrollStarted && !$normallAndAccessible)?'Notify Me':'Start Challenge';
+            $contentsOfType[$contentIndex]['primary_cta_text'] = (!$challengeEnrollStarted && !$normallAndAccessible) ? 'Notify Me' : 'Start Challenge';
             $contentsOfType[$contentIndex]['challenge_state'] = $enrollNow ? 'enrollment' : ($notifyMe ? 'upcoming' : ($normallAndAccessible ? 'accessible' : 'inaccessible'));
             $contentsOfType[$contentIndex]['challenge_state_text'] = $enrollNow ? 'Enroll Now' : ($notifyMe ? 'Notify Me' : $content['child_count'].' Workouts');
         }

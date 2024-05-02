@@ -15,7 +15,6 @@ use Railroad\Railtracker\Services\ContentLastEngagedService;
 
 class PlaylistDecorator extends ModeDecoratorBase
 {
-
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
@@ -106,8 +105,8 @@ class PlaylistDecorator extends ModeDecoratorBase
         foreach ($playlists as $index => $playlist) {
 
             $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
-            $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0)-1)*24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
-            $playlists[$index]['duration_formated'] = ($hours == 0)? $minsec : $hours.':'.$minsec ;
+            $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0) - 1) * 24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
+            $playlists[$index]['duration_formated'] = ($hours == 0) ? $minsec : $hours.':'.$minsec ;
 
             $playlists[$index]['progress_percent'] = 0;
             $playlists[$index]['completed_items'] = $completedItems[$playlist['id']] ?? 0;
@@ -116,8 +115,8 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlists[$index]['state'] =
                 ($playlists[$index]['completed_items'] > 0 || $playlists[$index]['started_items'] > 0) ? 'started' :
                     (($playlists[$index]['completed_items'] == $playlists[$index]['total_items']) ? 'completed' : '');
-            if($playlists[$index]['total_items'] > 0){
-                $playlists[$index]['progress_percent'] = $playlists[$index]['completed_items']/$playlists[$index]['total_items'];
+            if($playlists[$index]['total_items'] > 0) {
+                $playlists[$index]['progress_percent'] = $playlists[$index]['completed_items'] / $playlists[$index]['total_items'];
             }
 
             if (!$playlist['thumbnail_url']) {
@@ -148,7 +147,9 @@ class PlaylistDecorator extends ModeDecoratorBase
                         $playlists[$index]['square_thumbnail'] =
                             (($firstItem['type'] == 'assignment' &&
                                     ($firstItem->fetch('parent')) &&
-                                    in_array($firstItem->fetch('parent')['type'], ['song', 'song-tutorial-children']
+                                    in_array(
+                                        $firstItem->fetch('parent')['type'],
+                                        ['song', 'song-tutorial-children']
                                     )) ||
                                 $firstItem['type'] == 'song-tutorial-children' ||
                                 $firstItem['type'] == 'song' ||

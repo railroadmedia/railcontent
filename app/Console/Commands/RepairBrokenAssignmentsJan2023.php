@@ -8,7 +8,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 
 class RepairBrokenAssignmentsJan2023 extends Command
 {
-
     protected $signature = 'RepairBrokenAssignmentsJan2023';
 
     protected $description = 'Fix overwritten assignments from last 2 song imports from 24.01.23 and 30.12.22';
@@ -38,7 +37,7 @@ class RepairBrokenAssignmentsJan2023 extends Command
 
         $nrOfHierarchyRows = $dbConnection->table('railcontent_content_hierarchy')
             ->whereIn('child_id', $brokenAssignmentIds)
-            ->where('created_on', '>', '2022-12-30 00:00:00' )
+            ->where('created_on', '>', '2022-12-30 00:00:00')
             ->count()
         ;
 
@@ -49,7 +48,7 @@ class RepairBrokenAssignmentsJan2023 extends Command
         /* Unset the old assignments from the new added songs */
         $dbConnection->table('railcontent_content_hierarchy')
             ->whereIn('child_id', $brokenAssignmentIds)
-            ->where('created_on', '>', '2022-12-30 00:00:00' )
+            ->where('created_on', '>', '2022-12-30 00:00:00')
             ->delete();
 
         //289426  -> was already modified by a publisher
@@ -81,7 +80,7 @@ class RepairBrokenAssignmentsJan2023 extends Command
                 $dbConnection->table('railcontent_content_fields')
                     ->where('content_id', $contentId)
                     ->where('key', 'soundslice_slug')
-                    ->update( ['value' => $correctSoundSlice]);
+                    ->update(['value' => $correctSoundSlice]);
             }
 
             event(new ContentCreated($contentId));

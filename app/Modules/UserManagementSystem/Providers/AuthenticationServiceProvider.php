@@ -28,7 +28,9 @@ class AuthenticationServiceProvider extends ServiceProvider
             'user-management-system',
             function ($app, $name, array $config) {
                 $guard = new SaltedSessionGuard(
-                    $name, Auth::createUserProvider($config['provider']), $app['session.store']
+                    $name,
+                    Auth::createUserProvider($config['provider']),
+                    $app['session.store']
                 );
 
                 if (method_exists($guard, 'setCookieJar')) {

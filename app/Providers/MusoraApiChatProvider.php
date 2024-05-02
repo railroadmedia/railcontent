@@ -8,7 +8,7 @@ use Railroad\Railchat\Services\RailchatService;
 
 class MusoraApiChatProvider implements ChatProviderInterface
 {
- //TODO: INTEGRATE chatroll
+    //TODO: INTEGRATE chatroll
     /**
      * @var RailchatService
      */
@@ -24,20 +24,17 @@ class MusoraApiChatProvider implements ChatProviderInterface
         $this->railchatService = $railchatService;
     }
 
-    public function getEmbedUrl()
-    : string
+    public function getEmbedUrl(): string
     {
         return '';
     }
 
-    public function getCustomStyle()
-    : array
+    public function getCustomStyle(): array
     {
         return [];
     }
 
-    public function getRailchatData()
-    : array
+    public function getRailchatData(): array
     {
 
         $member = user();

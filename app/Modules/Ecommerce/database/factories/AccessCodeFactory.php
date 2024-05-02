@@ -26,7 +26,7 @@ class AccessCodeFactory extends Factory
         array $attributes = []
     ): AccessCode {
         $attributes = array_merge($attributes, [
-            'product_ids' => serialize([(integer)$product->id]),
+            'product_ids' => serialize([(int)$product->id]),
             'brand' => $product->brand
         ]);
         return AccessCode::factory()->create($attributes);

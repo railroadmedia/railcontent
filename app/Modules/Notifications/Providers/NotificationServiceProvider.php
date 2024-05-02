@@ -2,7 +2,6 @@
 
 namespace App\Modules\Notifications\Providers;
 
-
 use App\Modules\Notifications\Console\Commands\DailySummaryNotifications;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

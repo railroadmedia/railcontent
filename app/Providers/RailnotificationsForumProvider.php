@@ -57,14 +57,14 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
     {
         $postEntity = $this->postRepository->read($postId);
 
-        $post = ($postEntity)?$postEntity->getArrayCopy() : [];
+        $post = ($postEntity) ? $postEntity->getArrayCopy() : [];
         $post['latest_post_like'] = $this->postLikeRepository->getLatestPostLike($postId);
         $post['like_count'] = $this->postLikeRepository->countPostLikes($postId);
 
         return $post;
     }
 
-    public function getPostLikeCount(int $postId) : int
+    public function getPostLikeCount(int $postId): int
     {
         return $this->postLikeRepository->countPostLikes($postId);
     }
@@ -91,7 +91,8 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
      * @param $threadId
      * @return \Illuminate\Support\Collection
      */
-    public function getAllPostIdsInThread($threadId){
+    public function getAllPostIdsInThread($threadId)
+    {
         return $this->postRepository->getAllPostIdsInThread($threadId);
     }
 }

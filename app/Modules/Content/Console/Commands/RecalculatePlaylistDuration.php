@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class RecalculatePlaylistDuration extends Command
 {
-
     protected $name = 'RecalculatePlaylistDuration';
     protected $signature = 'RecalculatePlaylistDuration {playlistId}';
     protected $description = 'Recalculate playlist duration';

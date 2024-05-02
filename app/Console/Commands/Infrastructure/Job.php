@@ -13,7 +13,11 @@ use Throwable;
 
 abstract class Job implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use Batchable;
 
     public string $name;
     public int $instance;
@@ -34,7 +38,7 @@ abstract class Job implements ShouldQueue
         Log::info("$this->instance:$this->name Finished ($sec s)");
     }
 
-    abstract function handleJob();
+    abstract public function handleJob();
 
     public function failed(Throwable $exception)
     {

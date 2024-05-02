@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\URL;
 
 abstract class BaseTestCase extends FoundationBaseTestCase
 {
-
     protected string $testRouteName = 'test-route';
     protected string $testRoutePath = 'https://test.musora.com';
 

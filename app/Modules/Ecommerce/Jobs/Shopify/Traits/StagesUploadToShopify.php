@@ -66,8 +66,11 @@ trait StagesUploadToShopify
             // check for any errors
             $responseErrors = $responseBody->errors ?? $responseBody->data->stagedUploadsCreate->userErrors ?? [];
             if (!empty($responseErrors)) {
-                throw new Exception(sprintf("Error(s) found while attempting to call stagedUploadsCreate on Shopify for file %s: %s",
-                    $filename, collect($responseErrors)->implode("message", " ")));
+                throw new Exception(sprintf(
+                    "Error(s) found while attempting to call stagedUploadsCreate on Shopify for file %s: %s",
+                    $filename,
+                    collect($responseErrors)->implode("message", " ")
+                ));
             }
 
             $parameterValues = [];
