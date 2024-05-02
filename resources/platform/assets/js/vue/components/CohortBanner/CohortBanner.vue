@@ -38,7 +38,6 @@ const handleClick = (event, url) => {
         event.preventDefault();
 
         userJourney.trackHomeContentClick({
-            token: userStore.token,
             payload: {
                 contentId: null,
                 brand: userStore.brand,
