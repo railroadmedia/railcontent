@@ -46,9 +46,10 @@
                         <i class="lg:ml-2 fas fa-check-circle text-drumeo"></i> No location restrictions.</p>
 
                     @include("drumeo.lead-gen.partials.sign-up-form", [
-                "recaptchaKey" => $recaptchaKey,
-            "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",
-            "formName" => 'Drumeo Drumset Giveaway',
+                        "recaptchaKey" => $recaptchaKey,
+                        "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form",
+                        "formName" => 'Drumeo Drumset Giveaway',
+                        "nameInput" => true,
                         "stacked" => true,
                         "buttonText" => "I WANT TO WIN!",
                     ])
@@ -197,9 +198,10 @@
             <img class="h-32 sm:h-36 md:h-44 lg:h-48 mb-5 sm:mb-12 lazyload" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/drumeo/lead-gen/giveaway/drumeo-giveaway-logo.png" alt="title image">
 
             @include("drumeo.lead-gen.partials.sign-up-form", [
-        "recaptchaKey" => $recaptchaKey,
-    "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form2",
-    "formName" => 'Drumeo Drumset Giveaway',
+                "recaptchaKey" => $recaptchaKey,
+                "formId" => "Drumeo - Engagement - Trigger - Drumeo Drumset Giveaway - Web Form2",
+                "formName" => 'Drumeo Drumset Giveaway',
+                "nameInput" => true,
                 "stacked" => true,
                 "buttonText" => "I WANT TO WIN!",
             ])
