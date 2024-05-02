@@ -101,7 +101,7 @@
                         <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
                         <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
                         <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
-                        <span class="disabled hidden">new Pianote members only<i class="fad fa-exclamation-triangle"></i></span>
+                        <span class="disabled hidden">new Pianote members only  <i class="fad fa-exclamation-triangle"></i></span>
                     </button>
                 </form>
                 <div class="disclaimer block opacity-70 mx-auto mt-3 max-w-lg">
@@ -189,7 +189,8 @@
 
                             $('input[name="email"]').prop('disabled', true);
                             $('.submit').removeClass('bg-pianote');
-                            $('.submit').addClass('bg-gray-400');
+                            $('.submit').addClass('bg-gray-500');
+                            $('.disabled').addClass('text-white');
                         } else {
                             fail.removeClass("hide hidden");
                         }

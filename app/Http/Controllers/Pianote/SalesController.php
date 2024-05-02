@@ -319,17 +319,24 @@ class SalesController extends BaseController
         // Validate email before proceeding
         $workspace_name = 'pianote';
 
+        
         $validatedData = $request->validate([
             'email' => [
                 'required',
                 'email',
-                function ($attribute, $value, $fail) use ($workspace_name) {
+                function ($attribute, $value, $fail) use ($workspace_name) { // check if user exists
                     $userExists = DB::table('usora_users')
                         ->join('user_access_permissions', 'usora_users.id', '=', 'user_access_permissions.user_id')
                         ->where('usora_users.email', $value)
-                        ->whereIn('user_access_permissions.permission_id', [77, 88])
+                        ->where(function ($query) {
+                            $query->where(function ($query) {
+                                $query->whereIn('user_access_permissions.permission_id', [77, 88])
+                                    ->where('user_access_permissions.status', 'active');
+                            })
+                            ->orWhere('user_access_permissions.product_id', 408);
+                        })
                         ->exists();
-        
+
                     if ($userExists) {
                         $fail($attribute.' is already in use.');
                     }
@@ -337,9 +344,18 @@ class SalesController extends BaseController
                 Rule::unique('customer_io_customers', 'email')->where(function ($query) use ($workspace_name) {
                     $query->where('workspace_name', $workspace_name);
                 }),
+                  function ($attribute, $value, $fail) use ($request) { // check if email is in session
+                    if ($request->session()->get('email') === $value) {
+                        $fail('You cannot send email twice');
+                    }
+                },
             ],
         ]);
-       
+
+        // add email to session
+        $request->session()->put('email', $validatedData['email']);
+    
+
         // If validation passes, the customer does not exist, continue with the process
     
         // create access code
