@@ -19,17 +19,17 @@ class FeatureFlagFunctionalTest extends TestCase
         $this->ffService = app(FeatureFlagService::class);
 
         $this->experiment = $this->ffService->addExperiment(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             default_value: $this->faker->unique()->words(2, true)
         );
         $this->branch1 = $this->ffService->addBranch(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             $this->faker->unique()->words(2, true),
             $this->experiment->id,
             weight: 1
         );
         $this->branch2 = $this->ffService->addBranch(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             $this->faker->unique()->words(2, true),
             $this->experiment->id,
             weight: 1
@@ -68,18 +68,18 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_no_user()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $isAccessible = FeatureFlagging::accessible($feature->name);
         $this->assertFalse($isAccessible);
 
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(-1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(-1));
         $isAccessible = FeatureFlagging::accessible($feature->name);
         $this->assertTrue($isAccessible);
     }
 
     public function test_feature_inaccessible()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $user = User::factory()->create();
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertFalse($isAccessible);
@@ -87,7 +87,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_accessible()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(-1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(-1));
         $user = User::factory()->create();
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertTrue($isAccessible);
@@ -95,7 +95,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_userid_list()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $user = User::factory()->create();
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertFalse($isAccessible);
@@ -107,7 +107,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_allow_filter_admin()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $user = User::factory()->create(['permission_level' => User::PERMISSION_LEVEL_ADMIN]);
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertFalse($isAccessible);
@@ -119,7 +119,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_block_filter_admin()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name);
+        $feature = $this->ffService->addFeature($this->faker->unique()->word);
         $user = User::factory()->create(['permission_level' => User::PERMISSION_LEVEL_ADMIN]);
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertTrue($isAccessible);
@@ -131,7 +131,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_block_list_younger_than()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name);
+        $feature = $this->ffService->addFeature($this->faker->unique()->word);
         $user = User::factory()->create(['created_at' => Carbon::now()->addDays(-2)]);
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertTrue($isAccessible);
@@ -147,7 +147,7 @@ class FeatureFlagFunctionalTest extends TestCase
 
     public function test_feature_allow_list_older_than()
     {
-        $feature = $this->ffService->addFeature($this->faker->unique()->name, active_at: Carbon::now()->addDays(1));
+        $feature = $this->ffService->addFeature($this->getRandomName(), active_at: Carbon::now()->addDays(1));
         $user = User::factory()->create(['created_at' => Carbon::now()->addMonths(-4)]);
         $isAccessible = FeatureFlagging::accessible($feature->name, $user);
         $this->assertFalse($isAccessible);
@@ -164,11 +164,11 @@ class FeatureFlagFunctionalTest extends TestCase
     public function test_experiment_disabled()
     {
         $experiment = $this->ffService->addExperiment(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             default_value: $this->faker->words(2, true)
         );
         $branch1 = $this->ffService->addBranch(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             $this->faker->unique()->words(2, true),
             $experiment->id,
             weight: 1
@@ -237,11 +237,11 @@ class FeatureFlagFunctionalTest extends TestCase
     {
         $user = User::factory()->create();
         $experiment1 = $this->ffService->addExperiment(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             default_value: $this->faker->unique()->words(2, true)
         );
         $experiment1 = $this->ffService->addExperiment(
-            $this->faker->unique()->name,
+            $this->getRandomName(),
             default_value: $this->faker->unique()->words(2, true)
         );
         $this->ffService->editBranch($this->branch1->id, ['weight' => 1]);
@@ -259,8 +259,8 @@ class FeatureFlagFunctionalTest extends TestCase
         $tomorrow = $now->addDay();
         $user = User::factory()->create(['permission_level' => User::PERMISSION_LEVEL_ADMIN]);
         $allowed1 = $this->ffService->addFeature($this->faker->unique()->word);
-        $notAllowed1 = $this->ffService->addFeature($this->faker->unique()->word, active_at: $tomorrow);
-        $allowed2 = $this->ffService->addFeature($this->faker->unique()->word, active_at: $tomorrow, userid_list: [$user->id]);
+        $notAllowed1 = $this->ffService->addFeature($this->getRandomName(), active_at: $tomorrow);
+        $allowed2 = $this->ffService->addFeature($this->getRandomName(), active_at: $tomorrow, userid_list: [$user->id]);
         $allFeatures = FeatureFlagging::allowedFeatures($user);
         $this->assertContains($allowed1->name, $allFeatures);
         $this->assertContains($allowed2->name, $allFeatures);
@@ -272,7 +272,7 @@ class FeatureFlagFunctionalTest extends TestCase
         $now = Carbon::now();
         $tomorrow = $now->addDay();
         $domains = ['musora', 'drumeo', 'singeo', 'pianote', 'guitareo'];
-        $musoraFeature = $this->ffService->addFeature($this->faker->unique()->word, allow_filter: 'musora', active_at: $tomorrow);
+        $musoraFeature = $this->ffService->addFeature($this->getRandomName(), allow_filter: 'musora', active_at: $tomorrow);
         foreach($domains as $domain) {
             $user = User::factory()->create(['email' => "a@$domain.com"]);
             $this->assertTrue(FeatureFlagging::accessible($musoraFeature->name, $user));
