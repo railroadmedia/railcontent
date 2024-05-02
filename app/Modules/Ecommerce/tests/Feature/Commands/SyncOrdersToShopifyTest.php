@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Jobs\Shopify\SyncOrdersToShopifyJobManager;
 use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
@@ -52,18 +53,22 @@ class SyncOrdersToShopifyTest extends TestCase
         return $product;
     }
 
-    private function createOrders(int $count, bool $isBeforeLaunch): \Illuminate\Database\Eloquent\Collection
+    private function createOrders(int $count, bool $isBeforeLaunch): Collection
     {
         $product = $this->getProduct();
-
+        if ($isBeforeLaunch) {
+            $startDate = new Carbon('1970-01-01T00:00:00Z');
+            $endDate = $this->launchDate;
+        } else {
+            $startDate = $this->launchDate->copy()->addDay();
+            $endDate = now();
+        }
         return Order::factory()
             ->count($count)
             ->hasOrderItemForProduct($product)
-            ->create([
-                'created_at' => $isBeforeLaunch
-                    ? $this->faker->dateTimeBetween('1970-01-01T00:00:00Z', $this->launchDate)
-                    : $this->faker->dateTimeBetween($this->launchDate)
-            ]);
+            ->createdAtInDateRange($startDate, $endDate)
+            ->create()
+            ->sortBy('id');
     }
 
     public function test_dispatcher_uses_the_limit()
@@ -119,31 +124,29 @@ class SyncOrdersToShopifyTest extends TestCase
         Order::factory()
             ->count(6)
             ->hasOrderItemForProduct($product)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween('1970-01-01T00:00:00Z', $startCreatedAt)
-            ]);
+            ->createdAtInDateRange(new Carbon('1970-01-01T00:00:00Z'), $startCreatedAt->copy()->subDay())
+            ->create();
 
         $beforeLaunch = Order::factory()
             ->count(5)
             ->hasOrderItemForProduct($product)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween($startCreatedAt, $this->launchDate)
-            ]);
+            ->createdAtInDateRange($startCreatedAt, $this->launchDate)
+            ->create();
+        $beforeLaunch = $beforeLaunch->sortBy('id');
 
         $afterLaunch = Order::factory()
             ->count(4)
             ->hasOrderItemForProduct($product)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween($this->launchDate, $endCreatedAt)
-            ]);
+            ->createdAtInDateRange($this->launchDate, $endCreatedAt)
+            ->create();
+        $afterLaunch = $afterLaunch->sortBy('id');
 
         // after our wanted period
         Order::factory()
             ->count(3)
             ->hasOrderItemForProduct($product)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween($endCreatedAt)
-            ]);
+            ->createdAtInDateRange($endCreatedAt->copy()->addDay(), now())
+            ->create();
 
         // we won't bother checking the log message, this just helps keep it from outputting in the test run
         Log::shouldReceive("info");
@@ -169,8 +172,8 @@ class SyncOrdersToShopifyTest extends TestCase
         Order::factory()
             ->count(5)
             ->hasOrderItemForProduct($this->getProduct())
+            ->createdAtInDateRange(new Carbon('1970-01-01T00:00:00Z'), $this->launchDate)
             ->create([
-                'created_at' => $this->faker->dateTimeBetween('1970-01-01T00:00:00Z', $this->launchDate),
                 'shopify_id' => $this->faker->randomNumber(9)
             ]);
 
