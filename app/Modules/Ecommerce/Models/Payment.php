@@ -42,6 +42,11 @@ class Payment extends Model
     public const STATUS_FAILED = 'failed';
     public const STATUS_REFUNDED = 'refunded';
 
+    public const EXTERNAL_PROVIDER_STRIPE = 'stripe';
+    public const EXTERNAL_PROVIDER_PAYPAL = 'paypal';
+    public const EXTERNAL_PROVIDER_APPLE = 'apple';
+    public const EXTERNAL_PROVIDER_GOOGLE = 'google';
+
     protected $table = 'ecommerce_payments';
     protected $primaryKey = 'id';
 
