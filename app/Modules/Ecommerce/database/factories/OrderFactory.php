@@ -7,8 +7,8 @@ use App\Modules\Ecommerce\Models\Customer;
 use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\OrderItem;
 use App\Modules\Ecommerce\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 
 class OrderFactory extends Factory
@@ -75,6 +75,20 @@ class OrderFactory extends Factory
             OrderItem::factory(['product_id' => $product->id]),
             "orderItems"
         );
+    }
+
+    public function createdAtInDateRange(Carbon $startDate, Carbon $endDate, bool $updatedAtMatch = true): Factory
+    {
+        $date = $this->faker->dateTimeBetween($startDate, $endDate);
+        $changes = [
+            'created_at' => $date,
+        ];
+        if ($updatedAtMatch) {
+            $changes['updated_at'] = $date;
+        }
+        return $this->state(function (array $attributes) use ($changes) {
+            return $changes;
+        });
     }
 
     public function configure(): static
