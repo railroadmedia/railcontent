@@ -50,22 +50,22 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
         $this->init($skip, $take);
     }
 
-    function getSkip(): int
+    public function getSkip(): int
     {
         return $this->skip;
     }
 
-    function getTake(): int
+    public function getTake(): int
     {
         return $this->take;
     }
 
-    function getIds(): array
+    public function getIds(): array
     {
         return $this->ids;
     }
 
-    function getQuery(): Builder
+    public function getQuery(): Builder
     {
         return QueryServices::getCustomUserQuery(
             $this->customQuery,
@@ -75,11 +75,11 @@ class ShopifyCustomersSyncAllJob extends BatchQueryJobByIds
         );
     }
 
-    function handleItem($item): void
+    public function handleItem($item): void
     {
     }
 
-    function handleAllItems($items): bool
+    public function handleAllItems($items): bool
     {
         $shopifySyncService = app(ShopifySyncService::class);
         foreach ($items as $item) {

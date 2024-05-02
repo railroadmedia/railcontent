@@ -12,7 +12,8 @@ class LoggingEventListener
     public function commandStarting(CommandStarting $event): void
     {
         Log::shareContext(
-            array_filter([
+            array_filter(
+                [
                     'tid' => LoggingContextMiddleware::getTraceId(),
                     'command' => $event->command,
                 ]
@@ -24,7 +25,8 @@ class LoggingEventListener
     {
         $displayName = $event->job->payload()['displayName'] ??= 'unknown';
         Log::shareContext(
-            array_filter([
+            array_filter(
+                [
                     'tid' => LoggingContextMiddleware::getTraceId(),
                     'job' => $displayName,
                 ]

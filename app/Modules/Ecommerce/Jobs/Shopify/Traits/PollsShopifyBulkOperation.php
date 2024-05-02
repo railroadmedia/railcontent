@@ -10,15 +10,15 @@ use Signifly\Shopify\Shopify;
 
 trait PollsShopifyBulkOperation
 {
-
     protected Shopify $shopify;
 
-    public function __construct(protected string $bulkOperationId,
-                                protected ?ShopifySync $shopifySync,
-                                protected string $sourceFileName,
-                                protected string $resourceType,
-                                protected int $secondsPassed = 0)
-    {
+    public function __construct(
+        protected string $bulkOperationId,
+        protected ?ShopifySync $shopifySync,
+        protected string $sourceFileName,
+        protected string $resourceType,
+        protected int $secondsPassed = 0
+    ) {
     }
 
     /**
@@ -57,20 +57,29 @@ trait PollsShopifyBulkOperation
             // check for any errors
             $responseErrors = $responseBody->errors ?? $responseBody->data->customerCreate->userErrors ?? [];
             if (!empty($responseErrors)) {
-                throw new Exception(sprintf("%s: Error(s) returned while attempting to poll status of BulkOperation %s: %s",
-                    $this->getClassName(), $this->bulkOperationId, collect($responseErrors)->implode("message", " ")));
+                throw new Exception(sprintf(
+                    "%s: Error(s) returned while attempting to poll status of BulkOperation %s: %s",
+                    $this->getClassName(),
+                    $this->bulkOperationId,
+                    collect($responseErrors)->implode("message", " ")
+                ));
             }
 
             $values = $responseBody->data->node;
             return
-                new ShopifyPollResponse($values->status,
+                new ShopifyPollResponse(
+                    $values->status,
                     new Carbon($values->createdAt),
                     $values->completedAt ? new Carbon($values->completedAt) : null,
                     $values->url
                 );
         } else {
-            throw new Exception(sprintf("%s: BulkOperation status poll failed for %s: %s",
-                $this->getClassName(), $this->bulkOperationId, $pollResponse->reason()));
+            throw new Exception(sprintf(
+                "%s: BulkOperation status poll failed for %s: %s",
+                $this->getClassName(),
+                $this->bulkOperationId,
+                $pollResponse->reason()
+            ));
         }
     }
 
@@ -110,7 +119,7 @@ trait PollsShopifyBulkOperation
      */
     protected function downloadFile(string $saveAs, string $url): bool
     {
-        if (app()->environment("local", "development")){
+        if (app()->environment("local", "development")) {
             $storageResult = Storage::put($saveAs, file_get_contents($url));
         } else {
             $storageResult = Storage::disk('musora_web_platform_s3')->put($saveAs, file_get_contents($url));
@@ -125,7 +134,8 @@ trait PollsShopifyBulkOperation
      */
     abstract protected function getClassName(): string;
 }
-class ShopifyPollResponse {
+class ShopifyPollResponse
+{
     public function __construct(public string $status, public Carbon $createdAt, public ?Carbon $completedAt, public ?string $url)
     {
     }

@@ -49,20 +49,16 @@ class NotificationDecorator
                 $notification->getContentUrl()
             );
 
-            if ((str_starts_with($url, '/drumeo/jump-to-comment')) || (str_starts_with($url, '/drumeo/forums')))
-            {
+            if ((str_starts_with($url, '/drumeo/jump-to-comment')) || (str_starts_with($url, '/drumeo/forums'))) {
                 $url = $domain.$url;
             }
-            if ((str_starts_with($url, '/pianote/jump-to-comment'))  || (str_starts_with($url, '/pianote/forums')))
-            {
+            if ((str_starts_with($url, '/pianote/jump-to-comment'))  || (str_starts_with($url, '/pianote/forums'))) {
                 $url = $domain.$url;
             }
-            if ((str_starts_with($url, '/singeo/jump-to-comment'))  || (str_starts_with($url, '/singeo/forums')))
-            {
+            if ((str_starts_with($url, '/singeo/jump-to-comment'))  || (str_starts_with($url, '/singeo/forums'))) {
                 $url = $domain.$url;
             }
-            if ((str_starts_with($url, '/guitareo/jump-to-comment'))  || (str_starts_with($url, '/guitareo/forums')))
-            {
+            if ((str_starts_with($url, '/guitareo/jump-to-comment'))  || (str_starts_with($url, '/guitareo/forums'))) {
                 $url = $domain.$url;
             }
 

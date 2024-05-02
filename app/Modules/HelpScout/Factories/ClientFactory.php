@@ -7,8 +7,7 @@ use HelpScout\Api\ApiClientFactory;
 
 class ClientFactory
 {
-    public static function build()
-    : ApiClient
+    public static function build(): ApiClient
     {
         $credentials = config('helpscout.helpscout_credentials');
 

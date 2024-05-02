@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class ImportSongsDuration extends Command
 {
-
     protected $name = 'ImportSongsDuration';
     protected $signature = 'ImportSongsDuration {brand=drumeo} {calculateduration=0} {startIndex=0}';
     protected $description = 'Import songs duration from csv file';
@@ -89,7 +88,7 @@ class ImportSongsDuration extends Command
                         ->groupBy('railcontent_user_playlist_content.user_playlist_id')
                         ->orderBy('railcontent_user_playlist_content.user_playlist_id', 'asc')
                         ->get();
-                $videoDurations = (array_combine($durations->pluck('playlist_id')->toArray(), $durations->pluck( 'duration')->toArray()));
+                $videoDurations = (array_combine($durations->pluck('playlist_id')->toArray(), $durations->pluck('duration')->toArray()));
 
                 $songDuration =
                     DB::table('railcontent_user_playlist_content')
@@ -113,7 +112,7 @@ class ImportSongsDuration extends Command
                         ->groupBy('railcontent_user_playlist_content.user_playlist_id')
                         ->get();
 
-                $songsDurations = (array_combine($songDuration->pluck('playlist_id')->toArray(), $songDuration->pluck( 'duration')->toArray()));
+                $songsDurations = (array_combine($songDuration->pluck('playlist_id')->toArray(), $songDuration->pluck('duration')->toArray()));
 
                 foreach ($playlistIds as $playlistId) {
                     $total++;
@@ -133,8 +132,8 @@ class ImportSongsDuration extends Command
         $this->info('Done.');
     }
 
-    public function getCSV(int $startIndex, int $endIndex, $brand)
-    : array {
+    public function getCSV(int $startIndex, int $endIndex, $brand): array
+    {
         $fileName = $brand.'_songs_duration.csv';
         $filePath = app_path().'/Modules/Content/Console/Commands/Data/'.$fileName;
         $file = file($filePath);
@@ -149,8 +148,8 @@ class ImportSongsDuration extends Command
         return [$csv, $headersRow];
     }
 
-    private function getData($row, $headersRow)
-    : array {
+    private function getData($row, $headersRow): array
+    {
         $data = [];
         for ($i = 0; $i < count($row); $i++) {
             $data[$headersRow[$i]] = $row[$i];
@@ -159,8 +158,8 @@ class ImportSongsDuration extends Command
         return $data;
     }
 
-    private function getValue(array $data, mixed $headersRow, string $name)
-    : ?string {
+    private function getValue(array $data, mixed $headersRow, string $name): ?string
+    {
         if (!in_array($name, $headersRow)) {
             throw new Exception("Header '$name' does not exist in array");
         }

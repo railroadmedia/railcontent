@@ -19,10 +19,12 @@ class FeatureResolver implements ResolverInterface
     {
         $features = $resource->features()->get();
 
-        return $features->map(function($feature) use ($layouts) {
+        return $features->map(function ($feature) use ($layouts) {
             $layout = $layouts->find('feature-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
             return $layout->duplicateAndHydrate($feature->id, [
                 'desc' => $feature->desc,
@@ -43,29 +45,28 @@ class FeatureResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use ($groups){
-           $features = $groups->map(function($group, $index){
-              return [
-                  'desc' => $group->getAttributes()['desc'],
-                  'order_number' => $index,
-                  'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
-              ];
-           });
+        $class::saved(function ($model) use ($groups) {
+            $features = $groups->map(function ($group, $index) {
+                return [
+                    'desc' => $group->getAttributes()['desc'],
+                    'order_number' => $index,
+                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
+                ];
+            });
 
             //update and insert items
-            foreach($features as $feature){
-                if(!is_null($feature['id'])){
+            foreach($features as $feature) {
+                if(!is_null($feature['id'])) {
                     $dbFeature = Feature::find($feature['id']);
 
-                    if(empty($feature['desc'])){
+                    if(empty($feature['desc'])) {
                         $dbFeature->delete();
-                    }
-                    else {
-                        if($dbFeature->desc !== $feature['desc']){
+                    } else {
+                        if($dbFeature->desc !== $feature['desc']) {
                             $dbFeature->desc = $feature['desc'];
                         }
 
-                        if($dbFeature->order_number !== $feature['order_number']){
+                        if($dbFeature->order_number !== $feature['order_number']) {
                             $dbFeature->order_number = $feature['order_number'];
                         }
 
@@ -73,8 +74,7 @@ class FeatureResolver implements ResolverInterface
                     }
 
                     $updatedIds[] = $feature['id'];
-                }
-                elseif(!empty($feature['desc'])){
+                } elseif(!empty($feature['desc'])) {
                     $addFeature = new Feature();
                     $addFeature->product_id = $model['id'];
                     $addFeature->desc = $feature['desc'];
@@ -85,10 +85,10 @@ class FeatureResolver implements ResolverInterface
                 }
             }
 
-           if(isset($updatedIds)){
-               $deleteIds = Feature::where('product_id', '=', $model['id'])
-                   ->whereNotIn('id', $updatedIds)->delete();
-           }
+            if(isset($updatedIds)) {
+                $deleteIds = Feature::where('product_id', '=', $model['id'])
+                    ->whereNotIn('id', $updatedIds)->delete();
+            }
         });
     }
 }

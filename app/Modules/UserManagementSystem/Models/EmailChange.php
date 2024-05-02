@@ -33,9 +33,8 @@ use Illuminate\Support\Carbon;
  */
 class EmailChange extends Model
 {
-    protected $table = 'usora_email_changes';
-
     use HasFactory;
+    protected $table = 'usora_email_changes';
 
     public function user()
     {

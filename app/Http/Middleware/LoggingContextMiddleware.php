@@ -19,7 +19,8 @@ class LoggingContextMiddleware
         $user = user();
         $url = $request->url();
         Log::shareContext(
-            array_filter([
+            array_filter(
+                [
                     'tid' => self::getTraceId(),
                     'url' => $url,
                     'uid' => $user?->id,

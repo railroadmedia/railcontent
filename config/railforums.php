@@ -18,7 +18,7 @@ return array(
     ],
 
     // database
-    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY', 'musora_laravel_mysql_writer_only'),
 
     // url
     // NOTE: this gets updated on the fly depending on the brand in the SetLastUsedBrandMiddleware
@@ -95,7 +95,7 @@ return array(
     ],
     'excludedOldForumsIds' => [
         'drumeo' => [3, 14, 13, 8],
-        'pianote' =>[],
+        'pianote' => [],
         'singeo' => [],
         'guitareo' => []
     ],
@@ -105,7 +105,7 @@ return array(
         'singeo' => 42098,
         'pianote' => 112873
     ],
-    'decorators'=> [
+    'decorators' => [
         'posts' => [
             \App\Decorators\Forums\UserSignatureDecorator::class,
             \App\Decorators\Forums\PostUrlsDecorator::class

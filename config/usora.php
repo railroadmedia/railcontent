@@ -151,6 +151,6 @@ return [
     ],
 
     'password_creation_rules' => 'confirmed|min:8|max:128', // also defined in ecommerce
-    'shopify_store' => env('SHOPIFY_STORE','musora-sandbox-staging'),
-    'revenuecat_project_id' => env('REVENUECAT_PROJECT_ID','34db7a33'),
+    'shopify_store' => env('SHOPIFY_STORE', 'musora-sandbox-staging'),
+    'revenuecat_project_id' => env('REVENUECAT_PROJECT_ID', '34db7a33'),
 ];

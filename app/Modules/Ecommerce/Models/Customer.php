@@ -30,7 +30,9 @@ class Customer extends Model
 
     public function shippingAddresses(): HasMany
     {
-        return $this->hasMany(Address::class, "customer_id"
+        return $this->hasMany(
+            Address::class,
+            "customer_id"
         )->where("type", Address::SHIPPING_TYPE);
     }
 

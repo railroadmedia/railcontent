@@ -19,8 +19,7 @@ class MembershipFieldsSync extends Command
     public function handle(
         DatabaseManager $databaseManager,
         UserMembershipFieldsService $userMembershipFieldsService
-    )
-    {
+    ) {
         // ----------------------------------------------------------------
         // this matters
         // ----------------------------------------------------------------
@@ -70,17 +69,17 @@ class MembershipFieldsSync extends Command
 
         $chunkCounter = 0;
 
-        foreach($userIds->chunk($chunkSize) as $chunk){
+        foreach($userIds->chunk($chunkSize) as $chunk) {
             $chunkCounter++;
-            if($skip){
-                if($chunkCounter < $skip){
+            if($skip) {
+                if($chunkCounter < $skip) {
                     continue;
                 }
             }
-            $this->info('starting chunk ' . $chunkCounter . ' of ' . (ceil($userIds->count()/$chunkSize)));
+            $this->info('starting chunk ' . $chunkCounter . ' of ' . (ceil($userIds->count() / $chunkSize)));
             foreach($chunk as $userId) {
                 $result = $userMembershipFieldsService->sync($userId);
-                if(!$result){
+                if(!$result) {
                     $this->info('$userMembershipFieldsService->sync for user id ' . $userId . ' returned a non true value');
                 }
             }

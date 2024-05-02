@@ -16,8 +16,8 @@ class WorkoutsImport2023 extends Command
     protected $signature = 'workouts:import {brand=guitareo} {startIndex=0} {endIndex=-1}';
     protected $description = 'Import workouts data from CSV file';
 
-    const CHAPTER_THUMBS = [
-        'drumeo' =>[
+    public const CHAPTER_THUMBS = [
+        'drumeo' => [
             'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701464222.jpg',
             'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701464237.jpg',
             'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701464247.jpg',
@@ -51,8 +51,8 @@ class WorkoutsImport2023 extends Command
         ],
     ];
 
-    const PERMISSIONS = [
-        'guitareo' =>[
+    public const PERMISSIONS = [
+        'guitareo' => [
             'basic' => [
                 91,
                 92,
@@ -60,7 +60,7 @@ class WorkoutsImport2023 extends Command
             ],
             'plus' => [92],
         ],
-        'drumeo' =>[
+        'drumeo' => [
             'basic' => [
                 91,
                 92,
@@ -68,7 +68,7 @@ class WorkoutsImport2023 extends Command
             ],
             'plus' => [92],
         ],
-        'pianote' =>[
+        'pianote' => [
             'basic' => [
                 91,
                 92,
@@ -76,7 +76,7 @@ class WorkoutsImport2023 extends Command
             ],
             'plus' => [92],
         ],
-        'singeo' =>[
+        'singeo' => [
             'basic' => [
                 91,
                 92,
@@ -145,10 +145,10 @@ class WorkoutsImport2023 extends Command
                 $isCopyright = $this->getValue($data, $headersRow, 'Copyright');
                 if($isCopyright == 'Yes') {
                     $content->setPermissions(self::PERMISSIONS[$content->brand]['plus']);
-                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'youtube');
-                }else{
+                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'), 'youtube');
+                } else {
                     $content->setPermissions(self::PERMISSIONS[$content->brand]['basic']);
-                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'),'vimeo');
+                    $content->setVideo($this->getValue($data, $headersRow, 'Video ID - Workouts'), $this->getValue($data, $headersRow, 'Duration'), 'vimeo');
                 }
 
                 $thumbnail = $this->getValue($data, $headersRow, 'Thumbnail Name');

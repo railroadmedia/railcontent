@@ -2157,16 +2157,13 @@ class CmsClothingSeeder extends Seeder
         foreach($products as $product) {
             $brand = $product['brand'];
 
-            if($brand === 1){
+            if($brand === 1) {
                 $orderNum = $drumeo;
-            }
-            elseif($brand === 2){
+            } elseif($brand === 2) {
                 $orderNum = $pianote;
-            }
-            elseif($brand === 3){
+            } elseif($brand === 3) {
                 $orderNum = $guitareo;
-            }
-            elseif($brand === 4){
+            } elseif($brand === 4) {
                 $orderNum = $singeo;
             }
 
@@ -2199,20 +2196,17 @@ class CmsClothingSeeder extends Seeder
                 'updated_at' => now(),
             ]);
 
-            if($brand === 1){
+            if($brand === 1) {
                 $drumeo += 5;
-            }
-            elseif($brand === 2){
+            } elseif($brand === 2) {
                 $pianote += 5;
-            }
-            elseif($brand === 3){
+            } elseif($brand === 3) {
                 $guitareo += 5;
-            }
-            elseif($brand === 4){
+            } elseif($brand === 4) {
                 $singeo += 5;
             }
 
-            foreach($product['features'] as $key => $feature){
+            foreach($product['features'] as $key => $feature) {
                 Feature::create([
                     'product_id' => $newProduct->id,
                     'desc' => $feature,
@@ -2220,7 +2214,7 @@ class CmsClothingSeeder extends Seeder
                 ]);
             }
 
-            foreach($product['specs'] as $key => $spec){
+            foreach($product['specs'] as $key => $spec) {
                 Spec::create([
                     'product_id' => $newProduct->id,
                     'title' => $spec['title'],
@@ -2229,7 +2223,7 @@ class CmsClothingSeeder extends Seeder
                 ]);
             }
 
-            foreach($product['images'] as $key => $image){
+            foreach($product['images'] as $key => $image) {
                 Image::create([
                     'product_id' => $newProduct->id,
                     'path' => $image,
@@ -2237,7 +2231,7 @@ class CmsClothingSeeder extends Seeder
                 ]);
             }
 
-            foreach($product['sizes'] as $size){
+            foreach($product['sizes'] as $size) {
                 ProductSize::create([
                     'product_id' => $newProduct->id,
                     'size_id' => $size,

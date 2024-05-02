@@ -39,9 +39,9 @@ class NavigationViewComposer
             return self::$viewDataCache;
         }
 
-        $unread = (user())?$this->notificationService->getUnreadCount(user()->id, brand()):0;
-        $pinnedPlaylists = (user())?$this->userPlaylistsService->getPinnedPlaylists():[];
-        $latestPlaylists = (user())?$this->userPlaylistsService->getUserPlaylist(
+        $unread = (user()) ? $this->notificationService->getUnreadCount(user()->id, brand()) : 0;
+        $pinnedPlaylists = (user()) ? $this->userPlaylistsService->getPinnedPlaylists() : [];
+        $latestPlaylists = (user()) ? $this->userPlaylistsService->getUserPlaylist(
             user()->id,
             'user-playlist',
             brand(),
@@ -49,7 +49,7 @@ class NavigationViewComposer
             1,
             null,
             'most_recent'
-        ):[];
+        ) : [];
 
         self::$viewDataCache = [
             'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),

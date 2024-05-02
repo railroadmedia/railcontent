@@ -15,7 +15,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         ]);
     });
     Route::get('/coop3rdrumm3r', [LeadGenController::class, 'coop3rdrumm3r']);
-    Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
+    Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy']);
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
     Route::get('/fwtgf', [LeadGenController::class, 'faster']);

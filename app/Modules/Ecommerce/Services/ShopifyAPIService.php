@@ -203,7 +203,7 @@ class ShopifyAPIService
 
         foreach ($productVariantIdsAndSellingPlanIdsToAddToCart as $productVariantIdToAddToCart => $quantityAndSellingPlanId) {
             $createCartInputLineItem = [
-                'quantity' => (integer)$quantityAndSellingPlanId['quantity'],
+                'quantity' => (int)$quantityAndSellingPlanId['quantity'],
                 'merchandiseId' => $productVariantIdToAddToCart
             ];
 
@@ -312,7 +312,7 @@ class ShopifyAPIService
 
         foreach ($productVariantIdsAndSellingPlanIdsToAddToCart as $productVariantIdToAddToCart => $quantityAndSellingPlanId) {
             $createCartInputLineItem = [
-                'quantity' => (integer)$quantityAndSellingPlanId['quantity'],
+                'quantity' => (int)$quantityAndSellingPlanId['quantity'],
                 'merchandiseId' => $productVariantIdToAddToCart
             ];
 
@@ -392,7 +392,7 @@ class ShopifyAPIService
     ): array {
         $updateCartInputLineArray = [
             [
-                'quantity' => (integer)$newQuantity,
+                'quantity' => (int)$newQuantity,
                 'id' => $merchandiseLineItemId
             ]
         ];
@@ -779,12 +779,12 @@ class ShopifyAPIService
 
         // Use IV as first block of ciphertext
         $cipherText = $iv . openssl_encrypt(
-                json_encode($customerDataHash),
-                "AES-128-CBC",
-                $encryptionKey,
-                OPENSSL_RAW_DATA,
-                $iv
-            );
+            json_encode($customerDataHash),
+            "AES-128-CBC",
+            $encryptionKey,
+            OPENSSL_RAW_DATA,
+            $iv
+        );
 
         // Create a signature (message authentication code) of the ciphertext
         // and encode everything using URL-safe Base64 (RFC 4648)

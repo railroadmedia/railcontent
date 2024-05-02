@@ -106,10 +106,10 @@ class CustomerIoSyncService
 
         foreach ($contentFollowRows as $contentFollowRow) {
             $brandCoachFollows[$contentFollowRow['brand']][] = $contentFollowRow['content_id'] . '_' . str_replace(
-                    '-',
-                    '_',
-                    $contentFollowRow['slug']
-                );
+                '-',
+                '_',
+                $contentFollowRow['slug']
+            );
         }
 
         $contentFollowAttributes = [];

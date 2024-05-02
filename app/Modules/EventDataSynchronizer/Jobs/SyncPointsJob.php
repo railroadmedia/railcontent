@@ -24,22 +24,22 @@ class SyncPointsJob extends BatchQueryJob
         $this->userPointsService = App::make(UserPointsService::class);
     }
 
-    function getSkip(): int
+    public function getSkip(): int
     {
         return $this->skip;
     }
 
-    function getTake(): int
+    public function getTake(): int
     {
         return $this->take;
     }
 
-    function getQuery(): Builder
+    public function getQuery(): Builder
     {
         return User::query();
     }
 
-    function handleItem($item): void
+    public function handleItem($item): void
     {
         $userId = $item->id;
         $this->userProvider->saveExperiencePoints(

@@ -12,7 +12,6 @@ use Throwable;
 
 class CohortPackController
 {
-
     private UserAccessPermissionsService $userAccessPermissionsService;
     private ProductService $productService;
 

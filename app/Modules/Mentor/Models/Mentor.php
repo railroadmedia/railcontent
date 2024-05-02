@@ -11,7 +11,7 @@ use Modules\UserManagementSystem\Models\User;
 /**
  * Class Mentor
  *
- * @internal 
+ * @internal
  * @package App\Modules\Mentor\Models
  * @property integer $id
  * @property integer $user_id

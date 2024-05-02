@@ -8,7 +8,7 @@ use Shopify\Auth\SessionStorage;
 
 class ShopifyStoreFrontAPISessionService implements SessionStorage
 {
-    const SESSION_KEY = 'shopify_storefront_session_';
+    public const SESSION_KEY = 'shopify_storefront_session_';
 
     public function storeSession(Session $session): bool
     {

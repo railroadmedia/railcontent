@@ -2,13 +2,11 @@
 
 namespace Modules\UserManagementSystem\Models;
 
-
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
 
 /**
  * App\Modules\UserManagementSystem\Models\OnboardingGenre
@@ -33,10 +31,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OnboardingGenre extends Model
 {
+    use HasFactory;
 
     protected $table = 'onboarding_genres';
-
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.

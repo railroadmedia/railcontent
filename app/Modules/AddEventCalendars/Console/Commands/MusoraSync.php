@@ -12,7 +12,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class MusoraSync extends Command
 {
-
     protected $signature = 'addevent:syncMusora {--live}';
     protected $description = 'AddEventMusoraCalendarSync';
     private AddEventService $addEventService;
@@ -42,8 +41,7 @@ class MusoraSync extends Command
         $this->calendarSyncService->syncContentListToCalendar($allContent, $calendar);
     }
 
-    public function getAllContent()
-    : array
+    public function getAllContent(): array
     {
         $this->info('Loading all content');
 
@@ -61,14 +59,15 @@ class MusoraSync extends Command
         return $allContent;
     }
 
-    private function filterContentTypes($contentTypes): array {
+    private function filterContentTypes($contentTypes): array
+    {
         return $this->syncLiveEvents ? array_filter($contentTypes, function ($k) {
             return in_array($k, ContentTypes::liveContentTypes());
         }, ARRAY_FILTER_USE_KEY) : $contentTypes;
     }
 
-    private function getContentByContentType($brand, $type)
-    : array {
+    private function getContentByContentType($brand, $type): array
+    {
         $page = 1;
         $content = [];
 

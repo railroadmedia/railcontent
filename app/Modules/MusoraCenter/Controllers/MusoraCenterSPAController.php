@@ -19,8 +19,7 @@ class MusoraCenterSPAController extends Controller
      */
     public function __construct(
         PermissionService $permissionService,
-    )
-    {
+    ) {
         $this->permissionService = $permissionService;
     }
 
