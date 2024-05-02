@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -18,14 +17,12 @@ use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private CalendarService $calendarService;
     private ContentService $contentService;
-    private CustomerIoService $customerIoService;
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserService $userService;
@@ -35,7 +32,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function __construct(
         CalendarService $calendarService,
         ContentService $contentService,
-        CustomerIoService $customerIoService,
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserService $userService,
@@ -44,7 +40,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     ) {
         $this->calendarService = $calendarService;
         $this->contentService = $contentService;
-        $this->customerIoService = $customerIoService;
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userService = $userService;
