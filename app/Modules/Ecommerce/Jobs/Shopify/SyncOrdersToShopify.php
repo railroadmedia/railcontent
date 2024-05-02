@@ -14,6 +14,7 @@ use App\Modules\Ecommerce\Models\OrderItem;
 use App\Modules\Ecommerce\Models\OrderItemFulfillment;
 use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\Refund;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Bus\Batchable;
@@ -62,6 +63,7 @@ class SyncOrdersToShopify implements ShouldQueue
      * @var int
      */
     public $timeout = 840;
+    protected ShopifySyncService $shopifySyncService;
     protected TaxService $taxService;
     protected Collection $shopifyIds;
     protected array $results = [];
@@ -113,15 +115,18 @@ class SyncOrdersToShopify implements ShouldQueue
      * Execute the job
      *
      * @param  Shopify  $shopify
+     * @param  ShopifySyncService  $shopifySyncService
      * @param  TaxService  $taxService
      * @return void
      */
     public function handle(
         Shopify $shopify,
+        ShopifySyncService $shopifySyncService,
         TaxService $taxService,
     ): void {
         // set DI instances that we'll need
         $this->shopify = $shopify;
+        $this->shopifySyncService = $shopifySyncService;
         $this->taxService = $taxService;
 
         $this->logDebug(
@@ -329,16 +334,24 @@ class SyncOrdersToShopify implements ShouldQueue
 
             // STEP 6: add the Fulfillments and tracking
             $fulfillmentOrderData = $this->getFulfillmentOrder($order);
-            if (is_null($fulfillmentOrderData)) {
-                return false;
-            }
-
             if (!empty($fulfillmentOrderData)) {
                 $this->createShopifyFulfillmentForOrder(
                     $order,
                     $orderShopifyId,
                     $fulfillmentOrderData
                 );
+            } else {
+                // TODO: we need to create a basic fulfillment in this case, so that we don't have any old orders
+                // causing issues with ShipStation where the automation creates a fulfillment request. Refer to
+                // FulfillOrdersImportedIntoShopify's completeShopifyFulfillmentOrderWithNoData for an example,
+                // and be sure to mark them as delivered
+                $this->logError(
+                    sprintf(
+                        "%s: Implement function to create basic fulfillments",
+                        $this->getClassName()
+                    )
+                );
+                return false;
             }
         } else {
             // simulating
@@ -965,50 +978,24 @@ class SyncOrdersToShopify implements ShouldQueue
                         ];
                     }
 
-                    $this->markShopifyFulfillmentAsDelivered($shopifyOrderId, $fulfillmentId);
+                    try {
+                        $this->shopifySyncService->markFulfillmentAsDelivered($shopifyOrderId, $fulfillmentId);
+                    } catch (ValidationException|Exception $e) {
+                        $this->logError(
+                            sprintf(
+                                "%s: %s",
+                                $this->getClassName(),
+                                $e->getMessage()
+                            )
+                        );
+                    }
+                    $this->handleRateLimit();
                 }
             }
         );
     }
 
-    /**
-     * Post to Shopify to mark the given Fulfillment for the given Shopify Order, as delivered
-     * @param  int  $shopifyOrderId
-     * @param  int  $fulfillmentId
-     * @return void
-     */
-    private function markShopifyFulfillmentAsDelivered(int $shopifyOrderId, int $fulfillmentId): void
-    {
-        // mark the fulfillment as delivered
-        // DEV NOTE: there seems to be a bug with createOrderFulfillmentEvent, so we'll just work around it with a direct post
-        try {
-            $uriPrefix = ['orders', $shopifyOrderId, 'fulfillments', $fulfillmentId];
-            $url = implode('/', [...$uriPrefix, "events.json"]);
-            $data = ['event' => ['status' => 'delivered']];
-            $fulfillmentEventResponse = $this->shopify->post($url, $data);
-            $this->handleRateLimit();
 
-            if ($fulfillmentEventResponse->failed()) {
-                $this->logError(
-                    sprintf(
-                        "%s: Failed to mark fulfillment %s as delivered: %s.",
-                        $this->getClassName(),
-                        $fulfillmentId,
-                        $fulfillmentEventResponse->reason()
-                    )
-                );
-            }
-        } catch (ValidationException $validationException) {
-            $this->logError(
-                sprintf(
-                    "%s: Failed to mark fulfillment %s as delivered: %s.",
-                    $this->getClassName(),
-                    $fulfillmentId,
-                    $validationException->getMessage()
-                )
-            );
-        }
-    }
 
     /**
      * Print out the results in an Info log
