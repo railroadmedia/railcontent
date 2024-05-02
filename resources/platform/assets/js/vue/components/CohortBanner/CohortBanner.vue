@@ -2,7 +2,11 @@
 import { ref, onBeforeMount, onMounted } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
 import Button from "../Button/Button.vue";
+import userJourney from '../../../services/userJourney';
+import { useUserStore } from '../../../stores/user';
 import {getCookie, setCookie} from "../../vuesora/assets/js/functions/cookies";
+
+const userStore = useUserStore();
 
 const props = defineProps({
     preloadedBanner: {
@@ -34,7 +38,6 @@ const handleClick = (event, url) => {
         event.preventDefault();
 
         userJourney.trackHomeContentClick({
-            token: userStore.token,
             payload: {
                 contentId: null,
                 brand: userStore.brand,
