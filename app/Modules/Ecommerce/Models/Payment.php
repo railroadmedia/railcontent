@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * Class Payment
@@ -24,6 +25,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ * @property-read Collection<GoogleReceipt> $googleReceipts
+ * @property-read Collection<AppleReceipt> $appleReceipts
  *
  */
 class Payment extends Model
@@ -73,5 +76,23 @@ class Payment extends Model
     public function paymentMethod(): BelongsTo
     {
         return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function googleReceipts(): HasMany
+    {
+        return $this->hasMany(GoogleReceipt::class, 'order_id', 'external_id')
+            ->when($this->external_provider !== 'google', function ($q) {
+                // return an empty HasMany by using an impossible condition
+                $q->whereRaw('1 = 0');
+            });
+    }
+
+    public function appleReceipts(): HasMany
+    {
+        return $this->hasMany(AppleReceipt::class, 'transaction_id', 'external_id')
+            ->when($this->external_provider !== 'apple', function ($q) {
+                // return an empty HasMany by using an impossible condition
+                $q->whereRaw('1 = 0');
+            });
     }
 }
