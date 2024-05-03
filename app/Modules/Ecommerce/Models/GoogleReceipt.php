@@ -44,6 +44,10 @@ class GoogleReceipt extends Model
     protected $table = 'ecommerce_google_receipts';
     protected $primaryKey = 'id';
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class, 'order_id', 'external_id')

@@ -48,6 +48,10 @@ class AppleReceipt extends Model
     protected $table = 'ecommerce_apple_receipts';
     protected $primaryKey = 'id';
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class, 'transaction_id', 'external_id')

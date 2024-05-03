@@ -33,10 +33,10 @@ class PaymentFactory extends Factory
         ];
     }
 
-    public function withAmount(float $amount): Factory
+    public function withAmount(float $amount, string $currency = 'USD'): Factory
     {
         $amount = number_format($amount, 2, '.', '');
-        return $this->state(['total_due' => $amount, 'total_paid' => $amount]);
+        return $this->state(['total_due' => $amount, 'total_paid' => $amount, 'currency' => $currency]);
     }
 
     /**

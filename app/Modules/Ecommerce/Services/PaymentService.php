@@ -2,10 +2,16 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use App\Modules\Ecommerce\Models\AppleReceipt;
+use App\Modules\Ecommerce\Models\GoogleReceipt;
 use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\Payment;
 use Carbon\Carbon;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
+use Exception;
+use InvalidArgumentException;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Http;
 
 class PaymentService
 {
@@ -53,9 +59,19 @@ class PaymentService
         return $payment;
     }
 
+    /**
+     * Get the total amount paid, in USD, for the given Order or Subscription Payment,
+     * using the payments' source of truth
+     *
+     * @param  Order|SubscriptionPayment  $model
+     * @return float
+     * @throws Exception
+     */
     public function getTotalPaid(Order|SubscriptionPayment $model): float
     {
-        $payments = $model instanceof Order ? $model->payments->filter(fn (Payment $payment) => $payment->status == Payment::STATUS_PAID) : collect([$model->payment]);
+        $payments = $model instanceof Order ? $model->payments->filter(
+            fn (Payment $payment) => $payment->status == Payment::STATUS_PAID
+        ) : collect([$model->payment]);
 
         $total = 0.0;
         $payments->each(function (Payment $payment) use (&$total) {
@@ -71,12 +87,19 @@ class PaymentService
         return $total;
     }
 
+    /**
+     * Get the total USD amount paid for the given payment, that was made with Stripe
+     *
+     * @param  Payment  $payment
+     * @return float
+     * @throws Exception
+     */
     private function getPaymentAmountForStripe(Payment $payment): float
     {
         // safety check for external provider
         // @codeCoverageIgnoreStart
         if ($payment->external_provider !== Payment::EXTERNAL_PROVIDER_STRIPE) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     'Payment has external_provider of %s. Please use the appropriate function.',
                     $payment->external_provider
@@ -85,16 +108,268 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        // TODO connect to stripe and get the value
-        return 0.0;
+        // we recorded the correct amount for Stripe payments, so we can just use that
+        return $this->getAsUsd(floatval($payment->total_paid), $payment->currency, $payment->created_at);
     }
 
+    /**
+     * @param  float  $amount
+     * @param  string  $currency
+     * @param  Carbon  $date
+     * @return float
+     * @throws Exception
+     */
+    private function getAsUsd(float $amount, string $currency, Carbon $date): float
+    {
+        $currency = strtoupper($currency);
+        // if the currency is already USD, we're done
+        if ($currency === 'USD') {
+            return $amount;
+        }
+
+        return $this->getConvertedCurrencyAmount($amount, $currency, $date, 'USD');
+    }
+
+    /**
+     * Get the amount of money the given amount was worth in the desired currency, on the given date
+     *
+     * @throws RequestException
+     * @throws InvalidArgumentException
+     * @throws Exception
+     */
+    public function getConvertedCurrencyAmount(
+        float $amount,
+        string $originalCurrencyCode,
+        Carbon $date,
+        string $desiredCurrencyCode
+    ): float {
+        $originalCurrencyCode = strtoupper($originalCurrencyCode);
+        $desiredCurrencyCode = strtoupper($desiredCurrencyCode);
+
+        if (!$this->isValidCurrencyCode($originalCurrencyCode)) {
+            throw new InvalidArgumentException(
+                sprintf('%s is not a valid ISO 4217 currency code', $originalCurrencyCode)
+            );
+        }
+
+        if (!$this->isValidCurrencyCode($desiredCurrencyCode)) {
+            throw new InvalidArgumentException(
+                sprintf('%s is not a valid ISO 4217 currency code', $desiredCurrencyCode)
+            );
+        }
+
+        $baseUrl = 'https://v6.exchangerate-api.com/v6/';
+        $apiKey = config('ecommerce.exchange_rate_api_token');
+        $currency = $originalCurrencyCode;
+        $year = $date->year;
+        $month = $date->month;
+        $day = $date->day;
+        $url = sprintf('%s/%s/history/%s/%s/%s/%s/%s', $baseUrl, $apiKey, $currency, $year, $month, $day, $amount);
+
+        $response = Http::get($url);
+        $response->throw();
+
+        $results = $response->object();
+        if ($results->result !== "success") {
+            throw new Exception(json_encode($results, JSON_PRETTY_PRINT));
+        }
+        $conversions = $results->conversion_amounts;
+        if (!property_exists($conversions, $desiredCurrencyCode)) {
+            throw new Exception(sprintf('%s is not available for %s', $desiredCurrencyCode, $date->toDateString()));
+        }
+
+        return round($conversions->$desiredCurrencyCode, 2);
+    }
+
+    /**
+     * Check if the current code is a valid ISO 4217 currency code
+     *
+     * @param  string  $code
+     * @return bool
+     */
+    private function isValidCurrencyCode(string $code): bool
+    {
+        // valid currency codes supported by exchangerate-api.com
+        $codes = [
+            'AFN',
+            'ALL',
+            'AED',
+            'AMD',
+            'ANG',
+            'AOA',
+            'ARS',
+            'AUD',
+            'AWG',
+            'AZN',
+            'BAM',
+            'BBD',
+            'BDT',
+            'BGN',
+            'BHD',
+            'BIF',
+            'BMD',
+            'BND',
+            'BOB',
+            'BRL',
+            'BSD',
+            'BTN',
+            'BWP',
+            'BYN',
+            'BZD',
+            'CAD',
+            'CDF',
+            'CHF',
+            'CLP',
+            'CNY',
+            'COP',
+            'CRC',
+            'CUP',
+            'CVE',
+            'CZK',
+            'DJF',
+            'DKK',
+            'DOP',
+            'DZD',
+            'EGP',
+            'ERN',
+            'ETB',
+            'EUR',
+            'FJD',
+            'FKP',
+            'FOK',
+            'GBP',
+            'GEL',
+            'GGP',
+            'GHS',
+            'GIP',
+            'GMD',
+            'GNF',
+            'GTQ',
+            'GYD',
+            'HKD',
+            'HNL',
+            'HRK',
+            'HTG',
+            'HUF',
+            'IDR',
+            'ILS',
+            'IMP',
+            'INR',
+            'IQD',
+            'IRR',
+            'ISK',
+            'JEP',
+            'JMD',
+            'JOD',
+            'JPY',
+            'KES',
+            'KGS',
+            'KHR',
+            'KID',
+            'KMF',
+            'KRW',
+            'KWD',
+            'KYD',
+            'KZT',
+            'LAK',
+            'LBP',
+            'LKR',
+            'LRD',
+            'LSL',
+            'LYD',
+            'MAD',
+            'MDL',
+            'MGA',
+            'MKD',
+            'MMK',
+            'MNT',
+            'MOP',
+            'MRU',
+            'MUR',
+            'MVR',
+            'MWK',
+            'MXN',
+            'MYR',
+            'MZN',
+            'NAD',
+            'NGN',
+            'NIO',
+            'NOK',
+            'NPR',
+            'NZD',
+            'OMR',
+            'PAB',
+            'PEN',
+            'PGK',
+            'PHP',
+            'PKR',
+            'PLN',
+            'PYG',
+            'QAR',
+            'RON',
+            'RSD',
+            'RUB',
+            'RWF',
+            'SAR',
+            'SBD',
+            'SCR',
+            'SDG',
+            'SEK',
+            'SGD',
+            'SHP',
+            'SLE',
+            'SOS',
+            'SRD',
+            'SSP',
+            'STN',
+            'SYP',
+            'SZL',
+            'THB',
+            'TJS',
+            'TMT',
+            'TND',
+            'TOP',
+            'TRY',
+            'TTD',
+            'TVD',
+            'TWD',
+            'TZS',
+            'UAH',
+            'UGX',
+            'USD',
+            'UYU',
+            'UZS',
+            'VES',
+            'VND',
+            'VUV',
+            'WST',
+            'XAF',
+            'XCD',
+            'XDR',
+            'XOF',
+            'XPF',
+            'YER',
+            'ZAR',
+            'ZMW',
+            'ZWL'
+        ];
+
+        return in_array($code, $codes);
+    }
+
+    /**
+     * Get the total USD amount paid for the given payment, that was made with PayPal
+     *
+     * @param  Payment  $payment
+     * @return float
+     * @throws Exception
+     */
     private function getPaymentAmountForPayPal(Payment $payment): float
     {
         // safety check for external provider
         // @codeCoverageIgnoreStart
         if ($payment->external_provider !== Payment::EXTERNAL_PROVIDER_PAYPAL) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     'Payment has external_provider of %s. Please use the appropriate function.',
                     $payment->external_provider
@@ -103,16 +378,23 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        // TODO connect to PayPal and get the value
-        return 0.0;
+        // we recorded the correct amount for PayPal payments, so we can just use that
+        return $this->getAsUsd(floatval($payment->total_paid), $payment->currency, $payment->created_at);
     }
 
+    /**
+     * Get the total USD amount paid for the given payment, that was made with Apple
+     *
+     * @param  Payment  $payment
+     * @return float
+     * @throws Exception
+     */
     private function getPaymentAmountForApple(Payment $payment): float
     {
         // safety check for external provider
         // @codeCoverageIgnoreStart
         if ($payment->external_provider !== Payment::EXTERNAL_PROVIDER_APPLE) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     'Payment has external_provider of %s. Please use the appropriate function.',
                     $payment->external_provider
@@ -121,16 +403,32 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        // TODO connect to Apple and get the value
-        return 0.0;
+        // grab the Apple receipts for this payment
+        $receipts = $payment->appleReceipts()->whereNotNull('local_price')->get();
+        $total = 0.0;
+        $receipts->each(function (AppleReceipt $appleReceipt) use (&$total) {
+            $total += $this->getAsUsd(
+                $appleReceipt->local_price,
+                $appleReceipt->local_currency,
+                $appleReceipt->created_at
+            );
+        });
+        return $total;
     }
 
+    /**
+     * Get the total USD amount paid for the given payment, that was made with Google
+     *
+     * @param  Payment  $payment
+     * @return float
+     * @throws Exception
+     */
     private function getPaymentAmountForGoogle(Payment $payment): float
     {
         // safety check for external provider
         // @codeCoverageIgnoreStart
         if ($payment->external_provider !== Payment::EXTERNAL_PROVIDER_GOOGLE) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     'Payment has external_provider of %s. Please use the appropriate function.',
                     $payment->external_provider
@@ -139,8 +437,25 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        // TODO connect to Google and get the value
-        return 0.0;
+        // grab the Google receipts for this payment
+        $receipts = $payment->googleReceipts()->whereNotNull('local_price')->get();
+        // we have some duplicate entries, so make sure to get the unique entries
+        $receipts = $receipts->unique(function (GoogleReceipt $googleReceipt) {
+            $attributes = $googleReceipt->getAttributes();
+            unset($attributes['id']);
+            return $attributes;
+        });
+
+        // go through each receipt and get its value in USD
+        $total = 0.0;
+        $receipts->each(function (GoogleReceipt $googleReceipt) use (&$total) {
+            $total += $this->getAsUsd(
+                $googleReceipt->local_price,
+                $googleReceipt->local_currency,
+                $googleReceipt->created_at
+            );
+        });
+        return $total;
     }
 
     /**
@@ -148,6 +463,7 @@ class PaymentService
      *
      * @param  Payment  $payment
      * @return float the float value of the payment in USD
+     * @throws Exception
      */
     private function getPaymentAmountForOther(Payment $payment): float
     {
@@ -162,7 +478,7 @@ class PaymentService
                 Payment::EXTERNAL_PROVIDER_GOOGLE
             ]
         )) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     'Payment has external_provider of %s. Please use the appropriate function.',
                     $payment->external_provider
@@ -171,6 +487,7 @@ class PaymentService
         }
         // @codeCoverageIgnoreEnd
 
-        return floatval($payment->total_paid);
+        return $this->getAsUsd(floatval($payment->total_paid), $payment->currency, $payment->created_at);
     }
+
 }
