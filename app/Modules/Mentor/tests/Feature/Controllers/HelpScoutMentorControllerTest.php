@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\Event;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
-
 class HelpScoutMentorControllerTest extends TestCase
 {
-    const DEVELOPMENT_HELPSCOUT_USERID = 554771;
-    const DEVELOPMENT_HELPSCOUT_CUSTOMERID = 551120840;
+    public const DEVELOPMENT_HELPSCOUT_USERID = 554771;
+    public const DEVELOPMENT_HELPSCOUT_CUSTOMERID = 551120840;
 
     private MentorService $mentorService;
 

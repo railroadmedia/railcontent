@@ -76,7 +76,9 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['visible_on_mobile'],
                     function (Select $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->visible_on_mobile) $field->show();
+                        if ($formData->visible_on_mobile) {
+                            $field->show();
+                        }
                     }
                 ),
             Select::make(__('Selected version and higher only'), 'mobile_version_above')->options(function () {
@@ -91,11 +93,13 @@ class Carousel extends Resource
             })->hideFromIndex()
                 ->hide()
                 ->dependsOn(
-                ['visible_on_mobile'],
-                function (Select $field, NovaRequest $request, FormData $formData) {
-                    if ($formData->visible_on_mobile) $field->show();
-                }
-            ),
+                    ['visible_on_mobile'],
+                    function (Select $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->visible_on_mobile) {
+                            $field->show();
+                        }
+                    }
+                ),
             Boolean::make('Draft')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
@@ -112,27 +116,26 @@ class Carousel extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('logo')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -146,27 +149,26 @@ class Carousel extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('desktop_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -178,27 +180,26 @@ class Carousel extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('tablet_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -210,27 +211,26 @@ class Carousel extends Resource
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('mobile_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -245,7 +245,9 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show()->rules(['required']);
+                        if ($formData->is_featured) {
+                            $field->show()->rules(['required']);
+                        }
                     }
                 ),
             Select::make('Skill Level', 'skill_level')
@@ -266,7 +268,9 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Select $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show();
+                        if ($formData->is_featured) {
+                            $field->show();
+                        }
                     }
                 ),
             Text::make('Challenge ID', 'challenge_id')->hideFromIndex()
@@ -277,7 +281,9 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show();
+                        if ($formData->is_featured) {
+                            $field->show();
+                        }
                     }
                 ),
             Boolean::make('Button Light Mode', 'btn_light_mode')->hideFromIndex()->default(false),
@@ -291,7 +297,9 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show();
+                        if ($formData->is_featured) {
+                            $field->show();
+                        }
                     }
                 ),
             Text::make('Primary Button URL', 'primary_cta_url')->hideFromIndex(),
@@ -304,7 +312,9 @@ class Carousel extends Resource
                 ->dependsOn(
                     ['is_featured'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show()->rules(['required']);
+                        if ($formData->is_featured) {
+                            $field->show()->rules(['required']);
+                        }
                     }
                 ),
             Text::make('Primary Video Source', 'primary_video_src')->hideFromIndex()

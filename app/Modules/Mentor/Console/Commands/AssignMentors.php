@@ -2,7 +2,6 @@
 
 namespace App\Modules\Mentor\Console\Commands;
 
-
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Mentor\Services\EnsureMentorResult;
 use App\Modules\Mentor\Services\MentorService;

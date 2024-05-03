@@ -2,7 +2,6 @@
 
 namespace App\Modules\FeatureFlagging\Providers;
 
-
 use App\Modules\FeatureFlagging\Managers\FeatureFlagManager;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Query\Builder;

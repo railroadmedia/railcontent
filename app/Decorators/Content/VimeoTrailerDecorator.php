@@ -18,7 +18,7 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
      */
     private $cache;
 
-    const CACHE_KEY_PREFIX = 'pianote_vimeo_video_data_';
+    public const CACHE_KEY_PREFIX = 'pianote_vimeo_video_data_';
 
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException

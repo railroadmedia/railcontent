@@ -9,4 +9,3 @@ Route::domain('{singeoDomain}')
         Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
             ->where('leadgenSlug', '(.*)');
     });
-

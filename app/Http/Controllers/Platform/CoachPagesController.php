@@ -43,7 +43,7 @@ class CoachPagesController extends Controller
      */
     private $contentFollowService;
 
-    const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
+    public const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
 
     /**
      * CourseController constructor.
@@ -169,7 +169,9 @@ class CoachPagesController extends Controller
         );
 
         $latestSubscribedLessons = $this->contentFollowService->getLessonsForFollowedCoaches(
-            config('railcontent.brand'), [], [],
+            config('railcontent.brand'),
+            [],
+            [],
             1,
             4
         );
@@ -310,8 +312,9 @@ class CoachPagesController extends Controller
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachId = $currentEvent->fetch('fields.instructor.id');
-            $eventCoachUrl = url()->route('platform.content.first-level',
-                                          [
+            $eventCoachUrl = url()->route(
+                'platform.content.first-level',
+                [
                                               'brand' => brand(),
                                               'primaryPage' => 'coaches',
                                               'firstContentSlug' => $eventCoachSlug,

@@ -26,7 +26,7 @@ class DeleteChildrenFromUserPlaylistType extends Command
         $brokenContentIds = $dbConnection->table('railcontent_content')
             ->select('id')
             ->where('type', 'quick-tips')
-            ->where('parent_content_data', '!=', null )
+            ->where('parent_content_data', '!=', null)
             ->get()->toArray()
         ;
 

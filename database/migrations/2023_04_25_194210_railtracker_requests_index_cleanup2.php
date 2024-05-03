@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -46,19 +46,19 @@ return new class extends Migration {
                     $table->dropForeign('railtracker4_requests_response_duration_ms_foreign');
                     $table->dropForeign('railtracker4_requests_exception_code_foreign');
                     $table->dropForeign('railtracker4_requests_exception_line_foreign');
-//            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
 
 
-//            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
-//            $table->dropIndex('railtracker4_requests_route_action_hash_index');
-//            $table->dropIndex('railtracker4_requests_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_route_action_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_route_name_index');
                     $table->dropIndex('railtracker4_requests_responded_on_index');
                     $table->dropIndex('railtracker4_requests_ip_timezone_index');
@@ -76,7 +76,7 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_language_preference_index');
                     $table->dropIndex('railtracker4_requests_agent_browser_version_index');
                     $table->dropIndex('railtracker4_requests_ip_currency_index');
-//            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_response_status_code_index');
                     $table->dropIndex('railtracker4_requests_device_model_index');
@@ -88,10 +88,10 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_device_version_index');
                     $table->dropIndex('railtracker4_requests_referer_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_device_is_mobile_index');
-//            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
                     $table->dropIndex('railtracker4_requests_exception_code_index');
                     $table->dropIndex('railtracker4_requests_exception_line_index');
                     $table->dropIndex('railtracker4_requests_is_robot_index');
@@ -129,19 +129,19 @@ return new class extends Migration {
                     $table->dropForeign('railtracker4_requests_response_duration_ms_foreign');
                     $table->dropForeign('railtracker4_requests_exception_code_foreign');
                     $table->dropForeign('railtracker4_requests_exception_line_foreign');
-//            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
 
 
-//            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
-//            $table->dropIndex('railtracker4_requests_route_action_hash_index');
-//            $table->dropIndex('railtracker4_requests_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_route_action_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_route_name_index');
                     $table->dropIndex('railtracker4_requests_responded_on_index');
                     $table->dropIndex('railtracker4_requests_ip_timezone_index');
@@ -159,7 +159,7 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_language_preference_index');
                     $table->dropIndex('railtracker4_requests_agent_browser_version_index');
                     $table->dropIndex('railtracker4_requests_ip_currency_index');
-//            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_response_status_code_index');
                     $table->dropIndex('railtracker4_requests_device_model_index');
@@ -171,10 +171,10 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_device_version_index');
                     $table->dropIndex('railtracker4_requests_referer_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_device_is_mobile_index');
-//            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
                     $table->dropIndex('railtracker4_requests_exception_code_index');
                     $table->dropIndex('railtracker4_requests_exception_line_index');
                     $table->dropIndex('railtracker4_requests_is_robot_index');
@@ -212,19 +212,19 @@ return new class extends Migration {
                     $table->dropForeign('railtracker4_requests_response_duration_ms_foreign');
                     $table->dropForeign('railtracker4_requests_exception_code_foreign');
                     $table->dropForeign('railtracker4_requests_exception_line_foreign');
-//            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
 
 
-//            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
-//            $table->dropIndex('railtracker4_requests_route_action_hash_index');
-//            $table->dropIndex('railtracker4_requests_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_route_action_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_route_name_index');
                     $table->dropIndex('railtracker4_requests_responded_on_index');
                     $table->dropIndex('railtracker4_requests_ip_timezone_index');
@@ -242,7 +242,7 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_language_preference_index');
                     $table->dropIndex('railtracker4_requests_agent_browser_version_index');
                     $table->dropIndex('railtracker4_requests_ip_currency_index');
-//            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_response_status_code_index');
                     $table->dropIndex('railtracker4_requests_device_model_index');
@@ -254,10 +254,10 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_device_version_index');
                     $table->dropIndex('railtracker4_requests_referer_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_device_is_mobile_index');
-//            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
                     $table->dropIndex('railtracker4_requests_exception_code_index');
                     $table->dropIndex('railtracker4_requests_exception_line_index');
                     $table->dropIndex('railtracker4_requests_is_robot_index');
@@ -295,19 +295,19 @@ return new class extends Migration {
                     $table->dropForeign('railtracker4_requests_response_duration_ms_foreign');
                     $table->dropForeign('railtracker4_requests_exception_code_foreign');
                     $table->dropForeign('railtracker4_requests_exception_line_foreign');
-//            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
-//            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_referer_url_query_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_route_action_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_agent_string_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_class_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_file_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_message_hash_foreign');
+                    //            $table->dropForeign('railtracker4_requests_exception_trace_hash_foreign');
 
 
-//            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
-//            $table->dropIndex('railtracker4_requests_route_action_hash_index');
-//            $table->dropIndex('railtracker4_requests_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_agent_string_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_route_action_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_route_name_index');
                     $table->dropIndex('railtracker4_requests_responded_on_index');
                     $table->dropIndex('railtracker4_requests_ip_timezone_index');
@@ -325,7 +325,7 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_language_preference_index');
                     $table->dropIndex('railtracker4_requests_agent_browser_version_index');
                     $table->dropIndex('railtracker4_requests_ip_currency_index');
-//            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_referer_url_query_hash_index');
                     $table->dropIndex('railtracker4_requests_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_response_status_code_index');
                     $table->dropIndex('railtracker4_requests_device_model_index');
@@ -337,10 +337,10 @@ return new class extends Migration {
                     $table->dropIndex('railtracker4_requests_device_version_index');
                     $table->dropIndex('railtracker4_requests_referer_url_protocol_index');
                     $table->dropIndex('railtracker4_requests_device_is_mobile_index');
-//            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
-//            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_message_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_class_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_file_hash_index');
+                    //            $table->dropIndex('railtracker4_requests_exception_trace_hash_index');
                     $table->dropIndex('railtracker4_requests_exception_code_index');
                     $table->dropIndex('railtracker4_requests_exception_line_index');
                     $table->dropIndex('railtracker4_requests_is_robot_index');

@@ -8,9 +8,6 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class AddBranch extends Command
 {
-
-
-
     protected $signature = 'featureFlag:addBranch
                             {name : name of Branch}
                             {experimentName : name of Parent Experiment}

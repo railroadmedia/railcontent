@@ -8,7 +8,6 @@ use ReflectionMethod;
 
 trait CreatesReflectionProperty
 {
-
     /**
      * Get the value for the non-public property of the trait-using job, so we can call it
      *

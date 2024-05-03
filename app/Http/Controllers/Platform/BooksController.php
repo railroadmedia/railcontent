@@ -724,7 +724,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function drummersToolboxChapter($domain, $brand,  $chapterNumber, Request $request)
+    public function drummersToolboxChapter($domain, $brand, $chapterNumber, Request $request)
     {
         ContentRepository::$bypassPermissions = true;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;

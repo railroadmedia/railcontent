@@ -2,7 +2,6 @@
 
 namespace App\Modules\Ecommerce\Jobs;
 
-
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
@@ -56,7 +55,6 @@ class FixMobileTransactionsJob implements ShouldQueue
         UserService $userService,
         ProductService $productService,
         ShopifyDeleteService $shopifyDeleteService
-
     ): void {
         $className = get_class($this);
         if (!$this->endCursor) {

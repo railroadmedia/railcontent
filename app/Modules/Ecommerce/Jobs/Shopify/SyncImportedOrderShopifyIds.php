@@ -65,7 +65,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**
@@ -118,15 +118,15 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         $responseBody = $this->executeQuery($gql);
 
         $orderData = collect($responseBody->data->orders->nodes)->transform(
-            fn($data) => new SyncImportedOrderShopifyIdsOrderData($data->id, $data->note)
+            fn ($data) => new SyncImportedOrderShopifyIdsOrderData($data->id, $data->note)
         );
 
         // get only the orders that have notes in our expected format
         $importedOrderData = $orderData->filter(function ($orderData) {
             return !empty($orderData->note) && str_contains(
-                    $orderData->note,
-                    self::NOTE_STRING
-                );
+                $orderData->note,
+                self::NOTE_STRING
+            );
         });
 
         $this->updateOrders($importedOrderData);
@@ -254,7 +254,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
         // get the fulfillment data from Shopify
         $shopifyOrderFulfillments = $this->shopify->getOrderFulfillments($orderData->id);
         $this->handleRateLimit(true);
-        $shopifyOrderFulfillments->transform(fn(ApiResource $apiResource) => $apiResource->getAttributes());
+        $shopifyOrderFulfillments->transform(fn (ApiResource $apiResource) => $apiResource->getAttributes());
 
         // there can be multiple fulfillments on an order, so check each one
         $shopifyOrderFulfillments->each(function (array $fulfillmentData) use ($orderItems) {
@@ -275,7 +275,7 @@ class SyncImportedOrderShopifyIds implements ShouldQueue
 
                 // safety check to only update those entries that already had a shopify_id
                 $orderItemFulfillments = $orderItem->orderItemFulfillments->filter(
-                    fn(OrderItemFulfillment $fulfillment) => !empty($fulfillment->shopify_id)
+                    fn (OrderItemFulfillment $fulfillment) => !empty($fulfillment->shopify_id)
                 );
 
                 // update the order item's fulfillment(s)

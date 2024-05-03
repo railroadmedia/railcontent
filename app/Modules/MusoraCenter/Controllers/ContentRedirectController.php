@@ -32,8 +32,7 @@ class ContentRedirectController extends Controller
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService,
         UrlHelperService $urlHelperService
-    )
-    {
+    ) {
         $this->contentService = $contentService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->urlHelperService = $urlHelperService;

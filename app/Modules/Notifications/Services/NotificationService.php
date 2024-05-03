@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class NotificationService
 {
-
     public function getRecipientIdsWithUnreadNotificationsQuery(Carbon $startDate): Builder
     {
         return Notification::query()

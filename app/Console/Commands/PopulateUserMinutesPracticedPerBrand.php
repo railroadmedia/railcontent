@@ -14,7 +14,6 @@ use Exception;
 
 class PopulateUserMinutesPracticedPerBrand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -83,7 +82,7 @@ class PopulateUserMinutesPracticedPerBrand extends Command
             }
         });
 
-       $this->info("PopulateUserMinutesPracticedPerBrand command has finished #n");
+        $this->info("PopulateUserMinutesPracticedPerBrand command has finished #n");
     }
 
 }

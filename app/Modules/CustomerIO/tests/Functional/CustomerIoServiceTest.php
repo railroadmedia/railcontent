@@ -11,26 +11,28 @@ use App\Modules\CustomerIO\tests\CustomerIoTestCase;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class CustomerIoServiceTest extends CustomerIoTestCase
 {
     /**
      * @var CustomerIoService
      */
-    private $customerIoService;
+    private CustomerIoService $customerIoService;
 
     /**
      * @var CustomerIoApiGateway
      */
-    private $customerIoApiGateway;
+    private CustomerIoApiGateway $customerIoApiGateway;
 
-    protected function setUp()
-    : void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->customerIoService = app()->make(CustomerIoService::class);
         $this->customerIoApiGateway = app()->make(CustomerIoApiGateway::class);
+        Event::fake(CustomerCreated::class);
     }
 
     public function test_get_customer_by_id()
@@ -38,8 +40,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $email = $this->faker->email;
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
-
-        Event::fake([CustomerCreated::class]);
 
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
@@ -49,7 +49,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         Event::assertDispatched(CustomerCreated::class);
 
         // for some reason the fetch API needs some time to update otherwise we always get 404
-        sleep(4);
+        sleep(20);
 
         $fetchedCustomer = $this->customerIoService->getCustomerById($accountName, $createdCustomer->uuid);
 
@@ -83,8 +83,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
-        Event::fake([CustomerCreated::class]);
-
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
             $accountName,
@@ -101,10 +99,8 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $fetchedCustomer = $this->customerIoService->getCustomerByUserId($accountName, $userId);
 
         $this->assertEquals($fetchedCustomer->uuid, $createdCustomer->uuid);
-        $this->assertEquals($fetchedCustomer->getExternalAttributes()['id'], $createdCustomer->uuid);
 
         $this->assertEquals($fetchedCustomer->email, $email);
-        $this->assertEquals($fetchedCustomer->getExternalAttributes()['email'], $email);
 
         $this->assertEquals($fetchedCustomer->workspace_name, $accountConfigData['workspace_name']);
         $this->assertEquals($fetchedCustomer->workspace_id, $accountConfigData['workspace_id']);
@@ -160,8 +156,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $accountName = 'musora';
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
-        Event::fake([CustomerCreated::class]);
-
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
             $accountName
@@ -189,7 +183,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         );
 
         // for some reason the fetch API needs some time to update otherwise we always get 404
-        sleep(4);
+        sleep(20);
 
         $fetchedCustomer = $this->customerIoService->getCustomerById($accountName, $createdCustomer->uuid);
 
@@ -223,7 +217,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
         $createdAt =
             Carbon::now()
-                ->subDays(1)->timestamp;
+            ->subDays(1)->timestamp;
 
         $customAttributes = [
             'my_string_1' => $this->faker->text(),
@@ -236,8 +230,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             'my_timestamp_2' => Carbon::now()
                 ->addDays(100)->timestamp,
         ];
-
-        Event::fake([CustomerCreated::class]);
 
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
@@ -271,7 +263,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         );
 
         // for some reason the fetch API needs some time to update otherwise we always get 404
-        sleep(4);
+        sleep(10);
 
         $data = array_merge($data, $customAttributes);
 
@@ -317,7 +309,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $userId = rand();
         $createdAt =
             Carbon::now()
-                ->subDays(1)->timestamp;
+            ->subDays(1)->timestamp;
 
         $customAttributes = [
             'my_string_1' => $this->faker->text(),
@@ -330,8 +322,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             'my_timestamp_2' => Carbon::now()
                 ->addDays(100)->timestamp,
         ];
-
-        Event::fake([CustomerCreated::class]);
 
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
@@ -365,7 +355,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         );
 
         // for some reason the fetch API needs some time to update otherwise we always get 404
-        sleep(4);
+        sleep(20);
 
         $data = array_merge($data, $customAttributes);
 
@@ -414,7 +404,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $userId = rand();
         $createdAt =
             Carbon::now()
-                ->subDays(1)->timestamp;
+            ->subDays(1)->timestamp;
 
         $customAttributes = [
             'my_string_1' => $this->faker->text(),
@@ -427,8 +417,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             'my_timestamp_2' => Carbon::now()
                 ->addDays(100)->timestamp,
         ];
-
-        Event::fake([CustomerCreated::class]);
 
         $createdCustomer = $this->customerIoService->createOrUpdateCustomerByEmail(
             $email,
@@ -511,7 +499,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $userId = rand();
         $createdAt =
             Carbon::now()
-                ->subDays(1)->timestamp;
+            ->subDays(1)->timestamp;
 
         $customAttributes = [
             'my_string_1' => $this->faker->text(),
@@ -524,8 +512,6 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             'my_timestamp_2' => Carbon::now()
                 ->addDays(100)->timestamp,
         ];
-
-        Event::fake([CustomerCreated::class]);
 
         $createdCustomer = $this->customerIoService->createOrUpdateCustomerByEmail(
             $email,
@@ -576,7 +562,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $newUserId = rand();
         $newCreatedAt =
             Carbon::now()
-                ->subDays(1)->timestamp;
+            ->subDays(1)->timestamp;
 
         Event::fake([CustomerUpdated::class]);
         $updatedCustomer = $this->customerIoService->createOrUpdateCustomerByEmail(
@@ -692,14 +678,14 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
         $fetchedCustomerActivities = $this->customerIoApiGateway->getCustomerActivities(
             $accountConfigData['app_api_key'],
-            $createdCustomer->uuid,
+            $createdCustomer->email,
             'event'
         );
 
         $fetchedEventNames = [];
 
         foreach ($fetchedCustomerActivities as $fetchedCustomerActivity) {
-            $fetchedEventNames[] = $fetchedCustomerActivity->name;
+            $fetchedEventNames[] = $fetchedCustomerActivity['name'];
         }
 
         $this->assertContains('event_to_sync_1', $fetchedEventNames);
@@ -714,7 +700,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $eventType = 'my_event_type_1';
         $createdAt =
             Carbon::now()
-                ->subDays(2)->timestamp;
+            ->subDays(2)->timestamp;
 
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
@@ -724,19 +710,25 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         // for some reason the fetch API needs some time to update otherwise we always get 404
         sleep(4);
 
-        $this->customerIoService->createEvent($createdCustomer->uuid, $accountName, $eventName, ['data_point' => $eventType], $createdAt);
+        $this->customerIoService->createEvent(
+            $createdCustomer->email,
+            $accountName,
+            $eventName,
+            ['data_point' => $eventType],
+            $createdAt
+        );
 
-        sleep(5);
+        sleep(10);
 
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
         $fetchedCustomerActivities = $this->customerIoApiGateway->getCustomerActivities(
             $accountConfigData['app_api_key'],
-            $createdCustomer->uuid,
+            $createdCustomer->email,
             'event'
         );
 
-        $this->assertEquals($eventName, $fetchedCustomerActivities[0]->name);
+        $this->assertEquals($eventName, $fetchedCustomerActivities[0]['name']);
     }
 
     public function test_sync_user_device()
@@ -745,7 +737,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $accountName = 'musora';
         $createdAt =
             Carbon::now()
-                ->subDays(2)->timestamp;
+            ->subDays(2)->timestamp;
 
         $createdCustomer = $this->customerIoService->createCustomer(
             $email,
@@ -760,7 +752,8 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
         $this->customerIoService->syncDeviceForUserId(
             $createdCustomer->user_id,
-            $accountName, ['id' => $token, 'platform' => $platform],
+            $accountName,
+            ['id' => $token, 'platform' => $platform],
             $createdAt
         );
 
@@ -770,32 +763,33 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
         $fetchedCustomer = $this->customerIoApiGateway->getCustomer(
             $accountConfigData['app_api_key'],
-            $createdCustomer->uuid
+            $createdCustomer->email
         );
 
-        $this->assertEquals(1, count($fetchedCustomer->devices));
-        $this->assertEquals($token, $fetchedCustomer->devices[0]->id);
-        $this->assertEquals($platform, $fetchedCustomer->devices[0]->platform);
+        $this->assertEquals(1, count($fetchedCustomer['devices']));
+        $this->assertEquals($token, $fetchedCustomer['devices'][0]['id']);
+        $this->assertEquals($platform, $fetchedCustomer['devices'][0]['platform']);
     }
 
     public function test_merge_customers()
     {
         $accountName = 'musora';
-        $email = $this->faker->email;
+        $email1 = $this->faker->email;
+        $email2 = $this->faker->email;
         $createdAt1 =
             Carbon::now()
-                ->subDays(2)->timestamp;
-        $attributes1 = ['test1' => 'value-not-overwritten', 'test2' => 'new-value', 'test3' => ''];
+            ->subDays(2)->timestamp;
+        $attributes1 = ['test1' => 'value-not-overwritten', 'test2' => 'new-value'];
 
         $createdCustomer1 = $this->customerIoService->createCustomer(
-            $email,
+            $email1,
             $accountName,
             $attributes1
         );
         $attributes2 = ['test2' => 'value-is-overwritten', 'test3' => 'this-is-set'];
 
         $createdCustomer2 = $this->customerIoService->createCustomer(
-            $email,
+            $email2,
             $accountName,
             $attributes2
         );
@@ -809,13 +803,13 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             $createdCustomer2->uuid
         );
 
-        sleep(5);
+        sleep(20);
 
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
         $fetchedCustomer = $this->customerIoApiGateway->getCustomer(
             $accountConfigData['app_api_key'],
-            $primaryCustomer->uuid
+            $primaryCustomer->email
         );
 
         // duplicate should now be missing
@@ -830,24 +824,27 @@ class CustomerIoServiceTest extends CustomerIoTestCase
 
         $this->assertDatabaseMissing('customer_io_customers', ['uuid' => $createdCustomer2->uuid]);
         $this->assertDatabaseHas('customer_io_customers', ['uuid' => $primaryCustomer->uuid]);
-        $this->assertEquals($primaryCustomer->email, $fetchedCustomer->attributes->email);
-        $this->assertEquals($primaryCustomer->uuid, $fetchedCustomer->attributes->id);
-        $this->assertEquals("value-not-overwritten", $fetchedCustomer->attributes->test1);
-        $this->assertEquals("new-value", $fetchedCustomer->attributes->test2);
-        $this->assertEquals("this-is-set", $fetchedCustomer->attributes->test3);
+        $this->assertEquals($primaryCustomer->email, $fetchedCustomer['attributes']['email']);
+        $this->assertEquals($primaryCustomer->uuid, $fetchedCustomer['attributes']['id']);
+        $this->assertEquals("value-not-overwritten", $fetchedCustomer['attributes']['test1']);
+        $this->assertEquals("new-value", $fetchedCustomer['attributes']['test2']);
+        $this->assertEquals("this-is-set", $fetchedCustomer['attributes']['test3']);
     }
 
     public function test_merge_customers_updated_created_at()
     {
         $accountName = 'musora';
-        $email = $this->faker->email;
+        // CIO now uses email as IDs as well, so we need two different emails,
+        // otherwise CIO will just update the primaryCustomer attributes
+        $email1 = $this->faker->email;
+        $email2 = $this->faker->email;
         $createdAt1 =
             Carbon::now()
-                ->subDays(1)->timestamp;
-        $attributes1 = ['test1' => 'value-not-overwritten', 'test2' => 'new-value', 'test3' => ''];
+            ->subDays(1)->timestamp;
+        $attributes1 = ['test1' => 'value-not-overwritten', 'test2' => 'new-value'];
 
         $createdCustomer1 = $this->customerIoService->createCustomer(
-            $email,
+            $email1,
             $accountName,
             $attributes1,
             null,
@@ -858,9 +855,9 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $attributes2 = ['test2' => 'value-is-overwritten', 'test3' => 'this-is-set'];
         $createdAt2 =
             Carbon::now()
-                ->subDays(5)->timestamp;
+            ->subDays(5)->timestamp;
         $createdCustomer2 = $this->customerIoService->createCustomer(
-            $email,
+            $email2,
             $accountName,
             $attributes2,
             null,
@@ -869,7 +866,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         );
 
         // for some reason the fetch API needs some time to update otherwise we always get 404
-        sleep(4);
+        sleep(20);
 
         $primaryCustomer = $this->customerIoService->mergeCustomers(
             $accountName,
@@ -877,20 +874,20 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             $createdCustomer2->uuid
         );
 
-        sleep(5);
+        sleep(20);
 
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
         $fetchedCustomer = $this->customerIoApiGateway->getCustomer(
             $accountConfigData['app_api_key'],
-            $primaryCustomer->uuid
+            $primaryCustomer->email
         );
 
         // duplicate should now be missing
         try {
             $fetchedDuplicateCustomer = $this->customerIoApiGateway->getCustomer(
                 $accountConfigData['app_api_key'],
-                $createdCustomer2->uuid
+                $createdCustomer2->email
             );
         } catch (Exception $exception) {
             $this->assertEquals(404, $exception->getCode());
@@ -903,12 +900,12 @@ class CustomerIoServiceTest extends CustomerIoTestCase
             'created_at' => Carbon::now()
                 ->subDays(5)->toDateTimeString()
         ]);
-        $this->assertEquals(Carbon::now()->subDays(5)->timestamp, $fetchedCustomer->attributes->created_at);
-        $this->assertEquals($primaryCustomer->email, $fetchedCustomer->attributes->email);
-        $this->assertEquals($primaryCustomer->uuid, $fetchedCustomer->attributes->id);
-        $this->assertEquals("value-not-overwritten", $fetchedCustomer->attributes->test1);
-        $this->assertEquals("new-value", $fetchedCustomer->attributes->test2);
-        $this->assertEquals("this-is-set", $fetchedCustomer->attributes->test3);
+        $this->assertEquals(Carbon::now()->subDays(5)->timestamp, $fetchedCustomer['attributes']['created_at']);
+        $this->assertEquals($primaryCustomer->email, $fetchedCustomer['attributes']['email']);
+        $this->assertEquals($primaryCustomer->uuid, $fetchedCustomer['attributes']['id']);
+        $this->assertEquals("value-not-overwritten", $fetchedCustomer['attributes']['test1']);
+        $this->assertEquals("new-value", $fetchedCustomer['attributes']['test2']);
+        $this->assertEquals("this-is-set", $fetchedCustomer['attributes']['test3']);
     }
 
     public function test_merge_customers_failed_missing_from_db()
@@ -917,7 +914,7 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $email = $this->faker->email;
         $createdAt1 =
             Carbon::now()
-                ->subDays(2)->timestamp;
+            ->subDays(2)->timestamp;
         $attributes1 = ['test1' => 'value-not-overwritten', 'test2' => 'new-value', 'test3' => ''];
 
         $createdCustomer1 = $this->customerIoService->createCustomer(
@@ -938,22 +935,164 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         } catch (Exception $exception) {
             $this->assertEquals(
                 'Could not merge customer ids because one is missing from the database. $primaryCustomerId:' .
-                $createdCustomer1->uuid . ' - $secondaryCustomerId:test-fail-uuid - $accountName: musora',
+                    $createdCustomer1->uuid . ' - $secondaryCustomerId:test-fail-uuid - $accountName: musora',
                 $exception->getMessage()
             );
         }
 
-        sleep(5);
+        sleep(20);
 
         $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
 
         $fetchedCustomer = $this->customerIoApiGateway->getCustomer(
             $accountConfigData['app_api_key'],
-            $createdCustomer1->uuid
+            $createdCustomer1->email
         );
 
         $this->assertDatabaseHas('customer_io_customers', ['uuid' => $createdCustomer1->uuid]);
-        $this->assertEquals($createdCustomer1->email, $fetchedCustomer->attributes->email);
-        $this->assertEquals($createdCustomer1->uuid, $fetchedCustomer->attributes->id);
+        $this->assertEquals($createdCustomer1->email, $fetchedCustomer['attributes']['email']);
+        $this->assertEquals($createdCustomer1->uuid, $fetchedCustomer['attributes']['id']);
+    }
+
+    public function test_create_event_for_email_or_id()
+    {
+        $accountName = 'musora';
+        $email = $this->faker->email;
+
+        $createdCustomer = $this->customerIoService->createCustomer(
+            $email,
+            $accountName
+        );
+
+        try {
+            $customer = $this->customerIoService->createEventForEmailOrId(
+                $createdCustomer->email,
+                $createdCustomer->uuid,
+                $accountName,
+                'test',
+            );
+        } catch (Exception) {
+            $this->fail('CustomerIoService::createEventForEmailOrId() should not throw an exception');
+        }
+
+        $this->assertNotNull($customer);
+        $this->assertEquals($createdCustomer->email, $customer->email);
+        $this->assertEquals($createdCustomer->uuid, $customer->uuid);
+    }
+
+    public function test_create_event_for_user_id()
+    {
+        $accountName = 'musora';
+        $email = $this->faker->email;
+        $userId = rand();
+
+        $createdCustomer = $this->customerIoService->createCustomer(
+            $email,
+            $accountName,
+            [],
+            null,
+            $userId
+        );
+
+        try {
+            $customer = $this->customerIoService->createEventForUserId(
+                $userId,
+                $accountName,
+                'test',
+                ['email' => $email],
+            );
+
+            $this->assertNotNull($customer);
+            $this->assertEquals($email, $customer->email);
+            $this->assertEquals($userId, $customer->user_id);
+        } catch (Exception) {
+            $this->fail('CustomerIoService::createEventForUserId() should not throw an exception');
+        }
+    }
+
+    public function test_delete_customer()
+    {
+        $accountName = 'musora';
+        $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
+        $email = $this->faker->email;
+        $userId = rand();
+
+        $createdCustomer = $this->customerIoService->createCustomer(
+            $email,
+            $accountName,
+            [],
+            null,
+            $userId
+        );
+
+        $customer = null;
+        try {
+            $customer = $this->customerIoService->deleteCustomer($userId, $accountName);
+        } catch (Throwable $t) {
+            Log::error($t->getMessage());
+            $this->fail('CustomerIoService::deleteCustomer() should not throw an exception');
+        }
+
+        try {
+            $this->customerIoApiGateway->getCustomer(
+                $accountConfigData['app_api_key'],
+                $createdCustomer->uuid
+            );
+        } catch (Exception $exception) {
+            $this->assertEquals(404, $exception->getCode());
+        }
+    }
+
+    public function test_delete_customer_not_found()
+    {
+        $accountName = 'musora';
+        $userId = rand();
+
+        $customer = null;
+
+        try {
+            $customer = $this->customerIoService->deleteCustomer($userId, $accountName);
+        } catch (Throwable $t) {
+            Log::error($t->getMessage());
+            $this->fail('CustomerIoService::deleteCustomer() should not throw an exception');
+        }
+
+        $this->assertNull($customer);
+    }
+
+    public function test_get_customer_events_by_user_id()
+    {
+        $accountName = 'musora';
+        $email = $this->faker->email;
+        $userId = rand();
+
+        $createdCustomer = $this->customerIoService->createCustomer(
+            $email,
+            $accountName,
+            [],
+            null,
+            $userId
+        );
+
+        $this->customerIoService->createEvent(
+            $createdCustomer->email,
+            $accountName,
+            'test',
+            ['data_point' => 'test'],
+        );
+
+        sleep(10);
+
+        $activities = null;
+        try {
+            $activities = $this->customerIoService->getCustomerEventsByUserId($accountName, $userId);
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            $this->fail('CustomerIoService::getCustomerEventsByUserId() should not throw an exception');
+        }
+
+        $this->assertNotNull($activities);
+        $this->assertIsArray($activities);
+        $this->assertNotEmpty($activities);
     }
 }

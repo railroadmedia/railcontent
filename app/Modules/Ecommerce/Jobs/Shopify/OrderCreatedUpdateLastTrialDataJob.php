@@ -13,7 +13,8 @@ class OrderCreatedUpdateLastTrialDataJob extends WebhookChildJob
 {
     public function __construct(
         private $contents,
-    ) {}
+    ) {
+    }
 
     public function handle(ProductService $productService, ShopifyGateway $shopifyGateway, UserService $userService)
     {

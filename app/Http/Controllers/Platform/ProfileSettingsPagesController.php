@@ -52,9 +52,9 @@ use Throwable;
 
 class ProfileSettingsPagesController extends BaseController
 {
-    const MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER = 10;
+    public const MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER = 10;
 
-    const HOW_CAN_WE_HELP_OPTIONS = [
+    public const HOW_CAN_WE_HELP_OPTIONS = [
         'direction' => 'I need more direction',
         'time' => 'I don’t have enough time',
         'watch' => 'I don’t know what lesson to watch',
@@ -64,7 +64,7 @@ class ProfileSettingsPagesController extends BaseController
         'other' => 'Other',
     ];
 
-    const TRIAL_MEMBERSHIP_PRODUCT_IDS = [
+    public const TRIAL_MEMBERSHIP_PRODUCT_IDS = [
         126, // Drumeo
         283,
         400,
@@ -85,13 +85,13 @@ class ProfileSettingsPagesController extends BaseController
         424,
     ];
 
-    const SWITCH_TO_MONTHLY_PRICE = 19;
+    public const SWITCH_TO_MONTHLY_PRICE = 19;
 
     public static $generalSuccessMessageToUser = 'Your account has been updated.';
 
     public static $generalErrorMessageToUser = 'We\'re sorry, but there\'s been an error. Please reload the page and try ' .
-    'again. If that doesn\'t work email or use the chat at the bottom right of your screen to get things sorted out ' .
-    'right away.';
+        'again. If that doesn\'t work email or use the chat at the bottom right of your screen to get things sorted out ' .
+        'right away.';
 
     private NotificationSettingsService $notificationSettingsService;
     private UserSignaturesRepository $userSignaturesRepository;
@@ -262,7 +262,7 @@ class ProfileSettingsPagesController extends BaseController
                 $payment->getGatewayName() .
                 '.subscription_renewal_invoice.invoice_view'
             )
-            ) && $subscription->getType() != Subscription::TYPE_PAYMENT_PLAN) {
+        ) && $subscription->getType() != Subscription::TYPE_PAYMENT_PLAN) {
             $viewData = $this->invoiceService->getViewDataForSubscriptionRenewalInvoice($subscription, $payment);
 
             return view(
@@ -279,7 +279,7 @@ class ProfileSettingsPagesController extends BaseController
             config(
                 'ecommerce.invoice_email_details.' . $payment->getGatewayName() . '.order_invoice.invoice_view'
             )
-            )) {
+        )) {
             $viewData = $this->invoiceService->getViewDataForOrderInvoice($order, $payment);
 
             return view(
@@ -430,7 +430,7 @@ class ProfileSettingsPagesController extends BaseController
             }
 
             if (!$action) {
-                throw new Exception ('No MembershipAction of required type found for user ' . user()->getId());
+                throw new Exception('No MembershipAction of required type found for user ' . user()->getId());
             }
 
             // get the subscription and user-product
@@ -445,7 +445,7 @@ class ProfileSettingsPagesController extends BaseController
 
             // check that product from subscription from action is same product as membershipUserProduct
             if ($subscription->getProduct()->getId() != $userProduct->getProduct()->getId()) {
-                throw new Exception (
+                throw new Exception(
                     'Product in paused subscription does not match membershipUserProduct (user ' . user()->getId() . ')'
                 );
             }
@@ -843,9 +843,9 @@ class ProfileSettingsPagesController extends BaseController
 
                     // USE JUST ONE OF THE TWO BELOW:
                     // --------- OPTION 1 ---------
-//                $newSubscriptionTaxAmount = $orderTaxFactor * $newPrice;
-//                $newSubscription->setTax($newSubscriptionTaxAmount);
-//                $newPrice = $newPrice + $newSubscriptionTaxAmount;
+                    //                $newSubscriptionTaxAmount = $orderTaxFactor * $newPrice;
+                    //                $newSubscription->setTax($newSubscriptionTaxAmount);
+                    //                $newPrice = $newPrice + $newSubscriptionTaxAmount;
                     // --------- OPTION 2 ---------
                     $newPrice = $newPrice * ($orderTaxFactor + 1);
                 }
@@ -1108,12 +1108,12 @@ class ProfileSettingsPagesController extends BaseController
             } // not currently used but kept for posterity and safety in case of future changes
 
             // todo: re-add this and pass it to the cancellation-confirmed page
-//            $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically ' .
-//                'billed and your access will end ' . Carbon::parse($contentAccessExpiryDate)->format('l F jS');
-//
-//            if ($revokeAccessImmediately) {
-//                $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically billed.';
-//            }
+            //            $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically ' .
+            //                'billed and your access will end ' . Carbon::parse($contentAccessExpiryDate)->format('l F jS');
+            //
+            //            if ($revokeAccessImmediately) {
+            //                $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically billed.';
+            //            }
 
             // ---------------------------------------------------------------------------------------------------------
             // email to student ----------------------------------------------------------------------------------------

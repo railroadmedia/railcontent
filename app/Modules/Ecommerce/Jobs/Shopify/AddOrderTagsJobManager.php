@@ -38,6 +38,8 @@ class AddOrderTagsJobManager implements ShouldQueue
         protected ?int $customerId,
         protected string $startProcessedAt,
         protected string $endProcessedAt,
+        protected ?string $startCreatedAt,
+        protected ?string $endCreatedAt,
         protected bool $simulate,
         protected int $trialConversionDayLimit = 45
     ) {
@@ -45,7 +47,7 @@ class AddOrderTagsJobManager implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**
@@ -64,7 +66,7 @@ class AddOrderTagsJobManager implements ShouldQueue
         // make a REST call to get the orders
         $orders = $this->shopify->getOrders(['ids' => $orderIds->implode(','), 'status' => 'any']);
         $orders->transform(
-            fn(OrderResource $orderResource) => new Order(
+            fn (OrderResource $orderResource) => new Order(
                 json_decode(json_encode($orderResource->getAttributes()), false)
             )
         );
@@ -83,6 +85,8 @@ class AddOrderTagsJobManager implements ShouldQueue
                     $this->customerId,
                     $this->startProcessedAt,
                     $this->endProcessedAt,
+                    $this->startCreatedAt,
+                    $this->endCreatedAt,
                     $this->simulate,
                     $this->trialConversionDayLimit
                 )
@@ -102,10 +106,12 @@ class AddOrderTagsJobManager implements ShouldQueue
         $count = self::PAGE_SIZE;
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
         $customerIdQuery = empty($this->customerId) ? "" : " AND customer_id:{$this->customerId}";
+        $createdAtStartQuery = empty($this->startCreatedAt) ? "" : " AND created_at:>=\\\"$this->startCreatedAt\\\"";
+        $createdAtEndQuery = empty($this->endCreatedAt) ? "" : " AND created_at:<=\\\"$this->endCreatedAt\\\"";
 
         $gql = <<<GQL
             query {
-                orders(first: $count, $cursor query: "processed_at:>=\"$this->startProcessedAt\" AND processed_at:<=\"$this->endProcessedAt\"$customerIdQuery AND status:any", sortKey: PROCESSED_AT) {
+                orders(first: $count, $cursor query: "processed_at:>=\"$this->startProcessedAt\" AND processed_at:<=\"$this->endProcessedAt\"$customerIdQuery$createdAtStartQuery$createdAtEndQuery AND status:any", sortKey: PROCESSED_AT) {
                     nodes {
                         ... on Order {
                             id
@@ -125,7 +131,7 @@ class AddOrderTagsJobManager implements ShouldQueue
         $this->endCursor = $responseBody->data->orders->pageInfo->endCursor;
 
         return collect($responseBody->data->orders->nodes)
-            ->transform(fn($data) => Str::after($data->id, "gid://shopify/Order/"));
+            ->transform(fn ($data) => Str::after($data->id, "gid://shopify/Order/"));
     }
 
     /**

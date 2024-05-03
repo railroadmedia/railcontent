@@ -14,7 +14,11 @@ use Modules\UserManagementSystem\Models\User;
 
 class SyncUsersProductPermissionsQueryJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use Batchable;
 
     private array $userIdsToSync;
 

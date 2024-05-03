@@ -11,7 +11,8 @@ class RefundCreatedJob extends WebhookChildJob
     public function __construct(
         private $orderId,
         private $contents
-    ) {}
+    ) {
+    }
 
     public function handle(ShopifySyncService $shopifySyncService, EventTrackingService $eventTrackingService)
     {

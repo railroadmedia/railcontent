@@ -27,8 +27,12 @@ class HelpScoutMentorController extends Controller
             $helpScoutUserId = $request->input('createdBy.id');
             $helpScoutUserEmail = $request->input('createdBy.email') ?? '';
             $helpScoutMailBoxId = $request->input('mailboxId');
-            $this->helpScoutMentorService->newHelpScoutConversation($conversationId, $helpScoutUserId,
-                $helpScoutUserEmail, $helpScoutMailBoxId);
+            $this->helpScoutMentorService->newHelpScoutConversation(
+                $conversationId,
+                $helpScoutUserId,
+                $helpScoutUserEmail,
+                $helpScoutMailBoxId
+            );
         } catch (Throwable $exception) {
             //need to return success to helpscout or it may disable the webhook if too many failures occur
             Log::error($exception);

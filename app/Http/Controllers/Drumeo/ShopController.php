@@ -12,7 +12,7 @@ class ShopController extends BaseController
 {
     public function shop(Request $request)
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['shop_card_visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])
+        $products = Product::whereHas('brand', fn ($query) => $query->where('name', 'drumeo'))->where([['shop_card_visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])
             ->where(function ($query) {
                 return $query
                     ->whereNull('products.shop_card_start_date')
@@ -25,29 +25,29 @@ class ShopController extends BaseController
             })
             ->orderBy('display_order')->get();
 
-        $lessons = $products->filter(function($value, $key){
+        $lessons = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Lessons';
         });
 
-        $accessories = $products->filter(function($value, $key){
+        $accessories = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Accessories';
         });
 
-        $misc = $products->filter(function($value, $key){
+        $misc = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Misc';
         });
 
-        $shirts = $products->filter(function($value, $key){
+        $shirts = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Shirts';
         });
 
-        $hoodies = $products->filter(function($value, $key){
+        $hoodies = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
         $featured = $products->whereIn('id', [95, 207, 97, 98]);
 
-        $thirtyDD = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
+        $thirtyDD = Product::whereHas('brand', fn ($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
 
         return view('drumeo.shop.shop', [
             'lessons' => $lessons,

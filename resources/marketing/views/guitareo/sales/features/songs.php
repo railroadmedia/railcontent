@@ -1,4 +1,5 @@
 <?php
+
 $classic = [
     [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/acdc-back-in-black.png',
@@ -71,124 +72,124 @@ $classic = [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/journey-escape-1680514099.jpg',
     ],
 ];
-    $rock90s = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/20249-card-thumbnail-maxres-1592340937.jpeg',
-            'title' => 'All The Small Things',
-            'artist' => 'Blink 182',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/foo-fighters-everlong.jpg',
-            'title' => 'Everlong',
-            'artist' => 'Foo Fighters',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/goo-goo-dolls-iris-1633699382.jpg',
-            'title' => 'Iris',
-            'artist' => 'Goo Goo Dolls',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/green-day-dookie.jpg',
-            'title' => 'Basket Case',
-            'artist' => 'Green Day',
-        ],
+$rock90s = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/20249-card-thumbnail-maxres-1592340937.jpeg',
+        'title' => 'All The Small Things',
+        'artist' => 'Blink 182',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/foo-fighters-everlong.jpg',
+        'title' => 'Everlong',
+        'artist' => 'Foo Fighters',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/goo-goo-dolls-iris-1633699382.jpg',
+        'title' => 'Iris',
+        'artist' => 'Goo Goo Dolls',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/green-day-dookie.jpg',
+        'title' => 'Basket Case',
+        'artist' => 'Green Day',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'Lightning Crashes',
 //            'artist' => 'Live',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/nirvana-smells-like-teen-spirit.jpg',
-            'title' => 'Smells Like Teen Spirit',
-            'artist' => 'Nirvana',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/no-doubt-just-a-girl.jpg',
-            'title' => 'Just a Girl',
-            'artist' => 'No Doubt',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/radiohead-pablo-honey.jpg',
-            'title' => 'Creep',
-            'artist' => 'Radiohead',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/305691-card-thumbnail-maxres-1622728126.jpg',
-            'title' => 'Scar Tissue',
-            'artist' => 'Red Hot Chili Peppers',
-        ],
-        [
-            'artist' => 'Rage Against the Machine',
-            'title' => 'Killing in the Name',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/rage-against-the-machine-rage-against-the-machine.jpg',
-        ],
-        [
-            'artist' => 'Pearl Jam',
-            'title' => 'Alive',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/pearl-jam-ten-1689788332.jpg',
-        ],
-        [
-            'artist' => 'Smashing Pumpkins',
-            'title' => 'Today',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/smashing-pumpkins-siamese-dream-1681920052.jpg',
-        ],
-        [
-            'artist' => 'Soundgarden',
-            'title' => 'Black Hole Sun',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/soundgarden-superunknown-1688279377.jpg',
-        ],
-        [
-            'artist' => 'The Cranberries',
-            'title' => 'Zombie',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/the-cranberries-no-need-to-argue-1682587131.jpg',
-        ],
-        [
-            'artist' => 'Alice in Chains',
-            'title' => 'Man in the Box',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/alice-in-chains-facelift.jpg',
-        ],
-        [
-            'artist' => 'Collective Soul',
-            'title' => 'Shine',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/collective-soul-hints-allegations-and-things-left-unsaid-1676534913.jpg',
-        ],
-    ];
-    $modern = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/nirvana-smells-like-teen-spirit.jpg',
+        'title' => 'Smells Like Teen Spirit',
+        'artist' => 'Nirvana',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/no-doubt-just-a-girl.jpg',
+        'title' => 'Just a Girl',
+        'artist' => 'No Doubt',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/radiohead-pablo-honey.jpg',
+        'title' => 'Creep',
+        'artist' => 'Radiohead',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/305691-card-thumbnail-maxres-1622728126.jpg',
+        'title' => 'Scar Tissue',
+        'artist' => 'Red Hot Chili Peppers',
+    ],
+    [
+        'artist' => 'Rage Against the Machine',
+        'title' => 'Killing in the Name',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/rage-against-the-machine-rage-against-the-machine.jpg',
+    ],
+    [
+        'artist' => 'Pearl Jam',
+        'title' => 'Alive',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/pearl-jam-ten-1689788332.jpg',
+    ],
+    [
+        'artist' => 'Smashing Pumpkins',
+        'title' => 'Today',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/smashing-pumpkins-siamese-dream-1681920052.jpg',
+    ],
+    [
+        'artist' => 'Soundgarden',
+        'title' => 'Black Hole Sun',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/soundgarden-superunknown-1688279377.jpg',
+    ],
+    [
+        'artist' => 'The Cranberries',
+        'title' => 'Zombie',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/the-cranberries-no-need-to-argue-1682587131.jpg',
+    ],
+    [
+        'artist' => 'Alice in Chains',
+        'title' => 'Man in the Box',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/alice-in-chains-facelift.jpg',
+    ],
+    [
+        'artist' => 'Collective Soul',
+        'title' => 'Shine',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/collective-soul-hints-allegations-and-things-left-unsaid-1676534913.jpg',
+    ],
+];
+$modern = [
 //        [
 //            'img' => '',
 //            'title' => 'Don\'t Wanna Fight',
 //            'artist' => 'Alabama Shakes',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/arctic-monkeys-do-i-wanna-know.jpg',
-            'title' => 'Do I Wanna Know?',
-            'artist' => 'Arctic Monkeys',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/coldplay-the-scientist.jpg',
-            'title' => 'The Scientist',
-            'artist' => 'Coldplay',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/foster-the-people-torches.jpg',
-            'title' => 'Pumped Up Kicks',
-            'artist' => 'Foster The People',
-        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/arctic-monkeys-do-i-wanna-know.jpg',
+        'title' => 'Do I Wanna Know?',
+        'artist' => 'Arctic Monkeys',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/coldplay-the-scientist.jpg',
+        'title' => 'The Scientist',
+        'artist' => 'Coldplay',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/foster-the-people-torches.jpg',
+        'title' => 'Pumped Up Kicks',
+        'artist' => 'Foster The People',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'Highway Tune',
 //            'artist' => 'Greta Van Fleet',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-november/album-art/imagine-dragons-Believer.jpg',
-            'title' => 'Believer',
-            'artist' => 'Imagine Dragons',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/hozier-take-me-to-church.jpeg',
-            'title' => 'Take Me To Church',
-            'artist' => 'Hozier',
-        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-november/album-art/imagine-dragons-Believer.jpg',
+        'title' => 'Believer',
+        'artist' => 'Imagine Dragons',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/hozier-take-me-to-church.jpeg',
+        'title' => 'Take Me To Church',
+        'artist' => 'Hozier',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'The Night We Met',
@@ -199,22 +200,22 @@ $classic = [
 //            'title' => 'Little Lion Man',
 //            'artist' => 'Mumford & Sons',
 //        ],
-        [
-            'artist' => 'The Killers',
-            'title' => 'Mr. Brightside',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-killers-hot-fuss.jpg',
-        ],
-        [
-            'artist' => 'Jimmy Eat World',
-            'title' => 'The Middle',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/jimmy-eat-world-the-middle-1675632907.jpg',
-        ],
-        [
-            'artist' => 'John Mayer',
-            'title' => 'Last Train Home',
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mayer-sob-rock.jpg',
-        ],
-    ];
+    [
+        'artist' => 'The Killers',
+        'title' => 'Mr. Brightside',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-killers-hot-fuss.jpg',
+    ],
+    [
+        'artist' => 'Jimmy Eat World',
+        'title' => 'The Middle',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/jimmy-eat-world-the-middle-1675632907.jpg',
+    ],
+    [
+        'artist' => 'John Mayer',
+        'title' => 'Last Train Home',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mayer-sob-rock.jpg',
+    ],
+];
 $acoustic = [
     [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/kansas-point-of-know-return.jpg',
@@ -525,63 +526,63 @@ $metal = [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/iron-maiden-piece-of-mind-1676277303.jpeg',
     ],
 ];
-    $pop = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/ABBA-Dancing Queen.jpg',
-            'title' => 'Dancing Queen',
-            'artist' => 'ABBA',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/adele-skyfall-1637153718.jpg',
-            'title' => 'Skyfall',
-            'artist' => 'Adele',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/alanis-morissette-ironic-1633698976.jpg',
-            'title' => 'Ironic',
-            'artist' => 'Alanis Morissette',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/291206-card-thumbnail-maxres-1613587234.jpg',
-            'title' => 'Breathin',
-            'artist' => 'Ariana Grande',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/bette-midler-the-rose-original-soundtrack-recording.jpg',
-            'title' => 'The Rose',
-            'artist' => 'Bette Midler',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/291230-card-thumbnail-maxres-1613587436.jpg',
-            'title' => 'Bad Guy',
-            'artist' => 'Billie Eilish',
-        ],
+$pop = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/ABBA-Dancing Queen.jpg',
+        'title' => 'Dancing Queen',
+        'artist' => 'ABBA',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/adele-skyfall-1637153718.jpg',
+        'title' => 'Skyfall',
+        'artist' => 'Adele',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/alanis-morissette-ironic-1633698976.jpg',
+        'title' => 'Ironic',
+        'artist' => 'Alanis Morissette',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/291206-card-thumbnail-maxres-1613587234.jpg',
+        'title' => 'Breathin',
+        'artist' => 'Ariana Grande',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/bette-midler-the-rose-original-soundtrack-recording.jpg',
+        'title' => 'The Rose',
+        'artist' => 'Bette Midler',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/291230-card-thumbnail-maxres-1613587436.jpg',
+        'title' => 'Bad Guy',
+        'artist' => 'Billie Eilish',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'Circles',
 //            'artist' => 'Post Malone',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/olivia-rodrigo-sour.jpg',
-            'title' => 'Drivers Licence',
-            'artist' => 'Olivia Rodrigo',
-        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/olivia-rodrigo-sour.jpg',
+        'title' => 'Drivers Licence',
+        'artist' => 'Olivia Rodrigo',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'Fireflies',
 //            'artist' => 'Owl City',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/pink-raise-your-glass.jpg',
-            'title' => 'Raise Your Glass',
-            'artist' => 'Pink',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shawn-mendes-illuminate.jpg',
-            'title' => 'Mercy',
-            'artist' => 'Shawn Mendes',
-        ],
-    ];
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/pink-raise-your-glass.jpg',
+        'title' => 'Raise Your Glass',
+        'artist' => 'Pink',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shawn-mendes-illuminate.jpg',
+        'title' => 'Mercy',
+        'artist' => 'Shawn Mendes',
+    ],
+];
 $soul = [
     [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/alicia-keys-fallin-1649335656.jpg',
@@ -629,55 +630,55 @@ $soul = [
         'artist' => 'Rihanna',
     ],
 ];
-    $electronic = [
+$electronic = [
 //        [
 //            'img' => '',
 //            'title' => 'Sweet But Psycho',
 //            'artist' => 'Ava Max',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/avicii-true.jpg',
-            'title' => 'Wake Me Up',
-            'artist' => 'Avicii',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/benny-blanco-halsey-khalid-friends-keep-secrets.jpg',
-            'title' => 'Eastside',
-            'artist' => 'Benny Blanco, Halsey, Khalid',
-        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/avicii-true.jpg',
+        'title' => 'Wake Me Up',
+        'artist' => 'Avicii',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/benny-blanco-halsey-khalid-friends-keep-secrets.jpg',
+        'title' => 'Eastside',
+        'artist' => 'Benny Blanco, Halsey, Khalid',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'All Falls Down',
 //            'artist' => 'Alan Walker',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/daft-punk-get-lucky.jpg',
-            'title' => 'Get Lucky',
-            'artist' => 'Daft Punk',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/302643-card-thumbnail-maxres-1620397859.jpg',
-            'title' => 'Feel Good Inc',
-            'artist' => 'Gorillaz',
-        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/daft-punk-get-lucky.jpg',
+        'title' => 'Get Lucky',
+        'artist' => 'Daft Punk',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/302643-card-thumbnail-maxres-1620397859.jpg',
+        'title' => 'Feel Good Inc',
+        'artist' => 'Gorillaz',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'Without Me',
 //            'artist' => 'Halsey',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/marshmello-and-annemarie-speak-your-mind.jpg',
-            'title' => 'Friends',
-            'artist' => 'Marshmello & Anne-Marie',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/david-guetta-feat-sia-nothing-but-the-beat.jpg',
-            'title' => 'Titanium',
-            'artist' => 'David Guetta',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ellie-goulding-diplo-swae-lee-brightest-blue.jpg',
-            'title' => 'Close To Me',
-            'artist' => 'Ellie Goulding, Diplo, Swae Lee',
-        ],
-    ];
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/marshmello-and-annemarie-speak-your-mind.jpg',
+        'title' => 'Friends',
+        'artist' => 'Marshmello & Anne-Marie',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/david-guetta-feat-sia-nothing-but-the-beat.jpg',
+        'title' => 'Titanium',
+        'artist' => 'David Guetta',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ellie-goulding-diplo-swae-lee-brightest-blue.jpg',
+        'title' => 'Close To Me',
+        'artist' => 'Ellie Goulding, Diplo, Swae Lee',
+    ],
+];

@@ -2,9 +2,24 @@
     'whiteNav' => true,
     'fullSubscriptionVersion' => true,
 ])
+@section('head-includes')
+    <style>
+        .join.musora-gold {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora-gold:hover, .join.musora-gold:focus {
+            background:#FFAE00;
+            color:#000;
+        }
+    </style>
+@endsection
 
 @section('layout-body')
-    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white" @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundslice: false, } @endif">
+    <header class="pb-12 md:pb-0 md:pt-20 text-center text-white" style="background-color:#000C17;"
+        @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundslice: false, }" @endif
+    >
         @if($page === 'songs')
             @yield('header-mobileImg')
         @else
@@ -19,13 +34,13 @@
         <div class="px-4 md:px-0">
             <div class="mb-6">
                 <img
-                    class="h-5 md:h-7 mr-2"
+                    class="h-5 md:h-9 mr-2"
                     src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
                     alt="musora logo"
                     fetchpriority="high"
                 />
                 <img
-                    class="h-6 md:h-10"
+                    class="h-6 md:h-9"
                     src="https://www.musora.com/musora-cdn/image/width=150,quality=95/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
                     style="filter:brightness(0) invert(1)"
@@ -34,6 +49,18 @@
             </div>
             <h2 class="font-extrabold mb-4">@yield('header')</h2>
             <p class="md:mb-10 px-4 lg:px-0">@yield('desc')</p>
+
+            <div class="flex flex-wrap items-center justify-center my-7 mx-auto">
+                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px 0 1px #000C17;color: #ffac00;" aria-hidden="true"></i>
+                </a>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
+            </div>
+            <a class="join musora-gold smaller sm:mb-10" href="/choose-plan">Start your free trial today</a>
         </div>
             @if($page === 'songs')
                 @yield('header-img')

@@ -18,12 +18,12 @@ class InitializeMentors extends Command
     protected $signature = 'mentors:init';
     protected $description = 'Run to initialize mentor system';
 
-    public function handle(DatabaseManager        $databaseManager,
-                           MentorService          $mentorService,
-                           HelpScoutMentorService $helpScoutMentorService,
-                           HelpScoutUserService   $helpScoutUserService
-    ): bool
-    {
+    public function handle(
+        DatabaseManager        $databaseManager,
+        MentorService          $mentorService,
+        HelpScoutMentorService $helpScoutMentorService,
+        HelpScoutUserService   $helpScoutUserService
+    ): bool {
         $this->ensureMentorsCreated($databaseManager, $mentorService);
         $success = $this->ensureGuitareoSingeoMentorsAssigned($mentorService);
         if (!$success) {

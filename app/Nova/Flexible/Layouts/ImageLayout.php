@@ -35,15 +35,15 @@ class ImageLayout extends Layout
         $uuid  = Str::uuid();
 
         return [
-            Image::make('Image','path_file')
+            Image::make('Image', 'path_file')
                 ->disk('nova_s3')
                 ->prunable()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     return '/ImageSlides/'.$request->uuid.'-'.$request->file('path_file')->getClientOriginalName();
                 })
-                ->preview(function($value){
+                ->preview(function ($value) {
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://d1fyshwdvi6fth.cloudfront.net/'.$value;
                 }),
             Text::make('Image', 'path_text')->hideFromIndex()->hideFromDetail(),

@@ -40,7 +40,7 @@ class MarketingPagesProductsViewComposer
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         $productModel = Product::query()->select(['sku', 'price', 'discounted_price'])->where('sku', '!=', '')->where('sku', 'not like', '%products%')->get();
-        $productPrices = $productModel->mapWithKeys(function($item){
+        $productPrices = $productModel->mapWithKeys(function ($item) {
             return [$item['sku'] => $item];
         });
 

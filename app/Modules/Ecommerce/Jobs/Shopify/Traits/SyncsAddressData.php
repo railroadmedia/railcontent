@@ -83,7 +83,7 @@ trait SyncsAddressData
                         strtoupper($shopifyAddressData["country_name"])
                     ]
                 )
-                ){
+                ) {
                     $isDifferent = true;
                 }
                 $localAddressData["province"] = $localAddress->getRegion();
@@ -94,7 +94,7 @@ trait SyncsAddressData
                         strtoupper($shopifyAddressData["province"])
                     ]
                 )
-                ){
+                ) {
                     $isDifferent = true;
                 }
 

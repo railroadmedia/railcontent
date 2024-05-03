@@ -15,127 +15,90 @@ class CustomerIoApiGateway
      *
      * @param string $customerIoSiteId
      * @param string $customerIoTrackApiKey
-     * @param string $customerId
-     * @param string|null $emailAddress
-     * @param array $attributes
-     * @param null $createdAtTimestamp
+     * @param string $emailAddress
+     * @param string|null $customerId
+     * @param array|null $attributes
+     * @param int|null $createdAtTimestamp
      * @throws Exception
      */
     public function addOrUpdateCustomer(
-        $customerIoSiteId,
-        $customerIoTrackApiKey,
-        $customerId,
-        $emailAddress = null,
-        $attributes = [],
-        $createdAtTimestamp = null
-    ) {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/customers/' . $customerId);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $emailAddress,
+        ?string $customerId,
+        ?array $attributes = [],
+        ?int $createdAtTimestamp = null
+    ): void {
+        $url = 'https://track.customer.io/api/v1/customers/' . $emailAddress;
+        $method = 'PUT';
 
         $dataArray = $attributes;
 
-        if (!empty($emailAddress)) {
-            $dataArray['email'] = $emailAddress;
+        if (!empty($customerId)) {
+            $dataArray['id'] = $customerId;
         }
 
         if (!empty($createdAtTimestamp)) {
             $dataArray['created_at'] = $createdAtTimestamp;
         }
 
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            json_encode($dataArray)
-        );
-
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-        $headers = [];
-        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = json_decode(curl_exec($ch), true);
-
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io addOrUpdateCustomer api call failed: ' . curl_error($ch));
+        try {
+            $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
+        } catch (Exception $e) {
+            Log::error('CustomerIoApiGateway::addOrUpdateCustomer() failed: ' . $e->getMessage());
+            throw $e;
         }
-
-        // empty result means success for some reason...
-        if ($result !== []) {
-            throw new Exception('Customer.io addOrUpdateCustomer api call failed: ' . curl_error($ch));
-        }
-
-        curl_close($ch);
     }
 
     /**
      * @param string $customerIoAppApiKey
-     * @param string $customerId
+     * @param string $customerEmail
+     * @return mixed
+     * @throws Exception
      */
     public function getCustomer(
-        $customerIoAppApiKey,
-        $customerId
-    ) {
-        $ch = curl_init();
+        string $customerIoAppApiKey,
+        string $customerEmail
+    ): array {
+        $url = 'https://beta-api.customer.io/v1/api/customers/' . $customerEmail . '/attributes?id_type=email';
+        $method = 'GET';
 
-        curl_setopt($ch, CURLOPT_URL, 'https://beta-api.customer.io/v1/api/customers/' . $customerId . '/attributes');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-        $headers = [];
-        $headers[] = 'Authorization: Bearer ' . $customerIoAppApiKey;
-        $headers[] = 'Content-Type: application/json';
-        $headers[] = 'Accept: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $apiResponse = curl_exec($ch);
-
-        $result = json_decode($apiResponse);
-
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io api call failed: ' . curl_error($ch));
+        try {
+            $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', []);
+            if (!empty($result['errors']) || !isset($result['customer'])) {
+                throw new Exception('CustomerIoApiGateway::getCustomer() failed: ' . var_export($result, true), 404);
+            }
+            return $result['customer'];
+        } catch (Exception $e) {
+            Log::error('CustomerIoApiGateway::getCustomer() failed: ' . $e->getMessage());
+            throw $e;
         }
-
-        // empty result means success for some reason...
-        if (!empty($result->errors) || empty($result->customer)) {
-            throw new Exception(
-                'Customer.io api call failed: ' . curl_error($ch) . ' - ' . var_export($result, true),
-                404
-            );
-        }
-
-        curl_close($ch);
-
-        return $result->customer;
     }
 
     /**
-     * @param $customerIoSiteId
+     * @param string $customerIoSiteId
      * @param string $customerIoTrackApiKey
-     * @param string $customerId
+     * @param string $customerEmail
      * @param string $eventName
-     * @param array $eventData // key value pairs
-     * @param null $eventType
-     * @param null $createdAtTimestamp
+     * @param array|null $eventData // key value pairs
+     * @param string|null $eventType
+     * @param int|null $createdAtTimestamp
      * @return bool
      * @throws Exception
      */
     public function createEvent(
-        $customerIoSiteId,
-        $customerIoTrackApiKey,
-        $customerId,
-        $eventName,
-        $eventData = [],
-        $eventType = null,
-        $createdAtTimestamp = null
-    ) {
-        $url = 'https://track.customer.io/api/v1/customers/' . $customerId . '/events';
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $customerEmail,
+        string $eventName,
+        ?array $eventData = [],
+        ?string $eventType = null,
+        ?int $createdAtTimestamp = null
+    ): bool {
+        $url = 'https://track.customer.io/api/v1/customers/' . $customerEmail . '/events';
+        $method = 'POST';
 
         $dataArray = [
             'name' => $eventName,
@@ -153,174 +116,93 @@ class CustomerIoApiGateway
             $dataArray['timestamp'] = $createdAtTimestamp;
         }
 
-        $jsonBody = json_encode($dataArray);
-
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-        $headers = [];
-        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
-        $headers[] = 'Content-Type: application/json';
+        $result = $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
 
-        try {
-            $result = Http::withToken($authHeaderKey, 'Basic')
-                ->withHeaders($headers)
-                ->withBody($jsonBody, 'application/json')
-                ->post($url);
-
-            if (!$result->ok()) {
-                Log::error('customer.io api call failed. Request body: ' . var_export($dataArray, true));
-                throw new Exception(
-                    'Customer.io createEvent api call failed for ' . $url
-                        . ' - ' . $result->reason()
-                        . ' - Result: ' . var_export($result->json(), true)
-                        . ' - Request data: ' . $jsonBody,
-                    $result->status()
-                );
-            }
-
-            return true;
-        } catch (Exception $e) {
-            Log::error(
-                'Customer.io createEvent api call failed for ' . $url
-                    . ' - ' . $e->getMessage()
-                    . ' - Request data: ' . $jsonBody
-            );
-            throw $e;
+        // empty result means success for some reason...
+        if ($result !== []) {
+            throw new Exception('CustomerIoApiGateway::createEvent() api call failed: ' . var_export($result, true));
         }
+
+        return true;
     }
 
     /**
      * https://customer.io/docs/api/#operation/getPersonActivities
      *
      * @param string $customerIoAppApiKey
-     * @param string $customerId
+     * @param string $customerEmail
+     * @param string|null $type
+     * @param string|null $name
+     * @param int|null $limit
+     * @param string|null $startToken
+     * @return mixed
+     * @throws Exception
      */
     public function getCustomerActivities(
-        $customerIoAppApiKey,
-        $customerId,
-        $type = null,
-        $name = null,
-        $limit = 10,
-        $startToken = null
-    ) {
-        $ch = curl_init();
+        string $customerIoAppApiKey,
+        string $customerEmail,
+        ?string $type = null,
+        ?string $name = null,
+        ?int $limit = 10,
+        ?string $startToken = null
+    ): array {
+        $params = $this->createActivitiesQueryParams($type, $name, $limit, $startToken);
 
-        $params = [];
-
-        if (!empty($type)) {
-            $params['type'] = $type;
-        }
-        if (!empty($name)) {
-            $params['name'] = $name;
-        }
-        if (!empty($limit)) {
-            $params['limit'] = $limit;
-        }
-        if (!empty($startToken)) {
-            $params['start'] = $startToken;
-        }
+        $params['id_type'] = 'email';
 
         $paramsString = http_build_query($params);
 
-        curl_setopt(
-            $ch,
-            CURLOPT_URL,
-            'https://beta-api.customer.io/v1/api/customers/' . $customerId . '/activities?' . $paramsString
-        );
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        $url = 'https://beta-api.customer.io/v1/api/customers/' . $customerEmail . '/activities?' . $paramsString;
+        $method = 'GET';
 
-        $headers = [];
-        $headers[] = 'Authorization: Bearer ' . $customerIoAppApiKey;
-        $headers[] = 'Content-Type: application/json';
-        $headers[] = 'Accept: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $apiResponse = curl_exec($ch);
-
-        $result = json_decode($apiResponse);
-
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io getCustomerActivities api call failed: ' . curl_error($ch));
-        }
+        $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', []);
 
         // empty result means success for some reason...
-        if (!empty($result->errors)) {
+        if (!empty($result['errors'])) {
             throw new Exception(
-                'Customer.io getCustomerActivities api call failed: ' .
-                    curl_error($ch) .
-                    ' - ' .
-                    var_export($result, true),
+                'CustomerIoApiGateway::getCustomerActivities() api call failed: ' . var_export($result, true),
                 404
             );
         }
 
-        curl_close($ch);
-
-        return $result->activities;
+        return $result['activities'];
     }
 
     /**
      * @param string $customerIoAppApiKey ,
      * @param string $customerIoTransactionalMessageId
      * @param string $customerEmail
-     * @param string $customerId
-     * @param array $messageDataArray
+     * @param array|null $messageDataArray
      * @return bool
      * @throws Exception
      */
     public function sendTransactionalEmail(
-        $customerIoAppApiKey,
-        $customerIoTransactionalMessageId,
-        $customerEmail,
-        $customerId,
-        $messageDataArray = []
-    ) {
-        $ch = curl_init();
+        string $customerIoAppApiKey,
+        string $customerIoTransactionalMessageId,
+        string $customerEmail,
+        ?array $messageDataArray = []
+    ): bool {
+        $url = 'https://api.customer.io/v1/send/email';
+        $method = 'POST';
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.customer.io/v1/send/email');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-
-        $jonDataArray = [
+        $dataArray = [
             'to' => $customerEmail,
             'transactional_message_id' => $customerIoTransactionalMessageId,
             'message_data' => $messageDataArray,
             'identifiers' => [
-                'id' => $customerId,
+                'email' => $customerEmail,
             ],
         ];
 
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            json_encode($jonDataArray)
-        );
+        $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', [], $dataArray);
 
-        $headers = [];
-        $headers[] = 'Authorization: Bearer ' . $customerIoAppApiKey;
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $rawResult = curl_exec($ch);
-        $jsonResult = json_decode($rawResult, true);
-
-        if (curl_errno($ch)) {
+        if (empty($result['delivery_id'])) {
             throw new Exception(
-                'Customer.io sendTransactionalEmail api call failed: ' . curl_error($ch) . ' - Result: ' . $rawResult
+                'CustomerIoApiGateway::sendTransactionalEmail() api call failed: ' . var_export($result, true)
             );
         }
-
-        // empty result means success for some reason...
-        if (empty($jsonResult['delivery_id'])) {
-            throw new Exception(
-                'Customer.io sendTransactionalEmail api call failed: ' . curl_error($ch) . ' - Result: ' . $rawResult
-            );
-        }
-
-        curl_close($ch);
 
         return true;
     }
@@ -329,27 +211,22 @@ class CustomerIoApiGateway
      * Customers can have more than one device.
      * This method adds iOS and Android devices, or updates devices for, a customer profile.
      *
-     * @param $customerIoSiteId
-     * @param $customerIoTrackApiKey
-     * @param $customerId
-     * @param $deviceID
-     * @param $platform
-     * @param null $createdAtTimestamp
+     * @param string $customerIoSiteId
+     * @param string $customerIoTrackApiKey
+     * @param string $customerEmail
+     * @param array $deviceData
+     * @param int|null $createdAtTimestamp
      * @throws Exception
      */
     public function addOrUpdateCustomerDevice(
-        $customerIoSiteId,
-        $customerIoTrackApiKey,
-        $customerId,
-        $deviceData,
-        $createdAtTimestamp = null
-    ) {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/customers/' . $customerId . '/devices');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $customerEmail,
+        array $deviceData,
+        ?int $createdAtTimestamp = null
+    ): void {
+        $url = 'https://track.customer.io/api/v1/customers/' . $customerEmail . '/devices';
+        $method = 'PUT';
 
         $dataArray['device'] = $deviceData;
 
@@ -357,126 +234,81 @@ class CustomerIoApiGateway
             $dataArray['device']['last_used'] = $createdAtTimestamp;
         }
 
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            json_encode($dataArray)
-        );
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-        $headers = [];
-        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = json_decode(curl_exec($ch), true);
-
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io addOrUpdateCustomerDevice api call failed: ' . curl_error($ch));
-        }
+        $result = $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
 
         // empty result means success for some reason...
         if ($result !== []) {
-            throw new Exception('Customer.io addOrUpdateCustomerDevice api call failed: ' . curl_error($ch));
+            throw new Exception(
+                'CustomerIoApiGateway::addOrUpdateCustomerDevice() api call failed: ' . var_export($result, true)
+            );
         }
-
-        curl_close($ch);
     }
 
     /**
      * https://customer.io/docs/merge-people/
      *
-     * @param $customerIoSiteId
-     * @param $customerIoTrackApiKey
-     * @param $primaryCustomerId
-     * @param $secondaryCustomerId
+     * @param string $customerIoSiteId
+     * @param string $customerIoTrackApiKey
+     * @param string $primaryCustomerEmail
+     * @param string $secondaryCustomerEmail
      * @return bool
      * @throws Exception
      */
     public function mergeCustomers(
-        $customerIoSiteId,
-        $customerIoTrackApiKey,
-        $primaryCustomerId,
-        $secondaryCustomerId
-    ) {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/merge_customers');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $primaryCustomerEmail,
+        string $secondaryCustomerEmail
+    ): bool {
+        $url = 'https://track.customer.io/api/v1/merge_customers';
+        $method = 'POST';
 
         $dataArray = [
-            'primary' => ['id' => $primaryCustomerId],
-            'secondary' => ['id' => $secondaryCustomerId],
+            'primary' => ['email' => $primaryCustomerEmail],
+            'secondary' => ['email' => $secondaryCustomerEmail],
         ];
-
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            json_encode($dataArray)
-        );
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
-        $headers = [];
-        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $result = $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
 
-        $result = json_decode(curl_exec($ch), true);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        if (curl_errno($ch) || $httpCode !== 200) {
-            throw new Exception(
-                'Customer.io mergeCustomers api call failed: ' . curl_error($ch) .
-                    ' - http code: ' . $httpCode
-            );
-        }
-
-        // empty result means success for some reason...
         if ($result !== []) {
-            throw new Exception('Customer.io mergeCustomers api call failed: ' . curl_error($ch));
+            throw new Exception('CustomerIoApiGateway::mergeCustomers() api call failed: ' . var_export($result, true));
         }
-
-        curl_close($ch);
 
         return true;
     }
 
 
+    /**
+     * @param string $customerIoSiteId
+     * @param string $customerIoTrackApiKey
+     * @param string $customerEmail
+     * @return void
+     * @throws Exception
+     */
     public function deleteCustomer(
-        $customerIoSiteId,
-        $customerIoTrackApiKey,
-        $customerId
-    ) {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/customers/' . $customerId);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $customerEmail
+    ): void {
+        $url = 'https://track.customer.io/api/v1/customers/' . $customerEmail;
+        $method = 'DELETE';
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 
         $headers = [];
         $headers[] = 'Authorization: Basic ' . $authHeaderKey;
         $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result = json_decode(curl_exec($ch), true);
+        $result = $this->executeRequest($url, $method, $authHeaderKey, 'Basic', $headers);
 
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io deleteCustomer api call failed: ' . curl_error($ch));
-        }
-
-        // empty result means success for some reason...
         if ($result !== []) {
-            throw new Exception('Customer.io deleteCustomer api call failed: ' . curl_error($ch));
+            throw new Exception('CustomerIoApiGateway::deleteCustomer() api call failed: ' . var_export($result, true));
         }
-
-        curl_close($ch);
     }
 
     /**
@@ -485,7 +317,7 @@ class CustomerIoApiGateway
      * @param string|null $name
      * @param int|null $limit
      * @param string|null $startToken
-     * @return mixed
+     * @return array
      * @throws Exception
      */
     public function getActivities(
@@ -494,9 +326,123 @@ class CustomerIoApiGateway
         ?string $name = null,
         ?int $limit = 10,
         ?string $startToken = null
-    ): mixed {
-        $ch = curl_init();
+    ): array {
+        $params = $this->createActivitiesQueryParams($type, $name, $limit, $startToken);
 
+        $paramsString = http_build_query($params);
+
+        $url = 'https://beta-api.customer.io/v1/api/activities?' . $paramsString;
+        $method = 'GET';
+
+        $result = $this->executeRequest($url, $method, $customerIoAppApiKey, 'Bearer', []);
+
+        if (!$result['errors']) {
+            throw new Exception(
+                'CustomerIoApiGateway::getActivities() api call failed: ' . var_export($result, true),
+                404
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function addProfilesToSegment(
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        int $segmentId,
+        array $customerIds,
+    ): void {
+        $url = 'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id';
+        $method = 'POST';
+
+        $dataArray = [
+            'ids' => array_values($customerIds),
+        ];
+
+        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        $result = $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
+
+        if ($result !== []) {
+            throw new Exception(
+                'CustomerIoApiGateway::addProfilesToSegment() api call failed: ' . var_export($result, true)
+            );
+        }
+    }
+
+    /**
+     * @param string $url
+     * @param string $method
+     * @param string $authToken
+     * @param string $authStrategy
+     * @param array|null $headers
+     * @param array|null $dataArray
+     * @return array
+     * @throws Exception
+     */
+    public function executeRequest(
+        string $url,
+        string $method,
+        string $authToken,
+        string $authStrategy,
+        ?array $headers = [],
+        ?array $dataArray = []
+    ): array {
+        $result = null;
+
+        $body = json_encode($dataArray);
+        try {
+            $request = Http::withHeaders($headers)->withToken($authToken, $authStrategy);
+
+            $result = match ($method) {
+                'GET' => $request->accept('application/json')->get($url),
+                'PUT' => $request->withBody($body, 'application/json')->put($url),
+                'POST' => $request->withBody($body, 'application/json')->post($url),
+                'DELETE' => $request->delete($url)
+            };
+        } catch (Exception $e) {
+            Log::error(
+                'CustomerIoApiGateway::executeRequest: exception while reaching: ' . $url
+                    . ' - ' . $e->getMessage()
+                    . ' - Request payload: ' . $body
+            );
+            Log::debug(print_r($e->getTrace(), true));
+            throw $e;
+        }
+
+        $response = $result->json();
+
+        if (!$result->ok()) {
+            Log::error(
+                'CustomerIoApiGateway::executeRequest() api call failed: ' . $url
+                    . ' - ' . $result->reason()
+                    . ' - Result: ' . var_export($result->json(), true)
+                    . ' - Request data: ' . $body,
+            );
+            throw new Exception(
+                'CustomerIoApiGateway::executeRequest() api call failed: ' . $url
+                    . ' - ' . $result->reason()
+                    . ' - Result: ' . var_export($result->json(), true)
+                    . ' - Request data: ' . $body,
+                $result->status()
+            );
+        }
+
+        return $response ?? [];
+    }
+
+    /**
+     * @param string|null $type
+     * @param string|null $name
+     * @param int|null $limit
+     * @param string|null $startToken
+     * @return array
+     */
+    public function createActivitiesQueryParams(?string $type, ?string $name, ?int $limit, ?string $startToken): array
+    {
         $params = [];
 
         if (!empty($type)) {
@@ -511,93 +457,6 @@ class CustomerIoApiGateway
         if (!empty($startToken)) {
             $params['start'] = $startToken;
         }
-
-        $paramsString = http_build_query($params);
-
-        curl_setopt(
-            $ch,
-            CURLOPT_URL,
-            'https://beta-api.customer.io/v1/api/activities?' . $paramsString
-        );
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-        $headers = [];
-        $headers[] = 'Authorization: Bearer ' . $customerIoAppApiKey;
-        $headers[] = 'Content-Type: application/json';
-        $headers[] = 'Accept: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $apiResponse = curl_exec($ch);
-
-        $result = json_decode($apiResponse);
-
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io getCustomerActivities api call failed: ' . curl_error($ch));
-        }
-
-        // empty result means success for some reason...
-        if (!empty($result->errors)) {
-            throw new Exception(
-                'Customer.io getCustomerActivities api call failed: ' .
-                    curl_error($ch) .
-                    ' - ' .
-                    var_export($result, true),
-                404
-            );
-        }
-
-        curl_close($ch);
-
-        return $result;
-    }
-
-    public function addProfilesToSegment(
-        string $customerIoSiteId,
-        string $customerIoTrackApiKey,
-        int $segmentId,
-        array $customerIds,
-    ): void {
-        $ch = curl_init();
-
-        curl_setopt(
-            $ch,
-            CURLOPT_URL,
-            'https://track.customer.io/api/v1/segments/' . $segmentId . '/add_customers?id_type=id'
-        );
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-
-        $dataArray = [
-            'ids' => array_values($customerIds),
-        ];
-
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            json_encode($dataArray)
-        );
-
-        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
-
-        $headers = [];
-        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = json_decode(curl_exec($ch), true);
-
-        if (curl_errno($ch)) {
-            throw new Exception('Customer.io addProfilesToSegment api call failed: ' . curl_error($ch));
-        }
-
-        // empty result means success for some reason...
-        if ($result !== []) {
-            throw new Exception('Customer.io addProfilesToSegment api call failed: ' . curl_error($ch));
-        }
-
-        curl_close($ch);
+        return $params;
     }
 }

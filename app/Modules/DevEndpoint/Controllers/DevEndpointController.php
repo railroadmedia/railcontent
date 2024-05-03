@@ -18,7 +18,6 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\RecommendationService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-
 class DevEndpointController extends Controller
 {
     use AuthorizesRequests;
@@ -29,27 +28,27 @@ class DevEndpointController extends Controller
     public function __construct(
         private RecommendationService $recommendationService,
         private ContentService $contentService,
-    )
-    { }
+    ) {
+    }
 
-    public function handleRequest(Request $request, $arg1=null)
+    public function handleRequest(Request $request, $arg1 = null)
     {
         $results = [
-            'drumeo' => $this->recommendationService->getFilteredRecommendations($arg1,'drumeo'),
-            'singeo' => $this->recommendationService->getFilteredRecommendations($arg1,'singeo'),
-            'pianote' => $this->recommendationService->getFilteredRecommendations($arg1,'pianote'),
-            'guitareo' => $this->recommendationService->getFilteredRecommendations($arg1,'guitareo'),
+            'drumeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'drumeo'),
+            'singeo' => $this->recommendationService->getFilteredRecommendations($arg1, 'singeo'),
+            'pianote' => $this->recommendationService->getFilteredRecommendations($arg1, 'pianote'),
+            'guitareo' => $this->recommendationService->getFilteredRecommendations($arg1, 'guitareo'),
         ];
         dd($results);
-        return $this->recommendationService->getFilteredRecommendations(1111,'pianote', RecommenderSection::Course);
+        return $this->recommendationService->getFilteredRecommendations(1111, 'pianote', RecommenderSection::Course);
         $this->testRandomization();
         dd("hello from the playground");
     }
 
     private function testAPIEndpoints()
     {
-        $inputs = array_map(function($endpoint) {return $endpoint->value;}, APIEndPoint::cases());
-        $callback = function($endpoint) {
+        $inputs = array_map(function ($endpoint) {return $endpoint->value;}, APIEndPoint::cases());
+        $callback = function ($endpoint) {
             $this->recommendationService->APIEndPoint = $endpoint;
             $userIDs = [579297,648632, 149869, 150909, 152882];
             $randomize = false;
@@ -69,14 +68,15 @@ class DevEndpointController extends Controller
         ];
         $userID = 631736;
         $brand = 'drumeo';
-        $callback = function($sections) use ($userID, $brand) {
+        $callback = function ($sections) use ($userID, $brand) {
             return $this->contentService->getRecommendedContent($userID, $brand, $sections);
         };
         $results = $this->timeEvent($callback, $inputSections, 1, 0);
         return $results;
     }
 
-    private function testBulkRecommendation() {
+    private function testBulkRecommendation()
+    {
 
         $userIDs = [648632, 149869, 150909, 152882];
         $brand = 'SINGEO';
@@ -84,12 +84,13 @@ class DevEndpointController extends Controller
         dd($results);
     }
 
-    private function testingForRecommendationSystem() {
+    private function testingForRecommendationSystem()
+    {
 
         $brand = 'drumeo';
         $section = RecommenderSection::Song;
         $ids = ['579297', '1114', '149628', '149643', '111'];
-        $callback = function($id) use ($brand, $section) {
+        $callback = function ($id) use ($brand, $section) {
             return $this->recommendationService->getFilteredRecommendations($id, $brand, $section);
         };
         $timeResults = $this->timeEvent($callback, $ids, 2, 1);
@@ -101,7 +102,7 @@ class DevEndpointController extends Controller
 
     // ----------------------------------- UTILITY FUNCTIONS ------------------------------------------
 
-    private function timeEvent($callback, $inputs, $numAttempts=1, $delay=1, $transposeResults=true)
+    private function timeEvent($callback, $inputs, $numAttempts = 1, $delay = 1, $transposeResults = true)
     {
         $timeResults = [];
         foreach(array_keys($inputs) as $key) {
@@ -139,4 +140,3 @@ class DevEndpointController extends Controller
         return $timeResults;
     }
 }
-

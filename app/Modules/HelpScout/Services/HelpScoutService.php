@@ -14,7 +14,6 @@ use HelpScout\Api\Entity\PagedCollection;
 
 class HelpScoutService extends HelpScoutServiceBase
 {
-
     /**
      * @param int $userId
      * @param string $firstName

@@ -37,7 +37,7 @@ class PictureUploadController extends Controller
             ->save();
 
         $target = $fieldKey . "/" . pathinfo($request->get('target'))['filename'] . '-' . time() . '-' . user(
-            )->id . '.jpg';
+        )->id . '.jpg';
 
         $success = Storage::disk('musora_web_platform_s3')->put($target, $image->getEncoded());
 

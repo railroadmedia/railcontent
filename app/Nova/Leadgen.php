@@ -65,64 +65,62 @@ class Leadgen extends Resource
                 ->hideFromIndex()
                 ->disableDownload()
                 ->deletable(false)
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/Lead-gens/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             //To display in the index page
-            Text::make('Index Slug','slug', function(){
+            Text::make('Index Slug', 'slug', function () {
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).'/'.$this->slug.'">'.$this->slug.'</a>';
             })->asHtml()->hideWhenCreating()->hideWhenUpdating(),
             Text::make('Index Slug', 'slug')->hideFromIndex()->hideFromDetail(),
-            Boolean::make('Lesson tile/grid view','index_tile_view')->default(true)->help('If unchecked, the lessons will be displayed in a grid view.')->hideFromIndex(),
+            Boolean::make('Lesson tile/grid view', 'index_tile_view')->default(true)->help('If unchecked, the lessons will be displayed in a grid view.')->hideFromIndex(),
             Image::make('logo')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->disableDownload()
                 ->deletable(false)
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/Lead-gens/Logos/'.$request->uuid.'-'.$request->file('logo')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -133,27 +131,26 @@ class Leadgen extends Resource
                 ->hideFromIndex()
                 ->disableDownload()
                 ->deletable(false)
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/Lead-gens/Background-images/'.$request->uuid.'-'.$request->file('bg_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),

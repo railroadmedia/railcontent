@@ -9,7 +9,8 @@ class OrderCreatedEventTrackingJob extends WebhookChildJob
 {
     public function __construct(
         private $contents,
-    ) {}
+    ) {
+    }
 
     public function handle(EventTrackingService $eventTrackingService): void
     {

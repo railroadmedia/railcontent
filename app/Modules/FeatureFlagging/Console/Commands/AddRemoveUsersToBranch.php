@@ -13,9 +13,6 @@ use function PHPUnit\Framework\isNull;
 
 class AddRemoveUsersToBranch extends Command
 {
-
-
-
     protected $signature = 'featureFlag:addRemoveUsersToBranch
                             {name : The name of the branch to add or remove users to/from}
                             {userids : comma-separated list of user IDs to add or remove}
@@ -30,7 +27,7 @@ class AddRemoveUsersToBranch extends Command
         $userIds = $this->argument('userids');
         $add = $this->option('add');
         $remove = $this->option('remove');
-        if (!($add XOR $remove)) {
+        if (!($add xor $remove)) {
             $this->error("Only one of --add or --remove must be included");
             return;
         }

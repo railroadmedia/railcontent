@@ -54,7 +54,7 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     protected CustomerRepository $customerRepository;
@@ -96,7 +96,7 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
 
             // find any of our Customers with the same email address
             $customers = $this->getCustomersForEmail($email);
-            if ($customers->isEmpty()){
+            if ($customers->isEmpty()) {
                 $this->logError(sprintf("%s: No customers found with email address %s ... even though it's the".
                     " email address of a customer...?", $this->getClassName(), $email));
                 return;
@@ -149,15 +149,15 @@ class BulkCustomerCreateFromCustomers implements ShouldQueue
     protected function createAddressesData(Collection $customers): Collection
     {
         $addresses = collect();
-        $customers->each(fn(Customer $customer) => $addresses->push(
+        $customers->each(fn (Customer $customer) => $addresses->push(
             ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
         ));
 
         $addresses = $this->cleanUpAddresses($addresses);
 
         $addressData = collect();
-        $addresses->each(function($addressArray) use ($addressData) {
-            $addressData->push ($addressArray);
+        $addresses->each(function ($addressArray) use ($addressData) {
+            $addressData->push($addressArray);
         });
 
         return $addressData;

@@ -6,8 +6,7 @@ class UserSignatureDecorator
 {
     public function decorate($posts)
     {
-        foreach($posts as $post)
-        {
+        foreach($posts as $post) {
             $domain = config('app.url');
             $url = str_replace(
                 [

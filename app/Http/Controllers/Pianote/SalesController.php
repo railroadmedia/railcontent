@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use function App\Http\Controllers\Drumeo\array_entity_column;
 
 class SalesController extends BaseController
@@ -244,7 +245,7 @@ class SalesController extends BaseController
     }
     public function metronomePrestige()
     {
-        return view('pianote.products.prestige-metronome', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.products.prestige-metronome', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
     public function christmasSongbook()
     {
@@ -272,7 +273,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.new-piano-players', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -287,7 +288,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.easy-chords', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -302,7 +303,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.30-day-blues-piano', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -348,14 +349,14 @@ class SalesController extends BaseController
 
     public function betterTechnique()
     {
-        $productId = 740;
+        $productId = 843;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.30-days-to-better-technique', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,

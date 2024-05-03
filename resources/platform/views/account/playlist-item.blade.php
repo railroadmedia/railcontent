@@ -14,62 +14,63 @@
     $contentBreadCrumb = new stdClass();
     if(!empty($lessonContent->fetch('*fields.instructor')) ||
         !empty($lessonContent->fetch('data.description')) ||
-        !empty($lessonContent['chapters'])){
-
-            if(!empty($lessonContent['parent'])){
-                if(str_contains($lessonContent['parent']->fetch('type'),'learning-path')) {
-                    if($brand === 'drumeo'){
-                        $contentBreadCrumb->firstLevelUrl = '/drumeo/method/drumeo-method/241247';
-                    }
-                    else if($brand === 'pianote'){
-                        $contentBreadCrumb->firstLevelUrl = '/pianote/method/pianote-method/276693';
-                    }
-                    else if($brand === 'guitareo'){
-                        $contentBreadCrumb->firstLevelUrl = '/guitareo/method/guitareo-method/333652';
-                    }
-                    else if($brand === 'singeo'){
-                        $contentBreadCrumb->firstLevelUrl = '/singeo/method/singeo-method/308514';
-                    }
-                    $contentBreadCrumb->firstLevelTitle = $brand.' Method';
+        !empty($lessonContent['chapters']) || 
+        $lessonContent->fetch('type') === 'assignment'
+    ){
+        if(!empty($lessonContent['parent'])){
+            if(str_contains($lessonContent['parent']->fetch('type'),'learning-path')) {
+                if($brand === 'drumeo'){
+                    $contentBreadCrumb->firstLevelUrl = '/drumeo/method/drumeo-method/241247';
                 }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'pack-bundle')){
-                    $contentBreadCrumb->firstLevelUrl = url()->route('platform.packs');
-                    $contentBreadCrumb->firstLevelTitle = 'Packs';
+                else if($brand === 'pianote'){
+                    $contentBreadCrumb->firstLevelUrl = '/pianote/method/pianote-method/276693';
                 }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'course-part')){
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", 'courses');
-                    $contentBreadCrumb->firstLevelTitle = 'Course';
+                else if($brand === 'guitareo'){
+                    $contentBreadCrumb->firstLevelUrl = '/guitareo/method/guitareo-method/333652';
                 }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'challenge')){
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
-                    $contentBreadCrumb->firstLevelTitle = 'Challenges';
+                else if($brand === 'singeo'){
+                    $contentBreadCrumb->firstLevelUrl = '/singeo/method/singeo-method/308514';
                 }
-                else if(str_contains($lessonContent['parent']->fetch('type'),'unit')){
-                    $contentBreadCrumb->firstLevelUrl = '/pianote/method/foundations-2019/215952';
-                    $contentBreadCrumb->firstLevelTitle = 'Pianote Foundations';
-                }else {
-                    $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]);
-                    $contentBreadCrumb->firstLevelTitle = $lessonContent['parent']->fetch('type');
-                }
-
-                $contentBreadCrumb->secondLevelUrl = $lessonContent['parent']->fetch('url');
-                $contentBreadCrumb->secondLevelTitle = $lessonContent['parent']->fetch('fields.title');
-                $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+                $contentBreadCrumb->firstLevelTitle = $brand.' Method';
             }
-            elseif($lessonContent->fetch('type') === 'coach-stream') {
-                $instructor = $lessonContent->fetch('*fields.instructor')[0] ?? null;
-                $contentBreadCrumb->firstLevelUrl = url()->route("platform.coaches");
-                $contentBreadCrumb->firstLevelTitle = 'Coaches';
-                if($instructor) {
-                    $contentBreadCrumb->secondLevelUrl = url()->route("platform.content.coach.show",['firstContentSlug' => $instructor->fetch('slug'), 'firstContentId' => $instructor->fetch('id')]);
-                    $contentBreadCrumb->secondLevelTitle = $instructor->fetch('fields.name');
-                }
-                $contentBreadCrumb->lastLevelTitle = $lessonContent->fetch('title');
+            else if(str_contains($lessonContent['parent']->fetch('type'),'pack-bundle')){
+                $contentBreadCrumb->firstLevelUrl = url()->route('platform.packs');
+                $contentBreadCrumb->firstLevelTitle = 'Packs';
+            }
+            else if(str_contains($lessonContent['parent']->fetch('type'),'course-part')){
+                $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", 'courses');
+                $contentBreadCrumb->firstLevelTitle = 'Course';
+            }
+            else if(str_contains($lessonContent['parent']->fetch('type'),'challenge')){
+                $contentBreadCrumb->firstLevelUrl = url()->route("platform.workouts.challenges");
+                $contentBreadCrumb->firstLevelTitle = 'Challenges';
+            }
+            else if(str_contains($lessonContent['parent']->fetch('type'),'unit')){
+                $contentBreadCrumb->firstLevelUrl = '/pianote/method/foundations-2019/215952';
+                $contentBreadCrumb->firstLevelTitle = 'Pianote Foundations';
             }else {
-                $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
-                $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
-                $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+                $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]);
+                $contentBreadCrumb->firstLevelTitle = $lessonContent['parent']->fetch('type');
             }
+
+            $contentBreadCrumb->secondLevelUrl = $lessonContent['parent']->fetch('url');
+            $contentBreadCrumb->secondLevelTitle = $lessonContent['parent']->fetch('fields.title');
+            $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+        }
+        else if($lessonContent->fetch('type') === 'coach-stream') {
+            $instructor = $lessonContent->fetch('*fields.instructor')[0] ?? null;
+            $contentBreadCrumb->firstLevelUrl = url()->route("platform.coaches");
+            $contentBreadCrumb->firstLevelTitle = 'Coaches';
+            if($instructor) {
+                $contentBreadCrumb->secondLevelUrl = url()->route("platform.content.coach.show",['firstContentSlug' => $instructor->fetch('slug'), 'firstContentId' => $instructor->fetch('id')]);
+                $contentBreadCrumb->secondLevelTitle = $instructor->fetch('fields.name');
+            }
+            $contentBreadCrumb->lastLevelTitle = $lessonContent->fetch('title');
+        } else {
+            $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
+            $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+            $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+        }
     }
 
 @endphp
@@ -139,7 +140,7 @@
         subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
         :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
-        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) || $lessonContent->fetch('type') === 'assignment' }}"
         :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
         :content-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
         :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"

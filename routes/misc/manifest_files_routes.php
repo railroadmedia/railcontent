@@ -28,5 +28,3 @@ Route::middleware('cache.headers:public;max_age=7200')->get(
     '/favicons/{brand}/site.webmanifest',
     ManifestFilesController::class . '@brandManifestFile'
 );
-
-

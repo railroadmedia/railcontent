@@ -33,11 +33,10 @@ class ResetPassword extends ResetPasswordBase
     {
         $user = User::where('email', request('email'))->first();
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Musora Account Password Reset Link')
             ->view(
                 'user-management-system::emails.general-email',
-
                 [
                     'input' => [
                         'line-one' => "We've received a request to reset your password. To reset your password, click the button below. ",

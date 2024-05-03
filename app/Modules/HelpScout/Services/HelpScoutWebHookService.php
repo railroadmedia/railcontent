@@ -38,7 +38,8 @@ class HelpScoutWebHookService
 
         $webHook = new Webhook();
         $secret = config('helpscout.webhook_secret');
-        $webHook->hydrate([
+        $webHook->hydrate(
+            [
                 "url" => $url,
                 "events" => $events,
                 "secret" => $secret,

@@ -2,7 +2,6 @@
 
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
-
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;

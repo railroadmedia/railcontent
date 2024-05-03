@@ -34,7 +34,7 @@ return [
     'cache_duration' => 60 * 60 * 24 * 2, // 2 days
     'batch_prefix' => env('RAILTRACKER_BATCH_PREFIX', 'railtracker4_mwp_'),
 
-    'exclusion_regex_paths'=> [
+    'exclusion_regex_paths' => [
         '/members\/live\-poll/',
         '/members\/user\-video\-session\/store/',
         '/railtracker\/media\-playback\-sessions*/',

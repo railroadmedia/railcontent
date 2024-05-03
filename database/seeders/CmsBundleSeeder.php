@@ -705,7 +705,7 @@ Once you grab The Unlimited Lessons Bundle, you’ll never have to worry about h
 //            ],
         ];
 
-        foreach($products as $product){
+        foreach($products as $product) {
             $newProduct = Product::create([
                 'brand_id' => $product['brand'],
                 'product_type_id' => $product['product_type_id'],
@@ -727,7 +727,7 @@ Once you grab The Unlimited Lessons Bundle, you’ll never have to worry about h
                 'spread_img' => empty($product['spread']) ? null : $product['spread'],
             ]);
 
-            foreach($product['images'] as $key => $image){
+            foreach($product['images'] as $key => $image) {
                 Image::create([
                     'product_id' => $newProduct->id,
                     'path' => $image,
@@ -735,11 +735,10 @@ Once you grab The Unlimited Lessons Bundle, you’ll never have to worry about h
                 ]);
             }
 
-            foreach($product['products'] as $key => $bundle){
-                if(!empty($bundle['mix']) && $bundle['mix']){
+            foreach($product['products'] as $key => $bundle) {
+                if(!empty($bundle['mix']) && $bundle['mix']) {
                     $product_id = Product::where('name', '=', $bundle['name'])->first()->id;
-                }
-                else {
+                } else {
                     $product_id = Product::where('name', '=', $bundle['name'])->where('brand_id', '=', $product['brand'])->first()->id;
                 }
 

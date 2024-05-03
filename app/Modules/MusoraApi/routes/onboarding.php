@@ -11,49 +11,57 @@ Route::as('musora-api.')
             ->name('v1.onboarding.started');
 
         Route::post(
-            '/v1/onboarding/about-completed', [OnboardingController::class, 'aboutStepCompleted']
+            '/v1/onboarding/about-completed',
+            [OnboardingController::class, 'aboutStepCompleted']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.about_completed');
 
         Route::post(
-            '/v1/onboarding/gears', [OnboardingController::class, 'gears']
+            '/v1/onboarding/gears',
+            [OnboardingController::class, 'gears']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.gears');
 
         Route::post(
-            '/v1/onboarding/topics', [OnboardingController::class, 'topics']
+            '/v1/onboarding/topics',
+            [OnboardingController::class, 'topics']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.topics');
 
         Route::post(
-            '/v1/onboarding/genres', [OnboardingController::class, 'genres']
+            '/v1/onboarding/genres',
+            [OnboardingController::class, 'genres']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.genres');
 
         Route::post(
-            '/v1/onboarding/experience', [OnboardingController::class, 'experience']
+            '/v1/onboarding/experience',
+            [OnboardingController::class, 'experience']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.experience');
 
         Route::post(
-            '/v1/onboarding/goals', [OnboardingController::class, 'goals']
+            '/v1/onboarding/goals',
+            [OnboardingController::class, 'goals']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.goals');
 
         Route::get(
-            '/v1/onboarding/saved-answers', [OnboardingController::class, 'getUserOnboardingInformation']
+            '/v1/onboarding/saved-answers',
+            [OnboardingController::class, 'getUserOnboardingInformation']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.saved_answers');
 
         Route::post(
-            '/v1/onboarding/skip-account-setup', [OnboardingController::class, 'skipAccountSetup']
+            '/v1/onboarding/skip-account-setup',
+            [OnboardingController::class, 'skipAccountSetup']
         )
             ->middleware('api_version:v1')
             ->name('v1.onboarding.skip');

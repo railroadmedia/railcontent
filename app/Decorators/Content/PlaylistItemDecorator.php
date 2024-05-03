@@ -113,7 +113,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $resources = [];
-            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1') {
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
 
@@ -152,19 +152,19 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $grupedPermissions[$content['id']]->pluck('permission_id')
                             ->toArray() : []
                 )
-                ) && (isset($grupedPermissions[$content['id']]));
+            ) && (isset($grupedPermissions[$content['id']]));
 
             $needLifetime = (count($grupedPermissions[$content['id']] ?? []) == 1) && array_intersect(
-                    [
+                [
                         'Drumeo Lifetime Member',
                         'Pianote Lifetime Member',
                         'Guitareo Lifetime Member',
                         'Singeo Lifetime Member',
                     ],
-                    (isset($grupedPermissions[$content['id']])) ?
+                (isset($grupedPermissions[$content['id']])) ?
                         $grupedPermissions[$content['id']]->pluck('name')
                             ->toArray() : []
-                );
+            );
             $needMusoraBasic = array_intersect(
                 ['Musora Basic Membership'],
                 (isset($grupedPermissions[$content['id']])) ?
@@ -189,7 +189,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['need_access_message'] = $message;
             }
 
-            if(ContentRepository::$bypassPermissions === true){
+            if(ContentRepository::$bypassPermissions === true) {
                 $contentsOfType[$contentIndex]['need_access'] = false;
                 $contentsOfType[$contentIndex]['need_access_message'] = '';
             }
@@ -304,7 +304,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
                         $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$content['id']]]))
                             ->first();
-                        $resources = array_merge($contentsOfType[$contentIndex]['resources']??[], $contentsOfType[$contentIndex]['parent']['resources']??[]);
+                        $resources = array_merge($contentsOfType[$contentIndex]['resources'] ?? [], $contentsOfType[$contentIndex]['parent']['resources'] ?? []);
 
                         if (empty($contentsOfType[$contentIndex]['instructors'])) {
                             InstructorDecorator::$decorationMode =
@@ -349,7 +349,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                                         $grupedPermissions[self::$parents[$content['id']]['id']]->pluck('permission_id')
                                             ->toArray() : []
                                 )
-                                ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
+                            ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
                             if ($contentsOfType[$contentIndex]['need_access']) {
                                 $contentsOfType[$contentIndex]['need_access_message'] =
                                     self::$noAccessMessages[self::$parents[$content['id']]['id']] ?? '';

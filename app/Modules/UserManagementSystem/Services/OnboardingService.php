@@ -9,7 +9,6 @@ use Modules\UserManagementSystem\Models\OnboardingAnswerHistory;
 
 class OnboardingService
 {
-
     public function getBrand(int $userId): ?string
     {
         $instrumentAnswer = OnboardingAnswerHistory::query()->select('onboarding_answer')->where(

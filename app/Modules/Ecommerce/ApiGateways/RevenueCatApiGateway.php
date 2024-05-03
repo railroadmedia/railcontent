@@ -40,7 +40,8 @@ class RevenueCatApiGateway
         // empty result means success for some reason...
         if (!empty($result->errors) || empty($result->subscriber)) {
             throw new Exception(
-                'RevenueCat api call failed: '.curl_error($ch).' - '.var_export($result, true), 404
+                'RevenueCat api call failed: '.curl_error($ch).' - '.var_export($result, true),
+                404
             );
         }
 
@@ -57,8 +58,7 @@ class RevenueCatApiGateway
     public function revoke(
         $userId,
         $productIdentifier
-    )
-    {
+    ) {
         $ch = curl_init();
 
         curl_setopt(
@@ -227,7 +227,7 @@ class RevenueCatApiGateway
      * @param string $app
      * @return string
      */
-    public function updateSubscriberAttribute($userId, $attributes,  $platform, $app = 'Musora')
+    public function updateSubscriberAttribute($userId, $attributes, $platform, $app = 'Musora')
     {
         $client = new \GuzzleHttp\Client();
         $att = [];

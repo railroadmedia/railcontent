@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class IsDrumeoLifetimeUserFieldResyncTool extends Command
 {
-
     /**
      * The console command name.
      *

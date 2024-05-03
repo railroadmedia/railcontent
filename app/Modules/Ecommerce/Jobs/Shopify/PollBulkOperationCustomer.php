@@ -60,12 +60,13 @@ class PollBulkOperationCustomer implements ShouldQueue
                 // if the batch didn't finish, keep trying until it does, or we approach our 15-minute lambda time limit
                 if ($this->secondsPassed < self::TIMEOUT) {
                     sleep(self::DELAY);
-                    PollBulkOperationCustomer::dispatchSync($this->bulkOperationId,
-                            $this->shopifySync,
-                            $this->sourceFileName,
-                            $this->resourceType,
-                            $this->secondsPassed+self::DELAY
-                        );
+                    PollBulkOperationCustomer::dispatchSync(
+                        $this->bulkOperationId,
+                        $this->shopifySync,
+                        $this->sourceFileName,
+                        $this->resourceType,
+                        $this->secondsPassed + self::DELAY
+                    );
                     return;
                 }
 
@@ -82,17 +83,23 @@ class PollBulkOperationCustomer implements ShouldQueue
             }
 
             // log the run time, just to know
-            $this->logInfo(sprintf("%s: Bulk Operation completed in %s seconds",
-                $this->getClassName(), $pollResponse->getRuntime()));
+            $this->logInfo(sprintf(
+                "%s: Bulk Operation completed in %s seconds",
+                $this->getClassName(),
+                $pollResponse->getRuntime()
+            ));
 
             // if the bulk operation has been completed, we can now download the file from Shopify
             $resultsFileName = str($this->sourceFileName)
                 ->beforeLast(".jsonl")
                 ->append("-Results.jsonl");
             $downloadSuccess = $this->downloadFile($resultsFileName, $pollResponse->url);
-            if (!$downloadSuccess){
-                throw new Exception(sprintf("%s: Failed to download and store the results file from %s",
-                    $this->getClassName(), $pollResponse->url));
+            if (!$downloadSuccess) {
+                throw new Exception(sprintf(
+                    "%s: Failed to download and store the results file from %s",
+                    $this->getClassName(),
+                    $pollResponse->url
+                ));
             }
 
             // and dispatch another job to parse the results and update our users or customers

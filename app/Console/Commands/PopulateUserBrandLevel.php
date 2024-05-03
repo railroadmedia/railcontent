@@ -12,7 +12,6 @@ use Exception;
 
 class PopulateUserBrandLevel extends Command
 {
-
     /**
      * The console command name.
      *
@@ -60,18 +59,18 @@ class PopulateUserBrandLevel extends Command
         }
 
         $query->chunk(200, function (Collection $rows) use ($dbConn, $methods) {
-                $progress = [];
-                foreach ($rows as $row) {
-                    $progress[$row->user_id][$methods[$row->content_id]] = $row->higher_key_progress;
-                }
-                foreach ($progress as $key => $progres) {
-                    $dbConn->table('usora_users')
-                        ->where('id', $key)
-                        ->update([
-                                     'brand_method_levels' => $progres,
-                                 ]);
-                }
-            });
+            $progress = [];
+            foreach ($rows as $row) {
+                $progress[$row->user_id][$methods[$row->content_id]] = $row->higher_key_progress;
+            }
+            foreach ($progress as $key => $progres) {
+                $dbConn->table('usora_users')
+                    ->where('id', $key)
+                    ->update([
+                                 'brand_method_levels' => $progres,
+                             ]);
+            }
+        });
 
         $this->info("PopulateUserBrandLevel command has finished #n");
     }

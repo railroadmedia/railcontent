@@ -19,10 +19,12 @@ class CohortDropdownResolver implements ResolverInterface
     {
         $dropdowns = $resource->dropdowns()->get();
 
-        return $dropdowns->map(function($dropdown) use ($layouts) {
+        return $dropdowns->map(function ($dropdown) use ($layouts) {
             $layout = $layouts->find('cohort-dropdown-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
             return $layout->duplicateAndHydrate($dropdown->id, [
                 'title' => $dropdown->title,
@@ -44,8 +46,8 @@ class CohortDropdownResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use ($groups){
-            $dropdowns = $groups->map(function($group, $index){
+        $class::saved(function ($model) use ($groups) {
+            $dropdowns = $groups->map(function ($group, $index) {
                 return [
                     'title' => $group->getAttributes()['title'],
                     'description' => $group->getAttributes()['description'],
@@ -54,23 +56,22 @@ class CohortDropdownResolver implements ResolverInterface
             });
 
             //update and insert items
-            foreach($dropdowns as $dropdown){
-                if(!is_null($dropdown['id'])){
+            foreach($dropdowns as $dropdown) {
+                if(!is_null($dropdown['id'])) {
                     $dbDropdown = CohortDropdown::find($dropdown['id']);
 
-                    if($dbDropdown->title !== $dropdown['title']){
+                    if($dbDropdown->title !== $dropdown['title']) {
                         $dbDropdown->title = $dropdown['title'];
                     }
 
-                    if($dbDropdown->description !== $dropdown['description']){
+                    if($dbDropdown->description !== $dropdown['description']) {
                         $dbDropdown->description = $dropdown['description'];
                     }
 
                     $dbDropdown->save();
 
                     $updatedIds[] = $dropdown['id'];
-                }
-                else{
+                } else {
                     $addDropdown = new CohortDropdown();
                     $addDropdown->cohort_id = $model['id'];
                     $addDropdown->title = $dropdown['title'];
@@ -81,7 +82,7 @@ class CohortDropdownResolver implements ResolverInterface
                 }
             }
 
-            if(isset($updatedIds)){
+            if(isset($updatedIds)) {
                 $deleteIds = CohortDropdown::where('cohort_id', '=', $model['id'])
                     ->whereNotIn('id', $updatedIds)->delete();
             }

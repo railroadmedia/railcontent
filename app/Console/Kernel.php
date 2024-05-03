@@ -136,12 +136,12 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__ . '/Commands');
 
-//        $scan = scandir(app_path('Modules'));
-//        foreach ($scan as $file) {
-//            if (is_dir(app_path("Modules/$file"))) {
-//                $this->load(app_path("Modules/$file/Console/Commands"));
-//            }
-//        }
+        //        $scan = scandir(app_path('Modules'));
+        //        foreach ($scan as $file) {
+        //            if (is_dir(app_path("Modules/$file"))) {
+        //                $this->load(app_path("Modules/$file/Console/Commands"));
+        //            }
+        //        }
         $this->load(app_path('Modules/Ecommerce/Console/Commands'));
         $this->load(app_path('Modules/Content/Console/Commands'));
         $this->load(app_path('Modules/EventTracking/Console/Commands'));

@@ -161,15 +161,15 @@ class EmailChangeController extends Controller
         }
 
         if (Carbon::parse(
-                $emailChange->updated_at
+            $emailChange->updated_at
                     ->format('Y-m-d H:i:s')
-            ) <
+        ) <
             Carbon::now()
                 ->subHours(config('user_management_system.email_change_token_ttl'))) {
-// todo: error message does not appear
-                return redirect()
-                    ->back()
-                    ->withErrors(['error-message' => 'Your email reset code has expired.']);
+            // todo: error message does not appear
+            return redirect()
+                ->back()
+                ->withErrors(['error-message' => 'Your email reset code has expired.']);
 
         }
 
@@ -223,7 +223,7 @@ class EmailChangeController extends Controller
     public function sendEmailChangeNotification($token, $email)
     {
         $class = config('user_management_system.email_change_notification_class');
-        (new AnonymousNotifiable)->route(config('user_management_system.email_change_notification_channel'), $email)
+        (new AnonymousNotifiable())->route(config('user_management_system.email_change_notification_channel'), $email)
             ->notify(new $class($token));
     }
 }

@@ -76,7 +76,7 @@ class GenerateAccessCodes extends Command
 
             $accessCodes[] = [
                 'code' => strtoupper($code),
-                'product_ids' => serialize([(integer)$productId]),
+                'product_ids' => serialize([(int)$productId]),
                 'is_claimed' => false,
                 'claimer_id' => null,
                 'claimed_on' => null,
@@ -102,16 +102,18 @@ class GenerateAccessCodes extends Command
                 });
 
             Mail::send(
-                'emails.generateAccessCodes', [
+                'emails.generateAccessCodes',
+                [
                 'accessCodeData' => $accessCodes,
                 'product' => $product,
                 'source' => $source ?? 'no source',
-            ], function (\Illuminate\Mail\Message $message) use ($emails, $now, $amountToCreate) {
-                $subject = 'Musora - ' . $amountToCreate . ' Access Codes Generated on ' . $now;
-                $message->from('support@musora.com', 'Musora');
-                $message->to($emails)
-                    ->subject($subject);
-            }
+            ],
+                function (\Illuminate\Mail\Message $message) use ($emails, $now, $amountToCreate) {
+                    $subject = 'Musora - ' . $amountToCreate . ' Access Codes Generated on ' . $now;
+                    $message->from('support@musora.com', 'Musora');
+                    $message->to($emails)
+                        ->subject($subject);
+                }
             );
 
             $this->info(
@@ -122,7 +124,8 @@ class GenerateAccessCodes extends Command
                 $amountToCreate . ' access codes for \'' . $productId . '\' have been created.'
             );
         } else {
-            $this->table([
+            $this->table(
+                [
                 'code',
                 'product_ids',
                 'is_claimed',
@@ -134,7 +137,8 @@ class GenerateAccessCodes extends Command
                 'created_at',
                 'updated_at',
             ],
-                $accessCodes);
+                $accessCodes
+            );
 
             $this->info(
                 $amountToCreate . ' access codes for \'' . $productId . '\' have been simulated.'

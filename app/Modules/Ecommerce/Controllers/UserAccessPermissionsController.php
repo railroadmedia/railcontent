@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller;
 
 class UserAccessPermissionsController extends Controller
 {
-
     private UserAccessPermissionsService $userAccessPermissionsService;
 
     public function __construct(UserAccessPermissionsService $userAccessPermissionsService)
@@ -29,7 +28,7 @@ class UserAccessPermissionsController extends Controller
 
         return UserAccessPermissionResource::collection(
             $userAccessPermissions->getCollection()
-                ->sortBy($request->get('order_by_column','actualExpirationTime'), SORT_REGULAR, $request->get('order_by_direction','desc'))
+                ->sortBy($request->get('order_by_column', 'actualExpirationTime'), SORT_REGULAR, $request->get('order_by_direction', 'desc'))
         );
     }
 

@@ -12,7 +12,6 @@ use Throwable;
 
 class SyncImportedOrderShopifyIdsDispatcher extends Command
 {
-
     /**
      * The name and signature of the console command.
      *

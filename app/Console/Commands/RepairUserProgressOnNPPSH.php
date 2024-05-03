@@ -12,7 +12,6 @@ use Exception;
 
 class RepairUserProgressOnNPPSH extends Command
 {
-
     /**
      * The console command name.
      *

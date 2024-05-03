@@ -21,7 +21,7 @@ class VimeoVideoSourcesDecorator extends ModeDecoratorBase
      */
     private $cache;
 
-    const CACHE_KEY_PREFIX = 'pianote_vimeo_video_data_';
+    public const CACHE_KEY_PREFIX = 'pianote_vimeo_video_data_';
 
     /**
      * ContentVimeoVideoDecorator constructor.
@@ -125,7 +125,7 @@ class VimeoVideoSourcesDecorator extends ModeDecoratorBase
                                         );
                                     }
 
-                                    if($fileData['quality'] === 'hls'){
+                                    if($fileData['quality'] === 'hls') {
                                         $contentResults[$contentIndex]['hlsManifestUrl'] = $fileData['link'];
                                     }
 

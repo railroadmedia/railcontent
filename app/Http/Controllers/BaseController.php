@@ -9,5 +9,7 @@ use Illuminate\Routing\Controller as BaseLaravelController;
 
 class BaseController extends BaseLaravelController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 }

@@ -17,8 +17,10 @@ class UpdateExistingAccessCodesWithRolandSource extends Command
 
         $sourceValue = 'roland-piano-promo';
 
-        $csv = array_map(function($v){return str_getcsv($v, ",");},
-            file(base_path('musora_ids_old_roland_access_codes.csv')));
+        $csv = array_map(
+            function ($v) {return str_getcsv($v, ",");},
+            file(base_path('musora_ids_old_roland_access_codes.csv'))
+        );
 
         foreach ($csv as $row) {
             if (is_numeric($row[0])) {

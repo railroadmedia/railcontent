@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerIoSyncMentor extends CustomerIoBaseJob
 {
-
     /**
      * The number of seconds the job can run before timing out.
      *

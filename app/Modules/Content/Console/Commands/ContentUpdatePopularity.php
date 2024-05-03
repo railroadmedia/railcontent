@@ -10,7 +10,6 @@ use Illuminate\Database\DatabaseManager;
 
 class ContentUpdatePopularity extends Command
 {
-
     protected $signature = 'content:updatePopularityMWP';
 
     protected $description = 'Updates the content popularity column';
