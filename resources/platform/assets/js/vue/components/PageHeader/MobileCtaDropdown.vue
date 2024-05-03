@@ -1,7 +1,7 @@
 <template>
     <PageHeaderDropdown faIconClass="fa fa-ellipsis-h" v-if="hasCtas">
         <template v-slot:content>
-            <div class="dropdown-content">
+            <div class="dropdown-content tw-min-w-[256px]">
                 <CtaResolver :ctas="ctas" inDropdown />
             </div>
         </template>

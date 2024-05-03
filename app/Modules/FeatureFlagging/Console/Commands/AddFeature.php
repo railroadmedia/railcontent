@@ -11,7 +11,13 @@ class AddFeature extends Command
 
 
 
-    protected $signature = 'featureFlag:addFeature {name} {--description=} {--active_at=} {--allowFilter=} {--userid_list=} ';
+    protected $signature = 'featureFlag:addFeature
+                            {name : name of new Feature}
+                            {--description= : description value}
+                            {--active_at= : datetime string eg: "2024-04-19 16:02:37"}
+                            {--allow_filter= : comma separated list of filters}
+                            {--userid_list= : comma separated list of user ids} ';
+    protected $description = "Add New Feature Flag";
 
     public function handle(FeatureFlagService $ffService): void
     {
@@ -19,7 +25,7 @@ class AddFeature extends Command
             $this->argument('name'),
             active_at: $this->option('active_at'),
             description: $this->option('description'),
-            allow_filter: $this->option('allowFilter'),
+            allow_filter: $this->option('allow_filter'),
             userid_list: $this->option('userid_list')
         );
     }

@@ -2,7 +2,7 @@
     <!-- Header -->
     <!-- ADD NEW HEADER HERE -->
     <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
-    <PageHeader pageType="songs" title="Songs" iconName="headphones-filled" :infoData="headerInfoData" :ctas="ctaConfig" />
+    <PageHeader pageType="songs" title="Songs" iconName="headphones" :infoData="headerInfoData" :ctas="ctaConfig" />
     
     <!-- Continue section -->
     <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[33px]">

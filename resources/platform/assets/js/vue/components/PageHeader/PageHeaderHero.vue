@@ -22,7 +22,7 @@
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] md:tw-h-[86px]">
           </template>
           <template v-else>
-            <span v-if="title" class="tw-text-[28px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white"
+            <span v-if="title" class="tw-text-[24px] sm:tw-text-[32px] tw-font-bold dark:tw-text-white tw-line-clamp-3 tw-overflow-hidden"
               :class="{ 'tw-capitalize': !heroImgClasses }">
               {{ title }}
             </span>
@@ -52,7 +52,7 @@
                     class="tw-w-[27px] tw-h-[27px] tw-cursor-pointer tw-text-[#65656B] dark:tw-text-[#80A0B9]"></musora-icon>
                 </template>
                 <template #content>
-                  <div class="tw-max-w-[343px]">
+                  <div class="tw-max-w-[343px] tw-text-[14px]">
                     <slot name="header-description"></slot>
                   </div>
                 </template>

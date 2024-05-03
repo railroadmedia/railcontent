@@ -278,7 +278,7 @@ class SyncSubscriptionPaymentsToShopifyOrders implements ShouldQueue
                 $this->results[] = [
                     self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
                     self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_SUBSCRIPTION_PAYMENT,
-                    self::RESULTS_MODEL_ID => $subscriptionPayment->getId(),
+                    self::RESULTS_MODEL_ID => $subscriptionPayment->id,
                     self::RESULTS_ACTION => "FAILED",
                     self::RESULTS_FAIL_MESSAGE => $exception->getMessage()
                 ];

@@ -99,7 +99,7 @@ const confirmDelete = () => {
     }
 
     // Delete account
-    axios.put('musora-api/v1/delete-account')
+    axios.put('/musora-api/v1/delete-account')
     .then(() => {
         window.location.replace('/')
     })

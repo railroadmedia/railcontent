@@ -24,10 +24,10 @@
           <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
         </div>
         <div class="tw-justify-between tw-items-center" :class="{
-        'tw-flex tw-w-full': isSongsPage,
-        'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
-        'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
-      }">
+          'tw-flex tw-w-full': isSongsPage,
+          'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
+          'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
+        }">
           <a v-if="isSongsPage" :href="songsPageLink.url">
             <PageHeaderRowInfo :infoData="[songsPageLink.text]" />
           </a>
@@ -35,7 +35,11 @@
             :ctas="secondaryCtas" />
         </div>
       </div>
-      <PageHeaderProgressBar v-if="progress" :progress="progress" class="tw-mt-4" />
+      <PageHeaderProgressBar v-if="progress" :progress="progress" class="tw-mt-4">
+        <template #progress-text>
+          <span>{{ `${progressLabelText} - ` }}</span>
+        </template>
+      </PageHeaderProgressBar>
     </template>
   </PageHeaderLayout>
 </template>

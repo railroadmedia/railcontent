@@ -20,7 +20,7 @@
     <page-header
         page-type="shows"
         title="Shows"
-        icon-name="shows-filled"
+        icon-name="shows"
         description="{{ $headerDescription }}"
     ></page-header>
 

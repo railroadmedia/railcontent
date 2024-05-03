@@ -16,7 +16,7 @@
 @section('content')
         <page-header
             title="Student Focus"
-            icon-name="person-plus-filled"
+            icon-name="person-plus"
             description="{{ $headerDescription }}"
         >
         </page-header>

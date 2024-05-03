@@ -74,40 +74,21 @@
                     </div>
                 </div>
 
-                <div id="replyContainer"
-                     class="tw-flex tw-flex-col tw-w-full sm:tw-pl-4"
-                >
-                    <form
-                        method="post"
-                        :action="postStoreFormUrl"
-                        @submit="formDisabled = !formDisabled"
-                    >
+                <div id="replyContainer" class="tw-flex tw-flex-col tw-w-full sm:tw-pl-4">
+                    <form method="post" :action="postStoreFormUrl" @submit="formDisabled = !formDisabled">
 
                         <text-editor
                             ref="textEditor"
                             :is-reply-section="true"
                             :hasImageUploader="true"
                             v-model="postReplyInterface"
-                            @input="handleInput"
                         />
 
-                        <input
-                            type="hidden"
-                            name="_method"
-                            value="PUT"
-                        >
+                        <input type="hidden" name="_method" value="PUT">
 
-                        <input
-                            type="hidden"
-                            name="thread_id"
-                            :value="this.thread.id"
-                        >
+                        <input type="hidden" name="thread_id" :value="this.thread.id">
 
-                        <input
-                            type="hidden"
-                            name="brand"
-                            :value="this.brand"
-                        >
+                        <input type="hidden" name="brand" :value="this.brand">
 
                         <div class="flex tw-flex-col md:tw-flex-row mt-2 tw-justify-center md:tw-justify-between">
                             <a :href="`/${brand}/profile/${currentUser.id}/settings/profile#signatureForm`"
@@ -261,6 +242,8 @@ export default {
                     type: 'PageHeaderCta',
                     props: {
                         faIconClass: 'fa-edit',
+                        text: 'Edit Thread',
+                        showTextMobileHideDesktop: true,
                         onClickCallback: this.update,
                     },
                 });
@@ -270,6 +253,8 @@ export default {
                     type: 'PageHeaderCta',
                     props: {
                         faIconClass: 'fa-thumbtack',
+                        text: `${this.isPinned ? 'Unpin' : 'Pin'} Thread`,
+                        showTextMobileHideDesktop: true,
                         onClickCallback: this.pinPost,
                     },
                 });
@@ -277,6 +262,8 @@ export default {
                     type: 'PageHeaderCta',
                     props: {
                         faIconClass: 'fa-lock',
+                        text: `${this.isLocked ? 'Unlock' : 'Lock'} Thread`,
+                        showTextMobileHideDesktop: true,
                         onClickCallback: this.lockPost,
                     },
                 });
@@ -284,7 +271,9 @@ export default {
             ctas.push({
                 type: 'PageHeaderCta',
                 props: {
-                    faIconClass: 'fa-eye',
+                    faIconClass: `${this.signaturesHidden ? 'fa-eye-slash' : 'fa-eye'}`,
+                    text: `${this.signaturesHidden ? 'Show' : 'Hide'} All Signatures`,
+                    showTextMobileHideDesktop: true,
                     onClickCallback: this.hideSignatures,
                 },
             });
@@ -292,7 +281,8 @@ export default {
             ctas.push({
                 type: 'PageHeaderCta',
                 props: {
-                    text: this.isFollowed ? 'Followed' : 'Follow',
+                    text: this.isFollowed ? 'Unfollow' : 'Follow',
+                    faIconClass: `fa-user-${this.isFollowed ? 'minus' : 'plus'}`,
                     onClickCallback: this.followPost,
                 },
             });
@@ -301,7 +291,7 @@ export default {
                 type: 'PageHeaderCta',
                 props: {
                     text: 'Add Reply',
-                    faIconClass: 'fa-reply',
+                    faIconClass: 'fa-plus',
                     onClickCallback: this.scrollToReply,
                 },
             });
@@ -492,11 +482,7 @@ export default {
             this.currentPost = payload.id;
         },
 
-        handleInput (payload) {
-            this.postReplyInterface = payload.currentValue;
-        },
-
-        pinPost () {
+        pinPost() {
             ForumService.pinForumsThread(this.thread.id, this.brand, !this.isPinned)
                 .then(resolved => resolved);
 
