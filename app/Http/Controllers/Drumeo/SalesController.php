@@ -74,6 +74,10 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
     }
+    public function restart()
+    {
+        return view('drumeo.sales.restart', ['theme' => 'drumeo']);
+    }
     public function promoEG()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);

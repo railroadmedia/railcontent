@@ -21,6 +21,7 @@ Route::domain('{drumeoDomain}')
         //    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF']);
+        Route::get('/restart', [SalesController::class, 'restart'] );
 
         //    sales pages
         Route::get('/method', [SalesController::class, 'method']);
