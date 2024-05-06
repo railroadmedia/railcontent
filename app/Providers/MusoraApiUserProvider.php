@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
@@ -18,14 +17,12 @@ use Railroad\MusoraApi\Exceptions\MusoraAPIException;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private CalendarService $calendarService;
     private ContentService $contentService;
-    private CustomerIoService $customerIoService;
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserService $userService;
@@ -35,7 +32,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function __construct(
         CalendarService $calendarService,
         ContentService $contentService,
-        CustomerIoService $customerIoService,
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
         UserService $userService,
@@ -44,7 +40,6 @@ class MusoraApiUserProvider implements UserProviderInterface
     ) {
         $this->calendarService = $calendarService;
         $this->contentService = $contentService;
-        $this->customerIoService = $customerIoService;
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userService = $userService;
@@ -94,18 +89,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             })
         ) > 0;
 
-        try {
-            $accountName = ($app) ? strtolower($app) : config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
-            $customerIoData = $this->customerIoService->getCustomerByUserId(
-                $accountName,
-                $user->id,
-            );
-        } catch (ModelNotFoundException $exception) {
-            $customerIoData = null;
-        }
-
         $extraData = [
-            'customer_io_id' => $customerIoData?->uuid,
+            'customer_io_id' => user()->email,
         ];
 
         $branchData = $this->getAllBranchInformation();
@@ -155,30 +140,21 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
-                ->first();
+            ->first();
         if ($methodContent) {
             $hasStartedMethod = $methodContent['started'];
             $hasCompletedMethod = $methodContent['completed'];
         }
 
-        try {
-            $customerIoData = $this->customerIoService->getCustomerByUserId(
-                config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
-                $user->id,
-            );
-        } catch (ModelNotFoundException $exception) {
-            $customerIoData = null;
-        }
-
         $extraData = [
-            'customer_io_id' => $customerIoData?->uuid,
+            'customer_io_id' => user()->email,
         ];
 
         $brand = brand();
         $showLearningPathsOnHomepage = false;
-        $hideSection = $brand.'_trial_section_hide';
+        $hideSection = $brand . '_trial_section_hide';
 
-        if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
+        if ($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
             $hasExperienceLevels =  count(
                 user()->onboardingExperience->filter(function ($item) use ($brand) {
                     return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
@@ -243,7 +219,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $inUseDisplayName =
             \Modules\UserManagementSystem\Models\User::where('display_name', $displayName)
-                ->get();
+            ->get();
         $mobileEndpointVersion = (config('musora-api.api.version'));
         $mobileEndpointVersion = str_replace('v', '', $mobileEndpointVersion);
 
@@ -290,7 +266,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $user = user();
         if ($user) {
-            $oldUser = clone($user);
+            $oldUser = clone ($user);
             if ($deviceType == 'ios') {
                 $user->ios_latest_review_display_date = Carbon::now();
                 $user->ios_count_review_display = $reviewCount;
@@ -321,14 +297,14 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $passedCheck =
             auth()
-                ->guard('user-management-system')
-                ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
+            ->guard('user-management-system')
+            ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
 
         if ($passedCheck) {
             $user =
                 \Modules\UserManagementSystem\Models\User::query()
-                    ->where(['email' => $request->get('email')])
-                    ->firstOrFail();
+                ->where(['email' => $request->get('email')])
+                ->firstOrFail();
 
             auth()->login($user);
 
@@ -371,7 +347,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             '=',
             $revenuecatOriginalAppUserId
         )
-        ->first();
+            ->first();
 
         if (!$user) {
             $user = $this->revenueCatService->syncSubscriber($revenuecatOriginalAppUserId, $email, true);
