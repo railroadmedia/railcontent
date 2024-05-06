@@ -1,4 +1,5 @@
 <template>
+    <Breadcrumb :breadcrumbs="breadcrumbs" />
     <PageHeader pageType="forum-thread" :title="thread.title" :ctas="headerCtas" />
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 forum-post tw-py-12">
         <div class="tw-flex tw-flex-col">
@@ -150,10 +151,13 @@ import Toasts from '../../../assets/js/classes/toasts';
 import ThemeClasses from '../../../mixins/ThemeClasses';
 import CommentLikesModal from '../../comments/_CommentLikesModal.vue';
 import PageHeader from '../../../../components/PageHeader/PageHeader.vue';
+import Breadcrumb from '../../../../components/Breadcrumb/Breadcrumb.vue';
 
 export default {
     name: 'ForumThread',
     components: {
+        Breadcrumb,
+        PageHeader,
         'forum-thread-post': ForumThreadPost,
         pagination: Pagination,
         'text-editor': TextEditor,
@@ -161,6 +165,10 @@ export default {
     },
     mixins: [ThemeClasses],
     props: {
+        breadcrumbs: {
+            type: Array,
+            default: () => [],
+        },
         thread: {
             type: Object,
             default: () => {
