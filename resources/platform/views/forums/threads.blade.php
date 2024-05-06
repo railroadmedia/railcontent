@@ -30,6 +30,16 @@
     }
     $headerDataJson = json_encode($headerData);
     $headerDataObj = json_decode($headerDataJson);
+
+    $breadcrumbs = [
+            [
+                "title" => "Forums",
+                "url" => url()->route('forums.show-categories'),
+            ],
+            [
+                "title" => $discussion['title'],
+            ]
+    ];
 @endphp
 
 @extends('partials.layout', ['trackingSectionName' => 'forums'])
@@ -38,23 +48,11 @@
     <title>{{$discussion['title']}} | Forums | {{ $brand }}</title>
 @endsection
 
-@section('breadcrumbs')
-    @include('partials.bladesora.members.navigation.breadcrumbs', [
-        "pages" => [
-            [
-                "title" => "Forums",
-                "url" => url()->route('forums.show-categories'),
-            ],
-            [
-                "title" => $discussion['title'],
-            ]
-        ]
-    ])
-@endsection
-
 @section('content')
         <div v-cloak>
-
+            <breadcrumb
+                :breadcrumbs="{{ json_encode($breadcrumbs) }}"
+            ></breadcrumb>
             <page-header
                 page-type="{{ $headerDataObj->type }}"
                 icon-name="{{ $headerDataObj->iconName }}"
