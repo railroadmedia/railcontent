@@ -151,14 +151,13 @@ class FulfillOrdersImportedIntoShopify implements ShouldQueue
      */
     private function getOrderData(?string $endCursor): Collection
     {
-        $date = config('ecommerce.launch_date_times.shopify');
         $count = self::PAGE_SIZE;
         $cursor = empty($endCursor) ? "" : "after: \"$endCursor\",";
         $customerIdQuery = empty($this->customerId) ? "" : " AND customer_id:{$this->customerId}";
 
         $gql = <<<GQL
             query {
-                orders(first: $count, $cursor query: "created_at:<=\"$date\" AND processed_at:>=\"$this->startProcessedAt\" AND processed_at:<=\"$this->endProcessedAt\"$customerIdQuery AND financial_status:paid AND -fulfillment_status:shipped", sortKey: PROCESSED_AT) {
+                orders(first: $count, $cursor query: "processed_at:>=\"$this->startProcessedAt\" AND processed_at:<=\"$this->endProcessedAt\"$customerIdQuery AND (financial_status:paid OR financial_status:partially_paid OR financial_status:partially_refunded) AND -fulfillment_status:shipped", sortKey: PROCESSED_AT) {
                     nodes {
                         ... on Order {
                             id,
