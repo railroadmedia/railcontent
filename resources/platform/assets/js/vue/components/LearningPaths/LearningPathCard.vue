@@ -46,11 +46,17 @@
 <script setup>
 import { ref, computed } from "vue";
 import { VideoCameraIcon } from "@heroicons/vue/outline"
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import VideoModal from "../Modal/VideoModal.vue";
 import { useUserStore } from "../../../stores/user";
 import userJourney from "../../../services/userJourney";
 
 const userStore = useUserStore();
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const tablet = breakpoints.greaterOrEqual('md');
+const desktop = breakpoints.greaterOrEqual('lg');
+const mobile = breakpoints.smaller('md');
 
 const props = defineProps({
     topPillText: {
@@ -81,7 +87,15 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    bgImg: {
+    desktopBg: {
+        type: String,
+        default: ''
+    },
+    mobileBg: {
+        type: String,
+        default: ''
+    },
+    tabletBg: {
         type: String,
         default: ''
     },
@@ -95,6 +109,22 @@ const showVideoModal = ref(false);
 
 const computedCtaText = computed(() => {
     return props.ctaText ? props.ctaText.replace(/\s+/g, '').toLowerCase() : '';
+});
+
+const bgImg = computed(() => {
+    if (desktop.value && props.desktopBg) {
+        return props.desktopBg;
+    }
+
+    if (tablet.value && props.tabletBg) {
+        return props.tabletBg;
+    }
+
+    if (mobile.value && props.mobileBg) {
+        return props.mobileBg;
+    }
+
+    return '';
 });
 
 const handleVideoClick = () => {
