@@ -1,7 +1,7 @@
 <template>
   <div :class="`tw-flex tw-w-full tw-mx-auto tw-pt-4 ${classOverride}`">
     <!-- Mobile -->
-    <div v-if="penultimateBreadcrumb && penultimateBreadcrumb.url" class="tw-flex lg:tw-hidden tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-uppercase tw-text-[14px]">
+    <div v-if="penultimateBreadcrumb && penultimateBreadcrumb.url" class="tw-flex lg:tw-hidden tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-text-[#3F3F46] dark:tw-text-[#A1A1A9] tw-uppercase tw-text-[12px]">
       <a class="tw-flex tw-items-center tw-text-sm tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-no-underline tw-font-bold"
         :href="penultimateBreadcrumb.url">
         <i class="fa-solid fa-chevron-left tw-text-[16px] tw-h-[16px] tw-w-[16px] tw-pr-[5px]"></i>

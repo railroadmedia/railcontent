@@ -242,6 +242,11 @@ class ContentPagesController extends BaseController
                 "allArtistUrl" => url()->route('platform.content.artists.show'),
             ]);
         } else {
+            $breadcrumbs = [
+                [
+                    'title' => $catalogueMeta['name'],
+                ],
+            ];
             return view('content.catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $startedListLessons,
@@ -254,6 +259,7 @@ class ContentPagesController extends BaseController
                 "catalogueMeta" => $catalogueMeta,
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
+                "breadcrumbs" => $breadcrumbs
             ]);
         }
     }

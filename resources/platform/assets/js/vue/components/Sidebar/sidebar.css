@@ -215,7 +215,7 @@ a {
     cursor: pointer;
 }
 
-a {
+#sidebar a {
     color: #0b76db;
     color: rgb(11, 118, 219);
 }
