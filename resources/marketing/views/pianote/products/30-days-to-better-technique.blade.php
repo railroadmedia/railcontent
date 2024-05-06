@@ -165,20 +165,17 @@
             </div>
             <div class="uppercase text-sm text-pianote py-4">
                 <span x-cloak x-data="timer()" x-init="countdown()">
-                    <span>
-                        Enrollment closes in
-                        <br>
-                        <strong>
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                        </strong>
-                    </span>
+                    <strong>
+                        <span x-cloak x-show="timeLeft > 0">
+                            Enrollment closes in
+                            <br>
+                                <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>
+                                <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>
+                                <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>
+                                <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>
+                        </span>
+                        <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
+                    </strong>
                 </span>
             </div>
         </div>
@@ -438,23 +435,19 @@
                 </div>
                 <div class="uppercase text-sm text-center text-pianote pb-4">
                     <span x-cloak x-data="timer()" x-init="countdown()">
-                        <span>
-                            Enrollment closes in
-                            <br>
-                            <strong>
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                        x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                        x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                        x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                        x-text="secondText"></span></span>
-                            </strong>
-                        </span>
+                        <strong>
+                            <span x-cloak x-show="timeLeft > 0">
+                                Enrollment closes in
+                                <br>
+                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>
+                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>
+                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>
+                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>
+                            </span>
+                            <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
+                        </strong>
                     </span>
                 </div>
-
         </div>
 
     </section>
@@ -719,18 +712,20 @@
             </p>
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
             <h6 class="leading-normal text-sm mb-5">
-                <span class="text-pianote uppercase tracking-widest">Enrollment closes in
-                    <strong><span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>!
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                        </span></strong>
+                <span class="text-pianote uppercase tracking-widest">
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                        <strong>
+                            <span x-cloak x-show="timeLeft > 0">
+                                Enrollment closes in
+                                <br>
+                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>
+                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>
+                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>
+                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>
+                            </span>
+                            <span x-cloak x-show="timeLeft <= 0"> A Limited Time! </span>
+                        </strong>
+                    </span>
                 </span>
             </h6>
 
@@ -1002,22 +997,20 @@
                 <div class="uppercase text-base text-center text-pianote py-4">
                     <span x-cloak x-data="timer()" x-init="countdown()">
                         <span>
-                            Enrollment closes in
-                            <br>
                             <strong>
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                        x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                        x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                        x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                        x-text="secondText"></span></span>
+                                <span x-cloak x-show="timeLeft > 0">
+                                    Enrollment closes in
+                                    <br>
+                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>
+                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>
+                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>
+                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>
+                                </span>
+                                <span x-cloak x-show="timeLeft <= 0"> A Limited Time! </span>
                             </strong>
                         </span>
                     </span>
                 </div>
-
         </div>
     </section>
 
