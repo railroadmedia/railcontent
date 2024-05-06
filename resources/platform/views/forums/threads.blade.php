@@ -40,8 +40,6 @@
                 "title" => $discussion['title'],
             ]
     ];
-
-    dd($pages);
 @endphp
 
 @extends('partials.layout', ['trackingSectionName' => 'forums'])
@@ -54,10 +52,7 @@
         <div v-cloak>
             <breadcrumb
                 :breadcrumbs="{{ json_encode($breadcrumbs) }}"
-                @if(isset($breadcrumbClassOverride) && $breadcrumbClassOverride !== '')
-                    :class-override="{{ json_encode($breadcrumbClassOverride) }}"
-                @endif
-            />
+            ></breadcrumb>
             <page-header
                 page-type="{{ $headerDataObj->type }}"
                 icon-name="{{ $headerDataObj->iconName }}"
