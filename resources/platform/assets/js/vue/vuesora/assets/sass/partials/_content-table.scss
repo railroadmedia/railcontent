@@ -61,14 +61,14 @@
   }
 
   .title-column {
-    padding:0 #{$gutterWidth / 3};
+    padding:0 calc($gutterWidth / 3);
   }
 }
 
 .large-thumbnail {
   position:relative;
   z-index:3;
-  margin-bottom:$gutterWidth / 2;
+  margin-bottom: calc($gutterWidth / 2);
 
   @include medium {
     margin-bottom:0;
@@ -235,7 +235,7 @@
     a {
       @include xSmallOnly {
         flex:0 0 100%;
-        margin-bottom:$gutterWidth / 3;
+        margin-bottom:calc($gutterWidth / 3);
         max-width:100%;
       }
     }
@@ -515,11 +515,11 @@
 .button-col {
   flex:0 0 100%;
   margin-left:0;
-  margin-top:$gutterWidth / 2;
+  margin-top: calc($gutterWidth / 2);
 
   @include small {
     flex:0 0 250px;
-    margin-left:$gutterWidth / 3;
+    margin-left:calc($gutterWidth / 3);
     margin-top:0;
   }
 }
@@ -539,7 +539,7 @@
       width:100%;
       max-width:100%;
       margin-right:0;
-      margin-bottom:$gutterWidth / 2;
+      margin-bottom: calc($gutterWidth / 2);
 
       &:last-child {
         margin-bottom:0;
@@ -602,7 +602,7 @@ $months: jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
     bottom:0;
     left:0;
     width:100%;
-    padding:$gutterWidth #{$gutterWidth / 3} #{$gutterWidth / 3};
+    padding: $gutterWidth calc($gutterWidth / 3) calc($gutterWidth / 3);
     @include topToBottomGradient(transparent, #000);
   }
 }

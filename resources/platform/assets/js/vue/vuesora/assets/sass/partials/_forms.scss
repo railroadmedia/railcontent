@@ -11,7 +11,7 @@
   }
   label:not(.toggle-label) {
     position:absolute;
-    left:$gutterWidth / 3;
+    left:calc($gutterWidth / 3);
     top:0;
     height:50px;
     display:flex;
@@ -26,7 +26,7 @@
     transform:scale(1) translateY(0) translateX(15px);
 
     @include medium {
-      left:$gutterWidth / 2;
+      left:calc($gutterWidth / 2);
     }
   }
 
@@ -414,20 +414,20 @@ textarea {
   }
 
   .flex-column {
-    margin-bottom:$gutterWidth / 3;
+    margin-bottom:calc($gutterWidth / 3);
     flex:0 0 100%;
 
     @include small {
       flex:1 1 50%;
-      padding:0 #{$gutterWidth / 6};
+      padding:0 calc($gutterWidth / 6);
 
       &:first-child {
-        padding-right:$gutterWidth / 6;
+        padding-right: calc($gutterWidth / 6);
         padding-left:0;
       }
 
       &:last-child {
-        padding-left:$gutterWidth / 6;
+        padding-left: calc($gutterWidth / 6);
         padding-right:0;
       }
 
