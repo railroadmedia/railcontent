@@ -15,7 +15,7 @@
       </a>
       <template v-for="(breadcrumb, index) in breadcrumbs" :key="index">
         <span class="tw-font-normal tw-text-[14px] tw-leading-[21px]">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-        <a v-if="index < breadcrumbs.length - 1 && breadcrumb.url" :href="breadcrumb.url" class="tw-font-normal tw-text-[14px] tw-leading-[21px] dark:hover:tw-text-white hover:tw-text-black">
+        <a v-if="index < breadcrumbs.length - 1 && breadcrumb.url" :href="breadcrumb.url" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-font-normal tw-text-[14px] tw-leading-[21px] dark:hover:tw-text-white hover:tw-text-black">
           <span>{{ breadcrumb.title }}</span>
         </a>
         <span v-else class="tw-font-bold tw-text-[14px] tw-leading-[21px]">
