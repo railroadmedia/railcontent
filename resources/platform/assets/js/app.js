@@ -308,13 +308,6 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
-    .component('PlatformHeader', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "platform-header" */
-            `./vue/components/PlatformHeader/platform-header.vue`
-        )
-    ))
-
     .component('MembershipUpdate', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "membership-update-" */

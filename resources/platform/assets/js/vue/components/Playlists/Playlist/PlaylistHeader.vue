@@ -1,8 +1,8 @@
 <template>
-    <platform-header
+    <platform-banner-header
         :backgroundImage="playlistsStore.activePlaylist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
         :blurBG="true"
-        class="!tw-py-6"
+        class="!tw-py-6 tw-rounded-md tw-overflow-hidden"
     >
         <template v-slot:content>
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
@@ -137,12 +137,13 @@
                 </button>
             </div>
         </template>
-    </platform-header>
+    </platform-banner-header>
 </template>
 
 <script setup>
 import PlaylistService from '../../../../services/playlists.js';
 import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue'
+import platformBannerHeader from '../../PlatformBannerHeader/platform-banner-header.vue';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
 import { usePlaylistsStore } from '../../../../stores/playlists';
 import { onBeforeMount, ref, inject, reactive, computed, onUpdated } from 'vue';
