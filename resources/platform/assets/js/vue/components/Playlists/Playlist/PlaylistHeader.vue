@@ -2,7 +2,7 @@
     <platform-banner-header
         :backgroundImage="playlistsStore.activePlaylist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
         :blurBG="true"
-        class="!tw-py-6 tw-rounded-md tw-overflow-hidden"
+        class="!tw-py-6"
     >
         <template v-slot:content>
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
