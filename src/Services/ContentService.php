@@ -140,7 +140,7 @@ class ContentService
             $recommendations = $cached;
         } else {
             $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections, $useFastImplementation);
-            $ttl = 60 * 60;
+            $ttl = 60 * 60 * 4;
             Cache::store('redis')
                 ->put($cacheKey, $recommendations, $ttl);
         }
