@@ -508,12 +508,6 @@ app.component('AppContainer', AppContainer)
             `./vue/components/Breadcrumb/Breadcrumb.vue`
         )
     ))
-    .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "playlist-collection-header" */
-            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionHeader.vue`
-        )
-    ))
     .component('PlaylistCollectionCatalog', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-collection-catalog" */
