@@ -214,7 +214,7 @@
                 <p class="text-center mt-3 mb-6">You’ll have one year of unlimited drum lessons, including:</p>
                 <div class="md:grid md:grid-cols-3 md:gap-4">
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/may/guided-lessons.webp')"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/may/guided-lessons.webp')"></div>
                         <div class=" px-3 lg:px-4 py-5 lg:py-7 text-center">
                             <h4 class="leading-tight mb-3"><i class="fal fa-video text-drumeo inline-block mb-1"></i><br><strong>Guided Lessons</strong></h4>
                             <p class="leading-normal">
@@ -223,7 +223,7 @@
                         </div>
                     </div>
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/may/guided-lessons.webp')"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/may/songs.webp')"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                             <h4 class="leading-tight mb-3"><i class="fal fa-music text-drumeo inline-block mb-1"></i><br><strong>6000+ Popular Songs</strong></h4>
                             <p class="leading-normal">
@@ -232,7 +232,7 @@
                         </div>
                     </div>
                     <div class="relative rounded-xl overflow-hidden" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/may/guided-lessons.webp')"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/may/teachers.webp')"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                             <h4 class="leading-tight mb-3"><i class="fal fa-users text-drumeo inline-block mb-1"></i><br><strong>Real Teachers</strong></h4>
                             <p class="leading-normal">
