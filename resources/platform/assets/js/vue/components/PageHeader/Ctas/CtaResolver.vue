@@ -14,6 +14,7 @@ import WhereToBeginCta from './WhereToBeginCta.vue';
 import VideoModalCta from './VideoModalCta.vue';
 import GoogleFormCta from './GoogleFormCta.vue';
 import PageHeaderPrimaryCta from '../PageHeaderPrimaryCta.vue';
+import CreatePlaylistCta from '../../Playlists/CreatePlaylistCta.vue';
 
 const componentMap = {
     SongRequest,
@@ -26,6 +27,7 @@ const componentMap = {
     VideoModalCta,
     GoogleFormCta,
     PageHeaderPrimaryCta,
+    CreatePlaylistCta
 };
 
 const resolveComponent = (type) => componentMap[type];

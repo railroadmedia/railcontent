@@ -59,6 +59,7 @@
               </Tooltip>
             </div>
           </div>
+          <slot name="right-of-text-hero"></slot>
         </div>
         <PageHeaderRowInfo v-if="infoData" class="sm:tw-mt-1" :class="{ 'tw-mb-2': $slots['ctas'] }"
           :infoData="infoData" />

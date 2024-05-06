@@ -2,13 +2,17 @@
   <PageHeaderLayout>
     <template #top-left>
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo" :infoData="isSongsPage ? null : infoData">
+        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo"
+        :infoData="isSongsPage || isPlaylistsPage ? null : infoData">
         <template #header-description v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
               <span v-html="description" />
             </div>
           </div>
+        </template>
+        <template #right-of-text-hero v-if="isPlaylistsPage">
+          <PlaylistCountBadge :playlistCount="infoData[0]" />
         </template>
       </PageHeaderHero>
     </template>
@@ -53,6 +57,7 @@ import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
 import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
+import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
 const props = defineProps({
   pageType: String,
@@ -109,6 +114,8 @@ const isStudentFocusCatalougePage = computed(() => isStudentReviewPage.value || 
 
 const isForumsPage = computed(() => props.pageType === 'forums');
 const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
+
+const isPlaylistsPage = computed(() => props.pageType === 'playlists');
 
 const songsPageLink = computed(() => props.pageType === 'songs' ? props.infoData : null);
 
