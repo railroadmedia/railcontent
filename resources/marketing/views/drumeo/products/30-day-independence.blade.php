@@ -319,12 +319,12 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-{{--                            <span class="join sold-out medium w-full" x-on:click="waitlistModal = true;">JOIN WAITLIST</span>--}}
-                                                        <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
-                            <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">
-                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Registration is FREE for
-                                    Drumeo Members.</a>
-                            </p>
+                            <span class="join sold-out medium w-full">ENROLLMENT CLOSED</span>
+{{--                                                        <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>--}}
+{{--                            <p class="opacity-50 text-xs mt-2 mb-5 sm:mb-0 hover:text-drumeo">--}}
+{{--                                <a href="https://www.musora.com/drumeo/enrollment/30-day-drummer">Registration is FREE for--}}
+{{--                                    Drumeo Members.</a>--}}
+{{--                            </p>--}}
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -351,22 +351,22 @@
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
                     <h4 class="px-3 lg:px-5 text-2xl"><strong>May 6th</strong></h4>
-                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                        <strong>
-                            <span x-cloak x-show="timeLeft > 0">
-                                Enrollment closes in
-                                <br>
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                            </span>
-                            <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
-                        </strong>
-                    </span>
-                    </p>
+{{--                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">--}}
+{{--                    <p class="text-sm px-3 lg:px-5">--}}
+{{--                    <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                        <strong>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0">--}}
+{{--                                Enrollment closes in--}}
+{{--                                <br>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                            </span>--}}
+{{--                            <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>--}}
+{{--                        </strong>--}}
+{{--                    </span>--}}
+{{--                    </p>--}}
                 </div>
                 <div
                     class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
@@ -495,15 +495,15 @@
                 </h4>
             </div>
 
-                                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+{{--                                <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
 {{--                <a href="#final" class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" x-on:click="waitlistModal = true;">JOIN WAITLIST</a><br>--}}
 
-            <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles in 30-Day Independence">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join
-                {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
+{{--            <img class="h-7 mr-1 mb-5 sm:mb-10 transition-opacity opacity-0" loading="lazy"--}}
+{{--                onload="this.classList.remove('opacity-0')"--}}
+{{--                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
+{{--                alt="Image of joined student profiles in 30-Day Independence">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join--}}
+{{--                {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>--}}
 
         </div>
     </section>
@@ -724,17 +724,18 @@
                 you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this,
                 students will not be able to join midway — <strong>and you need to register before the course begins on May
                     6th.</strong></h6>
-            <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto"
-                style="background-color:#fd5;color:#9d1032;">
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                <span x-cloak x-show="timeLeft > 0">REGISTRATION CLOSES IN <br>
-                </span>
-                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-            </h4>
+{{--            <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto"--}}
+{{--                style="background-color:#fd5;color:#9d1032;">--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                <span x-cloak x-show="timeLeft > 0">REGISTRATION CLOSES IN <br>--}}
+{{--                </span>--}}
+{{--                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                </span>--}}
+{{--            </h4>--}}
         </div>
     </section>
 
@@ -885,73 +886,9 @@
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Play-Along Lessons + 4 Live Q&A
                     Sessions</strong></h2>
 
-            <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
+{{--            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span>--}}
+            <span class="join sold-out medium w-full max-w-xs align-middle mt-7">ENROLLMENT CLOSED</span>
 
-             <!-- Version 1 -->
-            <h6 class="leading-normal mb-4 text-drumeo">   
-                <strong x-cloak x-data="timer()" x-init="countdown()">
-                    <span x-cloak x-show="timeLeft > 0"> 
-                    Enrollment closes in
-                    <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                            x-text="dayText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                            x-text="hourText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                            x-text="minuteText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                            x-text="secondText"></span></span>!</span>
-                    <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                </strong>
-            </h6>
-
-
-
-            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles in 30-Day Independence">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}
-                drummers who<br class="sm:hidden"> have already registered.</p>
-
-            @include('drumeo.products.partials._promo-cards', [
-                'firstDeal' => '30-Day Independence',
-                'firstDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-01.webp',
-                'firstImageHeight' => 'h-36 lg:h-40',
-                'firstDealPrice' => 97,
-                'firstDealSub' => 'Just the course + 2 bonuses worth $42.95',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[30-day-independence]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true',
-                'firstButtonText' => 'ENROLL NOW',
-                'firstDealExtra' => "One-time payment",
-                'whiteBg' => 'false',
-                'firstExtraBonuses' => [
-                    '<strong>30-Day Independence</strong>',
-                    '<strong>Free</strong> Drumeo 5A Drumsticks',
-                    '<strong>Free</strong> 1-month Drumeo Access',
-                ],
-
-                'topBadge' => 'MOST POPULAR',
-                'secondDeal' => 'Unlimited Lessons',
-                'secondDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/bundle-02.webp',
-                'secondImageHeight' => 'h-36 lg:h-40',
-                'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $258.94",
-                'secondDealPrice' => '20/mo',
-                'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
-                'secondExtraBonuses' => [
-                    '<strong>Annual Drumeo Membership</strong>',
-                    '<strong>Free 30-Day Independence</strong>',
-                    '<strong>Free</strong> Drumeo QuietPad',
-                    '<strong>Free</strong> Drumeo PadStand',
-                    '<strong>Free</strong> Drumeo 5A Drumsticks',
-                    '<strong>Free</strong> Easy Rudiments Book',
-                ],
-                'secondButtonText' => 'GET EVERYTHING',
-                'secondDealExtra' => "Billed annually at $240/yr.",
-            ])
-
-            <a class="mt-10 inline-block" href="/ecommerce/add-to-cart?products[30-day-independence]=1&products[drumeo_access_30-days]=1&locked=true"><u class="text-drumeo">Don’t want a free bonus? Click here to get just digital access to 30-Day Independence ($97).</u></a>
         </div>
     </section>
     <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
