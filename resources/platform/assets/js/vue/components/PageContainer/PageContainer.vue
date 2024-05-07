@@ -16,6 +16,10 @@ import { setEndpointPrefix } from "../../utils"
 import PlaylistsModal from "../Playlists/Modals/PlaylistsModal.vue";
 
 const props = defineProps({
+  isMobileAppWebView: {
+    type: Boolean,
+    default: false,
+  },
   isLive: {
     type: Boolean,
     default: false
@@ -228,7 +232,7 @@ onUpdated(() => {
     <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key"
       v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps"></PlaylistsModal>
 
-    <Navbar v-if="!isOnboarding" :forceSidebarHidden="forceSidebarHidden" :has-notifications="hasNotifications"
+    <Navbar v-if="!isOnboarding && !isMobileAppWebView" :forceSidebarHidden="forceSidebarHidden" :has-notifications="hasNotifications"
       :isSidebarHidden="pageContainerStore.isSidebarHidden" :isDarkModeSelected="isDarkModeSelected" :show-recommendation="showRecommendation"
       :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed" :is-live="isLive" @onCollapseSidebar="onCollapseSidebar"
       @onColorModeToggle="onColorModeToggle" />
@@ -241,7 +245,7 @@ onUpdated(() => {
       ">
 
       <!-- Sidebar -->
-      <Sidebar v-if="!isOnboarding" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
+      <Sidebar v-if="!isOnboarding && !isMobileAppWebView" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
         :isSidebarHidden="pageContainerStore.isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
         :forceSidebarHidden="forceSidebarHidden" />
 
@@ -252,13 +256,12 @@ onUpdated(() => {
           tw-w-full
           tw-h-full
           tw-min-h-screen
-          tw-pt-[58px]
           tw-flex-col
           tw-relative
           tw-overflow-y-auto
           tw-overflow-x-hidden
           tw-scroll-smooth
-        " id="content-container">
+        " :class="isMobileAppWebView ? '' : 'tw-pt-[58px]'" id="content-container">
         <h2 v-if="adminMessage && adminMessage.length"
           class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
@@ -269,7 +272,7 @@ onUpdated(() => {
         </section>
 
         <!-- Footer -->
-        <Footer />
+        <Footer v-if="!isMobileAppWebView" />
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">

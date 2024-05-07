@@ -324,16 +324,16 @@ class RechargeGateway
     /**
      * Gets the default payment method for a Recharge customer
      *
-     * @param int $shopifyCustomerId
+     * @param int $rechargeCustomerId
      * @return null|PaymentMethod
      * @throws Exception
      */
-    public function getCustomerDefaultPaymentMethod(int $shopifyCustomerId): ?PaymentMethod
+    public function getCustomerDefaultPaymentMethod(int $rechargeCustomerId): ?PaymentMethod
     {
         $data = collect(
             $this->call(
                 'GET',
-                '/payment_methods?customer_id=' . $shopifyCustomerId,
+                '/payment_methods?customer_id=' . $rechargeCustomerId,
                 ['limit' => 3]
             )->payment_methods ?? []
         );
