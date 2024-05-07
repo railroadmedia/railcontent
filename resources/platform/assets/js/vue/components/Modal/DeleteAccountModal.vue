@@ -83,6 +83,7 @@ const agreement2 = ref(false);
 const showWarning = ref(false);
 
 const closeModal = () => {
+    console.log(userStore.userId)
     openModal.value = false;
     step.value = '1';
     textInput.value = '';
@@ -101,8 +102,18 @@ const confirmDelete = () => {
         return;
     }
 
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': userStore.token
+    }
+    
     // Delete account
-    axios.delete(`user/delete/${userStore.userId}`)
+    axios({
+        method: 'DELETE',
+        url: `/user-management-system/user/delete/${userStore.userId}`,
+        headers
+
+    })
     .then(() => {
         window.location.replace('/')
     })
