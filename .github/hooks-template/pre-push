@@ -1,0 +1,15 @@
+#!/bin/sh
+
+printf "\nRunning tests\n"
+
+docker exec --workdir /app/musora-web-platform railenvironmentdocker_apache-php-fpm-8 php artisan test --parallel --recreate-databases --processes=4
+result=$?
+
+if [ $result -eq 0 ]
+then
+    printf "\nAll tests passed\n"
+else
+    printf "\nPlease fix failing tests before pushing\n"
+fi
+
+exit $result

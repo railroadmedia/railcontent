@@ -1,0 +1,24 @@
+#!/bin/sh
+printf "\nRunning php-cs-fixer\n"
+
+PHP_CS_FIXER="vendor/bin/php-cs-fixer"
+HAS_PHP_CS_FIXER=false
+
+if [ -x vendor/bin/php-cs-fixer ]; then
+    HAS_PHP_CS_FIXER=true
+fi
+
+if $HAS_PHP_CS_FIXER; then
+    FILES=` git status --porcelain | grep -e '^[AM]\(.*\).php$' | cut -c 3- | tr '\n' ' '`
+    if [[ -z $FILES ]]; then
+        docker exec --workdir /app/musora-web-platform railenvironmentdocker_apache-php-fpm-8 $PHP_CS_FIXER fix --config=.php-cs-fixer.php ${FILES}
+        git add ${FILES}
+    fi
+else
+    echo ""
+    echo "Please install php-cs-fixer:"
+    echo ""
+    echo "  composer install"
+    echo ""
+    exit 1
+fi
