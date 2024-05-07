@@ -8,6 +8,8 @@ use App\Modules\Ecommerce\Models\UserAccessPermission;
 use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Modules\UserManagementSystem\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class CheckSongMembershipAccess extends Command
 {
@@ -30,6 +32,7 @@ class CheckSongMembershipAccess extends Command
         $shouldUpdate = [];
        foreach ($users as $user) {
             $shouldModify = true;
+            $userIdOrEmail = $user->id;
             foreach ($user->userAccessPermissions as $userPermission) {
                 if ($userPermission->permission_id == UserAccessPermissionsCollection::MusoraPlusMembershipPermission) {
                     $time = $userPermission->time_fixed ?? $userPermission->start_time;
