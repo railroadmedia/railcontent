@@ -19,27 +19,18 @@ class CheckSongMembershipAccess extends Command
         UserAccessPermissionsService $accessPermissionsService,
         UserService $userService
     ) {
-        $users =
-            UserAccessPermission::query()
-                ->join('usora_users', 'usora_users.id', '=', 'user_access_permissions.user_id')
-                ->where('permission_id', '=', UserAccessPermissionsCollection::SongsOnlyMembershipPermission)
-                ->where('permission_id', '!=', UserAccessPermissionsCollection::MusoraPlusMembershipPermission)
-                ->where('usora_users.membership_level', '=', 'plus')
-                ->get();
+        $users = User::query()
+            ->whereHas('userAccessPermissions', function (Builder $query) {
+                $query->where('permission_id', UserAccessPermissionsCollection::SongsOnlyMembershipPermission);
+            })
+            ->where('membership_level', 'plus')
+            ->with('userAccessPermissions')
+            ->get();
 
         $shouldUpdate = [];
-        foreach ($users as $item) {
-            $userIdOrEmail = $item['user_id'];
-            $user = $userService->getByIdOrNull($userIdOrEmail);
-            if (!$user) {
-                $this->error("User $userIdOrEmail not found");
-            }
-
+       foreach ($users as $user) {
             $shouldModify = true;
-            foreach (
-                $accessPermissionsService->getUserAccessPermissions($userIdOrEmail)
-                    ->getCollection() as $userPermission
-            ) {
+            foreach ($user->userAccessPermissions as $userPermission) {
                 if ($userPermission->permission_id == UserAccessPermissionsCollection::MusoraPlusMembershipPermission) {
                     $time = $userPermission->time_fixed ?? $userPermission->start_time;
                     $expirationDate =
