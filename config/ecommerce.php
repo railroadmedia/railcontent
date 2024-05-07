@@ -943,6 +943,7 @@ return [
         'IQD',
         'IRR',
         'ISK',
+        'JEP',
         'JMD',
         'JOD',
         'JPY',
@@ -1001,6 +1002,7 @@ return [
         'SEK',
         'SGD',
         'SHP',
+        'SLE',
         'SLL',
         'SOS',
         'SRD',
@@ -1035,6 +1037,7 @@ return [
         'YER',
         'ZAR',
         'ZMW',
+        'ZWL'
     ],
 
     // exchangerate-api.com
