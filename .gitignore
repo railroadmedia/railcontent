@@ -149,3 +149,5 @@ reports/*
 
 # PHP CS Fixer for autoformatting
 .php-cs-fixer.cache
+
+php-cs-fixer-results.txt
