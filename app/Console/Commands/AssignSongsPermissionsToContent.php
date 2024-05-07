@@ -11,7 +11,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
-
 class AssignSongsPermissionsToContent extends Command
 {
     /**

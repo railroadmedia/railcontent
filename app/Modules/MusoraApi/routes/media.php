@@ -9,13 +9,14 @@ Route::as('musora-api.')
         Route::match(['post', 'put'], '/v5/picture/upload', [PictureUploadController::class, 'uploadPicture'])
             ->middleware('api_version:v5')
             ->name('v5.picture.upload');
-        Route::match(['post', 'put'],
+        Route::match(
+            ['post', 'put'],
             '/v5/picture/upload-from-s3',
-            [PictureUploadController::class, 'uploadPictureFromS3'])
+            [PictureUploadController::class, 'uploadPictureFromS3']
+        )
             ->middleware('api_version:v5')
             ->name('v5.picture.upload-from-s3');
         Route::delete('/v5/picture/delete', [PictureUploadController::class, 'deletePictureFromS3'])
             ->middleware('api_version:v5')
             ->name('v5.picture.delete');
     });
-

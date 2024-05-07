@@ -8,7 +8,6 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 
-
 class EnableFeature extends Command
 {
     protected $signature = 'featureFlag:enableFeature

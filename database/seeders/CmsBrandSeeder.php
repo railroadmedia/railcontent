@@ -20,7 +20,7 @@ class CmsBrandSeeder extends Seeder
             "Drumeo", "Pianote", "Guitareo", "Singeo"
         ];
 
-        foreach ($brands as $brand){
+        foreach ($brands as $brand) {
             Brand::create([
                 'name' => $brand
             ]);

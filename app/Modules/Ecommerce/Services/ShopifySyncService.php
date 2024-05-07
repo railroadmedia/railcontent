@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
+use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
@@ -90,7 +91,7 @@ class ShopifySyncService
         $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
         $skus = $orders->pluck('lineItems')->flatten(1)->pluck('sku')->unique()->toArray();
         $products = $this->productService->getProductsBySkus($skus);
-        if ($products->contains(fn(Product $product) => $product->isDigital())) {
+        if ($products->contains(fn (Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
 
@@ -124,7 +125,7 @@ class ShopifySyncService
         $emailShopify = $this->getEmailForShopify($email);
         $customers = $this->shopify->getCustomers(['email' => $email]);
 
-        $customer = collect($customers)->first(fn($item) => strtolower($item->email) === strtolower($email));
+        $customer = collect($customers)->first(fn ($item) => strtolower($item->email) === strtolower($email));
         if (!$customer) {
             Log::warning("Customer with email $email not found in Shopify");
             return;
@@ -323,7 +324,7 @@ class ShopifySyncService
         return Product::whereIn('id', $productIds)
             ->get()
             ->map(
-                fn(Product $product) => [
+                fn (Product $product) => [
                     "price" => $price,
                     "quantity" => 1, // for digital products, only 1 item of each
                     "requires_shipping" => false, // no shipping required since it is for digital products
@@ -397,6 +398,32 @@ class ShopifySyncService
         $this->syncCustomerByUser($user);
     }
 
+    /**
+     * Post to Shopify to mark the given Fulfillment for the given Shopify Order, as delivered
+     *
+     * @param  int  $shopifyOrderId
+     * @param  int  $fulfillmentId
+     * @return void
+     * @throws ValidationException
+     * @throws Exception
+     */
+    public function markFulfillmentAsDelivered(int $shopifyOrderId, int $fulfillmentId): void
+    {
+        // DEV NOTE: there seems to be a bug with createOrderFulfillmentEvent, so we'll just work around it with a direct post
+        $uriPrefix = ['orders', $shopifyOrderId, 'fulfillments', $fulfillmentId];
+        $url = implode('/', [...$uriPrefix, "events.json"]);
+        $data = ['event' => ['status' => 'delivered']];
+        $fulfillmentEventResponse = $this->shopify->post($url, $data);
+
+        if ($fulfillmentEventResponse->failed()) {
+            throw new Exception(sprintf(
+                "Failed to mark fulfillment %s as delivered: %s.",
+                $fulfillmentId,
+                $fulfillmentEventResponse->reason()
+            ));
+        }
+    }
+
     public function syncUser(User $user)
     {
         Log::debug("Shopify: syncing user $user->id");
@@ -417,7 +444,7 @@ class ShopifySyncService
     public function getShopifyCustomer($email): mixed
     {
         $customers = $this->shopify->getCustomers(['email' => $email]);
-        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        $customer = collect($customers)->first(fn ($item) => $item->email === $email);
         return $customer;
     }
 
@@ -425,7 +452,7 @@ class ShopifySyncService
     {
         $metafields = $this->shopify->getOrderMetafields($orderId);
         $paymentSource = collect($metafields)->first(
-            fn($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
+            fn ($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
         );
 
         $paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom($paymentSource?->value);

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\AddEventCalendars\Models;
-
 
 use App\Services\AddEventService;
 
@@ -147,18 +145,18 @@ class AddEventCalendarVO
     {
         // todo: prepend this with a link to the content catalogue page, with something like this:
 
-//        if($isCoachesCalendar){
-//            $catalogueUrlEnd = '';  // todo: how to get this?
-//        } else {
-//            $catalogueUrlEnd = config('addevent.' . $brand . '.content-type-to-catalogue-url-end-map'); // todo: how to get this?
-//        }
-//        $url = 'https://www.' . $this->internalContentBrand . '.com/members/' . $catalogueUrlEnd;
-//
-//        if (empty($this->internalContentDescription)) {
-//            return $url;
-//        }
-//
-//        return $url . ' ' . PHP_EOL . ' ' . PHP_EOL . $this->internalContentDescription;
+        //        if($isCoachesCalendar){
+        //            $catalogueUrlEnd = '';  // todo: how to get this?
+        //        } else {
+        //            $catalogueUrlEnd = config('addevent.' . $brand . '.content-type-to-catalogue-url-end-map'); // todo: how to get this?
+        //        }
+        //        $url = 'https://www.' . $this->internalContentBrand . '.com/members/' . $catalogueUrlEnd;
+        //
+        //        if (empty($this->internalContentDescription)) {
+        //            return $url;
+        //        }
+        //
+        //        return $url . ' ' . PHP_EOL . ' ' . PHP_EOL . $this->internalContentDescription;
 
         return $this->internalContentDescription;
     }

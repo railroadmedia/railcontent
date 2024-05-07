@@ -16,7 +16,6 @@ use Throwable;
 
 class SyncUsersToShopifyDispatcher extends Command
 {
-
     /**
      * The name and signature of the console command.
      *

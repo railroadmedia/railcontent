@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
-
     public function thankyou()
     {
         return view('pianote.lead-gen.thank-you');
@@ -22,7 +21,7 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.thank-you-alt');
     }
 
-    public function emailconfirmation ()
+    public function emailconfirmation()
     {
         return view('pianote.lead-gen.email-confirmation');
     }
@@ -44,32 +43,32 @@ class LeadGenController extends BaseController
 
     public function weeklyemail()
     {
-        return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function weeklyemail2()
     {
-        return view('pianote.lead-gen.blog-forms.weekly-email-2', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.blog-forms.weekly-email-2', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function minorBlues()
     {
-        return view('pianote.lead-gen.blog-forms.minor-blues', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.blog-forms.minor-blues', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function fSharpMinor()
     {
-        return view('pianote.lead-gen.blog-forms.f-sharp-minor', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.blog-forms.f-sharp-minor', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function pentatonicScale()
     {
-        return view('pianote.lead-gen.blog-forms.pentatonic-scale', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.blog-forms.pentatonic-scale', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function chordInversions()
     {
-        return view('pianote.lead-gen.blog-forms.chord-inversions', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.blog-forms.chord-inversions', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function recitals()
@@ -117,11 +116,11 @@ class LeadGenController extends BaseController
     }
     public function giveaway()
     {
-        return view('pianote.lead-gen.casio-giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.casio-giveaway', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
     public function digitalChordsAndScales()
     {
-        return view('pianote.lead-gen.digital-chords-scales-guide', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.digital-chords-scales-guide', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
     public function awards()
     {
@@ -129,14 +128,13 @@ class LeadGenController extends BaseController
     }
     public function osmoseGiveaway()
     {
-        return view('pianote.lead-gen.osmose-giveaway', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.osmose-giveaway', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
-        if(is_null($page)){
+        if(is_null($page)) {
             return view('pianote.lead-gen.piano-complete-beginners-bootcamp.piano-complete-beginners-bootcamp');
-        }
-        else {
+        } else {
             return view('pianote.lead-gen.piano-complete-beginners-bootcamp.zoom');
         }
 
@@ -145,10 +143,9 @@ class LeadGenController extends BaseController
 
     public function practiceBootcamp(Request $request, $domain, $page = null)
     {
-        if(is_null($page)){
+        if(is_null($page)) {
             return view('pianote.lead-gen.perfect-piano-practice-bootcamp.perfect-piano-practice-bootcamp');
-        }
-        else {
+        } else {
             return view('pianote.lead-gen.perfect-piano-practice-bootcamp.zoom');
         }
 
@@ -157,9 +154,9 @@ class LeadGenController extends BaseController
 
     public function chordHacks(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page){
+        switch($page) {
             case null:
-                return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey' => config('recaptcha.key')]);
             case 'thank-you':
                 return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote']);
             case 'ty-annual':
@@ -173,9 +170,9 @@ class LeadGenController extends BaseController
 
     public function bluesPianoBootcamp(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page){
+        switch($page) {
             case null:
-                return view('pianote.lead-gen.blues-piano-bootcamp.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('pianote.lead-gen.blues-piano-bootcamp.signup', ['recaptchaKey' => config('recaptcha.key')]);
             case 'thank-you':
                 return view('pianote.lead-gen.blues-piano-bootcamp.thank-you', ['theme' => 'pianote', 'month' => true]);
             case 'ty-annual':
@@ -188,9 +185,9 @@ class LeadGenController extends BaseController
     }
     public function beautifulChristmasClassics(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page){
+        switch($page) {
             case null:
-                return view('pianote.lead-gen.beautiful-christmas-classics', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('pianote.lead-gen.beautiful-christmas-classics', ['recaptchaKey' => config('recaptcha.key')]);
         }
 
         throw new NotFoundHttpException();
@@ -231,9 +228,9 @@ class LeadGenController extends BaseController
 
     public function gstd(Request $request, $domain, $page = null, $lesson = null)
     {
-        switch($page){
+        switch($page) {
             case null:
-                return view('pianote.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key'), 'theme' => 'pianote']);
+                return view('pianote.lead-gen.getting-started.signup', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
             case 'thank-you':
                 return view('pianote.lead-gen.getting-started.thank-you', ['theme' => 'pianote', 'month' => true]);
             case 'ty-annual':
@@ -247,14 +244,14 @@ class LeadGenController extends BaseController
 
     public function sightReading()
     {
-        return view('pianote.lead-gen.sight-reading-made-simple', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.sight-reading-made-simple', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
-    public function learnSongs(Request $request, $domain, $page = null,)
+    public function learnSongs(Request $request, $domain, $page = null)
     {
-        switch($page){
+        switch($page) {
             case null:
-                return view('pianote.lead-gen.learn-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('pianote.lead-gen.learn-songs.signup', ['recaptchaKey' => config('recaptcha.key')]);
             case 'thank-you':
                 return view('pianote.lead-gen.learn-songs.thank-you');
         }
@@ -264,20 +261,19 @@ class LeadGenController extends BaseController
 
     public function carols()
     {
-        return view('pianote.lead-gen.christmas-carols', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.christmas-carols', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function classicalPiano()
     {
-        return view('pianote.lead-gen.classical-piano', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.classical-piano', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function chordCharts(Request $request, $domain, $page = null)
     {
-        if(is_null($page)){
-            return view('pianote.lead-gen.50-chord-charts.signup', ['recaptchaKey'=>config('recaptcha.key')]);
-        }
-        else {
+        if(is_null($page)) {
+            return view('pianote.lead-gen.50-chord-charts.signup', ['recaptchaKey' => config('recaptcha.key')]);
+        } else {
             return view('pianote.lead-gen.50-chord-charts.unlocked');
         }
 
@@ -286,28 +282,28 @@ class LeadGenController extends BaseController
 
     public function fiveDays()
     {
-        return view('pianote.lead-gen.piano-in-5-days', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.piano-in-5-days', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function startHere(Request $request, $domain)
     {
-        return view('pianote.lead-gen.start-here', ['recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.lead-gen.start-here', ['recaptchaKey' => config('recaptcha.key')]);
 
         throw new NotFoundHttpException();
     }
 
     public function sevenDaysSightReading()
     {
-        return view('pianote.lead-gen.7-days-to-sight-reading', ['recaptchaKey'=>config('recaptcha.key'), 'theme' => 'pianote']);
+        return view('pianote.lead-gen.7-days-to-sight-reading', ['recaptchaKey' => config('recaptcha.key'), 'theme' => 'pianote']);
     }
 
     public function personalityQuiz(Request $request, $domain, $page = null)
     {
-        switch($page){
+        switch($page) {
             case null:
                 return view('pianote.lead-gen.personality-quiz.personality-quiz');
             default:
-                return view('pianote.lead-gen.personality-quiz.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('pianote.lead-gen.personality-quiz.'.$page, ['recaptchaKey' => config('recaptcha.key')]);
         }
 
         throw new NotFoundHttpException();
@@ -327,12 +323,12 @@ class LeadGenController extends BaseController
                     ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
             })
             ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Pianote')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
-        if(!is_null($currentLesson)){
-            if(!$currentLesson->one_off){
+        if(!is_null($currentLesson)) {
+            if(!$currentLesson->one_off) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
-                $currentLessonIndex = $lessons->search(function($item) use($leadgenSlug){
-                        return $item->slug === $leadgenSlug;
-                    }) + 1;
+                $currentLessonIndex = $lessons->search(function ($item) use ($leadgenSlug) {
+                    return $item->slug === $leadgenSlug;
+                }) + 1;
                 $prevLesson = $currentLessonIndex === 1 ? null : $lessons[$currentLessonIndex - 2];
                 $nextLesson = $currentLessonIndex === count($lessons) ? null : $lessons[$currentLessonIndex];
             }
@@ -348,8 +344,7 @@ class LeadGenController extends BaseController
                 'totalLessonNum' => !empty($lessons) ? count($lessons) : null,
                 'currentLessonNum' => $currentLessonIndex ?? null,
             ]);
-        }
-        else {
+        } else {
             $leadgen = Leadgen::where('leadgens.visible', true)
                 ->where(function ($query) {
                     return $query
@@ -361,10 +356,10 @@ class LeadGenController extends BaseController
                         ->whereNull('leadgens.end_date')
                         ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
                 })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Pianote')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
-            if(!is_null($leadgen)){
+            if(!is_null($leadgen)) {
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
-                return view('_partials.layout.global-lead-gen-index-layout',[
+                return view('_partials.layout.global-lead-gen-index-layout', [
                     'theme' => 'pianote',
                     'leadgen' => $leadgen,
                     'lessons' => $lessons

@@ -74,7 +74,8 @@ class SummerSaleSeeder extends Seeder
         Product::where('brand_id', 2)->where('name', 'Classical Piano Pieces')->update(['discounted_price' => 19]);
 
         //CLOTHING
-        Product::where('brand_id', 2)->where('product_type_id', 3)->update(['discounted_price' => 9]);Product::where('brand_id', 2)->where('product_type_id', 4)->update(['discounted_price' => 9]);
+        Product::where('brand_id', 2)->where('product_type_id', 3)->update(['discounted_price' => 9]);
+        Product::where('brand_id', 2)->where('product_type_id', 4)->update(['discounted_price' => 9]);
         Product::where('brand_id', 2)->where('product_type_id', 5)->update(['discounted_price' => 19]);
         Product::where('brand_id', 2)->where('name', 'Sketchy Mug')->update(['discounted_price' => 5]);
         Product::where('brand_id', 2)->where('name', 'Music Brings Happiness Mug')->update(['discounted_price' => 5]);

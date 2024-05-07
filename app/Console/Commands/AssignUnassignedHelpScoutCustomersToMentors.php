@@ -14,7 +14,6 @@ use Illuminate\Console\Command;
 
 class AssignUnassignedHelpScoutCustomersToMentors extends Command
 {
-
     /**
      * The console command name.
      *

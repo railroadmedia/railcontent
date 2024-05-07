@@ -256,7 +256,7 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
             ],
         ];
 
-        foreach($bundles as $product){
+        foreach($bundles as $product) {
             $newProduct = Product::create([
                 'brand_id' => $product['brand'],
                 'product_type_id' => $product['product_type_id'],
@@ -277,7 +277,7 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
                 'overview' => empty($product['overview']) ? false : $product['overview'],
             ]);
 
-            foreach($product['images'] as $key => $image){
+            foreach($product['images'] as $key => $image) {
                 Image::create([
                     'product_id' => $newProduct->id,
                     'path' => $image,
@@ -285,7 +285,7 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
                 ]);
             }
 
-            foreach($product['products'] as $key => $bundle){
+            foreach($product['products'] as $key => $bundle) {
                 $product_id = Product::where('name', '=', $bundle['name'])->where('brand_id', '=', $product['brand'])->first()->id;
 
                 Bundle::create([

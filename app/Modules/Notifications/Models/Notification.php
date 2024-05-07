@@ -53,12 +53,12 @@ class Notification extends Model
 {
     protected $table = 'notifications';
 
-    const TYPE_FORUM_POST_IN_FOLLOWED_THREAD = 'forum post in followed thread';
-    const TYPE_FORUM_POST_REPLY = 'forum post reply';
-    const TYPE_FORUM_POST_LIKED = 'forum post liked';
-    const TYPE_LESSON_COMMENT_LIKED = 'lesson comment liked';
-    const TYPE_LESSON_COMMENT_REPLY = 'lesson comment reply';
-    const TYPE_NEW_CONTENT_RELEASES = 'new content releases';
+    public const TYPE_FORUM_POST_IN_FOLLOWED_THREAD = 'forum post in followed thread';
+    public const TYPE_FORUM_POST_REPLY = 'forum post reply';
+    public const TYPE_FORUM_POST_LIKED = 'forum post liked';
+    public const TYPE_LESSON_COMMENT_LIKED = 'lesson comment liked';
+    public const TYPE_LESSON_COMMENT_REPLY = 'lesson comment reply';
+    public const TYPE_NEW_CONTENT_RELEASES = 'new content releases';
 
     public function user()
     {

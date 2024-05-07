@@ -34,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $subDomain = current(explode('.', request()->getHost()));
-//dd($subDomain);
+        //dd($subDomain);
         /*
          * Domain patterns for usage in routes. This allows routes to accept any subdomain OR no subdomain for a given domain.
          */

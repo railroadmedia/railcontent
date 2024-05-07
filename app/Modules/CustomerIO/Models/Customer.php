@@ -87,7 +87,7 @@ class Customer extends Model
             }
 
             if (is_numeric($externalAttributeValue)) {
-                $this->externalAttributes[$externalAttributeName] = (integer)$externalAttributeValue;
+                $this->externalAttributes[$externalAttributeName] = (int)$externalAttributeValue;
             }
         }
 

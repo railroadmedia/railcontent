@@ -26,7 +26,7 @@ class Subscription
         $this->id = $subscriptionData->id;
         $this->customerId = $subscriptionData->customer_id;
         $this->email = $subscriptionData->email ?? null;
-        $this->createdAt = $subscriptionData->created_at? Carbon::parse($subscriptionData->created_at) : null;
+        $this->createdAt = $subscriptionData->created_at ? Carbon::parse($subscriptionData->created_at) : null;
 
         $this->cancellationReason = $subscriptionData->cancellation_reason;
         $this->cancelledAt = $subscriptionData->cancelled_at ? Carbon::parse($subscriptionData->cancelled_at) : null;

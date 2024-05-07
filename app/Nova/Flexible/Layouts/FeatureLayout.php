@@ -30,7 +30,7 @@ class FeatureLayout extends Layout
     {
         return [
             Text::make('Description', 'desc')->required()->rules('required'),
-            Text::make('Id','id')->hide()->hideFromDetail(),
+            Text::make('Id', 'id')->hide()->hideFromDetail(),
         ];
     }
 

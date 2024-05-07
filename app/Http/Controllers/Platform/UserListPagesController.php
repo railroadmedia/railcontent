@@ -77,7 +77,8 @@ class UserListPagesController extends BaseController
         }
 
         $listLessons =
-            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]
+            (new ContentFilterResultsEntity(
+                ['results' => $lessons, 'total_results' => $totalResults]
             ))->toResponseRawJson();
 
         $initialPage = $request->get('page', 1);
@@ -121,7 +122,7 @@ class UserListPagesController extends BaseController
         }
 
         $state = UserContentProgressService::STATE_COMPLETED;
-        if(!$request->has('tabs') || $request->get('tabs')[0] == 'inProgress'){
+        if(!$request->has('tabs') || $request->get('tabs')[0] == 'inProgress') {
             $state = UserContentProgressService::STATE_STARTED;
         }
         $listLessons = $this->contentService->getFiltered(
@@ -199,7 +200,8 @@ class UserListPagesController extends BaseController
         );
 
         $listLessons =
-            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]
+            (new ContentFilterResultsEntity(
+                ['results' => $lessons, 'total_results' => $totalResults]
             ))->toResponseRawJson();
 
         $initialPage = $request->get('page', 1);

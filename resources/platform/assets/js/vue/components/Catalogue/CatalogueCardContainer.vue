@@ -12,7 +12,8 @@
                 `">
                 <!-- Skeleton Loader -->
                 <template v-if="showSkeletonLoader">
-                    <SkeletonLoader :count="skeletonCardCount" :type="showListElement ? 'listElement' : 'card'" :is-single-row="isSingleRow" />
+                    <SkeletonLoader :count="skeletonCardCount" :type="showListElement ? 'listElement' : 'card'"
+                        :is-single-row="isSingleRow" />
                 </template>
                 <!-- Catalogue Cards -->
                 <template v-else-if="isMiniView">
@@ -20,11 +21,12 @@
                         :content-type="item.type" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
                         :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
                         :show-my-list-action="showMyListAction" :force-no-links="forceNoLinks" @addToList="addToList"
-                        @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
+                        @progressReset="handleProgressReset" :show-dropdown="showDropdown"
+                        :trackingSection="trackingSection" />
                 </template>
                 <template v-else>
-                    <CatalogueListElement v-if="showListElement"
-                        v-for="item in getData" :key="'catalogue-list' + item.id" :item="item" :content-type="item.type"
+                    <CatalogueListElement v-if="showListElement" v-for="item in getData"
+                        :key="'catalogue-list' + item.id" :item="item" :content-type="item.type"
                         :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
                         :force-no-links="forceNoLinks" :is-single-row="isSingleRow" @addToList="addToList"
@@ -33,7 +35,7 @@
                         :content-type="item.type" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
                         :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
                         :force-no-links="forceNoLinks" :force-list-view="displayInline" :is-single-row="isSingleRow"
-                        @addToList="addToList" @progressReset="handleProgressReset" :show-dropdown="showDropdown" />
+                        @addToList="addToList" @progressReset="handleProgressReset" :show-dropdown="showDropdown" :trackingSection="trackingSection" />
                 </template>
             </div>
         </div>
@@ -142,6 +144,10 @@ const props = defineProps({
     noSkeleton: {
         type: Boolean,
         default: () => false,
+    },
+    trackingSection: {
+        type: String,
+        default: '',
     },
 });
 

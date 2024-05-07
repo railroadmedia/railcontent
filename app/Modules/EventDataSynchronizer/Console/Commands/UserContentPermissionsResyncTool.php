@@ -9,7 +9,6 @@ use App\Modules\EventDataSynchronizer\Listeners\UserProductToUserContentPermissi
 
 class UserContentPermissionsResyncTool extends Command
 {
-
     /**
      * The console command name.
      *

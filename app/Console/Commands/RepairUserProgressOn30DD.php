@@ -12,7 +12,6 @@ use Exception;
 
 class RepairUserProgressOn30DD extends Command
 {
-
     /**
      * The console command name.
      *

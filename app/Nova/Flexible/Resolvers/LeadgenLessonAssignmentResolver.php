@@ -20,15 +20,21 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
     public function get($resource, $attribute, $layouts)
     {
         $lesson = LeadgenLesson::where('id', $resource['id'])->find($resource['id']);
-        if(!$lesson) return collect([]);
+        if(!$lesson) {
+            return collect([]);
+        }
         $assignments = $lesson->assignments()->get();
 
-        return $assignments->map(function($assignment) use ($layouts) {
+        return $assignments->map(function ($assignment) use ($layouts) {
             $layout = $layouts->find('leadgen-lesson-assignment-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
-            return $layout->duplicateAndHydrate($assignment->id, [
+            return $layout->duplicateAndHydrate(
+                $assignment->id,
+                [
                 'title' => $assignment->title,
                 'subtitle' => $assignment->subtitle,
                 'src' => $assignment->src,
@@ -51,7 +57,7 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
     public function set($model, $attribute, $groups)
     {
 
-        $assignments = $groups->map(function($group, $index){
+        $assignments = $groups->map(function ($group, $index) {
             return [
                 'title' => $group->getAttributes()['title'],
                 'subtitle' => $group->getAttributes()['subtitle'],
@@ -61,9 +67,9 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
             ];
         });
 
-        foreach($assignments as $assignment){
+        foreach($assignments as $assignment) {
             //insert
-            if(is_null($assignment['id'])){
+            if(is_null($assignment['id'])) {
                 $addAssignment = new LeadgenLessonAssignment();
                 $addAssignment->leadgen_lesson_id = $model->id;
                 $addAssignment->title = $assignment['title'];
@@ -77,19 +83,19 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
             else {
                 $dbAssignment = LeadgenLessonAssignment::find($assignment['id']);
 
-                if($dbAssignment['title'] !== $assignment['title']){
+                if($dbAssignment['title'] !== $assignment['title']) {
                     $dbAssignment->title = $assignment['title'];
                 }
 
-                if($dbAssignment['subtitle'] !== $assignment['subtitle']){
+                if($dbAssignment['subtitle'] !== $assignment['subtitle']) {
                     $dbAssignment->subtitle = $assignment['subtitle'];
                 }
 
-                if($dbAssignment['src'] !== $assignment['src']){
+                if($dbAssignment['src'] !== $assignment['src']) {
                     $dbAssignment->src = $assignment['src'];
                 }
 
-                if($dbAssignment['soundslice'] !== $assignment['soundslice']){
+                if($dbAssignment['soundslice'] !== $assignment['soundslice']) {
                     $dbAssignment->soundslice = $assignment['soundslice'];
                 }
 

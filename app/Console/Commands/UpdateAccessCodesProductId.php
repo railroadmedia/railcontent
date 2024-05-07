@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 class UpdateAccessCodesProductId extends Command
 {
     protected $name  = 'UpdateAccessCodesProductId';
-    
+
     protected $signature = 'UpdateAccessCodesProductId';
 
     protected $description = 'Update the product ids of given access codes 124 to 420;
@@ -17,8 +17,10 @@ class UpdateAccessCodesProductId extends Command
     {
         $this->info('###### Starting UpdateAccessCodesProductId command....  ######');
 
-        $csv = array_map(function($v){return str_getcsv($v, ",");},
-            file(base_path('access-codes-to-be-updates-MT-431.csv')));
+        $csv = array_map(
+            function ($v) {return str_getcsv($v, ",");},
+            file(base_path('access-codes-to-be-updates-MT-431.csv'))
+        );
 
         foreach ($csv as $row) {
             $accessCodes[] = $row[0];
@@ -27,7 +29,7 @@ class UpdateAccessCodesProductId extends Command
         $accessCodes = array_chunk($accessCodes, 1000);
 
         foreach ($accessCodes as $accessCodesChunk) {
-            $accessCodesChunk = array_map(function($code) {
+            $accessCodesChunk = array_map(function ($code) {
                 return "'" . $code . "'";
             }, $accessCodesChunk);
 

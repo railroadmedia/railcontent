@@ -14,19 +14,19 @@ class UTMEventsMiddleware
         if (auth()->check()) {
             $currentUser = auth()->user();
 
-                //customer-io event
-                event(
-                    new UTMLinks(
-                        $currentuser->id,
-                        config('event-data-synchronizer.customer_io_brand_activity_event'),
-                        Carbon::now()
-                            ->toDateTimeString(),
-                        $request->get('utm_id'),
-                        $request->get('utm_source'),
-                        $request->get('utm_campaign'),
-                        $request->get('utm_medium')
-                    )
-                );
+            //customer-io event
+            event(
+                new UTMLinks(
+                    $currentuser->id,
+                    config('event-data-synchronizer.customer_io_brand_activity_event'),
+                    Carbon::now()
+                        ->toDateTimeString(),
+                    $request->get('utm_id'),
+                    $request->get('utm_source'),
+                    $request->get('utm_campaign'),
+                    $request->get('utm_medium')
+                )
+            );
 
         }
 

@@ -9,7 +9,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class SoftDeleteOldGuitareoSongs extends Command
 {
-
     /**
      * The console command name.
      *
@@ -44,7 +43,7 @@ class SoftDeleteOldGuitareoSongs extends Command
                 ->select('id', 'type')
                 ->where('brand', 'guitareo')
                 ->where('type', 'song')
-                ->where('id','<',377661)
+                ->where('id', '<', 377661)
                 ->orderBy('id', 'asc');
 
         $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService) {

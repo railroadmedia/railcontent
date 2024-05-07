@@ -155,19 +155,19 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $grupedPermissions[$content['id']]->pluck('permission_id')
                             ->toArray() : []
                 )
-                ) && (isset($grupedPermissions[$content['id']]));
+            ) && (isset($grupedPermissions[$content['id']]));
 
             $needLifetime = (count($grupedPermissions[$content['id']] ?? []) == 1) && array_intersect(
-                    [
+                [
                         'Drumeo Lifetime Member',
                         'Pianote Lifetime Member',
                         'Guitareo Lifetime Member',
                         'Singeo Lifetime Member',
                     ],
-                    (isset($grupedPermissions[$content['id']])) ?
+                (isset($grupedPermissions[$content['id']])) ?
                         $grupedPermissions[$content['id']]->pluck('name')
                             ->toArray() : []
-                );
+            );
             $needMusoraBasic = array_intersect(
                 ['Musora Basic Membership'],
                 (isset($grupedPermissions[$content['id']])) ?
@@ -192,7 +192,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['need_access_message'] = $message;
             }
 
-            if(ContentRepository::$bypassPermissions === true){
+            if(ContentRepository::$bypassPermissions === true) {
                 $contentsOfType[$contentIndex]['need_access'] = false;
                 $contentsOfType[$contentIndex]['need_access_message'] = '';
             }

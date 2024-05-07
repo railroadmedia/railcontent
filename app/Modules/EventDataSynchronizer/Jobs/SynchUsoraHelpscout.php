@@ -18,14 +18,16 @@ use Modules\UserManagementSystem\Models\User;
 
 class SynchUsoraHelpscout implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
 
     /**
      * @var User
      */
     private $userId;
 
-    const DELAY_SECONDS = 600;
+    public const DELAY_SECONDS = 600;
 
     public function __construct(int $userId)
     {

@@ -83,7 +83,7 @@ class RemoveTemporarySongsAccessForLifetimeMembersJanuary2023 extends Command
 
                 foreach($songContentIdsForBrand as $songId) {
                     $this->connection->table('railcontent_content_permissions')->insert([
-                        'content_id'=> $songId,
+                        'content_id' => $songId,
                         'permission_id' => $permissionId
                     ]);
                 }
@@ -126,7 +126,7 @@ class RemoveTemporarySongsAccessForLifetimeMembersJanuary2023 extends Command
     private function squish($array)
     {
         $string = '';
-        foreach($array as $value){
+        foreach($array as $value) {
             $string = $string . $value . ',';
         }
         return '   ' . substr($string, 0, -1) . '   ';

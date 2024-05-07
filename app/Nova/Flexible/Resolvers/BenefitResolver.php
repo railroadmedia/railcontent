@@ -19,10 +19,12 @@ class BenefitResolver implements ResolverInterface
     {
         $benefits = $resource->benefits()->get();
 
-        return $benefits->map(function($benefit) use($layouts){
+        return $benefits->map(function ($benefit) use ($layouts) {
             $layout = $layouts->find('benefit-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
             return $layout->duplicateAndHydrate($benefit->id, [
                 'icon' => $benefit->icon,
@@ -45,31 +47,30 @@ class BenefitResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use($groups){
-            $benefits = $groups->map(function($group, $index){
-               return [
-                   'icon' => $group->getAttributes()['icon'],
-                   'heading' => $group->getAttributes()['heading'],
-                   'desc' => $group->getAttributes()['desc'],
-                   'order_number' => $index,
-                   'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
-               ];
+        $class::saved(function ($model) use ($groups) {
+            $benefits = $groups->map(function ($group, $index) {
+                return [
+                    'icon' => $group->getAttributes()['icon'],
+                    'heading' => $group->getAttributes()['heading'],
+                    'desc' => $group->getAttributes()['desc'],
+                    'order_number' => $index,
+                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
+                ];
             });
 
             //update and insert items
-            foreach($benefits as $benefit){
-                if(!is_null($benefit['id'])){
+            foreach($benefits as $benefit) {
+                if(!is_null($benefit['id'])) {
                     $dbBenefit = Benefit::find($benefit['id']);
 
-                    if(empty($benefit['desc'])){
+                    if(empty($benefit['desc'])) {
                         $dbBenefit->delete();
-                    }
-                    else {
-                        if($dbBenefit->desc !== $benefit['desc']){
+                    } else {
+                        if($dbBenefit->desc !== $benefit['desc']) {
                             $dbBenefit->desc = $benefit['desc'];
                         }
 
-                        if($dbBenefit->order_number !== $benefit['order_number']){
+                        if($dbBenefit->order_number !== $benefit['order_number']) {
                             $dbBenefit->order_number = $benefit['order_number'];
                         }
 
@@ -77,8 +78,7 @@ class BenefitResolver implements ResolverInterface
                     }
 
                     $updatedIds[] = $benefit['id'];
-                }
-                elseif(!empty($benefit['desc'])){
+                } elseif(!empty($benefit['desc'])) {
                     $addBenefit = new Benefit();
                     $addBenefit->product_id = $model['id'];
                     $addBenefit->icon = $benefit['icon'];
@@ -91,7 +91,7 @@ class BenefitResolver implements ResolverInterface
                 }
             }
 
-            if(isset($updatedIds)){
+            if(isset($updatedIds)) {
                 $deleteIds = Benefit::where('product_id', '=', $model['id'])
                     ->whereNotIn('id', $updatedIds)->delete();
             }

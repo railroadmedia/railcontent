@@ -353,7 +353,7 @@ class UserDelete extends Command
                 // chunkById grabs the paginated IDs, so we can't break out of the loop if we have a smaller
                 // amount wanted inside the batch, so we'll just tell the user that it got increased
                 if ($userCount % $batchSize) {
-                    $batchedLimit = intval($userCount * ceil( $batchSize / $userCount));
+                    $batchedLimit = intval($userCount * ceil($batchSize / $userCount));
                     $limitInfo .= ', rounded up to ' . $batchedLimit . ' for batching.';
                 }
                 $this->info($limitInfo);

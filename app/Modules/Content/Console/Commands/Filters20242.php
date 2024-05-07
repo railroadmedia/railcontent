@@ -56,12 +56,12 @@ class Filters20242 extends Command
 
                 $contentId = $this->getValue($data, $headersRow, 'id');
                 $contentIds[] = $contentId;
-                if($brand == 'drumeo-songs'){
+                if($brand == 'drumeo-songs') {
                     $contentType = 'song';
-                }else{
+                } else {
                     $contentType = $this->getValue($data, $headersRow, 'type');
                 }
-                $contentTitle= $this->getValue($data, $headersRow, 'title');
+                $contentTitle = $this->getValue($data, $headersRow, 'title');
 
                 $content = Content::query()
                     ->where('type', '=', $contentType)
@@ -73,60 +73,60 @@ class Filters20242 extends Command
                 } else {
                     if($brand == 'drumeo-Rudiments') {
                         $style = $this->getValue($data, $headersRow, 'Gear');
-                    }elseif($brand == 'drumeo-songs') {
+                    } elseif($brand == 'drumeo-songs') {
                         $style = $this->getValue($data, $headersRow, 'NEW-GENRE');
-                    }else {
+                    } else {
                         $style = $this->getValue($data, $headersRow, 'Genre');
                     }
                     $results[$contentType][$style] = ($results[$contentType][$style] ?? 0) + 1;
                     if ($import) {
-                    if($brand == 'drumeo-Rudiments') {
-                        ContentTopic::query()
-                                    ->where('content_id', '=', $contentId)
-                                    ->delete();
+                        if($brand == 'drumeo-Rudiments') {
+                            ContentTopic::query()
+                                        ->where('content_id', '=', $contentId)
+                                        ->delete();
 
-                        $content->deleteFields('topic');
+                            $content->deleteFields('topic');
 
-                        ContentGears::query()
-                            ->where('content_id', '=', $contentId)
-                            ->delete();
-                        $content->deleteFields('gear');
+                            ContentGears::query()
+                                ->where('content_id', '=', $contentId)
+                                ->delete();
+                            $content->deleteFields('gear');
 
-                        $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
-                        $content->setGear($this->getValue($data, $headersRow, 'Gear'));
-                    }elseif($brand == 'drumeo-songs') {
-                        ContentStyle::query()
-                            ->where('content_id', '=', $contentId)
-                            ->delete();
-                        $content->deleteFields('style');
-                        $content->setStyle($this->getValue($data, $headersRow, 'NEW-GENRE'));
-                    }else {
-                        $this->prepareDatabase($contentId, $content);
+                            $content->setTopic($this->getValue($data, $headersRow, 'Topic'));
+                            $content->setGear($this->getValue($data, $headersRow, 'Gear'));
+                        } elseif($brand == 'drumeo-songs') {
+                            ContentStyle::query()
+                                ->where('content_id', '=', $contentId)
+                                ->delete();
+                            $content->deleteFields('style');
+                            $content->setStyle($this->getValue($data, $headersRow, 'NEW-GENRE'));
+                        } else {
+                            $this->prepareDatabase($contentId, $content);
 
-                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-1'), 1);
-                        $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-2'), 2);
-                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-1'),1);
-                        $content->setTheory($this->getValue($data, $headersRow, 'Theory-2'),2);
-                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-1'),1);
-                        $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'),2);
-                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'),1);
-                        $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'),2);
-                        $content->setStyle($this->getValue($data, $headersRow, 'Genre'));
-                    }
+                            $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-1'), 1);
+                            $content->setEssentials($this->getValue($data, $headersRow, 'Essentials-2'), 2);
+                            $content->setTheory($this->getValue($data, $headersRow, 'Theory-1'), 1);
+                            $content->setTheory($this->getValue($data, $headersRow, 'Theory-2'), 2);
+                            $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-1'), 1);
+                            $content->setCreativity($this->getValue($data, $headersRow, 'Creativity-2'), 2);
+                            $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-1'), 1);
+                            $content->setLifestyle($this->getValue($data, $headersRow, 'Lifestyle-2'), 2);
+                            $content->setStyle($this->getValue($data, $headersRow, 'Genre'));
+                        }
                     }
                 }
             }
         );
 
-        if($refreshCompiledViewData){
+        if($refreshCompiledViewData) {
             $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
         }
 
         $separator = new TableSeparator();
         $roows = [];
-        foreach ($results as $key=>$result) {
+        foreach ($results as $key => $result) {
             $roows[] = $separator;
-            foreach($result as $key2=>$row) {
+            foreach($result as $key2 => $row) {
                 $roows = array_merge($roows, [
                     [$key,   $key2,     $row],
                 ]) ;
@@ -181,8 +181,7 @@ class Filters20242 extends Command
     private function prepareDatabase(
         ?string $contentId,
         $content
-    )
-    : void {
+    ): void {
         ContentCreativity::query()
             ->where('content_id', '=', $contentId)
             ->delete();

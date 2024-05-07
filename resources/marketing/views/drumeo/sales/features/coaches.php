@@ -73,289 +73,289 @@
         ],
     ];
 
-    $techniques = [
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/subdivision-studies.jpg',
-            'title' => 'Subdivision Studies',
-            'artist' => 'Anika Nilles',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/pedal-control.jpg',
-            'title' => 'Pedal Control',
-            'artist' => 'Dom Famularo',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/groove-essentials.jpg',
-            'title' => 'Groove Essentials',
-            'artist' => 'Tommy Igoe',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/stick-control.jpg',
-            'title' => 'Stick Control',
-            'artist' => 'Dorothea Taylor',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hand-technique.jpg',
-            'title' => 'Hand Technique',
-            'artist' => 'Bruce Becker',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/foot-technique.jpg',
-            'title' => 'Foot Technique',
-            'artist' => 'Gil Sharone',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/traditional-grip.jpg',
-            'title' => 'Traditional Grip',
-            'artist' => 'Emmanuelle Caplette',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/internal-synchronization.jpg',
-            'title' => 'Internal Synchronization',
-            'artist' => 'Billy Cobham',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/4-way-coordination.jpg',
-            'title' => '4-Way Coordination',
-            'artist' => 'Sarah Thawer',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/moeller-technique.jpg',
-            'title' => 'Moeller Technique',
-            'artist' => 'Henrique De Almeida',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/open-handed-drumming.jpg',
-            'title' => 'Open Handed Drumming',
-            'artist' => 'Claus Hessler',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/brush-technique.jpg',
-            'title' => 'Brush Technique',
-            'artist' => 'Steve Lyman',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/body-fulcrum.jpg',
-            'title' => 'The Body Fulcrum',
-            'artist' => 'Rodney Holmes',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/blast-beats.jpg',
-            'title' => 'Blast Beats',
-            'artist' => 'Ash Pearson',
-        ],
-    ];
+$techniques = [
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/subdivision-studies.jpg',
+        'title' => 'Subdivision Studies',
+        'artist' => 'Anika Nilles',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/pedal-control.jpg',
+        'title' => 'Pedal Control',
+        'artist' => 'Dom Famularo',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/groove-essentials.jpg',
+        'title' => 'Groove Essentials',
+        'artist' => 'Tommy Igoe',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/stick-control.jpg',
+        'title' => 'Stick Control',
+        'artist' => 'Dorothea Taylor',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hand-technique.jpg',
+        'title' => 'Hand Technique',
+        'artist' => 'Bruce Becker',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/foot-technique.jpg',
+        'title' => 'Foot Technique',
+        'artist' => 'Gil Sharone',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/traditional-grip.jpg',
+        'title' => 'Traditional Grip',
+        'artist' => 'Emmanuelle Caplette',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/internal-synchronization.jpg',
+        'title' => 'Internal Synchronization',
+        'artist' => 'Billy Cobham',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/4-way-coordination.jpg',
+        'title' => '4-Way Coordination',
+        'artist' => 'Sarah Thawer',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/moeller-technique.jpg',
+        'title' => 'Moeller Technique',
+        'artist' => 'Henrique De Almeida',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/open-handed-drumming.jpg',
+        'title' => 'Open Handed Drumming',
+        'artist' => 'Claus Hessler',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/brush-technique.jpg',
+        'title' => 'Brush Technique',
+        'artist' => 'Steve Lyman',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/body-fulcrum.jpg',
+        'title' => 'The Body Fulcrum',
+        'artist' => 'Rodney Holmes',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/blast-beats.jpg',
+        'title' => 'Blast Beats',
+        'artist' => 'Ash Pearson',
+    ],
+];
 
-    $creativities = [
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-sound.jpg',
-            'title' => 'Elevate Your Drum Sound',
-            'artist' => 'Simon Phillips',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/writing-drum-parts.jpg',
-            'title' => 'Writing Drum Parts',
-            'artist' => 'Hannah Welton',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/song-breakdowns.jpg',
-            'title' => 'Song Breakdowns',
-            'artist' => 'Matt McGuire',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/rudiments-patterns.jpg',
-            'title' => 'Rudiments & Patterns',
-            'artist' => 'Dorothea Taylor',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/creative-mindset.jpg',
-            'title' => 'The Creative Mindset',
-            'artist' => 'Aric Improta',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/musical-exercises.jpg',
-            'title' => 'Musical Exercises',
-            'artist' => 'Kaz Rodriguez',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-callibration.jpg',
-            'title' => 'Bass Drum Calibration',
-            'artist' => 'Gavin Harrison',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/crafting-drum-solos.jpg',
-            'title' => 'Crafting Drum Solos',
-            'artist' => 'Steve Smith',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/independence.jpg',
-            'title' => 'Independence',
-            'artist' => 'Thomas Lang',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/building-grooves.jpg',
-            'title' => 'Building Grooves',
-            'artist' => 'Taylor Gordon',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/timing.jpg',
-            'title' => 'Master Your Timing',
-            'artist' => 'Michael Schack',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-solos.jpg',
-            'title' => 'Supercharged Drum Solos',
-            'artist' => 'Larnell Lewis',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/jazz-flow.jpg',
-            'title' => 'Improving Your Jazz Flow',
-            'artist' => 'Rob Brown',
-        ],
-    ];
+$creativities = [
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-sound.jpg',
+        'title' => 'Elevate Your Drum Sound',
+        'artist' => 'Simon Phillips',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/writing-drum-parts.jpg',
+        'title' => 'Writing Drum Parts',
+        'artist' => 'Hannah Welton',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/song-breakdowns.jpg',
+        'title' => 'Song Breakdowns',
+        'artist' => 'Matt McGuire',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/rudiments-patterns.jpg',
+        'title' => 'Rudiments & Patterns',
+        'artist' => 'Dorothea Taylor',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/creative-mindset.jpg',
+        'title' => 'The Creative Mindset',
+        'artist' => 'Aric Improta',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/musical-exercises.jpg',
+        'title' => 'Musical Exercises',
+        'artist' => 'Kaz Rodriguez',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-callibration.jpg',
+        'title' => 'Bass Drum Calibration',
+        'artist' => 'Gavin Harrison',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/crafting-drum-solos.jpg',
+        'title' => 'Crafting Drum Solos',
+        'artist' => 'Steve Smith',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/independence.jpg',
+        'title' => 'Independence',
+        'artist' => 'Thomas Lang',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/building-grooves.jpg',
+        'title' => 'Building Grooves',
+        'artist' => 'Taylor Gordon',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/timing.jpg',
+        'title' => 'Master Your Timing',
+        'artist' => 'Michael Schack',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-solos.jpg',
+        'title' => 'Supercharged Drum Solos',
+        'artist' => 'Larnell Lewis',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/jazz-flow.jpg',
+        'title' => 'Improving Your Jazz Flow',
+        'artist' => 'Rob Brown',
+    ],
+];
 
-    $grooves = [
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/michael-jackson1.jpg',
-            'title' => 'The Grooves of Michael Jackson',
-            'artist' => 'Jonathan Moffett',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/styx1.jpg',
-            'title' => 'The Grooves of Styx',
-            'artist' => 'Todd Sucherman',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/snarky-puppy1.jpg',
-            'title' => 'The Grooves of Snarky Puppy',
-            'artist' => 'Larnell Lewis',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/john-boham.jpg',
-            'title' => 'The Grooves of John Bonham',
-            'artist' => 'Brian Tichy',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/porcupine-tree1.jpg',
-            'title' => 'The Grooves of Porcupine Tree',
-            'artist' => 'Gavin Harrison',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/chicago1.jpg',
-            'title' => 'The Grooves of Chicago',
-            'artist' => 'Danny Seraphine',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/death-cab-for-cutie1.jpg',
-            'title' => 'The Grooves of Death Cab For Cutie	',
-            'artist' => 'Jason McGerr',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/alice-cooper1.jpg',
-            'title' => 'The Grooves of Alice Cooper	',
-            'artist' => 'Glen Sobel',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/steely-dan.jpg',
-            'title' => 'The Grooves of Steely Dan',
-            'artist' => 'Keith Carlock',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/harvey-mason1.jpg',
-            'title' => 'The Grooves of Harvey Mason',
-            'artist' => 'Harvey Mason',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/daru-jones1.jpg',
-            'title' => 'The Grooves of Daru Jones',
-            'artist' => 'Daru Jones',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/shawn-mendes1.jpg',
-            'title' => 'The Grooves of Shawn Mendez',
-            'artist' => 'Mike Sleath',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tool1.jpg',
-            'title' => 'The Polyrhythms of Tool',
-            'artist' => 'Aaron Edgar',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/gene-hoglan1.jpg',
-            'title' => 'The Grooves of Gene Hoglan',
-            'artist' => 'Gene Hoglan',
-        ],
-    ];
+$grooves = [
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/michael-jackson1.jpg',
+        'title' => 'The Grooves of Michael Jackson',
+        'artist' => 'Jonathan Moffett',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/styx1.jpg',
+        'title' => 'The Grooves of Styx',
+        'artist' => 'Todd Sucherman',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/snarky-puppy1.jpg',
+        'title' => 'The Grooves of Snarky Puppy',
+        'artist' => 'Larnell Lewis',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/john-boham.jpg',
+        'title' => 'The Grooves of John Bonham',
+        'artist' => 'Brian Tichy',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/porcupine-tree1.jpg',
+        'title' => 'The Grooves of Porcupine Tree',
+        'artist' => 'Gavin Harrison',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/chicago1.jpg',
+        'title' => 'The Grooves of Chicago',
+        'artist' => 'Danny Seraphine',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/death-cab-for-cutie1.jpg',
+        'title' => 'The Grooves of Death Cab For Cutie	',
+        'artist' => 'Jason McGerr',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/alice-cooper1.jpg',
+        'title' => 'The Grooves of Alice Cooper	',
+        'artist' => 'Glen Sobel',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/steely-dan.jpg',
+        'title' => 'The Grooves of Steely Dan',
+        'artist' => 'Keith Carlock',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/harvey-mason1.jpg',
+        'title' => 'The Grooves of Harvey Mason',
+        'artist' => 'Harvey Mason',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/daru-jones1.jpg',
+        'title' => 'The Grooves of Daru Jones',
+        'artist' => 'Daru Jones',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/shawn-mendes1.jpg',
+        'title' => 'The Grooves of Shawn Mendez',
+        'artist' => 'Mike Sleath',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tool1.jpg',
+        'title' => 'The Polyrhythms of Tool',
+        'artist' => 'Aaron Edgar',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/gene-hoglan1.jpg',
+        'title' => 'The Grooves of Gene Hoglan',
+        'artist' => 'Gene Hoglan',
+    ],
+];
 
-    $anythingElse = [
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/mindset.jpg',
-            'title' => 'The Drummer’s Mindset',
-            'artist' => 'Jared Falk',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/double-bass.jpg',
-            'title' => 'Creative Double Bass',
-            'artist' => 'Ryan Van Poederooyen',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/herta-madness.jpg',
-            'title' => 'Herta Madness',
-            'artist' => 'Glen Sobel',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/rhythmic-confidence.jpg',
-            'title' => 'Rhythmic Confidence',
-            'artist' => 'Mark Guiliana',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tuning.jpg',
-            'title' => 'Drum Tuning',
-            'artist' => 'David Raouf',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/maintenance.jpg',
-            'title' => 'Maintenance & Repair',
-            'artist' => 'David Raouf',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/linear-singles.jpg',
-            'title' => 'Linear Singles',
-            'artist' => 'Alex Rüdinger',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/start-end-songs.jpg',
-            'title' => 'How To Start & End Songs',
-            'artist' => 'Gregg Bissonette',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hybrid-rudiments.jpg',
-            'title' => 'Hybrid Rudiments',
-            'artist' => 'Juan Mendoza',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/by-ear.jpg',
-            'title' => 'Learn Songs By Ear',
-            'artist' => 'Rashid Williams',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/using-combinations.jpg',
-            'title' => 'Using Combinations',
-            'artist' => 'Marco Minnemann',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tasty-combinations.jpg',
-            'title' => 'Tasty Combinations',
-            'artist' => 'Brian Frasier-Moore',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/moeller.jpg',
-            'title' => 'Moeller For Your Foot',
-            'artist' => 'Stan Bicknell',
-        ],
-        [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/characteristics.jpg',
-            'title' => 'The Characteristics of Feel',
-            'artist' => 'Josh Dion',
-        ],
-    ];
+$anythingElse = [
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/mindset.jpg',
+        'title' => 'The Drummer’s Mindset',
+        'artist' => 'Jared Falk',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/double-bass.jpg',
+        'title' => 'Creative Double Bass',
+        'artist' => 'Ryan Van Poederooyen',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/herta-madness.jpg',
+        'title' => 'Herta Madness',
+        'artist' => 'Glen Sobel',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/rhythmic-confidence.jpg',
+        'title' => 'Rhythmic Confidence',
+        'artist' => 'Mark Guiliana',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tuning.jpg',
+        'title' => 'Drum Tuning',
+        'artist' => 'David Raouf',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/maintenance.jpg',
+        'title' => 'Maintenance & Repair',
+        'artist' => 'David Raouf',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/linear-singles.jpg',
+        'title' => 'Linear Singles',
+        'artist' => 'Alex Rüdinger',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/start-end-songs.jpg',
+        'title' => 'How To Start & End Songs',
+        'artist' => 'Gregg Bissonette',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hybrid-rudiments.jpg',
+        'title' => 'Hybrid Rudiments',
+        'artist' => 'Juan Mendoza',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/by-ear.jpg',
+        'title' => 'Learn Songs By Ear',
+        'artist' => 'Rashid Williams',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/using-combinations.jpg',
+        'title' => 'Using Combinations',
+        'artist' => 'Marco Minnemann',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tasty-combinations.jpg',
+        'title' => 'Tasty Combinations',
+        'artist' => 'Brian Frasier-Moore',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/moeller.jpg',
+        'title' => 'Moeller For Your Foot',
+        'artist' => 'Stan Bicknell',
+    ],
+    [
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/characteristics.jpg',
+        'title' => 'The Characteristics of Feel',
+        'artist' => 'Josh Dion',
+    ],
+];

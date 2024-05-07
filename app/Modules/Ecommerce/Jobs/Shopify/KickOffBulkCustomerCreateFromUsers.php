@@ -85,7 +85,7 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
         $jobs = [];
         $totalCountForRun = is_null($this->limit) ? $totalCount : min($totalCount, $this->limit);
         $runningTotal = 0;
-        $this->getUserIdRangesToCreate($batchSize)->each(function (int $userId) use ($totalCountForRun, $batchSize, &$runningTotal, &$jobs){
+        $this->getUserIdRangesToCreate($batchSize)->each(function (int $userId) use ($totalCountForRun, $batchSize, &$runningTotal, &$jobs) {
             $jobs[] = new BulkCustomerCreateFromUsers($userId, $batchSize, $this->execute);
 
             if ($this->limit) {
@@ -142,7 +142,7 @@ class KickOffBulkCustomerCreateFromUsers implements ShouldQueue
             ->whereNull("shopify_id")
             ->select("id")
             ->orderBy("id")
-            ->chunkById($batchSize, function(Collection $users) use ($firstIds) {
+            ->chunkById($batchSize, function (Collection $users) use ($firstIds) {
                 $firstIds->push($users->first()->id);
             });
         return $firstIds;

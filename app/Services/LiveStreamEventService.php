@@ -29,7 +29,7 @@ class LiveStreamEventService
      */
     private static $internalCache = [];
 
-    const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
+    public const NOT_LIVE_PAGE_SWITCH_MINUTES = 30;
 
     // upcoming live stream section from homepage is displayed only if there is an event within the next $upcomingPriorMinutes minutes
     public static $upcomingPriorMinutes = null;
@@ -63,7 +63,7 @@ class LiveStreamEventService
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
-//        ContentUserProgressDecorator::$skip = true;
+        //        ContentUserProgressDecorator::$skip = true;
 
         $requiredInstructor = !empty($instructorIds) ? ['key' => 'instructor', 'value' => $instructorIds] : [];
         $liveEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -201,7 +201,7 @@ class LiveStreamEventService
     public function getCurrentOrNextYoutubeEventId($brand = null)
     {
         // temp hack because of api limit
-//        return 'WY14xLIeBbc';
+        //        return 'WY14xLIeBbc';
 
         if (empty($brand)) {
             $brand = brand();
@@ -242,8 +242,7 @@ class LiveStreamEventService
 
             $liveBroadcastItems = $data->getItems();
 
-            usort($liveBroadcastItems, function($a, $b)
-            {
+            usort($liveBroadcastItems, function ($a, $b) {
                 $t1 = strtotime($a->snippet->scheduledStartTime);
                 $t2 = strtotime($b->snippet->scheduledStartTime);
 

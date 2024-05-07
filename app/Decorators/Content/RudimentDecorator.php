@@ -15,7 +15,7 @@ class RudimentDecorator extends TypeDecoratorBase
         // todo: impliment changes
 
         return $contents;
-        
+
         $contentsOfType = $contents->where('type', 'rudiment');
 
         if ($contentsOfType->isEmpty()) {

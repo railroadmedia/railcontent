@@ -2,7 +2,6 @@
 
 namespace App\Modules\Notifications\Services;
 
-
 use App\Modules\Notifications\Models\Broadcast;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,8 +9,6 @@ use Railroad\Railnotifications\Jobs\BroadcastNotificationsAggregated;
 
 class BroadcastService
 {
-
-
     public function broadcastUnreadAggregated(
         Collection $notifications,
         string $channelName,
@@ -23,7 +20,9 @@ class BroadcastService
             // ensure this channel and notification type is enabled in the global config
             // and that is not read already
             if ($notification->read_on ||
-                (config('railnotifications.channel_notification_type_broadcast_toggles', []
+                (config(
+                    'railnotifications.channel_notification_type_broadcast_toggles',
+                    []
                 )[$channelName][$notification->type] ?? true) === false) {
                 continue;
             }

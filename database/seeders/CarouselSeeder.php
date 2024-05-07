@@ -169,7 +169,7 @@ class CarouselSeeder extends Seeder
             ],
         ];
 
-        foreach($carousels as $carousel){
+        foreach($carousels as $carousel) {
             Carousel::create([
                 'brand_id' => $carousel['brand_id'],
                 'subtitle' => $carousel['subtitle'],

@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -126,7 +125,7 @@ return new class extends Migration
             $table->dropColumn('primary_cta_text_alt');
         });
         Schema::table('carousels', function (Blueprint $table) {
-        $table->dropColumn('secondary_cta_text');
+            $table->dropColumn('secondary_cta_text');
         });
         Schema::table('carousels', function (Blueprint $table) {
             $table->dropColumn('secondary_cta_url');

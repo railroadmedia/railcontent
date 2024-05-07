@@ -34,7 +34,7 @@
 
     @if(!empty($nameInput))
         <div class="w-full px-2 sm:px-3 float-left">
-            <input class="w-full" name="name" type="text" placeholder="Your Name" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
+            <input class="w-full" name="first_name" type="text" placeholder="Your Name" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
         </div>
     @endif
 

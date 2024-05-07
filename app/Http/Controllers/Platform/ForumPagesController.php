@@ -82,12 +82,12 @@ class ForumPagesController extends Controller
         $amount = $request->get('amount', 20);
         $page = $request->get('page', 1);
         $categoryIds = $request->get('category_ids', null);
-        $pinned = (boolean)$request->get('pinned');
+        $pinned = (bool)$request->get('pinned');
         // $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id', '=', user()->id)->get()->pluck('user_id')->toArray();
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -244,26 +244,26 @@ class ForumPagesController extends Controller
         $amount = $request->get('amount', 20);
         $page = $request->get('page', 1);
         $categoryIds = [$categoryId];
-        $pinned = (boolean)$request->get('pinned');
-        $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
-        if($request->get('tabs', false)){
-            $tabs = $request->get('tabs',$request->get('tab'));
+        $pinned = (bool)$request->get('pinned');
+        $followed = $request->has('followed') ? (bool)$request->get('followed') : null;
+        if($request->get('tabs', false)) {
+            $tabs = $request->get('tabs', $request->get('tab'));
 
-            if(!is_array($request->get('tabs', $request->get('tab')))){
-                $tabs = [$request->get('tabs',$request->get('tab'))];
+            if(!is_array($request->get('tabs', $request->get('tab')))) {
+                $tabs = [$request->get('tabs', $request->get('tab'))];
             }
 
             foreach($tabs as $tab) {
                 $extra = explode(',', $tab);
                 if ($extra['0'] == 'followed') {
-                    $followed = (boolean)$extra['1'];
-                }elseif ($extra['0'] == 'all') {
+                    $followed = (bool)$extra['1'];
+                } elseif ($extra['0'] == 'all') {
                     $followed = null;
                 }
             }
         }
 
-        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id', '=', user()->id)->get()->pluck('user_id')->toArray();
 
         $sortBy = $request->get('sort', '-last_post_published_on');
 
@@ -377,7 +377,7 @@ class ForumPagesController extends Controller
             "xp_rank" => $xpRank,
         ];
         $listLessons = new ContentFilterResultsEntity([
-                                                          'results' => array_merge($mappedPinnedThreads,$mappedThreads),
+                                                          'results' => array_merge($mappedPinnedThreads, $mappedThreads),
                                                           'total_results' => $threadsCount,
                                                           'filter_options' => [],
                                                       ]);
@@ -405,7 +405,7 @@ class ForumPagesController extends Controller
         $amount = $request->get('amount', 20);
         $page = $request->get('page', 1);
         $sortBy = $request->get('sortby_val', '-last_post_published_on');
-        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id', '=', user()->id)->get()->pluck('user_id')->toArray();
 
         $threads = $this->threadRepository->getDecoratedThreads($amount, $page, [], null, null, $sortBy);
 
@@ -483,7 +483,7 @@ class ForumPagesController extends Controller
         $sortBy = $request->get('sortby_val', '-published_on');
 
         \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
-        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id', '=', user()->id)->get()->pluck('user_id')->toArray();
 
         $thread =
             $this->threadRepository->getDecoratedThreadsByIds([$id])
@@ -544,11 +544,11 @@ class ForumPagesController extends Controller
             $authorIds[] = $post['author_id'];
         }
 
-//        $users = User::query()->whereIn('id', $authorIds)->get()->keyBy('id');
+        //        $users = User::query()->whereIn('id', $authorIds)->get()->keyBy('id');
         $coaches = User::query()
             ->whereIn('id', $authorIds)
             ->get()
-            ->filter(fn(User $user) => $user->is_coach)
+            ->filter(fn (User $user) => $user->is_coach)
             ->pluck('id');
 
         $mappedPosts = [];
@@ -700,9 +700,12 @@ class ForumPagesController extends Controller
         }
 
         return new JsonPaginatedResponse(
-            $this->utf8ize( $mappedItems), $count, null, 200
+            $this->utf8ize($mappedItems),
+            $count,
+            null,
+            200
         );
-       // return response()->json($this->utf8ize(['results' => $mappedItems, 'count' => $count]));
+        // return response()->json($this->utf8ize(['results' => $mappedItems, 'count' => $count]));
     }
 
     /**

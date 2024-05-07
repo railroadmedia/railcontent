@@ -11,11 +11,11 @@ use Illuminate\Support\Str;
 
 class UserAccessPermissionsCollection
 {
-    const MusoraBasicMembershipPermission = 91;
-    const MusoraPlusMembershipPermission = 92;
-    const SongsOnlyMembershipPermission = 94;
-    const DrumeoLifetimePermission = 78;
-    const LifetimePermissions = [self::DrumeoLifetimePermission, 88, 89, 90];
+    public const MusoraBasicMembershipPermission = 91;
+    public const MusoraPlusMembershipPermission = 92;
+    public const SongsOnlyMembershipPermission = 94;
+    public const DrumeoLifetimePermission = 78;
+    public const LifetimePermissions = [self::DrumeoLifetimePermission, 88, 89, 90];
 
     private Collection $collection;
     private User $user;
@@ -57,8 +57,9 @@ class UserAccessPermissionsCollection
         }
 
         if ($this->user->isAdmin() && (
-                is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
-                || is_array($permissions) && in_array(self::MusoraPlusMembershipPermission, $permissions))) {
+            is_integer($permissions) && $permissions == self::MusoraPlusMembershipPermission
+                || is_array($permissions) && in_array(self::MusoraPlusMembershipPermission, $permissions)
+        )) {
             return [Carbon::today(), Carbon::maxValue()];
         }
 

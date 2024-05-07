@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class ResetReferralPerformsCount extends Command
 {
-
     protected $signature = 'ResetReferralPerformsCount';
 
     protected $description = 'Reset the referral count for referrals';

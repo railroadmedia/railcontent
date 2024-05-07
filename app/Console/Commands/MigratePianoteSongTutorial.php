@@ -10,7 +10,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class MigratePianoteSongTutorial extends Command
 {
-
     /**
      * The console command name.
      *

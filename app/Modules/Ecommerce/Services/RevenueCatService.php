@@ -72,8 +72,10 @@ class RevenueCatService
                 if ($subscriptionData->period_type == 'trial') {
                     $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]];
                 } else {
-                    $productsMap = array_merge([config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                                               [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]);
+                    $productsMap = array_merge(
+                        [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
+                    );
                 }
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
@@ -129,8 +131,8 @@ class RevenueCatService
      * @param array $aliases
      * @return User|null
      */
-    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = [])
-    : ?User {
+    public function getUser($value = null, $appUserId, $createIfNotExists = false, $aliases = []): ?User
+    {
         if (empty($aliases)) {
             $aliases = [$appUserId];
         }
@@ -141,14 +143,16 @@ class RevenueCatService
                 ->first();
         if ($createIfNotExists && $value) {
             $parts = explode('@', $value);
-            User::upsert([
+            User::upsert(
+                [
                                      'email' => $value,
                                      'password' => Hash::make($value),
                                      'display_name' => $parts[0].rand(10000, 99999),
                                      'revenuecat_origin_app_user_id' => $appUserId,
                                  ],
-            'email',
-            ['password','display_name','revenuecat_origin_app_user_id']);
+                'email',
+                ['password','display_name','revenuecat_origin_app_user_id']
+            );
 
             $user =
                 User::onWriteConnection()

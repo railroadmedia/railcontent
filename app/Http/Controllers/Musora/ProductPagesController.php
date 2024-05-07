@@ -12,39 +12,39 @@ class ProductPagesController extends BaseController
     {
         $products = Product::where([['shop_card_visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 1]])->orderBy('display_order')->get();
 
-        $accessories = $products->filter(function($value, $key){
+        $accessories = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Accessories';
         });
 
-        $misc = $products->filter(function($value, $key){
+        $misc = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Misc';
         });
 
-        $shirts = $products->filter(function($value, $key){
+        $shirts = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Shirts';
         });
 
-        $hoodies = $products->filter(function($value, $key){
+        $hoodies = $products->filter(function ($value, $key) {
             return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
-        $drumeo = $products->filter(function($value, $key){
+        $drumeo = $products->filter(function ($value, $key) {
             return $value->brand->name === 'Drumeo';
         });
 
-        $pianote = $products->filter(function($value, $key){
+        $pianote = $products->filter(function ($value, $key) {
             return $value->brand->name === 'Pianote';
         });
 
-        $guitareo = $products->filter(function($value, $key){
+        $guitareo = $products->filter(function ($value, $key) {
             return $value->brand->name === 'Guitareo';
         });
 
-        $singeo = $products->filter(function($value, $key){
+        $singeo = $products->filter(function ($value, $key) {
             return $value->brand->name === 'Singeo';
         });
 
-        $musora = $products->filter(function($value, $key){
+        $musora = $products->filter(function ($value, $key) {
             return $value->brand->name === 'Musora';
         });
 
@@ -75,30 +75,30 @@ class ProductPagesController extends BaseController
         $brand = $request->brand;
         $category = $request->category;
 
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', $brand))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $products = Product::whereHas('brand', fn ($query) => $query->where('name', $brand))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
-        if($brand === 'drumeo' || $brand === 'pianote'){
-            $lessons = $products->filter(function($value, $key){
+        if($brand === 'drumeo' || $brand === 'pianote') {
+            $lessons = $products->filter(function ($value, $key) {
                 return $value->productType->name === 'Lessons';
             });
 
-            $accessories = $products->filter(function($value, $key){
+            $accessories = $products->filter(function ($value, $key) {
                 return $value->productType->name === 'Accessories';
             });
 
-            $misc = $products->filter(function($value, $key){
+            $misc = $products->filter(function ($value, $key) {
                 return $value->productType->name === 'Misc';
             });
 
-            $shirts = $products->filter(function($value, $key){
+            $shirts = $products->filter(function ($value, $key) {
                 return $value->productType->name === 'Shirts';
             });
 
-            $hoodies = $products->filter(function($value, $key){
+            $hoodies = $products->filter(function ($value, $key) {
                 return $value->productType->name === 'Hoodies';
             });
 
-            return view('musora.product.products',[
+            return view('musora.product.products', [
                 'lessons' => $lessons,
                 'accessories' => $accessories,
                 'misc' => $misc,
@@ -107,20 +107,19 @@ class ProductPagesController extends BaseController
                 'theme' => $brand,
                 'category' => $category
             ]);
-        }
-
-        else {
-            return view('musora.product.products',[
+        } else {
+            return view('musora.product.products', [
                 'products' => $products,
                 'theme' => $brand,
             ]);
         }
     }
 
-    public function product($brand, $slug){
+    public function product($brand, $slug)
+    {
         $product = Product::where('slug', ucfirst($brand).'-'.$slug)->firstOrFail();
 
-        return view('musora.product.product',[
+        return view('musora.product.product', [
             'product' => $product,
             'theme' => $brand,
         ]);

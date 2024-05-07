@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-
 /**
  * App\Models\Cohort
  *
@@ -21,12 +20,12 @@ class Cohort extends Model
 {
     use HasFactory;
 
-//    use RevisionableTrait;
+    //    use RevisionableTrait;
 
-//
-//    protected $with = ["brand", "productType"];
+    //
+    //    protected $with = ["brand", "productType"];
 
-//    protected $revisionForceDeleteEnabled = true;
+    //    protected $revisionForceDeleteEnabled = true;
     protected $casts = [
         'enrollment_start_date' => 'datetime',
         'enrollment_end_date' => 'datetime',
@@ -57,12 +56,12 @@ class Cohort extends Model
         return $this->hasMany(CohortList::class);
     }
 
-//    protected function slug(): Attribute
-//    {
-//        return Attribute::make(
-//            get: fn ($value) => str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'), '', $value ),
-//        );
-//    }
+    //    protected function slug(): Attribute
+    //    {
+    //        return Attribute::make(
+    //            get: fn ($value) => str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'), '', $value ),
+    //        );
+    //    }
 
     public static function boot()
     {
@@ -72,9 +71,9 @@ class Cohort extends Model
             $uuid = $model['uuid'];
             unset($model['uuid']);
 
-//            if(!empty($model['slug'])){
-//                $model['slug'] = $model->brand->name.'-'.$model['slug'];
-//            }
+            //            if(!empty($model['slug'])){
+            //                $model['slug'] = $model->brand->name.'-'.$model['slug'];
+            //            }
 
             if (gettype($model['dark_mode_logo']) === 'object') {
                 $model['dark_mode_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['dark_mode_logo']->getClientOriginalName());

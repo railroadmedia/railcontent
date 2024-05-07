@@ -138,7 +138,7 @@ class SyncCustomersToShopify extends Command
         $limit = $this->getLimitOption();
 
         // STEP 1: group the customers together by email address, so we don't make duplicates in Shopify
-        $customers = $customers->groupBy(fn(Customer $customer) => $customer->getEmail());
+        $customers = $customers->groupBy(fn (Customer $customer) => $customer->getEmail());
 
         // apply the limit outside the query so that we don't miss out on grouping by email
         $customers = $customers->take($limit);
@@ -177,7 +177,7 @@ class SyncCustomersToShopify extends Command
                     ) {
                         // STEP 2: determine if updating or creating
                         $alreadySynced = $customersCollection->filter(
-                            fn(Customer $customer) => !is_null($customer->getShopifyId())
+                            fn (Customer $customer) => !is_null($customer->getShopifyId())
                         );
 
                         // sort the customers collection so that we have the newest one first (so we can work our way back when trying to find data)
@@ -235,7 +235,7 @@ class SyncCustomersToShopify extends Command
                                     $this->shopifyIds
                                 );
                                 $this->handleRateLimit();
-                                $errors->each(fn($errorMessage) => $this->error($errorMessage));
+                                $errors->each(fn ($errorMessage) => $this->error($errorMessage));
                             } catch (ORMException $e) {
                                 $this->error(
                                     sprintf(
@@ -377,7 +377,7 @@ class SyncCustomersToShopify extends Command
                 $this->handleRateLimit();
                 if ($failures->isNotEmpty()) {
                     $failures->each(
-                        fn($failureMessage) => $this->tableRows[] = [
+                        fn ($failureMessage) => $this->tableRows[] = [
                             $customerEmail,
                             "",
                             "<error>FAILED</error>",
@@ -458,7 +458,7 @@ class SyncCustomersToShopify extends Command
         // get all the addresses for all customers
         $addresses = collect();
         $customers->each(
-            fn(Customer $customer) => $addresses->merge(
+            fn (Customer $customer) => $addresses->merge(
                 $this->addressRepository->getCustomerShippingAddresses($customer->getId())
             )
         );
@@ -488,7 +488,8 @@ class SyncCustomersToShopify extends Command
         // first, get the address information from Shopify
         $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
         $this->handleRateLimit();
-        $shopifyAddresses = $shopifyAddressesResponse->map(fn(ApiResource $apiResource) => $apiResource->getAttributes()
+        $shopifyAddresses = $shopifyAddressesResponse->map(
+            fn (ApiResource $apiResource) => $apiResource->getAttributes()
         );
         // keep track of the local addresses that we've checked, so we know not to check if they're new
         $checkedLocalAddressIds = collect();
@@ -500,7 +501,7 @@ class SyncCustomersToShopify extends Command
             $checkedLocalAddressIds,
             $addressData
         );
-        $updateFailures->each(fn($failureMessage) => $this->error($failureMessage));
+        $updateFailures->each(fn ($failureMessage) => $this->error($failureMessage));
 
         // next, check for any additional addresses that the user has, that haven't yet been synced up to Shopify
         $allLocalAddressData = $this->createAddressesDataForCustomers($customers);

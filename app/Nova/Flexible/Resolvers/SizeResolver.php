@@ -20,10 +20,12 @@ class SizeResolver implements ResolverInterface
     {
         $sizes = $resource->sizes()->get();
 
-        return $sizes->map(function($size) use ($layouts, $resource) {
+        return $sizes->map(function ($size) use ($layouts, $resource) {
             $layout = $layouts->find('size-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
             return $layout->duplicateAndHydrate($size->id, [
                 'size' => $size->name,
@@ -44,8 +46,8 @@ class SizeResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use ($groups){
-            $sizes = $groups->map(function($group, $index) use($model){
+        $class::saved(function ($model) use ($groups) {
+            $sizes = $groups->map(function ($group, $index) use ($model) {
                 return [
                     'size_id' => is_null($group->getAttributes()['size']) ? null : Size::firstWhere('name', $group->getAttributes()['size'])->id,
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
@@ -54,25 +56,24 @@ class SizeResolver implements ResolverInterface
 
             $sizeIds = array();
 
-            foreach($sizes as $size){
-                if(!is_null($size['size_id'])){
-                    if(in_array($size['size_id'], $sizeIds)){
+            foreach($sizes as $size) {
+                if(!is_null($size['size_id'])) {
+                    if(in_array($size['size_id'], $sizeIds)) {
                         abort(500, 'There are duplicated sizes');
                     }
 
                     array_push($sizeIds, $size['size_id']);
 
                     //update and insert items
-                    if(!is_null($size['id'])){
+                    if(!is_null($size['id'])) {
                         $dbSize = ProductSize::find($size['id']);
-                        if($dbSize->size_id !== $size['size_id']){
+                        if($dbSize->size_id !== $size['size_id']) {
                             $dbSize->size_id = $size['size_id'];
                         }
 
                         $dbSize->save();
                         $updatedIds[] = $size['id'];
-                    }
-                    else {
+                    } else {
                         $addSize = new ProductSize();
                         $addSize->product_id = $model['id'];
                         $addSize->size_id = $size['size_id'];
@@ -83,7 +84,7 @@ class SizeResolver implements ResolverInterface
                 }
             }
 
-            if(isset($updatedIds)){
+            if(isset($updatedIds)) {
                 $deleteIds = ProductSize::where("product_id", '=', $model['id'])
                     ->whereNotIn('id', $updatedIds)->select('id')->get();
 

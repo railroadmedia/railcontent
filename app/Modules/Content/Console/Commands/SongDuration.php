@@ -53,17 +53,17 @@ class SongDuration extends Command
     {
         $start = microtime(true);
 
-//        $query =
-//            ContentField::query()
-//                ->where('key', 'soundslice_slug')
-//                ->whereNotNull('value')
-//                ->whereHas(
-//                           'content' , function (ContentBuilder $query) {
-//                               $query->where('status', '!=', "deleted")
-//                                   ->where('status', '!=', "draft")
-//                               ->whereNull('length_in_seconds');
-//                           },
-//                       );
+        //        $query =
+        //            ContentField::query()
+        //                ->where('key', 'soundslice_slug')
+        //                ->whereNotNull('value')
+        //                ->whereHas(
+        //                           'content' , function (ContentBuilder $query) {
+        //                               $query->where('status', '!=', "deleted")
+        //                                   ->where('status', '!=', "draft")
+        //                               ->whereNull('length_in_seconds');
+        //                           },
+        //                       );
 
         $query =
             Content::query()
@@ -73,13 +73,15 @@ class SongDuration extends Command
                // ->where('key', 'soundslice_slug')
                // ->whereNotNull('soundslice.soundslice_slug')
                    ->where(
-                       'f.key','=','soundslice_slug'
-               )
+                       'f.key',
+                       '=',
+                       'soundslice_slug'
+                   )
                 ->where('railcontent_content.status', '!=', "deleted")
                 ->where('railcontent_content.status', '!=', "draft")
-                ->where('railcontent_content.brand', '=','drumeo')
+                ->where('railcontent_content.brand', '=', 'drumeo')
                 //->whereNull('soundslice.length_in_seconds')
-                ->where('soundslice.length_in_seconds','=', 0)
+                ->where('soundslice.length_in_seconds', '=', 0)
             ->where('railcontent_content.type', '=', 'song')
 //            ->whereIn('railcontent_content.id', ['380116','380118','380120','380122','380124',
 //                '380126','380128','380130','380132','380134','380136','380138','380140',
@@ -89,13 +91,13 @@ class SongDuration extends Command
 //                ,'380196','380198','380202'
 //            ])
         ;
-//                ->whereHas(
-//                    'content' , function (ContentBuilder $query) {
-//                    $query->where('status', '!=', "deleted")
-//                        ->where('status', '!=', "draft")
-//                        ->whereNull('length_in_seconds');
-//                },
-//                );
+        //                ->whereHas(
+        //                    'content' , function (ContentBuilder $query) {
+        //                    $query->where('status', '!=', "deleted")
+        //                        ->where('status', '!=', "draft")
+        //                        ->whereNull('length_in_seconds');
+        //                },
+        //                );
 
         $queryCount = $query->count();
 
@@ -120,43 +122,43 @@ class SongDuration extends Command
                 $client = new \GuzzleHttp\Client();
 
                 $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
-//                $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.'SQw4c'.'/recordings', [
-//                    'auth' => $auth,
-//                ]);
-//                $body = json_decode($response->getBody(), true);
-//
-//                dd($body);
+                //                $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.'SQw4c'.'/recordings', [
+                //                    'auth' => $auth,
+                //                ]);
+                //                $body = json_decode($response->getBody(), true);
+                //
+                //                dd($body);
                 foreach ($items as $item) {
                     $slug = $item['soundslice_slug'];
 
-    try {
-        if(!in_array($slug, ['376Dc', 'gw4fc','229562','225905','228109','225924','225214','229629','227923','227894','225196',
-            '226202','225189','226189','225186','223969','226196','227187','232263','229618','229610','169790','227091',
-            '231947','223960','232232','223896','231972','223713','','231956','232226','225940','229565','162465','229557','221321','229550',
-            '202321','200747','182346','173091','169227','162136','162463','161933','162471','162473','162475','162480','176791',
-            '162623','162624','169162','227104','162635','162892'])) {
-            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
-                'auth' => $auth,
-            ]);
-            $body = json_decode($response->getBody(), true);
+                    try {
+                        if(!in_array($slug, ['376Dc', 'gw4fc','229562','225905','228109','225924','225214','229629','227923','227894','225196',
+                            '226202','225189','226189','225186','223969','226196','227187','232263','229618','229610','169790','227091',
+                            '231947','223960','232232','223896','231972','223713','','231956','232226','225940','229565','162465','229557','221321','229550',
+                            '202321','200747','182346','173091','169227','162136','162463','161933','162471','162473','162475','162480','176791',
+                            '162623','162624','169162','227104','162635','162892'])) {
+                            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
+                                'auth' => $auth,
+                            ]);
+                            $body = json_decode($response->getBody(), true);
 
-            if (!empty($body)) {
-                $duration = \Arr::last($body)['cropped_duration'] ?? \Arr::first($body)['cropped_duration'] ?? 0;
+                            if (!empty($body)) {
+                                $duration = \Arr::last($body)['cropped_duration'] ?? \Arr::first($body)['cropped_duration'] ?? 0;
 
-                if($duration > 0) {
-                    $item->length_in_seconds = $duration;
-                    $item->save();
-                    $this->info('slug: '.$slug.' duration: '.$duration);
-                }
-            } else {
-                $this->info('empty body pt slug '.$slug);
-               continue;
-            }
-        }
-        $bar->advance();
-    } catch (\Exception $e) {
-        dd($e);
-    }
+                                if($duration > 0) {
+                                    $item->length_in_seconds = $duration;
+                                    $item->save();
+                                    $this->info('slug: '.$slug.' duration: '.$duration);
+                                }
+                            } else {
+                                $this->info('empty body pt slug '.$slug);
+                                continue;
+                            }
+                        }
+                        $bar->advance();
+                    } catch (\Exception $e) {
+                        dd($e);
+                    }
 
 
                 }
@@ -174,4 +176,3 @@ class SongDuration extends Command
     }
 
 }
-

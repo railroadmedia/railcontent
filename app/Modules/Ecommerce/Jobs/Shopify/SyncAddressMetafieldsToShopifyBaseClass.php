@@ -64,7 +64,7 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**
@@ -131,7 +131,7 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
                     $shopifyMetafieldAttributes = $this->shopify->getOrderMetafields($model->shopify_id);
                     $this->handleRateLimit(true);
                     $shopifyMetafieldAttributes = $shopifyMetafieldAttributes->transform(
-                        fn(MetafieldResource $metafieldResource) => $metafieldResource->getAttributes()
+                        fn (MetafieldResource $metafieldResource) => $metafieldResource->getAttributes()
                     );
                     $this->handleRateLimit(true);
                 } catch (NotFoundException $exception) {
@@ -197,7 +197,7 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
         $typeString = ucfirst(Str::after($type->value, 'address_'));
 
         $modelMetafield = collect($model->getMetafieldsForShopify())->filter(
-            fn(MetaField $metaField) => $metaField->key == $type->value
+            fn (MetaField $metaField) => $metaField->key == $type->value
         )->first();
 
         if (!$modelMetafield) {
@@ -229,7 +229,7 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
 
         // look for a metafield from Shopify
         $shopifyMetafield = collect($shopifyMetafieldAttributes)->first(
-            fn($item) => array_key_exists('key', $item) && $item['key'] === $type->value
+            fn ($item) => array_key_exists('key', $item) && $item['key'] === $type->value
         );
 
         // no metafield in Shopify, so create one
