@@ -195,7 +195,12 @@ class EventTrackingService
             })->toArray();
     }
 
-    public function trackPaymentMethodExpiryDate(User $user, PaymentMethod $paymentMethod): void
+    /**
+     * @param User $user
+     * @param null|PaymentMethod $paymentMethod
+     * @return void
+     */
+    public function trackPaymentMethodExpiryDate(User $user, ?PaymentMethod $paymentMethod): void
     {
         $expiryDate = null;
         if ($paymentMethod != null) {
