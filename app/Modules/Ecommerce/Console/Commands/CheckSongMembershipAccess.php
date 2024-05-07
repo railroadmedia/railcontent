@@ -29,7 +29,7 @@ class CheckSongMembershipAccess extends Command
             ->with('userAccessPermissions')
             ->get();
 
-        $shouldUpdate = [];
+       $shouldUpdate = [];
        foreach ($users as $user) {
             $shouldModify = true;
             $userIdOrEmail = $user->id;
@@ -42,7 +42,7 @@ class CheckSongMembershipAccess extends Command
                             ->addDays($userPermission->time_days)
                             ->addHours($userPermission->time_hours)
                             ->addMinutes($userPermission->time_minutes);
-                    if ($expirationDate >
+                    if (($userPermission->time_lifetime == 1) || $expirationDate >
                         Carbon::now()
                             ->subDays(7)) {
                         $shouldModify = false;
@@ -56,7 +56,7 @@ class CheckSongMembershipAccess extends Command
                             ->addDays($userPermission->time_days)
                             ->addHours($userPermission->time_hours)
                             ->addMinutes($userPermission->time_minutes);
-                    if ($expirationDate->addDays(7) > Carbon::now()) {
+                    if (($userPermission->time_lifetime == 1) || $expirationDate->addDays(7) > Carbon::now()) {
                         $shouldModify = false;
                     }
                 }
