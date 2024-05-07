@@ -58,10 +58,10 @@
     <header class="text-center px-5 sm:px-6 py-44 sm:py-52 lg:py-56 relative overflow-hidden text-white"
         style="background:linear-gradient(45deg, #6403b5, #0c74da);">
         <div class="container max-w-6xl mx-auto relative z-20">
-            <img class="h-28 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/drumeo/promos/may/logo.webp">
+            <img class="h-20 sm:h-28 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/drumeo/promos/may/logo.webp">
             <br>
             <h1 class="relative w-auto inline-block mb-7 sm:mb-10">
-                Get 1 year of unlimited drum lessons<br>
+                Get 1 year of unlimited drum lessons<br class="hidden sm:inline">
                 <strong class="text-[#0BDBB6]">+ $794.95 in FREE bonuses.</strong></h1>
 
             <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
@@ -143,20 +143,9 @@
         style="background:linear-gradient(to right, #6403b5, #0c74da);">
         <div class="container mx-auto relative z-50  max-w-4xl ">
             <div class="w-full">
-                <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
-                    <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div class=" front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <picture class="h-full w-full bg-top bg-cover opacity-100" :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}" x-intersect.once="lazyLoad = true">
-                                    <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp" media="(min-width: 640px)">
-                                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp" alt="Top Image" class="w-full h-full object-cover transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img class="h-20 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/drumeo/promos/may/logo.webp">
                 <br>
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get 1 year of unlimited drum lessons<br>
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get 1 year of unlimited drum lessons<br class="hidden sm:inline">
                     <span class="text-[#0BDBB6]">+ a loaded StickBag, lesson packs, and more!</span></h3>
                 <a class="join  text-black my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="background-color:#0BDBB6; padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special" aria-label="Get Started">
                     GET Started »
@@ -169,7 +158,14 @@
             @php
                 $bonuses = [
                     [
-                    'image' => 'todo',
+                    'image' => 'marketing/drumeo/promos/may/card-annual.png',
+                    'title' => 'Drumeo StickBag',
+                    'description' => '1 year of unlimited drum lessons',
+                    'price' => 240,
+                    'customText' => '$200',
+                    ],
+                    [
+                    'image' => 'marketing/drumeo/promos/may/card-stick-bag.png',
                     'title' => 'Drumeo StickBag',
                     'description' => 'A StickBag you’ll want to show your friends.',
                     'price' => floatval($productPrices['stickbag']->price),
@@ -183,14 +179,14 @@
                     'shipping' => true,
                     ],
                     [
-                    'image' => 'todo',
+                    'image' => 'marketing/drumeo/promos/may/card-drum-key.png',
                     'title' => 'Drumeo Drum Key',
                     'description' => 'The Drumeo DrumKey sits perfectly in your hand with an ergonomic design and flared handle to help you tighten the most stubborn lugs.',
                     'price' => floatval($productPrices['Drumeo-Key']->price),
                     'shipping' => true,
                     ],
                     [
-                    'image' => 'todo',
+                    'image' => 'marketing/drumeo/promos/may/card-easy-rudiments.png',
                     'title' => 'Easy Rudiments Book',
                     'description' => 'The 15 Rudiments You Actually Need To Know (And How To Learn Them Quickly)',
                     'price' => floatval($productPrices['easy-rudiments-book']->price),
@@ -277,9 +273,6 @@
                         </div>
 
                         <p class="w-full leading-normal mt-2">
-                            @if(!empty($bonus['title']))
-                                <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
-                            @endif
                             <span style="text-transform:uppercase; display:inline-block;">
                             @if(!empty($bonus['price']))
                                     <s class="opacity-40">${{ $bonus['price'] }}</s>
@@ -302,17 +295,14 @@
                     </div>
                 @endforeach
             </div>
-            <h3 class="leading-tight mt-6 mb-1">
-                <s class="opacity-50">$240</s>
-                <strong>$200</strong> <span class="text-[#0BDBB6]">(Save 20%)</span>
-            </h3>
-            <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
+            <h2 class="leading-tight mt-6 mb-1"><s class="opacity-50">$1034.95</s> <strong>$200</strong></h2>
+            <p class="text-sm mb-4 sm:mb-6"><strong class="text-[#0BDBB6]">Save 17%</strong> for your first year. Renews at $240/yr.</p>
             <a role="link" aria-label=" Get Started" class="join  text-black  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="background-color:#0BDBB6;padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special">
                 GET Started »
             </a>
             <br>
             <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special">
-                <p><u><em>Trying to avoid VAT fees on physical items? Click here to just grab<br>  your discounted membership + 3 free digital lesson packs.</em></u></p></a>
+                <p><u><em>Trying to avoid VAT fees on physical items? Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital lesson packs.</em></u></p></a>
         </div>
     </section>
 @endsection
