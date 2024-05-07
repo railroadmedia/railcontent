@@ -210,12 +210,11 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $content->fetch('data.original_thumbnail_url', $content->fetch('data.thumbnail_url'));
 
             $route = [];
-
+            $parentContentDataForDatabase = [];
             if (!empty($content['parent_content_data'])) {
                 $hierarchyData =
                     $hierarchyRows->where('rch1_child_id', $content['id'])
                         ->first();
-                $parentContentDataForDatabase = [];
                 if (!empty($hierarchyData)) {
                     if (!empty($hierarchyData['rch4_parent_id']) &&
                         !empty($hierarchyData['rcp4_content_id']) &&
