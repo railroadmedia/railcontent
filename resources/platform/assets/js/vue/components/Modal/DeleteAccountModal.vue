@@ -71,6 +71,9 @@ import { ref } from "vue";
 import axios from "axios";
 import ModalRenderer from "./ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
+import { useUserStore } from '../../../stores/user';
+
+const userStore = useUserStore();
 
 const openModal = ref(false);
 const step = ref('1');
@@ -99,7 +102,7 @@ const confirmDelete = () => {
     }
 
     // Delete account
-    axios.put('/musora-api/v1/delete-account')
+    axios.delete(`user/delete/${userStore.userId}`)
     .then(() => {
         window.location.replace('/')
     })
