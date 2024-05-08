@@ -1007,4 +1007,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             str_contains($email, 'singeo.com') ||
             str_contains($email, 'musora.com');
     }
+
+    public function userAccessPermissions(): HasMany
+    {
+        return $this->hasMany(UserAccessPermission::class, 'user_id');
+    }
 }

@@ -125,6 +125,8 @@ class Kernel extends ConsoleKernel
             ->mondays()->when(function () {
                 return now()->weekOfYear % 2 == 0;
             })->at('08:01'); // every other Monday at 12:01am PST
+
+        $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00');//3am PST
     }
 
     /**

@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import PageHeader from '../components/PageHeader/PageHeader.vue';
 
 const props = defineProps({
