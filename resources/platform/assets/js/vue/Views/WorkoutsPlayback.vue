@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Breadcrumb :breadcrumbs="breadcrumbProps" />
+        <Breadcrumb :breadcrumbs="breadcrumbProps" classOverride="tw-w-full tw-max-w-[1450px] tw-mx-auto tw-px-4" />
 
         <div
             class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1450px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">

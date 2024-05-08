@@ -3,9 +3,10 @@
         <!-- BREADCRUMBS -->
         <Breadcrumb
             :breadcrumbs="[{ title: firstLevelTitle, url: firstLevelUrl }, { title: lastLevelTitle }]"
+            classOverride="tw-container tw-mx-auto tw-px-4 lg:tw-px-8"
         />
         <!-- Child Catalog -->
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] lg:tw-mt-8 dark:tw-text-white">
+        <div class="tw-container tw-mx-auto tw-px-4 lg:tw-px-8 tw-pt-6 dark:tw-text-white">
             <CollectionWrapper
                 :title="title"
                 :collection-type="collectionType"

@@ -7,11 +7,11 @@
 @php
     $ctas = [
         [
-            'type' => 'primary',
+            'type' => 'PageHeaderPrimaryCta',
             'props' => [
                 'text' => $pack->fetch('primary_cta_text'),
                 'url' => $nextLessonUrl,
-                'icon' => 'fa-play'
+                'faIconClass' => 'fa-play'
             ]
         ],
         [

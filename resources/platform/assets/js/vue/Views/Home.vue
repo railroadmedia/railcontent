@@ -4,7 +4,7 @@
         <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
-        <div class="tw-px-4 lg:tw-px-0">
+        <div>
             <!-- Header carousel -->
             <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
             <!-- Cohort banner -->
