@@ -12,6 +12,4 @@ const props = defineProps({
     text: String,
     url: String,
 })
-
-console.log('PageHeaderPrimaryCta.vue', props)
 </script>
