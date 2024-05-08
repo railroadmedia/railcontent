@@ -5,7 +5,6 @@ namespace App\Modules\Content\Builders;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
-
 class ContentBuilder extends Builder
 {
     public function whereTypes(array $types): self

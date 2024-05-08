@@ -13,13 +13,14 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/', [MarketingController::class, 'homepage']);
         Route::get('/trial', [MarketingController::class, 'trial']);
+        Route::get('/app', [MarketingController::class, 'app']);
         Route::get('/spotify', [MarketingController::class, 'spotify']);
         Route::get('6-reasons', [MarketingController::class, 'sixReasons']);
         Route::get('6-reasons/drums', [MarketingController::class, 'sixReasonsDrums']);
         Route::get('6-reasons/piano', [MarketingController::class, 'sixReasonsPiano']);
         Route::get('6-reasons/guitar', [MarketingController::class, 'sixReasonsGuitar']);
         Route::get('6-reasons/singing', [MarketingController::class, 'sixReasonsSinging']);
-//        Route::get('/handbook', [MarketingController::class, 'handbook']);
+        //        Route::get('/handbook', [MarketingController::class, 'handbook']);
         Route::get('about', [MarketingController::class, 'about']);
         Route::get('contact', [MarketingController::class, 'contact']);
         Route::get('terms', [MarketingController::class, 'terms']);
@@ -40,8 +41,8 @@ Route::domain('{musoraDomain}')
         Route::get('method', [MarketingController::class, 'method']);
         Route::get('songs', [MarketingController::class, 'songs']);
         Route::get('community', [MarketingController::class, 'community']);
-        Route::get('choose-plan', [MarketingController::class, 'choosePlan'] );
-        Route::get('choose-your-trial-month', [MarketingController::class, 'choosePlanMonth'] );
+        Route::get('choose-plan', [MarketingController::class, 'choosePlan']);
+        Route::get('choose-your-trial-month', [MarketingController::class, 'choosePlanMonth']);
 
         Route::get('/drum-faster', [MarketingController::class, 'faster']);
 
@@ -66,7 +67,7 @@ Route::domain('{musoraDomain}')
         Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
         Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
 
-        Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'] )
+        Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'])
             ->withoutMiddleware([VerifyCsrfToken::class])
             ->name('claim-spotify');
     });

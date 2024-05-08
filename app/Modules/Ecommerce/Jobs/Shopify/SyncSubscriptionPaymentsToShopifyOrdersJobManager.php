@@ -2,18 +2,17 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
-use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
-use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use Carbon\Carbon;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use ReflectionClass;
 
 /**
  * This job acts as a manager between the dispatching command and the syncing jobs.
@@ -26,7 +25,6 @@ class SyncSubscriptionPaymentsToShopifyOrdersJobManager implements ShouldQueue
     use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
-    use LogsShopify;
     use Queueable;
     use SerializesModels;
 
@@ -43,7 +41,8 @@ class SyncSubscriptionPaymentsToShopifyOrdersJobManager implements ShouldQueue
     public function __construct(
         protected int $startAtId,
         protected int $endAtId,
-        protected Carbon $lastSyncAt,
+        protected Carbon $startCreatedAt,
+        protected Carbon $endCreatedAt,
         protected bool $simulate,
         protected bool $fresh
     ) {
@@ -51,7 +50,7 @@ class SyncSubscriptionPaymentsToShopifyOrdersJobManager implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**
@@ -61,26 +60,19 @@ class SyncSubscriptionPaymentsToShopifyOrdersJobManager implements ShouldQueue
      */
     public function handle(): void
     {
-        $subscriptionPayments = SubscriptionPayment::query()
-            ->whereBetween("id", [$this->startAtId, $this->endAtId])
-            ->where(function (Builder $q) {
-                $q->when(!$this->fresh, function (Builder $q) {
-                    return $q->whereNull("shopify_id")
-                        ->orWhereDate("updated_at", ">", $this->lastSyncAt);
-                });
-            })
-            ->whereIn("payment_id", function($query) {
-                $query->select("id")
-                    ->from("ecommerce_payments")
-                    ->where("status", Payment::STATUS_PAID)
-                    ->whereNot("type", Payment::TYPE_INITIAL_ORDER);
-            })
+        $subscriptionPayments = SubscriptionPayment::toSyncWithShopify(
+            startingId: $this->startAtId,
+            endingId: $this->endAtId,
+            fresh: $this->fresh,
+            startCreatedAt: $this->startCreatedAt,
+            endCreatedAt: $this->endCreatedAt
+        )
             ->select("id");
 
-        $this->logDebug(
+        Log::debug(
             sprintf(
                 "%s: running batch for %s subscription payments: %s - %s (non-contiguously)",
-                $this->getClassName(),
+                (new ReflectionClass($this))->getShortName(),
                 $subscriptionPayments->count(),
                 $this->startAtId,
                 $this->endAtId
@@ -96,20 +88,10 @@ class SyncSubscriptionPaymentsToShopifyOrdersJobManager implements ShouldQueue
             $jobs[] = new SyncSubscriptionPaymentsToShopifyOrders(
                 $firstSubscriptionPaymentId,
                 $lastSubscriptionPaymentId,
-                $this->lastSyncAt,
                 $this->simulate,
                 $this->fresh
             );
         });
         $this->batch()->add($jobs);
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    protected function getClassName(): string
-    {
-        return "SyncSubscriptionPaymentsToShopifyOrdersJobManager";
     }
 }

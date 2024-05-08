@@ -33,7 +33,7 @@ class NotificationSetting extends Model
 {
     protected $table = 'notification_settings';
 
-    const NOTIFICATION_SETTINGS_NAME_NOTIFICATION_TYPE = [
+    public const NOTIFICATION_SETTINGS_NAME_NOTIFICATION_TYPE = [
         Notification::TYPE_LESSON_COMMENT_REPLY => 'notify_on_lesson_comment_reply',
         Notification::TYPE_LESSON_COMMENT_LIKED => 'notify_on_lesson_comment_like',
         Notification::TYPE_FORUM_POST_REPLY => 'notify_on_post_in_followed_forum_thread',
@@ -42,10 +42,10 @@ class NotificationSetting extends Model
         Notification::TYPE_NEW_CONTENT_RELEASES => 'notify_on_new_content_releases',
     ];
 
-    const SEND_EMAIL_NOTIF = 'send_email';
-    const SEND_PUSH_NOTIF = 'send_in_app_push_notification';
-    const SEND_WEEKLY = 'notify_weekly_update';
-    const NOTIFICATIONS_FREQUENCY = 'notifications_summary_frequency_minutes';
+    public const SEND_EMAIL_NOTIF = 'send_email';
+    public const SEND_PUSH_NOTIF = 'send_in_app_push_notification';
+    public const SEND_WEEKLY = 'notify_weekly_update';
+    public const NOTIFICATIONS_FREQUENCY = 'notifications_summary_frequency_minutes';
 
     public function user()
     {

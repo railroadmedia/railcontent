@@ -1,14 +1,14 @@
 <template>
-    <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
+    <div class="lg:tw-container tw-mx-auto tw-px-4 lg:tw-px-8 dark:tw-text-white">
         <!-- Learning Paths -->
-        <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" />
+        <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
         <div class="tw-px-4 lg:tw-px-0">
             <!-- Header carousel -->
-            <HeaderCarousel :preloadedCarousel="carousel" />
+            <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
             <!-- Cohort banner -->
-            <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" />
+            <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
         </div>
         <!-- Continue section -->
         <MiniCatalogueSection
@@ -20,6 +20,7 @@
             :isMiniView="true"
             :show-dropdown="true"
             :use-ref-data="true"
+            trackingSection="continue"
         />
         <!-- Recommended section -->
         <MiniCatalogueSection
@@ -28,12 +29,13 @@
             seeAllAriaLabel="See All Content"
             :seeAllUrl="recommendedContentUrl"
             :preLoadedContent="recommends"
+            trackingSection="recommended"
         >
-            <template #label>
+            <!-- <template #label>
                 <a :href="recommendationLinks[brand]" class="tw-flex tw-ml-2 tw-text-[#FFAE00] md:tw-text-[#00101D] tw-text-xs md:tw-border md:tw-border-[#FFAE00] md:tw-rounded-md md:tw-px-[5px] md:tw-py-0.5 tw-font-semibold md:tw-bg-[#FFAE00] hover:md:tw-border-[#DC9600] hover:md:tw-bg-[#DC9600] md:tw-flex tw-items-center" title="Learn More">
                     <musora-icon icon-name="info" class="tw-w-5 tw-h-5 tw-mr-1" /> <span class="tw-hidden md:tw-inline">Experimental Feature</span>
                 </a>
-            </template>
+            </template> -->
             <template #icon>
                 <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
                     <i class="fas fa-random"></i>
@@ -47,6 +49,7 @@
             seeAllAriaLabel="See All Workouts"
             :seeAllUrl="workoutsContentUrl"
             :preLoadedContent="workoutsContent.data"
+            trackingSection="workouts"
         />
         <!-- New section -->
         <MiniCatalogueSection
@@ -54,6 +57,7 @@
             seeAllAriaLabel="See All New Releases"
             :seeAllUrl="newContentUrl"
             :preLoadedContent="newContent.data"
+            trackingSection="new"
         />
         <!-- Playlist section -->
         <ListSection :newContentUrl="newContentUrl" :usersList="usersList" :my-list-url="`/${brand}/playlists`" />
@@ -61,7 +65,7 @@
             <!-- Live section -->
             <CoachEvent class="tw-mb-6" :preloadedContent="coachEvent" :currentDateString="currentDate"
                 :subscriptionCalendarId="calendarId" :youtubeEventId="youtubeId" :timeCutoffMinutes="timeCutoffMinutes"
-                :eventCoachProfileUrl="eventCoachProfileUrl" />
+                :eventCoachProfileUrl="eventCoachProfileUrl" trackingSection="live" />
         </div>
         <!-- Upcoming section -->
         <MiniCatalogueSection
@@ -71,6 +75,7 @@
             :seeAllUrl="upcomingUrl"
             :force-no-links="true"
             :preLoadedContent="upcomingEvents.data"
+            trackingSection="upcoming-events"
         />
 
         <!-- Stats section -->
@@ -91,7 +96,6 @@ import StatsSection from '../components/StatsSection/StatsSection.vue';
 import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
 import { useUserStore } from "../../stores/user";
 import {storeToRefs} from "pinia/dist/pinia";
-import axios from 'axios';
 
 //Pinia Stores
 const userStore = useUserStore();

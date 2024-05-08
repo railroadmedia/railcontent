@@ -754,21 +754,21 @@ class AddEventCommand extends Command
                             }
                         }
 
-//                        $this->info('slug ' . $coach->fetch('slug'));
-//                        $this->info('uniquekey ' . $calendar->uniquekey);
-//                        $this->info('$customData[AddEventService::SYNC_ID_KEY] ' . $customData[AddEventService::SYNC_ID_KEY]);
-//                        $this->info('$expectedSyncId ' . $expectedSyncId);
-//                        $this->info('$calendarName ' . $calendarName);
-//                        $this->info('$expectedCalendarName ' . $expectedCalendarName);
-//                        $this->info('================================================');
-//                        $this->info(
-//                            'This should not be possible and could represent either a significant ' .
-//                            'bug in our system, or just that this function needs an update to some general ' .
-//                            'information schema change'
-//                        );
-//                        $this->info(
-//                            'Exiting now because with this error the product of this command is unreliable'
-//                        );
+                        //                        $this->info('slug ' . $coach->fetch('slug'));
+                        //                        $this->info('uniquekey ' . $calendar->uniquekey);
+                        //                        $this->info('$customData[AddEventService::SYNC_ID_KEY] ' . $customData[AddEventService::SYNC_ID_KEY]);
+                        //                        $this->info('$expectedSyncId ' . $expectedSyncId);
+                        //                        $this->info('$calendarName ' . $calendarName);
+                        //                        $this->info('$expectedCalendarName ' . $expectedCalendarName);
+                        //                        $this->info('================================================');
+                        //                        $this->info(
+                        //                            'This should not be possible and could represent either a significant ' .
+                        //                            'bug in our system, or just that this function needs an update to some general ' .
+                        //                            'information schema change'
+                        //                        );
+                        //                        $this->info(
+                        //                            'Exiting now because with this error the product of this command is unreliable'
+                        //                        );
                     }
                 }
             }

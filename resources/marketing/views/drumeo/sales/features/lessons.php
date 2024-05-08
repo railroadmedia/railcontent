@@ -1,4 +1,5 @@
 <?php
+
 $lessons = [
     [
         "title" => "Getting Started On The Drums",

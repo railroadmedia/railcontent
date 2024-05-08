@@ -1,6 +1,10 @@
 <script setup>
 import VideoModal from "../Modal/VideoModal.vue";
 import { computed, ref } from "vue";
+import { useUserStore } from "../../../stores/user";
+import userJourney from "../../../services/userJourney";
+
+const userStore = useUserStore();
 
 const props = defineProps({
   topSubtitle: {
@@ -103,6 +107,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  trackingSection: {
+    type: String,
+    default: ''
+  }
 });
 
 const primaryVideoModal = ref(false);
@@ -110,7 +118,9 @@ const secondaryVideoModal = ref(false);
 
 const skillLevelColor = computed(() => {
   switch (props.skillLevel) {
-    case 'Novice':
+    case 'All':
+      return 'tw-bg-white';
+    case 'Introductory':
       return 'tw-bg-[#22C55E]';
     case 'Beginner':
       return 'tw-bg-[#0B76DB]';
@@ -125,6 +135,22 @@ const skillLevelColor = computed(() => {
   }
 });
 
+const handleCtaClick = (event, url) => {
+  if (props.trackingSection && props.trackingSection.length) {
+    event.preventDefault();
+
+    userJourney.trackHomeContentClick({
+      payload: {
+        contentId: null,
+        brand: userStore.brand,
+        section: props.trackingSection,
+      }
+    }).finally(() => {
+      window.location.href = url;
+    });
+  }
+};
+
 </script>
 
 <template>
@@ -137,20 +163,22 @@ const skillLevelColor = computed(() => {
         class="tw-text-white tw-absolute tw-right-2 md:tw-right-6 tw-top-2 md:tw-top-6 tw-z-50 tw-font-extrabold tw-text-xl tw-rounded-xl tw-bg-red-700 tw-px-6 tw-py-1">
         DRAFT</div>
 
-        <!-- Background Image -->
-        <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
-            <picture>
-                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2500,quality=95/${desktopImg}`">
-                <source media="(min-width:1024px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1780,quality=95/${desktopImg}`">
-                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1470,quality=95/${tabletImg}`">
-                <source media="(min-width:640px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1220,quality=95/${tabletImg}`">
-                <img
-                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
-                    :src="`https://www.musora.com/musora-cdn/image/width=790,quality=95/${mobileImg}`"
-                    alt="banner background image"
-                />
-            </picture>
-        </div>
+      <!-- Background Image -->
+      <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
+        <picture>
+          <source media="(min-width:1280px)"
+            :srcset="`https://www.musora.com/musora-cdn/image/width=2500,quality=95/${desktopImg}`">
+          <source media="(min-width:1024px)"
+            :srcset="`https://www.musora.com/musora-cdn/image/width=1780,quality=95/${desktopImg}`">
+          <source media="(min-width:768px)"
+            :srcset="`https://www.musora.com/musora-cdn/image/width=1470,quality=95/${tabletImg}`">
+          <source media="(min-width:640px)"
+            :srcset="`https://www.musora.com/musora-cdn/image/width=1220,quality=95/${tabletImg}`">
+          <img class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
+            :src="`https://www.musora.com/musora-cdn/image/width=790,quality=95/${mobileImg}`"
+            alt="banner background image" />
+        </picture>
+      </div>
 
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
@@ -174,43 +202,33 @@ const skillLevelColor = computed(() => {
             :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
           <div v-if="isFeatured && skillLevel" class="tw-flex tw-items-center tw-font-semibold md:tw-text-lg"
             :class="`${descriptionColor && `tw-text-${descriptionColor}`}`">
-            <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div> {{
-              skillLevel }}
+            <div class="tw-inline-block tw-w-[9px] tw-h-[9px] tw-rounded-full tw-mr-2" :class="skillLevelColor"></div>
+            {{ skillLevel }}
           </div>
           <p :class="`tw-hidden xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${descriptionColor && `tw-text-${descriptionColor}`}`"
             v-html="description"></p>
           <!-- CTA -->
-            <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block tw-max-w-[450px] md:tw-max-w-none">
-                <a
-                    v-if="primaryCtaText && primaryCtaUrl && !primaryVideo"
-                    :href="primaryCtaUrl"
-                    :class="`tw-btn-primary tw-text-center md:tw-px-10 lg:tw-px-[30px] tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`"
-                >
-                    {{ primaryCtaText }}
-                </a>
-                <span
-                    v-if="primaryCtaText && primaryVideo"
-                    @click="primaryVideoModal = true"
-                    :class="`tw-btn-primary tw-text-center md:tw-px-10 lg:tw-px-[30px] tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`"
-                >
-                    {{ primaryCtaText }}
-                </span>
-                <a
-                    v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo"
-                    :href="secondaryCtaUrl"
-                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
-                >
-                    {{ secondaryCtaText }}
-                </a>
-                <span
-                    v-if="secondaryCtaText && secondaryVideo"
-                    @click="secondaryVideoModal = true"
-                    :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
-
-                >
-                    {{ secondaryCtaText }}
-                </span>
-            </div>
+          <div
+            class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block tw-max-w-[450px] md:tw-max-w-none">
+            <a v-if="primaryCtaText && primaryCtaUrl && !primaryVideo" :href="primaryCtaUrl"
+              @click="(e) => handleCtaClick(e, primaryCtaUrl)"
+              :class="`tw-btn-primary tw-text-center md:tw-px-10 lg:tw-px-[30px] tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`">
+              {{ primaryCtaText }}
+            </a>
+            <span v-if="primaryCtaText && primaryVideo" @click="primaryVideoModal = true"
+              :class="`tw-btn-primary tw-text-center md:tw-px-10 lg:tw-px-[30px] tw-mr-2 tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer ${secondaryCtaText ? 'tw-flex-1 tw-px-2' : 'tw-px-6'}`">
+              {{ primaryCtaText }}
+            </span>
+            <a v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo" :href="secondaryCtaUrl"
+              @click="(e) => handleCtaClick(e, secondaryCtaUrl)"
+              :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`">
+              {{ secondaryCtaText }}
+            </a>
+            <span v-if="secondaryCtaText && secondaryVideo" @click="secondaryVideoModal = true"
+              :class="`tw-btn-primary tw-flex-1 tw-text-center tw-border-2 tw-font-bebas-neue tw-rounded-full tw-px-2 md:tw-px-10 lg:tw-px-[30px] tw-line-clamp-1 md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`">
+              {{ secondaryCtaText }}
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -243,4 +261,3 @@ const skillLevelColor = computed(() => {
   }
 } */
 </style>
-

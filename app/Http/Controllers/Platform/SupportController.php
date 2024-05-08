@@ -8,7 +8,7 @@ class SupportController extends Controller
 {
     public function memberSupport()
     {
-        $emailRecipient = config('mailora.' . brand() . '.support-email-address' , "support@musora.com");
+        $emailRecipient = config('mailora.' . brand() . '.support-email-address', "support@musora.com");
         $logoLink = config('mailora.' . brand() . '.logo-link');
 
         return view('pages.support', [
@@ -19,7 +19,7 @@ class SupportController extends Controller
 
     public function contact()
     {
-        $emailRecipient = config('mailora.' . brand() . '.support-email-address' , "support@musora.com");
+        $emailRecipient = config('mailora.' . brand() . '.support-email-address', "support@musora.com");
         $logoLink = config('mailora.' . brand() . '.logo-link');
         $brandSenderName =  config('mailora.' . brand() . '.support-sender-name');
 

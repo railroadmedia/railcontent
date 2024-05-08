@@ -9,7 +9,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class MigrateOldGuitareoDeletedSongs extends Command
 {
-
     /**
      * The console command name.
      *

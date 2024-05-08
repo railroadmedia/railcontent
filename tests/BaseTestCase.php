@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\URL;
 
 abstract class BaseTestCase extends FoundationBaseTestCase
 {
-
     protected string $testRouteName = 'test-route';
     protected string $testRoutePath = 'https://test.musora.com';
 
@@ -45,5 +44,12 @@ abstract class BaseTestCase extends FoundationBaseTestCase
         parent::setUp();
 
         URL::forceRootUrl('https://testing.musora.com');
+    }
+
+    protected function getRandomName($prefix=null)
+    {
+        $prefix ??= debug_backtrace(!DEBUG_BACKTRACE_PROVIDE_OBJECT|DEBUG_BACKTRACE_IGNORE_ARGS,2)[1]['function'];
+        $end = $this->faker->regexify('\d{4}-\d{4}-\d{4}-\d{4}');
+        return $prefix . $end;
     }
 }

@@ -10,7 +10,6 @@ use Exception;
 
 class PopulateUserRolesTable extends Command
 {
-
     /**
      * The console command name.
      *

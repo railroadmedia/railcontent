@@ -8,7 +8,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 
 class UpdateRoutinesFebruary2023 extends Command
 {
-
     /**
      * The console command name.
      *
@@ -124,7 +123,7 @@ class UpdateRoutinesFebruary2023 extends Command
                     'content_id' => $routineContentRow->id,
                     'key' => 'thumbnail_url',
                     'position' => 1,
-                ],                               [
+                ], [
                                                      'value' => $newThumb,
                                                  ]);
                 event(new ContentCreated($routineContentRow->id));

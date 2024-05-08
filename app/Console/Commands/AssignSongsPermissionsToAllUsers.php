@@ -14,7 +14,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
-
 class AssignSongsPermissionsToAllUsers extends Command
 {
     /**
@@ -83,13 +82,13 @@ class AssignSongsPermissionsToAllUsers extends Command
             ->from('ecommerce_user_products')
             ->whereIn('product_id', $products->pluck('id'))
             ->orderBy('user_id', 'asc')
-            ->chunkById(1000, function(Collection $userProductRows) use (&$count, &$allUsersIdsToSync) {
+            ->chunkById(1000, function (Collection $userProductRows) use (&$count, &$allUsersIdsToSync) {
                 $allUsersIdsToSync = array_merge($allUsersIdsToSync, array_unique($userProductRows->pluck('user_id')->toArray()));
 
                 $count += 1000;
 
-//                $this->info('$count:' . $count);
-//                $this->info("real: ".(memory_get_peak_usage(true)/1024/1024)." MiB");
+                //                $this->info('$count:' . $count);
+                //                $this->info("real: ".(memory_get_peak_usage(true)/1024/1024)." MiB");
             }, 'user_id');
 
         $allUsersIdsToSync = array_unique($allUsersIdsToSync);
@@ -103,7 +102,7 @@ class AssignSongsPermissionsToAllUsers extends Command
         $allUsersIdsToSyncChunked = array_reverse($allUsersIdsToSyncChunked);
 
         foreach ($allUsersIdsToSyncChunked as $chunkIndex => $userIdsChunk) {
-            $jobsToChain[] =new SyncUsersProductPermissionsQueryJob($userIdsChunk);
+            $jobsToChain[] = new SyncUsersProductPermissionsQueryJob($userIdsChunk);
         }
 
         $this->info('About to chain jobs, count: ' . count($jobsToChain));

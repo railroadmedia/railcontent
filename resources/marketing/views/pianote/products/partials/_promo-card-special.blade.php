@@ -3,7 +3,7 @@
         @if(!empty($badgeText))
             <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{$badgeColor}} @if(!empty($whiteBadge)) text-white @endif tracking-widest">{{$badgeText}}</p>
         @endif
-        <a href="{{$cardLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-{{$badgeColor}}">
+        <a href="{{$cardLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 lg:mb-0 group border-2 border-{{$badgeColor}} @if(empty($badgeText)) sm:mt-7 @endif">
             <div class="bg-white px-3 py-6 md:py-7">
                 <h4 class="leading-tight mb-2"><strong>{!! $cardTitle !!}</strong></h4>
                 <p class="text-sm mb-5"><em>{!! $cardSubtitle !!}</em></p>

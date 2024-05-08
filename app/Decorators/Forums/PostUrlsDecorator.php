@@ -31,7 +31,7 @@ class PostUrlsDecorator
             if ($unifiedLaunchDate->lessThan($postDate)) {
                 continue;
             }
-            $posts[$index]['url'] = route('forums.jump-to-post',['brand' => config('railnotifications.brand'), 'postId' => $post['id']]);
+            $posts[$index]['url'] = route('forums.jump-to-post', ['brand' => config('railnotifications.brand'), 'postId' => $post['id']]);
             $posts[$index]['created_at_diff'] = Carbon::parse($posts[$index]['created_at'])
                 ->diffForHumans();
 
@@ -246,7 +246,8 @@ class PostUrlsDecorator
         return $url;
     }
 
-    private function GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, $type) {
+    private function GetContentBySlugAndTypeSetBrands($lastSegment, $availableBrands, $type)
+    {
         $content =
             $this->contentService->getBySlugAndType($lastSegment, $type)
                 ->first();
@@ -258,8 +259,8 @@ class PostUrlsDecorator
      * @param $matches
      * @return array
      */
-    private function getUrls($matches)
-    : array {
+    private function getUrls($matches): array
+    {
         $urls = [];
 
         foreach ($matches as $match) {

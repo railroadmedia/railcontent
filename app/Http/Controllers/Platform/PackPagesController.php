@@ -80,11 +80,11 @@ class PackPagesController extends Controller
 
         FiltersHelper::prepareFiltersFields();
 
-        if(user()->isPackOnlyOwner()){
+        if(user()->isPackOnlyOwner()) {
             ContentRepository::$getEnrollmentContent = false;
         }
 
-        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort','-progress'));
+        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort', '-progress'));
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs['results'] as $packIndex => $pack) {
@@ -123,15 +123,6 @@ class PackPagesController extends Controller
         }
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
-
-        if ($packBundles->isEmpty()) {
-            abort(404);
-        }
-        $thisPackBundle = $packBundles[0];
-
-        if (empty($thisPackBundle)) {
-            abort(404);
-        }
 
         $collectionForDecoration = new Collection();
         $collectionForDecoration = $collectionForDecoration->merge([$pack]);

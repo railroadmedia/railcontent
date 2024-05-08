@@ -46,7 +46,7 @@
 
 .stripe-element-container label {
   position:absolute;
-  left:$gutterWidth / 3;
+  left: calc($gutterWidth / 3);
   top:0;
   height:50px;
   display:flex;

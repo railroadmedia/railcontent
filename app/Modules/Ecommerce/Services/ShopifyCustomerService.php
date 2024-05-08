@@ -40,11 +40,11 @@ class ShopifyCustomerService
      * @param  User  $user
      * @return int|null the Shopify customer's ID
      */
-    public function updateOrCreateShopifyCustomer(User $user)
-    : ?int {
+    public function updateOrCreateShopifyCustomer(User $user): ?int
+    {
         $customers = $this->getCustomersForUser($user);
 
-        $alreadySyncedUserCustomers = $customers->filter(fn(Customer $customer) => !is_null($customer->getShopifyId()));
+        $alreadySyncedUserCustomers = $customers->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
         $isCreating = is_null($user->shopify_id) && $alreadySyncedUserCustomers->isEmpty();
 
         $postData = $this->createCustomerDataForUser($user, $isCreating);
@@ -110,8 +110,8 @@ class ShopifyCustomerService
      * @param User $user
      * @return Collection
      */
-    private function getCustomersForUser(User $user)
-    : Collection {
+    private function getCustomersForUser(User $user): Collection
+    {
         $qb = $this->customerRepository->createQueryBuilder('customer');
         $qb->where(
             $qb->expr()
@@ -134,8 +134,8 @@ class ShopifyCustomerService
      * @param bool $isCreating
      * @return array
      */
-    private function createCustomerDataForUser(User $user, bool $isCreating)
-    : array {
+    private function createCustomerDataForUser(User $user, bool $isCreating): array
+    {
         $customerData = [
             "currency" => "USD",
             "email" => $this->getEmailForShopify($user->getEmail()),
@@ -151,7 +151,8 @@ class ShopifyCustomerService
             try {
                 $newMetafields = $user->getNewMetafieldsForShopify();
             } catch (Exception $exception) {
-                Log::error(sprintf(
+                Log::error(
+                    sprintf(
                         "Failed to find new metafields to send to Shopify for updating user %s (%s): %s",
                         $user->id,
                         $user->email,

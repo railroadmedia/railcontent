@@ -12,10 +12,14 @@ use function PHPUnit\Framework\isNull;
 
 class EditBranch extends Command
 {
-
-
-
-    protected $signature = 'featureFlag:editBranch {name} {--content=} {--weight=} {--priority=} {--allow_filter=} {--userid_list=} ';
+    protected $signature = 'featureFlag:editBranch
+                            {name : name of branch to edit}
+                            {--content= : new content value}
+                            {--weight= : new weight value}
+                            {--priority= : new priority value}
+                            {--allow_filter= : comma separated filters, will replace existing}
+                            {--userid_list= : comma separated userids, will replace exsiting}';
+    protected $description = "Edit A/B Testing Branch values";
 
     public function handle(FeatureFlagService $ffService): void
     {
@@ -28,9 +32,9 @@ class EditBranch extends Command
         $valuesToUpdate = [];
         $allOptions = $this->options();
         $builtInOptions = $this->getApplication()->getDefinition()->getOptions();
-        $onlyMyOptions = array_diff_key($allOptions,$builtInOptions);
+        $onlyMyOptions = array_diff_key($allOptions, $builtInOptions);
         $this->info("Updating Branch: $name");
-        foreach($onlyMyOptions as $key=>$value) {
+        foreach($onlyMyOptions as $key => $value) {
             if (!is_null($value)) {
                 $valuesToUpdate[$key] = $value;
                 $val = $branch[$key];

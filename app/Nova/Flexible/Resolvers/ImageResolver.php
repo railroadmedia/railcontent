@@ -20,12 +20,16 @@ class ImageResolver implements ResolverInterface
     {
         $images = $resource->images()->get();
 
-        return $images->map(function($image) use ($layouts) {
+        return $images->map(function ($image) use ($layouts) {
             $layout = $layouts->find('image-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
-            return $layout->duplicateAndHydrate($image->id, [
+            return $layout->duplicateAndHydrate(
+                $image->id,
+                [
                 'path_file' => $image->path,
                 'path_text' => $image->path,
                 'id' => $image->id
@@ -46,8 +50,8 @@ class ImageResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use ($groups){
-            $images = $groups->map(function($group, $index) use($model){
+        $class::saved(function ($model) use ($groups) {
+            $images = $groups->map(function ($group, $index) use ($model) {
                 return [
                     'path' => !empty($group->getAttributes()['path_text']) ? $group->getAttributes()['path_text'] : $group->getAttributes()['path_file'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
@@ -56,27 +60,27 @@ class ImageResolver implements ResolverInterface
             });
 
             //update and insert items
-            foreach($images as $image){
+            foreach($images as $image) {
                 if(!is_null($image['id'])) {
                     $dbImg = Image::find($image['id']);
-                    if($dbImg->path !== $image['path']){
+                    if($dbImg->path !== $image['path']) {
                         Storage::disk('nova_s3')->delete($dbImg->path);
                         Storage::disk('nova_s3')->put('/', $image['path']);
 
                         $dbImg->path = $image['path'];
                     }
 
-                    if($dbImg->order_number !== $image['order_number']){
+                    if($dbImg->order_number !== $image['order_number']) {
                         $dbImg->order_number = $image['order_number'];
                     }
 
                     $dbImg->save();
 
                     $updatedIds[] = $image['id'];
-                }
-
-                elseif(!empty($image['path'])) {
-                    if(!str_contains($image['path'], 'https')) $image['path'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$image['path'];
+                } elseif(!empty($image['path'])) {
+                    if(!str_contains($image['path'], 'https')) {
+                        $image['path'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$image['path'];
+                    }
 
                     $addImg = new Image();
                     $addImg->path = $image['path'];
@@ -90,9 +94,9 @@ class ImageResolver implements ResolverInterface
 
             //delete items
             $imgs = Image::where('product_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
-            if(count($imgs->get()) > 0){
-                foreach($imgs->get() as $img){
-                    Storage::disk('nova_s3')->delete(str_replace('https://d1fyshwdvi6fth.cloudfront.net/','',$img->path));
+            if(count($imgs->get()) > 0) {
+                foreach($imgs->get() as $img) {
+                    Storage::disk('nova_s3')->delete(str_replace('https://d1fyshwdvi6fth.cloudfront.net/', '', $img->path));
                 }
 
                 $imgs->delete();

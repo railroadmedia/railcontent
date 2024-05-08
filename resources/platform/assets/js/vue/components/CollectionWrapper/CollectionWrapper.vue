@@ -6,7 +6,8 @@
         />
 
         <transition appear name="fade">
-            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore">
+            <!-- Delete contentType prop after May 6th -->
+            <CollectionResults :content="data" :selected-filters="getSelectedFilters" :selected-progress="filter.progress" :search-term="getSearchTerm" :current-page="getCurrentPage" :total-pages="getTotalPages" :infinite-scroll="infiniteScroll" @on-load-more="collectionStore.loadMore" :contentType="collectionType">
                 <GroupedResultsContainer v-if="showGroupBy" :content="data" :content-type-override="collectionType" />
                 <PackCatalogue v-else-if="isPack" :content="data" />
                 <CoachesGridCatalogue v-else-if="isCoach" :content="data" :brand="brand" />
@@ -183,6 +184,10 @@ const props = defineProps({
     multipleTypes: {
         type: Boolean,
         default: () => false,
+    },
+    noResultsMessage: {
+        type: String,
+        default: '',
     },
 });
 

@@ -288,7 +288,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
-        'workoutsBG' => 'marketing/pianote/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'marketing/pianote/membership/homepage/2024/workouts-card3.webp',
     ])
 
     @php
@@ -408,7 +408,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'soundslice',
-        'video' => '77f4c',
+        'video' => '4JGlc',
         'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[

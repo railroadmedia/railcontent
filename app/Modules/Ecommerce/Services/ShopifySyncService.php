@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
+use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
@@ -56,13 +57,15 @@ class ShopifySyncService
     public function syncCustomerByUser(
         User $user,
         bool $isRebuildingPermissions = false,
-        bool $skipEventSync = false
+        bool $skipEventSync = false,
+        bool $removeDeletedOrderPermissions = false
     ): void {
         if ($user->shopify_id) {
             $this->syncCustomer(
                 $user->shopify_id,
                 isRebuildingPermissions: $isRebuildingPermissions,
-                skipEventSync: $skipEventSync
+                skipEventSync: $skipEventSync,
+                removeDeletedOrderPermissions: $removeDeletedOrderPermissions
             );
         } else {
             $this->userAccessPermissionsService->syncUser($user, $skipEventSync);
@@ -88,7 +91,7 @@ class ShopifySyncService
         $orders = $this->shopifyGateway->getCustomerOrders($shopifyCustomerId);
         $skus = $orders->pluck('lineItems')->flatten(1)->pluck('sku')->unique()->toArray();
         $products = $this->productService->getProductsBySkus($skus);
-        if ($products->contains(fn(Product $product) => $product->isDigital())) {
+        if ($products->contains(fn (Product $product) => $product->isDigital())) {
             $count = $orders->count();
             Log::debug("Customer $shopifyCustomerId: Found $count orders");
 
@@ -122,7 +125,7 @@ class ShopifySyncService
         $emailShopify = $this->getEmailForShopify($email);
         $customers = $this->shopify->getCustomers(['email' => $email]);
 
-        $customer = collect($customers)->first(fn($item) => strtolower($item->email) === strtolower($email));
+        $customer = collect($customers)->first(fn ($item) => strtolower($item->email) === strtolower($email));
         if (!$customer) {
             Log::warning("Customer with email $email not found in Shopify");
             return;
@@ -135,10 +138,12 @@ class ShopifySyncService
         array $productIds,
         string $brand,
         Carbon $processedAt,
-        float $price,
+        float $totalPrice,
         ?float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency
+        ?string $currency,
+        ?string $notes = null,
+        ?array $tags = null
     ): void {
         Log::debug("Start syncing purchase for user $user->id");
         // STEP 1: Is user synced?
@@ -158,10 +163,12 @@ class ShopifySyncService
             $productIds,
             $brand,
             $processedAt,
-            $price,
+            $totalPrice,
             $tax,
             $paymentSource,
-            $currency
+            $currency,
+            $notes,
+            $tags
         );
 
         Log::debug("User ID: $user->id; Customer Shopify ID: $customerShopifyId. Pushing order to Shopify");
@@ -172,17 +179,10 @@ class ShopifySyncService
         );
         $shopifyOrderId = $orderResource->getAttributes()['id'];
 
-        $amount = number_format($price, 2, '.', '');
+        $amount = number_format($totalPrice, 2, '.', '');
         if ($amount > 0) {
             // format the data for the payment
-            $paymentData =
-                [
-                    "amount" => $amount,
-                    "kind" => "sale",
-                    // DEV NOTE: this is not documented in Shopify, but it is required
-                    "source" => "external"
-                ];
-            $orderTransaction = $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+            $this->createShopifyOrderTransaction($shopifyOrderId, $amount, $processedAt, $paymentSource, $currency);
         }
 
         // STEP 4: sync user products
@@ -192,6 +192,44 @@ class ShopifySyncService
             Log::error($e->getMessage());
             Log::error($e->getTraceAsString());
         }
+    }
+
+    public function createShopifyOrderTransaction(
+        int $shopifyOrderId,
+        string $amount,
+        Carbon $processedAt,
+        ShopifyPaymentSourceEnum $paymentSource,
+        ?string $currency,
+    ): void {
+        $paymentData =
+            [
+                "amount" => $amount,
+                "kind" => "sale",
+                // DEV NOTE: this is not documented in Shopify, but it is required
+                "source" => "external",
+                "processed_at" => $processedAt->toIso8601String(),
+                "gateway" => $paymentSource->value,
+                "currency" => $currency ?? 'USD',
+                "status" => "success",
+            ];
+        $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
+    }
+
+    /**
+     * Temporarily keep this around for testing purposes
+     */
+    public function createShopifyOrderTransactionOld(
+        int $shopifyOrderId,
+        string $amount,
+    ): void {
+        $paymentData =
+            [
+                "amount" => $amount,
+                "kind" => "sale",
+                // DEV NOTE: this is not documented in Shopify, but it is required
+                "source" => "external",
+            ];
+        $this->shopify->createOrderTransaction($shopifyOrderId, $paymentData);
     }
 
     /**
@@ -218,7 +256,7 @@ class ShopifySyncService
      * @param int[] $productIds
      * @param string $brand
      * @param Carbon $processedAt
-     * @param float $price
+     * @param float $totalPrice
      * @param float $tax
      * @return array
      */
@@ -228,19 +266,21 @@ class ShopifySyncService
         array $productIds,
         string $brand,
         Carbon $processedAt,
-        float $price,
+        float $totalPrice,
         float $tax,
         ShopifyPaymentSourceEnum $paymentSource,
-        ?string $currency
+        ?string $currency,
+        ?string $note = null,
+        ?array $tags = null
     ): array {
         $data = [
             "customer" => ["id" => $customerShopifyId],
             "email" => $this->getEmailForShopify($email),
             "processed_at" => $processedAt->toIso8601String(),
-            "subtotal_price" => number_format($price, 2, '.', ''),
+            "subtotal_price" => number_format($totalPrice - ($tax ?? 0), 2, '.', ''),
             "total_outstanding" => "0.00",
-            "total_price" => number_format($price + ($tax ?? 0), 2, '.', ''),
-            "line_items" => $this->createOrderItems($productIds, $price),
+            "total_price" => number_format($totalPrice, 2, '.', ''),
+            "line_items" => $this->createOrderItems($productIds, $totalPrice),
             "currency" => $currency ?? 'USD',
             "metafields" => [
                 [
@@ -257,6 +297,13 @@ class ShopifySyncService
                 ]
             ]
         ];
+
+        if ($note) {
+            $data['note'] = $note;
+        }
+        if ($tags) {
+            $data['tags'] = implode(",", $tags);
+        }
 
         if ($tax) {
             $data['total_tax'] = number_format($tax, 2, '.', '');
@@ -277,7 +324,7 @@ class ShopifySyncService
         return Product::whereIn('id', $productIds)
             ->get()
             ->map(
-                fn(Product $product) => [
+                fn (Product $product) => [
                     "price" => $price,
                     "quantity" => 1, // for digital products, only 1 item of each
                     "requires_shipping" => false, // no shipping required since it is for digital products
@@ -351,6 +398,32 @@ class ShopifySyncService
         $this->syncCustomerByUser($user);
     }
 
+    /**
+     * Post to Shopify to mark the given Fulfillment for the given Shopify Order, as delivered
+     *
+     * @param  int  $shopifyOrderId
+     * @param  int  $fulfillmentId
+     * @return void
+     * @throws ValidationException
+     * @throws Exception
+     */
+    public function markFulfillmentAsDelivered(int $shopifyOrderId, int $fulfillmentId): void
+    {
+        // DEV NOTE: there seems to be a bug with createOrderFulfillmentEvent, so we'll just work around it with a direct post
+        $uriPrefix = ['orders', $shopifyOrderId, 'fulfillments', $fulfillmentId];
+        $url = implode('/', [...$uriPrefix, "events.json"]);
+        $data = ['event' => ['status' => 'delivered']];
+        $fulfillmentEventResponse = $this->shopify->post($url, $data);
+
+        if ($fulfillmentEventResponse->failed()) {
+            throw new Exception(sprintf(
+                "Failed to mark fulfillment %s as delivered: %s.",
+                $fulfillmentId,
+                $fulfillmentEventResponse->reason()
+            ));
+        }
+    }
+
     public function syncUser(User $user)
     {
         Log::debug("Shopify: syncing user $user->id");
@@ -371,7 +444,7 @@ class ShopifySyncService
     public function getShopifyCustomer($email): mixed
     {
         $customers = $this->shopify->getCustomers(['email' => $email]);
-        $customer = collect($customers)->first(fn($item) => $item->email === $email);
+        $customer = collect($customers)->first(fn ($item) => $item->email === $email);
         return $customer;
     }
 
@@ -379,7 +452,7 @@ class ShopifySyncService
     {
         $metafields = $this->shopify->getOrderMetafields($orderId);
         $paymentSource = collect($metafields)->first(
-            fn($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
+            fn ($item) => $item->key === ShopifyMetafieldKey::PaymentSource->value
         );
 
         $paymentSourceEnum = ShopifyPaymentSourceEnum::tryFrom($paymentSource?->value);

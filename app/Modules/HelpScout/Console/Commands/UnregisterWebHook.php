@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 
 class UnregisterWebHook extends Command
 {
-
     protected $signature = 'helpscout:unregister {url : Endpoint for webhook}';
     protected $description = 'Unregister web hook';
     private HelpScoutWebHookService $helpScoutWebHookService;

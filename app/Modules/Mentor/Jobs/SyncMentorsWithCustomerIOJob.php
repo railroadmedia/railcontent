@@ -21,17 +21,17 @@ class SyncMentorsWithCustomerIOJob extends BatchQueryJob
         $this->mentorUserId = $mentorUserID;
     }
 
-    function getSkip(): int
+    public function getSkip(): int
     {
         return $this->skip;
     }
 
-    function getTake(): int
+    public function getTake(): int
     {
         return $this->take;
     }
 
-    function getQuery(): Builder
+    public function getQuery(): Builder
     {
         $query = MentorStudent::query();
         if ($this->mentorUserId) {
@@ -40,11 +40,11 @@ class SyncMentorsWithCustomerIOJob extends BatchQueryJob
         return $query;
     }
 
-    function handleItem($item): void
+    public function handleItem($item): void
     {
     }
 
-    function handleAllItems($items): bool
+    public function handleAllItems($items): bool
     {
         dispatch_sync(
             (new CustomerIoSyncMentor(StudentMentorsUpdated::newWithMentorStudentCollection($items)->mentorStudentData))

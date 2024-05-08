@@ -336,6 +336,7 @@
         ])
     @endif
 
+
     @hasSection('top-bar')
         @yield('top-bar')
     @endif
@@ -462,7 +463,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
-        'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card3.webp',
     ])
 
     @php
@@ -574,7 +575,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'soundslice',
-        'video' => '1D6Vc',
+        'video' => '23rlc',
         'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[

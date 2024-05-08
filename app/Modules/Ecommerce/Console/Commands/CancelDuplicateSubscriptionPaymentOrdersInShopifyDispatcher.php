@@ -80,7 +80,7 @@ class CancelDuplicateSubscriptionPaymentOrdersInShopifyDispatcher extends Comman
                         $subscriptionPaymentData = $subscriptionPaymentData->take($toGet);
                     }
 
-                    $paymentIds = $subscriptionPaymentData->transform(fn($data) => $data->payment_id)->toArray();
+                    $paymentIds = $subscriptionPaymentData->transform(fn ($data) => $data->payment_id)->toArray();
                     $jobs[] = new CancelDuplicateSubscriptionPaymentOrders(
                         $paymentIds,
                         $simulate,
@@ -93,7 +93,7 @@ class CancelDuplicateSubscriptionPaymentOrdersInShopifyDispatcher extends Comman
             $subscriptionPayments->chunk(
                 $batchSize,
                 function ($subscriptionPaymentData, $batchIndex) use ($simulate, &$jobs) {
-                    $paymentIds = $subscriptionPaymentData->transform(fn($data) => $data->payment_id)->toArray();
+                    $paymentIds = $subscriptionPaymentData->transform(fn ($data) => $data->payment_id)->toArray();
                     $jobs[] = new CancelDuplicateSubscriptionPaymentOrders(
                         $paymentIds,
                         $simulate,

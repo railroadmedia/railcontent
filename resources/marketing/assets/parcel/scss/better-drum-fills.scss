@@ -166,6 +166,7 @@ a.text-yellow:hover {
   }
 
   .play-button {
+      display: inline-block;
     cursor: pointer;
     outline: none;
     transition: opacity .3s;

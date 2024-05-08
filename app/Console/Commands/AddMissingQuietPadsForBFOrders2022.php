@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class AddMissingQuietPadsForBFOrders2022 extends Command
 {
-
     /**
      * The console command name.
      *
@@ -35,11 +34,11 @@ class AddMissingQuietPadsForBFOrders2022 extends Command
     {
         $connection = $databaseManager->connection(config('railcontent.database_connection_name'));
 
-//        dd($connection->table('ecommerce_order_items')
-//            ->whereBetween('created_at', ['2022-11-22 00:00:00', '2022-11-30 23:00:00'])
-//            ->where('brand', 'drumeo')
-//            ->where('final_price', 150)
-//            ->count());
+        //        dd($connection->table('ecommerce_order_items')
+        //            ->whereBetween('created_at', ['2022-11-22 00:00:00', '2022-11-30 23:00:00'])
+        //            ->where('brand', 'drumeo')
+        //            ->where('final_price', 150)
+        //            ->count());
 
         $countWithoutQuietPad = 0;
         $rowDataForPadlessOrders = [];

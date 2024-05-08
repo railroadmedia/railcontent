@@ -6,7 +6,6 @@ use Modules\UserManagementSystem\Models\User;
 
 class UserAuthenticationService
 {
-
     public function __construct()
     {
     }

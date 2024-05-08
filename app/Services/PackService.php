@@ -63,29 +63,29 @@ class PackService
 
         return $packs->slice(0, 3);
         // disable broken code, just return top 3.
-//        if ($user->isPackOnlyOwner()) {
-//            return $packs->slice(0, 3);
-//        } else {
-//            $userProducts = $this->userProductService->getAllUsersProducts($user->id);
-//            $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
-//            $packsToShow = [];
-//
-//            foreach ($packs as $packIndex => $pack) {
-//                foreach ($userProducts as $userProduct) {
-//                    if (($productSkuToPackSlugArray[$userProduct->getProduct()
-//                            ->getSku()] ?? null) == $pack['slug']
-//                        && $userProduct->getCreatedAt() > Carbon::now()
-//                            ->subDays(3)
-//                    ) {
-//                        $packsToShow[] = $pack;
-//
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            return new PackCollection(array_slice($packsToShow, 0, 3));
-//        }
+        //        if ($user->isPackOnlyOwner()) {
+        //            return $packs->slice(0, 3);
+        //        } else {
+        //            $userProducts = $this->userProductService->getAllUsersProducts($user->id);
+        //            $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
+        //            $packsToShow = [];
+        //
+        //            foreach ($packs as $packIndex => $pack) {
+        //                foreach ($userProducts as $userProduct) {
+        //                    if (($productSkuToPackSlugArray[$userProduct->getProduct()
+        //                            ->getSku()] ?? null) == $pack['slug']
+        //                        && $userProduct->getCreatedAt() > Carbon::now()
+        //                            ->subDays(3)
+        //                    ) {
+        //                        $packsToShow[] = $pack;
+        //
+        //                        break;
+        //                    }
+        //                }
+        //            }
+        //
+        //            return new PackCollection(array_slice($packsToShow, 0, 3));
+        //        }
     }
 
 
@@ -110,7 +110,7 @@ class PackService
         $packs = $this->insertActiveCohortContent($packs, $activeContentId);
 
         return new ContentFilterResultsEntity([
-            'results' => !is_array($packs)?$packs->values()->toArray():$packs,
+            'results' => !is_array($packs) ? $packs->values()->toArray() : $packs,
             'total_results' => count($packs),
             'filter_options' => [],
         ]);
@@ -134,8 +134,9 @@ class PackService
             $sort,
             ['pack', 'semester-pack'],
             [],
-            FiltersHelper::$includedFields,
+            [],
             FiltersHelper::$requiredFields,
+            FiltersHelper::$includedFields,
             [],
             [],
             [],
@@ -148,7 +149,7 @@ class PackService
     protected function excludeActiveCohortContent($packs, $activeContentId)
     {
         if ($activeContentId && in_array($activeContentId, $packs->pluck('id')->toArray())) {
-            $packs = $packs->filter(function($pack) use ($activeContentId){
+            $packs = $packs->filter(function ($pack) use ($activeContentId) {
                 return $pack['id'] != $activeContentId;
             });
         }

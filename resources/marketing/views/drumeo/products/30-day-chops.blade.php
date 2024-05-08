@@ -402,7 +402,7 @@ $testimonials = $drumeo['testimonialsShopVersion'];
             ],
         'bgColor' => 'linear-gradient(rgba(11, 118, 219, 1), rgba(7, 74, 137, 1))',
         'title' => "Trusted by drummers everywhere.",
-        'subTitle' => "Rated 5 stars by thousands by Drumeo students from around the world! See the reviews ››",
+        'subTitle' => "Rated 5 stars by thousands of Drumeo students from around the world! See the reviews ››",
         'showTop' => true,
 ])
 

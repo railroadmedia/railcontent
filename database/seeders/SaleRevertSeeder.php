@@ -16,11 +16,11 @@ class SaleRevertSeeder extends Seeder
      */
     public function run()
     {
-//        all shirts
+        //        all shirts
         Product::where('product_type_id', 4)->update(['discounted_price' => 35]);
-//        all hoodies
+        //        all hoodies
         Product::where('product_type_id', 5)->update(['discounted_price' => 65]);
-//        all sweaters
+        //        all sweaters
         Product::where('product_type_id', 7)->update(['discounted_price' => 45]);
 
         Product::where('name', '30-Day Drummer Plaid Shirt')->update(['discounted_price' => 65]);

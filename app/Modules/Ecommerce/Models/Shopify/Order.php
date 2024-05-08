@@ -20,7 +20,8 @@ class Order
     public ?Carbon $processedAt;
     public ?Carbon $cancelledAt;
 
-    private float $totalPaid;
+    private float $totalPrice;
+    private float $totalRefunded;
 
     public function __construct($graphGLResponse)
     {
@@ -35,7 +36,8 @@ class Order
         $this->lineItems = collect($graphGLResponse->lineItems->nodes)->map(function ($item) {
             return new OrderLineItem($this, $item);
         });
-        $this->totalPaid = $graphGLResponse->totalPriceSet->shopMoney->amount;
+        $this->totalPrice = $graphGLResponse->totalPriceSet->shopMoney->amount;
+        $this->totalRefunded = $graphGLResponse->totalRefundedSet->shopMoney->amount;
     }
 
     public function getPaymentSourceEnum(): UserAccessPermissionsSourceEnum
@@ -66,16 +68,26 @@ class Order
         });
     }
 
+    public function isFullyRefunded(): bool
+    {
+        return $this->totalPrice > 0 && $this->totalRefunded >= $this->totalPrice;
+    }
+
     public function getPermissionStatusFromOrder(): UserAccessPermissionsStatusEnum
     {
         if ($this->cancelledAt) {
             return UserAccessPermissionsStatusEnum::Revoked;
         }
-        if ($this->processedAt < config('ecommerce.launch_dates.shopify')
-            && !$this->isTrialOrder()
-            && $this->totalPaid == 0) {
-            //case for migration data that was refunded does not actually use refunds/cancellations
-            return UserAccessPermissionsStatusEnum::Revoked;
+
+        if ($this->processedAt > config('ecommerce.launch_dates.shopify')) {
+            if ($this->isFullyRefunded()) {
+                return UserAccessPermissionsStatusEnum::Revoked;
+            }
+        } else {
+            if (!$this->isTrialOrder() && $this->totalPrice == 0) {
+                //case for migration data that was refunded does not actually use refunds/cancellations
+                return UserAccessPermissionsStatusEnum::Revoked;
+            }
         }
         return UserAccessPermissionsStatusEnum::Active;
     }

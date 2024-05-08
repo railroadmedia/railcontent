@@ -10,7 +10,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class DevEndpointServiceProvider extends ServiceProvider
 {
-
     protected $listen = [
 //        PostLiked::class => [
 //            PlaygroundListener::class . '@handlePostLiked',

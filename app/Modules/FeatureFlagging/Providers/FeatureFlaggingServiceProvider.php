@@ -2,7 +2,6 @@
 
 namespace App\Modules\FeatureFlagging\Providers;
 
-
 use App\Modules\FeatureFlagging\Managers\FeatureFlagManager;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Query\Builder;
@@ -16,6 +15,8 @@ use App\Modules\FeatureFlagging\Middlewares\GuardFeature;
 use Modules\FeatureFlagging\Console\Commands\AddBranch;
 use Modules\FeatureFlagging\Console\Commands\AddExperiment;
 use Modules\FeatureFlagging\Console\Commands\AddFeature;
+use Modules\FeatureFlagging\Console\Commands\AddRemoveUsersToBranch;
+use Modules\FeatureFlagging\Console\Commands\AddRemoveUsersToFeature;
 use Modules\FeatureFlagging\Console\Commands\DeleteBranch;
 use Modules\FeatureFlagging\Console\Commands\DeleteFeature;
 use Modules\FeatureFlagging\Console\Commands\EditBranch;
@@ -68,6 +69,8 @@ class FeatureFlaggingServiceProvider extends ServiceProvider
                 ShowExperiments::class,
                 ShowFeatures::class,
                 ToggleExperiment::class,
+                AddRemoveUsersToFeature::class,
+                AddRemoveUsersToBranch::class,
             ]
         );
     }

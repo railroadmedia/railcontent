@@ -35,12 +35,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Broadcast extends Model
 {
-    const TYPE_SINGLE = 'single';
-    const TYPE_AGGREGATED = 'aggregated';
+    public const TYPE_SINGLE = 'single';
+    public const TYPE_AGGREGATED = 'aggregated';
 
-    const STATUS_IN_TRANSIT = 'in transit';
-    const STATUS_SENT = 'sent';
-    const STATUS_FAILED = 'failed';
+    public const STATUS_IN_TRANSIT = 'in transit';
+    public const STATUS_SENT = 'sent';
+    public const STATUS_FAILED = 'failed';
 
     protected $table = 'notification_broadcasts';
 

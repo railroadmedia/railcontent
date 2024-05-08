@@ -319,7 +319,7 @@ $drumTechniqueLessons = [
     'title' => '5 Truths About Hand Technique',
     'artist' => 'Bruce Becker',
     ],
-    
+
     [
     'url' => '/beat/developing-your-own-pocket/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/05/17084332/pocket-queen-blog-768x403.jpg',
@@ -652,43 +652,43 @@ $warmupLessons = [
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/09/17101926/Jared-Blog-768x403.png',
     'title' => '4 Drum Warm-ups For Beginners',
     'artist' => 'Jared Falk',
-    ], 
+    ],
     [
     'url' => '/beat/drum-practice-pad-warm-up/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/blog/wp-content/uploads/2018/07/18093240/pat-petrillo-drumming-768x403.jpg',
     'title' => 'The Best Practice Pad Warm Up',
     'artist' => 'Pat Petrillo',
-    ], 
+    ],
     [
     'url' => '/beat/the-rock-star-drum-warm-up/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/01/22093848/ghostcover-768x403.jpg',
     'title' => 'The Rock Star Drum Warm-Up',
     'artist' => 'Todd Sucherman',
-    ], 
+    ],
     [
     'url' => '/beat/anika-nilles-drum-warm-up/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/blog/wp-content/uploads/2018/07/18093045/anika-nilles-drumming-768x403.jpg',
     'title' => 'Anika Nilles’ Top Two Drum Warm-Ups',
     'artist' => 'Anika Nilles',
-    ], 
+    ],
     [
     'url' => '/beat/how-to-warm-up/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/blog/wp-content/uploads/2018/07/06092254/photo-10-768x403.jpg',
     'title' => 'How To Warm Up Before A Gig',
     'artist' => 'Ash Pearson',
-    ], 
+    ],
     [
     'url' => '/beat/5-minute-drum-set-warm-ups/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/11/14120751/jared-featured-image-768x403.jpg',
     'title' => '5-Minute Drum Set Warm-Ups',
     'artist' => 'Jared Falk',
-    ], 
+    ],
     [
     'url' => '/beat/fastest-way-to-get-faster-3/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/blog/wp-content/uploads/2018/07/06092256/photo-11-768x403.jpg',
     'title' => 'Fastest Way To Get Faster #3: The Forearm Crusher',
     'artist' => 'Jared Falk',
-    ], 
+    ],
     [
     'url' => '/beat/simple-drumming-warmup/',
     'thumb' => 'https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/12/31092936/warmup-768x403.jpg',
@@ -805,7 +805,7 @@ $songLessons = [
     'thumb' => 'https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2020/10/09163418/Led-Zeppelin-IS.jpg',
     'title' => 'How To Play Led Zeppelin’s “Immigrant Song” On The Drums',
     'artist' => 'Mike Michalkow',
-    ],  
+    ],
 ];
 
 $stickTrickLessons = [

@@ -65,8 +65,8 @@ class PredefinedPlaylists extends Command
         $this->info('Done.');
     }
 
-    public function getCSV(int $startIndex, int $endIndex)
-    : array {
+    public function getCSV(int $startIndex, int $endIndex): array
+    {
         $fileName = 'predefined-playlists.csv';
         $filePath = app_path().'/Modules/Content/Console/Commands/Data/'.$fileName;
         $file = file($filePath);
@@ -81,8 +81,8 @@ class PredefinedPlaylists extends Command
         return [$csv, $headersRow];
     }
 
-    private function getData($row, $headersRow)
-    : array {
+    private function getData($row, $headersRow): array
+    {
         $data = [];
         for ($i = 0; $i < count($row); $i++) {
             $data[$headersRow[$i]] = $row[$i];
@@ -91,8 +91,8 @@ class PredefinedPlaylists extends Command
         return $data;
     }
 
-    private function getValue(array $data, mixed $headersRow, string $name)
-    : ?string {
+    private function getValue(array $data, mixed $headersRow, string $name): ?string
+    {
         if (!in_array($name, $headersRow)) {
             throw new Exception("Header '$name' does not exist in array");
         }

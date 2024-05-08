@@ -17,15 +17,18 @@ use Throwable;
  */
 abstract class BatchQueryJobByIds extends BatchQueryJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use Batchable;
 
     public function init(int $skip, int $take)
     {
         $this->ids = $this->getQuery()->skip($skip)->take($take)->pluck('id')->toArray();
     }
 
-    public
-    function handle()
+    public function handle()
     {
         if ($this->batch()?->cancelled()) {
             return;

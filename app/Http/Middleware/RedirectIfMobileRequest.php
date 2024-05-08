@@ -31,7 +31,7 @@ class RedirectIfMobileRequest
                 $getEnrollmentContent = true;
                 if(!user()->isAdmin() && ($request->routeIs('platform.packs.first-level') ||
                         $request->routeIs('platform.packs.second-level') ||
-                        $request->routeIs('platform.packs.third-level'))){
+                        $request->routeIs('platform.packs.third-level'))) {
                     $getEnrollmentContent = false;
                 }
                 $route =
@@ -64,7 +64,9 @@ class RedirectIfMobileRequest
             } elseif ($request->routeIs('platform.content-type-catalog')) {
                 $lessonType = PrimaryURLSlugToContentTypeMap::$map[last(request()->segments())];
                 $route =
-                    route('v1.mobile.musora-api.contents.filter', ['brand' => $brand, 'included_types' => [$lessonType]]
+                    route(
+                        'v1.mobile.musora-api.contents.filter',
+                        ['brand' => $brand, 'included_types' => [$lessonType]]
                     );
             } elseif ($request->routeIs('platform.shows')) {
                 $route = route('api.shows', ['brand' => $brand]);
@@ -108,12 +110,12 @@ class RedirectIfMobileRequest
                     'brand' => $brand,
                     'id' => last(request()->segments()),
                 ]);
-            }elseif($request->routeIs('platform.cohort')){
+            } elseif($request->routeIs('platform.cohort')) {
                 $route = route('v1.mobile.musora-api.cohort.template', [
                     'brand' => $brand,
                     'slug' => last(request()->segments()),
                 ]);
-            }  elseif ($request->routeIs('platform.user.playlist')) {
+            } elseif ($request->routeIs('platform.user.playlist')) {
                 $route = route('v1.mobile.musora-api.get.playlist', [
                     'brand' => $brand,
                     'playlist_id' => last(request()->segments()),

@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Gateways;
 
 use App\Modules\Ecommerce\Enums\RechargeSubscriptionStatusEnum;
 use App\Modules\Ecommerce\Models\Recharge\Customer;
+use App\Modules\Ecommerce\Models\Recharge\PaymentMethod;
 use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
@@ -149,6 +150,7 @@ class RechargeGateway
             $response = curl_exec($ch);
             $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
             $result = json_decode(substr($response, $headerSize), $options['return_array']);
+            $sleepTime = 1 * $attemptCount;
 
             $info = array_filter(array_map('trim', explode("\n", substr($response, 0, $headerSize))));
 
@@ -172,25 +174,25 @@ class RechargeGateway
             }
 
             if (isset($returnInfo['HTTP_CODE']) && (strpos(
-                        $returnInfo['HTTP_CODE'],
-                        'HTTP/1.1 429 TOO MANY REQUESTS'
-                    ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
-                Log::warning('[Recharge\API] Sleeping for 1 seconds (429 Too Many Requests / Method 1)');
-                sleep(1);
+                $returnInfo['HTTP_CODE'],
+                'HTTP/1.1 429 TOO MANY REQUESTS'
+            ) > -1 || $returnInfo['HTTP_CODE'] == 'HTTP/2 429')) {
+                Log::warning('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 1)');
+                sleep($sleepTime);
                 $retry = true;
                 continue;
             }
 
             if (isset($result->warning) && $result->warning == "too many requests") {
-                Log::warning('[Recharge\API] Sleeping for 1 seconds (Too Many Requests / Method 2)');
-                sleep(1);
+                Log::warning('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (Too Many Requests / Method 2)');
+                sleep($sleepTime);
                 $retry = true;
                 continue;
             }
 
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 409 CONFLICT') > -1) {
-                Log::warning('[Recharge\API] Sleeping for 1 seconds (409 Conflict)');
-                sleep(1);
+                Log::warning('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (409 Conflict)');
+                sleep($sleepTime);
                 $retry = true;
                 continue;
             }
@@ -198,11 +200,11 @@ class RechargeGateway
             if (isset($returnInfo['HTTP_CODE']) && strpos($returnInfo['HTTP_CODE'], 'HTTP/1.1 400 BAD REQUEST') > -1) {
                 if (isset($result->errors) && isset($result->errors->UNEXPECTED_VARIANT_ERROR_TYPE)) {
                     if (strpos(
-                            $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
-                            'Shopify returned 429 rate limit regarding this call'
-                        ) > -1) {
-                        Log::info('[Recharge\API] Sleeping for 1 seconds (Shopify 429)');
-                        sleep(1);
+                        $result->errors->UNEXPECTED_VARIANT_ERROR_TYPE,
+                        'Shopify returned 429 rate limit regarding this call'
+                    ) > -1) {
+                        Log::info('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (Shopify 429)');
+                        sleep($sleepTime);
                         $retry = true;
                         continue;
                     }
@@ -218,8 +220,8 @@ class RechargeGateway
                 }
 
                 if (stripos($returnError['msg'], 'The requested URL returned error: 429 TOO MANY REQUESTS') !== false) {
-                    Log::warning('[Recharge\API] Sleeping for 1 seconds (429 Too Many Requests / Method 2)');
-                    sleep(1);
+                    Log::warning('[Recharge\API] Sleeping for ' . $sleepTime . ' seconds (429 Too Many Requests / Method 2)');
+                    sleep($sleepTime);
                     $retry = true;
                     continue;
                 }
@@ -307,7 +309,7 @@ class RechargeGateway
         }
 
         // transform into our model
-        $customers->transform(fn($customerData) => new Customer($customerData));
+        $customers->transform(fn ($customerData) => new Customer($customerData));
 
         // in case there are multiple customers with that shopify id, we should log it for investigation
         if ($customers->count() > 1) {
@@ -317,6 +319,28 @@ class RechargeGateway
         }
 
         return $customers->first();
+    }
+
+    /**
+     * Gets the default payment method for a Recharge customer
+     *
+     * @param int $rechargeCustomerId
+     * @return null|PaymentMethod
+     * @throws Exception
+     */
+    public function getCustomerDefaultPaymentMethod(int $rechargeCustomerId): ?PaymentMethod
+    {
+        $data = collect(
+            $this->call(
+                'GET',
+                '/payment_methods?customer_id=' . $rechargeCustomerId,
+                ['limit' => 3]
+            )->payment_methods ?? []
+        );
+
+        return $data->filter(fn ($p) => $p->default)
+            ->transform(fn ($data) => new PaymentMethod($data))
+            ->first();
     }
 
     /**

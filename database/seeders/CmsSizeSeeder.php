@@ -59,7 +59,7 @@ class CmsSizeSeeder extends Seeder
             ],
         ];
 
-        foreach($sizes as $size){
+        foreach($sizes as $size) {
             Size::create([
                 'name' => $size['name'],
                 'code' => $size['code']

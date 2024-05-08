@@ -67,7 +67,7 @@
                     <!-- Mini Catalog -->
                     <playlist-collection-card v-for="(listElement, i) in playlistsStore.playlists" :key="listElement.id"
                         :listElement="listElement" :isListView="false" :isMiniCatalog="true" :token="token" :index="i"
-                        :brand="brand" />
+                        :brand="brand" :trackingSection="trackingSection" />
                 </div>
             </section>
 
@@ -140,6 +140,10 @@ const props = defineProps({
     filterOptions: {
         type: [Object, Array],
         default: null
+    },
+    trackingSection: {
+        type: String,
+        default: ''
     }
 })
 

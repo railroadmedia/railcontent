@@ -1,0 +1,193 @@
+<?php
+
+namespace App\Modules\Ecommerce\Jobs;
+
+use App\Console\Commands\Infrastructure\Timer;
+use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
+use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
+use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
+use App\Modules\Ecommerce\Services\ProductService;
+use App\Modules\Ecommerce\Services\ShopifyDeleteService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
+use App\Modules\UserManagementSystem\Services\UserService;
+use Carbon\Carbon;
+use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Log;
+
+class FixMobileTransactionsJob implements ShouldQueue
+{
+    use HandlesMaskedEmailAddress;
+    use Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
+    private Carbon $startDate;
+    private Carbon $endDate;
+    private string $endCursor;
+    private int $totalProcessed;
+    private ?int $limit;
+
+    public function __construct(
+        Carbon $startDate,
+        Carbon $endDate,
+        ?int $limit,
+        string $endCursor = '',
+        int $totalProcessed = 0
+    ) {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+        $this->endCursor = $endCursor;
+        $this->totalProcessed = $totalProcessed;
+        $this->limit = $limit;
+    }
+
+    public function handle(
+        ShopifyGateway $shopifyGateway,
+        ShopifySyncService $shopifySyncService,
+        UserService $userService,
+        ProductService $productService,
+        ShopifyDeleteService $shopifyDeleteService
+    ): void {
+        $className = get_class($this);
+        if (!$this->endCursor) {
+            Log::info("$className: Start Processing Batch $this->batchId");
+        }
+        $endCursor = $this->endCursor;
+        $break = false;
+        do {
+            Timer::afterSeconds(120, function () use (&$break) {
+                $break = true;
+            });
+            if ($break) {
+                break;
+            }
+            $orders = $shopifyGateway->getOrdersBetween(
+                $this->startDate,
+                $this->endDate,
+                10,
+                ' AND (tag:Apple OR tag:Google)',
+                ",email,transactions{id,processedAt},subtotalPriceSet{shopMoney{amount}},refunds{id},totalPriceSet{shopMoney{amount}}
+                ,cancelledAt,processedAt,currencyCode,metafields(first:10){edges{node{namespace,value,key}}}
+                ,lineItems(first:10){edges{node{id,title,quantity,variant{title,sku}}}},note,tags",
+                $endCursor
+            );
+
+            foreach ($orders as $order) {
+                $orderId = str_replace('gid://shopify/Order/', '', $order->id);
+                Log::info("Processing Order ID: $orderId");
+
+
+                if ($this->batch()->canceled()) {
+                    Log::info("$className: Batch $this->batchId was cancelled");
+                    return;
+                }
+
+                try {
+                    if ($order->subtotalPriceSet->shopMoney->amount != $order->totalPriceSet->shopMoney->amount) {
+                        Log::info("Order ID: $orderId has a different subtotal and total price");
+                    }
+
+                    if ($order->transactions && !$order->cancelledAt) {
+                        $hours = Carbon::parse($order->transactions[0]->processedAt)->diffInHours(
+                            Carbon::parse($order->processedAt)
+                        );
+
+                        if ($hours > 1) { //anything within an hour is fine for metrics
+                            if ($order->refunds) {
+                                Log::info("Order ID: $orderId has a refund, ignore processing.");
+                                continue;
+                            }
+
+                            Log::info(
+                                "Order ID: $orderId has a transaction that is more than 1 hour apart from the order processedAt time"
+                            );
+                            $email = $this->getEmailFromShopify($order->email);
+                            $user = $userService->getByEmailOrNull($email);
+
+                            foreach ($order->metafields->edges as $metafield) {
+                                if ($metafield->node->key === ShopifyMetafieldKey::Brand->value) {
+                                    $brand = $metafield->node->value;
+                                } elseif ($metafield->node->key === ShopifyMetafieldKey::PaymentSource->value) {
+                                    $paymentSource = ShopifyPaymentSourceEnum::tryFrom($metafield->node->value);
+                                }
+                            }
+
+                            if (!$brand) {
+                                throw new \Exception("Brand not found for order $orderId");
+                            }
+
+                            if (!$paymentSource) {
+                                throw new \Exception("Payment source not found for order $orderId");
+                            }
+
+                            $sku = $order->lineItems->edges[0]->node->variant->sku;
+                            $productsIds = [$productService->getBySku($sku)->id];
+                            $processedAt = Carbon::parse($order->processedAt);
+
+                            $price = $order->subtotalPriceSet->shopMoney->amount;
+                            $tax = $order->totalPriceSet->shopMoney->amount - $price;
+                            $currency = $order->currencyCode;
+
+                            $note = $order->note;
+                            $tags = $order->tags;
+
+                            $shopifySyncService->syncOrder(
+                                $user,
+                                $productsIds,
+                                $brand,
+                                $processedAt,
+                                $price,
+                                $tax,
+                                $paymentSource,
+                                $currency,
+                                $note,
+                                $tags,
+                            );
+
+                            $shopifyDeleteService->deleteOrder($orderId);
+                            $shopifySyncService->syncCustomerByUser($user, removeDeletedOrderPermissions: true);
+
+                            $this->totalProcessed++;
+                            if ($this->limit && $this->totalProcessed >= $this->limit) {
+                                Log::info(
+                                    "$className: Finished processing ($this->totalProcessed/$this->totalProcessed)"
+                                );
+                                return;
+                            }
+                        } else {
+                            Log::info(
+                                "Order ID: $orderId has a transaction within an hour of the order processedAt time"
+                            );
+                        }
+                    }
+                } catch (\Exception $e) {
+                    Log::error("Order ID: $orderId failed to process");
+                    Log::error($e);
+                }
+            }
+        } while ($endCursor);
+
+        if ($break) {
+            Log::info("$className: Processed $this->totalProcessed/??, triggering new job");
+            $this->batch()->add(
+                new FixMobileTransactionsJob(
+                    $this->startDate,
+                    $this->endDate,
+                    $this->limit,
+                    $endCursor,
+                    $this->totalProcessed
+                )
+            );
+        } else {
+            Log::info("$className: Finished processing ($this->totalProcessed/$this->totalProcessed)");
+        }
+    }
+}

@@ -14,10 +14,8 @@ use Railroad\Railcontent\Support\Collection;
 
 class RailcontentProvider implements RailcontentProviderInterface
 {
-
-    public function getBlockedUsers()
-    : ?array
+    public function getBlockedUsers(): ?array
     {
-        return BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+        return BlockedUser::where('blocker_id', '=', user()->id)->get()->pluck('user_id')->toArray();
     }
 }

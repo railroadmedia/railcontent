@@ -28,7 +28,7 @@ Route::group(
 
         Route::delete(
             'user/delete/{id}',
-            UserController::class . '@destroy'
+            UserController::class . '@markAsDelete'
         )
             ->name('user_management_system.user.delete');
 
@@ -121,14 +121,12 @@ Route::group(
         Route::post(
             'onboarding-experience',
             OnboardingController::class . '@experience'
-
         )
             ->name('user_management_system.onboarding.experience');
 
         Route::post(
             'onboarding-goals',
             OnboardingController::class . '@goals'
-
         )
             ->name('user_management_system.onboarding.goals');
 
@@ -183,5 +181,3 @@ Route::group(
         );
     }
 );
-
-

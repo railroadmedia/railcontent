@@ -9,10 +9,9 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 
 class DeleteExperiment extends Command
 {
-
-
-
-    protected $signature = 'featureFlag:deleteExperiment {name}';
+    protected $signature = 'featureFlag:deleteExperiment
+                            {name : name of Experiment to delete}';
+    protected $description = 'Delete A/B Testing Experiment. This should only be done when all code changes removing the split have been published';
 
     public function handle(FeatureFlagService $ffService): void
     {

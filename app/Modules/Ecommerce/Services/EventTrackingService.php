@@ -5,8 +5,10 @@ namespace App\Modules\Ecommerce\Services;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Models\Recharge\PaymentMethod;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\EventDataSynchronizer\Jobs\EverflowTrackConversion;
 use App\Modules\EventDataSynchronizer\Jobs\ImpactTrackConversion;
 use App\Modules\EventTracking\Avo\AvoHelper;
@@ -87,9 +89,13 @@ class EventTrackingService
             3
         );
 
-        $eventTrackingData = $this->getRefundData($refund, $order, $brand);
-
-        Avo::order_refunded(AvoHelper::defaultEventProperties($eventTrackingData, $user));
+        try {
+            $eventTrackingData = $this->getRefundData($refund, $order, $brand);
+            Avo::order_refunded(AvoHelper::defaultEventProperties($eventTrackingData, $user));
+        } catch (\Exception $e) {
+            // Do not block user flow if event tracking fails
+            \Log::error($e->getMessage());
+        }
     }
 
     private function getProductList(array $lineItems = []): array
@@ -156,12 +162,12 @@ class EventTrackingService
 
         $refundLineItemsAmount = $refundLineItems
             ->pluck('subtotal_set')
-            ->map(fn($a) => floatval($a['presentment_money']['amount']))
+            ->map(fn ($a) => floatval($a['presentment_money']['amount']))
             ->sum();
 
         $orderAdjustmentsAmount = collect($refund['order_adjustments'])
             ->pluck('amount_set')
-            ->map(fn($a) => floatval($a['presentment_money']['amount']) * -1)
+            ->map(fn ($a) => floatval($a['presentment_money']['amount']) * -1)
             ->sum();
 
         $lineItems = $refundLineItems->pluck('line_item')->toArray();
@@ -187,5 +193,29 @@ class EventTrackingService
                     default => $discount['description'] ?? ''
                 };
             })->toArray();
+    }
+
+    /**
+     * @param User $user
+     * @param null|PaymentMethod $paymentMethod
+     * @return void
+     */
+    public function trackPaymentMethodExpiryDate(User $user, ?PaymentMethod $paymentMethod): void
+    {
+        $expiryDate = null;
+        if ($paymentMethod != null) {
+            $year = $paymentMethod->paymentDetails->exp_year;
+            $month = $paymentMethod->paymentDetails->exp_month;
+            $expiryDate = Carbon::now()->setYear($year)->setMonth($month)->endOfMonth()->timestamp;
+        }
+
+        $attribute = "_user_payment_primary-method-expiration-date";
+        $data = collect(config('event-data-synchronizer.customer_io_brands_to_sync'))
+            ->flatMap(fn (string $b) => [
+                $b . $attribute => $expiryDate
+            ])
+            ->toArray();
+
+        dispatchWithDelay(new CustomerIoSyncUserByUserId($user, $data), 30);
     }
 }

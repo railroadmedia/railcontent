@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class PasswordResetController extends BaseController
 {
-
     /**
      * Show the application's reset password form.
      *

@@ -185,7 +185,7 @@
         height:100%;
 
         @include xSmallOnly {
-          padding:$gutterWidth / 3;
+          padding:calc($gutterWidth / 3);
         }
       }
 
