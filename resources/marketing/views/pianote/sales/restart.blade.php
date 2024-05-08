@@ -144,7 +144,7 @@
                             <img class="h-24 sm:h-36 lg:h-48" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1360x0/filters:quality(95)/marketing/pianote/promos/may/winback-header.webp">
                             <h1 class="rotater-text my-4 lg:my-5"><strong>Save 50% On <br class="inline sm:hidden"> Your First Year</strong></h1>
                             <h6 class="leading-normal mb-4 sm:mb-2">We want you back – so you’ll get a <strong>50% discount</strong> on your first year with Pianote.<br>
-                                <strong class="text-musora"><em>Only available until June 30th.
+                                <strong class="text-musora"><em>Only available until May 31st.
 
                                                         <span x-cloak x-data="timer()" x-init="countdown()">
                                                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -289,7 +289,7 @@
                     </div>
                     <br>
                     <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Pianote</span> Membership<br class="hidden sm:inline">  today and save 50%.</strong></h3>
-                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.
+                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until May 31st.
                                 <span x-cloak x-data="timer()" x-init="countdown()">
                                                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                                                      <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -315,7 +315,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
         @include('_partials.components.countdown',[
-        'countdownDate' => '2024-07-01 00:00:00',
+        'countdownDate' => '2024-06-01 00:00:00',
         'promoVersion' => false
         ])
 @stop
