@@ -113,7 +113,10 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $resources = [];
-            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1') {
+            foreach ($content['resources'] ?? [] as $resource){
+                $resources[$resource['resource_url']] = $resource;
+            }
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
 
@@ -207,12 +210,11 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $content->fetch('data.original_thumbnail_url', $content->fetch('data.thumbnail_url'));
 
             $route = [];
-
+            $parentContentDataForDatabase = [];
             if (!empty($content['parent_content_data'])) {
                 $hierarchyData =
                     $hierarchyRows->where('rch1_child_id', $content['id'])
                         ->first();
-                $parentContentDataForDatabase = [];
                 if (!empty($hierarchyData)) {
                     if (!empty($hierarchyData['rch4_parent_id']) &&
                         !empty($hierarchyData['rcp4_content_id']) &&
@@ -258,8 +260,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         ];
                     }
                 }
-
-                foreach ($parentContentDataForDatabase as $parent) {
+                $childId = $content['id'];
+                foreach (array_reverse($parentContentDataForDatabase) as $parent) {
                     switch ($parent->type) {
                         case 'learning-path':
                             $route[] = 'Method';
@@ -278,7 +280,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             break;
                     }
 
-                    if (isset($parent) && (!isset(self::$parents[$content['id']]))) {
+                    if (isset($parent) && (!isset(self::$parents[$childId]))) {
                         Decorator::$typeDecoratorsEnabled = true;
                         \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                         AddedToPrimaryPlaylistDecorator::$skip = true;
@@ -288,7 +290,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         ContentRepository::$pullFutureContent = true;
                         ResourceDecorator::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
-                        $parentContent[$content['id']] =
+                        $parentContent[$childId] =
                             $this->contentService->getByIds([$parent->id])
                                 ->first();
                         ContentRepository::$bypassPermissions = $initialByPassPermission;
@@ -297,33 +299,35 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         Decorator::$typeDecoratorsEnabled = true;
                     }
 
-                    if (isset(self::$parents[$content['id']]) &&
-                        (self::$parents[$content['id']] instanceof ContentEntity)) {
+                    if (isset(self::$parents[$childId]) &&
+                        (self::$parents[$childId] instanceof ContentEntity)) {
 
-                        $contentsOfType[$contentIndex]['parent'] = self::$parents[$content['id']] ?? null;
-                        $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
-                        $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                        $contentsOfType[$contentIndex]['parent'] = self::$parents[$childId] ?? null;
+                        $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$childId]['title'] ?? null;
+                        $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$childId]]))
                             ->first();
-                        $resources = array_merge($contentsOfType[$contentIndex]['resources'] ?? [], $contentsOfType[$contentIndex]['parent']['resources'] ?? []);
 
-                        if (empty($contentsOfType[$contentIndex]['instructors'])) {
+                        foreach ($contentsOfType[$contentIndex]['parent']['resources'] ?? [] as $parentResource){
+                            $resources[$parentResource['resource_url']] = $parentResource;
+                        }
+                                       if (empty($contentsOfType[$contentIndex]['instructors'])) {
                             InstructorDecorator::$decorationMode =
                                 \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-                            self::$parents[$content['id']] =
-                                $this->instructorDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                            self::$parents[$childId] =
+                                $this->instructorDecorator->decorate(new Collection([self::$parents[$childId]]))
                                     ->first();
                             $contentsOfType[$contentIndex]['instructors'] =
-                                self::$parents[$content['id']]['instructors'] ?? [];
+                                self::$parents[$childId]['instructors'] ?? [];
                         }
                         if (empty($contentsOfType[$contentIndex]['thumbnail_url'])) {
-                            $contentsOfType[$contentIndex]['thumbnail_url'] = self::$parents[$content['id']]->fetch(
+                            $contentsOfType[$contentIndex]['thumbnail_url'] = self::$parents[$childId]->fetch(
                                 'data.original_thumbnail_url',
-                                self::$parents[$content['id']]->fetch('data.thumbnail_url')
+                                self::$parents[$childId]->fetch('data.thumbnail_url')
                             );
                             if (empty($contentsOfType[$contentIndex]['thumbnail_url']) &&
-                                isset(self::$parents[(self::$parents[$content['id']]['id'])])) {
+                                isset(self::$parents[(self::$parents[$childId]['id'])])) {
                                 $contentsOfType[$contentIndex]['thumbnail_url'] =
-                                    self::$parents[(self::$parents[$content['id']]['id'])]->fetch(
+                                    self::$parents[(self::$parents[$childId]['id'])]->fetch(
                                         'data.original_thumbnail_url'
                                     );
                             }
@@ -331,36 +335,44 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
                         if ($contentsOfType[$contentIndex]['need_access'] &&
                             (empty($contentsOfType[$contentIndex]['need_access_message']))) {
-                            $parent = self::$parents[$content['id']] ?? null;
+                            $parent = self::$parents[$childId] ?? null;
                             $contentsOfType[$contentIndex]['need_access_message'] =
-                            self::$noAccessMessages[$content['id']] =
+                            self::$noAccessMessages[$childId] =
                                 $content['title'] . ' is part of our <b>' . $parent['title'] . '</b> Pack.';
                         }
 
                         if ($content['type'] == 'assignment') {
                             // TODO: check how to get the assignment duration
                             $contentsOfType[$contentIndex]['fields'] =
-                                array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
+                                array_merge($content['fields'] ?? [], self::$parents[$childId]['fields'] ?? []);
 
                             $contentsOfType[$contentIndex]['need_access'] = empty(
                                 array_intersect(
                                     $userPermissionIds,
-                                    (isset($grupedPermissions[self::$parents[$content['id']]['id']])) ?
-                                        $grupedPermissions[self::$parents[$content['id']]['id']]->pluck('permission_id')
+                                    (isset($grupedPermissions[self::$parents[$childId]['id']])) ?
+                                        $grupedPermissions[self::$parents[$childId]['id']]->pluck('permission_id')
                                             ->toArray() : []
                                 )
-                            ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
+                                ) && (isset($grupedPermissions[self::$parents[$childId]['id']]));
                             if ($contentsOfType[$contentIndex]['need_access']) {
                                 $contentsOfType[$contentIndex]['need_access_message'] =
-                                    self::$noAccessMessages[self::$parents[$content['id']]['id']] ?? '';
+                                    self::$noAccessMessages[self::$parents[$childId]['id']] ?? '';
                             }
                         }
                     }
+                    $childId = $parent->id;
                 }
             }
 
-            $contentsOfType[$contentIndex]['route'] = $route;
-            $contentsOfType[$contentIndex]['resources'] = $resources;
+            $contentsOfType[$contentIndex]['route'] = array_reverse($route);
+
+                foreach(array_reverse($parentContentDataForDatabase) as $parent){
+                    foreach (self::$parents[$parent->id]['resources'] ?? [] as $parentResource){
+                        $resources[$parentResource['resource_url']] = $parentResource;
+                    }
+                }
+
+            $contentsOfType[$contentIndex]['resources'] = array_values($resources);
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

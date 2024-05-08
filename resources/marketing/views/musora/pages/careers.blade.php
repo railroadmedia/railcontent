@@ -221,14 +221,14 @@
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
                 class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-1-ma.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage-1-mb.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
             >
             <img
                 class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-1a.png"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage-1b.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
