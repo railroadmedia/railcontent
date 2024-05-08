@@ -10,6 +10,10 @@
         });
     });
 
+
+
+    
+
 </script>
 
 <div class="widget item-absolute  " id="element-657">
@@ -38,3 +42,63 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+<a id="link-p16jlcvded" class="popup-link btn    item-block" data-at="button" data-link-p16jlcvded="" data-popup-link-p16jlcvded="" tabindex="0" role="button">
+      
+  </a>
+
+/**
+ * example of usage of the iframe
+ * 
+ * id="BlJyc" from the iframe src="https://www.soundslice.com/slices/BlJyc/embed/?api=1&amp;scroll_type=2&amp;branding=0"
+ */
+
+  <iframe src="" width="100%" height="500" frameborder="0" allowfullscreen id="BlJyc"></iframe>
+
+
+/**
+ * 
+ * needs to be added to the footer 
+ */
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var popupLinks = document.querySelectorAll('.popup-link');
+
+            popupLinks.forEach(function(popupLink) {
+                popupLink.addEventListener('click', function() {
+                    var popupId = this.id.replace('link', 'popup');
+                    var popup = document.getElementById(popupId);
+                    var iframe = popup.querySelector('iframe');
+
+                    var observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            if (mutation.attributeName === 'class') {
+                                var classList = mutation.target.classList;
+                                var prevClassList = mutation.oldValue ? mutation.oldValue.split(' ') : [];
+                                var wasModalOn = prevClassList.includes('modal-on');
+                                var isModalOn = classList.contains('modal-on');
+
+                                if (wasModalOn !== isModalOn && isModalOn) {
+                                    var iframeId = iframe.getAttribute('id');
+                                    iframe.src = "https://www.soundslice.com/slices/" + iframeId + "/embed/";
+                                } else {
+                                    iframe.src = "";
+                                }
+                            }
+                        });
+                    });
+
+                    observer.observe(document.body, {
+                        attributes: true,
+                        attributeOldValue: true
+                    });
+                });
+            });
+        });
+    </script>
