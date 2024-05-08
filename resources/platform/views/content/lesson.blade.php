@@ -20,7 +20,9 @@
 @endsection
 
 @section('content')
-    @include('content.breadcrumbs._lesson-breadcrumbs')
+    @include('content.breadcrumbs._lesson-breadcrumbs', [
+        'breadcrumbClassOverride' => 'tw-mx-auto tw-px-4 md:tw-px-8 tw-max-w-[1450px]'
+    ])
 
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">

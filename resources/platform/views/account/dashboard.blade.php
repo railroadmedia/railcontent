@@ -26,6 +26,39 @@ $hasExperience = user()->onboardingExperience ? true : false;
 $hasGoals= user()->onboardingGoals ? true : false;
 
 $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
+
+    $headerData = [
+        'title' => $dashboardUser->display_name,
+        'description' => null,
+        'heroImg' => $dashboardUser->profile_picture_url,
+        'heroImgClasses' => 'user-avatar' . ' ' . (in_array($currentUser['access_level'], ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '') . ' ' . $brand . ' ' . $currentUser['access_level'],
+        'progress' => null,
+        'contentId' => null,
+        'infoData' => ['Musora Member Since ' . \Carbon\Carbon::parse($dashboardUser->created_at)->format('Y')],
+        'ctas' => null
+    ];
+
+    if (!empty($currentUser['avatar'])) {
+        $headerData['heroImg'] = $currentUser['avatar'];
+    }
+
+    $ctaText = $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account';
+    $ctaUrlSuffix = $showCompleteYourAccountButton ? '&update=2' : '';
+
+    $ctaUrl = "/onboarding?brand={$brand}{$ctaUrlSuffix}";
+
+    $headerData['ctas'][] = [
+        'type' => 'PageHeaderPrimaryCta',
+        'props' => [
+            'text' => $ctaText,
+            'url' => $ctaUrl,
+            'showAllAlways' => true
+        ]
+    ];
+
+    $headerDataJson = json_encode($headerData);
+    $headerDataObj = json_decode($headerDataJson);
+
 @endphp
 
 @extends('partials.layout')
@@ -35,16 +68,16 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 @endsection
 
 @section('content')
-    @include('partials.bladesora.members.partials._account-header', [
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/' . $brand . '-header.jpg',
-        'userAvatar' => $dashboardUser->profile_picture_url,
-        'userName' => $dashboardUser->display_name,
-        'appName' => 'Musora',
-        'memberSince' => $dashboardUser->created_at,
-        'isCurrentUsersProfile' => $isCurrentUsersProfile,
-        'showCompleteYourAccountButton' => $showCompleteYourAccountButton,
-        'dashboardUser' => $dashboardUser,
-    ])
+    <page-header
+        page-type="dashboard"
+        title="{{ $headerDataObj->title }}"
+        description="{{ $headerDataObj->description }}"
+        hero-img="{{ $headerDataObj->heroImg }}"
+        hero-img-classes="{{ $headerDataObj->heroImgClasses ?? '' }}"
+        content-id="{{ $headerDataObj->contentId }}"
+        :info-data="{{ json_encode($headerDataObj->infoData) }}"
+        :ctas="{{ json_encode($headerDataObj->ctas) }}"
+    ></page-header>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14">
         <div class="tw-flex tw-flex-col">
