@@ -1,72 +1,30 @@
 <template>
     <div class="tw-w-full tw-relative">
-        <!-- Header -->
-        <div class="tw-w-full tw-py-8 md:tw-py-11 tw-relative tw-bg-black">
-        <!-- Background Image -->
-            <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-                <img :src="`https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/headers/${brand}-header.jpg`"
-                    class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
-                    onload="this.classList.remove('tw-opacity-0')"
-                >
-            </div>
-            <!-- Background Gradient -->
-            <div :class="`header-gradient-overlay tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full ${brand}`"></div>
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative">
-                <div class="tw-flex tw-flex-row">
-                    <div class="tw-flex tw-flex-col tw-pr-1">
-                        <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                            <musora-icon icon-name="calendar-filled" :class="`tw-w-[36px] tw-mr-2 tw-text-${brand}`"></musora-icon>
-                            <span class="tw-text-32 tw-font-bold tw-capitalize">{{ brand }} Schedule</span>
-                        </h1>
-
-                        <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                            Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">{{ brand }}</span> live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!
-                        </p>
-
-                        <div class="tw-flex tw-flex-row">
-                            <div class="tw-flex tw-flex-col xs-12 sm-4">
-                                <label id="timezoneLabel" for="timezoneSelector" class="flex-auto body tw-cursor-pointer tw-w-fit">
-                                    <button class="tw-btn-secondary tw-text-white">
-                                        <i class="fas fa-globe tw-mr-[10px]"></i>
-                                        Change Your Timezone
-                                    </button>
-                                    <select class="tw-cursor-pointer" name="timezone" id="timezoneSelector">
-                                        <option v-for="(timezone, i) in timezones" :key="i" class="tw-text-[#00101D]" :selected="isSelectedTimezone(timezone)">
-                                            {{ timezone }}
-                                        </option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Breadcrumb :breadcrumbs="[{ title: 'Drumeo Schedule' }]" />
+        <PageHeader pageType="schedule" :title="`${brand} Schedule`" iconName="calendar"
+            :description="description" :ctas="ctaConfig" />
 
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col tw-py-[30px]">
-                <div id="scheduleHeader" class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
+                <div id="scheduleHeader"
+                    class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                     <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl md:tw-text-2xl">
+                        <h1
+                            class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl md:tw-text-2xl">
                             Scheduled Releases
                         </h1>
                     </div>
                     <div class="tw-flex tw-flex-col">
                         <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white"
-                                data-open-modal="scheduleAddToCalendarModal"
-                        >
+                            data-open-modal="scheduleAddToCalendarModal">
                             <i class="fas fa-calendar-plus tw-mr-2"></i>
                             Subscribe to Calendar
                         </button>
                     </div>
                 </div>
                 <div class="tw-flex tw-flex-row">
-                    <ContentSchedule
-                        v-if="scheduleData"
-                        :preloaded-content="scheduleData"
-                        :subscription-calendar-id="subscriptionCalendarId"
-                        :theme-color="brand"
-                    />
+                    <ContentSchedule v-if="scheduleData" :preloaded-content="scheduleData"
+                        :subscription-calendar-id="subscriptionCalendarId" :theme-color="brand" />
                     <span v-else>No scheduled releases</span>
                 </div>
             </div>
@@ -76,9 +34,11 @@
 </template>
 
 <script setup>
-import {storeToRefs} from "pinia/dist/pinia";
+import { defineProps, computed } from 'vue';
+import { storeToRefs } from "pinia";
 import { useUserStore } from "../../stores/user";
 import ContentSchedule from '../vuesora/views/schedule/Schedule';
+import PageHeader from '../components/PageHeader/PageHeader.vue';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -102,73 +62,90 @@ const props = defineProps({
     },
 })
 
-const isSelectedTimezone = (timezone) => {
-    const area = timezone.split(' - ')[0];
-    return area === props.selectedTimezone;
-}
+// const isSelectedTimezone = (timezone) => {
+//     const area = timezone.split(' - ')[0];
+//     return area === props.selectedTimezone;
+// }
+
+const description = computed(() => {
+    return `Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">${brand.value}</span> live lessons. Subscribe to an event or the whole calendar, so you don't miss out!`
+})
+
+const ctaConfig = computed(() => {
+    return [
+        {
+            type: 'TimezoneSelectCta',
+            props: {
+                'timezones': props.timezones,
+                'fullTimezoneString': props.selectedTimezone
+            }
+        },
+    ];
+});
 </script>
 
 <style scoped media="print">
-    #nav, #subNav {
-        display: none;
-    }
+#nav,
+#subNav {
+    display: none;
+}
 
-    #pageHeader {
-        display: none;
-    }
+#pageHeader {
+    display: none;
+}
 
-    #scheduleHeader {
-        display: none;
-        border: none;
-    }
+#scheduleHeader {
+    display: none;
+    border: none;
+}
 
-    #printSchedule {
-        display: none;
-    }
+#printSchedule {
+    display: none;
+}
 
-    footer {
-        display: none !important;
-    }
+footer {
+    display: none !important;
+}
 
-    .shadow {
-        box-shadow: none !important;
-        border: 1px solid #e5e8e8;
-    }
+.shadow {
+    box-shadow: none !important;
+    border: 1px solid #e5e8e8;
+}
 
-    .content-table-row.scheduled .month-col {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+.content-table-row.scheduled .month-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
 
-    .content-table-row.scheduled .icon-col {
-        display: none;
-    }
+.content-table-row.scheduled .icon-col {
+    display: none;
+}
 
-    .content-table-row.scheduled .title-column p {
-        color: #000 !important;
-    }
+.content-table-row.scheduled .title-column p {
+    color: #000 !important;
+}
 
-    .content-table-row.scheduled .title-column .hide-md-up {
-        display: none;
-    }
+.content-table-row.scheduled .title-column .hide-md-up {
+    display: none;
+}
 
-    .header-gradient-overlay {
-        background: linear-gradient(180deg, rgba(0, 16, 29, 0.01) 68.57%, #00101D 100%);
-    }
+.header-gradient-overlay {
+    background: linear-gradient(180deg, rgba(0, 16, 29, 0.01) 68.57%, #00101D 100%);
+}
 
-    .header-gradient-overlay.drumeo {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(9, 92, 170, 0.7) 100%);
-    }
+.header-gradient-overlay.drumeo {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(9, 92, 170, 0.7) 100%);
+}
 
-    .header-gradient-overlay.pianote {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(213, 8, 29, 0.7) 100%);
-    }
+.header-gradient-overlay.pianote {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(213, 8, 29, 0.7) 100%);
+}
 
-    .header-gradient-overlay.guitareo {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(0, 150, 128, 0.7) 100%);
-    }
+.header-gradient-overlay.guitareo {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(0, 150, 128, 0.7) 100%);
+}
 
-    .header-gradient-overlay.singeo {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(102, 0, 182, 0.7) 100%);
-    }
+.header-gradient-overlay.singeo {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 45%, rgba(102, 0, 182, 0.7) 100%);
+}
 </style>

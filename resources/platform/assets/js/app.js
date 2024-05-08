@@ -308,13 +308,6 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
-    .component('PlatformHeader', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "platform-header" */
-            `./vue/components/PlatformHeader/platform-header.vue`
-        )
-    ))
-
     .component('MembershipUpdate', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "membership-update-" */
@@ -506,12 +499,6 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "breadcrumb" */
             `./vue/components/Breadcrumb/Breadcrumb.vue`
-        )
-    ))
-    .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "playlist-collection-header" */
-            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionHeader.vue`
         )
     ))
     .component('PlaylistCollectionCatalog', defineAsyncComponent(() =>

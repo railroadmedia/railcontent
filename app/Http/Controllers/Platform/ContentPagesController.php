@@ -242,6 +242,11 @@ class ContentPagesController extends BaseController
                 "allArtistUrl" => url()->route('platform.content.artists.show'),
             ]);
         } else {
+            $breadcrumbs = [
+                [
+                    'title' => $catalogueMeta['name'],
+                ],
+            ];
             return view('content.catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
                 "startedLessons" => $startedListLessons,
@@ -254,6 +259,7 @@ class ContentPagesController extends BaseController
                 "catalogueMeta" => $catalogueMeta,
                 "statuses" => ContentRepository::$availableContentStatues,
                 "futureScheduledContentOnly" => $futureScheduledContentOnly,
+                "breadcrumbs" => $breadcrumbs
             ]);
         }
     }
@@ -397,7 +403,7 @@ class ContentPagesController extends BaseController
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level '.(($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         return view('content.overview', [
@@ -489,7 +495,7 @@ class ContentPagesController extends BaseController
         ];
 
         $noProgress = empty($firstContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         $backButton = [
@@ -596,7 +602,7 @@ class ContentPagesController extends BaseController
         ];
 
         $noProgress = empty($firstContent->fetch('higher_key_progress'));
-        $progressLevel = 'Level - '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
+        $progressLevel = 'Level '.(($noProgress) ? '1.1' : $firstContent->fetch('higher_key_progress', '1.1'));
         $progressLabelText = ($primaryPage == 'method') ? $progressLevel : '';
 
         $backButton = [

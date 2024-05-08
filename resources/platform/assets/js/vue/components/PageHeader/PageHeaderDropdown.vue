@@ -9,14 +9,17 @@
                     <slot name="button"></slot>
                 </template>
                 <template v-else>
+                    <i v-if="iconPosition === 'left'" :class="[faIconClass, text ? 'mr-1' : '']" aria-hidden="true"></i>
                     <span v-if="text">{{ text }}</span>
+                    <i v-if="iconPosition === 'right'" :class="[faIconClass, text ? 'ml-1' : '']"
+                        aria-hidden="true"></i>
                 </template>
-                <i :class="[faIconClass, text ? 'mr-1' : '']" aria-hidden="true"></i>
             </button>
         </div>
 
-        <div class="tw-absolute tw-right-0 tw-z-10 tw-bg-white tw-shadow tw-text-xs tw-text-[#00101D] tw-rounded"
+        <div class="tw-absolute tw-right-0 tw-bg-white dark:tw-bg-[#081825] tw-shadow tw-text-xs tw-text-[#00101D] tw-rounded tw-z-50"
             :class="{ 'tw-opacity-0': !showDropdown, 'tw-opacity-100 tw-transition-opacity tw-duration-200 tw-ease-in-out': showDropdown }"
+            v-show="showDropdown"
             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <slot name="content"></slot>
         </div>
@@ -28,7 +31,15 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
     text: String,
-    faIconClass: String
+    faIconClass: String,
+    iconPosition: {
+        type: String,
+        default: 'left',
+    },
+    inDropdown: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const showDropdown = ref(false);
