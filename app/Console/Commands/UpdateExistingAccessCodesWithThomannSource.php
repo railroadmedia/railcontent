@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class UpdateExistingAccessCodesWithThomannSource extends Command
 {
-    protected  $signature = 'UpdateExistingAccessCodesWithThomannSource';
+    protected $signature = 'UpdateExistingAccessCodesWithThomannSource';
 
     protected $description = 'Fill in the source for the given csv batch with thomann-11-2022';
 
@@ -17,8 +17,10 @@ class UpdateExistingAccessCodesWithThomannSource extends Command
 
         $sourceValue = 'thomann-11-2022';
 
-        $csv = array_map(function($v){return str_getcsv($v, ",");},
-            file(base_path('thomann-access-codes-2022-11-16.csv')));
+        $csv = array_map(
+            function ($v) {return str_getcsv($v, ",");},
+            file(base_path('thomann-access-codes-2022-11-16.csv'))
+        );
 
         foreach ($csv as $row) {
             $thomannAccessCodes[] = $row[0];

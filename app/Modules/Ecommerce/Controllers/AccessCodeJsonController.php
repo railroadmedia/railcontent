@@ -10,7 +10,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 
-
 class AccessCodeJsonController extends Controller
 {
     private AccessCodeService $accessCodeService;

@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class SearchServiceTest extends TestCase
 {
-
     private SearchService $searchService;
 
     protected function setUp(): void

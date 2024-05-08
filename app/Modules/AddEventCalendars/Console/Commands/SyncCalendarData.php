@@ -7,7 +7,6 @@ use App\Modules\AddEventCalendars\Services\CalendarSyncService;
 
 class SyncCalendarData extends Command
 {
-
     protected $signature = 'addevent:syncCalendarData';
 
     public function handle(CalendarSyncService $calendarSyncService)

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-
+return new class () extends Migration {
     public function up()
     {
         // SQLite won't allow you to add a not null column without a default value, to an existing table

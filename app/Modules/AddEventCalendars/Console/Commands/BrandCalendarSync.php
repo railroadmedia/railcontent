@@ -106,11 +106,11 @@ class BrandCalendarSync extends Command
             false
         )['results'];
 
-//        if (app()->environment() == 'local') {
-//            $this->constrainCoachesToOnlyThoseWithContentReleasesComingUp($coaches, $brand);
-//        } else {
-//            $this->info('Syncronizing for the ' . count($coaches) . ' ' . $brand . ' coaches retrieved');
-//        }
+        //        if (app()->environment() == 'local') {
+        //            $this->constrainCoachesToOnlyThoseWithContentReleasesComingUp($coaches, $brand);
+        //        } else {
+        //            $this->info('Syncronizing for the ' . count($coaches) . ' ' . $brand . ' coaches retrieved');
+        //        }
 
         return $coaches;
     }
@@ -182,7 +182,7 @@ class BrandCalendarSync extends Command
             if ($calendarVO->apiCreateRequired()) {
                 // create using the API
                 $msg = 'coach calendar "' . $calendarVO->getTitleToSync(
-                    ) . '" for sync id ' . $calendarVO->getInternalSyncId();
+                ) . '" for sync id ' . $calendarVO->getInternalSyncId();
                 try {
                     $createdApiCalendarData = $this->addEventService->createCalendar(
                         $calendarVO->getTitleToSync(),
@@ -223,7 +223,7 @@ class BrandCalendarSync extends Command
                 // update using the API
 
                 $msg = 'coach calendar "' . $calendarVO->getTitleToSync(
-                    ) . '" for sync id ' . $calendarVO->getInternalSyncId();
+                ) . '" for sync id ' . $calendarVO->getInternalSyncId();
                 try {
                     $updatedCalendar = $this->addEventService->saveCalendar(
                         $calendarVO->getExternalId(),

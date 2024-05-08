@@ -27,17 +27,17 @@ class UserMembershipSyncCustomJob extends BatchQueryJob
         $this->take = $take;
     }
 
-    function getSkip(): int
+    public function getSkip(): int
     {
         return $this->skip;
     }
 
-    function getTake(): int
+    public function getTake(): int
     {
         return $this->take;
     }
 
-    function getQuery(): Builder
+    public function getQuery(): Builder
     {
         $query = UserPermission::query()->select('user_id')->distinct()
             ->join('usora_users', function ($join) {
@@ -50,11 +50,11 @@ class UserMembershipSyncCustomJob extends BatchQueryJob
         return $query;
     }
 
-    function handleItem($item): void
+    public function handleItem($item): void
     {
     }
 
-    function handleAllItems($items): bool
+    public function handleAllItems($items): bool
     {
         /** @var UserMembershipFieldsService $userMembershipFieldsService */
         $userMembershipFieldsService = app()->make(UserMembershipFieldsService::class);
@@ -77,16 +77,16 @@ class UserMembershipSyncCustomJob extends BatchQueryJob
             }
         }
 
-//        if ($this->syncCustomerIO) {
-//            foreach ($userIds as $userId) {
-//                $user = new User();
-//                $user->id = $userId;
-//                dispatch(
-//                    (new CustomerIoSyncUserByUserId($user))
-//                        ->delay(Carbon::now()->addSeconds(3))
-//                );
-//            }
-//        }
+        //        if ($this->syncCustomerIO) {
+        //            foreach ($userIds as $userId) {
+        //                $user = new User();
+        //                $user->id = $userId;
+        //                dispatch(
+        //                    (new CustomerIoSyncUserByUserId($user))
+        //                        ->delay(Carbon::now()->addSeconds(3))
+        //                );
+        //            }
+        //        }
         return true;
     }
 }

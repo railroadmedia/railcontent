@@ -90,7 +90,7 @@ blockquote {
 
   @include small {
     flex:0 0 250px;
-    margin-left:$gutterWidth / 2;
+    margin-left: calc($gutterWidth / 2);
   }
 }
 

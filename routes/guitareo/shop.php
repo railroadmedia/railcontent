@@ -8,7 +8,8 @@ Route::domain('{guitareoDomain}')
     ->group(function () {
 
         Route::get('/{category}', [ShopController::class, 'shop'])
-            ->whereIn('category', ['shop', 'lessons', 'accessories']);;
+            ->whereIn('category', ['shop', 'lessons', 'accessories']);
+        ;
 
-    Route::get('/shop/{productslug}', [ShopController::class, 'product']);
-});
+        Route::get('/shop/{productslug}', [ShopController::class, 'product']);
+    });

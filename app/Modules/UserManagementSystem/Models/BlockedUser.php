@@ -27,9 +27,8 @@ use Illuminate\Support\Carbon;
  */
 class BlockedUser extends Model
 {
-    protected $table = 'usora_blocked_users';
-
     use HasFactory;
+    protected $table = 'usora_blocked_users';
 
     /**
      * The attributes that are mass assignable.

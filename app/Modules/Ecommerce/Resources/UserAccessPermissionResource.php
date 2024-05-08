@@ -15,13 +15,13 @@ class UserAccessPermissionResource extends JsonResource
             'permission_name' => $this->getDescription(),
             'permission_id' => $this->permission,
             'duration' => $this->getDuration(),
-            'start_time' => ($this->status == 'revoked')?$this->start_time : ($this->actualStartTime?->toDateTimeString() ?? ''),
+            'start_time' => ($this->status == 'revoked') ? $this->start_time : ($this->actualStartTime?->toDateTimeString() ?? ''),
             'expiration_time' => $this->actualExpirationTime?->toDateTimeString() ?? '',
             'status' => $this->status,
             'source' => $this->getDisplaySource(),
             'time_lifetime' => $this->time_lifetime,
-            'time_days'=> $this->time_days,
-            'time_months'=> $this->time_months,
+            'time_days' => $this->time_days,
+            'time_months' => $this->time_months,
             'start_date' => $this->start_time,
         ];
     }

@@ -14,7 +14,6 @@ use Railroad\Usora\Events\User\UserUpdated as UsoraUserUpdated;
 
 class EcommerceEventListener
 {
-
     public function __construct(
         private readonly ShopifySyncService $shopifySyncService,
         private readonly ShopifyCustomerService $shopifyCustomerService,

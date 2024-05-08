@@ -28,8 +28,8 @@ class SyncHelpScout extends Command
      */
     protected $description = 'Sync all database users with helpscout';
 
-    const RETRY_ATTEMPTS = 3;
-    const SLEEP_DELAY = 600;
+    public const RETRY_ATTEMPTS = 3;
+    public const SLEEP_DELAY = 600;
 
     /**
      * Execute the console command.

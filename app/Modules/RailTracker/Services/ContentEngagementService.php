@@ -2,7 +2,6 @@
 
 namespace App\Modules\RailTracker\Services;
 
-
 use App\Modules\Tracker\Models\LastEngagedSeconds;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +11,8 @@ class ContentEngagementService
 {
     private ContentService $contentService;
 
-    public function __construct(ContentService $contentService,
+    public function __construct(
+        ContentService $contentService,
     ) {
         $this->contentService = $contentService;
     }
@@ -34,8 +34,7 @@ class ContentEngagementService
                 $row->resume_time_seconds = $currentSecond;
                 $row->save();
             }
-        }
-        catch(\Throwable $e){
+        } catch(\Throwable $e) {
             //Log::error($e);
         }
     }

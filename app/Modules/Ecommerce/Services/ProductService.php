@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class ProductService
 {
-
     public function getProductsByShopifyIds(array $shopifyProductIds): Collection
     {
         return Product::query()

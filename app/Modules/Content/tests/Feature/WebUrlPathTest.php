@@ -2,7 +2,6 @@
 
 namespace App\Modules\Content\tests\Feature;
 
-
 use App\Modules\Content\Models\Content;
 use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
 use Tests\TestCase;
@@ -11,7 +10,7 @@ class WebUrlPathTest extends TestCase
 {
     private RailcontentV2DataSyncingService $rcService;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->rcService = app()->make(RailcontentV2DataSyncingService::class);

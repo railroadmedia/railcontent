@@ -44,7 +44,7 @@ class LivePageController extends BaseController
      */
     private $permissionService;
 
-    const NOT_LIVE_PAGE_SWITCH_MINUTES = 15;
+    public const NOT_LIVE_PAGE_SWITCH_MINUTES = 15;
 
     public function __construct(
         ContentService $contentService,

@@ -518,7 +518,8 @@ class MigrateIntoRevenuecat extends Command
 
                     $productsMap = array_merge(
                         [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]);
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
+                    );
                     //  dd($productsMap);
 
                     $musoraProducts =

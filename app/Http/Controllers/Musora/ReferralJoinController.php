@@ -11,7 +11,6 @@ use Modules\UserManagementSystem\Models\User;
 use App\Modules\Referral\Models\Referrer;
 use App\Modules\Referral\Services\ReferralService;
 
-
 class ReferralJoinController extends BaseController
 {
     private ReferralService $referralService;

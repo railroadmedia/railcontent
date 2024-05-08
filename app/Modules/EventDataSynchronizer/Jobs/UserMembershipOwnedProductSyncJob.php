@@ -40,26 +40,26 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
         $this->customQueryParameter = $customQueryParameter;
     }
 
-    function getSkip(): int
+    public function getSkip(): int
     {
         return $this->skip;
     }
 
-    function getTake(): int
+    public function getTake(): int
     {
         return $this->take;
     }
 
-    function getQuery(): Builder
+    public function getQuery(): Builder
     {
         return QueryServices::getCustomUserQuery($this->customQuery, $this->customQueryParameter);
     }
 
-    function handleItem($item): void
+    public function handleItem($item): void
     {
     }
 
-    function handleAllItems($items): bool
+    public function handleAllItems($items): bool
     {
         /** @var UserMembershipFieldsService $userMembershipFieldsService */
         $userMembershipFieldsService = app()->make(UserMembershipFieldsService::class);

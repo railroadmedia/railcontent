@@ -31,9 +31,8 @@ use Illuminate\Support\Carbon;
  */
 class FirebaseToken extends Model
 {
-    protected $table = 'usora_user_firebase_tokens';
-
     use HasFactory;
+    protected $table = 'usora_user_firebase_tokens';
 
     /**
      * The attributes that are mass assignable.

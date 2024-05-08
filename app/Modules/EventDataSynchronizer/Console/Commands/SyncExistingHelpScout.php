@@ -30,8 +30,8 @@ class SyncExistingHelpScout extends Command
      */
     protected $description = 'Sync all existing users from helpscout with matching usora users';
 
-    const RETRY_ATTEMPTS = 3;
-    const SLEEP_DELAY = 600;
+    public const RETRY_ATTEMPTS = 3;
+    public const SLEEP_DELAY = 600;
 
     /**
      * Execute the console command.

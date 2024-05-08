@@ -113,7 +113,7 @@ class ProfilePublicPagesController extends BaseController
                 'currentUser' => $currentUser,
                 "isSubscriber" => $isSubscriber,
                 "nextLearningPathLevel" => $user->getMethodLevel(),
-                "nextLearningPathProgressPercent" => $userProgressOnMethod?$userProgressOnMethod['progress_percent']:0
+                "nextLearningPathProgressPercent" => $userProgressOnMethod ? $userProgressOnMethod['progress_percent'] : 0
             ]
         );
     }

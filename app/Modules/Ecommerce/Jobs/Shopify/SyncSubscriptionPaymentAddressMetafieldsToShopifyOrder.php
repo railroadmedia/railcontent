@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class SyncSubscriptionPaymentAddressMetafieldsToShopifyOrder extends SyncAddressMetafieldsToShopifyBaseClass
 {
-
     /**
      * @inheritDoc
      */

@@ -84,7 +84,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
             }
 
             // the results file is a json line file, so we need to break it down, line by line
-            $results = explode("\n",  $resultsFile);
+            $results = explode("\n", $resultsFile);
             foreach ($results as $result) {
                 // then json_decode the line and evaluate it
                 $responseObject = json_decode($result);
@@ -161,15 +161,25 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
                 }
             });
 
-            if ($customerData->addresses)
-            {
+            if ($customerData->addresses) {
                 // DEV NOTE: Shopify doesn't allow metafields on addresses, so we don't know what address of ours was
                 // used to create it. We need to take the address data and find any of our user's or customers' addresses
                 // that match the values, and assign the shopify_id to those
                 foreach($customerData->addresses as $address) {
-                    $matchedAddresses = $this->findAddressesWithMatchingData($userId, $customers,
-                        $address->firstName, $address->lastName, $address->address1, $address->address2, $address->city,
-                        $address->province, $address->provinceCode, $address->zip, $address->country, $address->countryCode);
+                    $matchedAddresses = $this->findAddressesWithMatchingData(
+                        $userId,
+                        $customers,
+                        $address->firstName,
+                        $address->lastName,
+                        $address->address1,
+                        $address->address2,
+                        $address->city,
+                        $address->province,
+                        $address->provinceCode,
+                        $address->zip,
+                        $address->country,
+                        $address->countryCode
+                    );
                     if ($matchedAddresses->isEmpty()) {
                         // this means we have an address in Shopify that we don't have in our database
                         $this->logError(sprintf("%s: Shopify returned address information that we don't have on".
@@ -183,11 +193,18 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
                             $this->storeShopifyId($matchedAddresses, $addressShopifyId);
                             $this->shopifyIds[] = $addressShopifyId;
                             // log the success
-                            $this->logInfo(sprintf("%s: Address(es) %s synced with Shopify ID %s",
-                                $this->getClassName(), $matchedAddresses->map(fn(Address $address) => $address->getId())->implode(", "), $addressShopifyId));
+                            $this->logInfo(sprintf(
+                                "%s: Address(es) %s synced with Shopify ID %s",
+                                $this->getClassName(),
+                                $matchedAddresses->map(fn (Address $address) => $address->getId())->implode(", "),
+                                $addressShopifyId
+                            ));
                         } catch (ORMException $e) {
-                            $this->logError(sprintf("%s: Failed to save Shopify ID on Address(es): ",
-                                $this->getClassName(), $e->getMessage()));
+                            $this->logError(sprintf(
+                                "%s: Failed to save Shopify ID on Address(es): ",
+                                $this->getClassName(),
+                                $e->getMessage()
+                            ));
                         }
                     }
                 }
@@ -197,8 +214,11 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
             throw new Exception(sprintf("%s: User could not be found using the returned metafield data %s.".
                 " User cannot be updated with shopify_id %s", $this->getClassName(), $userId, $shopifyId));
         } catch (ORMException $e) {
-            throw new Exception(sprintf("%s: Could not save Ecommerce entity: %s.",
-                $this->getClassName(), $e->getMessage()));
+            throw new Exception(sprintf(
+                "%s: Could not save Ecommerce entity: %s.",
+                $this->getClassName(),
+                $e->getMessage()
+            ));
         }
     }
 
@@ -213,22 +233,28 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
     protected function handleErrors(object $responseData, int $lineNumber): void
     {
         $errors = $responseData->userErrors;
-        foreach ($errors as $error)
-        {
+        foreach ($errors as $error) {
             if (str($error->message)->endsWith("is invalid")) {
                 // something in the data was invalid and the user couldn't be processed
-                $this->logError(sprintf("%s: Invalid data was provided for User %s. Field(s): %s. Message: %s",
-                $this->getClassName(), $this->getUserValueFromSourceFile($lineNumber, "email"), implode(", ", $error->field), $error->message));
-            }
-            else if ($error->message === "Email has already been taken") {
+                $this->logError(sprintf(
+                    "%s: Invalid data was provided for User %s. Field(s): %s. Message: %s",
+                    $this->getClassName(),
+                    $this->getUserValueFromSourceFile($lineNumber, "email"),
+                    implode(", ", $error->field),
+                    $error->message
+                ));
+            } elseif ($error->message === "Email has already been taken") {
                 // DEV NOTE: we check for existing customers with the same email address and a shopify_id before adding
                 // the user to the collection to be synced, so we know that we can't have a case here where the email
                 // address was used by one of our synced customers. This means that email address was entered some other
                 // way, and we can't do anything about it here
                 // the user must've been set as a customer already, so find the applicable customer and copy its shopify_id
-               $this->logError(sprintf("%s: Email address %s already exists in Shopify, but is not associated with"
-                   ." any of our synced customers. Please find this customer in Shopify and manually update our records",
-               $this->getClassName(), $this->getUserValueFromSourceFile($lineNumber, "email") ));
+                $this->logError(sprintf(
+                    "%s: Email address %s already exists in Shopify, but is not associated with"
+                    ." any of our synced customers. Please find this customer in Shopify and manually update our records",
+                    $this->getClassName(),
+                    $this->getUserValueFromSourceFile($lineNumber, "email")
+                ));
             }
             //    TODO any other errors we know how to handle
             else {
@@ -277,7 +303,7 @@ class ParseBulkOperationResultsForUsers implements ShouldQueue
             // the results file is a json line file, so we need to break it down, line by line
             $sourceFileUserStrings = explode("\n", $sourceFile);
             $this->_sourceFileUsers = collect($sourceFileUserStrings)
-                ->transform(function (string $userJson){
+                ->transform(function (string $userJson) {
                     return json_decode($userJson)->input;
                 })
                 ->toArray();

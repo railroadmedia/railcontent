@@ -28,7 +28,7 @@ class MentorServiceProvider extends ServiceProvider
         UserMembershipDateUpdated::class => [
             EnsureMentorState::class,
         ],
-        OnboardingInstrumentUpdated::class =>[
+        OnboardingInstrumentUpdated::class => [
             EnsureMentorState::class . '@handleOnboardingInstrumentUpdated'
         ]
     ];

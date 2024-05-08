@@ -15,7 +15,10 @@ use Modules\UserManagementSystem\Models\User;
 
 class CustomerIoDeleteUser implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     private int $userId;
 
@@ -41,9 +44,9 @@ class CustomerIoDeleteUser implements ShouldQueue
 
             foreach ($brands as $brand) {
                 if ($userProductService->userHadOrHasAnyDigitalProductsForBrand(
-                        new EcommerceUser($user->id, $user->email),
-                        $brand
-                    ) || $accountNameToSyncAllBrand == $brand) {
+                    new EcommerceUser($user->id, $user->email),
+                    $brand
+                ) || $accountNameToSyncAllBrand == $brand) {
                     $syncThisWorkspace = true;
                 }
             }

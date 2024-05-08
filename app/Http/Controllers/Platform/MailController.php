@@ -8,23 +8,21 @@ use Railroad\Mailora\Services\MailService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-
 class MailController extends Controller
 {
-
     /**
      * @var MailService
      */
     private $mailService;
-//    /**
-//     * @var UserPointsService
-//     */
-//    private $userPointsService;
+    //    /**
+    //     * @var UserPointsService
+    //     */
+    //    private $userPointsService;
 
     public function __construct(MailService $mailService)
     {
         $this->mailService = $mailService;
-//        $this->userPointsService = $userPointsService;
+        //        $this->userPointsService = $userPointsService;
     }
 
     /**
@@ -66,19 +64,19 @@ class MailController extends Controller
             $successMessage = $input['success-message'];
         }
 
-//todo
-//        if ($input['type'] == 'student-focus-application' && !empty(current_user())) {
-//            $this->userPointsService->setPoints(
-//                current_user()->getId(),
-//                [
-//                    'submitted_on' => Carbon::now()
-//                        ->toDateTimeString(),
-//                ],
-//                'student_focus_application_submitted',
-//                config('xp_ranks.student_focus_application_submitted'),
-//                'Awarded for submitting a student focus application.'
-//            );
-//        }
+        //todo
+        //        if ($input['type'] == 'student-focus-application' && !empty(current_user())) {
+        //            $this->userPointsService->setPoints(
+        //                current_user()->getId(),
+        //                [
+        //                    'submitted_on' => Carbon::now()
+        //                        ->toDateTimeString(),
+        //                ],
+        //                'student_focus_application_submitted',
+        //                config('xp_ranks.student_focus_application_submitted'),
+        //                'Awarded for submitting a student focus application.'
+        //            );
+        //        }
 
         return redirect()
             ->back()

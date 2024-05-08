@@ -27,9 +27,8 @@ use Illuminate\Support\Carbon;
  */
 class PasswordReset extends Model
 {
-    protected $table = 'usora_password_resets';
-
     use HasFactory;
+    protected $table = 'usora_password_resets';
 
     public function user()
     {

@@ -12,6 +12,12 @@ if (isset($trackingSectionName)) {
 } else {
     $journeySection = 'Unknown';
 }
+
+$isMobileAppWebView = false;
+
+if (request()->has('mobile-app-web-view')) {
+    $isMobileAppWebView = true;
+}
 @endphp
 
 <!DOCTYPE html>
@@ -70,6 +76,7 @@ if (isset($trackingSectionName)) {
                     :journey-section="{{ json_encode($journeySection) }}"
                 >
                     <page-container
+                        :is-mobile-app-web-view="{{ json_encode($isMobileAppWebView) }}"
                         :is-live="{{ json_encode(isLive()) }}"
                         :is-onboarding="{{ json_encode($isOnboarding) }}"
                         search-url=""
@@ -120,10 +127,13 @@ if (isset($trackingSectionName)) {
         @yield('inject-components')
 
         {{-- Helpscout Beacon --}}
-        @include('partials.third-party.helpscout-tracking-beacon-script', [
-            'email' => !empty(user()) ? user()->email : null,
-            'brand' => $brand,
-        ])
+        @if(!$isMobileAppWebView)
+            @include('partials.third-party.helpscout-tracking-beacon-script', [
+                'email' => !empty(user()) ? user()->email : null,
+                'brand' => $brand,
+                'mobileAppWebView' => true,
+            ])
+        @endif
 
         {{-- Pendo Script --}}
         <script>

@@ -86,27 +86,43 @@ trait SyncsShopifyCustomer
                 // check for any errors
                 $responseErrors = $responseBody->errors ?? $responseBody->data->customerCreate->userErrors ?? [];
                 if (!empty($responseErrors)) {
-                    throw new Exception(sprintf("%s: Error(s) returned while attempting to call bulkOperationRunMutation on Shopify for file %s: %s",
-                        $this->getClassName(), $filename, collect($responseErrors)->implode("message", " ")));
+                    throw new Exception(sprintf(
+                        "%s: Error(s) returned while attempting to call bulkOperationRunMutation on Shopify for file %s: %s",
+                        $this->getClassName(),
+                        $filename,
+                        collect($responseErrors)->implode("message", " ")
+                    ));
                 }
 
                 // check the status and make sure it's CREATED
                 $bulkOperationData = $responseBody->data->bulkOperationRunMutation->bulkOperation;
                 if ($bulkOperationData?->status !== "CREATED") {
-                    $this->logError(sprintf("%s: bulkOperationRunMutation failed to create. Response body printed below.",
-                        $this->getClassName()));
+                    $this->logError(sprintf(
+                        "%s: bulkOperationRunMutation failed to create. Response body printed below.",
+                        $this->getClassName()
+                    ));
                     $this->logError(print_r($responseBody, true));
-                    throw new Exception(sprintf("%s: Unexpected status returned while attempting to call bulkOperationRunMutation on Shopify for file %s: %s",
-                        $this->getClassName(), $filename, $bulkOperationData?->status ?? null));
+                    throw new Exception(sprintf(
+                        "%s: Unexpected status returned while attempting to call bulkOperationRunMutation on Shopify for file %s: %s",
+                        $this->getClassName(),
+                        $filename,
+                        $bulkOperationData?->status ?? null
+                    ));
                 }
 
                 // grab the bulk operation id from the response, and pass that to the polling job
-                $this->logDebug(sprintf("%s: bulkOperationRunMutation succeeded. Shopify created operation ID %s",
-                    $this->getClassName(), $bulkOperationData->id));
+                $this->logDebug(sprintf(
+                    "%s: bulkOperationRunMutation succeeded. Shopify created operation ID %s",
+                    $this->getClassName(),
+                    $bulkOperationData->id
+                ));
                 PollBulkOperationCustomer::dispatchSync($bulkOperationData->id, $shopifySync, $filename, $resourceType, $this->getIsUsingMask());
             } else {
-                throw new Exception(sprintf("%s: bulkOperationRunMutation GraphQl mutation failed: %s",
-                    $this->getClassName(), $bulkResponse->reason()));
+                throw new Exception(sprintf(
+                    "%s: bulkOperationRunMutation GraphQl mutation failed: %s",
+                    $this->getClassName(),
+                    $bulkResponse->reason()
+                ));
             }
         } else {
             $this->logInfo(sprintf("%s: running in simulation mode. File %s was created in storage.", $this->getClassName(), $filename));
@@ -124,7 +140,7 @@ trait SyncsShopifyCustomer
         $addresses = $this->filterAndSortAddressesToClean($addresses);
 
         // transform it to fit Shopify's data structure
-        $addresses->transform(function(Address $address) {
+        $addresses->transform(function (Address $address) {
             return  [
                 "address1" => $address->getStreetLine1(),
                 "address2" => $address->getStreetLine2(),
@@ -163,7 +179,7 @@ trait SyncsShopifyCustomer
         $addresses = $this->filterAndSortAddressesToClean($addresses);
 
         // transform it to fit Shopify's data structure (plus our internal id, so we can reference it to update)
-        $addresses->transform(function(Address $address) {
+        $addresses->transform(function (Address $address) {
             return  [
                 "ecommerce_address_id" => $address->getId(),
                 "address1" => $address->getStreetLine1(),
@@ -268,7 +284,7 @@ trait SyncsShopifyCustomer
 
         // get the customers' latest address and get the country, so we can supply the country code
         $addresses = collect();
-        $customers->each(fn(Customer $customer) => $addresses->push(
+        $customers->each(fn (Customer $customer) => $addresses->push(
             ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
         ));
 
@@ -281,8 +297,12 @@ trait SyncsShopifyCustomer
             $phoneNumberObject = $phoneUtil->parse($phoneNumber, $countryCode);
             return $phoneUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
         } catch (NumberParseException $e) {
-            $this->logError(sprintf("Unable to format phone number %s for Customer email %s: %s",
-                $phoneNumber, $customers->first()->getEmail(), $e->getMessage()));
+            $this->logError(sprintf(
+                "Unable to format phone number %s for Customer email %s: %s",
+                $phoneNumber,
+                $customers->first()->getEmail(),
+                $e->getMessage()
+            ));
         }
         return null;
     }
@@ -298,7 +318,7 @@ trait SyncsShopifyCustomer
     {
         $language = "EN";
         $countryCode_list = array('AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BY', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BV', 'BR', 'IO', 'BN', 'BG', 'BF', 'BI', 'KH', 'CM', 'CA', 'CV', 'KY', 'CF', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'KM', 'CG', 'CD', 'CK', 'CR', 'CI', 'HR', 'CU', 'CW', 'CY', 'CZ', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'GQ', 'ER', 'EE', 'ET', 'FK', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'GI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GN', 'GW', 'GY', 'HT', 'HM', 'VA', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'IR', 'IQ', 'IE', 'IM', 'IL', 'IT', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'KI', 'KP', 'KR', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MK', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'YT', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'MM', 'NA', 'NR', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NU', 'NF', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'RE', 'RO', 'RU', 'RW', 'BL', 'SH', 'KN', 'LC', 'MF', 'PM', 'VC', 'WS', 'SM', 'ST', 'SA', 'SN', 'RS', 'SC', 'SL', 'SG', 'SX', 'SK', 'SI', 'SB', 'SO', 'ZA', 'GS', 'SS', 'ES', 'LK', 'SD', 'SR', 'SJ', 'SZ', 'SE', 'CH', 'SY', 'TW', 'TJ', 'TZ', 'TH', 'TL', 'TG', 'TK', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'TV', 'UG', 'UA', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VE', 'VN', 'VG', 'VI', 'WF', 'EH', 'YE', 'ZM', 'ZW');
-        $ISO3166 = NULL;
+        $ISO3166 = null;
         foreach ($countryCode_list as $countryCode) {
             $locale_cc = \Locale::getDisplayRegion('-' . $countryCode, $language);
             if (strcasecmp($countryName, $locale_cc) == 0) {
@@ -340,7 +360,7 @@ trait SyncsShopifyCustomer
     {
         $filename = $this->getClassName() . "-" . preg_replace('~\D~', '', microtime(true)) . ".jsonl";
 
-        if (app()->environment("local", "development")){
+        if (app()->environment("local", "development")) {
             $storageResult = Storage::put($filename, $data);
         } else {
             $storageResult = Storage::disk('musora_web_platform_s3')->put($filename, $data);
@@ -362,16 +382,22 @@ trait SyncsShopifyCustomer
      */
     protected function getStoredFile(string $filename): string
     {
-        if (app()->environment("local", "development")){
+        if (app()->environment("local", "development")) {
             if (Storage::missing($filename)) {
-                throw new Exception(sprintf("%s: File %s was not found in storage and cannot be uploaded to Shopify",
-                    $this->getClassName(), $filename));
+                throw new Exception(sprintf(
+                    "%s: File %s was not found in storage and cannot be uploaded to Shopify",
+                    $this->getClassName(),
+                    $filename
+                ));
             }
             return Storage::get($filename);
         } else {
             if (Storage::disk('musora_web_platform_s3')->missing($filename)) {
-                throw new Exception(sprintf("%s: File %s was not found in storage and cannot be uploaded to Shopify",
-                    $this->getClassName(), $filename));
+                throw new Exception(sprintf(
+                    "%s: File %s was not found in storage and cannot be uploaded to Shopify",
+                    $this->getClassName(),
+                    $filename
+                ));
             }
             return Storage::disk('musora_web_platform_s3')->get($filename);
         }

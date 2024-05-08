@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
+use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
@@ -395,6 +396,32 @@ class ShopifySyncService
         $shopifyCancelService = app(ShopifyCancelService::class);
         $shopifyCancelService->cancelOrder($orderId);
         $this->syncCustomerByUser($user);
+    }
+
+    /**
+     * Post to Shopify to mark the given Fulfillment for the given Shopify Order, as delivered
+     *
+     * @param  int  $shopifyOrderId
+     * @param  int  $fulfillmentId
+     * @return void
+     * @throws ValidationException
+     * @throws Exception
+     */
+    public function markFulfillmentAsDelivered(int $shopifyOrderId, int $fulfillmentId): void
+    {
+        // DEV NOTE: there seems to be a bug with createOrderFulfillmentEvent, so we'll just work around it with a direct post
+        $uriPrefix = ['orders', $shopifyOrderId, 'fulfillments', $fulfillmentId];
+        $url = implode('/', [...$uriPrefix, "events.json"]);
+        $data = ['event' => ['status' => 'delivered']];
+        $fulfillmentEventResponse = $this->shopify->post($url, $data);
+
+        if ($fulfillmentEventResponse->failed()) {
+            throw new Exception(sprintf(
+                "Failed to mark fulfillment %s as delivered: %s.",
+                $fulfillmentId,
+                $fulfillmentEventResponse->reason()
+            ));
+        }
     }
 
     public function syncUser(User $user)

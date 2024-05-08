@@ -87,7 +87,7 @@ class SyncUsersToShopify implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**
@@ -236,7 +236,7 @@ class SyncUsersToShopify implements ShouldQueue
         // STEP 2: determine if updating or creating
         // ensuring to check for any of the user's customer entities that may have already been synced
         $alreadySyncedUserCustomers = $userCustomers->filter(
-            fn(Customer $customer) => !is_null($customer->getShopifyId())
+            fn (Customer $customer) => !is_null($customer->getShopifyId())
         );
         $isCreating = $fresh || (is_null($user->shopify_id) && $alreadySyncedUserCustomers->isEmpty());
 
@@ -309,7 +309,7 @@ class SyncUsersToShopify implements ShouldQueue
                 // STEP 6: send it to Shopify, if there are any
                 $errors = $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId, $this->shopifyIds);
                 $this->handleRateLimit();
-                $errors->each(fn($errorMessage) => $this->logError($errorMessage));
+                $errors->each(fn ($errorMessage) => $this->logError($errorMessage));
             } catch (ORMException $e) {
                 $this->logError(
                     sprintf(
@@ -464,7 +464,8 @@ class SyncUsersToShopify implements ShouldQueue
                 $failures = $this->linkExistingCustomer($user->email);
                 $this->handleRateLimit();
                 if ($failures->isNotEmpty()) {
-                    $failures->each(fn($failureMessage) => $this->results[] = [
+                    $failures->each(
+                        fn ($failureMessage) => $this->results[] = [
                         self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
                         self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
                         self::RESULTS_MODEL_ID => $user->id,
@@ -557,7 +558,7 @@ class SyncUsersToShopify implements ShouldQueue
         $addresses = collect($this->addressRepository->getUserShippingAddresses($user->id));
 
         // and its customers
-        $customers->each(fn(Customer $customer) => $addresses->push(
+        $customers->each(fn (Customer $customer) => $addresses->push(
             ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
         ));
 
@@ -587,7 +588,8 @@ class SyncUsersToShopify implements ShouldQueue
         // first, get the address information from Shopify
         $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
         $this->handleRateLimit();
-        $shopifyAddresses = $shopifyAddressesResponse->map(fn(ApiResource $apiResource) => $apiResource->getAttributes()
+        $shopifyAddresses = $shopifyAddressesResponse->map(
+            fn (ApiResource $apiResource) => $apiResource->getAttributes()
         );
 
         // keep track of the local addresses that we've checked, so we know not to check if they're new
@@ -600,7 +602,8 @@ class SyncUsersToShopify implements ShouldQueue
             $checkedLocalAddressIds,
             $addressData
         );
-        $updateFailures->each(fn($failureMessage) => $this->results[] = [
+        $updateFailures->each(
+            fn ($failureMessage) => $this->results[] = [
             self::RESULTS_MESSAGE_TYPE => self::RESULTS_MESSAGE_TYPE_ERROR,
             self::RESULTS_MODEL_TYPE => self::RESULTS_MODEL_TYPE_USER,
             self::RESULTS_MODEL_ID => $user->id,

@@ -40,11 +40,10 @@ export default {
             @click="onClose"
             id="modal-overlay"
             class="tw-absolute tw-h-full tw-w-full tw-bg-[#081825] tw-bg-opacity-90"
-            style="
-                 {
-                    backdropfilter: 'blur(64px)';
-                }
-            "
+            :style="{
+                backdropFilter: 'blur(1.5px)',
+                background: 'linear-gradient(180deg, rgba(0, 12, 23, 0.69) 0%, #000C17 100%)',
+            }"
         ></div>
         <div id="slot-wrapper" @click="onWrapperClick"
             class="tw-absolute tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center"

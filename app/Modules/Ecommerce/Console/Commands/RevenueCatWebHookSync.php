@@ -33,8 +33,7 @@ class RevenueCatWebHookSync extends Command
                     $request = Request::create('/ecommerce/revenuecat/webhook/notification', 'POST', $decodedEvent);
                     $response = app()->handle($request);
                     $this->info(print_r($event, true));
-                }
-                catch (\Throwable $e) {
+                } catch (\Throwable $e) {
                     $this->info("ecommerce:RevenueCatWebhookSync: Error parsing line $i");
                     $this->info($e->getMessage());
                 }

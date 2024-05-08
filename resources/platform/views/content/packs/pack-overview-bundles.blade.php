@@ -8,11 +8,11 @@
 @php
     $ctas = [
         [
-            'type' => 'primary',
+            'type' => 'PageHeaderPrimaryCta',
             'props' => [
                 'text' => $pack->fetch('primary_cta_text'),
                 'url' => $pack->fetch('primary_cta_url'),
-                'icon' => 'fa-play'
+                'faIconClass' => 'fa-play'
             ]
         ],
         

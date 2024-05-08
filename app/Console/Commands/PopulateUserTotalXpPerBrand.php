@@ -12,7 +12,6 @@ use Exception;
 
 class PopulateUserTotalXpPerBrand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -55,18 +54,18 @@ class PopulateUserTotalXpPerBrand extends Command
         ->groupBy(['user_id','brand']);
 
         $query->chunk(200, function (Collection $rows) use ($dbConn) {
-                $xp = [];
-                foreach ($rows as $row) {
-                    $xp[$row->user_id][$row->brand] = $row->total_xp;
-                }
-                foreach ($xp as $key => $x) {
-                    $dbConn->table('usora_users')
-                        ->where('id', $key)
-                        ->update([
-                                     'brand_total_xp' => $x,
-                                 ]);
-                }
-            });
+            $xp = [];
+            foreach ($rows as $row) {
+                $xp[$row->user_id][$row->brand] = $row->total_xp;
+            }
+            foreach ($xp as $key => $x) {
+                $dbConn->table('usora_users')
+                    ->where('id', $key)
+                    ->update([
+                                 'brand_total_xp' => $x,
+                             ]);
+            }
+        });
 
         $this->info("PopulateUserTotalXpPerBrand command has finished #n");
     }

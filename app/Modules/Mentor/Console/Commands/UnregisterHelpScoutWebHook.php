@@ -11,7 +11,7 @@ class UnregisterHelpScoutWebHook extends Command
     protected $signature = 'mentors:unregisterHelpScoutWebHook';
     protected $description = 'Run to unregister help scout web hook';
 
-    public function handle(        HelpScoutMentorService $helpScoutMentorService): bool
+    public function handle(HelpScoutMentorService $helpScoutMentorService): bool
     {
         $this->info("\nRegistering Web Hook");
         $helpScoutMentorService->unregisterHelpScoutWebHook();
