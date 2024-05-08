@@ -41,19 +41,16 @@ if(!empty($user)){
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-my-3">
         <div class="flex flex-column">
             <div class="flex flex-row">
-
                 <play-alongs
                     ref="playAlongsVueInstance"
                     content-endpoint="/railcontent/content"
-                    theme-color="drumeo"
-                    brand="drumeo"
-                    :pre-loaded-content="{{ json_encode(json_decode($listLessons)->data) }}"
+                    theme-color="{{ $brand }}"
+                    brand="{{ $brand }}"
+                    :pre-loaded-content="{{ $listLessons }}"
+                    :session-token="{{ json_encode(railtracker_session_token()) }}"
                     :total-results="{{ json_encode(json_decode($listLessons)->meta->totalResults) }}"
-                    user-id="{{ auth()->id() }}"
-                    :no-sidebar="true"
-                    :use-url-params="false"
-                    :show-user-actions="false"
-                    :track-progress="false"
+                    @play="handlePlayAlongsPlay"
+                    @pause="handlePlayAlongsPause"
                 ></play-alongs>
 
             </div>
