@@ -320,12 +320,17 @@ class SalesController extends BaseController
         $workspace_name = 'pianote';
 
         
+        $messages = [
+            'email.already_pianote_user' => 'already_pianote_user',
+            'email.code_claimed' => 'code_claimed'
+        ];
+        
         $validatedData = $request->validate([
             'email' => [
                 'required',
                 'email',
-                function ($attribute, $value, $fail) use ($workspace_name) { // check if user exists
-                    $userExists = DB::table('usora_users')
+                function ($attribute, $value, $fail) { // check if user exists in usora_users with permission_id 77 or 88 (pianote) or product_id 408 (roland)
+                    $user = DB::table('usora_users')
                         ->join('user_access_permissions', 'usora_users.id', '=', 'user_access_permissions.user_id')
                         ->where('usora_users.email', $value)
                         ->where(function ($query) {
@@ -335,28 +340,31 @@ class SalesController extends BaseController
                             })
                             ->orWhere('user_access_permissions.product_id', 408);
                         })
+                        ->first();
+        
+                        if ($user) {
+                            $fail('email.already_pianote_user');
+                        }
+                        // if ($user) {
+                        //     $fail('email.already_pianote_user' . ' User exists with this email: ' . $value . ', Permission ID: ' . $user->permission_id . ', Product ID: ' . $user->product_id);
+                        // } // to see the user details
+                },
+                function ($attribute, $value, $fail) {
+                    $codeClaimed = DB::table('usora_users')
+                        ->join('ecommerce_access_codes', 'usora_users.id', '=', 'ecommerce_access_codes.claimer_id')
+                        ->where('usora_users.email', $value)
+                        ->where('ecommerce_access_codes.is_claimed', 1)
+                        ->where('ecommerce_access_codes.source', 'roland-piano-promo')
                         ->exists();
-
-                    if ($userExists) {
-                        $fail($attribute.' is already in use.');
+                
+                    if ($codeClaimed) {
+                        $fail('email.code_claimed');
                     }
-                },
-                Rule::unique('customer_io_customers', 'email')->where(function ($query) use ($workspace_name) {
-                    $query->where('workspace_name', $workspace_name);
-                }),
-                  function ($attribute, $value, $fail) use ($request) { // check if email is in session
-                    if ($request->session()->get('email') === $value) {
-                        $fail('You cannot send email twice');
-                    }
-                },
+                }
             ],
-        ]);
-
-        // add email to session
-        $request->session()->put('email', $validatedData['email']);
+        ], $messages);
     
-
-        // If validation passes, the customer does not exist, continue with the process
+        // If validation passes, the customer does not exist as pianote user or did not claim, continue with the process
     
         // create access code
         $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote', 'roland-piano-promo');

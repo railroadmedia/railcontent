@@ -101,7 +101,7 @@
                         <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
                         <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
                         <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
-                        <span class="disabled hidden">new Pianote members only  <i class="fad fa-exclamation-triangle"></i></span>
+                        <span id="errorMessage" class="disabled hidden"><i class="fad fa-exclamation-triangle"></i></span>
                     </button>
                 </form>
                 <div class="disclaimer block opacity-70 mx-auto mt-3 max-w-lg">
@@ -145,44 +145,67 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script>
-    $(document).ready(function () {
-        $(".ajax-form").submit(function (e) {
-            e.preventDefault();
+        $(document).ready(function() {
+            $(".ajax-form").submit(function(e) {
+                e.preventDefault();
+                var currentEmail = $(this).find('input[name="email"]').val();
+                var lastEmail = localStorage.getItem('lastEmail');
 
-            var pre = $(this).find(".pre-add"),
-                pending = $(this).find(".pending"),
-                success = $(this).find(".success"),
-                fail = $(this).find(".fail"),
-                submitButton = $(this).find(".submit"),
-                disclaimer = $(this).parent().find(".disclaimer"),
-                thankBanner = $(this).parent().find(".thank-you-box"),
-                form = $(this),
-                url = form.attr("action");
+                if (currentEmail === lastEmail) {
+                    $('.email-used-disclaimer').removeClass("hidden");
+                    $('.pre-add').addClass("hidden");
+                    $('.disclaimer').addClass("hidden");
+                    $('.fail').removeClass("hidden");
+                    $('.disclaimer').addClass("hidden");
 
-            pre.addClass("hide hidden");
-            success.addClass("hide hidden");
-            fail.addClass("hide hidden");
-            pending.removeClass("hide hidden");
-            submitButton.removeClass("error");
+                    $('.submit').prop('disabled', true);
+                    return;
+                }
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(),
-                success: function () {
-                    form.addClass("hide hidden");
-                    disclaimer.addClass("hide hidden");
-                    thankBanner.addClass("active");
+                localStorage.setItem('lastEmail', currentEmail);
 
-                    pending.addClass("hide hidden");
-                    success.removeClass("hide hidden");
-                },
-                error: function (jqXHR) {
-                    pending.addClass("hide hidden");
+                var pre = $(this).find(".pre-add"),
+                    pending = $(this).find(".pending"),
+                    success = $(this).find(".success"),
+                    fail = $(this).find(".fail"),
+                    submitButton = $(this).find(".submit"),
+                    disclaimer = $(this).parent().find(".disclaimer"),
+                    thankBanner = $(this).parent().find(".thank-you-box"),
+                    form = $(this),
+                    url = form.attr("action");
 
-                    if (jqXHR.status === 422) {
-                       
+                pre.addClass("hide hidden");
+                success.addClass("hide hidden");
+                fail.addClass("hide hidden");
+                pending.removeClass("hide hidden");
+                submitButton.removeClass("error");
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function() {
+                        form.addClass("hide hidden");
+                        disclaimer.addClass("hide hidden");
+                        thankBanner.addClass("active");
+
+                        pending.addClass("hide hidden");
+                        success.removeClass("hide hidden");
+                    },
+                    error: function(jqXHR) {
+                        pending.addClass("hide hidden");
+
+                        if (jqXHR.status === 422) {
+                            var errorMessage = jqXHR.responseJSON.message;
+                            console.log(errorMessage);
+                            if (errorMessage === 'email.already_pianote_user') {
+                                $('#errorMessage').text('For new Pianote members only');
+                            } else if (errorMessage === 'email.code_claimed') {
+                                $('#errorMessage').text('Code has been already claimed');
+                            }
+
                             $('.disabled').removeClass("hidden");
                             $('.disclaimer').addClass("hidden");
                             $('.email-used-disclaimer').removeClass("hidden");
@@ -194,10 +217,10 @@
                         } else {
                             fail.removeClass("hide hidden");
                         }
-                }
+                    }
+                });
             });
         });
-    });
-</script>
-
+    </script>
+   
 @endsection
