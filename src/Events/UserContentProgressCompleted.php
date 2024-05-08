@@ -2,14 +2,8 @@
 
 namespace Railroad\Railcontent\Events;
 
-use Illuminate\Support\Facades\Event;
-
-class UserContentProgressCompleted extends Event
+class UserContentProgressCompleted extends UserContentProgressStatusUpdated
 {
-  public $userId;
-  public $contentId;
-  public $progressPercent;
-
   /**
    * @param int $userId
    * @param int $contentId
@@ -20,5 +14,6 @@ class UserContentProgressCompleted extends Event
     $this->userId = $userId;
     $this->contentId = $contentId;
     $this->progressPercent = $progressPercent;
+    $this->progressStatus = 'completed';
   }
 }
