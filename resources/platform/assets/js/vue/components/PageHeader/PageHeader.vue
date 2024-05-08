@@ -40,7 +40,7 @@
         </div>
       </div>
       <PageHeaderProgressBar v-if="progress" :progress="progress" class="tw-mt-4">
-        <template #progress-text>
+        <template #progress-text v-if="isLearningPathPage || isLearningPathLevelPage || isLearningPathCoursePage">
           <span>{{ `${progressLabelText} - ` }}</span>
         </template>
       </PageHeaderProgressBar>
@@ -79,8 +79,6 @@ const props = defineProps({
   ctas: Array,
   description: String,
 });
-
-console.log(props)
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
