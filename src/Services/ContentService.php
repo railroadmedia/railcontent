@@ -10,6 +10,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -134,11 +135,12 @@ class ContentService
                 return $section->value;
             }, $sections)
         );
-        $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
+        $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($user_id, $brand, $sectionString);
         $cached = Cache::store('redis')->get($cacheKey);
         if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
             $recommendations = $cached;
         } else {
+            Log::info('Retrieving recommendations from Huggingface for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
             $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections, $useFastImplementation);
             $ttl = 60 * 60 * 4;
             Cache::store('redis')

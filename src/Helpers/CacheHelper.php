@@ -83,6 +83,22 @@ class CacheHelper
     }
 
     /**
+     * Generate a md5 key based on function arguments
+     *
+     * @return string
+     */
+    public static function getKeyFromArguments()
+    {
+        $args = func_get_args();
+        $key = '';
+        foreach ($args as $arg) {
+            $key .= implode(' ', array_values(Arr::wrap($arg)));
+        }
+        return md5($key);
+    }
+
+
+    /**
      * Insert all the specified value (content search key) at the tail of the set stored at key(content id).
      * If not exist a set for content id, it is created as empty set before performing the push operation.
      * e.g.: musora_railcontent_:content_contentId => "musora_railcontent_:userId_149628
