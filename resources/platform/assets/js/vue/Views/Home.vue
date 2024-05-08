@@ -38,7 +38,7 @@
             </template> -->
             <template #icon>
                 <button class="tw-mr-[15px]" @click="shuffleRecommends" title="Shuffle. New content will be available twice a week.">
-                    <i class="fas fa-random"></i>
+                    <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
                 </button>
             </template>
         </MiniCatalogueSection>
@@ -96,6 +96,7 @@ import StatsSection from '../components/StatsSection/StatsSection.vue';
 import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
 import { useUserStore } from "../../stores/user";
 import {storeToRefs} from "pinia/dist/pinia";
+import MusoraIcon from '../components/MusoraIcons/MusoraIcon.vue';
 
 //Pinia Stores
 const userStore = useUserStore();
