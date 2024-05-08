@@ -135,7 +135,7 @@ class ContentService
                 return $section->value;
             }, $sections)
         );
-        $cacheKey = 'RECSYS-' . CacheHelper::getKey($user_id, $brand, $sectionString);
+        $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($user_id, $brand, $sectionString);
         $cached = Cache::store('redis')->get($cacheKey);
         if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
             $recommendations = $cached;
