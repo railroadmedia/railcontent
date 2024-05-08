@@ -16,7 +16,7 @@ if(!empty($user)){
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
                     <h1 class="heading mb-1 text-white tw-flex tw-items-center">
-                        <a href="javascript:history.back()"
+                        <a href="/drumeo/bestbook"
                            class="no-decoration tw-flex tw-items-center tw-mr-1">
                             <i class="fas fa-arrow-circle-left text-light tw-text-2xl"></i>
                         </a>
