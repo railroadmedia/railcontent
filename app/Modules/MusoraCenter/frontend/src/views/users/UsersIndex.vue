@@ -138,6 +138,20 @@
                                 >
                                     <em>No membership</em>
                                 </linkable-td>
+
+                                <v-tooltip bottom slot="activator">
+                                    <template v-slot:activator="{ on }">
+                                    <v-btn
+                                        slot="activator"
+                                        icon
+                                        @click.stop="deleteUser(item.id)"
+                                    >
+                                        <v-icon color="red">
+                                            delete
+                                        </v-icon>
+                                    </v-btn>
+                                    </template>
+                                </v-tooltip>
                             </tr>
 
 <!--                            <tr-->
@@ -612,6 +626,11 @@ export default {
 
         getMembershipRowClasses(item) {
             return {hovered: item.id == this.hoveredUserId};
+        },
+        deleteUser(id) {
+            api
+                .deleteUser(id)
+                .then( this.requestUsers());
         },
     },
     mounted() {
