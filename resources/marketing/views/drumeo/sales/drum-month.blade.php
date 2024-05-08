@@ -147,7 +147,7 @@
                 <br>
                 <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get 1 year of unlimited drum lessons<br class="hidden sm:inline">
                     <span class="text-[#0BDBB6]">+ a loaded StickBag, lesson packs, and more!</span></h3>
-                <a class="join  text-black my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="background-color:#0BDBB6; padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special" aria-label="Get Started">
+                <a class="join  text-black my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="background-color:#0BDBB6; padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special" aria-label="Get Started">
                     GET Started »
                 </a>
                 <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">$240</s>
@@ -297,7 +297,7 @@
             </div>
             <h2 class="leading-tight mt-6 mb-1"><s class="opacity-50">$1034.95</s> <strong>$200</strong></h2>
             <p class="text-sm mb-4 sm:mb-6"><strong class="text-[#0BDBB6]">Save 17%</strong> for your first year. Renews at $240/yr.</p>
-            <a role="link" aria-label=" Get Started" class="join  text-black  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="background-color:#0BDBB6;padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[Drumeo-Key]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special">
+            <a role="link" aria-label=" Get Started" class="join  text-black  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="background-color:#0BDBB6;padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special">
                 GET Started »
             </a>
             <br>

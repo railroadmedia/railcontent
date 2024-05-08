@@ -134,8 +134,8 @@
                         <div class="px-5 sm:px-0">
                             <img class="h-20 sm:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/header-collage.png">
                             <h1 class="rotater-text my-4 lg:my-5"><strong>We want you back <3.</strong></h1>
-                            <h6 class="leading-normal mb-4 sm:mb-2">Rejoin Drumeo and save 50% on your first year back. Because let’s be honest… we’re better together.<br>
-                                <strong class="text-musora"><em>Only available until June 30th.
+                            <h6 class="leading-normal mb-4 sm:mb-2">Rejoin Drumeo and save 50% on your first year back. <br>
+                                <strong class="text-musora"><em>Only available until May 31st.
 
                                                         <span x-cloak x-data="timer()" x-init="countdown()">
                                                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -324,7 +324,7 @@
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Legendary teachers<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Step-by-step courses<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Playalongs in every style</p>
-                    <h5 class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.
+                    <h5 class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until May 31st.
                                 <span x-cloak x-data="timer()" x-init="countdown()">
                                                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                                                      <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -352,7 +352,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
         @include('_partials.components.countdown',[
-        'countdownDate' => '2024-07-01 00:00:00',
+        'countdownDate' => '2024-06-01 00:00:00',
         'promoVersion' => false
         ])
 @stop
