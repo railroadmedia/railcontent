@@ -628,9 +628,34 @@ export default {
             return {hovered: item.id == this.hoveredUserId};
         },
         deleteUser(id) {
-            api
-                .deleteUser(id)
-                .then( this.requestUsers());
+            const confirmation = confirm('Are you sure you wish to delete this account? This action cannot be undone.');
+
+            if (confirmation) {
+                this.$root.$emit('pageLoading');
+
+                api.deleteUser(id)
+                    .then((response) => {
+                        this.handleResponse(response, 'deleted');
+                    })
+                    .finally(() => {
+                        this.$root.$emit('pageLoaded');
+                    });
+            }
+        },
+        handleResponse(response, action) {
+            if (response) {
+                this.requestUsers();
+
+                this.$root.$emit('displayMessage', {
+                    text: `Account successfully ${action}!`,
+                    color: 'success',
+                });
+            } else {
+                this.$root.$emit('displayMessage', {
+                    text: `Oops! Something went wrong. Account likely not ${action}!`,
+                    color: 'error',
+                });
+            }
         },
     },
     mounted() {
