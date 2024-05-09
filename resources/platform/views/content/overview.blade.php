@@ -85,8 +85,13 @@
         ];
     }
     elseif ($parentContent->fetch('type') === 'learning-path') {
+        
         $headerData['iconName'] = 'method';
-        $headerData['title'] = 'Method';
+        if(!Str::contains(request()->path(), 'foundations-2019')) {
+            $headerData['title'] = 'Method';
+        } else {
+            $headerData['title'] = 'Foundations';
+        }
         $headerData['description'] = $parentContent->fetch('data.description');
         $headerData['progress'] = $parentContent->fetch('progress_percent', 0);
         $headerData['progressLabelText'] = $progressLabelText;
@@ -108,10 +113,21 @@
                 ],
             ];
         }
-
-        $headerData['ctas'][] = [
-            'type' => 'WhereToBeginCta',
-        ];
+        if ($brand === 'drumeo' || $brand === 'pianote' && !Str::contains(request()->path(), 'foundations-2019')) {
+            $headerData['ctas'][] = [
+                'type' => 'WhereToBeginCta',
+            ];
+        }
+        if (Str::contains(request()->path(), 'foundations-2019')) {
+            $headerData['ctas'][] = [
+                'type' => 'PageHeaderCta',
+                'props' => [
+                    'text' => 'FOUNDATIONS BOOK RESOURCES',
+                    'url' => '/pianote/resources',
+                    'showAllAlways' => true
+                ]
+            ];
+        }
     }
     elseif ($parentContent->fetch('type') === 'learning-path-level' || $parentContent->fetch('type') === 'learning-path-course'){
         if (isset($infoData['courses'])) {
