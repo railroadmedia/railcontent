@@ -1,4 +1,5 @@
 <template>
+    <PageHeader pageType="notifications" title="Notifications" iconName="fa-bell" :ctas="headerCtas" />
     <div class="tw-flex tw-flex-col">
         <div class="tw-flex tw-flex-row tw-pb-8 tw-items-center tw-flex-wrap tw-justify-between">
             <div class="tw-flex tw-flex-row tw-items-center">
@@ -46,6 +47,7 @@ import { onMounted, ref, computed } from 'vue';
 import { EyeIcon, CogIcon } from '@heroicons/vue/outline';
 import * as QueryString from 'query-string';
 import NotificationsTableRow from './_NotificationsTableRow.vue';
+import PageHeader from '../../../components/PageHeader/PageHeader.vue';
 import Pagination from '../../components/Pagination.vue';
 import UserService from '../../assets/js/services/user';
 import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue';
@@ -99,7 +101,29 @@ const currentPage = computed(() => {
     return 1;
 });
 
-function markAllAsRead() {
+const headerCtas = computed(() => {
+    return [
+        {
+            type: 'PageHeaderCta',
+            props: {
+                text: 'Mark All As Read',
+                faIconClass: 'fa-eye',
+                onClickCallback: markAllAsRead,
+                disabled: !hasUnread.value,
+            },
+        },
+        {
+            type: 'PageHeaderCta',
+            props: {
+                text: 'Notification Settings',
+                faIconClass: 'fa-cog',
+                url: props.settingsUrl,
+            },
+        },
+    ];
+});
+
+const markAllAsRead = () => {
     if (!markingAllAsRead.value) {
         markingAllAsRead.value = true;
 
@@ -117,7 +141,7 @@ function markAllAsRead() {
     }
 };
 
-function markAsRead(payload) {
+function markAsRead (payload) {
     const index = notificationsArray.value.map(notification => notification.id).indexOf(payload.id);
 
     if (payload.isRead) {
@@ -141,7 +165,7 @@ function markAsRead(payload) {
     }
 };
 
-function handlePageChange(payload) {
+function handlePageChange (payload) {
     const urlParams = QueryString.parse(location.search);
 
     urlParams.page = payload.page;

@@ -1,7 +1,9 @@
 <template>
     <!-- Header -->
     <!-- ADD NEW HEADER HERE -->
-
+    <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
+    <PageHeader pageType="songs" title="Songs" iconName="headphones" :infoData="headerInfoData" :ctas="ctaConfig" />
+    
     <!-- Continue section -->
     <div v-if="startedContent?.data?.length" class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[33px]">
         <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="continueUrl"
@@ -19,16 +21,18 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia';
-import { useUserStore } from "../../stores/user";
-
-import UnifiedHeader from '../components/Unified/UnifiedHeader';
+import { defineProps, computed } from 'vue';
+import PageHeader from '../components/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
-import SongRequest from "../components/Songs/SongRequest.vue";
 import CollectionWrapper from "../components/CollectionWrapper/CollectionWrapper.vue";
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
 
 const props = defineProps({
     continueUrl: {
+        type: String,
+        default: '#'
+    },
+    allArtistsUrl: {
         type: String,
         default: '#'
     },
@@ -62,7 +66,20 @@ const props = defineProps({
     }
 });
 
-const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const ctaConfig = computed(() => {
+    return [
+        {
+            type: 'SongRequest'
+        },
+    ];
+});
+
+const headerInfoData = computed(() => {
+    return {
+        type: 'Link',
+        text: `See all ${props.artistsNumber} artists >`,
+        url: props.allArtistsUrl
+    }
+})
 
 </script>
