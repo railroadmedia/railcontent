@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, computed, useAttrs } from 'vue';
+import { ref, computed, useAttrs } from 'vue';
 import PageHeaderDropdown from '../PageHeaderDropdown.vue';
 
 const props = defineProps({

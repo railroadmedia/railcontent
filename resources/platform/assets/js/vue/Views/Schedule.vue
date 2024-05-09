@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../stores/user";
 import ContentSchedule from '../vuesora/views/schedule/Schedule';

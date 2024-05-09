@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import CtaResolver from './Ctas/CtaResolver.vue';
 import MobileCtaDropdown from './MobileCtaDropdown.vue';
 const props = defineProps({
