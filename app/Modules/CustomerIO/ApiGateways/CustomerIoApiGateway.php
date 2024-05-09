@@ -25,7 +25,7 @@ class CustomerIoApiGateway
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
         string $emailAddress,
-        string $customerId,
+        ?string $customerId,
         ?array $attributes = [],
         ?int $createdAtTimestamp = null
     ): void {
