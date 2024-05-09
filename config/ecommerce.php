@@ -515,6 +515,8 @@ return [
         'musora_annual_subscription' => 'musora-annual-recurring-membership',
 //        'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
 //        'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
+        'musora_subscription:annual-plus' => 'musora-annual-recurring-membership',
+        'musora_subscription:monthly-plus' => 'musora-monthly-recurring-membership',
     ],
 
     'apple_store_products_map_trial' => [
@@ -560,6 +562,8 @@ return [
         //Musora app
         'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
         'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
+        'musora_subscription:annual-plus' => 'musora-annual-recurring-7-day-trial-membership',
+        'musora_subscription:monthly-plus' => 'musora-monthly-recurring-7-day-trial-membership',
     ],
 
     // paypal
