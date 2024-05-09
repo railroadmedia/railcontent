@@ -317,11 +317,9 @@ class SalesController extends BaseController
     public function claimRoland90DaysAccess(Request $request)
     {
         // Validate email before proceeding
-        $workspace_name = 'pianote';
-
         
         $messages = [
-            'email.already_pianote_user' => 'already_pianote_user',
+            'email.already_pianote_user' => 'pianote_user',
             'email.code_claimed' => 'code_claimed'
         ];
         
@@ -329,36 +327,29 @@ class SalesController extends BaseController
             'email' => [
                 'required',
                 'email',
-                function ($attribute, $value, $fail) { // check if user exists in usora_users with permission_id 77 or 88 (pianote) or product_id 408 (roland)
-                    $user = DB::table('usora_users')
-                        ->join('user_access_permissions', 'usora_users.id', '=', 'user_access_permissions.user_id')
-                        ->where('usora_users.email', $value)
-                        ->where(function ($query) {
-                            $query->where(function ($query) {
-                                $query->whereIn('user_access_permissions.permission_id', [77, 88])
-                                    ->where('user_access_permissions.status', 'active');
-                            })
-                            ->orWhere('user_access_permissions.product_id', 408);
-                        })
-                        ->first();
-        
-                        if ($user) {
-                            $fail('email.already_pianote_user');
-                        }
-                        // if ($user) {
-                        //     $fail('email.already_pianote_user' . ' User exists with this email: ' . $value . ', Permission ID: ' . $user->permission_id . ', Product ID: ' . $user->product_id);
-                        // } // to see the user details
-                },
                 function ($attribute, $value, $fail) {
+                    $user = DB::table('usora_users')
+                    ->join('user_access_permissions', 'usora_users.id', '=', 'user_access_permissions.user_id')
+                    ->where('usora_users.email', $value)
+                    ->where(function ($query) {
+                        $query->where(function ($query) {
+                            $query->whereIn('user_access_permissions.permission_id', [77, 88]);
+                        })
+                        ->orWhere('user_access_permissions.product_id', 408);
+                    })
+                    ->first();
+        
                     $codeClaimed = DB::table('usora_users')
                         ->join('ecommerce_access_codes', 'usora_users.id', '=', 'ecommerce_access_codes.claimer_id')
                         ->where('usora_users.email', $value)
                         ->where('ecommerce_access_codes.is_claimed', 1)
                         ->where('ecommerce_access_codes.source', 'roland-piano-promo')
                         ->exists();
-                
-                    if ($codeClaimed) {
+        
+                    if ($user && $codeClaimed) {
                         $fail('email.code_claimed');
+                    } elseif ($user) {
+                        $fail('email.already_pianote_user');
                     }
                 }
             ],
