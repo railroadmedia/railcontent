@@ -9,9 +9,7 @@ import playlists from '../../../services/playlists';
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-
-const props = defineProps({
-  playlistCount: Number
-});
+  const props = defineProps({
+    playlistCount: Number
+  });
 </script>
