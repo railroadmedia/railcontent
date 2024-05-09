@@ -257,12 +257,18 @@ return [
                 ],
             ],
             'Drumeo Drumset Giveaway' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
                     'drumeo_prospect_drumset-giveaway-2023',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Drumeo Giveaway Rafflepress' => [
