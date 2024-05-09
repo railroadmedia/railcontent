@@ -267,9 +267,9 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.pages.teach-a-beginner-lessons');
     }
 
-    public function giveaway()
+    public function win()
     {
-        return view('drumeo.lead-gen.pages.giveaway', ['recaptchaKey' => config('recaptcha.key')]);
+        return view('drumeo.lead-gen.pages.win', ['recaptchaKey' => config('recaptcha.key')]);
     }
     public function weeklyEmail()
     {
