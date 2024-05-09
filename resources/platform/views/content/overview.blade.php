@@ -108,10 +108,11 @@
                 ],
             ];
         }
-
-        $headerData['ctas'][] = [
-            'type' => 'WhereToBeginCta',
-        ];
+        if ($brand === 'drumeo' || $brand === 'pianote') {
+            $headerData['ctas'][] = [
+                'type' => 'WhereToBeginCta',
+            ];
+        }
     }
     elseif ($parentContent->fetch('type') === 'learning-path-level' || $parentContent->fetch('type') === 'learning-path-course'){
         if (isset($infoData['courses'])) {
