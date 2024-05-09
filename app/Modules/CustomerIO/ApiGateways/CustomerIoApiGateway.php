@@ -25,7 +25,7 @@ class CustomerIoApiGateway
         string $customerIoSiteId,
         string $customerIoTrackApiKey,
         string $emailAddress,
-        ?string $customerId,
+        string $customerId,
         ?array $attributes = [],
         ?int $createdAtTimestamp = null
     ): void {
@@ -395,7 +395,7 @@ class CustomerIoApiGateway
 
         $body = json_encode($dataArray);
         try {
-            $request = Http::dump()->withHeaders($headers)->withToken($authToken, $authStrategy);
+            $request = Http::withHeaders($headers)->withToken($authToken, $authStrategy);
 
             $result = match ($method) {
                 'GET' => $request->accept('application/json')->get($url),
