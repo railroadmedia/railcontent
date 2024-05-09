@@ -395,7 +395,7 @@ class CustomerIoApiGateway
 
         $body = json_encode($dataArray);
         try {
-            $request = Http::withHeaders($headers)->withToken($authToken, $authStrategy);
+            $request = Http::dump()->withHeaders($headers)->withToken($authToken, $authStrategy);
 
             $result = match ($method) {
                 'GET' => $request->accept('application/json')->get($url),
