@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import PageHeader from '../components/PageHeader/PageHeader.vue';
 import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
 import CollectionWrapper from "../components/CollectionWrapper/CollectionWrapper.vue";
