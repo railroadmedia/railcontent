@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9cf660031f71337479d862d368e2e14",
+    "content-hash": "00a798783f2a07370ce0fb2468e3bd0f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.306.1",
+            "version": "3.306.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "99e13a3647edffba9110948acc85052e3169e46a"
+                "reference": "0de11adba8f174a76346c9dbb175c2030ff5c8f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/99e13a3647edffba9110948acc85052e3169e46a",
-                "reference": "99e13a3647edffba9110948acc85052e3169e46a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0de11adba8f174a76346c9dbb175c2030ff5c8f2",
+                "reference": "0de11adba8f174a76346c9dbb175c2030ff5c8f2",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.306.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.306.2"
             },
-            "time": "2024-05-07T18:11:42+00:00"
+            "time": "2024-05-08T18:07:54+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10374,16 +10374,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-BE-15-MWP",
+            "version": "v2.1.79",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "d33eb7bd0eb6e67529dfceba77a30ed593a335b5"
+                "reference": "097a967903a13e43663ed40f6c71a347ee9e9acc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d33eb7bd0eb6e67529dfceba77a30ed593a335b5",
-                "reference": "d33eb7bd0eb6e67529dfceba77a30ed593a335b5",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/097a967903a13e43663ed40f6c71a347ee9e9acc",
+                "reference": "097a967903a13e43663ed40f6c71a347ee9e9acc",
                 "shasum": ""
             },
             "require": {
@@ -10438,9 +10438,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/BE-15-MWP"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.79"
             },
-            "time": "2024-04-12T13:32:11+00:00"
+            "time": "2024-05-09T14:40:34+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19718,18 +19718,11 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-BE-15-MWP",
-            "alias": "v2.1.74",
-            "alias_normalized": "2.1.74.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20,
-        "railroad/railcontent": 20
+        "railroad/doctrine-array-hydrator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -19739,5 +19732,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
