@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import PageHeaderDropdown from './PageHeaderDropdown.vue';
 import CtaResolver from './Ctas/CtaResolver.vue';
 
