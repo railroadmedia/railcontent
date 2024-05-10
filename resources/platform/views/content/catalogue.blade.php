@@ -256,13 +256,7 @@
 
 @section('content')
     @if($lessonType === 'Recommendation')
-        @include('partials.bladesora.members.navigation.breadcrumbs', [
-            "pages" => [
-                [
-                    "title" => 'Inspired By Your Activity',
-                ],
-            ]
-        ])
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
 
         <div class="tw-container tw-mx-auto tw-mt-[30px] tw-px-4 lg:tw-px-8">
             <div class="tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-items-start tw-flex tw-justify-between tw-pb-5">
