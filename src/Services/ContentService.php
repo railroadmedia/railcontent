@@ -135,15 +135,33 @@ class ContentService
                 return $section->value;
             }, $sections)
         );
+        $ttl = 60 * 60 * 4;
         $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($user_id, $brand, $sectionString);
+        $lockKey = 'RECSYS-LOCK' . CacheHelper::getKeyFromArguments($user_id, $brand, $sectionString);
+        // Logic here requires some explaination. Recommendation system calls each cost real $, so reducing extraneous calls is worth some messy logic.
+        // We cache recommendations contentids based on user,brand, and section. The external request can take up ta 10 seconds to return results.
+        // Concurrent (or close to concurrent) requests (such as during autoscrolling, will then call to the external service multiple times
+        // So we have a 2nd cache value (the lock) that indications an existing process has already started to retrieve results.
+        // If the original process returns (and fills the cache), we leave exit this loop.
+        // Otherwise we wait for the lock timeout of 15s, this shouldn't happen outside of exceptions in the pipeline,
+        // This will still be faster than making an external request.
+        // there is a small window at the end of the 4 hour cache timeout where the user will have to wait an extra 15s for results. I'm okay with this edge case.
         $cached = Cache::store('redis')->get($cacheKey);
+        while(Cache::store('redis')->has($lockKey)) {
+            $cached = Cache::store('redis')->get($cacheKey);
+            if ($cached) {
+                break;
+            }
+            sleep(1);
+        }
+        Cache::store('redis')->put($lockKey, '1', 12);
         if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
             $recommendations = $cached;
             Log::info('Retrieving recommendations from Cache for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
         } else {
             Log::info('Retrieving recommendations from Huggingface for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
             $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections, $useFastImplementation);
-            $ttl = 60 * 60 * 4;
+
             Cache::store('redis')
                 ->put($cacheKey, $recommendations, $ttl);
         }
