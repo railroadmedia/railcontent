@@ -3,8 +3,10 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Psr\Http\Message\RequestInterface;
 
 class CustomerIoApiGateway
 {
@@ -395,7 +397,16 @@ class CustomerIoApiGateway
 
         $body = json_encode($dataArray);
         try {
-            $request = Http::withHeaders($headers)->withToken($authToken, $authStrategy);
+            $request = Http::withHeaders($headers)
+                ->withToken($authToken, $authStrategy)
+                ->withMiddleware(
+                    Middleware::mapRequest(
+                        function (RequestInterface $request) use ($url) {
+                            Log::info('CustomerIOAPIGateway: Requesting ' . $url . ' - Headers: ' . json_encode($request->getHeaders()));
+                            return $request;
+                        }
+                    )
+                );
 
             $result = match ($method) {
                 'GET' => $request->accept('application/json')->get($url),
