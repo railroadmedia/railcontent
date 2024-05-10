@@ -21,6 +21,7 @@ Route::domain('{drumeoDomain}')
         //    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF']);
+        Route::get('/restart', [SalesController::class, 'restart'] );
 
         //    sales pages
         Route::get('/method', [SalesController::class, 'method']);
@@ -47,6 +48,7 @@ Route::domain('{drumeoDomain}')
 
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
+        Route::get('/drum-month', [SalesController::class, 'drumMonth']);
         Route::get('/trial', [SalesController::class, 'trial']);
         Route::get('/trial2', [SalesController::class, 'trial']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);

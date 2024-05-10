@@ -44,9 +44,9 @@
                             <div class="overflow-hidden relative w-full" style="padding-bottom: 56.25%;">
 
                                 <picture>
-                                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg">
+                                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb2.jpg">
                                     <img class="absolute w-full h-full inset-0 object-cover"
-                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg"
+                                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb2.jpg"
                                         alt="card image" fetchpriority="high">
                                 </picture>
                             </div>

@@ -261,7 +261,7 @@ return [
                     'first_name' => 'required|string'
                 ],
                 'events' => [
-                    'drumeo_prospect_drumset-giveaway-2023',
+                    'drumeo_prospect_drumset-giveaway-may-2024',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
