@@ -1503,6 +1503,15 @@ class ContentPagesController extends BaseController
             "catalogueMeta" => $catalogueMeta,
             "adminMessage" => $adminMessage,
             "futureScheduledContentOnly" => false,
+            "breadcrumbs" => [
+                [
+                    "title" => "Lessons",
+                    "url" => "/lessons"
+                ],
+                [
+                    "title" => "New Releases",
+                ]
+            ],
         ]);
     }
 
@@ -1583,6 +1592,11 @@ class ContentPagesController extends BaseController
             "lessonType" => implode(',', $listLessons['filter_options']['type']),
             "listLessons" => $listLessons->toResponseRawJson(),
             "totalResults" => $listLessons['total_results'],
+            "breadcrumbs" => [
+                [
+                    "title" => "Inspired By Your Activity",
+                ]
+            ],
         ]);
     }
 
@@ -1708,6 +1722,15 @@ class ContentPagesController extends BaseController
             "endpointOverride" => "/railcontent/followed-lessons",
             "totalResults" => $followedLessons['total_results'],
             "catalogueMeta" => $catalogueMeta,
+            "breadcrumbs" => [
+                [
+                    "title" => "Lessons",
+                    "url" => "/lessons"
+                ],
+                [
+                    "title" => "Subscribed",
+                ]
+            ],
         ]);
     }
 
