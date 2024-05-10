@@ -74,7 +74,6 @@ class PackPagesController extends Controller
 
     public function index(Request $request, $domain, $brand)
     {
-        PackDecorator::$skip = true;
         ContentRepository::$countFilterOptionItems = true;
         ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
 
