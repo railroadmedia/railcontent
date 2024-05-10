@@ -139,6 +139,7 @@ class ContentService
         $cached = Cache::store('redis')->get($cacheKey);
         if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
             $recommendations = $cached;
+            Log::info('Retrieving recommendations from Cache for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
         } else {
             Log::info('Retrieving recommendations from Huggingface for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
             $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections, $useFastImplementation);
