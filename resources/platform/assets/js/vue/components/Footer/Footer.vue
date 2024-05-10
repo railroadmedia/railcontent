@@ -30,9 +30,15 @@ const currentYear = computed(() => {
       <div class="tw-flex md:tw-px-4 tw-text-xs tw-text-gray-[#3F3F46] dark:tw-text-[#9EC0DC] tw-justify-center tw-w-full tw-items-center ">
         <span class="tw-hidden lg:tw-block tw-mr-1 tw-py-2">Musora Media, Inc. © {{ currentYear }} </span>
         <ul class="tw-flex tw-items-center tw-text-xs">
-          <li class="tw-mx-1"><a :href="`/terms-of-service`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
-          <li class="tw-mx-1"><a :href="`/privacy-policy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
-          <li v-if="brand === 'drumeo'" class="tw-mx-1 tw-text-center"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Legacy Resources</a></li>/
+          <li class="tw-mx-1"><a :href="`/terms`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
+          <li class="tw-mx-1"><a :href="`/privacy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
+          <template v-if="brand === 'drumeo'">
+            <li class="tw-mx-1 tw-text-center">
+              <a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">
+                Legacy Resources
+              </a>
+            </li>/
+          </template>
           <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Support</a></li>/
           <li class="tw-mx-1"><a :href="`/${brand}/student-experience-studies`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Student Experience Studies</a></li>/
           <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Logout</a></li>

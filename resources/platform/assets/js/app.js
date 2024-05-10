@@ -29,21 +29,14 @@ import Cohort from './vue/Views/Cohort';
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
 import PageContainer from './vue/components/PageContainer/PageContainer.vue';
-import CatalogSection from './vue/components/CatalogSection/CatalogSection.vue';
 import CatalogueCardContainer from './vue/components/Catalogue/CatalogueCardContainer.vue';
-import StatsSection from './vue/components/StatsSection/StatsSection.vue';
 import HeaderCarousel from './vue/components/HeaderCarousel/HeaderCarousel.vue'
 import StaticHeader from './vue/components/HeaderCarousel/StaticHeader.vue'
-import TriggerBanner from './vue/components/Onboarding/TriggerBanner.vue';
 import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
-import InfoModal from './vue/components/Modal/InfoModal.vue';
-import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
-import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
-import CollectionFilterWrapper from './vue/components/Filter/CollectionFilterWrapper';
 import CollectionWrapper from './vue/components/CollectionWrapper/CollectionWrapper';
 import ChildCollectionPage from './vue/components/CollectionPage/ChildCollectionPage';
 import PageHeader from './vue/components/PageHeader/PageHeader'
@@ -67,17 +60,13 @@ import './vue/vuesora/assets/js/third-party/add-event-atc';
 
 //Vuesora Components
 import CoachEvent from './vue/vuesora/components/Coaches/CoachEvent.vue';
-import AddEventModal from './vue/vuesora/components/AddEvent/AddEventModal.vue';
 import ContentCatalogue from './vue/vuesora/views/catalogues/ContentCatalogue.vue';
 import PlayAlongs from './vue/vuesora/views/play-alongs/PlayAlongs.vue';
-import ContentCatalogueContainer from './vue/vuesora/views/catalogues/ContentCatalogueContainer.vue';
 import NotificationsTable from './vue/vuesora/views/notifications/NotificationsTable.vue';
-import PaymentMethods from './vue/vuesora/views/payment-methods/PaymentMethods.vue';
 import AssignmentsContainer from './vue/vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 import ContentAssignment from './vue/vuesora/components/ContentAssignment/ContentAssignment.vue';
 import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
 import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
-import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
@@ -256,31 +245,20 @@ app.component('AppContainer', AppContainer)
     .component('Home', Home)
     .component('HeaderCarousel', HeaderCarousel)
     .component('StaticHeader', StaticHeader)
-    .component('CatalogSection', CatalogSection)
-    .component('StatsSection', StatsSection)
     .component('CoachEvent', CoachEvent)
-    .component('ContentCatalogueContainer', ContentCatalogueContainer)
-    .component('TriggerBanner', TriggerBanner)
     .component('LoginForm', LoginForm)
     .component('ResetPassForm', ResetPassForm)
     .component('NotificationsTable', NotificationsTable)
-    .component('PaymentMethods', PaymentMethods)
     .component('MusoraIcon', MusoraIcon)
     .component('LegacyLoops', LegacyLoops)
     .component('ContentCatalogue', ContentCatalogue)
     .component('PlayAlongs', PlayAlongs)
     .component('GearCarousel', GearCarousel)
     .component('VideoResources', VideoResources)
-    .component('ContentLessonActionButtons', ContentLessonActionButtons)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
-    .component('AddEventModal', AddEventModal)
-    .component('InfoModal', InfoModal)
-    .component('SoundSlice', SoundSlice)
-    .component('CohortBanner', CohortBanner)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
-    .component('CollectionFilterWrapper', CollectionFilterWrapper)
     .component('CollectionWrapper', CollectionWrapper)
     .component('ChildCollectionPage', ChildCollectionPage)
     .component('Workouts', Workouts)
@@ -298,20 +276,12 @@ app.component('AppContainer', AppContainer)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
     .component('MiniCatalogueSection', MiniCatalogueSection)
-    // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */
             `./vue/Views/PlaylistPlayback.vue`
-        )
-    ))
-
-    .component('MembershipUpdate', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "membership-update-" */
-            `./vue/components/Membership/MembershipUpdate.vue`
         )
     ))
 
@@ -343,13 +313,6 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
-    .component('PianoBackingTracks', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "piano-backing-tracks" */
-            './vue/vuesora/components/PianoBackingTracks'
-        )
-    ))
-
     .component('StudentReviewForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "student-review-form-iframe" */
@@ -368,13 +331,6 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "comments-catalogue-component" */
             './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue'
-        )
-    ))
-
-    .component('OrderForm', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "order-form" */
-            './vue/vuesora/views/order-form/OrderForm.vue'
         )
     ))
 
@@ -482,31 +438,13 @@ app.component('AppContainer', AppContainer)
             './vue/vuesora/components/EmailForm/EmailForm.vue'
         )
     ))
-
-    .component('PlaylistHeader', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "playlist-header" */
-            `./vue/components/Playlists/Playlist/PlaylistHeader.vue`
-        )
-    ))
-    .component('PlaylistCatalog', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "playlist-collection-catalog" */
-            `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
-        )
-    ))
     .component('Breadcrumb', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "breadcrumb" */
             `./vue/components/Breadcrumb/Breadcrumb.vue`
         )
     ))
-    .component('PlaylistCollectionCatalog', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "playlist-collection-catalog" */
-            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionCatalog.vue`
-        )
-    ))
+
 
 app.directive('click-outside', {
     mounted(el, binding, vnode) {

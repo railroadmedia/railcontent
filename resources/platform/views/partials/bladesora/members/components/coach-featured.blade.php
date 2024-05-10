@@ -1,5 +1,5 @@
 @if ($hasFeaturedCoaches)
-    <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-[24px]">
+    <div class="tw-px-4 md:tw-px-8 tw-mb-[30px]">
         <div class="tw-flex tw-flex-row tw-mb-3">
             <div class="tw-flex tw-flex-col tw-flex-grow">
                 <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
@@ -16,7 +16,6 @@
                         $fullName = $featured->fetch('fields.name');
                         $exploded = explode(' ', $fullName);
                         $firstName = array_shift($exploded);
-
                         $currentCoach = new stdClass();
                         $currentCoach->ctaText = "Visit $firstName's Coach Page";
                         $currentCoach->description = $featured->fetch('data.short_bio.value');
@@ -25,7 +24,6 @@
                         $currentCoach->topSubtitle = $featured->fetch('data.focus_text.value');
                         $currentCoach->ctaUrl = $featured->fetch('url');
                         $currentCoach->img = "https://www.musora.com/musora-cdn/image/width=720,quality=95/".$featured->fetch('data.coach_featured_image');
-
                         array_push($formattedResults, $currentCoach);
                     @endphp
                 @endforeach
