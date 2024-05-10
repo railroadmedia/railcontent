@@ -402,7 +402,7 @@ class CustomerIoApiGateway
                 ->withMiddleware(
                     Middleware::mapRequest(
                         function (RequestInterface $request) use ($url) {
-                            Log::info('Requesting ' . $url . ' - Headers: ' . json_encode($request->getHeaders()));
+                            Log::info('CustomerIOAPIGateway: Requesting ' . $url . ' - Headers: ' . json_encode($request->getHeaders()));
                             return $request;
                         }
                     )
