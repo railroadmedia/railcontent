@@ -20,7 +20,7 @@
         </div>
 
         {{-- Continue Section --}}
-        @if($startedContentCount > 0)
+        {{-- @if($startedContentCount > 0)
             @component('partials.bladesora.members.components.home._continue-section', [
                 'brand' => brand(),
                 'hasStartedContent' => $startedContentCount > 0,
@@ -30,7 +30,7 @@
                 'startedContentJson' => $startedContentJson,
                 ])
             @endcomponent
-        @endif
+        @endif --}}
 
         @if (!empty($courses) && brand() == 'singeo')
             @include(
