@@ -6,6 +6,7 @@ use App\Modules\Content\Models\Content;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Services\ContentService;
 
 class SongDuration extends Command
@@ -48,7 +49,7 @@ class SongDuration extends Command
     {
         $start = microtime(true);
         $brand = $this->argument('brand');
-
+        Log::info("Processing SongDuration command in order to get song duration from Soundslice API");
         $query =
             Content::query()
                 ->whereHas('contentHierarchy.child', function (Builder $query) {
@@ -68,6 +69,7 @@ class SongDuration extends Command
         $queryCount = $query->count();
 
         if ($queryCount === 0) {
+            Log::info("There are no items to be updated!");
             $this->warn('There are no items to be updated!');
 
             return false;
@@ -100,15 +102,17 @@ class SongDuration extends Command
                                     $item->length_in_seconds = null;
                                     $item->save();
                                     $contentService->fillCompiledViewContentDataColumnForContentIds([$item->id]);
-                                    $this->info('slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
+                                    Log::info('Updated slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
+                                    $this->info('Updated slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
                                 }
                             } else {
-                                $this->warn('empty body pt slug '.$slug);
+                                Log::info('empty body for slug '.$slug);
                                 continue;
                             }
                         }
                         $bar->advance();
                     } catch (\Exception $e) {
+                        Log::info('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
                         $this->warn('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
                     }
 
@@ -120,6 +124,7 @@ class SongDuration extends Command
         $bar->finish();
 
         $this->newLine(2);
+        Log::info('Soundslice songs have been sucessfully updated!');
         $this->info('Soundslice songs have been sucessfully updated!');
 
         $finish = microtime(true) - $start;
