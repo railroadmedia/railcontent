@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
  * Abstract class to represent a document type's schema in Sanity
@@ -15,18 +16,22 @@ abstract class BaseSanityModel
     public ?string $icon;
     /** @var array<Field> */
     public array $fields;
+    /** @var array<Group>|null */
+    public ?array $groups;
 
     /**
      * @param  string  $name
      * @param  string  $title
      * @param  array<Field>  $fields
+     * @param  array<Group>|null  $groups
      * @param  string|null  $icon
      */
-    public function __construct(string $name, string $title, array $fields, ?string $icon = null)
+    public function __construct(string $name, string $title, array $fields, ?array $groups = null, ?string $icon = null)
     {
         $this->name = $name;
         $this->title = $title;
         $this->fields = $fields;
+        $this->groups = $groups;
         $this->icon = $icon;
     }
 
@@ -37,13 +42,20 @@ abstract class BaseSanityModel
      */
     public function toArray(): array
     {
-        return [
-            'type' => 'document',
-            'name' => 'post',
-            'title' => 'Post',
+        $required = [
+            'type' => $this->type,
+            'name' => $this->name,
+            'title' => $this->title,
             'fields' => array_map(function (Field $field) {
                 return $field->toArray();
             }, $this->fields)
         ];
+        $optional = [];
+        if ($this->groups) {
+            $optional['groups'] = array_map(function (Group $group) {
+                return $group->toArray();
+            }, $this->groups);
+        }
+        return array_merge($required, $optional);
     }
 }

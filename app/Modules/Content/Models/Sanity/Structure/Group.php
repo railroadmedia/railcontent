@@ -7,6 +7,20 @@ namespace App\Modules\Content\Models\Sanity\Structure;
  */
 class Group
 {
-    public string $name;
-    public ?string $title;
+    public function __construct(public string $name, public string $title)
+    {
+    }
+
+    /**
+     * Get the array-formatted values for this group, so that it can be rendered as part of the Sanity document type
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'title' => $this->title
+        ];
+    }
 }
