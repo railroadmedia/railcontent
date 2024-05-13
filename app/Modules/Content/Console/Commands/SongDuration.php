@@ -2,10 +2,14 @@
 
 namespace App\Modules\Content\Console\Commands;
 
+use App\Modules\Content\Jobs\ImportSongDurationFromSoundslice;
 use App\Modules\Content\Models\Content;
+use Carbon\Carbon;
+use Illuminate\Bus\Batch;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -79,48 +83,26 @@ class SongDuration extends Command
         $this->newLine();
         $bar = $this->output->createProgressBar($queryCount);
         $bar->start();
+        $batchSize = 50;
+        $songs = $query->orderBy('railcontent_content.id', 'desc');
+        $jobs = [];
 
-        $query->orderBy('railcontent_content.id', 'desc')
-            ->chunk(50, function ($items) use ($bar, $contentService) {
-                $client = new \GuzzleHttp\Client();
-                $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
-                foreach ($items as $item) {
-                    $slug = $item->contentHierarchy->child->soundslice_slug;
+        $songs->chunk($batchSize, function ($song) use (&$jobs, $brand) {
+            $firstSongId = $song->first()->id;
+            $lastSongId = $song->last()->id;
+            $jobs[] = new ImportSongDurationFromSoundslice($firstSongId, $lastSongId, $brand);
+        });
 
-                    try {
-                        if($slug != '') {
-                            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
-                                'auth' => $auth,
-                            ]);
-                            $body = json_decode($response->getBody(), true);
+        $startAt = Carbon::now();
+        $batch = Bus::batch($jobs)
+            ->then(function (Batch $batch) use ($startAt) {
+                Log::info(sprintf("ImportSongDurationFromSoundslice: completed in %s seconds", $startAt->diffInSeconds()));
+            })->catch(function (Batch $batch, Throwable $e) {
+                Log::error($e->getMessage());
+            })
+            ->onQueue('command')
+            ->dispatch();
 
-                            if (!empty($body)) {
-                                $duration = \Arr::last($body)['cropped_duration'] ?? \Arr::first($body)['cropped_duration'] ?? 0;
-
-                                if($duration > 0) {
-                                    $item->setLengthInSeconds(round($duration));
-                                    $item->length_in_seconds = null;
-                                    $item->save();
-                                    $contentService->fillCompiledViewContentDataColumnForContentIds([$item->id]);
-                                    Log::info('Updated slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
-                                    $this->info('Updated slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
-                                }
-                            } else {
-                                Log::info('empty body for slug '.$slug);
-                                continue;
-                            }
-                        }
-                        $bar->advance();
-                    } catch (\Exception $e) {
-                        if($e->getCode() == 429){
-                            Log::info('Too Many Requests, sleep for 60 s');
-                            sleep(60);
-                        }
-                        Log::info('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
-                        $this->warn('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
-                    }
-                }
-            });
 
         $bar->finish();
 
