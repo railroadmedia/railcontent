@@ -51,7 +51,6 @@ class ContentService
 
 
     public $idContentCache = [];
-    private static LocalMutex $recSysMutex;
 
         /**
      * @param ContentRepository $contentRepository
@@ -83,7 +82,6 @@ class ContentService
         private ContentVideoRepository $contentVideoRepository,
         private RecommendationService $recommendationService,
     ) {
-        ContentService::$recSysMutex = new LocalMutex();
     }
 
     /**
@@ -113,15 +111,15 @@ class ContentService
 
 
     /**
-     * @param $userId -
-     * @param $brand -
+     * @param string|int $userId -
+     * @param string $brand -
      * @param array[RecommenderSection] $sections - sections to include in the result
-     * @param $pageSize -
-     * @param $page -
+     * @param int $pageSize -
+     * @param int $page -
      * @param array $groupByForLessonsPage - Which RecommenderSection to bundle in a groupby filter
      * @return ContentFilterResultsEntity -
      */
-    public function getRecommendedContent($userId, $brand, array $sections=[], $pageSize=6, $page=1, array $groupByForLessonsPage = [])
+    public function getRecommendedContent(string|int $userId, string $brand, array $sections=[], int $pageSize=6, int $page=1, array $groupByForLessonsPage = [])
     {
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
         $useCaching = config('railcontent.recsys.use_caching');
