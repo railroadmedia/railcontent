@@ -6,6 +6,7 @@
 
 @section('content')
     <home
+        :is-pack-only="false"
         account-url="{{ user()->getDashboardUrl() }}"
         calendar-id="{{ $calendarId }}"
         :carousel="{{ json_encode($carousel) }}"
@@ -30,9 +31,7 @@
         new-content-url="{{ url()->route('platform.new-lessons') }}"
         next-learning-path-level="{{ user()->getMethodLevel() }}"
         :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-        @feature('recsys')
-            :recommended-content="{{ $recommendedContentJson }}"
-        @endfeature
+        :recommended-content="{{ $recommendedContentJson }}"
         recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
         :started-content="{{ $startedContentJson }}"
         :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
