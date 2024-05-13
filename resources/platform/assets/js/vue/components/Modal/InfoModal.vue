@@ -76,7 +76,7 @@ onUnmounted(() => {
           "
         >
           <h3 v-if="title && title.length" class="tw-mb-[24px] tw-text-center tw-w-full tw-text-black dark:tw-text-white tw-font-bold">{{ title }}</h3>
-          <button @click="onClose" class="tw-absolute tw-right-[12px] tw-top-[12px] tw-text-[#000C17] dark:tw-text-white">
+          <button @click="onClose" class="tw-absolute tw-right-[12px] tw-top-[12px] tw-text-[#000C17] dark:tw-text-white tw-z-20">
             <XIcon class="tw-h-[30px] tw-w-[30px]" />
           </button>
         </div>
