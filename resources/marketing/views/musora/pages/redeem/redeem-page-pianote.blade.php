@@ -7,6 +7,8 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color:transparent;
@@ -190,55 +192,60 @@
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
 
-            <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
+            <form x-data="redeemForm" id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 {{ csrf_field() }}
                 <input type="hidden" name="credentials_type" value="new">
                 <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
                 <div class="container mx-auto clearfix">
                     <div class="flex flex-wrap w-full">
                         <p class="w-full input-describer">Code</p>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code1') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code2') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code3') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code4') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code5') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code6') }}">
-                        </div>
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="code" maxlength="24" value="" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" />
+                        <span class="text-xs text-[#EF4444]" x-show="errors.code" x-text="errors.code"></span>
+{{--                        <div class="w-1/6">--}}
+{{--                            <input class="w-full code-input" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX"--}}
+{{--                                   value="{{ old('code1') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="w-1/6">--}}
+{{--                            <input class="w-full code-input" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX"--}}
+{{--                                   value="{{ old('code2') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="w-1/6">--}}
+{{--                            <input class="w-full code-input" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX"--}}
+{{--                                   value="{{ old('code3') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="w-1/6">--}}
+{{--                            <input class="w-full code-input" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX"--}}
+{{--                                   value="{{ old('code4') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="w-1/6">--}}
+{{--                            <input class="w-full code-input" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX"--}}
+{{--                                   value="{{ old('code5') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="w-1/6">--}}
+{{--                            <input class="w-full code-input" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX"--}}
+{{--                                   value="{{ old('code6') }}">--}}
+{{--                        </div>--}}
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Email</p>
-                        <input class="default-form-field" type="text" id="email" name="email" placeholder="Email"
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email"
                                value="{{ old('email') }}">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Create A Password</p>
-                        <input class="default-form-field" type="password" id="password" name="password"
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password"
                                placeholder="Password" value="">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Confirm Password</p>
-                        <input class="default-form-field" type="password" id="password_confirmation"
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.passwordCheck }" type="password" id="password_confirmation"
                                name="password_confirmation" placeholder="Password Confirm" value="">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
                     </div>
                     <div class="w-full">
-                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;"/>
+                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;" @click.prevent="submitRedeem" />
                     </div>
                 </div>
             </form>
@@ -260,7 +267,7 @@
             @endforeach
 
 
-            <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
+            <form id="commentform" x-data="redeemForm" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 <input type="hidden" name="credentials_type" value="existing">
                 <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
                 {{ csrf_field() }}
@@ -268,43 +275,23 @@
                 <div class="container mx-auto  clearfix">
                     <div class="flex flex-wrap w-full">
                         <p class="w-full input-describer">Code</p>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code1') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code2') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code3') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code4') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code5') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code6') }}">
-                        </div>
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="access_code" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" maxlength="24" value="" />
+                        <span class="text-xs text-[#EF4444]" x-show="errors.code" x-text="errors.code"></span>
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Email</p>
-                        <input class="default-form-field" type="text" id="email" name="user_email"
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="user_email"
                                placeholder="Email/Username" value="{{ old('user_email') }}">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Password</p>
-                        <input class="default-form-field" type="password" id="password" name="user_password"
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="user_password"
                                placeholder="Password" value="">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
                     </div>
                     <div class="w-full">
-                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;"/>
+                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;" @click.prevent="submitRedeem" />
                     </div>
                 </div>
             </form>
@@ -324,31 +311,9 @@
 </div>
     @include('pianote.sales.partials._footer')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $('.code-input').bind(
-                    'paste', function (e) {
-                        var value = e.originalEvent.clipboardData.getData('text');
-                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                        for (var i = 0; i < chunks.length; i++) {
-                            $('.code-input').eq(i).val(chunks[i]);
-                        }
-                    }
-                ).bind(
-                    'input',
-                    function (e) {
-                        console.log($(this).val().length);
-                        if ($(this).val().length == 4) {
-                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                        }
-                    }
-                );
-            }
-        );
-    </script>
 
+    @include('_partials.components.forms.redeem-form-script', [
+        'existingMember' => !$newAccount
+    ])
 @stop

@@ -1,4 +1,6 @@
-<form id="commentform" name="drumeo" method="post"
+<form
+    id="commentform" name="drumeo" method="post"
+    x-data="redeemForm"
     @if(empty($existing)) action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" @else action="{{ URL::route('access-codes.form-claim') }}" @endif
 >
     @php
@@ -14,38 +16,27 @@
     @endif
     <div class="flex flex-wrap">
         <p class="w-full input-describer">Code</p>
-        <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[0]}}" @else value="{{-- Input::old('code1') --}}" @endif>
-        </div>
-        <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[1]}}" @else value="{{-- Input::old('code2') --}}" @endif>
-        </div>
-        <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[2]}}" @else value="{{-- Input::old('code3') --}}" @endif>
-        </div>
-        <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[3]}}" @else value="{{-- Input::old('code4') --}}" @endif>
-        </div>
-        <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[4]}}" @else value="{{-- Input::old('code5') --}}" @endif>
-        </div>
-        <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[5]}}" @else value="{{-- Input::old('code6') --}}" @endif>
-        </div>
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="access_code" maxlength="24" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" value="" />
+        <span class="text-xs text-[#EF4444]" x-show="errors.code" x-text="errors.code"></span>
     </div>
     @if(empty($existing))
         <p class="input-describer">Email Address</p>
-        <input class="default-form-field" type="text" id="email" name="email" placeholder="Email Address" value="{{-- Input::old('email') --}}">
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email Address" value="{{-- Input::old('email') --}}">
+        <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
         <p class="input-describer">Password (min. 8 characters)</p>
-        <input class="default-form-field" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="">
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="">
+        <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
         <p class="input-describer">Confirm Password</p>
-        <input class="default-form-field" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
-        <input name="button" type="submit" id="button" class="apply hover:opacity-80" value="Get Started"/>
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.passwordCheck }" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
+        <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
+        <input name="button" type="submit" id="button" class="apply hover:opacity-80" @click.prevent="submitRedeem" value="Get Started"/>
     @else
         <p class="input-describer">Email</p>
-        <input class="default-form-field" type="text" id="email" name="user_email" placeholder="Email/Username" value="{{-- Input::old('user_email') --}}">
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="user_email" placeholder="Email/Username" value="{{-- Input::old('user_email') --}}">
+        <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
         <p class="input-describer">Password</p>
-        <input class="default-form-field" type="password" id="password" name="user_password" placeholder="Password" value="">
-        <input name="button" type="submit" id="button" class="apply hover:opacity-80" value="Click To Redeem &raquo;"/>
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="user_password" placeholder="Password" value="">
+        <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
+        <input name="button" type="submit" id="button" class="apply hover:opacity-80" @click.prevent="submitRedeem" value="Click To Redeem &raquo;"/>
     @endif
 </form>
