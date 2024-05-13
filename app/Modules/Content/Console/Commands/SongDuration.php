@@ -15,7 +15,7 @@ class SongDuration extends Command
      *
      * @var string
      */
-    protected $signature = 'SongDuration';
+    protected $signature = 'SongDuration {brand=drumeo}';
 
     /**
      * The console command description.
@@ -47,6 +47,7 @@ class SongDuration extends Command
     public function handle(ContentService $contentService)
     {
         $start = microtime(true);
+        $brand = $this->argument('brand');
 
         $query =
             Content::query()
@@ -55,7 +56,7 @@ class SongDuration extends Command
                 })
                 ->where('railcontent_content.status', '!=', "deleted")
                 ->where('railcontent_content.status', '!=', "draft")
-                ->where('railcontent_content.brand', '=', 'pianote')
+                ->where('railcontent_content.brand', '=', $brand)
                 ->whereNotExists(function ($query) {
                     $query->select(\DB::raw(1))
                         ->from('railcontent_content_fields')
