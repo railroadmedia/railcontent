@@ -112,13 +112,14 @@ class SongDuration extends Command
                         }
                         $bar->advance();
                     } catch (\Exception $e) {
+                        if($e->getCode() == 429){
+                            Log::info('Too Many Requests, sleep for 60 s');
+                            sleep(60);
+                        }
                         Log::info('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
                         $this->warn('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
                     }
-
-
                 }
-                sleep(20);
             });
 
         $bar->finish();
