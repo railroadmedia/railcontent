@@ -24,25 +24,10 @@
 
     const config = defineConfig({
         plugins: [deskTool()],
-        projectId: "4032r8py",
-        dataset: "production",
-        basePath: "/admin/studio",
-        schema: {
-            types: [
-                {
-                    type: "document",
-                    name: "post",
-                    title: "Post",
-                    fields: [
-                        {
-                            type: "string",
-                            name: "title",
-                            title: "Title"
-                        }
-                    ]
-                }
-            ]
-        }
+        projectId: "{{$projectId}}",
+        dataset: "{{$dataset}}",
+        basePath: "{{$basePath}}",
+        schema: {!! $schema !!}
     });
     renderStudio(document.getElementById("app"), config);
 </script>
