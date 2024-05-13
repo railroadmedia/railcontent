@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.306.1",
+            "version": "3.306.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "99e13a3647edffba9110948acc85052e3169e46a"
+                "reference": "0de11adba8f174a76346c9dbb175c2030ff5c8f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/99e13a3647edffba9110948acc85052e3169e46a",
-                "reference": "99e13a3647edffba9110948acc85052e3169e46a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0de11adba8f174a76346c9dbb175c2030ff5c8f2",
+                "reference": "0de11adba8f174a76346c9dbb175c2030ff5c8f2",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.306.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.306.2"
             },
-            "time": "2024-05-07T18:11:42+00:00"
+            "time": "2024-05-08T18:07:54+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -10374,16 +10374,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.77",
+            "version": "v2.1.80",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "32f0089773f2d7cb199377e1bc026a293c659fe7"
+                "reference": "5deca69405c380e07871bc3f79a71ed09b5c04ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/32f0089773f2d7cb199377e1bc026a293c659fe7",
-                "reference": "32f0089773f2d7cb199377e1bc026a293c659fe7",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5deca69405c380e07871bc3f79a71ed09b5c04ce",
+                "reference": "5deca69405c380e07871bc3f79a71ed09b5c04ce",
                 "shasum": ""
             },
             "require": {
@@ -10438,9 +10438,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.77"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.80"
             },
-            "time": "2024-05-06T17:42:57+00:00"
+            "time": "2024-05-10T20:41:39+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -19732,5 +19732,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.6.0"
 }

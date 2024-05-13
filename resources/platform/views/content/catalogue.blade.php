@@ -97,6 +97,40 @@
             ];
         }
     }
+    else if ($catalogueMeta['name'] == 'Drumeo Monthly Collaborations') {
+        $headerData['type'] = 'student-collaborations';
+        $headerData['title'] = 'Drumeo Monthly Collaborations';
+        $headerData['iconName'] = 'academic-cap-filled';
+        $headerData['description'] = "Collaborate with the community with Drumeo Monthly Collaborations! Each month a new Play-Along is chosen and members are tasked to submit their videos playing along to the song. At the end of each month, every video is joined together to create a single performance!";
+        if ($brand === 'drumeo') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'What is Student Collaboration?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/448684113',
+                    ]
+                ],
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'How to Create Your Video?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/448684140',
+                    ]
+                ],
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Submit A Video',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSdRIO4-j89ItSXadApA5Q-70Nz1ZMIURvfPfrFZB0olOyYdmw/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        }
+    }
     else if ($catalogueMeta['name'] == 'Student Reviews') {
         $headerData['type'] = 'student-review';
         $headerData['title'] = 'Student Reviews';
@@ -256,13 +290,7 @@
 
 @section('content')
     @if($lessonType === 'Recommendation')
-        @include('partials.bladesora.members.navigation.breadcrumbs', [
-            "pages" => [
-                [
-                    "title" => 'Inspired By Your Activity',
-                ],
-            ]
-        ])
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
 
         <div class="tw-container tw-mx-auto tw-mt-[30px] tw-px-4 lg:tw-px-8">
             <div class="tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-items-start tw-flex tw-justify-between tw-pb-5">
@@ -282,10 +310,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
-                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-mr-1"></musora-icon>
-                    Experimental Feature
-                </a> --}}
             </div>
         </div>
     @else
@@ -340,65 +364,6 @@
             </div>
         </section>
     @endif
-
-{{--    @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent)--}}
-{{--        && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))--}}
-{{--        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">--}}
-{{--            <div class="tw-flex tw-flex-col @if($showInProgress) tw-mt-[14px] lg:tw-mt-[6px] @else tw-mt-[30px] @endif">--}}
-{{--                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">--}}
-{{--                    <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">--}}
-{{--                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">--}}
-{{--                            All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>--}}
-{{--                    </div>--}}
-{{--                    <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-0">--}}
-{{--                        <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="addToCalendarModal">--}}
-{{--                            <i class="fas fa-calendar-plus mr-1"></i>--}}
-{{--                            Subscribe to Calendar--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <add-event-modal--}}
-{{--                modal-id="addToCalendarModal"--}}
-{{--                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] ?? null }}"--}}
-{{--                theme-color="{{ $brand }}"--}}
-{{--                toggleSubscribe="toggleSubscribe"--}}
-{{--            ></add-event-modal>--}}
-{{--        </div>--}}
-{{--    @else--}}
-{{--        @if( $catalogueMeta['name'] !== "Play Alongs" || $catalogueMeta['name'] === "Play Alongs" && $brand === "guitareo" )--}}
-{{--            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">--}}
-{{--                <div class="tw-flex tw-flex-col @if($showInProgress) tw-mt-[14px] lg:tw-mt-[6px] @else tw-mt-[30px] @endif">--}}
-{{--                    <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">--}}
-{{--                        <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">--}}
-{{--                            <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">--}}
-{{--                                All--}}
-{{--                                @if( !empty($catalogueMeta['shortname']) && $catalogueMeta['shortname'] === 'Podcast')--}}
-{{--                                    Episodes --}}{{-- Change Podcast Name}} --}}
-{{--                                @else--}}
-{{--                                    {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}--}}
-{{--                                @endif--}}
-{{--                            </h1>--}}
-{{--                        </div>--}}
-{{--                        @if( $catalogueMeta['name'] !== "Songs" && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]) )--}}
-{{--                            <div class="tw-flex tw-flex-col">--}}
-{{--                                <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="addToCalendarModal">--}}
-{{--                                    <i class="fas fa-calendar-plus mr-1"></i>--}}
-{{--                                    Subscribe to Calendar--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                            <add-event-modal--}}
-{{--                                modal-id="addToCalendarModal"--}}
-{{--                                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"--}}
-{{--                                theme-color="{{ $brand }}"--}}
-{{--                                toggleSubscribe="toggleSubscribe"--}}
-{{--                            ></add-event-modal>--}}
-{{--                        @endif--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endif--}}
-{{--    @endif--}}
 
     <div class="tw-container tw-mx-auto tw-px-4 lg:tw-px-8 tw-mt-[30px] dark:tw-text-white">
         @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
