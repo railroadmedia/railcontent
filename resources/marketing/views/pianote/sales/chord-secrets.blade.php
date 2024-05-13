@@ -76,8 +76,8 @@
         </div>
     </section>
     <div class="sticky-trigger block"></div>
-    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true"
-        class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide"style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+    <a href="#customize-anchor"
+        class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
         {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE BONUSES *</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
@@ -174,19 +174,20 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @php
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[music-theory-posters]=1&products[little-book-chord]=1&products[easy-chords]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=welcome-offer'
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[music-theory-posters]=1&products[little-book-chord]=1&products[easy-chords]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=welcome-offer';
+        $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[easy-chords]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=welcome-offer'
     @endphp
-    <div style="background:linear-gradient(to bottom, #07233E, #0C1524);">
+    <div style="background:linear-gradient(to left, #F61A30, #900068);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
             <div class="container mx-auto relative z-50  max-w-4xl ">
                 <div class="w-full">
-                    <img class="h-10 mb-2" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
+                    <img class="h-10 mb-2" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-white.png">
                    <br>
                     <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
-                        THE <span class="text-pianote">EASY</span> WAY<br class="sm:hidden"> TO PLAY<br class="hidden sm:inline"> <span class="relative inline-block">YOUR FAVORITE SONGS.<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>
+                        THE <span class="text-musora">EASY</span> WAY<br class="sm:hidden"> TO PLAY<br class="hidden sm:inline"> <span class="relative inline-block">YOUR FAVORITE SONGS.</span>
                     </h1>
-                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2 text-musora">Save 25% on your first year<br class="sm:hidden"> + get $615 in free bonuses.</h4>
-                    <a class="join my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                    <h3 class="leading-tight mt-4 sm:mt-5 mb-2 text-musora">Save 25% on your first year<br class="sm:hidden"> + get $615 in free bonuses.</h3>
+                    <a class="join musora my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                         GET STARTED
                     </a>
                     <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">$240</s>
@@ -223,7 +224,7 @@
                             ],
                             [
                                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                                'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
+                                'description' => 'Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. ',
                                 'price' => floatval($productPrices['easy-chords']->price),
                             ],
                             [
@@ -262,7 +263,7 @@
                                 <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                     <div
                                         x-ref="front"
-                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                        class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                         style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                         @if(!empty($bonus['badge']))
                                             <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
@@ -285,7 +286,7 @@
                                     </div>
                                     <div
                                         x-ref="back"
-                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                        class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
                                         style="backface-visibility: hidden;"
                                     >
                                         <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
@@ -301,9 +302,9 @@
                                         <s class="opacity-40">${{ $bonus['price'] }}</s>
                                     @endif
                                     @if(!empty($bonus['customText']))
-                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>
+                                        <strong class="text-musora">{{ $bonus['customText'] }}</strong>
                                     @else
-                                        <strong class="text-pianote">FREE</strong>
+                                        <strong class="text-musora">FREE</strong>
                                     @endif
                                 <br>
                                 <em>
@@ -321,12 +322,12 @@
                 <h2 class="leading-tight mt-6 mb-1">
                     <s class="opacity-50">$240</s> <strong>$180</strong>
                 </h2>
-                <p class="text-sm mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.</p>
-                <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                <p class="mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.</p>
+                <a class="join musora mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                     GET STARTED
                 </a>
                 <br>
-                <a class="inline-block opacity-70 mt-2" href="{{ $buttonLink }}"><p><u><em>OR get just the membership (no physical bonuses).</em></u></p></a>
+                <a class="inline-block" href="{{ $buttonLink2 }}"><p><u><em>OR get just the membership (no physical bonuses).</em></u></p></a>
             </div>
         </section>
     </div>
