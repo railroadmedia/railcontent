@@ -8,6 +8,7 @@ use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use App\Modules\Ecommerce\Requests\AccessCodeClaimRequest;
+use Exception;
 
 class AccessCodeController extends Controller
 {
@@ -42,7 +43,17 @@ class AccessCodeController extends Controller
 
         $rawAccessCode = $request->get('access_code');
 
-        $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
+        try {
+            $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
+        } catch (Exception $e) {
+            redirect()
+                ->back()
+                ->withInput()
+                ->withErrors([
+                    'access-code-claimed-success' => false,
+                    'access-code-claimed-message' => $e->getMessage(),
+                ]);
+        }
 
         $this->userAuthenticationService->login($user);
 

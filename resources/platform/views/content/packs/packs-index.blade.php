@@ -1,3 +1,16 @@
+@php
+    $headerDescription = "";
+    if ($brand === "drumeo") {
+        $headerDescription = "Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on.";
+    } elseif ($brand === "pianote") {
+        $headerDescription = "Training packs help you dive deeper and build expertise in specific skills and genres, taking your piano playing to the next level in particular areas you want to focus on.";
+    } elseif ($brand === "guitareo") {
+        $headerDescription = "Training packs help you dive deeper and build expertise in specific skills and genres, taking your guitar playing to the next level in particular areas you want to focus on.";
+    } else {
+        $headerDescription = "Here you can access Musora training packs. If you've purchased access to these packs individually you’ll have lifetime access to them. If you own a Musora Membership you'll have access to these packs as long as you're a member!";
+    }
+@endphp
+
 @extends('partials.layout', ['trackingSectionName' => 'packs'])
 
 @section('meta')
@@ -5,44 +18,20 @@
 @endsection
 
 @section('content')
-
-    @component('partials._header-banner', [
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/' . $brand . '-header.jpg',
-    ])
-        @slot('content')
-            <div class="tw-flex tw-flex-col tw-pr-1">
-                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <musora-icon icon-name="box-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                        <span class="tw-text-32 tw-font-bold">Packs</span>
-                    </h1>
-                    <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
-                        @if ($brand === 'drumeo')
-                            Training packs help you dive deeper and build expertise in specific skills and genres, taking your
-                            drumming to the next level in particular areas you want to focus on.
-                        @elseif($brand === 'pianote')
-                            Training packs help you dive deeper and build expertise in specific skills and genres, taking your piano
-                            playing to the next level in particular areas you want to focus on.
-                        @elseif($brand === 'guitareo')
-                            Training packs help you dive deeper and build expertise in specific skills and genres, taking your
-                            guitar playing to the next level in particular areas you want to focus on.
-                        @else
-                            Here you can access Musora training packs. If you've purchased access to these packs individually you’ll
-                            have lifetime access to them. If you own a Musora Membership you'll have access to these packs as long
-                            as you're a member!
-                        @endif
-                    </p>
-                </div>
-            </div>
-        @endslot
-    @endcomponent
-
-    <!-- <page-header
-        page-type="pack"
+    <breadcrumbs>
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([
+                [
+                    'title' => 'Packs',
+                ]
+            ]) }}"
+        ></breadcrumb>
+    <page-header
+        page-type="packs"
         title="Packs"
-        icon-name="box-filled"
-        description="Training packs help you dive deeper and build expertise in specific skills and genres, taking your drumming to the next level in particular areas you want to focus on."
-    ></page-header> -->
+        icon-name="box"
+        description="{{ $headerDescription }}"
+    ></page-header>
 
     <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] tw-px-4 lg:tw-px-8">
         <collection-wrapper

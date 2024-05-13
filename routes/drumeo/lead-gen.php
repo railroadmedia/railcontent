@@ -84,7 +84,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);
     Route::get('/for-teachers/teach-drums/', [LeadGenController::class, 'teachDrums']);
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
-    Route::get('/giveaway/', [LeadGenController::class, 'giveaway']);
+    Route::get('/win/', [LeadGenController::class, 'win']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
     Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')->where('leadgenSlug', '(.*)');

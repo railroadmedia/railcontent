@@ -28,7 +28,7 @@
                         style="width:540px;max-width:100%;"
                 >
                 {{-- todo: re-add if requested --}}
-                @if($brand==="drumeo" || $brand==="pianote")
+                @if($brand==="drumeo" || $brand==="pianote" && $learningPathSlug === 'foundations-2019' )
                     <a data-open-modal="surveyModal" class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
                         WHERE TO BEGIN &nbsp; <i class="fas fa-question-circle tw-text-base"></i>
                     </a>
@@ -91,17 +91,6 @@
                                 Start Next Lesson
                             </a>
                         </div>
-                    </div>
-                </div>
-
-                {{-- Survey Modal --}}
-                <div id="surveyModal" class="modal">
-                    <div class="flex flex-column corners-10">
-                        @if($brand === "drumeo")
-                            <div class="typeform-widget" data-url="https://form.typeform.com/to/rnPhq70s?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div>
-                        @elseif($brand === "pianote")
-                            <div class="typeform-widget" data-url="https://form.typeform.com/to/huIKxOSj?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div>
-                        @endif
                     </div>
                 </div>
 

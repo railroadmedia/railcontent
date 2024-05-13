@@ -1,18 +1,23 @@
 <template>
-    <Breadcrumb
-        :breadcrumbs="[{ title: 'My Playlists', url: `/${ brand }/playlists` }, { title: playlist['name'] }]"
-    />
+    <div class="tw-full">
+        <Breadcrumb
+            :breadcrumbs="[{ title: 'My Playlists', url: `/${ brand }/playlists` }, { title: playlist['name'] }]"
+            classOverride="tw-container tw-mx-auto tw-px-4 lg:tw-px-8"
+        />
 
-    <PlaylistHeader
-        :playlist="playlist"
-        :has-access="playlist['has_access']"
-        :lessons="lessons"
-    />
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
+            <PlaylistHeader
+                :playlist="playlist"
+                :has-access="playlist['has_access']"
+                :lessons="lessons"
+            />
+        </div>
 
-    <PlaylistCatalog
-        :has-access="playlist['has_access']"
-        :lessons="lessons"
-    />
+        <PlaylistCatalog
+            :has-access="playlist['has_access']"
+            :lessons="lessons"
+        />
+    </div>
 </template>
 
 <script setup>

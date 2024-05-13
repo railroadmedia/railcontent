@@ -42,8 +42,6 @@ const hideOnboardingBanner = () => {
       tw-relative
       tw-py-[13px]
       tw-my-4
-      tw-mx-4
-      lg:tw-mx-0
     " v-if="shouldShowBanner">
     <div
       class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-mb-[12px] lg:tw-mb-0 lg:tw-text-left tw-font-bebas-neue tw-text-[18px] lg:tw-text-[20px] 2xl:tw-text-[24px] tw-uppercase">
