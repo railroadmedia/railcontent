@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Jobs;
 
 use App\Modules\Content\Models\Content;
+use App\Modules\Ecommerce\Jobs\Shopify\Traits\LogsShopify;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,6 +22,7 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
+    use LogsShopify;
 
 
     /**
@@ -111,6 +113,14 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
             });
 
 
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getClassName(): string
+    {
+        return "ImportSongDurationFromSoundslice";
     }
 }
 
