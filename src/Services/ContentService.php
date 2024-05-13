@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use App\Modules\Content\Models\ContentUserProgress;
 use Carbon\Carbon;
-use http\Exception\InvalidArgumentException;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
@@ -15,7 +14,6 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
-use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -24,24 +22,18 @@ use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentBpmRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
-use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentInstructorRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentStyleRepository;
 use Railroad\Railcontent\Repositories\ContentTopicRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Repositories\ContentVideoRepository;
-use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
-use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Support\Collection;
 
 //use Railroad\Railcontent\Events\XPModified;
@@ -57,9 +49,10 @@ class ContentService
 
     const STATUS_DELETED = 'deleted';
 
+
     public $idContentCache = [];
 
-    /**
+        /**
      * @param ContentRepository $contentRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
@@ -118,38 +111,83 @@ class ContentService
 
 
     /**
-     *
-     *
-     * @param int user_id
-     * @param string brand
-     * @param RecommenderSection[] sections
-     * @param int limit -
-     * @return mixed|Collection|null
+     * @param string|int $userId -
+     * @param string $brand -
+     * @param array[RecommenderSection] $sections - sections to include in the result
+     * @param int $pageSize -
+     * @param int $page -
+     * @param array $groupByForLessonsPage - Which RecommenderSection to bundle in a groupby filter
+     * @return ContentFilterResultsEntity -
      */
-    public function getRecommendedContent($user_id, $brand, array $sections=[], $pageSize=6, $page=1, array $groupByForLessonsPage = [])
+    public function getRecommendedContent(string|int $userId, string $brand, array $sections=[], int $pageSize=6, int $page=1, array $groupByForLessonsPage = [])
     {
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
-        $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
-            '-',
-            array_map(function ($section) {
-                return $section->value;
-            }, $sections)
-        );
-        $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($user_id, $brand, $sectionString);
-        $cached = Cache::store('redis')->get($cacheKey);
-        if(config('railcontent.recsys.use_caching') && !empty($cached) && array_filter($cached)) {
-            $recommendations = $cached;
-            Log::info('Retrieving recommendations from Cache for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
+        $useCaching = config('railcontent.recsys.use_caching');
+        
+        if ($useCaching) {
+            $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
+                '-',
+                array_map(function ($section) {
+                    return $section->value;
+                }, $sections)
+            );
+            $identifier = implode('-', [$userId, $brand, $sectionString]);
+            $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($identifier);
+            $lockKey = 'RECSYS-LOCK-'.CacheHelper::getKeyFromArguments($identifier);
+            Cache::lock($lockKey, 15)->block(15, function () use ($userId, $brand, $sections, $useFastImplementation, $cacheKey, $identifier, & $recommendations) {
+                $cached = Cache::store('redis')->get($cacheKey);
+                if (!empty($cached) && array_filter($cached)) {
+                    $recommendations = $cached;
+                    Log::info('Retrieve recommendations from Cache for Key ' . $cacheKey . ' :' . $identifier);
+                } else {
+                    $recommendations = $this->pullRecommendations(
+                        $userId,
+                        $brand,
+                        $sections,
+                        $useFastImplementation,
+                        $cacheKey,
+                        $identifier
+                    );
+                }
+            });
         } else {
-            Log::info('Retrieving recommendations from Huggingface for Key ' . $cacheKey .' :' . $user_id . '-' . $brand . '-' . $sectionString);
-            $recommendations = $this->recommendationService->getFilteredRecommendations($user_id, $brand, $sections, $useFastImplementation);
-            $ttl = 60 * 60 * 4;
-            Cache::store('redis')
-                ->put($cacheKey, $recommendations, $ttl);
+            $recommendations = $this->pullRecommendations($userId, $brand, $sections, $useFastImplementation);
         }
+
         $filteredBySectionRecommendations = $this->filterRecommendedSections($recommendations, $sections);
-        $processedRecommendations = $this->postProcessRecommendations($filteredBySectionRecommendations, $pageSize, $page, $user_id, $groupByForLessonsPage);
+        $processedRecommendations = $this->postProcessRecommendations(
+            $filteredBySectionRecommendations,
+            $pageSize,
+            $page,
+            $userId,
+            $groupByForLessonsPage
+        );
         return $this->getContentFilterResultsFromRecommendations($processedRecommendations, $groupByForLessonsPage);
+    }
+
+    /**
+     * @param $userId
+     * @param $brand
+     * @param $sections
+     * @param $useFastImplementation -
+     * @param $cacheKey -
+     * @param $identifier -
+     * @return array|array[]
+     */
+    private function pullRecommendations($userId, $brand, $sections, $useFastImplementation, $cacheKey=null, $identifier=null)
+    {
+        $recommendations = $this->recommendationService->getFilteredRecommendations(
+            $userId,
+            $brand,
+            $sections,
+            $useFastImplementation
+        );
+        if ($cacheKey) {
+            Log::info('Retrieve recommendations from Huggingface for Key ' . $cacheKey . ' :' . $identifier);
+            $ttl = 60 * 60 * 4;
+            Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
+        }
+        return $recommendations;
     }
 
     private function filterRecommendedSections($allContent, $sections)
@@ -167,7 +205,7 @@ class ContentService
         return $content;
     }
 
-    private function postProcessRecommendations($recommendations, $pageSize, $page, $user_id, array $groupByForLessonsPage = [])
+    private function postProcessRecommendations($recommendations, $pageSize, $page, $userId, array $groupByForLessonsPage = [])
     {
         if (!$recommendations) {
             return [
@@ -178,7 +216,7 @@ class ContentService
         }
         $removeSeen = config('railcontent.recsys.remove_seen_content');
         if ($removeSeen) {
-            $recommendations = $this->removePreviousSeenRecommendations($recommendations, $user_id);
+            $recommendations = $this->removePreviousSeenRecommendations($recommendations, $userId);
         }
         if ($groupByForLessonsPage) {
             $groupedByRecommendations = [];
@@ -230,10 +268,10 @@ class ContentService
         }
     }
 
-    private function removePreviousSeenRecommendations($recommendations, $user_id)
+    private function removePreviousSeenRecommendations($recommendations, $userId)
     {
         $allkey = zipperMerge($recommendations);
-        $previouslySeenContent = ContentUserProgress::where(['user_id' => $user_id])->whereIn('content_id', $allkey)->get()->pluck('content_id');
+        $previouslySeenContent = ContentUserProgress::where(['user_id' => $userId])->whereIn('content_id', $allkey)->get()->pluck('content_id');
         if ($previouslySeenContent->count() == 0) {
             return $recommendations;
         }
