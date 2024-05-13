@@ -94,19 +94,26 @@
                 <em><strong>(No credit card required. No recurring billing. Just awesome piano lessons)</strong><br class="hidden md:inline">
                     Offer valid for new Pianote members only</em></p>
             <div class="max-w-2xl mx-auto px-4">
-                <form id="ajaxForm" accept-charset="UTF-8" action="/claim-roland-90-day-access" class="ajax-form clearfix facebook-track-lead w-full mx-auto" method="POST">
+                <form id="ajaxForm" accept-charset="UTF-8" action="/claim-roland-90-day-access" class="ajax-form clearfix facebook-track-lead w-full mx-auto" method="POST" x-data="{ submitting: false }" @submit="submitting = true">
                     <input class="w-full mb-2 text-left rounded-full py-2 px-5 text-gray-400 text-base md:text-lg" name="email" type="email" placeholder="Email Address..." required/>
-                    <button class="submit w-full transition-opacity duration-300 hover:opacity-90 uppercase cursor-pointer text-center text-white text-base md:text-lg font-bebas font-bold bg-pianote rounded-full" type="submit">
+                    <button :disabled="submitting" class="submit w-full transition-opacity duration-300 hover:opacity-90 uppercase cursor-pointer text-center text-white text-base md:text-lg font-bebas font-bold bg-pianote rounded-full" type="submit">
                         <span class="pre-add">Get Started <i class="fad fa-paper-plane"></i></span>
                         <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
                         <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
                         <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
+                        <span id="errorMessage" class="disabled hidden"><i class="fad fa-exclamation-triangle"></i></span>
                     </button>
                 </form>
                 <div class="disclaimer block opacity-70 mx-auto mt-3 max-w-lg">
                     <div class="flex w-full">
+                        <i class="fa-light fa-info-circle leading-none text-xl md:text-3xl" style="width:40px"></i>
+                        <p class="mx-auto text-left leading-tight pl-2 text-xs"><em>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</em></p>
+                    </div>
+                </div>
+                <div class="email-used-disclaimer block opacity-70 mx-auto mt-3 max-w-lg hidden">
+                    <div class="flex w-full">
                     <i class="fa-light fa-info-circle leading-none text-xl md:text-3xl" style="width:40px"></i>
-                    <p class="mx-auto text-left leading-tight pl-2 text-xs"><em>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</em></p>
+                        <p class="mx-auto text-left leading-tight pl-2 text-xs"><em>This email has already been used. Please refresh the page and enter a different email.</em></p>
                     </div>
                 </div>
                 <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
@@ -138,11 +145,26 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function (){
 
+    <script>
+        $(document).ready(function() {
             $(".ajax-form").submit(function(e) {
                 e.preventDefault();
+                var currentEmail = $(this).find('input[name="email"]').val();
+                var lastEmail = localStorage.getItem('lastEmail');
+
+                if (currentEmail === lastEmail) {
+                    $('.email-used-disclaimer').removeClass("hidden");
+                    $('.pre-add').addClass("hidden");
+                    $('.disclaimer').addClass("hidden");
+                    $('.fail').removeClass("hidden");
+                    $('.disclaimer').addClass("hidden");
+
+                    $('.submit').prop('disabled', true);
+                    return;
+                }
+
+                localStorage.setItem('lastEmail', currentEmail);
 
                 var pre = $(this).find(".pre-add"),
                     pending = $(this).find(".pending"),
@@ -172,14 +194,33 @@
                         pending.addClass("hide hidden");
                         success.removeClass("hide hidden");
                     },
-                    error: function() {
-                        submitButton.addClass("error");
-
+                    error: function(jqXHR) {
                         pending.addClass("hide hidden");
-                        fail.removeClass("hide hidden");
+
+                        if (jqXHR.status === 422) {
+                            var errorMessage = jqXHR.responseJSON.message;
+                            console.log(errorMessage);
+                            if (errorMessage === 'email.already_pianote_user') {
+                                $('#errorMessage').text('For new Pianote members only');
+                            } else if (errorMessage === 'email.code_claimed') {
+                                $('#errorMessage').text('Code has been already claimed');
+                            }
+
+                            $('.disabled').removeClass("hidden");
+                            $('.disclaimer').addClass("hidden");
+                            $('.email-used-disclaimer').removeClass("hidden");
+
+                            $('input[name="email"]').prop('disabled', true);
+                            $('.submit').removeClass('bg-pianote');
+                            $('.submit').addClass('bg-gray-500');
+                            $('.disabled').addClass('text-white');
+                        } else {
+                            fail.removeClass("hide hidden");
+                        }
                     }
                 });
             });
         });
     </script>
+   
 @endsection
