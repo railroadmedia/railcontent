@@ -123,22 +123,22 @@ class ContentService
     {
         $useFastImplementation = config('railcontent.recsys.use_fast_implementation');
         $useCaching = config('railcontent.recsys.use_caching');
-
-        $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
-            '-',
-            array_map(function ($section) {
-                return $section->value;
-            }, $sections)
-        );
-        $identifier = implode('-', [$userId, $brand, $sectionString]);
-        $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($identifier);
-        $lockKey = 'RECSYS-LOCK-'.CacheHelper::getKeyFromArguments($identifier);
+        
         if ($useCaching) {
+            $sectionString = !$useFastImplementation || count($sections) == 0 ? 'ALL' : implode(
+                '-',
+                array_map(function ($section) {
+                    return $section->value;
+                }, $sections)
+            );
+            $identifier = implode('-', [$userId, $brand, $sectionString]);
+            $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($identifier);
+            $lockKey = 'RECSYS-LOCK-'.CacheHelper::getKeyFromArguments($identifier);
             Cache::lock($lockKey, 15)->block(15, function () use ($userId, $brand, $sections, $useFastImplementation, $cacheKey, $identifier, & $recommendations) {
                 $cached = Cache::store('redis')->get($cacheKey);
                 if (!empty($cached) && array_filter($cached)) {
                     $recommendations = $cached;
-                    Log::info('Pull recommendations from Cache for Key ' . $cacheKey . ' :' . $identifier);
+                    Log::info('Retrieve recommendations from Cache for Key ' . $cacheKey . ' :' . $identifier);
                 } else {
                     $recommendations = $this->pullRecommendations(
                         $userId,
@@ -183,7 +183,7 @@ class ContentService
             $useFastImplementation
         );
         if ($cacheKey) {
-            Log::info('Pull recommendations from Huggingface for Key ' . $cacheKey . ' :' . $identifier);
+            Log::info('Retrieve recommendations from Huggingface for Key ' . $cacheKey . ' :' . $identifier);
             $ttl = 60 * 60 * 4;
             Cache::store('redis')->put($cacheKey, $recommendations, $ttl);
         }
