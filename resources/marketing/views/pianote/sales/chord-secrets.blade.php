@@ -36,8 +36,8 @@
 @section('promo-banner')
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #07233E, #0C1524);">
         <div class="container max-w-5xl mx-auto">
-            <img class="my-5 h-40 inline sm:hidden"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage-m.png"
+            <img class="mb-5 h-56 inline sm:hidden"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/620x0/filters:quality(95)/marketing/pianote/promos/may/banner-graphic.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -69,7 +69,7 @@
                 <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/september/pianote-trial-sept-promo-collage.png"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/pianote/promos/may/banner-graphic.png"
                     alt="learn playing image"
                 >
             </div>
@@ -87,7 +87,7 @@
     </a>
 
     <section class="py-8 sm:py-14 lg:py-20 relative overflow-hidden text-center customize px-5 lg:px-8 relative overflow-hidden" style="background: #fff;">
-        <div class="container mx-auto max-w-4xl">
+        <div class="container mx-auto max-w-4xl mb-14 sm:mb-0">
             <h3 class="leading-tight"><strong>Take a look at your bonuses…</strong></h3>
             <h6 class="leading-tight text-pianote mt-2 mb-5"><em>Join today and you’ll get all of these.</em></h6>
 
@@ -110,11 +110,29 @@
                         <p class="leading-tight">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
                     </div>
                 </div>
-                <div class="w-full sm:flex items-center">
+                <div class="w-full sm:flex items-center mb-12">
+                    <div class="relative flex-shrink-0">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/may/little-chord-thumb.png">
+                    </div>
+                    <div class="sm:pl-5 lg:pl-8">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/may/little-chord-logo.png">
+                        <p class="leading-tight">All popular music is chords. And we’ve compiled the top 14 chord progressions in popular music into this handy little book. You’ll get diagrams for each progression as well as notated chord pathways. Use these chords to start playing your favorite songs (or write your own).</p>
+                    </div>
+                </div>
+                <div class="w-full sm:flex items-center mb-12">
                     <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/may/power-thumb.png">
                     </div>
                     <div class="sm:pr-5 lg:pr-8">
+                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_left.png">
+                        <p class="leading-tight">You’ll get LIFETIME access to this step-by-step course showing you how to play and practice all the chords you’ll need to play the songs you love. From major and minor chords -- to sus chords and even “slash” chords, it’s your comprehensive chording course!</p>
+                    </div>
+                </div>
+                <div class="w-full sm:flex items-center">
+                    <div class="relative flex-shrink-0">
+                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
+                    </div>
+                    <div class="sm:pl-5 lg:pl-8">
                         <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords-logo.png">
                         <p class="leading-tight">Put what you learned in the webinar to use with this 30-day chording challenge. Play with Lisa every day and master your chord progressions and inversions so you can play any lead sheet with ease. All you have to do is pretty play and follow along.</p>
                     </div>
@@ -125,12 +143,12 @@
     <div class="h-5 sm:h-10 relative z-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F4F8FB calc(50% + 1px));">
     </div>
-    <section class="text-black px-5 sm:px-6 py-8 sm:py-10 lg:py-12" style="background-color:#F4F8FB;">
+    <section class="text-black px-5 sm:px-6 py-8 sm:py-10 lg:py-12 relative z-20" style="background-color:#F4F8FB;">
         <div class="container max-w-4xl mx-auto pb-10">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <img class="w-48 sm:w-64 lg:w-80 -mt-24 mb-4 sm:-mb-24 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/screen.webp"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/promos/may/live-phone.png"
                     alt="Mobile Screen with 30 Day To Better Technique">
                 <div class="flex-grow sm:pl-10">
                     <h3 class="leading-tight text-center sm:text-left py-4"><strong>LIVE Masterclass on Piano Chords.</strong></h3>
@@ -156,18 +174,18 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @php
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[digital-chords-scales-guide]=1&products[piano-chords-and-scales-guide]=1&products[easy-chords]=1&products[new-piano-players-start-here]=1&products[piano-riffs-and-fills]=1&products[song-secrets-webinar]=1&redirect=/order&locked=true&promo-code=special-discount'
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[music-theory-posters]=1&products[little-book-chord]=1&products[easy-chords]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=welcome-offer'
     @endphp
     <div style="background:linear-gradient(to bottom, #07233E, #0C1524);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
-            <div class="container mx-auto relative z-50  max-w-6xl ">
+            <div class="container mx-auto relative z-50  max-w-4xl ">
                 <div class="w-full">
                     <img class="h-10 mb-2" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png">
                    <br>
                     <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
-                        THE <span class="text-pianote">EASY</span> WAY TO PLAY<br> <span class="relative inline-block">YOUR FAVORITE SONGS<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>.
+                        THE <span class="text-pianote">EASY</span> WAY<br class="sm:hidden"> TO PLAY<br class="hidden sm:inline"> <span class="relative inline-block">YOUR FAVORITE SONGS.<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#f61a30" stroke-width="3" stroke-linecap="round"></path></svg></span>
                     </h1>
-                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2 text-musora">Save 25% on your first year + get $615 in free bonuses.</h4>
+                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2 text-musora">Save 25% on your first year<br class="sm:hidden"> + get $615 in free bonuses.</h4>
                     <a class="join my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                         GET STARTED
                     </a>
@@ -180,29 +198,49 @@
                     @php
                         $bonuses = [
                             [
-                                'image' => 'marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
-                                'title' => 'Chords & <br>Scales Book',
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
+                                'description' => 'Level up your skills with the lessons, teachers, and practice tools.',
+                                'price' => '240',
+                                'customText' => '$180/First Year',
+                            ],
+                            [
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
                                 'description' => 'Your encyclopedia of piano chords & scales.',
                                 'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                                 'shipping' => 'true'
                             ],
                             [
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/may/music-theory2.png',
+                                'description' => 'You’ll understand the Circle of 5ths, be able to read notes, and play every major and minor chord and scale with the Music Theory Poster Bundle.',
+                                'price' => '39',
+                                'shipping' => 'true'
+                            ],
+                            [
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/may/little-chords.png',
+                                'description' => 'All music is chord progressions. In this little book, we’ve compiled the top 14 chord progressions you’ll find in popular music.',
+                                'price' => '7',
+                                'shipping' => 'true'
+                            ],
+                            [
                                 'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
-                                'title' => 'Easy Chords',
                                 'description' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
                                 'price' => floatval($productPrices['easy-chords']->price),
                             ],
                             [
                                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
-                                'title' => 'The Power of Chords',
                                 'description' => 'Play the music you love using the power of chords.',
                                 'price' => floatval($productPrices['the-power-of-chords']->price),
+                            ],
+                            [
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/may/masterclass.png',
+                                'description' => 'Exclusive LIVE Masterclass with Lisa on Chording',
+                                'price' => '',
                             ],
                         ]
                     @endphp
                     @foreach($bonuses as $bonus)
                         <div
-                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
+                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"
                             x-data="{
                         flipped: false,
                     }"
@@ -224,7 +262,7 @@
                                 <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                     <div
                                         x-ref="front"
-                                        class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                        class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                         style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                         @if(!empty($bonus['badge']))
                                             <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
@@ -233,9 +271,7 @@
                                             :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
                                             x-intersect.once="lazyLoad = true">
                                             <picture class="absolute inset-0 w-full h-full object-cover">
-                                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $bonus['image'] }}"
-                                                    media="(min-width: 640px)">
-                                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/{{ $bonus['image'] }}"
+                                                <img src="{{ $bonus['image'] }}"
                                                     alt="Bonus Image"
                                                     class="w-full h-full object-cover opacity-0 transition-opacity"
                                                     loading="lazy"
@@ -249,7 +285,7 @@
                                     </div>
                                     <div
                                         x-ref="back"
-                                        class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                        class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
                                         style="backface-visibility: hidden;"
                                     >
                                         <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
@@ -260,17 +296,14 @@
                             </div>
 
                             <p class="w-full leading-normal mt-2">
-                                @if(!empty($bonus['title']))
-                                    <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
-                                @endif
-                                <span style="text-transform:uppercase; display:inline-block;">
+                                <span style="display:inline-block;">
                             @if(!empty($bonus['price']))
                                         <s class="opacity-40">${{ $bonus['price'] }}</s>
                                     @endif
                                     @if(!empty($bonus['customText']))
-                                        <strong class="text-musora">{{ $bonus['customText'] }}</strong>
+                                        <strong class="text-pianote">{{ $bonus['customText'] }}</strong>
                                     @else
-                                        <strong class="text-musora">FREE</strong>
+                                        <strong class="text-pianote">FREE</strong>
                                     @endif
                                 <br>
                                 <em>
