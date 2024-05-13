@@ -76,12 +76,12 @@
         </div>
     </section>
     <div class="sticky-trigger block"></div>
-    <a href="#customize-anchor"
-        class="promo-banner flex text-white items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+    <a href="#customize-anchor" style="background: linear-gradient(to bottom, #FFAC00, #FF5C00);"
+        class="promo-banner flex items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide">
         {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
-        <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE BONUSES *</h3>
+        <h3 class="inline-block font-bebas mx-0 pr-3">* FREE BONUSES *</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
-            <strong class="text-musora">SAVE 25%</strong> + get 5 free<br>
+            <strong class="font-black">SAVE 25%</strong> + get 5 free<br>
             bonuses (worth $615)
         </p>
     </a>
