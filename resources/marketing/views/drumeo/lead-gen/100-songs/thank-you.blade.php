@@ -47,6 +47,7 @@
 @section('body-data')
     x-data ='{
     trailer : false,
+    lazyLoad: false,
     }'
 @endsection
 

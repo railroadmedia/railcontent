@@ -97,6 +97,40 @@
             ];
         }
     }
+    else if ($catalogueMeta['name'] == 'Drumeo Monthly Collaborations') {
+        $headerData['type'] = 'student-collaborations';
+        $headerData['title'] = 'Drumeo Monthly Collaborations';
+        $headerData['iconName'] = 'academic-cap-filled';
+        $headerData['description'] = "Collaborate with the community with Drumeo Monthly Collaborations! Each month a new Play-Along is chosen and members are tasked to submit their videos playing along to the song. At the end of each month, every video is joined together to create a single performance!";
+        if ($brand === 'drumeo') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'What is Student Collaboration?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/448684113',
+                    ]
+                ],
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'How to Create Your Video?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/448684140',
+                    ]
+                ],
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Submit A Video',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSdRIO4-j89ItSXadApA5Q-70Nz1ZMIURvfPfrFZB0olOyYdmw/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        }
+    }
     else if ($catalogueMeta['name'] == 'Student Reviews') {
         $headerData['type'] = 'student-review';
         $headerData['title'] = 'Student Reviews';

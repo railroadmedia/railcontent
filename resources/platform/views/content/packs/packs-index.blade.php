@@ -18,21 +18,19 @@
 @endsection
 
 @section('content')
-    <breadcrumbs>
-        <breadcrumb
-            :breadcrumbs="{{ json_encode([
-                [
-                    'title' => 'Packs',
-                ]
-            ]) }}"
-        ></breadcrumb>
+    <breadcrumb
+        :breadcrumbs="{{ json_encode([
+            [
+                'title' => 'Packs',
+            ]
+        ]) }}"
+    ></breadcrumb>
     <page-header
         page-type="packs"
         title="Packs"
         icon-name="box"
         description="{{ $headerDescription }}"
     ></page-header>
-
     <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] tw-px-4 lg:tw-px-8">
         <collection-wrapper
             collection-type="pack"

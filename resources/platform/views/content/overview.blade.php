@@ -275,24 +275,7 @@
                 collection-type="song-pdf"
                 :pre-loaded-content="{{ $songsPdfs }}"
                 title="Songs"
-{{--                :filterable-values="{{ $something ?? [] }}"--}}
             ></collection-wrapper>
-{{--            <div class="flex flex-column">--}}
-{{--                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">--}}
-{{--                    <content-catalogue--}}
-{{--                            catalogue-type="downloads"--}}
-{{--                            theme-color="guitareo"--}}
-{{--                            brand="guitareo"--}}
-{{--                            :use-theme-color="true"--}}
-{{--                            sort-override="slug"--}}
-{{--                            :included-types="['song-pdf']"--}}
-{{--                            :filterable-values="['artist', 'style']"--}}
-{{--                            :pre-loaded-content="{{ $songsPdfs }}"--}}
-{{--                            user-id="{{ auth()->id() }}"--}}
-{{--                            :infinite-scroll="true"--}}
-{{--                    ></content-catalogue>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     @endif
 

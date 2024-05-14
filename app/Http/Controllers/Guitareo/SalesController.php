@@ -146,6 +146,11 @@ class SalesController extends BaseController
         return view('guitareo.products.rhythm-and-groove', [ 'theme' => 'guitareo' ]);
     }
 
+    public function thirtyDaysToBetterStrumming()
+    {
+        return view('guitareo.products.30-days-to-better-strumming', [ 'theme' => 'guitareo' ]);
+    }
+
     public function products(Request $request, $domain, $page = null)
     {
         return view('guitareo.products.' . $page, [ 'theme' => 'guitareo' ]);

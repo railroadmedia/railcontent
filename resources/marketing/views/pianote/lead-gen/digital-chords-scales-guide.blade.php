@@ -50,6 +50,7 @@
                             "formId" => "Pianote - Engagement - Trigger - Digital Chords And Scales - Web Form",
                     "buttonText" => "Get my book",
                     "stacked" => true,
+                    "nameInput" => true,
                     'inputBorder' => '1px solid #CCC',
                 ])
             </div>
@@ -126,6 +127,7 @@
                             "formId" => "Pianote - Engagement - Trigger - Digital Chords And Scales - Web Form2",
                     "buttonText" => "Get my book",
                     "stacked" => true,
+                    "nameInput" => true,
                     'inputBorder' => '1px solid #CCC',
                 ])
             </div>
