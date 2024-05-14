@@ -100,7 +100,6 @@
 
         
         <template v-if="isPackOnlyBoolean">
-
             <!-- Your Courses section : Packs Only -->
             <div v-if="courseDataObject.data.length">
                 <div class="tw-flex tw-flex-col tw-w-full">
@@ -118,17 +117,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- @if (!empty($courses) && brand() == 'singeo')
-                    @include(
-                        'partials.bladesora.members.components.home._courses-section',
-                        [
-                            'brand' => brand(),
-                            'contentEndpoint' => '/railcontent/content',
-                            'courseContentJson' => $courses,
-                            'allCoursesUrl' => '/'.$brand.'/courses',
-                        ]
-                    )
-                @endif -->
+                <collection-wrapper
+                    collection-type="course"
+                    :hide-controls-section="true"
+                    :pre-loaded-content="courseDataObject"
+                ></collection-wrapper>
             </div>
 
             <!-- Your Packs section : Packs Only -->
@@ -158,7 +151,6 @@
                     :without-enrollment="true"
                 ></collection-wrapper>
             </div>
-
         </template>
 
         <!-- Popular Conversation : Packs Only -->
@@ -181,19 +173,20 @@
 
 <script setup>
     import { computed, onMounted, ref } from 'vue';
-    import TriggerBanner from '../components/Onboarding/TriggerBanner.vue';
-    import StaticHeader from  '../components/HeaderCarousel/StaticHeader.vue';
-    import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
     import CohortBanner from '../components/CohortBanner/CohortBanner.vue';
-    import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import ListSection from '../components/ListSection/ListSection.vue';
     import CoachEvent from '../vuesora/components/Coaches/CoachEvent.vue';
-    import StatsSection from '../components/StatsSection/StatsSection.vue';
+    import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper.vue';
+    import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
     import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
-    import { useUserStore } from "../../stores/user";
-    import {storeToRefs} from "pinia/dist/pinia";
+    import ListSection from '../components/ListSection/ListSection.vue';
+    import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
     import MusoraIcon from '../components/MusoraIcons/MusoraIcon.vue';
     import PopularConversations from '../components/PopularConversations/PopularConversations.vue';
+    import StaticHeader from  '../components/HeaderCarousel/StaticHeader.vue';
+    import StatsSection from '../components/StatsSection/StatsSection.vue';
+    import TriggerBanner from '../components/Onboarding/TriggerBanner.vue';
+    import { useUserStore } from "../../stores/user";
+    import {storeToRefs} from "pinia/dist/pinia";
 
     //Pinia Stores
     const userStore = useUserStore();
@@ -295,6 +288,7 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
+        console.log('courseDataObject', courseDataObject.value)
     });
 
     const recommendationLinks = {
