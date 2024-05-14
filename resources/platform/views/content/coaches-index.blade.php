@@ -63,7 +63,7 @@
         ></mini-catalogue-section>
     </div>
 
-    {--  From Subscribed Coaches  --}}
+    {{--  From Subscribed Coaches  --}}
     @if($hasFollowedCoaches)
         <div class="tw-px-4 md:tw-px-8 tw-mb-[30px]">
             <mini-catalogue-section

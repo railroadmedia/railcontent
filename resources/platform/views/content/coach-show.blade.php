@@ -52,7 +52,7 @@
 
     <page-header
         page-type="{{ $thisCoach->fetch('type') }}"
-        :title="'{{ $firstLastName[0] }}' + ' ' + '{{ $firstLastName[1] }}'"
+        :title="'{{ $thisCoach->fetch('fields.name') }}'"
         hero-img="{{ $thisCoach->fetch('data.coach_top_banner_image') }}"
         :info-data="{{ $infoDataStrArrJson }}"
         :ctas="{{ $ctasJson }}"
