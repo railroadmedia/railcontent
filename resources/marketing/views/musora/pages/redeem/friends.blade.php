@@ -169,7 +169,6 @@
 @endsection
 
 @section('layout-body')
-
     @php
         if (empty($accessCodeArray)) {
            $accessCodeArray = null;
@@ -446,10 +445,11 @@
                 </div>
                 <div class="w-full sm:w-7/12 lg:w-1/2">
                     <h5 class="mt-5 sm:mt-0 font-black text-left md:text-center lg:text-left">Begin your musical journey today <i class="fas fa-arrow-down"></i> </h5>
-                    <form id="commentform" name="drumeo" method="post"
-                          action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem"
+                    <form
+                        id="commentform" name="drumeo" method="post"
+                        @submit.prevent="submitRedeem($event)"
                     >
-                            <input type="hidden" name="credentials_type" value="new">
+                        <input type="hidden" name="credentials_type" value="new">
                         <div class="flex flex-wrap">
                             <p class="w-full input-describer">Code</p>
                             <input class="w-full" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="access_code" maxlength="24" placeholder="XXXXXXXXXXXXXXXXXXXXXXX" value="" />
@@ -465,7 +465,7 @@
                         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.passwordCheck }" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
                         <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
                         <div class="text-center">
-                            <input name="button" type="submit" id="button" class="apply hover:opacity-80 transition-opacity bg-white text-black lg:w-2/3" value="Redeem your pass" @click.prevent="submitRedeem" />
+                            <input name="button" type="submit" id="button" class="apply hover:opacity-80 transition-opacity bg-white text-black lg:w-2/3" value="Redeem your pass" />
                             <p class="text-xs mt-3 mb-5">
                                 <em>No purchase is required. Try it for free.</em>
                             </p>
@@ -479,5 +479,5 @@
         </div>
     </section>
 
-    @include('_partials.components.forms.redeem-form-script')
+    @include('_partials.components.forms.redeem-form-script', ['api' => get_musora_brand_base_url().'/ecommerce/access-codes/redeem'])
 @endsection
