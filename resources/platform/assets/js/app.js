@@ -11,20 +11,20 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Workouts from './vue/Views/Workouts';
-import Songs from './vue/Views/Songs';
-import Artists from './vue/Views/Artists.vue';
-import WorkoutsPlayback from './vue/Views/WorkoutsPlayback';
-import Home from './vue/Views/Home.vue';
-import ChildCatalog from './vue/Views/ChildCatalog.vue';
-import Support from './vue/Views/Support';
-import Schedule from './vue/Views/Schedule';
-import Playlists from './vue/Views/Playlists';
-import Playlist from './vue/Views/Playlist';
-import Referral from './vue/Views/Referral';
-import Stc from './vue/Views/STC';
-import LessonHistory from './vue/Views/LessonHistory';
-import Cohort from './vue/Views/Cohort';
+import Workouts from './vue/Pages/Workouts';
+import Songs from './vue/Pages/Songs';
+import Artists from './vue/Pages/Artists.vue';
+import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+import Home from './vue/Pages/Home.vue';
+import ChildCatalog from './vue/Pages/ChildCatalog.vue';
+import Support from './vue/Pages/Support';
+import Schedule from './vue/Pages/Schedule';
+import Playlists from './vue/Pages/Playlists';
+import Playlist from './vue/Pages/Playlist';
+import Referral from './vue/Pages/Referral';
+import Stc from './vue/Pages/STC';
+import LessonHistory from './vue/Pages/LessonHistory';
+import Cohort from './vue/Pages/Cohort';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -281,7 +281,7 @@ app.component('AppContainer', AppContainer)
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */
-            `./vue/Views/PlaylistPlayback.vue`
+            `./vue/Pages/PlaylistPlayback.vue`
         )
     ))
 

@@ -1,6 +1,5 @@
 <template>
     <!-- Header -->
-    <!-- ADD NEW HEADER HERE -->
     <Breadcrumb :breadcrumbs="[{ title: 'SONGS' }]" />
     <PageHeader pageType="songs" title="Songs" iconName="headphones" :infoData="headerInfoData" :ctas="ctaConfig" />
     
