@@ -45,13 +45,13 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
     }
 
     public function handle(
-        ContentService $contentService,
         ContentFieldService $contentFieldService
     ): void {
         $this->logDebug(
             sprintf("%s: running batch for %s songs %s - %s", $this->getClassName(), $this->brand, $this->startAtId, $this->endAtId)
         );
         $batchSize = 25;
+
         $query =
             Content::query()
                 ->whereBetween("railcontent_content.id", [$this->endAtId, $this->startAtId])
@@ -68,11 +68,11 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
                 })
                 ->where('railcontent_content.type', '=', 'song')
                 ->with('contentHierarchy.child');
-
         $query->orderBy('railcontent_content.id', 'desc')
-            ->chunk(25, function ($items) use ($contentService, $contentFieldService) {
+            ->chunk($batchSize, function ($items) use ($contentFieldService) {
                 $client = new \GuzzleHttp\Client();
                 $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
+
                 foreach ($items as $item) {
                     $slug = $item->contentHierarchy->child->soundslice_slug;
 
@@ -87,15 +87,17 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
                                 $duration = \Arr::last($body)['cropped_duration'] ?? \Arr::first($body)['cropped_duration'] ?? 0;
 
                                 if($duration > 0) {
-                                    $contentFieldService->create($item->id,
-                                         'length_in_seconds',
-                                         $duration, 1,
-                                         'integer'
+                                    $contentFieldService->create(
+                                        $item->id,
+                                        'length_in_seconds',
+                                        round($duration),
+                                        1,
+                                        'integer'
                                     );
 
                                     $item->length_in_seconds = null;
                                     $item->save();
-                                    Log::info('Updated slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
+                                    // Log::info('Updated slug: '.$slug.' duration: '.$duration.'  item id:'.$item->id. '    item type:'.$item->type);
                                 }
                             } else {
                                 Log::info('empty body for slug '.$slug);
@@ -103,16 +105,21 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
                             }
                         }
                     } catch (\Exception $e) {
-                        if($e->getCode() == 429){
+                        if($e->getCode() == 429) {
                             Log::info('Too Many Requests, sleep for 60 s');
                             sleep(60);
+                            $this->batch()->add(
+                                new ImportSongDurationFromSoundslice(
+                                    $item->id,
+                                    $this->startAtId,
+                                    $this->brand
+                                )
+                            );
                         }
-                        Log::info('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
+                        // Log::info('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
                     }
                 }
             });
-
-
     }
 
     /**
@@ -123,4 +130,3 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
         return "ImportSongDurationFromSoundslice";
     }
 }
-
