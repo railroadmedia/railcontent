@@ -18,7 +18,7 @@ class SongDuration extends Command
      *
      * @var string
      */
-    protected $signature = 'SongDuration {brand=drumeo}';
+    protected $signature = 'SongDuration {brand=drumeo} {startContentId=1} {endContentId=999999}';
 
     /**
      * The console command description.
@@ -38,6 +38,7 @@ class SongDuration extends Command
         Log::info("Processing SongDuration command in order to get song duration from Soundslice API");
         $query =
             Content::query()
+                ->whereBetween("railcontent_content.id", [$this->argument('startContentId'), $this->argument('endContentId')])
                 ->whereHas('contentHierarchy.child', function (Builder $query) {
                     $query->whereNotNull('soundslice_slug')->whereNot('soundslice_slug', '=', '');
                 })
