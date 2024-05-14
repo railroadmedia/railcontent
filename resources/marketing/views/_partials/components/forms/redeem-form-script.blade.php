@@ -8,7 +8,7 @@
                 passwordCheck: '',
             },
 
-            submitRedeem(){
+            submitRedeem(event){
                 this.errors = {
                     code: '',
                     email: '',
@@ -17,7 +17,9 @@
                 }
                 let isValid = true;
 
-                const form = document.getElementById('commentform');
+                const form = event.target;
+
+                // console.log(Object.fromEntries(data))
 
                 //validation
                 const access_code = form.access_code.value;
@@ -53,7 +55,20 @@
                 })
 
                 if(isValid){
-                    form.submit();
+                    const data = new FormData(form);
+
+                    fetch('{{ $api }}', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            ...Object.fromEntries(data)
+                        })
+                    }).catch(error =>{
+                        console.log(error)
+                    })
+                    // form.submit();
                 }
             }
         }))
