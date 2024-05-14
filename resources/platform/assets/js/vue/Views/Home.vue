@@ -219,6 +219,7 @@
     });
 
     const courseDataObject = computed(() => {
+        if(!JSON.parse(props.courseData)) return; 
         return JSON.parse(props.courseData);
     })
 
@@ -255,7 +256,6 @@
         if (window.location.href.includes('create-playlist-window')) {
             openPlaylistModal();
         }
-        console.log('courseDataObject', courseDataObject.value)
     });
 
     const recommendationLinks = {
