@@ -16,7 +16,6 @@
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
 
     <style>
-
         .join.smaller {
             padding:8px 20px;
             font-size:14px;
@@ -28,8 +27,7 @@
                 padding:13px 30px;
             }
         }
-    </style>
-    <style>
+
         .header-bg {
             background: linear-gradient(180deg, rgba(20, 20, 22, 0) 30%, #141416 55%), url("https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/header.jpg") 60% 0/800px no-repeat;
         }
@@ -164,7 +162,8 @@
                 daunted by the notes on the page — let us show you how easy reading music can be.
             </p>
         ',
-        "playButtonStyles" => "my-20 md:my-44 lg:my-48",
+        "playButtonStyles" => "my-16 md:my-24 lg:my-28",
+        "nameInput" => true,
         "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form",
         "formName" => 'Sight Reading Made Simple',
     ])
@@ -292,12 +291,13 @@
                 4-video course on Sight-Reading Made Simple. <br class="hidden md:inline">
                 We’ll email you the access link within 5 minutes.
             </div>
-            <div class="max-w-lg px-4 mx-auto">
+            <div class="max-w-xl px-4 mx-auto">
                 @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                     "stacked" => true,
                     "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form2",
                     "formName" => 'Sight Reading Made Simple',
+                    "nameInput" => true,
                 ])
             </div>
         </div>

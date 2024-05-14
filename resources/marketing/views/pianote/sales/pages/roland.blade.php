@@ -199,7 +199,6 @@
 
                         if (jqXHR.status === 422) {
                             var errorMessage = jqXHR.responseJSON.message;
-                            console.log(errorMessage);
                             if (errorMessage === 'email.already_pianote_user') {
                                 $('#errorMessage').text('For new Pianote members only');
                             } else if (errorMessage === 'email.code_claimed') {
@@ -222,5 +221,5 @@
             });
         });
     </script>
-   
+
 @endsection

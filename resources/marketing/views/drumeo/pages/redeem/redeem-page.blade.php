@@ -183,6 +183,12 @@
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/915243228" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
                 </div>
+            @elseif(!empty($alesisStrataCore))
+                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata.png">
+                <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
+                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
+                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/915243228" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
+                </div>
             @elseif(empty($thomann))
                 <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
@@ -226,6 +232,15 @@
                         <br>
                         <em>(The form below is only for new accounts)</em>
                     </div>
+                @elseif(!empty($alesisStrataCore))
+                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                        <strong><b>Existing Member?</b>
+                            <br>
+                            <a class="text-drumeo underline" href="/alesis-strata-core/existing">Click here to add to your account.</a>
+                        </strong>
+                        <br>
+                        <em>(The form below is only for new accounts)</em>
+                    </div>
                 @elseif(empty($thomann))
                     <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                         <strong><b>Existing Member?</b>
@@ -258,6 +273,15 @@
                         <strong> <b>Not already a member?</b>
                             <br>
                             <a class="text-drumeo underline" href="/alesis-strata">Click here to redeem on a new account.</a>
+                        </strong>
+                        <br>
+                        <em>(The form below is only for existing members)</em>
+                    </div>
+                @elseif(!empty($alesisStrataCore))
+                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                        <strong> <b>Not already a member?</b>
+                            <br>
+                            <a class="text-drumeo underline" href="/alesis-strata-core">Click here to redeem on a new account.</a>
                         </strong>
                         <br>
                         <em>(The form below is only for existing members)</em>

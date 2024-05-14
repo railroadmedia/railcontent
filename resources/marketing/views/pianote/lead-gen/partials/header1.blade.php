@@ -11,11 +11,21 @@
             {!! $text !!}
         @endif
         <div class="max-w-3xl mx-auto">
-            @include('pianote._partials.sign-up-form', [
-                    "recaptchaKey" => $recaptchaKey,
-                "formId" => $formId,
-                "formName" => $formName,
-            ])
+            @if (!empty($nameInput))
+                @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                    "formId" => $formId,
+                    "formName" => $formName,
+                    "nameInput" => true,
+                        'stacked' => true,
+                ])
+            @else
+                @include('pianote._partials.sign-up-form', [
+                        "recaptchaKey" => $recaptchaKey,
+                    "formId" => $formId,
+                    "formName" => $formName,
+                ])
+            @endif
         </div>
     </div>
 </header>

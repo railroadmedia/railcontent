@@ -278,6 +278,22 @@ class SalesController extends BaseController
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
+    public function alesisStrataCore(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrataCore' => true,
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisStrataCoreExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrataCore' => true,
+            'newAccount' => false,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
 
     public function coachTrial(Request $request, $domain, $pageC = null)
     {
