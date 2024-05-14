@@ -1,6 +1,9 @@
+@php
+    require_once(resource_path('marketing/views/pianote/_partials/homepage-data.php'));
+@endphp
 @extends('pianote.sales.subscription', [
     "promoVersion" => true,
-    "chordPromoPage" => true,
+    "hideHeader" => true,
 ])
 
 @section('global-head')
@@ -34,6 +37,137 @@
 @endsection
 
 @section('promo-banner')
+
+    @php
+        $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/david-bennett2.webp';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/330x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/lisa-witt.webp';
+        $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jordan-rudess2.webp';
+        $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/kevin-castro.webp';
+        $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/erskine-hawkins.webp';
+        $bubble6 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/360x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/victoria-thoedore.webp';
+        $bubble7 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/390x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/sangah-noona.webp';
+        $bubble8 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jesus-molina.webp';
+            $bubbles =  [
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/jordan-rudess2.webp',
+                     'classes' => 'h-10 sm:h-14 lg:h-16 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/350x0/filters:quality(95)/marketing/pianote/promos/may/header-bubble-05.webp',
+                     'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/pianote/promos/may/header-bubble-02.webp',
+                     'classes' => 'h-32 sm:h-40 lg:h-52 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/kevin-castro.webp',
+                     'classes' => 'h-10 sm:h-12 lg:h-16 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/bubbles/erskine-hawkins.webp',
+                     'classes' => 'h-10 sm:h-12 lg:h-16 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/340x0/filters:quality(95)/marketing/pianote/promos/may/header-bubble-03.webp',
+                     'classes' => 'h-28 sm:h-32 lg:h-48 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/370x0/filters:quality(95)/marketing/pianote/promos/may/header-bubble-01.webp',
+                     'classes' => 'h-28 sm:h-36 lg:h-52 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]',
+                 ],
+                 [
+                     'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/130x0/filters:quality(95)/marketing/pianote/promos/may/header-bubble-04.webp',
+                     'classes' => 'h-12 sm:h-14 lg:h-16 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]',
+                 ]
+             ];
+            $slides = $pianote['slides'];
+    @endphp
+    <header class="text-center px-5 sm:px-6 py-28 sm:py-48 relative overflow-hidden text-white"
+        style="background:linear-gradient(45deg, #900068, #F61A30);">
+        <div class="container max-w-6xl mx-auto relative z-20">
+            <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
+                THE <span class="text-musora">EASY</span> WAY<br class="sm:hidden"> TO PLAY<br class="hidden sm:inline"> <span class="relative inline-block">YOUR FAVORITE SONGS.<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#ffae00" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#ffae00" stroke-width="3" stroke-linecap="round"></path></svg></span>
+            </h1>
+            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+                <i class="fas fa-check text-musora"></i> GREAT TEACHERS
+                <i class="fas fa-check ml-3 sm:ml-5 text-musora"></i> VIDEO LESSONS
+                <br class="lg:hidden">
+                <i class="fas fa-check lg:ml-5 text-musora"></i> FUN PRACTICE
+                <i class="fas fa-check ml-3 sm:ml-5 text-musora"></i> 1000+ SONGS
+            </p>
+            <h2 class="leading-tight mt-4 mb-1">
+                <s class="opacity-50">$240</s> <strong>$180</strong>
+            </h2>
+            <p class="mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.</p>
+            <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
+
+
+                <a class="sm:mx-0.5 w-full sm:w-56 join musora smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"
+                    href="#customize-anchor" aria-label="Customize anchor"
+                >SEE YOUR DEAL <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
+                <div class="sm:mx-0.5 w-full sm:w-56 join outline white smaller autoplay-video" x-on:click="trailer = true;">WATCH THE TRAILER</div>
+            </div>
+            <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
+                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" rel="noopener noreferrer" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #b80a52;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #b80a52;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #b80a52;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #b80a52;color: #ffac00;" aria-hidden="true"></i>
+                </a>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
+            </div>
+        </div>
+        @foreach($bubbles as $bubble)
+            <picture>
+                <source media="(min-width:640px)" srcset="{{ $bubble['src'] }}">
+                <img class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 {{ $bubble['classes'] }}"
+                    src="{{ $bubble['src'] }}" alt="header circle image" fetchpriority="high">
+            </picture>
+        @endforeach
+    </header>
+    <section class="sm:px-6 py-4 sm:py-5 text-white relative z-10" style="background:#0c1524;">
+        <div class="container max-w-5xl mx-auto">
+            @component('_partials.components.carousel',[
+                'xdata' => "
+                    classes: {
+                        arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
+                        prev: 'splide__arrow--prev your-class-prev hidden sm:flex z-50',
+                        next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                        pagination: 'hidden',
+                    },
+                    perPage: 1,
+                    perMove: 1,
+                    type: 'loop',
+                    autoplay: true,
+                    pauseOnHover: true,
+                    pauseOnFocus: true,
+                    interval: 3000,
+                    lazyLoad: 'nearby',
+                ",
+            ])
+                @slot('content')
+                    @foreach ($slides as $slide)
+                        <li class="splide__slide">
+                            <div class="px-3 md:px-6 text-center">
+                                <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                                <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                    <img
+                                        class="rounded-full object-cover object-right w-9 h-9"
+                                        data-splide-lazy={{ $slide['thumb'] }}
+                                alt="{{$slide['name']}}"
+                                    ><br class="inline md:hidden">
+                                    <p class="leading-tight w-full text-center md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                @endslot
+            @endcomponent
+        </div>
+    </section>
+
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white relative" style="background: linear-gradient(to bottom, #07233E, #0C1524);">
         <div class="container max-w-5xl mx-auto">
             <img class="mb-5 h-56 inline sm:hidden"
