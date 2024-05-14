@@ -1,24 +1,13 @@
 <template>
     <div class="tw-flex tw-flex-nowrap sm:tw-flex-wrap tw-transition-colors tw-flex-col tw-min-w-[340px] sm:tw-min-w-0 sm:tw-w-[340px] lg:tw-w-auto tw-rounded-md pa-2 hover:tw-shadow-lg dark:hover:tw-bg-[#081825] tw-border tw-border-transparent dark:hover:tw-border-[#223F57]">
         <a :href="url" class="tw-flex tw-flex-row tw-no-underline tw-flex-1">
-            <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col"
-            >
-                <!-- Avatar Thumb -->
-                <div class="user-avatar tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1.5"
-                    :class="[
-                        ['coach','edge','lifetime','team','guitar','piano'].includes(authorAccessLevel) ? 'subscriber' : '',
-                        brand, 
-                        authorAccessLevel, 
-                    ]"
-                >
-                    <div class="tw-no-underline tw-block tw-h-full tw-w-full">
-                        <img class="tw-rounded-full"
-                            :src="avatar"
-                            :alt="`${ author } Avatar`"
-                            loading="lazy"
-                        />
-                    </div>
-                </div>
+            <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col">
+                
+                <UserAvatar 
+                    :access-level="authorAccessLevel"
+                    :avatar-image="avatar"
+                    :name="author"
+                />
                 <!-- Rank Data -->
                 <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed tw-leading-[1.2]">
                     {{ rank }}
@@ -50,6 +39,7 @@
     import { computed } from 'vue';
     import { useUserStore } from "../../../stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
+    import UserAvatar from '../UserAvatar/UserAvatar.vue';
 
     //Pinia Stores
     const userStore = useUserStore();

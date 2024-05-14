@@ -6,22 +6,20 @@
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
 
-        <div>
-            <!-- Join Header: Pack Only -->
-            <StaticHeader
-                v-if="isPackOnlyBoolean"
-                title="JOIN THE COMMUNITY"
-                cta-text="UPGRADE YOUR MEMBERSHIP"
-                description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
-                :cta-url="upgradeMembershipUrl"
-                img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
-                class="tw-mt-4 tw-mb-8"
-            />
-            <!-- Header carousel -->
-            <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
-            <!-- Cohort banner -->
-            <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
-        </div>
+        <!-- Join Header: Pack Only -->
+        <StaticHeader
+            v-if="isPackOnlyBoolean"
+            title="JOIN THE COMMUNITY"
+            cta-text="UPGRADE YOUR MEMBERSHIP"
+            description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
+            :cta-url="upgradeMembershipUrl"
+            img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
+            class="tw-mt-4 tw-mb-8"
+        />
+        <!-- Header carousel -->
+        <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
+        <!-- Cohort banner -->
+        <CohortBanner v-if="existsCohortBanner" :preloadedBanner="cohortBanner" trackingSection="banner" />
 
         <!-- Continue section -->
         <MiniCatalogueSection
@@ -101,56 +99,24 @@
         
         <template v-if="isPackOnlyBoolean">
             <!-- Your Courses section : Packs Only -->
-            <div v-if="courseDataObject.data.length">
-                <div class="tw-flex tw-flex-col tw-w-full">
-                    <!-- Section Header -->
-                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                        <div class="tw-flex tw-items-center">
-                            <a :href="`${brand}/courses`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                                <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Your Courses</h2>
-                            </a>
-                        </div>
-                        <div class="tw-flex tw-items-center">
-                            <a :href="`${brand}/courses`" aria-label="See All Lessons In Progress" class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1"> 
-                                See All 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <collection-wrapper
-                    collection-type="course"
-                    :hide-controls-section="true"
-                    :pre-loaded-content="courseDataObject"
-                ></collection-wrapper>
-            </div>
+            <HomepageCatalog 
+                v-if="courseDataObject.data.length"
+                collection-type="course"
+                title="Your Courses"
+                see-all-label="See All Courses"
+                :see-all-url="`${brand}/courses`"
+                :pre-loaded-content="courseDataObject"
+            />
 
             <!-- Your Packs section : Packs Only -->
-            <div v-if="packData.length">
-                <div class="tw-flex tw-flex-col tw-w-full">
-                    <!-- Section Header -->
-                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                        <div class="tw-flex tw-items-center">
-                            <a :href="`${brand}/courses`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                                <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Your Training Packs</h2>
-                            </a>
-                        </div>
-                        <div class="tw-flex tw-items-center">
-                            <a :href="`${brand}/packs`" aria-label="See All Lessons In Progress" class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1"> 
-                                See All 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <collection-wrapper
-                    collection-type="pack"
-                    default-sorts="-progress"
-                    :hide-controls-section="true"
-                    :infinite-scroll="false"
-                    :limit="-1"
-                    :pre-loaded-content="packDataObject"
-                    :without-enrollment="true"
-                ></collection-wrapper>
-            </div>
+            <HomepageCatalog 
+                v-if="packData.length"
+                collection-type="pack"
+                title="Your Training Packs"
+                see-all-label="See All Packs"
+                :see-all-url="`${brand}/packs`"
+                :pre-loaded-content="packDataObject"
+            />
         </template>
 
         <!-- Popular Conversation : Packs Only -->
@@ -177,6 +143,7 @@
     import CoachEvent from '../vuesora/components/Coaches/CoachEvent.vue';
     import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper.vue';
     import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
+    import HomepageCatalog from '../components/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
     import ListSection from '../components/ListSection/ListSection.vue';
     import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
