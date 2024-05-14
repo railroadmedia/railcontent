@@ -31,7 +31,6 @@
         icon-name="box"
         description="{{ $headerDescription }}"
     ></page-header>
-    <p class="tw-text-white">{{ $packs }}</p>
     <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] tw-px-4 lg:tw-px-8">
         <collection-wrapper
             collection-type="pack"
