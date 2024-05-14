@@ -32,8 +32,11 @@
           'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
           'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
         }">
-          <a v-if="isSongsPage" :href="songsPageLink.url">
-            <PageHeaderRowInfo :infoData="[songsPageLink.text]" />
+          <a v-if="isSongsPage" :href="songsPageLink.url" >
+            <PageHeaderRowInfo 
+              :infoData="[songsPageLink.text]" 
+              class="tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current" 
+            />
           </a>
           <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
             :ctas="secondaryCtas" />
