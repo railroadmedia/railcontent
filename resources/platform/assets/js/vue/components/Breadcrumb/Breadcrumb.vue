@@ -5,17 +5,17 @@
       <a class="tw-flex tw-items-center tw-text-sm tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-no-underline tw-font-bold"
         :href="penultimateBreadcrumb.url">
         <i class="fa-solid fa-chevron-left tw-text-[16px] tw-h-[16px] tw-w-[16px] tw-pr-[5px]"></i>
-        <span class="tw-font-bold">{{ penultimateBreadcrumb.title }}</span>
+        <span class="tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">{{ penultimateBreadcrumb.title }}</span>
       </a>
     </div>
     <!-- Desktop -->
     <div class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-hidden lg:tw-flex tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden dark:tw-bg-[#000C17] tw-uppercase tw-text-[14px] tw-leading-[21px]">
-      <a :href="`/${brand}`" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] dark:hover:tw-text-white hover:tw-text-black tw-font-normal tw-text-[14px] tw-leading-[21px]">
+      <a :href="`/${brand}`" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] dark:hover:tw-text-white hover:tw-text-black tw-font-normal tw-text-[14px] tw-leading-[21px] tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
         HOME
       </a>
       <template v-for="(breadcrumb, index) in breadcrumbs" :key="index">
         <span class="tw-font-normal tw-text-[14px] tw-leading-[21px]">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-        <a v-if="index < breadcrumbs.length - 1 && breadcrumb.url" :href="breadcrumb.url" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-font-normal tw-text-[14px] tw-leading-[21px] dark:hover:tw-text-white hover:tw-text-black">
+        <a v-if="index < breadcrumbs.length - 1 && breadcrumb.url" :href="breadcrumb.url" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-font-normal tw-text-[14px] tw-leading-[21px] dark:hover:tw-text-white hover:tw-text-black tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
           <span>{{ breadcrumb.title }}</span>
         </a>
         <span v-else class="tw-font-bold tw-text-[14px] tw-leading-[21px]">
