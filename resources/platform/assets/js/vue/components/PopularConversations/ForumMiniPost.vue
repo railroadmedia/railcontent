@@ -14,7 +14,7 @@
                     <div class="tw-no-underline tw-block tw-h-full tw-w-full">
                         <img class="tw-rounded-full"
                             :src="avatar"
-                            :alt="`${ $author } Avatar`"
+                            :alt="`${ author } Avatar`"
                             loading="lazy"
                         />
                     </div>
@@ -38,17 +38,17 @@
                     <strong>{{ author }}</strong>
                 </h6>
                 <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D] tw-flex-1 tw-relative tw-pb-6" style="overflow-wrap: anywhere;">
-                    <span v-html="formattedPost"></span>
+                    <span v-html="formattedContent"></span>
                     <span class="tw-inline xl:tw-block tw-font-bold dark:tw-text-white tw-text-[#00101D] tw-underline lg:tw-absolute lg:tw-left-0 lg:tw-bottom-0">See Post &raquo;</span>
                 </p>
             </div>
         </a>
     </div>
 </template>
-<script>
+<script setup>
     //Imports
     import { computed } from 'vue';
-    import { useUserStore } from "../../stores/user";
+    import { useUserStore } from "../../../stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
 
     //Pinia Stores
@@ -60,8 +60,8 @@
         authorAccessLevel: String, 
         author: String,
         avatar: String,
+        content: String,
         date: String,
-        post: String,
         rank: String, 
         title: String,
         url: String,
@@ -69,9 +69,9 @@
     });
 
     //Computed Props
-    const formattedPost = computed(() => {
-        if (!this.post) return '';
+    const formattedContent = computed(() => {
+        if (!props.content) return '';
         // Replace '&nbsp;' with an empty space, take the first 100 characters
-        return this.post.replace(/&nbsp;/g, '').substring(0, 100);
+        return props.content.replace(/&nbsp;/g, '').substring(0, 100);
     });
 </script>

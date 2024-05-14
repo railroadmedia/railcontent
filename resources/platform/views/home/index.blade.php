@@ -25,7 +25,9 @@
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-topics="{{ $hasTopics ? 'true' : 'false' }}"
         :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
-        :hot-forum-topics="{{ json_encode($hotForumTopics) }}"
+        @if(count($hotForumTopics) > 0) 
+            :conversation-data="{{ json_encode($hotForumTopics) }}"
+        @endif
         :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
         :new-content="{{ $newContentJson }}"
         new-content-url="{{ url()->route('platform.new-lessons') }}"

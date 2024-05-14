@@ -7,6 +7,16 @@
         <TriggerBanner v-if="showTriggerBanner" />
 
         <div>
+            <!-- Join Header: Pack Only -->
+            <StaticHeader
+                v-if="isPackOnlyBoolean"
+                title="JOIN THE COMMUNITY"
+                cta-text="UPGRADE YOUR MEMBERSHIP"
+                description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
+                :cta-url="upgradeMembershipUrl"
+                img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
+                class="tw-mt-4 tw-mb-8"
+            />
             <!-- Header carousel -->
             <HeaderCarousel :preloadedCarousel="carousel" trackingSection="banner" />
             <!-- Cohort banner -->
@@ -54,6 +64,7 @@
 
         <!-- New section -->
         <MiniCatalogueSection
+            v-if="newContent.data"
             title="New Releases"
             seeAllAriaLabel="See All New Releases"
             :seeAllUrl="newContentUrl"
@@ -62,7 +73,12 @@
         />
 
         <!-- Playlist section -->
-        <ListSection :newContentUrl="newContentUrl" :usersList="usersList" :my-list-url="`/${brand}/playlists`" />
+        <ListSection 
+            v-if="usersList.length"
+            :newContentUrl="newContentUrl" 
+            :usersList="usersList" 
+            :my-list-url="`/${brand}/playlists`" 
+        />
 
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
             <!-- Live section -->
@@ -82,15 +98,91 @@
             trackingSection="upcoming-events"
         />
 
+        
+        <template v-if="isPackOnlyBoolean">
+
+            <!-- Your Courses section : Packs Only -->
+            <div v-if="courseDataObject.data.length">
+                <div class="tw-flex tw-flex-col tw-w-full">
+                    <!-- Section Header -->
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        <div class="tw-flex tw-items-center">
+                            <a :href="`${brand}/courses`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                                <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Your Courses</h2>
+                            </a>
+                        </div>
+                        <div class="tw-flex tw-items-center">
+                            <a :href="`${brand}/courses`" aria-label="See All Lessons In Progress" class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1"> 
+                                See All 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- @if (!empty($courses) && brand() == 'singeo')
+                    @include(
+                        'partials.bladesora.members.components.home._courses-section',
+                        [
+                            'brand' => brand(),
+                            'contentEndpoint' => '/railcontent/content',
+                            'courseContentJson' => $courses,
+                            'allCoursesUrl' => '/'.$brand.'/courses',
+                        ]
+                    )
+                @endif -->
+            </div>
+
+            <!-- Your Packs section : Packs Only -->
+            <div v-if="packData.length">
+                <div class="tw-flex tw-flex-col tw-w-full">
+                    <!-- Section Header -->
+                    <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+                        <div class="tw-flex tw-items-center">
+                            <a :href="`${brand}/courses`" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                                <h2 class="tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Your Training Packs</h2>
+                            </a>
+                        </div>
+                        <div class="tw-flex tw-items-center">
+                            <a :href="`${brand}/packs`" aria-label="See All Lessons In Progress" class="tw-text-sm md:tw-text-base md:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current tw-mt-1"> 
+                                See All 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <collection-wrapper
+                    collection-type="pack"
+                    default-sorts="-progress"
+                    :hide-controls-section="true"
+                    :infinite-scroll="false"
+                    :limit="-1"
+                    :pre-loaded-content="packDataObject"
+                    :without-enrollment="true"
+                ></collection-wrapper>
+            </div>
+
+        </template>
+
+        <!-- Popular Conversation : Packs Only -->
+        <PopularConversations
+            v-if="isPackOnlyBoolean && conversationData.length"
+            :posts="conversationData"
+            class="tw-mb-8"
+        />  
+
         <!-- Stats section -->
-        <StatsSection :accountUrl="accountUrl" :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
-            :nextLearningPathLevel="nextLearningPathLevel" :userMetrics="userMetrics" />
+        <StatsSection 
+            v-if="!isPackOnlyBoolean"
+            :accountUrl="accountUrl" 
+            :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
+            :nextLearningPathLevel="nextLearningPathLevel" 
+            :userMetrics="userMetrics" 
+        />
     </div>
 </template>
 
 <script setup>
     import { computed, onMounted, ref } from 'vue';
     import TriggerBanner from '../components/Onboarding/TriggerBanner.vue';
+    import StaticHeader from  '../components/HeaderCarousel/StaticHeader.vue';
     import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
     import CohortBanner from '../components/CohortBanner/CohortBanner.vue';
     import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
@@ -101,6 +193,7 @@
     import { useUserStore } from "../../stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
     import MusoraIcon from '../components/MusoraIcons/MusoraIcon.vue';
+    import PopularConversations from '../components/PopularConversations/PopularConversations.vue';
 
     //Pinia Stores
     const userStore = useUserStore();
@@ -112,7 +205,9 @@
         carousel: { type: Array, default: () => ([]) },
         coachEvent: { type: Object, default: () => null },
         cohortBanner: { type: Array, default: () => ([]) },
+        courseData: { type: Object, default: () => ({}) },
         continueUrl: { type: String, default: '' },
+        conversationData: { type: Array, default: () => ([]) },
         currentDate: { type: String, default: '' },
         eventCoachProfileUrl: { type: String, default: '' },
         existsCohortBanner: { type: Boolean, default: false },
@@ -123,28 +218,53 @@
         hasStartedLessons: { type: Boolean, default: false },
         hasTopics: { type: Boolean, default: false },
         hasUpcomingEvents: { type: Boolean, default: false },
-        hotForumTopics: { type: Array, default: () => ([]) },
+        isPackOnly: { type: Number, default: 0 },
         learningPaths: { type: Array, default: () => ([]) },
         newContent: { type: Object, default: () => ({}) },
         newContentUrl: { type: String, default: '' },
         nextLearningPathLevel: { type: String, default: '' },
         nextLearningPathProgressPercent: { type: Number, default: 0 },
+        packData: { type: Array, default: () => ([]) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
         recommendedContentUrl: { type: String, default: '' },
-        startedContent: { type: Object, default: () => ({}) },
+        startedContent: { 
+            type: Object, 
+            default: () => ({
+                data: []
+            }) 
+        },
         timeCutoffMinutes: { type: Number, default: 0 },
         upcomingEvents: { type: Object, default: () => ({}) },
         upcomingUrl: { type: String, default: '' },
+        upgradeMembershipUrl: { type: String, default: '' },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) },
-        workoutsContent: { type: Object, default: () => ({}) },
+        workoutsContent: { 
+            type: Object, 
+            default: () => ({
+                data: []
+            }) 
+        },
         workoutsContentUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
     });
 
     const showTriggerBanner = computed(() => {
+        if(!props.isPackOnlyBoolean) return false; //hide for packs only
         return !props.hasGear || !props.hasTopics || !props.hasGenres || !props.hasExperience || !props.hasGoals;
     });
+
+    const isPackOnlyBoolean = computed(() => {
+      return Boolean(props.isPackOnly);
+    });
+
+    const courseDataObject = computed(() => {
+        return JSON.parse(props.courseData);
+    })
+
+    const packDataObject = computed(() => {
+        return { data: [...props.packData] };
+    })
 
     const recommends = ref(props.recommendedContent.data ? props.recommendedContent.data.slice(0,5) : []);
     const recSysPage = ref(1);
@@ -168,7 +288,6 @@
         } else {
             recSysPage.value = recSysPage.value + 1;
         }
-
         recommends.value = props.recommendedContent.data.slice((recSysPage.value - 1) * 5, recSysPage.value * 5);
     }
 

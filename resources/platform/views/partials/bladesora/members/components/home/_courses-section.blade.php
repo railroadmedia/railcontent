@@ -14,7 +14,6 @@
             </a>
         </div>
 
-
         <div class="tw-flex tw-flex-row six-cards-row">
             <transition appear name="fade">
                 <content-catalogue
