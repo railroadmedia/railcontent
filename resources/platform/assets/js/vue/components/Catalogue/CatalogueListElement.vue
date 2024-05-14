@@ -138,7 +138,7 @@ import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
 import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
-import { snakeToCapitalized } from "../../utils";
+import { contentTypes } from "../../../utils";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
@@ -248,10 +248,9 @@ const handleShowDropdown = (className) => {
 };
 
 const contentTypeString = computed(() => {
-    if(contentModel.value.post.type === 'workout') {
-        return 'Workouts';
+    if (contentModel.value?.post?.type && contentTypes[contentModel.value.post.type]?.singular) {
+        return contentTypes[contentModel.value.post.type].singular
     }
-    if(contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
 })
 
