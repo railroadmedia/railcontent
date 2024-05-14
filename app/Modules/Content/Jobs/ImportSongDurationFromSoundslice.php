@@ -108,13 +108,6 @@ class ImportSongDurationFromSoundslice implements ShouldQueue
                         if($e->getCode() == 429) {
                             Log::info('Too Many Requests, sleep for 60 s');
                             sleep(60);
-                            $this->batch()->add(
-                                new ImportSongDurationFromSoundslice(
-                                    $item->id,
-                                    $this->startAtId,
-                                    $this->brand
-                                )
-                            );
                         }
                         // Log::info('can not update for slug: '.$slug .'  item id:'.$item->id. '    item type:'.$item->type.' error::: '.$e->getMessage());
                     }
