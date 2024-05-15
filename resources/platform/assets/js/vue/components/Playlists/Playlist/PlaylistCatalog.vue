@@ -4,7 +4,7 @@
         <template v-if="hasAccess">
             
             <!-- Edit Banner -->
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2">
+            <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-2">
                 <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden tw-rounded-md"
                     :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px] tw-z-20 tw-sticky tw-top-0 tw-drop-shadow-md' : 'tw-max-h-0'">
                     <div class="tw-w-full tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-flex-col md:tw-flex-row tw-items-center">
@@ -23,7 +23,7 @@
             </div>
 
 
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-4">
+            <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-4">
                 <div class="tw-flex tw-flex-col">
                     <!-- Empty State -->
                     <section v-if="playlistsStore.lessons.length === 0"
@@ -91,7 +91,7 @@
 
         <!-- No Access -->
         <template v-else>
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[80px]">
+            <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[80px]">
                 <div class="tw-flex tw-flex-col tw-items-center">
                     <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">Oops!</h1>
                     <p>This playlist is private and you don’t have access to view it</p>

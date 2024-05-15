@@ -15,7 +15,7 @@
     <div class="absolute-fill bg-top hide-lg-down tw-left-0 tw-w-full" style="background: linear-gradient(to left, #000 0%, transparent 10%, transparent 90%, #000 100%)"></div>
     <div class="header-gradient-overlay absolute-fill {{ $brand }}"></div>
     <div class="relative tw-h-full">
-        <div class="tw-relative tw-flex tw-items-center tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-h-full">
+        <div class="tw-relative tw-flex tw-items-center tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-h-full">
             {{ $content }}
 
             @if(empty($hideUser))

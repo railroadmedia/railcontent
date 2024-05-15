@@ -16,7 +16,7 @@
         <!-- List Item Component : Next Lesson Variant -->
 
         <!-- Content Catalog -->
-        <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-[30px]">
+        <section class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-[30px]">
             <div class="tw-flex tw-flex-col">
                 <div class="tw-flex tw-w-full tw-flex-row">
 
@@ -50,7 +50,7 @@
 
         <!-- for guitareo 500 songs special page -->
         <template v-if="songPDFs.length">
-            <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
+            <section class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-3">
                 <div class="tw-flex tw-flex-col">
                     <div class="tw-flex tw-flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
                         <content-catalogue

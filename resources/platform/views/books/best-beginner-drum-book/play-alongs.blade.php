@@ -12,7 +12,7 @@ if(!empty($user)){
 
 @section('content')
     <header id="bestBookHeader" class="fluid pv-5 shadow">
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
                     <h1 class="heading mb-1 text-white tw-flex tw-items-center">
@@ -38,7 +38,7 @@ if(!empty($user)){
         </div>
     </header>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-my-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-my-3">
         <div class="flex flex-column">
             <div class="flex flex-row">
                 <play-alongs

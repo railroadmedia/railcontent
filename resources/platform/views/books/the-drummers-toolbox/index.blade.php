@@ -55,7 +55,7 @@ if(!empty($user)){
 
 @section('content')
     <header id="bestBookHeader" class="fluid pv-5 shadow">
-        <div class="tw-w-full tw-container tw-mx-auto tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
                     <h1 class="tw-font-bold tw-text-5xl mb-1 text-white tw-font-bebas-neue">The Drummer's Toolbox</h1>
@@ -136,7 +136,7 @@ if(!empty($user)){
 
     @include('books.the-drummers-toolbox.partials.redeem-modal', ['formSubmitUrl' => url()->route('access-codes.form-claim')])
 
-    <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <section class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
         <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 4xl:tw-grid-cols-6 tw-mb-8">
             @foreach($chapters as $index => $chapter)
                     <div class="flex flex-column chapter-thumb pa-1">

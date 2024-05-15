@@ -1,8 +1,23 @@
 <?php
-$layout = 'books.layout';
-if(!empty($user)){
-    $layout = 'partials.layout';
-} ?>
+    $layout = 'books.layout';
+    
+    if(!empty($user)){
+        $layout = 'partials.layout';
+    } 
+
+    if(empty($hasAccess)) {
+        $ctas = [
+            [
+                'type' => 'PageHeaderPrimaryCta',
+                'props' => [
+                    'text' => 'Login to Musora',
+                    'url' => '/login',
+                    'faIconClass' => 'fa-external-link'
+                ]
+            ]
+        ];
+    }
+?>
 
 @extends($layout)
 
@@ -13,45 +28,31 @@ if(!empty($user)){
 @endsection
 
 @section('content')
-
-    @component('partials._header-banner', ['backgroundImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/header-background.jpg'])
-        @slot('content')
-            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <span class="tw-text-32 tw-font-bold">The Pianote Foundations</span>
-                </h1>
-
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Welcome to the resources page for the Pianote Foundations books. Here you’ll find extra worksheets,
-                    exercises and video lessons to perfectly accompany the lessons from your book.
-                </p>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Simply click on the relevant book to expand it and find the resources that are perfect for your
-                    practice.
-                </p>
-
-                @if(empty($hasAccess))
-                    <button
-                        class="btn collapse-250 mt-2"
-                        data-open-modal="loginModal"
-                    >
-                        <span class="bg-pianote text-white">
-                            <i class="fas fa-external-link mr-1"></i>
-                            Login to Pianote
-                        </span>
-                    </button>
-                @endif
-            </div>
-        @endslot
-    @endcomponent
-
-    @include('books.partials.login-modal', ['redirectUrl' => url()->route('platform.books.resources',[
-    'brand'=>'pianote'
-])])
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Pianote Foundations",
+                    "url" => "/pianote/method/foundations-2019/215952",
+                ],
+                [
+                    "title" => "Resources",
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="foundations"
+            title="Pianote Foundations"
+            description="Welcome to the resources page for the Pianote Foundations books. Here you’ll find extra worksheets, exercises and video lessons to perfectly accompany the lessons from your book. Simply click on the relevant book to expand it and find the resources that are perfect for your practice."
+            @if( !empty($ctas) )
+                :ctas="{{ json_encode($ctas) }}"
+            @endif
+        ></page-header>
+    </div>
 
     @include('books.partials.ask-question-modal')
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
         <div class="tw-flex tw-flex-row tw-flex-wrap md:tw-flex-nowrap tw-w-full pv-1 mt-1">
             <div class="tw-flex tw-flex-col tw-w-full md:tw-mr-2 tw-mb-2">
                 <a

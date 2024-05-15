@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:tw-container tw-mx-auto tw-px-4 lg:tw-px-8 dark:tw-text-white">
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
         <!-- Learning Paths -->
         <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
         

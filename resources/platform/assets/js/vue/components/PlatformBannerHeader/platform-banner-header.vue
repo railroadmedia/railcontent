@@ -42,7 +42,7 @@
              style="background: linear-gradient(0deg, rgba(11, 118, 219, 0.23), rgba(11, 118, 219, 0.23)), linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.9) 100%);">
         </div>
 
-        <div class="tw-container tw-mx-auto tw-px-2 md:tw-px-5 tw-z-40 tw-w-full tw-h-auto tw-flex tw-flex-wrap">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-2 md:tw-px-5 tw-z-40 tw-w-full tw-h-auto tw-flex tw-flex-wrap">
 
             <div v-if="title.length" class="tw-flex tw-flex-col tw-mr-8">
                 <!-- Title -->

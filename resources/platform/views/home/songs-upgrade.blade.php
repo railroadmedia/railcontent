@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-items-center tw-justify-center md:tw-h-[calc(100vh-128px)]">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-items-center tw-justify-center md:tw-h-[calc(100vh-128px)]">
         @if($isLifetime)
             <membership-update-page
                 :current-tier="{{ json_encode($currentTier) }}"

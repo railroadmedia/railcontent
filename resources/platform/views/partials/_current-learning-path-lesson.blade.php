@@ -1,6 +1,6 @@
-<div class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6]">
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
-        <div class="flex flex-column grow pv-2">
+<div class="tw-w-full dark:tw-bg-[#002039] tw-bg-[#E7EFF6] tw-mt-2 tw-rounded-md">
+    <div class="tw-w-full tw-p-4">
+        <div class="tw-flex tw-flex-col">
             <div class="flex flex-row align-v-center">
                 @if(!empty($showLogo))
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}">
