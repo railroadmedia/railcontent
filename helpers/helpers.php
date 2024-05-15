@@ -459,11 +459,8 @@ function encodeURISub($url)
 if (!function_exists('stripFromJson')) {
     function stripFromJson($string)
     {
-        $lead = '/"'.getStripFromJsonKey().'/';
-        $follow = '/'.getStripFromJsonKey().'"/';
-        $a = preg_replace($lead, '', $string);
-        $a = preg_replace($follow, '', $a);
-        return $a;
+        $pattern = '/"?'.getStripFromJsonKey().'"?/';
+        return preg_replace($pattern, '', $string);
     }
 }
 
