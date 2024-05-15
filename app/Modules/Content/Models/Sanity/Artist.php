@@ -6,7 +6,7 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 
 /**
- * Defines the schema structure for a Post document type in Sanity.
+ * Defines the schema structure for a Artist document type in Sanity.
  *
  * @property string $type
  * @property string $name

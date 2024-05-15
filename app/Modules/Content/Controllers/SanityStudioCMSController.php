@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\Event;
 use App\Modules\Content\Models\Sanity\Post;
+use App\Modules\Content\Models\Sanity\Song;
 use App\Modules\Content\Models\Sanity\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,12 +19,13 @@ class SanityStudioCMSController extends BaseController
         $dataset = config('content.dataset');
         $basePath = '/admin/studio';
 
-        // $post = new Post();
-        // $schema = json_encode([
-        //     'types' => [$post->toArray()]
-        // ]);
+        // Day One
+        // $types = [(new Artist())->toArray(), (new Venue())->toArray(), (new Event())->toArray()];
+        // Musora
+        $types = [(new Song())->toArray()];
+
         $schema = json_encode([
-            'types' => [(new Artist())->toArray(), (new Venue())->toArray(), (new Event())->toArray()]
+            'types' => $types
         ]);
 
         return response()->view(
