@@ -14,6 +14,12 @@ class AccessCodeClaimRequest extends FormRequest
 
     public function getValidatorInstance(): Validator
     {
+        // necessary to handle ajax requests
+        if (!empty($this->getContent())) {
+            $jsonData = json_decode($this->getContent(), true);
+            $this->merge($jsonData ?? []);
+        }
+
         if (empty($this->get('access_code'))) {
             $code =
                 $this->get('code1')
