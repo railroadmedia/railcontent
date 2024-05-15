@@ -61,8 +61,8 @@ const artist = computed(() => {
 })
 
 const contentTypeString = computed(() => {
-    if (props.lesson?.be_type && contentTypes[props.lesson.be_type]?.singular) {
-        return contentTypes[props.lesson.be_type].singular
+    if (props.lesson?.item_type && contentTypes[props.lesson.item_type]?.singular) {
+        return contentTypes[props.lesson.item_type].singular
     }
     return '';
 })
@@ -286,14 +286,14 @@ onBeforeMount(() => {
                         </span>
 
                         <!-- if instrumentless -->
-                        <template v-if="lesson.be_type === 'song' && !state.isFullTrack">
+                        <template v-if="lesson.item_type === 'song' && !state.isFullTrack">
                             <span>{{ instrument }}less</span>
                         </template>
                         <!-- if routine -->
-                        <template v-if="lesson.be_type === 'routine' && lesson.is_high_routine === true">
+                        <template v-if="lesson.item_type === 'routine' && lesson.is_high_routine === true">
                             <span>High Voice</span>
                         </template>
-                        <template v-if="lesson.be_type === 'routine' && lesson.is_low_routine === true">
+                        <template v-if="lesson.item_type === 'routine' && lesson.is_low_routine === true">
                             <span>Low Voice</span>
                         </template>
                     </p>
@@ -331,7 +331,7 @@ onBeforeMount(() => {
                     <p class="tw-w-full tw-flex tw-items-center tw-text-xs tw-capitalize tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-1"
                         :class="[{ 'md:tw-mt-0 md:tw-text-sm': !cueVersion }]">
                         <!-- Instructor / Artist -->
-                        <template v-if="lesson.be_type === 'song'">
+                        <template v-if="lesson.item_type === 'song'">
                             <span>{{ artist }}</span>
                         </template>
                         <template v-else-if="lesson.instructors && lesson.instructors.length">
@@ -351,13 +351,13 @@ onBeforeMount(() => {
                 <template v-if="!cueVersion">
                     <!-- Lesson Skill Level -->
                     <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="contentTypeString">
-                        <span v-if="lesson.be_type" class="tw-text-center tw-text-sm ">
+                        <span v-if="lesson.item_type" class="tw-text-center tw-text-sm ">
                             <DifficultyLabel class="" :difficultyValue="lesson.difficulty" textCase="uppercase" />
                         </span>
                     </div>
                     <!-- Lesson Type -->
                     <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="contentTypeString">
-                        <span v-if="lesson.be_type" class="tw-text-center tw-text-sm tw-capitalize">
+                        <span v-if="lesson.item_type" class="tw-text-center tw-text-sm tw-capitalize">
                             {{ contentTypeString }}
                         </span>
                     </div>

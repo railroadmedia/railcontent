@@ -209,7 +209,7 @@ class UserPlaylistsController extends BaseController
 
                 $playlistItems[$index]['id'] = $item['id'];
                 $playlistItems[$index]['type'] = $item['type'];
-                $playlistItems[$index]['be_type'] = $item['be_type'];
+                $playlistItems[$index]['item_type'] = $item['item_type'];
                 $playlistItems[$index]['title'] = $item['title'];
                 $playlistItems[$index]['artist'] = $item['artist'];
                 $playlistItems[$index]['status'] = $item['status'];
@@ -335,7 +335,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['url'] = $item['url'] ?? '';
             $otherItems[$index]['id'] = $item['id'];
             $otherItems[$index]['type'] = $item['type'];
-            $otherItems[$index]['be_type'] = $item['be_type'];
+            $otherItems[$index]['item_type'] = $item['item_type'];
             $otherItems[$index]['title'] = $item->fetch('title');
             $otherItems[$index]['artist'] = $item->fetch('artist');
             $otherItems[$index]['status'] = $item['status'];
