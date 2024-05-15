@@ -40,7 +40,7 @@
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "3.0.*",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "2.1.*",
+        "railroad/railcontent": "dev-BE-34 as v2.1.81",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
