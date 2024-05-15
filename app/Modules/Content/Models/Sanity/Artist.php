@@ -16,11 +16,12 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
  */
 class Artist extends BaseSanityModel
 {
-    // DELETEME - just here for a test of the Day One With Sanity lesson
     public function __construct()
     {
         $fields = [
             new Field(FieldType::String, 'name'),
+            new Field(FieldType::String, 'name2'),
+            new Field(FieldType::String, 'hiddenField', hidden:"({document}) => !document?.name2"),
         ];
         parent::__construct('artist', 'Artist', $fields);
     }

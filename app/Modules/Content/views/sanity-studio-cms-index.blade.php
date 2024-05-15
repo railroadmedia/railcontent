@@ -27,7 +27,7 @@
         projectId: "{{$projectId}}",
         dataset: "{{$dataset}}",
         basePath: "{{$basePath}}",
-        schema: {!! $schema !!}
+        schema: {!! stripFromJson($schema) !!}
     });
     renderStudio(document.getElementById("app"), config);
 </script>
