@@ -35,11 +35,12 @@ class CustomerIoSyncUserDevice extends CustomerIoBaseJob
      * @param $deviceData
      * @param null $timestamp
      */
-    public function __construct( $userId,
+    public function __construct(
+        $userId,
         $accountName,
         $deviceData,
-        $timestamp = null)
-    {
+        $timestamp = null
+    ) {
         $this->userId = $userId;
         $this->accountName = $accountName;
         $this->deviceData = $deviceData;

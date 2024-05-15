@@ -23,10 +23,14 @@
                 />
             </div>
             <!-- Arrow -->
-            <div class="tw-absolute tw-inset-0 tw-bg-[rgba(0,0,0,0.4)] tw-text-white tw-justify-center tw-items-center tw-text-[32px] tw-hidden group-hover:tw-flex">
+            <div
+                class="tw-absolute tw-inset-0 tw-bg-[rgba(0,0,0,0.4)] tw-text-white tw-justify-center tw-items-center tw-text-[32px]"
+                :class="progressText === 'Completed' ? 'tw-flex' : 'tw-hidden group-hover:tw-flex'"
+            >
                 <svg v-if="enrollmentOpen" class="tw-w-[40px] lg:tw-w-[52px] tw-h-[40px] lg:tw-h-[52px]" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.5 20.4166L30.625 13.1249L17.5 5.83325L4.375 13.1249L17.5 20.4166ZM17.5 20.4166L26.482 15.4265C27.2734 17.422 27.7083 19.5976 27.7083 21.8748C27.7083 22.8976 27.6206 23.8998 27.4522 24.8745C23.6458 25.2446 20.1965 26.8342 17.5 29.2476C14.8035 26.8342 11.3542 25.2446 7.54778 24.8745C7.37941 23.8998 7.29167 22.8975 7.29167 21.8747C7.29167 19.5976 7.72661 17.422 8.51794 15.4265L17.5 20.4166ZM11.6667 29.1665V18.2291L17.5 14.9883" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+                <i v-else-if="progressText === 'Completed'" :class="`fa-solid fa-circle-check tw-text-${brand}`" aria-hidden="true"></i>
                 <i v-else class="fas fa-arrow-right" aria-hidden="true"></i>
             </div>
             <!-- Progress bar -->
@@ -74,20 +78,37 @@
             </a>
             <div class="sm:tw-flex tw-flex-shrink-0 tw-items-center">
                 <!-- Add to playlist -->
-                <div class="tw-h-[45px]" :title="pack.lesson_count > 300 ? 'This pack has too many lessons.' : '' ">
-                    <button class="tw-mr-4 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-full tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-30 disabled:tw-pointer-events-none"
-                        :disabled="pack.lesson_count > 300"
+                <button
+                    class="tw-mr-3 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-30 disabled:tw-pointer-events-none"
+                    :disabled="pack.lesson_count > 300"
+                    :title="pack.lesson_count > 300 ? 'This pack has too many lessons.' : '' "
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                </button>
+                <!-- Reset -->
+                <button
+                    v-if="progressText === 'Completed'"
+                    class="tw-mr-3 dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-flex tw-justify-center tw-items-center tw-w-[45px] tw-h-[45px] tw-hidden hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]"
+                    @click="handleResetProgress"
+                >
+                    <i class="fas fas fa-redo-alt fa-flip-horizontal" aria-hidden="true"></i>
+                </button>
+                <div class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0">
+                    <!-- Action button  -->
+                    <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow" :class="progressButtonColor">
+                        <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
+
+                    </a>
+                    <button
+                        v-if="progressText === 'Completed'"
+                        class="tw-ml-[13px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full sm:tw-hidden tw-flex tw-justify-center tw-items-center tw-w-[30px] tw-h-[30px] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]"
+                        @click="handleResetProgress"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
+                        <i class="fas fas fa-redo-alt fa-flip-horizontal" aria-hidden="true"></i>
                     </button>
                 </div>
-                <!-- Action button  -->
-                <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-w-full sm:tw-w-auto tw-mt-3 tw-mb-0 sm:tw-mt-0" :class="progressButtonColor">
-                    <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
-
-                </a>
             </div>
         </div>
     </div>
@@ -95,12 +116,13 @@
 <script setup>
 import {storeToRefs} from "pinia/dist/pinia";
 import { useUserStore } from '../../../stores/user';
-import {computed, onMounted} from "vue";
+import { computed, ref } from "vue";
 import { DateTime } from 'luxon';
-import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
+import { useResetProgress } from "../../hooks/useResetProgress";
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
+const { resetProgress } = useResetProgress();
 
 const props = defineProps({
     pack: {
@@ -108,6 +130,8 @@ const props = defineProps({
         default: {},
     }
 })
+
+const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
@@ -178,7 +202,7 @@ const progressIcon = computed(() => {
     } else if (progressText.value === 'Continue'){
         return `fa-adjust`;
     } else if(progressText.value === 'Completed'){
-        return `fa-check-circle`;
+        return `fa-check`;
     } else {
         return 'fa-play';
     }
@@ -187,6 +211,8 @@ const progressIcon = computed(() => {
 const progressButtonColor = computed(() => {
     if(progressText.value === 'Start'){
         return 'dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border dark:tw-border-white tw-border-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]';
+    } else if(progressText.value === 'Completed'){
+        return `tw-bg-${brand.value}`;
     } else {
         return 'tw-bg-[#00101D] dark:tw-bg-white tw-text-white dark:tw-text-[#00101D] hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white';
     }
@@ -208,6 +234,10 @@ const addToPlaylist = () => {
     window.openplaylistmodal({ modalType: 'addItem', content });
 }
 
+const handleResetProgress = () => {
+    resetProgress(props.pack.id, resetIcon, true);
+}
+
 const logoStyle = computed(() => {
     if(title.value === 'Electrify Your Drumming' || title.value === 'Beyond Beginner Drumming' || title.value === 'Anatomy Of A Drum Solo' || title.value === 'Creative Control' || title.value === 'Getting Started On The Piano' || title.value === 'Easy Chords' || title.value === 'The Power Of Chords' || title.value === 'The Beginner\'s Guide To Classical Piano' || title.value === 'New Piano Players Start Here' || title.value === 'The Beginner\'s Guide To Playing Beautiful Piano' || title.value === 'Beginner Guitar System' || title.value === 'Rhythm & Groove') {
         return 'lg:tw-max-h-[50px]';
@@ -216,7 +246,5 @@ const logoStyle = computed(() => {
     if(title.value.includes('Rock Drumming Masterclass') || title.value === 'New Drummers Start Here' || title.value.includes('Drum Technique Made Easy') || title.value.includes('Independence Made Easy') || title.value === 'The Ultimate Guide To Recording Drums' || title.value === 'De-Stupefy Your Left Hand' || title.value === '500 Songs In 5 Days' || title.value === 'Blues Guitar Blueprint' || title.value === 'Guitar Quest' || title.value === 'The Ultimate Guide To Recording Guitar'){
         return 'lg:tw-max-h-[40px]';
     }
-
-
 })
 </script>

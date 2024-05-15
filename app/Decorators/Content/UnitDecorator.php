@@ -6,7 +6,6 @@ use Railroad\Railcontent\Support\Collection;
 
 class UnitDecorator extends TypeDecoratorBase
 {
-
     /**
      * @param Collection $contents
      *

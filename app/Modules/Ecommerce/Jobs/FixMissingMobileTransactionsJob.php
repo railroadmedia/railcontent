@@ -2,7 +2,6 @@
 
 namespace App\Modules\Ecommerce\Jobs;
 
-
 use App\Console\Commands\Infrastructure\Timer;
 use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
@@ -79,7 +78,7 @@ class FixMissingMobileTransactionsJob implements ShouldQueue
                             //Do nothing for cancelled orders because adding the transaction and revoking it will add a bunch of refunds for whenever we processed this
                             //$shopifyCancelService->cancelOrder($orderId);
                         } else {
-                            $shopifySyncService->createShopifyOrderTransaction($orderId, $amount);
+                            $shopifySyncService->createShopifyOrderTransactionOld($orderId, $amount);
                             Log::info("Order ID: $orderId transaction added");
                         }
                         $this->totalProcessed++;

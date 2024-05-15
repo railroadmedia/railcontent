@@ -12,7 +12,7 @@ use Illuminate\Database\Seeder;
 
 class CmsAccessorySeeder extends Seeder
 {
-    const C = [
+    public const C = [
         [
             "brand" => 1,
             "product_type_id" => 2,
@@ -2045,16 +2045,13 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
         foreach($products as $product) {
             $brand = $product['brand'];
 
-            if($brand === 1){
+            if($brand === 1) {
                 $orderNum = $drumeo;
-            }
-            elseif($brand === 2){
+            } elseif($brand === 2) {
                 $orderNum = $pianote;
-            }
-            elseif($brand === 3){
+            } elseif($brand === 3) {
                 $orderNum = $guitareo;
-            }
-            elseif($brand === 4){
+            } elseif($brand === 4) {
                 $orderNum = $singeo;
             }
 
@@ -2092,20 +2089,17 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
                 'updated_at' => now(),
             ]);
 
-            if($brand === 1){
+            if($brand === 1) {
                 $drumeo += 5;
-            }
-            elseif($brand === 2){
+            } elseif($brand === 2) {
                 $pianote += 5;
-            }
-            elseif($brand === 3){
+            } elseif($brand === 3) {
                 $guitareo += 5;
-            }
-            elseif($brand === 4){
+            } elseif($brand === 4) {
                 $singeo += 5;
             }
 
-            foreach($product['features'] as $key => $feature){
+            foreach($product['features'] as $key => $feature) {
                 Feature::create([
                     'product_id' => $newProduct->id,
                     'desc' => $feature,
@@ -2113,8 +2107,8 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
                 ]);
             }
 
-            if(count($product['specs']) > 0 ){
-                foreach($product['specs'] as $key => $spec){
+            if(count($product['specs']) > 0) {
+                foreach($product['specs'] as $key => $spec) {
                     Spec::create([
                         'product_id' => $newProduct->id,
                         'title' => $spec['title'],
@@ -2124,7 +2118,7 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
                 }
             }
 
-            foreach($product['images'] as $key => $image){
+            foreach($product['images'] as $key => $image) {
                 Image::create([
                     'product_id' => $newProduct->id,
                     'path' => $image,
@@ -2132,7 +2126,7 @@ APOP65 Nylon screen professional pop filter for studio-quality recordings',
                 ]);
             }
 
-            foreach($product['sizes'] as $size){
+            foreach($product['sizes'] as $size) {
                 ProductSize::create([
                     'product_id' => $newProduct->id,
                     'size_id' => $size

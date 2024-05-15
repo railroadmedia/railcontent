@@ -66,7 +66,7 @@ class CancelDuplicateSubscriptionPaymentOrders implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     /**

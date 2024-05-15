@@ -6,7 +6,6 @@ use Modules\UserManagementSystem\Models\User;
 
 class HelpScoutSyncService
 {
-
     /**
      * @param User $user
      *
@@ -215,7 +214,7 @@ class HelpScoutSyncService
                     } else {
                         $latestMembershipProduct = $latestMembershipUserProduct->getProduct();
                         $membershipType = $latestMembershipProduct->getSubscriptionIntervalCount(
-                            ) . $latestMembershipProduct->getSubscriptionIntervalType();
+                        ) . $latestMembershipProduct->getSubscriptionIntervalType();
 
                         $userOrders = $this->orderRepository->getUserOrdersForProduct(
                             $userId,
@@ -232,8 +231,8 @@ class HelpScoutSyncService
                             if (count($userOrders) > 1) {
                                 foreach ($userOrders as $order) {
                                     if ($order->getCreatedAt()->format(
-                                            'Ym'
-                                        ) == $latestMembershipUserProduct->getCreatedAt()->format('Ym')) {
+                                        'Ym'
+                                    ) == $latestMembershipUserProduct->getCreatedAt()->format('Ym')) {
                                         $latestMembershipOrder = $order;
                                     }
                                 }
@@ -249,7 +248,7 @@ class HelpScoutSyncService
                         }
 
                         $membershipDetails = $membershipType . '|' . $latestMembershipProduct->getType(
-                            ) . '|' . $membershipRate;
+                        ) . '|' . $membershipRate;
                     }
                 }
             }

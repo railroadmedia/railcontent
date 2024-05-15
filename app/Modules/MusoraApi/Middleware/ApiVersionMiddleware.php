@@ -17,7 +17,7 @@ class ApiVersionMiddleware
     public function handle(Request $request, Closure $next, $guard): mixed
     {
         //set filter version
-        if($request->has('count_filter_items')){
+        if($request->has('count_filter_items')) {
             config(['railcontent.filter_version' => 'V2']);
         }
 

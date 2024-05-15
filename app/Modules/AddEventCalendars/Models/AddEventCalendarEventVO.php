@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Modules\AddEventCalendars\Models;
-
 
 use App\Services\AddEventService;
 use Carbon\Carbon;

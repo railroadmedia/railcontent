@@ -25,6 +25,7 @@ use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Signifly\Shopify\Shopify;
+
 /**
  * BulkCustomerCreateFromUsers is a job used to perform a Bulk Operation in shopify to create multiple customers, using
  * the collection of Users found using the provided constructor parameters.
@@ -60,7 +61,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
 
     public function middleware(): array
     {
-        return [new SkipIfBatchCancelled];
+        return [new SkipIfBatchCancelled()];
     }
 
     protected CustomerRepository $customerRepository;
@@ -111,8 +112,10 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
 
         // safety check for edge case that all users in this batch were already synced as customers
         if (empty($usersData)) {
-            $this->logInfo(sprintf("%s: All users in this batch were already synced. Skipping this batch.",
-                $this->getClassName()));
+            $this->logInfo(sprintf(
+                "%s: All users in this batch were already synced. Skipping this batch.",
+                $this->getClassName()
+            ));
             return;
         }
 
@@ -136,7 +139,7 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
     {
         // check for any of the user's customer entities that may have already been synced
         $alreadySyncedUserCustomers = $userCustomers->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
-        if ($alreadySyncedUserCustomers->isNotEmpty()){
+        if ($alreadySyncedUserCustomers->isNotEmpty()) {
             /** @var Customer $syncedCustomer */
             $syncedCustomer = $alreadySyncedUserCustomers->first();
             $shopifyId = $syncedCustomer->getShopifyId();
@@ -193,14 +196,14 @@ class BulkCustomerCreateFromUsers implements ShouldQueue
         $addresses = collect($this->addressRepository->getUserShippingAddresses($user->id));
 
         // and its customers
-        $customers->each(fn(Customer $customer) => $addresses->push(
+        $customers->each(fn (Customer $customer) => $addresses->push(
             ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
         ));
 
         $addresses = $this->cleanUpAddresses($addresses);
 
-        $addresses->each(function($addressArray) use ($addressData) {
-            $addressData->push ($addressArray);
+        $addresses->each(function ($addressArray) use ($addressData) {
+            $addressData->push($addressArray);
         });
 
         return $addressData;

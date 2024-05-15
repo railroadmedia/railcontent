@@ -10,7 +10,6 @@ use Carbon\Carbon;
 
 class FeatureSeeders extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

@@ -18,8 +18,8 @@ use Modules\UserManagementSystem\Models\User;
 
 class CustomerIoSyncServiceTest extends CustomerIoTestCase
 {
-    const ROOT_BRAND = "musora";
-    const MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY = "_membership_latest-access-product-id";
+    public const ROOT_BRAND = "musora";
+    public const MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY = "_membership_latest-access-product-id";
     private CustomerIoSyncService $customerIoSyncService;
 
     /**
@@ -139,11 +139,16 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
 
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
-        SubscriptionFactory::createWith($user, $product, $activeTime, $expirationTime,
+        SubscriptionFactory::createWith(
+            $user,
+            $product,
+            $activeTime,
+            $expirationTime,
             [
                 "interval_type" => "year",
                 "interval_count" => 1,
-            ]);
+            ]
+        );
 
         return $product;
     }

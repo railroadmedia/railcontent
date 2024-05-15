@@ -15,7 +15,7 @@ use App\Modules\Referral\Exceptions\SaasquatchUserExistsException;
 
 class SaasquatchApi
 {
-    const BASE_URI = 'https://app.referralsaasquatch.com';
+    public const BASE_URI = 'https://app.referralsaasquatch.com';
 
     /**
      * @var Client
@@ -94,7 +94,8 @@ class SaasquatchApi
      *
      * @description : https://docs.saasquatch.com/api/methods#get_shareurls
      */
-    public function getShareUrlsFromUser($userId, $brand) {
+    public function getShareUrlsFromUser($userId, $brand)
+    {
         $pathFormat = "/api/v1/%s/open/account/%s/user/%s/shareurls?programId=%s";
         $path = sprintf($pathFormat, $this->saasquatchTenantAlias, $userId, $userId, $this->saasquatchReferralProgramId[$brand]);
         return $this->sendRequest("GET", $path);
@@ -113,7 +114,8 @@ class SaasquatchApi
      * @description : https://docs.saasquatch.com/api/methods#open_user_upsert
      * @description : https://docs.saasquatch.com/graphql/reference
      */
-    public function upsertUserUsingGraphqlAPI($userId) {
+    public function upsertUserUsingGraphqlAPI($userId)
+    {
         $path = sprintf("api/v1/%s/graphql", $this->saasquatchTenantAlias);
 
         $requestJsonBody =

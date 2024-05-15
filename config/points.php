@@ -2,7 +2,7 @@
 
 return [
     // database
-    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY', 'musora_laravel_mysql_writer_only'),
 
     // cache
     // ttl value in minutes

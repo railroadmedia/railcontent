@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $description
  * @property string $allow_filter
+ * @property string $block_filter
  * @property string $userid_list
  * @property \Illuminate\Support\Carbon|null $active_at
  * @method static \Illuminate\Database\Eloquent\Builder|Feature newModelQuery()

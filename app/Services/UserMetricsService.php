@@ -8,8 +8,6 @@ use Illuminate\Database\DatabaseManager;
 
 class UserMetricsService
 {
-
-
     /**
      * @var DatabaseManager
      */
@@ -57,7 +55,7 @@ class UserMetricsService
     private function getDaysAsMember($userId)
     {
         return 100; // todo: fix after ecom
-        $usersProducts = $this->userProductService->getAllUsersProducts((integer)$userId);
+        $usersProducts = $this->userProductService->getAllUsersProducts((int)$userId);
 
         /**
          * @var $startDate Carbon|null
@@ -142,9 +140,9 @@ class UserMetricsService
         return $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table('railcontent_comments')
             ->join('railcontent_comment_likes', 'railcontent_comment_likes.comment_id', '=', 'railcontent_comments.id')
-            ->join('railcontent_content','railcontent_comments.content_id', '=', 'railcontent_content.id' )
+            ->join('railcontent_content', 'railcontent_comments.content_id', '=', 'railcontent_content.id')
             ->where('railcontent_comments.user_id', '=', $userId)
-            ->where('railcontent_content.brand','=', brand())
+            ->where('railcontent_content.brand', '=', brand())
             ->count();
     }
 
@@ -153,7 +151,7 @@ class UserMetricsService
      *
      * @return integer
      */
-    public function getTotalMinutesPracticed($userId, $assignmentTypeIds=[])
+    public function getTotalMinutesPracticed($userId, $assignmentTypeIds = [])
     {
         if(empty($assignmentTypeIds)) {
             $assignmentTypeIds =
@@ -167,7 +165,7 @@ class UserMetricsService
         }
 
         return round(
-            ((integer)$this->databaseManager->connection(config('railtracker.database_connection_name'))
+            ((int)$this->databaseManager->connection(config('railtracker.database_connection_name'))
                 ->table('railtracker_media_playback_sessions')
                 ->where('user_id', $userId)
                 ->whereIn('type_id', $assignmentTypeIds)

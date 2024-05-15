@@ -20,7 +20,7 @@ class CmsProductTypeSeeder extends Seeder
             'Lessons', 'Accessories', 'Hats', 'Shirts', 'Hoodies', 'Bundles'
         ];
 
-        foreach($types as $type){
+        foreach($types as $type) {
             ProductType::create([
                 'name' => $type
             ]);

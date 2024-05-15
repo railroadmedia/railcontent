@@ -547,7 +547,7 @@ body {
         .arrow {
           position:absolute;
           top:0;
-          right:$gutterWidth / 3;
+          right:calc($gutterWidth / 3);
           bottom:0;
           will-change: transform;
           transition:transform .1s ease-in-out;

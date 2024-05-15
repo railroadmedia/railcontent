@@ -22,14 +22,21 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
      */
     public function __construct(
         ContentService $contentService
-    )
-    {
+    ) {
         $this->contentService = $contentService;
     }
 
-    public function redirectDrumeo($domain, $segment1 = null, $segment2 = null, $segment3 = null, $segment4 = null,
-        $segment5 = null, $segment6 = null, $segment7 = null, $segment8 = null)
-    {
+    public function redirectDrumeo(
+        $domain,
+        $segment1 = null,
+        $segment2 = null,
+        $segment3 = null,
+        $segment4 = null,
+        $segment5 = null,
+        $segment6 = null,
+        $segment7 = null,
+        $segment8 = null
+    ) {
         $userId = null;
         $authParams = null;
 
@@ -129,16 +136,16 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                     }
                 }
             } elseif ($segment1 == 'semester-packs') {
-// logic taken from Unified, SemesterPackController->show()
-                $pack = $this->contentService->getBySlugAndType($segment2,'semester-pack')->first();
+                // logic taken from Unified, SemesterPackController->show()
+                $pack = $this->contentService->getBySlugAndType($segment2, 'semester-pack')->first();
                 if ($pack) {
                     $lessons = $this->contentService->getByParentId($pack['id']);
                     $lessons = new Collection(
                         $lessons->sort(
                             function ($a, $b) {
                                 return strtotime($a["published_on"]) - strtotime(
-                                        $b["published_on"]
-                                    );
+                                    $b["published_on"]
+                                );
                             }
                         )
                             ->values()
@@ -172,14 +179,14 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                     }
                 }
             } elseif ($segment1 == 'packs') {
-                $pack = $this->contentService->getBySlugAndType($segment2,'pack')->first();
-                $packBundle = $this->contentService->getBySlugAndType($segment3,'pack-bundle')->first();
+                $pack = $this->contentService->getBySlugAndType($segment2, 'pack')->first();
+                $packBundle = $this->contentService->getBySlugAndType($segment3, 'pack-bundle')->first();
                 if ($pack && $packBundle) {
                     $unifiedUrl = $unifiedUrl . $segment1 . '/' . $segment2 . "/" . $pack['id'] . '/' . $segment3 . "/"  . $packBundle['id'] ;
                 }
             } elseif ($segment1 == 'learning-paths') {
-                $learningPath = $this->contentService->getBySlugAndType($segment2,'learning-path')->first();
-                $learningPathLevel = $this->contentService->getBySlugAndType($segment3,'learning-path-level')->first();
+                $learningPath = $this->contentService->getBySlugAndType($segment2, 'learning-path')->first();
+                $learningPathLevel = $this->contentService->getBySlugAndType($segment3, 'learning-path-level')->first();
                 if ($learningPath && $learningPathLevel) {
                     $unifiedUrl = $unifiedUrl  . 'method/' . $segment2 . "/" . $learningPath['id'] . '/' . $segment3 . "/"  . $learningPathLevel['id'] ;
                 }
@@ -195,15 +202,15 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
 
         if ($segment5 == null) {
             if ($segment1 == 'coaches') {
-//todo!
-// drumeo.com: https://www.drumeo.com/members/coaches/jared-falk/11-iconic-drum-beats/321029
-// could not find yet link for musora.com/drumeo
+                //todo!
+                // drumeo.com: https://www.drumeo.com/members/coaches/jared-falk/11-iconic-drum-beats/321029
+                // could not find yet link for musora.com/drumeo
             } elseif ($segment1 == 'packs') {
                 //https://dev.drumeo.com/members/packs/new-drummers-start-here/the-drum-setup-system/welcome
                 //https://devplatform.musora.com:8443/drumeo/packs/new-drummers-start-here/299812/the-drum-setup-system/299813/welcome/299814
-                $pack = $this->contentService->getBySlugAndType($segment2,'pack')->first();
-                $packBundle = $this->contentService->getBySlugAndType($segment3,'pack-bundle')->first();
-                $packBundleLesson = $this->contentService->getBySlugAndType($segment4,'pack-bundle-lesson')->first();
+                $pack = $this->contentService->getBySlugAndType($segment2, 'pack')->first();
+                $packBundle = $this->contentService->getBySlugAndType($segment3, 'pack-bundle')->first();
+                $packBundleLesson = $this->contentService->getBySlugAndType($segment4, 'pack-bundle-lesson')->first();
 
                 if ($pack && $packBundle && $packBundleLesson) {
                     $unifiedUrl = $unifiedUrl . "packs/" . $segment2 . "/" . $pack['id'] . "/" . $segment3 . "/" . $packBundle['id'] .
@@ -216,8 +223,8 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
 
         if ($segment6 == null) {
             if ($segment1 == 'learning-paths') {
-                $learningPath = $this->contentService->getBySlugAndType($segment2,'learning-path')->first();
-                $learningPathLevel = $this->contentService->getBySlugAndType($segment3,'learning-path-level')->first();
+                $learningPath = $this->contentService->getBySlugAndType($segment2, 'learning-path')->first();
+                $learningPathLevel = $this->contentService->getBySlugAndType($segment3, 'learning-path-level')->first();
                 if ($learningPath && $learningPathLevel) {
                     $unifiedUrl = $unifiedUrl  . 'method/' . $segment2 . "/" . $learningPath['id'] . '/' .
                         $segment3 . "/"  . $learningPathLevel['id'] . "/" .  $segment4 . "/" . $segment5;
@@ -363,8 +370,8 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         }
 
         if ($segment4 == null && $segment1 == 'learning-paths') {
-            $learningPath = $this->contentService->getBySlugAndType($segment2,'learning-path')->first();
-            $learningPathLevel = $this->contentService->getBySlugAndType($segment3,'learning-path-level')->first();
+            $learningPath = $this->contentService->getBySlugAndType($segment2, 'learning-path')->first();
+            $learningPathLevel = $this->contentService->getBySlugAndType($segment3, 'learning-path-level')->first();
             if ($learningPath && $learningPathLevel) {
                 $unifiedUrl = $unifiedUrl  . 'method/' . $segment2 . "/" . $learningPath['id'] . '/' . $segment3 . "/"  . $learningPathLevel['id'] ;
             }
@@ -532,12 +539,12 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                 }
             } elseif ($segment1 == 'course-part') {
                 //todo:
-//            https://dev.guitareo.com/members/course-part/363972
-//            https://dev.musora.com:8443/guitareo/courses/ayla-workouts/363971/workout-1/363972
+                //            https://dev.guitareo.com/members/course-part/363972
+                //            https://dev.musora.com:8443/guitareo/courses/ayla-workouts/363971/workout-1/363972
             } elseif ($segment1 == 'play-along-part') {
                 //todo:
-//            https://dev.guitareo.com/members/play-along-part/192922
-//            https://dev.musora.com:8443/guitareo/method/advanced-lead-guitar/193786/talking-birds-lead/191440/series-overview/192922
+                //            https://dev.guitareo.com/members/play-along-part/192922
+                //            https://dev.musora.com:8443/guitareo/method/advanced-lead-guitar/193786/talking-birds-lead/191440/series-overview/192922
             } elseif ($segment1 == 'student-review') {
                 $unifiedUrl = $unifiedUrl . 'student-reviews/student-review/' . $segment2;
             } elseif ($segment1 == 'semester-packs') {
@@ -588,7 +595,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                     $unifiedUrl = $unifiedUrl . "lists/my-list";
                 }
             } elseif ($segment1 == 'semester-packs') {
-// logic taken from Unified, SemesterPackController->show()
+                // logic taken from Unified, SemesterPackController->show()
                 $pack = $this->contentService->getBySlugAndType($segment2, 'semester-pack')->first();
                 if ($pack) {
                     $lessons = $this->contentService->getByParentId($pack['id']);
@@ -596,8 +603,8 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                         $lessons->sort(
                             function ($a, $b) {
                                 return strtotime($a["published_on"]) - strtotime(
-                                        $b["published_on"]
-                                    );
+                                    $b["published_on"]
+                                );
                             }
                         )
                             ->values()

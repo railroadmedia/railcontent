@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 class SyncShopifyProductInventoryToProductsTable extends Command
 {
-
     /**
      * The console command name.
      *
@@ -24,7 +23,7 @@ class SyncShopifyProductInventoryToProductsTable extends Command
      *
      * @return mixed
      */
-    public function handle(ShopifyAPIService $shopifyAPIService,)
+    public function handle(ShopifyAPIService $shopifyAPIService)
     {
         $this->info('Starting SyncShopifyProductInventoryToProductsTable.');
 
@@ -55,7 +54,7 @@ class SyncShopifyProductInventoryToProductsTable extends Command
                 }
 
                 // we don't want to hit the API limit
-                sleep (2);
+                sleep(2);
             });
 
         $this->info('---------------------------------------------------');

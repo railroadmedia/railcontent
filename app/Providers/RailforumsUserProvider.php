@@ -23,8 +23,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param $userId
      * @return mixed|string
      */
-    public function getUserAccessLevel($userId)
-    : string {
+    public function getUserAccessLevel($userId): string
+    {
         return DB::connection(config('user_management_system.database_connection_name'))
                 ->table('usora_users')
                 ->where('id', $userId)
@@ -36,8 +36,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param $userId
      * @return ?ForumUser
      */
-    public function getUser($userId)
-    : ?ForumUser {
+    public function getUser($userId): ?ForumUser
+    {
         if (!empty(user()) && $userId === user()->id) {
             $user = user();
         } else {
@@ -57,8 +57,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array|ForumUser[]
      */
-    public function getUsersByIds(array $userIds)
-    : array {
+    public function getUsersByIds(array $userIds): array
+    {
         $users =
             User::query()
                 ->whereIn('id', $userIds)
@@ -84,8 +84,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array
      */
-    public function getUsersAccessLevel(array $userIds)
-    : array {
+    public function getUsersAccessLevel(array $userIds): array
+    {
         $userRows =
             DB::connection(config('user_management_system.database_connection_name'))
                 ->table('usora_users')
@@ -106,8 +106,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array
      */
-    public function getUsersXPAndRank(array $userIds)
-    : array {
+    public function getUsersXPAndRank(array $userIds): array
+    {
         /**
          * @var $users User[]
          */
@@ -131,8 +131,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array
      */
-    public function getAssociatedCoaches(array $userIds)
-    : array {
+    public function getAssociatedCoaches(array $userIds): array
+    {
         $includedFields = [];
         $associatedUsers = [];
 
@@ -141,15 +141,15 @@ class RailforumsUserProvider implements UserProviderInterface
         }
 
         $instructors = $this->contentService->getFiltered(
-                1,
-                'null',
-                '-published_on',
-                ['instructor'],
-                [],
-                [],
-                [],
-                $includedFields
-            );
+            1,
+            'null',
+            '-published_on',
+            ['instructor'],
+            [],
+            [],
+            [],
+            $includedFields
+        );
 
         foreach ($instructors->results() as $instructor) {
             $associatedUsers[$instructor->fetch('fields.associated_user_id')] = [
@@ -186,8 +186,7 @@ class RailforumsUserProvider implements UserProviderInterface
     /**
      * @return array|null
      */
-    public function getBlockedUsers()
-    : ?array
+    public function getBlockedUsers(): ?array
     {
         return BlockedUser::where('blocker_id', '=', user()->id)
             ->get()

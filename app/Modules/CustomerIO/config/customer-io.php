@@ -59,8 +59,7 @@ return [
     'forms' => [
         'drumeo' => [
             'Kristinas Top 25' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_kristinas-top-25',
                 ],
@@ -69,8 +68,7 @@ return [
                 ],
             ],
             '40 Songs' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_top-40-songs',
                 ],
@@ -79,8 +77,7 @@ return [
                 ],
             ],
             'Fastest Way To Get Faster' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_fastest-way-to-get-faster',
                 ],
@@ -89,8 +86,7 @@ return [
                 ],
             ],
             'Fastest Way To Get Faster - Facebook' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_fastest-way-to-get-faster',
                 ],
@@ -99,8 +95,7 @@ return [
                 ],
             ],
             'Sucherman Sound' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_sucherman-sound',
                 ],
@@ -109,8 +104,7 @@ return [
                 ],
             ],
             'The Ultimate Drumming Toolbox' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_ultimate-toolbox',
                 ],
@@ -119,8 +113,7 @@ return [
                 ],
             ],
             'Hand Technique' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_hand-technique',
                 ],
@@ -129,8 +122,7 @@ return [
                 ],
             ],
             'Getting Started On The Drums' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_getting-started',
                 ],
@@ -139,8 +131,7 @@ return [
                 ],
             ],
             'Getting Started On The Drums - Facebook' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_getting-started',
                 ],
@@ -149,8 +140,7 @@ return [
                 ],
             ],
             'Getting Started On The Drums - Thrive' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_getting-started',
                 ],
@@ -159,8 +149,7 @@ return [
                 ],
             ],
             'Must-Know Drum Grooves' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_must-know',
                 ],
@@ -169,8 +158,7 @@ return [
                 ],
             ],
             'Grooves Of Michael Jackson' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_mj-grooves',
                 ],
@@ -179,8 +167,7 @@ return [
                 ],
             ],
             'Drum Set Maintenance' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_drum-maintenence',
                 ],
@@ -189,8 +176,7 @@ return [
                 ],
             ],
             'Linear Drumming' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_cooper-linear',
                 ],
@@ -199,8 +185,7 @@ return [
                 ],
             ],
             'COOP3RDRUMM3R - CC HTSPD - Lead Gen' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_cooper-htspd',
                 ],
@@ -209,8 +194,7 @@ return [
                 ],
             ],
             'Gavins Grooves' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_gavins-grooves',
                 ],
@@ -219,8 +203,7 @@ return [
                 ],
             ],
             'Free Play-Alongs' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_free-playalongs',
                 ],
@@ -229,8 +212,7 @@ return [
                 ],
             ],
             'Metal Play-Alongs' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_metal-playalongs',
                 ],
@@ -239,8 +221,7 @@ return [
                 ],
             ],
             'Grooves Of John Bonham' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_grooves-of-john-bonham',
                 ],
@@ -249,8 +230,7 @@ return [
                 ],
             ],
             'Blog Signup' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_blog-sign-up',
                 ],
@@ -259,8 +239,7 @@ return [
                 ],
             ],
             '2 Million Celebration' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_2-million',
                 ],
@@ -269,8 +248,7 @@ return [
                 ],
             ],
             'Drumeo Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_giveaway',
                 ],
@@ -280,17 +258,21 @@ return [
             ],
             'Drumeo Drumset Giveaway' => [
                 'custom_attributes' => [
+                    'first_name' => 'required|string'
                 ],
                 'events' => [
-                    'drumeo_prospect_drumset-giveaway-2023',
+                    'drumeo_prospect_drumset-giveaway-may-2024',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
                 ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
             ],
             'Drumeo Giveaway Rafflepress' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_rafflepress-giveaway',
                 ],
@@ -299,8 +281,7 @@ return [
                 ],
             ],
             'Drumeo Awards Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_awards-giveaway',
                 ],
@@ -309,8 +290,7 @@ return [
                 ],
             ],
             'Drumeo Awards Giveaway 2' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_awards-giveaway-2023',
                 ],
@@ -319,8 +299,7 @@ return [
                 ],
             ],
             '30 Day Drummer Waitlist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_30dd-waitlist',
                 ],
@@ -329,8 +308,7 @@ return [
                 ],
             ],
             '30 Day Chops Waitlist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_30dc-waitlist',
                 ],
@@ -339,8 +317,7 @@ return [
                 ],
             ],
             'Alesis Waitlist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_alesis-waitlist',
                 ],
@@ -351,8 +328,7 @@ return [
         ],
         'pianote' => [
             'Metronome Notice' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_metronome-notice',
                 ],
@@ -361,8 +337,7 @@ return [
                 ],
             ],
             'Blues Piano Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_blues-piano-bootcamp',
                 ],
@@ -372,6 +347,7 @@ return [
             ],
             'Chord Hacks' => [
                 'custom_attributes' => [
+                    'first_name' => 'required|string'
                 ],
                 'events' => [
                     'pianote_prospect_chord-hacks',
@@ -379,10 +355,13 @@ return [
                 'accounts_to_sync' => [
                     'pianote',
                 ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
             ],
             'Chord Hacks - Facebook' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_chord-hacks',
                 ],
@@ -392,6 +371,7 @@ return [
             ],
             'Getting Started On The Piano' => [
                 'custom_attributes' => [
+                    'first_name' => 'required|string'
                 ],
                 'events' => [
                     'pianote_prospect_getting-started',
@@ -399,10 +379,13 @@ return [
                 'accounts_to_sync' => [
                     'pianote',
                 ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
             ],
             'Getting Started On The Piano - Facebook' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_getting-started',
                 ],
@@ -412,6 +395,7 @@ return [
             ],
             'Sight Reading Made Simple' => [
                 'custom_attributes' => [
+                    'first_name' => 'required|string'
                 ],
                 'events' => [
                     'pianote_prospect_sight-reading-made-simple',
@@ -419,10 +403,13 @@ return [
                 'accounts_to_sync' => [
                     'pianote',
                 ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
             ],
             'Learn 3 Songs On Piano' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_learn-3-songs',
                 ],
@@ -431,8 +418,7 @@ return [
                 ],
             ],
             'NPPSH Waitlist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_nppsh-waitlist',
                 ],
@@ -441,8 +427,7 @@ return [
                 ],
             ],
             'Easy Chords Waitlist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_easy-chords-waitlist',
                 ],
@@ -451,8 +436,7 @@ return [
                 ],
             ],
             'Beginner Piano Christmas Carols' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_christmas-carols',
                 ],
@@ -461,8 +445,7 @@ return [
                 ],
             ],
             'Beautiful Christmas Classics' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_beautiful-christmas-classics',
                 ],
@@ -472,6 +455,7 @@ return [
             ],
             'Digital Chords And Scales' => [
                 'custom_attributes' => [
+                    'first_name' => 'required|string'
                 ],
                 'events' => [
                     'pianote_prospect_digital-chords-and-scales',
@@ -479,10 +463,13 @@ return [
                 'accounts_to_sync' => [
                     'pianote',
                 ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
             ],
             'Blog Signup' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_blog-signup',
                 ],
@@ -491,8 +478,7 @@ return [
                 ],
             ],
             'Easy Classical Songs' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_easy-classical-songs',
                 ],
@@ -501,8 +487,7 @@ return [
                 ],
             ],
             'F Sharp Minor' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_f-sharp-minor',
                 ],
@@ -511,8 +496,7 @@ return [
                 ],
             ],
             'The Minor Blues Made Easy' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_minor-blues',
                 ],
@@ -521,8 +505,7 @@ return [
                 ],
             ],
             'Pentatonic Scale' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_pentatonic-scale',
                 ],
@@ -531,8 +514,7 @@ return [
                 ],
             ],
             'Practice Chord Inversions' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_chord-inversions',
                 ],
@@ -541,8 +523,7 @@ return [
                 ],
             ],
             'Riffs And Fills' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_riffs-and-fills',
                 ],
@@ -551,8 +532,7 @@ return [
                 ],
             ],
             '50 Chord Charts' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_50-free-chord-charts',
                 ],
@@ -561,8 +541,7 @@ return [
                 ],
             ],
             '1 Million' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_1-million',
                 ],
@@ -571,8 +550,7 @@ return [
                 ],
             ],
             'Classical Piano Quick Start' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_classical-piano',
                 ],
@@ -581,8 +559,7 @@ return [
                 ],
             ],
             'Piano In 5 Days' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_piano-in-5-days',
                 ],
@@ -591,8 +568,7 @@ return [
                 ],
             ],
             'Piano For Complete Beginners Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_complete-beginner-bootcamp',
                 ],
@@ -601,8 +577,7 @@ return [
                 ],
             ],
             'Perfect Practice Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_perfect-practice-bootcamp',
                 ],
@@ -611,8 +586,7 @@ return [
                 ],
             ],
             'Giveaway Form' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_giveaway',
                 ],
@@ -621,8 +595,7 @@ return [
                 ],
             ],
             'FP30 Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_giveaway-2023',
                 ],
@@ -631,8 +604,7 @@ return [
                 ],
             ],
             'Pianote Awards Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_awards-giveaway',
                 ],
@@ -641,8 +613,7 @@ return [
                 ],
             ],
             'Osmose Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_osmose-giveaway',
                 ],
@@ -651,8 +622,7 @@ return [
                 ],
             ],
             '7 Days To Sight Reading' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_7-days',
                 ],
@@ -661,8 +631,7 @@ return [
                 ],
             ],
             'Waltz in A Minor' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_waltz-in-a-minor',
                 ],
@@ -671,8 +640,7 @@ return [
                 ],
             ],
             'Personality Quiz Academic' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_personality-quiz-academic',
                 ],
@@ -681,8 +649,7 @@ return [
                 ],
             ],
             'Personality Quiz Entertainer' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_personality-quiz-entertainer',
                 ],
@@ -691,8 +658,7 @@ return [
                 ],
             ],
             'Personality Quiz Explorer' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_personality-quiz-explorer',
                 ],
@@ -701,8 +667,7 @@ return [
                 ],
             ],
             'Personality Quiz Scientist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_personality-quiz-scientist',
                 ],
@@ -711,8 +676,7 @@ return [
                 ],
             ],
             'Pianote Webinar' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_webinar-registrations',
                 ],
@@ -721,8 +685,7 @@ return [
                 ],
             ],
             'Pianote webinar Joined' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_webinar-joined',
                 ],
@@ -731,8 +694,7 @@ return [
                 ],
             ],
             'Pianote Webinar Watched' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_webinar-watched',
                 ],
@@ -741,8 +703,7 @@ return [
                 ],
             ],
             'Pianote Webinar Replay Watched' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_webinar-replay-watched',
                 ],
@@ -751,8 +712,7 @@ return [
                 ],
             ],
             'Pianote Webinar Missed' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_webinar-missed',
                 ],
@@ -761,8 +721,7 @@ return [
                 ],
             ],
             'Pianote Webinar Finished' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'pianote_prospect_webinar-finished',
                 ],
@@ -773,8 +732,7 @@ return [
         ],
         'guitareo' => [
             'The Guitarists Toolbox' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_toolbox',
                 ],
@@ -783,8 +741,7 @@ return [
                 ],
             ],
             'Song Hour' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_song-hour',
                 ],
@@ -793,8 +750,7 @@ return [
                 ],
             ],
             'Acoustic Guitar Jump Start' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_acoustic-jumpstart',
                 ],
@@ -803,8 +759,7 @@ return [
                 ],
             ],
             'Guitar Chords for Hit Songs' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_guitar-chords-for-hit-songs',
                 ],
@@ -813,8 +768,7 @@ return [
                 ],
             ],
             'Guitar Tricks' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_guitar-tricks',
                 ],
@@ -823,8 +777,7 @@ return [
                 ],
             ],
             'The Beginner Guitar Starter' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_starter-kit',
                 ],
@@ -833,8 +786,7 @@ return [
                 ],
             ],
             'Blog Signup' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_blog-signup',
                 ],
@@ -843,8 +795,7 @@ return [
                 ],
             ],
             'Guitareo Waitlist 2' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_waitlist_signup',
                 ],
@@ -853,8 +804,7 @@ return [
                 ],
             ],
             'Fretboard Cheatsheet' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_fretboard-cheatsheet',
                 ],
@@ -863,8 +813,7 @@ return [
                 ],
             ],
             'Solo In An Hour' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_solo-in-an-hour',
                 ],
@@ -873,8 +822,7 @@ return [
                 ],
             ],
             'Getting Started On The Acoustic Guitar' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_getting-started-on-the-acoustic-guitar',
                 ],
@@ -883,8 +831,7 @@ return [
                 ],
             ],
             'Getting Started On The Electric Guitar' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_getting-started-on-the-electric-guitar',
                 ],
@@ -893,8 +840,7 @@ return [
                 ],
             ],
             'Live Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_live-bootcamp',
                 ],
@@ -903,8 +849,7 @@ return [
                 ],
             ],
             'Chord Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'guitareo_prospect_chord-bootcamp',
                 ],
@@ -915,8 +860,7 @@ return [
         ],
         'singeo' => [
             'Improve Any Voice' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_improve-any-voice',
                 ],
@@ -925,8 +869,7 @@ return [
                 ],
             ],
             'Holiday Karaoke' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_holiday-karaoke',
                 ],
@@ -935,8 +878,7 @@ return [
                 ],
             ],
             'Singeo Waitlist' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_launch-waitlist',
                 ],
@@ -945,8 +887,7 @@ return [
                 ],
             ],
             'Stop Hating Your Voice' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singo_prospect_stop-hating_signup',
                 ],
@@ -955,8 +896,7 @@ return [
                 ],
             ],
             'Eikon Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singo_prospect_eikon_giveaway_signup',
                 ],
@@ -965,8 +905,7 @@ return [
                 ],
             ],
             'Ultimate Giveaway' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_ultimate_giveaway_signup',
                 ],
@@ -975,8 +914,7 @@ return [
                 ],
             ],
             'Vocal Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_vocal-bootcamp_signup',
                 ],
@@ -985,8 +923,7 @@ return [
                 ],
             ],
             'Breath Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_breath-bootcamp_signup',
                 ],
@@ -995,8 +932,7 @@ return [
                 ],
             ],
             'Harmony Bootcamp' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_harmony-bootcamp_signup',
                 ],
@@ -1005,8 +941,7 @@ return [
                 ],
             ],
             'Blog Signup' => [
-                'custom_attributes' => [
-                ],
+                'custom_attributes' => [],
                 'events' => [
                     'singeo_prospect_blog_signup',
                 ],

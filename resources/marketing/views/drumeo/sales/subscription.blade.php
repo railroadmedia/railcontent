@@ -334,14 +334,6 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-white" style="background:linear-gradient(to bottom, #0B76DB, #01488B);">
-            <div class="container max-w-5xl mx-auto">
-                <img class="h-20 sm:h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/drumeo/promos/april/30di-logo.webp">
-                <h4 class="leading-tight mt-4 mb-1"><strong>Unlock your limbs with<br class="sm:hidden"> daily guided workouts.</strong></h4>
-                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on May 6th!</p>
-                <a href="/drumshop/30-day-independence" class="join white smaller text-drumeo">Learn More</a>
-            </div>
-        </section>
     @endif
 
 
@@ -471,7 +463,7 @@
 
     @include('musora.sales.components.workouts-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/898668674/rendition/540p/file.mp4?loc=external&signature=d5f33375d3a16dc91641be1539d7d621d07ad049b030baa8a7f32c23e63e3ab4',
-        'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card2.webp',
+        'workoutsBG' => 'marketing/drumeo/membership/homepage/2024/workouts-card3.webp',
     ])
 
     @php

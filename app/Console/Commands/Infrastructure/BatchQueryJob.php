@@ -17,16 +17,20 @@ use Throwable;
  */
 abstract class BatchQueryJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use Batchable;
 
     //There's an issue with storing base class constructor parameters in Jobs so we have to get the skip/take from the parent class
-    abstract function getSkip(): int;
+    abstract public function getSkip(): int;
 
-    abstract function getTake(): int;
+    abstract public function getTake(): int;
 
-    abstract function getQuery(): Builder;
+    abstract public function getQuery(): Builder;
 
-    abstract function handleItem($item): void;
+    abstract public function handleItem($item): void;
 
     public function handleAllItems($items): bool
     {
@@ -61,8 +65,7 @@ abstract class BatchQueryJob implements ShouldQueue
      *
      * @param Throwable $exception
      */
-    public
-    function failed(
+    public function failed(
         Throwable $exception
     ) {
         error_log($exception);

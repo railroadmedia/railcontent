@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class HelpScoutCustomer
  *
- * @internal 
+ * @internal
  * @package App\Modules\HelpScout\Models
  * @property integer $internal_id
  * @property integer $external_id

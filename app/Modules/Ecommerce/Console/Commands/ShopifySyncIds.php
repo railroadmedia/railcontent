@@ -44,7 +44,8 @@ class ShopifySyncIds extends Command
             }
 
 
-            $pages = $shopify->paginateCustomers([
+            $pages = $shopify->paginateCustomers(
+                [
                     'limit' => 250,
                 ]
             );

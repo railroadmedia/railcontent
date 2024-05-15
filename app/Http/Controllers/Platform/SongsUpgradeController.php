@@ -9,7 +9,6 @@ use Request;
 
 class SongsUpgradeController extends BaseController
 {
-
     private UpgradeService $upgradeService;
 
     public function __construct(UpgradeService $upgradeService)

@@ -18,7 +18,7 @@ use Railroad\Ecommerce\Transformers\UserTransformer;
 
 class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserProviderInterface
 {
-    const RESOURCE_TYPE = 'user';
+    public const RESOURCE_TYPE = 'user';
 
     /**
      * @var UserProductService
@@ -159,7 +159,7 @@ class EcommerceUserProvider implements UserProviderInterface, ArrayHydratorUserP
     {
         $parts = explode('@', $email);
 
-        $user = new User;
+        $user = new User();
         $user->email = $email;
         $user->setPassword($password);
         $user->display_name = $parts[0].rand(10000, 99999);

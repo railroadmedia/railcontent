@@ -42,12 +42,12 @@ class Bundle extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundles')->first()->id),
             Text::make('Name')->required()->sortable(),
-            Boolean::make('Sales Page Visible?','sales_page_visible')->default(true)->hideFromIndex(),
+            Boolean::make('Sales Page Visible?', 'sales_page_visible')->default(true)->hideFromIndex(),
             DateTime::make('Sales Page Start Time', 'sales_page_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make('Sales Page End Time', 'sales_page_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
 
             //slug field for displaying to use a tag
-            Text::make('Slug', function(){
+            Text::make('Slug', function () {
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).($this->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').$this->slug.'">'.$this->slug.'</a>';
             })->asHtml(),
             //slug field for saving
@@ -60,27 +60,26 @@ class Bundle extends Resource
                 ->hideFromIndex()
                 ->disableDownload()
                 ->deletable(false)
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -93,27 +92,26 @@ class Bundle extends Resource
                 ->hideFromIndex()
                 ->disableDownload()
                 ->nullable()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/Page-logos/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
@@ -132,27 +130,26 @@ class Bundle extends Resource
                 ->hideFromIndex()
                 ->disableDownload()
                 ->nullable()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     $brandId = $request->brand;
                     $brand = '';
 
                     if($brandId === "1") {
                         $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
+                    } elseif($brandId === "2") {
                         $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
+                    } elseif($brandId === "3") {
                         $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
+                    } elseif($brandId === "4") {
                         $brand = 'Singeo';
                     }
 
                     return '/'.$brand.'/Spread-images/'.$request->uuid.'-'.$request->file('spread_img')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),

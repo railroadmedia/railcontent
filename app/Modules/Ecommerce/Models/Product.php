@@ -104,21 +104,21 @@ class Product extends Model
     use HasShopifyMetafields;
     use SoftDeletes;
 
-    const TYPE_DIGITAL_SUBSCRIPTION = 'digital subscription';
-    const TYPE_DIGITAL_ONE_TIME = 'digital one time';
-    const TYPE_PHYSICAL_ONE_TIME = 'physical one time';
+    public const TYPE_DIGITAL_SUBSCRIPTION = 'digital subscription';
+    public const TYPE_DIGITAL_ONE_TIME = 'digital one time';
+    public const TYPE_PHYSICAL_ONE_TIME = 'physical one time';
 
-    const DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS = 'all content access';
-    const DIGITAL_ACCESS_TYPE_BASIC_CONTENT_ACCESS = 'basic content access';
-    const DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS = 'specific content access';
+    public const DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS = 'all content access';
+    public const DIGITAL_ACCESS_TYPE_BASIC_CONTENT_ACCESS = 'basic content access';
+    public const DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS = 'specific content access';
 
-    const DIGITAL_ACCESS_TIME_TYPE_RECURRING = 'recurring';
-    const DIGITAL_ACCESS_TIME_TYPE_ONE_TIME = 'one time';
-    const DIGITAL_ACCESS_TIME_TYPE_LIFETIME = 'lifetime';
+    public const DIGITAL_ACCESS_TIME_TYPE_RECURRING = 'recurring';
+    public const DIGITAL_ACCESS_TIME_TYPE_ONE_TIME = 'one time';
+    public const DIGITAL_ACCESS_TIME_TYPE_LIFETIME = 'lifetime';
 
-    const DIGITAL_PRODUCT_TYPES = [self::TYPE_DIGITAL_SUBSCRIPTION, self::TYPE_DIGITAL_ONE_TIME];
+    public const DIGITAL_PRODUCT_TYPES = [self::TYPE_DIGITAL_SUBSCRIPTION, self::TYPE_DIGITAL_ONE_TIME];
 
-    const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
+    public const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
 
     protected $table = 'ecommerce_products';
 
@@ -453,7 +453,7 @@ class Product extends Model
             'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL', 'PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL' => 'PIANOTE-MEMBERSHIP-1-YEAR',
             'guitareo-monthly-recurring-30-day-trial-membership', 'GUITAREO-7-DAY-TRIAL-ONE-TIME', 'guitareo-monthly-recurring-7-day-trial-membership' => 'GUITAREO-1-MONTH-MEMBERSHIP',
             'guitareo-annual-recurring-7-day-trial-membership', 'guitareo-annual-recurring-30-day-trial-membership' => 'GUITAREO-1-YEAR-MEMBERSHIP',
-            'DLM-Trial-1-month', 'DLM-Trial-30-Day' => 'DLM-1-month',
+            'DLM-Trial-1-month', 'DLM-Trial-30-Day', 'DLM-Trial-Best-Book-1-month', 'DLM-Trial-Drummers-Toolbox-1-month' => 'DLM-1-month',
             'DLM-Trial-Annual-30-Day', 'DLM-Trial-Annual-7-Day' => 'DLM-1-year',
             'singeo-monthly-recurring-30-day-trial-membership', 'singeo-monthly-recurring-7-day-trial-membership' => 'singeo-monthly-recurring-membership',
             'singeo-annual-recurring-30-day-trial-membership', 'singeo-annual-recurring-7-day-trial-membership' => 'singeo-annual-recurring-membership',

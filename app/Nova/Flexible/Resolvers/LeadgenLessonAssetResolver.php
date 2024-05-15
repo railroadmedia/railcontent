@@ -20,25 +20,32 @@ class LeadgenLessonAssetResolver implements ResolverInterface
     public function get($resource, $attribute, $layouts)
     {
         $assets = [];
-        if(!empty($resource['meta_desc'])){
+        if(!empty($resource['meta_desc'])) {
             $leadgen = Leadgen::where('id', $resource['id'])->find($resource['id']);
-            if(!$leadgen) return collect([]);
+            if(!$leadgen) {
+                return collect([]);
+            }
             $assets = $leadgen->assets()->get();
-        }
-        else {
+        } else {
             $lesson = LeadgenLesson::where('id', $resource['id'])->find($resource['id']);
-            if(!$lesson) return collect([]);
+            if(!$lesson) {
+                return collect([]);
+            }
             $assets = $lesson->assets()->get();
         }
 
         $assets = !empty($lesson) ? $lesson->assets()->get() : $leadgen->assets()->get();
 
-        return $assets->map(function($asset) use ($layouts) {
+        return $assets->map(function ($asset) use ($layouts) {
             $layout = $layouts->find('leadgen-lesson-asset-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
-            return $layout->duplicateAndHydrate($asset->id, [
+            return $layout->duplicateAndHydrate(
+                $asset->id,
+                [
                 'title' => $asset->title,
                 'src' => $asset->src,
                 'soundslice' => $asset->soundslice,
@@ -59,7 +66,7 @@ class LeadgenLessonAssetResolver implements ResolverInterface
      */
     public function set($model, $attribute, $groups)
     {
-        $assets = $groups->map(function($group, $index){
+        $assets = $groups->map(function ($group, $index) {
             return [
                 'title' => $group->getAttributes()['title'],
                 'src' => $group->getAttributes()['src'],
@@ -68,9 +75,9 @@ class LeadgenLessonAssetResolver implements ResolverInterface
             ];
         });
 
-        foreach($assets as $asset){
+        foreach($assets as $asset) {
             //insert
-            if(is_null($asset['id']) && !is_null(empty($model['id']))){
+            if(is_null($asset['id']) && !is_null(empty($model['id']))) {
                 $addAsset = new LeadgenLessonAsset();
                 $addAsset->leadgen_id = !empty($model['meta_desc']) ? $model['id'] : null;
                 $addAsset->leadgen_lesson_id = empty($model['meta_desc']) ? $model['id'] : null;
@@ -84,15 +91,15 @@ class LeadgenLessonAssetResolver implements ResolverInterface
             else {
                 $dbAsset = LeadgenLessonAsset::find($asset['id']);
 
-                if($dbAsset['title'] !== $asset['title']){
+                if($dbAsset['title'] !== $asset['title']) {
                     $dbAsset->title = $asset['title'];
                 }
 
-                if($dbAsset['src'] !== $asset['src']){
+                if($dbAsset['src'] !== $asset['src']) {
                     $dbAsset->src = $asset['src'];
                 }
 
-                if($dbAsset['soundslice'] !== $asset['soundslice']){
+                if($dbAsset['soundslice'] !== $asset['soundslice']) {
                     $dbAsset->soundslice = $asset['soundslice'];
                 }
 
@@ -102,10 +109,9 @@ class LeadgenLessonAssetResolver implements ResolverInterface
         }
 
         //delete
-        if(!empty($model['brand_id'])){
+        if(!empty($model['brand_id'])) {
             $deleteAssets = LeadgenLessonAsset::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
-        }
-        else {
+        } else {
             $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
         }
     }

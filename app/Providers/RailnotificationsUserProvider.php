@@ -10,12 +10,11 @@ use Railroad\Railnotifications\Transformers\UserTransformer;
 
 class RailnotificationsUserProvider implements UserProviderInterface
 {
-
-    public function getRailnotificationsUserById(int $id)
-    : ?RailnotificationUser {
+    public function getRailnotificationsUserById(int $id): ?RailnotificationUser
+    {
         $user = User::query()->where('id', $id)->first();
 
-        if($user){
+        if($user) {
             return new RailnotificationUser(
                 $user->id,
                 $user->email,
@@ -28,13 +27,13 @@ class RailnotificationsUserProvider implements UserProviderInterface
         return $user;
     }
 
-    public function getRailnotificationsUserId(RailnotificationUser $user)
-    : ?int {
+    public function getRailnotificationsUserId(RailnotificationUser $user): ?int
+    {
         return $user->getId();
     }
 
-    public function getUserFirebaseTokens(int $userId, $types = [])
-    : ?array {
+    public function getUserFirebaseTokens(int $userId, $types = []): ?array
+    {
         $tokens = FirebaseToken::whereUserId($userId)->get();
 
         return $tokens->unique('token')->toArray();
@@ -65,11 +64,11 @@ class RailnotificationsUserProvider implements UserProviderInterface
         return new UserTransformer();
     }
 
-    public function updateUserNotificationsSummaryFrequency(int $userId,?string $notificationsSummaryFrequency)
+    public function updateUserNotificationsSummaryFrequency(int $userId, ?string $notificationsSummaryFrequency)
     {
         $user = User::query()->where('id', $userId)->first();
 
-        if($user){
+        if($user) {
             $user->notifications_summary_frequency_minutes = $notificationsSummaryFrequency;
             $user->save();
         }

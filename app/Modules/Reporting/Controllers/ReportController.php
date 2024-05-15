@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller;
 
 class ReportController extends Controller
 {
-
     public function generate(Request $request, string $id)
     {
         $startDate = $request->get('start');

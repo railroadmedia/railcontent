@@ -103,10 +103,10 @@ class CustomerIoSyncEventListener
             $user = $this->userService->getByIdOrNull($userCreated->getUser()->id);
 
             if (!empty($user) && !in_array(
-                    $userCreated->getUser()
+                $userCreated->getUser()
                         ->id,
-                    self::$alreadyQueuedUserIds
-                )) {
+                self::$alreadyQueuedUserIds
+            )) {
                 dispatch(
                     (new CustomerIoSyncNewUserByEmail($user))->delay(
                         Carbon::now()
@@ -136,9 +136,9 @@ class CustomerIoSyncEventListener
             $user = $this->userService->getByIdOrNull($userUpdated->getNewUser()->id);
 
             if (!empty($user) && !in_array(
-                    $userUpdated->getNewUser()->id,
-                    self::$alreadyQueuedUserIds
-                )) {
+                $userUpdated->getNewUser()->id,
+                self::$alreadyQueuedUserIds
+            )) {
                 dispatch(
                     (new CustomerIoSyncUserByUserId($user))->delay(
                         Carbon::now()
@@ -202,11 +202,16 @@ class CustomerIoSyncEventListener
             if (!empty($comment) && !empty($content) && !empty($user)) {
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->id, $content['brand'], $content['brand'] . '_action_lesson_comment-like', [
+                        $user->id,
+                        $content['brand'],
+                        $content['brand'] . '_action_lesson_comment-like',
+                        [
                         'content_id' => $content['id'],
                         'content_name' => $content->fetch('fields.title'),
                         'content_type' => $content['type'],
-                    ], null, Carbon::now()->timestamp
+                    ],
+                        null,
+                        Carbon::now()->timestamp
                     ))->delay(
                         Carbon::now()
                             ->addSeconds(3)
@@ -235,11 +240,16 @@ class CustomerIoSyncEventListener
             if (!empty($comment) && !empty($content) && !empty($user)) {
                 dispatch(
                     (new CustomerIoCreateEventByUserId(
-                        $user->id, $content['brand'], $content['brand'] . '_action_lesson_comment', [
+                        $user->id,
+                        $content['brand'],
+                        $content['brand'] . '_action_lesson_comment',
+                        [
                         'content_id' => $content['id'],
                         'content_name' => $content->fetch('fields.title'),
                         'content_type' => $content['type'],
-                    ], null, Carbon::now()->timestamp
+                    ],
+                        null,
+                        Carbon::now()->timestamp
                     ))->delay(
                         Carbon::now()
                             ->addSeconds(3)
@@ -663,10 +673,13 @@ class CustomerIoSyncEventListener
         try {
             dispatch(
                 (new CustomerIoSyncUserDevice(
-                    $userId, $brand ?? config('event-data-synchronizer.customer_io_brand_activity_event'), [
+                    $userId,
+                    $brand ?? config('event-data-synchronizer.customer_io_brand_activity_event'),
+                    [
                     'id' => $token,
                     'platform' => $platform,
-                ], $timestamp ?? Carbon::now()->timestamp
+                ],
+                    $timestamp ?? Carbon::now()->timestamp
                 ))->delay(
                     Carbon::now()
                         ->addSeconds(3)
@@ -715,7 +728,9 @@ class CustomerIoSyncEventListener
                     'referrer_id' => null,
                     'musora_id' => null
 
-                ], null, Carbon::now()->timestamp
+                ],
+                null,
+                Carbon::now()->timestamp
             ))->delay(
                 Carbon::now()
                     ->addSeconds(3)
@@ -828,7 +843,7 @@ class CustomerIoSyncEventListener
             return $order->lineItems->filter(function ($orderLineItem) {
                 /** @var OrderLineItem $orderLineItem */
                 return $orderLineItem->product && $orderLineItem->product->isDigital(
-                    ) && $orderLineItem->product->isMembershipProduct();
+                ) && $orderLineItem->product->isMembershipProduct();
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
@@ -859,8 +874,7 @@ class CustomerIoSyncEventListener
         return $attributes;
     }
 
-    private
-    function getSubscriptionAttributes(
+    private function getSubscriptionAttributes(
         User $user,
         $subscriptions
     ): array {
@@ -903,8 +917,7 @@ class CustomerIoSyncEventListener
         return $attributes;
     }
 
-    public
-    function getSubscriptionStatus(
+    public function getSubscriptionStatus(
         RechargeSubscription $subscription
     ): string {
         return match ($subscription->status) {
@@ -915,8 +928,7 @@ class CustomerIoSyncEventListener
         };
     }
 
-    private
-    function getTrialType(
+    private function getTrialType(
         RechargeSubscription $latest
     ): string {
         if (!$latest->product->isTrial()) {

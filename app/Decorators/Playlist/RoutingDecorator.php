@@ -14,7 +14,6 @@ use Railroad\Railcontent\Services\UserPlaylistsService;
 
 class RoutingDecorator extends TypeDecoratorBase
 {
-
     private static $parents = [];
 
     /**
@@ -23,7 +22,7 @@ class RoutingDecorator extends TypeDecoratorBase
      */
     public function decorate($contents)
     {
-       if (empty($contents)) {
+        if (empty($contents)) {
             return $contents;
         }
 
@@ -61,11 +60,11 @@ class RoutingDecorator extends TypeDecoratorBase
                 }
                 $contents[$contentIndex]['parent'] = (isset(self::$parents[$value['id']])) ? self::$parents[$value['id']] : null;
 
-                if(empty($contents[$contentIndex]['instructors'])){
+                if(empty($contents[$contentIndex]['instructors'])) {
                     \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
                     $this->instructorDecorator->decorate(new Collection(self::$parents));
-                    $contents[$contentIndex]['instructors'] = $contents[$contentIndex]['instructors']??[] + self::$parents[$value['id']]['instructors'] ?? [];
+                    $contents[$contentIndex]['instructors'] = $contents[$contentIndex]['instructors'] ?? [] + self::$parents[$value['id']]['instructors'] ?? [];
                 }
             }
             $contents[$contentIndex]['route'] = $route;

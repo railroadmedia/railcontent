@@ -74,17 +74,16 @@ class PackPagesController extends Controller
 
     public function index(Request $request, $domain, $brand)
     {
-        PackDecorator::$skip = true;
         ContentRepository::$countFilterOptionItems = true;
         ContentRepository::$catalogMetaAllowableFilters = config('railcontent.cataloguesMetadata')[brand()]['pack']['allowableFilters'] ?? [];
 
         FiltersHelper::prepareFiltersFields();
 
-        if(user()->isPackOnlyOwner()){
+        if(user()->isPackOnlyOwner()) {
             ContentRepository::$getEnrollmentContent = false;
         }
 
-        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort','-progress'));
+        $packs = $this->packService->getPacks(FiltersHelper::$includedFields, $request->get('sort', '-progress'));
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs['results'] as $packIndex => $pack) {

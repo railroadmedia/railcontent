@@ -2552,25 +2552,25 @@ class SyncUsersToCIO extends Command
 
     public function handle()
     {
-//        $this->info('Users found: ' . User::query()->where('created_at', '>', '2023-11-01')->count());
-//
-//        $totalDone = 0;
-//
-//        $usersToSync = User::query()->where('created_at', '>', '2023-11-01')
-//            ->orderBy('id', 'asc')
-//            ->chunk(100, function (Collection $users) use (&$totalDone) {
-//                $this->info('Syncing ' . $users->count() . ' users to c.io.');
-//
-//                foreach ($users as $userIndex => $user) {
-//                    dispatch(new CustomerIoSyncUserByUserId($user));
-//
-//                    $this->info('Email to sync: ' . $user->email);
-//                }
-//
-//                if ($totalDone % 50 == 0) {
-//                    $this->info('Done ' . $totalDone);
-//                }
-//            });
+        //        $this->info('Users found: ' . User::query()->where('created_at', '>', '2023-11-01')->count());
+        //
+        //        $totalDone = 0;
+        //
+        //        $usersToSync = User::query()->where('created_at', '>', '2023-11-01')
+        //            ->orderBy('id', 'asc')
+        //            ->chunk(100, function (Collection $users) use (&$totalDone) {
+        //                $this->info('Syncing ' . $users->count() . ' users to c.io.');
+        //
+        //                foreach ($users as $userIndex => $user) {
+        //                    dispatch(new CustomerIoSyncUserByUserId($user));
+        //
+        //                    $this->info('Email to sync: ' . $user->email);
+        //                }
+        //
+        //                if ($totalDone % 50 == 0) {
+        //                    $this->info('Done ' . $totalDone);
+        //                }
+        //            });
 
         $this->info('Syncing ' . count($this->emailsToSync) . ' users to c.io.');
 

@@ -50,6 +50,19 @@
             console.log(error);
         });
     </script>
+
+    <script>
+        const saveLegacyPlayerOption = (form) => {
+            window.shownotification({
+                icon: 'check',
+                text: 'Legacy Player option saved successfully!',
+            });
+
+            setTimeout(() => {
+                document.getElementById("legacy-form").submit();
+            }, 500);
+        }
+    </script>
 @endsection
 
 @section('edit-forms')
@@ -138,7 +151,7 @@
 
     {{-- =================================  Legacy Video Player Form ================================= --}}
 
-    <form method="POST" action="{{ url()->route('user_management_system.user.update', ['id' => user()->id ])}}">
+    <form id="legacy-form" method="POST" action="{{ url()->route('user_management_system.user.update', ['id' => user()->id ])}}">
         {{ method_field('PATCH') }}
         {{ csrf_field() }}
 

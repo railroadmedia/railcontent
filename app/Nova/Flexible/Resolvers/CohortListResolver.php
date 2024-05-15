@@ -20,10 +20,12 @@ class CohortListResolver implements ResolverInterface
     {
         $dropdowns = $resource->lists()->get();
 
-        return $dropdowns->map(function($dropdown) use ($layouts) {
+        return $dropdowns->map(function ($dropdown) use ($layouts) {
             $layout = $layouts->find('cohort-list-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
 
             return $layout->duplicateAndHydrate($dropdown->id, [
@@ -45,8 +47,8 @@ class CohortListResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use ($groups){
-            $dropdowns = $groups->map(function($group, $index){
+        $class::saved(function ($model) use ($groups) {
+            $dropdowns = $groups->map(function ($group, $index) {
                 return [
                     'description' => $group->getAttributes()['description'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null
@@ -54,19 +56,18 @@ class CohortListResolver implements ResolverInterface
             });
 
             //update and insert items
-            foreach($dropdowns as $dropdown){
-                if(!is_null($dropdown['id'])){
+            foreach($dropdowns as $dropdown) {
+                if(!is_null($dropdown['id'])) {
                     $dbDropdown = CohortList::find($dropdown['id']);
 
-                    if($dbDropdown->description !== $dropdown['description']){
+                    if($dbDropdown->description !== $dropdown['description']) {
                         $dbDropdown->description = $dropdown['description'];
                     }
 
                     $dbDropdown->save();
 
                     $updatedIds[] = $dropdown['id'];
-                }
-                else{
+                } else {
                     $addDropdown = new CohortList();
                     $addDropdown->cohort_id = $model['id'];
                     $addDropdown->description = $dropdown['description'];
@@ -76,7 +77,7 @@ class CohortListResolver implements ResolverInterface
                 }
             }
 
-            if(isset($updatedIds)){
+            if(isset($updatedIds)) {
                 $deleteIds = CohortList::where('cohort_id', '=', $model['id'])
                     ->whereNotIn('id', $updatedIds)->delete();
             }

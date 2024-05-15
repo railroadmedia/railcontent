@@ -31,7 +31,7 @@ class SetUserNeedsLogout extends Command
 
         // perform the update in a transaction, so we can just do one call
         DB::transaction(function () use ($users) {
-            $users->each(function(User $user){
+            $users->each(function (User $user) {
                 $user->update(['needs_logout' => true]);
             });
         });

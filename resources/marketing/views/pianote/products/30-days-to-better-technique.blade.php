@@ -61,6 +61,7 @@
             transform: translateX(0.2rem);
         }
         .play-button {
+            display: inline-block;
             cursor: pointer;
             outline: none;
             transition: opacity 0.3s;
@@ -158,28 +159,26 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                          &nbsp;Watch Trailer
                     </div>
-                    <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500 anchor-slide" href="#customize-anchor"
-                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
+{{--                    <a class="w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500 anchor-slide" href="#customize-anchor"--}}
+{{--                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>--}}
+                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>
                 </div>
             </div>
-            <div class="uppercase text-sm text-pianote py-4">
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                    <span>
-                        Enrollment closes in
-                        <br>
-                        <strong>
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                        </strong>
-                    </span>
-                </span>
-            </div>
+{{--            <div class="uppercase text-sm text-pianote py-4">--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                    <strong>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0">--}}
+{{--                            Enrollment closes in--}}
+{{--                            <br>--}}
+{{--                                <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>--}}
+{{--                                <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>--}}
+{{--                                <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>--}}
+{{--                                <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>--}}
+{{--                        </span>--}}
+{{--                        <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>--}}
+{{--                    </strong>--}}
+{{--                </span>--}}
+{{--            </div>--}}
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
@@ -430,30 +429,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center py-4">
-                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"
-                        href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
-                        @mouseout="move = false">ENROLL NOW</a>
-                </div>
-                <div class="uppercase text-sm text-center text-pianote pb-4">
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                        <span>
-                            Enrollment closes in
-                            <br>
-                            <strong>
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                        x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                        x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                        x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                        x-text="secondText"></span></span>
-                            </strong>
-                        </span>
-                    </span>
-                </div>
-
+{{--                <div class="flex justify-center py-4">--}}
+{{--                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"--}}
+{{--                        href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"--}}
+{{--                        @mouseout="move = false">ENROLL NOW</a>--}}
+{{--                </div>--}}
+{{--                <div class="uppercase text-sm text-center text-pianote pb-4">--}}
+{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                        <strong>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0">--}}
+{{--                                Enrollment closes in--}}
+{{--                                <br>--}}
+{{--                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>--}}
+{{--                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>--}}
+{{--                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>--}}
+{{--                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>--}}
+{{--                            </span>--}}
+{{--                            <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>--}}
+{{--                        </strong>--}}
+{{--                    </span>--}}
+{{--                </div>--}}
         </div>
 
     </section>
@@ -624,7 +619,7 @@
                     <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results
                 </h4>
             </div>
-            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-12 sm:mb-0 anchor-slide">ENROLL NOW</a><br>
+{{--            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-12 sm:mb-0 anchor-slide">ENROLL NOW</a><br>--}}
         </div>
     </section>
 
@@ -649,8 +644,8 @@
                             Reserve your spot today.
                         </p>
                     </div>
-                    <a class="w-full md:w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide" href="#customize-anchor"
-                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
+{{--                    <a class="w-full md:w-5/12 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide" href="#customize-anchor"--}}
+{{--                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>--}}
                 </div>
                 </div>
                 <div class="flex justify-center">
@@ -717,21 +712,23 @@
                 <i class="fas fa-check text-pianote mr-1 ml-3 inline-block"></i> 90-Day Money Back Guarantee
             </p>
             <!-- <span class="join sold-out medium w-full max-w-xs align-middle mt-7" @click="waitlistModal = true;">JOIN WAITLIST</span> -->
-            <h6 class="leading-normal text-sm mb-5">
-                <span class="text-pianote uppercase tracking-widest">Enrollment closes in
-                    <strong><span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>!
-                            <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                        </span></strong>
-                </span>
-            </h6>
+{{--            <h6 class="leading-normal text-sm mb-5">--}}
+{{--                <span class="text-pianote uppercase tracking-widest">--}}
+{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                        <strong>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0">--}}
+{{--                                Enrollment closes in--}}
+{{--                                <br>--}}
+{{--                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>--}}
+{{--                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>--}}
+{{--                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>--}}
+{{--                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>--}}
+{{--                            </span>--}}
+{{--                            <span x-cloak x-show="timeLeft <= 0"> A Limited Time! </span>--}}
+{{--                        </strong>--}}
+{{--                    </span>--}}
+{{--                </span>--}}
+{{--            </h6>--}}
 
             <!-- Version 2 -->
 
@@ -751,52 +748,59 @@
 
             <div class="container mx-auto max-w-5xl">
                 <div id="customize-anchor" class="anchor"></div>
-                <div class="flex flex-wrap sm:flex-nowrap items-start justify-center mb-5 sm:mb-10 w-full mx-auto">
-                    @include('pianote.products.partials._promo-card-special', [
-                        'cardTitle' => 'Course Only',
-                        'cardImage' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle1.webp',
-                        'imageHeight' => 'h-40',
-                        'cardSubtitle' => 'Just 30 Days To Better Technique.',
-                        'cardPrice' => '97',
-                        'cardDiscount' => '127',
-                        'cardExtraInfo' => 'One-time payment. Save 24%',
-                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[pianote_access_30-days]=1&promo-code=technique-launch&locked=true',
-                        'badgeColor' => 'musora-black',
-                        'extraBonuses' => [
-                            '<strong class="font-black">30 Days To Better Technique</strong>',
-                            '<strong class="font-black">Lifetime</strong> Course Access',
-                            '<strong class="font-black">EXCLUSIVE</strong> Livestream with Jordan',
-                            '<strong class="font-black">FREE</strong> 1-month Pianote Access',
-                        ],
-                        'buttonText' => 'ENROLL NOW',
-                    ])
+                <span class="join sold-out medium align-middle mt-7">ENROLLMENT CLOSED</span>
+{{--                <div class="flex flex-wrap sm:flex-nowrap items-start justify-center mb-3 sm:mb-5 w-full mx-auto">--}}
+{{--                    @include('pianote.products.partials._promo-card-special', [--}}
+{{--                        'cardTitle' => 'Course Only',--}}
+{{--                        'cardImage' =>--}}
+{{--                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle1.webp',--}}
+{{--                        'imageHeight' => 'h-40',--}}
+{{--                        'cardSubtitle' => 'Just 30 Days To Better Technique.',--}}
+{{--                        'cardPrice' => '97',--}}
+{{--                        'cardDiscount' => '127',--}}
+{{--                        'cardExtraInfo' => 'One-time payment. Save 24%',--}}
+{{--                        'cardLink' => '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1&products[pianote_access_30-days]=1&promo-code=technique-launch&locked=true',--}}
+{{--                        'badgeColor' => 'musora-black',--}}
+{{--                        'extraBonuses' => [--}}
+{{--                            '<strong class="font-black">30 Days To Better Technique</strong>',--}}
+{{--                            '<strong class="font-black">Lifetime</strong> Course Access',--}}
+{{--                            '<strong class="font-black">EXCLUSIVE</strong> Livestream with Jordan',--}}
+{{--                            '<strong class="font-black">FREE</strong> 1-month Pianote Access',--}}
+{{--                        ],--}}
+{{--                        'buttonText' => 'ENROLL NOW',--}}
+{{--                    ])--}}
 
-                    @include('pianote.products.partials._promo-card-special', [
-                        'whiteBadge' => true,
-                        'badgeText' => 'MOST POPULAR',
-                        'cardTitle' => 'Unlimited Lessons',
-                        'cardImage' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-03.webp',
-                        'imageHeight' => 'h-40',
-                        'cardSubtitle' => "1 year of Pianote + 4 bonuses worth $406.",
-                        'cardPrice' => '20/mo',
-                        'cardExtraInfo' => "Billed annually at $240/yr.",
-                        'cardLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&locked=true',
-                        'badgeColor' => 'pianote',
-                        'extraBonuses' => [
-                            '<strong class="font-black">Annual Pianote Membership</strong>',
-                            '<strong class="font-black">FREE 30 Days To Better Technique</strong>',
-                            '<strong class="font-black">LIFETIME</strong> Course Access',
-                            '<strong class="font-black">BONUS</strong> Pianote Metronome',
-                            '<strong class="font-black">BONUS</strong> Pianote BookBag',
-                            '<strong class="font-black">BONUS</strong> Chords & Scales Book',
-                            '<strong class="font-black">BONUS</strong> Practice Planner',
-                            '<strong class="font-black">EXCLUSIVE</strong> Livestream with Jordan',
-                        ],
-                        'buttonText' => 'GET EVERYTHING',
-                    ])
-                </div>
+{{--                    @include('pianote.products.partials._promo-card-special', [--}}
+{{--                        'whiteBadge' => true,--}}
+{{--                        'badgeText' => 'MOST POPULAR',--}}
+{{--                        'cardTitle' => 'Unlimited Lessons',--}}
+{{--                        'cardImage' =>--}}
+{{--                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/bundle-03.webp',--}}
+{{--                        'imageHeight' => 'h-40',--}}
+{{--                        'cardSubtitle' => "1 year of Pianote + 4 bonuses worth $406.",--}}
+{{--                        'cardPrice' => '20/mo',--}}
+{{--                        'cardExtraInfo' => "Billed annually at $240/yr.",--}}
+{{--                        'cardLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[30-days-to-better-technique]=1&products[taktell-piccolo-metronome]=1&products[pianote-book-bag]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&locked=true',--}}
+{{--                        'badgeColor' => 'pianote',--}}
+{{--                        'extraBonuses' => [--}}
+{{--                            '<strong class="font-black">Annual Pianote Membership</strong>',--}}
+{{--                            '<strong class="font-black">FREE 30 Days To Better Technique</strong>',--}}
+{{--                            '<strong class="font-black">LIFETIME</strong> Course Access',--}}
+{{--                            '<strong class="font-black">BONUS</strong> Pianote Metronome',--}}
+{{--                            '<strong class="font-black">BONUS</strong> Pianote BookBag',--}}
+{{--                            '<strong class="font-black">BONUS</strong> Chords & Scales Book',--}}
+{{--                            '<strong class="font-black">BONUS</strong> Practice Planner',--}}
+{{--                            '<strong class="font-black">EXCLUSIVE</strong> Livestream with Jordan',--}}
+{{--                        ],--}}
+{{--                        'buttonText' => 'GET EVERYTHING',--}}
+{{--                    ])--}}
+{{--                </div>--}}
+{{--                <div class="flex items-center justify-center text-left mx-auto @if(Carbon\Carbon::create(2024, 4, 29, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) opacity-0 h-0 @endif">--}}
+{{--                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">--}}
+{{--                    <p class="leading-tight pl-3">--}}
+{{--                        Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
             </div>
         </div>
     </section>
@@ -987,30 +991,28 @@
                 </div>
             </div>
 
-                <div class="flex justify-center">
-                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"
-                        href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
-                        @mouseout="move = false">ENROLL NOW</a>
-                </div>
-                <div class="uppercase text-base text-center text-pianote py-4">
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                        <span>
-                            Enrollment closes in
-                            <br>
-                            <strong>
-                                <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                        x-text="dayText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                        x-text="hourText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                        x-text="minuteText"></span></span>
-                                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                        x-text="secondText"></span></span>
-                            </strong>
-                        </span>
-                    </span>
-                </div>
-
+{{--                <div class="flex justify-center">--}}
+{{--                    <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-pianote m-2 hover:bg-red-500  anchor-slide"--}}
+{{--                        href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"--}}
+{{--                        @mouseout="move = false">ENROLL NOW</a>--}}
+{{--                </div>--}}
+{{--                <div class="uppercase text-base text-center text-pianote py-4">--}}
+{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                        <span>--}}
+{{--                            <strong>--}}
+{{--                                <span x-cloak x-show="timeLeft > 0">--}}
+{{--                                    Enrollment closes in--}}
+{{--                                    <br>--}}
+{{--                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>--}}
+{{--                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>--}}
+{{--                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>--}}
+{{--                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>--}}
+{{--                                </span>--}}
+{{--                                <span x-cloak x-show="timeLeft <= 0"> A Limited Time! </span>--}}
+{{--                            </strong>--}}
+{{--                        </span>--}}
+{{--                    </span>--}}
+{{--                </div>--}}
         </div>
     </section>
 
@@ -1019,12 +1021,12 @@
     @include('_partials.components.video-modal', [
         'name' => 'jayZ',
         'video' => 'aFdOW1Ql3L4',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'danceOfEternity',
         'video' => 'LUknLohfN48',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
     @include('_partials.components.video-modal', [
         'name' => 'trailer',

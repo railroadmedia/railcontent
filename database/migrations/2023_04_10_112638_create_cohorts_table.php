@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -252,7 +252,7 @@ piano and sound beautiful.',
                                                         'course_url' => $cohort['course_url']
                                        ]);
 
-            foreach ($cohort['dropdowns'] as $dropdown){
+            foreach ($cohort['dropdowns'] as $dropdown) {
                 \App\Models\CohortDropdown::create([
                     'cohort_id' => $addcohort->id,
                     'title' => $dropdown['title'],

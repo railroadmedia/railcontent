@@ -41,7 +41,7 @@ class UserPlaylistsController extends BaseController
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RoutingDecorator $routingDecorator;
 
-    private  ResourceDecorator $resourceDecorator;
+    private ResourceDecorator $resourceDecorator;
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private ContentLastEngagedService $contentLastEngagedService;
     private PlaylistService $playlistService;
@@ -124,7 +124,8 @@ class UserPlaylistsController extends BaseController
         );
 
         $listLessons =
-            (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $playlistsNumber, 'filter_options' => $filterOptions]
+            (new ContentFilterResultsEntity(
+                ['results' => $lessons, 'total_results' => $playlistsNumber, 'filter_options' => $filterOptions]
             ))->toResponseRawJson();
 
         return view('account.playlists', [
@@ -165,13 +166,13 @@ class UserPlaylistsController extends BaseController
         $limit = $request->get('limit');
 
         $contentTypes = array_merge(config('railcontent.appUserListContentTypes', []), array_values(
-                                                                                         config(
-                                                                                             'railcontent.showTypes',
-                                                                                             []
-                                                                                         )[config(
-                                                                                             'railcontent.brand'
-                                                                                         )] ?? []
-                                                                                     ), ['routine']);
+            config(
+                'railcontent.showTypes',
+                []
+            )[config(
+                'railcontent.brand'
+            )] ?? []
+        ), ['routine']);
 
         $playlistItems = [];
         if ($playlist['has_access'] == 1) {
@@ -198,11 +199,11 @@ class UserPlaylistsController extends BaseController
                     LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
                     $this->lessonAssignmentDecorator->decorate(new Collection([$item]))
                         ->first();
-                    if(count($item['assignments'] ?? []) > 0){
+                    if(count($item['assignments'] ?? []) > 0) {
                         $playlistItems[$index]['duration'] = $item['assignments'][0]['length_in_seconds'] ?? 0;
                     }
                 }
-                if($item['type'] == 'assignment'){
+                if($item['type'] == 'assignment') {
                     $playlistItems[$index]['duration'] = $item['length_in_seconds'];
                 }
 
@@ -237,7 +238,7 @@ class UserPlaylistsController extends BaseController
                     $item->fetch('data.thumbnail_url', $item['thumbnail_url'] ?? '')
                 );
                 $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
-                $playlistItems[$index]['progress_percent'] = $item['progress_percent']??0;
+                $playlistItems[$index]['progress_percent'] = $item['progress_percent'] ?? 0;
                 $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
                 $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
@@ -285,7 +286,7 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_ARCHIVED
         ];
         ContentRepository::$pullFutureContent = true;
-        PlaylistDecorator::$decorationMode= DecoratorInterface::DECORATION_MODE_MINIMUM;
+        PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
 
@@ -353,7 +354,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['end_second'] = $item['end_second'] ?? null;
             $otherItems[$index]['started'] = $item['started'] ?? false;
             $otherItems[$index]['completed'] = $item['completed'] ?? false;
-            $otherItems[$index]['progress_percent'] = $item['progress_percent']??0;
+            $otherItems[$index]['progress_percent'] = $item['progress_percent'] ?? 0;
             $otherItems[$index]['thumbnail_url'] = $item->fetch(
                 'thumbnail_url',
                 $item->fetch('data.original_thumbnail_url', $item->fetch('data.thumbnail_url', ''))
@@ -482,7 +483,7 @@ class UserPlaylistsController extends BaseController
      */
     public function playback(Request $request, $domain, $brand, $playlistId)
     {
-       $item = $this->playlistService->getPlaylistNextItem($playlistId);
+        $item = $this->playlistService->getPlaylistNextItem($playlistId);
 
         if (isset($item)) {
             return redirect(

@@ -2,7 +2,6 @@
 
 namespace App\Modules\Mentor\Services;
 
-
 use App\Modules\HelpScout\Services\HelpScoutUserService;
 use App\Modules\HelpScout\Services\HelpScoutWebHookService;
 use Exception;

@@ -58,15 +58,6 @@
                 />
             </div>
         </template>
-
-        <!-- todo: component needs css -->
-        <!--        <add-event-modal-->
-        <!--            :single-event="singleEvent"-->
-        <!--            :brand="brand"-->
-        <!--            :subscription-calendar-id="subscriptionCalendarId"-->
-        <!--            :theme-color="themeColor"-->
-        <!--            @modalClose="handleModalClose"-->
-        <!--        ></add-event-modal>-->
     </div>
 </template>
 <script>

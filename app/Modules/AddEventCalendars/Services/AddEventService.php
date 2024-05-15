@@ -15,14 +15,14 @@ use stdClass;
 
 class AddEventService
 {
-    static $timezone = 'America/Vancouver';
+    public static $timezone = 'America/Vancouver';
 
     public $calendars;
     public $eventsByCalendarId;
 
     private $brand;
 
-    const SYNC_ID_KEY = 'sync_id';
+    public const SYNC_ID_KEY = 'sync_id';
 
     public function __construct()
     {
@@ -735,7 +735,7 @@ class AddEventService
 
         $resultAllDayEvent = $event->all_day_event === 'true';
 
-        $match_a = (integer)$event->id === (integer)$eventId;
+        $match_a = (int)$event->id === (int)$eventId;
         $match_b = $this->stringsSameIfFormattingRemoved($description, $event->description);
         $match_c = $this->stringsSameIfFormattingRemoved($title, $event->title);
         $match_d = $resultAllDayEvent === $allDayEvent;

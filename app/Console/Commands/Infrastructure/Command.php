@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 abstract class Command extends CommandBase
 {
-
     public function info($string, $verbosity = null)
     {
         Log::info($string); //also write info statements to log
@@ -153,8 +152,8 @@ abstract class Command extends CommandBase
         }
 
         if (App::environment('local') && env(
-                'QUEUE_CONNECTION'
-            ) == 'sync') { //progress bar not useful when running vapor commands
+            'QUEUE_CONNECTION'
+        ) == 'sync') { //progress bar not useful when running vapor commands
             if ($batch) {
                 $batchId = $batch->id;
                 while (!$batch->finished()) {

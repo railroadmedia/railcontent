@@ -42,7 +42,7 @@ return [
             'homepage-content-clicked' => [
                 'brand' => ['required', 'string'],
                 'section' => ['required', 'string'],
-                'contentId' => ['required', 'int']
+                'contentId' => ['sometimes', 'nullable', 'int']
             ],
             'homepage-section-see-all-clicked' => [
                 'brand' => ['required', 'string'],

@@ -19,10 +19,8 @@ use Modules\UserManagementSystem\Models\OnboardingTopic;
 use Modules\UserManagementSystem\Models\OnboardingGenre;
 use Modules\UserManagementSystem\Models\User;
 
-
 class OnboardingController extends Controller
 {
-
     private OnboardingService $onboardingService;
     private CustomerIoService $customerIoService;
 
@@ -148,7 +146,7 @@ class OnboardingController extends Controller
             ['experience_level' => $request->experience_level, 'brand' => $request->brand, 'user_id' => user()->id]
         );
 
-        $onboardingAnswerHistory = new OnboardingAnswerHistory;
+        $onboardingAnswerHistory = new OnboardingAnswerHistory();
         $onboardingAnswerHistory->onboarding_question = OnboardingAnswerHistory::QUESTION_EXPERIENCE;
         $onboardingAnswerHistory->setExperienceLevelAnswer($request->experience_level);
         $onboardingAnswerHistory->brand = $request->brand;

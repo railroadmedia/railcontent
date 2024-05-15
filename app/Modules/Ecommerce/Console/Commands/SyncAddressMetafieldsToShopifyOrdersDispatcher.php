@@ -115,7 +115,10 @@ class SyncAddressMetafieldsToShopifyOrdersDispatcher extends Command
         // step through the chunks of subscription payment ids to sync, and add a job to process each chunk
         $subscriptionPayments->chunkById($batchSize, function ($subscriptionPaymentIds) use (
             $endCreatedAt,
-            $startCreatedAt, $simulate, &$jobs) {
+            $startCreatedAt,
+            $simulate,
+            &$jobs
+        ) {
             $firstSubscriptionPaymentId = $subscriptionPaymentIds->first()->id;
             $lastSubscriptionPaymentId = $subscriptionPaymentIds->last()->id;
             $jobs[] = new SyncSubscriptionPaymentAddressMetafieldsToShopifyOrder(

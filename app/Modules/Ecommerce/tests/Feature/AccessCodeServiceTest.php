@@ -29,13 +29,15 @@ class AccessCodeServiceTest extends TestCase
 
         $accessCode = $this->accessCodeService->generateAccessCode([$product->id], $product->brand, 'foo-bar');
 
-        $this->assertDatabaseHas(AccessCode::class,
-        [
+        $this->assertDatabaseHas(
+            AccessCode::class,
+            [
             'id' => $accessCode->id,
             'brand' => $product->brand,
             'product_ids' => serialize([$product->id]),
             'source' => 'foo-bar'
-        ]);
+        ]
+        );
         $this->assertNotNull($accessCode->code);
         $this->assertFalse($accessCode->is_claimed);
     }

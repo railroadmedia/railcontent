@@ -17,8 +17,8 @@ class ChallengesImport2023 extends Command
     protected $description = 'Import challenge data from file';
 
 
-    const PERMISSIONS = [
-        'guitareo' =>[
+    public const PERMISSIONS = [
+        'guitareo' => [
             'basic' => [
                 91,
                 92,
@@ -26,7 +26,7 @@ class ChallengesImport2023 extends Command
             ],
             'plus' => [92],
         ],
-        'drumeo' =>[
+        'drumeo' => [
             'basic' => [
                 91,
                 92,
@@ -34,7 +34,7 @@ class ChallengesImport2023 extends Command
             ],
             'plus' => [92],
         ],
-        'pianote' =>[
+        'pianote' => [
             'basic' => [
                 91,
                 92,
@@ -42,7 +42,7 @@ class ChallengesImport2023 extends Command
             ],
             'plus' => [92],
         ],
-        'singeo' =>[
+        'singeo' => [
             'basic' => [
                 91,
                 92,
@@ -52,8 +52,8 @@ class ChallengesImport2023 extends Command
         ]
     ];
 
-    const CHAPTER_THUMBS = [
-        'drumeo' =>[
+    public const CHAPTER_THUMBS = [
+        'drumeo' => [
             'https://d1923uyy6spedc.cloudfront.net/Chapter1-1701464222.jpg',
             'https://d1923uyy6spedc.cloudfront.net/Chapter2-1701464237.jpg',
             'https://d1923uyy6spedc.cloudfront.net/Chapter3-1701464247.jpg',
@@ -118,7 +118,7 @@ class ChallengesImport2023 extends Command
                     $content->type = $contentType;
                     $content->slug = $contentSlug;
                     $content->status = 'draft';
-                        //$this->getValue($data, $headersRow, 'status');
+                    //$this->getValue($data, $headersRow, 'status');
                     $content->brand = $this->getValue($data, $headersRow, 'brand');
                     $content->published_on = $this->getValue($data, $headersRow, 'published_on');
                     $content->language = 'en-US';
@@ -151,22 +151,22 @@ class ChallengesImport2023 extends Command
                 $chapter_5_t = $this->getValue($data, $headersRow, 'chapter_5_timecode');
                 $chapter_6_d = $this->getValue($data, $headersRow, 'chapter_6_desc');
                 $chapter_6_t = $this->getValue($data, $headersRow, 'chapter_6_timecode');
-                if($chapter_1_d != 'NULL' && $chapter_1_t != 'NULL'){
+                if($chapter_1_d != 'NULL' && $chapter_1_t != 'NULL') {
                     $content->setChapter($chapter_1_d.':'.$chapter_1_t, 1, self::CHAPTER_THUMBS[$content->brand][0]);
                 }
-                if($chapter_2_d != 'NULL' && $chapter_2_t != 'NULL'){
+                if($chapter_2_d != 'NULL' && $chapter_2_t != 'NULL') {
                     $content->setChapter($chapter_2_d.':'.$chapter_2_t, 2, self::CHAPTER_THUMBS[$content->brand][1]);
                 }
-                if($chapter_3_d != 'NULL' && $chapter_3_t != 'NULL'){
+                if($chapter_3_d != 'NULL' && $chapter_3_t != 'NULL') {
                     $content->setChapter($chapter_3_d.':'.$chapter_3_t, 3, self::CHAPTER_THUMBS[$content->brand][2]);
                 }
-                if($chapter_4_d != 'NULL' && $chapter_4_t != 'NULL'){
+                if($chapter_4_d != 'NULL' && $chapter_4_t != 'NULL') {
                     $content->setChapter($chapter_4_d.':'.$chapter_4_t, 4, self::CHAPTER_THUMBS[$content->brand][3]);
                 }
-                if($chapter_5_d != 'NULL' && $chapter_5_t != 'NULL'){
+                if($chapter_5_d != 'NULL' && $chapter_5_t != 'NULL') {
                     $content->setChapter($chapter_5_d.':'.$chapter_5_t, 5, self::CHAPTER_THUMBS[$content->brand][4]);
                 }
-                if($chapter_6_d != 'NULL' && $chapter_6_t != 'NULL'){
+                if($chapter_6_d != 'NULL' && $chapter_6_t != 'NULL') {
                     $content->setChapter($chapter_6_d.':'.$chapter_6_t, 6, self::CHAPTER_THUMBS[$content->brand][5]);
                 }
 
@@ -189,10 +189,10 @@ class ChallengesImport2023 extends Command
                 $stagingParentId = $this->getValue($data, $headersRow, 'parent_id');
                 if($stagingParentId && isset($mappingIds[$stagingParentId])) {
 
-$parentId = $mappingIds[$stagingParentId];
-                        $content->setParentId($parentId, $this->getValue($data, $headersRow, 'child_position'));
-                        $challengePartIds[] = $content->id;
-                        $content->save();
+                    $parentId = $mappingIds[$stagingParentId];
+                    $content->setParentId($parentId, $this->getValue($data, $headersRow, 'child_position'));
+                    $challengePartIds[] = $content->id;
+                    $content->save();
 
                 }
 
@@ -206,8 +206,8 @@ $parentId = $mappingIds[$stagingParentId];
             }
         );
 
-//        $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
-//        $contentService->fillParentContentDataColumnForContentIds($challengePartIds);
+        //        $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
+        //        $contentService->fillParentContentDataColumnForContentIds($challengePartIds);
 
         $this->info('Done.');
     }

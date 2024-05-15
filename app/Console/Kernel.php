@@ -125,6 +125,8 @@ class Kernel extends ConsoleKernel
             ->mondays()->when(function () {
                 return now()->weekOfYear % 2 == 0;
             })->at('08:01'); // every other Monday at 12:01am PST
+
+        $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00');//3am PST
     }
 
     /**
@@ -136,12 +138,12 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__ . '/Commands');
 
-//        $scan = scandir(app_path('Modules'));
-//        foreach ($scan as $file) {
-//            if (is_dir(app_path("Modules/$file"))) {
-//                $this->load(app_path("Modules/$file/Console/Commands"));
-//            }
-//        }
+        //        $scan = scandir(app_path('Modules'));
+        //        foreach ($scan as $file) {
+        //            if (is_dir(app_path("Modules/$file"))) {
+        //                $this->load(app_path("Modules/$file/Console/Commands"));
+        //            }
+        //        }
         $this->load(app_path('Modules/Ecommerce/Console/Commands'));
         $this->load(app_path('Modules/Content/Console/Commands'));
         $this->load(app_path('Modules/EventTracking/Console/Commands'));

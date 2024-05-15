@@ -43,8 +43,8 @@ class LearningPathsService
                 $section->ctaUrl = $nextContentForUser['url'];
             }
 
-            $section->ctaText = ($content['completed'])?'Completed':((!$content['started']) ? 'Start now':'Continue');
-            $section->state = ($content['completed'])?'completed':((!$content['started']) ? 'start':'continue');
+            $section->ctaText = ($content['completed']) ? 'Completed' : ((!$content['started']) ? 'Start now' : 'Continue');
+            $section->state = ($content['completed']) ? 'completed' : ((!$content['started']) ? 'start' : 'continue');
         });
 
         return $learningPaths;

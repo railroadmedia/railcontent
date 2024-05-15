@@ -11,22 +11,23 @@ use Carbon\Carbon;
 
 class FeatureFlagService
 {
-
     /**
      * @param string $name - Human readable name of feature
      * @param string|null $active_at - Timestamp when feature should be enabled
      * @param string|null $description - Human readable description of feature
      * @param array|string|null $allow_filter - Array or comma separated values for different pass-filters to apply to this feature
+     * @param array|string|null $block_filter - Array or comma separated values for different block-filters to apply to this feature
      * @param array|string|null $userid_list -- Array or comma separated values for user ids
      * @return Feature
      */
-    public function addFeature(string $name, string $active_at=null, string $description=null, array|string $allow_filter=null, array|string $userid_list=null) : Feature
+    public function addFeature(string $name, string $active_at = null, string $description = null, array|string $allow_filter = null, array|string $block_filter = null, array|string $userid_list = null): Feature
     {
         $values = [
             'name' => $name,
             'active_at' => $active_at ?? Carbon::now(),
             'description' => $description,
             'allow_filter' => $allow_filter,
+            'block_filter' => $block_filter,
             'userid_list' => $userid_list
         ];
         $values = $this->convertArrayParamsToString($values);
@@ -42,7 +43,7 @@ class FeatureFlagService
     {
         $this->throwIfInvalidUpdate($attributesToUpdate, 'Feature');
         $attributesToUpdate = $this->convertArrayParamsToString($attributesToUpdate);
-        Feature::updateOrCreate( ['id' => $id], $attributesToUpdate);
+        Feature::updateOrCreate(['id' => $id], $attributesToUpdate);
     }
 
     public function deleteFeature(int $id)
@@ -56,7 +57,7 @@ class FeatureFlagService
      * @param bool $enabled - Toggle if experiment should use default values, or branch
      * @return Experiment
      */
-    public function addExperiment(string $name, string $default_value=null, bool $enabled=true) : Experiment
+    public function addExperiment(string $name, string $default_value = null, bool $enabled = true): Experiment
     {
         $values = [
             'name' => $name,
@@ -76,13 +77,13 @@ class FeatureFlagService
         Experiment::destroy([$id]);
     }
 
-    public function setExperimentEnabled(int $id, $enabled=true)
+    public function setExperimentEnabled(int $id, $enabled = true)
     {
         Experiment::updateOrCreate(['id' => $id], ['enabled' => $enabled]);
     }
 
 
-    public function addBranch(string $name, string $content, int $experimentID, int $priority=null, array|string $allow_filter=null, int $weight=null, array|string $userid_list=null) : Branch
+    public function addBranch(string $name, string $content, int $experimentID, int $priority = null, array|string $allow_filter = null, int $weight = null, array|string $userid_list = null): Branch
     {
         if ($weight <= 0  && !FeatureFlagManager::isValidFilter($allow_filter)) {
             throw new \InvalidArgumentException('A Branch must have either a positive weight or a valid allow_filter');
@@ -126,7 +127,7 @@ class FeatureFlagService
 
     private function convertArrayParamsToString(array $attributesToUpdate)
     {
-        $attributesToCheck = ['userid_list', 'allow_filter'];
+        $attributesToCheck = ['userid_list', 'allow_filter', 'block_filter'];
         foreach($attributesToCheck as $attributeToCheck) {
             if (isset($attributesToUpdate[$attributeToCheck]) && is_array($attributesToUpdate[$attributeToCheck])) {
                 $arrayValues = $attributesToUpdate[$attributeToCheck];

@@ -1,4 +1,5 @@
 <?php
+
 class Prices
 {
     public static $plusSubscriptionAnnualFull = 240;

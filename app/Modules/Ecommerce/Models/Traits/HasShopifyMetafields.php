@@ -27,7 +27,7 @@ trait HasShopifyMetafields
         }
         // Shopify has extra fields we don't care about, so clean up the response data
         $existingMetaFields = $shopifyMetaFields->transform(
-            fn(MetafieldResource $metafieldResource) => MetaField::getStructureFromShopify($metafieldResource)
+            fn (MetafieldResource $metafieldResource) => MetaField::getStructureFromShopify($metafieldResource)
         );
 
         $newMetafields = $localMetaFields->diffKeys($existingMetaFields);

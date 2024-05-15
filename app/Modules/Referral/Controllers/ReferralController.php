@@ -48,7 +48,7 @@ class ReferralController extends Controller
 
         $redirect = $request->has('redirect') ? $request->get('redirect') : url()->route(
             config('referral.email_invite_redirect_route'),
-             ['brand' => $request->get('brand')]
+            ['brand' => $request->get('brand')]
         );
 
         // this endpoint can handle json requests for the mobile app as well

@@ -78,11 +78,10 @@
     "webpack": "^5.90.3"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.22.10",
-    "@babel/preset-react": "^7.22.5",
     "@musora/icons": "^1.0.6",
     "@parcel/transformer-sass": "^2.12.0",
     "@tinymce/tinymce-vue": "^5.1.1",
+    "@typeform/embed": "^4.10.0",
     "@vimeo/player": "^2.15.0",
     "@vueuse/core": "^10.9.0",
     "alpinejs": "^3.4.2",

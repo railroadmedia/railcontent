@@ -37,7 +37,7 @@ class CmsSizeChartSeeder extends Seeder
             'Size_Chart/size_chart_18.png',
         ];
 
-        foreach($charts as $chart){
+        foreach($charts as $chart) {
             SizeChart::create([
                 'chart' => $chart
             ]);

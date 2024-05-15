@@ -38,7 +38,7 @@ class Brand extends Filter
     public function options(NovaRequest $request)
     {
         $brands = \App\Models\Brand::get();
-        $brands = $brands->mapWithKeys(function($item){
+        $brands = $brands->mapWithKeys(function ($item) {
             return [$item['name'] => $item['name']];
         });
 

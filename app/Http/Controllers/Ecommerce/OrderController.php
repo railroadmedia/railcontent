@@ -144,14 +144,14 @@ class OrderController extends Controller
         $logoutUrl = route('user_management_system.logout.cookie', ['redirect_to' => $currentUrl]);
 
         // this is likely no longer needed
-//        if (!empty($user) &&
-//            UserAccessService::isEdge($user->id) &&
-//            !empty($cart->getItemBySku('drumeo_edge_30_days_access'))) {
-//
-//            $cart->removeItemBySku('drumeo_edge_30_days_access');
-//            $cart->toSession();
-//
-//        }
+        //        if (!empty($user) &&
+        //            UserAccessService::isEdge($user->id) &&
+        //            !empty($cart->getItemBySku('drumeo_edge_30_days_access'))) {
+        //
+        //            $cart->removeItemBySku('drumeo_edge_30_days_access');
+        //            $cart->toSession();
+        //
+        //        }
 
         if (empty($cart->getItems())) {
             return redirect()->to('/');

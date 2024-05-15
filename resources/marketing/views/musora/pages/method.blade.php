@@ -1,8 +1,16 @@
 @php
-    require_once(resource_path('marketing/views/musora/pages/method-data.php'))
+    require_once(resource_path('marketing/views/musora/pages/method-data.php'));
+    require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
 @endphp
 
 @extends('musora._partials._features-layout')
+
+@section('body-data')
+    x-data ='{
+    lazyLoad: false,
+    videoLoaded: false,
+    }'
+@endsection
 
 @section('head-includes')
     <title>Musora - Your musical goals start here.</title>
@@ -208,17 +216,30 @@
 @endsection
 
 @section('desc')
-    Always know exactly what to practice with structured video lessons<br class="hidden sm:inline"> and courses featuring many of the world’s best teachers.
+    Have you always wanted to learn how to play an instrument but don’t know where to start?<br>
+    <strong>Get step-by-step lessons for the drums, piano, guitar and singing all in one platform.</strong>
 @endsection
 
 <!-- Main -->
 @section('page-body')
-    <section class="py-10 md:py-12">
-        <h3 class="text-center leading-tight mb-5"><strong>Your clear, frustration-free way to <br>learn ANY instrument.</strong></h3>
-        <p class="text-center max-w-2xl mx-auto">
-            Whether you’re learning to play the piano, guitar, drums or to sing, you’ll never have to wonder where to go next. Our 10-level curriculum of step-by-step lessons is your clear, specific path to go from total beginner to playing all your favorite songs.
-        </p>
-        <div class="container max-w-6xl lg:ml-auto lg:mr-0 xl:mx-auto px-6 xl:px-0">
+    <section class="py-10 sm:py-14 lg:py-20 px-3 lg:px-5">
+        <h3 class="text-center mx-auto font-extrabold max-w-4xl leading-snug"><strong>Your clear path, frustration-free guide to learning to play an instrument like you always imagined!</strong></h3>
+
+        <div class="container max-w-5xl lg:ml-auto lg:mr-0 xl:mx-auto px-6 xl:px-0">
+            <div class="flex flex-wrap sm:flex-nowrap lg:items-center my-5 sm:my-10">
+                <picture class="w-full sm:w-1/2">
+                    <source media="(min-width: 640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp">
+                    <img x-ref="image"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/marketing/musora/membership/homepage/2024/7-reasons-03.webp"
+                        alt="Step-By-Step Clarity"
+                        class="w-full h-56 lg:h-72 object-cover rounded-xl opacity-0 transition-opacity"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')">
+                </picture>
+                <p class="w-full sm:w-1/2 sm:pl-5 mt-5 sm:mt-0 leading-relaxed flex-grow-0">Whether it’s mastering rhythms, playing beautiful melodies, strumming your favorite tunes or singing beautifully, our10-level curriculum is designed to elevate you from a total beginner to a confident musician.
+                <br><br>
+                Learn from some of the world’s most acclaimed instructors through comprehensive video lessons that make learning clear, easy-to-follow, and enjoyable, so you can quickly progress from basic techniques to playing beloved tunes and expressing your own musical style.</p>
+            </div>
             <div class="mb-10">
                 <div id="courses" class="anchor"></div>
                 <h4 class="font-extrabold mb-4">Piano</h4>
@@ -257,7 +278,7 @@
                                             alt="lesson{{$key+1}} img"
                                             fetchpriority="high"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #85001E 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(133 0 30 / 60%), rgba(0, 0, 0, 0.2));"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-white.png" alt="pianote logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -314,7 +335,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #05816F 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(5 129 111 / 60%), rgba(0, 0, 0, 0.2));"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo-white.png" alt="guitareo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -371,7 +392,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #095399 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(9 83 153 / 60%), rgba(0, 0, 0, 0.2));"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo-white.png" alt="drumeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -428,7 +449,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #703d99 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
+{{--                                        <div class="absolute inset-0 rounded-t-xl" style="background:linear-gradient(to top, rgb(112 61 153 / 60%), rgba(0, 0, 0, 0.2));"></div>--}}
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="singeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -1374,6 +1395,14 @@
             </div>
         </div>
     </section>
+
+
+    @php
+        $testimonials = $musora['testimonials'];
+    @endphp
+    @include('musora.sales.components.testimonials-section', [
+        'header' => 'Where musical<br class="hidden sm:inline"> dreams come true.',
+    ])
 
     @include('musora.sales.components.order-section-collage', [
     'logo' => 'marketing/musora/membership/homepage/webp-format/musora_logo.webp',

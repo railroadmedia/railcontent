@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Modules\HelpScout\Console\Commands;
 
 use HelpScout\Api\Mailboxes\Mailbox;

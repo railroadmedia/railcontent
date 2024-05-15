@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 
 class RegisterWebHook extends Command
 {
-
     protected $signature = 'helpscout:register {url : Endpoint for webhook} {event : web hook event}';
     protected $description = 'Register web hook';
     private HelpScoutWebHookService $helpScoutWebHookService;

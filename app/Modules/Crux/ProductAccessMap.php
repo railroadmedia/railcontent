@@ -12,7 +12,6 @@ use Railroad\Ecommerce\Repositories\ProductRepository;
 
 class ProductAccessMap
 {
-
     public static $internalProductsBySkuCache = false;
     private static $hasClaimedRetentionOfferWithinCache = [];
 
@@ -24,7 +23,7 @@ class ProductAccessMap
             ->table('ecommerce_products')
             ->whereIn('digital_access_type', ['all content access', 'basic content access'])
             ->get(['id', 'sku'])
-            ;//->toArray();
+        ;//->toArray();
 
         return $results;
     }
@@ -50,7 +49,7 @@ class ProductAccessMap
             ->table('ecommerce_products')
             ->where('digital_access_type', 'specific content access')
             ->get(['id', 'sku'])
-            ;//->toArray();
+        ;//->toArray();
 
         return $results;
     }

@@ -29,18 +29,29 @@ trait SavesShopifyIdOnAddresses
      * @param string|null $countryCode
      * @return Collection
      */
-    protected function findAddressesWithMatchingData(?int $userId, ?Collection $customers,
-                                                     ?string $firstName, ?string $lastName, ?string $address1,
-                                                     ?string $address2, ?string $city, ?string $province, ?string $provinceCode,
-                                                     ?string $zip, ?string $country, ?string $countryCode): Collection
-    {
+    protected function findAddressesWithMatchingData(
+        ?int $userId,
+        ?Collection $customers,
+        ?string $firstName,
+        ?string $lastName,
+        ?string $address1,
+        ?string $address2,
+        ?string $city,
+        ?string $province,
+        ?string $provinceCode,
+        ?string $zip,
+        ?string $country,
+        ?string $countryCode
+    ): Collection {
         // one or the other must be set
         assert(!is_null($userId) || (!is_null($customers) && $customers->isNotEmpty()));
 
         // make a key out of the values, so we can compare our addresses (ignoring case)
         // DEV NOTE: we aren't consistent with region and country, and Shopify automatically converts names and codes,
         // so we need to create keys for all possibilities
-        $checkKeyNamedProvinceAndCountry = preg_replace('/\s+/', '',
+        $checkKeyNamedProvinceAndCountry = preg_replace(
+            '/\s+/',
+            '',
             strtoupper($firstName ?? "")
                     . strtoupper($lastName ?? "")
                     . strtoupper($address1 ?? "")
@@ -49,9 +60,11 @@ trait SavesShopifyIdOnAddresses
                     . strtoupper($province ?? "")
                     . strtoupper($zip ?? "")
                     . strtoupper($country ?? "")
-                );
+        );
 
-        $checkKeyProvinceCodeAndCountryName = preg_replace('/\s+/', '',
+        $checkKeyProvinceCodeAndCountryName = preg_replace(
+            '/\s+/',
+            '',
             strtoupper($firstName ?? "")
             . strtoupper($lastName ?? "")
             . strtoupper($address1 ?? "")
@@ -62,7 +75,9 @@ trait SavesShopifyIdOnAddresses
             . strtoupper($country ?? "")
         );
 
-        $checkKeyProvinceNameAndCountryCode = preg_replace('/\s+/', '',
+        $checkKeyProvinceNameAndCountryCode = preg_replace(
+            '/\s+/',
+            '',
             strtoupper($firstName ?? "")
             . strtoupper($lastName ?? "")
             . strtoupper($address1 ?? "")
@@ -73,7 +88,9 @@ trait SavesShopifyIdOnAddresses
             . strtoupper($countryCode ?? "")
         );
 
-        $checkKeyProvinceAndCountryCode = preg_replace('/\s+/', '',
+        $checkKeyProvinceAndCountryCode = preg_replace(
+            '/\s+/',
+            '',
             strtoupper($firstName ?? "")
             . strtoupper($lastName ?? "")
             . strtoupper($address1 ?? "")
@@ -92,14 +109,14 @@ trait SavesShopifyIdOnAddresses
             $addresses = collect($this->getAddressRepository()->getUserShippingAddresses($userId));
             // and its customers, if there are any
             if (!is_null($customers)) {
-                $customers->each(fn(Customer $customer) => $addresses->push(
+                $customers->each(fn (Customer $customer) => $addresses->push(
                     ...$this->getAddressRepository()->getCustomerShippingAddresses($customer->getId())
                 ));
             }
             $addresses;
         } else {
             // get all the addresses for the customers
-            $customers->each(fn(Customer $customer) => $addresses->push(
+            $customers->each(fn (Customer $customer) => $addresses->push(
                 ...$this->getAddressRepository()->getCustomerShippingAddresses($customer->getId())
             ));
         }
@@ -120,7 +137,7 @@ trait SavesShopifyIdOnAddresses
      */
     protected function storeShopifyId(Collection $addresses, int $shopifyId): void
     {
-        $addresses->each(function(Address $address) use ($shopifyId) {
+        $addresses->each(function (Address $address) use ($shopifyId) {
             // grab the eloquent model, so we can update it
             $addressModel = \App\Modules\Ecommerce\Models\Address::find($address->getId());
             $addressModel->shopify_id = $shopifyId;
@@ -138,7 +155,9 @@ trait SavesShopifyIdOnAddresses
      */
     private function getKey(Address $address): string
     {
-        return preg_replace('/\s+/', '',
+        return preg_replace(
+            '/\s+/',
+            '',
             strtoupper($address->getFirstName())
                 . strtoupper($address->getLastName())
                 . strtoupper($address->getStreetLine1() ?? "")
@@ -147,7 +166,7 @@ trait SavesShopifyIdOnAddresses
                 . strtoupper($address->getRegion() ?? "")
                 . strtoupper($address->getZip() ?? "")
                 . strtoupper($address->getCountry() ?? "")
-            );
+        );
     }
 
     /**

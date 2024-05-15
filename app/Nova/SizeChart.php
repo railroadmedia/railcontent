@@ -49,7 +49,7 @@ class SizeChart extends Resource
                 ->deletable(false)
                 ->required()
                 ->maxWidth(700)
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     return '/Size_Chart/'.$request->file('chart')->getClientOriginalName();
                 })
         ];

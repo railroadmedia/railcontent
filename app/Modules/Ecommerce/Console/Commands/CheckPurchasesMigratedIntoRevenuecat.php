@@ -27,12 +27,12 @@ class CheckPurchasesMigratedIntoRevenuecat extends Command
         $type = $this->argument('type') ?? 'apple_subscription';
         $users = [];
         $subscriptions =   Subscription::query()
-            ->where('brand','=', $brand)
-            ->where('type','=', $type)
+            ->where('brand', '=', $brand)
+            ->where('type', '=', $type)
             ->whereNotNull('user_id')
             ->orderBy('created_at')
-            ->chunk(1000, function ($items) use($revenueCatService, $subscriptionService, $userProductService, &$users) {
-                foreach($items as $item){
+            ->chunk(1000, function ($items) use ($revenueCatService, $subscriptionService, $userProductService, &$users) {
+                foreach($items as $item) {
                     try {
                         $subscriber = $revenueCatService->getSubscriber($item->user_id);
                         $entitlements = $subscriber->entitlements;
@@ -45,7 +45,7 @@ class CheckPurchasesMigratedIntoRevenuecat extends Command
 
                                 $sameExpireDate = Carbon::parse($subscriptionData->expires_date) == $item->paid_until;
                                 $isActiveRevenueCat = ((Carbon::parse($subscriptionData->expires_date) >= now()->subDays(5)
-                                && !$subscriptionData->unsubscribe_detected_at )|| $subscriptionData->auto_resume_date);
+                                && !$subscriptionData->unsubscribe_detected_at) || $subscriptionData->auto_resume_date);
                                 $isActive = $isActiveRevenueCat == $item->is_active;
                                 if(!$isActive) {
                                     $users[$item->user_id] = $item->user_id;
@@ -60,7 +60,7 @@ class CheckPurchasesMigratedIntoRevenuecat extends Command
 
                 }
                 $this->info('1000 ready');
-        });
+            });
 
         $this->info(print_r($users, true));
         $this->info(count($users));

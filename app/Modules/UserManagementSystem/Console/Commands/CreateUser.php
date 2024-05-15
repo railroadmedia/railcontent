@@ -15,7 +15,6 @@ use Modules\UserManagementSystem\Models\User;
 
 class CreateUser extends Command
 {
-
     protected $name = 'UserCreate';
     protected $signature = 'user:create {productId}';
 

@@ -11,7 +11,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class UpdateRoutines extends Command
 {
-
     /**
      * The console command name.
      *
@@ -248,7 +247,7 @@ class UpdateRoutines extends Command
                     'key' => 'title',
                     'type' => 'string',
                     'position' => 1,
-                ],                               [
+                ], [
                                                      'value' => $newTitle,
                                                  ]);
 
@@ -257,7 +256,7 @@ class UpdateRoutines extends Command
                     'content_id' => $routineContentRow->id,
                     'key' => 'description',
                     'position' => 1,
-                ],                               [
+                ], [
                                                      'value' => $newDescription,
                                                  ]);
                 //set new thumbnail_url
@@ -265,7 +264,7 @@ class UpdateRoutines extends Command
                     'content_id' => $routineContentRow->id,
                     'key' => 'thumbnail_url',
                     'position' => 1,
-                ],                               [
+                ], [
                                                      'value' => $newThumb,
                                                  ]);
                 event(new ContentCreated($routineContentRow->id));
@@ -329,14 +328,14 @@ class UpdateRoutines extends Command
                 'content_id' => $lesson->id,
                 'key' => 'description',
                 'position' => 1,
-            ],                               [
+            ], [
                                                  'value' => $routine['description'],
                                              ]);
             $this->updateOrInsertAndGetFirst('railcontent_content_data', [
                 'content_id' => $lesson->id,
                 'key' => 'thumbnail_url',
                 'position' => 1,
-            ],                               [
+            ], [
                                                  'value' => $routine['thumbnail_url'],
                                              ]);
 

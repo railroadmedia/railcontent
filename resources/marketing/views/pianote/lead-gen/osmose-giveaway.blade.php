@@ -29,6 +29,7 @@
             }
         }
             .play-button {
+                display: inline-block;
             cursor: pointer;
             outline: none;
             transition: opacity 0.3s;
@@ -272,13 +273,13 @@
     @include('_partials.components.video-modal', [
         'name' => 'modalVideoLeft',
         'video' => 'wNjxe49-_Cw',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
 
     @include('_partials.components.video-modal', [
         'name' => 'modalVideoRight',
         'video' => 'fsHr1hpKgVo',
-        'youtube' => true,
+        'youtubeEmbed' => true,
     ])
 
     @include('pianote.sales.partials._footer', [

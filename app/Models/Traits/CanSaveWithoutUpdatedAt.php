@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 trait CanSaveWithoutUpdatedAt
 {
-
     /**
      * Save the model without updating the updated_at value
      *

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 
 class YouTrackCompletedItemsReport
 {
-
     private $agiles = [
         "UX" => "121-5",
         "FEW" => "121-22",
