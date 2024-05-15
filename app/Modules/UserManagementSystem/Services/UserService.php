@@ -39,17 +39,6 @@ class UserService
             ->get();
     }
 
-    public function getUserByShopifyCustomerId($shopifyCustomerId): ?User
-    {
-        $user =
-            User::query()
-                ->where('shopify_id', '=', $shopifyCustomerId)
-                ->orderByDesc('id')
-                ->first();
-
-        return $user ?? null;
-    }
-
     public function createUser(
         string $email,
         string $password,
@@ -78,10 +67,19 @@ class UserService
         $user->save();
     }
 
-    public function deleteUser()
+    public function getUserByShopifyCustomerId($shopifyCustomerId): ?User
     {
-        $user = user();
+        $user =
+            User::query()
+                ->where('shopify_id', '=', $shopifyCustomerId)
+                ->orderByDesc('id')
+                ->first();
 
+        return $user ?? null;
+    }
+
+    public function deleteUser($user)
+    {
         $user->fill([
                         'email' => 'musora+deleted_'.
                             Carbon::now()
@@ -110,16 +108,19 @@ class UserService
                         'piano_gear_piano_brands' => null,
                         'piano_gear_keyboard_brands' => null,
                         'piano_playing_since_year' => null,
+                        'guitar_gear_string_brands' => null,
+                        'guitar_gear_pedal_brands' => null,
+                        'guitar_gear_amp_brands' => null,
+                        'guitar_gear_guitar_brands' => null,
+                        'guitar_gear_photo' => null,
+                        'singing_gear_mic_brands' => null,
+                        'singing_gear_photo' => null,
 
                     ]);
-        $user->email =
-            'musora+deleted_'.
-            Carbon::now()
-                ->getTimestamp().
-            '@musora.com';
         $user->updated_at =
             Carbon::now()
                 ->toDateTimeString();
+
         $user->save();
 
         return $user;

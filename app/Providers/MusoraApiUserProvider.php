@@ -330,7 +330,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->postRepository->deleteByUserId($userId);
         $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
 
-        $user = $this->userService->deleteUser();
+        $user = $this->userService->deleteUser($user);
 
         return $user;
     }
