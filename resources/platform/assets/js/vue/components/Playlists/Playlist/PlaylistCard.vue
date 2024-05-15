@@ -4,6 +4,7 @@ import { onBeforeMount, ref, computed, reactive, onMounted } from 'vue';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
 import { usePlaylistsStore } from '../../../../stores/playlists';
 import DifficultyLabel from '../../DifficultyLabel/DifficultyLabel.vue'
+import { contentTypes } from '../../../../utils';
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -57,6 +58,13 @@ const lessonThumbnail = computed(() => {
 //Song Artist
 const artist = computed(() => {
     return props.lesson.artist;
+})
+
+const contentTypeString = computed(() => {
+    if (props.lesson?.be_type && contentTypes[props.lesson.be_type]?.singular) {
+        return contentTypes[props.lesson.be_type].singular
+    }
+    return '';
 })
 
 const released = computed(() => {
@@ -278,14 +286,14 @@ onBeforeMount(() => {
                         </span>
 
                         <!-- if instrumentless -->
-                        <template v-if="lesson.type === 'song' && !state.isFullTrack">
+                        <template v-if="lesson.be_type === 'song' && !state.isFullTrack">
                             <span>{{ instrument }}less</span>
                         </template>
                         <!-- if routine -->
-                        <template v-if="lesson.type === 'routine' && lesson.is_high_routine === true">
+                        <template v-if="lesson.be_type === 'routine' && lesson.is_high_routine === true">
                             <span>High Voice</span>
                         </template>
-                        <template v-if="lesson.type === 'routine' && lesson.is_low_routine === true">
+                        <template v-if="lesson.be_type === 'routine' && lesson.is_low_routine === true">
                             <span>Low Voice</span>
                         </template>
                     </p>
@@ -323,7 +331,7 @@ onBeforeMount(() => {
                     <p class="tw-w-full tw-flex tw-items-center tw-text-xs tw-capitalize tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-1"
                         :class="[{ 'md:tw-mt-0 md:tw-text-sm': !cueVersion }]">
                         <!-- Instructor / Artist -->
-                        <template v-if="lesson.type === 'song'">
+                        <template v-if="lesson.be_type === 'song'">
                             <span>{{ artist }}</span>
                         </template>
                         <template v-else-if="lesson.instructors && lesson.instructors.length">
@@ -333,24 +341,24 @@ onBeforeMount(() => {
                             </span>
                         </template>
                         <!-- Or Lesson Type -->
-                        <span v-else>{{ lesson.type }}</span>
+                        <span v-else>{{ aaaa }}</span>
                         <!-- Duration OR Lesson Type -->
                         <span class="tw-mx-0.5" :class="[{ 'lg:tw-hidden': !cueVersion }]">|</span>
-                        <span :class="[{ 'lg:tw-hidden': !cueVersion }]">{{ lesson.type }}</span>
+                        <span :class="[{ 'lg:tw-hidden': !cueVersion }]">{{ contentTypeString }}</span>
                     </p>
                 </div>
 
                 <template v-if="!cueVersion">
                     <!-- Lesson Skill Level -->
-                    <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="lesson.type">
-                        <span v-if="lesson.type" class="tw-text-center tw-text-sm ">
+                    <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="contentTypeString">
+                        <span v-if="lesson.be_type" class="tw-text-center tw-text-sm ">
                             <DifficultyLabel class="" :difficultyValue="lesson.difficulty" textCase="uppercase" />
                         </span>
                     </div>
                     <!-- Lesson Type -->
-                    <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="lesson.type">
-                        <span v-if="lesson.type" class="tw-text-center tw-text-sm tw-capitalize">
-                            {{ lesson.type }}
+                    <div class="tw-hidden xl:tw-inline-flex tw-justify-start tw-shrink-0 tw-w-[140px]" :title="contentTypeString">
+                        <span v-if="lesson.be_type" class="tw-text-center tw-text-sm tw-capitalize">
+                            {{ contentTypeString }}
                         </span>
                     </div>
                     <!-- Lesson Time -->

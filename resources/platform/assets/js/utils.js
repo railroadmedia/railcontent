@@ -73,6 +73,14 @@ export const contentTypes = {
     'student-collaborations': { singular: 'Student Collaboration', plural: 'Student Collaborations' },
     'study-the-greats': { singular: 'Study the Greats Session', plural: 'Study the Greats Sessions' },
     'tama-drums': { singular: 'Tama Drum', plural: 'Tama Drums' },
+    'behind-the-scenes': { singular: 'Behind the Scenes', plural: 'Behind the Scenes' },
+    'live-streams': { singular: 'Live Stream', plural: 'Live Streams' },
+    'solos': { singular: 'Solo', plural: 'Solos' },
+    'play-alongs': { singular: 'Play Along', plural: 'Play Alongs' },
+    'recommended': { singular: 'Inspired By Your Activity', plural: 'Inspired By Your Activities' },
+    'pack': { singular: 'Pack', plural: 'Packs' },
+    'coach-lessons': { singular: 'Coach Lesson', plural: 'Coach Lessons' },
+    'song-pdf': { singular: 'Song PDF', plural: 'Song PDFs' }
 };
 
 export const toKebabCase = (string) => {

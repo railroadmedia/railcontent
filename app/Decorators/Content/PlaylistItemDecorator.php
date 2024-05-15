@@ -117,6 +117,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $resources[$resource['resource_url']] = $resource;
             }
             if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
+                $contentsOfType[$contentIndex]['be_type'] = $content['type'];
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
 
