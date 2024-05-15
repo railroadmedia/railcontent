@@ -7,7 +7,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 
 /**
- * Defines the schema structure for a Post document type in Sanity.
+ * Defines the schema structure for a Event document type in Sanity.
  *
  * @property string $type
  * @property string $name
