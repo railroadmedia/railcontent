@@ -240,6 +240,10 @@ class RailcontentV2DataSyncingService
                 $contentColumnsToUpdate['length_in_seconds'] = $contentRow->length_in_seconds;
             }
 
+            if($contentColumnsToUpdate['length_in_seconds'] == 0){
+                $contentColumnsToUpdate['length_in_seconds'] = null;
+            }
+
             // update content row
             $contentColumnsToUpdate['id'] = $contentRow->id;
 
