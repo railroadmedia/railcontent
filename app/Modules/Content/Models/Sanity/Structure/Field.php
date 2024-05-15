@@ -9,12 +9,6 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
  */
 class Field
 {
-    //TODO:
-    // - validation
-    // - hidden
-    // - readOnly
-    // - others??
-
     /**
      * @param  FieldType  $type
      * @param  string  $name
@@ -25,6 +19,9 @@ class Field
      * @param  string|null  $of
      * @param  Group|array<Group>|null  $group
      * @param  array|null  $options
+     * @param  string|null  $hidden
+     * @param  string|null  $readOnly
+     * @param string|null $validation
      */
     public function __construct(
         public FieldType $type,
@@ -37,7 +34,10 @@ class Field
         //TODO can we do something more for $of?
         public ?string $of = null,
         public Group|array|null $group = null,
-        public ?array $options = null
+        public ?array $options = null,
+        public ?string $hidden = null,
+        public ?string $readOnly = null,
+        public ?string $validation = null,
     ) {
 
     }
@@ -75,6 +75,21 @@ class Field
                 $optional['group'] = $this->group->name;
             }
         }
+        if (!is_null($this->hidden)) {
+            $optional['hidden'] = Field::addJsonStripKey($this->hidden);
+        }
+        if (!is_null($this->validation)) {
+            $optional['validation'] = Field::addJsonStripKey($this->validation);
+        }
+        if (!is_null($this->readOnly)) {
+            $optional['readyOnly'] = Field::addJsonStripKey($this->readOnly);
+        }
         return array_merge($required, $optional);
+    }
+
+    private static function addJsonStripKey($value)
+    {
+        $value = preg_replace("/\s\s+/", ' ', $value);
+        return getStripFromJsonKey() . $value . getStripFromJsonKey();
     }
 }

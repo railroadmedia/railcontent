@@ -29,12 +29,15 @@ class Event extends BaseSanityModel
 
         $fields = [
             new Field(FieldType::String, 'name', group:$groups),
-            new Field(FieldType::Slug, 'slug', group:$detailsGroup, options:['source' => 'name']),
+            new Field(FieldType::Slug, 'slug', group:$detailsGroup, options:['source' => 'name'],
+                validation: "(rule) => rule.required().error(`Yo, homie. This Event needs a slug so we can sell tickets.`)",),
             new Field(FieldType::String, 'eventType', group:$detailsGroup, options:['list' => ['in-person', 'virtual'],
                 'layout' => 'radio']),
             new Field(FieldType::Datetime, 'date', group:$detailsGroup),
             new Field(FieldType::Number, 'doorsOpen', description:'Number of minutes before the start time for admission', initialValue:60, group:$detailsGroup),
-            new Field(FieldType::Reference, 'venue', to:'venue', group:$detailsGroup),
+            new Field(FieldType::Reference, 'venue', to:'venue', group:$detailsGroup,
+                validation: "(rule) => rule.custom((value, context) => {if (value && context?.document?.eventType === 'virtual') {return 'Only in-person events can have a venue'}return true})",
+                readOnly: "({value, document}) => !value && document?.eventType === 'virtual'"),
             new Field(FieldType::Reference, 'headline', to:'artist', group:$detailsGroup),
             new Field(FieldType::Image, 'image', group:$editorialGroup),
             // TODO NOTE: this causes an error: Error: Cannot read properties of null (reading 'useMemo')
