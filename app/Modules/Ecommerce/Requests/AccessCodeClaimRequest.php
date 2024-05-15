@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class AccessCodeClaimRequest extends FormRequest
 {
@@ -76,5 +77,17 @@ class AccessCodeClaimRequest extends FormRequest
             'email.required_if' => 'The email field is required',
             'password.required_if' => 'The password field is required',
         ];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        if ($this->wantsJson()) {
+            throw new HttpResponseException(response()->json([
+                'errors' => $validator->errors(),
+                'status' => true
+            ], 422));
+        }
+
+        parent::failedValidation($validator);
     }
 }
