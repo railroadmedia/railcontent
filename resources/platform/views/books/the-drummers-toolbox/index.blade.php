@@ -1,6 +1,6 @@
 <?php
 $layout = 'books.layout';
-if(!empty($user)){
+if (!empty($user)) {
     $layout = 'partials.layout';
 } ?>
 
@@ -9,12 +9,14 @@ if(!empty($user)){
 @section('meta')
     <title>The Drummer's Toolbox | Musora</title>
     <meta name="author" content="Brandon Toews">
-    <meta name="description" content="Here you will find all the digital resources that pair with the material in
+    <meta name="description"
+        content="Here you will find all the digital resources that pair with the material in
         The Drummer’s Toolbox. These including pre-built Recommended Listening playlists, drumless play-along
         tracks, and tons of Drumeo resources.">
 
-{{--    <meta property="og:image" content="{{ cdn('books/drummers-toolbox/share-image.png') }}">--}}
-    <meta property="og:description" content="Here you will find all the digital resources that pair with the material
+    {{--    <meta property="og:image" content="{{ cdn('books/drummers-toolbox/share-image.png') }}"> --}}
+    <meta property="og:description"
+        content="Here you will find all the digital resources that pair with the material
         in The Drummer’s Toolbox. These including pre-built Recommended Listening playlists, drumless play-along
         tracks, and tons of Drumeo resources.">
     <meta property="og:title" content="The Drummer's Toolbox">
@@ -22,7 +24,7 @@ if(!empty($user)){
 
 @section('inject-components')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var changeFormButtons = document.querySelectorAll('.change-form');
             var redemptionForms = document.querySelectorAll('.redemption-form');
 
@@ -46,8 +48,10 @@ if(!empty($user)){
                 formToToggleTo.classList.remove('hide');
             }
 
-            @if(count($errors))
-                window.openModal('redeemModal')
+            @if (count($errors))
+                setTimeout(() => {
+                    window.openModal('redeemModal')
+                }, 500);
             @endif
         });
     </script>
@@ -64,9 +68,9 @@ if(!empty($user)){
                         Toolbox. These include pre-built Recommended Listening playlists, drumless play-along
                         tracks, and tons of Drumeo resources.
 
-                        @if($isDigital)
-                            @if(!empty($user))
-                                @if(!$isEdge && $isPackOwner)
+                        @if ($isDigital)
+                            @if (!empty($user))
+                                @if (!$isEdge && $isPackOwner)
                                     <br><br>
                                     As an owner of The Drummer’s Toolbox, we’re granting you free access to Drumeo
                                     Edge for 30 days so you can access all of the resources on this page. Click the
@@ -79,7 +83,7 @@ if(!empty($user)){
                                 “Learn More” button below to get started!
                             @endif
                         @else
-                            @if(!empty($user))
+                            @if (!empty($user))
                                 <br><br>
                                 If you have a Drumeo Access Pass with a redemption code from your copy of the
                                 book, be sure to click the green button.
@@ -92,10 +96,10 @@ if(!empty($user)){
                     </p>
 
                     <div class="flex flex-row flex-wrap align-v-center">
-                        @if($isDigital)
-                            @if(empty($user) || !$isEdge)
+                        @if ($isDigital)
+                            @if (empty($user) || !$isEdge)
                                 <a href="{{ url()->route('books.drummers-toolbox.trial') }}"
-                                   class="btn collapse-250 mr-1 mb-1 bg-success text-white">
+                                    class="btn collapse-250 mr-1 mb-1 bg-success text-white">
                                     Learn More
                                 </a>
                             @endif
@@ -107,16 +111,16 @@ if(!empty($user)){
                             </button>
                         @endif
 
-                        @if(empty($user))
+                        @if (empty($user))
                             <button class="btn collapse-200 mb-1" data-open-modal="loginModal">
-                                    <span class="bg-white inverted text-white no-decoration short">
-                                        <i class="fas fa-sign-in mr-1"></i> Login To Drumeo
-                                    </span>
+                                <span class="bg-white inverted text-white no-decoration short">
+                                    <i class="fas fa-sign-in mr-1"></i> Login To Drumeo
+                                </span>
                             </button>
                         @endif
                     </div>
 
-                    @if(session()->has('success'))
+                    @if (session()->has('success'))
                         <p class="body mb-2" style="color: #00c51c; margin-top: 30px;">
                             <strong>Your Drumeo Membership has been claimed successfully!</strong>
                         </p>
@@ -125,16 +129,21 @@ if(!empty($user)){
 
                 <div class="flex flex-column xs-12 sm-4 hide-xs-only">
                     <img id="bestBookImage"
-                         src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/drummers-toolbox.png"
-                         alt="Drummer's Toolbox">
+                        src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/drummers-toolbox.png"
+                        alt="Drummer's Toolbox">
                 </div>
             </div>
         </div>
     </header>
 
-    @include('books.the-drummers-toolbox.partials.login-modal', ['redirectUrl' => url()->current(), "trialUrl" => url()->route('books.drummers-toolbox.trial')])
+    @include('books.the-drummers-toolbox.partials.login-modal', [
+        'redirectUrl' => url()->current(),
+        'trialUrl' => url()->route('books.drummers-toolbox.trial'),
+    ])
 
-    @include('books.the-drummers-toolbox.partials.redeem-modal', ['formSubmitUrl' => url()->route('access-codes.form-claim')])
+    @include('books.the-drummers-toolbox.partials.redeem-modal', [
+        'formSubmitUrl' => url()->route('access-codes.form-claim'),
+    ])
 
     <section class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
         <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 4xl:tw-grid-cols-6 tw-mb-8">
@@ -160,4 +169,3 @@ if(!empty($user)){
         </div>
     </section>
 @endsection
-

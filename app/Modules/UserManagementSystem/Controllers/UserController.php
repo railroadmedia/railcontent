@@ -732,14 +732,14 @@ class UserController extends Controller
     {
         $isJson = request()->expectsJson();
 
-        $user = user();
+        $user = User::find($id);
         $userId = $user['id'];
 
         //delete related data
         $this->commentService->markUserCommentsAsDeleted($userId);
         $this->postRepository->deleteByUserId($userId);
         $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
-        $user = $this->userService->deleteUser();
+        $user = $this->userService->deleteUser($user);
 
         if ($user) {
             event(new UserDeleted($user));

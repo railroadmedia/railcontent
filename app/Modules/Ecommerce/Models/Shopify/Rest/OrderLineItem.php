@@ -35,7 +35,7 @@ class OrderLineItem
         $this->sku = $shopifyLineItemData->sku;
         $this->variantId = $shopifyLineItemData->variant_id;
         $this->product = Product::withTrashed()->firstWhere('sku', $this->sku);
-        $this->totalPrice = $this->price - $this->discount;
+        $this->totalPrice = ($this->price * $this->quantity) - $this->discount;
     }
 
     /**

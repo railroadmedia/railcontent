@@ -256,4 +256,18 @@ export default {
             .then(() => Promise.resolve(true))
             .catch(ErrorHandler.push);
     },
+
+    /**
+     * Delete user
+     *
+     * @param {number} id
+     *
+     * @returns {Promise} - resolved promise with the response object
+     */
+    deleteUser(id) {
+        return axios
+            .delete(`/user-management-system/user/delete/${id}`)
+            .then(response => response)
+            .catch(ErrorHandler.push);
+    },
 };

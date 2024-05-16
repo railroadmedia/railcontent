@@ -125,7 +125,7 @@ class AddOrderTags extends WebhookChildJob
 
         // ensure that this trial product had 0 cost
         return $order->lineItems
-            ->filter(fn (OrderLineItem $lineItem) => $lineItem->isTrial() && $lineItem->totalPrice == 0)
+            ->filter(fn (OrderLineItem $lineItem) => $lineItem->isTrial() && $lineItem->totalPrice <= 0)
             ->isNotEmpty();
     }
 

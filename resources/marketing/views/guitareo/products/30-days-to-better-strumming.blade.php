@@ -19,48 +19,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
-        .join,
-        .join:hover {
-            background: #F61A30;
-            border-color: #F61A30;
-        }
-
-        .join.musora,
-        .join.musora:hover {
-            background-color: #FFAE00;
-            border-color: #FFAE00;
-            color: #000;
-        }
-
-        .join.outline.red {
-            border-color: #F61A30;
-            color: #0b76db;
-        }
-
-        .join.smaller.outline {
-            padding: 12px 7%;
-            border-color: #F61A30;
-            background-color: rgb(18, 18, 6, 0.3);
-        }
-
-        .join.smaller.outline:hover {
-            background-color: #F61A30;
-            color: #FFFFFF;
-        }
-
-        .join i {
-            transition: all .3s;
-            position: relative;
-            right: 0;
-        }
-
-        .translate-x-2 {
-            transform: translateX(0.2rem);
-        }
         .play-button {
             display: inline-block;
             cursor: pointer;
@@ -99,7 +61,7 @@
             content: '';
             position: absolute;
             width: 3px;
-            background-color: #F61A30;
+            background-color: #00C9AC;
             top: 0;
             bottom: 0;
             transform: translate(-50%, 0);
@@ -112,7 +74,7 @@
             width: 20px;
             height: 20px;
             transform: translate(-50%, 0);
-            background-color: #F61A30;
+            background-color: #00C9AC;
             top: 0;
             border-radius: 50%;
             z-index: 1;
@@ -133,8 +95,6 @@
 
 @section('body-data')
     x-data="{
-        danceOfEternity: false,
-        jayZ: false,
         trailer: false,
     }"
 @endsection
@@ -147,10 +107,10 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color: #020B16;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
-                <img alt="30 Days To Better Strumming Logo" class="h-32 sm:h-40 lg:h-48 my-4 md:my-10"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/header-logo.svg"><br>
-                <h1 class="leading-tight mb-4"><strong>Strum with confidence</strong><br> in just 30 days.</h1>
-                <h6 class="italic">Add essential rhythm techniques and strumming patterns to <br>
+                <img alt="30 Days To Better Strumming Logo" class="h-14 sm:h-16 lg:h-20"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"><br>
+                <h1 class="leading-tight my-6"><strong>Strum with confidence</strong><br> in just 30 days.</h1>
+                <h6 class="leading-tight italic">Add essential rhythm techniques and strumming patterns to <br>
                     your playing <strong>by simply practicing for 10 minutes a day.</strong></h6>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block bg-transparent hover:bg-white hover:text-black"
@@ -165,16 +125,16 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
 {{--                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>--}}
                 </div>
+                <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
+                    <strong x-cloak x-data="timer()" x-init="countdown()">
+                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                        <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                    </strong>
+                </p>
             </div>
-            <p class="uppercase text-sm text-guitareo py-4">Enrollment closes in
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                 </span>
-            </p>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
         <video class="object-cover w-full relative z-0" style="height: 700px;" type="video/mp4" autoplay loop playsinline muted
@@ -185,25 +145,23 @@
 
     @php
         $items = [
-            'Daily Guided  <br class="inline lg:hidden"> Lessons',
-            'Learn By  <br class="inline lg:hidden"> Playing Along',
-            'Guaranteed <br class="inline lg:hidden"> results'
+            'Daily Guided  <br class="hidden sm:inline md:hidden"> Lessons',
+            'Learn By  <br class="hidden sm:inline md:hidden"> Playing Along',
+            'Guaranteed <br class="hidden sm:inline md:hidden"> results'
             ];
     @endphp
 
-    <section class="bg-black text-white p-4 md:px-20">
+    <section class="bg-black text-white py-4 sm:py-7 sm:px-6 text-center">
         <div class="container max-w-4xl mx-auto flex flex-wrap md:flex-center justify-center ">
             @foreach ($items as $item)
-                <div class="flex flex-col items-center justify-center uppercase text-center py-2 w-1/2 md:w-1/4">
-                    <p class="mb-2"><i class="fa fa-check text-guitareo"></i> {!! $item !!}</p>
-                </div>
+                <p class="w-full sm:w-auto mb-2 sm:mb-0 tracking-widest uppercase"><i class="fa fa-check text-guitareo"></i> {!! $item !!}</p>
             @endforeach
         </div>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F1F7FE;">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-3 sm:mb-5"><strong>This course is designed for:</strong></h2>
+            <h2 class="mb-5 sm:mb-7"><strong>This course is designed for:</strong></h2>
 
             @php
                 $drummers = [
@@ -257,38 +215,30 @@
             @php
                 $gettings = [
                     [
+                        'special' => true,
                         'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/timeline-01.webp',
-                        'desc' =>
-                            'Each day you’ll unlock a new lesson and play WITH Jordan. You don’t have to worry about what to do when you sit on the bench. Jordan’s got you covered.',
+                        'img' =>  'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/feature-01.mp4',
+                        'desc' =>  '<strong>Lock into the groove of any song</strong> so you can effortlessly play along with your favorite tracks and nail every beat and rhythm.',
                     ],
                     [
                         'position' => 'right',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/timeline-02.webp',
-                        'desc' =>
-                            'Building technique takes practice. But it doesn’t mean hours of scales every day. Each lesson is short and fun, so you can fit it around your busy schedule.',
+                        'img' =>  'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/feature-02.webp',
+                        'desc' =>  '<strong>Play iconic strum patterns</strong> and bring classic strumming patterns to life with your personal touch.',
                     ],
                     [
                         'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/guitareo/products/30-days-to-better-strumming/timeline-03.webp',
-                        'desc' =>
-                            'Each week you’ll focus on a new element of piano technique. You’ll build your finger independence, hand coordination, speed, and musical expression.',
+                        'img' =>  'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/guitareo/products/30-days-to-better-strumming/feature-03.webp',
+                        'desc' => '<strong>Add variations and techniques</strong> to keep your strumming engaging so that playing the guitar always feels fresh, exciting, and captivating.',
                     ],
                     [
                         'position' => 'right',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/timeline-04.webp',
-                        'desc' =>
-                            'You’ll be supported every step of the way by Guitareo’s team of expert instructors. Plus you’ll get to hang with Jordan in an exclusive LIVE Q&A.',
+                        'img' =>  'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/feature-03-1.webp',
+                        'desc' => '<strong>Build a powerful rhythm part</strong> that you can use to enhance your songwriting immediately, all while showcasing your unique musical style.',
                     ],
                     [
                         'position' => 'left',
-                        'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/timeline-05.webp',
-                        'desc' => 'You can access ALL the lessons and downloads from 30 Days to Better Strumming for life. That means you can return to your favorite workouts over and over – plus, it means you can work at your own pace.',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/feature-04.webp',
+                        'desc' => '<strong>Develop a foundational skill</strong> that will last you a lifetime and immediately level you up as a guitar player. ',
                     ],
                 ];
             @endphp
@@ -298,25 +248,23 @@
                         <div
                             class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
                             <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <p class="mt-1 md:mt-0"><strong>{{ $getting['desc'] }}</strong></p>
+                                <h6 class="leading-normal mt-1 md:mt-0">{!!  $getting['desc']  !!}</h6>
                             </div>
                             <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
                                 onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
-                                alt="{{ $getting['desc'] }}" />
+                                alt="thumbnail" />
                         </div>
                     @else
                         <div
                             class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
-                            @if (empty($getting['special']))
-                                <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
-                                    onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
-                                    alt="{{ $getting['desc'] }}" />
+                            @if(!empty($getting['special']))
+                                <video class="-mt-7 rounded-lg overflow-hidden object-cover w-full h-full" src="{{ $getting['img'] }}" type="video/mp4" autoplay loop playsinline muted></video>
                             @else
                                 <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9"
                                     style="background-image:url('{{ $getting['img'] }}')"></div>
                             @endif
                             <div class="content relative text-left sm:pl-10 md:pl-0 md:mb-10">
-                                <p class="mt-1 md:mt-0"><strong>{{ $getting['desc'] }}</strong></p>
+                                <h6 class="leading-normal mt-1 md:mt-0">{!!  $getting['desc']  !!}</h6>
                             </div>
                         </div>
                     @endif
@@ -331,122 +279,59 @@
                 href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
                 @mouseout="move = false">ENROLL NOW</a>
         </div>
-        <div class="uppercase text-sm text-center text-guitareo pb-4">
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                        <strong>
-                            <span x-cloak x-show="timeLeft > 0">
-                                Enrollment closes in
-                                <br>
-                                    <span x-show="day > 0"><span x-text="day"></span><span x-text="day"></span></span>
-                                    <span x-show="hour > 0"><span x-text="hour"></span><span x-text="hour"></span></span>
-                                    <span x-show="minute > 0"><span x-text="minute"></span><span x-text="minute"></span></span>
-                                    <span x-show="second > 0"><span x-text="second"></span><span x-text="second"></span></span>
-                            </span>
-                            <span x-cloak x-show="timeLeft < 0"> A Limited Time! </span>
-                        </strong>
-                    </span>
-        </div>
+        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
+            loading="lazy" onload="this.classList.remove('opacity-0')"
+            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+            alt="Image of joined student profiles">
+        <p class="inline-block leading-tight text-sm align-middle text-left">Join
+            {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background: #111729">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>Strumming progression made simple.</strong></h2>
-            <p class="leading-normal mt-5 mb-10 sm:mb-12 mx-auto" style="max-width:600px;">Lorem ipsum dolor sit amet consectetur. Duis nam gravida blandit ut pharetra magna commodo nisi augue. Integer egestas in viverra quis sapien varius. Enim ultrices integer donec aenean vivamus in mauris tellus libero. Nibh bibendum eros facilisis risus.</p>
+            <p class="leading-normal mt-5 mx-auto" style="max-width:700px;">Lorem ipsum dolor sit amet consectetur. Duis nam gravida blandit ut pharetra magna commodo nisi augue. Integer egestas in viverra quis sapien varius. Enim ultrices integer donec aenean vivamus in mauris tellus libero. Nibh bibendum eros facilisis risus.</p>
 
-
+            <img class="w-full rounded-lg my-7 transition-opacity opacity-0" loading="lazy"
+                onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
+                alt="thumbnail" />
             @php
                 $weeks = [
                     [
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/week1.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-02.webp',
                         'weekNum' => 'WEEK 1',
-                        'title' => 'Building your finger independence.',
-                        'excerpt' => 'Strong fingers make everything easier on the piano.',
-                        'desc' => 'And if you don’t work on your finger independence, you’ll stay stuck with fingers that do their own thing, hit random keys and move when you don’t want them to. <br><br> That’s why we’re starting the course with Jordan’s best exercise to strengthen your fingers and give them the independence they crave. After the first day, your fingers will already feel stronger, and you’ll be more confident and excited to keep learning.',
-                        'backHeader' => 'Here’s what we’ll focus on:',
-                        'back' => [
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-1',
-                                'desc' => '<strong>Using musical patterns</strong> to build strong fingers. Each exercise will sound like music, not a boring technical exercise. Jordan will show you exactly what notes to play in what order.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-2',
-                                'desc' => '<strong>Creating true separation for your fingers.</strong> Once you’re comfortable with the patterns, we’ll start holding individual notes while playing around them to really give your fingers a mind of their own.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-3',
-                                'desc' => '<strong>Independence for EVERY finger.</strong> As Jordan says, “We were given five fingers, we might as well use them.” You’ll build strength in every single digit of your hands. Yes, even your pinky and ring fingers!',
-                            ],
-                        ],
+                        'title' => 'Get Into The Groove',
+                        'excerpt' => 'todo',
+                        'desc' => 'Build the foundations to set you up for strumming success! In week 1, you will learn to get confident with constant strumming, miss notes, eighth note variations, playing the campfire strum pattern, using your foot to keep time, and using muted strums vs open chords. ',
+
                     ],
                     [
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/week2.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-03.webp',
                         'weekNum' => 'WEEK 2',
-                        'title' => 'Separate your hands and coordinate your brain.',
-                        'excerpt' => 'Now you’ve built strong fingers, it’s time to use them.',
-                        'desc' => 'In Week 2, you’ll learn how to separate your hands so you can play different rhythms and motifs in your left and right hands. <br><br> No more boring whole notes in your left hand. Hand coordination trips up so many piano players and halts your progress. But with Jordan’s daily guidance, you’ll be amazed at how quickly you progress.',
-                        'backHeader' => 'Here’s how we’ll do it:',
-                        'back' => [
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-1',
-                                'desc' => '<strong>Patterns designed to break up your hands.</strong> You’ll lay a foundational rhythm with one hand while exploring new patterns and syncopation in the other.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-2',
-                                'desc' => '<strong>Personal accompaniment from Jordan.</strong> While you’re working on your exercises, Jordan will accompany you, providing a unique backing track. Yes, you’ll be making music with Jordan Rudess.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-3',
-                                'desc' => '<strong>Break out of 4/4.</strong> Get out of the easy time signatures and step into Jordan’s world of off-time. “It’s easy, but it’s odd.”',
-                            ],
-                        ],
+                        'title' => 'Push The Beat',
+                        'excerpt' => 'todo',
+                        'desc' => 'It’s time to learn to push your beats, meet the rock n’ roll, and too many ands & reggae strumming patterns. Play alongside Kent, and you will lock in within no time. ',
+
                     ],
                     [
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/week3.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-04.webp',
                         'weekNum' => 'Week 3',
-                        'title' => 'Speed. How to practice and play fast.',
-                        'excerpt' => 'Now it’s time to impress.',
-                        'desc' => ' Not many keyboardists can play as fast as Jordan Rudess, and in Week 3, he’ll show you the exact exercises he learned at Juilliard and used to build his prodigious speed. <br><br> Strap in, because it’s a wild ride. <br><br> But don’t worry, we’ll start slow. Because in order to play fast -- you have to start slow. But we won’t stay there. By the end of the week, you’ll notice a significant difference in your speed, and you’ll have the tools to continue practicing how to play faster.',
-                        'backHeader' => 'Here’s what you’ll get:',
-                        'back' => [
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-1',
-                                'desc' => '<strong>Jordan’s secret Juilliard exercises.</strong> These are the exact exercises his teachers at Juilliard taught him. He’s sharing them now -- with you.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-2',
-                                'desc' => '<strong>The “Flowing” exercise to give you freedom in your playing.</strong> An ethereal arpeggio exercise that sounds incredible while helping you play faster.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-3',
-                                'desc' => '<strong>How to “think” about playing fast.</strong> Speed is more than an act -- it’s a mindset. Jordan will show you how to approach practicing speed so you’re set up for success, not frustration.',
-                            ],
-                        ],
+                        'title' => 'Get Creative',
+                        'excerpt' => 'todo',
+                        'desc' => 'Let’s get dynamic! Join Kent as he walks you through dynamics, accents, 332 pattern, palm mutes & split strums. These techniques will transform your playing for years to come.',
+
                     ],
                     [
                         'img' =>
-                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/week4.webp',
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/1100x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-05.webp',
                         'weekNum' => 'Week 4',
-                        'title' => 'Creative expression. Make beautiful music.',
-                        'excerpt' => 'You’ve spent 3 weeks building the skills that you’ll be using in Week 4.',
-                        'desc' => 'Because what’s the point of getting Better Strumming?<br><br>To play beautiful music. <br><br> In Week 4, Jordan will share his tips on how to create true emotion and expression in your piano playing. How do you go from hitting the keys to making music? This final week will show you how to tell a story with your playing.',
-                        'backHeader' => 'You end the course with:',
-                        'back' => [
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-1',
-                                'desc' => '<strong>The specific techniques to draw listeners into your playing.</strong> How to get people to stop and stare whenever you sit at the piano.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-2',
-                                'desc' => '<strong>The mindset of a singer.</strong> Why thinking like a vocalist is key to bringing emotion and feeling to the pieces you play.',
-                            ],
-                            [
-                                'icon' => 'fa-sharp fa-light fa-circle-3',
-                                'desc' => '<strong>A final performance with Jordan.</strong> “We are going to rock”, says Jordan. In the final week, you’ll put all your skills together to play something Dream Theater-esque WITH Jordan.',
-                            ],
-                        ],
+                        'title' => 'Put It All Together',
+                        'excerpt' => 'todo',
+                        'desc' => 'Three weeks down, one to go! This is where you’ll take a moment to see how far you’ve come and add the icing on the cake. You’ll begin utilizing sixteenth notes, the gallop strum, the smack strum, and the Jim N Jack, and create your strum patterns. ',
+
                     ],
                 ];
             @endphp
@@ -466,7 +351,7 @@
                             <h5 class="leading-normal">
                                 <strong>{!! $week['title'] !!}</strong></h5>
                             <p
-                                x-bind:class="open && 'mb-4'" class="leading-tight text-sm">{!! $week['excerpt'] !!} <span class="text-guitareo inline-block" x-bind:class="open && 'hidden'">Read more...</span> </p>
+                                x-bind:class="open && 'mb-4'" class="leading-tight text-sm">{{--{!! $week['excerpt'] !!}--}} <span class="text-guitareo inline-block" x-bind:class="open && 'hidden'">Read more...</span> </p>
 
 
                             <div
@@ -474,15 +359,6 @@
                                 class="transition-all duration-100 leading-relaxed sm:leading-relaxed overflow-hidden"
                                 x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }">
                                 <p class="leading-tight mb-4">{!! $week['desc'] !!}
-                                    <br><br>
-                                    <strong>{!! $week['backHeader'] !!}</strong></p>
-                                @foreach ($week['back'] as $paragraph)
-                                    <div class="flex items-start">
-                                        <i class="{{ $paragraph['icon'] }} text-guitareo text-3xl"></i>
-                                        <p class="leading-tight ml-2 pl-2 pb-4">
-                                            {!! $paragraph['desc'] !!}</p>
-                                    </div>
-                                @endforeach
                             </div>
                         </div>
                         <div class="ml-auto text-guitareo py-3 sm:py-4 lg:py-6 pr-4 sm:pr-5 cursor-pointer " x-on:click="open = !open">
@@ -495,67 +371,55 @@
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #EFF2F6">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #F1F7FE">
         <div class="container max-w-4xl mx-auto">
 
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-around mt-5 sm:mt-10">
                 <img class="h-28 sm:h-36 lg:h-48 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/30-days-technique-Jordan-Rudess-logo.svg"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-black.png"
                     alt="30-Day Independence Logo">
                 <h4 class="leading-loose text-left">
-                    <i class="fas fa-check text-guitareo mr-5"></i> Daily guided Piano workouts<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> Flexible weekly schedule<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> Ongoing motivation & support<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> Guaranteed results
+                    <i class="fas fa-check text-guitareo mr-5"></i> 20 guided play-along lessons<br>
+                    <i class="fas fa-check text-guitareo mr-5"></i> Lifetime Access<br>
+                    <i class="fas fa-check text-guitareo mr-5"></i> 90 Day Money Back Guarantee
                 </h4>
             </div>
-            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-12 sm:mb-0 anchor-slide">ENROLL NOW</a><br>
+            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
+            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
+                loading="lazy" onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                alt="Image of joined student profiles">
+            <p class="inline-block leading-tight text-sm align-middle text-left">Join
+                {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
         </div>
     </section>
 
-    <section class="flex flex-col items-center text-white" style="background-color: #00101D;">
+    <section class="flex flex-col items-center text-white" style="background-color: #111729;">
         <picture>
-            <source media="(min-width: 1200px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/coach.webp">
-            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/coach.webp">
+            <source media="(min-width: 1200px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/coach-bg.webp">
+            <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/coach-bg.webp">
             <img
                 class="w-full transition-opacity opacity-0 hidden md:inline"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)//marketing/guitareo/products/30-days-to-better-strumming/coach.webp"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)//marketing/guitareo/products/30-days-to-better-strumming/coach-bg.webp"
                 alt="Jordan Rudess Photo"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
         </picture>
-        <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/coach-m.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
+        <img class="w-full inline md:hidden transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/coach-bg-m.webp" onload="this.classList.remove('opacity-0');" loading="lazy" alt="Jordan Rudess Photo">
 
         <div class="container mx-auto max-w-5xl p-4 md:p-6 -mt-52 md:-mt-10">
             <div class="flex flex-col justify-center items-center">
                 <h6 class="uppercase text-guitareo">It’s time to meet your teacher…</h6>
-                <h1 class="text-6xl mb-4 font-bebas sm:tracking-widest">JORDAN RUDESS</h1>
+                <h1 class="text-6xl mb-4 font-bebas uppercase sm:tracking-widest">Kent Shores</h1>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="md:py-4 md:pt-10">
-                    <p class="mb-4">Jordan Rudess is best known as the extraordinary keyboardist for the
-                        platinum-selling, GRAMMY Award-winning progressive rock band, Dream Theater.</p>
-                    <p class="mb-4">As a classical child prodigy, Jordan was admitted to the prestigious Juilliard School
-                        of Music when he was just 9 years old.</p>
-                    <p class="mb-4">His piano playing is renowned for its virtuosity, speed, and of course…
-                        <strong>technique.</strong>
-                    </p>
-                    <p class="mb-4">Jordan honed his piano technique under the supervision of some of the greatest piano
-                        teachers at Juilliard. And now…</p>
-                    <p><strong>He’s sharing those secrets with you.</strong></p>
+                    <p class="mb-4">Kent holds a degree from the University of North Texas in Jazz Studies - Guitar Performance with a Minor in Music Theory. He has performed across Canada, the United States, and India with various bands. As an educator, Kent has over ten years of experience teaching lessons ranging from complete beginners to more advanced players.</p>
                 </div>
                 <div class="md:py-4 md:pt-10">
-                    <p class="mb-4">“These are the exercises that have made the biggest impact on my playing,” says
-                        Jordan.</p>
-                    <p class="mb-4">Over 30 days, Jordan will guide you through the exact exercises he used to develop
-                        his incredible piano skill. But you won’t just be watching Jordan, you’ll be playing with him.</p>
-                    <p class="mb-4">“I’ve always thought it would be amazing to have a place to go where you knew that
-                        the exercises and steps you were taking were guaranteed to make you a better piano player,” he says.
-                    </p>
-                    <p class="mb-4">“This is that place.”</p>
-                    <p>This is a rare opportunity to connect and learn from the world’s best.</p>
+                    <p class="mb-4">His teaching philosophy is about bringing out the best in his students and fostering a love of music. He strives to make sure that music lessons are fun. He enjoys sharing music with his students and celebrating their achievements.</p>
                 </div>
             </div>
         </div>
@@ -693,16 +557,6 @@
         </div>
     </section>
 
-    @include('_partials.components.video-modal', [
-        'name' => 'jayZ',
-        'video' => 'aFdOW1Ql3L4',
-        'youtubeEmbed' => true,
-    ])
-    @include('_partials.components.video-modal', [
-        'name' => 'danceOfEternity',
-        'video' => 'LUknLohfN48',
-        'youtubeEmbed' => true,
-    ])
     @include('_partials.components.video-modal', [
         'name' => 'trailer',
         'video' => '928599834',
