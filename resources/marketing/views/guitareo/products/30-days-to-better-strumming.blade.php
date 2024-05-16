@@ -126,8 +126,7 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                          &nbsp;Watch Trailer
                     </div>
-                    <a class="w-5/12 join smaller text-white  m-2  anchor-slide" href="#customize-anchor"
-                        x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false">ENROLL NOW</a>
+                    <a class="w-5/12 join smaller text-white  m-2" href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1">ENROLL NOW</a>
 {{--                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>--}}
                 </div>
                 <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
@@ -274,9 +273,7 @@
         </div>
         <h1 class="leading-none sm:-mt-8  sm:mb-8 text-5xl"><i class="fal fa-angle-down text-guitareo"></i></h1>
         <div class="flex justify-center py-4">
-            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2 hover:bg-red-500  anchor-slide"
-                href="#customize-anchor" x-data="{ move: false }" @mouseover="move = true"
-                @mouseout="move = false">ENROLL NOW</a>
+            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2" href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1">ENROLL NOW</a>
         </div>
         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
             loading="lazy" onload="this.classList.remove('opacity-0')"
@@ -384,7 +381,7 @@
                     <i class="fas fa-check text-guitareo mr-5"></i> 90 Day Money Back Guarantee
                 </h4>
             </div>
-            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
+            <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5">ENROLL NOW</a><br>
             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -423,7 +420,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="#final" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
+                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5">ENROLL NOW</a><br>
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                     loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -485,7 +482,7 @@
                     <h4 class="leading-tight mb-2"><strong>Only $97</strong></h4>
                     <div class="w-72  mx-auto sm:mx-0 text-center">
                         <a role="link" aria-label="Start your membership" class=" w-full sm:w-82 join smaller my-3  bg-guitareo "
-                            href="/choose-plan">GET STARTED <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                            href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1">GET STARTED <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
                         <p class="text-xs"><em>One-time payment.</em></p>
                     </div>
                 </div>
