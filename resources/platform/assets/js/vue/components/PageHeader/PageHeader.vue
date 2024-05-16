@@ -86,7 +86,7 @@ const props = defineProps({
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
-const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
+const primaryCtaIcon = computed(() => primaryCtaProps.value.faIconClass);
 const primaryCtaText = computed(() => primaryCtaProps.value.text);
 const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
