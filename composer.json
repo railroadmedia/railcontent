@@ -37,7 +37,7 @@
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
         "railroad/musora-api": "v3.1.*",
-        "railroad/points": "1.0.*",
+        "railroad/points": "dev-BE-29-duplicate-entry-issue as v1.0.2",
         "railroad/railanalytics": "3.0.*",
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "2.1.*",
