@@ -622,12 +622,18 @@ return [
                 ],
             ],
             '7 Days To Sight Reading' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
                     'pianote_prospect_7-days',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Waltz in A Minor' => [
