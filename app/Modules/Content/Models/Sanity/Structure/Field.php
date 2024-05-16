@@ -76,18 +76,18 @@ class Field
             }
         }
         if (!is_null($this->hidden)) {
-            $optional['hidden'] = Field::addJsonStripKey($this->hidden);
+            $optional['hidden'] = Field::formatTypeScriptForView($this->hidden);
         }
         if (!is_null($this->validation)) {
-            $optional['validation'] = Field::addJsonStripKey($this->validation);
+            $optional['validation'] = Field::formatTypeScriptForView($this->validation);
         }
         if (!is_null($this->readOnly)) {
-            $optional['readyOnly'] = Field::addJsonStripKey($this->readOnly);
+            $optional['readyOnly'] = Field::formatTypeScriptForView($this->readOnly);
         }
         return array_merge($required, $optional);
     }
 
-    private static function addJsonStripKey($value)
+    private static function formatTypeScriptForView($value)
     {
         $value = preg_replace("/\s\s+/", ' ', $value);
         return getStripFromJsonKey() . $value . getStripFromJsonKey();

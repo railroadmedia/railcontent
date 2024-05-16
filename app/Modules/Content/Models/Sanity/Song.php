@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models\Sanity;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
+use Modules\Content\Models\Sanity\Structure\BrandField;
 
 /**
  * Defines the schema structure for a Song document type in Sanity.
@@ -35,7 +36,7 @@ class Song extends BaseSanityModel
             //TODO reference??
             new Field(FieldType::String, 'transcriber_name', 'Transcribed By'),
             new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless'),
-            new Field(FieldType::String, 'brand', options:['list' => array_column(Brand::cases(), 'value')]),
+            new BrandField(),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title']),
             new Field(FieldType::Number, 'length_in_seconds', 'Length', description: 'song length in seconds'),
         ];
