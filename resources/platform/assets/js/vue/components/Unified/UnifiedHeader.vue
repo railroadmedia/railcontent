@@ -30,7 +30,7 @@ const props = defineProps({
 
 </script>
 <template>
-    <div class="tw-w-full lg:tw-container lg:tw-px-[50px]" :class="classOverride">
+    <div class="tw-w-full 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl lg:tw-px-[50px]" :class="classOverride">
         <div 
             class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center">
             <div

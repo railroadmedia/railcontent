@@ -54,15 +54,16 @@
 @endsection
 
 @section('content')
-    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
-    <page-header
-        page-type="{{ $headerDataObj->type }}"
-        icon-name="{{ $headerDataObj->iconName }}"
-        title="{{ $headerDataObj->title }}"
-        description="{{ $headerDataObj->description }}"
-        :ctas="{{ json_encode($headerDataObj->ctas) }}"
-    ></page-header>
-    
+    <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8">
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
+        <page-header
+            page-type="{{ $headerDataObj->type }}"
+            icon-name="{{ $headerDataObj->iconName }}"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+        ></page-header>
+    </div>
 
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
         <div class="tw-flex tw-flex-col tw-my-3">

@@ -4,26 +4,6 @@
     <title>{{ $parentContent->fetch('fields.title') }} | Musora</title>
 @endsection
 
-{{-- Page Specific Styles --}}
-@section('styles')
-    <style>
-        .pack-header::after {
-            content: '';
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            z-index:1;
-            background:rgba(0,0,0,.4);
-        }
-        .pack-header > * {
-            z-index:2;
-            position:relative;
-        }
-    </style>
-@endsection
-
 {{-- Learning Path JS --}}
 @section('layout-scripts')
     @if($parentContent->fetch('type') === 'learning-path' || $parentContent['type'] === 'learning-path-level')
@@ -42,11 +22,17 @@
         'progress' => null,
         'contentId' => null,
         'infoData' => null,
-        'ctas' => null
+        'ctas' => null,
+        'darkModeLogo' => null,
+        'lightModeLogo' => null,
     ];
 
     $infoDataStrArr = [];
-    if ($parentContent->fetch('type') === 'course') {
+    if ($parentContent->fetch('type') === 'challenge'){
+        $headerData['darkModeLogo'] = $parentContent->fetch('data.dark_mode_logo_url');
+        $headerData['lightModeLogo'] = $parentContent->fetch('data.light_mode_logo_url');
+    }
+    if ($parentContent->fetch('type') === 'course' || $parentContent->fetch('type') === 'challenge') {
         if (isset($infoData['lessons'])) {
             $infoDataStrArr[] = $infoData['lessons'] . ' Lessons';
         }
@@ -129,7 +115,7 @@
             ];
         }
     }
-    elseif ($parentContent->fetch('type') === 'learning-path-level' || $parentContent->fetch('type') === 'learning-path-course'){
+    elseif ($parentContent->fetch('type') === 'learning-path-level' || $parentContent->fetch('type') === 'learning-path-course' || $parentContent->fetch('type') === 'challenge'){
         if (isset($infoData['courses'])) {
             $infoDataStrArr[] = $infoData['courses'] . ' Courses';
         }
@@ -169,30 +155,33 @@
 
 {{-- Content --}}
 @section('content')
-    <!-- <div>{{$parentContent->fetch('type')}}</div> -->
 
-    @include('content.breadcrumbs._overview-breadcrumbs')
-    
-    <page-header
-        page-type="{{ $parentContent->fetch('type') }}"
-        icon-name="{{ $headerDataObj->iconName }}"
-        title="{{ $headerDataObj->title }}"
-        description="{{ $headerDataObj->description }}"
-        hero-img="{{ $headerDataObj->heroImg }}"
-        progress-label-text="{{ $headerDataObj->progressLabelText }}"
-        progress="{{ $headerDataObj->progress }}"
-        content-id="{{ $headerDataObj->contentId }}"
-        :info-data="{{ json_encode($headerDataObj->infoData) }}"
-        :ctas="{{ json_encode($headerDataObj->ctas) }}"
-    ></page-header>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        @include('content.breadcrumbs._overview-breadcrumbs')
+        
+        <page-header
+            page-type="{{ $parentContent->fetch('type') }}"
+            icon-name="{{ $headerDataObj->iconName }}"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            progress-label-text="{{ $headerDataObj->progressLabelText }}"
+            progress="{{ $headerDataObj->progress }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+            dark-mode-logo="{{ $headerDataObj->darkModeLogo  }}"
+            light-mode-logo="{{ $headerDataObj->lightModeLogo }}"
+        ></page-header>
 
-    @if(!empty($nextLessonJson))
-        @include('partials._current-learning-path-lesson', [
-            "currentLearningPathLesson" => $nextLessonJson,
-        ])
-    @endif
+        @if(!empty($nextLessonJson))
+            @include('partials._current-learning-path-lesson', [
+                "currentLearningPathLesson" => $nextLessonJson,
+            ])
+        @endif
+    </div>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-[30px]">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-[30px]">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-w-full tw-flex-row">
 
@@ -270,7 +259,7 @@
 
     {{-- for guitareo 500 songs special page --}}
     @if(!empty($songsPdfs))
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-3">
             <collection-wrapper
                 collection-type="song-pdf"
                 :pre-loaded-content="{{ $songsPdfs }}"

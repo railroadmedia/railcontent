@@ -21,7 +21,7 @@
         {{-- Background Gradient --}}
         <div class="header-gradient-overlay absolute-fill"></div>
         <div
-            class="tw-container tw-flex tw-items-center tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
+            class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-flex tw-items-center tw-flex-row tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
             <h1 class="tw-text-white">
                 <i class="fas fa-phone fa-flip-horizontal tw-text-3xl"></i>
                 <span class="tw-text-4xl tw-font-bold"> Contact </span>

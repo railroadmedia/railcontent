@@ -26,19 +26,19 @@
 
 {{-- Content --}}
 @section('content')
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-        <!-- PACKS SECTION-->
-        <div class="flex flex-row tw-mt-8 tw-mb-3">
-            <div class="flex flex-column grow">
-                <div class="flex flex-row align-v-center">
-                    <a href="{{ url()->route('platform.packs') }}"
-                        aria-label="See All Lesson Packs Lessons"
-                        class="tw-font-bold dark:tw-text-white tw-text-xl md:tw-text-2xl">
-                        Lesson Packs
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Lesson Packs",
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            title="Lesson Packs"
+            icon-name="electric-guitar"
+        >
+        </page-header>
 
         @include('partials.content._guitar-quest-pack', [
             'itemThumbnail' => 'https://www.musora.com/musora-cdn/image/width=2500,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background.jpg',

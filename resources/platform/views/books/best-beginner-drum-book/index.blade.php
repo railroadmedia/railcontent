@@ -47,7 +47,7 @@ if (!empty($user)) {
 
 @section('content')
     <header id="bestBookHeader" class="container fluid pv-5 shadow">
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
                     <h1 class="tw-font-bold tw-text-5xl mb-1 text-white tw-font-bebas-neue">The Best Beginner Drum Book</h1>

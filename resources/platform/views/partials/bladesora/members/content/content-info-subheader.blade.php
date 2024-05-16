@@ -1,5 +1,5 @@
 <div id="subHeader" class="collapsed-h fluid bg-grey-5 pv-1">
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-flex">
         <div class="tw-flex tw-flex-row tw-w-full align-center nmh-1">
 
             <div class="tw-flex tw-flex-col tw-w-full tw-justify-center tw-text-white ph-1 meta-info-col hide-xs-only">

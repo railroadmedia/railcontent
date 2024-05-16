@@ -1,5 +1,5 @@
 @if ($hasUpcomingCoaches)
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <div class="tw-flex tw-items-center tw-mb-6">
             <h2 class="heading sans dark:tw-text-white">
                 Upcoming Coaches

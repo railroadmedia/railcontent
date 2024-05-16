@@ -61,7 +61,7 @@
     </page-header>
 
     @if( !empty($coachEvent) )
-        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
+        <div class=" tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-4">
             {{-- Live Banner --}}
             <coach-event
                 brand="{{ $brand }}"
@@ -76,7 +76,7 @@
     @endif
 
     @if (session()->has('success-message'))
-        <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
+        <div class="form-success-message tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-3">
             <div class="tw-flex tw-flex-col bg-success tw-shadow corners-10 pa">
                 <p class="body tw-text-white">{{ session()->get('success-message') }}</p>
             </div>
@@ -110,7 +110,7 @@
         }
     @endphp
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
         <collection-wrapper
             :limit="{{ $limitOverride ?? 18 }}"
             :pre-loaded-content="{{ $listLessons }}"

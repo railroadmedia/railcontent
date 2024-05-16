@@ -5,32 +5,38 @@
 @endsection
 
 @section('content')
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-4">
+        <breadcrumb 
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Legacy Resources",
+                    "url" => "/drumeo/legacy-resources",
+                ],
+                [
+                    'title' => 'Dictionary of Terms'
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="dictionary"
+            title="Drumeo Dictionary of Terms"
+            icon-name="question-mark-circle"
+            description="Here you'll find a comprehensive list of commonly used drumming terms that we frequently reference in our videos and on our website."
+        ></page-header>
+    </div>
 
-    @component('partials._header-banner', [
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
-    ])
-        @slot('content')
-            <div class="tw-flex tw-flex-col tw-pr-1 tw-text-center">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2 tw-text-center">
-                    <i class="icon-dictionary-drum-terms tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                    <span class="tw-text-32 tw-font-bold">Drumeo Dictionary of Terms</span>
-                </h1>
-            </div>
-        @endslot
-    @endcomponent
-
-    <div id="dictionaryNav" class="container fluid bg-grey-5 pv tw-sticky tw-w-full tw-top-0 tw-z-10">
-        <div class="flex flex-row flex-wrap align-center">
+    <div id="dictionaryNav" class="tw-px-3 md:tw-px-8 tw-sticky tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-top-0 tw-z-10">
+        <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-justify-center sm:tw-justify-around tw-p-3 tw-bg-[#191b1c] tw-rounded-md">
             @foreach($dictionaryTerms as $letter => $definition)
-                <div class="text-white flex flex-column letter-anchor align-center">
-                    <a class="subheading uppercase text-white no-decoration"
+                <div class="tw-text-white tw-flex tw-flex-col">
+                    <a class="tw-text-xl md:tw-text-2xl tw-leading-none tw-p-1 tw-font-semibold tw-uppercase tw-text-white tw-no-underline"
                        href="#{{ $letter }}">{{ $letter }}</a>
                 </div>
             @endforeach
         </div>
     </div>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-py-6">
         <div class="flex flex-column">
             @foreach($dictionaryTerms as $letter => $terms)
                 <div class="flex flex-column mb-2 tw-relative">

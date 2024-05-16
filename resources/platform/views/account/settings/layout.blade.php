@@ -59,17 +59,27 @@
 @extends('partials.layout')
 
 @section('content')
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        {{-- Header --}}
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => 'Settings',
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="dashboard"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            hero-img-classes="{{ $headerDataObj->heroImgClasses ?? '' }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+        ></page-header>
+    </div>
 
-    <page-header
-        :page-type="'dashboard'"
-        :title="'{{ $headerDataObj->title }}'"
-        :description="'{{ $headerDataObj->description }}'"
-        :hero-img="'{{ $headerDataObj->heroImg }}'"
-        :hero-img-classes="'{{ $headerDataObj->heroImgClasses }}'"
-        :content-id="'{{ $headerDataObj->contentId }}'"
-        :info-data='@json($headerDataObj->infoData)'
-        :ctas='@json($headerDataObj->ctas)'
-    ></page-header>
 
     @if(session()->has('error-message'))
         <div class="form-success-message tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">

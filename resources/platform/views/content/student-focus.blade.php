@@ -14,14 +14,23 @@
 @endsection
 
 @section('content')
-        <page-header
-            title="Student Focus"
-            icon-name="person-plus"
-            description="{{ $headerDescription }}"
-        >
-        </page-header>
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+            <breadcrumb
+                :breadcrumbs="{{ json_encode([ 
+                    [
+                        "title" => "Student Focus",
+                    ]
+                ])}}"
+            ></breadcrumb>
+            <page-header
+                title="Student Focus"
+                icon-name="person-plus"
+                description="{{ $headerDescription }}"
+            >
+            </page-header>
+        </div>
 
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col mv-3">
                 <div class="tw-grid tw-gap-2 xl:tw-gap-4 tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-5 3xl:tw-grid-cols-6">
                     @foreach($lessonTypes as $lessonType)
