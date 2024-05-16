@@ -21,6 +21,7 @@
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <style>
         .play-button {
             display: inline-block;
@@ -142,7 +143,8 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
         <video class="object-cover w-full relative z-0 h-[500px] sm:h-[700px]" type="video/mp4" autoplay loop playsinline muted
-            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"></video>
+{{--            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"--}}
+        ></video>
     </header>
 
     <section class="bg-black text-white py-4 sm:py-7 sm:px-6 text-center">
@@ -286,7 +288,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background: #111729">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>Strumming progression made simple.</strong></h2>
-            <p class="leading-normal mt-5 mx-auto" style="max-width:700px;">Lorem ipsum dolor sit amet consectetur. Duis nam gravida blandit ut pharetra magna commodo nisi augue. Integer egestas in viverra quis sapien varius. Enim ultrices integer donec aenean vivamus in mauris tellus libero. Nibh bibendum eros facilisis risus.</p>
+{{--            <p class="leading-normal mt-5 mx-auto" style="max-width:700px;">Lorem ipsum dolor sit amet consectetur. Duis nam gravida blandit ut pharetra magna commodo nisi augue. Integer egestas in viverra quis sapien varius. Enim ultrices integer donec aenean vivamus in mauris tellus libero. Nibh bibendum eros facilisis risus.</p>--}}
 
             <img class="w-full rounded-lg my-7 transition-opacity opacity-0" loading="lazy"
                 onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
@@ -336,7 +338,7 @@
                     x-data="{ open: false }">
                     <div class="flex">
                         <div class="hidden sm:block mr-auto py-3 sm:py-4 lg:py-6 pl-4 lg:pl-5 cursor-pointer flex-shrink-0" x-on:click="open = !open">
-                            <img class="h-10 sm:h-16 lg:h-20 opacity-0 transition-opacity"
+                            <img class="h-10 sm:h-16 lg:h-20 rounded-md opacity-0 transition-opacity"
                                 src="{{ $week['img'] }}"
                                 alt="Collage showing pianists" loading="lazy"
                                 onload="this.classList.remove('opacity-0')">
@@ -377,8 +379,8 @@
                     alt="30-Day Independence Logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-guitareo mr-5"></i> 20 guided play-along lessons<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> Lifetime Access<br>
-                    <i class="fas fa-check text-guitareo mr-5"></i> 90 Day Money Back Guarantee
+                    <i class="fas fa-check text-guitareo mr-5"></i> Lifetime access to the course<br>
+                    <i class="fas fa-check text-guitareo mr-5"></i> 90-Day Money Back Guarantee
                 </h4>
             </div>
             <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5">ENROLL NOW</a><br>
@@ -510,7 +512,7 @@
                 </div>
                 <div>
                     <h2><i class="far fa-infinity text-guitareo"></i></h2>
-                    <h5 class="leading-tight my-2"><strong>Lifetime access.</strong></h5>
+                    <h5 class="leading-tight my-2"><strong>Lifetime access<br> to the course.</strong></h5>
                     <p class="text-sm">You can access ALL lessons from 30 Days To Better Strumming for life. That means you can repeatedly return to your favorite lessons and work at your own pace.</p>
                 </div>
             </div>
@@ -612,4 +614,5 @@
     @include('guitareo.sales.partials._footer')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 @stop
