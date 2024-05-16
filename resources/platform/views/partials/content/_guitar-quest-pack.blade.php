@@ -1,5 +1,5 @@
 {{-- Featured Pack --}}
-<div class="flex flex-row tw-w-full">
+<div class="flex flex-row tw-w-full tw-mt-4">
     <div class="relative gq-container corners-10 bg-grey-2 dark:tw-bg-[#081825] tw-overflow-hidden md:tw-h-[276px] tw-w-full">
         <a href="{{ $lessonsUrl }}" class="tw-w-full tw-h-full">
             {{-- Desktop Image --}}

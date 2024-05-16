@@ -1,7 +1,7 @@
 <template>
     <!-- SEARCH BAR -->
     <section class="tw-py-16 md:tw-py-20 tw-text-[#00101D] dark:tw-text-white tw-text-center tw-relative tw-bg-[#F9F9F9] dark:tw-bg-[#002039] tw-px-4 md:tw-px-0">
-        <div class="tw-container tw-mx-auto tw-relative tw-z-0 tw-max-w-xl md:tw-max-w-none">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-relative tw-z-0 tw-max-w-xl md:tw-max-w-none">
             <h3 class="tw-text-[32px]"><strong>Advice and answers from the Musora team</strong></h3>
             <p class="tw-mt-2 tw-mb-10 tw-text-lg">Find an answer on your own or get in touch with our support team.</p>
             <div>
@@ -30,7 +30,7 @@
 
     <!-- FORM -->
     <section class="tw-py-12 md:tw-py-16 tw-px-4 lg:tw-px-8 tw-bg-white dark:tw-bg-[#081825] dark:tw-text-white" id="contactPageApp">
-        <div class="tw-container tw-max-w-3xl tw-mx-auto tw-text-center">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-text-center">
             <h3><strong>Reach Out Directly</strong></h3>
             <p class="tw-mt-4 tw-mb-5 tw-text-sm md:tw-text-base tw-max-w-3xl tw-mx-auto">
                 Get in touch with our support team!

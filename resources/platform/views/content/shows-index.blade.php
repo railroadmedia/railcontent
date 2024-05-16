@@ -16,15 +16,16 @@
 @endsection
 
 @section('content')
-    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
-    <page-header
-        page-type="shows"
-        title="Shows"
-        icon-name="shows"
-        description="{{ $headerDescription }}"
-    ></page-header>
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-2">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
+        <page-header
+            page-type="shows"
+            title="Shows"
+            icon-name="shows"
+            description="{{ $headerDescription }}"
+        ></page-header>
+    </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 mv-2">
         <div class="flex flex-row flex-wrap nmh-1">
             @foreach($shows as $type=>$show)
                 <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $type]) }}"

@@ -1,10 +1,11 @@
 <template>
     <div class="tw-w-full tw-relative">
-        <Breadcrumb :breadcrumbs="[{ title: 'Drumeo Schedule' }]" />
-        <PageHeader pageType="schedule" :title="`${brand} Schedule`" iconName="calendar"
-            :description="description" :ctas="ctaConfig" />
-
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+            <Breadcrumb :breadcrumbs="[{ title: 'Drumeo Schedule' }]" />
+            <PageHeader pageType="schedule" :title="`${brand} Schedule`" iconName="calendar"
+                :description="description" :ctas="ctaConfig" />
+        </div>
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col tw-py-[30px]">
                 <div id="scheduleHeader"
                     class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">

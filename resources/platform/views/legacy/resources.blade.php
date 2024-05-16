@@ -5,36 +5,28 @@
 @endsection
 
 @section('content')
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ [ 'title' => 'Legacy Resources',] ]) }}"
+        ></breadcrumb>
+        <page-header
+            page-type="resources"
+            title="Legacy Resources"
+            icon-name="play-circle-filled"
+            description="Legacy Resources are lessons or tools that are no longer added to or supported. Rather than remove them from the site completely you can access them here."
+        ></page-header>
 
-    @component('partials._header-banner', [
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
-    ])
-        @slot('content')
-            <div class="tw-flex tw-flex-col tw-pr-1">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <i class="icon-legacy tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                    <span class="tw-text-32 tw-font-bold">Legacy Resources</span>
-                </h1>
-                <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Legacy Resources are lessons or tools that are no longer added to or supported.
-                </p>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Rather than remove them from the site completely you can access them here.
-                </p>
+        <div class="tw-py-4">
+            <div class="tw-flex tw-flex-col">
+                <div class="tw-flex tw-flex-row pv-2">
+                    <h1 class="heading dark:tw-text-white">Choose a Resource</h1>
+                </div>
+
+                @include('partials.bladesora.members.account.partials._settings-links', [
+                    "brand" => "drumeo",
+                    "sections" => $sections
+                ])
             </div>
-        @endslot
-    @endcomponent
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
-        <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-row pv-2">
-                <h1 class="heading dark:tw-text-white">Choose a Resource</h1>
-            </div>
-
-            @include('partials.bladesora.members.account.partials._settings-links', [
-                "brand" => "drumeo",
-                "sections" => $sections
-            ])
         </div>
     </div>
 @endsection

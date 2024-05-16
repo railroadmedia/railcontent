@@ -1,9 +1,9 @@
 <template>
     <Breadcrumb
         :breadcrumbs="[{ title: 'Workouts' }]"
-        classOverride="lg:tw-container tw-mx-auto tw-px-4 lg:tw-px-8"
+        classOverride="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8"
     />
-    <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white tw-pt-6">
+    <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl lg:tw-px-8 dark:tw-text-white tw-pt-6">
         <section v-if="carouselData.length">
             <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <div class="tw-flex tw-items-start">
