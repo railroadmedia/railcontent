@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\database\factories;
 use App\Modules\Ecommerce\Models\Payment;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubscriptionPaymentFactory extends Factory
@@ -37,5 +38,19 @@ class SubscriptionPaymentFactory extends Factory
     public function forPayment(Payment $payment): Factory
     {
         return $this->state(['payment_id' => $payment->id]);
+    }
+
+    public function createdAtInDateRange(Carbon $startDate, Carbon $endDate, bool $updatedAtMatch = true): Factory
+    {
+        $date = $this->faker->dateTimeBetween($startDate, $endDate);
+        $changes = [
+            'created_at' => $date,
+        ];
+        if ($updatedAtMatch) {
+            $changes['updated_at'] = $date;
+        }
+        return $this->state(function (array $attributes) use ($changes) {
+            return $changes;
+        });
     }
 }
