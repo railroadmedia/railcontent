@@ -102,6 +102,7 @@
 @section('body-data')
     x-data="{
         trailer: false,
+        kickOff: false,
     }"
 @endsection
 
@@ -178,7 +179,7 @@
                         ],
                         [
                             'image' =>
-                                'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/audience-02.webp',
+                                'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/audience-02-alt.webp',
                             'title' => 'Intermediate Guitarists',
                             'description' =>
                                 'You’ve been playing for a while but found yourself in a rut. You resort to the same handful of strumming patterns and don’t know where to go. This course will force you to revisit the foundations, fill the knowledge gaps that you possess, and expand your repertoire.',
@@ -290,9 +291,14 @@
             <h2 class="leading-tight"><strong>Strumming progression made simple.</strong></h2>
 {{--            <p class="leading-normal mt-5 mx-auto" style="max-width:700px;">Lorem ipsum dolor sit amet consectetur. Duis nam gravida blandit ut pharetra magna commodo nisi augue. Integer egestas in viverra quis sapien varius. Enim ultrices integer donec aenean vivamus in mauris tellus libero. Nibh bibendum eros facilisis risus.</p>--}}
 
-            <img class="w-full rounded-lg my-7 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
-                alt="thumbnail" />
+            <div class="aspect-16:9 cursor-pointer rounded-xl my-7 autoplay-video overflow-hidden w-full relative"
+                x-on:click="kickOff = true;" role="button">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
+                    alt="Thumbnail for tutorial video"/>
+            </div>
             @php
                 $weeks = [
                     [
@@ -602,8 +608,13 @@
     </section>
 
     @include('_partials.components.video-modal', [
+        'name' => 'kickOff',
+        'video' => '944222905',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal', [
         'name' => 'trailer',
-        'video' => '928599834',
+        'video' => '943429100',
         'vimeo' => true,
     ])
     @include('_partials.components.countdown', [
