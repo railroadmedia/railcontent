@@ -109,6 +109,40 @@
             background-color:#eb1a2f;
 
         }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #F61A30;
+            top: 0;
+            bottom: 0;
+            transform: translate(-50%, 0);
+            z-index: 0;
+            left: 0;
+        }
+        .timeline-container .timeline::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            transform: translate(-50%, 0);
+            background-color: #F61A30;
+            top: 0;
+            border-radius: 50%;
+            z-index: 1;
+            left: -16px;
+        }
+        @media (min-width: 768px) {
+            .timeline-container .timeline::after {
+                left: 50%;
+            }
+        }
+        @media (min-width: 768px) {
+            .timeline-container::after, .timeline::after {
+                left: 50%;
+            }
+        }
     </style>
 @stop
 
@@ -152,6 +186,7 @@
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
         <div class="container mx-auto max-w-4xl">
+            <h2 class="leading-tight"><strong class="text-pianote">Save 60%</strong> with the<br> <strong>Ultimate Technique Bundle</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5">
                     <img class="hidden sm:inline-block h-56 sm:h-auto max-w-full sm:max-w-sm lg:max-w-full transition-opacity opacity-0"
@@ -169,7 +204,6 @@
                             alt="{{$theme}} collage image"
                     >
                     <div class="inline-block mx-auto">
-                        <h2 class="w-auto leading-tight text-left"><strong class="text-pianote">Save 71% with your</strong><br> exclusive Webinar Bundle.</h2>
                         <ul class="inline-block mx-auto fa-ul text-left pl-6 my-4 sm:my-5">
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Step-by-step lessons </li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> World-class instructors</li>
@@ -191,7 +225,7 @@
             </div>
         </div>
     </section>
-    <section class="px-6 py-6 sm:py-8 text-white text-center bg-cover bg-center" style="background:#ac1179 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/order-bg.jpg');">
+    <section class="px-6 py-6 sm:py-8 text-white text-center bg-cover bg-center" style="background:linear-gradient(to bottom,#202F56, #060B2E);">
         <div class="container max-w-4xl mx-auto">
             <h6 class="leading-tight mb-4"><em><strong>PLUS</strong> get these special<br class="sm:hidden"> bonuses when you join today.</em></h6>
             <div style="font-size:0px">
@@ -208,7 +242,7 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-scales-digital-ipad-bonus.png');"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);"></div>
                             </div>
                         </div>
                     </div>
@@ -217,39 +251,108 @@
                     <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg);"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
-                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg);"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
-                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg);"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4  lg:mb-0 px-1 md:px-3  w-1/2 sm:w-1/6 ">
-                    <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-card.jpg);"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
+        </div>
+    </section>
+    <section class="px-6 py-6 sm:py-8 text-center" style="background:#F6F8FC;">
+        <div class="container max-w-4xl mx-auto">
+            <h3><strong>You’ve done the hard part. </strong></h3>
+            <p>
+                Now let’s keep the momentum going.
+                You did it.
+
+                And 30 Days to Better Technique is yours for LIFE. You should be proud, because you made the commitment to improve your piano technique. And look where you are now.
+
+                So the question is…
+
+                Where will you go next?
+            </p>
+            @php
+                $gettings = [
+                    [
+                        'position' => 'left',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/timeline-01.webp',
+                        'title' => 'Know exactly what to practice.',
+                        'desc' =>
+                            'Each day you’ll unlock a new lesson and play WITH Jordan. You don’t have to worry about what to do when you sit on the bench. Jordan’s got you covered.',
+                    ],
+                    [
+                        'position' => 'right',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/timeline-02.webp',
+                        'title' => 'Fits any schedule.',
+                        'desc' =>
+                            'Building technique takes practice. But it doesn’t mean hours of scales every day. Each lesson is short and fun, so you can fit it around your busy schedule.',
+                    ],
+                    [
+                        'position' => 'left',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/marketing/pianote/products/30-day-better-technique/timeline-03.webp',
+                        'title' => 'The four pillars of technique.',
+                        'desc' =>
+                            'Each week you’ll focus on a new element of piano technique. You’ll build your finger independence, hand coordination, speed, and musical expression.',
+                    ],
+                    [
+                        'position' => 'right',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/timeline-04.webp',
+                        'title' => 'Support from REAL teachers.',
+                        'desc' =>
+                            'You’ll be supported every step of the way by Pianote’s team of expert instructors. Plus you’ll get to hang with Jordan in an exclusive LIVE Q&A.',
+                    ],
+                    [
+                        'position' => 'left',
+                        'img' =>
+                            'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/timeline-05.webp',
+                        'title' => 'Lifetime Access',
+                        'desc' => 'You can access ALL the lessons and downloads from 30 Days to Better Technique for life. That means you can return to your favorite workouts over and over – plus, it means you can work at your own pace.',
+                    ],
+                ];
+            @endphp
+            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 py-7">
+                @foreach ($gettings as $key => $getting)
+                    @if ($getting['position'] === 'right')
+                        <div
+                            class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
+                            <div class="content relative text-left sm:pl-10 md:pl-0">
+                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
+                                <p>{{ $getting['desc'] }}</p>
+                            </div>
+                            <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
+                                onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
+                                alt="{{ $getting['title'] }}" />
+                        </div>
+                    @else
+                        <div
+                            class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
+                            @if (empty($getting['special']))
+                                <img class="-mt-7 rounded-lg transition-opacity opacity-0" loading="lazy"
+                                    onload="this.classList.remove('opacity-0')" src="{{ $getting['img'] }}"
+                                    alt="{{ $getting['title'] }}" />
+                            @else
+                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9"
+                                    style="background-image:url('{{ $getting['img'] }}')"></div>
+                            @endif
+                            <div class="content relative text-left sm:pl-10 md:pl-0 md:mb-10">
+                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
+                                <p>{{ $getting['desc'] }}</p>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <h1 class="leading-none sm:-mt-8 sm:mb-8 text-5xl"><i class="fal fa-angle-down text-pianote"></i></h1>
+            <h1 class="leading-none"><i class="fal fa-calendar text-pianote"></i></h1>
+            <h4 class="text-pianote">But this offer is only available until June 10th.
+                So click below and keep your progress going!</h4>
         </div>
     </section>
 
@@ -328,159 +431,40 @@
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
     ])
 
-    <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-5 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
-        <div class="container mx-auto max-w-4xl">
-            <h3 class="leading-tight"><strong>Take a look at your bonuses…</strong></h3>
-            <h6 class="leading-tight text-pianote mt-2 mb-5"><em>Join today and you’ll get all of these.</em></h6>
+    @php
+        $logo =
+            'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/better-technique-guarantee.webp';
+        $guaranteeText = "We’re so confident that you’ll LOVE the improvements to your piano technique after Jordan’s course, that we’re giving you THREE times as long to put it to the test.
+                        <br><br>
+                        <strong>The course is 30 days, but you’ll have 90 days to try it risk-free.</strong>
+                        <br><br>
+                        That means you’ll have enough time to go through every lesson and play with Jordan - THREE times. And if -- after you’ve put in the work -- you don’t see real improvements to your technique... 
+                        <br><br>
+                        If your fingers don’t feel stronger and your hands aren’t more coordinated…
+                        <br><br>
+                        If you don’t enjoy playing the piano more than you did before you started…
+                        <br><br>
+                        Contact support@pianote.com within those 90 days and get a refund.";
+        $guaranteeHeader = "<strong>The 90-Day “Better <br class='inline sm:hidden'> Technique” Guarantee</strong>";
+    @endphp
 
-            <div class="flex flex-wrap text-left">
-                <div class="w-full sm:flex items-center mb-12">
-                    <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/chords-scales.jpg">
-                    </div>
-                    <div class="sm:pl-5 lg:pl-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-horizontal-logo.png">
-                        <p class="leading-tight">Our best-selling book is yours FREE. This book is your encyclopedia of piano chords & scales. Arranged by key, you’ll find every major, minor, sus, and 7th chord as well as all the scales you’ll need to play the songs you love without fear.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12">
-                    <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden bg-white border border-gray-400" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/promos/december/chords-scales-digital-large.png">
-                    </div>
-                    <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-and-scales-digital-logo2.png">
-                        <p class="leading-tight">While you wait for the physical book to arrive, you’ll get instant access to the Digital Version of our amazing book. Available for immediate download, you’ll be able to find and play all the chords and scales you’ll need to play the songs you love.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12">
-                    <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh.jpg">
-                    </div>
-                    <div class="sm:pl-5 lg:pl-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/nppsh-logo.png">
-                        <p class="leading-tight">Your first 30 days on the piano. This 30-day challenge will help you come back to the keys with confidence and feel excited to play your piano every day. Simply follow along with Lisa for 10 minutes a day. You’ll have lifetime access to this course.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12">
-                    <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-poster.jpg">
-                    </div>
-                    <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/music-theory-logo.png">
-                        <p class="leading-tight">Upgrade your practice space and master your music theory with this gorgeous poster bundle. Shipped flat so there are no creases and printed in full color on beautiful paper stock, these posters will help you connect the notes on the page to the keys on your piano.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center mb-12">
-                    <div class="relative flex-shrink-0">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills.jpg">
-                    </div>
-                    <div class="sm:pl-5 lg:pl-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/riffs-fills-logo.png">
-                        <p class="leading-tight">Take your chords and make something beautiful. Lisa will show you her favorite riffs and fills to add some emotion and beauty to your playing. These are the fills she uses every day. She’ll show you each one, note for note.</p>
-                    </div>
-                </div>
-                <div class="w-full sm:flex items-center">
-                    <div class="relative flex-shrink-0 sm:order-1">
-                        <img class="h-48 sm:h-64 lg:h-72 rounded-xl overflow-hidden" src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords.jpg">
-                    </div>
-                    <div class="sm:pr-5 lg:pr-8">
-                        <img class="h-14 sm:h-16 lg:h-20 my-3 sm:mt-0 sm:mb-4" src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/easy-chords-logo.png">
-                        <p class="leading-tight">Put what you learned in the webinar to use with this 30-day chording challenge. Play with Lisa every day and master your chord progressions and inversions so you can play any lead sheet with ease. All you have to do is pretty play and follow along.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-10"
+        style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101D calc(50% + 1px));">
+    </div>
+    <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32 relative z-10"
+        style="background-color:#00101D; border: 1px solid #00101D">
         <div class="container max-w-6xl mx-auto">
-            <div class="relative">
-                <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
-                    <tbody>
-                    <style>
-                        table.comparison tr td {
-                            width: 33.3%!important;
-                            font-size: 14px;
-                        }
-                        @media (min-width: 768px) {
-                            table.comparison tr td {
-                                font-size: 18px;
-                            }
-
-                        }
-                    </style>
-                    <tr style="background-color:transparent!important;">
-                        <td></td>
-                        <td class="rounded-tl-xl"><strong>WEBINAR<br> BUNDLE</strong></td>
-                        <td class="rounded-tr-xl">TRADITIONAL<br> LESSONS</td>
-                    </tr>
-                    <tr>
-                        <td>Step-by-step curriculum</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Real teacher</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Live lessons</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>On-demand lessons</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Learn from home</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Multiple instructors</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1000+ songs</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Books/Posters included</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td>90-Day Guarantee</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Investment</td>
-                        <td class="rounded-bl-xl"><s class="opacity-60">$611</s> <strong>$177<br> 1st year.</strong></td>
-                        <td class="rounded-br-xl">$2400-$3600 <br>per year.</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            @include('pianote._partials._guarantee-section', [
+                'containerWidth' => 'max-w-6xl',
+                'imageUrl' =>
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/guarantee-collage.webp',
+            ])
         </div>
     </section>
-    @include('musora.sales.components.guarantee-section', [
-        'badge' => 'marketing/pianote/membership/homepage/webp-format/piano-guarantee.webp',
-        'header' => '<strong>But what if it doesn’t work for you?</strong>',
-        'desc' => 'You’ll love your Pianote lessons and how quickly you’ll see progress. That’s our promise.<br>
-But what if it doesn’t work?<br>
-Then you won’t have to pay. We’re so confident you’ll love the results, that you’ll 90 days to put us to the test. It’s the longest guarantee out there. And it’s enough time to really know if this is for you.<br>
-If you’re not happy (for any reason), simply let us know within 90 days for a refund.<br>
-That’s the Play Better Guarantee™.',
-    ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    <div style="background:linear-gradient(to bottom, #860c9f, #da174b);">
+    <div style="background:linear-gradient(to bottom,#202F56, #060B2E);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
             <div class="container mx-auto relative z-50  max-w-6xl ">
                 <div class="w-full">
@@ -495,7 +479,8 @@ That’s the Play Better Guarantee™.',
                         </div>
                     </div>
                     <br>
-                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2"><strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS &amp; THE CHORDS AND SCALES BOOK.</h4> <a class="join  white  my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                    <h4 class="leading-tight mt-4 sm:mt-5 mb-2"><strong><span class="text-musora">SAVE 26%</span> ON YOUR PIANOTE MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 3 COURSES, 6 POSTERS &amp; THE CHORDS AND SCALES BOOK.</h4>
+                    <a class="join   my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                         CLAIM YOUR OFFER
                     </a>
                     <p class="leading-tight text-sm mb-6"><em>First year discount: <s class="opacity-40">$240</s>
@@ -503,9 +488,37 @@ That’s the Play Better Guarantee™.',
                             <br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
                 </div>
                 <div style="font-size:0px">
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
+
+                    @php
+                        $bonuses = [
+                            [
+                                'image' => 'marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
+                                'title' => 'Chords & <br>Scales Book',
+                                'description' => 'Your encyclopedia of piano chords & scales.',
+                                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                                'shipping' => 'true'
+                            ],
+                            [
+                            'image' => 'marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
+                            'title' => 'Piano Technique<br> Made Easy',
+                            'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
+                            'price' => floatval($productPrices['piano-technique-made-easy']->price),
+                            ],
+                            [
+                                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
+                                'title' => 'Improvisation & Musical Freedom',
+                                'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
+                                'price' => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
+                            ],
+                        ]
+                    @endphp
+                    @foreach($bonuses as $bonus)
+                        <div
+                            class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
+                            x-data="{
                         flipped: false,
-                    }" x-on:click="
+                    }"
+                            x-on:click="
                         flipped = !flipped;
                         if(flipped){
                             $refs.front.classList.add('rotate-y-180');
@@ -517,443 +530,72 @@ That’s the Play Better Guarantee™.',
                             $refs.back.classList.add('-rotate-y-180');
                             $refs.back.classList.remove('rotate-y-0');
                         }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
+                    "
+                        >
+                            <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div
+                                        x-ref="front"
+                                        class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                        style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                                        @if(!empty($bonus['badge']))
+                                            <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} font-bebas uppercase">{{ $bonus['badge'] }}</h6>
+                                        @endif
+                                        <div class="overflow-hidden h-full w-full bg-black bg-top bg-cover"
+                                            :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                                            x-intersect.once="lazyLoad = true">
+                                            <picture class="absolute inset-0 w-full h-full object-cover">
+                                                <source srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/980x0/filters:quality(95)/{{ $bonus['image'] }}"
+                                                    media="(min-width: 640px)">
+                                                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/{{ $bonus['image'] }}"
+                                                    alt="Bonus Image"
+                                                    class="w-full h-full object-cover opacity-0 transition-opacity"
+                                                    loading="lazy"
+                                                    onload="this.classList.remove('opacity-0')">
+                                            </picture>
+                                        </div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Your encyclopedia of piano chords &amp; scales.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Chords &amp; <br>Scales Book</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$39</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="    background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/december/chords-scales-digital-ipad-bonus.png');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Your encyclopedia of piano chords &amp; scales.</p>
+                                    <div
+                                        x-ref="back"
+                                        class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                        style="backface-visibility: hidden;"
+                                    >
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <p class="w-full leading-normal mt-2">
+                                @if(!empty($bonus['title']))
+                                    <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
+                                @endif
+                                <span style="text-transform:uppercase; display:inline-block;">
+                            @if(!empty($bonus['price']))
+                                        <s class="opacity-40">${{ $bonus['price'] }}</s>
+                                    @endif
+                                    @if(!empty($bonus['customText']))
+                                        <strong class="text-musora">{{ $bonus['customText'] }}</strong>
+                                    @else
+                                        <strong class="text-musora">FREE</strong>
+                                    @endif
+                                <br>
+                                <em>
+                                    @if(!empty($bonus['shipping']))
+                                        Free Shipping
+                                    @else
+                                        Online Access
+                                    @endif
+                                </em>
+                            </span>
+                            </p>
                         </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Digital Chords &amp; <br>Scales Guide</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Instant Access
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Easy Chords</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$97</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Instant Access
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Learn the piano. Play your favorite songs. Start sounding beautiful.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">New Piano Players Start Here</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$97</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Instant Access
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Piano Riffs<br> &amp; Fills</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$99</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Instant Access
-                            </em>
-                        </p>
-                    </div>
-                    <br class="hidden lg:inline-block">
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Play every major and minor chord.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Chords Poster</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$6.5</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Play any chord. On any key. </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Chord Formulas Poster</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$6.5</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">The essential piece of music theory.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Circle Of 5ths Poster</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$6.5</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Link the notes on the page to your keys.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Keys To Sight Reading Poster</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$6.5</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">Don’t learn Italian. Just look at this poster.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Dynamics Poster</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$6.5</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/4 lg:w-1/6 " x-data="{
-                        flipped: false,
-                    }" x-on:click="
-                        flipped = !flipped;
-                        if(flipped){
-                            $refs.front.classList.add('rotate-y-180');
-                            $refs.back.classList.remove('-rotate-y-180');
-                            $refs.back.classList.add('rotate-y-0');
-                        }
-                        else {
-                            $refs.front.classList.remove('rotate-y-180');
-                            $refs.back.classList.add('-rotate-y-180');
-                            $refs.back.classList.remove('rotate-y-0');
-                        }
-                    ">
-                        <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
-                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div x-ref="front" class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url('https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg');"></div>
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                </div>
-                                <div x-ref="back" class="back border-2 border-musora absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-sm">All the major and minor scales in one place.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="w-full leading-normal mt-2">
-                            <strong class="font-black leading-tight inline-block mb-1">Scales Poster</strong><br>
-                            <span style="text-transform:uppercase; display:inline-block;">
-<s class="opacity-40">$6.5</s>
-<strong class="text-musora">FREE</strong></span><br>
-                            <em>
-                                Free Shipping
-                            </em>
-                        </p>
-                    </div>
+                    @endforeach
                     <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
                         <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                             <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/marketing/assets/drumeo-bonus.jpg">
@@ -977,7 +619,7 @@ That’s the Play Better Guarantee™.',
                     <strong>$177</strong> <span class="text-musora">(Save 26%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
-                <a class="join  white  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
+                <a class="join   mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                     CLAIM YOUR OFFER
                 </a>
                 <br>
