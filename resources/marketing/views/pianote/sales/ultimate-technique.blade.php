@@ -481,7 +481,7 @@
                 <h1 class="leading-none sm:-mt-8 sm:mb-6 text-5xl"><i class="fal fa-angle-down text-pianote"></i></h1>
             </div>
 
-            <div class="pb-2 leading-none">
+            <div class="pb-2 -mt-14 md:m-0 leading-none">
                 <img class="w-20 md:w-16"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/promos/may/date.svg"
                     alt="Calendar">
