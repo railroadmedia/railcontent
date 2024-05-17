@@ -18,8 +18,12 @@
 
         <div class="tw-py-4">
             <div class="tw-flex tw-flex-col">
-                <div class="tw-flex tw-flex-row pv-2">
-                    <h1 class="heading dark:tw-text-white">Choose a Resource</h1>
+                <div class="tw-flex tw-items-center tw-mt-4 tw-w-full tw-justify-between">
+                    <div class="tw-flex tw-items-center">           
+                        <h2 class="tw-text-[#00101D] dark:tw-text-white tw-font-bold tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">
+                            Choose A Resource
+                        </h2>
+                    </div>
                 </div>
 
                 @include('partials.bladesora.members.account.partials._settings-links', [
