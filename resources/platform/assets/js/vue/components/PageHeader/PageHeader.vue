@@ -16,8 +16,8 @@
         </template>
       </PageHeaderHero>
     </template>
-    <template #top-right v-if="!isSongsPage">
-      <div :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+    <template #top-right>
+      <div  v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
         <PageHeaderCtasBox :ctas="ctas" />
       </div>
     </template>

@@ -130,7 +130,7 @@
     </div>
 
     @if(!empty($thisChapter['backing_tracks']))
-        <div class="container mb-3">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
             <div class="flex flex-row pv-3 tw-justify-center">
                 <h1 class="heading dark:tw-text-white">Backing Tracks</h1>
             </div>
