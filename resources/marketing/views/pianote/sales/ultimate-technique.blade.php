@@ -4,14 +4,14 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Save 71% with your exclusive Webinar Bundle. | Pianote</title>
-    <meta property="og:title" content="Save 71% with your exclusive Webinar Bundle.">
+    <title>Save 60% with the  Ultimate Technique Bundle. | Pianote</title>
+    <meta property="og:title" content="Save 60% with the  Ultimate Technique Bundle">
     <meta property="og:url" content="https://www.pianote.com/song-secrets-bonus">
 
     <meta name="description" content="$177 for your first year!">
-    <meta property="og:description" content="$177 for your first year!">
+    <meta property="og:description" content="$177 for your first year!"> 
 
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/lead-gen/song-secrets/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/may/header.webp" style="display: none;">
 
 
     @include('_partials.layout._fonts')
@@ -186,13 +186,13 @@
 
     <section class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: #f6f8fc;">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="leading-tight"><strong class="text-pianote">Save 60%</strong> with the<br> <strong>Ultimate Technique Bundle</strong></h2>
+        <h2 class="w-auto leading-tight text-center"><strong class="text-pianote">Save 60% </strong>with the<br> <strong>Ultimate Technique Bundle</strong> </h2>
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5">
                     <img class="hidden sm:inline-block h-56 sm:h-auto max-w-full sm:max-w-sm lg:max-w-full transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=1210,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/pianote-bundle.png"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/may/header.webp"
                             alt="{{$theme}} collage image"
                     >
                 </div>
@@ -200,7 +200,7 @@
                     <img class="inline-block sm:hidden mb-4 h-64 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/webinar-offer/pianote-bundle-m.png"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/may/header.webp"
                             alt="{{$theme}} collage image"
                     >
                     <div class="inline-block mx-auto">
@@ -210,7 +210,7 @@
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially licensed songs</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song tutorials</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
-                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 11 FREE Bonuses</li>
+                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 3 FREE Bonuses</li>
                         </ul>
                     </div>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
@@ -662,7 +662,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             var stickyBar = $('.promo-banner');
             $(window).scroll(function () {
@@ -679,7 +679,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
