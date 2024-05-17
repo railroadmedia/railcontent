@@ -508,7 +508,7 @@
                 'secondDeal' => 'Unlimited<br> Lessons',
                 'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course-bundle2.webp',
                 'secondImageHeight' => 'h-36 lg:h-44',
-                'secondDealSub' => "1 Year of Guitareo +<br class='lg:hidden'> Lifetime Access to 3 Courses",
+                'secondDealSub' => "1 Year Of Guitareo + 3 Bonuses Worth $341",
                 'secondDealPrice' => '20</strong>/mo<strong>',
                 'secondDealLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',
                 'secondExtraBonuses' => [
