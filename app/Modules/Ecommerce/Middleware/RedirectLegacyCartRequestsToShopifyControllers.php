@@ -39,7 +39,7 @@ class RedirectLegacyCartRequestsToShopifyControllers
                 $urlParams['user_id'] = $userId;
             }
             $queryString = http_build_query($urlParams);
-            if(!empty($queryString)){
+            if(!empty($queryString)) {
                 $musoraURL = $musoraURL.'?'.$queryString;
             }
             return redirect()->away($musoraURL);
