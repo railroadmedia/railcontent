@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { computed, onUpdated, ref } from 'vue';
+import { computed, onUpdated, onMounted, ref } from 'vue';
 
 import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
@@ -132,6 +132,10 @@ const ctasAndInfoInsideHero = false;
 //     alwaysShow: isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value
 //   };
 // });
+
+// onMounted( () => {
+//   console.log('CTAs', props.ctas)
+// })
 
 const logo = computed(() => {
   return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;
