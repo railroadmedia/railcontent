@@ -118,6 +118,7 @@
             :statuses="{{ json_encode(['published', 'scheduled']) }}"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
             title="lessons"
+            collection-type="coach-show"
         ></collection-wrapper>
     </div>
 
