@@ -215,24 +215,23 @@ export default {
                 })
                     .then((resolved) => {
                         if (resolved) {
-                            Toasts.push({
-                                icon: 'happy',
-                                title: 'Woohoo!',
-                                themeColor: this.themeColor,
-                                message: this.successMessage,
-                            });
-
+                            //Notification: Success
+                            window.shownotification({
+                                icon: 'check',
+                                text: this.successMessage
+                            })
+                            //Emit Events
                             this.$emit('formSuccess');
                             this.$emit('closeForm');
-
+                            //Close Legacy Modals
                             window.closeAllModals();
                         } else {
-                            Toasts.push({
-                                icon: 'sad',
-                                title: 'Whoops!',
-                                themeColor: this.themeColor,
-                                message: 'There was an Error Submitting the email. Please try again later or contact <a class="tw-underline" href="support">support</a>.',
-                            });
+                            //Notification: Failure
+                            window.shownotification({
+                                icon: 'error',
+                                text: `There was an Error Submitting the email. Please try again later or contact <a class="tw-underline" href="support">support</a>.`
+                            })
+                            //Emit Events
                             this.$emit('closeForm');
                         }
 
