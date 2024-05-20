@@ -195,10 +195,19 @@
             ];
         }
     }
-    else if ($catalogueMeta['name'] == 'Q & A') {
+    else if ($catalogueMeta['name'] == 'Q&A') {
         $headerData['type'] = 'qanda';
-        $headerData['title'] = 'Q & A';
+        $headerData['title'] = 'Q&A';
         $headerData['iconName'] = 'question-mark-circle';
+        $headerData['description'] = 'Submit your questions using the button, in the Q&A thread in the forums, or live in the community chat.';
+        $headerData['ctas'][] = [
+            'type' => 'PageHeaderCta',
+            'props' => [
+                'text' => 'Ask A Question',
+                'url' => '/pianote/resources',
+                'showAllAlways' => true
+            ]
+        ];
     }
     else if ($catalogueMeta['name'] == 'Chords & Scales') {
         $headerData['type'] = 'chordsandscales';
