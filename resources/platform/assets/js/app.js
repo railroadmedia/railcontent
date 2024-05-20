@@ -22,8 +22,6 @@ import Referral from './vue/Pages/Referral';
 import Schedule from './vue/Pages/Schedule';
 import Songs from './vue/Pages/Songs';
 import Stc from './vue/Pages/STC';
-import LessonHistory from './vue/Pages/LessonHistory';
-import Cohort from './vue/Pages/Cohort';
 import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
