@@ -32,7 +32,7 @@
         $headerData['darkModeLogo'] = $parentContent->fetch('data.dark_mode_logo_url');
         $headerData['lightModeLogo'] = $parentContent->fetch('data.light_mode_logo_url');
     }
-    if ($parentContent->fetch('type') === 'course' || $parentContent->fetch('type') === 'challenge') {
+    if ($parentContent->fetch('type') === 'course' || $parentContent->fetch('type') === 'challenge' || $parentContent->fetch('type') === 'song-tutorial') {
         if (isset($infoData['lessons'])) {
             $infoDataStrArr[] = $infoData['lessons'] . ' Lessons';
         }

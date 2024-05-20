@@ -11,21 +11,24 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Workouts from './vue/Pages/Workouts';
-import Songs from './vue/Pages/Songs';
 import Artists from './vue/Pages/Artists.vue';
-import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
-import Home from './vue/Pages/Home.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
-import Support from './vue/Pages/Support';
-import Schedule from './vue/Pages/Schedule';
-import Playlists from './vue/Pages/Playlists';
+import Cohort from './vue/Pages/Cohort';
+import Home from './vue/Pages/Home.vue';
+import LessonHistory from './vue/Pages/LessonHistory';
 import Playlist from './vue/Pages/Playlist';
+import Playlists from './vue/Pages/Playlists';
 import Referral from './vue/Pages/Referral';
+import Schedule from './vue/Pages/Schedule';
+import Songs from './vue/Pages/Songs';
 import Stc from './vue/Pages/STC';
 import LessonHistory from './vue/Pages/LessonHistory';
 import Cohort from './vue/Pages/Cohort';
 import CoachIndex from './vue/Pages/CoachIndex';
+import Support from './vue/Pages/Support';
+import Workouts from './vue/Pages/Workouts';
+import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
