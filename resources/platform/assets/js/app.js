@@ -25,6 +25,7 @@ import Referral from './vue/Pages/Referral';
 import Stc from './vue/Pages/STC';
 import LessonHistory from './vue/Pages/LessonHistory';
 import Cohort from './vue/Pages/Cohort';
+import CoachIndex from './vue/Pages/CoachIndex';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -277,6 +278,7 @@ app.component('AppContainer', AppContainer)
     .component('Cohort', Cohort)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
+    .component('CoachIndex', CoachIndex)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(

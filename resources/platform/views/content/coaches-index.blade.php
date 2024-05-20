@@ -24,6 +24,20 @@
 @endsection
 
 @section('content')
+    <coach-index
+        :breadcrumbs="{{ json_encode($breadcrumbs) }}"
+        header-description="{{ $headerDescription }}"
+        :coach-event="{{ json_encode($coachEvent) }}"
+        @if(!empty($coachEvent))
+            current-date="{{ $currentDate }}"
+            subscription-calendar-id="{{ $currentEventCalendarId }}"
+            youtube-event-id="{{ $youtubeId }}"
+            time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+        @endif
+        :has-featured-coaches=""
+    ></coach-index>
+
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
         <page-header
@@ -93,7 +107,7 @@
             'brand' => '{{ $brand }}'
         ])
         @endcomponent
-    
+
         <collection-wrapper
             collection-type="coach"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
