@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5299c3d4497052b8d9854f39106e6ba",
+    "content-hash": "00a798783f2a07370ce0fb2468e3bd0f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.306.7",
+            "version": "3.307.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "bc30df54badd9d2af8d291cd0665ade6eb509598"
+                "reference": "cc79f16e1a1bd3feee421401ba2f21915abfdf91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bc30df54badd9d2af8d291cd0665ade6eb509598",
-                "reference": "bc30df54badd9d2af8d291cd0665ade6eb509598",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cc79f16e1a1bd3feee421401ba2f21915abfdf91",
+                "reference": "cc79f16e1a1bd3feee421401ba2f21915abfdf91",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.306.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.307.1"
             },
-            "time": "2024-05-15T18:04:12+00:00"
+            "time": "2024-05-17T18:07:44+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3441,26 +3441,26 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.10.0",
+            "version": "v6.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "a49db6f0a5033aef5143295342f1c95521b075ff"
+                "reference": "500501c2ce893c824c801da135d02661199f60c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/a49db6f0a5033aef5143295342f1c95521b075ff",
-                "reference": "a49db6f0a5033aef5143295342f1c95521b075ff",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/500501c2ce893c824c801da135d02661199f60c5",
+                "reference": "500501c2ce893c824c801da135d02661199f60c5",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4||^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
-                "guzzlehttp/guzzle": "^6.5||^7.4",
+                "guzzlehttp/guzzle": "^7.4",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5",
-                "psr/cache": "^1.0||^2.0",
+                "psr/cache": "^2.0||^3.0",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0"
             },
@@ -3498,9 +3498,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.10.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.10.1"
             },
-            "time": "2023-12-01T16:26:39+00:00"
+            "time": "2024-05-18T18:05:11+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -4097,23 +4097,23 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.355.0",
+            "version": "v0.356.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "235e6a45ecafd77accc102b5ab6d529aab54da23"
+                "reference": "8e22b0a6f661f2db3f99abb6ee5a1dcf28d370e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/235e6a45ecafd77accc102b5ab6d529aab54da23",
-                "reference": "235e6a45ecafd77accc102b5ab6d529aab54da23",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/8e22b0a6f661f2db3f99abb6ee5a1dcf28d370e7",
+                "reference": "8e22b0a6f661f2db3f99abb6ee5a1dcf28d370e7",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4||^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7||^8.5.13"
+                "phpunit/phpunit": "^9.6"
             },
             "type": "library",
             "autoload": {
@@ -4135,9 +4135,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.355.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.356.0"
             },
-            "time": "2024-05-11T01:02:11+00:00"
+            "time": "2024-05-18T01:10:18+00:00"
         },
         {
             "name": "google/auth",
@@ -4267,16 +4267,16 @@
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.41.4",
+            "version": "v1.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "304b3ef6a1bd827774faa1deea315b5844826af2"
+                "reference": "1c77f5882c30bec95ab2837b9534a946325d1c57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/304b3ef6a1bd827774faa1deea315b5844826af2",
-                "reference": "304b3ef6a1bd827774faa1deea315b5844826af2",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/1c77f5882c30bec95ab2837b9534a946325d1c57",
+                "reference": "1c77f5882c30bec95ab2837b9534a946325d1c57",
                 "shasum": ""
             },
             "require": {
@@ -4318,9 +4318,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.41.4"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.42.0"
             },
-            "time": "2024-05-03T18:32:44+00:00"
+            "time": "2024-05-19T17:27:42+00:00"
         },
         {
             "name": "google/common-protos",
@@ -10235,16 +10235,16 @@
         },
         {
             "name": "railroad/points",
-            "version": "dev-BE-29-duplicate-entry-issue",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/points.git",
-                "reference": "19b714216a4f7d0e0d4a97b794eb3111cb0cd229"
+                "reference": "1d79ca3ea891b379150d6317e8d8aa46ddfbfaf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/points/zipball/19b714216a4f7d0e0d4a97b794eb3111cb0cd229",
-                "reference": "19b714216a4f7d0e0d4a97b794eb3111cb0cd229",
+                "url": "https://api.github.com/repos/railroadmedia/points/zipball/1d79ca3ea891b379150d6317e8d8aa46ddfbfaf1",
+                "reference": "1d79ca3ea891b379150d6317e8d8aa46ddfbfaf1",
                 "shasum": ""
             },
             "require": {
@@ -10285,9 +10285,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/points/issues",
-                "source": "https://github.com/railroadmedia/points/tree/BE-29-duplicate-entry-issue"
+                "source": "https://github.com/railroadmedia/points/tree/v1.0.3"
             },
-            "time": "2024-05-16T09:09:11+00:00"
+            "time": "2024-05-20T08:04:43+00:00"
         },
         {
             "name": "railroad/railanalytics",
@@ -20293,18 +20293,11 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
-        },
-        {
-            "package": "railroad/points",
-            "version": "dev-BE-29-duplicate-entry-issue",
-            "alias": "v1.0.2",
-            "alias_normalized": "1.0.2.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20,
-        "railroad/points": 20
+        "railroad/doctrine-array-hydrator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
