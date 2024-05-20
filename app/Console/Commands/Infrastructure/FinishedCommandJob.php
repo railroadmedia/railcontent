@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Log;
 
 class FinishedCommandJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+    use Batchable;
 
 
     private string $commandName;

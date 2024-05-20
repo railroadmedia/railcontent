@@ -40,7 +40,7 @@ class SetUserNeedsLogoutTest extends TestCase
             ->expectsOutput('Set needs_logout for user ID '. $userIdCollection->implode(', '))
             ->assertSuccessful();
 
-        $users->each(fn(User $user) => $user->refresh());
+        $users->each(fn (User $user) => $user->refresh());
         $users->each(fn (User $user) => $this->assertTrue($user->needs_logout));
     }
 }

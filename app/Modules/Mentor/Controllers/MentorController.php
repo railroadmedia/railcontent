@@ -24,7 +24,7 @@ class MentorController extends Controller
     public function getMentors()
     {
         return Mentor::all()->map(
-            fn(Mentor $mentor) => ['mentorUserId' => $mentor->user->id, 'displayName' => $mentor->user->display_name]
+            fn (Mentor $mentor) => ['mentorUserId' => $mentor->user->id, 'displayName' => $mentor->user->display_name]
         );
     }
 
@@ -69,6 +69,6 @@ class MentorController extends Controller
     public function demoteMentor($userId)
     {
         $mentorStudents = $this->mentorService->delete($userId);
-        return $mentorStudents->map(fn($mentorStudent) => $mentorStudent->user->email);
+        return $mentorStudents->map(fn ($mentorStudent) => $mentorStudent->user->email);
     }
 }

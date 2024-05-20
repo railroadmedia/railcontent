@@ -1,3 +1,22 @@
+@php
+    $headerDescription = "";
+    if ($brand === "drumeo") {
+        $headerDescription = "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!";
+    } elseif ($brand === "pianote") {
+        $headerDescription = "Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!";
+    } elseif ($brand === "guitareo") {
+        $headerDescription = "Tackle your next guitar goal with bite-sized courses from many of the world's best guitarists.";
+    } elseif ($brand === "singeo") {
+        $headerDescription = "Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world!";
+    }
+
+    $breadcrumbs = [
+        [
+            'title' => 'Coaches',
+        ]
+    ];
+@endphp
+
 @extends('partials.layout', ['trackingSectionName' => 'coaches'])
 
 @section('meta')
@@ -5,36 +24,17 @@
 @endsection
 
 @section('content')
-
-    @component('partials.bladesora.members.components.header-banner', [
-        'hideUser' => true,
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
-        'brand' => '{{ $brand }}'
-    ])
-        @slot('content')
-            <div class="tw-flex tw-flex-col tw-pr-1">
-                <h1 class="heading tw-text-white tw-flex tw-flex-row tw-justify-start tw-mb-2">
-                    <musora-icon icon-name="whistle-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    Coaches
-                </h1>
-
-                <p class="text-white body tw-max-w-[960px]">
-                    @if($brand === "drumeo")
-                        Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!
-                    @elseif($brand === "pianote")
-                        Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!
-                    @elseif($brand === "guitareo")
-                        Tackle your next guitar goal with bite-sized courses from many of the world's best guitarists.
-                    @elseif($brand === "singeo")
-                        Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world!
-                    @endif
-                </p>
-            </div>
-        @endslot
-    @endcomponent
-
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
+        <page-header
+            title="Coaches"
+            icon-name="whistle"
+            description="{{ $headerDescription }}"
+        >
+        </page-header>
+    </div>
     @if( !empty($coachEvent) )
-        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-4">
             {{-- Live Banner --}}
             <coach-event
                 brand="{{ $brand }}"
@@ -48,51 +48,52 @@
         </div>
     @endif
 
-    {{-- Featured Coach --}}
-    @component('partials.bladesora.members.components.coach-featured', [
-        'hasFeaturedCoaches' => $hasFeaturedCoaches,
-        'featuredCoaches' => $featuredCoaches,
-        'brand' => $brand,
-    ])
-    @endcomponent
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
 
-    {{--  Latest Featured Lessons  --}}
-    <div class="tw-px-4 md:tw-px-8 tw-mb-[30px]">
-        <mini-catalogue-section
-            title="Latest Featured Lessons"
-            :pre-loaded-content="{{ json_encode(json_decode($latestLessons)->data) }}"
-        ></mini-catalogue-section>
-    </div>
+        {{-- Featured Coach --}}
+        @component('partials.bladesora.members.components.coach-featured', [
+            'hasFeaturedCoaches' => $hasFeaturedCoaches,
+            'featuredCoaches' => $featuredCoaches,
+            'brand' => $brand,
+        ])
+        @endcomponent
 
-    {--  From Subscribed Coaches  --}}
-    @if($hasFollowedCoaches)
-        <div class="tw-px-4 md:tw-px-8 tw-mb-[30px]">
+        {{--  Latest Featured Lessons  --}}
+        <div class="tw-mb-[30px]">
             <mini-catalogue-section
-                title="From Subscribed Coaches"
-                see-all-url="/{{ $brand }}/lessons/subscribed"
-                seeAllAriaLabel="See All From Subscribed Coaches"
-                :pre-loaded-content="{{ json_encode(json_decode($latestSubscribedLessons)->data) }}"
+                title="Latest Featured Lessons"
+                :pre-loaded-content="{{ json_encode(json_decode($latestLessons)->data) }}"
             ></mini-catalogue-section>
         </div>
-    @endif
 
-    <!-- Upcoming Coaches -->
-    @component('partials.bladesora.members.components.coach-upcoming', [
-        'hasUpcomingCoaches' => $hasUpcomingCoaches,
-        'upcomingCoaches' => $upcomingCoaches,
-        'brand' => '{{ $brand }}',
-    ])
-    @endcomponent
+        {{--  From Subscribed Coaches  --}}
+        @if($hasFollowedCoaches)
+            <div class="tw-mb-[30px]">
+                <mini-catalogue-section
+                    title="From Subscribed Coaches"
+                    see-all-url="/{{ $brand }}/lessons/subscribed"
+                    seeAllAriaLabel="See All From Subscribed Coaches"
+                    :pre-loaded-content="{{ json_encode(json_decode($latestSubscribedLessons)->data) }}"
+                ></mini-catalogue-section>
+            </div>
+        @endif
 
-    <!-- Active Coaches -->
-    @component('partials.bladesora.members.components.coach-active', [
-        'hasActiveCoaches' => $hasActiveCoaches,
-        'activeCoaches' => $activeCoaches,
-        'brand' => '{{ $brand }}'
-    ])
-    @endcomponent
+        <!-- Upcoming Coaches -->
+        @component('partials.bladesora.members.components.coach-upcoming', [
+            'hasUpcomingCoaches' => $hasUpcomingCoaches,
+            'upcomingCoaches' => $upcomingCoaches,
+            'brand' => '{{ $brand }}',
+        ])
+        @endcomponent
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mb-3">
+        <!-- Active Coaches -->
+        @component('partials.bladesora.members.components.coach-active', [
+            'hasActiveCoaches' => $hasActiveCoaches,
+            'activeCoaches' => $activeCoaches,
+            'brand' => '{{ $brand }}'
+        ])
+        @endcomponent
+    
         <collection-wrapper
             collection-type="coach"
             :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"

@@ -19,7 +19,7 @@ class FixProgressOnUnpublishedContent extends Command
             ->join('railcontent_content as c', 'c.id', '=', 'p.content_id')
             ->join('railcontent_content_hierarchy as h', 'h.child_id', '=', 'c.id')
             ->join('railcontent_content as pc', 'pc.id', '=', 'h.parent_id')
-            ->where(function ($q){
+            ->where(function ($q) {
                 $q->where('c.published_on', '>', Carbon::now())
                     ->orWhere('pc.published_on', '>', Carbon::now());
             })->whereNotIn('pc.slug', $ignoreSlugs);

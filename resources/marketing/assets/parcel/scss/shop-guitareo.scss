@@ -489,6 +489,7 @@ img {
     }
 
     .play-button {
+        display: inline-block;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -964,7 +965,6 @@ img {
   }
 
   .fixed-cards {
-    font-size: 0;
     text-align: center;
     margin: 0 auto 15px;
     @include tablet {

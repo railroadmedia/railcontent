@@ -33,8 +33,8 @@ class EngageContentEventListener
     public function handleRemoveEngageContent($event)
     {
         $deleted = $this->contentLastEngagedService->deleteEngagedContent(user()->id, $event->playlistId, null);
-        if(isset($event->playlistItemId) && ($deleted == 1) && ($event->position > 1)){
-            $previousPlaylistItem = $this->userPlaylistService->getItemWithPositionInPlaylist($event->playlistId, ($event->position -1));
+        if(isset($event->playlistItemId) && ($deleted == 1) && ($event->position > 1)) {
+            $previousPlaylistItem = $this->userPlaylistService->getItemWithPositionInPlaylist($event->playlistId, ($event->position - 1));
             $this->contentLastEngagedService->engageContent(user()->id, $previousPlaylistItem['id'], $event->playlistId, null);
         }
     }

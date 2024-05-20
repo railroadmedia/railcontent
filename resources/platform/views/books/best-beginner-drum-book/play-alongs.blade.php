@@ -12,11 +12,11 @@ if(!empty($user)){
 
 @section('content')
     <header id="bestBookHeader" class="fluid pv-5 shadow">
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
                     <h1 class="heading mb-1 text-white tw-flex tw-items-center">
-                        <a href="javascript:history.back()"
+                        <a href="/drumeo/bestbook"
                            class="no-decoration tw-flex tw-items-center tw-mr-1">
                             <i class="fas fa-arrow-circle-left text-light tw-text-2xl"></i>
                         </a>
@@ -38,22 +38,19 @@ if(!empty($user)){
         </div>
     </header>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-my-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-my-3">
         <div class="flex flex-column">
             <div class="flex flex-row">
-
                 <play-alongs
                     ref="playAlongsVueInstance"
                     content-endpoint="/railcontent/content"
-                    theme-color="drumeo"
-                    brand="drumeo"
-                    :pre-loaded-content="{{ json_encode(json_decode($listLessons)->data) }}"
+                    theme-color="{{ $brand }}"
+                    brand="{{ $brand }}"
+                    :pre-loaded-content="{{ $listLessons }}"
+                    :session-token="{{ json_encode(railtracker_session_token()) }}"
                     :total-results="{{ json_encode(json_decode($listLessons)->meta->totalResults) }}"
-                    user-id="{{ auth()->id() }}"
-                    :no-sidebar="true"
-                    :use-url-params="false"
-                    :show-user-actions="false"
-                    :track-progress="false"
+                    @play="handlePlayAlongsPlay"
+                    @pause="handlePlayAlongsPause"
                 ></play-alongs>
 
             </div>

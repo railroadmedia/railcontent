@@ -60,15 +60,17 @@ class LeadgenLessonLayout extends Layout
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
-                ->storeAs(function (Request $request){
+                ->storeAs(function (Request $request) {
                     return '/Lead-gens/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail_file')->getClientOriginalName();
                 })
-                ->preview(function($value){
-                    if(empty($value)) return null;
+                ->preview(function ($value) {
+                    if(empty($value)) {
+                        return null;
+                    }
 
                     return $value;
                 }),
-            Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
+            Text::make('Thumbnail', 'thumbnail_text')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required()->rules('required')->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted" (unless YT embed). <br> e.g. //player.vimeo.com/video/798501810?autoplay=1 and https://www.youtube.com/embed/bNpiCbY2y0c?rel=0&showinfo=0'),
             Number::make('duration')->help('In minutes')->required()->rules('required'),
             Flexible::make('Assignments')

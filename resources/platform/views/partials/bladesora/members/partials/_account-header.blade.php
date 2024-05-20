@@ -19,7 +19,7 @@
     {{-- Background Gradient --}}
     <div class="header-gradient-overlay absolute-fill"></div>
 
-    <div class="account-header tw-container tw-flex tw-flex-col tw-items-center lg:tw-items-end xl:tw-items-center lg:tw-flex-row tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
+    <div class="account-header tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-flex tw-flex-col tw-items-center lg:tw-items-end xl:tw-items-center lg:tw-flex-row tw-px-4 md:tw-px-8 dark:tw-text-white tw-relative tw-z-10 ">
 
         {{-- Avatar Image --}}
         <div class="header-avatar tw-flex tw-flex-col tw-mb-4 lg:tw-mb-0">

@@ -251,20 +251,20 @@ class HomePageController extends BaseController
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $hasGear = count(
-                user()->onboardingGear->filter(function ($item) {
-                    return $item->brand == brand();
-                })
-            ) > 0;
+            user()->onboardingGear->filter(function ($item) {
+                return $item->brand == brand();
+            })
+        ) > 0;
         $hasTopics = count(
-                user()->onboardingTopics->filter(function ($item) {
-                    return $item->brand == brand();
-                })
-            ) > 0;
+            user()->onboardingTopics->filter(function ($item) {
+                return $item->brand == brand();
+            })
+        ) > 0;
         $hasGenres = count(
-                user()->onboardingGenres->filter(function ($item) {
-                    return $item->brand == brand();
-                })
-            ) > 0;
+            user()->onboardingGenres->filter(function ($item) {
+                return $item->brand == brand();
+            })
+        ) > 0;
 
         $hasExperience = user()->onboardingExperience ? true : false;
 
@@ -315,10 +315,10 @@ class HomePageController extends BaseController
 
         if (user()->is_trial && !user()->$hideSection && user()->created_at->diffInDays(now()) <= 30) {
             $hasExperienceLevels = count(
-                    user()->onboardingExperience->filter(function ($item) use ($brand) {
-                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                    })
-                ) > 0;
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
 
             $shouldShowTrialSection = ($hasExperienceLevels) ? true : false;
         }
@@ -331,9 +331,9 @@ class HomePageController extends BaseController
         $activeCohort = $this->cohortService->getActiveCohort();
 
         $hasProduct = user() && $this->userAccessPermissionsService->hasProductNotCached(
-                user()?->id,
-                $activeCohort['product_id'] ?? 0
-            );
+            user()?->id,
+            $activeCohort['product_id'] ?? 0
+        );
 
         if ($activeCohort && $hasProduct) {
             $contentId = $activeCohort['content_id'];
@@ -431,7 +431,8 @@ class HomePageController extends BaseController
      */
     public function homePackOnly(Request $request, $brand)
     {
-        $packs = $this->packService->getPacksForHome(user());;
+        $packs = $this->packService->getPacksForHome(user());
+        ;
         $hotForumTopics = $this->getHotForumTopics();
         $member = user();
 

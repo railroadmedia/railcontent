@@ -118,7 +118,7 @@ class YouTrackSprintReport
         $this->info("Total Story Points: $totalStoryPoints");
 
         $totalStoryPointsBugs = $workItems
-            ->where(function($workItem) {
+            ->where(function ($workItem) {
                 return $workItem['project']['name'] == 'Bug Reports';
             })->sum(function ($workItem) {
                 $points = $workItem['BE Story Points'] ?? 1;
@@ -136,7 +136,7 @@ class YouTrackSprintReport
 
         $totalStoryPointsBugsCompleted = $workItems
             ->where($stateField, 'Complete')
-            ->where(function($workItem) {
+            ->where(function ($workItem) {
                 return $workItem['project']['name'] == 'Bug Reports';
             })->sum(function ($workItem) {
                 $points = $workItem['BE Story Points'] ?? 1;

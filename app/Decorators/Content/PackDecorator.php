@@ -34,7 +34,7 @@ class PackDecorator extends TypeDecoratorBase
             $enrollNow = $registrationUrl && $enrollStarted && !$enrollEnded;
             $contentsOfType[$contentIndex]['enrollment_state'] = $enrollNow ? 'open' : 'closed';
 
-            if($enrollNow){
+            if($enrollNow) {
                 $contentsOfType[$contentIndex]['badge_text'] = 'Enroll Now!';
                 $ctaRequest = \Request::create($registrationUrl);
 
@@ -49,7 +49,7 @@ class PackDecorator extends TypeDecoratorBase
                     $product->getContentPermissions($contentPermissionsLookup)
                         ->first()->id ?? null;
                 $hasProduct = user() && $this->userAccessPermissionsService->hasPermission(user()?->id, $permissionID);
-                if($hasProduct){
+                if($hasProduct) {
                     $enrollNow = false;
                     $contentsOfType[$contentIndex]['enrollment_state'] = 'enrolled';
                     $contentsOfType[$contentIndex]['badge_text'] = "You're Enrolled!";
@@ -58,7 +58,7 @@ class PackDecorator extends TypeDecoratorBase
             $isStarted = $content['started'] && !$content['completed'];
             $isCompleted = $content['completed'];
             $contentsOfType[$contentIndex]['primary_cta_text'] = $enrollNow ? 'Enroll Now' : ((!$isStarted) ? 'Start' : (($isCompleted) ? 'Completed' : ' Continue'));
-            $contentsOfType[$contentIndex]['primary_cta_url'] = $enrollNow ? $registrationUrl : ($contentsOfType[$contentIndex]['next_lesson_url']??$contentsOfType[$contentIndex]->fetch('url',''));
+            $contentsOfType[$contentIndex]['primary_cta_url'] = $enrollNow ? $registrationUrl : ($contentsOfType[$contentIndex]['next_lesson_url'] ?? $contentsOfType[$contentIndex]->fetch('url', ''));
 
             if ($content['slug'] === '30-day-drummer') {
                 $contentsOfType[$contentIndex]['launch_date'] = 'September 2022';
@@ -71,7 +71,7 @@ class PackDecorator extends TypeDecoratorBase
             //strip <p> tags from description
             $contentData = $content['data'] ?? [];
             foreach ($contentData as $index => $data) {
-                if(in_array($data['key'] ,['description'])){
+                if(in_array($data['key'], ['description'])) {
                     $contentsOfType[$contentIndex]['data'][$index]['value'] = strip_tags(html_entity_decode($data['value']), '<a>,<em>,<strong>');
                 }
             }

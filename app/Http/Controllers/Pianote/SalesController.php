@@ -8,8 +8,11 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSendTransactionalEmail;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use function App\Http\Controllers\Drumeo\array_entity_column;
 
 class SalesController extends BaseController
@@ -38,6 +41,14 @@ class SalesController extends BaseController
     public function promo()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true', 'promoPage' => 'true']);
+    }
+    public function restart()
+    {
+        return view('pianote.sales.restart', ['theme' => 'pianote']);
+    }
+    public function chordSecrets()
+    {
+        return view('pianote.sales.chord-secrets', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
     public function promoEG()
     {
@@ -244,7 +255,7 @@ class SalesController extends BaseController
     }
     public function metronomePrestige()
     {
-        return view('pianote.products.prestige-metronome', ['theme' => 'pianote', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('pianote.products.prestige-metronome', ['theme' => 'pianote', 'recaptchaKey' => config('recaptcha.key')]);
     }
     public function christmasSongbook()
     {
@@ -272,7 +283,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.new-piano-players', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -287,7 +298,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.easy-chords', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -302,7 +313,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.30-day-blues-piano', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -313,9 +324,50 @@ class SalesController extends BaseController
     // 2 is the customer.io email ID from their system
     public function claimRoland90DaysAccess(Request $request)
     {
+        // Validate email before proceeding
+        
+        $messages = [
+            'email.already_pianote_user' => 'pianote_user',
+            'email.code_claimed' => 'code_claimed'
+        ];
+        
+        $validatedData = $request->validate([
+            'email' => [
+                'required',
+                'email',
+                function ($attribute, $value, $fail) {
+                    $user = DB::table('usora_users')
+                    ->join('user_access_permissions', 'usora_users.id', '=', 'user_access_permissions.user_id')
+                    ->where('usora_users.email', $value)
+                    ->where(function ($query) {
+                        $query->where(function ($query) {
+                            $query->whereIn('user_access_permissions.permission_id', [77, 88]);
+                        })
+                        ->orWhere('user_access_permissions.product_id', 408);
+                    })
+                    ->first();
+        
+                    $codeClaimed = DB::table('usora_users')
+                        ->join('ecommerce_access_codes', 'usora_users.id', '=', 'ecommerce_access_codes.claimer_id')
+                        ->where('usora_users.email', $value)
+                        ->where('ecommerce_access_codes.is_claimed', 1)
+                        ->where('ecommerce_access_codes.source', 'roland-piano-promo')
+                        ->exists();
+        
+                    if ($user && $codeClaimed) {
+                        $fail('email.code_claimed');
+                    } elseif ($user) {
+                        $fail('email.already_pianote_user');
+                    }
+                }
+            ],
+        ], $messages);
+    
+        // If validation passes, the customer does not exist as pianote user or did not claim, continue with the process
+    
         // create access code
         $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote', 'roland-piano-promo');
-
+    
         // create the customer and send the email
         dispatch(
             (new CustomerIoSendTransactionalEmail(
@@ -328,7 +380,7 @@ class SalesController extends BaseController
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
                 ->delay(Carbon::now()->addSeconds(3))
         );
-
+    
         // dispatch the event
         dispatch(
             (new CustomerIoTriggerEvent(
@@ -342,20 +394,21 @@ class SalesController extends BaseController
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
                 ->delay(Carbon::now()->addSeconds(10))
         );
-
+    
         return response()->json(['success' => true]);
     }
+    
 
     public function betterTechnique()
     {
-        $productId = 740;
+        $productId = 843;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('pianote.products.30-days-to-better-technique', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,

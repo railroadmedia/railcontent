@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class RunMWPPhaseOneLaunchMigrations extends Command
 {
-
     /**
      * The console command name.
      *
@@ -56,8 +55,8 @@ class RunMWPPhaseOneLaunchMigrations extends Command
         Log::info('Starting command:migrateVideos...');
         $this->call('command:migrateVideos');
 
-//        $this->info('Starting command:MigrateContentToElasticsearch...');
-//        $this->call('command:MigrateContentToElasticsearch');
+        //        $this->info('Starting command:MigrateContentToElasticsearch...');
+        //        $this->call('command:MigrateContentToElasticsearch');
 
         $this->info('Starting CleanMetadata...');
         Log::info('Starting CleanMetadata...');

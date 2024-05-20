@@ -2,7 +2,6 @@
 
 namespace App\Modules\Ecommerce\Events;
 
-
 use App\Modules\Ecommerce\Models\AccessCode;
 use Modules\UserManagementSystem\Models\User;
 

@@ -212,8 +212,8 @@ class Content extends Model
 
     ];
 
-    public function newEloquentBuilder($query)
-    : ContentBuilder {
+    public function newEloquentBuilder($query): ContentBuilder
+    {
         return new ContentBuilder($query);
     }
 
@@ -232,8 +232,8 @@ class Content extends Model
         return ContentFactory::new();
     }
 
-    private function setField(string $key, $value)
-    : void {
+    private function setField(string $key, $value): void
+    {
         /** @var ContentField $field */
         $field =
             $this->fields->where('key', '=', $key)
@@ -263,8 +263,8 @@ class Content extends Model
         }
     }
 
-    public function setFieldArray(string $key, array $values)
-    : void {
+    public function setFieldArray(string $key, array $values): void
+    {
         $fields =
             $this->fields->where('key', '=', $key)
                 ->collect();
@@ -295,8 +295,8 @@ class Content extends Model
         }
     }
 
-    public function getNewContentField(string $key)
-    : ContentField {
+    public function getNewContentField(string $key): ContentField
+    {
         $field = new ContentField();
         $field->content_id = $this->id;
         $field->key = $key;
@@ -335,8 +335,8 @@ class Content extends Model
         }
     }
 
-    public function getNewContentData(string $key)
-    : ContentData {
+    public function getNewContentData(string $key): ContentData
+    {
         $content = new ContentData();
         $content->content_id = $this->id;
         $content->key = $key;
@@ -726,8 +726,8 @@ class Content extends Model
         $this->released = $value;
     }
 
-    public function deleteFields(string $key)
-    : void {
+    public function deleteFields(string $key): void
+    {
         $fields =
             $this->fields->where('key', '=', $key)
                 ->collect();
@@ -739,8 +739,8 @@ class Content extends Model
         }
     }
 
-    private function createField(string $key, $value)
-    : void {
+    private function createField(string $key, $value): void
+    {
         /** @var ContentField $field */
         $field = $this->getNewContentField($key);
 

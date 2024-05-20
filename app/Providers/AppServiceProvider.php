@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Webhook;
 use App\ViewComposers\MarketingCartSidebarViewComposer;
 use App\ViewComposers\MarketingPagesProductsViewComposer;
 use App\ViewComposers\NavigationViewComposer;
 use App\ViewComposers\RailanalyticsIframeTrackingViewComposer;
+use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -161,9 +164,13 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // handle host forwarding (ngrok, etc)
-        if (app()->environment('local', 'development') && isset($_SERVER['HTTP_X_FORWARDED_HOST']) ) {
+        if (app()->environment('local', 'development') && isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
             // without this, we get errors for the manifest (and probably other things) because of CORS and the different domains with ngrok and the app
             $this->app['url']->forceRootUrl($_SERVER['HTTP_X_FORWARDED_PROTO'].'://'.$_SERVER['HTTP_X_FORWARDED_HOST']);
         }
+
+        Queue::after(function (JobProcessed $event) {
+            Webhook::updateJobDetailsIfWebhookJob($event);
+        });
     }
 }

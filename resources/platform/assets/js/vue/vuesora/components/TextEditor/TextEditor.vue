@@ -5,9 +5,9 @@
             successMessage="Your image was successfully uploaded" fieldKey="forum_post_photo" cropType="square"
             :selectedImage="selectedImage" :initialStep="initialUploaderStep" @uploadSuccess="handleUploadDone"
             @uploadError="handleUploadError" @onUploaderClose="closeUploader" />
-        <input v-model="contentInterface" type="hidden" :name="fieldKey" class="">
+        <input v-model="contentInterface" type="hidden" :name="fieldKey">
         <TinyEditor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
-            :init="initObject" @change="handleInput" :placeholder="placeholder" />
+            :init="initObject" :placeholder="placeholder" />
     </div>
 </template>
 
@@ -15,8 +15,6 @@
 import { ref, computed, watch, nextTick, inject, onMounted } from 'vue';
 import TinyEditor from '@tinymce/tinymce-vue';
 import ImageUploader from '../../../components/ImageUploader/ImageUploader.vue';
-
-const emit = defineEmits(['input']);
 
 const props = defineProps({
     height: {
@@ -49,7 +47,6 @@ const props = defineProps({
 });
 
 const isDarkModeSelected = inject('isDarkModeSelected');
-const currentValue = ref(props.initialValue);
 const renderTinyMCE = ref(true);
 const contentInterface = defineModel();
 const editorRef = ref(null);
@@ -110,12 +107,6 @@ onMounted(() => {
         contentInterface.value = props.initialValue;
     }
 });
-
-function handleInput() {
-    emit('input', {
-        currentValue: currentValue.value,
-    });
-}
 
 function forceReRender() {
     renderTinyMCE.value = false;

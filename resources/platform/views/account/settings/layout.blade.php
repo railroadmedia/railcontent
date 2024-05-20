@@ -26,76 +26,60 @@
     $hasGoals= user()->onboardingGoals ? true : false;
 
     $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
+
+    $headerData = [
+        'title' => user()->display_name,
+        'description' => null,
+        'heroImg' => $user->profile_picture_url,
+        'heroImgClasses' => 'user-avatar' . ' ' . (in_array($user['access_level'], ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '') . ' ' . $brand . ' ' . $user['access_level'],
+        'progress' => null,
+        'contentId' => null,
+        'infoData' => ['Musora Member Since ' . \Carbon\Carbon::parse(user()->created_at)->format('Y')],
+        'ctas' => null
+    ];
+
+    $ctaText = $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account';
+    $ctaUrlSuffix = $showCompleteYourAccountButton ? '&update=2' : '';
+
+    $ctaUrl = "/onboarding?brand={$brand}{$ctaUrlSuffix}";
+
+    $headerData['ctas'][] = [
+        'type' => 'PageHeaderPrimaryCta',
+        'props' => [
+            'text' => $ctaText,
+            'url' => $ctaUrl,
+            'showAllAlways' => true
+        ]
+    ];
+
+    $headerDataJson = json_encode($headerData);
+    $headerDataObj = json_decode($headerDataJson);
 @endphp
 
 @extends('partials.layout')
 
 @section('content')
-
-    <div
-        id="pageHeader"
-        class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
-        dusk="profile-header"
-    >
-        {{-- Background Image --}}
-        <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-            <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/headers/unified_header.jpg"
-                class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
-                onload="this.classList.remove('tw-opacity-0')"
-            >
-        </div>
-        {{-- Background Gradient --}}
-        <div class="header-gradient-overlay absolute-fill"></div>
-
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 account-header tw-flex tw-flex-col tw-items-center lg:tw-items-end xl:tw-items-center lg:tw-flex-row dark:tw-text-white tw-relative tw-z-10 ">
-
-            {{-- Avatar Image --}}
-            <div class="header-avatar tw-flex tw-flex-col tw-mb-4 lg:tw-mb-0">
-                <div class="user-avatar
-                    {{ in_array($user->access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
-                    {{ $brand }}
-                    {{ $user->access_level }}"
-                >
-                    <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
-                        @if($user->profile_picture_url)
-                            <img class="tw-inline-block tw-rounded-full tw-h-full"
-                                 src="{{ $user->profile_picture_url }}"
-                            >
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-end xl:tw-items-center tw-pl-6">
-                {{-- Account Header --}}
-                <div class="tw-flex tw-w-full tw-items-center">
-                    <div class="tw-flex tw-flex-col tw-w-full tw-items-center lg:tw-items-start tw-mb-4">
-                        <h2 class="tw-font-bold tw-text-[36px] tw-leading-none lg:tw-leading-none tw-text-white lg:tw-text-3xl tw-mb-1">
-                            @if(!empty($countryCode))
-                                <span class="flag flag-{{ strtolower($countryCode) }}"></span>
-                            @endif
-                            {{ user()->display_name }}
-                        </h2>
-                        <p class="tw-text-white tw-uppercase tw-font-extralight tw-font-bebas-neue tw-text-[28px]">
-                            Musora Member Since {{ \Carbon\Carbon::parse( user()->created_at)->format('Y') }}
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Calls To Action --}}
-                <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
-                    {{-- Complete Your Account / Update Your Account --}}
-                    <a href="/onboarding?brand={{ $brand }}{{ !$showCompleteYourAccountButton ? '&update=2' : ''  }}"
-                        class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
-                    >
-                        {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }}
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        {{-- Header --}}
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => 'Settings',
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="dashboard"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            hero-img-classes="{{ $headerDataObj->heroImgClasses ?? '' }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+        ></page-header>
     </div>
+
 
     @if(session()->has('error-message'))
         <div class="form-success-message tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">

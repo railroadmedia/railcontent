@@ -9,7 +9,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
-
 class CreateSongs24Jan2023 extends Command
 {
     /**
@@ -43,7 +42,7 @@ class CreateSongs24Jan2023 extends Command
     public function handle(ContentRepository $contentRepository)
     {
         $this->info('Starting CreateSongs24Jan2023...');
-        $csv = array_map(function($v){return str_getcsv($v, ",");}, file(base_path('csv_songs_imports/Jan 18th - Songs Import - Import.csv')));
+        $csv = array_map(function ($v) {return str_getcsv($v, ",");}, file(base_path('csv_songs_imports/Jan 18th - Songs Import - Import.csv')));
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
@@ -85,7 +84,7 @@ class CreateSongs24Jan2023 extends Command
             } else {
                 $contentId = $this->musoraDB()->from('railcontent_content')
                     ->insertGetId(
-                    [
+                        [
                         'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
                         'brand' => $brand,
                         'type' => 'song',
@@ -98,7 +97,7 @@ class CreateSongs24Jan2023 extends Command
                         'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
                         )->toDateTimeString(),
                     ]
-                );
+                    );
             }
 
             $content = $this->musoraDB()->from('railcontent_content')->where('id', $contentId)
@@ -214,9 +213,9 @@ class CreateSongs24Jan2023 extends Command
             $pdfFileName = $row[8];
             $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
 
-//            $this->info('-------------------------------');
-//            $this->info($row[0] . $row[1] . $row[2]);
-//            $this->info($pdfFileName);
+            //            $this->info('-------------------------------');
+            //            $this->info($row[0] . $row[1] . $row[2]);
+            //            $this->info($pdfFileName);
 
             if (!empty($pdfFileName) && !empty($pdfUrlPrefix) && !empty($pdfResourceName1)) {
                 // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
@@ -366,12 +365,14 @@ class CreateSongs24Jan2023 extends Command
                 ]
             );
 
-            $existingContentHierarchy = $this->getFirst('railcontent_content_hierarchy',
+            $existingContentHierarchy = $this->getFirst(
+                'railcontent_content_hierarchy',
                 [
                     'parent_id' => $content->id,
                     'child_id' => $assignment->id,
                     'child_position' => 1,
-                ]);
+                ]
+            );
 
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_hierarchy',
@@ -380,7 +381,6 @@ class CreateSongs24Jan2023 extends Command
                     'child_id' => $assignment->id,
                     'child_position' => 1,
                 ],
-
                 [
                     'created_on' => ($existingContent && $existingContentHierarchy) ?
                         $existingContentHierarchy->created_on : Carbon::now()->toDateTimeString(),

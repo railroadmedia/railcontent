@@ -406,6 +406,7 @@
             content: "\f104";
         }
         .play-button {
+            display: inline-block;
             cursor: pointer;
             outline: none;
             transition: opacity 0.3s;

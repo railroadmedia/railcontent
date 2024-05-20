@@ -20,16 +20,18 @@ class BundleResolver implements ResolverInterface
     {
         $bundles = $resource->bundles()->get();
 
-        return $bundles->map(function($bundle) use($layouts){
+        return $bundles->map(function ($bundle) use ($layouts) {
             $layout = $layouts->find('bundle-layout');
 
-            if(!$layout) return;
+            if(!$layout) {
+                return;
+            }
 
             return $layout->duplicateAndHydrate($bundle->id, [
                 'product' => $bundle->name,
                 'free_bonus' => $bundle->free_bonus,
                 'lifetime_access' => $bundle->lifetime_access,
-                'id' => $bundle->id ? : null,
+                'id' => $bundle->id ?: null,
             ]);
         });
 
@@ -47,31 +49,30 @@ class BundleResolver implements ResolverInterface
     {
         $class = get_class($model);
 
-        $class::saved(function ($model) use ($groups){
-            foreach($groups as $key => $group){
+        $class::saved(function ($model) use ($groups) {
+            foreach($groups as $key => $group) {
                 //update
-                if(!is_null($group['id'])){
+                if(!is_null($group['id'])) {
                     $dbBundle = Bundle::find($group['id']);
                     $updatedIds[] = $group['id'];
 
-                    if(empty($group['product'])){
+                    if(empty($group['product'])) {
                         $dbBundle->delete();
-                    }
-                    else{
+                    } else {
                         $product_id = Product::where('name', $group['product'])->first()->id;
-                        if($dbBundle->name !== $product_id){
+                        if($dbBundle->name !== $product_id) {
                             $dbBundle->product_id = $product_id;
                         }
 
-                        if($dbBundle->order_number !== $key){
+                        if($dbBundle->order_number !== $key) {
                             $dbBundle->order_number = $key;
                         }
 
-                        if($dbBundle->free_bonus !== $group['free_bonus']){
+                        if($dbBundle->free_bonus !== $group['free_bonus']) {
                             $dbBundle->free_bonus = $group['free_bonus'];
                         }
 
-                        if($dbBundle->lifetime_access !== $group['lifetime_access']){
+                        if($dbBundle->lifetime_access !== $group['lifetime_access']) {
                             $dbBundle->lifetime_access = $group['lifetime_access'];
                         }
 
@@ -82,7 +83,7 @@ class BundleResolver implements ResolverInterface
                 elseif(!empty($group['product'])) {
                     $product_id = Product::where('name', $group['product'])->first()->id;
 
-                    if(!is_null($product_id)){
+                    if(!is_null($product_id)) {
                         $addBundle = new Bundle();
                         $addBundle->bundle_id = $model['id'];
                         $addBundle->product_id = $product_id;
@@ -96,7 +97,7 @@ class BundleResolver implements ResolverInterface
                 }
             }
 
-            if(isset($updatedIds)){
+            if(isset($updatedIds)) {
                 Bundle::where('bundle_id', $model['id'])->whereNotIn('id', $updatedIds)->delete();
             }
         });

@@ -13,7 +13,7 @@ class NavigationService
         if (empty($user)) {
             return [];
         }
-        $shopName = brand() == 'drumeo' ?  'drumshop' : 'shop';
+        $shopName = brand() == 'drumeo' ? 'drumshop' : 'shop';
         if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
             return [
                 [ // section
@@ -30,8 +30,8 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => brand() === 'singeo' ? 'Courses' : 'Packs',
-                        'path' => brand() === 'singeo' ? '/'.brand().'/courses' : '/'.brand().'/packs',
+                        'name' => 'Packs',
+                        'path' => '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                 ],
@@ -125,8 +125,9 @@ class NavigationService
             ];
 
         if (brand() === 'drumeo') {
-            $commonContentSection = array_merge($commonContentSection,
-                    [
+            $commonContentSection = array_merge(
+                $commonContentSection,
+                [
                         [
                             'name' => 'Play-Alongs',
                             'path' => '/'.brand().'/play-alongs',
@@ -156,7 +157,8 @@ class NavigationService
             ];
             return $navData;
         } elseif (brand() === 'pianote') {
-            $commonContentSection = array_merge($commonContentSection,
+            $commonContentSection = array_merge(
+                $commonContentSection,
                 [
                     [
                         'name' => 'Song Tutorials',
@@ -187,7 +189,8 @@ class NavigationService
             ];
             return $navData;
         } elseif (brand() === 'guitareo') {
-            $commonContentSection = array_merge($commonContentSection,
+            $commonContentSection = array_merge(
+                $commonContentSection,
                 [
                     [
                         'name' => 'Play-Alongs',
@@ -228,9 +231,8 @@ class NavigationService
             ];
             return $navData;
         } elseif (brand() === 'singeo') {
-            // remove the "Packs" menu item
-            array_shift($commonContentSection);
-            $commonContentSection = array_merge($commonContentSection,
+            $commonContentSection = array_merge(
+                $commonContentSection,
                 [
                     [
                         'name' => 'Routines',

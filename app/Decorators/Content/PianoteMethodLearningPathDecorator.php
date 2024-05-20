@@ -47,7 +47,7 @@ class PianoteMethodLearningPathDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $firstIncompleteLevel = $lessons[$content['id']]->where('completed', false)->first();
-          //  $contentsOfType[$contentIndex]['url'] = url()->route('members.learning-path.show', [$content['slug']]);
+            //  $contentsOfType[$contentIndex]['url'] = url()->route('members.learning-path.show', [$content['slug']]);
             $contentsOfType[$contentIndex]['units'] = $lessons[$content['id']] ?? [];
             $contentsOfType[$contentIndex]['xp'] = $content->fetch(
                 'fields.xp',

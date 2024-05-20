@@ -1,3 +1,14 @@
+@php
+    $headerDescription = "";
+    if($brand === 'drumeo'){
+        $headerDescription = "Whether you're looking for drumming inspiration, entertainment, or education, Drumeo Shows has something for everyone.";
+    }
+    $breadcrumbs = [
+        [
+            'title' => 'Shows',
+        ]
+    ];
+@endphp
 @extends('partials.layout')
 
 @section('meta')
@@ -5,26 +16,16 @@
 @endsection
 
 @section('content')
-
-    @component('partials._header-banner',
-        ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'])
-        @slot('content')
-            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <musora-icon icon-name="shows-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                    <span class="tw-text-32 tw-font-bold">Shows</span>
-                </h1>
-
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    @if($brand === 'drumeo')
-                        Whether you’re looking for drumming inspiration, entertainment, or education, Drumeo Shows has something for everyone.
-                    @endif
-                </p>
-            </div>
-        @endslot
-    @endcomponent
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-2">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
+        <page-header
+            page-type="shows"
+            title="Shows"
+            icon-name="shows"
+            description="{{ $headerDescription }}"
+        ></page-header>
+    </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 mv-2">
         <div class="flex flex-row flex-wrap nmh-1">
             @foreach($shows as $type=>$show)
                 <a href="{{ url()->route('platform.content-type-catalog', ['contentTypeName' => $type]) }}"

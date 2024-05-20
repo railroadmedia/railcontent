@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use App\Modules\Ecommerce\Models\Product;
+use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Exception;
@@ -33,6 +34,8 @@ use App\Modules\Referral\Exceptions\SaasquatchException;
 use App\Modules\Referral\Exceptions\SaasquatchUserExistsException;
 use App\Modules\Referral\Models\Referrer;
 use App\Modules\Referral\Services\SaasquatchService;
+use Railroad\Railcontent\Services\CommentService;
+use Railroad\Railforums\Repositories\PostRepository;
 use Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -44,6 +47,9 @@ class UserController extends Controller
     private MailService $mailService;
     private SaasquatchService $saasquatchService;
     private UserService $userService;
+    private SubscriptionService $subscriptionService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
 
     /**
      * UserController constructor.
@@ -51,11 +57,18 @@ class UserController extends Controller
     public function __construct(
         MailService $mailService,
         SaasquatchService $saasquatchService,
-        UserService $userService
+        UserService $userService,
+        SubscriptionService $subscriptionService,
+        CommentService $commentService,
+        PostRepository $postRepository
     ) {
         $this->mailService = $mailService;
         $this->saasquatchService = $saasquatchService;
         $this->userService = $userService;
+        $this->subscriptionService = $subscriptionService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
+
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
 
@@ -115,8 +128,8 @@ class UserController extends Controller
         $verificationToken = $request->get('verification_token');
 
         if (strtolower($verificationToken) !== strtolower(
-                md5($email . config('shopify.multipass.account_creation_secret_key'))
-            )) {
+            md5($email . config('shopify.multipass.account_creation_secret_key'))
+        )) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
@@ -164,8 +177,8 @@ class UserController extends Controller
         $verificationToken = $request->get('verification_token');
 
         if (strtolower($verificationToken) !== strtolower(
-                md5($email . config('shopify.multipass.account_creation_secret_key'))
-            )) {
+            md5($email . config('shopify.multipass.account_creation_secret_key'))
+        )) {
             throw new AuthorizationException('Invalid verification_token.', 403);
         }
 
@@ -246,7 +259,7 @@ class UserController extends Controller
                     ->with($exception->errors());
         }
 
-        $user = new User;
+        $user = new User();
 
         $user->email = $request->email;
         $user->setPassword($request->password);
@@ -255,7 +268,8 @@ class UserController extends Controller
 
         $newUser =
             User::where('email', $user->email)
-                ->first();;
+                ->first();
+        ;
 
         event(new UserCreated($user));
 
@@ -717,5 +731,41 @@ class UserController extends Controller
         return response()->json([
             "reported" => $reported ? true : false,
         ], 200);
+    }
+
+    public function markAsDelete(Request $request, $id)
+    {
+        $isJson = request()->expectsJson();
+
+        $user = User::find($id);
+        $userId = $user['id'];
+
+        //delete related data
+        $this->commentService->markUserCommentsAsDeleted($userId);
+        $this->postRepository->deleteByUserId($userId);
+        $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
+        $user = $this->userService->deleteUser($user);
+
+        if ($user) {
+            event(new UserDeleted($user));
+        } else {
+            return response('', 404);
+        }
+
+        if (!$isJson) {
+            $message = ['success' => true];
+
+            return $request->has('redirect') ?
+                redirect()
+                    ->away($request->get('redirect'))
+                    ->with($message) :
+                redirect()
+                    ->back()
+                    ->with($message);
+        } else {
+            return json_encode([
+                                   "data" => ["attributes" => json_encode($user)],
+                               ]);
+        }
     }
 }

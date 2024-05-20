@@ -11,7 +11,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
 {
-    const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
+    public const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
     public $brand;
     public $id;
     private $contentService;
@@ -78,15 +78,17 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
     {
         $isLessonOrAssignment = in_array(
             $entity['type'],
-            array_merge(config('railcontent.singularContentTypes', []),
-                        config('railcontent.showTypes')[$entity['brand']] ?? [],
-                        ['assignment'])
+            array_merge(
+                config('railcontent.singularContentTypes', []),
+                config('railcontent.showTypes')[$entity['brand']] ?? [],
+                ['assignment']
+            )
         );
 
         return in_array($data['key'], ['description']) && $isLessonOrAssignment;
     }
 
-    function hasRelativeUrlsInComment($comment)
+    public function hasRelativeUrlsInComment($comment)
     {
         // Regular expression pattern to match URLs
         $pattern = '/href=["\']?((?:.(?!["\'?]))*.)["\'?]/';
@@ -159,7 +161,9 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
         ContentRepository::$bypassPermissions = true;
         $unifiedUrl = '/'.$segments[0].'/';
         if (isset($segments[0]) &&
-            in_array($segments[0], ['drumshop', 'lifetime', 'beat', 'recitals', 'guitar-technique-made-easy-discount']
+            in_array(
+                $segments[0],
+                ['drumshop', 'shop','lifetime', 'beat', 'recitals', 'guitar-technique-made-easy-discount']
             )) {
             return $url;
         }
@@ -359,8 +363,8 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
      * @param $input
      * @return array|string|string[]
      */
-    private function prepareRelativeUrls($input)
-    : string|array {
+    private function prepareRelativeUrls($input): string|array
+    {
         $brand = $this->brand;
 
         $url = str_replace(

@@ -8,10 +8,12 @@ use App\Modules\FeatureFlagging\Services\FeatureFlagService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 
-
 class EnableFeature extends Command
 {
-    protected $signature = 'featureFlag:enableFeature {name}';
+    protected $signature = 'featureFlag:enableFeature
+                            {name : name of feature to enable}';
+
+    protected $description = "Enable Feature Flag";
 
     public function handle(FeatureFlagService $ffService): void
     {

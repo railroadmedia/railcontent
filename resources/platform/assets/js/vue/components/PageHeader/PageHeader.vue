@@ -1,48 +1,53 @@
 <template>
   <PageHeaderLayout>
-    <template v-slot:top-left>
+    <template #top-left>
       <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :additionalImgSrc="logo" :infoData="ctasAndInfoInsideHero ? infoData : null" :hasCtas="hasSecondaryCtas">
-        <template #header-info v-if="description">
-          <span>
-            {{ description }}
-          </span>
-        </template>
-
-        <template #ctas>
-          <div v-if="ctasAndInfoInsideHero" class="tw-hidden sm:tw-flex tw-justify-between tw-items-end tw-w-full">
-            <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
-            <div class="tw-flex tw-items-center tw-flex-grow"
-              :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
-              <ProgressText v-if="progress" :progress="progress" />
-              <div>
-                <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
-                  v-bind="cta.props" />
-              </div>
+        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo"
+        :infoData="isSongsPage || isPlaylistsPage ? null : infoData">
+        <template #header-description v-if="description">
+          <div class="tw-flex tw-flex-col tw-h-full">
+            <div class="tw-flex tw-grow tw-items-center">
+              <span v-html="description" />
             </div>
           </div>
         </template>
+        <template #right-of-text-hero v-if="isPlaylistsPage">
+          <PlaylistCountBadge :playlistCount="infoData[0]" />
+        </template>
       </PageHeaderHero>
     </template>
-
-    <template v-slot:bottom-full>
-      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''">
-        <PageHeaderPrimaryCta class="tw-my-3" :faIconClass="primaryCtaIcon" :url="primaryCtaUrl"
-          :text="primaryCtaText" />
+    <template #top-right>
+      <div  v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+        <PageHeaderCtasBox :ctas="ctas" />
       </div>
-      <div :class="ctasAndInfoInsideHero ? 'sm:tw-hidden' : ''"
-        class="tw-flex tw-justify-between tw-items-center tw-w-full">
-        <PageHeaderRowInfo v-if="!ctasAndInfoInsideHero" :infoData="infoData" />
-        <div class="tw-flex tw-items-center tw-flex-grow"
-          :class="[progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end']">
-          <ProgressText v-if="progress" :progress="progress" />
-          <div>
-            <component v-for="(cta, index) in secondaryCtas" :key="index" :is="resolveComponent(cta.type)"
-              v-bind="cta.props" />
-          </div>
+    </template>
+    <template #bottom-full>
+      <div class="tw-flex tw-items-center"
+        :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : ''">
+        <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : ''">
+          <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+        </div>
+        <div class="tw-justify-between tw-items-center" :class="{
+          'tw-flex tw-w-full': isSongsPage,
+          'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
+          'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
+        }">
+          <a v-if="isSongsPage" 
+            :href="songsPageLink.url" 
+            class="tw-text-[#002039] dark:tw-text-[#9EC0DC] tw-text-sm sm:tw-text-base tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current" 
+          >
+            <span class="tw-uppercase">{{ songsPageLink.text }}</span>
+            <i class="fa-solid fa-chevron-right tw-ml-1"></i>
+          </a>
+          <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
+            :ctas="secondaryCtas" />
         </div>
       </div>
-      <PageHeaderProgressBar v-if="progress" :progress="progress" />
+      <PageHeaderProgressBar v-if="progress" :progress="progress" class="tw-mt-4">
+        <template #progress-text v-if="isLearningPathPage || isLearningPathLevelPage || isLearningPathCoursePage">
+          <span>{{ `${progressLabelText} - ` }}</span>
+        </template>
+      </PageHeaderProgressBar>
     </template>
   </PageHeaderLayout>
 </template>
@@ -54,23 +59,9 @@ import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
 import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
 import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
-import ProgressText from './ProgressBar/ProgressText.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
-
-import SongRequest from '../Songs/SongRequestNew.vue';
-import ResetProgressCta from './Ctas/ResetProgressCta.vue';
-import DownloadResourcesCta from './Ctas/DownloadResourcesCta.vue';
-import PageHeaderCta from './PageHeaderCta.vue';
-
-
-const componentMap = {
-  ResetProgressCta,
-  DownloadResourcesCta,
-  PageHeaderCta,
-  SongRequest
-};
-
-const resolveComponent = (type) => componentMap[type];
+import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
+import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
 const props = defineProps({
   pageType: String,
@@ -79,9 +70,11 @@ const props = defineProps({
   title: String,
   subTitle: String,
   heroImg: String,
+  heroImgClasses: String,
   additionalImgSrc: String,
   darkModeLogo: String,
   lightModeLogo: String,
+  progressLabelText: String,
   progress: {
     type: [Number, String],
     default: null,
@@ -91,19 +84,54 @@ const props = defineProps({
   description: String,
 });
 
-const primaryCtaProps = computed(() => props.ctas?.find(cta => cta.type === 'primary')?.props || {});
-const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
+const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
+const primaryCtaProps = computed(() => primaryCta.value?.props || {});
+const primaryCtaIcon = computed(() => primaryCtaProps.value.faIconClass);
 const primaryCtaText = computed(() => primaryCtaProps.value.text);
 const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
-const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'primary') || []);
+const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'PageHeaderPrimaryCta') || []);
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
-
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
-const isSongs = computed(() => props.pageType === 'songs');
+const isDashboardPage = computed(() => props.pageType === 'dashboard')
+const isNotificationsPage = computed(() => props.pageType === 'notifications')
 
-const ctasAndInfoInsideHero = computed(() => !isSongs.value);
+const isCoachPage = computed(() => props.pageType === 'instructor')
+const isCoursePage = computed(() => props.pageType === 'course')
+const isPackOverviewPage = computed(() => props.pageType === 'pack')
+const isPackBundlePage = computed(() => props.pageType === 'pack-bundle')
+const isSongsPage = computed(() => props.pageType === 'songs');
+
+const isLivePage = computed(() => props.pageType === 'live');
+const isSchedulePage = computed(() => props.pageType === 'schedule');
+const isLearningPathPage = computed(() => props.pageType === 'learning-path');
+
+const isLearningPathLevelPage = computed(() => props.pageType === 'learning-path-level');
+const isLearningPathCoursePage = computed(() => props.pageType === 'learning-path-course');
+
+const isStudentReviewPage = computed(() => props.pageType === 'student-review');
+const isStudentFocusPage = computed(() => props.pageType === 'student-focus');
+const isStudentFocusCatalougePage = computed(() => isStudentReviewPage.value || isStudentFocusPage.value);
+
+const isForumsPage = computed(() => props.pageType === 'forums');
+const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
+
+const isPlaylistsPage = computed(() => props.pageType === 'playlists');
+
+const songsPageLink = computed(() => props.pageType === 'songs' ? props.infoData : null);
+
+// const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value || isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
+
+const ctasAndInfoInsideHero = false;
+
+// const progressBarData = computed(() => {
+//   return {
+//     progress: props.progress,
+//     labelText: props.progressLabelText,
+//     alwaysShow: isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value
+//   };
+// });
 
 const logo = computed(() => {
   return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;
@@ -112,5 +140,11 @@ const logo = computed(() => {
 onUpdated(() => {
   isDarkMode.value = JSON.parse(localStorage.getItem("darkMode"));
 })
-
 </script>
+<style lang="scss" scoped>
+.ctas-container {
+  ::v-deep>* {
+    margin-top: 0.5rem;
+  }
+}
+</style>

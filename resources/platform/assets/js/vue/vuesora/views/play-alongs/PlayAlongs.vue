@@ -11,7 +11,7 @@
                     class="tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border tw-border-[#CBCBCD] dark:tw-border-white tw-rounded-full"
                     :class="isShuffle ? 'tw-border-[#000C17] tw-bg-[#000C17] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17]' : 'hover:tw-border-[#000C17] hover:tw-bg-[#000C17] hover:dark:tw-bg-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-text-[#000C17] dark:tw-text-white tw-bg-white dark:tw-bg-transparent'"
                     title="Toggle Shuffle" @click="toggleShuffle">
-                    <i class="fas fa-random"></i>
+                    <musora-icon icon-name="random" class="tw-w-5 tw-h-5" />
                 </button>
             </template>
         </CollectionFilterWrapper>
@@ -80,7 +80,9 @@ import InputLabel from "../../../components/InputLabel/InputLabel.vue";
 import { bgColor, textColor } from "../../../../constants/brands";
 import { useFilterValues } from "../../../hooks/useFilterValues";
 import { useUserStore } from '../../../../stores/user.js';
+import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue';
 const { getFilterValues } = useFilterValues();
+
 
 export default {
     name: 'PlayAlongs',

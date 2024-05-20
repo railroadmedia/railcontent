@@ -4,15 +4,14 @@
     <title>{{ $pack->fetch('fields.title') }} | Musora</title>
 @endsection
 
-
 @php
     $ctas = [
         [
-            'type' => 'primary',
+            'type' => 'PageHeaderPrimaryCta',
             'props' => [
                 'text' => $pack->fetch('primary_cta_text'),
                 'url' => $pack->fetch('primary_cta_url'),
-                'icon' => 'fa-play'
+                'faIconClass' => 'fa-play'
             ]
         ],
         
@@ -31,92 +30,38 @@
 @endphp
 
 @section('content')
-    @include('partials.bladesora.members.navigation.breadcrumbs', [
-        "pages" => [
-            [
-                "title" => "Packs",
-                "url" => url()->route('platform.packs'),
-            ],
-            [
-                "title" => $pack->fetch('fields.title'),
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            "pages" => [
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title'),
+                ]
             ]
-        ]
-    ])
+        ])
+        <page-header
+            page-type="{{ $parentContent->fetch('type') }}"
+            title="Packs"
+            hero-img="{{ $pack->fetch('data.header_image_url') }}"
+            dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
+            light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
+            :info-data="{{ json_encode($infoDataStrArr) }}"
+            :ctas="{{ $ctasJson }}"
+        >
+        </page-header>
 
-    {{-- @component('partials._header-banner', [
-        'backgroundImage' => $pack->fetch('data.header_image_url'),
-        'hideUser' => true,
-        'hideBrandGradient' => $pack['slug'] == 'piano-technique-made-easy',
-    ])
-        @slot('content')
-            <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full tw-min-h-[312px]">
+        @if(!empty($pack->fetch('*fields.instructor')) || !empty($pack->fetch('data.description')))
+            <content-info
+                :instructors="{{ json_encode($pack->fetch('*fields.instructor')) }}"
+                :content-description="{{ json_encode($pack->fetch('data.description', null)) }}"
+            ></content-info>
+        @endif
+    </div>
 
-                @if($pack['slug'] == 'piano-technique-made-easy')
-                    <div
-                        class="tw-flex tw-flex-col tw-mb-4 tw-rounded-full ba-grey-1-2 hover-border-{{ $brand }} tw-text-white hover-text-{{ $brand }} tw-cursor-pointer"
-                        data-open-modal="previewModal"
-                        style="width:80px;"
-                    >
-                        <div class="square heading">
-                            <i
-                                class="fas fa-play absolute-center"
-                                style="margin-left:2px"
-                            ></i>
-                        </div>
-                    </div>
-                    <div id="previewModal" class="modal vimeo-embedded-player">
-                        <div class="tw-flex tw-flex-col corners-10">
-                            <div class="video-wrap">
-                                <div class="widescreen">
-                                    <div class="tw-flex tw-flex-col video-player user-active">
-                                        <iframe style="max-width: 100%; width: 100%; height: 100%; position: absolute; top: 0; left: 0;z-index: 1;" src="//player.vimeo.com/video/466355774" frameborder="0" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                <img alt="{{ $pack->fetch('title') }} Logo"
-                    class="tw-w-full tw-transition-opacity tw-max-w-[300px] tw-opacity-0"
-                    src="{{ $pack->fetch('data.logo_image_url') }}"
-                    onload="this.classList.remove('tw-opacity-0')"
-                >
-            </div>
-        @endslot
-    @endcomponent --}}
-
-    <page-header
-        page-type="{{ $parentContent->fetch('type') }}"
-        title="Packs"
-        hero-img="{{ $pack->fetch('data.header_image_url') }}"
-        dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
-        light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
-        :info-data="{{ json_encode($infoDataStrArr) }}"
-        :ctas="{{ $ctasJson }}"
-    >
-    </page-header>
-
-
-    {{-- @include('partials.bladesora.members.content.content-info-subheader', [
-        "infoData" => $infoData,
-        "contentType" => "pack",
-        "contentId" => $pack->fetch('id'),
-        "resetProgress" => $pack->fetch('progress_state', false) !== false,
-        "instructorInfo" => false,
-        "downloadableResources" => $pack['resources'] ?? [],
-        'addToList' => false,
-        'isAdded' => false,
-        'brand' => '{{ $brand }}',
-    ]) --}}
-
-    @if(!empty($pack->fetch('*fields.instructor')) || !empty($pack->fetch('data.description')))
-        <content-info
-            :instructors="{{ json_encode($pack->fetch('*fields.instructor')) }}"
-            :content-description="{{ json_encode($pack->fetch('data.description', null)) }}"
-        ></content-info>
-    @endif
-
-    <div class="tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <div class="tw-flex tw-flex-col">
 
             <div class="tw-flex tw-flex-row pv-3">

@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
+use App\Modules\UserManagementSystem\Services\UserService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -14,53 +14,56 @@ use Modules\UserManagementSystem\Models\FirebaseToken;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
-use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Railroad\Railcontent\Services\CommentService;
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private CalendarService $calendarService;
-    private CommentService $commentService;
-    private PostRepository $postRepository;
     private ContentService $contentService;
-    private CustomerIoService $customerIoService;
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
+    private UserService $userService;
+    private CommentService $commentService;
+    private PostRepository $postRepository;
 
     public function __construct(
         CalendarService $calendarService,
-        CommentService $commentService,
-        PostRepository $postRepository,
         ContentService $contentService,
-        CustomerIoService $customerIoService,
         RevenueCatService $revenueCatService,
-        SubscriptionService $subscriptionService
+        SubscriptionService $subscriptionService,
+        UserService $userService,
+        CommentService $commentService,
+        PostRepository $postRepository
     ) {
         $this->calendarService = $calendarService;
-        $this->commentService = $commentService;
-        $this->postRepository = $postRepository;
         $this->contentService = $contentService;
-        $this->customerIoService = $customerIoService;
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
+        $this->userService = $userService;
+        $this->commentService = $commentService;
+        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUser(): ?User
     {
         if (user()) {
             return new User(
-                user()->id, user()->email, user()->display_name, user()->profile_picture_url ?? '', user()->phone_number
+                user()->id,
+                user()->email,
+                user()->display_name,
+                user()->profile_picture_url ?? '',
+                user()->phone_number
             );
         }
 
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $app = null)
-    : array {
+    public function getCurrentUserMembershipData(?string $app = null): array
+    {
         $user = user();
 
         $isAppleAppSubscriber = $user->has_apple_subscription;
@@ -69,35 +72,25 @@ class MusoraApiUserProvider implements UserProviderInterface
         $hasExperience = user()->onboardingExperience ? true : false;
 
         $hasGear = count(
-                user()->onboardingGear->filter(function ($item) use($user) {
-                    return $item->brand == $user->last_used_brand;
-                })
-            ) > 0;
+            user()->onboardingGear->filter(function ($item) use ($user) {
+                return $item->brand == $user->last_used_brand;
+            })
+        ) > 0;
 
         $hasTopics = count(
-                user()->onboardingTopics->filter(function ($item) use($user) {
-                    return $item->brand == $user->last_used_brand;
-                })
-            ) > 0;
+            user()->onboardingTopics->filter(function ($item) use ($user) {
+                return $item->brand == $user->last_used_brand;
+            })
+        ) > 0;
 
         $hasGenres = count(
-                user()->onboardingGenres->filter(function ($item) use($user) {
-                    return $item->brand == $user->last_used_brand;
-                })
-            ) > 0;
-
-        try {
-            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
-            $customerIoData = $this->customerIoService->getCustomerByUserId(
-                $accountName,
-                $user->id,
-            );
-        } catch (ModelNotFoundException $exception) {
-            $customerIoData = null;
-        }
+            user()->onboardingGenres->filter(function ($item) use ($user) {
+                return $item->brand == $user->last_used_brand;
+            })
+        ) > 0;
 
         $extraData = [
-            'customer_io_id' => $customerIoData?->uuid,
+            'customer_io_id' => user()->email,
         ];
 
         $branchData = $this->getAllBranchInformation();
@@ -124,8 +117,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function getCurrentUserProfileData(?string $app = null)
-    : array
+    public function getCurrentUserProfileData(?string $app = null): array
     {
         $user = user();
 
@@ -148,35 +140,26 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
-                ->first();
+            ->first();
         if ($methodContent) {
             $hasStartedMethod = $methodContent['started'];
             $hasCompletedMethod = $methodContent['completed'];
         }
 
-        try {
-            $customerIoData = $this->customerIoService->getCustomerByUserId(
-                config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
-                $user->id,
-            );
-        } catch (ModelNotFoundException $exception) {
-            $customerIoData = null;
-        }
-
         $extraData = [
-            'customer_io_id' => $customerIoData?->uuid,
+            'customer_io_id' => user()->email,
         ];
 
         $brand = brand();
         $showLearningPathsOnHomepage = false;
-        $hideSection = $brand.'_trial_section_hide';
+        $hideSection = $brand . '_trial_section_hide';
 
-        if($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
+        if ($user->is_trial && !user()->$hideSection && $user->created_at->diffInDays(now()) <= 30) {
             $hasExperienceLevels =  count(
-                    user()->onboardingExperience->filter(function ($item) use($brand) {
-                        return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
-                    })
-                ) > 0;
+                user()->onboardingExperience->filter(function ($item) use ($brand) {
+                    return $item->brand == $brand && ($item->experience_level == 0 || $item->experience_level == 1);
+                })
+            ) > 0;
             $showLearningPathsOnHomepage = ($hasExperienceLevels) ? true : false;
         }
 
@@ -236,13 +219,15 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $inUseDisplayName =
             \Modules\UserManagementSystem\Models\User::where('display_name', $displayName)
-                ->get();
+            ->get();
         $mobileEndpointVersion = (config('musora-api.api.version'));
         $mobileEndpointVersion = str_replace('v', '', $mobileEndpointVersion);
 
         if (($inUseDisplayName->count() > 0) && (strtolower($displayName) != strtolower(user()->display_name))) {
             throw new MusoraAPIException(
-                'This display name is already in use', 'Display name exist', ($mobileEndpointVersion >= 2) ? 200 : 500
+                'This display name is already in use',
+                'Display name exist',
+                ($mobileEndpointVersion >= 2) ? 200 : 500
             );
         }
 
@@ -281,7 +266,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $user = user();
         if ($user) {
-            $oldUser = clone($user);
+            $oldUser = clone ($user);
             if ($deviceType == 'ios') {
                 $user->ios_latest_review_display_date = Carbon::now();
                 $user->ios_count_review_display = $reviewCount;
@@ -312,14 +297,14 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         $passedCheck =
             auth()
-                ->guard('user-management-system')
-                ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
+            ->guard('user-management-system')
+            ->validate(['email' => $request->get('email'), 'password' => $request->get('password')]);
 
         if ($passedCheck) {
             $user =
                 \Modules\UserManagementSystem\Models\User::query()
-                    ->where(['email' => $request->get('email')])
-                    ->firstOrFail();
+                ->where(['email' => $request->get('email')])
+                ->firstOrFail();
 
             auth()->login($user);
 
@@ -345,45 +330,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->postRepository->deleteByUserId($userId);
         $this->subscriptionService->cancelAllSubscriptions($user, 'Account deleted');
 
-        $user->fill([
-            'email' => 'musora+deleted_' .
-                Carbon::now()
-                    ->getTimestamp() .
-                '@musora.com',
-            'first_name' => null,
-            'last_name' => null,
-            'display_name' => '',
-            'gender' => null,
-            'country' => null,
-            'region' => null,
-            'city' => null,
-            'birthday' => null,
-            'phone_number' => null,
-            'profile_picture_url' => null,
-            'timezone' => null,
-            'permission_level' => null,
-            'drums_gear_photo' => null,
-            'biography' => null,
-            'piano_gear_photo' => null,
-            'drums_gear_set_brands' => null,
-            'drums_gear_hardware_brands' => null,
-            'drums_gear_stick_brands' => null,
-            'drums_gear_cymbal_brands' => null,
-            'drums_playing_since_year' => null,
-            'piano_gear_piano_brands' => null,
-            'piano_gear_keyboard_brands' => null,
-            'piano_playing_since_year' => null,
-
-        ]);
-        $user->email =
-            'musora+deleted_' .
-            Carbon::now()
-                ->getTimestamp() .
-            '@musora.com';
-        $user->updated_at =
-            Carbon::now()
-                ->toDateTimeString();
-        $user->save();
+        $user = $this->userService->deleteUser($user);
 
         return $user;
     }
@@ -396,11 +343,11 @@ class MusoraApiUserProvider implements UserProviderInterface
     public function getUserAfterRevenuecatPurchase($email, $password, $revenuecatOriginalAppUserId)
     {
         $user = \Modules\UserManagementSystem\Models\User::onWriteConnection()->where(
-        'revenuecat_origin_app_user_id',
-        '=',
-        $revenuecatOriginalAppUserId
-    )
-        ->first();
+            'revenuecat_origin_app_user_id',
+            '=',
+            $revenuecatOriginalAppUserId
+        )
+            ->first();
 
         if (!$user) {
             $user = $this->revenueCatService->syncSubscriber($revenuecatOriginalAppUserId, $email, true);

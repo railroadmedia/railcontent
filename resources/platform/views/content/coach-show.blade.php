@@ -1,6 +1,7 @@
 @php
     $firstLastName = preg_split('/\s+/', $thisCoach->fetch('fields.name'));
     $currentUserSubscribed = $thisCoach->fetch('current_user_is_subscribed');
+    $headerDescription = $thisCoach->fetch('data.short_bio');
 
     $ctas = [
         [
@@ -11,7 +12,8 @@
                 'payload' => [
                     'coachId' => $thisCoach->fetch('id')
                 ],
-                'faIconClass' => 'fa-bell'
+                'faIconClass' => 'fa-bell',
+                'showAllAlways' => true,
             ]
         ]
     ];
@@ -35,40 +37,31 @@
 @endsection
 
 @section('content')
-
-    @include('partials.bladesora.members.navigation.breadcrumbs', [
-        'pages' => [
-            [
-                'title' => 'Coaches',
-                'url' => url()->route('platform.coaches'),
-            ],
-            [
-                'title' => $thisCoach->fetch('fields.name'),
+    <div class=" tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        @include('partials.bladesora.members.navigation.breadcrumbs', [
+            'pages' => [
+                [
+                    'title' => 'Coaches',
+                    'url' => url()->route('platform.coaches'),
+                ],
+                [
+                    'title' => $thisCoach->fetch('fields.name'),
+                ]
             ]
-        ]
-    ])
-
-    @component('partials.bladesora.members.components.coach-header-banner', [
-        'brandName' => '{{ $brand }}',
-        'hideUser' => true,
-        'backgroundImage' => $thisCoach->fetch('data.coach_top_banner_image'),
-        'shortBio' => $thisCoach->fetch('data.short_bio'),
-        'focusArray' => \Illuminate\Support\Arr::wrap($thisCoach->fetch('data.focus_text','')),
-        'fullName' => $firstLastName,
-        'firstName' => $firstLastName[0] ?? '',
-        'lastName' => $firstLastName[1] ?? '',
-        'nameThree' => $firstLastName[2] ?? '',
-        'isUserSubscribed' => $currentUserSubscribed,
-        'coachId' => $thisCoach->fetch('id'),
-        'vimeoVideo' => $thisCoach->fetch('fields.video.fields.vimeo_video_id', null),
-        'forumUrl' => $thisCoach->fetch('fields.forum_thread_id')?($thisCoach['forum_thread']['url'] ?? ''):'',
-        'subscribeUrl' => url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
-        'unsubscribeUrl' => url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')])
         ])
-    @endcomponent
+        <page-header
+            page-type="{{ $thisCoach->fetch('type') }}"
+            :title="'{{ $thisCoach->fetch('fields.name') }}'"
+            hero-img="{{ $thisCoach->fetch('data.coach_top_banner_image') }}"
+            :info-data="{{ $infoDataStrArrJson }}"
+            :ctas="{{ $ctasJson }}"
+            description="{{ $headerDescription }}"
+        >
+        </page-header>
+    </div>
 
     @if( !empty($coachEvent) )
-        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
+        <div class=" tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-4">
             {{-- Live Banner --}}
             <coach-event
                 brand="{{ $brand }}"
@@ -83,7 +76,7 @@
     @endif
 
     @if (session()->has('success-message'))
-        <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
+        <div class="form-success-message tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-3">
             <div class="tw-flex tw-flex-col bg-success tw-shadow corners-10 pa">
                 <p class="body tw-text-white">{{ session()->get('success-message') }}</p>
             </div>
@@ -117,7 +110,7 @@
         }
     @endphp
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
         <collection-wrapper
             :limit="{{ $limitOverride ?? 18 }}"
             :pre-loaded-content="{{ $listLessons }}"

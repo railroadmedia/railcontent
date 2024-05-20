@@ -26,24 +26,24 @@ class DailySummaryNotificationsJob extends BatchQueryJob
         $this->startDate = $startDate;
     }
 
-    function getSkip(): int
+    public function getSkip(): int
     {
         return $this->skip;
     }
 
-    function getTake(): int
+    public function getTake(): int
     {
         return $this->take;
     }
 
-    function getQuery(): Builder
+    public function getQuery(): Builder
     {
         /** @var NotificationService $notificationService */
         $notificationService = App::make(NotificationService::class);
         return $notificationService->getRecipientIdsWithUnreadNotificationsQuery($this->startDate);
     }
 
-    function handleAllItems($items): bool
+    public function handleAllItems($items): bool
     {
         $recipientIds = $items->pluck('recipient_id')->all();
         /** @var BroadcastService $broadcastService */
@@ -92,7 +92,7 @@ class DailySummaryNotificationsJob extends BatchQueryJob
         return true;
     }
 
-    function handleItem($item): void
+    public function handleItem($item): void
     {
     }
 }

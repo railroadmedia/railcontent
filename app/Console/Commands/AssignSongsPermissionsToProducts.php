@@ -12,7 +12,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
-
 class AssignSongsPermissionsToProducts extends Command
 {
     /**
@@ -77,8 +76,8 @@ class AssignSongsPermissionsToProducts extends Command
 
             // for all products with a membership permission and all content access and not lifetime access
             if (count(
-                    array_intersect($allBrandsLegacyMembershipPermissionNames, $productsExistingPermissionNames)
-                ) > 0 &&
+                array_intersect($allBrandsLegacyMembershipPermissionNames, $productsExistingPermissionNames)
+            ) > 0 &&
                 $productRow->digital_access_type == 'all content access' &&
                 $productRow->digital_access_time_type != 'lifetime') {
 

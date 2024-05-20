@@ -70,6 +70,7 @@
                             @include('pianote._partials.sign-up-form', [
                             "recaptchaKey" => $recaptchaKey,
                             "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
+                            "nameInput" => true,
                             "formName" => 'Getting Started On The Piano',
                                 "buttonText" => "Get started for free",
                                 'stacked' => true,
@@ -80,9 +81,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" data-open="trailer">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
-                    </div>
+                    <img class="cursor-pointer autoplay-video" data-open="trailer" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                 </div>
             </div>
         </div>
@@ -227,12 +226,12 @@
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
                 <picture>
                     <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
-                    <img  class="h-14 sm:h-18 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo">
+                    <img  class="h-14 sm:h-16 lg:h-18 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo">
                 </picture>
-                <h2 class="my-4 md:my-5 leading-tight">
+                <h2 class="my-3 md:my-4 leading-none">
                     <strong>4 days of piano lessons</strong> to show you how easy and fun learning the piano can be.
                 </h2>
-                <p class="text-left mb-4 sm:mb-5 mx-auto inline-block sm:leading-loose">
+                <p class="text-left mb-3 sm:mb-4 mx-auto inline-block sm:leading-normal">
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> FREE Lifetime Access<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Play-along with a REAL teacher<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> No music theory knowledge required<br>
@@ -242,6 +241,7 @@
                         "recaptchaKey" => $recaptchaKey,
                         "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form2",
                         "formName" => 'Getting Started On The Piano',
+                            "nameInput" => true,
                         "buttonText" => "Get started for free",
                         'stacked' => true,
                         'inputBorder' => '1px solid #7A8491',

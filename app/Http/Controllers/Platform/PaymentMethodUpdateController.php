@@ -179,7 +179,8 @@ class PaymentMethodUpdateController extends Controller
                 $billingAddress->setBrand(config('ecommerce.brand'));
                 $billingAddress->setUser($user);
                 $billingAddress->setRegion($billingState);
-                $billingAddress->setCountry($billingCountry);;
+                $billingAddress->setCountry($billingCountry);
+                ;
 
                 $this->entityManager->persist($billingAddress);
 

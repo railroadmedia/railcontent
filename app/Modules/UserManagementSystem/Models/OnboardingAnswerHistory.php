@@ -39,18 +39,18 @@ class OnboardingAnswerHistory extends Model
     protected $table = 'onboarding_answer_history';
 
     /* we describe the question with only one term to help the data querying and data modelling process */
-    const QUESTION_GEAR = 'gear';
-    const QUESTION_TOPIC = 'topic';
-    const QUESTION_GENRE = 'genre';
-    const QUESTION_EXPERIENCE = 'experience';
-    const QUESTION_GOALS = 'goals';
-    const QUESTION_INSTRUMENT = 'instrument';
-    const QUESTION_COACH = 'coach';
+    public const QUESTION_GEAR = 'gear';
+    public const QUESTION_TOPIC = 'topic';
+    public const QUESTION_GENRE = 'genre';
+    public const QUESTION_EXPERIENCE = 'experience';
+    public const QUESTION_GOALS = 'goals';
+    public const QUESTION_INSTRUMENT = 'instrument';
+    public const QUESTION_COACH = 'coach';
 
-    const EXPERIENCE_ONE = 'Level 1';
-    const EXPERIENCE_TWO = 'Level 2-3';
-    const EXPERIENCE_THREE = 'Level 4-6';
-    const EXPERIENCE_FOUR = 'Level 7-10';
+    public const EXPERIENCE_ONE = 'Level 1';
+    public const EXPERIENCE_TWO = 'Level 2-3';
+    public const EXPERIENCE_THREE = 'Level 4-6';
+    public const EXPERIENCE_FOUR = 'Level 7-10';
 
 
     /**
@@ -65,12 +65,13 @@ class OnboardingAnswerHistory extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function setExperienceLevelAnswer(string $onboardingAnswer) {
+    public function setExperienceLevelAnswer(string $onboardingAnswer)
+    {
         if ($onboardingAnswer == '0') {
             $this->onboarding_answer = self::EXPERIENCE_ONE;
         } elseif ($onboardingAnswer == '1') {
             $this->onboarding_answer = self::EXPERIENCE_TWO;
-        } elseif ($onboardingAnswer == '2'){
+        } elseif ($onboardingAnswer == '2') {
             $this->onboarding_answer = self::EXPERIENCE_THREE;
         } elseif ($onboardingAnswer == '3') {
             $this->onboarding_answer = self::EXPERIENCE_FOUR;

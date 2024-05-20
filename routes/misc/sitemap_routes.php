@@ -9,6 +9,3 @@ Route::middleware(['web_public'])
             SiteMapController::class . '@sitemap'
         );
     });
-
-
-

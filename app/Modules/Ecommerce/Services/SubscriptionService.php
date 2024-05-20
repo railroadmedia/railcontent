@@ -15,7 +15,6 @@ use Modules\UserManagementSystem\Models\User;
 
 class SubscriptionService
 {
-
     private ProductService $productService;
     private RechargeGateway $recharge;
     private UserService $userService;

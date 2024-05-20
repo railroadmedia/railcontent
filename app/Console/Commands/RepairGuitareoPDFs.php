@@ -8,7 +8,6 @@ use Railroad\Railcontent\Events\ContentCreated;
 
 class RepairGuitareoPDFs extends Command
 {
-
     /**
      * The name and signature of the console command.
      *

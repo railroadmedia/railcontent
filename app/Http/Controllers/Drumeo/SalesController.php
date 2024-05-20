@@ -27,7 +27,6 @@ function array_entity_column(array $arrayOfEntities, $getMethodName)
 }
 class SalesController extends BaseController
 {
-
     public function ___construct()
     {
     }
@@ -73,7 +72,15 @@ class SalesController extends BaseController
     }
     public function promo()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
+    }
+    public function drumMonth()
+    {
+        return view('drumeo.sales.drum-month', ['theme' => 'drumeo', 'promoVersion' => true, 'promoPage' => 'true', ]);
+    }
+    public function restart()
+    {
+        return view('drumeo.sales.restart', ['theme' => 'drumeo']);
     }
     public function promoEG()
     {
@@ -124,7 +131,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer-4', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -139,7 +146,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -154,7 +161,7 @@ class SalesController extends BaseController
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-chops', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -163,20 +170,20 @@ class SalesController extends BaseController
 
     public function thirtyDayIndependence()
     {
-        $productId = 800;
+        $productId = 844;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
         $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-independence', [
-            'recaptchaKey'=>config('recaptcha.key'),
+            'recaptchaKey' => config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
         ]);
     }
-    
+
     public function thirtyDayDrummerDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['theme' => 'drumeo']);
@@ -271,6 +278,22 @@ class SalesController extends BaseController
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
+    public function alesisStrataCore(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrataCore' => true,
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisStrataCoreExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrataCore' => true,
+            'newAccount' => false,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
 
     public function coachTrial(Request $request, $domain, $pageC = null)
     {
@@ -313,12 +336,12 @@ class SalesController extends BaseController
 
     public function kit()
     {
-        return view('drumeo.products.kit', ['theme' => 'drumeo', 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('drumeo.products.kit', ['theme' => 'drumeo', 'recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function kitLifetime()
     {
-        return view('drumeo.products.kit', ['theme' => 'drumeo', 'membersVersion' => true, 'recaptchaKey'=>config('recaptcha.key')]);
+        return view('drumeo.products.kit', ['theme' => 'drumeo', 'membersVersion' => true, 'recaptchaKey' => config('recaptcha.key')]);
     }
 
     public function pro()

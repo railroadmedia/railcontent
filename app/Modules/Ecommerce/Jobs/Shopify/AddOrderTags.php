@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
+use App\Jobs\WebhookChildJob;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Enums\ShopifyTagEnum;
@@ -14,7 +15,6 @@ use App\Modules\Ecommerce\Models\Shopify\Rest\OrderLineItem;
 use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
-class AddOrderTags implements ShouldQueue
+class AddOrderTags extends WebhookChildJob
 {
     use Batchable;
     use Dispatchable;
@@ -102,7 +102,7 @@ class AddOrderTags implements ShouldQueue
         });
 
         // remove this order
-        return $customerOrders->filter(fn(Order $order) => $order->id != $this->order->id);
+        return $customerOrders->filter(fn (Order $order) => $order->id != $this->order->id);
     }
 
     /**
@@ -125,7 +125,7 @@ class AddOrderTags implements ShouldQueue
 
         // ensure that this trial product had 0 cost
         return $order->lineItems
-            ->filter(fn(OrderLineItem $lineItem) => $lineItem->isTrial() && $lineItem->totalPrice == 0)
+            ->filter(fn (OrderLineItem $lineItem) => $lineItem->isTrial() && $lineItem->totalPrice <= 0)
             ->isNotEmpty();
     }
 
@@ -165,19 +165,19 @@ class AddOrderTags implements ShouldQueue
         $recentDaysStart->subDays($this->trialConversionDayLimit);
         $recentOrders = $this->otherOrders
             ->filter(
-                fn(Order $otherOrder) => $otherOrder->processedAt->isBetween(
+                fn (Order $otherOrder) => $otherOrder->processedAt->isBetween(
                     $recentDaysStart,
                     $this->order->processedAt
                 )
             );
 
         $hasRecentTrialStart = $recentOrders
-            ->filter(fn(Order $otherOrder) => $this->isTrialStart($otherOrder))
+            ->filter(fn (Order $otherOrder) => $this->isTrialStart($otherOrder))
             ->isNotEmpty();
 
         // and make sure there weren't other payments in that period
         $noRecentMembershipPayment = $recentOrders
-            ->filter(fn(Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
+            ->filter(fn (Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
             ->isEmpty();
 
         return $hasRecentTrialStart && $noRecentMembershipPayment;
@@ -215,7 +215,7 @@ class AddOrderTags implements ShouldQueue
         // ensure we have a previous order that was a membership payment, to determine that this is a renewal of it
         /** @var Product $membershipProduct */
         $membershipProduct = $this->order->lineItems
-            ->filter(fn(OrderLineItem $lineItem) => $lineItem->isMembership())
+            ->filter(fn (OrderLineItem $lineItem) => $lineItem->isMembership())
             ->first()
             ->product;
         // annual or monthly, with the buffer
@@ -225,12 +225,12 @@ class AddOrderTags implements ShouldQueue
 
         return $this->otherOrders
             ->filter(
-                fn(Order $otherOrder) => $otherOrder->processedAt->isBetween(
+                fn (Order $otherOrder) => $otherOrder->processedAt->isBetween(
                     $historyPeriodStartDate,
                     $this->order->processedAt
                 )
             )
-            ->filter(fn(Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
+            ->filter(fn (Order $otherOrder) => $otherOrder->totalPrice > 0 && $otherOrder->isMembershipOrder())
             ->isNotEmpty();
     }
 
@@ -290,7 +290,7 @@ class AddOrderTags implements ShouldQueue
         $tagsToAdd = $this->sanitizeTags($tagsToAdd);
 
         // remove any that already exist on the order
-        $tagsToAdd = $tagsToAdd->reject(fn(string $tag) => in_array($tag, $this->order->tags));
+        $tagsToAdd = $tagsToAdd->reject(fn (string $tag) => in_array($tag, $this->order->tags));
 
         $gql = <<<GQL
                 mutation {

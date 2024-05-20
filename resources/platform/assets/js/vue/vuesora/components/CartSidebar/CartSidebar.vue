@@ -86,21 +86,6 @@
             <div class="checkout text-center">
                 <a :href="checkoutUrl" :class="brand"><i class="fas fa-lock mr-2"></i>checkout</a>
             </div>
-<!--            <div v-if="!locked" class="recommended-title">-->
-<!--                <div>customers also liked</div>-->
-<!--            </div>-->
-<!--            <div class="recommended-products" v-if="cartItems && !locked">-->
-<!--                <div class="recommended-products-wrapper">-->
-<!--                    <recommended-product-->
-<!--                        v-for="item in recommendedProducts"-->
-<!--                        :key="item.sku"-->
-<!--                        :item="item"-->
-<!--                        :brand="brand"-->
-<!--                        :loading="loading"-->
-<!--                        @addToCart="addRecommendedProductToCart"-->
-<!--                    ></recommended-product>-->
-<!--                </div>-->
-<!--            </div>-->
         </section>
     </div>
 </template>
@@ -124,9 +109,6 @@ export default {
             type: String,
             default: () => 'drumeo',
         },
-        // cartData: {
-        //     item: String,
-        // },
         cartDataUrl: {
             type: String,
         },

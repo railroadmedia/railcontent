@@ -348,7 +348,8 @@ Route::domain('{musoraDomain}')
                     )
                     ->name('platform.content.first-level');
 
-                Route::get('/{brand}/songs-upgrade',
+                Route::get(
+                    '/{brand}/songs-upgrade',
                     [SongsUpgradeController::class, 'index']
                 )->name('platform.songs-upgrade');
 
@@ -462,7 +463,7 @@ Route::domain('{musoraDomain}')
          * Primary Content Pages
          */
         Route::get('/{brand}/packs', [PackPagesController::class, 'index'])
-            ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
+            ->whereIn('brand', all_brands())
             ->name('platform.packs');
 
         Route::get('/{brand}/search', [ContentPagesController::class, 'search'])
@@ -476,14 +477,17 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.packs.first-level');
 
-        Route::get('/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
-                   [PackPagesController::class, 'packBundleLessons'])
+        Route::get(
+            '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
+            [PackPagesController::class, 'packBundleLessons']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.packs.second-level');
 
         Route::get(
             '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}/{packBundleLessonSlug}/{packBundleLessonId}',
-            [PackPagesController::class, 'packBundleLesson'])
+            [PackPagesController::class, 'packBundleLesson']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.packs.third-level');
 
@@ -555,8 +559,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.profile');
 
-        Route::get('/{brand}/profile/{userId}/settings/login-credentials',
-                   [ProfileSettingsPagesController::class, 'loginCredentials'])
+        Route::get(
+            '/{brand}/profile/{userId}/settings/login-credentials',
+            [ProfileSettingsPagesController::class, 'loginCredentials']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.login-credentials');
 
@@ -564,8 +570,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.payments');
 
-        Route::get('/{brand}/profile/{userId}/settings/notifications',
-                   [ProfileSettingsPagesController::class, 'notifications'])
+        Route::get(
+            '/{brand}/profile/{userId}/settings/notifications',
+            [ProfileSettingsPagesController::class, 'notifications']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.notifications');
 
@@ -591,38 +599,50 @@ Route::domain('{musoraDomain}')
          * Cancellation-related
          */
         // POST accept-annual-offer
-        Route::post('/{brand}/profile/settings/account/accept-annual-offer',
-                    [ProfileSettingsPagesController::class, 'acceptAnnualOffer'])
+        Route::post(
+            '/{brand}/profile/settings/account/accept-annual-offer',
+            [ProfileSettingsPagesController::class, 'acceptAnnualOffer']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.accept-annual-offer');
 
         // POST resume-paused
-        Route::post('/{brand}/profile/settings/account/resume-paused',
-                    [ProfileSettingsPagesController::class, 'resumePaused'])
+        Route::post(
+            '/{brand}/profile/settings/account/resume-paused',
+            [ProfileSettingsPagesController::class, 'resumePaused']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.resume-paused');
 
         // POST submit-cancel-reason
-        Route::post('/{brand}/profile/settings/account/submit-cancel-reason',
-                    [ProfileSettingsPagesController::class, 'submitCancelReason'])
+        Route::post(
+            '/{brand}/profile/settings/account/submit-cancel-reason',
+            [ProfileSettingsPagesController::class, 'submitCancelReason']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.submit-cancel-reason');
 
         // POST accept student-plan offer
-        Route::post('/{brand}/profile/settings/account/student-plan-offer',
-                    [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer'])
+        Route::post(
+            '/{brand}/profile/settings/account/student-plan-offer',
+            [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.student-plan-offer');
 
         // POST accept switch-to-monthly offer
-        Route::post('/{brand}/profile/settings/account/switch-to-monthly',
-                    [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly'])
+        Route::post(
+            '/{brand}/profile/settings/account/switch-to-monthly',
+            [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.switch-to-monthly');
 
         // POST accept student-plan offer
-        Route::post('/{brand}/profile/settings/account/gratis-access',
-                    [ProfileSettingsPagesController::class, 'acceptGratisAccess'])
+        Route::post(
+            '/{brand}/profile/settings/account/gratis-access',
+            [ProfileSettingsPagesController::class, 'acceptGratisAccess']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.gratis-access');
 
@@ -648,14 +668,18 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.decline-offer-proceed-with-cancel');
 
-        Route::post('/{brand}/profile/settings/account/send-help-email',
-                    [ProfileSettingsPagesController::class, 'sendHelpEmail'])
+        Route::post(
+            '/{brand}/profile/settings/account/send-help-email',
+            [ProfileSettingsPagesController::class, 'sendHelpEmail']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.send-help-email');
 
         // GET cancel-reason-form
-        Route::get('/{brand}/profile/settings/account/cancel',
-                   [ProfileSettingsPagesController::class, 'cancelReasonForm'])
+        Route::get(
+            '/{brand}/profile/settings/account/cancel',
+            [ProfileSettingsPagesController::class, 'cancelReasonForm']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.cancel');
 
@@ -668,8 +692,10 @@ Route::domain('{musoraDomain}')
         // (end of cancellation-related)
         // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
 
-        Route::get('/{brand}/profile/{userId}/settings/payment-invoice/{id}',
-                   [ProfileSettingsPagesController::class, 'showInvoiceForPayment'])
+        Route::get(
+            '/{brand}/profile/{userId}/settings/payment-invoice/{id}',
+            [ProfileSettingsPagesController::class, 'showInvoiceForPayment']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.payment-invoice');
 
@@ -691,13 +717,17 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('forums.show-all-latest-threads');
 
-        Route::get('/{brand}/forums/threads/{categorySlug}/{categoryId}',
-                   [ForumPagesController::class, 'showCategoryThreads'])
+        Route::get(
+            '/{brand}/forums/threads/{categorySlug}/{categoryId}',
+            [ForumPagesController::class, 'showCategoryThreads']
+        )
             ->whereIn('brand', all_brands())
             ->name('forums.show-category-threads');
 
-        Route::get('/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
-                   [ForumPagesController::class, 'showThreadPosts'])
+        Route::get(
+            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
+            [ForumPagesController::class, 'showThreadPosts']
+        )
             ->whereIn('brand', all_brands())
             ->name('forums.show-thread-posts');
 
@@ -783,7 +813,7 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['pianote'])
             ->name('platform.books.resources.chapter');
 
-//        //todo: to be moved outside members area
+        //        //todo: to be moved outside members area
         //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
@@ -797,12 +827,15 @@ Route::domain('{musoraDomain}')
             ->name('platform.request-song');
 
         Route::get('/{brand}/enrollment/{cohort}', [CohortPackController::class, 'template'])
-            ->name('platform.cohort');
+            ->name('platform.cohort')
+            ->middleware(
+                [Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class]
+            );
 
         Route::get('/{brand}/enrollment/{cohort}/purchased', [CohortPackController::class, 'purchased'])
             ->name('platform.cohort.purchased');
 
-        Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )
+        Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'])
             ->name('platform.cohort.register');
 
         // New playlists
@@ -850,16 +883,16 @@ Route::get(
 )
     ->name('platform.android-association-file');
 
-    Route::domain('{musoraDomain}')
-    ->middleware(['web_authenticated'])
-    ->group(function () {
-        /*
-         * Home Page
-         */
-        Route::get('/{brand}/comments', [\App\Http\Controllers\Platform\CommentModerationController::class, 'comments'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.members-area.comments');
-    });
+Route::domain('{musoraDomain}')
+->middleware(['web_authenticated'])
+->group(function () {
+    /*
+     * Home Page
+     */
+    Route::get('/{brand}/comments', [\App\Http\Controllers\Platform\CommentModerationController::class, 'comments'])
+        ->whereIn('brand', all_brands())
+        ->name('platform.members-area.comments');
+});
 
 Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
@@ -884,8 +917,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo'])
             ->name('books.best-beginner-drum-book');
 
-        Route::get('/{brand}/bestbook/play-alongs',
-                   [\App\Http\Controllers\Platform\BooksController::class, 'bestBeginnerPlayAlongs'])
+        Route::get(
+            '/{brand}/bestbook/play-alongs',
+            [\App\Http\Controllers\Platform\BooksController::class, 'bestBeginnerPlayAlongs']
+        )
             ->whereIn('brand', ['drumeo'])
             ->name('books.best-beginner-drum-book.play-alongs');
 

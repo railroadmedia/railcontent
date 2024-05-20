@@ -4,19 +4,9 @@
     <title> {{ ucfirst($brand) }} Search | {{ $searchTerm }} | Musora</title>
 @endsection
 
-@section('layout-styles')
-    <style>
-        .search-button-col {
-            flex: 0 0 50px;
-            max-width:50px;
-            min-width:50px;
-        }
-    </style>
-@endsection
-
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-py-12">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-py-12">
         <div class="tw-flex tw-flex-col ">
 
             <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">

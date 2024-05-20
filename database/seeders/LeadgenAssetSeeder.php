@@ -4690,14 +4690,14 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
         ];
 
 
-        foreach($leadgens as $leadgen){
+        foreach($leadgens as $leadgen) {
             $newLeadgen = Leadgen::query()->where('brand_id', $leadgen['brand_id'])->where('title', $leadgen['title'])->first();
 
-            foreach($leadgen['lessons'] as $key => $lesson){
+            foreach($leadgen['lessons'] as $key => $lesson) {
                 $newLesson = LeadgenLesson::query()->where('leadgen_id', $newLeadgen->id)->where('slug', $lesson['slug'])->first();
 
-                if(count($lesson['assets']) > 0){
-                    foreach($lesson['assets'] as $asset){
+                if(count($lesson['assets']) > 0) {
+                    foreach($lesson['assets'] as $asset) {
                         LeadgenLessonAsset::create([
                             'leadgen_lesson_id' => $newLesson->id,
                             'title' => $asset['title'],
@@ -4707,17 +4707,17 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
                     }
                 }
 
-//                if(!empty($lesson['assignments']) && count($lesson['assignments']) > 0){
-//                    foreach($lesson['assignments'] as $asset){
-//                        LeadgenLessonAssignment::create([
-//                            'leadgen_lesson_id' => $newLesson->id,
-//                            'title' => $asset['title'],
-//                            'subtitle' => $asset['subtitle'] ?? null,
-//                            'src' => $asset['src'] ?? null,
-//                            'soundslice' => $asset['soundslice'] ?? null,
-//                        ]);
-//                    }
-//                }
+                //                if(!empty($lesson['assignments']) && count($lesson['assignments']) > 0){
+                //                    foreach($lesson['assignments'] as $asset){
+                //                        LeadgenLessonAssignment::create([
+                //                            'leadgen_lesson_id' => $newLesson->id,
+                //                            'title' => $asset['title'],
+                //                            'subtitle' => $asset['subtitle'] ?? null,
+                //                            'src' => $asset['src'] ?? null,
+                //                            'soundslice' => $asset['soundslice'] ?? null,
+                //                        ]);
+                //                    }
+                //                }
             }
         }
     }

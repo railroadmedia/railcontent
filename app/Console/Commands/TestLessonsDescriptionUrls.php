@@ -17,7 +17,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class TestLessonsDescriptionUrls extends Command
 {
-
     /**
      * The console command name.
      *
@@ -65,13 +64,13 @@ class TestLessonsDescriptionUrls extends Command
                 ->where('railcontent_content_data.value', 'like', '%www.guitareo.com%')
                 ->where('brand', 'guitareo')
                 ->get();
-//
-//        $contentRows =
-//                        $connection->table('railcontent_content')
-//                            ->join('railcontent_comments', 'railcontent_comments.content_id', '=', 'railcontent_content.id')
-//                            ->where('railcontent_comments.comment', 'like', '%www.drumeo.com%')
-//                            ->where('railcontent_content.brand', 'drumeo')
-//                            ->get();
+        //
+        //        $contentRows =
+        //                        $connection->table('railcontent_content')
+        //                            ->join('railcontent_comments', 'railcontent_comments.content_id', '=', 'railcontent_content.id')
+        //                            ->where('railcontent_comments.comment', 'like', '%www.drumeo.com%')
+        //                            ->where('railcontent_content.brand', 'drumeo')
+        //                            ->get();
         config()->set('railcontent.brand', 'guitareo');
 
         foreach ($contentRows as $row) {

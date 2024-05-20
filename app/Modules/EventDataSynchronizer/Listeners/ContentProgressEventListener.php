@@ -412,14 +412,14 @@ class ContentProgressEventListener
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
 
         if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds) && $mediaPlaybackTracked->secondsPlayed > 0) {
-//            $min = $this->userMetricsService->getTotalMinutesPracticed(
-//                $mediaPlaybackTracked->userId,
-//                $assignmentTypeIds
-//            );
+            //            $min = $this->userMetricsService->getTotalMinutesPracticed(
+            //                $mediaPlaybackTracked->userId,
+            //                $assignmentTypeIds
+            //            );
             $userBrandMinutesPracticed = user()->brand_minutes_practiced;
             $brand = config('railcontent.brand');
             $initialValue = $userBrandMinutesPracticed[$brand] ?? 0;
-            $min = ($initialValue + round( $mediaPlaybackTracked->secondsPlayed/60, 0));
+            $min = ($initialValue + round($mediaPlaybackTracked->secondsPlayed / 60, 0));
             $userBrandMinutesPracticed[$brand] = $min;
             user()->brand_minutes_practiced = $userBrandMinutesPracticed;
             user()->save();
@@ -435,7 +435,7 @@ class ContentProgressEventListener
         if ($soundslice && ($mediaPlaybackTracked->typeId == $soundslice->id)) {
             $maxMinutesToTrack = 600;
 
-            $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
+            $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
                 $mediaPlaybackTracked->userId,
                 $mediaPlaybackTracked->mediaId,
                 $mediaPlaybackTracked->typeId
@@ -476,7 +476,7 @@ class ContentProgressEventListener
         if ($playAlong && ($mediaPlaybackTracked->typeId == $playAlong->id)) {
             $maxMinutesToTrack = 600;
 
-            $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
+            $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
                 $mediaPlaybackTracked->userId,
                 $mediaPlaybackTracked->mediaId,
                 $mediaPlaybackTracked->typeId
@@ -518,10 +518,10 @@ class ContentProgressEventListener
             $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId)
                 ->toArray();
 
-        $lengthInSeconds = (integer)$mediaPlaybackTracked->mediaLengthInSeconds;
+        $lengthInSeconds = (int)$mediaPlaybackTracked->mediaLengthInSeconds;
 
         foreach ($vimeoIdFields as $content) {
-            $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
+            $totalTimeWatchedSeconds = (int)$this->mediaPlaybackRepository->sumTotalPlayed(
                 $mediaPlaybackTracked->userId,
                 $mediaPlaybackTracked->mediaId,
                 $mediaPlaybackTracked->typeId

@@ -2,7 +2,6 @@
 
 namespace Modules\UserManagementSystem\Events;
 
-
 class OnboardingInstrumentUpdated
 {
     private int $userId;

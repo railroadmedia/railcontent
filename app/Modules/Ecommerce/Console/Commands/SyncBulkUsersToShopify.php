@@ -8,7 +8,6 @@ use Carbon\Carbon;
 
 class SyncBulkUsersToShopify extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -53,7 +52,7 @@ class SyncBulkUsersToShopify extends Command
     public function handle(): int
     {
         $this->info(sprintf("Starting SyncBulkUsersToShopify at %s", Carbon::now()->toString()));
-        if (!$this->getIsExecuting()){
+        if (!$this->getIsExecuting()) {
             $this->info("Executing in simulation mode. The source jsonl files will be created, but not processed."
                 ." Please check the logs for results of the SyncBulkUsersToShopify jobs to get the file names for"
                 ." your review.  Use --execute to run for real.");

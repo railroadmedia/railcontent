@@ -10,7 +10,6 @@ use Railroad\Railcontent\Services\ContentService;
 
 class SoftDeleteOldSingeoSongs extends Command
 {
-
     /**
      * The console command name.
      *
@@ -46,7 +45,7 @@ class SoftDeleteOldSingeoSongs extends Command
                 ->select('id', 'type')
                 ->where('brand', 'singeo')
                 ->where('type', 'song')
-                ->where('id','<=',365586)
+                ->where('id', '<=', 365586)
                 ->orderBy('id', 'asc');
 
         $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService, $contentHierarchyService) {

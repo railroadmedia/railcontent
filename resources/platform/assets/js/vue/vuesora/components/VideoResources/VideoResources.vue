@@ -220,7 +220,7 @@
 
             <ModalRenderer v-if="showShareModal" @onClose="handleOpenModal"
                            key="ModalRendererOnVideoResource">
-                <div class="tw-relative tw-container tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center">
+                <div class="tw-relative tw-w-full 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-h-full tw-flex tw-justify-center tw-items-center">
                     <button @click="handleOpenModal" aria-label="Close share modal"
                             class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
                         <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />

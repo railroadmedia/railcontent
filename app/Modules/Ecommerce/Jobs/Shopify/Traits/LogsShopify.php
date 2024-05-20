@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Log;
 
 trait LogsShopify
 {
-
     /**
      * Log the given info message
      *

@@ -1,9 +1,9 @@
 @if(!empty(user()))
     <div
-        class="tw-w-full bg-grey-2 dark:tw-bg-[#002039] relative"
+        class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-relative tw-mt-2"
         style="z-index:2;"
     >
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-py-4">
+        <div class="tw-rounded-md tw-w-full bg-grey-2 dark:tw-bg-[#002039] tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-py-4">
             <div class="tw-flex tw-flex-row tw-justify-center tw-flex-wrap tw-w-full nmh-1">
                 <div class="flex flex-column xs-12 sm-6 md-5 pa-1">
                     <div class="flex flex-row">
@@ -75,64 +75,5 @@
                 :lesson-page="false">
             </email-form>
         @endif
-        {{--<form--}}
-            {{--action="{{ url()->route('books.resources.ask-question') }}"--}}
-            {{--method="POST"--}}
-            {{--accept-charset="UTF-8"--}}
-        {{-->--}}
-            {{--<input type="hidden" name="_method" value="post">--}}
-            {{--<input type="hidden" name="level" value="{{ $level ?? 'Foundations Resources' }}">--}}
-
-            {{--{{ csrf_field() }}--}}
-
-            {{--<div class="form-group mb-2">--}}
-                {{--<input--}}
-                    {{--type="text"--}}
-                    {{--name="email"--}}
-                    {{--id="emailInput"--}}
-                    {{--@if(!empty(current_user()))--}}
-                    {{--value="{{ current_user()->getEmail() }}"--}}
-                    {{--readonly--}}
-                    {{--@endif--}}
-                    {{--required--}}
-                {{-->--}}
-                {{--<label--}}
-                    {{--for="emailInput"--}}
-                    {{--class="pianote"--}}
-                {{-->--}}
-                    {{--Email Address:--}}
-                {{--</label>--}}
-            {{--</div>--}}
-
-            {{--<div class="form-group mb-2">--}}
-                {{--<textarea--}}
-                    {{--name="question"--}}
-                    {{--id="questionInput"--}}
-                    {{--placeholder="Enter you question here..."--}}
-                    {{--required--}}
-                    {{--class="mb-2"--}}
-                {{--></textarea>--}}
-            {{--</div>--}}
-
-            {{--<div class="flex flex-row align-h-right">--}}
-                {{--<button--}}
-                    {{--class="btn collapse-150 short close-modal mr-1"--}}
-                    {{--type="reset"--}}
-                {{-->--}}
-                    {{--<span class="bg-black flat text-black">--}}
-                        {{--Cancel--}}
-                    {{--</span>--}}
-                {{--</button>--}}
-
-                {{--<button--}}
-                    {{--class="btn collapse-200 short"--}}
-                    {{--type="submit"--}}
-                {{-->--}}
-                    {{--<span class="bg-pianote text-white">--}}
-                        {{--Submit--}}
-                    {{--</span>--}}
-                {{--</button>--}}
-            {{--</div>--}}
-        {{--</form>--}}
     </div>
 </div>

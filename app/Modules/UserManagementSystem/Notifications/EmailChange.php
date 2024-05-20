@@ -66,7 +66,7 @@ class EmailChange extends Notification
      */
     protected function buildMailMessage()
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Musora Account Email Change Link')
             ->view(
                 'user-management-system::emails.general-email',
@@ -79,7 +79,8 @@ class EmailChange extends Notification
                         'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
                         'display-name' => user()->display_name
                     ]
-                ])
+                ]
+            )
             ->from('support@musora.com', 'Musora');
     }
 
