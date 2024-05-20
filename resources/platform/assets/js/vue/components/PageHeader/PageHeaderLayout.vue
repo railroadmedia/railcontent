@@ -5,7 +5,7 @@
                 <slot name="top-left"></slot>
             </div>
             <!-- only use this div if top-right is used -->
-            <div v-if="$slots['top-right']" class="tw-flex tw-py-1">
+            <div v-if="$slots['top-right']" class="tw-flex tw-py-1 tw-my-2">
                 <slot name="top-right"></slot>
             </div>
         </div>

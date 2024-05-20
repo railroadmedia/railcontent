@@ -14,7 +14,7 @@
             <p class="tw-text-sm tw-mb-4 tw-text-[#00101D] dark:tw-text-white">
                 Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.
             </p>
-            <email-form
+            <EmailForm
                 :recipient="emailRecipient"
                 :email-logo="emailLogo"
                 :email-subject="`Question Asked by: ${userStore.userDisplayName} ${userStore.userEmail}`"
@@ -25,8 +25,9 @@
                 :email-alert="`Question Asked by: ${userStore.userDisplayName} ${userStore.userEmail}`"
                 :theme-color="brand"
                 success-message="Question successfully sent!"
-                :lesson-page="false">
-            </email-form>
+                :lesson-page="false"
+                @closeForm="handleClose"
+            />
         </InfoModal>
     </div>
 </template>
