@@ -223,8 +223,17 @@ export default {
                             });
 
                             this.$emit('formSuccess');
+                            this.$emit('closeForm');
 
                             window.closeAllModals();
+                        } else {
+                            Toasts.push({
+                                icon: 'sad',
+                                title: 'Whoops!',
+                                themeColor: this.themeColor,
+                                message: 'There was an Error Submitting the email. Please try again later or contact <a class="tw-underline" href="support">support</a>.',
+                            });
+                            this.$emit('closeForm');
                         }
 
                         this.loading = false;
