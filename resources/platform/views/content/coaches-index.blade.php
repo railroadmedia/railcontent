@@ -29,10 +29,10 @@
         header-description="{{ $headerDescription }}"
         :coach-event="{{ $coachEvent }}"
         @if(!empty($coachEvent))
-            current-date="{{ $currentDate }}"
-            subscription-calendar-id="{{ $currentEventCalendarId }}"
-            youtube-event-id="{{ $youtubeId }}"
-            :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+            coach-event-current-date="{{ $currentDate }}"
+            coach-event-subscription-calendar-id="{{ $currentEventCalendarId }}"
+            coach-event-youtube-event-id="{{ $youtubeId }}"
+            :coach-event-time-cutoff-minutes="{{ $timeCutoffMinutes }}"
             event-coach-profile-url="{{ $eventCoachProfileUrl }}"
         @endif
         :has-featured-coaches="{{ json_encode($hasFeaturedCoaches) }}"

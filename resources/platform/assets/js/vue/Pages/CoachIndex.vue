@@ -13,10 +13,10 @@
     <div v-if="hasCoachEvent" class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-4">
         <CoachEvent
             :preloaded-content="coachEvent"
-            :current-date-string="currentDateString"
-            :subscription-calendar-id="subscriptionCalendarId"
-            :youtube-event-id="youtubeEventId"
-            :time-cutoff-minutes="timeCutoffMinutes"
+            :current-date-string="coachEventCurrentDateString"
+            :subscription-calendar-id="coachEventSubscriptionCalendarId"
+            :youtube-event-id="coachEventYoutubeEventId"
+            :time-cutoff-minutes="coachEventTimeCutoffMinutes"
         />
     </div>
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl">
@@ -144,7 +144,7 @@ const props = defineProps({
     collectionType: {
         default: '',
     },
-    currentDateString: {
+    coachEventCurrentDateString: {
         type: String,
         default: () => "",
     },
@@ -176,11 +176,11 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    subscriptionCalendarId: {
+    coachEventSubscriptionCalendarId: {
         type: String,
         default: () => "",
     },
-    timeCutoffMinutes: {
+    coachEventTimeCutoffMinutes: {
         type: Number,
         default: () => 0,
     },
@@ -192,7 +192,7 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    youtubeEventId: {
+    coachEventYoutubeEventId: {
         type: String,
         default: () => "",
     },
