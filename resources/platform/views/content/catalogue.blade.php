@@ -195,17 +195,16 @@
             ];
         }
     }
-    else if ($catalogueMeta['name'] == 'Q&A') {
+    else if ($catalogueMeta['name'] == 'Q&A' || $catalogueMeta['name'] == 'Q & A') {
         $headerData['type'] = 'qanda';
         $headerData['title'] = 'Q&A';
         $headerData['iconName'] = 'question-mark-circle';
-        $headerData['description'] = 'Submit your questions using the button, in the Q&A thread in the forums, or live in the community chat.';
+        $headerData['description'] = 'Submit your questions using the "Ask A Question" button, in the Q&A thread in the forums, or live in the community chat.';
         $headerData['ctas'][] = [
-            'type' => 'PageHeaderCta',
+            'type' => 'AskAQuestionCta',
             'props' => [
-                'text' => 'Ask A Question',
-                'url' => '/pianote/resources',
-                'showAllAlways' => true
+                'emailRecipient' => config('mailora.'. $brand . '.ask-question-recipient'),
+                'emailLogo' => config('mailora.'. $brand . '.logo-link')
             ]
         ];
     }
@@ -277,20 +276,20 @@
 
 @section('content')
 
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-            <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
-            <page-header
-                page-type="{{ $headerDataObj->type }}"
-                icon-name="{{ $headerDataObj->iconName }}"
-                title="{{ $headerDataObj->title }}"
-                description="{{ $headerDataObj->description }}"
-                hero-img="{{ $headerDataObj->heroImg }}"
-                progress="{{ $headerDataObj->progress }}"
-                content-id="{{ $headerDataObj->contentId }}"
-                :info-data="{{ json_encode($headerDataObj->infoData) }}"
-                :ctas="{{ json_encode($headerDataObj->ctas) }}"
-            ></page-header>
-        </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
+        <page-header
+            page-type="{{ $headerDataObj->type }}"
+            icon-name="{{ $headerDataObj->iconName }}"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            progress="{{ $headerDataObj->progress }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+        ></page-header>
+    </div>
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">
