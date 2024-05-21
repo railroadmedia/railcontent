@@ -38,11 +38,10 @@ class WebhookTest extends TestCase
         $this->assertEquals($webhookData->source, $source);
         $this->assertEqualsCanonicalizing($data, $webhookData->contents);
         $expectedJobCount = $parent->countChildren() + 1;
-        $dbCount = count($webhookData->job_details);
-        $this->assertEquals($expectedJobCount, $dbCount);
-
         dispatch($parent);
         $webhookData->refresh();
+        $dbCount = count($webhookData->job_details);
+        $this->assertEquals($expectedJobCount, $dbCount);
         $this->assertTrue($webhookData->allComplete());
     }
 
