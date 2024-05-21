@@ -2,12 +2,12 @@
 
 namespace App\Modules\CustomerIO\Services;
 
-use Carbon\Carbon;
-use Exception;
 use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Events\CustomerCreated;
 use App\Modules\CustomerIO\Events\CustomerUpdated;
 use App\Modules\CustomerIO\Models\Customer;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -156,37 +156,36 @@ class CustomerIoService
         $userId = null,
         $createdAtTimestamp = null
     ) {
-        $customer = new Customer();
-
-        // uuid (this is what is used inside customer.io
-        if (empty($id)) {
-            if ($userId) {
-                $customer->uuid = $userId;
-            } else {
-                $customer->generateUUID();
-            }
-        }
-
         // customer.io account/workspace details
         $accountConfigData = $this->getAccountConfigData($accountName);
-
-        $customer->workspace_name = $accountConfigData['workspace_name'];
-        $customer->workspace_id = $accountConfigData['workspace_id'];
-        $customer->site_id = $accountConfigData['site_id'];
-
-        // email & other misc
-        $customer->email = $email;
-        $customer->user_id = $userId;
-
         if (empty($createdAtTimestamp)) {
             $createdAtTimestamp = Carbon::now()->timestamp;
         }
+        Customer::upsert(
+            [
+                'uuid' => $userId ?? bin2hex(openssl_random_pseudo_bytes(16)),
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+                'email' => $email,
+                'user_id' => $userId,
+                'created_at' => Carbon::createFromTimestamp($createdAtTimestamp),
+                'updated_at' => Carbon::createFromTimestamp($createdAtTimestamp)
 
-        $customer->setCreatedAt(Carbon::createFromTimestamp($createdAtTimestamp));
-        $customer->setUpdatedAt(Carbon::createFromTimestamp($createdAtTimestamp));
+            ],
+            ['workspace_id','uuid'],
+            ['email','user_id','updated_at']
+        );
 
-        // save to the database
-        $customer->saveOrFail();
+        $customer =
+            Customer::onWriteConnection()
+                ->where([
+                            'email' => $email,
+                            'workspace_name' => $accountConfigData['workspace_name'],
+                            'workspace_id' => $accountConfigData['workspace_id'],
+                            'site_id' => $accountConfigData['site_id'],
+                        ])
+                ->first();
 
         // set the user id custom attribute if its not empty
         if (!empty($userId)) {

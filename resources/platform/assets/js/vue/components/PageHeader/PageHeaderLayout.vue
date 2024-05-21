@@ -1,11 +1,11 @@
 <template>
-    <header class="tw-py-5 md:tw-pt-6 tw-flex tw-flex-col tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
+    <header class="tw-py-5 md:tw-pt-[25px] tw-flex tw-flex-col tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
         <div class="tw-flex tw-items-center tw-flex-wrap"> 
             <div class="tw-flex-grow tw-mr-auto">
                 <slot name="top-left"></slot>
             </div>
             <!-- only use this div if top-right is used -->
-            <div v-if="$slots['top-right']" class="tw-flex tw-py-1">
+            <div v-if="$slots['top-right']" class="tw-flex tw-py-1 tw-my-2">
                 <slot name="top-right"></slot>
             </div>
         </div>

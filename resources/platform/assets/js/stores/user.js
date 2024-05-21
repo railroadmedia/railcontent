@@ -11,6 +11,7 @@ export const useUserStore = defineStore({
   getters: {
     userId: (state) => state.user?.id,
     userDisplayName: (state) => state.user?.display_name,
+    userEmail: (state) => state.user?.email,
     userProfilePictureUrl: (state) => state.user?.profile_picture_url,
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,

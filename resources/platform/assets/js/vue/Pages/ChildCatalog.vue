@@ -15,7 +15,6 @@
                 :included-types="includedTypes"
                 :pre-loaded-content="preLoadedContent"
                 :statuses="statuses"
-                :showBackButton="true"
                 :parentUrl="firstLevelUrl"
                 :subscription-calendar-id="subscriptionCalendarId" 
             />

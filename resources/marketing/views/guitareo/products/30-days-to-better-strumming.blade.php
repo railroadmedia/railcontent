@@ -102,6 +102,12 @@
 @section('body-data')
     x-data="{
         trailer: false,
+        kickOff: false,
+        lazyLoad: false,
+        loadAlternateSrc: function(src) {
+        this.$refs.playToLearnVideo.src = src;
+        },
+        videoLoaded: false,
     }"
 @endsection
 
@@ -127,7 +133,7 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                          &nbsp;Watch Trailer
                     </div>
-                    <a class="w-5/12 join smaller text-white  m-2" href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1">ENROLL NOW</a>
+                    <a class="w-5/12 join smaller text-white  m-2 anchor-slide" href="#final">ENROLL NOW</a>
 {{--                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>--}}
                 </div>
                 <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
@@ -141,9 +147,9 @@
                 </p>
             </div>
         </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.65)"></div>
         <video class="object-cover w-full relative z-0 h-[500px] sm:h-[700px]" type="video/mp4" autoplay loop playsinline muted
-{{--            src="https://player.vimeo.com/progressive_redirect/playback/932207347/rendition/1080p/file.mp4?loc=external&signature=5f7623116aebc377256b8e977f9f8cd5d89a073cbbe72da98636654c0508e44c"--}}
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/header-vid.mp4"
         ></video>
     </header>
 
@@ -178,7 +184,7 @@
                         ],
                         [
                             'image' =>
-                                'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/audience-02.webp',
+                                'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/audience-02-alt.webp',
                             'title' => 'Intermediate Guitarists',
                             'description' =>
                                 'You’ve been playing for a while but found yourself in a rut. You resort to the same handful of strumming patterns and don’t know where to go. This course will force you to revisit the foundations, fill the knowledge gaps that you possess, and expand your repertoire.',
@@ -220,7 +226,7 @@
                         [
                             'special' => true,
                             'position' => 'left',
-                            'img' =>  'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/feature-01.mp4',
+                            'img' =>  'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/feature-01a.mp4',
                             'desc' =>  '<strong>Lock into the groove of any song</strong> so you can effortlessly play along with your favorite tracks and nail every beat and rhythm.',
                         ],
                         [
@@ -260,7 +266,12 @@
                         <div
                             class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
                             @if(!empty($getting['special']))
-                                <video class="-mt-7 rounded-lg overflow-hidden object-cover w-full h-full" src="{{ $getting['img'] }}" type="video/mp4" autoplay loop playsinline muted></video>
+                                <video class="-mt-7 rounded-lg overflow-hidden object-cover w-full h-full"
+                                    x-ref="playToLearnVideo"
+                                    x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                                    x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                                    data-src="{{ $getting['img'] }}"
+                                    type="video/mp4" autoplay muted loop playsinline preload="auto"></video>
                             @else
                                 <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9"
                                     style="background-image:url('{{ $getting['img'] }}')"></div>
@@ -275,7 +286,7 @@
         </div>
         <h1 class="leading-none sm:-mt-8  sm:mb-8 text-5xl"><i class="fal fa-angle-down text-guitareo"></i></h1>
         <div class="flex justify-center py-4">
-            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2" href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1">ENROLL NOW</a>
+            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2 anchor-slide" href="#final">ENROLL NOW</a>
         </div>
         <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
             loading="lazy" onload="this.classList.remove('opacity-0')"
@@ -290,9 +301,14 @@
             <h2 class="leading-tight"><strong>Strumming progression made simple.</strong></h2>
 {{--            <p class="leading-normal mt-5 mx-auto" style="max-width:700px;">Lorem ipsum dolor sit amet consectetur. Duis nam gravida blandit ut pharetra magna commodo nisi augue. Integer egestas in viverra quis sapien varius. Enim ultrices integer donec aenean vivamus in mauris tellus libero. Nibh bibendum eros facilisis risus.</p>--}}
 
-            <img class="w-full rounded-lg my-7 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
-                alt="thumbnail" />
+            <div class="aspect-16:9 cursor-pointer rounded-xl my-7 autoplay-video overflow-hidden w-full relative"
+                x-on:click="kickOff = true;" role="button">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <img class="absolute inset-0 overflow-hidden object-cover w-full h-full absolute z-0 opacity-0 transition-opacity"
+                    loading="lazy" onload="this.classList.remove('opacity-0')"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/3000x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/thumbs-01.webp"
+                    alt="Thumbnail for tutorial video"/>
+            </div>
             @php
                 $weeks = [
                     [
@@ -383,7 +399,7 @@
                     <i class="fas fa-check text-guitareo mr-5"></i> 90-Day Money Back Guarantee
                 </h4>
             </div>
-            <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5">ENROLL NOW</a><br>
+            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                 loading="lazy" onload="this.classList.remove('opacity-0')"
                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -422,7 +438,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5">ENROLL NOW</a><br>
+                <a href="#final" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                     loading="lazy" onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
@@ -451,46 +467,74 @@
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar.',
     ])
 
-    <section class="py-10 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 sm:px-8 relative overflow-hidden"
-        style="background: #111729"
-        x-data="{lazyLoad:false}">
-        <div class="container mx-auto max-w-5xl mb-5 sm:mb-10">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0"
-                    :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
-                    x-intersect.once="lazyLoad = true; $refs.collage.src = $refs.collage.dataset.src;">
-                    <picture>
-                        <source type="image/webp" media="(min-width:1280px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/collage.webp">
-                        <source type="image/webp" media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1130x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/collage.webp">
-                        <source type="image/webp" media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1020x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/collage.webp">
-                        <img x-ref="collage"
-                            class="object-contain h-64 sm:h-96 max-w-full sm:max-w-md md:max-w-lg lg:max-w-2xl transition-opacity opacity-0"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/30x0/filters:quality(10)/filters:blur(6)/marketing/guitareo/products/30-days-to-better-strumming/collage.webp"
-                            data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/collage.webp"
-                            alt="guitareo collage image"
-                        >
-                    </picture>
-                </div>
-                <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
-                    <img class="h-20 sm:h-16 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png" alt="logo">
-                    <h3 class="leading-tight">  <strong>Improve your strumming<br> in just 30 days. </strong>  </h3>
-                    <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Daily Guided Lessons</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Learn By Playing Along</li>
-                        <li class="leading-tight"><i class="fa-li fas fa-check text-guitareo"></i> Guaranteed Results</li>
-                    </ul>
-                    <h4 class="leading-tight mb-2"><strong>Only $97</strong></h4>
-                    <div class="w-72  mx-auto sm:mx-0 text-center">
-                        <a role="link" aria-label="Start your membership" class=" w-full sm:w-82 join smaller my-3  bg-guitareo "
-                            href="/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1">GET STARTED <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
-                        <p class="text-xs"><em>One-time payment.</em></p>
-                    </div>
-                </div>
-            </div>
+    <div id="final" class="anchor"></div>
+    <section class="text-center text-white relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
+        style="background-color:#111729;">
+        <div class="container mx-auto relative z-50 text-center">
+            <img class="h-20 sm:h-28 transition-opacity opacity-0" loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png"
+                alt="30 day independence logo">
+            <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Guided Play-Along Lessons</strong></h2>
+
+            <!-- Version 1 -->
+            <h6 class="leading-normal mb-4 text-guitareo">
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                    Enrollment closes in
+                    <strong x-cloak x-show="timeLeft > 0">
+                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!
+                    </strong>
+                    <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
+                </span>
+            </h6>
+
+            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
+                alt="Image of joined student profiles in 30-Day Independence">
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}
+                guitarists who<br class="sm:hidden"> have already registered.</p>
+
+            @include('drumeo.products.partials._promo-cards', [
+                'firstDeal' => '30 Days To <br>Better Strumming',
+                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course.webp',
+                'firstImageHeight' => 'h-36 lg:h-44',
+                'firstDealPrice' => 97,
+                'firstDealSub' => 'Just the course',
+                'firstDealLink' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
+                'firstButtonText' => 'ENROLL NOW',
+                'firstDealExtra' => "One-time payment",
+                'whiteBg' => 'false',
+                'firstExtraBonuses' => [
+                    '20 Guided Play-Along Lessons',
+                    'Lifetime Course Access',
+                    '90-Day Money Back Guarantee',
+                ],
+
+                'topBadge' => 'MOST POPULAR',
+                'secondDeal' => 'Unlimited<br> Lessons',
+                'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course-bundle2.webp',
+                'secondImageHeight' => 'h-36 lg:h-44',
+                'secondDealSub' => "1 Year Of Guitareo + 3 Bonuses Worth $341",
+                'secondDealPrice' => '20</strong>/mo<strong>',
+                'secondDealLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',
+                'secondExtraBonuses' => [
+                    '<strong class="font-black">1 year of Unlimited Lessons</strong>',
+                    '<strong class="font-black">Lifetime Access to 30 Days To Better Strumming</strong>',
+                    '<strong class="font-black">Lifetime Access to Rhythm & Groove</strong>',
+                    '<strong class="font-black">Lifetime Access to Guitar Quest</strong>',
+                    'Lessons for the Guitar, Piano, Drums & Singing',
+                    '90-Day Money Back Guarantee',
+                ],
+                'secondButtonText' => 'GET EVERYTHING',
+                'secondDealExtra' => "Billed annually at $240/yr.",
+            ])
         </div>
     </section>
+
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-black text-white">
         <div class="container mx-auto relative z-10 max-w-5xl">
@@ -602,8 +646,13 @@
     </section>
 
     @include('_partials.components.video-modal', [
+        'name' => 'kickOff',
+        'video' => '944222905',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal', [
         'name' => 'trailer',
-        'video' => '928599834',
+        'video' => '943429100',
         'vimeo' => true,
     ])
     @include('_partials.components.countdown', [

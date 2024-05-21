@@ -1,5 +1,5 @@
 <template>
-    <FilterControls v-if="!hideControlsSection" :showBackButton="showBackButton" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
+    <FilterControls v-if="!hideControlsSection" :parentUrl="parentUrl" :search-term="searchTerm" :hide-search="hideSearch" :search-placeholder="searchPlaceholder" :is-collapsed="isCollapsed" :selected-sort="selectedSort" :tab-options="tabOptions" :active-tab="activeTab" :hide-controls="hideControls" :hide-sort-icon="hideSortIcon" :hide-filter-icon="hideFilterIcon" :selected-filters="selectedFilters" :sort-options="sortOptions"
         @on-toggle-collapse="handleToggleCollapse" @on-search-submit="value => emit('onSearchChange', value)"
         @on-sort="item => emit('onSortChange', item)" @on-filter-tab-click="tab => emit('onTabChange', tab)">
         <template #extra-icon-left>
@@ -36,10 +36,6 @@ import FilterControls from './FilterControls.vue';
 import FilterPills from './FilterPills.vue';
 
 const props = defineProps({
-    showBackButton: {
-        type: Boolean,
-        default: () => false,
-    },
     parentUrl: {
         type: String,
         default: () => "/",
