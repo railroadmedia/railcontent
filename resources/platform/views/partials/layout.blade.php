@@ -71,7 +71,6 @@ if (request()->has('mobile-app-web-view')) {
                     :vue-router="false"
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
-                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     csrf_token="{{ csrf_token() }}"
                     :journey-section="{{ json_encode($journeySection) }}"
                 >

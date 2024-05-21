@@ -7,11 +7,9 @@ export const useUserStore = defineStore({
     brand: 'drumeo',
     journeySection: null,
     token: null,
-    isAdmin: false,
   }),
   getters: {
     userId: (state) => state.user?.id,
-    userIsAdmin: (state) => state.user?.is_admin,
     userDisplayName: (state) => state.user?.display_name,
     userEmail: (state) => state.user?.email,
     userAccessLevel: (state) => state.user?.access_level,
@@ -24,13 +22,6 @@ export const useUserStore = defineStore({
   actions: {
     setUser (user) {
       this.user = user;
-    },
-    setIsAdmin(isAdmin) {
-      if (this.user) {
-        this.user.is_admin = isAdmin;
-      } else {
-        this.user = { isAdmin };
-      }
     },
     setCurrentBrand (brand) {
       this.brand = brand;

@@ -49,13 +49,6 @@ watch(
   { immediate: true }
 );
 watch(
-  () => props.isAdmin,
-  (isAdmin) => {
-    userStore.setIsAdmin(isAdmin);
-  },
-  { immediate: true }
-);
-watch(
   () => props.journeySection,
   (journeySection) => {
     const formattedJourneySection = () => {

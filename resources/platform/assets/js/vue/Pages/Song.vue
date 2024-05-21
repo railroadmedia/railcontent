@@ -60,7 +60,7 @@
                     :user-avatar="userProfilePictureUrl" 
                     :user-xp="userXP"
                     :user-access-level="userAccessLevel" 
-                    :is-admin="userIsAdmin"
+                    :is-admin="isAdmin"
                 />
             </div>
 
@@ -79,7 +79,7 @@
 
     //Pinia Data
     const userStore = useUserStore();
-    const { brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, userIsAdmin } = storeToRefs(userStore);
+    const { user, brand, userId, userDisplayName, userAccessLevel, userProfilePictureUrl, userXP, isAdmin } = storeToRefs(userStore);
 
     //Refs
     const isLoading = ref(false);
@@ -108,7 +108,7 @@
     });
 
     onBeforeMount( ()=> {
-        //FETCH SONG BY 
+        //FETCH SONG BY ID
         
         // const documentId = props.contentId;
         // const fields = [
