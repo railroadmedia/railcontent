@@ -1,7 +1,7 @@
 <template>
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8">
         <!-- Breadcrumbs -->
-        <Breadcrumb :breadcrumbs="[{ title: 'song', url: `/${brand}/songs` },{ title: songTitle }]"/>
+        <Breadcrumb :breadcrumbs="[{ title: 'songs', url: `/${brand}/songs` },{ title: songTitle }]"/>
 
         <div id="lessonInfo" 
              class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] 2xl:tw-grid-rows-[370px_auto_auto] tw-w-full tw-mx-auto tw-mt-3 tw-flex-col tw-gap-4"
