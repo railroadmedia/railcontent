@@ -103,6 +103,11 @@
     x-data="{
         trailer: false,
         kickOff: false,
+        lazyLoad: false,
+        loadAlternateSrc: function(src) {
+        this.$refs.playToLearnVideo.src = src;
+        },
+        videoLoaded: false,
     }"
 @endsection
 
@@ -144,7 +149,7 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.65)"></div>
         <video class="object-cover w-full relative z-0 h-[500px] sm:h-[700px]" type="video/mp4" autoplay loop playsinline muted
-            src="https://player.vimeo.com/progressive_redirect/playback/947499366/rendition/720p/file.mp4?loc=external&signature=a0c08c4299f5ca33c796e6fc594d3215fdef24b250099bf02f6a135553e9a8e8"
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/header-vid.mp4"
         ></video>
     </header>
 
@@ -221,7 +226,7 @@
                         [
                             'special' => true,
                             'position' => 'left',
-                            'img' =>  'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/feature-01.mp4',
+                            'img' =>  'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/guitareo/products/30-days-to-better-strumming/feature-01a.mp4',
                             'desc' =>  '<strong>Lock into the groove of any song</strong> so you can effortlessly play along with your favorite tracks and nail every beat and rhythm.',
                         ],
                         [
@@ -261,7 +266,12 @@
                         <div
                             class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if ($key !== 4) mb-16 md:mb-20 @else md:mb-0 @endif">
                             @if(!empty($getting['special']))
-                                <video class="-mt-7 rounded-lg overflow-hidden object-cover w-full h-full" src="{{ $getting['img'] }}" type="video/mp4" autoplay loop playsinline muted></video>
+                                <video class="-mt-7 rounded-lg overflow-hidden object-cover w-full h-full"
+                                    x-ref="playToLearnVideo"
+                                    x-intersect.once="videoLoaded = true; $refs.playToLearnVideo.src = $refs.playToLearnVideo.dataset.src;"
+                                    x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
+                                    data-src="{{ $getting['img'] }}"
+                                    type="video/mp4" autoplay muted loop playsinline preload="auto"></video>
                             @else
                                 <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9"
                                     style="background-image:url('{{ $getting['img'] }}')"></div>
