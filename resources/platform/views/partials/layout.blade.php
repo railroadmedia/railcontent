@@ -66,12 +66,12 @@ if (request()->has('mobile-app-web-view')) {
 
         {{-- App Container --}}
         <div id="app" class="flex-1">
-
             @if(empty($noContainer) || !$noContainer)
                 <app-container
                     :vue-router="false"
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
+                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     csrf_token="{{ csrf_token() }}"
                     :journey-section="{{ json_encode($journeySection) }}"
                 >
@@ -80,7 +80,7 @@ if (request()->has('mobile-app-web-view')) {
                         :is-live="{{ json_encode(isLive()) }}"
                         :is-onboarding="{{ json_encode($isOnboarding) }}"
                         search-url=""
-                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
+                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                         :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
                         @if(!empty( $hasUnreadNotifications ))
                             :has-notifications="{{ json_encode($hasUnreadNotifications) }}"

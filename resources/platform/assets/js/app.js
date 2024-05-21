@@ -295,14 +295,7 @@ app.component('AppContainer', AppContainer)
     .component('Song', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "song" */
-            `./vue/components/Songs/Song.vue`
-        )
-    ))
-
-    .component('SongRequest', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "song-request" */
-            `./vue/components/Songs/SongRequest.vue`
+            `./vue/Pages/Song.vue`
         )
     ))
 
