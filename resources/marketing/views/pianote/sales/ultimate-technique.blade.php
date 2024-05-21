@@ -404,7 +404,7 @@
                     @if ($getting['position'] === 'right')
                         <div
                             class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-20">
-                            <div class="content relative text-left md:pl-10 md:pl-0">
+                            <div class="content relative text-left">
                                 <h5 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <div>{!! $getting['desc'] !!}</div>
                             </div>
@@ -423,7 +423,7 @@
                                 <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9"
                                     style="background-image:url('{{ $getting['img'] }}')"></div>
                             @endif
-                            <div class="content relative text-left md:pl-10 md:pl-0 md:mb-10">
+                            <div class="content relative text-left md:mb-10">
                                 <h5 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <div>{!! $getting['desc'] !!}</div>
                             </div>
