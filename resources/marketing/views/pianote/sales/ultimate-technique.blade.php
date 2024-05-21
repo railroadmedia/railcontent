@@ -221,7 +221,8 @@
         style="background: #f6f8fc;">
         <div class="container mx-auto max-w-4xl">
             <h2 class="w-auto leading-tight text-center"><strong class="text-pianote">Save 60% </strong>with the<br>
-                <strong>Ultimate Technique Bundle</strong> </h2>
+                <strong>Ultimate Technique Bundle</strong>
+            </h2>
 
             <h6 class="text-pianote uppercase py-2">
                 <strong><em>
@@ -268,20 +269,31 @@
                         <h2><s class="opacity-50">$446</s> <strong>$177</strong> <br>
                             <span class="text-sm italic">For your first year then $240/yr.</span>
                         </h2>
-
-                        <a class=" w-full sm:w-82 join smaller mt-4 @if ($theme == 'musora') musora-gold @else bg-{{ $theme }} @endif"
-                            href="{{ $buttonLink }}">CLAIM YOUR OFFER</a>
-                        <p class="text-sm mt-2"><em>Money-back 90-day guarantee.</em></p>
+                       
                     </div>
+                    <a class="join my-4 md:my-5 w-full md:w-10/12 lg:w-11/12 md:max-w-lg" style="padding: 18px 10px;"
+                            href="{{ $buttonLink }}">
+                            CLAIM YOUR OFFER
+                        </a>
+                        <p class="text-sm"><em>Money-back 90-day guarantee.</em></p>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="px-6 py-6 sm:py-8 text-white text-center bg-cover bg-center"
         style="background:linear-gradient(to bottom,#202F56, #060B2E);">
         <div class="container max-w-4xl mx-auto">
             <h6 class="leading-tight mb-4"><em><strong>PLUS</strong> get these special<br class="sm:hidden"> bonuses when
                     you join today.</em></h6>
+
+            @php
+                $images = [
+                    'https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
+                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/may/improv-musical-freedom.jpg',
+                ];
+            @endphp
 
             <div class="inline sm:hidden">
                 <div id="image-slider-mobile" class="splide" x-data="{}" x-init="new Splide('#image-slider-mobile', {
@@ -295,110 +307,53 @@
                 }).mount()">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div class="splide__slide">
-                                <div class="w-3/4">
-                                    <div class="flip-div inline-block relative w-full group"
-                                        style="padding-bottom: 133%; perspective: 1000px;">
-                                        <div class="text-center w-full h-full absolute"
-                                            style="transform-style: preserve-3d;">
-                                            <div x-ref="front"
-                                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                                style="backface-visibility: hidden;">
-                                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                                    style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);">
+                            @foreach ($images as $image)
+                                <div class="splide__slide">
+                                    <div class="w-3/4">
+                                        <div class="flip-div inline-block relative w-full group"
+                                            style="padding-bottom: 133%; perspective: 1000px;">
+                                            <div class="text-center w-full h-full absolute"
+                                                style="transform-style: preserve-3d;">
+                                                <div x-ref="front"
+                                                    class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                                    style="backface-visibility: hidden;">
+                                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
+                                                        style="background-image:url('{{ $image }}');">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="splide__slide">
-                                <div class="w-3/4">
-                                    <div class="flip-div inline-block relative w-full group"
-                                        style="padding-bottom: 133%; perspective: 1000px;">
-                                        <div class="text-center w-full h-full absolute"
-                                            style="transform-style: preserve-3d;">
-                                            <div x-ref="front"
-                                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                                style="backface-visibility: hidden;">
-                                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp');">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="splide__slide">
-                                <div class="w-3/4">
-                                    <div class="flip-div inline-block relative w-full group"
-                                        style="padding-bottom: 133%; perspective: 1000px;">
-                                        <div class="text-center w-full h-full absolute"
-                                            style="transform-style: preserve-3d;">
-                                            <div x-ref="front"
-                                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                                style="backface-visibility: hidden;">
-                                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/may/improv-musical-freedom.jpg');">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="font-size:0px hidden sm:inline">
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 lg:mb-0 px-1 md:px-3 w-1/2 sm:w-1/6">
-                    <div class="flip-div inline-block relative w-full group"
-                        style="padding-bottom: 133%; perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div x-ref="front"
-                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                style="backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                    style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg);">
+                @foreach ($images as $image)
+                    <div
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 lg:mb-0 px-1 md:px-3 w-1/2 sm:w-1/6">
+                        <div class="flip-div inline-block relative w-full group"
+                            style="padding-bottom: 133%; perspective: 1000px;">
+                            <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                                <div x-ref="front"
+                                    class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                    style="backface-visibility: hidden;">
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
+                                        style="background-image:url('{{ $image }}');">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 lg:mb-0 px-1 md:px-3 w-1/2 sm:w-1/6">
-                    <div class="flip-div inline-block relative w-full group"
-                        style="padding-bottom: 133%; perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div x-ref="front"
-                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                style="backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp');">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 lg:mb-0 px-1 md:px-3 w-1/2 sm:w-1/6">
-                    <div class="flip-div inline-block relative w-full group"
-                        style="padding-bottom: 133%; perspective: 1000px;">
-                        <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
-                            <div x-ref="front"
-                                class="border-2 border-musora front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                style="backface-visibility: hidden;">
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                    style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/may/improv-musical-freedom.jpg');">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
         </div>
-        </div>
     </section>
+
     <section class="px-6 py-6 sm:py-8 text-center" style="background:#FFFFFF;">
         <div class="container max-w-4xl mx-auto">
             <h3 class="pt-4"><strong>You’ve done the hard part. </strong></h3>
@@ -487,8 +442,12 @@
                     alt="Calendar">
             </div>
 
-            <h4 class="text-pianote italic py-2"><strong>But this offer is only available until June 10th. </strong><br>So
-                click below and keep your progress going!</h4>
+            <h4 class="text-pianote italic py-2"><strong>But this offer is only available until June 10th. </strong><br>
+            So click below and keep your progress going!</h4>
+            <a class="join my-4 md:my-5 w-full sm:max-w-xs md:w-1/2 md:max-w-lg lg:max-w-3xl" style="padding: 16px 10px;"
+                    href="{{ $buttonLink }}">
+                    CLAIM YOUR OFFER
+                </a>
         </div>
     </section>
 
@@ -520,7 +479,7 @@
                         <br><br>
                         If you don’t enjoy playing the piano more than you did before you started…
                         <br><br>
-                        Contact support@pianote.com within those 90 days and get a refund.";
+                        Contact <u id='email'>support@pianote.com</u> within those 90 days and get a refund.";
         $guaranteeHeader = "<strong>The 90-Day “Better <br class='inline sm:hidden'> Technique” Guarantee</strong>";
     @endphp
 
@@ -589,20 +548,20 @@
                     @endphp
 
                     <section class="text-white p-4 md:px-30">
-                        <div class="container max-w-3xl mx-auto flex flex-wrap justify-center">
+                        <div class="container max-w-3xl mx-auto flex flex-col md:flex-row md:flex-wrap justify-center">
                             @foreach ($items as $index => $item)
-                                <div class="flex flex-col md:flex-row p-2">
-                                    <p class="mb-2"><i class="fa fa-check text-musora"></i> {!! $item !!}</p>
+                                <div class="flex p-2">
+                                    <p class="md:mb-2"><i class="fa fa-check text-musora"></i> {!! $item !!}</p>
                                 </div>
                             @endforeach
                         </div>
                     </section>
 
-                    <a class="join my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;"
+                    <a class="join mb-6 md:mb-8 w-full sm:max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 16px 10px;"
                         href="{{ $buttonLink }}">
                         CLAIM YOUR OFFER
                     </a>
-                    <p class="text-musora">PLUS get these special bonuses when you join today.</p>
+                    <h5 class="text-musora mb-6 md:mb-8"><em><strong>PLUS get these special bonuses when you join today.</strong></em></h5>
                 </div>
                 <div style="font-size:0px">
 
@@ -747,12 +706,12 @@
                     <strong>$177</strong> <span class="text-musora">(Save 60%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
-                <a class="join   mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
+                <a class="join mb-2 w-full sm:max-w-xs md:max-w-lg" style="padding: 16px 10px;"
                     href="{{ $buttonLink }}">
                     CLAIM YOUR OFFER
                 </a>
                 <br>
-                <a class="inline-block opacity-70 mt-2"
+                <a class="inline-block opacity-70 mt-1"
                     href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&amp;redirect=%2Forder">
                     <p><u><em>Or click here to start a monthly membership for <br class="inline-block md:hidden">$30/month.
                                 (no free bonuses)</em></u></p>
@@ -772,6 +731,11 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script>
+    document.getElementById('email').addEventListener('click', function() {
+        window.location.href = 'mailto:support@pianote.com';
+    });
+    </script>
 
     @include('_partials.components.countdown', [
         'countdownDate' => '2024-06-11 0:00:00',
