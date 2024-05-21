@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Modules\HelpScout\Console\Commands\WebHooks;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\Events\JobProcessed;
 
@@ -48,18 +47,6 @@ class Webhook extends Model
     }
 
     /**
-     * @param $job - Job to add to the jobDetails array
-     * @return mixed - return updated $job object
-     */
-    public function syncJobAndWebhook($job): mixed
-    {
-        $shortName = class_basename($job);
-        $job->webhookJobInfo = ['parent_id' => $this->id, 'name' => $shortName];
-        $this->setAndSaveJobDetails($shortName, false);
-        return $job;
-    }
-
-    /**
      * Process any WebhookJob or WebhookChildJob objects to update the Webhook.job_detail
      * @param JobProcessed $event
      * @return void
@@ -91,5 +78,31 @@ class Webhook extends Model
         $jobDetails[$name] = $set;
         $model->job_details = $jobDetails;
         $model->save();
+    }
+
+    /**
+     * @param $jobs - array of Jobs to set as the jobDetails array, this should include the parent
+     */
+    public function initializeJobDetails($jobs): void
+    {
+        $jobDetails = [];
+        foreach($jobs as $job) {
+            $shortName = $this->setWebhookJobInfo($job);
+            $jobDetails[$shortName] = false;
+        }
+        $webhook = Webhook::lockForUpdate()->find($this->id);
+        $webhook->job_details = $jobDetails;
+        $webhook->save();
+    }
+
+    /**
+     * @param $job
+     * @return string : job identifier
+     */
+    public function setWebhookJobInfo($job)
+    {
+        $shortName = class_basename($job);
+        $job->webhookJobInfo = ['parent_id' => $this->id, 'name' => $shortName];
+        return $shortName;
     }
 }

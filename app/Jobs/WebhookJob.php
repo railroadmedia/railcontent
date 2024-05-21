@@ -25,6 +25,7 @@ class WebhookJob implements ShouldQueue
     protected array $children;
     protected string $queueName;
     public array $webhookJobInfo;
+    protected bool $alreadyRun = false;
 
     /**
      * @param string $source - name of webhook source (eg: shopify-order-created)
@@ -42,17 +43,16 @@ class WebhookJob implements ShouldQueue
                         'source_id' => $source_id], [
                         'contents' => $contents]);
         if (!$this->webhook->wasRecentlyCreated) {
-            //TODO update to handle duplicates effectively once we know what is being duplicated.
-            // There is a race condition, where part of the previous webhook is proceed and we start the process again
-            // Shopify docs say we should safely be able to ignore duplicates of this, but I'd like to see if we get duplicates bofer commiting
             Log::info("Duplicated webhook id:" . $this->webhook->source_id . " from: "  . $this->webhook->source);
             if (!$this->webhook->allComplete()) {
-                // webhook successfully ran already, don't execute again
-                Log::warning("Previous webhook was already finished. Running duplicate warning. webhook id:" . $this->webhook->source_id . " from: "  . $this->webhook->source);
+                Log::info("Previous webhook was already finished. Running duplicate warning. webhook id:" . $this->webhook->source_id . " from: "  . $this->webhook->source);
+                $this->alreadyRun = true;
             }
         }
-        $this->webhook->syncJobAndWebhook($this);
-        $this->children = $this->buildChildren($children, $delays);
+        if (!$this->alreadyRun) {
+            $this->children = $this->buildChildren($children, $delays);
+            $this->webhook->setWebhookJobInfo($this);
+        }
     }
 
 
@@ -63,9 +63,18 @@ class WebhookJob implements ShouldQueue
      */
     public function handle()
     {
-        foreach($this->children as $index => $child) {
+        if ($this->alreadyRun) {
+            return;
+        }
+
+        $allJobs = [$this];
+        foreach($this->children as $child) {
+            $allJobs[] = $child['job'];
+        }
+        $this->webhook->initializeJobDetails($allJobs);
+        foreach($this->children as $child) {
             $delay = $child['delay'] ?? 0;
-            $job = $child['job'] ?? $index;
+            $job = $child['job'];
             $dispatch = $delay ? dispatchWithDelay($job, $delay) : dispatch($job);
             if ($this->queueName) {
                 $dispatch->onQueue($this->queueName);
@@ -91,9 +100,6 @@ class WebhookJob implements ShouldQueue
             if(!property_exists($job, 'webhookJobInfo')) {
                 $name = get_class($job);
                 throw new \InvalidArgumentException("$name must have the 'webhookJobInfo' property or derive from 'WebhookChildJob");
-            }
-            if(!isset($job->webhookJobInfo)) {
-                $job = $this->webhook->syncJobAndWebhook($job);
             }
             $delay = $delays ? array_shift($delays) : 0;
             $childrenWithDelays[] = [
