@@ -94,4 +94,5 @@
         :collection-statuses="{{ json_encode(['published', 'scheduled']) }}"
         :collection-filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
     ></coach-show>
+    
 @endsection

@@ -301,9 +301,13 @@ const isThreads = computed(() => {
     return props.collectionType === 'threads';
 })
 
+const isCoachShow = computed(() => {
+    return props.collectionType === 'coach-show';
+})
+
 //List view reactive
 const isList = computed(() => {
-    return !isRecommendation.value && !isWorkout.value && !isChallenge.value  && props.collectionType;
+    return !isRecommendation.value && !isWorkout.value && !isChallenge.value  && props.collectionType && !isCoachShow.value;
 })
 
 const showGroupBy = computed(() => {
