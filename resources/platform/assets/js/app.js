@@ -22,9 +22,11 @@ import Referral from './vue/Pages/Referral';
 import Schedule from './vue/Pages/Schedule';
 import Songs from './vue/Pages/Songs';
 import Stc from './vue/Pages/STC';
+import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -277,6 +279,7 @@ app.component('AppContainer', AppContainer)
     .component('Cohort', Cohort)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
+    .component('CoachIndex', CoachIndex)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
