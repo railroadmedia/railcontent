@@ -252,7 +252,4 @@
         Intercom.showWidget();
     };
 
-    onBeforeMount(()=> {
-        console.log('assignments', props.assignments)
-    })
 </script>
