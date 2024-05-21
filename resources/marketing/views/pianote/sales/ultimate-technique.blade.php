@@ -253,25 +253,24 @@
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-auto flex-shrink-0">
                     <div class="inline-block mx-auto">
                         <ul class="inline-block mx-auto fa-ul text-left pl-6 my-4 sm:my-5">
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Step-by-step
+                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Step-by-step
                                 lessons </li>
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> World-class
+                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> World-class
                                 instructors</li>
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially
+                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> 1000+ Officially
                                 licensed songs</li>
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Detailed song
+                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Detailed song
                                 tutorials</li>
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
+                            <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
                             <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 3 FREE Bonuses</li>
                         </ul>
                     </div>
-                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                        <h2><s class="opacity-50">$446</s> <strong>$177</strong> <br>
-                            <span class="text-sm italic">For your first year then $240/yr.</span>
+                    <div class="w-72 lg:w-72 mx-auto sm:mx-0">
+                        <h2 class="leading-tight"><s class="opacity-50">$446</s> <strong>$177</strong>
                         </h2>
-                       
+                        <p><em class="text-sm">For your first year then $240/yr.</em></p>
                     </div>
-                    <a class="join my-4 md:my-5 w-full md:w-10/12 lg:w-11/12 md:max-w-lg" style="padding: 18px 10px;"
+                    <a class="join smaller my-4 md:my-5 w-full md:w-10/12 lg:w-11/12 md:max-w-lg" style="padding: 18px 10px;"
                             href="{{ $buttonLink }}">
                             CLAIM YOUR OFFER
                         </a>
@@ -281,9 +280,9 @@
         </div>
     </section>
 
-    <section class="px-6 py-6 sm:py-8 text-white text-center bg-cover bg-center"
+    <section class="px-6 sm:px-10 py-6 sm:py-8 text-white text-center bg-cover bg-center"
         style="background:linear-gradient(to bottom,#202F56, #060B2E);">
-        <div class="container max-w-4xl mx-auto">
+        <div class="container max-w-xl mx-auto">
             <h6 class="leading-tight mb-4"><em><strong>PLUS</strong> get these special<br class="sm:hidden"> bonuses when
                     you join today.</em></h6>
 
@@ -331,10 +330,10 @@
                 </div>
             </div>
 
-            <div class="font-size:0px hidden sm:inline">
+            <div class="hidden sm:inline" style="font-size:0px;">
                 @foreach ($images as $image)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 lg:mb-0 px-1 md:px-3 w-1/2 sm:w-1/6">
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 lg:mb-0 px-1 md:px-2 w-1/3">
                         <div class="flip-div inline-block relative w-full group"
                             style="padding-bottom: 133%; perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
@@ -437,14 +436,16 @@
             </div>
 
             <div class="pb-2 -mt-14 md:m-0 leading-none">
-                <img class="w-20 md:w-16"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/promos/may/date.svg"
+                <img class="h-12 sm:h-14"
+                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/120x0/filters:quality(95)/marketing/pianote/promos/may/date.svg"
                     alt="Calendar">
             </div>
 
-            <h4 class="text-pianote italic py-2"><strong>But this offer is only available until June 10th. </strong><br>
-            So click below and keep your progress going!</h4>
-            <a class="join my-4 md:my-5 w-full sm:max-w-xs md:w-1/2 md:max-w-lg lg:max-w-3xl" style="padding: 16px 10px;"
+            <h6 class="text-pianote leading-tight italic my-2"><strong>
+                    But this offer is only available
+                    until June 10th. </strong><br>
+            So click below and keep your progress going!</h6>
+            <a class="join smaller my-4 md:my-5 w-full sm:max-w-xs md:w-1/2 md:max-w-lg lg:max-w-3xl" style="padding: 16px 10px;"
                     href="{{ $buttonLink }}">
                     CLAIM YOUR OFFER
                 </a>
@@ -486,7 +487,7 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101D calc(50% + 1px));">
     </div>
-    <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32 relative z-10"
+    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20 relative z-10"
         style="background-color:#00101D; border: 1px solid #00101D">
         <div class="container max-w-6xl mx-auto">
             @include('pianote._partials._guarantee-section', [
@@ -500,8 +501,8 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     <div style="background:linear-gradient(to bottom,#202F56, #060B2E);">
-        <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
-            <div class="container mx-auto relative z-50  max-w-6xl ">
+        <section class="py-14 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
+            <div class="container mx-auto relative z-50  max-w-5xl ">
                 <div class="w-full">
                     <h2 class="leading-tight mb-4"><strong class="text-pianote">Save 60% </strong>with <br>the Ultimate
                         Technique Bundle.</h2>
@@ -550,7 +551,7 @@
                     <section class="text-white p-4 md:px-30">
                         <div class="container max-w-3xl mx-auto flex flex-col md:flex-row md:flex-wrap justify-center">
                             @foreach ($items as $index => $item)
-                                <div class="flex p-2">
+                                <div class="flex px-2">
                                     <p class="md:mb-2"><i class="fa fa-check text-musora"></i> {!! $item !!}</p>
                                 </div>
                             @endforeach
