@@ -3,10 +3,8 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Psr\Http\Message\RequestInterface;
 
 class CustomerIoApiGateway
 {
@@ -372,6 +370,41 @@ class CustomerIoApiGateway
             throw new Exception(
                 'CustomerIoApiGateway::addProfilesToSegment() api call failed: ' . var_export($result, true)
             );
+        }
+    }
+
+    /**
+     * @param string $customerIoSiteId
+     * @param string $customerIoTrackApiKey
+     * @param string $cioId
+     * @param array|null $attributes
+     * @param int|null $createdAtTimestamp
+     * @return void
+     * @throws Exception
+     */
+    public function updateCustomerByCioId(
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $cioId,
+        ?array $attributes = [],
+        ?int $createdAtTimestamp = null
+    ): void {
+        $url = 'https://track.customer.io/api/v1/customers/cio_' . $cioId;
+        $method = 'PUT';
+
+        $dataArray = $attributes;
+
+        if (!empty($createdAtTimestamp)) {
+            $dataArray['created_at'] = $createdAtTimestamp;
+        }
+
+        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        try {
+            $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
+        } catch (Exception $e) {
+            Log::error('CustomerIoApiGateway::updateCustomerByCioId() failed: ' . $e->getMessage());
+            throw $e;
         }
     }
 

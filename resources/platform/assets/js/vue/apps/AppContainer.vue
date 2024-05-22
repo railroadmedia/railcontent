@@ -11,12 +11,12 @@ import { useUserStore } from '../../stores/user';
 import { toKebabCase } from '../../utils.js'; 
 
 const props = defineProps({
+  user: Object,
+  isAdmin: Boolean,
+  csrf_token: String,
   vueRouter: {
     type: Boolean,
     default: true,
-  },
-  user: {
-    type: Object
   },
   brand: {
     type: String,
@@ -26,9 +26,7 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  csrf_token: {
-    type: String
-  }
+
 });
 
 onBeforeMount(() => {

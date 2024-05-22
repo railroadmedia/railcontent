@@ -26,6 +26,7 @@ import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+import CoachShow from './vue/Pages/CoachShow';
 
 
 //App Components
@@ -279,6 +280,7 @@ app.component('AppContainer', AppContainer)
     .component('Cohort', Cohort)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
+    .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
@@ -298,14 +300,7 @@ app.component('AppContainer', AppContainer)
     .component('Song', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "song" */
-            `./vue/components/Songs/Song.vue`
-        )
-    ))
-
-    .component('SongRequest', defineAsyncComponent(() =>
-        import(
-            /* webpackChunkName: "song-request" */
-            `./vue/components/Songs/SongRequest.vue`
+            `./vue/Pages/Song.vue`
         )
     ))
 
