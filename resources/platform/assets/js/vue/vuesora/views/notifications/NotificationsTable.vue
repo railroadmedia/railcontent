@@ -1,44 +1,21 @@
 <template>
-    <PageHeader pageType="notifications" title="Notifications" iconName="fa-bell" :ctas="headerCtas" />
-    <div class="tw-flex tw-flex-col">
-        <div class="tw-flex tw-flex-row tw-pb-8 tw-items-center tw-flex-wrap tw-justify-between">
-            <div class="tw-flex tw-flex-row tw-items-center">
-                <MusoraIcon icon-name="bell-solid" class="tw-w-[35] tw-h-[35]" />
-                <h1 class="tw-text-[30px] tw-font-bold tw-leading-[45px]">
-                    Notifications
-                </h1>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <!-- Header -->
+        <PageHeader pageType="notifications" title="Notifications" iconName="fa-bell" :ctas="headerCtas" />
+        
+        <div class="tw-w-full dark:tw-text-white tw-pt-8 tw-pb-14 tw-flex tw-flex-col">
+            <div v-if="notifications.length === 0" class="tw-flex tw-flex-row">
+                <p class="tw-text-sm text-grey-3 dark:tw-text-[#9EC0DC] tw-italic">
+                    You do not appear to have any notifications at this time.
+                </p>
             </div>
+            <notifications-table-row v-for="item in notificationsArray" :key="item.id" v-bind="item"
+                @notificationRead="markAsRead"></notifications-table-row>
 
-            <div class="tw-flex tw-flex-row tw-flex-wrap">
-                <div class="tw-flex tw-flex-col tw-mr-[12px]">
-                <button class="tw-btn-primary tw-bg-[#00101D] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-px-[25px] hover:tw-bg-[#627F97] hover:tw-text-white"  :disabled="!hasUnread"
-                    @click.stop="markAllAsRead">
-                    <EyeIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[3px]" />
-                    Mark All As Read
-                </button>
+            <div v-if="totalPages > 1" class="tw-flex tw-flex-row bg-light pagination-row align-h-right">
+                <pagination :current-page="currentPage" :total-pages="totalPages" @pageChange="handlePageChange">
+                </pagination>
             </div>
-
-            <div class="tw-flex tw-flex-col">
-                <a :href="settingsUrl" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-px-[25px] dark:hover:tw-bg-white dark:hover:tw-text-[#000C17] hover:tw-text-white hover:tw-bg-[#000C17]">
-                    <CogIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[3px]" />
-                    Notification Settings
-                </a>
-            </div>
-            </div>
-        </div>
-
-        <div v-if="notifications.length === 0" class="tw-flex tw-flex-row">
-            <p class="tw-text-sm text-grey-3 dark:tw-text-[#9EC0DC] tw-italic">
-                You do not appear to have any notifications at this time.
-            </p>
-        </div>
-
-        <notifications-table-row v-for="item in notificationsArray" :key="item.id" v-bind="item"
-            @notificationRead="markAsRead"></notifications-table-row>
-
-        <div v-if="totalPages > 1" class="tw-flex tw-flex-row bg-light pagination-row align-h-right">
-            <pagination :current-page="currentPage" :total-pages="totalPages" @pageChange="handlePageChange">
-            </pagination>
         </div>
     </div>
 </template>
@@ -51,6 +28,7 @@ import PageHeader from '../../../components/PageHeader/PageHeader.vue';
 import Pagination from '../../components/Pagination.vue';
 import UserService from '../../assets/js/services/user';
 import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue';
+import Breadcrumb from '../../../components/ContentInfo/Breadcrumb.vue';
 
 const props = defineProps({
     brand: {

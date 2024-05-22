@@ -44,6 +44,7 @@ Route::domain('{guitareoDomain}')
         Route::get('/shop/guitar-system', [SalesController::class, 'gs']);
         Route::get('/shop/guitar-technique-made-easy', [SalesController::class, 'guitarTechniqueMadeEasy']);
         Route::get('/shop/rhythm-and-groove', [SalesController::class, 'rhythmAndGroove']);
+        Route::get('/shop/30-days-to-better-strumming', [SalesController::class, 'thirtyDaysToBetterStrumming']);
         Route::get('/{page?}', SalesController::class . '@products')
             ->whereIn('page', [
                 'guitar-technique-made-easy-beginner', '500-songs-discount'

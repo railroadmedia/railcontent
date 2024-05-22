@@ -4,24 +4,25 @@
     <title>{{ ucfirst($brand) }} Learning Paths | Musora</title>
 @endsection
 
+{{-- Is this page still Relevant?? --}}
 @section('content')
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Learning Paths"
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="learning-path"
+            title="Learning Paths"
+            iconName="method"
+            description="Learning Paths take the guesswork out of what you need to be practicing in order to reach your goals"
+        ></page-header>
+    </div>
 
-    @component('partials._header-banner')
-        @slot('content')
-            <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <i class="icon-learning-paths tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                    <span class="tw-text-32 tw-font-bold">Learning Paths</span>
-                </h1>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Learning Paths take the guesswork out of what you need to be practicing in order to reach
-                    your goals
-                </p>
-            </div>
-        @endslot
-    @endcomponent
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <div class="tw-flex tw-flex-col mv-3">
             <div class="tw-flex tw-flex-row pv-3">
                 <h1 class="heading tw-capitalize">All Learning Paths</h1>

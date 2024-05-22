@@ -1,6 +1,6 @@
 <?php
 $layout = 'books.layout';
-if(!empty($user)){
+if (!empty($user)) {
     $layout = 'partials.layout';
 } ?>
 
@@ -26,4 +26,3 @@ if(!empty($user)){
         login-api="{{ url()->route('user_management_system.login.cookie').'?redirect_to='.$redirectUrl }}"
     ></best-beginner-drum-book>
 @endsection
-

@@ -1,6 +1,6 @@
 <?php
 $layout = 'books.layout';
-if(!empty($user)){
+if (!empty($user)) {
     $layout = 'partials.layout';
 } ?>
 
@@ -9,12 +9,14 @@ if(!empty($user)){
 @section('meta')
     <title>The Drummer's Toolbox | Musora</title>
     <meta name="author" content="Brandon Toews">
-    <meta name="description" content="Here you will find all the digital resources that pair with the material in
+    <meta name="description"
+        content="Here you will find all the digital resources that pair with the material in
         The Drummer’s Toolbox. These including pre-built Recommended Listening playlists, drumless play-along
         tracks, and tons of Drumeo resources.">
 
-{{--    <meta property="og:image" content="{{ cdn('books/drummers-toolbox/share-image.png') }}">--}}
-    <meta property="og:description" content="Here you will find all the digital resources that pair with the material
+    {{--    <meta property="og:image" content="{{ cdn('books/drummers-toolbox/share-image.png') }}"> --}}
+    <meta property="og:description"
+        content="Here you will find all the digital resources that pair with the material
         in The Drummer’s Toolbox. These including pre-built Recommended Listening playlists, drumless play-along
         tracks, and tons of Drumeo resources.">
     <meta property="og:title" content="The Drummer's Toolbox">
@@ -34,4 +36,3 @@ if(!empty($user)){
         login-api="{{ url()->route('user_management_system.login.cookie').'?redirect_to='.url()->current() }}"
     ></drummers-toolbox>
 @endsection
-

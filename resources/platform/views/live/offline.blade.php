@@ -32,17 +32,17 @@
 @endsection
 
 @section('content')
-    <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
-    <page-header
-        page-type="{{ $headerDataObj->type }}"
-        icon-name="{{ $headerDataObj->iconName }}"
-        title="{{ $headerDataObj->title }}"
-        :ctas="{{ json_encode($headerDataObj->ctas) }}"
-        description="Practice sessions, Q&A, celebrations, and more are available during {{ $brand }} live lessons. Subscribe to an event or the whole calendar, so you don't miss out!"
-    ></page-header>
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
-
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
+        <page-header
+            page-type="{{ $headerDataObj->type }}"
+            icon-name="{{ $headerDataObj->iconName }}"
+            title="{{ $headerDataObj->title }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+            description="Practice sessions, Q&A, celebrations, and more are available during {{ $brand }} live lessons. Subscribe to an event or the whole calendar, so you don't miss out!"
+        ></page-header>
+    </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <div class="tw-flex tw-flex-col mv-3">
             <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-[10px]">
                 <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">

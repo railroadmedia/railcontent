@@ -21,6 +21,7 @@ Route::domain('{drumeoDomain}')
         //    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF']);
+        Route::get('/restart', [SalesController::class, 'restart'] );
 
         //    sales pages
         Route::get('/method', [SalesController::class, 'method']);
@@ -42,11 +43,14 @@ Route::domain('{drumeoDomain}')
         Route::get('/alesis/existing', [SalesController::class, 'alesisExisting']);
         Route::get('/alesis-strata', [SalesController::class, 'alesisStrata']);
         Route::get('/alesis-strata/existing', [SalesController::class, 'alesisStrataExisting']);
+        Route::get('/alesis-strata-core', [SalesController::class, 'alesisStrataCore']);
+        Route::get('/alesis-strata-core/existing', [SalesController::class, 'alesisStrataCoreExisting']);
         Route::get('/alesis-nitro-pro', [SalesController::class, 'alesis']);
         Route::get('/alesis-nitro-pro/existing', [SalesController::class, 'alesisExisting']);
 
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);
+        Route::get('/drum-month', [SalesController::class, 'drumMonth']);
         Route::get('/trial', [SalesController::class, 'trial']);
         Route::get('/trial2', [SalesController::class, 'trial']);
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner']);

@@ -97,6 +97,40 @@
             ];
         }
     }
+    else if ($catalogueMeta['name'] == 'Drumeo Monthly Collaborations') {
+        $headerData['type'] = 'student-collaborations';
+        $headerData['title'] = 'Drumeo Monthly Collaborations';
+        $headerData['iconName'] = 'academic-cap-filled';
+        $headerData['description'] = "Collaborate with the community with Drumeo Monthly Collaborations! Each month a new Play-Along is chosen and members are tasked to submit their videos playing along to the song. At the end of each month, every video is joined together to create a single performance!";
+        if ($brand === 'drumeo') {
+            $headerData['ctas'] = [
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'What is Student Collaboration?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/448684113',
+                    ]
+                ],
+                [
+                    'type' => 'VideoModalCta',
+                    'props' => [
+                        'text' => 'How to Create Your Video?',
+                        'faIconClass' => 'fa-question-circle',
+                        'iframeSrc' => '//player.vimeo.com/video/448684140',
+                    ]
+                ],
+                [
+                    'type' => 'GoogleFormCta',
+                    'props' => [
+                        'text' => 'Submit A Video',
+                        'faIconClass' => 'fa-chevrons-right',
+                        'iframeSrc' => 'https://docs.google.com/forms/d/e/1FAIpQLSdRIO4-j89ItSXadApA5Q-70Nz1ZMIURvfPfrFZB0olOyYdmw/viewform?embedded=true',
+                    ]
+                ]
+            ];
+        }
+    }
     else if ($catalogueMeta['name'] == 'Student Reviews') {
         $headerData['type'] = 'student-review';
         $headerData['title'] = 'Student Reviews';
@@ -161,10 +195,18 @@
             ];
         }
     }
-    else if ($catalogueMeta['name'] == 'Q & A') {
+    else if ($catalogueMeta['name'] == 'Q&A' || $catalogueMeta['name'] == 'Q & A') {
         $headerData['type'] = 'qanda';
-        $headerData['title'] = 'Q & A';
+        $headerData['title'] = 'Q&A';
         $headerData['iconName'] = 'question-mark-circle';
+        $headerData['description'] = 'Submit your questions using the "Ask A Question" button, in the Q&A thread in the forums, or live in the community chat.';
+        $headerData['ctas'][] = [
+            'type' => 'AskAQuestionCta',
+            'props' => [
+                'emailRecipient' => config('mailora.'. $brand . '.ask-question-recipient'),
+                'emailLogo' => config('mailora.'. $brand . '.logo-link')
+            ]
+        ];
     }
     else if ($catalogueMeta['name'] == 'Chords & Scales') {
         $headerData['type'] = 'chordsandscales';
@@ -197,6 +239,12 @@
         $headerData['iconName'] = 'drum';
         $headerData['description'] = "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.";
     }
+    else if ($lessonType === 'Recommendation') {
+        $headerData['type'] = 'recommended';
+        $headerData['title'] = 'Inspired By Your Activity';
+        $headerData['iconName'] = 'recommendation';
+        $headerData['description'] = "Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests.";
+    }
     else {
         $headerData['type'] = 'generic';
         $headerData['title'] = $catalogueMeta['name'];
@@ -220,34 +268,6 @@
     <title>{{ ucfirst($brand) }} {{ ucfirst($catalogueMeta['name']) }} | Musora</title>
 @endsection
 
-@section('layout-styles')
-    <style>
-        .search-button-col {
-            -webkit-box-tw-flex: 0;
-            -ms-tw-flex: 0 0 50px;
-            tw-flex: 0 0 50px;
-            max-width: 50px;
-            min-width: 50px;
-        }
-
-        button.btn.page-button {
-            margin: 0 3px;
-        }
-
-        button.btn.page-button > span {
-            border-width: 1px;
-            font-weight: 500;
-        }
-    </style>
-@endsection
-
-@section('layout-scripts')
-    @if($lessonType === 'student-review')
-        {{-- todo: script --}}
-        {{--        <script src="{{ mix('assets/members/js/student-review-form.js') }}"></script>--}}
-    @endif
-@endsection
-
 @section('review-modal-section')
     @if($lessonType === 'student-review' || $lessonType === 'student-focus')
         @include('partials._review-modal', ['brand' => $brand])
@@ -255,34 +275,8 @@
 @endsection
 
 @section('content')
-    @if($lessonType === 'Recommendation')
-        <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
 
-        <div class="tw-container tw-mx-auto tw-mt-[30px] tw-px-4 lg:tw-px-8">
-            <div class="tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] tw-items-start tw-flex tw-justify-between tw-pb-5">
-                <div class="tw-text-2xl md:tw-text-[32px] dark:tw-text-white tw-flex">
-                    <span class="tw-font-bold">Inspired By Your Activity</span>
-                    <div class="tw-group tw-relative">
-                        <musora-icon icon-name="info" class="tw-text-[#65656B] dark:tw-text-[#80A0B9] tw-w-[25px] tw-h-[25px] tw-ml-1" onclick="openModal()"></musora-icon>
-
-                        <div class="tw-left-full tw-top-0 tw-ml-2 tw-absolute tw-p-[15px] tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#B2B2B5] dark:tw-border-[#444447] tw-bg-[#F4F4F5] dark:tw-bg-[#232327] tw-z-30 tw-min-w-max tw-hidden group-hover:tw-block">
-                            <div class="tw-max-w-[343px]">
-                                <div class="tw-flex tw-flex-col tw-h-full">
-                                    <div class="tw-flex tw-grow tw-items-center">
-                                        <span>Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- <a href="{{ $recommendationLinks->$brand }}" class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-semibold tw-text-sm tw-hidden md:tw-flex tw-items-center tw-text-black" title="Learn More">
-                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-mr-1"></musora-icon>
-                    Experimental Feature
-                </a> --}}
-            </div>
-        </div>
-    @else
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <breadcrumb :breadcrumbs="{{ json_encode($breadcrumbs) }}"></breadcrumb>
         <page-header
             page-type="{{ $headerDataObj->type }}"
@@ -295,7 +289,7 @@
             :info-data="{{ json_encode($headerDataObj->infoData) }}"
             :ctas="{{ json_encode($headerDataObj->ctas) }}"
         ></page-header>
-    @endif
+    </div>
 
     @if(session()->has('success-message'))
         <div class="form-success-message container mt-3">
@@ -306,7 +300,7 @@
     @endif
 
     @if($showInProgress)
-        <section class="tw-container tw-mx-auto dark:tw-text-white tw-px-4 lg:tw-px-8">
+        <section class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl dark:tw-text-white tw-px-4 md:tw-px-8">
             <!-- Section Title -->
             <div class="tw-flex tw-items-center tw-mt-[30px] tw-mb-4 tw-w-full tw-justify-between">
                 <a href="/{{ $brand }}/lesson-history/in-progress" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
@@ -335,66 +329,7 @@
         </section>
     @endif
 
-{{--    @if($lessonType === 'student-review' || $lessonType === 'question-and-answer' || !empty($isAllContent)--}}
-{{--        && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]))--}}
-{{--        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">--}}
-{{--            <div class="tw-flex tw-flex-col @if($showInProgress) tw-mt-[14px] lg:tw-mt-[6px] @else tw-mt-[30px] @endif">--}}
-{{--                <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">--}}
-{{--                    <div class="tw-flex tw-flex-col tw-mb-3 md:tw-mb-0 tw-mr-auto">--}}
-{{--                        <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">--}}
-{{--                            All {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}</h1>--}}
-{{--                    </div>--}}
-{{--                    <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-0">--}}
-{{--                        <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="addToCalendarModal">--}}
-{{--                            <i class="fas fa-calendar-plus mr-1"></i>--}}
-{{--                            Subscribe to Calendar--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <add-event-modal--}}
-{{--                modal-id="addToCalendarModal"--}}
-{{--                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] ?? null }}"--}}
-{{--                theme-color="{{ $brand }}"--}}
-{{--                toggleSubscribe="toggleSubscribe"--}}
-{{--            ></add-event-modal>--}}
-{{--        </div>--}}
-{{--    @else--}}
-{{--        @if( $catalogueMeta['name'] !== "Play Alongs" || $catalogueMeta['name'] === "Play Alongs" && $brand === "guitareo" )--}}
-{{--            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">--}}
-{{--                <div class="tw-flex tw-flex-col @if($showInProgress) tw-mt-[14px] lg:tw-mt-[6px] @else tw-mt-[30px] @endif">--}}
-{{--                    <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">--}}
-{{--                        <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">--}}
-{{--                            <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">--}}
-{{--                                All--}}
-{{--                                @if( !empty($catalogueMeta['shortname']) && $catalogueMeta['shortname'] === 'Podcast')--}}
-{{--                                    Episodes --}}{{-- Change Podcast Name}} --}}
-{{--                                @else--}}
-{{--                                    {{ $catalogueMeta['shortname'] ?? $catalogueMeta['name'] }}--}}
-{{--                                @endif--}}
-{{--                            </h1>--}}
-{{--                        </div>--}}
-{{--                        @if( $catalogueMeta['name'] !== "Songs" && !empty(config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType]) )--}}
-{{--                            <div class="tw-flex tw-flex-col">--}}
-{{--                                <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="addToCalendarModal">--}}
-{{--                                    <i class="fas fa-calendar-plus mr-1"></i>--}}
-{{--                                    Subscribe to Calendar--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                            <add-event-modal--}}
-{{--                                modal-id="addToCalendarModal"--}}
-{{--                                subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonType] }}"--}}
-{{--                                theme-color="{{ $brand }}"--}}
-{{--                                toggleSubscribe="toggleSubscribe"--}}
-{{--                            ></add-event-modal>--}}
-{{--                        @endif--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endif--}}
-{{--    @endif--}}
-
-    <div class="tw-container tw-mx-auto tw-px-4 lg:tw-px-8 tw-mt-[30px] dark:tw-text-white">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-[30px] dark:tw-text-white">
         @if( $catalogueMeta['name'] === "Play Alongs" && $brand === "drumeo" )
             <play-alongs
                 ref="playAlongsVueInstance"
@@ -431,12 +366,6 @@
 
     <div id="featureModal" class="modal">
         <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-            {{-- <div class="tw-bg-[#FFAE00] tw-px-[10px] tw-py-0.5 tw-rounded-md tw-font-bold tw-text-sm tw-inline-block">
-                <div class="tw-flex tw-items-center">
-                    <musora-icon icon-name="info" class="tw-w-[15px] tw-h-[15px] tw-ml-1"></musora-icon>
-                    Experimental Feature
-                </div>
-            </div> --}}
             <p class="tw-my-2 dark:tw-text-white">Here's a list of items we think you'd be interested in! New content will be available twice a week, taking into account your activity and the preferences of other students with similar interests. </p>
             <a href="{{ $recommendationLinks->$brand }}" class="tw-font-bebas-neue tw-uppercase tw-flex tw-items-center dark:tw-text-white">
                 Learn More <musora-icon icon-name="right-arrow" class="tw-w-7" ></musora-icon>

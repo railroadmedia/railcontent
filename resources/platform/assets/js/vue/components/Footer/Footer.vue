@@ -14,7 +14,7 @@ const currentYear = computed(() => {
 
 <template>
   <footer data-component="Footer" class="tw-py-6 tw-bg-white dark:tw-bg-[#081825]/90">
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col xl:tw-flex-row ">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col xl:tw-flex-row ">
       <!-- Logo -->
       <a :href="`/members`" class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 xl:tw-mb-0 tw-w-fit tw-mx-auto">
         <svg class="tw-w-24 tw-transition tw-mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11878.76 2760.46">
@@ -30,9 +30,15 @@ const currentYear = computed(() => {
       <div class="tw-flex md:tw-px-4 tw-text-xs tw-text-gray-[#3F3F46] dark:tw-text-[#9EC0DC] tw-justify-center tw-w-full tw-items-center ">
         <span class="tw-hidden lg:tw-block tw-mr-1 tw-py-2">Musora Media, Inc. © {{ currentYear }} </span>
         <ul class="tw-flex tw-items-center tw-text-xs">
-          <li class="tw-mx-1"><a :href="`/terms-of-service`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
-          <li class="tw-mx-1"><a :href="`/privacy-policy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
-          <li v-if="brand === 'drumeo'" class="tw-mx-1 tw-text-center"><a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Legacy Resources</a></li>/
+          <li class="tw-mx-1"><a :href="`/terms`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
+          <li class="tw-mx-1"><a :href="`/privacy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
+          <template v-if="brand === 'drumeo'">
+            <li class="tw-mx-1 tw-text-center">
+              <a :href="`/${brand}/legacy-resources`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">
+                Legacy Resources
+              </a>
+            </li>/
+          </template>
           <li class="tw-mx-1"><a :href="`/${brand}/support`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Support</a></li>/
           <li class="tw-mx-1"><a :href="`/${brand}/student-experience-studies`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Student Experience Studies</a></li>/
           <li class="tw-mx-1"><a :href="`/user-management-system/logout/cookie`" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Logout</a></li>

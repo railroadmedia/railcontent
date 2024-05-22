@@ -58,7 +58,7 @@ import { onMounted, ref } from 'vue';
 </script>
 
 <template>
-    <div id="instructorInfo" class="tw-container tw-mx-auto fluid tw-bg-white dark:tw-bg-[#081825] tw-rounded-[10px]">
+    <div id="instructorInfo" class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl fluid tw-bg-white dark:tw-bg-[#081825] tw-rounded-[10px]">
         <div class="tw-max-w-screen-2xl tw-px-4 md:tw-px-8 tw-mx-auto tw-py-4">
             <!-- BREADCRUMBS -->
             <BreadCrumb

@@ -195,11 +195,5 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../../assets/sass/partials/variables";
-
-.search-button-col {
-  flex: 0 0 50px;
-  max-width: 50px;
-  min-width: 50px;
-}
+  @import "../../assets/sass/partials/variables";
 </style>

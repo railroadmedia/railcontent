@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    <breadcrumbs>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <breadcrumb
             :breadcrumbs="{{ json_encode([
                 [
@@ -26,14 +26,14 @@
                 ]
             ]) }}"
         ></breadcrumb>
-    <page-header
-        page-type="packs"
-        title="Packs"
-        icon-name="box"
-        description="{{ $headerDescription }}"
-    ></page-header>
-
-    <div class="tw-container tw-mx-auto tw-mb-3 tw-mt-[30px] tw-px-4 lg:tw-px-8">
+        <page-header
+            page-type="packs"
+            title="Packs"
+            icon-name="box"
+            description="{{ $headerDescription }}"
+        ></page-header>
+    </div>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-mb-3 tw-mt-[30px] tw-px-4 md:tw-px-8">
         <collection-wrapper
             collection-type="pack"
             :infinite-scroll="false"

@@ -3,8 +3,10 @@
 namespace App\Modules\CustomerIO\ApiGateways;
 
 use Exception;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Psr\Http\Message\RequestInterface;
 
 class CustomerIoApiGateway
 {
