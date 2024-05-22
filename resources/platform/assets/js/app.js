@@ -25,6 +25,8 @@ import Referral from './vue/Views/Referral';
 import Stc from './vue/Views/STC';
 import LessonHistory from './vue/Views/LessonHistory';
 import Cohort from './vue/Views/Cohort';
+import BestBeginnerDrumBook from './vue/Views/BestBeginnerDrumBook';
+import DrummersToolbox from './vue/Views/DrummersToolbox';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -297,6 +299,8 @@ app.component('AppContainer', AppContainer)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
+    .component('BestBeginnerDrumBook', BestBeginnerDrumBook)
+    .component('DrummersToolbox', DrummersToolbox)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     // .component('PackCatalogue', PackCatalogue)
     .component('LessonHistory', LessonHistory)
