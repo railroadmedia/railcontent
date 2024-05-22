@@ -222,7 +222,10 @@
                     <p class="validation-error">{{ $error }}</p>
                 @endforeach
 
-                @include('musora.pages.redeem._redeem-form')
+                @include('musora.pages.redeem._redeem-form',[
+                    'buttonText' => 'Get started',
+                    'buttonColor' => 'bg-[#000C17] text-white',
+                ])
              @else
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
@@ -245,7 +248,9 @@
 
                 @include('musora.pages.redeem._redeem-form', [
                     "existing" => true,
-                    "accessCodeArray" => $accessCodeArray
+                    "accessCodeArray" => $accessCodeArray,
+                    'buttonText' => 'Click To Redeem &raquo;',
+                    'buttonColor' => 'bg-[#000C17] text-white',
                 ])
              @endif
 
@@ -264,6 +269,7 @@
     </div>
 
     @include('_partials.components.forms.redeem-form-script', [
-        'existingMember' => !$newAccount
+        'existingMember' => !$newAccount,
+        'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim')
     ])
 @endsection

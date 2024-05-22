@@ -242,7 +242,10 @@
                     <p class="validation-error">{{ $error }}</p>
                 @endforeach
 
-                @include('musora.pages.redeem._redeem-form')
+                @include('musora.pages.redeem._redeem-form', [
+                    'buttonText' => 'Get started',
+                    'buttonColor' => 'bg-drumeo text-white',
+                ])
              @else
                 @if(!empty($alesis))
                     <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
@@ -278,7 +281,9 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true
+                    "existing" => true,
+                    'buttonText' => 'Click To Redeem &raquo;',
+                    'buttonColor' => 'bg-drumeo text-white',
                 ])
              @endif
 
@@ -298,29 +303,8 @@
 
     @include("drumeo.sales.partials._footer")
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $('.code-input').bind(
-                    'paste', function (e) {
-                        var value = e.originalEvent.clipboardData.getData('text');
-                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                        for (var i = 0; i < chunks.length; i++) {
-                            $('.code-input').eq(i).val(chunks[i]);
-                        }
-                    }
-                ).bind(
-                    'input',
-                    function (e) {
-                        console.log($(this).val().length);
-                        if ($(this).val().length == 4) {
-                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                        }
-                    }
-                );
-            }
-        );
-    </script>
+    @include('_partials.components.forms.redeem-form-script', [
+        'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
+        'existingMember' => !$newAccount
+    ])
 @endsection

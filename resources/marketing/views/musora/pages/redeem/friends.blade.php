@@ -452,8 +452,8 @@
                         <input type="hidden" name="credentials_type" value="new">
                         <div class="flex flex-wrap">
                             <p class="w-full input-describer">Code</p>
-                            <input class="w-full" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="access_code" maxlength="24" placeholder="XXXXXXXXXXXXXXXXXXXXXXX" value="" />
-                            <span class="text-xs text-[#EF4444]" x-show="errors.code" x-text="errors.code"></span>
+                            <input class="w-full" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" maxlength="24" placeholder="XXXXXXXXXXXXXXXXXXXXXXX" value="" />
+                            <span class="text-xs text-[#EF4444]" x-show="errors.access_code" x-text="errors.access_code"></span>
                         </div>
                         <p class="input-describer">Email Address</p>
                         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email Address" value="{{-- Input::old('email') --}}">
@@ -465,7 +465,16 @@
                         <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.passwordCheck }" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
                         <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
                         <div class="text-center">
-                            <input name="button" type="submit" id="button" class="apply hover:opacity-80 transition-opacity bg-white text-black lg:w-2/3" value="Redeem your pass" />
+                            <button
+                                class="apply hover:opacity-80 transition-opacity lg:w-2/3"
+                                :class="loading ? 'bg-[#B2D4F4] text-black' : !isValid ? 'bg-[#B91C1C] ttext-white' : submitted ? 'bg-[#15803D] text-white' : 'bg-white text-black'"
+                                type="submit"
+                            >
+                                <span x-show="!loading && isValid && !submitted">Redeem your pass</span>
+                                <span x-show="loading"><i class="fa-solid fa-spinner mr-1"></i> Loading</span>
+                                <span x-show="!isValid"><i class="fa-solid fa-rotate-left mr-1"></i> Retry submission</span>
+                                <span x-show="submitted"><i class="fa-solid fa-check mr-1"></i>Successfully Submitted</span>
+                            </button>
                             <p class="text-xs mt-3 mb-5">
                                 <em>No purchase is required. Try it for free.</em>
                             </p>

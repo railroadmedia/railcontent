@@ -192,39 +192,22 @@
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
 
-            <form x-data="redeemForm" id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
+            <form
+                x-data="redeemForm"
+                id="commentform"
+                name="pianote"
+                method="post"
+                action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem"
+                @submit.prevent="submitRedeem($event)"
+            >
                 {{ csrf_field() }}
                 <input type="hidden" name="credentials_type" value="new">
                 <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
                 <div class="container mx-auto clearfix">
                     <div class="flex flex-wrap w-full">
                         <p class="w-full input-describer">Code</p>
-                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="code" maxlength="24" value="" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" />
-                        <span class="text-xs text-[#EF4444]" x-show="errors.code" x-text="errors.code"></span>
-{{--                        <div class="w-1/6">--}}
-{{--                            <input class="w-full code-input" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX"--}}
-{{--                                   value="{{ old('code1') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="w-1/6">--}}
-{{--                            <input class="w-full code-input" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX"--}}
-{{--                                   value="{{ old('code2') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="w-1/6">--}}
-{{--                            <input class="w-full code-input" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX"--}}
-{{--                                   value="{{ old('code3') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="w-1/6">--}}
-{{--                            <input class="w-full code-input" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX"--}}
-{{--                                   value="{{ old('code4') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="w-1/6">--}}
-{{--                            <input class="w-full code-input" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX"--}}
-{{--                                   value="{{ old('code5') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="w-1/6">--}}
-{{--                            <input class="w-full code-input" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX"--}}
-{{--                                   value="{{ old('code6') }}">--}}
-{{--                        </div>--}}
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" maxlength="24" value="" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" />
+                        <span class="text-xs text-[#EF4444]" x-show="errors.access_code" x-text="errors.access_code"></span>
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Email</p>
@@ -245,7 +228,10 @@
                         <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
                     </div>
                     <div class="w-full">
-                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;" @click.prevent="submitRedeem" />
+                        @include('_partials.components.forms.redeem-form-buttons', [
+                            'buttonText' => 'Click To Redeem &raquo;',
+                            'buttonColor' => 'bg-pianote text-white'
+                        ])
                     </div>
                 </div>
             </form>
@@ -267,7 +253,14 @@
             @endforeach
 
 
-            <form id="commentform" x-data="redeemForm" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
+            <form
+                x-data="redeemForm"
+                id="commentform"
+                name="pianote"
+                method="post"
+                action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem"
+                @submit.prevent="submitRedeem($event)"
+            >
                 <input type="hidden" name="credentials_type" value="existing">
                 <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
                 {{ csrf_field() }}
@@ -275,8 +268,8 @@
                 <div class="container mx-auto  clearfix">
                     <div class="flex flex-wrap w-full">
                         <p class="w-full input-describer">Code</p>
-                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.code }" type="text" name="access_code" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" maxlength="24" value="" />
-                        <span class="text-xs text-[#EF4444]" x-show="errors.code" x-text="errors.code"></span>
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" placeholder="XXXXXXXXXXXXXXXXXXXXXXXX" maxlength="24" value="" />
+                        <span class="text-xs text-[#EF4444]" x-show="errors.access_code" x-text="errors.access_code"></span>
                     </div>
                     <div class="w-full">
                         <p class="input-describer">Email</p>
@@ -291,7 +284,10 @@
                         <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
                     </div>
                     <div class="w-full">
-                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;" @click.prevent="submitRedeem" />
+                        @include('_partials.components.forms.redeem-form-buttons', [
+                            'buttonText' => 'Click To Redeem &raquo;',
+                            'buttonColor' => 'bg-pianote text-white'
+                        ])
                     </div>
                 </div>
             </form>
@@ -314,6 +310,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     @include('_partials.components.forms.redeem-form-script', [
-        'existingMember' => !$newAccount
+        'existingMember' => !$newAccount,
+        'api' => get_musora_brand_base_url().'/ecommerce/access-codes/redeem'
     ])
 @stop
