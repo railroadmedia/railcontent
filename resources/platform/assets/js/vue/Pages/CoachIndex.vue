@@ -2,26 +2,27 @@
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <!-- Breadcrumb -->
         <Breadcrumb :breadcrumbs="breadcrumbs" />
+        
         <!-- Page Header -->
         <PageHeader
             title="Coaches"
             icon-name="whistle"
+            class="tw-mb-[30px]"
             :description="headerDescription"
         />
-    </div>
-    <!-- Coach Event -->
-    <div v-if="hasCoachEvent" class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-4">
+
+        <!-- Coach Event -->
         <CoachEvent
+            v-if="hasCoachEvent"
             :preloaded-content="coachEvent"
             :current-date-string="coachEventCurrentDateString"
             :subscription-calendar-id="coachEventSubscriptionCalendarId"
             :youtube-event-id="coachEventYoutubeEventId"
             :time-cutoff-minutes="coachEventTimeCutoffMinutes"
         />
-    </div>
-    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-4">
+
         <!-- Featured Coach -->
-        <div class="tw-mb-[30px]">
+        <div class="tw-mb-[30px]" v-if="featuredCoachLength.length || formattedFeaturedCoaches.length">
             <div class="tw-flex tw-flex-row">
                 <div class="tw-flex tw-flex-col tw-flex-grow">
                     <div class="tw-text-[#00101D] dark:tw-text-white tw-pb-1">
@@ -29,21 +30,27 @@
                             Featured Coach
                         </h2>
                     </div>
-                    <StaticHeader
-                        v-if="featuredCoachLength === 1"
-                        v-for="formattedCoach in formattedFeaturedCoaches"
-                        :top-subtitle="formattedCoach.subtitle"
-                        title-classes="tw-text-[#FAA300]"
-                        :title="formattedCoach.title"
-                        :cta-text="formattedCoach.primary_cta_text"
-                        :description="formattedCoach.description"
-                        :cta-url="formattedCoach.primary_cta_url"
-                        :img="formattedCoach.img"
+                    <HeaderCarousel 
+                        v-if="featuredCoachLength > 1" 
+                        :preloaded-carousel="formattedFeaturedCoaches" 
                     />
-                    <HeaderCarousel v-else-if="featuredCoachLength > 1" :preloaded-carousel="formattedFeaturedCoaches" />
+                    <template v-if="formattedFeaturedCoaches.length">
+                        <StaticHeader
+                            v-for="(formattedCoach,i) in formattedFeaturedCoaches"
+                            :key="i"
+                            :top-subtitle="formattedCoach.subtitle"
+                            title-classes="tw-text-[#FAA300]"
+                            :title="formattedCoach.title"
+                            :cta-text="formattedCoach.primary_cta_text"
+                            :description="formattedCoach.description"
+                            :cta-url="formattedCoach.primary_cta_url"
+                            :img="formattedCoach.img"
+                        />
+                    </template>
                 </div>
             </div>
         </div>
+
         <!-- Latest Featured Lessons -->
         <div class="tw-mb-[30px]">
             <MiniCatalogueSection
@@ -60,10 +67,17 @@
                 :pre-loaded-content="followedLessons"
             />
         </div>
+
         <!-- Upcoming Coaches -->
-        <UpcomingCoach v-if="hasUpcomingCoaches" :upcoming-coaches="upcomingCoaches" />
-        <!-- Active Coaches -->
-        <ActiveCoach v-if="hasActiveCoaches" :active-coaches="activeCoaches"  />
+        <UpcomingCoach 
+            v-if="hasUpcomingCoaches" 
+            :upcoming-coaches="upcomingCoaches" 
+        />
+        
+        <ActiveCoach 
+            v-if="hasActiveCoaches" 
+            :active-coaches="activeCoaches" 
+        />
 
         <CollectionWrapper
             :collection-type="collectionType"
