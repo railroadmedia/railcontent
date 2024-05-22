@@ -24,10 +24,8 @@
                     :hasInstrumentless= "hasInstrumentless"
                     :lessonProgress= "lessonProgress"
                     :likeCount= "likeCount"
-                    :lockUnowned= "lockUnowned"
                 />
             </div>
-
             <!-- Related Lessons -->
             <div class="tw-w-full tw-col-span-3 tw-flex tw-flex-col 2xl:tw-mt-0 2xl:tw-col-span-1 2xl:tw-row-span-3">
                 <!-- Refactor as a colleciton component -->
@@ -41,7 +39,6 @@
                     catalogue-type="grid" 
                     :theme-color="brand" 
                     :use-theme-color="true"
-                    :lock-unowned="lockUnowned" 
                     :pre-loaded-content="relatedLessons" 
                     :display-inline="true"
                     :user-id="String(userId)" 
@@ -101,10 +98,6 @@
         assignments: Array,
         resources: Array,
         relatedLessons: Object,
-        lockUnowned: {
-            type: Boolean,
-            default: false
-        },
     });
 
     onBeforeMount( ()=> {

@@ -161,10 +161,6 @@
         hasInstrumentless: Boolean,
         lessonProgress: [Number, String],
         likeCount: [Number, String],
-        lockUnowned: {
-            type: Boolean,
-            default: false
-        },
     });
 
     const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});

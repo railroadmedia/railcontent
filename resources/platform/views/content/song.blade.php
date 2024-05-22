@@ -54,9 +54,6 @@
         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :assignments="{{ json_encode($formattedAssignments) }}"
         :related-lessons="{{ $relatedLessons }}"
-        @if(!empty($lockUnowned))
-            :lock-unowned="true"
-        @endif
     ></song>
 
 @endsection
