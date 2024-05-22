@@ -391,9 +391,9 @@ const seekToChapter = (time) => {
 <template>
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto tw-max-w-[1703px] tw-px-4">
             <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
-                :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]" classOverride="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4" />
+                :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]" />
         </div>
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col"
             :class="{ 'tw-gap-4': !playlistsStore.playerExpanded }">
