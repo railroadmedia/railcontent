@@ -2,31 +2,32 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('redeemForm', () => ({
             errors: {
-                code: '',
+                access_code: '',
                 email: '',
                 password: '',
                 passwordCheck: '',
             },
+            loading: false,
+            isValid: true,
+            submitted: false,
 
             async submitRedeem(event) {
                 this.errors = {
-                    code: '',
+                    access_code: '',
                     email: '',
                     password: '',
                     passwordCheck: '',
                 }
-                let isValid = true;
+                this.isValid = true;
+                this.loading = true;
 
                 const form = event.target;
-
-                // console.log(Object.fromEntries(data))
 
                 //validation
                 const access_code = form.access_code.value;
                 if (!access_code.replaceAll(' ', '') || access_code.length < 24) {
-                    this.errors.code = 'Code is not valid.';
+                    this.errors.access_code = 'Code is not valid.';
                 }
-
 
                 const email = form.email.value;
                 const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -50,14 +51,15 @@
 
                 Object.keys(this.errors).forEach(key => {
                     if (this.errors[key]) {
-                        isValid = false;
+                        this.loading = false;
+                        this.isValid = false;
                     }
                 })
 
-                if (isValid) {
+                if (this.isValid) {
                     const data = new FormData(form);
 
-                    fetch('{{ $api }}', {
+                    const response = await fetch('{{ $api }}', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -65,14 +67,18 @@
                         body: JSON.stringify({
                             ...Object.fromEntries(data)
                         })
-                    }).then(async res => {
-                        const body = await res.json();
-                        console.log({body})
-                    }).catch(error => {
-                        console.log(error)
                     })
+                    const result = await response.json();
+                    this.loading = false;
 
-                    // form.submit();
+                    if(result.errors){
+                        this.isValid = false;
+                        Object.keys(result.errors).forEach(key => {
+                            this.errors[key] = result.errors[key][0];
+                        })
+                    } else {
+                        this.submitted = true;
+                    }
                 }
             }
         }))
