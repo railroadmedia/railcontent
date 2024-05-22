@@ -1466,14 +1466,14 @@ class ContentRepository extends RepositoryBase
                         ->whereNotNull('lessons.id')
                         ->groupBy('m.'.$this->groupByFields['associated_table']['column'])
                         ->directPaginate($this->page, $this->limit)
-                        ->orderByRaw($orderBy.' '.$this->orderDirection)
+                        ->orderGroupedContentsBy($this->orderBy, $this->orderDirection, 'm.content_id', $orderBy)
                         ->getToArray();
             } else {
                 //Group by content's column: artist
                 $contentRows =
                     $query->selectRaw(' "'.$this->groupByFields['field'].'" as type')
                         ->directPaginate($this->page, $this->limit)
-                        ->orderByRaw($this->groupByFields['field'].' '.$this->orderDirection)
+                        ->orderGroupedContentsBy($this->orderBy, $this->orderDirection, ConfigService::$tableContent . '.id', $this->groupByFields['field'])
                         ->getToArray();
             }
 
