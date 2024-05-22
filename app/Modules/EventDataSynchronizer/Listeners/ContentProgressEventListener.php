@@ -715,8 +715,11 @@ class ContentProgressEventListener
         $userBrandMethodLevels = user()->brand_method_levels;
         $brand = config('railcontent.brand');
         $userBrandMethodLevels[$brand] = $event->higherKeyProgress;
-
-        user()->brand_method_levels = $userBrandMethodLevels;
-        user()->save();
+        $content = $this->contentService->getById($event->contentId);
+        //only brand method should be stored
+        if($content['slug'] == $brand.'-method') {
+            user()->brand_method_levels = $userBrandMethodLevels;
+            user()->save();
+        }
     }
 }
