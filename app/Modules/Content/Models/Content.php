@@ -7,13 +7,12 @@ use App\Modules\Content\database\factories\ContentFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Log;
 use Modules\Content\Models\ContentCreativity;
 use Modules\Content\Models\ContentEssentials;
 use Modules\Content\Models\ContentGears;
-use Modules\Content\Models\ContentGenre;
 use Modules\Content\Models\ContentLifestyle;
-use App\Modules\Content\Models\ContentStyle;
 use Modules\Content\Models\ContentTheory;
 use Modules\Content\Models\ContentTopic;
 
@@ -209,6 +208,7 @@ class Content extends Model
         'gear' => 'string',
         'genre' => 'string',
         'released' => 'string',
+        'length_in_seconds' => 'integer',
 
     ];
 
@@ -747,5 +747,17 @@ class Content extends Model
         Log::debug("Content Field ($this->id) $key inserted $value");
         $field->value = $value;
         $field->save();
+    }
+
+    public function contentHierarchy(): HasOne
+    {
+        return $this->hasOne(ContentHierarchy::class, 'parent_id');
+    }
+
+    public function setLengthInSeconds($value)
+    {
+        if ($value) {
+            $this->setField('length_in_seconds', $value);
+        }
     }
 }
