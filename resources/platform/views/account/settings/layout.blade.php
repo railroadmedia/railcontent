@@ -133,6 +133,7 @@
         <div class="tw-flex tw-flex-row">
             <div class="tw-flex tw-flex-col grow">
                 <div id="filterPillContainer" class="tw-flex tw-overflow-x-scroll tw-scrolling-touch tw-no-scrollbar tw-gap-[4px] md:tw-gap-[10px] tw-px-[30px]">
+                    {{-- @php dd($sections) @endphp --}}
                     @foreach($sections as $index => $section)
                         <a href="{{ $section['url'] }}" class="tw-btn-primary tw-flex tw-items-center tw-justify-center tw-text-center tw-border tw-text-[#000C17] dark:tw-text-white dark:tw-border-[#445F74] tw-px-4 lg:tw-px-6 tw-mb-0 tw-leading-[1px]
                             {{ $section['active'] ? 'tw-bg-[#28282D] dark:tw-bg-[#445F74] tw-text-white' : 'hover:tw-bg-[#E7E7E8] hover:dark:tw-bg-[#223F57] hover:dark:tw-text-white tw-bg-white dark:tw-bg-[#000C17] tw-border-[#CBCBCD] dark:tw-text-white' }}">

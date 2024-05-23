@@ -18,10 +18,18 @@ export const useUserStore = defineStore({
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
     isAdmin: (state) => state.user?.permission_level === 'administrator',
+    userCreatedYear: (state) => {
+      if(state.user?.created_at) {
+        return new Date(state.user.created_at).getFullYear();
+      } else {
+        return new Date().getFullYear();
+      }
+    }
   },
   actions: {
     setUser (user) {
       this.user = user;
+      console.log(this.user)
     },
     setCurrentBrand (brand) {
       this.brand = brand;

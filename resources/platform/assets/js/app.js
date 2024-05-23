@@ -11,6 +11,11 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
+import Profile from './vue/Pages/Settings/Profile.vue';
+import LoginCredentials from './vue/Pages/Settings/LoginCredentials.vue';
+import Payments from './vue/Pages/Settings/Payments.vue';
+import NotificationSettings from './vue/Pages/Settings/NotificationSettings.vue';
+import Details from './vue/Pages/Settings/Details.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
@@ -27,7 +32,6 @@ import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
 import CoachShow from './vue/Pages/CoachShow';
-
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -282,6 +286,11 @@ app.component('AppContainer', AppContainer)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('Profile', Profile)
+    .component('LoginCredentials', LoginCredentials)
+    .component('Payments', Payments)
+    .component('NotificationSettings', NotificationSettings)
+    .component('Details', Details)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
