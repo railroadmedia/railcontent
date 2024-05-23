@@ -40,7 +40,7 @@ class PlaylistListener
         $ids = (\Arr::pluck($items, 'id'));
         $contents = $this->contentService->getByIds($ids);
 
-        $duration = $contents->sumFetched('fields.video.fields.length_in_seconds') + $contents->sumFetched('assignments_duration');
+        $duration = $contents->sumFetched('fields.length_in_seconds') + $contents->sumFetched('fields.video.fields.length_in_seconds');
         Decorator::$typeDecoratorsEnabled = true;
         $this->userPlaylistsService->update($playlistItemsUpdated->playlistId, ['duration' => $duration, 'updated_at'=>Carbon::now()->toDateTimeString()]);
     }

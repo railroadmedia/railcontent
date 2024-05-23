@@ -221,7 +221,7 @@ class RailcontentV2DataSyncingService
                 ->where('key', 'length_in_seconds')
                 ->first();
 
-            $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
+            $contentColumnsToUpdate['length_in_seconds'] = $contentLengthInSecondsField ? (integer)($contentLengthInSecondsField->value) : null;
 
             // update content row
             $contentColumnsToUpdate['id'] = $contentRow->id;
