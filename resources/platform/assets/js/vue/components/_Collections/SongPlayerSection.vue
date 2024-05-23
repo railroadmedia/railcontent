@@ -36,9 +36,9 @@
                         {{ songMeta }}
                     </p>
                     <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
-                        <button v-if="hasInstrumentless" style="padding: 0 24px;" 
+                        <button v-if="hasInstrumentless" style="padding: 0 24px;"
                             @click="openInstrumentless"
-                            :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
+                            :class="`tw-h-[50px] tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3`">
                             <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -50,7 +50,7 @@
                         </button>
 
                         <button style="padding: 0 24px;" @click="openFull"
-                            :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
+                            :class="`tw-h-[50px] tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3`">
                             <i class="fas fa-play tw-mr-2 tw-text-base"></i>
                             PLAY FULL TRACK
                         </button>
@@ -69,18 +69,18 @@
                             </span>
                         </button>
                     </div>
-                    <ContentLessonActionButtons 
+                    <ContentLessonActionButtons
                         :brand="brand"
-                        :title="songTitle" 
+                        :title="songTitle"
                         :description="songArtist"
                         :is-liked="isLiked"
-                        :like-count="likeCount" 
+                        :like-count="likeCount"
                         :is-added="isAdded"
                         :content-id="contentId"
-                        :user-id="userId" 
-                        :resources="resources" 
-                        content-type="song" 
-                        :thumbnailUrl="thumbnailUrl" 
+                        :user-id="userId"
+                        :resources="resources"
+                        content-type="song"
+                        :thumbnailUrl="thumbnailUrl"
                     />
                 </div>
             </div>
@@ -94,19 +94,19 @@
         <!-- Soundslice Modals -->
         <transition name="show-from-bottom">
             <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
-                <SoundSlice 
-                    :user-id="userId" 
+                <SoundSlice
+                    :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug" 
+                    :soundslice-slug="soundsliceObject.soundsliceSlug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
-                        <SoundSliceControls 
-                            :title="`${songTitle} (Instrumentless)`" 
+                        <SoundSliceControls
+                            :title="`${songTitle} (Instrumentless)`"
                             :disable-next="true"
-                            :disable-prev="true" 
-                            @onClose="handleCloseSoundslice" 
+                            :disable-prev="true"
+                            @onClose="handleCloseSoundslice"
                         />
                     </template>
                 </SoundSlice>
@@ -114,19 +114,19 @@
         </transition>
         <transition name="show-from-bottom">
             <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
-                <SoundSlice 
-                    :user-id="userId" 
+                <SoundSlice
+                    :user-id="userId"
                     :theme-color="brand"
                     :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                    :soundslice-slug="soundsliceObject.soundsliceSlug" 
+                    :soundslice-slug="soundsliceObject.soundsliceSlug"
                     :contentId="contentId"
                 >
                     <template v-slot:soundsliceControls>
-                        <SoundSliceControls 
-                            :title="`${songTitle} (Full)`" 
-                            :disable-next="true" 
+                        <SoundSliceControls
+                            :title="`${songTitle} (Full)`"
+                            :disable-next="true"
                             :disable-prev="true"
-                            @onClose="handleCloseSoundslice" 
+                            @onClose="handleCloseSoundslice"
                         />
                     </template>
                 </SoundSlice>
@@ -225,7 +225,7 @@
             singeo: 'PLAY VOICELESS TRACK',
             guitareo: 'PLAY GUITARLESS TRACK',
             pianote: 'PLAY PIANOLESS TRACK'
-        }[brand]);
+        }[brand.value]);
     };
 
     const getBrandSpecificParams = () => {
@@ -234,7 +234,7 @@
             singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
             guitareo: '',
             pianote: '&show_chords=1'
-        }[brand]);
+        }[brand.value]);
     };
 
     const handleCloseSoundslice = () => {
