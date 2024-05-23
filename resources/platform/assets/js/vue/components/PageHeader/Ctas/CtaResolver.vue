@@ -4,6 +4,7 @@
 </template>
 
 <script setup>
+import AskAQuestionCta from './AskAQuestionCta.vue'
 import SongRequest from '../../Songs/SongRequest.vue';
 import ResetProgressCta from './ResetProgressCta.vue';
 import DownloadResourcesCta from './DownloadResourcesCta.vue';
@@ -17,6 +18,7 @@ import PageHeaderPrimaryCta from '../PageHeaderPrimaryCta.vue';
 import CreatePlaylistCta from '../../Playlists/CreatePlaylistCta.vue';
 
 const componentMap = {
+    AskAQuestionCta,
     SongRequest,
     ResetProgressCta,
     DownloadResourcesCta,

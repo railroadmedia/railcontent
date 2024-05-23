@@ -27,11 +27,21 @@ class RedirectLegacyCartRequestsToShopifyControllers
 
             // pass shopify cart id as well since we cannot share these session cookies across domains
             $shopifyCartSessionId = session(ShopifyCartAPIController::SHOPIFY_CART_ID_SESSION_KEY);
-
+            $urlParams = [];
             if (!empty($shopifyCartSessionId)) {
-                $musoraURL = $musoraURL . '?shopify-cart-id=' . $shopifyCartSessionId;
+                $urlParams['shopify-cart-id'] = $shopifyCartSessionId;
             }
+            $authKey = session('auth_key');
+            $userId = session('user_id');
 
+            if (!empty($authKey) && !empty($userId)) {
+                $urlParams['auth_key'] = $authKey;
+                $urlParams['user_id'] = $userId;
+            }
+            $queryString = http_build_query($urlParams);
+            if(!empty($queryString)) {
+                $musoraURL = $musoraURL.'?'.$queryString;
+            }
             return redirect()->away($musoraURL);
         }
 

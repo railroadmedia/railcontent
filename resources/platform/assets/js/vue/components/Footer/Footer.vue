@@ -14,7 +14,7 @@ const currentYear = computed(() => {
 
 <template>
   <footer data-component="Footer" class="tw-py-6 tw-bg-white dark:tw-bg-[#081825]/90">
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col xl:tw-flex-row ">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-flex tw-justify-center tw-flex-col xl:tw-flex-row ">
       <!-- Logo -->
       <a :href="`/members`" class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 xl:tw-mb-0 tw-w-fit tw-mx-auto">
         <svg class="tw-w-24 tw-transition tw-mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11878.76 2760.46">

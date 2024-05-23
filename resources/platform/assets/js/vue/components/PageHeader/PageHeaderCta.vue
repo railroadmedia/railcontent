@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import ContentService from '../../vuesora/assets/js/services/content';
 

@@ -3,10 +3,10 @@
         <!-- BREADCRUMBS -->
         <Breadcrumb
             :breadcrumbs="[{ title: firstLevelTitle, url: firstLevelUrl }, { title: lastLevelTitle }]"
-            classOverride="tw-container tw-mx-auto tw-px-4 lg:tw-px-8"
+            classOverride="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8"
         />
         <!-- Child Catalog -->
-        <div class="tw-container tw-mx-auto tw-px-4 lg:tw-px-8 tw-pt-6 dark:tw-text-white">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 tw-pt-6 dark:tw-text-white">
             <CollectionWrapper
                 :title="title"
                 :collection-type="collectionType"
@@ -15,7 +15,6 @@
                 :included-types="includedTypes"
                 :pre-loaded-content="preLoadedContent"
                 :statuses="statuses"
-                :showBackButton="true"
                 :parentUrl="firstLevelUrl"
                 :subscription-calendar-id="subscriptionCalendarId" 
             />

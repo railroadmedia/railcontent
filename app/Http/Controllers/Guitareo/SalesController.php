@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guitareo;
 
+use App\Modules\Ecommerce\Services\UserAccessPermissionsService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -148,7 +149,19 @@ class SalesController extends BaseController
 
     public function thirtyDaysToBetterStrumming()
     {
-        return view('guitareo.products.30-days-to-better-strumming', [ 'theme' => 'guitareo' ]);
+//        $productId = 741;
+        $productId = 846;
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('guitareo.products.30-days-to-better-strumming', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'theme' => 'guitareo',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
     }
 
     public function products(Request $request, $domain, $page = null)

@@ -68,18 +68,28 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 @endsection
 
 @section('content')
-    <page-header
-        page-type="dashboard"
-        title="{{ $headerDataObj->title }}"
-        description="{{ $headerDataObj->description }}"
-        hero-img="{{ $headerDataObj->heroImg }}"
-        hero-img-classes="{{ $headerDataObj->heroImgClasses ?? '' }}"
-        content-id="{{ $headerDataObj->contentId }}"
-        :info-data="{{ json_encode($headerDataObj->infoData) }}"
-        :ctas="{{ json_encode($headerDataObj->ctas) }}"
-    ></page-header>
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        {{-- Header --}}
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Dashboard",
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="dashboard"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            hero-img-classes="{{ $headerDataObj->heroImgClasses ?? '' }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+        ></page-header>
+    </div>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
         <div class="tw-flex tw-flex-col">
 
             {{-- Dashboard Header --}}

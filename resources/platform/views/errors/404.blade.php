@@ -75,7 +75,7 @@ $userData = assembleUserAttributes(user());
                     <div class="tw-absolute tw-h-full tw-w-full tw-top-0 tw-left-0 tw-bg-[#E5E5E5]/90 dark:tw-bg-[#00101D]/90"></div>
 
                     {{-- Content --}}
-                    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
+                    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
                         <div class="tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
                             <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Page not found</h1>
                             <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h1>

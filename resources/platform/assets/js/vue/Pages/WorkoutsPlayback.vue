@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <Breadcrumb :breadcrumbs="breadcrumbProps" classOverride="tw-w-full tw-max-w-[1450px] tw-mx-auto tw-px-4" />
-
-        <div
-            class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1450px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
+    <div class="tw-w-full">
+        <div class="tw-w-full tw-mx-auto tw-max-w-[1450px] tw-px-4">
+            <Breadcrumb :breadcrumbs="breadcrumbProps" classOverride="" />
+        </div>
+        <div class="tw-grid tw-grid-cols-3 xl:tw-gird-rows-4 xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1450px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col tw-gap-4">
             <!-- VIDEO WRAPPER -->
             <section class="tw-col-span-3 xl:tw-row-span-2 tw-w-full tw-flex"
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : 'tw-mb-4'">

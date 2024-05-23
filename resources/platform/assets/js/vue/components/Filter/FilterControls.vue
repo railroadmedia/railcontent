@@ -1,12 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col lg:tw-flex-row tw-w-full tw-justify-between" :class="{ 'tw-mb-5': !hasPills}">
         <div class="tw-flex tw-grow tw-relative tw-items-center tw-mb-3 xl:tw-mb-0">
-            <!-- Back Button -->
-            <template v-if="showBackButton">
-                <a :href="parentUrl" class="tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[40px] tw-h-[40px] tw-border-[2px] tw-border-[#CBCBCD] hover:tw-border-[#000C17] dark:tw-border-white tw-rounded-full hover:tw-bg-[#000C17] hover:dark:tw-bg-white tw-text-[#000C17] dark:tw-text-white hover:tw-text-white hover:dark:tw-text-[#000C17] tw-mr-3">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-            </template>
             <!-- Filter Tabs -->
             <FilterTabs v-if="tabOptions.length > 0" :active-tab="activeTab" :tab-options="tabOptions" @onTabClick="handleTabClick" />
         </div>
@@ -47,10 +41,6 @@ import FilterSortDropdown from './FilterSortDropdown.vue';
 import MusoraIcon from "../MusoraIcons/MusoraIcon";
 
 const props = defineProps({
-    showBackButton: {
-        type: Boolean,
-        default: () => false,
-    },
     parentUrl: {
         type: String,
         default: () => "/",

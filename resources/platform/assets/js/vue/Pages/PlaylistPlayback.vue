@@ -391,9 +391,10 @@ const seekToChapter = (time) => {
 <template>
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
-        <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
-            :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]" classOverride="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4" />
-
+        <div class="tw-w-full tw-mx-auto tw-max-w-[1703px] tw-px-4">
+            <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
+                :breadcrumbs="[{ title: 'Playlists', url: `/${brand}/playlists` }, { title: playlistName, url: secondLevelUrl }, { title: playlistItemTitle }]" />
+        </div>
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col"
             :class="{ 'tw-gap-4': !playlistsStore.playerExpanded }">
             <!--Video Wrapper -->

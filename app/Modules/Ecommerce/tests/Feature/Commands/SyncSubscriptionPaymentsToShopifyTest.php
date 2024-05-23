@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Jobs\Shopify\SyncSubscriptionPaymentsToShopifyOrdersJo
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
@@ -44,13 +45,17 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
 
     private function createSubscriptionPayments(int $count, bool $isBeforeLaunch): Collection
     {
+        if ($isBeforeLaunch) {
+            $startDate = new Carbon('1970-01-01T00:00:00Z');
+            $endDate = $this->launchDate;
+        } else {
+            $startDate = $this->launchDate;
+            $endDate = now();
+        }
         return SubscriptionPayment::factory()
             ->count($count)
-            ->create([
-                'created_at' => $isBeforeLaunch
-                    ? $this->faker->dateTimeBetween('1970-01-01T00:00:00Z', $this->launchDate)
-                    : $this->faker->dateTimeBetween($this->launchDate)
-            ]);
+            ->createdAtInDateRange($startDate, $endDate)
+            ->create();
     }
 
     public function test_dispatcher_uses_the_limit()
@@ -104,28 +109,24 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
         // before our wanted period
         SubscriptionPayment::factory()
             ->count(6)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween('1970-01-01T00:00:00Z', $startCreatedAt)
-            ]);
+            ->createdAtInDateRange(new Carbon('1970-01-01T00:00:00Z'), $startCreatedAt)
+            ->create();
 
         $beforeLaunch = SubscriptionPayment::factory()
             ->count(5)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween($startCreatedAt, $this->launchDate)
-            ]);
+            ->createdAtInDateRange($startCreatedAt, $this->launchDate)
+            ->create();
 
         $afterLaunch = SubscriptionPayment::factory()
             ->count(4)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween($this->launchDate, $endCreatedAt)
-            ]);
+            ->createdAtInDateRange($this->launchDate, $endCreatedAt)
+            ->create();
 
         // after our wanted period
         SubscriptionPayment::factory()
             ->count(3)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween($endCreatedAt)
-            ]);
+            ->createdAtInDateRange($endCreatedAt, now())
+            ->create();
 
         // we won't bother checking the log message, this just helps keep it from outputting in the test run
         Log::shouldReceive("info");
@@ -150,10 +151,11 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
 
         SubscriptionPayment::factory()
             ->count(5)
-            ->create([
-                'created_at' => $this->faker->dateTimeBetween('1970-01-01T00:00:00Z', $this->launchDate),
-                'shopify_id' => $this->faker->randomNumber(9)
-            ]);
+            ->createdAtInDateRange(new Carbon('1970-01-01T00:00:00Z'), $this->launchDate)
+            ->state(new Sequence(
+                fn ($sequence) => [ 'shopify_id' => $this->faker->randomNumber(9)]
+            ))
+            ->create();
 
         // we won't bother checking the log message, this just helps keep it from outputting in the test run
         Log::shouldReceive("info");
