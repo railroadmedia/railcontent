@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Modules\UserManagementSystem\Services\UserService;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -16,13 +18,14 @@ enum AccessMethod {
 class RecommendationService
 {
 
-    public AccessMethod $accessMethod;
+    public AccessMethod $defaultAccessMethod;
     private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
-        //private DatabaseManager $databaseManager,
+        private UserPermissionsService $userPermissionsService,
+        private UserService $userService,
     ) {
-        $this->accessMethod = AccessMethod::HUGGINGFACE;
+        $this->defaultAccessMethod = AccessMethod::DB;
         $this->invalidConfigurations = [
             'pianote' => [RecommenderSection::Course],
             'singeo' => [RecommenderSection::Course],
@@ -45,7 +48,6 @@ class RecommendationService
     }
 
 
-
     private function hasNoResults($brand, $section): bool
     {
         $brand = strtolower($brand);
@@ -59,10 +61,10 @@ class RecommendationService
             'brand' => $brand,
             'section' => $section->value
         ];
-        $content = $this->postToHuggingFaceWithRetry($data);
+        $content = $this->requestData($data);
         if (!isset($content[$userID])) {
             $msg = print_r($content, true);
-            Log::warning("Malformed data from Huggingface: $msg");
+            Log::warning("Unexpected data from RecSys: $msg");
         }
         return $content[$userID] ?? [];
     }
@@ -73,12 +75,58 @@ class RecommendationService
             'user_ids' => [$userID],
             'brand' => $brand,
         ];
-        $content = $this->postToHuggingFaceWithRetry($data);
+        $content = $this->requestData($data);
         if (!isset($content[$userID])) {
             $msg = print_r($content, true);
-            Log::warning("Malformed data from Huggingface: $msg");
+            Log::warning("Unexpected data from RecSys $msg");
         }
         return $content[$userID] ?? [];
+    }
+
+    private function requestData($data, AccessMethod $accessMethod = null)
+    {
+        $accessMethod ??= $this->defaultAccessMethod;
+        $returnData = match($accessMethod) {
+            AccessMethod::HUGGINGFACE => $this->postToHuggingFaceWithRetry($data),
+            AccessMethod::PDO => throw new InvalidArgumentException('RecSys PDB Connection  not supported'),
+            AccessMethod::DB => $this->pullFromDataBase($data),
+        };
+        return $returnData;
+    }
+
+    private function pullFromDataBase($data)
+    {
+        if ($data['user_ids']->count() > 1) {
+            throw new InvalidArgumentException('RecommendationService DB handler does not support multiple userIds');
+        }
+        if (!is_set($data['section'])) {
+            $data['section'] = array_column(RecommenderSection::cases(), 'value');
+        }
+        $userID = $data['user_ids'][0];
+        $recommendations = [$userID => []];
+        foreach($data['section'] as $section) {
+            $recommendations[$userID][$section] = $this->getUserRecommendationsOrColdStartFromDB($userID, $data['brand'], $section);
+        }
+        return $recommendations;
+    }
+
+    private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit=20)
+    {
+        $tableName = $brand . $section . '_recommendations';
+        $recommendations = DB::table($tableName)->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit);
+
+        if (!$recommendations) {
+            $user = $this->userService->getByIdOrNull($userID);
+            $recommendations = [];
+            if (!$user) {
+                return $recommendations;
+            }
+            if ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value)){
+                $coldStartTableName = $brand . '_' . $section . '_BEGINNER_POPULAR_ITEMS_RECOMMENDATIONS';
+                $recommendations = DB::table($coldStartTableName)->orderBy('popularity_rank')->limit(20);
+            }
+        }
+        return $recommendations;
     }
 
     private function postToHuggingFaceWithRetry($data) {
