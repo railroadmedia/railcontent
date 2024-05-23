@@ -145,8 +145,7 @@ class ContentService
                         $useFastImplementation,
                         $cacheKey,
                         $identifier,
-                        &
-                        $recommendations
+                        &$recommendations
                     ) {
                         $cached = Cache::store('redis')->get($cacheKey);
                         if (!empty($cached) && array_filter($cached)) {
