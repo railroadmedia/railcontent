@@ -7,15 +7,24 @@
 
             <!-- Continue section -->
             <div v-if="startedContent?.data?.length" class="tw-mt-[33px]">
-                <MiniCatalogueSection title="Continue" seeAllAriaLabel="See All Songs In Progress" :seeAllUrl="continueUrl"
-                    :preLoadedContent="startedContent.data" :isMiniView="true" :show-dropdown="true" />
+                <MiniCatalogueSection 
+                    title="Continue" 
+                    seeAllAriaLabel="See All Songs In Progress" 
+                    :seeAllUrl="continueUrl"
+                    :preLoadedContent="startedContent.data" 
+                    :isMiniView="true" 
+                    :show-dropdown="true" 
+                />
             </div>
 
             <!-- Song Results -->
             <div :class="`dark:tw-text-white songs-catalogue-container ${startedContent?.data?.length ? 'tw-mt-[14px] lg:tw-mt-[6px]' : 'tw-mt-[30px]'}`">
                 <transition appear name="fade">
-                    <CollectionWrapper :preLoadedContent="listLessons" collectionType="song" :tabs="tabs"
-                        :filterableValues="filterableValues" />
+                    <CollectionWrapper 
+                        collectionType="song" 
+                        :tabs="tabs"
+                        :filterableValues="filterableValues" 
+                    />
                 </transition>
             </div>
         </div>
@@ -23,10 +32,10 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed, onBeforeMount } from 'vue';
     import PageHeader from '../components/PageHeader/PageHeader.vue';
     import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
-    import CollectionWrapper from "../components/CollectionWrapper/CollectionWrapper.vue";
+    import CollectionWrapper from "../components/CollectionWrapper/SanityCollectionWrapper.vue";
     import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
 
     const props = defineProps({
@@ -42,18 +51,8 @@
             type: Number,
             default: 0
         },
-        songsNumber: {
-            type: Number,
-            default: 0
-        },
         startedContent: {
             type: [Object, String],
-            default: () => ({
-                data: []
-            })
-        },
-        listLessons: {
-            type: Object,
             default: () => ({
                 data: []
             })
@@ -68,6 +67,7 @@
         }
     });
 
+    //Computed Props
     const ctaConfig = computed(() => {
         return [
             {
@@ -83,4 +83,9 @@
             url: props.allArtistsUrl
         }
     })
+
+    //Lifecycle Hooks
+    onBeforeMount( async () => {
+
+    });
 </script>
