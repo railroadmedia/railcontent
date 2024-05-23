@@ -951,4 +951,27 @@ class ContentQueryBuilder extends QueryBuilder
 
         return $this;
     }
+
+    public function orderGroupedContentsBy($column = null, $direction = 'asc', $matchingColumn = null, $defaultColumn = null)
+    {
+        if ($column && $column == 'popularity') {
+            $this->selectRaw(' COALESCE(SUM(railcontent_content_statistics.starts), 0) AS popularity')
+            ->leftJoin('railcontent_content_statistics', function (JoinClause $joinClause) use($matchingColumn) {
+                $joinClause->on(
+                    'railcontent_content_statistics.content_id',
+                    '=',
+                    $matchingColumn
+                )
+                    ->where(
+                        'railcontent_content_statistics.start_interval',
+                        '>=',
+                        DB::raw('DATE_SUB(NOW(), INTERVAL 3 MONTH)')
+                    );
+            })->orderByRaw($column . ' ' . $direction);
+        }else{
+            $this->orderByRaw($defaultColumn . ' ' . $direction);
+        }
+
+        return $this;
+    }
 }
