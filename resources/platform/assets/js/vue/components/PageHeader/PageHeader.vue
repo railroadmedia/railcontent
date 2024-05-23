@@ -24,8 +24,8 @@
     <template #bottom-full>
       <div class="tw-flex tw-items-center"
         :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : ''">
-        <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : ''">
-          <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+        <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : 'tw-hidden'">
+          <PageHeaderCta v-bind="primaryCtaProps" />
         </div>
         <div class="tw-justify-between tw-items-center" :class="{
           'tw-flex tw-w-full': isSongsPage,
@@ -57,7 +57,7 @@ import { computed, onUpdated, onMounted, ref } from 'vue';
 
 import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
-import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
+import PageHeaderCta from './PageHeaderCta.vue';
 import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
 import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
 import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
@@ -84,13 +84,10 @@ const props = defineProps({
   description: String,
 });
 
-const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
+const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
-const primaryCtaIcon = computed(() => primaryCtaProps.value.faIconClass);
-const primaryCtaText = computed(() => primaryCtaProps.value.text);
-const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
-const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'PageHeaderPrimaryCta') || []);
+const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.props?.isPrimary !== true) || []);
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 

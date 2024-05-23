@@ -52,7 +52,8 @@
                 'props' => [
                     'text' => 'Start first lesson',
                     'url' => $nextLessonUrl,
-                    'faIconClass' => 'fa-play'
+                    'faIconClass' => 'fa-play',
+                    'isPrimary' => true,
                 ]
             ],
             [

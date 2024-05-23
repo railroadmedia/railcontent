@@ -52,7 +52,8 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
         'props' => [
             'text' => $ctaText,
             'url' => $ctaUrl,
-            'showAllAlways' => true
+            'showAllAlways' => true,
+            'isPrimary' => true,
         ]
     ];
 
