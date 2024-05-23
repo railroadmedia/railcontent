@@ -388,7 +388,11 @@ class RevenueCatController extends Controller
     {
         $productId = $productId1;
         if (strpos($productId, ':') !== false) {
-            $productId = explode(':', $productId)[0];
+            $productIds = explode(':', $productId);
+            //starting with 2024 the new Google products name have the format: 'musora_subscription:annual-plus' and 'musora_subscription:monthly-plus'
+            if (isset($productIds[1]) && !in_array($productIds[1], ['annual-plus', 'monthly-plus'])) {
+                $productId = explode(':', $productId)[0];
+            }
         }
 
         return $productId;
