@@ -149,6 +149,10 @@ class ShopifyCartAPIController extends Controller
             session()->flash('cartNumberOfItems', count($responseData['meta']['cart']['items'] ?? []));
             session()->flash('cartSubTotal', $responseData['meta']['cart']['totals']['due'] ?? 0);
         }
+        if($request->has('auth_key') && $request->has('user_id')) {
+            $redirectResponse->with('user_id', $request->get('user_id'));
+            $redirectResponse->with('auth_key', $request->get('auth_key'));
+        }
 
         return $redirectResponse;
     }
