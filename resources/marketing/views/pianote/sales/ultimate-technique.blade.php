@@ -725,15 +725,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <script>
-    document.getElementById('email').addEventListener('click', function() {
-        window.location.href = 'mailto:support@pianote.com';
-    });
-    </script>
 
     @include('_partials.components.countdown', [
         'countdownDate' => '2024-06-11 0:00:00',
         'promoVersion' => false,
     ])
-    @yield('scripts')
 @stop
