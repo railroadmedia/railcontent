@@ -8,6 +8,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -134,22 +135,38 @@ class ContentService
             $identifier = implode('-', [$userId, $brand, $sectionString]);
             $cacheKey = 'RECSYS-' . CacheHelper::getKeyFromArguments($identifier);
             $lockKey = 'RECSYS-LOCK-'.CacheHelper::getKeyFromArguments($identifier);
-            Cache::lock($lockKey, 15)->block(15, function () use ($userId, $brand, $sections, $useFastImplementation, $cacheKey, $identifier, & $recommendations) {
-                $cached = Cache::store('redis')->get($cacheKey);
-                if (!empty($cached) && array_filter($cached)) {
-                    $recommendations = $cached;
-                    Log::info('Retrieve recommendations from Cache for Key ' . $cacheKey . ' :' . $identifier);
-                } else {
-                    $recommendations = $this->pullRecommendations(
+            try {
+                Cache::lock($lockKey, 20)->block(
+                    15,
+                    function () use (
                         $userId,
                         $brand,
                         $sections,
                         $useFastImplementation,
                         $cacheKey,
-                        $identifier
-                    );
-                }
-            });
+                        $identifier,
+                        &
+                        $recommendations
+                    ) {
+                        $cached = Cache::store('redis')->get($cacheKey);
+                        if (!empty($cached) && array_filter($cached)) {
+                            $recommendations = $cached;
+                            Log::info('Retrieve recommendations from Cache for Key ' . $cacheKey . ' :' . $identifier);
+                        } else {
+                            $recommendations = $this->pullRecommendations(
+                                $userId,
+                                $brand,
+                                $sections,
+                                $useFastImplementation,
+                                $cacheKey,
+                                $identifier
+                            );
+                        }
+                    }
+                );
+            } catch (LockTimeoutException $ex) {
+                $recommendations = $this->pullRecommendations($userId, $brand, $sections, $useFastImplementation);
+            }
         } else {
             $recommendations = $this->pullRecommendations($userId, $brand, $sections, $useFastImplementation);
         }
