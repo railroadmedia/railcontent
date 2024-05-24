@@ -65,16 +65,18 @@ class RevenueCatService
         if (!empty($entitlements)) {
             foreach ($entitlements as $entitlement) {
                 $productIdentifier = $entitlement->product_identifier;
+                $productPlanIdentifier = $entitlement->product_plan_identifier;
                 $subscriptionData = $subscriptions->$productIdentifier;
 
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
                 $store = $type.'_store';
+                $entitlementProduct = ($productIdentifier == 'musora_subscription')?$productIdentifier.':'.$productPlanIdentifier : $productIdentifier;
                 if ($subscriptionData->period_type == 'trial') {
-                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]];
+                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$entitlementProduct]];
                 } else {
                     $productsMap = array_merge(
-                        [config('ecommerce.'.$store.'_products_map')[$productIdentifier]],
-                        [config('ecommerce.'.$store.'_products_map_trial')[$productIdentifier]]
+                        [config('ecommerce.'.$store.'_products_map')[$entitlementProduct]],
+                        [config('ecommerce.'.$store.'_products_map_trial')[$entitlementProduct]]
                     );
                 }
                 $musoraProduct =
@@ -141,7 +143,7 @@ class RevenueCatService
                 ->where('email', $value)
                 ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
                 ->first();
-        if ($createIfNotExists && $value) {
+        if (!$user && $createIfNotExists && $value) {
             $parts = explode('@', $value);
             User::upsert(
                 [
