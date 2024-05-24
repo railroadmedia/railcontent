@@ -28,7 +28,7 @@ class Song extends BaseSanityModel
             //TODO song style is in the railcontent_content_styles table. We'll need a styles schema and reference it on this
             // new Field(FieldType::Array, 'style', of:'reference', list:),
             //TODO reference??
-            new Field(FieldType::String, 'artist'),
+
             //TODO can/should we do date instead and store just the year?
             new Field(FieldType::Number, 'released', 'Year Released'),
             //TODO reference??
@@ -39,6 +39,8 @@ class Song extends BaseSanityModel
             new BrandField(),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title']),
             new Field(FieldType::Number, 'length_in_seconds', 'Length', description: 'song length in seconds'),
+            new Field(FieldType::Reference, 'artist','Artist','' ,null,'artist'),
+            new Field(FieldType::Reference, 'genre','Genre','' ,null,'genre')
         ];
         parent::__construct('song', 'Song', $fields);
     }
