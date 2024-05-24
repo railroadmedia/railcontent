@@ -65,7 +65,7 @@ class RevenueCatService
         if (!empty($entitlements)) {
             foreach ($entitlements as $entitlement) {
                 $productIdentifier = $entitlement->product_identifier;
-                $productPlanIdentifier = $entitlement->product_plan_identifier;
+                $productPlanIdentifier = $entitlement->product_plan_identifier ?? '';
                 $subscriptionData = $subscriptions->$productIdentifier;
 
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
