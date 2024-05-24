@@ -36,13 +36,13 @@ const props = defineProps({
         type: String,
         default: 'content',
     },
-    isReplySection: {
-        type: Boolean,
-        default: false,
-    },
     placeholder: {
         type: String,
         default: '',
+    },
+    isStudentComment: {
+        type: Boolean,
+        default: true,
     },
 });
 
@@ -54,10 +54,20 @@ const showImageUploader = ref(false);
 const initialUploaderStep = ref('dropzone');
 const selectedImage = ref(null);
 
+const computedToolbar = computed(() => {
+    if (props.hasImageUploader) {
+        return 'bold italic underline | bullist numlist | link customImageUploader media | forecolor backcolor | emoticons';
+    } else if (props.isStudentComment) {
+        return 'link | emoticons';
+    }
+
+    return props.toolbar;
+});
+
 const initObject = computed(() => ({
     autoresize_min_height: props.height,
     body_class: `${isDarkModeSelected.value ? 'tw-dark' : ''}`,
-    toolbar: props.hasImageUploader ? 'bold italic underline | bullist numlist | link customImageUploader media | forecolor backcolor | emoticons' : props.toolbar,
+    toolbar: computedToolbar.value,
     branding: false,
     content_id: '#textEditor',
     content_style: `body.tw-dark { color: white } body { font-family: sans-serif; font-size:16px; font-weight:400; } p { margin:0; } blockquote { margin: 0 0 0 1em !important; padding: 10px 30px !important; border-radius: 7px; border-left: 3px solid;} blockquote.pianote { border-color: #F61A30 !important; background-color: rgb(246 26 48 / 5%); } blockquote.drumeo { border-color: #0B76DB !important; background-color: rgb(11 118 219 / 5%); } blockquote.guitareo { border-color: #00C9AC !important; background-color: rgb(0 201 172 / 5%); } blockquote.singeo { border-color: #8300E9 !important; background-color: rgb(131 0 233 / 5%) } .quote-heading em { text-transform:uppercase; } span.post-id { display:none; } body.tw-dark.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #9EC0DC; } body.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #223F57; } `,

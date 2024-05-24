@@ -65,7 +65,13 @@
                 </div>
 
                 <div class="tw-flex tw-flex-col tw-grow tw-w-full">
-                    <text-editor :fieldKey="contentId + '-comment-text-editor'" ref="textEditor" v-model="commentInterface" :height="150" placeholder="Share your thoughts..."></text-editor>
+                    <text-editor
+                        :fieldKey="contentId + '-comment-text-editor'"
+                        ref="textEditor" :is-student-comment="!currentUser.isAdmin"
+                        v-model="commentInterface"
+                        :height="150"
+                        placeholder="Share your thoughts...">
+                    </text-editor>
 
                     <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                         <button class="tw-btn-primary collapse-150 tw-text-white" :class="themeBgClass" :disabled="loading" dusk="submit-comment" @click="postComment">
