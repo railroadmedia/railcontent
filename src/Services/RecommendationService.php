@@ -7,6 +7,7 @@ use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Enums\RecommenderSection;
 
 enum AccessMethod {
@@ -51,6 +52,7 @@ class RecommendationService
     private function hasNoResults($brand, $section): bool
     {
         $brand = strtolower($brand);
+        $section = is_string($section) ? RecommenderSection::from($section) : $section;
         return isset($this->invalidConfigurations[$brand]) && in_array($section, $this->invalidConfigurations[$brand]);
     }
 
@@ -96,37 +98,42 @@ class RecommendationService
 
     private function pullFromDataBase($data)
     {
-        if ($data['user_ids']->count() > 1) {
+        if (count($data['user_ids']) > 1) {
             throw new InvalidArgumentException('RecommendationService DB handler does not support multiple userIds');
         }
-        if (!is_set($data['section'])) {
+        if (!isset($data['section'])) {
             $data['section'] = array_column(RecommenderSection::cases(), 'value');
         }
         $userID = $data['user_ids'][0];
         $recommendations = [$userID => []];
         foreach($data['section'] as $section) {
-            $recommendations[$userID][$section] = $this->getUserRecommendationsOrColdStartFromDB($userID, $data['brand'], $section);
+            if (!$this->hasNoResults($data['brand'], $section)) {
+                $recommendations[$userID][$section] = $this->getUserRecommendationsOrColdStartFromDB($userID, $data['brand'], $section);
+            }
         }
         return $recommendations;
     }
 
     private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit=20)
     {
-        $tableName = $brand . $section . '_recommendations';
-        $recommendations = DB::table($tableName)->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit);
+        $tableName = 'recommendations_' . $brand . '_' . $section ;
+        $tableName = strtolower($tableName);
+        $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get();
 
-        if (!$recommendations) {
+        if (!$recommendations || $recommendations->count() == 0) {
             $user = $this->userService->getByIdOrNull($userID);
             $recommendations = [];
             if (!$user) {
                 return $recommendations;
             }
             if ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value)){
-                $coldStartTableName = $brand . '_' . $section . '_BEGINNER_POPULAR_ITEMS_RECOMMENDATIONS';
-                $recommendations = DB::table($coldStartTableName)->orderBy('popularity_rank')->limit(20);
+                $coldStartTableName = 'recommendations_' . $brand . '_' . $section . '_beginner_popular_items';
+                $coldStartTableName = strtolower($coldStartTableName);
+                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('popularity_rank')->limit(20)->get();
             }
         }
-        return $recommendations;
+
+        return $recommendations->pluck('content_id')->toArray();
     }
 
     private function postToHuggingFaceWithRetry($data) {
