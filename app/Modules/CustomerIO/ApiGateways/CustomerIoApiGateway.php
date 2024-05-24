@@ -374,6 +374,41 @@ class CustomerIoApiGateway
     }
 
     /**
+     * @param string $customerIoSiteId
+     * @param string $customerIoTrackApiKey
+     * @param string $cioId
+     * @param array|null $attributes
+     * @param int|null $createdAtTimestamp
+     * @return void
+     * @throws Exception
+     */
+    public function updateCustomerByCioId(
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $cioId,
+        ?array $attributes = [],
+        ?int $createdAtTimestamp = null
+    ): void {
+        $url = 'https://track.customer.io/api/v1/customers/cio_' . $cioId;
+        $method = 'PUT';
+
+        $dataArray = $attributes;
+
+        if (!empty($createdAtTimestamp)) {
+            $dataArray['created_at'] = $createdAtTimestamp;
+        }
+
+        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        try {
+            $this->executeRequest($url, $method, $authHeaderKey, 'Basic', [], $dataArray);
+        } catch (Exception $e) {
+            Log::error('CustomerIoApiGateway::updateCustomerByCioId() failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
      * @param string $url
      * @param string $method
      * @param string $authToken

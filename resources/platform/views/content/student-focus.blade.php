@@ -1,3 +1,12 @@
+@php
+    $headerDescription = null;
+    if ($brand === "pianote" || $brand === "guitareo") {
+        $headerDescription = "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+    } elseif ($brand === "singeo") {
+        $headerDescription = "Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.";
+    }
+@endphp
+
 @extends('partials.layout')
 
 @section('meta')
@@ -5,27 +14,23 @@
 @endsection
 
 @section('content')
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+            <breadcrumb
+                :breadcrumbs="{{ json_encode([ 
+                    [
+                        "title" => "Student Focus",
+                    ]
+                ])}}"
+            ></breadcrumb>
+            <page-header
+                title="Student Focus"
+                icon-name="person-plus"
+                description="{{ $headerDescription }}"
+            >
+            </page-header>
+        </div>
 
-        @component('partials._header-banner', ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'])
-            @slot('content')
-                <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <musora-icon icon-name="person-plus-filled" class="tw-w-[33px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
-                        <span class="tw-text-32 tw-font-bold">Student Focus</span>
-                    </h1>
-
-                    <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                        @if($brand === 'pianote' || $brand === 'guitareo')
-                            Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
-                        @elseif($brand === 'singeo')
-                            Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
-                        @endif
-                    </p>
-                </div>
-            @endslot
-        @endcomponent
-
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <div class="tw-flex tw-flex-col mv-3">
                 <div class="tw-grid tw-gap-2 xl:tw-gap-4 tw-grid-cols-2 md:tw-grid-cols-3 xl:tw-grid-cols-4 2xl:tw-grid-cols-5 3xl:tw-grid-cols-6">
                     @foreach($lessonTypes as $lessonType)

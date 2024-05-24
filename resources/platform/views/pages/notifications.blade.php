@@ -6,15 +6,13 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
-        <notifications-table
-            brand="{{ $brand }}"
-            theme-color="{{ $brand }}"
-            :notifications="{{ $notifications }}"
-            settings-url="{{ url()->route('platform.profile.settings.notifications', ['userId' => user()->id]) }}"
-            notification-count="{{ $notificationCount }}"
-            :has-unread-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
-        />
-    </div>
+    <notifications-table
+        brand="{{ $brand }}"
+        theme-color="{{ $brand }}"
+        :notifications="{{ $notifications }}"
+        settings-url="{{ url()->route('platform.profile.settings.notifications', ['userId' => user()->id]) }}"
+        notification-count="{{ $notificationCount }}"
+        :has-unread-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+    />
     
 @endsection

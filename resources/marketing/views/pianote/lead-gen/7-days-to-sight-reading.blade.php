@@ -345,6 +345,7 @@
                             "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form',
                             "formName" => '7 Days To Sight Reading',
                         "buttonText" => "Get it now",
+                        "nameInput" => true,
                         "stacked" => true
                     ])
                 </div>
@@ -493,6 +494,8 @@
                     "formName" => '7 Days To Sight Reading',
                     "buttonText" => "Get it now",
                     'disclaimerColor' => '#B3B3B9',
+                        "nameInput" => true,
+                        "stacked" => true
                 ])
             </div>
         </div>

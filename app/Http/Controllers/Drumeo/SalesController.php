@@ -74,6 +74,14 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
     }
+    public function drumMonth()
+    {
+        return view('drumeo.sales.drum-month', ['theme' => 'drumeo', 'promoVersion' => true, 'promoPage' => 'true', ]);
+    }
+    public function restart()
+    {
+        return view('drumeo.sales.restart', ['theme' => 'drumeo']);
+    }
     public function promoEG()
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'evergreenVersion' => 'true']);
@@ -266,6 +274,22 @@ class SalesController extends BaseController
     {
         return view('drumeo.pages.redeem.redeem-page', [
             'alesisStrata' => true,
+            'newAccount' => false,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisStrataCore(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrataCore' => true,
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisStrataCoreExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesisStrataCore' => true,
             'newAccount' => false,
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);

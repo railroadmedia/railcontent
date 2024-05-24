@@ -15,30 +15,28 @@
 @endsection
 
 @section('content')
+    {{-- Header --}}
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-4">
+        <breadcrumb 
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Legacy Resources",
+                    "url" => "/drumeo/legacy-resources",
+                ],
+                [
+                    'title' => 'Loops'
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="loops"
+            title="Loops"
+            icon-name="metronome"
+            description="Do you want to play-along to any style of music? Maybe you want to work on your speed or timing? Use the loops below to help you!"
+        ></page-header>
+    </div>
 
-    @component('partials._header-banner', [
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
-    ])
-        @slot('content')
-            <div class="tw-flex tw-flex-col tw-pr-1">
-                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <i class="icon-loops  tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
-                    <span class="tw-text-32 tw-font-bold">Loops</span>
-                </h1>
-                <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Do you want to play-along to any style of music?
-                </p>
-                <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Maybe you want to work on your speed or timing?
-                </p>
-                <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base">
-                    Use the loops below to help you!
-                </p>
-            </div>
-        @endslot
-    @endcomponent
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 mv-3">
         <div class="flex flex-column mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading dark:tw-text-white">Bass Loops</h1>

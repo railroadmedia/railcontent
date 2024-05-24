@@ -4,26 +4,6 @@
     <title>{{ $parentContent->fetch('fields.title') }} | Musora</title>
 @endsection
 
-{{-- Page Specific Styles --}}
-@section('styles')
-    <style>
-        .pack-header::after {
-            content: '';
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            z-index:1;
-            background:rgba(0,0,0,.4);
-        }
-        .pack-header > * {
-            z-index:2;
-            position:relative;
-        }
-    </style>
-@endsection
-
 {{-- Learning Path JS --}}
 @section('layout-scripts')
     @if($parentContent->fetch('type') === 'learning-path' || $parentContent['type'] === 'learning-path-level')
@@ -34,52 +14,138 @@
 
 @php
     $headerData = [
+        'iconName' => null,
         'title' => null,
+        'description' => null,
         'heroImg' => null,
+        'progressLabelText' => null,
         'progress' => null,
         'contentId' => null,
         'infoData' => null,
+        'ctas' => null,
+        'darkModeLogo' => null,
+        'lightModeLogo' => null,
     ];
 
     $infoDataStrArr = [];
-    if ($parentContent->fetch('type') === 'course') {
-        if (isset($infoData['lessons']) && isset($infoData['xp'])) {
-            $infoDataStrArr = [
-                $infoData['lessons'] . ' Lessons',
-                $infoData['xp'] . ' XP'
-            ];
+    if ($parentContent->fetch('type') === 'challenge'){
+        $headerData['darkModeLogo'] = $parentContent->fetch('data.dark_mode_logo_url');
+        $headerData['lightModeLogo'] = $parentContent->fetch('data.light_mode_logo_url');
+    }
+    if ($parentContent->fetch('type') === 'course' || $parentContent->fetch('type') === 'challenge' || $parentContent->fetch('type') === 'song-tutorial') {
+        if (isset($infoData['lessons'])) {
+            $infoDataStrArr[] = $infoData['lessons'] . ' Lessons';
+        }
+        if (isset($infoData['xp'])) {
+            $infoDataStrArr[] = $infoData['xp'] . ' XP';
         }
 
-        $headerData = [
-            'title' => $parentContent->fetch('fields.title'),
-            'heroImg' => $parentContent->fetch('fields.instructor.data.head_shot_picture_url'),
-            'progress' => $parentContent->fetch('progress_percent', 0),
-            'contentId' => $parentContent->fetch('id'),
-            'infoData' => $infoDataStrArr,
-            'ctas' => [
-                [
-                    'type' => 'primary',
-                    'props' => [
-                        'text' => 'Start first lesson',
-                        'url' => $nextLessonUrl,
-                        'icon' => 'fa-play'
-                    ]
-                ],
-                [
-                    'type' => 'ResetProgressCta',
-                    'props' => [
-                        'contentId' => $parentContent->fetch('id'),
-                        'progress' => $parentContent->fetch('progress_percent', 0),
-                    ]
-                ],
-                [
-                    'type' => 'DownloadResourcesCta',
-                    'props' => [
-                        'resources' => $parentContent['resources'] ?? []
-                    ]
+        $headerData['title'] = $parentContent->fetch('fields.title');
+        $headerData['description'] = $parentContent->fetch('data.description');
+        $headerData['heroImg'] = $parentContent->fetch('fields.instructor.data.head_shot_picture_url');
+        $headerData['progress'] = $parentContent->fetch('progress_percent', 0);
+        $headerData['contentId'] = $parentContent->fetch('id');
+        $headerData['infoData'] = $infoDataStrArr;
+        $headerData['ctas'] = [
+            [
+                'type' => 'PageHeaderPrimaryCta',
+                'props' => [
+                    'text' => 'Start first lesson',
+                    'url' => $nextLessonUrl,
+                    'faIconClass' => 'fa-play'
+                ]
+            ],
+            [
+                'type' => 'ResetProgressCta',
+                'props' => [
+                    'contentId' => $parentContent->fetch('id'),
+                    'progress' => $parentContent->fetch('progress_percent', 0),
+                ]
+            ],
+            [
+                'type' => 'DownloadResourcesCta',
+                'props' => [
+                    'resources' => $parentContent['resources'] ?? []
                 ]
             ]
         ];
+    }
+    elseif ($parentContent->fetch('type') === 'learning-path') {
+        
+        $headerData['iconName'] = 'method';
+        if(!Str::contains(request()->path(), 'foundations-2019')) {
+            $headerData['title'] = 'Method';
+        } else {
+            $headerData['title'] = 'Foundations';
+        }
+        $headerData['description'] = $parentContent->fetch('data.description');
+        $headerData['progress'] = $parentContent->fetch('progress_percent', 0);
+        $headerData['progressLabelText'] = $progressLabelText;
+        $headerData['contentId'] = $parentContent->fetch('id');
+        $headerData['infoData'] = $infoDataStrArr;
+        $headerData['ctas'] = [];
+
+        $vimeoVideoId = $parentContent->fetch('fields.video.fields.vimeo_video_id');
+        if (!empty($vimeoVideoId)) {
+            $headerData['ctas'][] = [
+                'type' => 'PreviewLessonCta',
+                'props' => [
+                    'contentId' => $parentContent->fetch('id'),
+                    'videoId' => $vimeoVideoId,
+                    'castTitle' => $parentContent->fetch('fields.title'),
+                    'poster' => $parentContent['video_poster_image_url'] ?? '',
+                    'sources' => $parentContent['video_playback_endpoints'],
+                    'nextLessonUrl' => $nextLessonUrl,
+                ],
+            ];
+        }
+        if ($brand === 'drumeo' || $brand === 'pianote' && !Str::contains(request()->path(), 'foundations-2019')) {
+            $headerData['ctas'][] = [
+                'type' => 'WhereToBeginCta',
+            ];
+        }
+        if (Str::contains(request()->path(), 'foundations-2019')) {
+            $headerData['ctas'][] = [
+                'type' => 'PageHeaderCta',
+                'props' => [
+                    'text' => 'FOUNDATIONS BOOK RESOURCES',
+                    'url' => '/pianote/resources',
+                    'showAllAlways' => true
+                ]
+            ];
+        }
+    }
+    elseif ($parentContent->fetch('type') === 'learning-path-level' || $parentContent->fetch('type') === 'learning-path-course' || $parentContent->fetch('type') === 'challenge'){
+        if (isset($infoData['courses'])) {
+            $infoDataStrArr[] = $infoData['courses'] . ' Courses';
+        }
+        if (isset($infoData['lessons'])) {
+            $infoDataStrArr[] = $infoData['lessons'] . ' Lessons';
+        }
+        if (isset($infoData['xp'])) {
+            $infoDataStrArr[] = $infoData['xp'] . ' XP';
+        }
+        if($parentContent->fetch('type') === 'learning-path-level'){
+            $headerData['title'] = 'Level ' . $parentContent->fetch('level_number', 0) . ' - ' . $parentContent->fetch('fields.title');
+        }
+        else if($parentContent->fetch('type') === 'learning-path-course') {
+            $headerData['title'] = 'Level ' . $secondContent->fetch('level_number', 0) . '.' . $parentContent->fetch('course_position', 0) . ' - ' . $parentContent->fetch('fields.title');
+        }
+        $headerData['progress'] = $parentContent->fetch('progress_percent', 0);
+        $headerData['description'] = $parentContent->fetch('data.description');
+        $headerData['progressLabelText'] = $progressLabelText;
+        $headerData['contentId'] = $parentContent->fetch('id');
+        $headerData['infoData'] = $infoDataStrArr;
+        $headerData['ctas'] = [
+            [
+                'type' => 'ResetProgressCta',
+                'props' => [
+                    'contentId' => $parentContent->fetch('id'),
+                    'progress' => $parentContent->fetch('progress_percent', 0),
+                ]
+            ],    
+        ];
+
     }
 
     $headerDataJson = json_encode($headerData);
@@ -90,85 +156,32 @@
 {{-- Content --}}
 @section('content')
 
-    @include('content.breadcrumbs._overview-breadcrumbs')
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        @include('content.breadcrumbs._overview-breadcrumbs')
+        
+        <page-header
+            page-type="{{ $parentContent->fetch('type') }}"
+            icon-name="{{ $headerDataObj->iconName }}"
+            title="{{ $headerDataObj->title }}"
+            description="{{ $headerDataObj->description }}"
+            hero-img="{{ $headerDataObj->heroImg }}"
+            progress-label-text="{{ $headerDataObj->progressLabelText }}"
+            progress="{{ $headerDataObj->progress }}"
+            content-id="{{ $headerDataObj->contentId }}"
+            :info-data="{{ json_encode($headerDataObj->infoData) }}"
+            :ctas="{{ json_encode($headerDataObj->ctas) }}"
+            dark-mode-logo="{{ $headerDataObj->darkModeLogo  }}"
+            light-mode-logo="{{ $headerDataObj->lightModeLogo }}"
+        ></page-header>
 
-    @if($parentContent->fetch('type') === 'learning-path')
-        @include('partials._learning-path', ['learningPathSlug' => $parentContent->fetch('slug')])
-    @else
-        {{-- Overview Headers --}}
-        @if($parentContent->fetch('type') === 'pack-bundle')
-            @include('partials.content.overview-headers._pack-bundle')
-        @elseif($parentContent->fetch('type') === 'learning-path-level')
-            @include('partials.content.overview-headers._learning-path-level')
-        @elseif($parentContent->fetch('type') === 'learning-path-course')
-            @include('partials.content.overview-headers._learning-path-course')
-        @elseif($parentContent->fetch('type') === 'challenge')
-            @component('partials.bladesora.members.components.header-banner', [
-                'hideUser' => true,
-                'contentType' => $parentContent->fetch('type'),
-                'backgroundImage' => $parentContent->fetch('data.header_image_url'),
+        @if(!empty($nextLessonJson))
+            @include('partials._current-learning-path-lesson', [
+                "currentLearningPathLesson" => $nextLessonJson,
             ])
-                @slot('content')
-
-                    <a href="{{ url()->route('platform.workouts.challenges') }}"
-                        class="tw-absolute tw--top-[16px] tw-left-4 lg:tw-left-8 tw-inline-flex tw-items-center tw-justify-center tw-shrink-0 tw-w-[45px] tw-h-[45px] tw-border-[2px] tw-border-white tw-bg-black tw-rounded-full  hover:tw-bg-white tw-text-white hover:tw-text-[#000C17] tw-mr-3">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                    </a>
-
-                    <div class="flex flex-column pr-1 align-v-bottom align-h-center tw-self-end">
-                        {{-- Pack Logo --}}
-                        <img alt="{{ $parentContent->fetch('title') }} Logo"
-                            class="tw-transition-opacity tw-w-[150px] sm:tw-w-[250px] md:tw-w-[300px]  tw-opacity-0"
-                            src="{{ $parentContent->fetch('data.logo_image_url') }}"
-                            onload="this.classList.remove('tw-opacity-0')"
-                        >
-                    </div>
-                @endslot
-            @endcomponent
-
-        @else
-            @include('partials.content.overview-headers._default')
         @endif
-
-        {{-- Level SubHeader --}}
-        @include('partials.bladesora.members.content.content-info-subheader', [
-            "brand" => $brand,
-            "infoData" => $infoData,
-            "contentId" => $parentContent->fetch('id'),
-            "contentType" => $parentContent->fetch('type'),
-            "resetProgress" => $parentContent->fetch('progress_state', false) !== false,
-            "instructorInfo" => false,
-            "addToList" => !in_array($parentContent->fetch('type'), ['learning-path', 'pack-bundle']),
-            "downloadableResources" => $parentContent['resources'] ?? [],
-            "isAdded" => $parentContent->fetch('is_added_to_primary_playlist')
-        ])
-    @endif
-
-    {{-- Content Progress --}}
-    <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
-        @include('partials.bladesora.members.content.content-progress', [
-            "themeColor" => $brand,
-            "brand" => $brand,
-            "contentType" => $parentContent->fetch('type'),
-            "labelText" => $progressLabelText ?? null,
-            "progress" => $parentContent->fetch('progress_percent'),
-            "nextLessonUrl" => $nextLessonUrl,
-            "backButton" => $backButton,
-            "compact" => $parentContent->fetch('type') === 'pack-bundle' && $pack->fetch('bundle_count') <= 1,
-            "xpAmount" =>  $parentContent->fetch('total_xp') ?? null,
-            "isCompleted" => $parentContent->fetch('completed', false),
-            "isStarted" => $parentContent->fetch('started', false),
-        ])
     </div>
 
-
-    @if(!empty($nextLessonJson))
-        @include('partials._current-learning-path-lesson', [
-            "currentLearningPathLesson" => $nextLessonJson,
-        ])
-    @endif
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-[30px]">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-[30px]">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-w-full tw-flex-row">
 
@@ -246,29 +259,12 @@
 
     {{-- for guitareo 500 songs special page --}}
     @if(!empty($songsPdfs))
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-3">
             <collection-wrapper
                 collection-type="song-pdf"
                 :pre-loaded-content="{{ $songsPdfs }}"
                 title="Songs"
-{{--                :filterable-values="{{ $something ?? [] }}"--}}
             ></collection-wrapper>
-{{--            <div class="flex flex-column">--}}
-{{--                <div class="flex flex-row tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">--}}
-{{--                    <content-catalogue--}}
-{{--                            catalogue-type="downloads"--}}
-{{--                            theme-color="guitareo"--}}
-{{--                            brand="guitareo"--}}
-{{--                            :use-theme-color="true"--}}
-{{--                            sort-override="slug"--}}
-{{--                            :included-types="['song-pdf']"--}}
-{{--                            :filterable-values="['artist', 'style']"--}}
-{{--                            :pre-loaded-content="{{ $songsPdfs }}"--}}
-{{--                            user-id="{{ auth()->id() }}"--}}
-{{--                            :infinite-scroll="true"--}}
-{{--                    ></content-catalogue>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     @endif
 

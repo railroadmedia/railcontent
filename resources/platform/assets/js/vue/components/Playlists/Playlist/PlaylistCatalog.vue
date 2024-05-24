@@ -2,23 +2,28 @@
     <main class="tw-w-full ">
 
         <template v-if="hasAccess">
-            <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden"
-                :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px] tw-z-20 tw-sticky tw-top-0 tw-drop-shadow-md' : 'tw-max-h-0'">
-                <div class="tw-w-full tw-container tw-mx-auto tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-flex-col md:tw-flex-row tw-items-center">
-                    <p class="tw-text-center md:tw-text-left  md:tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
-                    <div class="tw-ml-6 tw-flex tw-py-[15px]">
-                        <button class="tw-btn-primary tw-mr-[10px] tw-px-[30px] xl:tw-w-[250px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
-                            Save changes
-                        </button>
-                        <button class="tw-btn-secondary tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10 xl:tw-w-[200px]"
-                                @click.prevent="handleCancelSort">
-                            Cancel
-                        </button>
+            
+            <!-- Edit Banner -->
+            <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mt-2">
+                <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden tw-rounded-md"
+                    :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px] tw-z-20 tw-sticky tw-top-0 tw-drop-shadow-md' : 'tw-max-h-0'">
+                    <div class="tw-w-full tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-flex-col md:tw-flex-row tw-items-center">
+                        <p class="tw-text-center md:tw-text-left  md:tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
+                        <div class="tw-ml-6 tw-flex tw-py-[15px]">
+                            <button class="tw-btn-primary tw-mr-[10px] tw-px-[30px] xl:tw-w-[250px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
+                                Save changes
+                            </button>
+                            <button class="tw-btn-secondary tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10 xl:tw-w-[200px]"
+                                    @click.prevent="handleCancelSort">
+                                Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[28px]">
+
+            <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-4">
                 <div class="tw-flex tw-flex-col">
                     <!-- Empty State -->
                     <section v-if="playlistsStore.lessons.length === 0"
@@ -86,7 +91,7 @@
 
         <!-- No Access -->
         <template v-else>
-            <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[80px]">
+            <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[80px]">
                 <div class="tw-flex tw-flex-col tw-items-center">
                     <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">Oops!</h1>
                     <p>This playlist is private and you don’t have access to view it</p>

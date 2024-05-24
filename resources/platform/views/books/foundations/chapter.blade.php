@@ -1,8 +1,21 @@
 <?php
-$layout = 'books.layout';
-if(!empty($user)){
-    $layout = 'partials.layout';
-} ?>
+    $layout = 'books.layout';
+    if(!empty($user)){
+        $layout = 'partials.layout';
+    } 
+    if(empty($hasAccess)) {
+        $ctas = [
+            [
+                'type' => 'PageHeaderPrimaryCta',
+                'props' => [
+                    'text' => 'Login to Musora',
+                    'url' => '/login',
+                    'faIconClass' => 'fa-external-link'
+                ]
+            ]
+        ];
+    }
+?>
 
 @extends($layout)
 
@@ -12,73 +25,59 @@ if(!empty($user)){
 
 @section('content')
 
-    @component('partials._header-banner', ['backgroundImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/header-background.jpg'])
-        @slot('content')
-            <div class="container relative">
-                <div class="flex flex-row">
-                    <a
-                        href="{{ url()->route('platform.books.resources') }}"
-                        aria-label="Back to All"
-                        class="text-white no-decoration tiny uppercase pa-1"
-                    >
-                        <i class="fas fa-arrow-left mr-1"></i> Back to All
-                    </a>
-                </div>
-
-                <div class="flex flex-row align-center pv-3">
-                    <a
-                        @if($chapterNumber > 1)
-                        href="{{ url()->route('platform.books.resources.chapter',[$chapterNumber - 1, 'brand' => 'pianote']) }}"
-                        @endif
-                        class="btn short collapse-square rounded mr-2 bg-white text-white inverted
-                        {{ $chapterNumber > 1 ? '' : 'disabled' }}"
-                    >
-                        <i class="fas fa-arrow-left"></i>
-                    </a>
-                    <p class="body text-white uppercase dense font-bold">
-                        Level {{ $chapterNumber }}
-                    </p>
-                    <a
-                        @if($chapterNumber < 10)
-                        href="{{ url()->route('platform.books.resources.chapter', [$chapterNumber + 1,  'brand' => 'pianote']) }}"
-                        @endif
-                        class="btn short collapse-square rounded ml-2 bg-white text-white inverted
-                        {{ $chapterNumber < 10 ? '' : 'disabled' }}"
-                    >
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="flex flex-row align-center">
-                    <div class="flex flex-column xs-12 sm-7 md-6">
-                        <h1 class="large-display text-white text-center mb-1">
-                            {{ $thisChapter['title'] }}
-                        </h1>
-                        <p class="text-white text-center body">
-                            {{ $thisChapter['description'] }}
-                        </p>
-                        @if(empty($hasAccess))
-                            <div class="flex flex-row align-center">
-                                <button
-                                    class="btn collapse-250 mt-2"
-                                    data-open-modal="loginModal"
-                                >
-                                    <span class="bg-pianote text-white">
-                                        <i class="fas fa-external-link mr-1"></i>
-                                        Login to Pianote
-                                    </span>
-                                </button>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        @endslot
-    @endcomponent
+    {{-- <div class="flex flex-row align-center pv-3">
+        <a
+            @if($chapterNumber > 1)
+            href="{{ url()->route('platform.books.resources.chapter',[$chapterNumber - 1, 'brand' => 'pianote']) }}"
+            @endif
+            class="btn short collapse-square rounded mr-2 bg-white text-white inverted
+            {{ $chapterNumber > 1 ? '' : 'disabled' }}"
+        >
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <p class="body text-white uppercase dense font-bold">
+            Level {{ $chapterNumber }}
+        </p>
+        <a
+            @if($chapterNumber < 10)
+            href="{{ url()->route('platform.books.resources.chapter', [$chapterNumber + 1,  'brand' => 'pianote']) }}"
+            @endif
+            class="btn short collapse-square rounded ml-2 bg-white text-white inverted
+            {{ $chapterNumber < 10 ? '' : 'disabled' }}"
+        >
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div> --}}
+    
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <breadcrumb
+            :breadcrumbs="{{ json_encode([ 
+                [
+                    "title" => "Pianote Foundations",
+                    "url" => "/pianote/method/foundations-2019/215952",
+                ],
+                [
+                    "title" => "Resources",
+                    "url" => "/pianote/resources"
+                ],
+                [
+                    "title" => "Level " . $chapterNumber
+                ]
+            ])}}"
+        ></breadcrumb>
+        <page-header
+            page-type="foundations"
+            title="{{ $thisChapter['title'] }}"
+            description="{{ $thisChapter['description'] }}"
+            @if( !empty($ctas) )
+                :ctas="{{ json_encode($ctas) }}"
+            @endif
+        ></page-header>
+    </div>
 
     @include('books.partials.login-modal', ['redirectUrl' => url()->route('platform.books.resources',[
-    'brand'=>'pianote'
-])])
+        'brand'=>'pianote'
+    ])])
 
     @include('books.partials.ask-question-modal', [
         "level" => 'Level ' . $chapterNumber . ': ' . $thisChapter['title']
@@ -100,7 +99,7 @@ if(!empty($user)){
         </div>
     </div>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white mv-3">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white tw-py-4">
         <div class="flex flex-column mb-3">
             <div class="flex flex-row pv-3">
                 <h1 class="heading dark:tw-text-white">Free Video Lessons</h1>
@@ -131,7 +130,7 @@ if(!empty($user)){
     </div>
 
     @if(!empty($thisChapter['backing_tracks']))
-        <div class="container mb-3">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
             <div class="flex flex-row pv-3 tw-justify-center">
                 <h1 class="heading dark:tw-text-white">Backing Tracks</h1>
             </div>

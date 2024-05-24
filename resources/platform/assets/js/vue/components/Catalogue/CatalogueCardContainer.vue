@@ -168,7 +168,7 @@ const getData = computed(() => {
 })
 
 const breakToListView = computed(() => {
-    return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value);
+    return !showGroupBy.value && (isWorkout.value || isChallenge.value || isRecommendation.value || isCoachShow.value);
 })
 
 const showListElement = computed(() => {
@@ -198,6 +198,10 @@ const isChallenge = computed(() => {
 const isRecommendation = computed(() => {
     return props.contentTypeOverride === 'Recommendation';
 });
+
+const isCoachShow = computed(() => {
+    return props.contentTypeOverride === 'coach-show';
+})
 
 const { addToList } = useUserCatalogueEvents({ ...props });
 

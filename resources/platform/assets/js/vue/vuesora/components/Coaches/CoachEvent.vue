@@ -4,7 +4,7 @@
     v-if="content && $_hours <= 48">
     <div class="tw-flex tw-flex-row tw-items-center">
       <!-- Live Event Image -->
-      <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`"
+      <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`/${brand}/live`"
         class="tw-w-full md:tw-w-52 tw-cursor-pointer tw-flex-col tw-mb-2 md:tw-mb-0 tw-mr-4 tw-hidden md:tw-flex">
         <div class="tw-relative">
           <img class="tw-rounded-lg tw-w-full" :src="'https://cdn.musora.com/image/fetch/c_thumb,w_320,h_180,z_0.75,q_auto:best/' +
@@ -20,7 +20,7 @@
         <div class="tw-flex tw-flex-col tw-justify-center tw-pr-4">
           <div class="tw-flex tw-items-center tw-mb-1">
             <!-- Live Badge -->
-            <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`" class="tw-flex tw-no-underline flex-row" v-if="eventIsLive">
+            <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`/${brand}/live`" class="tw-flex tw-no-underline flex-row" v-if="eventIsLive">
               <div
                 class="flex-center tw-text-white tw-uppercase tw-rounded tw-bg-red-500 tw-text-sm tw-font-bold tw-leading-none tw-p-1">
                 <span>live</span>
@@ -50,7 +50,7 @@
 
           <!-- Event Title & Desc -->
           <div class="tw-mb-1.5">
-            <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`${brand}/live`"
+            <a @click="(e) => handleClick(e, `${brand}/live`)" :href="`/${brand}/live`"
               class="tw-font-bold tw-no-underline tw-text-[#00101D] tw-capitalize tw-leading-tight tw-texl-xl md:tw-text-2xl dark:tw-text-white">
               {{ content.title }}
             </a>

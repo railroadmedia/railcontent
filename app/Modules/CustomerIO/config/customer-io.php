@@ -257,12 +257,18 @@ return [
                 ],
             ],
             'Drumeo Drumset Giveaway' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
-                    'drumeo_prospect_drumset-giveaway-2023',
+                    'drumeo_prospect_drumset-giveaway-may-2024',
                 ],
                 'accounts_to_sync' => [
                     'drumeo',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Drumeo Giveaway Rafflepress' => [
@@ -364,12 +370,18 @@ return [
                 ],
             ],
             'Getting Started On The Piano' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
                     'pianote_prospect_getting-started',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Getting Started On The Piano - Facebook' => [
@@ -382,12 +394,18 @@ return [
                 ],
             ],
             'Sight Reading Made Simple' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
                     'pianote_prospect_sight-reading-made-simple',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Learn 3 Songs On Piano' => [
@@ -436,12 +454,18 @@ return [
                 ],
             ],
             'Digital Chords And Scales' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
                     'pianote_prospect_digital-chords-and-scales',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Blog Signup' => [
@@ -598,12 +622,18 @@ return [
                 ],
             ],
             '7 Days To Sight Reading' => [
-                'custom_attributes' => [],
+                'custom_attributes' => [
+                    'first_name' => 'required|string'
+                ],
                 'events' => [
                     'pianote_prospect_7-days',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
                 ],
             ],
             'Waltz in A Minor' => [

@@ -113,10 +113,10 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             $resources = [];
-            foreach ($content['resources'] ?? [] as $resource){
+            foreach ($content['resources'] ?? [] as $resource) {
                 $resources[$resource['resource_url']] = $resource;
             }
-            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1') {
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
 
@@ -130,7 +130,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 ($content['type'] != 'assignment' && $content['type'] != 'song');
             $contentsOfType[$contentIndex]['user_playlist_item_extra_data'] =
                 $content['user_playlist_item_extra_data'] ?? null;
-            $contentsOfType[$contentIndex]['duration'] =  $content->fetch('fields.video.fields.length_in_seconds', 0);
+            $contentsOfType[$contentIndex]['duration'] = $contentsOfType[$contentIndex]['length_in_seconds'] = $content->fetch('fields.length_in_seconds', $content->fetch('fields.video.fields.length_in_seconds', 0));
 
             $userPlaylistId =
                 $content['user_playlist_id']
@@ -307,10 +307,10 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$childId]]))
                             ->first();
 
-                        foreach ($contentsOfType[$contentIndex]['parent']['resources'] ?? [] as $parentResource){
+                        foreach ($contentsOfType[$contentIndex]['parent']['resources'] ?? [] as $parentResource) {
                             $resources[$parentResource['resource_url']] = $parentResource;
                         }
-                                       if (empty($contentsOfType[$contentIndex]['instructors'])) {
+                        if (empty($contentsOfType[$contentIndex]['instructors'])) {
                             InstructorDecorator::$decorationMode =
                                 \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
                             self::$parents[$childId] =
@@ -353,7 +353,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                                         $grupedPermissions[self::$parents[$childId]['id']]->pluck('permission_id')
                                             ->toArray() : []
                                 )
-                                ) && (isset($grupedPermissions[self::$parents[$childId]['id']]));
+                            ) && (isset($grupedPermissions[self::$parents[$childId]['id']]));
                             if ($contentsOfType[$contentIndex]['need_access']) {
                                 $contentsOfType[$contentIndex]['need_access_message'] =
                                     self::$noAccessMessages[self::$parents[$childId]['id']] ?? '';
@@ -366,11 +366,11 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
             $contentsOfType[$contentIndex]['route'] = array_reverse($route);
 
-                foreach(array_reverse($parentContentDataForDatabase) as $parent){
-                    foreach (self::$parents[$parent->id]['resources'] ?? [] as $parentResource){
-                        $resources[$parentResource['resource_url']] = $parentResource;
-                    }
+            foreach(array_reverse($parentContentDataForDatabase) as $parent) {
+                foreach (self::$parents[$parent->id]['resources'] ?? [] as $parentResource) {
+                    $resources[$parentResource['resource_url']] = $parentResource;
                 }
+            }
 
             $contentsOfType[$contentIndex]['resources'] = array_values($resources);
         }

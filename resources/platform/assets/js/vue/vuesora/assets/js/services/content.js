@@ -157,8 +157,9 @@ export default {
      * Follow to coach
      *
      * @param {String|Number} coachId
+     * @param {String} firstName
      */
-     followCoach({ coachId }) {
+     followCoach({ coachId, firstName }) {
 
         return axios({
             url: `${endpointPrefix}/railcontent/follow`,
@@ -166,15 +167,22 @@ export default {
             data: {
                 content_id: coachId,
             },
-        });
+        })
+        .then(()=>{
+            window.shownotification({
+                icon: 'fa-bell',
+                text: `You will now receive updates when ${firstName} releases new content!`
+            });
+        })
     },
 
     /**
      * Unfollow to coach
      *
      * @param {String|Number} coachId
+     * @param {String} firstName
      */
-    unfollowCoach({ coachId }) {
+    unfollowCoach({ coachId, firstName }) {
 
         return axios({
             url: `${endpointPrefix}/railcontent/unfollow`,
@@ -182,7 +190,13 @@ export default {
             data: {
                 content_id: coachId,
             },
-        });
+        })
+        .then(()=>{
+            window.shownotification({
+                icon: 'fa-bell-slash',
+                text: `You will no longer receive updates when ${firstName} releases new content!`
+            });
+        })
     },
 
     /**

@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
+  <div class="tw-flex tw-flex-col" :class="{ 'tw-grow tw-justify-center' : !displayInline }">
 
     <div v-if="isCoachesGrid" id="coach-section" class="tw-flex tw-flex-col tw-mb-6">
       <div class="tw-flex tw-flex-wrap">

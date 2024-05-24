@@ -4,69 +4,61 @@
     <title>{{ ucfirst($brand) }} Home | Musora</title>
 @endsection
 
+@php
+    $isPackOnly = true;
+@endphp
+
 @section('content')
+    <home
+        :is-pack-only="{{ $isPackOnly }}"
+        account-url="{{ user()->getDashboardUrl() }}"
+        content-endpoint="/railcontent/content"
+        :is-a-member="{{ user()->isAMember() ? 'true' : 'false' }}"
+        :user-metrics="{{ json_encode($userMetrics) }}"
+        upgrade-membership-url="{{ get_legacy_brand_base_url() . '/#customize-anchor'  }}"
+        @if($isPackOnly)
 
-    <div class="tw-container tw-mx-auto tw-pt-[32px] tw-px-4 md:tw-px-8 dark:tw-text-white">
-
-        {{-- Add Header Slide "Welcome Username" --}}
-        <div class="tw-w-full tw-pb-[36px]">
-            <static-header
-                title="JOIN THE COMMUNITY"
-                cta-text="UPGRADE YOUR MEMBERSHIP"
-                description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
-                cta-url="{{ get_legacy_brand_base_url() . '/#customize-anchor'  }}"
-                img="https://www.musora.com/musora-cdn/image/width=720,quality=95/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg"
-            ></static-header>
-        </div>
-
-        {{-- Continue Section --}}
-        @if($startedContentCount > 0)
-            @component('partials.bladesora.members.components.home._continue-section', [
-                'brand' => brand(),
-                'hasStartedContent' => $startedContentCount > 0,
-                'contentEndpoint' => '/railcontent/content',
-                'continueUrl' => '', // todo: need url
-                'seeAllUrl' => '', // todo: need url
-                'startedContentJson' => $startedContentJson,
-                ])
-            @endcomponent
+            @if(!empty($packs)) :pack-data="{{ json_encode($packs) }}" @endif
+            @if(count($hotForumTopics) > 0) :conversation-data="{{ json_encode($hotForumTopics) }}" @endif
+            :course-data="{{ json_encode($courses) }}"
+            @if($startedContentCount > 0)
+                continue-url="{{ url()->route('platform.lesson-history.in-progress') }}"
+                :started-content="{{ $startedContentJson }}"
+            @endif
+        @else 
+            calendar-id="{{ $calendarId }}"
+            :carousel="{{ json_encode($carousel) }}"
+            :coach-event="{{ $coachEvent }}"
+            :cohort-banner="{{ $cohortBanner }}"
+            current-date="{{ $currentDate }}"
+            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+            :exists-cohort-banner="{{ $existsCohortBanner ? 'true' : 'false' }}"
+            :has-experience="{{ $hasExperience ? 'true' : 'false' }}"
+            :has-gear="{{ $hasGear ? 'true' : 'false' }}"
+            :has-genres="{{ $hasGenres ? 'true' : 'false' }}"
+            :has-goals="{{ $hasGoals ? 'true' : 'false' }}"
+            :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
+            :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
+            :has-topics="{{ $hasTopics ? 'true' : 'false' }}"
+            :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
+            :new-content="{{ $newContentJson }}"
+            new-content-url="{{ url()->route('platform.new-lessons') }}"
+            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+            next-learning-path-level="{{ user()->getMethodLevel() }}"
+            :recommended-content="{{ $recommendedContentJson }}"
+            recommended-content-url="{{ url()->route('platform.recommended-lessons') }}"
+            :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+            :upcoming-events="{{ $upcomingEvents }}"
+            upcoming-url="{{ '/'.$brand.'/live' }}"
+            :users-list="{{ json_encode($usersList->results())  }}"
+            :workouts-content="{{ $workoutsContentJson }}"
+            workouts-content-url="{{ url()->route('platform.workouts') }}"
+            youtube-id="{{ $youtubeId }}"
+            :learning-paths="{{ json_encode($trialSection) }}"
+            :display-trial-section="{{ $displayTrialSection ? 'true' : 'false' }}"
         @endif
-
-        @if (!empty($courses) && brand() == 'singeo')
-            @include(
-                'partials.bladesora.members.components.home._courses-section',
-                [
-                    'brand' => brand(),
-                    'contentEndpoint' => '/railcontent/content',
-                    'courseContentJson' => $courses,
-                    'allCoursesUrl' => '/'.$brand.'/courses',
-                ]
-            )
-        @else
-            {{-- Packs Section --}}
-            @component('partials.bladesora.members.components.home._packs-section', [
-                'brand' => brand(),
-                'packsUrl' => '/'.$brand.'/packs',
-                'hasPacks' => !empty($packs),
-                'packs' => $packs,
-                ])
-            @endcomponent
-        @endif
-
-        {{-- Popular Conversations --}}
-        @if(count($hotForumTopics) > 0)
-            @component('partials.bladesora.members.components.home._conversations-section', [
-                'brand' => brand(),
-                'forumUrl' => brand() . '/forums',
-                'forumPosts' => $hotForumTopics,
-                ])
-            @endcomponent
-        @endif
-
-    </div>
+    ></home>
 
     @include('partials._railanalytics-brand-tracking-iframe')
 @endsection
-
-
 

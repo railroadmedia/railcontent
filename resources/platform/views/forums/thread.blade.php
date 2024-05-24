@@ -1,5 +1,19 @@
 @php
     $bodyClass = ($bodyClass ?? '') . ' sidebar';
+
+    $breadcrumbs = [
+        [
+            "title" => "Forums",
+            "url" => url()->route('forums.show-categories'),
+        ],
+        [
+            "title" => $categoryTitle,
+            "url" => $categoryUrl,
+        ],
+        [
+            "title" => $threadTitle,
+        ]
+    ];
 @endphp
 
 @extends('partials.layout')
@@ -8,28 +22,11 @@
     <title>{{ $threadTitle }} | {{$categoryTitle}} | Forums | {{ $brand }}</title>
 @endsection
 
-@section('breadcrumbs')
-    @include('partials.bladesora.members.navigation.breadcrumbs', [
-        "pages" => [
-            [
-                "title" => "Forums",
-                "url" => url()->route('forums.show-categories'),
-            ],
-            [
-                "title" => $categoryTitle,
-                "url" => $categoryUrl,
-            ],
-            [
-                "title" => $threadTitle,
-            ]
-        ]
-    ])
-@endsection
-
 @section('content')
 
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
         <forum-thread
+            :breadcrumbs="{{ json_encode($breadcrumbs) }}"
             theme-color="{{ $brand }}"
             brand="{{ $brand }}"
             :thread="{{ $thread }}"

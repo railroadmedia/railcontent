@@ -1,6 +1,7 @@
 @php
     $firstLastName = preg_split('/\s+/', $thisCoach->fetch('fields.name'));
     $currentUserSubscribed = $thisCoach->fetch('current_user_is_subscribed');
+    $headerDescription = $thisCoach->fetch('data.short_bio');
 
     $ctas = [
         [
@@ -9,9 +10,11 @@
                 'text' => $currentUserSubscribed ? 'Unsubscribe' : 'Subscribe',
                 'contentFunction' => $currentUserSubscribed ? 'unfollowCoach' : 'followCoach',
                 'payload' => [
-                    'coachId' => $thisCoach->fetch('id')
+                    'coachId' => $thisCoach->fetch('id'),
+                    'firstName' => $firstLastName[0],
                 ],
-                'faIconClass' => 'fa-bell'
+                'faIconClass' => 'fa-bell',
+                'showAllAlways' => true,
             ]
         ]
     ];
@@ -25,6 +28,15 @@
 
     $ctasJson = json_encode($ctas);
     $infoDataStrArrJson = json_encode($infoDataStrArr);
+    $breadcrumbs = [
+        [
+            'title' => 'Coaches',
+            'url' => url()->route('platform.coaches'),
+        ],
+        [
+            'title' => $thisCoach->fetch('fields.name'),
+        ]
+    ];
 @endphp
 
 
@@ -35,61 +47,6 @@
 @endsection
 
 @section('content')
-
-    @include('partials.bladesora.members.navigation.breadcrumbs', [
-        'pages' => [
-            [
-                'title' => 'Coaches',
-                'url' => url()->route('platform.coaches'),
-            ],
-            [
-                'title' => $thisCoach->fetch('fields.name'),
-            ]
-        ]
-    ])
-
-    @component('partials.bladesora.members.components.coach-header-banner', [
-        'brandName' => '{{ $brand }}',
-        'hideUser' => true,
-        'backgroundImage' => $thisCoach->fetch('data.coach_top_banner_image'),
-        'shortBio' => $thisCoach->fetch('data.short_bio'),
-        'focusArray' => \Illuminate\Support\Arr::wrap($thisCoach->fetch('data.focus_text','')),
-        'fullName' => $firstLastName,
-        'firstName' => $firstLastName[0] ?? '',
-        'lastName' => $firstLastName[1] ?? '',
-        'nameThree' => $firstLastName[2] ?? '',
-        'isUserSubscribed' => $currentUserSubscribed,
-        'coachId' => $thisCoach->fetch('id'),
-        'vimeoVideo' => $thisCoach->fetch('fields.video.fields.vimeo_video_id', null),
-        'forumUrl' => $thisCoach->fetch('fields.forum_thread_id')?($thisCoach['forum_thread']['url'] ?? ''):'',
-        'subscribeUrl' => url()->route('content.follow',['content_id'=>$thisCoach->fetch('id')]),
-        'unsubscribeUrl' => url()->route('content.unfollow',['content_id'=>$thisCoach->fetch('id')])
-        ])
-    @endcomponent
-
-    @if( !empty($coachEvent) )
-        <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
-            {{-- Live Banner --}}
-            <coach-event
-                brand="{{ $brand }}"
-                :preloaded-content='{{ $coachEvent }}'
-                current-date-string="{{ $currentDate }}"
-                subscription-calendar-id="{{ $currentEventCalendarId }}"
-                youtube-event-id="{{ $youtubeId }}"
-                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-            ></coach-event>
-        </div>
-    @endif
-
-    @if (session()->has('success-message'))
-        <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
-            <div class="tw-flex tw-flex-col bg-success tw-shadow corners-10 pa">
-                <p class="body tw-text-white">{{ session()->get('success-message') }}</p>
-            </div>
-        </div>
-    @endif
-
     @php
         $catalogueProps = [];
         $catalogueProps['themeColor'] = $brand;
@@ -117,125 +74,25 @@
         }
     @endphp
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[30px] tw-mb-3">
-        <collection-wrapper
-            :limit="{{ $limitOverride ?? 18 }}"
-            :pre-loaded-content="{{ $listLessons }}"
-            :required-fields="{{ json_encode($requiredFields) }}"
-            :statuses="{{ json_encode(['published', 'scheduled']) }}"
-            :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
-            title="lessons"
-        ></collection-wrapper>
-    </div>
-
-    @component('partials.bladesora.members.components.coach-footer', [
-        'brandName' => '{{ $brand }}',
-        'shortBio' => $thisCoach->fetch('data.long_bio'),
-        'focusArray' => $thisCoach->fetch('*fields.focus.value', []),
-        'firstName' => $firstLastName[0] ?? '',
-        'lastName' => $firstLastName[1] ?? '',
-        'nameThree' => $firstLastName[2] ?? '',
-        'coachId' => $thisCoach->fetch('id'),
-        'headShotPicture' => $thisCoach->fetch('data.head_shot_picture_url'),
-        'longBio' => $thisCoach->fetch('data.long_bio'),
-        'bandsArray' => $thisCoach->fetch('*fields.bands.value'),
-        'endorsementsArray' => $thisCoach->fetch('*fields.endorsements.value'),
-        ])
-    @endcomponent
-
-@endsection
-
-@section('layout-scripts')
-    <script type="application/javascript">
-        function hideElement(elId) {
-            var element = document.getElementById(elId);
-            if (!element.classList.contains("tw-hidden")) {
-                element.classList.add("tw-hidden");
-            }
-        }
-
-        function showElement(elId) {
-            var element = document.getElementById(elId);
-            element.classList.remove("tw-hidden");
-        }
-
-        function switchToSubscribedButton() {
-            hideElement("subscribeButton");
-            showElement("unsubscribeButton");
-        };
-
-        function switchToSubscribeButton() {
-            hideElement("unsubscribeButton");
-            showElement("subscribeButton");
-        };
-
-        function successSubscribeToast() {
-            var text = 'You will now receive updates when ' +'{{$firstLastName[0]}}'+ ' releases new content!';
-            window.shownotification({
-                icon: 'fa-bell',
-                text
-            });
-        };
-
-        function successUnsubscribeToast() {
-            var text = 'You will no longer receive updates when ' +'{{$firstLastName[0]}}'+ ' releases new content!';
-            window.shownotification({
-                icon: 'fa-bell-slash',
-                text
-            });
-        };
-
-        function showErrorToast() {
-            window.shownotification({
-                isError: true
-            });
-        };
-
-        function subscribeToCoach(coachId, URL) {
-            switchToSubscribedButton();
-
-            fetch(URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify({
-                        content_id: coachId
-                    })
-                })
-                .then(response => response.json())
-                .then(() => {
-                    successSubscribeToast();
-                })
-                .catch((e) => {
-                    switchToSubscribeButton();
-                    showErrorToast();
-                });
-        }
-
-        function unsubscribeToCoach(coachId, URL) {
-            switchToSubscribeButton();
-
-            fetch(URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify({
-                        content_id: coachId
-                    })
-                })
-                .then(() => {
-                    successUnsubscribeToast();
-                })
-                .catch((e) => {
-                    switchToSubscribedButton();
-                    showErrorToast();
-                });
-        }
-    </script>
+    <coach-show
+        :coach-data="{{ json_encode($thisCoach) }}"
+        :breadcrumbs="{{ json_encode($breadcrumbs) }}"
+        :header-info-data="{{ $infoDataStrArrJson }}"
+        :header-ctas="{{ $ctasJson }}"
+        header-description="{{ $headerDescription }}"
+        :coach-event="{{ $coachEvent }}"
+        @if(!empty($coachEvent))
+            coach-event-current-date-string="{{ $currentDate }}"
+            coach-event-subscription-calendar-id="{{ $currentEventCalendarId }}"
+            coach-event-youtube-event-id="{{ $youtubeId }}"
+            :coach-event-time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+            event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+        @endif
+        :collection-limit="{{ $limitOverride ?? 18 }}"
+        :collection-data="{{ $listLessons }}"
+        :collection-required-fields="{{ json_encode($requiredFields) }}"
+        :collection-statuses="{{ json_encode(['published', 'scheduled']) }}"
+        :collection-filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
+    ></coach-show>
+    
 @endsection
