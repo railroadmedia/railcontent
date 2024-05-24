@@ -910,9 +910,11 @@ class RevenueCatController extends Controller
 
                     //productId
                     $productId = $entitlement->product_identifier;
+                    $productPlanIdentifier = $entitlement->product_plan_identifier;
+                    $entitlementProduct = ($productId == 'musora_subscription') ? $productId.':'.$productPlanIdentifier : $productId;
                     $productsMap = array_merge(
-                        [config('ecommerce.' . $store . '_products_map')[$productId]],
-                        [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+                        [config('ecommerce.' . $store . '_products_map')[$entitlementProduct]],
+                        [config('ecommerce.' . $store . '_products_map_trial')[$entitlementProduct]]
                     );
 
                     $musoraProduct =
@@ -968,9 +970,11 @@ class RevenueCatController extends Controller
 
                 //productId
                 $productId = $entitlement->product_identifier;
+                $productPlanIdentifier = $entitlement->product_plan_identifier;
+                $entitlementProduct = ($productId == 'musora_subscription') ? $productId.':'.$productPlanIdentifier : $productId;
                 $productsMap = array_merge(
-                    [config('ecommerce.' . $store . '_products_map')[$productId]],
-                    [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+                    [config('ecommerce.' . $store . '_products_map')[$entitlementProduct]],
+                    [config('ecommerce.' . $store . '_products_map_trial')[$entitlementProduct]]
                 );
 
                 $musoraProduct =
