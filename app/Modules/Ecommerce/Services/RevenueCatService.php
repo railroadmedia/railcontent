@@ -70,7 +70,7 @@ class RevenueCatService
 
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
                 $store = $type.'_store';
-                $entitlementProduct = ($productIdentifier == 'musora_subscription')?$productIdentifier.':'.$productPlanIdentifier : $productIdentifier;
+                $entitlementProduct = ($productIdentifier == 'musora_subscription') ? $productIdentifier.':'.$productPlanIdentifier : $productIdentifier;
                 if ($subscriptionData->period_type == 'trial') {
                     $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$entitlementProduct]];
                 } else {
