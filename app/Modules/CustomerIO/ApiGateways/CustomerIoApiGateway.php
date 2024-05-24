@@ -408,6 +408,24 @@ class CustomerIoApiGateway
         }
     }
 
+    public function unsuppressEmail(
+        string $customerIoSiteId,
+        string $customerIoTrackApiKey,
+        string $email
+    ): void {
+        $url = 'https://track.customer.io/api/v1/customers/' . $email . '/unsuppress';
+        $method = 'PUT';
+
+        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        try {
+            $this->executeRequest($url, $method, $authHeaderKey, 'Basic');
+        } catch (Exception $e) {
+            Log::error('CustomerIoApiGateway::unsuppressEmail() failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
     /**
      * @param string $url
      * @param string $method
