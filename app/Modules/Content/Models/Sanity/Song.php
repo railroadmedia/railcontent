@@ -22,8 +22,11 @@ class Song extends BaseSanityModel
     {
         $fields = [
             new Field(FieldType::String, 'title'),
+            new Field(FieldType::Datetime, 'published_on'),
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
             new Field(FieldType::Number, 'difficulty'),
+//            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'MyCustomScript' ),
+
             new Field(FieldType::Number, 'xp', 'XP'),
             //TODO song style is in the railcontent_content_styles table. We'll need a styles schema and reference it on this
             // new Field(FieldType::Array, 'style', of:'reference', list:),
@@ -39,6 +42,8 @@ class Song extends BaseSanityModel
             new BrandField(),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title']),
             new Field(FieldType::Number, 'length_in_seconds', 'Length', description: 'song length in seconds'),
+            new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed'),
+            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys'),
             new Field(FieldType::Reference, 'artist','Artist','' ,null,'artist'),
             new Field(FieldType::Reference, 'genre','Genre','' ,null,'genre')
         ];

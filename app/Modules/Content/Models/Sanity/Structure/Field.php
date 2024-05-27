@@ -38,6 +38,7 @@ class Field
         public ?string $hidden = null,
         public ?string $readOnly = null,
         public ?string $validation = null,
+        public ?string $inputComponent = null,
     ) {
 
     }
@@ -83,6 +84,14 @@ class Field
         }
         if (!is_null($this->readOnly)) {
             $optional['readyOnly'] = Field::formatTypeScriptForView($this->readOnly);
+        }
+        // Add initialValue to optional array
+        if (!is_null($this->initialValue)) {
+            $optional['initialValue'] = $this->initialValue;
+        }
+        // Add initialValue to optional array
+        if (!is_null($this->inputComponent)) {
+            $optional['components'] = ['input' => Field::formatTypeScriptForView($this->inputComponent)];
         }
         return array_merge($required, $optional);
     }
