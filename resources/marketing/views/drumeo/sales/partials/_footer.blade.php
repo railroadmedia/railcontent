@@ -1,30 +1,29 @@
 @include('_partials.components.cookie-modal')
 <footer id="footer" class="bottom-footer clearfix relative sales-footer">
     @if(empty($minimal))
-    <div class="row">
-        <div class="footer-link-wrap footer-sign-up">
-            <h1>Stay Connected</h1>
-            <p class="show-for-desktop">Join over 400,000 drummers who receive free weekly drum lessons.</p>
-            <p class="hide-for-desktop">Receive free weekly lessons.</p>
-            <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
-                  method="POST" class="ajax-form clearfix facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()" aria-label="Email Sign Up Form">
-                <input type="hidden" name="form_name" value="Blog Signup">
-                <div class="columns medium-7">
-                    <label for="sign-up-email" class="sr-only">Email Address</label>
-                    <input id="sign-up-email" class="" name="email" type="email" placeholder="Email Address..." required="" alt="Email Address Input Field">
-                </div>
-                <div class="columns medium-5">
-                    <button class="submit" type="submit">
-                        <span class="pre-add"> Sign Up  <i class="fas fa-paper-plane"></i></span>
-                        <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
-                        <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
-                        <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>
+        <div class="row">
+            <div class="footer-link-wrap footer-sign-up">
+                <h1>Stay Connected</h1>
+                <p class="show-for-desktop">Join over 400,000 drummers who receive free weekly drum lessons.</p>
+                <p class="hide-for-desktop">Receive free weekly lessons.</p>
+                <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
+                    class="ajax-form clearfix facebook-track-lead lg:flex" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                    <input type="hidden" name="form_name" value="Blog Signup">
+
+                    <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
+                    <div class="col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
+                        <input class="medium-body" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
+                    </div>
+                    <div class="col-xs-12 form-group lg:w-5/12">
+                        <button class="submit join-form-button" type="submit">
+                            <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
+                            <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
+                            <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
+                            <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>
                         </button>
-                </div>
+                    </div>
                     <input name="inf_form_xid" type="hidden" value="DrumeoEngagementTriggerBlogSignupWebForm">
-                    <input name="tag_names_to_add[]" type="hidden" value="Drumeo - Engagement - Trigger - Blog Signup - Web Form">
-                    <input name="list_ids_to_subscribe_to[]" type="hidden" value="31">
-                    <input name="success_redirect" type="hidden" value="/thankyou">
+                    <input name="success_redirect" type="hidden" value="/thank-you">
                 </form>
                 <div class="thank-you-box">
                     <p><em>You should receive an email from team@drumeo.com within 10 minutes.</em></p>
