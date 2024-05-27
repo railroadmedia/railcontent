@@ -295,9 +295,8 @@
             </div>
         </div>
     </section>
-    @include('musora._partials._mentors')
     <div id="musoraapp" class="anchor"></div>
-    <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #f9f9fb calc(50% + 1px));"></div>
+    <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(45deg, #e6fffb, #e6f2ff, #f6e6ff, #ffe6e8);">
         <div class="container max-w-2xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">

@@ -163,7 +163,7 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
         if (isset($segments[0]) &&
             in_array(
                 $segments[0],
-                ['drumshop', 'lifetime', 'beat', 'recitals', 'guitar-technique-made-easy-discount']
+                ['drumshop', 'shop','lifetime', 'beat', 'recitals', 'guitar-technique-made-easy-discount']
             )) {
             return $url;
         }

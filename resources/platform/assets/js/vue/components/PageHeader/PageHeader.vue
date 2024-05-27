@@ -16,8 +16,8 @@
         </template>
       </PageHeaderHero>
     </template>
-    <template #top-right v-if="!isSongsPage">
-      <div :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+    <template #top-right>
+      <div  v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
         <PageHeaderCtasBox :ctas="ctas" />
       </div>
     </template>
@@ -32,11 +32,12 @@
           'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
           'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
         }">
-          <a v-if="isSongsPage" :href="songsPageLink.url" >
-            <PageHeaderRowInfo 
-              :infoData="[songsPageLink.text]" 
-              class="tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current" 
-            />
+          <a v-if="isSongsPage" 
+            :href="songsPageLink.url" 
+            class="tw-text-[#002039] dark:tw-text-[#9EC0DC] tw-text-sm sm:tw-text-base tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current" 
+          >
+            <span class="tw-uppercase">{{ songsPageLink.text }}</span>
+            <i class="fa-solid fa-chevron-right tw-ml-1"></i>
           </a>
           <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
             :ctas="secondaryCtas" />
@@ -52,7 +53,7 @@
 </template>
 
 <script setup>
-import { computed, onUpdated, ref } from 'vue';
+import { computed, onUpdated, onMounted, ref } from 'vue';
 
 import PageHeaderLayout from './PageHeaderLayout.vue';
 import PageHeaderHero from './PageHeaderHero.vue';
@@ -85,7 +86,7 @@ const props = defineProps({
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
-const primaryCtaIcon = computed(() => primaryCtaProps.value.icon);
+const primaryCtaIcon = computed(() => primaryCtaProps.value.faIconClass);
 const primaryCtaText = computed(() => primaryCtaProps.value.text);
 const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
@@ -131,6 +132,10 @@ const ctasAndInfoInsideHero = false;
 //     alwaysShow: isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value
 //   };
 // });
+
+// onMounted( () => {
+//   console.log('CTAs', props.ctas)
+// })
 
 const logo = computed(() => {
   return isDarkMode.value ? props.darkModeLogo : props.lightModeLogo;

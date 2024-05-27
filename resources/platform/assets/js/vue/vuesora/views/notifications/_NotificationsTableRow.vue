@@ -6,13 +6,10 @@
             <div class="tw-flex tw-flex-col md:tw-justify-center">
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-mr-[12px]">
                     <!-- User Avatar -->
-                    <img :src="userAvatar"
-                         alt="User Avatar"
-                         loading="lazy"
-                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
-                         :class="linkedContent.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
-                         @load="linkedContent.imageLoaded = true"
-                    >
+                    <img :src="userAvatar" alt="User Avatar" loading="lazy"
+                        class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                        :class="linkedContent.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                        @load="linkedContent.imageLoaded = true">
                 </div>
 
             </div>
@@ -37,14 +34,20 @@
 
         </div>
         <div class="tw-flex tw-mt-2 md:tw-mt-0 tw-justify-end tw-items-center tw-w-full md:tw-w-auto">
-            <div tabindex="0" class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" title="Delete" @click.stop.prevent="deleteNotification(id)">
+            <div tabindex="0"
+                class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer"
+                title="Delete" @click.stop.prevent="deleteNotification(id)">
                 <TrashIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#3F3F46] dark:tw-text-[#9ec0dc]" />
             </div>
-            <div tabindex="0" class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" :title="isRead ? 'Mark as Unread' : 'Mark as Read'" @click="toggleReadNotification">
+            <div tabindex="0"
+                class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer"
+                :title="isRead ? 'Mark as Unread' : 'Mark as Read'" @click="toggleReadNotification">
                 <EyeIcon v-if="!isRead" class="tw-w-[23px] tw-h-[23px] tw-text-[#3F3F46] dark:tw-text-[#9ec0dc]" />
                 <EyeOffIcon v-if="isRead" class="tw-w-[23px] tw-h-[23px] dark:tw-text-[#9ec0dc]" />
             </div>
-            <div tabindex="0" class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer" title="See notification">
+            <div tabindex="0"
+                class="tw-inline-flex tw-justify-center tw-items-center tw-w-[51px] tw-h-[58px] tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-cursor-pointer"
+                title="See notification">
                 <ArrowCircleRightIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#3F3F46] dark:tw-text-[#9ec0dc]" />
             </div>
         </div>
@@ -53,7 +56,7 @@
 <script setup>
 import axios from 'axios';
 import { borderColor } from '../../../../constants/brands';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { TrashIcon, EyeIcon, EyeOffIcon, ArrowCircleRightIcon } from '@heroicons/vue/solid';
 
 const props = defineProps({
@@ -133,12 +136,26 @@ function toggleReadNotification(e) {
 }
 
 function deleteNotification(id) {
-    axios.delete(window.ENDPOINT_PREFIX+'/railnotifications/notification/'+id)
+    axios.delete(window.ENDPOINT_PREFIX + '/railnotifications/notification/' + id)
         .then(() => {
-            location.reload();
+            window.location.href = window.location.href + '?deleted=true';
         })
         .catch((e) => {
             console.error(e);
         });
 }
+
+onMounted(() => {
+    const currentUrl = new URL(window.location.href);
+
+    if (currentUrl.searchParams.get('deleted') === 'true') {
+        window.shownotification({
+            icon: 'trash',
+            text: `Your notification was successfully deleted.`
+        });
+
+        currentUrl.searchParams.delete('deleted');
+        window.history.pushState({}, '', currentUrl);
+    }
+});
 </script>

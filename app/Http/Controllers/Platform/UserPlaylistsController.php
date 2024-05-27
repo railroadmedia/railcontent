@@ -218,7 +218,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
                 $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
 
-                $playlistItems[$index]['duration'] = $playlistItems[$index]['duration'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
+                $playlistItems[$index]['duration'] = $item['length_in_seconds'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
                 $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                     'playlistId' => $playlistId,
                     'playlistItemId' => $item['user_playlist_item_id'],

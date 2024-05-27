@@ -574,10 +574,10 @@ class UserController extends Controller
 
     /**
      * @param $id
-     * @return mixed
-     * @throws \Exception
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function report($id)
+    public function report($id, Request $request)
     {
         $user = User::find($id);
         if (!$user) {
@@ -605,6 +605,11 @@ class UserController extends Controller
             'brand' => brand(),
             'userId' => $user['id'],
         ]);
+
+        if ($request->has('issue')) {
+            $input['lines'][] = 'Reason:';
+            $input['lines'][] = $request->get('issue');
+        }
 
         $input['alert'] = 'User reported by ' . $currentUser['display_name'] . " (" . $currentUser['email'] . ")";
 

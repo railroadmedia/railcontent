@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-max">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-max">
         <div class="tw-flex tw-flex-col tw-items-center tw-p-10 tw-max-w-screen-md tw-mx-auto lg:tw-max-w-[600px]">
 
             <div class="tw-flex tw-flex-col tw-items-center tw-px-10 tw-max-w-[257px] tw-mx-auto tw-mt-8 dark:tw-text-white">

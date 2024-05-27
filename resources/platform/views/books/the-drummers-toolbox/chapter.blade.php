@@ -16,7 +16,7 @@ if(!empty($user)){
 
 @section('content')
     <header id="bestBookHeader" class="fluid pb-5 pt-2 shadow">
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <div class="flex flex-row">
                 <a
                     href="/drumeo/{{ $isDigital ? 'drummers-toolbox-digital' : 'drummers-toolbox' }}"
@@ -121,7 +121,7 @@ if(!empty($user)){
         </div>
     </div>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 dark:tw-text-white">
         <div class="tw-w-full flex flex-column corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Related Lessons</h1>
