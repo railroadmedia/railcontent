@@ -17,7 +17,7 @@
       </PageHeaderHero>
     </template>
     <template #top-right>
-      <div  v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+      <div v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
         <PageHeaderCtasBox :ctas="ctas" />
       </div>
     </template>
@@ -29,13 +29,11 @@
         </div>
         <div class="tw-justify-between tw-items-center" :class="{
           'tw-flex tw-w-full': isSongsPage,
-          'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
-          'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
+          'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage || isSongTutorialPage,
+          'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage && !isSongTutorialPage
         }">
-          <a v-if="isSongsPage" 
-            :href="songsPageLink.url" 
-            class="tw-text-[#002039] dark:tw-text-[#9EC0DC] tw-text-sm sm:tw-text-base tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current" 
-          >
+          <a v-if="isSongsPage" :href="songsPageLink.url"
+            class="tw-text-[#002039] dark:tw-text-[#9EC0DC] tw-text-sm sm:tw-text-base tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
             <span class="tw-uppercase">{{ songsPageLink.text }}</span>
             <i class="fa-solid fa-chevron-right tw-ml-1"></i>
           </a>
@@ -84,6 +82,8 @@ const props = defineProps({
   description: String,
 });
 
+console.log('props', props)
+
 const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
 
@@ -117,6 +117,7 @@ const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
 const isPlaylistsPage = computed(() => props.pageType === 'playlists');
 
 const songsPageLink = computed(() => props.pageType === 'songs' ? props.infoData : null);
+const isSongTutorialPage = computed(() => props.pageType === 'song-tutorial');
 
 // const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value || isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
 

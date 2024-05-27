@@ -33,12 +33,16 @@
             <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-description']">
               <musora-icon @click="openModal" icon-name="info"
                 class="tw-self-start tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
-              <InfoModal v-if="isModalOpen" modalId="header-description" :selfContained="true" @onClose="closeModal">
+              <ModalRenderer v-if="isModalOpen">
+                <button @click="closeModal"
+                  class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
+                  <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
+                </button>
                 <div
                   class="dark:tw-text-white tw-text-center tw-p-6 sm:tw-p-[30px] tw-max-w-[600px] tw-mx-4 sm:tw-mx-0 tw-h-full">
                   <slot name="header-description"></slot>
                 </div>
-              </InfoModal>
+              </ModalRenderer>
             </div>
 
             <!-- Tooltip for Desktop -->
@@ -70,9 +74,10 @@
 
 <script setup>
 import { ref } from 'vue';
+import { XIcon } from "@heroicons/vue/solid";
+import ModalRenderer from "../Modal/ModalRenderer";
 import Tooltip from "../Tooltip/Tooltip";
 import PageHeaderRowInfo from "./PageHeaderRowInfo";
-import InfoModal from '../Modal/InfoModal.vue';
 
 const props = defineProps({
   iconName: String,
