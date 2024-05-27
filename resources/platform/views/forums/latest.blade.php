@@ -6,7 +6,8 @@
                 'props' => [
                     'text' => 'Create Thread',
                     'url' => url()->route('forums.show-create-thread-form'),
-                    'faIconClass' => 'fa-pencil'
+                    'faIconClass' => 'fa-pencil',
+                    'isPrimary' => true,
                 ]
             ]
         ];

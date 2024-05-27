@@ -22,13 +22,11 @@ export default {
     mounted() {
         modalRoot.classList.add('tw-fixed')
         modalRoot.classList.remove('tw-hidden')
-        appRoot.classList.add('tw-blur-sm')
         appRoot.classList.add('tw-overflow-hidden')
     },
     unmounted() {
         modalRoot.classList.remove('tw-fixed')
         modalRoot.classList.add('tw-hidden')
-        appRoot.classList.remove('tw-blur-sm')
         appRoot.classList.remove('tw-overflow-hidden')
     }
 }
@@ -39,7 +37,7 @@ export default {
         <div
             @click="onClose"
             id="modal-overlay"
-            class="tw-absolute tw-h-full tw-w-full tw-bg-[#081825] tw-bg-opacity-90"
+            class="tw-absolute tw-h-full tw-w-full tw-bg-opacity-90"
             :style="{
                 backdropFilter: 'blur(1.5px)',
                 background: 'linear-gradient(180deg, rgba(0, 12, 23, 0.69) 0%, #000C17 100%)',
