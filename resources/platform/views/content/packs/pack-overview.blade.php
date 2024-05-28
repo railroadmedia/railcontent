@@ -11,7 +11,8 @@
             'props' => [
                 'text' => $pack->fetch('primary_cta_text'),
                 'url' => $nextLessonUrl,
-                'faIconClass' => 'fa-play'
+                'faIconClass' => 'fa-play',
+                'isPrimary' => true,
             ]
         ],
         [
@@ -52,6 +53,7 @@
             progress="{{ $parentContent->fetch('progress_percent', 0) }}"
             :info-data="{{ json_encode($infoDataStrArr) }}"
             :ctas="{{ $ctasJson }}"
+            description="{{ $pack->fetch('data.description', null) }}"
         >
         </page-header>
     </div>

@@ -164,6 +164,7 @@
                                 ref="textEditor"
                                 v-model="replyInterface"
                                 :height="150"
+                                :is-student-comment="!currentUser.isAdmin"
                             ></text-editor>
                         </div>
                         <div class="tw-flex tw-flex-row tw-justify-end mv-1">
