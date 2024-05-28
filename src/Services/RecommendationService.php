@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Enums\RecommenderSection;
 
-enum AccessMethod {
-    case PDO;
-    case DB;
-    case HUGGINGFACE;
+enum AccessMethod: string {
+    case PDO = 'PDO';
+    case DB = 'DB';
+    case HUGGINGFACE = 'HUGGINGFACE';
 }
 
 class RecommendationService
@@ -26,7 +26,7 @@ class RecommendationService
         private UserPermissionsService $userPermissionsService,
         private UserService $userService,
     ) {
-        $this->defaultAccessMethod = AccessMethod::DB;
+        $this->defaultAccessMethod = AccessMethod::from(env('RECSYS_ACCESS_METHOD', 'DB'));
         $this->invalidConfigurations = [
             'pianote' => [RecommenderSection::Course],
             'singeo' => [RecommenderSection::Course],
