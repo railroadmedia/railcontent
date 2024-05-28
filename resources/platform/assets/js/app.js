@@ -21,6 +21,7 @@ import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
 import Home from './vue/Pages/Home.vue';
 import LessonHistory from './vue/Pages/LessonHistory';
+import LessonPlayback from './vue/Pages/LessonPlayback';
 import Playlist from './vue/Pages/Playlist';
 import Playlists from './vue/Pages/Playlists';
 import Referral from './vue/Pages/Referral';
@@ -271,6 +272,7 @@ app.component('AppContainer', AppContainer)
     .component('Workouts', Workouts)
     .component('PageHeader', PageHeader)
     .component('WorkoutsPlayback', WorkoutsPlayback)
+    .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
     .component('Artists', Artists)
     .component('ChildCatalog', ChildCatalog)

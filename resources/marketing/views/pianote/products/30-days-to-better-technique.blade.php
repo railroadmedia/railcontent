@@ -654,44 +654,29 @@
         </div>
     </section>
 
-    @php
-        $logo =
-            'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/better-technique-guarantee.webp';
-        $guaranteeText = "We’re so confident that you’ll LOVE the improvements to your piano technique after Jordan’s course, that we’re giving you THREE times as long to put it to the test.
-                        <br><br>
-                        <strong>The course is 30 days, but you’ll have 90 days to try it risk-free.</strong>
-                        <br><br>
-                        That means you’ll have enough time to go through every lesson and play with Jordan - THREE times. And if -- after you’ve put in the work -- you don’t see real improvements to your technique... 
-                        <br><br>
-                        If your fingers don’t feel stronger and your hands aren’t more coordinated…
-                        <br><br>
-                        If you don’t enjoy playing the piano more than you did before you started…
-                        <br><br>
-                        Contact support@pianote.com within those 90 days and get a refund.";
-        $guaranteeHeader = "<strong>The 90-Day “Better <br class='inline sm:hidden'> Technique” Guarantee</strong>";
-    @endphp
-
-    <!-- @if (empty($membersVersion))
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101D calc(50% + 1px));"></div>
-                    <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#00101D; border: 1px solid #00101D">
-                        <div class="container max-w-3xl mx-auto">
-                            @include('pianote._partials._guarantee-section', [
-                                'containerWidth' => 'max-w-3xl',
-                            ])
-                        </div>
-                    </section>
-    @endif -->
-
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10"
         style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #00101D calc(50% + 1px));">
     </div>
     <section class="text-center text-white px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32"
         style="background-color:#00101D; border: 1px solid #00101D">
         <div class="container max-w-6xl mx-auto">
+            @php
+                $logo = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/better-technique-guarantee.webp';
+                $guaranteeText = "We’re so confident that you’ll LOVE the improvements to your piano technique after Jordan’s course, that we’re giving you THREE times as long to put it to the test.
+                                <br><br>
+                                <strong>The course is 30 days, but you’ll have 90 days to try it risk-free.</strong>
+                                <br><br>
+                                That means you’ll have enough time to go through every lesson and play with Jordan - THREE times. And if -- after you’ve put in the work -- you don’t see real improvements to your technique... 
+                                <br><br>
+                                If your fingers don’t feel stronger and your hands aren’t more coordinated…
+                                <br><br>
+                                If you don’t enjoy playing the piano more than you did before you started…
+                                <br><br>
+                                Contact support@pianote.com within those 90 days and get a refund.";
+                $guaranteeHeader = "<strong>The 90-Day “Better <br class='inline sm:hidden'> Technique” Guarantee</strong>";
+            @endphp
             @include('pianote._partials._guarantee-section', [
-                'containerWidth' => 'max-w-6xl',
-                'imageUrl' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/guarantee-collage.webp',
+                'imageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/30-day-better-technique/guarantee-collage.webp',
             ])
         </div>
     </section>

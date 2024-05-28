@@ -81,7 +81,6 @@
 
                         <text-editor
                             ref="textEditor"
-                            :is-reply-section="true"
                             :hasImageUploader="true"
                             v-model="postReplyInterface"
                         />

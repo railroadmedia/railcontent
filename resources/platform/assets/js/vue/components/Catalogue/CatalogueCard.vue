@@ -50,7 +50,7 @@
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block">
-                    <a @click="handleClick"  :href="renderLink && !forceNoLinks ? item.url : null"
+                    <a @click="handleClick" :href="renderLink && !forceNoLinks ? item.url : null"
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
@@ -133,7 +133,7 @@ import { DotsHorizontalIcon } from '@heroicons/vue/outline';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import Dropdown from './Dropdown';
 import DifficultyLabel from '../DifficultyLabel/DifficultyLabel';
-import { snakeToCapitalized } from "../../utils";
+import { contentTypes } from "../../../utils";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
@@ -251,10 +251,9 @@ const handleShowDropdown = (className) => {
 };
 
 const contentTypeString = computed(() => {
-    if (contentModel.value.post.type === 'workout') {
-        return 'Workouts';
+    if (contentModel.value?.post?.type && contentTypes[contentModel.value.post.type]?.singular) {
+        return contentTypes[contentModel.value.post.type].singular
     }
-    if (contentModel.value.post.type) return snakeToCapitalized(contentModel.value.post.type);
     return '';
 })
 

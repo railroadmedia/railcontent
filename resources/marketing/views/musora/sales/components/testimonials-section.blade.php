@@ -1,6 +1,10 @@
 <div id="testimonials" class="anchor"></div>
 <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5"
-    style="background:linear-gradient(to bottom, #fff, #F6F8FC);"
+    @isset($bgColor)
+        style="background: {{ $bgColor }};"
+    @else
+        style="background:linear-gradient(to bottom, #fff, #F6F8FC);"
+    @endisset
     x-data="{
         @foreach($testimonials as $testimonial)
             {{ str_replace(' ', '', $testimonial['name']) }} : false,
@@ -78,10 +82,15 @@
                 <section x-ref="splide" class="splide mb-12 sm:mb-20">
                     <div class="splide__track">
                         <ul class="splide__list">
-                            @foreach ($testimonials as $testimonial)
+                        @foreach ($testimonials as $index => $testimonial)
                                 <li class="splide__slide flex px-1">
                                     <div class="w-full rounded-xl p-6 text-white flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg"
-                                        style="background-color:#0C1524;">
+                                    @if($index % 2 == 0 && isset($bgSplide))
+                                        style="background: {{ $bgSplide }};"
+                                    @else
+                                        style="background-color:#0C1524;"
+                                    @endif
+                                       >
                                         <picture class="w-full @if(!empty($testimonial['video'])) sm:w-1/2 cursor-pointer @else sm:w-1/2 @endif flex-shrink-0 bg-cover bg-center relative h-56 sm:h-80 lg:h-[32rem]"
                                             @if(!empty($testimonial['video']))
                                                 x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"

@@ -24,25 +24,23 @@
       </PageHeaderHero>
     </template>
     <template #top-right>
-      <div  v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
+      <div v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
         <PageHeaderCtasBox :ctas="ctas" />
       </div>
     </template>
     <template #bottom-full>
       <div class="tw-flex tw-items-center"
         :class="primaryCta || isPackBundlePage || isCoursePage ? 'tw-mt-4 sm:tw-mt-0' : ''">
-        <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : ''">
-          <PageHeaderPrimaryCta :faIconClass="primaryCtaIcon" :url="primaryCtaUrl" :text="primaryCtaText" />
+        <div :class="primaryCta ? 'sm:tw-hidden tw-w-full' : 'tw-hidden'">
+          <PageHeaderCta v-bind="primaryCtaProps" />
         </div>
         <div class="tw-justify-between tw-items-center" :class="{
           'tw-flex tw-w-full': isSongsPage,
-          'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage,
-          'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage
+          'tw-flex sm:tw-hidden': isPackBundlePage || isCoursePage || isSongTutorialPage,
+          'tw-hidden': !isSongsPage && !isCoursePage && !isPackBundlePage && !isSongTutorialPage
         }">
-          <a v-if="isSongsPage" 
-            :href="songsPageLink.url" 
-            class="tw-text-[#002039] dark:tw-text-[#9EC0DC] tw-text-sm sm:tw-text-base tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current" 
-          >
+          <a v-if="isSongsPage" :href="songsPageLink.url"
+            class="tw-text-[#002039] dark:tw-text-[#9EC0DC] tw-text-sm sm:tw-text-base tw-font-bold tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
             <span class="tw-uppercase">{{ songsPageLink.text }}</span>
             <i class="fa-solid fa-chevron-right tw-ml-1"></i>
           </a>
@@ -60,43 +58,43 @@
 </template>
 
 <script setup>
-  import { computed, onUpdated, onMounted, ref } from 'vue';
-  import PageHeaderLayout from './PageHeaderLayout.vue';
-  import PageHeaderHero from './PageHeaderHero.vue';
-  import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
-  import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
-  import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
-  import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
-  import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
+import { computed, onUpdated, onMounted, ref } from 'vue';
 
-  const props = defineProps({
-    pageType: String,
-    contentId: String,
-    iconName: String,
-    title: String,
-    subTitle: String,
-    heroImg: String,
-    heroImgClasses: String,
-    additionalImgSrc: String,
-    darkModeLogo: String,
-    lightModeLogo: String,
-    progressLabelText: String,
-    progress: {
-      type: [Number, String],
-      default: null,
-    },
-    infoData: Object,
-    ctas: Array,
-    description: String,
-  });
+import PageHeaderLayout from './PageHeaderLayout.vue';
+import PageHeaderHero from './PageHeaderHero.vue';
+import PageHeaderCta from './PageHeaderCta.vue';
+import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
+import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
+import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
+import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
-const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
+const props = defineProps({
+  pageType: String,
+  contentId: String,
+  iconName: String,
+  title: String,
+  subTitle: String,
+  heroImg: String,
+  heroImgClasses: String,
+  additionalImgSrc: String,
+  darkModeLogo: String,
+  lightModeLogo: String,
+  progressLabelText: String,
+  progress: {
+    type: [Number, String],
+    default: null,
+  },
+  infoData: Object,
+  ctas: Array,
+  description: String,
+});
+
+console.log('props', props)
+
+const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
-const primaryCtaIcon = computed(() => primaryCtaProps.value.faIconClass);
-const primaryCtaText = computed(() => primaryCtaProps.value.text);
-const primaryCtaUrl = computed(() => primaryCtaProps.value.url);
 
-const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'PageHeaderPrimaryCta') || []);
+const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.props?.isPrimary !== true) || []);
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
@@ -126,6 +124,7 @@ const isForumThreadPage = computed(() => props.pageType === 'forum-thread');
 const isPlaylistsPage = computed(() => props.pageType === 'playlists');
 
 const songsPageLink = computed(() => props.pageType === 'songs' ? props.infoData : null);
+const isSongTutorialPage = computed(() => props.pageType === 'song-tutorial');
 
 // const ctasBesideHero = computed(() => isLivePage.value || isSchedulePage.value || isLearningPathPage.value || isLearningPathLevelPage.value || isLearningPathCoursePage.value || isStudentFocusCatalougePage.value || isForumsPage.value || isForumThreadPage.value || isNotificationsPage.value || isCoursePage.value || isPackOverviewPage.value || isPackBundlePage.value || isCoachPage.value || isDashboardPage.value);
 

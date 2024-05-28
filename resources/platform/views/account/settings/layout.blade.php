@@ -48,7 +48,8 @@
         'props' => [
             'text' => $ctaText,
             'url' => $ctaUrl,
-            'showAllAlways' => true
+            'showAllAlways' => true,
+            'isPrimary' => true,
         ]
     ];
 

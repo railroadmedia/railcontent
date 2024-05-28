@@ -1,6 +1,6 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-    import BreadCrumb from './Breadcrumb.vue';
+    import { onMounted, ref } from 'vue';
+    import BreadCrumb from './../Breadcrumb/Breadcrumb.vue';
     import ContentCatalogue from "../../vuesora/views/catalogues/ContentCatalogue";
 
     const props = defineProps({
@@ -61,15 +61,7 @@ import { onMounted, ref } from 'vue';
     <div id="instructorInfo" class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl fluid tw-bg-white dark:tw-bg-[#081825] tw-rounded-[10px]">
         <div class="tw-max-w-screen-2xl tw-px-4 md:tw-px-8 tw-mx-auto tw-py-4">
             <!-- BREADCRUMBS -->
-            <BreadCrumb
-                v-if="breadcrumbs && Object.keys(breadcrumbs).length"
-                :brand="brand"
-                :firstLevelUrl="breadcrumbs.firstLevelUrl"
-                :firstLevelTitle="breadcrumbs.firstLevelTitle"
-                :secondLevelUrl="breadcrumbs.secondLevelUrl"
-                :secondLevelTitle="breadcrumbs.secondLevelTitle"
-                :lastLevelTitle="breadcrumbs.lastLevelTitle"
-            />
+            <Breadcrumb :breadcrumbs="breadcrumbs" classOverride="tw-pb-[10px]" />
 
             <!-- COURSE LESSONS -->
             <template v-if="lessonList && lessonList.length">

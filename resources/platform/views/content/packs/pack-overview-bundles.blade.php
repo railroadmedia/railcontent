@@ -11,7 +11,8 @@
             'props' => [
                 'text' => $pack->fetch('primary_cta_text'),
                 'url' => $pack->fetch('primary_cta_url'),
-                'faIconClass' => 'fa-play'
+                'faIconClass' => 'fa-play',
+                'isPrimary' => true,
             ]
         ],
         
@@ -50,6 +51,7 @@
             light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
             :info-data="{{ json_encode($infoDataStrArr) }}"
             :ctas="{{ $ctasJson }}"
+            description="{{ $pack->fetch('data.description', null) }}"
         >
         </page-header>
 
