@@ -107,13 +107,13 @@
                     Don't show if the user has not enrolled in a challenge (does not own Product)
                 -->
                 <div v-if="!enrollmentOpen || hasProduct" class="tw-inline-flex tw-items-start tw-pt-1 tw-px-1 tw-relative">
-                    <div class="tw-relative" v-click-outside="() => { state.dropdownOpen = false }">
+                    <div class="tw-relative tw-my-auto" v-click-outside="() => { state.dropdownOpen = false }">
                         <button :id="`${item.id}-action-btn-big`" v-if="showMyListAction"
                             class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                             :class="is_added ? 'is-added' + `tw-text-${brand}` : 'tw-text-[#00101D] dark:tw-text-white'"
                             :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                             :data-content-type="item.type"
-                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })">
+                            @click.prevent="showDropdown ? handleShowDropdown(`${item.id}-action-btn-big`) : handleAddToList()">
                             <DotsHorizontalIcon v-if="showDropdown" class="tw-h-[24px] tw-w-[24px]" />
                             <svg v-else xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -124,7 +124,7 @@
                         <Dropdown v-if="showDropdown" :brand="brand" :item="item" :is-open="state.dropdownOpen"
                             :dropdownOptions="dropdownOptions" @closeDropdown="state.dropdownOpen = false"
                             :position="state.dropdownPosition"
-                            @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.black_title, description: mappedData.description, thumbnail_url: mappedData.thumbnail })"
+                            @addToList="handleAddToList()"
                             @progressReset="$emit('progressReset', { content_id: item.id })" />
                     </div>
                 </div>
@@ -334,6 +334,12 @@ const closeDropdownOnScroll = () => {
     if (state.dropdownOpen) {
         state.dropdownOpen = false;
     }
+};
+
+const handleAddToList = () => {
+    const { item: { id, type } } = props;
+    const { black_title: name, description, thumbnail_url } = mappedData.value;
+    window.openplaylistmodal({ modalType: 'addItem', content: { content_id: id, type, name, description, thumbnail_url } })
 };
 
 onMounted(() => {
