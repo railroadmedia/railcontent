@@ -157,7 +157,7 @@
 
     //Pinia Stores
     const userStore = useUserStore();
-    const { brand } = storeToRefs(userStore);
+    const { brand, userCompletedAccount } = storeToRefs(userStore);
 
     const props = defineProps({
         accountUrl: { type: String, default: '' },
@@ -171,12 +171,7 @@
         currentDate: { type: String, default: '' },
         eventCoachProfileUrl: { type: String, default: '' },
         existsCohortBanner: { type: Boolean, default: false },
-        hasExperience: { type: Boolean, default: false },
-        hasGear: { type: Boolean, default: false },
-        hasGenres: { type: Boolean, default: false },
-        hasGoals: { type: Boolean, default: false },
         hasStartedLessons: { type: Boolean, default: false },
-        hasTopics: { type: Boolean, default: false },
         hasUpcomingEvents: { type: Boolean, default: false },
         isPackOnly: { type: Number, default: 0 },
         learningPaths: { type: Array, default: () => ([]) },
@@ -211,7 +206,7 @@
 
     const showTriggerBanner = computed(() => {
         if(!props.isPackOnlyBoolean) return false; //hide for packs only
-        return !props.hasGear || !props.hasTopics || !props.hasGenres || !props.hasExperience || !props.hasGoals;
+        return userCompletedAccount.value;
     });
 
     const isPackOnlyBoolean = computed(() => {

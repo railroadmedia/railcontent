@@ -125,6 +125,6 @@
 @section('content')
     {{-- Profile Page Component --}}
     <profile
-
+        user-forum-signature="{{ $signature }}"
     ></profile>
 @endsection

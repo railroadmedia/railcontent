@@ -1,9 +1,16 @@
 <template>
   <PageHeaderLayout>
     <template #top-left>
-      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo"
-        :infoData="isSongsPage || isPlaylistsPage ? null : infoData">
+      <PageHeaderHero 
+        :pageType="pageType"
+        :iconName="iconName" 
+        :title="title" 
+        :subTitle="subTitle" 
+        :heroImg="heroImg"
+        :heroImgClasses="heroImgClasses" 
+        :additionalImgSrc="logo"
+        :infoData="isSongsPage || isPlaylistsPage ? null : infoData"
+      >
         <template #header-description v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
@@ -53,36 +60,35 @@
 </template>
 
 <script setup>
-import { computed, onUpdated, onMounted, ref } from 'vue';
+  import { computed, onUpdated, onMounted, ref } from 'vue';
+  import PageHeaderLayout from './PageHeaderLayout.vue';
+  import PageHeaderHero from './PageHeaderHero.vue';
+  import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
+  import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
+  import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
+  import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
+  import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
-import PageHeaderLayout from './PageHeaderLayout.vue';
-import PageHeaderHero from './PageHeaderHero.vue';
-import PageHeaderPrimaryCta from './PageHeaderPrimaryCta.vue';
-import PageHeaderProgressBar from './ProgressBar/PageHeaderProgressBar.vue';
-import PageHeaderRowInfo from './PageHeaderRowInfo.vue';
-import PageHeaderCtasBox from './PageHeaderCtasBox.vue';
-import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
-
-const props = defineProps({
-  pageType: String,
-  contentId: String,
-  iconName: String,
-  title: String,
-  subTitle: String,
-  heroImg: String,
-  heroImgClasses: String,
-  additionalImgSrc: String,
-  darkModeLogo: String,
-  lightModeLogo: String,
-  progressLabelText: String,
-  progress: {
-    type: [Number, String],
-    default: null,
-  },
-  infoData: Object,
-  ctas: Array,
-  description: String,
-});
+  const props = defineProps({
+    pageType: String,
+    contentId: String,
+    iconName: String,
+    title: String,
+    subTitle: String,
+    heroImg: String,
+    heroImgClasses: String,
+    additionalImgSrc: String,
+    darkModeLogo: String,
+    lightModeLogo: String,
+    progressLabelText: String,
+    progress: {
+      type: [Number, String],
+      default: null,
+    },
+    infoData: Object,
+    ctas: Array,
+    description: String,
+  });
 
 const primaryCta = computed(() => props.ctas?.find(cta => cta.type === 'PageHeaderPrimaryCta'));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
@@ -94,8 +100,8 @@ const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.type !== 'Pag
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
-const isDashboardPage = computed(() => props.pageType === 'dashboard')
-const isNotificationsPage = computed(() => props.pageType === 'notifications')
+const isSettingsPage = computed(() => props.pageType === 'settings');
+const isNotificationsPage = computed(() => props.pageType === 'notifications');
 
 const isCoachPage = computed(() => props.pageType === 'instructor')
 const isCoursePage = computed(() => props.pageType === 'course')

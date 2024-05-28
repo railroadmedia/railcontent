@@ -26,6 +26,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  userCompletedAccount: {
+    type: Boolean,
+    default: false,
+  }
 
 });
 
@@ -70,4 +74,11 @@ watch(
   },
   { immediate: true }
 );
+watch(
+  () => props.userCompletedAccount,
+  (userCompletedAccount) => {
+    userStore.setCompletedAccount(userCompletedAccount)
+  },
+  { immediate: true }
+)
 </script>
