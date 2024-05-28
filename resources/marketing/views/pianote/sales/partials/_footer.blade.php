@@ -33,11 +33,11 @@
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-right: 2%;
-        margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank">
+        margin-top: 10px;" href="https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277" target="_blank">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
-        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank">
+        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">

@@ -354,8 +354,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/guitareo/membership/homepage/webp-format/devices.webp',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
 
     @include('guitareo._partials.faq')

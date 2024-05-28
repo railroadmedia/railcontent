@@ -57,10 +57,10 @@ bg-gradient-to-b from-white to-gray-200
                         </li>
                     </ul>
                     <div class="pt-5">
-                    <a class="inline-block" href="https://apps.apple.com/us/app/musora/id1619053766?platform=iphone" target="_blank" aria-label="Download from Apple Store">
+                    <a class="inline-block" href="https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277" target="_blank" aria-label="Download from Apple Store">
                         <img class="h-8 md:h-10 m-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/270x0/filters:quality(95)/marketing/musora/membership/app-page/apple-store.svg" alt="Download our app from the Apple Store">
                     </a>
-                    <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank" aria-label="Download from Google Play">
+                    <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank" aria-label="Download from Google Play">
                         <img class="h-8 md:h-10 m-1 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/270x0/filters:quality(95)/marketing/musora/membership/app-page/google-play.svg" alt="Download our app from Google Play">
                     </a>
                     </div>
