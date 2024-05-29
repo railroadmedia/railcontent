@@ -51,7 +51,6 @@ import DeleteAccountModal from './vue/components/Modal/DeleteAccountModal';
 import Forms from './vue/vuesora/assets/js/classes/forms';
 import ContentService from './vue/vuesora/assets/js/services/content';
 import UserService from './vue/vuesora/assets/js/services/user';
-import Toasts from './vue/vuesora/assets/js/classes/toasts';
 import ProgressTracker from './vue/vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
@@ -102,11 +101,9 @@ const app = createApp({
                 );
             });
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'AHH, MUCH BETTER!',
-                themeColor: 'black',
-                message: 'The new "you" is being refreshed...'
+            window.shownotification({
+                icon: 'check',
+                text: 'Ahh, Much Better! The new "you" is being refreshed...'
             });
         },
 
@@ -118,12 +115,10 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'drumeo',
-                message: 'Your drum gear looks fantastic!'
-            });
+            window.shownotification({
+                icon: 'check',
+                text: 'Woohoo! Your drum gear looks fantastic!'
+            });            
         },
 
         gearPianotePhotoUploaded(payload) {
@@ -134,12 +129,7 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'pianote',
-                message: 'Your piano gear looks fantastic!'
-            });
+
         },
 
         gearGuitareoPhotoUploaded(payload) {
@@ -150,12 +140,10 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'guitareo',
-                message: 'Your gear looks fantastic!'
-            });
+            window.shownotification({
+                icon: 'check',
+                text: 'Woohoo! Your gear looks fantastic!'
+            });            
         },
 
         gearSingeoPhotoUploaded(payload) {
@@ -166,12 +154,10 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'singeo',
-                message: 'Your singing gear looks fantastic!'
-            });
+            window.shownotification({
+                icon: 'check',
+                text: 'Woohoo! Your singing gear looks fantastic!'
+            });            
         },
 
         handleVideoPlay(payload) {
@@ -507,13 +493,11 @@ function showLevelUpData() {
     if (levelUpData) {
         setTimeout(() => {
             const newRank = levelUpData.dataset['newRank'];
-
-            Toasts.push({
+            window.shownotification({
                 icon: 'xp',
-                title: 'Congratulations!',
-                themeColor: 'drumeo',
-                message: 'You have earned the level of ' + newRank + '!'
+                text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
+            
         }, 1000);
     }
 }

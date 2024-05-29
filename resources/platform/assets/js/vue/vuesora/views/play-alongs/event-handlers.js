@@ -1,5 +1,3 @@
-import Toasts from '../../assets/js/classes/toasts';
-
 export default {
     data() {
         return {
@@ -23,14 +21,10 @@ export default {
 
                 error: (event) => {
                     if (event.target.error.code === 4) {
-                        Toasts.push({
-                            icon: 'doh',
-                            title: 'TRACK MISSING',
-                            themeColor: this.themeColor,
-                            message: 'The <em>odd-time</em> metronome and drum tracks aren\'t available, '
-                                + 'please turn those options on/off.',
-                            timeout: 10000,
-                        });
+                        window.shownotification({
+                            icon: 'warning',
+                            text: "Track missing. The <em>odd-time</em> metronome and drum tracks aren't available, please turn those options on/off."
+                        });                        
                     }
                 },
 

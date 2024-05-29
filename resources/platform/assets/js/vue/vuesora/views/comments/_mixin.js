@@ -1,5 +1,4 @@
 import CommentService from '../../assets/js/services/comments';
-import Toasts from '../../assets/js/classes/toasts';
 
 export default {
     props: {
@@ -120,13 +119,10 @@ export default {
                     } else {
                         this.comments = this.comments.filter(comment => comment.id !== payload.id);
                     }
-
-                    Toasts.push({
-                        icon: 'happy',
-                        themeColor: this.themeColor,
-                        title: 'TRASHED!',
-                        message: 'We have removed your comment. Please add a better one!',
-                    });
+                    window.shownotification({
+                        icon: 'check',
+                        text: 'Trashed! We have removed your comment. Please add a better one!'
+                    });                    
                 });
         },
 
@@ -139,12 +135,10 @@ export default {
                         this.comments[index].replies = this.comments[index].replies
                             .filter(reply => reply.id !== payload.id);
 
-                        Toasts.push({
-                            icon: 'happy',
-                            themeColor: this.themeColor,
-                            title: 'TRASHED!',
-                            message: 'We have removed your reply. Please add a better one!',
-                        });
+                            window.shownotification({
+                                icon: 'check',
+                                text: 'Trashed! We have removed your reply. Please add a better one!'
+                            });                            
                     }
                 });
         },
