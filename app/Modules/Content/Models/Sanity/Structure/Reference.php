@@ -3,7 +3,7 @@
 namespace App\Modules\Content\Models\Sanity\Structure;
 
 /**
- * A group of a Sanity CMS document, that can be used to structure the display of fields in a document type
+ * A reference of a Sanity CMS document field
  */
 class Reference
 {
@@ -12,7 +12,7 @@ class Reference
     }
 
     /**
-     * Get the array-formatted values for this group, so that it can be rendered as part of the Sanity document type
+     * Get the array-formatted values for this reference
      *
      * @return array
      */

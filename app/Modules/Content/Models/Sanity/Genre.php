@@ -20,7 +20,7 @@ class Genre extends BaseSanityModel
     {
         $fields = [
             new Field(FieldType::String, 'name'),
-            new Field(FieldType::Image, 'thumb'),
+            new Field(FieldType::Image, 'thumbnail_url'),
         ];
         parent::__construct('genre', 'Genre', $fields);
     }

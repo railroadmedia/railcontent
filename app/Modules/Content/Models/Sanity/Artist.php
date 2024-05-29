@@ -6,7 +6,7 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 
 /**
- * Defines the schema structure for a Artist document type in Sanity.
+ * Defines the schema structure for an Artist document type in Sanity.
  *
  * @property string $type
  * @property string $name
@@ -20,8 +20,7 @@ class Artist extends BaseSanityModel
     {
         $fields = [
             new Field(FieldType::String, 'name'),
-            new Field(FieldType::Image, 'thumb'),
-            new Field(FieldType::String, 'hiddenField', hidden:"({document}) => !document?.name2"),
+            new Field(FieldType::Image, 'thumbnail_url'),
         ];
         parent::__construct('artist', 'Artist', $fields);
     }
