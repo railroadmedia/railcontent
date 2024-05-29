@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="tw-flex tw-flex-wrap tw-items-start tw-my-2"
-    >
+    <div class="tw-flex tw-flex-wrap tw-items-start tw-my-2">
         <!-- Likes Button -->
         <div class="tw-flex tw-mr-2 tw-mb-2">
             <button
@@ -88,8 +86,6 @@
             <h1 class="heading mb-2">
                 Share Video Link
             </h1>
-
-
             <div class="form-group mb-2">
                 <input
                     id="shareableUrlInput"
@@ -97,7 +93,6 @@
                     type="text"
                     :value="shareUrl"
                 >
-
                 <button
                     id="copyUrlButton"
                     class="btn"
@@ -119,7 +114,6 @@
 <script>
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from '../../mixins/ThemeClasses';
-import Toasts from '../../assets/js/classes/toasts';
 import ContentService from '../../assets/js/services/content';
 
 export default {
@@ -139,16 +133,6 @@ export default {
         title: {
             type: String,
             default: () => '',
-        },
-
-        parentTitle: {
-            type: String,
-            default: () => null,
-        },
-
-        instructors: {
-            type: Array,
-            default: () => [],
         },
 
         isLiked: {
@@ -203,14 +187,6 @@ export default {
     },
 
     computed: {
-        subtitle() {
-            if (this.parentTitle) {
-                return `From ${this.parentTitle}`;
-            }
-
-            return `With ${this.instructors.join(', ')}`;
-        },
-
         currentTime() {
             const { mediaElementVueInstance } = this.$root.$refs;
 
@@ -297,11 +273,9 @@ export default {
             document.execCommand('copy');
             timecode.blur();
             window.closeAllModals();
-
-            Toasts.push({
-                icon: 'happy',
-                title: 'SHARE THE LOVE!',
-                message: 'This URL has been copied, and is ready to share!',
+            window.shownotification({
+                icon: 'check',
+                text: 'Share the love! This URL has been copied, and is ready to share!'
             });
         },
     },

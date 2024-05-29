@@ -83,6 +83,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.song-secrets-bonus', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
+    public function promoUT()
+    {
+        return view('pianote.sales.ultimate-technique', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
     public function choosePlan()
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
@@ -325,12 +329,12 @@ class SalesController extends BaseController
     public function claimRoland90DaysAccess(Request $request)
     {
         // Validate email before proceeding
-        
+
         $messages = [
             'email.already_pianote_user' => 'pianote_user',
             'email.code_claimed' => 'code_claimed'
         ];
-        
+
         $validatedData = $request->validate([
             'email' => [
                 'required',
@@ -346,14 +350,14 @@ class SalesController extends BaseController
                         ->orWhere('user_access_permissions.product_id', 408);
                     })
                     ->first();
-        
+
                     $codeClaimed = DB::table('usora_users')
                         ->join('ecommerce_access_codes', 'usora_users.id', '=', 'ecommerce_access_codes.claimer_id')
                         ->where('usora_users.email', $value)
                         ->where('ecommerce_access_codes.is_claimed', 1)
                         ->where('ecommerce_access_codes.source', 'roland-piano-promo')
                         ->exists();
-        
+
                     if ($user && $codeClaimed) {
                         $fail('email.code_claimed');
                     } elseif ($user) {
@@ -362,12 +366,12 @@ class SalesController extends BaseController
                 }
             ],
         ], $messages);
-    
+
         // If validation passes, the customer does not exist as pianote user or did not claim, continue with the process
-    
+
         // create access code
         $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote', 'roland-piano-promo');
-    
+
         // create the customer and send the email
         dispatch(
             (new CustomerIoSendTransactionalEmail(
@@ -380,7 +384,7 @@ class SalesController extends BaseController
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
                 ->delay(Carbon::now()->addSeconds(3))
         );
-    
+
         // dispatch the event
         dispatch(
             (new CustomerIoTriggerEvent(
@@ -394,10 +398,10 @@ class SalesController extends BaseController
                 ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
                 ->delay(Carbon::now()->addSeconds(10))
         );
-    
+
         return response()->json(['success' => true]);
     }
-    
+
 
     public function betterTechnique()
     {

@@ -388,7 +388,11 @@ class RevenueCatController extends Controller
     {
         $productId = $productId1;
         if (strpos($productId, ':') !== false) {
-            $productId = explode(':', $productId)[0];
+            $productIds = explode(':', $productId);
+            //starting with 2024 the new Google products name have the format: 'musora_subscription:annual-plus' and 'musora_subscription:monthly-plus'
+            if (isset($productIds[1]) && !in_array($productIds[1], ['annual-plus', 'monthly-plus'])) {
+                $productId = explode(':', $productId)[0];
+            }
         }
 
         return $productId;
@@ -906,9 +910,11 @@ class RevenueCatController extends Controller
 
                     //productId
                     $productId = $entitlement->product_identifier;
+                    $productPlanIdentifier = $entitlement->product_plan_identifier ?? '';
+                    $entitlementProduct = ($productId == 'musora_subscription') ? $productId.':'.$productPlanIdentifier : $productId;
                     $productsMap = array_merge(
-                        [config('ecommerce.' . $store . '_products_map')[$productId]],
-                        [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+                        [config('ecommerce.' . $store . '_products_map')[$entitlementProduct]],
+                        [config('ecommerce.' . $store . '_products_map_trial')[$entitlementProduct]]
                     );
 
                     $musoraProduct =
@@ -964,9 +970,11 @@ class RevenueCatController extends Controller
 
                 //productId
                 $productId = $entitlement->product_identifier;
+                $productPlanIdentifier = $entitlement->product_plan_identifier ?? '';
+                $entitlementProduct = ($productId == 'musora_subscription') ? $productId.':'.$productPlanIdentifier : $productId;
                 $productsMap = array_merge(
-                    [config('ecommerce.' . $store . '_products_map')[$productId]],
-                    [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+                    [config('ecommerce.' . $store . '_products_map')[$entitlementProduct]],
+                    [config('ecommerce.' . $store . '_products_map_trial')[$entitlementProduct]]
                 );
 
                 $musoraProduct =

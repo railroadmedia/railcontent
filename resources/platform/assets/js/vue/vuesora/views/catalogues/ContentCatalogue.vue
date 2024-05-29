@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
+  <div class="tw-flex tw-flex-col" :class="{ 'tw-grow tw-justify-center' : !displayInline }">
 
     <div v-if="isCoachesGrid" id="coach-section" class="tw-flex tw-flex-col tw-mb-6">
       <div class="tw-flex tw-flex-wrap">
@@ -120,7 +120,6 @@ import CatalogueFilters from "./_CatalogueFilters.vue";
 import CatalogueSearch from "./_CatalogueSearch.vue";
 import CoachCatalogueSearch from "./_CoachCatalogueSearch.vue";
 import CataloguePlaylistTabs from "./_CataloguePlaylistTabs.vue";
-import Toasts from "../../assets/js/classes/toasts";
 import Pagination from "../../components/Pagination.vue";
 import UserCatalogueEvents from "../../mixins/UserCatalogueEvents";
 import ThemeClasses from "../../mixins/ThemeClasses";
@@ -657,14 +656,11 @@ export default {
         .then((response) => response)
         .catch((error) => {
           console.error(error);
-          Toasts.push({
-            icon: "doh",
-            themeColor: this.themeColor,
-            title: "This is Embarrassing That didn't work",
-            message:
-              "Refresh the page and try once more, if it happens again please let us know using the chat below. ",
+          window.shownotification({
+              icon: 'warning',
+              text: "This is Embarrassing That didn't work. Refresh the page and try once more, if it happens again please let us know using the chat below."
           });
-
+          
           this.loading = false;
         });
     },

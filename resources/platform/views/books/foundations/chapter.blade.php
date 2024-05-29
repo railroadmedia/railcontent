@@ -10,7 +10,8 @@
                 'props' => [
                     'text' => 'Login to Musora',
                     'url' => '/login',
-                    'faIconClass' => 'fa-external-link'
+                    'faIconClass' => 'fa-external-link',
+                    'isPrimary' => true,
                 ]
             ]
         ];

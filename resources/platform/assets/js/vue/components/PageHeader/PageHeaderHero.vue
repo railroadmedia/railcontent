@@ -16,19 +16,20 @@
 
     <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
       <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : ''
-    ]">
+      ]">
         <div class="tw-flex">
           <template v-if="additionalImgSrc">
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] md:tw-h-[86px]">
           </template>
           <template v-else>
-            <span v-if="title" class="tw-text-2xl sm:tw-text-[32px] sm:tw-leading-tight tw-font-bold dark:tw-text-white tw-line-clamp-3 tw-overflow-hidden"
+            <span v-if="title"
+              class="tw-text-2xl sm:tw-text-[32px] sm:tw-leading-tight tw-font-bold dark:tw-text-white tw-line-clamp-3 tw-overflow-hidden"
               :class="{ 'tw-capitalize': !heroImgClasses }">
               {{ title }}
             </span>
           </template>
           <div class="tw-ml-[5px]">
-            <!-- Modal for Desktop -->
+            <!-- Modal for Mobile -->
             <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-description']">
               <musora-icon @click="openModal" icon-name="info"
                 class="tw-self-start tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
@@ -44,7 +45,7 @@
               </ModalRenderer>
             </div>
 
-            <!-- Tooltip for Mobile -->
+            <!-- Tooltip for Desktop -->
             <div class="tw-hidden sm:tw-block tw-self-start" v-if="$slots['header-description']">
               <Tooltip position="right">
                 <template #trigger>

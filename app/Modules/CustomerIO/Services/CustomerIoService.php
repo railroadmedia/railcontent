@@ -8,6 +8,7 @@ use App\Modules\CustomerIO\Events\CustomerUpdated;
 use App\Modules\CustomerIO\Models\Customer;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -47,7 +48,7 @@ class CustomerIoService
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         /**
-         * @var $customer Customer
+         * @var Customer $customer
          */
         $customer =
             Customer::query()
@@ -69,6 +70,16 @@ class CustomerIoService
         }
 
         return $customer;
+    }
+
+    public function getCustomerIoProfileByEmail(array $accountConfigData, string $email): array
+    {
+        $customerIoProfile = $this->customerIoApiGateway->getCustomer(
+            $accountConfigData['app_api_key'],
+            $email
+        );
+
+        return $customerIoProfile['attributes'];
     }
 
     /**
@@ -173,19 +184,19 @@ class CustomerIoService
                 'updated_at' => Carbon::createFromTimestamp($createdAtTimestamp)
 
             ],
-            ['workspace_id','uuid'],
-            ['email','user_id','updated_at']
+            ['workspace_id', 'uuid'],
+            ['email', 'user_id', 'updated_at']
         );
 
         $customer =
             Customer::onWriteConnection()
-                ->where([
-                            'email' => $email,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
-                ->first();
+            ->where([
+                'email' => $email,
+                'workspace_name' => $accountConfigData['workspace_name'],
+                'workspace_id' => $accountConfigData['workspace_id'],
+                'site_id' => $accountConfigData['site_id'],
+            ])
+            ->first();
 
         // set the user id custom attribute if its not empty
         if (!empty($userId)) {
@@ -231,15 +242,23 @@ class CustomerIoService
         $createdAtTimestamp = null
     ) {
         $accountConfigData = $this->getAccountConfigData($accountName);
-
         $oldCustomer = clone $customer;
 
         if (!empty($email)) {
             $customer->email = $email;
+            if ($oldCustomer->email !== $email) {
+                /**
+                 * Updates email and updates the identifier in customer.io as well using cio_id.
+                 * This is needed to avoid conflicts of identifiers in customer.io.
+                 */
+                $this->updateCustomerIdentifier($accountName, $oldCustomer, $customer);
+            }
         }
 
         if (!empty($userId)) {
             $customer->user_id = $userId;
+            $customer->uuid = $userId;
+            $customAttributes[$this->userIdCustomFieldName] = $userId;
         }
 
         if (!empty($createdAtTimestamp)) {
@@ -251,10 +270,6 @@ class CustomerIoService
         // save to the database
         $customer->saveOrFail();
 
-        // set the user id custom attribute if its not empty
-        if (!empty($userId)) {
-            $customAttributes[$this->userIdCustomFieldName] = $userId;
-        }
 
         // sync to customer.io using their API
         $this->customerIoApiGateway->addOrUpdateCustomer(
@@ -330,6 +345,34 @@ class CustomerIoService
     }
 
     /**
+     * @param string $accountName
+     * @param Customer $oldCustomer
+     * @param Customer $newCustomer
+     * @return void
+     * @throws Exception
+     */
+    public function updateCustomerIdentifier(
+        string $accountName,
+        Customer $oldCustomer,
+        Customer $newCustomer,
+    ): void {
+        $accountConfigData = $this->getAccountConfigData($accountName);
+
+        // to update customer ids we need to use cio_id
+        $cioCustomer = $this->getCustomerIoProfileByEmail($accountConfigData, $oldCustomer->email);
+        if (Arr::has($cioCustomer, 'cio_id')) {
+            $this->customerIoApiGateway->updateCustomerByCioId(
+                $accountConfigData['site_id'],
+                $accountConfigData['track_api_key'],
+                $cioCustomer['cio_id'],
+                [
+                    'email' => $newCustomer->email,
+                ]
+            );
+        }
+    }
+
+    /**
      * Looks up the customer based on the user id and $accountName config data. If none exists, this creates a new one,
      * otherwise it updates the existing customer in the database and via the API.
      *
@@ -353,9 +396,7 @@ class CustomerIoService
     ) {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
-        /**
-         * @var $customer Customer
-         */
+        /** @var Customer $customer */
         $customer =
             Customer::onWriteConnection()
             ->where([
