@@ -55,8 +55,6 @@
 
     $headerDataJson = json_encode($headerData);
     $headerDataObj = json_decode($headerDataJson);
-
-    dd(user()->onboardingGear)
 @endphp
 
 @extends('partials.layout')

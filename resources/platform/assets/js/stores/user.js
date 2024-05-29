@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { updateUserName } from '../services/userService';
 
 export const useUserStore = defineStore({
   id: 'User',
@@ -12,6 +13,8 @@ export const useUserStore = defineStore({
   getters: {
     userId: (state) => state.user?.id,
     userDisplayName: (state) => state.user?.display_name,
+    userFirstName: (state) => state.user?.first_name,
+    userLastName: (state) => state.user?.last_name,
     userEmail: (state) => state.user?.email,
     userAccessLevel: (state) => state.user?.access_level,
     userCountry: (state) => state.user?.country,
@@ -68,6 +71,9 @@ export const useUserStore = defineStore({
       this.user = user;
       console.log(this.user)
     },
+    setUserProfilePictureUrl (url) {
+      this.user.profile_picture_url = url;
+    },
     setCurrentBrand (brand) {
       this.brand = brand;
     },
@@ -79,6 +85,23 @@ export const useUserStore = defineStore({
     },
     setCompletedAccount (value) {
       this.userCompletedAccount = value;
+    },
+    async updateDisplayName(userId, displayName) {
+      try {
+          const response = await updateUserName(userId, displayName);
+          this.user.display_name = displayName; 
+          window.shownotification({
+              icon: 'check',
+              text: 'Success! Your song request has been submitted.'
+          });
+          return response;
+      } catch (error) {
+          window.shownotification({
+            icon: 'error',
+            text: 'Hmm, something has gone wrong. Your display name could not be updated.'
+          });
+          throw new Error('Failed to update display name');
+      }
     }
   }
 });

@@ -126,5 +126,6 @@
     {{-- Profile Page Component --}}
     <profile
         user-forum-signature="{{ $signature }}"
+        :country-list="{{ json_encode(\Railroad\Location\Services\CountryListService::allWithCommonDuplicatedAtTop()) }}"
     ></profile>
 @endsection

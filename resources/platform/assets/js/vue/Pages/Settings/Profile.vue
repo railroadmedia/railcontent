@@ -25,7 +25,6 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <!-- Page Content -->
             <div class="tw-flex tw-flex-col tw-grow">
-
                 <input id="userInfo" type="hidden" :data-user-id="userId">
 
                 <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-10 tw-mb-2">Profile Settings</h1>
@@ -36,7 +35,7 @@
                         <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Display Name</h2>
                             <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
-                                    @click="handleShowModal"
+                                    @click="handleShowDisplayNameModal"
                             >Edit</button>
                         </div>
                         <div class="tw-flex tw-flex-col">
@@ -50,7 +49,7 @@
                         </div>
                     </div>
                     <!-- Display Name Modal -->
-                    <EditDisplayNameModal v-if="showModal" @onCloseModal="handleShowModal" />
+                    <EditDisplayNameModal v-if="showDisplayNameModal" @onCloseDisplayNameModal="handleShowDisplayNameModal" />
                 </section>
 
                 <!-- PROFILE PICTURE -->
@@ -59,7 +58,7 @@
                         <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Profile Picture</h2>
                             <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
-                                    @click="handleShowProfilePictureModal"
+                                    @click="handleProfilePictureModal"
                             >Edit</button>
                         </div>
                         <div class="tw-flex tw-flex-col">
@@ -89,7 +88,17 @@
                         </div>
                     </div>
                     <!-- Profile Picture Name Modal -->
-                    <EditProfilePictureModal v-if="showProfilePictureModal" @onCloseModal="handleShowModal" />
+                    <ImageUploader
+                        v-if="showProfilePictureModal"
+                        :selfContained="true"
+                        uploadServiceRoute="/user-management-system/picture/upload-from-s3-front-end"
+                        successMessage="Your profile image has successfully uploaded"
+                        fieldKey="profile_picture_url"
+                        cropType="circle"
+                        @uploadSuccess="handleUploadDone"
+                        @uploadError="handleImageUploadError"
+                        @onUploaderClose="handleProfilePictureModal"
+                    />
                 </section>
 
                 <!-- ABOUT YOU -->
@@ -120,12 +129,12 @@
                             <!-- Birthday -->
                             <div class="tw-flex tw-flex-col tw-mb-2 tw-w-full">
                                 <h6 class="tw-font-bold tw-mb-2">Biography</h6>
-                                <p v-html="userBiography"></p>    
+                                <p class="tw-whitespace-pre-line" v-html="userBiography"></p>    
                             </div>
                         </div>
                     </div>
                     <!-- Profile Picture Name Modal -->
-                    <EditAboutYouModal v-if="showAboutYouModal" @onCloseModal="handleShowModal" />
+                    <EditAboutYouModal v-if="showAboutYouModal" :country-list="countryList" @onCloseAboutYouModal="handleShowAboutYouModal" />
                 </section>
 
                 <!-- GEAR INFO -->
@@ -136,105 +145,105 @@
                         </div>
                         <div class="tw-grid tw-grid-cols-1 tw-gap-6 sm:tw-grid-cols-2 sm:tw-gap-8">
                                 
-                                <!-- Drums -->
-                                <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
-                                    <div class="tw-flex tw-items-center tw-mb-2">
-                                        <h5 class="tw-font-bold tw-text-xl">My Drum Gear</h5>
-                                        <button class="tw-ml-4">
-                                            <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">Playing Drums Since</h6>
-                                        <p>{{ userDrummingSince }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Drums</h6>
-                                        <p>{{ userDrumBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Cymbals</h6>
-                                        <p>{{ userCymbalBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Hardware</h6>
-                                        <p>{{ userHardwareBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Sticks</h6>
-                                        <p>{{ userStickBrands }}</p>    
-                                    </div>
+                            <!-- Drums -->
+                            <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
+                                <div class="tw-flex tw-items-center tw-mb-2">
+                                    <h5 class="tw-font-bold tw-text-xl">My Drum Gear</h5>
+                                    <button class="tw-ml-4" @click="handleShowDrumGearModal">
+                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    </button>
                                 </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">Playing Drums Since</h6>
+                                    <p>{{ userDrummingSince }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Drums</h6>
+                                    <p>{{ userDrumBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Cymbals</h6>
+                                    <p>{{ userCymbalBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Hardware</h6>
+                                    <p>{{ userHardwareBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Sticks</h6>
+                                    <p>{{ userStickBrands }}</p>    
+                                </div>
+                            </div>
 
-                                <!-- Piano -->
-                                <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
-                                    <div class="tw-flex tw-items-center tw-mb-2">
-                                        <h5 class="tw-font-bold tw-text-xl">My Piano Gear</h5>
-                                        <button class="tw-ml-4">
-                                            <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">Playing Piano Since</h6>
-                                        <p>{{ userPlayingPianoSince }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Piano</h6>
-                                        <p>{{ userPianoBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Keyboard</h6>
-                                        <p>{{ userKeyboardBrands }}</p>    
-                                    </div>
+                            <!-- Piano -->
+                            <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
+                                <div class="tw-flex tw-items-center tw-mb-2">
+                                    <h5 class="tw-font-bold tw-text-xl">My Piano Gear</h5>
+                                    <button class="tw-ml-4" @click="handleShowPianoGearModal">
+                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    </button>
                                 </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">Playing Piano Since</h6>
+                                    <p>{{ userPlayingPianoSince }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Piano</h6>
+                                    <p>{{ userPianoBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Keyboard</h6>
+                                    <p>{{ userKeyboardBrands }}</p>    
+                                </div>
+                            </div>
 
-                                <!-- Guitar -->
-                                <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
-                                    <div class="tw-flex tw-items-center tw-mb-2">
-                                        <h5 class="tw-font-bold tw-text-xl">My Guitar Gear</h5>
-                                        <button class="tw-ml-4">
-                                            <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">Playing Guitar Since</h6>
-                                        <p>{{ userPlayingGuitarSince }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Guitars</h6>
-                                        <p>{{ userGuitarBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Amps</h6>
-                                        <p>{{ userAmpBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Pedals</h6>
-                                        <p>{{ userPedalBrands }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Strings</h6>
-                                        <p>{{ userStringBrands }}</p>    
-                                    </div>
+                            <!-- Guitar -->
+                            <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
+                                <div class="tw-flex tw-items-center tw-mb-2">
+                                    <h5 class="tw-font-bold tw-text-xl">My Guitar Gear</h5>
+                                    <button class="tw-ml-4" @click="handleShowGuitarGearModal">
+                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    </button>
                                 </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">Playing Guitar Since</h6>
+                                    <p>{{ userPlayingGuitarSince }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Guitars</h6>
+                                    <p>{{ userGuitarBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Amps</h6>
+                                    <p>{{ userAmpBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Pedals</h6>
+                                    <p>{{ userPedalBrands }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Strings</h6>
+                                    <p>{{ userStringBrands }}</p>    
+                                </div>
+                            </div>
 
-                                <!-- Piano -->
-                                <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
-                                    <div class="tw-flex tw-items-center tw-mb-2">
-                                        <h5 class="tw-font-bold tw-text-xl">My Singing Gear</h5>
-                                        <button class="tw-ml-4">
-                                            <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">Singing Since</h6>
-                                        <p>{{ userSingingSince }}</p>    
-                                    </div>
-                                    <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                        <h6 class="tw-font-bold tw-w-[200px]">My Microphone</h6>
-                                        <p>{{ userMicBrands }}</p>    
-                                    </div>
+                            <!-- Singing -->
+                            <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
+                                <div class="tw-flex tw-items-center tw-mb-2">
+                                    <h5 class="tw-font-bold tw-text-xl">My Singing Gear</h5>
+                                    <button class="tw-ml-4" @click="handleShowSingingGearModal">
+                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    </button>
                                 </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">Singing Since</h6>
+                                    <p>{{ userSingingSince }}</p>    
+                                </div>
+                                <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
+                                    <h6 class="tw-font-bold tw-w-[200px]">My Microphone</h6>
+                                    <p>{{ userMicBrands }}</p>    
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -247,10 +256,10 @@
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Gear Photos</h2>
                         </div>
                         <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-4 tw-gap-4">
+                            
                             <!-- Drum Photos -->
                             <div class="flex flex-row flex-wrap align-center tw-relative">
-                                <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
-                                >
+                                <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden">
                                     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
                                         <svg width="47" height="41" viewBox="0 0 47 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M37.1446 24.719C37.1481 22.4284 36.5527 20.1754 35.4154 18.1752C34.278 16.175 32.6367 14.4945 30.6485 13.2946C28.6603 12.0946 26.3916 11.4153 24.0594 11.3215C21.7272 11.2278 19.4095 11.7227 17.3279 12.759C15.2463 13.7953 13.4705 15.3383 12.1702 17.2405C10.8699 19.1427 10.0887 21.3404 9.90118 23.6235C9.71369 25.9066 10.1262 28.1988 11.0994 30.2807C12.0725 32.3627 13.5736 34.1649 15.4593 35.5149L12.3138 39.1158L13.4642 40.0832L16.7379 36.336C18.7945 37.4993 21.1266 38.1117 23.5004 38.1117C25.8742 38.1117 28.2063 37.4993 30.263 36.336L33.5366 40.0832L34.687 39.1158L31.5416 35.5149C33.2761 34.2757 34.6877 32.6519 35.6612 30.7758C36.6348 28.8997 37.1428 26.8243 37.1437 24.719H37.1446ZM11.3731 24.719C11.371 21.9623 12.3432 19.2902 14.124 17.1581C15.9047 15.0261 18.3838 13.566 21.1388 13.0267C23.8937 12.4874 26.7539 12.9023 29.2321 14.2007C31.7102 15.4991 33.6527 17.6006 34.7287 20.147C35.8047 22.6935 35.9476 25.5273 35.1328 28.1655C34.3181 30.8037 32.5963 33.083 30.2608 34.615C27.9253 36.1469 25.1208 36.8367 22.325 36.5668C19.5293 36.2969 16.9155 35.0839 14.9291 33.1347C13.8022 32.0298 12.9081 30.7179 12.2979 29.2739C11.6878 27.83 11.3735 26.2822 11.3731 24.719Z" fill="currentColor"/>
@@ -329,7 +338,8 @@
                                         </svg>
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> singing gear</p>
                                     </div>
-                                    <img v-if="userSingingPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0"
+                                    <img v-if="userSingingPhoto" 
+                                        class="tw-w-full tw-absolute tw-top-0 tw-left-0"
                                         :src="userSingingPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -371,8 +381,9 @@
     import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
     import PageHeader from '../../components/PageHeader/PageHeader';
     import PillNav from "../../components/PillNav/PillNav.vue";
-    import EditDisplayNameModal from "../../components/Modal/EditDisplayNameModal.vue"
-    import EditProfilePictureModal from "../../components/Modal/EditProfilePictureModal.vue"
+    import EditDisplayNameModal from "../../components/Modal/EditDisplayNameModal.vue";
+    import ImageUploader from "../../components/ImageUploader/ImageUploader.vue";
+    import EditAboutYouModal from "../../components/Modal/EditAboutYouModal.vue";
 
     //Pinia
     const userStore = useUserStore();
@@ -411,6 +422,7 @@
     //Props
     const props = defineProps({
         userForumSignature: String,
+        countryList: Array,
     })
 
     //Computed
@@ -440,20 +452,58 @@
         }
     ]);
 
-    const showModal = ref(false);
+    const showDisplayNameModal = ref(false);
     const showProfilePictureModal = ref(false);
+    const showAboutYouModal = ref(false);
+    const showDrumGearModal = ref(false);
+    const showPianoGearModal = ref(false);
+    const showGuitarGearModal = ref(false);
+    const showSingingGearModal = ref(false);
     
     //Methods
-    const handleShowModal = () => {
-        showModal.value = !showModal.value;
-    };
 
+    //Modals
+    const handleShowDisplayNameModal = () => {
+        showDisplayNameModal.value = !showDisplayNameModal.value;
+    };
     const handleProfilePictureModal = () => {
         showProfilePictureModal.value = !showProfilePictureModal.value;
+    }
+    const handleShowAboutYouModal = () => {
+        showAboutYouModal.value = !showAboutYouModal.value;
+    }
+    const handleShowDrumGearModal = () => {
+        showDrumGearModal.value = !showDrumGearModal.value;
+    }
+    const handleShowPianoGearModal = () => {
+        showPianoGearModal.value = !showPianoGearModal.value;
+    }
+    const handleShowGuitarGearModal = () => {
+        showGuitarGearModal.value = !showGuitarGearModal.value;
+    }
+    const handleShowSingingGearModal = () => {
+        showSingingGearModal.value = !showSingingGearModal.value;
+    }
+
+    //Image Upload logic should be moved Pinia in the future
+    const handleUploadDone = ({ profile_picture_url }) => {
+        userStore.setUserProfilePictureUrl(profile_picture_url)
+        showProfilePictureModal.value = false;
+        window.shownotification({
+            icon: 'check',
+            text: `AHH, MUCH BETTER! The new "you" is being refreshed...`
+        })
+    }
+    const handleImageUploadError = () => {
+        window.shownotification({
+            icon: 'error',
+            text: 'Hmm, something has gone wrong. Your image could not be uploaded.'
+        });
+        showProfilePictureModal.value = false;
     }
 
     //Lifecycle Hooks
     onBeforeMount( ()=> {
-        
+        //console.log('country list', props.countryList)
     })  
 </script>

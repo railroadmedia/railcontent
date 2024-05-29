@@ -97,86 +97,86 @@ const app = createApp({
         userNavigationDropdownLinks: window.userNavigationDropdownLinks,
     },
     methods: {
-        avatarUploaded(payload) {
-            const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
-            window.closeAllModals();
-            Array.from(avatarPhotos).forEach(photo => {
-                photo.setAttribute(
-                    'src', payload.image_url
-                );
-            });
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'AHH, MUCH BETTER!',
-                themeColor: 'black',
-                message: 'The new "you" is being refreshed...'
-            });
-        },
+        // avatarUploaded(payload) {
+        //     const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
+        //     window.closeAllModals();
+        //     Array.from(avatarPhotos).forEach(photo => {
+        //         photo.setAttribute(
+        //             'src', payload.image_url
+        //         );
+        //     });
+        //     payload.cropper.resetCropper();
+        //     Toasts.push({
+        //         icon: 'happy',
+        //         title: 'AHH, MUCH BETTER!',
+        //         themeColor: 'black',
+        //         message: 'The new "you" is being refreshed...'
+        //     });
+        // },
 
-        gearDrumeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'drumeo',
-                message: 'Your drum gear looks fantastic!'
-            });
-        },
+        // gearDrumeoPhotoUploaded(payload) {
+        //     const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
+        //     window.closeAllModals();
+        //     gearPhoto.setAttribute(
+        //         'src', payload.image_url
+        //     );
+        //     gearPhoto.classList.remove('tw-hidden');
+        //     payload.cropper.resetCropper();
+        //     Toasts.push({
+        //         icon: 'happy',
+        //         title: 'WOOHOO!',
+        //         themeColor: 'drumeo',
+        //         message: 'Your drum gear looks fantastic!'
+        //     });
+        // },
 
-        gearPianotePhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-pianote-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'pianote',
-                message: 'Your piano gear looks fantastic!'
-            });
-        },
+        // gearPianotePhotoUploaded(payload) {
+        //     const gearPhoto = document.querySelector('[data-pianote-gear-update]');
+        //     window.closeAllModals();
+        //     gearPhoto.setAttribute(
+        //         'src', payload.image_url
+        //     );
+        //     gearPhoto.classList.remove('tw-hidden');
+        //     payload.cropper.resetCropper();
+        //     Toasts.push({
+        //         icon: 'happy',
+        //         title: 'WOOHOO!',
+        //         themeColor: 'pianote',
+        //         message: 'Your piano gear looks fantastic!'
+        //     });
+        // },
 
-        gearGuitareoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'guitareo',
-                message: 'Your gear looks fantastic!'
-            });
-        },
+        // gearGuitareoPhotoUploaded(payload) {
+        //     const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
+        //     window.closeAllModals();
+        //     gearPhoto.setAttribute(
+        //         'src', payload.image_url
+        //     );
+        //     gearPhoto.classList.remove('tw-hidden');
+        //     payload.cropper.resetCropper();
+        //     Toasts.push({
+        //         icon: 'happy',
+        //         title: 'WOOHOO!',
+        //         themeColor: 'guitareo',
+        //         message: 'Your gear looks fantastic!'
+        //     });
+        // },
 
-        gearSingeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-singeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'singeo',
-                message: 'Your singing gear looks fantastic!'
-            });
-        },
+        // gearSingeoPhotoUploaded(payload) {
+        //     const gearPhoto = document.querySelector('[data-singeo-gear-update]');
+        //     window.closeAllModals();
+        //     gearPhoto.setAttribute(
+        //         'src', payload.image_url
+        //     );
+        //     gearPhoto.classList.remove('tw-hidden');
+        //     payload.cropper.resetCropper();
+        //     Toasts.push({
+        //         icon: 'happy',
+        //         title: 'WOOHOO!',
+        //         themeColor: 'singeo',
+        //         message: 'Your singing gear looks fantastic!'
+        //     });
+        // },
 
         handleVideoPlay(payload) {
             if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {

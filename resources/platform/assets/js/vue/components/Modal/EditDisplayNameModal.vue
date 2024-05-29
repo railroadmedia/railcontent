@@ -47,7 +47,6 @@
 </template>
 <script setup>
     import { ref } from 'vue';
-    import axios from 'axios';
     import InfoModal from '../Modal/InfoModal.vue';
     import InputLabel from "../InputLabel/InputLabel.vue";
     import { storeToRefs } from 'pinia';
@@ -57,33 +56,28 @@
     const { userId, userDisplayName } = storeToRefs(userStore);
 
     //Refs
-    const emit = defineEmits(['onCloseModal']);
+    const emit = defineEmits(['onCloseDisplayNameModal']);
 
     const formData = ref({
-        display_name: ''
+        display_name: userDisplayName.value || '' // Initialize with current displayName or empty string
     });
+
 
     //Methods
     const handleClose = () => {
-        emit('onCloseModal');
+        emit('onCloseDisplayNameModal');
     };
 
     const handleDisplayName = (value) => {
-        formData.value = {
-            ...formData.value,
-            display_name: value
-        };
+        formData.value.display_name = value;
     };
-    
-    const submitDisplayNameForm = () => {
-        axios.post(`/user-management-system/user/update/${ userId.value }`, formData.value).then((e) => {
-            if (window.shownotification) {
-                window.shownotification({
-                    icon: 'check',
-                    text: 'Success! Your song request has been submitted.'
-                });
-            }
-            handleClose()
-        });  
+        
+    const submitDisplayNameForm = async () => {
+        try {
+            await userStore.updateDisplayName(userId.value, formData.value.display_name);
+        } catch (error) {
+            console.error("Failed to update the display name:", error.message);
+        }
+        handleClose(); // Close modal
     };
 </script>
