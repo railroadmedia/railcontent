@@ -89,7 +89,7 @@ class Field
         if (!is_null($this->initialValue)) {
             $optional['initialValue'] = $this->initialValue;
         }
-        // Add initialValue to optional array
+        // Add input components to optional array
         if (!is_null($this->inputComponent)) {
             $optional['components'] = ['input' => Field::formatTypeScriptForView($this->inputComponent)];
         }
