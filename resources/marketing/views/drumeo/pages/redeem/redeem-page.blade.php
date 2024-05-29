@@ -163,29 +163,30 @@
                 @php
                     $logoMapping = [
                         'alesisNitro' => [
-                            'image' => musora_cdn('redeem/alesis/alesis-logo.png'),
+                            'name' => 'Nitro Max',
                             'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
                         ],
                         'alesisCrimson' => [
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata.png',
+                            'name' => 'Crimson III',
                             'video' => '//player.vimeo.com/video/915243228'
                         ],
                         'alesisStrata' => [
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata.png',
+                            'name' => 'Strata Prime',
                             'video' => '//player.vimeo.com/video/915243228'
                         ],
                         'alesisStrataCore' => [
-                            'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata-core.png',
+                            'name' => 'Strata Core',
                             'video' => '//player.vimeo.com/video/915243228'
                         ],
                     ];
 
                     $key = !empty($alesisNitro) ? 'alesisNitro' : (!empty($alesisCrimson) ? 'alesisCrimson' : (!empty($alesisStrata) ? 'alesisStrata' : 'alesisStrataCore'));
-                    $imageSrc = $logoMapping[$key]['image'];
+                    $nameSrc = $logoMapping[$key]['name'];
                     $videoSrc = $logoMapping[$key]['video'];
                 @endphp
-                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="{{ $imageSrc }}">
-                <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
+                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-with-drumeo.png">
+                <h1 class="leading-none font-lexend uppercase mt-2 mb-5">{{ $nameSrc }}</h1>
+                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full" src="{{ $videoSrc }}" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
                 </div>
