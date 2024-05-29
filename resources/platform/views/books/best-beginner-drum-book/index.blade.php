@@ -22,7 +22,7 @@ if (!empty($user)) {
         @endif
         :chapters="{{ json_encode($chapters) }}"
         :has-access="{{ json_encode($hasAccess) }}"
-        redeem-api="{{ URL::route('access-codes.form-claim') }}"
+        redeem-api="{{ URL::route('access-codes.claim') }}"
         login-api="{{ url()->route('user_management_system.login.cookie').'?redirect_to='.$redirectUrl }}"
     ></best-beginner-drum-book>
 @endsection
