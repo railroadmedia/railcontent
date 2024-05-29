@@ -29,18 +29,18 @@ class Song extends BaseSanityModel
 
         $fields = [
             new Field(FieldType::String, 'title'),
-            new Field(FieldType::Datetime, 'published_on'),
+            new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
-            new Field(FieldType::Number, 'difficulty', null, null, null, null, null, null, null, null, validation: "rule => rule.min(0).max(10)"),
+            new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"),
            // new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'MyCustomScript' ),
 
-            new Field(FieldType::Number, 'xp', 'XP', null, null, null, null, null, null, null, null, validation: "rule => rule.min(0)"),
+            new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),
             //TODO song style is in the railcontent_content_styles table. We'll need a styles schema and reference it on this
             // new Field(FieldType::Array, 'style', of:'reference', list:),
             //TODO reference??
 
             //TODO can/should we do date instead and store just the year?
-            new Field(FieldType::Number, 'released', 'Year Released', null, null, null, null, null, null, null, null, validation: "rule => rule.min(1500).max(new Date().getFullYear())"),
+            new Field(FieldType::Number, 'released', 'Year Released', validation: "rule => rule.min(1500).max(new Date().getFullYear())"),
             //TODO reference??
             new Field(FieldType::String, 'album'),
             //TODO reference??
@@ -52,14 +52,15 @@ class Song extends BaseSanityModel
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed'),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys'),
 
-            new Field(FieldType::Array, 'artist', 'Artist', '', null, null, of: $artistReference),
-            new Field(FieldType::Array, 'genre', 'Genre', '', null, null, of: $genreReference),
-            new Field(FieldType::Array, 'soundslice', 'Soundslice', '', null, null, of:  $soundsliceReference),
-            new Field(FieldType::Array, 'resource', 'Resources', '', null, null, of: $resourceReference),
+            new Field(FieldType::Array, 'artist', 'Artist', '', of: $artistReference),
+            new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference),
+            new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceReference),
+            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceReference),
 
             new Field(FieldType::URL, 'thumbnail_url', 'Thumbnail url'),
 
         ];
-        parent::__construct('song', 'Song', $fields);
+
+        parent::__construct('song', 'Song', fields: $fields);
     }
 }

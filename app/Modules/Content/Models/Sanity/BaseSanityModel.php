@@ -18,6 +18,7 @@ abstract class BaseSanityModel
     public array $fields;
     /** @var array<Group>|null */
     public ?array $groups;
+    public ?array $preview;
 
     /**
      * @param  string  $name
@@ -26,13 +27,14 @@ abstract class BaseSanityModel
      * @param  array<Group>|null  $groups
      * @param  string|null  $icon
      */
-    public function __construct(string $name, string $title, array $fields, ?array $groups = null, ?string $icon = null)
+    public function __construct(string $name, string $title, array $fields, ?array $groups = null, ?string $icon = null, ?array $preview = null)
     {
         $this->name = $name;
         $this->title = $title;
         $this->fields = $fields;
         $this->groups = $groups;
         $this->icon = $icon;
+        $this->preview = $preview;
     }
 
     /**
@@ -50,6 +52,10 @@ abstract class BaseSanityModel
                 return $field->toArray();
             }, $this->fields)
         ];
+        if($this->preview){
+            $required['preview'] = $this->preview;
+        }
+
         $optional = [];
         if ($this->groups) {
             $optional['groups'] = array_map(function (Group $group) {
