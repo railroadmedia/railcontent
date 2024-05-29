@@ -337,7 +337,7 @@ app.component('AppContainer', AppContainer)
     .component('Forums', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
-            './vue/Views/Forums.vue'
+            './vue/Pages/Forums.vue'
         )
     ))
 
@@ -365,7 +365,7 @@ app.component('AppContainer', AppContainer)
     .component('LatestForums', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
-            './vue/Views/LatestForums.vue'
+            './vue/Pages/LatestForums.vue'
         )
     ))
 
