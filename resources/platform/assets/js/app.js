@@ -320,6 +320,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('Forums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/Forums.vue'
+        )
+    ))
+
     .component('ForumThreadsTable', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
@@ -331,6 +338,20 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "forum-thread-component" */
             './vue/vuesora/views/forum/thread/ForumThread.vue'
+        )
+    ))
+
+    .component('ForumThreads', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/vuesora/views/forum/thread/ForumThreads.vue'
+        )
+    ))
+
+    .component('LatestForums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/LatestForums.vue'
         )
     ))
 

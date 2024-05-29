@@ -8,7 +8,7 @@
                 <!-- Previous Button -->
                 <div
                     class="tw-hidden tw-w-full tw-justify-center tw-mb-6 md:tw-mb-0 md:tw-justify-start sm:tw-w-auto md:tw-inline-flex">
-                    <a :href="previousPage"
+                    <a :href="categoryUrl"
                         class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center">
                         <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2"></i>
                         <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back To Forum</span>
@@ -46,7 +46,7 @@
             <div class="tw-flex tw-flex-row tw-mb-8 tw-flex-wrap">
                 <div
                     class="tw-w-full tw-inline-flex tw-justify-center tw-mb-4 sm:tw-mb-0 sm:tw-justify-start sm:tw-w-auto">
-                    <a :href="previousPage"
+                    <a :href="categoryUrl"
                         class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center">
                         <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2"></i>
                         <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back To Forum</span>
@@ -151,6 +151,8 @@ import ThemeClasses from '../../../mixins/ThemeClasses';
 import CommentLikesModal from '../../comments/_CommentLikesModal.vue';
 import PageHeader from '../../../../components/PageHeader/PageHeader.vue';
 import Breadcrumb from '../../../../components/Breadcrumb/Breadcrumb.vue';
+import { useUserStore } from "../../../../../stores/user";
+import { storeToRefs } from "pinia";
 
 export default {
     name: 'ForumThread',
@@ -164,18 +166,10 @@ export default {
     },
     mixins: [ThemeClasses],
     props: {
-        breadcrumbs: {
-            type: Array,
-            default: () => [],
-        },
         thread: {
             type: Object,
             default: () => {
             },
-        },
-        brand: {
-            type: String,
-            default: () => 'drumeo',
         },
         currentUser: {
             type: Object,
@@ -199,9 +193,21 @@ export default {
             type: String,
             default: '/post/update/',
         },
-        previousPage: {
+        categoryUrl: {
             type: String,
             default: () => document.referrer,
+        },
+        categoryTitle: {
+            type: String,
+            default: () => '',
+        },
+        threadTitle: {
+            type: String,
+            default: () => '',
+        },
+        showCategoriesUrl: {
+            type: String,
+            default: () => '',
         },
     },
     data () {
@@ -242,6 +248,27 @@ export default {
         };
     },
     computed: {
+        brand() {
+            const userStore = useUserStore();
+            const { brand } = storeToRefs(userStore)
+
+            return brand.value;
+        },
+        breadcrumbs () {
+            return [
+                {
+                    title: 'Forums',
+                    url: this.showCategoriesUrl,
+                },
+                {
+                    title: this.categoryTitle,
+                    url: this.categoryUrl,
+                },
+                {
+                    title: this.threadTitle,
+                },
+            ];
+        },
         headerCtas () {
             const ctas = []
             if (this.currentUser.isAdmin || this.currentUser.isOwner) {
