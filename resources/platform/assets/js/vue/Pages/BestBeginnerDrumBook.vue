@@ -109,7 +109,6 @@
     <RedeemModal :api="redeemApi" :is-user="isUser" :is-modal-open="isRedeemModalOpen" @close-modal="closeRedeemModal">
         <template #hidden-inputs>
             <input type="hidden" name="_method" value="POST" class="has-input">
-            <input type="hidden" name="credentials_type" value="new">
             <input type="hidden" name="redirect" value="/drumeo/bestbook">
 
             <input type="hidden" name="book-title" value="Best Beginner Drum Book">

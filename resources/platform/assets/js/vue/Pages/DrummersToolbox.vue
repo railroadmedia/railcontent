@@ -75,9 +75,8 @@
         </div>
     </section>
 
-    <RedeemModal :api="redeemApi" :is-user="isUser" :is-modal-open="isRedeemModalOpen" @close-modal="closeRedeemModal">
+    <RedeemModal :api="redeemApi" :is-user="isUser" :is-modal-open="isRedeemModalOpen" :user="user" @close-modal="closeRedeemModal">
         <template #hidden-inputs>
-            <input type="hidden" name="credentials_type" value="new">
             <input type="hidden" name="redirect" value="/drumeo/drummers-toolbox">
 
             <input type="hidden" name="book-title" value="The Drummer's Toolbox">
@@ -87,7 +86,7 @@
     <LoginModal :api="loginApi" :is-modal-open="isLoginModalOpen" @open-redeem-modal="openRedeemModal" @close-modal="closeLoginModal"></LoginModal>
 </template>
 <script setup>
-import { computed, ref } from "vue";
+import {computed, onMounted, ref} from "vue";
 import DrummersToolChapter from '../components/DrummersToolChapter/DrummersToolChapter';
 import RedeemModal from '../components/RedeemModal/RedeemModal';
 import LoginModal from '../components/RedeemModal/LoginModal';
@@ -148,4 +147,8 @@ const openRedeemModal = () => {
         isRedeemModalOpen.value = true;
     }, 500)
 }
+
+onMounted(() => {
+    console.log('user', props.user)
+})
 </script>

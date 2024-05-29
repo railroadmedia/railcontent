@@ -16,6 +16,8 @@
 
             <form @submit.prevent="submitForm" action="https://www.musora.com/ecommerce/access-codes/redeem" method="POST" novalidate="">
                 <input type="hidden" name="_method" value="POST" class="has-input">
+                <input type="hidden" name="credentials_type" :value="isNewAccount ? 'new' : 'existing'">
+                <input v-if="!isNewAccount && isUser" type="hidden" name="claim_for_user_id" :value="user.id">
 
                 <!-- Hidden inputs -->
                 <slot name="hidden-inputs"></slot>
@@ -82,6 +84,10 @@ const props = defineProps({
     isUser:{
         type: Boolean,
         default: false
+    },
+    user: {
+        type: Object,
+        default: {}
     },
 })
 
