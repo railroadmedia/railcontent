@@ -5,7 +5,8 @@
                 <div class="flex flex-row align-v-center">
                     <div class="flex flex-column arrow-column hide-xs-only">
                         <button class="btn collapse-square" @click="openAssignment">
-                            <span class="tw-border-2 tw-border-solid tw-border-[#000C17] tw-text-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center">
+                            <span
+                                class="tw-border-2 tw-border-solid tw-border-[#000C17] tw-text-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center">
                                 <i class="fas" :class="accordionButtonIconClasses"></i>
                             </span>
                         </button>
@@ -25,11 +26,9 @@
                             </div>
                         </div>
                     </div>
-                    <button v-if="soundsliceSlug"
-                            title="Add To Playlist"
-                            class="dark:tw-text-white tw-text-[#00101D] md:tw-hidden"
-                            @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
-                    >
+                    <button v-if="soundsliceSlug" title="Add To Playlist"
+                        class="dark:tw-text-white tw-text-[#00101D] md:tw-hidden"
+                        @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })">
                         <musora-icon icon-name="plus" class="tw-h-8 tw-w-8 font-bold" />
                     </button>
                 </div>
@@ -51,11 +50,9 @@
                     </button>
 
                     <!-- New Add To Playlist Button -->
-                    <button v-if="soundsliceSlug"
-                            title="Add To Playlist"
-                            class="dark:tw-text-white tw-text-[#00101D] tw-hidden md:tw-block"
-                            @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
-                    >
+                    <button v-if="soundsliceSlug" title="Add To Playlist"
+                        class="dark:tw-text-white tw-text-[#00101D] tw-hidden md:tw-block"
+                        @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })">
                         <musora-icon icon-name="plus" class="tw-h-10 tw-w-10 font-bold" />
                     </button>
                 </div>
@@ -114,8 +111,8 @@
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
-                    :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
-                    @onPause="handlePause">
+                    :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading"
+                    @onLoad="loading = false" @onPlay="handlePlay" @onPause="handlePause">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
                             @onGoToPrevious="goToPrevious" @onGoToNext="goToNext" @onClose="closeExercise" />
@@ -130,7 +127,6 @@
 import { Duration } from 'luxon';
 import ContentService from '../../assets/js/services/content';
 import Utils from '../../assets/js/classes/utils';
-import Toasts from '../../assets/js/classes/toasts';
 import ProgressTracker from '../../assets/js/classes/progress-tracker';
 import Intercom from "../../assets/js/services/intercom"
 import Helpscout from "../../assets/js/services/helpscout"
@@ -437,11 +433,10 @@ export default {
             Utils.triggerEvent(window, 'vue-requesting-completion');
 
             if (this.isComplete) {
-                Toasts.confirm({
+                window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
-                    submitButton: {
-                        text: `<span class="bg-${this.themeColor} text-white">Reset</span>`,
-                        callback: () => {
+                    callbacks: {
+                        submit: () => {
                             this.isComplete = !this.isComplete;
 
                             window.recalculateProgress(false, false, this.themeColor);
@@ -451,11 +446,9 @@ export default {
                                     if (resolved) {
                                         element.classList.add('remove-request-complete');
 
-                                        Toasts.push({
-                                            icon: 'happy',
-                                            title: 'READY TO START AGAIN?',
-                                            themeColor: this.themeColor,
-                                            message: 'Your progress has been reset.',
+                                        window.shownotification({
+                                            icon: 'check',
+                                            text: 'Ready to start again? Your progress has been reset.'
                                         });
 
                                         this.$emit('assignmentComplete', {
@@ -467,10 +460,10 @@ export default {
                                     this.isRequesting = false;
                                 });
                         },
-                    },
-                    cancelButton: {
-                        text: '<span class="bg-grey-3 inverted text-grey-3">Cancel</span>',
-                    },
+                        cancel: () => {
+                            console.log('Reset progress cancelled');
+                        }
+                    }
                 });
             } else {
                 this.isComplete = !this.isComplete;

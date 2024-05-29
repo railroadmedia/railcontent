@@ -1,5 +1,4 @@
 import ContentService from '../assets/js/services/content';
-import Toasts from '../assets/js/classes/toasts';
 import {useResetProgress} from "../../hooks/useResetProgress";
 
 const getValue = (obj, key) => {
@@ -17,29 +16,26 @@ export default {
         addToList(e) {
             if (this.destroyOnListRemoval) {
                 // TODO: CONFIRM IF THIS PART CAN BE DELETED
-                Toasts.confirm({
+                window.showconfirmationmodal({
                     title: 'Hold your horses… This will remove this lesson from your list, are you sure about this?',
-                    submitButton: {
-                        text: `<span class="bg-${this.themeColor} text-white short">I want to remove it</span>`,
-                        callback: () => {
+                    callbacks: {
+                        submit: () => {
                             this.emitAddToList({
                                 content_id: this.item.id,
                                 type: e.currentTarget.getAttribute('data-content-type'),
                                 is_added: this.item.is_added_to_primary_playlist || false,
                             });
-
-                            Toasts.push({
-                                icon: 'happy',
-                                title: 'REMOVED!',
-                                themeColor: this.themeColor,
-                                message: 'The lesson has been removed from your list.',
+                
+                            window.shownotification({
+                                icon: 'check',
+                                text: 'Removed! The lesson has been removed from your list.'
                             });
                         },
-                    },
-                    cancelButton: {
-                        text: '<span class="bg-grey-3 inverted text-grey-3 short">Get me out of here</span>',
-                    },
-                });
+                        cancel: () => {
+                            console.log('Remove lesson cancelled');
+                        }
+                    }
+                });                
             } else {
                 const type = this.item.type ? this.item.type : e.currentTarget.getAttribute('data-content-type');
                 let name = '';
@@ -92,12 +88,10 @@ export default {
             ContentService.resetContentProgress(payload.content_id)
                 .then((response) => {
                     if (response) {
-                        Toasts.push({
-                            icon: 'happy',
-                            title: 'READY TO START AGAIN?',
-                            themeColor: this.themeColor,
-                            message: 'Your progress has been reset.',
-                        });
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Ready to start again? Your progress has been reset.'
+                        });                        
 
                         this.content.splice(post_index, 1);
                     }

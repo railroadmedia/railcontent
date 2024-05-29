@@ -81,7 +81,6 @@
 </template>
 <script>
 import UserService from '../../assets/js/services/user';
-import Toasts from '../../assets/js/classes/toasts';
 import ThemeClasses from '../../mixins/ThemeClasses';
 
 export default {

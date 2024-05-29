@@ -1,8 +1,7 @@
 import Forms from './vue/vuesora/assets/js/classes/forms';
-import Toasts from './vue/vuesora/assets/js/classes/toasts';
 import axios from 'axios';
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     openModalOnPageLoad();
 
     const clearAvatar = document.getElementById('clearAvatar');
@@ -13,114 +12,102 @@ document.addEventListener('DOMContentLoaded', function(){
     const openUnsubscribeForm = document.getElementById('openUnsubscribeForm');
     const cancelUnsubscribeForm = document.getElementById('cancelUnsubscribeForm');
     const userInfo = document.getElementById('userInfo');
-    
+
     let userId = userInfo ? userInfo.dataset['userId'] : null;
 
-    if(clearAvatar){
+    if (clearAvatar) {
         clearAvatar.addEventListener('click', () => {
 
-            Toasts.confirm({
+            window.showconfirmationmodal({
                 title: 'Do you really want to reset your avatar?',
-                submitButton: {
-                    text: '<span class="bg-drumeo text-white short">YES</span>',
-                    callback: () => {
-
+                callbacks: {
+                    submit: () => {
                         let url = '/user-management-system/user/update/' + userId;
 
                         axios.patch(url, {
                             'profile_picture_url': null
                         })
                             .then(response => {
-                                if(response.data){
-                                    Toasts.push({
-                                        icon: 'happy',
-                                        title: 'Woohoo!',
-                                        themeColor: 'drumeo',
-                                        message: 'Avatar Successfully reset. Refreshing the page.'
+                                if (response.data) {
+                                    window.shownotification({
+                                        icon: 'check',
+                                        text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
+                                    });
+
+                                    location.reload();
+                                }
+                            })
+                            .catch(error => {
+                                console.error(error);
+                                window.shownotification({
+                                    icon: 'warning',
+                                    text: 'An error happened on the server... Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
+                                        '<br><br><span class="font-italic text-grey-3">' +
+                                        'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
+                                        '</span></span>'
+                                });
+                            });
+                    },
+                    cancel: () => {
+                        console.log('Reset avatar cancelled');
+                    }
+                }
+            });
+        });
+    }
+
+    if (clearGearPhotoButtons) {
+        clearGearPhotoButtons.forEach((clearButton) => {
+
+            clearButton.addEventListener('click', () => {
+                window.showconfirmationmodal({
+                    title: 'Do you really want to reset your gear photo?',
+                    callbacks: {
+                        submit: () => {
+                            let url = '/user-management-system/user/update/' + userId;
+                            let gearAttribute = { [`${clearButton.dataset.clearGearPhoto}_gear_photo`]: null };
+                
+                            axios.patch(url, gearAttribute)
+                            .then(response => {
+                                if (response.data) {
+                                    window.shownotification({
+                                        icon: 'check',
+                                        text: 'Woohoo! Gear Photo Successfully reset. Refreshing the page.'
                                     });
                                     location.reload();
                                 }
                             })
                             .catch(error => {
                                 console.error(error);
-                                Toasts.push({
-                                    icon: 'doh',
-                                    title: 'An error happened on the server...',
-                                    themeColor: 'error',
-                                    message: 'Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
-                                        '<br><br><span class="font-italic text-grey-3">' +
-                                        'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
-                                        '</span></span>'
+                                window.shownotification({
+                                    icon: 'warning',
+                                    text: 'An error happened on the server... Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
+                                          '<br><br><span class="font-italic text-grey-3">' +
+                                          'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
+                                          '</span></span>'
                                 });
                             });
-                    }
-                },
-                cancelButton: {
-                    text: '<span class="bg-dark inverted text-grey-3 short">NO</span>'
-                }
-            });
-        });
-    }
-
-    if(clearGearPhotoButtons){
-        clearGearPhotoButtons.forEach( (clearButton) => {
-            
-            clearButton.addEventListener('click', () => {
-                // console.log(clearButton.dataset)
-                Toasts.confirm({
-                    title: 'Do you really want to reset your gear photo?',
-                    submitButton: {
-                        text: '<span class="bg-drumeo text-white short">YES</span>',
-                        callback: () => {
-    
-                            let url = '/user-management-system/user/update/' + userId;
-                            let gearAttribute = { [`${clearButton.dataset.clearGearPhoto}_gear_photo`]: null }
-
-                            axios.patch(url, gearAttribute)
-                                .then(response => {
-                                    if(response.data){
-                                        Toasts.push({
-                                            icon: 'happy',
-                                            title: 'Woohoo!',
-                                            themeColor: 'drumeo',
-                                            message: 'Gear Photo Successfully reset. Refreshing the page.'
-                                        });
-                                        location.reload();
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                    Toasts.push({
-                                        icon: 'doh',
-                                        title: 'An error happened on the server...',
-                                        themeColor: 'error',
-                                        message: 'Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
-                                            '<br><br><span class="font-italic text-grey-3">' +
-                                            'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
-                                            '</span></span>'
-                                    });
-                                });
+                        },
+                        cancel: () => {
+                            console.log('Reset gear photo cancelled');
                         }
-                    },
-                    cancelButton: {
-                        text: '<span class="bg-dark inverted text-grey-3 short">NO</span>'
                     }
-                });
-            });  
+                });                
+            });
 
         })
     }
 
-    function toggleUnsubscribeForm(){
+    function toggleUnsubscribeForm() {
         membershipForm.classList.toggle('hide');
         unsubscribeForm.classList.toggle('hide');
     }
 
-    if(openUnsubscribeForm){
+    if (openUnsubscribeForm) {
         openUnsubscribeForm.addEventListener('click', toggleUnsubscribeForm);
     }
 
-    if(cancelUnsubscribeForm){
+    if (cancelUnsubscribeForm) {
         cancelUnsubscribeForm.addEventListener('click', toggleUnsubscribeForm);
     }
 
@@ -159,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function(){
     */
     function getStats(id) {
         var body = tinymce.get(id).getBody(),
-        text = tinymce.trim(body.innerText || body.textContent);
+            text = tinymce.trim(body.innerText || body.textContent);
 
         return {
             chars: text.length,
@@ -180,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     //Intercept Form
     document.addEventListener('click', e => {
-        if ( e.target.matches('#signatureButton')) {
+        if (e.target.matches('#signatureButton')) {
             e.preventDefault();
             submitSignatureForm();
         }
@@ -189,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 var openmodal = document.querySelectorAll('.mu-modal-open');
 for (var i = 0; i < openmodal.length; i++) {
-    openmodal[i].addEventListener('click', function(event){
+    openmodal[i].addEventListener('click', function (event) {
         event.preventDefault();
         openModal(event);
     });
@@ -210,7 +197,7 @@ for (var i = 0; i < switchToHowCanWeHelp.length; i++) {
     switchToHowCanWeHelp[i].addEventListener('click', closeModalAndSwitchToHowCanWeHelp);
 }
 
-document.onkeydown = function(evt) {
+document.onkeydown = function (evt) {
     evt = evt || window.event;
     var isEscape = false;
 
@@ -224,7 +211,7 @@ document.onkeydown = function(evt) {
     }
 };
 
-function openModal (event) {
+function openModal(event) {
     const body = document.querySelector('body');
     const targetModalClass = event.target.id;
     const targetModal = document.querySelector('.' + targetModalClass);
@@ -236,7 +223,7 @@ function openModal (event) {
 }
 
 
-function closeModal () {
+function closeModal() {
     const body = document.querySelector('body');
     const targetModal = document.querySelector('.mu-modal-is-open');
 
@@ -248,7 +235,7 @@ function closeModal () {
 
 function closeModalAndSwitchToHowCanWeHelp() {
     closeModal();
-    openModal({target:{id:'modal-how-can-we-help'}});
+    openModal({ target: { id: 'modal-how-can-we-help' } });
 }
 
 function openModalOnPageLoad() {
@@ -257,6 +244,6 @@ function openModalOnPageLoad() {
     const modalIdToOpen = urlParams.get('open-modal-id');
 
     if (modalIdToOpen) {
-        openModal({target:{id:modalIdToOpen}});
+        openModal({ target: { id: modalIdToOpen } });
     }
 }

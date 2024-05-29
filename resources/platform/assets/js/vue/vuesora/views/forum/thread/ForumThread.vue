@@ -147,7 +147,6 @@ import ForumThreadPost from './_ForumThreadPost.vue';
 import Pagination from '../../../components/Pagination.vue';
 import ForumService from '../../../assets/js/services/forums';
 import TextEditor from '../../../components/TextEditor/TextEditor.vue';
-import Toasts from '../../../assets/js/classes/toasts';
 import ThemeClasses from '../../../mixins/ThemeClasses';
 import CommentLikesModal from '../../comments/_CommentLikesModal.vue';
 import PageHeader from '../../../../components/PageHeader/PageHeader.vue';
@@ -443,11 +442,9 @@ export default {
         handlePostDelete (payload) {
             ForumService.deleteForumsPost(payload.id, this.brand)
                 .then((response) => {
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'YOU\'RE OUTTA HERE!',
-                        themeColor: this.themeColor,
-                        message: 'We have deleted this post.',
+                    window.shownotification({
+                        icon: 'check',
+                        text: "You're outta here! We have deleted this post."
                     });
 
                     this.posts = this.posts.filter(post => post.id !== payload.id);
