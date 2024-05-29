@@ -245,54 +245,54 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.sonor');
     }
 
-    public function alesis(Request $request)
+    public function handleRedeemRequest(Request $request, $productType, $isNewAccount)
     {
-        return view('drumeo.pages.redeem.redeem-page', [
-            'alesis' => true,
-            'newAccount' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
+        $data = [
+            $productType => true,
+            'newAccount' => $isNewAccount,
+            'accessCodeArray' => $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ];
+        return view('drumeo.pages.redeem.redeem-page', $data);
     }
-    public function alesisExisting(Request $request)
+
+    public function alesisNitro(Request $request)
     {
-        return view('drumeo.pages.redeem.redeem-page', [
-            'alesis' => true,
-            'newAccount' => false,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
+        return $this->handleRedeemRequest($request, 'alesisNitro', true);
+    }
+
+    public function alesisNitroExisting(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisNitro', false);
     }
 
     public function alesisStrata(Request $request)
     {
-        return view('drumeo.pages.redeem.redeem-page', [
-            'alesisStrata' => true,
-            'newAccount' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
+        return $this->handleRedeemRequest($request, 'alesisStrata', true);
     }
+
     public function alesisStrataExisting(Request $request)
     {
-        return view('drumeo.pages.redeem.redeem-page', [
-            'alesisStrata' => true,
-            'newAccount' => false,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
+        return $this->handleRedeemRequest($request, 'alesisStrata', false);
     }
+
+    public function alesisCrimson(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisCrimson', true);
+    }
+
+    public function alesisCrimsonExisting(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisCrimson', false);
+    }
+
     public function alesisStrataCore(Request $request)
     {
-        return view('drumeo.pages.redeem.redeem-page', [
-            'alesisStrataCore' => true,
-            'newAccount' => true,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
+        return $this->handleRedeemRequest($request, 'alesisStrataCore', true);
     }
+
     public function alesisStrataCoreExisting(Request $request)
     {
-        return view('drumeo.pages.redeem.redeem-page', [
-            'alesisStrataCore' => true,
-            'newAccount' => false,
-            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
-        ]);
+        return $this->handleRedeemRequest($request, 'alesisStrataCore', false);
     }
 
     public function coachTrial(Request $request, $domain, $pageC = null)
