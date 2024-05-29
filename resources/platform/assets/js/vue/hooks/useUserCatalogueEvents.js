@@ -1,5 +1,4 @@
 import ContentService from '../vuesora/assets/js/services/content';
-import Toasts from '../vuesora/assets/js/classes/toasts';
 
 const getValue = (obj, key) => {
     const filtered = obj.filter((field) => {
@@ -13,26 +12,26 @@ const getValue = (obj, key) => {
 export default function useUserCatalogueEvents(props, context) {
     function progressReset(event) {
         const icon = event.target;
-        Toasts.confirm({
+        window.showconfirmationmodal({
             title: 'Hold your horses… This will reset your progress, are you sure about this?',
-            submitButton: {
-                text: `<span class="bg-${props.themeColor} text-white short">I want to start over</span>`,
-                callback: () => {
-                    if(icon){
+            subtitle: 'This cannot be undone.',
+            callbacks: {
+                submit: () => {
+                    if (icon) {
                         icon.classList.remove('fa-undo');
                         icon.classList.add('fa-spin', 'fa-spinner');
                     }
-
+        
                     props.emitResetProgress({
                         content_id: props.item.id,
                         icon,
                     });
                 },
-            },
-            cancelButton: {
-                text: '<span class="bg-grey-3 inverted text-grey-3 short">Get me out of here</span>',
-            },
-        });
+                cancel: () => {
+                    console.log('Reset progress cancelled');
+                }
+            }
+        });        
     }
 
     function emitResetProgress(payload) {

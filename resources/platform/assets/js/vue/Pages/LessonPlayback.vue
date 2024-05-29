@@ -73,22 +73,28 @@
                         </template>
                     </div>
 
-                    <VideoResources :theme-color="videoResources.themeColor" :brand="videoResources.brand"
-                        :title="videoResources.title" :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl" :description="videoResources.description"
-                        :instructors="videoResources.instructors" :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked" :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded" :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId" :resources="videoResources.resources"
+                    <VideoResources 
+                        :theme-color="videoResources.themeColor" 
+                        :brand="videoResources.brand"
+                        :title="videoResources.title" 
+                        :lesson-type="videoResources.lessonType"
+                        :thumbnail-url="videoResources.thumbnailUrl" 
+                        :description="videoResources.description"
+                        :instructors="videoResources.instructors" 
+                        :parent-title="videoResources.parentTitle"
+                        :is-liked="videoResources.isLiked" 
+                        :like-count="videoResources.likeCount"
+                        :is-added="videoResources.isAdded" 
+                        :content-id="videoResources.contentId"
+                        :user-id="videoResources.userId" 
+                        :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList"
-                        :show-info-button="videoResources.showInfoButton" :show-practice-button="showPracticeButton"
-                        :show-share-button="false" :show-complete-button="true"
+                        :show-info-button="videoResources.showInfoButton"
                         :report-user-email="videoResources.reportUserEmail"
                         :report-user-name="videoResources.reportUserName"
-                        :report-recipient="videoResources.reportRecipient" :report-logo="videoResources.reportLogo"
-                        :lesson="{ completed: videoButtons.isCompleted }"
-                        @open-practice-soundslice="openSlice(videoResources.title, formattedChapters.length, 0, false)"
-                        :difficulty="videoResources.difficulty" />
+                        :report-logo="videoResources.reportLogo"
+                        :difficulty="videoResources.difficulty"
+                    />
 
                     <ContentInfo :breadcrumbs="contentBreadcrumb.pages" :content-description="contentDescription"
                         :content-chapters="videoProps.chapters" :instructors="contentInstructors" />

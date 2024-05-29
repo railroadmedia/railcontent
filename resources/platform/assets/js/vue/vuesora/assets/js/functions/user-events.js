@@ -1,4 +1,3 @@
-import Toasts from '../classes/toasts';
 import ContentService from '../services/content';
 import Utils from '../classes/utils';
 
@@ -107,24 +106,23 @@ export default (function () {
 
             if (!clickTimeout && !isResetCompleteOpened) {
                 isResetCompleteOpened = true;
-                Toasts.confirm({
+                
+                window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
-                    submitButton: {
-                        text: `<span class="bg-${brand} text-white short">YES</span>`,
-                        callback: () => {
+                    subtitle: 'This cannot be undone.',
+                    callbacks: {
+                        submit: () => {
                             icon.classList.remove('fa-redo-alt', 'fa-flip-horizontal');
                             icon.classList.add('fa-spin', 'fa-spinner');
-
+                
                             ContentService.resetContentProgress(contentId)
                                 .then((resolved) => {
                                     if (resolved) {
-                                        Toasts.push({
-                                            icon: 'happy',
-                                            title: 'REMOVED!',
-                                            themeColor: brand,
-                                            message: 'Your progress has been reset.',
+                                        window.shownotification({
+                                            icon: 'check',
+                                            text: 'Removed! Your progress has been reset.'
                                         });
-
+                
                                         if (document.querySelector('.trophy-progress')) {
                                             window.recalculateProgress(false, true, brand);
                                         }
@@ -132,21 +130,18 @@ export default (function () {
                                             button.parentElement.classList.add('hide');
                                         });
                                     }
-
+                
                                     icon.classList.remove('fa-spin', 'fa-spinner');
                                     icon.classList.add('fa-redo-alt', 'fa-flip-horizontal');
-
+                
                                     window.location.reload();
                                 });
                         },
-                    },
-                    cancelButton: {
-                        text: '<span class="bg-grey-3 inverted text-grey-3 short">NO</span>',
-                        callback: () => {
+                        cancel: () => {
                             isResetCompleteOpened = false;
                         }
-                    },
-                });
+                    }
+                });                
             }
 
             setClickTimeout();
@@ -193,39 +188,35 @@ export default (function () {
                 if (isRemoving) {
                     if (!isResetCompleteOpened) {
                         isResetCompleteOpened = true;
-                        Toasts.confirm({
+                        
+                        window.showconfirmationmodal({
                             title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
-                            submitButton: {
-                                text: `<span class="bg-${brand} text-white">Reset</span>`,
-                                callback: () => {
+                            subtitle: 'This cannot be undone.',
+                            callbacks: {
+                                submit: () => {
                                     element.classList.remove('is-complete');
-
+                        
                                     window.recalculateProgress(!isRemoving, true, brand);
-
+                        
                                     ContentService.resetContentProgress(contentId)
                                         .then((resolved) => {
                                             if (resolved) {
-                                                Toasts.push({
-                                                    icon: 'happy',
-                                                    title: 'READY TO START AGAIN?',
-                                                    themeColor: brand,
-                                                    message: 'Your progress has been reset.',
+                                                window.shownotification({
+                                                    icon: 'check',
+                                                    text: 'Ready to start again? Your progress has been reset.'
                                                 });
-
+                        
                                                 element.classList.add('remove-request-complete');
                                             }
-
+                        
                                             isRequesting = false;
                                         });
                                 },
-                            },
-                            cancelButton: {
-                                text: '<span class="bg-grey-3 inverted text-grey-3">Cancel</span>',
-                                callback: () => {
+                                cancel: () => {
                                     isResetCompleteOpened = false;
                                 }
-                            },
-                        });
+                            }
+                        });                        
                     }
                 } else {
                     element.classList.add('is-complete');

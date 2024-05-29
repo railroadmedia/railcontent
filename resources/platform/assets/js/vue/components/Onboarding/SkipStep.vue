@@ -1,6 +1,4 @@
 <script setup>
-import axios from "axios";
-import Toasts from "../../vuesora/assets/js/classes/toasts";
 import {skipAccountSetup} from "./services";
 
 const props = defineProps({
@@ -27,13 +25,9 @@ const handleError = (response) => {
         title = response.data.errors[0].title;
         message = response.data.errors[0].detail;
     }
-
-    Toasts.push({
-        icon: 'sad',
-        themeColor: this.themeColor,
-        title,
-        message,
-        timeout: 7500,
+    window.shownotification({
+        icon: 'error',
+        text: title + ' ' + message
     });
 }
 const handleSkip = () => {

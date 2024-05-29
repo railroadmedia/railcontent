@@ -137,7 +137,6 @@ import 'mediaelement-plugins/src/airplay/airplay';
 import 'mediaelement-plugins/src/airplay/airplay.css';
 import * as QueryString from 'query-string';
 import Utils from '../../assets/js/classes/utils';
-import Toasts from '../../assets/js/classes/toasts';
 
 export default {
     name: 'VideoMediaElement',
@@ -438,10 +437,9 @@ export default {
                 timecode.blur();
             }, 100);
 
-            Toasts.push({
-                icon: 'happy',
-                title: 'SHARE THE LOVE!',
-                message: 'This URL has been copied, and is ready to share!',
+            window.shownotification({
+                icon: 'check',
+                text: 'Share the love! This URL has been copied, and is ready to share!'
             });
         },
 
