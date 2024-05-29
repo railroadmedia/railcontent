@@ -179,6 +179,7 @@
         if (lessonProgressRef.value === '100') {
             window.showconfirmationmodal({
                 title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+                subtitle: 'This cannot be undone.',
                 callbacks: {
                     submit: () => {
                         lessonProgressRef.value = null;

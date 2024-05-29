@@ -302,6 +302,7 @@ export default {
 
             window.showconfirmationmodal({
                 title: 'Click report to send a notification to a moderator.',
+                subtitle: 'This cannot be undone.',
                 callbacks: {
                     submit: () => {
                         ForumService.reportForumPost(vm.post.id, vm.brand)
@@ -324,6 +325,7 @@ export default {
 
             window.showconfirmationmodal({
                 title: 'Click report to send a notification to a moderator.',
+                subtitle: 'This cannot be undone.',
                 callbacks: {
                     submit: () => {
                         this.$emit('hidePost', {
@@ -347,6 +349,7 @@ export default {
 
             window.showconfirmationmodal({
                 title: 'Are you sure you want to delete this post?',
+                subtitle: 'This cannot be undone.',
                 callbacks: {
                     submit: () => {
                         this.$emit('deletePost', {

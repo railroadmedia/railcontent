@@ -443,6 +443,7 @@ export default {
         deleteComment() {
             window.showconfirmationmodal({
                 title: 'Are you sure you want to delete this comment?',
+                subtitle: 'This cannot be undone.',
                 callbacks: {
                     submit: () => {
                         this.$emit('deleteComment', {

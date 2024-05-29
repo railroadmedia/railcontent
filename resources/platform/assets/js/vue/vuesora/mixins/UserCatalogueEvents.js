@@ -18,6 +18,7 @@ export default {
                 // TODO: CONFIRM IF THIS PART CAN BE DELETED
                 window.showconfirmationmodal({
                     title: 'Hold your horses… This will remove this lesson from your list, are you sure about this?',
+                    subtitle: 'This cannot be undone.',
                     callbacks: {
                         submit: () => {
                             this.emitAddToList({

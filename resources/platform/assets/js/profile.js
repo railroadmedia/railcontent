@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             window.showconfirmationmodal({
                 title: 'Do you really want to reset your avatar?',
+                subtitle: 'This cannot be undone.',
                 callbacks: {
                     submit: () => {
                         let url = '/user-management-system/user/update/' + userId;
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             clearButton.addEventListener('click', () => {
                 window.showconfirmationmodal({
                     title: 'Do you really want to reset your gear photo?',
+                    subtitle: 'This cannot be undone.',
                     callbacks: {
                         submit: () => {
                             let url = '/user-management-system/user/update/' + userId;

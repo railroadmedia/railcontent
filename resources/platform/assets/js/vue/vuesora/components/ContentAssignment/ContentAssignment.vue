@@ -435,6 +435,7 @@ export default {
             if (this.isComplete) {
                 window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+                    subtitle: 'This cannot be undone.',
                     callbacks: {
                         submit: () => {
                             this.isComplete = !this.isComplete;

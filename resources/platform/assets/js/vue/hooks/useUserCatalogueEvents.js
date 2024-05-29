@@ -14,6 +14,7 @@ export default function useUserCatalogueEvents(props, context) {
         const icon = event.target;
         window.showconfirmationmodal({
             title: 'Hold your horses… This will reset your progress, are you sure about this?',
+            subtitle: 'This cannot be undone.',
             callbacks: {
                 submit: () => {
                     if (icon) {

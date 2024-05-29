@@ -109,6 +109,7 @@ export default (function () {
                 
                 window.showconfirmationmodal({
                     title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+                    subtitle: 'This cannot be undone.',
                     callbacks: {
                         submit: () => {
                             icon.classList.remove('fa-redo-alt', 'fa-flip-horizontal');
@@ -190,6 +191,7 @@ export default (function () {
                         
                         window.showconfirmationmodal({
                             title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+                            subtitle: 'This cannot be undone.',
                             callbacks: {
                                 submit: () => {
                                     element.classList.remove('is-complete');
