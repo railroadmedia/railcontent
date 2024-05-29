@@ -26,7 +26,8 @@ import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
-
+import Offline from './vue/Pages/Live/Offline';
+import Online from './vue/Pages/Live/Online';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -280,6 +281,8 @@ app.component('AppContainer', AppContainer)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
     .component('CoachIndex', CoachIndex)
+    .component('Offline', Offline)
+    .component('Online', Online)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
