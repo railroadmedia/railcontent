@@ -29,6 +29,7 @@ class Song extends BaseSanityModel
 
         $fields = [
             new Field(FieldType::String, 'title'),
+            new Field(FieldType::Slug, 'slug', options:['source' => 'title'], hidden: "({document}) => !document?.title,"),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"),
@@ -47,7 +48,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::String, 'transcriber_name', 'Transcribed By'),
             new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless'),
             new BrandField(),
-            new Field(FieldType::Slug, 'slug', options:['source' => 'title']),
+
             new Field(FieldType::Number, 'length_in_seconds', 'Length', description: 'song length in seconds'),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed'),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys'),
@@ -57,10 +58,10 @@ class Song extends BaseSanityModel
             new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceReference),
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceReference),
 
-            new Field(FieldType::URL, 'thumbnail_url', 'Thumbnail url'),
+            new Field(FieldType::Image, 'thumbnail', 'Thumbnail'),
 
         ];
-
-        parent::__construct('song', 'Song', fields: $fields);
+        $preview = ['select' => ['title' => 'title', 'media' => 'thumbnail']];
+        parent::__construct('song', 'Song', fields: $fields, preview: $preview);
     }
 }
