@@ -32,7 +32,7 @@ class Field
         //TODO can we do something more for $to? Can at least do some validation that there exists a class with that name, that extends BaseSanityModel
         public ?string $to = null,
         //TODO can we do something more for $of?
-        public ?string $of = null,
+        public Reference|string|null $of = null,
         public Group|array|null $group = null,
         public ?array $options = null,
         public ?string $hidden = null,
@@ -62,7 +62,7 @@ class Field
             $optional['to'] = ['type' => $this->to];
         }
         if (!is_null($this->of)) {
-            $optional['of'] = [['type' => $this->of]];
+            $optional['of'] = [$this->of];
         }
         if (!is_null($this->options)) {
             $optional['options'] = $this->options;
