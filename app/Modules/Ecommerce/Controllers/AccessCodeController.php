@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use App\Modules\Ecommerce\Requests\AccessCodeClaimRequest;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Modules\UserManagementSystem\Models\User;
 
 class AccessCodeController extends Controller
@@ -27,7 +28,7 @@ class AccessCodeController extends Controller
         $this->userAuthenticationService = $userAuthenticationService;
     }
 
-    public function claim(AccessCodeClaimRequest $request): RedirectResponse
+    public function claim(AccessCodeClaimRequest $request): RedirectResponse|JsonResponse
     {
         $isAuthenticated = auth()->check();
 
