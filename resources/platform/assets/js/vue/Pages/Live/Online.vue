@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 lg:tw-px-0">
+    <div class="tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8">
         <Breadcrumb :breadcrumbs="breadcrumbs" />
         <div class="tw-pt-[30px]"></div>
         <LiveEmbed
@@ -24,7 +24,8 @@
                     <div class="tw-flex tw-flex-row">
                         <div class="tw-flex tw-flex-col tw-grow">
                             <ContentAssignment
-                                v-for="assignment in assignments"
+                                v-for="(assignment, i) in assignments"
+                                :key="i"
                                 :theme-color="brand"
                                 :brand="brand"
                                 :timecode="assignment.data.find(a => a.key === 'timecode')?.value"
@@ -40,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="tw-flex tw-flex-col tw-pt-[30px] tw-w-full">
+            <div class="tw-flex tw-flex-col tw-pt-[30px] tw-w-full tw-mb-8">
                 <div class="tw-flex tw-flex-row mb-3">
                     <h1 class="heading dark:tw-text-white tw-text-xl tw-leading-none md:tw-leading-none md:tw-text-2xl">Live Schedule</h1>
                 </div>
@@ -131,6 +132,6 @@ const userId = computed(() => {
 })
 
 const assignments = computed(() => {
-    return props.lessonContent.assignments;
+    return props.lessonContent.assignments || [];
 })
 </script>
