@@ -1,20 +1,28 @@
 <template>
     <ModalRenderer v-if="isModalOpen">
-        <button class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50" @click="closeModal">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
+        <button class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50"
+                @click="closeModal">
+            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]"/>
         </button>
 
         <div class="tw-bg-white tw-max-w-[800px] tw-w-full tw-p-[30px] tw-rounded-[3px] tw-m-2 lg:tw-m-0">
             <h2 class="subheading tw-mb-[30px]">Redeem Your Drumeo Access Pass</h2>
             <div class="sm:tw-flex sm:tw-flex-wrap">
-                <button :class="`tw-block change-form body tw-uppercase tw-text-[#ccd3d3] tw-mb-[10px] sm:tw-mr-[15px] ${isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : ''}`" @click="isNewAccount = true">Create New Account</button>
-                <button :class="`tw-block change-form body tw-uppercase tw-text-[#ccd3d3] tw-mb-[10px] sm:tw-mr-[15px] ${!isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : ''}`" @click="isNewAccount = false">Add to My Account</button>
+                <button
+                    :class="`tw-block change-form body tw-uppercase tw-text-[#ccd3d3] tw-mb-[10px] sm:tw-mr-[15px] ${isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : ''}`"
+                    @click="isNewAccount = true">Create New Account
+                </button>
+                <button
+                    :class="`tw-block change-form body tw-uppercase tw-text-[#ccd3d3] tw-mb-[10px] sm:tw-mr-[15px] ${!isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : ''}`"
+                    @click="isNewAccount = false">Add to My Account
+                </button>
             </div>
             <p class="tw-mb-1">
                 Fill out the form below to start your 30-Day Drumeo Membership.
             </p>
 
-            <form @submit.prevent="submitForm" action="https://www.musora.com/ecommerce/access-codes/redeem" method="POST" novalidate="">
+            <form @submit.prevent="submitForm" action="https://www.musora.com/ecommerce/access-codes/redeem"
+                  method="POST" novalidate="">
                 <input type="hidden" name="_method" value="POST" class="has-input">
                 <input type="hidden" name="credentials_type" :value="isNewAccount ? 'new' : 'existing'">
                 <input v-if="!isNewAccount && isUser" type="hidden" name="claim_for_user_id" :value="user.id">
@@ -26,29 +34,41 @@
                 <div class="tw-mb-[10px]">
                     <div class="form-group">
                         <p class="tw-font-bold">Access Code</p>
-                        <input id="accessCodeNew" name="access_code" type="text" class="tw-caret-black" :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.access_code}" autocomplete="off" spellcheck="false">
-                        <span v-show="errors.access_code" class="tw-text-xs tw-text-[#EF4444]" v-text="errors.access_code"></span>
+                        <input id="accessCodeNew" name="access_code" type="text" class="tw-caret-black"
+                               :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.access_code}" autocomplete="off"
+                               spellcheck="false">
+                        <span v-show="errors.access_code" class="tw-text-xs tw-text-[#EF4444]"
+                              v-text="errors.access_code"></span>
                     </div>
                 </div>
                 <div v-if="isNewAccount || !isUser" class="tw-mb-[10px]">
                     <div class="form-group">
                         <p class="tw-font-bold">Email</p>
-                        <input id="emailNew" name="email" type="email" class="tw-caret-black" :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.email}" autocomplete="off" spellcheck="false">
+                        <input id="emailNew" name="email" type="email" class="tw-caret-black"
+                               :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.email}" autocomplete="off"
+                               spellcheck="false">
                         <span v-show="errors.email" class="tw-text-xs tw-text-[#EF4444]" v-text="errors.email"></span>
                     </div>
                 </div>
                 <div v-if="isNewAccount || !isUser" class="tw-mb-[10px]">
                     <div class="form-group">
                         <p class="tw-font-bold">Password <span v-if="isNewAccount">(min. 8 characters)</span></p>
-                        <input id="passwordNew" name="password" type="password" class="tw-caret-black" :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.password}" autocomplete="off" spellcheck="false">
-                        <span v-show="errors.password" class="tw-text-xs tw-text-[#EF4444]" v-text="errors.password"></span>
+                        <input id="passwordNew" name="password" type="password" class="tw-caret-black"
+                               :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.password}" autocomplete="off"
+                               spellcheck="false">
+                        <span v-show="errors.password" class="tw-text-xs tw-text-[#EF4444]"
+                              v-text="errors.password"></span>
                     </div>
                 </div>
                 <div v-if="isNewAccount" class="tw-mb-[10px]">
                     <div class="form-group">
                         <p class="tw-font-bold">Confirm Password</p>
-                        <input id="confirmPasswordNew" name="password_confirmation" type="password" class="tw-caret-black" :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.passwordCheck}" autocomplete="off" spellcheck="false">
-                        <span v-show="errors.passwordCheck" class="tw-text-xs tw-text-[#EF4444]" v-text="errors.passwordCheck"></span>
+                        <input id="confirmPasswordNew" name="password_confirmation" type="password"
+                               class="tw-caret-black"
+                               :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.passwordCheck}" autocomplete="off"
+                               spellcheck="false">
+                        <span v-show="errors.passwordCheck" class="tw-text-xs tw-text-[#EF4444]"
+                              v-text="errors.passwordCheck"></span>
                     </div>
                 </div>
                 <div>
@@ -70,7 +90,7 @@
 <script setup>
 import {computed, inject, ref} from "vue";
 import ModalRenderer from "../Modal/ModalRenderer";
-import { XIcon } from "@heroicons/vue/solid";
+import {XIcon} from "@heroicons/vue/solid";
 
 const props = defineProps({
     api: {
@@ -81,7 +101,7 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    isUser:{
+    isUser: {
         type: Boolean,
         default: false
     },
@@ -108,7 +128,7 @@ const errors = ref({
     passwordCheck: '',
 })
 
-const closeModal = () =>{
+const closeModal = () => {
     errors.value = {
         access_code: '',
         email: '',
@@ -137,7 +157,7 @@ const submitForm = async (event) => {
         errors.value.access_code = 'Code is not valid.';
     }
 
-    if (isNewAccount.value || !props.isUser){
+    if (isNewAccount.value || !props.isUser) {
         const email = form.email.value;
         const emailFormat = /^\w+([\.-^+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!email.match(emailFormat)) {
@@ -148,8 +168,9 @@ const submitForm = async (event) => {
         if (password.length < 8) {
             errors.value.password = 'Password must be at least 8 characters long.';
         }
+    }
 
-
+    if (isNewAccount.value) {
         const passwordCheck = form.password_confirmation.value;
         if (!passwordCheck) {
             errors.value.passwordCheck = 'Password must be confirmed.';
@@ -174,14 +195,15 @@ const submitForm = async (event) => {
                 'Accept': 'application/json',
             },
             body: JSON.stringify({
-                ...Object.fromEntries(data)
+                ...Object.fromEntries(data),
+                credentials_type: isNewAccount.value ? 'new' : 'existing',
             })
         })
 
         const result = await response.json();
         isLoading.value = false;
 
-        if(result.errors){
+        if (result.errors) {
             isFormValid.value = false;
             Object.keys(result.errors).forEach(key => {
                 errors.value[key] = result.errors[key][0];
