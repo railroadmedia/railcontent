@@ -64,7 +64,7 @@ class AccessCodeClaimRequest extends FormRequest
                     ',' .
                     config('ecommerce.database_info_for_unique_user_email_validation.email_column'),
             ];
-            $rules['password'] = ['required', config('ecommerce.password_creation_rules', 'confirmed|min:8|max:128')];
+            $rules['password'] = 'required|' . config('ecommerce.password_creation_rules', 'confirmed|min:8|max:128');
         }
 
         return $rules;
