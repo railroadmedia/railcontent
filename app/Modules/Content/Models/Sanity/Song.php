@@ -53,7 +53,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed'),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys'),
 
-            new Field(FieldType::Array, 'artist', 'Artist', '', of: $artistReference),
+            new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist'),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference),
             new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceReference),
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceReference),
