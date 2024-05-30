@@ -183,6 +183,10 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct
         ]);
     }
+    public function thirtyDayIndependenceDeal()
+    {
+        return view('drumeo.lead-gen.pages.30-day-independence-deal', ['theme' => 'drumeo']);
+    }
 
     public function thirtyDayDrummerDeal()
     {
