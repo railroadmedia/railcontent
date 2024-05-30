@@ -9,6 +9,7 @@
             <h2 class="subheading tw-mb-[30px]">Redeem Your Drumeo Access Pass</h2>
             <div class="sm:tw-flex sm:tw-flex-wrap">
                 <button
+                    v-if="!isUser"
                     :class="`tw-block change-form body tw-uppercase tw-mb-[10px] sm:tw-mr-[15px] ${isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : 'tw-text-[#ccd3d3]'}`"
                     @click="isNewAccount = true">Create New Account
                 </button>
@@ -88,7 +89,7 @@
     </ModalRenderer>
 </template>
 <script setup>
-import {computed, inject, ref} from "vue";
+import {computed, inject, onBeforeMount, ref} from "vue";
 import ModalRenderer from "../Modal/ModalRenderer";
 import {XIcon} from "@heroicons/vue/solid";
 
@@ -136,6 +137,9 @@ const closeModal = () => {
         passwordCheck: '',
     }
 
+    isFormValid.value = true;
+    isLoading.value = false;
+    isSubmitted.value = false;
     emit('closeModal')
 }
 
@@ -148,6 +152,7 @@ const submitForm = async (event) => {
     }
     isFormValid.value = true;
     isLoading.value = true;
+    isSubmitted.value = false;
 
     const form = event.target;
 
@@ -207,9 +212,20 @@ const submitForm = async (event) => {
             Object.keys(result.errors).forEach(key => {
                 errors.value[key] = result.errors[key][0];
             })
+        } else if(result.error){
+            isFormValid.value = false;
+            errors.value['email'] = 'Invalid credentials.';
+            errors.value['password'] = 'Invalid credentials.';
+
         } else {
             isSubmitted.value = true;
         }
     }
 }
+
+onBeforeMount(() => {
+    if (props.isUser) {
+        isNewAccount.value = false;
+    }
+})
 </script>
