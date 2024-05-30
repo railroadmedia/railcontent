@@ -9,11 +9,11 @@
             <h2 class="subheading tw-mb-[30px]">Redeem Your Drumeo Access Pass</h2>
             <div class="sm:tw-flex sm:tw-flex-wrap">
                 <button
-                    :class="`tw-block change-form body tw-uppercase tw-text-[#ccd3d3] tw-mb-[10px] sm:tw-mr-[15px] ${isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : ''}`"
+                    :class="`tw-block change-form body tw-uppercase tw-mb-[10px] sm:tw-mr-[15px] ${isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : 'tw-text-[#ccd3d3]'}`"
                     @click="isNewAccount = true">Create New Account
                 </button>
                 <button
-                    :class="`tw-block change-form body tw-uppercase tw-text-[#ccd3d3] tw-mb-[10px] sm:tw-mr-[15px] ${!isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : ''}`"
+                    :class="`tw-block change-form body tw-uppercase  tw-mb-[10px] sm:tw-mr-[15px] ${!isNewAccount ? 'tw-text-drumeo tw-border-b tw-border-[#0B76DB] tw-font-bold' : 'tw-text-[#ccd3d3]'}`"
                     @click="isNewAccount = false">Add to My Account
                 </button>
             </div>
