@@ -243,7 +243,7 @@
                 + 2 NEW follow-up packs with Domino<br>
                 (and 3 more bonuses!)
             </h2>
-            <div class="uppercase text-2xl text-musora"> <strong> 
+            <div class="uppercase text-2xl text-musora"> <strong>
                 <span x-cloak x-data="timer()" x-init="countdown()">
                 <span>
                 ONLY AVAILABLE FOR
@@ -253,9 +253,9 @@
                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                 </span>
-                </span> 
+                </span>
             </strong>
-           
+
             </div>
                 <h5 class=" text-drumeo uppercase"></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
@@ -277,7 +277,7 @@
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Personalized support for ALL your drumming questions</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Follow-up courses 10-Day Fills and 10-Day Ghost Notes with Domino (NEW!)</li>
                 <li class="flex items-start"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> The brand NEW Drumeo StickBag and a fresh pair of 5A drumsticks (FREE BONUSES)</li>
-                </ul> 
+                </ul>
             </div>
 
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
@@ -440,7 +440,7 @@
     @endphp
     @include('musora.sales.components.order-section-bonuses', [
     'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
-    'subHeader' => '<strong><span class="text-musora">SAVE 20%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',
+    'subHeader' => '<strong><span class="text-musora">SAVE 17%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',
     'theme' => 'drumeo',
         'CTA' => 'CLAIM YOUR OFFER',
     'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
