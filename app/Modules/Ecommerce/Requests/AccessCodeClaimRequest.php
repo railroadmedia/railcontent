@@ -48,11 +48,16 @@ class AccessCodeClaimRequest extends FormRequest
                 '.' .
                 'ecommerce_access_codes' .
                 ',code,is_claimed,0',
-            'credentials_type' => 'required|in:new,existing',
             'context' => 'string|nullable',
         ];
 
-        if ($this->get('credentials_type') === 'existing' && !auth()->user()) {
+        $isAuthenticated = auth()->check();
+
+        $rules['credentials_type'] = $isAuthenticated
+            ? 'required|in:existing'
+            : 'required|in:new,existing';
+
+        if ($this->get('credentials_type') === 'existing' && !$isAuthenticated) {
             $rules['email'] = 'required_if:credentials_type,existing|email:strict,dns|not_regex:/[ÄäÜüÖö]/|max:255|exists:' .
                 config('ecommerce.database_info_for_unique_user_email_validation.database_connection_name') .
                 '.' .

@@ -59,6 +59,8 @@ class AccessCodeController extends Controller
                 : redirect()->back()->withInput()->withErrors($message);
         }
 
+        $this->userAuthenticationService->login($user);
+
         $message = [
             'access-code-claimed-success' => true,
             'access-code-claimed-message' => 'Your access code has been claimed successfully!',
