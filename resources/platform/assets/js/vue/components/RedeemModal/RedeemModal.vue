@@ -178,7 +178,7 @@ const submitForm = async (event) => {
             }
         }
     }
-    
+
     Object.keys(errors.value).forEach(key => {
         if (errors.value[key]) {
             isLoading.value = false;
@@ -196,7 +196,6 @@ const submitForm = async (event) => {
             },
             body: JSON.stringify({
                 ...Object.fromEntries(data),
-                credentials_type: isNewAccount.value ? 'new' : 'existing',
             })
         })
 
