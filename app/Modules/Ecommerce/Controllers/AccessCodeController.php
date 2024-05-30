@@ -41,13 +41,21 @@ class AccessCodeController extends Controller
         try {
             $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
         } catch (Exception $e) {
-            redirect()
-                ->back()
-                ->withInput()
-                ->withErrors([
-                    'access-code-claimed-success' => false,
-                    'access-code-claimed-message' => $e->getMessage(),
-                ]);
+            $message = [
+                'access-code-claimed-success' => false,
+                'access-code-claimed-message' => $e->getMessage(),
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($message, 400);
+            } else {
+                redirect()
+                    ->back()
+                    ->withInput()
+                    ->withErrors([
+                        'access-code-claimed-success' => false,
+                        'access-code-claimed-message' => $e->getMessage(),
+                    ]);
+            }
         }
 
         if (!$isAuthenticated) {
