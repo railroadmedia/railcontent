@@ -148,9 +148,8 @@ const submitForm = async (event) => {
         if (password.length < 8) {
             errors.value.password = 'Password must be at least 8 characters long.';
         }
-    }
 
-    if (isNewAccount.value) {
+
         const passwordCheck = form.password_confirmation.value;
         if (!passwordCheck) {
             errors.value.passwordCheck = 'Password must be confirmed.';
