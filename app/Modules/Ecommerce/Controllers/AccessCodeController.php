@@ -59,12 +59,16 @@ class AccessCodeController extends Controller
             'access-code-claimed-message' => 'Your access code has been claimed successfully!',
         ];
 
-        $redirectRoute =
-            (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
-                $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
+        if ($request->wantsJson()) {
+            return response()->json($message);
+        } else {
+            $redirectRoute =
+                (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
+                    $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
 
-        return $request->has('redirect')
-            ? redirect()->away($request->get('redirect'))->with($message)
-            : redirect()->to('/' . $redirectRoute)->with($message);
+            return $request->has('redirect')
+                ? redirect()->away($request->get('redirect'))->with($message)
+                : redirect()->to('/' . $redirectRoute)->with($message);
+        }
     }
 }
