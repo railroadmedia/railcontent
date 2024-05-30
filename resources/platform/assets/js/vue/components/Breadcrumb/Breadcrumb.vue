@@ -9,7 +9,7 @@
       </a>
     </div>
     <!-- Desktop -->
-    <div class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-hidden lg:tw-flex tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden dark:tw-bg-[#000C17] tw-uppercase tw-text-[14px] tw-leading-[21px]">
+    <div class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] tw-hidden lg:tw-flex tw-whitespace-nowrap tw-text-ellipsis tw-w-full tw-overflow-hidden tw-uppercase tw-text-[14px] tw-leading-[21px]">
       <a :href="`/${brand}`" class="tw-text-[#3F3F46] dark:tw-text-[#E7EFF6] dark:hover:tw-text-white hover:tw-text-black tw-font-normal tw-text-[14px] tw-leading-[21px] tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
         HOME
       </a>

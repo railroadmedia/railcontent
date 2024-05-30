@@ -209,6 +209,7 @@ class UserPlaylistsController extends BaseController
 
                 $playlistItems[$index]['id'] = $item['id'];
                 $playlistItems[$index]['type'] = $item['type'];
+                $playlistItems[$index]['item_type'] = $item['item_type'];
                 $playlistItems[$index]['title'] = $item['title'];
                 $playlistItems[$index]['artist'] = $item['artist'];
                 $playlistItems[$index]['status'] = $item['status'];
@@ -217,7 +218,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
                 $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
 
-                $playlistItems[$index]['duration'] = $playlistItems[$index]['duration'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
+                $playlistItems[$index]['duration'] = $item['length_in_seconds'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
                 $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                     'playlistId' => $playlistId,
                     'playlistItemId' => $item['user_playlist_item_id'],
@@ -334,6 +335,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['url'] = $item['url'] ?? '';
             $otherItems[$index]['id'] = $item['id'];
             $otherItems[$index]['type'] = $item['type'];
+            $otherItems[$index]['item_type'] = $item['item_type'];
             $otherItems[$index]['title'] = $item->fetch('title');
             $otherItems[$index]['artist'] = $item->fetch('artist');
             $otherItems[$index]['status'] = $item['status'];

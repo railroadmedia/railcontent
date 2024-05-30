@@ -16,6 +16,7 @@ import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
 import Home from './vue/Pages/Home.vue';
 import LessonHistory from './vue/Pages/LessonHistory';
+import LessonPlayback from './vue/Pages/LessonPlayback';
 import Playlist from './vue/Pages/Playlist';
 import Playlists from './vue/Pages/Playlists';
 import Referral from './vue/Pages/Referral';
@@ -26,10 +27,11 @@ import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+import Offline from './vue/Pages/Live/Offline';
+import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
 import BestBeginnerDrumBook from './vue/Pages/BestBeginnerDrumBook';
 import DrummersToolbox from './vue/Pages/DrummersToolbox';
-
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -52,7 +54,6 @@ import DeleteAccountModal from './vue/components/Modal/DeleteAccountModal';
 import Forms from './vue/vuesora/assets/js/classes/forms';
 import ContentService from './vue/vuesora/assets/js/services/content';
 import UserService from './vue/vuesora/assets/js/services/user';
-import Toasts from './vue/vuesora/assets/js/classes/toasts';
 import ProgressTracker from './vue/vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
@@ -103,11 +104,9 @@ const app = createApp({
                 );
             });
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'AHH, MUCH BETTER!',
-                themeColor: 'black',
-                message: 'The new "you" is being refreshed...'
+            window.shownotification({
+                icon: 'check',
+                text: 'Ahh, Much Better! The new "you" is being refreshed...'
             });
         },
 
@@ -119,12 +118,10 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'drumeo',
-                message: 'Your drum gear looks fantastic!'
-            });
+            window.shownotification({
+                icon: 'check',
+                text: 'Woohoo! Your drum gear looks fantastic!'
+            });            
         },
 
         gearPianotePhotoUploaded(payload) {
@@ -135,12 +132,7 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'pianote',
-                message: 'Your piano gear looks fantastic!'
-            });
+
         },
 
         gearGuitareoPhotoUploaded(payload) {
@@ -151,12 +143,10 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'guitareo',
-                message: 'Your gear looks fantastic!'
-            });
+            window.shownotification({
+                icon: 'check',
+                text: 'Woohoo! Your gear looks fantastic!'
+            });            
         },
 
         gearSingeoPhotoUploaded(payload) {
@@ -167,12 +157,10 @@ const app = createApp({
             );
             gearPhoto.classList.remove('tw-hidden');
             payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'singeo',
-                message: 'Your singing gear looks fantastic!'
-            });
+            window.shownotification({
+                icon: 'check',
+                text: 'Woohoo! Your singing gear looks fantastic!'
+            });            
         },
 
         handleVideoPlay(payload) {
@@ -269,6 +257,7 @@ app.component('AppContainer', AppContainer)
     .component('Workouts', Workouts)
     .component('PageHeader', PageHeader)
     .component('WorkoutsPlayback', WorkoutsPlayback)
+    .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
     .component('Artists', Artists)
     .component('ChildCatalog', ChildCatalog)
@@ -286,6 +275,8 @@ app.component('AppContainer', AppContainer)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('Offline', Offline)
+    .component('Online', Online)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -336,6 +327,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('Forums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/Forums.vue'
+        )
+    ))
+
     .component('ForumThreadsTable', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
@@ -347,6 +345,20 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "forum-thread-component" */
             './vue/vuesora/views/forum/thread/ForumThread.vue'
+        )
+    ))
+
+    .component('ForumThreads', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/vuesora/views/forum/thread/ForumThreads.vue'
+        )
+    ))
+
+    .component('LatestForums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/LatestForums.vue'
         )
     ))
 
@@ -509,13 +521,11 @@ function showLevelUpData() {
     if (levelUpData) {
         setTimeout(() => {
             const newRank = levelUpData.dataset['newRank'];
-
-            Toasts.push({
+            window.shownotification({
                 icon: 'xp',
-                title: 'Congratulations!',
-                themeColor: 'drumeo',
-                message: 'You have earned the level of ' + newRank + '!'
+                text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
+            
         }, 1000);
     }
 }

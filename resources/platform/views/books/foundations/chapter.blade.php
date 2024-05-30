@@ -1,20 +1,21 @@
 <?php
-    $layout = 'books.layout';
-    if(!empty($user)){
-        $layout = 'partials.layout';
-    } 
-    if(empty($hasAccess)) {
-        $ctas = [
-            [
-                'type' => 'PageHeaderPrimaryCta',
-                'props' => [
-                    'text' => 'Login to Musora',
-                    'url' => '/login',
-                    'faIconClass' => 'fa-external-link'
-                ]
+$layout = 'books.layout';
+if(!empty($user)) {
+    $layout = 'partials.layout';
+}
+if(empty($hasAccess)) {
+    $ctas = [
+        [
+            'type' => 'PageHeaderPrimaryCta',
+            'props' => [
+                'text' => 'Login to Musora',
+                'url' => '/login',
+                'faIconClass' => 'fa-external-link',
+                'isPrimary' => true,
             ]
-        ];
-    }
+        ]
+    ];
+}
 ?>
 
 @extends($layout)

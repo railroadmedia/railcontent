@@ -1,7 +1,6 @@
 import { ref } from 'vue';
 import { useUserStore } from "../../stores/user";
 import ContentService from '../vuesora/assets/js/services/content';
-import Toasts from '../vuesora/assets/js/classes/toasts';
 
 export function useResetProgress() {
     const loading = ref(false);
@@ -18,12 +17,11 @@ export function useResetProgress() {
 
             ContentService.resetContentProgress(contentId)
                 .then(() => {
-                    Toasts.push({
-                        icon: 'happy',
-                        title: 'READY TO START AGAIN?',
-                        themeColor: userStore.brand,
-                        message: 'Your progress has been reset.',
+                    window.shownotification({
+                        icon: 'check',
+                        text: 'Ready to start again? Your progress has been reset.'
                     });
+                    
                     iconClassRef.value = 'fas fa-redo-alt fa-flip-horizontal';
 
                      if(!arrayRef) {

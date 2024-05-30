@@ -267,7 +267,6 @@
 // TODO: REFACTOR THE MODAL OF THIS COMPONENT!
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
-import Toasts from "../../assets/js/classes/toasts";
 import ContentService from "../../assets/js/services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
 import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
@@ -582,10 +581,9 @@ export default {
             timecode.blur();
             this.handleOpenModal();
 
-            Toasts.push({
-                icon: "happy",
-                title: "SHARE THE LOVE!",
-                message: "This URL has been copied, and is ready to share!",
+            window.shownotification({
+                icon: 'check',
+                text: 'Share the love! This URL has been copied, and is ready to share!'
             });
         },
         toggleInfo() {

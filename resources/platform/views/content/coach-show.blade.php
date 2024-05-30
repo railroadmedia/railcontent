@@ -15,6 +15,7 @@
                 ],
                 'faIconClass' => 'fa-bell',
                 'showAllAlways' => true,
+                'isPrimary' => true,
             ]
         ]
     ];

@@ -65,7 +65,13 @@
                 </div>
 
                 <div class="tw-flex tw-flex-col tw-grow tw-w-full">
-                    <text-editor :fieldKey="contentId + '-comment-text-editor'" ref="textEditor" v-model="commentInterface" :height="150" placeholder="Share your thoughts..."></text-editor>
+                    <text-editor
+                        :fieldKey="contentId + '-comment-text-editor'"
+                        ref="textEditor" :is-student-comment="!currentUser.isAdmin"
+                        v-model="commentInterface"
+                        :height="150"
+                        placeholder="Share your thoughts...">
+                    </text-editor>
 
                     <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                         <button class="tw-btn-primary collapse-150 tw-text-white" :class="themeBgClass" :disabled="loading" dusk="submit-comment" @click="postComment">
@@ -111,7 +117,6 @@ import TextEditor from '../../components/TextEditor/TextEditor.vue';
 import CommentService from '../../assets/js/services/comments';
 import CommentPost from './_CommentPost.vue';
 import CommentLikesModal from './_CommentLikesModal.vue';
-import Toasts from '../../assets/js/classes/toasts';
 import Utils from '../../assets/js/classes/utils';
 import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
@@ -305,11 +310,9 @@ export default {
                             this.commentInterface = '';
                             this.$refs.textEditor.currentValue = '';
 
-                            Toasts.push({
-                                icon: 'happy',
-                                title: 'Woohoo!',
-                                themeColor: this.themeColor,
-                                message: `Your input is what makes ${Utils.toTitleCase(this.brand)} so great, thanks for commenting.`,
+                            window.shownotification({
+                                icon: 'check',
+                                text: `Woohoo! Your input is what makes ${Utils.toTitleCase(this.brand)} so great, thanks for commenting.`
                             });
 
                             this.comments.splice(0, 0, thisComment);
