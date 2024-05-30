@@ -21,13 +21,38 @@
 <script type="module">
     import { defineConfig, renderStudio } from "https://esm.sh/sanity@3.38.1-canary.107"
     import { deskTool } from "https://esm.sh/sanity@3.38.1-canary.107/desk"
+    import customInput from "/CustomInput.js"
 
     const config = defineConfig({
         plugins: [deskTool()],
         projectId: "{{$projectId}}",
         dataset: "{{$dataset}}",
         basePath: "{{$basePath}}",
-        schema: {!! stripFromJson($schema) !!}
+        schema: {
+            types: [
+                {
+                    type: "document",
+                    name: "post",
+                    title: "Post",
+                    fields: [
+                        {
+                            type: "string",
+                            name: "title",
+                            title: "Title"
+                        },
+                        {
+                            name: 'myCustomField',
+                            title: 'My Custom Field',
+                            type: 'string',
+                            components: {
+                                input: customInput
+                                // input: MyCustomStringInput
+                            }
+                        },
+                    ]
+                }
+            ]
+        }
     });
     renderStudio(document.getElementById("app"), config);
 </script>

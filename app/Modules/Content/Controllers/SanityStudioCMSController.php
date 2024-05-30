@@ -41,4 +41,11 @@ class SanityStudioCMSController extends BaseController
             ])
         );
     }
+
+    public function customInput(){
+        $json = file_get_contents(public_path('/platform/js/CustomInput.js'));
+
+        return response($json, 200)
+            ->header('Content-Type', 'application/javascript');
+    }
 }
