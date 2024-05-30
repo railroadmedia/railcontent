@@ -12,3 +12,9 @@ Route::prefix('admin')
         )->where('any', '.*')
             ->name('admin.studio');
     });
+
+Route::get(
+    '/CustomInput.js',
+    [SanityStudioCMSController::class, 'customInput']
+)
+    ->name('sanity.customInput-file');
