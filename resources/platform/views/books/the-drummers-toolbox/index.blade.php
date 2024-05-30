@@ -31,7 +31,7 @@ if (!empty($user)) {
             :is-pack-owner="{{ json_encode($isPackOwner) }}"
         @endif
         :chapters="{{ json_encode($chapters) }}"
-        redeem-api="{{ url()->route('access-codes.claim') }}"
+        redeem-api="{{ url()->route('access-codes.form-claim') }}"
         trial-url="{{ url()->route('books.drummers-toolbox.trial') }}"
         login-api="{{ url()->route('user_management_system.login.cookie').'?redirect_to='.url()->current() }}"
     ></drummers-toolbox>
