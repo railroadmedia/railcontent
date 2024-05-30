@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use App\Modules\Ecommerce\Requests\AccessCodeClaimRequest;
 use Exception;
+use Modules\UserManagementSystem\Models\User;
 
 class AccessCodeController extends Controller
 {
@@ -28,18 +29,12 @@ class AccessCodeController extends Controller
 
     public function claim(AccessCodeClaimRequest $request): RedirectResponse
     {
-        if ($request->has('user_email')) {
-            if ($this->userAuthenticationService->authenticate($request->get('user_email'), $request->get('user_password'))) {
-                $user = $this->userService->getByEmailOrNull($request->get('user_email'));
-            } else {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['Invalid credentials.']);
-            }
-        } else {
-            $user = $this->userService->createUser($request->get('email'), $request->get('password'));
-        }
+        $isAuthenticated = auth()->check();
+
+        /** @var User $user */
+        $user = $isAuthenticated
+            ? auth()->user()
+            : $this->userService->createUser($request->get('email'), $request->get('password'));
 
         $rawAccessCode = $request->get('access_code');
 
@@ -55,7 +50,9 @@ class AccessCodeController extends Controller
                 ]);
         }
 
-        $this->userAuthenticationService->login($user);
+        if (!$isAuthenticated) {
+            $this->userAuthenticationService->login($user);
+        }
 
         $message = [
             'access-code-claimed-success' => true,
