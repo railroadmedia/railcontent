@@ -20,7 +20,7 @@ class Reference
     {
         return [
             'type' => $this->type,
-            'of' => [$this->to]
+            'to' => [$this->to]
         ];
     }
 }
