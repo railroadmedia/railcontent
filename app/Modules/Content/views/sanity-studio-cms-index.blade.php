@@ -30,6 +30,6 @@
         </script>
         <script src="{{ mix('platform/js/manifest.js') }}"></script>
         <script src="{{ mix('platform/js/vendor.js') }}"></script>
-        <script src="{{ mix('sanity/js/sanity-app.js') }}"></script>
+        <script src="{{ mix('platform/js/sanity-app.js') }}"></script>
     </body>
 </html>
