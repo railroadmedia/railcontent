@@ -26,11 +26,15 @@ class Song extends BaseSanityModel
         $genreReference = new Reference('reference', [['type' => 'genre']]);
         $soundsliceReference =  new Reference('reference', [['type' => 'soundslice']]);
         $resourceReference = new Reference('reference', [['type' => 'resource']]);
+        $permissionReference = new Reference('reference', [['type' => 'permission']]);
 
         $fields = [
             new Field(FieldType::String, 'title'),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title'], hidden: "({document}) => !document?.title,"),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
+
+            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference),
+
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"),
            // new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'MyCustomScript' ),
