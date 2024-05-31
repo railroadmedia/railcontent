@@ -198,16 +198,15 @@ return [
                         'api-action-tracker-id' => '27555',
                         'sign-up-action-tracker-id' => ''
                     ],
-                //TODO remove this before production
                 'everflow' =>
                     [
-                        'base_link' => 'https://www.mcqn3fgtrk.com',
-                        'nid' => '2809',
-                        'verification_token' => 'Wd6qt9rAYSpV9Fm3QYUtBdnra9p4D0',
-                        'conversion_event_id' => 1, // This comes from Brands/X/Events
-                        'brand_id' => 1,
-                        'sign-up-action-tracker-id' => 2
-                    ]
+                        'base_link' => '',
+                        'nid' => '',
+                        'verification_token' => '',
+                        'conversion_event_id' => '', // This comes from Brands/X/Events
+                        'brand_id' => '',
+                        'sign-up-action-tracker-id' => ''
+                    ],
             ]
         ],
         'beta-testing' => [
@@ -338,7 +337,8 @@ return [
                         'verification_token' => 'Wd6qt9rAYSpV9Fm3QYUtBdnra9p4D0',
                         'conversion_event_id' => 1, // This comes from Brands/X/Events
                         'brand_id' => 1,
-                        'sign-up-action-tracker-id' => 2
+                        'sign-up-action-tracker-id' => 2,
+                        'purchase_event_id' => 9
                     ]
             ]
         ]
@@ -471,7 +471,8 @@ return [
                         'verification_token' => 'ESebdMzhYRuj9e81RThwqbp6SQ8s1W',
                         'conversion_event_id' => 4, // This comes from Brands/X/Events
                         'brand_id' => 2,
-                        'sign-up-action-tracker-id' => 3
+                        'sign-up-action-tracker-id' => 3,
+                        'purchase_event_id' => 10
                     ]
             ]
         ]
@@ -595,7 +596,8 @@ return [
                         'verification_token' => 'teNV6vx5a0OfPlf9MuXheR5PJMNURf',
                         'conversion_event_id' => 6, // This comes from Brands/X/Events
                         'brand_id' => 3,
-                        'sign-up-action-tracker-id' => 5
+                        'sign-up-action-tracker-id' => 5,
+                        'purchase_event_id' => 11
                     ]
             ]
         ]
@@ -671,7 +673,8 @@ return [
                         'verification_token' => 'LvxhwYIlQ32s7j1r2vMZTtJ0afohJz',
                         'conversion_event_id' => 8, // This comes from Brands/X/Events
                         'brand_id' => 4,
-                        'sign-up-action-tracker-id' => 7
+                        'sign-up-action-tracker-id' => 7,
+                        'purchase_event_id' => 12
                     ]
             ]
         ]
