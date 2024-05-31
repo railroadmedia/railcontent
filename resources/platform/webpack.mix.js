@@ -23,7 +23,7 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
     .vue({ version: 3 })
     .react()
-    .js('resources/platform/assets/js/Sanity/components/CustomInput.js', 'public/platform/js')
+    .js('resources/platform/assets/js/SanityStudio/sanity-app.js', 'public/platform/js')
     .sass(
         'resources/platform/assets/css/app.scss',
         'public/platform/css',

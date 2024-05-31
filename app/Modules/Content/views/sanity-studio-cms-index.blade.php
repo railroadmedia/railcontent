@@ -17,50 +17,19 @@
         </style>
     </head>
     <body>
-        <div id="app">
+        <div id="sanity-app">
             
         </div>
-        
         {{-- Scripts --}}
+        <script type="text/javascript">
+            window.SanityConfig = {
+                projectId: "{{ $projectId }}",
+                dataset: "{{ $dataset }}",
+                basePath: "{{ $basePath }}"
+            };
+        </script>
         <script src="{{ mix('platform/js/manifest.js') }}"></script>
         <script src="{{ mix('platform/js/vendor.js') }}"></script>
-        <script src="{{ mix('platform/js/CustomInput.js') }}"></script>
-        <script type="module">
-            import { defineConfig, renderStudio } from "https://esm.sh/sanity@3.38.1-canary.107";
-            import { deskTool } from "https://esm.sh/sanity@3.38.1-canary.107/desk";
-            
-            //Global Component -> Not ideal way to do this
-            const customInput = window.CustomInput;
-
-            const config = defineConfig({
-                plugins: [deskTool()],
-                projectId: "{{$projectId}}",
-                dataset: "{{$dataset}}",
-                basePath: "{{$basePath}}",
-                schema: {
-                    types: [
-                        {
-                            type: "document",
-                            name: "post",
-                            title: "Post",
-                            fields: [
-                                {
-                                    type: "string",
-                                    name: "title",
-                                    title: "Title"
-                                },
-                                {
-                                    name: 'myCustomField',
-                                    title: 'My Custom Field',
-                                    type: 'string',
-                                    inputComponent: customInput
-                                }
-                            ]
-                        }
-                    ]
-                }
-            });
-            renderStudio(document.getElementById("app"), config);
-        </script>
+        <script src="{{ mix('platform/js/sanity-app.js') }}"></script>
     </body>
 </html>

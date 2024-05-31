@@ -16,4 +16,4 @@ const CustomInput = React.forwardRef((props, ref) => {
     );
 });
 
-window.CustomInput = CustomInput;
+export default CustomInput;
