@@ -30,6 +30,7 @@ import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
 import Offline from './vue/Pages/Live/Offline';
 import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
+import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
 
 //App Components
@@ -274,6 +275,7 @@ app.component('AppContainer', AppContainer)
     .component('CoachIndex', CoachIndex)
     .component('Offline', Offline)
     .component('Online', Online)
+    .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
