@@ -40,15 +40,15 @@
                             name: "title",
                             title: "Title"
                         },
-                        {
-                            name: 'myCustomField',
-                            title: 'My Custom Field',
-                            type: 'string',
-                            components: {
-                                input: customInput
-                                // input: MyCustomStringInput
-                            }
-                        },
+                        // {
+                        //     name: 'myCustomField',
+                        //     title: 'My Custom Field',
+                        //     type: 'string',
+                        //     components: {
+                        //         input: customInput
+                        //         // input: MyCustomStringInput
+                        //     }
+                        // },
                     ]
                 }
             ]
