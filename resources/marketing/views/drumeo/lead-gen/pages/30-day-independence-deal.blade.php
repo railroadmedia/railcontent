@@ -265,7 +265,7 @@
 
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">You’ve spent 30 days crushing it on the drums.
                 <br><br>
-                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Independence students to get unlimited drum lessons for a year + lifetime access to 30-Day Independence–
+                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Independence students to get unlimited drum lessons for a year + lifetime access to 30-Day Chops–
                 <br><br>
                 And you only have to pay the difference.
                 <br><br>
@@ -277,14 +277,14 @@
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to 6000+ popular songs you can play with your new skills</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Personalized support for ALL your drumming questions</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> An Advanced Independence follow-up course with El Estepario Siberiano (NEW)</li>
-                <li class="flex items-start     "><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Lifetime access to learn the drums with 30-Day Independence</li>
+                <li class="flex items-start     "><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Lifetime access to learn tasty linear chops on the drums with 30-Day Chops</li>
                 </ul>
             </div>
 
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
                 <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Independence events like this one (we’ll be doing more, promise).
                 <br><br>
-                And we’ll also knock $40 off your membership for being a dedicated 30-Day Independence student (because hey, why not?).
+                You can join Drumeo for 1 year (with all that ^) for just $143.
                 <br><br>
                 <b>But heads up:</b> This offer is only available until June 5, 2024.
                 <br><br>
@@ -322,7 +322,7 @@
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
                         <img class="h-5 ml-2 imgfilter-songs" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                         <p class="mt-2">
-                            Easy access to 3100+ famous drum songs with play-along tools.
+                            Easy access to 6000+ famous drum songs with play-along tools.
                         </p>
                     </div>
                 </div>
@@ -424,7 +424,7 @@
                         ],
                         [
                         'image' => 'marketing/drumeo/products/30-day-independence/asc/card-advanced.png',
-                        'title' => "10 Day Ghost Notes",
+                        'title' => "Advanced Independence",
                         'description' => 'Estepario will push your 4-way limb independence to the next level with challenging patterns in short daily lessons.',
                         'customText' => 'NEW COURSE',
                         ],
