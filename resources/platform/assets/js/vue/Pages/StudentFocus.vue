@@ -52,7 +52,7 @@
   const userStore = useUserStore();
   
   const baseUrl = computed(() => {
-    return `${window.location.origin}/${userStore.brand}/platform/content-type-catalog/`;
+    return `${window.location.origin}/${userStore.brand}/`;
   });
   
   const removeOpacity = (event) => {
@@ -74,8 +74,4 @@
     },
   ];
   </script>
-  
-  <style scoped>
-  /* Add your styles here */
-  </style>
   
