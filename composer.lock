@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bcb06466ee038b934fad1721265c67f",
+    "content-hash": "4d1fafde0a1697b298de55e9cec82c30",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1108,16 +1108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.308.5",
+            "version": "3.308.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "81386b0d0fd18ae8015f279247f714c5d5acb696"
+                "reference": "d119265faba226b3fab1514b6fa27a2986b91453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/81386b0d0fd18ae8015f279247f714c5d5acb696",
-                "reference": "81386b0d0fd18ae8015f279247f714c5d5acb696",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d119265faba226b3fab1514b6fa27a2986b91453",
+                "reference": "d119265faba226b3fab1514b6fa27a2986b91453",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.308.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.308.6"
             },
-            "time": "2024-05-29T18:08:33+00:00"
+            "time": "2024-05-30T18:08:56+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -9210,16 +9210,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.29.0",
+            "version": "1.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "536889f2b340489d328f5ffb7b02bb6b183ddedc"
+                "reference": "fcaefacf2d5c417e928405b71b400d4ce10daaf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/536889f2b340489d328f5ffb7b02bb6b183ddedc",
-                "reference": "536889f2b340489d328f5ffb7b02bb6b183ddedc",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/fcaefacf2d5c417e928405b71b400d4ce10daaf4",
+                "reference": "fcaefacf2d5c417e928405b71b400d4ce10daaf4",
                 "shasum": ""
             },
             "require": {
@@ -9251,9 +9251,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.29.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.29.1"
             },
-            "time": "2024-05-06T12:04:23+00:00"
+            "time": "2024-05-31T08:52:43+00:00"
         },
         {
             "name": "predis/predis",
@@ -10172,16 +10172,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.70",
+            "version": "dev-challenges-redirect-from-banner",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "c7b15d39a56277aba35ba815a0087bc69084d07c"
+                "reference": "5f9f8cb23e5fd427aa148f85e660c87283c66fe1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c7b15d39a56277aba35ba815a0087bc69084d07c",
-                "reference": "c7b15d39a56277aba35ba815a0087bc69084d07c",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/5f9f8cb23e5fd427aa148f85e660c87283c66fe1",
+                "reference": "5f9f8cb23e5fd427aa148f85e660c87283c66fe1",
                 "shasum": ""
             },
             "require": {
@@ -10211,9 +10211,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.70"
+                "source": "https://github.com/railroadmedia/musora-api/tree/challenges-redirect-from-banner"
             },
-            "time": "2024-05-24T16:34:53+00:00"
+            "time": "2024-05-31T14:12:52+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -16944,16 +16944,16 @@
         },
         {
             "name": "composer/class-map-generator",
-            "version": "1.1.1",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/class-map-generator.git",
-                "reference": "8286a62d243312ed99b3eee20d5005c961adb311"
+                "reference": "d90e2bcf9f846562a39c232eeb01fae0ebab3c3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/8286a62d243312ed99b3eee20d5005c961adb311",
-                "reference": "8286a62d243312ed99b3eee20d5005c961adb311",
+                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/d90e2bcf9f846562a39c232eeb01fae0ebab3c3e",
+                "reference": "d90e2bcf9f846562a39c232eeb01fae0ebab3c3e",
                 "shasum": ""
             },
             "require": {
@@ -16997,7 +16997,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/class-map-generator/issues",
-                "source": "https://github.com/composer/class-map-generator/tree/1.1.1"
+                "source": "https://github.com/composer/class-map-generator/tree/1.2.1"
             },
             "funding": [
                 {
@@ -17013,7 +17013,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-15T12:53:41+00:00"
+            "time": "2024-05-31T13:29:08+00:00"
         },
         {
             "name": "composer/pcre",
@@ -20444,11 +20444,18 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
+        },
+        {
+            "package": "railroad/musora-api",
+            "version": "dev-challenges-redirect-from-banner",
+            "alias": "v3.1.70",
+            "alias_normalized": "3.1.70.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20
+        "railroad/doctrine-array-hydrator": 20,
+        "railroad/musora-api": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
