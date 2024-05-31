@@ -93,7 +93,7 @@
                             <a
                                 class="online-atc merch vue-add-to-cart selected-pack2"
                                 href="#"
-                                data-base-url="https://www.drumeo.com/ecommerce/add-to-cart?locked=true"
+                                data-base-url="https://www.drumeo.com/ecommerce/add-to-cart?"
                             >
                                 <button class="join border-none mt-2 mb-4 w-full" style="background: #000;font: 400 20px/1em 'Bebas Neue', sans-serif !important;">
                                     <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
@@ -131,7 +131,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var originalLink2 = 'https://www.drumeo.com/ecommerce/add-to-cart?locked=true';
+            var originalLink2 = 'https://www.drumeo.com/ecommerce/add-to-cart?';
             var selects = document.querySelectorAll('.pack-pick2');
             var priceSpan = document.querySelector('.chosen-variant-price-float');
             var orderButton = document.querySelector('.selected-pack2');
