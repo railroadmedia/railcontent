@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d1fafde0a1697b298de55e9cec82c30",
+    "content-hash": "1bcb06466ee038b934fad1721265c67f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10172,16 +10172,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-challenges-redirect-from-banner",
+            "version": "v3.1.71",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "5f9f8cb23e5fd427aa148f85e660c87283c66fe1"
+                "reference": "24ab339e8d39901cfb8afca04196f244105d5da4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/5f9f8cb23e5fd427aa148f85e660c87283c66fe1",
-                "reference": "5f9f8cb23e5fd427aa148f85e660c87283c66fe1",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/24ab339e8d39901cfb8afca04196f244105d5da4",
+                "reference": "24ab339e8d39901cfb8afca04196f244105d5da4",
                 "shasum": ""
             },
             "require": {
@@ -10211,9 +10211,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/challenges-redirect-from-banner"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.71"
             },
-            "time": "2024-05-31T14:12:52+00:00"
+            "time": "2024-05-31T15:13:27+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -20444,18 +20444,11 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
-        },
-        {
-            "package": "railroad/musora-api",
-            "version": "dev-challenges-redirect-from-banner",
-            "alias": "v3.1.70",
-            "alias_normalized": "3.1.70.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20,
-        "railroad/musora-api": 20
+        "railroad/doctrine-array-hydrator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
