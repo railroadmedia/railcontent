@@ -342,7 +342,7 @@
 
 @section('scripts')
     @include('_partials.components.countdown',[
-    'countdownDate' => '2024-06-03 00:00:00',
+    'countdownDate' => '2024-06-01 00:00:00',
     'promoVersion' => false
     ])
     <script type="application/javascript">
