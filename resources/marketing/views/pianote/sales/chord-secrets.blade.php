@@ -99,7 +99,8 @@
             <h2 class="leading-tight mt-4 mb-1">
                 <s class="opacity-50">$240</s> <strong>$180</strong>
             </h2>
-            <p class="mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.</p>
+            <p class="mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.
+            </p>
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 
 
@@ -196,7 +197,16 @@
                         <br>
                         <a class="join smaller my-3 w-1/2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&locked=true&promo-code=posters-trial">GET Started &raquo;</a>
                         <br>
-                        <em>Free worldwide shipping!</em>
+                        <em>Free worldwide shipping!</em><br>
+                        <strong class="text-musora uppercase">ONLY
+                            <span x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                            LEFT</strong>
                     </p>
 
                 </div>
@@ -320,7 +330,8 @@
                     <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
                         THE <span class="text-musora">EASY</span> WAY<br class="sm:hidden"> TO PLAY<br class="hidden sm:inline"> <span class="relative inline-block">YOUR FAVORITE SONGS.</span>
                     </h1>
-                    <h3 class="leading-tight mt-4 sm:mt-5 mb-2 text-musora">Save 25% on your first year<br class="sm:hidden"> + get $615 in free bonuses.</h3>
+                    <h3 class="leading-tight mt-4 sm:mt-5 mb-2 text-musora">Save 25% on your first year<br class="sm:hidden"> + get $615 in free bonuses.
+                    </h3>
                     <a class="join musora my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                         GET STARTED
                     </a>
@@ -456,7 +467,17 @@
                 <h2 class="leading-tight mt-6 mb-1">
                     <s class="opacity-50">$240</s> <strong>$180</strong>
                 </h2>
-                <p class="mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.</p>
+                <p class="mb-4 sm:mb-6"><strong class="text-musora">Save 25%</strong> for your first year. Renews at $240/yr.
+                    <br>
+                    <strong class="text-musora uppercase">ONLY
+                        <span x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                        LEFT</strong></p>
                 <a class="join musora mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                     GET STARTED
                 </a>
@@ -467,6 +488,10 @@
     </div>
 @endsection
 @section('scripts')
+    @include('_partials.components.countdown',[
+    'countdownDate' => '2024-06-03 00:00:00',
+    'promoVersion' => false
+    ])
 <script type="application/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         var stickyBar = document.querySelector('.promo-banner');

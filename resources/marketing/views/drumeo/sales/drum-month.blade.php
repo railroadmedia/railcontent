@@ -64,12 +64,23 @@
                 Get 1 year of unlimited drum lessons<br class="hidden sm:inline">
                 <strong class="text-[#0BDBB6]">+ $794.95 in FREE bonuses.</strong></h1>
 
-            <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
+            <p class="text-sm leading-normal sm:tracking-widest ">
                 <i class="fas fa-check text-[#0BDBB6]"></i> STICKBAG
                 <i class="fas fa-check ml-3 sm:ml-5 text-[#0BDBB6]"></i> DRUMSTICKS
                 <br class="lg:hidden">
                 <i class="fas fa-check lg:ml-5 text-[#0BDBB6]"></i> DRUM KEY
                 <i class="fas fa-check ml-3 sm:ml-5 text-[#0BDBB6]"></i> RUDIMENTS BOOK
+            </p>
+            <p class="mt-3 mb-5 lg:mb-7">
+                <strong class="text-musora uppercase">ONLY
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                    LEFT</strong>
             </p>
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
                 <a class="sm:mx-0.5 w-full sm:w-56 join text-black smaller sm:order-1 mb-2 sm:mb-0 anchor-slide"
@@ -136,6 +147,16 @@
             @endcomponent
         </div>
     </section>
+    <div class="sticky-trigger block"></div>
+    <a href="#customize-anchor" style="background: linear-gradient(to bottom, #FFAC00, #FF5C00);"
+        class="promo-banner flex items-center justify-center -mt-10 py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide">
+        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+        <h3 class="inline-block font-bebas mx-0 pr-3">* FREE BONUSES *</h3>
+        <p class="inline-block text-xs mx-0 leading-tight">
+            <strong class="font-black">SAVE 17%</strong> + get 7 free<br>
+            bonuses (worth $794)
+        </p>
+    </a>
 @endsection
 
 @section('final')
@@ -296,7 +317,19 @@
                 @endforeach
             </div>
             <h2 class="leading-tight mt-6 mb-1"><s class="opacity-50">$1034.95</s> <strong>$200</strong></h2>
-            <p class="text-sm mb-4 sm:mb-6"><strong class="text-[#0BDBB6]">Save 17%</strong> for your first year. Renews at $240/yr.</p>
+            <p class="mb-4 sm:mb-6"><strong class="text-[#0BDBB6]">Save 17%</strong> for your first year. Renews at $240/yr.
+
+                <br>
+                <strong class="text-musora uppercase">ONLY
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                    LEFT</strong>
+            </p>
             <a role="link" aria-label=" Get Started" class="join  text-black  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="background-color:#0BDBB6;padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special">
                 GET Started »
             </a>
@@ -305,6 +338,31 @@
                 <p><u><em>Trying to avoid VAT fees on physical items? Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital lesson packs.</em></u></p></a>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    @include('_partials.components.countdown',[
+    'countdownDate' => '2024-06-03 00:00:00',
+    'promoVersion' => false
+    ])
+    <script type="application/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var stickyBar = document.querySelector('.promo-banner');
+            window.addEventListener('scroll', function () {
+                var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
+                var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
+                if (window.scrollY > (unstickTrigger - 115)) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < stickTrigger - 115) {
+                    stickyBar.classList.remove('fixed', 'mt-0');
+                }
+                if (window.scrollY < unstickTrigger - 115 && window.scrollY > stickTrigger - 115) {
+                    stickyBar.classList.add('fixed', 'mt-0');
+                }
+            });
+        });
+    </script>
 @endsection
 
 
