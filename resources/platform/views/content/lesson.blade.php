@@ -299,7 +299,7 @@
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
-    
+
     <lesson-playback
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
@@ -314,6 +314,12 @@
         :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"
     >
     </lesson-playback>
+
+    @include('partials.bladesora.members.content._lesson-complete', [
+        'themeColor' => $brand,
+        'thisLessonJson' => $thisLessonJson,
+        'nextLessonJson' => !empty($nextChild) ? $nextLessonJson : null,
+    ])
 
 @endsection
 
