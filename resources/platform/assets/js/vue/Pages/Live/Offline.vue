@@ -41,7 +41,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ContentSchedule from '../../vuesora/views/schedule/Schedule';
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
     headerPageType: {
@@ -86,8 +86,4 @@ const breadcrumbs = [
 const hasScheduleEvents = computed(() =>{
     return props.scheduleEvents.length > 0;
 });
-
-onMounted(()=> {
-    console.log(props.scheduleEvents)
-})
 </script>
