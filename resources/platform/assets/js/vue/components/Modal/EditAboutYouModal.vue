@@ -6,7 +6,7 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Display Name</h2>
+            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">About You</h2>
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 

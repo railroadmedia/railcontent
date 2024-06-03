@@ -54,7 +54,7 @@
                                 "brand" => $brand,
                                 "type" => "text",
                                 "inputId" => "drumSet",
-                                "inputName" => "drums",
+                                "inputName" => "drums_gear_set_brands",
                                 "inputLabel" => "Drum Set",
                                 "inputValue" => "",
                                 "inputErrors" => [],

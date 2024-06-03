@@ -174,6 +174,8 @@
                                     <p>{{ userStickBrands }}</p>    
                                 </div>
                             </div>
+                            <!-- Profile Picture Name Modal -->
+                            <EditDrumGearModal v-if="showDrumGearModal" :country-list="countryList" @onCloseAboutYouModal="handleShowDrumGearModal" />
 
                             <!-- Piano -->
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
@@ -384,6 +386,10 @@
     import EditDisplayNameModal from "../../components/Modal/EditDisplayNameModal.vue";
     import ImageUploader from "../../components/ImageUploader/ImageUploader.vue";
     import EditAboutYouModal from "../../components/Modal/EditAboutYouModal.vue";
+    import EditDrumGearModal from "../../components/Modal/EditDrumGearModal.vue";
+    import EditPianoGearModal from "../../components/Modal/EditPianoGearModal.vue";
+    import EditGuitarGearModal from "../../components/Modal/EditGuitarGearModal.vue";
+    import EditSingingGearModal from "../../components/Modal/EditSingingGearModal.vue";
 
     //Pinia
     const userStore = useUserStore();

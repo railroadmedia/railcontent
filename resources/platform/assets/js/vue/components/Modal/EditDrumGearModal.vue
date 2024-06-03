@@ -6,21 +6,32 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Display Name</h2>
+            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Drum Gear</h2>
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
                 @submit.prevent="submitDisplayNameForm"
             >
-                <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-[20px]">
+                <MuSelect
+                    inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
+                    id="drummingSince"
+                    input-name="drums_playing_since_year"
+                    label="Drumming Since"
+                    :options="yearValues"
+                    :initial-value="userDrummingSince"
+                    v-model="selectedYear"
+                    placeholder="Drumming Since"
+                />
+
+                <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-8">
                     <InputLabel 
                         inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
                         inputType="text"
-                        id="firstName" 
-                        inputName="first_name" 
-                        labelValue="First Name"
+                        id="drumSet" 
+                        inputName="drums" 
+                        labelValue="Drum Set"
                         placeholder="Enter First Name" 
-                        :initial-value="userFirstName"
+                        :initial-value="userDrumBrands"
                         :inputErrors="[]" 
                         @onChange="handleFirstName" 
                     />
@@ -29,43 +40,39 @@
                         inputType="text"
                         id="lastName" 
                         inputName="last_name" 
-                        labelValue="Last Name"
+                        labelValue="Cymbals"
                         placeholder="Enter Last Name" 
-                        :initial-value="userLastName"
+                        :initial-value="userCymbalBrands"
                         :inputErrors="[]" 
                         @onChange="handleLastName" 
                     />
-                    <MuSelect
+                    <InputLabel 
                         inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        id="profileCountry"
-                        label="Country"
-                        :options="countryList"
-                        :initial-value="userCountry"
-                        v-model="selectedCountry"
-                        placeholder="Choose a Country"
+                        inputType="text"
+                        id="firstName" 
+                        inputName="first_name" 
+                        labelValue="Hardware"
+                        placeholder="Enter First Name" 
+                        :initial-value="userHardwareBrands"
+                        :inputErrors="[]" 
+                        @onChange="handleFirstName" 
                     />
-                    <MuDateInput
+                    <InputLabel 
                         inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        id="profileBirthday"
-                        label="Birthday"
-                        :initial-value="userBirthday"
-                        v-model="selectedBirthday"
+                        inputType="text"
+                        id="lastName" 
+                        inputName="last_name" 
+                        labelValue="Drum Sticks"
+                        placeholder="Enter Last Name" 
+                        :initial-value="userStickBrands"
+                        :inputErrors="[]" 
+                        @onChange="handleLastName" 
                     />
                 </div>
-                <MuTextarea
-                    inputOverride="tw-w-full tw-text-[#00101D] tw-mb-6" 
-                    id="profileBio"
-                    label="Biography"
-                    :initial-value="userBiography"
-                    v-model="selectedCountry"
-                    placeholder="Enter Biography"
-                />
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button
-                        :disabled="!formData.first_name.length" 
+                    <button   
                         type="submit"
                         class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
-                        :class="!formData.first_name.length ? 'tw-opacity-50' : ''"
                     >
                         Save
                     </button>
@@ -81,7 +88,7 @@
     </InfoModal>
 </template>
 <script setup>
-    import { ref, onBeforeMount } from 'vue';
+    import { ref, onBeforeMount, computed } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
     import InputLabel from "../InputLabel/InputLabel.vue";
     import MuSelect from "../../components/FormInputs/MuSelect.vue"
@@ -93,26 +100,32 @@
     const userStore = useUserStore();
     const { 
         userId, 
-        userFirstName,
-        userLastName,
-        userCountry,
-        userBirthday,
-        userBiography
+        userDrummingSince,
+        userDrumBrands,
+        userCymbalBrands,
+        userHardwareBrands,
+        userStickBrands,
     } = storeToRefs(userStore);
 
     //Props
     const props = defineProps({
-        countryList: Array,
+        
     });
 
     //Refs
     const emit = defineEmits(['onCloseAboutYouModal']);
-    const selectedCountry = ref('');
+    const selectedYear = ref('');
 
     const formData = ref({
-        first_name: userFirstName.value || '', 
-        last_name: userLastName.value || '',
-        country: userCountry.value || '',
+        drums_playing_since_year: selectedYear.value || '',
+        
+        
+    });
+
+    //Computed Values
+    const yearValues = computed(() => {
+        const currentYear = new Date().getFullYear();
+        return ["", ...Array(currentYear - 1899).fill().map((_, i) => currentYear - i)];
     });
 
     //Methods

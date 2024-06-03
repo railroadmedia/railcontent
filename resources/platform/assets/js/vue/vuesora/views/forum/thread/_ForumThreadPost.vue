@@ -1,5 +1,6 @@
 <template>
-    <div class="tw-flex tw-relative tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
+    <div
+        class="tw-flex tw-relative tw-flex-col tw-py-5 tw-px-4 sm:tw-px-14 tw-mb-4 tw-bg-white dark:tw-bg-[#081825] tw-rounded-2xl tw-overflow-hidden">
         <!-- Post Anchor -->
         <a :id="'post' + post.id" class="tw-top-[-68px] tw-absolute"></a>
 
@@ -7,27 +8,27 @@
         <div class="tw-flex tw-items-center">
             <!-- Avatar -->
             <div class="tw-w-20 tw-h-20 tw-mr-4">
-                <div class="user-avatar tw-w-20 tw-h-20"
-                    :class="[avatarClassObject, brand]">
-                    <a :href="post.authorProfileUrl"
-                        class="tw-no-underline tw-block tw-h-full tw-w-full"
-                    >
+                <div class="user-avatar tw-w-20 tw-h-20" :class="[avatarClassObject, brand]">
+                    <a :href="post.authorProfileUrl" class="tw-no-underline tw-block tw-h-full tw-w-full">
                         <img class="tw-rounded-full" :src="post.authorAvatar">
                     </a>
                 </div>
             </div>
             <div class="tw-flex tw-flex-col tw-w-9/12 sm:tw-w-full">
                 <!-- Name -->
-                <h2 class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
+                <h2
+                    class="tw-mb-1 tw-text-2xl tw-font-bold tw-truncate tw-w-full sm:tw-break-all sm:tw-whitespace-normal tw-text-[#00101D] dark:tw-text-white">
                     {{ post.authorUsername }}
                 </h2>
                 <div class="tw-flex tw-items-center tw-flex-wrap">
-                    <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-order-3 md:tw-order-2 tw-mr-auto">
+                    <div
+                        class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue tw-order-3 md:tw-order-2 tw-mr-auto">
                         <span>{{ post.authorTotalPosts }} Posts</span> -
                         <span>{{ userExpValue }}</span> -
                         <span>Level {{ post.progressLevel }}</span>
                     </div>
-                    <div class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last md:tw-justify-end tw-leading-none">
+                    <div
+                        class="tw-text-xl tw-text-[#00101D] dark:tw-text-white tw-uppercase tw-font-bebas-neue md:tw-order-last md:tw-justify-end tw-leading-none">
                         <span class="tw-mb-1 md:tw-mb-4">{{ post.createdOn }}</span>
                         <span>&nbsp;- #{{ postNumber }}</span>
                     </div>
@@ -39,53 +40,26 @@
         <div class="tw-flex tw-flex-col">
             <!-- Body -->
             <div class="tw-flex tw-flex-row body tw-mt-6 tw-mb-4 tw-pb-6">
-                <div
-                    v-if="!editing"
-                    class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
-                    :class="['post-body', brand]"
-                >
-                    <div v-html="post.postBody"
-                        :id="'post-body'+post.id"
-                        class="tw-text-base"
-                        :ref="'post-body'+post.id"
-                    ></div>
+                <div v-if="!editing" class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
+                    :class="['post-body', brand]">
+                    <div v-html="post.postBody" :id="'post-body' + post.id" class="tw-text-base"
+                        :ref="'post-body' + post.id"></div>
                 </div>
-                <div
-                    v-if="editing"
-                    class="tw-flex tw-flex-col tw-mb-1 tw-w-full"
-                >
-                    <form
-                        :action="updatePostRoute"
-                        method="post"
-                    >
-                        <input
-                            type="hidden"
-                            name="_method"
-                            value="patch"
-                        >
-                        <input
-                            type="hidden"
-                            name="brand"
-                            :value="this.brand"
-                        >
-                        <text-editor
-                            :initial-value="post.postBody"
-                            :hasImageUploader="true"
-                        />
+                <div v-if="editing" class="tw-flex tw-flex-col tw-mb-1 tw-w-full">
+                    <form :action="updatePostRoute" method="post">
+                        <input type="hidden" name="_method" value="patch">
+                        <input type="hidden" name="brand" :value="this.brand">
+                        <text-editor :initial-value="post.postBody" :hasImageUploader="true" />
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">
-                            <a
-                                class="tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-mr-2 tw-w-full sm:tw-w-auto"
-                                @click="editing = false"
-                            >
+                            <a class="tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-mr-2 tw-w-full sm:tw-w-auto"
+                                @click="editing = false">
                                 Cancel
                             </a>
 
-                            <button
-                                class="tw-btn-primary tw-w-full sm:tw-w-auto"
+                            <button class="tw-btn-primary tw-w-full sm:tw-w-auto"
                                 :class="`tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
-                                type="submit"
-                            >
+                                type="submit">
                                 Save Post
                             </button>
                         </div>
@@ -97,35 +71,26 @@
             <div class="tw-flex tw-flex-row tw-flex-wrap">
                 <div class="tw-flex tw-flex-col mb-1">
                     <div class="tw-flex tw-flex-row tw-items-center">
-                        <p
-                            class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                            :class="post.isLiked ? themeTextClass : 'text-grey-3'"
-                            @click="likePost"
-                        >
-                            <musora-icon :icon-name="post.isLiked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mb-1" />
+                        <p class="tw-text-lg tw-mr-1 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                            :class="post.isLiked ? themeTextClass : 'text-grey-3'" @click="likePost">
+                            <musora-icon :icon-name="post.isLiked ? 'thumb-like-filled' : 'thumb-like'"
+                                class="tw-w-6 tw-h-6 tw-mb-1" />
                         </p>
-                        <p
-                            class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
+                        <p class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"
                             :class="post.isLiked ? themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
-                            :data-open-modal="openModalString"
-                            @click="openLikes"
-                        >
-                        {{ post.totalLikes }}
+                            :data-open-modal="openModalString" @click="openLikes">
+                            {{ post.totalLikes }}
                         </p>
 
-                        <p
-                            v-if="!post.isLocked"
+                        <p v-if="!post.isLocked"
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white tw-mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect"
-                            @click="replyToPost"
-                        >
-                        Reply
+                            @click="replyToPost">
+                            Reply
                         </p>
                         <button
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white mr-3 tw-uppercase dense tw-cursor-pointer reply-like noselect tw-border-none tw-bg-transparent tw-p-0"
-                            data-open-modal="sharePostModal"
-                            title="Share this post"
-                            @click="$emit('updateCurrentPostID', post.id)"
-                        >
+                            data-open-modal="sharePostModal" title="Share this post"
+                            @click="$emit('updateCurrentPostID', post.id)">
                             <i class="fas fa-share"></i>
                             Share
                         </button>
@@ -133,24 +98,18 @@
                 </div>
                 <div class="tw-flex tw-flex-col mb-1 sm:tw-ml-auto">
                     <div class="tw-flex tw-flex-row tw-items-center">
-                        <p
-                            class="tw-text-lg tw-text-[#00101D] dark:tw-text-white sm:ml-3 tw-uppercase dense tw-cursor-pointer"
-                            @click="reportPost"
-                        >
+                        <p class="tw-text-lg tw-text-[#00101D] dark:tw-text-white sm:ml-3 tw-uppercase dense tw-cursor-pointer"
+                            @click="reportPost">
                             Report
                         </p>
-                        <p
-                            v-if="!(currentPage === 1 && index === 0) && canEdit"
+                        <p v-if="!(currentPage === 1 && index === 0) && canEdit"
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                            @click="deletePost"
-                        >
+                            @click="deletePost">
                             Delete
                         </p>
-                        <p
-                            v-if="canEdit"
+                        <p v-if="canEdit"
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
-                            @click="editing = !editing"
-                        >
+                            @click="editing = !editing">
                             Edit
                         </p>
                     </div>
@@ -159,11 +118,9 @@
 
             <!-- Signature -->
             <div class="tw-flex tw-flex-row body">
-                <div
-                    v-if="post.authorSignature && !signaturesHidden"
+                <div v-if="post.authorSignature && !signaturesHidden"
                     class="forumSignature tw-w-full post-body bt-grey-1-1 dark:tw-border-[#445F74] tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-pt-4 tw-mt-0"
-                    v-html="post.authorSignature"
-                >
+                    v-html="post.authorSignature">
                 </div>
             </div>
         </div>
@@ -172,7 +129,6 @@
 </template>
 <script>
 import TextEditor from '../../../components/TextEditor/TextEditor.vue';
-import Toasts from '../../../assets/js/classes/toasts';
 import ForumService from '../../../assets/js/services/forums';
 import ThemeClasses from '../../../mixins/ThemeClasses';
 import Utils from '../../../assets/js/classes/utils';
@@ -284,40 +240,40 @@ export default {
     },
     methods: {
         convertVideoLinksToEmbeds(postContent) {
-          const vm = this;
-          var temp = document.createElement('div');
+            const vm = this;
+            var temp = document.createElement('div');
 
-          // set the content with the string
-          temp.innerHTML = postContent;
+            // set the content with the string
+            temp.innerHTML = postContent;
 
-          Array.from(temp.querySelectorAll('a')).slice(0, 5).forEach(function(ele) {
-            var url = ele.getAttribute('href');
+            Array.from(temp.querySelectorAll('a')).slice(0, 5).forEach(function (ele) {
+                var url = ele.getAttribute('href');
 
-            // max of 5 embeds per post
-            if (!url.includes('yout')) {
-                return;
-            }
+                // max of 5 embeds per post
+                if (!url.includes('yout')) {
+                    return;
+                }
 
-            var ytId = vm.getYouTubeId(url);
+                var ytId = vm.getYouTubeId(url);
 
-            var youtubeIframeHtml = '<iframe width="720" ' +
-                'height="480" src="https://www.youtube-nocookie.com/embed/' +
-                 ytId + '" ' +
-                'title="YouTube video player" frameborder="0" ' +
-                'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
-                'allowfullscreen></iframe>';
+                var youtubeIframeHtml = '<iframe width="720" ' +
+                    'height="480" src="https://www.youtube-nocookie.com/embed/' +
+                    ytId + '" ' +
+                    'title="YouTube video player" frameborder="0" ' +
+                    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+                    'allowfullscreen></iframe>';
 
-            var iframeDiv = document.createElement('div');
-            iframeDiv.classList.add('youtube-video-wrapper');
+                var iframeDiv = document.createElement('div');
+                iframeDiv.classList.add('youtube-video-wrapper');
 
-            iframeDiv.innerHTML = youtubeIframeHtml;
-            ele.parentNode.insertBefore(iframeDiv, ele.nextSibling);
-            ele.remove();
+                iframeDiv.innerHTML = youtubeIframeHtml;
+                ele.parentNode.insertBefore(iframeDiv, ele.nextSibling);
+                ele.remove();
 
-            // console.log(vm.ytEmbedCount);
-          });
+                // console.log(vm.ytEmbedCount);
+            });
 
-          return temp.innerHTML;
+            return temp.innerHTML;
         },
 
         getYouTubeId(url) {
@@ -344,70 +300,66 @@ export default {
         reportPost() {
             const vm = this;
 
-            Toasts.confirm({
+            window.showconfirmationmodal({
                 title: 'Click report to send a notification to a moderator.',
-                submitButton: {
-                    text: '<span class="bg-error text-white">Report</span>',
-                    callback: () => {
+                subtitle: 'This cannot be undone.',
+                callbacks: {
+                    submit: () => {
                         ForumService.reportForumPost(vm.post.id, vm.brand)
                             .then((resolved) => {
-                                Toasts.push({
-                                    icon: 'happy',
-                                    title: 'GOOD EYE!',
-                                    themeColor: this.themeColor,
-                                    message: 'We will look into this post.',
+                                window.shownotification({
+                                    icon: 'check',
+                                    text: 'Good eye! We will look into this post.'
                                 });
                             });
                     },
-                },
-                cancelButton: {
-                    text: '<span class="bg-grey-3 inverted text-grey-3">Cancel</span>',
-                },
+                    cancel: () => {
+                        console.log('Report post cancelled');
+                    }
+                }
             });
         },
 
         hidePost() {
             const vm = this;
 
-            Toasts.confirm({
+            window.showconfirmationmodal({
                 title: 'Click report to send a notification to a moderator.',
-                submitButton: {
-                    text: '<span class="bg-warning text-white">Report</span>',
-                    callback: () => {
+                subtitle: 'This cannot be undone.',
+                callbacks: {
+                    submit: () => {
                         this.$emit('hidePost', {
                             id: vm.post.id,
                         });
 
-                        Toasts.push({
-                            icon: 'happy',
-                            title: 'GOOD EYE!',
-                            themeColor: this.themeColor,
-                            message: 'We have hidden this post.',
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Good eye! We have hidden this post.'
                         });
                     },
-                },
-                cancelButton: {
-                    text: '<span class="bg-grey-3 inverted text-grey-3">Cancel</span>',
-                },
+                    cancel: () => {
+                        console.log('Report post cancelled');
+                    }
+                }
             });
         },
 
         deletePost() {
             const vm = this;
 
-            Toasts.confirm({
+            window.showconfirmationmodal({
                 title: 'Are you sure you want to delete this post?',
-                submitButton: {
-                    text: '<span class="bg-error text-white">Delete</span>',
-                    callback: () => {
+                subtitle: 'This cannot be undone.',
+                callbacks: {
+                    submit: () => {
                         this.$emit('deletePost', {
                             id: this.post.id,
                         });
                     },
-                },
-                cancelButton: {
-                    text: '<span class="bg-grey-3 inverted text-grey-3">Cancel</span>',
-                },
+                    cancel: () => {
+                        console.log('Delete post cancelled');
+                    }
+                }
             });
         },
 
@@ -428,14 +380,14 @@ export default {
     },
     mounted() {
         //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
-        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) {
+        if (this.$refs['post-body' + this.post.id].getElementsByTagName('blockquote').length > 0) {
             //Get Top Quote
-            let topQuote = this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0];
+            let topQuote = this.$refs['post-body' + this.post.id].getElementsByTagName('blockquote')[0];
             //Get Quote Count
             let quoteCount = topQuote.getElementsByTagName('blockquote').length + 1; //Only Counts blockquotes within first blockquote element
 
             //Add ShowHide Button if there are multiple quotes
-            if(topQuote.querySelectorAll('blockquote')[0]) {
+            if (topQuote.querySelectorAll('blockquote')[0]) {
                 //Hide Multiple Quotes By Default
                 topQuote.querySelectorAll('blockquote')[0].classList.add('tw-hidden');
 
@@ -448,23 +400,23 @@ export default {
                             tabindex="0"
                             onClick="hideShow(${this.post.id})"
                         >
-                            ${ quoteCount } Replies
+                            ${quoteCount} Replies
                             <i class="fa-solid tw-ml-1.5 tw-text-sm fa-chevrons-down" aria-hidden="true"></i>
                         </div>
                     </div>
                 `;
 
                 //Add Button
-                if(topQuote.querySelector('.quote-heading')) {
-                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML );
+                if (topQuote.querySelector('.quote-heading')) {
+                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML);
                 } else {
-                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML );
+                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML);
                 }
 
                 //HideShow Function
-                window.hideShow = function(postID) {
-                    let childQuote = document.getElementById('post-body'+postID).getElementsByTagName('blockquote')[0].querySelectorAll('blockquote')[0];
-                    let QuoteToggleIcon = document.getElementById('post-body'+postID).getElementsByTagName('blockquote')[0].querySelector('.fa-chevrons-down');
+                window.hideShow = function (postID) {
+                    let childQuote = document.getElementById('post-body' + postID).getElementsByTagName('blockquote')[0].querySelectorAll('blockquote')[0];
+                    let QuoteToggleIcon = document.getElementById('post-body' + postID).getElementsByTagName('blockquote')[0].querySelector('.fa-chevrons-down');
                     //toggle classes
                     childQuote.classList.toggle('tw-hidden');
                     QuoteToggleIcon.classList.toggle('tw-rotate-180')
@@ -476,20 +428,27 @@ export default {
 };
 </script>
 <style>
-    /* Post Body Specific Styles */
-    .post-body ul,
-    .post-body ol {
-        list-style: revert;
-        padding-left: 40px;
-        margin: 15px 0;
-    }
-    .post-body p:empty { display: none; }
-    .post-body blockquote {
-        margin: 15px 0;
-        width: 100%;
-    }
-    .forumSignature p {
-        font-size: 1rem; /* 16px */
-        line-height: 1.5rem; /* 24px */
-    }
+/* Post Body Specific Styles */
+.post-body ul,
+.post-body ol {
+    list-style: revert;
+    padding-left: 40px;
+    margin: 15px 0;
+}
+
+.post-body p:empty {
+    display: none;
+}
+
+.post-body blockquote {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.forumSignature p {
+    font-size: 1rem;
+    /* 16px */
+    line-height: 1.5rem;
+    /* 24px */
+}
 </style>

@@ -68,7 +68,6 @@
 
 <script>
 import UserService from '../../assets/js/services/user';
-import Toasts from '../../assets/js/classes/toasts';
 //Form Components
 import TextareaInput from '../FormComponents/TextareaInput.vue'
 import FileInput from '../FormComponents/FileInput.vue'
@@ -382,11 +381,9 @@ export default {
             })
                 .then((resolved) => {
                     if (resolved) {
-                        Toasts.push({
-                            icon: 'happy',
-                            title: 'Woohoo!',
-                            themeColor: this.themeColor,
-                            message: this.successMessage,
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Woohoo! ' + this.successMessage
                         });
 
                         this.$emit('formSuccess');
@@ -399,12 +396,9 @@ export default {
                             attachments: [],
                         }
                     } else {
-                        // console.log('nope!')
-                        Toasts.push({
-                            icon: 'sad',
-                            title: 'Whoops',
-                            themeColor: this.themeColor,
-                            message: 'Your form was not sent.',
+                        window.shownotification({
+                            icon: 'error',
+                            text: 'Whoops. Your form was not sent.'
                         });
                     }
                 })

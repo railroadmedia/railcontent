@@ -117,7 +117,6 @@ import TextEditor from '../../components/TextEditor/TextEditor.vue';
 import CommentService from '../../assets/js/services/comments';
 import CommentPost from './_CommentPost.vue';
 import CommentLikesModal from './_CommentLikesModal.vue';
-import Toasts from '../../assets/js/classes/toasts';
 import Utils from '../../assets/js/classes/utils';
 import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
@@ -311,11 +310,9 @@ export default {
                             this.commentInterface = '';
                             this.$refs.textEditor.currentValue = '';
 
-                            Toasts.push({
-                                icon: 'happy',
-                                title: 'Woohoo!',
-                                themeColor: this.themeColor,
-                                message: `Your input is what makes ${Utils.toTitleCase(this.brand)} so great, thanks for commenting.`,
+                            window.shownotification({
+                                icon: 'check',
+                                text: `Woohoo! Your input is what makes ${Utils.toTitleCase(this.brand)} so great, thanks for commenting.`
                             });
 
                             this.comments.splice(0, 0, thisComment);

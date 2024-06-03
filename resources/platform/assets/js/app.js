@@ -32,7 +32,12 @@ import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+import Offline from './vue/Pages/Live/Offline';
+import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
+import StudentFocus from './vue/Pages/StudentFocus';
+import Shows from './vue/Pages/Shows';
+import GuitareoLessons from './vue/Pages/GuitareoLessons';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -55,7 +60,6 @@ import DeleteAccountModal from './vue/components/Modal/DeleteAccountModal';
 import Forms from './vue/vuesora/assets/js/classes/forms';
 import ContentService from './vue/vuesora/assets/js/services/content';
 import UserService from './vue/vuesora/assets/js/services/user';
-import Toasts from './vue/vuesora/assets/js/classes/toasts';
 import ProgressTracker from './vue/vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
@@ -293,6 +297,11 @@ app.component('AppContainer', AppContainer)
     .component('Payments', Payments)
     .component('NotificationSettings', NotificationSettings)
     .component('Details', Details)
+    .component('Offline', Offline)
+    .component('Online', Online)
+    .component('StudentFocus', StudentFocus)
+    .component('Shows', Shows)
+    .component('GuitareoLessons', GuitareoLessons)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -343,6 +352,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('Forums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/Forums.vue'
+        )
+    ))
+
     .component('ForumThreadsTable', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
@@ -354,6 +370,20 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "forum-thread-component" */
             './vue/vuesora/views/forum/thread/ForumThread.vue'
+        )
+    ))
+
+    .component('ForumThreads', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/vuesora/views/forum/thread/ForumThreads.vue'
+        )
+    ))
+
+    .component('LatestForums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/LatestForums.vue'
         )
     ))
 
@@ -516,13 +546,11 @@ function showLevelUpData() {
     if (levelUpData) {
         setTimeout(() => {
             const newRank = levelUpData.dataset['newRank'];
-
-            Toasts.push({
+            window.shownotification({
                 icon: 'xp',
-                title: 'Congratulations!',
-                themeColor: 'drumeo',
-                message: 'You have earned the level of ' + newRank + '!'
+                text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
+
         }, 1000);
     }
 }
