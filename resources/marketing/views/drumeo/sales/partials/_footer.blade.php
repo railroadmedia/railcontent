@@ -99,3 +99,4 @@
     </div>
 </footer>
 @include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
+@include("drumeo.lead-gen.partials.everflow-product-tracker")
