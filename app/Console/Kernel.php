@@ -10,6 +10,7 @@ use App\Console\Commands\CheckCommentsUrl;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
+use App\Console\Commands\GenerateDailyStats;
 use App\Console\Commands\MigrateOldGuitareoDeletedSongs;
 use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\RemoveRailTrackerData;
@@ -82,7 +83,8 @@ class Kernel extends ConsoleKernel
         AssignUnassignedHelpScoutCustomersToMentors::class,
         SyncShopifyProductInventoryToProductsTable::class,
         SetUserNeedsLogout::class,
-        CheckCommentsUrl::class
+        CheckCommentsUrl::class,
+        GenerateDailyStats::class,
     ];
 
     /**
