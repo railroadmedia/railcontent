@@ -382,6 +382,7 @@ const getActiveTab = computed(() => {
 const getSortOptions = computed(() => {
     return showGroupBy.value ?
         [
+            { value: '-popularity', name: 'Most Popular', icon: 'sort-popularity', },
             { value: 'slug', name: 'Name: A to Z', icon: 'sort-name-asc', },
             { value: '-slug', name: 'Name: Z to A', icon: 'sort-name-desc', },
         ]
@@ -427,7 +428,6 @@ onBeforeMount(() => {
         endpoint: props.endpoint,
         searchEndpointUrl: props.searchEndpointUrl,
         sortOptions: props.sortOptions,
-        defaultSort: props.defaultSort,
     })
     collectionStore.getURLParams();
 })
