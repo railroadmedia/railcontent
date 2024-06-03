@@ -1,10 +1,8 @@
 import { ref } from 'vue';
-import { useUserStore } from "../../stores/user";
 import ContentService from '../vuesora/assets/js/services/content';
 
 export function useResetProgress() {
     const loading = ref(false);
-    const userStore = useUserStore();
 
     const resetProgress = (contentId, iconClassRef, showConfirmation = true, arrayRef) => {
         const proceedWithReset = () => {
@@ -36,15 +34,16 @@ export function useResetProgress() {
         };
 
         if (showConfirmation) {
-            Toasts.confirm({
+            window.showconfirmationmodal({
                 title: 'Hold your horses… This will reset your progress, are you sure about this?',
-                submitButton: {
-                    text: `<span class="bg-${userStore.brand} text-white short">I want to start over</span>`,
-                    callback: proceedWithReset,
-                },
-                cancelButton: {
-                    text: '<span class="bg-grey-3 inverted text-grey-3 short">Get me out of here</span>',
-                },
+                callbacks: {
+                    submit: () => {
+                        proceedWithReset();
+                    },
+                    cancel: () => {
+                        console.log('Reset progress cancelled');
+                    }
+                }
             });
         } else {
             proceedWithReset();
