@@ -100,11 +100,7 @@ const props = defineProps({
         type: String,
         default: '',
     },
-    inviteCheckUrl: {
-        type: String,
-        default: '',
-    },
-    inviteSentUrl: {
+    inviteUrl: {
         type: String,
         default: '',
     },
@@ -183,35 +179,17 @@ const sendPass = (event) => {
     };
 
     if(email.match(emailFormat)){
-        // fetch(props.inviteCheckUrl, {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        // .then((res) => {
-        //     //use email value for the modal
-        //     document.getElementById('modalEmail').innerHTML = email.value;
-        //     //blank input
-        //     document.getElementById('email').value = '';
-        //     //open modal
-        //     window.openModal('confirmationModal');
-        // })
-        // .then((res) => {
-        //     fetch('{{ url()->route('musora-api.v1.referral.invite_sent') }}', {
-        //         method: 'POST',
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({
-        //             _token: '{{ csrf_token() }}',
-        //             brand,
-        //         }),
-        //     });
-        // })
+        fetch(props.inviteUrl, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then((res) => {
+            isModalOpen.value = true;
+        })
 
-        isModalOpen.value = true;
     }
     else {
         emailError.value = true;
