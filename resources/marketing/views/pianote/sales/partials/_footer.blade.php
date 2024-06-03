@@ -82,3 +82,4 @@
     </div>
 </footer>
 @include("pianote.lead-gen.impact-email-sign-up-tracker")
+@include("pianote.lead-gen.partials.everflow-product-tracker")

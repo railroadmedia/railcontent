@@ -27,8 +27,13 @@ import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+import Offline from './vue/Pages/Live/Offline';
+import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
 import InviteFriend from './vue/Pages/InviteFriend';
+import StudentFocus from './vue/Pages/StudentFocus';
+import Shows from './vue/Pages/Shows';
+import GuitareoLessons from './vue/Pages/GuitareoLessons';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -271,6 +276,11 @@ app.component('AppContainer', AppContainer)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
     .component('InviteFriend', InviteFriend)
+    .component('Offline', Offline)
+    .component('Online', Online)
+    .component('StudentFocus', StudentFocus)
+    .component('Shows', Shows)
+    .component('GuitareoLessons', GuitareoLessons)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(

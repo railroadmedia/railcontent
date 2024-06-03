@@ -299,7 +299,7 @@
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
     {{-- TODO: RT integration --}}
-    
+
     <lesson-playback
         :breadcrumb-last-level-title="{{ json_encode($lessonContent->fetch('fields.title')) }}"
         :video-props="{{ json_encode($videoProps) }}" :related-lessons="{{ $relatedLessons }}"
@@ -312,9 +312,10 @@
         :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
         :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"
+        :this-lesson-json="{{ $thisLessonJson }}"
+        :next-lesson-json="{{ !empty($nextChild) ? $nextLessonJson : null }}"
     >
     </lesson-playback>
-
 @endsection
 
 @section('layout-scripts')
