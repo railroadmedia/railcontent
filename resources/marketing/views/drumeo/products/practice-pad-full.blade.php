@@ -1405,4 +1405,5 @@
             ])
         </div>
     </div>
+    @include("drumeo.sales.partials._footer")
 @stop
