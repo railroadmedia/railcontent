@@ -312,15 +312,10 @@
         :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
         :progress-xp="{{ json_encode($lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),) }}"
+        :this-lesson-json="{{ $thisLessonJson }}"
+        :next-lesson-json="{{ !empty($nextChild) ? $nextLessonJson : null }}"
     >
     </lesson-playback>
-
-    @include('partials.bladesora.members.content._lesson-complete', [
-        'themeColor' => $brand,
-        'thisLessonJson' => $thisLessonJson,
-        'nextLessonJson' => !empty($nextChild) ? $nextLessonJson : null,
-    ])
-
 @endsection
 
 @section('layout-scripts')
