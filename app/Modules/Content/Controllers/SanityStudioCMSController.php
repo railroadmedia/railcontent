@@ -8,9 +8,7 @@ use App\Modules\Content\Models\Sanity\Event;
 use App\Modules\Content\Models\Sanity\Genre;
 use App\Modules\Content\Models\Sanity\Permission;
 use App\Modules\Content\Models\Sanity\Post;
-use App\Modules\Content\Models\Sanity\Resource;
 use App\Modules\Content\Models\Sanity\Song;
-use App\Modules\Content\Models\Sanity\Soundslice;
 use App\Modules\Content\Models\Sanity\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,7 +24,7 @@ class SanityStudioCMSController extends BaseController
         // Day One
         // $types = [(new Artist())->toArray(), (new Venue())->toArray(), (new Event())->toArray()];
         // Musora
-        $types = [(new Song())->toArray(), (new Artist())->toArray(), (new Genre())->toArray(), (new Soundslice())->toArray(), (new Resource())->toArray(), (new Permission())->toArray()];
+        $types = [(new Song())->toArray(), (new Artist())->toArray(), (new Genre())->toArray(), (new Permission())->toArray()];
 
         $schema = json_encode([
             'types' => $types

@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Models\Sanity\Structure;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
  * A field of a Sanity CMS document
@@ -32,7 +33,7 @@ class Field
         //TODO can we do something more for $to? Can at least do some validation that there exists a class with that name, that extends BaseSanityModel
         public ?string $to = null,
         //TODO can we do something more for $of?
-        public Reference|string|null $of = null,
+        public Reference|ListObject|string|null $of = null,
         public Group|array|null $group = null,
         public ?array $options = null,
         public ?string $hidden = null,
@@ -91,8 +92,9 @@ class Field
         }
         // Add input components to optional array
         if (!is_null($this->inputComponent)) {
-            $optional['components'] = ['input' => Field::formatTypeScriptForView($this->inputComponent)];
+            $optional['components'] = ['input' => '`{'.$this->inputComponent.'}`'];
         }
+
         return array_merge($required, $optional);
     }
 

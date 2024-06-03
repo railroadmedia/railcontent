@@ -8,6 +8,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
  * Defines the schema structure for a Song document type in Sanity.
@@ -28,6 +29,13 @@ class Song extends BaseSanityModel
         $resourceReference = new Reference('reference', [['type' => 'resource']]);
         $permissionReference = new Reference('reference', [['type' => 'permission']]);
 
+        $resourceList = new ListObject('object',fields: [new Field(FieldType::String, 'resource_name'),
+                        new Field(FieldType::URL, 'resource_url')],preview: ['select' => ['title' => 'resource_name', 'subtitle' => 'resource_url']]
+                                              );
+        $soundsliceList = new ListObject('object',fields: [new Field(FieldType::String, 'soundslice_title'),
+                       new Field(FieldType::String, 'soundslice_slug')],preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
+        );
+
         $fields = [
             new Field(FieldType::String, 'title'),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title'], hidden: "({document}) => !document?.title,"),
@@ -37,7 +45,7 @@ class Song extends BaseSanityModel
 
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"),
-           // new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'MyCustomScript' ),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'CustomInput' ),
 
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),
             //TODO song style is in the railcontent_content_styles table. We'll need a styles schema and reference it on this
@@ -59,8 +67,8 @@ class Song extends BaseSanityModel
 
             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist'),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference),
-            new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceReference),
-            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceReference),
+            new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceList),
+            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList),
 
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail'),
 
