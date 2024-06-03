@@ -119,7 +119,6 @@ class RecommendationService
         $tableName = 'recommendations_' . $brand . '_' . $section ;
         $tableName = strtolower($tableName);
         $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get();
-
         if (!$recommendations || $recommendations->count() == 0) {
             $user = $this->userService->getByIdOrNull($userID);
             $recommendations = [];
@@ -127,13 +126,14 @@ class RecommendationService
                 return $recommendations;
             }
             if ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value)){
-                $coldStartTableName = 'recommendations_' . $brand . '_' . $section . '_beginner_popular_items';
+                $coldStartTableName = 'recommendations_' . $brand . '_' . $section . '_beginner_items';
                 $coldStartTableName = strtolower($coldStartTableName);
-                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('popularity_rank')->limit(20)->get();
+                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit(20)->get()->pluck('content_id')->toArray();
             }
+        } else {
+            $recommendations = $recommendations->pluck('content_id')->toArray();
         }
-
-        return $recommendations->pluck('content_id')->toArray();
+        return $recommendations;
     }
 
     private function postToHuggingFaceWithRetry($data) {
