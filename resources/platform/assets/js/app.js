@@ -28,7 +28,7 @@ import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
 import CoachShow from './vue/Pages/CoachShow';
-
+import InviteFriend from './vue/Pages/InviteFriend';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -118,7 +118,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your drum gear looks fantastic!'
-            });            
+            });
         },
 
         gearPianotePhotoUploaded(payload) {
@@ -143,7 +143,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your gear looks fantastic!'
-            });            
+            });
         },
 
         gearSingeoPhotoUploaded(payload) {
@@ -157,7 +157,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your singing gear looks fantastic!'
-            });            
+            });
         },
 
         handleVideoPlay(payload) {
@@ -270,6 +270,7 @@ app.component('AppContainer', AppContainer)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('InviteFriend', InviteFriend)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -518,7 +519,7 @@ function showLevelUpData() {
                 icon: 'xp',
                 text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
-            
+
         }, 1000);
     }
 }
