@@ -6,81 +6,42 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Display Name</h2>
+            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Drum Gear</h2>
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
                 @submit.prevent="submitDisplayNameForm"
             >
-                <InputLabel 
-                    inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                    inputType="text"
-                    id="firstName" 
-                    inputName="first_name" 
-                    labelValue="First Name"
-                    placeholder="Enter First Name" 
-                    :initial-value="userFirstName"
-                    :inputErrors="[]" 
-                    @onChange="handleFirstName" 
+                <MuSelect
+                    inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
+                    id="drummingSince"
+                    input-name="drums_playing_since_year"
+                    label="Drumming Since"
+                    :options="yearValues"
+                    v-model="formData.drums_playing_since_year"
+                    placeholder="Select Year"
                 />
-                <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-[20px]">
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
-                        id="firstName" 
-                        inputName="first_name" 
-                        labelValue="First Name"
-                        placeholder="Enter First Name" 
-                        :initial-value="userFirstName"
-                        :inputErrors="[]" 
-                        @onChange="handleFirstName" 
-                    />
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
-                        id="lastName" 
-                        inputName="last_name" 
-                        labelValue="Last Name"
-                        placeholder="Enter Last Name" 
-                        :initial-value="userLastName"
-                        :inputErrors="[]" 
-                        @onChange="handleLastName" 
-                    />
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
-                        id="firstName" 
-                        inputName="first_name" 
-                        labelValue="First Name"
-                        placeholder="Enter First Name" 
-                        :initial-value="userFirstName"
-                        :inputErrors="[]" 
-                        @onChange="handleFirstName" 
-                    />
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
-                        id="lastName" 
-                        inputName="last_name" 
-                        labelValue="Last Name"
-                        placeholder="Enter Last Name" 
-                        :initial-value="userLastName"
-                        :inputErrors="[]" 
-                        @onChange="handleLastName" 
+
+                <div class="tw-grid tw-gap-3 tw-mb-8">
+                    <MuInput
+                        type="text"
+                        id="drumSet" 
+                        name="drums" 
+                        label="Drum Set"
+                        placeholder="Enter Drum Set Brand" 
+                        v-model="formData.drums_gear_set_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button
-                        :disabled="!formData.first_name.length" 
+                    <button   
                         type="submit"
                         class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
-                        :class="!formData.first_name.length ? 'tw-opacity-50' : ''"
                     >
                         Save
                     </button>
                     <button
                         @click="handleClose"
-                        class="tw-mx-1 tw-btn-primary tw-bg-transparent dark:hover:tw-bg-white hover:tw-bg-black dark:hover:tw-text-[#00101D] hover:tw-text-white tw-text-[#00101D] dark:tw-text-white"
+                        class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
                     </button>
@@ -89,60 +50,51 @@
         </div>
     </InfoModal>
 </template>
+
 <script setup>
-    import { ref, onBeforeMount } from 'vue';
-    import InfoModal from '../Modal/InfoModal.vue';
-    import InputLabel from "../InputLabel/InputLabel.vue";
-    import MuSelect from "../../components/FormInputs/MuSelect.vue"
-    import MuTextarea from "../../components/FormInputs/MuTextarea.vue"
-    import MuDateInput from "../../components/FormInputs/MuDateInput.vue"
-    import { storeToRefs } from 'pinia';
-    import { useUserStore } from '../../../stores/user';
+import { ref, computed } from 'vue';
+import InfoModal from '../Modal/InfoModal.vue';
+import MuInput from "../../components/FormInputs/MuInput.vue"
+import MuSelect from "../../components/FormInputs/MuSelect.vue"
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../../../stores/user';
 
-    const userStore = useUserStore();
-    const { 
-        userId, 
-        userFirstName,
-        userLastName,
-        userCountry,
-        userBirthday,
-        userBiography
-    } = storeToRefs(userStore);
+const userStore = useUserStore();
+const { 
+    userId, 
+    userDrumBrands,
+    userCymbalBrands,
+    userHardwareBrands,
+    userStickBrands,
+    userDrummingSince
+} = storeToRefs(userStore);
 
-    //Props
-    const props = defineProps({
-        countryList: Array,
-    });
+const emit = defineEmits(['onCloseDrumGearModal']);
 
-    //Refs
-    const emit = defineEmits(['onCloseAboutYouModal']);
-    const selectedCountry = ref('');
+const formData = ref({
+    drums_playing_since_year: userDrummingSince.value || '',
+    drums_gear_set_brands: userDrumBrands.value || '',
+    drums_gear_cymbal_brands: userCymbalBrands.value || '',
+    drums_gear_hardware_brands: userHardwareBrands.value || '',
+    drums_gear_stick_brands: userStickBrands.value || '',
+});
 
-    const formData = ref({
-        first_name: userFirstName.value || '', 
-        last_name: userLastName.value || '',
-        country: userCountry.value || '',
-    });
+const yearValues = computed(() => {
+    const currentYear = new Date().getFullYear();
+    return ["", ...Array(currentYear - 1899).fill().map((_, idx) => currentYear - idx)];
+});
 
-    //Methods
-    const handleClose = () => {
-        emit('onCloseAboutYouModal');
-    };
+const handleClose = () => {
+    emit('onCloseDrumGearModal');
+};
 
-    const handleDisplayName = (value) => {
-        formData.value.first_name = value;
-    };
-        
-    const submitDisplayNameForm = async () => {
-        try {
-            await userStore.updateDisplayName(userId.value, formData.value.first_name);
-        } catch (error) {
-            console.error("Failed to update the display name:", error.message);
-        }
-        handleClose(); // Close modal
-    };
-
-    onBeforeMount( () => {
-        console.log('Countries', props.countryList)
-    })
+const submitDisplayNameForm = async () => {
+    // API call to update user's drum gear
+    try {
+        await userStore.updateUserGear(userId.value, formData.value);
+        handleClose(); // Close modal after success
+    } catch (error) {
+        console.error("Failed to update the drum gear:", error.message);
+    }
+};
 </script>

@@ -148,7 +148,7 @@
                             <!-- Drums -->
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
-                                    <h5 class="tw-font-bold tw-text-xl">My Drum Gear</h5>
+                                    <h5 class="tw-font-bold tw-text-lg">My Drum Gear</h5>
                                     <button class="tw-ml-4" @click="handleShowDrumGearModal">
                                         <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
                                     </button>
@@ -174,13 +174,13 @@
                                     <p>{{ userStickBrands }}</p>    
                                 </div>
                             </div>
-                            <!-- Profile Picture Name Modal -->
-                            <EditDrumGearModal v-if="showDrumGearModal" :country-list="countryList" @onCloseAboutYouModal="handleShowDrumGearModal" />
+                            <!-- Edit Drum Gear -->
+                            <EditDrumGearModal v-if="showDrumGearModal" :country-list="countryList" @onCloseDrumGearModal="handleShowDrumGearModal" />
 
                             <!-- Piano -->
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
-                                    <h5 class="tw-font-bold tw-text-xl">My Piano Gear</h5>
+                                    <h5 class="tw-font-bold tw-text-lg">My Piano Gear</h5>
                                     <button class="tw-ml-4" @click="handleShowPianoGearModal">
                                         <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
                                     </button>
@@ -199,10 +199,13 @@
                                 </div>
                             </div>
 
+                            <!-- Edit Piano Gear -->
+                            <EditPianoGearModal v-if="showPianoGearModal" :country-list="countryList" @onClosePianoGearModal="handleShowPianoGearModal" />
+
                             <!-- Guitar -->
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
-                                    <h5 class="tw-font-bold tw-text-xl">My Guitar Gear</h5>
+                                    <h5 class="tw-font-bold tw-text-lg">My Guitar Gear</h5>
                                     <button class="tw-ml-4" @click="handleShowGuitarGearModal">
                                         <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
                                     </button>
@@ -232,7 +235,7 @@
                             <!-- Singing -->
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
-                                    <h5 class="tw-font-bold tw-text-xl">My Singing Gear</h5>
+                                    <h5 class="tw-font-bold tw-text-lg">My Singing Gear</h5>
                                     <button class="tw-ml-4" @click="handleShowSingingGearModal">
                                         <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
                                     </button>

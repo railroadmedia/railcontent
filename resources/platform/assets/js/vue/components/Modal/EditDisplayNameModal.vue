@@ -13,16 +13,14 @@
                 @submit.prevent="submitDisplayNameForm"
             >
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
+                    <MuInput 
+                        type="text"
                         id="displayName" 
-                        inputName="display_name" 
-                        labelValue="Display Name"
+                        name="display_name" 
+                        label="Display Name"
                         placeholder="Enter Display Name" 
-                        :initial-value="userDisplayName"
+                        v-model="formData.display_name"
                         :inputErrors="[]" 
-                        @onChange="handleDisplayName" 
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
@@ -48,7 +46,7 @@
 <script setup>
     import { ref } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
-    import InputLabel from "../InputLabel/InputLabel.vue";
+    import MuInput from "../../components/FormInputs/MuInput.vue"
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
@@ -62,14 +60,9 @@
         display_name: userDisplayName.value || '' // Initialize with current displayName or empty string
     });
 
-
     //Methods
     const handleClose = () => {
         emit('onCloseDisplayNameModal');
-    };
-
-    const handleDisplayName = (value) => {
-        formData.value.display_name = value;
     };
         
     const submitDisplayNameForm = async () => {

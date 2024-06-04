@@ -13,51 +13,40 @@
                 @submit.prevent="submitDisplayNameForm"
             >
                 <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-[20px]">
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
+                    <MuInput 
+                        type="text"
                         id="firstName" 
-                        inputName="first_name" 
-                        labelValue="First Name"
+                        name="first_name" 
+                        label="First Name"
                         placeholder="Enter First Name" 
-                        :initial-value="userFirstName"
-                        :inputErrors="[]" 
-                        @onChange="handleFirstName" 
+                        v-model="formData.first_name"
                     />
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        inputType="text"
+                    <MuInput 
+                        type="text"
                         id="lastName" 
-                        inputName="last_name" 
-                        labelValue="Last Name"
+                        name="last_name" 
+                        label="Last Name"
                         placeholder="Enter Last Name" 
-                        :initial-value="userLastName"
-                        :inputErrors="[]" 
-                        @onChange="handleLastName" 
+                        v-model="formData.last_name"
                     />
                     <MuSelect
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
                         id="profileCountry"
                         label="Country"
                         :options="countryList"
-                        :initial-value="userCountry"
-                        v-model="selectedCountry"
+                        v-model="formData.country"
                         placeholder="Choose a Country"
                     />
                     <MuDateInput
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
                         id="profileBirthday"
                         label="Birthday"
-                        :initial-value="userBirthday"
-                        v-model="selectedBirthday"
+                        v-model="formData.birthday"
                     />
                 </div>
                 <MuTextarea
                     inputOverride="tw-w-full tw-text-[#00101D] tw-mb-6" 
                     id="profileBio"
                     label="Biography"
-                    :initial-value="userBiography"
-                    v-model="selectedCountry"
+                    v-model="formData.biography"
                     placeholder="Enter Biography"
                 />
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
@@ -65,13 +54,12 @@
                         :disabled="!formData.first_name.length" 
                         type="submit"
                         class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
-                        :class="!formData.first_name.length ? 'tw-opacity-50' : ''"
                     >
                         Save
                     </button>
                     <button
                         @click="handleClose"
-                        class="tw-mx-1 tw-btn-primary tw-bg-transparent dark:hover:tw-bg-white hover:tw-bg-black dark:hover:tw-text-[#00101D] hover:tw-text-white tw-text-[#00101D] dark:tw-text-white"
+                        class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
                     </button>
@@ -80,10 +68,11 @@
         </div>
     </InfoModal>
 </template>
+
 <script setup>
     import { ref, onBeforeMount } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
-    import InputLabel from "../InputLabel/InputLabel.vue";
+    import MuInput from "../../components/FormInputs/MuInput.vue"
     import MuSelect from "../../components/FormInputs/MuSelect.vue"
     import MuTextarea from "../../components/FormInputs/MuTextarea.vue"
     import MuDateInput from "../../components/FormInputs/MuDateInput.vue"
@@ -100,40 +89,32 @@
         userBiography
     } = storeToRefs(userStore);
 
-    //Props
     const props = defineProps({
         countryList: Array,
     });
 
-    //Refs
     const emit = defineEmits(['onCloseAboutYouModal']);
-    const selectedCountry = ref('');
 
     const formData = ref({
         first_name: userFirstName.value || '', 
         last_name: userLastName.value || '',
         country: userCountry.value || '',
+        birthday: userBirthday.value || '',
+        biography: userBiography.value || '',
     });
 
-    //Methods
     const handleClose = () => {
         emit('onCloseAboutYouModal');
     };
 
-    const handleDisplayName = (value) => {
-        formData.value.first_name = value;
-    };
-        
     const submitDisplayNameForm = async () => {
         try {
-            await userStore.updateDisplayName(userId.value, formData.value.first_name);
+            // Here you would update the user information
+            // await userStore.updateUserProfile(userId.value, formData.value);
+            console.log("Form Submitted", formData.value);
+            handleClose(); // Close modal after success
         } catch (error) {
-            console.error("Failed to update the display name:", error.message);
+            console.error("Failed to update the profile:", error.message);
         }
-        handleClose(); // Close modal
     };
-
-    onBeforeMount( () => {
-        console.log('Countries', props.countryList)
-    })
 </script>
