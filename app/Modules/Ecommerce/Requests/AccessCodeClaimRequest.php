@@ -95,7 +95,7 @@ class AccessCodeClaimRequest extends FormRequest
 
     protected function failedValidation(Validator $validator): void
     {
-        if ($this->wantsJson()) {
+        if ($this->isJson()) {
             throw new HttpResponseException(response()->json([
                 'errors' => $validator->errors(),
                 'status' => true
