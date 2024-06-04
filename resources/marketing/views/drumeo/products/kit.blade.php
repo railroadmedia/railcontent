@@ -244,7 +244,18 @@
             </div>
         </div>
     @endif
+
 <!-- hero section-->
+@if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
+    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true"
+        class="promo-banner fixed flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">
+        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+        <h3 class="inline-block font-bebas mx-0 pr-3">BACK IN STOCK</h3>
+        <p class="inline-block text-xs mx-0 leading-tight">
+            <strong> (Limited Quantities) </strong>
+        </p>
+    </a>
+@endif
 <header class="text-white relative overflow-hidden z-20"
     style="height:700px;background:linear-gradient(to bottom, rgb(26, 26, 26), #1e1e1e);">
     <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -260,7 +271,7 @@
                 </strong></h1>
             @if(empty($membersVersion))
                 <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> a 1-Year Membership to Drumeo.<br>
-                    <em>+ 3 LAUNCH-ONLY BONUSES</em></h5>
+                    <em>+ 3 RE-LAUNCH BONUSES</em></h5>
             @endif
             <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
                 @if ($fullPrice > floatval($productPrices['alesis-ekit']->discounted_price))
@@ -562,6 +573,7 @@
 
 <!-- buy section-->
 
+    <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <section class="px-3 sm:px-0 text-center relative z-50 overflow-hidden" style="background:linear-gradient(to bottom, #fff, #f0f6fc 66%);">
         <div class="container max-w-6xl mx-auto relative z-50">
@@ -596,6 +608,7 @@
                         @endif
                     </h4>
                     @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
+                        <h4 class="text-red-600 leading-tight mb-2"><strong>LIMITED QUANTITIES</strong></h4>
                         <a class="join blue smaller w-full max-w-xs" href="{{ $orderUrl }}">Buy Now</a>
                     @else
                         <h4 class="text-red-600 leading-tight mb-2"><strong>SOLD OUT</strong></h4>
