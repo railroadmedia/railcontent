@@ -72,7 +72,7 @@
         ];
     }
     elseif ($parentContent->fetch('type') === 'learning-path') {
-        
+
         $headerData['iconName'] = 'method';
         if(!Str::contains(request()->path(), 'foundations-2019')) {
             $headerData['title'] = 'Method';
@@ -144,7 +144,7 @@
                     'contentId' => $parentContent->fetch('id'),
                     'progress' => $parentContent->fetch('progress_percent', 0),
                 ]
-            ],    
+            ],
         ];
 
     }
@@ -152,121 +152,135 @@
     $headerDataJson = json_encode($headerData);
     $headerDataObj = json_decode($headerDataJson);
 
+    $breadcrumbs = [];
+    if($parentContent->fetch('type') === 'learning-path'){
+        $breadcrumbs = [
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'learning-path-level'){
+        $breadcrumbs = [
+            [
+                "title" => ucwords(brand()) . ' Method',
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'learning-path-course'){
+        $breadcrumbs = [
+            [
+                "title" => ucwords(brand()) . ' Method',
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
+            ],
+            [
+                "title" => $secondContent->fetch('fields.title'),
+                "url" => $secondContent->fetch('url'),
+            ],
+            [
+                "title" => $thirdContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif ($parentContent->fetch('type') === 'unit'){
+        $breadcrumbs = [
+            [
+                "title" => $learningPath->fetch('fields.title'),
+                "url" => $learningPath->fetch('url'),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    }
+    elseif($parentContent->fetch('type') === 'challenge'){
+        $breadcrumbs = [
+            [
+                "title" => 'Workouts',
+                "url" => url()->route('platform.workouts'),
+            ],
+            [
+                "title" => 'Challenges',
+                "url" => url()->route('platform.workouts.challenges'),
+            ],
+            [
+                 "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'pack-bundle'){
+        if($pack->fetch('bundle_count') > 1){
+            $breadcrumbs = [
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title'),
+                    "url" => $pack->fetch('url'),
+                ],
+                [
+                    "title" => $parentContent->fetch('fields.title')
+                ]
+            ];
+        } elseif($pack->fetch('bundle_count') <= 1){
+            $breadcrumbs = [
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title')
+                ]
+            ];
+        }
+    } else {
+        $breadcrumbs = [
+            [
+                "title" => parse_lesson_type_readable($parentContent->fetch('type'), true),
+                "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => parse_lesson_type_readable($parentContent->fetch('type'), true)]),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    }
+
 @endphp
 
 {{-- Content --}}
 @section('content')
-
-    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-        @include('content.breadcrumbs._overview-breadcrumbs')
-        
-        <page-header
-            page-type="{{ $parentContent->fetch('type') }}"
-            icon-name="{{ $headerDataObj->iconName }}"
-            title="{{ $headerDataObj->title }}"
-            description="{{ $headerDataObj->description }}"
-            hero-img="{{ $headerDataObj->heroImg }}"
-            progress-label-text="{{ $headerDataObj->progressLabelText }}"
-            progress="{{ $headerDataObj->progress }}"
-            content-id="{{ $headerDataObj->contentId }}"
-            :info-data="{{ json_encode($headerDataObj->infoData) }}"
-            :ctas="{{ json_encode($headerDataObj->ctas) }}"
-            dark-mode-logo="{{ $headerDataObj->darkModeLogo  }}"
-            light-mode-logo="{{ $headerDataObj->lightModeLogo }}"
-        ></page-header>
-
+    <overview
+        :breadcrumbs="{{ json_encode($breadcrumbs) }}"
+        :header-data="{{ json_encode($headerDataObj) }}"
+        page-type="{{ $parentContent->fetch('type') }}"
         @if(!empty($nextLessonJson))
-            @include('partials._current-learning-path-lesson', [
-                "currentLearningPathLesson" => $nextLessonJson,
-            ])
+            :next-lesson="{{ $nextLessonJson }}"
         @endif
-    </div>
-
-    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-[30px]">
-        <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-w-full tw-flex-row">
-
-                <transition appear name="fade">
-                    <content-catalogue
-                        brand="{{ $brand }}"
-                        @if(!empty($pack) && $pack['slug'] == '500-songs-in-5-days')
-                        catalogue-type="grid"
-                        @else
-                        catalogue-type="list"
-                        @endif
-                        theme-color="{{ $brand }}"
-                        user-id="{{ user()->id }}"
-                        :use-theme-color="true"
-                        :pre-loaded-content="{{ $childContent }}"
-                        :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
-                        {{-- :is-admin="{{ json_encode(user()->isAdmin()) }}" --}}
-                        @if($displayItemAsOverview ?? false)
-                            :display-items-as-overview="true"
-                        @endif
-                        @if(!user()->isAdmin())
-                            :lock-unowned="true"
-                        @endif
-                        @if($parentContent['type'] !== 'learning-path')
-                            :show-numbers="true"
-                            :force-wide-thumbs="false"
-                        @endif
-                        {{-- New learning Paths? --}}
-                        @if(!empty($classicalMethodPackJson)) {{-- Check for Branch Path Content --}}
-                            :branch-path-index="4" {{-- Where does the branched content begin? (0 based) --}}
-                            :branch-path-content="{{ $classicalMethodPackJson }}"
-                        @endif
-                    >
-                        @for($i = 0; $i < 10; $i++)
-                            @include('partials.bladesora.members.skeletons.list-item', [
-                                "overview" => $parentContent['type'] === 'learning-path' || $parentContent['type'] === 'learning-path-level',
-                                "showNumbers" => $parentContent['type'] !== 'learning-path',
-                                "thumbnailType" => $parentContent['type'] === 'learning-path' ? 'square' : 'widescreen'
-                            ])
-                        @endfor
-                    </content-catalogue>
-                </transition>
-            </div>
-
-            @if($xpBonus > 0 && (empty($pack) || $pack['slug'] !== '500-songs-in-5-days'))
-                @include('partials.bladesora.members.partials._completion-bonus', [
-                    "xpBonus" => $xpBonus,
-                    "isComplete" => $parentContent->fetch('progress_percent', 0) === 100,
-                    "themeColor" => $brand
-                ])
-            @endif
-
-            {{-- Pianote Foundations --}}
-            @if($parentContent['slug'] == 'pianote-method')
-                <a href="/pianote/method/foundations-2019/215952"
-                class="flex flex-row no-decoration hover-bg-grey-7 dark:hover:tw-bg-[#002039] tw-relative text-grey-3 hover-text-black content-overview pv-2">
-
-                    <div class="flex flex-column">
-                        <p class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-mt-[5px]">Pianote Foundations</p>
-                    </div>
-
-                    <div class="tw-text-[#00101D] dark:tw-text-white tw-text-2xl tw-font-bold tw-flex tw-flex-col tw-justify-center tw-text-center hide-sm-down tw-mr-2">
-                        10 Levels
-                    </div>
-
-                    <div class="flex flex-column icon-col align-v-center hide-xs-only">
-                        <div class="body">
-                            <i class="fas flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] rounded fa-play-circle"></i>
-                        </div>
-                    </div>
-                </a>
-            @endif
-        </div>
-    </div>
-
-    {{-- for guitareo 500 songs special page --}}
-    @if(!empty($songsPdfs))
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-3">
-            <collection-wrapper
-                collection-type="song-pdf"
-                :pre-loaded-content="{{ $songsPdfs }}"
-                title="Songs"
-            ></collection-wrapper>
-        </div>
-    @endif
-
+        user-id="{{ user()->id }}"
+        :is-admin="{{ json_encode(user()->isAdmin()) }}"
+        :child-content="{{ $childContent }}"
+        @if($displayItemAsOverview ?? false)
+            :child-content-display-items-as-overview="true"
+        @endif
+        @if($parentContent['type'] !== 'learning-path')
+            :child-content-show-numbers="true"
+            :child-content-force-wide-thumbs="false"
+        @endif
+        {{-- New learning Paths? --}}
+        @if(!empty($classicalMethodPackJson)) {{-- Check for Branch Path Content --}}
+            :child-content-branch-path-index="4" {{-- Where does the branched content begin? (0 based) --}}
+            :child-content-branch-path-content="{{ $classicalMethodPackJson }}"
+        @endif
+        @if($xpBonus > 0 && (empty($pack) || $pack['slug'] !== '500-songs-in-5-days'))
+            :show-completion-bonus="true"
+            :xp-bonus="{{ $xpBonus }}"
+        @endif
+        @if($parentContent['slug'] == 'pianote-method')
+            :show-pianote-foundations="true"
+        @endif
+        @if(!empty($songsPdfs))
+            :songs-pdfs="{{ $songsPdfs }}"
+        @endif
+    ></overview>
 @endsection

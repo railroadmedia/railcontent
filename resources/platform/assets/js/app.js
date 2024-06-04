@@ -32,6 +32,7 @@ import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
+import Overview from './vue/Pages/Overview';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -121,7 +122,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your drum gear looks fantastic!'
-            });            
+            });
         },
 
         gearPianotePhotoUploaded(payload) {
@@ -146,7 +147,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your gear looks fantastic!'
-            });            
+            });
         },
 
         gearSingeoPhotoUploaded(payload) {
@@ -160,7 +161,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your singing gear looks fantastic!'
-            });            
+            });
         },
 
         handleVideoPlay(payload) {
@@ -277,6 +278,7 @@ app.component('AppContainer', AppContainer)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
+    .component('Overview', Overview)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -525,7 +527,7 @@ function showLevelUpData() {
                 icon: 'xp',
                 text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
-            
+
         }, 1000);
     }
 }
