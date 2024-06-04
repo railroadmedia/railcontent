@@ -418,4 +418,19 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
+    public function readMusic()
+    {
+        $productId = 844; //TODO change this to the correct product ID
+        /** @var UserAccessPermissionsService $userAccessPermissionsService */
+        $userAccessPermissionsService = app(UserAccessPermissionsService::class);
+        $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userAccessPermissionsService->getNumberProductOwners($productId);
+
+        return view('pianote.products.read-music', [
+            'recaptchaKey' => config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
+    }
 }
