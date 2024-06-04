@@ -20,6 +20,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'drum-technique-made-easy',
             'drumsticks',
             'eardrums',
+            'eardrums-2',
             'easy-rudiments',
             'electrify-your-drumming',
             'festival-videos',
