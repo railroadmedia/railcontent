@@ -32,6 +32,10 @@ import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
 import BestBeginnerDrumBook from './vue/Pages/BestBeginnerDrumBook';
 import DrummersToolbox from './vue/Pages/DrummersToolbox';
+import InviteFriend from './vue/Pages/InviteFriend';
+import StudentFocus from './vue/Pages/StudentFocus';
+import Shows from './vue/Pages/Shows';
+import GuitareoLessons from './vue/Pages/GuitareoLessons';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -121,7 +125,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your drum gear looks fantastic!'
-            });            
+            });
         },
 
         gearPianotePhotoUploaded(payload) {
@@ -146,7 +150,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your gear looks fantastic!'
-            });            
+            });
         },
 
         gearSingeoPhotoUploaded(payload) {
@@ -160,7 +164,7 @@ const app = createApp({
             window.shownotification({
                 icon: 'check',
                 text: 'Woohoo! Your singing gear looks fantastic!'
-            });            
+            });
         },
 
         handleVideoPlay(payload) {
@@ -275,8 +279,12 @@ app.component('AppContainer', AppContainer)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)
+    .component('StudentFocus', StudentFocus)
+    .component('Shows', Shows)
+    .component('GuitareoLessons', GuitareoLessons)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -525,7 +533,7 @@ function showLevelUpData() {
                 icon: 'xp',
                 text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
-            
+
         }, 1000);
     }
 }
