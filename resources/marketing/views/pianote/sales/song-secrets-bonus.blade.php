@@ -4,6 +4,7 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
+    <meta name="robots" content="noindex">
     <title>Save 71% with your exclusive Webinar Bundle. | Pianote</title>
     <meta property="og:title" content="Save 71% with your exclusive Webinar Bundle.">
     <meta property="og:url" content="https://www.pianote.com/song-secrets-bonus">
