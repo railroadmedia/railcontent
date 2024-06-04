@@ -50,9 +50,11 @@
             [
                 'type' => 'PageHeaderPrimaryCta',
                 'props' => [
-                    'text' => 'Start first lesson',
+                    'text' => $parentContent->fetch('progress_percent', 0) > 0 ? 
+                        ($parentContent->fetch('progress_percent', 0) === 100 ? 'Completed' : 'Next Lesson') :
+                        'Start first lesson',
                     'url' => $nextLessonUrl,
-                    'faIconClass' => 'fa-play',
+                    'faIconClass' => $parentContent->fetch('progress_percent', 0) !== 100 ? 'fa-play' : '',
                     'isPrimary' => true,
                 ]
             ],

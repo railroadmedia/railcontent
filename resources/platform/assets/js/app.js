@@ -33,6 +33,7 @@ import CoachShow from './vue/Pages/CoachShow';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
 import Overview from './vue/Pages/Overview';
+import GuitareoLessons from './vue/Pages/GuitareoLessons';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -279,6 +280,7 @@ app.component('AppContainer', AppContainer)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
     .component('Overview', Overview)
+    .component('GuitareoLessons', GuitareoLessons)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(

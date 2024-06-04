@@ -383,4 +383,6 @@
             </div>
         </div>
     </section>
+
+    @include("drumeo.sales.partials._footer")
 @stop
