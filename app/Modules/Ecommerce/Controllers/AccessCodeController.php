@@ -8,6 +8,7 @@ use App\Modules\UserManagementSystem\Services\UserService;
 use Illuminate\Routing\Controller;
 use App\Modules\Ecommerce\Requests\AccessCodeClaimRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Throwable;
 
 class AccessCodeController extends Controller
@@ -26,7 +27,7 @@ class AccessCodeController extends Controller
         $this->userAuthenticationService = $userAuthenticationService;
     }
 
-    public function claim(AccessCodeClaimRequest $request): JsonResponse
+    public function claim(AccessCodeClaimRequest $request): RedirectResponse|JsonResponse
     {
         if ($request->get('credentials_type') === 'existing') {
             if (auth()->check()) {
