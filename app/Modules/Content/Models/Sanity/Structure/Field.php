@@ -92,7 +92,7 @@ class Field
         }
         // Add input components to optional array
         if (!is_null($this->inputComponent)) {
-            $optional['components'] = ['input' => '`{'.$this->inputComponent.'}`'];
+            $optional['components'] = ['input' => $this->inputComponent];
         }
 
         return array_merge($required, $optional);

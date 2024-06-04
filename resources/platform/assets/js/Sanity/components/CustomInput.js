@@ -1,44 +1,56 @@
 import React from 'react';
 import {useCallback} from 'react'
 import {useFormValue} from 'sanity'
-import {Box, Stack, Text, TextInput} from '@sanity/ui'
-import {StringInputProps, StringSchemaType, set, unset, useClient} from 'sanity'
+import {Stack, TextInput} from '@sanity/ui'
+import {set, unset, useClient} from 'sanity'
 
 
-const CustomInput = React.forwardRef((props) => {
+const CustomInput = React.forwardRef((props, ref) => {
     console.log('This is an important message');
     const sanityClient = useClient({apiVersion: '2023-01-01'});
     const docId = String(useFormValue(["_id"]));
+
     const {onChange, value = '', elementProps, document } = props
+
+    console.log("handleChange doc id:: ", docId, 'props:::: ',elementProps)
+
     const diff = [
-        {id: '0', title: 'Novice', content: 'Welcome to learning React!'},
-        {id: '1', title: 'Intermediate', content: 'You can install React from npm.'},
-        {id: '2', title: 'Intermediate', content: 'You can install React from npm.'}];
+        {id: '1', title: 'Novice'},
+        {id: '2', title: 'Beginner'},
+        {id: '3', title: 'Beginner'},
+        {id: '4', title: 'Intermediate'},
+        {id: '5', title: 'Intermediate'},
+        {id: '6', title: 'Advanced'},
+        {id: '7', title: 'Advanced'},
+        {id: '8', title: 'Expert'},
+        {id: '9', title: 'Expert'},
+        {id: '10', title: 'Expert'},
+    ];
 
     // Creates a change handler for patching data
     const handleChange = useCallback(
-        (event) =>
-            onChange(event.currentTarget.value ? set(event.currentTarget.value) : unset()),
+        (event) => {
+            console.log('handleChange event', event,  docId);
+            if(event.target.id === 'difficulty') {
+                const difficulty = diff.filter((element) => {
+                     return element.id === event.target.value;
+                    }
+                );
+
+                if (difficulty[0]) {
+                    console.log('handleChange difficulty string',difficulty[0], docId);
+                    sanityClient
+                        .patch(docId)
+                        .set({
+                            difficult: difficulty[0] ? difficulty[0].title : '',
+                        })
+                        .commit()
+                }
+            }
+            onChange(event.target.value ? set(event.target.value) : unset());
+        },
         [onChange]
     )
-
-    const difficulty = diff.filter((element) =>
-    {
-        console.log("listofItems: element:: ", element, element.id, value, element.id === value)
-        return element.id === value;
-    }
-    );
-
-    if(difficulty[0]) {
-        sanityClient
-            .patch(docId)
-            .set({
-                post: {
-                    difficult: difficulty[0] ? difficulty[0].title : '',
-                },
-            })
-            .commit()
-    }
 
     return (
         <Stack space={3}>
