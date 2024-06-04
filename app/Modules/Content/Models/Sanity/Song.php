@@ -44,7 +44,9 @@ class Song extends BaseSanityModel
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference),
 
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
-            new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"),
+            new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"
+                //, inputComponent: 'CustomInput'
+            ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'CustomInput' ),
 
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),

@@ -1,16 +1,15 @@
 import React from 'react';
 import { renderStudio, defineConfig } from "sanity";
 import {structureTool} from 'sanity/structure'
-import CustomInput from '../components/CustomInput';
+import  CustomInput from '../components/CustomInput' ;
+import  ArrayInput from '../components/ArrayInput' ;
 
 const SanityStudio = ({ projectId, dataset, basePath, schema }) => {
   const sanityContainerRef = React.useRef(null);  // Create a ref for the Sanity container
 
   React.useEffect(() => {
     if (sanityContainerRef.current) {
-
-        var existCustom = React.isValidElement(<CustomInput />);
-        console.log('roxana schema   ',schema, existCustom);
+        console.log('roxana schema   ',schema);
       const config = defineConfig({
             plugins: [
                 structureTool()
@@ -18,37 +17,57 @@ const SanityStudio = ({ projectId, dataset, basePath, schema }) => {
             projectId: projectId,
             dataset: dataset,
             basePath: basePath,
-//             schema: schema
-            schema: {
-                types: [
-                    {
-                        type: "document",
-                        name: "post",
-                        title: "Post",
-                        fields: [
-                            {
-                                type: "string",
-                                name: "title",
-                                title: "Title"
-                            },
-
-                            {
-                                name: 'myCustomField',
-                                title: 'My Custom Field',
-                                type: 'string',
-                                components: {
-                                    input: CustomInput
-                                }
-                            },
-                            {
-                                type: "string",
-                                name: "difficult",
-                                title: "Difficulty String"
-                            }
-                        ]
-                    }
-                ]
-            }
+            schema: schema
+//             schema: {
+//                 types: [
+//                     {
+//                         type: "document",
+//                         name: "rox",
+//                         title: "Post",
+//                         fields: [
+//                             {
+//                                 type: "string",
+//                                 name: "title",
+//                                 title: "Title"
+//                             },
+//
+//                             {
+//                                 name: 'difficulty',
+//                                 title: 'Difficulty',
+//                                 type: 'string',
+//                                 components: {
+//                                     input: CustomInput
+//                                 }
+//                             },
+//                             {
+//                                 type: "string",
+//                                 name: "difficult",
+//                                 title: "Difficulty String"
+//                             },
+//                             {
+//                                 name: 'soundslice',
+//                                 title: 'Soundslice',
+//                                 type: 'array',
+//                                 of: [
+//                                     {
+//                                         type: 'object',
+//                                         fields: [
+//                                             {
+//                                                 title: 'Title',
+//                                                 name: 'title',
+//                                                 type: 'string'
+//                                             },
+//                                         ]
+//                                     }
+//                                 ],
+//                                 components: {
+//                                     input: ArrayInput
+//                                 }
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             }
         });
         renderStudio(sanityContainerRef.current, config);  // Render Sanity Studio into the ref'd container
     }
