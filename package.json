@@ -80,8 +80,6 @@
   "dependencies": {
     "@musora/icons": "^1.0.6",
     "@parcel/transformer-sass": "^2.12.0",
-    "@sanity/icons": "^2.11.8",
-    "@sanity/ui": "^2.1.3",
     "@tinymce/tinymce-vue": "^5.1.1",
     "@typeform/embed": "^4.10.0",
     "@vimeo/player": "^2.15.0",
@@ -110,7 +108,6 @@
     "parcel": "^2.12.0",
     "pinia": "^2.1.7",
     "query-string": "^7.1.1",
-    "sanity": "^3.38.0",
     "screenfull": "^6.0.1",
     "shaka-player": "^2.5.7",
     "simplebar": "^5.3.6",
