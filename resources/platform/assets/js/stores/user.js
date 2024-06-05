@@ -183,7 +183,7 @@ export const useUserStore = defineStore({
                               text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
                           });
                           //Reset in Pinia Store
-                          this.user.profile_picture_url = ''; 
+                          this.user.profile_picture_url = 'https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png'; 
                       }
                   })
                   .catch(error => {
@@ -207,7 +207,7 @@ export const useUserStore = defineStore({
         subtitle: 'This cannot be undone.',
         callbacks: {
             submit: () => {
-                let url = '/user-management-system/user/update/' + userId.value;
+                let url = '/user-management-system/user/update/' + this.userId;
                 let gearAttribute = { [`${instrument}_gear_photo`]: null };
     
                 axios.patch(url, gearAttribute)
@@ -215,7 +215,7 @@ export const useUserStore = defineStore({
                     if (response.data) {
                         window.shownotification({
                             icon: 'check',
-                            text: 'Woohoo! Gear Photo Successfully reset. Refreshing the page.'
+                            text: 'Woohoo! Gear Photo Successfully reset.'
                         });
                         //Update Pinia
                         switch (instrument) {
