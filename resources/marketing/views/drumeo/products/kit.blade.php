@@ -212,7 +212,7 @@
           $fullPrice = 499;
      }
      else {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[drumeo_edge_1_year_access]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true';
           $fullPrice = 1005.95;
      }
     @endphp
@@ -247,8 +247,7 @@
 
 <!-- hero section-->
 @if ($products['alesis-ekit']->getStockAvailability() > 1 && !empty($products['alesis-ekit']->getStockAvailability()))
-    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&products[poster-chords]=1&products[poster-scales]=1&promo-code=posters-trial&redirect=/order&locked=true"
-        class="promo-banner fixed flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">
+    <a class="promo-banner fixed flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">
         {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas mx-0 pr-3">BACK IN STOCK</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
@@ -270,7 +269,7 @@
                     @endif
                 </strong></h1>
             @if(empty($membersVersion))
-                <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> a 1-Year Membership to Drumeo.<br>
+                <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> a Annual Membership to Drumeo.<br>
                     <em>+ 3 RE-LAUNCH BONUSES</em></h5>
             @endif
             <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
@@ -538,7 +537,7 @@
         src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/union-icon.svg">
 
     <div class="container mx-auto z-10 relative max-w-5xl">
-        <h4 class="leading-tight mb-5 sm:mb-7 italic">Your new e-kit includes one year of unlimited drum lessons with... </h4>
+        <h4 class="leading-tight mb-5 sm:mb-7 italic">Your new e-kit includes unlimited drum lessons with... </h4>
         <img class="w-40 md:w-80 transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')"
             src="https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/drumeo/products/kit/drumeo-logo.svg">
     </div>
@@ -589,7 +588,7 @@
                     @if(empty($membersVersion))
                         <ul class="fa-ul text-left pl-6 mx-auto inline-block">
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> <strong>Alesis Nitro Max Drumeo Edition E-Kit</strong></li>
-                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 1-Year Drumeo Membership (<s>$240</s> <strong>FREE</strong>)</li>
+                            <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Annual Drumeo Membership (<s>$240</s> <strong>FREE</strong>)</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 30-Day Drummer (<s>$127</s> <strong>FREE</strong>)</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 30-Day Chops (<s>$127</s> <strong>FREE</strong>)</li>
                             <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> 5A Drumsticks (<s>$12.95</s> <strong>FREE</strong>)</li>
@@ -626,11 +625,11 @@
                         </picture>
                     @else
                         <picture>
-                            <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle.png">
-                            <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle.png">
+                            <source media="(min-width:1024px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
+                            <source media="(min-width:640px)" type="image/png" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
                             <img class="transition-opacity opacity-0 w-full" alt="icon" loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle.png">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/kit/ekit-bundle2.webp">
                         </picture>
                     @endif
                 </div>
