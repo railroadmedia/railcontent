@@ -269,7 +269,7 @@
                     @endif
                 </strong></h1>
             @if(empty($membersVersion))
-                <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> a Annual Membership to Drumeo.<br>
+                <h5 class="leading-normal text-musora mb-4 sm:mb-5">Get the highest-rated beginner e-kit <strong>PLUS</strong> an Annual Membership to Drumeo.<br>
                     <em>+ 3 RE-LAUNCH BONUSES</em></h5>
             @endif
             <h4 class="leading-tight mb-4 sm:mb-5 uppercase"> Only
