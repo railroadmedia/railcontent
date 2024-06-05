@@ -47,7 +47,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"
                 //, inputComponent: 'CustomInput'
             ),
-            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', null, null,null,null,null,null,null,null,null, 'CustomInput' ),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', hidden: "({document}) => !document?.difficulty", readOnly: "true"),
 
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),
             //TODO song style is in the railcontent_content_styles table. We'll need a styles schema and reference it on this
