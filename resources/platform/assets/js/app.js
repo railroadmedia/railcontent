@@ -34,6 +34,7 @@ import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
+import PackOverview from './vue/Pages/PackOverview';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -281,6 +282,7 @@ app.component('AppContainer', AppContainer)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
     .component('GuitareoLessons', GuitareoLessons)
+    .component('PackOverview', PackOverview)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
