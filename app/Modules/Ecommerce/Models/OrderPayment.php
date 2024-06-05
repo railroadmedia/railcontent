@@ -22,4 +22,5 @@ class OrderPayment extends Model
 {
     protected $table = 'ecommerce_order_payments';
     protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 }
