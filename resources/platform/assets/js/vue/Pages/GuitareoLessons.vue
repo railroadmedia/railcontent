@@ -80,59 +80,28 @@
             />
         </div>
 
-        <div class="tw-my-[30px] tw-px-[10px]">
+        <div class="tw-px-[10px]">
             <!-- COURSES SECTION-->
-            <div class="tw-mb-[30px]">
-                <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                    <a href="/guitareo/courses" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">Courses</h2>
-                    </a>
-                    <a href="/guitareo/courses" aria-label="See All New Lessons" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        See All
-                    </a>
-                </div>
 
-                <transition appear name="fade">
-                    <ContentCatalogue
-                        brand="guitareo"
-                        theme-color="guitareo"
-                        :use-theme-color="true"
-                        content-endpoint="/railcontent/content"
-                        catalogue-type="grid"
-                        limit="10"
-                        :lock-unowned="true"
-                        :force-wide-thumbs="true"
-                        :pre-loaded-content="courses"
-                        :full-width-on-mobile="true"
-                    />
-                </transition>
+            <div class="tw-mb-[30px]">
+                <MiniCatalogueSection
+                    title="Courses"
+                    seeAllAriaLabel="See All Courses"
+                    seeAllUrl="/guitareo/courses"
+                    :preLoadedContent="courses.data"
+                    :lock-unowned="true"
+                />
             </div>
 
             <!-- QUICK TIPS SECTION-->
             <div class="tw-mb-[30px]">
-                <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
-                    <a href="/guitareo/quick-tips" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl">Quick Tips</h2>
-                    </a>
-                    <a href="/guitareo/quick-tips" aria-label="See All New Lessons" class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
-                        See All
-                    </a>
-                </div>
-
-                <transition appear name="fade">
-                    <ContentCatalogue
-                        brand="guitareo"
-                        theme-color="guitareo"
-                        :use-theme-color="true"
-                        content-endpoint="/railcontent/content"
-                        catalogue-type="grid"
-                        limit="10"
-                        :lock-unowned="true"
-                        :force-wide-thumbs="true"
-                        :pre-loaded-content="quickTips"
-                        :full-width-on-mobile="true"
-                    />
-                </transition>
+                <MiniCatalogueSection
+                    title="Quick Tips"
+                    seeAllAriaLabel="See All Quick Tips"
+                    seeAllUrl="/guitareo/quick-tips"
+                    :preLoadedContent="quickTips.data"
+                    :lock-unowned="true"
+                />
             </div>
 
             <!-- TOPICS SECTION-->
@@ -153,13 +122,14 @@
     </div>
 </template>
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useUserStore } from "../../stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import PageHeader from '../components/PageHeader/PageHeader';
 import GuitareoPack from '../components/GuitareoPack/GuitareoPack';
 import ContentCatalogue from '../vuesora/views/catalogues/ContentCatalogue';
+import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
 
 const userStore = useUserStore();
 const { userId } = storeToRefs(userStore);
@@ -211,5 +181,9 @@ const guitarQuestProgress = computed(() => {
     } else {
         return props.guitarQuestPack.user_progress[userId.value]?.state;
     }
+})
+
+onMounted(() => {
+    console.log(props.courses)
 })
 </script>
