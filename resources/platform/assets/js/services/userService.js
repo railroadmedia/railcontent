@@ -7,7 +7,7 @@ import axios from 'axios';
  * @param {string} userId
  * @param {object} payload
  */
-export const updateUserName = (token, userId, payload) => {
+export const updateUserProfile = (token, userId, payload) => {
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': token
@@ -15,6 +15,26 @@ export const updateUserName = (token, userId, payload) => {
     return axios({
         method: 'PATCH',
         url: `/user-management-system/user/update/${userId}`,
+        data: payload,
+        headers
+    });
+};
+
+/**
+ * Update User Signature
+ *
+ * @param {string} token
+ * @param {string} userId
+ * @param {object} payload
+ */
+export const updateUserSignature = (token, userId, payload) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+    return axios({
+        method: 'PATCH',
+        url: `/signature/update/${userId}`,
         data: payload,
         headers
     });

@@ -10,7 +10,7 @@
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
-                @submit.prevent="submitDisplayNameForm"
+                @submit.prevent="submitUserForm"
             >
                 <MuSelect
                     inputOverride="tw-mb-3" 
@@ -89,6 +89,7 @@ import { useUserStore } from '../../../stores/user';
 
 const userStore = useUserStore();
 const { 
+    token,
     userId, 
     userPlayingGuitarSince,
     userGuitarBrands,
@@ -116,14 +117,13 @@ const handleClose = () => {
     emit('onCloseGuitarGearModal');
 };
 
-const submitDisplayNameForm = async () => {
-    // API call to update user's drum gear
+const submitUserForm = async () => {
     try {
-        await userStore.updateUserGear(userId.value, formData.value);
-        handleClose(); // Close modal after success
+        await userStore.updateProfile(token.value, userId.value, formData.value);
     } catch (error) {
-        console.error("Failed to update the drum gear:", error.message);
+        console.error("Failed to update the display name:", error.message);
     }
+    handleClose(); // Close modal
 };
 </script>
 

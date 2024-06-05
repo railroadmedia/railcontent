@@ -11,19 +11,9 @@
 
             <form 
                 accept-charset="UTF-8" 
-                method="POST" 
-                @submit.prevent="submitSignatureForm"
+                @submit.prevent="submitUserForm"
             >
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
-                    <!-- <MuInput 
-                        type="text"
-                        id="Signature" 
-                        name="signature" 
-                        label="Display Name"
-                        placeholder="Enter Display Name" 
-                        v-model="formData.signature"
-                        :inputErrors="[]" 
-                    /> -->
                     <TextEditor 
                         fieldKey="signature-editor"
                         ref="textEditor" 
@@ -59,7 +49,7 @@
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
-    const { userId, userSignature } = storeToRefs(userStore);
+    const { token, userId, userSignature } = storeToRefs(userStore);
 
     //Refs
     const emit = defineEmits(['onCloseSignatureModal']);
@@ -73,9 +63,9 @@
         emit('onCloseSignatureModal');
     };
         
-    const submitSignatureForm = async () => {
+    const submitUserForm = async () => {
         try {
-            await userStore.updateSignature(userId.value, formData.value.signature);
+            await userStore.updateSignature(token.value, userId.value, formData.value);
         } catch (error) {
             console.error("Failed to update the display name:", error.message);
         }

@@ -9,8 +9,7 @@
             <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Display Name</h2>
             <form 
                 accept-charset="UTF-8" 
-                method="POST" 
-                @submit.prevent="submitDisplayNameForm"
+                @submit.prevent="submitUserForm"
             >
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
                     <MuInput 
@@ -65,9 +64,9 @@
         emit('onCloseDisplayNameModal');
     };
         
-    const submitDisplayNameForm = async () => {
+    const submitUserForm = async () => {
         try {
-            await userStore.updateDisplayName(token.value, userId.value, formData.value.display_name);
+            await userStore.updateProfile(token.value, userId.value, formData.value);
         } catch (error) {
             console.error("Failed to update the display name:", error.message);
         }

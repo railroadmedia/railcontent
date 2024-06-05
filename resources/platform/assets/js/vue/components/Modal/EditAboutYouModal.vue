@@ -10,7 +10,7 @@
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
-                @submit.prevent="submitDisplayNameForm"
+                @submit.prevent="submitUserForm"
             >
                 <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-[20px]">
                     <MuInput 
@@ -81,6 +81,7 @@
 
     const userStore = useUserStore();
     const { 
+        token,
         userId, 
         userFirstName,
         userLastName,
@@ -107,14 +108,12 @@
         emit('onCloseAboutYouModal');
     };
 
-    const submitDisplayNameForm = async () => {
+    const submitUserForm = async () => {
         try {
-            // Here you would update the user information
-            // await userStore.updateUserProfile(userId.value, formData.value);
-            console.log("Form Submitted", formData.value);
-            handleClose(); // Close modal after success
+            await userStore.updateProfile(token.value, userId.value, formData.value);
         } catch (error) {
-            console.error("Failed to update the profile:", error.message);
+            console.error("Failed to update the display name:", error.message);
         }
+        handleClose(); // Close modal
     };
 </script>

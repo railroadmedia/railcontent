@@ -9,8 +9,7 @@
             <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Singing Gear</h2>
             <form 
                 accept-charset="UTF-8" 
-                method="POST" 
-                @submit.prevent="submitDisplayNameForm"
+                @submit.prevent="submitUserForm"
             >
                 <MuSelect
                     inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
@@ -83,13 +82,12 @@ const handleClose = () => {
     emit('onCloseSingingGearModal');
 };
 
-const submitDisplayNameForm = async () => {
-    // API call to update user's drum gear
+const submitUserForm = async () => {
     try {
-        await userStore.updateUserGear(userId.value, formData.value);
-        handleClose(); // Close modal after success
+        await userStore.updateProfile(token.value, userId.value, formData.value);
     } catch (error) {
-        console.error("Failed to update the drum gear:", error.message);
+        console.error("Failed to update the display name:", error.message);
     }
+    handleClose(); // Close modal
 };
 </script>
