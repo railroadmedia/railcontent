@@ -84,7 +84,7 @@ class Field
             $optional['validation'] = Field::formatTypeScriptForView($this->validation);
         }
         if (!is_null($this->readOnly)) {
-            $optional['readyOnly'] = Field::formatTypeScriptForView($this->readOnly);
+            $optional['readOnly'] = Field::formatTypeScriptForView($this->readOnly);
         }
         // Add initialValue to optional array
         if (!is_null($this->initialValue)) {
