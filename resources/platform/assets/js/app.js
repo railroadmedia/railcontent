@@ -35,6 +35,7 @@ import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
 import Offline from './vue/Pages/Live/Offline';
 import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
+import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
@@ -297,6 +298,7 @@ app.component('AppContainer', AppContainer)
     .component('Payments', Payments)
     .component('NotificationSettings', NotificationSettings)
     .component('Details', Details)
+    .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)

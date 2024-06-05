@@ -159,6 +159,7 @@
                 </div>
             </section>
         </div>
+        <LessonComplete :lesson-content="lessonData" :this-lesson-json="thisLessonJson" :next-lesson-json="nextLessonJson" />
     </div>
 </template>
 
@@ -181,8 +182,17 @@ import ContentService from '../vuesora/assets/js/services/content';
 import ContentProgress from "../components/ContentProgress/ContentProgress.vue";
 import RelatedLessonsToggle from "../components/RelatedLessons/RelatedLessonsToggle.vue";
 import RelatedLessons from "../components/RelatedLessons/RelatedLessons.vue";
+import LessonComplete from "../components/ContentProgress/LessonComplete.vue";
 
 const props = defineProps({
+    thisLessonJson: {
+        type: Object,
+        default: () => {}
+    },
+    nextLessonJson: {
+        type: Object,
+        default: () => {}
+    },
     progressXp: {
         type: String,
         default: ''

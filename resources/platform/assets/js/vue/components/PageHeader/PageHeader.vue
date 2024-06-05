@@ -89,8 +89,6 @@ const props = defineProps({
   description: String,
 });
 
-console.log('props', props)
-
 const primaryCta = computed(() => props.ctas?.find(cta => cta.props?.isPrimary));
 const primaryCtaProps = computed(() => primaryCta.value?.props || {});
 

@@ -63,8 +63,6 @@ const props = defineProps({
     }
 });
 
-console.log(props);
-
 const buttonStyle = computed(() => {
     return props.isPrimary ?
         'tw-btn-primary tw-bg-[#000C17] tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-text-center tw-m-0 md:tw-px-10 lg:tw-px-[30px] md:tw-inline-block tw-px-6 hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white'

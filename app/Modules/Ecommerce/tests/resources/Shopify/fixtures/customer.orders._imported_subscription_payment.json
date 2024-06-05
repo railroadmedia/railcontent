@@ -1,0 +1,2618 @@
+{
+    "orders": [
+        {
+            "id": 5566123016468,
+            "admin_graphql_api_id": "gid://shopify/Order/5566123016468",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "ZJYUICER5",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T12:13:59-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#1028165",
+            "note": "Imported from the old ecommerce system: subscription payment ID 1010269.\n",
+            "note_attributes": [],
+            "number": 1027165,
+            "order_number": 1028165,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/3ad365af123f2cb8a25af9a6210c784f/authenticate?key=b3ebaf70b9f1d8263c178e680898fdde&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-10-29T17:20:40-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "3ad365af123f2cb8a25af9a6210c784f",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-05T12:13:00-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4924685517076,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4924685517076",
+                    "created_at": "2023-11-05T12:14:01-08:00",
+                    "location_id": 79865217300,
+                    "name": "#1028165.1",
+                    "order_id": 5566123016468,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T12:14:01-08:00",
+                    "line_items": [
+                        {
+                            "id": 14273992491284,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14273992491284",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14273992491284,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14273992491284",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5564906537236,
+            "admin_graphql_api_id": "gid://shopify/Order/5564906537236",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "UQQJ17E0I",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T10:41:30-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#994867",
+            "note": "Imported from the old ecommerce system: subscription payment ID 947810.\n",
+            "note_attributes": [],
+            "number": 993867,
+            "order_number": 994867,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/f935dc98b020e685a5d09da27eb83eb1/authenticate?key=d1178492443f8f622941009edb240fbe&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-08-29T17:21:56-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "f935dc98b020e685a5d09da27eb83eb1",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-09T09:01:21-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4923501052180,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4923501052180",
+                    "created_at": "2023-11-05T10:41:32-08:00",
+                    "location_id": 79865217300,
+                    "name": "#994867.1",
+                    "order_id": 5564906537236,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T10:41:33-08:00",
+                    "line_items": [
+                        {
+                            "id": 14272572064020,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14272572064020",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14272572064020,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14272572064020",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5564365799700,
+            "admin_graphql_api_id": "gid://shopify/Order/5564365799700",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "4FUIMMU61",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T10:00:33-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#980125",
+            "note": "Imported from the old ecommerce system: subscription payment ID 974498.\n",
+            "note_attributes": [],
+            "number": 979125,
+            "order_number": 980125,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/a95d48b1a7b4bac5cff94e13f5ab87d4/authenticate?key=32666c2d655dadb017bb0f2a9f6a09ea&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-09-29T17:21:47-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "a95d48b1a7b4bac5cff94e13f5ab87d4",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-08T09:38:00-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4922989805844,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4922989805844",
+                    "created_at": "2023-11-05T10:00:35-08:00",
+                    "location_id": 79865217300,
+                    "name": "#980125.1",
+                    "order_id": 5564365799700,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T10:00:35-08:00",
+                    "line_items": [
+                        {
+                            "id": 14271950356756,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14271950356756",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14271950356756,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14271950356756",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5563297661204,
+            "admin_graphql_api_id": "gid://shopify/Order/5563297661204",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "X8U5X8CNK",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T08:39:18-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#950873",
+            "note": "Imported from the old ecommerce system: subscription payment ID 895129.\n",
+            "note_attributes": [],
+            "number": 949873,
+            "order_number": 950873,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/371e37d418fe5c04d859ac76459d3585/authenticate?key=4acd9d4b5a28579a94072557566e6114&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-06-29T19:17:41-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "371e37d418fe5c04d859ac76459d3585",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-10T09:27:46-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4921982714132,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4921982714132",
+                    "created_at": "2023-11-05T08:39:20-08:00",
+                    "location_id": 79865217300,
+                    "name": "#950873.1",
+                    "order_id": 5563297661204,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T08:39:20-08:00",
+                    "line_items": [
+                        {
+                            "id": 14270751015188,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14270751015188",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14270751015188,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14270751015188",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5563004715284,
+            "admin_graphql_api_id": "gid://shopify/Order/5563004715284",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "0X3G80ZPY",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T08:17:08-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#942889",
+            "note": "Imported from the old ecommerce system: subscription payment ID 922227.\n",
+            "note_attributes": [],
+            "number": 941889,
+            "order_number": 942889,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/174490b195199ff7e9f65eef1974828c/authenticate?key=460eea62bfadfd323c0ce03efc8983b2&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-07-29T17:22:02-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "174490b195199ff7e9f65eef1974828c",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-10T05:30:50-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4921708904724,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4921708904724",
+                    "created_at": "2023-11-05T08:17:10-08:00",
+                    "location_id": 79865217300,
+                    "name": "#942889.1",
+                    "order_id": 5563004715284,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T08:17:10-08:00",
+                    "line_items": [
+                        {
+                            "id": 14270421336340,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14270421336340",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14270421336340,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14270421336340",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5562350141716,
+            "admin_graphql_api_id": "gid://shopify/Order/5562350141716",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "1504EQ3LF",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T07:27:59-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#925205",
+            "note": "Imported from the old ecommerce system: subscription payment ID 870708.\n",
+            "note_attributes": [],
+            "number": 924205,
+            "order_number": 925205,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/5896ac1eb3f8d34394c0902d81d7b4e6/authenticate?key=e12a02982ab7e3861b12e7d5c939c527&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-05-29T19:18:00-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "5896ac1eb3f8d34394c0902d81d7b4e6",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-10T14:52:42-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4921102074132,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4921102074132",
+                    "created_at": "2023-11-05T07:28:01-08:00",
+                    "location_id": 79865217300,
+                    "name": "#925205.1",
+                    "order_id": 5562350141716,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T07:28:01-08:00",
+                    "line_items": [
+                        {
+                            "id": 14269681467668,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14269681467668",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14269681467668,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14269681467668",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5561870811412,
+            "admin_graphql_api_id": "gid://shopify/Order/5561870811412",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "QH574XATL",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-05T06:51:39-08:00",
+            "currency": "USD",
+            "current_subtotal_price": "30.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "30.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#912123",
+            "note": "Imported from the old ecommerce system: subscription payment ID 848370.\n",
+            "note_attributes": [],
+            "number": 911123,
+            "order_number": 912123,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/355a94194672c6550b6533b8caa52764/authenticate?key=c7474ee571bae6abdfeb7805f9a18101&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+                ""
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-04-30T05:16:01-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "30.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Trial Conversion",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "355a94194672c6550b6533b8caa52764",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "30.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "30.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "30.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-11T09:00:31-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4920648958228,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4920648958228",
+                    "created_at": "2023-11-05T06:51:41-08:00",
+                    "location_id": 79865217300,
+                    "name": "#912123.1",
+                    "order_id": 5561870811412,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-05T06:51:41-08:00",
+                    "line_items": [
+                        {
+                            "id": 14269139812628,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14269139812628",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs",
+                            "price": "30.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "30.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079230740,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758240532,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14269139812628,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14269139812628",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs",
+                    "price": "30.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "30.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079230740,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758240532,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        },
+        {
+            "id": 5538932424980,
+            "admin_graphql_api_id": "gid://shopify/Order/5538932424980",
+            "app_id": 62984159233,
+            "browser_ip": null,
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": null,
+            "checkout_token": null,
+            "client_details": null,
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "XY8QMN74D",
+            "confirmed": true,
+            "contact_email": "imported_memberships@mail.com",
+            "created_at": "2023-11-01T13:02:31-07:00",
+            "currency": "USD",
+            "current_subtotal_price": "0.00",
+            "current_subtotal_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "0.00",
+            "current_total_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "customer_locale": null,
+            "device_id": null,
+            "discount_codes": [],
+            "email": "imported_memberships@mail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_of_record_app_id": null,
+            "name": "#372306",
+            "note": "Imported from the old ecommerce system: order ID 401139.\n",
+            "note_attributes": [],
+            "number": 371306,
+            "order_number": 372306,
+            "order_status_url": "https://shop.musora.com/73541484820/orders/eb726e03ca806b5a48f41c39fb1f7079/authenticate?key=d8ecada5f1da04e39a6a74177dcb55eb&none=UgZcClJDUVFRRFc",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "USD",
+            "processed_at": "2023-04-23T03:50:06-07:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "62984159233",
+            "source_url": null,
+            "subtotal_price": "0.00",
+            "subtotal_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "tags": "Initial Order, Trial Start",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": false,
+            "test": false,
+            "token": "eb726e03ca806b5a48f41c39fb1f7079",
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_line_items_price": "0.00",
+            "total_line_items_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "0.00",
+            "total_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_shipping_price_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2024-04-11T08:17:03-07:00",
+            "user_id": null,
+            "billing_address": null,
+            "customer": {
+                "id": 7362382561556,
+                "email": "imported_memberships@mail.com",
+                "created_at": "2023-10-31T05:53:58-07:00",
+                "updated_at": "2023-11-17T15:50:27-08:00",
+                "first_name": "",
+                "last_name": "N/A",
+                "state": "enabled",
+                "note": null,
+                "verified_email": true,
+                "multipass_identifier": null,
+                "tax_exempt": false,
+                "phone": null,
+                "email_marketing_consent": {
+                    "state": "not_subscribed",
+                    "opt_in_level": "single_opt_in",
+                    "consent_updated_at": null
+                },
+                "sms_marketing_consent": null,
+                "tags": "Inactive Subscriber",
+                "currency": "USD",
+                "accepts_marketing": false,
+                "accepts_marketing_updated_at": null,
+                "marketing_opt_in_level": "single_opt_in",
+                "tax_exemptions": [],
+                "admin_graphql_api_id": "gid://shopify/Customer/7362382561556"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+                {
+                    "id": 4895988351252,
+                    "admin_graphql_api_id": "gid://shopify/Fulfillment/4895988351252",
+                    "created_at": "2023-11-01T13:02:32-07:00",
+                    "location_id": 79865217300,
+                    "name": "#372306.1",
+                    "order_id": 5538932424980,
+                    "origin_address": {},
+                    "receipt": {},
+                    "service": "manual",
+                    "shipment_status": null,
+                    "status": "success",
+                    "tracking_company": null,
+                    "tracking_number": null,
+                    "tracking_numbers": [],
+                    "tracking_url": null,
+                    "tracking_urls": [],
+                    "updated_at": "2023-11-01T13:02:32-07:00",
+                    "line_items": [
+                        {
+                            "id": 14236362277140,
+                            "admin_graphql_api_id": "gid://shopify/LineItem/14236362277140",
+                            "attributed_staffs": [],
+                            "fulfillable_quantity": 0,
+                            "fulfillment_service": "manual",
+                            "fulfillment_status": "fulfilled",
+                            "gift_card": false,
+                            "grams": 0,
+                            "name": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                            "price": "0.00",
+                            "price_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "product_exists": true,
+                            "product_id": 8801079722260,
+                            "properties": [],
+                            "quantity": 1,
+                            "requires_shipping": false,
+                            "sku": "DLM-Trial-1-month",
+                            "taxable": true,
+                            "title": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                            "total_discount": "0.00",
+                            "total_discount_set": {
+                                "shop_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                },
+                                "presentment_money": {
+                                    "amount": "0.00",
+                                    "currency_code": "USD"
+                                }
+                            },
+                            "variant_id": 47070758797588,
+                            "variant_inventory_management": "shopify",
+                            "variant_title": null,
+                            "vendor": "drumeo",
+                            "tax_lines": [],
+                            "duties": [],
+                            "discount_allocations": []
+                        }
+                    ]
+                }
+            ],
+            "line_items": [
+                {
+                    "id": 14236362277140,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/14236362277140",
+                    "attributed_staffs": [],
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                    "price": "0.00",
+                    "price_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "product_exists": true,
+                    "product_id": 8801079722260,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": false,
+                    "sku": "DLM-Trial-1-month",
+                    "taxable": true,
+                    "title": "Drumeo+ Monthly Membership: Includes Songs | With 7-Day Trial",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                        "shop_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        },
+                        "presentment_money": {
+                            "amount": "0.00",
+                            "currency_code": "USD"
+                        }
+                    },
+                    "variant_id": 47070758797588,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": null,
+                    "vendor": "drumeo",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": []
+        }
+    ]
+}

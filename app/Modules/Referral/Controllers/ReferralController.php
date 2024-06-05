@@ -2,12 +2,14 @@
 
 namespace App\Modules\Referral\Controllers;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use App\Modules\Referral\Events\EmailInvite;
 use App\Modules\Referral\Requests\EmailInviteRequest;
 use App\Modules\Referral\Services\ReferralService;
+use Avo;
 
 class ReferralController extends Controller
 {
@@ -46,6 +48,13 @@ class ReferralController extends Controller
         // this event is used in other packages to actually send the email
         event(new EmailInvite($request->get('email'), $referrer->referral_link, $brand));
 
+        Avo::referral_invite_sent(
+            AvoHelper::defaultEventProperties(
+                ['referral_code' => $referrer->referral_code, 'brand' => $brand],
+                user()
+            )
+        );
+
         $redirect = $request->has('redirect') ? $request->get('redirect') : url()->route(
             config('referral.email_invite_redirect_route'),
             ['brand' => $request->get('brand')]
@@ -61,5 +70,4 @@ class ReferralController extends Controller
             ->away($redirect)
             ->with(['email-invite-message' => config('referral.messages.email_invite_success')]);
     }
-
 }

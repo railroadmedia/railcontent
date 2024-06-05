@@ -98,21 +98,14 @@
   
   const resetProgress = () => {
     // Add logic for resetting progress
-    console.log('Reset progress');
+    // console.log('Reset progress');
+    // TODO: Refactor event listeners and attach here
   }
   
   const toggleComplete = () => {
     // Add logic for marking lesson as complete/incomplete
-    console.log('Toggle complete');
+    // console.log('Toggle complete');
+    // TODO: Refactor event listeners and attach here
   }
   </script>
-  
-  <style scoped>
-  .complete {
-    /* Add styles for completed state */
-  }
-  .is-complete {
-    /* Add styles for complete button */
-  }
-  </style>
   
