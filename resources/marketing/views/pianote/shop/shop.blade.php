@@ -127,7 +127,7 @@
                         "href" => "https://www.musora.com/gift-card",
                         "instructor" => "Award-Winning Membership",
                         "price" =>  90,
-                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/musora/membership/redeem/gift-card.webp",
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",
                         "title" => "Musora Gift Cards",
                         'soldOut' => false,
                     ])
