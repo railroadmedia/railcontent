@@ -36,7 +36,6 @@ import PageHeader from "../components/PageHeader/PageHeader";
 import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
 import CompletionBonus from "../components/CompletionBonus/CompletionBonus";
 import ContentCatalogue from "../components/Catalogue/ContentCatalogue";
-import CatalogueCardContainer from '../components/Catalogue/CatalogueCardContainer';
 
 const props = defineProps({
     breadcrumbs: {
