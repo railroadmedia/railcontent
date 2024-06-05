@@ -20,22 +20,26 @@
                         v-model="formData.signature"
                         :is-student-comment="false"
                         toolbar="bold italic underline | link"
+                        :disabled="formProcessing"
                         :height="150" 
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button
+                    <mu-button
+                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        :processing="formProcessing"
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
+                    </mu-button>
+                    <mu-button
                         @click="handleClose"
+                        style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </button>
+                    </mu-button>
                 </div>
             </form>
         </div>
@@ -45,17 +49,20 @@
     import { ref } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
     import TextEditor from '../../vuesora/components/TextEditor/TextEditor.vue';
+    import MuButton from '../Button/MuButton.vue';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
     const { token, userId, userSignature } = storeToRefs(userStore);
 
-    //Refs
+    //Emits
     const emit = defineEmits(['onCloseSignatureModal']);
 
+    //Refs
+    const formProcessing = ref(false);
     const formData = ref({
-        signature: userSignature.value || '', // Initialize with current Signature or empty string
+        signature: userSignature.value || '', 
     });
 
     //Methods
@@ -64,6 +71,7 @@
     };
         
     const submitUserForm = async () => {
+        formProcessing.value = true;
         try {
             await userStore.updateSignature(token.value, userId.value, formData.value);
         } catch (error) {

@@ -6,18 +6,25 @@
       </label>
       <div class="tw-flex tw-relative">
         <input :value="modelValue"
-               @input="updateValue($event.target.value)"
-               @keypress.enter.prevent="onEnter"
-               :placeholder="placeholder" 
-               :id="id"
-               :class="[getBaseInputStyles, `${inputOverride ? inputOverride : ''}`,
-                        {'!tw-border-red-500 dark:!tw-border-red-500' : error},
-                        {'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled}]"
-               :name="name"
-               :type="type"
-               :disabled="disabled"
-               autocomplete="off"
-               @focus="() => emit('onFocus')"
+                @input="updateValue($event.target.value)"
+                @keypress.enter.prevent="onEnter"
+                :placeholder="placeholder" 
+                :id="id"
+                :class="[
+                  getBaseInputStyles, 
+                  borderStyles,
+                  `${inputOverride ? inputOverride : ''}`,
+                  {'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled}]"
+                :name="name"
+                :type="type"
+                :disabled="disabled"
+                :required="required"
+                :minlength="minlength"
+                :maxlength="maxlength"
+                :pattern="pattern"   
+                :title="title"
+                autocomplete="off"
+                @focus="() => emit('onFocus')"
         />
         <div v-if="showClearButton"
              :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${value ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
@@ -33,7 +40,7 @@
   </template>
   
   <script setup>
-  import { defineProps, defineEmits, computed } from 'vue';
+  import { computed } from 'vue';
   import { XIcon } from "@heroicons/vue/solid";
   
   const props = defineProps({
@@ -53,12 +60,28 @@
         showCustomButton: Boolean,
         disabled: Boolean,
         error: Boolean,
+        success: Boolean,
+        required: Boolean,
+        minlength: Number,
+        maxlength: Number,
+        pattern: String,
+        title: String,
     });
   
   const emit = defineEmits(["update:modelValue", "onFocus", "onEnter"]);
   
-  const getBaseInputStyles = computed(() => `${props.removeDefaultInputStyles ? '' : 'tw-w-full tw-h-[50px] tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }`);
+  const getBaseInputStyles = computed(() => `${props.removeDefaultInputStyles ? '' : 'tw-w-full tw-h-[50px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-ring-0 focus:tw-outline-none' }`);
   
+  const borderStyles = computed( () => {
+    if(props.error) {
+      return 'tw-bg-transparent tw-border-pianote dark:tw-border-pianote'
+    } else if(props.success) {
+       return 'tw-border-guitareo dark:tw-border-guitareo'
+    } else {
+      return 'tw-border-[#D1D5DB] dark:tw-border-[#445F74] dark:focus:tw-border-drumeo focus:tw-border-drumeo';
+    }
+  })
+
   const updateValue = (value) => {
       emit("update:modelValue", value);
   };

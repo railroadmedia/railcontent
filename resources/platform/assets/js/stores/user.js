@@ -47,13 +47,11 @@ export const useUserStore = defineStore({
     userStringBrands: (state) => state.user?.guitar_gear_string_brands,
     userBirthdayFormatted: (state) => {
       if (!state.user?.birthday) return ''; 
-      const date = new Date(state.user.birthday);
-      return date.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-      });
+      const [year, month, day] = state.user.birthday.split('-');
+      const date = new Date(Date.UTC(year, month - 1, day));
+      return `${date.toLocaleString('default', { month: 'long' })} ${day}, ${year}`;
     },
+    
     userFullName: (state) => {
       if(state.user?.first_name && state.user?.last_name) {
         return `${state.user.first_name} ${state.user.last_name}`;

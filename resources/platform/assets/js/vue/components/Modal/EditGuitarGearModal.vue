@@ -18,6 +18,7 @@
                     input-name="guitar_playing_since_year"
                     label="Playing Guitar Since"
                     :options="yearValues"
+                    :disabled="formProcessing"
                     v-model="formData.guitar_playing_since_year"
                     placeholder="Select Year"
                 />
@@ -29,6 +30,7 @@
                         id="guitarBrand" 
                         name="guitar_gear_guitar_brands" 
                         label="Guitars"
+                        :disabled="formProcessing"
                         placeholder="Enter Guitar Brands" 
                         v-model="formData.guitar_gear_guitar_brands"
                     />
@@ -39,6 +41,7 @@
                         name="guitar_gear_amp_brands" 
                         label="Amps"
                         placeholder="Enter Amp Brands" 
+                        :disabled="formProcessing"
                         v-model="formData.guitar_gear_amp_brands"
                     />
                     <MuInput
@@ -48,6 +51,7 @@
                         name="guitar_gear_pedal_brands" 
                         label="Pedals"
                         placeholder="Enter Pedal Brands" 
+                        :disabled="formProcessing"
                         v-model="formData.guitar_gear_pedal_brands"
                     />
                     <MuInput
@@ -57,22 +61,26 @@
                         name="guitar_gear_string_brands" 
                         label="Strings"
                         placeholder="Enter String Brands" 
+                        :disabled="formProcessing"
                         v-model="formData.guitar_gear_string_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button   
+                    <mu-button
+                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        :processing="formProcessing"
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
+                    </mu-button>
+                    <mu-button
                         @click="handleClose"
+                        style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </button>
+                    </mu-button>
                 </div>
             </form>
         </div>
@@ -84,6 +92,7 @@ import { ref, computed } from 'vue';
 import InfoModal from '../Modal/InfoModal.vue';
 import MuInput from "../../components/FormInputs/MuInput.vue"
 import MuSelect from "../../components/FormInputs/MuSelect.vue"
+import MuButton from '../Button/MuButton.vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 
@@ -100,12 +109,14 @@ const {
 
 const emit = defineEmits(['onCloseGuitarGearModal']);
 
+//Refs
+const formProcessing = ref(false);
 const formData = ref({
-    guitar_playing_since_year: userPlayingGuitarSince || '',
-    guitar_gear_guitar_brands: userGuitarBrands || '',
-    guitar_gear_amp_brands: userAmpBrands || '',
-    guitar_gear_pedal_brands: userPedalBrands || '',
-    guitar_gear_string_brands: userStringBrands || '',
+    guitar_playing_since_year: userPlayingGuitarSince.value || '',
+    guitar_gear_guitar_brands: userGuitarBrands.value || '',
+    guitar_gear_amp_brands: userAmpBrands.value || '',
+    guitar_gear_pedal_brands: userPedalBrands.value || '',
+    guitar_gear_string_brands: userStringBrands.value || '',
 });
 
 const yearValues = computed(() => {
@@ -118,6 +129,7 @@ const handleClose = () => {
 };
 
 const submitUserForm = async () => {
+    formProcessing.value = true;      
     try {
         await userStore.updateProfile(token.value, userId.value, formData.value);
     } catch (error) {

@@ -18,7 +18,11 @@
                         id="firstName" 
                         name="first_name" 
                         label="First Name"
-                        placeholder="Enter First Name" 
+                        required
+                        title="First Name cannot be empty"
+                        :error="!formData.first_name.length"
+                        placeholder="Enter First Name"
+                        :disabled="formProcessing" 
                         v-model="formData.first_name"
                     />
                     <MuInput 
@@ -26,7 +30,11 @@
                         id="lastName" 
                         name="last_name" 
                         label="Last Name"
+                        required
+                        title="Last Name cannot be empty"
+                        :error="!formData.last_name.length"
                         placeholder="Enter Last Name" 
+                        :disabled="formProcessing"
                         v-model="formData.last_name"
                     />
                     <MuSelect
@@ -35,11 +43,13 @@
                         :options="countryList"
                         v-model="formData.country"
                         placeholder="Choose a Country"
+                        :disabled="formProcessing"
                     />
                     <MuDateInput
                         id="profileBirthday"
                         label="Birthday"
                         v-model="formData.birthday"
+                        :disabled="formProcessing"
                     />
                 </div>
                 <MuTextarea
@@ -48,21 +58,25 @@
                     label="Biography"
                     v-model="formData.biography"
                     placeholder="Enter Biography"
+                    :disabled="formProcessing"
                 />
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button
-                        :disabled="!formData.first_name.length" 
+                    <mu-button
+                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        :disabled="!formData.first_name.length && !formData.last_name"
+                        :processing="formProcessing"
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
+                    </mu-button>
+                    <mu-button
                         @click="handleClose"
+                        style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </button>
+                    </mu-button>
                 </div>
             </form>
         </div>
@@ -76,6 +90,7 @@
     import MuSelect from "../../components/FormInputs/MuSelect.vue"
     import MuTextarea from "../../components/FormInputs/MuTextarea.vue"
     import MuDateInput from "../../components/FormInputs/MuDateInput.vue"
+    import MuButton from '../Button/MuButton.vue';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
@@ -94,8 +109,11 @@
         countryList: Array,
     });
 
+    //Emits
     const emit = defineEmits(['onCloseAboutYouModal']);
 
+    //Refs
+    const formProcessing = ref(false);
     const formData = ref({
         first_name: userFirstName.value || '', 
         last_name: userLastName.value || '',
@@ -104,11 +122,13 @@
         biography: userBiography.value || '',
     });
 
+    //Methods
     const handleClose = () => {
         emit('onCloseAboutYouModal');
     };
 
     const submitUserForm = async () => {
+        formProcessing.value = true;
         try {
             await userStore.updateProfile(token.value, userId.value, formData.value);
         } catch (error) {

@@ -17,6 +17,7 @@
                     input-name="singing_since_year"
                     label="Singing Since"
                     :options="yearValues"
+                    :disabled="formProcessing"
                     v-model="formData.singing_since_year"
                     placeholder="Select Year"
                 />
@@ -28,22 +29,26 @@
                         name="singing_gear_mic_brands" 
                         label="Microphones"
                         placeholder="Enter Microphone Brands" 
+                        :disabled="formProcessing"
                         v-model="formData.singing_gear_mic_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button   
+                    <mu-button
+                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        :processing="formProcessing"
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
+                    </mu-button>
+                    <mu-button
                         @click="handleClose"
+                        style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </button>
+                    </mu-button>
                 </div>
             </form>
         </div>
@@ -55,11 +60,13 @@ import { ref, computed } from 'vue';
 import InfoModal from '../Modal/InfoModal.vue';
 import MuInput from "../../components/FormInputs/MuInput.vue"
 import MuSelect from "../../components/FormInputs/MuSelect.vue"
+import MuButton from '../Button/MuButton.vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 
 const userStore = useUserStore();
 const { 
+    token,
     userId, 
     userSingingSince,
     userMicBrands,
@@ -68,6 +75,8 @@ const {
 
 const emit = defineEmits(['onCloseSingingGearModal']);
 
+//Refs
+const formProcessing = ref(false);
 const formData = ref({
     singing_since_year: userSingingSince.value || '',
     singing_gear_mic_brands: userMicBrands.value || ''
@@ -83,6 +92,8 @@ const handleClose = () => {
 };
 
 const submitUserForm = async () => {
+    //Refs
+    formProcessing.value = true;
     try {
         await userStore.updateProfile(token.value, userId.value, formData.value);
     } catch (error) {

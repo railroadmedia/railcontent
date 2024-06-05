@@ -17,26 +17,31 @@
                         id="displayName" 
                         name="display_name" 
                         label="Display Name"
+                        :disabled="formProcessing"
+                        required
+                        title="Display Name cannot be empty"
+                        :error="!formData.display_name.length"
                         placeholder="Enter Display Name" 
                         v-model="formData.display_name"
-                        :inputErrors="[]" 
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button
-                        :disabled="!formData.display_name.length" 
+                    <mu-button
+                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
-                        :class="!formData.display_name.length ? 'tw-opacity-50' : ''"
+                        :disabled="!formData.display_name.length"
+                        :processing="formProcessing"
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
+                    </mu-button>
+                    <mu-button
                         @click="handleClose"
+                        style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </button>
+                    </mu-button>
                 </div>
             </form>
         </div>
@@ -46,6 +51,7 @@
     import { ref } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
     import MuInput from "../../components/FormInputs/MuInput.vue"
+    import MuButton from '../Button/MuButton.vue';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
@@ -55,6 +61,7 @@
     //Refs
     const emit = defineEmits(['onCloseDisplayNameModal']);
 
+    const formProcessing = ref(false);
     const formData = ref({
         display_name: userDisplayName.value || '' // Initialize with current displayName or empty string
     });
@@ -65,6 +72,7 @@
     };
         
     const submitUserForm = async () => {
+        formProcessing.value = true;
         try {
             await userStore.updateProfile(token.value, userId.value, formData.value);
         } catch (error) {

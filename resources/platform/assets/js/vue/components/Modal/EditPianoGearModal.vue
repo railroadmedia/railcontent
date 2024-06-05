@@ -17,8 +17,9 @@
                     input-name="piano_playing_since_year"
                     label="Playing Piano Since"
                     :options="yearValues"
-                    v-model="formData.piano_playing_since_year"
                     placeholder="Select Year"
+                    :disabled="formProcessing"
+                    v-model="formData.piano_playing_since_year"
                 />
 
                 <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-8">
@@ -29,6 +30,7 @@
                         name="piano_gear_piano_brands" 
                         label="Piano"
                         placeholder="Enter Piano Brand" 
+                        :disabled="formProcessing"
                         v-model="formData.piano_gear_piano_brands"
                     />
                     <MuInput
@@ -38,22 +40,26 @@
                         name="piano_gear_keyboard_brands" 
                         label="Keyboard"
                         placeholder="Enter Keyboard Brand" 
+                        :disabled="formProcessing"
                         v-model="formData.piano_gear_keyboard_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <button   
+                    <mu-button
+                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        :processing="formProcessing"
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
+                    </mu-button>
+                    <mu-button
                         @click="handleClose"
+                        style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </button>
+                    </mu-button>
                 </div>
             </form>
         </div>
@@ -65,6 +71,7 @@ import { ref, computed } from 'vue';
 import InfoModal from '../Modal/InfoModal.vue';
 import MuInput from "../../components/FormInputs/MuInput.vue"
 import MuSelect from "../../components/FormInputs/MuSelect.vue"
+import MuButton from '../Button/MuButton.vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 
@@ -78,24 +85,30 @@ const {
 
 } = storeToRefs(userStore);
 
+//Emits
 const emit = defineEmits(['onClosePianoGearModal']);
 
+//Refs
+const formProcessing = ref(false);
 const formData = ref({
     piano_playing_since_year: userPlayingPianoSince.value || '',
     piano_gear_piano_brands: userPianoBrands.value || '',
     piano_gear_keyboard_brands: userKeyboardBrands.value || '',
 });
 
+//Computed
 const yearValues = computed(() => {
     const currentYear = new Date().getFullYear();
     return ["", ...Array(currentYear - 1899).fill().map((_, idx) => currentYear - idx)];
 });
 
+//Methods
 const handleClose = () => {
     emit('onClosePianoGearModal');
 };
 
 const submitUserForm = async () => {
+    formProcessing.value = true;
     try {
         await userStore.updateProfile(token.value, userId.value, formData.value);
     } catch (error) {
