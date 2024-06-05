@@ -95,7 +95,7 @@ const submitUserForm = async () => {
     //Refs
     formProcessing.value = true;
     try {
-        await userStore.updateProfile(token.value, userId.value, formData.value);
+        await userStore.updateProfile(formData.value);
     } catch (error) {
         console.error("Failed to update the display name:", error.message);
     }

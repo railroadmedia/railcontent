@@ -72,6 +72,38 @@ export const useUserStore = defineStore({
     },
     setUserProfilePictureUrl (url) {
       this.user.profile_picture_url = url;
+      window.shownotification({
+          icon: 'check',
+          text: `AHH, MUCH BETTER! The new "you" is being refreshed...`
+      })
+    },
+    setDrumsPictureUrl (url) {
+      this.user.drums_gear_photo = url;
+      window.shownotification({
+          icon: 'check',
+          text: `Woohoo! Your Drum Gear Looks Fantastic!`
+      })
+    },
+    setPianoPictureUrl (url) {
+      this.user.piano_gear_photo = url;
+      window.shownotification({
+          icon: 'check',
+          text: `Woohoo! Your Piano Gear Looks Fantastic!`
+      })
+    },
+    setGuitarPictureUrl (url) {
+      this.user.guitar_gear_photo = url;
+      window.shownotification({
+          icon: 'check',
+          text: `Woohoo! Your Guitar Gear Looks Fantastic!`
+      })
+    },
+    setSingingPictureUrl (url) {
+      this.user.singing_gear_photo = url;
+      window.shownotification({
+          icon: 'check',
+          text: `Woohoo! Your Singing Gear Looks Fantastic!`
+      })
     },
     setCurrentBrand (brand) {
       this.brand = brand;
@@ -88,9 +120,9 @@ export const useUserStore = defineStore({
     setUserSignature (value) {
       this.userSignature = value;
     },
-    async updateProfile(token, userId, data) {
+    async updateProfile(data) {
       try {
-          const response = await updateUserProfile(token, userId, data);
+          const response = await updateUserProfile(this.token, this.userId, data);
           
           //Update Pinia values if they exist
           data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);
@@ -134,10 +166,94 @@ export const useUserStore = defineStore({
       }
     },
 
-    async updateSignature(token, userId, data) {
+    clearUserProfilePictureUrl() {
+      window.showconfirmationmodal({
+          title: 'Do you really want to reset your avatar?',
+          subtitle: 'This cannot be undone.',
+          callbacks: {
+              submit: () => {
+                  let url = '/user-management-system/user/update/' + this.userId;
+                  axios.patch(url, {
+                      'profile_picture_url': null
+                  })
+                  .then(response => {
+                      if (response.data) {
+                          window.shownotification({
+                              icon: 'check',
+                              text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
+                          });
+                          //Reset in Pinia Store
+                          this.user.profile_picture_url = ''; 
+                      }
+                  })
+                  .catch(error => {
+                      console.error(error);
+                      window.shownotification({
+                          icon: 'warning',
+                          text: 'An error happened on the server... Refresh the page to try once more, if it happens again please contact <a href="support">support</a>. '
+                      });
+                  });
+              },
+              cancel: () => {
+                  console.log('Reset avatar cancelled');
+              }
+          }
+      });
+    },
+
+    clearGearPictureUrl(instrument) {
+      window.showconfirmationmodal({
+        title: 'Do you really want to reset your gear photo?',
+        subtitle: 'This cannot be undone.',
+        callbacks: {
+            submit: () => {
+                let url = '/user-management-system/user/update/' + userId.value;
+                let gearAttribute = { [`${instrument}_gear_photo`]: null };
+    
+                axios.patch(url, gearAttribute)
+                .then(response => {
+                    if (response.data) {
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Woohoo! Gear Photo Successfully reset. Refreshing the page.'
+                        });
+                        //Update Pinia
+                        switch (instrument) {
+                          case 'drums':
+                            this.user.drums_gear_photo = '';
+                            break;
+                          case 'piano':
+                            this.user.piano_gear_photo = '';
+                            break;
+                          case 'guitar':
+                            this.user.guitar_gear_photo = '';
+                            break;
+                          case 'singing':
+                            this.user.singing_gear_photo = '';
+                            break;
+                          default:
+                            break;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    window.shownotification({
+                      icon: 'warning',
+                      text: 'An error happened on the server... Refresh the page to try once more, if it happens again please contact <a href="support">support</a>. '
+                  });
+                });
+            },
+            cancel: () => {
+                console.log('Reset gear photo cancelled');
+            }
+        }
+      });        
+    },
+
+    async updateSignature(data) {
       try {
-          const response = await updateUserSignature(token, userId, data);
-          
+          const response = await updateUserSignature(this.token, this.userId, data);
           //Signature
           data.hasOwnProperty('signature') && (this.user.signature = data.signature);
 

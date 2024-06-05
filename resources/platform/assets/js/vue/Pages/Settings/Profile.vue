@@ -283,7 +283,7 @@
                                         data-drumeo-gear-update="true"
                                     >
                                 </button>
-                                <span v-if="userDrumPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleRemoveGearPhoto()">
+                                <span v-if="userDrumPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleClearGearPhoto('drums')">
                                     <i class="fas fa-times"></i>
                                 </span>
                             </div>
@@ -296,7 +296,7 @@
                                 successMessage="Your profile image has successfully uploaded"
                                 fieldKey="drums_gear_photo"
                                 cropType="rectangle"
-                                @uploadSuccess="handleUploadDone"
+                                @uploadSuccess="handleDrumsUploadDone"
                                 @uploadError="handleImageUploadError"
                                 @onUploaderClose="handleDrumPictureModal"
                             />
@@ -315,7 +315,7 @@
                                         data-drumeo-gear-update="true"
                                     >
                                 </button>
-                                <span v-if="userPianoPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleRemoveGearPhoto()">
+                                <span v-if="userPianoPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleClearGearPhoto('piano')">
                                     <i class="fas fa-times"></i>
                                 </span>
                             </div>
@@ -328,7 +328,7 @@
                                 successMessage="Your profile image has successfully uploaded"
                                 fieldKey="piano_gear_photo"
                                 cropType="rectangle"
-                                @uploadSuccess="handleUploadDone"
+                                @uploadSuccess="handlePianoUploadDone"
                                 @uploadError="handleImageUploadError"
                                 @onUploaderClose="handlePianoPictureModal"
                             />
@@ -347,7 +347,7 @@
                                         data-drumeo-gear-update="true"
                                     >
                                 </button>
-                                <span v-if="userGuitarPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleRemoveGearPhoto()">
+                                <span v-if="userGuitarPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleClearGearPhoto('guitar')">
                                     <i class="fas fa-times"></i>
                                 </span>
                             </div>
@@ -360,7 +360,7 @@
                                 successMessage="Your profile image has successfully uploaded"
                                 fieldKey="guitar_gear_photo"
                                 cropType="rectangle"
-                                @uploadSuccess="handleUploadDone"
+                                @uploadSuccess="handleGuitarUploadDone"
                                 @uploadError="handleImageUploadError"
                                 @onUploaderClose="handleGuitarPictureModal"
                             />
@@ -380,7 +380,7 @@
                                         ta-ddarumeo-gear-update="true"
                                     >
                                 </button>
-                                <span v-if="userSingingPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleRemoveGearPhoto()">
+                                <span v-if="userSingingPhoto" class="rounded clear-button tw-top-1 tw-right-1" @click="handleClearGearPhoto('singing')">
                                     <i class="fas fa-times"></i>
                                 </span>
                             </div>
@@ -393,7 +393,7 @@
                                 successMessage="Your profile image has successfully uploaded"
                                 fieldKey="singing_gear_photo"
                                 cropType="rectangle"
-                                @uploadSuccess="handleUploadDone"
+                                @uploadSuccess="handleSingingUploadDone"
                                 @uploadError="handleImageUploadError"
                                 @onUploaderClose="handleSingingPictureModal"
                             />
@@ -566,13 +566,42 @@
 
     //Image Upload logic should be moved Pinia in the future
     const handleUploadDone = ({ profile_picture_url }) => {
-        userStore.setUserProfilePictureUrl(profile_picture_url)
-        showProfilePictureModal.value = false;
-        window.shownotification({
-            icon: 'check',
-            text: `AHH, MUCH BETTER! The new "you" is being refreshed...`
-        })
+        userStore.setUserProfilePictureUrl(profile_picture_url) //Update Pinia
+        showProfilePictureModal.value = false; //Close Modal
     }
+
+
+    //Drums
+    const handleDrumsUploadDone = ({ drums_gear_photo }) => {
+        userStore.setDrumsPictureUrl({ drums_gear_photo }) //Update Pinia
+        showDrumPictureModal.value = false; //Close Modal
+    }
+    //Piano
+    const handlePianoUploadDone = ({ piano_gear_photo }) => {
+        userStore.setPianoPictureUrl({ piano_gear_photo }) //Update Pinia
+        showPianoPictureModal.value = false; //Close Modal
+    }
+    //Guitars
+    const handleGuitarUploadDone = ({ guitar_gear_photo }) => {
+        userStore.setGuitarPictureUrl({ guitar_gear_photo }) //Update Pinia
+        showGuitarPictureModal.value = false; //Close Modal
+    }
+    //Singing
+    const handleSingingUploadDone = ({ singing_gear_photo }) => {
+        userStore.setSingingPictureUrl({ singing_gear_photo }) //Update Pinia
+        showSingingPictureModal.value = false; //Close Modal
+    }
+    
+    //Clear Avatar!
+    const handleClearAvatar = () => {
+        userStore.clearUserProfilePictureUrl();
+    }
+    //Clear Gear Photos
+    const handleClearGearPhoto = (instrument) => {
+        userStore.clearGearPictureUrl(instrument)         
+    };
+    
+    //Handle All Image Upload Errors
     const handleImageUploadError = () => {
         window.shownotification({
             icon: 'error',
@@ -583,46 +612,6 @@
         showPianoPictureModal.value = false;
         showGuitarPictureModal.value = false;
         showSingingPictureModal.value = false;
-    }
-
-    //Clear Avatar!
-    const handleClearAvatar = () => {
-        window.showconfirmationmodal({
-            title: 'Do you really want to reset your avatar?',
-            subtitle: 'This cannot be undone.',
-            callbacks: {
-                submit: () => {
-                    let url = '/user-management-system/user/update/' + userId.value;
-
-                    axios.patch(url, {
-                        'profile_picture_url': null
-                    })
-                        .then(response => {
-                            if (response.data) {
-                                window.shownotification({
-                                    icon: 'check',
-                                    text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
-                                });
-
-                                location.reload();
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                            window.shownotification({
-                                icon: 'warning',
-                                text: 'An error happened on the server... Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
-                                    '<br><br><span class="font-italic text-grey-3">' +
-                                    'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
-                                    '</span></span>'
-                            });
-                        });
-                },
-                cancel: () => {
-                    console.log('Reset avatar cancelled');
-                }
-            }
-        });
     }
 
     watch(
