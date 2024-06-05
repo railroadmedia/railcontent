@@ -6,58 +6,58 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Drum Gear</h2>
+            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Guitar Gear</h2>
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
                 @submit.prevent="submitDisplayNameForm"
             >
                 <MuSelect
-                    inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
-                    id="drummingSince"
-                    input-name="drums_playing_since_year"
-                    label="Drumming Since"
+                    inputOverride="tw-mb-3" 
+                    id="playingGuitarSince"
+                    input-name="guitar_playing_since_year"
+                    label="Playing Guitar Since"
                     :options="yearValues"
-                    v-model="formData.drums_playing_since_year"
+                    v-model="formData.guitar_playing_since_year"
                     placeholder="Select Year"
                 />
 
                 <div class="tw-grid tw-grid-cols-2 tw-gap-3 tw-mb-8">
                     <MuInput
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
+                        inputOverride="" 
                         type="text"
-                        id="drumSet" 
-                        name="drums" 
-                        label="Drum Set"
-                        placeholder="Enter Drum Set Brand" 
-                        v-model="formData.drums_gear_set_brands"
+                        id="guitarBrand" 
+                        name="guitar_gear_guitar_brands" 
+                        label="Guitars"
+                        placeholder="Enter Guitar Brands" 
+                        v-model="formData.guitar_gear_guitar_brands"
                     />
                     <MuInput
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
+                        inputOverride="" 
                         type="text"
-                        id="cymbals" 
-                        name="cymbals" 
-                        label="Cymbals"
-                        placeholder="Enter Cymbal Brands" 
-                        v-model="formData.drums_gear_cymbal_brands"
+                        id="ampBrands" 
+                        name="guitar_gear_amp_brands" 
+                        label="Amps"
+                        placeholder="Enter Amp Brands" 
+                        v-model="formData.guitar_gear_amp_brands"
                     />
                     <MuInput
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
+                        inputOverride="" 
                         type="text"
-                        id="hardware" 
-                        name="hardware" 
-                        label="Hardware"
-                        placeholder="Enter Hardware Brands" 
-                        v-model="formData.drums_gear_hardware_brands"
+                        id="pedalBrands" 
+                        name="guitar_gear_pedal_brands" 
+                        label="Pedals"
+                        placeholder="Enter Pedal Brands" 
+                        v-model="formData.guitar_gear_pedal_brands"
                     />
                     <MuInput
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
+                        inputOverride="" 
                         type="text"
-                        id="drumSticks" 
-                        name="drumSticks" 
-                        label="Drum Sticks"
-                        placeholder="Enter Drum Stick Brands" 
-                        v-model="formData.drums_gear_stick_brands"
+                        id="stringBrands" 
+                        name="guitar_gear_string_brands" 
+                        label="Strings"
+                        placeholder="Enter String Brands" 
+                        v-model="formData.guitar_gear_string_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
@@ -90,21 +90,21 @@ import { useUserStore } from '../../../stores/user';
 const userStore = useUserStore();
 const { 
     userId, 
-    userDrumBrands,
-    userCymbalBrands,
-    userHardwareBrands,
-    userStickBrands,
-    userDrummingSince
+    userPlayingGuitarSince,
+    userGuitarBrands,
+    userAmpBrands,
+    userPedalBrands,
+    userStringBrands,
 } = storeToRefs(userStore);
 
-const emit = defineEmits(['onCloseDrumGearModal']);
+const emit = defineEmits(['onCloseGuitarGearModal']);
 
 const formData = ref({
-    drums_playing_since_year: userDrummingSince.value || '',
-    drums_gear_set_brands: userDrumBrands.value || '',
-    drums_gear_cymbal_brands: userCymbalBrands.value || '',
-    drums_gear_hardware_brands: userHardwareBrands.value || '',
-    drums_gear_stick_brands: userStickBrands.value || '',
+    guitar_playing_since_year: userPlayingGuitarSince || '',
+    guitar_gear_guitar_brands: userGuitarBrands || '',
+    guitar_gear_amp_brands: userAmpBrands || '',
+    guitar_gear_pedal_brands: userPedalBrands || '',
+    guitar_gear_string_brands: userStringBrands || '',
 });
 
 const yearValues = computed(() => {
@@ -113,7 +113,7 @@ const yearValues = computed(() => {
 });
 
 const handleClose = () => {
-    emit('onCloseDrumGearModal');
+    emit('onCloseGuitarGearModal');
 };
 
 const submitDisplayNameForm = async () => {
@@ -126,3 +126,5 @@ const submitDisplayNameForm = async () => {
     }
 };
 </script>
+
+

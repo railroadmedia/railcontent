@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref,computed } from "vue";
 import {
   CheckIcon,
   PlusCircleIcon,
@@ -11,6 +11,7 @@ import MusoraIcon from "../../components/MusoraIcons/MusoraIcon.vue"
 
 import CircleStencil from "./CircleStencil.vue";
 import SquareStencil from "./SquareStencil.vue";
+import RectangleStencil from "./RectangleStencil.vue";
 
 const props = defineProps({
   selectedImage: {
@@ -23,11 +24,21 @@ const props = defineProps({
   }
 });
  
+//Emits
 const emit = defineEmits(['onCrop']);
 
+//Refs
 const cropper = ref(null);
 const zoomLevel = ref(0); 
 
+//Computed
+const stencil = computed(()=> {
+  if(props.type === 'circle') return CircleStencil;
+  if(props.type === 'square') return SquareStencil;
+  if(props.type === 'rectangle') return RectangleStencil;
+})
+
+//Methods
 function cropImage() {
   const result = cropper.value.getResult();
   const image = result.canvas.toDataURL();
@@ -63,7 +74,7 @@ function rotate() {
       ref="cropper"
       class="musora-cropper"
       :src="selectedImage"
-      :stencil-component="type === 'circle' ? CircleStencil : SquareStencil"
+      :stencil-component="stencil"
     />
     <div
       class="

@@ -1,34 +1,42 @@
 <template>
     <InfoModal
         classOverride="tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[654px]"
-        modalId="displayNameModal" 
+        modalId="SignatureModal" 
         :selfContained="true" 
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Display Name</h2>
+            <h2 class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Edit Forum Signature</h2>
+            <small class="tw-text-sm tw-italic tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-block tw-mb-6">Limit of 200 Characters</small>
+
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
-                @submit.prevent="submitDisplayNameForm"
+                @submit.prevent="submitSignatureForm"
             >
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
-                    <MuInput 
+                    <!-- <MuInput 
                         type="text"
-                        id="displayName" 
-                        name="display_name" 
+                        id="Signature" 
+                        name="signature" 
                         label="Display Name"
                         placeholder="Enter Display Name" 
-                        v-model="formData.display_name"
+                        v-model="formData.signature"
                         :inputErrors="[]" 
+                    /> -->
+                    <TextEditor 
+                        fieldKey="signature-editor"
+                        ref="textEditor" 
+                        v-model="formData.signature"
+                        :is-student-comment="false"
+                        toolbar="bold italic underline | link"
+                        :height="150" 
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
                     <button
-                        :disabled="!formData.display_name.length" 
                         type="submit"
                         class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
-                        :class="!formData.display_name.length ? 'tw-opacity-50' : ''"
                     >
                         Save
                     </button>
@@ -46,28 +54,28 @@
 <script setup>
     import { ref } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
-    import MuInput from "../../components/FormInputs/MuInput.vue"
+    import TextEditor from '../../vuesora/components/TextEditor/TextEditor.vue';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
-    const { token, userId, userDisplayName } = storeToRefs(userStore);
+    const { userId, userSignature } = storeToRefs(userStore);
 
     //Refs
-    const emit = defineEmits(['onCloseDisplayNameModal']);
+    const emit = defineEmits(['onCloseSignatureModal']);
 
     const formData = ref({
-        display_name: userDisplayName.value || '' // Initialize with current displayName or empty string
+        signature: userSignature.value || '', // Initialize with current Signature or empty string
     });
 
     //Methods
     const handleClose = () => {
-        emit('onCloseDisplayNameModal');
+        emit('onCloseSignatureModal');
     };
         
-    const submitDisplayNameForm = async () => {
+    const submitSignatureForm = async () => {
         try {
-            await userStore.updateDisplayName(token.value, userId.value, formData.value.display_name);
+            await userStore.updateSignature(userId.value, formData.value.signature);
         } catch (error) {
             console.error("Failed to update the display name:", error.message);
         }

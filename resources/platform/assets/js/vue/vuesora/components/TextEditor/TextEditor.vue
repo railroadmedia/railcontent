@@ -59,9 +59,9 @@ const computedToolbar = computed(() => {
         return 'bold italic underline | bullist numlist | link customImageUploader media | forecolor backcolor | emoticons';
     } else if (props.isStudentComment) {
         return 'link | emoticons';
+    } else {
+        return props.toolbar;
     }
-
-    return props.toolbar;
 });
 
 const initObject = computed(() => ({

@@ -6,7 +6,7 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Drum Gear</h2>
+            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Singing Gear</h2>
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
@@ -14,22 +14,22 @@
             >
                 <MuSelect
                     inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
-                    id="drummingSince"
-                    input-name="drums_playing_since_year"
-                    label="Drumming Since"
+                    id="SingingSince"
+                    input-name="singing_since_year"
+                    label="Singing Since"
                     :options="yearValues"
-                    v-model="formData.drums_playing_since_year"
+                    v-model="formData.singing_since_year"
                     placeholder="Select Year"
                 />
 
                 <div class="tw-grid tw-gap-3 tw-mb-8">
                     <MuInput
                         type="text"
-                        id="drumSet" 
-                        name="drums" 
-                        label="Drum Set"
-                        placeholder="Enter Drum Set Brand" 
-                        v-model="formData.drums_gear_set_brands"
+                        id="micBrands" 
+                        name="singing_gear_mic_brands" 
+                        label="Microphones"
+                        placeholder="Enter Microphone Brands" 
+                        v-model="formData.singing_gear_mic_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
@@ -62,21 +62,16 @@ import { useUserStore } from '../../../stores/user';
 const userStore = useUserStore();
 const { 
     userId, 
-    userDrumBrands,
-    userCymbalBrands,
-    userHardwareBrands,
-    userStickBrands,
-    userDrummingSince
+    userSingingSince,
+    userMicBrands,
+    
 } = storeToRefs(userStore);
 
-const emit = defineEmits(['onCloseDrumGearModal']);
+const emit = defineEmits(['onCloseSingingGearModal']);
 
 const formData = ref({
-    drums_playing_since_year: userDrummingSince.value || '',
-    drums_gear_set_brands: userDrumBrands.value || '',
-    drums_gear_cymbal_brands: userCymbalBrands.value || '',
-    drums_gear_hardware_brands: userHardwareBrands.value || '',
-    drums_gear_stick_brands: userStickBrands.value || '',
+    singing_since_year: userSingingSince.value || '',
+    singing_gear_mic_brands: userMicBrands.value || ''
 });
 
 const yearValues = computed(() => {
@@ -85,7 +80,7 @@ const yearValues = computed(() => {
 });
 
 const handleClose = () => {
-    emit('onCloseDrumGearModal');
+    emit('onCloseSingingGearModal');
 };
 
 const submitDisplayNameForm = async () => {

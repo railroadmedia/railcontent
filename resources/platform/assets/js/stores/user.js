@@ -9,6 +9,7 @@ export const useUserStore = defineStore({
     journeySection: null,
     token: null,
     userCompletedAccount: null,
+    userSignature: null,
   }),
   getters: {
     userId: (state) => state.user?.id,
@@ -86,9 +87,12 @@ export const useUserStore = defineStore({
     setCompletedAccount (value) {
       this.userCompletedAccount = value;
     },
-    async updateDisplayName(userId, displayName) {
+    setUserSignature (value) {
+      this.userSignature = value;
+    },
+    async updateDisplayName(token, userId, displayName) {
       try {
-          const response = await updateUserName(userId, displayName);
+          const response = await updateUserName(token, userId, { display_name });
           this.user.display_name = displayName; 
           window.shownotification({
               icon: 'check',

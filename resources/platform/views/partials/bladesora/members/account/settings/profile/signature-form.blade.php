@@ -45,7 +45,6 @@
                                         "inputValue" => $signature,
                                         "inputErrors" => [],
                                     ])
-                                    
                                 </div>
                             </div>
                         </div>

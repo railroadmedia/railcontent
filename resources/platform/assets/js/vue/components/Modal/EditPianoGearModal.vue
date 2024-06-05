@@ -6,7 +6,7 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Drum Gear</h2>
+            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Piano Gear</h2>
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
@@ -14,11 +14,11 @@
             >
                 <MuSelect
                     inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
-                    id="drummingSince"
-                    input-name="drums_playing_since_year"
-                    label="Drumming Since"
+                    id="playingPianoSince"
+                    input-name="piano_playing_since_year"
+                    label="Playing Piano Since"
                     :options="yearValues"
-                    v-model="formData.drums_playing_since_year"
+                    v-model="formData.piano_playing_since_year"
                     placeholder="Select Year"
                 />
 
@@ -26,20 +26,20 @@
                     <MuInput
                         inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
                         type="text"
-                        id="drumSet" 
-                        name="drums" 
-                        label="Drum Set"
-                        placeholder="Enter Drum Set Brand" 
-                        v-model="formData.drums_gear_set_brands"
+                        id="pianoBrand" 
+                        name="piano_gear_piano_brands" 
+                        label="Piano"
+                        placeholder="Enter Piano Brand" 
+                        v-model="formData.piano_gear_piano_brands"
                     />
                     <MuInput
                         inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
                         type="text"
-                        id="cymbals" 
-                        name="cymbals" 
-                        label="Cymbals"
-                        placeholder="Enter Cymbal Brands" 
-                        v-model="formData.drums_gear_cymbal_brands"
+                        id="keyboardBrand" 
+                        name="piano_gear_keyboard_brands" 
+                        label="Keyboard"
+                        placeholder="Enter Keyboard Brand" 
+                        v-model="formData.piano_gear_keyboard_brands"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
@@ -72,21 +72,18 @@ import { useUserStore } from '../../../stores/user';
 const userStore = useUserStore();
 const { 
     userId, 
-    userDrumBrands,
-    userCymbalBrands,
-    userHardwareBrands,
-    userStickBrands,
-    userDrummingSince
+    userPlayingPianoSince,
+    userPianoBrands,
+    userKeyboardBrands
+
 } = storeToRefs(userStore);
 
-const emit = defineEmits(['onCloseDrumGearModal']);
+const emit = defineEmits(['onClosePianoGearModal']);
 
 const formData = ref({
-    drums_playing_since_year: userDrummingSince.value || '',
-    drums_gear_set_brands: userDrumBrands.value || '',
-    drums_gear_cymbal_brands: userCymbalBrands.value || '',
-    drums_gear_hardware_brands: userHardwareBrands.value || '',
-    drums_gear_stick_brands: userStickBrands.value || '',
+    piano_playing_since_year: userPlayingPianoSince.value || '',
+    piano_gear_piano_brands: userPianoBrands.value || '',
+    piano_gear_keyboard_brands: userKeyboardBrands.value || '',
 });
 
 const yearValues = computed(() => {
@@ -95,7 +92,7 @@ const yearValues = computed(() => {
 });
 
 const handleClose = () => {
-    emit('onCloseDrumGearModal');
+    emit('onClosePianoGearModal');
 };
 
 const submitDisplayNameForm = async () => {
