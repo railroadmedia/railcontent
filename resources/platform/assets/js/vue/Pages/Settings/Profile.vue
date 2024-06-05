@@ -71,7 +71,7 @@
                                             :src="userProfilePictureUrl"
                                             data-avatar-update="true"
                                         >
-                                        <span id="clearAvatar" class="tw-rounded-full clear-button">
+                                        <span @click="handleClearAvatar" class="tw-rounded-full clear-button">
                                             <i class="fas fa-times"></i>
                                         </span>
                                     </template>
@@ -583,6 +583,46 @@
         showPianoPictureModal.value = false;
         showGuitarPictureModal.value = false;
         showSingingPictureModal.value = false;
+    }
+
+    //Clear Avatar!
+    const handleClearAvatar = () => {
+        window.showconfirmationmodal({
+            title: 'Do you really want to reset your avatar?',
+            subtitle: 'This cannot be undone.',
+            callbacks: {
+                submit: () => {
+                    let url = '/user-management-system/user/update/' + userId.value;
+
+                    axios.patch(url, {
+                        'profile_picture_url': null
+                    })
+                        .then(response => {
+                            if (response.data) {
+                                window.shownotification({
+                                    icon: 'check',
+                                    text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
+                                });
+
+                                location.reload();
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            window.shownotification({
+                                icon: 'warning',
+                                text: 'An error happened on the server... Refresh the page to try once more, if it happens again please let us know using the chat below. ' +
+                                    '<br><br><span class="font-italic text-grey-3">' +
+                                    'Reference: <span class="font-bold">' + error.response.status + ' - ' + error.response.statusText +
+                                    '</span></span>'
+                            });
+                        });
+                },
+                cancel: () => {
+                    console.log('Reset avatar cancelled');
+                }
+            }
+        });
     }
 
     watch(
