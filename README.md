@@ -660,3 +660,10 @@ Any Staging URL: [https://web-staging-one.musora.com/musora-center/](https://web
 3. Run: `npm run build`
 4. Publish the new assets to the MWP public folder: `r mwp artisan vendor:publish --tag=public --force`
 6. Commit all files changes and deploy.
+
+# Sanity Studio
+Steps to build Sanity Studio
+
+1. `cd /app/musora-web-platform/resources/sanitystudio`
+2. `yarn install`
+3. `yarn build`

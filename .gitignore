@@ -110,6 +110,8 @@ typings/
 public/mix-manifest.json
 public/platform/*
 
+public/sanity/*
+
 # Marketing generated files
 public/marketing/parcel/drumeo/*
 public/marketing/css/app.css
