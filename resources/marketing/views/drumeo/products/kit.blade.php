@@ -252,7 +252,7 @@
         {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
         <h3 class="inline-block font-bebas mx-0 pr-3">BACK IN STOCK</h3>
         <p class="inline-block text-xs mx-0 leading-tight">
-            <strong> (Limited Quantities) </strong>
+            Alesis Nitro Max E-Kits are back!<br> Get yours before they're gone!
         </p>
     </a>
 @endif
