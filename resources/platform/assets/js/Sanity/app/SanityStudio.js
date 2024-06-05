@@ -17,57 +17,77 @@ const SanityStudio = ({ projectId, dataset, basePath, schema }) => {
             projectId: projectId,
             dataset: dataset,
             basePath: basePath,
-            schema: schema
-//             schema: {
-//                 types: [
-//                     {
-//                         type: "document",
-//                         name: "rox",
-//                         title: "Post",
-//                         fields: [
-//                             {
-//                                 type: "string",
-//                                 name: "title",
-//                                 title: "Title"
-//                             },
-//
-//                             {
-//                                 name: 'difficulty',
-//                                 title: 'Difficulty',
-//                                 type: 'string',
-//                                 components: {
-//                                     input: CustomInput
-//                                 }
-//                             },
-//                             {
-//                                 type: "string",
-//                                 name: "difficult",
-//                                 title: "Difficulty String"
-//                             },
-//                             {
-//                                 name: 'soundslice',
-//                                 title: 'Soundslice',
-//                                 type: 'array',
-//                                 of: [
-//                                     {
-//                                         type: 'object',
-//                                         fields: [
-//                                             {
-//                                                 title: 'Title',
-//                                                 name: 'title',
-//                                                 type: 'string'
-//                                             },
-//                                         ]
-//                                     }
-//                                 ],
-//                                 components: {
-//                                     input: ArrayInput
-//                                 }
-//                             }
-//                         ]
-//                     }
-//                 ]
-//             }
+//             schema: schema,
+            schema: {
+                types: [
+                    {
+                        type: "document",
+                        name: "rox",
+                        title: "Post",
+                        fields: [
+                            {
+                                type: "string",
+                                name: "title",
+                                title: "Title"
+                            },
+
+                            {
+                                name: 'difficulty',
+                                title: 'Difficulty',
+                                type: 'string',
+                                components: {
+                                    input: CustomInput
+                                }
+                            },
+                            {
+                                type: "number",
+                                name: "difficult",
+                                title: "Difficulty String"
+                            },
+                            {
+                                name: 'soundslice',
+                                title: 'Soundslice',
+                                type: 'array',
+                                of: [
+                                    {
+                                        type: 'object',
+                                        fields: [
+                                            {
+                                                title: 'Title',
+                                                name: 'soundslice_title',
+                                                type: 'string'
+                                            },
+                                            {
+                                                title: 'Slug',
+                                                name: 'soundslice_slug',
+                                                type: 'string'
+                                            },
+                                        ]
+                                    }
+                                ],
+                                components: {
+                                    input: ArrayInput
+                                }
+                            },
+                            {
+                                type: "number",
+                                name: "child_count",
+                                title: "Child count"
+                            },
+                            {
+                                type: "number",
+                                name: "xp",
+                                title: "XP"
+                            },
+                            {
+                                type: "number",
+                                name: "total_xp",
+                                title: "Total XP"
+                            },
+                        ]
+                    }
+                ]
+            }
         });
         renderStudio(sanityContainerRef.current, config);  // Render Sanity Studio into the ref'd container
     }
