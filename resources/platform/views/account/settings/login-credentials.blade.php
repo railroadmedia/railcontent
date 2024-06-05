@@ -1,10 +1,10 @@
-@extends('partials.layout')
+@extends('account.settings.layout')
 
 @section('meta')
     <title>Login Credentials | Musora</title>
 @endsection
 
-{{-- @section('edit-forms')
+@section('edit-forms')
     <div id="editForm" class="tw-flex tw-flex-col">
         
         <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
@@ -51,9 +51,4 @@
             ])
         </div>
     </div>
-@endsection --}}
-
-@section('content')
-    {{-- Login Credentials Page Component --}}
-    <login-credentials></login-credentials>
 @endsection
