@@ -306,7 +306,7 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center pt-4">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-18 sm:h-20 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
+                    <img class="h-16 sm:h-20 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
                         alt="Read music Logo">
@@ -372,7 +372,7 @@
                             <!-- <span class="join sold-out medium w-full">ENROLLMENT CLOSED</span> -->
                             <a href="#final" class="join bg-pianote medium w-full anchor-slide">ENROLL NOW</a>
                         </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5">
+                        <div class="w-full sm:w-1/2 lg:pb-5 mt-2 sm:mt-0">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                                 loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png"
@@ -666,7 +666,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
             <h2 class="mb-6 sm:mb-10 lg:mb-14">
-                <img class="h-16 sm:h-20 align-bottom transition-opacity opacity-0" loading="lazy"
+                <img class="h-12 sm:h-20 align-bottom transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
                     alt="Read Music in 30 Days Logo"> <strong>...is perfect for: </strong>
@@ -890,8 +890,7 @@
         </div>
     </section>
 
-    <section class="text-center sm:px-6 pt-10 sm:pt-14 lg:pt-20 pt-16 sm:pb-32 lg:pb-40"
-        style="background-color:#f4f8fb;">
+    <section class="text-center px-2 sm:px-6 pt-10 sm:pt-14 lg:pt-20 pb-12 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
             <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                 <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
@@ -934,46 +933,46 @@
                 </div>
             </div>
         </div>
-            @php
-            $testimonials = [
-                [
-                    'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/lynda-burton.webp',
-                    'title' => 'I’m learning to read sheet music quicker than I ever did…',
-                    'content' => 'I’ve taken piano lessons in the past, but not recently. I thought I’d give Pianote a try, and I’m glad I decided to. <br><br> I’m learning to read sheet music quicker than I ever did while taking private piano lessons.',
-                    'name' => 'Lynda Burton',
-                    'location' => 'WYOMING, USA',
-                ],
-                [
-                    'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/products/read-music-in-30-days/paul-bucci.webp',
-                    'title' => 'It’s like sitting down with a friend who’s teaching me how to play…',
-                    'content' => 'I’d been self-taught but hit a wall and wasn’t progressing anymore, so I decided to try Pianote. <br><br> It’s like sitting down with a friend who’s teaching me how to play while explaining the logic behind what they’re doing. The lessons are well thought out and I can do this all on my own schedule.',
-                    'name' => 'Paul Bucci',
-                    'location' => 'DUXBURY, MASSACHUSETTS USA',
-                ],
-                [
-                    'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/steve-wilson.webp',
-                    'title' => 'I love the 30-day courses.',
-                    'content' => "The courses where you can start out five days a week, it's 10 minutes long, and you follow along for 10 minutes. The instructor's there with you and you're able to follow along just for 10 minutes every day. Those are extremely helpful for me in building some of that routine and confidence and really mastering building on what we did yesterday.",
-                    'name' => 'Steve Wilcon',
-                    'location' => 'ARIZONA, USA',
-                ],
-            ];
-        @endphp
 
         <div id="testimonials" class="anchor"></div>
-        <div class="px-5 sm:px-6 py-10 sm:py-14 md:py-20" style="background-color:#f4f8fb;">
-            <div class="container max-w-6xl mx-auto">
-                <h3 class="leading-tight text-black py-4 md:py-6 text-center"><strong>What students are saying about Lisa:</strong></h3>
+        <div class="py-10 sm:py-14 md:py-20" style="background-color:#f4f8fb;">
+            <div class="container max-w-5xl mx-auto">
+                <h3 class="leading-tight text-black py-4 md:py-6 text-center"><strong>What students are saying<br class="sm:hidden"> about Lisa:</strong></h3>
 
-                <div x-data="{ splide: null }" x-init="splide = new Splide($refs.splide, { type: 'loop', perPage: 1.3, gap: 2, focus: 0, arrows: false, pagination: false, autoplay: true }).mount()">
+                <div x-data="{ splide: null }" x-init="splide = new Splide($refs.splide, { type: 'loop', perPage: 1.2, gap: 2, focus: 0, arrows: false, pagination: false, autoplay: true }).mount()">
                     <div x-ref="splide" class="splide">
                         <div class="splide__track">
                             <ul class="splide__list">
+                                @php
+                                    $testimonials = [
+                                        [
+                                            'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/lynda-burton.webp',
+                                            'title' => 'I’m learning to read sheet music quicker than I ever did…',
+                                            'content' => 'I’ve taken piano lessons in the past, but not recently. I thought I’d give Pianote a try, and I’m glad I decided to. <br><br> I’m learning to read sheet music quicker than I ever did while taking private piano lessons.',
+                                            'name' => 'Lynda Burton',
+                                            'location' => 'WYOMING, USA',
+                                        ],
+                                        [
+                                            'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/marketing/pianote/products/read-music-in-30-days/paul-bucci.webp',
+                                            'title' => 'It’s like sitting down with a friend who’s teaching me how to play…',
+                                            'content' => 'I’d been self-taught but hit a wall and wasn’t progressing anymore, so I decided to try Pianote. <br><br> It’s like sitting down with a friend who’s teaching me how to play while explaining the logic behind what they’re doing. The lessons are well thought out and I can do this all on my own schedule.',
+                                            'name' => 'Paul Bucci',
+                                            'location' => 'DUXBURY, MASSACHUSETTS USA',
+                                        ],
+                                        [
+                                            'avatar' => 'https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/steve-wilson.webp',
+                                            'title' => 'I love the 30-day courses.',
+                                            'content' => "The courses where you can start out five days a week, it's 10 minutes long, and you follow along for 10 minutes. The instructor's there with you and you're able to follow along just for 10 minutes every day. Those are extremely helpful for me in building some of that routine and confidence and really mastering building on what we did yesterday.",
+                                            'name' => 'Steve Wilcon',
+                                            'location' => 'ARIZONA, USA',
+                                        ],
+                                    ];
+                                @endphp
                                 @foreach ($testimonials as $testimonial)
                                     <li class="splide__slide flex items-start sm:items-stretch px-1">
                                         <div class="w-full rounded-xl p-6 text-black flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg" style="background-color:#ffffff;">
                                             <div class="flex flex-col justify-evenly text-left sm:px-8">
-                                                <h4 class="leading-normal mt-3 sm:mt-0 mb-3">
+                                                <h4 class="leading-normal mt-3 sm:mt-0 mb-3 mx-0">
                                                     <strong><em>"{!! $testimonial['title'] !!}"</em></strong>
                                                 </h4>
                                                 <p class="leading-normal mt-3 sm:mt-0 mb-20"><em>{!! $testimonial['content'] !!}</em></p>
@@ -1003,7 +1002,7 @@
                 </div>
             </div>
         </div>
-        <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
+        <div class="container mx-auto text-center flex flex-col content-center items-center w-full mb-10">
             <a href="#final" class="join bg-pianote medium w-full max-w-xs anchor-slide">ENROLL NOW</a>
 
             <div class="pt-4">
@@ -1051,13 +1050,13 @@
         style="background-color:#eff7ff;">
 
         <div class="flex flex-col md:flex-row container max-w-6xl mx-auto">
-            <div class="flex flex-col items-center justify-center w-full md:w-7/12 text-center lg:text-left">
+            <div class="flex flex-col items-center justify-center w-full md:w-7/12 text-center sm:text-left">
                 <img class="h-16 sm:h-18 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
                     alt="Read music Logo">
 
-                <h5 class="leading-tight mt-4 md: my-4 text-center md:text-left my-1"><strong>20 Guided Play-Along
+                <h5 class="leading-tight mt-4 md: my-4 my-1"><strong>20 Guided Play-Along
                         Lessons. <br>
                         4 Weekly Q&A Sessions. <br>
                         Lifetime Course Access. <br> <span class="text-pianote">BONUS</span>
@@ -1161,17 +1160,17 @@
                         @else -->
                             <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto">
                                 <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true"
-                                    class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
+                                    class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
                                         <p class="text-xs px-4">EARLY BIRD OFFER</p>
                                     </div>
 
-                                    <h3><strong>Read Music in 30 Days</strong></h3>
-                                    <p class="text-sm mt-2 mb-5">Learn the language of music in just 30 days.</p>
+                                    <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
+                                    <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
                                     <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2>
                                     <p class="inline-block text-xs">one time payment.</p><br>
                                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
-                                    <ul class="list-disc ml-10">
+                                    <ul class="list-disc ml-5">
                                         <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Bonus Chords & Scales Book</li>
                                         <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion PDF
                                         </li>
@@ -1191,12 +1190,12 @@
                                     <div class="inline-block border rounded-xl border-pianote text-pianote text-center my-2">
                                         <p class="text-xs px-4">UNLIMITED LESSONS</p>
                                     </div>
-                                    <h3><strong>Join Pianote + Get Read Music in 30 Days FREE</strong></h3>
-                                    <p class="text-sm mt-2 mb-5 text-gray-700">The Ultimate Online Lessons Experience.</p>
+                                    <h3 class="leading-tight"><strong>Join Pianote + Get Read Music in 30 Days FREE</strong></h3>
+                                    <p class="text-sm mt-2 mb-3 text-gray-700">The Ultimate Online Lessons Experience.</p>
                                     <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
                                     <p class="inline-block text-xs text-gray-700">(Includes $364 in free bonuses)</p><br>
                                     <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
-                                    <ul class="list-disc ml-10">
+                                    <ul class="list-disc ml-5">
                                         <li class="text-sm leading-relaxed">Read Music in 30 Days</li>
                                         <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Workbook
                                         </li>
@@ -1229,15 +1228,23 @@
         </div>
     </section>
 
-    <section style="background-color:#eff7ff;">
-        <div class="container mx-auto text-center">
-            <div class="inline-block w-full px-3 md:px-4 my-5">
-                <p><strong>Still have questions? </strong><br class="inline-block md:hidden"> Call us toll-free at
+    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
+        <p class="max-w-3xl px-4 md:px-2 leading-loose">
+            <b>Shipping Disclaimer –</b> Your physical
+            bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is
+            up to the shipping gods.
+        </p>
+    </section>
+
+
+    <section class="text-center py-10" style="background: #00101D;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5 text-white">
+                <p>Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD.
-                </p>
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10">
+            <div class="inline-block w-full px-3 md:px-4 text-white" style="margin-top: 0;">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
@@ -1245,15 +1252,6 @@
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
         </div>
-
-    </section>
-
-    <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
-        <p class="max-w-3xl px-4 md:px-2 leading-loose">
-            <b>Shipping Disclaimer –</b> Your physical
-            bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is
-            up to the shipping gods.
-        </p>
     </section>
 
 
