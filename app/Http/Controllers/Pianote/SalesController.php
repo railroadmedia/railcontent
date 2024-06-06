@@ -418,9 +418,10 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
+
     public function readMusic()
     {
-        $productId = 844; //TODO change this to the correct product ID
+        $productId = 269; 
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
@@ -432,5 +433,10 @@ class SalesController extends BaseController
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
         ]);
+    }
+
+    public function readMusicBook()
+    {
+        return view('pianote.products.read-music-book', ['theme' => 'pianote']);
     }
 }
