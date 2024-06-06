@@ -286,27 +286,30 @@
     ])
     @php
         if (
-            !empty($products['quietpad-estepario']->getStockAvailability()) &&
-            $products['quietpad-estepario']->getStockAvailability() > 250
+            !empty($products['read-music-in-30-days-workbook']->getStockAvailability()) &&
+            $products['read-music-in-30-days-workbook']->getStockAvailability() > 250
         ) {
-            $stock = $products['quietpad-estepario']->getStockAvailability() - 250;
+            $stock = $products['read-music-in-30-days-workbook']->getStockAvailability() - 250;
         } else {
             $stock = 'a limited amount';
         }
-
-        $startDate = 'July 1st';
-        $endDate = 'July 30th';
-        $today = date('Y-m-d');
-        $changeDate = date('Y') . '-06-23';
+        
+        $startDateCourse = Carbon\Carbon::create(2024, 7, 1, 0, 0, 0, 'America/Vancouver');
+        $startDateCourse = $startDateCourse->format('F jS');
+        $endDateCourse = Carbon\Carbon::create(2024, 7, 30, 0, 0, 0, 'America/Vancouver');
+        $endDateCourse = $endDateCourse->format('F jS');
+        $earlyBirdStart = Carbon\Carbon::create(2024, 6, 13, 0, 0, 0, 'America/Vancouver');
+        $earlyBirdEnd = Carbon\Carbon::create(2024, 6, 24, 0, 0, 0, 'America/Vancouver');
         $registerButtonUrl = '';
         $course = 'Read Music in 30 Days';
+        $dateTest = Carbon\Carbon::create(2024, 7, 1, 0, 0, 0, 'America/Vancouver');
     @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center pt-4">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-16 sm:h-20 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
+                    <img class="h-20 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
                         alt="Read music Logo">
@@ -317,8 +320,7 @@
                             'Transform your playing',
                         ];
                     @endphp
-
-                    <h2 class="rotater-text overflow-hidden">
+                    <h2 class="text-3xl sm:text-xl md:text-2xl lg:text-3xl rotater-text overflow-hidden">
                         <strong>
                             @foreach (range(1, 5) as $i)
                                 @foreach ($lines as $line)
@@ -327,10 +329,10 @@
                             @endforeach
                         </strong>
                     </h2>
-                    <h3 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
+                    <h3 class="-mt-2 sm:-mt-1 lg:mt-0">with daily guided workouts.</h3>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
-                                class="inline lg:hidden">starting {{ $startDate }}.</strong></h6>
+                                class="inline lg:hidden">starting {{ $startDateCourse }}.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header.webp');"
@@ -361,16 +363,15 @@
                             </p>
                         @endforeach
                     </div>
-                    @if (session()->has('success-message'))
+                    <!-- @if (session()->has('success-message'))
                         <p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for
                                 {{ $course }}.<br class="hidden md:inline"> Check your email for the details.</strong>
                         </p>
-                    @endif
+                    @endif -->
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <!-- <span class="join sold-out medium w-full">ENROLLMENT CLOSED</span> -->
-                            <a href="#final" class="join bg-pianote medium w-full anchor-slide">ENROLL NOW</a>
+                            <a href="#final" class="@if($startDateCourse < Carbon\Carbon::now()) sold-out @endif join bg-pianote medium w-full anchor-slide">@if($startDateCourse < Carbon\Carbon::now()) ENROLLMENT CLOSED @endif ENROLL NOW </a>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5 mt-2 sm:mt-0">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -399,7 +400,7 @@
                 class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5 text-2xl"><strong>{{ $startDate }}.</strong></h4>
+                    <h4 class="px-3 lg:px-5 text-2xl"><strong>{{ $startDateCourse }}.</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                         <p class="text-sm px-3 lg:px-5">
                             <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
@@ -422,8 +423,8 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> {{ $startDate }} to<br class="hidden md:inline">
-                                {{ $endDate }}</span>
+                            <span class="text-sm"> {{ $startDateCourse }} to<br class="hidden md:inline">
+                                {{ $endDateCourse }}.</span>
                         </p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
@@ -538,7 +539,7 @@
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/feature-05.webp',
                         'title' => 'BONUS workbook to keep improving.',
                         'desc' =>
-                            $today >= $changeDate
+                            $earlyBirdEnd < Carbon\Carbon::now()
                                 ? 'Practice makes you better. So you’ll get a FREE 74-page companion E-Book to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.'
                                 : 'Practice makes you better. So you’ll get a FREE 74-page companion workbook when you enroll before June 23rd to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
                     ],
@@ -605,9 +606,12 @@
         </div>
 
         {{-- <span class="join sold-out medium w-full max-w-xs align-middle my-10" @click="waitlistModal = true;">JOIN WAITLIST</span> --}}
-        {{-- <span class="join sold-out medium w-full max-w-xs align-middle my-10">ENROLLMENT CLOSED</span> --}}
-        <span class="join bg-pianote medium w-full max-w-xs align-middle my-10">ENROLL NOW</span>
 
+        @if ($startDateCourse < Carbon\Carbon::now())
+            <span class="join sold-out medium w-full max-w-xs align-middle my-10">ENROLLMENT CLOSED</span>
+        @else
+            <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle my-10 anchor-slide">ENROLL NOW</span>
+        @endif
 
     </section>
 
@@ -830,11 +834,11 @@
         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book-bg.webp');">
         <div class="container max-w-6xl mx-auto mb-14 lg:mb-16 text-white">
             <div class="flex flex-col container max-w-5xl mx-auto">
-                <div class="flex flex-col-reverse md:flex-row items-center w-full pt-10">
-                    <div class="w-full md:w-7/12 lg:w-1/2 text-justify px-6 lg:px-6">
-                        <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your
-                                hands!</strong></h3>
-                        <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
+                <div class="flex flex-col-reverse md:flex-row w-full lg:pt-10">
+                    <div class="w-full md:w-7/12 lg:w-6/12 md:p-10 text-justify px-6">
+                        <h3 class=""><strong>The key to reading music… <br class="hidden md:block">in your
+                                hands!</strong></h3><br><br>
+                        <p>Read Music in 30 Days is an online Challenge that will have you reading and playing music each
                             day. <br><br>
                             Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE
                             (with
@@ -876,7 +880,7 @@
             <h6 class="leading-normal  mt-4">Read Music in 30 Days is a daily guided workout program for piano players.
                 You’ll unlock a new video each weekday and get questions answered each weekend. Because of this, you won’t
                 be able to join halfway. — <strong>and you need to register before the course begins on
-                    {{ $startDate }}.</strong></h6>
+                    {{ $startDateCourse }}.</strong></h6>
                     <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">
                         <span x-cloak x-data="timer()" x-init="countdown()">
                             <span x-cloak x-show="timeLeft > 0">REGISTRATION CLOSES IN <br class="block md:hidden"></span>
@@ -1002,8 +1006,13 @@
                 </div>
             </div>
         </div>
-        <div class="container mx-auto text-center flex flex-col content-center items-center w-full mb-10">
-            <a href="#final" class="join bg-pianote medium w-full max-w-xs anchor-slide">ENROLL NOW</a>
+        <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
+
+        @if ($startDateCourse < Carbon\Carbon::now())
+            <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
+        @else
+            <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle anchor-slide">ENROLL NOW</span>
+        @endif
 
             <div class="pt-4">
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
@@ -1050,7 +1059,7 @@
         style="background-color:#eff7ff;">
 
         <div class="flex flex-col lg:flex-row container max-w-6xl mx-auto">
-            <div class="flex flex-col items-center justify-center w-full lg:w-7/12 text-center sm:text-left">
+            <div class="flex flex-col items-center justify-center w-full lg:w-7/12 text-center lg:text-left">
                 <img class="h-16 sm:h-18 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
