@@ -60,6 +60,15 @@
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                         ])
                     @endforeach
+                    @include('_partials.components.shop.product-card', [
+                        "discounted_price" => 90,
+                        "href" => "https://www.musora.com/gift-card",
+                        "instructor" => "Award-Winning Membership",
+                        "price" =>  90,
+                        "thumbnail" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/380x0/filters:quality(95)/marketing/musora/membership/redeem/access-pass.jpg",
+                        "title" => "Musora Gift Cards",
+                        'soldOut' => false,
+                    ])
                 </div>
             </div>
         </section>

@@ -40,7 +40,7 @@ class Order
     public ?Customer $customer;
     /** @var Collection<OrderLineItem> $lineItems */
     public Collection $lineItems;
-
+    public ?string $note;
     /** @var Collection<MetaField> */
     private Collection $_metafields;
 
@@ -75,7 +75,7 @@ class Order
         $this->totalTax = floatval($shopifyOrderData->total_tax);
         $this->totalPrice = floatval($shopifyOrderData->total_price_set->shop_money->amount);
         $this->sourceName = $shopifyOrderData->source_name;
-
+        $this->note = $shopifyOrderData->note;
         $this->_metafields = collect();
     }
 

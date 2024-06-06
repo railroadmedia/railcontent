@@ -15,12 +15,10 @@ import CataloguePlaylistTabs from "../../vuesora/views/catalogues/_CataloguePlay
 import Pagination from "../../vuesora/components/Pagination.vue";
 import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 import ThemeClasses from "../../vuesora/mixins/ThemeClasses";
-import FilterWrapper from "../Filter/FilterWrapper";
 
 export default {
     name: "ContentCatalogue",
     components: {
-        FilterWrapper,
         "grid-catalogue": GridCatalogue,
         "coach-grid-catalogue": CoachGridCatalogue,
         "coaches-grid-catalogue": CoachesGridCatalogue,
@@ -372,7 +370,6 @@ export default {
         },
     },
     mounted() {
-        console.log('includeFutureScheduledContentOnly', this.includeFutureScheduledContentOnly)
         if (!this.preLoadedContent && !this.preLoadedContent.results.length) {
             this.getContent();
         }
@@ -754,30 +751,6 @@ export default {
 
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
-
-        <div v-if="isCoachesGrid" id="coach-section" class="tw-flex tw-flex-col tw-mb-6">
-            <filter-wrapper :search-term="search_term" :selected-tab="selectedTab" :selected-sort="sort"
-                :filter-params="filter_params" :multi-select-columns="filterMultiSelectColumns"
-                :tab-options="[{ value: 'allCoaches', key: 'All Coaches' }, { value: 'subscribedCoaches', key: 'Subscribed Coaches' }]"
-                @handleSearch="handleSearch" @on-filter-click="applyFilters" @handleContentSort="handleContentSort"
-                @on-click-filter-tab="handleFilterTabClick"></filter-wrapper>
-            <div class="tw-flex tw-flex-wrap">
-                <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
-                    :href="coachIndexUrl + '#coach-section'">
-                    <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                        :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500']">
-                        All Coaches
-                    </h3>
-                </a>
-                <a class="tw-no-underline tw-transition" :href="coachIndexUrl + '?only_subscribed=true#coach-section'">
-                    <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                        :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500']">
-                        Subscribed Coaches
-                    </h3>
-                </a>
-            </div>
-        </div>
-
         <coach-catalogue-search v-if="isCoach" :theme-color="themeColor" :brand="brand" :included-types="includedTypes"
             :selected-types="selected_types" :search-term="search_term" :current_page="page"
             :total-results="total_results" @typeChange="handleTypeChange" @searchChange="handleSearch"
