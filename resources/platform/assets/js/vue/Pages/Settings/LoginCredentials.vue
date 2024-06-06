@@ -29,57 +29,50 @@
                 <input id="userInfo" type="hidden" :data-user-id="userId">
 
                 <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-8 tw-mb-2">Login Credentials</h1>
+                
                 <!-- LOGIN -->
-                <div class="tw-flex tw-flex-row tw-p-6 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-4 tw-flex-grow-0" >
-                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">
-                                Login Email
-                            </h2>
-                            <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
-                                    @click="handleShowEmailModal"
-                            >Edit</button>
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
+                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
+                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
+                                @click="handleShowEmailModal"
+                            >
+                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                            </button>
                         </div>
                         <div class="tw-flex tw-flex-col">
                             <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
-                                <div class="tw-flex tw-flex-col tw-w-[200px]">
-                                    <p class="tw-font-bold">Current Email</p>
-                                </div>
-                                <div class="tw-flex tw-flex-col value">
-                                    <p class="">{{ userEmail }}</p>
-                                </div>
+                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Email</h6>
+                                <p class="">{{ userEmail }}</p>
                             </div>
                         </div>
                     </div>
                     <!-- Display Name Modal -->
                     <EditEmailModal v-if="showEmailModal" @onCloseModal="handleShowEmailModal" />
-                </div>
+                </section>
 
                 <!-- PASSWORD -->
-                <div class="tw-flex tw-flex-row tw-p-6 tw-flex-auto tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-4 tw-flex-grow-0" >
-                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">
-                                Login Password
-                            </h2>
-                            <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
-                                    @click="handleShowPasswordModal"
-                            >Edit</button>
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
+                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
+                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
+                                @click="handleShowPasswordModal"
+                            >
+                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                            </button>
                         </div>
                         <div class="tw-flex tw-flex-col">
                             <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
-                                <div class="tw-flex tw-flex-col tw-w-[200px]">
-                                    <p class="tw-font-bold">Current Password</p>
-                                </div>
-                                <div class="tw-flex tw-flex-col value">
-                                    <p class="">********</p>
-                                </div>
+                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Password</h6>
+                                <p class="">********</p>
                             </div>
                         </div>
                     </div>
                     <!-- Display Name Modal -->
                     <EditPasswordModal v-if="showPasswordModal" @onCloseModal="handleShowPasswordModal" />
-                </div>
+                </section>
 
             </div>
         </div>
