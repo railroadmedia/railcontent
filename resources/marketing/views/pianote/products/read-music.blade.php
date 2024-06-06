@@ -834,11 +834,11 @@
         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book-bg.webp');">
         <div class="container max-w-6xl mx-auto mb-14 lg:mb-16 text-white">
             <div class="flex flex-col container max-w-5xl mx-auto">
-                <div class="flex flex-col-reverse md:flex-row w-full lg:pt-10">
-                    <div class="w-full md:w-7/12 lg:w-6/12 md:p-10 text-justify px-6">
-                        <h3 class=""><strong>The key to reading music… <br class="hidden md:block">in your
+                <div class="flex flex-col-reverse md:flex-row items-center w-full lg:pt-10">
+                    <div class="w-full md:w-7/12 lg:w-1/2 text-justify px-6 lg:px-6">
+                        <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your
                                 hands!</strong></h3><br><br>
-                        <p>Read Music in 30 Days is an online Challenge that will have you reading and playing music each
+                        <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
                             day. <br><br>
                             Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE
                             (with
@@ -894,7 +894,7 @@
         </div>
     </section>
 
-    <section class="text-center px-2 sm:px-6 pt-10 sm:pt-14 lg:pt-20 pb-12 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
+    <section class="text-center px-2 sm:px-6 pt-10 sm:pt-14 lg:pt-20 pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
             <div class="w-52 sm:w-72 lg:w-80 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
                 <img class="inline-block sm:hidden w-full relative z-20 transition-opacity opacity-0" loading="lazy"
@@ -1090,10 +1090,15 @@
 
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
-                <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true"
-                    class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
+                @if ($earlyBirdEnd < Carbon\Carbon::now())
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[chords-scales-book]=1&locked=true"
+                        class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
+                @else
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[chords-scales-book]=1&locked=true"
+                        class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
+                @endif    
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
-                        <p class="text-xs px-4">EARLY BIRD OFFER</p>
+                        <p class="text-xs px-4">  @if ($earlyBirdEnd < Carbon\Carbon::now()) COURSE ONLY @else EARLY BIRD OFFER @endif</p>
                     </div>
 
                     <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
@@ -1103,7 +1108,7 @@
                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
                     <ul class="list-disc ml-5">
                         <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Bonus Chords & Scales Book</li>
-                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion PDF
+                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion @if ($earlyBirdEnd < Carbon\Carbon::now()) PDF @else Book @endif
                         </li>
                     </ul>
                     <hr class="w-full my-5" style="border-color:#b2cae1">
