@@ -3,12 +3,12 @@
         <!-- Breadcrumbs -->
         <Breadcrumb :breadcrumbs="[{ title: 'songs', url: `/${brand}/songs` },{ title: songTitle }]"/>
 
-        <div id="lessonInfo" 
+        <div id="lessonInfo"
              class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] 2xl:tw-grid-rows-[370px_auto_auto] tw-w-full tw-mx-auto tw-mt-3 tw-flex-col tw-gap-4"
         >
             <!-- Song Player Section -->
             <div class="tw-col-span-3 tw-w-full 2xl:tw-col-span-2 tw-row-span-1">
-                <SongPlayerSection 
+                <SongPlayerSection
                     :is-loading="isLoading"
                     :contentId="contentId"
                     :resources="resources"
@@ -34,29 +34,27 @@
                         Related Songs
                     </h6>
                 </div>
-                <content-catalogue 
-                    :is-loading="isLoading"
-                    catalogue-type="grid" 
-                    :theme-color="brand" 
-                    :use-theme-color="true"
-                    :pre-loaded-content="relatedLessons" 
-                    :display-inline="true"
-                    :user-id="String(userId)" 
-                />
+
+                <section class="tw-flex tw-flex-col tw-flex-wrap">
+                    <div v-for="(item, i) in relatedLessons.data" :key="i"
+                         class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-full dark:tw-border-[#223F57] tw-inline">
+                        <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" />
+                    </div>
+                </section>
             </div>
 
             <!-- Comments Section -->
             <div class="tw-col-span-3 2xl:tw-col-span-2 2xl:tw-row-span-2">
-                <Comments 
+                <Comments
                     :is-loading="isLoading"
-                    :brand="brand" 
-                    :theme-color="brand" 
-                    :content-id="contentId" 
+                    :brand="brand"
+                    :theme-color="brand"
+                    :content-id="contentId"
                     :user-id="userId"
-                    :user-name="userDisplayName" 
-                    :user-avatar="userProfilePictureUrl" 
+                    :user-name="userDisplayName"
+                    :user-avatar="userProfilePictureUrl"
                     :user-xp="userXP"
-                    :user-access-level="userAccessLevel" 
+                    :user-access-level="userAccessLevel"
                     :is-admin="isAdmin"
                 />
             </div>
@@ -66,13 +64,13 @@
 </template>
 <script setup>
     import { ref, onBeforeMount} from 'vue';
-    import SongPlayerSection from '../components/_Collections/SongPlayerSection.vue'
-    import Comments from '../vuesora/views/comments/Comments.vue'
-    import ContentCatalogue from '../vuesora/views/catalogues/ContentCatalogue.vue';
-    import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue'
     import { fetchSongById } from '../../services/songService';
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../stores/user';
+    import Breadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
+    import SongPlayerSection from '../components/_Collections/SongPlayerSection.vue'
+    import Comments from '../vuesora/views/comments/Comments.vue'
+    import CatalogueListElement from '../components/Catalogue/CatalogueListElement';
 
     //Pinia Data
     const userStore = useUserStore();
@@ -102,22 +100,22 @@
 
     onBeforeMount( ()=> {
         //FETCH SONG BY ID
-        
+
         // const documentId = props.contentId;
         // const fields = [
-        //     '_id', 
-        //     'title', 
-        //     'thumbnail_url', 
-        //     'style', 
-        //     'artist', 
-        //     'album', 
-        //     'lesson-progress', 
-        //     'like_count', 
-        //     'is_liked_by_current_user', 
-        //     'is_added_to_primary_playlist', 
-        //     'instrumentless', 
+        //     '_id',
+        //     'title',
+        //     'thumbnail_url',
+        //     'style',
+        //     'artist',
+        //     'album',
+        //     'lesson-progress',
+        //     'like_count',
+        //     'is_liked_by_current_user',
+        //     'is_added_to_primary_playlist',
+        //     'instrumentless',
         //     '"soundslice_slug": assignments[0]{soundsliceSlug}',
-        //     'resources[]{resource_url, resource_name}', 
+        //     'resources[]{resource_url, resource_name}',
         // ];
         // try {
         //     isLoading.value = true;
@@ -128,5 +126,4 @@
         //     isLoading.value = false;
         // }
     })
-
 </script>

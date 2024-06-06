@@ -2,7 +2,7 @@
     <div class="lg:tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 lg:tw-px-8 dark:tw-text-white">
         <!-- Learning Paths -->
         <LearningPathContainer v-if="learningPaths.length" :learning-paths="learningPaths" trackingSection="banner" />
-        
+
         <!-- Onboarding banner -->
         <TriggerBanner v-if="showTriggerBanner" />
 
@@ -71,11 +71,11 @@
         />
 
         <!-- Playlist section -->
-        <ListSection 
+        <ListSection
             v-if="usersList.length"
-            :newContentUrl="newContentUrl" 
-            :usersList="usersList" 
-            :my-list-url="`/${brand}/playlists`" 
+            :newContentUrl="newContentUrl"
+            :usersList="usersList"
+            :my-list-url="`/${brand}/playlists`"
         />
 
         <div v-if="coachEvent" class="tw-px-4 lg:tw-px-0">
@@ -96,10 +96,10 @@
             trackingSection="upcoming-events"
         />
 
-        
+
         <template v-if="isPackOnlyBoolean">
             <!-- Your Courses section : Packs Only -->
-            <HomepageCatalog 
+            <HomepageCatalog
                 v-if="courseDataObject.data.length"
                 collection-type="course"
                 title="Your Courses"
@@ -109,7 +109,7 @@
             />
 
             <!-- Your Packs section : Packs Only -->
-            <HomepageCatalog 
+            <HomepageCatalog
                 v-if="packData.length"
                 collection-type="pack"
                 title="Your Training Packs"
@@ -124,15 +124,15 @@
             v-if="isPackOnlyBoolean && conversationData.length"
             :posts="conversationData"
             class="tw-mb-8"
-        />  
+        />
 
         <!-- Stats section -->
-        <StatsSection 
+        <StatsSection
             v-if="!isPackOnlyBoolean"
-            :accountUrl="accountUrl" 
+            :accountUrl="accountUrl"
             :nextLearningPathProgressPercent="nextLearningPathProgressPercent"
-            :nextLearningPathLevel="nextLearningPathLevel" 
-            :userMetrics="userMetrics" 
+            :nextLearningPathLevel="nextLearningPathLevel"
+            :userMetrics="userMetrics"
         />
     </div>
 </template>
@@ -141,7 +141,6 @@
     import { computed, onMounted, ref } from 'vue';
     import CohortBanner from '../components/CohortBanner/CohortBanner.vue';
     import CoachEvent from '../vuesora/components/Coaches/CoachEvent.vue';
-    import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper.vue';
     import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel.vue';
     import HomepageCatalog from '../components/HomepageCatalog/HomepageCatalog.vue';
     import LearningPathContainer from '../components/LearningPaths/LearningPathContainer.vue';
@@ -182,11 +181,11 @@
         packData: { type: Array, default: () => ([]) },
         recommendedContent: { type: Object, default: () => ({ data: [] }) },
         recommendedContentUrl: { type: String, default: '' },
-        startedContent: { 
-            type: Object, 
+        startedContent: {
+            type: Object,
             default: () => ({
                 data: []
-            }) 
+            })
         },
         timeCutoffMinutes: { type: Number, default: 0 },
         upcomingEvents: { type: Object, default: () => ({}) },
@@ -194,11 +193,11 @@
         upgradeMembershipUrl: { type: String, default: '' },
         usersList: { type: Object, default: () => ({}) },
         userMetrics: { type: Object, default: () => ({}) },
-        workoutsContent: { 
-            type: Object, 
+        workoutsContent: {
+            type: Object,
             default: () => ({
                 data: []
-            }) 
+            })
         },
         workoutsContentUrl: { type: String, default: '' },
         youtubeId: { type: String, default: '' },
@@ -214,7 +213,7 @@
     });
 
     const courseDataObject = computed(() => {
-        if(!JSON.parse(props.courseData)) return; 
+        if(!JSON.parse(props.courseData)) return;
         return JSON.parse(props.courseData);
     })
 
