@@ -447,11 +447,10 @@
     </header>
 
     <section class="bg-top bg-cover"
-        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/sheet-music-bg.webp');">
+        style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp');">
         <div class="flex flex-col container max-w-4xl mx-auto py-10 md:py-20">
             <div class="w-full flex flex-col justify-center">
-                <h2 class="pb-10 text-white"><strong>Do you wish you could read this?</strong></h2>
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/950x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/sheet-music.webp"
+                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/sheet-music.webp"
                     alt="Sheet Music" class="w-full text-center px-6">
             </div>
             @php
@@ -481,7 +480,7 @@
                 ];
             @endphp
 
-            <div class="w-full md:flex md:flex-row p-6 text-white">
+            <div class="w-full md:flex md:flex-row p-6 text-black">
                 @foreach ($content as $item)
                     <div class="{{ $item['class'] }}">
                         @foreach ($item['sentences'] as $sentence)
@@ -833,7 +832,7 @@
     <section class="bg-top bg-cover pb-10 md:py-10"
         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book-bg.webp');">
         <div class="container max-w-6xl mx-auto mb-14 lg:mb-16 text-white">
-            <div class="flex flex-col container max-w-5xl mx-auto">
+            <div class="flex flex-col container max-w-5xl mx-auto px-4">
                 <div class="flex flex-col-reverse md:flex-row items-center w-full lg:pt-10">
                     <div class="w-full md:w-7/12 lg:w-1/2 text-justify px-6 lg:px-6">
                         <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your
@@ -855,7 +854,7 @@
                         </p>
                     </div>
                     <div class="flex w-full md:w-5/12 lg:w-1/2 p-10 md:p-0">
-                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book.webp"
+                        <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book.webp"
                             alt="Read Music in 30 Days Book">
                     </div>
                 </div>
@@ -1090,11 +1089,12 @@
 
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
+{{--discount TODO--}}
                 @if ($earlyBirdEnd < Carbon\Carbon::now())
-                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[chords-scales-book]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[piano-chords-and-scales-guide]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @else
-                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[chords-scales-book]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[piano-chords-and-scales-guide]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @endif    
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
@@ -1117,8 +1117,8 @@
                         <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
                     </p>
                 </a>
-
-                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[music-theory-posters]=2&products[BeginnerBook]=1&locked=true"
+{{--link TODO--}}
+                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]&products[music-theory-posters]=2&products[BeginnerBook]=1&locked=true" 
                     class="px-5 sm:px-9 py-7 sm:py-11 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">
                     <div class="border rounded-xl bg-musora text-black text-center absolute top-1 right-1">
                         <p class="text-xs py-1 px-2">BEST DEAL</p>
