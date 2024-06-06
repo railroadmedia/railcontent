@@ -38,11 +38,11 @@ const CustomInput = React.forwardRef((props, ref) => {
                 );
 
                 if (difficulty[0]) {
-                    console.log('handleChange difficulty string',difficulty[0], docId);
+                    console.log('handleChange set difficulty string',difficulty[0], docId);
                     sanityClient
                         .patch(docId)
                         .set({
-                            difficult: difficulty[0] ? difficulty[0].title : '',
+                            difficulty_string: difficulty[0] ? difficulty[0].title : '',
                         })
                         .commit()
                 }
@@ -54,7 +54,7 @@ const CustomInput = React.forwardRef((props, ref) => {
 
     return (
         <Stack space={3}>
-            <TextInput {...elementProps} onChange={handleChange} value={value} />
+            <TextInput type={"number"} {...elementProps} onChange={handleChange} value={value} />
         </Stack>
     )
 });

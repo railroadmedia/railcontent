@@ -50,6 +50,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', hidden: "({document}) => !document?.difficulty", readOnly: "true"),
 
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),
+            new Field(FieldType::Number, 'total_xp', 'Total XP',   hidden: "({document}) => !document?.xp", readOnly: "true"),
             //TODO song style is in the railcontent_content_styles table. We'll need a styles schema and reference it on this
             // new Field(FieldType::Array, 'style', of:'reference', list:),
             //TODO reference??
@@ -70,6 +71,8 @@ class Song extends BaseSanityModel
             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist'),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference),
             new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceList),
+            new Field(FieldType::Number, 'child_count', 'Child count',   hidden: "({document}) => !document?.soundslice", readOnly: "true"),
+
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList),
 
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail'),
