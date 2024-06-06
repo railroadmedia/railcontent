@@ -14,7 +14,8 @@
                   getBaseInputStyles, 
                   borderStyles,
                   `${inputOverride ? inputOverride : ''}`,
-                  {'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled}]"
+                  {'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled}
+                ]"
                 :name="name"
                 :type="type"
                 :disabled="disabled"

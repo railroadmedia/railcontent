@@ -30,17 +30,19 @@
                 <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-10 tw-mb-2">Profile Settings</h1>
 
                 <!-- DISPLAY NAME -->
-                <section class="tw-flex tw-flex-row tw-p-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Display Name</h2>
-                            <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
-                                    @click="handleShowDisplayNameModal"
-                            >Edit</button>
+                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
+                                @click="handleShowDisplayNameModal"
+                            >
+                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                            </button>
                         </div>
                         <div class="tw-flex tw-flex-col">
                             <div class="tw-flex tw-flex-row tw-mb-2 tw-items-center tw-w-full tw-text-[#00101D] dark:tw-text-white">
-                                <h6 class="tw-font-bold tw-w-[200px]">Display Name</h6>
+                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Display Name</h6>
                                 <p>{{ userDisplayName }}</p>    
                             </div>
                             <small class="tw-text-sm text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">
@@ -53,13 +55,15 @@
                 </section>
 
                 <!-- PROFILE PICTURE -->
-                <section class="tw-flex tw-flex-row tw-p-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Profile Picture</h2>
-                            <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
+                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
                                     @click="handleProfilePictureModal"
-                            >Edit</button>
+                            >
+                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                            </button>
                         </div>
                         <div class="tw-flex tw-flex-col">
                             <div class="tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-center tw-flex-wrap lg:tw-flex-nowrap">
@@ -103,28 +107,30 @@
                 </section>
 
                 <!-- ABOUT YOU -->
-                <section class="tw-flex tw-flex-row tw-p-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">About You</h2>
-                            <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
+                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
                                     @click="handleShowAboutYouModal"
-                            >Edit</button>
+                            >
+                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                            </button>
                         </div>
                         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white">
                             <!-- Full Name -->
                             <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                <h6 class="tw-font-bold tw-w-[200px]">Full Name</h6>
+                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Full Name</h6>
                                 <p>{{ userFullName }}</p>    
                             </div>
                             <!-- Country -->
                             <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                <h6 class="tw-font-bold tw-w-[200px]">Country</h6>
+                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Country</h6>
                                 <p>{{ userCountry }}</p>    
                             </div>
                             <!-- Birthday -->
                             <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                <h6 class="tw-font-bold tw-w-[200px]">Birthday</h6>
+                                <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Birthday</h6>
                                 <p>{{ userBirthdayFormatted }}</p>    
                             </div>
                             <!-- Birthday -->
@@ -139,39 +145,39 @@
                 </section>
 
                 <!-- GEAR INFO -->
-                <section class="tw-flex tw-flex-row tw-p-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-text-xl">Gear Info</h2>
                         </div>
-                        <div class="tw-grid tw-grid-cols-1 tw-gap-6 sm:tw-grid-cols-2 sm:tw-gap-8">
+                        <div class="tw-grid tw-grid-cols-1 tw-gap-6 md:tw-grid-cols-2 md:tw-gap-8">
                                 
                             <!-- Drums -->
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
                                     <h5 class="tw-font-bold tw-text-lg">My Drum Gear</h5>
-                                    <button class="tw-ml-4" @click="handleShowDrumGearModal">
-                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    <button class="tw-ml-auto sm:tw-ml-4 tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" @click="handleShowDrumGearModal">
+                                        <musora-icon icon-name="pencil" class="tw-w-[21px]" />
                                     </button>
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">Playing Drums Since</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Playing Drums Since</h6>
                                     <p>{{ userDrummingSince }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Drums</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Drums</h6>
                                     <p>{{ userDrumBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Cymbals</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Cymbals</h6>
                                     <p>{{ userCymbalBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Hardware</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Hardware</h6>
                                     <p>{{ userHardwareBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Sticks</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Sticks</h6>
                                     <p>{{ userStickBrands }}</p>    
                                 </div>
                             </div>
@@ -182,20 +188,20 @@
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
                                     <h5 class="tw-font-bold tw-text-lg">My Piano Gear</h5>
-                                    <button class="tw-ml-4" @click="handleShowPianoGearModal">
-                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    <button class="tw-ml-auto sm:tw-ml-4 tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" @click="handleShowPianoGearModal">
+                                        <musora-icon icon-name="pencil" class="tw-w-[21px]" />
                                     </button>
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">Playing Piano Since</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Playing Piano Since</h6>
                                     <p>{{ userPlayingPianoSince }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Piano</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Piano</h6>
                                     <p>{{ userPianoBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Keyboard</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Keyboard</h6>
                                     <p>{{ userKeyboardBrands }}</p>    
                                 </div>
                             </div>
@@ -207,28 +213,28 @@
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
                                     <h5 class="tw-font-bold tw-text-lg">My Guitar Gear</h5>
-                                    <button class="tw-ml-4" @click="handleShowGuitarGearModal">
-                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    <button class="tw-ml-auto sm:tw-ml-4 tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" @click="handleShowGuitarGearModal">
+                                        <musora-icon icon-name="pencil" class="tw-w-[21px]" />
                                     </button>
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">Playing Guitar Since</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Playing Guitar Since</h6>
                                     <p>{{ userPlayingGuitarSince }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Guitars</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Guitars</h6>
                                     <p>{{ userGuitarBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Amps</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Amps</h6>
                                     <p>{{ userAmpBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Pedals</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Pedals</h6>
                                     <p>{{ userPedalBrands }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Strings</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Strings</h6>
                                     <p>{{ userStringBrands }}</p>    
                                 </div>
                             </div>
@@ -240,16 +246,16 @@
                             <div class="tw-flex tw-flex-col tw-mb-4 tw-flex-grow-0 tw-text-[#00101D] dark:tw-text-white" >
                                 <div class="tw-flex tw-items-center tw-mb-2">
                                     <h5 class="tw-font-bold tw-text-lg">My Singing Gear</h5>
-                                    <button class="tw-ml-4" @click="handleShowSingingGearModal">
-                                        <i class="tw-text-lg fas fa-edit" aria-hidden="true"></i>
+                                    <button class="tw-ml-auto sm:tw-ml-4 tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" @click="handleShowSingingGearModal">
+                                        <musora-icon icon-name="pencil" class="tw-w-[21px]" />
                                     </button>
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">Singing Since</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Singing Since</h6>
                                     <p>{{ userSingingSince }}</p>    
                                 </div>
                                 <div class="tw-flex tw-flex-row tw-mb-2 tw-w-full tw-items-center">
-                                    <h6 class="tw-font-bold tw-w-[200px]">My Microphone</h6>
+                                    <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">My Microphone</h6>
                                     <p>{{ userMicBrands }}</p>    
                                 </div>
                             </div>
@@ -262,9 +268,9 @@
                 </section>
 
                 <!-- GEAR PHOTOS -->
-                <section class="tw-flex tw-flex-row tw-p-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Gear Photos</h2>
                         </div>
                         <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-4 tw-gap-4">
@@ -405,11 +411,13 @@
                 <!-- FORUM SIGNATURE -->
                 <section class="tw-flex tw-flex-row tw-p-6 tw-mb-10">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0" >
+                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Forum Signature</h2>
-                            <button class="tw-ml-auto tw-btn-secondary tw-btn-small tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-4" 
+                            <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
                                     @click="handleSignatureModal"
-                            >Edit</button>
+                            >
+                                <musora-icon icon-name="pencil" class="tw-w-[21px]" />
+                            </button>
                         </div>
                         <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white tw-break-words">
                             <p v-if="userSignature" v-html="userSignature"></p>
@@ -570,7 +578,6 @@
         showProfilePictureModal.value = false; //Close Modal
     }
 
-
     //Drums
     const handleDrumsUploadDone = ({ drums_gear_photo }) => {
         userStore.setDrumsPictureUrl({ drums_gear_photo }) //Update Pinia
@@ -600,7 +607,7 @@
     const handleClearGearPhoto = (instrument) => {
         userStore.clearGearPictureUrl(instrument)         
     };
-    
+
     //Handle All Image Upload Errors
     const handleImageUploadError = () => {
         window.shownotification({

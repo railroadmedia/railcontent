@@ -28,6 +28,7 @@ export const updateUserProfile = (token, userId, payload) => {
  * @param {object} payload
  */
 export const updateUserSignature = (token, userId, payload) => {
+    console.log('payload', payload)
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': token

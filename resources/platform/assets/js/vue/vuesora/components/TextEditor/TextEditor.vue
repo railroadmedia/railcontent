@@ -1,5 +1,8 @@
 <template>
-    <div class="text-editor-container tw-flex tw-flex-col tw-w-full" v-if="renderTinyMCE">
+    <div class="text-editor-container tw-flex tw-flex-col tw-w-full"
+         :class="{'tw-opacity-50 tw-pointer-events-none':disabled}" 
+         v-if="renderTinyMCE"
+    >
         <ImageUploader v-if="showImageUploader" :skipCrop="true" :selfContained="true"
             uploadServiceRoute="/musora-api/v5/picture/upload-from-s3"
             successMessage="Your image was successfully uploaded" fieldKey="forum_post_photo" cropType="square"
@@ -43,6 +46,10 @@ const props = defineProps({
     isStudentComment: {
         type: Boolean,
         default: true,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
     },
 });
 

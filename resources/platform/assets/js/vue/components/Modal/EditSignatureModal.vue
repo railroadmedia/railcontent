@@ -73,9 +73,9 @@
     const submitUserForm = async () => {
         formProcessing.value = true;
         try {
-            await userStore.updateSignature(token.value, userId.value, formData.value);
+            await userStore.updateSignature(formData.value);
         } catch (error) {
-            console.error("Failed to update the display name:", error.message);
+            console.error("Failed to update the user signature:", error.message);
         }
         handleClose(); // Close modal
     };

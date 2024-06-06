@@ -1,6 +1,6 @@
 <template>
     <div ref="container" 
-        class="tw-mx-auto tw-w-full 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-flex tw-overflow-x-scroll tw-scrolling-touch tw-no-scrollbar tw-gap-[4px] md:tw-gap-[10px] tw-px-[30px]"
+        class="tw-mx-auto tw-w-full 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-flex tw-overflow-x-scroll tw-scrolling-touch tw-no-scrollbar tw-gap-[4px] md:tw-gap-[10px] tw-px-4 md:tw-px-[30px]"
         @mousemove.prevent="move"
         @mousedown="startDragging"
         @mouseup="stopDragging"
