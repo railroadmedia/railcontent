@@ -46,15 +46,15 @@
         'price' => floatval($productPrices['read-music-in-30-days-workbook']->discounted_price),
         'noBreadcrumb' => true,
     ])
-    <header class="px-5 sm:px-6 pt-72 pb-12 sm:py-20 lg:py-36 bg-top" style="background-color:#F1F7FE;">
-        <div class="container max-w-3xl mx-auto">
+    <header class="px-5 sm:px-6 pt-64 pb-12 sm:py-20 lg:py-36 bg-top" style="background-color:#F1F7FE;">
+        <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center mt-28 sm:mt-0">
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
-                    <img class="h-24 lg:h-32" alt="logo" fetchpriority="high"
+                    <img class="h-24 lg:h-28" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
-                    <p class="leading-normal my-4 sm:my-6 text-black"><strong>Learn the language of music</strong> <br> with 30 days of
-                        guided lessons and exercises.</p>
-                    <h4 class="mb-4 sm:mb-6">
+                    <h4 class="leading-tight my-4 sm:my-6 text-black"><strong>Learn the language of music</strong> <br> with 30 days of
+                        guided lessons and exercises.</h4>
+                    <h2 class="mb-4 sm:mb-6">
                         @if (floatval($productPrices['read-music-in-30-days-workbook']->price) >
                                 floatval($productPrices['read-music-in-30-days-workbook']->discounted_price))
                             <strong></strong> <s
@@ -66,7 +66,7 @@
                             <strong>
                                 ${{ floatval($productPrices['read-music-in-30-days-workbook']->discounted_price) }}</strong>
                         @endif
-                    </h4>
+                    </h2>
                     <a href="/ecommerce/add-to-cart?products[read-music-in-30-days-workbook]=1"
                         class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
@@ -76,8 +76,8 @@
     <section class="text-center px-5 sm:px-6 py-8 sm:py-16 lg:py-20 relative" style="background-color:#FFFFFF">
         <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="leading-tight mb-3"><strong>Learn to Read Music… By <br class="md:hidden"> PLAYING Music</strong></h2>
-            <h6 class="leading-normal italic mb-4">Connect the notes on the page to the keys on your <br
-                    class="hidden sm:inline"> piano with daily lesson and practice exercises.</h6>
+            <h6 class="leading-normal mb-4"><em>Connect the notes on the page to the keys on your <br
+                    class="hidden sm:inline"> piano with daily lesson and practice exercises.</em></h6>
 
             @php
                 $items = [
@@ -126,10 +126,10 @@
                     @endif
 
                     <div class="flex flex-row md:flex-col sm:flex-1 justify-center items-start py-4 {{ $index % 2 != 0 ? 'sm:pl-4 md:pl-10' : 'sm:pr-4 md:pr-10' }} order-2 sm:order-1">
-                        <img class="w-10 md:w-12 mb-2 mr-3 sm:hidden" src="{{ $item['icon'] }}" alt="Icon">
+                        <img class="h-10 mb-2 mr-3 sm:hidden" src="{{ $item['icon'] }}" alt="Icon">
                         <div>
-                        <img class="w-10 md:w-12 mb-2 mr-3 hidden sm:inline-block" src="{{ $item['icon'] }}" alt="Icon">
-                        <h3 class="pb-2 md:pb-4 m-0"><strong>{{ $item['title'] }}</strong></h3>
+                        <img class="h-9 mr-3 hidden sm:inline-block" src="{{ $item['icon'] }}" alt="Icon">
+                        <h3 class="leading-tight mx-0 my-2 sm:my-4"><strong>{{ $item['title'] }}</strong></h3>
                         <p class="leading-normal max-w-xl">{{ $item['desc'] }}</p>
                         </div>
                     </div>
@@ -140,9 +140,9 @@
         </div>
     </section>
 
-    <section class="text-white text-center px-5 sm:px-6 pt-10 pb-24 sm:py-20 lg:py-24"
+    <section class="text-white text-center px-5 sm:px-6 pt-10 pb-24 sm:py-16 lg:py-20"
         style="background-color:#0E1523;">
-        <div class="container max-w-6xl mx-auto">
+        <div class="container max-w-6xl mx-auto lg:mb-12">
             <h3 class="leading-tight text-center mb-6 sm:mb-7"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h3>
 
             @php
@@ -178,13 +178,13 @@
             ])
                 <div class="flex flex-wrap items-center">
                     <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                        <div class="p-1 w-full">
                             <div @click="handleClick(1)"
                                 class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')">
                             </div>
                         </div>
-                        <div class="p-3 w-full">
+                        <div class="p-1 w-full">
                             <div @click="handleClick(3)"
                                 class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')">
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                     <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                        <div class="p-1 w-full">
                             <div @click="handleClick(2)"
                                 class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[2]['img'] }}')">
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                        <div class="p-1 w-full">
                             <div @click="handleClick(0)"
                                 class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[0]['img'] }}')">
@@ -208,13 +208,13 @@
                         </div>
                     </div>
                     <div class="w-1/2 md:w-1/4">
-                        <div class="p-3 w-full">
+                        <div class="p-1 w-full">
                             <div @click="handleClick(5)"
                                 class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[5]['img'] }}')">
                             </div>
                         </div>
-                        <div class="p-3 w-full">
+                        <div class="p-1 w-full">
                             <div @click="handleClick(4)"
                                 class="h-36 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}"
                                 style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[4]['img'] }}')">
@@ -229,7 +229,7 @@
 
     <div id="final" class="anchor"></div>
 
-    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20" style="background:#f7fbfe">
+    <section class="px-5 sm:px-6 py-12 sm:py-16 lg:py-20" style="background:#f1f7fe">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
@@ -237,11 +237,11 @@
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book.webp">
                 </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left sm:pr-5">
-                    <img class="h-24 lg:h-32" alt="logo" fetchpriority="high"
+                    <img class="h-24 lg:h-28" alt="logo" fetchpriority="high"
                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
-                    <p class="leading-normal my-4 sm:my-6"><strong>Learn the language of music</strong> <br class="md:hidden">with 30 days of
-                        guided lessons and exercises.</p>
-                    <h4 class="mb-4 sm:mb-6">
+                    <h4 class="leading-tight my-4 sm:my-6 text-black"><strong>Learn the language of music</strong> <br> with 30 days of
+                        guided lessons and exercises.</h4>
+                    <h2 class="mb-4 sm:mb-6">
                         @if (floatval($productPrices['read-music-in-30-days-workbook']->price) >
                                 floatval($productPrices['read-music-in-30-days-workbook']->discounted_price))
                             <strong></strong> <s
@@ -253,7 +253,7 @@
                             <strong>
                                 ${{ floatval($productPrices['read-music-in-30-days-workbook']->discounted_price) }}</strong>
                         @endif
-                    </h4>
+                    </h2>
                     <a href="/ecommerce/add-to-cart?products[read-music-in-30-days-workbook]=1"
                         class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
