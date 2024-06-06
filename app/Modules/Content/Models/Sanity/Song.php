@@ -47,7 +47,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"
                 , inputComponent: 'CustomInput'
             ),
-            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', hidden: "({document}) => !document?.difficulty", readOnly: "true"),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true"),
 
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),
             new Field(FieldType::Number, 'total_xp', 'Total XP',   hidden: "({document}) => !document?.xp", readOnly: "true"),
@@ -70,7 +70,7 @@ class Song extends BaseSanityModel
 
             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist'),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference),
-            new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceList),
+            new Field(FieldType::Array, 'soundslice', 'Soundslice', of:  $soundsliceList,  inputComponent: 'ArrayInput'),
             new Field(FieldType::Number, 'child_count', 'Child count',   hidden: "({document}) => !document?.soundslice", readOnly: "true"),
 
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList),

@@ -4,10 +4,12 @@ import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import CustomInput from './components/CustomInput'; // Import the custom component
+import ArrayInput from './components/ArrayInput'; // Import the custom component
 
 // You can add more custom components here as needed
 const customComponents = {
   CustomInput: CustomInput,
+    ArrayInput: ArrayInput
 };
 
 function App() {

@@ -41,10 +41,24 @@ class SanityStudioCMSController extends BaseController
         );
     }
 
-    public function customInput(){
-        $json = file_get_contents(public_path('/platform/js/CustomInput.js'));
+    public function getSoundsliceData(Request $request)
+    {
+        $slug = $request->get('slug');
+        try {
+            $client = new \GuzzleHttp\Client();
+            $auth = [env('SOUNDSLICE_APP_ID'), env('SOUNDSLICE_SECRET')];
+            $response = $client->request('GET', 'https://www.soundslice.com/'.'api/v1/slices/'.$slug.'/recordings', [
+                'auth' => $auth,
+            ]);
 
-        return response($json, 200)
-            ->header('Content-Type', 'text/javascript');
+            $body = json_decode($response->getBody(), true);
+            $duration = 0;
+            if (!empty($body)) {
+                $duration = \Arr::last($body)['cropped_duration'] ?? \Arr::first($body)['cropped_duration'] ?? 0;
+            }
+        } catch (\Exception $e) {
+            return 0;
+        }
+        return $duration;
     }
 }
