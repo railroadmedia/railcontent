@@ -293,7 +293,7 @@
         } else {
             $stock = 'a limited amount';
         }
-        
+
         $startDate = 'July 1st';
         $endDate = 'July 30th';
         $today = date('Y-m-d');
@@ -334,7 +334,7 @@
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
                         style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header.webp');"
-                        x-on:click="trailerM = true;">
+                        x-on:click="trailer = true;">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
                         </div>
                     </div>
@@ -666,7 +666,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
             <h2 class="mb-6 sm:mb-10 lg:mb-14">
-                <img class="h-16 sm:h-24 align-bottom transition-opacity opacity-0" loading="lazy"
+                <img class="h-16 sm:h-20 align-bottom transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
                     alt="Read Music in 30 Days Logo"> <strong>...is perfect for: </strong>
@@ -677,21 +677,21 @@
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/Beginner.webp',
-                        'title' => 'Beginner Piano Players',
+                        'title' => 'Beginner<br> Piano Players',
                         'description' =>
                             'You’re just starting and you want to read music to play your favorite songs. We’ve got you covered. This course is designed with you in mind.',
                     ],
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/Returning.webp',
-                        'title' => 'Returning Piano Players',
+                        'title' => 'Returning<br> Piano Players',
                         'description' =>
                             'You’ve played a bit and maybe know some basics, but you’re a little rusty. Read Music in 30 Days will get you back up to speed (and beyond) in no time. ',
                     ],
                     [
                         'image' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/Play-by-ear.webp',
-                        'title' => '“Play by Ear” Piano Players',
+                        'title' => '“Play by Ear”<br> Piano Players',
                         'description' =>
                             'You love to play by ear, but don’t know how to read music? Connect the melodies in your head to the notes on the page and become a more rounded piano player. ',
                     ],
@@ -703,11 +703,11 @@
                     <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0 mx-auto sm:mx-0">
                         <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl"
                             style="background-image:url('{{ $player['image'] }}'); object-position: 60% 0">
-                            <div class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img
+                            <h5 class="leading-tight absolute bottom-1 w-full z-10"><strong><img
                                         class="h-8 transition-opacity opacity-0" loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/tick-icon.svg"
-                                        alt="plus icon"><br>{{ $player['title'] }}</strong></div>
+                                        alt="plus icon"><br>{!!  $player['title']  !!}</strong></h5>
                             <div class="absolute inset-0 z-0"
                                 style="background:linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.4));"></div>
                         </div>
@@ -739,7 +739,7 @@
                                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-light.webp"
                                     alt="Read Music in 30 Days Logo"></td>
                             <td class="cursor-pointer sm:cursor-default"><strong>Private <br> Lessons</strong></td>
-                            <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Online<br> Courses</strong>
+                            <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong>
                             </td>
                             <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong>
                             </td>
@@ -799,7 +799,7 @@
     <section style="background: #EFF7FF" class="px-5 sm:px-8 py-8 sm:py-12 lg:py-16 text-center">
         <div class="container max-w-5xl mx-auto mb-10">
             <h6 class="uppercase leading-relaxed text-pianote">No theory. No homework.</h6>
-            <h1 class="uppercase leading-relaxed md:pb-4"><strong>JUST PRESS PLAY<strong></h1>
+            <h1 class="uppercase leading-relaxed md:pb-4"><strong>JUST PRESS PLAY</strong></h1>
             <!-- <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                         x-on:click="window.innerWidth <= 640 ? trailerM = true : trailer = true;">
                         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
@@ -819,7 +819,9 @@
                     </div> -->
 
             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/trailer-thumb.png"
-                alt="" class="w-full">
+                alt="" class="w-full cursor-pointer autoplay-video"
+                x-on:click="trailer = true"
+            >
 
         </div>
     </section>
@@ -828,11 +830,11 @@
         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book-bg.webp');">
         <div class="container max-w-6xl mx-auto mb-14 lg:mb-16 text-white">
             <div class="flex flex-col container max-w-5xl mx-auto">
-                <div class="flex flex-col-reverse md:flex-row w-full pt-10">
-                    <div class="w-full md:w-7/12 lg:w-6/12 md:p-10 text-justify px-6">
-                        <h3 class=""><strong>The key to reading music… <br class="hidden md:block">in your
-                                hands!</strong></h3><br><br>
-                        <p>Read Music in 30 Days is an online Challenge that will have you reading and playing music each
+                <div class="flex flex-col-reverse md:flex-row items-center w-full pt-10">
+                    <div class="w-full md:w-7/12 lg:w-1/2 text-justify px-6 lg:px-6">
+                        <h3 class="leading-tight mb-3 sm:mb-5"><strong>The key to reading music… <br class="hidden md:block">in your
+                                hands!</strong></h3>
+                        <p class="leading-normal">Read Music in 30 Days is an online Challenge that will have you reading and playing music each
                             day. <br><br>
                             Enroll before June 23rd and you’ll also get the Read Music in 30 Days Companion Book for FREE
                             (with
@@ -848,7 +850,7 @@
                             value).
                         </p>
                     </div>
-                    <div class="flex items-center w-full md:w-5/12 lg:w-6/12 p-10 md:p-0">
+                    <div class="flex w-full md:w-5/12 lg:w-1/2 p-10 md:p-0">
                         <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book.webp"
                             alt="Read Music in 30 Days Book">
                     </div>
@@ -960,7 +962,7 @@
 
         <div id="testimonials" class="anchor"></div>
         <div class="px-5 sm:px-6 py-10 sm:py-14 md:py-20" style="background-color:#f4f8fb;">
-            <div class="container max-w-4xl mx-auto">
+            <div class="container max-w-6xl mx-auto">
                 <h3 class="leading-tight text-black py-4 md:py-6 text-center"><strong>What students are saying about Lisa:</strong></h3>
 
                 <div x-data="{ splide: null }" x-init="splide = new Splide($refs.splide, { type: 'loop', perPage: 1.3, gap: 2, focus: 0, arrows: false, pagination: false, autoplay: true }).mount()">
@@ -1001,8 +1003,8 @@
                 </div>
             </div>
         </div>
-        <div class="container mx-auto text-center flex flex-col content-center items-center w-full md:w-1/3">
-            <a href="#final" class="join bg-pianote medium w-full md:w-1/2 anchor-slide">ENROLL NOW</a>
+        <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
+            <a href="#final" class="join bg-pianote medium w-full max-w-xs anchor-slide">ENROLL NOW</a>
 
             <div class="pt-4">
                 <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
@@ -1043,7 +1045,7 @@
     </section>
 
     <div id="final" class="anchor"></div>
-    
+
     <section
         class="flex flex-col md:flex-row text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
         style="background-color:#eff7ff;">
@@ -1163,7 +1165,7 @@
                                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
                                         <p class="text-xs px-4">EARLY BIRD OFFER</p>
                                     </div>
-                                    
+
                                     <h3><strong>Read Music in 30 Days</strong></h3>
                                     <p class="text-sm mt-2 mb-5">Learn the language of music in just 30 days.</p>
                                     <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2>
@@ -1319,12 +1321,12 @@
         'vimeo' => true,
     ])
 
-    @include('_partials.components.video-modal', [
-        'name' => 'trailerM',
-        'video' => '952486575',
-        'vimeo' => true,
-        'styles' => 'pb-[177%] bg-white',
-    ])
+{{--    @include('_partials.components.video-modal', [--}}
+{{--        'name' => 'trailerM',--}}
+{{--        'video' => '952486575',--}}
+{{--        'vimeo' => true,--}}
+{{--        'styles' => 'pb-[177%] bg-white',--}}
+{{--    ])--}}
 
     @include('pianote.sales.partials._footer')
 
