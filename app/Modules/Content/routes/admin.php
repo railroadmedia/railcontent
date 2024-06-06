@@ -11,6 +11,11 @@ Route::prefix('admin')
             [SanityStudioCMSController::class, 'renderStudio']
         )->where('any', '.*')
             ->name('admin.studio');
+        Route::get(
+            '/soundslice',
+            [SanityStudioCMSController::class, 'getSoundsliceData']
+        )
+            ->name('admin.soundslice');
     });
 
 Route::get(
