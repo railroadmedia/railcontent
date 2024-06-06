@@ -1,6 +1,6 @@
 <script setup>
     import { onMounted, ref } from 'vue';
-    import BreadCrumb from './../Breadcrumb/Breadcrumb.vue';
+    import Breadcrumb from './../Breadcrumb/Breadcrumb.vue';
     import ContentCatalogue from "../../vuesora/views/catalogues/ContentCatalogue";
 
     const props = defineProps({
@@ -14,7 +14,7 @@
         },
         breadcrumbs: {
             type: [Array, Object],
-            default: {},
+            default: [],
         },
         lessonList: {
             type: Array,
@@ -104,8 +104,8 @@
 
             <!-- INSTRUCTORS -->
             <template v-if="instructors && instructors.length"  >
-                <div class="tw-flex tw-flex-row mb-3" 
-                    v-for="(instructor, i) in instructors" 
+                <div class="tw-flex tw-flex-row mb-3"
+                    v-for="(instructor, i) in instructors"
                     :key="i"
                 >
                     <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
