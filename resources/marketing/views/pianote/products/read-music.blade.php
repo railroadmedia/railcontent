@@ -1049,8 +1049,8 @@
         class="flex flex-col md:flex-row text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
         style="background-color:#eff7ff;">
 
-        <div class="flex flex-col md:flex-row container max-w-6xl mx-auto">
-            <div class="flex flex-col items-center justify-center w-full md:w-7/12 text-center sm:text-left">
+        <div class="flex flex-col lg:flex-row container max-w-6xl mx-auto">
+            <div class="flex flex-col items-center justify-center w-full lg:w-7/12 text-center sm:text-left">
                 <img class="h-16 sm:h-18 lg:h-24 -mb-3 sm:mb-0 lg:mb-3 transition-opacity opacity-0" loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/770x0/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp"
@@ -1062,16 +1062,15 @@
                         Lifetime Course Access. <br> <span class="text-pianote">BONUS</span>
                         Companion Workbook.</strong></h5>
 
-                @php
-                    $nPackOwnersFormatted = !empty($nPackOwners) && $nPackOwners > 0 ? number_format($nPackOwners) : 0;
-                    $items = [
-                        'Read music and play the songs you love.',
-                        'Join ' . $nPackOwnersFormatted . ' piano players who<br> have already registered.',
-                        'Choose your best option to get started.',
-                    ];
-                @endphp
-
                 <div class="flex flex-col items-start">
+                    @php
+                        $nPackOwnersFormatted = !empty($nPackOwners) && $nPackOwners > 0 ? number_format($nPackOwners) : 0;
+                        $items = [
+                            'Read music and play the songs you love.',
+                            'Join ' . $nPackOwnersFormatted . ' piano players who<br> have already registered.',
+                            'Choose your best option to get started.',
+                        ];
+                    @endphp
                     @foreach ($items as $item)
                         <div class="flex items-center mb-2">
                             <i class="ml-2 fas fa-check text-pianote"></i>
@@ -1081,149 +1080,61 @@
                 </div>
 
             </div>
-            <div class="w-full">
-                <div class="container mx-auto relative z-50">
-                    <!-- @if (!is_current_user_a_member())
-    <img class="h-20 sm:h-28 lazyload"
-                        data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png"
-                        alt="30DD season 2">
-                    <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided
-                            workouts.</strong></h2>
-
-                    <h6 class="leading-normal mb-4">
-                        <strong>EARLY BIRD SPECIAL:</strong> Get a free practice & sticks <br
-                            class="hidden sm:inline md:hidden">when you enroll before February 19th.
-                        <br>
-                        <span class="text-pianote">Enrollment closes in <span class="tzcd-30DD">a limited time</span>!</span>
-                    </h6>
-    @endif -->
-
-                    <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                        <!-- @if (is_current_user_a_member())
-                            <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
-                                <img class="h-20 md:h-20 lg:h-24 lazyload"
-                                    data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
-                                <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                        24 Guided Workouts<br>
-                                        4 Live Q&A Sessions<br>
-                                        Lifetime Course Access
-                                    </strong></h2>
-                                <div class="w-full mx-auto sm:mx-0">
-
-                                    <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>
-                                        Learn
-                                        drums by playing drums with Domino Santantonio</p>
-                                    <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>
-                                        Join
-                                        {{ number_format($nPackOwners ?? 0) }} drummers who've already registered.</p>
-                                    <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>
-                                        Course
-                                        runs February 27 to March 27.</p>
-                                    <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>
-                                        Click
-                                        below to join the next edition of 30-Day Drummer</p>
-
-                                    @if (session()->has('success-message'))
-                                        <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for
-                                                30-Day
-                                                Drummer.<br class="hidden md:inline"> Check your email for the
-                                                details.</strong>
-                                        </p>
-                                    @endif
-
-                                    @if (is_current_user_a_member())
-                                        <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s
-                                                class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
-                                    @else
-                                        <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl">
-                                            <strong>${{ 97 }}</strong>
-                                        </h1>
-                                    @endif
-
-                                    @if ($hasProduct)
-                                        <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
-                                    @else
-                                        <a class="join blue medium w-1/2 align-middle"
-                                            href="{{ $registerButtonUrl }}">ENROLL
-                                            NOW</a>
-                                    @endif
-
-                                    <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round(97 / 30, 2) }} per
-                                            day.)</em></p>
-
-                                    {{--                            <p class="text-sm text-pianote"> --}}
-                                    {{--                                <em><a class="cursor-pointer" data-open="bundle">Need a practice pad & drumsticks?<br class="inline lg:hidden"> Click <strong>here</strong> for a special offer.</a></em> --}}
-                                    {{--                            </p> --}}
-
-                                </div>
-                            </div>
-                        @else -->
-                            <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto">
-                                <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true"
-                                    class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
-                                    <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
-                                        <p class="text-xs px-4">EARLY BIRD OFFER</p>
-                                    </div>
-
-                                    <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
-                                    <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
-                                    <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2>
-                                    <p class="inline-block text-xs">one time payment.</p><br>
-                                    <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
-                                    <ul class="list-disc ml-5">
-                                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Bonus Chords & Scales Book</li>
-                                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion PDF
-                                        </li>
-                                    </ul>
-                                    <hr class="w-full my-5" style="border-color:#b2cae1">
-                                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                        <i class="fas fa-check text-pianote mr-1"></i> RLifetime Access<br>
-                                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
-                                    </p>
-                                </a>
-
-                                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[music-theory-posters]=2&products[BeginnerBook]=1&locked=true"
-                                    class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">
-                                    <div class="border rounded-xl bg-musora text-black text-center absolute top-1 right-1">
-                                        <p class="text-xs py-1 px-2">BEST DEAL</p>
-                                    </div>
-                                    <div class="inline-block border rounded-xl border-pianote text-pianote text-center my-2">
-                                        <p class="text-xs px-4">UNLIMITED LESSONS</p>
-                                    </div>
-                                    <h3 class="leading-tight"><strong>Join Pianote + Get Read Music in 30 Days FREE</strong></h3>
-                                    <p class="text-sm mt-2 mb-3 text-gray-700">The Ultimate Online Lessons Experience.</p>
-                                    <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
-                                    <p class="inline-block text-xs text-gray-700">(Includes $364 in free bonuses)</p><br>
-                                    <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
-                                    <ul class="list-disc ml-5">
-                                        <li class="text-sm leading-relaxed">Read Music in 30 Days</li>
-                                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Workbook
-                                        </li>
-                                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF
-                                        </li>
-                                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Music Theory Poster Bundle</li>
-                                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Little Book Bundle (3 Books)</li>
-                                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Metronome</li>
-                                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Piano Riffs & Fills</li>
-
-                                    </ul>
-                                    <hr class="w-full my-5" style="border-color:#b2cae1">
-                                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
-                                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
-                                    </p>
-                                </a>
-                            </div>
-
-                        <!-- @endif
-                        <div
-                            class="flex w-full justify-center @if (is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
-                            <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload"
-                                data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/collage.png"
-                                alt="order collage image">
-                        </div> -->
+            <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
+                <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true"
+                    class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
+                    <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
+                        <p class="text-xs px-4">EARLY BIRD OFFER</p>
                     </div>
-                </div>
+
+                    <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
+                    <p class="text-sm mt-2 mb-3">Learn the language of music in just 30 days.</p>
+                    <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2>
+                    <p class="inline-block text-xs">one time payment.</p><br>
+                    <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
+                    <ul class="list-disc ml-5">
+                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Bonus Chords & Scales Book</li>
+                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion PDF
+                        </li>
+                    </ul>
+                    <hr class="w-full my-5" style="border-color:#b2cae1">
+                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Access<br>
+                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
+                    </p>
+                </a>
+
+                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[music-theory-posters]=2&products[BeginnerBook]=1&locked=true"
+                    class="px-5 sm:px-9 py-7 sm:py-11 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">
+                    <div class="border rounded-xl bg-musora text-black text-center absolute top-1 right-1">
+                        <p class="text-xs py-1 px-2">BEST DEAL</p>
+                    </div>
+                    <div class="inline-block border rounded-xl border-pianote text-pianote text-center my-2">
+                        <p class="text-xs px-4">UNLIMITED LESSONS</p>
+                    </div>
+                    <h3 class="leading-tight"><strong>Join Pianote + Get Read Music in 30 Days FREE</strong></h3>
+                    <p class="text-sm mt-2 mb-3 text-gray-700">The Ultimate Online Lessons Experience.</p>
+                    <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
+                    <p class="inline-block text-xs text-gray-700">(Includes $364 in free bonuses)</p><br>
+                    <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
+                    <ul class="list-disc ml-5">
+                        <li class="text-sm leading-relaxed">Read Music in 30 Days</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Workbook
+                        </li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF
+                        </li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Music Theory Poster Bundle</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Little Book Bundle (3 Books)</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Metronome</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Piano Riffs & Fills</li>
+
+                    </ul>
+                    <hr class="w-full my-5" style="border-color:#b2cae1">
+                    <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                        <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
+                        <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee<br>
+                    </p>
+                </a>
             </div>
         </div>
     </section>
