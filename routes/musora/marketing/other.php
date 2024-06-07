@@ -67,6 +67,11 @@ Route::domain('{musoraDomain}')
         Route::get('redeem-spotify', [CodeRedemptionController::class, 'spotifyRedeemNewMusora']);
         Route::get('redeem-spotify/existing', [CodeRedemptionController::class, 'spotifyRedeemExistingMusora']);
 
+
+        Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
+        Route::get('thomann90', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
+        Route::get('thomann/existing', [CodeRedemptionController::class, 'renderExistingAccountThomannRedeemPage']);
+
         Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'])
             ->withoutMiddleware([VerifyCsrfToken::class])
             ->name('claim-spotify');

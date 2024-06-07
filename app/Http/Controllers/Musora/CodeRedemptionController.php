@@ -116,9 +116,22 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function renderNewAccountThomannRedeemPage()
+    public function renderNewAccountThomannRedeemPage(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page', ['newAccount' => true, 'thomann' => true]);
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'thomann' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderExistingAccountThomannRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'thomann' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
     public function renderExistingAccountRedeemPage(Request $request)
