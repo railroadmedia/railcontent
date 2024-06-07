@@ -29,7 +29,7 @@
 
         @media (min-width: 639px) {
             header {
-                background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/products/read-music-book/header-bg.webp');
+                background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/products/read-music-book/header-bg.webp');
                 background-size: cover;
             }
         }
@@ -51,7 +51,8 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center mt-28 sm:mt-0">
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
                     <img class="h-24 lg:h-28" alt="logo" fetchpriority="high"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp"
+                        alt="Read Music in 30 Days Logo">
                     <h4 class="leading-tight my-4 sm:my-6 text-black"><strong>Learn the language of music</strong> <br> with 30 days of
                         guided lessons and exercises.</h4>
                     <h2 class="mb-4 sm:mb-6">
@@ -234,11 +235,13 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
                     <img class="-mt-32 sm:-mt-36 mb-4 sm:-mb-12 w-full max-w-xs lg:max-w-md"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book.webp">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/950x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book.webp"
+                        alt="Read Music Book Cover">
                 </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left sm:pr-5">
                     <img class="h-24 lg:h-28" alt="logo" fetchpriority="high"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp">
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/logo.webp"
+                        alt="Read Music in 30 Days Logo">
                     <h4 class="leading-tight my-4 sm:my-6 text-black"><strong>Learn the language of music</strong> <br> with 30 days of
                         guided lessons and exercises.</h4>
                     <h2 class="mb-4 sm:mb-6">
