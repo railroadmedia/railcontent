@@ -137,27 +137,15 @@
             }
         }
     </style>
-    @if(!empty($thomann))
-        <style>
-            .apply {
-                background:#0b76db;
-            }
+    <style>
+        .apply {
+            background:#000C17;
+        }
 
-            .apply:hover {
-                background:#258ff4;
-            }
-        </style>
-    @else
-        <style>
-            .apply {
-                background:#000C17;
-            }
-
-            .apply:hover {
-                background:#001930;
-            }
-        </style>
-    @endif
+        .apply:hover {
+            background:#001930;
+        }
+    </style>
 @endsection
 
 <!-- Main -->
@@ -268,27 +256,19 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $('.code-input').bind(
-                    'paste', function (e) {
-                        var value = e.originalEvent.clipboardData.getData('text');
-                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                        for (var i = 0; i < chunks.length; i++) {
-                            $('.code-input').eq(i).val(chunks[i]);
-                        }
-                    }
-                ).bind(
-                    'input',
-                    function (e) {
-                        console.log($(this).val().length);
-                        if ($(this).val().length == 4) {
-                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                        }
-                    }
-                );
-            }
-        );
+        $(document).ready(function () {
+            $('.code-input').bind('paste', function (e) {
+                var value = e.originalEvent.clipboardData.getData('text');
+                value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
+                var chunks = value.match(new RegExp('.{1,4}', 'g'));
+                for (var i = 0; i < chunks.length; i++) {
+                    $('.code-input').eq(i).val(chunks[i]);
+                }
+            }).bind('input', function (e) {
+                if ($(this).val().length == 4) {
+                    $('.code-input').eq($(this).index('.code-input') + 1).focus();
+                }
+            });
+        });
     </script>
 @endsection
