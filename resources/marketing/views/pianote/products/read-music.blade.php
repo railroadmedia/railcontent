@@ -253,8 +253,8 @@
         }
 
         table.comparison tr td:nth-child(2) {
-            text-shadow: 3px 3px #F61A30 !important;
-            background-color: #F61A30 !important;
+            text-shadow: 1px 1px #F61A30 !important;
+            background: linear-gradient(to right, #F61A30, #A10000) !important;
 
         }
     </style>
@@ -300,9 +300,7 @@
         $endDateCourse = $endDateCourse->format('F jS');
         $earlyBirdStart = Carbon\Carbon::create(2024, 6, 13, 0, 0, 0, 'America/Vancouver');
         $earlyBirdEnd = Carbon\Carbon::create(2024, 6, 24, 0, 0, 0, 'America/Vancouver');
-        $registerButtonUrl = '';
         $course = 'Read Music in 30 Days';
-        $dateTest = Carbon\Carbon::create(2024, 7, 1, 0, 0, 0, 'America/Vancouver');
     @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#EFF7FF;">
@@ -379,9 +377,7 @@
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png"
                                 alt="Image of joined student profiles in read music in 30 days">
                             <p class="inline-block leading-tight text-sm align-middle">Join
-                                @if (!empty($nPackOwners) && $nPackOwners > 0)
-                                    {{ number_format($nPackOwners ?? 0) }}
-                                @endif piano players who<br> have already registered.
+                            {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.
                             </p>
                         </div>
                     </div>
@@ -449,9 +445,20 @@
     <section class="bg-top bg-cover"
         style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp');">
         <div class="flex flex-col container max-w-4xl mx-auto py-10 md:py-20">
-            <div class="w-full flex flex-col justify-center">
-                <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/sheet-music.webp"
-                    alt="Sheet Music" class="w-full text-center px-6">
+            <div class="w-full flex flex-col justify-center  px-4">
+                <!-- <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/sheet-music.webp"
+                    alt="Sheet Music" class="w-full text-center px-6"> -->
+                    
+                    <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header-arrow.svg"
+                    alt="Sheet Music" class="w-full pl-8 md:pl-14"> 
+                    <video class="rounded-xl w-full h-full"
+                            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/products/read-music-in-30-days/sheet-music.mp4"
+                            type="video/mp4"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="auto"></video>                   
             </div>
             @php
                 $content = [
@@ -822,7 +829,7 @@
                     </div> -->
 
             <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/trailer-thumb.png"
-                alt="" class="w-full cursor-pointer autoplay-video"
+                alt="Read Music in 30 Days Trailer Thumbnail" class="w-full cursor-pointer autoplay-video"
                 x-on:click="trailer = true"
             >
 
@@ -854,8 +861,12 @@
                         </p>
                     </div>
                     <div class="flex w-full md:w-5/12 lg:w-1/2 p-10 md:p-0">
+                        <a href="https://www.pianote.com/shop/read-music-book"> 
                         <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/book.webp"
-                            alt="Read Music in 30 Days Book">
+                        alt="Read Music in 30 Days Book" 
+                        class="md:pl-10 cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        </a>
+                   
                     </div>
                 </div>
             </div>
@@ -1019,9 +1030,7 @@
                     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png"
                     alt="Image of joined student profiles in read music in 30 days">
                 <p class="inline-block leading-tight text-sm align-middle">Join
-                    @if (!empty($nPackOwners) && $nPackOwners > 0)
-                        {{ number_format($nPackOwners ?? 0) }}
-                    @endif piano players who<br> have already registered.
+                {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.
                 </p>
             </div>
         </div>
@@ -1072,10 +1081,9 @@
 
                 <div class="flex flex-col items-start">
                     @php
-                        $nPackOwnersFormatted = !empty($nPackOwners) && $nPackOwners > 0 ? number_format($nPackOwners) : 0;
                         $items = [
                             'Read music and play the songs you love.',
-                            'Join ' . $nPackOwnersFormatted . ' piano players who<br> have already registered.',
+                            'Join ' . number_format($nPackOwners ?? 0) . ' piano players who<br> have already registered.',
                             'Choose your best option to get started.',
                         ];
                     @endphp
@@ -1091,10 +1099,10 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
 {{--discount TODO--}}
                 @if ($earlyBirdEnd < Carbon\Carbon::now())
-                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[piano-chords-and-scales-guide]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[piano-chords-and-scales-guide]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @else
-                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[piano-chords-and-scales-guide]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&products[piano-chords-and-scales-guide]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @endif    
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
@@ -1107,8 +1115,10 @@
                     <p class="inline-block text-xs">one time payment.</p><br>
                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
                     <ul class="list-disc ml-5">
-                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Bonus Chords & Scales Book</li>
+                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Chords & Scales Book</li>
                         <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion @if ($earlyBirdEnd < Carbon\Carbon::now()) PDF @else Book @endif
+                        </li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF
                         </li>
                     </ul>
                     <hr class="w-full my-5" style="border-color:#b2cae1">
