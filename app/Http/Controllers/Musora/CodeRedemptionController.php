@@ -125,6 +125,16 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
+    public function renderNewAccountThomann90RedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'thomann' => true,
+            'day90' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
     public function renderExistingAccountThomannRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [

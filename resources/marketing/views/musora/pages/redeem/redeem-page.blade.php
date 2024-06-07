@@ -1,4 +1,6 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    "hideJoin" => true,
+])
 
 @section('head-includes')
 
@@ -139,11 +141,13 @@
     </style>
     <style>
         .apply {
-            background:#000C17;
+            background:#ffae00;
+            color:#000;
         }
 
         .apply:hover {
-            background:#001930;
+            background:#ffb61a;
+            color:#000;
         }
     </style>
 @endsection
@@ -153,10 +157,15 @@
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if(!empty($thomann))
-                <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/musora-thomann.png"
+                <div class="mb-2 align-middle flex items-center justify-center w-full">
+                <img class="inline-block h-6 sm:h-8 lg:h-9 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/thomann-white.png"
                     alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
-                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>
+                <h2 class="inline-block font-black mx-3 sm:mx-5">+</h2>
+                <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
+                    alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
+                <h3 class="leading-tight mt-2 mb-6 sm:mb-10"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
+{{--                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>--}}
                 <picture>
                     <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp">
                     <img class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp"

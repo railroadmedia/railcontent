@@ -69,7 +69,7 @@ Route::domain('{musoraDomain}')
 
 
         Route::get('thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
-        Route::get('thomann90', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
+        Route::get('thomann90', [CodeRedemptionController::class, 'renderNewAccountThomann90RedeemPage']);
         Route::get('thomann/existing', [CodeRedemptionController::class, 'renderExistingAccountThomannRedeemPage']);
 
         Route::post('/claim-spotify', [SalesController::class, 'claimSpotify'])

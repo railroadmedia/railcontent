@@ -60,7 +60,7 @@
 
     </div>
 
-    <div class="ml-auto flex items-center">
+    <div class="ml-auto flex items-center @if(!empty($hideJoin)) hidden @endif">
         <a
             @if(!empty($scrollToJoin))
                 href="#customize-anchor"
