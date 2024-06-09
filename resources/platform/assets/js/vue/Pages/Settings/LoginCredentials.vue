@@ -36,7 +36,7 @@
                         <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Login Email</h2>
                             <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
-                                @click="handleShowEmailModal"
+                                    @click="handleShowEmailModal"
                             >
                                 <musora-icon icon-name="pencil" class="tw-w-[21px]" />
                             </button>
@@ -143,8 +143,20 @@
         showPasswordModal.value = !showPasswordModal.value;
     };
 
-    //Lifecycle Hooks
-    onBeforeMount( ()=> {
-        
-    })  
+    const formData = ref({
+        display_name: ''
+    });
+
+    //Methods
+    const submitDisplayNameForm = () => {
+        axios.post(`/user-management-system/user/update/${ userId.value }`, formData.value).then((e) => {
+            if (window.shownotification) {
+                window.shownotification({
+                    icon: 'check',
+                    text: 'Success! Your song request has been submitted.'
+                });
+            }
+            handleClose()
+        });  
+    }; 
 </script>
