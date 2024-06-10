@@ -3,7 +3,7 @@
         "apps":[],
         "details":[
             {
-                "appID":"7RM4D35J2P.com.musoraapp",
+                "appID":"7RM4D35J2P.com.drumeo.DrumeoMobile",
                 "paths": [
                 "NOT /drumeo/referral/*",
                 "NOT /pianote/referral/*",
