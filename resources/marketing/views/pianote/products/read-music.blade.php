@@ -1097,7 +1097,6 @@
 
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
-{{--discount TODO--}}
                 @if ($earlyBirdEnd < Carbon\Carbon::now())
                     <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[piano-chords-and-scales-guide]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
@@ -1128,7 +1127,7 @@
                     </p>
                 </a>
 {{--link TODO--}}
-                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]&products[music-theory-posters]=2&products[BeginnerBook]=1&locked=true" 
+                <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[read-music-in-30-days]=1&products[read-music-in-30-days-workbook]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-pdf]=1&products[music-theory-posters]=1&products[little-book-arpeggios]=1&products[little-book-chord]=1&products[little-book-hanon]=1&products[taktell-piccolo-metronome]=1&products[piano-riffs-and-fills]=1&locked=true" 
                     class="px-5 sm:px-9 py-7 sm:py-11 sm:-ml-5 relative rounded-xl shadow-lg w-full sm:w-7/12 relative" style="background: #D2E8FF80;">
                     <div class="border rounded-xl bg-musora text-black text-center absolute top-1 right-1">
                         <p class="text-xs py-1 px-2">BEST DEAL</p>
