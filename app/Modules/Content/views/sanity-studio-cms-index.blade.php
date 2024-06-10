@@ -30,7 +30,8 @@
             projectId: "{{ $projectId }}",
             dataset: "{{ $dataset }}",
             basePath: "{{ $basePath }}",
-            schema: {!! stripFromJson($schema) !!}
+            schema: {!! stripFromJson($schema) !!},
+        csrfToken: "{{ $csrfToken }}",
         };
     </script>
 

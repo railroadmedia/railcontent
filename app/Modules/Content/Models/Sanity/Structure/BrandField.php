@@ -18,7 +18,7 @@ class BrandField extends Field
     public function __construct(
         public Group|array|null $group = null,
     ) {
-        parent::__construct(FieldType::String, 'brand', options:['list' => array_column(Brand::cases(), 'value')], group: $this->group);
+        parent::__construct(FieldType::String, 'brand', options:['list' => array_column(Brand::cases(), 'value')], group: $this->group, validation: "(rule) => rule.required()");
     }
 
 }

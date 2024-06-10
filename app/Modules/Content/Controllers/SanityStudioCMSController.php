@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Controllers;
 
 use App\Http\Controllers\BaseController;
+use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\Event;
 use App\Modules\Content\Models\Sanity\Genre;
@@ -10,8 +11,10 @@ use App\Modules\Content\Models\Sanity\Permission;
 use App\Modules\Content\Models\Sanity\Post;
 use App\Modules\Content\Models\Sanity\Song;
 use App\Modules\Content\Models\Sanity\Venue;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Railroad\Railcontent\Events\ContentCreated;
 
 class SanityStudioCMSController extends BaseController
 {
@@ -20,6 +23,7 @@ class SanityStudioCMSController extends BaseController
         $projectId = config('content.project_id');
         $dataset = config('content.dataset');
         $basePath = '/admin/studio';
+        $csrfToken = csrf_token();
 
         // Day One
         // $types = [(new Artist())->toArray(), (new Venue())->toArray(), (new Event())->toArray()];
@@ -36,7 +40,8 @@ class SanityStudioCMSController extends BaseController
                 'projectId',
                 'dataset',
                 'basePath',
-                'schema'
+                'schema',
+                'csrfToken'
             ])
         );
     }
@@ -60,5 +65,39 @@ class SanityStudioCMSController extends BaseController
             return 0;
         }
         return $duration;
+    }
+
+    public function getLastContent(Request $request)
+    {
+        $content = Content::query()
+            ->where('type', '=', 'song')
+            ->where('slug', '=', $request->get('slug')['current'])
+            ->first();
+
+        if (!$content) {
+            $content         = new Content();
+            $content->type   = $request->get('_type');
+            $content->slug   = $request->has('slug') ? $request->get('slug')['current'] : null;
+            $content->language   = 'en-US';
+            $content->created_on = Carbon::now()->toDateTimeString();
+            $content->status = 'published';
+            $content->brand  = $request->get('brand');
+
+            $content->save();
+        }
+
+        $content->status = 'published';
+        $content->brand  = $request->get('brand');
+        $content->setTitle($request->get('title'));
+        $content->setDifficulty($request->get('difficulty'));
+        $content->setXP($request->get('xp'));
+        $content->setReleased($request->get('released'));
+        $content->setAlbum($request->get('album'));
+
+        $content->save();
+
+        event(new ContentCreated($content->id));
+
+        return $content;
     }
 }
