@@ -4,7 +4,7 @@
         :href="isLink ? href : null"
         :type="isLink ? null : type"
         :disabled="disabled || processing"
-        :class="[ btnClasses, props.class ]"
+        :class="[ `tw-btn-${size}`, btnClasses, props.class ]"
         @click="handleClick"
     >
         <template v-if="processing">
@@ -45,6 +45,11 @@
             type: String,
             default: 'primary', // default style is primary
             validator: (value) => ['primary', 'secondary'].includes(value)
+        },
+        size: {
+            type: String,
+            default: 'medium', // default size is primary
+            validator: (value) => ['small', 'medium', 'large'].includes(value)
         },
         class: {
             type: String,

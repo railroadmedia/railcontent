@@ -253,7 +253,7 @@ export const useUserStore = defineStore({
 
     async updateSignature(data) {
       try {
-          const response = await updateUserSignature(this.token, this.userId, data);
+          const response = await updateUserSignature(this.token, data);
           //Signature
           data.hasOwnProperty('signature') && (this.user.signature = data.signature);
 

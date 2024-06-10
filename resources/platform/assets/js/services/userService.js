@@ -27,7 +27,7 @@ export const updateUserProfile = (token, userId, payload) => {
  * @param {string} userId
  * @param {object} payload
  */
-export const updateUserSignature = (token, userId, payload) => {
+export const updateUserSignature = (token, payload) => {
     console.log('payload', payload)
     const headers = {
         'Content-Type': 'application/json',
@@ -35,7 +35,27 @@ export const updateUserSignature = (token, userId, payload) => {
     };
     return axios({
         method: 'PATCH',
-        url: `/signature/update/${userId}`,
+        url: `/signature/store`,
+        data: payload,
+        headers
+    });
+};
+
+/**
+ * Update Login Email
+ *
+ * @param {string} token
+ * @param {string} userId
+ * @param {object} payload
+ */
+export const updateLoginEmail = (token, userId, payload) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+    return axios({
+        method: 'PATCH',
+        url: `/user-management-system/user/update/${userId}`,
         data: payload,
         headers
     });
