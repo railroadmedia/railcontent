@@ -61,7 +61,7 @@
                     :disabled="formProcessing"
                 />
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
-                    <mu-button
+                    <MuButton
                         class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
                         :disabled="!formData.first_name.length && !formData.last_name"
@@ -69,14 +69,14 @@
                         @click="handleClick"
                     >
                         Save
-                    </mu-button>
-                    <mu-button
+                    </MuButton>
+                    <MuButton
                         @click="handleClose"
                         style-type="secondary"
                         class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
-                    </mu-button>
+                    </MuButton>
                 </div>
             </form>
         </div>
