@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('marketing/views/musora/_partials/homepage-data.php'));
+@endphp
+
 @extends('musora._partials.layout', [
     "hideJoin" => true,
 ])
@@ -35,7 +39,7 @@
 
         .error {
             color:red;
-            font:500 16px "Open Sans", sans-serif;
+            font:500 20px "Open Sans", sans-serif;
         }
 
         input.jq-couponcode-part {
@@ -77,13 +81,12 @@
             background:#FFF;
             color:#000;
             border:1px solid #ccc;
-            font:400 12px/23px "Open Sans", sans-serif;
+            font:400 20px/20px "Open Sans", sans-serif;
             margin:0;
-            padding:10px;
+            padding:15px 20px;
             box-sizing:border-box;
             box-shadow:none !important;
-            height:45px;
-            border-radius:70px;
+            border-radius:100px;
         }
 
         .default-form-field {
@@ -92,14 +95,14 @@
 
         .help-message {
             color:#666;
-            font:400 14px "Open Sans", sans-serif;
+            font:400 16px "Open Sans", sans-serif;
             padding:0 0.9375rem;
             margin-bottom:10px;
         }
 
         .validation-error {
             color: red;
-            font: 600 16px/1em "Open Sans", sans-serif;
+            font: 600 20px/1em "Open Sans", sans-serif;
         }
 
         #commentform .code-input {
@@ -117,7 +120,7 @@
         }
 
         .input-describer {
-            font:700 14px "Open Sans", sans-serif;
+            font:900 20px "Open Sans", sans-serif;
             margin:15px auto 10px;
         }
 
@@ -125,21 +128,13 @@
             .redeem-switcher {
                 margin:0 auto 15px;
             }
-
-            input[type="text"],
-            input[type="password"] {
-                font-size:16px;
-                width:99%;
-                padding:10px 15px;
-            }
-
+            
             #commentform .code-input {
                 font-size:16px;
                 width:95%;
             }
         }
-    </style>
-    <style>
+
         .apply {
             background:#ffae00;
             color:#000;
@@ -155,7 +150,7 @@
 <!-- Main -->
 @section('layout-body')
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
-        <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
+        <div class="container mx-auto max-w-3xl">
             @if(!empty($thomann))
                 <div class="mb-2 align-middle flex items-center justify-center w-full">
                 <img class="inline-block h-6 sm:h-8 lg:h-9 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/thomann-white.png"
@@ -164,31 +159,34 @@
                 <img class="inline-block h-12 sm:h-20 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png"
                     alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
-                <h3 class="leading-tight mt-2 mb-6 sm:mb-10"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
-{{--                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>--}}
-                <picture>
-                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp">
-                    <img class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp"
-                        alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" >
-                </picture>
+                <h3 class="leading-tight my-2"><strong>Redeem your @if(!empty($day90)) 90-Day @endif membership for Musora.</strong></h3>
+                <h5 class="leading-tight mb-6 sm:mb-8 mx-auto max-w-md">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
+                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
+                    <picture>
+                        <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb2.jpg">
+                        <img class="absolute w-full h-full inset-0 object-cover"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb2.jpg"
+                            alt="card image" fetchpriority="high">
+                    </picture>
+                </div>
             @elseif(!empty($spotify))
                 <img class="h-7 sm:h-8 lg:h-9 mb-2 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
                     alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
-                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>
+                <h3 class="leading-tight my-2"><strong>Redeem your membership for Musora.</strong></h3>
+                <h5 class="leading-tight mb-6 sm:mb-8 mx-auto max-w-md">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
                 <picture>
                     <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp">
-                    <img class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp"
+                    <img class="h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop.webp"
                         alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" >
                 </picture>
             @else
                 <h3 class="leading-tight"><strong>Redeem your membership for Musora.</strong></h3>
-                <h4 class="leading-tight mt-1 mb-6 sm:mb-10">(Drumeo, Pianote, Guitareo & Singeo.)</h4>
+                <h5 class="leading-tight mt-2 mb-6 sm:mb-8 mx-auto max-w-md">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <picture>
-                        <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg">
+                        <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb2.jpg">
                         <img class="absolute w-full h-full inset-0 object-cover"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg"
+                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb2.jpg"
                             alt="card image" fetchpriority="high">
                     </picture>
                 </div>
@@ -262,6 +260,14 @@
             </p>
         </div>
     </div>
+
+    @php
+        $gridItems = $musora['gridItems'];
+    @endphp
+
+    @include('musora.sales.components.reason-cards-section', [
+        'seven' => true,
+    ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">

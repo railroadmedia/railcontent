@@ -93,6 +93,7 @@ class CodeRedemptionController extends BaseController
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
@@ -121,6 +122,7 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
             'thomann' => true,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
@@ -131,6 +133,7 @@ class CodeRedemptionController extends BaseController
             'newAccount' => true,
             'thomann' => true,
             'day90' => true,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
@@ -140,6 +143,7 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
             'thomann' => true,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
@@ -148,6 +152,7 @@ class CodeRedemptionController extends BaseController
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
