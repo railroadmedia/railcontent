@@ -32,64 +32,93 @@
         <slot name="custom-btn"></slot>
       </div>
     </div>
-    <p v-if="errorMessage" class="tw-italic tw-text-sm tw-text-red-500 tw-mt-2">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="tw-text-red-500 tw-mt-2">{{ errorMessage }}</p>
   </div>
 </template>
-<script setup>
-  import { computed } from 'vue';
-  import { XIcon } from "@heroicons/vue/solid";
-  
-  const props = defineProps({
-        modelValue: String,
-        label: String,
-        placeholder: String,
-        name: String,
-        type: String,
-        id: String,
-        inputOverride: String,
-        removeDefaultInputStyles: Boolean,
-        clearButtonOverride: String,
-        wrapperOverride: String,
-        labelOverride: String,
-        inputErrors: Array,
-        showClearButton: Boolean,
-        showCustomButton: Boolean,
-        disabled: Boolean,
-        error: Boolean,
-        success: Boolean,
-        required: Boolean,
-        minlength: Number,
-        maxlength: Number,
-        pattern: String,
-        title: String,
-    });
-  
-  const emit = defineEmits(["update:modelValue", "onFocus", "onEnter"]);
-  
-  const getBaseInputStyles = computed(() => `${props.removeDefaultInputStyles ? '' : 'tw-w-full tw-h-[50px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-ring-0 focus:tw-outline-none' }`);
-  
-  const borderStyles = computed( () => {
-    if(props.error) {
-      return 'tw-bg-transparent tw-border-pianote dark:tw-border-pianote'
-    } else if(props.success) {
-       return 'tw-border-guitareo dark:tw-border-guitareo'
-    } else {
-      return 'tw-border-[#D1D5DB] dark:tw-border-[#445F74] dark:focus:tw-border-drumeo focus:tw-border-drumeo';
-    }
-  })
 
-  const updateValue = (value) => {
-      emit("update:modelValue", value);
-  };
-  
-  const clearValue = (e) => {
-      e.preventDefault();
-      emit("update:modelValue", '');
-  };
-  
-  const onEnter = (e) => {
-      e.preventDefault();
-      emit("onEnter");
-  };
-  </script>
-  
+<script setup>
+import { computed, ref, watch } from 'vue';
+import { XIcon } from "@heroicons/vue/solid";
+
+const props = defineProps({
+  modelValue: String,
+  label: String,
+  placeholder: String,
+  name: String,
+  type: String,
+  id: String,
+  inputOverride: String,
+  removeDefaultInputStyles: Boolean,
+  clearButtonOverride: String,
+  wrapperOverride: String,
+  labelOverride: String,
+  inputErrors: Array,
+  showClearButton: Boolean,
+  showCustomButton: Boolean,
+  disabled: Boolean,
+  error: Boolean,
+  success: Boolean,
+  required: Boolean,
+  minlength: Number,
+  maxlength: Number,
+  pattern: String,
+  title: String,
+  customErrorMessage: String,
+});
+
+const emit = defineEmits(["update:modelValue", "onFocus", "onEnter"]);
+
+const errorMessage = ref('');
+const getBaseInputStyles = computed(() => props.removeDefaultInputStyles ? '' : 'tw-w-full tw-h-[50px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-ring-0 focus:tw-outline-none');
+
+const borderStyles = computed(() => {
+  if (errorMessage.value) {
+    return 'tw-bg-transparent tw-border-pianote dark:tw-border-pianote';
+  } else if (props.success) {
+    return 'tw-border-guitareo dark:tw-border-guitareo';
+  } else {
+    return 'tw-border-[#D1D5DB] dark:tw-border-[#445F74] dark:focus:tw-border-drumeo focus:tw-border-drumeo';
+  }
+});
+
+const updateValue = (value) => {
+  emit("update:modelValue", value);
+};
+
+const validateInput = (value) => {
+  if (props.pattern) {
+    try {
+      const regex = new RegExp(props.pattern);
+      if (!regex.test(value)) {
+        errorMessage.value = props.customErrorMessage || 'Invalid input';
+        return;
+      }
+    } catch (e) {
+      console.error(`Invalid regular expression: ${props.pattern}`);
+    }
+  }
+  errorMessage.value = '';
+};
+
+const handleInput = (event) => {
+  const value = event.target.value;
+  validateInput(value);
+  updateValue(value);
+};
+
+const clearValue = (e) => {
+  e.preventDefault();
+  emit("update:modelValue", '');
+  errorMessage.value = '';
+};
+
+const onEnter = (e) => {
+  e.preventDefault();
+  emit("onEnter");
+};
+
+// Watch modelValue and validate on change
+watch(() => props.modelValue, (newValue) => {
+  validateInput(newValue);
+});
+</script>

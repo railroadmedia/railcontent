@@ -21,9 +21,10 @@
                         :disabled="formProcessing"
                         required
                         title="Email cannot be empty"
-                        :error="!formData.email.length"
                         placeholder="Enter Email" 
                         v-model="formData.email"
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                        customErrorMessage="Please enter a valid email address"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
@@ -59,7 +60,6 @@
     const userStore = useUserStore();
     const { userEmail } = storeToRefs(userStore);
 
-
     const emit = defineEmits(['onCloseModal']);
 
     //Refs
@@ -76,7 +76,7 @@
     const submitUserForm = async () => {
         formProcessing.value = true;
         try {
-            await userStore.updateProfile(formData.value);
+            await userStore.updateEmail(formData.value);
         } catch (error) {
             console.error("Failed to update your email:", error.message);
         }

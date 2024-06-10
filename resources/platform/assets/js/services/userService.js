@@ -21,6 +21,26 @@ export const updateUserProfile = (token, userId, payload) => {
 };
 
 /**
+ * Update Display Name
+ *
+ * @param {string} token
+ * @param {string} userId
+ * @param {object} payload
+ */
+export const updateUserEmail = (token, userId, payload) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+    return axios({
+        method: 'PATCH',
+        url: `user-management-system/email-change/request/${userId}`,
+        data: payload,
+        headers
+    });
+};
+
+/**
  * Update User Signature
  *
  * @param {string} token
@@ -32,7 +52,7 @@ export const updateUserSignature = (token, payload) => {
         'X-CSRF-TOKEN': token
     };
     return axios({
-        method: 'PUT',
+        method: 'PATCH',
         url: `/signature/store`,
         data: payload,
         headers
@@ -53,7 +73,27 @@ export const updateLoginEmail = (token, userId, payload) => {
     };
     return axios({
         method: 'PATCH',
-        url: `/user-management-system/user/update/${userId}`,
+        url: `/user-management-system/email-change/request`,
+        data: payload,
+        headers
+    });
+};
+
+/**
+ * Update Login Password
+ *
+ * @param {string} token
+ * @param {string} userId
+ * @param {object} payload
+ */
+export const updateLoginPassword = (token, userId, payload) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+    return axios({
+        method: 'PATCH',
+        url: `/user-management-system/password/update`,
         data: payload,
         headers
     });
