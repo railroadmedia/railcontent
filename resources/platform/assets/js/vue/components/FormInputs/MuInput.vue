@@ -32,7 +32,7 @@
         <slot name="custom-btn"></slot>
       </div>
     </div>
-    <p v-if="errorMessage" class="tw-text-red-500 tw-mt-2">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="tw-text-red-500 tw-mt-2 tw-text-xs tw-italic">{{ errorMessage }}</p>
   </div>
 </template>
 
