@@ -68,7 +68,6 @@ export const useUserStore = defineStore({
   actions: {
     setUser (user) {
       this.user = user;
-      console.log(this.user)
     },
     setUserProfilePictureUrl (url) {
       this.user.profile_picture_url = url;

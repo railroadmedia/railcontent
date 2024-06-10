@@ -90,8 +90,5 @@
         }
     ])
 
-    //Lifecycle Hooks
-    onBeforeMount( ()=> {
-        console.log('userCompletedAccount', userCompletedAccount.value)
-    })  
+    //Lifecycle Hooks 
 </script>
