@@ -101,8 +101,9 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
+                    "badge" => "7-Day Free Trial",
                      "discounted_price" => 240,
-                     "href" => "/#customize-anchor",
+                        "href" => "/",
                      "instructor" => "Award-Winning Membership",
                      "price" => 240,
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
