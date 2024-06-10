@@ -6,7 +6,7 @@
             :selectedImage="selectedImage" :initialStep="initialUploaderStep" @uploadSuccess="handleUploadDone"
             @uploadError="handleUploadError" @onUploaderClose="closeUploader" />
         <input v-model="contentInterface" type="hidden" :name="fieldKey">
-        <TinyEditor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
+        <TinyEditor v-model="contentInterface" api-key="samk94ixqjb345m3tvofudoty51jv2qk1lk8q68vbeup3xbj"
             :init="initObject" :placeholder="placeholder" />
     </div>
 </template>
