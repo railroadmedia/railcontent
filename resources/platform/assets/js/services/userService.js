@@ -32,7 +32,7 @@ export const updateUserSignature = (token, payload) => {
         'X-CSRF-TOKEN': token
     };
     return axios({
-        method: 'PATCH',
+        method: 'PUT',
         url: `/signature/store`,
         data: payload,
         headers
