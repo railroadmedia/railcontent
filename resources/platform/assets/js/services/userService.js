@@ -24,18 +24,36 @@ export const updateUserProfile = (token, userId, payload) => {
  * Update User Signature
  *
  * @param {string} token
+ * @param {object} payload
+ */
+export const updateUserSignature = (token, payload) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': token
+    };
+    return axios({
+        method: 'PUT',
+        url: `/signature/store`,
+        data: payload,
+        headers
+    });
+};
+
+/**
+ * Update Login Email
+ *
+ * @param {string} token
  * @param {string} userId
  * @param {object} payload
  */
-export const updateUserSignature = (token, userId, payload) => {
-    console.log('payload', payload)
+export const updateLoginEmail = (token, userId, payload) => {
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': token
     };
     return axios({
         method: 'PATCH',
-        url: `/signature/update/${userId}`,
+        url: `/user-management-system/user/update/${userId}`,
         data: payload,
         headers
     });

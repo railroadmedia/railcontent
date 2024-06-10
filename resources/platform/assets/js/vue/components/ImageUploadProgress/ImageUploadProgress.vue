@@ -57,7 +57,6 @@ function dataURItoBlob(dataURI) {
 }
 
 onMounted(() => {
-  console.log('type is ', props.cropType)
   var formData = new FormData();
   const newFileName = `${userId.value}_${Date.now()}_${uuidv4()}.png`;
 

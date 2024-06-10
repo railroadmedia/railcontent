@@ -55,10 +55,4 @@
         container.value.scrollLeft = scrollLeft.value - scroll;
     }
 
-    //Lifecycle Hooks
-    onBeforeMount( ()=> {
-        //console.log('component mounted: PillNav')
-    })
-
-    //Methods
 </script>

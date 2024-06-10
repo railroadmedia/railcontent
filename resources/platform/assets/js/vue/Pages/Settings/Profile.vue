@@ -11,7 +11,7 @@
                 :ctas="[{
                     type: 'PageHeaderPrimaryCta',
                     props: {
-                        text: `${userCompletedAccount.value ? 'Update Your Account' : 'Complete Your Account'}`,
+                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
                         url: `/onboarding?brand=${brand}`,
                         showAllAlways: true,
                     }

@@ -68,7 +68,6 @@ export const useUserStore = defineStore({
   actions: {
     setUser (user) {
       this.user = user;
-      console.log(this.user)
     },
     setUserProfilePictureUrl (url) {
       this.user.profile_picture_url = url;
@@ -253,7 +252,7 @@ export const useUserStore = defineStore({
 
     async updateSignature(data) {
       try {
-          const response = await updateUserSignature(this.token, this.userId, data);
+          const response = await updateUserSignature(this.token, data);
           //Signature
           data.hasOwnProperty('signature') && (this.user.signature = data.signature);
 
