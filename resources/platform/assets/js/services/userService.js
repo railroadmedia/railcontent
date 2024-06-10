@@ -24,7 +24,6 @@ export const updateUserProfile = (token, userId, payload) => {
  * Update User Signature
  *
  * @param {string} token
- * @param {string} userId
  * @param {object} payload
  */
 export const updateUserSignature = (token, payload) => {
