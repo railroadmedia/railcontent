@@ -323,7 +323,7 @@ export const useCollectionStore = defineStore({
                 this.tabData[this.filter.activeTab] = { ...tab, filterApplied: true };
                 //When the tab's groupByView is true set sort to by alphabet
                 if (this.tabData[this.filter.activeTab].groupByView) {
-                    this.filter.sort = 'slug';
+                    this.filter.sort = '-popularity';
                 }
                 this.getData();
             }

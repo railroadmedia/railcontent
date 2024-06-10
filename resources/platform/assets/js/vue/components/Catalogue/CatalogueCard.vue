@@ -60,8 +60,9 @@
                             </h4>
                             <!-- Video Description -->
                             <p v-if="mappedData.show_description"
-                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2">{{
-        mappedData.description.replace(/<[^>]+>/g, '') }}</p>
+                                class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2">
+                                {{ mappedData.description.replace(/<[^>]+>/g, '') }}
+                            </p>
                             <!-- Content -->
                             <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
@@ -78,7 +79,7 @@
                                     textCase="capitalize" />
                                 <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
                             </span>
-                            <span class="tw-mb-0.5">
+                            <span>
                                 {{ contentTypeString }}
                             </span>
                         </p>

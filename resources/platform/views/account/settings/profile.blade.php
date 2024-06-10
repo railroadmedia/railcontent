@@ -6,7 +6,7 @@
 
 @section('layout-scripts')
     @parent
-    <script src="https://cdn.tiny.cloud/1/g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/samk94ixqjb345m3tvofudoty51jv2qk1lk8q68vbeup3xbj/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{ mix('platform/js/profile.js') }}"></script>
 @endsection
 
