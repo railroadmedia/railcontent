@@ -101,7 +101,7 @@
                     "badge" => "7-Day Free Trial",
                       "price" => 240,
                         "href" => "/",
-                     "instructor" => "Unlimited piano lessons.",
+                     "instructor" => "Unlimited Piano Lessons",
                       "discounted_price" => 240,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",

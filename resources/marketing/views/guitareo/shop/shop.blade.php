@@ -38,7 +38,7 @@
                     @include('_partials.components.shop.product-card', [
                     "badge" => "7-Day Free Trial",
                      "price" => 240,
-                     "instructor" => "Unlimited guitar lessons.",
+                     "instructor" => "Unlimited Guitar Lessons",
                      "discounted_price" => 240,
                      "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",
                      "title" => "Guitareo Membership",

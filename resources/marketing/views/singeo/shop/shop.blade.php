@@ -38,7 +38,7 @@
                     @include('_partials.components.shop.product-card', [
                     "badge" => "7-Day Free Trial",
                         "price" => 240,
-                     "instructor" => "Unlimited singing lessons.",
+                     "instructor" => "Unlimited Singing Lessons",
                         "discounted_price" => 240,
                         "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",
                         "title" => "Singeo Membership",
