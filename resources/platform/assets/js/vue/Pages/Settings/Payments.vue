@@ -11,7 +11,7 @@
                 :ctas="[{
                     type: 'PageHeaderPrimaryCta',
                     props: {
-                        text: `${userCompletedAccount.value ? 'Update Your Account' : 'Complete Your Account'}`,
+                        text: `${userCompletedAccount ? 'Update Your Account' : 'Complete Your Account'}`,
                         url: `/onboarding?brand=${brand}`,
                         showAllAlways: true,
                     }
@@ -28,7 +28,7 @@
                 
                 <!-- Edit Forms -->
                 <div class="tw-flex tw-flex-row">
-                    <input id="userInfo" type="hidden" data-user-id="{{ auth()->id() }}">
+                    <input id="userInfo" type="hidden" :data-user-id="userId">
                     
                     <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                         <!-- @yield('edit-forms') -->
