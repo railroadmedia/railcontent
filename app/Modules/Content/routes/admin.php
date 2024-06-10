@@ -16,7 +16,12 @@ Route::prefix('admin')
             [SanityStudioCMSController::class, 'getSoundsliceData']
         )
             ->name('admin.soundslice');
-    });
+
+        Route::post(
+            '/last-content',
+            [\App\Modules\Content\Controllers\SanityStudioCMSController::class, 'getLastContent']
+        )
+            ->name('admin.getLastContent');    });
 
 Route::get(
     '/CustomInput.js',

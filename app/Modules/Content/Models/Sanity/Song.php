@@ -33,12 +33,12 @@ class Song extends BaseSanityModel
                         new Field(FieldType::URL, 'resource_url')],preview: ['select' => ['title' => 'resource_name', 'subtitle' => 'resource_url']]
                                               );
         $soundsliceList = new ListObject('object',fields: [new Field(FieldType::String, 'soundslice_title'),
-                       new Field(FieldType::String, 'soundslice_slug')],preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
+                       new Field(FieldType::String, 'soundslice_slug', inputComponent: 'SoundsliceSlug'), new Field(FieldType::Number, 'soundslice_length_in_second')],preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
         );
 
         $fields = [
-            new Field(FieldType::String, 'title'),
-            new Field(FieldType::Slug, 'slug', options:['source' => 'title'], hidden: "({document}) => !document?.title,"),
+            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"),
+            new Field(FieldType::Slug, 'slug', options:['source' => 'title'],  hidden: "({document}) => !document?.title,"),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
 
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference),
@@ -76,7 +76,8 @@ class Song extends BaseSanityModel
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList),
 
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail'),
-
+            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"), //web_url_path
+            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true"),
         ];
         $preview = ['select' => ['title' => 'title', 'media' => 'thumbnail']];
         parent::__construct('song', 'Song', fields: $fields, preview: $preview);
