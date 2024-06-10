@@ -1,46 +1,41 @@
 <template>
-    <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride ? wrapperOverride : ''}`">
-      <label v-if="label" :for="id"
-        :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">
-        {{ label }}
-      </label>
-      <div class="tw-flex tw-relative">
-        <input :value="modelValue"
-                @input="updateValue($event.target.value)"
-                @keypress.enter.prevent="onEnter"
-                :placeholder="placeholder" 
-                :id="id"
-                :class="[
-                  getBaseInputStyles, 
-                  borderStyles,
-                  `${inputOverride ? inputOverride : ''}`,
-                  {'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled}
-                ]"
-                :name="name"
-                :type="type"
-                :disabled="disabled"
-                :required="required"
-                :minlength="minlength"
-                :maxlength="maxlength"
-                :pattern="pattern"   
-                :title="title"
-                autocomplete="off"
-                @focus="() => emit('onFocus')"
-        />
-        <div v-if="showClearButton"
-             :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${value ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
-          <button class="tw-h-[16px] tw-w-[16px] tw-mx-[20px] tw-z-10" @click="clearValue">
-            <XIcon class="tw-h-full tw-w-full dark:tw-text-white" />
-          </button>
-        </div>
-        <div v-if="showCustomButton" :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${value ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
-          <slot name="custom-btn"></slot>
-        </div>
+  <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride || ''}`">
+    <label v-if="label" :for="id"
+      :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride || 'dark:tw-text-[#9EC0DC]'}`">
+      {{ label }}
+    </label>
+    <div class="tw-flex tw-relative">
+      <input :value="modelValue"
+             @input="handleInput"
+             @keypress.enter.prevent="onEnter"
+             :placeholder="placeholder" 
+             :id="id"
+             :class="[getBaseInputStyles, borderStyles, inputOverride || '', {'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20': disabled}]"
+             :name="name"
+             :type="type"
+             :disabled="disabled"
+             :required="required"
+             :minlength="minlength"
+             :maxlength="maxlength"
+             :pattern="pattern"   
+             :title="title"
+             autocomplete="off"
+             @focus="() => emit('onFocus')"
+      />
+      <div v-if="showClearButton"
+           :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${modelValue ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
+        <button class="tw-h-[16px] tw-w-[16px] tw-mx-[20px] tw-z-10" @click="clearValue">
+          <XIcon class="tw-h-full tw-w-full dark:tw-text-white" />
+        </button>
+      </div>
+      <div v-if="showCustomButton" :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${modelValue ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
+        <slot name="custom-btn"></slot>
       </div>
     </div>
-  </template>
-  
-  <script setup>
+    <p v-if="errorMessage" class="tw-italic tw-text-sm tw-text-red-500 tw-mt-2">{{ errorMessage }}</p>
+  </div>
+</template>
+<script setup>
   import { computed } from 'vue';
   import { XIcon } from "@heroicons/vue/solid";
   

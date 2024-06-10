@@ -78,7 +78,7 @@
         try {
             await userStore.updateProfile(formData.value);
         } catch (error) {
-            console.error("Failed to update the display name:", error.message);
+            console.error("Failed to update your email:", error.message);
         }
         handleClose(); // Close modal
     };
