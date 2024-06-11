@@ -371,7 +371,7 @@
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             <a href="#final" class="@if($startDateCourse < Carbon\Carbon::now()) sold-out @endif join bg-pianote medium w-full anchor-slide">@if($startDateCourse < Carbon\Carbon::now()) ENROLLMENT CLOSED @endif ENROLL NOW </a>
                         </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5 mt-2 sm:mt-0">
+                        <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
                                 loading="lazy" onload="this.classList.remove('opacity-0')"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/pianote/products/30-day-blues/piano-players-trusted.png"
@@ -396,7 +396,7 @@
                 class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5 text-2xl"><strong>{{ $startDateCourse }}.</strong></h4>
+                    <h4 class="px-3 lg:px-5 text-2xl"><strong>{{ $startDateCourse }}</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                         <p class="text-sm px-3 lg:px-5">
                             <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
@@ -467,9 +467,9 @@
                         'sentences' => [
                             'Sheet music can be intimidating and overwhelming.',
                             'Does this sound familiar?',
-                            '“I can’t make sense of the notes I see on the page.”',
-                            '“It felt too difficult to learn, so I gave up.”',
-                            "“I don't want to spend years learning to read music before I can play music”",
+                            '<em>“I can’t make sense of the notes I see on the page.”</em>',
+                            '<em>“It felt too difficult to learn, so I gave up.”</em>',
+                            "<em>“I don't want to spend years learning to read music before I can play music.”</em>",
                             'Music is a language. And learning to read music is like learning another language. But once you know how…',
                             '<strong>An entire world of possibilities will open before you.</strong>',
                         ],
@@ -479,7 +479,7 @@
                         'sentences' => [
                             'You can play beautiful music (like this one) without having to spend hours memorizing each and every note. You won’t have to watch YouTube tutorials and follow someone’s hands.',
                             'If you’ve always wanted to read music, but felt like it was “too hard” or you weren’t “good enough”, then you need to enroll in Read Music in 30 Days.',
-                            'This course is an immersive experience where you’ll learn to read music by <strong>playing music.</strong>',
+                            'This course is an immersive experience where you’ll learn to read music <strong> by playing music.</strong>',
                             'Through daily practice and repetition, you’ll start to understand the notes on the page. And you’ll be able to translate them to the keys on your piano.',
                             'Keep scrolling to see how it works.',
                         ],
@@ -499,7 +499,7 @@
         </div>
     </section>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#F1F7FE;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:pt-14 lg:pt-20" style="background-color:#F1F7FE;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong>Learn to Read Music… <br class="block md:hidden" />By PLAYING Music</strong>
             </h2>
@@ -547,11 +547,11 @@
                         'desc' =>
                             $earlyBirdEnd < Carbon\Carbon::now()
                                 ? 'Practice makes you better. So you’ll get a FREE 74-page companion E-Book to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.'
-                                : 'Practice makes you better. So you’ll get a FREE 74-page companion workbook when you enroll before June 23rd to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
+                                : 'Practice makes you better. So you’ll get a FREE 74-page companion Book when you enroll before June 23rd to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
                     ],
                 ];
             @endphp
-            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 pt-7">
+            <div class="timeline-container max-w-4xl lg:max-w-4xl mx-auto relative px-4 mt-20">
                 @foreach ($gettings as $key => $getting)
                     @if ($getting['position'] === 'right')
                         <div
@@ -584,6 +584,7 @@
                 @endforeach
             </div>
         </div>
+        <h1 class="leading-none -mt-8 mb-8"><i class="fal fa-angle-down text-pianote"></i></h1>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #FFFFFF">
@@ -948,11 +949,27 @@
 
         <div id="testimonials" class="anchor"></div>
         <div class="py-10 sm:py-14 md:py-20" style="background-color:#f4f8fb;">
-            <div class="container max-w-5xl mx-auto">
+            <div class="container max-w-6xl mx-auto">
                 <h3 class="leading-tight text-black py-4 md:py-6 text-center"><strong>What students are saying<br class="sm:hidden"> about Lisa:</strong></h3>
 
-                <div x-data="{ splide: null }" x-init="splide = new Splide($refs.splide, { type: 'loop', perPage: 1.2, gap: 2, focus: 0, arrows: false, pagination: false, autoplay: true }).mount()">
-                    <div x-ref="splide" class="splide">
+                <div x-data="{ splide: null }" x-init="splide = new Splide($refs.splide, {  classes: {
+                    arrow: 'hidden',
+                    prev: 'hidden',
+                    next: 'hidden',
+                    pagination: 'hidden',
+                },
+                perPage: 1.5,
+                perMove: 1,
+                autoplay: true,
+                gap: '1rem',
+                type: 'loop',
+                focus: 0,
+                interval: 3000,
+                drag: 'free',
+                snap: false,
+                lazyLoad: 'nearby',}).mount()">                    
+                
+                <div x-ref="splide" class="splide">
                         <div class="splide__track">
                             <ul class="splide__list">
                                 @php
@@ -981,7 +998,7 @@
                                     ];
                                 @endphp
                                 @foreach ($testimonials as $testimonial)
-                                    <li class="splide__slide flex items-start sm:items-stretch px-1">
+                                    <li class="splide__slide flex items-start sm:items-stretch px-1 hover:cursor-pointer">
                                         <div class="w-full rounded-xl p-6 text-black flex flex-wrap sm:flex-nowrap transition-colors duration-300 active-bg" style="background-color:#ffffff;">
                                             <div class="flex flex-col justify-evenly text-left sm:px-8">
                                                 <h4 class="leading-normal mt-3 sm:mt-0 mb-3 mx-0">
