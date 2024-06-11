@@ -36,13 +36,14 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Singing Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                     @include('_partials.components.shop.product-card', [
+                    "badge" => "7-Day Free Trial",
                         "price" => 240,
-                        "instructor" => "7-Day Free Trial",
+                     "instructor" => "Unlimited Singing Lessons",
                         "discounted_price" => 240,
                         "thumbnail" => "https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-membership-shop.jpg",
                         "title" => "Singeo Membership",
                         'soldOut' => false,
-                        "href" => "/#customize-anchor",
+                        "href" => "/",
                     ])
 
                     @foreach($lessons as $key => $lesson)
