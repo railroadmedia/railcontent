@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\BaseController;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Railroad\Railnotifications\Services\NotificationService;
 
@@ -12,7 +11,7 @@ class NotificationPagesController extends BaseController
     private NotificationService $notificationService;
 
     /**
-     * @param NotificationService $notificationService
+     * @param  NotificationService  $notificationService
      */
     public function __construct(NotificationService $notificationService)
     {
@@ -21,7 +20,7 @@ class NotificationPagesController extends BaseController
 
     public function index(Request $request, $brand)
     {
-        $page = $request->get('page', 1);
+        $page = intval($request->get('page', 1));
         $amountPerPage = 20;
 
         $unreadCount = $this->notificationService->getUnreadCount(user()->id, brand());
