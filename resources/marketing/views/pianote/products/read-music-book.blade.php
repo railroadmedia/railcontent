@@ -23,13 +23,13 @@
     <style>
 
         header {
-            background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/book-header-bg-m.webp');
+            background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-book/header-bg-m2.webp');
             background-size: cover;
         }
 
         @media (min-width: 639px) {
             header {
-                background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/products/read-music-book/header-bg.webp');
+                background-image: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2100x0/filters:quality(95)/marketing/pianote/products/read-music-book/header-bg2.webp');
                 background-size: cover;
             }
         }
@@ -164,7 +164,7 @@
                         'img' => 'marketing/pianote/products/read-music-book/book-02.webp',
                     ],
                     [
-                        'img' => 'marketing/pianote/products/read-music-book/book-04.webp',
+                        'img' => 'marketing/pianote/products/read-music-book/book-03b.webp',
                     ],
                 ];
 
@@ -235,7 +235,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1 px-10">
                     <img class="-mt-32 sm:-mt-36 mb-4 sm:-mb-12 w-full max-w-xs lg:max-w-md"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/950x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/950x0/filters:quality(95)/marketing/pianote/products/read-music-book/RMI30D-book2.webp"
                         alt="Read Music Book Cover">
                 </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left sm:pr-5">
