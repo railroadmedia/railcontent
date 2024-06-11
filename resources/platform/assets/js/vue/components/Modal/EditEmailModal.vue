@@ -37,18 +37,18 @@
                         @onChange="handleDisplayName" 
                     />
                 </div>
-                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
+                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
                     <button
                         :disabled="!formData.display_name.length" 
                         type="submit"
-                        class="tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         :class="!formData.display_name.length ? 'tw-opacity-50' : ''"
                     >
                         Save
                     </button>
                     <button
                         @click="handleClose"
-                        class="tw-mx-1 tw-btn-primary tw-bg-transparent dark:hover:tw-bg-white hover:tw-bg-black dark:hover:tw-text-[#00101D] hover:tw-text-white tw-text-[#00101D] dark:tw-text-white"
+                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-primary tw-bg-transparent dark:hover:tw-bg-white hover:tw-bg-black dark:hover:tw-text-[#00101D] hover:tw-text-white tw-text-[#00101D] dark:tw-text-white"
                     >
                         Cancel
                     </button>
