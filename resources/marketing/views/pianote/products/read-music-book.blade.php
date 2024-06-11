@@ -100,7 +100,7 @@
                         'alt' => 'Read Music in 30 Days Workbook',
                         'icon' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/read-music-book/feature-icon-02.svg',
-                        'title' => 'The PERFECT companion book.',
+                        'title' => 'The PERFECT Companion Book.',
                     ],
                     [
                         'img' =>

@@ -332,15 +332,15 @@
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever class <br
                                 class="inline lg:hidden">starting {{ $startDateCourse }}.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
-                        style="padding-bottom: 63%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header.webp');"
+                    <div class="mt-4 mb-3 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header2.png');"
                         x-on:click="trailer = true;">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer
                         </div>
                     </div>
 
                     @php
-                        $items = ['Play With Real Music', 'Play Every Day', 'No theory required'];
+                        $items = ['Play With Real Music', 'Play Every Day'];
                     @endphp
                     <p class="hidden lg:inline">
                         @foreach ($items as $item)
@@ -384,7 +384,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video"
-                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header.webp');"
+                        style="padding-bottom: 100%; background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/850x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/header2.png');"
                         x-on:click="trailer = true;">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i
                                 class="fas fa-play"></i> Watch Trailer</div>
@@ -543,11 +543,11 @@
                         'position' => 'left',
                         'img' =>
                             'https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/feature-05.webp',
-                        'title' => 'BONUS workbook to keep improving.',
+                        'title' => 'BONUS Companion Book to keep improving.',
                         'desc' =>
                             $earlyBirdEnd < Carbon\Carbon::now()
-                                ? 'Practice makes you better. So you’ll get a FREE 74-page companion E-Book to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.'
-                                : 'Practice makes you better. So you’ll get a FREE 74-page companion Book when you enroll before June 23rd to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
+                                ? 'Practice makes you better. So you’ll get a FREE 74-page Companion E-Book to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.'
+                                : 'Practice makes you better. So you’ll get a FREE 74-page Companion Book when you enroll before June 23rd to help you through the Challenge and bonus exercises to cement the new skills you’ll learn.',
                     ],
                 ];
             @endphp
@@ -809,7 +809,7 @@
 
     <section style="background: #EFF7FF" class="px-5 sm:px-8 py-8 sm:py-12 lg:py-16 text-center">
         <div class="container max-w-5xl mx-auto mb-10">
-            <h6 class="uppercase leading-relaxed text-pianote">No theory. No homework.</h6>
+            <h6 class="uppercase leading-relaxed text-pianote">No homework.</h6>
             <h1 class="uppercase leading-relaxed md:pb-4"><strong>JUST PRESS PLAY</strong></h1>
             <!-- <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                         x-on:click="window.innerWidth <= 640 ? trailerM = true : trailer = true;">
@@ -967,8 +967,8 @@
                 interval: 3000,
                 drag: 'free',
                 snap: false,
-                lazyLoad: 'nearby',}).mount()">                    
-                
+                lazyLoad: 'nearby',}).mount()">
+
                 <div x-ref="splide" class="splide">
                         <div class="splide__track">
                             <ul class="splide__list">
@@ -1092,7 +1092,7 @@
                         Lessons. <br>
                         4 Weekly Q&A Sessions. <br>
                         Lifetime Course Access. <br> <span class="text-pianote">BONUS</span>
-                        Companion Workbook.</strong></h5>
+                        Companion Book.</strong></h5>
 
                 <div class="flex flex-col items-start">
                     @php
@@ -1113,10 +1113,10 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                 @if ($earlyBirdEnd < Carbon\Carbon::now())
-                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[piano-chords-and-scales-guide]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @else
-                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&products[piano-chords-and-scales-guide]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&products[read-music-in-30-days-workbook]=1&locked=true"
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @endif
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
@@ -1130,10 +1130,8 @@
                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
                     <ul class="list-disc ml-5">
                         <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Chords & Scales Book</li>
-                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion @if ($earlyBirdEnd < Carbon\Carbon::now()) PDF @else Book @endif
-                        </li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF
-                        </li>
+                        @if ($earlyBirdEnd < Carbon\Carbon::now())<li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion  Book</li> @endif
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF</li>
                     </ul>
                     <hr class="w-full my-5" style="border-color:#b2cae1">
                     <p class="leading-loose text-sm"><strong>Key Features</strong><br>
@@ -1157,10 +1155,8 @@
                     <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
                     <ul class="list-disc ml-5">
                         <li class="text-sm leading-relaxed">Read Music in 30 Days</li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Workbook
-                        </li>
-                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF
-                        </li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Companion Book</li>
+                        <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF</li>
                         <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Music Theory Poster Bundle</li>
                         <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Little Book Bundle (3 Books)</li>
                         <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span> Metronome</li>
@@ -1223,7 +1219,7 @@
                 @include('_partials.components.question-dropdown', [
                     'title' => 'How much time per week will this course require?',
                     'desc' =>
-                        'Each lesson is just 10 minutes, so the minimum time commitment is less than an hour a week. Of course, with the bonus workbook and practices, you could spend more. It’s really up to you.',
+                        'Each lesson is just 10 minutes, so the minimum time commitment is less than an hour a week. Of course, with the bonus Companion Book and practices, you could spend more. It’s really up to you.',
                     'num' => '?',
                 ])
                 @include('_partials.components.question-dropdown', [

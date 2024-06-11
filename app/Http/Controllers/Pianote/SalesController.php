@@ -421,7 +421,7 @@ class SalesController extends BaseController
 
     public function readMusic()
     {
-        $productId = 269; 
+        $productId = 851;
         /** @var UserAccessPermissionsService $userAccessPermissionsService */
         $userAccessPermissionsService = app(UserAccessPermissionsService::class);
         $hasProduct = user() && $userAccessPermissionsService->hasProductNotCached(user()?->id, $productId);
