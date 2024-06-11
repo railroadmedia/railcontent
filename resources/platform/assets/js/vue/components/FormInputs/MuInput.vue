@@ -1,7 +1,7 @@
 <template>
-  <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride || ''}`">
+  <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${wrapperOverride || ''}`">
     <label v-if="label" :for="id"
-      :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride || 'dark:tw-text-[#9EC0DC]'}`">
+      :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${labelOverride || 'dark:tw-text-[#9EC0DC]'}`">
       {{ label }}
     </label>
     <div class="tw-flex tw-relative">
@@ -32,10 +32,9 @@
         <slot name="custom-btn"></slot>
       </div>
     </div>
-    <p v-if="errorMessage" class="tw-text-red-500 tw-mt-2 tw-text-xs tw-italic">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="tw-text-red-500 tw-mt-2 tw-italic tw-text-xs">{{ errorMessage || customErrorMessage }}</p>
   </div>
 </template>
-
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
@@ -69,12 +68,13 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "onFocus", "onEnter"]);
 
 const errorMessage = ref('');
+const isValid = ref(false);
 const getBaseInputStyles = computed(() => props.removeDefaultInputStyles ? '' : 'tw-w-full tw-h-[50px] dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-ring-0 focus:tw-outline-none');
 
 const borderStyles = computed(() => {
   if (errorMessage.value) {
     return 'tw-bg-transparent tw-border-pianote dark:tw-border-pianote';
-  } else if (props.success) {
+  } else if (props.success || isValid.value ) {
     return 'tw-border-guitareo dark:tw-border-guitareo';
   } else {
     return 'tw-border-[#D1D5DB] dark:tw-border-[#445F74] dark:focus:tw-border-drumeo focus:tw-border-drumeo';
@@ -86,18 +86,27 @@ const updateValue = (value) => {
 };
 
 const validateInput = (value) => {
+  
   if (props.pattern) {
     try {
       const regex = new RegExp(props.pattern);
       if (!regex.test(value)) {
+        isValid.value = false;
         errorMessage.value = props.customErrorMessage || 'Invalid input';
         return;
+      } else {
+        isValid.value = true;
+        errorMessage.value = '';
+
       }
     } catch (e) {
       console.error(`Invalid regular expression: ${props.pattern}`);
     }
+  } else if (props.error) {
+    errorMessage.value = props.customErrorMessage;
+  } else {
+    errorMessage.value = '';
   }
-  errorMessage.value = '';
 };
 
 const handleInput = (event) => {
@@ -120,5 +129,14 @@ const onEnter = (e) => {
 // Watch modelValue and validate on change
 watch(() => props.modelValue, (newValue) => {
   validateInput(newValue);
+});
+
+// Watch error prop to update errorMessage
+watch(() => props.error, (newError) => {
+  if (newError) {
+    errorMessage.value = props.customErrorMessage;
+  } else {
+    errorMessage.value = '';
+  }
 });
 </script>
