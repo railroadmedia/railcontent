@@ -17,7 +17,17 @@
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
 
     <style>
-
+        @keyframes fadeEffect {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
         .info-pop {
             position: absolute;
         }
@@ -50,7 +60,7 @@
             width: 220px;
             border-radius: 8px;
             background: #fff;
-            box-shadow: 0 0 15px #000;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
             bottom: 30px;
             left: -300%;
         }
@@ -114,7 +124,7 @@
             <img class="h-14 sm:h-20 -mt-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/whats-new.webp" alt="Whats New">
             <h6 class="leading-normal mt-4 mb-7 sm:mb-10">The Drumeo EarDrums have helped 15,000 drummers protect their ears and play <br class="hidden sm:inline">
                 their favorite songs. We took your feedback and made a classic even better:</h6>
-            <div class="flex text-left">
+            <div class="flex flex-wrap sm:flex-nowrap text-left">
                 <div class="w-full sm:w-1/4 px-3">
                     <img class="rounded-xl h-56 object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/450x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/features-01.webp">
                     <h5 class="leading-tight mt-4 mb-2"><strong>Better Connections.</strong></h5>
@@ -144,21 +154,21 @@
             <h6 class="leading-normal mt-5 mb-7 sm:mb-10 mx-auto max-w-xl">
                 Whether you’re playing acoustic or electronic drums, sealing in the sound while protecting your ears is crucial. <strong>Drumeo EarDRUMS are professional in-ear headphones that help you:</strong></h6>
             <div class="flex flex-wrap text-left">
-                <div class="flex items-center mb-7 sm:mb-10">
+                <div class="flex flex-wrap sm:flex-nowrap items-center mb-7 sm:mb-10">
                     <img class="h-72 sm:order-1 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/current-feature-01.webp">
                     <div class="sm:px-4 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Catch every detail.</strong></h4>
                         <p>Triple driver headphones (that means 3 tiny speakers) give you a full range of sound -- from low kick drums to high cymbal shots.</p>
                     </div>
                 </div>
-                <div class="flex items-center mb-7 sm:mb-10">
+                <div class="flex flex-wrap sm:flex-nowrap items-center mb-7 sm:mb-10">
                     <img class="h-72 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/current-feature-02.webp">
                     <div class="sm:px-4 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Seal in the sound.</strong></h4>
                         <p>Drumeo EarDRUMS reduce external volume by up to -29dB. That means you can play hard while protecting your ears.</p>
                     </div>
                 </div>
-                <div class="flex items-center">
+                <div class="flex flex-wrap sm:flex-nowrap items-center">
                     <img class="h-72 sm:order-1 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/current-feature-03.webp">
                     <div class="sm:px-4 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Go anywhere.</strong></h4>
@@ -168,10 +178,10 @@
             </div>
         </div>
     </section>
-    <section class="text-center text-white px-5 py-10 sm:py-20 lg:py-24 relative" style="background-color:#111729;">
+    <section class="text-center text-white px-5 sm:px-10 py-10 sm:py-12 lg:py-24 relative" style="background-color:#111729;">
         <div class="container mx-auto relative z-10 max-w-4xl">
-            <div class="w-full sm:w-1/2 text-left">
-                <img class="h-24 sm:h-32 mb-5 sm:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/not-for-the-pros.webp" alt="Not just for the pros">
+            <div class="w-10/12 sm:w-7/12 lg:w-1/2 text-left">
+                <img class="h-20 sm:h-24 lg:h-32 mb-3 sm:mb-5 lg:mb-7" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/not-for-the-pros.webp" alt="Not just for the pros">
 
                 <p class="leading-normal">You don’t need to be an arena drummer to use in-ear monitors.
                     <br><br>
@@ -180,14 +190,15 @@
                     By reducing volume by up to -29db, in-ear monitors will save your ears from ambient drum noise AND allow you to listen to your music quieter.</p>
             </div>
         </div>
-        <img class="hidden sm:block absolute inset-0 z-0 w-full h-full object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/pro-section-bg.webp">
-        <img class="sm:hidden block absolute inset-0 z-0 w-full h-full object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/pro-section-bg-m.webp">
+        <img class="absolute inset-0 z-0 w-full h-full object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/pro-section-stage.webp">
+        <img class="absolute inset-0 z-0 w-full h-full object-cover" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/pro-section-living-room.webp"
+        style="opacity: 0; animation-delay: 5s; animation: fadeEffect 5s infinite ease-in-out;">
     </section>
     <section class="text-center px-5 sm:px-10 py-10 md:py-16 lg:py-20 text-white" style="background-color:#111729;">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h3 class="leading-tight"><strong>Everything you love about<br> the original EarDrums…</strong></h3>
 
-            <div class="grid grid-cols-4 gap-3 text-black my-7 sm:my-10">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-black my-7 sm:my-10">
                 <div class="rounded-xl p-4 sm:p-6 text-left h-full bg-white">
                     <h6 class="leading-normal">“I have really small ears and I am REALLY picky about sound.”</h6>
 {{--                    <p class="my-4 sm:my-6">I have to say I was doubtful. I have some more expensive in-ear monitors and I have really small ears and I am REALLY picky about sound. I was 100% blown away – deep rich bass response, nice clear mids and highs and amazing fit, and best of all no ear fatigue! I was also pleasantly surprised at the nice compact package that fits into a pocket or purse to take with me and keep things all in one place. Lots of selection for ear tips and a nice cleaner all part of the package for an amazing price.  If I had listened to the sound alone I would have expected them to cost a lot more than they do. I use mine every day and recommend them to everyone I talk to!</p>--}}
@@ -238,80 +249,80 @@
             <h6 class="leading-normal mt-3 mb-7 sm:mb-10 mx-auto max-w-2xl">A perfect seal is critical. That’s why your EarDrums include 9 different fits across 3 different configurations. From expanding memory foam to double-layer silicon, you can find the perfect fit for your ears.</h6>
             <div class="flex">
                 <div class="w-full sm:w-1/3 px-3">
-                    <img class="h-52" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/triple-layer.webp">
-                    <h5 class="leading-tight my-2"><strong>Triple-layer</strong></h5>
+                    <img class="h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/triple-layer2.webp">
+                    <h6 class="leading-tight mt-4 mb-2"><strong>Triple-layer</strong></h6>
                     <p class="leading-tight"><em>3 sizes included.</em></p>
                 </div>
                 <div class="w-full sm:w-1/3 px-3">
-                    <img class="h-52" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/double-layer.webp">
-                    <h5 class="leading-tight my-2"><strong>Double-layer</strong></h5>
+                    <img class="h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/double-layer2.webp">
+                    <h6 class="leading-tight mt-4 mb-2"><strong>Double-layer</strong></h6>
                     <p class="leading-tight"><em>3 sizes included.</em></p>
                 </div>
                 <div class="w-full sm:w-1/3 px-3">
-                    <img class="h-52" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/single-layer.webp">
-                    <h5 class="leading-tight my-2"><strong>Single-layer</strong></h5>
+                    <img class="h-36" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/single-layer2.webp">
+                    <h6 class="leading-tight mt-4 mb-2"><strong>Single-layer</strong></h6>
                     <p class="leading-tight"><em>3 sizes included.</em></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="text-center px-1 sm:px-5 py-8 md:py-10 lg:py-12" style="background:linear-gradient(to bottom, #fbfbfd, #f1eef4);">
+    <section class="text-center px-1 sm:px-5 py-8 md:py-10 lg:py-12" style="background:linear-gradient(to bottom, #f5f4f9, #edeaef);">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h1 class="leading-tight"><strong>What’s in the box?</strong></h1>
             <p class="leading-tight mt-2">(Tap for more information)</p>
             <div class="max-w-5xl mx-auto relative">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1152x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/items.webp">
-                    <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/items.webp" alt="logo">
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1152x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/items2.webp">
+                    <img class="rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/items2.webp" alt="logo">
                 </picture>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 50%;left: 0%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 42%;left: 20%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="Drumeo Miniature Road Case">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 0%;left: 30%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 26%;left: 46%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="2 Single-layer Silicone Eartips">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 0%;left: 40%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 25%;left: 57%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="2 Double-layer Silicone Eartips">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 50%;left: 50%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 45%;left: 57%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="2 Triple-layer Silicone Eartips">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 90%;left: 45%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 69%;left: 46%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="3 Memory Foam Eartips (S/M/L)">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 80%;left: 60%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 61%;left: 56%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="Clothing Clip">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 90%;left: 60%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 80%;left: 61%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="Gold ¼” Adapter">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 30%;left: 80%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 32%;left: 66%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="Cleaning Brush">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 60%;left: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 28%;left: 78%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="2 Black Braided Cables">
                     <span class="text-2xl">+</span>
                 </div>
                 <div class="info-pop cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center"
-                    style="top: 30%;left: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                    style="top: 52%;left: 89%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
                     tip="EarDrum IEMs">
                     <span class="text-2xl">+</span>
                 </div>
@@ -320,7 +331,7 @@
     </section>
     <section class="px-5 md:px-0 py-10 md:py-16 lg:py-20">
         <div class="container mx-auto max-w-3xl">
-            <div class="flex">
+            <div class="flex flex-wrap sm:flex-nowrap">
                 <img class="h-96 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo.webp">
                 <div class="sm:pl-7 lg:pl-14">
                     <img class="h-14" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/drumeo-icon.svg">
@@ -336,17 +347,19 @@
     <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 md:px-6 py-10 md:py-14 lg:py-16" style="background-color:#F4F8FB;">
         <div class="container mx-auto relative z-10 max-w-3xl">
-            <img alt="quietkick logo" class="h-12 sm:h-24" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
+            <img alt="quietkick logo" class="h-12 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/logo-black.png"><br>
             <h6 class="leading-tight mt-4 mb-2">Protect your ears + play your favorite songs.</h6>
 
             @include('drumeo.products.partials._promo-cards', [
-                'firstDeal' => 'Drumeo EarDrums',
+                'firstBadge' => 'SAVE 40%',
+                'firstDeal' => 'Drumeo<br> EarDrums',
                 'firstDealImage' =>
                     'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
-                'firstImageHeight' => 'h-36 lg:h-40',
-                'firstDealPrice' => 97,
-                'firstDealSub' => 'Just the course + 2 bonuses worth $42.95',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[eardrums-black]=1&products[drumeo_access_30-days]=1&locked=true',
+                'firstImageHeight' => 'h-24 lg:h-32',
+                'firstDealDiscount' => 149,
+                'firstDealPrice' => 99,
+                'firstDealSub' => 'Just the IEMs',
+                'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&locked=true',
                 'firstButtonText' => 'SELECT',
                 'firstDealExtra' => "One-time payment. Free shipping.",
                 'whiteBg' => 'false',
@@ -363,26 +376,29 @@
                     '1 Drumeo Miniature Road Case',
                 ],
 
-                'topBadge' => 'MOST POPULAR',
-                'secondDeal' => 'Unlimited Lessons',
+                'secondBadge' => 'LAUNCH SPECIAL',
+                'secondDeal' => 'EarDrums + 1 Year<br> Drumeo Membership',
                 'secondDealImage' =>
                     'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
-                'secondImageHeight' => 'h-36 lg:h-40',
-                'secondDealSub' => "1 year of Drumeo + 5 bonuses worth $258.94",
-                'secondDealPrice' => '20/mo',
+                'secondImageHeight' => 'h-24 lg:h-32',
+                'secondDealPrice' => 'Free EarDrums',
+                'secondDealExtra' => "with annual Membership of $240/yr.",
+                'secondButtonText' => 'SELECT',
                 'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-independence]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[easy-rudiments-book]=1&locked=true',
+                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&locked=true',
                 'secondExtraBonuses' => [
-                    '<strong>Annual Drumeo Membership</strong>',
-                    '<strong>Free 30-Day Independence</strong>',
-                    '<strong>Free</strong> Drumeo QuietPad',
-                    '<strong>Free</strong> Drumeo PadStand',
-                    '<strong>Free</strong> Drumeo 5A Drumsticks',
-                    '<strong>Free</strong> Easy Rudiments Book',
+                    '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
+                    '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
+                    'Step-by-Step Lessons',
+                    '6000+ Song Breakdowns',
+                    'Personalized Support',
                 ],
-                'secondButtonText' => 'GET EVERYTHING',
-                'secondDealExtra' => "Billed annually at $240/yr.",
             ])
+
+
+
+
+
             <h6 class="uppercase mt-6"><strong>For hygienic reasons all <br class="inline sm:hidden"> EarDrum sales are final.</strong></h6>
         </div>
     </section>
