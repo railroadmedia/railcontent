@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bcb06466ee038b934fad1721265c67f",
+    "content-hash": "d1c5c7922a31d6b39a2ad192db718f97",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10406,16 +10406,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.85",
+            "version": "dev-BE-187",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "d82037be781b2ed51ce44cb0e35328f80ec1d32b"
+                "reference": "4869eace6b0fe06b9456bf36b614cc1a8367ff26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d82037be781b2ed51ce44cb0e35328f80ec1d32b",
-                "reference": "d82037be781b2ed51ce44cb0e35328f80ec1d32b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/4869eace6b0fe06b9456bf36b614cc1a8367ff26",
+                "reference": "4869eace6b0fe06b9456bf36b614cc1a8367ff26",
                 "shasum": ""
             },
             "require": {
@@ -10470,9 +10470,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.85"
+                "source": "https://github.com/railroadmedia/railcontent/tree/BE-187"
             },
-            "time": "2024-05-24T16:23:02+00:00"
+            "time": "2024-06-11T08:31:45+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -20444,6 +20444,12 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-BE-187",
+            "alias": "v2.1.85",
+            "alias_normalized": "2.1.85.0"
         }
     ],
     "minimum-stability": "dev",
