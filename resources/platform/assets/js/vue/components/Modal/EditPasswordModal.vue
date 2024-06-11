@@ -54,7 +54,7 @@
                         customErrorMessage="Passwords must match"
                     />
                 </div>
-                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
+                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
                     <MuButton
                         class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0"
                         type="submit"
