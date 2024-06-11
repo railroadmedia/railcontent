@@ -106,9 +106,9 @@
     const submitUserForm = async () => {
         formProcessing.value = true;
         try {
-            await userStore.updateEmail(formData.value);
+            await userStore.updatePassword(formData.value);
         } catch (error) {
-            console.error("Failed to update your email:", error.message);
+            console.error("Failed to update your password:", error.message);
         }
         handleClose(); // Close modal
     };

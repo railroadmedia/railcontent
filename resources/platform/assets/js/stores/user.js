@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { updateUserProfile, updateUserEmail, updateUserSignature } from '../services/userService';
+import { updateUserProfile, updateLoginEmail, updateLoginPassword, updateUserSignature } from '../services/userService';
 
 export const useUserStore = defineStore({
   id: 'User',
@@ -252,7 +252,26 @@ export const useUserStore = defineStore({
 
     async updateEmail(data) {
       try {
-          const response = await updateUserEmail(this.token, this.userId, data);
+          const response = await updateLoginEmail(this.token, this.userId, data);
+          //Signature
+          data.hasOwnProperty('email') && (this.user.email = data.email);
+          window.shownotification({
+              icon: 'check',
+              text: 'Email successfully updated!'
+          });
+          return response;
+      } catch (error) {
+          window.shownotification({
+            icon: 'error',
+            text: 'Hmm, something has gone wrong. Your email could not be updated.'
+          });
+          throw new Error('Failed to update email');
+      }
+    },
+
+    async updatePassword(data) {
+      try {
+          const response = await updateLoginPassword(this.token, this.userId, data);
           //Signature
           data.hasOwnProperty('email') && (this.user.email = data.email);
           window.shownotification({
