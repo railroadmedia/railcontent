@@ -29,7 +29,7 @@ const currentYear = computed(() => {
       <!-- Footer Links -->
       <div class="tw-flex md:tw-px-4 tw-text-xs tw-text-gray-[#3F3F46] dark:tw-text-[#9EC0DC] tw-justify-center tw-w-full tw-items-center ">
         <span class="tw-hidden lg:tw-block tw-mr-1 tw-py-2">Musora Media, Inc. © {{ currentYear }} </span>
-        <ul class="tw-flex tw-items-center tw-text-xs">
+        <ul class="tw-flex tw-items-center tw-text-xs tw-flex-wrap tw-justify-center">
           <li class="tw-mx-1"><a :href="`/terms`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Terms</a></li>/
           <li class="tw-mx-1"><a :href="`/privacy`" target="_blank" class="tw-text-xs hover:tw-underline tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Privacy</a></li>/
           <template v-if="brand === 'drumeo'">

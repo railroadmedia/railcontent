@@ -33,9 +33,9 @@
                         v-model="formData.singing_gear_mic_brands"
                     />
                 </div>
-                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] ">
+                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
                     <MuButton
-                        class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
+                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
                         :processing="formProcessing"
                         @click="handleClick"
@@ -45,7 +45,7 @@
                     <MuButton
                         @click="handleClose"
                         style-type="secondary"
-                        class="tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
+                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
                     >
                         Cancel
                     </MuButton>

@@ -415,7 +415,7 @@
                 <section class="tw-flex tw-px-0 md:tw-px-6 tw-py-6 tw-mb-10">
                     <div class="tw-flex tw-flex-col tw-grow">
                         <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
-                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Forum Signature</h2>
+                            <h2 class="tw-capitalize tw-font-bold dark:tw-text-white tw-text-xl">{{ brand }} Forum Signature</h2>
                             <button class="tw-ml-auto tw-btn-primary tw-btn-circle tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-0" 
                                     @click="handleSignatureModal"
                             >
