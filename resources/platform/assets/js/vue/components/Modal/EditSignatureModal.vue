@@ -6,7 +6,7 @@
         @onClose="handleClose"
     >
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white">Edit Forum Signature</h2>
+            <h2 class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white tw-capitalize">Edit {{ brand }} Forum Signature</h2>
             <small class="tw-text-sm tw-italic tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-block tw-mb-6">Limit of 200 Characters</small>
 
             <form 
@@ -54,7 +54,7 @@
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
-    const { token, userId, userSignature } = storeToRefs(userStore);
+    const { brand, userSignature } = storeToRefs(userStore);
 
     //Emits
     const emit = defineEmits(['onCloseSignatureModal']);
@@ -62,6 +62,7 @@
     //Refs
     const formProcessing = ref(false);
     const formData = ref({
+        brand: brand,
         signature: userSignature.value || '', 
     });
 
