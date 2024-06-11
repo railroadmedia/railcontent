@@ -40,9 +40,9 @@ const onInput = (newValue) => {
 
 const borderStyles = computed( () => {
     if(props.error) {
-      return 'tw-bg-transparent tw-border-pianote dark:tw-border-pianote'
+      return 'tw-bg-transparent tw-border-red-500 dark:tw-border-red-500'
     } else if(props.success) {
-       return 'tw-border-guitareo dark:tw-border-guitareo'
+       return 'tw-border-green-500 dark:tw-border-green-500'
     } else {
       return 'tw-border-[#D1D5DB] dark:tw-border-[#445F74] dark:focus:tw-border-drumeo focus:tw-border-drumeo';
     }
