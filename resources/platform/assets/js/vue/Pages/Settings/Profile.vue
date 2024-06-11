@@ -268,16 +268,15 @@
                 </section>
 
                 <!-- GEAR PHOTOS -->
-                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
-                    <div class="tw-flex tw-flex-col tw-grow">
+                <section class="tw-w-full tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                    <div class="tw-w-full tw-flex tw-flex-col tw-grow">
                         <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Gear Photos</h2>
                         </div>
-                        <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 2xl:tw-grid-cols-4 tw-gap-4">
-                            
+                        <div class="tw-w-[calc(100%+2rem)] md:tw-w-full tw-relative tw-flex tw-flex-nowrap tw-no-scrollbar tw-overflow-auto tw-px-4 tw--mx-4 md:tw-px-0 md:tw--mx-0 md:tw-grid md:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4 tw-gap-3 md:tw-gap-4">
                             <!-- Drum Photos -->
-                            <div class="flex flex-row flex-wrap align-center tw-relative">
-                                <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
+                            <div class="tw-w-[253px] md:tw-w-full tw-flex-shrink-0 md:tw-flex-shrink tw-flex tw-items-center tw-justify-center tw-relative">
+                                <button class="tw-flex tw-flex-col tw-items-center tw-w-full tw-justify-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
                                     @click="handleDrumPictureModal"
                                 >
                                     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
@@ -308,8 +307,8 @@
                             />
                             
                             <!-- Piano Photos -->
-                            <div class="flex flex-row flex-wrap align-center tw-relative">
-                                <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
+                            <div class="tw-w-[253px] md:tw-w-full tw-flex-shrink-0 md:tw-flex-shrink tw-flex tw-items-center tw-justify-center tw-relative">
+                                <button class="tw-flex tw-flex-col tw-items-center tw-w-full tw-justify-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
                                     @click="handlePianoPictureModal"
                                 >
                                     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
@@ -340,8 +339,8 @@
                             />
                             
                             <!-- Guitar Photos -->
-                            <div class="flex flex-row flex-wrap align-center tw-relative">
-                                <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
+                            <div class="tw-w-[253px] md:tw-w-full tw-flex-shrink-0 md:tw-flex-shrink tw-flex tw-items-center tw-justify-center tw-relative">
+                                <button class="tw-flex tw-flex-col tw-items-center tw-w-full tw-justify-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
                                     @click="handleGuitarPictureModal"
                                 >
                                     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
@@ -372,8 +371,8 @@
                             />
 
                             <!-- Singing Photos -->
-                            <div class="flex flex-row flex-wrap align-center tw-relative">
-                                <button class="flex flex-column align-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
+                            <div class="tw-w-[253px] md:tw-w-full tw-flex-shrink-0 md:tw-flex-shrink tw-flex tw-items-center tw-justify-center tw-relative">
+                                <button class="tw-flex tw-flex-col tw-items-center tw-w-full tw-justify-center tw-relative tw-aspect-[16/9] tw-bg-[#D4D4D8] tw-text-[#002039] dark:tw-bg-[#002039] dark:tw-text-[#80A0B9] tw-rounded-lg tw-border tw-border-transparent hover:tw-border-[#002039] dark:hover:tw-border-[#80A0B9] tw-transition tw-overflow-hidden"
                                     @click="handleSingingPictureModal"
                                 >
                                     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
@@ -405,11 +404,15 @@
                             />
 
                         </div>
+                        <p class="tw-text-sm text-grey-3 tw-italic tw-mt-3 dark:tw-text-[#9EC0DC]">
+                            For best results upload photo larger than 1280x720px
+                            <br>Max file size: <span class="tw-font-bold">15MB</span>
+                        </p>
                     </div>
                 </section>
 
                 <!-- FORUM SIGNATURE -->
-                <section class="tw-flex tw-flex-row tw-p-6 tw-mb-10">
+                <section class="tw-flex tw-px-0 md:tw-px-6 tw-py-6 tw-mb-10">
                     <div class="tw-flex tw-flex-col tw-grow">
                         <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
                             <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Forum Signature</h2>

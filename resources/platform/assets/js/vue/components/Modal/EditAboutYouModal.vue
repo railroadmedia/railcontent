@@ -19,11 +19,11 @@
                         name="first_name" 
                         label="First Name"
                         required
-                        title="First Name cannot be empty"
                         :error="!formData.first_name.length"
                         placeholder="Enter First Name"
                         :disabled="formProcessing" 
                         v-model="formData.first_name"
+                        customErrorMessage="First Name cannot be empty"
                     />
                     <MuInput 
                         type="text"
@@ -31,11 +31,11 @@
                         name="last_name" 
                         label="Last Name"
                         required
-                        title="Last Name cannot be empty"
                         :error="!formData.last_name.length"
                         placeholder="Enter Last Name" 
                         :disabled="formProcessing"
                         v-model="formData.last_name"
+                        customErrorMessage="Last Name cannot be empty"
                     />
                     <MuSelect
                         id="profileCountry"
@@ -64,7 +64,7 @@
                     <MuButton
                         class="tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        :disabled="!formData.first_name.length && !formData.last_name"
+                        :disabled="!formData.first_name.length || !formData.last_name.length"
                         :processing="formProcessing"
                         @click="handleClick"
                     >

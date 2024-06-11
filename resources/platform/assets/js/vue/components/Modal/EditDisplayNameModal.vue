@@ -19,8 +19,8 @@
                         label="Display Name"
                         :disabled="formProcessing"
                         required
-                        title="Display Name cannot be empty"
                         :error="!formData.display_name.length"
+                        customErrorMessage="Display Name cannot be empty"
                         placeholder="Enter Display Name" 
                         v-model="formData.display_name"
                     />
