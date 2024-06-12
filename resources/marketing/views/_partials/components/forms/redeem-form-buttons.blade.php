@@ -2,6 +2,7 @@
     class="apply hover:opacity-80 transition-opacity w-full"
     :class="loading ? 'bg-[#B2D4F4] text-black' : !isValid ? 'bg-[#B91C1C] text-white' : submitted ? 'bg-[#15803D] text-white' : '{{ $buttonColor }}'"
     type="submit"
+    x-bind:disabled="loading"
 >
     <span x-show="!loading && isValid && !submitted">{!! $buttonText !!}</span>
     <span x-show="loading"><i class="fa-solid fa-spinner mr-1"></i> Loading</span>
