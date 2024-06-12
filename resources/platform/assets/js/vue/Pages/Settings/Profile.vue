@@ -281,7 +281,7 @@
                                         <musora-icon icon-name="drum-set" width="47" height="41" viewBox="0 0 47 41" />
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> drum gear</p>
                                     </div>
-                                    <img v-if="userDrumPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0"
+                                    <img v-if="userDrumPhoto" class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userDrumPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -313,7 +313,7 @@
                                         <musora-icon icon-name="keyboard" width="40" height="32" viewBox="0 0 40 32" />
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> piano gear</p>
                                     </div>
-                                    <img v-if="userPianoPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0"
+                                    <img v-if="userPianoPhoto" class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userPianoPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -345,7 +345,7 @@
                                         <musora-icon icon-name="electric-guitar" width="50" height="50" />
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> guitar gear</p>
                                     </div>
-                                    <img v-if="userGuitarPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0"
+                                    <img v-if="userGuitarPhoto" class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userGuitarPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -378,7 +378,7 @@
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> singing gear</p>
                                     </div>
                                     <img v-if="userSingingPhoto" 
-                                        class="tw-w-full tw-absolute tw-top-0 tw-left-0"
+                                        class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userSingingPhoto"
                                         ta-ddarumeo-gear-update="true"
                                     >
@@ -581,22 +581,22 @@
 
     //Drums
     const handleDrumsUploadDone = ({ drums_gear_photo }) => {
-        userStore.setDrumsPictureUrl({ drums_gear_photo }) //Update Pinia
+        userStore.setDrumsPictureUrl(drums_gear_photo) //Update Pinia
         showDrumPictureModal.value = false; //Close Modal
     }
     //Piano
-    const handlePianoUploadDone = ({ piano_gear_photo }) => {
-        userStore.setPianoPictureUrl({ piano_gear_photo }) //Update Pinia
+    const handlePianoUploadDone = ({piano_gear_photo}) => {
+        userStore.setPianoPictureUrl(piano_gear_photo) //Update Pinia
         showPianoPictureModal.value = false; //Close Modal
     }
     //Guitars
-    const handleGuitarUploadDone = ({ guitar_gear_photo }) => {
-        userStore.setGuitarPictureUrl({ guitar_gear_photo }) //Update Pinia
+    const handleGuitarUploadDone = ({guitar_gear_photo}) => {
+        userStore.setGuitarPictureUrl(guitar_gear_photo) //Update Pinia
         showGuitarPictureModal.value = false; //Close Modal
     }
     //Singing
-    const handleSingingUploadDone = ({ singing_gear_photo }) => {
-        userStore.setSingingPictureUrl({ singing_gear_photo }) //Update Pinia
+    const handleSingingUploadDone = ({singing_gear_photo}) => {
+        userStore.setSingingPictureUrl(singing_gear_photo) //Update Pinia
         showSingingPictureModal.value = false; //Close Modal
     }
     
