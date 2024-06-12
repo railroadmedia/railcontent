@@ -72,7 +72,7 @@
             handleClose();
         } catch (error) {
             console.error("Failed to update the user signature:", error.message);
-            handleClose();
+            formProcessing.value = false;
         }
     };
 </script>
