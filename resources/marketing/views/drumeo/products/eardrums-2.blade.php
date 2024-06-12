@@ -73,6 +73,52 @@
             opacity: 1;
             display: block;
         }
+
+        table.comparison.eardrums tr td:nth-child(1),
+        table.comparison.eardrums tr td:nth-child(2),
+        table.comparison.eardrums tr td:nth-child(3),
+        table.comparison.eardrums tr td:nth-child(4) {
+            width: 25%;
+        }
+        @media (min-width: 768px) {
+            table.comparison.eardrums tr td:nth-child(1),
+            table.comparison.eardrums tr td:nth-child(2),
+            table.comparison.eardrums tr td:nth-child(3),
+            table.comparison.eardrums tr td:nth-child(4) {
+                width: 26%;
+            }
+        }
+        table.comparison.eardrums tr td {
+            padding:15px 7px;
+            font-size:12px;
+            text-transform:uppercase;
+
+        }
+        @media (min-width: 768px) {
+            table.comparison.eardrums tr td {
+                font-size:16px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            table tr td:nth-child(3),
+            table tr td:nth-child(4) {
+                cursor:pointer;
+            }
+            .earbuds tr td:nth-child(3) {
+                display: table-cell;
+            }
+            .earbuds tr td:nth-child(4) {
+                display: none;
+            }
+            .headphones tr td:nth-child(4) {
+                display: table-cell;
+            }
+            .headphones tr td:nth-child(3) {
+                display: none;
+            }
+        }
+
     </style>
 @stop()
 
@@ -267,7 +313,65 @@
             </div>
         </div>
     </section>
-
+    <section class="content-section text-center comparison px-1 lg:px-3" style="background:linear-gradient(to bottom, #272e41, #02050e);">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="mb-16 md:mb-12 "><strong>The difference you can <img class="h-12 sm:h-20 align-bottom lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/hear.png" alt="Hear text"></strong></h2>
+            <div class="relative">
+                <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <table class="w-full mx-auto border-separate comparison eardrums earbuds">
+                    <tbody style="background-color:transparent!important;">
+                    <tr style="background-color:transparent!important;">
+                        <td></td>
+                        <td class="rounded-t-xl">
+                            <img class="h-5 md:h-12 filter saturate-0 brightness-200 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
+                        </td>
+                        <td class="leading-none rounded-t-xl">Standard<br> Earbuds</td>
+                        <td class="leading-none rounded-t-xl">Standard<br> Headphones</td>
+                    </tr>
+                    <tr>
+                        <td>Driver Type</td>
+                        <td>
+                            <span class="hidden sm:inline">2 dynamic drivers<br> + 1 balanced armature</span>
+                            <span class="inline sm:hidden">2 dynamic drivers + 1 BAs</span>
+                        </td>
+                        <td>1 Dynamic Driver</td>
+                        <td>Single 40mm Driver</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency Range</td>
+                        <td>18Hz - 22kHz</td>
+                        <td>19Hz - 20kHz</td>
+                        <td>18Hz - 22kHz</td>
+                    </tr>
+                    <tr>
+                        <td>Sound Isolation</td>
+                        <td>-29 dB</td>
+                        <td>0 dB</td>
+                        <td>0 dB</td>
+                    </tr>
+                    <tr>
+                        <td>Impedance (at 1khz)</td>
+                        <td>18 Ω</td>
+                        <td>~23 Ω</td>
+                        <td>~47 Ω</td>
+                    </tr>
+                    <tr>
+                        <td>Sensitivity (at 1khz)</td>
+                        <td>97 dB</td>
+                        <td>109 dB</td>
+                        <td>96 dB</td>
+                    </tr>
+                    <tr style="background-color:transparent!important;">
+                        <td class="rounded-b-xl">Built For Drummers</td>
+                        <td class="rounded-b-xl">Yes</td>
+                        <td class="rounded-b-xl">No</td>
+                        <td class="rounded-b-xl">No</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
     <section class="text-center py-8 sm:py-10 lg:py-12" style="background:linear-gradient(to bottom, #f5f4f9, #edeaef);">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h1 class="leading-tight"><strong>What’s in the box?</strong></h1>
@@ -353,13 +457,14 @@
                         Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for 6000+ famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
                     </p>
                 </div>
-                <picture>
+                <picture class="w-full sm:w-auto h-auto sm:h-96">
                     <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo.webp">
-                    <img class="w-full h-auto sm:h-96 sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo-m.webp">
+                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo-m.webp">
                 </picture>
             </div>
         </div>
     </section>
+
     <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-16" style="background-color:#F4F8FB;">
         <div class="container mx-auto relative z-10 max-w-3xl">
