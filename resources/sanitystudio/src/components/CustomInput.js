@@ -1,77 +1,44 @@
-import React from 'react';
-import {useCallback, useMemo} from 'react'
-import {useFormValue, NumberInputProps} from 'sanity'
-import {Stack, TextInput, Grid, Button} from '@sanity/ui'
-import {set, unset, useClient} from 'sanity'
+import React, { useCallback, useMemo } from 'react';
+import { useFormValue, set, useClient } from 'sanity';
+import { Grid, Button } from '@sanity/ui';
 
 const CustomInput = React.forwardRef((props, ref) => {
-    const {schemaType, renderDefault, onChange, value = '', elementProps, document } = props
-    const {validation = []} = schemaType
-    const sanityClient = useClient({apiVersion: '2023-01-01'});
+    const { schemaType, onChange, value = '', elementProps } = props;
+    const { validation = [] } = schemaType;
+    const sanityClient = useClient({ apiVersion: '2023-01-01' });
+
     const docId = String(useFormValue(["_id"]));
+    const patch = sanityClient.patch( docId);
+
     const diff = [
-        {id: '0', title: 'All'},
-        {id: '1', title: 'Novice'},
-        {id: '2', title: 'Beginner'},
-        {id: '3', title: 'Beginner'},
-        {id: '4', title: 'Intermediate'},
-        {id: '5', title: 'Intermediate'},
-        {id: '6', title: 'Advanced'},
-        {id: '7', title: 'Advanced'},
-        {id: '8', title: 'Expert'},
-        {id: '9', title: 'Expert'},
-        {id: '10', title: 'Expert'},
+        { id: '0', title: 'All' },
+        { id: '1', title: 'Novice' },
+        { id: '2', title: 'Beginner' },
+        { id: '3', title: 'Beginner' },
+        { id: '4', title: 'Intermediate' },
+        { id: '5', title: 'Intermediate' },
+        { id: '6', title: 'Advanced' },
+        { id: '7', title: 'Advanced' },
+        { id: '8', title: 'Expert' },
+        { id: '9', title: 'Expert' },
+        { id: '10', title: 'Expert' },
     ];
 
-    // Creates a change handler for patching data
-    const handleChange = useCallback(
-        (event) => {
-            if(event.target.id === 'difficulty') {
-                const difficulty = diff.filter((element) => {
-                     return element.id === event.target.value;
-                    }
-                );
-                if (difficulty[0]) {
-                    sanityClient
-                        .patch(docId)
-                        .set({
-                            difficulty_string: difficulty[0] ? difficulty[0].title : '',
-                        })
-                        .commit()
-                }
-            }
-            onChange(event.target.value ? set(event.target.value) : unset());
-        },
-        [onChange]
-    );
-    const range = useMemo(() => generateRange(validation), [validation])
+    const range = useMemo(() => generateRange(validation), [validation]);
 
     const handleDifficulty = useCallback(
-        (event: MouseEvent<HTMLButtonElement>) => {
-            const value = Number(event.currentTarget.value)
-            console.log('difficulty', event, 'value',value)
-            const difficulty = diff.filter((element) => {
-                    return Number(element.id) === value;
-                }
-            );
-            console.log('difficulty string', difficulty)
-            if (difficulty[0]) {
-                sanityClient
-                    .patch(docId)
-                    .set({
-                        difficulty_string: difficulty[0] ? difficulty[0].title : '',
-                    })
-                    .commit()
+        (event) => {
+            const value = Number(event.currentTarget.value);
+            const difficulty = diff.find(element => Number(element.id) === value);
+            if (difficulty) {
+                patch.set({ difficulty_string: difficulty.title }).commit().catch(console.error);
             }
-            onChange(set(value))
+            onChange(set(value));
         },
-        [onChange]
-    )
+        [onChange, patch, diff]
+    );
 
     return (
-//         <Stack space={3}>
-//             <TextInput {...elementProps} onChange={handleChange} value={value} />
-//         </Stack>
         <Grid columns={range.length} gap={1}>
             {range.map((index) => (
                 <Button
@@ -84,28 +51,20 @@ const CustomInput = React.forwardRef((props, ref) => {
                 />
             ))}
         </Grid>
-    )
+    );
 });
 
 export default CustomInput;
 
-/**
- * Function that finds the `min` and `max` rules from validations,
- * and generates the range of numbers between them
- **/
-function generateRange(validation: any[]) {
+function generateRange(validation) {
     const [min, max] = validation
-        .reduce((acc, {_rules}) => {
-            return [...acc, ..._rules]
-        }, [])
-        .filter((rule: any) => ['max', 'min'].includes(rule.flag))
-        .map((rule: any) => rule.constraint)
+        .reduce((acc, { _rules }) => [...acc, ..._rules], [])
+        .filter((rule) => ['max', 'min'].includes(rule.flag))
+        .map((rule) => rule.constraint);
 
-    let range = []
+    const range = [];
     for (let i = min; i <= max; i++) {
-        range.push(i)
+        range.push(i);
     }
-
-    return range
+    return range;
 }
-
