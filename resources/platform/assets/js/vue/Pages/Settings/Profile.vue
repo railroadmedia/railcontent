@@ -581,6 +581,7 @@
 
     //Drums
     const handleDrumsUploadDone = ({ drums_gear_photo }) => {
+        console.log(drums_gear_photo, { drums_gear_photo })
         userStore.setDrumsPictureUrl({ drums_gear_photo }) //Update Pinia
         showDrumPictureModal.value = false; //Close Modal
     }
