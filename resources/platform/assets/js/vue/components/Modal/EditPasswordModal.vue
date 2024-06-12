@@ -20,7 +20,6 @@
                         label="Current Password"
                         :disabled="formProcessing"
                         required
-                        title="Current password can not be empty"
                         placeholder="Enter Current Password" 
                         v-model="formData.current_password"
                     />
@@ -36,7 +35,7 @@
                         placeholder="Enter New Password" 
                         v-model="formData.new_password"
                         pattern="^.{8,}$"
-                        customErrorMessage="Password must be 8 characters"
+                        title="Password must be 8 characters"
                     />
                 </div>
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
@@ -48,27 +47,18 @@
                         :disabled="formProcessing"
                         required
                         placeholder="Confirm Password" 
-                        :error="formData.new_password_confirmation !== formData.new_password"
-                        :success="formData.new_password_confirmation === formData.new_password && formData.new_password_confirmation.length"
                         v-model="formData.new_password_confirmation"
-                        customErrorMessage="Passwords must match"
+                        title="Passwords must match"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
                     <MuButton
                         class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        :disabled="formData.new_password_confirmation !== formData.new_password"
                         :processing="formProcessing"
+                        processing-text="Saving..."
                     >
                         Save
-                    </MuButton>
-                    <MuButton
-                        @click="handleClose"
-                        style-type="secondary"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                    >
-                        Cancel
                     </MuButton>
                 </div>
             </form>
@@ -80,13 +70,11 @@
     import InfoModal from '../Modal/InfoModal.vue';
     import MuInput from '../FormInputs/MuInput.vue';
     import MuButton from '../Button/MuButton.vue';
-    import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
-    const { userId } = storeToRefs(userStore);
 
-
+    //Emits
     const emit = defineEmits(['onCloseModal']);
 
     //Refs
@@ -107,9 +95,10 @@
         formProcessing.value = true;
         try {
             await userStore.updatePassword(formData.value);
+            handleClose();
         } catch (error) {
             console.error("Failed to update your password:", error.message);
+            handleClose();
         }
-        handleClose(); // Close modal
     };
 </script>

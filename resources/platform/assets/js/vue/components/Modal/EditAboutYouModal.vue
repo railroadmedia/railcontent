@@ -60,7 +60,6 @@
                         type="submit"
                         :processing="formProcessing"
                         processing-text="Saving..."
-                        @click="handleClick"
                     >
                         Save
                     </MuButton>

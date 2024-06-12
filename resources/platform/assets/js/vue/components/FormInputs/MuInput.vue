@@ -2,8 +2,7 @@
   <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${wrapperOverride || ''}`">
     <label v-if="label" :for="id"
       :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${labelOverride || 'dark:tw-text-[#9EC0DC]'}`">
-      {{ label }}
-      <sup v-if="required">*</sup>
+      {{ label }}<sup v-if="required">*</sup>
     </label>
     <div class="tw-flex tw-relative">
       <input :value="modelValue"

@@ -46,14 +46,14 @@ export const updateUserEmail = (token, userId, payload) => {
  * @param {string} token
  * @param {object} payload
  */
-export const updateUserSignature = (token, payload) => {
+export const updateUserSignature = (token, userId, payload) => {
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': token
     };
     return axios({
         method: 'PATCH',
-        url: `/signature/store`,
+        url: `/forums/api/signature/update/${userId}`,
         data: payload,
         headers
     });

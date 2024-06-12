@@ -25,10 +25,7 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
             <!-- Page Content -->
             <div class="tw-flex tw-flex-col tw-grow">
-
                 <input id="userInfo" type="hidden" :data-user-id="userId">
-
-                <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-8 tw-mb-2">Login Credentials</h1>
                 
                 <!-- LOGIN -->
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">

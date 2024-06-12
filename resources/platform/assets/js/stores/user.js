@@ -46,12 +46,12 @@ export const useUserStore = defineStore({
     userPedalBrands: (state) => state.user?.guitar_gear_pedal_brands,
     userStringBrands: (state) => state.user?.guitar_gear_string_brands,
     userBirthdayFormatted: (state) => {
-      if (!state.user?.birthday) return ''; 
+      if (!state.user?.birthday) return '';
       const [year, month, day] = state.user.birthday.split('-');
       const date = new Date(Date.UTC(year, month - 1, day));
       return `${date.toLocaleString('default', { month: 'long' })} ${day}, ${year}`;
     },
-    
+
     userFullName: (state) => {
       if(state.user?.first_name && state.user?.last_name) {
         return `${state.user.first_name} ${state.user.last_name}`;
@@ -122,7 +122,7 @@ export const useUserStore = defineStore({
     async updateProfile(data) {
       try {
           const response = await updateUserProfile(this.token, this.userId, data);
-          
+
           //Update Pinia values if they exist
           data.hasOwnProperty('display_name') && (this.user.display_name = data.display_name);
           //About You
@@ -182,7 +182,7 @@ export const useUserStore = defineStore({
                               text: 'Woohoo! Avatar Successfully reset. Refreshing the page.'
                           });
                           //Reset in Pinia Store
-                          this.user.profile_picture_url = 'https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png'; 
+                          this.user.profile_picture_url = 'https://www.musora.com/musora-cdn/image/quality=75,width=250,height=250,metadata=none/https://s3.amazonaws.com/pianote/defaults/avatar.png';
                       }
                   })
                   .catch(error => {
@@ -208,7 +208,7 @@ export const useUserStore = defineStore({
             submit: () => {
                 let url = '/user-management-system/user/update/' + this.userId;
                 let gearAttribute = { [`${instrument}_gear_photo`]: null };
-    
+
                 axios.patch(url, gearAttribute)
                 .then(response => {
                     if (response.data) {
@@ -247,7 +247,7 @@ export const useUserStore = defineStore({
                 console.log('Reset gear photo cancelled');
             }
         }
-      });        
+      });
     },
 
     async updateEmail(data) {
@@ -282,7 +282,7 @@ export const useUserStore = defineStore({
       } catch (error) {
           window.shownotification({
             icon: 'error',
-            text: 'Hmm, something has gone wrong. Your email could not be updated.'
+            text: `Your email could not be updated. ${error.message}`
           });
           throw new Error('Failed to update email');
       }
@@ -290,9 +290,9 @@ export const useUserStore = defineStore({
 
     async updateSignature(data) {
       try {
-          const response = await updateUserSignature(this.token, data);
+          const response = await updateUserSignature(this.token, this.userId, data);
           //Signature
-          data.hasOwnProperty('signature') && (this.user.signature = data.signature);
+          data.hasOwnProperty('signature') && (this.userSignature = data.signature);
 
           window.shownotification({
               icon: 'check',

@@ -20,29 +20,21 @@
                         label="Login Email"
                         :disabled="formProcessing"
                         required
-                        title="Email cannot be empty"
+                        title="Please enter a valid email address"
                         placeholder="Enter Email" 
                         v-model="formData.email"
                         pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-                        customErrorMessage="Please enter a valid email address"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
                     <MuButton
                         class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        :disabled="!formData.email.length"
                         :processing="formProcessing"
+                        processing-text="Saving..."
                         @click="handleClick"
                     >
                         Save
-                    </MuButton>
-                    <MuButton
-                        @click="handleClose"
-                        style-type="secondary"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                    >
-                        Cancel
                     </MuButton>
                 </div>
             </form>
@@ -77,9 +69,9 @@
         formProcessing.value = true;
         try {
             await userStore.updateEmail(formData.value);
+            handleClose();
         } catch (error) {
             console.error("Failed to update your email:", error.message);
         }
-        handleClose(); // Close modal
     };
 </script>
