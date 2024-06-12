@@ -220,7 +220,16 @@ const submitForm = async (event) => {
 
         } else {
             isSubmitted.value = true;
-            closeModal();
+
+            if(!props.isUser){
+                if(isNewAccount.value){
+                    window.location.replace('/drumeo');
+                } else {
+                    location.reload();
+                }
+            } else {
+                closeModal();
+            }
         }
     }
 }

@@ -79,6 +79,7 @@
                         })
                     } else {
                         this.submitted = true;
+                        window.location.replace('/login')
                     }
                 }
             }
