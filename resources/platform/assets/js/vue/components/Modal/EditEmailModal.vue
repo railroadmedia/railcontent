@@ -72,6 +72,7 @@
             handleClose();
         } catch (error) {
             console.error("Failed to update your email:", error.message);
+            handleClose();
         }
     };
 </script>

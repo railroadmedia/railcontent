@@ -66,9 +66,10 @@ export const updateUserSignature = (token, userId, payload) => {
  * @param {string} userId
  * @param {object} payload
  */
-export const updateLoginEmail = (token, userId, payload) => {
+export const updateLoginEmail = (token, payload) => {
     const headers = {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'X-CSRF-TOKEN': token
     };
     return axios({
@@ -86,9 +87,10 @@ export const updateLoginEmail = (token, userId, payload) => {
  * @param {string} userId
  * @param {object} payload
  */
-export const updateLoginPassword = (token, userId, payload) => {
+export const updateLoginPassword = (token, payload) => {
     const headers = {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'X-CSRF-TOKEN': token
     };
     return axios({
