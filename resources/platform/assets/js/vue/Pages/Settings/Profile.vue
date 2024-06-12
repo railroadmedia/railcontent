@@ -580,24 +580,23 @@
     }
 
     //Drums
-    const handleDrumsUploadDone = ({ drums_gear_photo }) => {
-        console.log(drums_gear_photo, { drums_gear_photo })
-        userStore.setDrumsPictureUrl({ drums_gear_photo }) //Update Pinia
+    const handleDrumsUploadDone = (drums_gear_photo) => {
+        userStore.setDrumsPictureUrl(drums_gear_photo) //Update Pinia
         showDrumPictureModal.value = false; //Close Modal
     }
     //Piano
-    const handlePianoUploadDone = ({ piano_gear_photo }) => {
-        userStore.setPianoPictureUrl({ piano_gear_photo }) //Update Pinia
+    const handlePianoUploadDone = (piano_gear_photo) => {
+        userStore.setPianoPictureUrl(piano_gear_photo) //Update Pinia
         showPianoPictureModal.value = false; //Close Modal
     }
     //Guitars
-    const handleGuitarUploadDone = ({ guitar_gear_photo }) => {
-        userStore.setGuitarPictureUrl({ guitar_gear_photo }) //Update Pinia
+    const handleGuitarUploadDone = (guitar_gear_photo) => {
+        userStore.setGuitarPictureUrl(guitar_gear_photo) //Update Pinia
         showGuitarPictureModal.value = false; //Close Modal
     }
     //Singing
-    const handleSingingUploadDone = ({ singing_gear_photo }) => {
-        userStore.setSingingPictureUrl({ singing_gear_photo }) //Update Pinia
+    const handleSingingUploadDone = (singing_gear_photo) => {
+        userStore.setSingingPictureUrl(singing_gear_photo) //Update Pinia
         showSingingPictureModal.value = false; //Close Modal
     }
     
