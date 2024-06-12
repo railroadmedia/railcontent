@@ -6,13 +6,15 @@ import { visionTool } from '@sanity/vision';
 import CustomInput from './components/CustomInput'; // Import the custom component
 import ArrayInput from './components/ArrayInput'; // Import the custom component
 import SoundsliceSlug from './components/SoundsliceSlug'; // Import the custom component
+import RolesBasedArrayInput from './components/RolesBasedArrayInput';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 
 // You can add more custom components here as needed
 const customComponents = {
-  CustomInput: CustomInput,
+    CustomInput: CustomInput,
     ArrayInput: ArrayInput,
-    SoundsliceSlug: SoundsliceSlug
+    SoundsliceSlug: SoundsliceSlug,
+    RolesBasedArrayInput: RolesBasedArrayInput
 };
 
 // Helper function to map components
