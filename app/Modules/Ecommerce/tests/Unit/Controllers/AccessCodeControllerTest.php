@@ -249,4 +249,40 @@ class AccessCodeControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_json_access_code_claim_with_already_claimed_access_code(): void
+    {
+        Event::fake();
+        Bus::fake();
+        $email = 'validemail@test.com';
+        $password = $this->faker->words(3, true);
+
+        /** @var User $user */
+        $user = User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+            'last_used_brand' => null,
+        ]);
+
+        $product = Product::factory()->create();
+        $accessCode = AccessCodeFactory::createAccessCode($product, ['is_claimed' => true, 'claimer_id' => $user->id]);
+
+        auth()->setUser($user);
+
+        $body = [
+            'user_email' => $email,
+            'access_code' => $accessCode->code,
+            'user_password' => $password,
+            'brand' => $accessCode->brand,
+            'credentials_type' => 'existing',
+        ];
+
+        $response = $this->postJson(
+            route('access-codes.form-claim'),
+            $body,
+        );
+
+        $response->assertStatus(422);
+        $this->assertEquals('Access code has already been redeemed!', $response->json()['errors']['access-code'][0]);
+    }
 }

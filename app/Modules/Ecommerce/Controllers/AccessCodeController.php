@@ -38,7 +38,7 @@ class AccessCodeController extends Controller
             )) {
                 $user = $this->userService->getByEmailOrNull($request->get('email'));
             } else {
-                return $request->isJson()
+                return $request->wantsJson()
                     ? response()->json(['error' => 'Invalid Credentials'], status: 401)
                     : redirect()->back()->withInput()->withErrors(['Invalid credentials.']);
             }
@@ -51,13 +51,12 @@ class AccessCodeController extends Controller
         try {
             $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
         } catch (Throwable $e) {
-            $message = [
-                'access-code-claimed-success' => false,
-                'access-code-claimed-message' => $e->getMessage(),
+            $errors = [
+                'access-code' => [$e->getMessage()],
             ];
-            return $request->isJson()
-                ? response()->json($message, 400)
-                : redirect()->back()->withInput()->withErrors($message);
+            return $request->wantsJson()
+                ? response()->json(['errors' => $errors], 422)
+                : redirect()->back()->withInput()->withErrors($errors);
         }
 
         $this->userAuthenticationService->login($user);
@@ -67,7 +66,7 @@ class AccessCodeController extends Controller
             'access-code-claimed-message' => 'Your access code has been claimed successfully!',
         ];
 
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             return response()->json($message);
         } else {
             $redirectRoute =
