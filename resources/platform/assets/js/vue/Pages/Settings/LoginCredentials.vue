@@ -2,7 +2,7 @@
     <div class="tw-w-full">
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-[30px]">
             <!-- Header -->
-            <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Profile' } ]"/>
+            <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Login Credentials' } ]"/>
             <PageHeader 
                 page-type="settings"
                 :title="userDisplayName"
