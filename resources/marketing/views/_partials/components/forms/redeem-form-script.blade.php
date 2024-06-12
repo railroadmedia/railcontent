@@ -20,6 +20,7 @@
                 }
                 this.isValid = true;
                 this.loading = true;
+                this.submitted = false;
 
                 const form = event.target;
 
