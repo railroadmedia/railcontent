@@ -340,7 +340,7 @@
                     </div>
 
                     @php
-                        $items = ['Play With Real Music', 'Play Every Day'];
+                        $items = ['Play With Real Music', 'Play Every Day', 'Lifetime Access'];
                     @endphp
                     <p class="hidden lg:inline">
                         @foreach ($items as $item)
@@ -809,7 +809,7 @@
 
     <section style="background: #EFF7FF" class="px-5 sm:px-8 py-8 sm:py-12 lg:py-16 text-center">
         <div class="container max-w-5xl mx-auto mb-10">
-            <h6 class="uppercase leading-relaxed text-pianote">No homework.</h6>
+            <h6 class="uppercase leading-relaxed text-pianote">READ MUSIC IN 30 DAYS</h6>
             <h1 class="uppercase leading-relaxed md:pb-4"><strong>JUST PRESS PLAY</strong></h1>
             <!-- <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
                         x-on:click="window.innerWidth <= 640 ? trailerM = true : trailer = true;">
@@ -829,7 +829,7 @@
                             preload="auto"></video>
                     </div> -->
 
-            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/trailer-thumb.png"
+            <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1600x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/trailer-thumb2.png"
                 alt="Read Music in 30 Days Trailer Thumbnail" class="w-full cursor-pointer autoplay-video"
                 x-on:click="trailer = true"
             >
@@ -1120,7 +1120,7 @@
                         class="px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;">
                 @endif
                     <div class="inline-block px-2 border rounded-xl border-pianote text-pianote text-center my-2">
-                        <p class="text-xs px-4">  @if ($earlyBirdEnd < Carbon\Carbon::now()) COURSE ONLY @else EARLY BIRD OFFER @endif</p>
+                        <p class="text-xs px-4">  @if ($earlyBirdEnd > Carbon\Carbon::now()) EARLY BIRD OFFER @else COURSE ONLY @endif</p>
                     </div>
 
                     <h3 class="leading-tight"><strong>Read Music in 30 Days</strong></h3>
@@ -1129,8 +1129,7 @@
                     <p class="inline-block text-xs">one time payment.</p><br>
                     <div class="join bg-pianote smaller my-4">ENROLL NOW</div>
                     <ul class="list-disc ml-5">
-                        <li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Chords & Scales Book</li>
-                        @if ($earlyBirdEnd < Carbon\Carbon::now())<li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion  Book</li> @endif
+                        @if ($earlyBirdEnd > Carbon\Carbon::now())<li class="text-sm relaxed"><span class="text-pianote">Bonus</span> Companion  Book</li> @endif
                         <li class="text-sm leading-relaxed"><span class="text-pianote">Bonus</span>  Companion PDF</li>
                     </ul>
                     <hr class="w-full my-5" style="border-color:#b2cae1">
