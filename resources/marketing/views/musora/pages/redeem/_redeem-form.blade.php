@@ -36,10 +36,10 @@
         ])
     @else
         <p class="input-describer">Email</p>
-        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="user_email" placeholder="Email/Username" value="{{-- Input::old('user_email') --}}">
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email/Username" value="{{-- Input::old('user_email') --}}">
         <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
         <p class="input-describer">Password</p>
-        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="user_password" placeholder="Password" value="">
+        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password" value="">
         <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
         @include('_partials.components.forms.redeem-form-buttons', [
             'buttonText' => $buttonText,
