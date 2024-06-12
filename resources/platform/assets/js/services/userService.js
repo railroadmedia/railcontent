@@ -73,7 +73,7 @@ export const updateLoginEmail = (token, payload) => {
         'X-CSRF-TOKEN': token
     };
     return axios({
-        method: 'PATCH',
+        method: 'POST',
         url: `/user-management-system/email-change/request`,
         data: payload,
         headers
