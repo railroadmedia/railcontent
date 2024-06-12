@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaFieldDefinition;
 use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Models\Shopify\ProductMetaFields;
 use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
@@ -26,6 +27,40 @@ class ShopifyGateway
         $this->shopify = $shopify;
     }
 
+
+    public function getVariantMetaFields($id)
+    {
+        $product = collect();
+
+        $gql = <<<GQL
+                query {
+                    node(id: "$id") {
+                        ... on ProductVariant {
+                            id
+                            metafields(first: 10) {
+                                edges {
+                                    node {
+                                        namespace
+                                        key
+                                        value
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                GQL;
+
+        $responseBody = $this->executeQuery($gql);
+
+        $product =
+            collect($responseBody->data->node->metafields->edges)->map(function ($product) {
+                return new ProductMetaFields($product);
+            })
+        ;
+
+        return $product->values();
+    }
     public function getCustomerOrders($shopifyCustomerId)
     {
         $orders = collect();

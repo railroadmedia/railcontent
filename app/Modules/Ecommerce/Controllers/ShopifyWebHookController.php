@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Jobs\Shopify\RefundCreatedJob;
 use App\Modules\Ecommerce\Jobs\ShopifySyncCustomerJob;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedEventTrackingJob;
 use App\Modules\Ecommerce\Jobs\Shopify\OrderCreatedUpdateLastTrialDataJob;
+use App\Modules\Ecommerce\Jobs\ShopifySyncProductJob;
 use App\Modules\Ecommerce\Models\Shopify\Rest\Order;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -113,5 +114,22 @@ class ShopifyWebHookController extends Controller
     private function getWebhookIdentifierOrGUID(Request $request)
     {
         return $request->header('x-shopify-webhook-id') ?? $request->header('X-Shopify-Webhook-Id') ?? uniqid('generated-');
+    }
+
+    public function productUpdated(Request $request)
+    {
+        try {
+            $id = $this->getWebhookIdentifierOrGUID($request);
+            $content = $request->all();
+            Log::debug(json_encode($content));
+            $children = [
+                new ShopifySyncProductJob($content)
+            ];
+            dispatch(new WebhookJob('Shopify-product-updated', $id, $content, $children));
+        } catch (\Exception $e) { //Catch exception to prevent shopify from retrying the webhook
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
+        return response()->json();
     }
 }
