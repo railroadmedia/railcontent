@@ -24,6 +24,7 @@
                     :hasInstrumentless= "hasInstrumentless"
                     :lessonProgress= "lessonProgress"
                     :likeCount= "likeCount"
+                    :report-logo="reportLogo"
                 />
             </div>
             <!-- Related Lessons -->
@@ -96,6 +97,7 @@
         assignments: Array,
         resources: Array,
         relatedLessons: Object,
+        reportLogo: String,
     });
 
     onBeforeMount( ()=> {
