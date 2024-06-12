@@ -281,7 +281,7 @@
                                         <musora-icon icon-name="drum-set" width="47" height="41" viewBox="0 0 47 41" />
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> drum gear</p>
                                     </div>
-                                    <img v-if="userDrumPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
+                                    <img v-if="userDrumPhoto" class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userDrumPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -313,7 +313,7 @@
                                         <musora-icon icon-name="keyboard" width="40" height="32" viewBox="0 0 40 32" />
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> piano gear</p>
                                     </div>
-                                    <img v-if="userPianoPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
+                                    <img v-if="userPianoPhoto" class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userPianoPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -345,7 +345,7 @@
                                         <musora-icon icon-name="electric-guitar" width="50" height="50" />
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> guitar gear</p>
                                     </div>
-                                    <img v-if="userGuitarPhoto" class="tw-w-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
+                                    <img v-if="userGuitarPhoto" class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userGuitarPhoto"
                                         data-drumeo-gear-update="true"
                                     >
@@ -378,7 +378,7 @@
                                         <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> singing gear</p>
                                     </div>
                                     <img v-if="userSingingPhoto" 
-                                        class="tw-w-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
+                                        class="tw-w-full tw-h-full tw-absolute tw-top-0 tw-left-0 tw-object-center tw-object-cover "
                                         :src="userSingingPhoto"
                                         ta-ddarumeo-gear-update="true"
                                     >
