@@ -37,7 +37,7 @@
                         <p class="tw-font-bold">Access Code</p>
                         <input id="accessCodeNew" name="access_code" type="text" class="tw-caret-black"
                                :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.access_code}" autocomplete="off"
-                               spellcheck="false">
+                               spellcheck="false" :disabled="isLoading" >
                         <span v-show="errors.access_code" class="tw-text-xs tw-text-[#EF4444]"
                               v-text="errors.access_code"></span>
                     </div>
@@ -47,7 +47,7 @@
                         <p class="tw-font-bold">Email</p>
                         <input id="emailNew" name="email" type="email" class="tw-caret-black"
                                :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.email}" autocomplete="off"
-                               spellcheck="false">
+                               spellcheck="false" :disabled="isLoading" >
                         <span v-show="errors.email" class="tw-text-xs tw-text-[#EF4444]" v-text="errors.email"></span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         <p class="tw-font-bold">Password <span v-if="isNewAccount">(min. 8 characters)</span></p>
                         <input id="passwordNew" name="password" type="password" class="tw-caret-black"
                                :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.password}" autocomplete="off"
-                               spellcheck="false">
+                               spellcheck="false" :disabled="isLoading" >
                         <span v-show="errors.password" class="tw-text-xs tw-text-[#EF4444]"
                               v-text="errors.password"></span>
                     </div>
@@ -67,7 +67,7 @@
                         <input id="confirmPasswordNew" name="password_confirmation" type="password"
                                class="tw-caret-black"
                                :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.passwordCheck}" autocomplete="off"
-                               spellcheck="false">
+                               spellcheck="false" :disabled="isLoading" >
                         <span v-show="errors.passwordCheck" class="tw-text-xs tw-text-[#EF4444]"
                               v-text="errors.passwordCheck"></span>
                     </div>
@@ -77,6 +77,7 @@
                         class="btn big-text tw-rounded-[25px]"
                         :class="isLoading ? 'tw-bg-[#B2D4F4] tw-text-black' : !isFormValid ? 'tw-bg-[#B91C1C] tw-text-white' : isSubmitted ? 'tw-bg-[#15803D] tw-text-white' : 'tw-bg-drumeo tw-text-white'"
                         type="submit"
+                        :disabled="isLoading"
                     >
                         <span v-show="!isLoading && isFormValid && !isSubmitted">Click To Redeem</span>
                         <span v-show="isLoading"><i class="fa-solid fa-spinner mr-1"></i> Loading</span>
@@ -140,7 +141,7 @@ const closeModal = () => {
     isFormValid.value = true;
     isLoading.value = false;
     isSubmitted.value = false;
-    emit('closeModal')
+    emit('closeModal');
 }
 
 const submitForm = async (event) => {
@@ -219,6 +220,7 @@ const submitForm = async (event) => {
 
         } else {
             isSubmitted.value = true;
+            closeModal();
         }
     }
 }
