@@ -29,16 +29,10 @@
                         class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
                         :processing="formProcessing"
+                        processing-text="Saving..."
                         @click="handleClick"
                     >
                         Save
-                    </MuButton>
-                    <MuButton
-                        @click="handleClose"
-                        style-type="secondary"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                    >
-                        Cancel
                     </MuButton>
                 </div>
             </form>
@@ -75,9 +69,10 @@
         formProcessing.value = true;
         try {
             await userStore.updateSignature(formData.value);
+            handleClose();
         } catch (error) {
             console.error("Failed to update the user signature:", error.message);
+            handleClose();
         }
-        handleClose(); // Close modal
     };
 </script>

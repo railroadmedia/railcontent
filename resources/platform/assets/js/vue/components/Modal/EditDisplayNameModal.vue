@@ -19,8 +19,6 @@
                         label="Display Name"
                         :disabled="formProcessing"
                         required
-                        :error="!formData.display_name.length"
-                        customErrorMessage="Display Name cannot be empty"
                         placeholder="Enter Display Name" 
                         v-model="formData.display_name"
                     />
@@ -29,18 +27,11 @@
                     <MuButton
                         class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        :disabled="!formData.display_name.length"
                         :processing="formProcessing"
+                        processing-text="Saving..."
                         @click="handleClick"
                     >
                         Save
-                    </MuButton>
-                    <MuButton
-                        @click="handleClose"
-                        style-type="secondary"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                    >
-                        Cancel
                     </MuButton>
                 </div>
             </form>
@@ -56,14 +47,15 @@
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
-    const { token, userId, userDisplayName } = storeToRefs(userStore);
+    const { userDisplayName } = storeToRefs(userStore);
 
-    //Refs
+    //Emits
     const emit = defineEmits(['onCloseDisplayNameModal']);
 
+    //Refs
     const formProcessing = ref(false);
     const formData = ref({
-        display_name: userDisplayName.value || '' // Initialize with current displayName or empty string
+        display_name: userDisplayName.value || ''
     });
 
     //Methods
@@ -75,9 +67,9 @@
         formProcessing.value = true;
         try {
             await userStore.updateProfile(formData.value);
+            handleClose(); 
         } catch (error) {
             console.error("Failed to update the display name:", error.message);
         }
-        handleClose(); // Close modal
     };
 </script>

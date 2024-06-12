@@ -70,16 +70,10 @@
                         class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
                         :processing="formProcessing"
+                        processing-text="Saving..."
                         @click="handleClick"
                     >
                         Save
-                    </MuButton>
-                    <MuButton
-                        @click="handleClose"
-                        style-type="secondary"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                    >
-                        Cancel
                     </MuButton>
                 </div>
             </form>
@@ -98,8 +92,6 @@ import { useUserStore } from '../../../stores/user';
 
 const userStore = useUserStore();
 const { 
-    token,
-    userId, 
     userPlayingGuitarSince,
     userGuitarBrands,
     userAmpBrands,
@@ -132,10 +124,10 @@ const submitUserForm = async () => {
     formProcessing.value = true;      
     try {
         await userStore.updateProfile(formData.value);
+        handleClose();
     } catch (error) {
         console.error("Failed to update the display name:", error.message);
     }
-    handleClose(); // Close modal
 };
 </script>
 
