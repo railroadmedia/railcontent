@@ -27,7 +27,7 @@ class Song extends BaseSanityModel
         $genreReference = new Reference('reference', [['type' => 'genre']]);
         $soundsliceReference =  new Reference('reference', [['type' => 'soundslice']]);
         $resourceReference = new Reference('reference', [['type' => 'resource']]);
-        $permissionReference = new Reference('reference', [['type' => 'permission']]);
+        $permissionReference = new Reference('reference', [['type' => 'permission']],options: ['disableNew'=> false]);
 
         $resourceList = new ListObject('object',fields: [new Field(FieldType::String, 'resource_name'),
                         new Field(FieldType::URL, 'resource_url')],preview: ['select' => ['title' => 'resource_name', 'subtitle' => 'resource_url']]
@@ -39,9 +39,10 @@ class Song extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title'],  hidden: "({document}) => !document?.title,"),
+            new BrandField(),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
 
-            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference),
+            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference,  inputComponent: 'RolesBasedArrayInput'),
 
             //TODO we have numbers and text, like 1, 4, all, beginner, etc. What should we do here??
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"
@@ -62,7 +63,7 @@ class Song extends BaseSanityModel
             //TODO reference??
             new Field(FieldType::String, 'transcriber_name', 'Transcribed By'),
             new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless'),
-            new BrandField(),
+
 
             new Field(FieldType::Number, 'length_in_seconds', 'Length', description: 'song length in seconds'),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed'),

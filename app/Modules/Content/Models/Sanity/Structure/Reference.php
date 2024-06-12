@@ -7,7 +7,7 @@ namespace App\Modules\Content\Models\Sanity\Structure;
  */
 class Reference
 {
-    public function __construct(public string $type, public array $to)
+    public function __construct(public string $type, public array $to, public ?array $options = null)
     {
     }
 
@@ -18,9 +18,13 @@ class Reference
      */
     public function toArray(): array
     {
-        return [
+        $reference = [
             'type' => $this->type,
             'to' => [$this->to]
         ];
+        if (!is_null($this->options)) {
+            $reference['options'] = $this->options;
+        }
+        return $reference;
     }
 }
