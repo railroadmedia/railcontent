@@ -284,7 +284,8 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
-            ContentService::STATUS_ARCHIVED
+            ContentService::STATUS_ARCHIVED,
+            ContentService::STATUS_DRAFT
         ];
         ContentRepository::$pullFutureContent = true;
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;

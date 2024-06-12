@@ -81,6 +81,9 @@
                         :resources="resources"
                         content-type="song"
                         :thumbnailUrl="thumbnailUrl"
+                        :report-user-email="userEmail"
+                        :report-user-name="userDisplayName"
+                        :report-logo="reportLogo"
                     />
                 </div>
             </div>
@@ -144,7 +147,7 @@
     import { useUserStore } from '../../../stores/user';
 
     const userStore = useUserStore();
-    const { brand, userId } = storeToRefs(userStore);
+    const { brand, userId, userEmail, userDisplayName } = storeToRefs(userStore);
 
     const props = defineProps({
         isLoading: Boolean,
@@ -161,6 +164,7 @@
         hasInstrumentless: Boolean,
         lessonProgress: [Number, String],
         likeCount: [Number, String],
+        reportLogo: String,
     });
 
     const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});

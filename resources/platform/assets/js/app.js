@@ -39,6 +39,7 @@ import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
+import Search from './vue/Pages/Search';
 import PackOverview from './vue/Pages/PackOverview';
 import PackOverviewBundles from './vue/Pages/PackOverviewBundles';
 
@@ -223,6 +224,7 @@ app.component('AppContainer', AppContainer)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
     .component('GuitareoLessons', GuitareoLessons)
+    .component('Search', Search)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
 
