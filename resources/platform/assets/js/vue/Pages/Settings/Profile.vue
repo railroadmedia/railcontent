@@ -27,8 +27,6 @@
             <div class="tw-flex tw-flex-col tw-grow">
                 <input id="userInfo" type="hidden" :data-user-id="userId">
 
-                <h1 class="tw-text-2xl tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-mt-10 tw-mb-2">Profile Settings</h1>
-
                 <!-- DISPLAY NAME -->
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
                     <div class="tw-flex tw-flex-col tw-grow">

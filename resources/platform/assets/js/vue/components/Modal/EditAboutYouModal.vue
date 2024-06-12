@@ -18,9 +18,6 @@
                         id="firstName" 
                         name="first_name" 
                         label="First Name"
-                        required
-                        title="First Name cannot be empty"
-                        :error="!formData.first_name.length"
                         placeholder="Enter First Name"
                         :disabled="formProcessing" 
                         v-model="formData.first_name"
@@ -30,9 +27,6 @@
                         id="lastName" 
                         name="last_name" 
                         label="Last Name"
-                        required
-                        title="Last Name cannot be empty"
-                        :error="!formData.last_name.length"
                         placeholder="Enter Last Name" 
                         :disabled="formProcessing"
                         v-model="formData.last_name"
@@ -64,18 +58,10 @@
                     <MuButton
                         class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        :disabled="!formData.first_name.length && !formData.last_name"
                         :processing="formProcessing"
-                        @click="handleClick"
+                        processing-text="Saving..."
                     >
                         Save
-                    </MuButton>
-                    <MuButton
-                        @click="handleClose"
-                        style-type="secondary"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-secondary tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                    >
-                        Cancel
                     </MuButton>
                 </div>
             </form>
@@ -84,7 +70,7 @@
 </template>
 
 <script setup>
-    import { ref, onBeforeMount } from 'vue';
+    import { ref } from 'vue';
     import InfoModal from '../Modal/InfoModal.vue';
     import MuInput from "../../components/FormInputs/MuInput.vue"
     import MuSelect from "../../components/FormInputs/MuSelect.vue"
@@ -96,8 +82,6 @@
 
     const userStore = useUserStore();
     const { 
-        token,
-        userId, 
         userFirstName,
         userLastName,
         userCountry,
@@ -131,9 +115,9 @@
         formProcessing.value = true;
         try {
             await userStore.updateProfile(formData.value);
+            handleClose();
         } catch (error) {
             console.error("Failed to update the display name:", error.message);
         }
-        handleClose(); // Close modal
     };
 </script>
