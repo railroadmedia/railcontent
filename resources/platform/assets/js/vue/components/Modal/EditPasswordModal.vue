@@ -86,7 +86,6 @@
     });
 
     //Methods
-    //Methods
     const handleClose = () => {
         emit('onCloseModal');
     };
@@ -98,7 +97,7 @@
             handleClose();
         } catch (error) {
             console.error("Failed to update your password:", error.message);
-            handleClose();
+            formProcessing.value = false;
         }
     };
 </script>

@@ -12,7 +12,7 @@
                 method="POST" 
                 @submit.prevent="submitUserForm"
             >
-                <div class="tw-flex tw-flex-col tw-mb-4">
+                <div class="tw-grid tw-grid-cols-1 tw-gap-3 tw-mb-4">
                     <MuInput 
                         type="email"
                         id="loginEmail" 
@@ -20,10 +20,22 @@
                         label="Login Email"
                         :disabled="formProcessing"
                         required
-                        title="Please enter a valid email address"
                         placeholder="Enter Email" 
                         v-model="formData.email"
+                        title="Please enter a valid email address"
                         pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                    />
+                    <MuInput 
+                        type="password"
+                        id="userPassword" 
+                        name="user_password" 
+                        label="Confirm Password"
+                        :disabled="formProcessing"
+                        required
+                        placeholder="Enter Current Password" 
+                        v-model="formData.user_password"
+                        pattern="^.{8,}$"
+                        title="Password must be 8 characters"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
@@ -52,12 +64,13 @@
     const userStore = useUserStore();
     const { userEmail } = storeToRefs(userStore);
 
-    const emit = defineEmits(['onCloseModal']);
+    const emit = defineEmits(['onCloseModal', 'onSuccess']);
 
     //Refs
     const formProcessing = ref(false);
     const formData = ref({
-        email: userEmail.value || ''
+        email: userEmail.value || '',
+        user_password: '',
     });
 
     //Methods
@@ -69,10 +82,11 @@
         formProcessing.value = true;
         try {
             await userStore.updateEmail(formData.value);
+            emit('onSuccess')
             handleClose();
         } catch (error) {
             console.error("Failed to update your email:", error.message);
-            handleClose();
+            formProcessing.value = false;
         }
     };
 </script>

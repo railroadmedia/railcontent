@@ -43,10 +43,13 @@
                                 <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Email</h6>
                                 <p class="">{{ userEmail }}</p>
                             </div>
+                            <p v-if="showEmailSuccessMessage" class="tw-text-sm tw-text-[#8c9698] tw-italic tw-mt-3 dark:tw-text-[#9EC0DC]">
+                                An email confirmation link has been sent to your new email address.
+                            </p>
                         </div>
                     </div>
                     <!-- Display Name Modal -->
-                    <EditEmailModal v-if="showEmailModal" @onCloseModal="handleShowEmailModal" />
+                    <EditEmailModal v-if="showEmailModal" @onCloseModal="handleShowEmailModal" @onSuccess="showEmailSuccessMessage = true" />
                 </section>
 
                 <!-- PASSWORD -->
@@ -76,7 +79,7 @@
     </div>
 </template>
 <script setup>
-    import { computed, ref, onBeforeMount } from "vue";
+    import { ref } from "vue";
     import { storeToRefs } from "pinia/dist/pinia";
     import { useUserStore } from "../../../stores/user";
     import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
@@ -97,14 +100,10 @@
         userCompletedAccount 
     } = storeToRefs(userStore);   
 
-    //Props
-    const props = defineProps({
-
-    })
-
     //Computed
 
     //Refs
+    const showEmailSuccessMessage = ref(false);
     const accountPages = ref([
         {
             name: 'Profile',

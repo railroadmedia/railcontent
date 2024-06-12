@@ -252,18 +252,20 @@ export const useUserStore = defineStore({
 
     async updateEmail(data) {
       try {
-          const response = await updateLoginEmail(this.token, this.userId, data);
-          //Signature
-          data.hasOwnProperty('email') && (this.user.email = data.email);
+          const response = await updateLoginEmail(this.token, data);
+          const responseMessage = response.data;
+          //Email
+          //data.hasOwnProperty('email') && (this.user.email = data.email);
           window.shownotification({
               icon: 'check',
-              text: 'Email successfully updated!'
+              text: `Success! ${responseMessage}`
           });
           return response;
       } catch (error) {
+          const errorMessage = error.response?.data?.error || 'An unexpected error occurred.';
           window.shownotification({
             icon: 'error',
-            text: 'Hmm, something has gone wrong. Your email could not be updated.'
+            text: `Your email could not be updated. ${errorMessage}`
           });
           throw new Error('Failed to update email');
       }
@@ -271,20 +273,19 @@ export const useUserStore = defineStore({
 
     async updatePassword(data) {
       try {
-          const response = await updateLoginPassword(this.token, this.userId, data);
-          //Signature
-          data.hasOwnProperty('email') && (this.user.email = data.email);
+          const response = await updateLoginPassword(this.token, data);
           window.shownotification({
               icon: 'check',
-              text: 'Email successfully updated!'
+              text: 'Password successfully updated!'
           });
           return response;
       } catch (error) {
+          const errorMessage = error.response?.data?.error || 'An unexpected error occurred.';
           window.shownotification({
             icon: 'error',
-            text: `Your email could not be updated. ${error.message}`
+            text: `Your password could not be updated. ${errorMessage}`
           });
-          throw new Error('Failed to update email');
+          throw new Error('Failed to update password');
       }
     },
 
