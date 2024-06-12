@@ -63,7 +63,7 @@
                         <div class="tw-flex tw-flex-col">
                             <div class="tw-flex tw-flex-row tw-flex-auto tw-mb-2 tw-w-full tw-text-[#00101D] dark:tw-text-white">
                                 <h6 class="tw-font-bold tw-w-[200px] tw-flex-shrink-0">Current Password</h6>
-                                <p class="">********</p>
+                                <p class="">••••••••</p>
                             </div>
                         </div>
                     </div>
