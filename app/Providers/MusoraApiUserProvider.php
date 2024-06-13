@@ -69,26 +69,6 @@ class MusoraApiUserProvider implements UserProviderInterface
         $isAppleAppSubscriber = $user->has_apple_subscription;
         $isGoogleAppSubscriber = $user->has_google_subscription;
 
-        $hasExperience = user()->onboardingExperience ? true : false;
-
-        $hasGear = count(
-            user()->onboardingGear->filter(function ($item) use ($user) {
-                return $item->brand == $user->last_used_brand;
-            })
-        ) > 0;
-
-        $hasTopics = count(
-            user()->onboardingTopics->filter(function ($item) use ($user) {
-                return $item->brand == $user->last_used_brand;
-            })
-        ) > 0;
-
-        $hasGenres = count(
-            user()->onboardingGenres->filter(function ($item) use ($user) {
-                return $item->brand == $user->last_used_brand;
-            })
-        ) > 0;
-
         $extraData = [
             'customer_io_id' => user()->email,
         ];
@@ -110,7 +90,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
             'is_lifetime_member' => $user->is_lifetime_member,
-            'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience),
+            'show_onboarding' => !$user->hasCompletedOnboarding(),
             'access_level' => $user->access_level,
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),

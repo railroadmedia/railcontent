@@ -2,7 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
-use Carbon\Carbon;
+use App\Modules\UserManagementSystem\Services\UserAuthenticationService;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -23,6 +23,89 @@ class AuthenticationController extends Controller
     use AuthorizesRequests;
     use ValidatesRequests;
 
+    public function __construct(private readonly UserAuthenticationService $userAuthenticationService)
+    {
+    }
+
+    /*******************************************************************************************************************
+     * New web log in flow
+     ******************************************************************************************************************/
+    public function checkEmail(Request $request): JsonResponse
+    {
+        ['email' => $email] = $request->validate([
+            'email' => 'required|email|exists:usora_users,email',
+        ]);
+
+        /** @var User $user */
+        $user = User::firstWhere('email', $email);
+
+        if (!$user->isAccountSetup()) {
+            $this->userAuthenticationService->sendSetupAccountEmail($user);
+
+            return response()->json([
+                'message' => 'User requires password update. Email sent to user.',
+                'is_setup' => false,
+                'links' => [
+                    'resend-email' => route('user_management_system.login.send-account-setup-email'),
+                ],
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'success',
+            'is_setup' => true,
+            'links' => [
+                'login' => route('user_management_system.login'),
+            ],
+        ], 200);
+    }
+
+    public function sendAccountSetupEmail(Request $request): JsonResponse
+    {
+        ['email' => $email] = $request->validate([
+            'email' => 'required|email|exists:usora_users,email',
+        ]);
+
+        /** @var User $user */
+        $user = User::firstWhere('email', $email);
+
+        $this->userAuthenticationService->sendSetupAccountEmail($user);
+        return response()->json();
+    }
+
+    /**
+     * @throws AuthenticationException
+     */
+    public function login(Request $request): JsonResponse
+    {
+        ['email' => $email, 'password' => $password] = $request->validate([
+            'email' => 'required|email|exists:usora_users,email',
+            'password' => 'required|string',
+        ]);
+
+        $remember = config('user_management_system.force_remember', false) || (bool)$request->get('remember', false);
+
+        $request->attributes->set('remember', $remember);
+
+        if ($this->userAuthenticationService->authenticate($email, $password)) {
+            $user = User::firstWhere('email', $email);
+
+            auth()->login($user, $remember);
+
+            $this->authenticated($user, $password);
+
+            return response()->json();
+        }
+
+        return response()->json([
+            'message' => 'Invalid credentials',
+        ], 401);
+    }
+
+
+    /*******************************************************************************************************************
+     * Old web log in flow
+     ******************************************************************************************************************/
     /**
      * @param  Request  $request
      * @return JsonResponse|RedirectResponse
@@ -44,15 +127,17 @@ class AuthenticationController extends Controller
             return redirect()
                 ->to(
                     config('user_management_system.login_page_path') .
-                    ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
+                        ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
                 )
                 ->withErrors($exception->errors());
         }
 
         $remember = false;
 
-        if (config('user_management_system.force_remember', false) == true ||
-            (bool)$request->get('remember', false) == true) {
+        if (
+            config('user_management_system.force_remember', false) == true ||
+            (bool)$request->get('remember', false) == true
+        ) {
             $remember = true;
         }
 
@@ -66,7 +151,7 @@ class AuthenticationController extends Controller
 
             auth()->login($user, $remember);
 
-            $this->authenticated($request, $user);
+            $this->authenticated($user, $request->get('password'));
 
             return redirect()->away($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
@@ -74,7 +159,7 @@ class AuthenticationController extends Controller
         return redirect()
             ->to(
                 config('user_management_system.login_page_path') .
-                ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
+                    ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -95,7 +180,7 @@ class AuthenticationController extends Controller
         return redirect()
             ->to(
                 config('user_management_system.login_page_path') .
-                ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
+                    ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -149,8 +234,10 @@ class AuthenticationController extends Controller
 
         $remember = false;
 
-        if (config('user_management_system.force_remember', false) == true ||
-            (bool)$request->get('remember', false) == true) {
+        if (
+            config('user_management_system.force_remember', false) == true ||
+            (bool)$request->get('remember', false) == true
+        ) {
             $remember = true;
         }
 
@@ -164,7 +251,7 @@ class AuthenticationController extends Controller
 
             auth()->login($user, $remember);
 
-            $this->authenticated($request, $user);
+            $this->authenticated($user, $request->get('password'));
 
             event(
                 new MobileAppLogin($user, $request->get('firebase_token'), $request->get('platform'))
@@ -260,12 +347,12 @@ class AuthenticationController extends Controller
      * @return void
      * @throws AuthenticationException
      */
-    private function authenticated(Request $request, User $user): void
+    private function authenticated(User $user, string $password): void
     {
         if ($user->needs_logout) {
             Log::info("User $user->id has authenticated for the first time after needing to log out. Logging user out of other devices.");
             $user->update(['needs_logout' => false]);
-            Auth::guard('user-management-system')->logoutOtherDevices($request->get('password'));
+            Auth::guard('user-management-system')->logoutOtherDevices($password);
         }
 
         event(new UserEvent($user->id, 'authenticated'));
