@@ -17,13 +17,8 @@
         current-date="{{ $currentDate }}"
         event-coach-profile-url="{{ $eventCoachProfileUrl }}"
         :exists-cohort-banner="{{ $existsCohortBanner ? 'true' : 'false' }}"
-        :has-experience="{{ $hasExperience ? 'true' : 'false' }}"
-        :has-gear="{{ $hasGear ? 'true' : 'false' }}"
-        :has-genres="{{ $hasGenres ? 'true' : 'false' }}"
-        :has-goals="{{ $hasGoals ? 'true' : 'false' }}"
         :has-started-content="{{ $hasStartedLessons ? 'true' : 'false' }}"
         :has-started-lessons="{{ $hasStartedLessons ? 'true' : 'false' }}"
-        :has-topics="{{ $hasTopics ? 'true' : 'false' }}"
         :has-upcoming-events="{{ $hasUpcomingEvents ? 'true' : 'false' }}"
         @if(count($hotForumTopics) > 0) 
             :conversation-data="{{ json_encode($hotForumTopics) }}"

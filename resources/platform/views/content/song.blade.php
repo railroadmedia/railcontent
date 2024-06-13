@@ -1,15 +1,7 @@
 @extends('partials.layout')
 
-@php
- //dd(json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])));
-@endphp
-
 @section('meta')
     <title>{{ $lessonContent->fetch('fields.title') }} | Musora</title>
-@endsection
-
-@section('inject-components')
-    <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
 @endsection
 
 @section('content')

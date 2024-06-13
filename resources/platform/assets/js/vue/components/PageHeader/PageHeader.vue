@@ -1,9 +1,16 @@
 <template>
   <PageHeaderLayout>
     <template #top-left>
-      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo"
-        :infoData="isSongsPage || isPlaylistsPage ? null : infoData">
+      <PageHeaderHero 
+        :pageType="pageType"
+        :iconName="iconName" 
+        :title="title" 
+        :subTitle="subTitle" 
+        :heroImg="heroImg"
+        :heroImgClasses="heroImgClasses" 
+        :additionalImgSrc="logo"
+        :infoData="isSongsPage || isPlaylistsPage ? null : infoData"
+      >
         <template #header-description v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
@@ -89,8 +96,8 @@ const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.props?.isPrim
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
-const isDashboardPage = computed(() => props.pageType === 'dashboard')
-const isNotificationsPage = computed(() => props.pageType === 'notifications')
+const isSettingsPage = computed(() => props.pageType === 'settings');
+const isNotificationsPage = computed(() => props.pageType === 'notifications');
 
 const isCoachPage = computed(() => props.pageType === 'instructor')
 const isCoursePage = computed(() => props.pageType === 'course')

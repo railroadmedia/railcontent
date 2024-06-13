@@ -41,7 +41,7 @@
         "railroad/railanalytics": "3.0.*",
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "2.1.*",
-        "railroad/railforums": "2.0.*",
+        "railroad/railforums": "dev-FEW-213-signature-json-api as v2.0.26",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
         "railroad/referral": "3.0.*",
@@ -58,7 +58,15 @@
         "symfony/mailgun-mailer": "^6.0",
         "venturecraft/revisionable": "1.*",
         "vimeo/vimeo-api": "^3.0",
-        "whitecube/nova-flexible-content": "^1.0"
+        "whitecube/nova-flexible-content": "^1.0",
+        "lcobucci/clock": "3.0.0",
+        "symfony/css-selector": "6.4.*",
+        "symfony/options-resolver": "6.4.*",
+        "symfony/psr-http-message-bridge": "6.4.*",
+        "symfony/string": "6.4.*",
+        "symfony/var-exporter": "6.4.*",
+        "symfony/filesystem": "6.4.*",
+        "symfony/stopwatch": "6.4.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
