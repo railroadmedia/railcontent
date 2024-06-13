@@ -133,18 +133,18 @@
                         x-data="{ move: false }" @mouseover="move = true" @mouseout="move = false" @click="trailer = true;">
                          &nbsp;Watch Trailer
                     </div>
-                    <a class="w-5/12 join smaller text-white  m-2 anchor-slide" href="#final">ENROLL NOW</a>
-{{--                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>--}}
+{{--                    <a class="w-5/12 join smaller text-white  m-2 anchor-slide" href="#final">ENROLL NOW</a>--}}
+                    <a class="w-5/12 join sold-out smaller text-white m-2">ENROLLMENT CLOSED</a>
                 </div>
-                <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>
-                    <strong x-cloak x-data="timer()" x-init="countdown()">
-                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                        <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                    </strong>
-                </p>
+{{--                <p class="uppercase text-sm text-guitareo">Enrollment closes in<br>--}}
+{{--                    <strong x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                    </strong>--}}
+{{--                </p>--}}
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.65)"></div>
@@ -285,15 +285,15 @@
             </div>
         </div>
         <h1 class="leading-none sm:-mt-8  sm:mb-8 text-5xl"><i class="fal fa-angle-down text-guitareo"></i></h1>
-        <div class="flex justify-center py-4">
-            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2 anchor-slide" href="#final">ENROLL NOW</a>
-        </div>
-        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
-            loading="lazy" onload="this.classList.remove('opacity-0')"
-            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-            alt="Image of joined student profiles">
-        <p class="inline-block leading-tight text-sm align-middle text-left">Join
-            {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
+{{--        <div class="flex justify-center py-4">--}}
+{{--            <a class="w-full md:w-1/3 lg:w-1/4 join smaller text-white bg-guitareo m-2 anchor-slide" href="#final">ENROLL NOW</a>--}}
+{{--        </div>--}}
+{{--        <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
+{{--            loading="lazy" onload="this.classList.remove('opacity-0')"--}}
+{{--            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
+{{--            alt="Image of joined student profiles">--}}
+{{--        <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
+{{--            {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background: #111729">
@@ -399,13 +399,13 @@
                     <i class="fas fa-check text-guitareo mr-5"></i> 90-Day Money Back Guarantee
                 </h4>
             </div>
-            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
-            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
-                loading="lazy" onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles">
-            <p class="inline-block leading-tight text-sm align-middle text-left">Join
-                {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
+{{--            <a href="#final" class="join smaller w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>--}}
+{{--            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
+{{--                loading="lazy" onload="this.classList.remove('opacity-0')"--}}
+{{--                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
+{{--                alt="Image of joined student profiles">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
+{{--                {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
         </div>
     </section>
 
@@ -437,15 +437,15 @@
                     <p>His teaching philosophy is about bringing out the best in his students and fostering a love of music. He strives to make sure that music lessons are fun. He enjoys sharing music with his students and celebrating their achievements.</p>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="#final" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>
-                <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
-                    loading="lazy" onload="this.classList.remove('opacity-0')"
-                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                    alt="Image of joined student profiles">
-                <p class="inline-block leading-tight text-sm align-middle text-left">Join
-                    {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>
-            </div>
+{{--            <div class="text-center">--}}
+{{--                <a href="#final" class="join smaller w-3/4 sm:w-1/2  mb-3 sm:mb-5 anchor-slide">ENROLL NOW</a><br>--}}
+{{--                <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"--}}
+{{--                    loading="lazy" onload="this.classList.remove('opacity-0')"--}}
+{{--                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"--}}
+{{--                    alt="Image of joined student profiles">--}}
+{{--                <p class="inline-block leading-tight text-sm align-middle text-left">Join--}}
+{{--                    {{ number_format($nPackOwners ?? 0) }} guitarists who<br> have already registered.</p>--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -477,61 +477,55 @@
                 alt="30 day independence logo">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>20 Guided Play-Along Lessons</strong></h2>
 
-            <!-- Version 1 -->
-            <h6 class="leading-normal mb-4 text-guitareo">
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                    Enrollment closes in
-                    <strong x-cloak x-show="timeLeft > 0">
-                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!
-                    </strong>
-                    <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>
-                </span>
-            </h6>
+{{--            <h6 class="leading-normal mb-4 text-guitareo">--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                    Enrollment closes in--}}
+{{--                    <strong x-cloak x-show="timeLeft > 0">--}}
+{{--                        <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>!--}}
+{{--                    </strong>--}}
+{{--                    <span x-cloak x-show="timeLeft < 0">A Limited Time!</span>--}}
+{{--                </span>--}}
+{{--            </h6>--}}
 
-            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0" loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/900x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/joined-profiles.png"
-                alt="Image of joined student profiles in 30-Day Independence">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }}
-                guitarists who<br class="sm:hidden"> have already registered.</p>
+            <span class="join sold-out medium  align-middle mt-7">ENROLLMENT CLOSED</span>
 
-            @include('drumeo.products.partials._promo-cards', [
-                'firstDeal' => '30 Days To <br>Better Strumming',
-                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course.webp',
-                'firstImageHeight' => 'h-36 lg:h-44',
-                'firstDealPrice' => 97,
-                'firstDealSub' => 'Just the course',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',
-                'firstButtonText' => 'ENROLL NOW',
-                'firstDealExtra' => "One-time payment",
-                'whiteBg' => 'false',
-                'firstExtraBonuses' => [
-                    '20 Guided Play-Along Lessons',
-                    'Lifetime Course Access',
-                    '90-Day Money Back Guarantee',
-                ],
+{{--            @include('drumeo.products.partials._promo-cards', [--}}
+{{--                'firstDeal' => '30 Days To <br>Better Strumming',--}}
+{{--                'firstDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/540x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course.webp',--}}
+{{--                'firstImageHeight' => 'h-36 lg:h-44',--}}
+{{--                'firstDealPrice' => 97,--}}
+{{--                'firstDealSub' => 'Just the course',--}}
+{{--                'firstDealLink' => '/ecommerce/add-to-cart?products[30-days-to-better-strumming]=1',--}}
+{{--                'firstButtonText' => 'ENROLL NOW',--}}
+{{--                'firstDealExtra' => "One-time payment",--}}
+{{--                'whiteBg' => 'false',--}}
+{{--                'firstExtraBonuses' => [--}}
+{{--                    '20 Guided Play-Along Lessons',--}}
+{{--                    'Lifetime Course Access',--}}
+{{--                    '90-Day Money Back Guarantee',--}}
+{{--                ],--}}
 
-                'topBadge' => 'MOST POPULAR',
-                'secondDeal' => 'Unlimited<br> Lessons',
-                'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course-bundle2.webp',
-                'secondImageHeight' => 'h-36 lg:h-44',
-                'secondDealSub' => "1 Year Of Guitareo + 3 Bonuses Worth $341",
-                'secondDealPrice' => '20</strong>/mo<strong>',
-                'secondDealLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',
-                'secondExtraBonuses' => [
-                    '<strong class="font-black">1 year of Unlimited Lessons</strong>',
-                    '<strong class="font-black">Lifetime Access to 30 Days To Better Strumming</strong>',
-                    '<strong class="font-black">Lifetime Access to Rhythm & Groove</strong>',
-                    '<strong class="font-black">Lifetime Access to Guitar Quest</strong>',
-                    'Lessons for the Guitar, Piano, Drums & Singing',
-                    '90-Day Money Back Guarantee',
-                ],
-                'secondButtonText' => 'GET EVERYTHING',
-                'secondDealExtra' => "Billed annually at $240/yr.",
-            ])
+{{--                'topBadge' => 'MOST POPULAR',--}}
+{{--                'secondDeal' => 'Unlimited<br> Lessons',--}}
+{{--                'secondDealImage' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/650x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/course-bundle2.webp',--}}
+{{--                'secondImageHeight' => 'h-36 lg:h-44',--}}
+{{--                'secondDealSub' => "1 Year Of Guitareo + 3 Bonuses Worth $341",--}}
+{{--                'secondDealPrice' => '20</strong>/mo<strong>',--}}
+{{--                'secondDealLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[30-days-to-better-strumming]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',--}}
+{{--                'secondExtraBonuses' => [--}}
+{{--                    '<strong class="font-black">1 year of Unlimited Lessons</strong>',--}}
+{{--                    '<strong class="font-black">Lifetime Access to 30 Days To Better Strumming</strong>',--}}
+{{--                    '<strong class="font-black">Lifetime Access to Rhythm & Groove</strong>',--}}
+{{--                    '<strong class="font-black">Lifetime Access to Guitar Quest</strong>',--}}
+{{--                    'Lessons for the Guitar, Piano, Drums & Singing',--}}
+{{--                    '90-Day Money Back Guarantee',--}}
+{{--                ],--}}
+{{--                'secondButtonText' => 'GET EVERYTHING',--}}
+{{--                'secondDealExtra' => "Billed annually at $240/yr.",--}}
+{{--            ])--}}
         </div>
     </section>
 

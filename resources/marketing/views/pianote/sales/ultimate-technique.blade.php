@@ -4,12 +4,12 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Save 60% with the  Ultimate Technique Bundle. | Pianote</title>
-    <meta property="og:title" content="Save 60% with the  Ultimate Technique Bundle">
+    <title>Save 65% with the Ultimate Technique Bundle. | Pianote</title>
+    <meta property="og:title" content="Save 65% with the Ultimate Technique Bundle">
     <meta property="og:url" content="https://www.pianote.com/song-secrets-bonus">
 
-    <meta name="description" content="$177 for your first year!">
-    <meta property="og:description" content="$177 for your first year!">
+    <meta name="description" content="$143 for your first year!">
+    <meta property="og:description" content="$143 for your first year!">
 
     <meta property="og:image"
         content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/may/share-image-technique-bundle.jpg"
@@ -213,14 +213,14 @@
 
     @php
         $buttonLink =
-            '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[digital-chords-scales-guide]=1&products[piano-technique-made-easy]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&redirect=/order&locked=true&promo-code=special-discount';
+            '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-technique-made-easy]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&redirect=/order&locked=true&promo-code=ultimate-technique';
     @endphp
 
     <section
         class="py-8 sm:py-10 lg:py-12 relative overflow-hidden text-center customize px-4 lg:px-8 relative overflow-hidden"
         style="background: #f6f8fc;">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="w-auto leading-tight text-center"><strong class="text-pianote">Save 60% </strong>with the<br>
+            <h2 class="w-auto leading-tight text-center"><strong class="text-pianote">Save 65% </strong>with the<br>
                 <strong>Ultimate Technique Bundle</strong>
             </h2>
 
@@ -247,7 +247,7 @@
                 <div class="flex w-full p-6 sm:p-0 justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5">
                     <img class="sm:h-auto max-w-full sm:max-w-sm lg:max-w-full transition-opacity opacity-0" loading="lazy"
                         onload="this.classList.remove('opacity-0')"
-                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/may/header.webp"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/may/header2.webp"
                         alt="{{ $theme }} collage image">
                 </div>
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-auto flex-shrink-0">
@@ -262,11 +262,11 @@
                             <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Detailed song
                                 tutorials</li>
                             <li class="leading-tight mb-2"><i class="fa-li fas fa-check text-pianote"></i> Live support</li>
-                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 3 FREE Bonuses</li>
+                            <li class="leading-tight"><i class="fa-li fas fa-check text-pianote"></i> 2 FREE Bonuses</li>
                         </ul>
                     </div>
                     <div class="w-72 lg:w-72 mx-auto sm:mx-0">
-                        <h2 class="leading-tight"><s class="opacity-50">$446</s> <strong>$177</strong>
+                        <h2 class="leading-tight"><s class="opacity-50">$407</s> <strong>$143</strong>
                         </h2>
                         <p><em class="text-sm">For your first year then $240/yr.</em></p>
                     </div>
@@ -288,7 +288,6 @@
 
             @php
                 $images = [
-                    'https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
                     'https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
                     'https://d21q7xesnoiieh.cloudfront.net/fit-in/460x0/filters:quality(95)/marketing/pianote/promos/may/improv-musical-freedom.jpg',
                 ];
@@ -497,7 +496,7 @@
         <section class="py-14 sm:py-16 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
             <div class="container mx-auto relative z-50  max-w-5xl ">
                 <div class="w-full">
-                    <h2 class="leading-tight mb-4"><strong class="text-pianote">Save 60% </strong>with <br>the Ultimate
+                    <h2 class="leading-tight mb-4"><strong class="text-pianote">Save 65% </strong>with <br>the Ultimate
                         Technique Bundle.</h2>
                     <p class="text-musora uppercase pb-4 md:pb-8">
                         <strong><em>
@@ -561,13 +560,6 @@
 
                     @php
                         $bonuses = [
-                            [
-                                'image' => 'marketing/pianote/membership/homepage/2024/bonus-chords-scales.webp',
-                                'title' => 'Chords & <br>Scales Book',
-                                'description' => 'Your encyclopedia of piano chords & scales.',
-                                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                                'shipping' => 'true',
-                            ],
                             [
                                 'image' => 'marketing/pianote/membership/homepage/2024/piano-technique-made-easy.webp',
                                 'title' => 'Piano Technique<br> Made Easy',
@@ -696,8 +688,8 @@
                     </div>
                 </div>
                 <h3 class="leading-tight mt-6 mb-1">
-                    <s class="opacity-50">$446</s>
-                    <strong>$177</strong> <span class="text-musora">(Save 60%)</span>
+                    <s class="opacity-50">$407</s>
+                    <strong>$143</strong> <span class="text-musora">(Save 65%)</span>
                 </h3>
                 <p class="text-sm mb-4 sm:mb-6">For your first year, then $240/yr.</p>
                 <a class="join mb-2 w-full sm:max-w-xs md:max-w-lg" style="padding: 16px 10px;"

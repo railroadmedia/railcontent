@@ -90,6 +90,7 @@ const submitUserForm = async () => {
         handleClose();
     } catch (error) {
         console.error("Failed to update the display name:", error.message);
+        formProcessing.value = false;
     }
 
 };

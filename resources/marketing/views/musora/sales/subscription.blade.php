@@ -614,8 +614,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/musora/membership/homepage/2024/devices2.webp',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277?platform=iphone',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
 
     @include('musora._partials._faq')

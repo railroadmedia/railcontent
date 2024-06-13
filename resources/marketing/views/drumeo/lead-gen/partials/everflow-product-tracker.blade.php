@@ -1,7 +1,8 @@
 <script type='text/javascript' src='https://www.mcqn3fgtrk.com/scripts/sdk/everflow.js'></script>
 <script type='text/javascript'>
-    var addToCartText = 'add-to-cart';
-    var advertiserId =  "{{ config('railanalytics.drumeo.production.providers.everflow.brand_id') }}"
+    const addToCartText = 'add-to-cart';
+    const advertiserId = "{{ config('railanalytics.drumeo.production.providers.everflow.brand_id') }}";
+    const efTransactionKey = '_ef_transaction_id';
 
     window.onload = function() {
         var elems = document.body.getElementsByTagName("a");
@@ -9,23 +10,23 @@
             EF.click({
                 offer_id: EF.urlParameter('oid'),
                 affiliate_id: EF.urlParameter('affid'),
-                transaction_id: EF.urlParameter('_ef_transaction_id'),
+                transaction_id: EF.urlParameter(efTransactionKey),
             }).then(function(transaction_id){
                 console.log(transaction_id);
                 for (var i = 0; i < elems.length; i++){
-                    if (elems[i].href.includes(addToCartText)) {
-                        var url = new URL(elems[i].href);
-                        url.searchParams.set('_ef_transaction_id', transaction_id);
-                        elems[i].href = url.href
+                    if (elems[i].href.includes(addToCartText) && !elems[i].href.includes(efTransactionKey)) {
+                        var href = elems[i].href;
+                        var separator = href.includes('?') ? '&' : '?';
+                        elems[i].href = href + separator + efTransactionKey + '=' + transaction_id;
                     }
                 }
             });
         } else {
             for (var i = 0; i < elems.length; i++){
-                if (elems[i].href.includes(addToCartText)) {
-                    var url = new URL(elems[i].href);
-                    url.searchParams.set('_ef_transaction_id', EF.getAdvertiserTransactionId(advertiserId));
-                    elems[i].href = url.href
+                if (elems[i].href.includes(addToCartText) && !elems[i].href.includes(efTransactionKey)) {
+                    var href = elems[i].href;
+                    var separator = href.includes('?') ? '&' : '?';
+                    elems[i].href = href + separator + efTransactionKey + '=' + EF.getAdvertiserTransactionId(advertiserId);
                 }
             }
         }

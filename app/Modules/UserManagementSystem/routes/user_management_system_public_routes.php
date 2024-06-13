@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Controllers\AuthenticationController;
 use Modules\UserManagementSystem\Controllers\ForgotPasswordController;
-use Modules\UserManagementSystem\Controllers\OnboardingController;
 use Modules\UserManagementSystem\Controllers\ResetPasswordController;
 use Modules\UserManagementSystem\Controllers\UserController;
 
@@ -24,6 +23,19 @@ Route::group(
             UserController::class . '@createUserWithVerificationToken',
         )
             ->name('user_management_system.create-account-submit');
+
+        /**
+         * New web log in flow.
+         */
+        Route::post('login/check-email', [AuthenticationController::class, 'checkEmail'])
+            ->name('user_management_system.login.check-email');
+
+        Route::post('login', [AuthenticationController::class, 'login'])
+            ->name('user_management_system.login');
+
+        Route::post('login/send-setup-email', [AuthenticationController::class, 'sendAccountSetupEmail'])
+            ->name('user_management_system.login.send-account-setup-email');
+
 
         /*
          * Authentication

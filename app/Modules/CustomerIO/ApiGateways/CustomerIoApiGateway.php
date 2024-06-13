@@ -414,7 +414,7 @@ class CustomerIoApiGateway
         string $email
     ): void {
         $url = 'https://track.customer.io/api/v1/customers/' . $email . '/unsuppress';
-        $method = 'PUT';
+        $method = 'POST';
 
         $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
 

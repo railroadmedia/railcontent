@@ -72,6 +72,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         'lets-stay-together',
         'lifetime-members-masterclass',
         'preferences',
+        'ugwpreferences',
         'quick-drummer-survey',
         'recitals',
         'subscribed',
