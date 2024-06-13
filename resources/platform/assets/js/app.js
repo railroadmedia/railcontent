@@ -488,6 +488,21 @@ app.directive('click-outside', {
 
 app.directive("maska", vMaska)
 
+app.directive('teleport-first', {
+    mounted(el, binding) {
+      const target = document.querySelector(binding.value);
+      if (target) {
+        target.insertBefore(el, target.firstChild);
+      }
+    },
+    updated(el, binding) {
+      const target = document.querySelector(binding.value);
+      if (target && target.firstChild !== el) {
+        target.insertBefore(el, target.firstChild);
+      }
+    }
+});
+
 const pinia = createPinia();
 // app.use(router);
 

@@ -238,7 +238,7 @@ onUpdated(() => {
       @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->
-    <div v-if="!isOnboarding" class="
+    <div id="page-container" v-if="!isOnboarding" class="
         tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
         dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
         tw-overflow-hidden

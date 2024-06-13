@@ -1,36 +1,17 @@
 <template>
-    <div class="tw-flex tw-flex-row  tw-flex-wrap -tw-mx-[10px]">
-        <RoutineCard
-            v-for="(item, i) in content"
-            :key="'grid' + item.id"
-            :item="item"
-            @addToList="addToList"
-            @showRoutineSoundSlice="showRoutineSoundSlice"
-        />
-
-        <SoundSlice
-            :user-id="userId"
-            :theme-color="themeColor"
-            :soundslice-slug="state.soundSliceSlug"
-            :contentId="state.routineId"
-        >
-            <template v-slot:soundsliceControls>
-                <SoundSliceControls
-                    :title="`${state.routineTitle}`"
-                    :disable-next="true"
-                    :disable-prev="true"
-                    @onClose="soundSliceClosed"
-                />
-            </template>
-        </SoundSlice>
-<!--        <SoundSlice-->
-<!--            :sound-slice-slug="state.soundSliceSlug"-->
-<!--            :theme-color="themeColor"-->
-<!--            :title="state.routineTitle"-->
-<!--            :content-id="state.routineId"-->
-<!--            :user-id="userId"-->
-<!--            @soundSliceClosed="soundSliceClosed"-->
-<!--        />-->
+    <div class="tw-flex tw-flex-row tw-flex-wrap -tw-mx-[10px]">
+        <div v-if="state.soundSliceSlug" class="tw-absolute tw-w-full tw-h-full" v-teleport-first="'#page-container'" :style="{ zIndex: '1000'}">
+            <SoundSlice :key="`soundslice-${state.routineId}-${state.soundSliceSlug}`"
+                :user-id="userId" :theme-color="themeColor" :soundslice-slug="state.soundSliceSlug"
+                :contentId="state.routineId">
+                <template v-slot:soundsliceControls>
+                    <SoundSliceControls :title="`${state.routineTitle}`" :disable-next="true" :disable-prev="true"
+                        @onClose="soundSliceClosed" />
+                </template>
+            </SoundSlice>
+        </div>
+        <RoutineCard v-for="(item, i) in content" :key="'grid' + item.id" :item="item" @addToList="addToList"
+            @showRoutineSoundSlice="showRoutineSoundSlice" />
     </div>
 </template>
 <script setup>
