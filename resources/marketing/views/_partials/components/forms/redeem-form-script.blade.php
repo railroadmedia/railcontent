@@ -25,8 +25,9 @@
                 const form = event.target;
 
                 //validation
-                const access_code = form.access_code.value;
-                if (!access_code.replaceAll(' ', '') || access_code.length < 24) {
+                let access_code = form.access_code.value;
+                access_code = access_code.replaceAll(' ', '');
+                if (!access_code || access_code.length < 24) {
                     this.errors.access_code = 'Code is not valid.';
                 }
 
