@@ -86,7 +86,7 @@
     <LoginModal :api="loginApi" :is-modal-open="isLoginModalOpen" @open-redeem-modal="openRedeemModal" @close-modal="closeLoginModal"></LoginModal>
 </template>
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import DrummersToolChapter from '../components/DrummersToolChapter/DrummersToolChapter';
 import RedeemModal from '../components/RedeemModal/RedeemModal';
 import LoginModal from '../components/RedeemModal/LoginModal';
@@ -147,8 +147,4 @@ const openRedeemModal = () => {
         isRedeemModalOpen.value = true;
     }, 500)
 }
-
-onMounted(() => {
-    console.log('user', props.user)
-})
 </script>
