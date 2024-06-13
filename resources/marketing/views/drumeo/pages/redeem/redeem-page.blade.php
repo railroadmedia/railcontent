@@ -232,9 +232,10 @@
             @endforeach
 
             @include('musora.pages.redeem._redeem-form', [
-            'existing' => !$isNewAccount,
-                    'buttonText' => 'Click To Redeem &raquo;',
-                    'buttonColor' => 'bg-drumeo text-white',
+                'existing' => !$isNewAccount,
+                'buttonText' => 'Click To Redeem &raquo;',
+                'buttonColor' => 'bg-drumeo text-white',
+                'accessCodeArray' => $accessCodeArray,
             ])
 
             <br>
@@ -255,6 +256,6 @@
 
     @include('_partials.components.forms.redeem-form-script', [
         'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
-        'existingMember' => !$newAccount
+        'existingMember' => !$newAccount,
     ])
 @endsection
