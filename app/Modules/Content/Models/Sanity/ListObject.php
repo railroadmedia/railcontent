@@ -9,7 +9,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
  */
 class ListObject
 {
-    public function __construct(public string $type, public array $fields,   public ?array $preview = null )
+    public function __construct(public string $type, public array $fields, public ?array $preview = null)
     {
         $this->fields = array_map(function (Field $field) {
             return $field->toArray();
@@ -28,9 +28,9 @@ class ListObject
            'type' => $this->type,
          'fields' => $this->fields
         ];
-        if($this->preview){
-          $required['preview'] = $this->preview;
-       }
+        if($this->preview) {
+            $required['preview'] = $this->preview;
+        }
         return $required;
     }
 }

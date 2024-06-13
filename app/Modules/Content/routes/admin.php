@@ -21,5 +21,5 @@ Route::prefix('admin')
             '/last-content',
             [\App\Modules\Content\Controllers\SanityStudioCMSController::class, 'getLastContent']
         )
-            ->name('admin.getLastContent');    });
-
+            ->name('admin.getLastContent');
+    });
