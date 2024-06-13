@@ -535,22 +535,22 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             $exp < 250 => 'Casual',
             $exp < 1000 => 'Enthusiast I',
             $exp < 2500 => 'Enthusiast II',
-            $exp < 5000 => 'Pro I' ,
-            $exp < 10000 => 'Pro II' ,
-            $exp < 20000 => 'Pro III' ,
-            $exp < 50000 => 'Master I' ,
-            $exp < 100000 => 'Master II' ,
-            $exp < 250000 => 'Master III' ,
+            $exp < 5000 => 'Pro I',
+            $exp < 10000 => 'Pro II',
+            $exp < 20000 => 'Pro III',
+            $exp < 50000 => 'Master I',
+            $exp < 100000 => 'Master II',
+            $exp < 250000 => 'Master III',
             $exp < 500000 => $isDrumeo ? 'Drumeo Legend' : 'Legend',
-            $exp < 1000000 => $isDrumeo ? 'Legends: Starr' : 'Legend I' ,
-            $exp < 1500000 => $isDrumeo ? 'Legends: Erskine' : 'Legend II' ,
-            $exp < 2000000 => $isDrumeo ? 'Legends: Cobham' : 'Legend III' ,
-            $exp < 2500000 => $isDrumeo ? 'Legends: Garibaldi' : 'Legend IV' ,
-            $exp < 3000000 => $isDrumeo ? 'Legends: Peart' : 'Legend V' ,
-            $exp < 4000000 => $isDrumeo ? 'Legends: Bonham' : 'Legend VI' ,
-            $exp < 5000000 => $isDrumeo ? 'Legends: Colaiuta' : 'Legend VII' ,
-            $exp < 7500000 => $isDrumeo ? 'Legends: Gadd' : 'Legend VIII' ,
-            $exp < 10000000 => $isDrumeo ? 'Legends: Porcaro' : 'Legend IX' ,
+            $exp < 1000000 => $isDrumeo ? 'Legends: Starr' : 'Legend I',
+            $exp < 1500000 => $isDrumeo ? 'Legends: Erskine' : 'Legend II',
+            $exp < 2000000 => $isDrumeo ? 'Legends: Cobham' : 'Legend III',
+            $exp < 2500000 => $isDrumeo ? 'Legends: Garibaldi' : 'Legend IV',
+            $exp < 3000000 => $isDrumeo ? 'Legends: Peart' : 'Legend V',
+            $exp < 4000000 => $isDrumeo ? 'Legends: Bonham' : 'Legend VI',
+            $exp < 5000000 => $isDrumeo ? 'Legends: Colaiuta' : 'Legend VII',
+            $exp < 7500000 => $isDrumeo ? 'Legends: Gadd' : 'Legend VIII',
+            $exp < 10000000 => $isDrumeo ? 'Legends: Porcaro' : 'Legend IX',
             $exp >= 10000000 => $isDrumeo ? 'Legends: Rich' : 'Legend X',
             default => 'Member'
         };
@@ -986,7 +986,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function isEnrolledIntoCohort($cohortPermissionsIds = [])
     {
-        if(empty($cohortPermissionsIds)) {
+        if (empty($cohortPermissionsIds)) {
             $cohortPermissionsIds = config('railcontent.cohort_permission_ids', []);
         }
         return $this->hasMany(
@@ -1011,5 +1011,40 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function userAccessPermissions(): HasMany
     {
         return $this->hasMany(UserAccessPermission::class, 'user_id');
+    }
+
+    public function hasCompletedOnboarding(): bool
+    {
+        $hasExperience = count(
+            $this->onboardingExperience->filter(function ($item) {
+                return $item->brand == $this->last_used_brand;
+            })
+        ) > 0;
+
+        $hasGear = count(
+            $this->onboardingGear->filter(function ($item) {
+                return $item->brand == $this->last_used_brand;
+            })
+        ) > 0;
+
+        $hasTopics = count(
+            $this->onboardingTopics->filter(function ($item) {
+                return $item->brand == $this->last_used_brand;
+            })
+        ) > 0;
+
+        $hasGenres = count(
+            $this->onboardingGenres->filter(function ($item) {
+                return $item->brand == $this->last_used_brand;
+            })
+        ) > 0;
+
+        $hasGoals = count(
+            $this->onboardingGoals->filter(function ($item) {
+                return $item->brand == $this->last_used_brand;
+            })
+        ) > 0;
+
+        return $hasExperience && $hasGear && $hasTopics && $hasGenres && $hasGoals;
     }
 }
