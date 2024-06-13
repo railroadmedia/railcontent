@@ -5,9 +5,11 @@ namespace App\Modules\Ecommerce\Controllers;
 use App\Modules\Ecommerce\Services\AccessCodeService;
 use App\Modules\UserManagementSystem\Services\UserAuthenticationService;
 use App\Modules\UserManagementSystem\Services\UserService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use App\Modules\Ecommerce\Requests\AccessCodeClaimRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class AccessCodeController extends Controller
 {
@@ -25,16 +27,20 @@ class AccessCodeController extends Controller
         $this->userAuthenticationService = $userAuthenticationService;
     }
 
-    public function claim(AccessCodeClaimRequest $request): RedirectResponse
+    public function claim(AccessCodeClaimRequest $request): RedirectResponse|JsonResponse
     {
-        if ($request->has('user_email')) {
-            if ($this->userAuthenticationService->authenticate($request->get('user_email'), $request->get('user_password'))) {
-                $user = $this->userService->getByEmailOrNull($request->get('user_email'));
+        if ($request->get('credentials_type') === 'existing') {
+            if (auth()->check()) {
+                $user = auth()->user();
+            } elseif ($this->userAuthenticationService->authenticate(
+                $request->get('email'),
+                $request->get('password')
+            )) {
+                $user = $this->userService->getByEmailOrNull($request->get('email'));
             } else {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['Invalid credentials.']);
+                return $request->wantsJson()
+                    ? response()->json(['error' => 'Invalid Credentials'], status: 401)
+                    : redirect()->back()->withInput()->withErrors(['Invalid credentials.']);
             }
         } else {
             $user = $this->userService->createUser($request->get('email'), $request->get('password'));
@@ -42,7 +48,16 @@ class AccessCodeController extends Controller
 
         $rawAccessCode = $request->get('access_code');
 
-        $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
+        try {
+            $accessCode = $this->accessCodeService->claim($rawAccessCode, $user, $request->get('context'));
+        } catch (Throwable $e) {
+            $errors = [
+                'access-code' => [$e->getMessage()],
+            ];
+            return $request->wantsJson()
+                ? response()->json(['errors' => $errors], 422)
+                : redirect()->back()->withInput()->withErrors($errors);
+        }
 
         $this->userAuthenticationService->login($user);
 
@@ -51,12 +66,15 @@ class AccessCodeController extends Controller
             'access-code-claimed-message' => 'Your access code has been claimed successfully!',
         ];
 
-        $redirectRoute =
-            (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
-                $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
-
-        return $request->has('redirect')
-            ? redirect()->away($request->get('redirect'))->with($message)
-            : redirect()->to('/' . $redirectRoute)->with($message);
+        if ($request->wantsJson()) {
+            return response()->json($message);
+        } else {
+            $redirectRoute =
+                (in_array($accessCode->brand, config('ecommerce.available_brands')) &&
+                    $accessCode->brand != 'musora') ? $accessCode->brand : "drumeo";
+            return $request->has('redirect')
+                ? redirect()->away($request->get('redirect'))->with($message)
+                : redirect()->to('/' . $redirectRoute)->with($message);
+        }
     }
 }

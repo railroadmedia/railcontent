@@ -46,18 +46,9 @@ class AccessCodeService
      * extends $accessCode associated subscriptions
      * adds user products
      *
-     * @param string $code
-     * @param ?int $userId
-     *
-     * @param null $context
-     * @return AccessCode
-     *
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @throws Throwable
-     * @throws \Doctrine\ORM\ORMException
      */
-    public function claim(string $code, User $user, $context = null): AccessCode
+    public function claim(string $code, User $user, ?string $context = null): AccessCode
     {
         /** @var AccessCode $accessCode */
         $accessCode = $this->getAccessCode($code);
@@ -66,8 +57,7 @@ class AccessCodeService
         }
 
         if ($accessCode->is_claimed) {
-            // Can't claim a code that's already claimed
-            throw new Exception("Access code already claimed");
+            throw new Exception("Access code has already been redeemed!");
         }
 
         $productIds = $this->getAccessCodeProducts($accessCode);

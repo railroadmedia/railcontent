@@ -249,7 +249,10 @@
                     <p class="validation-error">{{ $error }}</p>
                 @endforeach
 
-                @include('musora.pages.redeem._redeem-form')
+                @include('musora.pages.redeem._redeem-form',[
+                    'buttonText' => 'Get started',
+                    'buttonColor' => 'bg-drumeo text-white',
+                ])
              @else
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
@@ -272,7 +275,9 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true
+                    "existing" => true,
+                    'buttonText' => 'Click To Redeem &raquo;',
+                    'buttonColor' => 'bg-drumeo text-white',
                 ])
              @endif
             <br>

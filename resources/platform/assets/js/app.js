@@ -30,6 +30,8 @@ import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
 import Offline from './vue/Pages/Live/Offline';
 import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
+import BestBeginnerDrumBook from './vue/Pages/BestBeginnerDrumBook';
+import DrummersToolbox from './vue/Pages/DrummersToolbox';
 import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
@@ -274,6 +276,8 @@ app.component('AppContainer', AppContainer)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
+    .component('BestBeginnerDrumBook', BestBeginnerDrumBook)
+    .component('DrummersToolbox', DrummersToolbox)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)

@@ -169,7 +169,6 @@
 @endsection
 
 @section('layout-body')
-
     @php
         if (empty($accessCodeArray)) {
            $accessCodeArray = null;
@@ -202,7 +201,7 @@
     @foreach ($errors->all() as $error)
         <p class="bg-pianote text-white py-4 w-full text-center">{{ $error }}</p>
     @endforeach
-    
+
     <header class="sm:px-6 pb-10 sm:py-14 lg:py-20 bg-[#f6f8fc]">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -435,7 +434,7 @@
     </section>
 
     <div id="redeem" class="anchor block relative invisible"></div>
-    <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6 text-white bg-[#000C17]">
+    <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6 text-white bg-[#000C17]" x-data="redeemForm">
         <div class="max-w-5xl mx-auto">
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-5/12 lg:w-1/2 sm:pr-4 lg:pr-10 text-center sm:text-left">
@@ -446,39 +445,36 @@
                 </div>
                 <div class="w-full sm:w-7/12 lg:w-1/2">
                     <h5 class="mt-5 sm:mt-0 font-black text-left md:text-center lg:text-left">Begin your musical journey today <i class="fas fa-arrow-down"></i> </h5>
-                    <form id="commentform" name="drumeo" method="post"
-                          action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem"
+                    <form
+                        id="commentform" name="drumeo" method="post"
+                        @submit.prevent="submitRedeem($event)"
                     >
-                            <input type="hidden" name="credentials_type" value="new">
+                        <input type="hidden" name="credentials_type" value="new">
                         <div class="flex flex-wrap">
                             <p class="w-full input-describer">Code</p>
-                            <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[0]}}" @else value="{{-- Input::old('code1') --}}" @endif>
-                            </div>
-                            <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[1]}}" @else value="{{-- Input::old('code2') --}}" @endif>
-                            </div>
-                            <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[2]}}" @else value="{{-- Input::old('code3') --}}" @endif>
-                            </div>
-                            <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[3]}}" @else value="{{-- Input::old('code4') --}}" @endif>
-                            </div>
-                            <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[4]}}" @else value="{{-- Input::old('code5') --}}" @endif>
-                            </div>
-                            <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[5]}}" @else value="{{-- Input::old('code6') --}}" @endif>
-                            </div>
+                            <input class="w-full" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" maxlength="24" placeholder="XXXXXXXXXXXXXXXXXXXXXXX" value="" />
+                            <span class="text-xs text-[#EF4444]" x-show="errors.access_code" x-text="errors.access_code"></span>
                         </div>
                         <p class="input-describer">Email Address</p>
-                        <input class="default-form-field" type="text" id="email" name="email" placeholder="Email Address" value="{{-- Input::old('email') --}}">
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.email }" type="text" id="email" name="email" placeholder="Email Address" value="{{-- Input::old('email') --}}">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.email" x-text="errors.email"></span>
                         <p class="input-describer">Password (min. 8 characters)</p>
-                        <input class="default-form-field" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="">
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.password }" type="password" id="password" name="password" placeholder="Password (min. 8 characters)" value="">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.password" x-text="errors.password"></span>
                         <p class="input-describer">Confirm Password</p>
-                        <input class="default-form-field" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
+                        <input class="default-form-field" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black': errors.passwordCheck }" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
+                        <span class="text-xs text-[#EF4444]" x-show="errors.passwordCheck" x-text="errors.passwordCheck"></span>
                         <div class="text-center">
-                            <input name="button" type="submit" id="button" class="apply hover:opacity-80 transition-opacity bg-white text-black lg:w-2/3" value="Redeem your pass"/>
+                            <button
+                                class="apply hover:opacity-80 transition-opacity lg:w-2/3"
+                                :class="loading ? 'bg-[#B2D4F4] text-black' : !isValid ? 'bg-[#B91C1C] ttext-white' : submitted ? 'bg-[#15803D] text-white' : 'bg-white text-black'"
+                                type="submit"
+                            >
+                                <span x-show="!loading && isValid && !submitted">Redeem your pass</span>
+                                <span x-show="loading"><i class="fa-solid fa-spinner mr-1"></i> Loading</span>
+                                <span x-show="!isValid"><i class="fa-solid fa-rotate-left mr-1"></i> Retry submission</span>
+                                <span x-show="submitted"><i class="fa-solid fa-check mr-1"></i>Successfully Submitted</span>
+                            </button>
                             <p class="text-xs mt-3 mb-5">
                                 <em>No purchase is required. Try it for free.</em>
                             </p>
@@ -491,4 +487,6 @@
             </div>
         </div>
     </section>
+
+    @include('_partials.components.forms.redeem-form-script', ['api' => get_musora_brand_base_url().'/ecommerce/access-codes/redeem'])
 @endsection
