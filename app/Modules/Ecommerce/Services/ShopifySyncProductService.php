@@ -43,6 +43,7 @@ class ShopifySyncProductService
                 $product->type = lcfirst($productShopify['product_type']);
                 $product->is_physical = $variant['requires_shipping'] ? 1 : 0;
                 $product->price = floatval($variant['price']);
+                //Shopify variants are stored as multiple products in MWP so we need to create a unique name here
                 $variantName = ($variant['requires_shipping'] && $variant['option1'] != "Default Title") ? $variant['option1'] : '';
                 $product->name = $variantName ? ($productShopify['title'] . ' - ' . $variantName) : $productShopify['title'];
                 $product->thumbnail_url = !(empty(\Arr::last($productShopify['images']))) ? \Arr::last($productShopify['images'])['src'] : '';
