@@ -24,6 +24,7 @@ class SanityStudioCMSController extends BaseController
         $dataset = config('content.dataset');
         $basePath = '/admin/studio';
         $csrfToken = csrf_token();
+        $appUrl = env('APP_URL');
 
         // Day One
         // $types = [(new Artist())->toArray(), (new Venue())->toArray(), (new Event())->toArray()];
@@ -41,7 +42,8 @@ class SanityStudioCMSController extends BaseController
                 'dataset',
                 'basePath',
                 'schema',
-                'csrfToken'
+                'csrfToken',
+                'appUrl'
             ])
         );
     }

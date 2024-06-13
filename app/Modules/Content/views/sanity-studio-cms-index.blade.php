@@ -30,6 +30,7 @@
             projectId: "{{ $projectId }}",
             dataset: "{{ $dataset }}",
             basePath: "{{ $basePath }}",
+            appUrl: "{{ $appUrl }}",
             schema: {!! stripFromJson($schema) !!},
         csrfToken: "{{ $csrfToken }}",
         };

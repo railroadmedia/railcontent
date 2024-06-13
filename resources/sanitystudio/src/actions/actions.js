@@ -4,7 +4,7 @@ export function CreateImprovedAction(originalPublishAction, token) {
     const BetterAction = (props) => {
         const originalResult = originalPublishAction(props)
         const {patch, publish} = useDocumentOperation(props.id, props.type)
-        const url = `https://dev.musora.com:8443/admin/last-content`;
+        const url = window.sanityConfig.appUrl + `/admin/last-content`;
 
         return {
             ...originalResult,
