@@ -98,6 +98,11 @@ class SanityStudioCMSController extends BaseController
 
         event(new ContentCreated($content->id));
 
+        $content = Content::query()
+            ->where('type', '=', 'song')
+            ->where('slug', '=', $request->get('slug')['current'])
+            ->first();
+
         return $content;
     }
 }
