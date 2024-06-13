@@ -249,10 +249,7 @@
                     <p class="validation-error">{{ $error }}</p>
                 @endforeach
 
-                @include('musora.pages.redeem._redeem-form',[
-                    'buttonText' => 'Get started',
-                    'buttonColor' => 'bg-drumeo text-white',
-                ])
+                @include('musora.pages.redeem._redeem-form')
              @else
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
@@ -275,9 +272,7 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true,
-                    'buttonText' => 'Click To Redeem &raquo;',
-                    'buttonColor' => 'bg-drumeo text-white',
+                    "existing" => true
                 ])
              @endif
             <br>
@@ -293,8 +288,21 @@
         </div>
     </div>
 
-    @include('_partials.components.forms.redeem-form-script', [
-       'existingMember' => !$newAccount,
-       'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim')
-   ])
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.code-input').bind('paste', function (e) {
+                var value = e.originalEvent.clipboardData.getData('text');
+                value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
+                var chunks = value.match(new RegExp('.{1,4}', 'g'));
+                for (var i = 0; i < chunks.length; i++) {
+                    $('.code-input').eq(i).val(chunks[i]);
+                }
+            }).bind('input', function (e) {
+                if ($(this).val().length == 4) {
+                    $('.code-input').eq($(this).index('.code-input') + 1).focus();
+                }
+            });
+        });
+    </script>
 @endsection
