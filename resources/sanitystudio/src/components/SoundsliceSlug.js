@@ -26,10 +26,10 @@ const SoundsliceSlug = React.forwardRef((props, ref) => {
             const firstElement = elementNameArray[0];
             const soundsliceKey = extractValue(firstElement);
 
-            console.log('SoundsliceSlug Soundslice KEY:', soundsliceEntries, soundsliceKey);
+            console.log('SoundsliceSlug Soundslice KEY:', soundsliceEntries, soundsliceKey, window.sanityConfig.appUrl);
 
             if (newValue) {
-                const url = `https://dev.musora.com:8443/admin/soundslice?slug=${newValue}`;
+                const url = window.sanityConfig.appUrl+`/admin/soundslice?slug=${newValue}`;
 
                 fetch(url, {
                     method: 'GET',
