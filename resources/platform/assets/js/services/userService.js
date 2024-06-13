@@ -21,26 +21,6 @@ export const updateUserProfile = (token, userId, payload) => {
 };
 
 /**
- * Update Display Name
- *
- * @param {string} token
- * @param {string} userId
- * @param {object} payload
- */
-export const updateUserEmail = (token, userId, payload) => {
-    const headers = {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': token
-    };
-    return axios({
-        method: 'PATCH',
-        url: `user-management-system/email-change/request/${userId}`,
-        data: payload,
-        headers
-    });
-};
-
-/**
  * Update User Signature
  *
  * @param {string} token
