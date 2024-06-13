@@ -179,7 +179,12 @@
     @endif
 @endsection
 
-<!-- Main -->
+@section('body-data')
+    x-data ='{
+    lazyLoad: false,
+    }'
+@endsection
+
 @section('layout-body')
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-3xl">
