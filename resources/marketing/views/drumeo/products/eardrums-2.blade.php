@@ -283,7 +283,7 @@
         <div class="container mx-auto relative z-10 max-w-4xl">
             <img class="h-14 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/840x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/drums-are-loud.webp" alt="Drums Are Loud">
             <h6 class="leading-normal mt-5 mb-7 sm:mb-10 mx-auto max-w-xl">
-                Whether you’re playing acoustic or electronic drums, sealing in the sound while protecting your ears is crucial. <br class="sm:hidden"><br class="sm:hidden"><strong>Drumeo EarDRUMS are professional in-ear headphones that help you:</strong></h6>
+                Whether you’re playing acoustic or electronic drums, sealing in the sound while protecting your ears is crucial. <br class="sm:hidden"><br class="sm:hidden"><strong>Drumeo EarDrums are professional in-ear headphones that help you:</strong></h6>
             <div class="flex flex-wrap text-left">
                 <div class="flex flex-wrap sm:flex-nowrap items-center mb-7 sm:mb-10">
                     <img class="h-auto w-full sm:w-auto sm:h-56 lg:h-72 sm:order-1 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/features-01b.webp">
@@ -296,14 +296,14 @@
                     <img class="h-auto w-full sm:w-auto sm:h-56 lg:h-72 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/current-feature-02.webp">
                     <div class="sm:px-6 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Seal in the sound.</strong></h4>
-                        <p>Drumeo EarDRUMS reduce external volume by up to -29dB. That means you can play hard while protecting your ears.</p>
+                        <p>Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center">
                     <img class="h-auto w-full sm:w-auto sm:h-56 lg:h-72 sm:order-1 rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/970x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/current-feature-03.webp">
                     <div class="sm:px-6 lg:px-10">
                         <h4 class="leading-tight my-2"><strong>Go anywhere.</strong></h4>
-                        <p>Your EarDRUMS are meant to be used. Take them anywhere with a handy carrying case + extra tips for a perfect fit every time.</p>
+                        <p>Your EarDrums are meant to be used. Take them anywhere with a handy carrying case + extra tips for a perfect fit every time.</p>
                     </div>
                 </div>
             </div>
