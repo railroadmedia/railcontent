@@ -1015,35 +1015,25 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function hasCompletedOnboarding(): bool
     {
-        $hasExperience = count(
-            $this->onboardingExperience->filter(function ($item) {
-                return $item->brand == $this->last_used_brand;
-            })
-        ) > 0;
+        $hasExperience = $this->onboardingExperience->contains(
+            fn (OnboardingExperience $experience) => $experience->brand == $this->last_used_brand
+        );
 
-        $hasGear = count(
-            $this->onboardingGear->filter(function ($item) {
-                return $item->brand == $this->last_used_brand;
-            })
-        ) > 0;
+        $hasGear = $this->onboardingGear->contains(
+            fn (OnboardingGear $gear) => $gear->brand == $this->last_used_brand
+        );
 
-        $hasTopics = count(
-            $this->onboardingTopics->filter(function ($item) {
-                return $item->brand == $this->last_used_brand;
-            })
-        ) > 0;
+        $hasTopics = $this->onboardingTopics->contains(
+            fn (OnboardingTopic $topic) => $topic->brand == $this->last_used_brand
+        );
 
-        $hasGenres = count(
-            $this->onboardingGenres->filter(function ($item) {
-                return $item->brand == $this->last_used_brand;
-            })
-        ) > 0;
+        $hasGenres = $this->onboardingGenres->contains(
+            fn (OnboardingGenre $genres) => $genres->brand == $this->last_used_brand
+        );
 
-        $hasGoals = count(
-            $this->onboardingGoals->filter(function ($item) {
-                return $item->brand == $this->last_used_brand;
-            })
-        ) > 0;
+        $hasGoals = $this->onboardingGoals->contains(
+            fn (OnboardingGoals $goals) => $goals->brand == $this->last_used_brand
+        );
 
         return $hasExperience && $hasGear && $hasTopics && $hasGenres && $hasGoals;
     }
