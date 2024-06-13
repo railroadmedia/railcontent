@@ -1,7 +1,7 @@
 <template>
     <InfoModal
         classOverride="tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[654px]"
-        modalId="displayNameModal" 
+        modalId="loginModal" 
         :selfContained="true" 
         @onClose="handleClose"
     >
@@ -10,48 +10,44 @@
             <form 
                 accept-charset="UTF-8" 
                 method="POST" 
-                @submit.prevent="submitDisplayNameForm"
+                @submit.prevent="submitUserForm"
             >
-                <div class="tw-flex tw-flex-col tw-mb-4">
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
+                <div class="tw-grid tw-grid-cols-1 tw-gap-3 tw-mb-4">
+                    <MuInput 
+                        type="email"
                         id="loginEmail" 
-                        input-type="email"
-                        inputName="login_email" 
-                        labelValue="Login Email"
-                        placeholder="Login Email" 
-                        :initial-value="userEmail"
-                        :inputErrors="[]" 
-                        @onChange="handleDisplayName" 
+                        name="email" 
+                        label="Login Email"
+                        :disabled="formProcessing"
+                        required
+                        placeholder="Enter Email" 
+                        v-model="formData.email"
+                        title="Please enter a valid email address"
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                     />
-                </div>
-                <div class="tw-flex tw-flex-col tw-mb-[20px]">
-                    <InputLabel 
-                        inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" 
-                        input-type="password"
-                        id="emailPassword" 
-                        inputName="password" 
-                        labelValue="Login Password"
-                        placeholder="Enter Password" 
-                        :inputErrors="[]" 
-                        @onChange="handleDisplayName" 
+                    <MuInput 
+                        type="password"
+                        id="userPassword" 
+                        name="user_password" 
+                        label="Confirm Password"
+                        :disabled="formProcessing"
+                        required
+                        placeholder="Enter Current Password" 
+                        v-model="formData.user_password"
+                        pattern="^.{8,}$"
+                        title="Password must be 8 characters"
                     />
                 </div>
                 <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
-                    <button
-                        :disabled="!formData.display_name.length" 
+                    <MuButton
+                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
                         type="submit"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white"
-                        :class="!formData.display_name.length ? 'tw-opacity-50' : ''"
+                        :processing="formProcessing"
+                        processing-text="Saving..."
+                        @click="handleClick"
                     >
                         Save
-                    </button>
-                    <button
-                        @click="handleClose"
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1 tw-btn-primary tw-bg-transparent dark:hover:tw-bg-white hover:tw-bg-black dark:hover:tw-text-[#00101D] hover:tw-text-white tw-text-[#00101D] dark:tw-text-white"
-                    >
-                        Cancel
-                    </button>
+                    </MuButton>
                 </div>
             </form>
         </div>
@@ -59,43 +55,38 @@
 </template>
 <script setup>
     import { ref } from 'vue';
-    import axios from 'axios';
     import InfoModal from '../Modal/InfoModal.vue';
-    import InputLabel from "../InputLabel/InputLabel.vue";
     import { storeToRefs } from 'pinia';
     import { useUserStore } from '../../../stores/user';
+    import MuButton from '../Button/MuButton.vue';
+    import MuInput from '../FormInputs/MuInput.vue';
 
     const userStore = useUserStore();
-    const { userId, userDisplayName, userEmail } = storeToRefs(userStore);
+    const { userEmail } = storeToRefs(userStore);
+
+    const emit = defineEmits(['onCloseModal', 'onSuccess']);
 
     //Refs
-    const emit = defineEmits(['onCloseModal']);
-
+    const formProcessing = ref(false);
     const formData = ref({
-        display_name: ''
+        email: userEmail.value || '',
+        user_password: '',
     });
 
     //Methods
     const handleClose = () => {
         emit('onCloseModal');
     };
-
-    const handleDisplayName = (value) => {
-        formData.value = {
-            ...formData.value,
-            display_name: value
-        };
-    };
     
-    const submitDisplayNameForm = () => {
-        axios.post(`/user-management-system/user/update/${ userId.value }`, formData.value).then((e) => {
-            if (window.shownotification) {
-                window.shownotification({
-                    icon: 'check',
-                    text: 'Success! Your song request has been submitted.'
-                });
-            }
-            handleClose()
-        });  
+    const submitUserForm = async () => {
+        formProcessing.value = true;
+        try {
+            await userStore.updateEmail(formData.value);
+            emit('onSuccess')
+            handleClose();
+        } catch (error) {
+            console.error("Failed to update your email:", error.message);
+            formProcessing.value = false;
+        }
     };
 </script>
