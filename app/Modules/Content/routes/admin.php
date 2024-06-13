@@ -23,8 +23,3 @@ Route::prefix('admin')
         )
             ->name('admin.getLastContent');    });
 
-Route::get(
-    '/CustomInput.js',
-    [SanityStudioCMSController::class, 'customInput']
-)
-    ->name('sanity.customInput-file');
