@@ -557,7 +557,7 @@
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
 
             @include('drumeo.products.partials._promo-cards', [
-                'firstBadge' => 'SAVE 40%',
+                'firstBadge' => 'SAVE 34%',
                 'firstDeal' => 'Drumeo<br> EarDrums',
                 'firstDealImage' =>
                     'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
