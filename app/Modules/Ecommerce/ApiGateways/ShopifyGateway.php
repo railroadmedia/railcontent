@@ -217,13 +217,14 @@ class ShopifyGateway
 
     public function getCustomerOrderByProcessAtDate(
         int $shopifyCustomerId,
-        Carbon $processedAt
+        Carbon $processedAt,
+        int $processedDateRangeMinutes = 1440
     ) {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
-        $processedAtStartString = $processedAt->clone()->addDays(-1)->toIso8601String();
-        $processedAtEndString = $processedAt->clone()->addDays(1)->toIso8601String();
+        $processedAtStartString = $processedAt->clone()->addMinutes(-1 * $processedDateRangeMinutes)->toIso8601String();
+        $processedAtEndString = $processedAt->clone()->addMinutes($processedDateRangeMinutes)->toIso8601String();
         $gql = <<<GQL
             query {
                  orders(first:1, query:"customer_id:$shopifyCustomerId AND processed_at:>=\"$processedAtStartString\" AND processed_at:<=\"$processedAtEndString\""){

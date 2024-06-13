@@ -54,6 +54,7 @@
         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :assignments="{{ json_encode($formattedAssignments) }}"
         :related-lessons="{{ $relatedLessons }}"
+        :report-logo="{{ json_encode(config('mailora.' . $brand . '.logo-link')) }}"
     ></song>
 
 @endsection

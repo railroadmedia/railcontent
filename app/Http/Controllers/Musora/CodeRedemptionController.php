@@ -93,6 +93,7 @@ class CodeRedemptionController extends BaseController
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => true,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }
@@ -116,15 +117,42 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function renderNewAccountThomannRedeemPage()
+    public function renderNewAccountThomannRedeemPage(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page', ['newAccount' => true, 'thomann' => true]);
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'thomann' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderNewAccountThomann90RedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'thomann' => true,
+            'day90' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function renderExistingAccountThomannRedeemPage(Request $request)
+    {
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'thomann' => true,
+            'theme' => 'musora',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
     public function renderExistingAccountRedeemPage(Request $request)
     {
         return view('musora.pages.redeem.redeem-page', [
             'newAccount' => false,
+            'theme' => 'musora',
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }

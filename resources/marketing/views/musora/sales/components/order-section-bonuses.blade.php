@@ -201,7 +201,7 @@
             </div>
             <h3 class="leading-tight mt-6 mb-1">
                 <s class="opacity-50">${{ Prices::$plusSubscriptionAnnualFull }}</s>
-                @if(!empty($firstYearPrice)) <strong>${{$firstYearPrice}}</strong> <span class="text-musora">(Save {{ round(100 - (100 * ($firstYearPrice / 240))) }}%)</span>  @else <strong>$200</strong> <span class="text-musora">(Save 20%)</span>  @endif
+                @if(!empty($firstYearPrice)) <strong>${{$firstYearPrice}}</strong> <span class="text-musora">(Save {{ round(100 - (100 * ($firstYearPrice / 240))) }}%)</span>  @else <strong>$200</strong> <span class="text-musora">(Save 17%)</span>  @endif
 
             </h3>
             <p class="text-sm mb-4 sm:mb-6">For your first year, then ${{ Prices::$plusSubscriptionAnnualFull }}/yr.</p>

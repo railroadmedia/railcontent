@@ -15,6 +15,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/500-songs', [SalesController::class, 'songs500']);
                 Route::get('/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano']);
                 Route::get('/classical-piano-pieces', [SalesController::class, 'classicalPianoPieces']);
+                Route::get('/read-music-book', [SalesController::class, 'readMusicBook']);
                 Route::get('/christmas-songbook', [SalesController::class, 'christmasSongbook']);
                 Route::get('/christmas-songbook-members', [SalesController::class, 'christmasSongbookMembers']);
                 Route::get('/concert-headphones', [SalesController::class, 'concertHeadphones']);
@@ -36,6 +37,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/prestige-metronome', [SalesController::class, 'metronomePrestige']);
                 Route::get('/book-bag', [SalesController::class, 'bookBag']);
                 Route::get('/book-bag-members', [SalesController::class, 'bookBagMembers']);
+                Route::get('/read-music', [SalesController::class, 'readMusic']);
             }
         );
 

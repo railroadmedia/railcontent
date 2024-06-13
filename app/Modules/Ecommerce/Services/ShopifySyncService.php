@@ -239,13 +239,13 @@ class ShopifySyncService
      * @param Carbon $processedAt
      * @return bool
      */
-    public function doesOrderExist(?int $shopifyCustomerId, Carbon $processedAt): bool
+    public function doesOrderExist(?int $shopifyCustomerId, Carbon $processedAt, int $processedDateRangeMinutes = 1440): bool
     {
         if (!$shopifyCustomerId) {
             return false;
         }
 
-        return $this->shopifyGateway->doesOrderExist($shopifyCustomerId, $processedAt);
+        return $this->shopifyGateway->doesOrderExist($shopifyCustomerId, $processedAt, $processedDateRangeMinutes);
     }
 
     /**
