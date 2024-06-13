@@ -154,8 +154,8 @@
     ])
     @include('_partials.components.shop.promo-banner', [
         "name" => "Drumeo EarDrums",
-        "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
-        "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),
+        "fullPrice" => floatval($productPrices['drumeo-eardrums-black']->price),
+        "price" => floatval($productPrices['drumeo-eardrums-black']->discounted_price),
         "noBreadcrumb" => true
     ])
 
@@ -165,19 +165,19 @@
                 <img alt="quietkick" class="h-16 sm:h-24" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
                 <h6 class="leading-tight my-3">Protect your ears + <br class="sm:hidden">play your favorite songs.</h6>
                 <h2 class="leading-tight">
-                    @if(floatval($productPrices['drumeo-eardrums']->price) > floatval($productPrices['drumeo-eardrums']->discounted_price))
-                        <s class="opacity-50">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s>
-                        <strong>${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}</strong>
-                        <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['drumeo-eardrums']->discounted_price) / floatval($productPrices['drumeo-eardrums']->price)))) }}%)</em>
+                    @if(floatval($productPrices['drumeo-eardrums-black']->price) > floatval($productPrices['drumeo-eardrums-black']->discounted_price))
+                        <s class="opacity-50">${{ floatval($productPrices['drumeo-eardrums-black']->price) }}</s>
+                        <strong>${{ floatval($productPrices['drumeo-eardrums-black']->discounted_price) }}</strong>
+                        <em class="text-musora text-sm">(Save {{ round(100 - (100 * (floatval($productPrices['drumeo-eardrums-black']->discounted_price) / floatval($productPrices['drumeo-eardrums-black']->price)))) }}%)</em>
                     @else
-                        <strong>${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}</strong>
+                        <strong>${{ floatval($productPrices['drumeo-eardrums-black']->discounted_price) }}</strong>
                     @endif
                 </h2>
                 <div class="mt-5 sm:mt-7 mb-2 w-full max-w-xl mx-auto">
                     <div class="sm:w-5/12 join smaller outline hidden sm:inline-block"  @click="trailer = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
                     <div class="sm:w-5/12 join smaller outline sm:hidden inline-block"   @click="trailerM = true;" ><i class="fas fa-play"></i> &nbsp;Watch Video</div>
-                    @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
-                        <a class="w-5/12 join smaller blue" href="#customize-anchor">Order Now</a>
+                    @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
+                        <a class="w-5/12 join smaller blue anchor-slide" href="#customize-anchor">Order Now</a>
                     @else
                         <a class="join smaller sold-out">SOLD OUT</a>
                     @endif
