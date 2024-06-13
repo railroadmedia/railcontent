@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { updateUserProfile, updateUserSignature } from '../services/userService';
+import { updateUserProfile, updateLoginEmail, updateLoginPassword, updateUserSignature } from '../services/userService';
 
 export const useUserStore = defineStore({
   id: 'User',
@@ -250,6 +250,45 @@ export const useUserStore = defineStore({
       });
     },
 
+    async updateEmail(data) {
+      try {
+          const response = await updateLoginEmail(this.token, data);
+          const responseMessage = response.data;
+          //Email
+          //data.hasOwnProperty('email') && (this.user.email = data.email);
+          window.shownotification({
+              icon: 'check',
+              text: `Success! ${responseMessage}`
+          });
+          return response;
+      } catch (error) {
+          const errorMessage = error.response?.data?.error || 'An unexpected error occurred.';
+          window.shownotification({
+            icon: 'error',
+            text: `Your email could not be updated. ${errorMessage}`
+          });
+          throw new Error('Failed to update email');
+      }
+    },
+
+    async updatePassword(data) {
+      try {
+          const response = await updateLoginPassword(this.token, data);
+          window.shownotification({
+              icon: 'check',
+              text: 'Password successfully updated!'
+          });
+          return response;
+      } catch (error) {
+          const errorMessage = error.response?.data?.error || 'An unexpected error occurred.';
+          window.shownotification({
+            icon: 'error',
+            text: `Your password could not be updated. ${errorMessage}`
+          });
+          throw new Error('Failed to update password');
+      }
+    },
+
     async updateSignature(data) {
       try {
           const response = await updateUserSignature(this.token, this.userId, data);
@@ -269,5 +308,6 @@ export const useUserStore = defineStore({
           throw new Error('Failed to update signature');
       }
     }
+
   }
 });
