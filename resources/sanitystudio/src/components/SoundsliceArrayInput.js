@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useClient, useFormValue, set } from 'sanity';
 
-const ArrayInput = React.forwardRef((props, ref) => {
+const SoundsliceArrayInput = React.forwardRef((props, ref) => {
     const { renderDefault, elementProps } = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
     const docId = useFormValue(["_id"]);
@@ -40,4 +40,4 @@ const ArrayInput = React.forwardRef((props, ref) => {
     return renderDefault({ ...props, elementProps: { ...elementProps } });
 });
 
-export default ArrayInput;
+export default SoundsliceArrayInput;

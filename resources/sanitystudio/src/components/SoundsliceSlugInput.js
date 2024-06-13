@@ -3,7 +3,7 @@ import { useClient, useFormValue, unset } from 'sanity';
 import { Stack, TextInput } from '@sanity/ui';
 import { randomKey } from '@sanity/util/content';
 
-const SoundsliceSlug = React.forwardRef((props, ref) => {
+const SoundsliceSlugInput = React.forwardRef((props, ref) => {
     const { elementProps,  value = '', onChange} = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
     const docId = useFormValue(["_id"]);
@@ -100,4 +100,4 @@ const SoundsliceSlug = React.forwardRef((props, ref) => {
     );
 });
 
-export default SoundsliceSlug;
+export default SoundsliceSlugInput;
