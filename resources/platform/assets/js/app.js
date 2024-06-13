@@ -11,6 +11,11 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
+import Profile from './vue/Pages/Settings/Profile.vue';
+import LoginCredentials from './vue/Pages/Settings/LoginCredentials.vue';
+import Payments from './vue/Pages/Settings/Payments.vue';
+import NotificationSettings from './vue/Pages/Settings/NotificationSettings.vue';
+import Details from './vue/Pages/Settings/Details.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
@@ -100,74 +105,6 @@ const app = createApp({
         userNavigationDropdownLinks: window.userNavigationDropdownLinks,
     },
     methods: {
-        avatarUploaded(payload) {
-            const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
-            window.closeAllModals();
-            Array.from(avatarPhotos).forEach(photo => {
-                photo.setAttribute(
-                    'src', payload.image_url
-                );
-            });
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Ahh, Much Better! The new "you" is being refreshed...'
-            });
-        },
-
-        gearDrumeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Woohoo! Your drum gear looks fantastic!'
-            });
-        },
-
-        gearPianotePhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-pianote-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-
-        },
-
-        gearGuitareoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Woohoo! Your gear looks fantastic!'
-            });
-        },
-
-        gearSingeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-singeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Woohoo! Your singing gear looks fantastic!'
-            });
-        },
-
         handleVideoPlay(payload) {
             if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
                 ContentService.markContentAsStarted(payload.contentId);
@@ -208,7 +145,6 @@ const app = createApp({
                 playAlongsProgressTracker = new ProgressTracker();
 
                 const { playAlongsVueInstance } = this.$refs;
-
                 if (playAlongsVueInstance) {
                     window.addEventListener('unload', (event) => {
                         progressTracker.send({
@@ -219,7 +155,6 @@ const app = createApp({
                     });
                 }
             }
-
             playAlongsProgressTracker.start();
         },
 
@@ -278,6 +213,11 @@ app.component('AppContainer', AppContainer)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('Profile', Profile)
+    .component('LoginCredentials', LoginCredentials)
+    .component('Payments', Payments)
+    .component('NotificationSettings', NotificationSettings)
+    .component('Details', Details)
     .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)

@@ -8,7 +8,12 @@
     </template>
     <template v-else-if="heroImg">
       <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
-        <div :class="heroImgClasses ?? 'square'">
+        <UserAvatar 
+          v-if="pageType === 'settings'"
+          :access-level="userAccessLevel" 
+          :avatar-image="heroImg"
+        />
+        <div v-else :class="heroImgClasses ?? 'square'">
           <img class="rounded inset-border" :src="heroImg">
         </div>
       </div>
@@ -78,8 +83,16 @@ import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import Tooltip from "../Tooltip/Tooltip";
 import PageHeaderRowInfo from "./PageHeaderRowInfo";
+import UserAvatar from '../UserAvatar/UserAvatar.vue';
+import { storeToRefs } from "pinia/dist/pinia";
+import { useUserStore } from "../../../stores/user";
+
+//Pinia
+const userStore = useUserStore();
+const { userAccessLevel } = storeToRefs(userStore);   
 
 const props = defineProps({
+  pageType: String,
   iconName: String,
   heroImg: String,
   heroImgClasses: String,
