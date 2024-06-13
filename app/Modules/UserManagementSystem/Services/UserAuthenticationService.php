@@ -2,6 +2,8 @@
 
 namespace App\Modules\UserManagementSystem\Services;
 
+use App\Mail\Agnostic;
+use Illuminate\Support\Facades\Mail;
 use Modules\UserManagementSystem\Models\User;
 
 class UserAuthenticationService
@@ -19,5 +21,23 @@ class UserAuthenticationService
     public function login(User $user): void
     {
         auth()->loginUsingId($user->getId(), true);
+    }
+
+    public function sendSetupAccountEmail(User $user): void
+    {
+        $token = md5($user->email . config('shopify.multipass.account_creation_secret_key'));
+
+        $mailToStudent = new Agnostic();
+        $mailToStudent->to($user->email);
+        $mailToStudent->from('team@musora.com', 'Musora');
+        $mailToStudent->subject('One more step 👇️');
+        $mailToStudent->view('emails.account-setup');
+        $mailToStudent->with([
+            'setupAccountUrl' => route('user_management_system.create-account-page', [
+                'email' => $user->email,
+                'verification_token' => $token
+            ])
+        ]);
+        Mail::send($mailToStudent);
     }
 }
