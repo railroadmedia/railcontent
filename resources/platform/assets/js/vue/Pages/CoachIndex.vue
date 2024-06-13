@@ -2,7 +2,7 @@
     <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
         <!-- Breadcrumb -->
         <Breadcrumb :breadcrumbs="breadcrumbs" />
-        
+
         <!-- Page Header -->
         <PageHeader
             title="Coaches"
@@ -30,9 +30,9 @@
                             Featured Coach
                         </h2>
                     </div>
-                    <HeaderCarousel 
-                        v-if="featuredCoachLength > 1" 
-                        :preloaded-carousel="formattedFeaturedCoaches" 
+                    <HeaderCarousel
+                        v-if="featuredCoachLength > 1"
+                        :preloaded-carousel="formattedFeaturedCoaches"
                     />
                     <template v-if="formattedFeaturedCoaches.length">
                         <StaticHeader
@@ -59,7 +59,7 @@
             />
         </div>
         <!-- From Subscribed Coaches -->
-        <div class="tw-mb-[30px]">
+        <div v-if="followedLessons.length" class="tw-mb-[30px]">
             <MiniCatalogueSection
                 title="From Subscribed Coaches"
                 :see-all-url="`/${brand}/lessons/subscribed`"
@@ -69,14 +69,14 @@
         </div>
 
         <!-- Upcoming Coaches -->
-        <UpcomingCoach 
-            v-if="hasUpcomingCoaches" 
-            :upcoming-coaches="upcomingCoaches" 
+        <UpcomingCoach
+            v-if="hasUpcomingCoaches"
+            :upcoming-coaches="upcomingCoaches"
         />
-        
-        <ActiveCoach 
-            v-if="hasActiveCoaches" 
-            :active-coaches="activeCoaches" 
+
+        <ActiveCoach
+            v-if="hasActiveCoaches"
+            :active-coaches="activeCoaches"
         />
 
         <CollectionWrapper
@@ -163,7 +163,7 @@ const props = defineProps({
         default: () => "",
     },
     featuredCoaches: {
-        type: Array,
+        type: [Object, Array],
         default: () => [],
     },
     followedLessons: {

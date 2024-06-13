@@ -43,8 +43,8 @@
         <div class="container mx-auto">
             <p>Put your piano teacher in your pocket. Take your video lessons, <br class="hidden md:inline">
                 song tutorials, and practice sessions anywhere you go.</p>
-            <a class="download-badge" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="Black “download on Apple app store” button."></a>
-            <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="Black “get it on Google Play” button."></a>
+            <a class="download-badge" href="https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="Black “download on Apple app store” button."></a>
+            <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="Black “get it on Google Play” button."></a>
             <p class="small">Not a member? <a class="text-blue" href="/">Click here to join Pianote</a>.</p>
         </div>
     </section>
@@ -84,8 +84,8 @@
             <div class="float-left w-full md:w-1/2 px-2 md:px-3 option-wrap">
                 <p>MEMBERS</p>
                 <h4>Take your membership everywhere<br> with the Pianote app.</h4>
-                <a class="download-badge" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="Black “download on Apple app store” button."></a>
-                <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="Black “get it on Google Play” button"></a>
+                <a class="download-badge" href="https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="Black “download on Apple app store” button."></a>
+                <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="Black “get it on Google Play” button"></a>
             </div>
             <div class="float-left w-full md:w-1/2 px-2 md:px-3 option-wrap">
                 <p>NOT A MEMBER?</p>

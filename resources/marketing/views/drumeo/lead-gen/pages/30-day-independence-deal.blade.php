@@ -102,8 +102,8 @@
     <title>Get unlimited drum lessons for a year!</title>
     <meta property="og:title" content="Get unlimited drum lessons for a year!">
 
-    <meta name="description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
-    <meta property="og:description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
+    <meta name="description" content="We put together an exclusive offer for 30-Day Independence students to get unlimited drum lessons for a year + some extra special bonuses.">
+    <meta property="og:description" content="We put together an exclusive offer for 30-Day Independence students to get unlimited drum lessons for a year + some extra special bonuses.">
 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
@@ -239,9 +239,8 @@
     <section class="py-20 text-center" style="background:#F1F7FE;">
         <div class="mx-auto">
             <h2 class="leading-tight mb-2">
-                <strong>GET UNLIMITED DRUM LESSONS FOR A YEAR</strong><br>
-                + 2 NEW follow-up packs with Domino<br>
-                (and 3 more bonuses!)
+                <strong>Get unlimited drum lessons for a year!</strong><br>
+                + Lifetime Access To 30-Day Independence.
             </h2>
             <div class="uppercase text-2xl text-musora"> <strong>
                 <span x-cloak x-data="timer()" x-init="countdown()">
@@ -260,32 +259,35 @@
                 <h5 class=" text-drumeo uppercase"></h5>
             <div class="w-full mx-auto my-8 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/869289949" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/952030247" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
 
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">You’ve spent 30 days crushing it on the drums.
                 <br><br>
-                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.
+                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Independence students to get unlimited drum lessons for a year + lifetime access to 30-Day Chops–
+                <br><br>
+                And you only have to pay the difference.
                 <br><br>
                 <b>Join Drumeo today and you’ll get:</b>
             </p>
             <div class="mx-3 md:mx-0">
                 <ul class="pl-4 mx-auto text-left rounded-xl text-white px-3 py-4 w-full" style="max-width: 700px; background-color:#0D1627;">
-                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Step-by-step lessons building on what you learned in 30-Day Drummer</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Step-by-step lessons building on what you learned in 30-Day Independence</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Access to 6000+ popular songs you can play with your new skills</li>
                 <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Personalized support for ALL your drumming questions</li>
-                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Follow-up courses 10-Day Fills and 10-Day Ghost Notes with Domino (NEW!)</li>
-                <li class="flex items-start"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> The brand NEW Drumeo StickBag and a fresh pair of 5A drumsticks (FREE BONUSES)</li>
+                <li class="flex items-start mb-1"><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> An Advanced Independence follow-up course with El Estepario Siberiano (NEW)</li>
+                <li class="flex items-start     "><span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span> Lifetime access to learn tasty linear chops on the drums with 30-Day Chops</li>
                 </ul>
             </div>
 
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
-                <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise).
+                <strong class="text-drumeo">Plus,</strong> you’ll have FREE priority registration for any future 30-Day Independence events like this one (we’ll be doing more, promise).
                 <br><br>
-                And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?).
+                You can join Drumeo for 1 year (with all that ^) for just $143.
                 <br><br>
-                <b>But heads up:</b> This offer is only available until March 31, 2024. <br><br>
+                <b>But heads up:</b> This offer is only available until June 5, 2024.
+                <br><br>
                 Click below to get started and keep crushing it on the drums for the next year!
             </p>
                         <div class="px-3 md:px-0">
@@ -297,7 +299,7 @@
 
     <section class="py-12 md:py-20 text-white" style="background:#01050F;">
         <div class="max-w-md md:max-w-4xl mx-auto px-4 lg:px-2">
-            <p class="text-center text-yellow">30-DAY DRUMMER EXCLUSIVE</p>
+            <p class="text-center text-yellow">30-DAY INDEPENDENCE EXCLUSIVE</p>
             <h3 class="font-extrabold text-center text-white my-6">
                 Drumeo membership special <br class="sm:hidden">pricing <br class="hidden sm:inline">
                 + FREE bonuses.
@@ -305,30 +307,30 @@
             <p class="text-center mb-6">You’ll have one year of unlimited drum lessons, including:</p>
             <div class="md:grid md:grid-cols-3 md:gap-4">
                 <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#071023;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg"></div>
+                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg');"></div>
                     <div class=" px-3 lg:px-4 py-5 lg:py-7 text-center">
                         <i class="text-4xl align-middle icon-drumeo-method text-drumeo"></i>
-                        <img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
+                        <img class="h-5 ml-2 imgfilter-method" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
                         <p class="mt-2">
                             Step-by-step lessons for the next stage of your drumming.
                         </p>
                     </div>
                 </div>
                 <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#071023;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg"></div>
+                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg');"></div>
                     <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
-                        <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
+                        <img class="h-5 ml-2 imgfilter-songs" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                         <p class="mt-2">
-                            Easy access to 3100+ famous drum songs with play-along tools.
+                            Easy access to 6000+ famous drum songs with play-along tools.
                         </p>
                     </div>
                 </div>
                 <div class="relative rounded-xl overflow-hidden" style="background-color:#071023;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg"></div>
+                    <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg');"></div>
                     <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
-                        <img class="h-8 icon imgfilter-coaches lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
-                        <img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
+                        <img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
+                        <img class="h-5 ml-2 imgfilter-coaches" src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
                         <p class="mt-2">
                             Personalized support for ALL your drumming questions.
                         </p>
@@ -338,20 +340,24 @@
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
-            <h3 class="text-center leading-tight"><strong>Improve your Drum Fills and Ghost Notes<br> with Domino Santantonio.</strong></h3>
-            <p class="leading-normal mt-2 sm:mt-3">Domino will help you take the next steps on the drums<br> with her all NEW follow-up packs to 30-Day Drummer:</p>
+        <div class="container max-w-5xl mx-auto">
+            <h3 class="text-center leading-tight"><strong>Learn Drum Chops AND Take Your<br> Independence To The Next Level</strong></h3>
+            <p class="leading-normal mt-2 sm:mt-3">You’ve untangled your limbs and are ready for the next steps.</p>
             <div class="flex flex-wrap text-left mx-auto my-6 sm:my-9 text-white">
                 <div class="w-1/2 pr-2 sm:px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#071023;">
-                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/september/fills.png" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
-                        <p class="p-2 sm:p-5 text-sm">Still stumbling in and out of drum fills? In 10-Day Fills, Domino will help you play seamless transitions in and out of popular drum fills. You’ll play along with her every day for 10 days until you can play fills with excellent timing & feel.</p>
+                        <img class="transition-all" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/asc/thumb-30.png" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <p class="p-2 sm:p-5 text-sm">
+                            <strong>30-Day Chops</strong> | LIFETIME ACCESS<br><br>
+                            Learn tasty linear chops by following daily guided workouts with ZackGrooves. By the end of the course, you’ll have the skills to explode creatively on the drums and start creating your own patterns.</p>
                     </div>
                 </div>
                 <div class="w-1/2 sm:px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#071023;">
-                        <img class="transition-all" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/september/ghost-notes.png" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
-                        <p class="p-2 sm:p-5 text-sm">Challenge your coordination and feel by playing tasty ghost notes with REAL music. Taught in the same format as 30-Day Drummer, you’ll play along with Domino every day for 10 days until your ghost notes feel effortless.</p>
+                        <img class="transition-all" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/690x0/filters:quality(95)/marketing/drumeo/products/30-day-independence/asc/thumb-advanced.png" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <p class="p-2 sm:p-5 text-sm">
+                            <strong>Advanced Independence with Estepario</strong><br><br>
+                            The next frontier in 4-way coordination. In this advanced course, Estepario will push your 4-way limb independence to the next level with challenging patterns in short daily lessons.</p>
                     </div>
                 </div>
             </div>
@@ -373,35 +379,35 @@
     <section class="py-6 md:py-10" style="background-color:#F1F7FE;">
         <div class="mx-auto md:max-w-3xl lg:max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-6 px-4 lg:px-0">
             <div class="max-w-xs mx-auto">
-                <img class="rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “Playing drums is my favorite thing I get to do and I learn so much from all of these super pros on Drumeo.”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.instagram.com/reel/CeTtxCLpo7m/?utm_source=ig_web_copy_link&utm_campaign=2022-06-05_Drumeo_Mainlist_Celebrity-Drummers&utm_medium=email&utm_source=customer.io">As shared on Instagram</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
                     <i class="text-sm">Actor, Musician, Singer</i>
                 </p>
             </div>
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “It’s an app that teaches you drums and has songs you can play along with, different teachers, and sheet music. It’s really good.”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px;" href="https://youtube.com/shorts/frOYuDmEO2s?feature=share">As shared on "The Howard Stern Show"</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
                     <i class="text-sm">Actor, Comedian, Producer</i>
                 </p>
             </div>
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “Drumeo is the easiest way for me to learn the drums, because I can learn anything I want, whenever it works best for me!”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.drumeo.com/beat/petr-cech/">As shared on Drumeo.com</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
                     <i class="text-sm">Record-Setting Goalkeeper, Chelsea FC</i>
                 </p>
             </div>
@@ -411,41 +417,28 @@
     @php
         $bonuses = [
                         [
-                        'image' => 'marketing/drumeo/promos/black-friday/fills-card2.jpg',
-                        'title' => "10 Day Fills",
-                        'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
+                        'image' => 'marketing/drumeo/products/30-day-independence/asc/card-30.png',
+                        'title' => "30-Day Chops",
+                        'description' => 'For 30 days, play along with Zack Graybeal (aka “Zack Grooves”) and gain the skills to create your own patterns around the kit.',
+                        'price' => floatval($productPrices['30-day-chops']->price),
+                        ],
+                        [
+                        'image' => 'marketing/drumeo/products/30-day-independence/asc/card-advanced.png',
+                        'title' => "Advanced Independence",
+                        'description' => 'Estepario will push your 4-way limb independence to the next level with challenging patterns in short daily lessons.',
                         'customText' => 'NEW COURSE',
-                        ],
-                        [
-                        'image' => 'marketing/drumeo/promos/black-friday/ghost-notes-card2.jpg',
-                        'title' => "10 Day Ghost Notes",
-                        'description' => 'This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm.',
-                        'customText' => 'NEW COURSE',
-                        ],
-                        [
-                        'image' => 'marketing/drumeo/promos/black-friday/stick-card.png',
-                        'title' => "Drumeo StickBag",
-                        'description' => 'Protect your tools & keep your kit tight. All your tools in one place, safe and sound.',
-                            'price' => floatval($productPrices['stickbag']->price),
-                            'shipping' => true,
-                        ],
-                        [
-                            'image' => 'marketing/drumeo/promos/black-friday/drumsticks.jpg',
-                            'title' => 'Drumeo Drumsticks',
-                            'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
-                            'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                            'shipping' => true,
                         ],
         ]
     @endphp
     @include('musora.sales.components.order-section-bonuses', [
     'bgColor' => 'background:linear-gradient(to bottom, #01050F 66%, #07132C);',
-    'subHeader' => '<strong><span class="text-musora">SAVE 17%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 4 FREE BONUSES.',
+    'subHeader' => '<strong><span class="text-musora">SAVE 40%</span> ON YOUR DRUMEO MEMBERSHIP</strong> <br class="hidden sm:inline">+ GET 2 FREE BONUSES.',
     'theme' => 'drumeo',
+        'firstYearPrice' => '143',
         'CTA' => 'CLAIM YOUR OFFER',
     'topImage' => 'marketing/drumeo/membership/homepage/2024/drumeo-annual-2w-card.webp',
     'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=special',
+    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&locked=true&promo-code=ultimate-technique',
     'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
     ])
 
@@ -457,7 +450,7 @@
         ])
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2024-04-01 00:00:00',
+        'countdownDate' => '2024-06-06 00:00:00',
         'promoVersion' => false
     ])
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
