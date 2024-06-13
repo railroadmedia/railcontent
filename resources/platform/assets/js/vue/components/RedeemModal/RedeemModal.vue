@@ -37,7 +37,7 @@
                         <p class="tw-font-bold">Access Code</p>
                         <input id="accessCodeNew" name="access_code" type="text" class="tw-caret-black"
                                :class="{'tw-border-[#EF4444] tw-bg-[#FECACA]': errors.access_code}" autocomplete="off"
-                               spellcheck="false" :disabled="isLoading" >
+                               spellcheck="false" :disabled="isLoading" placeholder="XXXX - XXXX - XXXX - XXXX - XXXX - XXXX" maxlength="24" >
                         <span v-show="errors.access_code" class="tw-text-xs tw-text-[#EF4444]"
                               v-text="errors.access_code"></span>
                     </div>
