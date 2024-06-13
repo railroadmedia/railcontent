@@ -3,18 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
-import CustomInput from './components/CustomInput'; // Import the custom component
-import ArrayInput from './components/ArrayInput'; // Import the custom component
-import SoundsliceSlug from './components/SoundsliceSlug'; // Import the custom component
-import RolesBasedArrayInput from './components/RolesBasedArrayInput';
+import DifficultyInput from './components/DifficultyInput'; // Import the custom component
+import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import the custom component
+import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
+import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 
 // You can add more custom components here as needed
 const customComponents = {
-    CustomInput: CustomInput,
-    ArrayInput: ArrayInput,
-    SoundsliceSlug: SoundsliceSlug,
-    RolesBasedArrayInput: RolesBasedArrayInput
+    DifficultyInput: DifficultyInput,
+    SoundsliceArrayInput: SoundsliceArrayInput,
+    SoundsliceSlugInput: SoundsliceSlugInput,
+    RolesBasedPermissionsInput: RolesBasedPermissionsInput
 };
 
 // Helper function to map components
