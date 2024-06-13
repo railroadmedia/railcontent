@@ -1143,9 +1143,7 @@
                         <p class="text-xs px-3 py-1 font-black">BEST DEAL</p>
                     </div>
                     <h3 class="leading-tight"><strong>Join Pianote</strong></h3>
-                    <p class="text-sm mt-2 mb-3">- Step-by-Step Lessons<br>
-                        - 1000+ Songs<br>
-                        - World-Class Teachers</p>
+                    <p class="text-sm mt-2 mb-3">Step-by-step lessons with world-class teachers and 1000+ popular songs!</p>
                     <h2 class="inline-block"><strong class="text-4xl">$240</strong></h2>
                     <p class="inline-block text-xs">(Includes $364 in free bonuses)</p><br>
                     <div class="join bg-pianote smaller my-4">GET EVERYTHING</div>
