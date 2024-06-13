@@ -30,7 +30,7 @@ class Song extends BaseSanityModel
                         new Field(FieldType::URL, 'resource_url')],preview: ['select' => ['title' => 'resource_name', 'subtitle' => 'resource_url']]
                                               );
         $soundsliceList = new ListObject('object',fields: [new Field(FieldType::String, 'soundslice_title'),
-                       new Field(FieldType::String, 'soundslice_slug', inputComponent: 'SoundsliceSlug'), new Field(FieldType::Number, 'soundslice_length_in_second')],preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
+                       new Field(FieldType::String, 'soundslice_slug', inputComponent: 'SoundsliceSlugInput'), new Field(FieldType::Number, 'soundslice_length_in_second')],preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
         );
 
         $fields = [
@@ -38,9 +38,9 @@ class Song extends BaseSanityModel
             new Field(FieldType::Slug, 'slug', options:['source' => 'title'],  hidden: "({document}) => !document?.title,"),
             new BrandField(),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
-            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference,  inputComponent: 'RolesBasedArrayInput'),
+            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference,  inputComponent: 'RolesBasedPermissionsInput'),
             new Field(FieldType::Number, 'difficulty',  validation: "rule => rule.min(0).max(10)"
-                , inputComponent: 'CustomInput'
+                , inputComponent: 'DifficultyInput'
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true"),
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),

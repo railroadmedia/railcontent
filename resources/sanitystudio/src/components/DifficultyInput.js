@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useFormValue, set, useClient } from 'sanity';
 import { Grid, Button } from '@sanity/ui';
 
-const CustomInput = React.forwardRef((props, ref) => {
+const DifficultyInput = React.forwardRef((props, ref) => {
     const { schemaType, onChange, value = '', elementProps } = props;
     const { validation = [] } = schemaType;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
@@ -54,7 +54,7 @@ const CustomInput = React.forwardRef((props, ref) => {
     );
 });
 
-export default CustomInput;
+export default DifficultyInput;
 
 function generateRange(validation) {
     const [min, max] = validation

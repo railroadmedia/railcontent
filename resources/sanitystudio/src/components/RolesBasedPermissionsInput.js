@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCurrentUser} from 'sanity'
 
-const RolesBasedArrayInput = React.forwardRef((props, ref) => {
+const RolesBasedPermissionsInput = React.forwardRef((props, ref) => {
     const {renderDefault, schemaType} = props;
     const {role} = useCurrentUser();
 
@@ -16,4 +16,4 @@ const RolesBasedArrayInput = React.forwardRef((props, ref) => {
     return renderDefault({...props});
 });
 
-export default RolesBasedArrayInput;
+export default RolesBasedPermissionsInput;
