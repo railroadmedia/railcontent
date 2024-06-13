@@ -3,6 +3,7 @@
 namespace App\Modules\Content\Models\Sanity\Structure;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
@@ -33,7 +34,7 @@ class Field
         //TODO can we do something more for $to? Can at least do some validation that there exists a class with that name, that extends BaseSanityModel
         public ?string $to = null,
         //TODO can we do something more for $of?
-        public Reference|ListObject|string|null $of = null,
+        public Reference|ListObject|Block|string|null $of = null,
         public Group|array|null $group = null,
         public ?array $options = null,
         public ?string $hidden = null,

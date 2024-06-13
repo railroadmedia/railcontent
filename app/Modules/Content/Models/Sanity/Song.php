@@ -7,6 +7,7 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
+use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
@@ -38,6 +39,9 @@ class Song extends BaseSanityModel
                        new Field(FieldType::String, 'soundslice_slug', inputComponent: 'SoundsliceSlugInput'), new Field(FieldType::Number, 'soundslice_length_in_second')],
             preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
         );
+        $blockList = new Block(
+                     'block'
+        );
 
         $fields = [
             new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"),
@@ -52,6 +56,7 @@ class Song extends BaseSanityModel
                 inputComponent: 'DifficultyInput'
             ),
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true"),
+            new Field(FieldType::Array, 'description', 'Description', of:$blockList),
             new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)"),
             new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true"),
             new Field(FieldType::Number, 'released', 'Year Released', validation: "rule => rule.min(1500).max(new Date().getFullYear())"),
