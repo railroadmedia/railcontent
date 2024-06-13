@@ -53,11 +53,10 @@ class ShopifyGateway
 
         $responseBody = $this->executeQuery($gql);
 
-        $product =
+        $product = $responseBody->data->node ?
             collect($responseBody->data->node->metafields->edges)->map(function ($product) {
                 return new ProductMetaFields($product);
-            })
-        ;
+            }) : collect();
 
         return $product->values();
     }
