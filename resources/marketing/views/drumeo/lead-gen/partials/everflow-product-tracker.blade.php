@@ -14,18 +14,18 @@
                 console.log(transaction_id);
                 for (var i = 0; i < elems.length; i++){
                     if (elems[i].href.includes(addToCartText)) {
-                        var url = new URL(elems[i].href);
-                        url.searchParams.set('_ef_transaction_id', transaction_id);
-                        elems[i].href = url.href
+                        var href = elems[i].href;
+                        var separator = href.includes('?') ? '&' : '?';
+                        elems[i].href = href + separator + '_ef_transaction_id=' + transaction_id;
                     }
                 }
             });
         } else {
             for (var i = 0; i < elems.length; i++){
                 if (elems[i].href.includes(addToCartText)) {
-                    var url = new URL(elems[i].href);
-                    url.searchParams.set('_ef_transaction_id', EF.getAdvertiserTransactionId(advertiserId));
-                    elems[i].href = url.href
+                    var href = elems[i].href;
+                    var separator = href.includes('?') ? '&' : '?';
+                    elems[i].href = href + separator + '_ef_transaction_id=' + EF.getAdvertiserTransactionId(advertiserId);
                 }
             }
         }

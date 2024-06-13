@@ -304,9 +304,9 @@
                 <div class="flex-grow pl-8 sm:text-left">
                     <h3 class="leading-tight"><strong>The app for learning<br> the music you love.</strong></h3>
                     <p class="leading-tight my-5">Access the member’s area for Drumeo, Pianote, Singeo, and Guitareo all in one place. Our brand new Musora app has improved functionality and added features with full access to all four brands.</p>
-                    <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
+                    <a class="inline-block" href="https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277?ls=1" target="_blank">
                         <img class="h-10 m-1" src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-                    <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
+                    <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank">
                         <img class="h-10 m-1" src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
                 </div>
             </div>
@@ -324,7 +324,7 @@
             'num' => '?',
             "title" => "Which mobile app should I use?",
             "desc" => "We’ve launched a brand new Musora mobile app with improved functionality and added features with access to all four brands. The Drumeo and Pianote mobile apps will remain accessible, but will not be updated with new content and features. Download the new app here:
-            <a href='https://play.google.com/store/apps/details?id=com.musoraapp' target='_blank'><u>GOOGLE PLAY</u></a> / <a href='https://itunes.apple.com/us/app/musora/id1619053766?ls=1' target='_blank'><u>APPLE STORE</u></a>",
+            <a href='https://play.google.com/store/apps/details?id=com.drumeo' target='_blank'><u>GOOGLE PLAY</u></a> / <a href='https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277?ls=1' target='_blank'><u>APPLE STORE</u></a>",
             ])
             @include('_partials.components.question-dropdown', [
             'num' => '?',

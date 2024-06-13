@@ -596,20 +596,16 @@
                 Chords, scales, and arpeggios are the building blocks to playing beautiful music.
             </p>
             <div class="flex flex-col md:flex-row md:gap-4">
-                <a href="/blog/piano-technique-made-easy/" class="flex-1 mb-10 md:mb-0">
+                <a href="https://www.pianote.com/blog/ultimate-piano-technique/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/rXC7CJgTeYY/maxresdefault.jpg" alt="improve your piano technique">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/quality=80,width=768/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2024/04/12120051/Blog-Piano-Technique-101-01-scaled.jpg">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        Lisa Witt / TECHNIQUE
-                    </p>
-                    <h5 class="font-bold mb-2 leading-6">
-                        Piano Technique Made Easy
-                    </h5>
-                    <p>
-                        What to focus on when you practice technique, including scales, inversions, finger patterns, and arpeggios.
-                    </p>
+Pianote &nbsp;/&nbsp;
+Technique </p>
+                    <h5 class="font-bold mb-2 leading-6">The Ultimate Piano Technique Resource</h5>
+                    <p>Look no further. Here is everything you need to play faster, articulate better, and master piano technique.</p>
                 </a>
                 <a href="/blog/hand-independence-in-5-days/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
@@ -650,28 +646,28 @@
                 Musicianship skills include ear training, songwriting, improvisation, playing in groups, and more.
             </p>
             <div class="flex flex-col md:flex-row md:gap-4">
-                <a href="/blog/piano-practice-routine-for-beginners/" class="flex-1 mb-10 md:mb-0">
+                <a href="/blog/how-long-should-you-practice-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/yrgO3R8mgGo/maxresdefault.jpg" alt="piano practice routine for beginners">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2024/05/15143639/30minutes-1hour-3hours-01-768x432.jpg" alt="piano practice routine for beginners">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        Lisa Witt / Practice
+                        Charmaine Li / Practice
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        Piano Practice Routine for Beginners (Not Boring!)
+                        How Long Should You Practice Piano?
                     </h5>
                     <p>
-                        A beginner-friendly routine designed to maximize skill and minimize boredom.
+                        How long should you practice piano each day? Let’s answer this question with ability level, goals, and practice habits in mind…
                     </p>
                     </a>
                 <a href="/blog/how-to-improvise-on-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/FJ-Y21kBkMk/maxresdefault.jpg" alt="how to improvise on piano">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://img.youtube.com/vi/q1hXh416WmE/maxresdefault.jpg" alt="how to improvise on piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        Jesús Molina, Pianote / Improvisation
+                        Pianote / Improvisation
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
                         How to Improvise on Piano: A Beginner’s Guide
@@ -734,19 +730,19 @@
                         Piano is good for you! It can improve mood, slow cognitive decline, and it's the perfect mindfulness exercise.
                     </p>
                 </a>
-                <a href="/blog/is-piano-hard-to-learn/" class="flex-1">
+                <a href="/blog/50-best-piano-songs/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/05/12081100/Is-Piano-Hard-1400x788-1-768x432.jpg" alt="is piano hard to learn">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/09/22141817/Blog-Thumb-50-Best-Piano-Songs-768x432.jpg" alt="is piano hard to learn">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
                         CHARMAINE LI / Articles
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        Is Piano Hard to Learn? Tips for Beginners
+                        50 Best Piano Songs of All Time (All Genres)
                     </h5>
                     <p>
-                        The piano is one of the best instruments for beginners...and one of the hardest for musicians to master.
+                        The most iconic piano-driven songs in history, from Franz Liszt to Hans Zimmer.
                     </p>
                 </a>
             </div>

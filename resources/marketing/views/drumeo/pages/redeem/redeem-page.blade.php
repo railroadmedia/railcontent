@@ -137,28 +137,15 @@
                 width:95%;
             }
         }
+
+        .apply {
+            background:#0b76db;
+        }
+
+        .apply:hover {
+            background:#258ff4;
+        }
     </style>
-    @if(!empty($thomann) || !empty($alesis) || !empty($alesisStrata))
-        <style>
-            .apply {
-                background:#0b76db;
-            }
-
-            .apply:hover {
-                background:#258ff4;
-            }
-        </style>
-    @else
-        <style>
-            .apply {
-                background:#000C17;
-            }
-
-            .apply:hover {
-                background:#001930;
-            }
-        </style>
-    @endif
 @endsection
 
 <!-- Main -->
@@ -169,143 +156,82 @@
         "joinUrl" => '/choose-plan',
     ])
 
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center"
+        style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-            @if(!empty($alesis))
-                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="{{ musora_cdn('redeem/alesis/alesis-logo.png') }}">
-                <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
+            @if(!empty($alesisNitro) || !empty($alesisCrimson) || !empty($alesisStrata) || !empty($alesisStrataCore))
+                @php
+                    $logoMapping = [
+                        'alesisNitro' => [
+                            'name' => 'Nitro Max',
+                            'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
+                        ],
+                        'alesisCrimson' => [
+                            'name' => 'Crimson III',
+                            'video' => '//player.vimeo.com/video/915243228'
+                        ],
+                        'alesisStrata' => [
+                            'name' => 'Strata Prime',
+                            'video' => '//player.vimeo.com/video/915243228'
+                        ],
+                        'alesisStrataCore' => [
+                            'name' => 'Strata Core',
+                            'video' => '//player.vimeo.com/video/915243228'
+                        ],
+                    ];
+
+                    $key = !empty($alesisNitro) ? 'alesisNitro' : (!empty($alesisCrimson) ? 'alesisCrimson' : (!empty($alesisStrata) ? 'alesisStrata' : 'alesisStrataCore'));
+                    $nameSrc = $logoMapping[$key]['name'];
+                    $videoSrc = $logoMapping[$key]['video'];
+                @endphp
+                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-with-drumeo.png">
+                <h1 class="leading-none font-lexend uppercase mt-2 mb-5">{{ $nameSrc }}</h1>
+                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
+                    <iframe class="absolute w-full h-full" src="{{ $videoSrc }}" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
                 </div>
-            @elseif(!empty($alesisStrata))
-                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata.png">
-                <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
-                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/915243228" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-                </div>
-            @elseif(!empty($alesisStrataCore))
-                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-strata-core.png">
-                <h3 class="leading-tight mt-3 mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
-                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/915243228" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-                </div>
-            @elseif(empty($thomann))
-                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
-                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <picture>
-                        <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg">
-                        <img class="absolute w-full h-full inset-0 object-cover"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb.jpg"
-                            alt="card image" fetchpriority="high">
-                    </picture>
-                </div>
-            @else
-                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="filter  h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
-                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @endif
         </div>
     </div>
+
     <div class="py-8 sm:py-12 px-4 sm:px-6">
         <div class="container mx-auto max-w-3xl">
-            @if(!empty($thomann))
-                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                    <strong class="text-pianote"> These access codes can only be <br class="inline sm:hidden"> redeemed for new accounts</strong>
-                </div>
-            @endif
-             @if($newAccount)
-                @if(!empty($alesis))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong><b>Existing Member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/alesis/existing">Click here to add to your account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for new accounts)</em>
-                    </div>
-                @elseif(!empty($alesisStrata))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong><b>Existing Member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/alesis-strata/existing">Click here to add to your account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for new accounts)</em>
-                    </div>
-                @elseif(!empty($alesisStrataCore))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong><b>Existing Member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/alesis-strata-core/existing">Click here to add to your account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for new accounts)</em>
-                    </div>
-                @elseif(empty($thomann))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong><b>Existing Member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/redeem/existing">Click here to add to your account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for new accounts)</em>
-                    </div>
-                @endif
+            @php
+                $isNewAccount = $newAccount;
+                $accountTypes = [
+                    'alesisNitro' => '/alesis',
+                    'alesisCrimson' => '/alesis-crimson-iii',
+                    'alesisStrata' => '/alesis-strata',
+                    'alesisStrataCore' => '/alesis-strata-core'
+                ];
 
-                @foreach ($errors->all() as $error)
-                    <br>
-                    <p class="validation-error">{{ $error }}</p>
-                @endforeach
+                $membershipLink = '';
+                foreach ($accountTypes as $type => $link) {
+                    if (!empty($$type)) {
+                        $membershipLink = $isNewAccount ? $link . '/existing' : $link;
+                        break;
+                    }
+                }
 
-                @include('musora.pages.redeem._redeem-form')
-             @else
-                @if(!empty($alesis))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong> <b>Not already a member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/alesis">Click here to redeem on a new account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for existing members)</em>
-                    </div>
-                @elseif(!empty($alesisStrata))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong> <b>Not already a member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/alesis-strata">Click here to redeem on a new account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for existing members)</em>
-                    </div>
-                @elseif(!empty($alesisStrataCore))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong> <b>Not already a member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/alesis-strata-core">Click here to redeem on a new account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for existing members)</em>
-                    </div>
-                @else
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong> <b>Not already a member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/redeem">Click here to redeem on a new account.</a>
-                        </strong>
-                        <br>
-                        <em>(The form below is only for existing members)</em>
-                    </div>
-                @endif
-                @foreach ($errors->all() as $error)
-                    <br>
-                    <p class="validation-error">{{ $error }}</p>
-                @endforeach
+                $membershipMessage = $isNewAccount
+                    ? 'Click here to add to your account.'
+                    : 'Click here to redeem on a new account.';
+            @endphp
 
-                @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true
-                ])
-             @endif
+            <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                <strong>{{ $isNewAccount ? 'Existing Member?' : 'Not already a member?' }}</strong>
+                <br>
+                <a class="text-drumeo underline" href="{{ $membershipLink }}">{{ $membershipMessage }}</a>
+                <br>
+                <em>(The form below is only for {{ $isNewAccount ? 'new accounts' : 'existing members' }})</em>
+            </div>
 
+            @foreach ($errors->all() as $error)
+                <br>
+                <p class="validation-error">{{ $error }}</p>
+            @endforeach
+
+            @include('musora.pages.redeem._redeem-form', ['existing' => !$isNewAccount])
 
             <br>
             @if(!$newAccount)
@@ -320,31 +246,24 @@
         </div>
     </div>
 
+
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $('.code-input').bind(
-                    'paste', function (e) {
-                        var value = e.originalEvent.clipboardData.getData('text');
-                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                        for (var i = 0; i < chunks.length; i++) {
-                            $('.code-input').eq(i).val(chunks[i]);
-                        }
-                    }
-                ).bind(
-                    'input',
-                    function (e) {
-                        console.log($(this).val().length);
-                        if ($(this).val().length == 4) {
-                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                        }
-                    }
-                );
-            }
-        );
+        $(document).ready(function () {
+            $('.code-input').bind('paste', function (e) {
+                var value = e.originalEvent.clipboardData.getData('text');
+                value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
+                var chunks = value.match(new RegExp('.{1,4}', 'g'));
+                for (var i = 0; i < chunks.length; i++) {
+                    $('.code-input').eq(i).val(chunks[i]);
+                }
+            }).bind('input', function (e) {
+                if ($(this).val().length == 4) {
+                    $('.code-input').eq($(this).index('.code-input') + 1).focus();
+                }
+            });
+        });
     </script>
 @endsection

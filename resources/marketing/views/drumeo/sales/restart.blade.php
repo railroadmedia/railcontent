@@ -137,16 +137,17 @@
                             <h6 class="leading-normal mb-4 sm:mb-2">Rejoin Drumeo and save 50% on your first year back. <br>
                                 <strong class="text-musora"><em>Only available until May 31st.
 
-                                                        <span x-cloak x-data="timer()" x-init="countdown()">
-                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                                                 </span>
-                                        left!</em></strong></h6>
+{{--                                                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                                                                 </span>--}}
+{{--                                        left!--}}
+                                    </em></strong></h6>
                             <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 mx-auto sm:max-w-xs">
-                                <a class="w-full join green smaller mb-2 anchor-slide" href="#customize-anchor">SEE YOUR DEAL &raquo;</a>
+{{--                                <a class="w-full join green smaller mb-2 anchor-slide" href="#customize-anchor">SEE YOUR DEAL &raquo;</a>--}}
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
                                     <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #383bc8;color: #ffac00;"></i>
@@ -325,21 +326,23 @@
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Step-by-step courses<br class="sm:hidden">
                         <i class="fas fa-check text-musora mr-1 ml-3"></i>Playalongs in every style</p>
                     <h5 class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until May 31st.
-                                <span x-cloak x-data="timer()" x-init="countdown()">
-                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                                                 </span>
-                                left!</em></strong></h5>
+{{--                                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                                                                 </span>--}}
+{{--                                left!--}}
+                            </em></strong></h5>
 
                     <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
                 </div>
 
 
-                <a class="join green" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">GET Started »</a>
+                <a class="join sold-out" >THIS OFFER HAS NOW ENDED</a>
+{{--                <a class="join green" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&locked=true&promo-code=restart">GET Started »</a>--}}
             </div>
         </section>
 
