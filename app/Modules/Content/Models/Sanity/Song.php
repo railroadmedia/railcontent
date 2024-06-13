@@ -45,6 +45,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true"),
             new Field(FieldType::Number, 'xp', 'XP',  validation: "rule => rule.min(0)"),
             new Field(FieldType::Number, 'total_xp', 'Total XP',   hidden: "({document}) => !document?.xp", readOnly: "true"),
+            new Field(FieldType::Number, 'released', 'Year Released', validation: "rule => rule.min(1500).max(new Date().getFullYear())"),
             new Field(FieldType::String, 'album'),
             new Field(FieldType::String, 'transcriber_name', 'Transcribed By'),
             new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless'),
@@ -58,6 +59,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail'),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true"), //web_url_path
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true"),
+            new Field(FieldType::String, 'language', 'Language', hidden: "true"),
         ];
         $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
         parent::__construct('song', 'Song', fields: $fields, preview: $preview);
