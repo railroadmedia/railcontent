@@ -53,14 +53,14 @@ class ShopifyGateway
 
         $responseBody = $this->executeQuery($gql);
 
-        $product =
+        $product = $responseBody->data->node ?
             collect($responseBody->data->node->metafields->edges)->map(function ($product) {
                 return new ProductMetaFields($product);
-            })
-        ;
+            }) : collect();
 
         return $product->values();
     }
+
     public function getCustomerOrders($shopifyCustomerId)
     {
         $orders = collect();
@@ -193,7 +193,7 @@ class ShopifyGateway
      *
      * @param Carbon $startDate
      * @param Carbon $endDate
-     * @param  int  $limit  The page limit for this query. Must be 1-250.
+     * @param int $limit The page limit for this query. Must be 1-250.
      * @param string $additionalFilter Additional query filter, e.g. " AND status:closed".
      *                       See https://shopify.dev/docs/api/usage/search-syntax
      * @param string $additionalFields Additional fields to include in result, e.g. ", processedAt".
@@ -203,11 +203,12 @@ class ShopifyGateway
     public function getOrdersBetween(
         Carbon $startDate,
         Carbon $endDate,
-        int $limit = 100,
+        int    $limit = 100,
         string $additionalFilter = '',
         string $additionalFields = '',
         string &$endCursor = ''
-    ): Collection {
+    ): Collection
+    {
         $orderInfo = collect();
         $startDateString = $startDate->toIso8601String();
         $endDateString = $endDate->toIso8601String();
@@ -244,16 +245,18 @@ class ShopifyGateway
     }
 
     public function doesOrderExist(
-        int $shopifyCustomerId,
+        int    $shopifyCustomerId,
         Carbon $processedAt
-    ): bool {
+    ): bool
+    {
         return count($this->getCustomerOrderByProcessAtDate($shopifyCustomerId, $processedAt));
     }
 
     public function getCustomerOrderByProcessAtDate(
-        int $shopifyCustomerId,
+        int    $shopifyCustomerId,
         Carbon $processedAt
-    ) {
+    )
+    {
         // DEV NOTE: we must supply the datetime as a properly formatted string, and for some reason Shopify isn't
         // taking the full datetime string into account when querying processed_at:\"$processedAtString\", and instead
         // only uses the date. So as a workaround, just check >= and <=.
@@ -311,7 +314,8 @@ class ShopifyGateway
     public function updateCustomerLastTrialEndDate(
         $customerID,
         $lastTrialEndDate
-    ) {
+    )
+    {
         // This data is processed by the shopify extension: checkout-block-repeated-trials
         // in the repository: musora-shop-ify-extensions-app
         $namespace = ShopifyMetafieldNamespace::Model_Users->value;
@@ -357,7 +361,8 @@ class ShopifyGateway
      */
     public function doesMetaFieldDefinitionExist(
         MetaFieldDefinition $metaFieldDefinition
-    ): bool {
+    ): bool
+    {
         $ownerType = $metaFieldDefinition->ownerType;
         $key = $metaFieldDefinition->key;
         $name = $metaFieldDefinition->name;
@@ -397,7 +402,8 @@ class ShopifyGateway
      */
     public function createMetaFieldDefinition(
         MetaFieldDefinition $metaFieldDefinition
-    ): mixed {
+    ): mixed
+    {
         $ownerType = $metaFieldDefinition->ownerType;
         $key = $metaFieldDefinition->key;
         $name = $metaFieldDefinition->name;
