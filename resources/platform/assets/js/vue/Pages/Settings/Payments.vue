@@ -45,7 +45,7 @@
                                         <div class="tw-flex">
                                             <p class="tw-text-sm tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                                                 <i class="fal fa-file-pdf mr-1"></i>
-                                                {{ formatDate(order.ProcessedAt) }}
+                                                {{ formatDate(order.processedAt) }}
                                             </p>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                             <div class="tw-flex tw-flex-column tw-text-xs tw-italic tw-uppercase tw-w-1/2 tw-text-[#00101D] dark:tw-text-white">
                                                 {{ order.itemsProductTitlesString }}
                                             </div>
-                                            <div class="tw-flex tw-flex-column tw-text-xs tw-italic tw-uppercase tw-1/4 tw-text-[#00101D] dark:tw-text-white">
+                                            <div class="tw-flex tw-flex-column tw-text-xs tw-italic tw-uppercase tw-w-1/4 tw-justify-end tw-text-[#00101D] dark:tw-text-white">
                                                 ${{ formatPrice(order.totalPrice) }}
                                             </div>
                                         </div>
