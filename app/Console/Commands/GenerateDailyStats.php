@@ -71,8 +71,7 @@ class GenerateDailyStats extends Command
                 'drumeo' => 0,
                 'pianote' => 0,
                 'guitareo' => 0,
-                'singeo' => 0,
-                'musora' => 0
+                'singeo' => 0
             ];
             $totalBasicMembersPerBrand = $totalPlusMembersPerBrand;
             $totalLifetimeMembersPerBrand = $totalPlusMembersPerBrand;
@@ -100,25 +99,19 @@ class GenerateDailyStats extends Command
                 ->join('usora_users', 'user_access_permissions.user_id', '=', 'usora_users.id')
                 ->whereRaw("'$dateIncrement' >= start_time")
                 ->whereRaw("'$dateIncrement' <= end_time")
+                ->where(function ($query) use ($dateIncrement) {
+                    $query->where('trial_expiration_date', '<', $dateIncrement)
+                        ->orWhereNull('trial_expiration_date');
+                })
                 ->where('status', 'active')
+                ->where('user_id', 596143)
                 ->groupBy('user_id');
 
             $allUserPermissionsOfDay = $allUserPermissionsOfDay->get()->toArray();
 
             foreach ($allUserPermissionsOfDay as $userPermission) {
-                $allocatedBrand = null;
-
-                if (Arr::has($brands, $userPermission['last_used_brand'])) {
+                if (in_array($userPermission['last_used_brand'], $brands)) {
                     $allocatedBrand = $userPermission['last_used_brand'];
-                }
-
-                if (empty($allocatedBrand) ) {
-                    foreach ($brands as $brand) {
-                        if (str_contains(strtolower($userPermission['permissions']), $brand)) {
-                            $allocatedBrand = $brand;
-                            break; // never reassign to musora, the last brand in the array because musora perms are always added
-                        }
-                    }
                 }
 
                 if (empty($allocatedBrand)) {
@@ -127,6 +120,7 @@ class GenerateDailyStats extends Command
 
                 if (str_contains(strtolower($userPermission['permissions']), 'lifetime')) {
                     $totalLifetimeMembersPerBrand[$allocatedBrand] += 1;
+                    continue;
                 }
 
                 if (str_contains(strtolower($userPermission['permissions']), 'plus')) {
@@ -136,9 +130,21 @@ class GenerateDailyStats extends Command
                 }
             }
 
-            var_dump($totalPlusMembersPerBrand);
-            var_dump($totalBasicMembersPerBrand);
-            var_dump($totalLifetimeMembersPerBrand);
+            dd(2);
+
+            $totalMembers = 0;
+
+            foreach ($brands as $brand) {
+                $this->info('$totalPlusMembersPerBrand: ' . $brand . ' - ' . ($totalPlusMembersPerBrand[$brand] ?? 0));
+                $this->info('$totalBasicMembersPerBrand: ' . $brand . ' - ' . ($totalBasicMembersPerBrand[$brand] ?? 0));
+                $this->info('$totalLifetimeMembersPerBrand: ' . $brand . ' - ' . ($totalLifetimeMembersPerBrand[$brand] ?? 0));
+
+                $totalMembers += $totalPlusMembersPerBrand[$brand] ?? 0;
+                $totalMembers += $totalBasicMembersPerBrand[$brand] ?? 0;
+                $totalMembers += $totalLifetimeMembersPerBrand[$brand] ?? 0;
+            }
+
+            $this->info('$totalMembers: ' . $totalMembers);
 
             // active
 
