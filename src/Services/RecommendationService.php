@@ -128,7 +128,7 @@ class RecommendationService
             if ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value)){
                 $coldStartTableName = 'recommendations_' . $brand . '_' . $section . '_beginner_items';
                 $coldStartTableName = strtolower($coldStartTableName);
-                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit(20)->get()->pluck('content_id')->toArray();
+                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit($limit)->get()->pluck('content_id')->toArray();
             }
         } else {
             $recommendations = $recommendations->pluck('content_id')->toArray();
