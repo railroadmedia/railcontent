@@ -103,6 +103,19 @@ class ContentLikeService
             ->first();
     }
 
+    public function isLiked($contentId, $userId): bool
+    {
+        $exists = $this->contentLikeRepository->query()
+            ->where(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ]
+            )
+            ->first();
+        return !is_null($exists);
+    }
+
     /**
      * @param $contentId
      * @param $userId
