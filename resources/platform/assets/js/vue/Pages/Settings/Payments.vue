@@ -105,11 +105,11 @@
         {
             name: 'Login Credentials',
             url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
-            isActive: true,
         },
         {
             name: 'Payments',
             url: `/${brand.value}/profile/${userId.value}/settings/payments`,
+            isActive: true,
         },
         {
             name: 'Notification Settings',
