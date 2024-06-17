@@ -7,7 +7,7 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 
 /**
- * Defines the schema structure for an Artist document type in Sanity.
+ * Defines the schema structure for a Permission document type in Sanity.
  *
  * @property string $type
  * @property string $name
