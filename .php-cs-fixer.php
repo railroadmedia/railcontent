@@ -3,7 +3,7 @@
 $finder =
     PhpCsFixer\Finder::create()
         ->in(__DIR__)
-        ->notPath('storage/*')
+        ->exclude(['bootstrap', 'node_modules', 'storage', 'vendor'])
         ->name('*.php')
         ->notName('*.blade.php')
         ->ignoreDotFiles(true)
