@@ -9,17 +9,17 @@ if [ -x vendor/bin/php-cs-fixer ]; then
 fi
 
 if $HAS_PHP_CS_FIXER; then
-    FILES=` git status --porcelain | grep -e '^[AM]\(.*\).php$' | cut -c 3- | tr '\n' ' '`
+    FILES=$(git status --porcelain | grep -E '^[AM].*\.php$' | cut -c 3- | tr '\n' ' ')
     results="php-cs-fixer-results.txt"
-    if [[ -z $FILES ]]; then
+    if [ ! -z "$FILES" ]; then
         rm -f $results
         docker exec --workdir /app/musora-web-platform railenvironmentdocker_apache-php-fpm-8 $PHP_CS_FIXER check --config=.php-cs-fixer.php ${FILES} > $results
         if  grep "Found 0 of " $results
         then
-        	echo ""
+            echo ""
         else
-        	echo "Run 'bash .git/hooks/php-cs-fixer' to fix files then recommit. Or run 'git commit --no-verify' to skip verification"
-        	exit 1
+            echo "Run 'bash .git/hooks/php-cs-fixer' to fix files then recommit. Or run 'git commit --no-verify' to skip verification"
+            exit 1
         fi
         rm -f $results
     fi
