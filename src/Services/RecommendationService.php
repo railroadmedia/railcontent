@@ -116,24 +116,16 @@ class RecommendationService
 
     private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit=20)
     {
-        $tableName = 'recommendations_' . $brand . '_' . $section ;
-        $tableName = strtolower($tableName);
-        $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get();
-        if (!$recommendations || $recommendations->count() == 0) {
+        $tableName = strtolower('recommendations_' . $brand . '_' . $section);
+        $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get()->pluck('content_id');
+        if ($recommendations->isEmpty()) {
             $user = $this->userService->getByIdOrNull($userID);
-            $recommendations = [];
-            if (!$user) {
-                return $recommendations;
+            if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))){
+                $coldStartTableName = strtolower('recommendations_' . $brand . '_' . $section . '_beginner_items');
+                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit(20)->get()->pluck('content_id');
             }
-            if ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value)){
-                $coldStartTableName = 'recommendations_' . $brand . '_' . $section . '_beginner_items';
-                $coldStartTableName = strtolower($coldStartTableName);
-                $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit($limit)->get()->pluck('content_id')->toArray();
-            }
-        } else {
-            $recommendations = $recommendations->pluck('content_id')->toArray();
         }
-        return $recommendations;
+        return $recommendations->toArray();
     }
 
     private function postToHuggingFaceWithRetry($data) {
