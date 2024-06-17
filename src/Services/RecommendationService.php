@@ -23,7 +23,6 @@ class RecommendationService
     private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
-        private UserPermissionsService $userPermissionsService,
         private UserService $userService,
     ) {
         $this->defaultAccessMethod = AccessMethod::from(env('RECSYS_ACCESS_METHOD', 'DB'));
