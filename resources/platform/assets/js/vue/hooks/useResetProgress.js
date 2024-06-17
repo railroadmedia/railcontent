@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import ContentService from '../vuesora/assets/js/services/content';
+import axios from "axios";
 
 export function useResetProgress() {
     const loading = ref(false);
@@ -13,24 +13,26 @@ export function useResetProgress() {
                 arrayRef.value = arrayRef.value.filter((item) => item.id !== contentId);
             }
 
-            ContentService.resetContentProgress(contentId)
-                .then(() => {
-                    window.shownotification({
-                        icon: 'check',
-                        text: 'Ready to start again? Your progress has been reset.'
-                    });
-                    
-                    iconClassRef.value = 'fas fa-redo-alt fa-flip-horizontal';
-
-                     if(!arrayRef) {
-                        setTimeout(() => {
-                            location.reload();
-                        },500);
-                     }
-                })
-                .finally(() => {
-                    loading.value = false;
+            axios.put(`/railcontent/reset`, {
+                content_id: contentId,
+            })
+            .then(() => {
+                window.shownotification({
+                    icon: 'check',
+                    text: 'Ready to start again? Your progress has been reset.'
                 });
+
+                iconClassRef.value = 'fas fa-redo-alt fa-flip-horizontal';
+
+                 if(!arrayRef) {
+                    setTimeout(() => {
+                        location.reload();
+                    },500);
+                 }
+            })
+            .finally(() => {
+                loading.value = false;
+            });
         };
 
         if (showConfirmation) {
