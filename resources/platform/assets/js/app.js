@@ -38,6 +38,7 @@ import CoachShow from './vue/Pages/CoachShow';
 import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
+import Overview from './vue/Pages/Overview';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
 import Search from './vue/Pages/Search';
 import PackOverview from './vue/Pages/PackOverview';
@@ -223,6 +224,7 @@ app.component('AppContainer', AppContainer)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
+    .component('Overview', Overview)
     .component('GuitareoLessons', GuitareoLessons)
     .component('Search', Search)
     .component('PackOverview', PackOverview)
