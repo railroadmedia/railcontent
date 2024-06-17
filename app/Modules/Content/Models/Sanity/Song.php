@@ -2,10 +2,8 @@
 
 namespace App\Modules\Content\Models\Sanity;
 
-use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
-use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
@@ -24,24 +22,20 @@ class Song extends BaseSanityModel
 {
     public function __construct()
     {
-        $genreReference = new Reference('reference', [['type' => 'genre']]);
-        $permissionReference = new Reference('reference', [['type' => 'permission']], options: ['disableNew' => false]);
+        $genreReference = new Reference([['type' => 'genre']]);
+        $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
 
         $resourceList = new ListObject(
-            'object',
             fields: [new Field(FieldType::String, 'resource_name'),
                         new Field(FieldType::URL, 'resource_url')],
             preview: ['select' => ['title' => 'resource_name', 'subtitle' => 'resource_url']]
         );
         $soundsliceList = new ListObject(
-            'object',
             fields: [new Field(FieldType::String, 'soundslice_title'),
                        new Field(FieldType::String, 'soundslice_slug', inputComponent: 'SoundsliceSlugInput'), new Field(FieldType::Number, 'soundslice_length_in_second')],
             preview: ['select' => ['title' => 'soundslice_title', 'subtitle' => 'soundslice_slug']]
         );
-        $blockList = new Block(
-                     'block'
-        );
+        $blockList = new Block();
 
         $fields = [
             new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"),

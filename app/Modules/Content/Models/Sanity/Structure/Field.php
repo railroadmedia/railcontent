@@ -3,8 +3,6 @@
 namespace App\Modules\Content\Models\Sanity\Structure;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
-use Modules\Content\Models\Sanity\Structure\Block;
-use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
  * A field of a Sanity CMS document
@@ -18,12 +16,13 @@ class Field
      * @param  string|null  $description
      * @param  mixed|null  $initialValue
      * @param  string|null  $to
-     * @param  string|null  $of
+     * @param  ArrayItem|null  $of
      * @param  Group|array<Group>|null  $group
      * @param  array|null  $options
      * @param  string|null  $hidden
      * @param  string|null  $readOnly
-     * @param string|null $validation
+     * @param  string|null  $validation
+     * @param  string|null  $inputComponent
      */
     public function __construct(
         public FieldType $type,
@@ -33,8 +32,7 @@ class Field
         public mixed $initialValue = null,
         //TODO can we do something more for $to? Can at least do some validation that there exists a class with that name, that extends BaseSanityModel
         public ?string $to = null,
-        //TODO can we do something more for $of?
-        public Reference|ListObject|Block|string|null $of = null,
+        public ?ArrayItem $of = null,
         public Group|array|null $group = null,
         public ?array $options = null,
         public ?string $hidden = null,
