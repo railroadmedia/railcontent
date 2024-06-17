@@ -69,7 +69,7 @@ class SanityStudioCMSController extends BaseController
         return $duration;
     }
 
-    public function getLastContent(Request $request)
+    public function getLastContent(Request $request): Content
     {
         $content = Content::query()
             ->where('type', '=', 'song')
