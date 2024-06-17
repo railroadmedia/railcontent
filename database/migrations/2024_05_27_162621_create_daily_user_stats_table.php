@@ -20,9 +20,13 @@ return new class extends Migration
             $table->enum('brand', ['drumeo','pianote','guitareo','singeo','musora'])->index();
             $table->integer('total_members_with_full_access')->index();
             $table->integer('total_members_with_basic_access')->index();
+            $table->integer('total_monthly_members')->index();
+            $table->integer('total_annual_members')->index();
+            $table->integer('total_members_in_trial_period')->index();
             $table->integer('total_lifetime_members')->index();
             $table->integer('total_active_members')->index();
             $table->integer('total_expired_members')->index();
+            $table->integer('total_members')->index();
             $table->dateTime('generated_at')->index();
         });
     }
