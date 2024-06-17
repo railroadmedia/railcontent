@@ -90,7 +90,7 @@ class RecommendationService
         $accessMethod ??= $this->defaultAccessMethod;
         $returnData = match($accessMethod) {
             AccessMethod::HUGGINGFACE => $this->postToHuggingFaceWithRetry($data),
-            AccessMethod::PDO => throw new InvalidArgumentException('RecSys PDB Connection  not supported'),
+            AccessMethod::PDO => throw new InvalidArgumentException('RecSys PDO Connection not supported'),
             AccessMethod::DB => $this->pullFromDataBase($data),
         };
         return $returnData;
