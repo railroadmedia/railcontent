@@ -167,14 +167,14 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-white" style="background: linear-gradient(225deg, #111729 40%, #00806c);">
-            <div class="container max-w-5xl mx-auto">
-                <img class="h-20 sm:h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png">
-                <h4 class="leading-tight mt-4 mb-1"><strong>Strum with confidence<br class="sm:hidden"> in just 30 days.</strong></h4>
-                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on June 3rd!</p>
-                <a href="/shop/30-days-to-better-strumming" class="join white smaller text-guitareo">Learn More</a>
-            </div>
-        </section>
+{{--        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-white" style="background: linear-gradient(225deg, #111729 40%, #00806c);">--}}
+{{--            <div class="container max-w-5xl mx-auto">--}}
+{{--                <img class="h-20 sm:h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/guitareo/products/30-days-to-better-strumming/logo-white.png">--}}
+{{--                <h4 class="leading-tight mt-4 mb-1"><strong>Strum with confidence<br class="sm:hidden"> in just 30 days.</strong></h4>--}}
+{{--                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on June 3rd!</p>--}}
+{{--                <a href="/shop/30-days-to-better-strumming" class="join white smaller text-guitareo">Learn More</a>--}}
+{{--            </div>--}}
+{{--        </section>--}}
     @endif
 
     @php
