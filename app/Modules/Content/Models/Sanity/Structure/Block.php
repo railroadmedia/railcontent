@@ -2,15 +2,17 @@
 
 namespace Modules\Content\Models\Sanity\Structure;
 
-use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Structure\ArrayItem;
 
 /**
  * A reference of a Sanity CMS document field
  */
-class Block
+class Block extends ArrayItem
 {
-    public function __construct(public string $type)
+    public function __construct()
     {
+        parent::__construct(FieldType::Block);
     }
 
     /**
@@ -21,7 +23,7 @@ class Block
     public function toArray(): array
     {
         return [
-            'type' => $this->type
+            'type' => $this->type->value
         ];
     }
 }
