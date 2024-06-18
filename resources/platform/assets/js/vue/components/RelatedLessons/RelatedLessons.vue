@@ -33,7 +33,6 @@
   </template>
   
   <script setup>
-  import { defineProps, defineEmits } from 'vue';
   import CatalogueListElement from '../Catalogue/CatalogueListElement.vue';
   
   const props = defineProps({
