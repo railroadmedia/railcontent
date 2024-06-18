@@ -7,7 +7,6 @@ use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use App\Modules\Ecommerce\Services\EventTrackingService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
-use Illuminate\Support\Arr;
 use Modules\UserManagementSystem\Models\User;
 use Queue;
 use stdClass;

@@ -251,4 +251,38 @@ class EventTrackingService
             30
         );
     }
+
+    public function handleSubscriptionCancelled(
+        User $user,
+        Product $product,
+        Carbon $cancellation_date,
+        mixed $cancellation_reason,
+    ): void {
+        $brand = $product->brand;
+        $attributes = [];
+        $attributes[$brand . '_membership_status'] = 'cancelled';
+        $attributes[$brand . '_membership_subscription_cancellation-date'] = $cancellation_date->timestamp;
+        $attributes[$brand . '_membership_subscription_cancellation-reason'] = $cancellation_reason;
+
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
+    }
+
+    public function handleChargeFailed(User $user, string $brand, array $data): void
+    {
+        $attributes = [];
+        $attributes['musora_retention_failed-billing_membership_subscription-renewal-attempts'] = $data['charge_attempts'];
+        $attributes[$brand . '_retention_failed-billing_membership_subscription-renewal-attempts'] = $data['charge_attempts'];
+
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
+    }
 }
