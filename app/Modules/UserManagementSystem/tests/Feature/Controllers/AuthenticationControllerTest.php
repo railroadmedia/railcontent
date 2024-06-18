@@ -130,7 +130,6 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         );
 
         $this->assertTrue(Auth::check());
-
         Event::assertDispatched(UserEvent::class);
         $response->assertOk();
     }
@@ -157,6 +156,7 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $response->assertJson(['message' => 'Invalid credentials']);
         $this->assertFalse(Auth::check());
     }
+
     // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     protected function setUp(): void
     {

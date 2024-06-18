@@ -584,7 +584,7 @@
                 @endforeach
             </div>
         </div>
-        <h1 class="leading-none -mt-8 mb-8"><i class="fal fa-angle-down text-pianote"></i></h1>
+        <h1 class="leading-none -mt-8 mb-8"><i class="fal fa-angle-down text-pianote hidden md:block"></i></h1>
     </section>
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #FFFFFF">

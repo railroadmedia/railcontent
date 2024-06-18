@@ -147,7 +147,7 @@
                                             <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:40px 10px 10px 40px;font-family:'Open Sans',sans-serif;" align="left">
 
                                                 <div class="v-text-align" style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-size: 18px; line-height: 25.2px; font-family: 'Open Sans', sans-serif;">I hope you’re excited!</p>
+                                                    <p style="font-size: 18px; line-height: 25.2px; font-family: 'Open Sans', sans-serif;">There’s one more thing…</p>
                                                 </div>
 
                                             </td>
@@ -162,7 +162,7 @@
 
                                                 <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        You now have unlimited access to thousands of music lessons and practice tools. But before you can start playing…
+                                                        Before you go off exploring everything inside Musora with thousands of music lessons and practice tools. 🚀
                                                     </p>
                                                 </div>
 
@@ -209,7 +209,7 @@
 
                                                 <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        We promise it should only take a minute.⏱️
+                                                        We promise it should only take 60 seconds. ⏱️
                                                     </p>
                                                 </div>
 
@@ -224,7 +224,7 @@
 
                                                 <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        After that, you’re free to begin your journey to improve your technique, start a practice routine, and play more songs.
+                                                        Once that’s done you can start improving your technique, building a practice routine, and playing more songs.
                                                     </p>
                                                 </div>
 
@@ -239,7 +239,7 @@
 
                                                 <div class="v-text-align" style="line-height: 160%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 25.6px;">
-                                                        See you there!
+                                                        See you soon!
                                                     </p>
                                                 </div>
 

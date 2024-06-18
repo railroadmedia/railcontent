@@ -130,7 +130,7 @@
                         "url" => "/",
                     ],
                     [
-                        "name" => "P4 Practice Pad",
+                        "name" => "QuietPad",
                         "url" => "/",
                     ],
                     [

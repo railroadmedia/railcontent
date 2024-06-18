@@ -9,9 +9,10 @@ use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Exception;
+use Google\Service\Monitoring\Custom;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Log;
 
 class RechargeGateway
 {
@@ -319,6 +320,22 @@ class RechargeGateway
         }
 
         return $customers->first();
+    }
+
+    public function getCustomerByRechargeId(int $rechargeCustomerId): ?Customer
+    {
+        try {
+            $customer = $this->call('GET', '/customers/' . $rechargeCustomerId)->customer ?? null;
+        } catch (Exception $e) {
+            Log::error($e);
+            return null;
+        }
+
+        if (!$customer) {
+            return null;
+        }
+
+        return new Customer($customer);
     }
 
     /**

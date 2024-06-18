@@ -50,7 +50,7 @@
             [
                 'type' => 'PageHeaderPrimaryCta',
                 'props' => [
-                    'text' => $parentContent->fetch('progress_percent', 0) > 0 ? 
+                    'text' => $parentContent->fetch('progress_percent', 0) > 0 ?
                         ($parentContent->fetch('progress_percent', 0) === 100 ? 'Completed' : 'Next Lesson') :
                         'Start first lesson',
                     'url' => $nextLessonUrl,
@@ -252,11 +252,13 @@
 
 {{-- Content --}}
 @section('content')
+
     <overview
         :breadcrumbs="{{ json_encode($breadcrumbs) }}"
         :header-data="{{ json_encode($headerDataObj) }}"
         page-type="{{ $parentContent->fetch('type') }}"
         @if(!empty($nextLessonJson))
+            :has-next-lesson="{{ json_encode(true) }}"
             :next-lesson="{{ $nextLessonJson }}"
         @endif
         user-id="{{ user()->id }}"

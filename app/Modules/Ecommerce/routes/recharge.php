@@ -10,6 +10,9 @@ Route::prefix('ecommerce/recharge')
         Route::prefix('webhook')
             ->middleware(RechargeWebhookVerify::class)
             ->group(function () {
+                Route::post('subscription/paused', [RechargeWebhookController::class, 'subscriptionPaused'])
+                    ->name('recharge.webhook.subscription.paused');
+
                 Route::post('subscription/cancelled', [RechargeWebhookController::class, 'subscriptionCancelled'])
                     ->name('recharge.webhook.subscription.cancel');
 
