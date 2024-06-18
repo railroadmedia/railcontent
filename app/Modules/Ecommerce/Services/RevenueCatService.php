@@ -69,20 +69,20 @@ class RevenueCatService
                 $subscriptionData = $subscriptions->$productIdentifier;
 
                 $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
-                $store = $type.'_store';
-                $entitlementProduct = ($productIdentifier == 'musora_subscription') ? $productIdentifier.':'.$productPlanIdentifier : $productIdentifier;
+                $store = $type . '_store';
+                $entitlementProduct = ($productIdentifier == 'musora_subscription') ? $productIdentifier . ':' . $productPlanIdentifier : $productIdentifier;
                 if ($subscriptionData->period_type == 'trial') {
-                    $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$entitlementProduct]];
+                    $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$entitlementProduct]];
                 } else {
                     $productsMap = array_merge(
-                        [config('ecommerce.'.$store.'_products_map')[$entitlementProduct]],
-                        [config('ecommerce.'.$store.'_products_map_trial')[$entitlementProduct]]
+                        [config('ecommerce.' . $store . '_products_map')[$entitlementProduct]],
+                        [config('ecommerce.' . $store . '_products_map_trial')[$entitlementProduct]]
                     );
                 }
                 $musoraProduct =
                     Product::whereIn('sku', $productsMap)
-                        ->get()
-                        ->first();
+                    ->get()
+                    ->first();
 
                 $processedAt = Carbon::parse($subscriptionData->purchase_date);
                 $expiredAt = Carbon::parse($subscriptionData->expires_date);
@@ -140,26 +140,26 @@ class RevenueCatService
         }
         $user =
             User::onWriteConnection()
-                ->where('email', $value)
-                ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
-                ->first();
+            ->where('email', $value)
+            ->orWhereIn('revenuecat_origin_app_user_id', $aliases)
+            ->first();
         if (!$user && $createIfNotExists && $value) {
             $parts = explode('@', $value);
             User::upsert(
                 [
-                                     'email' => $value,
-                                     'password' => Hash::make($value),
-                                     'display_name' => $parts[0].rand(10000, 99999),
-                                     'revenuecat_origin_app_user_id' => $appUserId,
-                                 ],
+                    'email' => $value,
+                    'password' => Hash::make($value),
+                    'display_name' => $parts[0] . rand(10000, 99999),
+                    'revenuecat_origin_app_user_id' => $appUserId,
+                ],
                 'email',
-                ['password','display_name','revenuecat_origin_app_user_id']
+                ['password', 'display_name', 'revenuecat_origin_app_user_id']
             );
 
             $user =
                 User::onWriteConnection()
-                    ->where('email', $value)
-                    ->first();
+                ->where('email', $value)
+                ->first();
             event(new UserCreated($user));
         } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
@@ -183,16 +183,99 @@ class RevenueCatService
         $app = 'Musora'
     ) {
         Log::debug(
-            'Call revoke API '.
-            $productIdentifier.
-            ' for '.
-            $userId.
-            ' on Revenuecat(user access revoked from Google Play Console)'
+            'Call revoke API ' .
+                $productIdentifier .
+                ' for ' .
+                $userId .
+                ' on Revenuecat(user access revoked from Google Play Console)'
         );
 
         $results = $this->revenueCatApiGateway->revoke($userId, $productIdentifier, $platform, $app);
         Log::debug(print_r($results, true));
 
         return $results;
+    }
+
+    public function tryGetUserFromNotificationData(
+        $data,
+        $createIfNotExists,
+    ): ?User {
+        $subscriberEmail = $data['event']['subscriber_attributes']['email']['value'] ?? null;
+        $user = $this->getUser(
+            $subscriberEmail,
+            $data['event']['original_app_user_id'],
+            $createIfNotExists,
+            $data['event']['aliases']
+        );
+        if (!$user) {
+            $eventType = $data['event']['type'];
+            Log::error(
+                'RevenueCatController processNotification::' .
+                    $eventType .
+                    '- user not found email: ' .
+                    $subscriberEmail .
+                    ' original_app_user_id: ' .
+                    $data['event']['original_app_user_id']
+            );
+            return null;
+        }
+        return $user;
+    }
+
+    public function unsetUserSubscription(User $user, string $type): void
+    {
+        match ($type) {
+            'apple' => $user->has_apple_subscription = false,
+            'google' => $user->has_google_subscription = false
+        };
+        $user->save();
+    }
+
+    /**
+     * @param $productId1
+     * @return string
+     */
+    public function getProductId($productId1): string
+    {
+        $productId = $productId1;
+        if (strpos($productId, ':') !== false) {
+            $productIds = explode(':', $productId);
+            //starting with 2024 the new Google products name have the format: 'musora_subscription:annual-plus' and 'musora_subscription:monthly-plus'
+            if (isset($productIds[1]) && !in_array($productIds[1], ['annual-plus', 'monthly-plus'])) {
+                $productId = explode(':', $productId)[0];
+            }
+        }
+
+        return $productId;
+    }
+
+    /**
+     * @param string $type
+     * @param $event
+     * @param mixed $productId
+     * @return Collection
+     */
+    public function getMusoraProducts(string $type, $event, mixed $productId)
+    {
+        $store = $type . '_store';
+
+        if ($event['period_type'] == 'TRIAL') {
+            $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
+        } else {
+            $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
+        }
+
+        if ($event['type'] != 'INITIAL_PURCHASE' && $event['type'] != 'RENEWAL') {
+            $productsMap = array_merge(
+                [config('ecommerce.' . $store . '_products_map')[$productId]],
+                [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+            );
+        }
+
+        $musoraProduct =
+            Product::whereIn('sku', $productsMap)
+            ->get();
+
+        return $musoraProduct;
     }
 }

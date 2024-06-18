@@ -284,4 +284,17 @@ class EventTrackingService
             )
         );
     }
+
+    public function handleSubscriptionExpired(User $user, string $brand): void
+    {
+        $attributes = [];
+        $attributes[$brand . '_membership_status'] = 'expired';
+
+        dispatch(
+            (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
+    }
 }
