@@ -8,6 +8,7 @@ import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import 
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
+import { defaultDocumentNode } from './defaultDocumentNode';
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -66,8 +67,8 @@ function App() {
                     title: config.title,
                     icon: config.icon,
                     plugins: [
-                        structureTool(),
-                        visionTool()
+                      structureTool({ defaultDocumentNode }), 
+                      visionTool()
                     ],
                     document: {
                         actions: (prev) =>

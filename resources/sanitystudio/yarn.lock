@@ -3318,12 +3318,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sanity/icons@npm:^1.3":
+  version: 1.3.10
+  resolution: "@sanity/icons@npm:1.3.10"
+  peerDependencies:
+    react: ^16.9 || ^17 || ^18
+  checksum: 10c0/ca24f3a8c0362648c242293256465c91d50af249fd1acb467599d6e34d27bade07896d128d0745cd7664732314e8625c799495ea101772f35f514ec87a259257
+  languageName: node
+  linkType: hard
+
+"@sanity/icons@npm:^2.7.0":
+  version: 2.11.8
+  resolution: "@sanity/icons@npm:2.11.8"
+  peerDependencies:
+    react: ^18
+  checksum: 10c0/56d4b19f276cd55bd989d9e05b86876e25ad0abb25953c1cb0899e028a34cfcf6786c9c0ea2e973baeb2a145ec90ede5913a2741c946733bb7989b5c3c8f200d
+  languageName: node
+  linkType: hard
+
 "@sanity/icons@npm:^3.0.0":
   version: 3.0.0
   resolution: "@sanity/icons@npm:3.0.0"
   peerDependencies:
     react: ^18.3 || >=19.0.0-rc
   checksum: 10c0/50f310f79096e4a649fc4c52f630a15fb2797ceed20839eccc3dc332c6748f410d79c108f2dbc1da896581da516a3e771306d01a78d164a15f330004fe2eded6
+  languageName: node
+  linkType: hard
+
+"@sanity/icons@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@sanity/icons@npm:3.2.0"
+  peerDependencies:
+    react: ^18.3 || >=19.0.0-rc
+  checksum: 10c0/95057c8bbe6d8a4962011d0d12e955a7389898b602b3c9b6ae83a838785be36337ceb1296e2547297bddad21bba13e34b3f8f5dadf5465d12a97520e41ccf70e
   languageName: node
   linkType: hard
 
@@ -3362,6 +3389,19 @@ __metadata:
   bin:
     sanity-import: src/cli.js
   checksum: 10c0/0ffdb18dbd14227c98945aa11477c8ce504c3438d829cec8726a47c2819f99f2d15666f45137d37503586d1d6a6b57abd011943d861f65f5b0496cdffcc68509
+  languageName: node
+  linkType: hard
+
+"@sanity/incompatible-plugin@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@sanity/incompatible-plugin@npm:1.0.4"
+  dependencies:
+    "@sanity/icons": "npm:^1.3"
+    react-copy-to-clipboard: "npm:^5.1.0"
+  peerDependencies:
+    react: ^16.9 || ^17 || ^18
+    react-dom: ^16.9 || ^17 || ^18
+  checksum: 10c0/86ac9111171bdd15542dc1a9139e104879a088dff1dc630732524ca285208381c0fddb84bae9c129c5071ce47e7a66385f542aad0c0c8a90f11b2e9c084f91ee
   languageName: node
   linkType: hard
 
@@ -3460,7 +3500,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/preview-url-secret@npm:^1.6.17":
+"@sanity/preview-url-secret@npm:^1.6.17, @sanity/preview-url-secret@npm:^1.6.4":
   version: 1.6.17
   resolution: "@sanity/preview-url-secret@npm:1.6.17"
   dependencies:
@@ -3517,6 +3557,25 @@ __metadata:
     "@sanity/client": "npm:^6.19.1"
     "@types/react": "npm:^18.0.25"
   checksum: 10c0/e53d8d66b2f527d06d1dac6b2de558f714fa76a518fea3a473ea9099b154e895647dfeaa2bbd689e5fc5d385c905cafbcf213be320f0e36f7a07e2dad6e59354
+  languageName: node
+  linkType: hard
+
+"@sanity/ui@npm:^2.0.10":
+  version: 2.4.0
+  resolution: "@sanity/ui@npm:2.4.0"
+  dependencies:
+    "@floating-ui/react-dom": "npm:^2.1.0"
+    "@sanity/color": "npm:^3.0.6"
+    "@sanity/icons": "npm:^3.2.0"
+    csstype: "npm:^3.1.3"
+    framer-motion: "npm:11.0.8"
+    react-refractor: "npm:^2.2.0"
+  peerDependencies:
+    react: ^18
+    react-dom: ^18
+    react-is: ^18
+    styled-components: ^5.2 || ^6
+  checksum: 10c0/14ec534c2d5231df171ab0beb67097112558ddcced2e8ecdeac8d24f5bca19df495d2f3eadfe43ae23b8d1012db85153d2e47d01503bd2298b951e0b7aae9623
   languageName: node
   linkType: hard
 
@@ -14516,7 +14575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-copy-to-clipboard@npm:^5.0.4":
+"react-copy-to-clipboard@npm:^5.0.4, react-copy-to-clipboard@npm:^5.1.0":
   version: 5.1.0
   resolution: "react-copy-to-clipboard@npm:5.1.0"
   dependencies:
@@ -15339,6 +15398,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sanity-plugin-iframe-pane@npm:^3.1.6":
+  version: 3.1.6
+  resolution: "sanity-plugin-iframe-pane@npm:3.1.6"
+  dependencies:
+    "@sanity/icons": "npm:^2.7.0"
+    "@sanity/incompatible-plugin": "npm:^1.0.4"
+    "@sanity/preview-url-secret": "npm:^1.6.4"
+    "@sanity/ui": "npm:^2.0.10"
+    framer-motion: "npm:11.0.8"
+    suspend-react: "npm:0.1.3"
+    usehooks-ts: "npm:3.0.1"
+  peerDependencies:
+    react: ^18.2.0
+    sanity: ^3.20.0
+    styled-components: ^5.2 || ^6.0.0
+  checksum: 10c0/12f73591e75bad8e1afcbb25316f469d585c854c9d61930e438372b50d659f4984c866861335bec722a85aac8dac5048619d492b93104a36813411ad0edc047d
+  languageName: node
+  linkType: hard
+
 "sanity@npm:^3.45.0":
   version: 3.45.0
   resolution: "sanity@npm:3.45.0"
@@ -15478,6 +15556,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-scripts: "npm:5.0.1"
     sanity: "npm:^3.45.0"
+    sanity-plugin-iframe-pane: "npm:^3.1.6"
     styled-components: "npm:^6.1.11"
     web-vitals: "npm:^2.1.4"
   languageName: unknown
@@ -17448,6 +17527,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/23b1597c10adf15b26ade9e8c318d8cc0abc9ec0ab5fc7ca7338da92e89c2536abd150a5891bf076836c352fdfa104fc7231fb48f806fd9960e0cbe03601abaf
+  languageName: node
+  linkType: hard
+
+"usehooks-ts@npm:3.0.1":
+  version: 3.0.1
+  resolution: "usehooks-ts@npm:3.0.1"
+  dependencies:
+    lodash.debounce: "npm:^4.0.8"
+  peerDependencies:
+    react: ^16.8.0  || ^17 || ^18
+  checksum: 10c0/c1673758100251c35a62d8d50aafe375fdce253eaa4374e7f4686bfc68505bd1b24dfe1c605db6d2ddfbe3a4ac1eca826c52ce454c9e58d8da96a45c351e0e05
   languageName: node
   linkType: hard
 
