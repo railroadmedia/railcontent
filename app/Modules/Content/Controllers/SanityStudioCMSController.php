@@ -5,10 +5,9 @@ namespace App\Modules\Content\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
-use App\Modules\Content\Models\Sanity\Event;
+use App\Modules\Content\Models\Sanity\Enums\Workspace;
 use App\Modules\Content\Models\Sanity\Genre;
 use App\Modules\Content\Models\Sanity\Permission;
-use App\Modules\Content\Models\Sanity\Post;
 use App\Modules\Content\Models\Sanity\Song;
 use App\Modules\Content\Models\Sanity\Venue;
 use Carbon\Carbon;
@@ -20,28 +19,55 @@ class SanityStudioCMSController extends BaseController
 {
     public function renderStudio(Request $request): Response
     {
+        // common settings
         $projectId = config('content.project_id');
         $dataset = config('content.dataset');
-        $basePath = '/admin/studio';
         $csrfToken = csrf_token();
         $appUrl = env('APP_URL');
 
-        // Day One
-        // $types = [(new Artist())->toArray(), (new Venue())->toArray(), (new Event())->toArray()];
-        // Musora
-        $types = [(new Song())->toArray(), (new Artist())->toArray(), (new Genre())->toArray(), (new Permission())->toArray()];
+        // publishing workspace
+        $types = [
+            (new Song())->toArray(),
+            (new Artist())->toArray(),
+            (new Genre())->toArray(),
+            (new Permission())->toArray()
+        ];
+        $publishing = [
+            'projectId' => $projectId,
+            'dataset' => $dataset,
+            'name' => Workspace::Publishing->workspaceName(),
+            'basePath' => Workspace::Publishing->basePath(),
+            'title' => Workspace::Publishing->title(),
+            'icon' => Workspace::Publishing->icon(),
+            'schema' => json_encode([
+                'types' => $types
+            ])
+        ];
 
-        $schema = json_encode([
-            'types' => $types
-        ]);
+        // marketing workspace
+        // TODO Nataliia to add new types here in place of Venue
+        $types = [(new Venue())->toArray()];
+        $marketing = [
+            'projectId' => $projectId,
+            'dataset' => $dataset,
+            'name' => Workspace::Marketing->workspaceName(),
+            'basePath' => Workspace::Marketing->basePath(),
+            'title' => Workspace::Marketing->title(),
+            'icon' => Workspace::Marketing->icon(),
+            'schema' => json_encode([
+                'types' => $types
+            ])
+        ];
+
+        $workspaces = [
+            $marketing,
+            $publishing
+        ];
 
         return response()->view(
             "content::sanity-studio-cms-index",
             compact([
-                'projectId',
-                'dataset',
-                'basePath',
-                'schema',
+                'workspaces',
                 'csrfToken',
                 'appUrl'
             ])
@@ -77,19 +103,19 @@ class SanityStudioCMSController extends BaseController
             ->first();
 
         if (!$content) {
-            $content         = new Content();
-            $content->type   = $request->get('_type');
-            $content->slug   = $request->has('slug') ? $request->get('slug')['current'] : null;
-            $content->language   = 'en-US';
+            $content = new Content();
+            $content->type = $request->get('_type');
+            $content->slug = $request->has('slug') ? $request->get('slug')['current'] : null;
+            $content->language = 'en-US';
             $content->created_on = Carbon::now()->toDateTimeString();
             $content->status = 'published';
-            $content->brand  = $request->get('brand');
+            $content->brand = $request->get('brand');
 
             $content->save();
         }
 
         $content->status = 'published';
-        $content->brand  = $request->get('brand');
+        $content->brand = $request->get('brand');
         $content->setTitle($request->get('title'));
         $content->setDifficulty($request->get('difficulty'));
         $content->setXP($request->get('xp'));
