@@ -13,7 +13,7 @@ Route::prefix('admin')
             ->name('admin.studio');
         Route::get(
             '/soundslice',
-            [SanityStudioCMSController::class, 'getSoundsliceData']
+            [SanityStudioCMSController::class, 'getSoundsliceDuration']
         )
             ->name('admin.soundslice');
 

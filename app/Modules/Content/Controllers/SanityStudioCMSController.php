@@ -48,7 +48,7 @@ class SanityStudioCMSController extends BaseController
         );
     }
 
-    public function getSoundsliceData(Request $request)
+    public function getSoundsliceDuration(Request $request)
     {
         $slug = $request->get('slug');
         try {
