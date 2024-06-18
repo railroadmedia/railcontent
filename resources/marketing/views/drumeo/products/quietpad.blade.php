@@ -280,7 +280,7 @@
                     <td><img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad-white.png" alt="Quietpad logo"></td>
                     <td>Evans RealFeel</td>
                     <td>Reflexx</td>
-                    <td><a target="_blank" href="/drumshop/practice-pad-full" style="color:inherit;">Drumeo P4 <i class="fas fa-external-link"></i></a></td>
+                    <td>Drumeo P4</td>
                 </tr>
                 <tr>
                     <td>Size</td>
@@ -338,12 +338,7 @@
                         <strong>${{ floatval($productPrices['quietpad']->discounted_price) }}</strong><br>+ SHIPPING</td>
                     <td><strong>$29</strong><br>+ SHIPPING</td>
                     <td><strong>$60</strong><br>+ SHIPPING</td>
-                    <td>@if(floatval($productPrices['practicepad']->price) > floatval($productPrices['practicepad']->discounted_price))
-                            <s>${{ floatval($productPrices['practicepad']->price) }}</s>
-                            <strong>${{ floatval($productPrices['practicepad']->discounted_price) }}</strong><br>+ SHIPPING
-                        @else
-                            <strong>${{ floatval($productPrices['practicepad']->discounted_price) }}</strong><br>+ SHIPPING
-                        @endif</td>
+                    <td><strong>$79</strong><br>+ SHIPPING</td>
                 </tr>
                 </tbody>
             </table>
