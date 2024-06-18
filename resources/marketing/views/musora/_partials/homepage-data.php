@@ -12,28 +12,31 @@ $musora = [
 
     "packs" => [
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
-        ],
-        [
             "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
         ],
         [
             "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
         ],
         [
+            "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+        ],
+        [
+            "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+        ],
+        [
+            "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+        ],
+        [
+            "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+        ],
+        [
+            "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
+        ],
+        [
             "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
         ],
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+            "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
         ],
         [
             "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
@@ -42,10 +45,7 @@ $musora = [
             "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
         ],
         [
-            "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
-        ],
-        [
-            "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+            "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
         ],
     ],
     "gridItems" => [
