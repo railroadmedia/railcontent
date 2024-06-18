@@ -437,20 +437,20 @@
 </template>
 <script setup>
     import { watch, ref, onBeforeMount } from "vue";
-    import MusoraIcon from '../../components/MusoraIcons/MusoraIcon.vue';
     import { storeToRefs } from "pinia/dist/pinia";
-    import { useUserStore } from "../../../stores/user";
-    import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
-    import PageHeader from '../../components/PageHeader/PageHeader';
-    import PillNav from "../../components/PillNav/PillNav.vue";
-    import EditDisplayNameModal from "../../components/Modal/EditDisplayNameModal.vue";
-    import EditSignatureModal from "../../components/Modal/EditSignatureModal.vue";
-    import ImageUploader from "../../components/ImageUploader/ImageUploader.vue";
-    import EditAboutYouModal from "../../components/Modal/EditAboutYouModal.vue";
-    import EditDrumGearModal from "../../components/Modal/EditDrumGearModal.vue";
-    import EditPianoGearModal from "../../components/Modal/EditPianoGearModal.vue";
-    import EditGuitarGearModal from "../../components/Modal/EditGuitarGearModal.vue";
-    import EditSingingGearModal from "../../components/Modal/EditSingingGearModal.vue";
+    import { useUserStore } from "../../../../stores/user";
+    import Breadcrumb from '../../Breadcrumb/Breadcrumb';
+    import PageHeader from '../../PageHeader/PageHeader';
+    import PillNav from "../../PillNav/PillNav.vue";
+    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
+    import EditDisplayNameModal from "../../Modal/EditDisplayNameModal.vue";
+    import EditSignatureModal from "../../Modal/EditSignatureModal.vue";
+    import ImageUploader from "../../ImageUploader/ImageUploader.vue";
+    import EditAboutYouModal from "../../Modal/EditAboutYouModal.vue";
+    import EditDrumGearModal from "../../Modal/EditDrumGearModal.vue";
+    import EditPianoGearModal from "../../Modal/EditPianoGearModal.vue";
+    import EditGuitarGearModal from "../../Modal/EditGuitarGearModal.vue";
+    import EditSingingGearModal from "../../Modal/EditSingingGearModal.vue";
 
     //Pinia
     const userStore = useUserStore();

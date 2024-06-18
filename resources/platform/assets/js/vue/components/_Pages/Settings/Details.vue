@@ -42,10 +42,10 @@
 <script setup>
     import { computed, ref, onBeforeMount } from "vue";
     import { storeToRefs } from "pinia/dist/pinia";
-    import { useUserStore } from "../../../stores/user";
-    import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
-    import PageHeader from '../../components/PageHeader/PageHeader';
-    import PillNav from "../../components/PillNav/PillNav.vue";
+    import { useUserStore } from "../../../../stores/user";
+    import Breadcrumb from '../../Breadcrumb/Breadcrumb';
+    import PageHeader from '../../PageHeader/PageHeader';
+    import PillNav from "../../PillNav/PillNav.vue";
 
     //Pinia
     const userStore = useUserStore();
@@ -82,13 +82,13 @@
         {
             name: 'Notification Settings',
             url: `/${brand.value}/profile/${userId.value}/settings/notifications`,
-            isActive: true,
         },
         {
             name: 'Account Details',
             url: `/${brand.value}/profile/settings/account`,
+            isActive: true,
         }
     ])
 
-    //Lifecycle Hooks 
+    //Lifecycle Hooks
 </script>

@@ -11,11 +11,11 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Profile from './vue/Pages/Settings/Profile.vue';
-import LoginCredentials from './vue/Pages/Settings/LoginCredentials.vue';
-import Payments from './vue/Pages/Settings/Payments.vue';
-import NotificationSettings from './vue/Pages/Settings/NotificationSettings.vue';
-import Details from './vue/Pages/Settings/Details.vue';
+import Profile from './vue/components/_Pages/Settings/Profile.vue';
+import LoginCredentials from './vue/components/_Pages/Settings/LoginCredentials.vue';
+import Payments from './vue/components/_Pages/Settings/Payments.vue';
+import NotificationSettings from './vue/components/_Pages/Settings/NotificationSettings.vue';
+import Details from './vue/components/_Pages/Settings/Details.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
