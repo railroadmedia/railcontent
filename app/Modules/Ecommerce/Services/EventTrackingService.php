@@ -254,11 +254,10 @@ class EventTrackingService
 
     public function handleSubscriptionCancelled(
         User $user,
-        Product $product,
+        string $brand,
         Carbon $cancellation_date,
         mixed $cancellation_reason,
     ): void {
-        $brand = $product->brand;
         $attributes = [];
         $attributes[$brand . '_membership_status'] = 'cancelled';
         $attributes[$brand . '_membership_subscription_cancellation-date'] = $cancellation_date->timestamp;
