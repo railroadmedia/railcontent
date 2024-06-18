@@ -112,8 +112,8 @@ class RevenueCatController extends Controller
                 $processedDateRangeMinutes = 1440;
                 if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
                     $processedDateRangeMinutes = round(
-                            $expiredAt->diffInSeconds($processedAt) / 60
-                        ) -1;
+                        $expiredAt->diffInSeconds($processedAt) / 60
+                    ) - 1;
                 }
                 if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt, $processedDateRangeMinutes)) {
                     if (!$musoraProduct) {
@@ -177,7 +177,7 @@ class RevenueCatController extends Controller
                 if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
                     $processedDateRangeMinutes = round(
                         $expiredAt->diffInSeconds($processedAt) / 60
-                    ) -1;
+                    ) - 1;
                 }
                 if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt, $processedDateRangeMinutes)) {
                     $musoraProduct = $musoraProducts?->first();

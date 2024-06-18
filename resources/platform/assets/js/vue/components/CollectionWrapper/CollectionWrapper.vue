@@ -214,10 +214,14 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    }else if(props.multipleTypes){
+    } else if(props.multipleTypes){
         types = props.includedTypes;
     } else {
-        props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
+        types = [...types, ...props.includedTypes];
+
+        if(!types.includes(props.collectionType)){
+            types.push(props.collectionType);
+        }
 
         if (isQuickTips.value) {
             types.push('boot-camps');
