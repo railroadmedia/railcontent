@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware;
 use Carbon\Carbon;
 use Faker\Factory;
 use Faker\Generator;
@@ -40,10 +41,14 @@ abstract class BaseTestCase extends FoundationBaseTestCase
         $this->faker = Factory::create();
 
         Carbon::setTestNow(Carbon::now());
-
         parent::setUp();
 
         URL::forceRootUrl('https://testing.musora.com');
+
+        // DEV NOTE our web_or_api_public middleware uses UserActivitySyncMiddleware and causes issues with the test
+        // environment, due to calls to Redis and CustomerIO.
+        // Disable the UserActivitySyncMiddleware middleware by default, since it can't be tested and causes errors.
+        $this->withoutMiddleware(UserActivitySyncMiddleware::class);
     }
 
     protected function getRandomName($prefix=null)
