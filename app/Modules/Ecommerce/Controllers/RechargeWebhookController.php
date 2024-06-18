@@ -4,6 +4,7 @@ namespace App\Modules\Ecommerce\Controllers;
 
 use App\Jobs\WebhookJob;
 use App\Modules\Ecommerce\Jobs\Recharge\PaymentMethodUpdatedEventTrackingJob;
+use App\Modules\Ecommerce\Jobs\Recharge\SubscriptionPausedEventTrackingJob;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
@@ -21,6 +22,26 @@ class RechargeWebhookController extends Controller
     public function __construct(CustomerIoService $customerIoService)
     {
         $this->customerIoService = $customerIoService;
+    }
+
+    public function subscriptionPaused(Request $request): void
+    {
+        try {
+            Log::info('Recharge subscription paused webhook received');
+
+            $id = $this->getWebhookIdentifierOrGUID($request);
+            $contents = $request->get('subscription');
+            // Log::debug(var_export($contents));
+
+            $children = [
+                new SubscriptionPausedEventTrackingJob($contents),
+            ];
+            dispatch(new WebhookJob('Recharge-subscription-paused', $id, $contents, $children));
+        } catch (Exception $e) {
+            //Catch exception to prevent shopify from retrying the webhook
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+        }
     }
 
     public function subscriptionCancelled(Request $request): void

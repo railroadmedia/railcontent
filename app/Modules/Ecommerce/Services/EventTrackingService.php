@@ -6,6 +6,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Recharge\PaymentMethod;
+use App\Modules\Ecommerce\Models\Recharge\Subscription;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
@@ -217,5 +218,37 @@ class EventTrackingService
             ->toArray();
 
         dispatchWithDelay(new CustomerIoSyncUserByUserId($user, $data), 30);
+    }
+
+    public function handleSubscriptionPaused(
+        Subscription $subscription,
+        User $user
+    ): void {
+        $expirationDate = Carbon::parse($user->membership_expiration_date);
+        $nextCharge = $subscription->nextChargeScheduledAt;
+        $diff = $expirationDate->diffInMonths($nextCharge);
+        $data = [
+            'timestamp' => Carbon::now()->timestamp,
+            'duration_in_months' => $diff,
+            'paused_until' => $nextCharge->timestamp,
+        ];
+
+        dispatchWithDelay(
+            new CustomerIoSyncUserByUserId(
+                $user,
+                [$subscription->product->brand . '_subscription_paused_until' => $nextCharge->timestamp]
+            ),
+            30
+        );
+
+        dispatchWithDelay(
+            new CustomerIoCreateEventByUserId(
+                $user->id,
+                'musora',
+                'musora_user_subscription_paused',
+                $data
+            ),
+            30
+        );
     }
 }
