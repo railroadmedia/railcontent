@@ -176,6 +176,10 @@ const props = defineProps({
         type: Number,
         default: 0,
     },
+    hasNextLesson: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 const userStore = useUserStore();
@@ -223,9 +227,5 @@ const headerDarkModeLogo = computed(() => {
 
 const headerLightModeLogo = computed(() => {
     return props.headerData.lightModeLogo;
-})
-
-const hasNextLesson = computed(() => {
-    return Object.keys(props.nextLesson).length > 0;
 })
 </script>
