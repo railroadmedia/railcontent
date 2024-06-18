@@ -1,4 +1,6 @@
-@extends('drumeo.products.misc-products-layout')
+@extends('drumeo.products.misc-products-layout', [
+    'appTailwind' => true
+])
 
 @section('meta')
     <title>Drumeo QuietPad</title>
@@ -153,11 +155,6 @@
         'video' => '395000347',
         'vimeo' => true,
     ])
-        @slot('button')
-            <div class="text-center bg-white rounded-b-xl py-4">
-                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-            </div>
-        @endslot
     @endcomponent
 
     <section class="content-section two-sides text-center" style="background:#fff!important;color:#000!important;">
@@ -221,11 +218,6 @@
         'video' => '394999066',
         'vimeo' => true,
     ])
-        @slot('button')
-            <div class="text-center bg-white rounded-b-xl py-4">
-                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-            </div>
-        @endslot
     @endcomponent
 
     <div class="slider-overlay">
@@ -270,111 +262,136 @@
         </div>
     </div>
 
-    <section class="content-section text-center comparison" style="background-color: #f4f8fb; color:#000;">
-        <div class="row">
-            <h2><strong>The everyday practice<br class="hide-for-medium"> pad for drummers.</strong></h2>
-            <table>
-                <tbody>
-                <tr>
-                    <td></td>
-                    <td><img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad-white.png" alt="Quietpad logo"></td>
-                    <td>Evans RealFeel</td>
-                    <td>Reflexx</td>
-                    <td>Drumeo P4</td>
-                </tr>
-                <tr>
-                    <td>Size</td>
-                    <td>12”</td>
-                    <td>12”</td>
-                    <td>10”</td>
-                    <td>12”</td>
-                </tr>
-                <tr>
-                    <td>Playing Surfaces</td>
-                    <td>2</td>
-                    <td>1-2</td>
-                    <td>2</td>
-                    <td>4 (one side)</td>
-                </tr>
-                <tr>
-                    <td>Snare-Like Size</td>
-                    <td>12” x 12”</td>
-                    <td></td>
-                    <td></td>
-                    <td>12” x 5”</td>
-                </tr>
-                <tr>
-                    <td>Quiet Surface Size</td>
-                    <td>12” x 12”</td>
-                    <td></td>
-                    <td></td>
-                    <td>6” x 5”</td>
-                </tr>
-                <tr>
-                    <td>Priorities</td>
-                    <td>Quieter Practice<br>Realistic Feel<br>Portable</td>
-                    <td>Durable<br>Portable<br>Affordable</td>
-                    <td>Workout/Quiet<br>Portable<br>Portability</td>
-                    <td>Practice Movement<br>Realistic Feel<br>Versatile</td>
-                </tr>
-                <tr>
-                    <td>Hand Assembled</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td></td>
-                    <td></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Worldwide Shipping</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td></td>
-                    <td></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>@if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))
-                            <s>${{ floatval($productPrices['quietpad']->price) }}</s>@endif
-                        <strong>${{ floatval($productPrices['quietpad']->discounted_price) }}</strong><br>+ SHIPPING</td>
-                    <td><strong>$29</strong><br>+ SHIPPING</td>
-                    <td><strong>$60</strong><br>+ SHIPPING</td>
-                    <td><strong>$79</strong><br>+ SHIPPING</td>
-                </tr>
-                </tbody>
-            </table>
+{{--    <section class="content-section text-center comparison" style="background-color: #f4f8fb; color:#000;">--}}
+{{--        <div class="row">--}}
+{{--            <h2><strong>The everyday practice<br class="hide-for-medium"> pad for drummers.</strong></h2>--}}
+{{--            <table>--}}
+{{--                <tbody>--}}
+{{--                <tr>--}}
+{{--                    <td></td>--}}
+{{--                    <td><img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad-white.png" alt="Quietpad logo"></td>--}}
+{{--                    <td>Evans RealFeel</td>--}}
+{{--                    <td>Reflexx</td>--}}
+{{--                    <td>Drumeo P4</td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Size</td>--}}
+{{--                    <td>12”</td>--}}
+{{--                    <td>12”</td>--}}
+{{--                    <td>10”</td>--}}
+{{--                    <td>12”</td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Playing Surfaces</td>--}}
+{{--                    <td>2</td>--}}
+{{--                    <td>1-2</td>--}}
+{{--                    <td>2</td>--}}
+{{--                    <td>4 (one side)</td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Snare-Like Size</td>--}}
+{{--                    <td>12” x 12”</td>--}}
+{{--                    <td></td>--}}
+{{--                    <td></td>--}}
+{{--                    <td>12” x 5”</td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Quiet Surface Size</td>--}}
+{{--                    <td>12” x 12”</td>--}}
+{{--                    <td></td>--}}
+{{--                    <td></td>--}}
+{{--                    <td>6” x 5”</td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Priorities</td>--}}
+{{--                    <td>Quieter Practice<br>Realistic Feel<br>Portable</td>--}}
+{{--                    <td>Durable<br>Portable<br>Affordable</td>--}}
+{{--                    <td>Workout/Quiet<br>Portable<br>Portability</td>--}}
+{{--                    <td>Practice Movement<br>Realistic Feel<br>Versatile</td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Hand Assembled</td>--}}
+{{--                    <td><i class="fas fa-check-circle"></i></td>--}}
+{{--                    <td></td>--}}
+{{--                    <td></td>--}}
+{{--                    <td><i class="fas fa-check-circle"></i></td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td>Worldwide Shipping</td>--}}
+{{--                    <td><i class="fas fa-check-circle"></i></td>--}}
+{{--                    <td></td>--}}
+{{--                    <td></td>--}}
+{{--                    <td><i class="fas fa-check-circle"></i></td>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td></td>--}}
+{{--                    <td>@if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))--}}
+{{--                            <s>${{ floatval($productPrices['quietpad']->price) }}</s>@endif--}}
+{{--                        <strong>${{ floatval($productPrices['quietpad']->discounted_price) }}</strong><br>+ SHIPPING</td>--}}
+{{--                    <td><strong>$29</strong><br>+ SHIPPING</td>--}}
+{{--                    <td><strong>$60</strong><br>+ SHIPPING</td>--}}
+{{--                    <td><strong>$79</strong><br>+ SHIPPING</td>--}}
+{{--                </tr>--}}
+{{--                </tbody>--}}
+{{--            </table>--}}
+{{--        </div>--}}
+{{--    </section>--}}
+
+    <section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/shop/stickbag/order-bg.jpg') center center/cover;">
+        <div class="container mx-auto">
+            <img alt="quietkick logo" class="h-14 sm:h-24 mb-4" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png"><br>
+
+            @if( $products['quietpad']->getStockAvailability() > 1 && !empty($products['quietpad']->getStockAvailability()))
+
+                <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
+                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+                        <a href="/ecommerce/add-to-cart?locked=true&products[quietpad]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                            <div class="bg-white px-3 py-5 md:py-7">
+                                <h4 class="mb-2 sm:mb-3"><strong>QuietPad Only</strong></h4>
+                                <img class="h-24 transition-opacity opacity-0"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper.png"
+                                    alt="learn playing image"
+                                >
+                                <br>
+                                <h4 class="inline-block leading-tight">
+                                    @if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))
+                                        <s>${{ floatval($productPrices['quietpad']->price) }}</s>
+                                    @endif
+                                    <strong>${{ floatval($productPrices['quietpad']->discounted_price) }}</strong></h4>
+                                <p class="text-sm"><em>
+                                        @if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))
+                                            Save 34%.
+                                        @endif
+                                        One-time payment.</em></p>
+                                <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
+                                <p class="text-sm">1 Drumeo QuietPad<sup>NEW</sup></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            @else
+                <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
+            @endif
+            <br>
+            <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&locked=true"><h6><strong><u>Or get it FREE when you join Drumeo.</u></strong></h6></a>
         </div>
     </section>
 
-    <section class="content-section final text-center">
-        <div class="row">
-            <img class="bubbles hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/order-image-mobile.png" alt="Quietpad order image">
-            <img class="bubbles show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/order-image.png" alt="Quietpad order image">
-            <br>
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
-
-
-            <h3>
-                @if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))
-                    <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s><br class="hide-for-medium">
-                    <strong>NOW ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong><br class="hide-for-medium">
-                    (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%).
-                @else
-                    <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong>
-                @endif
-            </h3>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue max-w-xl">Get Yours &raquo;</a>
-
-            <div class="credit-cards columns">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-amex"></i>
-                <i class="fab fa-cc-paypal"></i>
-                <i class="fab fa-cc-discover"></i>
-            </div>
-            <div class="columns questions">
-                <p><strong>Any questions?</strong><br class="hide-for-medium"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="hide-for-medium"> or directly at
+    <section class="text-center py-10 text-white" style="background: #00101D;">
+        <div class="container mx-auto relative z-50">
+            <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
+                <p>Call us toll-free at
+                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            </div>
+            <div class="inline-block w-full px-3 md:px-4 text-light-navy" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
         </div>
     </section>
