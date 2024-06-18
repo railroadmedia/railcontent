@@ -26,14 +26,21 @@
 <body>
     {{-- Scripts --}}
     <script type="text/javascript">
-        window.sanityConfig = {
-            projectId: "{{ $projectId }}",
-            dataset: "{{ $dataset }}",
-            basePath: "{{ $basePath }}",
-            appUrl: "{{ $appUrl }}",
-            schema: {!! stripFromJson($schema) !!},
-        csrfToken: "{{ $csrfToken }}",
-        };
+        window.sanityConfig = [
+            @foreach($workspaces as $workspace)
+            {
+                projectId: "{{ $workspace['projectId'] }}",
+                name: "{{ $workspace['name'] }}",
+                title: "{{ $workspace['title'] }}",
+                dataset: "{{ $workspace['dataset'] }}",
+                basePath: "{{ $workspace['basePath'] }}",
+                icon: "{{ $workspace['icon'] }}",
+                appUrl: "{{ $appUrl }}",
+                schema: {!! stripFromJson($workspace['schema']) !!},
+                csrfToken: "{{ $csrfToken }}"
+            },
+            @endforeach
+        ];
     </script>
 
     <div id="root"></div>

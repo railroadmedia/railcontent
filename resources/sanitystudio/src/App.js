@@ -55,49 +55,53 @@ const mapComponents = (fields) => {
 };
 
 function App() {
-  const [config, setConfig] = useState(null);
+    const [config, setConfigs] = useState(null);
 
-  useEffect(() => {
-    const loadConfig = () => {
-      const clientConfig = {
-        ...window.sanityConfig,
-        plugins: [
-          structureTool(),
-          visionTool()
-        ],
-          document: {
-              actions: (prev) =>
-                           prev.map((previousAction) =>
-                               previousAction.action === 'publish' ? CreateImprovedAction(previousAction, window.sanityConfig.csrfToken) : previousAction
-                           ),
-          },
-        schema: {
-          types: window.sanityConfig.schema.types.map((type) => {
-            return {
-              ...type,
-                fields: mapComponents(type.fields)
-            };
-          })
+    useEffect(() => {
+        const loadConfigs = () => {
+            const workspaceConfigs = window.sanityConfig.map((config, index) => {
+                return defineConfig({
+                    ...config,
+                    name: config.name,
+                    title: config.title,
+                    icon: config.icon,
+                    plugins: [
+                        structureTool(),
+                        visionTool()
+                    ],
+                    document: {
+                        actions: (prev) =>
+                            prev.map((previousAction) =>
+                                previousAction.action === 'publish' ? CreateImprovedAction(previousAction, config.csrfToken) : previousAction
+                            ),
+                    },
+                    schema: {
+                        types: config.schema.types.map((type) => {
+                            return {
+                                ...type,
+                                fields: mapComponents(type.fields)
+                            };
+                        })
+                    }
+                });
+            });
+            setConfigs(workspaceConfigs);
+        };
+
+        if (!window.sanityConfig || !Array.isArray(window.sanityConfig)) {
+            console.error('Sanity configuration not found or is not an array in the window object.');
+        } else {
+            loadConfigs();
         }
-      };
-      console.log('schema',clientConfig)
-      setConfig(defineConfig(clientConfig));
-    };
+    }, []);
 
-    if (!window.sanityConfig) {
-      console.error('Sanity configuration not found in window object.');
-    } else {
-      loadConfig();
+    if (!config) {
+        return <div>Loading...</div>;
     }
-  }, []);
 
-  if (!config) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <Studio config={config} />
-  );
+    return (
+        <Studio config={config} />
+    );
 }
 
 export default App;
