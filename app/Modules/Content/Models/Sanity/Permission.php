@@ -22,6 +22,7 @@ class Permission extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
             new BrandField(),
+            new Field(FieldType::Number, 'railcontent_id', 'Railcontent ID', readOnly: "true"),
         ];
         parent::__construct('permission', 'Permission', $fields);
     }
