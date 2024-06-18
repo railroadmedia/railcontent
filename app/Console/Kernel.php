@@ -36,6 +36,7 @@ use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\UpdateRoutinesFebruary2023;
 use App\Console\Commands\VaporEnvManager;
 use App\Console\Commands\UpdateRoutines;
+use App\Modules\UserManagementSystem\Console\Commands\SendAccountSetupEmail;
 use App\Modules\UserManagementSystem\Console\Commands\SetUserNeedsLogout;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -82,7 +83,8 @@ class Kernel extends ConsoleKernel
         AssignUnassignedHelpScoutCustomersToMentors::class,
         SyncShopifyProductInventoryToProductsTable::class,
         SetUserNeedsLogout::class,
-        CheckCommentsUrl::class
+        CheckCommentsUrl::class,
+        SendAccountSetupEmail::class
     ];
 
     /**
@@ -98,22 +100,22 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('forums:rebuildSearchIndexes')->hourly();
 
-        $schedule->command('notifications:dailySummary')->dailyAt('12:00');//4am PST
+        $schedule->command('notifications:dailySummary')->dailyAt('12:00'); //4am PST
 
-        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');//6am PST
+        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00'); //6am PST
         $schedule->command('content:updatePopularityMWP')->cron('0 */8 * * *'); //every 8 hours
         $schedule->command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
         $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron(
             "0 */6 * * *"
-        );//4am, 10am, 4pm, 10pm PST
+        ); //4am, 10am, 4pm, 10pm PST
 
-        $schedule->command('ecommerce:renewalDueSubscriptions 200')->dailyAt('10:00');//2am PST
+        $schedule->command('ecommerce:renewalDueSubscriptions 200')->dailyAt('10:00'); //2am PST
 
         $schedule->command('mentors:verify')->daily(); //4pm
         //temporary measure to assign mentors until ecommerce is integrated with MWP
         $schedule->command('mentors:assign')->hourly();
 
-        $schedule->command('user:resyncExpiredProducts')->dailyAt('10:00');//2am PST
+        $schedule->command('user:resyncExpiredProducts')->dailyAt('10:00'); //2am PST
 
         $schedule->command('addevent:syncMusora')->hourlyAt(50);
 
@@ -126,7 +128,9 @@ class Kernel extends ConsoleKernel
                 return now()->weekOfYear % 2 == 0;
             })->at('08:01'); // every other Monday at 12:01am PST
 
-        $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00');//3am PST
+        $schedule->command('ecommerce:CheckSongMembershipAccess')->dailyAt('11:00'); //3am PST
+
+        $schedule->command('user:sendAccountSetupEmail')->dailyAt('11:00'); //3am PST
     }
 
     /**
