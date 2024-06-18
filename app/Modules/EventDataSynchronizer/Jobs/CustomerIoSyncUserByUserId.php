@@ -49,8 +49,10 @@ class CustomerIoSyncUserByUserId extends CustomerIoBaseJob
                 $syncThisWorkspace = false;
 
                 foreach ($brands as $brand) {
-                    if ($userAccessPermissionsService->shouldSyncCustomerIOWorkspace($this->user, $brand)
-                        || $accountNameToSyncAllBrand == $brand) {
+                    if (
+                        $userAccessPermissionsService->shouldSyncCustomerIOWorkspace($this->user, $brand)
+                        || $accountNameToSyncAllBrand == $brand
+                    ) {
                         $syncThisWorkspace = true;
                         break;
                     }
