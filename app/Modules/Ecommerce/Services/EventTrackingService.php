@@ -271,11 +271,12 @@ class EventTrackingService
         );
     }
 
-    public function handleChargeFailed(User $user, string $brand, array $data): void
+    public function handleChargeFailed(User $user, string $brand, int $chargeAttemps): void
     {
-        $attributes = [];
-        $attributes['musora_retention_failed-billing_membership_subscription-renewal-attempts'] = $data['charge_attempts'];
-        $attributes[$brand . '_retention_failed-billing_membership_subscription-renewal-attempts'] = $data['charge_attempts'];
+        $attributes = [
+            'musora_retention_failed-billing_membership_subscription-renewal-attempts' => $chargeAttemps,
+            $brand . '_retention_failed-billing_membership_subscription-renewal-attempts' => $chargeAttemps
+        ];
 
         dispatch(
             (new CustomerIoSyncUserByUserId($user, $attributes))->delay(
