@@ -6,11 +6,11 @@ import { Iframe } from 'sanity-plugin-iframe-pane';
 // Customise this function to show the correct URL based on the current document
 function getPreviewUrl(doc, dataset) {
     if (!doc) return `https://${getBaseUrl(dataset)}/drumeo/`;
+    console.log(doc);
 
-    const contentName = doc.slug?.current;
+    const contentPath = doc.web_url_path;
     let contentId = doc._id;
     let brand = doc.brand || 'drumeo';
-    let contentType = doc._type;
 
     // Remove the 'song_' prefix from the contentId
     if (contentId.startsWith('song_')) {
@@ -20,13 +20,13 @@ function getPreviewUrl(doc, dataset) {
     // Handle draft documents
     if (contentId.startsWith('drafts.')) {
       contentId = contentId.replace('drafts.', '');
-      return contentName && contentId
-        ? `https://${getBaseUrl(dataset)}/${brand}/${contentType}s/${contentName}/${contentId}`
+      return contentPath && contentId
+        ? `https://${getBaseUrl(dataset)}${contentPath}`
         : `https://${getBaseUrl(dataset)}/${brand}/`;
     }
   
-    return contentName && contentId
-      ? `https://${getBaseUrl(dataset)}/${brand}/${contentType}s/${contentName}/${contentId}`
+    return contentPath && contentId
+      ? `https://${getBaseUrl(dataset)}${contentPath}`
       : `https://${getBaseUrl(dataset)}/${brand}/`;
 }
 
