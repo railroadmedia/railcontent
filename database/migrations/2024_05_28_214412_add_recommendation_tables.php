@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -18,7 +17,7 @@ return new class extends Migration
         $sections = ['quick_tips', 'course', 'song', 'workout'];
         foreach($brands as $brand) {
             foreach($sections as $section) {
-                if(($brand == 'singeo' || $brand == 'pianote') && $section == 'course' ) {
+                if(($brand == 'singeo' || $brand == 'pianote') && $section == 'course') {
                     continue;
                 }
                 $tableName = "recommendations_" . $brand . '_' . $section;

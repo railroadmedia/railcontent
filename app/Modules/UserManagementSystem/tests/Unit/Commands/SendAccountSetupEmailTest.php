@@ -29,7 +29,7 @@ class SendAccountSetupEmailTest extends TestCase
             ->count(5)
             ->create([
                 'requires_password_update' => true,
-                'created_at' => now()->subDays(2)
+                'created_at' => now()->subDay()->subHour()
             ]);
     }
 
@@ -51,7 +51,6 @@ class SendAccountSetupEmailTest extends TestCase
                 'requires_password_update' => true,
                 'created_at' => now()
             ]);
-        $allUsers = $this->usersToReceiveNotification->add($recentUser);
 
         $this->travel(1)->day();
         $this->travel(1)->second();
@@ -59,7 +58,7 @@ class SendAccountSetupEmailTest extends TestCase
         $this->artisan("user:sendAccountSetupEmail")
             ->assertSuccessful();
 
-        $this->assertOnlyValidUsersSelected($allUsers);
+        $this->assertOnlyValidUsersSelected(Collection::make([$recentUser]));
     }
 
     public function test_dispatched_finds_users_to_notify_without_user_who_updated_password()

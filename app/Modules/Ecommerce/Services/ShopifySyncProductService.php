@@ -20,8 +20,7 @@ class ShopifySyncProductService
     public function __construct(
         ShopifyGateway $shopifyGateway,
         ProductService $productService,
-    )
-    {
+    ) {
         $this->productService = $productService;
         $this->shopifyGateway = $shopifyGateway;
     }
@@ -34,7 +33,9 @@ class ShopifySyncProductService
         foreach ($productShopify["variants"] as $variant) {
             try {
                 $product = $products[$variant["sku"]] ?? new Product();
-                if (!$variant['sku']) continue;
+                if (!$variant['sku']) {
+                    continue;
+                }
                 $product->sku = $variant['sku'];
                 $product->description = $productShopify['body_html'];
                 $product->active = $productShopify['status'] == 'active' ? 1 : 0;

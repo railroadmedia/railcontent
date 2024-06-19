@@ -51,9 +51,9 @@ abstract class BaseTestCase extends FoundationBaseTestCase
         $this->withoutMiddleware(UserActivitySyncMiddleware::class);
     }
 
-    protected function getRandomName($prefix=null)
+    protected function getRandomName($prefix = null)
     {
-        $prefix ??= debug_backtrace(!DEBUG_BACKTRACE_PROVIDE_OBJECT|DEBUG_BACKTRACE_IGNORE_ARGS,2)[1]['function'];
+        $prefix ??= debug_backtrace(!DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'];
         $end = $this->faker->regexify('\d{4}-\d{4}-\d{4}-\d{4}');
         return $prefix . $end;
     }
