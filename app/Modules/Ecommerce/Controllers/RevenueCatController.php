@@ -5,7 +5,7 @@ namespace App\Modules\Ecommerce\Controllers;
 use App\Jobs\WebhookJob;
 use App\Modules\Ecommerce\ApiGateways\RevenueCatApiGateway;
 use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
-use App\Modules\Ecommerce\Jobs\Recharge\SubscriptioneExpiredEventTrackingJob;
+use App\Modules\Ecommerce\Jobs\RevenueCat\SubscriptionExpiredEventTrackingJob;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Services\ShopifySyncService;
@@ -267,7 +267,7 @@ class RevenueCatController extends Controller
 
                     $id = $this->getWebhookIdentifierOrGUID($request);
                     $children = [
-                        new SubscriptioneExpiredEventTrackingJob($data),
+                        new SubscriptionExpiredEventTrackingJob($data),
                     ];
                     dispatch(new WebhookJob('Recharge-subscription-expired', $id, $data, $children));
                 } catch (Throwable $th) {

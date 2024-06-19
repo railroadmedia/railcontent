@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Jobs\RevenueCat;
 use App\Jobs\WebhookChildJob;
 use App\Modules\Ecommerce\Services\EventTrackingService;
 use App\Modules\Ecommerce\Services\RevenueCatService;
+use Exception;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Log;
 
@@ -22,7 +23,7 @@ class SubscriptionExpiredEventTrackingJob extends WebhookChildJob
     ): void {
         $user = $revenueCatService->tryGetUserFromNotificationData($this->contents, false);
         if (!$user) {
-            return;
+            throw new Exception('User not found');
         }
         $type = (strtolower($this->contents['event']['store']) == 'app_store') ? 'apple' : 'google';
         $revenueCatService->unsetUserSubscription($user, $type);
@@ -34,7 +35,7 @@ class SubscriptionExpiredEventTrackingJob extends WebhookChildJob
             Log::error(
                 "SubscriptionExpiredEventTrackingJob - musora product not found: $productId"
             );
-            return;
+            throw new Exception('Musora product not found');
         }
 
         $musoraProduct = $musoraProducts->first();
