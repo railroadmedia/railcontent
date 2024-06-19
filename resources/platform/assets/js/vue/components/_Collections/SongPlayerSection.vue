@@ -33,7 +33,9 @@
                     <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] mt-1 tw-mb-3">
                         {{ songArtist }} -
                         {{ songAlbum }} -
-                        {{ songMeta }}
+                        <span v-for="(genre, index) in songGenres" :key="index">
+                            {{ genre }}<span v-if="index < songGenres.length - 1">, </span>
+                        </span>
                     </p>
                     <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
                         <button v-if="hasInstrumentless" style="padding: 0 24px;"
@@ -157,7 +159,7 @@
         songTitle: String,
         songArtist: String,
         songAlbum: String,
-        songMeta: String,
+        songGenres: Array,
         isLiked: Boolean,
         isAdded: Boolean,
         assignments: Array,

@@ -12,11 +12,11 @@
             :is-loading="isLoading"
             :content-id="contentId"
             :resources="song?.resource"
-            :thumbnail-url="thumbnailUrl"
+            :thumbnail-url="song?.image"
             :song-title="song?.title"
             :song-artist="song?.artist_name"
             :song-album="song?.album"
-            :song-meta="songMeta"
+            :song-genres="song?.genre_names"
             :related-lessons="relatedLessons"
             :assignments="assignments"
             :has-instrumentless="song?.instrumentless"
@@ -83,8 +83,6 @@
   
   // Props
   const props = defineProps({
-    thumbnailUrl: String,
-    songMeta: String,
     contentId: Number,
     isLiked: Boolean,
     isAdded: Boolean,
@@ -100,9 +98,10 @@
     const fields = [
       '_id',
       'title',
-      'thumbnail',
+      '"image":thumbnail.asset->url',
       'genre',
       '"artist_name":artist->name',
+      '"genre_names":genre[]->name',
       'album',
       'instrumentless',
       'soundslice',
