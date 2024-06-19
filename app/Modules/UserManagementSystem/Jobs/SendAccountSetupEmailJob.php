@@ -40,7 +40,8 @@ class SendAccountSetupEmailJob extends BatchQueryJob
     {
         return User::query()
             ->where('requires_password_update', true)
-            ->where('created_at', '<', now()->subDays(1));
+            ->where('created_at', '<', now()->subDays(1))
+            ->where('created_at', '>', now()->subDays(2));
     }
 
     public function handleItem($user): void

@@ -8,7 +8,6 @@ use App\Modules\Ecommerce\Services\ShopifySyncService;
 
 class ShopifySyncProductJob extends WebhookChildJob
 {
-
     private array $data;
 
     public function __construct(
