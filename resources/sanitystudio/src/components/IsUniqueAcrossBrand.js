@@ -1,0 +1,24 @@
+import React, { useEffect } from 'react';
+
+export default async function IsUniqueAcrossBrand(slug, context) {
+    const { document, getClient } = context;
+    const client = getClient({ apiVersion: '2022-12-07' });
+    const params = {
+        type: 'song',
+        id: document._id,
+        slug,
+    };
+    // Construct the query based on the presence of the brand field
+    let query = `*[_type == $type && slug.current == $slug && _id != $id]`;
+    if (document.brand) {
+        params.brand = document.brand;
+        query = `*[_type == $type && brand == $brand && slug.current == $slug && _id != $id]`;
+    }
+    const documents = await client.fetch(query, params);
+    // Returns true if no documents are found, false otherwise
+    return documents.length === 0;
+};
+
+
+
+

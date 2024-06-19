@@ -9,18 +9,33 @@ import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import th
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
+import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
 
 // You can add more custom components here as needed
 const customComponents = {
     DifficultyInput: DifficultyInput,
     SoundsliceArrayInput: SoundsliceArrayInput,
     SoundsliceSlugInput: SoundsliceSlugInput,
-    RolesBasedPermissionsInput: RolesBasedPermissionsInput
+    RolesBasedPermissionsInput: RolesBasedPermissionsInput,
+    IsUniqueAcrossBrand: IsUniqueAcrossBrand
 };
 
 // Helper function to map components
 const mapComponents = (fields) => {
     return fields.map((field) => {
+        // Map components at the field level if they exist in options
+        if (field.options) {
+            const { isUnique } = field.options;
+            if (isUnique) {
+                field = {
+                    ...field,
+                    options: {
+                        ...field.options,
+                        isUnique: customComponents[isUnique]
+                    }
+                };
+            }
+        }
         // Map components at the field level
         if (field.components) {
             field = {
