@@ -39,7 +39,7 @@ class Song extends BaseSanityModel
 
         $fields = [
             new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"),
-            new Field(FieldType::Slug, 'slug', options:['source' => 'title'], hidden: "({document}) => !document?.title,"),
+            new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique'=>'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title,"),
             new BrandField(),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
             new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput'),
