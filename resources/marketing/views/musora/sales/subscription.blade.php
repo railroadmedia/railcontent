@@ -334,7 +334,7 @@
 @section('layout-body')
     <section class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#101921;">
 
-        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             <div class="container mx-auto max-w-5xl">
                 <div class="flex flex-wrap sm:flex-nowrap items-center">
                     <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
@@ -378,9 +378,12 @@
                 </div>
             </div>
         </div>
-                <img class="object-cover object-center w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/header.jpg">
-{{--        <video class="object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted--}}
-{{--            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/eardrums-black/header2.mp4"></video>--}}
+        <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(16,25,33,0.7);"></div>
+{{--                <img class="object-cover object-center w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/header.jpg">--}}
+        <video class="sm:hidden block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header-m.mp4"></video>
+        <video class="hidden sm:block object-cover w-full relative z-0" style="height: 100%;" type="video/mp4" autoplay loop playsinline muted
+            src="https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/musora/membership/homepage/2024/header3.mp4"></video>
     </section>
     @php
         $packs = $musora['packs'];
