@@ -125,7 +125,7 @@ environments:
             - 'php artisan event:clear'
             - 'php artisan route:clear'
             - 'php artisan view:cache'
-            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && yarn build-storybook && yarn build-sanity-studio && rm -rf node_modules'
         deploy:
             - 'php artisan migrate --force'
     web-staging-two:
