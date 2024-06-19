@@ -218,10 +218,19 @@
                     : 'Click here to redeem on a new account.';
             @endphp
 
-            <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+            <div class="redeem-switcher rounded-xl py-4 bg-gray-300" x-data="{
+                        membershipLink: '{{ $membershipLink }}',
+                        init() {
+                            const params = new URLSearchParams(window.location.search);
+                            const code = params.get('code');
+                            if (code && !this.membershipLink.includes(`code=${code}`)) {
+                                this.membershipLink += (this.membershipLink.includes('?') ? '&' : '?') + `code=${code}`;
+                            }
+                        }
+                    }" x-init="init()">
                 <strong>{{ $isNewAccount ? 'Existing Member?' : 'Not already a member?' }}</strong>
                 <br>
-                <a class="text-drumeo underline" href="{{ $membershipLink }}">{{ $membershipMessage }}</a>
+                <a :href="membershipLink" class="text-drumeo underline">{{ $membershipMessage }}</a>
                 <br>
                 <em>(The form below is only for {{ $isNewAccount ? 'new accounts' : 'existing members' }})</em>
             </div>
