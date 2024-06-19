@@ -33,7 +33,7 @@ function getPreviewUrl(doc, dataset) {
 function getBaseUrl(dataset) {
     switch (dataset) {
       case 'production':
-        return 'musora.com';
+        return 'web-staging-five.musora.com' //Set To WS5 for now
       default:
         return 'beta-testing.musora.com';
     }
