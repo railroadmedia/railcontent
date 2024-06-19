@@ -154,7 +154,6 @@
     const props = defineProps({
         isLoading: Boolean,
         contentId: Number,
-        resources: Array,
         thumbnailUrl: String,
         songTitle: String,
         songArtist: String,
@@ -167,7 +166,15 @@
         lessonProgress: [Number, String],
         likeCount: [Number, String],
         reportLogo: String,
+        resources: {
+            type: Array,
+            default: [],
+        }
     });
+
+    onBeforeMount(()=>{
+        console.log('songArtist', props.songArtist)
+    })
 
     const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
     const openSoundslice = ref(null);
