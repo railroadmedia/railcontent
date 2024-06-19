@@ -16,7 +16,6 @@
     "mp": "yarn marketing-production",
     "run-storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o public/storybook-build",
-    "build-sanity-studio": "cd /app/musora-web-platform/resources/sanitystudio && yarn install && yarn build",
     "test:unit": "jest"
   },
   "resolutions": {
