@@ -1,7 +1,7 @@
 <template>
     <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
         <div v-if="!isLoading" class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
-            <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
+            <div class="tw-flex tw-flex-col sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-justify-center tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px]  2xl:tw-w-screen tw-relative tw-overflow-hidden tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]">
                     <!-- Song Image Background -->
                     <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${thumbnailUrl}`"
@@ -30,7 +30,7 @@
             <div class="tw-flex flex-column tw-w-full">
                 <div>
                     <h1 class="text-black font-bold item-title heading dark:tw-text-white tw-text-xl md:tw-text-2xl">{{ songTitle }}</h1>
-                    <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] mt-1 tw-mb-3">
+                    <p class="text-grey-3 tw-text-lg dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] tw-mt-[.625rem] tw-mb-3">
                         {{ songArtist }} -
                         {{ songAlbum }} -
                         <span v-for="(genre, index) in songGenres" :key="index">
@@ -93,7 +93,27 @@
 
         <!-- Else Show Skeleton Loader -->
         <div v-else>
-
+            <section class="tw-animate-pulse tw-flex tw-flex-col sm:tw-flex-row tw-py-4">
+                <div class="tw-flex tw-flex-col sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
+                    <!-- Thumb Skeleton -->
+                    <div class="tw-flex tw-flex-shrink-0 tw-aspect-square tw-w-full tw-min-w-[175px] sm:tw-max-w-[338px] 2xl:tw-w-screen tw-rounded-[10px] tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                </div>
+                <div class="tw-flex flex-column tw-w-full">
+                    <!-- Title Skeletons -->
+                    <div class="tw-h-[32px] tw-flex tw-w-1/2 tw-rounded-sm tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                    <div class="tw-h-[28px] tw-mt-[.625rem] tw-mb-3 tw-flex tw-w-1/3 tw-rounded-sm tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                    <!-- Button Skeletons -->
+                    <div class="tw-h-[50px] tw-flex tw-rounded-full tw-bg-white dark:tw-bg-[#0E2031] tw-mb-3 3xl:tw-mb-0 3xl:tw-mr-3"></div>
+                    <div class="tw-h-[50px] tw-flex tw-rounded-full tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                    <!-- Pill Buttons -->
+                    <div class="tw-flex tw-flex-wrap tw-items-start tw-my-2">
+                        <div class="tw-w-[52px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                        <div class="tw-w-[65px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                        <div class="tw-w-[65px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                        <div class="tw-w-[34px] tw-h-[34px] tw-flex tw-mr-2 tw-mb-2 tw-rounded-full tw-bg-white dark:tw-bg-[#0E2031]"></div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- Soundslice Modals -->
