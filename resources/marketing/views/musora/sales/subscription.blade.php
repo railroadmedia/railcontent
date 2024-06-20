@@ -403,20 +403,8 @@
     @endphp
 
     @include('musora.sales.components.reason-cards-section', [
+        'bgColor' => "#f4f8fb",
         'seven' => true,
-    ])
-
-    @php
-        $buttons = $musora['buttons'];
-
-        $courses = $musora['courses'];
-    @endphp
-
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
-    @include('musora.sales.components.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden"><u>best teachers.</u>',
-        'desc' => 'Amplify your skills with artist<br class="inline sm:hidden"> courses and live events.',
-        'split' => true
     ])
 
     @php
