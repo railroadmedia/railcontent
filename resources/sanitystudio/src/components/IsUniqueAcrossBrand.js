@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect } from 'react';
 
 export default async function IsUniqueAcrossBrand(slug, context) {
