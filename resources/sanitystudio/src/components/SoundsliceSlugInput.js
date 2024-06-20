@@ -7,6 +7,7 @@ const SoundsliceSlugInput = React.forwardRef((props, ref) => {
     const { elementProps,  value = '', onChange} = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
     const docId = useFormValue(["_id"]);
+    // eslint-disable-next-line
     const soundsliceEntries = useFormValue(['soundslice']) ?? [];
 
     const extractValue = (str) => {
