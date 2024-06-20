@@ -1,5 +1,5 @@
 <template>
-    <div class="avatar-thumb tw-relative tw-h-0 tw-pb-[100%] tw-overflow-hidden tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1.5"
+    <div class="avatar-thumb tw-relative tw-h-0 tw-pb-[100%] tw-overflow-hidden tw-rounded-full tw-bg-[#ccd3d3] dark:tw-bg-[#081825] tw-mb-1.5"
         :class="[ thumbBorderClass ]"
     >
         <div class="tw-no-underline tw-block tw-h-full tw-w-full tw-border-inherit">

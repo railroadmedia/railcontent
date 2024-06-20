@@ -1,12 +1,15 @@
 <template>
-    <div class="text-editor-container tw-flex tw-flex-col tw-w-full" v-if="renderTinyMCE">
+    <div class="text-editor-container tw-flex tw-flex-col tw-w-full"
+         :class="{'tw-opacity-50 tw-pointer-events-none':disabled}" 
+         v-if="renderTinyMCE"
+    >
         <ImageUploader v-if="showImageUploader" :skipCrop="true" :selfContained="true"
             uploadServiceRoute="/musora-api/v5/picture/upload-from-s3"
             successMessage="Your image was successfully uploaded" fieldKey="forum_post_photo" cropType="square"
             :selectedImage="selectedImage" :initialStep="initialUploaderStep" @uploadSuccess="handleUploadDone"
             @uploadError="handleUploadError" @onUploaderClose="closeUploader" />
         <input v-model="contentInterface" type="hidden" :name="fieldKey">
-        <TinyEditor v-model="contentInterface" api-key="g84168rl7b45du7fji2nive374o541mhtmzogyolgqng97xc"
+        <TinyEditor v-model="contentInterface" api-key="samk94ixqjb345m3tvofudoty51jv2qk1lk8q68vbeup3xbj"
             :init="initObject" :placeholder="placeholder" />
     </div>
 </template>
@@ -44,6 +47,10 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const isDarkModeSelected = inject('isDarkModeSelected');
@@ -59,9 +66,9 @@ const computedToolbar = computed(() => {
         return 'bold italic underline | bullist numlist | link customImageUploader media | forecolor backcolor | emoticons';
     } else if (props.isStudentComment) {
         return 'link | emoticons';
+    } else {
+        return props.toolbar;
     }
-
-    return props.toolbar;
 });
 
 const initObject = computed(() => ({

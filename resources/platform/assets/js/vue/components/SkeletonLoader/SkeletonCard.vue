@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group" :class="[
+    <div class="tw-animate-pulse tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-full tw-shrink-0 tw-mr-3 lg:tw-mr-0" :class="[
         { 'lg:[&:nth-child(n+5)]:tw-hidden 2xl:[&:nth-child(n+5)]:tw-flex 2xl:[&:nth-child(n+6)]:tw-hidden': isSingleRow },
     ]">
         <div class="tw-flex tw-flex-col">

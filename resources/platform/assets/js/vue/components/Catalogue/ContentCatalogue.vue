@@ -12,16 +12,13 @@ import CatalogueFilters from "../../vuesora/views/catalogues/_CatalogueFilters.v
 import CatalogueSearch from "../../vuesora/views/catalogues/_CatalogueSearch.vue";
 import CoachCatalogueSearch from "../../vuesora/views/catalogues/_CoachCatalogueSearch.vue";
 import CataloguePlaylistTabs from "../../vuesora/views/catalogues/_CataloguePlaylistTabs.vue";
-import Toasts from "../../vuesora/assets/js/classes/toasts";
 import Pagination from "../../vuesora/components/Pagination.vue";
 import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 import ThemeClasses from "../../vuesora/mixins/ThemeClasses";
-import FilterWrapper from "../Filter/FilterWrapper";
 
 export default {
     name: "ContentCatalogue",
     components: {
-        FilterWrapper,
         "grid-catalogue": GridCatalogue,
         "coach-grid-catalogue": CoachGridCatalogue,
         "coaches-grid-catalogue": CoachesGridCatalogue,
@@ -238,7 +235,7 @@ export default {
         return {
             page: this.initialPage || 1,
             content: this.preLoadedContent ? this.preLoadedContent.data : [],
-            filters: this.preLoadedContent ? ContentHelpers.flattenFilters( this.preLoadedContent?.meta?.filterOptions || [] ): {},
+            filters: this.preLoadedContent ? ContentHelpers.flattenFilters(this.preLoadedContent?.meta?.filterOptions || []) : {},
             total_results: this.totalResults ? this.totalResults : (this.preLoadedContent?.data ? this.preLoadedContent.data.length : (this.totalResults || 0)),
             total_pages: this.preLoadedContent
                 ? Math.ceil(this.preLoadedContent.meta.totalResults / this.limit)
@@ -365,16 +362,14 @@ export default {
 
         noResultsMessageWithProgress() {
             if (this.required_user_states.length) {
-                return `You do not have any ${this.required_user_states[0] || ""} ${
-                    this.catalogueName || "lessons"
-                } that match those filters. Please remove some filters.`;
+                return `You do not have any ${this.required_user_states[0] || ""} ${this.catalogueName || "lessons"
+                    } that match those filters. Please remove some filters.`;
             }
 
             return this.noResultsMessage;
         },
     },
     mounted() {
-        console.log('includeFutureScheduledContentOnly',this.includeFutureScheduledContentOnly)
         if (!this.preLoadedContent && !this.preLoadedContent.results.length) {
             this.getContent();
         }
@@ -393,8 +388,8 @@ export default {
             });
         }
 
-        if(this.isCoachesGrid){
-            this.getContent(true, true).then(()=>{
+        if (this.isCoachesGrid) {
+            this.getContent(true, true).then(() => {
                 this.selectedTab = 'allCoaches';
                 this.coachData['subscribedCoaches'] = [...this.content];
                 this.getContent(true, true);
@@ -431,10 +426,10 @@ export default {
         handleSortChange(value) {
             if (value != 0) {
                 window.location.href = `${location.protocol}//${location.host
-                }${location.pathname}?sort=${value}`;
+                    }${location.pathname}?sort=${value}`;
             } else {
                 window.location.href = `${location.protocol}//${location.host
-                }${location.pathname}`;
+                    }${location.pathname}`;
             }
         },
 
@@ -526,16 +521,15 @@ export default {
 
             const string = QueryString.stringify(params, { arrayFormat: "bracket" });
 
-            const new_url = `${
-                window.location.origin + window.location.pathname
-            }?${string}`;
+            const new_url = `${window.location.origin + window.location.pathname
+                }?${string}`;
 
             window.history.replaceState(history.state, null, new_url);
         },
 
         fetchContent() {
             return axios
-                .get( this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
+                .get(this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
                     params: {
                         brand: this.brand,
                         limit: this.limit,
@@ -547,12 +541,9 @@ export default {
                 .then((response) => response)
                 .catch((error) => {
                     console.error(error);
-                    Toasts.push({
-                        icon: "doh",
-                        themeColor: this.themeColor,
-                        title: "This is Embarrassing That didn't work",
-                        message:
-                            "Refresh the page and try once more, if it happens again please let us know using the chat below. ",
+                    window.shownotification({
+                        icon: 'warning',
+                        text: "This is Embarrassing That didn't work. Refresh the page and try once more, if it happens again please let us know using the chat below."
                     });
 
                     this.loading = false;
@@ -648,7 +639,7 @@ export default {
                 this.getContent();
 
                 const catalogueContainer = document.getElementById('content-catalogue');
-                
+
                 catalogueContainer.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start',
@@ -662,9 +653,8 @@ export default {
 
                 query_object.page = payload.page;
 
-                window.location.href = `${location.protocol}//${location.host}${
-                    location.pathname
-                }?${QueryString.stringify(query_object)}#content-catalogue`;
+                window.location.href = `${location.protocol}//${location.host}${location.pathname
+                    }?${QueryString.stringify(query_object)}#content-catalogue`;
             }
         },
 
@@ -713,19 +703,19 @@ export default {
             this.getContent();
         },
 
-        coachEndpoint(){
+        coachEndpoint() {
             return this.selectedTab === "allCoaches" ? '/railcontent/content?only_subscribed=' : '/railcontent/content?only_subscribed=true';
         },
 
-        handleFilterTabClick(value){
+        handleFilterTabClick(value) {
             this.coachData[this.selectedTab] = [...this.content];
             this.selectedTab = value;
             this.content = [...this.coachData[this.selectedTab]];
         },
 
-        getFilterColumns(){
+        getFilterColumns() {
             let filters = [];
-            for (const value of this.filterableValues){
+            for (const value of this.filterableValues) {
                 filters.push({
                     category: value,
                     items: this.filters[value]
@@ -734,14 +724,14 @@ export default {
             this.filterMultiSelectColumns = filters;
         },
 
-        applyFilters(category, item){
-            if (this.filter_params[category]){
-                const isChecked = this.filter_params[category].find((f)=> f.value === item.value);
+        applyFilters(category, item) {
+            if (this.filter_params[category]) {
+                const isChecked = this.filter_params[category].find((f) => f.value === item.value);
 
                 if (isChecked) {
                     this.filter_params[category] = this.filter_params[category].filter((f) => f.value !== item.value);
 
-                    if(this.filter_params[category].length === 0) {
+                    if (this.filter_params[category].length === 0) {
                         delete this.filter_params[category];
                     }
                 }
@@ -760,256 +750,97 @@ export default {
 </script>
 
 <template>
-  <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
+    <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
+        <coach-catalogue-search v-if="isCoach" :theme-color="themeColor" :brand="brand" :included-types="includedTypes"
+            :selected-types="selected_types" :search-term="search_term" :current_page="page"
+            :total-results="total_results" @typeChange="handleTypeChange" @searchChange="handleSearch"
+            @handleContentSort="handleContentSort" />
 
-    <div v-if="isCoachesGrid"
-         id="coach-section"
-         class="tw-flex tw-flex-col tw-mb-6">
-            <filter-wrapper
-                :search-term="search_term"
-                :selected-tab="selectedTab"
-                :selected-sort="sort"
-                :filter-params="filter_params"
-                :multi-select-columns="filterMultiSelectColumns"
-                :tab-options="[{ value: 'allCoaches', key: 'All Coaches' }, { value: 'subscribedCoaches', key: 'Subscribed Coaches' }]"
-                @handleSearch="handleSearch"
-                @on-filter-click="applyFilters"
-                @handleContentSort="handleContentSort"
-                @on-click-filter-tab="handleFilterTabClick"
-            ></filter-wrapper>
-        <div class="tw-flex tw-flex-wrap">
-            <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
-               :href="coachIndexUrl + '#coach-section'"
-            >
-              <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[!isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
-              >
-                All Coaches
-              </h3>
-            </a>
-            <a class="tw-no-underline tw-transition"
-               :href="coachIndexUrl + '?only_subscribed=true#coach-section' "
-            >
-              <h3 class="tw-text-2xl md:tw-text-3xl tw-inline-block tw-cursor-pointer"
-                  :class="[isOnlySubscribed ? 'tw-text-[#00101D] dark:tw-text-white tw-font-bold' : 'tw-text-gray-400 dark:tw-text-[#445F74] hover:tw-text-gray-500' ]"
-              >
-                  Subscribed Coaches
-              </h3>
-            </a>
+        <div :class="{ 'tw-flex tw-w-full tw-flex-wrap tw-mb-3': isCoachesGrid }">
+            <catalogue-search v-if="searchBar && !isCoach" :theme-color="themeColor" :included-types="includedTypes"
+                :selected-types="selected_types" :search-term="search_term" :current-page="page"
+                :isCoachesGrid="isCoachesGrid" :total-results="total_results" :catalogueType="catalogueType"
+                :search-bar-title="searchBarTitle" :infiniteScroll="infiniteScroll" @typeChange="handleTypeChange"
+                @searchChange="handleSearch" />
+
+            <catalogue-playlist-tabs v-if="isPlaylists && !isCoach" :brand="brand" :theme-color="themeColor"
+                :included-types="includedTypes" />
+
+            <catalogue-filters v-if="!isCoach && filterableValues.length" :filters="filters"
+                :filterable-values="filterableValues" :filters-labels="filtersLabels"
+                :required-user-states="required_user_states" :filter-params="filter_params"
+                :isCoachesGrid="isCoachesGrid" :event-type="eventType" :loading="loading" :theme-color="themeColor"
+                :content-types="selectedTypes" :brand="brand" :init-sort="sortBy" @filterChange="handleFilterChange"
+                @progressChange="handleProgressChange" @handleContentSort="handleContentSort" />
+
         </div>
-    </div>
 
-    <coach-catalogue-search
-      v-if="isCoach"
-      :theme-color="themeColor"
-      :brand="brand"
-      :included-types="includedTypes"
-      :selected-types="selected_types"
-      :search-term="search_term"
-      :current_page="page"
-      :total-results="total_results"
-      @typeChange="handleTypeChange"
-      @searchChange="handleSearch"
-      @handleContentSort="handleContentSort"
-    />
-
-    <div :class="{'tw-flex tw-w-full tw-flex-wrap tw-mb-3' : isCoachesGrid }">
-        <catalogue-search
-            v-if="searchBar && !isCoach"
-            :theme-color="themeColor"
-            :included-types="includedTypes"
-            :selected-types="selected_types"
-            :search-term="search_term"
-            :current-page="page"
-            :isCoachesGrid="isCoachesGrid"
-            :total-results="total_results"
-            :catalogueType="catalogueType"
-            :search-bar-title="searchBarTitle"
-            :infiniteScroll="infiniteScroll"
-            @typeChange="handleTypeChange"
-            @searchChange="handleSearch"
-        />
-
-        <catalogue-playlist-tabs
-            v-if="isPlaylists && !isCoach"
-            :brand="brand"
-            :theme-color="themeColor"
-            :included-types="includedTypes"
-        />
-
-        <catalogue-filters
-            v-if="!isCoach && filterableValues.length"
-            :filters="filters"
-            :filterable-values="filterableValues"
-            :filters-labels="filtersLabels"
-            :required-user-states="required_user_states"
-            :filter-params="filter_params"
-            :isCoachesGrid="isCoachesGrid"
-            :event-type="eventType"
-            :loading="loading"
-            :theme-color="themeColor"
-            :content-types="selectedTypes"
-            :brand="brand"
-            :init-sort="sortBy"
-            @filterChange="handleFilterChange"
-            @progressChange="handleProgressChange"
-            @handleContentSort="handleContentSort"
-        />
-
-    </div>
-
-    <div
-      v-if="content.length === 0 && noResultsMessage.length > 0"
-      class="flex flex-row pv-3 align-v-center"
-    >
-      <div class="flex flex-column icon-col face-icon mr-1">
-        <div class="icon-wrap square" :class="noResultsIcon"></div>
-      </div>
-      <div class="flex flex-column">
-        <h4 class="body tw-text-[#00101D] dark:tw-text-white" v-html="noResultsMessageWithProgress"></h4>
-      </div>
-    </div>
-
-    <coach-grid-catalogue
-      v-if="catalogueType === 'coach-grid'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :show-my-list-action="showMyListAction"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
-
-    <!-- Coach Index Page -->
-    <coaches-grid-catalogue
-      v-if="isCoachesGrid"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :show-my-list-action="showMyListAction"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
-
-    <grid-catalogue
-      v-if="catalogueType === 'grid'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :show-my-list-action="showMyListAction"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
-
-    <routines-catalogue
-      v-if="catalogueType === 'routines'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :lock-unowned="lockUnowned"
-      :force-wide-thumbs="forceWideThumbs"
-      :content-type-override="contentTypeOverride"
-      :display-inline="displayInline"
-      @addToList="addToListEventHandler"
-    />
-
-    <list-catalogue
-      v-if="catalogueType === 'list'"
-      :is-coach="isCoach"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :card_type="catalogueType"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :display-items-as-overview="displayItemsAsOverview"
-      :display-user-interactions="displayUserInteractions"
-      :content-type-override="contentTypeOverride"
-      :lock-unowned="lockUnowned"
-      :show-numbers="showNumbers"
-      :is_search="searchBar || isPlaylists"
-      :reset-progress="resetProgress"
-      :force-wide-thumbs="forceWideThumbs"
-      :destroy-on-list-removal="destroyOnListRemoval"
-      :compact-layout="compactLayout"
-      :subscription-calendar-id="subscriptionCalendarId"
-      :branch-path-index="branchPathIndex"
-      :branch-path-content="branchPathContent"
-      @addToList="addToListEventHandler"
-      @progressReset="resetProgressEventHandler"
-    />
-
-    <downloads-catalogue
-      v-if="catalogueType === 'downloads'"
-      :content="content"
-      :brand="brand"
-      :theme-color="themeColor"
-      :use-theme-color="useThemeColor"
-      :card_type="catalogueType"
-      :user-id="userId"
-      :is-admin="isAdmin"
-      :display-items-as-overview="displayItemsAsOverview"
-      :display-user-interactions="displayUserInteractions"
-      :content-type-override="contentTypeOverride"
-      :lock-unowned="lockUnowned"
-      :show-numbers="showNumbers"
-      :is_search="searchBar || isPlaylists"
-      :reset-progress="resetProgress"
-      :force-wide-thumbs="forceWideThumbs"
-      :destroy-on-list-removal="destroyOnListRemoval"
-      :compact-layout="compactLayout"
-      :subscription-calendar-id="subscriptionCalendarId"
-      @addToList="addToListEventHandler"
-      @progressReset="resetProgressEventHandler"
-    />
-
-    <div
-      v-if="paginate && total_pages > 1 && !infiniteScroll"
-      class="flex flex-row pagination-row align-h-right"
-    >
-      <pagination
-        :current-page="Number(page)"
-        :total-pages="total_pages"
-        @pageChange="handlePageChange"
-      />
-    </div>
-
-    <transition name="show-from-bottom">
-      <div
-        v-show="loading && showLoadingAnimation"
-        id="loadingDialog"
-        class="flex flex-row align-center"
-      >
-        <div
-          class="loading-spinner corners-10 shadow pa flex-center"
-          :class="themeBgClass"
-        >
-          <i class="fas fa-spinner fa-spin text-white"></i>
-          <p class="tw-text-xs text-white">Loading Please Wait...</p>
+        <div v-if="content.length === 0 && noResultsMessage.length > 0" class="flex flex-row pv-3 align-v-center">
+            <div class="flex flex-column icon-col face-icon mr-1">
+                <div class="icon-wrap square" :class="noResultsIcon"></div>
+            </div>
+            <div class="flex flex-column">
+                <h4 class="body tw-text-[#00101D] dark:tw-text-white" v-html="noResultsMessageWithProgress"></h4>
+            </div>
         </div>
-      </div>
-    </transition>
-  </div>
+
+        <coach-grid-catalogue v-if="catalogueType === 'coach-grid'" :content="content" :brand="brand"
+            :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
+            :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
+            :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction"
+            :display-inline="displayInline" @addToList="addToListEventHandler" />
+
+        <!-- Coach Index Page -->
+        <coaches-grid-catalogue v-if="isCoachesGrid" :content="content" :brand="brand" :theme-color="themeColor"
+            :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+            :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
+            :show-my-list-action="showMyListAction" :display-inline="displayInline"
+            @addToList="addToListEventHandler" />
+
+        <grid-catalogue v-if="catalogueType === 'grid'" :content="content" :brand="brand" :theme-color="themeColor"
+            :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin" :lock-unowned="lockUnowned"
+            :force-wide-thumbs="forceWideThumbs" :content-type-override="contentTypeOverride"
+            :show-my-list-action="showMyListAction" :display-inline="displayInline"
+            @addToList="addToListEventHandler" />
+
+        <routines-catalogue v-if="catalogueType === 'routines'" :content="content" :brand="brand"
+            :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId" :is-admin="isAdmin"
+            :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
+            :content-type-override="contentTypeOverride" :display-inline="displayInline"
+            @addToList="addToListEventHandler" />
+
+        <list-catalogue v-if="catalogueType === 'list'" :is-coach="isCoach" :content="content" :brand="brand"
+            :theme-color="themeColor" :use-theme-color="useThemeColor" :card_type="catalogueType" :user-id="userId"
+            :is-admin="isAdmin" :display-items-as-overview="displayItemsAsOverview"
+            :display-user-interactions="displayUserInteractions" :content-type-override="contentTypeOverride"
+            :lock-unowned="lockUnowned" :show-numbers="showNumbers" :is_search="searchBar || isPlaylists"
+            :reset-progress="resetProgress" :force-wide-thumbs="forceWideThumbs"
+            :destroy-on-list-removal="destroyOnListRemoval" :compact-layout="compactLayout"
+            :subscription-calendar-id="subscriptionCalendarId" :branch-path-index="branchPathIndex"
+            :branch-path-content="branchPathContent" @addToList="addToListEventHandler"
+            @progressReset="resetProgressEventHandler" />
+
+        <downloads-catalogue v-if="catalogueType === 'downloads'" :content="content" :brand="brand"
+            :theme-color="themeColor" :use-theme-color="useThemeColor" :card_type="catalogueType" :user-id="userId"
+            :is-admin="isAdmin" :display-items-as-overview="displayItemsAsOverview"
+            :display-user-interactions="displayUserInteractions" :content-type-override="contentTypeOverride"
+            :lock-unowned="lockUnowned" :show-numbers="showNumbers" :is_search="searchBar || isPlaylists"
+            :reset-progress="resetProgress" :force-wide-thumbs="forceWideThumbs"
+            :destroy-on-list-removal="destroyOnListRemoval" :compact-layout="compactLayout"
+            :subscription-calendar-id="subscriptionCalendarId" @addToList="addToListEventHandler"
+            @progressReset="resetProgressEventHandler" />
+
+        <div v-if="paginate && total_pages > 1 && !infiniteScroll" class="flex flex-row pagination-row align-h-right">
+            <pagination :current-page="Number(page)" :total-pages="total_pages" @pageChange="handlePageChange" />
+        </div>
+
+        <transition name="show-from-bottom">
+            <div v-show="loading && showLoadingAnimation" id="loadingDialog" class="flex flex-row align-center">
+                <div class="loading-spinner corners-10 shadow pa flex-center" :class="themeBgClass">
+                    <i class="fas fa-spinner fa-spin text-white"></i>
+                    <p class="tw-text-xs text-white">Loading Please Wait...</p>
+                </div>
+            </div>
+        </transition>
+    </div>
 </template>

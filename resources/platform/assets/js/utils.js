@@ -28,7 +28,7 @@ export const trapFocus = (element) => {
 }
 
 export const contentTypes = {
-    'learning-path-lesson': { singular: 'Learning Path Lesson', plural: 'Learning Path Lessons' },
+    'learning-path-lesson': { singular: 'Method Lesson', plural: 'Method Lessons' },
     'pack-lesson': { singular: 'Pack Lesson', plural: 'Pack Lessons' },
     'quick-tips': { singular: 'Quick Tip', plural: 'Quick Tips' },
     'boot-camps': { singular: 'Boot Camp', plural: 'Boot Camps' },
@@ -44,7 +44,7 @@ export const contentTypes = {
     'challenge-part': { singular: 'Challenge Part', plural: 'Challenge Parts' },
     'song-tutorial-children': { singular: 'Song Tutorial Lesson', plural: 'Song Tutorial Lessons' },
     'song-tutorial': { singular: 'Song Tutorial', plural: 'Song Tutorials' },
-    'question-and-answer': { singular: 'Question And Answer', plural: 'Question And Answers' },
+    'question-and-answer': { singular: 'Questions And Answers', plural: 'Questions And Answers' },
     'coach-stream': { singular: 'Coach Stream', plural: 'Coach Streams' },
     'course': { singular: 'Course', plural: 'Courses' },
     'course-part': { singular: 'Course Part', plural: 'Course Parts' },
@@ -53,6 +53,34 @@ export const contentTypes = {
     'student-review': { singular: 'Student Review', plural: 'Student Reviews' },
     'unit-part': { singular: 'Unit Part', plural: 'Unit Parts' },
     'spotlight': { singular: 'Spotlight', plural: 'Spotlights' },
+    'performances': { singular: 'Performance', plural: 'Performances' },
+    'live': { singular: 'Live Stream', plural: 'Live Streams' },
+    'archives': { singular: 'Archive', plural: 'Archives' },
+    'recording': { singular: 'Recording', plural: 'Recordings' },
+    'backstage-secrets': { singular: 'Backstage Secrets', plural: 'Backstage Secrets' },
+    'challenges': { singular: 'Challenge', plural: 'Challenges' },
+    'diy-drum-experiments': { singular: 'DIY Drum Experiment', plural: 'DIY Drum Experiments' },
+    'drum-fest-international-2022': { singular: 'Drum Fest International 2022', plural: 'Drum Fest International 2022' },
+    'exploring-beats': { singular: 'Exploring Beat', plural: 'Exploring Beats' },
+    'gear-guides': { singular: 'Gear Guide', plural: 'Gear Guides' },
+    'history-of-electronic-drums': { singular: 'History of Electronic Drums', plural: 'Histories of Electronic Drums' },
+    'in-rhythm': { singular: 'In Rhythm Session', plural: 'In Rhythm Sessions' },
+    'on-the-road': { singular: 'On the Road', plural: 'On the Road' },
+    'paiste-cymbals': { singular: 'Paiste Cymbals', plural: 'Paiste Cymbals' },
+    'rhythmic-adventures-of-captain-carson': { singular: 'Rhythmic Adventure of Captain Carson', plural: 'Rhythmic Adventures of Captain Carson' },
+    'rhythms-from-another-planet': { singular: 'Rhythm from Another Planet', plural: 'Rhythms from Another Planet' },
+    'sonor-drums': { singular: 'Sonor Drums', plural: 'Sonor Drums' },
+    'student-collaborations': { singular: 'Student Collaboration', plural: 'Student Collaborations' },
+    'study-the-greats': { singular: 'Study the Greats Session', plural: 'Study the Greats Sessions' },
+    'tama-drums': { singular: 'Tama Drums', plural: 'Tama Drums' },
+    'behind-the-scenes': { singular: 'Behind the Scenes', plural: 'Behind the Scenes' },
+    'live-streams': { singular: 'Live Stream', plural: 'Live Streams' },
+    'solos': { singular: 'Solo', plural: 'Solos' },
+    'play-alongs': { singular: 'Play Along', plural: 'Play Alongs' },
+    'recommended': { singular: 'Inspired By Your Activity', plural: 'Inspired By Your Activity' },
+    'pack': { singular: 'Pack', plural: 'Packs' },
+    'coach-lessons': { singular: 'Coach Lesson', plural: 'Coach Lessons' },
+    'song-pdf': { singular: 'Song PDF', plural: 'Song PDFs' }
 };
 
 export const toKebabCase = (string) => {

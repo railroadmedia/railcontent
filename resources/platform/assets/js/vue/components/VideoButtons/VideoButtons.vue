@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row">
       <div class="flex flex-column next-prev-button-col mr-1" dusk="previous-lesson">
-        <a v-if="prevLessonUrl" :href="prevLessonUrl" data-tooltip="Previous Lesson" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white">
+        <a v-if="prevLessonUrl" :href="prevLessonUrl" data-tooltip="Previous Lesson" class="tw-btn-secondary" :class="hasBrandedColor ? brandTextColor : 'tw-text-[#00101D] dark:tw-text-white'">
           <i class="fas fa-chevron-left"></i>
           <span class="hide-xs-only ml-1">{{ prevLabel || 'Previous Lesson' }}</span>
         </a>
@@ -29,7 +29,7 @@
       </div>
   
       <div class="flex flex-column next-prev-button-col ml-1" dusk="next-lesson">
-        <a v-if="nextLessonUrl" :href="nextLessonUrl" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-tooltip="Next Lesson">
+        <a v-if="nextLessonUrl" :href="nextLessonUrl" class="tw-btn-secondary" data-tooltip="Next Lesson" :class="hasBrandedColor ? brandTextColor : 'tw-text-[#00101D] dark:tw-text-white'">
           <span class="hide-xs-only mr-1">{{ nextLabel || 'Next Lesson' }}</span>
           <i class="fas fa-chevron-right"></i>
         </a>
@@ -41,16 +41,22 @@
     </div>
   </template>
   
-  <script>
-  export default {
-    props: {
+  <script setup>
+    import { computed } from 'vue';
+    import { textColor } from '../../../constants/brands';
+  
+    const brandTextColor = computed(() => {
+          return textColor[props.brand];
+    });
+
+    const props = defineProps({
       prevLessonUrl: String,
       nextLessonUrl: String,
       brand: String,
       prevLabel: String,
       nextLabel: String,
-      hasQAVideo: Boolean
-    }
-  };
+      hasQAVideo: Boolean,
+      hasBrandedColor: Boolean,
+    })
   </script>
   

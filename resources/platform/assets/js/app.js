@@ -11,11 +11,17 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
+import Profile from './vue/components/_Pages/Settings/Profile.vue';
+import LoginCredentials from './vue/components/_Pages/Settings/LoginCredentials.vue';
+import Payments from './vue/components/_Pages/Settings/Payments.vue';
+import NotificationSettings from './vue/components/_Pages/Settings/NotificationSettings.vue';
+import Details from './vue/components/_Pages/Settings/Details.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
 import Home from './vue/Pages/Home.vue';
 import LessonHistory from './vue/Pages/LessonHistory';
+import LessonPlayback from './vue/Pages/LessonPlayback';
 import Playlist from './vue/Pages/Playlist';
 import Playlists from './vue/Pages/Playlists';
 import Referral from './vue/Pages/Referral';
@@ -26,8 +32,17 @@ import CoachIndex from './vue/Pages/CoachIndex';
 import Support from './vue/Pages/Support';
 import Workouts from './vue/Pages/Workouts';
 import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
+import Offline from './vue/Pages/Live/Offline';
+import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
-
+import InviteFriend from './vue/Pages/InviteFriend';
+import StudentFocus from './vue/Pages/StudentFocus';
+import Shows from './vue/Pages/Shows';
+import Overview from './vue/Pages/Overview';
+import GuitareoLessons from './vue/Pages/GuitareoLessons';
+import Search from './vue/Pages/Search';
+import PackOverview from './vue/Pages/PackOverview';
+import PackOverviewBundles from './vue/Pages/PackOverviewBundles';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -50,7 +65,6 @@ import DeleteAccountModal from './vue/components/Modal/DeleteAccountModal';
 import Forms from './vue/vuesora/assets/js/classes/forms';
 import ContentService from './vue/vuesora/assets/js/services/content';
 import UserService from './vue/vuesora/assets/js/services/user';
-import Toasts from './vue/vuesora/assets/js/classes/toasts';
 import ProgressTracker from './vue/vuesora/assets/js/classes/progress-tracker';
 
 //Vuesora Functions
@@ -92,87 +106,6 @@ const app = createApp({
         userNavigationDropdownLinks: window.userNavigationDropdownLinks,
     },
     methods: {
-        avatarUploaded(payload) {
-            const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
-            window.closeAllModals();
-            Array.from(avatarPhotos).forEach(photo => {
-                photo.setAttribute(
-                    'src', payload.image_url
-                );
-            });
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'AHH, MUCH BETTER!',
-                themeColor: 'black',
-                message: 'The new "you" is being refreshed...'
-            });
-        },
-
-        gearDrumeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'drumeo',
-                message: 'Your drum gear looks fantastic!'
-            });
-        },
-
-        gearPianotePhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-pianote-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'pianote',
-                message: 'Your piano gear looks fantastic!'
-            });
-        },
-
-        gearGuitareoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'guitareo',
-                message: 'Your gear looks fantastic!'
-            });
-        },
-
-        gearSingeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-singeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            Toasts.push({
-                icon: 'happy',
-                title: 'WOOHOO!',
-                themeColor: 'singeo',
-                message: 'Your singing gear looks fantastic!'
-            });
-        },
-
         handleVideoPlay(payload) {
             if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
                 ContentService.markContentAsStarted(payload.contentId);
@@ -213,7 +146,6 @@ const app = createApp({
                 playAlongsProgressTracker = new ProgressTracker();
 
                 const { playAlongsVueInstance } = this.$refs;
-
                 if (playAlongsVueInstance) {
                     window.addEventListener('unload', (event) => {
                         progressTracker.send({
@@ -224,7 +156,6 @@ const app = createApp({
                     });
                 }
             }
-
             playAlongsProgressTracker.start();
         },
 
@@ -267,6 +198,7 @@ app.component('AppContainer', AppContainer)
     .component('Workouts', Workouts)
     .component('PageHeader', PageHeader)
     .component('WorkoutsPlayback', WorkoutsPlayback)
+    .component('LessonPlayback', LessonPlayback)
     .component('Songs', Songs)
     .component('Artists', Artists)
     .component('ChildCatalog', ChildCatalog)
@@ -282,6 +214,21 @@ app.component('AppContainer', AppContainer)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('Profile', Profile)
+    .component('LoginCredentials', LoginCredentials)
+    .component('Payments', Payments)
+    .component('NotificationSettings', NotificationSettings)
+    .component('Details', Details)
+    .component('InviteFriend', InviteFriend)
+    .component('Offline', Offline)
+    .component('Online', Online)
+    .component('StudentFocus', StudentFocus)
+    .component('Shows', Shows)
+    .component('Overview', Overview)
+    .component('GuitareoLessons', GuitareoLessons)
+    .component('Search', Search)
+    .component('PackOverview', PackOverview)
+    .component('PackOverviewBundles', PackOverviewBundles)
 
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
@@ -332,6 +279,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('Forums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/Forums.vue'
+        )
+    ))
+
     .component('ForumThreadsTable', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */
@@ -343,6 +297,20 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "forum-thread-component" */
             './vue/vuesora/views/forum/thread/ForumThread.vue'
+        )
+    ))
+
+    .component('ForumThreads', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/vuesora/views/forum/thread/ForumThreads.vue'
+        )
+    ))
+
+    .component('LatestForums', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "forum-thread-component" */
+            './vue/Pages/LatestForums.vue'
         )
     ))
 
@@ -505,13 +473,11 @@ function showLevelUpData() {
     if (levelUpData) {
         setTimeout(() => {
             const newRank = levelUpData.dataset['newRank'];
-
-            Toasts.push({
+            window.shownotification({
                 icon: 'xp',
-                title: 'Congratulations!',
-                themeColor: 'drumeo',
-                message: 'You have earned the level of ' + newRank + '!'
+                text: 'Congratulations! You have earned the level of ' + newRank + '!'
             });
+
         }, 1000);
     }
 }

@@ -197,11 +197,11 @@
                             <button
                                 class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-sm" @click="toggleReportModal"
                             >
-                                <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none">
+                                <div class="tw-flex tw-items-center tw-relative tw-pointer-events-none tw-whitespace-nowrap">
                                     <div class="tw-h-6 tw-w-6 tw-flex tw-items-center tw-justify-center tw-mr-1">
                                         <FlagIcon class="tw-w-5 tw-h-5" />
                                     </div>
-                                    Report
+                                    Report An Issue
                                 </div>
                             </button>
                         </li>
@@ -267,7 +267,6 @@
 // TODO: REFACTOR THE MODAL OF THIS COMPONENT!
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
-import Toasts from "../../assets/js/classes/toasts";
 import ContentService from "../../assets/js/services/content";
 import CoachesInLesson from "./CoachesInLesson.vue";
 import ModalRenderer from "../../../components/Modal/ModalRenderer.vue";
@@ -582,10 +581,9 @@ export default {
             timecode.blur();
             this.handleOpenModal();
 
-            Toasts.push({
-                icon: "happy",
-                title: "SHARE THE LOVE!",
-                message: "This URL has been copied, and is ready to share!",
+            window.shownotification({
+                icon: 'check',
+                text: 'Share the love! This URL has been copied, and is ready to share!'
             });
         },
         toggleInfo() {

@@ -166,7 +166,22 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+
+        <section class="text-center px-5 sm:px-6 py-6 sm:py-8 lg:py-10 text-black relative" style="background-color:#f3efee;">
+            <div class="container max-w-5xl mx-auto relative z-20">
+                <img class="h-16 sm:h-20 lg:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/720x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/RMI30D-dark.webp">
+                <h6 class="leading-tight mt-3 mb-1"><strong>Learn the language of music <br class="sm:hidden"> with daily guided workouts.</strong></h6>
+                <p class="leading-tight mb-4">Save your seat in the first-ever<br class="sm:hidden"> class starting on July 1st!</p>
+                <a href="/shop/read-music" class="join smaller">Learn More</a>
+            </div>
+            <picture>
+                <source media="(min-width: 1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">
+                <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp" type="image/webp">
+                <img class="absolute inset-0 w-full h-full object-cover z-10" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/read-music-in-30-days/read-this-section-bg.webp">
+            </picture>
+        </section>
     @endif
+
 
     @php
         $bubbles =  [
@@ -400,8 +415,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/pianote/membership/homepage/webp-format/devices.webp',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
 
     @include('pianote._partials.faq')

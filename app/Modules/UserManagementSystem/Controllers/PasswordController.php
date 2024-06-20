@@ -49,6 +49,7 @@ class PasswordController extends Controller
      */
     public function update(Request $request)
     {
+        $isJson = request()->expectsJson();
         try {
             $validationRules =
                 [
@@ -60,18 +61,25 @@ class PasswordController extends Controller
                 $validationRules
             );
         } catch (ValidationException $e) {
-            $messagesByField = $e->validator->getMessageBag()->getMessages();
+            if ($isJson) {
+                return response()->json(
+                    ['error' => $e->getMessage()],
+                    500
+                );
+            } else {
+                $messagesByField = $e->validator->getMessageBag()->getMessages();
 
-            $messagesForFieldFailingField = reset($messagesByField);
+                $messagesForFieldFailingField = reset($messagesByField);
 
-            foreach ($messagesForFieldFailingField as $messagesForField) {
-                $errorMessageToUser = $messagesForField;
-                break;
+                foreach ($messagesForFieldFailingField as $messagesForField) {
+                    $errorMessageToUser = $messagesForField;
+                    break;
+                }
+
+                $default = 'Please try again, and contact support if the problem persists.';
+
+                return redirect()->back()->with('error-message', 'Error: ' . ($errorMessageToUser ?? $default));
             }
-
-            $default = 'Please try again, and contact support if the problem persists.';
-
-            return redirect()->back()->with('error-message', 'Error: ' . ($errorMessageToUser ?? $default));
         }
         $user = user();
 
@@ -81,6 +89,12 @@ class PasswordController extends Controller
         if (
             !$this->hasher->check($request->get('current_password'), $user->password)
         ) {
+            if ($isJson) {
+                return response()->json(
+                    ['error' => 'The current password you entered is incorrect.'],
+                    500
+                );
+            }
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
 
@@ -88,7 +102,9 @@ class PasswordController extends Controller
         $user->save();
 
         event(new PasswordReset($user));
-
+        if ($isJson) {
+            return response()->json('Your password has been reset successfully.', 201);
+        }
         return redirect()
             ->back()
             ->with(

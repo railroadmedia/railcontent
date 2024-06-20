@@ -49,8 +49,8 @@ const duplicatedIDs = ref([]);
 const duplicateProps = ref({ show: false, id: null });
 const duplicatedItemIdNameMap = ref({});
 
-const handleOnToggleAssignments = (val) => {
-    importAll.value = val;
+const handleOnToggleAssignments = () => {
+    importAll.value = !importAll.value;
 };
 
 //Handle Instrument Toggles

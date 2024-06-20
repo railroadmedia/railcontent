@@ -116,7 +116,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             foreach ($content['resources'] ?? [] as $resource) {
                 $resources[$resource['resource_url']] = $resource;
             }
-            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1') {
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
+                $contentsOfType[$contentIndex]['item_type'] = $content['type'];
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
 

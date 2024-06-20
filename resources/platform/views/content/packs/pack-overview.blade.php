@@ -11,7 +11,8 @@
             'props' => [
                 'text' => $pack->fetch('primary_cta_text'),
                 'url' => $nextLessonUrl,
-                'faIconClass' => 'fa-play'
+                'faIconClass' => 'fa-play',
+                'isPrimary' => true,
             ]
         ],
         [
@@ -38,53 +39,113 @@
             $infoData['xp'] . ' XP'
         ];
     }
+
+    $breadcrumbs = [];
+    if($parentContent->fetch('type') === 'learning-path'){
+        $breadcrumbs = [
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'learning-path-level'){
+        $breadcrumbs = [
+            [
+                "title" => ucwords(brand()) . ' Method',
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'learning-path-course'){
+        $breadcrumbs = [
+            [
+                "title" => ucwords(brand()) . ' Method',
+                "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
+            ],
+            [
+                "title" => $secondContent->fetch('fields.title'),
+                "url" => $secondContent->fetch('url'),
+            ],
+            [
+                "title" => $thirdContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'unit'){
+        $breadcrumbs = [
+            [
+                "title" => $learningPath->fetch('fields.title'),
+                "url" => $learningPath->fetch('url'),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'challenge'){
+        $breadcrumbs = [
+            [
+                "title" => 'Workouts',
+                "url" => url()->route('platform.workouts'),
+            ],
+            [
+                "title" => 'Challenges',
+                "url" => url()->route('platform.workouts.challenges'),
+            ],
+            [
+                 "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    } elseif($parentContent->fetch('type') === 'pack-bundle') {
+        if($pack->fetch('bundle_count') > 1){
+            $breadcrumbs = [
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title'),
+                    "url" => $pack->fetch('url'),
+                ],
+                [
+                    "title" => $parentContent->fetch('fields.title')
+                ]
+            ];
+        } elseif($pack->fetch('bundle_count') <= 1){
+            $breadcrumbs = [
+                [
+                    "title" => "Packs",
+                    "url" => url()->route('platform.packs'),
+                ],
+                [
+                    "title" => $pack->fetch('fields.title')
+                ]
+            ];
+        }
+    } else {
+        $breadcrumbs = [
+            [
+                "title" => parse_lesson_type_readable($parentContent->fetch('type'), true),
+                "url" => url()->route('platform.content-type-catalog', ["contentTypeName" => parse_lesson_type_readable($parentContent->fetch('type'), true)]),
+            ],
+            [
+                "title" => $parentContent->fetch('fields.title'),
+            ]
+        ];
+    }
+
 @endphp
 
 @section('content')
-    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
-        @include('content.breadcrumbs._overview-breadcrumbs')
-        <page-header
-            page-type="{{ $parentContent->fetch('type') }}"
-            title="Pack"
-            hero-img="{{ $pack->fetch('data.header_image_url') }}"
-            dark-mode-logo="{{ $pack->fetch('data.dark_mode_logo_url') }}"
-            light-mode-logo="{{ $pack->fetch('data.light_mode_logo_url') }}"
-            progress="{{ $parentContent->fetch('progress_percent', 0) }}"
-            :info-data="{{ json_encode($infoDataStrArr) }}"
-            :ctas="{{ $ctasJson }}"
-        >
-        </page-header>
-    </div>
-    <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-my-4">
-        <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-row">
-                <content-catalogue
-                    brand="{{ $brand }}"
-                    catalogue-type="list"
-                    theme-color="{{ $brand }}"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $childContent }}"
-                    :show-numbers="true"
-                    user-id="{{ auth()->id() }}"
-                    :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                >
-                @for($i = 0; $i < 10; $i++)
-                    @include('partials.bladesora.members.skeletons.list-item', [
-                        "overview" => false,
-                        "showNumbers" => true,
-                        "thumbnailType" => false
-                    ])
-                @endfor
-                </content-catalogue>
-            </div>
-
-            @if($xpBonus > 0)
-                @include('partials.bladesora.members.partials._completion-bonus', [
-                    "xpBonus" => $xpBonus,
-                    "isComplete" => $parentContent->fetch('progress_percent', 0) === 100,
-                    "themeColor" => '{{ $brand }}'
-                ])
-            @endif
-        </div>
-    </div>
+    <pack-overview
+        :breadcrumbs="{{ json_encode($breadcrumbs) }}"
+        header-page-type="{{ json_encode($parentContent->fetch('type')) }}"
+        header-progress="{{ $parentContent->fetch('progress_percent', 0) }}"
+        :header-info-data="{{ json_encode($infoDataStrArr) }}"
+        :header-ctas="{{ $ctasJson }}"
+        :pack="{{ json_encode($pack) }}"
+        user-id="{{ auth()->id() }}"
+        :is-admin="{{ json_encode(user()->isAdmin()) }}"
+        :child-content="{{ $childContent }}"
+        :xp-bonus="{{ $xpBonus }}"
+    ></pack-overview>
 @endsection

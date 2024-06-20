@@ -25,7 +25,6 @@ use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Entities\Structures\Purchaser;
 use App\Modules\Ecommerce\Events\AugustContestReferralClaimed;
 use Railroad\Mailora\Services\MailService;
 use App\Modules\Referral\Exceptions\NotFoundException;
@@ -82,7 +81,7 @@ class UserController extends Controller
     private function applyReferral(string $referralCode, User $user, string $productSku): void
     {
         /**
-         * @var $referrer Referrer
+         * @var Referrer $referrer
          */
         $referrer = Referrer::query()->where('referral_code', $referralCode)->firstOrFail();
 
@@ -92,7 +91,7 @@ class UserController extends Controller
         if (empty($productToAssign)) {
             throw new Exception(
                 'Error assigning product to user trying to claim a referral. ' .
-                'Could not find product with configured SKU, ' . $productSku
+                    'Could not find product with configured SKU, ' . $productSku
             );
         }
 
@@ -110,8 +109,7 @@ class UserController extends Controller
 
         event(new AugustContestReferralClaimed($referrer, $productToAssign->id, $user->getId()));
         info(
-            "Applied referral code $referralCode for user " . $user->getId(
-            ) . " and triggered event AugustContestReferralClaimed."
+            "Applied referral code $referralCode for user " . $user->getId() . " and triggered event AugustContestReferralClaimed."
         );
     }
 
@@ -215,9 +213,9 @@ class UserController extends Controller
 
         return $request->has('redirect') ?
             redirect()
-                ->away($request->get('redirect')) :
+            ->away($request->get('redirect')) :
             redirect()
-                ->to(config('ecommerce.post_purchase_redirect_digital_items'));
+            ->to(config('ecommerce.post_purchase_redirect_digital_items'));
     }
 
     /**
@@ -252,11 +250,11 @@ class UserController extends Controller
 
             return $request->has('redirect') ?
                 redirect()
-                    ->away($request->get('redirect'))
-                    ->with($exception->errors()) :
+                ->away($request->get('redirect'))
+                ->with($exception->errors()) :
                 redirect()
-                    ->back()
-                    ->with($exception->errors());
+                ->back()
+                ->with($exception->errors());
         }
 
         $user = new User();
@@ -268,7 +266,7 @@ class UserController extends Controller
 
         $newUser =
             User::where('email', $user->email)
-                ->first();
+            ->first();
         ;
 
         event(new UserCreated($user));
@@ -278,11 +276,11 @@ class UserController extends Controller
 
             return $request->has('redirect') ?
                 redirect()
-                    ->away($request->get('redirect'))
-                    ->with($message) :
+                ->away($request->get('redirect'))
+                ->with($message) :
                 redirect()
-                    ->back()
-                    ->with($message);
+                ->back()
+                ->with($message);
         } else {
             return json_encode([
                 "data" => ["attributes" => json_encode($user)],
@@ -302,16 +300,16 @@ class UserController extends Controller
         if ($user) {
             $user['shopify_customer_url'] =
                 ($user->shopify_id) ?
-                    'https://admin.shopify.com/store/' . config(
-                        'usora.shopify_store'
-                    ) . '/customers/' . $user->shopify_id :
-                    '';
+                'https://admin.shopify.com/store/' . config(
+                    'usora.shopify_store'
+                ) . '/customers/' . $user->shopify_id :
+                '';
             $user['revenuecat_customer_url'] =
                 ($user->revenuecat_origin_app_user_id) ?
-                    'https://app.revenuecat.com/customers/' .
-                    config('usora.revenuecat_project_id') .
-                    '/' .
-                    $user->revenuecat_origin_app_user_id : '';
+                'https://app.revenuecat.com/customers/' .
+                config('usora.revenuecat_project_id') .
+                '/' .
+                $user->revenuecat_origin_app_user_id : '';
 
             return json_encode([
                 "data" => [
@@ -352,7 +350,7 @@ class UserController extends Controller
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
-                    ->getMessages();
+                ->getMessages();
             $messagesForFieldFailingField = reset($messagesByField);
 
             foreach ($messagesForFieldFailingField as $messagesForField) {
@@ -383,7 +381,7 @@ class UserController extends Controller
 
         //todo: create exception and add error message if user is not found
         if ($user) {
-            $oldUser = clone($user);
+            $oldUser = clone ($user);
 
             $user->fill($request->all());
             $user->save();
@@ -396,11 +394,11 @@ class UserController extends Controller
 
             return $request->has('redirect') ?
                 redirect()
-                    ->away($request->get('redirect'))
-                    ->with($message) :
+                ->away($request->get('redirect'))
+                ->with($message) :
                 redirect()
-                    ->back()
-                    ->with($message);
+                ->back()
+                ->with($message);
         } else {
             return json_encode([
                 "data" => ["attributes" => json_encode($user)],
@@ -431,11 +429,11 @@ class UserController extends Controller
 
             return $request->has('redirect') ?
                 redirect()
-                    ->away($request->get('redirect'))
-                    ->with($message) :
+                ->away($request->get('redirect'))
+                ->with($message) :
                 redirect()
-                    ->back()
-                    ->with($message);
+                ->back()
+                ->with($message);
         } else {
             return json_encode([
                 "data" => ["attributes" => json_encode($user)],
@@ -456,23 +454,23 @@ class UserController extends Controller
 
         $users =
             User::query()
-                ->where('display_name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
-                ->skip($skip)
-                ->take($limit)
-                ->orderBy($request->get('sort', 'createdAt'))
-                ->get();
+            ->where('display_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+            ->skip($skip)
+            ->take($limit)
+            ->orderBy($request->get('sort', 'createdAt'))
+            ->get();
         $totalResults =
             User::query()
-                ->where('display_name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
-                ->count();
+            ->where('display_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('phone_number', 'LIKE', "%{$searchTerm}%")
+            ->count();
         $results = [];
         foreach ($users as $user) {
             $results[] = [
@@ -538,8 +536,8 @@ class UserController extends Controller
 
         $user =
             User::where('display_name', $request->display_name)
-                ->where('id', '!=', user()->id)
-                ->first();
+            ->where('id', '!=', user()->id)
+            ->first();
 
         if ($user) {
             return response()->json(['unique' => false]);
@@ -563,7 +561,7 @@ class UserController extends Controller
         }
         $user =
             User::where('email', $request->email)
-                ->first();
+            ->first();
 
         if ($user) {
             return response()->json(['unique' => false, 'is_musora_account_set_up' => $user->isAccountSetup()]);
@@ -672,8 +670,8 @@ class UserController extends Controller
         $currentUser = user();
         $unblock =
             BlockedUser::where('user_id', '=', $id)
-                ->where('blocker_id', '=', $currentUser['id'])
-                ->delete();
+            ->where('blocker_id', '=', $currentUser['id'])
+            ->delete();
 
         return response()->json([
             "success" => $unblock > 0,
@@ -692,18 +690,18 @@ class UserController extends Controller
         $skip = ($request->get('page', 1) - 1) * $limit;
         $blocked =
             BlockedUser::where('blocker_id', '=', $currentUser['id'])
-                ->skip($skip)
-                ->take($limit)
-                ->orderBy('created_on', 'desc')
-                ->get();
+            ->skip($skip)
+            ->take($limit)
+            ->orderBy('created_on', 'desc')
+            ->get();
         $blockedUsersIds =
             $blocked->pluck('user_id')
-                ->toArray();
+            ->toArray();
 
         $users =
             User::query()
-                ->whereIn('id', $blockedUsersIds)
-                ->get();
+            ->whereIn('id', $blockedUsersIds)
+            ->get();
 
         return response()->json([
             "data" => $users,
@@ -725,8 +723,8 @@ class UserController extends Controller
         $currentUser = user();
         $reported =
             ReportedUser::where('user_id', '=', $id)
-                ->where('reporter_id', '=', $currentUser['id'])
-                ->first();
+            ->where('reporter_id', '=', $currentUser['id'])
+            ->first();
 
         return response()->json([
             "reported" => $reported ? true : false,
@@ -757,15 +755,15 @@ class UserController extends Controller
 
             return $request->has('redirect') ?
                 redirect()
-                    ->away($request->get('redirect'))
-                    ->with($message) :
+                ->away($request->get('redirect'))
+                ->with($message) :
                 redirect()
-                    ->back()
-                    ->with($message);
+                ->back()
+                ->with($message);
         } else {
             return json_encode([
-                                   "data" => ["attributes" => json_encode($user)],
-                               ]);
+                "data" => ["attributes" => json_encode($user)],
+            ]);
         }
     }
 }

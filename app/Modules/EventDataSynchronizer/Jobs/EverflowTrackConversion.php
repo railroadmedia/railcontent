@@ -33,17 +33,16 @@ class EverflowTrackConversion implements ShouldQueue
         $id = $this->orderID;
         $order = $shopifySyncService->getOrder($id);
         $time = Carbon::parse($order->created_at)->timestamp;
-
-        if (!str_contains(strtolower($order->tags), strtolower(ShopifyTagEnum::TrialConversion->value))) {
-            return;
-        }
+        $isTrialConversion = str_contains(strtolower($order->tags), strtolower(ShopifyTagEnum::TrialConversion->value));
         $email = $order->email;
+        $currency = $order->currency ?? 'USD';
+        $amount = $order->current_total_price ?? '0.00';
 
         try {
             Tracker::queue(
                 $this->brand,
-                function () use ($time, $email, $id) {
-                    Tracker::trackEverFlowConversionAPI($id, $email, $time);
+                function () use ($time, $email, $id, $isTrialConversion, $currency, $amount) {
+                    Tracker::trackEverFlowConversionAPI($id, $email, $time, $amount, $currency, $isTrialConversion);
                 }
             );
         } catch (Throwable $exception) {

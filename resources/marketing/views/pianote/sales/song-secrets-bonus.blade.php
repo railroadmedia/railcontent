@@ -4,6 +4,7 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
+    <meta name="robots" content="noindex">
     <title>Save 71% with your exclusive Webinar Bundle. | Pianote</title>
     <meta property="og:title" content="Save 71% with your exclusive Webinar Bundle.">
     <meta property="og:url" content="https://www.pianote.com/song-secrets-bonus">
@@ -988,8 +989,8 @@ That’s the Play Better Guarantee™.',
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/pianote/membership/homepage/2023/devices.png',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
 
     @include('pianote._partials.faq')

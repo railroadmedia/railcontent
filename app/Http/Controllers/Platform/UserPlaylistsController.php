@@ -209,6 +209,7 @@ class UserPlaylistsController extends BaseController
 
                 $playlistItems[$index]['id'] = $item['id'];
                 $playlistItems[$index]['type'] = $item['type'];
+                $playlistItems[$index]['item_type'] = $item['item_type'];
                 $playlistItems[$index]['title'] = $item['title'];
                 $playlistItems[$index]['artist'] = $item['artist'];
                 $playlistItems[$index]['status'] = $item['status'];
@@ -283,7 +284,8 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
-            ContentService::STATUS_ARCHIVED
+            ContentService::STATUS_ARCHIVED,
+            ContentService::STATUS_DRAFT
         ];
         ContentRepository::$pullFutureContent = true;
         PlaylistDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -334,6 +336,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['url'] = $item['url'] ?? '';
             $otherItems[$index]['id'] = $item['id'];
             $otherItems[$index]['type'] = $item['type'];
+            $otherItems[$index]['item_type'] = $item['item_type'];
             $otherItems[$index]['title'] = $item->fetch('title');
             $otherItems[$index]['artist'] = $item->fetch('artist');
             $otherItems[$index]['status'] = $item['status'];

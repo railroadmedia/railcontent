@@ -50,7 +50,7 @@
         <div class="container mx-auto clearfix">
             <p>Download the app & watch the first<br class="hidden sm:inline">
                 episode with your kids for FREE today.</p>
-            <a class="download-badge" href="https://itunes.apple.com/us/app/drumeo-kids/id1469926955?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store img"></a>
+            <a class="download-badge" href="https://apps.apple.com/us/app/drumeo-kids/id1469926955?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store img"></a>
             <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.drumeo.drumeokids" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play img"></a>
             <p class="small">If you’re a <a href="/">Drumeo member</a>, you already have full<br class="hidden sm:inline"> access to every episode in your membership.</p>
         </div>
@@ -118,7 +118,7 @@
     <section class="final-pitch text-center kids-app">
         <div class="container mx-auto clearfix max-w-5xl">
             <h1>Download The App  <br class="inline sm:hidden">For Free Today</h1>
-            <a class="download-badge" href="https://itunes.apple.com/us/app/drumeo-kids/id1469926955?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store img"></a>
+            <a class="download-badge" href="https://apps.apple.com/us/app/drumeo-kids/id1469926955?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store img"></a>
             <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.drumeo.drumeokids" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play img"></a>
             <p class="small"><em><a href="/"><strong>Drumeo Members:</strong></a> You already have full access to every episode inside Drumeo. If you’d <br class="hidden sm:inline">
                 prefer the Drumeo Kids app experience, you’ll need to download this app and add episodes separately.</em></p>

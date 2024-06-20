@@ -8,7 +8,12 @@
     </template>
     <template v-else-if="heroImg">
       <div class="tw-flex-none tw-w-[80px] sm:tw-w-[150px] sm:tw-max-w-[150px] tw-flex tw-flex-col tw-mr-5">
-        <div :class="heroImgClasses ?? 'square'">
+        <UserAvatar 
+          v-if="pageType === 'settings'"
+          :access-level="userAccessLevel" 
+          :avatar-image="heroImg"
+        />
+        <div v-else :class="heroImgClasses ?? 'square'">
           <img class="rounded inset-border" :src="heroImg">
         </div>
       </div>
@@ -16,19 +21,20 @@
 
     <div class="tw-flex tw-flex-col tw-self-stretch tw-mr-1 tw-w-full">
       <div class="tw-h-full tw-flex tw-flex-col tw-items-start" :class="[!hasCtas ? 'tw-justify-center' : !additionalImgSrc ? 'tw-justify-end' : ''
-    ]">
+      ]">
         <div class="tw-flex">
           <template v-if="additionalImgSrc">
             <img :src="additionalImgSrc" class="tw-max-w-[200px] tw-h-[60px] sm:tw-max-w-[460px] md:tw-h-[86px]">
           </template>
           <template v-else>
-            <span v-if="title" class="tw-text-2xl sm:tw-text-[32px] sm:tw-leading-tight tw-font-bold dark:tw-text-white tw-line-clamp-3 tw-overflow-hidden"
+            <span v-if="title"
+              class="tw-text-2xl sm:tw-text-[32px] sm:tw-leading-tight tw-font-bold dark:tw-text-white tw-line-clamp-3 tw-overflow-hidden"
               :class="{ 'tw-capitalize': !heroImgClasses }">
               {{ title }}
             </span>
           </template>
           <div class="tw-ml-[5px]">
-            <!-- Modal for Desktop -->
+            <!-- Modal for Mobile -->
             <div class="sm:tw-hidden tw-self-start" v-if="$slots['header-description']">
               <musora-icon @click="openModal" icon-name="info"
                 class="tw-self-start tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
@@ -44,7 +50,7 @@
               </ModalRenderer>
             </div>
 
-            <!-- Tooltip for Mobile -->
+            <!-- Tooltip for Desktop -->
             <div class="tw-hidden sm:tw-block tw-self-start" v-if="$slots['header-description']">
               <Tooltip position="right">
                 <template #trigger>
@@ -77,8 +83,16 @@ import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import Tooltip from "../Tooltip/Tooltip";
 import PageHeaderRowInfo from "./PageHeaderRowInfo";
+import UserAvatar from '../UserAvatar/UserAvatar.vue';
+import { storeToRefs } from "pinia/dist/pinia";
+import { useUserStore } from "../../../stores/user";
+
+//Pinia
+const userStore = useUserStore();
+const { userAccessLevel } = storeToRefs(userStore);   
 
 const props = defineProps({
+  pageType: String,
   iconName: String,
   heroImg: String,
   heroImgClasses: String,
