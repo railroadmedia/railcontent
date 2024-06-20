@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a15b8b1873c827c871c3d163260ae5b6",
+    "content-hash": "6c574b68c22e1e2f6be54f67e191a5ae",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10456,7 +10456,7 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "dev-BE-209",
+            "version": "v3.0.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
@@ -10505,7 +10505,7 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/BE-209"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.24"
             },
             "time": "2024-06-20T10:45:05+00:00"
         },
@@ -20370,19 +20370,12 @@
             "version": "dev-FEW-213-signature-json-api",
             "alias": "v2.0.26",
             "alias_normalized": "2.0.26.0"
-        },
-        {
-            "package": "railroad/railnotifications",
-            "version": "dev-BE-209",
-            "alias": "v3.0.22",
-            "alias_normalized": "3.0.22.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/doctrine-array-hydrator": 20,
-        "railroad/railforums": 20,
-        "railroad/railnotifications": 20
+        "railroad/railforums": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
