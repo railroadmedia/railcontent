@@ -231,10 +231,6 @@ class GenerateWeeklyMembershipStats extends Command
                             })
                             ->groupBy(['railcontent_user_content_progress.user_id', 'brand']);
 
-                        $this->info(vsprintf(str_replace('?', '%s', $printQuery->toSql()), $printQuery->getBindings()));
-
-                        dd();
-
                         // active rows
                         $activeUserIds = collect(
                             DB::connection()->select(
