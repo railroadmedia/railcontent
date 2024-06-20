@@ -152,6 +152,10 @@
             color:#FFAE00;
         }
 
+        .splide__pagination {
+            padding:0;
+        }
+
         .splide__pagination__page.is-active {
             background:#01050F;
             transform:none !important;
