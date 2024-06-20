@@ -101,7 +101,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
             }
 
             // events always sync to the brand specific workspace and the primary all synced workspace
-            if($this->accountName !== $accountNameToSyncAllBrand) {
+            if ($this->accountName !== $accountNameToSyncAllBrand) {
                 $customerIoService->createEventForUserId(
                     $user->id,
                     $accountNameToSyncAllBrand,
@@ -146,7 +146,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
     {
         error_log(
             'Error on CustomerIoCreateEventByUserId job trying to sync user to customer.io. User ID: ' .
-            $this->userId
+                $this->userId
         );
 
         error_log($exception);

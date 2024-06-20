@@ -179,7 +179,12 @@
     @endif
 @endsection
 
-<!-- Main -->
+@section('body-data')
+    x-data ='{
+    lazyLoad: false,
+    }'
+@endsection
+
 @section('layout-body')
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-3xl">
@@ -201,8 +206,8 @@
             @endif
             <h5 class="leading-tight mt-2 mb-6 sm:mb-8 mx-auto max-w-md">Level up your skills with the lessons, songs, teachers, and practice tools trusted by <strong>thousands of active students.</strong></h5>
             <picture>
-                <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb3.webp">
-                <img class="h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-thumb3.webp"
+                <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop2.webp">
+                <img class="h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/musora/membership/redeem/redeem-laptop2.webp"
                     alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" >
             </picture>
         </div>

@@ -11,11 +11,11 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
-import Profile from './vue/Pages/Settings/Profile.vue';
-import LoginCredentials from './vue/Pages/Settings/LoginCredentials.vue';
-import Payments from './vue/Pages/Settings/Payments.vue';
-import NotificationSettings from './vue/Pages/Settings/NotificationSettings.vue';
-import AccountDetails from './vue/Pages/Settings/AccountDetails.vue';
+import Profile from './vue/components/_Pages/Settings/Profile.vue';
+import LoginCredentials from './vue/components/_Pages/Settings/LoginCredentials.vue';
+import Payments from './vue/components/_Pages/Settings/Payments.vue';
+import NotificationSettings from './vue/components/_Pages/Settings/NotificationSettings.vue';
+import Details from './vue/components/_Pages/Settings/AccountDetails.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
@@ -38,6 +38,7 @@ import CoachShow from './vue/Pages/CoachShow';
 import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
+import Overview from './vue/Pages/Overview';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
 import Search from './vue/Pages/Search';
 import PackOverview from './vue/Pages/PackOverview';
@@ -223,6 +224,7 @@ app.component('AppContainer', AppContainer)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
+    .component('Overview', Overview)
     .component('GuitareoLessons', GuitareoLessons)
     .component('Search', Search)
     .component('PackOverview', PackOverview)

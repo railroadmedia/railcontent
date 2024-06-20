@@ -121,10 +121,10 @@
 <script setup>
     import { ref, onBeforeMount } from "vue";
     import { storeToRefs } from "pinia/dist/pinia";
-    import { useUserStore } from "../../../stores/user";
-    import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
-    import PageHeader from '../../components/PageHeader/PageHeader';
-    import PillNav from "../../components/PillNav/PillNav.vue";
+    import { useUserStore } from "../../../../stores/user";
+    import Breadcrumb from '../../Breadcrumb/Breadcrumb';
+    import PageHeader from '../../PageHeader/PageHeader';
+    import PillNav from "../../PillNav/PillNav.vue";
 
     const props = defineProps({        
 

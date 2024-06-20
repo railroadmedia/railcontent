@@ -287,7 +287,7 @@
         <div class="container mx-auto relative max-w-5xl">
             <h2><strong>Works with ALL 12” practice pads.</strong></h2>
             <h6 class="leading-tight mt-2 mb-5 sm:mb-10">
-                The Drumeo PadStand can be used with a QuietPad, P4, or any other 12” or<br class="hidden sm:inline">
+                The Drumeo PadStand can be used with a QuietPad, or any other 12” or<br class="hidden sm:inline">
                 smaller practice pad. Simply tighten the basket for the perfect fit.</h6>
             @php
                 $slides = [
