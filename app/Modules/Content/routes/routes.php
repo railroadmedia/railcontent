@@ -10,4 +10,9 @@ Route::prefix('content')
             'is_liked_by_user/{content}/{user?}',
             [ContentMetadataController::class, 'isLikedByUser']
         )->name('content.is_liked_by_user');
+
+        Route::get(
+            'user_progress/{content}/{user?}',
+            [ContentMetadataController::class, 'userProgress']
+        )->name('content.user_progress');
     });
