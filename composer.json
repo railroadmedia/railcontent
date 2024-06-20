@@ -14,7 +14,6 @@
         "php": "^8.1",
         "ext-curl": "*",
         "ext-openssl": "*",
-        "code-lts/laravel-fcm": "1.7.*",
         "cweagans/composer-patches": "^1.7",
         "fakerphp/faker": "^1.9.1",
         "fruitcake/laravel-cors": "^2.0.5",
@@ -42,7 +41,7 @@
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "2.1.*",
         "railroad/railforums": "dev-FEW-213-signature-json-api as v2.0.26",
-        "railroad/railnotifications": "3.0.*",
+        "railroad/railnotifications": "dev-BE-209 as v3.0.22",
         "railroad/railtracker": "4.0.*",
         "railroad/referral": "3.0.*",
         "railroad/usora": "3.0.*",
@@ -66,7 +65,9 @@
         "symfony/string": "6.4.*",
         "symfony/var-exporter": "6.4.*",
         "symfony/filesystem": "6.4.*",
-        "symfony/stopwatch": "6.4.*"
+        "symfony/stopwatch": "6.4.*",
+        "google/apiclient": "^2.12",
+        "google/auth": "1.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
