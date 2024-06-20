@@ -10,6 +10,7 @@ use App\Console\Commands\CheckCommentsUrl;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
+use App\Console\Commands\GenerateWeeklyMembershipStats;
 use App\Console\Commands\MigrateOldGuitareoDeletedSongs;
 use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\RemoveRailTrackerData;
@@ -84,7 +85,8 @@ class Kernel extends ConsoleKernel
         SyncShopifyProductInventoryToProductsTable::class,
         SetUserNeedsLogout::class,
         CheckCommentsUrl::class,
-        SendAccountSetupEmail::class
+        SendAccountSetupEmail::class,
+        GenerateWeeklyMembershipStats::class,
     ];
 
     /**

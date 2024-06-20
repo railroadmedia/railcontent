@@ -82,5 +82,22 @@
         }
     };
 </script>
+<style scoped>
+    /* DEFAULT BUTTON STYLES */
+    .tw-btn-primary {
+        background-color: black; 
+        color: white;
+    }
+    body.tw-dark .tw-btn-primary {
+        background-color: white;
+        color: #00101D;
+    }
+    .tw-btn-secondary {
+        color: black; 
+    }
+    body.tw-dark .tw-btn-secondary {
+        color: white;
+    }
+</style>
   
   
