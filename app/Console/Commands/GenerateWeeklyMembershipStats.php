@@ -21,7 +21,7 @@ class GenerateWeeklyMembershipStats extends Command
      * @var string
      */
     // DO NOT CALCULATE THE CURRENT WEEK, that can cause data anomalies.
-    protected $signature = 'generate:weekly_statistics {startDate?} {endDate?}';
+    protected $signature = 'generate:weekly_statistics {startDate?} {endDate?} {chunkSize?}';
     // r mwp artisan generate:weekly_statistics "2024-05-01" "2024-05-01"
 
     /**
@@ -120,7 +120,7 @@ class GenerateWeeklyMembershipStats extends Command
                 ->orderBy('usora_users.id', 'desc')
                 ->groupBy('usora_users.id')
                 ->chunk(
-                    10000,
+                    $this->argument('chunkSize') ?? 1000,
                     function (Collection $userRows) use (
                         $allMembershipPermissionIds,
                         $brands,
@@ -194,6 +194,46 @@ class GenerateWeeklyMembershipStats extends Command
                             ->groupBy(['railcontent_user_content_progress.user_id', 'brand'])
                             ->get()
                             ->groupBy('user_id');
+
+                        $printQuery = DB::connection('musora_laravel_mysql')
+                            ->table('railcontent_user_content_progress')
+                            ->join(
+                                'railcontent_content',
+                                'railcontent_content.id',
+                                '=',
+                                'railcontent_user_content_progress.content_id'
+                            )
+                            ->select(
+                                [
+                                    'railcontent_user_content_progress.user_id',
+                                    'brand',
+                                    DB::raw('COUNT(railcontent_user_content_progress.id) as count')
+                                ]
+                            )
+                            ->whereIn(
+                                'railcontent_user_content_progress.user_id',
+                                $allUserIdsInChunk
+                            )
+                            ->whereIn('railcontent_content.brand', $brands)
+                            ->where(function (Builder $builder) use ($dateIncrement, $dateIncrementEndOfWeek) {
+                                $builder->where(
+                                    function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                                        $builder->whereRaw("started_on >= '$dateIncrement'")
+                                            ->whereRaw("started_on <= '$dateIncrementEndOfWeek'");
+                                    }
+                                )->orWhere(function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                                    $builder->whereRaw("completed_on >= '$dateIncrement'")
+                                        ->whereRaw("completed_on <= '$dateIncrementEndOfWeek'");
+                                })->orWhere(function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                                    $builder->whereRaw("updated_on >= '$dateIncrement'")
+                                        ->whereRaw("updated_on <= '$dateIncrementEndOfWeek'");
+                                });
+                            })
+                            ->groupBy(['railcontent_user_content_progress.user_id', 'brand']);
+
+                        $this->info(vsprintf(str_replace('?', '%s', $printQuery->toSql()), $printQuery->getBindings()));
+
+                        dd();
 
                         // active rows
                         $activeUserIds = collect(
