@@ -6,6 +6,7 @@ use App\Models\WeeklyUserStatistic;
 use App\Modules\Ecommerce\Models\UserAccessPermission;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
@@ -19,6 +20,7 @@ class GenerateWeeklyMembershipStats extends Command
      *
      * @var string
      */
+    // DO NOT CALCULATE THE CURRENT WEEK, that can cause data anomalies.
     protected $signature = 'generate:weekly_statistics {startDate?} {endDate?}';
     // r mwp artisan generate:weekly_statistics "2024-05-01" "2024-05-01"
 
@@ -27,7 +29,7 @@ class GenerateWeeklyMembershipStats extends Command
      *
      * @var string
      */
-    protected $description = 'Generates weekly stats rows for all days between passed in dates including the start and end day.';
+    protected $description = 'Generates weekly stats rows for all days between passed in dates including the start and end period weeks.';
 
     /**
      * Execute the console command.
@@ -36,16 +38,18 @@ class GenerateWeeklyMembershipStats extends Command
      */
     public function handle()
     {
-        // Reporting is always Monday 00:00:00 -> Sunday 23:59:59
+        $this->info(
+            "*** DO NOT calculate and save the current week, that can throw off the data. Always calculate starting at least 1 week in to the past. ***"
+        );
 
+        // Reporting is always Monday 00:00:00 -> Sunday 23:59:59
         $startDate = $this->argument('startDate');
         $endDate = $this->argument('endDate');
 
         // Default to generating the last 2 weeks of data
-        $startDate = !empty($startDate) ? Carbon::parse($startDate)->startOfWeek(1) : Carbon::now()->startOfWeek(
-            1
-        )->subWeek();
-        $endDate = !empty($endDate) ? Carbon::parse($endDate)->endOfWeek(1) : Carbon::now()->endOfWeek(1);
+        $startDate = !empty($startDate) ?
+            Carbon::parse($startDate)->startOfWeek(1) : Carbon::now()->startOfWeek(1)->subWeek();
+        $endDate = !empty($endDate) ? Carbon::parse($endDate)->endOfWeek(1) : Carbon::now()->endOfWeek(1)->subWeek();
 
         $dateIncrement = $startDate->clone();
 
@@ -63,27 +67,11 @@ class GenerateWeeklyMembershipStats extends Command
 
         while ($dateIncrement <= $endDate) {
             $dateIncrementEndOfWeek = $dateIncrement->copy()->endOfWeek();
+
             $this->info(
                 'Processing weekly stats for date: ' . $dateIncrement->toDateTimeString(
                 ) . ' - ' . $dateIncrementEndOfWeek->toDateTimeString()
             );
-
-//            $table->date('week')->index();
-//            $table->integer('user_id')->index();
-//            $table->enum('last_used_brand', ['drumeo','pianote','guitareo','singeo','musora'])->index();
-//            $table->enum('most_content_starts_brand', ['drumeo','pianote','guitareo','singeo','musora'])->index();
-//            $table->integer('count_of_content_starts_drumeo')->index();
-//            $table->integer('count_of_content_starts_pianote')->index();
-//            $table->integer('count_of_content_starts_guitareo')->index();
-//            $table->integer('count_of_content_starts_singeo')->index();
-//            $table->integer('count_of_content_starts_basseo')->index();
-//            $table->integer('count_of_content_starts_musora')->index();
-//            $table->enum('access_type', ['plus', 'basic'])->index();
-//            $table->enum('access_frequency', ['monthly', 'yearly', 'lifetime'])->index();
-//            $table->boolean('in_trial_period')->index();
-//            $table->boolean('active')->index();
-//            $table->boolean('expired')->index();
-//            $table->dateTime('generated_at')->index();
 
             $progress = 0;
 
@@ -91,7 +79,8 @@ class GenerateWeeklyMembershipStats extends Command
             WeeklyUserStatistic::query()->where('week', $dateIncrement)->delete();
 
             // Get all users with permissions and get all their permissions
-            UserAccessPermission::query()
+            DB::connection('musora_laravel_mysql')
+                ->table('usora_users')
                 ->select(
                     [
                         'usora_users.id as user_id',
@@ -100,10 +89,26 @@ class GenerateWeeklyMembershipStats extends Command
                         'membership_expiration_date',
                     ]
                 )
-                ->join('usora_users', 'user_access_permissions.user_id', '=', 'usora_users.id')
-                ->whereIn('user_access_permissions.permission_id', $allMembershipPermissionIds)
-                ->whereRaw("'$dateIncrement' >= start_time")
-                ->whereRaw("'$dateIncrement' <= end_time")
+                ->leftJoin('user_access_permissions', function (JoinClause $joinClause) use ($allMembershipPermissionIds) {
+                    $joinClause->on('usora_users.id', '=', 'user_access_permissions.user_id')
+                        ->whereIn('user_access_permissions.permission_id', $allMembershipPermissionIds);
+                })
+                ->where(
+                    function (Builder $query) use (
+                        $dateIncrementEndOfWeek,
+                        $dateIncrement,
+                        $startDate,
+                        $endDate
+                    ) {
+                        $query->where(function (Builder $query) use ($dateIncrement, $startDate, $endDate) {
+                            $query->whereRaw("'$dateIncrement' >= start_time")
+                                ->whereRaw("'$dateIncrement' <= end_time");
+                        })->orWhere(function (Builder $query) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                            $query->where('membership_expiration_date', '>=', $dateIncrement)
+                                ->where('membership_expiration_date', '<=', $dateIncrementEndOfWeek);
+                        });
+                    }
+                )
 //                ->where(function ($query) use ($dateIncrementEndOfWeek, $dateIncrement) {
 //                    $query->where('membership_expiration_date', '>', $dateIncrement);
 //                    $query->where('membership_expiration_date', '<', $dateIncrementEndOfWeek);
@@ -113,7 +118,7 @@ class GenerateWeeklyMembershipStats extends Command
 //                        ->orWhereNull('trial_expiration_date');
 //                })
                 ->orderBy('usora_users.id', 'desc')
-                ->groupBy('user_id')
+                ->groupBy('usora_users.id')
                 ->chunk(
                     10000,
                     function (Collection $userRows) use (
@@ -224,20 +229,22 @@ GROUP BY user_id
                         )
                             ->pluck('user_id');
 
-//                    last_used_brand
-//                    most_content_starts_brand
-//                    count_of_content_starts_drumeo
-//                    count_of_content_starts_pianote
-//                    count_of_content_starts_guitareo
-//                    count_of_content_starts_singeo
-//                    count_of_content_starts_basseo
-//                    count_of_content_starts_musora
-//                    access_type
-//                    access_frequency
-//                    in_trial_period
-//                    active
-//                    expired
-//                    generated_at
+                        // Rows to save:
+                        // last_used_brand
+                        // most_content_starts_brand
+                        // count_of_content_starts_drumeo
+                        // count_of_content_starts_pianote
+                        // count_of_content_starts_guitareo
+                        // count_of_content_starts_singeo
+                        // count_of_content_starts_basseo
+                        // count_of_content_starts_musora
+                        // access_type
+                        // access_frequency
+                        // in_trial_period
+                        // active
+                        // expired
+                        // generated_at
+
                         foreach ($userRows as $userRow) {
                             $userId = $userRow->user_id;
                             $weeklyMembershipStatsRow = [];
@@ -270,7 +277,7 @@ GROUP BY user_id
                             // access type (plus or basic)
                             $weeklyMembershipStatsRow['access_type'] = 'basic';
 
-                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] as $userPermissionRow) {
+                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? [] as $userPermissionRow) {
                                 // access type (plus or basic)
                                 if (str_contains(strtolower($userPermissionRow->name), 'plus')) {
                                     $weeklyMembershipStatsRow['access_type'] = 'plus';
@@ -280,15 +287,15 @@ GROUP BY user_id
                                 }
                             }
 
-                            // in trial and expired
+                            // in trial
                             $weeklyMembershipStatsRow['in_trial_period'] = false;
                             $weeklyMembershipStatsRow['expired'] = false;
 
-                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] as $userPermissionRow) {
+                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? [] as $userPermissionRow) {
                                 // in trial
-                                if (!empty($userRow['trial_expiration_date'])) {
+                                if (!empty($userRow->trial_expiration_date)) {
                                     $trialExpirationDate = Carbon::parse(
-                                        $userRow['trial_expiration_date']
+                                        $userRow->trial_expiration_date
                                     );
 
                                     // if they are in their trial period
@@ -296,17 +303,17 @@ GROUP BY user_id
                                         $weeklyMembershipStatsRow['in_trial_period'] = true;
                                     }
                                 }
+                            }
 
-                                // expired
-                                if (!empty($userRow['membership_expiration_date'])) {
-                                    $membershipExpirationDate = Carbon::parse(
-                                        $userRow['membership_expiration_date']
-                                    );
+                            // is expired
+                            if (!empty($userRow->membership_expiration_date)) {
+                                $membershipExpirationDate = Carbon::parse(
+                                    $userRow->membership_expiration_date
+                                );
 
-                                    if ($membershipExpirationDate >= $dateIncrement &&
-                                        $membershipExpirationDate <= $dateIncrementEndOfWeek) {
-                                        $weeklyMembershipStatsRow['expired'] = true;
-                                    }
+                                if ($membershipExpirationDate >= $dateIncrement &&
+                                    $membershipExpirationDate <= $dateIncrementEndOfWeek) {
+                                    $weeklyMembershipStatsRow['expired'] = true;
                                 }
                             }
 
@@ -317,7 +324,7 @@ GROUP BY user_id
                                 $weeklyMembershipStatsRow['access_frequency'] = 'trial';
                             }
 
-                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] as $userPermissionRow) {
+                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? [] as $userPermissionRow) {
                                 if (str_contains(strtolower($userPermissionRow->name), 'lifetime')) {
                                     $weeklyMembershipStatsRow['access_frequency'] = 'lifetime';
                                     continue;
@@ -362,165 +369,6 @@ GROUP BY user_id
                         $this->info($progress);
                     }
                 );
-
-            dd(1);
-
-            // Look through each user id
-
-            // access by last used brand
-            $totalPlusMembersPerBrand = [
-                'drumeo' => 0,
-                'pianote' => 0,
-                'guitareo' => 0,
-                'singeo' => 0
-            ];
-            $totalBasicMembersPerBrand = $totalPlusMembersPerBrand;
-            $totalMonthlyMembersPerBrand = $totalPlusMembersPerBrand;
-            $totalAnnualMembersPerBrand = $totalPlusMembersPerBrand;
-            $totalMembersInTrialPeriodPerBrand = $totalPlusMembersPerBrand;
-            $totalLifetimeMembersPerBrand = $totalPlusMembersPerBrand;
-            $totalMembersPerBrand = $totalPlusMembersPerBrand;
-
-            $allUserPermissionsOfDay = UserAccessPermission::query()
-                ->select(
-                    [
-                        'user_id',
-                        'last_used_brand',
-                        'time_days',
-                        'time_months',
-                        'trial_expiration_date',
-                        DB::raw('GROUP_CONCAT(DISTINCT brand) as brands'),
-                        DB::raw('GROUP_CONCAT(DISTINCT name) as permissions')
-                    ]
-                )
-                ->join(
-                    'railcontent_permissions',
-                    function (JoinClause $join) use ($allMembershipPermissionIds) {
-                        $join->on(
-                            'railcontent_permissions.id',
-                            '=',
-                            'user_access_permissions.permission_id'
-                        )
-                            ->whereIn('permission_id', $allMembershipPermissionIds);
-                    }
-                )
-                ->join('usora_users', 'user_access_permissions.user_id', '=', 'usora_users.id')
-                ->whereRaw("'$dateIncrement' >= start_time")
-                ->whereRaw("'$dateIncrement' <= end_time")
-//                ->where(function ($query) use ($dateIncrement) {
-//                    $query->where('trial_expiration_date', '<', $dateIncrement)
-//                        ->orWhereNull('trial_expiration_date');
-//                })
-                ->where('status', 'active')
-//                ->where('user_id', 596143)
-                ->groupBy('user_id', 'time_days', 'time_months', 'trial_expiration_date');
-
-            $userIds = DB::connection()->select(
-                "
-            SELECT * FROM ((SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_comments WHERE created_on >= '$dateIncrement' AND created_on <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_comment_likes WHERE created_on >= '$dateIncrement' AND created_on <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_content_likes WHERE created_on >= '$dateIncrement' AND created_on <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_playlist_likes WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(railcontent_user_playlists.user_id) as user_id, d') as e_date
-FROM musora_laravel.railcontent_user_playlist_content
-LEFT JOIN musora_laravel.railcontent_user_playlists ON railcontent_user_playlists.id = railcontent_user_playlist_content.user_playlist_id
-WHERE railcontent_user_playlist_content.created_at >= '$dateIncrement' AND railcontent_user_playlist_content.created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM drumeo_laravel.forum_posts WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM drumeo_laravel.forum_threads WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(liker_id) as user_id FROM drumeo_laravel.forum_post_likes WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM pianote_laravel.forum_posts WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM pianote_laravel.forum_threads WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(liker_id) as user_id FROM pianote_laravel.forum_post_likes WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM guitareo_laravel.forum_posts WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM guitareo_laravel.forum_threads WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(liker_id) as user_id FROM guitareo_laravel.forum_post_likes WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM singeo_laravel.forum_posts WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(author_id) as user_id FROM singeo_laravel.forum_threads WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(liker_id) as user_id FROM singeo_laravel.forum_post_likes WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_user_content_progress WHERE updated_on >= '$dateIncrement' AND updated_on <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_user_content_progress WHERE started_on >= '$dateIncrement' AND started_on <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-) as user_e_days
-GROUP BY user_id
-ORDER BY e_date ASC
-            "
-            );
-
-            $totalActiveUsers = count($userIds);
-            $this->info("totalActiveUsers: " . $totalActiveUsers);
-
-            $allUserPermissionsOfDay = $allUserPermissionsOfDay->get()->toArray();
-
-            foreach ($allUserPermissionsOfDay as $userPermission) {
-                if (in_array($userPermission['last_used_brand'], $brands)) {
-                    $allocatedBrand = $userPermission['last_used_brand'];
-                }
-
-                if (empty($allocatedBrand)) {
-                    $allocatedBrand = 'musora';
-                }
-
-                if (str_contains(strtolower($userPermission['permissions']), 'lifetime')) {
-                    $totalLifetimeMembersPerBrand[$allocatedBrand] += 1;
-                    continue;
-                }
-
-                if (str_contains(strtolower($userPermission['permissions']), 'plus')) {
-                    $totalPlusMembersPerBrand[$allocatedBrand] += 1;
-                } else {
-                    $totalBasicMembersPerBrand[$allocatedBrand] += 1;
-                }
-
-                if ($userPermission['time_months'] == 1) {
-                    $totalMonthlyMembersPerBrand[$allocatedBrand] += 1;
-                }
-                if ($userPermission['time_months'] == 12) {
-                    $totalAnnualMembersPerBrand[$allocatedBrand] += 1;
-                }
-
-                if (!empty($userPermission['trial_expiration_date'])) {
-                    $trialExpirationDate = Carbon::parse($userPermission['trial_expiration_date']);
-
-                    // if they are in their trial period
-                    if ($trialExpirationDate > $dateIncrement && $userPermission['time_days'] > 0) {
-                        $totalMembersInTrialPeriodPerBrand[$allocatedBrand] += 1;
-                    }
-                }
-            }
-
-            $totalMembers = 0;
-
-            foreach ($brands as $brand) {
-                $this->info('$totalPlusMembersPerBrand: ' . $brand . ' - ' . ($totalPlusMembersPerBrand[$brand] ?? 0));
-                $this->info(
-                    '$totalBasicMembersPerBrand: ' . $brand . ' - ' . ($totalBasicMembersPerBrand[$brand] ?? 0)
-                );
-                $this->info(
-                    '$totalLifetimeMembersPerBrand: ' . $brand . ' - ' . ($totalLifetimeMembersPerBrand[$brand] ?? 0)
-                );
-                $this->info(
-                    '$totalMonthlyMembersPerBrand: ' . $brand . ' - ' . ($totalMonthlyMembersPerBrand[$brand] ?? 0)
-                );
-                $this->info(
-                    '$totalAnnualMembersPerBrand: ' . $brand . ' - ' . ($totalAnnualMembersPerBrand[$brand] ?? 0)
-                );
-                $this->info(
-                    '$totalMembersInTrialPeriodPerBrand: ' . $brand . ' - ' . ($totalMembersInTrialPeriodPerBrand[$brand] ?? 0)
-                );
-
-                $totalMembersPerBrand[$brand] += $totalPlusMembersPerBrand[$brand] ?? 0;
-                $totalMembersPerBrand[$brand] += $totalBasicMembersPerBrand[$brand] ?? 0;
-                $totalMembersPerBrand[$brand] += $totalLifetimeMembersPerBrand[$brand] ?? 0;
-
-                $this->info('$totalMembersPerBrand: ' . $brand . ' - ' . ($totalMembersPerBrand[$brand] ?? 0));
-
-                $totalMembers += $totalPlusMembersPerBrand[$brand] ?? 0;
-                $totalMembers += $totalBasicMembersPerBrand[$brand] ?? 0;
-                $totalMembers += $totalLifetimeMembersPerBrand[$brand] ?? 0;
-            }
-
-            $this->info('$totalMembers: ' . $totalMembers);
-
-            // active
 
             $dateIncrement = $dateIncrement->addWeek();
         }
