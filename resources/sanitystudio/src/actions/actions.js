@@ -3,6 +3,7 @@ import {useDocumentOperation} from 'sanity'
 export function CreateImprovedAction(originalPublishAction, token) {
     const BetterAction = (props) => {
         const originalResult = originalPublishAction(props)
+        // eslint-disable-next-line
         const {patch, publish} = useDocumentOperation(props.id, props.type)
         const url = window.sanityConfig.appUrl + `/admin/last-content`;
 
