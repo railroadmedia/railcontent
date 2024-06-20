@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railforums\Controllers\UserForumThreadJsonController;
 use Railroad\Railforums\Repositories\CategoryRepository;
 use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\SearchIndexRepository;
@@ -241,8 +242,8 @@ class ForumPagesController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $amount = $request->get('amount', 20);
-        $page = $request->get('page', 1);
+        $amount = $request->get('amount', UserForumThreadJsonController::AMOUNT);
+        $page = $request->get('page', UserForumThreadJsonController::PAGE);
         $categoryIds = [$categoryId];
         $pinned = (bool)$request->get('pinned');
         $followed = $request->has('followed') ? (bool)$request->get('followed') : null;
@@ -301,66 +302,18 @@ class ForumPagesController extends Controller
                 Carbon::parse($latestPost['created_at'])
                     ->diffForHumans();
             $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
-
-            $mappedThreads[] = [
-                "title" => $thread->title,
-                "id" => $thread->id,
-                "categoryId" => $thread->category_id,
-                "createdOn" => Carbon::parse($thread->published_on)
-                    ->diffforHumans(),
-                "lastPostDate" => Carbon::parse($thread->last_post_published_on)
-                    ->diffforHumans(),
-                "isPinned" => $thread->pinned,
-                "isNew" => !$thread->is_read,
-                "isLocked" => $thread->locked,
-                "topic" => $thread->category_id,
-                "replyAmount" => $thread->post_count,
-                "authorUsername" => $thread->author_display_name,
-                "authorAvatar" => $thread->author_avatar_url,
-                "isRead" => $thread->is_read,
-                "access_level" => $thread->author_access_level,
-                "url" => url()->route(
-                    'forums.show-thread-posts',
-                    [$category['slug'], $category['id'], $thread->slug, $thread->id]
-                ),
-                "latestPost" => $latestPost,
-            ];
-
+            $mappedThreads[] = $this->mapThread($thread, $latestPost);
             $authors[$thread->last_post_user_id]['threads'][] = count($mappedThreads) - 1;
         }
 
-        foreach ($pinnedThreads as $pinnedThread) {
-            $latestPost = $pinnedThread->latest_post;
+        foreach ($pinnedThreads as $thread) {
+            $latestPost = $thread->latest_post;
             $latestPost['created_at_diff'] =
                 Carbon::parse($latestPost['created_at'])
                     ->diffForHumans();
             $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
-
-            $mappedPinnedThreads[] = [
-                "title" => $pinnedThread->title,
-                "id" => $pinnedThread->id,
-                "categoryId" => $pinnedThread->category_id,
-                "createdOn" => Carbon::parse($pinnedThread->published_on)
-                    ->diffforHumans(),
-                "lastPostDate" => Carbon::parse($pinnedThread->last_post_published_on)
-                    ->diffforHumans(),
-                "isPinned" => $pinnedThread->pinned,
-                "isNew" => !$pinnedThread->is_read,
-                "isLocked" => $pinnedThread->locked,
-                "topic" => $pinnedThread->category_id,
-                "replyAmount" => $pinnedThread->post_count,
-                "authorUsername" => $pinnedThread->author_display_name,
-                "authorAvatar" => $pinnedThread->author_avatar_url,
-                "access_level" => $pinnedThread->author_access_level,
-                "isRead" => $pinnedThread->is_read,
-                "url" => url()->route(
-                    'forums.show-thread-posts',
-                    [$category['slug'], $category['id'], $pinnedThread->slug, $pinnedThread->id]
-                ),
-                "latestPost" => $latestPost,
-            ];
-
-            $authors[$pinnedThread->last_post_user_id]['pinnedThreads'][] = count($mappedPinnedThreads) - 1;
+            $mappedPinnedThreads[] = $this->mapThread($thread, $latestPost);
+            $authors[$thread->last_post_user_id]['pinnedThreads'][] = count($mappedPinnedThreads) - 1;
         }
 
         $user = user();
@@ -396,14 +349,45 @@ class ForumPagesController extends Controller
         );
     }
 
+    private function mapThread($thread, $latestPost = null): array
+    {
+        $mapped = [
+            "title" => $thread->title,
+            "id" => $thread->id,
+            "categoryId" => $thread->category_id,
+            "createdOn" => Carbon::parse($thread->published_on)
+                ->diffforHumans(),
+            "lastPostDate" => Carbon::parse($thread->last_post_published_on)
+                ->diffforHumans(),
+            "isPinned" => $thread->pinned,
+            "isNew" => !$thread->is_read,
+            "isLocked" => $thread->locked,
+            "topic" => $thread->category_id,
+            "replyAmount" => $thread->post_count,
+            "authorUsername" => $thread->author_display_name,
+            "authorAvatar" => $thread->author_avatar_url,
+            "access_level" => $thread->author_access_level,
+            "isRead" => $thread->is_read,
+            "url" => url()->route(
+                'forums.show-thread-posts',
+                [$thread->category_slug, $thread->category_id, $thread->slug, $thread->id]
+            ),
+
+        ];
+        if ($latestPost) {
+            $mapped["latestPost"] = $latestPost;
+        }
+        return $mapped;
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function showAllLatestThreads(Request $request, $domain, $brand)
     {
-        $amount = $request->get('amount', 20);
-        $page = $request->get('page', 1);
+        $amount = $request->get('amount', UserForumThreadJsonController::AMOUNT);
+        $page = $request->get('page', UserForumThreadJsonController::PAGE);
         $sortBy = $request->get('sortby_val', '-last_post_published_on');
         PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id', '=', user()->id)->get()->pluck('user_id')->toArray();
 
@@ -419,31 +403,8 @@ class ForumPagesController extends Controller
                 Carbon::parse($latestPost['created_at'])
                     ->diffForHumans();
             $latestPost['url'] = url()->route('forums.jump-to-post', [$latestPost['id']]);
-
-            $mappedThreads[] = [
-                "title" => $thread->title,
-                "id" => $thread->id,
-                "categoryId" => $thread->category_id,
-                "category" => $thread->category,
-                "createdOn" => Carbon::parse($thread->published_on)
-                    ->diffforHumans(),
-                "isPinned" => $thread->pinned,
-                "isNew" => !$thread->is_read,
-                "isLocked" => $thread->locked,
-                "topic" => $thread->category_id,
-                "replyAmount" => $thread->post_count,
-                "authorUsername" => $thread->author_display_name,
-                "authorAvatar" => $thread->author_avatar_url,
-                "isRead" => $thread->is_read,
-                "access_level" => $thread->author_access_level,
-                "url" => url()->route(
-                    'forums.show-thread-posts',
-                    [$thread->category_slug, $thread->category_id, $thread->slug, $thread->id]
-                ),
-                "latestPost" => $latestPost,
-            ];
+            $mappedThreads[] = $this->mapThread($thread, $latestPost);
         }
-        $isAdmin = user()->isAdmin();
 
         $user = user();
 
@@ -451,7 +412,6 @@ class ForumPagesController extends Controller
 
         $userXP = $user->total_xp;
         $xpRank = $user->getXpRank();
-        $progressLevel = $user->getMethodLevel();
 
         $currentUser = [
             "avatar" => $user->profile_picture_url,
@@ -510,32 +470,15 @@ class ForumPagesController extends Controller
             $this->threadReadRepository->markRead($thread->id, auth()->id());
         }
 
-        $mappedThread = [
-            "title" => $thread->title,
-            "id" => $thread->id,
-            "categoryId" => $thread->category_id,
-            "createdOn" => Carbon::parse($thread->published_on)
-                ->diffforHumans(),
-            "lastPostDate" => Carbon::parse($thread->last_post_published_on)
-                ->diffforHumans(),
-            "isPinned" => $thread->pinned,
-            "isNew" => !$thread->is_read,
-            "isLocked" => $thread->locked,
-            "isFollowed" => $thread->is_followed,
-            "topic" => $thread->category_id,
-            "replyAmount" => $thread->post_count,
-            "authorUsername" => $thread->last_post_user_display_name,
-            "authorAvatar" => $thread->last_post_user_avatar_url,
-            "isRead" => $thread->is_read,
-            "signaturesHidden" => false,
-            "url" => url()->route(
-                'forums.show-thread-posts',
-                [$category['slug'], $category['id'], $thread->slug, $thread->id]
-            ),
+        $mappedThread = $this->mapThread($thread);
+        $mappedThread = array_merge(
+            $mappedThread,
+            [
             "currentPage" => $page,
             "totalPages" => ceil($total / $amount),
             "update" => url()->route('forums.show-update-thread-form', [$thread->id]),
-        ];
+        ]
+        );
 
         $authors[$thread->last_post_user_id]['thread'] = true;
         $authorIds = [];

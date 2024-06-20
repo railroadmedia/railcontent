@@ -2,8 +2,7 @@
     $hasQAVideo = !empty($lessonContent['qna_video_playback_endpoints']);
     $hasRelatedLessons = false;
     if (
-        count(json_decode($relatedLessons)->data) > 1 &&
-        $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id
+        count(json_decode($relatedLessons)->data) > 1
     ) {
         $hasRelatedLessons = true;
     }
