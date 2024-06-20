@@ -335,48 +335,49 @@
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#101921;">
 
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
-            <div class="container mx-auto max-w-5xl">
-                <div class="flex flex-wrap sm:flex-nowrap items-center">
-                    <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0">
-                        @yield('spotify-banner')
-                        <h1 class="leading-tight mb-3">  <strong>The ultimate music<br> lessons experience.</strong>  </h1>
-                        <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play 1000s of songs.</h5>
-                        <div class="w-72 lg:w-96 mx-auto sm:mx-0 my-5 sm:my-7">
-                            <a class=" w-full sm:w-82 join smaller musora-gold mb-3 @if(!empty($promoVersion)) anchor-slide @endif"
-                                @if(!empty($promoVersion))
-                                    href="#customize-anchor"
-                                aria-label="Customize anchor"
-                                @elseif(!empty($month))
-                                    href="/choose-your-trial-month"
-                                aria-label="Choose your trial month"
-                                @else
-                                    href="/choose-plan"
-                                aria-label="Choose plan"
-                                @endif
-                            >
-                                @if(!empty($promoVersion) && empty($trialVersion))
-                                    @if(!empty($cta))
-                                        {!! $cta !!}
-                                    @else
-                                        SEE YOUR DEAL &raquo;
-                                    @endif
-                                @elseif(!empty($month))
-                                    30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
-                                @else
-                                    7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
-                                @endif
-                            </a>
-                            <p class="opacity-80 text-sm leading-normal">Your first 7 days are free, then<br class="lg:hidden"> just $20/month.</p>
-                        </div>
-                        <div class="flex justify-center sm:justify-start">
+            @yield('spotify-banner')
+            <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
+            <h5 class="leading-normal">Learn your favorite instruments, build better<br> habits, and play 1000s of songs.</h5>
+            <div class="mx-auto my-5 sm:my-7">
+                <a class="w-full sm:w-96 join smaller musora-gold mb-3 @if(!empty($promoVersion)) anchor-slide @endif"
+                    @if(!empty($promoVersion))
+                        href="#customize-anchor"
+                    aria-label="Customize anchor"
+                    @elseif(!empty($month))
+                        href="/choose-your-trial-month"
+                    aria-label="Choose your trial month"
+                    @else
+                        href="/choose-plan"
+                    aria-label="Choose plan"
+                    @endif
+                >
+                    @if(!empty($promoVersion) && empty($trialVersion))
+                        @if(!empty($cta))
+                            {!! $cta !!}
+                        @else
+                            SEE YOUR DEAL &raquo;
+                        @endif
+                    @elseif(!empty($month))
+                        30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+                    @else
+                        7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+                    @endif
+                </a>
+                <p class="opacity-80 text-sm leading-normal">
+                    @if(!empty($promoVersion) && empty($trialVersion))
+                    @elseif(!empty($month))
+                        Your first 30 days are free, then just $20/month.
+                    @else
+                        Your first 7 days are free, then just $20/month.
+                    @endif
+                </p>
+            </div>
+            <div class="flex justify-center">
                             <img style="padding-bottom:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="logo">
                             <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png" alt="logo">
                             <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block mr-2 sm:mr-4" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="logo">
                             <img style="padding-top:2px;" class="h-5 sm:h-6 inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="logo">
                         </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(16,25,33,0.7);"></div>
 {{--                <img class="object-cover object-center w-full h-full relative z-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/musora/membership/homepage/2024/header.jpg">--}}
