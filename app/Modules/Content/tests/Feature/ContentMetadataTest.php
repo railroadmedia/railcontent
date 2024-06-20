@@ -2,8 +2,10 @@
 
 namespace App\Modules\Content\tests\Feature;
 
+use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
+use App\Modules\Content\Models\ContentUserProgress;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -116,5 +118,92 @@ class ContentMetadataTest extends TestCase
         // DEV NOTE: use createQuietly to avoid attempted calls to CustomerIO to sync the new content like
         $like->saveQuietly();
         return $like;
+    }
+
+    public function test_content_user_progress_returns_not_started_when_user_has_not_started()
+    {
+        $content = Content::factory()->create();
+        $response = $this->getJson(
+            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $expectedJson = [$content->id => ProgressState::NotStarted->value];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_content_user_progress_returns_not_started_when_no_content_progress_created()
+    {
+        $content = Content::factory()->create();
+        $response = $this->getJson(
+            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $expectedJson = [$content->id => ProgressState::NotStarted->value];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_content_user_progress_returns_started_when_user_has_not_completed()
+    {
+        $content = Content::factory()->create();
+        $this->createContentProgress($content, false);
+        $response = $this->getJson(
+            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $expectedJson = [$content->id => ProgressState::Started->value];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_content_user_progress_returns_completed_when_user_has_completed()
+    {
+        $content = Content::factory()->create();
+        $this->createContentProgress($content, true);
+        $response = $this->getJson(
+            route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
+        );
+        $response->assertOk();
+        $expectedJson = [$content->id => ProgressState::Completed->value];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_content_user_progress_uses_session_user_when_not_provided()
+    {
+        $content = Content::factory()->create();
+        $this->createContentProgress($content, true);
+        $response = $this->getJson(
+            route('content.user_progress', ['content' => $content->id]),
+        );
+        $response->assertOk();
+        $expectedJson = [$content->id => ProgressState::Completed->value];
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_content_user_progress_returns_error_if_multiple_entries()
+    {
+        $content = Content::factory()->create();
+        $this->createContentProgress($content, false);
+        $this->createContentProgress($content, true);
+        $response = $this->getJson(
+            route('content.user_progress', ['content' => $content->id]),
+        );
+        $response->assertNotFound();
+        $expectedJson = ['error' => "Multiple ContentUserProgress found for Content {$content->id} and User {$this->user->id}"];
+        $response->assertJson($expectedJson);
+    }
+
+    private function createContentProgress(Content $content, bool $isCompleted): void
+    {
+        $progress = new ContentUserProgress([
+            'content_id' => $content->id,
+            'user_id' => $this->user->id,
+            'state' => $isCompleted ? ProgressState::Completed->value : ProgressState::Started->value,
+            'started_on' => now(),
+            'updated_on' => now(),
+        ]);
+        if ($isCompleted) {
+            $progress->progress_percent = 100;
+            $progress->completed_on = now();
+        }
+        $progress->save();
     }
 }
