@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36f88c0f82bbafa101e00ad6436db911",
+    "content-hash": "ab8c5fe0b95861ca0c02261d348e2b6f",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10401,16 +10401,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "dev-FEW-213-signature-json-api",
+            "version": "v2.0.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "720c7179515827485ec7af040e93254bebbc5732"
+                "reference": "653a9ac8cdd5cfacfeddeff5e257253d9f0d0497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/720c7179515827485ec7af040e93254bebbc5732",
-                "reference": "720c7179515827485ec7af040e93254bebbc5732",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/653a9ac8cdd5cfacfeddeff5e257253d9f0d0497",
+                "reference": "653a9ac8cdd5cfacfeddeff5e257253d9f0d0497",
                 "shasum": ""
             },
             "require": {
@@ -10449,22 +10449,22 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/FEW-213-signature-json-api"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.27"
             },
-            "time": "2024-06-11T15:05:16+00:00"
+            "time": "2024-06-21T13:50:22+00:00"
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.24",
+            "version": "v3.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "3a35e9ca201c5c0b0290d53dcb42662644f93d87"
+                "reference": "5dd0c8eb5d3d1c2259c13d8e498dbeb69709de6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/3a35e9ca201c5c0b0290d53dcb42662644f93d87",
-                "reference": "3a35e9ca201c5c0b0290d53dcb42662644f93d87",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/5dd0c8eb5d3d1c2259c13d8e498dbeb69709de6c",
+                "reference": "5dd0c8eb5d3d1c2259c13d8e498dbeb69709de6c",
                 "shasum": ""
             },
             "require": {
@@ -10504,9 +10504,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.24"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.25"
             },
-            "time": "2024-06-20T10:45:05+00:00"
+            "time": "2024-06-21T13:47:17+00:00"
         },
         {
             "name": "railroad/railtracker",
@@ -20426,18 +20426,11 @@
             "version": "dev-temp-fix-inflector",
             "alias": "v2.0.2",
             "alias_normalized": "2.0.2.0"
-        },
-        {
-            "package": "railroad/railforums",
-            "version": "dev-FEW-213-signature-json-api",
-            "alias": "v2.0.26",
-            "alias_normalized": "2.0.26.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/doctrine-array-hydrator": 20,
-        "railroad/railforums": 20
+        "railroad/doctrine-array-hydrator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

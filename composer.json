@@ -40,7 +40,7 @@
         "railroad/railanalytics": "3.0.*",
         "railroad/railchat": "2.0.*",
         "railroad/railcontent": "2.1.*",
-        "railroad/railforums": "dev-FEW-213-signature-json-api as v2.0.26",
+        "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
         "railroad/referral": "3.0.*",
