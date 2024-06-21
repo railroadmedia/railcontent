@@ -39,13 +39,15 @@
               <musora-icon @click="openModal" icon-name="info"
                 class="tw-self-start tw-inline-block dark:tw-text-[#80A0B9] tw-w-[27px] tw-h-[27px] tw-cursor-pointer"></musora-icon>
               <ModalRenderer v-if="isModalOpen">
-                <button @click="closeModal"
-                  class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
-                  <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-                </button>
-                <div
-                  class="dark:tw-text-white tw-text-center tw-p-6 sm:tw-p-[30px] tw-max-w-[600px] tw-mx-4 sm:tw-mx-0 tw-h-full">
-                  <slot name="header-description"></slot>
+                <div class="tw-bg-white dark:tw-bg-black tw-text-black dark:tw-text-white tw-h-full tw-w-full tw-m-[16px] tw-bg-opacity-80">
+                  <button @click="closeModal"
+                    class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
+                    <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px] tw-text-black dark:tw-text-white" />
+                  </button>
+                  <div
+                    class="dark:tw-text-white tw-text-center tw-p-6 sm:tw-p-[30px] tw-max-w-[600px] tw-mx-4 sm:tw-mx-0 tw-h-full">
+                    <slot name="header-description"></slot>
+                  </div>
                 </div>
               </ModalRenderer>
             </div>

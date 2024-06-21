@@ -25,7 +25,7 @@
     </template>
     <template #top-right>
       <div v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
-        <PageHeaderCtasBox :ctas="ctas" />
+        <PageHeaderCtasBox v-if="ctas && ctas.length" :ctas="ctas" />
       </div>
     </template>
     <template #bottom-full>
@@ -44,7 +44,7 @@
             <span class="tw-uppercase">{{ songsPageLink.text }}</span>
             <i class="fa-solid fa-chevron-right tw-ml-1"></i>
           </a>
-          <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
+          <PageHeaderCtasBox v-if="ctas && ctas.length" :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
             :ctas="secondaryCtas" />
         </div>
       </div>

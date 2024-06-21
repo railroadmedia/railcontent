@@ -40,6 +40,7 @@ import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
 import Overview from './vue/Pages/Overview';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
+import Catalogue from './vue/Pages/Catalogue/Catalogue';
 import Search from './vue/Pages/Search';
 import PackOverview from './vue/Pages/PackOverview';
 import PackOverviewBundles from './vue/Pages/PackOverviewBundles';
@@ -226,10 +227,10 @@ app.component('AppContainer', AppContainer)
     .component('Shows', Shows)
     .component('Overview', Overview)
     .component('GuitareoLessons', GuitareoLessons)
+    .component('Catalogue', Catalogue)
     .component('Search', Search)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
-
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */
