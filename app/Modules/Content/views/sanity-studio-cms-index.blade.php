@@ -1,5 +1,5 @@
 @php
-    $manifest = json_decode(file_get_contents(public_path('sanity/asset-manifest.json')), true);
+    $manifest = json_decode(file_get_contents(public_path('sanity/mix-manifest.json')), true);
 @endphp
 
 <html>
@@ -45,8 +45,8 @@
 
     <div id="root"></div>
 
-    @foreach($manifest['entrypoints'] as $file)
-        <script src="{{ asset('sanity/' . $file) }}"></script>
+    @foreach($manifest as $file)
+        <script src="{{ asset('sanity' . $file) }}"></script>
     @endforeach
 </body>
 

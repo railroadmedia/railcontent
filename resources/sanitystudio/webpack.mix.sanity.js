@@ -3,27 +3,27 @@ const path = require('path');
 
 mix.setPublicPath(path.resolve(__dirname, '../../public/sanity'));
 
-mix.js('src/index.js', '')
+mix.js('src/index.js', 'bundle.js')
    .react() // if you're using React
-   .webpackConfig(webpack => {
-    require('dotenv').config();
-    const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
-    console.log("ASSET_URL", ASSET_URL);
-
-    return {
+   .extract(['react', 'react-dom', 'other-vendor-libraries']) // Add all your vendor libraries here
+   .webpackConfig({
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'vendor',
+                        chunks: 'all',
+                    },
+                },
+            },
+        },
         stats: {
             children: true
         },
-        // target: ['web', 'es5'],
         output: {
-            publicPath: ASSET_URL,
+            filename: '[name].js', // Ensure a single output file
+            chunkFilename: '[name].js', // Ensure any chunked files are merged into the same output
         },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ]
-    };
-})
+    })
    .version();
- 
