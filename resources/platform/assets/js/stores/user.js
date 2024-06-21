@@ -26,6 +26,9 @@ export const useUserStore = defineStore({
     userDashboardUrl: (state) => state.user?.get_dashboard_url,
     isUserAMember: (state) => state.user?.is_a_member,
     isAdmin: (state) => state.user?.permission_level === 'administrator',
+    isLifetimeMember: (state) => state.user?.is_lifetime_member,
+    userMembershipLevel: (state) => state.user?.membership_level,
+    userMembershipExpiration: (state) => state.user?.membership_expiration_date,
     userDrumPhoto: (state) => state.user?.drums_gear_photo,
     userDrummingSince: (state) => state.user?.drums_playing_since_year,
     userDrumBrands: (state) => state.user?.drums_gear_set_brands,
@@ -45,13 +48,23 @@ export const useUserStore = defineStore({
     userAmpBrands: (state) => state.user?.guitar_gear_amp_brands,
     userPedalBrands: (state) => state.user?.guitar_gear_pedal_brands,
     userStringBrands: (state) => state.user?.guitar_gear_string_brands,
+    useLegacyVideoPlayer: (state) => state.user?.use_legacy_video_player ? true : false,
     userBirthdayFormatted: (state) => {
       if (!state.user?.birthday) return '';
       const [year, month, day] = state.user.birthday.split('-');
       const date = new Date(Date.UTC(year, month - 1, day));
       return `${date.toLocaleString('default', { month: 'long' })} ${day}, ${year}`;
     },
-
+    userMembershipExpirationFormatted: (state) => {
+      if (!state.user?.membership_expiration_date) return '';
+      const date = new Date(state.user?.membership_expiration_date);
+      // Check if the year is 9999
+      if (date.getFullYear() === 9999) return "Never Expires";
+      //Else Return Date
+      const options = { month: 'long', day: 'numeric', year: 'numeric' };
+      const formattedDate = date.toLocaleDateString('default', options);
+      return formattedDate;
+    },
     userFullName: (state) => {
       if(state.user?.first_name && state.user?.last_name) {
         return `${state.user.first_name} ${state.user.last_name}`;
@@ -68,6 +81,7 @@ export const useUserStore = defineStore({
   actions: {
     setUser (user) {
       this.user = user;
+      console.log(this.user)
     },
     setUserProfilePictureUrl (url) {
       this.user.profile_picture_url = url;
@@ -150,6 +164,8 @@ export const useUserStore = defineStore({
           //Singing Gear
           data.hasOwnProperty('singing_since_year') && (this.user.singing_since_year = data.singing_since_year);
           data.hasOwnProperty('singing_gear_mic_brands') && (this.user.singing_gear_mic_brands = data.singing_gear_mic_brands);
+          //Video Settings
+          data.hasOwnProperty('use_legacy_video_player') && (this.user.use_legacy_video_player = data.use_legacy_video_player);
 
           window.shownotification({
               icon: 'check',

@@ -22,151 +22,204 @@
         <!-- Page Pills -->
         <PillNav :pills="accountPages"/>
 
-        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8">
+        <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
             <!-- Page Content -->
             <div class="tw-flex tw-flex-col tw-grow">
                 
-                <!-- Payment History -->
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        <div class="tw-flex tw-flex-row tw-mb-4 tw-flex-grow-0 tw-items-center" >
-                            <h2 class="tw-font-bold dark:tw-text-white tw-text-xl">Account Details</h2>
+                        
+                        <!-- Membership Access -->
+                        <div v-if="userMembershipLevel !== 'none'" class="tw-flex tw-flex-col tw-pt-0 tw-mb-6">
+                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                                <h2 class="tw-font-bold tw-text-xl dark:tw-text-white tw-mb-3">Your Membership Access</h2>
+                            </div>
+                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                                <div class="tw-flex tw-flex-col">
+                                    <p class="tw-capitalize">{{ userMembershipLevel }} Membership</p>
+                                    <template v-if="userMembershipLevel !== 'lifetime' && !isLifetimeMember">
+                                        <p v-if="userMembershipLevel === 'plus' || userMembershipLevel === 'basic'">
+                                            Valid Until: {{ userMembershipExpirationFormatted }}
+                                        </p>
+                                    </template>
+                                    <p v-else>Never Expires</p>
+                                </div>
+                            </div>
                         </div>
                         
-                        <!-- 
-                            @if($membershipLevel !== 'none')
-                                <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
-                                    <div
-                                        class="tw-flex tw-flex-row tw-flex-auto tw-py-2 dark:tw-text-white tw-text-[#00101D]">
-                                        <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Membership Access</h2>
-                                    </div>
-
-                                    <div
-                                        class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                                        <div class="tw-flex tw-flex-col">
-                                            <p>{{ ucwords($membershipLevel) }} Membership</p>
-                                            @if( $membershipLevel == 'plus' || $membershipLevel == 'basic')
-                                                <p>Valid Until: {{ $membershipExpirationDate->format('F j, Y') }}</p>
-                                            @elseif($membershipLevel == 'lifetime' && $isLifetimeMember == true)
-                                                <p>Never Expires</p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
-                            @endif
-
-                            @if(!empty($allPackPermissionNames))
-                                <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
-                                    <div
-                                        class="tw-flex tw-flex-row tw-flex-auto tw-py-2 dark:tw-text-white tw-text-[#00101D]">
-                                        <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Other Products</h2>
-                                    </div>
-
-                                    <div
-                                        class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                                        <div class="tw-flex tw-flex-col">
-                                            <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
-                                                @foreach($allPackPermissionNames as $product)
-                                                    <li>{{ $product }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            @endif
-
-                            <div class="tw-flex tw-flex-col pa-3" id="rcPortalContainer">
-                                <iframe id="rcPortal"
-                                        src=""
-                                        width=100% height=850px>
-                                </iframe>
+                        <!-- User Packs -->
+                        <div v-if="userPacks.length" class="tw-flex tw-flex-col tw-pt-0">
+                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                                <h2 class="tw-font-bold tw-text-xl dark:tw-text-white">Your Other Products</h2>
                             </div>
-                        -->
+                            <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
+                                <div class="tw-flex tw-flex-col">
+                                    <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
+                                        <li v-for="(product, i) in userPacks" :key="i">{{ product }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- Recharge iFrame -->
+                        <div v-if="showIframe" class="tw-flex tw-flex-col tw-p-4" id="rcPortalContainer">
+                            <iframe id="rcPortal"
+                                    :src="portalUrl"
+                                    width="100%" 
+                                    height="850px"
+                            ></iframe>
+                        </div>
                     </div>
                 </section>
 
-                <!--
-                    <form id="legacy-form" method="POST" action="{{ url()->route('user_management_system.user.update', ['id' => user()->id ])}}">
-                        {{ method_field('PATCH') }}
-                        {{ csrf_field() }}
-
-                        <div class="pa-3 tw-border-0 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid tw-w-full">
-                            <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">Would you like to use our
-                                legacy video player?</h3>
-                            <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
-                                Our video player may have compatibility issues with older devices and operating systems. We recommend
-                                switching to our legacy video player if you are experiencing playback issues.
-                            </p>
-                            <div class="tw-flex tw-flex-row tw-mt-3">
-                                @include('partials.bladesora.members.inputs.toggle-input', [
-                                    "inputID" => "useLegacyPlayer",
-                                    "inputName" => "use_legacy_video_player",
-                                    "inputLabel" => "Use legacy video player.",
-                                    "checked" => (boolean) user()->use_legacy_video_player ?? false,
-                                    "submitOnChange" => true,
-                                ])
-                            </div>
-                        </div>
+                <!-- Legacy Media Player -->
+                <div class="tw-px-0 md:tw-px-6 tw-py-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                    <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">
+                        Would you like to use our legacy video player?
+                    </h3>
+                    <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
+                        Our video player may have compatibility issues with older devices and operating systems. We recommend
+                        switching to our legacy video player if you are experiencing playback issues.
+                    </p>
+                    <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
+                        <Toggle                               
+                            :brand="brand"
+                            v-model="formData.use_legacy_video_player"
+                            :disabled="formProcessing"
+                            id="useLegacyPlayer"
+                            input-label="Use legacy video player."
+                            name="use_legacy_video_player"
+                            @change="submitUserForm"
+                        />
                     </form>
-                    <delete-account-modal></delete-account-modal>
-                -->
-
+                </div>
+                
+                <!-- Delete Account UI -->
+                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
+                    <div class="tw-flex tw-flex-col tw-w-full">
+                        <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
+                            Delete Account
+                        </h3>
+                        <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-4 lg:tw-max-w-[50%]">Delete your account and account data.</p>
+                        <MuButton class="tw-mr-auto" @click="modalOpen = true">Delete Account</MuButton>
+                    </div>
+                </section>handleShowDisplayNameModal
+                <DeleteAccountModal v-if="modalOpen" @onCloseModal="modalOpen = false"/>
             </div>
         </div>
     </div>
 </template>
+
 <script setup>
-    import { ref, onBeforeMount } from "vue";
-    import { storeToRefs } from "pinia/dist/pinia";
-    import { useUserStore } from "../../../../stores/user";
-    import Breadcrumb from '../../Breadcrumb/Breadcrumb';
-    import PageHeader from '../../PageHeader/PageHeader';
-    import PillNav from "../../PillNav/PillNav.vue";
+import { ref, onMounted } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../../../../stores/user";
+import Breadcrumb from '../../Breadcrumb/Breadcrumb';
+import PageHeader from '../../PageHeader/PageHeader';
+import Toggle from '../../FormInputs/Toggle.vue';
+import PillNav from "../../PillNav/PillNav.vue";
+import DeleteAccountModal from "../../Modal/DeleteAccountModal.vue";
+import { initRecharge, loginShopifyAppProxy, getCustomer, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
+import MuButton from "../../Button/MuButton.vue";
 
-    const props = defineProps({        
+const props = defineProps({   
+    storeIdentifier: String,
+    rechargeStorefrontAccessToken: String,
+    storefrontAccessToken: String, 
+    customerAccessToken: String,    
+    userPacks: {
+        type: Array,
+        default: []
+    }
+});
 
-    });
+// Pinia
+const userStore = useUserStore();
+const { 
+    brand, 
+    userId, 
+    userDisplayName, 
+    userProfilePictureUrl, 
+    userCreatedYear, 
+    userCompletedAccount,
+    userMembershipLevel,
+    isLifetimeMember,
+    userMembershipExpirationFormatted,
+    useLegacyVideoPlayer,
+} = storeToRefs(userStore);
 
+// Refs
+const accountPages = ref([
+    {
+        name: 'Profile',
+        url: `/${brand.value}/profile/${userId.value}/settings/profile`,
+    }, 
+    {
+        name: 'Login Credentials',
+        url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
+    },
+    {
+        name: 'Payments',
+        url: `/${brand.value}/profile/${userId.value}/settings/payments`,
+    },
+    {
+        name: 'Notification Settings',
+        url: `/${brand.value}/profile/${userId.value}/settings/notifications`,
+    },
+    {
+        name: 'Account Details',
+        url: `/${brand.value}/profile/settings/account`,
+        isActive: true,
+    }
+]);
 
-    //Pinia
-    const userStore = useUserStore();
-    const { 
-        brand, 
-        userId, 
-        userDisplayName, 
-        userProfilePictureUrl, 
-        userCreatedYear, 
-        userCompletedAccount 
-    } = storeToRefs(userStore);   
+const showIframe = ref(false);
+const formProcessing = ref(false);
+const modalOpen = ref(false);
+const portalUrl = ref('');
+const customerDetails = ref(null);
+const formData = ref({
+    use_legacy_video_player: useLegacyVideoPlayer.value || false
+});
 
-    //Refs
-    const accountPages = ref([
-        {
-            name: 'Profile',
-            url: `/${brand.value}/profile/${userId.value}/settings/profile`,
-        }, 
-        {
-            name: 'Login Credentials',
-            url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
-        },
-        {
-            name: 'Payments',
-            url: `/${brand.value}/profile/${userId.value}/settings/payments`,
-        },
-        {
-            name: 'Notification Settings',
-            url: `/${brand.value}/profile/${userId.value}/settings/notifications`,
-        },
-        {
-            name: 'Account Details',
-            url: `/${brand.value}/profile/settings/account`,
-            isActive: true,
-        }
-    ]);
+const initializeRecharge = async () => {
+    try {
+        await initRecharge({
+            storeIdentifier: props.storeIdentifier,
+            storefrontAccessToken: props.rechargeStorefrontAccessToken,
+            loginRetryFn: async () => {
+                const session = await loginShopifyAppProxy();
+                // store recharge session logic here
+                return session;
+            }
+        });
 
-    //methods
+        const session = await loginShopifyAppProxy();
+        const portal = await getCustomerPortalAccess(session);
+        portalUrl.value = portal.portal_url.replace('schedule', 'subscriptions');
+
+        // Fetch customer details
+        customerDetails.value = await getCustomer(session, { include: ['addresses'] });
+        showIframe.value = true;
+    } catch (error) {
+        console.log(error);
+    }
+
+};
+
+const submitUserForm = async () => {
+    formProcessing.value = true;
+    try {
+        await userStore.updateProfile(formData.value);
+        handleClose(); 
+    } catch (error) {
+        console.error("Failed to update the legacy video preference:", error.message);
+        formProcessing.value = false;
+    }
+};
+
+onMounted(() => {
+    initializeRecharge();
+});
 
 </script>

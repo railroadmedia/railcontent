@@ -65,72 +65,6 @@
 @endsection
 
 @section('edit-forms')
-    <div class="tw-flex tw-flex-row">
-
-        <div class="tw-flex tw-flex-col tw-grow tw-w-full ">
-
-            <div class="tw-flex tw-flex-col tw-w-full ">
-
-                <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-pb-3">
-                    <h1 class="tw-text-2xl tw-font-bold dark:tw-text-white tw-text-[#00101D]">
-                        Account Details
-                    </h1>
-                </div>
-
-                @if($membershipLevel !== 'none')
-                    <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
-                        <div
-                            class="tw-flex tw-flex-row tw-flex-auto tw-py-2 dark:tw-text-white tw-text-[#00101D]">
-                            <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Membership Access</h2>
-                        </div>
-
-                        <div
-                            class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                            <div class="tw-flex tw-flex-col">
-                                <p>{{ ucwords($membershipLevel) }} Membership</p>
-                                @if( $membershipLevel == 'plus' || $membershipLevel == 'basic')
-                                    <p>Valid Until: {{ $membershipExpirationDate->format('F j, Y') }}</p>
-                                @elseif($membershipLevel == 'lifetime' && $isLifetimeMember == true)
-                                    <p>Never Expires</p>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                @endif
-
-                @if(!empty($allPackPermissionNames))
-                    <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
-                        <div
-                            class="tw-flex tw-flex-row tw-flex-auto tw-py-2 dark:tw-text-white tw-text-[#00101D]">
-                            <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Other Products</h2>
-                        </div>
-
-                        <div
-                            class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
-                            <div class="tw-flex tw-flex-col">
-                                <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
-                                    @foreach($allPackPermissionNames as $product)
-                                        <li>{{ $product }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                @endif
-
-                <div class="tw-flex tw-flex-col pa-3" id="rcPortalContainer">
-                    <iframe id="rcPortal"
-                            src=""
-                            width=100% height=850px>
-                    </iframe>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
 
     <form id="legacy-form" method="POST" action="{{ url()->route('user_management_system.user.update', ['id' => user()->id ])}}">
         {{ method_field('PATCH') }}
@@ -166,8 +100,13 @@
 @endsection
 
 @section('content')
+    {{-- <p class="tw-text-white">{{ json_encode($allPackPermissionNames) }}</p> --}}
     {{-- Acount Details Page Component --}}
     <account-details
-
+        :user-packs="{{json_encode($allPackPermissionNames) }}"
+        store-identifier="{{ config('shopify.credentials.domain') }}"
+        recharge-storefront-access-token="{{ config('shopify.recharge.storefront_access_token') }}"
+        storefront-access-token="{{ config('shopify.storefront.access_token') }}"
+        customer-access-token="{{ $shopifyCustomerAccessToken }}"
     ></account-details>
 @endsection
