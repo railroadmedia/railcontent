@@ -154,7 +154,7 @@ class ContentCompiledColumnTransformer
         return $contentRows;
     }
 
-    public function transformLessons(array $contentRows, array $dataLookup)
+    public function transformLessons(array $contentRows, array $dataLookup, int $maxGroupedByChildren=10)
     {
         $dataKeys = config('railcontent.compiled_column_mapping_data_keys', []);
         $fieldKeys = config('railcontent.compiled_column_mapping_field_keys', []);
@@ -165,7 +165,8 @@ class ContentCompiledColumnTransformer
             $lessonContentIds = explode(',', $lessons);
             $lessonContentIds = array_unique($lessonContentIds);
             $allLessonsCount = count($lessonContentIds);
-            $lessonContentIds = (array_slice($lessonContentIds, 0, 10));
+            //here be danger
+            $lessonContentIds = (array_slice($lessonContentIds, 0, $maxGroupedByChildren));
             $contentRows[$contentRowIndex]['all_lessons_count'] = $contentRow['lessonsCount'] ?? $allLessonsCount;
 
             if (empty($lessonContentIds)) {

@@ -68,9 +68,10 @@ class ContentJsonController extends Controller
 
         $contentTypes = $request->get('included_types', []);
         $defaultLimit = ContentJsonController::getDefaultLimit($contentTypes, brand(), $request->get('tabs', []), 10);
+
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', $defaultLimit),
+            $defaultLimit,
             $request->get('sort', '-published_on'),
             $contentTypes,
             $request->get('slug_hierarchy', []),
@@ -85,6 +86,7 @@ class ContentJsonController extends Controller
             $request->get('only_subscribed', false),
             FiltersHelper::$futureScheduledContentOnly,
             FiltersHelper::$groupBy ?? null,
+
         );
 
         $filters = $contentData['filter_options'];
