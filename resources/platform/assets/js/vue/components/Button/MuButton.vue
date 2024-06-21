@@ -3,12 +3,12 @@
         :is="isLink ? 'a' : 'button'"
         :href="isLink ? href : null"
         :type="isLink ? null : type"
-        :disabled="disabled || processing"
+        :disabled="disabled"
         :class="[ `tw-btn-${size}`, btnClasses, props.class ]"
         @click="handleClick"
     >
         <template v-if="processing">
-            <svg class="tw-animate-spin tw--ml-1 tw-mr-3 tw-h-5 tw-w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <svg class="tw-animate-spin tw--ml-1 tw-mr-2 tw-h-4 tw-w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
@@ -69,8 +69,8 @@
         'tw-cursor-not-allowed': props.disabled || props.processing,
         'tw-opacity-50': props.disabled,
         'tw-cursor-pointer': !props.disabled && !props.processing,
-        'tw-btn-primary': props.styleType === 'primary',
-        'tw-btn-secondary': props.styleType === 'secondary',
+        'tw-btn-primary': props.btnType === 'primary',
+        'tw-btn-secondary': props.btnType === 'secondary',
     }));
 
     //Methods
@@ -84,6 +84,9 @@
 </script>
 <style scoped>
     /* DEFAULT BUTTON STYLES */
+    .tw-btn-primary, .tw-btn-secondary {
+        line-height: 0;
+    }
     .tw-btn-primary {
         background-color: black; 
         color: white;
@@ -92,11 +95,20 @@
         background-color: white;
         color: #00101D;
     }
+    body.tw-dark .tw-btn-primary:hover {
+        background-color: #223F57;
+        color: white;
+    }
     .tw-btn-secondary {
         color: black; 
     }
     body.tw-dark .tw-btn-secondary {
         color: white;
+    }
+    body.tw-dark .tw-btn-secondary:hover {
+        color: black;
+        border-color: white;
+        background-color: white;
     }
 </style>
   

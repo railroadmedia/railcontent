@@ -36,7 +36,7 @@
                             </div>
                             <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
                                 <div class="tw-flex tw-flex-col">
-                                    <p class="tw-capitalize">{{ userMembershipLevel }} Membership</p>
+                                    <p class="tw-capitalize"><span class="tw-font-bold">{{ userMembershipLevel }}</span> Membership</p>
                                     <template v-if="userMembershipLevel !== 'lifetime' && !isLifetimeMember">
                                         <p v-if="userMembershipLevel === 'plus' || userMembershipLevel === 'basic'">
                                             Valid Until: {{ userMembershipExpirationFormatted }}
@@ -95,15 +95,13 @@
                 </div>
                 
                 <!-- Delete Account UI -->
-                <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
-                    <div class="tw-flex tw-flex-col tw-w-full">
-                        <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
-                            Delete Account
-                        </h3>
-                        <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-4 lg:tw-max-w-[50%]">Delete your account and account data.</p>
-                        <MuButton class="tw-mr-auto" @click="modalOpen = true">Delete Account</MuButton>
-                    </div>
-                </section>handleShowDisplayNameModal
+                <section class="tw-w-full tw-px-0 md:tw-px-6 tw-py-6">
+                    <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
+                        Delete Account
+                    </h3>
+                    <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-4 lg:tw-max-w-[50%]">Delete your account and account data.</p>
+                    <MuButton @click="modalOpen = true">Delete Account</MuButton>
+                </section>
                 <DeleteAccountModal v-if="modalOpen" @onCloseModal="modalOpen = false"/>
             </div>
         </div>
