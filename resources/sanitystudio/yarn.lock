@@ -5738,6 +5738,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.6.0":
+  version: 1.7.2
+  resolution: "axios@npm:1.7.2"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/cbd47ce380fe045313364e740bb03b936420b8b5558c7ea36a4563db1258c658f05e40feb5ddd41f6633fdd96d37ac2a76f884dad599c5b0224b4c451b3fa7ae
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^3.2.1":
   version: 3.2.1
   resolution: "axobject-query@npm:3.2.1"
@@ -12655,6 +12666,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"laravel-vapor@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "laravel-vapor@npm:0.7.1"
+  dependencies:
+    axios: "npm:^1.6.0"
+  checksum: 10c0/e919c5e37c02579f1305d8974777df6f45745886c46909dd763dbeccf172ca3a53434e9726a07ded93fd4cb4708773ba52aed4979fbdcb893ed4031e45184725
+  languageName: node
+  linkType: hard
+
 "launch-editor@npm:^2.6.0":
   version: 2.8.0
   resolution: "launch-editor@npm:2.8.0"
@@ -15546,6 +15566,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: 10c0/fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
+  languageName: node
+  linkType: hard
+
 "psl@npm:^1.1.33":
   version: 1.9.0
   resolution: "psl@npm:1.9.0"
@@ -16760,6 +16787,7 @@ __metadata:
     "@testing-library/user-event": "npm:^13.5.0"
     dotenv: "npm:^16.4.5"
     laravel-mix: "npm:^6.0.43"
+    laravel-vapor: "npm:^0.7.1"
     postcss: "npm:^8.4.38"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
