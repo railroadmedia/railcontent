@@ -1,5 +1,6 @@
 // src/App.js
 import React, { useEffect, useState } from 'react';
+import {RobotIcon, RocketIcon} from '@sanity/icons'
 import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
@@ -17,7 +18,12 @@ const customComponents = {
     SoundsliceArrayInput: SoundsliceArrayInput,
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
-    IsUniqueAcrossBrand: IsUniqueAcrossBrand
+    IsUniqueAcrossBrand: IsUniqueAcrossBrand,
+};
+
+const icons = {
+    RobotIcon: RobotIcon,
+    RocketIcon: RocketIcon,
 };
 
 // Helper function to map components
@@ -80,7 +86,7 @@ function App() {
                     ...config,
                     name: config.name,
                     title: config.title,
-                    icon: config.icon,
+                    icon: icons[config.icon] ? icons[config.icon] : null,
                     plugins: [
                       structureTool({ defaultDocumentNode }), 
                       visionTool()
