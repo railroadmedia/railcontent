@@ -9,7 +9,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "fs-extra": "^11.2.0",
+    "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -21,7 +21,8 @@
   "homepage": "/sanity/",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && node post-build.js",
+    "build:cra": "react-scripts build",
+    "build": "npx mix --mix-config=webpack.mix.sanity.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -42,5 +43,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "laravel-mix": "^6.0.43",
+    "postcss": "^8.4.38"
   }
 }
