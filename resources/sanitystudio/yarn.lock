@@ -16780,6 +16780,7 @@ __metadata:
     "@babel/core": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.7"
     "@sanity/client": "npm:^6.19.1"
+    "@sanity/icons": "npm:^3.2.0"
     "@sanity/vision": "npm:^3.45.0"
     "@testing-library/dom": "npm:^10.1.0"
     "@testing-library/jest-dom": "npm:^5.17.0"
