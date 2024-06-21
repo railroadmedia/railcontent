@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36f88c0f82bbafa101e00ad6436db911",
+    "content-hash": "74cc1748d1f3829ba3b0b933f46114bc",
     "packages": [
         {
             "name": "amphp/amp",
@@ -10455,16 +10455,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.24",
+            "version": "dev-fcm-ios-foreground",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "3a35e9ca201c5c0b0290d53dcb42662644f93d87"
+                "reference": "f6fd5825468c660f84340f70c1bf38c595f264dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/3a35e9ca201c5c0b0290d53dcb42662644f93d87",
-                "reference": "3a35e9ca201c5c0b0290d53dcb42662644f93d87",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/f6fd5825468c660f84340f70c1bf38c595f264dc",
+                "reference": "f6fd5825468c660f84340f70c1bf38c595f264dc",
                 "shasum": ""
             },
             "require": {
@@ -10504,9 +10504,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.24"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/fcm-ios-foreground"
             },
-            "time": "2024-06-20T10:45:05+00:00"
+            "time": "2024-06-21T12:15:20+00:00"
         },
         {
             "name": "railroad/railtracker",
@@ -20432,12 +20432,19 @@
             "version": "dev-FEW-213-signature-json-api",
             "alias": "v2.0.26",
             "alias_normalized": "2.0.26.0"
+        },
+        {
+            "package": "railroad/railnotifications",
+            "version": "dev-fcm-ios-foreground",
+            "alias": "v3.0.24",
+            "alias_normalized": "3.0.24.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/doctrine-array-hydrator": 20,
-        "railroad/railforums": 20
+        "railroad/railforums": 20,
+        "railroad/railnotifications": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
