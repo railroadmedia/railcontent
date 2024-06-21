@@ -82,7 +82,7 @@
                         switching to our legacy video player if you are experiencing playback issues.
                     </p>
                     <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
-                        <Toggle                               
+                        <MuToggle                               
                             :brand="brand"
                             v-model="formData.use_legacy_video_player"
                             :disabled="formProcessing"
@@ -116,7 +116,7 @@ import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../../stores/user";
 import Breadcrumb from '../../Breadcrumb/Breadcrumb';
 import PageHeader from '../../PageHeader/PageHeader';
-import Toggle from '../../FormInputs/Toggle.vue';
+import MuToggle from '../../FormInputs/MuToggle.vue';
 import PillNav from "../../PillNav/PillNav.vue";
 import DeleteAccountModal from "../../Modal/DeleteAccountModal.vue";
 import { initRecharge, loginShopifyAppProxy, getCustomer, getCustomerPortalAccess } from '@rechargeapps/storefront-client';

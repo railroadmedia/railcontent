@@ -45,7 +45,7 @@
             type: String,
             default: '#'
         },
-        styleType: {
+        btnType: {
             type: String,
             default: 'primary', // default style is primary
             validator: (value) => ['primary', 'secondary'].includes(value)
