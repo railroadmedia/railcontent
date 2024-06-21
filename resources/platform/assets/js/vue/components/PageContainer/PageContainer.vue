@@ -239,10 +239,7 @@ onUpdated(() => {
 
     <!-- Page Container -->
     <div v-if="!isOnboarding" class="
-        tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors
-        dark:tw-bg-[#000C17] tw-bg-[#F9F9F9]
-        tw-overflow-hidden
-      ">
+        tw-flex tw-flex-row tw-w-full tw-h-screen tw-transition-colors tw-bg-ui-page tw-overflow-hidden">
 
       <!-- Sidebar -->
       <Sidebar v-if="!isOnboarding && !isMobileAppWebView" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
@@ -262,10 +259,12 @@ onUpdated(() => {
           tw-overflow-x-hidden
           tw-scroll-smooth
         " :class="isMobileAppWebView ? '' : 'tw-pt-[58px]'" id="content-container">
+        
         <h2 v-if="adminMessage && adminMessage.length"
           class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
         </h2>
+
         <!-- Content -->
         <section class="tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />
