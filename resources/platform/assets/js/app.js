@@ -15,7 +15,7 @@ import Profile from './vue/components/_Pages/Settings/Profile.vue';
 import LoginCredentials from './vue/components/_Pages/Settings/LoginCredentials.vue';
 import Payments from './vue/components/_Pages/Settings/Payments.vue';
 import NotificationSettings from './vue/components/_Pages/Settings/NotificationSettings.vue';
-import Details from './vue/components/_Pages/Settings/Details.vue';
+import AccountDetails from './vue/components/_Pages/Settings/AccountDetails.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
@@ -219,7 +219,7 @@ app.component('AppContainer', AppContainer)
     .component('LoginCredentials', LoginCredentials)
     .component('Payments', Payments)
     .component('NotificationSettings', NotificationSettings)
-    .component('Details', Details)
+    .component('AccountDetails', AccountDetails)
     .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)

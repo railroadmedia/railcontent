@@ -105,6 +105,11 @@
         border-color: var(--color-ui-button-bg); 
         color: var(--color-ui-button-text); 
     }
+    body.tw-dark .tw-btn-secondary:hover {
+        color: black;
+        border-color: white;
+        background-color: white;
+    }
 </style>
   
   

@@ -172,7 +172,7 @@
         existsCohortBanner: { type: Boolean, default: false },
         hasStartedLessons: { type: Boolean, default: false },
         hasUpcomingEvents: { type: Boolean, default: false },
-        isPackOnly: { type: Number, default: 0 },
+        isPackOnly: { type: [Number, Boolean], default: 0 },
         learningPaths: { type: Array, default: () => ([]) },
         newContent: { type: Object, default: () => ({}) },
         newContentUrl: { type: String, default: '' },
