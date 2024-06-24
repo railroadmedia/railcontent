@@ -122,13 +122,12 @@
     </div>
 </template>
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useUserStore } from "../../stores/user";
 import { storeToRefs } from "pinia/dist/pinia";
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import PageHeader from '../components/PageHeader/PageHeader';
 import GuitareoPack from '../components/GuitareoPack/GuitareoPack';
-import ContentCatalogue from '../vuesora/views/catalogues/ContentCatalogue';
 import MiniCatalogueSection from '../components/MiniCatalogueSection/MiniCatalogueSection.vue';
 
 const userStore = useUserStore();
@@ -181,9 +180,5 @@ const guitarQuestProgress = computed(() => {
     } else {
         return props.guitarQuestPack.user_progress[userId.value]?.state;
     }
-})
-
-onMounted(() => {
-    console.log(props.courses)
 })
 </script>
