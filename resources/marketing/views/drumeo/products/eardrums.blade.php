@@ -330,6 +330,15 @@
         "noBreadcrumb" => true
     ])
 
+    @if(strpos(url()->full(), 'thankyou'))
+        <div class="py-5 sm:py-7 px-6 text-center bg-green-400">
+            <div class="container mx-auto max-w-xl">
+                <h3 class="leading-tight mb-2"><strong>Thanks for contacting us!</strong></h3>
+                <p class="leading-tight">You’re on the early access list for the next drop of Drumeo EarDrums.<br class="hidden sm:inline"> Keep on eye on your inbox to get yours before anyone else.</p>
+            </div>
+        </div>
+    @endif
+
     @if(!empty($products['drumeo-eardrums-black']->getStockAvailability()))
     @if($products['drumeo-eardrums-black']->getStockAvailability() > 1 && $products['drumeo-eardrums-black']->getStockAvailability() < 100)
         <a class="promo-banner fixed flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">
@@ -819,7 +828,8 @@
                     "formId" => "Drumeo - Engagement - Trigger - Eardrums Waitlist - Web Form",
                     "buttonText" => "Let Me Know ",
                     "stacked" => true,
-                    "noSocial" => true,
+                    "redirectURL" => "/drumshop/eardrums?thankyou",
+                    "minimalForm" => true
                 ])
             </div>
         @endslot
