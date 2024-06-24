@@ -127,7 +127,7 @@ class ContentMetadataTest extends TestCase
             route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
         );
         $response->assertOk();
-        $expectedJson = [$content->id => ProgressState::NotStarted->value];
+        $expectedJson = [$content->id => ['state' => ProgressState::NotStarted->value, 'percent' => 0]];
         $response->assertJson($expectedJson);
     }
 
@@ -138,19 +138,21 @@ class ContentMetadataTest extends TestCase
             route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
         );
         $response->assertOk();
-        $expectedJson = [$content->id => ProgressState::NotStarted->value];
+        $expectedJson = [$content->id => ['state' => ProgressState::NotStarted->value, 'percent' => 0]];
         $response->assertJson($expectedJson);
     }
 
     public function test_content_user_progress_returns_started_when_user_has_not_completed()
     {
         $content = Content::factory()->create();
-        $this->createContentProgress($content, false);
+        $progress = $this->createContentProgress($content, false);
+        $progress->progress_percent = 25;
+        $progress->save();
         $response = $this->getJson(
             route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
         );
         $response->assertOk();
-        $expectedJson = [$content->id => ProgressState::Started->value];
+        $expectedJson = [$content->id => ['state' => ProgressState::Started->value, 'percent' => 25]];
         $response->assertJson($expectedJson);
     }
 
@@ -162,7 +164,7 @@ class ContentMetadataTest extends TestCase
             route('content.user_progress', ['content' => $content->id, 'user' => $this->user->id]),
         );
         $response->assertOk();
-        $expectedJson = [$content->id => ProgressState::Completed->value];
+        $expectedJson = [$content->id => ['state' => ProgressState::Completed->value, 'percent' => 100]];
         $response->assertJson($expectedJson);
     }
 
@@ -174,7 +176,7 @@ class ContentMetadataTest extends TestCase
             route('content.user_progress', ['content' => $content->id]),
         );
         $response->assertOk();
-        $expectedJson = [$content->id => ProgressState::Completed->value];
+        $expectedJson = [$content->id => ['state' => ProgressState::Completed->value, 'percent' => 100]];
         $response->assertJson($expectedJson);
     }
 
@@ -191,7 +193,7 @@ class ContentMetadataTest extends TestCase
         $response->assertJson($expectedJson);
     }
 
-    private function createContentProgress(Content $content, bool $isCompleted): void
+    private function createContentProgress(Content $content, bool $isCompleted): ContentUserProgress
     {
         $progress = new ContentUserProgress([
             'content_id' => $content->id,
@@ -205,5 +207,6 @@ class ContentMetadataTest extends TestCase
             $progress->completed_on = now();
         }
         $progress->save();
+        return $progress;
     }
 }
