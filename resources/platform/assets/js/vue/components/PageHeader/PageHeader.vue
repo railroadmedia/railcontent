@@ -1,13 +1,13 @@
 <template>
   <PageHeaderLayout>
     <template #top-left>
-      <PageHeaderHero 
+      <PageHeaderHero
         :pageType="pageType"
-        :iconName="iconName" 
-        :title="title" 
-        :subTitle="subTitle" 
+        :iconName="iconName"
+        :title="title"
+        :subTitle="subTitle"
         :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" 
+        :heroImgClasses="heroImgClasses"
         :additionalImgSrc="logo"
         :infoData="isSongsPage || isPlaylistsPage ? null : infoData"
       >
@@ -44,8 +44,7 @@
             <span class="tw-uppercase">{{ songsPageLink.text }}</span>
             <i class="fa-solid fa-chevron-right tw-ml-1"></i>
           </a>
-          <PageHeaderCtasBox v-if="ctas && ctas.length" :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
-            :ctas="secondaryCtas" />
+          <PageHeaderCtasBox v-if="ctas && ctas.length" :ctas="secondaryCtas" />
         </div>
       </div>
       <PageHeaderProgressBar v-if="progress" :progress="progress" class="tw-mt-4">
@@ -70,7 +69,7 @@ import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
 const props = defineProps({
   pageType: String,
-  contentId: String,
+  contentId: [String, Number],
   iconName: String,
   title: String,
   subTitle: String,
