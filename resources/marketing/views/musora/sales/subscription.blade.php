@@ -166,14 +166,25 @@
             opacity:1 !important;
         }
 
+
         @media (min-width:768px) {
             .splide__pagination__page {
                 margin:3px 6px !important;
             }
         }
 
+        @media (max-width: 767px) {
+            ul.splide__pagination li:nth-child(n+7) {
+                display: none;
+            }
+        }
+
         .splide__arrow svg {
             fill:#FFAE00 !important;
+        }
+
+        .splide__arrow--prev.testimonial-arrow--prev svg {
+            fill: #FFFFFF !important;
         }
 
         .dot {
@@ -194,6 +205,7 @@
             .full-line {
                 bottom:0;
             }
+            
         }
         .join.musora {
             background-color:#FFAE00;
@@ -309,13 +321,14 @@
             }
         }
 
-
         .rotater-text span {
             animation: move 25s infinite;
             background: -webkit-linear-gradient(20deg, #980353, #003285, #00B59F);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
+
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -332,6 +345,10 @@
         trailer: false,
         lazyLoad: false,
         videoLoaded: false,
+        loadAlternateSrc: function(src) {
+        this.$refs.testimonialVideo.src = src;
+    },
+    testimonialVideo: false,
     }'
 @endsection
 
@@ -425,9 +442,9 @@
     ])
 
     @php
-        $testimonials = $musora['testimonials'];
+        $testimonials = $musora['testimonialsVideo'];
     @endphp
-    @include('musora.sales.components.testimonials-section', [
+    @include('musora.sales.components.testimonials-section-video', [
         'header' => 'Where musical<br class="hidden sm:inline"> dreams come true.',
     ])
 
@@ -506,6 +523,7 @@
         'video' => '785314424',
         'vimeo' => true,
     ])
+
 
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
