@@ -24,21 +24,47 @@ return new class () extends Migration {
                 $coldStartTableName = $tableName . '_beginner_items';
 
                 if (Schema::hasTable($tableName)) {
-                    Schema::table($tableName, function (Blueprint $table) {
-                        $table->index('user_id', 'user_id_index');
-                        $table->index('content_id', 'content_id_index');
-                        $table->index('recommendation_rank', 'recommendation_rank_index');
-                        $table->index(['user_id', 'recommendation_rank'], 'user_id_rec_rank_index');
-                    });
+                    // SQLite doesn't support multiple calls to dropColumn / renameColumn in a single modification
+                    if (Schema::getConnection()->getDriverName() === "sqlite") {
+                        $this->addIndexesSqlite($tableName, $coldStartTableName);
+                    } else {
+                        Schema::table($tableName, function (Blueprint $table) {
+                            $table->index('user_id', 'user_id_index');
+                            $table->index('content_id', 'content_id_index');
+                            $table->index('recommendation_rank', 'recommendation_rank_index');
+                            $table->index(['user_id', 'recommendation_rank'], 'user_id_rec_rank_index');
+                        });
 
-                    Schema::table($coldStartTableName, function (Blueprint $table) {
-                        $table->index('content_id', 'content_id_index');
-                        $table->index('rank', 'rank_index');
-                        $table->index(['content_id', 'rank'], 'user_id_rec_rank_index');
-                    });
+                        Schema::table($coldStartTableName, function (Blueprint $table) {
+                            $table->index('content_id', 'content_id_index');
+                            $table->index('rank', 'rank_index');
+                            $table->index(['content_id', 'rank'], 'user_id_rec_rank_index');
+                        });
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Run the migrations (separated out for SQLite support)
+     * SQLite fails for the index name already in use, so just use Laravel's generated name instead of
+     * specifying one.
+     */
+    private function addIndexesSqlite(string $tableName, string $coldStartTableName): void
+    {
+        Schema::table($tableName, function (Blueprint $table) {
+            $table->index('user_id');
+            $table->index('content_id');
+            $table->index('recommendation_rank');
+            $table->index(['user_id', 'recommendation_rank']);
+        });
+
+        Schema::table($coldStartTableName, function (Blueprint $table) {
+            $table->index('content_id');
+            $table->index('rank');
+            $table->index(['content_id', 'rank']);
+        });
     }
 
 

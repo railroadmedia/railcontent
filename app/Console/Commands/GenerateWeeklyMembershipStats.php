@@ -48,8 +48,10 @@ class GenerateWeeklyMembershipStats extends Command
 
         // Default to generating the last 2 weeks of data
         $startDate = !empty($startDate) ?
-            Carbon::parse($startDate)->startOfWeek(1) : Carbon::now()->startOfWeek(1)->subWeek();
-        $endDate = !empty($endDate) ? Carbon::parse($endDate)->endOfWeek(1) : Carbon::now()->endOfWeek(1)->subWeek();
+            Carbon::parse($startDate)->startOfWeek() : Carbon::now()->startOfWeek()->subWeek();
+        $endDate = !empty($endDate) ? Carbon::parse($endDate)->endOfWeek() : Carbon::now()->endOfWeek()->subWeek();
+
+        $this->info('$startDate: ' . $startDate->toDateTimeString() . ' - $endDate: ' . $endDate->toDateTimeString());
 
         $dateIncrement = $startDate->clone();
 
@@ -65,8 +67,16 @@ class GenerateWeeklyMembershipStats extends Command
             $lifetimeMembershipPermissionIds
         );
 
-        while ($dateIncrement <= $endDate) {
+        while ($dateIncrement < $endDate) {
+            $this->info(
+                '$dateIncrement: ' . $dateIncrement->toDateTimeString() . ' - $endDate: ' . $endDate->toDateTimeString()
+            );
+
             $dateIncrementEndOfWeek = $dateIncrement->copy()->endOfWeek();
+            $this->info(
+                '$dateIncrement: ' . $dateIncrement->toDateTimeString(
+                ) . ' - $dateIncrementEndOfWeek: ' . $dateIncrementEndOfWeek->toDateTimeString()
+            );
 
             $this->info(
                 'Processing weekly stats for date: ' . $dateIncrement->toDateTimeString(
@@ -89,10 +99,13 @@ class GenerateWeeklyMembershipStats extends Command
                         'membership_expiration_date',
                     ]
                 )
-                ->leftJoin('user_access_permissions', function (JoinClause $joinClause) use ($allMembershipPermissionIds) {
-                    $joinClause->on('usora_users.id', '=', 'user_access_permissions.user_id')
-                        ->whereIn('user_access_permissions.permission_id', $allMembershipPermissionIds);
-                })
+                ->leftJoin(
+                    'user_access_permissions',
+                    function (JoinClause $joinClause) use ($allMembershipPermissionIds) {
+                        $joinClause->on('usora_users.id', '=', 'user_access_permissions.user_id')
+                            ->whereIn('user_access_permissions.permission_id', $allMembershipPermissionIds);
+                    }
+                )
                 ->where(
                     function (Builder $query) use (
                         $dateIncrementEndOfWeek,
@@ -157,6 +170,7 @@ class GenerateWeeklyMembershipStats extends Command
                             ->groupBy('user_id');
 
                         // user progress rows
+                        $t1 = microtime(true);
                         $usersProgressRowsGroupedByUserId = DB::connection('musora_laravel_mysql')
                             ->table('railcontent_user_content_progress')
                             ->join(
@@ -172,9 +186,12 @@ class GenerateWeeklyMembershipStats extends Command
                                     DB::raw('COUNT(railcontent_user_content_progress.id) as count')
                                 ]
                             )
-                            ->whereIn(
-                                'railcontent_user_content_progress.user_id',
-                                $allUserIdsInChunk
+                            ->whereRaw(
+                                'railcontent_user_content_progress.user_id IN (' . implode(
+                                    ',',
+                                    $allUserIdsInChunk->toArray()
+                                ) . ')',
+
                             )
                             ->whereIn('railcontent_content.brand', $brands)
                             ->where(function (Builder $builder) use ($dateIncrement, $dateIncrementEndOfWeek) {
@@ -183,17 +200,28 @@ class GenerateWeeklyMembershipStats extends Command
                                         $builder->whereRaw("started_on >= '$dateIncrement'")
                                             ->whereRaw("started_on <= '$dateIncrementEndOfWeek'");
                                     }
-                                )->orWhere(function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
-                                    $builder->whereRaw("completed_on >= '$dateIncrement'")
-                                        ->whereRaw("completed_on <= '$dateIncrementEndOfWeek'");
-                                })->orWhere(function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
-                                    $builder->whereRaw("updated_on >= '$dateIncrement'")
-                                        ->whereRaw("updated_on <= '$dateIncrementEndOfWeek'");
-                                });
+                                )
+                                    ->orWhere(
+                                        function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                                            $builder->whereRaw("completed_on >= '$dateIncrement'")
+                                                ->whereRaw("completed_on <= '$dateIncrementEndOfWeek'");
+                                        }
+                                    )->orWhere(
+                                        function (Builder $builder) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                                            $builder->whereRaw("updated_on >= '$dateIncrement'")
+                                                ->whereRaw("updated_on <= '$dateIncrementEndOfWeek'");
+                                        }
+                                    );
                             })
-                            ->groupBy(['railcontent_user_content_progress.user_id', 'brand'])
-                            ->get()
-                            ->groupBy('user_id');
+                            ->groupBy(['railcontent_user_content_progress.user_id', 'brand']);
+
+//                        $this->info($usersProgressRowsGroupedByUserId->toSql());
+
+                        $usersProgressRowsGroupedByUserId = $usersProgressRowsGroupedByUserId->get()->groupBy(
+                            'user_id'
+                        );
+
+                        $this->info('Query 1 time: ' . (microtime(true) - $t1));
 
                         // active rows
                         $activeUserIds = collect(
@@ -219,8 +247,14 @@ UNION (SELECT DISTINCT(liker_id) as user_id FROM guitareo_laravel.forum_post_lik
 UNION (SELECT DISTINCT(author_id) as user_id FROM singeo_laravel.forum_posts WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
 UNION (SELECT DISTINCT(author_id) as user_id FROM singeo_laravel.forum_threads WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
 UNION (SELECT DISTINCT(liker_id) as user_id FROM singeo_laravel.forum_post_likes WHERE created_at >= '$dateIncrement' AND created_at <= '$dateIncrementEndOfWeek' GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_user_content_progress WHERE updated_on >= '$dateIncrement' AND updated_on <= '$dateIncrementEndOfWeek' AND user_id IN (" . implode(',', $allUserIdsInChunk->toArray()) . ") GROUP BY user_id)
-UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_user_content_progress WHERE started_on >= '$dateIncrement' AND started_on <= '$dateIncrementEndOfWeek' AND user_id IN (" . implode(',', $allUserIdsInChunk->toArray()) . ") GROUP BY user_id)
+UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_user_content_progress WHERE updated_on >= '$dateIncrement' AND updated_on <= '$dateIncrementEndOfWeek' AND user_id IN (" . implode(
+                                    ',',
+                                    $allUserIdsInChunk->toArray()
+                                ) . "))
+UNION (SELECT DISTINCT(user_id) as user_id FROM musora_laravel.railcontent_user_content_progress WHERE started_on >= '$dateIncrement' AND started_on <= '$dateIncrementEndOfWeek' AND user_id IN (" . implode(
+                                    ',',
+                                    $allUserIdsInChunk->toArray()
+                                ) . "))
 ) as user_e_days
 WHERE user_id IN (" . implode(',', $allUserIdsInChunk->toArray()) . ")
 GROUP BY user_id
