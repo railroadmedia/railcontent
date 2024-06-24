@@ -513,7 +513,7 @@ return [
         [
             'path' => '/customer-io/submit-email-form-rc',
             'method' => 'post',
-            'form_name' => 'Eardrums Waitlist',
+            'form_name' => 'EarDrums Waitlist',
             'brand' => 'drumeo',
 
             'input_data_map' => [
