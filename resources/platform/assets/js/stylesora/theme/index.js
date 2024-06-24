@@ -91,6 +91,10 @@ module.exports = {
       page: "var(--color-ui-page)", 
       navigation: "var(--color-ui-navigation)", 
       border: "var(--color-ui-border)", 
+      button: {
+        bg: "var(--color-ui-button-bg)",
+        text:"var(--color-ui-button-text)"
+      }
     }
   },
   //FONT SIZES
