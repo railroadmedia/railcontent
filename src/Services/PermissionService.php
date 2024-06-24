@@ -169,4 +169,13 @@ class PermissionService
 
         return $this->permissionRepository->delete($id) > 0;
     }
+
+    public static function getMemberShipPermissionIds() : array
+    {
+        // 1 - Drumeo Edge
+        // 77 - Pianote Membership
+        // 73 - Singeo Membership
+        // 52 - Guitareo Membership
+        return [1, 52, 73, 77,];
+    }
 }

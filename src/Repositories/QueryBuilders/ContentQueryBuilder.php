@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\PermissionService;
 
 class ContentQueryBuilder extends QueryBuilder
 {
@@ -630,13 +631,8 @@ class ContentQueryBuilder extends QueryBuilder
         // A member for any brand should get access to all brands membership content.
         // If the contents' permission id is any member one and the users permission id is any member one, show all with
         // the membership content.
-        //
-        // 1 - Drumeo Edge
-        // 77 - Pianote Membership
-        // 73 - Singeo Membership
-        // 52 - Guitareo Membership
 
-        $membershipPermissionIds = [1, 52, 73, 77,];
+        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
 
         $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
             function (JoinClause $join) {
