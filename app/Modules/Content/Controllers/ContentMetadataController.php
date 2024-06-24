@@ -49,8 +49,8 @@ class ContentMetadataController extends Controller
         // @codeCoverageIgnoreEnd
 
         try {
-            $isCompleted = ContentUserProgress::getState($content->id, $user->id);
-            return response()->json([$content->id => $isCompleted->value]);
+            $progressState = ContentUserProgress::getState($content->id, $user->id);
+            return response()->json([$content->id => $progressState->toArray()]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
