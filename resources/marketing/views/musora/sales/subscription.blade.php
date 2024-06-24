@@ -345,10 +345,6 @@
         trailer: false,
         lazyLoad: false,
         videoLoaded: false,
-        loadAlternateSrc: function(src) {
-        this.$refs.testimonialVideo.src = src;
-    },
-    testimonialVideo: false,
     }'
 @endsection
 
