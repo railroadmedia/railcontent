@@ -38,20 +38,17 @@ class ContentUserProgress extends Model
     /**
      * Get the state of the progress for the content and user provided.
      *
+     * @return object{state: ProgressState, percent: int}
      * @throws Exception
      */
-    public static function getState(int $contentId, int $userId): ProgressState
+    public static function getState(int $contentId, int $userId): object
     {
-        /** @var Collection<ContentUserProgress> $progress */
-        $progress = self::where('content_id', $contentId)
+        /** @var Collection<ContentUserProgress> $progressCollection */
+        $progressCollection = self::where('content_id', $contentId)
             ->where('user_id', $userId)
             ->get();
 
-        if ($progress->isEmpty()) {
-            return ProgressState::NotStarted;
-        }
-
-        if ($progress->count() > 1) {
+        if ($progressCollection->count() > 1) {
             throw new Exception(sprintf(
                 'Multiple %s found for Content %s and User %s',
                 class_basename(__CLASS__),
@@ -60,6 +57,28 @@ class ContentUserProgress extends Model
             ));
         }
 
-        return ProgressState::tryFrom($progress->first()->state);
+        return new class ($progressCollection) {
+            public ProgressState $state;
+            public int $percent;
+
+            public function __construct(Collection $progressCollection)
+            {
+                if ($progressCollection->isEmpty()) {
+                    $this->state = ProgressState::NotStarted;
+                    $this->percent = 0;
+                } else {
+                    $this->state = ProgressState::tryFrom($progressCollection->first()->state);
+                    $this->percent = $progressCollection->first()->progress_percent;
+                }
+            }
+
+            public function toArray(): array
+            {
+                return [
+                    'state' => $this->state->value,
+                    'percent' => $this->percent
+                ];
+            }
+        };
     }
 }

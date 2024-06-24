@@ -45,7 +45,7 @@
             type: String,
             default: '#'
         },
-        btnType: {
+        variant: {
             type: String,
             default: 'primary', // default style is primary
             validator: (value) => ['primary', 'secondary'].includes(value)
@@ -69,8 +69,8 @@
         'tw-cursor-not-allowed': props.disabled || props.processing,
         'tw-opacity-50': props.disabled,
         'tw-cursor-pointer': !props.disabled && !props.processing,
-        'tw-btn-primary': props.btnType === 'primary',
-        'tw-btn-secondary': props.btnType === 'secondary',
+        'tw-btn-primary': props.variant === 'primary',
+        'tw-btn-secondary': props.variant === 'secondary',
     }));
 
     //Methods
@@ -87,23 +87,23 @@
     .tw-btn-primary, .tw-btn-secondary {
         line-height: 0;
     }
+    /* Primary Styles */
     .tw-btn-primary {
-        background-color: black; 
-        color: white;
+        background-color: var(--color-ui-button-bg); 
+        color: var(--color-ui-button-text); 
     }
-    body.tw-dark .tw-btn-primary {
-        background-color: white;
-        color: #00101D;
+    .tw-btn-primary:hover {
+        background-color: var(--color-primary-6); 
+        color: var(--color-primary-1); 
     }
-    body.tw-dark .tw-btn-primary:hover {
-        background-color: #223F57;
-        color: white;
-    }
+    /* Secondary Styles */
     .tw-btn-secondary {
-        color: black; 
+        color: var(--color-ui-button-text); 
     }
-    body.tw-dark .tw-btn-secondary {
-        color: white;
+    .tw-btn-secondary:hover {
+        background-color: var(--color-ui-button-bg); 
+        border-color: var(--color-ui-button-bg); 
+        color: var(--color-ui-button-text); 
     }
     body.tw-dark .tw-btn-secondary:hover {
         color: black;
