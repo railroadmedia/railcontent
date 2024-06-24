@@ -80,6 +80,7 @@
   "dependencies": {
     "@musora/icons": "^1.0.6",
     "@parcel/transformer-sass": "^2.12.0",
+    "@rechargeapps/storefront-client": "^1.18.3",
     "@tinymce/tinymce-vue": "^5.1.1",
     "@typeform/embed": "^4.10.0",
     "@vimeo/player": "^2.15.0",
