@@ -18,6 +18,176 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
     <style>
+
+        [placeholder]:focus::-webkit-input-placeholder {
+            color:transparent
+        }
+
+        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
+            color:#777
+        }
+
+        form {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            form {
+                margin: 0 auto 10px;
+            }
+        }
+
+        form input, form button {
+            font: 400 18px/50px 'Open Sans', sans-serif;
+            height: 50px;
+            color: #999;
+            border-radius: 100px;
+            text-align: left;
+            padding: 7px 20px;
+            margin: 0 auto 15px;
+        }
+        @media (min-width: 768px) {
+            form input, form button {
+                font-size: 22px;
+                height: 65px;
+                line-height: 65px;
+            }
+        }
+        form input[type="submit"], form button[type="submit"], form input button, form button button {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #fff;
+            background: #0b76db;
+            text-transform: uppercase;
+            margin: 0 auto 15px;
+            display: block;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            padding: 0;
+        }
+        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
+            background: #258ff4;
+        }
+        .disclaimer {
+            display: none;
+            margin: 0 auto;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .thank-you-box {
+            width:100%;
+            max-width:960px;
+            border-radius:5px;
+            height:auto;
+            max-height:0;
+            visibility:hidden;
+            opacity:0;
+            transition:all .4s ease-in;
+            display:block;
+            margin:0 auto;
+            background:#FFF;
+            text-align:center;
+            overflow:hidden;
+            color:#000
+        }
+
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:15px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box.active {
+                padding:20px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box.active {
+                padding:30px
+            }
+        }
+
+        .thank-you-box p {
+            font:400 15px/1.4em "Open Sans", sans-serif;
+            margin:0 auto
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p {
+                font-size:19px
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box p {
+                font-size:23px
+            }
+        }
+
+        .thank-you-box p em {
+            line-height:1.4em;
+            max-width:550px;
+            display:inline-block;
+            font-size:12px
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box p em {
+                font-size:14px
+            }
+        }
+
+        .thank-you-box h2 {
+            font:700 30px/1em "Bebas Neue", sans-serif;
+            margin:15px auto;
+            text-transform:uppercase;
+            color:#0b76db
+        }
+
+        @media (min-width:40em) {
+            .thank-you-box h2 {
+                font-size:37px;
+                margin:20px auto
+            }
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box h2 {
+                font-size:44px
+            }
+        }
+
+        .thank-you-box .social-media a {
+            background:#000;
+            color:#fff;
+            border-radius:50%;
+            display:inline-block;
+            text-align:center;
+            margin:20px 3px 0;
+            width:50px;
+            height:50px;
+            line-height:50px;
+            font-size:26px
+        }
+
+        @media (min-width:64em) {
+            .thank-you-box .social-media a {
+                width:70px;
+                height:70px;
+                line-height:70px;
+                font-size:35px;
+                margin:25px 10px 0
+            }
+        }
+    </style>
+    <style>
         @-webkit-keyframes fadeEffect {
             0% {
                 opacity: 0;
@@ -144,6 +314,7 @@
 @section('body-data')
     x-data="{
     trailer: false,
+    waitlistModal: false,
     trailerM: false,
     }"
 @endsection
@@ -159,6 +330,25 @@
         "noBreadcrumb" => true
     ])
 
+    @if(strpos(url()->full(), 'thankyou'))
+        <div class="py-5 sm:py-7 px-6 text-center bg-green-400">
+            <div class="container mx-auto max-w-xl">
+                <h3 class="leading-tight mb-2"><strong>Thanks for contacting us!</strong></h3>
+                <p class="leading-tight">You’re on the early access list for the next drop of Drumeo EarDrums.<br class="hidden sm:inline"> Keep on eye on your inbox to get yours before anyone else.</p>
+            </div>
+        </div>
+    @endif
+
+    @if(!empty($products['drumeo-eardrums-black']->getStockAvailability()))
+    @if($products['drumeo-eardrums-black']->getStockAvailability() > 1 && $products['drumeo-eardrums-black']->getStockAvailability() < 100)
+        <a class="promo-banner fixed flex text-black items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] transition-none anchor-slide bg-musora">
+            <h3 class="inline-block font-bebas mx-0 pr-3">LOW STOCK</h3>
+            <p class="inline-block text-xs mx-0 leading-tight">
+                Get yours before they're gone!
+            </p>
+        </a>
+    @endif
+    @endif
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-5xl">
@@ -179,7 +369,7 @@
                     @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
                         <a class="w-5/12 join smaller blue anchor-slide" href="#customize-anchor">Order Now</a>
                     @else
-                        <a class="join smaller sold-out">SOLD OUT</a>
+                        <a class="join smaller sold-out" @click="waitlistModal = true;">JOIN WAITLIST</a>
                     @endif
                 </div>
                 {{--                <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>--}}
@@ -555,55 +745,54 @@
         <div class="container mx-auto relative z-10 max-w-3xl">
             <img alt="quietkick logo" class="h-16 sm:h-24" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/logo-black.png"><br>
             <h6 class="leading-tight mt-4 mb-2">Protect your ears +<br class="sm:hidden"> play your favorite songs.</h6>
+            @if( $products['drumeo-eardrums-black']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums-black']->getStockAvailability()))
+                @include('drumeo.products.partials._promo-cards', [
+                    'firstBadge' => 'SAVE 34%',
+                    'firstDeal' => 'Drumeo<br> EarDrums',
+                    'firstDealImage' =>
+                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
+                    'firstImageHeight' => 'h-28 lg:h-32',
+                    'firstDealDiscount' => 149,
+                    'firstDealPrice' => 99,
+                    'firstDealSub' => 'Just the IEMs',
+                    'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
+                    'firstButtonText' => 'SELECT',
+                    'firstDealExtra' => "One-time payment. Free shipping.",
+                    'whiteBg' => 'false',
+                    'firstExtraBonuses' => [
+                        '<strong>1 Pair of EarDrum IEMs</strong>',
+                        '<strong>30 Days Of Drumeo</strong>',
+                        'Single-layer Silicone Eartips (S/M/L)',
+                        'Triple-layer Silicone Eartips (S/M/L)',
+                        'Memory Foam Eartips (S/M/L)',
+                        'Drumeo Miniature Road Case',
+                        '2 Black Braided Cables',
+                        'Cleaning Brush',
+                        'Clothing Clip',
+                        '¼” Adapter',
+                    ],
 
-            @include('drumeo.products.partials._promo-cards', [
-                'firstBadge' => 'SAVE 34%',
-                'firstDeal' => 'Drumeo<br> EarDrums',
-                'firstDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-01.webp',
-                'firstImageHeight' => 'h-28 lg:h-32',
-                'firstDealDiscount' => 149,
-                'firstDealPrice' => 99,
-                'firstDealSub' => 'Just the IEMs',
-                'firstDealLink' => '/ecommerce/add-to-cart?products[drumeo-eardrums-black]=1&products[drumeo_access_30-days]=1&promo-code=eardrums-shipping&locked=true',
-                'firstButtonText' => 'SELECT',
-                'firstDealExtra' => "One-time payment. Free shipping.",
-                'whiteBg' => 'false',
-                'firstExtraBonuses' => [
-                    '<strong>1 Pair of EarDrum IEMs</strong>',
-                    '<strong>30 Days Of Drumeo</strong>',
-                    'Single-layer Silicone Eartips (S/M/L)',
-                    'Triple-layer Silicone Eartips (S/M/L)',
-                    'Memory Foam Eartips (S/M/L)',
-                    'Drumeo Miniature Road Case',
-                    '2 Black Braided Cables',
-                    'Cleaning Brush',
-                    'Clothing Clip',
-                    '¼” Adapter',
-                ],
-
-                'secondBadge' => 'LAUNCH SPECIAL',
-                'secondDeal' => 'EarDrums + 1 Year<br> Drumeo Membership',
-                'secondDealImage' =>
-                    'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
-                'secondImageHeight' => 'h-28 lg:h-32',
-                'secondDealPrice' => 'Free EarDrums',
-                'secondDealExtra' => "with annual Membership of $240/yr.",
-                'secondButtonText' => 'SELECT',
-                'secondDealLink' =>
-                    '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&promo-code=eardrums-shipping&locked=true',
-                'secondExtraBonuses' => [
-                    '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
-                    '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
-                    'Step-by-Step Lessons',
-                    '6000+ Song Breakdowns',
-                    'Personalized Support',
-                ],
-            ])
-
-
-
-
+                    'secondBadge' => 'LAUNCH SPECIAL',
+                    'secondDeal' => 'EarDrums + 1 Year<br> Drumeo Membership',
+                    'secondDealImage' =>
+                        'https://d21q7xesnoiieh.cloudfront.net/fit-in/570x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/order-02.webp',
+                    'secondImageHeight' => 'h-28 lg:h-32',
+                    'secondDealPrice' => 'Free EarDrums',
+                    'secondDealExtra' => "with annual Membership of $240/yr.",
+                    'secondButtonText' => 'SELECT',
+                    'secondDealLink' =>
+                        '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums-black]=1&promo-code=eardrums-shipping&locked=true',
+                    'secondExtraBonuses' => [
+                        '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
+                        '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
+                        'Step-by-Step Lessons',
+                        '6000+ Song Breakdowns',
+                        'Personalized Support',
+                    ],
+                ])
+            @else
+                <a class="join sold-out my-7"  @click="waitlistModal = true;">JOIN WAITLIST</a>
+            @endif
 
             <h6 class="uppercase mt-6"><strong>For hygienic reasons all <br class="inline sm:hidden"> EarDrum sales are final.</strong></h6>
         </div>
@@ -627,6 +816,24 @@
     </section>
 
 
+    @component('_partials.components.modal', ['name' => 'waitlistModal'])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-md px-4 md:px-5 lg:px-7 py-5 md:py-7 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
+                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
+                    Drumeo EarDrums are back in stock. </p>
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                        "recaptchaKey" => $recaptchaKey,
+                    "formName" => 'EarDrums Waitlist',
+                    "formId" => "Drumeo - Engagement - Trigger - Eardrums Waitlist - Web Form",
+                    "buttonText" => "Let Me Know ",
+                    "stacked" => true,
+                    "redirectURL" => "/drumshop/eardrums?thankyou",
+                    "minimalForm" => true
+                ])
+            </div>
+        @endslot
+    @endcomponent
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '957405443',
