@@ -48,7 +48,9 @@
         </div>
 
         <div x-data="{
+            splideInitialized: false,
             initSplide() {
+                if (this.splideInitialized) return; 
                 new Splide(this.$refs.splide, {
                             classes: {
                                 arrow: 'splide__arrow testimonials-arrow bg-gray-200 opacity-100 shadow-sm h-11 w-11',
@@ -83,6 +85,7 @@
                                 },
                             },
                 }).mount();
+            this.splideInitialized = true;
             }
         }" x-intersect="initSplide()" class="container max-w-6xl relative">
             <div x-ref="splide" class="splide mb-28 md:mb-20">
