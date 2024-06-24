@@ -58,18 +58,18 @@ return new class () extends Migration {
 
                 if (Schema::hasTable($tableName)) {
                     Schema::table($tableName, function (Blueprint $table) {
-                        $table->dropIndex('user_id');
-                        $table->dropIndex('content_id');
-                        $table->dropIndex('recommendation_rank');
-                        $table->dropIndex(['user_id', 'recommendation_rank']);
+                        $table->dropIndex('user_id_index');
+                        $table->dropIndex('content_id_index');
+                        $table->dropIndex('recommendation_rank_index');
+                        $table->dropIndex('user_id_rec_rank_index');
                     });
                 }
 
                 if (Schema::hasTable($coldStartTableName)) {
                     Schema::table($coldStartTableName, function (Blueprint $table) {
-                        $table->dropIndex('content_id');
-                        $table->dropIndex('rank');
-                        $table->dropIndex(['user_id', 'rank']);
+                        $table->dropIndex('content_id_index');
+                        $table->dropIndex('rank_index');
+                        $table->dropIndex('user_id_rec_rank_index');
                     });
                 }
             }
