@@ -20,6 +20,8 @@ class RecommendationService
 {
 
     public AccessMethod $defaultAccessMethod;
+
+    private array $invalidConfigurations;
     private array $RETRY_ERROR_CODES = [503];
 
     public function __construct(
