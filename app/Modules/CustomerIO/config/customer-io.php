@@ -325,6 +325,15 @@ return [
                     'drumeo',
                 ],
             ],
+            'Eardrums Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_eardrums2-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
             'Metronome Notice' => [
