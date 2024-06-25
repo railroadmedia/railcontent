@@ -73,19 +73,24 @@
                             lazyLoad: 'nearby',
                             breakpoints: {
                                 960: {
-                                    perPage: 2,
+                                    perPage: 3,
                                     arrows: true,
+                                    focus: 1,
+                                     drag: 'free',
+                                    gap: '0.3rem',
                                     pagination: false,
                                     padding: '2.5rem',
                                 },
                                 767: {
                                     perPage: 2,
                                     pagination: false,
+                                     drag: 'free',
                                 },
                                 620: {
                                     drag: 'free',
                                     snap: false,
                                     padding: '10px',
+                                    focus: 0,
                                     perPage: 1.5,
                                     pagination: true,
                                     arrows: false,
@@ -99,7 +104,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $index => $testimonial)
-                        <li class="splide__slide flex px-1 min-h-[390px] md:min-h-[500px]">
+                        <li class="splide__slide flex px-1 min-h-[390px] md:min-h-[460px] lg:min-h-[500px]">
                             <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8 relative p-2 pb-5 rounded-xl"
                                 @if (!empty($testimonial['video'])) 
                                     x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;" 
