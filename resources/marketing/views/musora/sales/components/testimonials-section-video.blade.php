@@ -11,7 +11,7 @@
             {{ str_replace(' ', '', $testimonial['name']) }} : false, @endforeach
     }">
 
-    <div class="container mx-auto max-w-6xl mb-12">
+    <div class="container mx-auto max-w-7xl mb-12">
         <h2 class="font-lexend uppercase leading-none"><strong>
                 @if ($theme != 'musora')
                     Trusted by<br class="hidden sm:inline"> {!! $header !!} everywhere.
@@ -62,7 +62,7 @@
                             type: 'loop',
                             drag: false,
                             arrows: false,
-                            gap: '0.7rem',
+                            gap: '0.5rem',
                             pagination: false,
                             perMove: 1,
                             focus: 0,
