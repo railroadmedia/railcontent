@@ -4,11 +4,21 @@ namespace Railroad\Railcontent\Transformers;
 
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
+use Railroad\Railcontent\Services\PermissionService;
 
 class ContentCompiledColumnTransformer
 {
     public static bool $useCompiledColumnForServingData = true;
     public static bool $avoidDuplicates = false;
+
+
+    public function __construct(
+        private UserPermissionsRepository $userPermissionsRepository,
+        private ContentPermissionRepository $contentPermissionRepository
+    )
+    {}
 
     /**
      * @param array|null $contentRows
@@ -30,8 +40,42 @@ class ContentCompiledColumnTransformer
         $fieldKeys = config('railcontent.compiled_column_mapping_field_keys', []);
         $subContentFieldKeys = config('railcontent.compiled_column_mapping_sub_content_field_keys', []);
 
+
+        $contentIds = Arr::pluck($contentRows, 'id');
+        $contentPermissionRows = collect(
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                $contentIds,
+                []));
+        $groupedPermissions = $contentPermissionRows->groupBy('content_id');
+
+        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+        $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
+        // TODO I'm not so sure about this logic here. I think this should be removed. The user should have explicit permission for the content
+//        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
+//        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
+//            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+//        }
+
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
+
+//            $hasAccess = !empty(
+//                array_intersect(
+//                    $userPermissionIds,
+//                    (isset($contentRow['permissions'])) ?
+//                        \Arr::pluck($contentRow['permissions'],'id')
+//                            : []
+//                )
+//                ) && (isset($contentRow['permissions']));
+            $hasAccess = !empty(
+                array_intersect(
+                    $userPermissionIds,
+                    (isset($groupedPermissions[$contentRow['id']])) ?
+                        Arr::pluck($groupedPermissions[$contentRow['id']], 'id') : []
+                )
+                ) && (isset($groupedPermissions[$contentRow['id']]));
+            $contentRow['user_has_access2'] = $hasAccess;
+
 
             if (!is_array($contentRow)) {
                 continue;
@@ -154,7 +198,7 @@ class ContentCompiledColumnTransformer
         return $contentRows;
     }
 
-    public function transformLessons(array $contentRows, array $dataLookup)
+    public function transformLessons(array $contentRows, array $dataLookup, int $maxGroupedByChildren=10)
     {
         $dataKeys = config('railcontent.compiled_column_mapping_data_keys', []);
         $fieldKeys = config('railcontent.compiled_column_mapping_field_keys', []);
@@ -165,7 +209,8 @@ class ContentCompiledColumnTransformer
             $lessonContentIds = explode(',', $lessons);
             $lessonContentIds = array_unique($lessonContentIds);
             $allLessonsCount = count($lessonContentIds);
-            $lessonContentIds = (array_slice($lessonContentIds, 0, 10));
+            //here be danger
+            $lessonContentIds = (array_slice($lessonContentIds, 0, $maxGroupedByChildren));
             $contentRows[$contentRowIndex]['all_lessons_count'] = $contentRow['lessonsCount'] ?? $allLessonsCount;
 
             if (empty($lessonContentIds)) {
