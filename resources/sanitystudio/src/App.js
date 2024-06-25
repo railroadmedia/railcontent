@@ -4,9 +4,12 @@ import {RobotIcon, RocketIcon} from '@sanity/icons'
 import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
+ import {openaiImageAsset} from 'sanity-plugin-asset-source-openai';
+import {assist} from '@sanity/assist';
 import DifficultyInput from './components/DifficultyInput'; // Import the custom component
 import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import the custom component
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
+import OpenAIFetchSongDetails from './components/OpenAIFetchSongDetails';
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
@@ -19,6 +22,7 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
+    OpenAIFetchSongDetails: OpenAIFetchSongDetails,
 };
 
 const icons = {
@@ -88,8 +92,12 @@ function App() {
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
                     plugins: [
-                      structureTool({ defaultDocumentNode }), 
-                      visionTool()
+                      structureTool({ defaultDocumentNode }),
+                      visionTool(),
+                        openaiImageAsset({
+                            API_KEY:"sk-proj-67J17Z91oSK5uJ36y8RyT3BlbkFJ4LzgX2eNYY2q3jx7rk94"
+                        }),
+                        assist(),
                     ],
                     document: {
                         actions: (prev) =>
