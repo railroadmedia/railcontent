@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Railroad\Railcontent\Events\ContentCreated;
+use Railroad\Railcontent\Services\PermissionService;
 
 class SanityStudioCMSController extends BaseController
 {
@@ -95,42 +96,51 @@ class SanityStudioCMSController extends BaseController
         return $duration;
     }
 
-    public function getLastContent(Request $request): Content
+    public function getLastContent(Request $request): array|Content
     {
-        $content = Content::query()
-            ->where('type', '=', 'song')
-            ->where('slug', '=', $request->get('slug')['current'])
-            ->first();
+        if($request->get('_type') == 'song') {
+            $content = Content::query()
+                ->where('type', '=', 'song')
+                ->where('slug', '=', $request->get('slug')['current'])
+                ->first();
 
-        if (!$content) {
-            $content = new Content();
-            $content->type = $request->get('_type');
-            $content->slug = $request->has('slug') ? $request->get('slug')['current'] : null;
-            $content->language = 'en-US';
-            $content->created_on = Carbon::now()->toDateTimeString();
+            if (!$content) {
+                $content             = new Content();
+                $content->type       = $request->get('_type');
+                $content->slug       = $request->has('slug') ? $request->get('slug')['current'] : null;
+                $content->language   = 'en-US';
+                $content->created_on = Carbon::now()->toDateTimeString();
+                $content->status     = 'published';
+                $content->brand      = $request->get('brand');
+
+                $content->save();
+            }
+
             $content->status = 'published';
-            $content->brand = $request->get('brand');
+            $content->brand  = $request->get('brand');
+            $content->setTitle($request->get('title'));
+            $content->setDifficulty($request->get('difficulty'));
+            $content->setXP($request->get('xp'));
+            $content->setReleased($request->get('released'));
+            $content->setAlbum($request->get('album'));
 
             $content->save();
+
+            event(new ContentCreated($content->id));
+
+            $content = Content::query()
+                ->where('type', '=', 'song')
+                ->where('slug', '=', $request->get('slug')['current'])
+                ->first();
+
+            return $content;
+        }elseif ($request->get('_type') === 'permission'){
+            $permissionService = app()->make(PermissionService::class);
+            $permission = $permissionService->getByName($request->get('name'));
+            if(!$permission){
+                $permission = $permissionService->create($request->get('name'), $request->get('brand'));
+            }
+            return $permission;
         }
-
-        $content->status = 'published';
-        $content->brand = $request->get('brand');
-        $content->setTitle($request->get('title'));
-        $content->setDifficulty($request->get('difficulty'));
-        $content->setXP($request->get('xp'));
-        $content->setReleased($request->get('released'));
-        $content->setAlbum($request->get('album'));
-
-        $content->save();
-
-        event(new ContentCreated($content->id));
-
-        $content = Content::query()
-            ->where('type', '=', 'song')
-            ->where('slug', '=', $request->get('slug')['current'])
-            ->first();
-
-        return $content;
     }
 }

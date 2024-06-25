@@ -30,7 +30,7 @@ const SoundsliceSlugInput = React.forwardRef((props, ref) => {
             console.log('SoundsliceSlug Soundslice KEY:', soundsliceEntries, soundsliceKey, window.sanityConfig.appUrl);
 
             if (newValue) {
-                const url = window.sanityConfig.appUrl+`/admin/soundslice?slug=${newValue}`;
+                const url = window.sanityConfig[0].appUrl+`/admin/soundslice?slug=${newValue}`;
 
                 fetch(url, {
                     method: 'GET',

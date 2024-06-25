@@ -38,7 +38,10 @@ class Song extends BaseSanityModel
         $blockList = new Block();
 
         $fields = [
-            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"),
+            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()"
+               // ,inputComponent: 'OpenAIFetchSongDetails'
+            ),
+          //  new Field(FieldType::Object, 'fetchDetails', 'OpenAI suggestions', inputComponent: 'OpenAIFetchSongDetails'),
             new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique'=>'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title,"),
             new BrandField(),
             new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD ']),
