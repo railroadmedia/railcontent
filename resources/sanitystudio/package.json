@@ -5,6 +5,7 @@
   "dependencies": {
     "@sanity/assist": "^3.0.4",
     "@sanity/client": "^6.19.1",
+    "@sanity/embeddings-index-cli": "^1.0.10",
     "@sanity/icons": "^3.2.0",
     "@sanity/vision": "^3.45.0",
     "@testing-library/dom": "^10.1.0",
