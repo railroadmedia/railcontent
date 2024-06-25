@@ -78,12 +78,12 @@
                                     focus: 1,
                                      drag: 'free',
                                     gap: '0.3rem',
-                                    pagination: false,
+                                    pagination: true,
                                     padding: '2.5rem',
                                 },
                                 767: {
                                     perPage: 2,
-                                    pagination: false,
+                                    pagination: true,
                                      drag: 'free',
                                 },
                                 620: {
