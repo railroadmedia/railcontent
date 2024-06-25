@@ -80,7 +80,7 @@
                                 },
                                 767: {
                                     perPage: 2,
-                                    pagination: true,
+                                    pagination: false,
                                 },
                                 620: {
                                     drag: 'free',
