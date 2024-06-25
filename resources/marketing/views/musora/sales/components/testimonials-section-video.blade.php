@@ -53,69 +53,78 @@
                 if (this.splideInitialized) return; 
                 new Splide(this.$refs.splide, {
                             classes: {
-                                arrow: 'splide__arrow testimonials-arrow bg-gray-200 opacity-100 shadow-sm h-11 w-11',
-                                arrows: 'splide__arrows absolute -bottom-2 right-1/2 md:right-0 md:mr-14', 
-                                next: 'splide__arrow--next testimonial-arrow--next left-1 md:-left-4',
-                                prev: 'splide__arrow--prev testimonial-arrow--prev -left-12 md:-left-32',
-                                pagination: 'splide__pagination hidden md:inline -bottom-10',
+                                arrow: 'splide__arrow bg-white opacity-100 bottom-0 transform -translate-y-1/2 shadow-lg h-11 w-11',
+                                prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
+                                pagination: 'splide__pagination md:inline -bottom-10',
                             },
-                            perPage: 3.5,
+                            perPage: 4,
                             type: 'loop',
-                            gap: '1rem',
-                            pagination: true,
+                            drag: false,
+                            arrows: false,
+                            gap: '0.7rem',
+                            pagination: false,
                             perMove: 1,
                             focus: 0,
-                            autoplay: true,
+                            autoplay: false,
                             pauseOnHover: true,
                             pauseOnFocus: true,
                             interval: 5000,
                             lazyLoad: 'nearby',
                             breakpoints: {
-                                1020: {
-                                    perPage: 2.5,
+                                960: {
+                                    perPage: 2,
+                                    arrows: true,
+                                    pagination: false,
+                                    padding: '2.5rem',
                                 },
                                 767: {
                                     perPage: 2,
+                                    pagination: true,
                                 },
                                 620: {
                                     drag: 'free',
                                     snap: false,
                                     padding: '10px',
                                     perPage: 1.5,
+                                    pagination: true,
+                                    arrows: false,
                                 },
                             },
                 }).mount();
             this.splideInitialized = true;
             }
-        }" x-intersect="initSplide()" class="container max-w-6xl relative">
+        }" x-intersect="initSplide()" class="container max-w-7xl relative">
             <div x-ref="splide" class="splide mb-28 md:mb-20">
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $index => $testimonial)
-                            <li class="splide__slide flex px-1 min-h-[300px] sm:min-h-[400px] md:min-h-[500px]">
-                                <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8 relative p-2 pb-5 rounded-xl"
-                                    @if (!empty($testimonial['video'])) 
-                                        x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;" 
-                                    @endif
-                                    style="background: linear-gradient(to top, #000, transparent), url('{{ $testimonial['avatar'] }}'); background-size: cover; background-position: center;">
-                                    <i class="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if (!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-2xl text-white border-2 border-white px-5 md:px-8 py-3 md:py-6 rounded-full bg-[#0009] hover:opacity-80 z-10"></i>
-                                    <div class="absolute bottom-0 left-0 right-0 px-4 sm:px-5 pb-5 sm:pb-7 pt-10 flex items-start rounded-b-xl" style="background:linear-gradient(to top, #000, transparent);">
-                                        <div class="pl-3">
-                                            <div class="flex flex-col justify-evenly text-left">
-                                                <p class="leading-normal text-xs mt-3 sm:mt-0 mb-2 text-white">
-                                                    <em>{!! $testimonial['title'] !!}</em>
+                        <li class="splide__slide flex px-1 min-h-[390px] md:min-h-[500px]">
+                            <div class="flex flex-wrap items-start w-full sm:px-3 mb-5 sm:mb-8 relative p-2 pb-5 rounded-xl"
+                                @if (!empty($testimonial['video'])) 
+                                    x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;" 
+                                @endif
+                                style="background: linear-gradient(to top, #000, transparent), url('{{ $testimonial['avatar'] }}'); background-size: cover; background-position: center;">
+                                <i class="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if (!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-2xl text-white border-2 border-white px-5 md:px-8 py-3 md:py-6 rounded-full bg-[#0009] hover:opacity-80 z-10"></i>
+                                <div class="absolute bottom-0 left-0 right-0 px-3 sm:px-5 pb-4 sm:pb-7 flex items-end rounded-b-xl" style="background:linear-gradient(to top, #000, transparent);">
+                                    <div class="flex flex-col justify-between text-left">
+                                        <div>
+                                            <p class="leading-normal text-xs mt-3 sm:mt-0 mb-2 lg:mb-4 text-white">
+                                                <em>{!! $testimonial['title'] !!}</em>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="leading-tight mx-0 text-white">{{ $testimonial['name'] }}</p>
+                                            @if (!empty($testimonial['location']))
+                                                <p class="leading-tight mx-0 text-sm text-musora">
+                                                    <em>{{ $testimonial['location'] }}</em>
                                                 </p>
-                                                <p class="leading-tight mx-0 text-white">{{ $testimonial['name'] }}</p>
-                                                @if (!empty($testimonial['location']))
-                                                    <p class="leading-tight mx-0 text-sm text-musora">
-                                                        <em>{{ $testimonial['location'] }}</em>
-                                                    </p>
-                                                @endif
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </div>
+                        </li>
                         @endforeach
                     </ul>
                 </div>
