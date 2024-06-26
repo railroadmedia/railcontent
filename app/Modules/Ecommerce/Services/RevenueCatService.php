@@ -231,14 +231,10 @@ class RevenueCatService
         $user->save();
     }
 
-    /**
-     * @param $productId1
-     * @return string
-     */
-    public function getProductId($productId1): string
+    public function getProductId(string $productId1): string
     {
         $productId = $productId1;
-        if (strpos($productId, ':') !== false) {
+        if (str_contains($productId, ':')) {
             $productIds = explode(':', $productId);
             //starting with 2024 the new Google products name have the format: 'musora_subscription:annual-plus' and 'musora_subscription:monthly-plus'
             if (isset($productIds[1]) && !in_array($productIds[1], ['annual-plus', 'monthly-plus'])) {
