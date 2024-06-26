@@ -71,11 +71,14 @@
 
             <div class="tw-flex tw-flex-col tw-w-full ">
 
+                {{-- Account Title --}}
                 <div class="tw-flex tw-flex-row tw-flex-auto pa-3 tw-pb-3">
                     <h1 class="tw-text-2xl tw-font-bold dark:tw-text-white tw-text-[#00101D]">
                         Account Details
                     </h1>
                 </div>
+
+                {{-- ================================= Owned products ================================= --}}
 
                 @if($membershipLevel !== 'none')
                     <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
@@ -120,7 +123,21 @@
 
                 @endif
 
+
+                {{-- ============================================================================================= --}}
+                {{-- ================================= Subscription Info Section ================================= --}}
+                {{-- ============================================================================================= --}}
+
                 <div class="tw-flex tw-flex-col pa-3" id="rcPortalContainer">
+                    {{-- TEMPORARY MESSAGE --}}
+                    {{-- <div class="tw-full tw-flex tw-p-4 tw-mb-4 tw-rounded-lg tw-bg-red-100 tw-text-red-800 tw-font-semibold">
+                        <p>
+                            Hello! 👋 We are doing a quick systems update today that will impact this page. For help with managing
+                            your subscription in the interim, please <a href="/{{$brand}}/support#contactPageApp" class="tw-underline tw-text-current">contact our support team</a>!
+                        </p>
+                    </div> --}}
+
+                    {{-- Recharge iFrame --}}
                     <iframe id="rcPortal"
                             src=""
                             width=100% height=850px>
@@ -131,6 +148,7 @@
         </div>
     </div>
 
+    {{-- =================================  Legacy Video Player Form ================================= --}}
 
     <form id="legacy-form" method="POST" action="{{ url()->route('user_management_system.user.update', ['id' => user()->id ])}}">
         {{ method_field('PATCH') }}
@@ -143,6 +161,7 @@
                 Our video player may have compatibility issues with older devices and operating systems. We recommend
                 switching to our legacy video player if you are experiencing playback issues.
             </p>
+            {{-- Legacy Player Toggle --}}
             <div class="tw-flex tw-flex-row tw-mt-3">
                 @include('partials.bladesora.members.inputs.toggle-input', [
                     "inputID" => "useLegacyPlayer",
