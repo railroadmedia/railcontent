@@ -2447,7 +2447,8 @@ return [
             'subcription_date',
             'completed_workouts',
             'branches',
-            'features'
+            'features',
+            'show_onboarding'
         ],
 
         'quick-tips' => [
@@ -5538,7 +5539,8 @@ return [
             'is_enrolled_into_cohort',
             'completed_workouts',
             'branches',
-            'features'
+            'features',
+            'show_onboarding'
         ],
 
         'quick-tips' => [
