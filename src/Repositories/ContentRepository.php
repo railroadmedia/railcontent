@@ -49,6 +49,8 @@ class ContentRepository extends RepositoryBase
      */
     public static $bypassPermissions = false;
 
+    public static $allowsPullSongsContent = false;
+
     public static $catalogMetaAllowableFilters = null;
     public static $pullFilterResultsOptionsAndCount = true;
     public static $countFilterOptionItems = false;

@@ -176,6 +176,13 @@ class PermissionService
         // 77 - Pianote Membership
         // 73 - Singeo Membership
         // 52 - Guitareo Membership
-        return [1, 52, 73, 77,];
+        // 91 - Musora Basic Membership
+        return [1, 52, 73, 77, 91];
     }
+
+    public static function getPlusMembershipPermissionsIds(): array
+    {
+        return [92];
+    }
+
 }

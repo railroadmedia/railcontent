@@ -59,14 +59,6 @@ class ContentCompiledColumnTransformer
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
 
-//            $hasAccess = !empty(
-//                array_intersect(
-//                    $userPermissionIds,
-//                    (isset($contentRow['permissions'])) ?
-//                        \Arr::pluck($contentRow['permissions'],'id')
-//                            : []
-//                )
-//                ) && (isset($contentRow['permissions']));
             $hasAccess = !empty(
                 array_intersect(
                     $userPermissionIds,
@@ -74,7 +66,8 @@ class ContentCompiledColumnTransformer
                         Arr::pluck($groupedPermissions[$contentRow['id']], 'id') : []
                 )
                 ) && (isset($groupedPermissions[$contentRow['id']]));
-            $contentRow['user_has_access2'] = $hasAccess;
+            //TODO double check on naming.
+            $contentRow['user_has_access'] = $hasAccess;
 
 
             if (!is_array($contentRow)) {

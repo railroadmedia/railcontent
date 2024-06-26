@@ -7,6 +7,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Models\Content;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -634,6 +635,14 @@ class ContentQueryBuilder extends QueryBuilder
 
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
 
+        $user = user();
+        if (ContentRepository::$allowsPullSongsContent && ($user?->isBasicMember() ?? false)) {
+            //
+            $membershipPermissionIds = array_merge($membershipPermissionIds, PermissionService::getPlusMembershipPermissionsIds());
+        }
+
+
+
         $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
             function (JoinClause $join) {
                 $join->on(
@@ -650,7 +659,7 @@ class ContentQueryBuilder extends QueryBuilder
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
-                            ->where('user_id', auth()->id() ?? null)
+                            ->where('user_id', $user?->id ?? null)
                             ->where(function (Builder $builder) use ($membershipPermissionIds) {
                                 return $builder
                                     ->whereRaw(
@@ -695,7 +704,8 @@ class ContentQueryBuilder extends QueryBuilder
                 }
                 return $newBuilder;
             });
-
+        // I think we
+        //$this->addSelect()
         return $this;
     }
 
