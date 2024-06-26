@@ -269,7 +269,7 @@ class RevenueCatController extends Controller
                     $children = [
                         new SubscriptionExpiredEventTrackingJob($data),
                     ];
-                    dispatch(new WebhookJob('Recharge-subscription-expired', $id, $data, $children));
+                    dispatch(new WebhookJob('RevenueCat-subscription-expired', $id, $data, $children));
                 } catch (Throwable $th) {
                     Log::error(
                         'RevenueCatController processNotification::EXPIRATION - ' . $th->getMessage()
