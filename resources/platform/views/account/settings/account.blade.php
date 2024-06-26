@@ -1,3 +1,4 @@
+@php use App\Http\Controllers\Platform\ProfileSettingsPagesController; @endphp
 @extends('partials.layout')
 
 @section('meta')
