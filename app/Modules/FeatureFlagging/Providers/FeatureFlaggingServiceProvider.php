@@ -25,6 +25,7 @@ use Modules\FeatureFlagging\Console\Commands\EnableFeature;
 use Modules\FeatureFlagging\Console\Commands\ShowExperiments;
 use Modules\FeatureFlagging\Console\Commands\ShowFeatures;
 use Modules\FeatureFlagging\Console\Commands\ToggleExperiment;
+use Modules\FeatureFlagging\Console\Commands\ProcessAllUsersForExperiment;
 use Modules\FeatureFlagging\Support\QueryBuilderMixin;
 
 class FeatureFlaggingServiceProvider extends ServiceProvider
@@ -71,6 +72,7 @@ class FeatureFlaggingServiceProvider extends ServiceProvider
                 ToggleExperiment::class,
                 AddRemoveUsersToFeature::class,
                 AddRemoveUsersToBranch::class,
+                ProcessAllUsersForExperiment::class,
             ]
         );
     }
