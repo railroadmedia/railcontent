@@ -868,11 +868,6 @@ $playDrumeo = [
         'artist' => 'Steve Smith',
     ],
     [
-        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/independence.jpg',
-        'title' => 'Independence',
-        'artist' => 'Thomas Lang',
-    ],
-    [
         'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/building-grooves.jpg',
         'title' => 'Building Grooves',
         'artist' => 'Taylor Gordon',
