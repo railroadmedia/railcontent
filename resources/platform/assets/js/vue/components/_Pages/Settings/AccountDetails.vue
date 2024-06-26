@@ -116,7 +116,6 @@ import PageHeader from '../../PageHeader/PageHeader';
 import MuToggle from '../../FormInputs/MuToggle.vue';
 import PillNav from "../../PillNav/PillNav.vue";
 import DeleteAccountModal from "../../Modal/DeleteAccountModal.vue";
-import { initRecharge, loginShopifyAppProxy, getCustomer, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
 import MuButton from "../../Button/MuButton.vue";
 
 const props = defineProps({   
@@ -179,40 +178,55 @@ const formData = ref({
     use_legacy_video_player: useLegacyVideoPlayer.value || false
 });
 
+/*
+ * Using Recharge CDN Script because the NPM script was not working and could only test in prod.
+ * Anyone else is welcome to try but for now this is working fine.  
+ * -Miguel
+ */
+const loadRechargeScript = () => {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = "https://static.rechargecdn.com/assets/storefront/recharge-client-1.12.0.min.js";
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error("Failed to load Recharge script"));
+        document.head.appendChild(script);
+    });
+};
+
 const initializeRecharge = async () => {
     try {
+        console.log("Loading Recharge script...");
+        await loadRechargeScript();
         console.log("Initializing Recharge...");
-        await initRecharge({
+        recharge.init({
+            // optional when in a shopify environment
             storeIdentifier: props.storeIdentifier,
+            // required for API access
             storefrontAccessToken: props.rechargeStorefrontAccessToken,
-            loginRetryFn: async () => {
-                const session = await loginShopifyAppProxy(
+            // retry middleware function if/when Recharge session expires
+            loginRetryFn: () => {
+                return recharge.auth.loginShopifyApi(
                     props.storefrontAccessToken,
                     props.customerAccessToken
-                );
-                console.log("Login successful, session:", session);
-                return session;
-            }
+                )
+                .then(session => {
+                    return session;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            },
         });
-
-        console.log("Logging into Shopify API...");
-        const session = await loginShopifyAppProxy(
+        recharge.auth.loginShopifyApi(
             props.storefrontAccessToken,
             props.customerAccessToken
-        );
-        console.log("Shopify API session:", session);
-        
-        console.log("Fetching customer portal access...");
-        const portal = await getCustomerPortalAccess(session);
-        console.log("Customer portal access:", portal);
-        
-        portalUrl.value = portal.portal_url.replace('schedule', 'subscriptions');
-
-        // Fetch customer details
-        console.log("Fetching customer details...");
-        customerDetails.value = await getCustomer(session, { include: ['addresses'] });
-        console.log("Customer details:", customerDetails.value);
-        
+        )
+        .then(session => {
+            recharge.customer.getCustomerPortalAccess(session)
+        }).catch(error => {
+            console.log(error);
+        });        
         showIframe.value = true;
     } catch (error) {
         console.error("Error initializing Recharge:", error);
@@ -223,7 +237,12 @@ const submitUserForm = async () => {
     formProcessing.value = true;
     try {
         await userStore.updateProfile(formData.value);
-        handleClose(); 
+        formProcessing.value = false;
+        // Notify user of successful update
+        window.shownotification({
+            icon: 'check',
+            text: 'Legacy Player option saved successfully!',
+        });
     } catch (error) {
         console.error("Failed to update the legacy video preference:", error.message);
         formProcessing.value = false;
