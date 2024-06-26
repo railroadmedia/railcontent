@@ -67,7 +67,7 @@ class ContentCompiledColumnTransformer
                 )
                 ) && (isset($groupedPermissions[$contentRow['id']]));
             //TODO double check on naming.
-            $contentRow['need_access'] = $needAccess;
+            $contentRows[$contentRowIndex]['need_access'] = $needAccess;
 
 
             if (!is_array($contentRow)) {
