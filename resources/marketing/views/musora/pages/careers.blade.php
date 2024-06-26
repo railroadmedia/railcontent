@@ -13,6 +13,9 @@
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
 
     <style>
+        .anchor {
+            top:-116px;
+        }
         .join {
             display:inline-block;
             font:500 22px/1em 'Bebas Neue', sans-serif;
@@ -155,6 +158,7 @@
         <a class="join smaller musora-gold whitespace-nowrap anchor-slide relative py-2 px-3 md:py-3 md:px-5 text-sm" href="#join">APPLY NOW</a>
     </div>
     <div class="w-full h-10 sm:h-12 lg:h-14"></div>
+    <div id="join" class="anchor block relative invisible"></div>
     <header class="py-10 sm:py-16 text-white text-center relative" style="background-color:#0c1524;">
         <div class="container mx-auto">
             <img
@@ -186,7 +190,6 @@
                 alt="singeo logo"
             >
             <h1 class="mt-1 mb-16"><strong>Careers at Musora</strong></h1>
-            <div id="join" class="anchor block relative invisible -top-6"></div>
             <div class="max-w-5xl mx-auto mb-10 sm:mb-12 xl:px-5">
                 <div class="w-full relative" style="height:370px;">
                     <iframe class="absolute w-full h-full" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
