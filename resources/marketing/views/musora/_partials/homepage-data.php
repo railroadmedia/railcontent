@@ -12,176 +12,194 @@ $musora = [
 
     "packs" => [
         [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+            'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> All',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+                ],
+            ]
         ],
         [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+            'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30TBT.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
+                ],
+            ]
         ],
         [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+            'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DD.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/4-Way-Coordination.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Musical-Exercises.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rock-Drumming.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rudiments-Patterns.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Songs-Breakdown.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Creative-Mindset.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Writing-Drum-Parts.webp",
+                ],
+            ]
         ],
         [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+            'title' => '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/AGSH.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Add-Power-To-Your-Playing.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Finding-Your-Musical-Lanes.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Rhythm-Groove.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Shred-Guitar.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Solo-In-An-Hour.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Song-Anatomy.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-Cheat-Codes.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Unlock-Your-Creativity.webp",
+                ],
+            ]
         ],
         [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DC.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/NPPSH.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DTBS.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DI.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/EC.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/GI.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/30DBP.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/4-Way-Coordination.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Musical-Exercises.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Rock-Drumming.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Rudiments-Patterns.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Songs-Breakdown.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/The-Creative-Mindset.webp",
-        ],
-        [
-            "brand" => "drumeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Writing-Drum-Parts.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Classical-Piano.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Creative-Songwriting.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Gospel-Piano.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Improvisational-Jazz.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Latin-Piano-Essentials.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Rhythmic-Playing.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Simple-Piano-Arpeggios.webp",
-        ],
-        [
-            "brand" => "pianote",
-            "image" => "marketing/musora/membership/homepage/2024/packs/The-Perfect-Arrangement.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Add-Power-To-Your-Playing.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Finding-Your-Musical-Lanes.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Rhythm-Groove.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Shred-Guitar.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Solo-In-An-Hour.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Song-Anatomy.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-Cheat-Codes.webp",
-        ],
-        [
-            "brand" => "guitareo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Unlock-Your-Creativity.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Beautiful-Harmonies.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Defining-Yourself.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Find-Your-True-Voice.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Hit-The-High-Notes.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Singing-With-Soul.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-For-Singers.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/The-Power-Of-Movement.webp",
-        ],
-        [
-            "brand" => "singeo",
-            "image" => "marketing/musora/membership/homepage/2024/packs/The-Science.webp",
+            'title' => '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing',
+            'images' => [
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/SBI30D.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/5DTTYV.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Beautiful-Harmonies.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Defining-Yourself.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Find-Your-True-Voice.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Hit-The-High-Notes.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Singing-With-Soul.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/Songwriting-For-Singers.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Power-Of-Movement.webp",
+                ],
+                [
+                    "image" => "marketing/musora/membership/homepage/2024/packs/The-Science.webp",
+                ],
+            ]
         ],
     ],
     "gridItems" => [
