@@ -1125,12 +1125,6 @@ $drummerLessons = [
     'title' => 'Stanley Randolph: Tips &amp; Tricks for the Funky Drummer',
     ],
     [
-    'url' => '/beat/thomas-lang-drum-lessons/',
-    'thumb' => 'https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2020/09/11111345/Image-24.jpg',
-    'artist' => 'Thomas Lang',
-    'title' => 'Thomas Lang: Applying Technique On The Drum-Set',
-    ],
-    [
     'url' => '/beat/tony-royster-jr-drum-lessons/',
     'thumb' => 'https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2020/09/11111347/Image-25.jpg',
     'artist' => 'Tony Royster Jr.',

@@ -3,7 +3,7 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-[30px]">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Account' } ]"/>
-            <PageHeader 
+            <PageHeader
                 page-type="settings"
                 :title="userDisplayName"
                 :hero-img="userProfilePictureUrl"
@@ -25,10 +25,9 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
             <!-- Page Content -->
             <div class="tw-flex tw-flex-col tw-grow">
-                
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        
+
                         <!-- Membership Access -->
                         <div v-if="userMembershipLevel !== 'none'" class="tw-flex tw-flex-col tw-pt-0 tw-mb-6">
                             <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
@@ -46,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- User Packs -->
                         <div v-if="userPacks.length" class="tw-flex tw-flex-col tw-pt-0">
                             <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
@@ -65,7 +64,7 @@
                         <div v-if="showIframe" class="tw-flex tw-flex-col tw-p-4" id="rcPortalContainer">
                             <iframe id="rcPortal"
                                     :src="portalUrl"
-                                    width="100%" 
+                                    width="100%"
                                     height="850px"
                             ></iframe>
                         </div>
@@ -82,7 +81,7 @@
                         switching to our legacy video player if you are experiencing playback issues.
                     </p>
                     <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
-                        <MuToggle                               
+                        <MuToggle
                             :brand="brand"
                             v-model="formData.use_legacy_video_player"
                             :disabled="formProcessing"
@@ -93,7 +92,7 @@
                         />
                     </form>
                 </div>
-                
+
                 <!-- Delete Account UI -->
                 <section class="tw-w-full tw-px-0 md:tw-px-6 tw-py-6">
                     <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
@@ -112,19 +111,19 @@
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../../stores/user";
+import { initRecharge, loginShopifyAppProxy, loginWithShopifyStorefront, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
 import Breadcrumb from '../../Breadcrumb/Breadcrumb';
 import PageHeader from '../../PageHeader/PageHeader';
 import MuToggle from '../../FormInputs/MuToggle.vue';
 import PillNav from "../../PillNav/PillNav.vue";
 import DeleteAccountModal from "../../Modal/DeleteAccountModal.vue";
-import { initRecharge, loginShopifyAppProxy, getCustomer, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
 import MuButton from "../../Button/MuButton.vue";
 
-const props = defineProps({   
+const props = defineProps({
     storeIdentifier: String,
     rechargeStorefrontAccessToken: String,
-    storefrontAccessToken: String, 
-    customerAccessToken: String,    
+    storefrontAccessToken: String,
+    customerAccessToken: String,
     userPacks: {
         type: Array,
         default: []
@@ -133,12 +132,12 @@ const props = defineProps({
 
 // Pinia
 const userStore = useUserStore();
-const { 
-    brand, 
-    userId, 
-    userDisplayName, 
-    userProfilePictureUrl, 
-    userCreatedYear, 
+const {
+    brand,
+    userId,
+    userDisplayName,
+    userProfilePictureUrl,
+    userCreatedYear,
     userCompletedAccount,
     userMembershipLevel,
     isLifetimeMember,
@@ -151,7 +150,7 @@ const accountPages = ref([
     {
         name: 'Profile',
         url: `/${brand.value}/profile/${userId.value}/settings/profile`,
-    }, 
+    },
     {
         name: 'Login Credentials',
         url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
@@ -171,7 +170,7 @@ const accountPages = ref([
     }
 ]);
 
-const showIframe = ref(false);
+const showIframe = ref(true);
 const formProcessing = ref(false);
 const modalOpen = ref(false);
 const portalUrl = ref('');
@@ -181,35 +180,34 @@ const formData = ref({
 });
 
 const initializeRecharge = async () => {
+    await initRecharge({
+        storeIdentifier: props.storeIdentifier,
+        storefrontAccessToken: props.rechargeStorefrontAccessToken,
+        loginRetryFn: async() => {
+            return await loginShopifyAppProxy();
+        }
+    })
+
+    const session = await loginWithShopifyStorefront(props.storefrontAccessToken, props.customerAccessToken);
+
     try {
-        await initRecharge({
-            storeIdentifier: props.storeIdentifier,
-            storefrontAccessToken: props.rechargeStorefrontAccessToken,
-            loginRetryFn: async () => {
-                const session = await loginShopifyAppProxy();
-                // store recharge session logic here
-                return session;
-            }
-        });
-
-        const session = await loginShopifyAppProxy();
         const portal = await getCustomerPortalAccess(session);
-        portalUrl.value = portal.portal_url.replace('schedule', 'subscriptions');
-
-        // Fetch customer details
-        customerDetails.value = await getCustomer(session, { include: ['addresses'] });
-        showIframe.value = true;
-    } catch (error) {
-        console.log(error);
+        document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
+    } catch {
+        showIframe.value = false;
     }
-
 };
 
 const submitUserForm = async () => {
     formProcessing.value = true;
     try {
         await userStore.updateProfile(formData.value);
-        handleClose(); 
+        formProcessing.value = false;
+        // Notify user of successful update
+        window.shownotification({
+            icon: 'check',
+            text: 'Legacy Player option saved successfully!',
+        });
     } catch (error) {
         console.error("Failed to update the legacy video preference:", error.message);
         formProcessing.value = false;
@@ -219,5 +217,4 @@ const submitUserForm = async () => {
 onMounted(() => {
     initializeRecharge();
 });
-
 </script>
