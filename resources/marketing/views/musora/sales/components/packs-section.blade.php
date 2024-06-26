@@ -1,16 +1,15 @@
 <section class="sm:px-6 py-12 md:py-20 text-center">
     <div class="max-w-6xl mx-auto">
         <h2 class="leading-tight font-extrabold">{!! $header !!}</h2>
-        <p class="leading-tight px-4 md:px-0 mt-3 mb-5 sm:mb-7 mx-auto">{!! $desc !!}</p>
+        <p class="leading-tight px-4 md:px-0 mt-3 mx-auto">{!! $desc !!}</p>
         <div
             x-data="{
                 selectedId: 1,
             }"
             x-id="['tab']"
         >
-            <div class="flex flex-wrap sm:flex-nowrap justify-center w-full" x-ref="tablist">
+            <div class="flex justify-center w-full my-5 sm:my-7" x-ref="tablist">
                     @php
-
                         $buttons = [
                             ' ',
                             'marketing/musora/membership/homepage/2024/packs/piano-nav.webp',
@@ -21,16 +20,16 @@
                     @endphp
                     @foreach ($buttons as $key => $button)
                         @if($key != 0)
-                            <img class="rounded-full cursor-pointer w-1/4 h-auto sm:w-auto sm:h-36 mr-1 hover:opacity-90 transition-opacity"
+                            <img class="rounded-full cursor-pointer w-1/5 h-auto sm:w-auto sm:h-28 lg:h-36 mx-1 sm:mx-2 hover:opacity-90 transition-opacity"
                                 @click="selectedId = {{ $key+1 }}"
                                 @mousedown.prevent
                                 @focus="selectedId = {{ $key+1 }}"
-                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{  $button  }}">
+                                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{  $button  }}">
                         @endif
                     @endforeach
             </div>
 
-            <div class="pb-56 lg:pb-96 relative">
+            <div class="pb-56 sm:pb-72 lg:pb-96 relative">
                 @foreach ($packs as $key => $pack)
                     <div
                         class="max-w-6xl mx-auto px-4 lg:px-6 absolute inset-0"
@@ -43,8 +42,8 @@
                                     new Splide(this.$refs.splide, {
                                         classes: {
                                                 arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                                                prev: 'splide__arrow--prev your-class-prev hidden sm:flex -left-1',
-                                                next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
+                                                prev: 'splide__arrow--prev your-class-prev -left-1',
+                                                next: 'splide__arrow--next your-class-next -right-1',
                                                 pagination: 'splide__pagination flex -bottom-10',
                                         },
                                         padding: '3rem',
@@ -58,22 +57,23 @@
                                             1020: {
                                                 padding: '2rem',
                                             },
-                                            720: {
+                                            768: {
                                                 padding: '3rem',
                                                 perPage: 3,
-                                                drag   : 'free',
-                                                snap   : false,
+                                                drag: 'free',
+                                                snap: false,
                                             },
                                             620: {
                                                 padding: '1rem',
                                                 perPage: 2,
+                                                arrows: false,
                                             },
                                         },
                                     }).mount()
                                 },
                             }"
                         >
-                            <section x-ref="splide" class="splide h-48 sm:h-52 lg:h-72 mb-20 sm:mb-0">
+                            <section x-ref="splide" class="splide mb-20 sm:mb-0">
                                 <div class="splide__track">
                                     <ul class="splide__list">
                                         @foreach ($pack['images'] as $image)
