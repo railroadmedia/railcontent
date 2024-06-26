@@ -25,7 +25,6 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-8">
             <!-- Page Content -->
             <div class="tw-flex tw-flex-col tw-grow">
-                
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
                     <div class="tw-flex tw-flex-col tw-grow">
                         
@@ -182,27 +181,42 @@ const formData = ref({
 
 const initializeRecharge = async () => {
     try {
+        console.log("Initializing Recharge...");
         await initRecharge({
             storeIdentifier: props.storeIdentifier,
             storefrontAccessToken: props.rechargeStorefrontAccessToken,
             loginRetryFn: async () => {
-                const session = await loginShopifyAppProxy();
-                // store recharge session logic here
+                const session = await loginShopifyAppProxy(
+                    props.storefrontAccessToken,
+                    props.customerAccessToken
+                );
+                console.log("Login successful, session:", session);
                 return session;
             }
         });
 
-        const session = await loginShopifyAppProxy();
+        console.log("Logging into Shopify API...");
+        const session = await loginShopifyAppProxy(
+            props.storefrontAccessToken,
+            props.customerAccessToken
+        );
+        console.log("Shopify API session:", session);
+        
+        console.log("Fetching customer portal access...");
         const portal = await getCustomerPortalAccess(session);
+        console.log("Customer portal access:", portal);
+        
         portalUrl.value = portal.portal_url.replace('schedule', 'subscriptions');
 
         // Fetch customer details
+        console.log("Fetching customer details...");
         customerDetails.value = await getCustomer(session, { include: ['addresses'] });
+        console.log("Customer details:", customerDetails.value);
+        
         showIframe.value = true;
     } catch (error) {
-        console.log(error);
+        console.error("Error initializing Recharge:", error);
     }
-
 };
 
 const submitUserForm = async () => {
@@ -219,5 +233,4 @@ const submitUserForm = async () => {
 onMounted(() => {
     initializeRecharge();
 });
-
 </script>
