@@ -406,8 +406,8 @@
         $packs = $musora['packs'];
     @endphp
     @include('musora.sales.components.packs-section', [
-        'header' => 'Learn from the best teachers.',
-        'desc' => 'Get unlimited access to lessons for guitar, piano, drums, and singing.',
+        'header' => 'Learn from the<br class="sm:hidden"> best teachers.',
+        'desc' => 'Get unlimited access to lessons for<br class="sm:hidden">  guitar, piano, drums, and singing.',
     ])
 
     @php

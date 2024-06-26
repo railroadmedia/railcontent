@@ -1,19 +1,16 @@
-<section class="px-4 lg:px-6 py-12 md:py-20 text-center">
+<section class="sm:px-6 py-12 md:py-20 text-center">
     <div class="max-w-6xl mx-auto">
         <h2 class="leading-tight font-extrabold">{!! $header !!}</h2>
         <p class="leading-tight px-4 md:px-0 mt-3 mb-5 sm:mb-7 mx-auto">{!! $desc !!}</p>
         <div
             x-data="{
                 selectedId: 1,
-                isMobile: window.innerWidth < 768 ? true : false,
             }"
             x-id="['tab']"
-            x-on:resize.window="isMobile = (window.innerWidth < 768) ? true : false"
         >
-            <!-- Tab List -->
-            <div class="hidden sm:flex justify-center w-full" x-ref="tablist">
+            <div class="flex flex-wrap sm:flex-nowrap justify-center w-full" x-ref="tablist">
                     @php
-                    
+
                         $buttons = [
                             ' ',
                             'marketing/musora/membership/homepage/2024/packs/piano-nav.webp',
@@ -24,7 +21,7 @@
                     @endphp
                     @foreach ($buttons as $key => $button)
                         @if($key != 0)
-                            <img class="rounded-full cursor-pointer h-36 mx-1 hover:opacity-90 transition-opacity"
+                            <img class="rounded-full cursor-pointer w-1/4 h-auto sm:w-auto sm:h-36 mr-1 hover:opacity-90 transition-opacity"
                                 @click="selectedId = {{ $key+1 }}"
                                 @mousedown.prevent
                                 @focus="selectedId = {{ $key+1 }}"
@@ -33,14 +30,13 @@
                     @endforeach
             </div>
 
-            <div class="md:pb-56 lg:pb-96 relative">
+            <div class="pb-56 lg:pb-96 relative">
                 @foreach ($packs as $key => $pack)
                     <div
-                        class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
-                        :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
+                        class="max-w-6xl mx-auto px-4 lg:px-6 absolute inset-0"
+                        :class="!(selectedId === {{ $key+1 }}) && 'opacity-0'"
 
                     >
-                        <h4 class="font-extrabold mb-3 md:hidden">{!!  $pack['title']  !!}</h4>
                         <div
                             x-data="{
                                 init() {
