@@ -1,12 +1,5 @@
 <template>
-    <div class="dark:tw-text-white tw-text-[#00101D] tw-px-[30px] tw-mt-[30px]">
-        <h1 class="tw-text-2xl tw-font-bold">
-            Delete Account
-        </h1>
-        <p class="tw-my-4">Delete your account and account data.</p>
-        <button class="tw-btn-primary tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-px-10" @click="openModal = true">Delete Account</button>
-    </div>
-    <ModalRenderer v-if="openModal">
+    <ModalRenderer>
         <div class="tw-max-w-[600px] tw-w-full tw-p-[30px] tw-border tw-border-[#223F57] tw-rounded-xl tw-text-white tw-bg-[#081825]">
             <template v-if="step === '1'">
                 <div class="tw-flex tw-justify-between tw-items-center">
@@ -71,14 +64,20 @@ import axios from "axios";
 import ModalRenderer from "./ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
 import { useUserStore } from '../../../stores/user';
+
 const userStore = useUserStore();
-const openModal = ref(false);
+
+//Emits
+const emit = defineEmits(['onCloseModal']);
+
 const step = ref('1');
 const textInput = ref('');
 const agreement1 = ref(false);
 const agreement2 = ref(false);
 const showWarning = ref(false);
+
 const closeModal = () => {
+    emit('onCloseModal');
     openModal.value = false;
     step.value = '1';
     textInput.value = '';
@@ -86,14 +85,17 @@ const closeModal = () => {
     agreement2.value = false;
     showWarning.value = false;
 }
+
 const goToNextStep = () => {
     step.value = '2';
 }
+
 const confirmDelete = () => {
     if (!agreement1.value || !agreement2.value || textInput.value !== 'DELETE') {
         showWarning.value = true;
         return;
     }
+
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': userStore.token
