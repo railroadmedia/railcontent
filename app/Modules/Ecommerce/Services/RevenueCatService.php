@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Enums\ShopifyPaymentSourceEnum;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\EventTracking\Services\CustomerIoService;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\User\UserCreated;
@@ -251,23 +252,23 @@ class RevenueCatService
      * @param mixed $productId
      * @return Collection
      */
-   public function getMusoraProducts(string $type, $event, mixed $productId): Collection
-   {
-       $store = $type . '_store';
+    public function getMusoraProducts(string $type, $event, mixed $productId): Collection
+    {
+        $store = $type . '_store';
 
-       if ($event['period_type'] == 'TRIAL') {
-           $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
-       } else {
-           $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
-       }
+        if ($event['period_type'] == 'TRIAL') {
+            $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
+        } else {
+            $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
+        }
 
-       if ($event['type'] != 'INITIAL_PURCHASE' && $event['type'] != 'RENEWAL') {
-           $productsMap = array_merge(
-               [config('ecommerce.' . $store . '_products_map')[$productId]],
-               [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
-           );
-       }
+        if ($event['type'] != 'INITIAL_PURCHASE' && $event['type'] != 'RENEWAL') {
+            $productsMap = array_merge(
+                [config('ecommerce.' . $store . '_products_map')[$productId]],
+                [config('ecommerce.' . $store . '_products_map_trial')[$productId]]
+            );
+        }
 
-       return Product::whereIn('sku', $productsMap)->get();
+        return Product::whereIn('sku', $productsMap)->get();
     }
 }
