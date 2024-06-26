@@ -13,6 +13,7 @@
             <!-- Tab List -->
             <div class="hidden sm:flex justify-center w-full" x-ref="tablist">
                     @php
+                    
                         $buttons = [
                             ' ',
                             'marketing/musora/membership/homepage/2024/packs/piano-nav.webp',
