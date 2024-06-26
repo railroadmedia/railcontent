@@ -205,7 +205,7 @@
             .full-line {
                 bottom:0;
             }
-            
+
         }
         .join.musora {
             background-color:#FFAE00;
@@ -327,7 +327,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
 
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -424,7 +424,7 @@
     @endphp
 
     @include('musora.sales.components.workouts-section', [
-        'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card.webp',
+        'workoutsBG' => 'marketing/musora/membership/homepage/2024/workouts-card2.jpg',
     ])
 
 

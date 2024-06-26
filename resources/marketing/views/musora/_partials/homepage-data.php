@@ -419,7 +419,7 @@ $musora = [
             'animation' => 'animation: breathing 6s infinite; animation-delay: 2s;'
         ],
         [
-            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04.webp',
+            'src' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/musora/membership/homepage/2024/workouts/workouts-thumbs-04a.jpg',
             'animation' => 'animation: breathing 6s infinite; animation-delay: 4s;'
         ],
         [
