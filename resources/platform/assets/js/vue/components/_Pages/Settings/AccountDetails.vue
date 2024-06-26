@@ -179,61 +179,6 @@ const formData = ref({
     use_legacy_video_player: useLegacyVideoPlayer.value || false
 });
 
-/*
- * Using Recharge CDN Script because the NPM script was not working and could only test in prod.
- * Anyone else is welcome to try but for now this is working fine.
- * -Miguel
- */
-// const loadRechargeScript = () => {
-//     return new Promise((resolve, reject) => {
-//         const script = document.createElement('script');
-//         script.src = "https://static.rechargecdn.com/assets/storefront/recharge-client-1.12.0.min.js";
-//         script.async = true;
-//         script.onload = () => resolve();
-//         script.onerror = () => reject(new Error("Failed to load Recharge script"));
-//         document.head.appendChild(script);
-//     });
-// };
-
-// const initializeRecharge = async () => {
-//     try {
-//         console.log("Loading Recharge script...");
-//         await loadRechargeScript();
-//         console.log("Initializing Recharge...");
-//         recharge.init({
-//             // optional when in a shopify environment
-//             storeIdentifier: props.storeIdentifier,
-//             // required for API access
-//             storefrontAccessToken: props.rechargeStorefrontAccessToken,
-//             // retry middleware function if/when Recharge session expires
-//             loginRetryFn: () => {
-//                 return recharge.auth.loginShopifyApi(
-//                     props.storefrontAccessToken,
-//                     props.customerAccessToken
-//                 )
-//                 .then(session => {
-//                     return session;
-//                 })
-//                 .catch(error => {
-//                     console.log(error);
-//                 })
-//             },
-//         });
-//         recharge.auth.loginShopifyApi(
-//             props.storefrontAccessToken,
-//             props.customerAccessToken
-//         )
-//         .then(session => {
-//             recharge.customer.getCustomerPortalAccess(session)
-//         }).catch(error => {
-//             console.log(error);
-//         });
-//         showIframe.value = true;
-//     } catch (error) {
-//         console.error("Error initializing Recharge:", error);
-//     }
-// };
-
 const initializeRecharge = async () => {
     await initRecharge({
         storeIdentifier: props.storeIdentifier,
