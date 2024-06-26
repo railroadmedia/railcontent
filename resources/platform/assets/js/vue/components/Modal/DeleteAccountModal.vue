@@ -1,11 +1,4 @@
 <template>
-    <div class="dark:tw-text-white tw-text-[#00101D] tw-px-[30px] tw-mt-[30px]">
-        <h1 class="tw-text-2xl tw-font-bold">
-            Delete Account
-        </h1>
-        <p class="tw-my-4">Delete your account and account data.</p>
-        <button class="tw-btn-primary tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-px-10" @click="openModal = true">Delete Account</button>
-    </div>
     <ModalRenderer v-if="openModal">
         <div class="tw-max-w-[600px] tw-w-full tw-p-[30px] tw-border tw-border-[#223F57] tw-rounded-xl tw-text-white tw-bg-[#081825]">
             <template v-if="step === '1'">
