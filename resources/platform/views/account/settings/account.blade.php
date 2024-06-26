@@ -1,8 +1,7 @@
-@php use App\Http\Controllers\Platform\ProfileSettingsPagesController; @endphp
-@extends('account.settings.layout')
+@extends('partials.layout')
 
 @section('meta')
-    <title>Profile | Musora</title>
+    <title>Account Details | Musora</title>
 @endsection
 
 @section('content')
