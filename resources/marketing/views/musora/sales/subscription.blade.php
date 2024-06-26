@@ -337,7 +337,6 @@
 
 @section('layout-body')
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#101921;">
-
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-10 text-center">
             @yield('spotify-banner')
             <h1 class="leading-tight mb-3"><strong>The ultimate music<br> lessons experience.</strong>  </h1>
