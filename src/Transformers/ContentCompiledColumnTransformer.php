@@ -59,7 +59,7 @@ class ContentCompiledColumnTransformer
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
 
-            $hasAccess = !empty(
+            $needAccess = empty(
                 array_intersect(
                     $userPermissionIds,
                     (isset($groupedPermissions[$contentRow['id']])) ?
@@ -67,7 +67,7 @@ class ContentCompiledColumnTransformer
                 )
                 ) && (isset($groupedPermissions[$contentRow['id']]));
             //TODO double check on naming.
-            $contentRow['user_has_access'] = $hasAccess;
+            $contentRow['need_access'] = $needAccess;
 
 
             if (!is_array($contentRow)) {
