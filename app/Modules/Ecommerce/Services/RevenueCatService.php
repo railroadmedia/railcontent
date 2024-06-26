@@ -197,8 +197,8 @@ class RevenueCatService
     }
 
     public function tryGetUserFromNotificationData(
-        $data,
-        $createIfNotExists,
+        array $data,
+        bool $createIfNotExists,
     ): ?User {
         $subscriberEmail = $data['event']['subscriber_attributes']['email']['value'] ?? null;
         $user = $this->getUser(
