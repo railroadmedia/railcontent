@@ -29,7 +29,8 @@
     "build:cra": "react-scripts build",
     "build": "npx mix --mix-config=webpack.mix.sanity.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sanity": "./sanity.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
+    "@sanity/cli": "^3.47.1",
     "laravel-mix": "^6.0.43",
     "laravel-vapor": "^0.7.1",
     "postcss": "^8.4.38"
