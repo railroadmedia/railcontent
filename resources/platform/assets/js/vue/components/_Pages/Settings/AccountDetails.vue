@@ -3,7 +3,7 @@
         <div class="tw-w-full tw-mx-auto 3xl:tw-max-w-screen-3xl 4xl:tw-max-w-screen-4xl tw-px-4 md:tw-px-8 tw-mb-[30px]">
             <!-- Header -->
             <Breadcrumb :breadcrumbs="[ { title: 'Settings' }, { title: 'Account' } ]"/>
-            <PageHeader 
+            <PageHeader
                 page-type="settings"
                 :title="userDisplayName"
                 :hero-img="userProfilePictureUrl"
@@ -27,7 +27,7 @@
             <div class="tw-flex tw-flex-col tw-grow">
                 <section class="tw-flex tw-flex-row tw-px-0 md:tw-px-6 tw-py-6">
                     <div class="tw-flex tw-flex-col tw-grow">
-                        
+
                         <!-- Membership Access -->
                         <div v-if="userMembershipLevel !== 'none'" class="tw-flex tw-flex-col tw-pt-0 tw-mb-6">
                             <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- User Packs -->
                         <div v-if="userPacks.length" class="tw-flex tw-flex-col tw-pt-0">
                             <div class="tw-flex tw-flex-row tw-flex-auto dark:tw-text-white tw-text-[#00101D]">
@@ -64,7 +64,7 @@
                         <div v-if="showIframe" class="tw-flex tw-flex-col tw-p-4" id="rcPortalContainer">
                             <iframe id="rcPortal"
                                     :src="portalUrl"
-                                    width="100%" 
+                                    width="100%"
                                     height="850px"
                             ></iframe>
                         </div>
@@ -81,7 +81,7 @@
                         switching to our legacy video player if you are experiencing playback issues.
                     </p>
                     <form class="tw-flex tw-flex-row tw-mt-3" id="legacy-form" @submit.prevent="submitUserForm">
-                        <MuToggle                               
+                        <MuToggle
                             :brand="brand"
                             v-model="formData.use_legacy_video_player"
                             :disabled="formProcessing"
@@ -92,7 +92,7 @@
                         />
                     </form>
                 </div>
-                
+
                 <!-- Delete Account UI -->
                 <section class="tw-w-full tw-px-0 md:tw-px-6 tw-py-6">
                     <h3 class="tw-text-[#00101D] dark:tw-text-white tw-text-xl tw-font-bold tw-mb-3">
@@ -111,6 +111,7 @@
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../../../../stores/user";
+import { initRecharge, loginShopifyAppProxy, loginWithShopifyStorefront, getCustomerPortalAccess } from '@rechargeapps/storefront-client';
 import Breadcrumb from '../../Breadcrumb/Breadcrumb';
 import PageHeader from '../../PageHeader/PageHeader';
 import MuToggle from '../../FormInputs/MuToggle.vue';
@@ -118,11 +119,11 @@ import PillNav from "../../PillNav/PillNav.vue";
 import DeleteAccountModal from "../../Modal/DeleteAccountModal.vue";
 import MuButton from "../../Button/MuButton.vue";
 
-const props = defineProps({   
+const props = defineProps({
     storeIdentifier: String,
     rechargeStorefrontAccessToken: String,
-    storefrontAccessToken: String, 
-    customerAccessToken: String,    
+    storefrontAccessToken: String,
+    customerAccessToken: String,
     userPacks: {
         type: Array,
         default: []
@@ -131,12 +132,12 @@ const props = defineProps({
 
 // Pinia
 const userStore = useUserStore();
-const { 
-    brand, 
-    userId, 
-    userDisplayName, 
-    userProfilePictureUrl, 
-    userCreatedYear, 
+const {
+    brand,
+    userId,
+    userDisplayName,
+    userProfilePictureUrl,
+    userCreatedYear,
     userCompletedAccount,
     userMembershipLevel,
     isLifetimeMember,
@@ -149,7 +150,7 @@ const accountPages = ref([
     {
         name: 'Profile',
         url: `/${brand.value}/profile/${userId.value}/settings/profile`,
-    }, 
+    },
     {
         name: 'Login Credentials',
         url: `/${brand.value}/profile/${userId.value}/settings/login-credentials`,
@@ -180,7 +181,7 @@ const formData = ref({
 
 /*
  * Using Recharge CDN Script because the NPM script was not working and could only test in prod.
- * Anyone else is welcome to try but for now this is working fine.  
+ * Anyone else is welcome to try but for now this is working fine.
  * -Miguel
  */
 const loadRechargeScript = () => {
@@ -194,42 +195,61 @@ const loadRechargeScript = () => {
     });
 };
 
+// const initializeRecharge = async () => {
+//     try {
+//         console.log("Loading Recharge script...");
+//         await loadRechargeScript();
+//         console.log("Initializing Recharge...");
+//         recharge.init({
+//             // optional when in a shopify environment
+//             storeIdentifier: props.storeIdentifier,
+//             // required for API access
+//             storefrontAccessToken: props.rechargeStorefrontAccessToken,
+//             // retry middleware function if/when Recharge session expires
+//             loginRetryFn: () => {
+//                 return recharge.auth.loginShopifyApi(
+//                     props.storefrontAccessToken,
+//                     props.customerAccessToken
+//                 )
+//                 .then(session => {
+//                     return session;
+//                 })
+//                 .catch(error => {
+//                     console.log(error);
+//                 })
+//             },
+//         });
+//         recharge.auth.loginShopifyApi(
+//             props.storefrontAccessToken,
+//             props.customerAccessToken
+//         )
+//         .then(session => {
+//             recharge.customer.getCustomerPortalAccess(session)
+//         }).catch(error => {
+//             console.log(error);
+//         });
+//         showIframe.value = true;
+//     } catch (error) {
+//         console.error("Error initializing Recharge:", error);
+//     }
+// };
+
 const initializeRecharge = async () => {
+    await initRecharge({
+        storeIdentifier: props.storeIdentifier,
+        storefrontAccessToken: props.rechargeStorefrontAccessToken,
+        loginRetryFn: async() => {
+            return await loginShopifyAppProxy();
+        }
+    })
+
+    const session = await loginWithShopifyStorefront(props.storefrontAccessToken, props.customerAccessToken);
+
     try {
-        console.log("Loading Recharge script...");
-        await loadRechargeScript();
-        console.log("Initializing Recharge...");
-        recharge.init({
-            // optional when in a shopify environment
-            storeIdentifier: props.storeIdentifier,
-            // required for API access
-            storefrontAccessToken: props.rechargeStorefrontAccessToken,
-            // retry middleware function if/when Recharge session expires
-            loginRetryFn: () => {
-                return recharge.auth.loginShopifyApi(
-                    props.storefrontAccessToken,
-                    props.customerAccessToken
-                )
-                .then(session => {
-                    return session;
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-            },
-        });
-        recharge.auth.loginShopifyApi(
-            props.storefrontAccessToken,
-            props.customerAccessToken
-        )
-        .then(session => {
-            recharge.customer.getCustomerPortalAccess(session)
-        }).catch(error => {
-            console.log(error);
-        });        
-        showIframe.value = true;
-    } catch (error) {
-        console.error("Error initializing Recharge:", error);
+        const portal = await getCustomerPortalAccess(session);
+        document.getElementById('rcPortal').src = portal.portal_url.replace('schedule', 'subscriptions');
+    } catch {
+        document.getElementById('rcPortalContainer').remove();
     }
 };
 
