@@ -1750,7 +1750,8 @@ return [
             'helpscout_beacon_id',
             'branches',
             'features',
-            'show_onboarding'
+            'show_onboarding',
+            'last_used_brand'
         ],
     ],
     'brand_logo_path_for_email' => [

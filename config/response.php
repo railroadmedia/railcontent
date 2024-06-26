@@ -2448,7 +2448,8 @@ return [
             'completed_workouts',
             'branches',
             'features',
-            'show_onboarding'
+            'show_onboarding',
+            'last_used_brand'
         ],
 
         'quick-tips' => [
@@ -5540,7 +5541,8 @@ return [
             'completed_workouts',
             'branches',
             'features',
-            'show_onboarding'
+            'show_onboarding',
+            'last_used_brand'
         ],
 
         'quick-tips' => [
