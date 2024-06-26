@@ -278,6 +278,11 @@ class SalesController extends BaseController
         return view('pianote.products.book-bag', ['theme' => 'pianote', 'membersVersion' => true]);
     }
 
+    public function fiveforthreeBundle()
+    {
+        return view('pianote.products.5-for-3-bundle', ['theme' => 'pianote']);
+    }
+
     public function newPianoPlayers()
     {
         $productId = 517;
