@@ -33,8 +33,7 @@
                 @foreach ($packs as $key => $pack)
                     <div
                         class="max-w-6xl mx-auto px-4 lg:px-6 absolute inset-0"
-                        :class="!(selectedId === {{ $key+1 }}) && 'opacity-0'"
-
+                        :class="(selectedId === {{$key + 1}}) ? 'z-20' : 'z-0 opacity-0'"
                     >
                         <div
                             x-data="{
