@@ -11,7 +11,7 @@
             {{ str_replace(' ', '', $testimonial['name']) }} : false, @endforeach
     }">
 
-    <div class="container mx-auto max-w-5xl mb-12">
+    <div class="container mx-auto max-w-6xl mb-12">
         <h2 class="font-lexend uppercase leading-none"><strong>
                 @if ($theme != 'musora')
                     Trusted by<br class="hidden sm:inline"> {!! $header !!} everywhere.
@@ -41,7 +41,7 @@
             </a>
         </p>
 
-        <div class="container max-w-5xl mx-auto mb-10">
+        <div class="container mx-auto mb-10">
             <div class="aspect-16:9 w-full relative">
                 <iframe class="absolute w-full h-full rounded-xl" src="//player.vimeo.com/video/963340669"
                     frameborder="0" allowfullscreen="" allow="autoplay" title="Musora Students"></iframe>
@@ -98,29 +98,20 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $index => $testimonial)
-                        <li class="splide__slide flex min-h-[390px] md:min-h-[430px] lg:min-h-[460px]">
-                            <div class="flex flex-wrap items-start w-full mb-5 sm:mb-8 relative p-2 pb-5 rounded-xl"
+                        <li class="splide__slide flex min-h-[360px] md:min-h-[390px]">
+                            <div class="flex flex-wrap items-start w-full mb-5 sm:mb-8 relative px-2 pt-2 pb-5 rounded-xl bg-cover bg-top"
+                                style="background-image: url('{{ $testimonial['avatar'] }}');"
                                 @if (!empty($testimonial['video']))
                                     x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;"
                                 @endif
-                                style="background: url('{{ $testimonial['avatar'] }}'); background-size: cover; background-position: center;">
+                                >
                                 <i class="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if (!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-2xl text-white border-2 border-white px-5 py-3 rounded-full bg-[#0009] hover:opacity-80 z-10"></i>
-                                <div class="absolute bottom-0 left-0 right-0 px-3 sm:px-5 pb-4 sm:pb-7 flex items-end rounded-b-xl"
-                                    {{--style="background:linear-gradient(to top, #000, transparent);"--}}>
-                                    <div class="flex flex-col justify-between text-left">
-                                        <div>
-                                            <p class="leading-normal text-xs mt-3 sm:mt-0 mb-2 lg:mb-4 text-white">
-                                                <em>{!! $testimonial['title'] !!}</em>
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p class="leading-tight mx-0 text-white">{{ $testimonial['name'] }}</p>
-                                            @if (!empty($testimonial['location']))
-                                                <p class="leading-tight mx-0 text-sm text-musora">
-                                                    <em>{{ $testimonial['location'] }}</em>
-                                                </p>
-                                            @endif
-                                        </div>
+                                <div class="absolute bottom-0 left-0 right-0 px-4 pb-5 sm:pb-6 flex items-end rounded-b-xl">
+                                    <div class="flex flex-wrap w-full justify-center">
+                                        <h6 class="leading-normal w-full mb-3 text-white">
+                                            <em>"{!! $testimonial['title'] !!}"</em>
+                                        </h6>
+                                        <p class="leading-tight w-full text-sm text-musora"><strong class="font-black">{{ $testimonial['name'] }}</strong></p>
                                     </div>
                                 </div>
                             </div>

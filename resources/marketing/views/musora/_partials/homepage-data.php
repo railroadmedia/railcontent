@@ -665,7 +665,7 @@ $musora = [
             "name" => "Claudio Sanchez",
             "location" => "California, USA",
             "video" => "877648411",
-            "title" => "I’ve always wanted to play in front of a crowd – at least once in my lifetime – and now <strong>I’ve already achieved that!</strong>",
+            "title" => "I’ve always wanted to<br> play in front of a crowd.",
         ],
         [
             "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
@@ -673,15 +673,7 @@ $musora = [
             "name" => "Darli Brazil",
             "location" => "California, USA",
             "video" => "878027528",
-            "title" => "The amount of songs you can learn is amazing. <strong>I am really enjoying this program.</strong> Everything about it is a positive experience.",
-        ],
-        [
-            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
-            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/tonia-hotz.jpg",
-            "name" => "Tonya Hotz",
-            "location" => "Arizona, USA",
-            "video" => "882979587",
-            "title" => "Being able to start and complete an entire song was huge – and eventually to play and sing. <strong>It’s even better than I’d hoped it would be.</strong>",
+            "title" => "Everything about it is<br> a positive experience.",
         ],
         [
             "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
@@ -689,7 +681,15 @@ $musora = [
             "name" => "Gabriel Queija",
             "location" => "Canada",
             "video" => "877591404",
-            "title" => "It was everything I was looking for – they have <strong>great teachers, great courses, great everything</strong>! They help you so much. ",
+            "title" => "...great teachers, great<br> courses, great everything!",
+        ],
+        [
+            "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
+            "avatar" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/1300x0/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/tonia-hotz.jpg",
+            "name" => "Tonya Hotz",
+            "location" => "Arizona, USA",
+            "video" => "882979587",
+            "title" => "It’s even better than<br> I’d hoped it would be.",
         ],
     ],
 ]

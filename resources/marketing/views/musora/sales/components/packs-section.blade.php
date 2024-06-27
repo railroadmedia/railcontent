@@ -29,7 +29,7 @@
                     @endforeach
             </div>
 
-            <div class="pb-56 sm:pb-72 lg:pb-96 relative">
+            <div class="pb-[61%] sm:pb-72 lg:pb-96 relative">
                 @foreach ($packs as $key => $pack)
                     <div
                         class="max-w-6xl mx-auto px-4 lg:px-6 absolute inset-0"
