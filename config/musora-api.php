@@ -1,21 +1,11 @@
 <?php
 
 return [
-    'auth-middleware' => ['web_or_api_authenticated', 'auth:sanctum',
+    'auth-middleware' => [
+        'web_or_api_authenticated', 'auth:sanctum',
         \Railroad\MusoraApi\Middleware\SetCustomDecorators::class
     ],
-//        [
-////        \Railroad\MusoraApi\Middleware\MobileAppTokenAuth::class,
-//        \Railroad\MusoraApi\Middleware\SetCustomDecorators::class,
-//        \Railroad\MusoraApi\Middleware\BrandMiddleware::class,
-//        \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-//
-////        \App\Http\Middleware\SetContentPermissions::class,
-////        \App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class
-//    ],
-    'user-middleware' => [
-//        \Railroad\MusoraApi\Middleware\AuthIfTokenExist::class,
-    ],
+    'user-middleware' => [],
     'shouldDisplayReview' => true,
     'response-structure' => [
         'catalogues' => [
@@ -1756,17 +1746,12 @@ return [
             'isPackOnlyOwner',
             'isAppleAppSubscriber',
             'isGoogleAppSubscriber',
-//            'notify_weekly_update',
-//            'notify_on_lesson_comment_reply',
-//            'notify_on_lesson_comment_like',
-//            'notify_on_forum_followed_thread_reply',
-//            'notify_on_forum_post_like',
-//            'notify_on_forum_post_reply',
-//            'notifications_summary_frequency_minutes',
             'permission_level',
             'helpscout_beacon_id',
             'branches',
             'features',
+            'show_onboarding',
+            'last_used_brand'
         ],
     ],
     'brand_logo_path_for_email' => [

@@ -4,7 +4,6 @@ export const trapFocus = (element) => {
     var lastFocusableEl = focusableEls[focusableEls.length - 1];
     var KEYCODE_TAB = 9;
     firstFocusableEl.focus();
-    console.log('trap focus');
 
     element.addEventListener('keydown', function (e) {
         var isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);

@@ -22,7 +22,8 @@
 
 @section('spotify-banner')
     <p class="leading-tight mb-2 text-sm"><em>Learn your favorite songs for <strong>FREE</strong></em></p>
-    <img class="h-7 sm:h-10 mb-9 sm:mb-14 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1480x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo.svg"
+    <img class="h-7 sm:h-10 mb-5 sm:mb-7 transition-opacity opacity-0"
+        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/560x0/filters:quality(95)/marketing/musora/membership/redeem/musora-spotify-logo-white.svg"
         alt="spotify logo" loading="lazy" onload="this.classList.remove('opacity-0')">
 @endsection
 

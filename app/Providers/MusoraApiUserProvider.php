@@ -94,6 +94,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'access_level' => $user->access_level,
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
+            'last_used_brand' => $user->last_used_brand,
         ];
     }
 

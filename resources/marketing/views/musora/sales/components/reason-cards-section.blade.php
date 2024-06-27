@@ -1,6 +1,6 @@
-
 <div id="method" class="anchor"></div>
-<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
+@if(!empty($bgColor)) style="background:{{ $bgColor }};" @endif>
     <div class="container max-w-5xl mx-auto">
         <h2 class="leading-tight"><strong><span class="border-2 border-{{ $theme }} rounded-full px-3 sm:px-4 py-1 inline-block">@if(!empty($seven)) 7 @else 6 @endif</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
         <p class="mt-2 sm:mt-3 mb-6 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-{{ $theme }}">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>

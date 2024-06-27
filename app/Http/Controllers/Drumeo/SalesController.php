@@ -338,6 +338,11 @@ class SalesController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    public function eardrums()
+    {
+        return view('drumeo.products.eardrums', ['theme' => 'drumeo', 'recaptchaKey' => config('recaptcha.key')]);
+    }
+
     public function kit()
     {
         return view('drumeo.products.kit', ['theme' => 'drumeo', 'recaptchaKey' => config('recaptcha.key')]);

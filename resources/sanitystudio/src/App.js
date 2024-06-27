@@ -17,6 +17,7 @@ import OpenAiInput from './components/OpenAiInput'; // Import the custom compone
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
+import {media} from 'sanity-plugin-media'
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -98,6 +99,7 @@ function App() {
                     plugins: [
                       structureTool({ defaultDocumentNode }),
                       visionTool(),
+                      media(),
                       assist(),
                       embeddingsIndexReferenceInput(),
                         embeddingsIndexDashboard()

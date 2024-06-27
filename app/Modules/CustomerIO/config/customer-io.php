@@ -258,7 +258,7 @@ return [
             ],
             'Drumeo Drumset Giveaway' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'drumeo_prospect_drumset-giveaway-may-2024',
@@ -325,6 +325,15 @@ return [
                     'drumeo',
                 ],
             ],
+            'Eardrums Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_eardrums2-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
             'Metronome Notice' => [
@@ -347,7 +356,7 @@ return [
             ],
             'Chord Hacks' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_chord-hacks',
@@ -371,7 +380,7 @@ return [
             ],
             'Getting Started On The Piano' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_getting-started',
@@ -395,7 +404,7 @@ return [
             ],
             'Sight Reading Made Simple' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_sight-reading-made-simple',
@@ -455,7 +464,7 @@ return [
             ],
             'Digital Chords And Scales' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_digital-chords-and-scales',
@@ -623,7 +632,7 @@ return [
             ],
             '7 Days To Sight Reading' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_7-days',
