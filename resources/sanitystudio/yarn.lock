@@ -3827,7 +3827,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^1.0.14, @sanity/ui@npm:^1.7.11, @sanity/ui@npm:^1.9.3":
+"@sanity/ui@npm:^1.7.11, @sanity/ui@npm:^1.9.3":
   version: 1.9.3
   resolution: "@sanity/ui@npm:1.9.3"
   dependencies:
@@ -16435,15 +16435,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-icons@npm:^4.7.1":
-  version: 4.12.0
-  resolution: "react-icons@npm:4.12.0"
-  peerDependencies:
-    react: "*"
-  checksum: 10c0/2170f43031ee7365539f72d4075cbe6c7fbf9a66d6cf4494aa9393b194272da0564f5b19d1b24dbfc567c0ac89f5fe5b8974d92dd83f61e252388dde6a226fb8
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -17298,20 +17289,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-asset-source-openai@npm:1.1.2":
-  version: 1.1.2
-  resolution: "sanity-plugin-asset-source-openai@npm:1.1.2"
-  dependencies:
-    "@sanity/incompatible-plugin": "npm:^1.0.4"
-    "@sanity/ui": "npm:^1.0.14"
-    react-icons: "npm:^4.7.1"
-  peerDependencies:
-    react: ^18
-    sanity: ^3
-  checksum: 10c0/ca4b7236b5017fed6547fb4086a12eb3e656cb7b9344908f192a0244ba5c4f21abcffd7f6fe693f140b3ab6e93f79bf2443a69270d2a083f5b4f3a5f2b8ce281
-  languageName: node
-  linkType: hard
-
 "sanity-plugin-iframe-pane@npm:^3.1.6":
   version: 3.1.6
   resolution: "sanity-plugin-iframe-pane@npm:3.1.6"
@@ -17521,7 +17498,6 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-scripts: "npm:5.0.1"
     sanity: "npm:^3.45.0"
-    sanity-plugin-asset-source-openai: "npm:1.1.2"
     sanity-plugin-iframe-pane: "npm:^3.1.6"
     sanity-plugin-media: "npm:^2.2.5"
     styled-components: "npm:^6.1.11"

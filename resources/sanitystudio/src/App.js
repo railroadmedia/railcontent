@@ -11,7 +11,6 @@ import {embeddingsIndexDashboard} from '@sanity/embeddings-index-ui'
 import DifficultyInput from './components/DifficultyInput'; // Import the custom component
 import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import the custom component
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
-import OpenAIFetchSongDetails from './components/OpenAIFetchSongDetails';
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
@@ -26,7 +25,6 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
-    OpenAIFetchSongDetails: OpenAIFetchSongDetails,
     OpenAiInput: OpenAiInput
 };
 
