@@ -3392,6 +3392,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sanity/embeddings-index-ui@npm:^1.1.8":
+  version: 1.1.8
+  resolution: "@sanity/embeddings-index-ui@npm:1.1.8"
+  dependencies:
+    "@sanity/icons": "npm:^2.4.1"
+    "@sanity/incompatible-plugin": "npm:^1.0.4"
+    "@sanity/ui": "npm:^1.7.11"
+  peerDependencies:
+    react: ^18
+    sanity: ^3.14
+  checksum: 10c0/5a9c83bc7856122f6cad94099db9f529e191b15b2c0f8056ce8eeb1c91298a58839e0679c8884926ae4300073993032560b8af398585d05038f0982829cc2b7e
+  languageName: node
+  linkType: hard
+
 "@sanity/eventsource@npm:^5.0.0, @sanity/eventsource@npm:^5.0.2":
   version: 5.0.2
   resolution: "@sanity/eventsource@npm:5.0.2"
@@ -3681,7 +3695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/ui@npm:^1.0.14":
+"@sanity/ui@npm:^1.0.14, @sanity/ui@npm:^1.7.11":
   version: 1.9.3
   resolution: "@sanity/ui@npm:1.9.3"
   dependencies:
@@ -16973,6 +16987,7 @@ __metadata:
     "@sanity/assist": "npm:^3.0.4"
     "@sanity/client": "npm:^6.19.1"
     "@sanity/embeddings-index-cli": "npm:^1.0.10"
+    "@sanity/embeddings-index-ui": "npm:^1.1.8"
     "@sanity/icons": "npm:^3.2.0"
     "@sanity/vision": "npm:^3.45.0"
     "@testing-library/dom": "npm:^10.1.0"

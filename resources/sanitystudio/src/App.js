@@ -1,16 +1,19 @@
 // src/App.js
 import React, { useEffect, useState } from 'react';
-import {RobotIcon, RocketIcon} from '@sanity/icons'
+import {RobotIcon, RocketIcon, CogIcon} from '@sanity/icons'
 import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
- import {openaiImageAsset} from 'sanity-plugin-asset-source-openai';
 import {assist} from '@sanity/assist';
+import {embeddingsIndexReferenceInput} from '@sanity/embeddings-index-ui'
+import {embeddingsIndexDashboard} from '@sanity/embeddings-index-ui'
+
 import DifficultyInput from './components/DifficultyInput'; // Import the custom component
 import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import the custom component
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import OpenAIFetchSongDetails from './components/OpenAIFetchSongDetails';
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
+import OpenAiInput from './components/OpenAiInput'; // Import the custom component
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
@@ -23,6 +26,7 @@ const customComponents = {
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
     OpenAIFetchSongDetails: OpenAIFetchSongDetails,
+    OpenAiInput: OpenAiInput
 };
 
 const icons = {
@@ -94,10 +98,9 @@ function App() {
                     plugins: [
                       structureTool({ defaultDocumentNode }),
                       visionTool(),
-                        openaiImageAsset({
-                            API_KEY:"sk-proj-67J17Z91oSK5uJ36y8RyT3BlbkFJ4LzgX2eNYY2q3jx7rk94"
-                        }),
-                        assist(),
+                      assist(),
+                      embeddingsIndexReferenceInput(),
+                        embeddingsIndexDashboard()
                     ],
                     document: {
                         actions: (prev) =>
@@ -112,7 +115,19 @@ function App() {
                                 fields: mapComponents(type.fields)
                             };
                         })
-                    }
+                    },
+                    form: {
+                        components: {
+                            input: (props) => {
+                                if (Array.isArray(props.groups) && props.groups.length > 0) {
+                                    if (props.groups[0].name === 'all-fields') {
+                                        props.groups.shift()
+                                    }
+                                }
+                                return props.renderDefault(props)
+                            },
+                        },
+                    },
                 });
             });
             setConfigs(workspaceConfigs);

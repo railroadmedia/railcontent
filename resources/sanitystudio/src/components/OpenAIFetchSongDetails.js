@@ -2,11 +2,15 @@ import React, { useCallback } from 'react';
 import { useClient, useFormValue, unset } from 'sanity';
 import { Stack, TextInput } from '@sanity/ui';
 import { randomKey } from '@sanity/util/content';
-console.log('roxana 1');
+
+
 const OpenAIFetchSongDetails = React.forwardRef((props, ref) => {
     const { elementProps,  value = '', onChange} = props;
     const sanityClient = useClient({ apiVersion: '2023-01-01' });
     const docId = useFormValue(["_id"]);
+
+    const oldValueRef = React.useRef(0);
+    console.log('roxana first',elementProps, value);
 //     // eslint-disable-next-line
 //     const soundsliceEntries = useFormValue(['soundslice']) ?? [];
 //
@@ -21,7 +25,8 @@ const OpenAIFetchSongDetails = React.forwardRef((props, ref) => {
 
         const OPENAI_API_KEY = 'sk-proj-kzgtxjxyxwuaRc9a9Qo1T3BlbkFJ6REV0l9r6eet3WwKI3cz';
     const songName = useFormValue(['name']);
-//     const [loading, setLoading] = useState(false);
+    const [state, setState] = useState();
+
 //     const [error, setError] = useState(null);
 //     const { documentId } = useFormState();
 //     const { patch } = useDocumentOperation(documentId, 'song');
@@ -29,7 +34,8 @@ const OpenAIFetchSongDetails = React.forwardRef((props, ref) => {
     const handleChange = useCallback(
 
          (event) => {
-             console.log('roxana handleChange');
+             const oldValue = oldValueRef.current;
+             console.log('roxana handleChange', oldValueRef, oldValue);
             // Get the soundslice key (_key) from the event target's id
             const newValue = event.target.value;
             const elementNameArray = event.target.id.split(".");
