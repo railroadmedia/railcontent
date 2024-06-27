@@ -218,7 +218,7 @@
                     : 'Click here to redeem on a new account.';
             @endphp
 
-            <div class="redeem-switcher rounded-xl py-4 bg-gray-300" x-data="{
+            <div class="redeem-switcher rounded-xl py-4 bg-[#E3E8EC]" x-data="{
                         membershipLink: '{{ $membershipLink }}',
                         init() {
                             const params = new URLSearchParams(window.location.search);
@@ -243,7 +243,6 @@
                 'existing' => !$isNewAccount,
                 'buttonText' => 'Click To Redeem &raquo;',
                 'buttonColor' => 'bg-drumeo text-white',
-                'accessCodeArray' => $accessCodeArray,
             ])
 
             <br>
