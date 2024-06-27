@@ -111,6 +111,7 @@ class GenerateFileForSongMigrationInSanity extends Command
                 'thumbnail_url'
             )
             ->where('railcontent_content.type','=', 'song')
+            ->where('railcontent_content.status','!=', 'deleted')
             ->where('railcontent_content.brand','=', $this->argument('brand'))
             // ->where('railcontent_content.id','=',407287)
             ->selectRaw('railcontent_content.*, f.value as soundslice, d.value as thumb')->get();
@@ -118,7 +119,7 @@ class GenerateFileForSongMigrationInSanity extends Command
         //   dd($results);
         foreach($results as $result){
             if(in_array($result->id,[270443, 318625, 382515, 382827, 382765, 382767, 391008, 396548, 399638, 404279, 404299,
-                382879, 391008, 391160, 401415])){
+                382879, 391008, 391160, 401415, 378258, 381186])){
                 continue;
             }
 
@@ -156,7 +157,7 @@ class GenerateFileForSongMigrationInSanity extends Command
                         'soundslice_slug'=>$result->soundslice,
                         'soundslice_length_in_second'=> (int) $result->length_in_seconds]
                 ],
-                "web_url_path" => url()->route('platform.content.first-level', ['songs', $result->slug, $result->id]),
+                "web_url_path" => '/'.$result->brand.'/songs/'. $result->slug.'/'. $result->id,
                 "popularity" => $result->popularity
             ];
             if(isset($this->difficultyMapping[$difficulty])){
