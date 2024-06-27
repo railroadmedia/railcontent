@@ -1,5 +1,4 @@
 <div id="testimonials" class="anchor"></div>
-
 <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5"
     @isset($bgColor)
         style="background: {{ $bgColor }};"
@@ -83,9 +82,8 @@
                                     padding: '2.5rem',
                                 },
                                 620: {
-                                    perPage: 1,
+                                    padding: '15px',
                                     arrows: false,
-                                    gap: '10px',
                                     focus: 0,
                                     snap: false,
                                 },
@@ -98,7 +96,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $index => $testimonial)
-                        <li class="splide__slide flex min-h-[360px] md:min-h-[390px]">
+                        <li class="splide__slide flex min-h-[290px] md:min-h-[390px]">
                             <div class="flex flex-wrap items-start w-full mb-5 sm:mb-8 relative px-2 pt-2 pb-5 rounded-xl bg-cover bg-top"
                                 style="background-image: url('{{ $testimonial['avatar'] }}');"
                                 @if (!empty($testimonial['video']))
@@ -106,9 +104,9 @@
                                 @endif
                                 >
                                 <i class="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if (!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-2xl text-white border-2 border-white px-5 py-3 rounded-full bg-[#0009] hover:opacity-80 z-10"></i>
-                                <div class="absolute bottom-0 left-0 right-0 px-4 pb-5 sm:pb-6 flex items-end rounded-b-xl">
+                                <div class="absolute bottom-0 left-0 right-0 px-3 sm:px-4 pb-4 sm:pb-6 flex items-end rounded-b-xl">
                                     <div class="flex flex-wrap w-full justify-center">
-                                        <h6 class="leading-normal w-full mb-3 text-white">
+                                        <h6 class="leading-tight sm:leading-normal w-full mb-2 sm:mb-3 text-white">
                                             <em>"{!! $testimonial['title'] !!}"</em>
                                         </h6>
                                         <p class="leading-tight w-full text-sm text-musora"><strong class="font-black">{{ $testimonial['name'] }}</strong></p>
@@ -121,79 +119,6 @@
                 </div>
             </div>
         </div>
-        @if (!empty($desktopGrid))
-            <div class=" hidden sm:flex flex-wrap">
-                @foreach ($testimonials as $testimonial)
-                    <div class="flex flex-col items-start w-1/4 mb-3">
-                        <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer"
-                            style="padding-bottom: 66%;"
-                            x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;">
-                            <div class="absolute inset-0 bg-cover bg-top"
-                                :class="{ 'opacity-0': !lazyLoad, 'opacity-100': lazyLoad }"
-                                :style="`background-image:url({{ $testimonial['image'] }}); background-color: rgba(0, 0, 0, 0.6)`"
-                                x-intersect.once="lazyLoad = true"></div>
-                            <div class="absolute inset-0 flex justify-center align-center">
-                                <i
-                                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if (!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
-                            </div>
-                        </div>
-                        <div class="w-full text-center">
-                            <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
-                            <p class="text-sm">{{ $testimonial['name'] }}</p>
-                            @if (!empty($testimonial['brand']))
-                                <p class="mt-1 text-xs cursor-pointer
-                                                @if ($testimonial['brand'] == 'Drummer') text-drumeo
-                                                @elseif($testimonial['brand'] == 'Pianist')
-                                                text-pianote
-                                                @elseif($testimonial['brand'] == 'Guitarist')
-                                                text-guitareo
-                                                @else
-                                                text-singeo @endif
-                                                "
-                                    x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;">
-                                    {{ $testimonial['brand'] }}
-                                </p>
-                            @else
-                                <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer"
-                                    x-on:click="{{ str_replace(' ', '', $testimonial['name']) }} = true;">
-                                    @if (!empty($testimonial['video']))
-                                        Watch video
-                                    @else
-                                        Read more
-                                    @endif
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
-
-            </div>
-        @endif
-        @if (!empty($youtube))
-            <div class="flex flex-wrap items-start justify-center mx-auto mt-10 sm:mt-16 lg:mt-20 max-w-3xl">
-                <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#cd201f;">
-                    <a href="{{ $youtubeLink }}" target="_blank" aria-label="Youtube Link" role="link"> <i
-                            class="fab fa-youtube text-4xl sm:text-5xl"></i>
-                    </a>
-                    <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $youtube }}</h2>
-                    <p class="uppercase sm:tracking-widest">Subscribers</p>
-                </div>
-                <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#3b5998;">
-                    <a href="{{ $facebookLink }}" target="_blank" aria-label="Facebook Link" role="link"> <i
-                            class="fab fa-facebook-f text-4xl sm:text-5xl"></i> </a>
-                    <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $facebook }}</h2>
-                    <p class="uppercase sm:tracking-widest">Likes</p>
-                </div>
-                <div class="w-1/3 sm:px-2 mb-4 py-1 sm:py-4 lg:py-5 instagram">
-                    <a href="{{ $instagramLink }}" target="_blank" aria-label="Instagram Link" role="link"> <i
-                            class="fab fa-instagram text-4xl sm:text-5xl"
-                            style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
-                    </a>
-                    <h2 class="font-black leading-none my-1 sm:my-2">{{ $instagram }}</h2>
-                    <p class="uppercase sm:tracking-widest" style="color:#E1306C">Followers</p>
-                </div>
-            </div>
-        @endif
     </div>
     @foreach ($testimonials as $testimonial)
         @if (!empty($testimonial['video']))

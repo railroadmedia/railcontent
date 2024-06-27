@@ -665,7 +665,7 @@ $musora = [
             "name" => "Claudio Sanchez",
             "location" => "California, USA",
             "video" => "877648411",
-            "title" => "I’ve always wanted to<br> play in front of a crowd.",
+            "title" => "I’ve always wanted to<br class='hidden sm:inline'> play in front of a crowd.",
         ],
         [
             "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Darli-Brazil-thumb-m.webp",
@@ -673,7 +673,7 @@ $musora = [
             "name" => "Darli Brazil",
             "location" => "California, USA",
             "video" => "878027528",
-            "title" => "Everything about it is<br> a positive experience.",
+            "title" => "Everything about it is<br class='hidden sm:inline'> a positive experience.",
         ],
         [
             "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Gabriel-Queija-thumb-m.webp",
@@ -681,7 +681,7 @@ $musora = [
             "name" => "Gabriel Queija",
             "location" => "Canada",
             "video" => "877591404",
-            "title" => "...great teachers, great<br> courses, great everything!",
+            "title" => "...great teachers, great<br class='hidden sm:inline'> courses, great everything!",
         ],
         [
             "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/musora/membership/homepage/2024/testimonials/Tonya-Hotz-thumb-m.webp",
@@ -689,7 +689,7 @@ $musora = [
             "name" => "Tonya Hotz",
             "location" => "Arizona, USA",
             "video" => "882979587",
-            "title" => "It’s even better than<br> I’d hoped it would be.",
+            "title" => "It’s even better than<br class='hidden sm:inline'> I’d hoped it would be.",
         ],
     ],
 ]
