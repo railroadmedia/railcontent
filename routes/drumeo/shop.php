@@ -19,8 +19,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'comfort-cover',
             'drum-technique-made-easy',
             'drumsticks',
-            'eardrums',
-            'eardrums-2',
             'easy-rudiments',
             'electrify-your-drumming',
             'festival-videos',
@@ -28,7 +26,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'learn-songs-faster',
             'new-drummers',
             'padstand',
-            'practice-pad-full',
             'quietpad',
             'quietkick',
             'rock-drumming-masterclass',
@@ -40,6 +37,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'tone-control-kit',
             'tony-royster-jr'
         ]);
+        Route::get('/eardrums', [SalesController::class, 'eardrums']);
         Route::get('/kit', [SalesController::class, 'kit']);
         Route::get('/kit-lifetime', [SalesController::class, 'kitLifetime']);
         Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummerEG']);

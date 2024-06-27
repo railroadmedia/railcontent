@@ -11,6 +11,11 @@ import 'simplebar/dist/simplebar.css';
 import { createPinia } from 'pinia';
 
 //App Pages
+import Profile from './vue/components/_Pages/Settings/Profile.vue';
+import LoginCredentials from './vue/components/_Pages/Settings/LoginCredentials.vue';
+import Payments from './vue/components/_Pages/Settings/Payments.vue';
+import NotificationSettings from './vue/components/_Pages/Settings/NotificationSettings.vue';
+import AccountDetails from './vue/components/_Pages/Settings/AccountDetails.vue';
 import Artists from './vue/Pages/Artists.vue';
 import ChildCatalog from './vue/Pages/ChildCatalog.vue';
 import Cohort from './vue/Pages/Cohort';
@@ -30,12 +35,12 @@ import WorkoutsPlayback from './vue/Pages/WorkoutsPlayback';
 import Offline from './vue/Pages/Live/Offline';
 import Online from './vue/Pages/Live/Online';
 import CoachShow from './vue/Pages/CoachShow';
-import BestBeginnerDrumBook from './vue/Pages/BestBeginnerDrumBook';
-import DrummersToolbox from './vue/Pages/DrummersToolbox';
 import InviteFriend from './vue/Pages/InviteFriend';
 import StudentFocus from './vue/Pages/StudentFocus';
 import Shows from './vue/Pages/Shows';
+import Overview from './vue/Pages/Overview';
 import GuitareoLessons from './vue/Pages/GuitareoLessons';
+import Catalogue from './vue/Pages/Catalogue/Catalogue';
 import Search from './vue/Pages/Search';
 import PackOverview from './vue/Pages/PackOverview';
 import PackOverviewBundles from './vue/Pages/PackOverviewBundles';
@@ -102,74 +107,6 @@ const app = createApp({
         userNavigationDropdownLinks: window.userNavigationDropdownLinks,
     },
     methods: {
-        avatarUploaded(payload) {
-            const avatarPhotos = document.querySelectorAll('[data-avatar-update]');
-            window.closeAllModals();
-            Array.from(avatarPhotos).forEach(photo => {
-                photo.setAttribute(
-                    'src', payload.image_url
-                );
-            });
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Ahh, Much Better! The new "you" is being refreshed...'
-            });
-        },
-
-        gearDrumeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-drumeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Woohoo! Your drum gear looks fantastic!'
-            });
-        },
-
-        gearPianotePhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-pianote-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-
-        },
-
-        gearGuitareoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-guitareo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Woohoo! Your gear looks fantastic!'
-            });
-        },
-
-        gearSingeoPhotoUploaded(payload) {
-            const gearPhoto = document.querySelector('[data-singeo-gear-update]');
-            window.closeAllModals();
-            gearPhoto.setAttribute(
-                'src', payload.image_url
-            );
-            gearPhoto.classList.remove('tw-hidden');
-            payload.cropper.resetCropper();
-            window.shownotification({
-                icon: 'check',
-                text: 'Woohoo! Your singing gear looks fantastic!'
-            });
-        },
-
         handleVideoPlay(payload) {
             if (['started', 'completed'].indexOf(payload.progressState) === -1 && !hasBeenPlayed) {
                 ContentService.markContentAsStarted(payload.contentId);
@@ -210,7 +147,6 @@ const app = createApp({
                 playAlongsProgressTracker = new ProgressTracker();
 
                 const { playAlongsVueInstance } = this.$refs;
-
                 if (playAlongsVueInstance) {
                     window.addEventListener('unload', (event) => {
                         progressTracker.send({
@@ -221,7 +157,6 @@ const app = createApp({
                     });
                 }
             }
-
             playAlongsProgressTracker.start();
         },
 
@@ -276,22 +211,26 @@ app.component('AppContainer', AppContainer)
     .component('Stc', Stc)
     .component('DeleteAccountModal', DeleteAccountModal)
     .component('Cohort', Cohort)
-    .component('BestBeginnerDrumBook', BestBeginnerDrumBook)
-    .component('DrummersToolbox', DrummersToolbox)
     .component('MiniCatalogueSection', MiniCatalogueSection)
     .component('LessonHistory', LessonHistory)
     .component('CoachShow', CoachShow)
     .component('CoachIndex', CoachIndex)
+    .component('Profile', Profile)
+    .component('LoginCredentials', LoginCredentials)
+    .component('Payments', Payments)
+    .component('NotificationSettings', NotificationSettings)
+    .component('AccountDetails', AccountDetails)
     .component('InviteFriend', InviteFriend)
     .component('Offline', Offline)
     .component('Online', Online)
     .component('StudentFocus', StudentFocus)
     .component('Shows', Shows)
+    .component('Overview', Overview)
     .component('GuitareoLessons', GuitareoLessons)
+    .component('Catalogue', Catalogue)
     .component('Search', Search)
     .component('PackOverview', PackOverview)
     .component('PackOverviewBundles', PackOverviewBundles)
-
     .component('PlaylistPlayback', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback" */

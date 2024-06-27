@@ -212,8 +212,6 @@ return [
         App\Providers\VaporUiServiceProvider::class,
 
         Venturecraft\Revisionable\RevisionableServiceProvider::class,
-
-        LaravelFCM\FCMServiceProvider::class,
     ],
 
     /*
@@ -245,7 +243,6 @@ return [
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
-        'FCM' => LaravelFCM\Facades\FCM::class,
         'FeatureFlag' => App\Modules\FeatureFlagging\Facades\FeatureFlagging::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,

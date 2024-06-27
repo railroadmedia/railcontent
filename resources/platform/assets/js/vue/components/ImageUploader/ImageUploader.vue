@@ -6,6 +6,10 @@ import ImageUploadProgress from '../ImageUploadProgress/ImageUploadProgress.vue'
 import InfoModal from '../Modal/InfoModal.vue';
 
 const props = defineProps({
+  modalTitle : {
+    type: String, 
+    default: 'Upload Image'
+  },
   uploadServiceRoute: {
     type: String,
     required: true,
@@ -43,7 +47,7 @@ const props = defineProps({
 const emit = defineEmits(['uploadSuccess', 'uploadError', 'onUploaderClose']);
 
 const title = {
-  dropzone: 'Upload Image',
+  dropzone: props.modalTitle,
   crop: `Crop your ${props.cropType === 'circle' ? 'Avatar' : 'Image'}`,
   upload: '',
 };
@@ -83,9 +87,16 @@ function handleUploadError() {
       classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
       <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
       <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" :type="cropType" />
-      <ImageUploadProgress :successMessage="successMessage" :fieldKey="fieldKey" :uploadService="uploadServiceRoute"
-        v-if="uploadStep === 'upload'" :image="croppedImage" @onUploadDone="handleUploadDone"
-        @onUploadError="handleUploadError" />
+      <ImageUploadProgress 
+        v-if="uploadStep === 'upload'" 
+        :successMessage="successMessage" 
+        :fieldKey="fieldKey" 
+        :uploadService="uploadServiceRoute"
+        :crop-type="cropType"
+        :image="croppedImage" 
+        @onUploadDone="handleUploadDone"
+        @onUploadError="handleUploadError" 
+      />
     </InfoModal>
   </div>
 </template>

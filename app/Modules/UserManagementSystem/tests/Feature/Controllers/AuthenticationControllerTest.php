@@ -2,19 +2,161 @@
 
 namespace Modules\UserManagementSystem\Tests\Feature\Controllers;
 
+use App\Mail\Agnostic;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Middleware\AuthenticatedOnly;
 use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Tests\UserManagementSystemTestCase;
-use PDO;
 
 class AuthenticationControllerTest extends UserManagementSystemTestCase
 {
+    public function test_check_email_account_exists()
+    {
+        $email = $this->faker->email;
+
+        User::factory()->create([
+            'email' => $email,
+        ]);
+
+        $response = $this->post(
+            route('user_management_system.login.check-email'),
+            ['email' => $email]
+        );
+
+        $response->assertJson(
+            [
+                'message' => 'success',
+                'is_setup' => true,
+                'links' => [
+                    'login' => route('user_management_system.login')
+                ]
+            ]
+        );
+    }
+
+    public function test_check_email_doesnt_exist()
+    {
+        $email = $this->faker->email;
+
+        $response = $this->post(
+            route('user_management_system.login.check-email'),
+            ['email' => $email]
+        );
+
+        $response->assertInvalid(['email' => 'The selected email is invalid.']);
+    }
+
+    public function test_check_email_needs_setup()
+    {
+        $email = $this->faker->email;
+
+        User::factory()->create([
+            'email' => $email,
+            'requires_password_update' => true
+        ]);
+
+        Mail::fake();
+
+        $response = $this->post(
+            route('user_management_system.login.check-email'),
+            ['email' => $email]
+        );
+
+        Mail::assertSent(
+            Agnostic::class,
+            function (Agnostic $mail) use ($email) {
+                return $mail->hasTo($email) && $mail->view === 'emails.account-setup';
+            }
+        );
+
+        $response->assertJson(
+            [
+                'message' => 'User requires password update. Email sent to user.',
+                'is_setup' => false,
+                'links' => [
+                    'resend-email' => route('user_management_system.login.send-account-setup-email')
+                ]
+            ]
+        );
+    }
+
+    public function test_send_account_setup_email()
+    {
+        $email = $this->faker->email;
+
+        User::factory()->create([
+            'email' => $email,
+        ]);
+
+        $response = $this->post(
+            route('user_management_system.login.send-account-setup-email'),
+            ['email' => $email]
+        );
+
+        Mail::assertSent(
+            Agnostic::class,
+            function (Agnostic $mail) use ($email) {
+                return $mail->hasTo($email) && $mail->view === 'emails.account-setup';
+            }
+        );
+
+        $response->assertOk();
+    }
+
+    public function test_login()
+    {
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        User::factory()->create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        Event::fake();
+        $this->assertFalse(Auth::check());
+
+        $response = $this->post(
+            route('user_management_system.login'),
+            ['email' => $email, 'password' => $password]
+        );
+
+        $this->assertTrue(Auth::check());
+        Event::assertDispatched(UserEvent::class);
+        $response->assertOk();
+    }
+
+    public function test_login_fails_for_invalid_password()
+    {
+        $this->assertFalse(Auth::check());
+        $email = $this->faker->email;
+        $password = $this->faker->words(3, true);
+
+        User::factory()->create([
+            'email' => $email,
+            'password' => 'some-other-string-123',
+        ]);
+
+        Event::fake();
+
+        $response = $this->post(
+            route('user_management_system.login'),
+            ['email' => $email, 'password' => $password]
+        );
+
+        $response->assertUnauthorized();
+        $response->assertJson(['message' => 'Invalid credentials']);
+        $this->assertFalse(Auth::check());
+    }
+
     // TODO: fix all of these tests. They all throw ErrorException: Redis::connect(): php_network_getaddresses: getaddrinfo for redis failed: Name or service not known...
     protected function setUp(): void
     {
@@ -41,20 +183,20 @@ class AuthenticationControllerTest extends UserManagementSystemTestCase
         $this->assertEquals(
             json_encode([
                 'errors' =>
+                [
+                    'email' =>
                     [
-                        'email' =>
-                            [
-                                0 => 'The email field is required.',
-                            ],
-                        'password' =>
-                            [
-                                0 => 'The password field is required.',
-                            ],
-                        'device_name' =>
-                            [
-                                0 => 'The device name field is required.',
-                            ],
+                        0 => 'The email field is required.',
                     ],
+                    'password' =>
+                    [
+                        0 => 'The password field is required.',
+                    ],
+                    'device_name' =>
+                    [
+                        0 => 'The device name field is required.',
+                    ],
+                ],
             ]),
             $response->getContent()
         );

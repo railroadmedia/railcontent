@@ -62,7 +62,7 @@
                 <h1><a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/" aria-label="Drum Shop">Drum Shop</a></h1>
                 <p>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/" aria-label="Drumeo Membership">Drumeo Membership</a><br>
-                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/practice-pad-full/" aria-label="P4 Practice Pad">P4 Practice Pad</a><br>
+                    <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/quietpad/" aria-label="Drumeo QuietPad">Drumeo QuietPad</a><br>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/quietkick/" aria-label="Drumeo QuietKick">Drumeo QuietKick</a><br>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop/beginner-book" aria-label="Beginner Drum Book">Beginner Drum Book</a><br>
                     <a href="{{ get_legacy_brand_base_url('drumeo') }}/clothing/" aria-label="Drumeo Merch">Drumeo Merch</a>

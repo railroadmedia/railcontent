@@ -13,17 +13,12 @@
             :description="headerDescription"
         />
         <div class="tw-my-4">
-            <ContentCatalogue
-                :brand="brand"
-                catalogue-type="list"
-                :theme-color="brand"
-                :use-theme-color="true"
-                :pre-loaded-content="childContent"
-                :show-numbers="true"
+            <ListCatalogue
+                :content="childContent.data"
                 :user-id="userId"
                 :is-admin="isAdmin"
+                :show-numbers="true"
             />
-
             <CompletionBonus :xp-bonus="xpBonus" />
         </div>
     </div>
@@ -35,7 +30,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import PageHeader from "../components/PageHeader/PageHeader";
 import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
 import CompletionBonus from "../components/CompletionBonus/CompletionBonus";
-import ContentCatalogue from "../components/Catalogue/ContentCatalogue";
+import ListCatalogue from '../components/ListCatalogue/ListCatalogue';
 
 const props = defineProps({
     breadcrumbs: {

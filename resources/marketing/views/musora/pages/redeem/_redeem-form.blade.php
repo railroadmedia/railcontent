@@ -1,7 +1,4 @@
-<form
-    id="commentform" name="drumeo" method="post"
-    x-data="redeemForm"
-    @submit.prevent="submitRedeem($event)"
+<form id="commentform" name="drumeo" method="post"
     @if(empty($existing)) action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" @else action="{{ URL::route('access-codes.form-claim') }}" @endif
 >
     @php

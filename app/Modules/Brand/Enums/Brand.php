@@ -8,4 +8,5 @@ enum Brand: string
     case Pianote = 'pianote';
     case Guitareo = 'guitareo';
     case Singeo = 'singeo';
+    case Musora = 'musora';
 }

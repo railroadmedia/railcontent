@@ -21,8 +21,7 @@
                 <DownloadsCatalogue v-else-if="isDownloadView" :content="data" />
                 <RoutinesCatalogue v-else-if="isRoutine" :content="data"
                                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
-                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :show-reset-progress="showResetProgress"
-                    @addToList="UserCatalogueEvents.methods.addToListEventHandler" />
+                <ListCatalogue v-else-if="isList" :content="data" :force-wide-thumbs="isStudentReview" :show-reset-progress="showResetProgress" />
                 <CatalogueCardContainer
                     v-else
                     :pre-loaded-content="data"
@@ -46,7 +45,7 @@ import CollectionResults from '../Catalogue/CollectionResults.vue';
 import UserCatalogueEvents from "../../vuesora/mixins/UserCatalogueEvents";
 
 //Views
-import ListCatalogue from "../../vuesora/views/catalogues/ListCatalogue";
+import ListCatalogue from "../ListCatalogue/ListCatalogue";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 import SongCardContainer from "../Catalogue/SongCardContainer";
 import RoutinesCatalogue from "../../vuesora/views/catalogues/RoutinesCatalogue";
@@ -215,10 +214,14 @@ const includedTypes = computed(() => {
 
     if (isCoach.value) {
         types.push('instructor');
-    }else if(props.multipleTypes){
+    } else if(props.multipleTypes){
         types = props.includedTypes;
     } else {
-        props.collectionType && types.push(props.collectionType) && types.push(props.includedTypes);
+        types = [...types, ...props.includedTypes];
+
+        if(!types.includes(props.collectionType)){
+            types.push(props.collectionType);
+        }
 
         if (isQuickTips.value) {
             types.push('boot-camps');
@@ -307,7 +310,7 @@ const isCoachShow = computed(() => {
 
 //List view reactive
 const isList = computed(() => {
-    return !isRecommendation.value && !isWorkout.value && !isChallenge.value  && props.collectionType && !isCoachShow.value;
+    return !isRecommendation.value && !isWorkout.value && !isChallenge.value && props.collectionType && !isCoachShow.value;
 })
 
 const showGroupBy = computed(() => {

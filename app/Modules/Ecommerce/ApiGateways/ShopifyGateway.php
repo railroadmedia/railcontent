@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaFieldDefinition;
 use App\Modules\Ecommerce\Models\Shopify\Order;
+use App\Modules\Ecommerce\Models\Shopify\ProductMetaFields;
 use App\Modules\Ecommerce\Traits\ExecutesShopifyGraphQlQuery;
 use Carbon\Carbon;
 use Exception;
@@ -24,6 +25,40 @@ class ShopifyGateway
     public function __construct(Shopify $shopify)
     {
         $this->shopify = $shopify;
+    }
+
+
+    public function getVariantMetaFields($id)
+    {
+        $product = collect();
+
+        $gql = <<<GQL
+                query {
+                    node(id: "$id") {
+                        ... on ProductVariant {
+                            id
+                            metafields(first: 10) {
+                                edges {
+                                    node {
+                                        namespace
+                                        key
+                                        value
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                GQL;
+
+        $responseBody = $this->executeQuery($gql);
+
+        $product = $responseBody->data->node ?
+            collect($responseBody->data->node->metafields->edges)->map(function ($product) {
+                return new ProductMetaFields($product);
+            }) : collect();
+
+        return $product->values();
     }
 
     public function getCustomerOrders($shopifyCustomerId)
@@ -158,7 +193,7 @@ class ShopifyGateway
      *
      * @param Carbon $startDate
      * @param Carbon $endDate
-     * @param  int  $limit  The page limit for this query. Must be 1-250.
+     * @param int $limit The page limit for this query. Must be 1-250.
      * @param string $additionalFilter Additional query filter, e.g. " AND status:closed".
      *                       See https://shopify.dev/docs/api/usage/search-syntax
      * @param string $additionalFields Additional fields to include in result, e.g. ", processedAt".

@@ -14,3 +14,55 @@
         color: rgb(11, 118, 219);
     }
 }
+
+/* Musora Color Palette */
+@layer base {
+    :root {
+        // Primary Colors
+        --color-primary-1: #00101D;
+        --color-primary-2: #3F3F46;
+        --color-primary-3: #65656B;
+        --color-primary-4: #8C8C90;
+        --color-primary-5: #B2B2B5;
+        --color-primary-6: #CBCBCD;
+        --color-primary-7: #E0E0E1;
+        --color-primary-8: #F4F4F5;
+        --color-primary-9: #F9F9F9;
+        --color-primary-10: #FFFFFF;
+        // Text
+        --color-text-primary: #000C17;
+        --color-text-secondary: #00101D;
+        --color-text-tertiary: #3F3F46;
+        // UI
+        --color-ui-page: #F9F9F9;
+        --color-ui-navigation: #FFFFFF;
+        --color-ui-border: #C5C5C7;
+        --color-ui-button-bg: #000000;
+        --color-ui-button-text: #FFFFFF;
+    }
+
+    //Dark Mode Variant
+    body.tw-dark {
+        // Primary Colors
+        --color-primary-1: #E7EFF6;
+        --color-primary-2: #9EC0DC;
+        --color-primary-3: #80A0B9;
+        --color-primary-4: #627F97;
+        --color-primary-5: #445F74;
+        --color-primary-6: #223F57;
+        --color-primary-7: #002039;
+        --color-primary-8: #081825;
+        --color-primary-9: #00101D;
+        --color-primary-10: #000C17;
+        // Text
+        --color-text-primary: #FFFFFF;
+        --color-text-secondary: #E7EFF6;
+        --color-text-tertiary: #9EC0DC;
+        // UI
+        --color-ui-page: #000C17;
+        --color-ui-navigation: #081825;
+        --color-ui-border: #223F57;
+        --color-ui-button-bg: #FFFFFF;
+        --color-ui-button-text: #000000;
+    }
+}

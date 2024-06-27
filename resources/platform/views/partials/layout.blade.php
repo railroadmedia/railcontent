@@ -1,23 +1,45 @@
 @php
-use Illuminate\Support\Str;
-$isOnboarding = str_contains(request()->url(), '/onboarding');
-$userData = assembleUserAttributes(user());
+    use Illuminate\Support\Str;
+    $isOnboarding = str_contains(request()->url(), '/onboarding');
+    $userData = assembleUserAttributes(user());
 
-$journeySection = '';
+    $journeySection = '';
 
-if (isset($trackingSectionName)) {
-    $journeySection = $trackingSectionName;
-} else if (isset($catalogueMeta) && isset($catalogueMeta['name'])) {
-    $journeySection = $catalogueMeta['name'];
-} else {
-    $journeySection = 'Unknown';
-}
+    if (isset($trackingSectionName)) {
+        $journeySection = $trackingSectionName;
+    } else if (isset($catalogueMeta) && isset($catalogueMeta['name'])) {
+        $journeySection = $catalogueMeta['name'];
+    } else {
+        $journeySection = 'Unknown';
+    }
 
-$isMobileAppWebView = false;
+    $isMobileAppWebView = false;
+    if (request()->has('mobile-app-web-view')) {
+        $isMobileAppWebView = true;
+    }
 
-if (request()->has('mobile-app-web-view')) {
-    $isMobileAppWebView = true;
-}
+    // Show Account Button
+    $hasGear =
+        count(
+            user()->onboardingGear->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasTopics =
+        count(
+            user()->onboardingTopics->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasGenres =
+        count(
+            user()->onboardingGenres->filter(function ($item) {
+                return $item->brand == brand();
+            }),
+        ) > 0;
+    $hasExperience = user()->onboardingExperience ? true : false;
+    $hasGoals= user()->onboardingGoals ? true : false;
+    $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$hasExperience || !$hasGoals;
 @endphp
 
 <!DOCTYPE html>
@@ -71,6 +93,7 @@ if (request()->has('mobile-app-web-view')) {
                     :vue-router="false"
                     brand="{{ $brand }}"
                     :user="{{ json_encode($userData) }}"
+                    :user-completed-account="{{ json_encode($showCompleteYourAccountButton) }}"
                     csrf_token="{{ csrf_token() }}"
                     :journey-section="{{ json_encode($journeySection) }}"
                 >

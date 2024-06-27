@@ -239,7 +239,6 @@
                 <br>
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
-
             @include('musora.pages.redeem._redeem-form', [
                 'existing' => !$isNewAccount,
                 'buttonText' => 'Click To Redeem &raquo;',
