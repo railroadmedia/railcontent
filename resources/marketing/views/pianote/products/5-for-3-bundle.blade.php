@@ -10,7 +10,7 @@
     <meta property="description" content="Get 5 years of Pianote for the price of 3.">
     <meta property="og:description" content="Get 5 years of Pianote for the price of 3.">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-share-image.jpg">
 
 @endsection
 
@@ -64,15 +64,20 @@
 
 @section('layout-body')
 
+@php
+$originalPrice = 1200;
+$discountedPrice = 720;
+@endphp
+
     @include('pianote.products.partials._summer-promo', [
         'backgroundImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg.webp',
         'logoUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/logo.webp',
         'offerTitle' => 'Get 5 years of Pianote for the price of 3.',
         'spotsAvailable' => $products['pianote_access_5-years']->getPublicStockCount(), 
         'headerImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header.webp',
-        'originalPrice' => '1200',
-        'discountedPrice' => '720',
-        'discountPercentage' => '40',
+        'originalPrice' => $originalPrice,
+        'discountedPrice' => $discountedPrice,
+        'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
         'ctaLink' => '',
         ]) <!-- TODO -->
 
@@ -129,9 +134,9 @@
         'offerTitle' => 'Get 5 years of Pianote for the price of 3.',
         'spotsAvailable' => $products['pianote_access_5-years']->getPublicStockCount(),
         'headerImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header.webp',
-        'originalPrice' => '1200',
-        'discountedPrice' => '720',
-        'discountPercentage' => '40',
+        'originalPrice' => $originalPrice,
+        'discountedPrice' => $discountedPrice,
+        'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
         'ctaLink' => '', 
     ])
     
