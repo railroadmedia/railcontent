@@ -11,7 +11,7 @@ class AddExperiment extends Command
     protected $signature = 'featureFlag:addExperiment
                             {name : name of new Experiment}
                             {--default_value= : string - Default value, used when no branches exist or the Experiment is disabled}
-                            {--enabled : truthsy values will set the enabled flag to true. Default true}';
+                            {--enabled : Passing this flag will enable the experiment}';
     protected $description = "Add new A/B Testing Experiment";
 
     public function handle(FeatureFlagService $ffService): void

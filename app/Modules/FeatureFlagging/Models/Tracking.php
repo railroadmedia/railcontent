@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?int $user_id
  * @property int $experiment_id
  * @property ?string $anonymous_user_id
+ * @property bool $is_first_touch_handled
  * @method static \Illuminate\Database\Eloquent\Builder|Tracking newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tracking newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tracking query()

@@ -12,8 +12,8 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::table('webhooks', function (Blueprint $table) {
-            $table->index(['source', 'source_id']);
+        Schema::table('features_tracking', function (Blueprint $table) {
+            $table->boolean('is_first_touch_handled')->default(false)->after('anonymous_user_id');
         });
     }
 
@@ -24,8 +24,8 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::table('webhooks', function (Blueprint $table) {
-            $table->dropIndex(['source', 'source_id']);
+        Schema::table('features_tracking', function (Blueprint $table) {
+            $table->removeColumn('is_first_touch_handled');
         });
     }
 };
