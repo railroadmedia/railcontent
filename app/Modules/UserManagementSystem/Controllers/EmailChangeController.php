@@ -47,6 +47,7 @@ class EmailChangeController extends Controller
      */
     public function request(Request $request)
     {
+        $isJson = request()->expectsJson();
         try {
             $request->validate([
                 'email' => [
@@ -59,21 +60,34 @@ class EmailChangeController extends Controller
                 'user_password' => 'required'
             ]);
         } catch (ValidationException $e) {
-            $messagesByField = $e->validator->getMessageBag()->getMessages();
-            $messagesForFieldFailingField = reset($messagesByField);
+            if ($isJson) {
+                return response()->json(
+                    ['error' => $e->getMessage()],
+                    500
+                );
+            } else {
+                $messagesByField              = $e->validator->getMessageBag()->getMessages();
+                $messagesForFieldFailingField = reset($messagesByField);
 
-            foreach ($messagesForFieldFailingField as $messagesForField) {
-                $errorMessageToUser = $messagesForField;
-                break;
+                foreach ($messagesForFieldFailingField as $messagesForField) {
+                    $errorMessageToUser = $messagesForField;
+                    break;
+                }
+                $default = 'Please try again, and contact support if the problem persists.';
+                $message = ['error-message' => ($errorMessageToUser ?? $default)];
+
+                return redirect()->back()->withErrors($message);
             }
-            $default = 'Please try again, and contact support if the problem persists.';
-            $message = ['error-message' => ($errorMessageToUser ?? $default)];
-
-            return redirect()->back()->withErrors($message);
         }
         $user = user();
 
         if ($request->get('email') == user()->email) {
+            if ($isJson) {
+                return response()->json(
+                    ['error' => 'Please choose a new email.'],
+                    500
+                );
+            }
             return back()
                 ->with(['error-message' => "Please choose a new email."]);
         }
@@ -81,6 +95,12 @@ class EmailChangeController extends Controller
         if (
             !$this->hasher->check($request->get('user_password'), $user->password)
         ) {
+            if ($isJson) {
+                return response()->json(
+                    ['error' => 'The current password you entered is incorrect.'],
+                    500
+                );
+            }
             return redirect()->back()->with('error-message', 'The current password you entered is incorrect.');
         }
 
@@ -106,6 +126,10 @@ class EmailChangeController extends Controller
         event(new EmailChangeRequest($payload['token'], $payload['email']));
 
         $this->sendEmailChangeNotification($payload['token'], $payload['email']);
+
+        if ($isJson) {
+            return response()->json('An email confirmation link has been sent to your new email address.', 201);
+        }
 
         $message = [
             'successes' => new MessageBag(

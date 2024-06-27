@@ -1,9 +1,16 @@
 <template>
   <PageHeaderLayout>
     <template #top-left>
-      <PageHeaderHero :iconName="iconName" :title="title" :subTitle="subTitle" :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" :additionalImgSrc="logo"
-        :infoData="isSongsPage || isPlaylistsPage ? null : infoData">
+      <PageHeaderHero
+        :pageType="pageType"
+        :iconName="iconName"
+        :title="title"
+        :subTitle="subTitle"
+        :heroImg="heroImg"
+        :heroImgClasses="heroImgClasses"
+        :additionalImgSrc="logo"
+        :infoData="isSongsPage || isPlaylistsPage ? null : infoData"
+      >
         <template #header-description v-if="description">
           <div class="tw-flex tw-flex-col tw-h-full">
             <div class="tw-flex tw-grow tw-items-center">
@@ -18,7 +25,7 @@
     </template>
     <template #top-right>
       <div v-if="!isSongsPage" :class="primaryCta ? 'tw-hidden sm:tw-flex' : 'tw-flex'">
-        <PageHeaderCtasBox :ctas="ctas" />
+        <PageHeaderCtasBox v-if="ctas && ctas.length" :ctas="ctas" />
       </div>
     </template>
     <template #bottom-full>
@@ -37,7 +44,7 @@
             <span class="tw-uppercase">{{ songsPageLink.text }}</span>
             <i class="fa-solid fa-chevron-right tw-ml-1"></i>
           </a>
-          <PageHeaderCtasBox :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
+          <PageHeaderCtasBox v-if="ctas && ctas.length" :class="progress ? 'tw-justify-between sm:tw-justify-end' : 'tw-justify-end'"
             :ctas="secondaryCtas" />
         </div>
       </div>
@@ -63,7 +70,7 @@ import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
 const props = defineProps({
   pageType: String,
-  contentId: String,
+  contentId: [String, Number],
   iconName: String,
   title: String,
   subTitle: String,
@@ -89,8 +96,8 @@ const secondaryCtas = computed(() => props.ctas?.filter(cta => cta.props?.isPrim
 const hasSecondaryCtas = computed(() => secondaryCtas.value.length > 0);
 const isDarkMode = ref(JSON.parse(localStorage.getItem("darkMode")));
 
-const isDashboardPage = computed(() => props.pageType === 'dashboard')
-const isNotificationsPage = computed(() => props.pageType === 'notifications')
+const isSettingsPage = computed(() => props.pageType === 'settings');
+const isNotificationsPage = computed(() => props.pageType === 'notifications');
 
 const isCoachPage = computed(() => props.pageType === 'instructor')
 const isCoursePage = computed(() => props.pageType === 'course')

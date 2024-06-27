@@ -34,11 +34,11 @@
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-right: 2%;
-        margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1" target="_blank" aria-label="Download on App Store">
+        margin-top: 10px;" href="https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277" target="_blank" aria-label="Download on App Store">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
-        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews" target="_blank" aria-label="Download on Google Play">
+        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank" aria-label="Download on Google Play">
                 <img src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">

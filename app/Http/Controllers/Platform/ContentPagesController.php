@@ -827,14 +827,11 @@ class ContentPagesController extends BaseController
         $matched = false;
 
         foreach ($parentChildren as $parentChildIndex => $parentChild) {
-            if ((count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
+            $matched = $parentChild['id'] == $contentToRenderAsLesson['id'];
+            if (!$matched && (count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
                 $parentChildrenTrimmed[] = $parentChild;
-            } elseif ($matched && count($parentChildrenTrimmed) < 10) {
+            } elseif ($matched && count($parentChildren) < 10 && count($parentChildrenTrimmed) < 10) {
                 $parentChildrenTrimmed[] = $parentChild;
-            }
-
-            if ($parentChild['id'] == $contentToRenderAsLesson['id']) {
-                $matched = true;
             }
         }
 

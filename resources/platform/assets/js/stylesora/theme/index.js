@@ -28,14 +28,6 @@ module.exports = {
       800: "#112E4A",
       900: "#13171B",
     },
-    drumeoBasic: {
-      50: "#F3F4F5",
-      200: "#B2D4F4",
-      500: "#0B76DB", //DEFAULT
-      DEFAULT: "#0B76DB",
-      800: "#112E4A",
-      900: "#13171B",
-    },
     pianote: {
       50: "#F6F5F5",
       100: "#FEE8EA",
@@ -46,14 +38,6 @@ module.exports = {
       DEFAULT: "#F61A30",
       600: "#AC1222",
       700: "#7B0D18",
-      800: "#55171D",
-      900: "#201617",
-    },
-    pianoteBasic: {
-      50: "#F6F5F5",
-      200: "#FCB8BF",
-      500: "#F61A30",
-      DEFAULT: "#F61A30",
       800: "#55171D",
       900: "#201617",
     },
@@ -70,14 +54,6 @@ module.exports = {
       800: "#0C443C",
       900: "#101817",
     },
-    guitareoBasic: {
-      50: "#F2F4F3",
-      300: "#A8EDE3",
-      500: "#00C9AC", //DEFAULT
-      DEFAULT: "#00C9AC",
-      800: "#0C443C",
-      900: "#101817",
-    },
     singeo: {
       50: "#F4F3F5",
       100: "#F3E6FD",
@@ -91,44 +67,36 @@ module.exports = {
       800: "#320E4F",
       900: "#18131C",
     },
-    singeoBasic: {
-      50: "#F4F3F5",
-      200: "#DAB3F8",
-      500: "#8300E9", //DEFAULT
-      DEFAULT: "#8300E9",
-      800: "#320E4F",
-      900: "#18131C",
+    //Primary
+    primary: {
+      1: "var(--color-primary-1)",
+      2: "var(--color-primary-2)",
+      3: "var(--color-primary-3)",
+      4: "var(--color-primary-4)",
+      5: "var(--color-primary-5)",
+      6: "var(--color-primary-6)",
+      7: "var(--color-primary-7)",
+      8: "var(--color-primary-8)",
+      9: "var(--color-primary-9)",
+      10: "var(--color-primary-1)",
     },
-    recordeo: {
-      50: "#F6F5F4",
-      100: "#FFEFCC",
-      200: "#FFE3A7",
-      300: "#FFCE66",
-      400: "#FFBE33",
-      500: "#FFAE00", //DEFAULT
-      DEFAULT: "#FFAE00",
-      600: "#CC8B00",
-      700: "#996800",
-      800: "#563F0F",
-      900: "#1E1B14",
+    //Text Colors
+    text: {
+      primary: "var(--color-text-primary)", 
+      secondary: "var(--color-text-secondary)", 
+      tertiary: "var(--color-text-tertiary)"
     },
-    recordeoBasic: {
-      50: "#F6F5F4",
-      200: "#FFE3A7",
-      500: "#FFAE00", //DEFAULT
-      DEFAULT: "#FFAE00",
-      800: "#563F0F",
-      900: "#1E1B14",
-    },
-    //Dark Mode
-    dm: {
-      "mild-blue": "#7E9AB1",
-      "gray-blue": "#445F74",
-      "royal-blue": "#002039",
-      "dark-blue-1": "#081825",
-      "dark-blue-2": "#000C17",
-      "dark-blue-3": "#00101D",
-    },
+    //UI Colors
+    ui: {
+      page: "var(--color-ui-page)", 
+      navigation: "var(--color-ui-navigation)", 
+      border: "var(--color-ui-border)", 
+      skeleton: "var(--color-ui-skeleton)",
+      button: {
+        bg: "var(--color-ui-button-bg)",
+        text:"var(--color-ui-button-text)"
+      }
+    }
   },
   //FONT SIZES
   fontSize: {

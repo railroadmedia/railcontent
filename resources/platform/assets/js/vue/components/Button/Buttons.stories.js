@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "./MuButton";
 
 export default {
   title: "Components/Button",
@@ -16,7 +16,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<Button v-bind="args">My button</Button>',
+  template: '<MuButton v-bind="args">My button</MuButton>',
 });
 
 export const Primary = Template.bind({});

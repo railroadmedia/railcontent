@@ -60,7 +60,7 @@
                     <div id="sticky-slide" class="overflow-hidden rounded border border-solid border-gray-300">
                         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
                             <h1 class="text-center text-3xl uppercase md:text-4xl">
-                                <strong class="font-black">$<span class="chosen-variant-price-float">87</span></strong>
+                                <strong class="font-black">$<span class="chosen-variant-price-float">90</span></strong>
                             </h1>
                             <select class="pack-pick2 mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Bebas Neue, sans-serif" title="Shirt Size" required>
                                 <option hidden value="">Pick duration</option>
@@ -68,8 +68,8 @@
                                     $variations = [
                                             (object)[
                                                 "name" => "90 Day Access Pass",
-                                                "fullPrice" => 87,
-                                                "price" => 87,
+                                                "fullPrice" => 90,
+                                                "price" => 90,
                                                 "sku" => "musora-membership-gift-card-90-days"
                                             ],
                                             (object)[
@@ -93,7 +93,7 @@
                             <a
                                 class="online-atc merch vue-add-to-cart selected-pack2"
                                 href="#"
-                                data-base-url="https://www.drumeo.com/ecommerce/add-to-cart?locked=true"
+                                data-base-url="https://www.drumeo.com/ecommerce/add-to-cart?"
                             >
                                 <button class="join border-none mt-2 mb-4 w-full" style="background: #000;font: 400 20px/1em 'Bebas Neue', sans-serif !important;">
                                     <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
@@ -131,7 +131,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var originalLink2 = 'https://www.drumeo.com/ecommerce/add-to-cart?locked=true';
+            var originalLink2 = 'https://www.drumeo.com/ecommerce/add-to-cart?';
             var selects = document.querySelectorAll('.pack-pick2');
             var priceSpan = document.querySelector('.chosen-variant-price-float');
             var orderButton = document.querySelector('.selected-pack2');

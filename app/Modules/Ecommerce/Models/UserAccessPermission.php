@@ -53,17 +53,21 @@ class UserAccessPermission extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getExpirationDate(): Carbon
+    {
+        return $this->time_fixed ? Carbon::parse($this->time_fixed) :
+            Carbon::parse($this->start_time)
+            ->addMinutes($this->time_minutes)
+            ->addDays($this->time_days)
+            ->addMonths($this->time_months);
+    }
+
     public function getExpirationTime(): string
     {
         if ($this->time_lifetime) {
             return 'Forever';
         }
-        return $this->time_fixed ? Carbon::parse($this->time_fixed)->toDateTimeString() :
-            Carbon::parse($this->start_time)
-                ->addMinutes($this->time_minutes)
-                ->addDays($this->time_days)
-                ->addMonths($this->time_months)
-                ->toDateTimeString();
+        return $this->getExpirationDate()->toDateTimeString();
     }
 
     //These properties are calculated through the UserAccessPermissionsCollection determineActiveTimes method
@@ -122,5 +126,4 @@ class UserAccessPermission extends Model
                 return 'Unknown';
         }
     }
-
 }

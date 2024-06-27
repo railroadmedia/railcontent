@@ -109,7 +109,13 @@ class RevenueCatController extends Controller
 
                 $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
                 $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
-                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                $processedDateRangeMinutes = 1440;
+                if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                    $processedDateRangeMinutes = round(
+                        $expiredAt->diffInSeconds($processedAt) / 60
+                    ) - 1;
+                }
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt, $processedDateRangeMinutes)) {
                     if (!$musoraProduct) {
                         Log::error(
                             "RevenueCatController processNotification::INITIAL_PURCHASE - musora product not found: $productId"
@@ -167,7 +173,13 @@ class RevenueCatController extends Controller
 
                 $processedAt = Carbon::createFromTimestampMs($data['event']['purchased_at_ms']);
                 $expiredAt = Carbon::createFromTimestampMs($data['event']['expiration_at_ms']);
-                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt)) {
+                $processedDateRangeMinutes = 1440;
+                if ($data['event']['environment'] == self::SANDBOX_ENVIRONMENT) {
+                    $processedDateRangeMinutes = round(
+                        $expiredAt->diffInSeconds($processedAt) / 60
+                    ) - 1;
+                }
+                if (!$this->shopifySyncService->doesOrderExist($user->shopify_id, $processedAt, $processedDateRangeMinutes)) {
                     $musoraProduct = $musoraProducts?->first();
                     if (!$musoraProduct) {
                         Log::error(

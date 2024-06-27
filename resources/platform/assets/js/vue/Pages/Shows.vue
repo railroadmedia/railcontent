@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { useUserStore } from "../../stores/user";
 
 const props = defineProps({

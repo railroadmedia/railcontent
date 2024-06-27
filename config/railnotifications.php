@@ -101,4 +101,5 @@ return [
 
     // urls
     'app_notifications_deep_link_url' => 'https://www.musora.com/drumeo/notifications',
+    'service_account_json_file'=> __DIR__ . '/../drumeo-app-v2.json'
 ];
