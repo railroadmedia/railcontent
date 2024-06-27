@@ -95,6 +95,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'is_enrolled_into_cohort' => $user->isEnrolledIntoCohort(),
             'subcription_date' => Carbon::parse($user->created_at)->format('Y/m/d H:i:s'),
             'last_used_brand' => $user->last_used_brand,
+            'active_permissions_ids' => $user->getActivePermissionsIds(),
         ];
     }
 
@@ -167,7 +168,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'show_learning_paths_on_homepage' => $showLearningPathsOnHomepage,
             'completed_workouts' => $completedWorkouts,
             'branches' => $this->getAllBranchInformation(),
-            'features' => $this->getAccessibleFeatures()
+            'features' => $this->getAccessibleFeatures(),
+            'active_permissions_ids' => $user->getActivePermissionsIds()
         ], $extraData);
     }
 

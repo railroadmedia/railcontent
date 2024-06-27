@@ -5,6 +5,7 @@ namespace Modules\UserManagementSystem\Models;
 use App\Models\Traits\CanSaveWithoutUpdatedAt;
 use App\Modules\Content\Models\Content;
 use App\Modules\CustomerIO\Models\Customer;
+use App\Modules\Ecommerce\Collections\UserAccessPermissionsCollection;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
@@ -1036,5 +1037,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         );
 
         return $hasExperience && $hasGear && $hasTopics && $hasGenres && $hasGoals;
+    }
+
+    public function getActivePermissionsIds()
+    {
+        $userAccessPermissions = $this->userAccessPermissions()->getResults();
+        $userAccessPermissionsCollection = new UserAccessPermissionsCollection($this, $userAccessPermissions);
+        return array_values($userAccessPermissionsCollection->getActivePermissionIds());
     }
 }
