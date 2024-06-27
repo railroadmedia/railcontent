@@ -2,11 +2,10 @@
 
 namespace App\Modules\Content\Controllers;
 
-use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
+use App\Modules\Content\Requests\ContentMetadataRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\UserManagementSystem\Models\User;
 
@@ -16,7 +15,7 @@ class ContentMetadataController extends Controller
     {
     }
 
-    public function isLikedByUser(Request $request, Content $content, ?User $user = null): JsonResponse
+    public function isLikedByUser(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
         if (is_null($user)) {
@@ -30,11 +29,15 @@ class ContentMetadataController extends Controller
         }
         // @codeCoverageIgnoreEnd
 
-        $liked = ContentLike::isContentLikedByUser($content->id, $user->id);
-        return response()->json([$content->id => $liked]);
+        $contentIds = $request->query('content_ids', []);
+        $results = [];
+        foreach ($contentIds as $contentId) {
+            $results[$contentId] = ContentLike::isContentLikedByUser($contentId, $user->id);
+        }
+        return response()->json($results);
     }
 
-    public function userProgress(Request $request, Content $content, ?User $user = null): JsonResponse
+    public function userProgress(ContentMetadataRequest $request, ?User $user = null): JsonResponse
     {
         // if the user ID isn't provided, grab the user from the session
         if (is_null($user)) {
@@ -49,8 +52,13 @@ class ContentMetadataController extends Controller
         // @codeCoverageIgnoreEnd
 
         try {
-            $isCompleted = ContentUserProgress::getState($content->id, $user->id);
-            return response()->json([$content->id => $isCompleted->value]);
+            $contentIds = $request->query('content_ids', []);
+            $results = [];
+            foreach ($contentIds as $contentId) {
+                $progressState = ContentUserProgress::getState($contentId, $user->id);
+                $results[$contentId] = $progressState->toArray();
+            }
+            return response()->json($results);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }

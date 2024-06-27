@@ -95,7 +95,7 @@
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
-                                        <li class="splide__slide flex flex-col items-center justify-center px-1">
+                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden pb-36 sm:pb-40 lg:pb-52">
                                                 <picture>
                                                     <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}">

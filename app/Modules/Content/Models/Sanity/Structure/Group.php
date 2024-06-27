@@ -7,7 +7,7 @@ namespace App\Modules\Content\Models\Sanity\Structure;
  */
 class Group
 {
-    public function __construct(public string $name, public string $title)
+    public function __construct(public string $name, public string $title, public bool $default = false)
     {
     }
 
@@ -20,7 +20,8 @@ class Group
     {
         return [
             'name' => $this->name,
-            'title' => $this->title
+            'title' => $this->title,
+            'default' => $this->default
         ];
     }
 }

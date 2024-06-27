@@ -1,16 +1,22 @@
 // src/App.js
 import React, { useEffect, useState } from 'react';
-import {RobotIcon, RocketIcon} from '@sanity/icons'
+import {RobotIcon, RocketIcon, CogIcon} from '@sanity/icons'
 import { Studio, defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
+import {assist} from '@sanity/assist';
+import {embeddingsIndexReferenceInput} from '@sanity/embeddings-index-ui'
+import {embeddingsIndexDashboard} from '@sanity/embeddings-index-ui'
+
 import DifficultyInput from './components/DifficultyInput'; // Import the custom component
 import SoundsliceArrayInput from './components/SoundsliceArrayInput'; // Import the custom component
 import SoundsliceSlugInput from './components/SoundsliceSlugInput'; // Import the custom component
 import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput';
+import OpenAiInput from './components/OpenAiInput'; // Import the custom component
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
+import {media} from 'sanity-plugin-media'
 
 // You can add more custom components here as needed
 const customComponents = {
@@ -19,6 +25,7 @@ const customComponents = {
     SoundsliceSlugInput: SoundsliceSlugInput,
     RolesBasedPermissionsInput: RolesBasedPermissionsInput,
     IsUniqueAcrossBrand: IsUniqueAcrossBrand,
+    OpenAiInput: OpenAiInput
 };
 
 const icons = {
@@ -88,8 +95,12 @@ function App() {
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
                     plugins: [
-                      structureTool({ defaultDocumentNode }), 
-                      visionTool()
+                      structureTool({ defaultDocumentNode }),
+                      visionTool(),
+                      media(),
+                      assist(),
+                      embeddingsIndexReferenceInput(),
+                        embeddingsIndexDashboard()
                     ],
                     document: {
                         actions: (prev) =>
@@ -104,7 +115,19 @@ function App() {
                                 fields: mapComponents(type.fields)
                             };
                         })
-                    }
+                    },
+                    form: {
+                        components: {
+                            input: (props) => {
+                                if (Array.isArray(props.groups) && props.groups.length > 0) {
+                                    if (props.groups[0].name === 'all-fields') {
+                                        props.groups.shift()
+                                    }
+                                }
+                                return props.renderDefault(props)
+                            },
+                        },
+                    },
                 });
             });
             setConfigs(workspaceConfigs);

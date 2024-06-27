@@ -57,5 +57,29 @@
                 </div>
             </div>
         </div>
+
+        <div class="text-center mt-16 lg:mt-20 px-4 sm:px-0">
+            @if(empty($promoVersion))
+                <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-72 join outline black smaller">EXPLORE COURSES</a>
+            @endif
+            <a class="sm:mx-1 w-full sm:w-64 join @if($theme != 'musora') {{ $theme }} @else musora-gold @endif smaller @if(!empty($promoVersion)) anchor-slide @endif"
+                @if(!empty($promoVersion))
+                    href="#customize-anchor"
+                aria-label="Customize Anchor"
+                @elseif(!empty($month))
+                    href="/choose-your-trial-month"
+                aria-label="Choose Your Trial Month"
+                @else
+                    href="/choose-plan"
+                aria-label="Choose Plan"
+                @endif
+            >
+                @if(!empty($promoVersion) && empty($trialVersion))
+                    SEE YOUR DEAL &raquo;
+                @else
+                    START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @endif
+            </a>
+        </div>
     </div>
 </section>

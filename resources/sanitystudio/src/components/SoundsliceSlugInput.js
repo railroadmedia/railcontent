@@ -26,12 +26,9 @@ const SoundsliceSlugInput = React.forwardRef((props, ref) => {
             const elementNameArray = event.target.id.split(".");
             const firstElement = elementNameArray[0];
             const soundsliceKey = extractValue(firstElement);
-
-            console.log('SoundsliceSlug Soundslice KEY:', soundsliceEntries, soundsliceKey, window.sanityConfig.appUrl);
-
+            const sanityConfig = window.sanityConfig.find(item => item.name == 'publishing-workspace');
             if (newValue) {
-                const url = window.sanityConfig[0].appUrl+`/admin/soundslice?slug=${newValue}`;
-
+                const url = sanityConfig.appUrl +`/admin/soundslice?slug=${newValue}`;
                 fetch(url, {
                     method: 'GET',
                     headers: {

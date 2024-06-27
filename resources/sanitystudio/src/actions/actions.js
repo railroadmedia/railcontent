@@ -5,7 +5,8 @@ export function CreateImprovedAction(originalPublishAction, token) {
         const originalResult = originalPublishAction(props)
         // eslint-disable-next-line
         const {patch, publish} = useDocumentOperation(props.id, props.type)
-        const url = window.sanityConfig[0].appUrl + `/admin/last-content`;
+        const sanityConfig = window.sanityConfig.find(item => item.name == 'publishing-workspace');
+        const url = sanityConfig.appUrl + `/admin/last-content`;
 
         return {
             ...originalResult,

@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sanity/assist": "^3.0.4",
     "@sanity/client": "^6.19.1",
+    "@sanity/embeddings-index-cli": "^1.0.10",
+    "@sanity/embeddings-index-ui": "^1.1.8",
     "@sanity/icons": "^3.2.0",
     "@sanity/vision": "^3.45.0",
     "@testing-library/dom": "^10.1.0",
@@ -16,6 +19,7 @@
     "react-scripts": "5.0.1",
     "sanity": "^3.45.0",
     "sanity-plugin-iframe-pane": "^3.1.6",
+    "sanity-plugin-media": "^2.2.5",
     "styled-components": "^6.1.11",
     "web-vitals": "^2.1.4"
   },

@@ -1,13 +1,13 @@
 <template>
   <PageHeaderLayout>
     <template #top-left>
-      <PageHeaderHero 
+      <PageHeaderHero
         :pageType="pageType"
-        :iconName="iconName" 
-        :title="title" 
-        :subTitle="subTitle" 
+        :iconName="iconName"
+        :title="title"
+        :subTitle="subTitle"
         :heroImg="heroImg"
-        :heroImgClasses="heroImgClasses" 
+        :heroImgClasses="heroImgClasses"
         :additionalImgSrc="logo"
         :infoData="isSongsPage || isPlaylistsPage ? null : infoData"
       >
@@ -70,7 +70,7 @@ import PlaylistCountBadge from '../Playlists/PlaylistCountBadge.vue';
 
 const props = defineProps({
   pageType: String,
-  contentId: String,
+  contentId: [String, Number],
   iconName: String,
   title: String,
   subTitle: String,
