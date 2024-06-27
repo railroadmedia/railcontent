@@ -44,6 +44,8 @@ import Catalogue from './vue/Pages/Catalogue/Catalogue';
 import Search from './vue/Pages/Search';
 import PackOverview from './vue/Pages/PackOverview';
 import PackOverviewBundles from './vue/Pages/PackOverviewBundles';
+import BestBeginnerDrumBook from './vue/Pages/BestBeginnerDrumBook';
+import DrummersToolbox from './vue/Pages/DrummersToolbox';
 
 //App Components
 import AppContainer from './vue/apps/AppContainer.vue';
@@ -237,6 +239,8 @@ app.component('AppContainer', AppContainer)
             `./vue/Pages/PlaylistPlayback.vue`
         )
     ))
+    .component('BestBeginnerDrumBook', BestBeginnerDrumBook)
+    .component('DrummersToolbox', DrummersToolbox)
 
     .component('MembershipUpdatePage', defineAsyncComponent(() =>
         import(

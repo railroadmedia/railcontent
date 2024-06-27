@@ -88,8 +88,8 @@
 <script setup>
 import {computed, ref} from "vue";
 import DrummersToolChapter from '../components/DrummersToolChapter/DrummersToolChapter';
-import RedeemModal from '../components/RedeemModal/RedeemModal';
-import LoginModal from '../components/RedeemModal/LoginModal';
+import RedeemModal from '../components/Modal/RedeemModal';
+import LoginModal from '../components/Modal/RedeemLoginModal';
 
 const props = defineProps({
     chapters: {
