@@ -28,12 +28,12 @@ export function CreateImprovedAction(originalPublishAction, token) {
                         return response.json();
                     })
                     .then(data => {
-                        console.log('Custom action    primesc response .....', data.id, data.web_url_path)
+                        console.log('Custom action   response .....', data)
                         patch.execute([{set: {railcontent_id: data.id}}])
                         patch.execute([{set: { web_url_path: data.web_url_path }}])
                     })
                     .catch(error => {
-                        console.error('Error fetching data from Soundslice API:', error);
+                        console.error('Error fetching data in publish action ::', error);
                     });
                 // then delegate to original handler
                 originalResult.onHandle()
