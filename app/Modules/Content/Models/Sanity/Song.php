@@ -79,6 +79,7 @@ class Song extends BaseSanityModel
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true",group:$detailsGroup), //web_url_path
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true",group:$detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true",group:$detailsGroup),
+            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true",group:$detailsGroup), //web_url_path
         ];
         $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
         parent::__construct('song', 'Song', fields: $fields, preview: $preview, groups: $groups);
