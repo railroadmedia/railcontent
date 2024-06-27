@@ -636,7 +636,7 @@ class ContentQueryBuilder extends QueryBuilder
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
 
         $user = user();
-        if (ContentRepository::$allowsPullSongsContent && ($user?->isBasicMember() ?? false)) {
+        if (ContentRepository::$allowsPullSongsContent && ($user?->isABasicMember() ?? false)) {
             //
             $membershipPermissionIds = array_merge($membershipPermissionIds, PermissionService::getPlusMembershipPermissionsIds());
         }
