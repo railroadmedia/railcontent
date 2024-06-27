@@ -282,7 +282,7 @@ const enrollmentOpen = computed(() => {
 const thumbnailBadge = computed(() => {
     if(props.item.type === 'challenge') {
         if(enrollmentOpen.value && !contentModel.value.post.has_product) return 'Enroll Now';
-        if(upcomingChallenge.value) return 'Upcomming';
+        if(upcomingChallenge.value) return 'Upcoming';
         return `${ props.item.child_count } Workouts`;
     } else if(props.item.type === 'workout') {
         return duration.value;
