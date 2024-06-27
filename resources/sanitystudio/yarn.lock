@@ -236,11 +236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@babel/helper-module-imports@npm:^7.10.4, @babel/helper-module-imports@npm:^7.24.7":
-=======
 "@babel/helper-module-imports@npm:^7.10.4, @babel/helper-module-imports@npm:^7.16.7, @babel/helper-module-imports@npm:^7.24.7":
->>>>>>> feature/sanity-studio-cms
   version: 7.24.7
   resolution: "@babel/helper-module-imports@npm:7.24.7"
   dependencies:
@@ -1674,11 +1670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
-=======
 "@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.15, @babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
->>>>>>> feature/sanity-studio-cms
   version: 7.24.7
   resolution: "@babel/runtime@npm:7.24.7"
   dependencies:
@@ -2104,8 +2096,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@emotion/babel-plugin@npm:^11.11.0":
   version: 11.11.0
   resolution: "@emotion/babel-plugin@npm:11.11.0"
@@ -2145,7 +2135,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@emotion/is-prop-valid@npm:1.2.2":
   version: 1.2.2
   resolution: "@emotion/is-prop-valid@npm:1.2.2"
@@ -2178,9 +2167,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@emotion/unitless@npm:0.8.1":
-=======
 "@emotion/react@npm:^11.8.1":
   version: 11.11.4
   resolution: "@emotion/react@npm:11.11.4"
@@ -2223,15 +2209,12 @@ __metadata:
   linkType: hard
 
 "@emotion/unitless@npm:0.8.1, @emotion/unitless@npm:^0.8.1":
->>>>>>> feature/sanity-studio-cms
   version: 0.8.1
   resolution: "@emotion/unitless@npm:0.8.1"
   checksum: 10c0/a1ed508628288f40bfe6dd17d431ed899c067a899fa293a13afe3aed1d70fac0412b8a215fafab0b42829360db687fecd763e5f01a64ddc4a4b58ec3112ff548
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@emotion/use-insertion-effect-with-fallbacks@npm:^1.0.1":
   version: 1.0.1
   resolution: "@emotion/use-insertion-effect-with-fallbacks@npm:1.0.1"
@@ -2255,7 +2238,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@esbuild/aix-ppc64@npm:0.21.5":
   version: 0.21.5
   resolution: "@esbuild/aix-ppc64@npm:0.21.5"
@@ -2632,11 +2614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@floating-ui/dom@npm:^1.2.7":
-=======
 "@floating-ui/dom@npm:^1.0.1, @floating-ui/dom@npm:^1.2.7":
->>>>>>> feature/sanity-studio-cms
   version: 1.6.6
   resolution: "@floating-ui/dom@npm:1.6.6"
   dependencies:
@@ -2684,8 +2662,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@hookform/resolvers@npm:^3.1.1":
   version: 3.6.0
   resolution: "@hookform/resolvers@npm:3.6.0"
@@ -2695,7 +2671,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -3278,8 +3253,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@reduxjs/toolkit@npm:^1.9.0":
   version: 1.9.7
   resolution: "@reduxjs/toolkit@npm:1.9.7"
@@ -3300,7 +3273,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@rexxars/react-json-inspector@npm:^8.0.1":
   version: 8.0.1
   resolution: "@rexxars/react-json-inspector@npm:8.0.1"
@@ -3400,7 +3372,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@sanity/assist@npm:^3.0.4":
   version: 3.0.4
   resolution: "@sanity/assist@npm:3.0.4"
@@ -3423,8 +3394,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "@sanity/bifur-client@npm:^0.4.0":
   version: 0.4.1
   resolution: "@sanity/bifur-client@npm:0.4.1"
@@ -3537,7 +3506,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@sanity/embeddings-index-cli@npm:^1.0.10":
   version: 1.0.10
   resolution: "@sanity/embeddings-index-cli@npm:1.0.10"
@@ -3570,8 +3538,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "@sanity/eventsource@npm:^5.0.0, @sanity/eventsource@npm:^5.0.2":
   version: 5.0.2
   resolution: "@sanity/eventsource@npm:5.0.2"
@@ -3620,11 +3586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@sanity/icons@npm:^2.11.7, @sanity/icons@npm:^2.4.1, @sanity/icons@npm:^2.7.0":
-=======
-"@sanity/icons@npm:^2.4.1, @sanity/icons@npm:^2.7.0":
->>>>>>> feature/sanity-studio-cms
   version: 2.11.8
   resolution: "@sanity/icons@npm:2.11.8"
   peerDependencies:
@@ -3865,11 +3827,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"@sanity/ui@npm:^1.0.14, @sanity/ui@npm:^1.7.11":
-=======
-"@sanity/ui@npm:^1.9.3":
->>>>>>> feature/sanity-studio-cms
+"@sanity/ui@npm:^1.0.14, @sanity/ui@npm:^1.7.11, @sanity/ui@npm:^1.9.3":
   version: 1.9.3
   resolution: "@sanity/ui@npm:1.9.3"
   dependencies:
@@ -3888,11 +3846,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@sanity/ui@npm:^2.0.10, @sanity/ui@npm:^2.1.0, @sanity/ui@npm:^2.3.3, @sanity/ui@npm:^2.4.0":
-=======
-"@sanity/ui@npm:^2.0.10, @sanity/ui@npm:^2.3.3, @sanity/ui@npm:^2.4.0":
->>>>>>> feature/sanity-studio-cms
   version: 2.4.0
   resolution: "@sanity/ui@npm:2.4.0"
   dependencies:
@@ -4255,8 +4209,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@tanem/react-nprogress@npm:^5.0.0":
   version: 5.0.51
   resolution: "@tanem/react-nprogress@npm:5.0.51"
@@ -4270,7 +4222,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@tanstack/react-table@npm:^8.16.0":
   version: 8.17.3
   resolution: "@tanstack/react-table@npm:8.17.3"
@@ -4592,8 +4543,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@types/hoist-non-react-statics@npm:^3.3.0":
   version: 3.3.5
   resolution: "@types/hoist-non-react-statics@npm:3.3.5"
@@ -4604,7 +4553,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@types/html-minifier-terser@npm:^6.0.0":
   version: 6.1.0
   resolution: "@types/html-minifier-terser@npm:6.1.0"
@@ -4861,8 +4809,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "@types/react-redux@npm:^7.1.20":
   version: 7.1.33
   resolution: "@types/react-redux@npm:7.1.33"
@@ -4884,7 +4830,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "@types/react@npm:*, @types/react@npm:^18.0.25":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
@@ -6044,8 +5989,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "attr-accept@npm:^2.2.2":
   version: 2.2.2
   resolution: "attr-accept@npm:2.2.2"
@@ -6053,7 +5996,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "autoprefixer@npm:^10.4.0, autoprefixer@npm:^10.4.13":
   version: 10.4.19
   resolution: "autoprefixer@npm:10.4.19"
@@ -7156,11 +7098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"colord@npm:^2.9.1":
-=======
 "colord@npm:^2.9.1, colord@npm:^2.9.3":
->>>>>>> feature/sanity-studio-cms
   version: 2.9.3
   resolution: "colord@npm:2.9.3"
   checksum: 10c0/9699e956894d8996b28c686afe8988720785f476f59335c80ce852ded76ab3ebe252703aec53d9bef54f6219aea6b960fb3d9a8300058a1d0c0d4026460cd110
@@ -7320,7 +7258,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "configstore@npm:^6.0.0":
   version: 6.0.0
   resolution: "configstore@npm:6.0.0"
@@ -7334,8 +7271,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "confusing-browser-globals@npm:^1.0.11":
   version: 1.0.11
   resolution: "confusing-browser-globals@npm:1.0.11"
@@ -7403,11 +7338,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
-=======
 "convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
->>>>>>> feature/sanity-studio-cms
   version: 1.9.0
   resolution: "convert-source-map@npm:1.9.0"
   checksum: 10c0/281da55454bf8126cbc6625385928c43479f2060984180c42f3a86c8b8c12720a24eac260624a7d1e090004028d2dee78602330578ceec1a08e27cb8bb0a8a5b
@@ -7573,8 +7504,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "cross-spawn@npm:^6.0.5":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
@@ -7588,7 +7517,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
@@ -7633,7 +7561,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "crypto-random-string@npm:^4.0.0":
   version: 4.0.0
   resolution: "crypto-random-string@npm:4.0.0"
@@ -7643,8 +7570,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "css-blank-pseudo@npm:^3.0.3":
   version: 3.0.3
   resolution: "css-blank-pseudo@npm:3.0.3"
@@ -8081,11 +8006,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"date-fns@npm:^2.26.1":
-=======
 "date-fns@npm:^2.26.1, date-fns@npm:^2.27.0":
->>>>>>> feature/sanity-studio-cms
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -8094,7 +8015,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "date-fns@npm:^3.6.0":
   version: 3.6.0
   resolution: "date-fns@npm:3.6.0"
@@ -8102,8 +8022,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "date-now@npm:1.0.1":
   version: 1.0.1
   resolution: "date-now@npm:1.0.1"
@@ -8540,8 +8458,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "dom-helpers@npm:^5.0.1":
   version: 5.2.1
   resolution: "dom-helpers@npm:5.2.1"
@@ -8552,7 +8468,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "dom-serializer@npm:0":
   version: 0.2.2
   resolution: "dom-serializer@npm:0.2.2"
@@ -8700,7 +8615,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "dot-prop@npm:^6.0.1":
   version: 6.0.1
   resolution: "dot-prop@npm:6.0.1"
@@ -8710,8 +8624,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "dotenv-expand@npm:^5.1.0":
   version: 5.1.0
   resolution: "dotenv-expand@npm:5.1.0"
@@ -9763,11 +9675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "execa@npm:^5.0.0, execa@npm:^5.1.1":
-=======
-"execa@npm:^5.0.0":
->>>>>>> feature/sanity-studio-cms
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
   dependencies:
@@ -9981,8 +9889,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "file-selector@npm:^0.4.0":
   version: 0.4.0
   resolution: "file-selector@npm:0.4.0"
@@ -9992,7 +9898,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "file-type@npm:^12.0.0":
   version: 12.4.2
   resolution: "file-type@npm:12.4.2"
@@ -10051,8 +9956,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "filesize@npm:^9.0.0":
   version: 9.0.11
   resolution: "filesize@npm:9.0.11"
@@ -10060,7 +9963,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "fill-range@npm:^7.1.1":
   version: 7.1.1
   resolution: "fill-range@npm:7.1.1"
@@ -10107,8 +10009,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "find-root@npm:^1.1.0":
   version: 1.1.0
   resolution: "find-root@npm:1.1.0"
@@ -10116,7 +10016,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "find-up@npm:^3.0.0":
   version: 3.0.0
   resolution: "find-up@npm:3.0.0"
@@ -10760,11 +10659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"groq@npm:3.47.1":
-=======
 "groq@npm:3.47.1, groq@npm:^3.0.0":
->>>>>>> feature/sanity-studio-cms
   version: 3.47.1
   resolution: "groq@npm:3.47.1"
   checksum: 10c0/70df8190f1cf5b99554c8052760c8e5d062e572dcee27bb7f51c508bc9c5bc2830675257e8118e207053fabf9bc57ef2e52528bb7733744ff7ac589b92e90e66
@@ -10973,11 +10868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"hoist-non-react-statics@npm:^3.3.2":
-=======
 "hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
->>>>>>> feature/sanity-studio-cms
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -11398,11 +11289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"immer@npm:^9.0.7":
-=======
 "immer@npm:^9.0.21, immer@npm:^9.0.7":
->>>>>>> feature/sanity-studio-cms
   version: 9.0.21
   resolution: "immer@npm:9.0.21"
   checksum: 10c0/03ea3ed5d4d72e8bd428df4a38ad7e483ea8308e9a113d3b42e0ea2cc0cc38340eb0a6aca69592abbbf047c685dbda04e3d34bf2ff438ab57339ed0a34cc0a05
@@ -12948,8 +12835,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "json-parse-better-errors@npm:^1.0.1":
   version: 1.0.2
   resolution: "json-parse-better-errors@npm:1.0.2"
@@ -12957,7 +12842,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "json-parse-even-better-errors@npm:^2.3.0, json-parse-even-better-errors@npm:^2.3.1":
   version: 2.3.1
   resolution: "json-parse-even-better-errors@npm:2.3.1"
@@ -13262,8 +13146,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "load-json-file@npm:^4.0.0":
   version: 4.0.0
   resolution: "load-json-file@npm:4.0.0"
@@ -13276,7 +13158,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "loader-runner@npm:^4.2.0":
   version: 4.3.0
   resolution: "loader-runner@npm:4.3.0"
@@ -13341,7 +13222,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "lodash-es@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
@@ -13349,8 +13229,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -13642,8 +13520,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "memoize-one@npm:^6.0.0":
   version: 6.0.0
   resolution: "memoize-one@npm:6.0.0"
@@ -13658,7 +13534,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "mendoza@npm:3.0.7, mendoza@npm:^3.0.0":
   version: 3.0.7
   resolution: "mendoza@npm:3.0.7"
@@ -14097,11 +13972,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"nanoid@npm:^3.1.12, nanoid@npm:^3.1.30, nanoid@npm:^3.3.7":
-=======
 "nanoid@npm:^3.1.12, nanoid@npm:^3.1.30, nanoid@npm:^3.3.3, nanoid@npm:^3.3.7":
->>>>>>> feature/sanity-studio-cms
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
   bin:
@@ -14147,8 +14018,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "nice-try@npm:^1.0.4":
   version: 1.0.5
   resolution: "nice-try@npm:1.0.5"
@@ -14156,7 +14025,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "no-case@npm:^3.0.4":
   version: 3.0.4
   resolution: "no-case@npm:3.0.4"
@@ -14281,11 +14149,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"normalize-package-data@npm:^2.5.0":
-=======
 "normalize-package-data@npm:^2.3.2, normalize-package-data@npm:^2.5.0":
->>>>>>> feature/sanity-studio-cms
   version: 2.5.0
   resolution: "normalize-package-data@npm:2.5.0"
   dependencies:
@@ -14330,8 +14194,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "npm-run-all@npm:^4.1.5":
   version: 4.1.5
   resolution: "npm-run-all@npm:4.1.5"
@@ -14353,7 +14215,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "npm-run-path@npm:^3.0.0":
   version: 3.1.0
   resolution: "npm-run-path@npm:3.1.0"
@@ -14645,7 +14506,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "outdent@npm:^0.8.0":
   version: 0.8.0
   resolution: "outdent@npm:0.8.0"
@@ -14653,8 +14513,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "p-finally@npm:^2.0.0":
   version: 2.0.1
   resolution: "p-finally@npm:2.0.1"
@@ -14840,8 +14698,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "parse-json@npm:4.0.0"
@@ -14852,7 +14708,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "parse-json@npm:^5.0.0, parse-json@npm:^5.2.0":
   version: 5.2.0
   resolution: "parse-json@npm:5.2.0"
@@ -14933,8 +14788,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "path-key@npm:^2.0.1":
   version: 2.0.1
   resolution: "path-key@npm:2.0.1"
@@ -14942,7 +14795,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "path-key@npm:^3.0.0, path-key@npm:^3.1.0":
   version: 3.1.1
   resolution: "path-key@npm:3.1.1"
@@ -14981,8 +14833,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "path-type@npm:^3.0.0":
   version: 3.0.0
   resolution: "path-type@npm:3.0.0"
@@ -14992,7 +14842,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "path-type@npm:^4.0.0":
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
@@ -15059,8 +14908,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "pidtree@npm:^0.3.0":
   version: 0.3.1
   resolution: "pidtree@npm:0.3.1"
@@ -15070,7 +14917,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "pify@npm:^2.3.0":
   version: 2.3.0
   resolution: "pify@npm:2.3.0"
@@ -15158,8 +15004,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "pluralize@npm:^8.0.0":
   version: 8.0.0
   resolution: "pluralize@npm:8.0.0"
@@ -15167,7 +15011,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "polished@npm:^4.2.2":
   version: 4.3.1
   resolution: "polished@npm:4.3.1"
@@ -16207,11 +16050,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"prop-types@npm:^15.5.4, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
-=======
 "prop-types@npm:^15.5.4, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
->>>>>>> feature/sanity-studio-cms
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -16509,8 +16348,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "react-dropzone@npm:^11.3.1":
   version: 11.7.1
   resolution: "react-dropzone@npm:11.7.1"
@@ -16524,7 +16361,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "react-error-overlay@npm:^6.0.11":
   version: 6.0.11
   resolution: "react-error-overlay@npm:6.0.11"
@@ -16532,19 +16368,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "react-fast-compare@npm:^3.2.0, react-fast-compare@npm:^3.2.2":
-=======
-"react-fast-compare@npm:^3.2.0":
->>>>>>> feature/sanity-studio-cms
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
   checksum: 10c0/0bbd2f3eb41ab2ff7380daaa55105db698d965c396df73e6874831dbafec8c4b5b08ba36ff09df01526caa3c61595247e3269558c284e37646241cba2b90a367
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "react-file-icon@npm:^1.1.0":
   version: 1.5.0
   resolution: "react-file-icon@npm:1.5.0"
@@ -16558,7 +16388,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "react-focus-lock@npm:^2.8.1":
   version: 2.12.1
   resolution: "react-focus-lock@npm:2.12.1"
@@ -16579,8 +16408,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "react-hook-form@npm:^7.45.1":
   version: 7.52.0
   resolution: "react-hook-form@npm:7.52.0"
@@ -16590,7 +16417,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "react-i18next@npm:^13.0.1":
   version: 13.5.0
   resolution: "react-i18next@npm:13.5.0"
@@ -16609,7 +16435,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "react-icons@npm:^4.7.1":
   version: 4.12.0
   resolution: "react-icons@npm:4.12.0"
@@ -16619,8 +16444,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -16628,11 +16451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"react-is@npm:^17.0.1":
-=======
 "react-is@npm:^17.0.1, react-is@npm:^17.0.2":
->>>>>>> feature/sanity-studio-cms
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
@@ -16653,8 +16472,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "react-redux@npm:^7.2.2":
   version: 7.2.9
   resolution: "react-redux@npm:7.2.9"
@@ -16676,7 +16493,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "react-refractor@npm:^2.1.6, react-refractor@npm:^2.1.7, react-refractor@npm:^2.2.0":
   version: 2.2.0
   resolution: "react-refractor@npm:2.2.0"
@@ -16783,8 +16599,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "react-select@npm:^5.3.2":
   version: 5.8.0
   resolution: "react-select@npm:5.8.0"
@@ -16805,7 +16619,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "react-style-proptype@npm:^3.2.2":
   version: 3.2.2
   resolution: "react-style-proptype@npm:3.2.2"
@@ -16815,8 +16628,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "react-transition-group@npm:^4.3.0":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
@@ -16842,7 +16653,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
@@ -16872,8 +16682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "read-pkg@npm:^3.0.0":
   version: 3.0.0
   resolution: "read-pkg@npm:3.0.0"
@@ -16885,7 +16693,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "read-pkg@npm:^5.2.0":
   version: 5.2.0
   resolution: "read-pkg@npm:5.2.0"
@@ -16995,8 +16802,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "redux-observable@npm:^2.0.0":
   version: 2.0.0
   resolution: "redux-observable@npm:2.0.0"
@@ -17027,7 +16832,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "reflect.getprototypeof@npm:^1.0.4":
   version: 1.0.6
   resolution: "reflect.getprototypeof@npm:1.0.6"
@@ -17185,8 +16989,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "reselect@npm:^4.1.8":
   version: 4.1.8
   resolution: "reselect@npm:4.1.8"
@@ -17194,7 +16996,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "resolve-cwd@npm:^3.0.0":
   version: 3.0.0
   resolution: "resolve-cwd@npm:3.0.0"
@@ -17497,7 +17298,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "sanity-plugin-asset-source-openai@npm:1.1.2":
   version: 1.1.2
   resolution: "sanity-plugin-asset-source-openai@npm:1.1.2"
@@ -17512,8 +17312,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "sanity-plugin-iframe-pane@npm:^3.1.6":
   version: 3.1.6
   resolution: "sanity-plugin-iframe-pane@npm:3.1.6"
@@ -17533,8 +17331,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "sanity-plugin-media@npm:^2.2.5":
   version: 2.2.5
   resolution: "sanity-plugin-media@npm:2.2.5"
@@ -17573,7 +17369,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "sanity@npm:^3.45.0":
   version: 3.47.1
   resolution: "sanity@npm:3.47.1"
@@ -17708,14 +17503,10 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.7"
-<<<<<<< HEAD
     "@sanity/assist": "npm:^3.0.4"
     "@sanity/client": "npm:^6.19.1"
     "@sanity/embeddings-index-cli": "npm:^1.0.10"
     "@sanity/embeddings-index-ui": "npm:^1.1.8"
-=======
-    "@sanity/client": "npm:^6.19.1"
->>>>>>> feature/sanity-studio-cms
     "@sanity/icons": "npm:^3.2.0"
     "@sanity/vision": "npm:^3.45.0"
     "@testing-library/dom": "npm:^10.1.0"
@@ -17730,13 +17521,9 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-scripts: "npm:5.0.1"
     sanity: "npm:^3.45.0"
-<<<<<<< HEAD
     sanity-plugin-asset-source-openai: "npm:1.1.2"
     sanity-plugin-iframe-pane: "npm:^3.1.6"
-=======
-    sanity-plugin-iframe-pane: "npm:^3.1.6"
     sanity-plugin-media: "npm:^2.2.5"
->>>>>>> feature/sanity-studio-cms
     styled-components: "npm:^6.1.11"
     web-vitals: "npm:^2.1.4"
   languageName: unknown
@@ -17884,11 +17671,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.6.0":
-=======
 "semver@npm:2 || 3 || 4 || 5, semver@npm:^5.5.0, semver@npm:^5.6.0":
->>>>>>> feature/sanity-studio-cms
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
   bin:
@@ -18063,8 +17846,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "shebang-command@npm:^1.2.0":
   version: 1.2.0
   resolution: "shebang-command@npm:1.2.0"
@@ -18074,7 +17855,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
   resolution: "shebang-command@npm:2.0.0"
@@ -18084,8 +17864,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "shebang-regex@npm:^1.0.0":
   version: 1.0.0
   resolution: "shebang-regex@npm:1.0.0"
@@ -18093,7 +17871,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "shebang-regex@npm:^3.0.0":
   version: 3.0.0
   resolution: "shebang-regex@npm:3.0.0"
@@ -18101,11 +17878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"shell-quote@npm:^1.7.3, shell-quote@npm:^1.8.1":
-=======
 "shell-quote@npm:^1.6.1, shell-quote@npm:^1.7.3, shell-quote@npm:^1.8.1":
->>>>>>> feature/sanity-studio-cms
   version: 1.8.1
   resolution: "shell-quote@npm:1.8.1"
   checksum: 10c0/8cec6fd827bad74d0a49347057d40dfea1e01f12a6123bf82c4649f3ef152fc2bc6d6176e6376bffcd205d9d0ccb4f1f9acae889384d20baff92186f01ea455a
@@ -18295,8 +18068,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "source-map@npm:^0.5.7":
   version: 0.5.7
   resolution: "source-map@npm:0.5.7"
@@ -18304,7 +18075,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "source-map@npm:^0.7.3":
   version: 0.7.4
   resolution: "source-map@npm:0.7.4"
@@ -18636,8 +18406,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "string.prototype.padend@npm:^3.0.0":
   version: 3.1.6
   resolution: "string.prototype.padend@npm:3.1.6"
@@ -18650,7 +18418,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "string.prototype.trim@npm:^1.2.9":
   version: 1.2.9
   resolution: "string.prototype.trim@npm:1.2.9"
@@ -18852,8 +18619,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "stylis@npm:4.2.0":
   version: 4.2.0
   resolution: "stylis@npm:4.2.0"
@@ -18861,7 +18626,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "stylis@npm:4.3.2":
   version: 4.3.2
   resolution: "stylis@npm:4.3.2"
@@ -19462,8 +19226,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "tslib@npm:~2.1.0":
   version: 2.1.0
   resolution: "tslib@npm:2.1.0"
@@ -19471,7 +19233,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "tsutils@npm:^3.21.0":
   version: 3.21.0
   resolution: "tsutils@npm:3.21.0"
@@ -19566,7 +19327,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "type-fest@npm:^1.0.1":
   version: 1.4.0
   resolution: "type-fest@npm:1.4.0"
@@ -19574,8 +19334,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "type-is@npm:~1.6.18":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
@@ -19757,7 +19515,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "unique-string@npm:^3.0.0":
   version: 3.0.0
   resolution: "unique-string@npm:3.0.0"
@@ -19767,8 +19524,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "unist-util-filter@npm:^2.0.2":
   version: 2.0.3
   resolution: "unist-util-filter@npm:2.0.3"
@@ -19906,8 +19661,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-=======
 "use-isomorphic-layout-effect@npm:^1.1.2":
   version: 1.1.2
   resolution: "use-isomorphic-layout-effect@npm:1.1.2"
@@ -19920,7 +19673,6 @@ __metadata:
   languageName: node
   linkType: hard
 
->>>>>>> feature/sanity-studio-cms
 "use-sidecar@npm:^1.1.2":
   version: 1.1.2
   resolution: "use-sidecar@npm:1.1.2"
@@ -20591,11 +20343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"which@npm:^1.3.1":
-=======
 "which@npm:^1.2.9, which@npm:^1.3.1":
->>>>>>> feature/sanity-studio-cms
   version: 1.3.1
   resolution: "which@npm:1.3.1"
   dependencies:
@@ -20876,11 +20624,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "write-file-atomic@npm:^3.0.0, write-file-atomic@npm:^3.0.3":
-=======
-"write-file-atomic@npm:^3.0.0":
->>>>>>> feature/sanity-studio-cms
   version: 3.0.3
   resolution: "write-file-atomic@npm:3.0.3"
   dependencies:
@@ -20929,7 +20673,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "xdg-basedir@npm:^5.0.1":
   version: 5.1.0
   resolution: "xdg-basedir@npm:5.1.0"
@@ -20937,8 +20680,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-=======
->>>>>>> feature/sanity-studio-cms
 "xml-name-validator@npm:^3.0.0":
   version: 3.0.0
   resolution: "xml-name-validator@npm:3.0.0"
@@ -21090,11 +20831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-"zod@npm:^3.22.1, zod@npm:^3.22.4":
-=======
-"zod@npm:^3.21.4, zod@npm:^3.22.4":
->>>>>>> feature/sanity-studio-cms
+"zod@npm:^3.21.4, zod@npm:^3.22.1, zod@npm:^3.22.4":
   version: 3.23.8
   resolution: "zod@npm:3.23.8"
   checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
