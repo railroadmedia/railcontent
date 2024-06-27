@@ -1,5 +1,12 @@
-<form id="commentform" name="drumeo" method="post"
-    @if(empty($existing)) action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" @else action="{{ URL::route('access-codes.form-claim') }}" @endif
+<form
+    id="commentform" name="drumeo" method="post"
+    x-data="redeemForm"
+    @submit.prevent="submitRedeem($event)"
+    @if(empty($existing))
+        action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem"
+    @else
+        action="{{ URL::route('access-codes.form-claim') }}"
+    @endif
 >
     @php
         if (empty($accessCodeArray)) {
@@ -14,7 +21,7 @@
     @endif
     <div class="flex flex-wrap">
         <p class="w-full input-describer">Code</p>
-        <input class="default-form-field text-center uppercase" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" maxlength="29" placeholder="XXXX - XXXX - XXXX - XXXX - XXXX - XXXX" x-mask="**** **** **** **** **** ****" @if($accessCodeArray) value="{{$accessCodeArray[0]}} {{$accessCodeArray[1]}} {{$accessCodeArray[2]}} {{$accessCodeArray[3]}} {{$accessCodeArray[4]}} {{$accessCodeArray[5]}}" @else value="" @endif x-bind:disabled="loading" />
+        <input class="default-form-field uppercase" x-bind:class="{ 'border border-[#EF4444] bg-[#FECACA] text-black mb-1.5': errors.access_code }" type="text" name="access_code" maxlength="29" placeholder="XXXX - XXXX - XXXX - XXXX - XXXX - XXXX" x-mask="**** **** **** **** **** ****" @if($accessCodeArray) value="{{$accessCodeArray[0]}} {{$accessCodeArray[1]}} {{$accessCodeArray[2]}} {{$accessCodeArray[3]}} {{$accessCodeArray[4]}} {{$accessCodeArray[5]}}" @else value="" @endif x-bind:disabled="loading" />
         <span class="text-xs text-[#EF4444]" x-show="errors.access_code" x-text="errors.access_code"></span>
     </div>
     @if(empty($existing))

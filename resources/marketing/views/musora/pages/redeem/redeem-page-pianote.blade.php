@@ -190,58 +190,11 @@
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
 
-            <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
-                {{ csrf_field() }}
-                <input type="hidden" name="credentials_type" value="new">
-                <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
-                <div class="container mx-auto clearfix">
-                    <div class="flex flex-wrap w-full">
-                        <p class="w-full input-describer">Code</p>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code1') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code2') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code3') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code4') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code5') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code6') }}">
-                        </div>
-                    </div>
-                    <div class="w-full">
-                        <p class="input-describer">Email</p>
-                        <input class="default-form-field" type="text" id="email" name="email" placeholder="Email"
-                               value="{{ old('email') }}">
-                    </div>
-                    <div class="w-full">
-                        <p class="input-describer">Create A Password</p>
-                        <input class="default-form-field" type="password" id="password" name="password"
-                               placeholder="Password" value="">
-                    </div>
-                    <div class="w-full">
-                        <p class="input-describer">Confirm Password</p>
-                        <input class="default-form-field" type="password" id="password_confirmation"
-                               name="password_confirmation" placeholder="Password Confirm" value="">
-                    </div>
-                    <div class="w-full">
-                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;"/>
-                    </div>
-                </div>
-            </form>
+            @include('musora.pages.redeem._redeem-form', [
+                'existing' => false,
+                'buttonText' => 'Click To Redeem &raquo;',
+                'buttonColor' => 'bg-pianote text-white',
+            ])
 
         @else
             @if(empty($noSwitch))
@@ -260,54 +213,11 @@
             @endforeach
 
 
-            <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
-                <input type="hidden" name="credentials_type" value="existing">
-                <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
-                {{ csrf_field() }}
-
-                <div class="container mx-auto  clearfix">
-                    <div class="flex flex-wrap w-full">
-                        <p class="w-full input-describer">Code</p>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code1') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code2') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code3') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code4') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code5') }}">
-                        </div>
-                        <div class="w-1/6">
-                            <input class="w-full code-input" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX"
-                                   value="{{ old('code6') }}">
-                        </div>
-                    </div>
-                    <div class="w-full">
-                        <p class="input-describer">Email</p>
-                        <input class="default-form-field" type="text" id="email" name="user_email"
-                               placeholder="Email/Username" value="{{ old('user_email') }}">
-                    </div>
-                    <div class="w-full">
-                        <p class="input-describer">Password</p>
-                        <input class="default-form-field" type="password" id="password" name="user_password"
-                               placeholder="Password" value="">
-                    </div>
-                    <div class="w-full">
-                        <input name="button" type="submit" id="button" class="apply" value="Click To Redeem &raquo;"/>
-                    </div>
-                </div>
-            </form>
+            @include('musora.pages.redeem._redeem-form', [
+                'existing' => true,
+                'buttonText' => 'Click To Redeem &raquo;',
+                'buttonColor' => 'bg-pianote text-white',
+            ])
 
         @endif
         <br>
@@ -324,23 +234,10 @@
 </div>
     @include('pianote.sales.partials._footer')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.code-input').bind('paste', function (e) {
-                var value = e.originalEvent.clipboardData.getData('text');
-                value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                for (var i = 0; i < chunks.length; i++) {
-                    $('.code-input').eq(i).val(chunks[i]);
-                }
-            }).bind('input', function (e) {
-                if ($(this).val().length == 4) {
-                    $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                }
-            });
-        });
-    </script>
+    @include('_partials.components.forms.redeem-form-script', [
+        'api' => empty($existing) ? get_musora_brand_base_url().'/ecommerce/access-codes/redeem' : URL::route('access-codes.form-claim'),
+        'existingMember' => !$newAccount,
+    ])
 
 @stop
