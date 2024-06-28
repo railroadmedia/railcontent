@@ -15,4 +15,9 @@ Route::prefix('content')
             'user_progress/{user?}',
             [ContentMetadataController::class, 'userProgress']
         )->name('content.user_progress');
+
+        Route::get(
+            'in_progress/{user?}',
+            [ContentMetadataController::class, 'inProgressForUser']
+        )->name('content.in_progress');
     });

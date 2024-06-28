@@ -2,11 +2,16 @@
 
 namespace App\Modules\Content\Controllers;
 
+use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
 use App\Modules\Content\Requests\ContentMetadataRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rules\Enum;
 use Modules\UserManagementSystem\Models\User;
 
 class ContentMetadataController extends Controller
@@ -21,13 +26,6 @@ class ContentMetadataController extends Controller
         if (is_null($user)) {
             $user = user();
         }
-
-        // @codeCoverageIgnoreStart
-        // safety catch
-        if (!$user) {
-            return response()->json(['error' => 'Invalid UserId or No Authenticated User'], 404);
-        }
-        // @codeCoverageIgnoreEnd
 
         $contentIds = $request->query('content_ids', []);
         $results = [];
@@ -44,13 +42,6 @@ class ContentMetadataController extends Controller
             $user = user();
         }
 
-        // @codeCoverageIgnoreStart
-        // safety catch
-        if (!$user) {
-            return response()->json(['error' => 'Invalid UserId or No Authenticated User'], 404);
-        }
-        // @codeCoverageIgnoreEnd
-
         try {
             $contentIds = $request->query('content_ids', []);
             $results = [];
@@ -62,5 +53,38 @@ class ContentMetadataController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         }
+    }
+
+    public function inProgressForUser(Request $request, ?User $user = null): JsonResponse
+    {
+        $validated = $request->validate(
+            [
+                'content_type' => 'required|string',
+                'brand' => ['nullable',  new Enum(Brand::class)],
+                'user' => 'nullable'
+            ]
+        );
+
+        // if the user ID isn't provided, grab the user from the session
+        if (is_null($user)) {
+            $user = user();
+        }
+
+        $type = $validated['content_type'];
+        $brandValue = $validated['brand'] ?? null;
+        $brand = null;
+        if ($brandValue) {
+            $brand = Brand::from($brandValue);
+        }
+
+        $inProgress = $user->progress()
+            ->incomplete()
+            ->ofContentType($type)
+            ->when(!is_null($brand), function (Builder $q) use ($brand) {
+                return $q->ofContentBrand($brand);
+            })
+            ->pluck('content_id');
+
+        return response()->json([ProgressState::Started->value => $inProgress]);
     }
 }

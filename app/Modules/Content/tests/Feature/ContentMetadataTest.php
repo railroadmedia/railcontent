@@ -2,10 +2,12 @@
 
 namespace App\Modules\Content\tests\Feature;
 
+use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Enums\ProgressState;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\ContentLike;
 use App\Modules\Content\Models\ContentUserProgress;
+use Illuminate\Support\Collection;
 use Modules\UserManagementSystem\Models\User;
 use Tests\TestCase;
 
@@ -232,6 +234,73 @@ class ContentMetadataTest extends TestCase
             $notStartedContent->id => ['state' => ProgressState::NotStarted->value, 'percent' => 0]
         ];
         $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_returns_correct_value_for_songs()
+    {
+        Content::factory()->count(10)->create();
+        $this->createContentWithProgress(5, 2);
+        $incompleteContentIds = ContentUserProgress::where('user_id', $this->user->id)
+            ->where('state', ProgressState::Started->value)
+            ->pluck('content_id');
+        $expectedJson = [
+            ProgressState::Started->value => $incompleteContentIds->toArray()
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['user' => $this->user->id, 'content_type' => 'song']),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_returns_correct_value_for_songs_in_brand()
+    {
+        Content::factory(['brand' => Brand::Drumeo->value])->count(5)->create();
+        $this->createContentWithProgress(5, 2);
+        Content::factory(['brand' => Brand::Singeo->value])->count(3)->create();
+        $singeoContent = $this->createContentWithProgress(4, 6, Brand::Singeo);
+
+        $expectedJson = [
+            ProgressState::Started->value => $singeoContent->get('started')
+        ];
+
+        $response = $this->getJson(
+            route('content.in_progress', ['content_type' => 'song', 'brand' => Brand::Singeo->value]),
+        );
+        $response->assertOk();
+        $response->assertJson($expectedJson);
+    }
+
+    public function test_in_progress_content_returns_error_for_invalid_brand()
+    {
+        $response = $this->getJson(
+            route('content.in_progress', ['content_type' => 'song', 'brand' => 'foo-bar-baz']),
+        );
+        $response->assertStatus(500);
+        $this->assertStringContainsString('The selected brand is invalid', $response->getContent());
+    }
+
+    private function createContentWithProgress(int $startedCount = 0, int $completedCount = 0, ?Brand $brand = Brand::Drumeo): Collection
+    {
+        $results = collect();
+        if ($startedCount) {
+            $startedContents = Content::factory(['brand' => $brand->value])->count($startedCount)->create();
+            $startedContents->each(function (Content $content) {
+                $progress = $this->createContentProgress($content, false);
+                $progress->progress_percent = 25;
+                $progress->save();
+            });
+            $results->put('started', $startedContents->pluck('id')->toArray());
+        }
+        if ($completedCount) {
+            $completedContents = Content::factory(['brand' => $brand->value])->count($completedCount)->create();
+            $completedContents->each(function (Content $content) {
+                $this->createContentProgress($content, true);
+            });
+            $results->put('completed', $completedContents->pluck('id')->toArray());
+        }
+        return $results;
     }
 
     private function createContentProgress(Content $content, bool $isCompleted): ContentUserProgress
