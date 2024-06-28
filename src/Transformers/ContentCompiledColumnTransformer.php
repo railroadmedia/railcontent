@@ -50,23 +50,20 @@ class ContentCompiledColumnTransformer
 
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
         $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
-        // TODO I'm not so sure about this logic here. I think this should be removed. The user should have explicit permission for the content
-//        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
-//        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
-//            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
-//        }
+        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
+        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
+            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+        }
 
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
 
-            $needAccess = empty(
+            $needAccess = (isset($groupedPermissions[$contentRow['id']])) && empty(
                 array_intersect(
                     $userPermissionIds,
                     (isset($groupedPermissions[$contentRow['id']])) ?
                         Arr::pluck($groupedPermissions[$contentRow['id']], 'id') : []
-                )
-                ) && (isset($groupedPermissions[$contentRow['id']]));
-            //TODO double check on naming.
+                ));
             $contentRows[$contentRowIndex]['need_access'] = $needAccess;
 
 

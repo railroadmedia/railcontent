@@ -634,14 +634,11 @@ class ContentQueryBuilder extends QueryBuilder
         // the membership content.
 
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
-
         $user = user();
         if (ContentRepository::$allowsPullSongsContent && ($user?->isABasicMember() ?? false)) {
             //
             $membershipPermissionIds = array_merge($membershipPermissionIds, PermissionService::getPlusMembershipPermissionsIds());
         }
-
-
 
         $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
             function (JoinClause $join) {
@@ -659,7 +656,7 @@ class ContentQueryBuilder extends QueryBuilder
                     ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
-                            ->where('user_id', $user?->id ?? null)
+                            ->where('user_id', auth()->id())
                             ->where(function (Builder $builder) use ($membershipPermissionIds) {
                                 return $builder
                                     ->whereRaw(
