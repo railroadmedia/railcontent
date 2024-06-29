@@ -32,6 +32,46 @@
 
     @include('_partials.components.shop.index-filters')
 
+        <div class="pt-5 sm:p-8 lg:py-10">
+             @php
+                $bundles = [
+                    [
+                        'slug' => 'shop/ultimate-lessons-bundle',
+                        'title' => 'The Ultimate Lessons Bundle',
+                        'desc' => 'Annual Pianote membership + books, posters, and more!',
+                        'visible' => 1,
+                        'price' => 760,
+                        'discountedPrice' => 200,
+                        'discountedPriceColor' => '#4B41BC',
+                        'buttonStyle' => 'background: linear-gradient(to right, #4B41BC 100%, #8032FF 100%);',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ultimate-lessons-shop.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ultimate-lessons-shop.webp',
+                        'buttonText' => 'SEE THE DEAL',
+                        'badgeText' => '6 free gifts worth $520',
+                    ],
+                    [
+                        'slug' => '/drumshop/practice-anywhere-bundle',
+                        'desc' => 'A 5-Year Membership for the price of 3, and more!',
+                        'visible' => 1,
+                        'price' => 1200,
+                        'discountedPrice' => 720,
+                        'discountedPriceColor' => '#AF213D',
+                        'buttonStyle' => 'background: linear-gradient(to right, rgba(216, 58, 77, 1) 0%, rgba(175, 33, 61, 1) 100%);',
+                        'buttonText' => 'SEE THE DEAL',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/5-for-3-shop.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/5-for-3-shop.webp',
+                        'title' => 'Pianote 5-For-3 Bundle',
+                        'badgeText' => 'Includes a $150 Gift Card',
+                    ],
+                ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles-summer', [
+            "header" => 'Deals',
+        ])
+
+        </div>
+   
+
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
