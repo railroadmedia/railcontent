@@ -21,9 +21,9 @@ class MetaFieldDefinition
     public function __construct(
         string $name,
         ?string $description,
-        ShopifyMetafieldKey $key,
+        string|ShopifyMetafieldKey $key,
         ShopifyMetafieldTypes $type,
-        ShopifyMetafieldNamespace $namespace,
+        string|ShopifyMetafieldNamespace $namespace,
         ShopifyMetafieldOwnerTypeEnum $ownerType,
         mixed $id = null,
         mixed $value = null
@@ -32,10 +32,10 @@ class MetaFieldDefinition
         $this->description = $description;
         $this->value = $value;
         $this->type = $type->value;
-        $this->namespace = $namespace->value;
+        $this->namespace = is_string($namespace) ? $namespace : $namespace->value;
         $this->ownerType = $ownerType->value;
         $this->id = $id;
-        $this->key = $key->value;
+        $this->key = is_string($key) ? $key : $key->value;
     }
 
     /**
@@ -85,9 +85,9 @@ class MetaFieldDefinition
         return new self(
             $data['name'],
             $data['description'] ?: null,
-            ShopifyMetafieldKey::from($data['key']),
+            ShopifyMetafieldKey::tryFrom($data['key']) ?? $data['key'],
             ShopifyMetafieldTypes::from($data['type']),
-            ShopifyMetafieldNamespace::from($data['namespace']),
+            ShopifyMetafieldNamespace::tryFrom($data['namespace']) ?? $data['namespace'],
             ShopifyMetafieldOwnerTypeEnum::from($data['ownerType']),
             $data['id'],
             null
