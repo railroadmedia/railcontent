@@ -25,21 +25,6 @@ class ContentEntityDecorator extends TypeDecoratorBase
 
         $entities = [];
 
-        // TODO this shouldn't happen when the $contentResults['type'] is user-playlist
-        $contentIds = $contentResults->pluck('id')->toArray();
-        $contentPermissionRows = collect(
-            $this->contentPermissionRepository->getByContentIdsOrTypes(
-                $contentIds,
-                [])
-        );
-        $groupedPermissions = $contentPermissionRows->groupBy('content_id');
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-        $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
-        $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
-        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
-            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
-        }
-
         foreach ($contentResults as $resultsIndex => $result) {
             $entities[$resultsIndex] = new ContentEntity($result);
 
@@ -58,16 +43,6 @@ class ContentEntityDecorator extends TypeDecoratorBase
                     $entities[$resultsIndex]['lessons'][$index] = new ContentEntity($field);
                 }
             }
-
-            $hasAccess = !empty(
-                array_intersect(
-                    $userPermissionIds,
-                    (isset($groupedPermissions[$result['id']])) ?
-                        $groupedPermissions[$result['id']]->pluck('permission_id')
-                            ->toArray() : []
-                )
-                ) && (isset($groupedPermissions[$result['id']]));
-            $entities[$resultsIndex]['user_has_access'] = $hasAccess;
         }
 
         return new Collection($entities);
