@@ -179,6 +179,15 @@ class PermissionService
         return [1, 52, 73, 77,];
     }
 
+    public static function getLifetimeMembershipPermissionIds() : array
+    {
+        // 78 Drumeo Lifetime
+        // 88 Pianote Lifetime
+        // 89 Guitareo Lifetime
+        // Singeo Lifetime
+        return [78, 88, 89, 90];
+    }
+
     public static function getMusoraMemberShipIds(): array
     {
         return [91, 92];
