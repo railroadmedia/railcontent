@@ -179,9 +179,9 @@ class PermissionService
         return [1, 52, 73, 77,];
     }
 
-    public static function getPlusMembershipPermissionsIds(): array
+    public static function getMusoraMemberShipIds(): array
     {
-        return [92];
+        return [91, 92];
     }
 
 }
