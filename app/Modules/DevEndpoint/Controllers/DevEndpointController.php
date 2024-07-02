@@ -2,18 +2,9 @@
 
 namespace App\Modules\DevEndpoint\Controllers;
 
-use App\Modules\Ecommerce\ApiGateways\ShopifyGateway;
-use App\Modules\Ecommerce\Services\ProductService;
-use App\Modules\Ecommerce\Services\ShopifyAPIService;
-use App\Modules\EventDataSynchronizer\Jobs\EverflowTrackConversion;
-use App\Modules\UserManagementSystem\Services\UserService;
-use Closure;
 use Google\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Railroad\Railanalytics\Tracker;
 use Railroad\Railcontent\Enums\RecommenderSection;
 use Railroad\Railcontent\Services\APIEndPoint;
 use Railroad\Railcontent\Services\ContentService;
