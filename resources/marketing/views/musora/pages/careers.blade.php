@@ -195,8 +195,8 @@
                     <iframe class="absolute w-full h-full" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
                 </div>
             </div>
-
-            <h3><strong>Not the right time or opportunity?</strong></h3>
+            <div class="mx-auto px-3">
+            <h3><strong>Not the right time<br class="sm:hidden"> or opportunity?</strong></h3>
             <p class="text-[#a1afc9] my-5">
                 No problem! We’re always looking for good people — so if now isn’t the <br class="hidden md:inline">
                 right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
@@ -204,6 +204,7 @@
             </p>
             <a class="join smaller musora-gold text-black" target="_blank" href="https://careers.musora.com/register-your-interest/new">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
 {{--            <a class="join smaller musora-gold" href="#join">APPLY NOW</a>--}}
+            </div>
         </div>
     </header>
     <div id="values" class="anchor block relative invisible"></div>
@@ -237,15 +238,8 @@
     <section class="pt-10 sm:pt-14 lg:pt-16 pb-72 px-5 relative text-white text-center bg-musora-black">
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
-                class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage-1-mb.png"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                alt="collage 1"
-            >
-            <img
-                class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage-1b.png"
+                class="-mt-40 transition-opacity opacity-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage1c.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
@@ -279,15 +273,8 @@
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">
         <div class="container mx-auto max-w-5xl">
             <img
-                class="-mt-96 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-2-m.png"
-                alt="collage 2"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
-            <img
-                class="-mt-96 hidden sm:inline-block"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-2.png"
+                class="-mt-96 transition-opacity opacity-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage2c.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
