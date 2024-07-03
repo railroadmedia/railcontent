@@ -20,7 +20,7 @@ class ContentServedEventTrackingJob extends BaseJob
     {
         $recommended_content = [];
 
-        foreach ($this->props['contents'] as $contentServed) {
+        foreach ($this->props['recommended_content'] as $contentServed) {
             /** @var Content $content */
             $content = Content::where('id', $contentServed['id'])->first();
 
@@ -30,11 +30,11 @@ class ContentServedEventTrackingJob extends BaseJob
             }
 
             $brand = $content->brand;
-            $type = str_replace('_', '-', $content->type);
-            $moduleSource = null;
+            $type = str_replace('-', '_', $content->type);
+            $moduleSource = [];
 
-            $table = 'recommendations_' . $brand . $type;
-            $beginnerTable = 'recommendations_' . $brand . $type . '_beginner_items';
+            $table = 'recommendations_' . $brand . '_' . $type;
+            $beginnerTable = 'recommendations_' . $brand . '_' . $type . '_beginner_items';
 
             $recommendation = DB::table($table)
                 ->where('user_id', $this->user->id)
@@ -42,10 +42,9 @@ class ContentServedEventTrackingJob extends BaseJob
                 ->first();
 
             if ($recommendation) {
-                $moduleSource = json_decode($recommendation->module_source);
+                $moduleSource = json_decode($recommendation->module_source, associative: true)['module_source'];
             } else {
                 $beginnerRecommendation = DB::table($beginnerTable)
-                    ->where('user_id', $this->user->id)
                     ->where('content_id', $content->id)
                     ->first();
 
@@ -54,7 +53,7 @@ class ContentServedEventTrackingJob extends BaseJob
                     return;
                 }
 
-                $moduleSource = 'beginner';
+                $moduleSource[] = 'popular_beginner';
             }
 
             $recommended_content[] = [
@@ -64,7 +63,7 @@ class ContentServedEventTrackingJob extends BaseJob
             ];
         }
 
-        if (emptyArray($recommended_content)) {
+        if (empty($recommended_content)) {
             Log::error('No recommended content found for contents served', ['content_id' => $this->props['content_id']]);
             return;
         }
@@ -72,7 +71,8 @@ class ContentServedEventTrackingJob extends BaseJob
         Avo::recommended_content_served(
             AvoHelper::defaultEventProperties(
                 [
-                    'brand' => $props['brand'] ?? null,
+                    'brand' => $this->props['brand'] ?? null,
+                    'navigation_section' => $this->props['navigation_section'],
                     'recommended_content' => $recommended_content,
                 ],
                 $this->user
