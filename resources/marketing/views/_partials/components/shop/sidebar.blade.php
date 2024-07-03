@@ -32,7 +32,7 @@
             </h1>
 
             @if($category === 'bundles')
-                <p class="text-sm text-black rounded-lg px-2 leading-none py-1 inline-block opacity-40">${{ round($fullPrice - $price) }} <em> in FREE BONUSES </em></p>
+                <p class="text-sm text-black rounded-lg px-2 leading-none py-1 block opacity-40">${{ round($fullPrice - $price) }} <em> in FREE BONUSES </em></p>
             @else
 
                 <p class="text-sm font-black text-black rounded-lg px-2 leading-none py-1 inline-block bg-musora">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>

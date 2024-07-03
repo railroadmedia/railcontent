@@ -36,7 +36,7 @@
              @php
                 $bundles = [
                     [
-                        'slug' => 'shop/ultimate-lessons-bundle',
+                        'slug' => '/shop/ultimate-lessons-bundle',
                         'title' => 'The Ultimate Lessons Bundle',
                         'desc' => 'Annual Pianote membership + books, posters, and more!',
                         'visible' => 1,
@@ -50,7 +50,7 @@
                         'badgeText' => '6 free gifts worth $520',
                     ],
                     [
-                        'slug' => '/drumshop/practice-anywhere-bundle',
+                        'slug' => '/shop/5-for-3-bundle',
                         'desc' => 'A 5-Year Membership for the price of 3, and more!',
                         'visible' => 1,
                         'price' => 1200,

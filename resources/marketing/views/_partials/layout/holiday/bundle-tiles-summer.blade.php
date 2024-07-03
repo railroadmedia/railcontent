@@ -31,12 +31,12 @@
                                 <p class="text-sm italic text-center mb-2 text-black">{!! $bundle['desc'] !!}</p>
                                 @if (!empty($bundle['price']))
                                     
-                                        <div class="flex flex-row items-center py-2">
+                                        <div class="flex flex-row items-center justify-center py-2">
                                       
                                                 @if ($bundle['discountedPrice'] < $bundle['price'])
-                                                <h5 class="line-through text-black opacity-40">Was ${{ $bundle['price'] }}</h5>
+                                                <h5 class="line-through text-black opacity-40 m-2">Was ${{ $bundle['price'] }}</h5>
                                                 @endif
-                                                <h5 style="color: {{ $bundle['discountedPriceColor'] }};"><strong>Now ${{ $bundle['discountedPrice'] }}</strong></h5>                                           
+                                                <h5 class="m-2" style="color: {{ $bundle['discountedPriceColor'] }};"><strong>Now ${{ $bundle['discountedPrice'] }}</strong></h5>                                           
                                         </div>
                                    
                                 @endif

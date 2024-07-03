@@ -57,8 +57,9 @@
 @section('layout-body')
 
 @php
-$originalPrice = 2736;
+$originalPrice = 1200;
 $discountedPrice = 720;
+$promoLink = '/ecommerce/add-to-cart?products[drumeo_access_5-years]=1&products[musora-gift-card-150]=1&promo-code=&locked=true';
 @endphp
 
 @include('pianote.products.partials._summer-promo', [
@@ -70,8 +71,8 @@ $discountedPrice = 720;
         'originalPrice' => $originalPrice,
         'discountedPrice' => $discountedPrice,
         'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
-        'ctaLink' => '',
-        ]) <!-- TODO -->
+        'ctaLink' => $promoLink,
+        ]) 
 
     <section class="py-20">
         <div class="max-w-4xl px-1 sm:px-4 container mx-auto z-10 relative text-center">
@@ -93,10 +94,10 @@ $discountedPrice = 720;
     </section>
 
     <section style="background: #111729;">
-        <div class="container max-w-5xl mx-auto px-4 py-10 md:py-20">
+        <div class="container max-w-5xl mx-auto px-4 py-10 md:my-20">
             <div class="flex flex-col-reverse md:flex-row">
                 <div class="md:w-1/2 flex flex-col justify-center pb-2 text-white px-0 sm:px-10">
-                    <h1 class="text-2xl m-0 pb-3 md:pb-6"><strong>Books? Tools? Swag? <br> Your choice!</strong></h1>
+                    <h2 class="text-2xl m-0 pb-3 md:pb-6"><strong>Books? Tools? Swag? <br> Your choice!</strong></h2>
                     <p class="text-base">With your 5-for-3 membership, you'll receive a $150 Digital Gift Card to select whatever products you like! Choose between the best lessons, tool, books, merch and more!</p>
                 </div>
                 <div class="md:w-1/2 p-10 md:p-0">
@@ -126,8 +127,8 @@ $discountedPrice = 720;
         'originalPrice' => $originalPrice,
         'discountedPrice' => $discountedPrice,
         'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
-        'ctaLink' => '', 
-    ])
+        'ctaLink' => $promoLink,
+        ])
 
 @endsection
 
