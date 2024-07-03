@@ -5,8 +5,6 @@ namespace App\Modules\MusoraApi\Services\V5;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\MusoraApi\Jobs\ContentServedEventTrackingJob;
 use Avo;
-use Illuminate\Support\Facades\DB;
-use Railroad\Railcontent\Models\Content;
 
 class RecSysJourneyService
 {

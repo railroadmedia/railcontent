@@ -6,6 +6,7 @@ use App\Jobs\BaseJob;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
 use Illuminate\Support\Facades\DB;
+use Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Models\Content;
 
@@ -24,7 +25,7 @@ class ContentServedEventTrackingJob extends BaseJob
             $content = Content::where('id', $contentServed['id'])->first();
 
             if (!$content) {
-                // TODO: Log no content found
+                Log::error('Content not found', ['content_id' => $contentServed['id']]);
                 continue;
             }
 
@@ -40,18 +41,20 @@ class ContentServedEventTrackingJob extends BaseJob
                 ->where('content_id', $content->id)
                 ->first();
 
-            $beginnerRecommendation = DB::table($beginnerTable)
-                ->where('user_id', $this->user->id)
-                ->where('content_id', $content->id)
-                ->first();
-
             if ($recommendation) {
                 $moduleSource = json_decode($recommendation->module_source);
-            } elseif ($beginnerRecommendation) {
-                $moduleSource = 'beginner';
             } else {
-                // TODO: log no recommendation found
-                continue;
+                $beginnerRecommendation = DB::table($beginnerTable)
+                    ->where('user_id', $this->user->id)
+                    ->where('content_id', $content->id)
+                    ->first();
+
+                if (!$beginnerRecommendation) {
+                    Log::error(self::class . ': Content not found', ['content_id' => $contentServed['id']]);
+                    return;
+                }
+
+                $moduleSource = 'beginner';
             }
 
             $recommended_content[] = [
@@ -62,7 +65,7 @@ class ContentServedEventTrackingJob extends BaseJob
         }
 
         if (emptyArray($recommended_content)) {
-            // TODO: Log no recommended content found
+            Log::error('No recommended content found for contents served', ['content_id' => $this->props['content_id']]);
             return;
         }
 
