@@ -67,7 +67,7 @@
         <img class="rounded-xl w-full my-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/drumeo/lead-gen/pages/SheetMusic101-01.jpg">
         <p><strong>Sheet Music 101 starts on July 18th!</strong><br>
             We'll notify you when the lessons drop! Click below for more info.</p>
-        <a class="join blue smaller" href="https://www.musora.com/drumeo/forums">LEARN MORE</a>
+        <a class="join blue smaller" href="https://www.musora.com/drumeo/forums/jump-to-post/353960">LEARN MORE</a>
     </div>
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
