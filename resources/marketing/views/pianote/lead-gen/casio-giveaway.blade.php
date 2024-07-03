@@ -49,8 +49,9 @@
                             <i class="fas fa-check-circle text-pianote lg:ml-2"></i> Cancel anytime.</p>
 
                     </div>
-                    @if(Carbon\Carbon::now() > Carbon\Carbon::create(2024, 6, 11, 0, 0, 0, 'America/Vancouver')
-                        && Carbon\Carbon::now() < Carbon\Carbon::create(2024, 6, 3, 0, 0, 0, 'America/Vancouver'))
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
                         <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
@@ -189,8 +190,9 @@
                         </h4>
                     </div>
 
-                    @if(Carbon\Carbon::now() > Carbon\Carbon::create(2024, 6, 11, 0, 0, 0, 'America/Vancouver')
-                        && Carbon\Carbon::now() < Carbon\Carbon::create(2024, 6, 3, 0, 0, 0, 'America/Vancouver'))
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
                         <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
                     @else
                         <span class="join sold-out smaller w-full">this offer has now ended</span>
