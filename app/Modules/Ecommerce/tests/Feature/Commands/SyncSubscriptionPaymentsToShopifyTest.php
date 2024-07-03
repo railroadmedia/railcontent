@@ -112,15 +112,30 @@ class SyncSubscriptionPaymentsToShopifyTest extends TestCase
             ->createdAtInDateRange(new Carbon('1970-01-01T00:00:00Z'), $startCreatedAt)
             ->create();
 
-        $beforeLaunch = SubscriptionPayment::factory()
-            ->count(5)
-            ->createdAtInDateRange($startCreatedAt, $this->launchDate)
-            ->create();
+        // create these in a loop, so we can have an incrementing created_at value
+        $previousCreatedAt = $startCreatedAt->copy();
+        $beforeLaunch = collect();
+        for ($i = 0; $i < 5; $i++) {
+            $sp = SubscriptionPayment::factory()
+                ->createdAtInDateRange($previousCreatedAt, $this->launchDate)
+                ->create();
 
-        $afterLaunch = SubscriptionPayment::factory()
-            ->count(4)
-            ->createdAtInDateRange($this->launchDate, $endCreatedAt)
-            ->create();
+            // update the previousCreatedAt to the created_at of the current subscription payment, so the next will be after it
+            $previousCreatedAt = $sp->created_at->copy()->addSecond();
+            $beforeLaunch->push($sp);
+        }
+
+        $previousCreatedAt = $this->launchDate->copy();
+        $afterLaunch = collect();
+        for ($i = 0; $i < 4; $i++) {
+            $sp = SubscriptionPayment::factory()
+                ->createdAtInDateRange($previousCreatedAt, $endCreatedAt->copy()->startOfDay())
+                ->create();
+
+            // update the previousCreatedAt to the created_at of the current subscription payment, so the next will be after it
+            $previousCreatedAt = $sp->created_at->copy()->addSecond();
+            $afterLaunch->push($sp);
+        }
 
         // after our wanted period
         SubscriptionPayment::factory()
