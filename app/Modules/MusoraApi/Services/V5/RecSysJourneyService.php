@@ -3,7 +3,10 @@
 namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\MusoraApi\Jobs\ContentServedEventTrackingJob;
 use Avo;
+use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Models\Content;
 
 class RecSysJourneyService
 {
@@ -36,15 +39,7 @@ class RecSysJourneyService
 
     public function trackRecommendedContentServed(array $props): void
     {
-        // TODO: parse data based on event schema
-        Avo::recommended_content_served(
-            AvoHelper::defaultEventProperties(
-                [
-                    'brand' => $props['brand'] ?? null,
-                    'homepage_section' => $props['section'] ?? null,
-                ],
-                user()
-            )
-        );
+        $user = user();
+        dispatchWithDelay(new ContentServedEventTrackingJob($props, $user), 5);
     }
 }
