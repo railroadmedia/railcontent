@@ -25,6 +25,12 @@
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <exclude>
+            <directory>./app/Modules/Content/views</directory>
+            <directory>./app/Modules/HelpScout/views</directory>
+            <directory>./app/Modules/MusoraCenter</directory>
+            <directory>./app/Modules/UserManagementSystem/views/emails</directory>
+        </exclude>
     </coverage>
     <php>
         <server name="APP_ENV" value="testing"/>
