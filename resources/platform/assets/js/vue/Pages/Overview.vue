@@ -99,13 +99,12 @@
     </div>
 </template>
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "../../stores/user";
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import PageHeader from '../components/PageHeader/PageHeader';
 import ListCatalogue from '../components/ListCatalogue/ListCatalogue'
-import ContentCatalogue from "../vuesora/views/catalogues/ContentCatalogue";
 import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper';
 
 const props = defineProps({
