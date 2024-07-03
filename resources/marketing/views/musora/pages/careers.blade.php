@@ -13,6 +13,9 @@
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
 
     <style>
+        .anchor {
+            top:-116px;
+        }
         .join {
             display:inline-block;
             font:500 22px/1em 'Bebas Neue', sans-serif;
@@ -155,7 +158,8 @@
         <a class="join smaller musora-gold whitespace-nowrap anchor-slide relative py-2 px-3 md:py-3 md:px-5 text-sm" href="#join">APPLY NOW</a>
     </div>
     <div class="w-full h-10 sm:h-12 lg:h-14"></div>
-    <header class="pb-24 sm:pb-32 pt-32 sm:pt-40 text-white text-center relative" style="background-color:#0c1524;">
+    <div id="join" class="anchor block relative invisible"></div>
+    <header class="py-10 sm:py-16 text-white text-center relative" style="background-color:#0c1524;">
         <div class="container mx-auto">
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
@@ -185,8 +189,22 @@
                 onload="this.classList.remove('opacity-0')"
                 alt="singeo logo"
             >
-            <h1 class="mt-2 mb-5"><strong>Careers at Musora</strong></h1>
-            <a class="join smaller musora-gold" href="#join">APPLY NOW</a>
+            <h1 class="mt-1 mb-16"><strong>Careers at Musora</strong></h1>
+            <div class="max-w-5xl mx-auto mb-10 sm:mb-12 xl:px-5">
+                <div class="w-full relative" style="height:370px;">
+                    <iframe class="absolute w-full h-full" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
+                </div>
+            </div>
+            <div class="mx-auto px-3">
+            <h3><strong>Not the right time<br class="sm:hidden"> or opportunity?</strong></h3>
+            <p class="text-[#a1afc9] my-5">
+                No problem! We’re always looking for good people — so if now isn’t the <br class="hidden md:inline">
+                right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
+                link below to join our talent pool for future opportunities.
+            </p>
+            <a class="join smaller musora-gold text-black" target="_blank" href="https://careers.musora.com/register-your-interest/new">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
+{{--            <a class="join smaller musora-gold" href="#join">APPLY NOW</a>--}}
+            </div>
         </div>
     </header>
     <div id="values" class="anchor block relative invisible"></div>
@@ -217,18 +235,11 @@
             </div>
         </div>
     </section>
-    <section class="pt-10 sm:pt-14 lg:pt-16 pb-96 px-5 relative text-white text-center bg-musora-black">
+    <section class="pt-10 sm:pt-14 lg:pt-16 pb-72 px-5 relative text-white text-center bg-musora-black">
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
-                class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage-1-mb.png"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                alt="collage 1"
-            >
-            <img
-                class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage-1b.png"
+                class="-mt-40 transition-opacity opacity-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage1c.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
@@ -242,7 +253,7 @@
             </p>
 
             <img
-                class="my-12 inline-block sm:hidden transition-opacity opacity-0"
+                class="mt-12 mb-24 inline-block sm:hidden transition-opacity opacity-0"
                 style="filter: saturate(0) brightness(10);"
                 src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote-m.png"
                 loading="lazy"
@@ -257,36 +268,13 @@
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
             >
-
-            <div id="join" class="anchor block relative invisible"></div>
-            <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
-            <div class="max-w-5xl mx-auto mb-14 sm:mb-20 xl:px-5">
-                <div class="w-full relative" style="height:370px;">
-                    <iframe class="absolute w-full h-full" src="/careers-pinpoint" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
-                </div>
-            </div>
-
-            <h3><strong>Not the right time or opportunity?</strong></h3>
-            <p class="text-[#a1afc9] my-5">
-                No problem! We’re always looking for good people — so if now isn’t the <br class="hidden md:inline">
-                right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
-                link below to join our talent pool for future opportunities.
-            </p>
-            <a class="join smaller musora-gold text-black" target="_blank" href="https://careers.musora.com/register-your-interest/new">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">
         <div class="container mx-auto max-w-5xl">
             <img
-                class="-mt-96 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-2-m.png"
-                alt="collage 2"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
-            <img
-                class="-mt-96 hidden sm:inline-block"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-2.png"
+                class="-mt-96 transition-opacity opacity-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/musora/lead-gen/careers/collage2c.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -431,7 +419,7 @@
                 @endphp
                 @foreach($points as $point)
                     <div class="flex items-start w-full sm:w-1/2 m:px-2 lg:px-10 mb-6 sm:mb-9 text-left">
-                        <div class="w-12 sm:w-14 lg:w-16 flex-shrink-0"><img class="h-6 sm:h-7" style="filter: saturate(0) brightness(10);" src="{!! $point['icon'] !!}" alt="{{ $point['title'] }} icon"></div>
+                        <div class="w-12 sm:w-14 lg:w-16 flex-shrink-0"><img class="h-6 sm:h-7" style="    filter: brightness(0) invert() sepia(1) hue-rotate(310deg) saturate(200);" src="{!! $point['icon'] !!}" alt="{{ $point['title'] }} icon"></div>
                         <div>
                             <h5 class="leading-tight mb-2"><strong>{!! $point['title'] !!}</strong></h5>
                             <p class="text-[#a1afc9]">{!! $point['description'] !!}</p>

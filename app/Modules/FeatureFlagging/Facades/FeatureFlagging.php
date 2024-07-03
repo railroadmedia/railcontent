@@ -8,7 +8,7 @@ use Modules\UserManagementSystem\Models\User;
 
 /**
  * @method static bool accessible(string $feature, User $user=null)
- * @method static bool branch(string $experiment, User $user=null)
+ * @method static bool branch(string $experiment, User $user=null, bool $handleFirstTouch=true)
  * @method static array allBranches(User $user)
  * @method static array allowedFeatures(User $user)
  */

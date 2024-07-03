@@ -97,6 +97,7 @@ class GenerateWeeklyMembershipStats extends Command
                         'trial_expiration_date',
                         'last_used_brand',
                         'membership_expiration_date',
+                        'usora_users.created_at',
                     ]
                 )
                 ->leftJoin(
@@ -113,10 +114,17 @@ class GenerateWeeklyMembershipStats extends Command
                         $startDate,
                         $endDate
                     ) {
-                        $query->where(function (Builder $query) use ($dateIncrement, $startDate, $endDate) {
-                            $query->whereRaw("'$dateIncrement' >= start_time")
-                                ->whereRaw("'$dateIncrement' <= end_time");
-                        })->orWhere(function (Builder $query) use ($dateIncrementEndOfWeek, $dateIncrement) {
+                        $query->where(
+                            function (Builder $query) use (
+                                $dateIncrementEndOfWeek,
+                                $dateIncrement,
+                                $startDate,
+                                $endDate
+                            ) {
+                                $query->whereRaw("'$dateIncrementEndOfWeek' >= start_time")
+                                    ->whereRaw("'$dateIncrement' <= end_time");
+                            }
+                        )->orWhere(function (Builder $query) use ($dateIncrementEndOfWeek, $dateIncrement) {
                             $query->where('membership_expiration_date', '>=', $dateIncrement)
                                 ->where('membership_expiration_date', '<=', $dateIncrementEndOfWeek);
                         });
@@ -130,6 +138,7 @@ class GenerateWeeklyMembershipStats extends Command
 //                    $query->where('trial_expiration_date', '<', $dateIncrement)
 //                        ->orWhereNull('trial_expiration_date');
 //                })
+//                ->whereIn('user_id', [707563])
                 ->orderBy('usora_users.id', 'desc')
                 ->groupBy('usora_users.id')
                 ->chunk(
@@ -147,6 +156,7 @@ class GenerateWeeklyMembershipStats extends Command
                         // user access permissions rows
                         $usersAccessPermissionsRowsGroupedByUserId = DB::connection('musora_laravel_mysql')
                             ->table('user_access_permissions')
+                            ->select(['user_id', 'name', 'time_days', 'time_months', 'start_time', 'end_time'])
                             ->join(
                                 'railcontent_permissions',
                                 function (JoinClause $join) use ($allMembershipPermissionIds) {
@@ -158,8 +168,38 @@ class GenerateWeeklyMembershipStats extends Command
                                         ->whereIn('permission_id', $allMembershipPermissionIds);
                                 }
                             )
-                            ->whereRaw("'$dateIncrement' >= start_time")
+                            ->whereRaw("'$dateIncrementEndOfWeek' >= start_time")
                             ->whereRaw("'$dateIncrement' <= end_time")
+                            ->whereIn('user_access_permissions.permission_id', $allMembershipPermissionIds)
+                            ->whereIn(
+                                'user_access_permissions.user_id',
+                                $allUserIdsInChunk
+                            )
+                            ->orderBy('user_id', 'desc')
+                            ->get()
+                            ->groupBy('user_id');
+
+                        // if the user perm start this week, check if:
+                        // sql to check if user has a membership permission that ended more than 30 days in to the past
+                        // user access permissions rows
+                        $dateIncrementMinusMonth = $dateIncrement->copy()->subDays(30);
+
+                        $pastUsersAccessPermissionsRowsGroupedByUserId = DB::connection('musora_laravel_mysql')
+                            ->table('user_access_permissions')
+                            ->select(['user_id', 'name', 'time_days', 'time_months', 'start_time', 'end_time'])
+                            ->join(
+                                'railcontent_permissions',
+                                function (JoinClause $join) use ($allMembershipPermissionIds) {
+                                    $join->on(
+                                        'railcontent_permissions.id',
+                                        '=',
+                                        'user_access_permissions.permission_id'
+                                    )
+                                        ->whereIn('permission_id', $allMembershipPermissionIds);
+                                }
+                            )
+                            ->whereRaw("'$dateIncrementMinusMonth' <= end_time")
+                            ->whereRaw("'$dateIncrement' >= start_time")
                             ->whereIn('user_access_permissions.permission_id', $allMembershipPermissionIds)
                             ->whereIn(
                                 'user_access_permissions.user_id',
@@ -275,6 +315,7 @@ GROUP BY user_id
                         // access_type
                         // access_frequency
                         // in_trial_period
+                        // started
                         // active
                         // expired
                         // generated_at
@@ -351,7 +392,24 @@ GROUP BY user_id
                                 }
                             }
 
+                            // started
+                            $weeklyMembershipStatsRow['started'] = false;
+
+                            foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? [] as $userPermissionRow) {
+                                $startTime = Carbon::parse($userPermissionRow->start_time);
+
+                                // if the permission was started in this week
+                                if ($startTime >= $dateIncrement &&
+                                    $startTime <= $dateIncrementEndOfWeek) {
+                                    // check if it was their first permission in 30 days
+                                    if (empty($pastUsersAccessPermissionsRowsGroupedByUserId[$userId])) {
+                                        $weeklyMembershipStatsRow['started'] = true;
+                                    }
+                                }
+                            }
+
                             // access frequency
+                            // ['1 month', '2 month', '3 month', '6 month', '60 month', '1 year', 'lifetime', 'other', 'trial']
                             $weeklyMembershipStatsRow['access_frequency'] = 'other';
 
                             if ($weeklyMembershipStatsRow['in_trial_period']) {
@@ -361,16 +419,35 @@ GROUP BY user_id
                             foreach ($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? [] as $userPermissionRow) {
                                 if (str_contains(strtolower($userPermissionRow->name), 'lifetime')) {
                                     $weeklyMembershipStatsRow['access_frequency'] = 'lifetime';
-                                    continue;
+                                    break;
                                 }
 
-                                if ($userPermissionRow->time_months == 1) {
-                                    $weeklyMembershipStatsRow['access_frequency'] = 'monthly';
-                                }
-                                if ($userPermissionRow->time_months == 12) {
-                                    $weeklyMembershipStatsRow['access_frequency'] = 'yearly';
+                                switch ($userPermissionRow->time_months) {
+                                    case 1:
+                                        $weeklyMembershipStatsRow['access_frequency'] = '1 month';
+                                        break;
+                                    case 2:
+                                        $weeklyMembershipStatsRow['access_frequency'] = '2 month';
+                                        break;
+                                    case 3:
+                                        $weeklyMembershipStatsRow['access_frequency'] = '3 month';
+                                        break;
+                                    case 6:
+                                        $weeklyMembershipStatsRow['access_frequency'] = '6 month';
+                                        break;
+                                    case 12:
+                                    case 13:
+                                        $weeklyMembershipStatsRow['access_frequency'] = '1 year';
+                                        break;
+                                    case 60:
+                                        $weeklyMembershipStatsRow['access_frequency'] = '5 year';
+                                        break;
                                 }
                             }
+
+//                            if ($weeklyMembershipStatsRow['access_frequency'] == 'other') {
+//                                var_dump($usersAccessPermissionsRowsGroupedByUserId[$userId] ?? []);
+//                            }
 
                             // active
                             $weeklyMembershipStatsRow['active'] = false;
@@ -390,11 +467,6 @@ GROUP BY user_id
                         $weeklyMembershipStatsRows = collect($weeklyMembershipStatsRows)->chunk(1000);
 
                         foreach ($weeklyMembershipStatsRows as $weeklyMembershipStatsRowsToInsert) {
-                            foreach ($weeklyMembershipStatsRowsToInsert as $weeklyMembershipStatsRowToInsert) {
-                                if (count($weeklyMembershipStatsRowToInsert) != 16) {
-                                    dd($weeklyMembershipStatsRowToInsert);
-                                }
-                            }
                             WeeklyUserStatistic::query()->insert($weeklyMembershipStatsRowsToInsert->toArray());
                             $this->info("Inserted: " . count($weeklyMembershipStatsRowsToInsert));
                         }

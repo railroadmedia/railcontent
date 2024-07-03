@@ -369,7 +369,7 @@
 
                     <div class="flex flex-wrap items-left sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a href="#final" class="@if($startDateCourse < Carbon\Carbon::now()) sold-out @endif join bg-pianote medium w-full anchor-slide">@if($startDateCourse < Carbon\Carbon::now()) ENROLLMENT CLOSED @endif ENROLL NOW </a>
+                            <a href="#final" class="@if($startDateCourse > Carbon\Carbon::now()) sold-out @else bg-pianote @endif join medium w-full anchor-slide">@if($startDateCourse > Carbon\Carbon::now()) ENROLLMENT CLOSED @else ENROLL NOW @endif</a>
                         </div>
                         <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 transition-opacity opacity-0"
@@ -614,7 +614,7 @@
 
         {{-- <span class="join sold-out medium w-full max-w-xs align-middle my-10" @click="waitlistModal = true;">JOIN WAITLIST</span> --}}
 
-        @if ($startDateCourse < Carbon\Carbon::now())
+        @if ($startDateCourse > Carbon\Carbon::now())
             <span class="join sold-out medium w-full max-w-xs align-middle my-10">ENROLLMENT CLOSED</span>
         @else
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle my-10 anchor-slide">ENROLL NOW</span>
@@ -1033,7 +1033,7 @@
         </div>
         <div class="container mx-auto text-center flex flex-col content-center items-center w-full">
 
-        @if ($startDateCourse < Carbon\Carbon::now())
+        @if ($startDateCourse > Carbon\Carbon::now())
             <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
         @else
             <span href="#final" class="join bg-pianote medium w-full max-w-xs align-middle anchor-slide">ENROLL NOW</span>
@@ -1109,9 +1109,16 @@
                         </div>
                     @endforeach
                 </div>
+                @if ($startDateCourse > Carbon\Carbon::now())
+                    <span class="join sold-out medium w-full max-w-xs align-middle">ENROLLMENT CLOSED</span>
+                @endif
 
             </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
+
+            @if ($startDateCourse > Carbon\Carbon::now())
+
+            @else
+                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto mt-5 lg:mt-0">
                     <a class="px-5 sm:px-7 py-7 sm:py-8 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-5/12 z-10" style="background: #ffffff;"
                         @if ($earlyBirdEnd < Carbon\Carbon::now())
                             href="/ecommerce/add-to-cart?products[read-music-in-30-days]=1&products[read-music-in-30-days-pdf]=1&promo-code=read-music-shipping&locked=true"
@@ -1164,6 +1171,7 @@
                     </p>
                 </a>
             </div>
+            @endif
         </div>
     </section>
 

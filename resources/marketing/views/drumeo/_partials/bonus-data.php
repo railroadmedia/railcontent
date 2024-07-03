@@ -93,10 +93,4 @@ $bonuses = [
         'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
         'price' => floatval($productPrices['GHFAL-DIGI']->price),
     ],
-    [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/creative-control.jpg',
-        'title' => 'Creative Control',
-        'description' => 'Thomas Lang’s innovative system for developing technique so you can play more effectively in any style of music. Includes more than four hours of video.',
-        'price' => floatval($productPrices['CC-DIGI']->price),
-    ],
 ];
