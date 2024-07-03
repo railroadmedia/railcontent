@@ -103,7 +103,15 @@ class CohortPackController
             'purchased' => $purchased
         ]);
     }
-
+    public function templateAlt(Request $request, $domain, $brand, $slug, $purchased = false)
+    {
+        return view('content.cohort-template-mk', [
+            'brand' => brand(),
+            'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
+            'purchased' => $purchased,
+            'singHarmony' => true
+        ]);
+    }
     public function purchased(Request $request, $domain, $brand, $slug)
     {
         return $this->template($request, $domain, $brand, $slug, purchased: true);

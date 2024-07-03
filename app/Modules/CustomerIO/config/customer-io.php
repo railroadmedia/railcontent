@@ -325,7 +325,7 @@ return [
                     'drumeo',
                 ],
             ],
-            'Eardrums Waitlist' => [
+            'EarDrums Waitlist' => [
                 'custom_attributes' => [],
                 'events' => [
                     'drumeo_prospect_eardrums2-waitlist',

@@ -831,6 +831,11 @@ Route::domain('{musoraDomain}')
             ->middleware(
                 [Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class]
             );
+        Route::get('/{brand}/enrollment/sing-harmony-in-30-days', [CohortPackController::class, 'templateAlt'])
+            ->name('platform.cohort')
+            ->middleware(
+                [Modules\UserManagementSystem\Middleware\AuthenticateViaKeyIfAvailable::class]
+            );
 
         Route::get('/{brand}/enrollment/{cohort}/purchased', [CohortPackController::class, 'purchased'])
             ->name('platform.cohort.purchased');
