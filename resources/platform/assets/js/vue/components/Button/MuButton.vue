@@ -4,7 +4,7 @@
         :href="isLink ? href : null"
         :type="isLink ? null : type"
         :disabled="disabled"
-        :class="[ `tw-btn-${size}`, btnClasses, props.class ]"
+        :class="[ `tw-mu-button tw-btn-${size} tw-font-bebas-neue tw-flex tw-justify-center tw-items-center`, btnClasses, props.class ]"
         @click="handleClick"
     >
         <template v-if="processing">
@@ -48,7 +48,7 @@
         variant: {
             type: String,
             default: 'primary', // default style is primary
-            validator: (value) => ['primary', 'secondary'].includes(value)
+            validator: (value) => ['primary', 'secondary', 'custom'].includes(value)
         },
         size: {
             type: String,
@@ -67,10 +67,9 @@
     //Computed
     const btnClasses = computed(() => ({
         'tw-cursor-not-allowed': props.disabled || props.processing,
-        'tw-opacity-50': props.disabled,
         'tw-cursor-pointer': !props.disabled && !props.processing,
-        'tw-btn-primary': props.variant === 'primary',
-        'tw-btn-secondary': props.variant === 'secondary',
+        'tw-bg-ui-button-1 tw-text-ui-button-3 hover:tw-bg-primary-6 hover:tw-text-primary-1 disabled:tw-bg-primary-8': props.variant === 'primary',
+        'tw-bg-ui-button-2 tw-text-text-primary tw-border-primary-1 tw-border hover:tw-bg-primary-1 hover:tw-text-primary-9 hover:tw-border-primary-1 disabled:tw-border-primary-9': props.variant === 'secondary',
     }));
 
     //Methods
@@ -83,33 +82,18 @@
     };
 </script>
 <style scoped>
-    /* DEFAULT BUTTON STYLES */
-    .tw-btn-primary, .tw-btn-secondary {
+    .tw-mu-button {
         line-height: 0;
+        height: 40px;
+        padding: 0 35px;
+        border-radius: 25px;
     }
-    /* Primary Styles */
-    .tw-btn-primary {
-        background-color: var(--color-ui-button-bg); 
-        color: var(--color-ui-button-text); 
-    }
-    .tw-btn-primary:hover {
-        background-color: var(--color-primary-6); 
-        color: var(--color-primary-1); 
-    }
-    /* Secondary Styles */
-    .tw-btn-secondary {
-        color: var(--color-ui-button-text); 
-    }
-    .tw-btn-secondary:hover {
-        background-color: var(--color-ui-button-bg); 
-        border-color: var(--color-ui-button-bg); 
-        color: var(--color-ui-button-text); 
-    }
-    body.tw-dark .tw-btn-secondary:hover {
-        color: black;
-        border-color: white;
-        background-color: white;
+
+    @media only screen and (max-width: 768px) {
+        .tw-mu-button {
+            height: 35px;
+            font-size: 14px;
+        }
     }
 </style>
-  
-  
+
