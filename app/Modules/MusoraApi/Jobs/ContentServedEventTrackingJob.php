@@ -33,8 +33,8 @@ class ContentServedEventTrackingJob extends BaseJob
             $type = str_replace('-', '_', $content->type);
             $moduleSource = [];
 
-            $table = 'recommendations_' . $brand . '_' . $type;
-            $beginnerTable = 'recommendations_' . $brand . '_' . $type . '_beginner_items';
+            $table = sprintf('recommendations_%s_%s', $brand, $type);
+            $beginnerTable = sprintf('recommendations_%s_%s_beginner_items', $brand, $type);
 
             $recommendation = DB::table($table)
                 ->where('user_id', $this->user->id)
