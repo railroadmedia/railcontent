@@ -473,7 +473,8 @@ class CustomerIoService
      */
     public function processForm(string $email, string $formNameToProcess, array $requestParams): array
     {
-        $allConfiguredForms = config('customer-io.forms.' . config('customer-io.brand'), []);
+        $brand = config('customer-io.forms.brand');
+        $allConfiguredForms = config('customer-io.forms.' . $brand, []);
 
         $customers = [];
 
@@ -514,7 +515,11 @@ class CustomerIoService
                     sleep(1);
 
                     foreach ($formConfig['events'] as $eventName) {
-                        $eventData = [];
+                        $eventData = [
+                            'timestamp' => Carbon::now()->timestamp,
+                            'brand' => $brand,
+                            'form_name' => $formName,
+                        ];
                         foreach (config('customer-io.forms_events_UTM_parameters', []) as $param => $dataKey) {
                             $eventData[$dataKey] = $requestParams[$param] ?? null;
                         }
