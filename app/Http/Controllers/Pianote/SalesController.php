@@ -277,6 +277,10 @@ class SalesController extends BaseController
     {
         return view('pianote.products.book-bag', ['theme' => 'pianote', 'membersVersion' => true]);
     }
+    public function betterTechniqueSale()
+    {
+        return view('pianote.products.30-days-to-better-technique-sale', ['theme' => 'pianote', 'membersVersion' => true]);
+    }
 
     public function newPianoPlayers()
     {
@@ -418,6 +422,7 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
+    
 
     public function readMusic()
     {
