@@ -434,6 +434,9 @@ $items = [
                                 drag: 'free',
                                 snap: false,
                             },
+                             410: {
+                                perPage: 1,
+                            },
                         },
                     }).mount()
                 },
@@ -471,7 +474,7 @@ $items = [
                             ];
                         @endphp
                         @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center h-[400px] sm:h-[340px]">
+                            <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-4 sm:px-8 mr-4 text-center h-[400px] sm:h-[340px]">
                                 <div class="mb-6" style="margin-top: -60px;">
                                     <img class="rounded-full w-[90px] h-[90px] object-cover transition-opacity opacity-0"
                                         loading="lazy" onload="this.classList.remove('opacity-0')"
