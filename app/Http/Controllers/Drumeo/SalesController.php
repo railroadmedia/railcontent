@@ -188,11 +188,6 @@ class SalesController extends BaseController
         return view('drumeo.lead-gen.pages.30-day-independence-deal', ['theme' => 'drumeo']);
     }
 
-    public function thirtyDayIndependenceSale()
-    {
-        return view('drumeo.products.30-day-independence-sale', ['theme' => 'drumeo']);
-    }
-
     public function thirtyDayDrummerDeal()
     {
         return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['theme' => 'drumeo']);
