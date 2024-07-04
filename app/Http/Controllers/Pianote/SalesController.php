@@ -279,7 +279,7 @@ class SalesController extends BaseController
     }
     public function betterTechniqueSale()
     {
-        return view('pianote.products.30-days-to-better-technique-sale', ['theme' => 'pianote', 'membersVersion' => true]);
+        return view('pianote.products.30-days-to-better-technique-sale', ['theme' => 'pianote']);
     }
 
     public function newPianoPlayers()
