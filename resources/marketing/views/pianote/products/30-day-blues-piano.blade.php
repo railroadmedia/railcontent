@@ -358,9 +358,9 @@ $items = [
 <section class="text-center bg-blue-50">
     <div class="container max-w-4xl mx-auto px-6 pt-6">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center pb-4">
-            <img class="h-32 md:h-64 lg:h-72 py-4 lazyload p-2"
-                data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png"
-                alt="logo">
+            <img class="h-32 md:h-64 lg:h-72 py-4 p-2 opacity-0"
+                src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/30-day-blues/30-day-blues-piano-logo-blue-glow.png"
+                loaf="lazy" onload="this.classList.remove('opacity-0')" alt="30 day blues logo">
             <ul class="pl-6">
                 @foreach ($items as $item)
                     <li>
@@ -382,7 +382,7 @@ $items = [
             </div>
             {{-- <div class="flex flex-row items-center py-2">
                      @if ($numStudents > 500)
-                    <img class="h-7 mr-2 lazyload" alt="Joined Student Profiles" data-src={{ $studentProfilesImage }}>
+                    <img class="h-7 mr-2" alt="Joined Student Profiles" src={{ $studentProfilesImage }}>
                     <span class="inline-block align-middle leading-tight text-xs">Join
                         {{ $numStudents }} {{ $students }} who<br> have already registered.
                     </span>
@@ -561,7 +561,5 @@ $points = [
             });
         })
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
 
 @stop

@@ -265,6 +265,8 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/header-left-collage.png',
     'isVideo' => true,
     'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
+    'alternateSrc' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/video-reel.mp4',
+    'poster' => 'https://i.vimeocdn.com/video/1754218536-f8a5209579972b4151468a5d286eb9e0736358110de6397a1f11b325f2b9fb60-d?mw=1500&mh=844&q=70',
 
 ])
 
@@ -385,17 +387,20 @@ $items = [
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <img class="h-6 sm:h-8 opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy" 
+                    onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>1.6M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <img class="h-6 sm:h-8 opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" 
+                    onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>19M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <img class="h-6 sm:h-8 opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" 
+                    onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>461k</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
@@ -452,9 +457,9 @@ $students = '30-Day Drummer Student'
 <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20"
     style="background-color:#2a2f34; border: 1px solid #2a2f34">
     <div class="container max-w-4xl mx-auto">
-        <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload"
-            data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/250x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
-            alt="guarantee badge">
+        <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 opacity-0"
+            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/guarantee.png"
+            alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')" >
         <h2 class="my-4 sm:my-6 lg:my-8"><strong>Your favorite drum<br class="inline sm:hidden"> course,
                 guaranteed.</strong></h2>
 
@@ -507,6 +512,4 @@ $points = [
 
 
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
 @stop

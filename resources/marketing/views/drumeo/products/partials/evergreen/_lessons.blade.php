@@ -6,9 +6,9 @@
     <div class="container max-w-5xl mx-auto px-4 md:px-6 md:flex leading-normal pb-6 md:pb-8" x-data="{ posterImage: '{{ $features[0]['posterImage'] }}', videoPlayer: '{{ $features[0]['videoId'] }}' }">
 
         <div class="pb-4 md:w-2/3 lg:w-8/12 md:pr-4 flex-shrink-0">
-            <div class="aspect-16:9 cursor-pointer rounded-xl overflow-hidden w-full relative" x-data="{ open: false, videoPlaying: false }">
+            <div class="aspect-16:9 cursor-pointer rounded-xl overflow-hidden w-full relative" x-data="{ open: false, videoPlaying: false, loaded: false }">
                 <img :src="posterImage" class="rounded-xl object-cover w-full h-full absolute z-0"
-                    alt="video poster" />
+                    alt="video poster" src="{{$features[0]['posterImage'] }}"/>
 
                 <button @click="open = true, videoPlaying = true"
                     class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"
@@ -27,13 +27,13 @@
 
         <div class="text-black md:w-1/3">
             @foreach ($features as $feature)
-        <button class="rounded-lg mb-2 px-4 py-3 bg-blue-50 w-full"
-    x-on:click="posterImage = '{{ $feature['posterImage'] }}', videoPlayer = '{{ $feature['videoId'] }}', open = false">
-    <p class="flex items-center">
-        <i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature['title'] }}
-    </p>
-</button>
-    @endforeach
+                <button class="rounded-lg mb-2 px-4 py-3 bg-blue-50 w-full"
+                    x-on:click="posterImage = '{{ $feature['posterImage'] }}', videoPlayer = '{{ $feature['videoId'] }}', open = false">
+                    <p class="flex items-center">
+                        <i class="fas fa-play-circle text-xl text-{{ $brand }} mr-2"></i> {{ $feature['title'] }}
+                    </p>
+                </button>
+            @endforeach
 
             <p class="text-white pt-3"><strong>{{ $lessonTitle }}</strong></p>
             <div class="relative">

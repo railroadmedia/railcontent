@@ -39,6 +39,7 @@
                     perPage: 2.5,
                     perMove: 1,
                     type: 'loop',
+                    lazyLoad: 'nearby',
                     focus: 0,
                     interval: 2000,
                     breakpoints: {
@@ -61,8 +62,8 @@
                         @foreach ($testimonials as $testimonial)
                         <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
                             <div class="-mt-10 mb-6">
-                                <img class="rounded-full w-[90px] h-[90px] object-cover lazyload"
-                                    data-src="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}"
+                                <img class="rounded-full w-[90px] h-[90px] object-cover"
+                                    data-splide-lazy="https://www.musora.com/musora-cdn/image/width=130,quality=95/{{ $testimonial['img'] }}"
                                     alt="{{ $testimonial['name'] }} avatar" />
                             </div>
                             <h6 class="mb-1"> <strong>{{ $testimonial['name'] }}</strong> </h6>
@@ -73,7 +74,7 @@
                                 <p><i>{{ $location }}</i></p>
                             @endif
                             <img class="my-4"
-                                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg"
+                                data-splide-lazy="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/stars.svg"
                                 alt="stars" />
                             <p class="mb-6">“{!! $testimonial['comment'] !!}”</p>
                         </li>

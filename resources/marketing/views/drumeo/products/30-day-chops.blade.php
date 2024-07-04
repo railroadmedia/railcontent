@@ -237,7 +237,9 @@
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-left-collage.png',
     'isVideo' => true,
-    'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
+    'alternateSrc' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
+    'poster' => 'https://i.vimeocdn.com/video/1754218307-e912a3951474ccd1222a6696c82ee8f3e0960b3e42ba9bb4d9d5db067c9cae20-d?mw=3100&mh=1744&q=70',
+    'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4'
 ])
 
  <!-- Lessons Section -->
@@ -279,7 +281,7 @@ $lessons = [
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Zack Grooves',
     'course' => ' 30 Days (20 Workouts + 4 Q&As)',
-    'lessons' => $lessons
+    'lessons' => $lessons,
 ])
 
 @php
@@ -459,7 +461,5 @@ $points = [
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defeer></script>
 
 @stop
