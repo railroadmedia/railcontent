@@ -157,7 +157,7 @@
                 </div>
             </div>
             <div class="inline-block italic text-black py-4 px-6 bg-musora">
-                The winner will be announced during a LIVE event on <strong>July 11th</strong>!
+                The winner will be announced {{--during a LIVE event--}} on <strong>July 11th</strong>!
             </div>
         </div>
     </section>

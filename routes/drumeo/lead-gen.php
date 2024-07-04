@@ -75,6 +75,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         'ugwpreferences',
         'quick-drummer-survey',
         'recitals',
+        'sm101preferences',
         'subscribed',
         'teach-a-beginner',
         'thank-you',
