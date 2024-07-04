@@ -26,11 +26,9 @@
                     </div>
                     <div class="flex flex-row remove-borders">
                         <transition appear name="fade">
-                            <ContentCatalogue
-                                :brand="brand"
-                                catalogue-type="list"
+                            <ListCatalogue
                                 :theme-color="brand"
-                                :pre-loaded-content="nextLesson"
+                                :content="nextLesson.data"
                                 :display-items-as-overview="true"
                                 :lock-unowned="true"
                                 :data-user-id="userId"
@@ -45,13 +43,11 @@
         <div class="tw-flex tw-flex-col tw-my-[30px]">
             <div class="tw-flex tw-w-full tw-flex-row">
                 <transition appear name="fade">
-                    <ContentCatalogue
-                        :brand="brand"
-                        catalogue-type="list"
+                    <ListCatalogue
                         :theme-color="brand"
                         :user-id="userId"
                         :use-theme-color="true"
-                        :pre-loaded-content="childContent"
+                        :content="childContent.data"
                         :is-admin="isAdmin"
                         :display-items-as-overview="childContentDisplayItemsAsOverview"
                         :lock-unowned="!isAdmin"
@@ -103,12 +99,12 @@
     </div>
 </template>
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import { useUserStore } from "../../stores/user";
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import PageHeader from '../components/PageHeader/PageHeader';
-import ContentCatalogue from "../vuesora/views/catalogues/ContentCatalogue";
+import ListCatalogue from '../components/ListCatalogue/ListCatalogue'
 import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper';
 
 const props = defineProps({
