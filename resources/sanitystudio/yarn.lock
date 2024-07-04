@@ -3414,7 +3414,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/cli@npm:3.47.1":
+"@sanity/cli@npm:3.47.1, @sanity/cli@npm:^3.47.1":
   version: 3.47.1
   resolution: "@sanity/cli@npm:3.47.1"
   dependencies:
@@ -17481,6 +17481,7 @@ __metadata:
     "@babel/core": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.7"
     "@sanity/assist": "npm:^3.0.4"
+    "@sanity/cli": "npm:^3.47.1"
     "@sanity/client": "npm:^6.19.1"
     "@sanity/embeddings-index-cli": "npm:^1.0.10"
     "@sanity/embeddings-index-ui": "npm:^1.1.8"
