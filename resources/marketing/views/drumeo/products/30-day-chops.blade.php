@@ -237,7 +237,9 @@
     'bgImageRight' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-right-collage.png',
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/products/30-day-chops/header-left-collage.png',
     'isVideo' => true,
-    'mediaSource' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
+    'alternateSrc' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4',
+    'poster' => 'https://i.vimeocdn.com/video/1754218307-e912a3951474ccd1222a6696c82ee8f3e0960b3e42ba9bb4d9d5db067c9cae20-d?mw=3100&mh=1744&q=70',
+    'mediaSource' => 'https://player.vimeo.com/progressive_redirect/playback/884916500/rendition/540p/file.mp4?loc=external&signature=2d5989ab0198546c227a112969ce0cbf29546beaf764f83299488dc21c587125'
 ])
 
  <!-- Lessons Section -->
@@ -279,7 +281,7 @@ $lessons = [
     'lessonTitle' => 'Course Lessons',
     'instructor' => ' Zack Grooves',
     'course' => ' 30 Days (20 Workouts + 4 Q&As)',
-    'lessons' => $lessons
+    'lessons' => $lessons,
 ])
 
 @php
@@ -351,17 +353,17 @@ $items = [
                     </h6>
                     <div class="flex justify-between text-center mt-7 lg:mt-10">
                         <div class="">
-                            <img class="h-7 sm:h-9" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png" alt="tiktok icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <img class="h-7 sm:h-9 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png" alt="tiktok icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                             <h3 class="mt-2"><strong>2x</strong></h3>
                             <p class="uppercase opacity-70 text-sm leading-tight">Drumeo Awards<br> Nominee</p>
                         </div>
                         <div class="">
-                            <img class="h-7 sm:h-9" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <img class="h-7 sm:h-9 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                             <h3 class="mt-2"><strong>49M</strong></h3>
                             <p class="uppercase opacity-70 text-sm leading-tight">views</p>
                         </div>
                         <div class="">
-                            <img class="h-7 sm:h-9" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <img class="h-7 sm:h-9 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                             <h3 class="mt-2"><strong>104k</strong></h3>
                             <p class="uppercase opacity-70 text-sm leading-tight">followers</p>
                         </div>
@@ -459,7 +461,5 @@ $points = [
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defeer></script>
 
 @stop
