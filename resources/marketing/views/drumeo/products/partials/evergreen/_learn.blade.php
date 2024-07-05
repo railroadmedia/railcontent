@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4 opacity-0" 
+                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4 opacity-0 transition duration-300 ease-in-out" 
                      src="{{ $mainImage }}" 
                      alt="collage" 
                      loading="lazy" 
@@ -51,6 +51,6 @@
         </div>
     </div>
     <div class="w-full sm:hidden text-center py-8">
-        <img class="opacity-0" src="{{ $mainImage }}" alt="collage" loading="lazy" onload="this.classList.remove('opacity-0')" >
+        <img class="opacity-0 transition duration-300 ease-in-out" src="{{ $mainImage }}" alt="collage" loading="lazy" onload="this.classList.remove('opacity-0')" >
     </div>
 </section>

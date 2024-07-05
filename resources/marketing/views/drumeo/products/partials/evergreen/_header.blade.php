@@ -10,7 +10,8 @@
         <div class="flex flex-col sm:flex-nowrap items-center">
             <div class="text-center w-3/4">
                 <img class="{{ isset($extraClass) ? $extraClass . ' ' : '' }}h-16 sm:h-20 -mb-3 sm:mb-0 lg:mb-3 py-1"
-                     src="{{ $logoHeader }}" loading="lazy" onload="this.classList.remove('opacity-0')" alt="{{ $logoAlt }}">
+                     src="{{ $logoHeader }}" alt="{{ $logoAlt }}"
+                     fetchpriority="hight">
                 <h1 class="rotater-text overflow-hidden">
                     <strong>
                         @if (isset($rotatingText) && $rotatingText)
@@ -48,7 +49,7 @@
 
         <div class="py-5 sm:py-6 relative">
             <div class="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
-                <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="h-56 lg:h-72">
+                <img src="{{ $bgImageLeft }}" alt="{{ $subtitle }}" class="h-56 lg:h-72" fetchpriority="hight">
             </div>
 
             <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative"
@@ -59,7 +60,7 @@
 
                 {{-- Blur --}}
                 <div x-data="{ videoLoaded: false }">
-                    <img src="{{ $poster }}" alt="Blurred Poster Image" class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-2xl" x-show="!videoLoaded">
+                    <img src="{{ $poster }}" alt="Blurred Poster Image" class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl" x-show="!videoLoaded">
                     
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                         x-ref="playToLearnVideo"
@@ -68,7 +69,6 @@
                         x-effect="if (videoLoaded) { $refs.playToLearnVideo.play(); }"
                         data-src="{{ $mediaSource }}"
                         type="video/mp4"
-                        autoplay
                         muted
                         loop
                         playsinline
@@ -98,7 +98,7 @@
                 @endif
             </div>
             <div class="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 px-4 lg:px-8 hidden sm:block">
-                <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="h-56 lg:h-72">
+                <img src="{{ $bgImageRight }}" alt="{{ $subtitle }}" class="h-56 lg:h-72" fetchpriority="high">
             </div>
         </div>
         <div class="flex w-full flex-col text-center items-center mt-6 sm:mt-5 lg:mt-10">

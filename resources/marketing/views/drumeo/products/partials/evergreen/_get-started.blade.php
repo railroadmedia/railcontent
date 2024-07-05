@@ -1,7 +1,7 @@
 <section class="container-video text-center px-6 {{ !empty($eg) ? 'py-12 md:py-16 lg:py-20 bg-blue-50' : 'py-6 md:py-8 lg:py-14' }}">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center pb-4">
-                <img class="{{ isset($extraClass) ? $extraClass . ' ' : '' }}h-28 md:h-38 lg:h-40 p-2 opacity-0"
+                <img class="{{ isset($extraClass) ? $extraClass . ' ' : '' }}h-28 md:h-38 lg:h-40 p-2 opacity-0 transition duration-300 ease-in-out"
                     src={{ $logo }}
                     loading="lazy" 
                     onload="this.classList.remove('opacity-0')" 
@@ -9,9 +9,9 @@
                 <ul class="pl-6">
                     @foreach ($items as $item)
                         <li>
-                            <h4 class="leading-loose text-left"><i
-                                    class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5"
-                                    aria-hidden="true"></i>{{ $item }}</h4>
+                            <h4 class="leading-loose text-left">
+                                <i class="fas fa-sharp fa-solid fa-circle-check text-{{ $brand }} mr-5" aria-hidden="true"></i>{{ $item }}
+                            </h4>
                         </li>
                     @endforeach
                 </ul>
