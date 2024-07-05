@@ -189,12 +189,12 @@
                         [
                         "img" => "https://miro.medium.com/v2/resize:fit:1400/1*CUwi6l0nyt5mx1juUeC52g.jpeg",
                         "artist" => "Vinnie Colaiuta",
-                        "band" => "Frank Zappa"
+                        "band" => "Studio Legend"
                         ],
                         [
                         "img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/matt-mcguire.jpg",
                         "artist" => "Matt McGuire",
-                        "band" => "Chainsmokers"
+                        "band" => "The Chainsmokers"
                         ],
                         [
                         "img" => "https://www.musora.com/musora-cdn/image/width=500,quality=95/https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2022/06/21150547/2022-01-15-COACH-Greyson-AM-116.jpg",
