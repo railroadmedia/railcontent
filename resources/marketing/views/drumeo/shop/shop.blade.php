@@ -35,7 +35,50 @@
         "all" => true
     ])
 
+
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
+        @php
+            $bundles = [
+                [
+                    'slug' => '/drumshop/ultimate-lessons-bundle',
+                    'desc' => '10 Free Bonuses <br class="sm:hidden"> Worth $1272',
+                    'full' => true,
+                    'visible' => 1,
+                    'price' => 1512.94,
+                    'discountedPrice' => 240,
+                    'buttonColor' => '#0A69D0',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
+                ],
+                [
+                    'slug' => '/drumshop/better-hands-bundle',
+                    'desc' => 'Easy Rudiments Book + P4<br> + Drumsticks + PadStand',
+                    'visible' => 1,
+                    'price' => 200.94,
+                    'discountedPrice' => 150.21,
+                    'buttonColor' => '#01AB5A',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
+                ],
+                [
+                    'slug' => '/drumshop/perfect-gift-bundle',
+                    'desc' => 'The perfect gift <br> for any drummer.',
+                    'visible' => 1,
+                    'price' => 331.95,
+                    'discountedPrice' => 240,
+                    'buttonColor' => '#f2192e',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/the-pefect-gift-bundle-white.png',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
+                ],
+            ];
+        @endphp
+        @include('_partials.layout.holiday.bundle-tiles', [
+            "header" => 'Featured Deals',
+        ])
+
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>

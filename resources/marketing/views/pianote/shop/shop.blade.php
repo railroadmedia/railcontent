@@ -30,9 +30,52 @@
     ])
 
 
+    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
     @include('_partials.components.shop.index-filters')
 
-        <div class="pt-5 sm:p-8 lg:py-10">
+            @php
+                $bundles = [
+                    [
+                        'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
+                        'desc' => 'Pianote Discount<br> + 11 Bonuses',
+                        'visible' => 1,
+                        'specialW' => true,
+                        'price' => 1203,
+                        'discountedPrice' => 150,
+                        'buttonColor' => '#F61A30',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card2.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m2.jpg',
+                    ],
+                    [
+                        'slug' => '/lifetime',
+                        'desc' => 'Unlimited pianote lessons<br> for life + more',
+                        'visible' => 1,
+                        'discountedPrice' => 1200,
+                        'specialW2' => true,
+                        'price' => 1200,
+                        'buttonColor' => '#000',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                    ],
+                    [
+                        'slug' => '/shop/metronome',
+                        'desc' => '',
+                        'full' => true,
+                        'visible' => 1,
+                        'price' => 79,
+                        'discountedPrice' => 59,
+                        'buttonColor' => '#F61A30',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-logo.png',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card.jpg',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-m.jpg',
+                    ],
+                ];
+            @endphp
+            @include('_partials.layout.holiday.bundle-tiles', [
+                "header" => 'Featured Deals',
+            ])
              @php
                 $bundles = [
                     [
@@ -65,14 +108,11 @@
                     ],
                 ];
         @endphp
+
         @include('_partials.layout.holiday.bundle-tiles-summer', [
             "header" => 'Deals',
         ])
 
-        </div>
-   
-
-    <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-fire text-{{ $brand }} mr-1"></i> Trending Now</strong></h5>
