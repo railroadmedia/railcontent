@@ -106,7 +106,7 @@
         </div>
     </div>
 
-    <RedeemModal :api="redeemApi" :is-user="isUser" :is-modal-open="isRedeemModalOpen" @close-modal="closeRedeemModal">
+    <RedeemModal v-if="isRedeemModalOpen" :api="redeemApi" :is-user="isUser" @close-modal="closeRedeemModal">
         <template #hidden-inputs>
             <input type="hidden" name="_method" value="POST" class="has-input">
             <input type="hidden" name="redirect" value="/drumeo/bestbook">

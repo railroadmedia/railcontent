@@ -75,7 +75,7 @@
         </div>
     </section>
 
-    <RedeemModal :api="redeemApi" :is-user="isUser" :is-modal-open="isRedeemModalOpen" :user="user" @close-modal="closeRedeemModal">
+    <RedeemModal v-if="isRedeemModalOpen" :api="redeemApi" :is-user="isUser" :is-modal-open="isRedeemModalOpen" :user="user" @close-modal="closeRedeemModal">
         <template #hidden-inputs>
             <input type="hidden" name="redirect" value="/drumeo/drummers-toolbox">
 
