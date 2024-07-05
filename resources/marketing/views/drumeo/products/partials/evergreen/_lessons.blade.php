@@ -1,4 +1,6 @@
-<section class="m-0 text-white" style="background: #00101D; border: 1px solid #00101D">
+<section x-data="{ visible: false }" 
+         x-intersect.once="visible = true;"  
+         class="m-0 text-white" style="background: #00101D; border: 1px solid #00101D">
     <h2 class="text-center leading-tight pt-12 md:pt-20 px-4 mb-6">
         <strong>{{ $title }}</strong>
     </h2>

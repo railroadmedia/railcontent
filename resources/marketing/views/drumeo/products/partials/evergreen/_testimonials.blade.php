@@ -1,4 +1,6 @@
-<section class="pt-14 md:pt-28 pb-40 md:pb-50" style="background: {{ $bgColor }}">
+<section x-data="{ visible: false }" 
+         x-intersect.once="visible = true;" 
+class="pt-14 md:pt-28 pb-40 md:pb-50" style="background: {{ $bgColor }}">
         <!-- top part-->
     @if (!empty($showTop))
     <div class="text-center text-white">

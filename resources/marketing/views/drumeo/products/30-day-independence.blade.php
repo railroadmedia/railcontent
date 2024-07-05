@@ -202,7 +202,7 @@
             opacity: 0.8;
         }
         .splide__arrow--next {
-            right:-4em;
+            right:-1.5em;
         }
     </style>
 @stop()
@@ -445,7 +445,7 @@
                 },
             }"
             >
-                <div x-ref="splide" class="splide mb-12 sm:mb-10 lg:mb-12 py-4">
+                <div x-ref="splide" class="splide mb-12 sm:mb-10 lg:mb-12 py-4 px-8">
                     <div class="splide__track">
                         <ul class="splide__list items-start" style="padding-top: 60px !important;">
                             @php
@@ -510,7 +510,6 @@
 
         </div>
     </section>
-
 
     <!-- Learn section -->
     @php

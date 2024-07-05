@@ -2,7 +2,7 @@
     <div class="container max-w-6xl mx-auto relative z-50" style="background: #eff7ff;" data-bg="{{ $mainImage }}">
         <div class="flex flex-wrap items-center px-4 sm:px-6 pt-10 md:py-10 lg:py-20">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5" style="background: #eff7ff;">
-                <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 opacity-0" 
+                <img class="h-20 sm:h-24 lg:h-26 -mb-3 sm:mb-0 lg:mb-3 opacity-0 transition duration-300 ease-in-out" 
                      src="{{ $logo }}"  
                      loading="lazy" 
                      onload="this.classList.remove('opacity-0')" 
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0 hidden sm:block">
-                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4 opacity-0 transition duration-300 ease-in-out" 
+                <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl pb-4 opacity-0 transition-opacity" 
                      src="{{ $mainImage }}" 
                      alt="collage" 
                      loading="lazy" 
@@ -51,6 +51,6 @@
         </div>
     </div>
     <div class="w-full sm:hidden text-center py-8">
-        <img class="opacity-0 transition duration-300 ease-in-out" src="{{ $mainImage }}" alt="collage" loading="lazy" onload="this.classList.remove('opacity-0')" >
+        <img class="opacity-0 transition-opacity" src="{{ $mainImage }}" alt="collage" loading="lazy" onload="this.classList.remove('opacity-0')" >
     </div>
 </section>
