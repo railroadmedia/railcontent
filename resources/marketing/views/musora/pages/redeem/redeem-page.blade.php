@@ -238,7 +238,7 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    'existing' => !$isNewAccount,
+                    'existing' => !$newAccount,
                     'buttonText' => 'Click To Redeem &raquo;',
                     'buttonColor' => 'bg-drumeo text-white',
                 ])
@@ -265,7 +265,7 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    'existing' => !$isNewAccount,
+                    'existing' => !$newAccount,
                     'buttonText' => 'Click To Redeem &raquo;',
                     'buttonColor' => 'bg-drumeo text-white',
                 ])
