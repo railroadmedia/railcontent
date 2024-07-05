@@ -87,7 +87,7 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
     <section class="py-20">
         <div class="max-w-4xl px-3 sm:px-4 container mx-auto z-10 relative text-center">
             <h2><strong>The 5-Year Advantage</strong></h2>
-            <h6 class="mt-2 mb-12 opacity-90 text-gray-800 leading-tight"><em>You’ll have 5 years of unlimited piano lessons for <br class="inline lg:hidden">the price of 3 years of access to Pianote ($720 total).</em></h6>
+            <h6 class="mt-2 mb-12 opacity-90 text-gray-800 leading-tight"><em>You’ll have 5 years of unlimited access to<br class="sm:hidden"> Pianote for the price of 3 ($720 total).</em></h6>
             <div class="relative w-full rounded-full mx-auto h-10 beg-adv-text">
                 <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap text-left px-2"><strong>TODAY</strong></p>
                 <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap"><strong>YEAR 3</strong></p>
