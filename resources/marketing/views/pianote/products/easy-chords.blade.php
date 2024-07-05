@@ -313,6 +313,8 @@
     'bgImageLeft' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/products/easy-chords/header-left-collage.png',
     'isVideo' => true,
     'mediaSource' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4',
+    'alternateSrc'=> 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4',
+    'poster' => 'https://i.vimeocdn.com/video/1748392205-0648e7b529f06d5afd156aa6a12e605efc2fe19c9fabcb971ea73338d6204658-d?mw=1500&mh=844&q=70'
 ])
 
 
@@ -559,11 +561,12 @@ $points = [
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
+
 
 @stop
