@@ -1,8 +1,17 @@
 <template>
-    <ModalRenderer v-if="isModalOpen">
-        <button class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50"
-                @click="closeModal">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]"/>
+    <div
+        @click="closeModal"
+        id="modal-overlay"
+        class="tw-fixed tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-[rgba(0,12,23,0.75)] tw-z-[150]"
+    ></div>
+    <div id="modal-wrapper" @click="onWrapperClick"
+         class="tw-absolute tw-flex tw-flex-wrap tw-h-screen tw-w-full tw-items-center tw-justify-center tw-top-0 tw-left-0 tw-z-[150]"
+    >
+        <button
+            class="tw-text-white tw-absolute tw-right-2 tw-top-[60px] lg:tw-top-[90px] lg:tw-right-[48px] tw-z-[150]"
+            @click="closeModal"
+        >
+            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
         </button>
 
         <div class="tw-bg-white tw-max-w-[800px] tw-w-full tw-p-[30px] tw-rounded-[3px] tw-m-2 lg:tw-m-0">
@@ -87,7 +96,7 @@
                 </div>
             </form>
         </div>
-    </ModalRenderer>
+    </div>
 </template>
 <script setup>
 import {computed, inject, onBeforeMount, ref} from "vue";
@@ -129,6 +138,12 @@ const errors = ref({
     password: '',
     passwordCheck: '',
 })
+
+const onWrapperClick = (event) => {
+    if (event.target.id === 'modal-wrapper') {
+        closeModal();
+    }
+}
 
 const closeModal = () => {
     errors.value = {
