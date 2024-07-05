@@ -1,5 +1,5 @@
 <template>
-    <ModalRenderer>
+    <ModalRenderer v-if="openModal">
         <div class="tw-max-w-[600px] tw-w-full tw-p-[30px] tw-border tw-border-[#223F57] tw-rounded-xl tw-text-white tw-bg-[#081825]">
             <template v-if="step === '1'">
                 <div class="tw-flex tw-justify-between tw-items-center">
@@ -64,20 +64,14 @@ import axios from "axios";
 import ModalRenderer from "./ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
 import { useUserStore } from '../../../stores/user';
-
 const userStore = useUserStore();
-
-//Emits
-const emit = defineEmits(['onCloseModal']);
-
+const openModal = ref(false);
 const step = ref('1');
 const textInput = ref('');
 const agreement1 = ref(false);
 const agreement2 = ref(false);
 const showWarning = ref(false);
-
 const closeModal = () => {
-    emit('onCloseModal');
     openModal.value = false;
     step.value = '1';
     textInput.value = '';
@@ -85,17 +79,14 @@ const closeModal = () => {
     agreement2.value = false;
     showWarning.value = false;
 }
-
 const goToNextStep = () => {
     step.value = '2';
 }
-
 const confirmDelete = () => {
     if (!agreement1.value || !agreement2.value || textInput.value !== 'DELETE') {
         showWarning.value = true;
         return;
     }
-
     const headers = {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': userStore.token

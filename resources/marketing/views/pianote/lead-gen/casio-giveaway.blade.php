@@ -40,15 +40,22 @@
                         <img class="h-28 lg:h-32" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/470x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/logo.png" alt="logo">
                         <img class="h-52 sm:hidden mt-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
                         <p class="mx-0 my-4" style="max-width: 450px;">
-                            2024 is the year to learn piano. And we want to help! <span class="font-extrabold">Simply start a free 7-day trial of Pianote from now until February 28th</span> and you’ll automatically be entered to win one of TWO Casio Privia PX-S1100 88-key digital pianos.
+                            At Pianote, it’s our mission to help everyone play this beautiful instrument. So we’re giving away TWO Casio Privia Digital Pianos!
+                            <br><br>
+                            Simply start a FREE 7-day trial of Pianote from now until July 11th and you’ll automatically be entered to win.
                         </p>
                         <p class="mt-3 mb-6 text-sm">
                             <i class="fas fa-check-circle text-pianote"></i> No purchase necessary.<br class="lg:hidden">
-                            <i class="fas fa-check-circle text-pianote lg:ml-2"></i> No age or location restrictions.</p>
+                            <i class="fas fa-check-circle text-pianote lg:ml-2"></i> Cancel anytime.</p>
 
                     </div>
-{{--                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>--}}
-                    <span class="join sold-out smaller w-full">this offer has now ended</span>
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
+                        <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
+                    @else
+                        <span class="join sold-out smaller w-full">this offer has now ended</span>
+                    @endif
                 </div>
                 <div class="hidden sm:block flex-shrink-0">
                     <img class="h-72 lg:h-80" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/780x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/header-image.png" alt="title image">
@@ -97,9 +104,9 @@
     </section>
 
     <section class="py-12 sm:py-20 px-4 md:px-6" style="background:#F1EFED;">
-        <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center">
+        <div class="max-w-md md:max-w-5xl mx-auto md:flex md:items-center">
             <div class="md:pr-8 text-center md:text-left mb-6 md:mb-0 flex-shrink-0">
-                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes.png" alt="ui image">
+                <img class="lazyload h-72 lg:h-96" data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/lead-gen/giveaway/prizes2.webp" alt="ui image">
             </div>
             <div class="lg:pl-6">
                 <h4 class="font-extrabold leading-snug mb-4" style="color:#2A2F34;">
@@ -113,7 +120,7 @@
                     <br><br>
                     But a beautiful digital piano is not the only prize.
                     <br><br>
-                    You could also win one of TWO Limited Edition Prestige Metronomoes by Wittner. These flamed maple metronomes are hand-made in Germany by the best name in metronomes. There are only 216 in the world and each is hand-numbered. <a href="/shop/prestige-metronome"><u>(You can learn more here.)</u></a>
+                    You could also win one of TWO Pianote BookBag Bundles. You’ll get a hand-crafted premium leather satchel full of music books. Play timeless classical pieces or your favorite Christmas Carols.
                     <br><br>
                     And finally, you could win one of two Annual Pianote Memberships.
                 </p>
@@ -138,27 +145,19 @@
                 </div>
                 <div class="flex">
                     <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    You can cancel the trial anytime.
-                </div>
-                <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No purchase necessary and there are no age restrictions.
-                </div>
-                <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No location restrictions. We’ll ship it anywhere in the world.
-                </div>
-                <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
-                    No sneaky shipping fees. We’ll take care of it. (VAT may apply)
-                </div>
-                <div class="flex">
-                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
                     One email entry per person.
+                </div>
+                <div class="flex">
+                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    No purchase necessary. Cancel anytime.
+                </div>
+                <div class="flex">
+                    <i class="fas fa-check pt-1 mr-2 text-musora"></i>
+                    No shipping fees (VAT may apply).
                 </div>
             </div>
             <div class="inline-block italic text-black py-4 px-6 bg-musora">
-                The winner will be announced during a LIVE event on <strong>February 29th</strong>!
+                The winner will be announced {{--during a LIVE event--}} on <strong>July 11th</strong>!
             </div>
         </div>
     </section>
@@ -190,8 +189,14 @@
                             PX-S1100 Digital Piano
                         </h4>
                     </div>
-{{--                    <a class="join smaller w-full" href="/choose-plan">I WANT TO WIN! »</a>--}}
-                    <span class="join sold-out smaller w-full">this offer has now ended</span>
+
+                    @if(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 3, 0, 0, 0, 'America/Vancouver'))
+                        <span class="join sold-out smaller w-full">Opens July 3rd</span>
+                    @elseif(Carbon\Carbon::now() < Carbon\Carbon::create(2024, 7, 11, 8, 0, 0, 'America/Vancouver'))
+                        <a class="join smaller w-full" href="/choose-plan">Start your free trial »</a>
+                    @else
+                        <span class="join sold-out smaller w-full">this offer has now ended</span>
+                    @endif
                 </div>
             </div>
         </div>

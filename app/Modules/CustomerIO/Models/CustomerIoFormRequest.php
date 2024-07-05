@@ -15,7 +15,7 @@ class CustomerIoFormRequest extends FormRequest
 
     public function rules()
     {
-        $forms = config('customer-io.forms.' . config('customer-io.brand'), []);
+        $forms = config('customer-io.forms.' . config('customer-io.forms.brand'), []);
         $allConfiguredFormNames = array_keys($forms);
 
         $customAttributeRules = $forms[$this->input('form_name')]['custom_attributes'] ?? [];
@@ -33,7 +33,7 @@ class CustomerIoFormRequest extends FormRequest
 
     public function attributes()
     {
-        $forms = config('customer-io.forms.' . config('customer-io.brand'), []);
+        $forms = config('customer-io.forms.' . config('customer-io.forms.brand'), []);
         return $forms[$this->input('form_name')]['attributes'] ?? [];
     }
 }

@@ -3,9 +3,6 @@
 namespace App\Modules\Ecommerce\Jobs\Shopify;
 
 use App\Models\ShopifySync;
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\FindsCustomers;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\HandlesMaskedEmailAddress;
 use App\Modules\Ecommerce\Jobs\Shopify\Traits\StagesUploadToShopify;
