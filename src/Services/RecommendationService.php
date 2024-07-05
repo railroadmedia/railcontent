@@ -117,7 +117,7 @@ class RecommendationService
 
     private function getUserRecommendationsOrColdStartFromDB(int $userID, string $brand, string $section, int $limit = 20)
     {
-        $tableName = strtolower('recommendations_' . $brand . '_' . $section);
+        $tableName = $this->getTableName($brand, $section);
         $recommendations = DB::table($tableName)->select('content_id')->where('user_id', $userID)->orderBy('recommendation_rank')->limit($limit)->get()->pluck('content_id');
         if ($recommendations->isEmpty()) {
             $user = $this->userService->getByIdOrNull($userID);
