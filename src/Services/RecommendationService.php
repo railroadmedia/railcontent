@@ -122,7 +122,7 @@ class RecommendationService
         if ($recommendations->isEmpty()) {
             $user = $this->userService->getByIdOrNull($userID);
             if ($user && ($user->isAPlusMember() || ($user->isABasicMember() || $section != RecommenderSection::Song->value))) {
-                $coldStartTableName = strtolower('recommendations_' . $brand . '_' . $section . '_beginner_items');
+                $coldStartTableName = $this->getTableName($brand, $section, true);
                 $recommendations = DB::table($coldStartTableName)->select('content_id')->orderBy('rank')->limit(20)->get()->pluck('content_id');
             }
         }
