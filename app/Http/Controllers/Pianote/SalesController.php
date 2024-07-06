@@ -46,9 +46,9 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
-    public function chordSecrets()
+    public function ultimateBundle()
     {
-        return view('pianote.sales.chord-secrets', ['theme' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.ultimate-bundle', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
     public function promoEG()
     {
@@ -277,7 +277,7 @@ class SalesController extends BaseController
     {
         return view('pianote.products.book-bag', ['theme' => 'pianote', 'membersVersion' => true]);
     }
-   
+
     public function fiveforthreeBundle()
     {
         return view('pianote.products.5-for-3-bundle', ['theme' => 'pianote']);
