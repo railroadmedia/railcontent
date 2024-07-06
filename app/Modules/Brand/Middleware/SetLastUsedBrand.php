@@ -36,9 +36,11 @@ class SetLastUsedBrand
         }
 
         // API requests will have the brand in the params
-        if (!empty(user()) &&
+        if (
+            !empty(user()) &&
             !empty($request->get('brand')) &&
-            in_array($request->get('brand'), config('brands'))) {
+            in_array($request->get('brand'), config('brands'))
+        ) {
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->get('brand')));
         }
 
@@ -53,6 +55,7 @@ class SetLastUsedBrand
         } elseif (Str::endsWith(request()->getHost(), 'singeo.com')) {
             $brand = 'singeo';
         }
+
 
         if (empty($brand) && !empty(user())) {
             $brand = BrandService::getLastUsedBrand(user());
@@ -78,6 +81,10 @@ class SetLastUsedBrand
             config()->set('railnotifications.brand', $brand);
             config()->set('lead-tracker.brand', $brand);
             config()->set('customer-io.brand', $brand);
+
+            // TP-28 NOTE: for leadgen we need to set the brand to musora if the domain is musora.com
+            $cioLeadgenBrand = Str::endsWith(request()->getHost(), 'musora.com') ? 'musora' : $brand;
+            config()->set('customer-io.forms.brand', $cioLeadgenBrand);
 
             config()->set('event-data-synchronizer.customer_io_brand_activity_event', $brand);
             config()->set('event-data-synchronizer.brand', $brand);
