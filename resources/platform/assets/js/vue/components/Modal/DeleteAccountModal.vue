@@ -1,5 +1,5 @@
 <template>
-    <ModalRenderer v-if="openModal">
+    <ModalRenderer>
         <div class="tw-max-w-[600px] tw-w-full tw-p-[30px] tw-border tw-border-[#223F57] tw-rounded-xl tw-text-white tw-bg-[#081825]">
             <template v-if="step === '1'">
                 <div class="tw-flex tw-justify-between tw-items-center">
@@ -58,53 +58,61 @@
         </div>
     </ModalRenderer>
 </template>
+
 <script setup>
-import { ref } from "vue";
-import axios from "axios";
-import ModalRenderer from "./ModalRenderer";
-import { XIcon } from "@heroicons/vue/solid";
-import { useUserStore } from '../../../stores/user';
-const userStore = useUserStore();
-const openModal = ref(false);
-const step = ref('1');
-const textInput = ref('');
-const agreement1 = ref(false);
-const agreement2 = ref(false);
-const showWarning = ref(false);
-const closeModal = () => {
-    openModal.value = false;
-    step.value = '1';
-    textInput.value = '';
-    agreement1.value = false;
-    agreement2.value = false;
-    showWarning.value = false;
-}
-const goToNextStep = () => {
-    step.value = '2';
-}
-const confirmDelete = () => {
-    if (!agreement1.value || !agreement2.value || textInput.value !== 'DELETE') {
-        showWarning.value = true;
-        return;
+    import { ref } from "vue";
+    import axios from "axios";
+    import ModalRenderer from "./ModalRenderer";
+    import { XIcon } from "@heroicons/vue/solid";
+    import { useUserStore } from '../../../stores/user';
+
+    const userStore = useUserStore();
+
+    //Emits
+    const emit = defineEmits(['onCloseModal']);
+
+    //Refs
+    const step = ref('1');
+    const textInput = ref('');
+    const agreement1 = ref(false);
+    const agreement2 = ref(false);
+    const showWarning = ref(false);
+
+    //Methods
+    const closeModal = () => {
+        step.value = '1';
+        textInput.value = '';
+        agreement1.value = false;
+        agreement2.value = false;
+        showWarning.value = false;
+        emit('onCloseModal')
     }
-    const headers = {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': userStore.token
+    const goToNextStep = () => {
+        step.value = '2';
     }
-    // Delete account
-    axios({
-        method: 'DELETE',
-        url: `/user-management-system/user/delete/${userStore.userId}`,
-        headers
-    })
-    .then(() => {
-        window.location.replace('/')
-    })
-    .catch(() => {
-        window.shownotification({
-            icon: 'error',
-            text: 'An error occurred while deleting your account. Please try again later.'
+    const confirmDelete = () => {
+        if (!agreement1.value || !agreement2.value || textInput.value !== 'DELETE') {
+            showWarning.value = true;
+            return;
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': userStore.token
+        }
+        // Delete account
+        axios({
+            method: 'DELETE',
+            url: `/user-management-system/user/delete/${userStore.userId}`,
+            headers
+        })
+        .then(() => {
+            window.location.replace('/')
+        })
+        .catch(() => {
+            window.shownotification({
+                icon: 'error',
+                text: 'An error occurred while deleting your account. Please try again later.'
+            });
         });
-    });
-}
+    }
 </script>
