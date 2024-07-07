@@ -24,12 +24,9 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'GET LESSONS, MERCH, GEAR, & MUCH MORE',
-        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg',
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/543x0/filters:quality(95)/marketing/drumeo/membership/homepage/2023/logo-blue.png',
-        'logoStyles' => 'h-6 sm:h-8 mb-1',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 68% UNTIL JULY 17th!</strong>',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp',
     ])
-{{--    'logoStyles' => 'h-12 sm:h-20 pb-3 sm:pb-4',--}}
 
     @include('_partials.components.shop.index-filters', [
         "all" => true
@@ -39,39 +36,43 @@
     <div class="sm:px-4 lg:px-5 py-5 sm:py-8 lg:py-10">
         @php
             $bundles = [
+
+                    [
+                        'slug' => '/practice-anywhere',
+                        'desc' => 'Annual Drumeo membership + <br class="lg:hidden"> drumsticks, Quietpad, and more!',
+                        'visible' => 1,
+                        'price' => 625.95,
+                        'discountedPrice' => 180,
+                        'buttonColor' => '#0A69D0',
+                        'bgColor' => '#FF005C, #3418E1',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-logo.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/spread-pa.png',
+                    ],
+                    [
+                        'slug' => '/drumshop/5-for-3-bundle',
+                        'desc' => '5 years of Drumeo for the <br class="lg:hidden"> price of 3 + $150 gift card!',
+                        'visible' => 1,
+                        'price' => 1200,
+                        'discountedPrice' => 720,
+                        'buttonColor' => '#000',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/logo-stack.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/spread-5.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
+                    ],
+
                 [
-                    'slug' => '/drumshop/ultimate-lessons-bundle',
-                    'desc' => '10 Free Bonuses <br class="sm:hidden"> Worth $1272',
+                    'slug' => '/drumshop/kit',
+                    'desc' => 'Annual Drumeo membership +<br class="lg:hidden"> courses, drumsticks, and more!',
                     'full' => true,
                     'visible' => 1,
-                    'price' => 1512.94,
-                    'discountedPrice' => 240,
+                    'price' => 1006,
+                    'discountedPrice' => 499,
                     'buttonColor' => '#0A69D0',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-card-m.jpg',
-                ],
-                [
-                    'slug' => '/drumshop/better-hands-bundle',
-                    'desc' => 'Easy Rudiments Book + P4<br> + Drumsticks + PadStand',
-                    'visible' => 1,
-                    'price' => 200.94,
-                    'discountedPrice' => 150.21,
-                    'buttonColor' => '#01AB5A',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/better-hands-card.jpg',
-                ],
-                [
-                    'slug' => '/drumshop/perfect-gift-bundle',
-                    'desc' => 'The perfect gift <br> for any drummer.',
-                    'visible' => 1,
-                    'price' => 331.95,
-                    'discountedPrice' => 240,
-                    'buttonColor' => '#f2192e',
-                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/the-pefect-gift-bundle-white.png',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/perfect-gift-card.jpg',
+                    'logoStyle' => 'h-20 lg:h-24',
+                    'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-logo2.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg-m.webp',
                 ],
             ];
         @endphp

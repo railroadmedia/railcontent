@@ -62,7 +62,7 @@
 @endsection
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drum Technique Made Easy",
         "fullPrice" => floatval($productPrices['drum-technique-made-easy-pack']->price),
         "price" => floatval($productPrices['drum-technique-made-easy-pack']->discounted_price),

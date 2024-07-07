@@ -304,7 +304,7 @@
 @endsection
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Tone Control Kit",
         "fullPrice" => floatval($productPrices['tone-control-kit']->price),
         "price" => floatval($productPrices['tone-control-kit']->discounted_price),

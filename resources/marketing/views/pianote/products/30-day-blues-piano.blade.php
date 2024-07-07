@@ -224,7 +224,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "30-Day Blues Piano",
         "fullPrice" => floatval($productPrices['30-day-blues-piano']->price),
         "price" => floatval($productPrices['30-day-blues-piano']->discounted_price),
@@ -396,8 +396,8 @@ $items = [
     </div>
 </section>
 
-<section x-data="{ visible: false }" 
-         x-intersect.once="visible = true;" 
+<section x-data="{ visible: false }"
+         x-intersect.once="visible = true;"
          class="container-video">
     <div class="container max-w-4xl mx-auto flex flex-col items-center md:pt-10 text-center px-6">
         <h2 class="py-2"><strong>You’ll sound like THIS after 30 days…</strong></h2>
@@ -428,8 +428,8 @@ $items = [
 
 
  <!-- Meet your teacher section -->
-    <section x-data="{ visible: false }" 
-         x-intersect.once="visible = true;" 
+    <section x-data="{ visible: false }"
+         x-intersect.once="visible = true;"
          class="text-center sm:px-6 pt-10 sm:pt-14 lg:pt-20 sm:pb-32 lg:pb-40">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">

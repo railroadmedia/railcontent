@@ -22,11 +22,10 @@
 @endsection
 
 @section('body')
+
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!',
-        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/427x0/filters:quality(95)/marketing/pianote/membership/homepage/2023/pianote-logo-red.png',
-        'logoStyles' => 'h-12 sm:h-20 pb-2 sm:pb-3',
-        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 68% UNTIL JULY 17th!</strong>',
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp',
     ])
 
 
@@ -36,82 +35,33 @@
             @php
                 $bundles = [
                     [
-                        'slug' => 'https://www.pianote.com/shop/ultimate-lessons-bundle',
-                        'desc' => 'Pianote Discount<br> + 11 Bonuses',
+                        'slug' => '/ultimate-lessons',
+                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + books, lessons, and more!',
                         'visible' => 1,
-                        'specialW' => true,
-                        'price' => 1203,
-                        'discountedPrice' => 150,
-                        'buttonColor' => '#F61A30',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card2.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/ultimate-lessons-card-m2.jpg',
-                    ],
-                    [
-                        'slug' => '/lifetime',
-                        'desc' => 'Unlimited pianote lessons<br> for life + more',
-                        'visible' => 1,
-                        'discountedPrice' => 1200,
-                        'specialW2' => true,
-                        'price' => 1200,
+                        'price' => 760,
+                        'discountedPrice' => 180,
                         'buttonColor' => '#000',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-bundle-white.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/lifetime-card.jpg',
+                        'bgColor' => '#4B41BC, #8032FF',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/shop-card-ul.webp',
                     ],
                     [
-                        'slug' => '/shop/metronome',
-                        'desc' => '',
-                        'full' => true,
+                        'slug' => '/shop/5-for-3-bundle',
+                        'desc' => '5 years of Pianote for the<br class="lg:hidden"> price of 3 + $150 gift card!',
                         'visible' => 1,
-                        'price' => 79,
-                        'discountedPrice' => 59,
-                        'buttonColor' => '#F61A30',
-                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-logo.png',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card.jpg',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/november/bundles/metronome-card-m.jpg',
+                        'price' => 1200,
+                        'discountedPrice' => 720,
+                        'buttonColor' => '#000',
+                        'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/logo-stack.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/shop-card-5.webp',
+                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg-m.webp',
+                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg-m.webp',
                     ],
                 ];
             @endphp
             @include('_partials.layout.holiday.bundle-tiles', [
                 "header" => 'Featured Deals',
             ])
-             @php
-                $bundles = [
-                    [
-                        'slug' => '/shop/ultimate-lessons-bundle',
-                        'title' => 'The Ultimate Lessons Bundle',
-                        'desc' => 'Annual Pianote membership + books, posters, and more!',
-                        'visible' => 1,
-                        'price' => 760,
-                        'discountedPrice' => 200,
-                        'discountedPriceColor' => '#4B41BC',
-                        'buttonStyle' => 'background: linear-gradient(to right, #4B41BC 100%, #8032FF 100%);',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ultimate-lessons-shop.webp',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ultimate-lessons-shop.webp',
-                        'buttonText' => 'SEE THE DEAL',
-                        'badgeText' => '6 free gifts worth $520',
-                    ],
-                    [
-                        'slug' => '/shop/5-for-3-bundle',
-                        'desc' => 'A 5-Year Membership for the price of 3, and more!',
-                        'visible' => 1,
-                        'price' => 1200,
-                        'discountedPrice' => 720,
-                        'discountedPriceColor' => '#AF213D',
-                        'buttonStyle' => 'background: linear-gradient(to right, rgba(216, 58, 77, 1) 0%, rgba(175, 33, 61, 1) 100%);',
-                        'buttonText' => 'SEE THE DEAL',
-                        'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/5-for-3-shop.webp',
-                        'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/5-for-3-shop.webp',
-                        'title' => 'Pianote 5-For-3 Bundle',
-                        'badgeText' => 'Includes a $150 Gift Card',
-                    ],
-                ];
-        @endphp
-
-        @include('_partials.layout.holiday.bundle-tiles-summer', [
-            "header" => 'Deals',
-        ])
 
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">
             <div class="container">

@@ -41,7 +41,7 @@
 @endsection
 
 @section('content')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Independence Made Easy",
         "fullPrice" => floatval($productPrices['independence-made-easy-pack']->price),
         "price" => floatval($productPrices['independence-made-easy-pack']->discounted_price),

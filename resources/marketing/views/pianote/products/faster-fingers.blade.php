@@ -21,7 +21,7 @@
         "cartVersion" => true
     ])
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Faster Fingers",
         "fullPrice" => floatval($productPrices['faster-fingers']->price),
         "price" => floatval($productPrices['faster-fingers']->discounted_price),

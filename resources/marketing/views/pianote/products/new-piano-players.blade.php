@@ -70,7 +70,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "New Piano Players Start Here",
         "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
         "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
@@ -401,8 +401,8 @@ $items = [
 
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 relative z-10 opacity-0" 
-            src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" 
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 relative z-10 opacity-0"
+            src="https://www.musora.com/musora-cdn/image/width=410,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png"
             alt="guarantee badge"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"

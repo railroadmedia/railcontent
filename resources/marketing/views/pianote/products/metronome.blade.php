@@ -9,7 +9,7 @@
 
     <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/products/metronome/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script> 
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 
 
     @include('_partials.layout._fonts')
@@ -35,7 +35,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Pianote Metronome",
         "fullPrice" => floatval($productPrices['taktell-piccolo-metronome']->price),
         "price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),

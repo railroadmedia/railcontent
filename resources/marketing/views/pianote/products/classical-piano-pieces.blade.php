@@ -8,7 +8,7 @@
     <meta property="og:description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script> 
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 
 
     @include('_partials.layout._fonts')
@@ -84,7 +84,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Classical Piano Pieces",
         "fullPrice" => floatval($productPrices['classical-piano-pieces']->price),
         "price" => floatval($productPrices['classical-piano-pieces']->discounted_price),

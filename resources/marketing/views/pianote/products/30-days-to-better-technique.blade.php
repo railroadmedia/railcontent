@@ -134,6 +134,12 @@
     @include('pianote.sales.partials._nav', [
         'cartVersion' => true,
     ])
+    @include('_partials.components.shop.promo-banner-3', [
+        "name" => "30-Day To Better Technique",
+        "fullPrice" => floatval($productPrices['30-days-to-better-technique']->price),
+        "price" => floatval($productPrices['30-days-to-better-technique']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     @php
         $buttonLink = '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1';
