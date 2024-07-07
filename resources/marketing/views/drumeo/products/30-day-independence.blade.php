@@ -249,7 +249,7 @@
     'isVideo' => true,
     'mediaSource' => 'https://player.vimeo.com/progressive_redirect/playback/975466470/rendition/540p/file.mp4?loc=external&signature=f54a0f37fe3342c738f2e529f2d3d778fb92fba8f0238b62345dac334e511ca2',
     'poster' =>'https://i.vimeocdn.com/video/1889890450-a7e98719a624f12033eb2e7c924686b2eebafb71325cf5b6ef5e892675317720-d?mw=1500&mh=844&q=70',
-    'alternateSrc' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/promos/summer-sale/30di_trailer_full_16x9(evergreen)+(540p).mp4',
+    'alternateSrc' => 'https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/promos/summer-sale/30di-trailer.mp4',
 ])
 
     <!-- Lessons Section -->
