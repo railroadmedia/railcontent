@@ -46,9 +46,9 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
-    public function ultimateBundle()
+    public function ultimateLessons()
     {
-        return view('pianote.sales.ultimate-bundle', ['theme' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.ultimate-lessons', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
     public function promoEG()
     {

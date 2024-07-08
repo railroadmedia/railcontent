@@ -1,6 +1,6 @@
 <section x-show="filter === 'all'">
     <div class="container mx-auto">
-        <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-badge-percent text-{{ $brand }} mr-1"></i> {!!  $header  !!}</strong></h5>
+        <h5 class="leading-tight my-4 md:my-5"><strong><i class="fas fa-badge-percent text-{{ $brand }} mr-1"></i> {!!  $header  !!}</strong></h5>
         <div class="flex flex-wrap mb-5 sm:mb-10">
             @foreach(array_filter($bundles, function($val){if($val['visible'] === 1){ return 1; }}) as $key => $bundle)
                 <a href="{{ $bundle['slug'] }}" class="w-full @if(!empty($bundle['specialW'])) lg:w-2/3 @elseif(!empty($bundle['specialW2'])) lg:w-1/3 @elseif(!empty($bundle['full'])) @else sm:w-1/2 @endif mx-auto p-1 sm:p-2">
@@ -19,7 +19,7 @@
                             @endif
                              @if(isset($bundle['spread']))
                                  <br>
-                                <img class="h-32 sm:h-32 lg:h-40 mt-3" src="{{ $bundle['spread'] }}">
+                                <img class="h-32 sm:h-32 lg:h-40 xl:h-48 mt-3" src="{{ $bundle['spread'] }}">
                             @endif
                             @if(isset($bundle['title']))
                                 <h2 class="leading-none"><strong>{{ $bundle['title'] }}</strong></h2>
@@ -35,7 +35,7 @@
                                     @endif
                                 </h4>
                              @endif
-                             <div class="join smaller w-full text-white p-3 sm:max-w-md w-full" style="background:{{$bundle['buttonColor']}};">
+                             <div class="join smaller white w-full p-3 sm:max-w-md w-full">
                                 @if(!empty($bundle['buttonText']))
                                      {{ $bundle['buttonText'] }}
                                 @elseif(!empty($bundle['soldOut']))
