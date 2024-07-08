@@ -32,19 +32,20 @@ class AccessCodeServiceTest extends TestCase
         $this->assertDatabaseHas(
             AccessCode::class,
             [
-            'id' => $accessCode->id,
-            'brand' => $product->brand,
-            'product_ids' => serialize([$product->id]),
-            'source' => 'foo-bar'
-        ]
+                'id' => $accessCode->id,
+                'brand' => $product->brand,
+                'product_ids' => serialize([$product->id]),
+                'source' => 'foo-bar'
+            ]
         );
+
         $this->assertNotNull($accessCode->code);
         $this->assertFalse($accessCode->is_claimed);
     }
 
     public function test_claim()
     {
-        Queue::fake();//ignore customerIO jobs
+        Queue::fake(); //ignore customerIO jobs
 
         $product = Product::factory()->create();
         $accessCode = AccessCodeFactory::createAccessCode($product);
