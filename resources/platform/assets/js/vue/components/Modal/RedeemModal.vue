@@ -243,7 +243,9 @@ const submitForm = async (event) => {
                     location.reload();
                 }
             } else {
-                closeModal();
+                setTimeout(() => {
+                    closeModal();
+                }, 2000)
             }
         }
     }
