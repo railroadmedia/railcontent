@@ -10,7 +10,7 @@ Route::domain('{drumeoDomain}')
             'as' => 'referral.invite-a-friend-landing',
             'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
         ]);
-        Route::get('/', [SalesController::class, 'home']);
+        Route::get('/', [SalesController::class, 'homeBF']);
         Route::get('/ultimate-bundle', [SalesController::class, 'homeBF']);
         Route::get('/lp', [SalesController::class, 'promoEG']);
         Route::get('/beginner', [SalesController::class, 'promo']);

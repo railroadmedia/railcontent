@@ -3,36 +3,7 @@
     style="background-image:@if(!empty($bg)) {{ $bg }} @else url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp') @endif ;
 ">
     <div class="container mx-auto relative z-30 @if(!empty($bfVersion)) max-w-3xl @else max-w-2xl @endif">
-        @if(!empty($bfVersion))
-            <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
-                @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-8 sm:h-10 mx-auto'
-                ])
-            </a>
-            <h3 class="leading-tight my-4"><strong>{!! $text2 !!}</strong></h3>
-                <div class="w-full mx-auto my-8">
-                    <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                        @if(!empty($vimeo))
-                            <iframe class="absolute w-full h-full reset-on-close bg-black" src="//player.vimeo.com/video/{{ $vimeo }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                        @elseif(!empty($image))
-                            <img class="absolute inset-0 w-full h-full" src="{{ $image }}">
-                        @endif
-                    </div>
-                </div>
 
-            <h3 class="leading-tight mb-3"><strong>$240</strong></h3>
-            <a class="join promo w-full max-w-xl mx-auto" href="{{ $orderUrl }}">GET STARTED &raquo;</a>
-            <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
-                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #000;color: #ffac00;" aria-hidden="true"></i>
-                </a>
-                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
-            </div>
-        @else
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 @include($theme.'._partials.holiday-logo', [
                     'styles' => 'h-16 sm:h-24 lg:h-36 mx-auto'
@@ -47,7 +18,6 @@
 {{--                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN {{ strtoupper($theme) }} &raquo;</a>--}}
 {{--                </div>--}}
             </div>
-        @endif
 
         @if(session()->has('error'))
             <h5 class="leading-tight my-2"><strong class="text-musora">{{ session()->get('error') }}</strong></h5>

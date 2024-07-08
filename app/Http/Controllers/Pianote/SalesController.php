@@ -27,7 +27,7 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', ]);
     }
 
     public function homeBF()
@@ -48,7 +48,7 @@ class SalesController extends BaseController
     }
     public function ultimateLessons()
     {
-        return view('pianote.sales.ultimate-lessons', ['theme' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.ultimate-lessons', ['theme' => 'pianote', 'promoVersion' => 'true', 'smallPromoBanner' => 'true',]);
     }
     public function promoEG()
     {

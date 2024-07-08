@@ -24,7 +24,7 @@
 @section('body')
 
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 68% UNTIL JULY 17th!</strong>',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 50% UNTIL JULY 17th!</strong>',
         'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp',
     ])
 
