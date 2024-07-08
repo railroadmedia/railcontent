@@ -1095,4 +1095,108 @@ class CustomerIoServiceTest extends CustomerIoTestCase
         $this->assertIsArray($activities);
         $this->assertNotEmpty($activities);
     }
+
+    public function test_create_or_update_customer_create_prospect_workspace()
+    {
+        $email = $this->faker->email;
+        $accountName = 'musora_prospects';
+        $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
+        $userId = rand();
+        $createdAt = Carbon::now()->timestamp;
+
+        Event::fake();
+
+        $this->customerIoService->createCustomer(
+            $email,
+            $accountName,
+            id: $userId,
+            createdAtTimestamp: $createdAt
+        );
+
+        $customAttributes = [
+            'my_string_1' => $this->faker->text(),
+            'my_bool_1' => true,
+            'my_bool_2' => false,
+            'my_integer_1' => 5,
+            'my_integer_2' => 5937653,
+            'my_timestamp_1' => Carbon::now()
+                ->subDays(100)->timestamp,
+            'my_timestamp_2' => Carbon::now()
+                ->addDays(100)->timestamp,
+        ];
+
+        $createdCustomer = $this->customerIoService->createOrUpdateCustomerByEmail(
+            $email,
+            $accountName,
+            $customAttributes,
+            $userId,
+            $createdAt
+        );
+
+        Event::assertDispatched(CustomerUpdated::class);
+
+        $data = [
+            'uuid' => $createdCustomer->uuid,
+            'email' => $email,
+            'user_id' => $userId,
+            'workspace_name' => $accountConfigData['workspace_name'],
+            'workspace_id' => $accountConfigData['workspace_id'],
+            'site_id' => $accountConfigData['site_id'],
+            'created_at' => Carbon::createFromTimestamp($createdAt)
+                ->toDateTimeString(),
+            'updated_at' => Carbon::createFromTimestamp($createdAt)
+                ->toDateTimeString(),
+            'deleted_at' => null,
+        ];
+
+        $this->assertDatabaseHas('customer_io_customers', $data);
+
+        $this->assertNotEmpty(Customer::query()->firstWhere('email', $email)->uuid);
+    }
+
+    public function test_create_or_update_customer_update_not_sync_prospect_workspace()
+    {
+        $email = $this->faker->email;
+        $accountName = 'musora';
+        $accountConfigData = $this->customerIoService->getAccountConfigData($accountName);
+        $userId = rand();
+        $createdAt = Carbon::now()->timestamp;
+
+        Event::fake();
+
+        $customAttributes = [
+            'my_string_1' => $this->faker->text(),
+            'my_bool_1' => true,
+            'my_integer_1' => 5,
+            'my_timestamp_1' => Carbon::now()
+                ->subDays(100)->timestamp,
+        ];
+
+        $createdCustomer = $this->customerIoService->createOrUpdateCustomerByEmail(
+            $email,
+            $accountName,
+            $customAttributes,
+            $userId,
+            $createdAt
+        );
+
+        Event::assertNotDispatched(CustomerUpdated::class);
+
+        $data = [
+            'uuid' => $createdCustomer->uuid,
+            'email' => $email,
+            'user_id' => $userId,
+            'workspace_name' => $accountConfigData['workspace_name'],
+            'workspace_id' => $accountConfigData['workspace_id'],
+            'site_id' => $accountConfigData['site_id'],
+            'created_at' => Carbon::createFromTimestamp($createdAt)
+                ->toDateTimeString(),
+            'updated_at' => Carbon::createFromTimestamp($createdAt)
+                ->toDateTimeString(),
+            'deleted_at' => null,
+        ];
+
+        $this->assertDatabaseHas('customer_io_customers', $data);
+        $this->assertNotEmpty(Customer::query()->firstWhere('email', $email)->uuid);
+    }
 }
