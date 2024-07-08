@@ -1,5 +1,5 @@
 /*
-    This file exports the theme settings you will 
+    This file exports the theme settings you will
     be able to 'extend' in you tailwind.config.js
 */
 
@@ -82,20 +82,21 @@ module.exports = {
     },
     //Text Colors
     text: {
-      primary: "var(--color-text-primary)", 
-      secondary: "var(--color-text-secondary)", 
+      primary: "var(--color-text-primary)",
+      secondary: "var(--color-text-secondary)",
       tertiary: "var(--color-text-tertiary)"
     },
     //UI Colors
     ui: {
-      page: "var(--color-ui-page)", 
-      navigation: "var(--color-ui-navigation)", 
-      border: "var(--color-ui-border)", 
+      page: "var(--color-ui-page)",
+      navigation: "var(--color-ui-navigation)",
+      border: "var(--color-ui-border)",
       skeleton: "var(--color-ui-skeleton)",
       button: {
-        bg: "var(--color-ui-button-bg)",
-        text:"var(--color-ui-button-text)"
-      }
+            1: "var(--color-ui-button-1)",
+            2: "var(--color-ui-button-2)",
+            3: "var(--color-ui-button-3)",
+      },
     }
   },
   //FONT SIZES

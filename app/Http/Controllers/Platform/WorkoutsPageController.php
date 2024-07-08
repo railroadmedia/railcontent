@@ -105,8 +105,8 @@ class WorkoutsPageController extends BaseController
 
         $challenges = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 25),
-            $request->get('sort', '-popularity'),
+            $request->get('limit', 10),
+            $request->get('sort', '-published_on'),
             [$lessonType],
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
