@@ -27,7 +27,7 @@ abstract class BaseSanityModel
      * @param  array<Group>|null  $groups
      * @param  string|null  $icon
      */
-    public function __construct(string $name, string $title, array $fields, ?array $groups = null, ?string $icon = null, ?array $preview = null)
+    public function __construct(string $name, string $title, array $fields, ?array $groups = null, ?string $icon = null, ?array $preview = null, ?string $type = 'document')
     {
         $this->name = $name;
         $this->title = $title;
@@ -35,6 +35,7 @@ abstract class BaseSanityModel
         $this->groups = $groups;
         $this->icon = $icon;
         $this->preview = $preview;
+        $this->type = $type;
     }
 
     /**

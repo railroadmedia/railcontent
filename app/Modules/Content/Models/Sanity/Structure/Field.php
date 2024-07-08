@@ -39,6 +39,7 @@ class Field
         public ?string $readOnly = null,
         public ?string $validation = null,
         public ?string $inputComponent = null,
+        public ?array $fields = null,
     ) {
 
     }
@@ -63,6 +64,9 @@ class Field
         }
         if (!is_null($this->of)) {
             $optional['of'] = [$this->of];
+        }
+        if (!is_null($this->fields)) {
+            $optional['fields'] = $this->fields;
         }
         if (!is_null($this->options)) {
             $optional['options'] = $this->options;

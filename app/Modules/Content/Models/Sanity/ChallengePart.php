@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Modules\Content\Models\Sanity;
+
+use App\Modules\Content\Models\Sanity\Enums\FieldType;
+use App\Modules\Content\Models\Sanity\Enums\VideoType;
+use App\Modules\Content\Models\Sanity\Structure\Field;
+use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\Reference;
+use Modules\Content\Models\Sanity\Structure\BrandField;
+use Modules\Content\Models\Sanity\Structure\ListObject;
+
+/**
+ * Defines the schema structure for a Challenge part document type in Sanity.
+ *
+ * @property string       $type
+ * @property string       $name
+ * @property string       $title
+ * @property ?string      $icon
+ * @property array<Field> $fields
+ */
+class ChallengePart extends BaseSanityModel
+{
+    public function __construct()
+    {
+        $instructorReference = new Reference([['type' => 'instructor']]);
+        $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
+        $video               = new ListObject(
+            fields: [
+                        new Field(FieldType::String, 'type', options: ['list' => array_column(VideoType::cases(), 'value')], validation: "(rule) => rule.required()"),
+                        new Field(FieldType::String, 'external_id')
+                    ],
+        );
+        $chapterList = new ListObject(
+            fields: [new Field(FieldType::String, 'chapter_description'),
+                        new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
+                        new Field(FieldType::URL, 'chapter_thumbnail_url')
+                        ],
+            preview: ['select' => ['title' => 'chapter_description', 'subtitle' => 'chapter_timecode']]
+        );
+
+        $detailsGroup = new Group('editorFields', 'Details', true);
+        $openAIGroup  = new Group('openAI', 'OpenAI');
+        $groups       = [
+            $detailsGroup,
+            $openAIGroup,
+        ];
+
+        $fields  = [
+            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()", group: $detailsGroup),
+            new Field(
+                         FieldType::Slug,
+                         'slug',
+                options: ['source' => 'title', 'isUnique' => 'IsUniqueAcrossBrand'],
+                hidden:  "({document}) => !document?.title,",
+                group:   $detailsGroup
+            ),
+            new BrandField($detailsGroup),
+            new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group: $detailsGroup),
+            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group: $detailsGroup),
+            new Field(FieldType::Array, 'instructor', 'Instructor', '', of: $instructorReference, group: $detailsGroup),
+            new Field(
+                                FieldType::Number,
+                                'difficulty',
+                validation:     "rule => rule.min(0).max(10)",
+                inputComponent: 'DifficultyInput', group: $detailsGroup
+            ),
+            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)", group: $detailsGroup),
+            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
+            new Field(FieldType::String, 'soundslice_slug', group: $detailsGroup),
+            new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
+            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
+            new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
+            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList,group:$detailsGroup),
+            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup), //web_url_path
+            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
+            new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
+            new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup), //web_url_path
+        ];
+        $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
+        parent::__construct('challenge-part', 'Challenge Part', fields: $fields, preview: $preview, groups: $groups);
+    }
+}

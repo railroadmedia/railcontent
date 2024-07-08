@@ -5,11 +5,18 @@ namespace App\Modules\Content\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
+use App\Modules\Content\Models\Sanity\Challenge;
+use App\Modules\Content\Models\Sanity\ChallengePart;
+use App\Modules\Content\Models\Sanity\Course;
+use App\Modules\Content\Models\Sanity\Creativity;
 use App\Modules\Content\Models\Sanity\Enums\Workspace;
 use App\Modules\Content\Models\Sanity\Genre;
+use App\Modules\Content\Models\Sanity\Instructor;
 use App\Modules\Content\Models\Sanity\Permission;
 use App\Modules\Content\Models\Sanity\Song;
+use App\Modules\Content\Models\Sanity\Topic;
 use App\Modules\Content\Models\Sanity\Venue;
+use App\Modules\Content\Models\Sanity\Workout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -28,10 +35,17 @@ class SanityStudioCMSController extends BaseController
 
         // publishing workspace
         $types = [
+            (new Challenge())->toArray(),
+            (new ChallengePart())->toArray(),
+            (new Workout())->toArray(),
             (new Song())->toArray(),
+            (new Course())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),
-            (new Permission())->toArray()
+            (new Permission())->toArray(),
+            (new Topic())->toArray(),
+            (new Creativity())->toArray(),
+            (new Instructor())->toArray()
         ];
         $publishing = [
             'projectId' => $projectId,
