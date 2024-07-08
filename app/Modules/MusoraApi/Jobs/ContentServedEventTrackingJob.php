@@ -5,10 +5,10 @@ namespace App\Modules\MusoraApi\Jobs;
 use App\Jobs\BaseJob;
 use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
-use Illuminate\Support\Facades\DB;
 use Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Models\Content;
+use Railroad\Railcontent\Services\RecommendationService;
 
 class ContentServedEventTrackingJob extends BaseJob
 {
@@ -16,7 +16,7 @@ class ContentServedEventTrackingJob extends BaseJob
     {
     }
 
-    public function handle()
+    public function handle(RecommendationService $recommendationService)
     {
         $recommended_content = [];
 
@@ -25,35 +25,19 @@ class ContentServedEventTrackingJob extends BaseJob
             $content = Content::where('id', $contentServed['id'])->first();
 
             if (!$content) {
-                Log::error('Content not found', ['content_id' => $contentServed['id']]);
+                Log::error('ContentServedEventTrackingJob: content not found', [
+                    'content_id' => $contentServed['id']
+                ]);
                 continue;
             }
 
-            $brand = $content->brand;
-            $type = str_replace('-', '_', $content->type);
-            $moduleSource = [];
+            $moduleSource = $recommendationService->getModuleSourceFromContent($this->user->id, $content);
 
-            $table = sprintf('recommendations_%s_%s', $brand, $type);
-            $beginnerTable = sprintf('recommendations_%s_%s_beginner_items', $brand, $type);
-
-            $recommendation = DB::table($table)
-                ->where('user_id', $this->user->id)
-                ->where('content_id', $content->id)
-                ->first();
-
-            if ($recommendation) {
-                $moduleSource = json_decode($recommendation->module_source, associative: true)['module_source'];
-            } else {
-                $beginnerRecommendation = DB::table($beginnerTable)
-                    ->where('content_id', $content->id)
-                    ->first();
-
-                if (!$beginnerRecommendation) {
-                    Log::error(self::class . ': Content not found', ['content_id' => $contentServed['id']]);
-                    return;
-                }
-
-                $moduleSource[] = 'popular_beginner';
+            if (empty($moduleSource)) {
+                Log::error('ContentServedEventTrackingJob: module source not found', [
+                    'content_id' => $content->id
+                ]);
+                continue;
             }
 
             $recommended_content[] = [
@@ -64,7 +48,6 @@ class ContentServedEventTrackingJob extends BaseJob
         }
 
         if (empty($recommended_content)) {
-            Log::error('No recommended content found for contents served', ['content_id' => $this->props['content_id']]);
             return;
         }
 
