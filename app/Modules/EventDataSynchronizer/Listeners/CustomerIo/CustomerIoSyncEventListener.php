@@ -104,7 +104,7 @@ class CustomerIoSyncEventListener
 
             if (!empty($user) && !in_array(
                 $userCreated->getUser()
-                        ->id,
+                    ->id,
                 self::$alreadyQueuedUserIds
             )) {
                 dispatch(
@@ -116,7 +116,7 @@ class CustomerIoSyncEventListener
 
                 self::$alreadyQueuedUserIds[] =
                     $userCreated->getUser()
-                        ->id;
+                    ->id;
             }
         } catch (Throwable $throwable) {
             error_log($throwable);
@@ -206,10 +206,10 @@ class CustomerIoSyncEventListener
                         $content['brand'],
                         $content['brand'] . '_action_lesson_comment-like',
                         [
-                        'content_id' => $content['id'],
-                        'content_name' => $content->fetch('fields.title'),
-                        'content_type' => $content['type'],
-                    ],
+                            'content_id' => $content['id'],
+                            'content_name' => $content->fetch('fields.title'),
+                            'content_type' => $content['type'],
+                        ],
                         null,
                         Carbon::now()->timestamp
                     ))->delay(
@@ -244,10 +244,10 @@ class CustomerIoSyncEventListener
                         $content['brand'],
                         $content['brand'] . '_action_lesson_comment',
                         [
-                        'content_id' => $content['id'],
-                        'content_name' => $content->fetch('fields.title'),
-                        'content_type' => $content['type'],
-                    ],
+                            'content_id' => $content['id'],
+                            'content_name' => $content->fetch('fields.title'),
+                            'content_type' => $content['type'],
+                        ],
                         null,
                         Carbon::now()->timestamp
                     ))->delay(
@@ -273,12 +273,12 @@ class CustomerIoSyncEventListener
         try {
             $thread =
                 $this->threadRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableThreads . '.id', $threadCreated->getThreadId())
-                    ->first();
+                ->where(ConfigService::$tableThreads . '.id', $threadCreated->getThreadId())
+                ->first();
             $category =
                 $this->categoryRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableCategories . '.id', $thread['category_id'])
-                    ->first();
+                ->where(ConfigService::$tableCategories . '.id', $thread['category_id'])
+                ->first();
             $user = $this->userService->getByIdOrNull($threadCreated->getUserId());
 
             if (!empty($thread) && !empty($user)) {
@@ -313,16 +313,16 @@ class CustomerIoSyncEventListener
         try {
             $post =
                 $this->postRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tablePosts . '.id', $postCreated->getPostId())
-                    ->first();
+                ->where(ConfigService::$tablePosts . '.id', $postCreated->getPostId())
+                ->first();
             $thread =
                 $this->threadRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableThreads . '.id', $post['thread_id'])
-                    ->first();
+                ->where(ConfigService::$tableThreads . '.id', $post['thread_id'])
+                ->first();
             $category =
                 $this->categoryRepository->getDecoratedQuery()
-                    ->where(ConfigService::$tableCategories . '.id', $thread['category_id'])
-                    ->first();
+                ->where(ConfigService::$tableCategories . '.id', $thread['category_id'])
+                ->first();
             $user = $this->userService->getByIdOrNull($post['author_id']);
 
             if (!empty($thread) && !empty($user)) {
@@ -383,10 +383,10 @@ class CustomerIoSyncEventListener
                             $user->id,
                             $content['brand'],
                             $content['brand'] .
-                            '_action_' .
-                            $contentTypeToEventStringMap[$content['type']] .
-                            '_' .
-                            $userContentProgressSaved->progressStatus,
+                                '_action_' .
+                                $contentTypeToEventStringMap[$content['type']] .
+                                '_' .
+                                $userContentProgressSaved->progressStatus,
                             $data,
                             null,
                             Carbon::now()->timestamp
@@ -676,9 +676,9 @@ class CustomerIoSyncEventListener
                     $userId,
                     $brand ?? config('event-data-synchronizer.customer_io_brand_activity_event'),
                     [
-                    'id' => $token,
-                    'platform' => $platform,
-                ],
+                        'id' => $token,
+                        'platform' => $platform,
+                    ],
                     $timestamp ?? Carbon::now()->timestamp
                 ))->delay(
                     Carbon::now()
@@ -842,8 +842,7 @@ class CustomerIoSyncEventListener
             /** @var Order $order */
             return $order->lineItems->filter(function ($orderLineItem) {
                 /** @var OrderLineItem $orderLineItem */
-                return $orderLineItem->product && $orderLineItem->product->isDigital(
-                ) && $orderLineItem->product->isMembershipProduct();
+                return $orderLineItem->product && $orderLineItem->product->isDigital() && $orderLineItem->product->isMembershipProduct();
             });
         })->groupBy(function ($orderLineItem) {
             /** @var OrderLineItem $orderLineItem */
@@ -941,12 +940,16 @@ class CustomerIoSyncEventListener
         };
 
         $days = 0;
-        if (str_contains(strtolower($latest->product->sku), "7-day")
-            || $latest->product->sku == "PIANOTE-MEMBERSHIP-TRIAL") {
+        if (
+            str_contains(strtolower($latest->product->sku), "7-day")
+            || $latest->product->sku == "PIANOTE-MEMBERSHIP-TRIAL"
+        ) {
             $days = 7;
         }
-        if (str_contains(strtolower($latest->product->sku), "30-day")
-            || str_contains(strtolower($latest->product->sku), "1-month")) {
+        if (
+            str_contains(strtolower($latest->product->sku), "30-day")
+            || str_contains(strtolower($latest->product->sku), "1-month")
+        ) {
             $days = 30;
         }
 
