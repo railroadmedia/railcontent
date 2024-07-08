@@ -67,7 +67,8 @@
                             'Accept': 'application/json',
                         },
                         body: JSON.stringify({
-                            ...Object.fromEntries(data)
+                            ...Object.fromEntries(data),
+                            access_code,
                         })
                     })
                     const result = await response.json();
