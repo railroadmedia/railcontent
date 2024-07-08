@@ -101,12 +101,12 @@ $pianote = [
         ],
         [
             "big" => true,
-            'image' => 'marketing/pianote/membership/homepage/2024/world-class-teachers.webp',
+            'image' => 'marketing/pianote/membership/homepage/2024/world-class-teachers2.webp',
             'title' => 'World-Class Teachers',
             'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
             'lessonInfo' => [
                 [
-                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/world-class-teachers.webp',
+                    'thumb' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/640x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/world-class-teachers2.webp',
                 ],
             ]
         ],
