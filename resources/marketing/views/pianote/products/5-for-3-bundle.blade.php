@@ -64,6 +64,12 @@
 
 @section('layout-body')
 
+   @include('_partials.components.shop.promo-banner-3', [
+        "name" => "Pianote Summer Sale",
+        "noBreadcrumb" => true,
+        'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp',
+    ])
+
 @php
 $originalPrice = 1200;
 $discountedPrice = 720;

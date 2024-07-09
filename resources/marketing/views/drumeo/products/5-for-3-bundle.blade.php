@@ -56,6 +56,11 @@
 
 @section('layout-body')
 
+   @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Drumeo Summer Sale",
+        "noBreadcrumb" => true,
+    ])
+
 @php
 $originalPrice = 1200;
 $discountedPrice = 720;
