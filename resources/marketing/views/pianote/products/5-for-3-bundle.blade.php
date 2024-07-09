@@ -152,6 +152,18 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
     @include('pianote.sales.partials._footer')
 @endsection
 
+@if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2024-7-18 00:00:00',
+        'promoVersion' => true
+    ])
+@else
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-8-1 00:00:00',
+        'promoVersion' => true
+    ])
+@endif
+
 @section('layout-scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
