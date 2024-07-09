@@ -36,26 +36,27 @@
                 $bundles = [
                     [
                         'slug' => '/ultimate-lessons',
-                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + books, lessons, and more!',
+                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + $540 in free bonuses!',
+                        'bonusValue' => '$720 in total value',
                         'visible' => 1,
-                        'price' => 760,
+                        'price' => 240,
                         'discountedPrice' => 180,
                         'bgColor' => '#4B41BC, #8032FF',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ul-logo-horizontal.webp',
                         'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ulimate-lessons-bundle.webp',
-                        'logoStyle' => 'w-full sm:w-11/12',
                     ],
                     [
                         'slug' => '/shop/5-for-3-bundle',
                         'desc' => '5 years of Pianote for the<br class="lg:hidden"> price of 3 + $150 gift card!',
+                        'bonusValue' => '$1350 in total value',
                         'visible' => 1,
                         'price' => 1200,
                         'discountedPrice' => 720,
+                        'imgStyle' => 'py-3 lg:py-4',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-logo-horizontal.webp',
                         'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-bundle.webp',
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg-m.webp',
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg-m.webp',
-                        'logoStyle' => 'w-full sm:w-10/12 px-4',
                     ],
                 ];
             @endphp

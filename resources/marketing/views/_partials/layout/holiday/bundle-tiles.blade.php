@@ -10,23 +10,23 @@
                     @elseif(!empty($bundle['specialW']))
                         lg:pl-16 xl:pl-20 py-5 sm:py-6 lg:py-8
                     @else
-                        py-10 lg:py-12
+                        sm:pl-12 lg:pl-16 xl:pl-20 py-5 sm:py-10 lg:py-12
                      @endif "
                         @if(empty($bundle['img'])) style="background:linear-gradient(to bottom, {{ $bundle['bgColor'] }});" @endif >
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                              @if(isset($bundle['logo']))
-                                <img class="@if(isset($bundle['logoStyle'])) {{ $bundle['logoStyle'] }} @else h-16 sm:h-20 @endif" src="{{ $bundle['logo'] }}">
+                                <img class="@if(isset($bundle['logoStyle'])) {{ $bundle['logoStyle'] }} @else h-7 sm:h-7 lg:h-10 @endif" src="{{ $bundle['logo'] }}">
                             @endif
                              @if(isset($bundle['spread']))
                                  <br>
-                                <img class="@if(isset($bundle['imgStyle'])) {{ $bundle['imgStyle'] }} @else h-32 sm:h-32 lg:h-40 xl:h-48 mt-3 @endif" src="{{ $bundle['spread'] }}">
+                                <img class="@if(isset($bundle['imgStyle'])) {{ $bundle['imgStyle'] }} @endif  h-36 sm:h-32 lg:h-40 xl:h-48 mt-5" src="{{ $bundle['spread'] }}">
                             @endif
                             @if(isset($bundle['title']))
                                 <h2 class="leading-none"><strong>{{ $bundle['title'] }}</strong></h2>
                             @endif
                             <p class="leading-tight mb-3 mt-1 sm:mt-3 text-sm italic">{!!$bundle['desc'] !!}</p>
                              @if(!empty($bundle['price']))
-                                 <h4 class="inline-block leading-none mb-3">
+                                 <h4 class="inline-block leading-none mb-5">
                                     @if(!empty($bundle['soldOut']))
                                         <strong>{{$bundle['price']}}</strong>
                                     @else
