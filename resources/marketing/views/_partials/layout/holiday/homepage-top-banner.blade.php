@@ -1,4 +1,4 @@
-<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-8 sm:py-12 bg-cover bg-top"
+<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 pt-4 pb-8 sm:pb-12 bg-cover bg-top"
 
     style="background-image:@if(!empty($bg)) {{ $bg }} @else url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp') @endif ;
 ">
@@ -9,7 +9,7 @@
                     'styles' => 'h-16 sm:h-24 lg:h-36 mx-auto'
                 ])
             </a>
-            <h4 class="leading-tight my-4 uppercase">{!! $text !!}</h4>
+            <h5 class="leading-tight my-4 uppercase">{!! $text !!}</h5>
 
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-4">
                 <a class="w-full sm:w-1/2 join smaller sm:order-2 bg-[#FFD600] text-black" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP NOW &raquo;</a>

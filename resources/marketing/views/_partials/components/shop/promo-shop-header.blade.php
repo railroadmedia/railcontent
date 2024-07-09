@@ -1,17 +1,22 @@
-<header class="text-white text-center relative z-10 overflow-hidden px-5 sm:px-6
+<header class="text-white text-center relative z-10 overflow-hidden  sm:px-6
 @if($theme === 'drumeo' || $theme === 'pianote')
     py-6 sm:pb-12
 @else
     py-6 sm:py-12 lg:py-16
 @endif
 " {{--style="background-color:#141535;"--}}>
-    <div class="container mx-auto relative z-30 max-w-2xl">
+    <div class="container mx-auto relative z-30 max-w-lg">
         @if($theme === 'drumeo' || $theme === 'pianote')
-            @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-16 sm:h-24 lg:h-36 mx-auto mb-2',
-                    'isShop' => true,
-                    'shopStyles' => 'w-auto h-12 sm:h-14 p-1'
-                ])
+            <img class="w-auto h-16 sm:h-24 lg:h-28 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-logo-text-only.webp">
+
+            <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
+            {{--            <div class="flex items-center justify-center">--}}
+{{--                <img class="{{ $shopStyles }}"--}}
+{{--                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">--}}
+{{--                <img class="{{ $shopStyles }}"--}}
+{{--                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">--}}
+{{--            </div>--}}
+
 {{--            @if(!empty($logo))--}}
 {{--                <img src="{{ $logo }}" alt="Drumeo" class=" @if(!empty($logoStyles)) {{ $logoStyles }} @endif mx-auto">--}}
 {{--            @endif--}}

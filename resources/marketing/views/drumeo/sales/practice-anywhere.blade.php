@@ -19,13 +19,15 @@
 @section('top-bar')
 
     @include('_partials.components.shop.promo-banner-2', [
-        "name" => "Drumeo Summer Sale",
-        "noBreadcrumb" => true
+        "noBreadcrumb" => true,
+        "name" => "The Practice Anywhere Bundle",
+        "fullPrice" => 240,
+        "price" => 180,
     ])
 
 @php
     $originalPrice = 240;
-    $discountedPrice = 180; 
+    $discountedPrice = 180;
     $savePercentage = round((($originalPrice - $discountedPrice) / $originalPrice) * 100);
 @endphp
 
@@ -82,10 +84,11 @@
                 <i class="fas fa-check ml-3 sm:ml-5 text-drumeo"></i> 2 DIGITAL PACKS
             </p>
              <h2 class="leading-tight my-4">
-                <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>            
+                <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
                 <span class="mb-4 sm:mb-6 sm:mb-6 text-xl md:text-3xl">Save {{$savePercentage}}% </span>
             </span>
             </h2>
+            <p class="mb-4 sm:mb-6"><strong class="font-black">PLUS</strong> get $385.95 in free bonuses</p>
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 
 
@@ -159,11 +162,11 @@
 @section('final')
     <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
         style="background:linear-gradient(45deg, #3418E1, #FF005C);">
-        <div class="container mx-auto relative z-50  max-w-4xl ">
+        <div class="container mx-auto relative z-50  max-w-3xl ">
             <div class="w-full px-4 md:px-0 mb-6">
                 <img class="w-full md:w-2/3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp">
                 <br>
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">The perfect bundle to get you started on the drums. <br> Get unlimited lessons + $385 in free bonuses.</h3>
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get unlimited lessons + $385 in free bonuses.</h3>
             </div>
 
             @php
@@ -214,7 +217,7 @@
             <div style="font-size:0px">
                 @foreach($bonuses as $bonus)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 @endif"
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/3 @endif"
                         x-data="{
                         flipped: false,
                     }"
@@ -297,17 +300,17 @@
                 @endforeach
             </div>
               <h2 class="leading-tight mt-6 mb-1">
-                    <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong> 
+                    <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
                 </h2>
              <p class="mb-4 sm:mb-6"><strong class="text-musora">Save {{$savePercentage}}%</strong> for your first year. Renews at $240/yr.</p>
             </p>
-            <a role="link" aria-label=" Get Started" class="join  drumeo  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" 
+            <a role="link" aria-label=" Get Started" class="join  drumeo  mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;"
             href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true">
                 GET Started
             </a>
             <br>
             <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true">
-                <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital lesson packs.</em></u></p></a>
+                <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 2 free digital lesson packs.</em></u></p></a>
         </div>
     </section>
 @endsection

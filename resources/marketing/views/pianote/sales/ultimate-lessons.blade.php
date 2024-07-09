@@ -39,13 +39,15 @@
 @section('promo-banner')
 
    @include('_partials.components.shop.promo-banner-3', [
-        "name" => "Pianote Summer Sale",
         "noBreadcrumb" => true,
+        "name" => "The Ultimate Lessons Bundle",
+        "fullPrice" => 240,
+        "price" => 180,
     ])
 
 @php
-    $originalPrice = 700;
-    $discountedPrice = 180; 
+    $originalPrice = 240;
+    $discountedPrice = 180;
     $savePercentage = round((($originalPrice - $discountedPrice) / $originalPrice) * 100);
 @endphp
 
@@ -116,10 +118,11 @@
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> 3 DIGITAL COURSES
             </p>
             <h2 class="leading-tight my-4">
-                <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>            
+                <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
                 <span class="mb-4 sm:mb-6 text-xl md:text-3xl">Save {{$savePercentage}}% </span>
             </span>
             </h2>
+            <p class="mb-4 sm:mb-6"><strong class="font-black">PLUS</strong> get $540 in free bonuses</p>
 
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 
@@ -201,7 +204,9 @@
             <div class="container mx-auto relative z-50  max-w-4xl ">
                 <img class="mb-3 sm:mb-6 f-full md:w-2/3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ul-logo-horizontal.webp">
                 <br>
-                <h4 class="leading-tight mb-6">UNLIMITED piano lessons you can take anywhere, anytime <br> + $520 in free bonuses on this page. </h4>
+                <h4 class="leading-tight mb-6">
+                    UNLIMITED piano lessons you can take anywhere, <br>
+                    anytime + get $520 in free bonuses. </h4>
                 <div style="font-size:0px">
                     @php
                         $bonuses = [
@@ -334,15 +339,18 @@
                     @endforeach
                 </div>
                 <h2 class="leading-tight mt-6 mb-1">
-                    <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong> 
+                    <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>
                 </h2>
                  <p class="mb-4 sm:mb-6"><strong class="text-musora">Save {{$savePercentage}}%</strong> for your first year. Renews at $240/yr.</p>
-               
+
                 <a class="join mb-4 md:mb-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">
                     GET STARTED
                 </a>
                 <br>
-                <a class="inline-block" href="{{ $buttonLink2 }}"><p><u><em>OR get just the membership (no physical bonuses).</em></u></p></a>
+                <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership"
+                    href="{{ $buttonLink2 }}"
+                >
+                    <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 3 free digital lesson packs.</em></u></p></a>
             </div>
         </section>
     </div>
