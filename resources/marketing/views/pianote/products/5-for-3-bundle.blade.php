@@ -72,10 +72,10 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
 
     @include('pianote.products.partials._summer-promo', [
         'backgroundImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg.webp',
-        'logoUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/logo.webp',
+        'logoUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)//marketing/pianote/promos/summer-sale/pianote-5-for-3-logo-horizontal.webp',
         'offerTitle' => 'Get 5 years of Pianote for the price of 3.',
         'spotsAvailable' => $products['pianote_access_5-years']->getPublicStockCount(),
-        'headerImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header.webp',
+        'headerImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-bundle.webp',
         'originalPrice' => $originalPrice,
         'discountedPrice' => $discountedPrice,
         'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
@@ -130,10 +130,10 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
 
     @include('pianote.products.partials._summer-promo', [
         'backgroundImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/bg.webp',
-        'logoUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/logo.webp',
+        'logoUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-logo-horizontal.webp',
         'offerTitle' => 'Get 5 years of Pianote for the price of 3.',
         'spotsAvailable' => $products['pianote_access_5-years']->getPublicStockCount(),
-        'headerImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header.webp',
+        'headerImageUrl' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-5-for-3-bundle.webp',
         'originalPrice' => $originalPrice,
         'discountedPrice' => $discountedPrice,
         'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),

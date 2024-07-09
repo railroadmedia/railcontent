@@ -194,9 +194,9 @@
     <div style="background:linear-gradient(45deg, #4B41BC, #8032FF);">
         <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6">
             <div class="container mx-auto relative z-50  max-w-4xl ">
-                <img class="h-20 sm:h-28 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/510x0/filters:quality(95)/marketing/drumeo/promos/november/bundles/ultimate-lessons-white.png">
+                <img class="mb-3 sm:mb-6 f-full md:w-2/3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ul-logo-horizontal.webp">
                 <br>
-                <h4 class="leading-tight mb-6">UNLIMITED piano lessons<br class="sm:hidden"> you can take anywhere, anytime.</h4>
+                <h4 class="leading-tight mb-6">UNLIMITED piano lessons you can take anywhere, anytime <br> + $520 in free bonuses on this page. </h4>
                 <div style="font-size:0px">
                     @php
                         $bonuses = [
@@ -347,7 +347,7 @@
     'countdownDate' => '2024-06-01 00:00:00',
     'promoVersion' => false
     ])
-{{-- <script type="application/javascript">
+<script type="application/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         var stickyBar = document.querySelector('.promo-banner');
         window.addEventListener('scroll', function () {
@@ -364,5 +364,5 @@
             }
         });
     });
-</script> --}}
+</script>
 @endsection

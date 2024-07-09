@@ -155,10 +155,10 @@
     <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
         style="background:linear-gradient(45deg, #3418E1, #FF005C);">
         <div class="container mx-auto relative z-50  max-w-4xl ">
-            <div class="w-full mb-6">
-                <img class="h-20 sm:h-28" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-logo.webp">
+            <div class="w-full px-4 md:px-0 mb-6">
+                <img class="w-full md:w-2/3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp">
                 <br>
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">The perfect bundle to get you started on the drums.</h3>
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">The perfect bundle to get you started on the drums. <br> Get unlimited lessons + $385 in free bonuses.</h3>
             </div>
 
             @php
@@ -313,7 +313,7 @@
     'countdownDate' => '2024-06-01 00:00:00',
     'promoVersion' => false
     ])
-    {{-- <script type="application/javascript">
+    <script type="application/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var stickyBar = document.querySelector('.promo-banner');
             window.addEventListener('scroll', function () {
@@ -330,7 +330,7 @@
                 }
             });
         });
-    </script> --}}
+    </script>
 @endsection
 
 

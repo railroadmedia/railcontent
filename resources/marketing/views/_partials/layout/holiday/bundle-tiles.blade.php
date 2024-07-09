@@ -19,7 +19,7 @@
                             @endif
                              @if(isset($bundle['spread']))
                                  <br>
-                                <img class="h-32 sm:h-32 lg:h-40 xl:h-48 mt-3" src="{{ $bundle['spread'] }}">
+                                <img class="@if(isset($bundle['imgStyle'])) {{ $bundle['imgStyle'] }} @else h-32 sm:h-32 lg:h-40 xl:h-48 mt-3 @endif" src="{{ $bundle['spread'] }}">
                             @endif
                             @if(isset($bundle['title']))
                                 <h2 class="leading-none"><strong>{{ $bundle['title'] }}</strong></h2>
