@@ -78,7 +78,7 @@
             ];
         @endphp
         @include('_partials.layout.holiday.bundle-tiles', [
-            "header" => 'Featured Deals',
+            "header" => 'Summer Bundles',
         ])
 
         <section class="grid-view" data-category="featured" x-show="filter === 'featured' || filter === 'all'">

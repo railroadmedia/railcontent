@@ -5,7 +5,7 @@
 </style>
  <div class="big-promo-banner text-white text-center lg:text-left relative py-2 bg-cover bg-center"
      style="background: url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp');">
-    <div class="row container max-w-4xl mx-auto px-3 sm:flex items-center justify-between">
+    <div class="row container mx-auto px-3 sm:flex items-center justify-between">
         <a @if($theme === 'drumeo') href="/drumshop/" @else href="/shop/" @endif>
             @include($theme.'._partials.holiday-logo',[
                 'styles' => 'w-auto h-12 sm:h-14',
