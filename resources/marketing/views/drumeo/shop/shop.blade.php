@@ -46,7 +46,7 @@
                         'discountedPrice' => 180,
                         'bgColor' => '#FF005C, #3418E1',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp',
-                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-bundle.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-bundle2.webp',
                     ],
                     [
                         'slug' => '/drumshop/5-for-3-bundle',
@@ -56,7 +56,7 @@
                         'discountedPrice' => 720,
                         'imgStyle' => 'py-3 lg:py-4',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/logo.webp',
-                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-5-for-3-bundle.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-5-for-3-bundle2.webp',
                         'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
                         'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/bg-m.webp',
                     ],
