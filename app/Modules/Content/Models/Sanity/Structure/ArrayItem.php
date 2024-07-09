@@ -4,10 +4,11 @@ namespace App\Modules\Content\Models\Sanity\Structure;
 
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 
-abstract class ArrayItem
+abstract class ArrayItem extends FormItem
 {
-
-    public function __construct(public FieldType $type) {
+    public function __construct(public FieldType $type)
+    {
+        parent::__construct($this->type);
     }
 
     /**

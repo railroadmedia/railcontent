@@ -22,6 +22,14 @@ class Venue extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
         ];
-        parent::__construct('venue', 'Venue', $fields);
+        parent::__construct(self::getName(), 'Venue', $fields);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getName(): string
+    {
+        return 'venue';
     }
 }
