@@ -8,12 +8,16 @@ use App\Modules\Content\Models\Sanity\Artist;
 use App\Modules\Content\Models\Sanity\Challenge;
 use App\Modules\Content\Models\Sanity\ChallengePart;
 use App\Modules\Content\Models\Sanity\Course;
+use App\Modules\Content\Models\Sanity\CoursePart;
 use App\Modules\Content\Models\Sanity\Creativity;
 use App\Modules\Content\Models\Sanity\Enums\Workspace;
 use App\Modules\Content\Models\Sanity\Genre;
 use App\Modules\Content\Models\Sanity\Instructor;
+use App\Modules\Content\Models\Sanity\Lifestyle;
 use App\Modules\Content\Models\Sanity\Permission;
 use App\Modules\Content\Models\Sanity\Song;
+use App\Modules\Content\Models\Sanity\Essential;
+use App\Modules\Content\Models\Sanity\Theory;
 use App\Modules\Content\Models\Sanity\Topic;
 use App\Modules\Content\Models\Sanity\Venue;
 use App\Modules\Content\Models\Sanity\Workout;
@@ -40,11 +44,15 @@ class SanityStudioCMSController extends BaseController
             (new Workout())->toArray(),
             (new Song())->toArray(),
             (new Course())->toArray(),
+            (new CoursePart())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),
             (new Permission())->toArray(),
             (new Topic())->toArray(),
+            (new Essential())->toArray(),
             (new Creativity())->toArray(),
+            (new Theory())->toArray(),
+            (new Lifestyle())->toArray(),
             (new Instructor())->toArray()
         ];
         $publishing = [

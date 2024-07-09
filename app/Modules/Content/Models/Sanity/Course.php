@@ -25,7 +25,7 @@ class Course extends BaseSanityModel
     {
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $instructorReference = new Reference([['type' => 'instructor']]);
-        $childReference = new Reference([['type' => 'challenge-part']]);
+        $childReference = new Reference([['type' => 'course-part']]);
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
         $blockList = new Block();
         $resourceList = new ListObject(
