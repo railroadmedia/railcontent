@@ -56,12 +56,10 @@
 
 @section('layout-body')
 
-  @include('_partials.layout.holiday.homepage-top-banner',[
-            'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 50% UNTIL JULY 17th!</strong>',
-            'text2' => '',
-            'vimeo' => '',
-            'orderUrl' => '',
-        ])
+   @include('_partials.components.shop.promo-banner-2', [
+        "name" => "Drumeo Summer Sale",
+        "noBreadcrumb" => true,
+    ])
 
 @php
 $originalPrice = 1200;
