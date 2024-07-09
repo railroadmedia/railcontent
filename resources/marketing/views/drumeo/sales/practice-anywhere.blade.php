@@ -208,7 +208,6 @@
                     'title' => '30-Day Chops',
                     'description' => '30-Day Chops is the first-ever course that teaches you tasty linear drum chops one note at a time.',
                     'price' => floatval($productPrices['30-day-chops']->price),
-                    'shipping' => true,
                     ],
                 ];
             @endphp
