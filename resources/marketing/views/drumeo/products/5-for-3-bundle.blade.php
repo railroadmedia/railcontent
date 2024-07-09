@@ -57,8 +57,10 @@
 @section('layout-body')
 
    @include('_partials.components.shop.promo-banner-2', [
-        "name" => "Drumeo Summer Sale",
         "noBreadcrumb" => true,
+        "name" => "The 5-For-3 Bundle",
+        "fullPrice" => 1200,
+        "price" => 720,
     ])
 
 @php
