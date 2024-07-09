@@ -38,6 +38,11 @@
 
 @section('promo-banner')
 
+   @include('_partials.components.shop.promo-banner-3', [
+        "name" => "Pianote Summer Sale",
+        "noBreadcrumb" => true,
+    ])
+
 @php
     $originalPrice = 700;
     $discountedPrice = 180; 
@@ -112,7 +117,7 @@
             </p>
             <h2 class="leading-tight my-4">
                 <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>            
-                <span class="mb-4 sm:mb-6 text-3xl">Save {{$savePercentage}}% </span>
+                <span class="mb-4 sm:mb-6 text-xl md:text-3xl">Save {{$savePercentage}}% </span>
             </span>
             </h2>
 

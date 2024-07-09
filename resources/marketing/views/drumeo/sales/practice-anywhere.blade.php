@@ -83,7 +83,7 @@
             </p>
              <h2 class="leading-tight my-4">
                 <s class="opacity-50">${{$originalPrice}}</s> <strong>${{$discountedPrice}}</strong>            
-                <span class="mb-4 sm:mb-6 text-3xl">Save {{$savePercentage}}% </span>
+                <span class="mb-4 sm:mb-6 sm:mb-6 text-xl md:text-3xl">Save {{$savePercentage}}% </span>
             </span>
             </h2>
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
