@@ -8,7 +8,9 @@
     <div class="row container mx-auto px-3 sm:flex items-center justify-between">
         <a @if($theme === 'drumeo') href="/drumshop/" @else href="/shop/" @endif>
             @include($theme.'._partials.holiday-logo',[
-                'styles' => 'w-auto h-12 sm:h-14'
+                'styles' => 'w-auto h-12 sm:h-14',
+                'isProductPage' => true,
+                'productPageStyles' => 'w-auto h-12 sm:h-14 p-1'    
             ])
         </a>
         <span class="text-center sm:text-right flex flex-wrap items-center sm:justify-end">

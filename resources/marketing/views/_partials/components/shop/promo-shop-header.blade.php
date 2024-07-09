@@ -8,7 +8,9 @@
     <div class="container mx-auto relative z-30 max-w-2xl">
         @if($theme === 'drumeo' || $theme === 'pianote')
             @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-16 sm:h-24 lg:h-36 mx-auto mb-2'
+                    'styles' => 'h-16 sm:h-24 lg:h-36 mx-auto mb-2',
+                    'isShop' => true,
+                    'shopStyles' => 'w-auto h-12 sm:h-14 p-1'
                 ])
 {{--            @if(!empty($logo))--}}
 {{--                <img src="{{ $logo }}" alt="Drumeo" class=" @if(!empty($logoStyles)) {{ $logoStyles }} @endif mx-auto">--}}
