@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models\Sanity;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
@@ -31,7 +32,7 @@ class Course extends BaseSanityModel
         $resourceList = new ListObject(
             fields: [new Field(FieldType::String, 'resource_name'),
                         new Field(FieldType::URL, 'resource_url')],
-            preview: ['select' => ['title' => 'resource_name', 'subtitle' => 'resource_url']]
+            previewItem: new ListItemPreview('resource_name', 'resource_url')
         );
 
         $detailsGroup = new Group('editorFields', 'Details', true);
@@ -71,7 +72,12 @@ class Course extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true",group:$detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true",group:$detailsGroup), //web_url_path
         ];
-        $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
-        parent::__construct('course', 'Course', fields: $fields, preview: $preview, groups: $groups);
+        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
+        parent::__construct(self::getName(), 'Course', fields: $fields, preview: $preview, groups: $groups);
+    }
+
+    public static function getName(): string
+    {
+        return 'course';
     }
 }

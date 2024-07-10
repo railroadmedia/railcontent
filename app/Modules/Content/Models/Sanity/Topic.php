@@ -21,6 +21,11 @@ class Topic extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
         ];
-        parent::__construct('topic', 'Topic', $fields);
+        parent::__construct(self::getName(), 'Topic', $fields);
+    }
+
+    public static function getName(): string
+    {
+        return 'topic';
     }
 }

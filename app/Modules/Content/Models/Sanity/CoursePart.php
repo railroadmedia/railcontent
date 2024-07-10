@@ -6,6 +6,7 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Enums\VideoType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
@@ -38,7 +39,7 @@ class CoursePart extends BaseSanityModel
                         new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
                         new Field(FieldType::URL, 'chapter_thumbnail_url')
                         ],
-            preview: ['select' => ['title' => 'chapter_description', 'subtitle' => 'chapter_timecode']]
+            previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
         );
 
         $assignmentsList = new ListObject(
@@ -46,8 +47,7 @@ class CoursePart extends BaseSanityModel
                         new Field(FieldType::String, 'assignment_soundslice'),
                         new Field(FieldType::String, 'assignment_description'),
                         new Field(FieldType::URL, 'assignment_sheet_music_image')
-                    ],
-            preview: ['select' => ['title' => 'chapter_description', 'subtitle' => 'chapter_timecode']]
+                    ]
         );
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $genreReference = new Reference([['type' => 'genre']],  options: ['aiAssist'=>['embeddingsIndex' => 'genre-index']]);
@@ -107,7 +107,12 @@ class CoursePart extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup), //web_url_path
         ];
-        $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
-        parent::__construct('course-part', 'Course Part', fields: $fields, preview: $preview, groups: $groups);
+        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
+        parent::__construct(self::getName(), 'Course Part', fields: $fields, preview: $preview, groups: $groups);
+    }
+
+    public static function getName(): string
+    {
+        return 'course-part';
     }
 }

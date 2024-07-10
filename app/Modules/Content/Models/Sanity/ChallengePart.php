@@ -6,6 +6,7 @@ use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Enums\VideoType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
@@ -36,7 +37,7 @@ class ChallengePart extends BaseSanityModel
                         new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
                         new Field(FieldType::URL, 'chapter_thumbnail_url')
                         ],
-            preview: ['select' => ['title' => 'chapter_description', 'subtitle' => 'chapter_timecode']]
+            previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
         );
 
         $detailsGroup = new Group('editorFields', 'Details', true);
@@ -79,7 +80,12 @@ class ChallengePart extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group: $detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup), //web_url_path
         ];
-        $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
-        parent::__construct('challenge-part', 'Challenge Part', fields: $fields, preview: $preview, groups: $groups);
+        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
+        parent::__construct(self::getName(), 'Challenge Part', fields: $fields, preview: $preview, groups: $groups);
+    }
+
+    public static function getName(): string
+    {
+        return 'challenge-part';
     }
 }

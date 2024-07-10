@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models\Sanity;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\BrandField;
 
@@ -66,7 +67,12 @@ class Challenge extends BaseSanityModel
             new Field(FieldType::String, 'language', 'Language', hidden: "true",group:$detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true",group:$detailsGroup), //web_url_path
         ];
-        $preview = ['select' => ['title' => 'title', 'subtitle' => 'brand', 'media' => 'thumbnail']];
-        parent::__construct('challenge', 'Challenge', fields: $fields, preview: $preview, groups: $groups);
+        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
+        parent::__construct(self::getName(), 'Challenge', fields: $fields, preview: $preview, groups: $groups);
+    }
+
+    public static function getName(): string
+    {
+        return 'challenge';
     }
 }

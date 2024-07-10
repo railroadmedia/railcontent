@@ -20,14 +20,12 @@ class Essential extends BaseSanityModel
     {
         $fields = [
             new Field(FieldType::String, 'name'),
-//            new Field(
-//                             FieldType::Array,
-//                             'filter_types',
-//                description: 'Content types for which this essential will be a filter option',
-//                //of: new StringListItem(),
-//                options: ['list' => ['course','course-part']]
-//            ),
         ];
-        parent::__construct('essential', 'Essentials', $fields);
+        parent::__construct(self::getName(), 'Essentials', $fields);
+    }
+
+    public static function getName(): string
+    {
+        return 'essential';
     }
 }

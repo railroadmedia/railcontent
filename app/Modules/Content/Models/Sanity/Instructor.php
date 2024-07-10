@@ -22,6 +22,11 @@ class Instructor extends BaseSanityModel
             new Field(FieldType::String, 'name'),
             new Field(FieldType::Image, 'thumbnail_url'),
         ];
-        parent::__construct('instructor', 'Instructor', $fields);
+        parent::__construct(self::getName(), 'Instructor', $fields);
+    }
+
+    public static function getName(): string
+    {
+        return 'instructor';
     }
 }

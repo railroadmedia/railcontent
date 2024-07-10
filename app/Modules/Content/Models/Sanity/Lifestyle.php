@@ -21,6 +21,11 @@ class Lifestyle extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
         ];
-        parent::__construct('lifestyle', 'Lifestyle', $fields);
+        parent::__construct(self::getName(), 'Lifestyle', $fields);
+    }
+
+    public static function getName(): string
+    {
+        return 'lifestyle';
     }
 }

@@ -21,6 +21,11 @@ class Creativity extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
         ];
-        parent::__construct('creativity', 'Creativity', $fields);
+        parent::__construct(self::getName(), 'Creativity', $fields);
+    }
+
+    public static function getName(): string
+    {
+        return 'creativity';
     }
 }

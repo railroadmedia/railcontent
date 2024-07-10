@@ -21,6 +21,11 @@ class Theory extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'name'),
         ];
-        parent::__construct('theory', 'Theory', $fields);
+        parent::__construct(self::getName(), 'Theory', $fields);
+    }
+
+    public static function getName(): string
+    {
+        return 'theory';
     }
 }
