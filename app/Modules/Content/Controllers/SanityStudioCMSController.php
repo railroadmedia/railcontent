@@ -5,18 +5,46 @@ namespace App\Modules\Content\Controllers;
 use App\Http\Controllers\BaseController;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\Sanity\Artist;
+use App\Modules\Content\Models\Sanity\BackstageSecret;
+use App\Modules\Content\Models\Sanity\BehindTheScenes;
+use App\Modules\Content\Models\Sanity\BootCamp;
 use App\Modules\Content\Models\Sanity\Challenge;
 use App\Modules\Content\Models\Sanity\ChallengePart;
+use App\Modules\Content\Models\Sanity\Challenges;
 use App\Modules\Content\Models\Sanity\Course;
 use App\Modules\Content\Models\Sanity\CoursePart;
 use App\Modules\Content\Models\Sanity\Creativity;
+use App\Modules\Content\Models\Sanity\Diy;
+use App\Modules\Content\Models\Sanity\DrumFestInternational2022;
 use App\Modules\Content\Models\Sanity\Enums\Workspace;
+use App\Modules\Content\Models\Sanity\ExploringBeats;
+use App\Modules\Content\Models\Sanity\GearGuide;
 use App\Modules\Content\Models\Sanity\Genre;
+use App\Modules\Content\Models\Sanity\InRhythm;
 use App\Modules\Content\Models\Sanity\Instructor;
 use App\Modules\Content\Models\Sanity\Lifestyle;
+use App\Modules\Content\Models\Sanity\Live;
+use App\Modules\Content\Models\Sanity\OnTheRoad;
+use App\Modules\Content\Models\Sanity\Performance;
 use App\Modules\Content\Models\Sanity\Permission;
+use App\Modules\Content\Models\Sanity\PlayAlong;
+use App\Modules\Content\Models\Sanity\Podcast;
+use App\Modules\Content\Models\Sanity\QuestionAndAnswer;
+use App\Modules\Content\Models\Sanity\QuickTip;
+use App\Modules\Content\Models\Sanity\RhytmicAdventuresOfCaptainCarson;
+use App\Modules\Content\Models\Sanity\Rudiment;
+use App\Modules\Content\Models\Sanity\Solo;
 use App\Modules\Content\Models\Sanity\Song;
 use App\Modules\Content\Models\Sanity\Essential;
+use App\Modules\Content\Models\Sanity\Sonor;
+use App\Modules\Content\Models\Sanity\Spotlight;
+use App\Modules\Content\Models\Sanity\StudentCollaboration;
+use App\Modules\Content\Models\Sanity\StudentFocus;
+use App\Modules\Content\Models\Sanity\StudyTheGreats;
+use App\Modules\Content\Models\Sanity\Tama;
+use App\Modules\Content\Models\Sanity\TheHistoryOfElectronicDrums;
+use App\Modules\Content\Models\Sanity\RhytmsFromAnotherPlanet;
+use App\Modules\Content\Models\Sanity\PaisteCymbals;
 use App\Modules\Content\Models\Sanity\Theory;
 use App\Modules\Content\Models\Sanity\Topic;
 use App\Modules\Content\Models\Sanity\Venue;
@@ -45,6 +73,34 @@ class SanityStudioCMSController extends BaseController
             (new Song())->toArray(),
             (new Course())->toArray(),
             (new CoursePart())->toArray(),
+            (new QuickTip())->toArray(),
+            (new BootCamp())->toArray(),
+            (new StudentFocus())->toArray(),
+            (new PlayAlong())->toArray(),
+            (new Rudiment())->toArray(),
+            (new DrumFestInternational2022())->toArray(),
+            (new Spotlight())->toArray(),
+            (new TheHistoryOfElectronicDrums())->toArray(),
+            (new BackstageSecret())->toArray(),
+            (new QuestionAndAnswer())->toArray(),
+            (new StudentCollaboration())->toArray(),
+            (new Live())->toArray(),
+            (new Podcast())->toArray(),
+            (new Solo())->toArray(),
+            (new GearGuide())->toArray(),
+            (new Performance())->toArray(),
+            (new InRhythm())->toArray(),
+            (new Challenges())->toArray(),
+            (new OnTheRoad())->toArray(),
+            (new Diy())->toArray(),
+            (new RhytmicAdventuresOfCaptainCarson())->toArray(),
+            (new StudyTheGreats())->toArray(),
+            (new RhytmsFromAnotherPlanet())->toArray(),
+            (new Tama())->toArray(),
+            (new PaisteCymbals())->toArray(),
+            (new BehindTheScenes())->toArray(),
+            (new ExploringBeats())->toArray(),
+            (new Sonor())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),
             (new Permission())->toArray(),

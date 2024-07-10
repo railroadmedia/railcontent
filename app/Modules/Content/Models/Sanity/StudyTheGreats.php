@@ -13,7 +13,7 @@ use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
- * Defines the schema structure for a Course part document type in Sanity.
+ * Defines the schema structure for a Study The Greats document type in Sanity.
  *
  * @property string       $type
  * @property string       $name
@@ -21,7 +21,7 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string      $icon
  * @property array<Field> $fields
  */
-class CoursePart extends BaseSanityModel
+class StudyTheGreats extends BaseSanityModel
 {
     public function __construct()
     {
@@ -108,11 +108,11 @@ class CoursePart extends BaseSanityModel
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group: $detailsGroup),
         ];
         $preview = new ListItemPreview('title', 'brand', 'thumbnail');
-        parent::__construct(self::getName(), 'Course Part', fields: $fields, preview: $preview, groups: $groups);
+        parent::__construct(self::getName(), 'Study The Greats', fields: $fields, preview: $preview, groups: $groups);
     }
 
     public static function getName(): string
     {
-        return 'course-part';
+        return 'study-the-greats';
     }
 }
