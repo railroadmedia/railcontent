@@ -57,11 +57,11 @@ function handleUploadError() {
             @uploadSuccess="handleUploadDone" @uploadError="handleUploadError" @onUploaderClose="openUploadForm" />
 
         <div
-            class="hover:tw-underline tw-flex tw-flex-col lg:tw-pr-[42px] tw-w-[200px] tw-shrink-0 tw-mx-auto tw-items-center sm:tw-items-start">
+            class="hover:tw-underline tw-flex tw-flex-col sm:tw-pr-[42px] tw-w-[200px] tw-shrink-0 tw-mx-auto tw-items-center sm:tw-items-start">
             <button v-on:click="openUploadForm"
-                :class="type === 'playlist' ? 'tw-w-[158px] tw-h-[158px] tw-rounded-lg tw-overflow-hidden' : ''">
+                :class="type === 'playlist' ? 'tw-w-[100px] sm:tw-w-[158px] tw-h-[100px] sm:tw-h-[158px] tw-rounded-lg tw-overflow-hidden' : ''">
 
-                <!-- Image Conatiner -->
+                <!-- Image Container -->
                 <template v-if="type === 'playlist'">
                     <div v-if="imgUrlRef" class="tw-relative tw-w-full tw-h-full tw-aspect-square">
                         <img :src="`https://musora.com/cdn-cgi/image/width=200/${imgUrlRef}`" alt="playlist thumbnail"

@@ -103,7 +103,7 @@ const onEnter = (e) => {
 };
 
 const getBaseInputStyles = () => `
-    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
+    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-black dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
   `
 
 onUpdated(() => {
