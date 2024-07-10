@@ -57,27 +57,33 @@ onUnmounted(() => {
           tw-w-full
           tw-rounded-[8px]
           tw-z-30
-          tw-py-[30px]
+          tw-p-[30px]
           tw-flex
           tw-flex-col
           tw-relative
           tw-mx-[16px]
           md:tw-mx-[28px]
+          tw-bg-white
+          dark:tw-bg-[#081825]
+          tw-border
+          tw-border-[#445F74]
+          dark:tw-border-[#445F74]
         "
-        :class="classOverride ? classOverride : 'tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825]'"
+        :class="classOverride"
       >
         <div
           class="
             tw-flex
             tw-flex-row
             tw-justify-between
+            tw-items-start
             tw-text-white
-            tw-px-[40px]
+            tw-mb-5
           "
         >
-          <h3 v-if="title && title.length" class="tw-mb-[24px] tw-text-center tw-w-full tw-text-black dark:tw-text-white tw-font-bold">{{ title }}</h3>
-          <button @click="onClose" class="tw-absolute tw-right-[12px] tw-top-[12px] tw-text-[#000C17] dark:tw-text-white tw-z-20">
-            <XIcon class="tw-h-[30px] tw-w-[30px]" />
+          <h3 class="tw-w-full tw-text-black dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl" v-html="title"></h3>
+          <button @click="onClose" class="tw-text-[#000C17] dark:tw-text-white tw-z-20">
+            <XIcon class="tw-h-[28px] md:tw-h-[36px] tw-w-[28px] md:tw-w-[36px]" />
           </button>
         </div>
         <slot></slot>
