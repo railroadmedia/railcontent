@@ -11,6 +11,7 @@ import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outlin
 import { XIcon } from "@heroicons/vue/solid";
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
 import AddDuplicate from './AddDuplicate.vue';
+import MuButton from '../../Button/MuButton';
 
 const props = defineProps({
     brand: {
@@ -83,6 +84,16 @@ const instrumentless = computed(() => {
 const title = computed(() => {
     return props.content.title || props.content.name;
 });
+
+const disableSave = computed(() => {
+    if(props.content.type === 'song'){
+        return selectedPlaylists.value.length === 0 || (!addInstrumentlessToggle.value && !addFullSongToggle.value)
+    } else if(props.content.type === 'routine'){
+        return selectedPlaylists.value.length === 0 || (!includeHighRoutine.value && !includeLowRoutine.value)
+    } else {
+        return selectedPlaylists.value.length === 0 || (importAll.value && totalItems.value > 300)
+    }
+})
 
 const addRemovePlaylistSelection = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
@@ -290,17 +301,12 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
-
         <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
             @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
 
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-top-0 tw-left-0 tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
-        </div>
-
-        <div class="tw-relative tw-w-full">
-            <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
         </div>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-2 lg:tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
@@ -317,7 +323,7 @@ onMounted(() => {
                 </fieldset>
             </div>
             <p v-if="importAll && totalItems > 300" class="tw-text-left tw-text-[14px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">
-                LIMIT EXCEEDED. Please add child lessons to playlist individually. 
+                LIMIT EXCEEDED. Please add child lessons to playlist individually.
             </p>
         </div>
 
@@ -422,37 +428,17 @@ onMounted(() => {
             </template>
         </Table>
 
-        <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
-            <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#00101D] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] disabled:tw-opacity-40"
+        <div class="tw-w-full tw-flex tw-justify-end tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
+            <MuButton
+                @click="handleCreate"
+                variant="secondary"
+                class="tw-mr-[10px]"
                 :disabled="props.content.type === 'song' && (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false) || (importAll && totalItems > 300)"
             >
-                <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
-                <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
-            </button>
+                <PlusIcon class="tw-w-[15px] tw-h-[15px]" /> Create Playlist
+            </MuButton>
             <!--Save Buttons -->
-            <button v-if="props.content.type === 'song'"
-                    @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
-                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) "
-            >
-                SAVE
-            </button>
-            <button v-else-if="props.content.type === 'routine'"
-                    @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
-                    :disabled="selectedPlaylists.length === 0 || (includeHighRoutine === false && includeLowRoutine === false)"
-            >
-                SAVE
-            </button>
-            <button v-else
-                    @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
-                    :disabled="selectedPlaylists.length === 0 || (importAll && totalItems > 300)"
-            >
-                SAVE
-            </button>
-
+            <MuButton @click="handleSaveItem" :disabled="disableSave">Save</MuButton>
         </div>
     </div>
 </template>

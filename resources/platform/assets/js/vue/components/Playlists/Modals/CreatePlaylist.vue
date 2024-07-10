@@ -8,6 +8,7 @@
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import ThumbnailUpload from '../../ThumbnailUpload/ThumbnailUpload.vue';
+    import MuButton from '../../Button/MuButton';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
@@ -270,11 +271,6 @@
 </script>
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-text-[#0D0D0D] dark:tw-text-white">
-        <h2 class="tw-font-bold tw-font-open-sans tw-text-[24px] tw-text-center">
-            <span v-if="mode === 'create'">Create Playlist</span>
-            <span v-if="mode === 'edit'">Edit Playlist</span>
-            <span v-if="mode === 'duplicate'">Duplicate Playlist</span>
-        </h2>
         <div v-if="playlist.hasAddItemCallback && playlist.importAssignments" class="tw-pt-[24px]">
             <p v-if="playlist.additionalItems > 0">
                 <strong>{{ playlist.name }}</strong> with <strong>{{ playlist.additionalItems }}</strong> assignment items will be added to your new playlist
@@ -283,7 +279,7 @@
                 <strong>{{ playlist.name }}</strong> will be added to your new playlist
             </p>
         </div>
-        <div class="tw-flex tw-pt-[24px] tw-flex-col sm:tw-flex-row">
+        <div class="tw-flex tw-flex-col sm:tw-flex-row">
             <ThumbnailUpload
                 :token="token"
                 type='playlist'
@@ -295,7 +291,7 @@
                     :initialValue="state.name"
                     placeholder="Playlist Title"
                     :remove-default-input-styles="true"
-                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
+                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full dark:tw-bg-black tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[13px] sm:tw-text-[14px]"
                     @onChange="handleTitleChange"
                 />
                 <Dropdown
@@ -308,15 +304,15 @@
                     id="playlist-description"
                     name="playlistDescription"
                     placeholder="Playlist Description"
-                    class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-py-[9px]"
+                    class="tw-no-scrollbar tw-text-[13px] sm:tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white dark:tw-bg-black tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-py-[9px]"
                     v-model="state.description"
                     @change="handleDescriptionChange"
                 ></textarea>
             </div>
         </div>
-        <div class="tw-pt-[30px] tw-flex tw-flex-col sm:tw-flex-row tw-justify-between">
-            <button @click="() => emit('onCloseModal')" class="tw-order-1 sm:tw-order-none tw-btn-primary tw-text-center tw-justify-center tw-items-center tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">CANCEL</button>
-            <button @click="() => handleConfirm()" :class="`tw-mb-2 sm:tw-mb-0 sm:tw-ml-4 tw-btn-primary tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-text-center tw-flex tw-justify-center tw-items-center`"><span>{{ props.modalProps.modalType === 'create' ? 'create' : props.modalProps.modalType === 'duplicate' ? 'duplicate' : 'save' }}</span></button>
+        <div class="tw-pt-[30px] tw-flex tw-justify-end">
+            <MuButton variant="secondary" @click="() => emit('onCloseModal')" class="tw-mr-[10px]">Cancel</MuButton>
+            <MuButton @click="() => handleConfirm()">{{ props.modalProps.modalType === 'create' ? 'create' : props.modalProps.modalType === 'duplicate' ? 'duplicate' : 'save' }}</MuButton>
         </div>
     </div>
 </template>
