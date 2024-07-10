@@ -74,9 +74,9 @@ class SalesController extends BaseController
     {
         return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'promoPage' => 'true', 'recaptchaKey' => config('recaptcha.key')]);
     }
-    public function drumMonth()
+    public function practiceAnywhere()
     {
-        return view('drumeo.sales.drum-month', ['theme' => 'drumeo', 'promoVersion' => true, 'promoPage' => 'true', ]);
+        return view('drumeo.sales.practice-anywhere', ['theme' => 'drumeo', 'promoVersion' => true, 'promoPage' => 'true', 'smallPromoBanner' => 'true', ]);
     }
     public function restart()
     {
@@ -371,6 +371,11 @@ class SalesController extends BaseController
     public function easyRudimentsPlaylist()
     {
         return view('drumeo.pages.easy-rudiments-playlist', ['theme' => 'drumeo']);
+    }
+
+    public function fiveforthreeBundle()
+    {
+        return view('drumeo.products.5-for-3-bundle', ['theme' => 'drumeo']);
     }
 
     public function vote()

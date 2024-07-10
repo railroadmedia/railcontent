@@ -217,6 +217,12 @@
     @include("pianote.sales.partials._nav", [
         "cartVersion" => true
     ])
+    @include('_partials.components.shop.promo-banner-3', [
+        "name" => "Pianote BookBag",
+        "fullPrice" => floatval($productPrices['pianote-book-bag']->price),
+        "price" => floatval($productPrices['pianote-book-bag']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">

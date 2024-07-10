@@ -27,6 +27,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'new-drummers',
             'padstand',
             'quietpad',
+            'quietpad-colorburst',
             'quietkick',
             'rock-drumming-masterclass',
             'successful-drumming',
@@ -46,6 +47,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         Route::get('/30-day-chops/deal', [SalesController::class, 'thirtyDayChopsDeal']);
         Route::get('/30-day-independence', [SalesController::class, 'thirtyDayIndependence']);
         Route::get('/30-day-independence/deal', [SalesController::class, 'thirtyDayIndependenceDeal']);
+        Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle']);
         Route::get('/{productslug}', [ShopController::class, 'product']);
     });
 });

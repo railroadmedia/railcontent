@@ -7,7 +7,7 @@
     <meta property="og:description" content="Improve your kick foot anywhere.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>    
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 
     @include('_partials.layout._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
@@ -81,7 +81,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => "QuietKick",
                 "fullPrice" => floatval($productPrices['quietkick']->price),
                 "price" => $memberPrice,

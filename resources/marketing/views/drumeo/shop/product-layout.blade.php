@@ -8,11 +8,11 @@
 @endsection
 
 @section('layout-body')
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => $product->name,
                 "fullPrice" => $product->price,
                 "price" => $product->discounted_price,
-                "noBreadcrumb" => true
+                "noBreadcrumb" => true,
             ])
     <div class="clearfix container mx-auto max-w-6xl relative pt-5 md:pt-9 lg:pt-11">
         <div class="lg:flex">

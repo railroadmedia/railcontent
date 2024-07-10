@@ -116,7 +116,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Drumeo PadStand",
         "fullPrice" => floatval($productPrices['padstand']->price),
         "price" => floatval($productPrices['padstand']->discounted_price),

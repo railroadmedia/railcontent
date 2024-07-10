@@ -235,7 +235,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
                 "name" => "30-Day Drummer",
                 "fullPrice" => floatval($productPrices['30-day-drummer-3']->price),
                 "price" => floatval($productPrices['30-day-drummer-3']->discounted_price),
@@ -387,19 +387,19 @@ $items = [
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy" 
+                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>1.6M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" 
+                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>19M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" 
+                        <img class="h-6 sm:h-8 opacity-0 transition duration-300 ease-in-out" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy"
                     onload="this.classList.remove('opacity-0')" >
                         <h3 class="mt-2"><strong>461k</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>

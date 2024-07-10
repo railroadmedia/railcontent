@@ -10,28 +10,32 @@
                     @elseif(!empty($bundle['specialW']))
                         lg:pl-16 xl:pl-20 py-5 sm:py-6 lg:py-8
                     @else
-                        py-6 lg:py-7
+                        sm:pl-12 lg:pl-16 xl:pl-20 py-5 sm:py-10 lg:py-12
                      @endif "
-                        @if(empty($bundle['img'])) style="background:linear-gradient(to bottom, {{ $bundle['bgColor'] }});" @endif >
+                        @if(empty($bundle['img'])) style="{{ $bundle['bgColor'] }}" @endif >
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                              @if(isset($bundle['logo']))
-                            <img class="h-24 sm:h-24 lg:h-32" src="{{ $bundle['logo'] }}">
+                                <img class="@if(isset($bundle['logoStyle'])) {{ $bundle['logoStyle'] }} @else h-7 sm:h-7 lg:h-10 @endif" src="{{ $bundle['logo'] }}">
+                            @endif
+                             @if(isset($bundle['spread']))
+                                 <br>
+                                <img class="@if(isset($bundle['imgStyle'])) {{ $bundle['imgStyle'] }} @endif  h-36 sm:h-32 lg:h-40 xl:h-48 mt-5" src="{{ $bundle['spread'] }}">
                             @endif
                             @if(isset($bundle['title']))
                                 <h2 class="leading-none"><strong>{{ $bundle['title'] }}</strong></h2>
                             @endif
-                            <p class="leading-tight mb-5 mt-1 sm:mt-3 text-sm italic">{!!$bundle['desc'] !!}</p>
+                            <p class="leading-tight mb-3 mt-1 sm:mt-3 text-sm italic">{!!$bundle['desc'] !!}</p>
                              @if(!empty($bundle['price']))
-                                 <h4 class="inline-block leading-none mb-3">
+                                 <h4 class="inline-block leading-none mb-5">
                                     @if(!empty($bundle['soldOut']))
                                         <strong>{{$bundle['price']}}</strong>
                                     @else
-                                        @if($bundle['discountedPrice'] < $bundle['price'])<span class="opacity-60"><s>${{ $bundle['price'] }}</s></span>&nbsp;@endif
+                                        @if($bundle['discountedPrice'] < $bundle['price'])<strong class="opacity-60"><s>${{ $bundle['price'] }}</s></strong>&nbsp;@endif
                                         <strong>${{$bundle['discountedPrice']}}</strong>
                                     @endif
                                 </h4>
                              @endif
-                             <div class="join smaller w-full text-white p-3 sm:max-w-md w-full" style="background:{{$bundle['buttonColor']}};">
+                             <div class="join smaller white w-full p-3 sm:max-w-md w-full">
                                 @if(!empty($bundle['buttonText']))
                                      {{ $bundle['buttonText'] }}
                                 @elseif(!empty($bundle['soldOut']))
@@ -42,7 +46,7 @@
                             </div><br>
                         </div>
                         @if(!empty($bundle['img']))
-                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:30% 0;background-image:url('{{ $bundle['img'] }}');"></div>
+                            <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-position:30% 0;background-image:url('{{ $bundle['img'] }}');"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-image:url('{{ $bundle['imgM'] }}');"></div>
                         @endif
                     </div>

@@ -83,7 +83,7 @@
 //     }
     @endphp
 
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-3', [
         "name" => "Christmas Songbook",
         "fullPrice" => floatval($productPrices['christmas-songbook']->price),
         "price" => $discountedPrice,

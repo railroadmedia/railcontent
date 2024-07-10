@@ -66,7 +66,7 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner', [
+    @include('_partials.components.shop.promo-banner-2', [
         "name" => "Beyond Beginner Drumming",
         "fullPrice" => floatval($productPrices['beyond-beginner-drumming']->price),
         "price" => floatval($productPrices['beyond-beginner-drumming']->discounted_price),
