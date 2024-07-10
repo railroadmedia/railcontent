@@ -27,12 +27,12 @@ x-data="{ open: false }">
         @endif
         @if(!$soldOut)
             @if(!empty($sizes) && count($sizes) > 0)
-                <p class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm shadow-md"
+                <p class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1.5 leading-none text-sm shadow-md"
                     x-on:click="open = !open;"
                 ><i class="fas fa-cart-plus"></i></p>
             @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
                 <p
-                    class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1 text-sm shadow-md"
+                    class="online-atc vue-add-to-cart add-to-cart-button text-black bg-white rounded-full absolute top-0 right-0 m-2 z-20 px-1.5 py-1.5 leading-none text-sm shadow-md"
                     href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                     data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                     value="?products[{{ $sku }}]=1"

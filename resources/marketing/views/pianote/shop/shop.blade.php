@@ -84,14 +84,14 @@
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
                         },
-                        perPage: 3.5,
+                        perPage: 4,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             1023: {
-                                perPage: 2.5,
+                                perPage: 3,
                             },
                             767: {
                                 perPage: 1.5,
