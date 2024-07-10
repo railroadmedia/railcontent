@@ -212,7 +212,7 @@
           $fullPrice = 499;
      }
      else {
-          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&locked=true';
+          $orderUrl = '/ecommerce/add-to-cart?products[alesis-ekit]=1&products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=_ALESISKIT&locked=true';
           $fullPrice = 1005.95;
      }
     @endphp
