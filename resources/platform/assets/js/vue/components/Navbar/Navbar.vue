@@ -130,9 +130,9 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
     </div>
 
     <SearchModal
-      @onClose="() => toggleSearchModal(false)"
-      :brand="brand"
-      v-if="showSearchModal"
+        v-if="showSearchModal"
+        @onClose="() => toggleSearchModal(false)"
+        :brand="brand"
     />
   </nav>
 </template>
