@@ -21,6 +21,14 @@ class Post extends BaseSanityModel
         $fields = [
             new Field(FieldType::String, 'title', 'Title'),
         ];
-        parent::__construct('post', 'Post', $fields);
+        parent::__construct(self::getName(), 'Post', $fields);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getName(): string
+    {
+        return 'post';
     }
 }

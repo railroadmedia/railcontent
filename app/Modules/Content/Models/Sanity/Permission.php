@@ -24,6 +24,14 @@ class Permission extends BaseSanityModel
             new BrandField(),
             new Field(FieldType::Number, 'railcontent_id', 'Railcontent ID', readOnly: "true"),
         ];
-        parent::__construct('permission', 'Permission', $fields);
+        parent::__construct(self::getName(), 'Permission', $fields);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getName(): string
+    {
+        return 'permission';
     }
 }

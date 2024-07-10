@@ -4,6 +4,7 @@ namespace App\Modules\Content\Models\Sanity;
 
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
+use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 
 /**
  * Abstract class to represent a document type's schema in Sanity
@@ -11,32 +12,27 @@ use App\Modules\Content\Models\Sanity\Structure\Group;
 abstract class BaseSanityModel
 {
     public string $type = 'document';
-    public string $name;
-    public string $title;
-    public ?string $icon;
-    /** @var array<Field> */
-    public array $fields;
-    /** @var array<Group>|null */
-    public ?array $groups;
-    public ?array $preview;
 
     /**
-     * @param  string  $name
-     * @param  string  $title
      * @param  array<Field>  $fields
      * @param  array<Group>|null  $groups
-     * @param  string|null  $icon
      */
-    public function __construct(string $name, string $title, array $fields, ?array $groups = null, ?string $icon = null, ?array $preview = null, ?string $type = 'document')
-    {
-        $this->name = $name;
-        $this->title = $title;
-        $this->fields = $fields;
-        $this->groups = $groups;
-        $this->icon = $icon;
-        $this->preview = $preview;
-        $this->type = $type;
+    public function __construct(
+        public string $name,
+        public string $title,
+        public array $fields,
+        public ?array $groups = null,
+        public ?string $icon = null,
+        public ?ListItemPreview $preview = null
+    ) {
     }
+
+    /**
+     * Get the name of this model (document type)
+     *
+     * @return string
+     */
+    abstract public static function getName(): string;
 
     /**
      * Get the array-formatted values for this schema, so that it can be rendered
@@ -53,15 +49,15 @@ abstract class BaseSanityModel
                 return $field->toArray();
             }, $this->fields)
         ];
-        if($this->preview) {
-            $required['preview'] = $this->preview;
-        }
 
         $optional = [];
         if ($this->groups) {
             $optional['groups'] = array_map(function (Group $group) {
                 return $group->toArray();
             }, $this->groups);
+        }
+        if ($this->preview) {
+            $optional['preview'] = $this->preview->toArray();
         }
         return array_merge($required, $optional);
     }

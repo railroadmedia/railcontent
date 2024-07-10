@@ -22,6 +22,14 @@ class Artist extends BaseSanityModel
             new Field(FieldType::String, 'name'),
             new Field(FieldType::Image, 'thumbnail_url'),
         ];
-        parent::__construct('artist', 'Artist', $fields);
+        parent::__construct(self::getName(), 'Artist', $fields);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function getName(): string
+    {
+        return 'artist';
     }
 }
