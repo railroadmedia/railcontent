@@ -44,7 +44,7 @@
                         'visible' => 1,
                         'price' => 240,
                         'discountedPrice' => 180,
-                        'bgColor' => '#FF005C, #3418E1',
+                        'bgColor' => 'background: linear-gradient(45deg, #3418E1, #FF005C)',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp',
                         'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-bundle2.webp',
                     ],
@@ -139,15 +139,16 @@
                 </div>
             </div>
         </section>
+
         <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <div class="container">
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Online Drum Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
-                    "badge" => "7-Day Free Trial",
-                     "discounted_price" => 240,
-                        "href" => "/",
+                    "badge" => "Most Popular",
+                     "discounted_price" => 180,
+                        "href" => "/practice-anywhere",
                      "instructor" => "Award-Winning Membership",
                      "price" => 240,
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",

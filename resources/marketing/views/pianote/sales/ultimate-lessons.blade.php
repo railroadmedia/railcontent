@@ -212,7 +212,7 @@
                         $bonuses = [
                             [
                                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
-                                'description' => 'Level up your skills with the lessons, teachers, and practice tools.',
+                                'description' => "Level up your skills with Pianote - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
                                 'price' => '240',
                                 'customText' => '$180',
                                 'customSubText' => 'true'

@@ -174,7 +174,7 @@
                     [
                     'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/drumeo/promos/may/card-annual.png',
                     'title' => 'Drumeo',
-                    'description' => '1 year of unlimited drum lessons',
+                    'description' => "Level up your skills with Drumeo - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
                     'price' => 240,
                     'customText' => '$180',
                     'customSubText' => 'true',
@@ -322,7 +322,7 @@
                             <div class="relative px-3 text-center"
                                 @mouseenter="hoverIndex = index"
                                 @mouseleave="hoverIndex = null"
-                                @click="selectedIndex = index; selectedProduct = colors[color][0]; console.log('Selected Product:', selectedProduct);">
+                                @click="selectedIndex = index; selectedProduct = colors[color][0];">
                                 <div class="relative inline-block">
                                     <img :class="{
                                             'scale-105 border-2 border-white-500 cursor-pointer': hoverIndex === index,

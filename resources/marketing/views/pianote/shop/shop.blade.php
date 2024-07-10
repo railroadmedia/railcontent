@@ -11,6 +11,12 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
+<style>
+.splide__arrow.pianote svg {
+    fill: #F61A30 !important;
+    }
+</style>
+
 @section('x-data')
     filter: '{{ $category !== 'shop' ? $category : 'all' }}',
 @endsection
@@ -42,7 +48,7 @@
                         'visible' => 1,
                         'price' => 240,
                         'discountedPrice' => 180,
-                        'bgColor' => '#4B41BC, #8032FF',
+                        'bgColor' => 'background: linear-gradient(45deg, #4B41BC, #8032FF)',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ul-logo-horizontal.webp',
                         'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ulimate-lessons-bundle.webp',
                     ],
@@ -73,7 +79,7 @@
                 init() {
                     new Splide(this.$refs.splide, {
                         classes: {
-                                arrow: 'splide__arrow bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
+                                arrow: 'splide__arrow pianote bg-white opacity-100 top-[50%] shadow-lg h-11 w-11 text-[#0B76DB]',
                                 prev: 'hidden',
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
@@ -130,11 +136,11 @@
                 <h5 class="leading-tight mb-4 md:mb-5"><strong><i class="fas fa-video text-{{ $brand }} mr-1"></i> Piano Lessons</strong></h5>
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
-                    "badge" => "7-Day Free Trial",
+                    "badge" => "Most Popular",
                       "price" => 240,
-                        "href" => "/",
+                        "href" => "/ultimate-lessons",
                      "instructor" => "Unlimited Piano Lessons",
-                      "discounted_price" => 240,
+                      "discounted_price" => 180,
                       "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                       "title" => "Pianote Membership",
                       'soldOut' => false,

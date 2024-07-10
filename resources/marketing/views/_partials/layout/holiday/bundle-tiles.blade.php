@@ -12,7 +12,7 @@
                     @else
                         sm:pl-12 lg:pl-16 xl:pl-20 py-5 sm:py-10 lg:py-12
                      @endif "
-                        @if(empty($bundle['img'])) style="background:linear-gradient(to bottom, {{ $bundle['bgColor'] }});" @endif >
+                        @if(empty($bundle['img'])) style="{{ $bundle['bgColor'] }}" @endif >
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                              @if(isset($bundle['logo']))
                                 <img class="@if(isset($bundle['logoStyle'])) {{ $bundle['logoStyle'] }} @else h-7 sm:h-7 lg:h-10 @endif" src="{{ $bundle['logo'] }}">
