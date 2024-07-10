@@ -105,12 +105,7 @@ export default {
       </span>
     </div>
 
-    <ModalRenderer v-if="isReviewModalOpen" @onClose="() => handleReviewOpen(false)">
-      <button @click="() => handleReviewOpen(false)" class="tw-absolute tw-right-3 tw-top-3">
-          <XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" />
-      </button>
-      <StudentReviewModal :brand="brand" />
-    </ModalRenderer>
+    <StudentReviewModal v-if="isReviewModalOpen" :brand="brand" @onCloseStudentReviewModal="handleReviewOpen(false)" />
 
     <AvatarMenu v-if="isUserMenuOpen" @onCloseMenu="() => handleMenuOpen(false)">
       <MenuHeader
