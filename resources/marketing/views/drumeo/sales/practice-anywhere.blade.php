@@ -299,11 +299,11 @@
                     </div>
                 @endforeach
             </div>
-             
-            
+
+
             <div x-data="{
                 selectedIndex: null,
-                selectedProduct: '',
+                selectedProduct: '#0B76DB',
                 colors: {
                     '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Purple'],
                     '#3CDBC0': ['quietpad-color-burst-turquoise', 'Triplet', 'Teal'],
@@ -319,16 +319,12 @@
                     </p>
                     <div class="flex flex-row">
                         <template x-for="(color, index) in Object.keys(colors)" :key="index">
-                            <div class="relative px-3 text-center"
-                                @mouseenter="hoverIndex = index"
-                                @mouseleave="hoverIndex = null"
-                                @click="selectedIndex = index; selectedProduct = colors[color][0];">
-                                <div class="relative inline-block">
-                                    <img :class="{
-                                            'scale-105 border-2 border-white-500 cursor-pointer': hoverIndex === index,
-                                            'border-transparent': hoverIndex !== index
-                                        }"
-                                        class="rounded-full border-4 transition-transform duration-300 ease-in-out"
+                            <div class="relative cursor-pointer"
+                                @click="selectedIndex = index; selectedProduct = color;">
+                                <div class="relative inline-block rounded-full sm:p-1 border-4 transition-all border-transparent hover:border-white hover:sm:border-opacity-50"
+                                    :class="{ 'border-white': selectedIndex === index, }">
+                                    <img
+                                        class="rounded-full"
                                         :style="'background-color:' + color"
                                         src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/flipper-transparent.png">
                                     <svg x-show="selectedIndex === index" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-11 h-11 text-white m-auto"
@@ -337,10 +333,10 @@
                                         <path d="M20 6L9 17l-5-5" />
                                     </svg>
                                 </div>
-                                <div class="mt-2">
-                                    <p class="text-white" x-text="colors[color][1]"></p>
-                                    <p class="text-white" x-text="colors[color][2]"></p>
-                                </div>
+                                <p class="mt-2 leading-tight text-xs sm:text-base">
+                                    <em x-text="colors[color][1]"></em><br>
+                                    <strong class="font-black" x-text="colors[color][2]"></strong>
+                                </p>
                             </div>
                         </template>
                     </div>
@@ -353,11 +349,11 @@
 
                 <a role="link" aria-label="Get Started" class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                     style="padding: 20px 10px;"
-                    :href="`/ecommerce/add-to-cart?products[DLM-1-year]=1&products[${selectedProduct}]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true`">
+                    :href="`/ecommerce/add-to-cart?products[DLM-1-year]=1&products[${colors[selectedProduct][0]}]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true`">
                     GET Started
                 </a>
             </div>
-           
+
             <br>
             <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true">
             <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 2 free digital lesson packs.</em></u></p></a>
