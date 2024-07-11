@@ -3,6 +3,7 @@
 namespace Modules\Content\Models\Sanity\Structure;
 
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Models\Sanity\BaseSanityModel;
 use App\Modules\Content\Models\Sanity\Enums\FieldType;
 use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
@@ -18,7 +19,7 @@ class BrandField extends Field
     public function __construct(
         public Group|array|null $group = null,
     ) {
-        parent::__construct(FieldType::String, 'brand', options:['list' => array_column(Brand::cases(), 'value')], group: $this->group, validation: "(rule) => rule.required()");
+        parent::__construct(FieldType::String, 'brand', options:['list' => array_column(Brand::cases(), 'value')], group: $this->group, validation: BaseSanityModel::RULE_REQUIRED);
     }
 
 }

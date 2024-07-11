@@ -7,7 +7,6 @@ use App\Modules\Content\Models\Sanity\Structure\Field;
 use App\Modules\Content\Models\Sanity\Structure\Group;
 use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
-use Modules\Content\Models\Sanity\Structure\BrandField;
 use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
@@ -19,12 +18,11 @@ use Modules\Content\Models\Sanity\Structure\ListObject;
  * @property ?string $icon
  * @property array<Field> $fields
  */
-class Song extends BaseSanityModel
+class Song extends BaseSanityContentTypeModel
 {
     public function __construct()
     {
         $genreReference = new Reference([['type' => 'genre']], options: ['aiAssist' => ['embeddingsIndex' => 'genre-index']]);
-        $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
 
         $resourceList = new ListObject(
             fields: [new Field(FieldType::String, 'resource_name'),
@@ -44,24 +42,9 @@ class Song extends BaseSanityModel
             $detailsGroup,
             $openAIGroup,
         ];
+        $defaultFields = $this->getCommonFields($detailsGroup, includeDescription: false);
 
         $fields = [
-            new Field(FieldType::String, 'title', validation: "(rule) => rule.required()", group:$detailsGroup),
-            new Field(FieldType::Slug, 'slug', options:['source' => 'title','isUnique' => 'IsUniqueAcrossBrand'], hidden: "({document}) => !document?.title,", group:$detailsGroup),
-            new BrandField($detailsGroup),
-            new Field(FieldType::Datetime, 'published_on', options: ['dateformat' => 'YYYY-MM-DD '], group:$detailsGroup),
-            new Field(FieldType::Array, 'permission', 'Permissions', of: $permissionReference, inputComponent: 'RolesBasedPermissionsInput', group:$detailsGroup),
-            new Field(
-                FieldType::Number,
-                'difficulty',
-                validation: "rule => rule.min(0).max(10)",
-                inputComponent: 'DifficultyInput',
-                group:$detailsGroup
-            ),
-            new Field(FieldType::String, 'difficulty_string', 'Difficulty String', readOnly: "true", group:$detailsGroup),
-           // new Field(FieldType::Array, 'description', 'Description', of:$blockList),
-            new Field(FieldType::Number, 'xp', 'XP', validation: "rule => rule.min(0)", group:$detailsGroup),
-            new Field(FieldType::Number, 'total_xp', 'Total XP', hidden: "({document}) => !document?.xp", readOnly: "true", group:$detailsGroup),
             new Field(FieldType::Number, 'released', 'Year Released', validation: "rule => rule.min(0).max(new Date().getFullYear())", group:$detailsGroup),
             new Field(FieldType::String, 'released_year_ai', 'Year Released AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group:$openAIGroup),
@@ -70,20 +53,16 @@ class Song extends BaseSanityModel
             new Field(FieldType::String, 'transcriber_name', 'Transcribed By', group:$detailsGroup),
             new Field(FieldType::Boolean, 'instrumentless', 'Is instrumentless', group:$detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in new feed', group:$detailsGroup),
-            new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group:$detailsGroup),
             new Field(FieldType::Reference, 'artist', 'Artist', '', to: 'artist', options: ['aiAssist' => ['embeddingsIndex' => 'artists-index']], group:$detailsGroup),
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference, group:$detailsGroup),
             new Field(FieldType::Array, 'soundslice', 'Soundslice', of: $soundsliceList, inputComponent: 'ArrayInput', group:$detailsGroup),
             new Field(FieldType::Number, 'child_count', 'Child count', hidden: "({document}) => !document?.soundslice", readOnly: "true", group:$detailsGroup),
             new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
-            new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group:$detailsGroup),
-            new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group:$detailsGroup), //web_url_path
-            new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group:$detailsGroup),
             new Field(FieldType::String, 'language', 'Language', hidden: "true", group:$detailsGroup),
             new Field(FieldType::Number, 'popularity', 'Popularity', readOnly: "true", group:$detailsGroup), //web_url_path
         ];
-        $preview = new ListItemPreview('title', 'brand', 'thumbnail');
-        parent::__construct(self::getName(), 'Song', fields: $fields, groups: $groups, preview: $preview);
+        $fields = array_merge($defaultFields, $fields);
+        parent::__construct(self::getName(), 'Song', fields: $fields, groups: $groups, preview: $this->getDefaultPreview());
     }
 
     /**

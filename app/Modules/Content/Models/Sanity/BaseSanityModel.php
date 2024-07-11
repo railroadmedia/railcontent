@@ -13,6 +13,8 @@ abstract class BaseSanityModel
 {
     public string $type = 'document';
 
+    const RULE_REQUIRED = "(rule) => rule.required()";
+
     /**
      * @param  array<Field>  $fields
      * @param  array<Group>|null  $groups
@@ -23,7 +25,8 @@ abstract class BaseSanityModel
         public array $fields,
         public ?array $groups = null,
         public ?string $icon = null,
-        public ?ListItemPreview $preview = null
+        public ?ListItemPreview $preview = null,
+        public bool $readOnly = false,
     ) {
     }
 
@@ -49,16 +52,16 @@ abstract class BaseSanityModel
                 return $field->toArray();
             }, $this->fields)
         ];
-
+        if($this->preview) {
+            $required['preview'] = $this->preview->toArray();
+        }
         $optional = [];
         if ($this->groups) {
             $optional['groups'] = array_map(function (Group $group) {
                 return $group->toArray();
             }, $this->groups);
         }
-        if ($this->preview) {
-            $optional['preview'] = $this->preview->toArray();
-        }
+        $optional['readOnly'] = $this->readOnly;
         return array_merge($required, $optional);
     }
 }

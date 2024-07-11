@@ -13,6 +13,8 @@ use App\Modules\Content\Models\Sanity\Venue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Modules\Content\Models\Sanity\License;
+use App\Modules\Content\Models\Sanity\Publisher;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\PermissionService;
 
@@ -31,8 +33,11 @@ class SanityStudioCMSController extends BaseController
             (new Song())->toArray(),
             (new Artist())->toArray(),
             (new Genre())->toArray(),
-            (new Permission())->toArray()
+            (new Permission())->toArray(),
+            (new License())->toArray(),
+            (new Publisher())->toArray(),
         ];
+
         $publishing = [
             'projectId' => $projectId,
             'dataset' => $dataset,
