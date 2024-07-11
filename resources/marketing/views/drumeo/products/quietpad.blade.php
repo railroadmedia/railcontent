@@ -487,20 +487,20 @@
             @endif
             <p class="leading-tight text-sm mt-5"><em>Drum sticks and practice pad stand not included.</em></p>
 
-            {{--            <div class="mt-12">--}}
-            {{--                <div class="text-center">--}}
-            {{--                    <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>--}}
-            {{--                    <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>--}}
-            {{--                    <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>--}}
-            {{--                    <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>--}}
-            {{--                    <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>--}}
-            {{--                </div>--}}
-            {{--                <h6 class="leading-tight my-4">“Placeholder. Testimonial text coming yet for Dorothea.”</h6>--}}
-            {{--                <div class="flex items-center justify-center">--}}
-            {{--                    <img class="h-12 sm:h-14 rounded-full mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/200x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/dorothea.webp">--}}
-            {{--                    <h6 class="leading-tight mx-0"><strong>Dorothea Taylor</strong></h6>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
+                        <div class="mt-12">
+                            <div class="text-center">
+                                <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                                <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                                <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                                <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                                <i class="align-middle text-3xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            </div>
+                            <h6 class="leading-tight my-4 mx-auto max-w-xl">“I love my Drumeo QuietPad because of the two distinct surfaces. One trains you to play softer and with great stick control, and the other side allows the real feel of a nice pad or tightened snare head.”</h6>
+                            <div class="flex items-center justify-center">
+                                <img class="h-12 sm:h-14 rounded-full mr-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/200x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/dorothea.webp">
+                                <h6 class="leading-tight mx-0"><strong>Dorothea Taylor</strong></h6>
+                            </div>
+                        </div>
         </div>
     </div>
 
