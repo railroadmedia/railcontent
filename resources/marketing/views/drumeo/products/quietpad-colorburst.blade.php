@@ -21,7 +21,7 @@
 @section('body-data')
     x-data="{
         trailer: false,
-        selectedIndex: null,
+        selectedIndex: 2,
         selectedProduct: '#0B76DB',
         colors: {
             '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Pink'],
