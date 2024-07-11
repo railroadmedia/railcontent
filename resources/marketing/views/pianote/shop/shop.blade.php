@@ -43,7 +43,7 @@
                 $bundles = [
                     [
                         'slug' => '/ultimate-lessons',
-                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + $540 in free bonuses!',
+                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + $520 in free bonuses!',
                         'bonusValue' => '$720 in total value',
                         'visible' => 1,
                         'price' => 240,
