@@ -32,17 +32,6 @@
 {{--            </h1>--}}
             <h5 class="leading-tight mb-4 uppercase">{!! $text !!}</h5>
 
-            @if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                @include('_partials.components.countdown',[
-                    'countdownDate' => '2024-7-18 00:00:00',
-                    'promoVersion' => true
-                ])
-            @else
-                @include('_partials.components.countdown',[
-                    'countdownDate' => '2024-8-1 00:00:00',
-                    'promoVersion' => true
-                ])
-            @endif
             <div x-data="timer()" x-init="countdown()">
                 <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00101D] bg-[#FFD600] rounded-xl p-4">
                     <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
