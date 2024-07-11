@@ -73,11 +73,11 @@
             <img class="h-20 sm:h-32 mb-3 sm:mb-4" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-logo.webp">
             <br>
             <h1 class="relative w-auto inline-block text-3xl sm:text-5xl lg:text-6xl mb-7 sm:mb-10 font-black font-lexend leading-none sm:leading-none lg:leading-none uppercase">
-                EVERYTHING YOU NEED<br class="sm:hidden"> TO <br class="hidden sm:inline"> <span class="relative inline-block">LEARN THE DRUMS.<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#0B76DB" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#0B76DB" stroke-width="3" stroke-linecap="round"></path></svg></span>
+                EVERYTHING YOU NEED TO <br class="hidden sm:inline"> <span class="relative inline-block">LEARN THE DRUMS.<svg class="absolute left-0 right-0 bottom-0 w-full h-4 sm:h-7" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 524 22" fill="none" style="transform: translate(0, 100%);"><path d="M1.99978 10.6328C84.053 4.08508 302.889 -3.20824 521.809 20" stroke="#0B76DB" stroke-width="3" stroke-linecap="round"></path><path d="M2.17373 15.0541C83.9528 7.29382 302.406 -3.51921 521.988 15.3111" stroke="#0B76DB" stroke-width="3" stroke-linecap="round"></path></svg></span>
             </h1>
 
             <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
-                <i class="fas fa-check text-drumeo"></i> DRUMEO MEMBERSHP
+                <i class="fas fa-check text-drumeo"></i> DRUMEO MEMBERSHIP<br class="sm:hidden">
                 <i class="fas fa-check ml-3 sm:ml-5 text-drumeo"></i> PRACTICE PAD + STAND
                 <br class="lg:hidden">
                 <i class="fas fa-check lg:ml-5 text-drumeo"></i> DRUMSTICKS
@@ -166,7 +166,7 @@
             <div class="w-full px-4 md:px-0 mb-6">
                 <img class="w-full md:w-2/3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp">
                 <br>
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get unlimited lessons + $385 in free bonuses.</h3>
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get unlimited lessons +<br class="sm:hidden">  $385 in free bonuses.</h3>
             </div>
 
             @php
@@ -305,7 +305,7 @@
                 selectedIndex: null,
                 selectedProduct: '#0B76DB',
                 colors: {
-                    '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Purple'],
+                    '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Pink'],
                     '#3CDBC0': ['quietpad-color-burst-turquoise', 'Triplet', 'Teal'],
                     '#0B76DB': ['quietpad', 'Drumeo', 'Blue'],
                     '#79C300': ['quietpad-color-burst-green', 'Ghostnote', 'Green'],
@@ -313,7 +313,7 @@
                 },
                 hoverIndex: null
             }">
-                <div class="border-2 border-white rounded-xl py-5 px-10 text-center text-white">
+                <div class="border-2 border-white rounded-xl py-5 px-2 sm:px-10 text-center text-white">
                     <p class="leading-tight mb-4">
                         <strong class="font-black"><em>Select your QuietPad color below:</em></strong>
                     </p>

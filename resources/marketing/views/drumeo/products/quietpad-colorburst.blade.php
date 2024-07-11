@@ -24,7 +24,7 @@
         selectedIndex: null,
         selectedProduct: '#0B76DB',
         colors: {
-            '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Purple'],
+            '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Pink'],
             '#3CDBC0': ['quietpad-color-burst-turquoise', 'Triplet', 'Teal'],
             '#0B76DB': ['quietpad', 'Drumeo', 'Blue'],
             '#79C300': ['quietpad-color-burst-green', 'Ghostnote', 'Green'],

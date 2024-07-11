@@ -54,7 +54,7 @@
     ])
 @else
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-8-1 00:00:00',
+        'countdownDate' => '2024-8-1 00:00:00',
         'promoVersion' => true
     ])
 @endif

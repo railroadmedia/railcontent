@@ -58,7 +58,7 @@
         ])
     @else
         @include('_partials.components.countdown',[
-            'countdownDate' => '2023-8-1 00:00:00',
+            'countdownDate' => '2024-8-1 00:00:00',
             'promoVersion' => true
         ])
     @endif
@@ -69,7 +69,7 @@
     <!-- {{-- Platform --}}-->
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script> 
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script>
         var Sorting = {
