@@ -10,7 +10,7 @@
     <meta property="description" content="Get 5 years of Drumeo for the price of 3.">
     <meta property="og:description" content="Get 5 years of Drumeo for the price of 3.">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
-    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-5-for-3-share-image.jpg">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-5-for-3-share-image-new.jpg">
 
 @endsection
 
