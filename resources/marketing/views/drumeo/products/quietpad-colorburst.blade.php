@@ -4,7 +4,7 @@
     @parent
     <title>Drumeo QuietPad</title>
     <meta name="description" content="Practice anywhere with two full-size playing surfaces.">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/share-image.jpg" style="display: none;">
     <meta property="og:title" content="Drumeo QuietPad">
     <meta property="og:description" content="Practice anywhere with two full-size playing surfaces.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
@@ -191,66 +191,186 @@
             </div>
         </div>
     </section>
-{{--    <section class="text-center px-5 py-10 md:py-20 lg:py-24" style="background-color:#f4f8fb;">--}}
-{{--        <div class="container mx-auto max-w-5xl">--}}
-{{--            <h2><strong>Your pad,<br class="sm:hidden"> your personality.</strong></h2>--}}
-{{--            <h6 class="mt-2">Express yourself with 5 different color QuietPads (for a limited time only).</h6>--}}
+    <section class="text-center px-5 py-10 md:py-20 lg:py-24" style="background-color:#f4f8fb;">
+        <div class="container mx-auto max-w-5xl">
+            <h2><strong>Your pad,<br class="sm:hidden"> your personality.</strong></h2>
+            <h6 class="mt-2">Express yourself with 5 different color QuietPads (for a limited time only).</h6>
 
-{{--            @php--}}
-{{--                $slides = [--}}
-{{--                 [--}}
-{{--                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-03.jpg',--}}
-{{--                 ],--}}
-{{--                 [--}}
-{{--                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-04.jpg',--}}
-{{--                 ],--}}
-{{--                 [--}}
-{{--                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-02.jpg',--}}
-{{--                 ],--}}
-{{--                 [--}}
-{{--                     'img' => 'marketing/drumeo/shop/quietkick/Quietkick-gallery-01.jpg',--}}
-{{--                 ],--}}
-{{--             ];--}}
-{{--             $scaleAnimation = 'cursor-pointer transform transition duration-300 ease-in-out hover:scale-105';--}}
-{{--             $handleClick = 'handleClick';--}}
-{{--            @endphp--}}
+            @php
+                $slides = [
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/pink-quietpad-01.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/pink-quietpad-02.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/pink-quietpad-03.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/pink-quietpad-04.webp',
+                 ],
+             ];
+                $slides2 = [
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/teal-quietpad-01.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/teal-quietpad-02.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/teal-quietpad-03.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/teal-quietpad-04.webp',
+                 ],
+             ];
+                $slides3 = [
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/blue-quietpad-01.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/blue-quietpad-02.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/blue-quietpad-03.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/blue-quietpad-04.webp',
+                 ],
+             ];
+                $slides4 = [
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/green-quietpad-01.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/green-quietpad-02.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/green-quietpad-03.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/green-quietpad-04.webp',
+                 ],
+             ];
+                $slides5 = [
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/orange-quietpad-01.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/orange-quietpad-02.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/orange-quietpad-03.webp',
+                 ],
+                 [
+                     'img' => 'marketing/drumeo/products/quietpad-colorburst/orange-quietpad-04.webp',
+                 ],
+             ];
+             $scaleAnimation = 'cursor-pointer transform transition duration-300 ease-in-out hover:scale-105';
+             $handleClick = 'handleClick';
+             $squareImage = true;
+            @endphp
 
-{{--            @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])--}}
-
-
-{{--                <div class="flex flex-wrap my-5 sm:my-10">--}}
-{{--                    <div class="p-2 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>--}}
-{{--                    <div class="p-2 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>--}}
-{{--                    <div class="p-2 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>--}}
-{{--                    <div class="p-2 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>--}}
-{{--                </div>--}}
-
-{{--            @endcomponent--}}
-{{--            <p class="leading-tight">Drum sticks and practice pad stand not included.</p>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+            @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick, 'squareImage' => $squareImage])
+                <div class="flex flex-wrap my-5 sm:my-10 hidden" :class="{ 'hidden': selectedProduct !== '#BB16A3', }">
+                    <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
+                    <div class="px-2 w-full sm:w-1/4">
+                        <div class="py-2 w-full"><div class="h-64 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[1]['img'] }}')"></div></div>
+                        <div class="py-2 w-full"><div class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[2]['img'] }}')"></div></div>
+                    </div>
+                    <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
+                </div>
+            @endcomponent
+            @component('drumeo._partials.modal-carousel', ['slides' => $slides2, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick, 'squareImage' => $squareImage])
+                <div class="flex flex-wrap my-5 sm:my-10 hidden" :class="{ 'hidden': selectedProduct !== '#3CDBC0', }">
+                    <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides2[0]['img'] }}')"></div></div>
+                    <div class="px-2 w-full sm:w-1/4">
+                        <div class="py-2 w-full"><div class="h-64 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides2[1]['img'] }}')"></div></div>
+                        <div class="py-2 w-full"><div class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides2[2]['img'] }}')"></div></div>
+                    </div>
+                    <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides2[3]['img'] }}')"></div></div>
+                </div>
+            @endcomponent
+            @component('drumeo._partials.modal-carousel', ['slides' => $slides3, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick, 'squareImage' => $squareImage])
+                <div class="flex flex-wrap my-5 sm:my-10" :class="{ 'hidden': selectedProduct !== '#0B76DB', }">
+                    <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides3[0]['img'] }}')"></div></div>
+                    <div class="px-2 w-full sm:w-1/4">
+                        <div class="py-2 w-full"><div class="h-64 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides3[1]['img'] }}')"></div></div>
+                        <div class="py-2 w-full"><div class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides3[2]['img'] }}')"></div></div>
+                    </div>
+                    <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides3[3]['img'] }}')"></div></div>
+                </div>
+            @endcomponent
+            @component('drumeo._partials.modal-carousel', ['slides' => $slides4, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick, 'squareImage' => $squareImage])
+                <div class="flex flex-wrap my-5 sm:my-10 hidden" :class="{ 'hidden': selectedProduct !== '#79C300', }">
+                    <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides4[0]['img'] }}')"></div></div>
+                    <div class="px-2 w-full sm:w-1/4">
+                        <div class="py-2 w-full"><div class="h-64 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides4[1]['img'] }}')"></div></div>
+                        <div class="py-2 w-full"><div class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides4[2]['img'] }}')"></div></div>
+                    </div>
+                    <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides4[3]['img'] }}')"></div></div>
+                </div>
+            @endcomponent
+            @component('drumeo._partials.modal-carousel', ['slides' => $slides5, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick, 'squareImage' => $squareImage])
+                <div class="flex flex-wrap my-5 sm:my-10 hidden" :class="{ 'hidden': selectedProduct !== '#FF6900', }">
+                    <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides5[0]['img'] }}')"></div></div>
+                    <div class="px-2 w-full sm:w-1/4">
+                        <div class="py-2 w-full"><div class="h-64 sm:h-40 lg:h-48 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(1)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides5[1]['img'] }}')"></div></div>
+                        <div class="py-2 w-full"><div class="h-36 sm:h-36 lg:h-44 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(2)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides5[2]['img'] }}')"></div></div>
+                    </div>
+                    <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/480x0/filters:quality(95)/{{ $slides5[3]['img'] }}')"></div></div>
+                </div>
+            @endcomponent
+            <p class="leading-tight">Drum sticks and practice pad stand not included.</p>
+        </div>
+    </section>
     <section class="text-center px-5 py-10 md:py-20 lg:py-24">
         <div class="container mx-auto max-w-5xl">
             <h2><strong>20,000 Drummers<br class="sm:hidden"> Use The QuietPad.</strong></h2>
             <h6 class="mt-2 italic">Here's what they're saying...</h6>
             <div class="flex flex-wrap my-5 sm:my-9">
-                @php
-                    $reviews = [
-                        [
-                        "description" => '"I actually have two of these now and one stays at work for lunchtime practice sessions and one stays at home for late night rudiments. My wife works early shift patterns and goes to bed earlier in the evening and the quiet foam side is an ideal way to practice without disturbing her. I have also not had any complaints from my work colleagues when I sit quietly to one side and practice various sticking exercises at lunchtime."
-                        <br><br><strong>Anthony S.</strong>',
-                        ],
-                        [
-                        "description" => '"The blue surface is a classic rubber pad surface that allows the stick to bounce well. Here you can practice great doubles etc. I like to use the other side, which is colored black and has a slightly more impact-absorbing surface. More force has to be used here, which is great for training strength and endurance in the forearms. In addition, this is the special \"quiet\" surface, which is actually significantly quieter when touched. This means I can easily do my exercises in the next room without disturbing other roommates in the apartment."
-                        <br><br><strong>FrizzB</strong>',
-                        ],
-                        [
-                        "description" => '"With this practice pad I can practice whenever I want without disturbing others, even if it\'s the middle of the night. The blue side feels and sounds like a normal pad, the black side is quiet and has a bit less rebound. I enjoy using this, but most of all I\'m glad that I can pick it up whenever I want to without having to think about what time it is."
-                        <br><br><strong>Kimiko</strong>',
-                        ],
-                    ]
-                @endphp
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3 text-left text-white">
+                    <div class="rounded-xl pr-4 py-8 sm:py-12 bg-cover pl-[33%] sm:pl-[40%]" style="padding-left: 33%;background-position:33% 0%;background-image:url('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/quietpad-colorburst/testimonial-02.webp');">
+                        <div class="mb-4">
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                        </div>
+                        <p class="leading-normal text-sm">"I love using my QuietPad when I’m on the road or outside while enjoying the sun – it’s great to practice without disturbing anyone haha!"
+                            <br><br><strong>Domino Santantonio</strong></p>
+                    </div>
+                    <div class="rounded-xl pr-4 py-8 sm:py-12 bg-cover pl-[33%] lg:pl-[40%]" style="padding-left: 33%;background-position:33% 0%;background-image:url('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/quietpad-colorburst/testimonial-01.webp');">
+                        <div class="mb-4">
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                            <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                        </div>
+                        <p class="leading-normal text-sm">"With this pad, I have both the surfaces I need to practice my speed and endurance for my videos. Sometimes, I use the quiet side to mute my snare hits when I’m working on a difficult pattern – it works perfectly!"
+                            <br><br><strong>El Estepario Siberiano</strong></p>
+                    </div>
+                </div>
                 <div class="hidden sm:flex flex-wrap items-start text-left justify-center">
+                    @php
+                        $reviews = [
+                            [
+                            "description" => '"I actually have two of these now and one stays at work for lunchtime practice sessions and one stays at home for late night rudiments. My wife works early shift patterns and goes to bed earlier in the evening and the quiet foam side is an ideal way to practice without disturbing her. I have also not had any complaints from my work colleagues when I sit quietly to one side and practice various sticking exercises at lunchtime."
+                            <br><br><strong>Anthony S.</strong>',
+                            ],
+                            [
+                            "description" => '"The blue surface is a classic rubber pad surface that allows the stick to bounce well. Here you can practice great doubles etc. I like to use the other side, which is colored black and has a slightly more impact-absorbing surface. More force has to be used here, which is great for training strength and endurance in the forearms. In addition, this is the special \"quiet\" surface, which is actually significantly quieter when touched. This means I can easily do my exercises in the next room without disturbing other roommates in the apartment."
+                            <br><br><strong>FrizzB</strong>',
+                            ],
+                            [
+                            "description" => '"With this practice pad I can practice whenever I want without disturbing others, even if it\'s the middle of the night. The blue side feels and sounds like a normal pad, the black side is quiet and has a bit less rebound. I enjoy using this, but most of all I\'m glad that I can pick it up whenever I want to without having to think about what time it is."
+                            <br><br><strong>Kimiko</strong>',
+                            ],
+                        ]
+                    @endphp
                     @foreach($reviews as $review)
                         <div class="w-full sm:w-1/3 px-2 lg:px-1 mb-4 lg:mb-2 ">
                             <div class="border-2 border-black rounded-xl px-5 py-9">

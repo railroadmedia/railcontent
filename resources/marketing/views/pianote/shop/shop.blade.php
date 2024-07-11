@@ -9,13 +9,13 @@
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+    
+    <style>
+        .splide__arrow.pianote svg {
+            fill:#F61A30 !important;
+        }
+    </style>
 @endsection
-
-<style>
-.splide__arrow.pianote svg {
-    fill: #F61A30 !important;
-    }
-</style>
 
 @section('x-data')
     filter: '{{ $category !== 'shop' ? $category : 'all' }}',

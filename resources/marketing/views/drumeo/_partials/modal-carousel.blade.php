@@ -2,7 +2,7 @@
 <!-- <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script> -->
 <!-- Splide 4.1.4 -->
 
-@props(['slides', 'scaleAnimation', 'handleClick'])
+@props(['slides', 'scaleAnimation', 'handleClick', 'squareImage'])
 
 
 <div x-data="{
@@ -83,12 +83,21 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
                                 <template x-for="(slide, index) in slides" :key="index">
                                     <li class="splide__slide">
                                         <picture>
-                                            <source media="(min-width: 1160px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/2300x0/filters:quality(95)/' + slide">
-                                            <source media="(min-width: 1024px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1850x0/filters:quality(95)/' + slide">
-                                            <source media="(min-width: 768px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/' + slide">
-                                            <source media="(min-width: 640px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1150x0/filters:quality(95)/' + slide">
-                                            <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/' + slide"
-                                                alt="product image" class="w-full h-full bg-white object-contain overflow-hidden rounded-xl">
+                                            @if(!empty($squareImage))
+                                                <source media="(min-width: 1160px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/2300x2300/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 1024px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1850x1850/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 768px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x1400/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 640px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1150x1150/filters:quality(95)/' + slide">
+                                                <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/750x750/filters:quality(95)/' + slide"
+                                                    alt="product image" class="w-full h-full bg-white object-contain overflow-hidden rounded-xl">
+                                            @else
+                                                <source media="(min-width: 1160px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/2300x0/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 1024px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1850x0/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 768px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x0/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 640px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1150x0/filters:quality(95)/' + slide">
+                                                <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/' + slide"
+                                                    alt="product image" class="w-full h-full bg-white object-contain overflow-hidden rounded-xl">
+                                            @endif
                                         </picture>
                                     </li>
                                 </template>
