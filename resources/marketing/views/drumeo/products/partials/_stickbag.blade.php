@@ -97,7 +97,12 @@
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
                         <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
-                        <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                        <strong>
+                            @if(number_format(floatval($productPrices['stickbag']->discounted_price), 2) == intval(floatval($productPrices['stickbag']->discounted_price)))
+                                ${{  floatval($productPrices['stickbag']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['stickbag']->discounted_price), 2)  }}
+                            @endif </strong>
                         (Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%)
                     @else
                         <strong>Only ${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
@@ -444,7 +449,13 @@
                         @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
                             <s class="opacity-50">${{ floatval($productPrices['stickbag']->price) }}</s>
                         @endif
-                        <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong>
+                        <strong>
+                            @if(number_format(floatval($productPrices['stickbag']->discounted_price), 2) == intval(floatval($productPrices['stickbag']->discounted_price)))
+                                ${{  floatval($productPrices['stickbag']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['stickbag']->discounted_price), 2)  }}
+                            @endif
+                        </strong>
                     </td>
                     <td class="rounded-b-xl"><strong>$104</strong></td>
                     <td class="rounded-b-xl"><strong>$200</strong></td>
@@ -591,7 +602,13 @@
                     </tr>
                     <tr>
                         <td class="px-3 py-1 text-left  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
-                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $197 @else ${{ floatval($productPrices['stickbag']->discounted_price) }} @endif</td>
+                        <td class="px-5 py-1  border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">@if(!empty($blackBag)) $197 @else
+                                @if(number_format(floatval($productPrices['stickbag']->discounted_price), 2) == intval(floatval($productPrices['stickbag']->discounted_price)))
+                                    ${{  floatval($productPrices['stickbag']->discounted_price)  }}
+                                @else
+                                    ${{  number_format(floatval($productPrices['stickbag']->discounted_price), 2)  }}
+                                @endif
+                            @endif</td>
                     </tr>
                 </table>
             </div>
@@ -647,10 +664,16 @@
                                     @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
                                         <s>${{ floatval($productPrices['stickbag']->price) }}</s>
                                     @endif
-                                    <strong>${{ floatval($productPrices['stickbag']->discounted_price) }}</strong></h4>
+                                    <strong>
+                                        @if(number_format(floatval($productPrices['stickbag']->discounted_price), 2) == intval(floatval($productPrices['stickbag']->discounted_price)))
+                                            ${{  floatval($productPrices['stickbag']->discounted_price)  }}
+                                        @else
+                                            ${{  number_format(floatval($productPrices['stickbag']->discounted_price), 2)  }}
+                                        @endif
+                                    </strong></h4>
                                 <p class="text-sm"><em>
                                         @if(floatval($productPrices['stickbag']->price) > floatval($productPrices['stickbag']->discounted_price))
-                                            Save 34%.
+                                            Save {{ round(100 - (100 * (floatval($productPrices['stickbag']->discounted_price) / floatval($productPrices['stickbag']->price)))) }}%.
                                         @endif
                                         One-time payment.</em></p>
                                 <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>

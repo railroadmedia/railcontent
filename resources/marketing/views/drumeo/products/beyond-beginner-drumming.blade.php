@@ -81,7 +81,13 @@
             <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros Signature"><br>
             <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
-                <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
+                <strong class="text-yellow-400">
+                    @if(number_format(floatval($productPrices['beyond-beginner-drumming']->discounted_price), 2) == intval(floatval($productPrices['beyond-beginner-drumming']->discounted_price)))
+                        ${{  floatval($productPrices['beyond-beginner-drumming']->discounted_price)  }}
+                    @else
+                        ${{  number_format(floatval($productPrices['beyond-beginner-drumming']->discounted_price), 2)  }}
+                    @endif
+                    {{--Launch Special--}}</strong></h6>
         </div>
     </header>
 
@@ -286,7 +292,13 @@
             <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros signature"><br>
             <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
-                <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
+                <strong class="text-yellow-400">
+                    @if(number_format(floatval($productPrices['beyond-beginner-drumming']->discounted_price), 2) == intval(floatval($productPrices['beyond-beginner-drumming']->discounted_price)))
+                        ${{  floatval($productPrices['beyond-beginner-drumming']->discounted_price)  }}
+                    @else
+                        ${{  number_format(floatval($productPrices['beyond-beginner-drumming']->discounted_price), 2)  }}
+                    @endif
+                    {{--Launch Special--}}</strong></h6>
         </div>
     </section>
     <section class="text-white py-7 md:py-10 lg:py-16 relative text-center" style="background: #0c1429;">

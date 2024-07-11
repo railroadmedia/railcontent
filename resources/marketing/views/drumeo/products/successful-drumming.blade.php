@@ -56,7 +56,13 @@
                 <p class="price-info">
                     @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
                         <s>NORMALLY ${{ floatval($productPrices['SD-DIGI']->price) }}.</s>
-                        <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
+                        <strong>NOW
+                            @if(number_format(floatval($productPrices['SD-DIGI']->discounted_price), 2) == intval(floatval($productPrices['SD-DIGI']->discounted_price)))
+                                ${{  floatval($productPrices['SD-DIGI']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['SD-DIGI']->discounted_price), 2)  }}
+                            @endif
+                        </strong>
                         (SAVE {{ round(100 - (100 * (floatval($productPrices['SD-DIGI']->discounted_price) / floatval($productPrices['SD-DIGI']->price)))) }}%).
                     @else
                         <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
@@ -77,7 +83,11 @@
             <h2 class=" mb-8 sm:mb-10"><strong>The Faster Way To Improve Your Skills… For Just
                     @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
                         <s class="opacity-60">${{ floatval($productPrices['SD-DIGI']->price) }}</s>
-                        ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}
+                        @if(number_format(floatval($productPrices['SD-DIGI']->discounted_price), 2) == intval(floatval($productPrices['SD-DIGI']->discounted_price)))
+                            ${{  floatval($productPrices['SD-DIGI']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['SD-DIGI']->discounted_price), 2)  }}
+                        @endif
                     @else
                         ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}
                     @endif
@@ -291,14 +301,17 @@
                 @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
                     <strong>
                         ONLY <s class="opacity-60">${{ floatval($productPrices['SD-DIGI']->price) }}.</s>
-                    <span class="text-drumeo">${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</span>
+                    <span class="text-drumeo">
+                        @if(number_format(floatval($productPrices['SD-DIGI']->discounted_price), 2) == intval(floatval($productPrices['SD-DIGI']->discounted_price)))
+                            ${{  floatval($productPrices['SD-DIGI']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['SD-DIGI']->discounted_price), 2)  }}
+                        @endif
+                    </span>
                     </strong>
                     <sub>(SAVE {{ round(100 - (100 * (floatval($productPrices['SD-DIGI']->discounted_price) / floatval($productPrices['SD-DIGI']->price)))) }}%).</sub>
                 @else
-                    <strong>
-                        ONLY
-                        <span class="text-drumeo">${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</span>
-                    </strong>
+                    <strong>ONLY <span class="text-drumeo">${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</span></strong>
                 @endif
             </h2>
             <a href="/ecommerce/add-to-cart?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>

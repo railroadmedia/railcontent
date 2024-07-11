@@ -73,7 +73,13 @@
 
     </style>
 
-    @php $memberPrice = floatval($productPrices['quietkick']->discounted_price) @endphp
+    @php
+        if(number_format(floatval($productPrices['quietkick']->discounted_price), 2) == intval(floatval($productPrices['quietkick']->discounted_price))) {
+            $memberPrice = floatval($productPrices['quietkick']->discounted_price);
+        } else {
+            $memberPrice = number_format(floatval($productPrices['quietkick']->discounted_price), 2);
+        }
+    @endphp
 @stop
 
 

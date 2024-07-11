@@ -81,7 +81,15 @@
 
             <p class="uppercase price">
                 @if(floatval($productPrices['drum-technique-made-easy-pack']->price) > floatval($productPrices['drum-technique-made-easy-pack']->discounted_price))
-                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
+                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s>
+                    <strong>Only
+                        @if(number_format(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price), 2) == intval(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price)))
+                            ${{  floatval($productPrices['drum-technique-made-easy-pack']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price), 2)  }}
+                        @endif
+                    </strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
                 @else
                     <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
@@ -510,7 +518,7 @@
     <section class="compare-table">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>while saving {{ round(100 - (100 * (round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
+            <h3>while saving {{ round(100 - (100 * (round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) / 30))) }}% or more <br class="inline sm:hidden">
                 compared to private lessons.</h3>
 
             <table>
@@ -586,7 +594,7 @@
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums — <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums — <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u>.
                 <br><br> The entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
@@ -651,7 +659,7 @@
                 <img class="guarantee-badge hidden sm:inline-block transition-all opacity-0" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
-                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
+                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-drumeo" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
                 </div>
             </div>
         </div>
@@ -669,7 +677,15 @@
 
             <h2 class="uppercase">
                 @if(floatval($productPrices['drum-technique-made-easy-pack']->price) > floatval($productPrices['drum-technique-made-easy-pack']->discounted_price))
-                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
+                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s>
+                    <strong>Only
+                        @if(number_format(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price), 2) == intval(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price)))
+                            ${{  floatval($productPrices['drum-technique-made-easy-pack']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price), 2)  }}
+                        @endif
+                    </strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
                 @else
                     <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif

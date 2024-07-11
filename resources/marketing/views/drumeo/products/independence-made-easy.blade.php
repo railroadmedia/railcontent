@@ -72,7 +72,15 @@
                 <a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
                 <p class="uppercase price-info">
                     @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
-                        <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s> <strong>Only ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</strong> (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
+                        <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s>
+                        <strong>Only
+                            @if(number_format(floatval($productPrices['independence-made-easy-pack']->discounted_price), 2) == intval(floatval($productPrices['independence-made-easy-pack']->discounted_price)))
+                                ${{  floatval($productPrices['independence-made-easy-pack']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['independence-made-easy-pack']->discounted_price), 2)  }}
+                            @endif
+                        </strong>
+                        (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
                     @else
                         <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                     @endif
@@ -424,13 +432,18 @@
                         @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
                             <s>${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s>
                         @endif
-                            ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</td>
+                            @if(number_format(floatval($productPrices['independence-made-easy-pack']->discounted_price), 2) == intval(floatval($productPrices['independence-made-easy-pack']->discounted_price)))
+                                ${{  floatval($productPrices['independence-made-easy-pack']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['independence-made-easy-pack']->discounted_price), 2)  }}
+                            @endif
+                    </td>
                     <td><strong>$50+</strong><br>FOR 1 LESSON</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums — <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums — <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u>.
                 <br><br>
                 The entire course is yours for life with no recurring subscription or additional fees.
 
@@ -464,7 +477,15 @@
 
             <h2 class="columns uppercase">
                 @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
-                    <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s> <strong>Only ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</strong> (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
+                    <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s>
+                    <strong>Only
+                        @if(number_format(floatval($productPrices['independence-made-easy-pack']->discounted_price), 2) == intval(floatval($productPrices['independence-made-easy-pack']->discounted_price)))
+                            ${{  floatval($productPrices['independence-made-easy-pack']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['independence-made-easy-pack']->discounted_price), 2)  }}
+                        @endif
+                    </strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
                 @else
                     <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
