@@ -47,7 +47,7 @@ class ContentCompiledColumnTransformer
                 $contentIds,
                 []));
         $groupedPermissions = $contentPermissionRows->groupBy('content_id');
-        $userExists = (user() ?? null);
+        $userExists = (user() ?? false);
         $userPermissions = $userExists ? $this->userPermissionsRepository->getUserPermissions(user()->id, true) : [];
         $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
