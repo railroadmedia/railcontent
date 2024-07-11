@@ -1,6 +1,13 @@
 @extends('pianote.products.500-songs-layout')
 
-@php $productPrice = floatval($productPrices['500-songs-in-5-days']->discounted_price) @endphp
+@php
+    if(number_format(floatval($productPrices['500-songs-in-5-days']->discounted_price), 2) == intval(floatval($productPrices['500-songs-in-5-days']->discounted_price))) {
+        $productPrice = floatval($productPrices['500-songs-in-5-days']->discounted_price);
+    }
+    else {
+         $productPrice = number_format(floatval($productPrices['500-songs-in-5-days']->discounted_price), 2);
+    }
+@endphp
 
 @section('order-link', '/ecommerce/add-to-cart?products[500-songs-in-5-days]=1')
 

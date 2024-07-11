@@ -43,7 +43,13 @@
             <p class="breakdown">
                 @if(floatval($productPrices['piano-riffs-and-fills']->price) > floatval($productPrices['piano-riffs-and-fills']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['piano-riffs-and-fills']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
+                    <strong><u>ONLY
+                            @if(number_format(floatval($productPrices['piano-riffs-and-fills']->discounted_price), 2) == intval(floatval($productPrices['piano-riffs-and-fills']->discounted_price)))
+                                ${{  floatval($productPrices['piano-riffs-and-fills']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['piano-riffs-and-fills']->discounted_price), 2)  }}
+                            @endif
+                        </u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
@@ -254,7 +260,13 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
             <p class="breakdown">
                 @if(floatval($productPrices['piano-riffs-and-fills']->price) > floatval($productPrices['piano-riffs-and-fills']->discounted_price))
                     <s>NORMALLY ${{ floatval($productPrices['piano-riffs-and-fills']->price) }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
+                    <strong><u>ONLY
+                            @if(number_format(floatval($productPrices['piano-riffs-and-fills']->discounted_price), 2) == intval(floatval($productPrices['piano-riffs-and-fills']->discounted_price)))
+                                ${{  floatval($productPrices['piano-riffs-and-fills']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['piano-riffs-and-fills']->discounted_price), 2)  }}
+                            @endif
+                        </u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
