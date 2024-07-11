@@ -13,7 +13,10 @@
     <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translateX(100%);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
 @elseif($theme === 'pianote')
     <img class="w-auto h-16 sm:h-24 lg:h-28 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">
-    <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translateX(100%);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
+    <img class="h-80 absolute right-0 top-0 hidden sm:block" 
+     style="transform: translateX(100%); !important;" 
+     src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp" 
+     alt="Sun Icon">
 @endif
 
 
