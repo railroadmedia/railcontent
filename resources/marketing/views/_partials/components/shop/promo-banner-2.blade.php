@@ -17,7 +17,7 @@
                 <p class="text mx-auto sm:ml-0 sm:mr-3 my-2 sm:my-0 w-full sm:w-auto">
                     @if(!empty($price))
                         @if(round(100 - (100 * ($price / $fullPrice))) > 1)
-                            <strong>Save <span class="text-yellow-400">{{ round(100 - (100 * ($price / $fullPrice))) }}%</span> on {{ $name }}</strong>
+                            Save <strong>{{ round(100 - (100 * ($price / $fullPrice))) }}%</strong> on {{ $name }}
                         @elseif(!empty($specialText))
                             {!!  $specialText  !!}
                         @endif

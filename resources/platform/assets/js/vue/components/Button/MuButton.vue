@@ -68,8 +68,8 @@
     const btnClasses = computed(() => ({
         'tw-cursor-not-allowed': props.disabled || props.processing,
         'tw-cursor-pointer': !props.disabled && !props.processing,
-        'tw-bg-ui-button-1 tw-text-ui-button-3 hover:tw-bg-primary-6 hover:tw-text-primary-1 disabled:tw-bg-primary-8': props.variant === 'primary',
-        'tw-bg-ui-button-2 tw-text-text-primary tw-border-primary-1 tw-border hover:tw-bg-primary-1 hover:tw-text-primary-9 hover:tw-border-primary-1 disabled:tw-border-primary-9': props.variant === 'secondary',
+        'tw-bg-ui-button-1 tw-text-ui-button-3 hover:tw-bg-primary-6 hover:tw-text-primary-1 disabled:tw-bg-primary-7 disabled:tw-text-primary-5': props.variant === 'primary',
+        'tw-bg-ui-button-2 tw-text-text-primary tw-border-primary-1 tw-border hover:tw-bg-primary-1 hover:tw-text-primary-9 hover:tw-border-primary-1 disabled:tw-border-primary-5 disabled:tw-bg-primary-9 disabled:tw-text-primary-5': props.variant === 'secondary',
     }));
 
     //Methods

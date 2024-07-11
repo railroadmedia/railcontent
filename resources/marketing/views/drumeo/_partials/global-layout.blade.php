@@ -47,14 +47,14 @@
 
 @yield('global-body')
 
-@if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+@if(Carbon\Carbon::create(2024, 7, 15, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
     @include('_partials.components.countdown',[
-        'countdownDate' => '2024-7-18 00:00:00',
+        'countdownDate' => '2024-7-15 00:00:00',
         'promoVersion' => true
     ])
 @else
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-8-1 00:00:00',
+        'countdownDate' => '2024-8-1 00:00:00',
         'promoVersion' => true
     ])
 @endif

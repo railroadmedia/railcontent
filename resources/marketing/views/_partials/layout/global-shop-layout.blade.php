@@ -50,10 +50,11 @@
     @endcomponent
 @endsection
 
+
 @section('layout-scripts')
-    @if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+    @if(Carbon\Carbon::create(2024, 7, 15, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
         @include('_partials.components.countdown',[
-            'countdownDate' => '2024-07-18 00:00:00',
+            'countdownDate' => '2024-07-15 00:00:00',
             'promoVersion' => true
         ])
     @else
@@ -70,7 +71,7 @@
     <!-- {{-- Platform --}}-->
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script> 
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script>
         var Sorting = {
@@ -215,4 +216,5 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
 @endsection

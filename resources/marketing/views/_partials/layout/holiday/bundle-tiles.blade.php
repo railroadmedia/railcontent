@@ -26,14 +26,14 @@
                             @endif
                             <p class="leading-tight mb-3 mt-1 sm:mt-3 text-sm italic">{!!$bundle['desc'] !!}</p>
                              @if(!empty($bundle['price']))
-                                 <h4 class="inline-block leading-none mb-5">
+                                 <h3 class="inline-block leading-none mb-5">
                                     @if(!empty($bundle['soldOut']))
                                         <strong>{{$bundle['price']}}</strong>
                                     @else
                                         @if($bundle['discountedPrice'] < $bundle['price'])<strong class="opacity-60"><s>${{ $bundle['price'] }}</s></strong>&nbsp;@endif
                                         <strong>${{$bundle['discountedPrice']}}</strong>
                                     @endif
-                                </h4>
+                                </h3>
                              @endif
                              <div class="join smaller white w-full p-3 sm:max-w-md w-full">
                                 @if(!empty($bundle['buttonText']))

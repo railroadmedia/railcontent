@@ -599,9 +599,9 @@
                     </a>
                 </div>
             </div>
-            @if(empty($membersVersion))
-                <a href="/" class="text-center text-xs italic pt-4"><h6><u>Or get your bag FREE with a Pianote Membership</u></h6></a>
-            @endif
+{{--            @if(empty($membersVersion))--}}
+{{--                <a href="/" class="text-center text-xs italic pt-4"><h6><u>Or get your bag FREE with a Pianote Membership</u></h6></a>--}}
+{{--            @endif--}}
         </div>
 
     </section>

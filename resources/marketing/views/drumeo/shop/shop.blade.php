@@ -24,7 +24,7 @@
 
 @section('body')
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% UNTIL JULY 17th!</strong>',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% UNTIL JULY 14th!</strong>',
         'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp',
         'isShop' => true,
     ])
@@ -93,14 +93,14 @@
                                 next: 'splide__arrow--next hidden sm:flex mb-16',
                                 pagination: 'hidden',
                         },
-                        perPage: 3.5,
+                        perPage: 4,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             1023: {
-                                perPage: 2.5,
+                                perPage: 3,
                             },
                             767: {
                                 perPage: 1.5,

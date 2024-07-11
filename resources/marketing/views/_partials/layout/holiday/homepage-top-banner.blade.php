@@ -1,14 +1,19 @@
-<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 pt-4 pb-8 sm:pb-12 bg-cover bg-top"
+<section class="big-promo-banner text-white text-center relative z-10 overflow-hidden px-5 sm:px-3 lg:px-5 sm:px-8 py-6 sm:pb-12 bg-cover bg-top"
 
     style="background-image:@if(!empty($bg)) {{ $bg }} @else url('https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/header-bg.webp') @endif ;
 ">
-    <div class="container mx-auto relative z-30 @if(!empty($bfVersion)) max-w-3xl @else max-w-2xl @endif">
-
+    <div class="container mx-auto relative z-30 max-w-lg">
+        @if($theme === 'drumeo')
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
-                @include($theme.'._partials.holiday-logo', [
-                    'styles' => 'h-16 sm:h-24 lg:h-36 mx-auto'
-                ])
+                <img class="w-auto h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-logo-text-only.webp">
             </a>
+            <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
+        @elseif($theme === 'pianote')
+            <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
+                <img class="w-auto h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">
+            </a>
+            <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
+        @endif
             <h5 class="leading-tight my-4 uppercase">{!! $text !!}</h5>
 
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs sm:max-w-none mt-4">

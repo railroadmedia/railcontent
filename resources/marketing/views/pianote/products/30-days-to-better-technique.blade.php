@@ -143,6 +143,7 @@
 
     @php
         $buttonLink = '/ecommerce/add-to-cart?products[30-days-to-better-technique]=1';
+        $fullPrice = floatval($productPrices['30-days-to-better-technique']->discounted_price);
         $price = floatval($productPrices['30-days-to-better-technique']->price);
     @endphp
 
@@ -164,7 +165,15 @@
                     </div>
                     <a class="w-full sm:w-5/12 join sold-out smaller text-white bg-pianote my-2 sm:m-2 hover:bg-red-500" href="{{ $buttonLink }}">GET STARTED</a>
                 </div>
-                <h5 class="text-pianote"><strong>Only ${{$price}} </strong></h5>
+                <h5>Only
+                    @if($price > $fullPrice)
+                        <s class="opacity-50">${{ $price }}</s>
+                        <strong>${{ $fullPrice }}</strong>
+                        <em class="text-musora text-sm">(Save {{ round(100 - (100 * ($fullPrice / $price))) }}%)</em>
+                    @else
+                        <strong>${{ $fullPrice }}</strong>
+                    @endif
+                </h5>
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(2, 11, 22, 0.6)"></div>
@@ -577,7 +586,16 @@
                 </h4>
             </div>
             <a href="{{ $buttonLink }}"  class="join smaller w-full sm:w-1/2 md:w-1/3 mt-6 sm:mt-12 sm:mb-0 hover:bg-red-500">GET STARTED</a><br>
-            <h5 class="text-black block py-2 md:py-4 mb-10 lg:mb-14"><strong>Only ${{$price}} </strong></h5>
+            <h5 class="text-black block py-2 md:py-4 mb-10 lg:mb-14">
+                Only
+                @if($price > $fullPrice)
+                    <s class="opacity-50">${{ $price }}</s>
+                    <strong>${{ $fullPrice }}</strong>
+                    <em class="text-musora text-sm">(Save {{ round(100 - (100 * ($fullPrice / $price))) }}%)</em>
+                @else
+                    <strong>${{ $fullPrice }}</strong>
+                @endif
+            </h5>
 
         </div>
     </section>
@@ -627,7 +645,14 @@
                 </div>
             </div>
             <a href="{{ $buttonLink }}" class="join smaller w-full sm:w-1/2 md:w-1/3 mt-6 sm:mb-0 hover:bg-red-500">GET STARTED</a><br>
-            <h5 class="text-black block py-2 md:py-4"><strong>Only ${{$price}}</strong></h5>
+            <h5 class="text-black block py-2 md:py-4">Only
+                @if($price > $fullPrice)
+                    <s class="opacity-50">${{ $price }}</s>
+                    <strong>${{ $fullPrice }}</strong>
+                    <em class="text-musora text-sm">(Save {{ round(100 - (100 * ($fullPrice / $price))) }}%)</em>
+                @else
+                    <strong>${{ $fullPrice }}</strong>
+                @endif</h5>
         </div>
     </section>
 

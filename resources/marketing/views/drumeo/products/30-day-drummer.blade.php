@@ -237,18 +237,18 @@
     ])
     @include('_partials.components.shop.promo-banner-2', [
                 "name" => "30-Day Drummer",
-                "fullPrice" => floatval($productPrices['30-day-drummer-3']->price),
-                "price" => floatval($productPrices['30-day-drummer-3']->discounted_price),
+                "fullPrice" => floatval($productPrices['30-day-drummer-4']->price),
+                "price" => floatval($productPrices['30-day-drummer-4']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
     @php
-            $price = floatval($productPrices['30-day-drummer-3']->price);
-            $discountedPrice = floatval($productPrices['30-day-drummer-3']->discounted_price);
+            $price = floatval($productPrices['30-day-drummer-4']->price);
+            $discountedPrice = floatval($productPrices['30-day-drummer-4']->discounted_price);
             $enrollmentLink = 'https://www.drumeo.com/choose-plan';
             $brandTitle = 'Drumeo';
             $buttonText = 'GET STARTED';
-            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-3]=1";
+            $buttonLink = "/ecommerce/add-to-cart?products[30-day-drummer-4]=1";
             $studentProfilesImage = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/100x0/filters:quality(95)/marketing/drumeo/products/30-day-drummer/Joined_profiles.png';
             $numStudents =  number_format($nPackOwners ?? 0);
             $students = 'drummers';
