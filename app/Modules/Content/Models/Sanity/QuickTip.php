@@ -49,6 +49,13 @@ class QuickTip extends BaseSanityModel
                         new Field(FieldType::URL, 'assignment_sheet_music_image')
                     ]
         );
+
+        $resourceList = new ListObject(
+            fields: [new Field(FieldType::String, 'resource_name'),
+                        new Field(FieldType::URL, 'resource_url')],
+            previewItem: new ListItemPreview('resource_name', 'resource_url')
+        );
+
         $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $genreReference = new Reference([['type' => 'genre']],  options: ['aiAssist'=>['embeddingsIndex' => 'genre-index']]);
         $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
@@ -99,6 +106,7 @@ class QuickTip extends BaseSanityModel
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
             new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list',group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
+            new Field(FieldType::Array, 'resource', 'Resources', of: $resourceList, group:$detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
             new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList,group:$detailsGroup),
             new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList,group:$detailsGroup),

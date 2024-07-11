@@ -15,6 +15,7 @@ import RolesBasedPermissionsInput from './components/RolesBasedPermissionsInput'
 import OpenAiInput from './components/OpenAiInput'; // Import the custom component
 import {CreateImprovedAction} from './actions/actions'; // Import the custom component
 import { defaultDocumentNode } from './defaultDocumentNode';
+import { musoraStructure } from './musoraStructure';
 import IsUniqueAcrossBrand from './components/IsUniqueAcrossBrand';
 import {media} from 'sanity-plugin-media'
 
@@ -95,7 +96,9 @@ function App() {
                     title: config.title,
                     icon: icons[config.icon] ? icons[config.icon] : null,
                     plugins: [
-                      structureTool({ defaultDocumentNode }),
+                      structureTool({
+                          structure: musoraStructure,
+                          defaultDocumentNode: defaultDocumentNode }),
                       visionTool(),
                       media(),
                       assist(),
