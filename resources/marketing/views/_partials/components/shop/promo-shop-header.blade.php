@@ -15,8 +15,8 @@
     <img class="w-auto h-16 sm:h-24 lg:h-28 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">
     <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
 @endif
-        
-          
+
+
             {{--            <div class="flex items-center justify-center">--}}
 {{--                <img class="{{ $shopStyles }}"--}}
 {{--                    src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">--}}
@@ -31,6 +31,18 @@
 {{--                <strong>DRUM SHOP</strong>--}}
 {{--            </h1>--}}
             <h5 class="leading-tight mb-4 uppercase">{!! $text !!}</h5>
+
+            @if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                @include('_partials.components.countdown',[
+                    'countdownDate' => '2024-7-18 00:00:00',
+                    'promoVersion' => true
+                ])
+            @else
+                @include('_partials.components.countdown',[
+                    'countdownDate' => '2024-8-1 00:00:00',
+                    'promoVersion' => true
+                ])
+            @endif
             <div x-data="timer()" x-init="countdown()">
                 <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00101D] bg-[#FFD600] rounded-xl p-4">
                     <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>
