@@ -31,14 +31,11 @@
                 </strong>
             </h1>
 
-            @if($category === 'bundles')
+            @if($category === 'bundles' && $product->slug != 'little-book-bundle')
                 <p class="text-sm text-black rounded-lg px-2 leading-none py-1 block opacity-40">${{ round($fullPrice - $price) }} <em> in FREE BONUSES </em></p>
             @else
-
                 <p class="text-sm font-black text-black rounded-lg px-2 leading-none py-1 inline-block bg-musora">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
             @endif
-
-            
 
             @elseif(isset($price))
                 <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
