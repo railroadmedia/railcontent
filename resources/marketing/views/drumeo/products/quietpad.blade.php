@@ -329,8 +329,8 @@
             <h6 class="mt-2 italic">Here's what they're saying...</h6>
             <div class="flex flex-wrap my-5 sm:my-9">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3 text-left text-white">
-                    <div class="rounded-xl pr-4 py-8 sm:py-12 bg-cover pl-[33%] sm:pl-[40%]" style="padding-left: 33%;background-position:33% 0%;background-image:url('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/quietpad-colorburst/testimonial-02.webp');">
-                        <div class="mb-4">
+                    <div class="rounded-xl pr-4 py-6 lg:py-12 bg-cover pl-[35%] sm:pl-[40%]" style="background-position:33% 0%;background-image:url('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/quietpad-colorburst/testimonial-02.webp');">
+                        <div class="mb-2 lg:mb-4">
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -338,10 +338,11 @@
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                         </div>
                         <p class="leading-normal text-sm">"I love using my QuietPad when I’m on the road or outside while enjoying the sun – it’s great to practice without disturbing anyone haha!"
-                            <br><br><strong>Domino Santantonio</strong></p>
+                            <br><br><strong>Domino Santantonio</strong><br>
+                            Content Creator | 1.7M TikTok Followers</p>
                     </div>
-                    <div class="rounded-xl pr-4 py-8 sm:py-12 bg-cover pl-[33%] lg:pl-[40%]" style="padding-left: 33%;background-position:33% 0%;background-image:url('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/quietpad-colorburst/testimonial-01.webp');">
-                        <div class="mb-4">
+                    <div class="rounded-xl pr-4 py-6 lg:py-12 bg-cover pl-[35%] sm:pl-[40%]" style="background-position:33% 0%;background-image:url('https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/products/quietpad-colorburst/testimonial-01.webp');">
+                        <div class="mb-2 lg:mb-4">
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -349,7 +350,8 @@
                             <i class="align-middle text-2xl fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                         </div>
                         <p class="leading-normal text-sm">"With this pad, I have both the surfaces I need to practice my speed and endurance for my videos. Sometimes, I use the quiet side to mute my snare hits when I’m working on a difficult pattern – it works perfectly!"
-                            <br><br><strong>El Estepario Siberiano</strong></p>
+                            <br><br><strong>El Estepario Siberiano</strong><br>
+                            Content Creator | 920M YouTube Views</p>
                     </div>
                 </div>
                 <div class="hidden sm:flex flex-wrap items-start text-left justify-center">
@@ -380,7 +382,7 @@
                                     <i class="align-middle text-xl fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <p class="leading-normal text-sm">{!! $review['description'] !!}<br><br><em>Verified review via Thomann Music</em></p>
+                                    <p class="leading-normal text-sm">{!! $review['description'] !!}<br><br><em>Student</em></p>
                                 </div>
                             </div>
                         </div>
@@ -425,7 +427,7 @@
                                                     <i class="align-middle text-xl fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                                                 </div>
                                                 <div>
-                                                    <p class="leading-normal text-sm">{!! $review['description'] !!}<br><br><em>Verified review via Thomann Music</em></p>
+                                                    <p class="leading-normal text-sm">{!! $review['description'] !!}<br><br><em>Student</em></p>
                                                 </div>
                                             </div>
                                         </div>

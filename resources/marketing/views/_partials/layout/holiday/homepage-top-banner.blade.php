@@ -7,12 +7,12 @@
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 <img class="w-auto h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-logo-text-only.webp">
             </a>
-            <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
+            <img class="h-80 absolute right-0 top-0 hidden sm:block translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
         @elseif($theme === 'pianote')
             <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
                 <img class="w-auto h-14 sm:h-16 lg:h-20" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">
             </a>
-            <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
+            <img class="h-80 absolute right-0 top-0 hidden sm:block translate-x-full" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
         @endif
             <h5 class="leading-tight my-4 uppercase">{!! $text !!}</h5>
 
