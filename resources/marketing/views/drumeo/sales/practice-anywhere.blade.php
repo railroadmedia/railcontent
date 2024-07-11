@@ -194,20 +194,20 @@
                     'shipping' => true,
                     ],
                     [
-                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/quietpad-card.webp',
+                        'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/quietpad-card-new.webp',
                         'title' => 'QuietPad',
                         'description' => 'Practice anywhere with two full-size playing surfaces.',
                         'price' => floatval($productPrices['quietpad']->price),
                         'shipping' => true,
                     ],
                     [
-                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/30d-drummer.jpg',
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/30DD-card.webp',
                     'title' => '30-Day Drummer',
                     'description' => '30-Day Drummer gives you guided play-along workouts every day for thirty days.',
                     'price' => floatval($productPrices['30-day-drummer-4']->price),
                     ],
                     [
-                    'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/eaa92a5e-9269-4d51-873b-bc0124540a40-30d-chops-thumb.png',
+                    'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/30DC-card.webp',
                     'title' => '30-Day Chops',
                     'description' => '30-Day Chops is the first-ever course that teaches you tasty linear drum chops one note at a time.',
                     'price' => floatval($productPrices['30-day-chops']->price),

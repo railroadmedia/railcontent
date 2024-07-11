@@ -211,26 +211,26 @@
                     @php
                         $bonuses = [
                             [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/pianote/promos/may/annual.png',
                                 'description' => "Level up your skills with Pianote - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
                                 'price' => '240',
                                 'customText' => '$180',
                                 'customSubText' => 'true'
                             ],
                             [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/metronome.jpg',
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/metronome-card.webp',
                                 'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
                                 'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
                                 'shipping' => 'true'
                             ],
                             [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/chords.jpg',
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/CSB-card.webp',
                                 'description' => 'Your encyclopedia of piano chords & scales.',
                                 'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                                 'shipping' => 'true'
                             ],
                             [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/little-book.jpg',
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/LBB-card.webp',
                                 'description' => 'Three little books to improve your chording, technique, and arpeggios.',
                                 'price' => 21,
                                 'shipping' => 'true'
@@ -249,7 +249,7 @@
                                 'price' => floatval($productPrices['easy-chords']->price),
                             ],
                              [
-                                'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/46f26b8d-f53a-44c6-8eb2-d9a700801310-30d-blues.png',
+                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/30DB-card.webp',
                                 'title' => '30-Day Blues Piano',
                                 'description' => '30-Day Blues Piano will guide you through the essential skills you need to confidently play the Blues on your piano.',
                                 'price' => floatval($productPrices['30-day-blues-piano']->price),
