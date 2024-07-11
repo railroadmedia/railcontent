@@ -47,8 +47,8 @@ class ContentCompiledColumnTransformer
                 $contentIds,
                 []));
         $groupedPermissions = $contentPermissionRows->groupBy('content_id');
-
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+        $userExists = (user() ?? null);
+        $userPermissions = $userExists ? $this->userPermissionsRepository->getUserPermissions(user()->id, true) : [];
         $userPermissionIds = Arr::pluck($userPermissions, 'permission_id');
         $membershipPermissionIds = PermissionService::getMemberShipPermissionIds();
         if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
@@ -57,12 +57,12 @@ class ContentCompiledColumnTransformer
 
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
-
-            $needAccess = (isset($groupedPermissions[$contentRow['id']])) && empty(
+            $contentPermissions = $groupedPermissions->get($contentRow['id']);
+            $contentPermissionIds = $contentPermissions?->pluck('id')->toArray() ?? [];
+            $needAccess = !$userExists && empty(
                 array_intersect(
                     $userPermissionIds,
-                    (isset($groupedPermissions[$contentRow['id']])) ?
-                        Arr::pluck($groupedPermissions[$contentRow['id']], 'id') : []
+                    $contentPermissionIds
                 ));
             $contentRows[$contentRowIndex]['need_access'] = $needAccess;
 
@@ -88,7 +88,7 @@ class ContentCompiledColumnTransformer
                         $dataKeyCounts[$dataKey] = 0;
                     }
 
-                    if ($compiledDataKey === $dataKey) {
+                    if ($compiledDataKey === $dataKey) {$userPermissionIds
                         $compiledDataValue = Arr::wrap($compiledDataValue);
 
                         foreach ($compiledDataValue as $compiledDataSingleValue) {
@@ -99,7 +99,7 @@ class ContentCompiledColumnTransformer
                                 'content_id' => $contentRow['id'],
                                 'key' => $dataKey,
                                 'value' => $compiledDataSingleValue,
-                                'position' => $dataKeyCounts[$dataKey],
+                                'position' =$userPermissionIds> $dataKeyCounts[$dataKey],
                             ];
                         }
                         if (self::$avoidDuplicates) {
