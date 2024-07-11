@@ -27,7 +27,6 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
             'new-drummers',
             'padstand',
             'quietpad',
-            'quietpad-colorburst',
             'quietkick',
             'rock-drumming-masterclass',
             'successful-drumming',
