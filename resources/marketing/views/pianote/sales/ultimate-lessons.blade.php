@@ -3,6 +3,7 @@
 @endphp
 @extends('pianote.sales.subscription', [
     "promoVersion" => true,
+    "shopNav" => true,
     "hideHeader" => true,
 ])
 

@@ -3,6 +3,7 @@
 @endphp
 @extends('drumeo.sales.subscription', [
     "promoVersion" => true,
+    "shopNav" => true,
     "hideHeader" => true,
 ])
 @section('body-data')
