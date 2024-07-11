@@ -302,18 +302,18 @@
 
 
             <div x-data="{
-                selectedIndex: null,
-                selectedProduct: '#0B76DB',
-                colors: {
-                    '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Purple'],
-                    '#3CDBC0': ['quietpad-color-burst-turquoise', 'Triplet', 'Teal'],
-                    '#0B76DB': ['quietpad', 'Drumeo', 'Blue'],
-                    '#79C300': ['quietpad-color-burst-green', 'Ghostnote', 'Green'],
-                    '#FF6900': ['quietpad-color-burst-orange', 'Ostinato', 'Orange']
-                },
-                hoverIndex: null
-            }">
-                <div class="border-2 border-white rounded-xl py-5 px-10 text-center text-white">
+                    selectedIndex: 2,
+                    selectedProduct: '#0B76DB',
+                    colors: {
+                        '#BB16A3': ['quietpad-color-burst-purple', 'Paradiddle', 'Pink'],
+                        '#3CDBC0': ['quietpad-color-burst-turquoise', 'Triplet', 'Teal'],
+                        '#0B76DB': ['quietpad', 'Drumeo', 'Blue'],
+                        '#79C300': ['quietpad-color-burst-green', 'Ghostnote', 'Green'],
+                        '#FF6900': ['quietpad-color-burst-orange', 'Ostinato', 'Orange']
+                    },
+                    hoverIndex: null
+                }">
+                <div class="border-2 border-white rounded-xl py-5 px-2 sm:px-10 text-center text-white">
                     <p class="leading-tight mb-4">
                         <strong class="font-black"><em>Select your QuietPad color below:</em></strong>
                     </p>
@@ -321,8 +321,10 @@
                         <template x-for="(color, index) in Object.keys(colors)" :key="index">
                             <div class="relative cursor-pointer"
                                 @click="selectedIndex = index; selectedProduct = color;">
-                                <div class="relative inline-block rounded-full sm:p-1 border-4 transition-all border-transparent hover:border-white hover:sm:border-opacity-50"
-                                    :class="{ 'border-white': selectedIndex === index, }">
+                                <div :class="[
+                                    'relative inline-block rounded-full sm:p-1 border-4 transition-all border-transparent',
+                                    selectedIndex === index ? 'border-white' : 'hover:border-white hover:sm:border-opacity-50'
+                                ]">
                                     <img
                                         class="rounded-full"
                                         :style="'background-color:' + color"
