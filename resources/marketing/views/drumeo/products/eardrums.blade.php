@@ -798,6 +798,13 @@
         </div>
     </section>
 
+    <section class="py-6 md:py-10 text-center">
+        <p class="max-w-md px-4 md:px-2 leading-normal">
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer</b><br>
+            Due to high demand, your EarDrums will ship <br class="hidden sm:inline">
+            within 2-4 business days of your order.
+        </p>
+    </section>
     <section class="text-center py-10" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 sm:px-4 mb-5 text-light-navy">

@@ -8,7 +8,7 @@
     }">
     <div class="container max-w-xl lg:max-w-3xl xl:max-w-4xl mx-auto">
         <div class="flex flex-col sm:flex-nowrap items-center">
-            <div class="text-center w-3/4">
+            <div class="text-center w-full">
                 <img class="{{ isset($extraClass) ? $extraClass . ' ' : '' }}h-16 sm:h-20 -mb-3 sm:mb-0 lg:mb-3 py-1"
                      src="{{ $logoHeader }}" alt="{{ $logoAlt }}"
                      fetchpriority="hight">
@@ -34,13 +34,9 @@
                 @endforeach
                 <div class="flex inline lg:hidden my-3">
                     @foreach ($checklist as $item)
-                        @php
-                            $firstWord = strtok($item, ' ');
-                            $restOfWords = substr($item, strlen($firstWord));
-                        @endphp
                         <p class="w-1/2 leading-tight">
                             <i class="fas fa-check-circle text-{{ $brand }}" aria-hidden="true"></i><br />
-                            {{ $firstWord }}<br />{{ $restOfWords }}
+                            {{ $item }}
                         </p>
                     @endforeach
                 </div>
@@ -61,7 +57,7 @@
                 {{-- Blur --}}
                 <div x-data="{ videoLoaded: false }">
                     <img src="{{ $poster }}" alt="Blurred Poster Image" class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 blur-xl" x-show="!videoLoaded">
-                    
+
                     <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0"
                         x-ref="playToLearnVideo"
                         x-on:error="loadAlternateSrc('{{ $alternateSrc }}')"
