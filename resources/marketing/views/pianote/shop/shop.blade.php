@@ -9,7 +9,7 @@
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    
+
     <style>
         .splide__arrow.pianote svg {
             fill:#F61A30 !important;
@@ -30,7 +30,7 @@
 @section('body')
 
     @include('_partials.components.shop.promo-shop-header',[
-        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% UNTIL JULY 17th!</strong>',
+        'text' => 'get lessons, accessories, and merch.<br> <strong class="text-[#FFD600]">SAVE UP TO 90% UNTIL JULY 14th!</strong>',
         'bg' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2500x0/filters:quality(95)/marketing/pianote/promos/summer-sale/header-bg.webp',
         'isShop' => true,
     ])

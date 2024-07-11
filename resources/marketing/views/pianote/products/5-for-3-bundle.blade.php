@@ -154,9 +154,9 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
     @include('pianote.sales.partials._footer')
 @endsection
 
-@if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+@if(Carbon\Carbon::create(2024, 7, 15, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
     @include('_partials.components.countdown',[
-        'countdownDate' => '2024-7-18 00:00:00',
+        'countdownDate' => '2024-7-15 00:00:00',
         'promoVersion' => true
     ])
 @else
