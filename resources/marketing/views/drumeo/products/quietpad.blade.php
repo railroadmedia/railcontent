@@ -330,7 +330,7 @@
     </section>
     <section class="text-center px-5 py-10 md:py-20 lg:py-24">
         <div class="container mx-auto max-w-5xl">
-            <h2><strong>20,000 Drummers<br class="sm:hidden"> Use The QuietPad.</strong></h2>
+            <h2><strong>13,995 Drummers<br class="sm:hidden"> Use The QuietPad.</strong></h2>
             <h6 class="mt-2 italic">Here's what they're saying...</h6>
             <div class="flex flex-wrap my-5 sm:my-9">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3 text-left text-white">
