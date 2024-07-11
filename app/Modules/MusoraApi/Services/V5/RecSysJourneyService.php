@@ -3,8 +3,8 @@
 namespace App\Modules\MusoraApi\Services\V5;
 
 use App\Modules\EventTracking\Avo\AvoHelper;
+use App\Modules\MusoraApi\Jobs\ContentServedEventTrackingJob;
 use Avo;
-use Illuminate\Http\Request;
 
 class RecSysJourneyService
 {
@@ -33,5 +33,11 @@ class RecSysJourneyService
                 user()
             )
         );
+    }
+
+    public function trackRecommendedContentServed(array $props): void
+    {
+        $user = user();
+        dispatchWithDelay(new ContentServedEventTrackingJob($props, $user), 5);
     }
 }
