@@ -88,7 +88,7 @@ class ContentCompiledColumnTransformer
                         $dataKeyCounts[$dataKey] = 0;
                     }
 
-                    if ($compiledDataKey === $dataKey) {$userPermissionIds
+                    if ($compiledDataKey === $dataKey) {
                         $compiledDataValue = Arr::wrap($compiledDataValue);
 
                         foreach ($compiledDataValue as $compiledDataSingleValue) {
@@ -99,7 +99,7 @@ class ContentCompiledColumnTransformer
                                 'content_id' => $contentRow['id'],
                                 'key' => $dataKey,
                                 'value' => $compiledDataSingleValue,
-                                'position' =$userPermissionIds> $dataKeyCounts[$dataKey],
+                                'position' => $dataKeyCounts[$dataKey],
                             ];
                         }
                         if (self::$avoidDuplicates) {
