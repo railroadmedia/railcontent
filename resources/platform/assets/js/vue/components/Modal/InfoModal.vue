@@ -81,7 +81,7 @@ onUnmounted(() => {
             tw-mb-5
           "
         >
-          <h3 class="tw-w-full tw-text-black dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl" v-html="title"></h3>
+          <h3 class="tw-w-full tw-text-black dark:tw-text-white tw-font-bold tw-text-xl md:tw-text-2xl tw-mr-5" v-html="title"></h3>
           <button @click="onClose" class="tw-text-[#000C17] dark:tw-text-white tw-z-20">
             <XIcon class="tw-h-[28px] md:tw-h-[36px] tw-w-[28px] md:tw-w-[36px]" />
           </button>
