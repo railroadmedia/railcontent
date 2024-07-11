@@ -50,26 +50,26 @@
         <h1 class="uppercase font-bebas leading-none">Limited Time COLORBURST Series</h1>
         <h6 class="leading-tight mb-4">5 different color QuietPads to choose from below:</h6>
         <div class="flex flex-row max-w-md justify-center mx-auto">
-            <template x-for="(color, index) in Object.keys(colors)" :key="index">
-                <div class="relative cursor-pointer"
-                    @click="selectedIndex = index; selectedProduct = color;">
-                    <div class="relative inline-block rounded-full sm:p-0.5 border-2 border-transparent hover:border-white hover:sm:border-opacity-50"
-                        :class="{ 'border-white': selectedIndex === index, }">
-                        <img class="rounded-full"
-                            :style="'background-color:' + color"
-                            src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/flipper-transparent.png">
-                        <svg x-show="selectedIndex === index" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-11 h-11 m-auto"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M20 6L9 17l-5-5" />
-                        </svg>
-                    </div>
-                    <p class="mt-1 text-sm leading-tight">
-                        <em x-text="colors[color][1]"></em><br>
-                        <strong class="font-black" x-text="colors[color][2]"></strong>
-                    </p>
+        <template x-for="(color, index) in Object.keys(colors)" :key="index">
+            <div class="relative cursor-pointer"
+                @click="selectedIndex = index; selectedProduct = color;">
+                <div class="relative inline-block rounded-full sm:p-0.5 border-2 border-transparent"
+                    :class="selectedIndex === index ? 'border-white' : 'hover:border-white hover:sm:border-opacity-50 border-transparent'">
+                    <img class="rounded-full"
+                        :style="'background-color:' + color"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/flipper-transparent.png">
+                    <svg x-show="selectedIndex === index" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-11 h-11 m-auto"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
                 </div>
-            </template>
+                <p class="mt-1 text-sm leading-tight">
+                    <em x-text="colors[color][1]"></em><br>
+                    <strong class="font-black" x-text="colors[color][2]"></strong>
+                </p>
+            </div>
+        </template>
         </div>
     </div>
     <header class="text-white relative overflow-hidden z-10" style="height:700px;background-color:#000;">
@@ -466,8 +466,10 @@
                 <template x-for="(color, index) in Object.keys(colors)" :key="index">
                     <div class="relative cursor-pointer"
                         @click="selectedIndex = index; selectedProduct = color;">
-                        <div class="relative inline-block rounded-full sm:p-1 border-4 transition-all border-transparent hover:border-white hover:sm:border-opacity-50"
-                            :class="{ 'border-white': selectedIndex === index, }">
+                        <div :class="[
+                                    'relative inline-block rounded-full sm:p-1 border-4 transition-all border-transparent',
+                                    selectedIndex === index ? 'border-white' : 'hover:border-white hover:sm:border-opacity-50'
+                                ]">
                             <img class="rounded-full"
                                 :style="'background-color:' + color"
                                 src="https://d21q7xesnoiieh.cloudfront.net/fit-in/500x0/filters:quality(95)/marketing/drumeo/products/quietpad-colorburst/flipper-transparent.png">
