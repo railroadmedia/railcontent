@@ -43,6 +43,7 @@
         "name" => "The Ultimate Lessons Bundle",
         "fullPrice" => 240,
         "price" => 180,
+        "isFixed" => true,
     ])
 
 @php
@@ -364,7 +365,7 @@
     ])
 {{-- <script type="application/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-        var stickyBar = document.querySelector('.promo-banner');
+        var stickyBar = document.querySelector('.big-promo-banner');
         window.addEventListener('scroll', function () {
             var stickTrigger = document.querySelector('.sticky-trigger').offsetTop;
             var unstickTrigger = document.querySelector('.unstick-trigger').offsetTop;
