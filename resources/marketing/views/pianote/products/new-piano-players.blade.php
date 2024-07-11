@@ -78,8 +78,13 @@
     ])
 
         @php
-            $price = floatval($productPrices['new-piano-players-start-here']->price);
-            $discountedPrice = floatval($productPrices['new-piano-players-start-here']->discounted_price);
+        $price = number_format(floatval($productPrices['new-piano-players-start-here']->price), 2) == intval(floatval($productPrices['new-piano-players-start-here']->price))
+        ? floatval($productPrices['new-piano-players-start-here']->price)
+        : number_format(floatval($productPrices['new-piano-players-start-here']->price), 2);
+
+        $discountedPrice = number_format(floatval($productPrices['new-piano-players-start-here']->discounted_price), 2) == intval(floatval($productPrices['new-piano-players-start-here']->discounted_price))
+        ? floatval($productPrices['new-piano-players-start-here']->discounted_price)
+        : number_format(floatval($productPrices['new-piano-players-start-here']->discounted_price), 2);
             $enrollmentLink = 'https://www.pianote.com/choose-plan';
             $brandTitle = 'Pianote';
             $buttonText = 'GET STARTED';

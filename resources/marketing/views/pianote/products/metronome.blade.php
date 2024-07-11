@@ -35,12 +35,23 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    @include('_partials.components.shop.promo-banner-3', [
-        "name" => "Pianote Metronome",
-        "fullPrice" => floatval($productPrices['taktell-piccolo-metronome']->price),
-        "price" => floatval($productPrices['taktell-piccolo-metronome']->discounted_price),
-        "noBreadcrumb" => true
-    ])
+
+@php
+    $fullPriceValue = number_format(floatval($productPrices['taktell-piccolo-metronome']->price), 2) == intval(floatval($productPrices['taktell-piccolo-metronome']->price))
+        ? floatval($productPrices['taktell-piccolo-metronome']->price)
+        : number_format(floatval($productPrices['taktell-piccolo-metronome']->price), 2);
+
+    $discountedPriceValue = number_format(floatval($productPrices['taktell-piccolo-metronome']->discounted_price), 2) == intval(floatval($productPrices['taktell-piccolo-metronome']->discounted_price))
+        ? floatval($productPrices['taktell-piccolo-metronome']->discounted_price)
+        : number_format(floatval($productPrices['taktell-piccolo-metronome']->discounted_price), 2);
+@endphp
+
+@include('_partials.components.shop.promo-banner-3', [
+    "name" => "Pianote Metronome",
+    "fullPrice" => $fullPriceValue,
+    "price" => $discountedPriceValue,
+    "noBreadcrumb" => true
+])
 
     <header class="text-white px-5 sm:px-6 pt-[100%] pb-10 sm:py-20 lg:py-28 relative" style="background-color:#690808;">
         <div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden" style="background:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/750x0/filters:quality(95)/marketing/pianote/products/metronome/header-bg-m.jpg')"></div>
@@ -52,11 +63,11 @@
                     <img class="h-24 lg:h-32 hidden lg:inline-block" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-web-logo.svg">
                     <p class="leading-normal my-3 sm:my-6">Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner. </p>
                     <h4 class="mb-3 sm:mb-6">
-                        @if(floatval($productPrices['taktell-piccolo-metronome']->price) > floatval($productPrices['taktell-piccolo-metronome']->discounted_price))
-                            <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['taktell-piccolo-metronome']->price) }}</s>
-                            <strong>${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['taktell-piccolo-metronome']->discounted_price) / floatval($productPrices['taktell-piccolo-metronome']->price)))) }}%)
+                        @if($fullPriceValue > $discountedPriceValue)
+                            <strong>ONLY</strong> <s class="opacity-60">${{ $fullPriceValue }}</s>
+                            <strong>${{ $discountedPriceValue }}</strong> (SAVE {{ round(100 - (100 * ($discountedPriceValue / $fullPriceValue))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ $discountedPriceValue }}</strong>
                         @endif
                     </h4>
                     <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1" class="join medium w-full">ORDER NOW &raquo;</a>
@@ -267,11 +278,11 @@
                     <img class="h-24 lg:h-32 hidden lg:inline-block" alt="logo" fetchpriority="high" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/580x0/filters:quality(95)/marketing/pianote/products/metronome/metronome-web-logo.svg">
                     <p class="leading-normal my-5 sm:my-6">Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner. </p>
                     <h4 class="mb-5 sm:mb-6">
-                        @if(floatval($productPrices['taktell-piccolo-metronome']->price) > floatval($productPrices['taktell-piccolo-metronome']->discounted_price))
-                            <strong>ONLY</strong> <s class="opacity-60">${{ floatval($productPrices['taktell-piccolo-metronome']->price) }}</s>
-                            <strong>${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['taktell-piccolo-metronome']->discounted_price) / floatval($productPrices['taktell-piccolo-metronome']->price)))) }}%)
+                        @if($fullPriceValue > $discountedPriceValue)
+                            <strong>ONLY</strong> <s class="opacity-60">${{ $fullPriceValue }}</s>
+                            <strong>${{ $discountedPriceValue }}</strong> (SAVE {{ round(100 - (100 * ($discountedPriceValue / $fullPriceValue))) }}%)
                         @else
-                            <strong>ONLY ${{ floatval($productPrices['taktell-piccolo-metronome']->discounted_price) }}</strong>
+                            <strong>ONLY ${{ $discountedPriceValue }}</strong>
                         @endif
                     </h4>
                     <a href="/ecommerce/add-to-cart?products[taktell-piccolo-metronome]=1" class="join medium w-full">ORDER NOW &raquo;</a>
