@@ -733,8 +733,8 @@
                     </p>
                 </div>
                 <picture class="w-full sm:w-auto h-auto sm:h-96">
-                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo.webp">
-                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo-m.webp">
+                    <source media="(min-width: 768px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
+                    <img class="sm:rounded-xl" src="https://d21q7xesnoiieh.cloudfront.net/700x700/filters:quality(95)/marketing/drumeo/products/eardrums-black/join-drumeo2.jpg">
                 </picture>
             </div>
         </div>
