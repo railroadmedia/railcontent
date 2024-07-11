@@ -15,13 +15,13 @@
 
     function timer(){
         return {
-            day: '00',
+            day: 0,
             dayText: @if(!empty($promoVersion) && $promoVersion) 'DAYS' @else ' days' @endif,
-            hour: '00',
+            hour: 0,
             hourText: @if(!empty($promoVersion) && $promoVersion) 'HRS' @else ' hours' @endif,
-            minute: '00',
+            minute: 0,
             minuteText: @if(!empty($promoVersion) && $promoVersion) 'MIN' @else ' minutes' @endif,
-            second: '00',
+            second: 0,
             secondText: @if(!empty($promoVersion) && $promoVersion) 'SEC' @else ' seconds' @endif,
             endTime: new Date('{{ $countdownDate }}').getTime(),
             endTime2: @if(!empty($countdownDate2)) new Date('{{ $countdownDate2 }}').getTime() @else new Date('{{ $countdownDate }}').getTime() @endif,

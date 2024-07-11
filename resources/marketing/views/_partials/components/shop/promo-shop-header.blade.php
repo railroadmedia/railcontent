@@ -10,10 +10,10 @@
 
 @if($theme === 'drumeo')
     <img class="w-auto h-16 sm:h-24 lg:h-28 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-logo-text-only.webp">
-    <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
+    <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translateX(100%);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/drumeo-summer-hand-icon.webp">
 @elseif($theme === 'pianote')
     <img class="w-auto h-16 sm:h-24 lg:h-28 mb-3 sm:mb-6" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-logo-text-only.webp">
-    <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translate(100%, 0);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
+    <img class="h-80 absolute right-0 top-0 hidden sm:block" style="transform: translateX(100%);" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-summer-sun-icon.webp">
 @endif
 
 
@@ -38,25 +38,26 @@
                     <div class="h-12 mx-4 bg-[#00101D]" style="width:2px;"></div>
                     <div class="flex">
                         <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && day > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">00</div>
+                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="day">0</div>
                             <div class="text-xs font-semibold" x-text="dayText">DAYS</div>
                         </div>
                         <div class="mr-4 sm:mr-6" x-show="timeLeft > 0 && hour > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour">00</div>
+                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="hour">0</div>
                             <div class="text-xs font-semibold" x-text="hourText">HRS</div>
                         </div>
                         <div class="mr-4 sm:mr-6" x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="minute">00</div>
+                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="minute">0</div>
                             <div class="text-xs font-semibold" x-text="minuteText">MIN</div>
                         </div>
                         <div x-show="timeLeft > 0">
-                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="second">00</div>
+                            <div class="text-2xl sm:text-3xl font-extrabold" x-text="second">0</div>
                             <div class="text-xs font-semibold" x-text="secondText">SEC</div>
                         </div>
                         <span x-cloak x-show="timeLeft < 0">A Limited Time Left!</span>
                     </div>
                 </div>
             </div>
+
         @else
             <h1 class="uppercase leading-none sm:leading-none text-4xl sm:text-7xl mb-2">
                 <strong>

@@ -52,6 +52,18 @@
 
 
 @section('layout-scripts')
+    @if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2024-07-18 00:00:00',
+            'promoVersion' => true
+        ])
+    @else
+        @include('_partials.components.countdown',[
+            'countdownDate' => '2023-08-01 00:00:00',
+            'promoVersion' => true
+        ])
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>
@@ -204,15 +216,5 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @if(Carbon\Carbon::create(2024, 7, 18, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        @include('_partials.components.countdown',[
-            'countdownDate' => '2024-7-18 00:00:00',
-            'promoVersion' => true
-        ])
-    @else
-        @include('_partials.components.countdown',[
-            'countdownDate' => '2024-8-1 00:00:00',
-            'promoVersion' => true
-        ])
-    @endif
+  
 @endsection
