@@ -125,7 +125,7 @@
                 <span class="mb-4 sm:mb-6 text-xl md:text-3xl">Save {{$savePercentage}}% </span>
             </span>
             </h2>
-            <p class="mb-4 sm:mb-6"><strong class="font-black">PLUS</strong> get $540 in free bonuses</p>
+            <p class="mb-4 sm:mb-6"><strong class="font-black">PLUS</strong> get $520 in free bonuses</p>
 
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 

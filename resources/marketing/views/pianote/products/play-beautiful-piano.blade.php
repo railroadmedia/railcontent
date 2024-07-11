@@ -194,7 +194,13 @@
         <div class="container mx-auto">
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30 animated fadeIn">
                 <img class="h-20 md:h-40 lg:h-52 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
-                <h4 class="leading-normal mb-5 md:mb-8">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
+                <h4 class="leading-normal mb-5 md:mb-8">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>
+                        @if(number_format(floatval($productPrices['play-beautiful-piano']->discounted_price), 2) == intval(floatval($productPrices['play-beautiful-piano']->discounted_price)))
+                            ${{  floatval($productPrices['play-beautiful-piano']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['play-beautiful-piano']->discounted_price), 2)  }}
+                        @endif
+                    </strong>.</h4>
                 <a class="join vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1">Play Beautifully &raquo;</a>
             </div>
             <div class="bottom absolute bottom-0 left-0 right-0 z-30 pb-5 md:pb-8"><img class="h-14 md:h-16 lg:h-20 animated infinite pulse" src="https://www.musora.com/musora-cdn/image/width=70,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/treble-clef.png" alt="Treble clef"></div>
@@ -398,7 +404,13 @@
                 <div class="md:pr-8 lg:pr-10">
                     <h2 class="mb-5 lg:mb-10 text-center md:text-left">The Best Results Guaranteed.<br>
                         <strong>With NO Risk.</strong></h2>
-                    <p class="leading-normal text-left">You’ll be playing beautiful music from your very 1st lesson — for just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}. That's just ${{ number_format(floatval($productPrices['play-beautiful-piano']->discounted_price) / 6, 2) }} per lesson.
+                    <p class="leading-normal text-left">You’ll be playing beautiful music from your very 1st lesson — for just
+                        @if(number_format(floatval($productPrices['play-beautiful-piano']->discounted_price), 2) == intval(floatval($productPrices['play-beautiful-piano']->discounted_price)))
+                            ${{  floatval($productPrices['play-beautiful-piano']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['play-beautiful-piano']->discounted_price), 2)  }}
+                        @endif
+                        . That's just ${{ number_format(floatval($productPrices['play-beautiful-piano']->discounted_price) / 6, 2) }} per lesson.
                         <br><br>
                         And we’ll admit, there are some pretty big claims on this page. But you know what, we believe them. And we stand by them.
                         <br><br>
@@ -423,8 +435,14 @@
         <div class="container mx-auto">
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30">
                 <img class="h-20 md:h-40 lg:h-52 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
-                <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
-                <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1">Play Beautifully For Just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }} &raquo;</a>
+                <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>
+                        @if(number_format(floatval($productPrices['play-beautiful-piano']->discounted_price), 2) == intval(floatval($productPrices['play-beautiful-piano']->discounted_price)))
+                            ${{  floatval($productPrices['play-beautiful-piano']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['play-beautiful-piano']->discounted_price), 2)  }}
+                        @endif
+                    </strong>.</h4>
+                <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="/ecommerce/add-to-cart?products[play-beautiful-piano]=1">Get Started &raquo;</a>
 {{--                <a class="text-pianote" href="/"><h6><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></h6></a>--}}
                 <h6 class="mt-2"><strong>** 90-DAY GUARANTEE **</strong></h6>
             </div>

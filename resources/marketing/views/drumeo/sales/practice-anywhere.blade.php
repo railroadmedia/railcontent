@@ -166,7 +166,7 @@
             <div class="w-full px-4 md:px-0 mb-6">
                 <img class="w-full md:w-2/3" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp">
                 <br>
-                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get unlimited lessons +<br class="sm:hidden">  $520 in free bonuses.</h3>
+                <h3 class="leading-tight mt-4 sm:mt-5 mb-2">Get unlimited lessons +<br class="sm:hidden">  $385.95 in free bonuses.</h3>
             </div>
 
             @php

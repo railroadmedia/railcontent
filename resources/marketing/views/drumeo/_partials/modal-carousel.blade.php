@@ -84,11 +84,11 @@ x-init="$watch('open', value => { if (value) initSplide(); })">
                                     <li class="splide__slide">
                                         <picture>
                                             @if(!empty($squareImage))
-                                                <source media="(min-width: 1160px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/2300x2300/filters:quality(95)/' + slide">
-                                                <source media="(min-width: 1024px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1850x1850/filters:quality(95)/' + slide">
-                                                <source media="(min-width: 768px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1400x1400/filters:quality(95)/' + slide">
-                                                <source media="(min-width: 640px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/1150x1150/filters:quality(95)/' + slide">
-                                                <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/fit-in/750x750/filters:quality(95)/' + slide"
+                                                <source media="(min-width: 1160px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/2300x2300/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 1024px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/1850x1850/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 768px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/1400x1400/filters:quality(95)/' + slide">
+                                                <source media="(min-width: 640px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/1150x1150/filters:quality(95)/' + slide">
+                                                <img x-bind:src="'https://d21q7xesnoiieh.cloudfront.net/750x750/filters:quality(95)/' + slide"
                                                     alt="product image" class="w-full h-full bg-white object-contain overflow-hidden rounded-xl">
                                             @else
                                                 <source media="(min-width: 1160px)" x-bind:srcset="'https://d21q7xesnoiieh.cloudfront.net/fit-in/2300x0/filters:quality(95)/' + slide">

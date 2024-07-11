@@ -47,7 +47,7 @@ class ShopController extends BaseController
 
         $featured = $products->whereIn('id', [100, 260, 95, 238]);
 
-        $thirtyDD = Product::whereHas('brand', fn ($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 215, 214, 213, 212]);
+        $thirtyDD = Product::whereHas('brand', fn ($query) => $query->where('name', 'drumeo'))->where([['sold_out', 0]])->orderBy('display_order')->get()->whereIn('id', [217, 216, 214, 213, 212]);
 
         return view('drumeo.shop.shop', [
             'lessons' => $lessons,

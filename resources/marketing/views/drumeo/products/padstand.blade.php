@@ -131,7 +131,13 @@
                 <h3 class="leading-tight">
                     @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
                         <s class="opacity-50">${{ floatval($productPrices['padstand']->price) }}</s>
-                        <strong>${{ floatval($productPrices['padstand']->discounted_price) }}</strong>
+                        <strong>
+                            @if(number_format(floatval($productPrices['padstand']->discounted_price), 2) == intval(floatval($productPrices['padstand']->discounted_price)))
+                                ${{  floatval($productPrices['padstand']->discounted_price)  }}
+                            @else
+                                ${{  number_format(floatval($productPrices['padstand']->discounted_price), 2)  }}
+                            @endif
+                        </strong>
                         (Save {{ round(100 - (100 * (floatval($productPrices['padstand']->discounted_price) / floatval($productPrices['padstand']->price)))) }}%)
                     @else
                         <strong>Only ${{ floatval($productPrices['padstand']->discounted_price) }}</strong>
@@ -388,7 +394,13 @@
                                             <s>${{ floatval($productPrices['padstand']->price) }}</s>
                                         @endif
 
-                                        <strong>${{ floatval($productPrices['padstand']->discounted_price) }}</strong></h4>
+                                        <strong>
+                                            @if(number_format(floatval($productPrices['padstand']->discounted_price), 2) == intval(floatval($productPrices['padstand']->discounted_price)))
+                                                ${{  floatval($productPrices['padstand']->discounted_price)  }}
+                                            @else
+                                                ${{  number_format(floatval($productPrices['padstand']->discounted_price), 2)  }}
+                                            @endif
+                                        </strong></h4>
                                     <p class="text-sm"><em>
                                             @if(floatval($productPrices['padstand']->price) > floatval($productPrices['padstand']->discounted_price))
                                                 Save {{ round(100 - (100 * (floatval($productPrices['padstand']->discounted_price) / floatval($productPrices['padstand']->price)))) }}%

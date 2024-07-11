@@ -70,7 +70,15 @@
 
             <p class="columns uppercase price">
                 @if(floatval($productPrices['rock-drumming-masterclass-pack']->price) > floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price))
-                    <s>Normally ${{ floatval($productPrices['rock-drumming-masterclass-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / floatval($productPrices['rock-drumming-masterclass-pack']->price)))) }}%)
+                    <s>Normally ${{ floatval($productPrices['rock-drumming-masterclass-pack']->price) }}.</s>
+                    <strong>Only
+                        @if(number_format(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price), 2) == intval(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price)))
+                            ${{  floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price), 2)  }}
+                        @endif
+                    </strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / floatval($productPrices['rock-drumming-masterclass-pack']->price)))) }}%)
                 @else
                     <strong>Now ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong>
                 @endif
@@ -561,7 +569,7 @@
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills — <u>all for just ${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills — <u>all for just ${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }} per week</u>.
                 <br><br>
                 The entire course is yours for life with no recurring subscription or additional fees.
             </p>
@@ -644,7 +652,15 @@
 
             <h2 class="columns uppercase">
                 @if(floatval($productPrices['rock-drumming-masterclass-pack']->price) > floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price))
-                    <s>Normally ${{ floatval($productPrices['rock-drumming-masterclass-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / floatval($productPrices['rock-drumming-masterclass-pack']->price)))) }}%)
+                    <s>Normally ${{ floatval($productPrices['rock-drumming-masterclass-pack']->price) }}.</s>
+                    <strong>Only
+                        @if(number_format(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price), 2) == intval(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price)))
+                            ${{  floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price)  }}
+                        @else
+                            ${{  number_format(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price), 2)  }}
+                        @endif
+                    </strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / floatval($productPrices['rock-drumming-masterclass-pack']->price)))) }}%)
                 @else
                     <strong>Now ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong>
                 @endif

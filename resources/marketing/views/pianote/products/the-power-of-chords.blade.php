@@ -1,6 +1,13 @@
 @extends('pianote.products.the-power-of-chords-layout')
 
-@php $productPrice = floatval($productPrices['the-power-of-chords']->discounted_price) @endphp
+@php
+    if(number_format(floatval($productPrices['the-power-of-chords']->discounted_price), 2) == intval(floatval($productPrices['the-power-of-chords']->discounted_price))) {
+        $productPrice = floatval($productPrices['the-power-of-chords']->discounted_price);
+    }
+    else {
+         $productPrice = number_format(floatval($productPrices['the-power-of-chords']->discounted_price), 2);
+    }
+@endphp
 
 @section('order-link', '/ecommerce/add-to-cart?products[the-power-of-chords]=1')
 
