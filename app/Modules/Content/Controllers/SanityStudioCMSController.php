@@ -56,6 +56,8 @@ use App\Modules\Content\Models\Sanity\Workout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Modules\Content\Models\Sanity\License;
+use App\Modules\Content\Models\Sanity\Publisher;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Services\PermissionService;
 
@@ -117,8 +119,11 @@ class SanityStudioCMSController extends BaseController
             (new Creativity())->toArray(),
             (new Theory())->toArray(),
             (new Lifestyle())->toArray(),
-            (new Instructor())->toArray()
+            (new Instructor())->toArray(),
+            (new License())->toArray(),
+            (new Publisher())->toArray(),
         ];
+
         $publishing = [
             'projectId' => $projectId,
             'dataset' => $dataset,
