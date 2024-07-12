@@ -59,7 +59,7 @@ class ContentCompiledColumnTransformer
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
             $contentPermissions = $groupedPermissions->get($contentRow['id']);
             $contentPermissionIds = $contentPermissions?->pluck('id')->toArray() ?? [];
-            $needAccess = !$userExists && empty(
+            $needAccess = !$userExists || empty(
                 array_intersect(
                     $userPermissionIds,
                     $contentPermissionIds
