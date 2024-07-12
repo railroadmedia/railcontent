@@ -18,14 +18,16 @@ const props = defineProps({
 </script>
 
 <template>
-    <InfoModal :classOverride="`tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[468px] tw-px-[30px]`"
-        key="duplicate-playlist-modal-instance" modalId="duplicate-playlist-modal" @onClose="() => emit('onClose')"
-        :selfContained="false" :showOverlay="true">
+    <InfoModal
+        :classOverride="`tw-max-w-[468px]`"
+        key="duplicate-playlist-modal-instance"
+        modalId="duplicate-playlist-modal"
+        @onClose="() => emit('onClose')"
+        :selfContained="false"
+        :showOverlay="true"
+        title="Already Added"
+    >
         <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
-            <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                Already Added
-            </h2>
-
             <p class="dark:tw-text-white tw-text-center">
                 <span class="tw-font-bold dark:tw-text-[#9EC0DC] tw-capitalize">{{ title }}</span> already exists in this playlist.
                 <br />
