@@ -258,7 +258,7 @@
              $handleClick = 'handleClick';
             @endphp
 
-            @component('drumeo._partials.modal-carousel', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+            @component('drumeo._partials.modal-carousel-test', ['slides' => $slides, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
                 <div class="flex flex-wrap hidden" :class="{ 'hidden': selectedProduct !== '#BB16A3', }">
                     <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x480/filters:quality(95)/{{ $slides[0]['img'] }}')"></div></div>
                     <div class="px-2 w-full sm:w-1/4">
@@ -268,7 +268,7 @@
                     <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides[3]['img'] }}')"></div></div>
                 </div>
             @endcomponent
-            @component('drumeo._partials.modal-carousel', ['slides' => $slides2, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+            @component('drumeo._partials.modal-carousel-test', ['slides' => $slides2, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
                 <div class="flex flex-wrap hidden" :class="{ 'hidden': selectedProduct !== '#3CDBC0', }">
                     <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x480/filters:quality(95)/{{ $slides2[0]['img'] }}')"></div></div>
                     <div class="px-2 w-full sm:w-1/4">
@@ -278,7 +278,7 @@
                     <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides2[3]['img'] }}')"></div></div>
                 </div>
             @endcomponent
-            @component('drumeo._partials.modal-carousel', ['slides' => $slides3, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+            @component('drumeo._partials.modal-carousel-test', ['slides' => $slides3, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
                 <div class="flex flex-wrap" :class="{ 'hidden': selectedProduct !== '#0B76DB', }">
                     <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x480/filters:quality(95)/{{ $slides3[0]['img'] }}')"></div></div>
                     <div class="px-2 w-full sm:w-1/4">
@@ -288,7 +288,7 @@
                     <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides3[3]['img'] }}')"></div></div>
                 </div>
             @endcomponent
-            @component('drumeo._partials.modal-carousel', ['slides' => $slides4, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+            @component('drumeo._partials.modal-carousel-test', ['slides' => $slides4, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
                 <div class="flex flex-wrap hidden" :class="{ 'hidden': selectedProduct !== '#79C300', }">
                     <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x480/filters:quality(95)/{{ $slides4[0]['img'] }}')"></div></div>
                     <div class="px-2 w-full sm:w-1/4">
@@ -298,7 +298,7 @@
                     <div class="p-2 w-full sm:w-1/2"><div class="h-72 sm:h-80 lg:h-96 w-full bg-center bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(3)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/{{ $slides4[3]['img'] }}')"></div></div>
                 </div>
             @endcomponent
-            @component('drumeo._partials.modal-carousel', ['slides' => $slides5, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
+            @component('drumeo._partials.modal-carousel-test', ['slides' => $slides5, 'scaleAnimation' => $scaleAnimation, 'handleClick' => $handleClick])
                 <div class="flex flex-wrap hidden" :class="{ 'hidden': selectedProduct !== '#FF6900', }">
                     <div class="p-2 w-full sm:w-1/4"><div class="h-72 sm:h-80 lg:h-96 w-full bg-top bg-cover rounded-xl cursor-pointer hover:opacity-90 {{ $scaleAnimation }}" @click="handleClick(0)" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/0x480/filters:quality(95)/{{ $slides5[0]['img'] }}')"></div></div>
                     <div class="px-2 w-full sm:w-1/4">
