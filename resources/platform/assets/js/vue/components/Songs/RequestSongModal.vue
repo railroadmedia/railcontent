@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import InfoModal from '../Modal/InfoModal.vue';
-import InputLabel from "../InputLabel/InputLabel.vue";
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
+
+import InfoModal from '../Modal/InfoModal.vue';
+import InputLabel from "../InputLabel/InputLabel.vue";
+import MuButton from '../Button/MuButton';
 
 const userStore = useUserStore();
 const { brand } = storeToRefs(userStore);
@@ -44,8 +46,8 @@ const handleArtistName = (value) => {
 </script>
 <template>
     <InfoModal title="Request A Song" modalId="request-a-song-modal" @onClose="emit('onCloseModal')"
-        :selfContained="true" classOverride="tw-bg-white dark:tw-bg-[#081825] tw-max-w-[575px] tw-border-[1px] dark:tw-border-[#445F74]">
-        <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
+        :selfContained="true" classOverride="tw-max-w-[575px]">
+        <div class="tw-bg-white dark:tw-bg-[#081825]">
             <form accept-charset="UTF-8" method="POST" @submit.prevent="submitForm">
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
                     <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" inputType="text"
@@ -57,14 +59,8 @@ const handleArtistName = (value) => {
                         id="inputSongArtist" inputName="artist_name" labelValue="Artist Name"
                         placeholder="Enter the artist name..." :inputErrors="[]" @onChange="handleArtistName" />
                 </div>
-                <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                    <button
-                        :disabled="!formData.song_name.length || !formData.artist_name.length" type="submit"
-                        class="tw-mb-[20px] tw-mx-4"
-                        :class="!formData.song_name.length || !formData.artist_name.length ? 'tw-btn-secondary tw-text-[#445F74]' : 'tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white'"
-                    >
-                        SUBMIT SONG REQUEST
-                    </button>
+                <div class="tw-flex tw-justify-end tw-items-center">
+                    <MuButton variant="secondary" :disabled="!formData.song_name.length || !formData.artist_name.length" type="submit">Submit song request</MuButton>
                 </div>
             </form>
         </div>

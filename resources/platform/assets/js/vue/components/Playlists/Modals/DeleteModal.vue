@@ -3,6 +3,7 @@
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
+    import MuButton from '../../Button/MuButton';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
@@ -134,34 +135,17 @@
 </script>
 
 <template>
-    <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
+    <div class="tw-h-full tw-w-full tw-flex tw-flex-col">
         <template v-if="!state.isLoading">
-            <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                <span v-if="mode === 'lesson'">Remove from playlist?</span>
-                <span v-else>Delete <span :class="`tw-text-${brand}`" class="tw-mr-0.5">{{ data.name }}</span>?</span>
-            </h2>
-            <p class="dark:tw-text-white tw-text-center">
+            <p class="dark:tw-text-white">
                 <span v-if="mode === 'lesson'">Are you sure? This action can not be undone.</span>
                 <span v-else>Warning: this action can not be undone.</span>
             </p>
-            <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
-                <!-- Delete Playlist -->
-                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
-                        @click.prevent="handleDeletePlaylist()"
-                >
-                    CONFIRM
-                </button>
-                <!-- Delete Lesson -->
-                <button v-else :class="`tw-mb-2 tw-btn-primary tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
-                        @click.prevent="handleDeleteLesson()"
-                >
-                    CONFIRM
-                </button>
+            <div class="tw-mt-5 tw-flex tw-justify-end tw-w-full">
                 <!-- Close Modal -->
-                <button @click="() => emit('onCloseModal')"
-                        class="tw-btn-primary tw-w-[218px] sm:tw-mr-2 tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">
-                        CANCEL
-                </button>
+                <MuButton variant="secondary" class="tw-mr-[10px]" @click="() => emit('onCloseModal')">Cancel</MuButton>
+                <!-- Delete Playlist -->
+                <MuButton @click.prevent="mode !== 'lesson' ? handleDeletePlaylist() : handleDeleteLesson()">Confirm</MuButton>
             </div>
         </template>
         <template v-else>

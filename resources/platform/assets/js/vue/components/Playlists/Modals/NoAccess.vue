@@ -3,6 +3,7 @@
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
+    import MuButton from '../../Button/MuButton';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
@@ -38,6 +39,22 @@
         return props.data.type === 'song';
     })
 
+    const ctaUrl = computed(() => {
+        if(isSong.value){
+            return `/${props.brand}/songs`;
+        } else {
+            return `https://${props.brand}.com/${props.brand === 'drumeo' ? 'drum' : ''}shop`;
+        }
+    })
+
+    const ctaText = computed(() => {
+        if(isSong.value){
+            return 'Click Here To Learn More and Upgrade';
+        } else {
+            return 'Click Here To Learn More';
+        }
+    })
+
     //--------Reactive Data--------//
     const state = reactive({
         isLoading: false,
@@ -46,9 +63,6 @@
         packUrl: '',
         thumbnail: ''
     })
-
-    //-----------Methods-----------//
-
 
     //-----------Lifecycle Hooks -----------//
     onBeforeMount(()=> {
@@ -67,9 +81,6 @@
 
 <template>
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
-        <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-3">
-            Content Unavailable
-        </h2>
         <p class="dark:tw-text-white tw-text-center tw-mb-4">
         <span class="lg:tw-line-clamp-2" v-html="state.message"></span>
         </p>
@@ -94,32 +105,20 @@
                 :src="`https://musora.com/cdn-cgi/image/width=175/${state.thumbnail}`"
                 alt="playlist thumbnail"
                 class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
-                :class="{ '' : needAccess }"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             />
             <!-- Image Mask -->
             <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                 <img class="tw-h-full tw-object-contain"
-                        :class="{ '' : needAccess }"
                         :src="`https://musora.com/cdn-cgi/image/width=175/${state.thumbnail}`"
                         alt="playlist thumbnail"
                 >
             </div>
         </div>
 
-        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
-            <!-- Go To Shop -->
-            <a v-if="!isSong"
-               :href="`https://${brand}.com/shop`"
-               target="_blank"
-               class="tw-btn-secondary tw-text-[#0D0D0D] dark:tw-text-white">
-               Click Here To Learn More
-            </a>
-            <!-- Go To Songs -->
-            <a v-else :href="`/${brand}/songs`" class="tw-btn-secondary tw-text-[#0D0D0D] dark:tw-text-white">
-                Click Here To Learn More and Upgrade
-            </a>
+        <div class="tw-flex tw-items-center tw-justify-end tw-w-full">
+            <MuButton :is-link="true" :href="ctaUrl" variant="secondary">{{ ctaText }}</MuButton>
         </div>
     </div>
 </template>

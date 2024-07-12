@@ -2,6 +2,7 @@
     import { inject, onBeforeMount, computed, reactive, onMounted } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
+    import MuButton from '../../Button/MuButton';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
@@ -119,9 +120,7 @@
 </script>
 <template>
     <div class="tw-h-full tw-w-full">
-        <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">Set Start/End Time</h2>
-
-        <div class="tw-flex tw-pt-[29px] tw-pb-4">
+        <div class="tw-flex tw-pb-4">
             <!-- Start Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Start Time</p>
@@ -154,16 +153,9 @@
         </div>
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
-            <button @click="() => emit('onCloseModal')"
-                    class="tw-btn-secondary tw-mr-4 tw-w-[218px] tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">
-                    CANCEL
-            </button>
-            <!-- Delete Lesson -->
-            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-px-[30px] tw-w-[218px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
-                    @click.prevent="handleConfirm()"
-            >
-                SAVE
-            </button>
+            <MuButton @click="() => emit('onCloseModal')" variant="secondary" class="tw-mr-[10px]">Cancel</MuButton>
+            <!-- Save -->
+            <MuButton @click.prevent="handleConfirm()">Save</MuButton>
         </div>
     </div>
 </template>

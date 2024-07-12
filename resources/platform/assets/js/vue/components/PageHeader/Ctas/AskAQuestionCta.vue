@@ -1,16 +1,15 @@
 <template>
     <div>
-        <PageHeaderCta 
-            v-bind="$attrs" 
-            text="Ask A Question" 
+        <PageHeaderCta
+            v-bind="$attrs"
+            text="Ask A Question"
             showAllAlways
-            @click="handleOpen" 
+            @click="handleOpen"
         />
         <InfoModal v-if="modalOpen"
-            :classOverride="'tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[654px] tw-p-6'"
-            modalId="surveyModall" :selfContained="true" @onClose="handleClose"
+            :classOverride="'tw-max-w-[654px]'"
+            modalId="surveyModal" :selfContained="true" @onClose="handleClose" title="Ask a Question"
         >
-            <h1 class="tw-text-2xl tw-mb-3 tw-text-[#00101D] dark:tw-text-white">Ask a Question</h1>
             <p class="tw-text-sm tw-mb-4 tw-text-[#00101D] dark:tw-text-white">
                 Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.
             </p>
