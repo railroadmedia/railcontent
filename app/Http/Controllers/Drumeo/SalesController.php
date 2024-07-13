@@ -52,7 +52,7 @@ class SalesController extends BaseController
     }
     public function homeBF()
     {
-        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'promoVersion' => 'true', 'bfVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['theme' => 'drumeo', 'bfVersion' => 'true']);
     }
     public function homeMonth()
     {

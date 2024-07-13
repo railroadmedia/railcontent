@@ -319,6 +319,8 @@
 @section('global-body')
     @if(!empty($shopNav))
         @include("drumeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "scrollToJoin" => true,
             "cartVersion" => true
         ])
     @elseif(!empty($promoVersion))
