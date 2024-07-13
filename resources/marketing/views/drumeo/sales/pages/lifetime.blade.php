@@ -184,19 +184,19 @@
         <div class="container mx-auto relative z-50 max-w-4xl">
             <h3 class="leading-tight" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="sm:hidden"> today and get:</strong></h3>
             <h6 class="leading-tight mt-3 mb-5 md:mb-7 lg:mb-10 text-musora uppercase">
-                @if($stock > 0)
-                    Only
-                        <span x-cloak x-data="timer()" x-init="countdown()">
-                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                         </span>
-                    left
-                @else
-                    &nbsp;
-                @endif
+{{--                @if($stock > 0)--}}
+{{--                    Only--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                         </span>--}}
+{{--                    left--}}
+{{--                @else--}}
+{{--                    &nbsp;--}}
+{{--                @endif--}}
             </h6>
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md">

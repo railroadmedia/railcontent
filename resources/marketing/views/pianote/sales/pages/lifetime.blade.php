@@ -114,22 +114,22 @@
         <div class="container mx-auto">
             <h1 class="leading-tight"><strong>Get piano lessons<br class="sm:hidden"> for <span class="text-musora">life.</span></strong></h1>
             <div class="uppercase text-xl md:text-2xl text-white py-4 mb-3 sm:mb-4">
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                    <span>
-                        ENDS IN
-                        <strong class="text-bold">
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                    <span>--}}
+{{--                        ENDS IN--}}
+{{--                        <strong class="text-bold">--}}
 
-                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span
-                                    x-text="dayText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span
-                                    x-text="hourText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span
-                                    x-text="minuteText"></span></span>
-                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span
-                                    x-text="secondText"></span></span>
-                        </strong>
-                    </span>
-                </span>
+{{--                            <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span--}}
+{{--                                    x-text="dayText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span--}}
+{{--                                    x-text="hourText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span--}}
+{{--                                    x-text="minuteText"></span></span>--}}
+{{--                            <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span--}}
+{{--                                    x-text="secondText"></span></span>--}}
+{{--                        </strong>--}}
+{{--                    </span>--}}
+{{--                </span>--}}
 
             </div>
             <div class="w-full mx-auto mb-2 sm:mb-3">
