@@ -355,4 +355,3 @@ onUnmounted(() => {
 const emit = defineEmits(['addToList', 'progressReset']);
 
 </script>
-../../Hooks/useCatalogueItem.js
