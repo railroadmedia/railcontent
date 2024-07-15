@@ -18,7 +18,6 @@ const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL
 
 mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms
-    .js('resources/platform/assets/js/profile.js', 'public/platform/js')
     .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
     .vue({ version: 3 })

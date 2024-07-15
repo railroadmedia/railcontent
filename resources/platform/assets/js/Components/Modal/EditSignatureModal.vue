@@ -1,0 +1,78 @@
+<template>
+    <InfoModal
+        classOverride="tw-max-w-[654px]"
+        modalId="SignatureModal"
+        :title="`Edit ${brand} Forum Signature`"
+        :selfContained="true"
+        @onClose="handleClose"
+    >
+        <div class="-tw-mt-5">
+            <small class="tw-text-sm tw-italic tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-block tw-mb-5">Limit of 200 Characters</small>
+        </div>
+
+        <form
+            accept-charset="UTF-8"
+            @submit.prevent="submitUserForm"
+        >
+            <div class="tw-flex tw-flex-col tw-mb-[20px]">
+                <TextEditor
+                    fieldKey="signature-editor"
+                    ref="textEditor"
+                    v-model="formData.signature"
+                    :is-student-comment="false"
+                    toolbar="bold italic underline | link"
+                    :disabled="formProcessing"
+                    :height="150"
+                />
+            </div>
+            <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
+                <MuButton
+                    class="tw-w-full sm:tw-w-auto sm:tw-mx-1"
+                    type="submit"
+                    :processing="formProcessing"
+                    processing-text="Saving..."
+                >
+                    Save
+                </MuButton>
+            </div>
+        </form>
+    </InfoModal>
+</template>
+<script setup>
+    import { ref } from 'vue';
+    import InfoModal from '../Modal/InfoModal.vue';
+    import TextEditor from '../../Libraries/Vuesora/Components/TextEditor/TextEditor.vue';
+    import MuButton from '../Button/MuButton.vue';
+    import { storeToRefs } from 'pinia';
+    import { useUserStore } from '../../Stores/user';
+
+    const userStore = useUserStore();
+    const { brand, userSignature } = storeToRefs(userStore);
+
+    //Emits
+    const emit = defineEmits(['onCloseSignatureModal']);
+
+    //Refs
+    const formProcessing = ref(false);
+    const formData = ref({
+        brand: brand,
+        signature: userSignature.value || '',
+    });
+
+    //Methods
+    const handleClose = () => {
+        emit('onCloseSignatureModal');
+    };
+
+    const submitUserForm = async () => {
+        formProcessing.value = true;
+        try {
+            await userStore.updateSignature(formData.value);
+            handleClose();
+        } catch (error) {
+            console.error("Failed to update the user signature:", error.message);
+            formProcessing.value = false;
+        }
+    };
+</script>
+../../Libraries/Vuesora/Components/TextEditor/TextEditor.vue../../Libraries/Vuesora/components/TextEditor/TextEditor.vue

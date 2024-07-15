@@ -1,0 +1,907 @@
+<template>
+    <div class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full">
+        <div class="flex flex-row pa-2 align-v-center bb-grey-1-1 tw-w-full">
+            <div class="flex flex-column">
+                <h1 class="heading grow">
+                    Comments
+                </h1>
+            </div>
+            <div class="flex flex-column">
+                <div class="tw-flex tw-flex-row tw-justify-end">
+                    <div class="flex flex-column grow pr-2 tw-w-full md:tw-max-w-[455px]">
+                        <input id="catalogueSearch" v-model="searchTerm" ref="searchInput" type="text"
+                               name="search" autocomplete="off" placeholder="Search..."
+                               class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[45px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+                               @keydown.enter="submitSearch($event)">
+                    </div>
+
+                    <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0 tw-w-[45px] tw-h-[45px] tw-mb-0"
+                            :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`" title="Search"
+                            @click="submitSearch">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="flex flex-column"
+                 style="max-width:80px">
+                <button
+                    class="btn collapse-square"
+                    style="margin-left:15px"
+                    @click="filters = !filters"
+                >
+                <span :class="[themeBgClass, filters ? 'text-white' : 'inverted ' + themeTextClass]">
+                    <i class="fas fa-filter"></i>
+                </span>
+                </button>
+            </div>
+        </div>
+
+        <transition name="slide-fade">
+            <div
+                v-if="filters"
+                class="flex flex-row pa-2 bb-grey-1-1 tw-w-full"
+            >
+                <div class="flex flex-column">
+                    <div
+                        v-for="contentType in availableTypes"
+                        class="flex flex-row form-group align-v-center mb-1"
+                    >
+                        <span class="toggle-input mr-1">
+                            <input
+                                :id="contentType.key"
+                                :name="contentType.key"
+                                :v-model="contentType.active"
+                                :checked="contentType.active"
+                                type="checkbox"
+                                @change="handleFilter"
+                            >
+
+                            <span class="toggle">
+                                <span class="handle"></span>
+                            </span>
+                        </span>
+
+                        <label
+                            :for="contentType.key"
+                            class="toggle-label capitalize"
+                        >
+                            {{ contentType.key.replace(/-/g, ' ') }}
+                        </label>
+                    </div>
+
+                    <div class="flex flex-row form-group align-v-center mb-1">
+                        <span class="toggle-input mr-1">
+                            <input
+                                id="noRepliedTo"
+                                name="noRepliedTo"
+                                :v-model="noRepliedTo"
+                                :checked="noRepliedTo"
+                                type="checkbox"
+                                @change="removeCommentsWithReplies"
+                            >
+
+                            <span class="toggle">
+                                <span class="handle"></span>
+                            </span>
+                        </span>
+
+                        <label
+                            :for="noRepliedTo"
+                            class="toggle-label capitalize"
+                        >
+                            Dont show comments we've replied to
+                        </label>
+                    </div>
+
+                    <div class="flex flex-row form-group align-v-center mb-1">
+                        <span class="toggle-input mr-1">
+                            <input
+                                id="openOnly"
+                                name="openOnly"
+                                :v-model="openOnly"
+                                :checked="openOnly"
+                                type="checkbox"
+                                @change="changeOpenClosedCommentsOnly"
+                            >
+
+                            <span class="toggle">
+                                <span class="handle"></span>
+                            </span>
+                        </span>
+
+                        <label
+                            :for="openOnly"
+                            class="toggle-label capitalize"
+                        >
+                            Open conversation comments only
+                        </label>
+                    </div>
+
+                    <div class="flex flex-row form-group align-v-center mb-1">
+                        <span class="toggle-input mr-1">
+                            <input
+                                id="closedOnly"
+                                name="closedOnly"
+                                :v-model="closedOnly"
+                                :checked="closedOnly"
+                                type="checkbox"
+                                @change="changeOpenClosedCommentsOnly"
+                            >
+
+                            <span class="toggle">
+                                <span class="handle"></span>
+                            </span>
+                        </span>
+
+                        <label
+                            :for="closedOnly"
+                            class="toggle-label capitalize"
+                        >
+                            Closed conversation comments only
+                        </label>
+                    </div>
+                    <div class="flex flex-row form-group align-v-center mb-1">
+                        <span class="toggle-input mr-1">
+                            <input
+                                id="mineOnly"
+                                name="mineOnly"
+                                :v-model="mineOnly"
+                                :checked="mineOnly"
+                                type="checkbox"
+                                @change="mineOnlyUpdated"
+                            >
+
+                            <span class="toggle">
+                                <span class="handle"></span>
+                            </span>
+                        </span>
+
+                        <label
+                            :for="mineOnly"
+                            class="toggle-label capitalize"
+                        >
+                            Assigned To Me
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+        <div class="flex flex-row bb-grey-1-1 pa-2 tw-text-xs align-v-center">
+            <p class="tw-text-sm dense mr-3">
+                <i class="fas fa-check-square text-success mr-1"></i> Replied to (no response)
+            </p>
+            <p class="tw-text-sm dense mr-3">
+                <i class="fas fa-check-square text-warning mr-1"></i> Replied to (has response)
+            </p>
+            <p class="tw-text-sm dense mr-3">
+                <i class="fas fa-times-square text-error mr-1"></i> Not replied to
+            </p>
+        </div>
+
+        <div class="flex flex-row pa-2 comment-data">
+            <div class="flex flex-column user-name tw-text-xs dense font-bold ph-1">
+                User
+            </div>
+            <div class="flex flex-column comment-body tw-text-xs dense font-bold ph-1">
+                Comment Body
+            </div>
+            <div class="flex flex-column lesson-title tw-text-xs dense font-bold hide-xs-only ph-1">
+                Title
+            </div>
+            <div class="flex flex-column lesson-created-on tw-text-xs dense font-bold ph-1">
+                <a
+                    @click.prevent.stop="sortComments('created_on')"
+                >
+                    Created On
+                </a>
+            </div>
+            <div class="flex flex-column lesson-assigned-to tw-text-xs dense font-bold hide-xs-only ph-1">
+                Moderator
+            </div>
+            <div class="flex flex-column lesson-type tw-text-xs dense font-bold hide-xs-only ph-1 text-center">
+                Type
+            </div>
+            <div class="flex flex-column replied-to tw-text-xs dense font-bold ph-1 text-center">
+                Replied
+            </div>
+            <div class="flex flex-column status tw-text-xs dense font-bold ph-1 text-center">
+                Status
+            </div>
+        </div>
+        <div
+            v-for="comment in comments"
+            v-if="!loading"
+            class="comment-item flex flex-row bb-grey-1-1 pointer hover:tw-opacity-80"
+            @click="openCommentThread(comment)"
+        >
+            <div class="flex flex-column">
+                <div class="comment-data flex flex-row align-v-top pa-2">
+                    <div class="flex flex-column align-center user-name ph-1">
+                        <!--                        <div class="flex flex-row align-v-center">-->
+                        <div class="rounded overflow avatar mb-1 hide-xs-only">
+                            <img :src="comment.user['fields.profile_picture_image_url']">
+                        </div>
+                        <h6 class="tw-text-sm font-bold text-center text-truncate">
+                            {{ comment.user.display_name }}
+                        </h6>
+                        <!--                        </div>-->
+                    </div>
+
+                    <div
+                        class="flex flex-column comment-body tw-text-xs ph-1"
+                        v-html="comment.comment"
+                    >
+                    </div>
+
+                    <div class="flex flex-column lesson-title hide-xs-only ph-1">
+                        <h6
+                            v-if="comment.content"
+                            class="tw-text-sm font-bold"
+                        >
+                            {{ comment.content.title }}
+                        </h6>
+                    </div>
+
+                    <div class="flex flex-column lesson-created-on hide-xs-only ph-1">
+                        <h6
+                            v-if="comment.content"
+                            class="tw-text-sm font-bold"
+                        >
+                            {{ new Date(comment.created_on).toLocaleDateString('en-US') }}
+                        </h6>
+                    </div>
+                    <div class="flex flex-column lesson-assigned-to hide-xs-only ph-1">
+                        <h6
+                            v-if="comment.content"
+                            class="tw-text-sm font-bold"
+                        >
+                            {{ comment.assigned_moderator_name }}
+                        </h6>
+                        <button
+                            v-if="!comment.assigned_moderator_name"
+                            class="button btn collapse-250"
+                            @click.prevent.stop="assignComment(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Assign
+                            </span>
+                        </button>
+                        <button
+                            v-if="comment.assigned_moderator_name"
+                            class="button btn collapse-250"
+                            style="margin-top:5px"
+                            @click.prevent.stop="unassignComment(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Unassign
+                            </span>
+                        </button>
+                    </div>
+                    <div class="flex flex-column lesson-type hide-xs-only ph-1 align-center">
+                        <i
+                            v-if="comment.content"
+                            :class="[getContentTypeIcon(comment.content.type), themeTextClass]"
+                        ></i>
+                        <h6
+                            v-if="comment.content"
+                            class="tw-text-sm capitalize text-center"
+                        >
+                            {{ comment.content.type.replace(/-/g, ' ') }}
+                        </h6>
+                    </div>
+
+                    <div class="flex flex-column replied-to body ph-1 align-center">
+                        <i
+                            class="fas"
+                            :class="repliedToClasses(comment)"
+                        ></i>
+                    </div>
+
+                    <div class="flex flex-column status hide-xs-only ph-1 align-center text-center">
+                        <h6
+                            v-if="comment.conversation_status"
+                            :class="['font-bold', 'body', 'text-center', 'uppercase', comment.conversation_status === 'open' ? 'color-green' : 'color-red']"
+                        >
+                            {{ comment.conversation_status }}
+                        </h6>
+
+                        <button
+                            v-if="comment.conversation_status === 'open'"
+                            class="button btn collapse-250"
+                            style="margin-top: 5px;"
+                            @click.prevent.stop="markClosed(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Close
+                            </span>
+                        </button>
+
+                        <button
+                            v-if="comment.conversation_status === 'open'"
+                            class="button btn collapse-250"
+                            style="margin-top: 10px;"
+                            @click.prevent.stop="likeAndClose(comment)"
+                        >
+                            <span
+                                class="text-white background-color-red tiny" style="height: 25px;"
+                            >
+                                Like/Close
+                            </span>
+                        </button>
+
+                        <button
+                            v-if="comment.conversation_status === 'closed'"
+                            class="button btn collapse-250"
+                            style="margin-top: 15px;"
+                            @click.prevent.stop="markOpen(comment)"
+                        >
+                            <span class="text-white background-color-green tiny" style="height: 25px;">Open</span>
+                        </button>
+                    </div>
+                </div>
+
+                <transition
+                    name="slide-fade"
+                    enter-active-class="slide-fade-enter-active"
+                >
+                    <div
+                        v-if="openCommentId === comment.id"
+                        class="flex flex-row pa-2 active-comment"
+                    >
+                        <div class="flex flex-column">
+                            <comment-post
+                                :comment="comment"
+                                :brand="brand"
+                                :current-user="currentUser"
+                                :theme-color="themeColor"
+                                :profile-base-route="profileBaseRoute"
+                                :has-public-profiles="hasPublicProfiles"
+                                @likeComment="handleCommentLike"
+                                @likeReply="handleReplyLike"
+                                @deleteComment="handleCommentDelete"
+                                @deleteReply="handleReplyDelete"
+                                @openLikes="addLikeUsersToModal"
+                            ></comment-post>
+
+                            <a
+                                :href="comment.content.url + '?goToComment=' + comment.id"
+                                class="btn flat"
+                                target="_blank"
+                                :class="themeTextClass"
+                            >
+                                Go to Lesson
+                            </a>
+                        </div>
+                    </div>
+                </transition>
+            </div>
+        </div>
+
+        <comment-likes-modal
+            :theme-color="themeColor"
+            :comment-id="currentLikeUsersId"
+            :like-users="likeUsers"
+            :total-like-users="totalLikeUsers"
+            :loading-like-users="loadingLikeUsers"
+            :requesting-like-users="requestingLikeUsers"
+            @loadMoreLikeUsers="addLikeUsersToModal"
+        ></comment-likes-modal>
+
+        <div class="flex flex-row pa-3 align-center">
+            <button
+                class="button btn collapse-250"
+                @click="loadMore"
+            >
+                <span
+                    class="text-white"
+                    :class="themeBgClass"
+                >
+                    <i
+                        v-if="loading || requestingData"
+                        class="fas fa-spin fa-spinner mr-1"
+                    ></i>
+                    {{ loading || requestingData ? 'Loading...' : 'Load More' }}
+                </span>
+            </button>
+        </div>
+    </div>
+</template>
+<script>
+import CommentService from '../../../assets/js/Services/comments';
+import ContentService from '../../../assets/js/Services/content';
+import Utils from '../../../assets/js/classes/utils';
+import CommentPost from '../_CommentPost';
+import CommentLikesModal from '../_CommentLikesModal.vue';
+import CommentMixin from '../_mixin';
+import ThemeClasses from '../../../mixins/ThemeClasses';
+import {storeToRefs} from 'pinia';
+import {useUserStore} from "../../../../../Stores/user";
+
+const userStore = useUserStore();
+const {userDisplayName} = storeToRefs(userStore);
+
+export default {
+    name: 'CommentsCatalogue',
+    components: {
+        'comment-post': CommentPost,
+        'comment-likes-modal': CommentLikesModal,
+    },
+    mixins: [CommentMixin, ThemeClasses],
+    data() {
+        return {
+            comments: [],
+            filters: false,
+            loading: false,
+            openCommentId: 0,
+            filterTimeout: null,
+            noRepliedTo: true,
+            openOnly: true,
+            closedOnly: false,
+            mineOnly: false,
+            searchTerm: '',
+            sortState: this.defaultSortState,
+            contentTypes: [
+                {
+                    key: 'all',
+                    brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
+                    value: ['all'],
+                    icon: 'icon-courses',
+                    active: true,
+                },
+                {
+                    key: 'course-part',
+                    brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
+                    value: ['course-part'],
+                    icon: 'icon-courses',
+                    active: true,
+                },
+                {
+                    key: 'song',
+                    brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
+                    value: ['song', 'song-part'],
+                    icon: 'icon-songs',
+                    active: true,
+                },
+                {
+                    key: 'show',
+                    brand: ['drumeo'],
+                    value: [
+                        'gear-guides', 'challenges', 'boot-camps', 'quick-tips',
+                        'podcasts', 'on-the-road', 'behind-the-scenes', 'study-the-greats',
+                        'live', 'solos', 'performances', 'exploring-beats', 'sonor-drums',
+                        'paiste-cymbals', '25-days-of-christmas', 'rhythms-from-another-planet',
+                    ],
+                    icon: 'icon-shows',
+                    active: true,
+                },
+                {
+                    key: 'play-along',
+                    brand: ['drumeo', 'guitareo'],
+                    value: ['play-along', 'play-along-part'],
+                    icon: 'icon-play-alongs',
+                    active: true,
+                },
+                {
+                    key: 'student-focus',
+                    brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
+                    value: ['student-focus', 'student-review', 'question-and-answer', 'boot-camps'],
+                    icon: 'icon-student-focus',
+                    active: true,
+                },
+                {
+                    key: 'rudiment',
+                    brand: ['drumeo'],
+                    value: ['rudiment'],
+                    icon: 'icon-drums',
+                    active: true,
+                },
+                {
+                    key: 'semester-pack-lesson',
+                    brand: ['drumeo', 'guitareo'],
+                    value: ['semester-pack-lesson'],
+                    icon: 'icon-packs',
+                    active: this.brand === 'guitareo',
+                },
+                {
+                    key: 'pack-bundle-lesson',
+                    brand: ['drumeo', 'guitareo', 'pianote', 'singeo'],
+                    value: ['pack-bundle-lesson'],
+                    icon: 'icon-packs',
+                    active: true,
+                },
+                {
+                    key: 'learning-path-lesson',
+                    brand: ['drumeo', 'pianote'],
+                    value: ['learning-path-lesson', 'singeo'],
+                    icon: 'icon-packs',
+                    active: true,
+                },
+                {
+                    key: 'unit',
+                    brand: ['pianote'],
+                    value: ['unit-part'],
+                    icon: 'icon-course',
+                    active: true,
+                },
+                {
+                    key: 'entertainment',
+                    brand: ['guitareo'],
+                    value: ['entertainment'],
+                    icon: 'icon-shows',
+                    active: true,
+                },
+                {
+                    key: 'quick-tips',
+                    brand: ['drumeo', 'pianote', 'guitareo', 'singeo'],
+                    value: ['quick-tips'],
+                    icon: 'icon-student-focus',
+                    active: true,
+                },
+            ],
+        };
+    },
+    computed: {
+        availableTypes() {
+            return this.contentTypes.filter(type => type.brand.indexOf(this.brand) !== -1);
+        },
+
+        activeTypes() {
+            const parsedTypes = [];
+
+            this.availableTypes.forEach((type) => {
+                if (type.active) {
+                    parsedTypes.push(
+                        ...type.value,
+                    );
+                }
+            });
+
+            return parsedTypes;
+        },
+
+        defaultSortState() {
+            if (this.brand === 'guitareo') {
+                return '-created_on';
+            }
+
+            return '-replied_on';
+        },
+    },
+    mounted() {
+        this.getComments(true);
+    },
+    methods: {
+        isAllTypesSelected() {
+            let isActive = false;
+
+            this.contentTypes.forEach((type) => {
+                if (type.key === 'all') {
+                    isActive = type.active;
+                }
+            });
+
+            return isActive;
+        },
+
+        handleFilter(event) {
+            this.contentTypes.forEach((type) => {
+                if (type.key === event.target.name) {
+                    type.active = !type.active;
+                }
+            });
+
+            clearTimeout(this.filterTimeout);
+
+            this.filterTimeout = setTimeout(() => {
+                this.getComments(true);
+            }, 2000);
+        },
+
+        getContentTypeIcon(type) {
+            const thisType = this.contentTypes.filter(contentType => contentType.key === type)[0];
+
+
+            return thisType ? thisType.icon : 'icon-shows';
+        },
+
+        isRepliedTo(comment) {
+            comment.replies = comment.replies || [];
+
+            for (let i = 0; i < comment.replies.length; i++) {
+                if (comment.replies[i].user.access_level === 'team') {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        lastReplyIsByTeam(comment) {
+            return this.isRepliedTo(comment) && comment.replies[comment.replies.length - 1].user.access_level === 'team';
+        },
+
+        repliedToClasses(comment) {
+            return {
+                'fa-check-square': this.isRepliedTo(comment) === true,
+                'text-success': this.lastReplyIsByTeam(comment),
+                'text-warning': !this.lastReplyIsByTeam(comment),
+                'fa-times-square': this.isRepliedTo(comment) === false,
+                'text-error': this.isRepliedTo(comment) === false,
+            };
+        },
+
+        openCommentThread(comment) {
+            this.openCommentId = comment.id;
+        },
+
+        sortComments(column) {
+            if (this.sortState === column) {
+                this.sortState = '-' + column;
+            } else {
+                this.sortState = column;
+            }
+            if (!this.requestingData) {
+                this.currentPage = 1;
+                this.getComments(true);
+            }
+        },
+
+
+        markOpen(comment) {
+            comment.conversation_status = 'open';
+
+            CommentService.updateCommentConversationStatus(comment.id, 'open');
+
+            if (this.closedOnly) {
+                this.comments.splice(this.comments.indexOf(comment), 1);
+            }
+        },
+
+        assignComment(comment) {
+            CommentService.commentAssignModerator(comment.id)
+                .then(({response, error}) => {
+                    console.log(error);
+                    if (!error) {
+                        comment.assigned_moderator_name = userDisplayName.value;
+                    }
+                });
+        },
+
+        unassignComment(comment) {
+            comment.assigned_moderator_name = userDisplayName.value;
+            CommentService.commentUnassignModerator(comment.id)
+                .then(({response, error}) => {
+                    if (!error) {
+                        comment.assigned_moderator_name = "";
+                    }
+                });
+        },
+
+        markClosed(comment) {
+            comment.conversation_status = 'closed';
+
+            CommentService.updateCommentConversationStatus(comment.id, 'closed');
+
+            if (!this.closedOnly) {
+                this.comments.splice(this.comments.indexOf(comment), 1);
+            }
+        },
+
+        likeAndClose(comment) {
+            comment.conversation_status = 'closed';
+
+            CommentService.likeComment(comment.id);
+            CommentService.updateCommentConversationStatus(comment.id, 'closed');
+
+            if (!this.closedOnly) {
+                this.comments.splice(this.comments.indexOf(comment), 1);
+            }
+        },
+
+        changeOpenClosedCommentsOnly(comment) {
+            this.openOnly = !this.openOnly;
+            this.closedOnly = !this.openOnly;
+
+            clearTimeout(this.filterTimeout);
+
+            this.filterTimeout = setTimeout(() => {
+                this.getComments(true);
+            }, 1000);
+        },
+
+        mineOnlyUpdated(value) {
+            this.mineOnly = !this.mineOnly;
+            clearTimeout(this.filterTimeout);
+            this.filterTimeout = setTimeout(() => {
+                this.getComments(true);
+            }, 1000);
+        },
+
+        getComments(replace = false) {
+            this.requestingData = true;
+
+            if (replace) {
+                this.currentPage = 1;
+                this.loading = true;
+            }
+
+            let types = this.activeTypes;
+
+            if (this.isAllTypesSelected()) {
+                types = [];
+            }
+
+            CommentService.getComments({
+                brand: this.brand,
+                limit: 100,
+                sort: this.sortState,
+                content_type: types,
+                page: this.currentPage,
+                conversation_status: this.openOnly === true ? 'open' : 'closed',
+                searchTerm: this.searchTerm,
+                mineOnly: this.mineOnly
+            })
+                .then((response) => {
+                    // Pulls all Content IDs from every comment and returns all uniques
+                    const allContentIds = response.data
+                        .map(data => data.content_id)
+                        .filter((id, index, self) => self.indexOf(id) === index);
+
+                    if (response) {
+                        const comments = response.data;
+
+                        ContentService.getContentByIds(allContentIds.join(','))
+                            .then((response) => {
+                                const content = Utils.flattenContent(response.data.data);
+
+                                comments.forEach((comment) => {
+                                    content.forEach((content) => {
+                                        if (content.id === comment.content_id) {
+                                            comment.content = content;
+                                        }
+                                    });
+                                });
+
+                                if (replace) {
+                                    this.comments = comments;
+                                } else {
+                                    this.comments = [
+                                        ...this.comments,
+                                        ...comments,
+                                    ];
+                                }
+
+                                this.$nextTick(() => {
+                                    this.loading = false;
+                                    this.$forceUpdate();
+                                });
+
+                                this.requestingData = false;
+                            });
+                    }
+                });
+        },
+
+        loadMore() {
+            if (!this.requestingData) {
+                this.currentPage += 1;
+
+                this.getComments(false);
+            }
+        },
+
+        removeCommentsWithReplies() {
+            this.noRepliedTo = !this.noRepliedTo;
+        },
+
+        submitSearch(e) {
+            this.getComments(true);
+            //only blur the input on mobile (up to Tailwind sm breakpoint)
+            let isMobile = window.matchMedia('(max-width: 639px)');
+            if (isMobile.matches) {
+                e.target.blur()
+            }
+        },
+    },
+};
+</script>
+<style lang="scss">
+@import '../../../assets/sass/partials/variables';
+
+.user-name {
+    flex: 0 0 100px;
+    max-width: 100px;
+
+    @include small {
+        flex: 0 0 250px;
+        max-width: 250px;
+    }
+
+    .avatar {
+        max-width: 45px;
+    }
+
+    h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.lesson-title {
+    flex: 0 0 150px;
+    max-width: 150px;
+    min-width: 150px;
+}
+
+.lesson-created-on {
+    flex: 0 0 90px;
+    max-width: 90px;
+    min-width: 90px;
+}
+
+.lesson-assigned-to {
+    flex: 0 0 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.status {
+    flex: 0 0 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.lesson-type {
+    flex: 0 0 150px;
+    max-width: 150px;
+    min-width: 150px;
+
+    i {
+        font-size: 12px;
+    }
+}
+
+.comment-item.replied {
+    display: none;
+}
+
+.replied-to {
+    flex: 0 0 60px;
+    max-width: 60px;
+    min-width: 60px;
+}
+
+.comment-body p {
+    word-break: break-word;
+}
+
+.comment-data {
+    padding: calc(#{$gutterWidth} / 2) 0;
+
+    @include small {
+        padding: calc(#{$gutterWidth} / 2);
+    }
+}
+
+.active-comment {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto calc(#{$gutterWidth} / 2);
+}
+
+.comment-item .user-name {
+    flex: 0 0 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
+</style>
+../../../assets/js/Services/comments../../../assets/js/Services/content
