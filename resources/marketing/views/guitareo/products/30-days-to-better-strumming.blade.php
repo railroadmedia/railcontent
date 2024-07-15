@@ -649,10 +649,6 @@
         'video' => '943429100',
         'vimeo' => true,
     ])
-    @include('_partials.components.countdown', [
-        'countdownDate' => '2024-06-03 00:00:00',
-        'promoVersion' => false,
-    ])
 
     @include('guitareo.sales.partials._footer')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

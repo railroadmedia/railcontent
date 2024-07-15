@@ -26,17 +26,10 @@
 
 @yield('global-body')
 
-@if(Carbon\Carbon::create(2024, 7, 15, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-7-15 00:00:00',
-        'promoVersion' => true
-    ])
-@else
     @include('_partials.components.countdown',[
         'countdownDate' => '2024-8-1 00:00:00',
         'promoVersion' => true
     ])
-@endif
 
 <script type="text/javascript" src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
 

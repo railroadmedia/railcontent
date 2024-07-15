@@ -365,10 +365,6 @@
 @endsection
 
 @section('scripts')
-    @include('_partials.components.countdown',[
-    'countdownDate' => '2024-06-01 00:00:00',
-    'promoVersion' => false
-    ])
     {{-- <script type="application/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var stickyBar = document.querySelector('.promo-banner');

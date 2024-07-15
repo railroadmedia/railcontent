@@ -363,10 +363,6 @@
         'styles' => 'pb-[177%] sm:pb-[66vh] bg-white',
     ])
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2024-03-16 00:00:00',
-        'promoVersion' => false
-    ])
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

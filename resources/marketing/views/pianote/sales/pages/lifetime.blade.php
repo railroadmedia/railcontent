@@ -575,10 +575,6 @@
         </div>
     </section>
 
-    @include('_partials.components.countdown', [
-        'countdownDate' => '2024-04-01 00:00:00',
-        'promoVersion' => false,
-    ])
 
     @include('pianote.sales.partials._footer')
 

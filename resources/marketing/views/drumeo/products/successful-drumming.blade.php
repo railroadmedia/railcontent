@@ -20,10 +20,6 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-10-11 00:00:00',
-        'promoVersion' => false
-    ])
 @stop()
 
 @section('body-data')
