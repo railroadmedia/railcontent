@@ -71,8 +71,8 @@
                     'imgStyle' => 'sm:hidden',
                     'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/ekit-logo-horizontal.webp',
                     'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/ekit-spread.webp',
-                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop.webp',
-                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg-m.webp',
+                    'img' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/2000x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg2.webp',
+                    'imgM' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/e-kit-shop-bg2-m.png',
                 ],
             ];
         @endphp
