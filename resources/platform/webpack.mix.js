@@ -18,7 +18,6 @@ const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL
 
 mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms
-    .js('resources/platform/assets/js/profile.js', 'public/platform/js')
     .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
     .vue({ version: 3 })
@@ -49,21 +48,22 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     .sourceMaps()
     .version();
 
-mix.webpackConfig(webpack => {
-    return {
-        stats: {
-            children: true
-        },
-        // target: ['web', 'es5'],
-        output: {
-            publicPath: ASSET_URL,
-        },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ]
-    };
-});
+    mix.webpackConfig(webpack => {
+        return {
+            stats: {
+                children: true
+            },
+            // target: ['web', 'es5'],
+            output: {
+                publicPath: ASSET_URL,
+            },
+            plugins: [
+                new webpack.DefinePlugin({
+                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+                })
+            ]
+        };
+    });
+    
 
 module.exports = mix;

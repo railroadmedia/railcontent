@@ -1,0 +1,349 @@
+<template>
+
+    <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-pb-[30px]">
+
+        <!-- All Threads -->
+        <div v-if="!showTabs && !onlyFollowed"
+             class="tw-flex tw-px-4"
+        >
+            <div class="tw-flex tw-flex-col tw-mb-6">
+                <div class="tw-no-underline tw-mr-6 tw-text-[#00101D] dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2"
+                     :class="[ brandBorderColor ]"
+                >
+                    <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
+                        All New Threads
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <template v-if="!searching">
+            <!-- Forum Items -->
+            <div v-if="forumsArray.length !== 0" class="tw-mb-12">
+                <forum-item
+                    v-for="forum in forumsArray"
+                    :key="forum.id"
+                    :forum="forum"
+                    :brand="brand"
+                />
+            </div>
+
+            <!-- Thread Items -->
+            <div v-if="onlyFollowed">
+                <!-- Latest Thread Button -->
+                <div class="tw-mb-6 tw-flex tw-justify-center ">
+                    <a :href="latestThreadsUrl" class="tw-btn-primary" :class="[brandBGColor]">View All Latest Threads</a>
+                </div>
+
+                <h2 class="tw-text-32 tw-mb-3 tw-font-bold">Followed Threads</h2>
+
+                <template v-if="pinnedThreads.length === 0 && threadsArray.length === 0">
+                    <p class="tw-text-base">Any thread you reply to or follow will appear here.</p>
+                </template>
+            </div>
+
+            <!-- Threads Table Header -->
+            <div v-if="pinnedThreads.length !== 0 || threadsArray.length !== 0"
+                 class="tw-flex tw-bg-gray-200 dark:tw-bg-[#002039] tw-h-10 tw-w-full tw-items-center tw-rounded-t-lg"
+            >
+                <div class="tw-uppercase tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-pl-8 tw-w-full lg:tw-w-9/12">
+                    Thread Details
+                </div>
+                <div v-if="!showTabs && !onlyFollowed"
+                     class="tw-uppercase tw-mx-6 tw-w-52 tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-hidden tw-flex-shrink-0 xl:tw-inline-flex">
+                    Forum
+                </div>
+                <div class="tw-uppercase tw-ml-auto tw-pr-2 tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-hidden sm:tw-inline-flex tw-flex-shrink-0 tw-w-24">
+                    Replies
+                </div>
+                <div class="tw-uppercase tw-text-gray-500 dark:tw-text-white tw-text-sm tw-font-bold tw-inline-flex tw-px-2 tw-flex-shrink-0 tw-w-28 lg:tw-px-8 lg:tw-w-full lg:tw-max-w-xs">
+                    Latest Post
+                </div>
+            </div>
+
+            <forum-threads-table-item
+                v-for="thread in pinnedThreads"
+                :key="'pinned' + thread.id"
+                :thread="thread"
+                :brand="brand"
+            />
+            <forum-threads-table-item
+                v-for="thread in threads"
+                :key="thread.id"
+                :thread="thread"
+                :brand="brand"
+            />
+
+            <!-- Thread Pagination -->
+            <div v-if="totalPages > 1"
+                 class="tw-flex tw-py-4">
+                <pagination
+                    :current-page="currentPage"
+                    :total-pages="totalPages"
+                    @pageChange="handlePageChange"
+                ></pagination>
+            </div>
+        </template>
+
+        <template v-else>
+            <!-- Search Results -->
+            <forum-search-result
+                v-for="item in threads"
+                :searching = "searching"
+                :key="item.id"
+                :item="item"
+                :brand="brand"
+                :term="searchTerm"
+            />
+
+            <!-- Results Pagination -->
+            <div v-if="totalSearchPages > 1"
+                 class="tw-flex tw-py-4">
+                <pagination
+                    :current-page="currentPage"
+                    :total-pages="totalSearchPages"
+                    @pageChange="handleSearchPageChange"
+                ></pagination>
+            </div>
+        </template>
+
+    </div>
+</template>
+
+<script>
+import * as QueryString from 'query-string';
+import ForumThreadsTableItem from './_ForumThreadsTableItem';
+import ForumItem from './_ForumItem.vue';
+import ForumSearchResult from './_ForumSearchResult.vue';
+import Pagination from '../../Components/Pagination.vue';
+import ClearableFilter from '../../Components/ClearableFilter.vue';
+import ForumService from '../../assets/js/Services/forums';
+import {useUserStore} from "../../../../Stores/user";
+import {storeToRefs} from "pinia/dist/pinia";
+
+export default {
+    name: 'ForumThreadsTable',
+    components: {
+        'forum-threads-table-item': ForumThreadsTableItem,
+        'forum-item': ForumItem,
+        'forum-search-result': ForumSearchResult,
+        'clearable-filter': ClearableFilter,
+        pagination: Pagination,
+    },
+    props: {
+        pinnedThreads: {
+            type: Array,
+            default: () => [],
+        },
+        threads: {
+            type: Array,
+            default: () => [],
+        },
+        forums: {
+            type: Array,
+            default: () => [],
+        },
+        threadCount: {
+            type: Number,
+            default: () => 0,
+        },
+        onlyFollowed: {
+            type: Boolean,
+            default: () => false,
+        },
+        showTabs: {
+            type: Boolean,
+            default: () => true,
+        },
+        latestThreadsUrl: {
+            type: String,
+            default: () => '/threads/latest',
+        },
+        searchJsonResultsEndpointUrl: {
+            type: String,
+            default: () => '/threads/latest',
+        },
+        searching: {
+            type: Boolean,
+            default: () => false,
+        },
+        searchTerm: {
+            type: String,
+            default: () => '',
+        },
+    },
+    data() {
+        return {
+            forumsArray: this.forums,
+            threadsArray: this.threads,
+            filter: 'all',
+            timeout: null,
+            followed: false,
+            filterOptions: [
+                {
+                    label: 'Oldest',
+                    value: 'last_post_published_on'
+                },
+                {
+                    label: 'Most recent',
+                    value: '-last_post_published_on'
+                },
+                {
+                    label: 'My threads',
+                    value: 'mine'
+                }
+            ],
+            loading: false,
+            searchResults: [],
+            searchResultsCount: 0,
+            searchResultsPage: 1,
+            searchResultsPageLength: 8
+        };
+    },
+    computed: {
+        brand(){
+            const userStore = useUserStore();
+            const { brand } = storeToRefs(userStore);
+
+            return brand.value;
+        },
+        brandBorderColor() {
+            return 'tw-border-' + this.brand;
+        },
+        brandBGColor() {
+            return 'tw-bg-'+ this.brand;
+        },
+        currentUrl() {
+            return location.href.replace(location.search, '');
+        },
+        totalPages() {
+            return Math.ceil(this.threadCount / 20);
+        },
+        totalSearchPages() {
+            return Math.ceil(this.searchResultsCount / this.searchResultsPageLength);
+        },
+        isFollowedSection() {
+            return String(location.search).includes('followed=true');
+        },
+        currentPage() {
+            const urlParams = QueryString.parse(location.search);
+            if(!this.searching) {
+                if (urlParams.page != null) {
+                    return Number(urlParams.page);
+                }
+                return 1;
+            } else {
+                return this.searchResultsPage;
+            }
+        },
+        topicIdMap() {
+            const topics = {
+                1: 'general',
+                2: 'gear',
+                3: 'website feedback',
+                4: 'off topic',
+            };
+
+            const urlParams = QueryString.parse(location.search);
+
+            if (urlParams['category_ids[]'] != null) {
+                return urlParams['category_ids[]'];
+            }
+
+            return '0';
+        },
+        currentFilter: {
+            get() {
+                const urlParams = QueryString.parse(location.search);
+                if (urlParams['sortby_val'] != null) {
+                    return urlParams['sortby_val'];
+                }
+                return '-last_post_published_on';
+            },
+            set(val) {
+                return val;
+            }
+        },
+        filterInterface: {
+            get() {
+                return this.filterOptions.filter(option => option.value === this.currentFilter)[0].value;
+            },
+            set(value) {
+                this.currentFilter = value;
+                this.handleFilterChange(value);
+            },
+        },
+
+    },
+    watch: {
+        followed() {
+            this.getThreads();
+        },
+    },
+    created() {
+        const urlParams = QueryString.parse(document.location.search);
+
+        if (urlParams.search) {
+            this.loading = true;
+        }
+    },
+    methods: {
+        getSearchResults() {
+            this.loading = true;
+
+            ForumService.getForumSearchResults(
+                this.searchJsonResultsEndpointUrl,
+                this.searchTerm,
+                null,
+                this.searchResultsPage,
+                this.searchResultsPageLength,
+            ).then((data) => {
+                this.loading = false;
+                this.searchResults = data.results;
+                this.searchResultsCount = data.count;
+            });
+        },
+
+        getThreads() {
+            return ForumService.getForumThreads()
+                .then((data) => {
+                    this.threadsArray = data;
+                });
+        },
+
+        handlePageChange(payload) {
+            const urlParams = QueryString.parse(location.search);
+
+            urlParams.page = payload.page;
+
+            window.location.href = `${location.protocol}//${location.host
+            }${location.pathname}?${QueryString.stringify(urlParams)}`;
+        },
+
+        handleSearchPageChange(payload) {
+            this.searchResultsPage = payload.page;
+            this.getSearchResults();
+        },
+
+        handleFilterChange(value) {
+            if (value != 0) {
+                window.location.href = `${location.protocol}//${location.host
+                }${location.pathname}?sortby_val=${value}`;
+            } else {
+                window.location.href = `${location.protocol}//${location.host
+                }${location.pathname}`;
+            }
+        },
+
+        clearSearch() {
+            const searchInput = document.getElementById('threadSearch');
+            const changeEvent = new Event('change');
+            const new_url = window.location.origin + window.location.pathname;
+
+            window.history.replaceState(history.state, null, new_url);
+            searchInput.value = '';
+            searchInput.dispatchEvent(changeEvent);
+        },
+    },
+};
+</script>
