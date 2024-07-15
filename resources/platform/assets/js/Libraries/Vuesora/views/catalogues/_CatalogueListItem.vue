@@ -347,4 +347,3 @@ export default {
   },
 };
 </script>
-../../../../Components/DifficultyLabel/DifficultyLabel

@@ -164,4 +164,3 @@ onMounted(() => {
     transition: width 3s;
 }
 </style>
-../../Libraries/Vuesora/Components/AddEvent/AddEventModal.vue../../Libraries/Vuesora/components/AddEvent/AddEventModal.vue../../Libraries/Vuesora/mixins/UserCatalogueEvents

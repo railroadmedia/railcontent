@@ -373,4 +373,3 @@ const handleClick = (event) => {
     }
 }
 </script>
-../../Hooks/useCatalogueItem.js../../Services/userJourney.js

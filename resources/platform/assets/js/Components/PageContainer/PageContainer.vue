@@ -259,7 +259,7 @@ onUpdated(() => {
           tw-overflow-x-hidden
           tw-scroll-smooth
         " :class="isMobileAppWebView ? '' : 'tw-pt-[58px]'" id="content-container">
-        
+
         <h2 v-if="adminMessage && adminMessage.length"
           class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
@@ -289,4 +289,3 @@ onUpdated(() => {
     <slot v-if="isOnboarding" :is-dark-mode="isDarkModeSelected" />
   </main>
 </template>
-../../Libraries/Vuesora/Components/NotificationToasts/NotificationToasts.vue../../Libraries/Vuesora/components/NotificationToasts/NotificationToasts.vue

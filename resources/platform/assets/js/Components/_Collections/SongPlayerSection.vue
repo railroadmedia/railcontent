@@ -252,4 +252,3 @@
     };
 
 </script>
-../../Libraries/Vuesora/assets/js/Services/content../../Libraries/Vuesora/Components/VideoResources/ContentLessonActionButtons.vue../../Libraries/Vuesora/components/VideoResources/ContentLessonActionButtons.vue../../Libraries/Vuesora/assets/js/Services/content
