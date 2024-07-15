@@ -1,7 +1,6 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
-const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
