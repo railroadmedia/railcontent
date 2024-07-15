@@ -136,4 +136,3 @@ const { isUserAMember, userDisplayName, userDashboardUrl, userProfilePictureUrl,
     />
   </nav>
 </template>
-../../Constants/brands

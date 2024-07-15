@@ -73,4 +73,3 @@ const emit = defineEmits(['navigateToStep'])
         </div>
     </div>
 </template>
-../../Constants/brands

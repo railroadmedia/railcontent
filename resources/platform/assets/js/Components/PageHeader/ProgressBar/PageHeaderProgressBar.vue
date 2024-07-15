@@ -33,4 +33,4 @@ const brandBgColor = computed(() => {
     return bgColor[brand.value];
 });
 
-</script>../../../Constants/brands.js
+</script>

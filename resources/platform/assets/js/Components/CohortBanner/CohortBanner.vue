@@ -112,4 +112,3 @@ const handleClick = (event, url) => {
         </button>
     </div>
 </template>
-../../Services/userJourney../../Libraries/Vuesora/assets/js/functions/cookies

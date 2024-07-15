@@ -74,4 +74,3 @@ export default {
     },
 };
 </script>
-../../../../Components/Catalogue/CatalogueCard.vue../../../../Components/Catalogue/CatalogueListElement.vue

@@ -32,4 +32,4 @@ const props = defineProps({
     default: "",
   },
 });
-</script>../../Constants/brands
+</script>

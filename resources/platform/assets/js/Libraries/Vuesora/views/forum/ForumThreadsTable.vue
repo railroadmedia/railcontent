@@ -347,4 +347,3 @@ export default {
     },
 };
 </script>
-../../assets/js/Services/forums../../../Components/Pagination.vue../../../Components/ClearableFilter.vue

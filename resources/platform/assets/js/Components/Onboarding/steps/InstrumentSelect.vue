@@ -72,4 +72,3 @@ function goBack() {
     </template>
   </StepWrapper>
 </template>
-../../../Constants/brands

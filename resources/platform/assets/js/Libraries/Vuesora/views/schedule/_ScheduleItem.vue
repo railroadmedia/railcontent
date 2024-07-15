@@ -181,4 +181,3 @@ export default {
     },
 };
 </script>
-../../mixins/UserCatalogueEvents.js../../mixins/ThemeClasses.js../../mixins/UserCatalogueEvents.js../../mixins/ThemeClasses.js../../../../Components/DifficultyLabel/DifficultyLabel.js

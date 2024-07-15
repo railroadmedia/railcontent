@@ -82,4 +82,3 @@ const { brand } = storeToRefs(userStore);
         </div>
     </section>
 </template>
-../../Constants/brands.js

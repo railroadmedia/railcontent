@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -48,21 +49,33 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     .sourceMaps()
     .version();
 
-mix.webpackConfig(webpack => {
-    return {
-        stats: {
-            children: true
-        },
-        // target: ['web', 'es5'],
-        output: {
-            publicPath: ASSET_URL,
-        },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ]
-    };
-});
+    mix.webpackConfig(webpack => {
+        return {
+            stats: {
+                children: true
+            },
+            // target: ['web', 'es5'],
+            output: {
+                publicPath: ASSET_URL,
+            },
+            resolve: {
+                alias: {
+                    '@': path.resolve(__dirname, 'resources/js'),
+                    '@components': path.resolve(__dirname, 'resources/js/Components'),
+                    '@constants': path.resolve(__dirname, 'resources/js/Constants'),
+                    '@hooks': path.resolve(__dirname, 'resources/js/Hooks'),
+                    '@libraries': path.resolve(__dirname, 'resources/js/Libraries'),
+                    '@services': path.resolve(__dirname, 'resources/js/Services'),
+                    '@stores': path.resolve(__dirname, 'resources/js/Stores'),
+                }
+            },
+            plugins: [
+                new webpack.DefinePlugin({
+                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+                })
+            ]
+        };
+    });
+    
 
 module.exports = mix;

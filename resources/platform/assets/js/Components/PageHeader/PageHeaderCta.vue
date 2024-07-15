@@ -166,5 +166,3 @@ const emitClick = async () => {
     font-family: 'Open Sans', sans-serif;
 }
 </style>
-
-../../Libraries/Vuesora/assets/js/Services/content../../Libraries/Vuesora/assets/js/Services/content

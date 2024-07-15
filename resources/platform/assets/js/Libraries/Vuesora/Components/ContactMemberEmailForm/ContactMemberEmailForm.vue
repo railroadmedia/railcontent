@@ -477,4 +477,3 @@ export default {
     }
 };
 </script>
-../../assets/js/Services/support

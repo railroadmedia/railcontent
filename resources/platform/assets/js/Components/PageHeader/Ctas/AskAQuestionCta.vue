@@ -58,4 +58,3 @@ const handleClose = () => {
     modalOpen.value = false;
 };
 </script>
-../../../Libraries/Vuesora/Components/EmailForm/EmailForm.vue../../../Libraries/Vuesora/components/EmailForm/EmailForm.vue

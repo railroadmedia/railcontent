@@ -159,4 +159,3 @@ onMounted(() => {
     }
 });
 </script>
-../../../Constants/brands

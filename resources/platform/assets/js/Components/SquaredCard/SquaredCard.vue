@@ -66,4 +66,3 @@ export default {
 <style type="text/css">
 @import "./squared-card.css";
 </style>
-../../Constants/brands

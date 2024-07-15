@@ -57,4 +57,3 @@ const emit = defineEmits(['onHeaderGoBack']);
     </div>
   </div>
 </template>
-../../Constants/brands

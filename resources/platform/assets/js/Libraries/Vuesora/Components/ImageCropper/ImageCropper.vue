@@ -387,4 +387,3 @@ export default {
     },
 };
 </script>
-../../assets/js/Services/user

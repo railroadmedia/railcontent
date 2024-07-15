@@ -441,4 +441,3 @@ onMounted(() => {
     // console.log(props.preLoadedContent)
 })
 </script>
-../../Libraries/Vuesora/mixins/UserCatalogueEvents../../Libraries/Vuesora/views/catalogues/RoutinesCatalogue../../Libraries/Vuesora/views/catalogues/CoachesGridCatalogue../../Libraries/Vuesora/views/catalogues/DownloadsCatalogue

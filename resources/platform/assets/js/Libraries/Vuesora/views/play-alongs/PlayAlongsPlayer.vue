@@ -529,4 +529,3 @@ export default {
     },
 };
 </script>
-../../../Components/VideoPlayer/player-utils
