@@ -46,11 +46,10 @@ Route::domain('{drumeoDomain}')
         Route::get('/alesis-strata/existing', [SalesController::class, 'alesisStrataExisting']);
         Route::get('/alesis-crimson-iii', [SalesController::class, 'alesisCrimson']);
         Route::get('/alesis-crimson-iii/existing', [SalesController::class, 'alesisCrimsonExisting']);
-        Route::get('/alesis-strata/existing', [SalesController::class, 'alesisStrataExisting']);
         Route::get('/alesis-strata-core', [SalesController::class, 'alesisStrataCore']);
         Route::get('/alesis-strata-core/existing', [SalesController::class, 'alesisStrataCoreExisting']);
-        Route::get('/alesis-nitro-pro', [SalesController::class, 'alesis']);
-        Route::get('/alesis-nitro-pro/existing', [SalesController::class, 'alesisExisting']);
+        Route::get('/alesis-nitro-pro', [SalesController::class, 'alesisNitroPro']);
+        Route::get('/alesis-nitro-pro/existing', [SalesController::class, 'alesisNitroProExisting']);
 
         Route::get('/june', [SalesController::class, 'trial']);
         Route::get('/trial-key', [SalesController::class, 'trialKey']);

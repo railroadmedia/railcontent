@@ -159,38 +159,54 @@
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-black bg-cover bg-center text-white text-center"
         style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-            @if(!empty($alesisNitro) || !empty($alesisCrimson) || !empty($alesisStrata) || !empty($alesisStrataCore))
-                @php
-                    $logoMapping = [
-                        'alesisNitro' => [
-                            'name' => 'Nitro Max',
-                            'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
-                        ],
-                        'alesisCrimson' => [
-                            'name' => 'Crimson III',
-                            'video' => '//player.vimeo.com/video/915243228'
-                        ],
-                        'alesisStrata' => [
-                            'name' => 'Strata Prime',
-                            'video' => '//player.vimeo.com/video/915243228'
-                        ],
-                        'alesisStrataCore' => [
-                            'name' => 'Strata Core',
-                            'video' => '//player.vimeo.com/video/915243228'
-                        ],
-                    ];
+            @php
+                $logoMapping = [
+                    'alesisNitro' => [
+                        'name' => 'Nitro Max',
+                        'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
+                    ],
+                    'alesisNitroPro' => [
+                        'name' => 'Nitro Pro',
+                        'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
+                    ],
+                    'alesisCrimson' => [
+                        'name' => 'Crimson III',
+                        'video' => '//player.vimeo.com/video/915243228'
+                    ],
+                    'alesisStrata' => [
+                        'name' => 'Strata Prime',
+                        'video' => '//player.vimeo.com/video/915243228'
+                    ],
+                    'alesisStrataCore' => [
+                        'name' => 'Strata Core',
+                        'video' => '//player.vimeo.com/video/915243228'
+                    ],
+                ];
 
-                    $key = !empty($alesisNitro) ? 'alesisNitro' : (!empty($alesisCrimson) ? 'alesisCrimson' : (!empty($alesisStrata) ? 'alesisStrata' : 'alesisStrataCore'));
-                    $nameSrc = $logoMapping[$key]['name'];
-                    $videoSrc = $logoMapping[$key]['video'];
-                @endphp
-                <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-with-drumeo.png">
-                <h1 class="leading-none font-lexend uppercase mt-2 mb-5">{{ $nameSrc }}</h1>
-                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
-                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="{{ $videoSrc }}" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-                </div>
-            @endif
+                $keys = [
+                    'alesisNitro',
+                    'alesisNitroPro',
+                    'alesisCrimson',
+                    'alesisStrata',
+                    'alesisStrataCore'
+                ];
+                $key = 'alesisNitro';
+
+                foreach ($keys as $k) {
+                    if (!empty($$k)) {
+                        $key = $k;
+                        break;
+                    }
+                }
+                $nameSrc = $logoMapping[$key]['name'];
+                $videoSrc = $logoMapping[$key]['video'];
+            @endphp
+            <img alt="alesis logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-6 sm:h-10 transition-opacity opacity-0" src="https://d21q7xesnoiieh.cloudfront.net/fit-in/1060x0/filters:quality(95)/marketing/drumeo/products/kit/alesis-with-drumeo.png">
+            <h1 class="leading-none font-lexend uppercase mt-2 mb-5">{{ $nameSrc }}</h1>
+            <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership<br class="sm:hidden"> to Drumeo.</strong></h3>
+            <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
+                <iframe class="absolute w-full h-full" src="{{ $videoSrc }}" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
+            </div>
         </div>
     </div>
 
@@ -200,6 +216,7 @@
                 $isNewAccount = $newAccount;
                 $accountTypes = [
                     'alesisNitro' => '/alesis',
+                    'alesisNitroPro' => '/alesis-nitro-pro',
                     'alesisCrimson' => '/alesis-crimson-iii',
                     'alesisStrata' => '/alesis-strata',
                     'alesisStrataCore' => '/alesis-strata-core'

@@ -269,6 +269,16 @@ class SalesController extends BaseController
         return $this->handleRedeemRequest($request, 'alesisNitro', false);
     }
 
+    public function alesisNitroPro(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisNitroPro', true);
+    }
+
+    public function alesisNitroProExisting(Request $request)
+    {
+        return $this->handleRedeemRequest($request, 'alesisNitroPro', false);
+    }
+
     public function alesisStrata(Request $request)
     {
         return $this->handleRedeemRequest($request, 'alesisStrata', true);
