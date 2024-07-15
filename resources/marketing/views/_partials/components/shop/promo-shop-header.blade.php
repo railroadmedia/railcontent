@@ -30,7 +30,7 @@
             <h5 class="leading-tight mb-4 uppercase">{!! $text !!}</h5>
 
             <div x-data="timer()" x-init="countdown()">
-                <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00101D] bg-[#FFD600] rounded-xl p-4">
+                <div class="inline-flex flex-wrap mx-auto justify-center items-center text-[#00101D] bg-[#FFD600] p-4"> <!--rounded-xl-->
                     <h5 class="leading-none m-0"><strong>EXTENDED</strong></h5>
 {{--                    <h5 class="leading-none m-0"><strong>DEALS END IN:</strong></h5>--}}
 {{--                    <div class="h-12 mx-4 bg-[#00101D]" style="width:2px;"></div>--}}
