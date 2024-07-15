@@ -144,7 +144,7 @@ $promoLink = '/ecommerce/add-to-cart?products[drumeo_access_5-years]=1&products[
 @endsection
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2024-8-1 00:00:00',
+        'countdownDate' => '2024-08-01 00:00:00',
         'promoVersion' => true
     ])
 

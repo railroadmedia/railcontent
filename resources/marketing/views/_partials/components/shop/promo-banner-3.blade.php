@@ -24,7 +24,7 @@
                     @endif
                 </p>
                 @if(empty($noCountdown))
-                <div class="text-2xl sm:text-3xl font-extrabold">EXTENDED</div>
+                <div class="text-2xl sm:text-3xl font-extrabold mx-auto">EXTENDED</div>
 
                 {{--                    <div class="mx-auto" x-data="timer()" x-init="countdown()" x-cloak x-show="day < 7">--}}
                 {{--                        <div class="flex text-center mx-auto sm:mx-0">--}}
