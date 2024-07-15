@@ -58,17 +58,6 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
             output: {
                 publicPath: ASSET_URL,
             },
-            resolve: {
-                alias: {
-                    '@': path.resolve(__dirname, 'resources/js'),
-                    '@components': path.resolve(__dirname, 'resources/js/Components'),
-                    '@constants': path.resolve(__dirname, 'resources/js/Constants'),
-                    '@hooks': path.resolve(__dirname, 'resources/js/Hooks'),
-                    '@libraries': path.resolve(__dirname, 'resources/js/Libraries'),
-                    '@services': path.resolve(__dirname, 'resources/js/Services'),
-                    '@stores': path.resolve(__dirname, 'resources/js/Stores'),
-                }
-            },
             plugins: [
                 new webpack.DefinePlugin({
                     "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
