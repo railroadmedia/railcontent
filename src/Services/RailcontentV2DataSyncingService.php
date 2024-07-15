@@ -91,6 +91,7 @@ class RailcontentV2DataSyncingService
             'xp' => 'xp',
             'week' => 'week',
             'released' => 'released',
+            'unlisted' => 'unlisted',
         ];
 
         $this->fieldNameToTableMap = [
