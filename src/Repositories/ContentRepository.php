@@ -49,6 +49,8 @@ class ContentRepository extends RepositoryBase
      */
     public static $bypassPermissions = false;
 
+    public static $bypassUnlisted = false;
+
     public static $catalogMetaAllowableFilters = null;
     public static $pullFilterResultsOptionsAndCount = true;
     public static $countFilterOptionItems = false;
@@ -798,6 +800,8 @@ class ContentRepository extends RepositoryBase
         $contentId = null
     ) {
         if ($contentId) {
+            $bypassUnlisted = ContentRepository::$bypassUnlisted;
+            ContentRepository::$bypassUnlisted = true;
             $beforeSubquery = $this->getSubqueryForNeighbouringSiblings(
                 $type,
                 $columnName,
@@ -821,15 +825,16 @@ class ContentRepository extends RepositoryBase
                     200
                 );
             }
-
+            ContentRepository::$bypassUnlisted = $bypassUnlisted;
             $beforeContents =
                 $this->query()
                     ->select('*')
                     ->fromSub($beforeSubquery['subqueryOne'], 'sub')
                     ->where('rowNumber', '>', $beforeSubquery['subqueryTwo'])
+                    ->where('unlisted','=',0)
                     ->limit($siblingPairLimit)
                     ->getToArray();
-
+            ContentRepository::$bypassUnlisted = true;
             $afterSubquery = $this->getSubqueryForNeighbouringSiblings(
                 $type,
                 $columnName,
@@ -852,13 +857,14 @@ class ContentRepository extends RepositoryBase
                     200
                 );
             }
-
+            ContentRepository::$bypassUnlisted = $bypassUnlisted;
             if ($afterSubquery['subqueryTwo']) {
                 $afterContents =
                     $this->query()
                         ->select('*')
                         ->fromSub($afterSubquery['subqueryOne'], 'sub')
                         ->where('rowNumber', '>', $afterSubquery['subqueryTwo'])
+                        ->where('unlisted','=',0)
                         ->limit($siblingPairLimit)
                         ->getToArray();
             } else {

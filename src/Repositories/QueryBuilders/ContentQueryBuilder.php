@@ -712,7 +712,8 @@ class ContentQueryBuilder extends QueryBuilder
             ->restrictPublishedOnDate()
             ->restrictBrand()
             ->restrictByPermissions()
-            ->restrictPlaylistIds();
+            ->restrictPlaylistIds()
+            ->restrictUnlisted();
 
         return $this;
     }
@@ -971,6 +972,19 @@ class ContentQueryBuilder extends QueryBuilder
         }else{
             $this->orderByRaw($defaultColumn . ' ' . $direction);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictUnlisted()
+    {
+        if (ContentRepository::$bypassUnlisted === true) {
+            return $this;
+        }
+        $this->where(ConfigService::$tableContent.'.unlisted','=',0);
 
         return $this;
     }

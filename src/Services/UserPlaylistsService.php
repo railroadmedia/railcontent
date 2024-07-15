@@ -273,6 +273,7 @@ class UserPlaylistsService
         ];
 
         ContentRepository::$pullFutureContent = true;
+        ContentRepository::$bypassUnlisted = true;
 
         $results = [];
         $added = [];
