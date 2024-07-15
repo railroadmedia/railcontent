@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref, watchEffect } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
+import MuButton from '../Button/MuButton';
+
 const props = defineProps({
   modalId: {
     type: String
@@ -96,8 +98,7 @@ onUnmounted(() => {
       <div class="
               tw-rounded-[8px]
               tw-z-40
-              tw-pt-[24px]
-              tw-pb-[42px]
+              tw-p-[30px]
               tw-flex
               tw-flex-col
               tw-border-[#223F57]
@@ -115,23 +116,23 @@ onUnmounted(() => {
                 tw-flex
                 tw-flex-row
                 tw-justify-between
+                tw-items-start
                 tw-text-white
-                tw-px-[64px]
               ">
-          <h3 class="tw-w-full tw-text-center tw-text-[20px] tw-text-black dark:tw-text-white">{{ title }}</h3>
+          <h3 class="tw-w-full tw-text-xl md:tw-text-2xl tw-text-black dark:tw-text-white tw-mr-5">{{ title }}</h3>
+          <!-- X Icon -->
+          <button @click="onClose">
+            <XIcon class="tw-text-[#000C17] dark:tw-text-white tw-h-[28px] md:tw-h-[36px] tw-w-[28px] md:tw-w-[36px]" />
+          </button>
         </div>
         <div
           class="tw-text-center tw-text-[#000C17] dark:tw-text-white tw-flex tw-justify-center tw-items-center tw-text-black tw-py-[32px]">
           {{ subtitle }}
         </div>
-        <div class="tw-flex tw-justify-end tw-px-[32px]">
-          <button v-if="!hideCancel" @click="onCancel" class="tw-grow tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">No</button>
-          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-ml-[16px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`">{{ submitLabel }}</button>
+        <div class="tw-flex tw-justify-end">
+            <MuButton v-if="!hideCancel" @click="onCancel" variant="secondary" class="tw-mr-[10px]">No</MuButton>
+            <MuButton @click="onSubmit">{{ submitLabel }}</MuButton>
         </div>
-        <!-- X Icon -->
-        <button @click="onClose" class="tw-absolute tw-top-3 tw-right-3">
-          <XIcon class="tw-text-[#000C17] dark:tw-text-white tw-h-[30px] tw-w-[30px]" />
-        </button>
       </div>
     </div>
   </teleport>

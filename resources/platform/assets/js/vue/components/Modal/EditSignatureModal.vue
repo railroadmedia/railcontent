@@ -1,42 +1,41 @@
 <template>
     <InfoModal
-        classOverride="tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[654px]"
-        modalId="SignatureModal" 
-        :selfContained="true" 
+        classOverride="tw-max-w-[654px]"
+        modalId="SignatureModal"
+        :title="`Edit ${brand} Forum Signature`"
+        :selfContained="true"
         @onClose="handleClose"
     >
-        <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-text-[#00101D] dark:tw-text-white tw-capitalize">Edit {{ brand }} Forum Signature</h2>
-            <small class="tw-text-sm tw-italic tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-block tw-mb-6">Limit of 200 Characters</small>
-
-            <form 
-                accept-charset="UTF-8" 
-                @submit.prevent="submitUserForm"
-            >
-                <div class="tw-flex tw-flex-col tw-mb-[20px]">
-                    <TextEditor 
-                        fieldKey="signature-editor"
-                        ref="textEditor" 
-                        v-model="formData.signature"
-                        :is-student-comment="false"
-                        toolbar="bold italic underline | link"
-                        :disabled="formProcessing"
-                        :height="150" 
-                    />
-                </div>
-                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
-                    <MuButton
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1"
-                        type="submit"
-                        :processing="formProcessing"
-                        processing-text="Saving..."
-                        @click="handleClick"
-                    >
-                        Save
-                    </MuButton>
-                </div>
-            </form>
+        <div class="-tw-mt-5">
+            <small class="tw-text-sm tw-italic tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-block tw-mb-5">Limit of 200 Characters</small>
         </div>
+
+        <form
+            accept-charset="UTF-8"
+            @submit.prevent="submitUserForm"
+        >
+            <div class="tw-flex tw-flex-col tw-mb-[20px]">
+                <TextEditor
+                    fieldKey="signature-editor"
+                    ref="textEditor"
+                    v-model="formData.signature"
+                    :is-student-comment="false"
+                    toolbar="bold italic underline | link"
+                    :disabled="formProcessing"
+                    :height="150"
+                />
+            </div>
+            <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
+                <MuButton
+                    class="tw-w-full sm:tw-w-auto sm:tw-mx-1"
+                    type="submit"
+                    :processing="formProcessing"
+                    processing-text="Saving..."
+                >
+                    Save
+                </MuButton>
+            </div>
+        </form>
     </InfoModal>
 </template>
 <script setup>
@@ -57,14 +56,14 @@
     const formProcessing = ref(false);
     const formData = ref({
         brand: brand,
-        signature: userSignature.value || '', 
+        signature: userSignature.value || '',
     });
 
     //Methods
     const handleClose = () => {
         emit('onCloseSignatureModal');
     };
-        
+
     const submitUserForm = async () => {
         formProcessing.value = true;
         try {

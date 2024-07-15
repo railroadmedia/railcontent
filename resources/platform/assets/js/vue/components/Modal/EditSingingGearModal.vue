@@ -1,51 +1,49 @@
 <template>
     <InfoModal
-        classOverride="tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[654px]"
-        modalId="displayNameModal" 
-        :selfContained="true" 
+        classOverride="tw-max-w-[654px]"
+        modalId="displayNameModal"
+        title="Edit Singing Gear"
+        :selfContained="true"
         @onClose="handleClose"
     >
-        <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
-            <h2 class="tw-text-2xl tw-mb-4 tw-text-[#00101D] dark:tw-text-white">Edit Singing Gear</h2>
-            <form 
-                accept-charset="UTF-8" 
-                @submit.prevent="submitUserForm"
-            >
-                <MuSelect
-                    inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3" 
-                    id="SingingSince"
-                    input-name="singing_since_year"
-                    label="Singing Since"
-                    :options="yearValues"
-                    :disabled="formProcessing"
-                    v-model="formData.singing_since_year"
-                    placeholder="Select Year"
-                />
+        <form
+            accept-charset="UTF-8"
+            @submit.prevent="submitUserForm"
+        >
+            <MuSelect
+                inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D] tw-mb-3"
+                id="SingingSince"
+                input-name="singing_since_year"
+                label="Singing Since"
+                :options="yearValues"
+                :disabled="formProcessing"
+                v-model="formData.singing_since_year"
+                placeholder="Select Year"
+            />
 
-                <div class="tw-grid tw-gap-3 tw-mb-8">
-                    <MuInput
-                        type="text"
-                        id="micBrands" 
-                        name="singing_gear_mic_brands" 
-                        label="Microphones"
-                        placeholder="Enter Microphone Brands" 
-                        :disabled="formProcessing"
-                        v-model="formData.singing_gear_mic_brands"
-                    />
-                </div>
-                <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
-                    <MuButton
-                        class="tw-w-full sm:tw-w-auto sm:tw-mx-1"
-                        type="submit"
-                        :processing="formProcessing"
-                        processing-text="Saving..."
-                        @click="handleClick"
-                    >
-                        Save
-                    </MuButton>
-                </div>
-            </form>
-        </div>
+            <div class="tw-grid tw-gap-3 tw-mb-8">
+                <MuInput
+                    type="text"
+                    id="micBrands"
+                    name="singing_gear_mic_brands"
+                    label="Microphones"
+                    placeholder="Enter Microphone Brands"
+                    :disabled="formProcessing"
+                    v-model="formData.singing_gear_mic_brands"
+                />
+            </div>
+            <div class="tw-flex tw-w-full tw-justify-end tw-mb-[20px] tw-flex-wrap sm:tw-flex-nowrap tw-gap-2 sm:tw-gap-0">
+                <MuButton
+                    class="tw-w-full sm:tw-w-auto sm:tw-mx-1"
+                    type="submit"
+                    :processing="formProcessing"
+                    processing-text="Saving..."
+                    @click="handleClick"
+                >
+                    Save
+                </MuButton>
+            </div>
+        </form>
     </InfoModal>
 </template>
 
@@ -59,7 +57,7 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from '../../../stores/user';
 
 const userStore = useUserStore();
-const { 
+const {
     userSingingSince,
     userMicBrands,
 } = storeToRefs(userStore);

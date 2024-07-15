@@ -98,31 +98,27 @@
             :is-admin="isAdmin"
         />
     </div>
-    <ModalRenderer v-if="modalType">
-        <button @click="closeModal"
-                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-        </button>
-        <div class="tw-rounded-lg dark:tw-border dark:tw-border-[#223F57] dark:tw-text-white tw-bg-white dark:tw-bg-[#081825] tw-text-center tw-p-6 sm:tw-p-[30px] tw-max-w-[600px] tw-mx-4 sm:tw-mx-0">
-            <h1 class="tw-font-bold tw-text-2xl tw-mb-4">{{ infoText[modalType].title }}</h1>
-            <p class="tw-mb-4">{{ infoText[modalType].content }}</p>
-            <button @click="closeModal" class="tw-btn-primary tw-border-[#000C17] dark:tw-border-white tw-text-[#000C17] dark:tw-text-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">Close</button>
+    <InfoModal v-if="modalType" :self-contained="true" :title="infoText[modalType].title" @onClose="closeModal" class-override="tw-max-w-[600px] tw-w-full">
+        <p class="tw-mb-4 dark:tw-text-white">{{ infoText[modalType].content }}</p>
+        <div class="tw-flex tw-justify-end">
+            <MuButton @click="closeModal" variant="secondary">Close</MuButton>
         </div>
-    </ModalRenderer>
+    </InfoModal>
 </template>
 
 <script setup>
 // TODO: Attach the new component for continue section, or fix this implementation if necessary (no href)
-import {computed, onMounted, ref} from "vue";
+import { ref } from "vue";
 import { storeToRefs } from 'pinia';
-import {useUserStore} from "../../stores/user";
+import { useUserStore } from "../../stores/user";
+
 import Tooltip from '../components/Tooltip/Tooltip';
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel';
 import CatalogueCardContainer from '../components/Catalogue/CatalogueCardContainer';
 import CollectionWrapper from '../components/CollectionWrapper/CollectionWrapper';
-import ModalRenderer from "../components/Modal/ModalRenderer";
-import { XIcon } from "@heroicons/vue/solid";
+import InfoModal from "../components/Modal/InfoModal";
+import MuButton from '../components/Button/MuButton';
 
 const props = defineProps({
     breadcrumbLastLevelUrl: {

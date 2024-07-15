@@ -1,9 +1,9 @@
 <template>
     <PageHeaderCta v-bind="$attrs" :text="text" :faIconClass="faIconClass" showAllAlways @click="handleOpen" />
     <InfoModal v-if="modalOpen"
-        :classOverride="'tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[654px]'"
+        :classOverride="'tw-max-w-[654px]'"
         :modalId="modalId" :selfContained="true" @onClose="handleClose">
-        <div class="flex flex-column corners-10 tw-px-5 tw-pt-8">
+        <div class="flex flex-column corners-10">
             <div class="video-wrap">
                 <div class="widescreen">
                     <div class="flex flex-column video-player user-active">
