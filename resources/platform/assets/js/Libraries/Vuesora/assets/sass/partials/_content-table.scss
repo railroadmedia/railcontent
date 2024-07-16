@@ -303,16 +303,17 @@
       flex:0 0 100%;
     }
 
-    flex:0 0 200px;
+    & {
+      flex:0 0 200px;
 
-    .thumb-wrap {
-
-      .thumb-hover {
-
-        i {
-          font-size:24px;
+      .thumb-wrap {
+        .thumb-hover {
+          i {
+            font-size:24px;
+          }
         }
       }
+
     }
   }
 }
@@ -457,8 +458,9 @@
   @include xSmallOnly {
     flex:0 0 100%;
   }
-
-  flex:0 0 200px;
+  & {
+    flex:0 0 200px;
+  }
 }
 
 .avatar-col {
