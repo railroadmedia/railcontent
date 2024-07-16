@@ -73,20 +73,20 @@
                         </template>
                     </div>
 
-                    <VideoResources 
-                        :theme-color="videoResources.themeColor" 
+                    <VideoResources
+                        :theme-color="videoResources.themeColor"
                         :brand="videoResources.brand"
-                        :title="videoResources.title" 
+                        :title="videoResources.title"
                         :lesson-type="videoResources.lessonType"
-                        :thumbnail-url="videoResources.thumbnailUrl" 
+                        :thumbnail-url="videoResources.thumbnailUrl"
                         :description="videoResources.description"
-                        :instructors="videoResources.instructors" 
+                        :instructors="videoResources.instructors"
                         :parent-title="videoResources.parentTitle"
-                        :is-liked="videoResources.isLiked" 
+                        :is-liked="videoResources.isLiked"
                         :like-count="videoResources.likeCount"
-                        :is-added="videoResources.isAdded" 
+                        :is-added="videoResources.isAdded"
                         :content-id="videoResources.contentId"
-                        :user-id="videoResources.userId" 
+                        :user-id="videoResources.userId"
                         :resources="videoResources.resources"
                         :show-add-to-list="videoResources.showAddToList"
                         :show-info-button="videoResources.showInfoButton"
@@ -129,6 +129,15 @@
             <!-- Lesson Content Wrapper -->
             <section class="tw-col-span-3 xl:tw-row-span-2"
                 :class="isRelatedSectionOpen ? 'xl:tw-col-span-2' : `${hasRelatedLessons ? 'xl:tw-mr-[64px]' : ''}`">
+                <!-- Chapters -->
+                <VideoChapters
+                    v-if="formattedChapters.length"
+                    :chapters="formattedChapters"
+                    @open-slice="openSlice"
+                    @seek-to-chapter="seekToChapter"
+                />
+
+                <!-- Assignments -->
                 <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                     <div
                         class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-items-center tw-border-b tw-border-[#e5e8e8] dark:tw-border-[#223F57] tw-pb-4">
@@ -183,6 +192,7 @@ import ContentProgress from "../components/ContentProgress/ContentProgress.vue";
 import RelatedLessonsToggle from "../components/RelatedLessons/RelatedLessonsToggle.vue";
 import RelatedLessons from "../components/RelatedLessons/RelatedLessons.vue";
 import LessonComplete from "../components/ContentProgress/LessonComplete.vue";
+import VideoChapters from "../components/VideoChapters/VideoChapters.vue";
 
 const props = defineProps({
     thisLessonJson: {
@@ -268,7 +278,7 @@ const state = reactive({
 
 //Computed
 const formattedChapters = computed(() => {
-    if (props.videoProps.chapters?.length) {
+    if (props.videoProps.chapters?.length > 0) {
         return props.videoProps.chapters.map(({ chapter_description, chapter_thumbnail_url, chapter_timecode }) => {
             return {
                 title: chapter_description,
