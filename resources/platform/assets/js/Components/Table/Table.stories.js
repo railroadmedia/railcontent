@@ -3,7 +3,7 @@
 import Table from './Table.vue'; // Adjust the path as necessary
 
 export default {
-  title: 'Components/Table',
+  title: 'Components/Collections/Table',
   parameters: {
     design: {
       type: "figma",
