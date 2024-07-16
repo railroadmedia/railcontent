@@ -30,6 +30,7 @@ class ContentCreateRequest extends CustomFormRequest
                             ContentService::STATUS_ARCHIVED,
                             ContentService::STATUS_SCHEDULED,
                             ContentService::STATUS_DELETED,
+                            ContentService::STATUS_UNLISTED,
                         ]
                     ),
                 'type' => 'required|max:64',
