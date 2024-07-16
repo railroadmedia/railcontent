@@ -10,10 +10,14 @@ const path = require('path');
 
 module.exports = {
   stories: [
+    "./StyleGuide/**/*.mdx",
+    './Introduction.mdx',
+    "./palette.stories.js", 
     "../resources/platform/assets/js/**/*.stories.mdx",
     "../resources/platform/assets/js/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   addons: [
+    '@storybook/addon-docs',
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
