@@ -50,6 +50,7 @@ class SetContentPermissions
                         ContentService::STATUS_DRAFT,
                         ContentService::STATUS_SCHEDULED,
                         ContentService::STATUS_ARCHIVED,
+                        ContentService::STATUS_UNLISTED,
                     ]
                 );
 

@@ -122,6 +122,7 @@ class ContentPagesController extends BaseController
         // Admin users have access to drafts
         if (user()->isAdmin() || user()->permission_level === 'administrator') {
             ContentRepository::$availableContentStatues[] = ContentService::STATUS_DRAFT;
+            ContentRepository::$availableContentStatues[] = ContentService::STATUS_UNLISTED;
         }
 
         if (empty($lessonType) || empty($catalogueMeta)) {
@@ -277,7 +278,7 @@ class ContentPagesController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
 
         if (user()->isAdmin()) {
             array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED);
@@ -287,15 +288,9 @@ class ContentPagesController extends BaseController
         $classicalMethodPackJson = null;
 
         $firstLevelContent = $this->contentService->getById($firstId);
-
         if (empty($firstLevelContent)) {
             throw new NotFoundHttpException();
         }
-
-        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
-            $firstLevelContent['id'],
-            auth()->id()
-        );
 
         if ($primaryPage == 'songs') {
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
@@ -313,6 +308,14 @@ class ContentPagesController extends BaseController
                 $firstId
             );
         }
+        if (!user()->isAdmin()) {
+            ContentRepository::$availableContentStatues = array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_UNLISTED]);
+        }
+
+        $nextContentForUser = $this->contentService->getNextContentForParentContentForUser(
+            $firstLevelContent['id'],
+            auth()->id()
+        );
 
         $childrenContent = $firstLevelContent['units'] ?? $this->contentService->getByParentId(
             $firstLevelContent['id']
@@ -689,7 +692,6 @@ class ContentPagesController extends BaseController
         $this->contentService->idContentCache = [];
 
         $firstContent = $this->contentService->getById($firstId);
-
         throw_if(empty($firstContent), new NotFoundHttpException());
 
         $contentToRenderAsLesson = $firstContent;
@@ -726,14 +728,14 @@ class ContentPagesController extends BaseController
                 Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
                 !in_array(
                     $contentToRenderAsLesson['status'],
-                    [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED]
+                    [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED,  ContentService::STATUS_UNLISTED]
                 )) &&
             !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
 
         ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
 
         if (user()->isAdmin()) {
             array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED);
