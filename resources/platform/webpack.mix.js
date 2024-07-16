@@ -70,8 +70,11 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
                     '@constants': path.resolve(__dirname, './assets/js/Constants'),
                     '@services': path.resolve(__dirname, './assets/js/Services'),
                     '@hooks': path.resolve(__dirname, './assets/js/Hooks'),
-                    '@chatsora': path.resolve(__dirname, './assets/js/Libraries/Chatsora'),
-                    '@stylesora': path.resolve(__dirname, './assets/js/Libraries/Stylesora'),
+                    //Components
+                    '@units': path.resolve(__dirname, './assets/js/Components/_Units'),
+                    '@collections': path.resolve(__dirname, './assets/js/Components/_Collections'),
+                    '@pages': path.resolve(__dirname, './assets/js/Components/_Pages'),
+                    //Libraries
                     '@vuesora': path.resolve(__dirname, './assets/js/Libraries/Vuesora'),
                 }
             }
