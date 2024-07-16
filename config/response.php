@@ -363,6 +363,7 @@ return [
             'user_progress',
             'difficulty_string',
             'instructors',
+            'chapters',
             'related_lessons' => [
                 'id',
                 'type',
@@ -3727,6 +3728,7 @@ return [
             'user_progress',
             'instructors',
             'difficulty_string',
+            'chapters',
             'related_lessons' => [
                 'id',
                 'type',
