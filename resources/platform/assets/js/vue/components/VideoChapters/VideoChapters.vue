@@ -5,7 +5,7 @@
           <button class="btn collapse-square"
                   @click="isCollapsed = !isCollapsed">
               <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="isCollapsed && 'tw-rotate-180'">
-                  <i class="fas fa-chevron-down tw-text-lg"></i>
+                  <i class="fas fa-chevron-up tw-text-lg"></i>
               </div>
           </button>
       </div>
