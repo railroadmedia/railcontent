@@ -117,4 +117,3 @@
         </div>
     </div>
 </template>
-../../Libraries/Vuesora/views/catalogues/ContentCatalogue

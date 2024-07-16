@@ -101,4 +101,3 @@ export default {
     },
 };
 </script>
-../../mixins/UserCatalogueEvents.js../../mixins/UserCatalogueEvents.js../../../Components/AddEvent/AddEventModal.vue

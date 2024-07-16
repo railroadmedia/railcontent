@@ -347,4 +347,4 @@ onBeforeUnmount(() => {
             <LoadingAnimation :theme-color="themeColor" />
         </div>
     </div>
-</template>../../Libraries/Vuesora/assets/js/Services/content../../Libraries/Vuesora/Components/LoadingAnimation/LoadingAnimation.vue../../Libraries/Vuesora/components/LoadingAnimation/LoadingAnimation.vue../../Libraries/Vuesora/assets/js/classes/progress-tracker../../Libraries/Vuesora/assets/js/Services/content
+</template>

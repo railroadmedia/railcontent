@@ -48,4 +48,3 @@ const emit = defineEmits(['onButtonClick'])
     cursor: default !important;
 }
 </style>
-../../Constants/brands

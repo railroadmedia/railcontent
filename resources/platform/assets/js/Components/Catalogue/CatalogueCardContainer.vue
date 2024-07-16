@@ -209,4 +209,3 @@ const handleProgressReset = (payload) => {
     resetProgress(payload.content_id, resetIcon, true, data);
 }
 </script>
-../../Hooks/useUserCatalogueEvents../../Hooks/useResetProgress../../Libraries/Vuesora/Components/AddEvent/AddEventModal.vue../../Libraries/Vuesora/components/AddEvent/AddEventModal.vue

@@ -513,4 +513,3 @@ export default {
     }
 }
 </style>
-../../assets/js/Services/ecommerce.js

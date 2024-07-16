@@ -206,4 +206,3 @@ export default {
         scroll-snap-margin-top: 68px ; /* For Safari */
     }
 </style>
-../../../../Components/DifficultyLabel/DifficultyLabel

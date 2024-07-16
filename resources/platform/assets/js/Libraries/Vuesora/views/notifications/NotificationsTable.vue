@@ -152,4 +152,3 @@ function handlePageChange (payload) {
         }${location.pathname}?${QueryString.stringify(urlParams)}`;
 }
 </script>
-../../assets/js/Services/user../../../../Components/PageHeader/PageHeader.vue../../../../Components/MusoraIcons/MusoraIcon.vue../../../../Components/ContentInfo/Breadcrumb.vue../../../Components/Pagination.vue

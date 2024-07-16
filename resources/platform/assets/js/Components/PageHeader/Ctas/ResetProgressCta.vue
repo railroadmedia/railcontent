@@ -31,4 +31,4 @@ const attrs = useAttrs()
 
 const resetText = attrs.inDropdown ? 'Reset Progress' : null;
 
-</script>../../../Hooks/useResetProgress
+</script>

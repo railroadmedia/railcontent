@@ -863,4 +863,3 @@ export default {
   },
 };
 </script>
-../../../Components/Pagination.vue

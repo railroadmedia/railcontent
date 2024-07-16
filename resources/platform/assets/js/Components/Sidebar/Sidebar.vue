@@ -102,4 +102,3 @@ onBeforeMount(() => {
   opacity: 0;
 }
 </style>
-../../Constants/brands.js

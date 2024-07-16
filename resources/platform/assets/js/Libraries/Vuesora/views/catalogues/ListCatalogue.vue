@@ -187,4 +187,3 @@ export default {
     },
 };
 </script>
-../../../Components/AddEvent/AddEventModal

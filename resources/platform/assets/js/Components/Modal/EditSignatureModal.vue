@@ -75,4 +75,3 @@
         }
     };
 </script>
-../../Libraries/Vuesora/Components/TextEditor/TextEditor.vue../../Libraries/Vuesora/components/TextEditor/TextEditor.vue

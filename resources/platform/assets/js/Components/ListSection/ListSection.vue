@@ -58,4 +58,3 @@ const handleSeeAllClick = (event) => {
   }
 };
 </script>
-../../Services/userJourney

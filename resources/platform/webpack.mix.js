@@ -48,21 +48,22 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     .sourceMaps()
     .version();
 
-mix.webpackConfig(webpack => {
-    return {
-        stats: {
-            children: true
-        },
-        // target: ['web', 'es5'],
-        output: {
-            publicPath: ASSET_URL,
-        },
-        plugins: [
-            new webpack.DefinePlugin({
-                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-            })
-        ]
-    };
-});
+    mix.webpackConfig(webpack => {
+        return {
+            stats: {
+                children: true
+            },
+            // target: ['web', 'es5'],
+            output: {
+                publicPath: ASSET_URL,
+            },
+            plugins: [
+                new webpack.DefinePlugin({
+                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+                })
+            ]
+        };
+    });
+    
 
 module.exports = mix;

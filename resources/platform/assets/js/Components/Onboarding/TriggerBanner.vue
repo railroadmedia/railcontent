@@ -73,4 +73,4 @@ const hideOnboardingBanner = () => {
       <XIcon class="tw-w-[12px] tw-h-[12px]" />
     </button>
   </div>
-</template>../../Libraries/Vuesora/assets/js/functions/cookies
+</template>
