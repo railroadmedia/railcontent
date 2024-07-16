@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Collections\PackCollection;
-use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
-use App\Decorators\Content\ContentExperienceDecorator;
-use App\Decorators\Content\PackDecorator;
-use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\ContentLikesDecorator;
 use App\Modules\Content\Services\CohortService;
 use App\Services\PackService;
@@ -17,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Railroad\Railcontent\Decorators\Decorator;
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Helpers\FiltersHelper;
@@ -310,6 +305,7 @@ class PackPagesController extends Controller
                 ContentService::STATUS_ARCHIVED,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_DRAFT,
+                ContentService::STATUS_UNLISTED,
             ];
         } else {
             ContentRepository::$availableContentStatues =
@@ -433,6 +429,7 @@ class PackPagesController extends Controller
                 ContentService::STATUS_ARCHIVED,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_DRAFT,
+                ContentService::STATUS_UNLISTED,
             ];
         } else {
             ContentRepository::$availableContentStatues =
@@ -597,6 +594,7 @@ class PackPagesController extends Controller
                 ContentService::STATUS_ARCHIVED,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_DRAFT,
+                ContentService::STATUS_UNLISTED,
             ];
         } else {
             ContentRepository::$availableContentStatues =

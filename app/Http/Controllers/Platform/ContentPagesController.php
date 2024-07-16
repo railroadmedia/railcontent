@@ -6,13 +6,13 @@ use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\ContentUserWatchPositionDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\ModeDecoratorBase as AppModeDecoratorBase;
 use App\Decorators\Content\ResourceDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use App\Maps\DrumeoShowDataMapper;
 use App\Maps\PrimaryURLSlugToContentTypeMap;
-use App\Modules\FeatureFlagging\Facades\FeatureFlagging;
 use App\Providers\RailcontentURLProvider;
 use App\Services\CalendarService;
 use Carbon\Carbon;
@@ -22,7 +22,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
@@ -40,7 +39,6 @@ use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Decorators\Content\ModeDecoratorBase as AppModeDecoratorBase;
 
 class ContentPagesController extends BaseController
 {
@@ -952,7 +950,7 @@ class ContentPagesController extends BaseController
     public function drumeoSongPage(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
         ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_UNLISTED];
 
         ContentRepository::$pullFutureContent = user()->isAdmin();
 
