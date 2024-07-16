@@ -2,8 +2,55 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="StyleGuide/Palette" />
 
-# Musora Color Palette
+# Tailwind CSS Color Palette
 
-Here you'll find documentation and examples for all the components.
+This document provides an overview of the Tailwind CSS color palette used in our project. Tailwind's color palette is designed to be flexible and easy to customize. Below are the primary colors used throughout our application, along with their specific roles.
 
+## Primary Colors
 
+These colors are used for primary actions, highlights, and key UI elements.
+
+<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+  <div style={{ backgroundColor: '#1D4ED8', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Primary Blue - #1D4ED8</div>
+  <div style={{ backgroundColor: '#10B981', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Primary Green - #10B981</div>
+  <div style={{ backgroundColor: '#EF4444', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Primary Red - #EF4444</div>
+</div>
+
+## Secondary Colors
+
+Secondary colors are used for less prominent UI elements, backgrounds, and accents.
+
+<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+  <div style={{ backgroundColor: '#6B7280', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Secondary Gray - #6B7280</div>
+  <div style={{ backgroundColor: '#F59E0B', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Secondary Yellow - #F59E0B</div>
+  <div style={{ backgroundColor: '#8B5CF6', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Secondary Purple - #8B5CF6</div>
+</div>
+
+## Neutral Colors
+
+Neutral colors are used for text, borders, and backgrounds. They provide contrast and readability.
+
+<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+  <div style={{ backgroundColor: '#FFFFFF', color: '#000', padding: '10px', margin: '10px', borderRadius: '4px', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>White - #FFFFFF</div>
+  <div style={{ backgroundColor: '#F3F4F6', padding: '10px', margin: '10px', borderRadius: '4px', color: '#000', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Light Gray - #F3F4F6</div>
+  <div style={{ backgroundColor: '#D1D5DB', padding: '10px', margin: '10px', borderRadius: '4px', color: '#000', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Gray - #D1D5DB</div>
+  <div style={{ backgroundColor: '#4B5563', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Dark Gray - #4B5563</div>
+  <div style={{ backgroundColor: '#000000', padding: '10px', margin: '10px', borderRadius: '4px', color: 'white', fontWeight: 'bold', textAlign: 'center', flex: '1 1 200px' }}>Black - #000000</div>
+</div>
+
+## Usage Guidelines
+
+- **Primary Colors**: Use these colors for buttons, links, and key action items.
+- **Secondary Colors**: Ideal for hover states, secondary actions, and less prominent elements.
+- **Neutral Colors**: Best used for text, backgrounds, and to provide a neutral base.
+
+### Example
+
+```html
+<div class="bg-primary-blue text-white p-4 rounded">
+  This is a primary blue background with white text.
+</div>
+
+<div class="bg-secondary-gray text-secondary-yellow p-4 rounded">
+  This is a secondary gray background with secondary yellow text.
+</div>

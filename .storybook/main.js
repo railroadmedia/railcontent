@@ -10,9 +10,9 @@ const path = require('path');
 
 module.exports = {
   stories: [
+    "./Introduction.mdx",
     "./StyleGuide/**/*.mdx",
-    './Introduction.mdx',
-    "./palette.stories.js", 
+    "./Components/**/*.mdx",
     "../resources/platform/assets/js/**/*.stories.mdx",
     "../resources/platform/assets/js/**/*.stories.@(js|jsx|ts|tsx)"
   ],
@@ -33,6 +33,18 @@ module.exports = {
   },
   docs: {
     autodocs: "tag",
+  },
+  parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Introduction', 
+          'Styleguide', 
+          'Components',
+          ['Introduction', 'Units', 'Collections'],
+        ],
+      },
+    },
   },
   webpackFinal: async (config, { configType }) => {
     // Find and alter the rule for SASS/SCSS files
