@@ -4,8 +4,8 @@ import '../resources/platform/assets/css/app.scss';
 import { vMaska } from "maska";
 
 // Global Components
-import MusoraIcon from '../resources/platform/assets/js/vue/components/MusoraIcons/MusoraIcon.vue';
-import SpriteSheet from "../resources/platform/assets/js/vue/components/MusoraIcons/SpriteSheet.vue";
+import MusoraIcon from '../resources/platform/assets/js/Components/MusoraIcons/MusoraIcon.vue';
+import SpriteSheet from "../resources/platform/assets/js/Components/MusoraIcons/SpriteSheet.vue";
 
 const pinia = createPinia();
 
