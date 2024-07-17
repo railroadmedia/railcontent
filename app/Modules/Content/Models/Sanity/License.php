@@ -31,23 +31,33 @@ class License extends BaseSanityModel
         ];
 
         $publisherList = new ListObject(
-            fields: [new Field(FieldType::Reference, 'publisher', 'Publisher', to: 'publisher', validation: BaseSanityModel::RULE_REQUIRED),
-                     new Field(FieldType::Number, 'license_percent', validation: "rule => rule.required().min(.01).max(1).precision(2)")],
+            fields: [
+                new Field(FieldType::Reference, 'publisher', 'Publisher', to: 'publisher', validation: BaseSanityModel::RULE_REQUIRED),
+                new Field(FieldType::Number, 'license_percent', validation: "rule => rule.required().min(.01).max(1).precision(2)")
+            ],
             previewItem: new ListItemPreview('publisher.name', 'license_percent')
         );
 
+        $contentList = new ListObject(
+            fields: [new Field(FieldType::String, 'content_id')],
+            previewItem: new ListItemPreview('content_id')
+        );
+
         $fields = [
-            new Field(FieldType::String, 'song_name', "Song Name", validation: BaseSanityModel::RULE_REQUIRED, group:$detailsGroup),
-            new Field(FieldType::String, 'song_artist', "Artist", validation: BaseSanityModel::RULE_REQUIRED, group:$detailsGroup),
-            new Field(FieldType::String, 'risk', "Risk", validation: BaseSanityModel::RULE_REQUIRED, group:$detailsGroup, options:['list' => ['blue', 'red'],
-                'layout' => 'dropdown']),
-            new Field(FieldType::String, 'mlc', "MLC", validation: BaseSanityModel::RULE_REQUIRED, group:$detailsGroup),
-            new Field(FieldType::String, 'iscw', 'ISWC', group:$detailsGroup),
-            new Field(FieldType::String, 'isrc', 'ISRC', group:$detailsGroup),
-            new Field(FieldType::Boolean, 'public_domain', 'Is In Public Domain', validation: BaseSanityModel::RULE_REQUIRED, group:$detailsGroup),
-            new Field(FieldType::Array, 'license', 'Licenses',  of: $publisherList, group:$publisherGroup),
+            new Field(FieldType::Array, 'content_id', "Content", of: $contentList, group: $detailsGroup),
+            new Field(FieldType::String, 'song_name', "Song Name", validation: BaseSanityModel::RULE_REQUIRED, group: $detailsGroup),
+            new Field(FieldType::String, 'song_artist', "Artist", validation: BaseSanityModel::RULE_REQUIRED, group: $detailsGroup),
+            new Field(FieldType::String, 'risk', "Risk", validation: BaseSanityModel::RULE_REQUIRED, group: $detailsGroup, options: [
+                'list' => ['blue', 'red'],
+                'layout' => 'dropdown'
+            ]),
+            new Field(FieldType::String, 'mlc', "MLC", validation: BaseSanityModel::RULE_REQUIRED, group: $detailsGroup),
+            new Field(FieldType::String, 'iswc', 'ISWC', group: $detailsGroup),
+            new Field(FieldType::String, 'isrc', 'ISRC', group: $detailsGroup),
+            new Field(FieldType::Boolean, 'public_domain', 'Is In Public Domain', validation: BaseSanityModel::RULE_REQUIRED, group: $detailsGroup),
+            new Field(FieldType::Array, 'license', 'Licenses', of: $publisherList, group: $publisherGroup),
         ];
-        $preview = new ListItemPreview( 'song_name', 'song_artist');
+        $preview = new ListItemPreview('song_name', 'song_artist');
         parent::__construct('license', 'License', fields: $fields, preview: $preview, groups: $groups);
     }
     public static function getName(): string

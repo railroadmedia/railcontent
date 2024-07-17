@@ -9,7 +9,6 @@ use App\Modules\Content\Models\Sanity\Structure\ListItemPreview;
 use App\Modules\Content\Models\Sanity\Structure\Reference;
 use Modules\Content\Models\Sanity\Structure\Block;
 use Modules\Content\Models\Sanity\Structure\BrandField;
-use Modules\Content\Models\Sanity\Structure\ListObject;
 
 /**
  * Abstract class to represent a contentType schema in Sanity
@@ -19,6 +18,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
     protected function getCommonFields(Group $group, bool $includeLicense=true, bool $includeDescription=true) : array
     {
         $permissionReference = new Reference([['type' => 'permission']], options: ['disableNew' => false]);
+        $licenseReference = new Reference([['type' => 'license']], options: ['disableNew' => false]);
 
         $defaultFields = [
             new Field(FieldType::String, 'title', validation: BaseSanityModel::RULE_REQUIRED, group:$group),
@@ -42,11 +42,7 @@ abstract class BaseSanityContentTypeModel extends BaseSanityModel
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group:$group),
         ];
         if ($includeLicense) {
-            $licenseList = new ListObject(
-                fields: [new Field(FieldType::Reference, 'licence', to:'license')],
-                previewItem: new ListItemPreview('license.song_name', 'license.song_artist')
-            );
-            $defaultFields[] = new Field(FieldType::Array, 'license', 'License Information', of: $licenseList, group:$group);
+            $defaultFields[] = new Field(FieldType::Array, 'license', 'License Information', of: $licenseReference, group:$group);
         }
         if ($includeDescription) {
             new Field(FieldType::Array, 'description', 'Description', of: new Block());
