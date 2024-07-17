@@ -250,7 +250,7 @@ class CoachPagesController extends Controller
 
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT, ContentService::STATUS_UNLISTED];
         }
 
         ContentRepository::$countFilterOptionItems = true;
