@@ -82,4 +82,4 @@
     </div>
 </footer>
 @include("pianote.lead-gen.impact-email-sign-up-tracker")
-@include("pianote.lead-gen.partials.everflow-product-tracker")
+@include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.pianote.production.providers.everflow.brand_id')])

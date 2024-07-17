@@ -98,4 +98,4 @@
     </div>
 </footer>
 @include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
-@include("drumeo.lead-gen.partials.everflow-product-tracker")
+@include("_partials.layout.everflow-product-tracker", ['advertiserId' => config('railanalytics.drumeo.production.providers.everflow.brand_id')])
