@@ -8,11 +8,9 @@
     <br>
     <h3 class="text-white"> <s class="opacity-60">${{ $originalPrice }}</s> <strong>${{ $discountedPrice }}</strong> (Save {{ $discountPercentage }}%)</h3>
     <br>
-    <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="{{ $ctaLink }}">
+    <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="{{ $ctaLink }}">
        get started &raquo;
     </a>
-   <!-- <a class="join sold-out smaller w-full max-w-sm md:w-96 mb-2">
-            SOLD OUT
-        </a> -->
     <br>
+    <a class="inline-block leading-tight text-white text-sm mt-4" href="{{ $ctaLink2 }}"><em><u>Prefer a payment plan? Click here to order with 3 monthly payments.</u></em></a>
 </section>

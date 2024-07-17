@@ -75,7 +75,8 @@
 @php
 $originalPrice = 1200;
 $discountedPrice = 720;
-$promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products[musora-gift-card-150]=1&promo-code=&locked=true';
+$promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products[musora-gift-card-150]=1&locked=true';
+$promoLink2 = '/ecommerce/add-to-cart?products[pianote_access_5-years-3-payments]=1&products[musora-gift-card-150]=1&locked=true';
 @endphp
 
     @include('pianote.products.partials._summer-promo', [
@@ -88,6 +89,7 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
         'discountedPrice' => $discountedPrice,
         'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
         'ctaLink' => $promoLink,
+        'ctaLink2' => $promoLink2,
         ])
 
 
@@ -146,6 +148,7 @@ $promoLink = '/ecommerce/add-to-cart?products[pianote_access_5-years]=1&products
         'discountedPrice' => $discountedPrice,
         'discountPercentage' => round((($originalPrice - $discountedPrice) / $originalPrice) * 100),
         'ctaLink' => $promoLink,
+        'ctaLink2' => $promoLink2,
     ])
 
 @endsection
