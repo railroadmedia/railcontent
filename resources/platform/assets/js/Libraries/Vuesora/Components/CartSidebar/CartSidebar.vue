@@ -250,8 +250,9 @@ export default {
                             let productsObject = JSON.parse(element.getAttribute('data-product-json'));
                             let promoCode = element.hasAttribute('data-promocode') ? element.getAttribute('data-promocode') : null;
                             let lockedCart = element.hasAttribute('data-locked-cart') ? element.getAttribute('data-locked-cart') : null;
+                            let extraData = element.hasAttribute('extra-data') ? element.getAttribute('extra-data') : null;
 
-                            this.addToCart(productsObject, promoCode, lockedCart)
+                            this.addToCart(productsObject, promoCode, lockedCart, extraData)
                                 .then(() => {
                                     element.classList.remove('loading');
                                 }).catch(e => e);
@@ -261,7 +262,7 @@ export default {
             }
         },
 
-        addToCart(products, promoCode, lockedCart) {
+        addToCart(products, promoCode, lockedCart, extraData) {
             if (!this.loading) {
                 this.loading = true;
 
@@ -274,7 +275,14 @@ export default {
                 if (lockedCart) {
                     payload['locked'] = lockedCart;
                 }
-
+                if (extraData) {
+                    const data = JSON.parse(extraData);
+                    if (data) {
+                        for (const [key, value] of Object.entries(data)) {
+                            payload[key] = value;
+                        }
+                    }
+                }
                 this.scrollTop = true;
 
                 return EcommerceService

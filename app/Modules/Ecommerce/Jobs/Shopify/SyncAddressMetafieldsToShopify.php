@@ -11,7 +11,6 @@ use Exception;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
@@ -24,7 +23,7 @@ use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\MetafieldResource;
 use Signifly\Shopify\Shopify;
 
-abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
+class SyncAddressMetafieldsToShopify implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -33,32 +32,20 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    protected const RESULTS_SHOPIFY_ORDER_ID = "results_shopify_order_id";
-    protected const RESULTS_STATUS = "results_status";
-    protected const RESULTS_RESULT = "results_result";
-    protected const STATUS_CREATED = "Created";
-    protected const STATUS_FAILED = "FAILED";
-    protected const STATUS_SKIPPED = "Skipped";
-    protected const STATUS_UPDATED = "Updated";
-    /**
-     * The number of seconds the job can run before timing out.
-     *
-     * @var int
-     */
-    public $timeout = 840;
-    protected Shopify $shopify;
-    protected array $results = [];
-    protected ?string $currentModelCountry = null;
+    private const STATUS_CREATED = "Created";
+    private const STATUS_FAILED = "FAILED";
+    private const STATUS_SKIPPED = "Skipped";
+    private const STATUS_UPDATED = "Updated";
+    private const MESSAGE_TYPE_INFO = "info";
+    private const MESSAGE_TYPE_ERROR = "error";
 
-    /**
-     * Create a new job instance.
-     */
+    public int $timeout = 840;
+    protected Shopify $shopify;
+    private ?string $currentModelCountry = null;
+
     public function __construct(
-        protected int $startAtId,
-        protected int $endAtId,
-        protected string $startCreatedAt,
-        protected string $endCreatedAt,
-        protected bool $simulate
+        private readonly Order|SubscriptionPayment $model,
+        private readonly bool $simulate
     ) {
     }
 
@@ -70,8 +57,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     /**
      * Execute the job
      *
-     * @param  Shopify  $shopify
-     * @return void
      * @throws Exception
      */
     public function handle(
@@ -80,107 +65,38 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
         // set DI instances that we'll need
         $this->shopify = $shopify;
 
-        Log::debug(
-            sprintf(
-                "%s: running batch %s of %s for %s %s - %s",
-                get_class($this),
-                $this->batch()->processedJobs() + 1,
-                $this->batch()->totalJobs,
-                Str::plural($this->getModelTypeName()),
-                $this->startAtId,
-                $this->endAtId
-            )
-        );
+        $this->currentModelCountry = null;
+        try {
+            $shopifyMetafieldAttributes = $this->shopify->getOrderMetafields($this->model->shopify_id);
+            $this->handleRateLimit(true);
+            $shopifyMetafieldAttributes = $shopifyMetafieldAttributes->transform(
+                fn (MetafieldResource $metafieldResource) => $metafieldResource->getAttributes()
+            );
+            $this->handleRateLimit(true);
+        } catch (NotFoundException $exception) {
+            $this->logResult(self::STATUS_FAILED, 'No order found in Shopify', self::MESSAGE_TYPE_ERROR);
+            return;
+        }
 
-        $batchSize = 25;
-        $this->loopSync($batchSize);
+        $countryResult = $this->handleMetafield(
+            ShopifyMetafieldKey::AddressCountry,
+            $this->model,
+            $shopifyMetafieldAttributes
+        );
+        $this->logResult(key($countryResult), array_values($countryResult)[0]);
+
+        $regionResult = $this->handleMetafield(
+            ShopifyMetafieldKey::AddressRegion,
+            $this->model,
+            $shopifyMetafieldAttributes
+        );
+        $this->logResult(key($regionResult), array_values($regionResult)[0]);
     }
 
-    /**
-     * Get the name of the type of model being used
-     * (e.g. order)
-     *
-     * @return string
-     */
-    abstract protected function getModelTypeName(): string;
-
-    /**
-     * Get all the items that need to be synced, and perform the sync action on each one
-     *
-     * @param  int  $batchSize
-     * @return void
-     */
-    protected function loopSync(int $batchSize): void
-    {
-        // get the items, using pagination to keep from blowing up the memory usage
-        $modelsQuery = $this->getModelsQuery();
-
-        Log::debug(
-            sprintf(
-                "Found %s %s to be synced. Performing in batches of %s.",
-                $modelsQuery->count(),
-                Str::plural($this->getModelTypeName(), $modelsQuery->count()),
-                $batchSize
-            )
-        );
-
-        $modelsQuery->chunkById($batchSize, function ($models) {
-            $models->each(function (Order|SubscriptionPayment $model) {
-                $this->currentModelCountry = null;
-                try {
-                    $shopifyMetafieldAttributes = $this->shopify->getOrderMetafields($model->shopify_id);
-                    $this->handleRateLimit(true);
-                    $shopifyMetafieldAttributes = $shopifyMetafieldAttributes->transform(
-                        fn (MetafieldResource $metafieldResource) => $metafieldResource->getAttributes()
-                    );
-                    $this->handleRateLimit(true);
-                } catch (NotFoundException $exception) {
-                    $this->results[] = [
-                        self::RESULTS_SHOPIFY_ORDER_ID => $model->shopify_id,
-                        self::RESULTS_STATUS => self::STATUS_FAILED,
-                        self::RESULTS_RESULT => "No order found in Shopify"
-                    ];
-                    return;
-                }
-
-                $countryResult = $this->handleMetafield(
-                    ShopifyMetafieldKey::AddressCountry,
-                    $model,
-                    $shopifyMetafieldAttributes
-                );
-                $this->results[] = [
-                    self::RESULTS_SHOPIFY_ORDER_ID => $model->shopify_id,
-                    self::RESULTS_STATUS => key($countryResult),
-                    self::RESULTS_RESULT => array_values($countryResult)[0]
-                ];
-                $regionResult = $this->handleMetafield(
-                    ShopifyMetafieldKey::AddressRegion,
-                    $model,
-                    $shopifyMetafieldAttributes
-                );
-                $this->results[] = [
-                    self::RESULTS_SHOPIFY_ORDER_ID => $model->shopify_id,
-                    self::RESULTS_STATUS => key($regionResult),
-                    self::RESULTS_RESULT => array_values($regionResult)[0]
-                ];
-            });
-        });
-        $this->printResults();
-    }
-
-    /**
-     * Get the query builder to use to find applicable models.
-     *
-     * @return Builder
-     */
-    abstract protected function getModelsQuery(): Builder;
 
     /**
      * Handle the process for checking, creating, or updating the (type) metafield.
      *
-     * @param  ShopifyMetafieldKey  $type
-     * @param  Order|SubscriptionPayment  $model
-     * @param  Collection<array>  $shopifyMetafieldAttributes
      * @return array[string $status, string $message]
      */
     protected function handleMetafield(
@@ -248,9 +164,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     /**
      * Update the given metafield to have the sanitized country name.
      * In case of sanitization failure due to invalid data, return null so the metafield creation can be skipped.
-     *
-     * @param  MetaField  $metaField
-     * @return MetaField
      */
     protected function sanitizeCountryMetafield(MetaField $metaField): MetaField
     {
@@ -272,9 +185,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
 
     /**
      * Get the normalized country name, using the data found in our database (and ChatGPT's help).
-     *
-     * @param $input
-     * @return string
      */
     protected function getCountryName($input): string
     {
@@ -387,9 +297,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
      * Update the given metafield to have the sanitized Canadian province name,
      * if we're working on a Canadian address.
      * In case of sanitization failure due to invalid data, return null so the metafield creation can be skipped.
-     *
-     * @param  MetaField  $metaField
-     * @return MetaField|null
      */
     protected function sanitizeRegion(MetaField $metaField): ?MetaField
     {
@@ -417,9 +324,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
 
     /**
      * Get the proper province name, using the data found in our database (and ChatGPT's help).
-     *
-     * @param $input
-     * @return string|null
      */
     protected function getProvinceName($input): ?string
     {
@@ -444,9 +348,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     /**
      * Create the (type) metafield in Shopify, with the given data for the given model.
      *
-     * @param  string  $typeString
-     * @param  Order|SubscriptionPayment  $model
-     * @param  MetaField  $localMetaField
      * @return array[string $status, string $message]
      */
     protected function createMetafield(
@@ -483,9 +384,6 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     /**
      * Update the (type) metafield in Shopify, with the given data for the given order.
      *
-     * @param  string  $typeString
-     * @param  int  $shopifyMetafieldId
-     * @param  MetaField  $localMetaField
      * @return array[string $status, string $message]
      */
     protected function updateMetafield(string $typeString, int $shopifyMetafieldId, MetaField $localMetaField): array
@@ -517,42 +415,16 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     }
 
     /**
-     * Print the results in a table.
-     *
-     * @return void
+     * Log the results for this model
      */
-    protected function printResults(): void
+    private function logResult(string $status, string $result, string $msgType = self::MESSAGE_TYPE_INFO): void
     {
-        if (empty($this->results)) {
-            return;
-        }
-
-        $output = [];
-        $output[] = "|".Str::padRight("", 100, "-")."|";
-        $output[] = sprintf(
-            "| %s | %s | %s |",
-            $this->padForTable("Shopify Order ID"),
-            $this->padForTable("Status"),
-            $this->padForTable("Result", true),
-        );
-        $output[] = "|".Str::padRight("", 100, "-")."|";
-        foreach ($this->results as $result) {
-            $output[] = "| {$this->padForTable($result[self::RESULTS_SHOPIFY_ORDER_ID])} | {$this->padForTable($result[self::RESULTS_STATUS])} | {$this->padForTable($result[self::RESULTS_RESULT], true)} |";
-        }
-        $output[] = "|".Str::padRight("", 100, "-")."|";
-        Log::info(PHP_EOL.implode(PHP_EOL, $output).PHP_EOL);
-    }
-
-    /**
-     * Pad the given string so that it will fill a table column for our output
-     *
-     * @param  string  $string
-     * @param  bool  $isLong
-     * @return string
-     */
-    protected function padForTable(string $string, bool $isLong = false): string
-    {
-        return Str::padRight($string, $isLong ? 60 : 16, " ");
+        Log::$msgType(sprintf('%s: %s %s - %s',
+            $this->getClassName(),
+            $this->model->shopify_id,
+            $status,
+            $result
+        ));
     }
 
     /**
@@ -561,5 +433,13 @@ abstract class SyncAddressMetafieldsToShopifyBaseClass implements ShouldQueue
     protected function getIsSimulation(): bool
     {
         return $this->simulate;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getClassName(): string
+    {
+        return class_basename(__CLASS__);
     }
 }

@@ -2,7 +2,7 @@ import Breadcrumb from './Breadcrumb.vue' // Adjust the import path as needed
 import { ArrowLeftIcon, HomeIcon } from '@heroicons/vue/solid';
 
 export default {
-    title: 'Components/Breadcrumb',
+    title: 'Components/Collections/Breadcrumb',
     component: Breadcrumb,
     parameters: {
       design: {

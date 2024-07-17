@@ -1,0 +1,72 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Units/Introduction" />
+
+# Units
+
+## Overview
+
+Units are the smallest building blocks of our component architecture. They are designed to be simple, reusable components that can be composed together to form more complex structures like collections and pages.
+
+## Structure
+
+Units serve as the fundamental elements within our component hierarchy. They are often combined to create collections, which in turn are used to build pages.
+
+### Example
+
+For instance, a `Collection` component might include multiple `Unit` components, each serving a specific function.
+```html
+<Collection>
+  <Unit />
+  <Unit />
+</Collection>
+```
+
+## Usage
+
+Units can be imported and used within other components using the `@units` alias. This promotes a clean and organized import structure, making it easier to manage dependencies and maintain the codebase.
+
+```js
+import MyUnit from '@components/Units/MyUnit';
+```
+
+## Best Practices
+
+- **Simplicity**: Keep unit components as simple as possible, focusing on a single responsibility.
+- **Reusability**: Design units to be reusable across different collections and pages.
+- **Consistency**: Maintain a clear and consistent naming convention for unit components.
+
+By following these guidelines, you can create scalable and maintainable components that integrate seamlessly into the broader application architecture.
+
+### Example
+
+Here are some examples of unit components and their usage:
+
+```js
+<template>
+  <button :class="buttonClass" @click="handleClick">{{ label }}</button>
+</template>
+
+<script>
+    export default {
+        props: {
+            label: {
+            type: String,
+            required: true
+            }
+        },
+        computed: {
+            buttonClass() {
+                return 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded';
+            }
+        },
+        methods: {
+            handleClick() {
+                this.$emit('click');
+            }
+        }
+    };
+</script>
+```
+
+By using these unit components effectively, you can ensure a consistent and modular approach to building your application's UI.

@@ -1,7 +1,7 @@
 import HeaderCarousel from './HeaderCarousel.vue';
 
 export default {
-    title: 'HeaderCarousel/HeaderCarousel',
+    title: 'Components/Collections/HeaderCarousel',
     component: HeaderCarousel,
 };
 

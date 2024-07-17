@@ -337,9 +337,10 @@
     flex:0 0 calc($gutterWidth / 3);
     max-width:calc($gutterWidth / 3);
   }
-
-  flex:0 0 calc($gutterWidth / 2);
-  max-width:calc($gutterWidth / 2);
+  & {
+    flex:0 0 calc($gutterWidth / 2);
+    max-width:calc($gutterWidth / 2);
+  }
 }
 
 $numerators: 2 3 6 9 10;
