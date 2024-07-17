@@ -3,7 +3,7 @@
 import StaticHeader from './StaticHeader.vue';
 
 export default {
-  title: 'HeaderCarousel/StaticHeader',
+  title: 'Components/Collections/StaticHeader',
   parameters: {
     design: {
       type: "figma",

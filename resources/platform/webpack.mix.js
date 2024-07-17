@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require('path');
 const tailwindcss = require('tailwindcss');
 const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
@@ -61,7 +62,22 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
                 new webpack.DefinePlugin({
                     "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
                 })
-            ]
+            ],
+            resolve: {
+                alias: {
+                    '@components': path.resolve(__dirname, './assets/js/Components'),
+                    '@stores': path.resolve(__dirname, './assets/js/Stores'),
+                    '@constants': path.resolve(__dirname, './assets/js/Constants'),
+                    '@services': path.resolve(__dirname, './assets/js/Services'),
+                    '@hooks': path.resolve(__dirname, './assets/js/Hooks'),
+                    //Components
+                    '@units': path.resolve(__dirname, './assets/js/Components/_Units'),
+                    '@collections': path.resolve(__dirname, './assets/js/Components/_Collections'),
+                    '@pages': path.resolve(__dirname, './assets/js/Components/_Pages'),
+                    //Libraries
+                    '@vuesora': path.resolve(__dirname, './assets/js/Libraries/Vuesora'),
+                }
+            }
         };
     });
     

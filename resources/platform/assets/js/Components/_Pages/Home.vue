@@ -139,19 +139,19 @@
 
 <script setup>
     import { computed, onMounted, ref } from 'vue';
-    import CohortBanner from '../CohortBanner/CohortBanner.vue';
-    import CoachEvent from '../../Libraries/Vuesora/Components/Coaches/CoachEvent.vue';
-    import HeaderCarousel from '../HeaderCarousel/HeaderCarousel.vue';
-    import HomepageCatalog from '../HomepageCatalog/HomepageCatalog.vue';
-    import LearningPathContainer from '../LearningPaths/LearningPathContainer.vue';
-    import ListSection from '../ListSection/ListSection.vue';
-    import MiniCatalogueSection from '../MiniCatalogueSection/MiniCatalogueSection.vue';
-    import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
-    import PopularConversations from '../PopularConversations/PopularConversations.vue';
-    import StaticHeader from  '../HeaderCarousel/StaticHeader.vue';
-    import StatsSection from '../StatsSection/StatsSection.vue';
-    import TriggerBanner from '../Onboarding/TriggerBanner.vue';
-    import { useUserStore } from "../../Stores/user";
+    import CohortBanner from '@components/CohortBanner/CohortBanner.vue';
+    import CoachEvent from '@vuesora/Components/Coaches/CoachEvent.vue';
+    import HeaderCarousel from '@components/HeaderCarousel/HeaderCarousel.vue';
+    import HomepageCatalog from '@components/HomepageCatalog/HomepageCatalog.vue';
+    import LearningPathContainer from '@components/LearningPaths/LearningPathContainer.vue';
+    import ListSection from '@components/ListSection/ListSection.vue';
+    import MiniCatalogueSection from '@components/MiniCatalogueSection/MiniCatalogueSection.vue';
+    import MusoraIcon from '@components/MusoraIcons/MusoraIcon.vue';
+    import PopularConversations from '@components/PopularConversations/PopularConversations.vue';
+    import StaticHeader from  '@components/HeaderCarousel/StaticHeader.vue';
+    import StatsSection from '@components/StatsSection/StatsSection.vue';
+    import TriggerBanner from '@components/Onboarding/TriggerBanner.vue';
+    import { useUserStore } from "@stores/user";
     import {storeToRefs} from "pinia/dist/pinia";
 
     //Pinia Stores

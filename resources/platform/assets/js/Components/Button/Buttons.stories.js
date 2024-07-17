@@ -1,7 +1,7 @@
 import Button from "./MuButton";
 
 export default {
-  title: "Components/Button",
+  title: "Components/Units/Button",
   component: Button,
   parameters: {
     design: {

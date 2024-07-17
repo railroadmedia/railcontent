@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Collections/Introduction" />
+
+# Collection Components
+
+## Overview
+
+Collections are components that are composed of smaller unit components. They are commonly used in larger page components or other larger collection components.
+
+## Structure
+
+In our component hierarchy, pages are made of collections, and collections are made of units. This structure ensures that our components are modular, reusable, and maintainable.
+
+### Example
+
+For instance, a `Page` component might include multiple `Collection` components, each of which is built from several `Unit` components.
+
+```html
+<Page>
+  <Collection>
+    <Unit />
+    <Unit />
+  </Collection>
+  <Collection>
+    <Unit />
+    <Unit />
+    <Unit />
+  </Collection>
+</Page>
+```
+
+## Usage
+
+Collections can be imported and used within other components using the @components alias. This allows for a clean and organized import structure, making it easier to manage dependencies.
+
+### Importing a Collection
+
+```js
+import MyCollection from '@components/Collections/MyCollection';
+```
+
+### Using a Collection in a Component
+
+```js
+<template>
+  <div>
+    <MyCollection />
+  </div>
+</template>
+
+<script>
+import MyCollection from '@components/Collections/MyCollection';
+
+export default {
+  components: {
+    MyCollection
+  }
+};
+</script>
+```
+
+## Best Practices
+- **Modularity**: Keep collections as modular as possible, ensuring that each unit component has a single responsibility.
+- **Reusability**: Design collections to be reusable across different pages and contexts.
+- **Maintainability**: Maintain a clear and consistent naming convention for collections and their unit components.
+
+By following these guidelines, you can create scalable and maintainable components that fit seamlessly into your application's architecture.
