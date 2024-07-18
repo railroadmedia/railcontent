@@ -3,15 +3,14 @@
 namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Models\AppleReceipt;
-use App\Modules\Ecommerce\Models\GoogleReceipt;
 use App\Modules\Ecommerce\Models\Order;
 use App\Modules\Ecommerce\Models\Payment;
-use Carbon\Carbon;
 use App\Modules\Ecommerce\Models\SubscriptionPayment;
+use Carbon\Carbon;
 use Exception;
-use InvalidArgumentException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use InvalidArgumentException;
 
 class PaymentService
 {
@@ -276,11 +275,33 @@ class PaymentService
         // @codeCoverageIgnoreEnd
 
         // grab the Google receipts for this payment
-        $receipts = $payment->googleReceipts()->whereNotNull('local_price')->get();
+        // DEV NOTE: we're hoping that there should only be one valid payment amount that we would actually report,
+        // so just grab the latest valid receipt.
+        $googleReceipt = $payment->googleReceipts()
+            ->whereNotNull('local_price')
+            ->where('valid', 1)
+            ->whereNot('notification_type', 'cancel')
+            ->orderByDesc('created_at')
+            ->first();
+
+        // get the receipt's value in USD
+        $total = 0.0;
+        if ($googleReceipt) {
+            $total = $this->getAsUsd(
+                $googleReceipt->local_price,
+                $googleReceipt->local_currency,
+                $googleReceipt->created_at
+            );
+        }
+
+        /*
+        // DEV NOTE: leaving this in case the hope above is wrong
         // we have some duplicate entries, so make sure to get the unique entries
         $receipts = $receipts->unique(function (GoogleReceipt $googleReceipt) {
             $attributes = $googleReceipt->getAttributes();
             unset($attributes['id']);
+            unset($attributes['created_at']);
+            unset($attributes['updated_at']);
             return $attributes;
         });
 
@@ -293,6 +314,7 @@ class PaymentService
                 $googleReceipt->created_at
             );
         });
+        */
         return $total;
     }
 

@@ -117,6 +117,7 @@ class PaymentServiceTest extends TestCase
                 'product_id' => $subscriptionPayment->subscription->product_id,
                 'purchase_token' => $this->faker->text,
                 'request_type' => GoogleReceipt::MOBILE_APP_REQUEST_TYPE,
+                'notification_type' => GoogleReceipt::GOOGLE_RENEWAL_NOTIFICATION_TYPE,
                 'valid' => 1,
                 'order_id' => $payment->external_id,
                 'local_price' => $amount,
