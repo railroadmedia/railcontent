@@ -2,7 +2,6 @@
 
 namespace App\Decorators\Content;
 
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Support\Collection;
 
 class ChapterDecorator extends ModeDecoratorBase
@@ -23,6 +22,16 @@ class ChapterDecorator extends ModeDecoratorBase
                 if ($datum['key'] === 'chapter_thumbnail_url') {
                     $contents[$contentIndex]['chapters'][$datum['position'] - 1]['chapter_thumbnail_url'] =
                         $datum['value'];
+                }
+            }
+            if($content['type'] == 'pack-bundle-lesson' && isset(($contents[$contentIndex]['chapters']))){
+                foreach($contents[$contentIndex]['chapters'] as $index=>$chapter){
+                    // We've only uploaded 20 default images chapters to amazon
+                    if($index <= 19) {
+                        $position                                                             = $index + 1;
+                        $contents[$contentIndex]['chapters'][$index]['chapter_thumbnail_url'] = $contents[$contentIndex]['chapters'][$index]['chapter_thumbnail_url'] ??
+                            'https://musora-web-platform.s3.amazonaws.com/chapters/' . $content['brand'] . '/Chapter' . $position . '.jpg';
+                    }
                 }
             }
         }
