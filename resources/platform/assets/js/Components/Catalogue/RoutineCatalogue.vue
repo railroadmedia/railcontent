@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-row tw-flex-wrap -tw-mx-[10px]">
-        <div v-if="state.soundSliceSlug" class="tw-absolute tw-w-full tw-h-full" v-teleport-first="'#page-container'" :style="{ zIndex: '1000'}">
+        <div v-if="state.soundSliceSlug" id="practiceOverlay" class="bg-white">
             <SoundSlice :key="`soundslice-${state.routineId}-${state.soundSliceSlug}`"
                 :user-id="userId" :theme-color="themeColor" :soundslice-slug="state.soundSliceSlug"
                 :contentId="state.routineId">
@@ -20,7 +20,7 @@ import RoutineCard from './RoutineCard'
 import SoundSlice from '../SoundSlice/SoundSlice';
 import SoundSliceControls from '../SoundSlice/SoundSliceControls';
 
-import useUserCatalogueEvents from "../../hooks/useUserCatalogueEvents";
+import useUserCatalogueEvents from "../../Hooks/useUserCatalogueEvents";
 
 const props = defineProps({
     content: {
