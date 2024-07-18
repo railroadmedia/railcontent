@@ -98,23 +98,23 @@
                         "desc" => "<strong>Warm Up.</strong> Get started coordinating both of your feet and play smooth, even strokes.",
                         ],
                         [
-                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-02.webp",
+                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-02b.webp",
                         "desc" => "<strong>Setup & Technique.</strong> Set yourself up for success with fundamental foot techniques.",
                         ],
                         [
-                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-03.webp",
+                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-03b.webp",
                         "desc" => "<strong>16th Note Groove.</strong> Learn the double bass pattern that will unlock hundreds of songs.",
                         ],
                         [
-                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-04.webp",
+                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-04b.webp",
                         "desc" => "<strong>Double Bass Fills.</strong> You’re ready to incorporate double kick to create powerful fills.",
                         ],
                         [
-                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-05.webp",
+                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-05b.webp",
                         "desc" => "<strong>Breakdowns.</strong> Get choppy with broken rhythms to fuel your next heavy breakdown.",
                         ],
                         [
-                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-06.webp",
+                        "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-06b.webp",
                         "desc" => "<strong>Listening Recommendations.</strong> Samus gives you a list of double-kick drummers you need to know.",
                         ]
                     ];
