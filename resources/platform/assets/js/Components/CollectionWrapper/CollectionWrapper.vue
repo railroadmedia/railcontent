@@ -48,7 +48,7 @@ import UserCatalogueEvents from "../../Libraries/Vuesora/mixins/UserCatalogueEve
 import ListCatalogue from "../ListCatalogue/ListCatalogue";
 import CatalogueCardContainer from "../Catalogue/CatalogueCardContainer";
 import SongCardContainer from "../Catalogue/SongCardContainer";
-import RoutinesCatalogue from "../../Libraries/Vuesora/views/catalogues/RoutinesCatalogue";
+import RoutinesCatalogue from "../Catalogue/RoutineCatalogue";
 import CoachesGridCatalogue from "../../Libraries/Vuesora/views/catalogues/CoachesGridCatalogue";
 import GroupedResultsContainer from "../GroupedResultsContainer/GroupedResultsContainer";
 import DownloadsCatalogue from "../../Libraries/Vuesora/views/catalogues/DownloadsCatalogue";
