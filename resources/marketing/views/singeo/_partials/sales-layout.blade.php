@@ -21,10 +21,6 @@
                         "iconClass" => "fa-fw far fa-music-note",
                         "url" => get_legacy_brand_base_url("singeo")."/method",
                     ],
-                    "Songs"=> [
-                        "iconClass" => "fa-fw far fa-headphones",
-                        "url" => get_legacy_brand_base_url("singeo")."/songs",
-                    ],
                     "Coaches"=> [
                         "iconClass" => "fa-fw far fa-whistle",
                         "url" => get_legacy_brand_base_url("singeo")."/coaches",
@@ -72,9 +68,6 @@
                 "children" => [
                     "Method"=> [
                         "url" => "/methods",
-                    ],
-                    "Songs"=> [
-                        "url" => "/songs",
                     ],
                     "Coaches"=> [
                         "url" => "/coaches",
