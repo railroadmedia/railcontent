@@ -85,7 +85,7 @@
 
     <section class="py-12 sm:py-20 px-4 text-center">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="font-extrabold mb-4">6 free videos to help you<br> get started and beyond</h2>
+            <h2 class="font-extrabold mb-4">6 free videos to help you<br> get started and beyond.</h2>
             <p class="mb-10">
                 Double Bass 101 includes everything you need to coordinate your feet,<br class="hidden sm:inline">
                 setup your kit, and draw inspiration from iconic double kick players:
