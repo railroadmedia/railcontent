@@ -1,10 +1,10 @@
 <script setup>
-import { DateTime } from 'luxon';
-import { onBeforeMount, ref, computed, reactive, onMounted } from 'vue';
+import {DateTime} from 'luxon';
+import {computed, onBeforeMount, reactive, ref} from 'vue';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
-import { usePlaylistsStore } from '../../../Stores/playlists';
+import {usePlaylistsStore} from '../../../Stores/playlists';
 import DifficultyLabel from '../../DifficultyLabel/DifficultyLabel.vue'
-import { contentTypes } from '../../../utils';
+import {contentTypes} from '../../../utils';
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -67,8 +67,8 @@ const contentTypeString = computed(() => {
     return '';
 })
 
-const released = computed(() => {
-    return props.lesson.status === 'published';
+const showOverlay = computed(() => {
+    return !(props.lesson.status === 'published' || props.lesson.status === 'unlisted');
 })
 
 //Instructor
@@ -249,10 +249,10 @@ onBeforeMount(() => {
                     </div>
 
                     <!-- Overlay -->
-                    <div v-if="lesson.progress_percent === 100 || !released"
+                    <div v-if="lesson.progress_percent === 100 || showOverlay"
                          class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-text-white tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center"
                     >
-                        <template v-if="!released">
+                        <template v-if="showOverlay">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }},
                                 <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber

@@ -262,6 +262,7 @@ class UrlsDecorator extends \Railroad\Railcontent\Decorators\ModeDecoratorBase
                 ContentService::STATUS_DRAFT,
                 ContentService::STATUS_SCHEDULED,
                 ContentService::STATUS_ARCHIVED,
+                ContentService::STATUS_UNLISTED,
             ];
             $content = $this->contentService->getById($lastSegment);
 

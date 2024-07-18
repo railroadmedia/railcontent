@@ -139,11 +139,12 @@ class HomePageController extends BaseController
         ContentRepository::$availableContentStatues =
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
         ContentRepository::$pullFutureContent = true;
-
+        $originalContentStatuses = ContentRepository::$availableContentStatues;
+        array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
-
+        ContentRepository::$availableContentStatues = $originalContentStatuses;
         if (empty($methodContent)) {
             return $this->homePackOnly($request, $brand);
         }
