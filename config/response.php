@@ -453,7 +453,8 @@ return [
                 'current_user_is_subscribed',
             ],
             'resources',
-            'route'
+            'route',
+            'fields.soundslice_slug',
         ],
 
         'course' => [
@@ -3818,7 +3819,8 @@ return [
                 'current_user_is_subscribed',
             ],
             'resources',
-            'route'
+            'route',
+            'fields.soundslice_slug',
         ],
 
         'course' => [
