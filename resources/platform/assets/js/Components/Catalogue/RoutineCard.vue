@@ -75,7 +75,7 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import useCatalogueItem from "../../hooks/useCatalogueItem";
+import useCatalogueItem from "../../Hooks/useCatalogueItem";
 
 const props = defineProps({
     item: {
