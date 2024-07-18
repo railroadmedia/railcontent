@@ -134,6 +134,11 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.metal-playalongs.signup', ['recaptchaKey' => config('recaptcha.key')]);
     }
 
+    public function doubleBass101()
+    {
+        return view('drumeo.lead-gen.pages.double-bass-101', ['recaptchaKey' => config('recaptcha.key')]);
+    }
+
     public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
     {
         if(is_null($prefix) && is_null($page)) {
