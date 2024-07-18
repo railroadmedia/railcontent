@@ -43,14 +43,14 @@
                 $bundles = [
                     [
                         'slug' => '/ultimate-lessons',
-                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + $520 in free bonuses!',
-                        'bonusValue' => '$720 in total value',
+                        'desc' => 'Annual Pianote membership <br class="lg:hidden"> + $441 in free bonuses!',
+                        'bonusValue' => '$641 in total value',
                         'visible' => 1,
                         'price' => 240,
                         'discountedPrice' => 180,
                         'bgColor' => 'background: linear-gradient(45deg, #4B41BC, #8032FF)',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ul-logo-horizontal.webp',
-                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ulimate-lessons-bundle.webp',
+                        'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/ulimate-lessons-bundle2.webp',
                     ],
                     [
                         'slug' => '/shop/5-for-3-bundle',

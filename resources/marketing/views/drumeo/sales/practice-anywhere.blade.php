@@ -23,12 +23,12 @@
         "noBreadcrumb" => true,
         "name" => "The Practice Anywhere Bundle",
         "fullPrice" => 240,
-        "price" => 180,
+        "price" => 200,
     ])
 
 @php
     $originalPrice = 240;
-    $discountedPrice = 180;
+    $discountedPrice = 200;
     $savePercentage = round((($originalPrice - $discountedPrice) / $originalPrice) * 100);
 @endphp
 
@@ -177,7 +177,7 @@
                     'title' => 'Drumeo',
                     'description' => "Level up your skills with Drumeo - the world's best lessons, teachers, and practice tools trusted by thousands of active students.",
                     'price' => 240,
-                    'customText' => '$180',
+                    'customText' => '$200',
                     'customSubText' => 'true',
                     ],
                     [

@@ -55,7 +55,7 @@
 
     @php
         $bubble1 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-header-items-09.webp';
-        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/330x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-header-items-02.webp';
+        $bubble2 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/330x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-header-items-03.webp';
         $bubble3 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-header-items-01.webp';
         $bubble4 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/300x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-header-items-08.webp';
         $bubble5 = 'https://d21q7xesnoiieh.cloudfront.net/fit-in/400x0/filters:quality(95)/marketing/pianote/promos/summer-sale/pianote-header-items-03.webp';
@@ -71,7 +71,7 @@
              ],
              [
                  'src' => $bubble2,
-                 'classes' => 'h-24 sm:h-28 lg:h-44 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%] rotate-45',
+                 'classes' => 'h-12 sm:h-14 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%] rotate-45 opacity-0',
              ],
              [
                  'src' => $bubble3,
@@ -116,8 +116,7 @@
             </h1>
             <p class="text-sm leading-normal sm:tracking-widest mb-5 lg:mb-7">
                 <i class="fas fa-check text-pianote"></i> PIANOTE MEMBERSHIP
-                <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> METRONOME
-                <br class="lg:hidden">
+                <br class="sm:hidden">
                 <i class="fas fa-check lg:ml-5 text-pianote"></i> 4 PIANO BOOKS
                 <i class="fas fa-check ml-3 sm:ml-5 text-pianote"></i> 3 DIGITAL COURSES
             </p>
@@ -126,7 +125,7 @@
                 <span class="mb-4 sm:mb-6 text-xl md:text-3xl">Save {{$savePercentage}}% </span>
             </span>
             </h2>
-            <p class="mb-4 sm:mb-6"><strong class="font-black">PLUS</strong> get $520 in free bonuses</p>
+            <p class="mb-4 sm:mb-6"><strong class="font-black">PLUS</strong> get $441 in free bonuses</p>
 
             <div class="flex flex-wrap justify-center max-w-xs sm:max-w-full mx-auto px-5 sm:px-0">
 
@@ -200,7 +199,7 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @php
-        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[taktell-piccolo-metronome]=1&products[piano-chords-and-scales-guide]=1&products[little-book-hanon]=1&products[little-book-chord]=1&products[little-book-arpeggios]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&promo-code=summersalepromo&locked=true';
+        $buttonLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[little-book-hanon]=1&products[little-book-chord]=1&products[little-book-arpeggios]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&promo-code=summersalepromo&locked=true';
         $buttonLink2 = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[new-piano-players-start-here]=1&products[easy-chords]=1&products[30-day-blues-piano]=1&redirect=/order&promo-code=summersalepromo&locked=true'
     @endphp
     <div style="background:linear-gradient(45deg, #4B41BC, #8032FF);">
@@ -210,7 +209,7 @@
                 <br>
                 <h4 class="leading-tight mb-6">
                     UNLIMITED piano lessons you can take anywhere, <br>
-                    anytime + get $520 in free bonuses. </h4>
+                    anytime + get $441 in free bonuses. </h4>
                 <div style="font-size:0px">
                     @php
                         $bonuses = [
@@ -220,12 +219,6 @@
                                 'price' => '240',
                                 'customText' => '$180',
                                 'customSubText' => 'true'
-                            ],
-                            [
-                                'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/pianote/promos/summer-sale/metronome-card.webp',
-                                'description' => 'Develop your rhythm, timing, and coordination with this beautiful compact metronome made in Germany by Wittner.',
-                                'price' => floatval($productPrices['taktell-piccolo-metronome']->price),
-                                'shipping' => 'true'
                             ],
                             [
                                 'image' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/420x0/filters:quality(95)/marketing/pianote/promos/summer-sale/CSB-card.webp',

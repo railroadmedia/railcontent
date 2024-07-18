@@ -43,7 +43,7 @@
                         'desc' => 'Annual Drumeo membership + <br class="lg:hidden"> $385.95 in free bonuses!',
                         'visible' => 1,
                         'price' => 240,
-                        'discountedPrice' => 180,
+                        'discountedPrice' => 200,
                         'bgColor' => 'background: linear-gradient(45deg, #3418E1, #FF005C)',
                         'logo' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/pa-logo-horizontal.webp',
                         'spread' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/800x0/filters:quality(95)/marketing/drumeo/promos/summer-sale/practice-anywhere-bundle2.webp',
@@ -147,7 +147,7 @@
                 <div class="fixed-cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4 text-left">
                 @include('_partials.components.shop.product-card', [
                     "badge" => "Most Popular",
-                     "discounted_price" => 180,
+                     "discounted_price" => 200,
                         "href" => "/practice-anywhere",
                      "instructor" => "Award-Winning Membership",
                      "price" => 240,
