@@ -18,6 +18,13 @@ return [
 
     // customer.io accounts configuration
     'accounts' => [
+        'musora_prospects' => [
+            'track_api_key' => env('MUSORA_PROSPECTS_CUSTOMER_IO_TRACK_API_KEY'),
+            'app_api_key' => env('MUSORA_PROSPECTS_CUSTOMER_IO_APP_API_KEY'),
+            'workspace_name' => env('MUSORA_PROSPECTS_CUSTOMER_IO_WORKSPACE_NAME'),
+            'workspace_id' => env('MUSORA_PROSPECTS_CUSTOMER_IO_WORKSPACE_ID'),
+            'site_id' => env('MUSORA_PROSPECTS_CUSTOMER_IO_SITE_ID'),
+        ],
         'musora' => [
             'track_api_key' => env('MUSORA_CUSTOMER_IO_TRACK_API_KEY'),
             'app_api_key' => env('MUSORA_CUSTOMER_IO_APP_API_KEY'),
@@ -57,6 +64,42 @@ return [
 
     // form names and configuration
     'forms' => [
+        // NOTE: brand changes dynamically based on the current domain
+        'brand' => 'musora',
+        'musora' => [
+            'The Playlist - Musora Newsletter' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email'
+                ],
+            ],
+            'Free Music Lessons For Life' => [
+                'custom_attributes' => [
+                    'first_name' => 'nullable|string',
+                    'preferred_instrument' => 'nullable|string',
+                ],
+                'events' => [
+                    'Prospect Signed Up',
+                ],
+                'accounts_to_sync' => [
+                    'musora_prospects',
+                ],
+                'attributes' => [
+                    'first_name' => 'First Name',
+                    'email' => 'Email',
+                    'preferred_instrument' => 'Preferred Instrument'
+                ],
+            ],
+        ],
         'drumeo' => [
             'Kristinas Top 25' => [
                 'custom_attributes' => [],
@@ -258,7 +301,7 @@ return [
             ],
             'Drumeo Drumset Giveaway' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'drumeo_prospect_drumset-giveaway-may-2024',
@@ -325,6 +368,15 @@ return [
                     'drumeo',
                 ],
             ],
+            'EarDrums Waitlist' => [
+                'custom_attributes' => [],
+                'events' => [
+                    'drumeo_prospect_eardrums2-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
             'Metronome Notice' => [
@@ -347,7 +399,7 @@ return [
             ],
             'Chord Hacks' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_chord-hacks',
@@ -371,7 +423,7 @@ return [
             ],
             'Getting Started On The Piano' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_getting-started',
@@ -395,7 +447,7 @@ return [
             ],
             'Sight Reading Made Simple' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_sight-reading-made-simple',
@@ -455,7 +507,7 @@ return [
             ],
             'Digital Chords And Scales' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_digital-chords-and-scales',
@@ -623,7 +675,7 @@ return [
             ],
             '7 Days To Sight Reading' => [
                 'custom_attributes' => [
-                    'first_name' => 'required|string'
+                    'first_name' => 'nullable|string'
                 ],
                 'events' => [
                     'pianote_prospect_7-days',

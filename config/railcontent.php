@@ -3056,7 +3056,7 @@ return [
     'playlist_items_limit' => 300,
     'search_in_playlist_items_name' => false,
 
-    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107],
+    'cohort_permission_ids' => [81, 65,96,97,98,100,101,102,103,104,105,106,107,109,110,112],
     'difficulty_map' =>
         [
             '1' => 'Introductory',
@@ -3148,7 +3148,7 @@ return [
         'url' => env('HUGGINGFACE_URL', 'https://MusoraProductDepartment-recsys-alt-1.hf.space/recommend'),
         'backup_url' => env('HUGGINGFACE_BACKUP_URL', 'https://MusoraProductDepartment-recsys-alt-2.hf.space/recommend'),
         'token' => env('HUGGINGFACE_TOKEN', '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'),
-        'use_caching' => true,
+        'use_caching' => false,
         'remove_seen_content' => false,
         'use_fast_implementation' => false,
     ]

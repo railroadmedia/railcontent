@@ -1,10 +1,60 @@
+import axios from 'axios';
+
+export const setEndpointPrefix = () => {
+    const { origin } = window.location;
+    if (origin.includes('dev')) {
+        window.ENDPOINT_PREFIX = `https://${location.hostname}:${location.port}`
+    } else {
+        window.ENDPOINT_PREFIX = 'https://' + location.hostname
+    }
+};
+
+export const searchCoaches = (brand, term) => {
+    const coachesUrl = `${window.ENDPOINT_PREFIX}/railcontent/content?brand=${brand}&limit=18&statuses[]=published&sort=-published_on&required_fields[]=is_coach,1&page=1${term ? '&term=' + term : ''}`
+    return axios.get(coachesUrl);
+}
+
+const getResultValue = (el, searchKey, searchObj) => {
+    if (el[searchObj]) {
+        const findResult = el[searchObj].find(({ key }) => key === searchKey);
+        return findResult ? findResult.value : '';
+    }
+    return '';
+};
+
+
+export const transformCoachesCardData = (result) => {
+    return result.data.data.map((coach) => {
+        // console.log(coach)
+        const img = getResultValue(coach, 'coach_card_image', 'data');
+        const focusText = getResultValue(coach, 'focus_text', 'data');
+        const name = getResultValue(coach, 'name', 'fields');
+        const isFollowed = coach.current_user_is_subscribed;
+
+        return {
+            img,
+            focusText,
+            id: coach.id,
+            url: coach.url,
+            name,
+            isFollowed
+        }
+    })
+};
+
+export function snakeToCapitalized (str) {
+    return str
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+}
+
 export const trapFocus = (element) => {
     var focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
     var firstFocusableEl = focusableEls[0];
     var lastFocusableEl = focusableEls[focusableEls.length - 1];
     var KEYCODE_TAB = 9;
     firstFocusableEl.focus();
-    console.log('trap focus');
 
     element.addEventListener('keydown', function (e) {
         var isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);

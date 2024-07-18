@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "drumeo-app",
+  "private_key_id": "d3d6acc952aba78a822d14681d2fcc904df729df",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCu/4GA7EzdVGTN\niLpxR6SutBCppnI63MNuEAibFZ9vuzR1qjoGLfQ0SXhLkMUNnuRZM8Sw3smRN+86\nOVugxtid8sxG5UNtcJHaZHC/HLUG7MAT4VpPUl3kbD0zqZ2Pr/bJUhQ+Tdp5w/q7\nQqQ8HMkdCMjBudK9JbTzQHzxKfx25xQeJg/Lyotd6FsEGAQ3wlDhus+HjSvrdLbX\nl/2CHSWg4UdiYm8BGK4HQ2raLfy7OLhvr5htFXxtp9T+NKIZqBu1g8kfe4YYn+0C\nuTXHGvB2u6Kki6mwpDy+kQSTgLGTRG6+HGUqio43s0byay9NLmhVY3vlLXKTTH8I\n2LAKy+HXAgMBAAECggEAHEl1xAKuTAqDvstuo7f6cTjvBpU+mrArsONLmNHucy+W\nA70P4wbTlg4YMVLF33VDIP4iuZpRh7U8aLNz0bHCuwlPptgRRaPwF5aruOCpjGSB\nidUf9XlxbuZmIC83Jk5BvHoVhpqsCYm5wkI77PGUOqq8VMA2RdfN/5H5gDwSsJ9W\nGPKox30WxnZssVRP3gCCi60jnkv8InUcNMmQnbwadaOvfUrdUdLXFDUYX9Pb88L1\n9j3f2rR4C6tVXfxQPtP2TmmiSfhllqRZQd3AwB4JcYyXJaLwOUSd3X9dut0O/osK\nkNbV71pHQuXcZX6hHXTqTh/AVAhvPMdejFQiZOyXlQKBgQDeZT/JaiqxSdAIxYQO\nqiiJNsz7EdFJ682EFggUU0rnXg6SwmqLx4VrNLEG+9CP+sgdZIweJeb11Lckl5pG\n2zPDjFNXTrohqAgk/DpGo55DYVD7YmUELxaiv0WScWHzrfbPn6Qj4nuRZt8r77jJ\ncZLxlcG8b6QLB4UlAhvJhwxcXQKBgQDJcNGk2pPGUl2HO9v00hC16dcSG7nd2wk8\nHFirltZlIDO9dT8sg953nIuJgjcabZoLZbc/vA04I9LhNTpaM5ASQ7NVZNznVS2o\n6zl6mjTanziW2Chp+xYrz4mebG9WiUqMxJybE6+pt65dEjXt8fvqSLwjV2hjM/53\nQxl8djczwwKBgG1HXSeQZngFKBcXTwORsydxaRm5sJhdKPhNhxzNrNGxkwGkTIxw\ntutt0cr3s4z8Epb20C8EOs/y/Sca43ELxwzAiDcvdSCSm6Xo1o3dWigLyqoruC1t\nIfdIe1wxIIuHoO52qEYFxOg2n1TMj4VUrHrPNopsZTQSNudveM328Sj1AoGAI4BM\nkj8rWAJgFVtJUoZLB6RkkP5t7VmS8RMV1XfJ5RydwcAOGCxNYssmFF/ski3KvkN4\n3jSoJ8K4gZQ96nO36mAgFOanv+VVHLYH9UGEGxuAf6UsyjDEIYh7+n2lyZx8lP55\nkyMPDFwg0KpK8tp4yTt0XM4kyYb6S855iWPUKr0CgYEAwMtsd65364cfnjyOA/ou\n+bJ0dzqNU+41E6QTymvf03OTNFTghleyr0V+OZVHWiCgIk++wHyHWJGff0tY0WUC\nNN/NMpdINqefBlFhaQn380pRyLQR0RjY4UCvg2N6FHFwfEDtyn6d5M3KPO5F5axk\n+wTV04NLl2D736e8Sat0n0g=\n-----END PRIVATE KEY-----\n",
+  "client_email": "drumeo-fcm@drumeo-app.iam.gserviceaccount.com",
+  "client_id": "104348077453920556622",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/drumeo-fcm%40drumeo-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

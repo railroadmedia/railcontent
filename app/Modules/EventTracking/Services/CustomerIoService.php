@@ -6,7 +6,6 @@ use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\CustomerIO\Services\CustomerIoService as LegacyCustomerIoService;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -133,12 +132,16 @@ class CustomerIoService
         };
 
         $days = 0;
-        if (str_contains(strtolower($product->sku), "7-day")
-            || $product->sku == "PIANOTE-MEMBERSHIP-TRIAL") {
+        if (
+            str_contains(strtolower($product->sku), "7-day")
+            || $product->sku == "PIANOTE-MEMBERSHIP-TRIAL"
+        ) {
             $days = 7;
         }
-        if (str_contains(strtolower($product->sku), "30-day")
-            || str_contains(strtolower($product->sku), "1-month")) {
+        if (
+            str_contains(strtolower($product->sku), "30-day")
+            || str_contains(strtolower($product->sku), "1-month")
+        ) {
             $days = 30;
         }
 

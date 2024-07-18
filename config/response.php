@@ -363,6 +363,7 @@ return [
             'user_progress',
             'difficulty_string',
             'instructors',
+            'chapters',
             'related_lessons' => [
                 'id',
                 'type',
@@ -452,7 +453,8 @@ return [
                 'current_user_is_subscribed',
             ],
             'resources',
-            'route'
+            'route',
+            'fields.soundslice_slug',
         ],
 
         'course' => [
@@ -2447,7 +2449,9 @@ return [
             'subcription_date',
             'completed_workouts',
             'branches',
-            'features'
+            'features',
+            'show_onboarding',
+            'last_used_brand'
         ],
 
         'quick-tips' => [
@@ -3725,6 +3729,7 @@ return [
             'user_progress',
             'instructors',
             'difficulty_string',
+            'chapters',
             'related_lessons' => [
                 'id',
                 'type',
@@ -3814,7 +3819,8 @@ return [
                 'current_user_is_subscribed',
             ],
             'resources',
-            'route'
+            'route',
+            'fields.soundslice_slug',
         ],
 
         'course' => [
@@ -5538,7 +5544,9 @@ return [
             'is_enrolled_into_cohort',
             'completed_workouts',
             'branches',
-            'features'
+            'features',
+            'show_onboarding',
+            'last_used_brand'
         ],
 
         'quick-tips' => [

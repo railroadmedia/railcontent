@@ -127,19 +127,32 @@ class SyncOrdersToShopifyTest extends TestCase
             ->createdAtInDateRange(new Carbon('1970-01-01T00:00:00Z'), $startCreatedAt->copy()->subDay())
             ->create();
 
-        $beforeLaunch = Order::factory()
-            ->count(5)
-            ->hasOrderItemForProduct($product)
-            ->createdAtInDateRange($startCreatedAt, $this->launchDate)
-            ->create();
-        $beforeLaunch = $beforeLaunch->sortBy('id');
+        // create these in a loop, so we can have an incrementing created_at value
+        $beforeLaunch = collect();
+        $previousCreatedAt = $startCreatedAt->copy();
+        for ($i = 0; $i < 5; $i++) {
+            $order = Order::factory()
+                ->hasOrderItemForProduct($product)
+                ->createdAtInDateRange($previousCreatedAt, $this->launchDate)
+                ->create();
 
-        $afterLaunch = Order::factory()
-            ->count(4)
-            ->hasOrderItemForProduct($product)
-            ->createdAtInDateRange($this->launchDate, $endCreatedAt)
-            ->create();
-        $afterLaunch = $afterLaunch->sortBy('id');
+            // update the previousCreatedAt to the created_at of the current order, so the next will be after it
+            $previousCreatedAt = $order->created_at->copy()->addSecond();
+            $beforeLaunch->push($order);
+        }
+
+        $afterLaunch = collect();
+        $previousCreatedAt = $this->launchDate->copy()->addMinute();
+        for ($i = 0; $i < 4; $i++) {
+            $order = Order::factory()
+                ->hasOrderItemForProduct($product)
+                ->createdAtInDateRange($previousCreatedAt, $endCreatedAt->copy()->startOfDay())
+                ->create();
+
+            // update the previousCreatedAt to the created_at of the current order, so the next will be after it
+            $previousCreatedAt = $order->created_at->copy()->addSecond();
+            $afterLaunch->push($order);
+        }
 
         // after our wanted period
         Order::factory()

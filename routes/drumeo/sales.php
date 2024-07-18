@@ -21,7 +21,7 @@ Route::domain('{drumeoDomain}')
         //    Route::get('/lifetime-discounted', [SalesController::class, 'lifetimeDiscount'] );
         Route::get('/anniversary', [SalesController::class, 'promoEG']);
         Route::get('/vdf', [SalesController::class, 'choosePlanVDF']);
-        Route::get('/restart', [SalesController::class, 'restart'] );
+        Route::get('/restart', [SalesController::class, 'restart']);
 
         //    sales pages
         Route::get('/method', [SalesController::class, 'method']);
@@ -39,9 +39,13 @@ Route::domain('{drumeoDomain}')
         Route::get('/drumfest', [SalesController::class, 'drumFest']);
         Route::get('/awards/', [SalesController::class, 'awards']);
         Route::get('/sonor/', [SalesController::class, 'sonor']);
-        Route::get('/alesis', [SalesController::class, 'alesis']);
-        Route::get('/alesis/existing', [SalesController::class, 'alesisExisting']);
+
+        Route::get('/alesis', [SalesController::class, 'alesisNitro']);
+        Route::get('/alesis/existing', [SalesController::class, 'alesisNitroExisting']);
         Route::get('/alesis-strata', [SalesController::class, 'alesisStrata']);
+        Route::get('/alesis-strata/existing', [SalesController::class, 'alesisStrataExisting']);
+        Route::get('/alesis-crimson-iii', [SalesController::class, 'alesisCrimson']);
+        Route::get('/alesis-crimson-iii/existing', [SalesController::class, 'alesisCrimsonExisting']);
         Route::get('/alesis-strata/existing', [SalesController::class, 'alesisStrataExisting']);
         Route::get('/alesis-strata-core', [SalesController::class, 'alesisStrataCore']);
         Route::get('/alesis-strata-core/existing', [SalesController::class, 'alesisStrataCoreExisting']);

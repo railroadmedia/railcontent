@@ -353,8 +353,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'marketing/singeo/membership/homepage/2023/devices.png',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora-the-music-lessons-app/id1460388277',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.drumeo',
     ])
 
     @include('singeo._partials.faq')

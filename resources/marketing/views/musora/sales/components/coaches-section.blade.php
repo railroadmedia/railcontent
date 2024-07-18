@@ -52,7 +52,7 @@
                 <section
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
                     :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
-                    
+
                 >
                     <h4 class="font-extrabold mb-3 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
@@ -91,26 +91,26 @@
                                 },
                             }"
                     >
-                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72">
+                        <section x-ref="splide" class="splide h-48 sm:h-52 lg:h-72 mb-20 sm:mb-0">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
-                                        <li class="splide__slide flex flex-col items-center justify-center px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
+                                        <li class="splide__slide flex flex-col items-center justify-start px-1">
+                                            <div class="relative w-full rounded-xl overflow-hidden pb-36 sm:pb-40 lg:pb-52">
                                                 <picture>
-                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{$image['img']}}">
-                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/290x0/filters:quality(95)/{{$image['img']}}">
+                                                    <source media="(min-width:1024px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}">
+                                                    <source media="(min-width:640px)" data-srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/320x0/filters:quality(95)/{{$image['img']}}">
                                                     <img
-                                                        alt="{{ $image['instructor'] }}" 
-                                                        class="absolute top-0 left-0 w-full h-full object-cover transition-opacity opacity-0 duration-300"
+                                                        alt="{{ $image['instructor'] }}"
+                                                        class="absolute top-0 left-0 w-full h-full object-cover object-top transition-opacity opacity-0 duration-300"
                                                         data-splide-lazy="https://d21q7xesnoiieh.cloudfront.net/fit-in/490x0/filters:quality(95)/{{$image['img']}}"
                                                         onload="this.classList.remove('opacity-0');"
                                                     />
                                                 </picture>
-                                                <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
-                                                    <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['title'] !!}</h4>
-                                                    <p class="leading-none text-xs sm:text-sm">{{ $image['instructor'] }}</p>
-                                                </div>
+                                            </div>
+                                            <div class="w-full text-center sm:text-left mt-2 lg:mt-3">
+                                                <h5 class="leading-none font-extrabold mb-1.5">{!! $image['title'] !!}</h5>
+                                                <p class="leading-none text-xs sm:text-sm">{{ $image['instructor'] }}</p>
                                             </div>
                                         </li>
                                     @endforeach

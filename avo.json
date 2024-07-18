@@ -7,8 +7,8 @@
     "name": "Members' Area"
   },
   "branch": {
-    "id": "master",
-    "name": "main"
+    "id": "Wi6wpEnsi",
+    "name": "add-recsys-v2-tracking"
   },
   "sources": [
     {
@@ -16,9 +16,9 @@
       "name": "Musora Web Platform",
       "path": "app/Modules/EventTracking/Avo/Avo.php",
       "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
-      "actionId": "Y3VFudIkpNVS0yyLD1Mv",
-      "branchId": "master",
-      "updatedAt": "2024-05-29T16:01:29.921Z"
+      "actionId": "sgB0KsuT0K2aHOQXXark",
+      "branchId": "Wi6wpEnsi",
+      "updatedAt": "2024-06-25T15:43:39.793Z"
     }
   ],
   "force": false

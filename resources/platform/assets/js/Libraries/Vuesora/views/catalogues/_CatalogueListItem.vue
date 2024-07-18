@@ -1,0 +1,349 @@
+<template>
+  <a class="
+      tw-flex
+      tw-flex-row
+      tw-relative
+      tw-text-[#3F3F46]
+      dark:tw-text-[#9EC0DC]
+      tw-border-b
+      tw-border-[#E4E4E7]
+      dark:tw-border-[#223457]
+      tw-no-underline
+    " :class="[class_object, isBranchPath ? [branchPathBG, branchPathText] : ' hover-text-black',  {'hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039]' : isReleased}]"
+    :href="renderLink && isReleased ? item.url : null">
+
+    <!-- LESSON NUMBERS -->
+    <div v-if="showNumbers" class="
+        tw-flex
+        tw-flex-col
+        tw-text-[#00101D]
+        dark:tw-text-white
+        align-left
+        tw-justify-center
+        number-col
+        title
+        hide-xs-only
+      ">
+      {{ lesson_number }}
+    </div>
+
+    <!-- THUMBNAIL COLUMN -->
+    <div v-if="!showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center tw-flex-shrink-0"
+      :class="[thumbnailColumnClass, themeColor]">
+      <div class="thumb-wrap corners-10">
+        <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
+          <img :src="`https://www.musora.com/musora-cdn/image/width=500,quality=95/${contentModel.list.thumbnail}`" alt="Lesson Thumbnail"
+            class="tw-transition-opacity tw-duration-500" loading="lazy"
+            :class="contentModel.list.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="contentModel.list.imageLoaded = true" />
+
+          <div class="lesson-progress overflow">
+            <span class="progress" :class="themeBgClass" :style="'width:' + progress_percent + '%'"></span>
+          </div>
+
+          <div v-if="mappedData.thumb_title && overview" class="thumb-title flex-center text-center ph-1"
+            :class="brand">
+            <img v-if="mappedData.thumb_logo" :src="mappedData.thumb_logo" alt="Item Logo" style="max-width: 150px" />
+            <h5 v-if="mappedData.thumb_title" class="large-display uppercase text-white">
+              {{ mappedData.thumb_title }}
+            </h5>
+          </div>
+
+          <span
+              class="thumb-hover flex-center"
+              :class="{ 'tw-visible tw-opacity-100 tw-bg-[rgba(0,0,0,0.8)]' : !isReleased }"
+          >
+            <i class="fas" :class="thumbnailIcon"></i>
+            <p v-if="!isReleased" class="tw-text-white tw-font-bold" :class="overview ? 'tw-text-sm' : 'tw-text-xs'">
+              {{ releaseDate }}
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- AVATAR INSTEAD OF THUMBNAIL -->
+    <div v-if="showStudentReviewThumbsAsAvatar" class="tw-flex tw-flex-col tw-justify-center avatar-col">
+      <div class="thumb-wrap rounded" style="border-radius: 50%">
+        <div class="thumb-img corners-10 square rounded" :style="'background-image:url( ' + thumbnail + ' );'">
+          <span class="thumb-hover rounded flex-center" style="border-radius: 50%">
+            <i class="fas" :class="thumbnailIcon"></i>
+            <p v-if="!isReleased" class="tw-text-xs tw-text-white tw-font-bold">
+              {{ releaseDate }}
+            </p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TITLES AND COLUMN DATA (on mobile) -->
+    <div class="tw-flex tw-flex-col tw-justify-center tw-mr-auto title-column tw-flex-grow overflow">
+
+      <!-- Is New -->
+      <div v-if="isBranchPath"
+        class="tw-font-bebas-neue tw-tracking-tighter tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-pianote tw-p-1 tw-rounded"
+        style="width: fit-content;">
+        New Method Path
+      </div>
+
+      <p v-if="!isCoach"
+        class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" :class="[
+          overview ? 'dense' : 'font-compressed',
+        ]">
+        {{ mappedData.color_title }}
+      </p>
+
+      <p class="tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title"
+        :class="overview ? 'heading' : 'tw-text-sm'">
+        {{ mappedData.black_title }}
+      </p>
+
+      <p v-if="mappedData.grey_title && overview"
+        class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] item-title body tw-mt-1 tw-mb-4">
+        {{ mappedData.grey_title }}
+      </p>
+
+      <p v-if="overview && mappedData.description" class="tw-text-base text-grey-6 dark:tw-text-white mb-1 m-xs-only"
+        v-html="mappedData.description">
+      </p>
+
+      <p v-if="!is_search" class="
+          tw-text-xs
+          font-compressed
+          tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] text-truncate
+          tw-uppercase
+          xl:tw-hidden
+          tw-flex
+          tw-flex-wrap
+          sm:tw-flex-nowrap
+        " :class="`${this.overview ? 'tw-mt-4' : ''}`">
+        <span v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`">
+          <span v-if="i > 0" class="bullet">-</span>
+          {{ column_data }}
+        </span>
+        <!-- Difficulty Label -->
+        <DifficultyLabel v-if="mappedData.difficulty" class="sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs tw-ml-2" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+      </p>
+    </div>
+
+    <!-- SHEET MUSIC IMAGE IF IT EXISTS -->
+    <div v-if="mappedData.sheet_music && !is_search"
+      class="flex tw-flex-col tw-justify-center sheet-music-col ph-1 hide-xs-only">
+      <img class="dark:tw-invert tw-transition-opacity tw-duration-500" alt="Rudiment Image"
+        :src="mappedData.sheet_music" loading="lazy" />
+    </div>
+
+    <!-- Difficulty Label -->
+    <DifficultyLabel v-if="mappedData.difficulty" class="tw-hidden xl:tw-flex sm:tw-w-[110px] xl:tw-flex-shrink-0 tw-justify-center tw-text-center tw-text-xs" :difficultyValue="mappedData.difficulty" textCase="uppercase" />
+
+    <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
+    <template v-if="!is_search">
+      <div v-for="(column_data, i) in mappedData.column_data" :key="`${item.id}-mappedData-${i}`" class="
+          tw-hidden
+          xl:tw-flex
+          tw-uppercase
+          tw-items-center
+          tw-justify-center
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
+          tw-text-center
+          tw-text-xs
+          font-compressed
+        " :data-test="column_data">
+        {{ column_data }}
+      </div>
+    </template>
+
+    <!-- ONLY SHOW TYPE ON SEARCHES -->
+    <template v-if="is_search">
+      <div v-if="mappedData.column_data && mappedData.column_data.length"
+          class="
+            tw-hidden
+            sm:tw-flex
+            tw-flex-col
+            tw-uppercase
+            tw-justify-center
+            sm:tw-w-[110px] xl:tw-flex-shrink-0
+            tw-text-center
+            tw-text-xs"
+      >
+        {{ mappedData.column_data[0] }}
+      </div>
+      <div v-if="item.type !== 'song'" class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
+          tw-text-center
+          tw-text-xs
+        ">
+        {{ item.type.replace("bundle-", "").replace(/-/g, " ") }}
+      </div>
+      <div class="
+          tw-hidden
+          sm:tw-flex
+          tw-flex-col
+          tw-uppercase
+          tw-justify-center
+          sm:tw-w-[110px] xl:tw-flex-shrink-0
+          text-center
+          tw-text-xs
+          hide-sm-down
+        ">
+        {{ releaseDate }}
+      </div>
+    </template>
+
+    <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
+    <div v-if="displayUserInteractions"
+      class="flex tw-flex-col icon-col tw-justify-center" :class="is_search ? '' : 'hide-xs-only'">
+      <div v-if="resetProgress" class="body">
+        <i class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] reset"
+          :class="isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'" title="Reset Progress"
+          @click.stop.prevent="progressReset"></i>
+      </div>
+      <button
+          v-if="!resetProgress && !disableAddToListForMethods "
+          class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-h-[50px] tw-items-center"
+          :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
+          :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
+          @click.stop.prevent="addToList"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+      </button>
+    </div>
+
+    <div v-if="is_search && item.type === 'learning-path'" class="flex tw-flex-col icon-col tw-justify-center"></div>
+
+    <!-- PROGRESS INDICATOR OR LOCK ICON -->
+    <div class="flex tw-flex-col icon-col tw-justify-center" :class="is_search || overview ? 'hide-xs-only' : ''">
+
+      <!-- LOCK ICON OR ADD TO CALENDAR -->
+      <div v-if="noAccess" class="body tw-inline-flex tw-h-full tw-items-center"
+        tabindex="0"
+        :class="isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'"
+        title="Add to Calendar" data-open-modal="addToCalendarModal" @click="addEvent">
+        <i class="fas flex-center rounded" :class="isReleased ? 'fa-lock' : 'fa-calendar-plus'"></i>
+      </div>
+
+      <!-- STARTED OR COMPLETED -->
+      <div v-else class="body tw-inline-flex tw-h-full tw-items-center">
+        <i v-if="item.started || item.completed"
+          class="fas flex-center rounded dark:hover:tw-text-white hover:tw-text-[#00101D]" :class="[
+            item.completed ? completedIcon : 'fa-adjust',
+            themeTextClass,
+          ]"></i>
+
+        <i v-else class="fas flex-center rounded" :class="[
+          ['course', 'learning-path', 'pack', 'pack-bundle'].indexOf(item.type) !== -1 ? 'fa-arrow-circle-right' : 'fa-play-circle',
+          isBranchPath ? branchPathText : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D]'
+        ]
+        "></i>
+      </div>
+    </div>
+  </a>
+</template>
+<script>
+import {computed, onMounted} from "vue";
+import Mixin from "./_mixin";
+import ThemeClasses from "../../mixins/ThemeClasses";
+import DifficultyLabel from '../../../../Components/DifficultyLabel/DifficultyLabel';
+export default {
+  name: "CatalogueListItem",
+  mixins: [Mixin, ThemeClasses],
+  components: {
+    DifficultyLabel,
+  },
+  props: {
+    brand: {
+      type: String,
+      default: () => 'drumeo',
+    },
+    isCoach: {
+      type: Boolean,
+      default: () => false,
+    },
+    isBranchPath: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+  computed: {
+    mappedData() {
+      const difficultyValue = this.contentModel.post.fields.find(field => field.key === 'difficulty')?.value;
+      const contentModel = JSON.parse(JSON.stringify(this.contentModel)) //Create a deep copy to not update reactive prop
+      contentModel.list.difficulty = difficultyValue;
+
+      const excludeWords = ['novice', 'beginner', 'intermediate', 'advanced', 'expert', 'all'];
+      const filteredColumnData = contentModel.list.column_data.filter(item => item && !excludeWords.some(word => item.toLowerCase().includes(word)));
+      contentModel.list.column_data = filteredColumnData
+
+      return contentModel.list;
+    },
+
+    disableAddToListForMethods() {
+      if(this.item.type === 'learning-path-level') {
+        return this.brand === 'drumeo' || this.brand === 'pianote';
+      }
+      return false;
+    },
+
+    itemStyle() {
+      const field = this.item.fields.find((field) => field.key === 'style');
+      return field.value;
+    },
+
+    class_object() {
+      return {
+        active: this.active,
+        completed: this.item.completed,
+        "content-overview": this.overview,
+        "pv-2": this.overview,
+        "content-table-row": !this.overview,
+        "pv-1": !this.overview,
+        "no-access": this.noAccess,
+        "wrap-on-mobile": false,
+        compact: this.compactLayout,
+        "start-learning-path":
+          this.contentTypeOverride === "learning-path-part",
+      };
+    },
+
+    branchPathBG() {
+      return `tw-bg-${this.brand}/10`;
+    },
+    branchPathText() {
+      return `tw-text-${this.brand}`;
+    },
+
+    showStudentReviewThumbsAsAvatar() {
+      return (
+        this.item.type === "student-review" && this.forceWideThumbs === false
+      );
+    },
+
+    thumbnailColumnClass() {
+      return {
+        "large-thumbnail": this.overview,
+        "tw-w-[110px] sm:tw-w-[142px]": !this.overview,
+        active: this.active,
+        "background-cards tw-mt-3":
+          this.item.type === "learning-path" ||
+          this.item.type === "learning-path-course",
+      };
+    },
+
+    lesson_number() {
+      if (this.item.type === "semester-pack-lesson") {
+        return this.contentModel.getPostField("week");
+      }
+
+      return this.index;
+    },
+  },
+  beforeDestroy() {
+    this.contentModel = null;
+  },
+};
+</script>

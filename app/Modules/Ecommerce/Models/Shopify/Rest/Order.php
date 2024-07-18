@@ -2,8 +2,6 @@
 
 namespace App\Modules\Ecommerce\Models\Shopify\Rest;
 
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldKey;
-use App\Modules\Ecommerce\Enums\ShopifyMetafieldNamespace;
 use App\Modules\Ecommerce\Enums\ShopifyMetafieldTypes;
 use App\Modules\Ecommerce\Models\Shopify\MetaField;
 use Carbon\Carbon;
@@ -94,10 +92,10 @@ class Order
         try {
             $this->_metafields = $metafields->map(function (MetafieldResource $metafieldResource) {
                 return new MetaField(
-                    ShopifyMetafieldKey::from($metafieldResource->key),
+                    $metafieldResource->key,
                     (string)$metafieldResource->value,
                     ShopifyMetafieldTypes::from($metafieldResource->type),
-                    ShopifyMetafieldNamespace::from($metafieldResource->namespace)
+                    $metafieldResource->namespace
                 );
             });
         } catch (\ValueError $exception) {

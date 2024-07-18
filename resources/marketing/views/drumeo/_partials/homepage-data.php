@@ -328,7 +328,7 @@ $drumeo = [
             "name" => "Tarah Mark",
             "location" => "California, USA",
             "video" => "878790651",
-            "title" => "I don’t feel the pressure to become this rock legend. I’m just going to me – and now I actually get to <strong>make my own rhythms and my own beat.</strong>",
+            "title" => "I don’t feel the pressure to become this rock legend. I’m just going to be me – and now I actually get to <strong>make my own rhythms and my own beat.</strong>",
         ],
         [
             "image" => "https://d21q7xesnoiieh.cloudfront.net/1024x1024/filters:quality(95)/marketing/drumeo/membership/homepage/2024/testimonials/Lisa-Aragon-thumb-m.webp",
