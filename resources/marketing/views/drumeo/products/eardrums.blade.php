@@ -786,7 +786,7 @@
                         '<strong class="text-drumeo">Join Drumeo and get EarDrums for FREE!</strong>',
                         '<strong>Everything included with the<br> Drumeo Eardrums PLUS:</strong>',
                         'Step-by-Step Lessons',
-                        '6000+ Song Breakdowns',
+                        'Song Breakdowns',
                         'Personalized Support',
                     ],
                 ])

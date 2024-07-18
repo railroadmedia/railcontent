@@ -186,7 +186,7 @@
                 ],
                 [
                     'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-icon.svg',
-                    'title' => '1000+ Songs',
+                    'title' => 'Popular Songs',
                     'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
                 ],
                 [

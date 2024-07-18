@@ -256,7 +256,7 @@ class SalesController extends BaseController
             'newAccount' => $isNewAccount,
             'accessCodeArray' => $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ];
-        return view('drumeo.pages.redeem.redeem-page', $data);
+        return view('drumeo.pages.alesis', $data);
     }
 
     public function alesisNitro(Request $request)

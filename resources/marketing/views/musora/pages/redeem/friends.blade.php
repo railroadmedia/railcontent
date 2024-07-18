@@ -188,7 +188,7 @@
            ],
            [
                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
-               'title' => '1000+ Songs',
+               'title' => 'Popular Songs',
                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
            ],
            [
@@ -202,7 +202,7 @@
     @foreach ($errors->all() as $error)
         <p class="bg-pianote text-white py-4 w-full text-center">{{ $error }}</p>
     @endforeach
-    
+
     <header class="sm:px-6 pb-10 sm:py-14 lg:py-20 bg-[#f6f8fc]">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
