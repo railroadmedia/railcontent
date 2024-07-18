@@ -352,13 +352,13 @@
 
                 <a role="link" aria-label="Get Started" class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                     style="padding: 20px 10px;"
-                    :href="`/ecommerce/add-to-cart?products[DLM-1-year]=1&products[${colors[selectedProduct][0]}]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true`">
+                    :href="`/ecommerce/add-to-cart?products[DLM-1-year]=1&products[${colors[selectedProduct][0]}]=1&products[padstand]=1&products[Drumeo-VaterSticks]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersale&locked=true`">
                     GET Started
                 </a>
             </div>
 
             <br>
-            <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersalepromo&locked=true">
+            <a role="link" class="inline-block mt-2" aria-label="Start a monthly membership" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-3]=1&products[30-day-chops]=1&promo-code=summersale&locked=true">
             <p><u><em><strong>Trying to avoid VAT fees on physical items?</strong> Click here to just grab<br class="hidden sm:inline">  your discounted membership + 2 free digital lesson packs.</em></u></p></a>
         </div>
     </section>
