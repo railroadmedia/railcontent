@@ -49,6 +49,7 @@ class PlaylistService
                 $initialByPassPermissions = ContentRepository::$bypassPermissions;
                 ContentRepository::$bypassPermissions = true;
                 ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+                ContentRepository::$availableContentStatues = array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_UNLISTED);
                 $playlistItems =
                     $this->userPlaylistsService->getUserPlaylistContents(
                         $playlistItem['user_playlist_id'],
