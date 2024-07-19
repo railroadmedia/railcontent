@@ -22,8 +22,13 @@
                     :alt="`${title} logo`"
                 />
             </div>
+            <!-- Locked -->
+            <div v-if="!isReleased" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center tw-text-white">
+                {{ releaseDate }}
+            </div>
             <!-- Arrow -->
             <div
+                v-if="isReleased"
                 class="tw-absolute tw-inset-0 tw-bg-[rgba(0,0,0,0.4)] tw-text-white tw-justify-center tw-items-center tw-text-[32px]"
                 :class="progressText === 'Completed' ? 'tw-flex' : 'tw-hidden group-hover:tw-flex'"
             >
@@ -43,9 +48,9 @@
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
             <a :href="packURL" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2">
-                    <div v-if="showEnrollmentLabel" class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
+                    <div v-if="showEnrollmentState" class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
-                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-0.5 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{pack.badge_text}}</div>
+                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-0.5 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{ pack.badge_text }}</div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
@@ -60,7 +65,7 @@
                             </div>
 
                             <!-- Add to playlist on mobile -->
-                            <button v-if="!showEnrollmentLabel" class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
+                            <button v-if="!showEnrollmentState" class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                                 </svg>
@@ -95,7 +100,10 @@
                 >
                     <i class="fas fas fa-redo-alt fa-flip-horizontal" aria-hidden="true"></i>
                 </button>
-                <div class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0">
+                <div
+                    v-if="isReleased"
+                    class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0"
+                >
                     <!-- Action button  -->
                     <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow" :class="progressButtonColor">
                         <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
@@ -137,6 +145,10 @@ const isReleased = computed(() => {
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
 })
 
+const releaseDate = computed(() => {
+    return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
+})
+
 const thumbnail = computed(() => {
     const url = props.pack.data && props.pack.data.find((d) => d.key === 'thumbnail_url');
     return url && url.value;
@@ -173,12 +185,14 @@ const enrolled = computed(() => {
     return props.pack.enrollment_state === 'enrolled';
 })
 
-const showEnrollmentLabel = computed(() => {
-    return enrolled.value || enrollmentOpen.value;
+const showEnrollmentState = computed(() => {
+    return !enrolled.value && enrollmentOpen.value;
 })
 
 const progressText = computed(() => {
-    if(progressPercent.value === 0){
+    if(showEnrollmentState.value){
+        return 'Enroll Now';
+    } else if(progressPercent.value === 0){
         return 'Start';
     } else if(progressPercent.value < 100){
         return 'Continue';
@@ -189,7 +203,9 @@ const progressText = computed(() => {
 })
 
 const packURL = computed(() => {
-    if(enrollmentOpen.value){
+    if(!isReleased.value){
+        return;
+    } else if(showEnrollmentState.value){
         return props.pack.primary_cta_url;
     } else {
         return props.pack.url;
@@ -197,7 +213,7 @@ const packURL = computed(() => {
 })
 
 const progressIcon = computed(() => {
-    if(enrollmentOpen.value){
+    if(showEnrollmentState.value){
         return 'fa-solid fa-graduation-cap';
     } else if (progressText.value === 'Continue'){
         return `fa-adjust`;
