@@ -43,9 +43,9 @@
         <div class="sm:tw-flex tw-grow tw-items-center tw-w-full">
             <a :href="packURL" class="sm:tw-px-4 tw-grow tw-mb-3 sm:tw-mb-0">
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-start tw-mb-2">
-                    <div v-if="showEnrollmentLabel" class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
+                    <div v-if="showEnrollmentState" class="tw-flex tw-justify-between tw-w-full sm:tw-w-auto tw-items-start lg:tw-order-1 tw-flex-shrink-0">
                         <!-- Enrollment Label -->
-                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-0.5 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{pack.badge_text}}</div>
+                        <div class="tw-bg-[#FFAE00] tw-text-[#000C17] tw-px-3 tw-py-0.5 tw-rounded-lg tw-font-semibold tw-text-xs lg:tw-text-sm tw-mb-2 lg:tw-mb-0">{{ pack.badge_text }}</div>
                         <!-- Add to playlist on mobile -->
                         <button class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
@@ -60,7 +60,7 @@
                             </div>
 
                             <!-- Add to playlist on mobile -->
-                            <button v-if="!showEnrollmentLabel" class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
+                            <button v-if="!showEnrollmentState" class="dark:tw-bg-[#00101D] tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#00101D] dark:tw-border-white tw-rounded-full tw-flex tw-justify-center tw-items-center sm:tw-hidden tw-p-0.5">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="addToPlaylist">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                                 </svg>
@@ -173,12 +173,14 @@ const enrolled = computed(() => {
     return props.pack.enrollment_state === 'enrolled';
 })
 
-const showEnrollmentLabel = computed(() => {
-    return enrolled.value || enrollmentOpen.value;
+const showEnrollmentState = computed(() => {
+    return !enrolled.value && enrollmentOpen.value;
 })
 
 const progressText = computed(() => {
-    if(progressPercent.value === 0){
+    if(showEnrollmentState.value){
+        return 'Enroll Now';
+    } else if(progressPercent.value === 0){
         return 'Start';
     } else if(progressPercent.value < 100){
         return 'Continue';
@@ -189,7 +191,7 @@ const progressText = computed(() => {
 })
 
 const packURL = computed(() => {
-    if(enrollmentOpen.value){
+    if(showEnrollmentState.value){
         return props.pack.primary_cta_url;
     } else {
         return props.pack.url;
@@ -197,7 +199,7 @@ const packURL = computed(() => {
 })
 
 const progressIcon = computed(() => {
-    if(enrollmentOpen.value){
+    if(showEnrollmentState.value){
         return 'fa-solid fa-graduation-cap';
     } else if (progressText.value === 'Continue'){
         return `fa-adjust`;
