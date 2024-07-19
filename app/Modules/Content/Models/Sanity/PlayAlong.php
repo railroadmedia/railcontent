@@ -34,13 +34,6 @@ class PlayAlong extends BaseSanityModel
                         new Field(FieldType::String, 'external_id')
                     ],
         );
-        $chapterList = new ListObject(
-            fields: [new Field(FieldType::String, 'chapter_description'),
-                        new Field(FieldType::Number, 'chapter_timecode', description: 'Time in seconds'),
-                        new Field(FieldType::URL, 'chapter_thumbnail_url')
-                        ],
-            previewItem: new ListItemPreview('chapter_description', 'chapter_timecode')
-        );
 
         $assignmentsList = new ListObject(
             fields: [new Field(FieldType::String, 'assignment_title'),
@@ -49,12 +42,8 @@ class PlayAlong extends BaseSanityModel
                         new Field(FieldType::URL, 'assignment_sheet_music_image')
                     ]
         );
-        $topicReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
         $genreReference = new Reference([['type' => 'genre']],  options: ['aiAssist'=>['embeddingsIndex' => 'genre-index']]);
-        $theoryReference = new Reference([['type' => 'theory']], options: ['disableNew' => false]);
-        $lifestyleReference = new Reference([['type' => 'lifestyle']], options: ['disableNew' => false]);
-        $essentialReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
-        $creativityReference = new Reference([['type' => 'topic']], options: ['disableNew' => false]);
+
 
         $detailsGroup = new Group('editorFields', 'Details', true);
         $openAIGroup  = new Group('openAI', 'OpenAI');
@@ -89,18 +78,11 @@ class PlayAlong extends BaseSanityModel
             new Field(FieldType::String, 'difficulty_ai', 'Difficulty AI', inputComponent: 'OpenAiInput', group: $openAIGroup),
 
             new Field(FieldType::Array, 'genre', 'Genre', '', of: $genreReference,group:$detailsGroup),
-            new Field(FieldType::Array, 'essential', 'Essentials', '', of: $essentialReference,group:$detailsGroup),
-            new Field(FieldType::Array, 'creativity', 'Creativity', '', of: $creativityReference,group:$detailsGroup),
-            new Field(FieldType::Array, 'theory', 'Theory', '', of: $theoryReference,group:$detailsGroup),
-            new Field(FieldType::Array, 'topic', 'Topic', '', of: $topicReference,group:$detailsGroup),
-            new Field(FieldType::Array, 'lifestyle', 'Lifestyle', '', of: $lifestyleReference,group:$detailsGroup),
 
             new Field(FieldType::Object, 'video', fields: $video->fields, group: $detailsGroup),
             new Field(FieldType::Boolean, 'show_in_new_feed', 'Show in New feed',group:$detailsGroup),
-            new Field(FieldType::Boolean, 'is_featured', 'Feature in coach/instructor "Featured Lessons" list',group:$detailsGroup),
             new Field(FieldType::Boolean, 'hide_from_recsys', 'Hide from recsys', group: $detailsGroup),
             new Field(FieldType::Image, 'thumbnail', 'Thumbnail', group: $detailsGroup),
-            new Field(FieldType::Array, 'chapter', 'Chapters', of: $chapterList,group:$detailsGroup),
             new Field(FieldType::Array, 'assignment', 'Assignments', of: $assignmentsList,group:$detailsGroup),
             new Field(FieldType::Number, 'railcontent_id', 'MWP Railcontent ID', readOnly: "true", group: $detailsGroup),
             new Field(FieldType::String, 'web_url_path', 'MWP web_url_path', readOnly: "true", group: $detailsGroup),
