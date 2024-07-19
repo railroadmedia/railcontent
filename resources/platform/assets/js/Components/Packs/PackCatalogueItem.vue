@@ -22,8 +22,13 @@
                     :alt="`${title} logo`"
                 />
             </div>
+            <!-- Locked -->
+            <div v-if="!isReleased" class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-[rgba(0,12,23,0.85)] tw-z-20 tw-flex tw-justify-center tw-items-center tw-text-white">
+                {{ releaseDate }}
+            </div>
             <!-- Arrow -->
             <div
+                v-if="isReleased"
                 class="tw-absolute tw-inset-0 tw-bg-[rgba(0,0,0,0.4)] tw-text-white tw-justify-center tw-items-center tw-text-[32px]"
                 :class="progressText === 'Completed' ? 'tw-flex' : 'tw-hidden group-hover:tw-flex'"
             >
@@ -95,7 +100,10 @@
                 >
                     <i class="fas fas fa-redo-alt fa-flip-horizontal" aria-hidden="true"></i>
                 </button>
-                <div class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0">
+                <div
+                    v-if="isReleased"
+                    class="tw-flex tw-items-center tw-mt-3 sm:tw-mt-0"
+                >
                     <!-- Action button  -->
                     <a :href="pack.primary_cta_url" class="tw-btn-primary tw-items-center tw-px-6 xl:tw-px-10 tw-mb-0 tw-flex-grow" :class="progressButtonColor">
                         <i class="fas tw-mr-2 tw-mb-0.5" :class="progressIcon"></i> {{ progressText }}
@@ -135,6 +143,10 @@ const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
+})
+
+const releaseDate = computed(() => {
+    return DateTime.fromSQL(props.pack.published_on_in_timezone).toFormat('LLL d/yy');
 })
 
 const thumbnail = computed(() => {
@@ -191,7 +203,9 @@ const progressText = computed(() => {
 })
 
 const packURL = computed(() => {
-    if(showEnrollmentState.value){
+    if(!isReleased.value){
+        return;
+    } else if(showEnrollmentState.value){
         return props.pack.primary_cta_url;
     } else {
         return props.pack.url;
