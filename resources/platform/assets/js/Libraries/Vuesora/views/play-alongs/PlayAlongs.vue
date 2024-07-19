@@ -21,7 +21,7 @@
                 :active="activeItem != null ? item.id === activeItem.id : false" :display-user-interactions="false"
                 :no-link="true" :theme-color="themeColor" :show-user-actions="showUserActions"
                 @addToList="addToListEventHandler" @markAsComplete="completedEventHandler"
-                @click.native="updateTrack(item)" />
+                @update-track="updateTrack" />
         </div>
         <div v-if="content.length === 0" class="flex flex-row pa-2">
             <div class="flex flex-column">
