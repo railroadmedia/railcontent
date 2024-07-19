@@ -13,35 +13,49 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
-                    <span>{{ totalCommentsAndReplies }}</span>
-                    Comments
-                </h2>
-                <!-- Sort -->
-                <div class="tw-mr-auto">
-                    <div class="form-group xs-12" style="width:100%;">
-                        <select id="commentSort" class="dark:tw-text-white tw-pb-0 tw-pt-1 has-input tw-h-[40px] tw-font-bebas-neue tw-border-2 tw-border-[#000C17] dark:tw-border-white" v-model="sortInterface">
-                            <option class="tw-text-[#00101D]" value="-like_count">
-                                Popular
-                            </option>
-                            <option class="tw-text-[#00101D]" value="-created_on">
-                                Latest
-                            </option>
-                            <option class="tw-text-[#00101D]" value="created_on">
-                                Oldest
-                            </option>
-                            <option class="tw-text-[#00101D]" value="-mine">
-                                My Comments
-                            </option>
-                        </select>
+                <div class="tw-flex tw-flex-grow">
+                    <h2 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
+                        <span>{{ totalCommentsAndReplies }}</span>
+                        Comments
+                    </h2>
+                    <div class="tw-flex tw-flex-grow tw-justify-end">
+                        <!-- Sort -->
+                        <div class="tw-relative">
+                            <button
+                                @click="toggleSortOptions"
+                                class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center tw-mr-3">
+                                <svg v-if="sortOption === '-mine'" class="tw-w-[20px] sm:tw-w-[22px] tw-h-[20px] sm:tw-h-[22px]" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 7.5L6.0075 7.5M9 7.5L9.0075 7.5M12 7.5L12.0075 7.5M6.75 12L3.75 12C2.92157 12 2.25 11.3284 2.25 10.5L2.25 4.5C2.25 3.67157 2.92157 3 3.75 3L14.25 3C15.0784 3 15.75 3.67158 15.75 4.5L15.75 10.5C15.75 11.3284 15.0784 12 14.25 12L10.5 12L6.75 15.75L6.75 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <musora-icon v-else :icon-name="sortIcon" class="tw-w-[20px] sm:tw-w-[22px] tw-h-[20px] sm:tw-h-[22px]" />
+                            </button>
+                            <div v-if="showSortOptions" v-click-outside="closeSortOptions"
+                                 class="tw-w-[150px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute -tw-left-[80px] tw-py-2 tw-mt-1 tw-top-[100%] tw-z-[10]">
+                                <ul class="tw-text-xs tw-w-full">
+                                    <!-- List Items -->
+                                    <li v-for="(item, i) in sortOptions" :key="i" class="tw-w-full">
+                                        <button
+                                            class="tw-flex tw-items-center tw-w-full tw-px-[10px] tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+                                            @click.prevent="handleSort(item.value)"
+                                        >
+                                            <svg v-if="item.value === '-mine'" class="tw-w-[20px] tw-h-[20px] tw-mr-[10px]" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6 7.5L6.0075 7.5M9 7.5L9.0075 7.5M12 7.5L12.0075 7.5M6.75 12L3.75 12C2.92157 12 2.25 11.3284 2.25 10.5L2.25 4.5C2.25 3.67157 2.92157 3 3.75 3L14.25 3C15.0784 3 15.75 3.67158 15.75 4.5L15.75 10.5C15.75 11.3284 15.0784 12 14.25 12L10.5 12L6.75 15.75L6.75 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <musora-icon v-else :icon-name="item.icon" class="tw-w-[20px] tw-h-[20px] tw-mr-[10px]" />
+                                            {{ item.name }}
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button v-if="collapsable" class="btn collapse-square"
+                                @click="commentsCollapsed = !commentsCollapsed">
+                            <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] sm:tw-h-[50px] tw-w-[35px] sm:tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!commentsCollapsed && 'tw-rotate-180'">
+                                <i class="fas fa-chevron-down tw-text-lg"></i>
+                            </div>
+                        </button>
                     </div>
                 </div>
-                <button v-if="collapsable" class="btn collapse-square"
-                        @click="commentsCollapsed = !commentsCollapsed">
-                    <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!commentsCollapsed && 'tw-rotate-180'">
-                        <i class="fas fa-chevron-down tw-text-lg"></i>
-                    </div>
-                </button>
             </div>
         </div>
 
@@ -74,9 +88,9 @@
                     </text-editor>
 
                     <div class="tw-flex tw-flex-row tw-justify-end mv-1">
-                        <button class="tw-btn-primary collapse-150 tw-text-white" :class="themeBgClass" :disabled="loading" dusk="submit-comment" @click="postComment">
-                                Comment
-                        </button>
+                        <MuButton :disabled="loading" dusk="submit-comment" @click="postComment">
+                            Comment
+                        </MuButton>
                     </div>
 
                     <div :class="loading ? 'tw-flex' : 'tw-hidden'"
@@ -122,6 +136,7 @@ import xpMapper from '../../assets/js/classes/xp-mapper';
 import CommentMixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { textColor } from '../../../../Constants/brands'
+import MuButton from '../../../../Components/Button/MuButton';
 
 export default {
     name: 'Comments',
@@ -129,6 +144,7 @@ export default {
         'text-editor': TextEditor,
         'comment-post': CommentPost,
         'comment-likes-modal': CommentLikesModal,
+        'MuButton': MuButton,
         // 'wysiwyg-editor': WYSIWYGEditor,
     },
     mixins: [ThemeClasses, CommentMixin],
@@ -152,6 +168,29 @@ export default {
             loading: false,
             flattenedProfilePics: [],
             commentsCollapsed: false,
+            showSortOptions: false,
+            sortOptions: [
+                {
+                    value: '-like_count',
+                    name: 'Popular',
+                    icon: 'sort-popularity',
+                },
+                {
+                    value: '-created_on',
+                    name: 'Latest',
+                    icon: 'sort-down',
+                },
+                {
+                    value: 'created_on',
+                    name: 'Oldest',
+                    icon: 'sort-up',
+                },
+                {
+                    value: '-mine',
+                    name: 'My Comments',
+                    icon: 'comment',
+                },
+            ],
         };
     },
     computed: {
@@ -219,6 +258,10 @@ export default {
 
         showUserExp() {
             return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
+        },
+
+        sortIcon() {
+            return this.sortOptions.find(option => option.value === this.sortOption).icon;
         },
     },
     mounted() {
@@ -356,6 +399,22 @@ export default {
                         }, 100);
                     }
                 });
+        },
+
+        closeSortOptions() {
+            this.showSortOptions = false;
+        },
+
+        toggleSortOptions() {
+            this.showSortOptions = !this.showSortOptions;
+        },
+
+        handleSort(val){
+            this.showSortOptions = false;
+            this.sortOption = val;
+
+            this.currentPage = 1;
+            this.getComments(this.requestParams, true);
         },
     },
 };
