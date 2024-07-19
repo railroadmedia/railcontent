@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    @if(!empty($singHarmony))
+    @if($cohort['slug'] == '30-day-double-bass')
         <h1>Hello World</h1>
     @endif
     @include('partials._railanalytics-brand-tracking-iframe')

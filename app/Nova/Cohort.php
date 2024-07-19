@@ -38,7 +38,14 @@ class Cohort extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('slug')->required()->rules('required'),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('Cohort Title', 'cohort_title')->required()->rules('required')->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
+            Text::make('Cohort Title', 'cohort_title')
+                ->required()
+                ->rules('required')
+                ->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
+            Boolean::make('Use Custom Cohort Template?', 'custom_cohort')
+                ->hideFromIndex()
+                ->default(false)
+                ->help('Use this checkbox to enable the custom marketing cohort template.'),
 
             Heading::make('Header'),
             Image::make('Dark Mode Logo', 'dark_mode_logo')
