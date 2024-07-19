@@ -17,11 +17,19 @@
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </button>
+              <button class="tw-z-10 lg:tw-hidden" @click="isCollapsed = !isCollapsed">
+                <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] tw-w-[35px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                     :class="!isCollapsed && 'tw-rotate-180'">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+              </button>
             </div>
           </header>
           <!-- Cards -->
           <section
-            class="tw-w-full tw-flex tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block">
+            class="tw-w-full tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block"
+            :class="isCollapsed ? 'tw-hidden' : 'tw-flex'"
+          >
             <div v-for="(item, i) in relatedLessons.data" :key="i"
               class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
               <CatalogueListElement :item="item" :content-type="item.type" :show-my-list-action="true" />
@@ -31,24 +39,27 @@
       </div>
     </aside>
   </template>
-  
-  <script setup>
-  import CatalogueListElement from '../Catalogue/CatalogueListElement.vue';
-  
-  const props = defineProps({
-    isRelatedSectionOpen: {
-      type: Boolean,
-      required: true
-    },
-    relatedLessons: {
-      type: Object,
-      required: true
-    },
-  });
-  
-  const emit = defineEmits(['update:isRelatedSectionOpen']);
-  
-  const toggleRelatedSection = () => {
-    emit('update:isRelatedSectionOpen', !props.isRelatedSectionOpen);
-  };
-  </script>
+
+<script setup>
+import { ref } from 'vue';
+import CatalogueListElement from '../Catalogue/CatalogueListElement.vue';
+
+const props = defineProps({
+isRelatedSectionOpen: {
+  type: Boolean,
+  required: true
+},
+relatedLessons: {
+  type: Object,
+  required: true
+},
+});
+
+const isCollapsed = ref(false);
+
+const emit = defineEmits(['update:isRelatedSectionOpen']);
+
+const toggleRelatedSection = () => {
+emit('update:isRelatedSectionOpen', !props.isRelatedSectionOpen);
+};
+</script>
