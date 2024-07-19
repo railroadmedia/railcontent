@@ -167,7 +167,7 @@
                     ],
                     'alesisNitroPro' => [
                         'name' => 'Nitro Pro',
-                        'video' => 'https://www.youtube-nocookie.com/embed/iZ3CL7nMOpc'
+                        'video' => '//player.vimeo.com/video/986831506'
                     ],
                     'alesisCrimson' => [
                         'name' => 'Crimson III',
