@@ -1332,6 +1332,28 @@ class ContentService
     }
 
     /**
+     * Update
+     *
+     * @param array $ids
+     * @param array $data
+     */
+    public function bulkUpdate(array $ids, array $data) : void
+    {
+        $contents = $this->getByIds($ids);
+        $this->contentRepository->bulkUpdate($ids, $data);
+        foreach($contents as $content) {
+            $id = $content['id'];
+            event(new ContentUpdated($id, $content, $data));
+
+            event(new ElasticDataShouldUpdate($id));
+
+            CacheHelper::deleteCache('content_' . $id);
+
+            CacheHelper::deleteUserFields(null, 'contents');
+        }
+    }
+
+    /**
      * Call the delete method from repository and returns true if the content was deleted
      *
      * @param $id

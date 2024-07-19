@@ -1263,6 +1263,26 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * Update a content record, recalculate position and return whether a row was updated or not.
+     *
+     * @param array $ids
+     * @param array $newData
+     * @return bool
+     */
+    public function bulkUpdate(array $ids, array $newData)
+    {
+        if (count($newData) == 0) {
+            return true;
+        }
+        $amountOfUpdatedRows =
+            $this->query()
+                ->whereIn('id', $ids)
+                ->update($newData);
+
+        return $amountOfUpdatedRows > 0;
+    }
+
+    /**
      * Unlink content's fields, content's datum and content's children,
      * delete the content and reposition the content children.
      *
