@@ -4,7 +4,7 @@
         :class="wrapperClasses">
         <div class="tw-flex tw-flex-row tw-items-center">
             <!-- Thumbnail Section -->
-            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
+            <a :href="isReleased && renderLink && !forceNoLinks ? item.url : null" class="tw-no-underline tw-flex tw-flex-col tw-w-[104px] sm:tw-w-[142px] tw-flex-shrink-0 tw-mr-3" :class="[
                 item.type === 'song' ? 'tw-max-w-[121px]' : '',
                 item.type + '-thumbnail'
             ]">
@@ -60,7 +60,7 @@
                         class="card-info tw-flex tw-flex-auto tw-flex-col tw-rounded-lg tw-justify-center tw-pt-1">
                         <div class="tw-flex tw-flex-col">
                             <!-- Video Title -->
-                            <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
+                            <h4 class="tw-text-[13px] sm:tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                                 :class="{ 'tw-text-center': isGuitareoChordAndScale }">
                                 {{ mappedData.black_title }}
                             </h4>
@@ -69,24 +69,22 @@
                                 class="tw-text-xs tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1 tw-line-clamp-2"
                             >{{  mappedData.description.replace(/<[^>]+>/g, '') }}</p>
                             <!-- Content -->
-                            <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] tw-mb-0.5"
+                            <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[11px] sm:tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC]"
                                 :class="[{ 'tw-text-center': isGuitareoChordAndScale }]">
-                                <div v-if="contentCreator && contentCreator !== ''" class="tw-mb-0.5">
+                                <div v-if="contentCreator && contentCreator !== ''">
                                     <span>{{ contentCreator }}</span>
                                 </div>
+                                <!-- Difficulty Label -->
+                                <span v-if="mappedData.difficulty" class="tw-flex tw-items-center" :class="contentCreator && contentCreator !== '' ? 'tw-ml-1' : ''">
+                                    <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
+                                                 textCase="capitalize" />
+                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
+                                </span>
+                                    <span class="tw-mb-0.5">
+                                    {{ contentTypeString }}
+                                </span>
                             </h6>
                         </div>
-                        <p class="tw-flex tw-items-center tw-flex-wrap tw-text-xs tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
-                            <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty" class="tw-flex tw-items-center">
-                                <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
-                                    textCase="capitalize" />
-                                    <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
-                            </span>
-                            <span class="tw-mb-0.5">
-                                {{ contentTypeString }}
-                            </span>
-                        </p>
                     </a>
                     <!-- CHALLENGE CTA's -->
                     <template v-if="contentType === 'challenge'">
