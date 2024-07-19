@@ -1,40 +1,26 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Getting Started On The Drums | Drumeo</title>
-    <meta property="og:title" content="Getting Started On The Drums | Drumeo">
+    <title>Double Bass 101 | Drumeo</title>
+    <meta property="og:title" content="Double Bass 101 | Drumeo">
 
-    <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
-    <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
+    <meta name="description" content="Learn your first double bass grooves and play along with REAL music.">
+    <meta property="og:description" content="Learn your first double bass grooves and play along with REAL music.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/getting-started/">
-
-    @include('_partials.layout._fonts')
+    <meta property="og:image" content="https://d21q7xesnoiieh.cloudfront.net/fit-in/1200x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
-
-    <style>
-        h3 {
-            font-size: 21px;
-        }
-
-        @media (min-width: 768px){
-            h3 {
-                font-size:24px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            h3 {
-                font-size: 30px;
-            }
-        }
-    </style>
 @stop
+
+@section('body-data')
+    x-data="{
+    trailer: false,
+    }"
+@endsection
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
@@ -83,8 +69,8 @@
         </div>
     </header>
 
-    <section class="py-12 sm:py-20 px-4 text-center">
-        <div class="container max-w-4xl mx-auto">
+    <section class="py-12 sm:py-14 lg:py-20 px-4 text-center">
+        <div class="container max-w-5xl mx-auto">
             <h2 class="font-extrabold mb-4">6 free videos to help you<br> get started and beyond.</h2>
             <p class="mb-10">
                 Double Bass 101 includes everything you need to coordinate your feet,<br class="hidden sm:inline">
@@ -94,6 +80,7 @@
                 @php
                     $lessons = [
                         [
+                        "trailer" => true,
                         "thumb" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/600x0/filters:quality(95)/marketing/drumeo/lead-gen/double-bass-101/videos-01.webp",
                         "desc" => "<strong>Warm Up.</strong> Get started coordinating both of your feet and play smooth, even strokes.",
                         ],
@@ -120,8 +107,14 @@
                     ];
                 @endphp
                 @foreach($lessons as $key => $lesson)
-                    <div class="w-full sm:w-1/2 lg:w-1/3 px-2 mb-6">
-                        <img class="w-full rounded-lg" src="{{ $lesson['thumb'] }}" alt="video thumbnail" loading="lazy">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-4 mb-6 sm:mb-8">
+                        <img src="{{ $lesson['thumb'] }}" alt="video thumbnail" loading="lazy"
+                            @if(!empty($lesson['trailer']))
+                                class="w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity autoplay-video" x-on:click="trailer = true;"
+                            @else
+                                class="w-full rounded-lg"
+                            @endif
+                        >
                         <p class="mt-3">{!! $lesson['desc'] !!}</p>
                     </div>
                 @endforeach
@@ -204,6 +197,12 @@
             </div>
         </div>
     </section>
+
+    @include('_partials.components.video-modal',[
+        'styles' => 'aspect-16:9',
+        'name' => 'trailer',
+        'video' => 'https://www.youtube.com/embed/Q9wl9GZhUX4?autoplay=1',
+    ])
 
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
