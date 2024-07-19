@@ -145,11 +145,19 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </button>
+                                <button class="tw-z-10 lg:tw-hidden" @click="isRelatedSectionCollapsed = !isRelatedSectionCollapsed">
+                                    <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[35px] tw-w-[35px] tw-rounded-full tw-flex tw-justify-center tw-items-center"
+                                         :class="!isRelatedSectionCollapsed && 'tw-rotate-180'">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </button>
                             </div>
                         </header>
                         <!-- Cards -->
                         <section
-                            class="tw-w-full tw-flex tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block">
+                            class="tw-w-full tw-flex-col tw-max-h-[1000px] tw-relative tw-overflow-y-auto lg:tw-block"
+                            :class="isRelatedSectionCollapsed ? 'tw-hidden' : 'tw-flex'"
+                        >
                             <div v-for="(item, i) in relatedLessons.data " :key="i"
                                 class="tw-group tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-px-2">
                                 <CatalogueListElement :item="item" :content-type="item.type" :brand="brand" />
@@ -281,6 +289,7 @@ let progressTracker;
 
 //Refs
 const isRelatedSectionOpen = ref(false);
+const isRelatedSectionCollapsed = ref(false);
 const openSoundslice = ref(false);
 const seekToTime = ref(0);
 const chapterStartTime = ref(0);
