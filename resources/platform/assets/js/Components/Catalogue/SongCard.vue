@@ -35,49 +35,25 @@
             <div class="tw-flex tw-w-full tw-justify-between tw-break-all">
                 <div class="tw-w-full tw-flex tw-flex-wrap lg:tw-block tw-grow-0 tw-shrink">
                     <a :href="item.url"
-                        class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2"
-                        :class="isGroupedView ? 'tw-flex' : 'tw-hidden sm:tw-flex'">
+                        class="tw-flex-auto tw-flex-col tw-rounded-lg tw-pt-2 tw-flex">
                         <div class="tw-flex tw-flex-col">
                             <!-- Song Title -->
-                            <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2 tw-break-words">
+                            <h4 class="tw-text-[13px] sm:tw-text-sm tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2 tw-break-words">
                                 {{ mappedData.black_title }}
                             </h4>
                         </div>
                         <!-- Artist Name -->
-                        <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] ">
-                            <div v-if="artistName && artistName !== ''" class="tw-mb-0.5 tw-break-words">
+                        <h6 class="tw-flex tw-items-center tw-flex-wrap tw-text-[11px] sm:tw-text-xs tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-uppercase dark:tw-text-[#9EC0DC] ">
+                            <div v-if="artistName && artistName !== ''" class="tw-mb-0.5 tw-break-words tw-line-clamp-1">
                                 <span>{{ artistName }}</span>
                             </div>
                         </h6>
                         <p
-                            class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
+                            class="tw-flex tw-items-center tw-flex-wrap tw-text-[11px] sm:tw-text-xs tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
                             <!-- Difficulty Label -->
                             <span v-if="mappedData.difficulty" class="tw-flex tw-items-center tw-mb-0.5">
                                 <DifficultyLabel class="tw-text-xs" :difficultyValue="mappedData.difficulty"
                                     textCase="capitalize" />
-                            </span>
-                        </p>
-                    </a>
-                    <a :href="item.url"
-                        class="tw-flex-auto tw-flex-col tw-rounded-lg tw-h-full tw-justify-center"
-                        :class="isGroupedView ? 'tw-hidden' : 'tw-flex sm:tw-hidden'">
-                        <div class="tw-flex tw-flex-col">
-                            <!-- Song Title -->
-                            <h4 class="tw-text-[14px] tw-leading-[18px] tw-text-[#00101D] tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-break-all tw-line-clamp-1">
-                                {{ mappedData.black_title }}
-                            </h4>
-                        </div>
-                        <p
-                            class="tw-flex tw-items-center tw-flex-wrap tw-text-[12px] tw-leading-[18px] tw-font-normal tw-text-[#3F3F46] tw-capitalize dark:tw-text-[#9EC0DC]">
-                            <!-- Difficulty Label -->
-                            <span v-if="mappedData.difficulty">
-                                <DifficultyLabel  :difficultyValue="mappedData.difficulty"
-                                    textCase="capitalize" />
-                            </span>
-                            <span class="tw-mx-1 tw-text-base tw-leading-none">·</span>
-                            <!-- Artist Name -->
-                            <span class="tw-break-words">
-                                {{ artistName }}
                             </span>
                         </p>
                     </a>
