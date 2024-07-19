@@ -288,7 +288,7 @@
                                 <br>
                                <em>
                                     @if(!empty($bonus['shipping']))
-                                        Free Shipping
+                                        Free Bonus
                                     @elseif(!empty($bonus['customSubText']))
                                         Save {{$savePercentage}}%
                                     @else
