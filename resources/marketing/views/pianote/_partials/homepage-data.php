@@ -263,36 +263,17 @@ $pianote = [
     ],
     "songItems" => [
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/songs-icon.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/drumeo/membership/homepage/2024/songs-ultra.mp4",
-            "title" => "1000+ popular songs.",
-            "desc" => "Get note-for-note song breakdowns for every style, era, and skill level.",
-        ],
-        [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/tempo-icons.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/speed-feature-ultra.mp4",
             "title" => "Find the perfect tempo.",
             "desc" => "Slow down any section of a song to make those tricky bars easier.",
         ],
         [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/loop-icons.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/pianote-loop-ultra.mp4",
             "title" => "Loop the trouble spots.",
             "desc" => "Create practice loops to play-through those difficult parts over and over.",
         ],
         [
-            "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/timing-icons.svg",
-            "mediaVid" => true,
-            "media" => "https://musora-image-processing-cdn.s3.us-east-2.amazonaws.com/marketing/pianote/membership/homepage/2024/metronome-feature-ultra.mp4",
-            'title' => 'Improve your timing.',
-            'desc' => 'Use the built-in-metronome – your new best friend for difficult rhythms.  ',
-        ],
-        [
             "icon" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/pianote/membership/homepage/2023/devices-icons.svg",
-            "media" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/768x0/filters:quality(95)/marketing/pianote/membership/homepage/2024/devices-feature2.webp",
             "title" => "Take your songs anywhere.",
             "desc" => "Accessible on any device, or printable,so you can play any song, any time.",
         ],

@@ -122,17 +122,6 @@
             background-color:#1B2434!important;
             color:#fff!important;
         }
-
-        .timed-toggle .media-toggle.active {
-            display:block!important;
-        }
-        .timed-toggle .active-toggle.active {
-            border-color: #0b76db!important;
-            background-color:#151f31!important;
-        }
-        .timed-toggle .active-toggle.active .description {
-            max-height:100px!important;
-        }
     </style>
     <style>
 
@@ -487,7 +476,9 @@
         $songItems = $drumeo['songItems'];
     @endphp
 
-    @include('musora.sales.components.songs-section')
+    @include('musora.sales.components.songs-section', [
+        'media' => 'drumeo/membership/homepage/2024/drumeo-songs.webp',
+    ])
 
     @php
         $testimonials = $drumeo['testimonials'];
@@ -611,7 +602,6 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop

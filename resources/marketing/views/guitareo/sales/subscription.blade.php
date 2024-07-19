@@ -121,17 +121,6 @@
             background-color:#1B2434!important;
             color:#fff!important;
         }
-
-        .timed-toggle .media-toggle.active {
-            display:block!important;
-        }
-        .timed-toggle .active-toggle.active {
-            border-color: #00c9ac!important;
-            background-color:#151f31!important;
-        }
-        .timed-toggle .active-toggle.active .description {
-            max-height:100px!important;
-        }
     </style>
 @stop
 
@@ -260,11 +249,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'header' => 'Play your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1500x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/device.webp',
-        'brandName' => 'Guitareo',
-        'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
+        'media' => 'guitareo/membership/homepage/2024/guitareo-songs.webp',
     ])
 
     @php
@@ -382,7 +367,6 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop

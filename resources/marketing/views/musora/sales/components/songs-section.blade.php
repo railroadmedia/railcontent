@@ -1,58 +1,38 @@
 <div id="songs" class="anchor"></div>
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
-    <div class="container max-w-4xl mx-auto">
-        <h2><strong>Play your favorite songs.</strong></h2>
-        <p class="leading-tight mt-2 sm:mt-3">You’ll have all the tools you need to make sure you never miss a beat.
-            @if($theme != 'musora')
-                <strong class="font-black text-{{ $theme }} cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo <i class="fal fa-play-circle"></i></u></strong>
-            @else
-                <br class="lg:hidden"><strong class="font-black mr-0.5">Try the demo <i class="fas fa-arrow-right"></i></strong>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-drumeo text-drumeo" x-on:click="drumeoSoundslice = true;"><i class="fal fa-drum"></i></span>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-pianote text-pianote" x-on:click="pianoteSoundslice = true;"><i class="fal fa-piano"></i></span>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer mr-0.5 border-guitareo text-guitareo" x-on:click="guitareoSoundslice = true;"><i class="fal fa-guitar"></i></span>
-                <span class="inline-block rounded-full border px-1.5 py-0.5 cursor-pointer border-singeo text-singeo" x-on:click="singeoSoundslice = true;"><i class="fal fa-microphone-stand"></i></span>
-            @endif
+    <div class="container max-w-5xl mx-auto">
+        <h2 class="leading-tight"><strong>Play your favorite songs.</strong></h2>
+        <p class="leading-tight mt-3 sm:mt-4">You’ll have all the tools you need to make sure you never miss a beat.</p>
 
-        </p>
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mt-8 sm:my-10">
+            <div class="max-w-sm sm:max-w-full"
+                :class="{'opacity-0': !lazyLoad, 'opacity-100': lazyLoad}"
+                x-intersect.once="lazyLoad = true; $refs.image.src = $refs.image.dataset.src;">
+                <picture>
+                    <source media="(min-width:1024px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/1280x0/filters:quality(95)/marketing/{!! $media !!}">
+                    <source media="(min-width:640px)" srcset="https://d21q7xesnoiieh.cloudfront.net/fit-in/760x0/filters:quality(95)/marketing/{!! $media !!}">
 
-        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center my-10 sm:my-14 timed-toggle">
-            <div class="sm:order-1 rounded-l-xl overflow-hidden py-10 pl-10 max-w-xs sm:max-w-full" style="background-color:#1B2434;">
-                @foreach ($songItems as $key => $songItem)
-                    @if(!empty($songItem['mediaVid']))
-                    <video
-                    class="w-full hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif"
-                    src="{{ $songItem['media'] }}"
-                    muted
-                    autoplay
-                    loop
-                    playsinline
-                    preload="none"
-                    x-ref="videoSongsSection"
-                    x-effect="if (videoLoaded && $refs.videoSongsSection) { $refs.videoSongsSection.play(); }"
-                    x-intersect.once="videoLoaded = true"
-                    ></video>
-                        {{-- <video class="h-64 sm:h-72 lg:h-96 hidden media-toggle rounded-l-xl overflow-hidden @if($key == 0) active @endif" src="{{ $songItem['media'] }}" muted autoplay loop playsinline></video> --}}
-                    @else
-                        <img class="w-full hidden media-toggle rounded-l-xl overflow-hidden opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="{{ $songItem['media'] }}" >
-                    @endif
-                @endforeach
+                    <img x-ref="image"
+                        class="w-full transition-opacity opacity-0"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        src="https://d21q7xesnoiieh.cloudfront.net/fit-in/50x0/filters:quality(95)/filters:blur(15)/marketing/{!! $media !!}"
+                        data-src="https://d21q7xesnoiieh.cloudfront.net/fit-in/670x0/filters:quality(95)/marketing/{!! $media !!}"
+                        alt="Device Image">
+                </picture>
             </div>
-            <div class="w-full sm:w-auto text-left mt-6 sm:mt-0 sm:pr-5 lg:pr-8 flex-shrink-0">
+            <div class="w-full sm:w-auto text-left -mt-8 sm:mt-0 sm:pl-5 lg:pl-8 flex-shrink-0">
                 @foreach ($songItems as $key => $songItem)
-                    <div class="flex px-4 py-4 mb-1 rounded-xl w-full cursor-pointer active-toggle transition-colors duration-500 border bg-[#0c1524] border-[#0c1524] @if($key == 0) active @endif">
+                    <div class="flex my-10 lg:my-14 w-full">
                         <div class="w-9 sm:w-12 lg:w-16 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-7 lg:h-8 @if($theme == 'musora') filter invert @endif opacity-0 transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
-                        <div class="flex-grow pl-2 lg:pl-4">
+                        <div class="flex-grow pl-1 lg:pl-2">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
-                            <p class="mx-0 mt-1 sm:mt-2 text-sm description overflow-hidden max-h-0" style="max-width: 270px;">{!! $songItem['desc'] !!}</p>
+                            <p class="mx-0 mt-1 sm:mt-2 text-sm" style="max-width: 270px;">{!! $songItem['desc'] !!}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
-
-{{--        @if(empty($promoVersion))--}}
-{{--            <a role="link" aria-label="See songs list" href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline white smaller">SEE SONGS LIST</a>--}}
-{{--        @endif--}}
         <a role="link" aria-label="See your deal" class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
@@ -68,8 +48,5 @@
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif
         </a>
-        @if(empty($promoVersion))
-            <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ ucfirst($theme) }}+</em></p>
-        @endif
     </div>
 </section>

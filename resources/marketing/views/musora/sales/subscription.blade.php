@@ -245,17 +245,6 @@
             color:#fff!important;
         }
 
-        .timed-toggle .media-toggle.active {
-            display:block!important;
-        }
-        .timed-toggle .active-toggle.active {
-            border-color: #FFAE00!important;
-            background-color:#151f31!important;
-        }
-        .timed-toggle .active-toggle.active .description {
-            max-height:100px!important;
-        }
-
         @-webkit-keyframes breathing {
             0% {
                 opacity: 0.4;
@@ -433,7 +422,7 @@
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'video' => 'https://d21q7xesnoiieh.cloudfront.net/fit-in/1000x0/filters:quality(95)/marketing/drumeo/membership/homepage/2024/device.webp',
+        'media' => 'musora/membership/homepage/2024/musora-songs.webp',
     ])
 
     @php
@@ -520,7 +509,6 @@
     ])
 
 
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/songs-toggler.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop
