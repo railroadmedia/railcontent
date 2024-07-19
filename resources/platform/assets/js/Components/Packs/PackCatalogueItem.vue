@@ -129,7 +129,7 @@ import { DateTime } from 'luxon';
 import { useResetProgress } from "../../Hooks/useResetProgress";
 
 const userStore = useUserStore();
-const { brand } = storeToRefs(userStore);
+const { brand, isAdmin } = storeToRefs(userStore);
 const { resetProgress } = useResetProgress();
 
 const props = defineProps({
@@ -142,6 +142,8 @@ const props = defineProps({
 const resetIcon = ref('fas fa-redo-alt fa-flip-horizontal');
 
 const isReleased = computed(() => {
+    if(isAdmin) return true;
+
     return DateTime.fromSQL(props.pack.published_on_in_timezone).toISO() < DateTime.now().toISO();
 })
 
