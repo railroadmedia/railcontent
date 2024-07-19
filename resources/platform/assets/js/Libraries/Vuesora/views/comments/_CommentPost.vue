@@ -1,11 +1,11 @@
 <template>
     <div :id="domID" class="tw-flex tw-flex-row comment-post pv mb-1 dark:tw-text-white" :class="{ 'pinned': pinned }">
-        <div class="tw-flex tw-flex-col avatar-column tw-mr-[15px]">
+        <div class="tw-flex tw-flex-col avatar-column tw-max-w-[33px] sm:tw-max-w-[75px] tw-mr-[6px] sm:tw-mr-[15px]">
             <div v-if="hasPublicProfiles" class="user-avatar smaller" :class="[avatarClassObject, brand]">
                 <a :href="profileRoute" target="_blank" class="tw-no-underline">
                     <!-- User Avatar -->
                     <img :src="comment.user['fields.profile_picture_image_url']" loading="lazy"
-                        class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                        class="tw-rounded-full tw-transition-opacity tw-duration-500 tw-border-[1px] sm:tw-border-[3px]"
                         :class="comment.user.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
                         @load="comment.user.imageLoaded = true">
                 </a>
@@ -14,30 +14,30 @@
                 class="tw-rounded-full">
 
             <p v-if="showUserExp"
-                class="tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none">
+                class="tw-hidden sm:tw-block tw-uppercase tw-text-center tw-mt-[10px] tw-font-bebas-neue tw-font-bold tw-text-[18px] tw-leading-none">
                 {{ userExpRank }}
             </p>
             <p v-if="showUserExp"
-                class="tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none">
+                class="tw-hidden sm:tw-block tw-uppercase tw-text-center tw-mt-[5px] tw-font-bebas-neue tw-font-bold tw-text-[16px] dark:tw-text-[#9EC0DC] tw-leading-none">
                 {{ userExpValue }} XP
             </p>
         </div>
         <div class="tw-flex tw-flex-col tw-flex-grow">
             <div class="tw-group/comment" v-on:mouseleave="showDropdown = false;">
-                <div class="tw-flex tw-flex-row tw-mb-1 comment-meta">
+                <div class="tw-flex tw-flex-row sm:tw-mb-1 comment-meta">
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mr-1">
                         <h2 class="tw-flex break-words tw-leading-0 tw-items-end">
                             <a v-if="hasPublicProfiles" :href="profileRoute" target="_blank"
-                                class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0 hover:tw-underline hover:tw-underline-offset-2">
+                                class="tw-font-bold tw-text-[#00101D] tw-text-[13px] sm:tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0 hover:tw-underline hover:tw-underline-offset-2">
                                 {{ comment.user.display_name }}
                             </a>
                             <span v-else
-                                class="tw-font-bold tw-text-[#00101D] tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0">
+                                class="tw-font-bold tw-text-[#00101D] tw-text-[13px] sm:tw-text-[18px] dark:tw-text-white tw-no-underline tw-leading-0">
                                 {{ comment.user.display_name }}
                             </span>
 
                             <span
-                                class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[16px] tw-ml-[9px] tw-leading-0">
+                                class="tw-font-normal tw-font-bebas-neue tw-uppercase dark:tw-text-white tw-text-[13px] sm:tw-text-[16px] tw-ml-[9px] tw-leading-0">
                                 {{ dateString }}
                             </span>
                         </h2>
@@ -46,7 +46,7 @@
                     <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-grow-0">
                         <div class="tw-flex tw-flex-row">
                             <button v-if="(isUsersPost || isCurrentUserAdmin)"
-                                class="tw-inline-flex tw-items-center tw-justify-center tw-text-sm no-decoration tw-cursor-pointer tw-mr-1 tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-h-[32px] tw-w-[32px]"
+                                class="tw-inline-flex tw-items-center tw-justify-center tw-text-sm no-decoration tw-cursor-pointer tw-mr-1 tw-rounded dark:hover:tw-bg-[#081825] tw-transition-colors hover:tw-bg-white tw-h-[19.5px] sm:tw-h-[24px] tw-w-[19.5px] sm:tw-w-[24px]"
                                 @click="deleteComment">
                                 <TrashIcon class="tw-w-[16px] tw-h-[16px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]" />
                             </button>
@@ -60,8 +60,8 @@
                     </div>
                 </div>
 
-                <div class="tw-flex tw-flex-row body tw-mb-2">
-                    <div class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post" v-html="comment.comment">
+                <div class="tw-flex tw-flex-row body sm:tw-mb-2">
+                    <div class="tw-flex tw-flex-col post-body tw-flex-grow tw-forum-post tw-text-[13px] sm:tw-text-base" v-html="comment.comment">
                     </div>
                 </div>
 
@@ -86,9 +86,10 @@
                                 <MusoraIcon icon-name="comment-outline" class="tw-inline tw-h-[22px] tw-w-[22px]"
                                     width="22" height="22" viewBox="0 0 22 22" />
                                 <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
-                                    <span v-if="comment.replies && comment.replies.length > 0">&nbsp;{{
-        comment.replies.length }}</span>&nbsp;{{ repliesToShow.length > 1 ? 'REPLIES' :
-        'REPLY' }}&nbsp;
+                                    <span v-if="comment.replies && comment.replies.length > 0">&nbsp;
+                                        {{ comment.replies.length }}
+                                    </span>&nbsp;
+                                    {{ repliesToShow.length > 1 ? 'REPLIES' : 'REPLY' }}
                                 </span>
                             </button>
 
@@ -121,8 +122,9 @@
                                         <button
                                             class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-whitespace-nowrap tw-text-sm"
                                             @click="reportComment">
-                                            <FlagIcon class="tw-inline tw-w-6 tw-h-6 tw-mr-1" /> {{ isReported ?
-        'Reported' : 'Report Comment' }}
+                                            <FlagIcon class="tw-inline tw-w-6 tw-h-6 tw-mr-1"
+                                            />
+                                            {{ isReported ? 'Reported' : 'Report Comment' }}
                                         </button>
                                     </li>
                                 </ul>
