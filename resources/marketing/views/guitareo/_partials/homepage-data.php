@@ -23,7 +23,7 @@ $guitareo = [
         ],
         [
             'image' => 'https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/songs-icon.svg',
-            'title' => '1000+ Songs',
+            'title' => 'Popular Songs',
             'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
         ],
         [

@@ -51,7 +51,6 @@
         <div class="footer-link-wrap">
             <h1><a href="{{ get_legacy_brand_base_url('pianote') }}/shop/">PIANOTE SHOP</a></h1>
             <p><a href="{{ get_legacy_brand_base_url('pianote') }}/">Pianote Membership</a><br>
-                <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/500-songs">500 Songs In 5 Days</a><br>
                 <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/play-beautiful-piano">Playing Beautiful Piano</a><br>
                 <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/chords-scales-book">Chords & Scales Book</a><br>
                 <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/practice-planner">Practice Planner</a></p>

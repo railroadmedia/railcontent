@@ -214,7 +214,7 @@
             'pointOne' => 'GREAT TEACHERS',
             'pointTwo' => 'VIDEO LESSONS',
             'pointThree' => 'FUN PRACTICE',
-            'pointFour' => '1000+ SONGS',
+            'pointFour' => 'POPULAR SONGS',
         'cta' => 'SEE YOUR DEAL &raquo',
     ])
 
@@ -280,7 +280,7 @@
             "noSelector" => true,
             "plusLogo" => "https://d21q7xesnoiieh.cloudfront.net/filters:quality(95)/marketing/guitareo/membership/homepage/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://d21q7xesnoiieh.cloudfront.net/fit-in/0x0/filters:quality(95)/marketing/guitareo/membership/homepage/2024/guitareo-logo.webp",
-            "songs" => "1000+ popular songs.",
+            "songs" => "Popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
@@ -327,7 +327,7 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'logo' => 'marketing/guitareo/membership/homepage/2024/guitareo-logo-green.webp',
-        'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
+        'header' => 'Unlimited guitar lessons.<br>Guided Practice Sessions. <br> Direct access to real teachers.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>

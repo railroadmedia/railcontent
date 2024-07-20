@@ -729,7 +729,7 @@
                     <h3 class="leading-tight my-4"><strong>30 Days Of Free Drum Lessons With Your EarDrums. </strong></h3>
                     <p class="leading-normal">Play your favorite songs, study with your favorite teachers, and find your next breakthrough on the drums.
                         <br><br>
-                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for 6000+ famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
+                        Your Drumeo EarDrums include 30 days of unlimited drum lessons. You’ll have sheet music for famous drum songs, step-by-step lessons with award-winning drummers, and playalongs in every style and tempo.
                     </p>
                 </div>
                 <picture class="w-full sm:w-auto h-auto sm:h-96">

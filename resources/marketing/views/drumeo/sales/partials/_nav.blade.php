@@ -215,11 +215,6 @@
                 "linkUrl" => "/beat/how-to-play-drums/",
                 "linkIcon" => ''
             ])
-            @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "100 Free Songs",
-                "linkUrl" => "/100-songs",
-                "linkIcon" => ''
-            ])
         </div>
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "About Us",

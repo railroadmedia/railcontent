@@ -235,7 +235,7 @@
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
                         <div class="w-full aspect-16:9 bg-cover bg-center" style="background-image:url('https://d21q7xesnoiieh.cloudfront.net/fit-in/700x0/filters:quality(95)/marketing/pianote/promos/may/songs.webp')"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
-                            <h4 class="leading-tight mb-3"><i class="fal fa-music text-pianote inline-block mb-1"></i><br><strong>1000+ Popular Songs</strong></h4>
+                            <h4 class="leading-tight mb-3"><i class="fal fa-music text-pianote inline-block mb-1"></i><br><strong>Popular Songs</strong></h4>
                             <p class="leading-normal">
                                 Note-for-note breakdowns with the ability to slow things down, loop sections and use a metronome.
                             </p>

@@ -163,10 +163,10 @@
                 ],
                 [
                 "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/drumeo-04.png",
-                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "title" => "4. Popular songs with note-for-note breakdowns.",
                 "description" => "The whole point of learning the drums is to actually PLAY the songs you love.
     <br><br>
-    With Musora, you’ll get <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, drumless tracks and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+    With Musora, you’ll get <strong>popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, drumless tracks and more… accessible on any device, or printable, so you can play your favorite songs anytime!
     <br><br>
     Sheet music can cost you hundreds of dollars per year on top of your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.&nbsp;
     <br><br>
@@ -258,10 +258,10 @@
                 ],
                 [
                 "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/pianote-04.png",
-                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "title" => "4. Popular songs with note-for-note breakdowns.",
                 "description" => "The whole point of learning the piano is to actually PLAY the music you love.
     <br><br>
-    With Musora, you’ll get <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+    With Musora, you’ll get <strong>popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
     <br><br>
     Sheet music can cost you hundreds of dollars per year on top of your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.&nbsp;
     <br><br>
@@ -355,7 +355,7 @@
                 ],
                 [
                 "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guitareo-04.png",
-                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "title" => "4. Popular songs with note-for-note breakdowns.",
                 "description" => "The whole point of learning the guitar is to actually PLAY the songs you love.
     <br><br>
     With Musora, you’ll get<strong> note-for-note breakdowns of over 1,000+ of your favorite songs</strong>. Plus,interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
@@ -524,7 +524,7 @@
                 <br><br>
                 <strong>Music should serve you!</strong>
                 <br><br>
-                Online music lessons give you 24/7 on-demand access to lessons, songs, and practice tools. Learn when you want to learn. Practice with engaging, interactive tools. Or play your favorite music with 1000+ popular songs with note-for-note transcriptions, just a click away.
+                Online music lessons give you 24/7 on-demand access to lessons, songs, and practice tools. Learn when you want to learn. Practice with engaging, interactive tools. Or play your favorite music with note-for-note transcriptions, just a click away.
                 <br><br>
                 You can start <strong>right now</strong> for free!",
                 ],
@@ -541,10 +541,10 @@
                 ],
                 [
                 "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/04-songs2.jpg",
-                "title" => "4. Thousands of songs with note-for-note breakdowns.",
+                "title" => "4. Popular songs with note-for-note breakdowns.",
                 "description" => "The point of learning music is to <strong>PLAY</strong> music.
                 <br><br>
-                That’s why Musora gives you <strong>1000s of popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
+                That’s why Musora gives you <strong>popular songs with note-for-note breakdowns</strong> and interactive practice tools like tempo control, section loops, a built-in metronome, and more… accessible on any device, or printable, so you can play your favorite songs anytime!
                 <br><br>
                 Normally sheet music costs you hundreds of dollars per year in addition to your lessons – or most online services are filled with errors, making your playing experience a frustrating one. The Musora song library only includes fully-licensed transcriptions PLUS they’re carefully reviewed by our team of professional transcribers.
                 <br><br>

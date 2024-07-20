@@ -224,7 +224,7 @@
                             for 30 days.
                         </h1>
                         <h6 class="leading-snug mt-4 mb-4 sm:mb-2">
-                            Learn a musical instrument faster with step-by-step lessons, thousands of songs, and unlimited personal support — for all skill levels. <b>Unlock drums, piano, singing, and guitar lessons today with your Musora 30-Day Access Pass.</b>
+                            Learn a musical instrument faster with step-by-step lessons, popular songs, and unlimited personal support — for all skill levels. <b>Unlock drums, piano, singing, and guitar lessons today with your Musora 30-Day Access Pass.</b>
                         </h6>
 
                         <div class="flex flex-wrap items-center justify-center sm:justify-center mt-6 sm:mt-5 lg:mt-10 sm:max-w-xs mx-auto lg:mx-0">

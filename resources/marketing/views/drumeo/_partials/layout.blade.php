@@ -53,9 +53,6 @@
                     "How To Play Drums"=> [
                         "url" => "/beat/how-to-play-drums/",
                     ],
-                    "100 Free Songs"=> [
-                        "url" => "/100-songs",
-                    ],
                 ],
             ],
         ],
