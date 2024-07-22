@@ -219,7 +219,6 @@ export const useCollectionStore = defineStore({
 
             if (defaults.filter) {
                 this.filter = { ...this.filter, ...defaults.filter };
-                console.log(this.filter)
             }
 
             if (defaults.endpoint) {
