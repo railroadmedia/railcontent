@@ -42,7 +42,7 @@ class Cohort extends Resource
                 ->required()
                 ->rules('required')
                 ->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
-//            Boolean::make('Use Custom Cohort Template?', 'custom_cohort')->hideFromIndex()->default(false)->help('Use this checkbox to enable the custom marketing cohort template.'),
+            Boolean::make('Use Custom Cohort Template?', 'custom_cohort')->hideFromIndex()->default(false)->help('Use this checkbox to enable the custom marketing cohort template.'),
             Heading::make('Header'),
             Image::make('Dark Mode Logo', 'dark_mode_logo')
                 ->help('The logo should be 545 x 103px or a comparable aspect ratio.')
